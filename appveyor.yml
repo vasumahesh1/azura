@@ -29,7 +29,7 @@ install:
   - appveyor DownloadFile https://vulkan.lunarg.com/sdk/download/1.1.77.0/windows/VulkanSDK-1.1.77.0-Installer.exe -FileName Vulkan.exe
   - ps: ./Vulkan.exe /S
   - ps: Start-Sleep -s 4
-  - ps: Move-Item -Path C:\VulkanSDK\ -Destination C:\azura\Source\Imports\Windows\Vulkan\
+  - ps: Copy-Item -Path C:\VulkanSDK\ -Destination C:\azura\Source\Imports\Windows\Vulkan\
   - ps: cd C:\azura\Source\Imports\Windows\Vulkan\1.1.77.0\
 
 # scripts to run before tests (working directory and environment changes are persisted from the previous steps such as "before_build")
