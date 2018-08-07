@@ -55,7 +55,7 @@ def executeCommand(command, override=False):
 		return
 
 	if (buildArgs.debug):
-		print command
+		print(command)
 	else:
 		subprocess.Popen(command, env=processEnv).wait()
 
@@ -88,7 +88,7 @@ def run():
 	az_log.trace("Host OS: %s" % hostOS)
 
 	if (buildArgs.v):
-		print "Version: " + VERSION
+		print("Version: " + VERSION)
 		return
 
 	externalConfig = ConfigParser.ConfigParser()
@@ -108,7 +108,7 @@ def run():
 	cmakeCommand = [executableMap['cmake']]
 
 	if (buildArgs.debug):
-		print 'Building %s Environment' % hostOS
+		print('Building %s Environment' % hostOS)
 
 	if (hostOS == 'Windows'):
 		configureWindows()
@@ -135,7 +135,7 @@ def run():
 	if (buildArgs.projectFiles):
 		az_log.empty()
 		az_log.banner("Creating Project Files at: " + buildArgs.projectPath)
-		print "Using Generator: " + buildArgs.projectGenerator
+		print("Using Generator: " + buildArgs.projectGenerator)
 
 		cmakeArgs = []
 		cmakeArgs.append('-G' + buildArgs.projectGenerator)
