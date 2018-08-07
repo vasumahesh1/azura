@@ -45,7 +45,7 @@ def buildExecutableMap(config, platform):
 
 def printConfig(item):
 	for key, value in item.iteritems():
-		print "Using %s:" % key, value
+		print("Using %s:" % key, value)
 
 def executeCommand(command, override=False):
 	global processEnv
