@@ -92,7 +92,7 @@ def run():
 		return
 
 	externalConfig = ConfigParser.ConfigParser()
-	externalConfig.read("./External/Config.ini")
+	externalConfig.read(buildArgs.configFile)
 	hostExternalConfig = getConfigMap(externalConfig, hostOS)
 	
 	az_log.empty()
