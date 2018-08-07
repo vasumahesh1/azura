@@ -25,11 +25,11 @@ install:
   - 7z x ninja.zip -oC:/azura/External/Windows/Tools/Ninja/ > nul
   - C:\azura\External\Windows\Tools\Ninja\ninja.exe --version
 
-  - appveyor DownloadFile https://vulkan.lunarg.com/sdk/download/1.0.54.0/windows/VulkanSDK-1.0.54.0-Installer.exe -FileName Vulkan.exe
-  - ps: Vulkan.exe /S
+  - appveyor DownloadFile https://vulkan.lunarg.com/sdk/download/1.1.77.0/windows/VulkanSDK-1.1.77.0-Installer.exe -FileName Vulkan.exe
+  - ps: ./Vulkan.exe /S
   - ps: dir
   - ps: Move-Item -Path C:\VulkanSDK -Destination C:\azura\Source\Imports\Windows\Vulkan\
-  - ps: cd C:\azura\Source\Imports\Windows\Vulkan\1.1.82.0\
+  - ps: cd C:\azura\Source\Imports\Windows\Vulkan\1.1.77.0\
   - ps: dir
 
 # scripts to run before tests (working directory and environment changes are persisted from the previous steps such as "before_build")
