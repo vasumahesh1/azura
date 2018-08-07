@@ -27,7 +27,9 @@ install:
 
   - ps: Invoke-WebRequest -Uri https://vulkan.lunarg.com/sdk/download/1.1.82.0/windows/VulkanSDK-1.1.82.0-Installer.exe -OutFile Vulkan.exe
   - ps: .\Vulkan.exe /S
-  - Move-Item -Path C:\VulkanSDK -Destination C:\azura\Source\Imports\Windows\Vulkan\
+  - ps: Move-Item -Path C:\VulkanSDK -Destination C:\azura\Source\Imports\Windows\Vulkan\
+  - ps: cd C:\azura\Source\Imports\Windows\Vulkan\1.1.82.0\
+  - ps: dir
 
 # scripts to run before tests (working directory and environment changes are persisted from the previous steps such as "before_build")
 before_test:
