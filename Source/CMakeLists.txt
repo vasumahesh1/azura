@@ -4,7 +4,4 @@ set(VULKAN_1_1_77_0_LIB32_DIR ${CMAKE_CURRENT_SOURCE_DIR}/Imports/Windows/Vulkan
 set(VULKAN_1_1_77_0_LIB64_DIR ${CMAKE_CURRENT_SOURCE_DIR}/Imports/Windows/Vulkan/1.1.77.0/Lib/ CACHE STRING "" FORCE)
 
 add_subdirectory(Common)
-# add_subdirectory(Core)
 add_subdirectory(Azura)
-# add_subdirectory(Mephala)
-add_subdirectory(Sandbox)
