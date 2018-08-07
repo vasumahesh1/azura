@@ -28,6 +28,7 @@ install:
   - cd ..
   - appveyor DownloadFile https://vulkan.lunarg.com/sdk/download/1.1.77.0/windows/VulkanSDK-1.1.77.0-Installer.exe -FileName Vulkan.exe
   - ps: ./Vulkan.exe /S
+  - ps: Start-Sleep -s 4
   - ps: Move-Item -Path C:\VulkanSDK\ -Destination C:\azura\Source\Imports\Windows\Vulkan\
   - ps: cd C:\azura\Source\Imports\Windows\Vulkan\1.1.77.0\
 
