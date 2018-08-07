@@ -25,7 +25,7 @@ install:
   - C:\azura\Tools\External\Windows\Ninja\ninja.exe --version
 
   - cd C:\azura
-  - build --project all --target t --configFile ./External/AppveyorConfig.ini
+  - build.py --project all --target t --configFile ./External/AppveyorConfig.ini
 
 # artifacts:
 #   # pushing a single file
