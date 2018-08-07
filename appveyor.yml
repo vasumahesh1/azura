@@ -25,6 +25,7 @@ install:
   - 7z x ninja.zip -oC:/azura/External/Windows/Tools/Ninja/ > nul
   - C:\azura\External\Windows\Tools\Ninja\ninja.exe --version
 
+  - cd ..
   - appveyor DownloadFile https://vulkan.lunarg.com/sdk/download/1.1.77.0/windows/VulkanSDK-1.1.77.0-Installer.exe -FileName Vulkan.exe
   - ps: ./Vulkan.exe /S
   - ps: dir
