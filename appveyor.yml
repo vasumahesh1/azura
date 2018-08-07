@@ -30,10 +30,10 @@ install:
 
   - cd ..
   - appveyor DownloadFile %VULKAN_URL% -FileName Vulkan.exe
-  - Vulkan.exe /S
+  - ps: ./Vulkan.exe /S
   - ps: Start-Sleep -s 4
   - ps: Copy-Item -Path C:\VulkanSDK\ -Destination C:\azura\Source\Imports\Windows\Vulkan\
-  - cd C:\azura\Source\Imports\Windows\Vulkan\
+  - ps: cd C:\azura\Source\Imports\Windows\Vulkan\
   - dir
 
 # scripts to run before tests (working directory and environment changes are persisted from the previous steps such as "before_build")
