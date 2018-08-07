@@ -32,8 +32,8 @@ install:
   - appveyor DownloadFile %VULKAN_URL% -FileName Vulkan.exe
   - Vulkan.exe /S
   - dir
-  - ps: mkdir C:\azura\Source\Imports\Windows\Vulkan\1.1.77.0\ -ea 0
-  - ps: Copy-Item -Path "C:\VulkanSDK\*" -Destination "C:\azura\Source\Imports\Windows\Vulkan\1.1.77.0\" -Recurse -Force 
+  - ps: mkdir C:\azura\Source\Imports\Windows\Vulkan\ -ea 0
+  - ps: Copy-Item -Path "C:\VulkanSDK\*" -Destination "C:\azura\Source\Imports\Windows\Vulkan\" -Recurse -Force 
   - ps: cd C:\azura\Source\Imports\Windows\Vulkan\1.1.77.0\
   - dir
 
