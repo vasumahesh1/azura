@@ -8,15 +8,28 @@ environment:
   NINJA_URL: https://github.com/ninja-build/ninja/releases/download/v1.6.0/ninja-win.zip
   VULKAN_URL: https://vulkan.lunarg.com/sdk/download/1.1.77.0/windows/VulkanSDK-1.1.77.0-Installer.exe
 
+  matrix:
+    - BUILD: 'DEBUG'
+      PROJECT: 'Common'
+      TARGET: 'Win64'
+
+    - BUILD: 'RELEASE'
+      PROJECT: 'Common'
+      TARGET: 'Win32'
+
+    - BUILD: 'RELEASE'
+      PROJECT: 'Common'
+      TARGET: 'Win64'
+
 matrix:
   fast_finish: true
 
 platform:
-  - x86
   - x64
 
 configuration:
   - Debug
+  - Release
 
 services:
 
@@ -28,19 +41,16 @@ install:
   - 7z x ninja.zip -oC:/azura/External/Windows/Tools/Ninja/ > nul
   - C:\azura\External\Windows\Tools\Ninja\ninja.exe --version
 
+  # Download and setup Vulkan
   - cd ..
   - appveyor DownloadFile %VULKAN_URL% -FileName Vulkan.exe
   - Vulkan.exe /S
-  - dir
   - ps: mkdir C:\azura\Source\Imports\Windows\Vulkan\ -ea 0
   - ps: Copy-Item -Path "C:\VulkanSDK\*" -Destination "C:\azura\Source\Imports\Windows\Vulkan\" -Recurse -Force 
-  - ps: cd C:\azura\Source\Imports\Windows\Vulkan\1.1.77.0\
-  - dir
 
-# scripts to run before tests (working directory and environment changes are persisted from the previous steps such as "before_build")
 before_test:
   - cd C:\azura
-  - C:\Python27\python.exe build.py --project all --target t --configFile ./External/AppveyorConfig.ini
+  - C:\Python27\python.exe build.py --project %PROJECT% --target t --configFile ./External/AppveyorConfig.ini
 
 test_script:
 
