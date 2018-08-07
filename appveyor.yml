@@ -19,6 +19,8 @@ cache:
 
 services:
 
+build: off
+
 install:
   # Download Ninja
   - set NINJA_URL="https://github.com/ninja-build/ninja/releases/download/v1.6.0/ninja-win.zip"
@@ -26,8 +28,14 @@ install:
   - 7z x ninja.zip -oC:/azura/External/Windows/Tools/Ninja/ > nul
   - C:\azura\External\Windows\Tools\Ninja\ninja.exe --version
 
+# scripts to run before tests (working directory and environment changes are persisted from the previous steps such as "before_build")
+before_test:
   - cd C:\azura
   - C:\Python27\python.exe build.py --project all --target t --configFile ./External/AppveyorConfig.ini
+
+test_script:
+
+after_test:
 
 # artifacts:
 #   # pushing a single file
