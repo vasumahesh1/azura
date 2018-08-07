@@ -25,8 +25,8 @@ install:
   - 7z x ninja.zip -oC:/azura/External/Windows/Tools/Ninja/ > nul
   - C:\azura\External\Windows\Tools\Ninja\ninja.exe --version
 
-  - curl --silent --show-error --output VulkanSDK.exe https://vulkan.lunarg.com/sdk/download/1.1.77.0/windows/VulkanSDK-1.1.77.0-Installer.exe
-  - .\VulkanSDK.exe /S
+  - ps: Invoke-WebRequest -Uri https://vulkan.lunarg.com/sdk/download/1.1.82.0/windows/VulkanSDK-1.1.82.0-Installer.exe -OutFile Vulkan.exe
+  - ps: .\Vulkan.exe /S
   - Move-Item -Path C:\VulkanSDK -Destination C:\azura\Source\Imports\Windows\Vulkan\
 
 # scripts to run before tests (working directory and environment changes are persisted from the previous steps such as "before_build")
