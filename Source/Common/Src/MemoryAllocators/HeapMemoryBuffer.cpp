@@ -11,8 +11,8 @@ HeapMemoryBuffer::HeapMemoryBuffer(const SizeType blockSize)
 }
 
 HeapMemoryBuffer::HeapMemoryBuffer(SizeType blockSize, SizeType alignment)
-// NOLINTNEXTLINE(cppcoreguidelines-pro-type-reinterpret-cast, cppcoreguidelines-no-malloc)
   : MemoryBuffer(blockSize,
+                 // NOLINTNEXTLINE(cppcoreguidelines-pro-type-reinterpret-cast, cppcoreguidelines-no-malloc)
                  reinterpret_cast<AddressPtr>(ALIGNED_ALLOC(alignment, blockSize
                  ))) {
 }
@@ -24,14 +24,14 @@ HeapMemoryBuffer::~HeapMemoryBuffer() {
   }
 }
 
-void *HeapMemoryBuffer::Allocate(SizeType size) {
+void* HeapMemoryBuffer::Allocate(SizeType size) {
   const AddressPtr addr = AllocateRaw(size);
 
   // NOLINTNEXTLINE(cppcoreguidelines-pro-type-reinterpret-cast)
   return reinterpret_cast<void*>(addr);
 }
 
-void HeapMemoryBuffer::Deallocate(void *address) {
+void HeapMemoryBuffer::Deallocate(void* address) {
   UNUSED(address);
 }
 

@@ -6,7 +6,6 @@
 #include <set>
 
 namespace Azura {
-
 namespace {
 #define VERIFY_VK_OP(res, message)        \
   if((res) != VK_SUCCESS) {               \
@@ -90,19 +89,19 @@ VkQueueIndices FindQueueFamiliesInDevice(VkPhysicalDevice device, VkSurfaceKHR s
 
   int idx = 0;
   for (const auto& queueFamily : queueFamilies) {
-    if (queueFamily.queueCount > 0 && queueFamily.queueFlags & VK_QUEUE_GRAPHICS_BIT) {
+    if (queueFamily.queueCount > 0 && (queueFamily.queueFlags & VK_QUEUE_GRAPHICS_BIT) != 0) {
       result.m_graphicsFamily = idx;
     }
 
-    if (queueFamily.queueCount > 0 && !(queueFamily.queueFlags & VK_QUEUE_GRAPHICS_BIT) && queueFamily.queueFlags &&
-        VK_QUEUE_TRANSFER_BIT) {
+    if (queueFamily.queueCount > 0 && !((queueFamily.queueFlags & VK_QUEUE_GRAPHICS_BIT) != 0) && (
+          queueFamily.queueFlags & VK_QUEUE_TRANSFER_BIT) != 0) {
       result.m_transferFamily = idx;
     }
 
-    VkBool32 canPresent = false;
+    VkBool32 canPresent = 0u;
     vkGetPhysicalDeviceSurfaceSupportKHR(device, idx, surface, &canPresent);
 
-    if (queueFamily.queueCount > 0 && canPresent) {
+    if (queueFamily.queueCount > 0 && canPresent != 0u) {
       result.m_presentFamily = idx;
     }
 
@@ -174,11 +173,11 @@ int GetDeviceScore(VkPhysicalDevice device, VkSurfaceKHR surface, const DeviceRe
     return 0;
   }
 
-  if (requirements.m_float64 && !deviceFeatures.shaderFloat64) {
+  if (requirements.m_float64 && deviceFeatures.shaderFloat64 == 0u) {
     return 0;
   }
 
-  if (requirements.m_int64 && !deviceFeatures.shaderInt64) {
+  if (requirements.m_int64 && deviceFeatures.shaderInt64 == 0u) {
     return 0;
   }
 
@@ -337,4 +336,4 @@ bool VkQueueIndices::IsComplete(const bool isTransferQueueRequired) const {
 
   return basicRequirement;
 }
-}
+} // namespace Azura

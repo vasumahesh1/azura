@@ -24,7 +24,7 @@ struct ApplicationInfo
 
 class Renderer {
 public:
-  Renderer(const ApplicationInfo& appInfo, const DeviceRequirements &deviceRequirements) = default;
+  Renderer(const ApplicationInfo& appInfo, const DeviceRequirements &deviceRequirements);
   virtual ~Renderer() = default;
 
   Renderer(const Renderer &other) = delete;
