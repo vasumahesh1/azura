@@ -2,8 +2,8 @@
 
 #include <vulkan/vulkan_core.h>
 
-#include "Containers/Vector.h"
 #include "Generic/Renderer.h"
+#include "Types.h"
 
 namespace Azura {
 struct VkQueueIndices {
@@ -26,7 +26,7 @@ struct SwapChainSupportDetails
 };
 
 namespace VulkanCore {
-VkInstance CreateInstance(const ApplicationInfo& applicationData, Vector<const char*> vkExtensions);
+VkInstance CreateInstance(const ApplicationInfo& applicationData, std::vector<const char*> vkExtensions);
 
 VkPhysicalDevice SelectPhysicalDevice(VkInstance instance,
                                       VkSurfaceKHR surface,
@@ -39,6 +39,6 @@ void CreateSwapChain();
 void CreateRenderPass();
 void CreateDescriptorSetLayout();
 void CreateGraphicsPipelineLayout();
-void CreateShaderModule(const Vector<U8>& code);
+void CreateShaderModule(const std::vector<U8>& code);
 };
 }

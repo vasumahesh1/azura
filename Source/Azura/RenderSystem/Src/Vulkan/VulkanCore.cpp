@@ -4,6 +4,7 @@
 #include <array>
 #include <map>
 #include <set>
+#include "Utils/Macros.h"
 
 namespace Azura {
 namespace {
@@ -64,7 +65,7 @@ bool CheckDeviceExtensionSupport(VkPhysicalDevice device) {
   for (const auto& requiredExtension : DEVICE_EXTENSIONS) {
     bool foundExtension = false;
     for (const auto& availableExtension : availableExtensions) {
-      if (strcmp(availableExtension.extensionName, requiredExtension) == 0) {
+      if (strcmp(&availableExtension.extensionName[0], requiredExtension) == 0) {
         foundExtension = true;
         break;
       }
@@ -189,7 +190,7 @@ int GetDeviceScore(VkPhysicalDevice device, VkSurfaceKHR surface, const DeviceRe
 }
 } // namespace
 
-VkInstance VulkanCore::CreateInstance(const ApplicationInfo& applicationData, Vector<const char*> vkExtensions) {
+VkInstance VulkanCore::CreateInstance(const ApplicationInfo& applicationData, std::vector<const char*> vkExtensions) {
   VkApplicationInfo appInfo = {};
   appInfo.sType             = VK_STRUCTURE_TYPE_APPLICATION_INFO;
   appInfo.pApplicationName  = applicationData.m_name.c_str();
@@ -207,8 +208,8 @@ VkInstance VulkanCore::CreateInstance(const ApplicationInfo& applicationData, Ve
   VkInstanceCreateInfo createInfo    = {};
   createInfo.sType                   = VK_STRUCTURE_TYPE_INSTANCE_CREATE_INFO;
   createInfo.pApplicationInfo        = &appInfo;
-  createInfo.enabledExtensionCount   = uint32_t(vkExtensions.GetSize());
-  createInfo.ppEnabledExtensionNames = vkExtensions.Data();
+  createInfo.enabledExtensionCount   = uint32_t(vkExtensions.size());
+  createInfo.ppEnabledExtensionNames = vkExtensions.data();
 
   // Validation Layers Check
   VERIFY_TRUE(CheckValidationLayerSupport(), "Validation layers requested, but not available on device");
@@ -324,7 +325,8 @@ void VulkanCore::CreateDescriptorSetLayout() {
 void VulkanCore::CreateGraphicsPipelineLayout() {
 }
 
-void VulkanCore::CreateShaderModule(const Vector<U8>& code) {
+void VulkanCore::CreateShaderModule(const std::vector<U8>& code) {
+  UNUSED(code);
 }
 
 bool VkQueueIndices::IsComplete(const bool isTransferQueueRequired) const {

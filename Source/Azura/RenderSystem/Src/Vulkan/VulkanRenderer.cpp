@@ -5,8 +5,7 @@ VulkanRenderer::VulkanRenderer(const ApplicationInfo& appInfo, const DeviceRequi
 {
 }
 
-VulkanRenderer::~VulkanRenderer() {
-}
+VulkanRenderer::~VulkanRenderer() = default;
 
 void VulkanRenderer::AddRenderEntity() {
 }

@@ -1,4 +1,4 @@
-project (RendererSystem)
+project (RenderSystem)
 
 set(VULKAN_SOURCES
 	"Inc/Vulkan/VulkanCore.h"
@@ -18,22 +18,21 @@ source_group(D3D12 REGULAR_EXPRESSION Src/D3D12/.*)
 source_group(Vulkan REGULAR_EXPRESSION Inc/Vulkan/.*)
 source_group(Vulkan REGULAR_EXPRESSION Src/Vulkan/.*)
 
-# AzuraAddLibrary(VulkanRendererSystem ${VULKAN_SOURCES})
-add_library(VulkanRendererSystem ${VULKAN_SOURCES})
+add_library(VulkanRenderSystem ${VULKAN_SOURCES})
 
-target_compile_definitions(VulkanRendererSystem
+target_compile_definitions(VulkanRenderSystem
 	PUBLIC
 		API_VULKAN=1
 )
 
-target_include_directories(VulkanRendererSystem
+target_include_directories(VulkanRenderSystem
 	PRIVATE
 		${VULKAN_1_1_77_0_INCLUDE_DIR}
     PUBLIC
         ${PROJECT_SOURCE_DIR}/Inc
 )
 
-target_link_libraries(VulkanRendererSystem
+target_link_libraries(VulkanRenderSystem
 	Common
 	${VULKAN_1_1_77_0_LIB64_DIR}/vulkan-1
 )

@@ -40,7 +40,7 @@ install:
 
 before_test:
   - cd C:\azura
-  - C:\Python27\python.exe build.py --project all --target %TARGET% --configFile ./External/AppveyorConfig.ini
+  - C:\Python27\python.exe build.py --project all --target %TARGET% --configFile ./External/AppveyorConfig.ini --build %BUILD%
 
 test_script:
 
