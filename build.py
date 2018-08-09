@@ -57,7 +57,13 @@ def executeCommand(command, override=False):
 	if (buildArgs.debug):
 		print(command)
 	else:
-		subprocess.Popen(command, env=processEnv).wait()
+		res = subprocess.Popen(command, env=processEnv)
+		res.wait()
+		output, error = res.communicate()
+
+		if error:
+			print "ExecuteCommandError>>>> ", res.returncode
+			raise Exception('ExecuteCommandError: ', res)
 
 def configureWindows():
 	global hostExternalConfig
