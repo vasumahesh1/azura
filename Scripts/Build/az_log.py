@@ -1,3 +1,5 @@
+import sys
+
 class bcolors:
 	HEADER = '\033[95m'
 	OKBLUE = '\033[94m'
@@ -13,24 +15,31 @@ def repeat_to_length(string_to_expand, length):
 
 def header(message):
 	print(bcolors.HEADER + message + bcolors.ENDC)
+	sys.stdout.flush()
 
 def info(message):
 	print(bcolors.OKBLUE + message + bcolors.ENDC)
+	sys.stdout.flush()
 
 def success(message):
 	print(bcolors.OKGREEN + message + bcolors.ENDC)
+	sys.stdout.flush()
 
 def fail(message):
 	print(bcolors.FAIL + message + bcolors.ENDC)
+	sys.stdout.flush()
 
 def trace(message):
 	print(message)
+	sys.stdout.flush()
 
 def warning(message):
 	print(bcolors.WARNING + message + bcolors.ENDC)
+	sys.stdout.flush()
 
 def empty():
 	print('')
+	sys.stdout.flush()
 
 def banner(message):
 	header("--------" + repeat_to_length("-", len(message)))
