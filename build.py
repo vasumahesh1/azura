@@ -51,19 +51,18 @@ def executeCommand(command, override=False):
 	global processEnv
 
 	if (override):
-		subprocess.Popen(command, env=processEnv).wait()
+		res = subprocess.Popen(command, env=processEnv).wait()
+		if res:
+			raise Exception('Error Executing one or more build commands')
 		return
 
 	if (buildArgs.debug):
 		print(command)
 	else:
-		res = subprocess.Popen(command, env=processEnv)
-		res.wait()
-		output, error = res.communicate()
+		res = subprocess.Popen(command, env=processEnv).wait()
 
-		if error:
-			print "ExecuteCommandError>>>> ", res.returncode
-			raise Exception('ExecuteCommandError: ', res)
+		if res:
+			raise Exception('Error Executing one or more build commands')
 
 def configureWindows():
 	global hostExternalConfig
