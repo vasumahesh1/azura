@@ -10,15 +10,9 @@ environment:
 
   matrix:
     - BUILD: 'DEBUG'
-      PROJECT: 'Common'
       TARGET: 'Win64'
 
     - BUILD: 'RELEASE'
-      PROJECT: 'Common'
-      TARGET: 'Win32'
-
-    - BUILD: 'RELEASE'
-      PROJECT: 'Common'
       TARGET: 'Win64'
 
 matrix:
@@ -46,7 +40,7 @@ install:
 
 before_test:
   - cd C:\azura
-  - C:\Python27\python.exe build.py --project %PROJECT% --target t --configFile ./External/AppveyorConfig.ini
+  - C:\Python27\python.exe build.py --project all --target %TARGET% --configFile ./External/AppveyorConfig.ini
 
 test_script:
 
