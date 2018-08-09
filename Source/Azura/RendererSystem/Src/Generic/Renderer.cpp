@@ -1,5 +1,5 @@
 #include "Generic/Renderer.h"
 
-namespace AZ {
+namespace Azura {
 
 } // namespace AZ

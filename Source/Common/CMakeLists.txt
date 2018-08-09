@@ -18,6 +18,7 @@ set(SOURCES
     "Inc/Containers/Vector.h"
     "Inc/Types.h"
     "Inc/Utils/Macros.h"
+    "Inc/Utils/Exceptions.h"
 	"Inc/Containers/ArrayBatch.h")
 
 add_library(Common ${SOURCES})

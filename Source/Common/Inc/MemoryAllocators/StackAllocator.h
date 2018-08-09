@@ -2,7 +2,7 @@
 
 #include "Types.h"
 
-namespace AZ
+namespace Azura
 {
 // Stack Allocator based on a header file template provided in
 // Game Engine Architecture - Jason Gregory
@@ -36,4 +36,4 @@ private:
   Marker mBaseMarker;
   U32 mSize;
 };
-} // namespace AZ
+} // namespace Azura

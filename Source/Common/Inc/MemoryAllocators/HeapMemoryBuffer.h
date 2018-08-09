@@ -3,7 +3,7 @@
 #include "Types.h"
 #include "MemoryBuffer.h"
 
-namespace AZ {
+namespace Azura {
   class HeapMemoryBuffer : public MemoryBuffer {
     using AddressPtr = UPTR;
     using AddressDiff = ptrdiff_t;
@@ -42,4 +42,4 @@ namespace AZ {
   private:
     UPTR AllocateRaw(SizeType size);
   };
-} // namespace AZ
+} // namespace Azura

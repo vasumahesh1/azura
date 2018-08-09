@@ -1,37 +1,38 @@
 
+
 #include "MemoryAllocators/MonotonicAllocator.h"
 
-namespace AZ {
+namespace Azura {
 
-namespace
-{
-  /**
-  * \brief Finds the next largest Aligned multiple according to the input size
-  * \param size Size of Bytes to Allocate
-  * \param alignment Alignment of the data to allocate
-  * \return Next greatest alignment multiple that can fit `size` bytes
-  */
-  SizeType AlignAhead(SizeType size, SizeType alignment) {
-    return (size + (alignment - 1)) & ~(alignment - 1);
-  }
+namespace {
+/**
+* \brief Finds the next largest Aligned multiple according to the input size
+* \param size Size of Bytes to Allocate
+* \param alignment Alignment of the data to allocate
+* \return Next greatest alignment multiple that can fit `size` bytes
+*/
+SizeType AlignAhead(SizeType size, SizeType alignment) {
+  return (size + (alignment - 1)) & ~(alignment - 1);
+}
 } // namespace
 
 MonotonicAllocator::MonotonicAllocator(SizeType size)
   : mSize(size),
-  // NOLINTNEXTLINE(cppcoreguidelines-pro-type-reinterpret-cast, cppcoreguidelines-no-malloc)
-  mMemoryBlock(reinterpret_cast<AddressPtr>(ALIGNED_ALLOC(16, mSize))),
-  mCurrentPosition(mMemoryBlock) {}
+    // NOLINTNEXTLINE(cppcoreguidelines-pro-type-reinterpret-cast, cppcoreguidelines-no-malloc)
+    mMemoryBlock(reinterpret_cast<AddressPtr>(ALIGNED_ALLOC(16, mSize))),
+    mCurrentPosition(mMemoryBlock) {
+}
 
-MonotonicAllocator::MonotonicAllocator(SizeType size, void* managedResource)
+MonotonicAllocator::MonotonicAllocator(SizeType size, void *managedResource)
   : mSize(size),
-  // NOLINTNEXTLINE(cppcoreguidelines-pro-type-reinterpret-cast)
-  mMemoryBlock(reinterpret_cast<AddressPtr>(managedResource)),
-  mCurrentPosition(mMemoryBlock),
-  mIsManagedResource(true) {}
+    // NOLINTNEXTLINE(cppcoreguidelines-pro-type-reinterpret-cast)
+    mMemoryBlock(reinterpret_cast<AddressPtr>(managedResource)),
+    mCurrentPosition(mMemoryBlock),
+    mIsManagedResource(true) {
+}
 
 MonotonicAllocator::~MonotonicAllocator() {
-  if (mIsManagedResource)
-  {
+  if (mIsManagedResource) {
     return;
   }
 
@@ -39,12 +40,12 @@ MonotonicAllocator::~MonotonicAllocator() {
   ALIGNED_FREE(reinterpret_cast<void*>(mMemoryBlock));
 }
 
-MonotonicAllocator MonotonicAllocator::Create(SizeType size, MemoryBuffer& buffer)
-{
+MonotonicAllocator MonotonicAllocator::Create(SizeType size,
+                                              MemoryBuffer &buffer) {
   return MonotonicAllocator(size, buffer.Allocate(size));
 }
 
-void* MonotonicAllocator::Allocate(SizeType size, SizeType alignment) {
+void *MonotonicAllocator::Allocate(SizeType size, SizeType alignment) {
   // Power of 2 check
   assert((alignment & (alignment - 1)) == 0);
 
@@ -67,8 +68,7 @@ void* MonotonicAllocator::Allocate(SizeType size, SizeType alignment) {
   return reinterpret_cast<void*>(addr);
 }
 
-void MonotonicAllocator::Deallocate(void* address)
-{
+void MonotonicAllocator::Deallocate(void *address) {
   UNUSED(address);
 }
 
@@ -76,4 +76,4 @@ void MonotonicAllocator::Reset() {
   mCurrentPosition = mMemoryBlock;
 }
 
-} // namespace AZ
+} // namespace Azura

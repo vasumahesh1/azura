@@ -8,7 +8,7 @@
 #include "Utils/Macros.h"
 
 
-namespace AZ {
+namespace Azura {
   class MonotonicAllocator : public Allocator {
     using AddressPtr = UPTR;
     using AddressDiff = ptrdiff_t;

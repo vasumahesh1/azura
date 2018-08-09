@@ -40,4 +40,4 @@ namespace AZ {
     mCurrentMarker = mBaseMarker;
   }
 
-} // namespace AZ
+} // namespace Azura

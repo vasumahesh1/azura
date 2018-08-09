@@ -4,7 +4,7 @@
 #include <iostream>
 #include "Types.h"
 
-namespace AZ {
+namespace Azura {
   template<typename T>
     struct PoolNode {
       T mData;
@@ -88,4 +88,4 @@ namespace AZ {
       pTail = node;
     }
 
-} // namespace AZ
+} // namespace Azura

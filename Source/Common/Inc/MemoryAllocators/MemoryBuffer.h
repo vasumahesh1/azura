@@ -2,7 +2,7 @@
 
 #include "Types.h"
 
-namespace AZ {
+namespace Azura {
   class MemoryBuffer {
     using AddressPtr = UPTR;
 
@@ -32,4 +32,4 @@ namespace AZ {
     AddressPtr mCurrentPosition{0};
     SizeType mSize{0};
   };
-} // namespace AZ
+} // namespace Azura

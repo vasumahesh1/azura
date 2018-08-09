@@ -4,7 +4,7 @@
 #include "MemoryBuffer.h"
 #include <type_traits>
 
-namespace AZ {
+namespace Azura {
   constexpr SizeType DEFAULT_MEMORY_ALIGNMENT = 16;
 
   template<typename T, SizeType A>
@@ -117,4 +117,4 @@ namespace AZ {
     // TODO: Figure out Deallocate for Arrays
     Deallocate(address);
   }  
-} // namespace AZ
+} // namespace Azura
