@@ -27,7 +27,6 @@ const std::map<PresentModes, VkPresentModeKHR> VK_PRESENT_MODE_MAPPING = {
   std::make_pair(PresentModes::SharedDemandRefesh, VK_PRESENT_MODE_SHARED_DEMAND_REFRESH_KHR),
   std::make_pair(PresentModes::SharedContinuous, VK_PRESENT_MODE_SHARED_CONTINUOUS_REFRESH_KHR),
 };
-} // namespace Impl
 
 template<typename FromType, typename ToType>
 std::optional<ToType> ConvertFormat(FromType fromValue, const std::map<FromType, ToType> sourceMap) {
@@ -39,21 +38,21 @@ std::optional<ToType> ConvertFormat(FromType fromValue, const std::map<FromType,
 
   return (*itr).second;
 }
-
+} // namespace Impl
 
 inline auto ToVkFormat(const RawStorageFormat format)
 {
-  return ConvertFormat<RawStorageFormat, VkFormat>(format, Impl::VK_FORMAT_MAPPING);
+  return Impl::ConvertFormat<RawStorageFormat, VkFormat>(format, Impl::VK_FORMAT_MAPPING);
 }
 
 inline auto ToVkColorSpaceKHR(const ColorSpace colorSpace)
 {
-  return ConvertFormat<ColorSpace, VkColorSpaceKHR>(colorSpace, Impl::VK_COLOR_SPACE_MAPPING);
+  return Impl::ConvertFormat<ColorSpace, VkColorSpaceKHR>(colorSpace, Impl::VK_COLOR_SPACE_MAPPING);
 }
 
 inline auto ToVkPresentModeKHR(const PresentModes presentMode)
 {
-  return ConvertFormat<PresentModes, VkPresentModeKHR>(presentMode, Impl::VK_PRESENT_MODE_MAPPING);
+  return Impl::ConvertFormat<PresentModes, VkPresentModeKHR>(presentMode, Impl::VK_PRESENT_MODE_MAPPING);
 }
 
 } // namespace Vulkan

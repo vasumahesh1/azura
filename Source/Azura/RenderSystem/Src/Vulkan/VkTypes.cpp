@@ -21,5 +21,9 @@ U32 VkQueueIndices::GetActiveSize() const {
   return m_isTransferQueueRequired ? 2 : 1;
 }
 
+bool SwapChainDeviceSupport::IsSupported() const {
+  return !m_formats.empty() && !m_presentModes.empty();
+}
+
 } // namespace Vulkan
 } // namespace Azura

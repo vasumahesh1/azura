@@ -374,6 +374,7 @@ SwapChainCreateResult VkCore::CreateSwapChain(VkDevice device,
   result.m_surfaceFormat             = ChooseSwapSurfaceFormat(swapChainSupport.m_formats, swapChainRequirement);
   result.m_extent                    = ChooseSwapExtent(swapChainSupport.m_capabilities, swapChainRequirement);
 
+  // TODO(vasumahesh1): Need requirement?
   // Set Queue Length of SwapChain
   result.m_imageCount = swapChainSupport.m_capabilities.minImageCount + 1;
   if (swapChainSupport.m_capabilities.maxImageCount > 0 && result.m_imageCount > swapChainSupport
@@ -423,21 +424,106 @@ std::vector<VkImage> VkCore::GetSwapChainImages(VkDevice device, VkSwapchainKHR 
   return result;
 }
 
-void VkCore::CreateRenderPass() {
+// TODO(vasumahesh1): Needs serious changes here
+VkRenderPass VkCore::CreateRenderPass(VkDevice device, VkFormat colorFormat) {
+  VkAttachmentDescription colorAttachment = {};
+  colorAttachment.format                  = colorFormat;
+  colorAttachment.samples                 = VK_SAMPLE_COUNT_1_BIT;
+
+  colorAttachment.loadOp  = VK_ATTACHMENT_LOAD_OP_CLEAR;
+  colorAttachment.storeOp = VK_ATTACHMENT_STORE_OP_STORE;
+
+  // Not using Stencil buffer
+  colorAttachment.stencilLoadOp  = VK_ATTACHMENT_LOAD_OP_DONT_CARE;
+  colorAttachment.stencilStoreOp = VK_ATTACHMENT_STORE_OP_DONT_CARE;
+
+  colorAttachment.initialLayout = VK_IMAGE_LAYOUT_UNDEFINED;
+  colorAttachment.finalLayout   = VK_IMAGE_LAYOUT_PRESENT_SRC_KHR;
+
+  VkAttachmentReference colorAttachmentRef = {};
+  colorAttachmentRef.attachment            = 0;
+  colorAttachmentRef.layout                = VK_IMAGE_LAYOUT_COLOR_ATTACHMENT_OPTIMAL;
+
+  VkSubpassDescription subpass = {};
+  subpass.pipelineBindPoint    = VK_PIPELINE_BIND_POINT_GRAPHICS;
+  subpass.colorAttachmentCount = 1;
+  subpass.pColorAttachments    = &colorAttachmentRef;
+
+  VkRenderPassCreateInfo renderPassInfo = {};
+  renderPassInfo.sType                  = VK_STRUCTURE_TYPE_RENDER_PASS_CREATE_INFO;
+  renderPassInfo.attachmentCount        = 1;
+  renderPassInfo.pAttachments           = &colorAttachment;
+  renderPassInfo.subpassCount           = 1;
+  renderPassInfo.pSubpasses             = &subpass;
+
+  // Tell special subpass to wait for Image acquisition from semaphore
+  VkSubpassDependency dependency = {};
+  dependency.srcSubpass          = VK_SUBPASS_EXTERNAL;
+  dependency.dstSubpass          = 0;
+  dependency.srcStageMask        = VK_PIPELINE_STAGE_COLOR_ATTACHMENT_OUTPUT_BIT;
+  dependency.srcAccessMask       = 0;
+  dependency.dstStageMask        = VK_PIPELINE_STAGE_COLOR_ATTACHMENT_OUTPUT_BIT;
+  dependency.dstAccessMask       = VK_ACCESS_COLOR_ATTACHMENT_READ_BIT | VK_ACCESS_COLOR_ATTACHMENT_WRITE_BIT;
+
+  renderPassInfo.dependencyCount = 1;
+  renderPassInfo.pDependencies   = &dependency;
+
+  VkRenderPass renderPass;
+  VERIFY_VK_OP(vkCreateRenderPass(device, &renderPassInfo, nullptr, &renderPass), "Failed to create render pass");
+  return renderPass;
 }
 
-void VkCore::CreateDescriptorSetLayout() {
+void VkCore::BindUniformBufferToDescriptorSet(std::vector<VkDescriptorSetLayoutBinding>& bindings,
+                                              VkShaderStageFlags stageFlag) {
+
+  VkDescriptorSetLayoutBinding uboLayoutBinding = {};
+  uboLayoutBinding.binding                      = U32(bindings.size());
+  uboLayoutBinding.descriptorType               = VK_DESCRIPTOR_TYPE_UNIFORM_BUFFER;
+  uboLayoutBinding.descriptorCount              = 1;
+  uboLayoutBinding.stageFlags                   = stageFlag;
+  uboLayoutBinding.pImmutableSamplers           = nullptr;
+
+  bindings.push_back(uboLayoutBinding);
 }
 
-void VkCore::CreateGraphicsPipelineLayout() {
+VkDescriptorSetLayout VkCore::CreateDescriptorSetLayout(VkDevice device,
+                                                        const std::vector<VkDescriptorSetLayoutBinding>& bindings) {
+  VkDescriptorSetLayoutCreateInfo layoutInfo = {};
+  layoutInfo.sType                           = VK_STRUCTURE_TYPE_DESCRIPTOR_SET_LAYOUT_CREATE_INFO;
+  layoutInfo.bindingCount                    = U32(bindings.size());
+  layoutInfo.pBindings                       = bindings.data();
+
+  VkDescriptorSetLayout descriptorSet;
+  VERIFY_VK_OP(vkCreateDescriptorSetLayout(device, &layoutInfo, nullptr, &descriptorSet),
+    "Failed to create descriptor set layout");
+  return descriptorSet;
 }
 
-void VkCore::CreateShaderModule(const std::vector<U8>& code) {
-  UNUSED(code);
+VkPipelineLayout VkCore::CreateGraphicsPipelineLayout(VkDevice device,
+                                                      const std::vector<VkDescriptorSetLayout>& descriptorSets) {
+  VkPipelineLayoutCreateInfo pipelineLayoutInfo = {};
+  pipelineLayoutInfo.sType                      = VK_STRUCTURE_TYPE_PIPELINE_LAYOUT_CREATE_INFO;
+
+  // Descriptors Info
+  pipelineLayoutInfo.pSetLayouts    = descriptorSets.data();
+  pipelineLayoutInfo.setLayoutCount = U32(descriptorSets.size());
+
+  VkPipelineLayout pipelineLayout;
+  VERIFY_VK_OP(vkCreatePipelineLayout(device, &pipelineLayoutInfo, nullptr, &pipelineLayout),
+    "Failed to create pipeline layout");
+  return pipelineLayout;
 }
 
-bool SwapChainDeviceSupport::IsSupported() const {
-  return !m_formats.empty() && !m_presentModes.empty();
+VkShaderModule VkCore::CreateShaderModule(VkDevice device, const std::vector<U8>& code) {
+  VkShaderModuleCreateInfo createInfo = {};
+  createInfo.sType                    = VK_STRUCTURE_TYPE_SHADER_MODULE_CREATE_INFO;
+  createInfo.codeSize                 = code.size();
+  // NOLINTNEXTLINE(cppcoreguidelines-pro-type-reinterpret-cast)
+  createInfo.pCode                    = reinterpret_cast<const uint32_t*>(code.data()); // byte code ptr conversion
+
+  VkShaderModule shaderModule;
+  VERIFY_VK_OP(vkCreateShaderModule(device, &createInfo, nullptr, &shaderModule), "Failed to create shader module");
+  return shaderModule;
 }
 
 } // namespace Vulkan
