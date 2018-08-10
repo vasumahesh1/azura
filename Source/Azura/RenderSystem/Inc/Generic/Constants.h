@@ -18,4 +18,4 @@ namespace Azura
     const std::uint32_t RENDER_SYSTEM_MAJOR_SEMVER = std::get<SemverMajor>(RENDER_SYSTEM_VERSION);
     const std::uint32_t RENDER_SYSTEM_MINOR_SEMVER = std::get<SemverMinor>(RENDER_SYSTEM_VERSION);
     const std::uint32_t RENDER_SYSTEM_PATCH_SEMVER = std::get<SemverPatch>(RENDER_SYSTEM_VERSION);
-}
+} // namespace Azura

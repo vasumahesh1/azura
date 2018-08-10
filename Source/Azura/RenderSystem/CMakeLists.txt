@@ -1,11 +1,17 @@
 project (RenderSystem)
 
 set(VULKAN_SOURCES
-	"Inc/Vulkan/VulkanCore.h"
-	"Src/Vulkan/VulkanCore.cpp"
-	"Inc/Vulkan/VulkanRenderer.h"
-	"Src/Vulkan/VulkanRenderer.cpp"
-	"Inc/Generic/Types.h"
+	"Inc/Vulkan/VkCore.h"
+	"Src/Vulkan/VkCore.cpp"
+	"Inc/Vulkan/VkRenderer.h"
+	"Src/Vulkan/VkRenderer.cpp"
+	"Inc/Vulkan/VkTypes.h"
+	"Src/Vulkan/VkTypes.cpp"
+	"Inc/Vulkan/VkTypeMapping.h"
+	"Src/Vulkan/VkTypeMapping.cpp"
+	"Inc/Generic/GenericTypes.h"
+	"Inc/Generic/RawStorageFormat.h"
+	"Src/Generic/RawStorageFormat.cpp"
 	"Inc/Generic/Constants.h"
 	"Inc/Generic/Renderer.h"
 	"Src/Generic/Renderer.cpp"

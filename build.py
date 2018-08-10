@@ -129,7 +129,7 @@ def run():
 	cmakeArgs.append("-H.")
 	cmakeArgs.append("-DCMAKE_BUILD_TYPE=" + buildArgs.build.upper())
 	cmakeArgs.append("-DCMAKE_EXPORT_COMPILE_COMMANDS=ON")
-	cmakeArgs.append("-DCMAKE_CXX_CLANG_TIDY=" + executableMap['clang-tidy'])
+	cmakeArgs.append("-DCMAKE_CXX_CLANG_TIDY=" + executableMap['clang-tidy'] + ";-extra-arg=-std=c++17")
 
 	if (buildArgs.verbose):
 		cmakeArgs.append("--trace")
