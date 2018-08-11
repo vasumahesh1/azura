@@ -31,11 +31,14 @@ struct SwapChainDeviceSupport {
   bool IsSupported() const;
 };
 
-struct SwapChainCreateResult {
+struct VkScopedSwapChain {
   VkSwapchainKHR m_swapChain;
   VkExtent2D m_extent;
   VkSurfaceFormatKHR m_surfaceFormat;
   U32 m_imageCount{0};
+  std::vector<VkImage> m_images;
+
+  std::vector<VkImageView> m_imageViews;
 };
 } // namespace Vulkan
 } // namespace Azura

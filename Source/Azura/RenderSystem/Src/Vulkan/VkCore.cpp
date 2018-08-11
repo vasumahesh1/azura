@@ -6,25 +6,12 @@
 #include <set>
 #include "Utils/Macros.h"
 #include "Vulkan/VkTypeMapping.h"
+#include "Vulkan/VkMacros.h"
+#include "Vulkan/VkScopedBuffer.h"
 
 namespace Azura {
 namespace Vulkan {
 namespace {
-#define VERIFY_VK_OP(res, message)        \
-  if((res) != VK_SUCCESS) {               \
-    throw std::runtime_error(#message);   \
-  }
-
-#define VERIFY_TRUE(res, message)         \
-  if((res) != true) {                     \
-    throw std::runtime_error(#message);   \
-  }
-
-#define VERIFY_OPT(res, message)         \
-  if((res)) {                     \
-    throw std::runtime_error(#message);   \
-  }
-
 #ifdef DEBUG
     const std::array<const char*, 1> VALIDATION_LAYERS = {
       "VK_LAYER_LUNARG_standard_validation"
@@ -362,33 +349,34 @@ VkQueue VkCore::GetQueueFromDevice(VkDevice device, int queueIndex) {
   return queue;
 }
 
-SwapChainCreateResult VkCore::CreateSwapChain(VkDevice device,
-                                              VkSurfaceKHR surface,
-                                              const VkQueueIndices& queueIndices,
-                                              const SwapChainDeviceSupport& swapChainSupport,
-                                              const SwapChainRequirement& swapChainRequirement) {
+VkScopedSwapChain VkCore::CreateSwapChain(VkDevice device,
+                                          VkSurfaceKHR surface,
+                                          const VkQueueIndices& queueIndices,
+                                          const SwapChainDeviceSupport& swapChainSupport,
+                                          const SwapChainRequirement& swapChainRequirement) {
 
-  SwapChainCreateResult result;
+  VkScopedSwapChain scopedSwapChain;
 
   const VkPresentModeKHR presentMode = ChooseSwapPresentMode(swapChainSupport.m_presentModes);
-  result.m_surfaceFormat             = ChooseSwapSurfaceFormat(swapChainSupport.m_formats, swapChainRequirement);
-  result.m_extent                    = ChooseSwapExtent(swapChainSupport.m_capabilities, swapChainRequirement);
+  scopedSwapChain.m_surfaceFormat    = ChooseSwapSurfaceFormat(swapChainSupport.m_formats, swapChainRequirement);
+  scopedSwapChain.m_extent           = ChooseSwapExtent(swapChainSupport.m_capabilities, swapChainRequirement);
 
   // TODO(vasumahesh1): Need requirement?
   // Set Queue Length of SwapChain
-  result.m_imageCount = swapChainSupport.m_capabilities.minImageCount + 1;
-  if (swapChainSupport.m_capabilities.maxImageCount > 0 && result.m_imageCount > swapChainSupport
-                                                                                 .m_capabilities.maxImageCount) {
-    result.m_imageCount = swapChainSupport.m_capabilities.maxImageCount;
+  scopedSwapChain.m_imageCount = swapChainSupport.m_capabilities.minImageCount + 1;
+  if (swapChainSupport.m_capabilities.maxImageCount > 0 && scopedSwapChain.m_imageCount > swapChainSupport
+                                                                                          .m_capabilities.maxImageCount
+  ) {
+    scopedSwapChain.m_imageCount = swapChainSupport.m_capabilities.maxImageCount;
   }
 
   VkSwapchainCreateInfoKHR createInfo = {};
   createInfo.sType                    = VK_STRUCTURE_TYPE_SWAPCHAIN_CREATE_INFO_KHR;
   createInfo.surface                  = surface;
-  createInfo.minImageCount            = result.m_imageCount;
-  createInfo.imageFormat              = result.m_surfaceFormat.format;
-  createInfo.imageColorSpace          = result.m_surfaceFormat.colorSpace;
-  createInfo.imageExtent              = result.m_extent;
+  createInfo.minImageCount            = scopedSwapChain.m_imageCount;
+  createInfo.imageFormat              = scopedSwapChain.m_surfaceFormat.format;
+  createInfo.imageColorSpace          = scopedSwapChain.m_surfaceFormat.colorSpace;
+  createInfo.imageExtent              = scopedSwapChain.m_extent;
   createInfo.imageArrayLayers         = 1;
   createInfo.imageUsage               = VK_IMAGE_USAGE_COLOR_ATTACHMENT_BIT;
 
@@ -409,19 +397,54 @@ SwapChainCreateResult VkCore::CreateSwapChain(VkDevice device,
   createInfo.clipped        = VK_TRUE;
   createInfo.oldSwapchain   = VK_NULL_HANDLE;
 
-  VERIFY_VK_OP(vkCreateSwapchainKHR(device, &createInfo, nullptr, &result.m_swapChain), "Failed to create swap chain");
+  VERIFY_VK_OP(vkCreateSwapchainKHR(device, &createInfo, nullptr, &scopedSwapChain.m_swapChain),
+    "Failed to create swap chain");
 
-  return result;
+  vkGetSwapchainImagesKHR(device, scopedSwapChain.m_swapChain, &scopedSwapChain.m_imageCount, nullptr);
+  scopedSwapChain.m_images.resize(scopedSwapChain.m_imageCount);
+  vkGetSwapchainImagesKHR(device, scopedSwapChain.m_swapChain, &scopedSwapChain.m_imageCount,
+                          scopedSwapChain.m_images.data());
+
+  for (U32 idx = 0; idx < scopedSwapChain.m_imageCount; ++idx) {
+    CreateImageView(device, scopedSwapChain.m_images[idx], VK_IMAGE_VIEW_TYPE_2D,
+                    scopedSwapChain.m_surfaceFormat.format, VK_IMAGE_ASPECT_COLOR_BIT);
+  }
+
+  return scopedSwapChain;
 }
 
-std::vector<VkImage> VkCore::GetSwapChainImages(VkDevice device, VkSwapchainKHR swapChain, U32 imageCount) {
-  std::vector<VkImage> result;
+VkImageView VkCore::CreateImageView(VkDevice device,
+                                    VkImage sourceImage,
+                                    VkImageViewType viewType,
+                                    VkFormat viewFormat,
+                                    VkImageAspectFlags aspectMask,
+                                    U32 baseMip,
+                                    U32 levelCount,
+                                    U32 baseArrayLayer,
+                                    U32 layerCount) {
+  VkImageViewCreateInfo createInfo = {};
+  createInfo.sType                 = VK_STRUCTURE_TYPE_IMAGE_VIEW_CREATE_INFO;
+  createInfo.image                 = sourceImage;
+  createInfo.viewType              = viewType;
+  createInfo.format                = viewFormat;
 
-  vkGetSwapchainImagesKHR(device, swapChain, &imageCount, nullptr);
-  result.resize(imageCount);
-  vkGetSwapchainImagesKHR(device, swapChain, &imageCount, result.data());
+  // TODO(vasumahesh1): Add Swizzle support
+  // Default Swizzle
+  createInfo.components.r = VK_COMPONENT_SWIZZLE_IDENTITY;
+  createInfo.components.g = VK_COMPONENT_SWIZZLE_IDENTITY;
+  createInfo.components.b = VK_COMPONENT_SWIZZLE_IDENTITY;
+  createInfo.components.a = VK_COMPONENT_SWIZZLE_IDENTITY;
 
-  return result;
+  // Which part of image to access
+  createInfo.subresourceRange.aspectMask     = aspectMask;
+  createInfo.subresourceRange.baseMipLevel   = baseMip;
+  createInfo.subresourceRange.levelCount     = levelCount;
+  createInfo.subresourceRange.baseArrayLayer = baseArrayLayer;
+  createInfo.subresourceRange.layerCount     = layerCount;
+
+  VkImageView imageView;
+  VERIFY_VK_OP(vkCreateImageView(device, &createInfo, nullptr, &imageView), "Failed to create image view");
+  return imageView;
 }
 
 // TODO(vasumahesh1): Needs serious changes here
@@ -429,9 +452,8 @@ VkRenderPass VkCore::CreateRenderPass(VkDevice device, VkFormat colorFormat) {
   VkAttachmentDescription colorAttachment = {};
   colorAttachment.format                  = colorFormat;
   colorAttachment.samples                 = VK_SAMPLE_COUNT_1_BIT;
-
-  colorAttachment.loadOp  = VK_ATTACHMENT_LOAD_OP_CLEAR;
-  colorAttachment.storeOp = VK_ATTACHMENT_STORE_OP_STORE;
+  colorAttachment.loadOp                  = VK_ATTACHMENT_LOAD_OP_CLEAR;
+  colorAttachment.storeOp                 = VK_ATTACHMENT_STORE_OP_STORE;
 
   // Not using Stencil buffer
   colorAttachment.stencilLoadOp  = VK_ATTACHMENT_LOAD_OP_DONT_CARE;
@@ -499,8 +521,8 @@ VkDescriptorSetLayout VkCore::CreateDescriptorSetLayout(VkDevice device,
   return descriptorSet;
 }
 
-VkPipelineLayout VkCore::CreateGraphicsPipelineLayout(VkDevice device,
-                                                      const std::vector<VkDescriptorSetLayout>& descriptorSets) {
+VkPipelineLayout VkCore::CreatePipelineLayout(VkDevice device,
+                                              const std::vector<VkDescriptorSetLayout>& descriptorSets) {
   VkPipelineLayoutCreateInfo pipelineLayoutInfo = {};
   pipelineLayoutInfo.sType                      = VK_STRUCTURE_TYPE_PIPELINE_LAYOUT_CREATE_INFO;
 
@@ -519,11 +541,230 @@ VkShaderModule VkCore::CreateShaderModule(VkDevice device, const std::vector<U8>
   createInfo.sType                    = VK_STRUCTURE_TYPE_SHADER_MODULE_CREATE_INFO;
   createInfo.codeSize                 = code.size();
   // NOLINTNEXTLINE(cppcoreguidelines-pro-type-reinterpret-cast)
-  createInfo.pCode                    = reinterpret_cast<const uint32_t*>(code.data()); // byte code ptr conversion
+  createInfo.pCode = reinterpret_cast<const uint32_t*>(code.data()); // byte code ptr conversion
 
   VkShaderModule shaderModule;
   VERIFY_VK_OP(vkCreateShaderModule(device, &createInfo, nullptr, &shaderModule), "Failed to create shader module");
   return shaderModule;
+}
+
+std::vector<VkFramebuffer> VkCore::CreateFrameBuffers(VkDevice device,
+                                                      VkRenderPass renderPass,
+                                                      const VkScopedSwapChain& scopedSwapChain) {
+  const auto& swapChainImageViews = scopedSwapChain.m_imageViews;
+
+  std::vector<VkFramebuffer> frameBuffers(swapChainImageViews.size());
+
+  for (SizeType idx = 0; idx < swapChainImageViews.size(); ++idx) {
+
+    const std::array<VkImageView, 1> attachments = {
+      swapChainImageViews[idx]
+    };
+
+    VkFramebufferCreateInfo framebufferInfo = {};
+    framebufferInfo.sType                   = VK_STRUCTURE_TYPE_FRAMEBUFFER_CREATE_INFO;
+    framebufferInfo.renderPass              = renderPass;
+    framebufferInfo.attachmentCount         = U32(attachments.size());
+    framebufferInfo.pAttachments            = attachments.data();
+    framebufferInfo.width                   = scopedSwapChain.m_extent.width;
+    framebufferInfo.height                  = scopedSwapChain.m_extent.height;
+    framebufferInfo.layers                  = 1;
+
+    VERIFY_VK_OP(vkCreateFramebuffer(device, &framebufferInfo, nullptr, &frameBuffers[idx]),
+      "Failed to create framebuffer");
+  }
+
+  return frameBuffers;
+}
+
+VkCommandPool VkCore::CreateCommandPool(VkDevice device, int queueIndex) {
+  VkCommandPoolCreateInfo poolInfo = {};
+  poolInfo.sType                   = VK_STRUCTURE_TYPE_COMMAND_POOL_CREATE_INFO;
+  poolInfo.queueFamilyIndex        = queueIndex;
+  poolInfo.flags                   = 0;
+
+  VkCommandPool commandPool;
+  VERIFY_VK_OP(vkCreateCommandPool(device, &poolInfo, nullptr, &commandPool), "Failed to create command pool");
+  return commandPool;
+}
+
+U32 VkCore::FindMemoryType(U32 typeFilter,
+                           VkMemoryPropertyFlags properties,
+                           const VkPhysicalDeviceMemoryProperties& physicalDeviceMemoryProperties) {
+  // TODO(vasumahesh1): Fix this warning
+  for (U32 idx = 0; idx < physicalDeviceMemoryProperties.memoryTypeCount; ++idx) {
+    if (((typeFilter & (1 << idx)) != 0u)
+        // NOLINTNEXTLINE(cppcoreguidelines-pro-bounds-constant-array-index)
+        && ((physicalDeviceMemoryProperties.memoryTypes[idx].propertyFlags & properties) == properties)) {
+      return idx;
+    }
+  }
+
+  throw std::runtime_error("Failed to find suitable memory type");
+}
+
+VkDescriptorPoolSize VkCore::CreateDescriptorPoolSize(VkDescriptorType type, U32 descriptorCount) {
+  VkDescriptorPoolSize poolSize;
+  poolSize.type            = type;
+  poolSize.descriptorCount = descriptorCount;
+  return poolSize;
+}
+
+VkDescriptorPool VkCore::CreateDescriptorPool(VkDevice device,
+                                              const std::vector<VkDescriptorPoolSize>& pools,
+                                              U32 maxSets) {
+  VkDescriptorPoolCreateInfo poolInfo = {};
+  poolInfo.sType                      = VK_STRUCTURE_TYPE_DESCRIPTOR_POOL_CREATE_INFO;
+  poolInfo.poolSizeCount              = U32(pools.size());
+  poolInfo.pPoolSizes                 = pools.data();
+  poolInfo.maxSets                    = maxSets;
+
+  VkDescriptorPool descriptorPool;
+  VERIFY_VK_OP(vkCreateDescriptorPool(device, &poolInfo, nullptr, &descriptorPool), "Failed to create descriptor pool");
+  return descriptorPool;
+}
+
+VkDescriptorSet VkCore::CreateDescriptorSet(VkDevice device,
+                                            VkDescriptorPool descriptorPool,
+                                            const std::vector<VkDescriptorSetLayout>& descriptorSets) {
+  VkDescriptorSetAllocateInfo allocInfo = {};
+  allocInfo.sType                       = VK_STRUCTURE_TYPE_DESCRIPTOR_SET_ALLOCATE_INFO;
+  allocInfo.descriptorPool              = descriptorPool;
+  allocInfo.descriptorSetCount          = U32(descriptorSets.size());
+  allocInfo.pSetLayouts                 = descriptorSets.data();
+
+  VkDescriptorSet descriptorSet;
+  VERIFY_VK_OP(vkAllocateDescriptorSets(device, &allocInfo, &descriptorSet), "Failed to allocate descriptor set");
+  return descriptorSet;
+}
+
+VkWriteDescriptorSet VkCore::CreateWriteDescriptorForUniformBuffer(VkDescriptorSet set,
+                                                                   U32 layoutIndex,
+                                                                   U32 binding,
+                                                                   const std::vector<VkDescriptorBufferInfo>&
+                                                                   bufferInfos) {
+  VkWriteDescriptorSet descriptorWrite = {};
+  descriptorWrite.sType                = VK_STRUCTURE_TYPE_WRITE_DESCRIPTOR_SET;
+  descriptorWrite.dstSet               = set;
+  descriptorWrite.dstArrayElement      = layoutIndex;
+  descriptorWrite.dstBinding           = binding;
+  descriptorWrite.descriptorType       = VK_DESCRIPTOR_TYPE_UNIFORM_BUFFER;
+
+  // Attach Buffer Info to WriteDescriptorSet
+  descriptorWrite.descriptorCount  = U32(bufferInfos.size());
+  descriptorWrite.pBufferInfo      = bufferInfos.data();
+  descriptorWrite.pImageInfo       = nullptr;
+  descriptorWrite.pTexelBufferView = nullptr;
+
+  return descriptorWrite;
+}
+
+void VkCore::UpdateDescriptorSets(VkDevice device, const std::vector<VkWriteDescriptorSet>& descriptorWrites) {
+  vkUpdateDescriptorSets(device, U32(descriptorWrites.size()), descriptorWrites.data(), 0, nullptr);
+}
+
+
+VkCommandBuffer VkCore::CreateCommandBuffer(VkDevice device, VkCommandPool commandPool, VkCommandBufferLevel level) {
+  VkCommandBuffer commandBuffer;
+
+  VkCommandBufferAllocateInfo allocInfo = {};
+  allocInfo.sType                       = VK_STRUCTURE_TYPE_COMMAND_BUFFER_ALLOCATE_INFO;
+  allocInfo.commandPool                 = commandPool;
+  allocInfo.level                       = level;
+  allocInfo.commandBufferCount          = 1;
+
+  VERIFY_VK_OP(vkAllocateCommandBuffers(device, &allocInfo, &commandBuffer), "Failed to allocate command buffers");
+
+  return commandBuffer;
+}
+
+
+std::vector<VkCommandBuffer> VkCore::CreateCommandBuffers(VkDevice device,
+                                                          U32 count,
+                                                          VkCommandPool commandPool,
+                                                          VkCommandBufferLevel level) {
+  std::vector<VkCommandBuffer> commandBuffers(count);
+  CreateCommandBuffers(device, count, commandPool, level, commandBuffers);
+  return commandBuffers;
+}
+
+void VkCore::CreateCommandBuffers(VkDevice device,
+                                  U32 count,
+                                  VkCommandPool commandPool,
+                                  VkCommandBufferLevel level,
+                                  std::vector<VkCommandBuffer>& commandBuffers) {
+
+  VkCommandBufferAllocateInfo allocInfo = {};
+  allocInfo.sType                       = VK_STRUCTURE_TYPE_COMMAND_BUFFER_ALLOCATE_INFO;
+  allocInfo.commandPool                 = commandPool;
+  allocInfo.level                       = level;
+  allocInfo.commandBufferCount          = count;
+
+  VERIFY_VK_OP(vkAllocateCommandBuffers(device, &allocInfo, commandBuffers.data()), "Failed to create command buffers");
+}
+
+void VkCore::BeginCommandBuffer(VkCommandBuffer buffer, VkCommandBufferUsageFlags flags) {
+  VkCommandBufferBeginInfo beginInfo = {};
+  beginInfo.sType                    = VK_STRUCTURE_TYPE_COMMAND_BUFFER_BEGIN_INFO;
+  beginInfo.flags                    = flags;
+  beginInfo.pInheritanceInfo         = nullptr;
+
+  VERIFY_VK_OP(vkBeginCommandBuffer(buffer, &beginInfo), "Failed to begin recording command buffer");
+}
+
+void VkCore::EndCommandBuffer(VkCommandBuffer buffer) {
+  VERIFY_VK_OP(vkEndCommandBuffer(buffer), "Failed to begin recording command buffer");
+}
+
+VkSemaphore VkCore::CreateSemaphore(VkDevice device) {
+  VkSemaphoreCreateInfo semaphoreInfo = {};
+  semaphoreInfo.sType                 = VK_STRUCTURE_TYPE_SEMAPHORE_CREATE_INFO;
+  VkSemaphore semaphore;
+  VERIFY_VK_OP(vkCreateSemaphore(device, &semaphoreInfo, nullptr, &semaphore), "Failed to create semaphore");
+  return semaphore;
+}
+
+void VkCore::CreateSemaphores(VkDevice device, U32 count, std::vector<VkSemaphore>& semaphores) {
+  VkSemaphoreCreateInfo semaphoreInfo = {};
+  semaphoreInfo.sType                 = VK_STRUCTURE_TYPE_SEMAPHORE_CREATE_INFO;
+
+  for (U32 idx = 0; idx < count; ++idx) {
+    VERIFY_VK_OP(vkCreateSemaphore(device, &semaphoreInfo, nullptr, &semaphores[idx]),
+      "Failed to create semaphore [multi-create]");
+  }
+}
+
+std::vector<VkSemaphore> VkCore::CreateSemaphores(VkDevice device, U32 count) {
+  std::vector<VkSemaphore> semaphores(count);
+  CreateSemaphores(device, count, semaphores);
+  return semaphores;
+}
+
+
+VkFence VkCore::CreateFence(VkDevice device, VkFenceCreateFlags flags) {
+  VkFenceCreateInfo fenceInfo = {};
+  fenceInfo.sType             = VK_STRUCTURE_TYPE_FENCE_CREATE_INFO;
+  fenceInfo.flags             = flags;
+
+  VkFence fence;
+  VERIFY_VK_OP(vkCreateFence(device, &fenceInfo, nullptr, &fence), "Failed to create fence");
+  return fence;
+}
+
+void VkCore::CreateFences(VkDevice device, U32 count, VkFenceCreateFlags flags, std::vector<VkFence>& fences) {
+  VkFenceCreateInfo fenceInfo = {};
+  fenceInfo.sType             = VK_STRUCTURE_TYPE_FENCE_CREATE_INFO;
+  fenceInfo.flags             = flags;
+
+  for (U32 idx = 0; idx < count; ++idx) {
+    VERIFY_VK_OP(vkCreateFence(device, &fenceInfo, nullptr, &fences[idx]), "Failed to create fences [multi-create]");
+  }
+}
+
+std::vector<VkFence> VkCore::CreateFences(VkDevice device, U32 count, VkFenceCreateFlags flags) {
+  std::vector<VkFence> fences(count);
+  CreateFences(device, count, flags, fences);
+  return fences;
 }
 
 } // namespace Vulkan
