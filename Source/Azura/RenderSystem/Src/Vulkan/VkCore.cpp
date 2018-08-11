@@ -495,7 +495,7 @@ VkRenderPass VkCore::CreateRenderPass(VkDevice device, VkFormat colorFormat) {
   return renderPass;
 }
 
-void VkCore::BindUniformBufferToDescriptorSet(std::vector<VkDescriptorSetLayoutBinding>& bindings,
+void VkCore::CreateUniformBufferBinding(std::vector<VkDescriptorSetLayoutBinding>& bindings,
                                               VkShaderStageFlags stageFlag) {
 
   VkDescriptorSetLayoutBinding uboLayoutBinding = {};
