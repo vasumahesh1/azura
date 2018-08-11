@@ -47,7 +47,7 @@ VkImageView CreateImageView(VkDevice device,
 
 VkRenderPass CreateRenderPass(VkDevice device, VkFormat colorFormat);
 
-void BindUniformBufferToDescriptorSet(std::vector<VkDescriptorSetLayoutBinding>& bindings,
+void CreateUniformBufferBinding(std::vector<VkDescriptorSetLayoutBinding>& bindings,
                                       VkShaderStageFlags stageFlag);
 VkDescriptorSetLayout CreateDescriptorSetLayout(VkDevice device,
                                                 const std::vector<VkDescriptorSetLayoutBinding>& bindings);
