@@ -33,13 +33,13 @@ install:
   - ps: mkdir C:\AppveyorCache\VulkanSDK\ -ea 0
 
   # Download Ninja
-  - ps: appveyor DownloadFile %NINJA_URL% -FileName ninja.zip
-  - ps: 7z x ninja.zip -oC:\AppveyorCache\Ninja\ > nul
+  - ps: appveyor DownloadFile $env:NINJA_URL -FileName ninja.zip
+  - ps: 7z x ninja.zip -oC:\AppveyorCache\Ninja\
 
   # Download and setup Vulkan
   - ps: cd ..
-  - ps: appveyor DownloadFile %VULKAN_URL% -FileName Vulkan.exe
-  - ps: cmd /c "Vulkan.exe /S"
+  - ps: appveyor DownloadFile $env:VULKAN_URL -FileName Vulkan.exe
+  - ps: cmd /c "Vulkan.exe /S && exit"
   - ps: Copy-Item -Path "C:\VulkanSDK\*" -Destination "C:\AppveyorCache\VulkanSDK\" -Recurse -Force 
 
   # -------------------------- CACHE COMMANDS END --------------------------
