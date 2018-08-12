@@ -25,7 +25,7 @@ appveyor DownloadFile $env:BOOST_URL -FileName boost.zip > $null
 cd C:\AppveyorCache\Boost\boost_1_68_0\
 
 echo "Building Boost ..."
-cmd /c ".\boostrap && exit" > $null
+cmd /c "boostrap.bat && exit" > $null
 cmd /c ".\b2 && exit" > $null
 
 # Download and setup Vulkan
