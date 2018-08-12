@@ -34,8 +34,8 @@ install:
   # -------------------------- CACHE CHECK --------------------------
 
   # Copy Ninja from Cache to Repo
-  - ps: mkdir C:\azura\External\Windows\Tools\Ninja\ -ea 0
-  - ps: Copy-Item -Path "C:\AppveyorCache\Ninja\*" -Destination "C:\azura\External\Windows\Tools\Ninja\" -Recurse -Force 
+  - ps: mkdir C:\azura\External\Windows\Tools\Ninja\ -ea 0 > $null
+  - ps: Copy-Item -Path "C:\AppveyorCache\Ninja\*" -Destination "C:\azura\External\Windows\Tools\Ninja\" -Recurse -Force
   - ps: C:\azura\External\Windows\Tools\Ninja\ninja.exe --version
 
 before_test:
