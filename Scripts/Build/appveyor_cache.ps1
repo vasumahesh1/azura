@@ -12,6 +12,7 @@ echo "Preparing Cache Directories ..."
 mkdir C:\AppveyorCache\ -ea 0 > $null
 mkdir C:\AppveyorCache\Ninja\ -ea 0 > $null
 mkdir C:\AppveyorCache\VulkanSDK\ -ea 0 > $null
+mkdir C:\AppveyorCache\Boost\ -ea 0 > $null
 
 # Download Ninja
 echo "Downloading Ninja ..."
@@ -25,7 +26,7 @@ appveyor DownloadFile $env:BOOST_URL -FileName boost.zip > $null
 cd C:\AppveyorCache\Boost\boost_1_68_0\
 
 echo "Building Boost ..."
-cmd /c "boostrap.bat && exit" > $null
+cmd /c "bootstrap.bat && exit" > $null
 cmd /c ".\b2 && exit" > $null
 
 # Download and setup Vulkan
