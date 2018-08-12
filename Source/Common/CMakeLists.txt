@@ -19,6 +19,8 @@ set(SOURCES
     "Inc/Types.h"
     "Inc/Utils/Macros.h"
     "Inc/Utils/Exceptions.h"
+    "Inc/Utils/FileReader.h"
+    "Src/Utils/FileReader.cpp"
 	"Inc/Containers/ArrayBatch.h")
 
 add_library(Common ${SOURCES})

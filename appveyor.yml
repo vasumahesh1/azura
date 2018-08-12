@@ -26,17 +26,34 @@ services:
 build: off
 
 install:
+  # -------------------------- CACHE COMMANDS START --------------------------
+
+  - ps: mkdir C:\AppveyorCache\ -ea 0
+  - ps: mkdir C:\AppveyorCache\Ninja\ -ea 0
+  - ps: mkdir C:\AppveyorCache\VulkanSDK\ -ea 0
+
   # Download Ninja
-  - appveyor DownloadFile %NINJA_URL% -FileName ninja.zip
-  - 7z x ninja.zip -oC:/azura/External/Windows/Tools/Ninja/ > nul
-  - C:\azura\External\Windows\Tools\Ninja\ninja.exe --version
+  - ps: appveyor DownloadFile %NINJA_URL% -FileName ninja.zip
+  - ps: 7z x ninja.zip -oC:\AppveyorCache\Ninja\ > nul
 
   # Download and setup Vulkan
-  - cd ..
-  - appveyor DownloadFile %VULKAN_URL% -FileName Vulkan.exe
-  - Vulkan.exe /S
+  - ps: cd ..
+  - ps: appveyor DownloadFile %VULKAN_URL% -FileName Vulkan.exe
+  - ps: cmd /c "Vulkan.exe /S"
+  - ps: Copy-Item -Path "C:\VulkanSDK\*" -Destination "C:\AppveyorCache\VulkanSDK\" -Recurse -Force 
+
+  # -------------------------- CACHE COMMANDS END --------------------------
+
+  # Copy Ninja from Cache to Repo
+  - ps: mkdir C:\azura\External\Windows\Tools\Ninja\ -ea 0
+  - ps: Copy-Item -Path "C:\AppveyorCache\Ninja\*" -Destination "C:\azura\External\Windows\Tools\Ninja\" -Recurse -Force 
+  - ps: C:\azura\External\Windows\Tools\Ninja\ninja.exe --version
+
+  # Copy VulkanSDK from Cache to Repo
   - ps: mkdir C:\azura\Source\Imports\Windows\Vulkan\ -ea 0
-  - ps: Copy-Item -Path "C:\VulkanSDK\*" -Destination "C:\azura\Source\Imports\Windows\Vulkan\" -Recurse -Force 
+  - ps: Copy-Item -Path "C:\AppveyorCache\VulkanSDK\*" -Destination "C:\azura\Source\Imports\Windows\Vulkan\" -Recurse -Force
+  - ps: cd C:\azura\Source\Imports\Windows\Vulkan\
+  - ps: dir
 
 before_test:
   - cd C:\azura
@@ -45,6 +62,10 @@ before_test:
 test_script:
 
 after_test:
+
+cache:
+  - C:\AppveyorCache\Ninja\ -> appveyor.yml
+  - C:\ProgramData\chocolatey\lib -> appveyor.yml
 
 # artifacts:
 #   # pushing a single file

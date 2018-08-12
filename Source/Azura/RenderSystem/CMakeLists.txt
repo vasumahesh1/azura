@@ -11,21 +11,23 @@ set(VULKAN_SOURCES
 	"Inc/Vulkan/VkScopedBuffer.h"
 	"Src/Vulkan/VkScopedBuffer.cpp"
 	"Inc/Vulkan/VkTypeMapping.h"
-	"Src/Vulkan/VkTypeMapping.cpp"
+	"Inc/Vulkan/VkShader.h"
+	"Src/Vulkan/VkShader.cpp"
+	"Inc/Vulkan/VkScopedPipeline.h"
+	"Src/Vulkan/VkScopedPipeline.cpp"
 	"Inc/Generic/GenericTypes.h"
 	"Inc/Generic/RawStorageFormat.h"
-	"Src/Generic/RawStorageFormat.cpp"
+	"Inc/Generic/Shader.h"
+	"Src/Generic/Shader.cpp"
 	"Inc/Generic/Constants.h"
 	"Inc/Generic/Renderer.h"
 	"Src/Generic/Renderer.cpp"
 )
 
-source_group(Generic REGULAR_EXPRESSION Inc/Generic/.*)
-source_group(Generic REGULAR_EXPRESSION Src/Generic/.*)
-source_group(D3D12 REGULAR_EXPRESSION Inc/D3D12/.*)
-source_group(D3D12 REGULAR_EXPRESSION Src/D3D12/.*)
-source_group(Vulkan REGULAR_EXPRESSION Inc/Vulkan/.*)
-source_group(Vulkan REGULAR_EXPRESSION Src/Vulkan/.*)
+source_group(Generic REGULAR_EXPRESSION "(Inc|Src)/Generic/.*")
+source_group(D3D12 REGULAR_EXPRESSION "(Inc|Src)/D3D12/.*")
+source_group(Vulkan/Inc REGULAR_EXPRESSION "Inc/Vulkan/.*")
+source_group(Vulkan/Src REGULAR_EXPRESSION "Src/Vulkan/.*")
 
 add_library(VulkanRenderSystem ${VULKAN_SOURCES})
 
