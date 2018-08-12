@@ -19,7 +19,7 @@ VkShader::VkShader(VkDevice device, const String& fileName)
 }
 
 VkPipelineShaderStageCreateInfo VkShader::GetShaderStageInfo() const {
-  const auto vkShaderStage = ToVkShaderStageFlags(GetShaderStage());
+  const auto vkShaderStage = ToVkShaderStageFlagBits(GetShaderStage());
   VERIFY_OPT(vkShaderStage, "Unknown Shader Stage");
 
   VkPipelineShaderStageCreateInfo shaderStage = {};
