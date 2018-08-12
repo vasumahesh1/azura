@@ -33,7 +33,7 @@ def trace(message):
 	print(message)
 	sys.stdout.flush()
 
-def warning(message):
+def warn(message):
 	print(bcolors.WARNING + message + bcolors.ENDC)
 	sys.stdout.flush()
 

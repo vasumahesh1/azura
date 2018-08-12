@@ -5,6 +5,7 @@ parser.add_argument("--project", help="Project to build", required=False, defaul
 parser.add_argument("--target", help="Project to build on", required=True)
 parser.add_argument("--generator", help="CMake Generator", default="Ninja", required=False)
 parser.add_argument("--configFile", help="Config File Override", default="./External/Config.ini", required=False)
+parser.add_argument("--cmakeConfigFile", help="CMake Config File Override", default="", required=False)
 parser.add_argument("--projectGenerator", help="CMake Project Files Generator", default="Visual Studio 15 2017", required=False)
 parser.add_argument("--buildPath", help="Build Path", default="Build/", required=False)
 parser.add_argument("--projectPath", help="Projects Path", default="BuildProjects/", required=False)

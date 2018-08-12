@@ -25,8 +25,8 @@ appveyor DownloadFile $env:BOOST_URL -FileName boost.zip > $null
 cd C:\AppveyorCache\Boost\boost_1_68_0\
 
 echo "Building Boost ..."
-cmd /c ".\boostrap && exit"
-cmd /c ".\b2 && exit"
+cmd /c ".\boostrap && exit" > $null
+cmd /c ".\b2 && exit" > $null
 
 # Download and setup Vulkan
 echo "Downloading VulkanSDK ..."
@@ -36,7 +36,6 @@ appveyor DownloadFile $env:VULKAN_URL -FileName Vulkan.exe > $null
 echo "Installing VulkanSDK ..."
 cmd /c "Vulkan.exe /S && exit" > $null
 Copy-Item -Path "C:\VulkanSDK\*" -Destination "C:\AppveyorCache\VulkanSDK\" -Recurse -Force > $null
-
 
 
 echo "Dependencies Downloaded."

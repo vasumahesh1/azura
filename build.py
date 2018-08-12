@@ -15,6 +15,21 @@ processEnv = os.environ.copy()
 hostExternalConfig = {}
 executableMap = {}
 
+def getRawConfigMap(config, section):
+    resultMap = {}
+
+    if (not config.has_section(section)):
+    	return resultMap
+
+    options = config.options(section)
+    for option in options:
+        try:
+            resultMap[option] = config.get(section, option)
+        except:
+            print("exception on %s!" % option)
+            resultMap[option] = None
+    return resultMap
+
 def getConfigMap(config, section):
     resultMap = {}
     relativePath = "External/" + section + "/"
@@ -31,6 +46,13 @@ def getConfigMap(config, section):
             print("exception on %s!" % option)
             resultMap[option] = None
     return resultMap
+
+def getDefines(defineMap):
+	arr = []
+	for key, value in defineMap.iteritems():
+		arr.append('-D' + key.upper() + '=' + value)
+
+	return arr
 
 def buildExecutableMap(config, platform):
 	global executableMap
@@ -130,6 +152,13 @@ def run():
 	cmakeArgs.append("-DCMAKE_BUILD_TYPE=" + buildArgs.build.upper())
 	cmakeArgs.append("-DCMAKE_EXPORT_COMPILE_COMMANDS=ON")
 	cmakeArgs.append("-DCMAKE_CXX_CLANG_TIDY=" + executableMap['clang-tidy'] + ";-extra-arg=-std=c++17")
+
+	if (buildArgs.cmakeConfigFile):
+		az_log.warn('Found a Custom CMake Config')
+		cmakeConfig = ConfigParser.ConfigParser()
+		cmakeConfig.read(buildArgs.cmakeConfigFile)
+		cmakeDefines = getRawConfigMap(cmakeConfig, 'Defines')
+		cmakeArgs = cmakeArgs + getDefines(cmakeDefines)
 
 	if (buildArgs.verbose):
 		cmakeArgs.append("--trace")
