@@ -1,8 +1,8 @@
-$shouldExitEarly = Test-Path -Path C:\AppveyorCache\
-$shouldExitEarly = $shouldExitEarly && Test-Path -Path C:\AppveyorCache\Ninja\
-$shouldExitEarly = $shouldExitEarly && Test-Path -Path C:\AppveyorCache\VulkanSDK\
+$testRoot = Test-Path -Path C:\AppveyorCache\
+$testNinja = Test-Path -Path C:\AppveyorCache\Ninja\
+$testVulkan = Test-Path -Path C:\AppveyorCache\VulkanSDK\
 
-if($shouldExitEarly) {
+if($testRoot -and $testNinja -and $testVulkan) {
     echo "Cache already found ..."
     exit 0
 }
