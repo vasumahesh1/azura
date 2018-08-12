@@ -24,6 +24,11 @@ set(VULKAN_SOURCES
 	"Src/Generic/Renderer.cpp"
 )
 
+find_package(Boost
+  ${BOOST_VERSION} EXACT REQUIRED
+  COMPONENTS preprocessor
+)
+
 source_group(Generic REGULAR_EXPRESSION "(Inc|Src)/Generic/.*")
 source_group(D3D12 REGULAR_EXPRESSION "(Inc|Src)/D3D12/.*")
 source_group(Vulkan/Inc REGULAR_EXPRESSION "Inc/Vulkan/.*")
@@ -32,12 +37,15 @@ source_group(Vulkan/Src REGULAR_EXPRESSION "Src/Vulkan/.*")
 add_library(VulkanRenderSystem ${VULKAN_SOURCES})
 
 target_compile_definitions(VulkanRenderSystem
+	PRIVATE
+		${Boost_INCLUDE_DIRS}
 	PUBLIC
 		API_VULKAN=1
 )
 
 target_include_directories(VulkanRenderSystem
 	PRIVATE
+		${Boost_LIBRARY_DIRS}
 		${VULKAN_1_1_77_0_INCLUDE_DIR}
     PUBLIC
         ${PROJECT_SOURCE_DIR}/Inc

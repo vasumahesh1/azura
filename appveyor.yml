@@ -7,6 +7,7 @@ clone_folder: c:\azura
 environment:
   NINJA_URL: https://github.com/ninja-build/ninja/releases/download/v1.6.0/ninja-win.zip
   VULKAN_URL: https://vulkan.lunarg.com/sdk/download/1.1.77.0/windows/VulkanSDK-1.1.77.0-Installer.exe
+  BOOST_URL: https://dl.bintray.com/boostorg/release/1.68.0/source/boost_1_68_0.7z
 
   matrix:
     - BUILD: 'DEBUG'
@@ -52,7 +53,7 @@ test_script:
 after_test:
 
 cache:
-  - C:\AppveyorCache\ -> appveyor.yml
+  - C:\AppveyorCache\ -> .cicache
 
 # artifacts:
 #   # pushing a single file
