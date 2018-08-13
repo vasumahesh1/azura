@@ -16,8 +16,10 @@ set(VULKAN_SOURCES
 	"Src/Vulkan/VkShader.cpp"
 	"Inc/Vulkan/VkScopedPipeline.h"
 	"Src/Vulkan/VkScopedPipeline.cpp"
+	
 	"Inc/Generic/GenericTypes.h"
 	"Inc/Generic/RawStorageFormat.h"
+	"Src/Generic/RawStorageFormat.cpp"
 	"Inc/Generic/Shader.h"
 	"Src/Generic/Shader.cpp"
 	"Inc/Generic/Constants.h"

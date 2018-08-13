@@ -1,4 +1,5 @@
 #include "Vulkan/VkTypeMapping.h"
+#include "Utils/Macros.h"
 
 namespace Azura {
 namespace Vulkan {
@@ -52,15 +53,6 @@ namespace Vulkan {
 #define FRONT_FACE_TO_VK_FRONT_FACE_MAPPING(FUNC) \
   FUNC(FrontFace::CounterClockwise, VK_FRONT_FACE_COUNTER_CLOCKWISE) \
   FUNC(FrontFace::Clockwise, VK_FRONT_FACE_CLOCKWISE) 
-
-
-#define FORWARD_MAPPING(TYPE_A, TYPE_B)    \
-  case TYPE_A:                          \
-    return TYPE_B;
-
-#define REVERSE_MAPPING(TYPE_A, TYPE_B)    \
-  case TYPE_B:                          \
-    return TYPE_A;
 
 #define CREATE_MAPPER_CPP(FROM_FORMAT, TO_FORMAT, MAPPING_TABLE, CASE_MAPPING_FUNC)                \
   CREATE_MAPPER_H(FROM_FORMAT, TO_FORMAT) {                                                                  \

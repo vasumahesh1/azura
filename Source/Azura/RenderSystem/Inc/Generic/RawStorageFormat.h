@@ -4,7 +4,7 @@
 
 #include <boost/preprocessor/tuple/elem.hpp>
 #include <boost/preprocessor/repetition/repeat.hpp>
-#include <map>
+#include <boost/preprocessor/seq/for_each.hpp>
 
 namespace Azura {
 enum Bits {
@@ -32,7 +32,8 @@ enum class ChannelDataType {
   UNorm,
   SNorm,
   UScaled,
-  SScaled
+  SScaled,
+  Typeless
 };
 
 enum class Channel {
@@ -43,24 +44,48 @@ enum class Channel {
   Depth,
   Stencil,
   Padding,
+  Unknown,
 };
 
 using ChannelDesc = std::tuple<Channel, ChannelDataType, U32>;
 
+// Tuple Access Info
 #define TUPLE_ACCESS_ENUM 0
 #define TUPLE_ACCESS_CHANNEL_DATA 1
-
 #define TUPLE_SIZE 2
 
-#define RAW_STORAGE_FORMAT_ITERATOR(FUNC)                                                                                                                           \
-  FUNC(( UNKNOWN,  /* CHANNELS START */ (BOOST_PP_NIL) /* CHANNELS END */ ))                                                                                                                                           \
-  FUNC(( R32G32B32A32_FLOAT, /* CHANNELS START */ ((Red, Float, 32), ((Blue, Float, 32), ((Green, Float, 32), ((Alpha, Float, 32), BOOST_PP_NIL)))) /* CHANNELS END */ ))
+#define CHANNEL_TUPLE_ACCESS_CHANNEL 0
+#define CHANNEL_TUPLE_ACCESS_TYPE 1
+#define CHANNEL_TUPLE_ACCESS_BIT_WIDTH 2
+#define CHANNEL_TUPLE_SIZE 3
+
+// Format Iterator
+#define RAW_STORAGE_FORMAT_ITERATOR(FUNC)                                                                                                                                   \
+  FUNC(( UNKNOWN,                   /* CHANNELS START */ ((Unknown, Typeless, 0))                                                             /* CHANNELS END */ ))         \
+  FUNC(( R32G32B32A32_FLOAT,        /* CHANNELS START */ ((Red, Float, 32)) ((Blue, Float, 32)) ((Green, Float, 32)) ((Alpha, Float, 32))     /* CHANNELS END */ ))
+
+// Macros For: ENUM NAME
+#define GET_FORMAT_NAME_ONLY_FROM_TUPLE(ENUM_TUPLE) BOOST_PP_TUPLE_ELEM(TUPLE_SIZE, TUPLE_ACCESS_ENUM, ENUM_TUPLE)
+#define GET_FORMAT_NAME_FROM_TUPLE(ENUM_TUPLE) GET_FORMAT_NAME_ONLY_FROM_TUPLE(ENUM_TUPLE),
+#define GET_FULL_FORMAT_NAME_ONLY_FROM_TUPLE(ENUM_TUPLE) RawStorageFormat::GET_FORMAT_NAME_ONLY_FROM_TUPLE(ENUM_TUPLE)
+
+// Macros For: CHANNEL WIDTH
+#define GET_CHANNEL_WIDTH(CHANNEL_TUPLE) BOOST_PP_TUPLE_ELEM(CHANNEL_TUPLE_SIZE, CHANNEL_TUPLE_ACCESS_BIT_WIDTH, CHANNEL_TUPLE)
+#define GET_CHANNEL_WIDTH_SEQ(R, DATA, CHANNEL_TUPLE) BOOST_PP_TUPLE_ELEM(CHANNEL_TUPLE_SIZE, CHANNEL_TUPLE_ACCESS_BIT_WIDTH, CHANNEL_TUPLE) DATA
+#define GET_FORMAT_WIDTH(CHANNEL_LIST) BOOST_PP_SEQ_FOR_EACH(GET_CHANNEL_WIDTH_SEQ, +, CHANNEL_LIST) 0
+
+#define GET_FORMAT_WIDTH_ONLY_FROM_TUPLE(ENUM_TUPLE) GET_FORMAT_WIDTH(BOOST_PP_TUPLE_ELEM(TUPLE_SIZE, TUPLE_ACCESS_CHANNEL_DATA, ENUM_TUPLE))
+#define GET_FORMAT_WIDTH_FROM_TUPLE(ENUM_TUPLE) GET_FORMAT_WIDTH_ONLY_FROM_TUPLE(ENUM_TUPLE),
 
 
-#define ENUM_NAME_ONLY_MACRO(EnumTuple) BOOST_PP_TUPLE_ELEM(TUPLE_SIZE, TUPLE_ACCESS_ENUM, EnumTuple)
-#define ENUM_MACRO(EnumTuple) ENUM_NAME_ONLY_MACRO(EnumTuple),
-
+/**
+ * \brief This enum represents a platform agnostic way of representing Raw Data.
+ * It can be used in Images, Image Views, Buffers etc.
+ */
 enum class RawStorageFormat {
-  RAW_STORAGE_FORMAT_ITERATOR(ENUM_MACRO)
+  RAW_STORAGE_FORMAT_ITERATOR(GET_FORMAT_NAME_FROM_TUPLE)
 };
+
+U32 GetFormatSize(RawStorageFormat format);
+
 } // namespace Azura
