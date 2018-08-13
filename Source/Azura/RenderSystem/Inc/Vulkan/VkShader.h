@@ -6,6 +6,10 @@
 #include <vector>
 
 namespace Azura {
+enum class RawStorageFormat;
+}
+
+namespace Azura {
 namespace Vulkan {
 
 class VkShader : public Shader {
@@ -16,7 +20,7 @@ public:
 
   const std::vector<VkVertexInputAttributeDescription>& GetInputAttributeDescription() const;
 
-  void AddVertexAttribute(VkFormat format, U32 binding);
+  void AddVertexAttribute(RawStorageFormat rawFormat, U32 binding);
 
 private:
   struct BindingInfo {

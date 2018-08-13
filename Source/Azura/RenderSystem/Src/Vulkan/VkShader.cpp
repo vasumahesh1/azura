@@ -35,20 +35,22 @@ const std::vector<VkVertexInputAttributeDescription>& VkShader::GetInputAttribut
   return m_attributes;
 }
 
-void VkShader::AddVertexAttribute(VkFormat format, U32 binding) {
+void VkShader::AddVertexAttribute(RawStorageFormat rawFormat, U32 binding) {
   auto bindingInfo = m_bindingMap[binding];
+
+  const auto format = ToVkFormat(rawFormat);
+  VERIFY_OPT(format, "Unknown Format");
 
   VkVertexInputAttributeDescription attrDesc;
   attrDesc.binding  = binding;
   attrDesc.location = bindingInfo.m_location;
-  attrDesc.format   = format;
+  attrDesc.format   = format.value();
   attrDesc.offset   = bindingInfo.m_offset;
 
   // TODO(vasumahesh1): Handle 64bit formats taking 2 locations
   bindingInfo.m_location++;
 
-  // TODO(vasumahesh1): Handle SIZE in Offset
-  bindingInfo.m_offset += 0;
+  bindingInfo.m_offset += GetFormatSize(rawFormat);
 
   m_bindingMap[binding] = bindingInfo;
 
