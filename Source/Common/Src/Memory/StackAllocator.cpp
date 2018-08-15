@@ -1,5 +1,5 @@
 #include <stdlib.h>
-#include "MemoryAllocators/StackAllocator.h"
+#include "Memory/StackAllocator.h"
 
 namespace AZ {
   StackAllocator::StackAllocator(U32 stackSizeInBytes) {

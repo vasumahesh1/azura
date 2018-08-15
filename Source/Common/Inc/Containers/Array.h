@@ -5,7 +5,7 @@
 #include <cassert>
 
 #include "Types.h"
-#include "MemoryAllocators/Allocator.h"
+#include "Memory/Allocator.h"
 
 namespace Azura {
 template <typename Type, UINT MaxSize> class Array {

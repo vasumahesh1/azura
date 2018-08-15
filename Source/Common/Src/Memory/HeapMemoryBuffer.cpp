@@ -1,4 +1,4 @@
-#include "MemoryAllocators/HeapMemoryBuffer.h"
+#include "Memory/HeapMemoryBuffer.h"
 #include <cstdlib>
 #include <cassert>
 

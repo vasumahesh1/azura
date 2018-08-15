@@ -5,7 +5,7 @@
 #include <iterator>
 
 #include "Types.h"
-#include "MemoryAllocators/Allocator.h"
+#include "Memory/Allocator.h"
 #include <cassert>
 
 namespace Azura {

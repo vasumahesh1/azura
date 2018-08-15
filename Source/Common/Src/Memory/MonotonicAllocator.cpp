@@ -1,6 +1,8 @@
 
 
-#include "MemoryAllocators/MonotonicAllocator.h"
+#include "Memory/MonotonicAllocator.h"
+#include <cassert>
+#include "Utils/Macros.h"
 
 namespace Azura {
 
@@ -23,7 +25,7 @@ MonotonicAllocator::MonotonicAllocator(SizeType size)
     mCurrentPosition(mMemoryBlock) {
 }
 
-MonotonicAllocator::MonotonicAllocator(SizeType size, void *managedResource)
+MonotonicAllocator::MonotonicAllocator(SizeType size, void* managedResource)
   : mSize(size),
     // NOLINTNEXTLINE(cppcoreguidelines-pro-type-reinterpret-cast)
     mMemoryBlock(reinterpret_cast<AddressPtr>(managedResource)),
@@ -41,22 +43,22 @@ MonotonicAllocator::~MonotonicAllocator() {
 }
 
 MonotonicAllocator MonotonicAllocator::Create(SizeType size,
-                                              MemoryBuffer &buffer) {
+                                              MemoryBuffer& buffer) {
   return MonotonicAllocator(size, buffer.Allocate(size));
 }
 
-void *MonotonicAllocator::Allocate(SizeType size, SizeType alignment) {
+void* MonotonicAllocator::Allocate(SizeType size, SizeType alignment) {
   // Power of 2 check
   assert((alignment & (alignment - 1)) == 0);
 
   const SizeType alignedSize = AlignAhead(size, alignment);
   assert(mSize - (mCurrentPosition - mMemoryBlock) >= alignedSize);
 
-  const SizeType mask = alignment - 1;
-  const UPTR misalignment = (mCurrentPosition & mask);
+  const SizeType mask          = alignment - 1;
+  const UPTR misalignment      = (mCurrentPosition & mask);
   const AddressDiff adjustment = alignment - misalignment;
 
-  const UPTR addr = mCurrentPosition + adjustment;
+  const UPTR addr  = mCurrentPosition + adjustment;
   mCurrentPosition = addr + alignedSize;
 
   // TODO(Vasu Mahesh): Store adjusment appropriately for deallocation
@@ -68,7 +70,7 @@ void *MonotonicAllocator::Allocate(SizeType size, SizeType alignment) {
   return reinterpret_cast<void*>(addr);
 }
 
-void MonotonicAllocator::Deallocate(void *address) {
+void MonotonicAllocator::Deallocate(void* address) {
   UNUSED(address);
 }
 

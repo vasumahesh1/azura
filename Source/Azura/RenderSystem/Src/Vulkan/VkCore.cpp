@@ -4,10 +4,8 @@
 #include <array>
 #include <map>
 #include <set>
-#include "Utils/Macros.h"
 #include "Vulkan/VkTypeMapping.h"
 #include "Vulkan/VkMacros.h"
-#include "Vulkan/VkScopedBuffer.h"
 
 namespace Azura {
 namespace Vulkan {
@@ -496,7 +494,7 @@ VkRenderPass VkCore::CreateRenderPass(VkDevice device, VkFormat colorFormat) {
 }
 
 void VkCore::CreateUniformBufferBinding(std::vector<VkDescriptorSetLayoutBinding>& bindings,
-                                              VkShaderStageFlags stageFlag) {
+                                        VkShaderStageFlags stageFlag) {
 
   VkDescriptorSetLayoutBinding uboLayoutBinding = {};
   uboLayoutBinding.binding                      = U32(bindings.size());
