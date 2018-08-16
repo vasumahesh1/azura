@@ -14,6 +14,7 @@ parser.add_argument("--debug", help="Debug Commands Mode", action="store_true", 
 parser.add_argument("--clean", help="Clean the project", action="store_true", required=False)
 parser.add_argument("--build", help="Build Release or Debug, defaults to Debug Mode", default="Debug", required=False)
 parser.add_argument("--projectFiles", help="Flag to tell the build system to generate project files", action="store_true")
+parser.add_argument("--includeTests", help="Flag to run tests as well", action="store_true")
 parser.add_argument("-v", help="Version", action="store_true")
 parser.parse_args()
 

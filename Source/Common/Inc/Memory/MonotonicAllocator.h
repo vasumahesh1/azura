@@ -4,27 +4,17 @@
 #include "Allocator.h"
 
 namespace Azura {
-class MonotonicAllocator : public Allocator {
-  using AddressPtr = UPTR;
-  using AddressDiff = ptrdiff_t;
-
+namespace Memory {
+class MonotonicAllocator final : public Allocator {
 public:
-  explicit MonotonicAllocator(SizeType size);
-  MonotonicAllocator(SizeType size, void* managedResource);
+  MonotonicAllocator(MemoryBuffer& buffer, U32 size);
   ~MonotonicAllocator() override;
 
-  /**
-   * \brief Creates a Monotonic allocator from the provided MemoryBuffer.
-   */
-  static MonotonicAllocator Create(SizeType size, MemoryBuffer& buffer);
-
-  // Disable Copy
   MonotonicAllocator(const MonotonicAllocator& other) = delete;
   MonotonicAllocator& operator=(const MonotonicAllocator& other) = delete;
 
-  // Enable Move
   MonotonicAllocator(MonotonicAllocator&& other) noexcept = default;
-  MonotonicAllocator& operator=(MonotonicAllocator&& other) noexcept = default;
+  MonotonicAllocator& operator=(MonotonicAllocator&& other) noexcept = delete;
 
   /**
    * \brief Allocates a set number of bytes
@@ -32,7 +22,7 @@ public:
    * \param alignment Alignment for the data
    * \return Pointer to Memory
    */
-  void* Allocate(SizeType size, SizeType alignment) override;
+  void* Allocate(U32 size, U32 alignment) override;
 
   /**
    * \brief Currently a No Op.
@@ -45,16 +35,15 @@ public:
   */
   void Reset() override;
 
-#ifdef TOOLS_TEST
-    AddressPtr GetCurrentPtr() const { return mCurrentPosition; };
-    AddressPtr GetBasePtr() const { return mMemoryBlock; };
-    AddressPtr GetSize() const { return mSize; };
+#ifdef BUILD_UNIT_TEST
+    AddressPtr GetCurrentPtr() const { return m_headPtr; };
+    AddressPtr GetBasePtr() const { return BasePtr(); };
+    AddressPtr GetSize() const { return Size(); };
 #endif
 
 private:
-  SizeType mSize;
-  AddressPtr mMemoryBlock;
-  AddressPtr mCurrentPosition;
-  bool mIsManagedResource{false};
+  AddressPtr m_headPtr;
+  MemoryBuffer& m_sourceBuffer;
 };
+} // namespace Memory
 } // namespace Azura

@@ -8,9 +8,11 @@ set(CMAKE_CXX_EXTENSIONS OFF)
 set(CLANG_PATH ${CMAKE_CURRENT_SOURCE_DIR}/External/Windows/Tools/LLVM/x64/LLVM/ CACHE STRING "" FORCE)
 set(CLANG_TIDY_EXECUTABLE ${CLANG_PATH}/bin/clang-tidy.exe CACHE STRING "" FORCE)
 
-# Local Sets
-# set(CLANG_TIDY_COMMAND "${CLANG_TIDY_EXECUTABLE}" "-checks=-*,clang-analyzer-*,-clang-analyzer-cplusplus*")
-# set(CLANG_TIDY_COMMAND "${CLANG_TIDY_EXECUTABLE}" "-p ${CMAKE_BINARY_DIR}")
+# Install GTest
+include("./GTest.cmake")
+include("./Azura.Macros.cmake")
+
+enable_testing()
 
 # VS Grouping
 set_property(GLOBAL PROPERTY USE_FOLDERS ON)

@@ -2,6 +2,7 @@ import sys
 import os
 sys.path.insert(0, './Scripts/Build/')
 
+import datetime
 import subprocess
 import platform
 import ConfigParser
@@ -63,6 +64,7 @@ def buildExecutableMap(config, platform):
 
 	executableMap['ninja'] = config['ninja'] + '/ninja' + ext
 	executableMap['cmake'] = config['cmake'] + '/cmake' + ext
+	executableMap['ctest'] = config['cmake'] + '/ctest' + ext
 	executableMap['clang-tidy'] = config['llvm'] + '/clang-tidy' + ext
 
 def printConfig(item):
@@ -104,10 +106,27 @@ def configureLinux():
 	processEnv['LIB'] = hostExternalConfig['clang'] + '/lib/:'
 	processEnv['INCLUDE'] = hostExternalConfig['clang'] + '/include/:'
 
+def printTimeDelta(seconds):
+    seconds = int(seconds)
+    days, seconds = divmod(seconds, 86400)
+    hours, seconds = divmod(seconds, 3600)
+    minutes, seconds = divmod(seconds, 60)
+
+    if days > 0:
+        return '%dd %dh %dm %ds' % (days, hours, minutes, seconds)
+    elif hours > 0:
+        return '%dh %dm %ds' % (hours, minutes, seconds)
+    elif minutes > 0:
+        return '%dm %ds' % (minutes, seconds)
+    else:
+        return '%ds' % (seconds)
+
 def run():
 	global hostExternalConfig
 	global executableMap
 	global processEnv
+
+	buildStartTime = datetime.datetime.now()
 
 	hostOS = platform.system()
 
@@ -198,5 +217,21 @@ def run():
 	az_log.banner("Building Projects")
 
 	executeCommand(ninjaBuildArgs)
+
+	if (buildArgs.includeTests):
+		az_log.empty()
+		az_log.banner("Running Tests")
+
+		ctestArgs = [executableMap['ctest']]
+		ctestArgs.append('-DGTEST_COLOR=1')
+		ctestArgs.append('--verbose')
+
+		executeCommand(ctestArgs)
+
+
+	buildEndTime = datetime.datetime.now()
+	delta = printTimeDelta((buildEndTime - buildStartTime).total_seconds())
+
+	az_log.bannerLarge('Build Finished', 'Time Taken: %s' % delta)
 
 run()

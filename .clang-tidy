@@ -1,6 +1,6 @@
 ---
-Checks:          'cppcoreguidelines-*,clang-analyzer-*,google-*,modernize-*,readability-*,portability-*'
-WarningsAsErrors: 'cppcoreguidelines-*,clang-analyzer-*,google-*,modernize-*,readability-*,portability-*'
+Checks:          'cppcoreguidelines-*,clang-analyzer-*,google-*,modernize-*,readability-*,portability-*,-google-runtime-references'
+WarningsAsErrors: 'cppcoreguidelines-*,clang-analyzer-*,google-*,modernize-*,readability-*,portability-*,-google-runtime-references'
 HeaderFilterRegex: ''
 AnalyzeTemporaryDtors: false
 FormatStyle:     google

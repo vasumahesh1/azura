@@ -29,7 +29,7 @@ private:
   };
 
   std::map<U32, BindingInfo> m_bindingMap;
-  VkShaderModule m_module;
+  VkShaderModule m_module{};
   std::vector<VkVertexInputAttributeDescription> m_attributes;
 };
 

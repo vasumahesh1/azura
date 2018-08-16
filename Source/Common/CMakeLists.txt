@@ -7,6 +7,8 @@ source_group(Containers\\Src REGULAR_EXPRESSION Src/Containers/.*)
 source_group(Utils\\Inc REGULAR_EXPRESSION Inc/Utils/.*)
 source_group(Utils\\Src REGULAR_EXPRESSION Src/Utils/.*)
 
+# -----------  Main Target  -----------
+
 set(SOURCES
     "Inc/Memory/Allocator.h"
     "Src/Memory/Allocator.cpp"
@@ -37,4 +39,23 @@ add_library(Common ${SOURCES})
 target_include_directories(Common
     PUBLIC
         ${PROJECT_SOURCE_DIR}/Inc
+)
+
+
+# -----------  Testing Target  -----------
+
+
+add_executable(
+  CommonTest
+    "Test/test.cpp"
+    "Test/MonotonicAllocator_test.h"
+    "Test/MonotonicAllocator_test.cpp"
+)
+
+AzuraSilenceClangTidy(CommonTest)
+AzuraAddUnitTest(CommonTest)
+
+target_link_libraries(CommonTest
+    gtest_main
+    Common
 )

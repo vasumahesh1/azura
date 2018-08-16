@@ -10,7 +10,7 @@ std::vector<U8> FileReader::GetFileContents(const String& filePath) {
   std::vector<U8> buffer;
 
   fileStream.seekg(0, std::ios::end);
-  buffer.reserve(fileStream.tellg());
+  buffer.reserve(SizeType(fileStream.tellg()));
   fileStream.seekg(0, std::ios::beg);
 
   buffer.assign(std::istreambuf_iterator<char>(fileStream), std::istreambuf_iterator<char>());
@@ -25,7 +25,7 @@ SizeType FileReader::GetFileSize(const String& filePath) {
   std::vector<U8> buffer;
 
   fileStream.seekg(0, std::ios::end);
-  const SizeType size = fileStream.tellg();
+  const auto size = SizeType(fileStream.tellg());
   fileStream.close();
 
   return size;

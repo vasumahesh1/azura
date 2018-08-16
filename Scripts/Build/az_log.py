@@ -45,3 +45,12 @@ def banner(message):
 	header("--------" + repeat_to_length("-", len(message)))
 	header("--- %s ---" % message)
 	header("--------" + repeat_to_length("-", len(message)))
+
+def bannerLarge(message1, message2):
+	size = len(message1) if len(message1) > len(message2) else len(message2)
+	size += 10
+
+	header(repeat_to_length("=", size))
+	header((": %s" + repeat_to_length(" ", size - len(message1) - 3) + ":")  % message1)
+	header((": %s" + repeat_to_length(" ", size - len(message2) - 3) + ":") % message2)
+	header(repeat_to_length("=", size))

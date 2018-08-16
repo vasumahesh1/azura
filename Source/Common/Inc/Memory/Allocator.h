@@ -3,114 +3,122 @@
 #include "Types.h"
 #include "MemoryBuffer.h"
 #include <type_traits>
+#include <functional>
 
 namespace Azura {
-constexpr SizeType DEFAULT_MEMORY_ALIGNMENT = 16;
+namespace Memory {
+namespace Impl
+{
+inline U32 AlignAhead(U32 size, U32 alignment) {
+    return (size + (alignment - 1)) & ~(alignment - 1);
+  }
+} // namespace Impl
 
-template <typename T, SizeType A> struct AlignedType final {
-  AlignedType() = delete;
+template <typename T>
+using UniquePtr = std::unique_ptr<T, std::function<void(T*)>>;
 
-  using Type = T;
-  static const SizeType sAlignment = A;
-};
+template <typename T>
+using UniqueArrayPtr = std::unique_ptr<T[], std::function<void(T*)>>;
 
-template <typename> struct is_aligned_type : std::false_type {
-};
-
-template <typename Type, SizeType Alignment> struct is_aligned_type<AlignedType<Type, Alignment>> : std::true_type {
-};
 
 class Allocator {
 public:
-  Allocator();
+  Allocator(void* resource, U32 size);
+  Allocator(AddressPtr resource, U32 size);
   virtual ~Allocator();
 
+  // Disable Copy
   Allocator(const Allocator& other) = delete;
   Allocator& operator=(const Allocator& other) = delete;
 
+  // Enable Move
   Allocator(Allocator&& other) noexcept = default;
   Allocator& operator=(Allocator&& other) noexcept = default;
 
-  virtual void* Allocate(SizeType size, SizeType alignment) = 0;
+  virtual void* Allocate(U32 size, U32 alignment) = 0;
   virtual void Deallocate(void* address) = 0;
   virtual void Reset();
 
-  template <class Type> void DeleteObject(Type* object);
+  template <typename Type, typename... Args>
+  UniquePtr<Type> New(Args ... args);
 
-  template <class Type> void DeleteObjects(Type* object, UINT count);
+  template<typename Type, typename ...Args>
+  UniqueArrayPtr<Type> NewArray(U32 numElements, Args ...args);
 
-  template <typename Type, typename... Args, typename = std::enable_if_t<!is_aligned_type<Type>::value>> Type*
-  NewObject(bool construct, Args ... args) {
-    Type* address = reinterpret_cast<Type*>(Allocate(sizeof(Type), sizeof(Type)));
+  template <typename Type, typename... Args>
+  UniquePtr<Type> RawNew(Args ... args);
 
-    if (construct) {
-      new(address) Type(args...);
-    }
+  template<typename Type, typename ...Args>
+  UniqueArrayPtr<Type> RawNewArray(U32 numElements, Args ...args);
 
-    return address;
-  }
+protected:
+  U32 Size() const;
+  AddressPtr BasePtr() const;
 
-  template <typename AlignedType, typename... Args, typename = std::enable_if_t<is_aligned_type<AlignedType>::value>
-  > typename AlignedType::Type* NewObject(bool construct, Args ... args) {
-    typename AlignedType::Type* address = reinterpret_cast<typename AlignedType::Type*>(
-      Allocate(sizeof(typename AlignedType::Type), AlignedType::sAlignment));
+private:
+  template <typename Type, typename... Args>
+  UniquePtr<Type> InternalAllocate(bool shouldConstruct, U32 size, U32 alignment, Args ... args);
+  template <class Type, class ... Args>
+  UniqueArrayPtr<Type> InternalAllocateArray(bool shouldConstruct,
+                                        U32 elementSize,
+                                        U32 numElements,
+                                        U32 alignment,
+                                        Args ... args);
 
-    if (construct) {
-      new(address) typename AlignedType::Type(args...);
-    }
-
-    return address;
-  }
-
-  template <typename Type, typename... Args, typename = std::enable_if_t<!is_aligned_type<Type>::value>> Type*
-  NewObjects(const UINT count, bool construct) {
-    Type* address = reinterpret_cast<Type*>(Allocate(count * sizeof(Type), sizeof(Type)));
-    Type* start   = address;
-
-    if (construct) {
-      for (auto itr = 0U; itr < count; ++itr) {
-        new(start) Type();
-        ++start;
-      }
-    }
-
-    return address;
-  }
-
-  template <typename AlignedType, typename... Args, typename = std::enable_if_t<is_aligned_type<AlignedType>::value>
-  > typename AlignedType::Type* NewObjects(const UINT count, bool construct) {
-    typename AlignedType::Type* address = reinterpret_cast<Type*>(Allocate(count * sizeof(typename AlignedType::Type),
-                                                                           AlignedType::sAlignment));
-    typename AlignedType::Type* start = address;
-
-    if (construct) {
-      for (auto itr = 0U; itr < count; ++itr) {
-        new(start) typename AlignedType::Type();
-        ++start;
-      }
-    }
-
-    return address;
-  }
+  AddressPtr m_basePtr;
+  U32 m_size;
 };
 
-template <typename Type> void Allocator::DeleteObject(Type* object) {
-  // TODO: Figure out Dynamic Type based destruction.
-  void* address = static_cast<void*>(object);
-  object->~Type();
-  Deallocate(address);
+template <typename Type, typename... Args>
+UniquePtr<Type> Allocator::New(Args ... args) {
+  return InternalAllocate<Type, Args...>(true, sizeof(Type), sizeof(Type), args...);
 }
 
-template <typename Type> void Allocator::DeleteObjects(Type* object, const UINT count) {
-  void* address = static_cast<void*>(object);
-  Type* start   = object;
+template <typename Type, typename... Args>
+UniqueArrayPtr<Type> Allocator::NewArray(U32 numElements, Args ... args) {
+  return InternalAllocateArray<Type, Args...>(true, sizeof(Type), numElements, sizeof(Type), args...);
+}
 
-  for (auto itr = 0U; itr < count; ++itr) {
-    start->~Type();
-    ++start;
+template <typename Type, typename ... Args>
+UniquePtr<Type> Allocator::RawNew(Args ... args) {
+  return InternalAllocate<Type, Args...>(false, sizeof(Type), sizeof(Type), args...);
+}
+
+template <typename Type, typename... Args>
+UniqueArrayPtr<Type> Allocator::RawNewArray(U32 numElements, Args ... args) {
+  return InternalAllocateArray<Type, Args...>(false, sizeof(Type), numElements, sizeof(Type), args...);
+}
+
+template <typename Type, typename ... Args>
+UniquePtr<Type> Allocator::InternalAllocate(bool shouldConstruct, U32 size, U32 alignment, Args ... args) {
+  Type* address = reinterpret_cast<Type*>(Allocate(size, alignment));
+
+  if (shouldConstruct) {
+    new(address) Type(args...);
   }
 
-  // TODO: Figure out Deallocate for Arrays
-  Deallocate(address);
+  UniquePtr<Type> result(address, [&](Type* data) { Deallocate(data); });
+  return result;
 }
+
+template <typename Type, typename ... Args>
+UniqueArrayPtr<Type> Allocator::InternalAllocateArray(bool shouldConstruct,
+                                                 U32 elementSize,
+                                                 U32 numElements,
+                                                 U32 alignment,
+                                                 Args ... args) {
+  const U32 actualSize = Impl::AlignAhead(elementSize, alignment);
+  Type* address = reinterpret_cast<Type*>(Allocate(actualSize * numElements, alignment));
+
+  if (shouldConstruct) {
+    for (U32 idx = 0; idx < numElements; ++idx) {
+      new(address + (idx * actualSize)) Type(args...);
+    }
+  }
+
+  UniqueArrayPtr<Type> result(address, [&](Type* data) { Deallocate(data); });
+  return result;
+}
+
+} // namespace Memory
 } // namespace Azura

@@ -7,17 +7,19 @@
 #include "Types.h"
 #include "Memory/Allocator.h"
 #include <cassert>
+#include "Array.h"
 
 namespace Azura {
+namespace Containers {
 template <typename Type>
 class Vector {
 public:
   Vector() = default;
-  explicit Vector(Allocator* alloc);
+  explicit Vector(Memory::Allocator& alloc);
 
   // TODO: Enable When NewDeleteAllocator is ready
   //explicit Vector(UINT maxSize);
-  Vector(UINT maxSize, Allocator* alloc);
+  Vector(UINT maxSize, Memory::Allocator& alloc);
   ~Vector();
 
   // Copy Ctor
@@ -33,7 +35,13 @@ public:
    * \brief Appends data to the end of the vector
    * \param data Data to push
    */
-  void Push(const Type& data);
+  void PushBack(const Type& data);
+
+  /**
+  * \brief Appends data to the end of the vector
+  * \param data Data to push
+  */
+  void EmplaceBack(Type&& data);
 
   /**
    * \brief Removes the last element in the vector array
@@ -46,7 +54,7 @@ public:
    * \param data Data to search for
    * \return Index if Found, else -1
    */
-  int Find(const Type& data);
+  int FindFirst(const Type& data);
 
   /**
    * \brief Searches for the given data in the vector and removes it
@@ -82,8 +90,8 @@ public:
   Type& operator[](UINT idx);
   Type& operator[](UINT idx) const;
 
-  UINT GetSize() const { return mSize; }
-  UINT GetMaxSize() const { return mMaxSize; }
+  UINT GetSize() const { return m_size; }
+  UINT GetMaxSize() const { return m_maxSize; }
 
   class Iterator : public std::iterator<std::random_access_iterator_tag, Type> {
   public:
@@ -218,66 +226,57 @@ public:
 
 #ifdef TOOLS_TEST
     Type* GetBackPtr() const { return mBack; };
-    Type* GetBasePtr() const { return mBase; };
+    Type* GetBasePtr() const { return m_base; };
 #endif
 
 private:
-  UINT mSize{0};
-  UINT mMaxSize{0};
-  Allocator* mAlloc{nullptr};
-  Type* mBase{nullptr};
-  Type* mBack{nullptr};
+  UINT m_size{0};
+  UINT m_maxSize{0};
+  Memory::Allocator& m_allocator;
+  Memory::UniqueArrayPtr<Type> m_base{nullptr};
 };
 
 // TODO: Enable When NewDeleteAllocator is ready
 //template <typename Type>
-//Vector<Type>::Vector(const UINT maxSize) : mMaxSize(maxSize), mAlloc(alloc), mBase(mAlloc->NewObjects<Type>(maxSize)) {}
+//Vector<Type>::Vector(const UINT maxSize) : m_maxSize(maxSize), m_allocator(alloc), m_base(m_allocator->NewObjects<Type>(maxSize)) {}
 
 template <typename Type>
-Vector<Type>::Vector(Allocator* alloc)
-  : mAlloc(alloc) {
+Vector<Type>::Vector(Memory::Allocator& alloc)
+  : m_allocator(alloc) {
 }
 
 template <typename Type>
-Vector<Type>::Vector(const UINT maxSize, Allocator* alloc)
-  : mMaxSize(maxSize),
-    mAlloc(alloc),
-    mBase(mAlloc->NewObjects<Type>(maxSize, false)),
-    mBack(mBase) {
+Vector<Type>::Vector(const UINT maxSize, Memory::Allocator& alloc)
+  : m_maxSize(maxSize),
+    m_allocator(alloc),
+    m_base(m_allocator.RawNewArray<Type>(maxSize)) {
 }
 
 template <typename Type>
-Vector<Type>::~Vector() {
-  if (mAlloc) {
-    mAlloc->DeleteObjects(mBase, mMaxSize);
-  }
-}
+Vector<Type>::~Vector() = default;
 
 // TODO: error with non trivial types need something similar to typename std::enable_if<!std::is_fundamental<Type>::value>::type
 template <typename Type>
 Vector<Type>::Vector(const Vector& other)
-  : mSize(other.mSize),
-    mMaxSize(other.mMaxSize),
-    mAlloc(other.mAlloc),
-    mBack(other.mBack) {
+  : m_size(other.m_size),
+    m_maxSize(other.m_maxSize),
+    m_allocator(other.m_allocator) {
 
   // Allocate Memory
-  mBase = mAlloc->NewObjects<Type>(mMaxSize, false);
+  m_base = m_allocator.RawNewArray<Type>(m_maxSize);
 
   // Copy over Contents
-  std::memcpy(mBase, other.mBase, mMaxSize * sizeof(Type));
+  std::memcpy(m_base.get(), other.m_base.get(), m_maxSize * sizeof(Type));
 }
 
 template <typename Type>
 Vector<Type>::Vector(Vector&& other) noexcept
-  : mSize(other.mSize),
-    mMaxSize(other.mMaxSize),
-    mAlloc(other.mAlloc),
-    mBase(other.mBase),
-    mBack(other.mBack) {
-  other.mAlloc = nullptr;
-  other.mBase = nullptr;
-  other.mBack = nullptr;
+  : m_size(other.m_size),
+    m_maxSize(other.m_maxSize),
+    m_allocator(other.m_allocator),
+    m_base(other.m_base) {
+  other.m_allocator = nullptr;
+  other.m_base  = nullptr;
 }
 
 // TODO: error with non trivial types need something similar to typename std::enable_if<!std::is_fundamental<Type>::value>::type
@@ -287,16 +286,15 @@ Vector<Type>& Vector<Type>::operator=(const Vector& other) {
     return *this;
   }
 
-  mSize = other.mSize;
-  mMaxSize = other.mMaxSize;
-  mAlloc = other.mAlloc;
-  mBack = other.mBack;
+  m_size    = other.m_size;
+  m_maxSize = other.m_maxSize;
+  m_allocator   = other.m_allocator;
 
   // Allocate Memory
-  mBase = mAlloc->NewObjects<Type>(mMaxSize, false);
+  m_base = m_allocator.RawNewArray<Type>(m_maxSize);
 
   // Copy over Contents
-  std::memcpy(mBase, other.mBase, mMaxSize * sizeof(Type));
+  std::memcpy(m_base.get(), other.m_base.get(), m_maxSize * sizeof(Type));
 
   return *this;
 }
@@ -307,51 +305,54 @@ Vector<Type>& Vector<Type>::operator=(Vector&& other) noexcept {
     return *this;
   }
 
-  mSize = other.mSize;
-  mMaxSize = other.mMaxSize;
-  mAlloc = other.mAlloc;
-  mBase = other.mBase;
-  mBack = other.mBack;
+  m_size    = std::move(other.m_size);
+  m_maxSize = std::move(other.m_maxSize);
+  m_allocator   = std::move(other.m_allocator);
+  m_base    = std::move(other.m_base);
 
-  other.mAlloc = nullptr;
-  other.mBase = nullptr;
+  other.m_allocator = nullptr;
+  other.m_base  = nullptr;
 
   return *this;
 }
 
 template <typename Type>
-void Vector<Type>::Push(const Type& data) {
-  assert(mSize < mMaxSize);
+void Vector<Type>::PushBack(const Type& data) {
+  assert(m_size < m_maxSize);
 
-  *mBack = data;
-  ++mBack;
-  ++mSize;
+  m_base[m_size] = data;
+  ++m_size;
+}
+
+template <typename Type>
+void Vector<Type>::EmplaceBack(Type&& data) {
+  assert(m_size < m_maxSize);
+
+  m_base[m_size] = std::move(data);
+  ++m_size;
 }
 
 template <typename Type>
 Type Vector<Type>::Pop() {
-  assert(mSize > 0);
+  assert(m_size > 0);
 
-  Type data = *(mBack - 1);
-  --mSize;
-  --mBack;
+  // TODO(vasumahesh1): should move here?
+  Type data = m_base[m_size - 1];
+  --m_size;
 
   return data;
 }
 
 template <typename Type>
-int Vector<Type>::Find(const Type& data) {
-  Type* start = mBase;
+int Vector<Type>::FindFirst(const Type& data) {
 
   int idx = -1;
 
-  for (auto itr = 0; itr < mSize; ++itr) {
-    if (data == *start) {
+  for (auto itr = 0; itr < m_size; ++itr) {
+    if (data == m_base[itr]) {
       idx = itr;
       break;
     }
-
-    ++start;
   }
 
   return idx;
@@ -359,61 +360,54 @@ int Vector<Type>::Find(const Type& data) {
 
 template <typename Type>
 void Vector<Type>::Remove(const Type& data) {
-  Type* start = mBase;
-  const int idx = Find(data);
+  const int idx = FindFirst(data);
 
   if (idx >= 0) {
-    Type* ptr = start + (idx + 1);
-
-    for (auto itr = idx + 1; itr < mSize; ++itr) {
-      *(ptr - 1) = *ptr;
-      ++ptr;
+    for (auto itr = idx + 1; itr < m_size; ++itr) {
+      m_base[itr - 1]  = m_base[itr];
     }
 
-    --mBack;
-    --mSize;
+    --m_size;
   }
 }
 
 template <typename Type>
 void Vector<Type>::Reserve(UINT maxSize) {
-  mMaxSize = maxSize;
-  mBase = mAlloc->NewObjects<Type>(maxSize, false);
+  m_maxSize = maxSize;
+  m_base    = m_allocator.RawNewArray<Type>(m_maxSize);
 }
 
 template <typename Type>
 bool Vector<Type>::IsEmpty() const {
-  return mSize == 0;
+  return m_size == 0;
 }
 
 template <typename Type>
 void Vector<Type>::InsertAt(UINT idx, const Type& data) {
-  assert(idx >= 0 && idx <= mSize);
+  assert(idx >= 0 && idx <= m_size);
 
-  Type* ptr = mBack;
-
-  for (int i = mSize; i > idx; i--) {
-    *ptr = *(ptr - 1);
-    --ptr;
+  for (int itr = m_size; itr > idx; --itr) {
+    m_base[itr]     = m_base[itr - 1];
   }
 
-  *(mBase + idx) = data;
+  m_base[idx] = data;
 }
 
-template <typename Type> Type* Vector<Type>::Data() {
-    return mBase;
+template <typename Type>
+Type* Vector<Type>::Data() {
+  return m_base.get();
 }
 
 template <typename Type>
 Type& Vector<Type>::operator[](const UINT idx) {
-  assert(idx < mSize);
-  return *(mBase + idx);
+  assert(idx < m_size);
+  return m_base[idx];
 }
 
 template <typename Type>
 Type& Vector<Type>::operator[](const UINT idx) const {
-  assert(idx < mSize);
-  return *(mBase + idx);
+  assert(idx < m_size);
+  return m_base[idx];
 }
 
 template <typename Type>
@@ -423,6 +417,7 @@ typename Vector<Type>::Iterator Vector<Type>::Begin() const {
 
 template <typename Type>
 typename Vector<Type>::Iterator Vector<Type>::End() const {
-  return Iterator(this, mSize);
+  return Iterator(this, m_size);
 }
-} // namespace AZ
+} // namespace Containers
+} // namespace Azura

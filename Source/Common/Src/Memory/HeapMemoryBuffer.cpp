@@ -5,6 +5,7 @@
 #include "Utils/Macros.h"
 
 namespace Azura {
+namespace Memory {
 HeapMemoryBuffer::HeapMemoryBuffer(const SizeType blockSize)
 // NOLINTNEXTLINE(cppcoreguidelines-pro-type-reinterpret-cast, cppcoreguidelines-no-malloc)
   : MemoryBuffer(blockSize, reinterpret_cast<AddressPtr>(malloc(blockSize))) {
@@ -18,9 +19,9 @@ HeapMemoryBuffer::HeapMemoryBuffer(SizeType blockSize, SizeType alignment)
 }
 
 HeapMemoryBuffer::~HeapMemoryBuffer() {
-  if (mMemoryBlock != 0u) {
+  if (m_memoryBlock != 0u) {
     // NOLINTNEXTLINE(cppcoreguidelines-owning-memory, cppcoreguidelines-no-malloc, cppcoreguidelines-pro-type-reinterpret-cast)
-    free(reinterpret_cast<void*>(mMemoryBlock));
+    free(reinterpret_cast<void*>(m_memoryBlock));
   }
 }
 
@@ -37,11 +38,12 @@ void HeapMemoryBuffer::Deallocate(void* address) {
 
 UPTR HeapMemoryBuffer::AllocateRaw(SizeType size) {
   // Available > Size
-  assert(mSize - (mCurrentPosition - mMemoryBlock) >= size);
+  assert(mSize - (m_currentPosition - m_memoryBlock) >= size);
 
-  const AddressPtr addr = mCurrentPosition;
-  mCurrentPosition += size;
+  const AddressPtr addr = m_currentPosition;
+  m_currentPosition += size;
 
   return addr;
 }
+} // namespace Memory
 } // namespace Azura
