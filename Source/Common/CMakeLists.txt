@@ -28,11 +28,18 @@ set(SOURCES
     "Inc/Containers/Array.h"
     "Inc/Containers/Vector.h"
     "Inc/Types.h"
+
     "Inc/Utils/Macros.h"
     "Inc/Utils/Exceptions.h"
+
     "Inc/Utils/FileReader.h"
     "Src/Utils/FileReader.cpp"
-	"Inc/Containers/ArrayBatch.h")
+
+    "Inc/Utils/Hash.h"
+    "Src/Utils/Hash.cpp"
+
+	"Inc/Containers/ArrayBatch.h"
+)
 
 add_library(Common ${SOURCES})
 
@@ -56,6 +63,9 @@ add_executable(
 
     "Test/Array_test.h"
     "Test/Array_test.cpp"
+
+    "Test/Hash_test.h"
+    "Test/Hash_test.cpp"
 )
 
 AzuraSilenceClangTidy(CommonTest)
