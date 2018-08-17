@@ -171,6 +171,7 @@ def run():
 		cmakeConfig.read(buildArgs.cmakeConfigFile)
 		cmakeDefines = getRawConfigMap(cmakeConfig, 'Defines')
 		printConfig(cmakeDefines)
+		az_log.flush();
 
 	cmakeArgs = []
 	cmakeArgs.append('-G' + buildArgs.generator)

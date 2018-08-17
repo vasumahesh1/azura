@@ -41,6 +41,9 @@ def empty():
 	print('')
 	sys.stdout.flush()
 
+def flush():
+	sys.stdout.flush()
+
 def banner(message):
 	header("--------" + repeat_to_length("-", len(message)))
 	header("--- %s ---" % message)
