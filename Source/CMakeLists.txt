@@ -19,11 +19,6 @@ endif()
 
 set(BOOST_LIBRARYDIR ${BOOST_ROOT}/stage/lib/ CACHE STRING "" FORCE)
 
-message("-- Using VULKAN_1_1_77_0_INCLUDE_DIR => ${VULKAN_1_1_77_0_INCLUDE_DIR}")
-message("-- Using VULKAN_1_1_77_0_LIB32_DIR => ${VULKAN_1_1_77_0_LIB32_DIR}")
-message("-- Using VULKAN_1_1_77_0_LIB64_DIR => ${VULKAN_1_1_77_0_LIB64_DIR}")
-message("-- Using BOOST_ROOT => ${BOOST_ROOT}")
-
 add_subdirectory(Common)
 add_subdirectory(Azura)
 # add_subdirectory(Sandbox)

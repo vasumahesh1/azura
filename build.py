@@ -164,6 +164,14 @@ def run():
 	az_log.empty()
 	az_log.banner("Configuring Build Files")
 
+	cmakeDefines = {}
+	if (buildArgs.cmakeConfigFile):
+		az_log.warn('Found a Custom CMake Config')
+		cmakeConfig = ConfigParser.ConfigParser()
+		cmakeConfig.read(buildArgs.cmakeConfigFile)
+		cmakeDefines = getRawConfigMap(cmakeConfig, 'Defines')
+		printConfig(cmakeDefines)
+
 	cmakeArgs = []
 	cmakeArgs.append('-G' + buildArgs.generator)
 	cmakeArgs.append("-B%s" % buildArgs.buildPath)
@@ -173,10 +181,6 @@ def run():
 	cmakeArgs.append("-DCMAKE_CXX_CLANG_TIDY=" + executableMap['clang-tidy'] + ";-extra-arg=-std=c++17")
 
 	if (buildArgs.cmakeConfigFile):
-		az_log.warn('Found a Custom CMake Config')
-		cmakeConfig = ConfigParser.ConfigParser()
-		cmakeConfig.read(buildArgs.cmakeConfigFile)
-		cmakeDefines = getRawConfigMap(cmakeConfig, 'Defines')
 		cmakeArgs = cmakeArgs + getDefines(cmakeDefines)
 
 	if (buildArgs.verbose):
