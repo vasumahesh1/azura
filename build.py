@@ -232,6 +232,10 @@ def run():
 	buildEndTime = datetime.datetime.now()
 	delta = printTimeDelta((buildEndTime - buildStartTime).total_seconds())
 
-	az_log.bannerLarge('Build Finished', 'Time Taken: %s' % delta)
+	buildTimings = 'Started At: %s' % buildStartTime
+	buildTimings += '  -->  '
+	buildTimings += 'Completed At: %s' % buildEndTime
+
+	az_log.bannerLarge('Build Finished', buildTimings, 'Time Taken: %s' % delta)
 
 run()

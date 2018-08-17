@@ -46,11 +46,14 @@ def banner(message):
 	header("--- %s ---" % message)
 	header("--------" + repeat_to_length("-", len(message)))
 
-def bannerLarge(message1, message2):
-	size = len(message1) if len(message1) > len(message2) else len(message2)
+def bannerLarge(message1, message2, message3):
+	sizes = [len(message1), len(message2), len(message3)]
+	size = max(sizes)
 	size += 10
 
 	header(repeat_to_length("=", size))
 	header((": %s" + repeat_to_length(" ", size - len(message1) - 3) + ":")  % message1)
+	header((": " + repeat_to_length(" ", size -  3) + ":"))
 	header((": %s" + repeat_to_length(" ", size - len(message2) - 3) + ":") % message2)
+	header((": %s" + repeat_to_length(" ", size - len(message3) - 3) + ":") % message3)
 	header(repeat_to_length("=", size))
