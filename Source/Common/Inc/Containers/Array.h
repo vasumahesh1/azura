@@ -8,11 +8,12 @@
 #include "Memory/Allocator.h"
 
 namespace Azura {
-template <typename Type, UINT MaxSize>
+namespace Containers {
+template <typename Type, U32 MaxSize>
 class Array {
 public:
   // TODO: Enable When NewDeleteAllocator is ready
-  //explicit Array(UINT maxSize);
+  //explicit Array(U32 maxSize);
   explicit Array(Memory::Allocator& alloc);
 
   ~Array();
@@ -30,7 +31,7 @@ public:
   * \brief Appends data to the end of the array
   * \param data Data to push
   */
-  void Push(const Type& data);
+  void PushBack(const Type& data);
 
   /**
   * \brief Removes the last element in the array array
@@ -62,21 +63,27 @@ public:
   * \param idx Target Index
   * \param data Data to insert
   */
-  void InsertAt(UINT idx, const Type& data);
+  void InsertAt(U32 idx, const Type& data);
 
-  Type& operator[](UINT idx);
-  Type& operator[](UINT idx) const;
+  Type& operator[](U32 idx);
+  Type& operator[](U32 idx) const;
   Type* Data();
 
-  UINT GetSize() const { return m_size; }
-  UINT GetMaxSize() const { return m_maxSize; }
+  U32 GetSize() const { return m_size; }
+  U32 GetMaxSize() const { return m_maxSize; }
 
-  class Iterator : public std::iterator<std::random_access_iterator_tag, Type> {
+  class Iterator {
   public:
     Iterator() = default;
     ~Iterator() = default;
     Iterator(const Iterator& other) = default;
     Iterator& operator=(const Iterator& other) = default;
+
+    using iterator_category = std::random_access_iterator_tag;
+    using value_type = Type;
+    using difference_type = int;
+    using pointer = Type*;
+    using reference = Type&;
 
     Iterator(const Array* ptr, int index)
       : mPtr(ptr),
@@ -207,27 +214,27 @@ public:
 #endif
 
 private:
-  UINT m_size{0};
-  UINT m_maxSize{MaxSize};
+  U32 m_size{0};
+  U32 m_maxSize{MaxSize};
   Memory::Allocator& m_allocator;
   Memory::UniqueArrayPtr<Type> m_base{nullptr};
 };
 
 // TODO: Enable When NewDeleteAllocator is ready
 //template <typename Type>
-//Array<Type, MaxSize>::Array(const UINT maxSize) : m_maxSize(maxSize), m_allocator(alloc), m_base(m_allocator->NewObjects<Type>(maxSize)) {}
+//Array<Type, MaxSize>::Array(const U32 maxSize) : m_maxSize(maxSize), m_allocator(alloc), m_base(m_allocator->NewObjects<Type>(maxSize)) {}
 
-template <typename Type, UINT MaxSize>
+template <typename Type, U32 MaxSize>
 Array<Type, MaxSize>::Array(Memory::Allocator& alloc)
   : m_allocator(alloc),
     m_base(m_allocator.RawNewArray<Type>(MaxSize)) {
 }
 
-template <typename Type, UINT MaxSize>
+template <typename Type, U32 MaxSize>
 Array<Type, MaxSize>::~Array() = default;
 
 // TODO: error with non trivial types need something similar to typename std::enable_if<!std::is_fundamental<Type>::value>::type
-template <typename Type, UINT MaxSize>
+template <typename Type, U32 MaxSize>
 Array<Type, MaxSize>::Array(const Array& other)
   : m_size(other.m_size),
     m_maxSize(other.m_maxSize),
@@ -240,7 +247,7 @@ Array<Type, MaxSize>::Array(const Array& other)
   std::memcpy(m_base, other.m_base, m_maxSize * sizeof(Type));
 }
 
-template <typename Type, UINT MaxSize>
+template <typename Type, U32 MaxSize>
 Array<Type, MaxSize>::Array(Array&& other) noexcept
   : m_size(other.m_size),
     m_maxSize(other.m_maxSize),
@@ -250,7 +257,7 @@ Array<Type, MaxSize>::Array(Array&& other) noexcept
 }
 
 // TODO: error with non trivial types need something similar to typename std::enable_if<!std::is_fundamental<Type>::value>::type
-template <typename Type, UINT MaxSize>
+template <typename Type, U32 MaxSize>
 Array<Type, MaxSize>& Array<Type, MaxSize>::operator=(const Array& other) {
   if (this == &other) {
     return *this;
@@ -269,7 +276,7 @@ Array<Type, MaxSize>& Array<Type, MaxSize>::operator=(const Array& other) {
   return *this;
 }
 
-template <typename Type, UINT MaxSize>
+template <typename Type, U32 MaxSize>
 Array<Type, MaxSize>& Array<Type, MaxSize>::operator=(Array&& other) noexcept {
   if (this == &other) {
     return *this;
@@ -286,15 +293,15 @@ Array<Type, MaxSize>& Array<Type, MaxSize>::operator=(Array&& other) noexcept {
   return *this;
 }
 
-template <typename Type, UINT MaxSize>
-void Array<Type, MaxSize>::Push(const Type& data) {
+template <typename Type, U32 MaxSize>
+void Array<Type, MaxSize>::PushBack(const Type& data) {
   assert(m_size < m_maxSize);
 
   m_base[m_size] = data;
   ++m_size;
 }
 
-template <typename Type, UINT MaxSize>
+template <typename Type, U32 MaxSize>
 Type Array<Type, MaxSize>::Pop() {
   assert(m_size > 0);
 
@@ -304,12 +311,12 @@ Type Array<Type, MaxSize>::Pop() {
   return data;
 }
 
-template <typename Type, UINT MaxSize>
+template <typename Type, U32 MaxSize>
 int Array<Type, MaxSize>::FindFirst(const Type& data) {
 
   int idx = -1;
 
-  for (auto itr = 0; itr < m_size; ++itr) {
+  for (U32 itr = 0; itr < m_size; ++itr) {
     if (data == m_base[itr]) {
       idx = itr;
       break;
@@ -319,12 +326,12 @@ int Array<Type, MaxSize>::FindFirst(const Type& data) {
   return idx;
 }
 
-template <typename Type, UINT MaxSize>
+template <typename Type, U32 MaxSize>
 void Array<Type, MaxSize>::Remove(const Type& data) {
   const int idx = FindFirst(data);
 
   if (idx >= 0) {
-    for (auto itr     = idx + 1; itr < m_size; ++itr) {
+    for (U32 itr     = idx + 1; itr < m_size; ++itr) {
       m_base[itr - 1] = m_base[itr];
     }
 
@@ -332,13 +339,13 @@ void Array<Type, MaxSize>::Remove(const Type& data) {
   }
 }
 
-template <typename Type, UINT MaxSize>
+template <typename Type, U32 MaxSize>
 bool Array<Type, MaxSize>::IsEmpty() const {
   return m_size == 0;
 }
 
-template <typename Type, UINT MaxSize>
-void Array<Type, MaxSize>::InsertAt(UINT idx, const Type& data) {
+template <typename Type, U32 MaxSize>
+void Array<Type, MaxSize>::InsertAt(U32 idx, const Type& data) {
   assert(idx >= 0 && idx <= m_size);
 
   for (int itr  = m_size; itr > idx; --itr) {
@@ -348,30 +355,31 @@ void Array<Type, MaxSize>::InsertAt(UINT idx, const Type& data) {
   m_base[idx] = data;
 }
 
-template <typename Type, UINT MaxSize>
-Type& Array<Type, MaxSize>::operator[](const UINT idx) {
+template <typename Type, U32 MaxSize>
+Type& Array<Type, MaxSize>::operator[](const U32 idx) {
   assert(idx < m_size);
   return m_base[idx];
 }
 
-template <typename Type, UINT MaxSize>
-Type& Array<Type, MaxSize>::operator[](const UINT idx) const {
+template <typename Type, U32 MaxSize>
+Type& Array<Type, MaxSize>::operator[](const U32 idx) const {
   assert(idx < m_size);
   return m_base[idx];
 }
 
-template <typename Type, UINT MaxSize>
+template <typename Type, U32 MaxSize>
 Type* Array<Type, MaxSize>::Data() {
   return m_base.get();
 }
 
-template <typename Type, UINT MaxSize>
+template <typename Type, U32 MaxSize>
 typename Array<Type, MaxSize>::Iterator Array<Type, MaxSize>::Begin() const {
   return Iterator(this, 0);
 }
 
-template <typename Type, UINT MaxSize>
+template <typename Type, U32 MaxSize>
 typename Array<Type, MaxSize>::Iterator Array<Type, MaxSize>::End() const {
   return Iterator(this, m_size);
 }
-} // namespace AZ
+} // namespace Containers
+} // namespace Azura

@@ -50,6 +50,12 @@ add_executable(
     "Test/test.cpp"
     "Test/MonotonicAllocator_test.h"
     "Test/MonotonicAllocator_test.cpp"
+
+    "Test/Vector_test.h"
+    "Test/Vector_test.cpp"
+
+    "Test/Array_test.h"
+    "Test/Array_test.cpp"
 )
 
 AzuraSilenceClangTidy(CommonTest)

@@ -67,7 +67,7 @@ public:
    * Use only when you didn't supply a maxSize in the constructor.
    * \param maxSize Maxium Possible Size
    */
-  void Reserve(UINT maxSize);
+  void Reserve(U32 maxSize);
 
   /**
    * \brief Checks if the container is empty
@@ -80,25 +80,31 @@ public:
    * \param idx Target Index
    * \param data Data to insert
    */
-  void InsertAt(UINT idx, const Type& data);
+  void InsertAt(U32 idx, const Type& data);
 
   /**
    * \brief Gets the Data pointer
    */
   Type* Data();
 
-  Type& operator[](UINT idx);
-  Type& operator[](UINT idx) const;
+  Type& operator[](U32 idx);
+  Type& operator[](U32 idx) const;
 
-  UINT GetSize() const { return m_size; }
-  UINT GetMaxSize() const { return m_maxSize; }
+  U32 GetSize() const { return m_size; }
+  U32 GetMaxSize() const { return m_maxSize; }
 
-  class Iterator : public std::iterator<std::random_access_iterator_tag, Type> {
+  class Iterator {
   public:
     Iterator() = default;
     ~Iterator() = default;
     Iterator(const Iterator& other) = default;
     Iterator& operator=(const Iterator& other) = default;
+
+    using iterator_category = std::random_access_iterator_tag;
+    using value_type = Type;
+    using difference_type = int;
+    using pointer = Type*;
+    using reference = Type&;
 
     Iterator(const Vector* ptr, int index)
       : mPtr(ptr),
@@ -207,7 +213,7 @@ public:
     }
 
   private:
-    const Vector* mPtr{nullptr};
+    const Vector<Type>* mPtr{nullptr};
     int mIndex{-1};
   };
 
@@ -224,14 +230,9 @@ public:
   */
   Iterator End() const;
 
-#ifdef TOOLS_TEST
-    Type* GetBackPtr() const { return mBack; };
-    Type* GetBasePtr() const { return m_base; };
-#endif
-
 private:
-  UINT m_size{0};
-  UINT m_maxSize{0};
+  U32 m_size{0};
+  U32 m_maxSize{0};
   Memory::Allocator& m_allocator;
   Memory::UniqueArrayPtr<Type> m_base{nullptr};
 };
@@ -348,7 +349,7 @@ int Vector<Type>::FindFirst(const Type& data) {
 
   int idx = -1;
 
-  for (auto itr = 0; itr < m_size; ++itr) {
+  for (U32 itr = 0; itr < m_size; ++itr) {
     if (data == m_base[itr]) {
       idx = itr;
       break;
@@ -363,7 +364,7 @@ void Vector<Type>::Remove(const Type& data) {
   const int idx = FindFirst(data);
 
   if (idx >= 0) {
-    for (auto itr = idx + 1; itr < m_size; ++itr) {
+    for (U32 itr = idx + 1; itr < m_size; ++itr) {
       m_base[itr - 1]  = m_base[itr];
     }
 
@@ -372,7 +373,7 @@ void Vector<Type>::Remove(const Type& data) {
 }
 
 template <typename Type>
-void Vector<Type>::Reserve(UINT maxSize) {
+void Vector<Type>::Reserve(U32 maxSize) {
   m_maxSize = maxSize;
   m_base    = m_allocator.RawNewArray<Type>(m_maxSize);
 }
@@ -383,10 +384,10 @@ bool Vector<Type>::IsEmpty() const {
 }
 
 template <typename Type>
-void Vector<Type>::InsertAt(UINT idx, const Type& data) {
+void Vector<Type>::InsertAt(U32 idx, const Type& data) {
   assert(idx >= 0 && idx <= m_size);
 
-  for (int itr = m_size; itr > idx; --itr) {
+  for (U32 itr = m_size; itr > idx; --itr) {
     m_base[itr]     = m_base[itr - 1];
   }
 
@@ -399,13 +400,13 @@ Type* Vector<Type>::Data() {
 }
 
 template <typename Type>
-Type& Vector<Type>::operator[](const UINT idx) {
+Type& Vector<Type>::operator[](const U32 idx) {
   assert(idx < m_size);
   return m_base[idx];
 }
 
 template <typename Type>
-Type& Vector<Type>::operator[](const UINT idx) const {
+Type& Vector<Type>::operator[](const U32 idx) const {
   assert(idx < m_size);
   return m_base[idx];
 }
