@@ -16,30 +16,29 @@ public:
   MonotonicAllocator(MonotonicAllocator&& other) noexcept = default;
   MonotonicAllocator& operator=(MonotonicAllocator&& other) noexcept = delete;
 
-  /**
-   * \brief Allocates a set number of bytes
-   * \param size Number of Bytes to Allocate
-   * \param alignment Alignment for the data
-   * \return Pointer to Memory
-   */
-  void* Allocate(U32 size, U32 alignment) override;
-
-  /**
-   * \brief Currently a No Op.
-   * \param address Address to Deallocate
-   */
-  void Deallocate(void* address) override;
+#ifdef BUILD_UNIT_TEST
+    AddressPtr GetCurrentPtr() const { return m_headPtr; };
+#endif
 
   /**
   * \brief Reset the Memory for fresh new use.
   */
   void Reset() override;
 
-#ifdef BUILD_UNIT_TEST
-    AddressPtr GetCurrentPtr() const { return m_headPtr; };
-    AddressPtr GetBasePtr() const { return BasePtr(); };
-    AddressPtr GetSize() const { return Size(); };
-#endif
+protected:
+  /**
+  * \brief Allocates a set number of bytes
+  * \param size Number of Bytes to Allocate
+  * \param alignment Alignment for the data
+  * \return Pointer to Memory
+  */
+  void* Allocate(U32 size, U32 alignment) override;
+
+  /**
+  * \brief Currently a No Op.
+  * \param address Address to Deallocate
+  */
+  void Deallocate(void* address) override;
 
 private:
   AddressPtr m_headPtr;

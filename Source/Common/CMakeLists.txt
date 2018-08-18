@@ -58,8 +58,12 @@ target_include_directories(Common
 add_executable(
   CommonTest
     "Test/test.cpp"
+
     "Test/MonotonicAllocator_test.h"
     "Test/MonotonicAllocator_test.cpp"
+
+    "Test/RangeAllocator_test.h"
+    "Test/RangeAllocator_test.cpp"
 
     "Test/Vector_test.h"
     "Test/Vector_test.cpp"

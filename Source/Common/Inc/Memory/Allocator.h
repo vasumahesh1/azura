@@ -41,10 +41,6 @@ public:
   Allocator(Allocator&& other) noexcept = default;
   Allocator& operator=(Allocator&& other) noexcept = default;
 
-  virtual void* Allocate(U32 size, U32 alignment) = 0;
-  virtual void Deallocate(void* address) = 0;
-  virtual void Reset();
-
   template <typename Type, typename... Args>
   UniquePtr<Type> New(Args ... args);
 
@@ -57,9 +53,18 @@ public:
   template <typename Type, typename ...Args>
   UniqueArrayPtr<Type> RawNewArray(U32 numElements, Args ...args);
 
+#ifdef BUILD_UNIT_TEST
+  AddressPtr GetBasePtr() const { return BasePtr(); };
+  AddressPtr GetSize() const { return Size(); };
+#endif
+
 protected:
   U32 Size() const;
   AddressPtr BasePtr() const;
+
+  virtual void* Allocate(U32 size, U32 alignment) = 0;
+  virtual void Deallocate(void* address) = 0;
+  virtual void Reset();
 
 private:
   template <typename Type, typename... Args>

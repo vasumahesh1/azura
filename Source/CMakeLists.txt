@@ -21,4 +21,4 @@ set(BOOST_LIBRARYDIR ${BOOST_ROOT}/stage/lib/ CACHE STRING "" FORCE)
 
 add_subdirectory(Common)
 add_subdirectory(Azura)
-# add_subdirectory(Sandbox)
+add_subdirectory(Sandbox)

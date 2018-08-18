@@ -20,8 +20,15 @@ public:
   RangeAllocator(RangeAllocator&& other) noexcept = default;
   RangeAllocator& operator=(RangeAllocator&& other) noexcept = delete;
 
+#ifdef BUILD_UNIT_TEST
+  const std::vector<MemoryRange>& GetFreeRanges() const { return m_freeRanges; };
+  const std::vector<MemoryRange>& GetOccupiedRanges() const { return m_occupiedRanges; };
+#endif
+
+protected:
   void* Allocate(U32 size, U32 alignment) override;
   void Deallocate(void* address) override;
+  
 private:
   MemoryBuffer& m_sourceBuffer;
 

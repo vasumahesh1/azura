@@ -39,12 +39,11 @@ void* RangeAllocator::Allocate(U32 size, U32 alignment) {
     const UPTR misalignment = (rangeBase & mask);
 
     // TODO(vasumahesh1): Check Logic
-    const auto misalignmentFromOffset = U32(misalignment - rangeBase);
-    const U32 requiredSize = misalignmentFromOffset + expectedSize;
+    const U32 requiredSize = U32(misalignment) + expectedSize;
 
     if (range.m_size >= requiredSize) {
       finalRangeItr      = itr;
-      finalOffsetInRange = misalignmentFromOffset;
+      finalOffsetInRange = U32(misalignment);
       break;
     }
   }
