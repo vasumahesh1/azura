@@ -59,17 +59,21 @@ def buildExecutableMap(config, platform):
 	global executableMap
 
 	ext = ''
+	sep = '/'
 	if (platform == 'Windows'):
 		ext = '.exe'
+		sep = '\\'
 
-	executableMap['ninja'] = config['ninja'] + '/ninja' + ext
-	executableMap['cmake'] = config['cmake'] + '/cmake' + ext
-	executableMap['ctest'] = config['cmake'] + '/ctest' + ext
-	executableMap['clang-tidy'] = config['llvm'] + '/clang-tidy' + ext
+	executableMap['ninja'] = config['ninja'] + sep + 'ninja' + ext
+	executableMap['cmake'] = config['cmake'] + sep + 'cmake' + ext
+	executableMap['ctest'] = config['cmake'] + sep + 'ctest' + ext
+	executableMap['clang-tidy'] = config['llvm'] + sep + 'clang-tidy' + ext
 
 def printConfig(item):
 	for key, value in item.iteritems():
-		print("Using %s:" % key, value)
+		message = "Using %32s = " % key.upper()
+		message = message + ("%s" % value)
+		print(message)
 
 def executeCommand(command, override=False):
 	global processEnv
@@ -151,6 +155,16 @@ def run():
 	buildExecutableMap(hostExternalConfig, hostOS)
 	printConfig(executableMap)
 
+	cmakeDefines = {}
+	if (buildArgs.cmakeConfigFile):
+		az_log.empty()
+		az_log.warn('> Custom CMake Override Config')
+		cmakeConfig = ConfigParser.ConfigParser()
+		cmakeConfig.read(buildArgs.cmakeConfigFile)
+		cmakeDefines = getRawConfigMap(cmakeConfig, 'Defines')
+		printConfig(cmakeDefines)
+		az_log.flush();
+
 	cmakeCommand = [executableMap['cmake']]
 
 	if (buildArgs.debug):
@@ -163,15 +177,6 @@ def run():
 
 	az_log.empty()
 	az_log.banner("Configuring Build Files")
-
-	cmakeDefines = {}
-	if (buildArgs.cmakeConfigFile):
-		az_log.warn('Found a Custom CMake Config')
-		cmakeConfig = ConfigParser.ConfigParser()
-		cmakeConfig.read(buildArgs.cmakeConfigFile)
-		cmakeDefines = getRawConfigMap(cmakeConfig, 'Defines')
-		printConfig(cmakeDefines)
-		az_log.flush();
 
 	cmakeArgs = []
 	cmakeArgs.append('-G' + buildArgs.generator)
