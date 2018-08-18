@@ -3,6 +3,11 @@
 namespace Azura {
 namespace Memory {
 
+MemoryRange::MemoryRange(U32 offset, U32 size)
+  : m_offset(offset),
+    m_size(size) {
+}
+
 Allocator::Allocator(void* resource, U32 size)
 // NOLINTNEXTLINE(cppcoreguidelines-pro-type-reinterpret-cast)
   : m_basePtr(reinterpret_cast<AddressPtr>(resource)),

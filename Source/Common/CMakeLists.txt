@@ -24,6 +24,9 @@ set(SOURCES
     "Inc/Memory/MonotonicAllocator.h"
     "Src/Memory/MonotonicAllocator.cpp"
 
+    "Inc/Memory/RangeAllocator.h"
+    "Src/Memory/RangeAllocator.cpp"
+
     # "Inc/Memory/PoolAllocator.h"
     "Inc/Containers/Array.h"
     "Inc/Containers/Vector.h"
