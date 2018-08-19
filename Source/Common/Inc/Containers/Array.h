@@ -244,16 +244,15 @@ Array<Type, MaxSize>::Array(const Array& other)
   m_base = m_allocator.RawNewArray<Type>(m_maxSize);
 
   // Copy over Contents
-  std::memcpy(m_base, other.m_base, m_maxSize * sizeof(Type));
+  std::memcpy(m_base.get(), other.m_base.get(), m_maxSize * sizeof(Type));
 }
 
 template <typename Type, U32 MaxSize>
 Array<Type, MaxSize>::Array(Array&& other) noexcept
-  : m_size(other.m_size),
-    m_maxSize(other.m_maxSize),
+  : m_size(std::move(other.m_size)),
+    m_maxSize(std::move(other.m_maxSize)),
     m_allocator(other.m_allocator),
-    m_base(other.m_base) {
-  other.m_base = nullptr;
+    m_base(std::move(other.m_base)) {
 }
 
 // TODO: error with non trivial types need something similar to typename std::enable_if<!std::is_fundamental<Type>::value>::type
@@ -271,7 +270,7 @@ Array<Type, MaxSize>& Array<Type, MaxSize>::operator=(const Array& other) {
   m_base = m_allocator.RawNewArray<Type>(m_maxSize);
 
   // Copy over Contents
-  std::memcpy(m_base, other.m_base, m_maxSize * sizeof(Type));
+  std::memcpy(m_base.get(), other.m_base.get(), m_maxSize * sizeof(Type));
 
   return *this;
 }
@@ -282,13 +281,10 @@ Array<Type, MaxSize>& Array<Type, MaxSize>::operator=(Array&& other) noexcept {
     return *this;
   }
 
-  m_size      = other.m_size;
-  m_maxSize   = other.m_maxSize;
+  m_size      = std::move(other.m_size);
+  m_maxSize   = std::move(other.m_maxSize);
   m_allocator = other.m_allocator;
-  m_base      = other.m_base;
-
-  other.m_allocator = nullptr;
-  other.m_base      = nullptr;
+  m_base      = std::move(other.m_base);
 
   return *this;
 }
@@ -331,7 +327,7 @@ void Array<Type, MaxSize>::Remove(const Type& data) {
   const int idx = FindFirst(data);
 
   if (idx >= 0) {
-    for (U32 itr     = idx + 1; itr < m_size; ++itr) {
+    for (U32 itr      = idx + 1; itr < m_size; ++itr) {
       m_base[itr - 1] = m_base[itr];
     }
 

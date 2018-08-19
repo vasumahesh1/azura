@@ -272,12 +272,12 @@ Vector<Type>::Vector(const Vector& other)
 
 template <typename Type>
 Vector<Type>::Vector(Vector&& other) noexcept
-  : m_size(other.m_size),
-    m_maxSize(other.m_maxSize),
+  : m_size(std::move(other.m_size)),
+    m_maxSize(std::move(other.m_maxSize)),
     m_allocator(other.m_allocator),
-    m_base(other.m_base) {
+    m_base(std::move(other.m_base)) {
   other.m_allocator = nullptr;
-  other.m_base  = nullptr;
+  other.m_base      = nullptr;
 }
 
 // TODO: error with non trivial types need something similar to typename std::enable_if<!std::is_fundamental<Type>::value>::type
@@ -287,9 +287,9 @@ Vector<Type>& Vector<Type>::operator=(const Vector& other) {
     return *this;
   }
 
-  m_size    = other.m_size;
-  m_maxSize = other.m_maxSize;
-  m_allocator   = other.m_allocator;
+  m_size      = other.m_size;
+  m_maxSize   = other.m_maxSize;
+  m_allocator = other.m_allocator;
 
   // Allocate Memory
   m_base = m_allocator.RawNewArray<Type>(m_maxSize);
@@ -306,13 +306,10 @@ Vector<Type>& Vector<Type>::operator=(Vector&& other) noexcept {
     return *this;
   }
 
-  m_size    = std::move(other.m_size);
-  m_maxSize = std::move(other.m_maxSize);
-  m_allocator   = std::move(other.m_allocator);
-  m_base    = std::move(other.m_base);
-
-  other.m_allocator = nullptr;
-  other.m_base  = nullptr;
+  m_size      = std::move(other.m_size);
+  m_maxSize   = std::move(other.m_maxSize);
+  m_allocator = other.m_allocator;
+  m_base      = std::move(other.m_base);
 
   return *this;
 }
@@ -364,8 +361,8 @@ void Vector<Type>::Remove(const Type& data) {
   const int idx = FindFirst(data);
 
   if (idx >= 0) {
-    for (U32 itr = idx + 1; itr < m_size; ++itr) {
-      m_base[itr - 1]  = m_base[itr];
+    for (U32 itr      = idx + 1; itr < m_size; ++itr) {
+      m_base[itr - 1] = m_base[itr];
     }
 
     --m_size;
@@ -387,8 +384,8 @@ template <typename Type>
 void Vector<Type>::InsertAt(U32 idx, const Type& data) {
   assert(idx >= 0 && idx <= m_size);
 
-  for (U32 itr = m_size; itr > idx; --itr) {
-    m_base[itr]     = m_base[itr - 1];
+  for (U32 itr  = m_size; itr > idx; --itr) {
+    m_base[itr] = m_base[itr - 1];
   }
 
   m_base[idx] = data;
