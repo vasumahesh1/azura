@@ -75,6 +75,12 @@ add_executable(
 
     "Test/Hash_test.h"
     "Test/Hash_test.cpp"
+
+    "Test/HeapMemoryBuffer_test.h"
+    "Test/HeapMemoryBuffer_test.cpp"
+
+    "Test/StackMemoryBuffer_test.h"
+    "Test/StackMemoryBuffer_test.cpp"
 )
 
 AzuraSilenceClangTidy(CommonTest)

@@ -8,8 +8,8 @@ class MemoryBuffer {
 
 public:
   MemoryBuffer() = default;
-  explicit MemoryBuffer(SizeType size);
-  MemoryBuffer(SizeType size, AddressPtr blockStart);
+  explicit MemoryBuffer(U32 size);
+  MemoryBuffer(U32 size, AddressPtr blockStart);
   virtual ~MemoryBuffer() = default;
 
   MemoryBuffer(const MemoryBuffer& other) = delete;
@@ -18,19 +18,19 @@ public:
   MemoryBuffer(MemoryBuffer&& other) noexcept;
   MemoryBuffer& operator=(MemoryBuffer&& other) noexcept;
 
-  virtual void* Allocate(SizeType size) = 0;
+  virtual void* Allocate(U32 size) = 0;
   virtual void Deallocate(void* address) = 0;
 
-#ifdef TOOLS_TEST
-    AddressPtr GetCurrentPtr() const { return m_headPtr; };
+#ifdef BUILD_UNIT_TEST
+    AddressPtr GetCurrentPtr() const { return m_currentPosition; };
     AddressPtr GetBasePtr() const { return m_memoryBlock; };
-    AddressPtr GetSize() const { return m_size; };
+    U32 GetSize() const { return m_size; };
 #endif
 
 protected:
   AddressPtr m_memoryBlock{0};
   AddressPtr m_currentPosition{0};
-  SizeType mSize{0};
+  U32 m_size{0};
 };
 } // namespace Memory
 } // namespace Azura

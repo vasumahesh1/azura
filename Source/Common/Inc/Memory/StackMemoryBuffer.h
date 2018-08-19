@@ -11,7 +11,6 @@ namespace Memory {
 
 template<U32 Size>
 class StackMemoryBuffer final : public MemoryBuffer {
-  using Byte = U8;
 
 public:
   StackMemoryBuffer();
@@ -25,11 +24,11 @@ public:
   StackMemoryBuffer(StackMemoryBuffer&& other) noexcept = default;
   StackMemoryBuffer& operator=(StackMemoryBuffer&& other) noexcept = default;
 
-  void* Allocate(SizeType size) override;
+  void* Allocate(U32 size) override;
   void Deallocate(void* address) override;
 
 private:
-  UPTR AllocateRaw(SizeType size);
+  UPTR AllocateRaw(U32 size);
   U8 m_buffer[Size];
 };
 
@@ -40,7 +39,7 @@ StackMemoryBuffer<Size>::StackMemoryBuffer()
 }
 
 template <U32 Size>
-void* StackMemoryBuffer<Size>::Allocate(SizeType size) {
+void* StackMemoryBuffer<Size>::Allocate(U32 size) {
   const AddressPtr addr = AllocateRaw(size);
 
   // NOLINTNEXTLINE(cppcoreguidelines-pro-type-reinterpret-cast)
@@ -53,9 +52,9 @@ void StackMemoryBuffer<Size>::Deallocate(void* address) {
 }
 
 template <U32 Size>
-UPTR StackMemoryBuffer<Size>::AllocateRaw(SizeType size) {
+UPTR StackMemoryBuffer<Size>::AllocateRaw(U32 size) {
   // Available < Size, Can't allocate
-  if (mSize - (m_currentPosition - m_memoryBlock) < size)
+  if (m_size - (m_currentPosition - m_memoryBlock) < size)
   {
     return 0u;
   }

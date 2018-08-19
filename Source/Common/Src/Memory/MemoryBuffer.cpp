@@ -3,12 +3,12 @@
 
 namespace Azura {
 namespace Memory {
-MemoryBuffer::MemoryBuffer(SizeType size)
-  : mSize(size) {
+MemoryBuffer::MemoryBuffer(U32 size)
+  : m_size(size) {
 }
 
-MemoryBuffer::MemoryBuffer(SizeType size, AddressPtr blockStart)
-  : mSize(size),
+MemoryBuffer::MemoryBuffer(U32 size, AddressPtr blockStart)
+  : m_size(size),
     m_memoryBlock(blockStart),
     m_currentPosition(blockStart) {
 }
@@ -16,10 +16,10 @@ MemoryBuffer::MemoryBuffer(SizeType size, AddressPtr blockStart)
 MemoryBuffer::MemoryBuffer(MemoryBuffer&& other) noexcept
   : m_memoryBlock(other.m_memoryBlock),
     m_currentPosition(other.m_currentPosition),
-    mSize(other.mSize) {
+    m_size(other.m_size) {
   other.m_memoryBlock     = 0;
   other.m_currentPosition = 0;
-  other.mSize            = 0;
+  other.m_size            = 0;
 }
 
 MemoryBuffer& MemoryBuffer::operator=(MemoryBuffer&& other) noexcept {
@@ -27,11 +27,11 @@ MemoryBuffer& MemoryBuffer::operator=(MemoryBuffer&& other) noexcept {
 
   m_memoryBlock     = other.m_memoryBlock;
   m_currentPosition = other.m_currentPosition;
-  mSize            = other.mSize;
+  m_size            = other.m_size;
 
   other.m_memoryBlock     = 0;
   other.m_currentPosition = 0;
-  other.mSize            = 0;
+  other.m_size            = 0;
 
   return *this;
 }
