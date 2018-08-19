@@ -20,6 +20,8 @@ set(SOURCES
 
     "Inc/Memory/HeapMemoryBuffer.h"
     "Src/Memory/HeapMemoryBuffer.cpp"
+
+    "Inc/Memory/StackMemoryBuffer.h"
     
     "Inc/Memory/MonotonicAllocator.h"
     "Src/Memory/MonotonicAllocator.cpp"

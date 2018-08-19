@@ -5,7 +5,7 @@
 
 namespace Azura {
 namespace Memory {
-class HeapMemoryBuffer : public MemoryBuffer {
+class HeapMemoryBuffer final : public MemoryBuffer {
   using Byte = U8;
 
 public:
