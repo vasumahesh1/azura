@@ -1,30 +1,42 @@
 project(RenderSystem)
 
+# TODO(vasumahesh1): Add Platform Support here
+
 set(
   VULKAN_SOURCES
-  "Inc/Vulkan/VkCore.h"
-  "Src/Vulkan/VkCore.cpp"
-  "Inc/Vulkan/VkRenderer.h"
-  "Src/Vulkan/VkRenderer.cpp"
-  "Inc/Vulkan/VkTypes.h"
-  "Inc/Vulkan/VkMacros.h"
-  "Src/Vulkan/VkTypes.cpp"
-  "Inc/Vulkan/VkScopedBuffer.h"
-  "Src/Vulkan/VkScopedBuffer.cpp"
-  "Inc/Vulkan/VkTypeMapping.h"
-  "Src/Vulkan/VkTypeMapping.cpp"
-  "Inc/Vulkan/VkShader.h"
-  "Src/Vulkan/VkShader.cpp"
-  "Inc/Vulkan/VkScopedPipeline.h"
-  "Src/Vulkan/VkScopedPipeline.cpp"
+
+  # Include
+  "Inc/Generic/Constants.h"
   "Inc/Generic/GenericTypes.h"
   "Inc/Generic/RawStorageFormat.h"
-  "Src/Generic/RawStorageFormat.cpp"
-  "Inc/Generic/Shader.h"
-  "Src/Generic/Shader.cpp"
-  "Inc/Generic/Constants.h"
   "Inc/Generic/Renderer.h"
+  "Inc/Generic/Shader.h"
+  "Inc/Generic/Window.h"
+
+  "Inc/Vulkan/VkCore.h"
+  "Inc/Vulkan/VkMacros.h"
+  "Inc/Vulkan/VkRenderer.h"
+  "Inc/Vulkan/VkScopedBuffer.h"
+  "Inc/Vulkan/VkScopedPipeline.h"
+  "Inc/Vulkan/VkShader.h"
+  "Inc/Vulkan/VkTypeMapping.h"
+  "Inc/Vulkan/VkTypes.h"
+  "Inc/Vulkan/VkWindow.h"
+
+  # Source
+  "Src/Generic/RawStorageFormat.cpp"
   "Src/Generic/Renderer.cpp"
+  "Src/Generic/Shader.cpp"
+  "Src/Generic/Window.cpp"
+
+  "Src/Vulkan/VkCore.cpp"
+  "Src/Vulkan/VkRenderer.cpp"
+  "Src/Vulkan/VkScopedBuffer.cpp"
+  "Src/Vulkan/VkScopedPipeline.cpp"
+  "Src/Vulkan/VkShader.cpp"
+  "Src/Vulkan/VkTypeMapping.cpp"
+  "Src/Vulkan/VkTypes.cpp"
+  "Src/Vulkan/VkWin32Window.cpp"
 )
 
 source_group(Generic\\Inc REGULAR_EXPRESSION "Inc/Generic/.*")

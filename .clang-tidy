@@ -1,7 +1,6 @@
 ---
 Checks:          'cppcoreguidelines-*,clang-analyzer-*,google-*,modernize-*,readability-*,portability-*,-google-runtime-references,clang-diagnostic-switch'
 WarningsAsErrors: 'cppcoreguidelines-*,clang-analyzer-*,google-*,modernize-*,readability-*,portability-*,-google-runtime-references,clang-diagnostic-switch'
-HeaderFilterRegex: ''
 AnalyzeTemporaryDtors: false
 FormatStyle:     google
 User:            Vasu Mahesh
@@ -27,4 +26,3 @@ CheckOptions:
   - key:             modernize-use-nullptr.NullMacros
     value:           'NULL'
 ...
-

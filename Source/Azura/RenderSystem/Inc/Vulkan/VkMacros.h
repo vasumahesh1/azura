@@ -20,5 +20,7 @@ namespace Vulkan {
     throw std::runtime_error(#message);   \
   }
 
+#define VK_KHR_SURFACE "VK_KHR_surface"
+
 } // namespace Vulkan
 } // namespace Azura
