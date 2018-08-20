@@ -4,12 +4,12 @@ project(RenderSystem)
 
 set(
   VULKAN_SOURCES
-
   # Include
   "Inc/Generic/Constants.h"
   "Inc/Generic/GenericTypes.h"
   "Inc/Generic/RawStorageFormat.h"
   "Inc/Generic/Renderer.h"
+  "Inc/Generic/RenderSystem.h"
   "Inc/Generic/Shader.h"
   "Inc/Generic/Window.h"
 
@@ -31,6 +31,7 @@ set(
 
   "Src/Vulkan/VkCore.cpp"
   "Src/Vulkan/VkRenderer.cpp"
+  "Src/Vulkan/VkRenderSystem.cpp"
   "Src/Vulkan/VkScopedBuffer.cpp"
   "Src/Vulkan/VkScopedPipeline.cpp"
   "Src/Vulkan/VkShader.cpp"
