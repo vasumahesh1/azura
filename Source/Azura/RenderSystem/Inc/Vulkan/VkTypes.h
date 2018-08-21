@@ -3,6 +3,7 @@
 #include <vector>
 #include "Types.h"
 #include <vulkan/vulkan_core.h>
+#include "Containers/Vector.h"
 
 namespace Azura {
 namespace Vulkan {
@@ -25,9 +26,10 @@ struct VkQueueIndices {
 
 struct SwapChainDeviceSupport {
   VkSurfaceCapabilitiesKHR m_capabilities{};
-  std::vector<VkSurfaceFormatKHR> m_formats;
-  std::vector<VkPresentModeKHR> m_presentModes;
+  Containers::Vector<VkSurfaceFormatKHR> m_formats;
+  Containers::Vector<VkPresentModeKHR> m_presentModes;
 
+  explicit SwapChainDeviceSupport(Memory::Allocator& allocator);
   bool IsSupported() const;
 };
 
@@ -36,9 +38,11 @@ struct VkScopedSwapChain {
   VkExtent2D m_extent;
   VkSurfaceFormatKHR m_surfaceFormat;
   U32 m_imageCount{0};
-  std::vector<VkImage> m_images;
+  Containers::Vector<VkImage> m_images;
 
-  std::vector<VkImageView> m_imageViews;
+  Containers::Vector<VkImageView> m_imageViews;
+
+  VkScopedSwapChain(Memory::Allocator& allocator);
 };
 } // namespace Vulkan
 } // namespace Azura

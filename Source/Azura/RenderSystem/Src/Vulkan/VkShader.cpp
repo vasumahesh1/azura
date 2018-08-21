@@ -11,10 +11,10 @@ namespace {
 const String SPRIV_EXT = "spv";
 } // namespace
 
-VkShader::VkShader(VkDevice device, const String& fileName)
+VkShader::VkShader(VkDevice device, const String& fileName, Memory::Allocator& allocator)
   : Shader(fileName, SPRIV_EXT) {
 
-  const auto fileContents = FileReader::GetFileContents(GetFilePath());
+  const auto fileContents = FileReader::GetFileContents(GetFilePath(), allocator);
   m_module                = VkCore::CreateShaderModule(device, fileContents);
 }
 

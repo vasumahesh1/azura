@@ -20,6 +20,7 @@ public:
   // TODO: Enable When NewDeleteAllocator is ready
   //explicit Vector(UINT maxSize);
   Vector(UINT maxSize, Memory::Allocator& alloc);
+  Vector(U32 size, U32 maxSize, Memory::Allocator& alloc);
   ~Vector();
 
   // Copy Ctor
@@ -68,6 +69,8 @@ public:
    * \param maxSize Maxium Possible Size
    */
   void Reserve(U32 maxSize);
+  void ReserveAndResize(U32 maxSize);
+  void Resize(U32 size);
 
   /**
    * \brief Checks if the container is empty
@@ -87,11 +90,16 @@ public:
    */
   Type* Data();
 
+  const Type* Data() const;
+
   Type& operator[](U32 idx);
   Type& operator[](U32 idx) const;
 
   U32 GetSize() const { return m_size; }
   U32 GetMaxSize() const { return m_maxSize; }
+
+  template< class InputIt >
+  void Assign(InputIt first, InputIt last);
 
   class Iterator {
   public:
@@ -230,6 +238,18 @@ public:
   */
   Iterator End() const;
 
+  /**
+  * \brief Returns an Iterator pointing to the beginning of the vector. This is similar to begin() of a std::vector.
+  * \return Iterator
+  */
+  Iterator begin() const;
+
+  /**
+  * \brief Returns an Iterator pointing to the end of the vector. This is similar to end() of a std::vector.
+  * \return Iterator
+  */
+  Iterator end() const;
+
 private:
   U32 m_size{0};
   U32 m_maxSize{0};
@@ -251,6 +271,15 @@ Vector<Type>::Vector(const UINT maxSize, Memory::Allocator& alloc)
   : m_maxSize(maxSize),
     m_allocator(alloc),
     m_base(m_allocator.RawNewArray<Type>(maxSize)) {
+}
+
+template <typename Type>
+Vector<Type>::Vector(U32 size, U32 maxSize, Memory::Allocator& alloc)
+  : m_maxSize(maxSize),
+  m_size(size),
+  m_allocator(alloc),
+  m_base(m_allocator.RawNewArray<Type>(maxSize)) {
+  assert(size <= maxSize);
 }
 
 template <typename Type>
@@ -276,7 +305,6 @@ Vector<Type>::Vector(Vector&& other) noexcept
     m_maxSize(std::move(other.m_maxSize)),
     m_allocator(other.m_allocator),
     m_base(std::move(other.m_base)) {
-  other.m_allocator = nullptr;
   other.m_base      = nullptr;
 }
 
@@ -376,6 +404,26 @@ void Vector<Type>::Reserve(U32 maxSize) {
 }
 
 template <typename Type>
+void Vector<Type>::ReserveAndResize(U32 maxSize) {
+  m_maxSize = maxSize;
+  m_size = maxSize;
+  m_base    = m_allocator.RawNewArray<Type>(m_maxSize);
+}
+
+template <typename Type>
+void Vector<Type>::Resize(U32 size) {
+  assert(size <= m_maxSize);
+
+  auto newData    = m_allocator.RawNewArray<Type>(size);
+
+  // TODO(vasumahesh1): Check for trivially copyable
+  // Copy over Old Contents
+  std::memcpy(newData.get(), m_base.get(), m_size * sizeof(Type));
+  m_base = newData;
+  m_size = size;
+}
+
+template <typename Type>
 bool Vector<Type>::IsEmpty() const {
   return m_size == 0;
 }
@@ -397,6 +445,11 @@ Type* Vector<Type>::Data() {
 }
 
 template <typename Type>
+const Type* Vector<Type>::Data() const {
+  return m_base.get();
+}
+
+template <typename Type>
 Type& Vector<Type>::operator[](const U32 idx) {
   assert(idx < m_size);
   return m_base[idx];
@@ -409,6 +462,17 @@ Type& Vector<Type>::operator[](const U32 idx) const {
 }
 
 template <typename Type>
+template <class InputIt>
+void Vector<Type>::Assign(InputIt first, InputIt last) {
+  U32 count = 0;
+  for(auto itr = first; itr != last; ++itr)
+  {
+    operator[](count) = *itr;
+    ++count;
+  }
+}
+
+template <typename Type>
 typename Vector<Type>::Iterator Vector<Type>::Begin() const {
   return Iterator(this, 0);
 }
@@ -416,6 +480,16 @@ typename Vector<Type>::Iterator Vector<Type>::Begin() const {
 template <typename Type>
 typename Vector<Type>::Iterator Vector<Type>::End() const {
   return Iterator(this, m_size);
+}
+
+template <typename Type>
+typename Vector<Type>::Iterator Vector<Type>::begin() const {
+  return Begin();
+}
+
+template <typename Type>
+typename Vector<Type>::Iterator Vector<Type>::end() const {
+  return End();
 }
 } // namespace Containers
 } // namespace Azura

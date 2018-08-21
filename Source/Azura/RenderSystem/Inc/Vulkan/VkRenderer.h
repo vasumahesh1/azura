@@ -9,6 +9,7 @@
 #include "Generic/Renderer.h"
 #include "VkCore.h"
 #include "VkScopedBuffer.h"
+#include "VkWindow.h"
 
 namespace Azura {
 namespace Vulkan {
@@ -38,14 +39,15 @@ public:
 
 private:
   VkScopedBuffer m_buffer;
-  Containers::Vector<VkDrawable> m_drawablePools;
+  Containers::Vector<VkDrawable> m_drawables;
 };
 
 class VkRenderer : public Renderer {
 public:
   VkRenderer(const ApplicationInfo& appInfo,
              const DeviceRequirements& deviceRequirements,
-             Memory::Allocator& allocator);
+             Memory::Allocator& allocator,
+             VkWindow& window);
   ~VkRenderer();
 
   VkRenderer(const VkRenderer& other) = delete;
@@ -55,6 +57,10 @@ public:
 
   U32 CreateDrawablePool(const DrawablePoolCreateInfo& createInfo) override;
   DrawablePool& GetDrawablePool(U32 id) override;
+
+private:
+  VkWindow& m_window;
+  Containers::Vector<VkDrawablePool> m_drawablePools;
 };
 } // namespace Vulkan
 } // namespace Azura

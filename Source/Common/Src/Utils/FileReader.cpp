@@ -5,15 +5,15 @@
 
 namespace Azura {
 
-std::vector<U8> FileReader::GetFileContents(const String& filePath) {
+Containers::Vector<U8> FileReader::GetFileContents(const String& filePath, Memory::Allocator& allocator) {
   std::ifstream fileStream(filePath);
-  std::vector<U8> buffer;
+  Containers::Vector<U8> buffer(allocator);
 
   fileStream.seekg(0, std::ios::end);
-  buffer.reserve(SizeType(fileStream.tellg()));
+  buffer.ReserveAndResize(U32(fileStream.tellg()));
   fileStream.seekg(0, std::ios::beg);
 
-  buffer.assign(std::istreambuf_iterator<char>(fileStream), std::istreambuf_iterator<char>());
+  buffer.Assign(std::istreambuf_iterator<char>(fileStream), std::istreambuf_iterator<char>());
 
   fileStream.close();
 
@@ -22,7 +22,6 @@ std::vector<U8> FileReader::GetFileContents(const String& filePath) {
 
 SizeType FileReader::GetFileSize(const String& filePath) {
   std::ifstream fileStream(filePath);
-  std::vector<U8> buffer;
 
   fileStream.seekg(0, std::ios::end);
   const auto size = SizeType(fileStream.tellg());

@@ -6,6 +6,9 @@
 #include <set>
 #include "Vulkan/VkTypeMapping.h"
 #include "Vulkan/VkMacros.h"
+#include "Memory/StackMemoryBuffer.h"
+#include "Memory/MonotonicAllocator.h"
+#include "Memory/MemoryFactory.h"
 
 namespace Azura {
 namespace Vulkan {
@@ -22,10 +25,10 @@ const std::array<const char*, 1> DEVICE_EXTENSIONS = {
 
 bool CheckValidationLayerSupport() {
 #ifdef DEBUG
-  uint32_t layerCount = 0;
+  U32 layerCount = 0;
 
   vkEnumerateInstanceLayerProperties(&layerCount, nullptr);
-  std::vector<VkLayerProperties> availableLayers(layerCount);
+  Containers::Vector<VkLayerProperties> availableLayers(layerCount);
 
   vkEnumerateInstanceLayerProperties(&layerCount, availableLayers.data());
 
@@ -48,11 +51,14 @@ bool CheckValidationLayerSupport() {
 }
 
 bool CheckDeviceExtensionSupport(VkPhysicalDevice device) {
-  uint32_t extensionCount = 0;
+  U32 extensionCount          = 0;
+  const U32 maxExtensionCount = 30;
+
+  STACK_ALLOCATOR(Extension, Memory::MonotonicAllocator, sizeof(VkExtensionProperties) * maxExtensionCount)
 
   vkEnumerateDeviceExtensionProperties(device, nullptr, &extensionCount, nullptr);
-  std::vector<VkExtensionProperties> availableExtensions(extensionCount);
-  vkEnumerateDeviceExtensionProperties(device, nullptr, &extensionCount, availableExtensions.data());
+  Containers::Vector<VkExtensionProperties> availableExtensions(extensionCount, maxExtensionCount, allocatorExtension);
+  vkEnumerateDeviceExtensionProperties(device, nullptr, &extensionCount, availableExtensions.Data());
 
   for (const auto& requiredExtension : DEVICE_EXTENSIONS) {
     bool foundExtension = false;
@@ -113,7 +119,7 @@ int GetDeviceScore(VkPhysicalDevice device,
   return score;
 }
 
-VkSurfaceFormatKHR ChooseSwapSurfaceFormat(const std::vector<VkSurfaceFormatKHR>& availableFormats,
+VkSurfaceFormatKHR ChooseSwapSurfaceFormat(const Containers::Vector<VkSurfaceFormatKHR>& availableFormats,
                                            const SwapChainRequirement& requirement) {
   const auto format = ToVkFormat(requirement.m_format);
   VERIFY_OPT(format, "Unknown Format");
@@ -122,7 +128,7 @@ VkSurfaceFormatKHR ChooseSwapSurfaceFormat(const std::vector<VkSurfaceFormatKHR>
   VERIFY_OPT(colorSpace, "Unknown Colorspace");
 
   // no preferred format
-  if (availableFormats.size() == 1 && availableFormats[0].format == VK_FORMAT_UNDEFINED) {
+  if (availableFormats.GetSize() == 1 && availableFormats[0].format == VK_FORMAT_UNDEFINED) {
     return {format.value(), colorSpace.value()};
   }
 
@@ -135,7 +141,7 @@ VkSurfaceFormatKHR ChooseSwapSurfaceFormat(const std::vector<VkSurfaceFormatKHR>
   return availableFormats[0];
 }
 
-VkPresentModeKHR ChooseSwapPresentMode(const std::vector<VkPresentModeKHR>& availablePresentModes) {
+VkPresentModeKHR ChooseSwapPresentMode(const Containers::Vector<VkPresentModeKHR>& availablePresentModes) {
   VkPresentModeKHR bestMode = VK_PRESENT_MODE_FIFO_KHR;
   for (const auto& availablePresentMode : availablePresentModes) {
     if (availablePresentMode == VK_PRESENT_MODE_MAILBOX_KHR) {
@@ -151,7 +157,7 @@ VkPresentModeKHR ChooseSwapPresentMode(const std::vector<VkPresentModeKHR>& avai
 }
 
 VkExtent2D ChooseSwapExtent(const VkSurfaceCapabilitiesKHR& capabilities, const SwapChainRequirement& requirement) {
-  if (capabilities.currentExtent.width != std::numeric_limits<uint32_t>::max()) {
+  if (capabilities.currentExtent.width != std::numeric_limits<U32>::max()) {
     return capabilities.currentExtent;
   }
 
@@ -164,15 +170,16 @@ VkExtent2D ChooseSwapExtent(const VkSurfaceCapabilitiesKHR& capabilities, const 
 }
 } // namespace
 
-VkInstance VkCore::CreateInstance(const ApplicationInfo& applicationData, std::vector<const char*> vkExtensions) {
+VkInstance VkCore::CreateInstance(const ApplicationInfo& applicationData,
+                                  Containers::Vector<const char*> vkExtensions) {
   VkApplicationInfo appInfo = {};
   appInfo.sType             = VK_STRUCTURE_TYPE_APPLICATION_INFO;
   appInfo.pApplicationName  = applicationData.m_name.c_str();
 
-  const std::uint32_t majorVer = std::get<SemverMajor>(applicationData.m_version);
-  const std::uint32_t minorVer = std::get<SemverMinor>(applicationData.m_version);
-  const std::uint32_t patchVer = std::get<SemverPatch>(applicationData.m_version);
-  appInfo.applicationVersion   = VK_MAKE_VERSION(majorVer, minorVer, patchVer);
+  const U32 majorVer         = std::get<SemverMajor>(applicationData.m_version);
+  const U32 minorVer         = std::get<SemverMinor>(applicationData.m_version);
+  const U32 patchVer         = std::get<SemverPatch>(applicationData.m_version);
+  appInfo.applicationVersion = VK_MAKE_VERSION(majorVer, minorVer, patchVer);
 
   appInfo.pEngineName   = "";
   appInfo.engineVersion = VK_MAKE_VERSION(RENDER_SYSTEM_MAJOR_SEMVER, RENDER_SYSTEM_MINOR_SEMVER,
@@ -182,14 +189,14 @@ VkInstance VkCore::CreateInstance(const ApplicationInfo& applicationData, std::v
   VkInstanceCreateInfo createInfo    = {};
   createInfo.sType                   = VK_STRUCTURE_TYPE_INSTANCE_CREATE_INFO;
   createInfo.pApplicationInfo        = &appInfo;
-  createInfo.enabledExtensionCount   = uint32_t(vkExtensions.size());
-  createInfo.ppEnabledExtensionNames = vkExtensions.data();
+  createInfo.enabledExtensionCount   = vkExtensions.GetSize();
+  createInfo.ppEnabledExtensionNames = vkExtensions.Data();
 
   // Validation Layers Check
   VERIFY_TRUE(CheckValidationLayerSupport(), "Validation layers requested, but not available on device");
 
 #ifdef DEBUG
-  createInfo.enabledLayerCount   = uint32_t(VALIDATION_LAYERS.size());
+  createInfo.enabledLayerCount   = U32(VALIDATION_LAYERS.size());
   createInfo.ppEnabledLayerNames = VALIDATION_LAYERS.data();
 #else
   createInfo.enabledLayerCount   = 0;
@@ -207,11 +214,13 @@ VkQueueIndices VkCore::FindQueueFamiliesInDevice(VkPhysicalDevice device,
   VkQueueIndices result;
   result.m_isTransferQueueRequired = requirements.m_transferQueue;
 
-  uint32_t queueFamilyCount;
-  vkGetPhysicalDeviceQueueFamilyProperties(device, &queueFamilyCount, nullptr);
-  std::vector<VkQueueFamilyProperties> queueFamilies(queueFamilyCount);
+  const U32 maxQueueFamilies = 4;
+  STACK_ALLOCATOR(QueueFamily, Memory::MonotonicAllocator, sizeof(VkQueueFamilyProperties) * maxQueueFamilies)
 
-  vkGetPhysicalDeviceQueueFamilyProperties(device, &queueFamilyCount, queueFamilies.data());
+  U32 queueFamilyCount;
+  vkGetPhysicalDeviceQueueFamilyProperties(device, &queueFamilyCount, nullptr);
+  Containers::Vector<VkQueueFamilyProperties> queueFamilies(queueFamilyCount, maxQueueFamilies, allocatorQueueFamily);
+  vkGetPhysicalDeviceQueueFamilyProperties(device, &queueFamilyCount, queueFamilies.Data());
 
   int idx = 0;
   for (const auto& queueFamily : queueFamilies) {
@@ -237,24 +246,24 @@ VkQueueIndices VkCore::FindQueueFamiliesInDevice(VkPhysicalDevice device,
   return result;
 }
 
-SwapChainDeviceSupport VkCore::QuerySwapChainSupport(VkPhysicalDevice device, VkSurfaceKHR surface) {
-  SwapChainDeviceSupport result;
+SwapChainDeviceSupport VkCore::QuerySwapChainSupport(VkPhysicalDevice device, VkSurfaceKHR surface, Memory::Allocator& allocator) {
+  SwapChainDeviceSupport result(allocator);
 
   vkGetPhysicalDeviceSurfaceCapabilitiesKHR(device, surface, &result.m_capabilities);
-  uint32_t formatCount = 0;
+  U32 formatCount = 0;
   vkGetPhysicalDeviceSurfaceFormatsKHR(device, surface, &formatCount, nullptr);
 
   if (formatCount > 0) {
-    result.m_formats.resize(formatCount);
-    vkGetPhysicalDeviceSurfaceFormatsKHR(device, surface, &formatCount, result.m_formats.data());
+    result.m_formats.ReserveAndResize(formatCount);
+    vkGetPhysicalDeviceSurfaceFormatsKHR(device, surface, &formatCount, result.m_formats.Data());
   }
 
-  uint32_t presentCount = 0;
+  U32 presentCount = 0;
   vkGetPhysicalDeviceSurfacePresentModesKHR(device, surface, &presentCount, nullptr);
 
   if (presentCount > 0) {
-    result.m_presentModes.resize(presentCount);
-    vkGetPhysicalDeviceSurfacePresentModesKHR(device, surface, &presentCount, result.m_presentModes.data());
+    result.m_presentModes.ReserveAndResize(presentCount);
+    vkGetPhysicalDeviceSurfacePresentModesKHR(device, surface, &presentCount, result.m_presentModes.Data());
   }
 
   return result;
@@ -267,13 +276,16 @@ VkPhysicalDevice VkCore::SelectPhysicalDevice(VkInstance instance,
   VkPhysicalDevice physicalDevice = VK_NULL_HANDLE;
 
   // Query for Available Devices
-  uint32_t availableDeviceCount = 0;
+  U32 availableDeviceCount = 0;
   vkEnumeratePhysicalDevices(instance, &availableDeviceCount, nullptr);
 
   VERIFY_TRUE(availableDeviceCount != 0, "No supported GPUs found with Vulkan");
 
-  std::vector<VkPhysicalDevice> availableDevices(availableDeviceCount);
-  vkEnumeratePhysicalDevices(instance, &availableDeviceCount, availableDevices.data());
+  const U32 maxDevices = 4;
+  STACK_ALLOCATOR(Device, Memory::MonotonicAllocator, sizeof(VkPhysicalDevice) * maxDevices)
+
+  Containers::Vector<VkPhysicalDevice> availableDevices(availableDeviceCount, maxDevices, allocatorDevice);
+  vkEnumeratePhysicalDevices(instance, &availableDeviceCount, availableDevices.Data());
 
   std::multimap<int, VkPhysicalDevice> candidates;
 
@@ -301,8 +313,11 @@ VkDevice VkCore::CreateLogicalDevice(VkPhysicalDevice physicalDevice,
     queueIndices.m_transferFamily
   };
 
+  const U32 maxQueueFamilies = 3;
+  STACK_ALLOCATOR(QueueCreateInfo, Memory::MonotonicAllocator, sizeof(VkDeviceQueueCreateInfo) * maxQueueFamilies)
+
   // TODO(vasumahesh1): Simplify with Azura::Vector
-  std::vector<VkDeviceQueueCreateInfo> queueCreateInfos;
+  Containers::Vector<VkDeviceQueueCreateInfo> queueCreateInfos(allocatorQueueCreateInfo);
 
   float queuePriority = 1.0f;
 
@@ -312,7 +327,7 @@ VkDevice VkCore::CreateLogicalDevice(VkPhysicalDevice physicalDevice,
     queueCreateInfo.queueFamilyIndex        = queueIdx;
     queueCreateInfo.queueCount              = 1;
     queueCreateInfo.pQueuePriorities        = &queuePriority;
-    queueCreateInfos.push_back(queueCreateInfo);
+    queueCreateInfos.PushBack(queueCreateInfo);
   }
 
   VkPhysicalDeviceFeatures deviceFeatures = {};
@@ -322,14 +337,14 @@ VkDevice VkCore::CreateLogicalDevice(VkPhysicalDevice physicalDevice,
   // Create the logical device
   VkDeviceCreateInfo createInfo      = {};
   createInfo.sType                   = VK_STRUCTURE_TYPE_DEVICE_CREATE_INFO;
-  createInfo.pQueueCreateInfos       = queueCreateInfos.data();
-  createInfo.queueCreateInfoCount    = uint32_t(queueCreateInfos.size());
+  createInfo.pQueueCreateInfos       = queueCreateInfos.Data();
+  createInfo.queueCreateInfoCount    = queueCreateInfos.GetSize();
   createInfo.pEnabledFeatures        = &deviceFeatures;
-  createInfo.enabledExtensionCount   = uint32_t(DEVICE_EXTENSIONS.size());
+  createInfo.enabledExtensionCount   = U32(DEVICE_EXTENSIONS.size());
   createInfo.ppEnabledExtensionNames = DEVICE_EXTENSIONS.data();
 
 #ifdef DEBUG
-  createInfo.enabledLayerCount   = uint32_t(VALIDATION_LAYERS.size());
+  createInfo.enabledLayerCount   = U32(VALIDATION_LAYERS.size());
   createInfo.ppEnabledLayerNames = VALIDATION_LAYERS.data();
 #else
   createInfo.enabledLayerCount   = 0;
@@ -351,9 +366,10 @@ VkScopedSwapChain VkCore::CreateSwapChain(VkDevice device,
                                           VkSurfaceKHR surface,
                                           const VkQueueIndices& queueIndices,
                                           const SwapChainDeviceSupport& swapChainSupport,
-                                          const SwapChainRequirement& swapChainRequirement) {
+                                          const SwapChainRequirement& swapChainRequirement,
+                                          Memory::Allocator& allocator) {
 
-  VkScopedSwapChain scopedSwapChain;
+  VkScopedSwapChain scopedSwapChain(allocator);
 
   const VkPresentModeKHR presentMode = ChooseSwapPresentMode(swapChainSupport.m_presentModes);
   scopedSwapChain.m_surfaceFormat    = ChooseSwapSurfaceFormat(swapChainSupport.m_formats, swapChainRequirement);
@@ -399,13 +415,15 @@ VkScopedSwapChain VkCore::CreateSwapChain(VkDevice device,
     "Failed to create swap chain");
 
   vkGetSwapchainImagesKHR(device, scopedSwapChain.m_swapChain, &scopedSwapChain.m_imageCount, nullptr);
-  scopedSwapChain.m_images.resize(scopedSwapChain.m_imageCount);
+  scopedSwapChain.m_images.ReserveAndResize(scopedSwapChain.m_imageCount);
+  scopedSwapChain.m_imageViews.ReserveAndResize(scopedSwapChain.m_imageCount);
   vkGetSwapchainImagesKHR(device, scopedSwapChain.m_swapChain, &scopedSwapChain.m_imageCount,
-                          scopedSwapChain.m_images.data());
+                          scopedSwapChain.m_images.Data());
 
-  for (U32 idx = 0; idx < scopedSwapChain.m_imageCount; ++idx) {
-    CreateImageView(device, scopedSwapChain.m_images[idx], VK_IMAGE_VIEW_TYPE_2D,
-                    scopedSwapChain.m_surfaceFormat.format, VK_IMAGE_ASPECT_COLOR_BIT);
+  for (U32 idx                        = 0; idx < scopedSwapChain.m_imageCount; ++idx) {
+    scopedSwapChain.m_imageViews[idx] = CreateImageView(device, scopedSwapChain.m_images[idx], VK_IMAGE_VIEW_TYPE_2D,
+                                                        scopedSwapChain.m_surfaceFormat.format,
+                                                        VK_IMAGE_ASPECT_COLOR_BIT);
   }
 
   return scopedSwapChain;
@@ -493,25 +511,26 @@ VkRenderPass VkCore::CreateRenderPass(VkDevice device, VkFormat colorFormat) {
   return renderPass;
 }
 
-void VkCore::CreateUniformBufferBinding(std::vector<VkDescriptorSetLayoutBinding>& bindings,
+void VkCore::CreateUniformBufferBinding(Containers::Vector<VkDescriptorSetLayoutBinding>& bindings,
                                         VkShaderStageFlags stageFlag) {
 
   VkDescriptorSetLayoutBinding uboLayoutBinding = {};
-  uboLayoutBinding.binding                      = U32(bindings.size());
+  uboLayoutBinding.binding                      = bindings.GetSize();
   uboLayoutBinding.descriptorType               = VK_DESCRIPTOR_TYPE_UNIFORM_BUFFER;
   uboLayoutBinding.descriptorCount              = 1;
   uboLayoutBinding.stageFlags                   = stageFlag;
   uboLayoutBinding.pImmutableSamplers           = nullptr;
 
-  bindings.push_back(uboLayoutBinding);
+  bindings.PushBack(uboLayoutBinding);
 }
 
 VkDescriptorSetLayout VkCore::CreateDescriptorSetLayout(VkDevice device,
-                                                        const std::vector<VkDescriptorSetLayoutBinding>& bindings) {
+                                                        const Containers::Vector<VkDescriptorSetLayoutBinding>&
+                                                        bindings) {
   VkDescriptorSetLayoutCreateInfo layoutInfo = {};
   layoutInfo.sType                           = VK_STRUCTURE_TYPE_DESCRIPTOR_SET_LAYOUT_CREATE_INFO;
-  layoutInfo.bindingCount                    = U32(bindings.size());
-  layoutInfo.pBindings                       = bindings.data();
+  layoutInfo.bindingCount                    = bindings.GetSize();
+  layoutInfo.pBindings                       = bindings.Data();
 
   VkDescriptorSetLayout descriptorSet;
   VERIFY_VK_OP(vkCreateDescriptorSetLayout(device, &layoutInfo, nullptr, &descriptorSet),
@@ -520,13 +539,13 @@ VkDescriptorSetLayout VkCore::CreateDescriptorSetLayout(VkDevice device,
 }
 
 VkPipelineLayout VkCore::CreatePipelineLayout(VkDevice device,
-                                              const std::vector<VkDescriptorSetLayout>& descriptorSets) {
+                                              const Containers::Vector<VkDescriptorSetLayout>& descriptorSets) {
   VkPipelineLayoutCreateInfo pipelineLayoutInfo = {};
   pipelineLayoutInfo.sType                      = VK_STRUCTURE_TYPE_PIPELINE_LAYOUT_CREATE_INFO;
 
   // Descriptors Info
-  pipelineLayoutInfo.pSetLayouts    = descriptorSets.data();
-  pipelineLayoutInfo.setLayoutCount = U32(descriptorSets.size());
+  pipelineLayoutInfo.pSetLayouts    = descriptorSets.Data();
+  pipelineLayoutInfo.setLayoutCount = descriptorSets.GetSize();
 
   VkPipelineLayout pipelineLayout;
   VERIFY_VK_OP(vkCreatePipelineLayout(device, &pipelineLayoutInfo, nullptr, &pipelineLayout),
@@ -534,26 +553,28 @@ VkPipelineLayout VkCore::CreatePipelineLayout(VkDevice device,
   return pipelineLayout;
 }
 
-VkShaderModule VkCore::CreateShaderModule(VkDevice device, const std::vector<U8>& code) {
+VkShaderModule VkCore::CreateShaderModule(VkDevice device, const Containers::Vector<U8>& code) {
   VkShaderModuleCreateInfo createInfo = {};
   createInfo.sType                    = VK_STRUCTURE_TYPE_SHADER_MODULE_CREATE_INFO;
-  createInfo.codeSize                 = code.size();
+  createInfo.codeSize                 = code.GetSize();
   // NOLINTNEXTLINE(cppcoreguidelines-pro-type-reinterpret-cast)
-  createInfo.pCode = reinterpret_cast<const uint32_t*>(code.data()); // byte code ptr conversion
+  createInfo.pCode = reinterpret_cast<const U32*>(code.Data()); // byte code ptr conversion
 
   VkShaderModule shaderModule;
   VERIFY_VK_OP(vkCreateShaderModule(device, &createInfo, nullptr, &shaderModule), "Failed to create shader module");
   return shaderModule;
 }
 
-std::vector<VkFramebuffer> VkCore::CreateFrameBuffers(VkDevice device,
-                                                      VkRenderPass renderPass,
-                                                      const VkScopedSwapChain& scopedSwapChain) {
+Containers::Vector<VkFramebuffer> VkCore::CreateFrameBuffers(VkDevice device,
+                                                             VkRenderPass renderPass,
+                                                             const VkScopedSwapChain& scopedSwapChain,
+                                                             Memory::Allocator& allocator) {
   const auto& swapChainImageViews = scopedSwapChain.m_imageViews;
 
-  std::vector<VkFramebuffer> frameBuffers(swapChainImageViews.size());
+  Containers::Vector<VkFramebuffer> frameBuffers(swapChainImageViews.GetSize(), swapChainImageViews.GetSize(),
+                                                 allocator);
 
-  for (SizeType idx = 0; idx < swapChainImageViews.size(); ++idx) {
+  for (U32 idx = 0; idx < swapChainImageViews.GetSize(); ++idx) {
 
     const std::array<VkImageView, 1> attachments = {
       swapChainImageViews[idx]
@@ -609,12 +630,12 @@ VkDescriptorPoolSize VkCore::CreateDescriptorPoolSize(VkDescriptorType type, U32
 }
 
 VkDescriptorPool VkCore::CreateDescriptorPool(VkDevice device,
-                                              const std::vector<VkDescriptorPoolSize>& pools,
+                                              const Containers::Vector<VkDescriptorPoolSize>& pools,
                                               U32 maxSets) {
   VkDescriptorPoolCreateInfo poolInfo = {};
   poolInfo.sType                      = VK_STRUCTURE_TYPE_DESCRIPTOR_POOL_CREATE_INFO;
-  poolInfo.poolSizeCount              = U32(pools.size());
-  poolInfo.pPoolSizes                 = pools.data();
+  poolInfo.poolSizeCount              = pools.GetSize();
+  poolInfo.pPoolSizes                 = pools.Data();
   poolInfo.maxSets                    = maxSets;
 
   VkDescriptorPool descriptorPool;
@@ -624,12 +645,12 @@ VkDescriptorPool VkCore::CreateDescriptorPool(VkDevice device,
 
 VkDescriptorSet VkCore::CreateDescriptorSet(VkDevice device,
                                             VkDescriptorPool descriptorPool,
-                                            const std::vector<VkDescriptorSetLayout>& descriptorSets) {
+                                            const Containers::Vector<VkDescriptorSetLayout>& descriptorSets) {
   VkDescriptorSetAllocateInfo allocInfo = {};
   allocInfo.sType                       = VK_STRUCTURE_TYPE_DESCRIPTOR_SET_ALLOCATE_INFO;
   allocInfo.descriptorPool              = descriptorPool;
-  allocInfo.descriptorSetCount          = U32(descriptorSets.size());
-  allocInfo.pSetLayouts                 = descriptorSets.data();
+  allocInfo.descriptorSetCount          = descriptorSets.GetSize();
+  allocInfo.pSetLayouts                 = descriptorSets.Data();
 
   VkDescriptorSet descriptorSet;
   VERIFY_VK_OP(vkAllocateDescriptorSets(device, &allocInfo, &descriptorSet), "Failed to allocate descriptor set");
@@ -639,7 +660,7 @@ VkDescriptorSet VkCore::CreateDescriptorSet(VkDevice device,
 VkWriteDescriptorSet VkCore::CreateWriteDescriptorForUniformBuffer(VkDescriptorSet set,
                                                                    U32 layoutIndex,
                                                                    U32 binding,
-                                                                   const std::vector<VkDescriptorBufferInfo>&
+                                                                   const Containers::Vector<VkDescriptorBufferInfo>&
                                                                    bufferInfos) {
   VkWriteDescriptorSet descriptorWrite = {};
   descriptorWrite.sType                = VK_STRUCTURE_TYPE_WRITE_DESCRIPTOR_SET;
@@ -649,18 +670,17 @@ VkWriteDescriptorSet VkCore::CreateWriteDescriptorForUniformBuffer(VkDescriptorS
   descriptorWrite.descriptorType       = VK_DESCRIPTOR_TYPE_UNIFORM_BUFFER;
 
   // Attach Buffer Info to WriteDescriptorSet
-  descriptorWrite.descriptorCount  = U32(bufferInfos.size());
-  descriptorWrite.pBufferInfo      = bufferInfos.data();
+  descriptorWrite.descriptorCount  = bufferInfos.GetSize();
+  descriptorWrite.pBufferInfo      = bufferInfos.Data();
   descriptorWrite.pImageInfo       = nullptr;
   descriptorWrite.pTexelBufferView = nullptr;
 
   return descriptorWrite;
 }
 
-void VkCore::UpdateDescriptorSets(VkDevice device, const std::vector<VkWriteDescriptorSet>& descriptorWrites) {
-  vkUpdateDescriptorSets(device, U32(descriptorWrites.size()), descriptorWrites.data(), 0, nullptr);
+void VkCore::UpdateDescriptorSets(VkDevice device, const Containers::Vector<VkWriteDescriptorSet>& descriptorWrites) {
+  vkUpdateDescriptorSets(device, U32(descriptorWrites.GetSize()), descriptorWrites.Data(), 0, nullptr);
 }
-
 
 VkCommandBuffer VkCore::CreateCommandBuffer(VkDevice device, VkCommandPool commandPool, VkCommandBufferLevel level) {
   VkCommandBuffer commandBuffer;
@@ -677,11 +697,13 @@ VkCommandBuffer VkCore::CreateCommandBuffer(VkDevice device, VkCommandPool comma
 }
 
 
-std::vector<VkCommandBuffer> VkCore::CreateCommandBuffers(VkDevice device,
-                                                          U32 count,
-                                                          VkCommandPool commandPool,
-                                                          VkCommandBufferLevel level) {
-  std::vector<VkCommandBuffer> commandBuffers(count);
+Containers::Vector<VkCommandBuffer> VkCore::CreateCommandBuffers(VkDevice device,
+                                                                 U32 count,
+                                                                 VkCommandPool commandPool,
+                                                                 VkCommandBufferLevel level,
+                                                                 Memory::Allocator& allocator) {
+
+  Containers::Vector<VkCommandBuffer> commandBuffers(count, count, allocator);
   CreateCommandBuffers(device, count, commandPool, level, commandBuffers);
   return commandBuffers;
 }
@@ -690,7 +712,7 @@ void VkCore::CreateCommandBuffers(VkDevice device,
                                   U32 count,
                                   VkCommandPool commandPool,
                                   VkCommandBufferLevel level,
-                                  std::vector<VkCommandBuffer>& commandBuffers) {
+                                  Containers::Vector<VkCommandBuffer>& commandBuffers) {
 
   VkCommandBufferAllocateInfo allocInfo = {};
   allocInfo.sType                       = VK_STRUCTURE_TYPE_COMMAND_BUFFER_ALLOCATE_INFO;
@@ -698,7 +720,7 @@ void VkCore::CreateCommandBuffers(VkDevice device,
   allocInfo.level                       = level;
   allocInfo.commandBufferCount          = count;
 
-  VERIFY_VK_OP(vkAllocateCommandBuffers(device, &allocInfo, commandBuffers.data()), "Failed to create command buffers");
+  VERIFY_VK_OP(vkAllocateCommandBuffers(device, &allocInfo, commandBuffers.Data()), "Failed to create command buffers");
 }
 
 void VkCore::BeginCommandBuffer(VkCommandBuffer buffer, VkCommandBufferUsageFlags flags) {
@@ -722,7 +744,7 @@ VkSemaphore VkCore::CreateSemaphore(VkDevice device) {
   return semaphore;
 }
 
-void VkCore::CreateSemaphores(VkDevice device, U32 count, std::vector<VkSemaphore>& semaphores) {
+void VkCore::CreateSemaphores(VkDevice device, U32 count, Containers::Vector<VkSemaphore>& semaphores) {
   VkSemaphoreCreateInfo semaphoreInfo = {};
   semaphoreInfo.sType                 = VK_STRUCTURE_TYPE_SEMAPHORE_CREATE_INFO;
 
@@ -732,8 +754,8 @@ void VkCore::CreateSemaphores(VkDevice device, U32 count, std::vector<VkSemaphor
   }
 }
 
-std::vector<VkSemaphore> VkCore::CreateSemaphores(VkDevice device, U32 count) {
-  std::vector<VkSemaphore> semaphores(count);
+Containers::Vector<VkSemaphore> VkCore::CreateSemaphores(VkDevice device, U32 count, Memory::Allocator& allocator) {
+  Containers::Vector<VkSemaphore> semaphores(count, count, allocator);
   CreateSemaphores(device, count, semaphores);
   return semaphores;
 }
@@ -749,7 +771,7 @@ VkFence VkCore::CreateFence(VkDevice device, VkFenceCreateFlags flags) {
   return fence;
 }
 
-void VkCore::CreateFences(VkDevice device, U32 count, VkFenceCreateFlags flags, std::vector<VkFence>& fences) {
+void VkCore::CreateFences(VkDevice device, U32 count, VkFenceCreateFlags flags, Containers::Vector<VkFence>& fences) {
   VkFenceCreateInfo fenceInfo = {};
   fenceInfo.sType             = VK_STRUCTURE_TYPE_FENCE_CREATE_INFO;
   fenceInfo.flags             = flags;
@@ -759,8 +781,11 @@ void VkCore::CreateFences(VkDevice device, U32 count, VkFenceCreateFlags flags, 
   }
 }
 
-std::vector<VkFence> VkCore::CreateFences(VkDevice device, U32 count, VkFenceCreateFlags flags) {
-  std::vector<VkFence> fences(count);
+Containers::Vector<VkFence> VkCore::CreateFences(VkDevice device,
+                                                 U32 count,
+                                                 VkFenceCreateFlags flags,
+                                                 Memory::Allocator& allocator) {
+  Containers::Vector<VkFence> fences(count, count, allocator);
   CreateFences(device, count, flags, fences);
   return fences;
 }

@@ -13,6 +13,7 @@ set(
   SOURCES "Inc/Memory/Allocator.h" "Src/Memory/Allocator.cpp"
   # "Src/Memory/StackAllocator.cpp"
   "Inc/Memory/MemoryBuffer.h"
+  "Inc/Memory/MemoryFactory.h"
   "Src/Memory/MemoryBuffer.cpp"
   "Inc/Memory/HeapMemoryBuffer.h"
   "Src/Memory/HeapMemoryBuffer.cpp"

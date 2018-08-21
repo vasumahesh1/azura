@@ -14,15 +14,28 @@ bool VkQueueIndices::IsComplete() const {
 }
 
 std::array<U32, 2> VkQueueIndices::GetIndicesArray() const {
-  return { uint32_t(m_graphicsFamily), uint32_t(m_transferFamily) };
+  return {uint32_t(m_graphicsFamily), uint32_t(m_transferFamily)};
 }
 
 U32 VkQueueIndices::GetActiveSize() const {
   return m_isTransferQueueRequired ? 2 : 1;
 }
 
+SwapChainDeviceSupport::SwapChainDeviceSupport(Memory::Allocator& allocator)
+  : m_formats(allocator),
+    m_presentModes(allocator) {
+}
+
 bool SwapChainDeviceSupport::IsSupported() const {
-  return !m_formats.empty() && !m_presentModes.empty();
+  return !m_formats.IsEmpty() && !m_presentModes.IsEmpty();
+}
+
+VkScopedSwapChain::VkScopedSwapChain(Memory::Allocator& allocator)
+  : m_swapChain(nullptr),
+    m_extent(),
+    m_surfaceFormat(),
+    m_images(allocator),
+    m_imageViews(allocator) {
 }
 
 } // namespace Vulkan
