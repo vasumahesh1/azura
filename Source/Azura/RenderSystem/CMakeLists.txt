@@ -6,6 +6,7 @@ set(
   VULKAN_SOURCES
   # Include
   "Inc/Generic/Constants.h"
+  "Inc/Generic/Drawable.h"
   "Inc/Generic/GenericTypes.h"
   "Inc/Generic/RawStorageFormat.h"
   "Inc/Generic/Renderer.h"
@@ -24,6 +25,7 @@ set(
   "Inc/Vulkan/VkWindow.h"
 
   # Source
+  "Src/Generic/Drawable.cpp"
   "Src/Generic/RawStorageFormat.cpp"
   "Src/Generic/Renderer.cpp"
   "Src/Generic/Shader.cpp"

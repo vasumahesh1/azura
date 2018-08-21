@@ -3,6 +3,8 @@
 #include "Types.h"
 
 namespace Azura {
+enum class RawStorageFormat;
+
 enum class RS {
   Success = 0,
   UnknownError,
@@ -28,6 +30,16 @@ enum class ShaderStage {
   Pixel,
   Compute,
   Geometry
+};
+
+enum class BufferUsage {
+  Vertex,
+  Index,
+};
+
+enum class BufferRate {
+  PerVertex,
+  PerInstance
 };
 
 enum class PrimitiveTopology {
@@ -56,6 +68,11 @@ enum class FrontFace {
   Clockwise
 };
 
+enum class DrawType {
+  InstancedIndexed,
+  InstancedIndexedIndirect
+};
+
 struct ShaderStageInfo {
   ShaderStage m_stage;
   String m_entryPoint;
@@ -70,6 +87,16 @@ struct ViewportDimensions {
   float height;
   float minDepth;
   float maxDepth;
+};
+
+struct BufferInfo {
+  U32 m_offset;
+  U32 m_byteSize;
+  U32 m_binding;
+  RawStorageFormat m_format;
+
+  BufferUsage m_usage;
+  BufferRate m_rate;
 };
 
 } // namespace Azura

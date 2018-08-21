@@ -1,11 +1,14 @@
 #pragma once
 
-#include <vector>
 #include "Constants.h"
 #include "RawStorageFormat.h"
 #include "GenericTypes.h"
+#include "Containers/Vector.h"
+#include "Drawable.h"
 
 namespace Azura {
+struct DrawablePoolCreateInfo;
+
 struct Bounds3D {
   uint32_t m_width{0};
   uint32_t m_height{0};
@@ -37,7 +40,7 @@ struct SwapChainRequirement {
 
 class Renderer {
 public:
-  Renderer(const ApplicationInfo& appInfo, const DeviceRequirements& deviceRequirements);
+  Renderer(ApplicationInfo appInfo, const DeviceRequirements& deviceRequirements, Memory::Allocator& allocator);
   virtual ~Renderer() = default;
 
   Renderer(const Renderer& other) = delete;
@@ -45,8 +48,17 @@ public:
   Renderer& operator=(const Renderer& rhs) = delete;
   Renderer& operator=(Renderer&& rhs) = delete;
 
-  virtual void AddRenderEntity() = 0;
+  virtual U32 CreateDrawablePool(const DrawablePoolCreateInfo& createInfo) = 0;
+  virtual DrawablePool& GetDrawablePool(U32 id) = 0;
+
+protected:
+  const ApplicationInfo& GetApplicationInfo() const;
+  const DeviceRequirements& GetDeviceRequirements() const;
+  Memory::Allocator& GetAllocator() const;
 
 private:
+  const ApplicationInfo m_applicationInfo;
+  const DeviceRequirements m_deviceRequirements;
+  Memory::Allocator& m_allocator;
 };
 }
