@@ -46,7 +46,9 @@ class VkRenderer : public Renderer {
 public:
   VkRenderer(const ApplicationInfo& appInfo,
              const DeviceRequirements& deviceRequirements,
-             Memory::Allocator& allocator,
+             const SwapChainRequirement& swapChainRequirement,
+             Memory::Allocator& mainAllocator,
+    Memory::Allocator& drawAllocator,
              VkWindow& window);
   ~VkRenderer();
 
@@ -61,6 +63,28 @@ public:
 private:
   VkWindow& m_window;
   Containers::Vector<VkDrawablePool> m_drawablePools;
+
+  VkInstance m_instance;
+  VkSurfaceKHR m_surface;
+  VkPhysicalDevice m_physicalDevice;
+  VkQueueIndices m_queueIndices;
+  VkDevice m_device;
+  VkScopedSwapChain m_swapChain;
+  VkRenderPass m_renderPass;
+  VkDescriptorSetLayout m_descriptorSetLayout;
+  VkPipelineLayout m_pipelineLayout;
+
+  Containers::Vector<VkFramebuffer> m_frameBuffers;
+  Containers::Vector<VkSemaphore> m_imageAvailableSemaphores;
+  Containers::Vector<VkSemaphore> m_renderFinishedSemaphores;
+  Containers::Vector<VkFence> mInFlightFences;
+
+  VkCommandPool m_graphicsCommandPool;
+  VkCommandPool m_transferCommandPool;
+
+  VkQueue m_graphicsQueue;
+  VkQueue m_presentQueue;
+  VkQueue m_transferQueue;
 };
 } // namespace Vulkan
 } // namespace Azura

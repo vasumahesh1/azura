@@ -30,7 +30,7 @@ VkSurfaceKHR VkWindow::CreateSurface(VkInstance instance) const {
   return surface;
 }
 
-void VkWindow::GetInstanceExtensions(Containers::Vector<std::string>& extensions) {
+void VkWindow::GetInstanceExtensions(Containers::Vector<const char*>& extensions) {
   extensions.PushBack(VK_KHR_SURFACE);
   extensions.PushBack("VK_KHR_win32_surface");
 }

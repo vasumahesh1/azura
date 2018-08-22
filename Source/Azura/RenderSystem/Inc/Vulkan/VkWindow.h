@@ -14,7 +14,7 @@ public:
 
   VkSurfaceKHR CreateSurface(VkInstance instance) const;
 
-  static void GetInstanceExtensions(Containers::Vector<std::string>& extensions);
+  static void GetInstanceExtensions(Containers::Vector<const char*>& extensions);
 };
 } // namespace Vulkan
 } // namespace Azura

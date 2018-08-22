@@ -17,8 +17,7 @@ SwapChainDeviceSupport QuerySwapChainSupport(VkPhysicalDevice device, VkSurfaceK
 
 VkPhysicalDevice SelectPhysicalDevice(VkInstance instance,
                                       VkSurfaceKHR surface,
-                                      const DeviceRequirements& requirements,
-                                      const SwapChainDeviceSupport& swapChainSupport);
+                                      const DeviceRequirements& requirements);
 VkDevice CreateLogicalDevice(VkPhysicalDevice physicalDevice,
                              const VkQueueIndices& queueIndices,
                              const DeviceRequirements& requirements);
@@ -62,7 +61,9 @@ Containers::Vector<VkFramebuffer> CreateFrameBuffers(VkDevice device,
                                                      const VkScopedSwapChain& scopedSwapChain,
                                                      Memory::Allocator& allocator);
 
-VkCommandPool CreateCommandPool(VkDevice device, int queueIndex);
+void CreateFrameBuffers(VkDevice device, VkRenderPass renderPass, const VkScopedSwapChain & scopedSwapChain, Containers::Vector<VkFramebuffer>& frameBuffers);
+
+VkCommandPool CreateCommandPool(VkDevice device, int queueIndex, VkCommandPoolCreateFlags flags);
 
 U32 FindMemoryType(U32 typeFilter,
                    VkMemoryPropertyFlags properties,

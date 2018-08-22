@@ -1,5 +1,6 @@
 ﻿#pragma once
 #include "Types.h"
+#include "Memory/StackMemoryBuffer.h"
 
 
 namespace Azura

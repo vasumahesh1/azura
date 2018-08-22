@@ -271,8 +271,7 @@ SwapChainDeviceSupport VkCore::QuerySwapChainSupport(VkPhysicalDevice device, Vk
 
 VkPhysicalDevice VkCore::SelectPhysicalDevice(VkInstance instance,
                                               VkSurfaceKHR surface,
-                                              const DeviceRequirements& requirements,
-                                              const SwapChainDeviceSupport& swapChainSupport) {
+                                              const DeviceRequirements& requirements) {
   VkPhysicalDevice physicalDevice = VK_NULL_HANDLE;
 
   // Query for Available Devices
@@ -282,7 +281,10 @@ VkPhysicalDevice VkCore::SelectPhysicalDevice(VkInstance instance,
   VERIFY_TRUE(availableDeviceCount != 0, "No supported GPUs found with Vulkan");
 
   const U32 maxDevices = 4;
-  STACK_ALLOCATOR(Device, Memory::MonotonicAllocator, sizeof(VkPhysicalDevice) * maxDevices)
+  STACK_ALLOCATOR(Device, Memory::MonotonicAllocator, sizeof(VkPhysicalDevice) * maxDevices);
+
+  STACK_ALLOCATOR(SwapChainSupport, Memory::MonotonicAllocator, 2048);
+
 
   Containers::Vector<VkPhysicalDevice> availableDevices(availableDeviceCount, maxDevices, allocatorDevice);
   vkEnumeratePhysicalDevices(instance, &availableDeviceCount, availableDevices.Data());
@@ -291,6 +293,7 @@ VkPhysicalDevice VkCore::SelectPhysicalDevice(VkInstance instance,
 
   // Rate and Select the best GPU
   for (const auto& device : availableDevices) {
+    const auto swapChainSupport = QuerySwapChainSupport(device, surface, allocatorSwapChainSupport);
     int tempScore = GetDeviceScore(device, surface, requirements, swapChainSupport);
     candidates.insert(std::make_pair(tempScore, device));
   }
@@ -521,6 +524,7 @@ void VkCore::CreateUniformBufferBinding(Containers::Vector<VkDescriptorSetLayout
   uboLayoutBinding.stageFlags                   = stageFlag;
   uboLayoutBinding.pImmutableSamplers           = nullptr;
 
+  // TODO(vasumahesh1): Move here
   bindings.PushBack(uboLayoutBinding);
 }
 
@@ -596,11 +600,39 @@ Containers::Vector<VkFramebuffer> VkCore::CreateFrameBuffers(VkDevice device,
   return frameBuffers;
 }
 
-VkCommandPool VkCore::CreateCommandPool(VkDevice device, int queueIndex) {
+void VkCore::CreateFrameBuffers(VkDevice device,
+  VkRenderPass renderPass,
+  const VkScopedSwapChain& scopedSwapChain,
+  Containers::Vector<VkFramebuffer>& frameBuffers) {
+  const auto& swapChainImageViews = scopedSwapChain.m_imageViews;
+
+  frameBuffers.ReserveAndResize(swapChainImageViews.GetSize());
+
+  for (U32 idx = 0; idx < swapChainImageViews.GetSize(); ++idx) {
+
+    const std::array<VkImageView, 1> attachments = {
+      swapChainImageViews[idx]
+    };
+
+    VkFramebufferCreateInfo framebufferInfo = {};
+    framebufferInfo.sType                   = VK_STRUCTURE_TYPE_FRAMEBUFFER_CREATE_INFO;
+    framebufferInfo.renderPass              = renderPass;
+    framebufferInfo.attachmentCount         = U32(attachments.size());
+    framebufferInfo.pAttachments            = attachments.data();
+    framebufferInfo.width                   = scopedSwapChain.m_extent.width;
+    framebufferInfo.height                  = scopedSwapChain.m_extent.height;
+    framebufferInfo.layers                  = 1;
+
+    VERIFY_VK_OP(vkCreateFramebuffer(device, &framebufferInfo, nullptr, &frameBuffers[idx]),
+      "Failed to create framebuffer");
+  }
+}
+
+VkCommandPool VkCore::CreateCommandPool(VkDevice device, int queueIndex, VkCommandPoolCreateFlags flags) {
   VkCommandPoolCreateInfo poolInfo = {};
   poolInfo.sType                   = VK_STRUCTURE_TYPE_COMMAND_POOL_CREATE_INFO;
   poolInfo.queueFamilyIndex        = queueIndex;
-  poolInfo.flags                   = 0;
+  poolInfo.flags                   = flags;
 
   VkCommandPool commandPool;
   VERIFY_VK_OP(vkCreateCommandPool(device, &poolInfo, nullptr, &commandPool), "Failed to create command pool");

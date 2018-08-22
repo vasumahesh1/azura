@@ -42,6 +42,12 @@ public:
   * \brief Appends data to the end of the vector
   * \param data Data to push
   */
+  void PushBack(const Type&& data);
+
+  /**
+  * \brief Appends data to the end of the vector
+  * \param data Data to push
+  */
   void EmplaceBack(Type&& data);
 
   /**
@@ -98,7 +104,7 @@ public:
   U32 GetSize() const { return m_size; }
   U32 GetMaxSize() const { return m_maxSize; }
 
-  template< class InputIt >
+  template <class InputIt>
   void Assign(InputIt first, InputIt last);
 
   class Iterator {
@@ -276,9 +282,9 @@ Vector<Type>::Vector(const UINT maxSize, Memory::Allocator& alloc)
 template <typename Type>
 Vector<Type>::Vector(U32 size, U32 maxSize, Memory::Allocator& alloc)
   : m_maxSize(maxSize),
-  m_size(size),
-  m_allocator(alloc),
-  m_base(m_allocator.RawNewArray<Type>(maxSize)) {
+    m_size(size),
+    m_allocator(alloc),
+    m_base(m_allocator.RawNewArray<Type>(maxSize)) {
   assert(size <= maxSize);
 }
 
@@ -305,7 +311,7 @@ Vector<Type>::Vector(Vector&& other) noexcept
     m_maxSize(std::move(other.m_maxSize)),
     m_allocator(other.m_allocator),
     m_base(std::move(other.m_base)) {
-  other.m_base      = nullptr;
+  other.m_base = nullptr;
 }
 
 // TODO: error with non trivial types need something similar to typename std::enable_if<!std::is_fundamental<Type>::value>::type
@@ -336,7 +342,7 @@ Vector<Type>& Vector<Type>::operator=(Vector&& other) noexcept {
 
   m_size      = std::move(other.m_size);
   m_maxSize   = std::move(other.m_maxSize);
-  m_allocator = other.m_allocator;
+  m_allocator = std::move(other.m_allocator);
   m_base      = std::move(other.m_base);
 
   return *this;
@@ -347,6 +353,15 @@ void Vector<Type>::PushBack(const Type& data) {
   assert(m_size < m_maxSize);
 
   m_base[m_size] = data;
+  ++m_size;
+}
+
+template <typename Type>
+void Vector<Type>::PushBack(const Type&& data) {
+  assert(m_size < m_maxSize);
+
+  // TODO: Should we memcpy?
+  m_base[m_size] = std::move(data);
   ++m_size;
 }
 
@@ -406,7 +421,7 @@ void Vector<Type>::Reserve(U32 maxSize) {
 template <typename Type>
 void Vector<Type>::ReserveAndResize(U32 maxSize) {
   m_maxSize = maxSize;
-  m_size = maxSize;
+  m_size    = maxSize;
   m_base    = m_allocator.RawNewArray<Type>(m_maxSize);
 }
 
@@ -414,7 +429,7 @@ template <typename Type>
 void Vector<Type>::Resize(U32 size) {
   assert(size <= m_maxSize);
 
-  auto newData    = m_allocator.RawNewArray<Type>(size);
+  auto newData = m_allocator.RawNewArray<Type>(size);
 
   // TODO(vasumahesh1): Check for trivially copyable
   // Copy over Old Contents
@@ -464,9 +479,8 @@ Type& Vector<Type>::operator[](const U32 idx) const {
 template <typename Type>
 template <class InputIt>
 void Vector<Type>::Assign(InputIt first, InputIt last) {
-  U32 count = 0;
-  for(auto itr = first; itr != last; ++itr)
-  {
+  U32 count           = 0;
+  for (auto itr       = first; itr != last; ++itr) {
     operator[](count) = *itr;
     ++count;
   }

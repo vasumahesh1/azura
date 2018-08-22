@@ -7,6 +7,8 @@
 #include "Drawable.h"
 
 namespace Azura {
+const U32 DEFAULT_FRAMES_IN_FLIGHT = 2;
+
 struct DrawablePoolCreateInfo;
 
 struct Bounds3D {
@@ -36,6 +38,7 @@ struct SwapChainRequirement {
   RawStorageFormat m_format{};
   Bounds2D m_extent{};
   ColorSpace m_colorSpace{};
+  U32 m_framesInFlight{DEFAULT_FRAMES_IN_FLIGHT};
 };
 
 class Renderer {
