@@ -7,6 +7,8 @@
 
 namespace Azura {
 namespace Memory {
+class MemoryBuffer;
+
 class RangeAllocator final : public Allocator {
 public:
   RangeAllocator(MemoryBuffer& buffer, U32 size);

@@ -1,4 +1,5 @@
 #include "Memory/RangeAllocator.h"
+#include "Memory/MemoryBuffer.h"
 
 namespace Azura {
 namespace Memory {

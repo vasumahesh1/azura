@@ -3,6 +3,7 @@
 #include "Memory/MonotonicAllocator.h"
 #include <cassert>
 #include "Utils/Macros.h"
+#include "Memory/MemoryBuffer.h"
 
 namespace Azura {
   namespace Memory {

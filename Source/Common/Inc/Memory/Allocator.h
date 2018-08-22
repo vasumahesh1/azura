@@ -1,8 +1,7 @@
 #pragma once
 
 #include "Types.h"
-#include "MemoryBuffer.h"
-#include <type_traits>
+#include "Utils/Macros.h"
 #include <functional>
 
 namespace Azura {
@@ -143,13 +142,15 @@ UniqueArrayPtr<Type> Allocator::InternalAllocateArray(U32 elementSize,
 
   const auto customDeleter = [&](Type* data)
   {
-    // if constexpr (Construct) {
-    //   Type* ptr    = data;
-    //   for (U32 idx = 0; idx < numElements; ++idx) {
-    //     ptr->~Type();
-    //     ++ptr;
-    //   }
-    // }
+    // TODO(vasumahesh1): Investigate Lambda Capture
+    const U32 dataSize = numElements;
+    if constexpr (Construct) {
+      Type* ptr    = data;
+      for (U32 idx = 0; idx < dataSize; ++idx) {
+        UNUSED(ptr->~Type());
+        ++ptr;
+      }
+    }
 
     Deallocate(data);
   };

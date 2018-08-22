@@ -5,6 +5,8 @@
 
 namespace Azura {
 namespace Memory {
+class MemoryBuffer;
+
 class MonotonicAllocator final : public Allocator {
 public:
   MonotonicAllocator(MemoryBuffer& buffer, U32 size);
