@@ -67,11 +67,10 @@ protected:
   virtual void Reset();
 
 private:
-  template <typename Type, typename... Args>
-  UniquePtr<Type> InternalAllocate(bool shouldConstruct, U32 size, U32 alignment, Args ... args);
-  template <class Type, class ... Args>
-  UniqueArrayPtr<Type> InternalAllocateArray(bool shouldConstruct,
-                                             U32 elementSize,
+  template <typename Type, bool Construct, typename... Args>
+  UniquePtr<Type> InternalAllocate(U32 size, U32 alignment, Args ... args);
+  template <class Type, bool Construct, class ... Args>
+  UniqueArrayPtr<Type> InternalAllocateArray(U32 elementSize,
                                              U32 numElements,
                                              U32 alignment,
                                              Args ... args);
@@ -82,45 +81,49 @@ private:
 
 template <typename Type, typename... Args>
 UniquePtr<Type> Allocator::New(Args ... args) {
-  return InternalAllocate<Type, Args...>(true, sizeof(Type), sizeof(Type), args...);
+  return InternalAllocate<Type, true, Args...>(sizeof(Type), sizeof(Type), args...);
 }
 
 template <typename Type, typename... Args>
 UniqueArrayPtr<Type> Allocator::NewArray(U32 numElements, Args ... args) {
-  return InternalAllocateArray<Type, Args...>(true, sizeof(Type), numElements, sizeof(Type), args...);
+  return InternalAllocateArray<Type, true, Args...>(sizeof(Type), numElements, sizeof(Type), args...);
 }
 
 template <typename Type, typename ... Args>
 UniquePtr<Type> Allocator::RawNew(Args ... args) {
-  return InternalAllocate<Type, Args...>(false, sizeof(Type), sizeof(Type), args...);
+  return InternalAllocate<Type, false, Args...>(sizeof(Type), sizeof(Type), args...);
 }
 
 template <typename Type, typename... Args>
 UniqueArrayPtr<Type> Allocator::RawNewArray(U32 numElements, Args ... args) {
-  return InternalAllocateArray<Type, Args...>(false, sizeof(Type), numElements, sizeof(Type), args...);
+  return InternalAllocateArray<Type, false, Args...>(sizeof(Type), numElements, sizeof(Type), args...);
 }
 
-template <typename Type, typename ... Args>
-UniquePtr<Type> Allocator::InternalAllocate(bool shouldConstruct, U32 size, U32 alignment, Args ... args) {
+template <typename Type, bool Construct, typename ... Args>
+UniquePtr<Type> Allocator::InternalAllocate(U32 size, U32 alignment, Args ... args) {
   Type* address = reinterpret_cast<Type*>(Allocate(size, alignment));
 
   // Allocator couldn't allocate
-  if (address == nullptr)
-  {
+  if (address == nullptr) {
     return nullptr;
   }
 
-  if (shouldConstruct) {
+  if constexpr (Construct) {
     new(address) Type(args...);
   }
 
-  UniquePtr<Type> result(address, [&](Type* data) { Deallocate(data); });
+  const auto customDeleter = [&](Type* data)
+  {
+    data->~Type();
+    Deallocate(data);
+  };
+
+  UniquePtr<Type> result(address, customDeleter);
   return result;
 }
 
-template <typename Type, typename ... Args>
-UniqueArrayPtr<Type> Allocator::InternalAllocateArray(bool shouldConstruct,
-                                                      U32 elementSize,
+template <typename Type, bool Construct, typename ... Args>
+UniqueArrayPtr<Type> Allocator::InternalAllocateArray(U32 elementSize,
                                                       U32 numElements,
                                                       U32 alignment,
                                                       Args ... args) {
@@ -128,18 +131,30 @@ UniqueArrayPtr<Type> Allocator::InternalAllocateArray(bool shouldConstruct,
   Type* address        = reinterpret_cast<Type*>(Allocate(actualSize * numElements, alignment));
 
   // Allocator couldn't allocate
-  if (address == nullptr)
-  {
+  if (address == nullptr) {
     return nullptr;
   }
 
-  if (shouldConstruct) {
+  if constexpr (Construct) {
     for (U32 idx = 0; idx < numElements; ++idx) {
       new(address + (idx * actualSize)) Type(args...);
     }
   }
 
-  UniqueArrayPtr<Type> result(address, [&](Type* data) { Deallocate(data); });
+  const auto customDeleter = [&](Type* data)
+  {
+    // if constexpr (Construct) {
+    //   Type* ptr    = data;
+    //   for (U32 idx = 0; idx < numElements; ++idx) {
+    //     ptr->~Type();
+    //     ++ptr;
+    //   }
+    // }
+
+    Deallocate(data);
+  };
+
+  UniqueArrayPtr<Type> result(address, customDeleter);
   return result;
 }
 

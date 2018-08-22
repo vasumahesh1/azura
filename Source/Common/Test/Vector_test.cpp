@@ -1,17 +1,102 @@
 #include "Vector_test.h"
+#include "Utils/Macros.h"
 #include <algorithm>
+#include <iostream>
+#include <vector>
 
 using namespace Azura;
 using namespace Azura::Containers;
 
+Vector<int> GetVector(Memory::Allocator& alloc) {
+  Vector<int> v{16, alloc};
+
+  v.PushBack(10);
+  v.PushBack(20);
+  v.PushBack(30);
+  v.PushBack(40);
+
+  return v;
+}
+
+class ComplexType {
+  int m_data;
+
+public:
+  static int s_ctorCalls;
+  static int s_dtorCalls;
+  static int s_copyCtorCalls;
+  static int s_moveCtorCalls;
+  static int s_copyAssignCalls;
+  static int s_moveAssignCalls;
+
+  static void ResetStats() {
+    s_ctorCalls       = 0;
+    s_dtorCalls       = 0;
+    s_copyCtorCalls   = 0;
+    s_moveCtorCalls   = 0;
+    s_copyAssignCalls = 0;
+    s_moveAssignCalls = 0;
+
+    std::cout << "Reset" << std::endl;
+  }
+
+  ComplexType(int data)
+    : m_data(data) {
+    std::cout << "Ctor" << std::endl;
+    ++s_ctorCalls;
+  }
+
+  ~ComplexType() {
+    std::cout << "Dtor" << std::endl;
+    ++s_dtorCalls;
+  }
+
+  ComplexType(const ComplexType& other)
+    : m_data(other.m_data) {
+    std::cout << "Copy Ctor" << std::endl;
+    ++s_copyCtorCalls;
+  }
+
+  ComplexType(ComplexType&& other) noexcept
+    : m_data(std::move(other.m_data)) {
+    std::cout << "Move Ctor" << std::endl;
+    ++s_moveCtorCalls;
+  }
+
+  ComplexType& operator=(const ComplexType& other) {
+    std::cout << "Copy = " << std::endl;
+    m_data = other.m_data;
+    ++s_copyAssignCalls;
+    return *this;
+  }
+
+  ComplexType& operator=(ComplexType&& other) noexcept {
+    std::cout << "Move = " << std::endl;
+    m_data = std::move(other.m_data);
+    ++s_moveAssignCalls;
+    return *this;
+  }
+
+  int Data() const {
+    return m_data;
+  }
+};
+
+int ComplexType::s_ctorCalls       = 0;
+int ComplexType::s_dtorCalls       = 0;
+int ComplexType::s_copyCtorCalls   = 0;
+int ComplexType::s_moveCtorCalls   = 0;
+int ComplexType::s_copyAssignCalls = 0;
+int ComplexType::s_moveAssignCalls = 0;
+
 TEST_F(VectorTest, Constructs) {
-  Vector<int> v{ 16, alloc };
+  Vector<int> v{16, alloc};
   ASSERT_EQ(v.GetSize(), 0u);
 }
 
 TEST_F(VectorTest, NormalPush) {
   alloc.Reset();
-  Vector<int> v{ 16, alloc };
+  Vector<int> v{16, alloc};
 
   v.PushBack(10);
   v.PushBack(20);
@@ -25,20 +110,20 @@ TEST_F(VectorTest, NormalPush) {
 
 TEST_F(VectorTest, NormalPop) {
   alloc.Reset();
-  Vector<int> v{ 16, alloc };
+  Vector<int> v{16, alloc};
 
   v.PushBack(10);
   v.PushBack(20);
   v.PushBack(30);
 
   ASSERT_EQ(v.GetSize(), 3u);
-  ASSERT_EQ(v.Pop(), 30);
+  v.PopBack();
   ASSERT_EQ(v.GetSize(), 2u);
 }
 
 TEST_F(VectorTest, NormalRemove) {
   alloc.Reset();
-  Vector<int> v{ 16, alloc };
+  Vector<int> v{16, alloc};
 
   v.PushBack(10);
   v.PushBack(20);
@@ -63,7 +148,7 @@ TEST_F(VectorTest, NormalRemove) {
 
 TEST_F(VectorTest, NormalFind) {
   alloc.Reset();
-  Vector<int> v{ 16, alloc };
+  Vector<int> v{16, alloc};
 
   v.PushBack(10);
   v.PushBack(20);
@@ -77,7 +162,7 @@ TEST_F(VectorTest, NormalFind) {
 
 TEST_F(VectorTest, Empty) {
   alloc.Reset();
-  Vector<int> v{ 16, alloc };
+  Vector<int> v{16, alloc};
 
   ASSERT_EQ(v.IsEmpty(), true);
 
@@ -93,8 +178,7 @@ TEST_F(VectorTest, Empty) {
 
 TEST_F(VectorTest, IteratorLoop) {
   alloc.Reset();
-  Vector<int> v{ 16, alloc };
-
+  Vector<int> v{16, alloc};
 
   v.PushBack(40);
   v.PushBack(10);
@@ -102,6 +186,7 @@ TEST_F(VectorTest, IteratorLoop) {
   v.PushBack(20);
 
   int c = 0;
+
   for (auto i = v.Begin(); i != v.End(); ++i) {
     ASSERT_EQ(v[c], *i);
     c++;
@@ -110,7 +195,7 @@ TEST_F(VectorTest, IteratorLoop) {
 
 TEST_F(VectorTest, IteratorCount) {
   alloc.Reset();
-  Vector<int> v{ 16, alloc };
+  Vector<int> v{16, alloc};
 
   v.PushBack(40);
   v.PushBack(10);
@@ -118,7 +203,7 @@ TEST_F(VectorTest, IteratorCount) {
   v.PushBack(20);
   v.PushBack(10);
 
-  int count = 10;
+  const int count = 10;
 
   auto countResult = std::count(v.Begin(), v.End(), count);
   ASSERT_EQ(countResult, 2);
@@ -126,7 +211,7 @@ TEST_F(VectorTest, IteratorCount) {
 
 TEST_F(VectorTest, IteratorSort) {
   alloc.Reset();
-  Vector<int> v{ 16, alloc };
+  Vector<int> v{16, alloc};
 
   v.PushBack(40);
   v.PushBack(10);
@@ -140,3 +225,254 @@ TEST_F(VectorTest, IteratorSort) {
   ASSERT_EQ(v[2], 30);
   ASSERT_EQ(v[3], 40);
 }
+
+TEST_F(VectorTest, PushBackComplexTypesCopy) {
+  alloc.Reset();
+  ComplexType::ResetStats();
+
+  const int expectedCtors      = 4;
+  const int expectedDtors      = 0;
+  const int expectedCopyCtor   = 4;
+  const int expectedCopyAssign = 0;
+  const int expectedMoveCtor   = 0;
+  const int expectedMoveAssign = 0;
+
+  Vector<ComplexType> v{16, alloc};
+
+  const auto d1 = ComplexType{10};
+  const auto d2 = ComplexType{20};
+  const auto d3 = ComplexType{30};
+  const auto d4 = ComplexType{40};
+
+  v.PushBack(d1);
+  v.PushBack(d2);
+  v.PushBack(d3);
+  v.PushBack(d4);
+
+  ASSERT_EQ(ComplexType::s_ctorCalls, expectedCtors);
+  ASSERT_EQ(ComplexType::s_dtorCalls, expectedDtors);
+
+  ASSERT_EQ(ComplexType::s_copyCtorCalls, expectedCopyCtor);
+  ASSERT_EQ(ComplexType::s_copyAssignCalls, expectedCopyAssign);
+
+  ASSERT_EQ(ComplexType::s_moveCtorCalls, expectedMoveCtor);
+  ASSERT_EQ(ComplexType::s_moveAssignCalls, expectedMoveAssign);
+
+  ASSERT_EQ(10, v[0].Data());
+  ASSERT_EQ(20, v[1].Data());
+  ASSERT_EQ(30, v[2].Data());
+  ASSERT_EQ(40, v[3].Data());
+
+  // Compare with Ground Truth
+  ComplexType::ResetStats();
+
+  const auto o1 = ComplexType{10};
+  const auto o2 = ComplexType{20};
+  const auto o3 = ComplexType{30};
+  const auto o4 = ComplexType{40};
+
+  std::vector<ComplexType> vOriginal;
+  vOriginal.reserve(16);
+  vOriginal.push_back(o1);
+  vOriginal.push_back(o2);
+  vOriginal.push_back(o3);
+  vOriginal.push_back(o4);
+
+  ASSERT_EQ(ComplexType::s_ctorCalls, expectedCtors);
+  ASSERT_EQ(ComplexType::s_dtorCalls, expectedDtors);
+
+  ASSERT_EQ(ComplexType::s_copyCtorCalls, expectedCopyCtor);
+  ASSERT_EQ(ComplexType::s_copyAssignCalls, expectedCopyAssign);
+
+  ASSERT_EQ(ComplexType::s_moveCtorCalls, expectedMoveCtor);
+  ASSERT_EQ(ComplexType::s_moveAssignCalls, expectedMoveAssign);
+}
+
+TEST_F(VectorTest, PushBackComplexTypesMove) {
+  alloc.Reset();
+  ComplexType::ResetStats();
+
+  const int expectedCtors      = 4;
+  const int expectedDtors      = 4;
+  const int expectedCopyCtor   = 0;
+  const int expectedCopyAssign = 0;
+  const int expectedMoveCtor   = 4;
+  const int expectedMoveAssign = 0;
+
+  Vector<ComplexType> v{16, alloc};
+
+  v.PushBack(ComplexType{10});
+  v.PushBack(ComplexType{20});
+  v.PushBack(ComplexType{30});
+  v.PushBack(ComplexType{40});
+
+  ASSERT_EQ(ComplexType::s_ctorCalls, expectedCtors);
+  ASSERT_EQ(ComplexType::s_dtorCalls, expectedDtors);
+
+  ASSERT_EQ(ComplexType::s_copyCtorCalls, expectedCopyCtor);
+  ASSERT_EQ(ComplexType::s_copyAssignCalls, expectedCopyAssign);
+
+  ASSERT_EQ(ComplexType::s_moveCtorCalls, expectedMoveCtor);
+  ASSERT_EQ(ComplexType::s_moveAssignCalls, expectedMoveAssign);
+
+  ASSERT_EQ(10, v[0].Data());
+  ASSERT_EQ(20, v[1].Data());
+  ASSERT_EQ(30, v[2].Data());
+  ASSERT_EQ(40, v[3].Data());
+
+  // Compare with Ground Truth
+  ComplexType::ResetStats();
+
+  std::vector<ComplexType> vOriginal;
+  vOriginal.reserve(16);
+
+  vOriginal.push_back(ComplexType{10});
+  vOriginal.push_back(ComplexType{20});
+  vOriginal.push_back(ComplexType{30});
+  vOriginal.push_back(ComplexType{40});
+
+  ASSERT_EQ(ComplexType::s_ctorCalls, expectedCtors);
+  ASSERT_EQ(ComplexType::s_dtorCalls, expectedDtors);
+
+  ASSERT_EQ(ComplexType::s_copyCtorCalls, expectedCopyCtor);
+  ASSERT_EQ(ComplexType::s_copyAssignCalls, expectedCopyAssign);
+
+  ASSERT_EQ(ComplexType::s_moveCtorCalls, expectedMoveCtor);
+  ASSERT_EQ(ComplexType::s_moveAssignCalls, expectedMoveAssign);
+}
+
+TEST_F(VectorTest, EmplaceBackComplexTypes) {
+  alloc.Reset();
+  ComplexType::ResetStats();
+
+  const int expectedCtors      = 4;
+  const int expectedDtors      = 0;
+  const int expectedCopyCtor   = 0;
+  const int expectedCopyAssign = 0;
+  const int expectedMoveCtor   = 0;
+  const int expectedMoveAssign = 0;
+
+  Vector<ComplexType> v{16, alloc};
+
+  v.EmplaceBack(10);
+  v.EmplaceBack(20);
+  v.EmplaceBack(30);
+  v.EmplaceBack(40);
+
+  ASSERT_EQ(ComplexType::s_ctorCalls, expectedCtors);
+  ASSERT_EQ(ComplexType::s_dtorCalls, expectedDtors);
+
+  ASSERT_EQ(ComplexType::s_copyCtorCalls, expectedCopyCtor);
+  ASSERT_EQ(ComplexType::s_copyAssignCalls, expectedCopyAssign);
+
+  ASSERT_EQ(ComplexType::s_moveCtorCalls, expectedMoveCtor);
+  ASSERT_EQ(ComplexType::s_moveAssignCalls, expectedMoveAssign);
+
+  ASSERT_EQ(10, v[0].Data());
+  ASSERT_EQ(20, v[1].Data());
+  ASSERT_EQ(30, v[2].Data());
+  ASSERT_EQ(40, v[3].Data());
+
+  // Compare with Ground Truth
+  ComplexType::ResetStats();
+
+  std::vector<ComplexType> vOriginal;
+  vOriginal.reserve(16);
+
+  vOriginal.emplace_back(10);
+  vOriginal.emplace_back(20);
+  vOriginal.emplace_back(30);
+  vOriginal.emplace_back(40);
+
+  ASSERT_EQ(ComplexType::s_ctorCalls, expectedCtors);
+  ASSERT_EQ(ComplexType::s_dtorCalls, expectedDtors);
+
+  ASSERT_EQ(ComplexType::s_copyCtorCalls, expectedCopyCtor);
+  ASSERT_EQ(ComplexType::s_copyAssignCalls, expectedCopyAssign);
+
+  ASSERT_EQ(ComplexType::s_moveCtorCalls, expectedMoveCtor);
+  ASSERT_EQ(ComplexType::s_moveAssignCalls, expectedMoveAssign);
+}
+
+TEST_F(VectorTest, PopComplexTypes) {
+  alloc.Reset();
+  ComplexType::ResetStats();
+
+  const int expectedCtors      = 4;
+  const int expectedDtors      = 1;
+  const int expectedCopyCtor   = 0;
+  const int expectedCopyAssign = 0;
+  const int expectedMoveCtor   = 0;
+  const int expectedMoveAssign = 0;
+
+  Vector<ComplexType> v{16, alloc};
+
+  v.EmplaceBack(10);
+  v.EmplaceBack(20);
+  v.EmplaceBack(30);
+  v.EmplaceBack(40);
+
+  v.PopBack();
+
+  ASSERT_EQ(ComplexType::s_ctorCalls, expectedCtors);
+  ASSERT_EQ(ComplexType::s_dtorCalls, expectedDtors);
+
+  ASSERT_EQ(ComplexType::s_copyCtorCalls, expectedCopyCtor);
+  ASSERT_EQ(ComplexType::s_copyAssignCalls, expectedCopyAssign);
+
+  ASSERT_EQ(ComplexType::s_moveCtorCalls, expectedMoveCtor);
+  ASSERT_EQ(ComplexType::s_moveAssignCalls, expectedMoveAssign);
+
+  ASSERT_EQ(10, v[0].Data());
+  ASSERT_EQ(20, v[1].Data());
+  ASSERT_EQ(30, v[2].Data());
+
+  // Compare with Ground Truth
+  ComplexType::ResetStats();
+
+  std::vector<ComplexType> vOriginal;
+  vOriginal.reserve(16);
+
+  vOriginal.emplace_back(10);
+  vOriginal.emplace_back(20);
+  vOriginal.emplace_back(30);
+  vOriginal.emplace_back(40);
+
+  vOriginal.pop_back();
+
+  ASSERT_EQ(ComplexType::s_ctorCalls, expectedCtors);
+  ASSERT_EQ(ComplexType::s_dtorCalls, expectedDtors);
+
+  ASSERT_EQ(ComplexType::s_copyCtorCalls, expectedCopyCtor);
+  ASSERT_EQ(ComplexType::s_copyAssignCalls, expectedCopyAssign);
+
+  ASSERT_EQ(ComplexType::s_moveCtorCalls, expectedMoveCtor);
+  ASSERT_EQ(ComplexType::s_moveAssignCalls, expectedMoveAssign);
+}
+
+
+// TEST_F(VectorTest, CopyCtorTrivialTypes) {
+//   alloc.Reset();
+//   Vector<int> v{ 16, alloc };
+
+//   v.PushBack(10);
+//   v.PushBack(20);
+//   v.PushBack(30);
+//   v.PushBack(40);
+
+//   Vector<int> v2{ 16, alloc };
+//   v2 = v;
+// }
+
+// TEST_F(VectorTest, CopyCtorComplexTypes) {
+//   alloc.Reset();
+//   Vector<ComplexType> v{ 16, alloc };
+
+//   v.PushBack(ComplexType{10});
+//   v.PushBack(ComplexType{20});
+//   v.PushBack(ComplexType{30});
+//   v.PushBack(ComplexType{40});
+
+//   Vector<ComplexType> v2{ 16, alloc };
+//   v2 = v;
+// }

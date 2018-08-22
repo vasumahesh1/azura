@@ -9,6 +9,8 @@
 #include <cassert>
 #include "Array.h"
 
+#include "Utils/Macros.h"
+
 namespace Azura {
 namespace Containers {
 template <typename Type>
@@ -42,19 +44,19 @@ public:
   * \brief Appends data to the end of the vector
   * \param data Data to push
   */
-  void PushBack(const Type&& data);
+  void PushBack(Type&& data);
 
   /**
   * \brief Appends data to the end of the vector
   * \param data Data to push
   */
-  void EmplaceBack(Type&& data);
+  template <typename... Args>
+  void EmplaceBack(Args ... args);
 
   /**
    * \brief Removes the last element in the vector array
-   * \return Element that was popped
    */
-  Type Pop();
+  void PopBack();
 
   /**
    * \brief Searches for the data in the Vector
@@ -289,7 +291,12 @@ Vector<Type>::Vector(U32 size, U32 maxSize, Memory::Allocator& alloc)
 }
 
 template <typename Type>
-Vector<Type>::~Vector() = default;
+Vector<Type>::~Vector() {
+  for (U32 idx = 0; idx < m_size; ++idx) {
+    // TODO(vasumahesh1): MSVC gives a NoDIscard warning here. Not sure why, but due to C++17.
+    UNUSED(m_base[idx].~Type());
+  }
+};
 
 // TODO: error with non trivial types need something similar to typename std::enable_if<!std::is_fundamental<Type>::value>::type
 template <typename Type>
@@ -351,37 +358,32 @@ Vector<Type>& Vector<Type>::operator=(Vector&& other) noexcept {
 template <typename Type>
 void Vector<Type>::PushBack(const Type& data) {
   assert(m_size < m_maxSize);
-
-  m_base[m_size] = data;
+  new(&m_base[m_size]) Type(data);
   ++m_size;
 }
 
 template <typename Type>
-void Vector<Type>::PushBack(const Type&& data) {
+void Vector<Type>::PushBack(Type&& data) {
   assert(m_size < m_maxSize);
-
-  // TODO: Should we memcpy?
-  m_base[m_size] = std::move(data);
+  new(&m_base[m_size]) Type(std::move(data));
   ++m_size;
 }
 
 template <typename Type>
-void Vector<Type>::EmplaceBack(Type&& data) {
+template <typename ... Args>
+void Vector<Type>::EmplaceBack(Args ... args) {
   assert(m_size < m_maxSize);
-
-  m_base[m_size] = std::move(data);
+  new(&m_base[m_size]) Type(args...);
   ++m_size;
 }
 
 template <typename Type>
-Type Vector<Type>::Pop() {
+void Vector<Type>::PopBack() {
   assert(m_size > 0);
 
-  // TODO(vasumahesh1): should move here?
-  Type data = m_base[m_size - 1];
+  const U32 targetId = m_size - 1;
+  m_base[targetId].~Type();
   --m_size;
-
-  return data;
 }
 
 template <typename Type>
