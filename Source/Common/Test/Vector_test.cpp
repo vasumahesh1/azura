@@ -37,41 +37,42 @@ public:
     s_copyAssignCalls = 0;
     s_moveAssignCalls = 0;
 
-    std::cout << "Reset" << std::endl;
+    // TODO(vasumahesh1): Test Logs needed.
+    // std::cout << "Reset" << std::endl;
   }
 
   ComplexType(int data)
     : m_data(data) {
-    std::cout << "Ctor" << std::endl;
+    // std::cout << "Ctor" << std::endl;
     ++s_ctorCalls;
   }
 
   ~ComplexType() {
-    std::cout << "Dtor" << std::endl;
+    // std::cout << "Dtor" << std::endl;
     ++s_dtorCalls;
   }
 
   ComplexType(const ComplexType& other)
     : m_data(other.m_data) {
-    std::cout << "Copy Ctor" << std::endl;
+    // std::cout << "Copy Ctor" << std::endl;
     ++s_copyCtorCalls;
   }
 
   ComplexType(ComplexType&& other) noexcept
     : m_data(std::move(other.m_data)) {
-    std::cout << "Move Ctor" << std::endl;
+    // std::cout << "Move Ctor" << std::endl;
     ++s_moveCtorCalls;
   }
 
   ComplexType& operator=(const ComplexType& other) {
-    std::cout << "Copy = " << std::endl;
+    // std::cout << "Copy = " << std::endl;
     m_data = other.m_data;
     ++s_copyAssignCalls;
     return *this;
   }
 
   ComplexType& operator=(ComplexType&& other) noexcept {
-    std::cout << "Move = " << std::endl;
+    // std::cout << "Move = " << std::endl;
     m_data = std::move(other.m_data);
     ++s_moveAssignCalls;
     return *this;
