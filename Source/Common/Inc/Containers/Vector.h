@@ -311,7 +311,6 @@ Vector<Type>::~Vector() {
   }
 };
 
-// TODO: error with non trivial types need something similar to typename std::enable_if<!std::is_fundamental<Type>::value>::type
 template <typename Type>
 Vector<Type>::Vector(const Vector& other)
   : m_size(other.m_size),
@@ -321,8 +320,17 @@ Vector<Type>::Vector(const Vector& other)
   // Allocate Memory
   m_base = m_allocator.RawNewArray<Type>(m_maxSize);
 
-  // Copy over Contents
-  std::memcpy(m_base.get(), other.m_base.get(), m_maxSize * sizeof(Type));
+  if constexpr (std::is_trivially_copyable_v<Type>) {
+    // Copy over Contents
+    std::memcpy(m_base.get(), other.m_base.get(), other.m_size * sizeof(Type));
+  }
+  else
+  {
+    // Manually Copy Construct each item
+    for (U32 idx = 0; idx < other.m_size; ++idx) {
+      new(&m_base[idx]) Type(other.m_base[idx]);
+    }
+  }
 }
 
 template <typename Type>
