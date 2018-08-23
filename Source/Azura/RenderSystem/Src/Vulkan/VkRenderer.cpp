@@ -101,9 +101,9 @@ VkRenderer::VkRenderer(const ApplicationInfo& appInfo,
 
   const U32 syncCount = swapChainRequirement.m_framesInFlight;
 
-  m_imageAvailableSemaphores.ReserveAndResize(syncCount);
-  m_renderFinishedSemaphores.ReserveAndResize(syncCount);
-  mInFlightFences.ReserveAndResize(syncCount);
+  m_imageAvailableSemaphores.Resize(syncCount);
+  m_renderFinishedSemaphores.Resize(syncCount);
+  mInFlightFences.Resize(syncCount);
 
   VkCore::CreateSemaphores(m_device, syncCount, m_imageAvailableSemaphores);
   VkCore::CreateSemaphores(m_device, syncCount, m_renderFinishedSemaphores);

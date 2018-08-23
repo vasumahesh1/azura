@@ -10,6 +10,8 @@
 #include "Memory/MonotonicAllocator.h"
 #include "Memory/MemoryFactory.h"
 
+using ContainerExtent = Azura::Containers::ContainerExtent;
+
 namespace Azura {
 namespace Vulkan {
 namespace {
@@ -51,13 +53,13 @@ bool CheckValidationLayerSupport() {
 }
 
 bool CheckDeviceExtensionSupport(VkPhysicalDevice device) {
-  U32 extensionCount          = 0;
+  U32 extensionCount = 0;
   const U32 maxExtensionCount = 30;
 
   STACK_ALLOCATOR(Extension, Memory::MonotonicAllocator, sizeof(VkExtensionProperties) * maxExtensionCount)
 
-  vkEnumerateDeviceExtensionProperties(device, nullptr, &extensionCount, nullptr);
-  Containers::Vector<VkExtensionProperties> availableExtensions(extensionCount, maxExtensionCount, allocatorExtension);
+    vkEnumerateDeviceExtensionProperties(device, nullptr, &extensionCount, nullptr);
+  Containers::Vector<VkExtensionProperties> availableExtensions(ContainerExtent{ extensionCount, maxExtensionCount }, allocatorExtension);
   vkEnumerateDeviceExtensionProperties(device, nullptr, &extensionCount, availableExtensions.Data());
 
   for (const auto& requiredExtension : DEVICE_EXTENSIONS) {
@@ -219,7 +221,7 @@ VkQueueIndices VkCore::FindQueueFamiliesInDevice(VkPhysicalDevice device,
 
   U32 queueFamilyCount;
   vkGetPhysicalDeviceQueueFamilyProperties(device, &queueFamilyCount, nullptr);
-  Containers::Vector<VkQueueFamilyProperties> queueFamilies(queueFamilyCount, maxQueueFamilies, allocatorQueueFamily);
+  Containers::Vector<VkQueueFamilyProperties> queueFamilies(ContainerExtent{ queueFamilyCount, maxQueueFamilies }, allocatorQueueFamily);
   vkGetPhysicalDeviceQueueFamilyProperties(device, &queueFamilyCount, queueFamilies.Data());
 
   int idx = 0;
@@ -254,7 +256,7 @@ SwapChainDeviceSupport VkCore::QuerySwapChainSupport(VkPhysicalDevice device, Vk
   vkGetPhysicalDeviceSurfaceFormatsKHR(device, surface, &formatCount, nullptr);
 
   if (formatCount > 0) {
-    result.m_formats.ReserveAndResize(formatCount);
+    result.m_formats.Resize(formatCount);
     vkGetPhysicalDeviceSurfaceFormatsKHR(device, surface, &formatCount, result.m_formats.Data());
   }
 
@@ -262,7 +264,7 @@ SwapChainDeviceSupport VkCore::QuerySwapChainSupport(VkPhysicalDevice device, Vk
   vkGetPhysicalDeviceSurfacePresentModesKHR(device, surface, &presentCount, nullptr);
 
   if (presentCount > 0) {
-    result.m_presentModes.ReserveAndResize(presentCount);
+    result.m_presentModes.Resize(presentCount);
     vkGetPhysicalDeviceSurfacePresentModesKHR(device, surface, &presentCount, result.m_presentModes.Data());
   }
 
@@ -286,7 +288,7 @@ VkPhysicalDevice VkCore::SelectPhysicalDevice(VkInstance instance,
   STACK_ALLOCATOR(SwapChainSupport, Memory::MonotonicAllocator, 2048);
 
 
-  Containers::Vector<VkPhysicalDevice> availableDevices(availableDeviceCount, maxDevices, allocatorDevice);
+  Containers::Vector<VkPhysicalDevice> availableDevices(ContainerExtent{ availableDeviceCount, maxDevices }, allocatorDevice);
   vkEnumeratePhysicalDevices(instance, &availableDeviceCount, availableDevices.Data());
 
   std::multimap<int, VkPhysicalDevice> candidates;
@@ -418,8 +420,8 @@ VkScopedSwapChain VkCore::CreateSwapChain(VkDevice device,
     "Failed to create swap chain");
 
   vkGetSwapchainImagesKHR(device, scopedSwapChain.m_swapChain, &scopedSwapChain.m_imageCount, nullptr);
-  scopedSwapChain.m_images.ReserveAndResize(scopedSwapChain.m_imageCount);
-  scopedSwapChain.m_imageViews.ReserveAndResize(scopedSwapChain.m_imageCount);
+  scopedSwapChain.m_images.Resize(scopedSwapChain.m_imageCount);
+  scopedSwapChain.m_imageViews.Resize(scopedSwapChain.m_imageCount);
   vkGetSwapchainImagesKHR(device, scopedSwapChain.m_swapChain, &scopedSwapChain.m_imageCount,
                           scopedSwapChain.m_images.Data());
 
@@ -575,8 +577,7 @@ Containers::Vector<VkFramebuffer> VkCore::CreateFrameBuffers(VkDevice device,
                                                              Memory::Allocator& allocator) {
   const auto& swapChainImageViews = scopedSwapChain.m_imageViews;
 
-  Containers::Vector<VkFramebuffer> frameBuffers(swapChainImageViews.GetSize(), swapChainImageViews.GetSize(),
-                                                 allocator);
+  Containers::Vector<VkFramebuffer> frameBuffers(ContainerExtent{ swapChainImageViews.GetSize() }, allocator);
 
   for (U32 idx = 0; idx < swapChainImageViews.GetSize(); ++idx) {
 
@@ -606,7 +607,7 @@ void VkCore::CreateFrameBuffers(VkDevice device,
   Containers::Vector<VkFramebuffer>& frameBuffers) {
   const auto& swapChainImageViews = scopedSwapChain.m_imageViews;
 
-  frameBuffers.ReserveAndResize(swapChainImageViews.GetSize());
+  frameBuffers.Resize(swapChainImageViews.GetSize());
 
   for (U32 idx = 0; idx < swapChainImageViews.GetSize(); ++idx) {
 
@@ -735,7 +736,7 @@ Containers::Vector<VkCommandBuffer> VkCore::CreateCommandBuffers(VkDevice device
                                                                  VkCommandBufferLevel level,
                                                                  Memory::Allocator& allocator) {
 
-  Containers::Vector<VkCommandBuffer> commandBuffers(count, count, allocator);
+  Containers::Vector<VkCommandBuffer> commandBuffers(ContainerExtent{ count }, allocator);
   CreateCommandBuffers(device, count, commandPool, level, commandBuffers);
   return commandBuffers;
 }
@@ -787,7 +788,7 @@ void VkCore::CreateSemaphores(VkDevice device, U32 count, Containers::Vector<VkS
 }
 
 Containers::Vector<VkSemaphore> VkCore::CreateSemaphores(VkDevice device, U32 count, Memory::Allocator& allocator) {
-  Containers::Vector<VkSemaphore> semaphores(count, count, allocator);
+  Containers::Vector<VkSemaphore> semaphores(ContainerExtent{ count }, allocator);
   CreateSemaphores(device, count, semaphores);
   return semaphores;
 }
@@ -817,7 +818,7 @@ Containers::Vector<VkFence> VkCore::CreateFences(VkDevice device,
                                                  U32 count,
                                                  VkFenceCreateFlags flags,
                                                  Memory::Allocator& allocator) {
-  Containers::Vector<VkFence> fences(count, count, allocator);
+  Containers::Vector<VkFence> fences(ContainerExtent{ count }, allocator);
   CreateFences(device, count, flags, fences);
   return fences;
 }

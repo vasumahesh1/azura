@@ -10,7 +10,7 @@ Containers::Vector<U8> FileReader::GetFileContents(const String& filePath, Memor
   Containers::Vector<U8> buffer(allocator);
 
   fileStream.seekg(0, std::ios::end);
-  buffer.ReserveAndResize(U32(fileStream.tellg()));
+  buffer.Resize(U32(fileStream.tellg()));
   fileStream.seekg(0, std::ios::beg);
 
   buffer.Assign(std::istreambuf_iterator<char>(fileStream), std::istreambuf_iterator<char>());

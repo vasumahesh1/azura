@@ -13,6 +13,20 @@
 
 namespace Azura {
 namespace Containers {
+struct ContainerExtent
+{
+  U32 m_size;
+  U32 m_reserveSize;
+
+  explicit ContainerExtent(const U32 size): m_size(size), m_reserveSize(size)
+  {
+  }
+
+  ContainerExtent(const U32 size, const U32 reserveSize) : m_size(size), m_reserveSize(reserveSize)
+  {
+  }
+};
+
 template <typename Type>
 class Vector {
 public:
@@ -22,7 +36,7 @@ public:
   // TODO: Enable When NewDeleteAllocator is ready
   //explicit Vector(UINT maxSize);
   Vector(UINT maxSize, Memory::Allocator& alloc);
-  Vector(U32 size, U32 maxSize, Memory::Allocator& alloc);
+  Vector(ContainerExtent extent, Memory::Allocator& alloc);
   ~Vector();
 
   // Copy Ctor
@@ -48,7 +62,7 @@ public:
 
   /**
   * \brief Appends data to the end of the vector
-  * \param data Data to push
+  * \param args Arguments for emplacement
   */
   template <typename... Args>
   void EmplaceBack(Args ... args);
@@ -77,8 +91,7 @@ public:
    * \param maxSize Maxium Possible Size
    */
   void Reserve(U32 maxSize);
-  void ReserveAndResize(U32 maxSize);
-  void Resize(U32 size);
+  void Resize(U32 maxSize);
 
   /**
    * \brief Checks if the container is empty
@@ -278,16 +291,16 @@ template <typename Type>
 Vector<Type>::Vector(const UINT maxSize, Memory::Allocator& alloc)
   : m_maxSize(maxSize),
     m_allocator(alloc),
-    m_base(m_allocator.RawNewArray<Type>(maxSize)) {
+    m_base(m_allocator.RawNewArray<Type>(m_maxSize)) {
 }
 
 template <typename Type>
-Vector<Type>::Vector(U32 size, U32 maxSize, Memory::Allocator& alloc)
-  : m_maxSize(maxSize),
-    m_size(size),
+Vector<Type>::Vector(ContainerExtent extent, Memory::Allocator& alloc)
+  : m_maxSize(extent.m_reserveSize),
+    m_size(extent.m_size),
     m_allocator(alloc),
-    m_base(m_allocator.RawNewArray<Type>(maxSize)) {
-  assert(size <= maxSize);
+    m_base(m_allocator.RawNewArray<Type>(m_maxSize)) {
+  assert(m_size <= m_maxSize);
 }
 
 template <typename Type>
@@ -421,23 +434,10 @@ void Vector<Type>::Reserve(U32 maxSize) {
 }
 
 template <typename Type>
-void Vector<Type>::ReserveAndResize(U32 maxSize) {
+void Vector<Type>::Resize(U32 maxSize) {
   m_maxSize = maxSize;
   m_size    = maxSize;
   m_base    = m_allocator.RawNewArray<Type>(m_maxSize);
-}
-
-template <typename Type>
-void Vector<Type>::Resize(U32 size) {
-  assert(size <= m_maxSize);
-
-  auto newData = m_allocator.RawNewArray<Type>(size);
-
-  // TODO(vasumahesh1): Check for trivially copyable
-  // Copy over Old Contents
-  std::memcpy(newData.get(), m_base.get(), m_size * sizeof(Type));
-  m_base = newData;
-  m_size = size;
 }
 
 template <typename Type>
