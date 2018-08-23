@@ -3,10 +3,11 @@
 // for memcpy
 #include <cstring>
 #include <iterator>
+#include <cassert>
+#include <functional>
 
 #include "Types.h"
 #include "Memory/Allocator.h"
-#include <cassert>
 #include "Array.h"
 
 #include "Utils/Macros.h"
@@ -274,7 +275,7 @@ public:
 private:
   U32 m_size{0};
   U32 m_maxSize{0};
-  Memory::Allocator& m_allocator;
+  std::reference_wrapper<Memory::Allocator> m_allocator;
   Memory::UniqueArrayPtr<Type> m_base{nullptr};
 };
 
@@ -291,7 +292,7 @@ template <typename Type>
 Vector<Type>::Vector(const UINT maxSize, Memory::Allocator& alloc)
   : m_maxSize(maxSize),
     m_allocator(alloc),
-    m_base(m_allocator.RawNewArray<Type>(m_maxSize)) {
+    m_base(m_allocator.get().RawNewArray<Type>(m_maxSize)) {
 }
 
 template <typename Type>
@@ -299,7 +300,7 @@ Vector<Type>::Vector(ContainerExtent extent, Memory::Allocator& alloc)
   : m_maxSize(extent.m_reserveSize),
     m_size(extent.m_size),
     m_allocator(alloc),
-    m_base(m_allocator.RawNewArray<Type>(m_maxSize)) {
+    m_base(m_allocator.get().RawNewArray<Type>(m_maxSize)) {
   assert(m_size <= m_maxSize);
 }
 
@@ -318,7 +319,7 @@ Vector<Type>::Vector(const Vector& other)
     m_allocator(other.m_allocator) {
 
   // Allocate Memory
-  m_base = m_allocator.RawNewArray<Type>(m_maxSize);
+  m_base = m_allocator.get().RawNewArray<Type>(m_maxSize);
 
   if constexpr (std::is_trivially_copyable_v<Type>) {
     // Copy over Contents
@@ -340,9 +341,10 @@ Vector<Type>::Vector(Vector&& other) noexcept
     m_allocator(other.m_allocator),
     m_base(std::move(other.m_base)) {
   other.m_base = nullptr;
+  other.m_size = 0;
+  other.m_maxSize = 0;
 }
 
-// TODO: error with non trivial types need something similar to typename std::enable_if<!std::is_fundamental<Type>::value>::type
 template <typename Type>
 Vector<Type>& Vector<Type>::operator=(const Vector& other) {
   if (this == &other) {
@@ -354,10 +356,19 @@ Vector<Type>& Vector<Type>::operator=(const Vector& other) {
   m_allocator = other.m_allocator;
 
   // Allocate Memory
-  m_base = m_allocator.RawNewArray<Type>(m_maxSize);
+  m_base = m_allocator.get().RawNewArray<Type>(m_maxSize);
 
-  // Copy over Contents
-  std::memcpy(m_base.get(), other.m_base.get(), m_maxSize * sizeof(Type));
+  if constexpr (std::is_trivially_copyable_v<Type>) {
+    // Copy over Contents
+    std::memcpy(m_base.get(), other.m_base.get(), other.m_size * sizeof(Type));
+  }
+  else
+  {
+    // Manually Copy Construct each item
+    for (U32 idx = 0; idx < other.m_size; ++idx) {
+      new(&m_base[idx]) Type(other.m_base[idx]);
+    }
+  }
 
   return *this;
 }
@@ -370,8 +381,12 @@ Vector<Type>& Vector<Type>::operator=(Vector&& other) noexcept {
 
   m_size      = std::move(other.m_size);
   m_maxSize   = std::move(other.m_maxSize);
-  m_allocator = std::move(other.m_allocator);
+  m_allocator = other.m_allocator;
   m_base      = std::move(other.m_base);
+
+  other.m_base = nullptr;
+  other.m_size = 0;
+  other.m_maxSize = 0;
 
   return *this;
 }
@@ -438,14 +453,14 @@ void Vector<Type>::Remove(const Type& data) {
 template <typename Type>
 void Vector<Type>::Reserve(U32 maxSize) {
   m_maxSize = maxSize;
-  m_base    = m_allocator.RawNewArray<Type>(m_maxSize);
+  m_base    = m_allocator.get().RawNewArray<Type>(m_maxSize);
 }
 
 template <typename Type>
 void Vector<Type>::Resize(U32 maxSize) {
   m_maxSize = maxSize;
   m_size    = maxSize;
-  m_base    = m_allocator.RawNewArray<Type>(m_maxSize);
+  m_base    = m_allocator.get().RawNewArray<Type>(m_maxSize);
 }
 
 template <typename Type>
