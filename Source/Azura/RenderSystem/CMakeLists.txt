@@ -55,8 +55,8 @@ target_compile_definitions(VulkanRenderSystem PUBLIC API_VULKAN=1)
 
 target_include_directories(
   VulkanRenderSystem
-  PRIVATE ${BOOST_ROOT}/ ${VULKAN_1_1_77_0_INCLUDE_DIR}
+  PRIVATE ${BOOST_ROOT}/ ${VULKAN_INCLUDE}
   PUBLIC ${PROJECT_SOURCE_DIR}/Inc
 )
 
-target_link_libraries(VulkanRenderSystem Common ${VULKAN_1_1_77_0_LIB64_DIR}/vulkan-1)
+target_link_libraries(VulkanRenderSystem Common ${VULKAN_LIB}/vulkan-1)

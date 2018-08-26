@@ -35,6 +35,10 @@ endif()
 
 set(BOOST_LIBRARYDIR ${BOOST_ROOT}/stage/lib/ CACHE STRING "" FORCE)
 
+# TODO(vasumahesh1): Respect Architecture here
+set(VULKAN_INCLUDE ${VULKAN_1_1_77_0_INCLUDE_DIR} CACHE STRING "" FORCE)
+set(VULKAN_LIB ${VULKAN_1_1_77_0_LIB64_DIR} CACHE STRING "" FORCE)
+
 add_subdirectory(Common)
 add_subdirectory(Azura)
 # add_subdirectory(Sandbox)
