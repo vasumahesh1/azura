@@ -1,0 +1,7 @@
+AzuraDisableWarningsAsErrors()
+set(YAML_CPP_BUILD_TESTS OFF CACHE BOOL "Disable Yaml CPP Tests" FORCE)
+set(YAML_CPP_BUILD_TOOLS OFF CACHE BOOL "Disable Yaml CPP Build Tools" FORCE)
+add_subdirectory(yaml-cpp)
+AzuraSilenceClangTidy(yaml-cpp)
+AzuraSilenceEnumGuard(yaml-cpp)
+AzuraEnableWarningsAsErrors()
