@@ -27,6 +27,8 @@ services:
 build: off
 
 install:
+  - ps: git submodule update --init --recursive
+
   # -------------------------- CACHE CHECK --------------------------
 
   - ps: ./Scripts/Build/appveyor_cache.ps1
