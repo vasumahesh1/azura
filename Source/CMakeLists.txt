@@ -34,8 +34,11 @@ set(BOOST_LIBRARYDIR ${BOOST_ROOT}/stage/lib/ CACHE STRING "" FORCE)
 set(VULKAN_INCLUDE ${VULKAN_1_1_77_0_INCLUDE_DIR} CACHE STRING "" FORCE)
 set(VULKAN_LIB ${VULKAN_1_1_77_0_LIB64_DIR} CACHE STRING "" FORCE)
 
+add_subdirectory(Imports)
+
 add_subdirectory(Common)
 add_subdirectory(Azura)
+add_subdirectory(Log)
 
 if(DEFINED FORCE_INCLUDE_SUB_DIRECTORIES)
   foreach(dir ${FORCE_INCLUDE_SUB_DIRECTORIES})
