@@ -476,7 +476,7 @@ TEST_F(VectorTest, PopComplexTypes) {
 
 TEST_F(VectorTest, CopyCtorTrivialTypes) {
   alloc.Reset();
-  Vector<int> v1{ 16, alloc };
+  Vector<int> v1{16, alloc};
 
   v1.PushBack(10);
   v1.PushBack(20);
@@ -607,7 +607,7 @@ TEST_F(VectorTest, MoveCtorComplexTypes) {
 
 TEST_F(VectorTest, CopyAssignTrivialTypes) {
   alloc.Reset();
-  Vector<int> v1{ 16, alloc };
+  Vector<int> v1{16, alloc};
 
   v1.PushBack(10);
   v1.PushBack(20);
@@ -734,4 +734,60 @@ TEST_F(VectorTest, MoveAssignComplexTypes) {
 
   ASSERT_EQ(ComplexType::s_moveCtorCalls, expectedMoveCtor);
   ASSERT_EQ(ComplexType::s_moveAssignCalls, expectedMoveAssign);
+}
+
+TEST_F(VectorTest, ContructWithArguments) {
+  alloc.Reset();
+  ComplexType::ResetStats();
+
+  const int expectedCtors      = 4;
+  const int expectedDtors      = 0;
+  const int expectedCopyCtor   = 0;
+  const int expectedCopyAssign = 0;
+  const int expectedMoveCtor   = 0;
+  const int expectedMoveAssign = 0;
+
+  Vector<ComplexType> v{ContainerExtent{4}, alloc, 5};
+
+  ASSERT_EQ(ComplexType::s_ctorCalls, expectedCtors);
+  ASSERT_EQ(ComplexType::s_dtorCalls, expectedDtors);
+
+  ASSERT_EQ(ComplexType::s_copyCtorCalls, expectedCopyCtor);
+  ASSERT_EQ(ComplexType::s_copyAssignCalls, expectedCopyAssign);
+
+  ASSERT_EQ(ComplexType::s_moveCtorCalls, expectedMoveCtor);
+  ASSERT_EQ(ComplexType::s_moveAssignCalls, expectedMoveAssign);
+
+  ASSERT_EQ(5, v[0].Data());
+  ASSERT_EQ(5, v[1].Data());
+  ASSERT_EQ(5, v[2].Data());
+  ASSERT_EQ(5, v[3].Data());
+}
+
+TEST_F(VectorTest, VectorOfVector) {
+  alloc.Reset();
+  ComplexType::ResetStats();
+
+  const int expectedCtors      = 4;
+  const int expectedDtors      = 0;
+  const int expectedCopyCtor   = 0;
+  const int expectedCopyAssign = 0;
+  const int expectedMoveCtor   = 0;
+  const int expectedMoveAssign = 0;
+
+  Vector<Vector<ComplexType>> v{ContainerExtent{2}, alloc, ContainerExtent{2}, alloc, 5};
+
+  ASSERT_EQ(ComplexType::s_ctorCalls, expectedCtors);
+  ASSERT_EQ(ComplexType::s_dtorCalls, expectedDtors);
+
+  ASSERT_EQ(ComplexType::s_copyCtorCalls, expectedCopyCtor);
+  ASSERT_EQ(ComplexType::s_copyAssignCalls, expectedCopyAssign);
+
+  ASSERT_EQ(ComplexType::s_moveCtorCalls, expectedMoveCtor);
+  ASSERT_EQ(ComplexType::s_moveAssignCalls, expectedMoveAssign);
+
+  ASSERT_EQ(5, v[0][0].Data());
+  ASSERT_EQ(5, v[0][1].Data());
+  ASSERT_EQ(5, v[1][0].Data());
+  ASSERT_EQ(5, v[1][1].Data());
 }

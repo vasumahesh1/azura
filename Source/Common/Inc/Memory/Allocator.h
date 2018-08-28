@@ -10,6 +10,22 @@ namespace Impl {
 inline U32 AlignAhead(U32 size, U32 alignment) {
   return (size + (alignment - 1)) & ~(alignment - 1);
 }
+
+inline U32 NearestPowerOf2(U32 number) {
+  if (number == 0) {
+    return 0;
+  }
+
+  number--;
+  number |= number >> 1;
+  number |= number >> 2;
+  number |= number >> 4;
+  number |= number >> 8;
+  number |= number >> 16;
+  number++;
+  return number;
+}
+
 } // namespace Impl
 
 template <typename T>
@@ -100,6 +116,7 @@ UniqueArrayPtr<Type> Allocator::RawNewArray(U32 numElements, Args ... args) {
 
 template <typename Type, bool Construct, typename ... Args>
 UniquePtr<Type> Allocator::InternalAllocate(U32 size, U32 alignment, Args ... args) {
+  alignment     = Impl::NearestPowerOf2(alignment);
   Type* address = reinterpret_cast<Type*>(Allocate(size, alignment));
 
   // Allocator couldn't allocate
@@ -126,6 +143,7 @@ UniqueArrayPtr<Type> Allocator::InternalAllocateArray(U32 elementSize,
                                                       U32 numElements,
                                                       U32 alignment,
                                                       Args ... args) {
+  alignment            = Impl::NearestPowerOf2(alignment);
   const U32 actualSize = Impl::AlignAhead(elementSize, alignment);
   Type* address        = reinterpret_cast<Type*>(Allocate(actualSize * numElements, alignment));
 

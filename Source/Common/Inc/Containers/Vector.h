@@ -14,17 +14,18 @@
 
 namespace Azura {
 namespace Containers {
-struct ContainerExtent
-{
+struct ContainerExtent {
   U32 m_size;
   U32 m_reserveSize;
 
-  explicit ContainerExtent(const U32 size): m_size(size), m_reserveSize(size)
-  {
+  explicit ContainerExtent(const U32 size)
+    : m_size(size),
+      m_reserveSize(size) {
   }
 
-  ContainerExtent(const U32 size, const U32 reserveSize) : m_size(size), m_reserveSize(reserveSize)
-  {
+  ContainerExtent(const U32 size, const U32 reserveSize)
+    : m_size(size),
+      m_reserveSize(reserveSize) {
   }
 };
 
@@ -37,7 +38,10 @@ public:
   // TODO: Enable When NewDeleteAllocator is ready
   //explicit Vector(UINT maxSize);
   Vector(UINT maxSize, Memory::Allocator& alloc);
-  Vector(ContainerExtent extent, Memory::Allocator& alloc);
+
+  template <typename... Args>
+  Vector(ContainerExtent extent, Memory::Allocator& alloc, Args&&... args);
+
   ~Vector();
 
   // Copy Ctor
@@ -296,12 +300,17 @@ Vector<Type>::Vector(const UINT maxSize, Memory::Allocator& alloc)
 }
 
 template <typename Type>
-Vector<Type>::Vector(ContainerExtent extent, Memory::Allocator& alloc)
+template <typename ... Args>
+Vector<Type>::Vector(ContainerExtent extent, Memory::Allocator& alloc, Args&&... args)
   : m_maxSize(extent.m_reserveSize),
     m_size(extent.m_size),
     m_allocator(alloc),
     m_base(m_allocator.get().RawNewArray<Type>(m_maxSize)) {
   assert(m_size <= m_maxSize);
+
+  for (U32 idx = 0; idx < m_size; ++idx) {
+    new(&m_base[idx]) Type(std::forward<Args>(args)...);
+  }
 }
 
 template <typename Type>
@@ -324,9 +333,7 @@ Vector<Type>::Vector(const Vector& other)
   if constexpr (std::is_trivially_copyable_v<Type>) {
     // Copy over Contents
     std::memcpy(m_base.get(), other.m_base.get(), other.m_size * sizeof(Type));
-  }
-  else
-  {
+  } else {
     // Manually Copy Construct each item
     for (U32 idx = 0; idx < other.m_size; ++idx) {
       new(&m_base[idx]) Type(other.m_base[idx]);
@@ -340,8 +347,8 @@ Vector<Type>::Vector(Vector&& other) noexcept
     m_maxSize(std::move(other.m_maxSize)),
     m_allocator(other.m_allocator),
     m_base(std::move(other.m_base)) {
-  other.m_base = nullptr;
-  other.m_size = 0;
+  other.m_base    = nullptr;
+  other.m_size    = 0;
   other.m_maxSize = 0;
 }
 
@@ -361,9 +368,7 @@ Vector<Type>& Vector<Type>::operator=(const Vector& other) {
   if constexpr (std::is_trivially_copyable_v<Type>) {
     // Copy over Contents
     std::memcpy(m_base.get(), other.m_base.get(), other.m_size * sizeof(Type));
-  }
-  else
-  {
+  } else {
     // Manually Copy Construct each item
     for (U32 idx = 0; idx < other.m_size; ++idx) {
       new(&m_base[idx]) Type(other.m_base[idx]);
@@ -384,8 +389,8 @@ Vector<Type>& Vector<Type>::operator=(Vector&& other) noexcept {
   m_allocator = other.m_allocator;
   m_base      = std::move(other.m_base);
 
-  other.m_base = nullptr;
-  other.m_size = 0;
+  other.m_base    = nullptr;
+  other.m_size    = 0;
   other.m_maxSize = 0;
 
   return *this;
