@@ -2,6 +2,7 @@
 #include "Memory/MemoryFactory.h"
 #include "Memory/MonotonicAllocator.h"
 #include "Utils/Macros.h"
+#include "Vulkan/VkShader.h"
 
 using namespace Azura::Containers; // NOLINT - Freedom to use using namespace in CPP files.
 
@@ -88,8 +89,6 @@ void VkDrawablePool::AppendBytes(const Containers::Vector<U8>& buffer) {
 }
 
 void VkDrawablePool::Submit() {
-  // TODO(vasumahesh1): [WON'T RUN]: Shader Stages
-
   m_pipelineFactory.SetInputAssemblyStage(PrimitiveTopology::TriangleList);
   m_pipelineFactory.SetRasterizerStage(CullMode::BackBit, FrontFace::CounterClockwise);
   m_pipelineFactory.SetPipelineLayout(m_pipelineLayout);
@@ -101,7 +100,7 @@ void VkDrawablePool::Submit() {
   m_pipeline = m_pipelineFactory.Submit();
 }
 
-void VkDrawablePool::SetBufferBindings(Slot slot, const Containers::Vector<RawStorageFormat>& strides) {
+void VkDrawablePool::AddBufferBinding(Slot slot, const Containers::Vector<RawStorageFormat>& strides) {
   m_pipelineFactory.BulkAddAttributeDescription(strides, slot.m_binding);
 
   U32 totalBufferStride = 0;
@@ -113,6 +112,12 @@ void VkDrawablePool::SetBufferBindings(Slot slot, const Containers::Vector<RawSt
   totalBufferStride /= 8;
 
   m_pipelineFactory.AddBindingDescription(totalBufferStride, slot);
+}
+
+void VkDrawablePool::AddShader(const Shader& shader) {
+  // NOLINTNEXTLINE(cppcoreguidelines-pro-type-static-cast-downcast)
+  auto vkShader = static_cast<const VkShader&>(shader);
+  m_pipelineFactory.AddShaderStage(vkShader.GetShaderStageInfo());
 }
 
 VkRenderer::VkRenderer(const ApplicationInfo& appInfo,

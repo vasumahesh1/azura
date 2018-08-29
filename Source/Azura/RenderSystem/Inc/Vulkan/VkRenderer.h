@@ -1,9 +1,6 @@
 #pragma once
 
 #include <vulkan/vulkan_core.h>
-#include <cstdint>
-#include <array>
-#include <vector>
 
 #include "Containers/Vector.h"
 #include "Generic/Renderer.h"
@@ -50,7 +47,9 @@ public:
   void AppendBytes(const Containers::Vector<U8>& buffer) override;
 
   void Submit() override;
-  void SetBufferBindings(Slot slot, const Containers::Vector<RawStorageFormat>& strides) override;
+  void AddBufferBinding(Slot slot, const Containers::Vector<RawStorageFormat>& strides) override;
+
+  void AddShader(const Shader& shader) override;
 
 private:
   VkScopedBuffer m_buffer;
@@ -84,8 +83,8 @@ public:
   VkRenderer& operator=(VkRenderer&& other) noexcept = delete;
 
   DrawablePool& CreateDrawablePool(const DrawablePoolCreateInfo& createInfo) override;
-
   void SetDrawablePoolCount(U32 count) override;
+
 private:
   VkWindow& m_window;
   Containers::Vector<VkDrawablePool> m_drawablePools;

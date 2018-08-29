@@ -4,6 +4,7 @@
 #include "Containers/Vector.h"
 
 namespace Azura {
+class Shader;
 
 class Drawable {
 
@@ -70,7 +71,9 @@ public:
 
   virtual Drawable& CreateDrawable() = 0;
 
-  virtual void SetBufferBindings(Slot slot, const Containers::Vector<RawStorageFormat>& strides) = 0;
+  virtual void AddShader(const Shader& shader) = 0;
+
+  virtual void AddBufferBinding(Slot slot, const Containers::Vector<RawStorageFormat>& strides) = 0;
 
   virtual void AppendBytes(const Containers::Vector<U8>& buffer);
 

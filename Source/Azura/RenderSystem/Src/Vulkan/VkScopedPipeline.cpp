@@ -68,9 +68,9 @@ VkPipelineFactory& VkPipelineFactory::AddAttributeDescription(RawStorageFormat r
 VkPipelineFactory& VkPipelineFactory::BulkAddAttributeDescription(const Containers::Vector<RawStorageFormat>& strides,
   U32 binding) {
 
-  for (const auto& rawFormat : strides) {
+  auto bindingInfo = m_bindingMap[binding];
 
-    auto bindingInfo = m_bindingMap[binding];
+  for (const auto& rawFormat : strides) {
 
     const auto format = ToVkFormat(rawFormat);
     VERIFY_OPT(format, "Unknown Format");
@@ -86,10 +86,10 @@ VkPipelineFactory& VkPipelineFactory::BulkAddAttributeDescription(const Containe
 
     bindingInfo.m_offset += GetFormatSize(rawFormat);
 
-    m_bindingMap[binding] = bindingInfo;
-
     m_attributeDescription.PushBack(attrDesc);
   }
+
+  m_bindingMap[binding] = bindingInfo;
 
   return *this;
 }

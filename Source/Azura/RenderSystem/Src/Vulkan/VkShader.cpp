@@ -11,11 +11,10 @@ namespace {
 const String SPRIV_EXT = "spv";
 } // namespace
 
-VkShader::VkShader(VkDevice device, const String& fileName, Memory::Allocator& allocator)
-  : Shader(fileName, SPRIV_EXT),
-  m_attributes(allocator) {
+VkShader::VkShader(VkDevice device, const String& fileName, Memory::Allocator& temporaryAllocator)
+  : Shader(fileName, SPRIV_EXT) {
 
-  const auto fileContents = FileReader::GetFileContents(GetFilePath(), allocator);
+  const auto fileContents = FileReader::GetFileContents(GetFilePath(), temporaryAllocator);
   m_module                = VkCore::CreateShaderModule(device, fileContents);
 }
 
@@ -32,34 +31,5 @@ VkPipelineShaderStageCreateInfo VkShader::GetShaderStageInfo() const {
   return shaderStage;
 }
 
-const Containers::Vector<VkVertexInputAttributeDescription>& VkShader::GetInputAttributeDescription() const {
-  return m_attributes;
-}
-
-void VkShader::SetVertexInputAttributeCount(U32 count) {
-  m_attributes.Reserve(count);
-}
-
-void VkShader::AddVertexAttribute(RawStorageFormat rawFormat, U32 binding) {
-  auto bindingInfo = m_bindingMap[binding];
-
-  const auto format = ToVkFormat(rawFormat);
-  VERIFY_OPT(format, "Unknown Format");
-
-  VkVertexInputAttributeDescription attrDesc;
-  attrDesc.binding  = binding;
-  attrDesc.location = bindingInfo.m_location;
-  attrDesc.format   = format.value();
-  attrDesc.offset   = bindingInfo.m_offset;
-
-  // TODO(vasumahesh1): Handle 64bit formats taking 2 locations
-  bindingInfo.m_location++;
-
-  bindingInfo.m_offset += GetFormatSize(rawFormat);
-
-  m_bindingMap[binding] = bindingInfo;
-
-  m_attributes.PushBack(attrDesc);
-}
 } // namespace Vulkan
 } // namespace Azura
