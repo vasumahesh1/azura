@@ -51,8 +51,8 @@ public:
   Renderer& operator=(const Renderer& rhs) = delete;
   Renderer& operator=(Renderer&& rhs) = delete;
 
-  virtual U32 CreateDrawablePool(const DrawablePoolCreateInfo& createInfo) = 0;
-  virtual DrawablePool& GetDrawablePool(U32 id) = 0;
+  virtual void SetDrawablePoolCount(U32 count) = 0;
+  virtual DrawablePool& CreateDrawablePool(const DrawablePoolCreateInfo& createInfo) = 0;
 
 protected:
   const ApplicationInfo& GetApplicationInfo() const;

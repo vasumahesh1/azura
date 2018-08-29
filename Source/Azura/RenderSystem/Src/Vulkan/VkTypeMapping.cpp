@@ -75,7 +75,7 @@ namespace Vulkan {
   FUNC(PresentModes::Mailbox,                      VK_PRESENT_MODE_MAILBOX_KHR)                    \
   FUNC(PresentModes::FIFO,                         VK_PRESENT_MODE_FIFO_KHR)                       \
   FUNC(PresentModes::FIFORelaxed,                  VK_PRESENT_MODE_FIFO_RELAXED_KHR)               \
-  FUNC(PresentModes::SharedDemandRefesh,           VK_PRESENT_MODE_SHARED_DEMAND_REFRESH_KHR)      \
+  FUNC(PresentModes::SharedDemandRefresh,          VK_PRESENT_MODE_SHARED_DEMAND_REFRESH_KHR)      \
   FUNC(PresentModes::SharedContinuous,             VK_PRESENT_MODE_SHARED_CONTINUOUS_REFRESH_KHR)
 
 

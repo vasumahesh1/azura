@@ -1,6 +1,7 @@
 #pragma once
 
 #include "Types.h"
+#include "Containers/Vector.h"
 
 namespace Azura {
 enum class RawStorageFormat;
@@ -10,37 +11,18 @@ enum class RS {
   UnknownError,
 };
 
-enum class ColorSpace {
-  SRGB,
-  HDR10
-};
+enum class ColorSpace { SRGB, HDR10 };
 
-enum class PresentModes {
-  Immediate,
-  Mailbox,
-  FIFO,
-  FIFORelaxed,
-  SharedDemandRefesh,
-  SharedContinuous
-};
+enum class PresentModes { Immediate, Mailbox, FIFO, FIFORelaxed, SharedDemandRefresh, SharedContinuous };
 
-enum class ShaderStage {
-  All,
-  Vertex,
-  Pixel,
-  Compute,
-  Geometry
-};
+enum class ShaderStage { All, Vertex, Pixel, Compute, Geometry };
 
 enum class BufferUsage {
   Vertex,
   Index,
 };
 
-enum class BufferRate {
-  PerVertex,
-  PerInstance
-};
+enum class BufferUsageRate { PerVertex, PerInstance };
 
 enum class PrimitiveTopology {
   PointList,
@@ -56,22 +38,11 @@ enum class PrimitiveTopology {
   PatchList
 };
 
-enum class CullMode {
-  None,
-  FrontBit,
-  BackBit,
-  FrontAndBack
-};
+enum class CullMode { None, FrontBit, BackBit, FrontAndBack };
 
-enum class FrontFace {
-  CounterClockwise,
-  Clockwise
-};
+enum class FrontFace { CounterClockwise, Clockwise };
 
-enum class DrawType {
-  InstancedIndexed,
-  InstancedIndexedIndirect
-};
+enum class DrawType { InstancedIndexed, InstancedIndexedIndirect };
 
 struct ShaderStageInfo {
   ShaderStage m_stage;
@@ -89,14 +60,24 @@ struct ViewportDimensions {
   float maxDepth;
 };
 
+struct Slot {
+  U32 m_binding;
+  BufferUsageRate m_rate;
+};
+
 struct BufferInfo {
   U32 m_offset;
   U32 m_byteSize;
-  U32 m_binding;
-  RawStorageFormat m_format;
 
-  BufferUsage m_usage;
-  BufferRate m_rate;
+  Containers::Vector<RawStorageFormat> m_strideInfo;
+  Slot m_slot;
+
+  explicit BufferInfo(Memory::Allocator& alloc)
+    : m_offset(0),
+      m_byteSize(0),
+      m_strideInfo(alloc),
+      m_slot() {
+  }
 };
 
 } // namespace Azura

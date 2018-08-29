@@ -14,28 +14,34 @@
 namespace Azura {
 namespace Vulkan {
 
+class VkDrawablePool;
+
 class VkDrawable final : public Drawable {
 public:
-  VkDrawable(U32 vertexCount,
-             U32 indexCount,
-             Memory::Allocator& allocator);
+  VkDrawable(Memory::Allocator& allocator, VkDrawablePool& parentPool);
+
+  void AddVertexData(const Containers::Vector<U8>& buffer, Containers::Vector<RawStorageFormat> strides) override;
+  void AddInstanceData(const Containers::Vector<U8>& buffer, Containers::Vector<RawStorageFormat> strides) override;
+  void SetIndexData(const Containers::Vector<U8>& buffer, RawStorageFormat stride) override;
 
 private:
-  Containers::Vector<BufferInfo> m_offset;
+  VkDrawablePool& m_parentPool;
 };
 
 class VkDrawablePool final : public DrawablePool {
+  friend class VkDrawable;
 
 public:
-  VkDrawablePool(U32 byteSize,
+  VkDrawablePool(U32 numDrawables,
+                 U32 byteSize,
                  VkDevice device,
                  VkBufferUsageFlags usage,
                  VkMemoryPropertyFlags memoryProperties,
                  const VkPhysicalDeviceMemoryProperties& phyDeviceMemoryProperties,
                  Memory::Allocator& allocator);
 
-  U32 CreateDrawable(const DrawableCreateInfo& createInfo) override;
-  Azura::Drawable& GetDrawable(U32 id) override;
+  Drawable& CreateDrawable() override;
+  void AppendBytes(const Containers::Vector<U8>& buffer) override;
 
 private:
   VkScopedBuffer m_buffer;
@@ -57,9 +63,9 @@ public:
   VkRenderer& operator=(const VkRenderer& other) = delete;
   VkRenderer& operator=(VkRenderer&& other) noexcept = delete;
 
-  U32 CreateDrawablePool(const DrawablePoolCreateInfo& createInfo) override;
-  DrawablePool& GetDrawablePool(U32 id) override;
+  DrawablePool& CreateDrawablePool(const DrawablePoolCreateInfo& createInfo) override;
 
+  void SetDrawablePoolCount(U32 count) override;
 private:
   VkWindow& m_window;
   Containers::Vector<VkDrawablePool> m_drawablePools;
@@ -85,6 +91,9 @@ private:
   VkQueue m_graphicsQueue;
   VkQueue m_presentQueue;
   VkQueue m_transferQueue;
+
+  std::reference_wrapper<Memory::Allocator> m_mainAllocator;
+  std::reference_wrapper<Memory::Allocator> m_drawPoolAllocator;
 };
 } // namespace Vulkan
 } // namespace Azura
