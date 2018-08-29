@@ -45,6 +45,9 @@ public:
 
 private:
   VkScopedBuffer m_buffer;
+  VkScopedBuffer m_stagingBuffer;
+  VkDevice m_device;
+
   Containers::Vector<VkDrawable> m_drawables;
 };
 

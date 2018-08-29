@@ -11,7 +11,20 @@ VkScopedBuffer::VkScopedBuffer(VkDevice device,
                                const U32 bufferSize,
                                const VkMemoryPropertyFlags memoryProperties,
                                const VkPhysicalDeviceMemoryProperties& phyDeviceMemoryProperties)
-  : m_device(device) {
+    : m_device(device) {
+  Create(device, usage, bufferSize, memoryProperties, phyDeviceMemoryProperties);
+}
+
+VkScopedBuffer::VkScopedBuffer() : m_device() {}
+
+void VkScopedBuffer::Create(VkDevice device,
+  VkBufferUsageFlags usage,
+  U32 bufferSize,
+  VkMemoryPropertyFlags memoryProperties,
+  const VkPhysicalDeviceMemoryProperties& phyDeviceMemoryProperties) {
+
+  m_device = device;
+
   VkBufferCreateInfo bufferInfo = {};
   bufferInfo.sType              = VK_STRUCTURE_TYPE_BUFFER_CREATE_INFO;
   bufferInfo.size               = bufferSize;
@@ -28,8 +41,8 @@ VkScopedBuffer::VkScopedBuffer(VkDevice device,
   VkMemoryAllocateInfo allocInfo = {};
   allocInfo.sType                = VK_STRUCTURE_TYPE_MEMORY_ALLOCATE_INFO;
   allocInfo.allocationSize       = memRequirements.size;
-  allocInfo.memoryTypeIndex      =
-    VkCore::FindMemoryType(memRequirements.memoryTypeBits, memoryProperties, phyDeviceMemoryProperties);
+  allocInfo.memoryTypeIndex =
+      VkCore::FindMemoryType(memRequirements.memoryTypeBits, memoryProperties, phyDeviceMemoryProperties);
 
   VERIFY_VK_OP(vkAllocateMemory(device, &allocInfo, nullptr, &m_memory), "Failed to allocate buffer memory")
 
@@ -42,7 +55,7 @@ void* VkScopedBuffer::MapMemory(VkDeviceSize size, VkDeviceSize offset) const {
   return data;
 }
 
-void VkScopedBuffer::UnmapMemory() const {
+void VkScopedBuffer::UnMapMemory() const {
   vkUnmapMemory(m_device, m_memory);
 }
 

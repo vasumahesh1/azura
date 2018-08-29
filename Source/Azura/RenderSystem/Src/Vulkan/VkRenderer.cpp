@@ -65,7 +65,9 @@ VkDrawablePool::VkDrawablePool(U32 numDrawables,
                                const VkPhysicalDeviceMemoryProperties& phyDeviceMemoryProperties,
                                Memory::Allocator& allocator)
   : DrawablePool(byteSize, allocator),
-    m_buffer(device, usage, byteSize, memoryProperties, phyDeviceMemoryProperties),
+    m_buffer(device, VK_BUFFER_USAGE_TRANSFER_DST_BIT | usage, byteSize, memoryProperties, phyDeviceMemoryProperties),
+    m_stagingBuffer(device, VK_BUFFER_USAGE_TRANSFER_SRC_BIT, byteSize, memoryProperties, phyDeviceMemoryProperties),
+    m_device(device),
     m_drawables(numDrawables, allocator) {
 }
 
@@ -76,7 +78,14 @@ Drawable& VkDrawablePool::CreateDrawable() {
   return m_drawables[m_drawables.GetSize() - 1];
 }
 
-void VkDrawablePool::AppendBytes(const Containers::Vector<U8>& buffer) { UNUSED(buffer); }
+void VkDrawablePool::AppendBytes(const Containers::Vector<U8>& buffer) {
+  void* data = m_stagingBuffer.MapMemory(buffer.GetSize(), GetOffset());
+  std::memcpy(data, buffer.Data(), buffer.GetSize());
+  m_stagingBuffer.UnMapMemory();
+
+  // Record Offset Changes
+  DrawablePool::AppendBytes(buffer);
+}
 
 VkRenderer::VkRenderer(const ApplicationInfo& appInfo,
                        const DeviceRequirements& deviceRequirements,
@@ -164,14 +173,17 @@ DrawablePool& VkRenderer::CreateDrawablePool(const DrawablePoolCreateInfo& creat
   // TODO(vasumahesh1): This isn't as performance optimized as it should be. We can probably find a way to insert a buffer inside each pool?
   VkDrawablePool pool = VkDrawablePool(createInfo.m_numDrawables, createInfo.m_byteSize, m_device,
                                        VK_BUFFER_USAGE_INDEX_BUFFER_BIT | VK_BUFFER_USAGE_VERTEX_BUFFER_BIT,
-                                       VK_MEMORY_PROPERTY_HOST_VISIBLE_BIT, memProperties, m_drawPoolAllocator);
+                                       VK_MEMORY_PROPERTY_HOST_VISIBLE_BIT | VK_MEMORY_PROPERTY_HOST_COHERENT_BIT,
+                                       memProperties, m_drawPoolAllocator);
 
   m_drawablePools.PushBack(std::move(pool));
 
   return m_drawablePools[m_drawablePools.GetSize() - 1];
 }
 
-void VkRenderer::SetDrawablePoolCount(U32 count) { m_drawablePools.Reserve(count); }
+void VkRenderer::SetDrawablePoolCount(U32 count) {
+  m_drawablePools.Reserve(count);
+}
 
 } // namespace Vulkan
 } // namespace Azura
