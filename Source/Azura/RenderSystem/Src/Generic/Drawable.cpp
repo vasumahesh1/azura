@@ -5,7 +5,6 @@ namespace Azura {
 Drawable::Drawable(Memory::Allocator& allocator)
   : m_vertexBufferInfos(allocator),
     m_instanceBufferInfos(allocator),
-    m_indexBufferInfo(allocator),
     m_vertexCount(0),
     m_indexCount(0),
     m_instanceCount(0),
@@ -51,6 +50,18 @@ void Drawable::SetIndexCount(U32 count) {
 
 void Drawable::SetInstanceCount(U32 count) {
   m_instanceCount = count;
+}
+
+const Containers::Vector<BufferInfo>& Drawable::GetVertexBufferInfos() const {
+  return m_vertexBufferInfos;
+}
+
+const Containers::Vector<BufferInfo>& Drawable::GetInstanceBufferInfos() const {
+  return m_instanceBufferInfos;
+}
+
+const BufferInfo& Drawable::GetIndexBufferInfo() const {
+  return m_indexBufferInfo;
 }
 
 DrawablePool::DrawablePool(const U32 byteSize, Memory::Allocator& allocator)

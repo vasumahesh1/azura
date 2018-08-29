@@ -11,18 +11,37 @@ enum class RS {
   UnknownError,
 };
 
-enum class ColorSpace { SRGB, HDR10 };
+enum class ColorSpace {
+  SRGB,
+  HDR10
+};
 
-enum class PresentModes { Immediate, Mailbox, FIFO, FIFORelaxed, SharedDemandRefresh, SharedContinuous };
+enum class PresentModes {
+  Immediate,
+  Mailbox,
+  FIFO,
+  FIFORelaxed,
+  SharedDemandRefresh,
+  SharedContinuous
+};
 
-enum class ShaderStage { All, Vertex, Pixel, Compute, Geometry };
+enum class ShaderStage {
+  All,
+  Vertex,
+  Pixel,
+  Compute,
+  Geometry
+};
 
 enum class BufferUsage {
   Vertex,
   Index,
 };
 
-enum class BufferUsageRate { PerVertex, PerInstance };
+enum class BufferUsageRate {
+  PerVertex,
+  PerInstance
+};
 
 enum class PrimitiveTopology {
   PointList,
@@ -38,11 +57,22 @@ enum class PrimitiveTopology {
   PatchList
 };
 
-enum class CullMode { None, FrontBit, BackBit, FrontAndBack };
+enum class CullMode {
+  None,
+  FrontBit,
+  BackBit,
+  FrontAndBack
+};
 
-enum class FrontFace { CounterClockwise, Clockwise };
+enum class FrontFace {
+  CounterClockwise,
+  Clockwise
+};
 
-enum class DrawType { InstancedIndexed, InstancedIndexedIndirect };
+enum class DrawType {
+  InstancedIndexed,
+  InstancedIndexedIndirect
+};
 
 struct ShaderStageInfo {
   ShaderStage m_stage;
@@ -52,12 +82,12 @@ struct ShaderStageInfo {
 };
 
 struct ViewportDimensions {
-  float x;
-  float y;
-  float width;
-  float height;
-  float minDepth;
-  float maxDepth;
+  float m_x;
+  float m_y;
+  float m_width;
+  float m_height;
+  float m_minDepth;
+  float m_maxDepth;
 };
 
 struct Slot {
@@ -68,14 +98,11 @@ struct Slot {
 struct BufferInfo {
   U32 m_offset;
   U32 m_byteSize;
-
-  Containers::Vector<RawStorageFormat> m_strideInfo;
   Slot m_slot;
 
-  explicit BufferInfo(Memory::Allocator& alloc)
+  BufferInfo()
     : m_offset(0),
       m_byteSize(0),
-      m_strideInfo(alloc),
       m_slot() {
   }
 };

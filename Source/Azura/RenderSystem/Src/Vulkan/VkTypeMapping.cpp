@@ -112,6 +112,12 @@ namespace Vulkan {
   FUNC(FrontFace::CounterClockwise,                VK_FRONT_FACE_COUNTER_CLOCKWISE)   \
   FUNC(FrontFace::Clockwise,                       VK_FRONT_FACE_CLOCKWISE)
 
+#define BUFFER_USAGE_RATE_TO_VK_VERTEX_INPUT_RATE_MAPPING(FUNC)                                     \
+  FUNC(BufferUsageRate::PerVertex,                VK_VERTEX_INPUT_RATE_VERTEX)                     \
+  FUNC(BufferUsageRate::PerInstance,              VK_VERTEX_INPUT_RATE_INSTANCE)
+
+
+
 #define CREATE_MAPPER_CPP(FROM_FORMAT, TO_FORMAT, MAPPING_TABLE, CASE_MAPPING_FUNC)     \
   CREATE_MAPPER_H(FROM_FORMAT, TO_FORMAT) {                                             \
   switch(inputFormat) {                                                                 \
@@ -143,6 +149,10 @@ CREATE_MAPPER_CPP(CullMode, VkCullModeFlags, CULL_MODE_TO_VK_CULL_MODE_MAPPING, 
 
 CREATE_MAPPER_CPP(FrontFace, VkFrontFace, FRONT_FACE_TO_VK_FRONT_FACE_MAPPING, FORWARD_MAPPING)
 // CREATE_MAPPER_CPP(VkFrontFace, FrontFace, FRONT_FACE_TO_VK_FRONT_FACE_MAPPING, REVERSE_MAPPING)
+
+CREATE_MAPPER_CPP(BufferUsageRate, VkVertexInputRate, BUFFER_USAGE_RATE_TO_VK_VERTEX_INPUT_RATE_MAPPING, FORWARD_MAPPING)
+// CREATE_MAPPER_CPP(VkFrontFace, FrontFace, FRONT_FACE_TO_VK_FRONT_FACE_MAPPING, REVERSE_MAPPING)
+
 
 } // namespace Vulkan
 } // namespace Azura

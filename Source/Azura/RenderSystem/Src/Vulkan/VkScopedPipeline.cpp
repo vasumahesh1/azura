@@ -1,6 +1,7 @@
 #include "Vulkan/VkScopedPipeline.h"
 #include "Vulkan/VkTypeMapping.h"
 #include "Vulkan/VkMacros.h"
+#include "Memory/Allocator.h"
 
 namespace Azura {
 namespace Vulkan {
@@ -13,31 +14,83 @@ VkPipeline VkScopedPipeline::Real() const {
   return m_pipeline;
 }
 
-VkPipelineFactory::VkPipelineFactory(VkDevice device)
-  : m_device(device) {
+// TODO(vasumahesh1): Figure out a way to adjust size properly
+VkPipelineFactory::VkPipelineFactory(VkDevice device, Memory::Allocator& allocator)
+  : m_device(device),
+  m_stages(10, allocator),
+  m_bindingInfo(10, allocator),
+  m_attributeDescription(10, allocator){
 }
 
 VkPipelineFactory& VkPipelineFactory::AddShaderStage(VkPipelineShaderStageCreateInfo shaderStageCreateInfo) {
   // TODO(vasumahesh1): Emplace?
-  m_stages.push_back(shaderStageCreateInfo);
+  m_stages.PushBack(shaderStageCreateInfo);
   return *this;
 }
 
-VkPipelineFactory& VkPipelineFactory::AddBindingDescription(VkVertexInputBindingDescription bindingDesc) {
-  // TODO(vasumahesh1): Emplace?
-  m_bindingInfo.push_back(bindingDesc);
+VkPipelineFactory& VkPipelineFactory::AddBindingDescription(U32 stride, Slot slot) {
+  VkVertexInputBindingDescription bindingDesc;
+
+  const auto rate = ToVkVertexInputRate(slot.m_rate);
+  VERIFY_OPT(rate, "Unknown Format");
+
+  bindingDesc.binding = slot.m_binding;
+  bindingDesc.stride = stride;
+  bindingDesc.inputRate = rate.value();
+
+  m_bindingInfo.PushBack(bindingDesc);
   return *this;
 }
 
-VkPipelineFactory& VkPipelineFactory::AddAttributeDescription(VkVertexInputAttributeDescription attrDesc) {
-  // TODO(vasumahesh1): Emplace?
-  m_attributeDescription.push_back(attrDesc);
+VkPipelineFactory& VkPipelineFactory::AddAttributeDescription(RawStorageFormat rawFormat, U32 binding) {
+  auto bindingInfo = m_bindingMap[binding];
+
+  const auto format = ToVkFormat(rawFormat);
+  VERIFY_OPT(format, "Unknown Format");
+
+  VkVertexInputAttributeDescription attrDesc;
+  attrDesc.binding  = binding;
+  attrDesc.location = bindingInfo.m_location;
+  attrDesc.format   = format.value();
+  attrDesc.offset   = bindingInfo.m_offset;
+
+  // TODO(vasumahesh1): Handle 64bit formats taking 2 locations
+  bindingInfo.m_location++;
+
+  bindingInfo.m_offset += GetFormatSize(rawFormat);
+
+  m_bindingMap[binding] = bindingInfo;
+
+  m_attributeDescription.PushBack(attrDesc);
   return *this;
 }
 
-VkPipelineFactory& VkPipelineFactory::BulkAddAttributeDescription(
-  std::vector<VkVertexInputAttributeDescription>&& attributes) {
-  m_attributeDescription = std::vector<VkVertexInputAttributeDescription>(std::move(attributes));
+VkPipelineFactory& VkPipelineFactory::BulkAddAttributeDescription(const Containers::Vector<RawStorageFormat>& strides,
+  U32 binding) {
+
+  for (const auto& rawFormat : strides) {
+
+    auto bindingInfo = m_bindingMap[binding];
+
+    const auto format = ToVkFormat(rawFormat);
+    VERIFY_OPT(format, "Unknown Format");
+
+    VkVertexInputAttributeDescription attrDesc;
+    attrDesc.binding = binding;
+    attrDesc.location = bindingInfo.m_location;
+    attrDesc.format = format.value();
+    attrDesc.offset = bindingInfo.m_offset;
+
+    // TODO(vasumahesh1): Handle 64bit formats taking 2 locations
+    bindingInfo.m_location++;
+
+    bindingInfo.m_offset += GetFormatSize(rawFormat);
+
+    m_bindingMap[binding] = bindingInfo;
+
+    m_attributeDescription.PushBack(attrDesc);
+  }
+
   return *this;
 }
 
@@ -58,12 +111,12 @@ VkPipelineFactory& VkPipelineFactory::SetInputAssemblyStage(PrimitiveTopology to
 VkPipelineFactory& VkPipelineFactory::SetViewportStage(ViewportDimensions viewportDimensions,
                                                        const VkScopedSwapChain& swapChain) {
   VkViewport viewport;
-  viewport.x        = viewportDimensions.x;
-  viewport.y        = viewportDimensions.y;
-  viewport.width    = viewportDimensions.width;
-  viewport.height   = viewportDimensions.height;
-  viewport.minDepth = viewportDimensions.minDepth;
-  viewport.maxDepth = viewportDimensions.maxDepth;
+  viewport.x        = viewportDimensions.m_x;
+  viewport.y        = viewportDimensions.m_y;
+  viewport.width    = viewportDimensions.m_width;
+  viewport.height   = viewportDimensions.m_height;
+  viewport.minDepth = viewportDimensions.m_minDepth;
+  viewport.maxDepth = viewportDimensions.m_maxDepth;
 
   // TODO(vasumahesh1): Might need custom scissoring
   VkRect2D scissor;
@@ -142,15 +195,15 @@ VkPipelineFactory& VkPipelineFactory::SetRenderPass(VkRenderPass renderPass) {
 VkScopedPipeline VkPipelineFactory::Submit() const {
   VkPipelineVertexInputStateCreateInfo vertexInputInfo = {};
   vertexInputInfo.sType                                = VK_STRUCTURE_TYPE_PIPELINE_VERTEX_INPUT_STATE_CREATE_INFO;
-  vertexInputInfo.vertexBindingDescriptionCount        = U32(m_bindingInfo.size());
-  vertexInputInfo.pVertexBindingDescriptions           = m_bindingInfo.data();
-  vertexInputInfo.vertexAttributeDescriptionCount      = U32(m_attributeDescription.size());
-  vertexInputInfo.pVertexAttributeDescriptions         = m_attributeDescription.data();
+  vertexInputInfo.vertexBindingDescriptionCount        = m_bindingInfo.GetSize();
+  vertexInputInfo.pVertexBindingDescriptions           = m_bindingInfo.Data();
+  vertexInputInfo.vertexAttributeDescriptionCount      = m_attributeDescription.GetSize();
+  vertexInputInfo.pVertexAttributeDescriptions         = m_attributeDescription.Data();
 
   VkGraphicsPipelineCreateInfo pipelineInfo = {};
   pipelineInfo.sType                        = VK_STRUCTURE_TYPE_GRAPHICS_PIPELINE_CREATE_INFO;
-  pipelineInfo.stageCount                   = U32(m_stages.size());
-  pipelineInfo.pStages                      = m_stages.data();
+  pipelineInfo.stageCount                   = m_stages.GetSize();
+  pipelineInfo.pStages                      = m_stages.Data();
   pipelineInfo.pVertexInputState            = &vertexInputInfo;
   pipelineInfo.pInputAssemblyState          = &m_inputAssemblyStage;
   pipelineInfo.pViewportState               = &m_viewportStage;

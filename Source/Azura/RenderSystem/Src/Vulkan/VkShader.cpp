@@ -12,7 +12,8 @@ const String SPRIV_EXT = "spv";
 } // namespace
 
 VkShader::VkShader(VkDevice device, const String& fileName, Memory::Allocator& allocator)
-  : Shader(fileName, SPRIV_EXT) {
+  : Shader(fileName, SPRIV_EXT),
+  m_attributes(allocator) {
 
   const auto fileContents = FileReader::GetFileContents(GetFilePath(), allocator);
   m_module                = VkCore::CreateShaderModule(device, fileContents);
@@ -31,8 +32,12 @@ VkPipelineShaderStageCreateInfo VkShader::GetShaderStageInfo() const {
   return shaderStage;
 }
 
-const std::vector<VkVertexInputAttributeDescription>& VkShader::GetInputAttributeDescription() const {
+const Containers::Vector<VkVertexInputAttributeDescription>& VkShader::GetInputAttributeDescription() const {
   return m_attributes;
+}
+
+void VkShader::SetVertexInputAttributeCount(U32 count) {
+  m_attributes.Reserve(count);
 }
 
 void VkShader::AddVertexAttribute(RawStorageFormat rawFormat, U32 binding) {
@@ -54,7 +59,7 @@ void VkShader::AddVertexAttribute(RawStorageFormat rawFormat, U32 binding) {
 
   m_bindingMap[binding] = bindingInfo;
 
-  m_attributes.push_back(attrDesc);
+  m_attributes.PushBack(attrDesc);
 }
 } // namespace Vulkan
 } // namespace Azura

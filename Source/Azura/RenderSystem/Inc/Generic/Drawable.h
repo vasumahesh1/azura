@@ -18,9 +18,9 @@ public:
 
   void SetVertexDataCount(U32 count);
   void SetInstanceDataCount(U32 count);
-  virtual void AddVertexData(const Containers::Vector<U8>& buffer, Containers::Vector<RawStorageFormat> strides) = 0;
-  virtual void AddInstanceData(const Containers::Vector<U8>& buffer, Containers::Vector<RawStorageFormat> strides) = 0;
-  virtual void SetIndexData(const Containers::Vector<U8>& buffer, RawStorageFormat stride) = 0;
+  virtual void AddVertexData(const Containers::Vector<U8>& buffer, Slot slot) = 0;
+  virtual void AddInstanceData(const Containers::Vector<U8>& buffer, Slot slot) = 0;
+  virtual void SetIndexData(const Containers::Vector<U8>& buffer) = 0;
   virtual void SetDrawMode(DrawType drawMode);
 
   U32 GetVertexCount() const;
@@ -29,9 +29,13 @@ public:
 
   void SetVertexCount(U32 count);
   void SetInstanceCount(U32 count);
+  void SetIndexCount(U32 count);
+
+  const Containers::Vector<BufferInfo>& GetVertexBufferInfos() const;
+  const Containers::Vector<BufferInfo>& GetInstanceBufferInfos() const;
+  const BufferInfo& GetIndexBufferInfo() const;
 
 protected:
-  void SetIndexCount(U32 count);
 
   Memory::Allocator& GetAllocator() const;
 
@@ -66,7 +70,11 @@ public:
 
   virtual Drawable& CreateDrawable() = 0;
 
+  virtual void SetBufferBindings(Slot slot, const Containers::Vector<RawStorageFormat>& strides) = 0;
+
   virtual void AppendBytes(const Containers::Vector<U8>& buffer);
+
+  virtual void Submit() = 0;
 
 protected:
   U32 GetOffset() const;

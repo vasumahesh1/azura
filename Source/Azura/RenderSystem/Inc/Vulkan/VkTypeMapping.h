@@ -38,5 +38,7 @@ CREATE_MAPPER_H(CullMode, VkCullModeFlags);
 CREATE_MAPPER_H(FrontFace, VkFrontFace);
 // CREATE_MAPPER_H(VkFrontFace, FrontFace);
 
+CREATE_MAPPER_H(BufferUsageRate, VkVertexInputRate);
+
 } // namespace Vulkan
 } // namespace Azura

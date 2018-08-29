@@ -10,6 +10,7 @@
 #include "VkCore.h"
 #include "VkScopedBuffer.h"
 #include "VkWindow.h"
+#include "VkScopedPipeline.h"
 
 namespace Azura {
 namespace Vulkan {
@@ -20,9 +21,9 @@ class VkDrawable final : public Drawable {
 public:
   VkDrawable(Memory::Allocator& allocator, VkDrawablePool& parentPool);
 
-  void AddVertexData(const Containers::Vector<U8>& buffer, Containers::Vector<RawStorageFormat> strides) override;
-  void AddInstanceData(const Containers::Vector<U8>& buffer, Containers::Vector<RawStorageFormat> strides) override;
-  void SetIndexData(const Containers::Vector<U8>& buffer, RawStorageFormat stride) override;
+  void AddVertexData(const Containers::Vector<U8>& buffer, Slot slot) override;
+  void AddInstanceData(const Containers::Vector<U8>& buffer, Slot slot) override;
+  void SetIndexData(const Containers::Vector<U8>& buffer) override;
 
 private:
   VkDrawablePool& m_parentPool;
@@ -37,16 +38,32 @@ public:
                  VkDevice device,
                  VkBufferUsageFlags usage,
                  VkMemoryPropertyFlags memoryProperties,
+                 VkPipelineLayout pipelineLayout,
+    VkRenderPass renderPass,
+    const ViewportDimensions& viewport,
                  const VkPhysicalDeviceMemoryProperties& phyDeviceMemoryProperties,
-                 Memory::Allocator& allocator);
+                 const VkScopedSwapChain& swapChain,
+                 Memory::Allocator& allocator,
+                 Memory::Allocator& allocatorTemporary);
 
   Drawable& CreateDrawable() override;
   void AppendBytes(const Containers::Vector<U8>& buffer) override;
+
+  void Submit() override;
+  void SetBufferBindings(Slot slot, const Containers::Vector<RawStorageFormat>& strides) override;
 
 private:
   VkScopedBuffer m_buffer;
   VkScopedBuffer m_stagingBuffer;
   VkDevice m_device;
+  VkRenderPass m_renderPass;
+  ViewportDimensions m_viewport;
+
+  VkScopedPipeline m_pipeline;
+  VkPipelineLayout m_pipelineLayout;
+  VkPipelineFactory m_pipelineFactory;
+
+  const VkScopedSwapChain& m_swapChain;
 
   Containers::Vector<VkDrawable> m_drawables;
 };
@@ -57,7 +74,7 @@ public:
              const DeviceRequirements& deviceRequirements,
              const SwapChainRequirement& swapChainRequirement,
              Memory::Allocator& mainAllocator,
-    Memory::Allocator& drawAllocator,
+             Memory::Allocator& drawAllocator,
              VkWindow& window);
   ~VkRenderer();
 

@@ -13,48 +13,37 @@ VkDrawable::VkDrawable(Memory::Allocator& allocator, VkDrawablePool& parentPool)
     m_parentPool(parentPool) {
 }
 
-void VkDrawable::AddVertexData(const Containers::Vector<U8>& buffer, Containers::Vector<RawStorageFormat> strides) {
-  STACK_ALLOCATOR(Temporary, Memory::MonotonicAllocator, 512);
-
-  BufferInfo info = BufferInfo(allocatorTemporary);
-
-  info.m_strideInfo = strides;
+void VkDrawable::AddVertexData(const Containers::Vector<U8>& buffer, Slot slot) {
+  BufferInfo info = BufferInfo();
 
   info.m_byteSize = buffer.GetSize();
   info.m_offset   = m_parentPool.GetOffset();
+  info.m_slot     = slot;
 
   m_vertexBufferInfos.PushBack(std::move(info));
 
   m_parentPool.AppendBytes(buffer);
 }
 
-void VkDrawable::AddInstanceData(const Containers::Vector<U8>& buffer, Containers::Vector<RawStorageFormat> strides) {
-  STACK_ALLOCATOR(Temporary, Memory::MonotonicAllocator, 512);
-
-  BufferInfo info = BufferInfo(allocatorTemporary);
-
-  info.m_strideInfo = strides;
+void VkDrawable::AddInstanceData(const Containers::Vector<U8>& buffer, Slot slot) {
+  BufferInfo info = BufferInfo();
 
   info.m_byteSize = buffer.GetSize();
   info.m_offset   = m_parentPool.GetOffset();
+  info.m_slot     = slot;
 
   m_instanceBufferInfos.PushBack(std::move(info));
 
   m_parentPool.AppendBytes(buffer);
 }
 
-void VkDrawable::SetIndexData(const Containers::Vector<U8>& buffer, RawStorageFormat stride) {
-  m_indexBufferInfo = BufferInfo(GetAllocator());
-
-  m_indexBufferInfo.m_strideInfo.Resize(1);
-  m_indexBufferInfo.m_strideInfo.PushBack(stride);
+void VkDrawable::SetIndexData(const Containers::Vector<U8>& buffer) {
+  m_indexBufferInfo = BufferInfo();
 
   m_indexBufferInfo.m_byteSize = buffer.GetSize();
   m_indexBufferInfo.m_offset   = m_parentPool.GetOffset();
 
   m_parentPool.AppendBytes(buffer);
-
-  SetIndexCount(buffer.GetSize() / GetFormatSize(stride));
 }
 
 VkDrawablePool::VkDrawablePool(U32 numDrawables,
@@ -62,12 +51,23 @@ VkDrawablePool::VkDrawablePool(U32 numDrawables,
                                VkDevice device,
                                VkBufferUsageFlags usage,
                                VkMemoryPropertyFlags memoryProperties,
+                               VkPipelineLayout pipelineLayout,
+                               VkRenderPass renderPass,
+                               const ViewportDimensions& viewport,
                                const VkPhysicalDeviceMemoryProperties& phyDeviceMemoryProperties,
-                               Memory::Allocator& allocator)
+                               const VkScopedSwapChain& swapChain,
+                               Memory::Allocator& allocator,
+                               Memory::Allocator& allocatorTemporary)
   : DrawablePool(byteSize, allocator),
     m_buffer(device, VK_BUFFER_USAGE_TRANSFER_DST_BIT | usage, byteSize, memoryProperties, phyDeviceMemoryProperties),
     m_stagingBuffer(device, VK_BUFFER_USAGE_TRANSFER_SRC_BIT, byteSize, memoryProperties, phyDeviceMemoryProperties),
     m_device(device),
+    m_renderPass(renderPass),
+    m_viewport(viewport),
+    m_pipeline({}),
+    m_pipelineLayout(pipelineLayout),
+    m_pipelineFactory(device, allocatorTemporary),
+    m_swapChain(swapChain),
     m_drawables(numDrawables, allocator) {
 }
 
@@ -85,6 +85,34 @@ void VkDrawablePool::AppendBytes(const Containers::Vector<U8>& buffer) {
 
   // Record Offset Changes
   DrawablePool::AppendBytes(buffer);
+}
+
+void VkDrawablePool::Submit() {
+  // TODO(vasumahesh1): [WON'T RUN]: Shader Stages
+
+  m_pipelineFactory.SetInputAssemblyStage(PrimitiveTopology::TriangleList);
+  m_pipelineFactory.SetRasterizerStage(CullMode::BackBit, FrontFace::CounterClockwise);
+  m_pipelineFactory.SetPipelineLayout(m_pipelineLayout);
+  m_pipelineFactory.SetRenderPass(m_renderPass);
+  m_pipelineFactory.SetViewportStage(m_viewport, m_swapChain);
+  m_pipelineFactory.SetMultisampleStage();
+  m_pipelineFactory.SetColorBlendStage();
+
+  m_pipeline = m_pipelineFactory.Submit();
+}
+
+void VkDrawablePool::SetBufferBindings(Slot slot, const Containers::Vector<RawStorageFormat>& strides) {
+  m_pipelineFactory.BulkAddAttributeDescription(strides, slot.m_binding);
+
+  U32 totalBufferStride = 0;
+
+  for (const auto& stride : strides) {
+    totalBufferStride += GetFormatSize(stride);
+  }
+
+  totalBufferStride /= 8;
+
+  m_pipelineFactory.AddBindingDescription(totalBufferStride, slot);
 }
 
 VkRenderer::VkRenderer(const ApplicationInfo& appInfo,
@@ -167,14 +195,19 @@ VkRenderer::VkRenderer(const ApplicationInfo& appInfo,
 VkRenderer::~VkRenderer() = default;
 
 DrawablePool& VkRenderer::CreateDrawablePool(const DrawablePoolCreateInfo& createInfo) {
+  STACK_ALLOCATOR(Temporary, Memory::MonotonicAllocator, 2048);
+
   VkPhysicalDeviceMemoryProperties memProperties;
   vkGetPhysicalDeviceMemoryProperties(m_physicalDevice, &memProperties);
+
+  // TODO(vasumahesh1): [WON'T RUN]: Get viewport from Window?
+  ViewportDimensions viewport{};
 
   // TODO(vasumahesh1): This isn't as performance optimized as it should be. We can probably find a way to insert a buffer inside each pool?
   VkDrawablePool pool = VkDrawablePool(createInfo.m_numDrawables, createInfo.m_byteSize, m_device,
                                        VK_BUFFER_USAGE_INDEX_BUFFER_BIT | VK_BUFFER_USAGE_VERTEX_BUFFER_BIT,
                                        VK_MEMORY_PROPERTY_HOST_VISIBLE_BIT | VK_MEMORY_PROPERTY_HOST_COHERENT_BIT,
-                                       memProperties, m_drawPoolAllocator);
+                                       m_pipelineLayout, m_renderPass, viewport, memProperties, m_swapChain, m_drawPoolAllocator, allocatorTemporary);
 
   m_drawablePools.PushBack(std::move(pool));
 

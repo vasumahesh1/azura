@@ -1,9 +1,10 @@
 #pragma once
 #include <vulkan/vulkan_core.h>
-#include <vector>
 
 #include "Generic/GenericTypes.h"
+#include "Containers/Vector.h"
 #include "Vulkan/VkTypes.h"
+#include <map>
 
 namespace Azura {
 namespace Vulkan {
@@ -21,14 +22,14 @@ private:
 class VkPipelineFactory {
 
 public:
-  VkPipelineFactory(VkDevice device);
+  VkPipelineFactory(VkDevice device, Memory::Allocator& allocator);
 
   VkPipelineFactory& AddShaderStage(VkPipelineShaderStageCreateInfo shaderStageCreateInfo);
 
-  VkPipelineFactory& AddBindingDescription(VkVertexInputBindingDescription bindingDesc);
-  VkPipelineFactory& AddAttributeDescription(VkVertexInputAttributeDescription attrDesc);
+  VkPipelineFactory& AddBindingDescription(U32 stride, Slot slot);
+  VkPipelineFactory& AddAttributeDescription(RawStorageFormat rawFormat, U32 binding);
+  VkPipelineFactory& BulkAddAttributeDescription(const Containers::Vector<RawStorageFormat>& strides, U32 binding);
 
-  VkPipelineFactory& BulkAddAttributeDescription(std::vector<VkVertexInputAttributeDescription>&& attributes);
   VkPipelineFactory& SetInputAssemblyStage(PrimitiveTopology topology);
   VkPipelineFactory& SetViewportStage(ViewportDimensions viewportDimensions, const VkScopedSwapChain& swapChain);
   VkPipelineFactory& SetRasterizerStage(CullMode cullMode, FrontFace faceOrder);
@@ -39,13 +40,21 @@ public:
 
   VkScopedPipeline Submit() const;
 
+
 private:
+  struct BindingInfo {
+    U32 m_offset{0};
+    U32 m_location{0};
+  };
+
   const VkDevice m_device;
 
-  // TODO(vasumahesh1): use Azura Vector
-  std::vector<VkPipelineShaderStageCreateInfo> m_stages;
-  std::vector<VkVertexInputBindingDescription> m_bindingInfo;
-  std::vector<VkVertexInputAttributeDescription> m_attributeDescription;
+  // TODO(vasumahesh1): Make our own map
+  std::map<U32, BindingInfo> m_bindingMap;
+
+  Containers::Vector<VkPipelineShaderStageCreateInfo> m_stages;
+  Containers::Vector<VkVertexInputBindingDescription> m_bindingInfo;
+  Containers::Vector<VkVertexInputAttributeDescription> m_attributeDescription;
 
   VkPipelineInputAssemblyStateCreateInfo m_inputAssemblyStage{};
   VkPipelineViewportStateCreateInfo m_viewportStage{};

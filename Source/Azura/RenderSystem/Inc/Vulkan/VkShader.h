@@ -3,7 +3,6 @@
 #include "Generic/Shader.h"
 #include <vulkan/vulkan_core.h>
 #include <map>
-#include <vector>
 
 namespace Azura {
 namespace Memory {
@@ -22,8 +21,9 @@ public:
 
   VkPipelineShaderStageCreateInfo GetShaderStageInfo() const;
 
-  const std::vector<VkVertexInputAttributeDescription>& GetInputAttributeDescription() const;
+  const Containers::Vector<VkVertexInputAttributeDescription>& GetInputAttributeDescription() const;
 
+  void SetVertexInputAttributeCount(U32 count);
   void AddVertexAttribute(RawStorageFormat rawFormat, U32 binding);
 
 private:
@@ -32,9 +32,11 @@ private:
     U32 m_location{0};
   };
 
+  // TODO(vasumahesh1): Make our own map
   std::map<U32, BindingInfo> m_bindingMap;
+
   VkShaderModule m_module{};
-  std::vector<VkVertexInputAttributeDescription> m_attributes;
+  Containers::Vector<VkVertexInputAttributeDescription> m_attributes;
 };
 
 
