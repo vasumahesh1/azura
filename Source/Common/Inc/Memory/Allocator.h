@@ -125,7 +125,7 @@ UniqueArrayPtr<Type> Allocator::InternalAllocateArray(U32 elementSize, U32 numEl
 
   if constexpr (Construct) {
     for (U32 idx = 0; idx < numElements; ++idx) {
-      new (address + (idx * actualSize)) Type(args...);
+      new (address + (idx * elementSize)) Type(args...);
     }
   }
 
