@@ -1,4 +1,4 @@
-version: 1.0.{build}
+version: Azura_Build_{build}
 
 image: Visual Studio 2017
 
@@ -29,6 +29,7 @@ services:
 build: off
 
 install:
+  - ps: dir "C:/Program Files (x86)/Microsoft Visual Studio/2017/Community/VC/Tools/MSVC/"
   - ps: git submodule -q update --init
 
   # -------------------------- CACHE CHECK --------------------------
