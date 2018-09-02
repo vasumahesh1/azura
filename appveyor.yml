@@ -5,51 +5,53 @@ image: Visual Studio 2017
 clone_folder: c:\azura
 
 environment:
-  NINJA_URL: https://github.com/ninja-build/ninja/releases/download/v1.6.0/ninja-win.zip
-  VULKAN_URL: https://vulkan.lunarg.com/sdk/download/1.1.77.0/windows/VulkanSDK-1.1.77.0-Installer.exe
-  BOOST_URL: https://dl.bintray.com/boostorg/release/1.68.0/source/boost_1_68_0.7z
+	NINJA_URL: https://github.com/ninja-build/ninja/releases/download/v1.6.0/ninja-win.zip
+	VULKAN_URL: https://vulkan.lunarg.com/sdk/download/1.1.77.0/windows/VulkanSDK-1.1.77.0-Installer.exe
+	BOOST_URL: https://dl.bintray.com/boostorg/release/1.68.0/source/boost_1_68_0.7z
+	GLFW_64_URL: https://github.com/glfw/glfw/releases/download/3.2.1/glfw-3.2.1.bin.WIN64.zip
+	GLFW_32_URL: https://github.com/glfw/glfw/releases/download/3.2.1/glfw-3.2.1.bin.WIN32.zip
 
-  matrix:
-    - BUILD: 'DEBUG'
-      TARGET: 'Win64'
+	matrix:
+		- BUILD: 'DEBUG'
+			TARGET: 'Win64'
 
-    - BUILD: 'RELEASE'
-      TARGET: 'Win64'
+		- BUILD: 'RELEASE'
+			TARGET: 'Win64'
 
 matrix:
-  fast_finish: true
+	fast_finish: true
 
 platform:
-  - x64
+	- x64
 
 services:
 
 build: off
 
 install:
-  - ps: git submodule -q update --init
+	- ps: git submodule -q update --init
 
-  # -------------------------- CACHE CHECK --------------------------
+	# -------------------------- CACHE CHECK --------------------------
 
-  - ps: ./Scripts/Build/appveyor_cache.ps1
+	- ps: ./Scripts/Build/appveyor_cache.ps1
 
-  # -------------------------- CACHE CHECK --------------------------
+	# -------------------------- CACHE CHECK --------------------------
 
-  # Copy Ninja from Cache to Repo
-  - ps: mkdir C:\azura\External\Windows\Tools\Ninja\ -ea 0 > $null
-  - ps: Copy-Item -Path "C:\AppveyorCache\Ninja\*" -Destination "C:\azura\External\Windows\Tools\Ninja\" -Recurse -Force
-  - ps: C:\azura\External\Windows\Tools\Ninja\ninja.exe --version
+	# Copy Ninja from Cache to Repo
+	- ps: mkdir C:\azura\External\Windows\Tools\Ninja\ -ea 0 > $null
+	- ps: Copy-Item -Path "C:\AppveyorCache\Ninja\*" -Destination "C:\azura\External\Windows\Tools\Ninja\" -Recurse -Force
+	- ps: C:\azura\External\Windows\Tools\Ninja\ninja.exe --version
 
 before_test:
-  - cd C:\azura
-  - C:\Python27\python.exe build.py --project all --target %TARGET% --configFile ./External/AppveyorConfig.ini --cmakeConfigFile="External/AppveyorCMakeConfig.ini" --build %BUILD% --includeTests
+	- cd C:\azura
+	- C:\Python27\python.exe build.py --project all --target %TARGET% --configFile ./External/AppveyorConfig.ini --cmakeConfigFile="External/AppveyorCMakeConfig.ini" --build %BUILD% --includeTests
 
 test_script:
 
 after_test:
 
 cache:
-  - C:\AppveyorCache\ -> .cicache
+	- C:\AppveyorCache\ -> .cicache
 
 # artifacts:
 #   # pushing a single file
