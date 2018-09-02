@@ -10,8 +10,10 @@ source_group(Utils\\Src REGULAR_EXPRESSION Src/Utils/.*)
 # -----------  Main Target  -----------
 
 set(
-  SOURCES "Inc/Memory/Allocator.h" "Src/Memory/Allocator.cpp"
-  # "Src/Memory/StackAllocator.cpp"
+  SOURCES
+  # Memory
+  "Inc/Memory/Allocator.h"
+  "Src/Memory/Allocator.cpp"
   "Inc/Memory/MemoryBuffer.h"
   "Inc/Memory/MemoryFactory.h"
   "Src/Memory/MemoryBuffer.cpp"
@@ -22,9 +24,17 @@ set(
   "Src/Memory/MonotonicAllocator.cpp"
   "Inc/Memory/RangeAllocator.h"
   "Src/Memory/RangeAllocator.cpp"
-  # "Inc/Memory/PoolAllocator.h"
+
+  # Containers
   "Inc/Containers/Array.h"
   "Inc/Containers/Vector.h"
+  "Inc/Containers/ArrayBatch.h"
+
+  # Compiler Warnings Includes
+  "Inc/CompileWarnings/EnableSclSecureWarnings.h"
+  "Inc/CompileWarnings/DisableSclSecureWarnings.h"
+
+  # Utils
   "Inc/Types.h"
   "Inc/Utils/Macros.h"
   "Inc/Utils/Exceptions.h"
@@ -32,7 +42,6 @@ set(
   "Src/Utils/FileReader.cpp"
   "Inc/Utils/Hash.h"
   "Src/Utils/Hash.cpp"
-  "Inc/Containers/ArrayBatch.h"
 )
 
 add_library(Common ${SOURCES})

@@ -18,20 +18,26 @@ struct ContainerExtent {
   U32 m_size;
   U32 m_reserveSize;
 
-  explicit ContainerExtent(const U32 size) : m_size(size), m_reserveSize(size) {}
+  explicit ContainerExtent(const U32 size)
+    : m_size(size),
+      m_reserveSize(size) {
+  }
 
-  ContainerExtent(const U32 size, const U32 reserveSize) : m_size(size), m_reserveSize(reserveSize) {}
+  ContainerExtent(const U32 size, const U32 reserveSize)
+    : m_size(size),
+      m_reserveSize(reserveSize) {
+  }
 };
 
 template <typename Type>
 class Vector {
- public:
+public:
   Vector() = default;
   explicit Vector(Memory::Allocator& alloc);
 
   Vector(UINT maxSize, Memory::Allocator& alloc);
 
-  Vector(std::initializer_list<Type> list, Memory::Allocator& alloc);
+  Vector(const std::initializer_list<Type>& list, Memory::Allocator& alloc);
 
   template <typename... Args>
   Vector(ContainerExtent extent, Memory::Allocator& alloc, Args&&... args);
@@ -64,7 +70,7 @@ class Vector {
    * \param args Arguments for emplacement
    */
   template <typename... Args>
-  void EmplaceBack(Args... args);
+  void EmplaceBack(Args ... args);
 
   /**
    * \brief Removes the last element in the vector array
@@ -118,6 +124,7 @@ class Vector {
   U32 GetSize() const {
     return m_size;
   }
+
   U32 GetMaxSize() const {
     return m_maxSize;
   }
@@ -126,19 +133,22 @@ class Vector {
   void Assign(InputIt first, InputIt last);
 
   class Iterator {
-   public:
-    Iterator()                      = default;
-    ~Iterator()                     = default;
+  public:
+    Iterator() = default;
+    ~Iterator() = default;
     Iterator(const Iterator& other) = default;
     Iterator& operator=(const Iterator& other) = default;
 
     using iterator_category = std::random_access_iterator_tag;
-    using value_type        = Type;
-    using difference_type   = int;
-    using pointer           = Type*;
-    using reference         = Type&;
+    using value_type = Type;
+    using difference_type = int;
+    using pointer = Type*;
+    using reference = Type&;
 
-    Iterator(const Vector* ptr, int index) : mPtr(ptr), mIndex(index) {}
+    Iterator(const Vector* ptr, int index)
+      : mPtr(ptr),
+        mIndex(index) {
+    }
 
     Iterator(Iterator&& other) noexcept = default;
     Iterator& operator=(Iterator&& other) noexcept = default;
@@ -241,7 +251,7 @@ class Vector {
       return mPtr->operator[](mIndex + idx);
     }
 
-   private:
+  private:
     const Vector<Type>* mPtr{nullptr};
     int mIndex{-1};
   };
@@ -270,41 +280,55 @@ class Vector {
    */
   Iterator end() const;
 
- private:
+private:
   U32 m_size{0};
   U32 m_maxSize{0};
   std::reference_wrapper<Memory::Allocator> m_allocator;
   Memory::UniqueArrayPtr<Type> m_base{nullptr};
 };
 
-// TODO: Enable When NewDeleteAllocator is ready
-// template <typename Type>
-// Vector<Type>::Vector(const UINT maxSize) : m_maxSize(maxSize), m_allocator(alloc),
-// m_base(m_allocator->NewObjects<Type>(maxSize)) {}
-
 template <typename Type>
-Vector<Type>::Vector(Memory::Allocator& alloc) : m_allocator(alloc) {}
+Vector<Type>::Vector(Memory::Allocator& alloc)
+  : m_allocator(alloc) {
+}
 
 template <typename Type>
 Vector<Type>::Vector(const UINT maxSize, Memory::Allocator& alloc)
-    : m_maxSize(maxSize), m_allocator(alloc), m_base(m_allocator.get().RawNewArray<Type>(m_maxSize)) {}
+  : m_maxSize(maxSize),
+    m_allocator(alloc),
+    m_base(m_allocator.get().RawNewArray<Type>(m_maxSize)) {
+}
 
 template <typename Type>
-Vector<Type>::Vector(std::initializer_list<Type> list, Memory::Allocator& alloc) : m_maxSize(list.size()), m_allocator(alloc), m_base(m_allocator.get().RawNewArray<Type>(m_maxSize)) {
-  std::copy(list.begin(), list.end(), m_base.get());
+Vector<Type>::Vector(const std::initializer_list<Type>& list, Memory::Allocator& alloc)
+  : m_size(U32(list.size())),
+    m_maxSize(U32(list.size())),
+    m_allocator(alloc),
+    m_base(m_allocator.get().RawNewArray<Type>(m_maxSize)) {
+
+  if constexpr (std::is_trivially_copyable_v<Type>) {
+    // Copy over Contents
+    std::memcpy(m_base.get(), list.begin(), m_size * sizeof(Type));
+  } else {
+    const Type* start = list.begin();
+    // Manually Copy Construct each item
+    for (U32 idx = 0; idx < m_size; ++idx) {
+      new(&m_base[idx]) Type(*(start + idx));
+    }
+  }
 }
 
 template <typename Type>
 template <typename... Args>
 Vector<Type>::Vector(ContainerExtent extent, Memory::Allocator& alloc, Args&&... args)
-    : m_maxSize(extent.m_reserveSize),
-      m_size(extent.m_size),
-      m_allocator(alloc),
-      m_base(m_allocator.get().RawNewArray<Type>(m_maxSize)) {
+  : m_maxSize(extent.m_reserveSize),
+    m_size(extent.m_size),
+    m_allocator(alloc),
+    m_base(m_allocator.get().RawNewArray<Type>(m_maxSize)) {
   assert(m_size <= m_maxSize);
 
   for (U32 idx = 0; idx < m_size; ++idx) {
-    new (&m_base[idx]) Type(std::forward<Args>(args)...);
+    new(&m_base[idx]) Type(std::forward<Args>(args)...);
   }
 }
 
@@ -318,28 +342,29 @@ Vector<Type>::~Vector() {
 
 template <typename Type>
 Vector<Type>::Vector(const Vector& other)
-    : m_size(other.m_size), m_maxSize(other.m_maxSize), m_allocator(other.m_allocator) {
+  : m_size(other.m_size),
+    m_maxSize(other.m_maxSize),
+    m_allocator(other.m_allocator) {
   // Allocate Memory
   m_base = m_allocator.get().RawNewArray<Type>(m_maxSize);
 
   if constexpr (std::is_trivially_copyable_v<Type>) {
     // Copy over Contents
     std::memcpy(m_base.get(), other.m_base.get(), other.m_size * sizeof(Type));
-  }
-  else {
+  } else {
     // Manually Copy Construct each item
     for (U32 idx = 0; idx < other.m_size; ++idx) {
-      new (&m_base[idx]) Type(other.m_base[idx]);
+      new(&m_base[idx]) Type(other.m_base[idx]);
     }
   }
 }
 
 template <typename Type>
 Vector<Type>::Vector(Vector&& other) noexcept
-    : m_size(std::move(other.m_size)),
-      m_maxSize(std::move(other.m_maxSize)),
-      m_allocator(other.m_allocator),
-      m_base(std::move(other.m_base)) {
+  : m_size(std::move(other.m_size)),
+    m_maxSize(std::move(other.m_maxSize)),
+    m_allocator(other.m_allocator),
+    m_base(std::move(other.m_base)) {
   other.m_base    = nullptr;
   other.m_size    = 0;
   other.m_maxSize = 0;
@@ -361,11 +386,10 @@ Vector<Type>& Vector<Type>::operator=(const Vector& other) {
   if constexpr (std::is_trivially_copyable_v<Type>) {
     // Copy over Contents
     std::memcpy(m_base.get(), other.m_base.get(), other.m_size * sizeof(Type));
-  }
-  else {
+  } else {
     // Manually Copy Construct each item
     for (U32 idx = 0; idx < other.m_size; ++idx) {
-      new (&m_base[idx]) Type(other.m_base[idx]);
+      new(&m_base[idx]) Type(other.m_base[idx]);
     }
   }
 
@@ -393,22 +417,22 @@ Vector<Type>& Vector<Type>::operator=(Vector&& other) noexcept {
 template <typename Type>
 void Vector<Type>::PushBack(const Type& data) {
   assert(m_size < m_maxSize);
-  new (&m_base[m_size]) Type(data);
+  new(&m_base[m_size]) Type(data);
   ++m_size;
 }
 
 template <typename Type>
 void Vector<Type>::PushBack(Type&& data) {
   assert(m_size < m_maxSize);
-  new (&m_base[m_size]) Type(std::move(data));
+  new(&m_base[m_size]) Type(std::move(data));
   ++m_size;
 }
 
 template <typename Type>
 template <typename... Args>
-void Vector<Type>::EmplaceBack(Args... args) {
+void Vector<Type>::EmplaceBack(Args ... args) {
   assert(m_size < m_maxSize);
-  new (&m_base[m_size]) Type(args...);
+  new(&m_base[m_size]) Type(args...);
   ++m_size;
 }
 
@@ -440,7 +464,7 @@ void Vector<Type>::Remove(const Type& data) {
   const int idx = FindFirst(data);
 
   if (idx >= 0) {
-    for (U32 itr = idx + 1; itr < m_size; ++itr) {
+    for (U32 itr      = idx + 1; itr < m_size; ++itr) {
       m_base[itr - 1] = m_base[itr];
     }
 
@@ -470,7 +494,7 @@ template <typename Type>
 void Vector<Type>::InsertAt(U32 idx, const Type& data) {
   assert(idx >= 0 && idx <= m_size);
 
-  for (U32 itr = m_size; itr > idx; --itr) {
+  for (U32 itr  = m_size; itr > idx; --itr) {
     m_base[itr] = m_base[itr - 1];
   }
 
@@ -502,8 +526,8 @@ Type& Vector<Type>::operator[](const U32 idx) const {
 template <typename Type>
 template <class InputIt>
 void Vector<Type>::Assign(InputIt first, InputIt last) {
-  U32 count = 0;
-  for (auto itr = first; itr != last; ++itr) {
+  U32 count           = 0;
+  for (auto itr       = first; itr != last; ++itr) {
     operator[](count) = *itr;
     ++count;
   }
@@ -528,5 +552,5 @@ template <typename Type>
 typename Vector<Type>::Iterator Vector<Type>::end() const {
   return End();
 }
-}  // namespace Containers
-}  // namespace Azura
+} // namespace Containers
+} // namespace Azura
