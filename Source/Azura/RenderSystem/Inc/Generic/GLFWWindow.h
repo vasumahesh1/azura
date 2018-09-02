@@ -6,19 +6,18 @@ struct GLFWwindow;
 namespace Azura {
 
 class GLFWWindow : public Window {
-
-public:
+ public:
   GLFWWindow(String title, U32 width, U32 height);
   bool Initialize() override;
   void Destroy() override;
 
   void StartListening() override;
 
-protected:
+ protected:
   GLFWwindow* GetGLFWHandle() const;
 
-private:
+ private:
   GLFWwindow* p_window;
 };
 
-} // namespace Azura
+}  // namespace Azura

@@ -6,10 +6,7 @@
 
 namespace Azura {
 
-GLFWWindow::GLFWWindow(String title, U32 width, U32 height)
-  : Window(title, width, height),
-    p_window(nullptr) {
-}
+GLFWWindow::GLFWWindow(String title, U32 width, U32 height) : Window(title, width, height), p_window(nullptr) {}
 
 bool GLFWWindow::Initialize() {
   if (glfwInit() == GLFW_FALSE) {
@@ -39,4 +36,4 @@ GLFWwindow* GLFWWindow::GetGLFWHandle() const {
   return p_window;
 }
 
-} // namespace Azura
+}  // namespace Azura

@@ -1,5 +1,5 @@
-#include <utility>
 #include "Generic/Window.h"
+#include <utility>
 
 namespace Azura {
 Window::Window(String title, const U32 width, const U32 height)
@@ -11,6 +11,17 @@ Window::Window(String title, const U32 width, const U32 height)
 
 void Window::SetUpdateCallback(std::function<void()> eventUpdate) {
   p_updateFunc = eventUpdate;
+}
+
+ViewportDimensions Window::GetViewport() const {
+  ViewportDimensions dimension{};
+  dimension.m_x        = 0;
+  dimension.m_y        = 0;
+  dimension.m_width    = static_cast<float>(m_width);
+  dimension.m_height   = static_cast<float>(m_height);
+  dimension.m_minDepth = 0.0f;
+  dimension.m_maxDepth = 1.0f;
+  return dimension;
 }
 
 U32 Window::GetWidth() const {

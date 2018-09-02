@@ -203,16 +203,14 @@ DrawablePool& VkRenderer::CreateDrawablePool(const DrawablePoolCreateInfo& creat
   VkPhysicalDeviceMemoryProperties memProperties;
   vkGetPhysicalDeviceMemoryProperties(m_physicalDevice, &memProperties);
 
-  // TODO(vasumahesh1): [WON'T RUN]: Get viewport from WindowSurface?
-  ViewportDimensions viewport{};
-
   // TODO(vasumahesh1): This isn't as performance optimized as it should be. We can probably find a way to insert a
   // buffer inside each pool?
-  VkDrawablePool pool =
-      VkDrawablePool(createInfo.m_numDrawables, createInfo.m_byteSize, m_device,
-                     VK_BUFFER_USAGE_INDEX_BUFFER_BIT | VK_BUFFER_USAGE_VERTEX_BUFFER_BIT,
-                     VK_MEMORY_PROPERTY_HOST_VISIBLE_BIT | VK_MEMORY_PROPERTY_HOST_COHERENT_BIT, m_pipelineLayout,
-                     m_renderPass, viewport, memProperties, m_swapChain, m_drawPoolAllocator, allocatorTemporary);
+  // Also, using default Viewport.
+  VkDrawablePool pool = VkDrawablePool(createInfo.m_numDrawables, createInfo.m_byteSize, m_device,
+                                       VK_BUFFER_USAGE_INDEX_BUFFER_BIT | VK_BUFFER_USAGE_VERTEX_BUFFER_BIT,
+                                       VK_MEMORY_PROPERTY_HOST_VISIBLE_BIT | VK_MEMORY_PROPERTY_HOST_COHERENT_BIT,
+                                       m_pipelineLayout, m_renderPass, m_window.GetViewport(), memProperties,
+                                       m_swapChain, m_drawPoolAllocator, allocatorTemporary);
 
   m_drawablePools.PushBack(std::move(pool));
 

@@ -1,9 +1,15 @@
 #include "Generic/RenderSystem.h"
-#include "Utils/Macros.h"
+#include "Generic/Window.h"
+#include "Vulkan/VkRenderer.h"
 
 namespace Azura {
-Renderer* RenderSystem::CreateRenderer(Memory::Allocator& allocator) {
-  UNUSED(allocator);
-  return nullptr;
+std::unique_ptr<Renderer> RenderSystem::CreateRenderer(const ApplicationInfo& appInfo,
+                                                       const DeviceRequirements& deviceRequirements,
+                                                       const SwapChainRequirement& swapChainRequirement,
+                                                       Memory::Allocator& mainAllocator,
+                                                       Memory::Allocator& drawAllocator,
+                                                       Window& window) {
+  return std::make_unique<Vulkan::VkRenderer>(appInfo, deviceRequirements, swapChainRequirement, mainAllocator,
+                                              drawAllocator, window);
 }
 }  // namespace Azura
