@@ -6,12 +6,10 @@
 namespace Azura {
 namespace Vulkan {
 
-namespace VkPlatform
-{
-  VkSurfaceKHR CreateSurface(const void* windowHandle, VkInstance instance);
+namespace VkPlatform {
+VkSurfaceKHR CreateSurface(const void* windowHandle, VkInstance instance);
+void GetInstanceExtensions(Containers::Vector<const char*>& extensions);
+}  // namespace VkPlatform
 
-  void GetInstanceExtensions(Containers::Vector<const char*>& extensions);
-} // namespace VkPlatform
-
-} // namespace Vulkan
-} // namespace Azura
+}  // namespace Vulkan
+}  // namespace Azura

@@ -1,24 +1,20 @@
 #include "Memory/HeapMemoryBuffer.h"
-#include <cstdlib>
 #include <cassert>
+#include <cstdlib>
 
 #include "Utils/Macros.h"
 
 namespace Azura {
 namespace Memory {
 HeapMemoryBuffer::HeapMemoryBuffer(const U32 blockSize)
-// NOLINTNEXTLINE(cppcoreguidelines-pro-type-reinterpret-cast, cppcoreguidelines-no-malloc)
-  : MemoryBuffer(blockSize, reinterpret_cast<AddressPtr>(malloc(blockSize))),
-    m_isAllocationAligned(false) {
-}
+    // NOLINTNEXTLINE(cppcoreguidelines-pro-type-reinterpret-cast, cppcoreguidelines-no-malloc)
+    : MemoryBuffer(blockSize, reinterpret_cast<AddressPtr>(malloc(blockSize))), m_isAllocationAligned(false) {}
 
 HeapMemoryBuffer::HeapMemoryBuffer(U32 blockSize, U32 alignment)
-  : MemoryBuffer(blockSize,
-                 // NOLINTNEXTLINE(cppcoreguidelines-pro-type-reinterpret-cast, cppcoreguidelines-no-malloc)
-                 reinterpret_cast<AddressPtr>(ALIGNED_ALLOC(alignment, blockSize
-                 ))),
-    m_isAllocationAligned(true) {
-}
+    : MemoryBuffer(blockSize,
+                   // NOLINTNEXTLINE(cppcoreguidelines-pro-type-reinterpret-cast, cppcoreguidelines-no-malloc)
+                   reinterpret_cast<AddressPtr>(ALIGNED_ALLOC(alignment, blockSize))),
+      m_isAllocationAligned(true) {}
 
 HeapMemoryBuffer::~HeapMemoryBuffer() {
   if (m_memoryBlock == 0u) {
@@ -26,11 +22,12 @@ HeapMemoryBuffer::~HeapMemoryBuffer() {
   }
 
   if (m_isAllocationAligned) {
-    // NOLINTNEXTLINE(cppcoreguidelines-owning-memory, cppcoreguidelines-no-malloc, cppcoreguidelines-pro-type-reinterpret-cast)
-    ALIGNED_FREE(reinterpret_cast<void*>(m_memoryBlock));
-  } else {
-    // NOLINTNEXTLINE(cppcoreguidelines-owning-memory, cppcoreguidelines-no-malloc, cppcoreguidelines-pro-type-reinterpret-cast)
-    free(reinterpret_cast<void*>(m_memoryBlock));
+    // NOLINTNEXTLINE(cppcoreguidelines-owning-memory, cppcoreguidelines-pro-type-reinterpret-cast)
+    ALIGNED_FREE(reinterpret_cast<void*>(m_memoryBlock));  // NOLINT(cppcoreguidelines-no-malloc)
+  }
+  else {
+    // NOLINTNEXTLINE(cppcoreguidelines-owning-memory, cppcoreguidelines-pro-type-reinterpret-cast)
+    free(reinterpret_cast<void*>(m_memoryBlock));  // NOLINT(cppcoreguidelines-no-malloc)
   }
 }
 
@@ -54,5 +51,5 @@ UPTR HeapMemoryBuffer::AllocateRaw(U32 size) {
 
   return addr;
 }
-} // namespace Memory
-} // namespace Azura
+}  // namespace Memory
+}  // namespace Azura

@@ -1,8 +1,8 @@
 #pragma once
 
+#include <functional>
 #include "Types.h"
 #include "Utils/Macros.h"
-#include <functional>
 
 namespace Azura {
 namespace Memory {
@@ -26,7 +26,7 @@ inline U32 NearestPowerOf2(U32 number) {
   return number;
 }
 
-} // namespace Impl
+}  // namespace Impl
 
 template <typename T>
 using UniquePtr = std::unique_ptr<T, std::function<void(T*)>>;
@@ -41,9 +41,8 @@ struct MemoryRange {
   MemoryRange(U32 offset, U32 size);
 };
 
-
 class Allocator {
-public:
+ public:
   Allocator(void* resource, U32 size);
   Allocator(AddressPtr resource, U32 size);
   virtual ~Allocator();
@@ -57,65 +56,66 @@ public:
   Allocator& operator=(Allocator&& other) noexcept = default;
 
   template <typename Type, typename... Args>
-  UniquePtr<Type> New(Args ... args);
-
-  template <typename Type, typename ...Args>
-  UniqueArrayPtr<Type> NewArray(U32 numElements, Args ...args);
+  UniquePtr<Type> New(Args... args);
 
   template <typename Type, typename... Args>
-  UniquePtr<Type> RawNew(Args ... args);
+  UniqueArrayPtr<Type> NewArray(U32 numElements, Args... args);
 
-  template <typename Type, typename ...Args>
-  UniqueArrayPtr<Type> RawNewArray(U32 numElements, Args ...args);
+  template <typename Type, typename... Args>
+  UniquePtr<Type> RawNew(Args... args);
+
+  template <typename Type, typename... Args>
+  UniqueArrayPtr<Type> RawNewArray(U32 numElements, Args... args);
 
 #ifdef BUILD_UNIT_TEST
-  AddressPtr GetBasePtr() const { return BasePtr(); };
-  AddressPtr GetSize() const { return Size(); };
+  AddressPtr GetBasePtr() const {
+    return BasePtr();
+  };
+  AddressPtr GetSize() const {
+    return Size();
+  };
 #endif
 
-protected:
+ protected:
   U32 Size() const;
   AddressPtr BasePtr() const;
 
   virtual void* Allocate(U32 size, U32 alignment) = 0;
-  virtual void Deallocate(void* address) = 0;
+  virtual void Deallocate(void* address)          = 0;
   virtual void Reset();
 
-private:
+ private:
   template <typename Type, bool Construct, typename... Args>
-  UniquePtr<Type> InternalAllocate(U32 size, U32 alignment, Args ... args);
-  template <class Type, bool Construct, class ... Args>
-  UniqueArrayPtr<Type> InternalAllocateArray(U32 elementSize,
-                                             U32 numElements,
-                                             U32 alignment,
-                                             Args ... args);
+  UniquePtr<Type> InternalAllocate(U32 size, U32 alignment, Args... args);
+  template <class Type, bool Construct, class... Args>
+  UniqueArrayPtr<Type> InternalAllocateArray(U32 elementSize, U32 numElements, U32 alignment, Args... args);
 
   AddressPtr m_basePtr;
   U32 m_size;
 };
 
 template <typename Type, typename... Args>
-UniquePtr<Type> Allocator::New(Args ... args) {
+UniquePtr<Type> Allocator::New(Args... args) {
   return InternalAllocate<Type, true, Args...>(sizeof(Type), sizeof(Type), args...);
 }
 
 template <typename Type, typename... Args>
-UniqueArrayPtr<Type> Allocator::NewArray(U32 numElements, Args ... args) {
+UniqueArrayPtr<Type> Allocator::NewArray(U32 numElements, Args... args) {
   return InternalAllocateArray<Type, true, Args...>(sizeof(Type), numElements, sizeof(Type), args...);
 }
 
-template <typename Type, typename ... Args>
-UniquePtr<Type> Allocator::RawNew(Args ... args) {
+template <typename Type, typename... Args>
+UniquePtr<Type> Allocator::RawNew(Args... args) {
   return InternalAllocate<Type, false, Args...>(sizeof(Type), sizeof(Type), args...);
 }
 
 template <typename Type, typename... Args>
-UniqueArrayPtr<Type> Allocator::RawNewArray(U32 numElements, Args ... args) {
+UniqueArrayPtr<Type> Allocator::RawNewArray(U32 numElements, Args... args) {
   return InternalAllocateArray<Type, false, Args...>(sizeof(Type), numElements, sizeof(Type), args...);
 }
 
-template <typename Type, bool Construct, typename ... Args>
-UniquePtr<Type> Allocator::InternalAllocate(U32 size, U32 alignment, Args ... args) {
+template <typename Type, bool Construct, typename... Args>
+UniquePtr<Type> Allocator::InternalAllocate(U32 size, U32 alignment, Args... args) {
   alignment     = Impl::NearestPowerOf2(alignment);
   Type* address = reinterpret_cast<Type*>(Allocate(size, alignment));
 
@@ -125,11 +125,10 @@ UniquePtr<Type> Allocator::InternalAllocate(U32 size, U32 alignment, Args ... ar
   }
 
   if constexpr (Construct) {
-    new(address) Type(args...);
+    new (address) Type(args...);
   }
 
-  const auto customDeleter = [&](Type* data)
-  {
+  const auto customDeleter = [&](Type* data) {
     data->~Type();
     Deallocate(data);
   };
@@ -138,11 +137,8 @@ UniquePtr<Type> Allocator::InternalAllocate(U32 size, U32 alignment, Args ... ar
   return result;
 }
 
-template <typename Type, bool Construct, typename ... Args>
-UniqueArrayPtr<Type> Allocator::InternalAllocateArray(U32 elementSize,
-                                                      U32 numElements,
-                                                      U32 alignment,
-                                                      Args ... args) {
+template <typename Type, bool Construct, typename... Args>
+UniqueArrayPtr<Type> Allocator::InternalAllocateArray(U32 elementSize, U32 numElements, U32 alignment, Args... args) {
   alignment            = Impl::NearestPowerOf2(alignment);
   const U32 actualSize = Impl::AlignAhead(elementSize, alignment);
   Type* address        = reinterpret_cast<Type*>(Allocate(actualSize * numElements, alignment));
@@ -154,16 +150,15 @@ UniqueArrayPtr<Type> Allocator::InternalAllocateArray(U32 elementSize,
 
   if constexpr (Construct) {
     for (U32 idx = 0; idx < numElements; ++idx) {
-      new(address + (idx * actualSize)) Type(args...);
+      new (address + (idx * actualSize)) Type(args...);
     }
   }
 
-  const auto customDeleter = [&](Type* data)
-  {
+  const auto customDeleter = [&](Type* data) {
     // TODO(vasumahesh1): Investigate Lambda Capture
     const U32 dataSize = numElements;
     if constexpr (Construct) {
-      Type* ptr    = data;
+      Type* ptr = data;
       for (U32 idx = 0; idx < dataSize; ++idx) {
         UNUSED(ptr->~Type());
         ++ptr;
@@ -177,5 +172,5 @@ UniqueArrayPtr<Type> Allocator::InternalAllocateArray(U32 elementSize,
   return result;
 }
 
-} // namespace Memory
-} // namespace Azura
+}  // namespace Memory
+}  // namespace Azura

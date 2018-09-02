@@ -1,22 +1,25 @@
 #pragma once
 
-#include "Types.h"
 #include "Containers/Vector.h"
+#include "Types.h"
 
 namespace Azura {
 enum class RawStorageFormat;
 
-enum class RS {
+enum class RS
+{
   Success = 0,
   UnknownError,
 };
 
-enum class ColorSpace {
+enum class ColorSpace
+{
   SRGB,
   HDR10
 };
 
-enum class PresentModes {
+enum class PresentModes
+{
   Immediate,
   Mailbox,
   FIFO,
@@ -25,7 +28,8 @@ enum class PresentModes {
   SharedContinuous
 };
 
-enum class ShaderStage {
+enum class ShaderStage
+{
   All,
   Vertex,
   Pixel,
@@ -33,17 +37,20 @@ enum class ShaderStage {
   Geometry
 };
 
-enum class BufferUsage {
+enum class BufferUsage
+{
   Vertex,
   Index,
 };
 
-enum class BufferUsageRate {
+enum class BufferUsageRate
+{
   PerVertex,
   PerInstance
 };
 
-enum class PrimitiveTopology {
+enum class PrimitiveTopology
+{
   PointList,
   LineList,
   LineStrip,
@@ -57,19 +64,22 @@ enum class PrimitiveTopology {
   PatchList
 };
 
-enum class CullMode {
+enum class CullMode
+{
   None,
   FrontBit,
   BackBit,
   FrontAndBack
 };
 
-enum class FrontFace {
+enum class FrontFace
+{
   CounterClockwise,
   Clockwise
 };
 
-enum class DrawType {
+enum class DrawType
+{
   InstancedIndexed,
   InstancedIndexedIndirect
 };
@@ -100,11 +110,7 @@ struct BufferInfo {
   U32 m_byteSize;
   Slot m_slot;
 
-  BufferInfo()
-    : m_offset(0),
-      m_byteSize(0),
-      m_slot() {
-  }
+  BufferInfo() : m_offset(0), m_byteSize(0), m_slot() {}
 };
 
-} // namespace Azura
+}  // namespace Azura

@@ -2,13 +2,11 @@
 
 #include "Types.h"
 
-namespace Azura
-{
+namespace Azura {
 // Stack Allocator based on a header file template provided in
 // Game Engine Architecture - Jason Gregory
-class StackAllocator
-{
-public:
+class StackAllocator {
+ public:
   using Marker = UPTR;
 
   // Allocates a pool of memory for the stack to use
@@ -31,9 +29,9 @@ public:
   // Empty the stack memory
   void Clear();
 
-private:
+ private:
   Marker mCurrentMarker;
   Marker mBaseMarker;
   U32 mSize;
 };
-} // namespace Azura
+}  // namespace Azura

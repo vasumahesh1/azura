@@ -1,8 +1,8 @@
-#include <limits>
 #include <iostream>
+#include <limits>
 
-#include "Types.h"
 #include "RangeAllocator_test.h"
+#include "Types.h"
 
 struct Sample {
   int arg1;
@@ -15,19 +15,19 @@ struct Sample {
 };
 
 TEST(RangeAllocatorTest, Constructs) {
-  Azura::Memory::HeapMemoryBuffer myBuffer = Azura::Memory::HeapMemoryBuffer(256);
+  Azura::Memory::HeapMemoryBuffer myBuffer     = Azura::Memory::HeapMemoryBuffer(256);
   Azura::Memory::RangeAllocator rangeAllocator = Azura::Memory::RangeAllocator(myBuffer, 128);
 }
 
 TEST(RangeAllocatorTest, AllocateNormalData) {
-  Azura::Memory::HeapMemoryBuffer myBuffer = Azura::Memory::HeapMemoryBuffer(256);
+  Azura::Memory::HeapMemoryBuffer myBuffer     = Azura::Memory::HeapMemoryBuffer(256);
   Azura::Memory::RangeAllocator rangeAllocator = Azura::Memory::RangeAllocator(myBuffer, 128);
 
-  const auto basePtr = rangeAllocator.GetBasePtr();
+  const auto basePtr  = rangeAllocator.GetBasePtr();
   const auto baseSize = rangeAllocator.GetSize();
 
   auto ptr = rangeAllocator.New<int>(0);
-  
+
   ASSERT_NE(ptr, nullptr);
   ASSERT_EQ(*ptr, 0);
 
@@ -35,7 +35,7 @@ TEST(RangeAllocatorTest, AllocateNormalData) {
 
   ASSERT_EQ(*ptr, 99.0);
 
-  const auto& freeRanges = rangeAllocator.GetFreeRanges();
+  const auto& freeRanges     = rangeAllocator.GetFreeRanges();
   const auto& occupiedRanges = rangeAllocator.GetOccupiedRanges();
 
   ASSERT_EQ(freeRanges.size(), 1);
@@ -50,19 +50,19 @@ TEST(RangeAllocatorTest, AllocateNormalData) {
 }
 
 TEST(RangeAllocatorTest, DeallocateNormalData) {
-  Azura::Memory::HeapMemoryBuffer myBuffer = Azura::Memory::HeapMemoryBuffer(256);
+  Azura::Memory::HeapMemoryBuffer myBuffer     = Azura::Memory::HeapMemoryBuffer(256);
   Azura::Memory::RangeAllocator rangeAllocator = Azura::Memory::RangeAllocator(myBuffer, 128);
 
-  const auto basePtr = rangeAllocator.GetBasePtr();
+  const auto basePtr  = rangeAllocator.GetBasePtr();
   const auto baseSize = rangeAllocator.GetSize();
 
   // BLock Allocate
   {
     const auto ptr = rangeAllocator.New<int>(0);
-    *ptr = 99;
+    *ptr           = 99;
   }
 
-  const auto& freeRanges = rangeAllocator.GetFreeRanges();
+  const auto& freeRanges     = rangeAllocator.GetFreeRanges();
   const auto& occupiedRanges = rangeAllocator.GetOccupiedRanges();
 
   ASSERT_EQ(freeRanges.size(), 2);

@@ -2,10 +2,7 @@
 
 namespace Azura {
 
-Shader::Shader(const String& filePath, const String& extension)
-  : m_filePath(filePath + "." + extension),
-    m_stage() {
-}
+Shader::Shader(const String& filePath, const String& extension) : m_filePath(filePath + "." + extension), m_stage() {}
 
 void Shader::SetStage(const ShaderStage stage) {
   m_stage = stage;
@@ -27,4 +24,4 @@ ShaderStage Shader::GetShaderStage() const {
   return m_stage;
 }
 
-} // namespace Azura
+}  // namespace Azura

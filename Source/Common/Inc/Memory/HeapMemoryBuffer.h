@@ -1,14 +1,14 @@
 #pragma once
 
-#include "Types.h"
 #include "MemoryBuffer.h"
+#include "Types.h"
 
 namespace Azura {
 namespace Memory {
 class HeapMemoryBuffer final : public MemoryBuffer {
   using Byte = U8;
 
-public:
+ public:
   /**
    * \brief Allocate a Block on the Heap for Usage
    * \param blockSize Size of Memory Block to allocate
@@ -38,9 +38,9 @@ public:
   void* Allocate(U32 size) override;
   void Deallocate(void* address) override;
 
-private:
+ private:
   UPTR AllocateRaw(U32 size);
   bool m_isAllocationAligned;
 };
-} // namespace Memory
-} // namespace Azura
+}  // namespace Memory
+}  // namespace Azura

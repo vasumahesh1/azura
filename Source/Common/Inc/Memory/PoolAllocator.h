@@ -5,87 +5,87 @@
 #include "Types.h"
 
 namespace Azura {
-  template<typename T>
-    struct PoolNode {
-      T mData;
-      PoolNode* pNext{nullptr};
-    };
+template <typename T>
+struct PoolNode {
+  T mData;
+  PoolNode* pNext{nullptr};
+};
 
-  template<typename T>
-    class PoolAllocator {
-      using Node = PoolNode<T>;
-      public:
-      PoolAllocator(U32 totalElements);
-      ~PoolAllocator();
+template <typename T>
+class PoolAllocator {
+  using Node = PoolNode<T>;
 
-      T* allocate();
-      void deallocate(T* data);
+ public:
+  PoolAllocator(U32 totalElements);
+  ~PoolAllocator();
 
-      private:
-      U32 mCount;
-      Node* pHead;
-      Node* pTail;
-      void* pMemory;
-    };
+  T* allocate();
+  void deallocate(T* data);
 
+ private:
+  U32 mCount;
+  Node* pHead;
+  Node* pTail;
+  void* pMemory;
+};
 
-  template<typename T>
-    PoolAllocator<T>::PoolAllocator(U32 totalElements) : mCount(totalElements) {
-      pMemory = malloc(sizeof(Node) * mCount);
-      pHead = (Node*) pMemory;
+template <typename T>
+PoolAllocator<T>::PoolAllocator(U32 totalElements) : mCount(totalElements) {
+  pMemory = malloc(sizeof(Node) * mCount);
+  pHead   = (Node*)pMemory;
 
-      Node* itr = pHead;
-      Node* prev = nullptr;
+  Node* itr  = pHead;
+  Node* prev = nullptr;
 
-      // Form Initial Links between Nodes
-      for (auto i = 0U; i < mCount; i++) {
-        itr->pNext = nullptr;
+  // Form Initial Links between Nodes
+  for (auto i = 0U; i < mCount; i++) {
+    itr->pNext = nullptr;
 
-        if (prev != nullptr) {
-          prev->pNext = itr;
-        }
-
-        prev = itr;
-        itr++;
-      }
-
-      pTail = prev;
+    if (prev != nullptr) {
+      prev->pNext = itr;
     }
 
-  template<typename T>
-    PoolAllocator<T>::~PoolAllocator() {
-      free(pMemory);
+    prev = itr;
+    itr++;
+  }
+
+  pTail = prev;
+}
+
+template <typename T>
+PoolAllocator<T>::~PoolAllocator() {
+  free(pMemory);
+}
+
+template <typename T>
+T* PoolAllocator<T>::allocate() {
+  T* result = nullptr;
+  if (pHead != nullptr) {
+    result = reinterpret_cast<T*>(pHead);
+
+    auto oldNode   = pHead;
+    pHead          = pHead->pNext;
+    oldNode->pNext = nullptr;
+
+    if (pHead == nullptr) {
+      pTail = nullptr;
     }
+  }
 
-  template<typename T>
-    T* PoolAllocator<T>::allocate() {
-      T* result = nullptr;
-      if (pHead != nullptr) {
-        result = reinterpret_cast<T*>(pHead);
+  return result;
+}
 
-        auto oldNode = pHead;
-        pHead = pHead->pNext;
-        oldNode->pNext = nullptr;
+template <typename T>
+void PoolAllocator<T>::deallocate(T* data) {
+  Node* node = reinterpret_cast<Node*>(data);
+  if (pTail != nullptr) {
+    pTail->pNext = node;
+  }
+  else {
+    pHead = node;
+  }
 
-        if (pHead == nullptr) {
-          pTail = nullptr;
-        }
-      }
+  pTail = node;
+}
 
-      return result;
-    }
-
-
-  template<typename T>
-    void PoolAllocator<T>::deallocate(T* data) {
-      Node* node = reinterpret_cast<Node*>(data);
-      if (pTail != nullptr) {
-        pTail->pNext = node;
-      } else {
-        pHead = node;
-      }
-
-      pTail = node;
-    }
-
-} // namespace Azura
+}  // namespace Azura

@@ -1,4 +1,3 @@
 #include "Intersection.h"
 
-namespace Dibella {
-}
+namespace Dibella {}

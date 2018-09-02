@@ -1,7 +1,6 @@
 #include "Vulkan/VkScopedBuffer.h"
-#include "Vulkan/VkMacros.h"
 #include "Vulkan/VkCore.h"
-
+#include "Vulkan/VkMacros.h"
 
 namespace Azura {
 namespace Vulkan {
@@ -18,11 +17,10 @@ VkScopedBuffer::VkScopedBuffer(VkDevice device,
 VkScopedBuffer::VkScopedBuffer() : m_device() {}
 
 void VkScopedBuffer::Create(VkDevice device,
-  VkBufferUsageFlags usage,
-  U32 bufferSize,
-  VkMemoryPropertyFlags memoryProperties,
-  const VkPhysicalDeviceMemoryProperties& phyDeviceMemoryProperties) {
-
+                            VkBufferUsageFlags usage,
+                            U32 bufferSize,
+                            VkMemoryPropertyFlags memoryProperties,
+                            const VkPhysicalDeviceMemoryProperties& phyDeviceMemoryProperties) {
   m_device = device;
 
   VkBufferCreateInfo bufferInfo = {};
@@ -71,9 +69,9 @@ VkDescriptorBufferInfo VkScopedBuffer::GetDescriptorInfo(U32 offset, U32 range) 
   VkDescriptorBufferInfo bufferInfo;
   bufferInfo.buffer = Real();
   bufferInfo.offset = offset;
-  bufferInfo.range = range;
+  bufferInfo.range  = range;
 
   return bufferInfo;
 }
-} // namespace Vulkan
-} // namespace Azura
+}  // namespace Vulkan
+}  // namespace Azura

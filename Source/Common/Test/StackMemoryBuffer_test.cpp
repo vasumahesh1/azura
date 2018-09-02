@@ -2,8 +2,7 @@
 
 using namespace Azura::Memory;
 
-TEST(StackMemoryBufferTest, Constructs)
-{
+TEST(StackMemoryBufferTest, Constructs) {
   StackMemoryBuffer<32> target;
 
   ASSERT_NE(target.GetCurrentPtr(), 0u);
@@ -11,9 +10,7 @@ TEST(StackMemoryBufferTest, Constructs)
   ASSERT_EQ(target.GetSize(), 32u);
 }
 
-
-TEST(StackMemoryBufferTest, AllocateNormal)
-{
+TEST(StackMemoryBufferTest, AllocateNormal) {
   Azura::U32 allocateAmount = 32;
 
   StackMemoryBuffer<128> target;

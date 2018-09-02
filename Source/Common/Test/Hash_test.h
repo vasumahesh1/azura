@@ -1,15 +1,12 @@
 #pragma once
-#include "gtest/gtest.h"
 #include "Utils/Hash.h"
+#include "gtest/gtest.h"
 
 using namespace Azura;
 
 class HashTest : public ::testing::Test {
  protected:
+  HashTest() {}
 
-  HashTest() {
-  }
-
-  virtual ~HashTest() {
-  }
+  virtual ~HashTest() {}
 };

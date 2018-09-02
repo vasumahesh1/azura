@@ -1,9 +1,9 @@
 #pragma once
+#include <vulkan/vulkan_core.h>
 #include <array>
 #include <vector>
-#include "Types.h"
-#include <vulkan/vulkan_core.h>
 #include "Containers/Vector.h"
+#include "Types.h"
 
 namespace Azura {
 namespace Vulkan {
@@ -44,5 +44,5 @@ struct VkScopedSwapChain {
 
   VkScopedSwapChain(Memory::Allocator& allocator);
 };
-} // namespace Vulkan
-} // namespace Azura
+}  // namespace Vulkan
+}  // namespace Azura

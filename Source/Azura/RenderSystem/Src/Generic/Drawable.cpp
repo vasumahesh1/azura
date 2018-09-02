@@ -3,14 +3,13 @@
 namespace Azura {
 
 Drawable::Drawable(Memory::Allocator& allocator)
-  : m_vertexBufferInfos(allocator),
-    m_instanceBufferInfos(allocator),
-    m_vertexCount(0),
-    m_indexCount(0),
-    m_instanceCount(0),
-    m_drawMode(DrawType::InstancedIndexed),
-    m_allocator(allocator) {
-}
+    : m_vertexBufferInfos(allocator),
+      m_instanceBufferInfos(allocator),
+      m_vertexCount(0),
+      m_indexCount(0),
+      m_instanceCount(0),
+      m_drawMode(DrawType::InstancedIndexed),
+      m_allocator(allocator) {}
 
 void Drawable::SetVertexDataCount(const U32 count) {
   m_vertexBufferInfos.Reserve(count);
@@ -65,12 +64,11 @@ const BufferInfo& Drawable::GetIndexBufferInfo() const {
 }
 
 DrawablePool::DrawablePool(const U32 byteSize, Memory::Allocator& allocator)
-  : m_byteSize(byteSize),
-    m_offset(0),
-    m_allocator(allocator) {
-}
+    : m_byteSize(byteSize), m_offset(0), m_allocator(allocator) {}
 
-void DrawablePool::AppendBytes(const Containers::Vector<U8>& buffer) { m_offset += buffer.GetSize(); }
+void DrawablePool::AppendBytes(const Containers::Vector<U8>& buffer) {
+  m_offset += buffer.GetSize();
+}
 
 U32 DrawablePool::GetOffset() const {
   return m_offset;
@@ -83,4 +81,4 @@ U32 DrawablePool::GetSize() const {
 Memory::Allocator& DrawablePool::GetAllocator() const {
   return m_allocator;
 }
-} // namespace Azura
+}  // namespace Azura

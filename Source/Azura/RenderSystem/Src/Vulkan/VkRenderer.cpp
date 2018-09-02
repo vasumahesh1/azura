@@ -1,19 +1,17 @@
 #include "Vulkan/VkRenderer.h"
+#include "Generic/Window.h"
 #include "Memory/MemoryFactory.h"
 #include "Memory/MonotonicAllocator.h"
 #include "Utils/Macros.h"
 #include "Vulkan/VkShader.h"
-#include "Generic/Window.h"
 
-using namespace Azura::Containers; // NOLINT - Freedom to use using namespace in CPP files.
+using namespace Azura::Containers;  // NOLINT - Freedom to use using namespace in CPP files.
 
 namespace Azura {
 namespace Vulkan {
 
 VkDrawable::VkDrawable(Memory::Allocator& allocator, VkDrawablePool& parentPool)
-  : Drawable(allocator),
-    m_parentPool(parentPool) {
-}
+    : Drawable(allocator), m_parentPool(parentPool) {}
 
 void VkDrawable::AddVertexData(const Containers::Vector<U8>& buffer, Slot slot) {
   BufferInfo info = BufferInfo();
@@ -60,18 +58,17 @@ VkDrawablePool::VkDrawablePool(U32 numDrawables,
                                const VkScopedSwapChain& swapChain,
                                Memory::Allocator& allocator,
                                Memory::Allocator& allocatorTemporary)
-  : DrawablePool(byteSize, allocator),
-    m_buffer(device, VK_BUFFER_USAGE_TRANSFER_DST_BIT | usage, byteSize, memoryProperties, phyDeviceMemoryProperties),
-    m_stagingBuffer(device, VK_BUFFER_USAGE_TRANSFER_SRC_BIT, byteSize, memoryProperties, phyDeviceMemoryProperties),
-    m_device(device),
-    m_renderPass(renderPass),
-    m_viewport(viewport),
-    m_pipeline({}),
-    m_pipelineLayout(pipelineLayout),
-    m_pipelineFactory(device, allocatorTemporary),
-    m_swapChain(swapChain),
-    m_drawables(numDrawables, allocator) {
-}
+    : DrawablePool(byteSize, allocator),
+      m_buffer(device, VK_BUFFER_USAGE_TRANSFER_DST_BIT | usage, byteSize, memoryProperties, phyDeviceMemoryProperties),
+      m_stagingBuffer(device, VK_BUFFER_USAGE_TRANSFER_SRC_BIT, byteSize, memoryProperties, phyDeviceMemoryProperties),
+      m_device(device),
+      m_renderPass(renderPass),
+      m_viewport(viewport),
+      m_pipeline({}),
+      m_pipelineLayout(pipelineLayout),
+      m_pipelineFactory(device, allocatorTemporary),
+      m_swapChain(swapChain),
+      m_drawables(numDrawables, allocator) {}
 
 Drawable& VkDrawablePool::CreateDrawable() {
   VkDrawable drawable = VkDrawable(GetAllocator(), *this);
@@ -127,16 +124,16 @@ VkRenderer::VkRenderer(const ApplicationInfo& appInfo,
                        Memory::Allocator& mainAllocator,
                        Memory::Allocator& drawAllocator,
                        Window& window)
-  : Renderer(appInfo, deviceRequirements, mainAllocator),
-    m_window(window),
-    m_drawablePools(drawAllocator),
-    m_swapChain(mainAllocator),
-    m_frameBuffers(mainAllocator),
-    m_imageAvailableSemaphores(mainAllocator),
-    m_renderFinishedSemaphores(mainAllocator),
-    mInFlightFences(mainAllocator),
-    m_mainAllocator(mainAllocator),
-    m_drawPoolAllocator(drawAllocator) {
+    : Renderer(appInfo, deviceRequirements, mainAllocator),
+      m_window(window),
+      m_drawablePools(drawAllocator),
+      m_swapChain(mainAllocator),
+      m_frameBuffers(mainAllocator),
+      m_imageAvailableSemaphores(mainAllocator),
+      m_renderFinishedSemaphores(mainAllocator),
+      mInFlightFences(mainAllocator),
+      m_mainAllocator(mainAllocator),
+      m_drawPoolAllocator(drawAllocator) {
   STACK_ALLOCATOR(Temporary, Memory::MonotonicAllocator, 2048);
 
   Vector<const char*> extensions(4, allocatorTemporary);
@@ -153,7 +150,7 @@ VkRenderer::VkRenderer(const ApplicationInfo& appInfo,
   m_presentQueue  = VkCore::GetQueueFromDevice(m_device, m_queueIndices.m_presentFamily);
 
   const SwapChainDeviceSupport swapChainDeviceSupport =
-    VkCore::QuerySwapChainSupport(m_physicalDevice, m_surface, allocatorTemporary);
+      VkCore::QuerySwapChainSupport(m_physicalDevice, m_surface, allocatorTemporary);
 
   if (m_queueIndices.m_isTransferQueueRequired) {
     m_transferQueue = VkCore::GetQueueFromDevice(m_device, m_queueIndices.m_transferFamily);
@@ -184,7 +181,7 @@ VkRenderer::VkRenderer(const ApplicationInfo& appInfo,
 
   if (m_queueIndices.m_isTransferQueueRequired) {
     m_transferCommandPool =
-      VkCore::CreateCommandPool(m_device, m_queueIndices.m_transferFamily, VK_COMMAND_POOL_CREATE_TRANSIENT_BIT);
+        VkCore::CreateCommandPool(m_device, m_queueIndices.m_transferFamily, VK_COMMAND_POOL_CREATE_TRANSIENT_BIT);
   }
 
   const U32 syncCount = swapChainRequirement.m_framesInFlight;
@@ -209,12 +206,13 @@ DrawablePool& VkRenderer::CreateDrawablePool(const DrawablePoolCreateInfo& creat
   // TODO(vasumahesh1): [WON'T RUN]: Get viewport from WindowSurface?
   ViewportDimensions viewport{};
 
-  // TODO(vasumahesh1): This isn't as performance optimized as it should be. We can probably find a way to insert a buffer inside each pool?
-  VkDrawablePool pool = VkDrawablePool(createInfo.m_numDrawables, createInfo.m_byteSize, m_device,
-                                       VK_BUFFER_USAGE_INDEX_BUFFER_BIT | VK_BUFFER_USAGE_VERTEX_BUFFER_BIT,
-                                       VK_MEMORY_PROPERTY_HOST_VISIBLE_BIT | VK_MEMORY_PROPERTY_HOST_COHERENT_BIT,
-                                       m_pipelineLayout, m_renderPass, viewport, memProperties, m_swapChain,
-                                       m_drawPoolAllocator, allocatorTemporary);
+  // TODO(vasumahesh1): This isn't as performance optimized as it should be. We can probably find a way to insert a
+  // buffer inside each pool?
+  VkDrawablePool pool =
+      VkDrawablePool(createInfo.m_numDrawables, createInfo.m_byteSize, m_device,
+                     VK_BUFFER_USAGE_INDEX_BUFFER_BIT | VK_BUFFER_USAGE_VERTEX_BUFFER_BIT,
+                     VK_MEMORY_PROPERTY_HOST_VISIBLE_BIT | VK_MEMORY_PROPERTY_HOST_COHERENT_BIT, m_pipelineLayout,
+                     m_renderPass, viewport, memProperties, m_swapChain, m_drawPoolAllocator, allocatorTemporary);
 
   m_drawablePools.PushBack(std::move(pool));
 
@@ -225,5 +223,5 @@ void VkRenderer::SetDrawablePoolCount(U32 count) {
   m_drawablePools.Reserve(count);
 }
 
-} // namespace Vulkan
-} // namespace Azura
+}  // namespace Vulkan
+}  // namespace Azura

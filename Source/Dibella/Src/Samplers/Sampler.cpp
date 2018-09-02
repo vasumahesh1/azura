@@ -1,5 +1,3 @@
 #include "Sampler.h"
 
-namespace Dibella {
-
-}
+namespace Dibella {}

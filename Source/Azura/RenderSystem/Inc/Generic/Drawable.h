@@ -1,27 +1,26 @@
 ﻿#pragma once
-#include "Types.h"
-#include "GenericTypes.h"
 #include "Containers/Vector.h"
+#include "GenericTypes.h"
+#include "Types.h"
 
 namespace Azura {
 class Shader;
 
 class Drawable {
-
-public:
+ public:
   Drawable(Memory::Allocator& allocator);
   virtual ~Drawable() = default;
 
-  Drawable(const Drawable& other) = delete;
+  Drawable(const Drawable& other)     = delete;
   Drawable(Drawable&& other) noexcept = default;
   Drawable& operator=(const Drawable& other) = delete;
   Drawable& operator=(Drawable&& other) noexcept = default;
 
   void SetVertexDataCount(U32 count);
   void SetInstanceDataCount(U32 count);
-  virtual void AddVertexData(const Containers::Vector<U8>& buffer, Slot slot) = 0;
+  virtual void AddVertexData(const Containers::Vector<U8>& buffer, Slot slot)   = 0;
   virtual void AddInstanceData(const Containers::Vector<U8>& buffer, Slot slot) = 0;
-  virtual void SetIndexData(const Containers::Vector<U8>& buffer) = 0;
+  virtual void SetIndexData(const Containers::Vector<U8>& buffer)               = 0;
   virtual void SetDrawMode(DrawType drawMode);
 
   U32 GetVertexCount() const;
@@ -36,15 +35,14 @@ public:
   const Containers::Vector<BufferInfo>& GetInstanceBufferInfos() const;
   const BufferInfo& GetIndexBufferInfo() const;
 
-protected:
-
+ protected:
   Memory::Allocator& GetAllocator() const;
 
   Containers::Vector<BufferInfo> m_vertexBufferInfos;
   Containers::Vector<BufferInfo> m_instanceBufferInfos;
   BufferInfo m_indexBufferInfo;
 
-private:
+ private:
   // Shared as they are editable by APIs
   U32 m_vertexCount;
   U32 m_indexCount;
@@ -60,11 +58,11 @@ struct DrawablePoolCreateInfo {
 };
 
 class DrawablePool {
-public:
+ public:
   explicit DrawablePool(U32 byteSize, Memory::Allocator& allocator);
   virtual ~DrawablePool() = default;
 
-  DrawablePool(const DrawablePool& other) = delete;
+  DrawablePool(const DrawablePool& other)     = delete;
   DrawablePool(DrawablePool&& other) noexcept = default;
   DrawablePool& operator=(const DrawablePool& other) = delete;
   DrawablePool& operator=(DrawablePool&& other) noexcept = default;
@@ -79,15 +77,15 @@ public:
 
   virtual void Submit() = 0;
 
-protected:
+ protected:
   U32 GetOffset() const;
   U32 GetSize() const;
   Memory::Allocator& GetAllocator() const;
 
-private:
+ private:
   U32 m_byteSize;
   U32 m_offset;
   std::reference_wrapper<Memory::Allocator> m_allocator;
 };
 
-} // namespace Azura
+}  // namespace Azura

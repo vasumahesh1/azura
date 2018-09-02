@@ -1,8 +1,8 @@
 #include "Vector_test.h"
-#include "Utils/Macros.h"
 #include <algorithm>
 #include <iostream>
 #include <vector>
+#include "Utils/Macros.h"
 
 using namespace Azura;
 using namespace Azura::Containers;
@@ -10,7 +10,7 @@ using namespace Azura::Containers;
 class ComplexType {
   int m_data;
 
-public:
+ public:
   static int s_ctorCalls;
   static int s_dtorCalls;
   static int s_copyCtorCalls;
@@ -30,8 +30,7 @@ public:
     // std::cout << "Reset" << std::endl;
   }
 
-  ComplexType(int data)
-    : m_data(data) {
+  ComplexType(int data) : m_data(data) {
     // std::cout << "Ctor" << std::endl;
     ++s_ctorCalls;
   }
@@ -41,14 +40,12 @@ public:
     ++s_dtorCalls;
   }
 
-  ComplexType(const ComplexType& other)
-    : m_data(other.m_data) {
+  ComplexType(const ComplexType& other) : m_data(other.m_data) {
     // std::cout << "Copy Ctor" << std::endl;
     ++s_copyCtorCalls;
   }
 
-  ComplexType(ComplexType&& other) noexcept
-    : m_data(std::move(other.m_data)) {
+  ComplexType(ComplexType&& other) noexcept : m_data(std::move(other.m_data)) {
     // std::cout << "Move Ctor" << std::endl;
     ++s_moveCtorCalls;
   }

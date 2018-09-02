@@ -1,5 +1,3 @@
 #include "Integrator.h"
 
-namespace Dibella {
-
-}
+namespace Dibella {}

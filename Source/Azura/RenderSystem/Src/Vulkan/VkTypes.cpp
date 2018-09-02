@@ -22,21 +22,14 @@ U32 VkQueueIndices::GetActiveSize() const {
 }
 
 SwapChainDeviceSupport::SwapChainDeviceSupport(Memory::Allocator& allocator)
-  : m_formats(allocator),
-    m_presentModes(allocator) {
-}
+    : m_formats(allocator), m_presentModes(allocator) {}
 
 bool SwapChainDeviceSupport::IsSupported() const {
   return !m_formats.IsEmpty() && !m_presentModes.IsEmpty();
 }
 
 VkScopedSwapChain::VkScopedSwapChain(Memory::Allocator& allocator)
-  : m_swapChain(nullptr),
-    m_extent(),
-    m_surfaceFormat(),
-    m_images(allocator),
-    m_imageViews(allocator) {
-}
+    : m_swapChain(nullptr), m_extent(), m_surfaceFormat(), m_images(allocator), m_imageViews(allocator) {}
 
-} // namespace Vulkan
-} // namespace Azura
+}  // namespace Vulkan
+}  // namespace Azura

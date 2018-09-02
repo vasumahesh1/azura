@@ -2,10 +2,10 @@
 
 #include <vulkan/vulkan_core.h>
 
+#include "Containers/Vector.h"
 #include "Generic/Renderer.h"
 #include "Types.h"
 #include "VkTypes.h"
-#include "Containers/Vector.h"
 
 namespace Azura {
 namespace Vulkan {
@@ -13,7 +13,9 @@ namespace VkCore {
 
 VkInstance CreateInstance(const ApplicationInfo& applicationData, Containers::Vector<const char*> vkExtensions);
 
-SwapChainDeviceSupport QuerySwapChainSupport(VkPhysicalDevice device, VkSurfaceKHR surface, Memory::Allocator& allocator);
+SwapChainDeviceSupport QuerySwapChainSupport(VkPhysicalDevice device,
+                                             VkSurfaceKHR surface,
+                                             Memory::Allocator& allocator);
 
 VkPhysicalDevice SelectPhysicalDevice(VkInstance instance,
                                       VkSurfaceKHR surface,
@@ -33,7 +35,7 @@ VkScopedSwapChain CreateSwapChain(VkDevice device,
                                   const VkQueueIndices& queueIndices,
                                   const SwapChainDeviceSupport& swapChainSupport,
                                   const SwapChainRequirement& swapChainRequirement,
-  Memory::Allocator& allocator);
+                                  Memory::Allocator& allocator);
 
 VkImageView CreateImageView(VkDevice device,
                             VkImage sourceImage,
@@ -44,7 +46,6 @@ VkImageView CreateImageView(VkDevice device,
                             U32 levelCount     = 1,
                             U32 baseArrayLayer = 0,
                             U32 layerCount     = 1);
-
 
 VkRenderPass CreateRenderPass(VkDevice device, VkFormat colorFormat);
 
@@ -61,7 +62,10 @@ Containers::Vector<VkFramebuffer> CreateFrameBuffers(VkDevice device,
                                                      const VkScopedSwapChain& scopedSwapChain,
                                                      Memory::Allocator& allocator);
 
-void CreateFrameBuffers(VkDevice device, VkRenderPass renderPass, const VkScopedSwapChain & scopedSwapChain, Containers::Vector<VkFramebuffer>& frameBuffers);
+void CreateFrameBuffers(VkDevice device,
+                        VkRenderPass renderPass,
+                        const VkScopedSwapChain& scopedSwapChain,
+                        Containers::Vector<VkFramebuffer>& frameBuffers);
 
 VkCommandPool CreateCommandPool(VkDevice device, int queueIndex, VkCommandPoolCreateFlags flags);
 
@@ -79,28 +83,21 @@ VkDescriptorSet CreateDescriptorSet(VkDevice device,
                                     VkDescriptorPool descriptorPool,
                                     const Containers::Vector<VkDescriptorSetLayout>& descriptorSets);
 
-VkWriteDescriptorSet CreateWriteDescriptorForUniformBuffer(VkDescriptorSet set,
-                                                           U32 layoutIndex,
-                                                           U32 binding,
-                                                           const Containers::Vector<VkDescriptorBufferInfo>&
-                                                           bufferInfos);
+VkWriteDescriptorSet CreateWriteDescriptorForUniformBuffer(
+    VkDescriptorSet set, U32 layoutIndex, U32 binding, const Containers::Vector<VkDescriptorBufferInfo>& bufferInfos);
 
 void UpdateDescriptorSets(VkDevice device, const Containers::Vector<VkWriteDescriptorSet>& descriptorWrites);
 
 VkCommandBuffer CreateCommandBuffer(VkDevice device, VkCommandPool commandPool, VkCommandBufferLevel level);
 
-Containers::Vector<VkCommandBuffer> CreateCommandBuffers(VkDevice device,
-                                                         U32 count,
-                                                         VkCommandPool commandPool,
-                                                         VkCommandBufferLevel level,
-                                                         Memory::Allocator& allocator);
+Containers::Vector<VkCommandBuffer> CreateCommandBuffers(
+    VkDevice device, U32 count, VkCommandPool commandPool, VkCommandBufferLevel level, Memory::Allocator& allocator);
 
 void CreateCommandBuffers(VkDevice device,
                           U32 count,
                           VkCommandPool commandPool,
                           VkCommandBufferLevel level,
-                          Containers::Vector<VkCommandBuffer>&
-                          commandBuffers);
+                          Containers::Vector<VkCommandBuffer>& commandBuffers);
 
 void BeginCommandBuffer(VkCommandBuffer buffer, VkCommandBufferUsageFlags flags);
 
@@ -121,6 +118,6 @@ Containers::Vector<VkFence> CreateFences(VkDevice device,
                                          VkFenceCreateFlags flags,
                                          Memory::Allocator& allocator);
 
-}
-} // namespace Vulkan
-} // namespace Azura
+}  // namespace VkCore
+}  // namespace Vulkan
+}  // namespace Azura

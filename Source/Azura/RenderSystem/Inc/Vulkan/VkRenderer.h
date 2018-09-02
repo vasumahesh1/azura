@@ -5,8 +5,8 @@
 #include "Containers/Vector.h"
 #include "Generic/Renderer.h"
 #include "VkCore.h"
-#include "VkScopedBuffer.h"
 #include "VkPlatform.h"
+#include "VkScopedBuffer.h"
 #include "VkScopedPipeline.h"
 
 namespace Azura {
@@ -19,29 +19,29 @@ namespace Vulkan {
 class VkDrawablePool;
 
 class VkDrawable final : public Drawable {
-public:
+ public:
   VkDrawable(Memory::Allocator& allocator, VkDrawablePool& parentPool);
 
   void AddVertexData(const Containers::Vector<U8>& buffer, Slot slot) override;
   void AddInstanceData(const Containers::Vector<U8>& buffer, Slot slot) override;
   void SetIndexData(const Containers::Vector<U8>& buffer) override;
 
-private:
+ private:
   VkDrawablePool& m_parentPool;
 };
 
 class VkDrawablePool final : public DrawablePool {
   friend class VkDrawable;
 
-public:
+ public:
   VkDrawablePool(U32 numDrawables,
                  U32 byteSize,
                  VkDevice device,
                  VkBufferUsageFlags usage,
                  VkMemoryPropertyFlags memoryProperties,
                  VkPipelineLayout pipelineLayout,
-    VkRenderPass renderPass,
-    const ViewportDimensions& viewport,
+                 VkRenderPass renderPass,
+                 const ViewportDimensions& viewport,
                  const VkPhysicalDeviceMemoryProperties& phyDeviceMemoryProperties,
                  const VkScopedSwapChain& swapChain,
                  Memory::Allocator& allocator,
@@ -55,7 +55,7 @@ public:
 
   void AddShader(const Shader& shader) override;
 
-private:
+ private:
   VkScopedBuffer m_buffer;
   VkScopedBuffer m_stagingBuffer;
   VkDevice m_device;
@@ -72,7 +72,7 @@ private:
 };
 
 class VkRenderer : public Renderer {
-public:
+ public:
   VkRenderer(const ApplicationInfo& appInfo,
              const DeviceRequirements& deviceRequirements,
              const SwapChainRequirement& swapChainRequirement,
@@ -81,7 +81,7 @@ public:
              Window& window);
   ~VkRenderer();
 
-  VkRenderer(const VkRenderer& other) = delete;
+  VkRenderer(const VkRenderer& other)     = delete;
   VkRenderer(VkRenderer&& other) noexcept = delete;
   VkRenderer& operator=(const VkRenderer& other) = delete;
   VkRenderer& operator=(VkRenderer&& other) noexcept = delete;
@@ -89,7 +89,7 @@ public:
   DrawablePool& CreateDrawablePool(const DrawablePoolCreateInfo& createInfo) override;
   void SetDrawablePoolCount(U32 count) override;
 
-private:
+ private:
   Window& m_window;
   Containers::Vector<VkDrawablePool> m_drawablePools;
 
@@ -118,6 +118,5 @@ private:
   std::reference_wrapper<Memory::Allocator> m_mainAllocator;
   std::reference_wrapper<Memory::Allocator> m_drawPoolAllocator;
 };
-} // namespace Vulkan
-} // namespace Azura
-
+}  // namespace Vulkan
+}  // namespace Azura

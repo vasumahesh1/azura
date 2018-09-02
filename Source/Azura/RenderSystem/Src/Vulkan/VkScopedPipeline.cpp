@@ -1,14 +1,12 @@
 #include "Vulkan/VkScopedPipeline.h"
-#include "Vulkan/VkTypeMapping.h"
-#include "Vulkan/VkMacros.h"
 #include "Memory/Allocator.h"
+#include "Vulkan/VkMacros.h"
+#include "Vulkan/VkTypeMapping.h"
 
 namespace Azura {
 namespace Vulkan {
 
-VkScopedPipeline::VkScopedPipeline(VkPipeline pipeline)
-  : m_pipeline(pipeline) {
-}
+VkScopedPipeline::VkScopedPipeline(VkPipeline pipeline) : m_pipeline(pipeline) {}
 
 VkPipeline VkScopedPipeline::Real() const {
   return m_pipeline;
@@ -16,11 +14,7 @@ VkPipeline VkScopedPipeline::Real() const {
 
 // TODO(vasumahesh1): Figure out a way to adjust size properly
 VkPipelineFactory::VkPipelineFactory(VkDevice device, Memory::Allocator& allocator)
-  : m_device(device),
-  m_stages(10, allocator),
-  m_bindingInfo(10, allocator),
-  m_attributeDescription(10, allocator){
-}
+    : m_device(device), m_stages(10, allocator), m_bindingInfo(10, allocator), m_attributeDescription(10, allocator) {}
 
 VkPipelineFactory& VkPipelineFactory::AddShaderStage(VkPipelineShaderStageCreateInfo shaderStageCreateInfo) {
   // TODO(vasumahesh1): Emplace?
@@ -34,8 +28,8 @@ VkPipelineFactory& VkPipelineFactory::AddBindingDescription(U32 stride, Slot slo
   const auto rate = ToVkVertexInputRate(slot.m_rate);
   VERIFY_OPT(rate, "Unknown Format");
 
-  bindingDesc.binding = slot.m_binding;
-  bindingDesc.stride = stride;
+  bindingDesc.binding   = slot.m_binding;
+  bindingDesc.stride    = stride;
   bindingDesc.inputRate = rate.value();
 
   m_bindingInfo.PushBack(bindingDesc);
@@ -66,20 +60,18 @@ VkPipelineFactory& VkPipelineFactory::AddAttributeDescription(RawStorageFormat r
 }
 
 VkPipelineFactory& VkPipelineFactory::BulkAddAttributeDescription(const Containers::Vector<RawStorageFormat>& strides,
-  U32 binding) {
-
+                                                                  U32 binding) {
   auto bindingInfo = m_bindingMap[binding];
 
   for (const auto& rawFormat : strides) {
-
     const auto format = ToVkFormat(rawFormat);
     VERIFY_OPT(format, "Unknown Format");
 
     VkVertexInputAttributeDescription attrDesc;
-    attrDesc.binding = binding;
+    attrDesc.binding  = binding;
     attrDesc.location = bindingInfo.m_location;
-    attrDesc.format = format.value();
-    attrDesc.offset = bindingInfo.m_offset;
+    attrDesc.format   = format.value();
+    attrDesc.offset   = bindingInfo.m_offset;
 
     // TODO(vasumahesh1): Handle 64bit formats taking 2 locations
     bindingInfo.m_location++;
@@ -107,7 +99,6 @@ VkPipelineFactory& VkPipelineFactory::SetInputAssemblyStage(PrimitiveTopology to
   return *this;
 }
 
-
 VkPipelineFactory& VkPipelineFactory::SetViewportStage(ViewportDimensions viewportDimensions,
                                                        const VkScopedSwapChain& swapChain) {
   VkViewport viewport;
@@ -120,8 +111,8 @@ VkPipelineFactory& VkPipelineFactory::SetViewportStage(ViewportDimensions viewpo
 
   // TODO(vasumahesh1): Might need custom scissoring
   VkRect2D scissor;
-  scissor.offset   = {0, 0};
-  scissor.extent   = swapChain.m_extent;
+  scissor.offset = {0, 0};
+  scissor.extent = swapChain.m_extent;
 
   // TODO(vasumahesh1): Might need arrays here one day
   m_viewportStage.sType         = VK_STRUCTURE_TYPE_PIPELINE_VIEWPORT_STATE_CREATE_INFO;
@@ -164,12 +155,10 @@ VkPipelineFactory& VkPipelineFactory::SetMultisampleStage() {
   return *this;
 }
 
-
 VkPipelineFactory& VkPipelineFactory::SetColorBlendStage() {
   VkPipelineColorBlendAttachmentState colorBlendAttachment = {};
-  colorBlendAttachment.colorWriteMask                      =
-    VK_COLOR_COMPONENT_R_BIT | VK_COLOR_COMPONENT_G_BIT | VK_COLOR_COMPONENT_B_BIT |
-    VK_COLOR_COMPONENT_A_BIT;
+  colorBlendAttachment.colorWriteMask =
+      VK_COLOR_COMPONENT_R_BIT | VK_COLOR_COMPONENT_G_BIT | VK_COLOR_COMPONENT_B_BIT | VK_COLOR_COMPONENT_A_BIT;
   colorBlendAttachment.blendEnable = VK_FALSE;
 
   // TODO(vasumahesh1): Add Support for Blending
@@ -219,8 +208,9 @@ VkScopedPipeline VkPipelineFactory::Submit() const {
   pipelineInfo.basePipelineIndex            = -1;
 
   VkPipeline pipeline;
-  VERIFY_VK_OP(vkCreateGraphicsPipelines(m_device, VK_NULL_HANDLE, 1, &pipelineInfo, nullptr, &pipeline), "Failed to create pipeline");
+  VERIFY_VK_OP(vkCreateGraphicsPipelines(m_device, VK_NULL_HANDLE, 1, &pipelineInfo, nullptr, &pipeline),
+               "Failed to create pipeline");
   return VkScopedPipeline(pipeline);
 }
-} // namespace Vulkan
-} // namespace Azura
+}  // namespace Vulkan
+}  // namespace Azura

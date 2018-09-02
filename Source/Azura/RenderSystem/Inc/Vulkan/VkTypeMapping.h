@@ -1,19 +1,18 @@
 #pragma once
 
-#include <map>
-#include "Generic/GenericTypes.h"
 #include <vulkan/vulkan_core.h>
+#include <map>
 #include <optional>
+#include "Generic/GenericTypes.h"
 #include "Generic/RawStorageFormat.h"
 
 namespace Azura {
 namespace Vulkan {
 namespace Impl {
 
-#define CREATE_MAPPER_H(FROM_FORMAT, TO_FORMAT) \
-  std::optional<TO_FORMAT> To##TO_FORMAT(FROM_FORMAT inputFormat)
+#define CREATE_MAPPER_H(FROM_FORMAT, TO_FORMAT) std::optional<TO_FORMAT> To##TO_FORMAT(FROM_FORMAT inputFormat)
 
-} // namespace Impl
+}  // namespace Impl
 
 // TODO(vasumahesh1): Enable enum mappings when all mappings are complete to prevent -Wswitch issues
 
@@ -40,5 +39,5 @@ CREATE_MAPPER_H(FrontFace, VkFrontFace);
 
 CREATE_MAPPER_H(BufferUsageRate, VkVertexInputRate);
 
-} // namespace Vulkan
-} // namespace Azura
+}  // namespace Vulkan
+}  // namespace Azura

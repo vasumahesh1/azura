@@ -1,6 +1,5 @@
 #pragma once
-#include "gtest/gtest.h"
 #include "Memory/StackMemoryBuffer.h"
+#include "gtest/gtest.h"
 
-class StackMemoryBufferTest : public ::testing::Test {
-};
+class StackMemoryBufferTest : public ::testing::Test {};

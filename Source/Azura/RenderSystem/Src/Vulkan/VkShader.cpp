@@ -1,6 +1,6 @@
 #include "Vulkan/VkShader.h"
-#include "Vulkan/VkCore.h"
 #include "Utils/FileReader.h"
+#include "Vulkan/VkCore.h"
 #include "Vulkan/VkMacros.h"
 #include "Vulkan/VkTypeMapping.h"
 
@@ -9,11 +9,10 @@ namespace Vulkan {
 
 namespace {
 const String SPRIV_EXT = "spv";
-} // namespace
+}  // namespace
 
 VkShader::VkShader(VkDevice device, const String& fileName, Memory::Allocator& temporaryAllocator)
-  : Shader(fileName, SPRIV_EXT) {
-
+    : Shader(fileName, SPRIV_EXT) {
   const auto fileContents = FileReader::GetFileContents(GetFilePath(), temporaryAllocator);
   m_module                = VkCore::CreateShaderModule(device, fileContents);
 }
@@ -31,5 +30,5 @@ VkPipelineShaderStageCreateInfo VkShader::GetShaderStageInfo() const {
   return shaderStage;
 }
 
-} // namespace Vulkan
-} // namespace Azura
+}  // namespace Vulkan
+}  // namespace Azura

@@ -5,10 +5,10 @@
 namespace Azura {
 
 class NotImplementedException : public std::logic_error {
-public:
+ public:
   virtual char const *what() const {
     return "Function or branch not yet implemented.";
   }
 };
 
-} // namespace Azura
+}  // namespace Azura

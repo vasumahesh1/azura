@@ -20,10 +20,10 @@
 
 #define UNUSED(x) (void)(x)
 
-#define FORWARD_MAPPING(TYPE_A, TYPE_B)     \
-  case TYPE_A:                              \
+#define FORWARD_MAPPING(TYPE_A, TYPE_B)                                                                                \
+  case TYPE_A:                                                                                                         \
     return TYPE_B;
 
-#define REVERSE_MAPPING(TYPE_A, TYPE_B)     \
-  case TYPE_B:                              \
+#define REVERSE_MAPPING(TYPE_A, TYPE_B)                                                                                \
+  case TYPE_B:                                                                                                         \
     return TYPE_A;

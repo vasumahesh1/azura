@@ -1,10 +1,10 @@
 #pragma once
 
 #include "Constants.h"
-#include "RawStorageFormat.h"
-#include "GenericTypes.h"
 #include "Containers/Vector.h"
 #include "Drawable.h"
+#include "GenericTypes.h"
+#include "RawStorageFormat.h"
 
 namespace Azura {
 const U32 DEFAULT_FRAMES_IN_FLIGHT = 2;
@@ -42,26 +42,26 @@ struct SwapChainRequirement {
 };
 
 class Renderer {
-public:
+ public:
   Renderer(ApplicationInfo appInfo, const DeviceRequirements& deviceRequirements, Memory::Allocator& allocator);
   virtual ~Renderer() = default;
 
   Renderer(const Renderer& other) = delete;
-  Renderer(Renderer&& other) = delete;
+  Renderer(Renderer&& other)      = delete;
   Renderer& operator=(const Renderer& rhs) = delete;
   Renderer& operator=(Renderer&& rhs) = delete;
 
-  virtual void SetDrawablePoolCount(U32 count) = 0;
+  virtual void SetDrawablePoolCount(U32 count)                                       = 0;
   virtual DrawablePool& CreateDrawablePool(const DrawablePoolCreateInfo& createInfo) = 0;
 
-protected:
+ protected:
   const ApplicationInfo& GetApplicationInfo() const;
   const DeviceRequirements& GetDeviceRequirements() const;
   Memory::Allocator& GetAllocator() const;
 
-private:
+ private:
   const ApplicationInfo m_applicationInfo;
   const DeviceRequirements m_deviceRequirements;
   Memory::Allocator& m_allocator;
 };
-}
+}  // namespace Azura

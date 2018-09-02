@@ -16,9 +16,9 @@ VkSurfaceKHR VkPlatform::CreateSurface(const void* windowHandle, VkInstance inst
   createInfo.hwnd      = *reinterpret_cast<const HWND*>(windowHandle);
   createInfo.hinstance = GetModuleHandle(nullptr);
 
-  // NOLINTNEXTLINE(cppcoreguidelines-pro-type-reinterpret-cast)
-  const auto CreateWin32SurfaceKHR = reinterpret_cast<PFN_vkCreateWin32SurfaceKHR>(
-    vkGetInstanceProcAddr(instance, "vkCreateWin32SurfaceKHR"));
+  const auto CreateWin32SurfaceKHR =
+      // NOLINTNEXTLINE(cppcoreguidelines-pro-type-reinterpret-cast)
+      reinterpret_cast<PFN_vkCreateWin32SurfaceKHR>(vkGetInstanceProcAddr(instance, "vkCreateWin32SurfaceKHR"));
   VERIFY_OPT(!CreateWin32SurfaceKHR, "Cannot find PFN_vkCreateWin32SurfaceKHR");
 
   VkSurfaceKHR surface;
@@ -30,5 +30,5 @@ void VkPlatform::GetInstanceExtensions(Containers::Vector<const char*>& extensio
   extensions.PushBack(VK_KHR_SURFACE);
   extensions.PushBack("VK_KHR_win32_surface");
 }
-} // namespace Vulkan
-} // namespace Azura
+}  // namespace Vulkan
+}  // namespace Azura

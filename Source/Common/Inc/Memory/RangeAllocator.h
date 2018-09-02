@@ -1,7 +1,7 @@
 #pragma once
 
-#include "Types.h"
 #include "Allocator.h"
+#include "Types.h"
 
 #include <vector>
 
@@ -10,7 +10,7 @@ namespace Memory {
 class MemoryBuffer;
 
 class RangeAllocator final : public Allocator {
-public:
+ public:
   RangeAllocator(MemoryBuffer& buffer, U32 size);
   ~RangeAllocator();
 
@@ -23,20 +23,24 @@ public:
   RangeAllocator& operator=(RangeAllocator&& other) noexcept = delete;
 
 #ifdef BUILD_UNIT_TEST
-  const std::vector<MemoryRange>& GetFreeRanges() const { return m_freeRanges; };
-  const std::vector<MemoryRange>& GetOccupiedRanges() const { return m_occupiedRanges; };
+  const std::vector<MemoryRange>& GetFreeRanges() const {
+    return m_freeRanges;
+  };
+  const std::vector<MemoryRange>& GetOccupiedRanges() const {
+    return m_occupiedRanges;
+  };
 #endif
 
-protected:
+ protected:
   void* Allocate(U32 size, U32 alignment) override;
   void Deallocate(void* address) override;
-  
-private:
+
+ private:
   MemoryBuffer& m_sourceBuffer;
 
   // TODO(vasumahesh1): Needs a performance boost here
   std::vector<MemoryRange> m_freeRanges{1, MemoryRange(0, Size())};
   std::vector<MemoryRange> m_occupiedRanges;
 };
-} // namespace Memory
-} // namespace Azura
+}  // namespace Memory
+}  // namespace Azura

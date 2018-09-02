@@ -5,13 +5,13 @@ using namespace Azura;
 using namespace Azura::Containers;
 
 TEST_F(ArrayTest, Constructs) {
-  Array<int, 16> a{ alloc };
+  Array<int, 16> a{alloc};
   ASSERT_EQ(a.GetSize(), 0u);
 }
 
 TEST_F(ArrayTest, NormalPush) {
   alloc.Reset();
-  Array<int, 16> a{ alloc };
+  Array<int, 16> a{alloc};
 
   a.PushBack(10);
   a.PushBack(20);
@@ -25,7 +25,7 @@ TEST_F(ArrayTest, NormalPush) {
 
 TEST_F(ArrayTest, NormalPop) {
   alloc.Reset();
-  Array<int, 16> a{ alloc };
+  Array<int, 16> a{alloc};
 
   a.PushBack(10);
   a.PushBack(20);
@@ -38,7 +38,7 @@ TEST_F(ArrayTest, NormalPop) {
 
 TEST_F(ArrayTest, NormalRemove) {
   alloc.Reset();
-  Array<int, 16> a{ alloc };
+  Array<int, 16> a{alloc};
 
   a.PushBack(10);
   a.PushBack(20);
@@ -63,7 +63,7 @@ TEST_F(ArrayTest, NormalRemove) {
 
 TEST_F(ArrayTest, NormalFind) {
   alloc.Reset();
-  Array<int, 16> a{ alloc };
+  Array<int, 16> a{alloc};
 
   a.PushBack(10);
   a.PushBack(20);
@@ -77,7 +77,7 @@ TEST_F(ArrayTest, NormalFind) {
 
 TEST_F(ArrayTest, Empty) {
   alloc.Reset();
-  Array<int, 16> a{ alloc };
+  Array<int, 16> a{alloc};
 
   ASSERT_EQ(a.IsEmpty(), true);
 
@@ -93,7 +93,7 @@ TEST_F(ArrayTest, Empty) {
 
 TEST_F(ArrayTest, IteratorLoop) {
   alloc.Reset();
-  Array<int, 16> a{ alloc };
+  Array<int, 16> a{alloc};
 
   a.PushBack(40);
   a.PushBack(10);
@@ -109,7 +109,7 @@ TEST_F(ArrayTest, IteratorLoop) {
 
 TEST_F(ArrayTest, IteratorSort) {
   alloc.Reset();
-  Array<int, 16> a{ alloc };
+  Array<int, 16> a{alloc};
 
   a.PushBack(40);
   a.PushBack(10);
@@ -126,7 +126,7 @@ TEST_F(ArrayTest, IteratorSort) {
 
 TEST_F(ArrayTest, IteratorCount) {
   alloc.Reset();
-  Array<int, 16> a{ alloc };
+  Array<int, 16> a{alloc};
 
   a.PushBack(40);
   a.PushBack(10);

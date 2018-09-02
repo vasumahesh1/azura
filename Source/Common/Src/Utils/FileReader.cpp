@@ -1,7 +1,7 @@
 #include "Utils/FileReader.h"
 
-#include <iterator>
 #include <fstream>
+#include <iterator>
 
 namespace Azura {
 
@@ -29,4 +29,4 @@ SizeType FileReader::GetFileSize(const String& filePath) {
 
   return size;
 }
-} // namespace Azura
+}  // namespace Azura

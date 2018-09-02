@@ -1,15 +1,13 @@
 #pragma once
 
 namespace Dibella {
-  class Allocator;
+class Allocator;
 
-  class AllocationDependent {
+class AllocationDependent {
+ protected:
+  explicit AllocationDependent(Allocator* alloc);
+  Allocator* mAllocator;
+};
 
-  protected:
-    explicit AllocationDependent(Allocator* alloc);
-    Allocator* mAllocator;
-  };
-
-  inline AllocationDependent::AllocationDependent(Allocator* alloc)
-    : mAllocator(alloc) {}
-}
+inline AllocationDependent::AllocationDependent(Allocator* alloc) : mAllocator(alloc) {}
+}  // namespace Dibella

@@ -6,20 +6,18 @@ namespace Memory {
 
 namespace {
 /**
-* \brief Finds the next largest Aligned multiple according to the input size
-* \param size Size of Bytes to Allocate
-* \param alignment Alignment of the data to allocate
-* \return Next greatest alignment multiple that can fit `size` bytes
-*/
+ * \brief Finds the next largest Aligned multiple according to the input size
+ * \param size Size of Bytes to Allocate
+ * \param alignment Alignment of the data to allocate
+ * \return Next greatest alignment multiple that can fit `size` bytes
+ */
 U32 AlignAhead(U32 size, U32 alignment) {
   return (size + (alignment - 1)) & ~(alignment - 1);
 }
-} // namespace
+}  // namespace
 
 RangeAllocator::RangeAllocator(MemoryBuffer& buffer, U32 size)
-  : Allocator(buffer.Allocate(size), size),
-    m_sourceBuffer(buffer) {
-}
+    : Allocator(buffer.Allocate(size), size), m_sourceBuffer(buffer) {}
 
 RangeAllocator::~RangeAllocator() {
   // NOLINTNEXTLINE(cppcoreguidelines-pro-type-reinterpret-cast)
@@ -32,7 +30,7 @@ void* RangeAllocator::Allocate(U32 size, U32 alignment) {
 
   const U32 expectedSize = AlignAhead(size, alignment);
 
-  for (auto itr                = m_freeRanges.begin(); itr != m_freeRanges.end(); ++itr) {
+  for (auto itr = m_freeRanges.begin(); itr != m_freeRanges.end(); ++itr) {
     const auto& range          = *itr;
     const AddressPtr rangeBase = BasePtr() + range.m_offset;
 
@@ -84,7 +82,7 @@ void RangeAllocator::Deallocate(void* address) {
   const auto addressPtr = reinterpret_cast<AddressPtr>(address);
   auto finalRangeItr    = m_occupiedRanges.end();
 
-  for (auto itr                = m_occupiedRanges.begin(); itr != m_occupiedRanges.end(); ++itr) {
+  for (auto itr = m_occupiedRanges.begin(); itr != m_occupiedRanges.end(); ++itr) {
     const auto& range          = *itr;
     const AddressPtr rangeBase = BasePtr() + range.m_offset;
 
@@ -110,5 +108,5 @@ void RangeAllocator::Deallocate(void* address) {
 
   // TODO(vasumahesh1): Should Amalgamate Free Ranges?
 }
-} // namespace Memory
-} // namespace Azura
+}  // namespace Memory
+}  // namespace Azura

@@ -2,7 +2,5 @@
 
 namespace Dibella {
 
-  class Integrator {
-
-  };
-}
+class Integrator {};
+}  // namespace Dibella

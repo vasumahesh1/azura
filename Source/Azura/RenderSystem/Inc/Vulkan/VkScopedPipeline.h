@@ -1,27 +1,25 @@
 #pragma once
 #include <vulkan/vulkan_core.h>
 
-#include "Generic/GenericTypes.h"
-#include "Containers/Vector.h"
-#include "Vulkan/VkTypes.h"
 #include <map>
+#include "Containers/Vector.h"
+#include "Generic/GenericTypes.h"
+#include "Vulkan/VkTypes.h"
 
 namespace Azura {
 namespace Vulkan {
 
 class VkScopedPipeline {
-
-public:
+ public:
   VkScopedPipeline(VkPipeline pipeline);
   VkPipeline Real() const;
 
-private:
+ private:
   VkPipeline m_pipeline;
 };
 
 class VkPipelineFactory {
-
-public:
+ public:
   VkPipelineFactory(VkDevice device, Memory::Allocator& allocator);
 
   VkPipelineFactory& AddShaderStage(VkPipelineShaderStageCreateInfo shaderStageCreateInfo);
@@ -40,8 +38,7 @@ public:
 
   VkScopedPipeline Submit() const;
 
-
-private:
+ private:
   struct BindingInfo {
     U32 m_offset{0};
     U32 m_location{0};
@@ -66,5 +63,5 @@ private:
   VkRenderPass m_renderPass{};
 };
 
-} // namespace Vulkan
-} // namespace Azura
+}  // namespace Vulkan
+}  // namespace Azura

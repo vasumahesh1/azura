@@ -4,11 +4,11 @@
 #include <array>
 #include <map>
 #include <set>
-#include "Vulkan/VkTypeMapping.h"
-#include "Vulkan/VkMacros.h"
-#include "Memory/StackMemoryBuffer.h"
-#include "Memory/MonotonicAllocator.h"
 #include "Memory/MemoryFactory.h"
+#include "Memory/MonotonicAllocator.h"
+#include "Memory/StackMemoryBuffer.h"
+#include "Vulkan/VkMacros.h"
+#include "Vulkan/VkTypeMapping.h"
 
 using ContainerExtent = Azura::Containers::ContainerExtent;
 
@@ -16,14 +16,10 @@ namespace Azura {
 namespace Vulkan {
 namespace {
 #ifdef DEBUG
-    const std::array<const char*, 1> VALIDATION_LAYERS = {
-      "VK_LAYER_LUNARG_standard_validation"
-    };
+const std::array<const char*, 1> VALIDATION_LAYERS = {"VK_LAYER_LUNARG_standard_validation"};
 #endif
 
-const std::array<const char*, 1> DEVICE_EXTENSIONS = {
-  VK_KHR_SWAPCHAIN_EXTENSION_NAME
-};
+const std::array<const char*, 1> DEVICE_EXTENSIONS = {VK_KHR_SWAPCHAIN_EXTENSION_NAME};
 
 bool CheckValidationLayerSupport() {
 #ifdef DEBUG
@@ -53,13 +49,14 @@ bool CheckValidationLayerSupport() {
 }
 
 bool CheckDeviceExtensionSupport(VkPhysicalDevice device) {
-  U32 extensionCount = 0;
+  U32 extensionCount          = 0;
   const U32 maxExtensionCount = 30;
 
   STACK_ALLOCATOR(Extension, Memory::MonotonicAllocator, sizeof(VkExtensionProperties) * maxExtensionCount)
 
-    vkEnumerateDeviceExtensionProperties(device, nullptr, &extensionCount, nullptr);
-  Containers::Vector<VkExtensionProperties> availableExtensions(ContainerExtent{ extensionCount, maxExtensionCount }, allocatorExtension);
+  vkEnumerateDeviceExtensionProperties(device, nullptr, &extensionCount, nullptr);
+  Containers::Vector<VkExtensionProperties> availableExtensions(ContainerExtent{extensionCount, maxExtensionCount},
+                                                                allocatorExtension);
   vkEnumerateDeviceExtensionProperties(device, nullptr, &extensionCount, availableExtensions.Data());
 
   for (const auto& requiredExtension : DEVICE_EXTENSIONS) {
@@ -164,13 +161,13 @@ VkExtent2D ChooseSwapExtent(const VkSurfaceCapabilitiesKHR& capabilities, const 
   }
 
   VkExtent2D actualExtent = {requirement.m_extent.m_width, requirement.m_extent.m_height};
-  actualExtent.width      = std::max(capabilities.minImageExtent.width,
-                                     std::min(capabilities.maxImageExtent.width, actualExtent.width));
-  actualExtent.height = std::max(capabilities.minImageExtent.height,
-                                 std::min(capabilities.maxImageExtent.height, actualExtent.height));
+  actualExtent.width =
+      std::max(capabilities.minImageExtent.width, std::min(capabilities.maxImageExtent.width, actualExtent.width));
+  actualExtent.height =
+      std::max(capabilities.minImageExtent.height, std::min(capabilities.maxImageExtent.height, actualExtent.height));
   return actualExtent;
 }
-} // namespace
+}  // namespace
 
 VkInstance VkCore::CreateInstance(const ApplicationInfo& applicationData,
                                   Containers::Vector<const char*> vkExtensions) {
@@ -183,9 +180,9 @@ VkInstance VkCore::CreateInstance(const ApplicationInfo& applicationData,
   const U32 patchVer         = std::get<SemverPatch>(applicationData.m_version);
   appInfo.applicationVersion = VK_MAKE_VERSION(majorVer, minorVer, patchVer);
 
-  appInfo.pEngineName   = "";
-  appInfo.engineVersion = VK_MAKE_VERSION(RENDER_SYSTEM_MAJOR_SEMVER, RENDER_SYSTEM_MINOR_SEMVER,
-    RENDER_SYSTEM_PATCH_SEMVER);
+  appInfo.pEngineName = "";
+  appInfo.engineVersion =
+      VK_MAKE_VERSION(RENDER_SYSTEM_MAJOR_SEMVER, RENDER_SYSTEM_MINOR_SEMVER, RENDER_SYSTEM_PATCH_SEMVER);
   appInfo.apiVersion = VK_API_VERSION_1_1;
 
   VkInstanceCreateInfo createInfo    = {};
@@ -221,7 +218,8 @@ VkQueueIndices VkCore::FindQueueFamiliesInDevice(VkPhysicalDevice device,
 
   U32 queueFamilyCount;
   vkGetPhysicalDeviceQueueFamilyProperties(device, &queueFamilyCount, nullptr);
-  Containers::Vector<VkQueueFamilyProperties> queueFamilies(ContainerExtent{ queueFamilyCount, maxQueueFamilies }, allocatorQueueFamily);
+  Containers::Vector<VkQueueFamilyProperties> queueFamilies(ContainerExtent{queueFamilyCount, maxQueueFamilies},
+                                                            allocatorQueueFamily);
   vkGetPhysicalDeviceQueueFamilyProperties(device, &queueFamilyCount, queueFamilies.Data());
 
   int idx = 0;
@@ -230,8 +228,8 @@ VkQueueIndices VkCore::FindQueueFamiliesInDevice(VkPhysicalDevice device,
       result.m_graphicsFamily = idx;
     }
 
-    if (queueFamily.queueCount > 0 && !((queueFamily.queueFlags & VK_QUEUE_GRAPHICS_BIT) != 0) && (
-          queueFamily.queueFlags & VK_QUEUE_TRANSFER_BIT) != 0) {
+    if (queueFamily.queueCount > 0 && !((queueFamily.queueFlags & VK_QUEUE_GRAPHICS_BIT) != 0)
+        && (queueFamily.queueFlags & VK_QUEUE_TRANSFER_BIT) != 0) {
       result.m_transferFamily = idx;
     }
 
@@ -248,7 +246,9 @@ VkQueueIndices VkCore::FindQueueFamiliesInDevice(VkPhysicalDevice device,
   return result;
 }
 
-SwapChainDeviceSupport VkCore::QuerySwapChainSupport(VkPhysicalDevice device, VkSurfaceKHR surface, Memory::Allocator& allocator) {
+SwapChainDeviceSupport VkCore::QuerySwapChainSupport(VkPhysicalDevice device,
+                                                     VkSurfaceKHR surface,
+                                                     Memory::Allocator& allocator) {
   SwapChainDeviceSupport result(allocator);
 
   vkGetPhysicalDeviceSurfaceCapabilitiesKHR(device, surface, &result.m_capabilities);
@@ -287,8 +287,8 @@ VkPhysicalDevice VkCore::SelectPhysicalDevice(VkInstance instance,
 
   STACK_ALLOCATOR(SwapChainSupport, Memory::MonotonicAllocator, 2048);
 
-
-  Containers::Vector<VkPhysicalDevice> availableDevices(ContainerExtent{ availableDeviceCount, maxDevices }, allocatorDevice);
+  Containers::Vector<VkPhysicalDevice> availableDevices(ContainerExtent{availableDeviceCount, maxDevices},
+                                                        allocatorDevice);
   vkEnumeratePhysicalDevices(instance, &availableDeviceCount, availableDevices.Data());
 
   std::multimap<int, VkPhysicalDevice> candidates;
@@ -296,7 +296,7 @@ VkPhysicalDevice VkCore::SelectPhysicalDevice(VkInstance instance,
   // Rate and Select the best GPU
   for (const auto& device : availableDevices) {
     const auto swapChainSupport = QuerySwapChainSupport(device, surface, allocatorSwapChainSupport);
-    int tempScore = GetDeviceScore(device, surface, requirements, swapChainSupport);
+    int tempScore               = GetDeviceScore(device, surface, requirements, swapChainSupport);
     candidates.insert(std::make_pair(tempScore, device));
   }
 
@@ -312,11 +312,8 @@ VkDevice VkCore::CreateLogicalDevice(VkPhysicalDevice physicalDevice,
                                      const VkQueueIndices& queueIndices,
                                      const DeviceRequirements& requirements) {
   // Create Queue Infos
-  const std::set<int> uniqueQueueFamilies = {
-    queueIndices.m_graphicsFamily,
-    queueIndices.m_presentFamily,
-    queueIndices.m_transferFamily
-  };
+  const std::set<int> uniqueQueueFamilies = {queueIndices.m_graphicsFamily, queueIndices.m_presentFamily,
+                                             queueIndices.m_transferFamily};
 
   const U32 maxQueueFamilies = 3;
   STACK_ALLOCATOR(QueueCreateInfo, Memory::MonotonicAllocator, sizeof(VkDeviceQueueCreateInfo) * maxQueueFamilies)
@@ -373,7 +370,6 @@ VkScopedSwapChain VkCore::CreateSwapChain(VkDevice device,
                                           const SwapChainDeviceSupport& swapChainSupport,
                                           const SwapChainRequirement& swapChainRequirement,
                                           Memory::Allocator& allocator) {
-
   VkScopedSwapChain scopedSwapChain(allocator);
 
   const VkPresentModeKHR presentMode = ChooseSwapPresentMode(swapChainSupport.m_presentModes);
@@ -383,9 +379,8 @@ VkScopedSwapChain VkCore::CreateSwapChain(VkDevice device,
   // TODO(vasumahesh1): Need requirement?
   // Set Queue Length of SwapChain
   scopedSwapChain.m_imageCount = swapChainSupport.m_capabilities.minImageCount + 1;
-  if (swapChainSupport.m_capabilities.maxImageCount > 0 && scopedSwapChain.m_imageCount > swapChainSupport
-                                                                                          .m_capabilities.maxImageCount
-  ) {
+  if (swapChainSupport.m_capabilities.maxImageCount > 0
+      && scopedSwapChain.m_imageCount > swapChainSupport.m_capabilities.maxImageCount) {
     scopedSwapChain.m_imageCount = swapChainSupport.m_capabilities.maxImageCount;
   }
 
@@ -404,7 +399,8 @@ VkScopedSwapChain VkCore::CreateSwapChain(VkDevice device,
     createInfo.imageSharingMode      = VK_SHARING_MODE_CONCURRENT;
     createInfo.queueFamilyIndexCount = queueIndices.GetActiveSize();
     createInfo.pQueueFamilyIndices   = queueIndices.GetIndicesArray().data();
-  } else {
+  }
+  else {
     createInfo.imageSharingMode      = VK_SHARING_MODE_EXCLUSIVE;
     createInfo.queueFamilyIndexCount = 0;
     createInfo.pQueueFamilyIndices   = nullptr;
@@ -417,7 +413,7 @@ VkScopedSwapChain VkCore::CreateSwapChain(VkDevice device,
   createInfo.oldSwapchain   = VK_NULL_HANDLE;
 
   VERIFY_VK_OP(vkCreateSwapchainKHR(device, &createInfo, nullptr, &scopedSwapChain.m_swapChain),
-    "Failed to create swap chain");
+               "Failed to create swap chain");
 
   vkGetSwapchainImagesKHR(device, scopedSwapChain.m_swapChain, &scopedSwapChain.m_imageCount, nullptr);
   scopedSwapChain.m_images.Resize(scopedSwapChain.m_imageCount);
@@ -425,10 +421,10 @@ VkScopedSwapChain VkCore::CreateSwapChain(VkDevice device,
   vkGetSwapchainImagesKHR(device, scopedSwapChain.m_swapChain, &scopedSwapChain.m_imageCount,
                           scopedSwapChain.m_images.Data());
 
-  for (U32 idx                        = 0; idx < scopedSwapChain.m_imageCount; ++idx) {
-    scopedSwapChain.m_imageViews[idx] = CreateImageView(device, scopedSwapChain.m_images[idx], VK_IMAGE_VIEW_TYPE_2D,
-                                                        scopedSwapChain.m_surfaceFormat.format,
-                                                        VK_IMAGE_ASPECT_COLOR_BIT);
+  for (U32 idx = 0; idx < scopedSwapChain.m_imageCount; ++idx) {
+    scopedSwapChain.m_imageViews[idx] =
+        CreateImageView(device, scopedSwapChain.m_images[idx], VK_IMAGE_VIEW_TYPE_2D,
+                        scopedSwapChain.m_surfaceFormat.format, VK_IMAGE_ASPECT_COLOR_BIT);
   }
 
   return scopedSwapChain;
@@ -518,7 +514,6 @@ VkRenderPass VkCore::CreateRenderPass(VkDevice device, VkFormat colorFormat) {
 
 void VkCore::CreateUniformBufferBinding(Containers::Vector<VkDescriptorSetLayoutBinding>& bindings,
                                         VkShaderStageFlags stageFlag) {
-
   VkDescriptorSetLayoutBinding uboLayoutBinding = {};
   uboLayoutBinding.binding                      = bindings.GetSize();
   uboLayoutBinding.descriptorType               = VK_DESCRIPTOR_TYPE_UNIFORM_BUFFER;
@@ -530,9 +525,8 @@ void VkCore::CreateUniformBufferBinding(Containers::Vector<VkDescriptorSetLayout
   bindings.PushBack(uboLayoutBinding);
 }
 
-VkDescriptorSetLayout VkCore::CreateDescriptorSetLayout(VkDevice device,
-                                                        const Containers::Vector<VkDescriptorSetLayoutBinding>&
-                                                        bindings) {
+VkDescriptorSetLayout VkCore::CreateDescriptorSetLayout(
+    VkDevice device, const Containers::Vector<VkDescriptorSetLayoutBinding>& bindings) {
   VkDescriptorSetLayoutCreateInfo layoutInfo = {};
   layoutInfo.sType                           = VK_STRUCTURE_TYPE_DESCRIPTOR_SET_LAYOUT_CREATE_INFO;
   layoutInfo.bindingCount                    = bindings.GetSize();
@@ -540,7 +534,7 @@ VkDescriptorSetLayout VkCore::CreateDescriptorSetLayout(VkDevice device,
 
   VkDescriptorSetLayout descriptorSet;
   VERIFY_VK_OP(vkCreateDescriptorSetLayout(device, &layoutInfo, nullptr, &descriptorSet),
-    "Failed to create descriptor set layout");
+               "Failed to create descriptor set layout");
   return descriptorSet;
 }
 
@@ -555,7 +549,7 @@ VkPipelineLayout VkCore::CreatePipelineLayout(VkDevice device,
 
   VkPipelineLayout pipelineLayout;
   VERIFY_VK_OP(vkCreatePipelineLayout(device, &pipelineLayoutInfo, nullptr, &pipelineLayout),
-    "Failed to create pipeline layout");
+               "Failed to create pipeline layout");
   return pipelineLayout;
 }
 
@@ -564,7 +558,7 @@ VkShaderModule VkCore::CreateShaderModule(VkDevice device, const Containers::Vec
   createInfo.sType                    = VK_STRUCTURE_TYPE_SHADER_MODULE_CREATE_INFO;
   createInfo.codeSize                 = code.GetSize();
   // NOLINTNEXTLINE(cppcoreguidelines-pro-type-reinterpret-cast)
-  createInfo.pCode = reinterpret_cast<const U32*>(code.Data()); // byte code ptr conversion
+  createInfo.pCode = reinterpret_cast<const U32*>(code.Data());  // byte code ptr conversion
 
   VkShaderModule shaderModule;
   VERIFY_VK_OP(vkCreateShaderModule(device, &createInfo, nullptr, &shaderModule), "Failed to create shader module");
@@ -577,13 +571,10 @@ Containers::Vector<VkFramebuffer> VkCore::CreateFrameBuffers(VkDevice device,
                                                              Memory::Allocator& allocator) {
   const auto& swapChainImageViews = scopedSwapChain.m_imageViews;
 
-  Containers::Vector<VkFramebuffer> frameBuffers(ContainerExtent{ swapChainImageViews.GetSize() }, allocator);
+  Containers::Vector<VkFramebuffer> frameBuffers(ContainerExtent{swapChainImageViews.GetSize()}, allocator);
 
   for (U32 idx = 0; idx < swapChainImageViews.GetSize(); ++idx) {
-
-    const std::array<VkImageView, 1> attachments = {
-      swapChainImageViews[idx]
-    };
+    const std::array<VkImageView, 1> attachments = {swapChainImageViews[idx]};
 
     VkFramebufferCreateInfo framebufferInfo = {};
     framebufferInfo.sType                   = VK_STRUCTURE_TYPE_FRAMEBUFFER_CREATE_INFO;
@@ -595,25 +586,22 @@ Containers::Vector<VkFramebuffer> VkCore::CreateFrameBuffers(VkDevice device,
     framebufferInfo.layers                  = 1;
 
     VERIFY_VK_OP(vkCreateFramebuffer(device, &framebufferInfo, nullptr, &frameBuffers[idx]),
-      "Failed to create framebuffer");
+                 "Failed to create framebuffer");
   }
 
   return frameBuffers;
 }
 
 void VkCore::CreateFrameBuffers(VkDevice device,
-  VkRenderPass renderPass,
-  const VkScopedSwapChain& scopedSwapChain,
-  Containers::Vector<VkFramebuffer>& frameBuffers) {
+                                VkRenderPass renderPass,
+                                const VkScopedSwapChain& scopedSwapChain,
+                                Containers::Vector<VkFramebuffer>& frameBuffers) {
   const auto& swapChainImageViews = scopedSwapChain.m_imageViews;
 
   frameBuffers.Resize(swapChainImageViews.GetSize());
 
   for (U32 idx = 0; idx < swapChainImageViews.GetSize(); ++idx) {
-
-    const std::array<VkImageView, 1> attachments = {
-      swapChainImageViews[idx]
-    };
+    const std::array<VkImageView, 1> attachments = {swapChainImageViews[idx]};
 
     VkFramebufferCreateInfo framebufferInfo = {};
     framebufferInfo.sType                   = VK_STRUCTURE_TYPE_FRAMEBUFFER_CREATE_INFO;
@@ -625,7 +613,7 @@ void VkCore::CreateFrameBuffers(VkDevice device,
     framebufferInfo.layers                  = 1;
 
     VERIFY_VK_OP(vkCreateFramebuffer(device, &framebufferInfo, nullptr, &frameBuffers[idx]),
-      "Failed to create framebuffer");
+                 "Failed to create framebuffer");
   }
 }
 
@@ -690,11 +678,8 @@ VkDescriptorSet VkCore::CreateDescriptorSet(VkDevice device,
   return descriptorSet;
 }
 
-VkWriteDescriptorSet VkCore::CreateWriteDescriptorForUniformBuffer(VkDescriptorSet set,
-                                                                   U32 layoutIndex,
-                                                                   U32 binding,
-                                                                   const Containers::Vector<VkDescriptorBufferInfo>&
-                                                                   bufferInfos) {
+VkWriteDescriptorSet VkCore::CreateWriteDescriptorForUniformBuffer(
+    VkDescriptorSet set, U32 layoutIndex, U32 binding, const Containers::Vector<VkDescriptorBufferInfo>& bufferInfos) {
   VkWriteDescriptorSet descriptorWrite = {};
   descriptorWrite.sType                = VK_STRUCTURE_TYPE_WRITE_DESCRIPTOR_SET;
   descriptorWrite.dstSet               = set;
@@ -729,14 +714,9 @@ VkCommandBuffer VkCore::CreateCommandBuffer(VkDevice device, VkCommandPool comma
   return commandBuffer;
 }
 
-
-Containers::Vector<VkCommandBuffer> VkCore::CreateCommandBuffers(VkDevice device,
-                                                                 U32 count,
-                                                                 VkCommandPool commandPool,
-                                                                 VkCommandBufferLevel level,
-                                                                 Memory::Allocator& allocator) {
-
-  Containers::Vector<VkCommandBuffer> commandBuffers(ContainerExtent{ count }, allocator);
+Containers::Vector<VkCommandBuffer> VkCore::CreateCommandBuffers(
+    VkDevice device, U32 count, VkCommandPool commandPool, VkCommandBufferLevel level, Memory::Allocator& allocator) {
+  Containers::Vector<VkCommandBuffer> commandBuffers(ContainerExtent{count}, allocator);
   CreateCommandBuffers(device, count, commandPool, level, commandBuffers);
   return commandBuffers;
 }
@@ -746,7 +726,6 @@ void VkCore::CreateCommandBuffers(VkDevice device,
                                   VkCommandPool commandPool,
                                   VkCommandBufferLevel level,
                                   Containers::Vector<VkCommandBuffer>& commandBuffers) {
-
   VkCommandBufferAllocateInfo allocInfo = {};
   allocInfo.sType                       = VK_STRUCTURE_TYPE_COMMAND_BUFFER_ALLOCATE_INFO;
   allocInfo.commandPool                 = commandPool;
@@ -783,16 +762,15 @@ void VkCore::CreateSemaphores(VkDevice device, U32 count, Containers::Vector<VkS
 
   for (U32 idx = 0; idx < count; ++idx) {
     VERIFY_VK_OP(vkCreateSemaphore(device, &semaphoreInfo, nullptr, &semaphores[idx]),
-      "Failed to create semaphore [multi-create]");
+                 "Failed to create semaphore [multi-create]");
   }
 }
 
 Containers::Vector<VkSemaphore> VkCore::CreateSemaphores(VkDevice device, U32 count, Memory::Allocator& allocator) {
-  Containers::Vector<VkSemaphore> semaphores(ContainerExtent{ count }, allocator);
+  Containers::Vector<VkSemaphore> semaphores(ContainerExtent{count}, allocator);
   CreateSemaphores(device, count, semaphores);
   return semaphores;
 }
-
 
 VkFence VkCore::CreateFence(VkDevice device, VkFenceCreateFlags flags) {
   VkFenceCreateInfo fenceInfo = {};
@@ -818,10 +796,10 @@ Containers::Vector<VkFence> VkCore::CreateFences(VkDevice device,
                                                  U32 count,
                                                  VkFenceCreateFlags flags,
                                                  Memory::Allocator& allocator) {
-  Containers::Vector<VkFence> fences(ContainerExtent{ count }, allocator);
+  Containers::Vector<VkFence> fences(ContainerExtent{count}, allocator);
   CreateFences(device, count, flags, fences);
   return fences;
 }
 
-} // namespace Vulkan
-} // namespace Azura
+}  // namespace Vulkan
+}  // namespace Azura

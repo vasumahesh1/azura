@@ -4,20 +4,18 @@
 
 using namespace Azura::Memory;
 
-TEST(HeapMemoryBufferTest, Constructs)
-{
-  HeapMemoryBuffer target{ 32 };
+TEST(HeapMemoryBufferTest, Constructs) {
+  HeapMemoryBuffer target{32};
 
   ASSERT_NE(target.GetCurrentPtr(), 0u);
   ASSERT_NE(target.GetBasePtr(), 0u);
   ASSERT_EQ(target.GetSize(), 32u);
 }
 
-TEST(HeapMemoryBufferTest, AlignedConstruction)
-{
+TEST(HeapMemoryBufferTest, AlignedConstruction) {
   Azura::U32 alignment = 16;
 
-  HeapMemoryBuffer target{ 32, alignment };
+  HeapMemoryBuffer target{32, alignment};
 
   ASSERT_NE(target.GetCurrentPtr(), 0u);
   ASSERT_NE(target.GetBasePtr(), 0u);
@@ -28,11 +26,10 @@ TEST(HeapMemoryBufferTest, AlignedConstruction)
   ASSERT_EQ((target.GetCurrentPtr() & mask), 0u);
 }
 
-TEST(HeapMemoryBufferTest, AlignedConstruction32)
-{
+TEST(HeapMemoryBufferTest, AlignedConstruction32) {
   Azura::U32 alignment = 32;
 
-  HeapMemoryBuffer target{ 128, alignment };
+  HeapMemoryBuffer target{128, alignment};
 
   ASSERT_NE(target.GetCurrentPtr(), 0);
   ASSERT_NE(target.GetBasePtr(), 0);
@@ -43,11 +40,10 @@ TEST(HeapMemoryBufferTest, AlignedConstruction32)
   ASSERT_EQ((target.GetCurrentPtr() & mask), 0);
 }
 
-TEST(HeapMemoryBufferTest, AlignedConstruction256)
-{
+TEST(HeapMemoryBufferTest, AlignedConstruction256) {
   Azura::U32 alignment = 256;
 
-  HeapMemoryBuffer target{ 128, alignment };
+  HeapMemoryBuffer target{128, alignment};
 
   ASSERT_NE(target.GetCurrentPtr(), 0);
   ASSERT_NE(target.GetBasePtr(), 0);
@@ -58,13 +54,11 @@ TEST(HeapMemoryBufferTest, AlignedConstruction256)
   ASSERT_EQ((target.GetCurrentPtr() & mask), 0);
 }
 
-
-TEST(HeapMemoryBufferTest, AllocateNormal)
-{
-  Azura::U32 alignment = 16;
+TEST(HeapMemoryBufferTest, AllocateNormal) {
+  Azura::U32 alignment      = 16;
   Azura::U32 allocateAmount = 32;
 
-  HeapMemoryBuffer target{ 128, alignment };
+  HeapMemoryBuffer target{128, alignment};
 
   auto p1 = target.GetCurrentPtr();
 

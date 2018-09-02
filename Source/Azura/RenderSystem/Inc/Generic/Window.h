@@ -3,19 +3,19 @@
 
 namespace Azura {
 class Window {
-public:
+ public:
   Window(U32 width, U32 height);
   const void* GetHandle() const;
 
-protected:
+ protected:
   U32 GetWidth() const;
   U32 GetHeight() const;
 
   void SetHandle(void* window);
 
-private:
+ private:
   U32 m_width;
   U32 m_height;
   void* m_windowResource;
 };
-} // namespace Azura
+}  // namespace Azura

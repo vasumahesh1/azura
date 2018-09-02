@@ -1,5 +1,5 @@
-#include <limits>
 #include <iostream>
+#include <limits>
 
 #include "MonotonicAllocator_test.h"
 
@@ -23,7 +23,7 @@ TEST(MonotonicAllocatorTest, AllocateNormalData) {
   Azura::Memory::MonotonicAllocator target = Azura::Memory::MonotonicAllocator(myBuffer, 128);
 
   auto ptr = target.New<int>(0);
-  
+
   ASSERT_NE(ptr, nullptr);
   ASSERT_EQ(*ptr, 0);
 
@@ -37,7 +37,7 @@ TEST(MonotonicAllocatorTest, AllocateStructData) {
   Azura::Memory::MonotonicAllocator target = Azura::Memory::MonotonicAllocator(myBuffer, 128);
 
   auto ptr = target.New<Sample>();
-  
+
   ASSERT_NE(ptr, nullptr);
   ASSERT_EQ(ptr->arg1, 99);
   ASSERT_EQ(ptr->arg2, 16.0);
@@ -49,13 +49,13 @@ TEST(MonotonicAllocatorTest, AllocateNormalData2) {
 
   uintptr_t base = target.GetBasePtr();
 
-  auto ptr = target.New<Sample>();
-  auto ptr2 = target.New<Sample>();
+  auto ptr   = target.New<Sample>();
+  auto ptr2  = target.New<Sample>();
   ptr2->arg1 = 12;
   ptr2->arg2 = 7.0;
 
-  ASSERT_EQ(base, (uintptr_t) ptr.get());
-  ASSERT_EQ(base + sizeof(Sample), (uintptr_t) ptr2.get());
+  ASSERT_EQ(base, (uintptr_t)ptr.get());
+  ASSERT_EQ(base + sizeof(Sample), (uintptr_t)ptr2.get());
 
   ASSERT_NE(ptr, nullptr);
   ASSERT_EQ(ptr->arg1, 99);

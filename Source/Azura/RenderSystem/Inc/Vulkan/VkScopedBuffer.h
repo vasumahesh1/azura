@@ -6,8 +6,7 @@ namespace Azura {
 namespace Vulkan {
 
 class VkScopedBuffer {
-
-public:
+ public:
   VkScopedBuffer(VkDevice device,
                  VkBufferUsageFlags usage,
                  U32 bufferSize,
@@ -29,12 +28,11 @@ public:
   VkDeviceMemory Memory() const;
   VkDescriptorBufferInfo GetDescriptorInfo(U32 offset, U32 range) const;
 
-
-private:
+ private:
   VkDevice m_device;
   VkBuffer m_buffer{};
   VkDeviceMemory m_memory{};
 };
 
-} // namespace Vulkan
-} // namespace Azura
+}  // namespace Vulkan
+}  // namespace Azura

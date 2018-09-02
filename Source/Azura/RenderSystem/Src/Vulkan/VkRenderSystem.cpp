@@ -6,4 +6,4 @@ Renderer* RenderSystem::CreateRenderer(Memory::Allocator& allocator) {
   UNUSED(allocator);
   return nullptr;
 }
-} // namespace Azura
+}  // namespace Azura

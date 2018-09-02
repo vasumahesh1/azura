@@ -2,17 +2,16 @@
 
 #include <cassert>
 
-#include "Types.h"
 #include "MemoryBuffer.h"
+#include "Types.h"
 #include "Utils/Macros.h"
 
 namespace Azura {
 namespace Memory {
 
-template<U32 Size>
+template <U32 Size>
 class StackMemoryBuffer final : public MemoryBuffer {
-
-public:
+ public:
   StackMemoryBuffer();
   ~StackMemoryBuffer() = default;
 
@@ -27,16 +26,13 @@ public:
   void* Allocate(U32 size) override;
   void Deallocate(void* address) override;
 
-private:
+ private:
   UPTR AllocateRaw(U32 size);
   U8 m_buffer[Size];
 };
 
 template <U32 Size>
-StackMemoryBuffer<Size>::StackMemoryBuffer()
-  : MemoryBuffer(Size, reinterpret_cast<AddressPtr>(m_buffer)),
-    m_buffer{} {
-}
+StackMemoryBuffer<Size>::StackMemoryBuffer() : MemoryBuffer(Size, reinterpret_cast<AddressPtr>(m_buffer)), m_buffer{} {}
 
 template <U32 Size>
 void* StackMemoryBuffer<Size>::Allocate(U32 size) {
@@ -54,8 +50,7 @@ void StackMemoryBuffer<Size>::Deallocate(void* address) {
 template <U32 Size>
 UPTR StackMemoryBuffer<Size>::AllocateRaw(U32 size) {
   // Available < Size, Can't allocate
-  if (m_size - (m_currentPosition - m_memoryBlock) < size)
-  {
+  if (m_size - (m_currentPosition - m_memoryBlock) < size) {
     return 0u;
   }
 
@@ -64,5 +59,5 @@ UPTR StackMemoryBuffer<Size>::AllocateRaw(U32 size) {
 
   return addr;
 }
-} // namespace Memory
-} // namespace Azura
+}  // namespace Memory
+}  // namespace Azura

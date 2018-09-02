@@ -5,8 +5,7 @@
 namespace Azura {
 namespace Memory {
 class MemoryBuffer {
-
-public:
+ public:
   MemoryBuffer() = default;
   explicit MemoryBuffer(U32 size);
   MemoryBuffer(U32 size, AddressPtr blockStart);
@@ -18,19 +17,25 @@ public:
   MemoryBuffer(MemoryBuffer&& other) noexcept;
   MemoryBuffer& operator=(MemoryBuffer&& other) noexcept;
 
-  virtual void* Allocate(U32 size) = 0;
+  virtual void* Allocate(U32 size)       = 0;
   virtual void Deallocate(void* address) = 0;
 
 #ifdef BUILD_UNIT_TEST
-    AddressPtr GetCurrentPtr() const { return m_currentPosition; };
-    AddressPtr GetBasePtr() const { return m_memoryBlock; };
-    U32 GetSize() const { return m_size; };
+  AddressPtr GetCurrentPtr() const {
+    return m_currentPosition;
+  };
+  AddressPtr GetBasePtr() const {
+    return m_memoryBlock;
+  };
+  U32 GetSize() const {
+    return m_size;
+  };
 #endif
 
-protected:
+ protected:
   AddressPtr m_memoryBlock{0};
   AddressPtr m_currentPosition{0};
   U32 m_size{0};
 };
-} // namespace Memory
-} // namespace Azura
+}  // namespace Memory
+}  // namespace Azura
