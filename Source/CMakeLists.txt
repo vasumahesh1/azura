@@ -1,8 +1,8 @@
 set(BOOST_VERSION 1.67.0 CACHE STRING "" FORCE)
 
-message("CMake: Build Target: ${BUILD_TARGET}")
-message("CMake: Build Platform: ${BUILD_PLATFORM}")
-message("CMake: Build Arch: ${BUILD_ARCH}")
+message(STATUS "Build Target: ${BUILD_TARGET}")
+message(STATUS "Build Platform: ${BUILD_PLATFORM}")
+message(STATUS "Build Arch: ${BUILD_ARCH}")
 
 include("./GLFW.Import.cmake")
 include("./Vulkan.Import.cmake")

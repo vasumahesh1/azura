@@ -16,6 +16,8 @@ processEnv = os.environ.copy()
 hostExternalConfig = {}
 executableMap = {}
 
+currentBuildArch = "64"
+
 def getRawConfigMap(config, section):
     resultMap = {}
 
@@ -96,10 +98,15 @@ def configureWindows():
   global hostExternalConfig
   global executableMap
   global processEnv
+  global currentBuildArch
+  global buildArgs
 
+  processEnv['INCLUDE'] = hostExternalConfig['msvcpath'] + '/include/;' + hostExternalConfig['windows10sdkinc'] + '/um/;' + hostExternalConfig['windows10sdkinc'] + '/shared/;' + hostExternalConfig['windows10sdkinc'] + '/ucrt/;';
   processEnv['PATH'] = hostExternalConfig['ninja'] + ";" + hostExternalConfig['msvcpath'] + "/bin/Hostx64/x64/;" + hostExternalConfig['windows10sdkbin'] + "/x64/;" + processEnv['PATH'];
   processEnv['LIB'] = hostExternalConfig['msvcpath'] + '/lib/x64/;' + hostExternalConfig['windows10sdklib'] + '/ucrt/x64/;' + hostExternalConfig['windows10sdklib'] + '/um/x64/;'
-  processEnv['INCLUDE'] = hostExternalConfig['msvcpath'] + '/include/;' + hostExternalConfig['windows10sdkinc'] + '/um/;' + hostExternalConfig['windows10sdkinc'] + '/shared/;' + hostExternalConfig['windows10sdkinc'] + '/ucrt/;';
+
+  if (currentBuildArch == "64"):
+    buildArgs.projectGenerator = buildArgs.projectGenerator + ' Win64'
 
 def configureLinux():
   global hostExternalConfig
@@ -124,6 +131,15 @@ def printTimeDelta(seconds):
         return '%dm %ds' % (minutes, seconds)
     else:
         return '%ds' % (seconds)
+
+def setCompileSettings():
+  global currentBuildArch
+
+  if (buildArgs.target == 'Win64'):
+    return
+
+  if (buildArgs.target == 'Win32'):
+    currentBuildArch = "32"
 
 def addTargetCmakeArgs(cmakeArgs):
   if (buildArgs.target == 'Win64'):
@@ -155,6 +171,8 @@ def run():
   if (buildArgs.v):
     print("Version: " + VERSION)
     return
+
+  setCompileSettings()
 
   externalConfig = ConfigParser.ConfigParser()
   externalConfig.read(buildArgs.configFile)

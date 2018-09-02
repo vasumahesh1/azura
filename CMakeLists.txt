@@ -22,6 +22,8 @@ enable_testing()
 set_property(GLOBAL PROPERTY USE_FOLDERS ON)
 
 if(MSVC)
+  # AzuraConfigureMSVC()
+
   if(CMAKE_CXX_FLAGS MATCHES "/W[0-4]")
     string(REGEX
            REPLACE "/W[0-4]"
@@ -32,6 +34,7 @@ if(MSVC)
     set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} /W4")
   endif()
   set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} /WX /we4061 /wd4127")
+
 elseif(CMAKE_COMPILER_IS_GNUCC OR CMAKE_COMPILER_IS_GNUCXX)
   set(
     CMAKE_CXX_FLAGS
