@@ -23,7 +23,7 @@ if ("${BUILD_PLATFORM}" STREQUAL "Windows")
 		set(VULKAN_LIB ${VULKAN_1_1_77_0_LIB32_DIR} CACHE STRING "" FORCE)
 	endif()
 
-	target_link_libraries(VULKAN_STATIC INTERFACE ${VULKAN_LIB}/vulkan-1)
+	target_link_libraries(VULKAN_STATIC INTERFACE ${VULKAN_LIB}/vulkan-1.lib)
 endif()
 
 target_include_directories(VULKAN_STATIC INTERFACE ${VULKAN_INCLUDE})

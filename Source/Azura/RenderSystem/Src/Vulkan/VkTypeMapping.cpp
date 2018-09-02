@@ -9,6 +9,13 @@ namespace Vulkan {
   FUNC(RawStorageFormat::R32_UNORM, VK_FORMAT_UNDEFINED)                                                               \
   FUNC(RawStorageFormat::R32_SNORM, VK_FORMAT_UNDEFINED)                                                               \
                                                                                                                        \
+  FUNC(RawStorageFormat::B8G8R8A8_UNORM, VK_FORMAT_B8G8R8A8_UNORM)                                                     \
+  FUNC(RawStorageFormat::B8G8R8A8_SNORM, VK_FORMAT_B8G8R8A8_SNORM)                                                     \
+  FUNC(RawStorageFormat::B8G8R8A8_USCALED, VK_FORMAT_B8G8R8A8_USCALED)                                                 \
+  FUNC(RawStorageFormat::B8G8R8A8_SSCALED, VK_FORMAT_B8G8R8A8_SSCALED)                                                 \
+  FUNC(RawStorageFormat::B8G8R8A8_UINT, VK_FORMAT_B8G8R8A8_UINT)                                                       \
+  FUNC(RawStorageFormat::B8G8R8A8_SINT, VK_FORMAT_B8G8R8A8_SINT)                                                       \
+  FUNC(RawStorageFormat::B8G8R8A8_SRGB, VK_FORMAT_B8G8R8A8_SRGB)                                                       \
   FUNC(RawStorageFormat::R16_FLOAT, VK_FORMAT_R16_SFLOAT)                                                              \
   FUNC(RawStorageFormat::R16_UINT, VK_FORMAT_R16_UINT)                                                                 \
   FUNC(RawStorageFormat::R16_SINT, VK_FORMAT_R16_SINT)                                                                 \

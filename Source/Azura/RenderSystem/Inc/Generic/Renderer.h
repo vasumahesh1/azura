@@ -12,14 +12,27 @@ const U32 DEFAULT_FRAMES_IN_FLIGHT = 2;
 struct DrawablePoolCreateInfo;
 
 struct Bounds3D {
-  uint32_t m_width{0};
-  uint32_t m_height{0};
-  uint32_t m_depth{0};
+  U32 m_width{0};
+  U32 m_height{0};
+  U32 m_depth{0};
+
+  Bounds3D(U32 width, U32 height, U32 depth)
+    : m_width(width),
+      m_height(height),
+      m_depth(depth) {
+
+  }
 };
 
 struct Bounds2D {
-  uint32_t m_width{0};
-  uint32_t m_height{0};
+  U32 m_width{0};
+  U32 m_height{0};
+
+  Bounds2D(U32 width, U32 height)
+    : m_width(width),
+      m_height(height) {
+
+  }
 };
 
 struct DeviceRequirements {
@@ -36,32 +49,32 @@ struct ApplicationInfo {
 
 struct SwapChainRequirement {
   RawStorageFormat m_format{};
-  Bounds2D m_extent{};
+  Bounds2D m_extent{0u, 0u};
   ColorSpace m_colorSpace{};
   U32 m_framesInFlight{DEFAULT_FRAMES_IN_FLIGHT};
 };
 
 class Renderer {
- public:
+public:
   Renderer(ApplicationInfo appInfo, const DeviceRequirements& deviceRequirements, Memory::Allocator& allocator);
   virtual ~Renderer() = default;
 
   Renderer(const Renderer& other) = delete;
-  Renderer(Renderer&& other)      = delete;
+  Renderer(Renderer&& other) = delete;
   Renderer& operator=(const Renderer& rhs) = delete;
   Renderer& operator=(Renderer&& rhs) = delete;
 
-  virtual void SetDrawablePoolCount(U32 count)                                       = 0;
+  virtual void SetDrawablePoolCount(U32 count) = 0;
   virtual DrawablePool& CreateDrawablePool(const DrawablePoolCreateInfo& createInfo) = 0;
 
- protected:
+protected:
   const ApplicationInfo& GetApplicationInfo() const;
   const DeviceRequirements& GetDeviceRequirements() const;
   Memory::Allocator& GetAllocator() const;
 
- private:
+private:
   const ApplicationInfo m_applicationInfo;
   const DeviceRequirements m_deviceRequirements;
   Memory::Allocator& m_allocator;
 };
-}  // namespace Azura
+} // namespace Azura

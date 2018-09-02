@@ -54,7 +54,6 @@ add_library(VulkanRenderSystem ${VULKAN_SOURCES})
 target_compile_definitions(VulkanRenderSystem PUBLIC API_VULKAN=1)
 
 target_include_directories(VulkanRenderSystem
-                           PRIVATE ${BOOST_ROOT}/
-                           PUBLIC ${PROJECT_SOURCE_DIR}/Inc)
+                           PUBLIC ${BOOST_ROOT}/ ${PROJECT_SOURCE_DIR}/Inc)
 
 target_link_libraries(VulkanRenderSystem Common VULKAN_STATIC GLFW_STATIC)

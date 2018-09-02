@@ -12,6 +12,7 @@ add_subdirectory(Imports)
 
 add_subdirectory(Common)
 add_subdirectory(Azura)
+add_subdirectory(Samples)
 add_subdirectory(Log)
 
 if(DEFINED FORCE_INCLUDE_SUB_DIRECTORIES)

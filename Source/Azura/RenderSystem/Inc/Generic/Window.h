@@ -2,6 +2,7 @@
 #include <functional>
 #include "GenericTypes.h"
 #include "Types.h"
+#include "Renderer.h"
 
 namespace Azura {
 class Window {
@@ -21,6 +22,8 @@ class Window {
   virtual void Destroy() = 0;
 
   ViewportDimensions GetViewport() const;
+
+  SwapChainRequirement GetSwapChainRequirements() const;
 
  protected:
   U32 GetWidth() const;
