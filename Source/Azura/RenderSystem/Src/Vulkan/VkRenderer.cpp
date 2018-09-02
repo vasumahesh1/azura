@@ -3,6 +3,7 @@
 #include "Memory/MonotonicAllocator.h"
 #include "Utils/Macros.h"
 #include "Vulkan/VkShader.h"
+#include "Generic/Window.h"
 
 using namespace Azura::Containers; // NOLINT - Freedom to use using namespace in CPP files.
 
@@ -125,7 +126,7 @@ VkRenderer::VkRenderer(const ApplicationInfo& appInfo,
                        const SwapChainRequirement& swapChainRequirement,
                        Memory::Allocator& mainAllocator,
                        Memory::Allocator& drawAllocator,
-                       VkWindow& window)
+                       Window& window)
   : Renderer(appInfo, deviceRequirements, mainAllocator),
     m_window(window),
     m_drawablePools(drawAllocator),
@@ -139,10 +140,10 @@ VkRenderer::VkRenderer(const ApplicationInfo& appInfo,
   STACK_ALLOCATOR(Temporary, Memory::MonotonicAllocator, 2048);
 
   Vector<const char*> extensions(4, allocatorTemporary);
-  VkWindow::GetInstanceExtensions(extensions);
+  VkPlatform::GetInstanceExtensions(extensions);
 
   m_instance = VkCore::CreateInstance(GetApplicationInfo(), extensions);
-  m_surface  = m_window.CreateSurface(m_instance);
+  m_surface  = VkPlatform::CreateSurface(m_window.GetHandle(), m_instance);
 
   m_physicalDevice = VkCore::SelectPhysicalDevice(m_instance, m_surface, GetDeviceRequirements());
   m_queueIndices   = VkCore::FindQueueFamiliesInDevice(m_physicalDevice, m_surface, GetDeviceRequirements());
@@ -205,14 +206,15 @@ DrawablePool& VkRenderer::CreateDrawablePool(const DrawablePoolCreateInfo& creat
   VkPhysicalDeviceMemoryProperties memProperties;
   vkGetPhysicalDeviceMemoryProperties(m_physicalDevice, &memProperties);
 
-  // TODO(vasumahesh1): [WON'T RUN]: Get viewport from Window?
+  // TODO(vasumahesh1): [WON'T RUN]: Get viewport from WindowSurface?
   ViewportDimensions viewport{};
 
   // TODO(vasumahesh1): This isn't as performance optimized as it should be. We can probably find a way to insert a buffer inside each pool?
   VkDrawablePool pool = VkDrawablePool(createInfo.m_numDrawables, createInfo.m_byteSize, m_device,
                                        VK_BUFFER_USAGE_INDEX_BUFFER_BIT | VK_BUFFER_USAGE_VERTEX_BUFFER_BIT,
                                        VK_MEMORY_PROPERTY_HOST_VISIBLE_BIT | VK_MEMORY_PROPERTY_HOST_COHERENT_BIT,
-                                       m_pipelineLayout, m_renderPass, viewport, memProperties, m_swapChain, m_drawPoolAllocator, allocatorTemporary);
+                                       m_pipelineLayout, m_renderPass, viewport, memProperties, m_swapChain,
+                                       m_drawPoolAllocator, allocatorTemporary);
 
   m_drawablePools.PushBack(std::move(pool));
 

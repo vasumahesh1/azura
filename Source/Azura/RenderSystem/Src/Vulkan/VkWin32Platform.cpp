@@ -1,4 +1,4 @@
-﻿#include "Vulkan/VkWindow.h"
+﻿#include "Vulkan/VkPlatform.h"
 
 #include <Windows.h>
 
@@ -8,16 +8,12 @@
 namespace Azura {
 namespace Vulkan {
 
-VkWindow::VkWindow(void* windowResource, const U32 width, const U32 height)
-  : Window(windowResource, width, height) {
-}
-
-VkSurfaceKHR VkWindow::CreateSurface(VkInstance instance) const {
+VkSurfaceKHR VkPlatform::CreateSurface(const void* windowHandle, VkInstance instance) {
   VkWin32SurfaceCreateInfoKHR createInfo = {};
   createInfo.sType                       = VK_STRUCTURE_TYPE_WIN32_SURFACE_CREATE_INFO_KHR;
 
   // NOLINTNEXTLINE(cppcoreguidelines-pro-type-reinterpret-cast)
-  createInfo.hwnd      = *reinterpret_cast<const HWND*>(Handle());
+  createInfo.hwnd      = *reinterpret_cast<const HWND*>(windowHandle);
   createInfo.hinstance = GetModuleHandle(nullptr);
 
   // NOLINTNEXTLINE(cppcoreguidelines-pro-type-reinterpret-cast)
@@ -30,7 +26,7 @@ VkSurfaceKHR VkWindow::CreateSurface(VkInstance instance) const {
   return surface;
 }
 
-void VkWindow::GetInstanceExtensions(Containers::Vector<const char*>& extensions) {
+void VkPlatform::GetInstanceExtensions(Containers::Vector<const char*>& extensions) {
   extensions.PushBack(VK_KHR_SURFACE);
   extensions.PushBack("VK_KHR_win32_surface");
 }

@@ -6,8 +6,12 @@
 #include "Generic/Renderer.h"
 #include "VkCore.h"
 #include "VkScopedBuffer.h"
-#include "VkWindow.h"
+#include "VkPlatform.h"
 #include "VkScopedPipeline.h"
+
+namespace Azura {
+class Window;
+}
 
 namespace Azura {
 namespace Vulkan {
@@ -74,7 +78,7 @@ public:
              const SwapChainRequirement& swapChainRequirement,
              Memory::Allocator& mainAllocator,
              Memory::Allocator& drawAllocator,
-             VkWindow& window);
+             Window& window);
   ~VkRenderer();
 
   VkRenderer(const VkRenderer& other) = delete;
@@ -86,7 +90,7 @@ public:
   void SetDrawablePoolCount(U32 count) override;
 
 private:
-  VkWindow& m_window;
+  Window& m_window;
   Containers::Vector<VkDrawablePool> m_drawablePools;
 
   VkInstance m_instance;
