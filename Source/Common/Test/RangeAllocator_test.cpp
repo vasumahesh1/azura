@@ -38,11 +38,11 @@ TEST(RangeAllocatorTest, AllocateNormalData) {
   const auto& freeRanges     = rangeAllocator.GetFreeRanges();
   const auto& occupiedRanges = rangeAllocator.GetOccupiedRanges();
 
-  ASSERT_EQ(freeRanges.size(), 1);
+  ASSERT_EQ(freeRanges.size(), 1u);
   ASSERT_EQ(freeRanges[0].m_offset, sizeof(int));
   ASSERT_EQ(freeRanges[0].m_size, baseSize - sizeof(int));
 
-  ASSERT_EQ(occupiedRanges.size(), 1);
+  ASSERT_EQ(occupiedRanges.size(), 1u);
   ASSERT_EQ(occupiedRanges[0].m_offset, 0u);
   ASSERT_EQ(occupiedRanges[0].m_size, sizeof(int));
 
@@ -65,11 +65,11 @@ TEST(RangeAllocatorTest, DeallocateNormalData) {
   const auto& freeRanges     = rangeAllocator.GetFreeRanges();
   const auto& occupiedRanges = rangeAllocator.GetOccupiedRanges();
 
-  ASSERT_EQ(freeRanges.size(), 2);
+  ASSERT_EQ(freeRanges.size(), 2u);
   ASSERT_EQ(freeRanges[0].m_offset, sizeof(int));
   ASSERT_EQ(freeRanges[0].m_size, baseSize - sizeof(int));
   ASSERT_EQ(freeRanges[1].m_offset, 0u);
   ASSERT_EQ(freeRanges[1].m_size, sizeof(int));
 
-  ASSERT_EQ(occupiedRanges.size(), 0);
+  ASSERT_EQ(occupiedRanges.size(), 0u);
 }

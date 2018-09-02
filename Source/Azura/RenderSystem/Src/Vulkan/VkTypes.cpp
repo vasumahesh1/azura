@@ -29,7 +29,7 @@ bool SwapChainDeviceSupport::IsSupported() const {
 }
 
 VkScopedSwapChain::VkScopedSwapChain(Memory::Allocator& allocator)
-    : m_swapChain(nullptr), m_extent(), m_surfaceFormat(), m_images(allocator), m_imageViews(allocator) {}
+    : m_swapChain(), m_extent(), m_surfaceFormat(), m_images(allocator), m_imageViews(allocator) {}
 
 }  // namespace Vulkan
 }  // namespace Azura

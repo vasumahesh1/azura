@@ -102,11 +102,14 @@ def configureWindows():
   global buildArgs
 
   processEnv['INCLUDE'] = hostExternalConfig['msvcpath'] + '/include/;' + hostExternalConfig['windows10sdkinc'] + '/um/;' + hostExternalConfig['windows10sdkinc'] + '/shared/;' + hostExternalConfig['windows10sdkinc'] + '/ucrt/;';
-  processEnv['PATH'] = hostExternalConfig['ninja'] + ";" + hostExternalConfig['msvcpath'] + "/bin/Hostx64/x64/;" + hostExternalConfig['windows10sdkbin'] + "/x64/;" + processEnv['PATH'];
-  processEnv['LIB'] = hostExternalConfig['msvcpath'] + '/lib/x64/;' + hostExternalConfig['windows10sdklib'] + '/ucrt/x64/;' + hostExternalConfig['windows10sdklib'] + '/um/x64/;'
 
   if (currentBuildArch == "64"):
+    processEnv['PATH'] = hostExternalConfig['ninja'] + ";" + hostExternalConfig['msvcpath'] + "/bin/Hostx64/x64/;" + hostExternalConfig['windows10sdkbin'] + "/x64/;" + processEnv['PATH'];
+    processEnv['LIB'] = hostExternalConfig['msvcpath'] + '/lib/x64/;' + hostExternalConfig['windows10sdklib'] + '/ucrt/x64/;' + hostExternalConfig['windows10sdklib'] + '/um/x64/;'
     buildArgs.projectGenerator = buildArgs.projectGenerator + ' Win64'
+  elif (currentBuildArch == "32"):
+    processEnv['PATH'] = hostExternalConfig['ninja'] + ";" + hostExternalConfig['msvcpath'] + "/bin/Hostx86/x86/;" + hostExternalConfig['windows10sdkbin'] + "/x86/;" + processEnv['PATH'];
+    processEnv['LIB'] = hostExternalConfig['msvcpath'] + '/lib/x86/;' + hostExternalConfig['windows10sdklib'] + '/ucrt/x86/;' + hostExternalConfig['windows10sdklib'] + '/um/x86/;'
 
 def configureLinux():
   global hostExternalConfig
