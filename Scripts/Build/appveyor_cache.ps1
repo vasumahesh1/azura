@@ -18,10 +18,12 @@ appveyor DownloadFile $env:NINJA_URL -FileName ninja.zip > $null
 7z x ninja.zip -oC:\AppveyorCache\Ninja\ > $null
 
 # Download GLFW
-# TODO(vasumahesh1): [ARCH]
 echo "Downloading GLFW ..."
-appveyor DownloadFile $env:GLFW_64_URL -FileName ninja.zip > $null
-7z x glfw-3.2.1.bin.WIN64.zip -oC:\AppveyorCache\GLFW\ > $null
+appveyor DownloadFile $env:GLFW_64_URL -FileName glfw64.zip > $null
+7z x glfw64.zip -oC:\AppveyorCache\GLFW\ > $null
+
+appveyor DownloadFile $env:GLFW_32_URL -FileName glfw32.zip > $null
+7z x glfw32.zip -oC:\AppveyorCache\GLFW\ > $null
 
 # Download and setup Vulkan
 echo "Downloading VulkanSDK ..."

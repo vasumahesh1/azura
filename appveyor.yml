@@ -15,8 +15,8 @@ environment:
     - BUILD: 'DEBUG'
       TARGET: 'Win64'
 
-    - BUILD: 'RELEASE'
-      TARGET: 'Win64'
+    - BUILD: 'DEBUG'
+      TARGET: 'Win32'
 
 matrix:
   fast_finish: true
