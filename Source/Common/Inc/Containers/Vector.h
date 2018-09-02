@@ -29,9 +29,9 @@ class Vector {
   Vector() = default;
   explicit Vector(Memory::Allocator& alloc);
 
-  // TODO: Enable When NewDeleteAllocator is ready
-  // explicit Vector(UINT maxSize);
   Vector(UINT maxSize, Memory::Allocator& alloc);
+
+  Vector(std::initializer_list<Type> list, Memory::Allocator& alloc);
 
   template <typename... Args>
   Vector(ContainerExtent extent, Memory::Allocator& alloc, Args&&... args);
@@ -288,6 +288,11 @@ Vector<Type>::Vector(Memory::Allocator& alloc) : m_allocator(alloc) {}
 template <typename Type>
 Vector<Type>::Vector(const UINT maxSize, Memory::Allocator& alloc)
     : m_maxSize(maxSize), m_allocator(alloc), m_base(m_allocator.get().RawNewArray<Type>(m_maxSize)) {}
+
+template <typename Type>
+Vector<Type>::Vector(std::initializer_list<Type> list, Memory::Allocator& alloc) : m_maxSize(list.size()), m_allocator(alloc), m_base(m_allocator.get().RawNewArray<Type>(m_maxSize)) {
+  std::copy(list.begin(), list.end(), m_base.get());
+}
 
 template <typename Type>
 template <typename... Args>
