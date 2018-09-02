@@ -7,7 +7,7 @@ class Window {
 public:
   virtual ~Window() = default;
   Window(String title, U32 width, U32 height);
-  const void* GetHandle() const;
+  virtual const void* GetHandle() const;
 
   Window(const Window& other) = delete;
   Window(Window&& other) noexcept = delete;

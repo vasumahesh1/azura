@@ -1,3 +1,5 @@
+// Don't include GLFW's non-sense. We include what we need.
+#define GLFW_INCLUDE_NONE
 #include <GLFW/glfw3.h>
 
 #include "Generic/GLFWWindow.h"
@@ -14,6 +16,9 @@ bool GLFWWindow::Initialize() {
     return false;
   }
 
+  glfwWindowHint(GLFW_CLIENT_API, GLFW_NO_API);
+  glfwWindowHint(GLFW_RESIZABLE, GLFW_FALSE);
+
   p_window = glfwCreateWindow(GetWidth(), GetHeight(), GetTitle(), nullptr, nullptr);
   return true;
 }
@@ -28,6 +33,10 @@ void GLFWWindow::StartListening() {
     CallUpdateFunction();
     glfwPollEvents();
   }
+}
+
+GLFWwindow* GLFWWindow::GetGLFWHandle() const {
+  return p_window;
 }
 
 } // namespace Azura
