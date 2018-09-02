@@ -6,28 +6,6 @@
 
 namespace Azura {
 namespace Memory {
-namespace Impl {
-inline U32 AlignAhead(U32 size, U32 alignment) {
-  return (size + (alignment - 1)) & ~(alignment - 1);
-}
-
-inline U32 NearestPowerOf2(U32 number) {
-  if (number == 0) {
-    return 0;
-  }
-
-  number--;
-  number |= number >> 1;
-  number |= number >> 2;
-  number |= number >> 4;
-  number |= number >> 8;
-  number |= number >> 16;
-  number++;
-  return number;
-}
-
-}  // namespace Impl
-
 template <typename T>
 using UniquePtr = std::unique_ptr<T, std::function<void(T*)>>;
 
@@ -96,27 +74,26 @@ class Allocator {
 
 template <typename Type, typename... Args>
 UniquePtr<Type> Allocator::New(Args... args) {
-  return InternalAllocate<Type, true, Args...>(sizeof(Type), sizeof(Type), args...);
+  return InternalAllocate<Type, true, Args...>(sizeof(Type), alignof(Type), args...);
 }
 
 template <typename Type, typename... Args>
 UniqueArrayPtr<Type> Allocator::NewArray(U32 numElements, Args... args) {
-  return InternalAllocateArray<Type, true, Args...>(sizeof(Type), numElements, sizeof(Type), args...);
+  return InternalAllocateArray<Type, true, Args...>(sizeof(Type), numElements, alignof(Type), args...);
 }
 
 template <typename Type, typename... Args>
 UniquePtr<Type> Allocator::RawNew(Args... args) {
-  return InternalAllocate<Type, false, Args...>(sizeof(Type), sizeof(Type), args...);
+  return InternalAllocate<Type, false, Args...>(sizeof(Type), alignof(Type), args...);
 }
 
 template <typename Type, typename... Args>
 UniqueArrayPtr<Type> Allocator::RawNewArray(U32 numElements, Args... args) {
-  return InternalAllocateArray<Type, false, Args...>(sizeof(Type), numElements, sizeof(Type), args...);
+  return InternalAllocateArray<Type, false, Args...>(sizeof(Type), numElements, alignof(Type), args...);
 }
 
 template <typename Type, bool Construct, typename... Args>
 UniquePtr<Type> Allocator::InternalAllocate(U32 size, U32 alignment, Args... args) {
-  alignment     = Impl::NearestPowerOf2(alignment);
   Type* address = reinterpret_cast<Type*>(Allocate(size, alignment));
 
   // Allocator couldn't allocate
@@ -139,9 +116,7 @@ UniquePtr<Type> Allocator::InternalAllocate(U32 size, U32 alignment, Args... arg
 
 template <typename Type, bool Construct, typename... Args>
 UniqueArrayPtr<Type> Allocator::InternalAllocateArray(U32 elementSize, U32 numElements, U32 alignment, Args... args) {
-  alignment            = Impl::NearestPowerOf2(alignment);
-  const U32 actualSize = Impl::AlignAhead(elementSize, alignment);
-  Type* address        = reinterpret_cast<Type*>(Allocate(actualSize * numElements, alignment));
+  Type* address        = reinterpret_cast<Type*>(Allocate(elementSize * numElements, alignment));
 
   // Allocator couldn't allocate
   if (address == nullptr) {
