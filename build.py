@@ -1,5 +1,6 @@
 import sys
 import os
+import errno
 sys.path.insert(0, './Scripts/Build/')
 
 import datetime
@@ -17,6 +18,15 @@ hostExternalConfig = {}
 executableMap = {}
 
 currentBuildArch = "64"
+
+def mkdir_p(path):
+    try:
+        os.makedirs(path)
+    except OSError as exc:  # Python >2.5
+        if exc.errno == errno.EEXIST and os.path.isdir(path):
+            pass
+        else:
+            raise
 
 def getRawConfigMap(config, section):
     resultMap = {}
@@ -136,7 +146,14 @@ def printTimeDelta(seconds):
         return '%ds' % (seconds)
 
 def setCompileSettings():
+  global buildArgs
   global currentBuildArch
+
+  buildArgs.buildPath = os.path.join(buildArgs.buildPath, buildArgs.target)
+  mkdir_p(buildArgs.buildPath)
+
+  buildArgs.projectPath = os.path.join(buildArgs.projectPath, buildArgs.target)
+  mkdir_p(buildArgs.projectPath)
 
   if (buildArgs.target == 'Win64'):
     return
