@@ -1,11 +1,17 @@
+#include <utility>
 #include "Generic/Window.h"
 
 namespace Azura {
-Window::Window(const U32 width, const U32 height)
+Window::Window(String title, const U32 width, const U32 height)
     : m_width(width),
       m_height(height),
+      m_title(std::move(title)),
 
-      m_windowResource(nullptr) {}
+      p_windowResource(nullptr) {}
+
+void Window::SetUpdateCallback(std::function<void()> eventUpdate) {
+  p_updateFunc = eventUpdate;
+}
 
 U32 Window::GetWidth() const {
   return m_width;
@@ -16,10 +22,14 @@ U32 Window::GetHeight() const {
 }
 
 const void* Window::GetHandle() const {
-  return m_windowResource;
+  return p_windowResource;
 }
 
 void Window::SetHandle(void* window) {
-  m_windowResource = window;
+  p_windowResource = window;
+}
+
+const char* Window::GetTitle() const {
+  return m_title.c_str();
 }
 }  // namespace Azura

@@ -54,4 +54,4 @@ target_include_directories(VulkanRenderSystem
                            PRIVATE ${BOOST_ROOT}/
                            PUBLIC ${PROJECT_SOURCE_DIR}/Inc)
 
-target_link_libraries(VulkanRenderSystem Common VULKAN_STATIC)
+target_link_libraries(VulkanRenderSystem Common VULKAN_STATIC GLFW_STATIC)
