@@ -105,7 +105,7 @@ UniquePtr<Type> Allocator::InternalAllocate(U32 size, U32 alignment, Args... arg
     new (address) Type(args...);
   }
 
-  const auto customDeleter = [&](Type* data) {
+  const auto customDeleter = [this](Type* data) {
     data->~Type();
     Deallocate(data);
   };
@@ -129,12 +129,10 @@ UniqueArrayPtr<Type> Allocator::InternalAllocateArray(U32 elementSize, U32 numEl
     }
   }
 
-  const auto customDeleter = [&](Type* data) {
-    // TODO(vasumahesh1): Investigate Lambda Capture
-    const U32 dataSize = numElements;
+  const auto customDeleter = [this, numElements](Type* data) {
     if constexpr (Construct) {
       Type* ptr = data;
-      for (U32 idx = 0; idx < dataSize; ++idx) {
+      for (U32 idx = 0; idx < numElements; ++idx) {
         UNUSED(ptr->~Type());
         ++ptr;
       }
