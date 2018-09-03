@@ -22,7 +22,7 @@ class VkPipelineFactory {
  public:
   VkPipelineFactory(VkDevice device, Memory::Allocator& allocator);
 
-  VkPipelineFactory& AddShaderStage(VkPipelineShaderStageCreateInfo shaderStageCreateInfo);
+  VkPipelineFactory& AddShaderStage(const VkPipelineShaderStageCreateInfo& shaderStageCreateInfo);
 
   VkPipelineFactory& AddBindingDescription(U32 stride, Slot slot);
   VkPipelineFactory& AddAttributeDescription(RawStorageFormat rawFormat, U32 binding);

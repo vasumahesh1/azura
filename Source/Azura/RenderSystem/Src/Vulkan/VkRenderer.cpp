@@ -13,37 +13,38 @@ namespace Vulkan {
 VkDrawable::VkDrawable(Memory::Allocator& allocator, VkDrawablePool& parentPool)
     : Drawable(allocator), m_parentPool(parentPool) {}
 
-void VkDrawable::AddVertexData(const Containers::Vector<U8>& buffer, Slot slot) {
+void VkDrawable::AddVertexData(const U8* buffer, U32 size, Slot slot) {
+
   BufferInfo info = BufferInfo();
 
-  info.m_byteSize = buffer.GetSize();
+  info.m_byteSize = size;
   info.m_offset   = m_parentPool.GetOffset();
   info.m_slot     = slot;
 
   m_vertexBufferInfos.PushBack(std::move(info));
 
-  m_parentPool.AppendBytes(buffer);
+  m_parentPool.AppendBytes(buffer, size);
 }
 
-void VkDrawable::AddInstanceData(const Containers::Vector<U8>& buffer, Slot slot) {
+void VkDrawable::AddInstanceData(const U8* buffer, U32 size, Slot slot) {
   BufferInfo info = BufferInfo();
 
-  info.m_byteSize = buffer.GetSize();
+  info.m_byteSize = size;
   info.m_offset   = m_parentPool.GetOffset();
   info.m_slot     = slot;
 
   m_instanceBufferInfos.PushBack(std::move(info));
 
-  m_parentPool.AppendBytes(buffer);
+  m_parentPool.AppendBytes(buffer, size);
 }
 
-void VkDrawable::SetIndexData(const Containers::Vector<U8>& buffer) {
+void VkDrawable::SetIndexData(const U8* buffer, U32 size) {
   m_indexBufferInfo = BufferInfo();
 
-  m_indexBufferInfo.m_byteSize = buffer.GetSize();
+  m_indexBufferInfo.m_byteSize = size;
   m_indexBufferInfo.m_offset   = m_parentPool.GetOffset();
 
-  m_parentPool.AppendBytes(buffer);
+  m_parentPool.AppendBytes(buffer, size);
 }
 
 VkDrawablePool::VkDrawablePool(U32 numDrawables,
@@ -77,12 +78,17 @@ Drawable& VkDrawablePool::CreateDrawable() {
   return m_drawables[m_drawables.GetSize() - 1];
 }
 
-void VkDrawablePool::AppendBytes(const Containers::Vector<U8>& buffer) {
-  void* data = m_stagingBuffer.MapMemory(buffer.GetSize(), GetOffset());
-  std::memcpy(data, buffer.Data(), buffer.GetSize());
+void VkDrawablePool::AppendBytes(const U8* buffer, U32 bufferSize) {
+  void* data = m_stagingBuffer.MapMemory(bufferSize, GetOffset());
+  std::memcpy(data, buffer, bufferSize);
   m_stagingBuffer.UnMapMemory();
 
   // Record Offset Changes
+  MoveOffset(bufferSize);
+}
+
+// TODO(vasumahesh1): Check behaviour
+void VkDrawablePool::AppendBytes(const Containers::Vector<U8>& buffer) {
   DrawablePool::AppendBytes(buffer);
 }
 
@@ -219,6 +225,14 @@ DrawablePool& VkRenderer::CreateDrawablePool(const DrawablePoolCreateInfo& creat
 
 void VkRenderer::SetDrawablePoolCount(U32 count) {
   m_drawablePools.Reserve(count);
+}
+
+VkDevice VkRenderer::GetDevice() const {
+  return m_device;
+}
+
+String VkRenderer::GetRenderingAPI() const {
+  return "Vulkan";
 }
 
 }  // namespace Vulkan

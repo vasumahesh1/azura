@@ -22,9 +22,9 @@ class VkDrawable final : public Drawable {
  public:
   VkDrawable(Memory::Allocator& allocator, VkDrawablePool& parentPool);
 
-  void AddVertexData(const Containers::Vector<U8>& buffer, Slot slot) override;
-  void AddInstanceData(const Containers::Vector<U8>& buffer, Slot slot) override;
-  void SetIndexData(const Containers::Vector<U8>& buffer) override;
+  void AddVertexData(const U8* buffer, U32 size, Slot slot) override;
+  void AddInstanceData(const U8* buffer, U32 size, Slot slot) override;
+  void SetIndexData(const U8* buffer, U32 size) override;
 
  private:
   VkDrawablePool& m_parentPool;
@@ -48,6 +48,7 @@ class VkDrawablePool final : public DrawablePool {
                  Memory::Allocator& allocatorTemporary);
 
   Drawable& CreateDrawable() override;
+  void AppendBytes(const U8* buffer, U32 bufferSize) override;
   void AppendBytes(const Containers::Vector<U8>& buffer) override;
 
   void Submit() override;
@@ -88,6 +89,9 @@ class VkRenderer : public Renderer {
 
   DrawablePool& CreateDrawablePool(const DrawablePoolCreateInfo& createInfo) override;
   void SetDrawablePoolCount(U32 count) override;
+
+  VkDevice GetDevice() const;
+  String GetRenderingAPI() const override;
 
  private:
   Window& m_window;

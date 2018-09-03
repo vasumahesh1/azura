@@ -18,9 +18,16 @@ class Drawable {
 
   void SetVertexDataCount(U32 count);
   void SetInstanceDataCount(U32 count);
-  virtual void AddVertexData(const Containers::Vector<U8>& buffer, Slot slot)   = 0;
-  virtual void AddInstanceData(const Containers::Vector<U8>& buffer, Slot slot) = 0;
-  virtual void SetIndexData(const Containers::Vector<U8>& buffer)               = 0;
+
+  void AddVertexData(const Containers::Vector<U8>& buffer, Slot slot);
+  virtual void AddVertexData(const U8* buffer, U32 size, Slot slot)   = 0;
+
+  void AddInstanceData(const Containers::Vector<U8>& buffer, Slot slot);
+  virtual void AddInstanceData(const U8* buffer, U32 size, Slot slot)   = 0;
+
+  void SetIndexData(const Containers::Vector<U8>& buffer);
+  virtual void SetIndexData(const U8* buffer, U32 size)   = 0;
+
   virtual void SetDrawMode(DrawType drawMode);
 
   U32 GetVertexCount() const;
@@ -74,6 +81,8 @@ class DrawablePool {
   virtual void AddBufferBinding(Slot slot, const Containers::Vector<RawStorageFormat>& strides) = 0;
 
   virtual void AppendBytes(const Containers::Vector<U8>& buffer);
+  virtual void AppendBytes(const U8* buffer, U32 bufferSize) = 0;
+  void MoveOffset(U32 bufferSize);
 
   virtual void Submit() = 0;
 

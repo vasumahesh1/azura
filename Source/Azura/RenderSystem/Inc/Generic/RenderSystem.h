@@ -20,5 +20,7 @@ std::unique_ptr<Renderer> CreateRenderer(const ApplicationInfo& appInfo,
 
 std::unique_ptr<Window> CreateWindow(String title, U32 width, U32 height);
 
+std::unique_ptr<Shader> CreateShader(const Renderer& renderer, const String& fileName);
+
 }  // namespace RenderSystem
 }  // namespace Azura

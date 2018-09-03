@@ -19,6 +19,18 @@ void Drawable::SetInstanceDataCount(U32 count) {
   m_instanceBufferInfos.Reserve(count);
 }
 
+void Drawable::AddVertexData(const Containers::Vector<U8>& buffer, Slot slot) {
+  AddVertexData(buffer.Data(), buffer.GetSize(), slot);
+}
+
+void Drawable::AddInstanceData(const Containers::Vector<U8>& buffer, Slot slot) {
+  AddInstanceData(buffer.Data(), buffer.GetSize(), slot);
+}
+
+void Drawable::SetIndexData(const Containers::Vector<U8>& buffer) {
+  SetIndexData(buffer.Data(), buffer.GetSize());
+}
+
 void Drawable::SetDrawMode(const DrawType drawMode) {
   m_drawMode = drawMode;
 }
@@ -67,7 +79,11 @@ DrawablePool::DrawablePool(const U32 byteSize, Memory::Allocator& allocator)
     : m_byteSize(byteSize), m_offset(0), m_allocator(allocator) {}
 
 void DrawablePool::AppendBytes(const Containers::Vector<U8>& buffer) {
-  m_offset += buffer.GetSize();
+  AppendBytes(buffer.Data(), buffer.GetSize());
+}
+
+void DrawablePool::MoveOffset(U32 bufferSize) {
+  m_offset += bufferSize;
 }
 
 U32 DrawablePool::GetOffset() const {

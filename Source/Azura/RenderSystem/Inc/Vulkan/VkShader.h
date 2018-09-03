@@ -5,10 +5,6 @@
 #include "Generic/Shader.h"
 
 namespace Azura {
-namespace Memory {
-class Allocator;
-}
-
 enum class RawStorageFormat;
 }  // namespace Azura
 
@@ -17,7 +13,7 @@ namespace Vulkan {
 
 class VkShader : public Shader {
  public:
-  VkShader(VkDevice device, const String& fileName, Memory::Allocator& temporaryAllocator);
+  VkShader(VkDevice device, const String& fileName);
   VkPipelineShaderStageCreateInfo GetShaderStageInfo() const;
 
  private:

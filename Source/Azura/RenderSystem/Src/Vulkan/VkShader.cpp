@@ -3,6 +3,9 @@
 #include "Vulkan/VkCore.h"
 #include "Vulkan/VkMacros.h"
 #include "Vulkan/VkTypeMapping.h"
+#include "Memory/MemoryFactory.h"
+#include "Memory/MonotonicAllocator.h"
+#include "Memory/HeapMemoryBuffer.h"
 
 namespace Azura {
 namespace Vulkan {
@@ -11,9 +14,12 @@ namespace {
 const String SPRIV_EXT = "spv";
 }  // namespace
 
-VkShader::VkShader(VkDevice device, const String& fileName, Memory::Allocator& temporaryAllocator)
+VkShader::VkShader(VkDevice device, const String& fileName)
     : Shader(fileName, SPRIV_EXT) {
-  const auto fileContents = FileReader::GetFileContents(GetFilePath(), temporaryAllocator);
+  Memory::HeapMemoryBuffer bufferTemporary = Memory::HeapMemoryBuffer(4096);
+  Memory::MonotonicAllocator allocatorTemporary = Memory::MonotonicAllocator(bufferTemporary, 4096);;
+
+  const auto fileContents = FileReader::GetFileContents(GetFilePath(), allocatorTemporary);
   m_module                = VkCore::CreateShaderModule(device, fileContents);
 }
 

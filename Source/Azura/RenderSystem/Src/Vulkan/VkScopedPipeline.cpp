@@ -6,7 +6,9 @@
 namespace Azura {
 namespace Vulkan {
 
-VkScopedPipeline::VkScopedPipeline(VkPipeline pipeline) : m_pipeline(pipeline) {}
+VkScopedPipeline::VkScopedPipeline(VkPipeline pipeline)
+  : m_pipeline(pipeline) {
+}
 
 VkPipeline VkScopedPipeline::Real() const {
   return m_pipeline;
@@ -14,9 +16,13 @@ VkPipeline VkScopedPipeline::Real() const {
 
 // TODO(vasumahesh1): Figure out a way to adjust size properly
 VkPipelineFactory::VkPipelineFactory(VkDevice device, Memory::Allocator& allocator)
-    : m_device(device), m_stages(10, allocator), m_bindingInfo(10, allocator), m_attributeDescription(10, allocator) {}
+  : m_device(device),
+    m_stages(10, allocator),
+    m_bindingInfo(10, allocator),
+    m_attributeDescription(10, allocator) {
+}
 
-VkPipelineFactory& VkPipelineFactory::AddShaderStage(VkPipelineShaderStageCreateInfo shaderStageCreateInfo) {
+VkPipelineFactory& VkPipelineFactory::AddShaderStage(const VkPipelineShaderStageCreateInfo& shaderStageCreateInfo) {
   // TODO(vasumahesh1): Emplace?
   m_stages.PushBack(shaderStageCreateInfo);
   return *this;
@@ -157,8 +163,8 @@ VkPipelineFactory& VkPipelineFactory::SetMultisampleStage() {
 
 VkPipelineFactory& VkPipelineFactory::SetColorBlendStage() {
   VkPipelineColorBlendAttachmentState colorBlendAttachment = {};
-  colorBlendAttachment.colorWriteMask =
-      VK_COLOR_COMPONENT_R_BIT | VK_COLOR_COMPONENT_G_BIT | VK_COLOR_COMPONENT_B_BIT | VK_COLOR_COMPONENT_A_BIT;
+  colorBlendAttachment.colorWriteMask                      =
+    VK_COLOR_COMPONENT_R_BIT | VK_COLOR_COMPONENT_G_BIT | VK_COLOR_COMPONENT_B_BIT | VK_COLOR_COMPONENT_A_BIT;
   colorBlendAttachment.blendEnable = VK_FALSE;
 
   // TODO(vasumahesh1): Add Support for Blending
@@ -209,8 +215,8 @@ VkScopedPipeline VkPipelineFactory::Submit() const {
 
   VkPipeline pipeline;
   VERIFY_VK_OP(vkCreateGraphicsPipelines(m_device, VK_NULL_HANDLE, 1, &pipelineInfo, nullptr, &pipeline),
-               "Failed to create pipeline");
+    "Failed to create pipeline");
   return VkScopedPipeline(pipeline);
 }
-}  // namespace Vulkan
-}  // namespace Azura
+} // namespace Vulkan
+} // namespace Azura
