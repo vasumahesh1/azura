@@ -15,6 +15,7 @@ set(CLANG_TIDY_EXECUTABLE ${CLANG_PATH}/bin/clang-tidy.exe
 # Install GTest
 include("./GTest.cmake")
 include("./Azura.Macros.cmake")
+include("./Azura.Functions.cmake")
 
 enable_testing()
 

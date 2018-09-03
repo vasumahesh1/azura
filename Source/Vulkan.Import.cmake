@@ -15,6 +15,12 @@ if ("${BUILD_PLATFORM}" STREQUAL "Windows")
 		set(VULKAN_1_1_77_0_LIB64_DIR ${CMAKE_CURRENT_SOURCE_DIR}/Imports/Windows/Vulkan/1.1.77.0/Lib/)
 	endif()
 
+	if (${CMAKE_HOST_SYSTEM_PROCESSOR} STREQUAL "AMD64")
+		set(GLSL_VALIDATOR ${CMAKE_CURRENT_SOURCE_DIR}/Imports/Windows/Vulkan/1.1.77.0/Bin/glslangValidator.exe CACHE STRING "GLSLangValidator Location" FORCE)
+	else()
+		set(GLSL_VALIDATOR ${CMAKE_CURRENT_SOURCE_DIR}/Imports/Windows/Vulkan/1.1.77.0/Bin32/glslangValidator.exe CACHE STRING "GLSLangValidator Location" FORCE)
+	endif()
+
 	if ("${BUILD_ARCH}" STREQUAL "64")
 		set(VULKAN_INCLUDE ${VULKAN_1_1_77_0_INCLUDE_DIR} CACHE STRING "" FORCE)
 		set(VULKAN_LIB ${VULKAN_1_1_77_0_LIB64_DIR} CACHE STRING "" FORCE)
