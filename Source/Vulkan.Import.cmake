@@ -1,24 +1,20 @@
 add_library(VULKAN_STATIC INTERFACE IMPORTED GLOBAL)
 
 if ("${BUILD_PLATFORM}" STREQUAL "Windows")
-	if(NOT DEFINED VULKAN_1_1_77_0_INCLUDE_DIR)
-		set(VULKAN_1_1_77_0_INCLUDE_DIR ${CMAKE_CURRENT_SOURCE_DIR}/Imports/Windows/Vulkan/1.1.77.0/Include/)
+	if(NOT DEFINED VULKAN_1_1_77_0_ROOT)
+		set(VULKAN_1_1_77_0_ROOT ${CMAKE_CURRENT_SOURCE_DIR}/Imports/Windows/Vulkan/1.1.77.0/)
 	endif()
 
-	#  Vulkan 32-bit
-	if(NOT DEFINED VULKAN_1_1_77_0_LIB32_DIR)
-		set(VULKAN_1_1_77_0_LIB32_DIR ${CMAKE_CURRENT_SOURCE_DIR}/Imports/Windows/Vulkan/1.1.77.0/Lib32/)
-	endif()
-
-	#  Vulkan 64-bit
-	if(NOT DEFINED VULKAN_1_1_77_0_LIB64_DIR)
-		set(VULKAN_1_1_77_0_LIB64_DIR ${CMAKE_CURRENT_SOURCE_DIR}/Imports/Windows/Vulkan/1.1.77.0/Lib/)
-	endif()
-
-	if (${CMAKE_HOST_SYSTEM_PROCESSOR} STREQUAL "AMD64")
-		set(GLSL_VALIDATOR ${CMAKE_CURRENT_SOURCE_DIR}/Imports/Windows/Vulkan/1.1.77.0/Bin/glslangValidator.exe CACHE STRING "GLSLangValidator Location" FORCE)
-	else()
-		set(GLSL_VALIDATOR ${CMAKE_CURRENT_SOURCE_DIR}/Imports/Windows/Vulkan/1.1.77.0/Bin32/glslangValidator.exe CACHE STRING "GLSLangValidator Location" FORCE)
+	set(VULKAN_1_1_77_0_INCLUDE_DIR ${VULKAN_1_1_77_0_ROOT}/Include/)
+	set(VULKAN_1_1_77_0_LIB32_DIR ${VULKAN_1_1_77_0_ROOT}/Lib32/)
+	set(VULKAN_1_1_77_0_LIB64_DIR ${VULKAN_1_1_77_0_ROOT}/Lib/)
+	
+	if(NOT DEFINED GLSL_VALIDATOR)
+		if (${CMAKE_HOST_SYSTEM_PROCESSOR} STREQUAL "AMD64")
+			set(GLSL_VALIDATOR ${VULKAN_1_1_77_0_ROOT}/Bin/glslangValidator.exe CACHE STRING "GLSLangValidator Location" FORCE)
+		else()
+			set(GLSL_VALIDATOR ${VULKAN_1_1_77_0_ROOT}/Bin32/glslangValidator.exe CACHE STRING "GLSLangValidator Location" FORCE)
+		endif()
 	endif()
 
 	if ("${BUILD_ARCH}" STREQUAL "64")
