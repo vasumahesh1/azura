@@ -17,6 +17,7 @@ set(
 
 add_executable(ProceduralPlanet ${SOURCES})
 
+AzuraSilenceWarningsForMathfu(ProceduralPlanet)
 AzuraSetGLFWForTarget(ProceduralPlanet)
 AzuraAddSPIRVShadersToTarget(ProceduralPlanet ${VULKAN_SHADERS})
 

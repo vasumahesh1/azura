@@ -5,13 +5,13 @@
 #include "Memory/RangeAllocator.h"
 #include "Memory/HeapMemoryBuffer.h"
 
-// #include "mathfu/matrix.h"
+#include "mathfu/matrix.h"
 
 namespace Azura {
 struct UniformBufferData
 {
   int m_data;
-  // mathfu::Matrix<float, 4, 4> m_view;
+  mathfu::Matrix<float, 4, 4> m_view;
   // mathfu::Matrix<float, 4, 4> m_proj;
 };
 

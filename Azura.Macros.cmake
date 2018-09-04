@@ -7,6 +7,15 @@ macro(AzuraSilenceEnumGuard TargetName)
                         PROPERTIES COMPILE_FLAGS "${CMAKE_CXX_FLAGS} /wd4061")
 endmacro(AzuraSilenceEnumGuard)
 
+macro(AzuraSilenceWarningsForMathfu TargetName)
+  if(MSVC)
+    target_compile_options(${TargetName}
+      PUBLIC
+      "/wd4201"
+    )
+  endif()
+endmacro(AzuraSilenceWarningsForMathfu)
+
 macro(AzuraDisableWarningsAsErrors)
   if(MSVC)
     string(REPLACE " /WX"
