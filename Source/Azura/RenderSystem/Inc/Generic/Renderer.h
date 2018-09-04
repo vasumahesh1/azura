@@ -47,6 +47,20 @@ struct ApplicationInfo {
   Version m_version;
 };
 
+struct UniformBufferDesc
+{
+  U32 m_size;
+  U32 m_count;
+};
+
+struct ApplicationRequirements {
+  Containers::Vector<std::pair<ShaderStage, UniformBufferDesc>> m_uniformBuffers;
+
+  ApplicationRequirements(Memory::Allocator& alloc) : m_uniformBuffers(alloc)
+  {
+  }
+};
+
 struct SwapChainRequirement {
   RawStorageFormat m_format{};
   Bounds2D m_extent{0u, 0u};
@@ -56,7 +70,8 @@ struct SwapChainRequirement {
 
 class Renderer {
 public:
-  Renderer(ApplicationInfo appInfo, const DeviceRequirements& deviceRequirements, Memory::Allocator& allocator);
+  Renderer(ApplicationInfo appInfo, const DeviceRequirements& deviceRequirements,
+           ApplicationRequirements appRequirements, Memory::Allocator& allocator);
   virtual ~Renderer() = default;
 
   Renderer(const Renderer& other) = delete;
@@ -65,17 +80,20 @@ public:
   Renderer& operator=(Renderer&& rhs) = delete;
 
   virtual String GetRenderingAPI() const = 0;
+
   virtual void SetDrawablePoolCount(U32 count) = 0;
   virtual DrawablePool& CreateDrawablePool(const DrawablePoolCreateInfo& createInfo) = 0;
 
 protected:
   const ApplicationInfo& GetApplicationInfo() const;
   const DeviceRequirements& GetDeviceRequirements() const;
+  const ApplicationRequirements& GetApplicationRequirements() const;
   Memory::Allocator& GetAllocator() const;
 
 private:
   const ApplicationInfo m_applicationInfo;
   const DeviceRequirements m_deviceRequirements;
+  const ApplicationRequirements m_appRequirements;
   Memory::Allocator& m_allocator;
 };
 } // namespace Azura

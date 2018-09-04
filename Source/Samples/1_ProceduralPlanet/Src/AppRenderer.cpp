@@ -8,8 +8,7 @@
 namespace Azura {
 using namespace Containers; // NOLINT
 
-struct Vertex
-{
+struct Vertex {
   float m_pos[4];
   float m_col[4];
 };
@@ -34,25 +33,34 @@ void AppRenderer::Initialize() {
   requirements.m_int64         = false;
   requirements.m_transferQueue = false;
 
-  m_renderer = RenderSystem::CreateRenderer(appInfo, requirements, m_window->GetSwapChainRequirements(),
-                                            m_mainAllocator, m_drawableAllocator, *m_window);
+  // TODO(vasumahesh1):[Q]:Allocator?
+  ApplicationRequirements applicationRequirements(m_mainAllocator);
+  applicationRequirements.m_uniformBuffers.Reserve(1);
+  applicationRequirements.m_uniformBuffers.PushBack(std::make_pair(ShaderStage::Vertex,
+                                                                   UniformBufferDesc{sizeof(UniformBufferData), 1}));
+
+  m_renderer = RenderSystem::CreateRenderer(appInfo, requirements, applicationRequirements,
+                                            m_window->GetSwapChainRequirements(), m_mainAllocator, m_drawableAllocator,
+                                            *m_window);
   m_renderer->SetDrawablePoolCount(1);
 
-  auto vertShader = RenderSystem::CreateShader(*m_renderer, "Shaders/" + m_renderer->GetRenderingAPI() + "/test.vertex");
+  auto vertShader = RenderSystem::
+    CreateShader(*m_renderer, "Shaders/" + m_renderer->GetRenderingAPI() + "/test.vertex");
   vertShader->SetStage(ShaderStage::Vertex);
 
-  auto pixelShader = RenderSystem::CreateShader(*m_renderer, "Shaders/" + m_renderer->GetRenderingAPI() + "/test.pixel");
+  auto pixelShader = RenderSystem::
+    CreateShader(*m_renderer, "Shaders/" + m_renderer->GetRenderingAPI() + "/test.pixel");
   pixelShader->SetStage(ShaderStage::Pixel);
 
   DrawablePoolCreateInfo poolInfo = {};
-  poolInfo.m_byteSize     = 2048;
-  poolInfo.m_numDrawables = 1;
-  DrawablePool& pool      = m_renderer->CreateDrawablePool(poolInfo);
+  poolInfo.m_byteSize             = 2048;
+  poolInfo.m_numDrawables         = 1;
+  DrawablePool& pool              = m_renderer->CreateDrawablePool(poolInfo);
 
   pool.AddShader(*vertShader);
   pool.AddShader(*pixelShader);
 
-  Slot vertexDataSlot = {};
+  Slot vertexDataSlot      = {};
   vertexDataSlot.m_binding = 0;
   vertexDataSlot.m_rate    = BufferUsageRate::PerVertex;
 

@@ -6,11 +6,12 @@
 namespace Azura {
 std::unique_ptr<Renderer> RenderSystem::CreateRenderer(const ApplicationInfo& appInfo,
                                                        const DeviceRequirements& deviceRequirements,
+                                                       const ApplicationRequirements& appRequirements,
                                                        const SwapChainRequirement& swapChainRequirement,
                                                        Memory::Allocator& mainAllocator,
                                                        Memory::Allocator& drawAllocator,
                                                        Window& window) {
-  return std::make_unique<Vulkan::VkRenderer>(appInfo, deviceRequirements, swapChainRequirement, mainAllocator,
+  return std::make_unique<Vulkan::VkRenderer>(appInfo, deviceRequirements, appRequirements, swapChainRequirement, mainAllocator,
                                               drawAllocator, window);
 }
 

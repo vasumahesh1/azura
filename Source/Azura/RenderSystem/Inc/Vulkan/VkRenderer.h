@@ -76,6 +76,7 @@ class VkRenderer : public Renderer {
  public:
   VkRenderer(const ApplicationInfo& appInfo,
              const DeviceRequirements& deviceRequirements,
+             const ApplicationRequirements& appRequirements,
              const SwapChainRequirement& swapChainRequirement,
              Memory::Allocator& mainAllocator,
              Memory::Allocator& drawAllocator,

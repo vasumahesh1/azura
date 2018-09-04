@@ -513,16 +513,16 @@ VkRenderPass VkCore::CreateRenderPass(VkDevice device, VkFormat colorFormat) {
 }
 
 void VkCore::CreateUniformBufferBinding(Containers::Vector<VkDescriptorSetLayoutBinding>& bindings,
+                                        U32 count,
                                         VkShaderStageFlags stageFlag) {
   VkDescriptorSetLayoutBinding uboLayoutBinding = {};
   uboLayoutBinding.binding                      = bindings.GetSize();
   uboLayoutBinding.descriptorType               = VK_DESCRIPTOR_TYPE_UNIFORM_BUFFER;
-  uboLayoutBinding.descriptorCount              = 1;
+  uboLayoutBinding.descriptorCount              = count;
   uboLayoutBinding.stageFlags                   = stageFlag;
   uboLayoutBinding.pImmutableSamplers           = nullptr;
 
-  // TODO(vasumahesh1): Move here
-  bindings.PushBack(uboLayoutBinding);
+  bindings.PushBack(std::move(uboLayoutBinding));
 }
 
 VkDescriptorSetLayout VkCore::CreateDescriptorSetLayout(

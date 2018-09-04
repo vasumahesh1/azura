@@ -4,6 +4,8 @@
 #include "Memory/MonotonicAllocator.h"
 #include "Utils/Macros.h"
 #include "Vulkan/VkShader.h"
+#include "Vulkan/VkTypeMapping.h"
+#include "Vulkan/VkMacros.h"
 
 using namespace Azura::Containers;  // NOLINT - Freedom to use using namespace in CPP files.
 
@@ -126,11 +128,12 @@ void VkDrawablePool::AddShader(const Shader& shader) {
 
 VkRenderer::VkRenderer(const ApplicationInfo& appInfo,
                        const DeviceRequirements& deviceRequirements,
+                       const ApplicationRequirements& appRequirements,
                        const SwapChainRequirement& swapChainRequirement,
                        Memory::Allocator& mainAllocator,
                        Memory::Allocator& drawAllocator,
                        Window& window)
-    : Renderer(appInfo, deviceRequirements, mainAllocator),
+    : Renderer(appInfo, deviceRequirements, appRequirements, mainAllocator),
       m_window(window),
       m_drawablePools(drawAllocator),
       m_swapChain(mainAllocator),
@@ -169,18 +172,23 @@ VkRenderer::VkRenderer(const ApplicationInfo& appInfo,
 
   m_renderPass = VkCore::CreateRenderPass(m_device, m_swapChain.m_surfaceFormat.format);
 
-  Containers::Vector<VkDescriptorSetLayoutBinding> layoutBindings(allocatorTemporary);
+  const U32 uniformCount = appRequirements.m_uniformBuffers.GetSize();
+  Containers::Vector<VkDescriptorSetLayoutBinding> layoutBindings(uniformCount, allocatorTemporary);
 
-  // TODO(vasumahesh1): Needs to be generic
-  VkCore::CreateUniformBufferBinding(layoutBindings, VK_SHADER_STAGE_VERTEX_BIT);
+  for(const auto& bufferDesc : appRequirements.m_uniformBuffers)
+  {
+    const auto vkShaderStage = ToVkShaderStageFlagBits(bufferDesc.first);
+    VERIFY_OPT(vkShaderStage, "Unknown Shader Stage");
+
+    VkCore::CreateUniformBufferBinding(layoutBindings, bufferDesc.second.m_count, vkShaderStage.value());
+  }
 
   m_descriptorSetLayout = VkCore::CreateDescriptorSetLayout(m_device, layoutBindings);
 
-  // TODO(vasumahesh1): Use Move or prevent this...
-  Containers::Vector<VkDescriptorSetLayout> sets(allocatorTemporary);
-  sets.PushBack(m_descriptorSetLayout);
-
+  // TODO(vasumahesh1):[EXT]: Add support for more than 1 set
+  const Containers::Vector<VkDescriptorSetLayout> sets({m_descriptorSetLayout}, allocatorTemporary);
   m_pipelineLayout = VkCore::CreatePipelineLayout(m_device, sets);
+
   VkCore::CreateFrameBuffers(m_device, m_renderPass, m_swapChain, m_frameBuffers);
 
   m_graphicsCommandPool = VkCore::CreateCommandPool(m_device, m_queueIndices.m_graphicsFamily, 0);
@@ -213,7 +221,7 @@ DrawablePool& VkRenderer::CreateDrawablePool(const DrawablePoolCreateInfo& creat
   // buffer inside each pool?
   // Also, using default Viewport.
   VkDrawablePool pool = VkDrawablePool(createInfo.m_numDrawables, createInfo.m_byteSize, m_device,
-                                       VK_BUFFER_USAGE_INDEX_BUFFER_BIT | VK_BUFFER_USAGE_VERTEX_BUFFER_BIT,
+                                       VK_BUFFER_USAGE_INDEX_BUFFER_BIT | VK_BUFFER_USAGE_VERTEX_BUFFER_BIT | VK_BUFFER_USAGE_UNIFORM_BUFFER_BIT,
                                        VK_MEMORY_PROPERTY_HOST_VISIBLE_BIT | VK_MEMORY_PROPERTY_HOST_COHERENT_BIT,
                                        m_pipelineLayout, m_renderPass, m_window.GetViewport(), memProperties,
                                        m_swapChain, m_drawPoolAllocator, allocatorTemporary);
