@@ -29,7 +29,7 @@ services:
 build: off
 
 install:
-  - ps: git submodule -q update --init
+  - ps: git submodule -q update --init --recursive
 
   # -------------------------- CACHE CHECK --------------------------
 
