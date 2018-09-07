@@ -33,9 +33,12 @@ set(
   # Compiler Warnings Includes
   "Inc/CompileWarnings/EnableSclSecureWarnings.h"
   "Inc/CompileWarnings/DisableSclSecureWarnings.h"
+  "Inc/CompileWarnings/EnableSwitchEnumWarning.h"
+  "Inc/CompileWarnings/DisableSwitchEnumWarning.h"
 
   # Utils
   "Inc/Types.h"
+  "Inc/Utils/Platform.h"
   "Inc/Utils/Macros.h"
   "Inc/Utils/Exceptions.h"
   "Inc/Utils/FileReader.h"

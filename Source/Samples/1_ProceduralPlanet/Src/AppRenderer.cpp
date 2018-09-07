@@ -33,11 +33,15 @@ void AppRenderer::Initialize() {
   requirements.m_int64         = false;
   requirements.m_transferQueue = false;
 
+  const int uboBinding = 0;
+
+  UniformBufferData uboData = {};
+
   // TODO(vasumahesh1):[Q]:Allocator?
   ApplicationRequirements applicationRequirements(m_mainAllocator);
   applicationRequirements.m_uniformBuffers.Reserve(1);
   applicationRequirements.m_uniformBuffers.PushBack(std::make_pair(ShaderStage::Vertex,
-                                                                   UniformBufferDesc{sizeof(UniformBufferData), 1}));
+                                                                   UniformBufferDesc{sizeof(UniformBufferData), 1, uboBinding}));
 
   m_renderer = RenderSystem::CreateRenderer(appInfo, requirements, applicationRequirements,
                                             m_window->GetSwapChainRequirements(), m_mainAllocator, m_drawableAllocator,
@@ -82,6 +86,7 @@ void AppRenderer::Initialize() {
   }, allocatorTemporary);
 
   const auto bufferStart = reinterpret_cast<U8*>(vertexData.Data()); // NOLINT
+  const auto uboDataBuffer = reinterpret_cast<U8*>(&uboData); // NOLINT
 
   // Create Drawable from Pool
   Drawable& drawable = pool.CreateDrawable();
@@ -91,12 +96,16 @@ void AppRenderer::Initialize() {
   drawable.SetInstanceCount(1);
   drawable.SetInstanceDataCount(0);
   drawable.SetVertexDataCount(1);
+  drawable.SetUniformCount(1);
 
   drawable.AddVertexData(bufferStart, vertexData.GetSize() * sizeof(vertexData), vertexDataSlot);
   drawable.SetIndexData(indexData);
+  drawable.AddUniformData(uboDataBuffer, sizeof(UniformBufferData), 0);
 
   // All Drawables Done
   pool.Submit();
+
+  m_renderer->Submit();
 }
 
 void AppRenderer::Run() {

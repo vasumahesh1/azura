@@ -25,28 +25,39 @@ class Drawable {
   void AddInstanceData(const Containers::Vector<U8>& buffer, Slot slot);
   virtual void AddInstanceData(const U8* buffer, U32 size, Slot slot)   = 0;
 
+  void AddUniformData(const Containers::Vector<U8>& buffer, U32 binding);
+  virtual void AddUniformData(const U8* buffer, U32 size, U32 binding)   = 0;
+
   void SetIndexData(const Containers::Vector<U8>& buffer);
   virtual void SetIndexData(const U8* buffer, U32 size)   = 0;
+  void SetIndexFormat(RawStorageFormat indexType);
 
   virtual void SetDrawMode(DrawType drawMode);
 
   U32 GetVertexCount() const;
   U32 GetIndexCount() const;
   U32 GetInstanceCount() const;
+  U32 GetUniformCount() const;
+  DrawType GetDrawType() const;
+  RawStorageFormat GetIndexType() const;
 
   void SetVertexCount(U32 count);
   void SetInstanceCount(U32 count);
   void SetIndexCount(U32 count);
+  void SetUniformCount(U32 count);
 
   const Containers::Vector<BufferInfo>& GetVertexBufferInfos() const;
   const Containers::Vector<BufferInfo>& GetInstanceBufferInfos() const;
   const BufferInfo& GetIndexBufferInfo() const;
+
+  virtual void Submit() = 0;
 
  protected:
   Memory::Allocator& GetAllocator() const;
 
   Containers::Vector<BufferInfo> m_vertexBufferInfos;
   Containers::Vector<BufferInfo> m_instanceBufferInfos;
+  Containers::Vector<BufferInfo> m_uniformBufferInfos;
   BufferInfo m_indexBufferInfo;
 
  private:
@@ -54,6 +65,8 @@ class Drawable {
   U32 m_vertexCount;
   U32 m_indexCount;
   U32 m_instanceCount;
+  U32 m_uniformCount{};
+  RawStorageFormat m_indexType;
 
   DrawType m_drawMode;
   std::reference_wrapper<Memory::Allocator> m_allocator;

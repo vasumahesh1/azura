@@ -50,7 +50,7 @@ VkImageView CreateImageView(VkDevice device,
 VkRenderPass CreateRenderPass(VkDevice device, VkFormat colorFormat);
 
 void CreateUniformBufferBinding(Containers::Vector<VkDescriptorSetLayoutBinding>& bindings,
-                                U32 count,
+                                const UniformBufferDesc& desc,
                                 VkShaderStageFlags stageFlag);
 VkDescriptorSetLayout CreateDescriptorSetLayout(VkDevice device,
                                                 const Containers::Vector<VkDescriptorSetLayoutBinding>& bindings);
@@ -95,7 +95,6 @@ Containers::Vector<VkCommandBuffer> CreateCommandBuffers(
     VkDevice device, U32 count, VkCommandPool commandPool, VkCommandBufferLevel level, Memory::Allocator& allocator);
 
 void CreateCommandBuffers(VkDevice device,
-                          U32 count,
                           VkCommandPool commandPool,
                           VkCommandBufferLevel level,
                           Containers::Vector<VkCommandBuffer>& commandBuffers);

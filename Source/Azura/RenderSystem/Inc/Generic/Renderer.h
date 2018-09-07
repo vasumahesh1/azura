@@ -51,6 +51,7 @@ struct UniformBufferDesc
 {
   U32 m_size;
   U32 m_count;
+  U32 m_binding;
 };
 
 struct ApplicationRequirements {
@@ -83,6 +84,8 @@ public:
 
   virtual void SetDrawablePoolCount(U32 count) = 0;
   virtual DrawablePool& CreateDrawablePool(const DrawablePoolCreateInfo& createInfo) = 0;
+
+  virtual void Submit() = 0;
 
 protected:
   const ApplicationInfo& GetApplicationInfo() const;

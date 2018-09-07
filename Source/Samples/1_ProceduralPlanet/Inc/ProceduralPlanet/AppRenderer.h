@@ -12,7 +12,7 @@ struct UniformBufferData
 {
   int m_data;
   mathfu::Matrix<float, 4, 4> m_view;
-  // mathfu::Matrix<float, 4, 4> m_proj;
+  mathfu::Matrix<float, 4, 4> m_proj;
 };
 
 class AppRenderer {
@@ -29,7 +29,7 @@ private:
   Memory::RangeAllocator m_mainAllocator;
   Memory::RangeAllocator m_drawableAllocator;
 
-  std::unique_ptr<Renderer> m_renderer;
-  std::unique_ptr<Window> m_window;
+  std::unique_ptr<Renderer> m_renderer{nullptr};
+  std::unique_ptr<Window> m_window{nullptr};
 };
 } // namespace

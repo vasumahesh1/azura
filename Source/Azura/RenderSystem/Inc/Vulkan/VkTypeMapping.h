@@ -19,6 +19,9 @@ namespace Impl {
 CREATE_MAPPER_H(RawStorageFormat, VkFormat);
 // CREATE_MAPPER_H(VkFormat, RawStorageFormat);
 
+CREATE_MAPPER_H(RawStorageFormat, VkIndexType);
+// CREATE_MAPPER_H(VkIndexType, RawStorageFormat);
+
 CREATE_MAPPER_H(ColorSpace, VkColorSpaceKHR);
 // CREATE_MAPPER_H(VkColorSpaceKHR, ColorSpace);
 

@@ -513,12 +513,12 @@ VkRenderPass VkCore::CreateRenderPass(VkDevice device, VkFormat colorFormat) {
 }
 
 void VkCore::CreateUniformBufferBinding(Containers::Vector<VkDescriptorSetLayoutBinding>& bindings,
-                                        U32 count,
+                          const UniformBufferDesc& desc,
                                         VkShaderStageFlags stageFlag) {
   VkDescriptorSetLayoutBinding uboLayoutBinding = {};
-  uboLayoutBinding.binding                      = bindings.GetSize();
+  uboLayoutBinding.binding                      = desc.m_binding;
   uboLayoutBinding.descriptorType               = VK_DESCRIPTOR_TYPE_UNIFORM_BUFFER;
-  uboLayoutBinding.descriptorCount              = count;
+  uboLayoutBinding.descriptorCount              = desc.m_count;
   uboLayoutBinding.stageFlags                   = stageFlag;
   uboLayoutBinding.pImmutableSamplers           = nullptr;
 
@@ -717,12 +717,11 @@ VkCommandBuffer VkCore::CreateCommandBuffer(VkDevice device, VkCommandPool comma
 Containers::Vector<VkCommandBuffer> VkCore::CreateCommandBuffers(
     VkDevice device, U32 count, VkCommandPool commandPool, VkCommandBufferLevel level, Memory::Allocator& allocator) {
   Containers::Vector<VkCommandBuffer> commandBuffers(ContainerExtent{count}, allocator);
-  CreateCommandBuffers(device, count, commandPool, level, commandBuffers);
+  CreateCommandBuffers(device, commandPool, level, commandBuffers);
   return commandBuffers;
 }
 
 void VkCore::CreateCommandBuffers(VkDevice device,
-                                  U32 count,
                                   VkCommandPool commandPool,
                                   VkCommandBufferLevel level,
                                   Containers::Vector<VkCommandBuffer>& commandBuffers) {
@@ -730,7 +729,7 @@ void VkCore::CreateCommandBuffers(VkDevice device,
   allocInfo.sType                       = VK_STRUCTURE_TYPE_COMMAND_BUFFER_ALLOCATE_INFO;
   allocInfo.commandPool                 = commandPool;
   allocInfo.level                       = level;
-  allocInfo.commandBufferCount          = count;
+  allocInfo.commandBufferCount          = commandBuffers.GetSize();
 
   VERIFY_VK_OP(vkAllocateCommandBuffers(device, &allocInfo, commandBuffers.Data()), "Failed to create command buffers");
 }

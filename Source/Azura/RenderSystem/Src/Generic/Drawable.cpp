@@ -3,13 +3,16 @@
 namespace Azura {
 
 Drawable::Drawable(Memory::Allocator& allocator)
-    : m_vertexBufferInfos(allocator),
-      m_instanceBufferInfos(allocator),
-      m_vertexCount(0),
-      m_indexCount(0),
-      m_instanceCount(0),
-      m_drawMode(DrawType::InstancedIndexed),
-      m_allocator(allocator) {}
+  : m_vertexBufferInfos(allocator),
+    m_instanceBufferInfos(allocator),
+    m_uniformBufferInfos(allocator),
+    m_vertexCount(0),
+    m_indexCount(0),
+    m_instanceCount(0),
+    m_indexType(),
+    m_drawMode(DrawType::InstancedIndexed),
+    m_allocator(allocator) {
+}
 
 void Drawable::SetVertexDataCount(const U32 count) {
   m_vertexBufferInfos.Reserve(count);
@@ -27,8 +30,16 @@ void Drawable::AddInstanceData(const Containers::Vector<U8>& buffer, Slot slot) 
   AddInstanceData(buffer.Data(), buffer.GetSize(), slot);
 }
 
+void Drawable::AddUniformData(const Containers::Vector<U8>& buffer, U32 binding) {
+  AddUniformData(buffer.Data(), buffer.GetSize(), binding);
+}
+
 void Drawable::SetIndexData(const Containers::Vector<U8>& buffer) {
   SetIndexData(buffer.Data(), buffer.GetSize());
+}
+
+void Drawable::SetIndexFormat(RawStorageFormat indexType) {
+  m_indexType = indexType;
 }
 
 void Drawable::SetDrawMode(const DrawType drawMode) {
@@ -51,12 +62,28 @@ U32 Drawable::GetInstanceCount() const {
   return m_instanceCount;
 }
 
+U32 Drawable::GetUniformCount() const {
+  return m_uniformCount;
+}
+
+DrawType Drawable::GetDrawType() const {
+  return m_drawMode;
+}
+
+RawStorageFormat Drawable::GetIndexType() const {
+  return m_indexType;
+}
+
 void Drawable::SetVertexCount(U32 count) {
   m_vertexCount = count;
 }
 
 void Drawable::SetIndexCount(U32 count) {
   m_indexCount = count;
+}
+
+void Drawable::SetUniformCount(U32 count) {
+  m_uniformCount = count;
 }
 
 void Drawable::SetInstanceCount(U32 count) {

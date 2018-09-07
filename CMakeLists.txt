@@ -39,7 +39,7 @@ if(MSVC)
 elseif(CMAKE_COMPILER_IS_GNUCC OR CMAKE_COMPILER_IS_GNUCXX)
   set(
     CMAKE_CXX_FLAGS
-    "${CMAKE_CXX_FLAGS} -Werror -Wall -Wno-long-long -pedantic -Wswitch -Wextra"
+    "${CMAKE_CXX_FLAGS} -Werror -Wall -Wno-long-long -pedantic -Wswitch -Wswitch-enum -Wextra"
     )
 endif()
 

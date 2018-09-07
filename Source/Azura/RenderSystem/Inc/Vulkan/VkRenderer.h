@@ -24,10 +24,16 @@ class VkDrawable final : public Drawable {
 
   void AddVertexData(const U8* buffer, U32 size, Slot slot) override;
   void AddInstanceData(const U8* buffer, U32 size, Slot slot) override;
+  void AddUniformData(const U8* buffer, U32 size, U32 binding) override;
+
   void SetIndexData(const U8* buffer, U32 size) override;
+  void Submit() override;
+
+  const VkDescriptorSet& GetDescriptorSet() const;
 
  private:
   VkDrawablePool& m_parentPool;
+  VkDescriptorSet m_descriptorSet;
 };
 
 class VkDrawablePool final : public DrawablePool {
@@ -40,7 +46,10 @@ class VkDrawablePool final : public DrawablePool {
                  VkBufferUsageFlags usage,
                  VkMemoryPropertyFlags memoryProperties,
                  VkPipelineLayout pipelineLayout,
+                 VkDescriptorSetLayout descriptorSetLayout,
+                 VkCommandPool graphicsCommandPool,
                  VkRenderPass renderPass,
+                 const ApplicationRequirements& appReq,
                  const ViewportDimensions& viewport,
                  const VkPhysicalDeviceMemoryProperties& phyDeviceMemoryProperties,
                  const VkScopedSwapChain& swapChain,
@@ -50,6 +59,8 @@ class VkDrawablePool final : public DrawablePool {
   Drawable& CreateDrawable() override;
   void AppendBytes(const U8* buffer, U32 bufferSize) override;
   void AppendBytes(const Containers::Vector<U8>& buffer) override;
+
+  void CreateDescriptorPool(const ApplicationRequirements& appReq);
 
   void Submit() override;
   void AddBufferBinding(Slot slot, const Containers::Vector<RawStorageFormat>& strides) override;
@@ -63,11 +74,18 @@ class VkDrawablePool final : public DrawablePool {
   VkRenderPass m_renderPass;
   ViewportDimensions m_viewport;
 
+  VkDescriptorPool m_descriptorPool{};
+  VkDescriptorSetLayout m_descriptorSetLayout;
+
   VkScopedPipeline m_pipeline;
   VkPipelineLayout m_pipelineLayout;
   VkPipelineFactory m_pipelineFactory;
 
+  VkCommandBuffer m_commandBuffer{};
+  VkCommandPool m_graphicsCommandPool;
+
   const VkScopedSwapChain& m_swapChain;
+  const ApplicationRequirements& m_appRequirements;
 
   Containers::Vector<VkDrawable> m_drawables;
 };
@@ -93,6 +111,7 @@ class VkRenderer : public Renderer {
 
   VkDevice GetDevice() const;
   String GetRenderingAPI() const override;
+  void Submit() override;
 
  private:
   Window& m_window;

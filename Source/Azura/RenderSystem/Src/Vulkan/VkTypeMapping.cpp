@@ -73,6 +73,11 @@ namespace Vulkan {
   FUNC(RawStorageFormat::D32_FLOAT_S8X24_UINT, VK_FORMAT_D32_SFLOAT_S8_UINT)                                           \
   FUNC(RawStorageFormat::D32_FLOAT, VK_FORMAT_D32_SFLOAT)
 
+
+#define RAW_STORAGE_TO_VK_INDEX_TYPE_MAPPING(FUNC)                                                                      \
+  FUNC(RawStorageFormat::R32_UNORM, VK_INDEX_TYPE_UINT16)                                                               \
+  FUNC(RawStorageFormat::R32_SNORM, VK_INDEX_TYPE_UINT32)                                                               \
+
 #define COLOR_SPACE_TO_VK_COLOR_SPACE_MAPPING(FUNC)                                                                    \
   FUNC(ColorSpace::SRGB, VK_COLOR_SPACE_SRGB_NONLINEAR_KHR)                                                            \
   FUNC(ColorSpace::HDR10, VK_COLOR_SPACE_HDR10_HLG_EXT)
@@ -130,6 +135,9 @@ namespace Vulkan {
 
 CREATE_MAPPER_CPP(RawStorageFormat, VkFormat, RAW_STORAGE_TO_VK_FORMAT_MAPPING, FORWARD_MAPPING)
 // CREATE_MAPPER_CPP(VkFormat, RawStorageFormat, RAW_STORAGE_TO_VK_FORMAT_MAPPING, REVERSE_MAPPING)
+
+CREATE_MAPPER_CPP(RawStorageFormat, VkIndexType, RAW_STORAGE_TO_VK_INDEX_TYPE_MAPPING, FORWARD_MAPPING) // NOLINT - Exception case as VkIndexType is different from VkFormat.
+// CREATE_MAPPER_CPP(RawStorageFormat, VkIndexType, RAW_STORAGE_TO_VK_INDEX_TYPE_MAPPING, REVERSE_MAPPING)
 
 CREATE_MAPPER_CPP(ColorSpace, VkColorSpaceKHR, COLOR_SPACE_TO_VK_COLOR_SPACE_MAPPING, FORWARD_MAPPING)
 // CREATE_MAPPER_CPP(VkColorSpaceKHR, ColorSpace, COLOR_SPACE_TO_VK_COLOR_SPACE_MAPPING, REVERSE_MAPPING)

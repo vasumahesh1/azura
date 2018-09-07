@@ -13,7 +13,10 @@ namespace Azura {
 namespace Vulkan {
 
 VkDrawable::VkDrawable(Memory::Allocator& allocator, VkDrawablePool& parentPool)
-    : Drawable(allocator), m_parentPool(parentPool) {}
+  : Drawable(allocator),
+    m_parentPool(parentPool),
+    m_descriptorSet() {
+}
 
 void VkDrawable::AddVertexData(const U8* buffer, U32 size, Slot slot) {
 
@@ -40,6 +43,18 @@ void VkDrawable::AddInstanceData(const U8* buffer, U32 size, Slot slot) {
   m_parentPool.AppendBytes(buffer, size);
 }
 
+void VkDrawable::AddUniformData(const U8* buffer, U32 size, U32 binding) {
+  // TODO(vasumahesh1): Creating a slot here, when only binding data needed.
+  BufferInfo info = BufferInfo();
+  info.m_byteSize = size;
+  info.m_offset   = m_parentPool.GetOffset();
+  info.m_slot     = Slot{binding};
+
+  m_uniformBufferInfos.PushBack(std::move(info));
+
+  m_parentPool.AppendBytes(buffer, size);
+}
+
 void VkDrawable::SetIndexData(const U8* buffer, U32 size) {
   m_indexBufferInfo = BufferInfo();
 
@@ -49,13 +64,60 @@ void VkDrawable::SetIndexData(const U8* buffer, U32 size) {
   m_parentPool.AppendBytes(buffer, size);
 }
 
+void VkDrawable::Submit() {
+  STACK_ALLOCATOR(Temporary, Memory::MonotonicAllocator, 2048);
+
+  VkDescriptorSetAllocateInfo allocInfo = {};
+  allocInfo.sType = VK_STRUCTURE_TYPE_DESCRIPTOR_SET_ALLOCATE_INFO;
+  allocInfo.descriptorPool = m_parentPool.m_descriptorPool;
+  allocInfo.descriptorSetCount = 1;
+  allocInfo.pSetLayouts = &m_parentPool.m_descriptorSetLayout;
+
+  VERIFY_VK_OP(vkAllocateDescriptorSets(m_parentPool.m_device, &allocInfo, &m_descriptorSet), "Failed to Allocate Descriptor Set");
+
+  Vector<VkWriteDescriptorSet> descriptorWrites(m_uniformBufferInfos.GetSize(), allocatorTemporary);
+
+  // TODO(vasumahesh1):[DESCRIPTOR]: How to use Uniform Buffer Arrays?
+  // TODO(vasumahesh1):[TEXTURE]: Add support for Textures
+
+  for(const auto& ubInfo : m_uniformBufferInfos)
+  {
+    VkDescriptorBufferInfo uniformBufferInfo = {};
+    uniformBufferInfo.buffer = m_parentPool.m_buffer.Real();
+    uniformBufferInfo.offset = ubInfo.m_offset;
+    uniformBufferInfo.range = ubInfo.m_byteSize;
+
+    VkWriteDescriptorSet uniformDescriptorWrite = {};
+    uniformDescriptorWrite.sType = VK_STRUCTURE_TYPE_WRITE_DESCRIPTOR_SET;
+    uniformDescriptorWrite.dstSet = m_descriptorSet;
+    uniformDescriptorWrite.dstBinding = 0;
+    uniformDescriptorWrite.dstArrayElement = 0;
+    uniformDescriptorWrite.descriptorType = VK_DESCRIPTOR_TYPE_UNIFORM_BUFFER;
+    uniformDescriptorWrite.descriptorCount = 1;
+    uniformDescriptorWrite.pBufferInfo = &uniformBufferInfo;
+    uniformDescriptorWrite.pImageInfo = nullptr;
+    uniformDescriptorWrite.pTexelBufferView = nullptr;
+
+    descriptorWrites.PushBack(std::move(uniformDescriptorWrite));
+  }
+
+  vkUpdateDescriptorSets(m_parentPool.m_device, descriptorWrites.GetSize(), descriptorWrites.Data(), 0, nullptr);
+}
+
+const VkDescriptorSet& VkDrawable::GetDescriptorSet() const {
+  return m_descriptorSet;
+}
+
 VkDrawablePool::VkDrawablePool(U32 numDrawables,
                                U32 byteSize,
                                VkDevice device,
                                VkBufferUsageFlags usage,
                                VkMemoryPropertyFlags memoryProperties,
                                VkPipelineLayout pipelineLayout,
+                               VkDescriptorSetLayout descriptorSetLayout,
+                               VkCommandPool graphicsCommandPool,
                                VkRenderPass renderPass,
+                               const ApplicationRequirements& appReq,
                                const ViewportDimensions& viewport,
                                const VkPhysicalDeviceMemoryProperties& phyDeviceMemoryProperties,
                                const VkScopedSwapChain& swapChain,
@@ -67,10 +129,13 @@ VkDrawablePool::VkDrawablePool(U32 numDrawables,
       m_device(device),
       m_renderPass(renderPass),
       m_viewport(viewport),
+      m_descriptorSetLayout(descriptorSetLayout),
       m_pipeline({}),
       m_pipelineLayout(pipelineLayout),
       m_pipelineFactory(device, allocatorTemporary),
+      m_graphicsCommandPool(graphicsCommandPool),
       m_swapChain(swapChain),
+      m_appRequirements(appReq),
       m_drawables(numDrawables, allocator) {}
 
 Drawable& VkDrawablePool::CreateDrawable() {
@@ -94,7 +159,32 @@ void VkDrawablePool::AppendBytes(const Containers::Vector<U8>& buffer) {
   DrawablePool::AppendBytes(buffer);
 }
 
+void VkDrawablePool::CreateDescriptorPool(const ApplicationRequirements& appReq) {
+  STACK_ALLOCATOR(Temporary, Memory::MonotonicAllocator, 2048);
+
+  // TODO(vasumahesh1):[DESCRIPTOR]: How to use Uniform Buffer Arrays?
+  VkDescriptorPoolSize uniformPoolSize = {};
+  uniformPoolSize.type = VK_DESCRIPTOR_TYPE_UNIFORM_BUFFER_DYNAMIC;
+  uniformPoolSize.descriptorCount = appReq.m_uniformBuffers.GetSize();
+
+
+  // TODO(vasumahesh1):[TEXTURE]: Add support for Descriptor Pools
+  Vector<VkDescriptorPoolSize> descriptorPool(1, allocatorTemporary);
+  descriptorPool.PushBack(uniformPoolSize);
+
+  // TODO(vasumahesh1):[DESCRIPTOR]: 1 Set per Drawable?
+  VkDescriptorPoolCreateInfo poolInfo = {};
+  poolInfo.sType = VK_STRUCTURE_TYPE_DESCRIPTOR_POOL_CREATE_INFO;
+  poolInfo.poolSizeCount = descriptorPool.GetSize();
+  poolInfo.pPoolSizes = descriptorPool.Data();
+  poolInfo.maxSets = m_drawables.GetSize();
+
+  VERIFY_VK_OP(vkCreateDescriptorPool(m_device, &poolInfo, nullptr, &m_descriptorPool), "Unable to create Descriptor Pool");
+}
+
 void VkDrawablePool::Submit() {
+  CreateDescriptorPool(m_appRequirements);
+
   m_pipelineFactory.SetInputAssemblyStage(PrimitiveTopology::TriangleList);
   m_pipelineFactory.SetRasterizerStage(CullMode::BackBit, FrontFace::CounterClockwise);
   m_pipelineFactory.SetPipelineLayout(m_pipelineLayout);
@@ -104,6 +194,60 @@ void VkDrawablePool::Submit() {
   m_pipelineFactory.SetColorBlendStage();
 
   m_pipeline = m_pipelineFactory.Submit();
+
+  m_commandBuffer = VkCore::CreateCommandBuffer(m_device, m_graphicsCommandPool, VK_COMMAND_BUFFER_LEVEL_SECONDARY);
+
+  VkCore::BeginCommandBuffer(m_commandBuffer, VK_COMMAND_BUFFER_USAGE_SIMULTANEOUS_USE_BIT);
+
+  vkCmdBindPipeline(m_commandBuffer, VK_PIPELINE_BIND_POINT_GRAPHICS, m_pipeline.Real());
+
+  VkBuffer mainBuffer = m_buffer.Real();
+
+  for(auto& drawable: m_drawables)
+  {
+    drawable.Submit();
+
+    const auto& vertBufferInfos = drawable.GetVertexBufferInfos();
+
+    for (const auto& vertexBuffer: vertBufferInfos)
+    {
+      VkDeviceSize offsets[] = { vertexBuffer.m_offset };
+      vkCmdBindVertexBuffers(m_commandBuffer, vertexBuffer.m_slot.m_binding, 1, &mainBuffer, &offsets[0]);
+    }
+
+    const auto& instanceBufferInfos = drawable.GetInstanceBufferInfos();
+
+    for (const auto& instanceBuffer: instanceBufferInfos)
+    {
+      VkDeviceSize offsets[] = { instanceBuffer.m_offset };
+      vkCmdBindVertexBuffers(m_commandBuffer, instanceBuffer.m_slot.m_binding, 1, &mainBuffer, &offsets[0]);
+    }
+
+    const auto& indexBufferInfo = drawable.GetIndexBufferInfo();
+
+    const auto indexType = ToVkIndexType(drawable.GetIndexType());
+    VERIFY_OPT(indexType, "Invalid VkIndexType converted");
+
+    vkCmdBindIndexBuffer(m_commandBuffer, mainBuffer, indexBufferInfo.m_offset, indexType.value());
+
+
+    vkCmdBindDescriptorSets(m_commandBuffer, VK_PIPELINE_BIND_POINT_GRAPHICS, m_pipelineLayout, 0, 1, &drawable.GetDescriptorSet(), 1, nullptr);
+
+    switch (drawable.GetDrawType())
+    {
+      case DrawType::InstancedIndexed:
+        vkCmdDrawIndexed(m_commandBuffer, drawable.GetIndexCount(), drawable.GetInstanceCount(), 0, 0, 0);
+        break;
+
+      case DrawType::InstancedIndexedIndirect:
+        break;
+
+      default:
+        break;
+    }
+  }
+
+  VkCore::EndCommandBuffer(m_commandBuffer);
 }
 
 void VkDrawablePool::AddBufferBinding(Slot slot, const Containers::Vector<RawStorageFormat>& strides) {
@@ -180,7 +324,7 @@ VkRenderer::VkRenderer(const ApplicationInfo& appInfo,
     const auto vkShaderStage = ToVkShaderStageFlagBits(bufferDesc.first);
     VERIFY_OPT(vkShaderStage, "Unknown Shader Stage");
 
-    VkCore::CreateUniformBufferBinding(layoutBindings, bufferDesc.second.m_count, vkShaderStage.value());
+    VkCore::CreateUniformBufferBinding(layoutBindings, bufferDesc.second, vkShaderStage.value());
   }
 
   m_descriptorSetLayout = VkCore::CreateDescriptorSetLayout(m_device, layoutBindings);
@@ -223,7 +367,7 @@ DrawablePool& VkRenderer::CreateDrawablePool(const DrawablePoolCreateInfo& creat
   VkDrawablePool pool = VkDrawablePool(createInfo.m_numDrawables, createInfo.m_byteSize, m_device,
                                        VK_BUFFER_USAGE_INDEX_BUFFER_BIT | VK_BUFFER_USAGE_VERTEX_BUFFER_BIT | VK_BUFFER_USAGE_UNIFORM_BUFFER_BIT,
                                        VK_MEMORY_PROPERTY_HOST_VISIBLE_BIT | VK_MEMORY_PROPERTY_HOST_COHERENT_BIT,
-                                       m_pipelineLayout, m_renderPass, m_window.GetViewport(), memProperties,
+                                       m_pipelineLayout, m_descriptorSetLayout, m_graphicsCommandPool, m_renderPass, GetApplicationRequirements(), m_window.GetViewport(), memProperties,
                                        m_swapChain, m_drawPoolAllocator, allocatorTemporary);
 
   m_drawablePools.PushBack(std::move(pool));
@@ -241,6 +385,9 @@ VkDevice VkRenderer::GetDevice() const {
 
 String VkRenderer::GetRenderingAPI() const {
   return "Vulkan";
+}
+
+void VkRenderer::Submit() {
 }
 
 }  // namespace Vulkan
