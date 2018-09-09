@@ -28,6 +28,8 @@ class VkScopedBuffer {
   VkDeviceMemory Memory() const;
   VkDescriptorBufferInfo GetDescriptorInfo(U32 offset, U32 range) const;
 
+  void CleanUp() const;
+
  private:
   VkDevice m_device;
   VkBuffer m_buffer{};

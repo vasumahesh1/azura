@@ -11,6 +11,7 @@ namespace Azura {
 struct UniformBufferData
 {
   int m_data;
+  mathfu::Matrix<float, 4, 4> m_model;
   mathfu::Matrix<float, 4, 4> m_view;
   mathfu::Matrix<float, 4, 4> m_proj;
 };
@@ -20,8 +21,9 @@ public:
   AppRenderer();
 
   void Initialize();
-  void Run();
-  void Destroy();
+  void WindowUpdate();
+  void Run() const;
+  void Destroy() const;
 
 private:
   Memory::HeapMemoryBuffer m_mainBuffer;

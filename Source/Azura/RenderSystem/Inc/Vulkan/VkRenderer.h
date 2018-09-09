@@ -8,6 +8,7 @@
 #include "VkPlatform.h"
 #include "VkScopedBuffer.h"
 #include "VkScopedPipeline.h"
+#include "VkShader.h"
 
 namespace Azura {
 class Window;
@@ -31,6 +32,8 @@ class VkDrawable final : public Drawable {
 
   const VkDescriptorSet& GetDescriptorSet() const;
 
+  void CleanUp(VkDevice device) const;
+
  private:
   VkDrawablePool& m_parentPool;
   VkDescriptorSet m_descriptorSet;
@@ -40,8 +43,7 @@ class VkDrawablePool final : public DrawablePool {
   friend class VkDrawable;
 
  public:
-  VkDrawablePool(U32 numDrawables,
-                 U32 byteSize,
+  VkDrawablePool(const DrawablePoolCreateInfo& createInfo,
                  VkDevice device,
                  VkBufferUsageFlags usage,
                  VkMemoryPropertyFlags memoryProperties,
@@ -67,6 +69,8 @@ class VkDrawablePool final : public DrawablePool {
 
   void AddShader(const Shader& shader) override;
 
+  void CleanUp() const;
+
  private:
   VkScopedBuffer m_buffer;
   VkScopedBuffer m_stagingBuffer;
@@ -88,6 +92,7 @@ class VkDrawablePool final : public DrawablePool {
   const ApplicationRequirements& m_appRequirements;
 
   Containers::Vector<VkDrawable> m_drawables;
+  Containers::Vector<VkShader> m_shaders;
 };
 
 class VkRenderer : public Renderer {
@@ -117,6 +122,10 @@ class VkRenderer : public Renderer {
   Window& m_window;
   Containers::Vector<VkDrawablePool> m_drawablePools;
 
+#ifdef BUILD_DEBUG
+  VkDebugReportCallbackEXT m_callback;
+#endif
+
   VkInstance m_instance;
   VkSurfaceKHR m_surface;
   VkPhysicalDevice m_physicalDevice;
@@ -130,7 +139,7 @@ class VkRenderer : public Renderer {
   Containers::Vector<VkFramebuffer> m_frameBuffers;
   Containers::Vector<VkSemaphore> m_imageAvailableSemaphores;
   Containers::Vector<VkSemaphore> m_renderFinishedSemaphores;
-  Containers::Vector<VkFence> mInFlightFences;
+  Containers::Vector<VkFence> m_inFlightFences;
 
   VkCommandPool m_graphicsCommandPool;
   VkCommandPool m_transferCommandPool;

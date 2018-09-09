@@ -14,12 +14,17 @@ VkPipeline VkScopedPipeline::Real() const {
   return m_pipeline;
 }
 
+void VkScopedPipeline::CleanUp(VkDevice device) const {
+  vkDestroyPipeline(device, m_pipeline, nullptr);
+}
+
 // TODO(vasumahesh1): Figure out a way to adjust size properly
 VkPipelineFactory::VkPipelineFactory(VkDevice device, Memory::Allocator& allocator)
   : m_device(device),
     m_stages(10, allocator),
     m_bindingInfo(10, allocator),
-    m_attributeDescription(10, allocator) {
+    m_attributeDescription(10, allocator),
+    m_colorBlendAttachment() {
 }
 
 VkPipelineFactory& VkPipelineFactory::AddShaderStage(const VkPipelineShaderStageCreateInfo& shaderStageCreateInfo) {
@@ -107,25 +112,23 @@ VkPipelineFactory& VkPipelineFactory::SetInputAssemblyStage(PrimitiveTopology to
 
 VkPipelineFactory& VkPipelineFactory::SetViewportStage(ViewportDimensions viewportDimensions,
                                                        const VkScopedSwapChain& swapChain) {
-  VkViewport viewport;
-  viewport.x        = viewportDimensions.m_x;
-  viewport.y        = viewportDimensions.m_y;
-  viewport.width    = viewportDimensions.m_width;
-  viewport.height   = viewportDimensions.m_height;
-  viewport.minDepth = viewportDimensions.m_minDepth;
-  viewport.maxDepth = viewportDimensions.m_maxDepth;
+  m_viewport.x        = viewportDimensions.m_x;
+  m_viewport.y        = viewportDimensions.m_y;
+  m_viewport.width    = viewportDimensions.m_width;
+  m_viewport.height   = viewportDimensions.m_height;
+  m_viewport.minDepth = viewportDimensions.m_minDepth;
+  m_viewport.maxDepth = viewportDimensions.m_maxDepth;
 
   // TODO(vasumahesh1): Might need custom scissoring
-  VkRect2D scissor;
-  scissor.offset = {0, 0};
-  scissor.extent = swapChain.m_extent;
+  m_scissors.offset = {0, 0};
+  m_scissors.extent = swapChain.m_extent;
 
   // TODO(vasumahesh1): Might need arrays here one day
   m_viewportStage.sType         = VK_STRUCTURE_TYPE_PIPELINE_VIEWPORT_STATE_CREATE_INFO;
   m_viewportStage.viewportCount = 1;
-  m_viewportStage.pViewports    = &viewport;
+  m_viewportStage.pViewports    = &m_viewport;
   m_viewportStage.scissorCount  = 1;
-  m_viewportStage.pScissors     = &scissor;
+  m_viewportStage.pScissors     = &m_scissors;
 
   return *this;
 }
@@ -162,16 +165,16 @@ VkPipelineFactory& VkPipelineFactory::SetMultisampleStage() {
 }
 
 VkPipelineFactory& VkPipelineFactory::SetColorBlendStage() {
-  VkPipelineColorBlendAttachmentState colorBlendAttachment = {};
-  colorBlendAttachment.colorWriteMask                      =
-    VK_COLOR_COMPONENT_R_BIT | VK_COLOR_COMPONENT_G_BIT | VK_COLOR_COMPONENT_B_BIT | VK_COLOR_COMPONENT_A_BIT;
-  colorBlendAttachment.blendEnable = VK_FALSE;
+  m_colorBlendAttachment                = {};
+  m_colorBlendAttachment.colorWriteMask = VK_COLOR_COMPONENT_R_BIT | VK_COLOR_COMPONENT_G_BIT | VK_COLOR_COMPONENT_B_BIT
+                                          | VK_COLOR_COMPONENT_A_BIT;
+  m_colorBlendAttachment.blendEnable = VK_FALSE;
 
   // TODO(vasumahesh1): Add Support for Blending
   m_colorBlendStage.sType           = VK_STRUCTURE_TYPE_PIPELINE_COLOR_BLEND_STATE_CREATE_INFO;
   m_colorBlendStage.logicOpEnable   = VK_FALSE;
   m_colorBlendStage.attachmentCount = 1;
-  m_colorBlendStage.pAttachments    = &colorBlendAttachment;
+  m_colorBlendStage.pAttachments    = &m_colorBlendAttachment;
 
   return *this;
 }

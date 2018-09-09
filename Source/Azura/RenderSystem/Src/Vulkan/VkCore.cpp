@@ -7,33 +7,64 @@
 #include "Memory/MemoryFactory.h"
 #include "Memory/MonotonicAllocator.h"
 #include "Memory/StackMemoryBuffer.h"
+#include "Memory/HeapMemoryBuffer.h"
 #include "Vulkan/VkMacros.h"
 #include "Vulkan/VkTypeMapping.h"
+
+#ifdef BUILD_DEBUG
+#include <iostream>
+#endif
 
 using ContainerExtent = Azura::Containers::ContainerExtent;
 
 namespace Azura {
 namespace Vulkan {
 namespace {
-#ifdef DEBUG
-const std::array<const char*, 1> VALIDATION_LAYERS = {"VK_LAYER_LUNARG_standard_validation"};
+#ifdef BUILD_DEBUG
+const std::array<const char*, 2> VALIDATION_LAYERS = {
+  "VK_LAYER_LUNARG_standard_validation",
+  "VK_LAYER_LUNARG_core_validation"
+};
+
+VKAPI_ATTR VkBool32 VKAPI_CALL DebugReportCallback(
+  VkDebugReportFlagsEXT flags,
+  VkDebugReportObjectTypeEXT objType,
+  uint64_t obj,
+  size_t location,
+  int32_t code,
+  const char* layerPrefix,
+  const char* msg,
+  void* userData)
+{
+  UNUSED(userData);
+  UNUSED(layerPrefix);
+  UNUSED(code);
+  UNUSED(location);
+  UNUSED(obj);
+  UNUSED(objType);
+  UNUSED(flags);
+
+  std::cout << "[VkRenderer] Validation layer: " << msg << std::endl;
+  return VK_FALSE;
+}
+
 #endif
 
 const std::array<const char*, 1> DEVICE_EXTENSIONS = {VK_KHR_SWAPCHAIN_EXTENSION_NAME};
 
 bool CheckValidationLayerSupport() {
-#ifdef DEBUG
+#ifdef BUILD_DEBUG
+  HEAP_ALLOCATOR(Temporary, Memory::MonotonicAllocator, 16384);
   U32 layerCount = 0;
 
   vkEnumerateInstanceLayerProperties(&layerCount, nullptr);
-  Containers::Vector<VkLayerProperties> availableLayers(layerCount);
-
-  vkEnumerateInstanceLayerProperties(&layerCount, availableLayers.data());
+  Containers::Vector<VkLayerProperties> availableLayers(ContainerExtent{layerCount}, allocatorTemporary);
+  vkEnumerateInstanceLayerProperties(&layerCount, availableLayers.Data());
 
   for (const char* layer : VALIDATION_LAYERS) {
     bool layerFound = false;
     for (const auto& vkLayer : availableLayers) {
-      if (strcmp(layer, vkLayer.layerName) == 0) {
+      if (strcmp(layer, vkLayer.layerName) == 0) { // NOLINT
         layerFound = true;
         break;
       }
@@ -50,9 +81,9 @@ bool CheckValidationLayerSupport() {
 
 bool CheckDeviceExtensionSupport(VkPhysicalDevice device) {
   U32 extensionCount          = 0;
-  const U32 maxExtensionCount = 30;
+  const U32 maxExtensionCount = 128;
 
-  STACK_ALLOCATOR(Extension, Memory::MonotonicAllocator, sizeof(VkExtensionProperties) * maxExtensionCount)
+  HEAP_ALLOCATOR(Extension, Memory::MonotonicAllocator, sizeof(VkExtensionProperties) * maxExtensionCount)
 
   vkEnumerateDeviceExtensionProperties(device, nullptr, &extensionCount, nullptr);
   Containers::Vector<VkExtensionProperties> availableExtensions(ContainerExtent{extensionCount, maxExtensionCount},
@@ -169,8 +200,46 @@ VkExtent2D ChooseSwapExtent(const VkSurfaceCapabilitiesKHR& capabilities, const 
 }
 }  // namespace
 
+#ifdef BUILD_DEBUG
+VkResult VkCore::CreateDebugReportCallbackEXT(VkInstance instance, const VkDebugReportCallbackCreateInfoEXT* pCreateInfo, const VkAllocationCallbacks* pAllocator, VkDebugReportCallbackEXT* pCallback)
+{
+  // NOLINTNEXTLINE
+  auto func = reinterpret_cast<PFN_vkCreateDebugReportCallbackEXT>(vkGetInstanceProcAddr(instance, "vkCreateDebugReportCallbackEXT"));
+  if (func != nullptr)
+  {
+    return func(instance, pCreateInfo, pAllocator, pCallback);
+  }
+
+  return VK_ERROR_EXTENSION_NOT_PRESENT;
+}
+
+void VkCore::DestroyDebugReportCallbackEXT(VkInstance instance, VkDebugReportCallbackEXT callback, const VkAllocationCallbacks* pAllocator)
+{
+  // NOLINTNEXTLINE
+  auto func = reinterpret_cast<PFN_vkDestroyDebugReportCallbackEXT>(vkGetInstanceProcAddr(instance, "vkDestroyDebugReportCallbackEXT"));
+  if (func != nullptr)
+  {
+    func(instance, callback, pAllocator);
+  }
+}
+
+
+VkDebugReportCallbackEXT VkCore::SetupDebug(VkInstance instance)
+{
+  // Attach callback since we have validation turned on
+  VkDebugReportCallbackCreateInfoEXT createInfo = {};
+  createInfo.sType = VK_STRUCTURE_TYPE_DEBUG_REPORT_CALLBACK_CREATE_INFO_EXT;
+  createInfo.flags = VK_DEBUG_REPORT_WARNING_BIT_EXT | VK_DEBUG_REPORT_ERROR_BIT_EXT;
+  createInfo.pfnCallback = DebugReportCallback;
+
+  VkDebugReportCallbackEXT callback;
+  VERIFY_VK_OP(CreateDebugReportCallbackEXT(instance, &createInfo, nullptr, &callback), "Failed to create Debug Callback");
+  return callback;
+}
+#endif
+
 VkInstance VkCore::CreateInstance(const ApplicationInfo& applicationData,
-                                  Containers::Vector<const char*> vkExtensions) {
+                                  const Containers::Vector<const char*>& vkExtensions) {
   VkApplicationInfo appInfo = {};
   appInfo.sType             = VK_STRUCTURE_TYPE_APPLICATION_INFO;
   appInfo.pApplicationName  = applicationData.m_name.c_str();
@@ -194,7 +263,7 @@ VkInstance VkCore::CreateInstance(const ApplicationInfo& applicationData,
   // Validation Layers Check
   VERIFY_TRUE(CheckValidationLayerSupport(), "Validation layers requested, but not available on device");
 
-#ifdef DEBUG
+#ifdef BUILD_DEBUG
   createInfo.enabledLayerCount   = U32(VALIDATION_LAYERS.size());
   createInfo.ppEnabledLayerNames = VALIDATION_LAYERS.data();
 #else
@@ -319,7 +388,7 @@ VkDevice VkCore::CreateLogicalDevice(VkPhysicalDevice physicalDevice,
   STACK_ALLOCATOR(QueueCreateInfo, Memory::MonotonicAllocator, sizeof(VkDeviceQueueCreateInfo) * maxQueueFamilies)
 
   // TODO(vasumahesh1): Simplify with Azura::Vector
-  Containers::Vector<VkDeviceQueueCreateInfo> queueCreateInfos(allocatorQueueCreateInfo);
+  Containers::Vector<VkDeviceQueueCreateInfo> queueCreateInfos(maxQueueFamilies, allocatorQueueCreateInfo);
 
   float queuePriority = 1.0f;
 
@@ -345,7 +414,7 @@ VkDevice VkCore::CreateLogicalDevice(VkPhysicalDevice physicalDevice,
   createInfo.enabledExtensionCount   = U32(DEVICE_EXTENSIONS.size());
   createInfo.ppEnabledExtensionNames = DEVICE_EXTENSIONS.data();
 
-#ifdef DEBUG
+#ifdef BUILD_DEBUG
   createInfo.enabledLayerCount   = U32(VALIDATION_LAYERS.size());
   createInfo.ppEnabledLayerNames = VALIDATION_LAYERS.data();
 #else
@@ -395,7 +464,7 @@ VkScopedSwapChain VkCore::CreateSwapChain(VkDevice device,
   createInfo.imageUsage               = VK_IMAGE_USAGE_COLOR_ATTACHMENT_BIT;
 
   // TODO(vasumahesh1): Possible bug if Graphics Queue is not the same as Present Queue. How to handle?
-  if (queueIndices.m_transferFamily != -1) {
+  if (queueIndices.m_transferFamily != -1 && queueIndices.m_isTransferQueueRequired) {
     createInfo.imageSharingMode      = VK_SHARING_MODE_CONCURRENT;
     createInfo.queueFamilyIndexCount = queueIndices.GetActiveSize();
     createInfo.pQueueFamilyIndices   = queueIndices.GetIndicesArray().data();
@@ -739,6 +808,15 @@ void VkCore::BeginCommandBuffer(VkCommandBuffer buffer, VkCommandBufferUsageFlag
   beginInfo.sType                    = VK_STRUCTURE_TYPE_COMMAND_BUFFER_BEGIN_INFO;
   beginInfo.flags                    = flags;
   beginInfo.pInheritanceInfo         = nullptr;
+
+  VERIFY_VK_OP(vkBeginCommandBuffer(buffer, &beginInfo), "Failed to begin recording command buffer");
+}
+
+void VkCore::BeginCommandBuffer(VkCommandBuffer buffer, VkCommandBufferUsageFlags flags, const VkCommandBufferInheritanceInfo& inheritanceInfo) {
+  VkCommandBufferBeginInfo beginInfo = {};
+  beginInfo.sType                    = VK_STRUCTURE_TYPE_COMMAND_BUFFER_BEGIN_INFO;
+  beginInfo.flags                    = flags;
+  beginInfo.pInheritanceInfo         = &inheritanceInfo;
 
   VERIFY_VK_OP(vkBeginCommandBuffer(buffer, &beginInfo), "Failed to begin recording command buffer");
 }

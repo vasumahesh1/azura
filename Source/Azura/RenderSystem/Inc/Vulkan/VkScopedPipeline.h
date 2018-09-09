@@ -13,8 +13,9 @@ class VkScopedPipeline {
  public:
   VkScopedPipeline(VkPipeline pipeline);
   VkPipeline Real() const;
+  void CleanUp(VkDevice device) const;
 
- private:
+private:
   VkPipeline m_pipeline;
 };
 
@@ -58,9 +59,13 @@ class VkPipelineFactory {
   VkPipelineRasterizationStateCreateInfo m_rasterizerStage{};
   VkPipelineMultisampleStateCreateInfo m_multisampleStage{};
   VkPipelineColorBlendStateCreateInfo m_colorBlendStage{};
+  VkPipelineColorBlendAttachmentState m_colorBlendAttachment;
 
   VkPipelineLayout m_layout{};
   VkRenderPass m_renderPass{};
+
+  VkViewport m_viewport{};
+  VkRect2D m_scissors{};
 };
 
 }  // namespace Vulkan

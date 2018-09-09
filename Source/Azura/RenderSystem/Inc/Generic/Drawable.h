@@ -18,6 +18,7 @@ class Drawable {
 
   void SetVertexDataCount(U32 count);
   void SetInstanceDataCount(U32 count);
+  void SetUniformDataCount(U32 count);
 
   void AddVertexData(const Containers::Vector<U8>& buffer, Slot slot);
   virtual void AddVertexData(const U8* buffer, U32 size, Slot slot)   = 0;
@@ -75,6 +76,7 @@ class Drawable {
 struct DrawablePoolCreateInfo {
   U32 m_byteSize;
   U32 m_numDrawables;
+  U32 m_numShaders;
 };
 
 class DrawablePool {

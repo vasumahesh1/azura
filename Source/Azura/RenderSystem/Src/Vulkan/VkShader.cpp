@@ -16,8 +16,7 @@ const String SPRIV_EXT = "spv";
 
 VkShader::VkShader(VkDevice device, const String& fileName)
     : Shader(fileName, SPRIV_EXT) {
-  Memory::HeapMemoryBuffer bufferTemporary = Memory::HeapMemoryBuffer(4096);
-  Memory::MonotonicAllocator allocatorTemporary = Memory::MonotonicAllocator(bufferTemporary, 4096);;
+  HEAP_ALLOCATOR(Temporary, Memory::MonotonicAllocator, 8192);
 
   const auto fileContents = FileReader::GetFileContents(GetFilePath(), allocatorTemporary);
   m_module                = VkCore::CreateShaderModule(device, fileContents);
@@ -34,6 +33,10 @@ VkPipelineShaderStageCreateInfo VkShader::GetShaderStageInfo() const {
   shaderStage.pName                           = GetShaderEntryPoint().c_str();
 
   return shaderStage;
+}
+
+void VkShader::CleanUp(VkDevice device) const {
+  vkDestroyShaderModule(device, m_module, nullptr);
 }
 
 }  // namespace Vulkan

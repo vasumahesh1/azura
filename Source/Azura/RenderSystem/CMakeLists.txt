@@ -15,14 +15,15 @@ set(VULKAN_SOURCES
     "Inc/Generic/Window.h"
     "Inc/Generic/Windows/Win32GLFWWindow.h"
     "Inc/Vulkan/VkCore.h"
+    "Inc/Vulkan/VkDebug.h"
     "Inc/Vulkan/VkMacros.h"
+    "Inc/Vulkan/VkPlatform.h"
     "Inc/Vulkan/VkRenderer.h"
     "Inc/Vulkan/VkScopedBuffer.h"
     "Inc/Vulkan/VkScopedPipeline.h"
     "Inc/Vulkan/VkShader.h"
     "Inc/Vulkan/VkTypeMapping.h"
     "Inc/Vulkan/VkTypes.h"
-    "Inc/Vulkan/VkPlatform.h"
     # Source
     "Src/Generic/Drawable.cpp"
     "Src/Generic/GLFWWindow.cpp"
@@ -32,6 +33,7 @@ set(VULKAN_SOURCES
     "Src/Generic/Window.cpp"
     "Src/Generic/Windows/Win32GLFWWindow.cpp"
     "Src/Vulkan/VkCore.cpp"
+    "Src/Vulkan/VkDebug.cpp"
     "Src/Vulkan/VkRenderer.cpp"
     "Src/Vulkan/VkRenderSystem.cpp"
     "Src/Vulkan/VkScopedBuffer.cpp"
@@ -39,8 +41,9 @@ set(VULKAN_SOURCES
     "Src/Vulkan/VkShader.cpp"
     "Src/Vulkan/VkTypeMapping.cpp"
     "Src/Vulkan/VkTypes.cpp"
+    "Src/Vulkan/Windows/VkWin32Platform.cpp"
     "Src/Vulkan/Windows/VkWin32RenderSystem.cpp"
-    "Src/Vulkan/Windows/VkWin32Platform.cpp")
+)
 
 source_group(Generic\\Inc REGULAR_EXPRESSION "Inc/Generic/.*")
 source_group(Generic\\Src REGULAR_EXPRESSION "Src/Generic/.*")

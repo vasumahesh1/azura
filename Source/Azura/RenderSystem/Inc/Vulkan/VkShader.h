@@ -16,6 +16,8 @@ class VkShader : public Shader {
   VkShader(VkDevice device, const String& fileName);
   VkPipelineShaderStageCreateInfo GetShaderStageInfo() const;
 
+  void CleanUp(VkDevice device) const;
+
  private:
   VkShaderModule m_module{};
 };

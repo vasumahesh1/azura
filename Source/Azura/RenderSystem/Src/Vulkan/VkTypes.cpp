@@ -31,5 +31,13 @@ bool SwapChainDeviceSupport::IsSupported() const {
 VkScopedSwapChain::VkScopedSwapChain(Memory::Allocator& allocator)
     : m_swapChain(), m_extent(), m_surfaceFormat(), m_images(allocator), m_imageViews(allocator) {}
 
+void VkScopedSwapChain::CleanUp(VkDevice device) {
+  for (const VkImageView& imageView : m_imageViews) {
+    vkDestroyImageView(device, imageView, nullptr);
+  }
+
+  vkDestroySwapchainKHR(device, m_swapChain, nullptr);
+}
+
 }  // namespace Vulkan
 }  // namespace Azura

@@ -43,6 +43,8 @@ struct VkScopedSwapChain {
   Containers::Vector<VkImageView> m_imageViews;
 
   VkScopedSwapChain(Memory::Allocator& allocator);
+
+  void CleanUp(VkDevice device);
 };
 }  // namespace Vulkan
 }  // namespace Azura

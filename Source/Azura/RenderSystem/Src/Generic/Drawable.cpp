@@ -22,6 +22,10 @@ void Drawable::SetInstanceDataCount(U32 count) {
   m_instanceBufferInfos.Reserve(count);
 }
 
+void Drawable::SetUniformDataCount(U32 count) {
+  m_uniformBufferInfos.Reserve(count);
+}
+
 void Drawable::AddVertexData(const Containers::Vector<U8>& buffer, Slot slot) {
   AddVertexData(buffer.Data(), buffer.GetSize(), slot);
 }

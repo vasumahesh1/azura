@@ -11,7 +11,13 @@ namespace Azura {
 namespace Vulkan {
 namespace VkCore {
 
-VkInstance CreateInstance(const ApplicationInfo& applicationData, Containers::Vector<const char*> vkExtensions);
+#ifdef BUILD_DEBUG
+VkDebugReportCallbackEXT SetupDebug(VkInstance instance);
+void DestroyDebugReportCallbackEXT(VkInstance instance, VkDebugReportCallbackEXT callback, const VkAllocationCallbacks* pAllocator);
+VkResult CreateDebugReportCallbackEXT(VkInstance instance, const VkDebugReportCallbackCreateInfoEXT* pCreateInfo, const VkAllocationCallbacks* pAllocator, VkDebugReportCallbackEXT* pCallback);
+#endif
+
+VkInstance CreateInstance(const ApplicationInfo& applicationData, const Containers::Vector<const char*>& vkExtensions);
 
 SwapChainDeviceSupport QuerySwapChainSupport(VkPhysicalDevice device,
                                              VkSurfaceKHR surface,
@@ -100,6 +106,7 @@ void CreateCommandBuffers(VkDevice device,
                           Containers::Vector<VkCommandBuffer>& commandBuffers);
 
 void BeginCommandBuffer(VkCommandBuffer buffer, VkCommandBufferUsageFlags flags);
+void BeginCommandBuffer(VkCommandBuffer buffer, VkCommandBufferUsageFlags flags, const VkCommandBufferInheritanceInfo& inheritanceInfo);
 
 void EndCommandBuffer(VkCommandBuffer buffer);
 

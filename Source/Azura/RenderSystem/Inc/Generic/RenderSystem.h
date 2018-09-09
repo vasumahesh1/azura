@@ -19,7 +19,7 @@ std::unique_ptr<Renderer> CreateRenderer(const ApplicationInfo& appInfo,
                                          Memory::Allocator& drawAllocator,
                                          Window& window);
 
-std::unique_ptr<Window> CreateWindow(String title, U32 width, U32 height);
+std::unique_ptr<Window> CreateApplicationWindow(String title, U32 width, U32 height);
 
 std::unique_ptr<Shader> CreateShader(const Renderer& renderer, const String& fileName);
 

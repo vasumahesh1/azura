@@ -73,5 +73,10 @@ VkDescriptorBufferInfo VkScopedBuffer::GetDescriptorInfo(U32 offset, U32 range) 
 
   return bufferInfo;
 }
+
+void VkScopedBuffer::CleanUp() const {
+  vkDestroyBuffer(m_device, m_buffer, nullptr);
+  vkFreeMemory(m_device, m_memory, nullptr);
+}
 }  // namespace Vulkan
 }  // namespace Azura

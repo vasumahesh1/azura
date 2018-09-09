@@ -4,6 +4,7 @@
 #include "Generic/Shader.h"
 #include "Memory/MemoryFactory.h"
 #include "Memory/MonotonicAllocator.h"
+#include "Vulkan/VkMacros.h"
 
 namespace Azura {
 using namespace Containers; // NOLINT
@@ -21,7 +22,14 @@ AppRenderer::AppRenderer()
 
 void AppRenderer::Initialize() {
   STACK_ALLOCATOR(Temporary, Memory::MonotonicAllocator, 1024);
-  m_window = RenderSystem::CreateWindow("ProceduralPlanet", 1280, 720);
+  m_window = RenderSystem::CreateApplicationWindow("ProceduralPlanet", 1280, 720);
+
+  m_window->SetUpdateCallback([this] ()
+  {
+    WindowUpdate();
+  });
+
+  VERIFY_TRUE(m_window->Initialize(), "Cannot Initialize Window");
 
   ApplicationInfo appInfo;
   appInfo.m_name    = "Procedural Planet";
@@ -52,17 +60,19 @@ void AppRenderer::Initialize() {
     CreateShader(*m_renderer, "Shaders/" + m_renderer->GetRenderingAPI() + "/test.vertex");
   vertShader->SetStage(ShaderStage::Vertex);
 
-  auto pixelShader = RenderSystem::
-    CreateShader(*m_renderer, "Shaders/" + m_renderer->GetRenderingAPI() + "/test.pixel");
-  pixelShader->SetStage(ShaderStage::Pixel);
+
+  // auto pixelShader = RenderSystem::
+  //   CreateShader(*m_renderer, "Shaders/" + m_renderer->GetRenderingAPI() + "/test.pixel");
+  // pixelShader->SetStage(ShaderStage::Pixel);
 
   DrawablePoolCreateInfo poolInfo = {};
   poolInfo.m_byteSize             = 2048;
   poolInfo.m_numDrawables         = 1;
+  poolInfo.m_numShaders         = 1;
   DrawablePool& pool              = m_renderer->CreateDrawablePool(poolInfo);
 
   pool.AddShader(*vertShader);
-  pool.AddShader(*pixelShader);
+  // pool.AddShader(*pixelShader);
 
   Slot vertexDataSlot      = {};
   vertexDataSlot.m_binding = 0;
@@ -94,9 +104,11 @@ void AppRenderer::Initialize() {
   drawable.SetIndexCount(indexData.GetSize());
   drawable.SetVertexCount(vertexData.GetSize());
   drawable.SetInstanceCount(1);
+  drawable.SetUniformCount(1);
+
   drawable.SetInstanceDataCount(0);
   drawable.SetVertexDataCount(1);
-  drawable.SetUniformCount(1);
+  drawable.SetUniformDataCount(1);
 
   drawable.AddVertexData(bufferStart, vertexData.GetSize() * sizeof(vertexData), vertexDataSlot);
   drawable.SetIndexData(indexData);
@@ -108,9 +120,14 @@ void AppRenderer::Initialize() {
   m_renderer->Submit();
 }
 
-void AppRenderer::Run() {
+void AppRenderer::WindowUpdate() {
 }
 
-void AppRenderer::Destroy() {
+void AppRenderer::Run() const {
+  m_window->StartListening();
+}
+
+void AppRenderer::Destroy() const {
+  m_window->Destroy();
 }
 } // namespace Azura

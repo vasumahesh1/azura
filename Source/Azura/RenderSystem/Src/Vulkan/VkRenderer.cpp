@@ -108,8 +108,11 @@ const VkDescriptorSet& VkDrawable::GetDescriptorSet() const {
   return m_descriptorSet;
 }
 
-VkDrawablePool::VkDrawablePool(U32 numDrawables,
-                               U32 byteSize,
+void VkDrawable::CleanUp(VkDevice device) const {
+  UNUSED(device);
+}
+
+VkDrawablePool::VkDrawablePool(const DrawablePoolCreateInfo& createInfo,
                                VkDevice device,
                                VkBufferUsageFlags usage,
                                VkMemoryPropertyFlags memoryProperties,
@@ -123,9 +126,9 @@ VkDrawablePool::VkDrawablePool(U32 numDrawables,
                                const VkScopedSwapChain& swapChain,
                                Memory::Allocator& allocator,
                                Memory::Allocator& allocatorTemporary)
-    : DrawablePool(byteSize, allocator),
-      m_buffer(device, VK_BUFFER_USAGE_TRANSFER_DST_BIT | usage, byteSize, memoryProperties, phyDeviceMemoryProperties),
-      m_stagingBuffer(device, VK_BUFFER_USAGE_TRANSFER_SRC_BIT, byteSize, memoryProperties, phyDeviceMemoryProperties),
+    : DrawablePool(createInfo.m_byteSize, allocator),
+      m_buffer(device, VK_BUFFER_USAGE_TRANSFER_DST_BIT | usage, createInfo.m_byteSize, memoryProperties, phyDeviceMemoryProperties),
+      m_stagingBuffer(device, VK_BUFFER_USAGE_TRANSFER_SRC_BIT, createInfo.m_byteSize, memoryProperties, phyDeviceMemoryProperties),
       m_device(device),
       m_renderPass(renderPass),
       m_viewport(viewport),
@@ -136,7 +139,9 @@ VkDrawablePool::VkDrawablePool(U32 numDrawables,
       m_graphicsCommandPool(graphicsCommandPool),
       m_swapChain(swapChain),
       m_appRequirements(appReq),
-      m_drawables(numDrawables, allocator) {}
+      m_drawables(createInfo.m_numDrawables, allocator),
+      m_shaders(createInfo.m_numShaders, allocator) {}
+
 
 Drawable& VkDrawablePool::CreateDrawable() {
   VkDrawable drawable = VkDrawable(GetAllocator(), *this);
@@ -197,7 +202,12 @@ void VkDrawablePool::Submit() {
 
   m_commandBuffer = VkCore::CreateCommandBuffer(m_device, m_graphicsCommandPool, VK_COMMAND_BUFFER_LEVEL_SECONDARY);
 
-  VkCore::BeginCommandBuffer(m_commandBuffer, VK_COMMAND_BUFFER_USAGE_SIMULTANEOUS_USE_BIT);
+  VkCommandBufferInheritanceInfo inheritanceInfo = {};
+  inheritanceInfo.sType = VK_STRUCTURE_TYPE_COMMAND_BUFFER_INHERITANCE_INFO;
+  inheritanceInfo.renderPass = m_renderPass;
+  inheritanceInfo.framebuffer = VK_NULL_HANDLE;
+
+  VkCore::BeginCommandBuffer(m_commandBuffer, VK_COMMAND_BUFFER_USAGE_SIMULTANEOUS_USE_BIT, inheritanceInfo);
 
   vkCmdBindPipeline(m_commandBuffer, VK_PIPELINE_BIND_POINT_GRAPHICS, m_pipeline.Real());
 
@@ -267,7 +277,23 @@ void VkDrawablePool::AddBufferBinding(Slot slot, const Containers::Vector<RawSto
 void VkDrawablePool::AddShader(const Shader& shader) {
   // NOLINTNEXTLINE(cppcoreguidelines-pro-type-static-cast-downcast)
   auto vkShader = static_cast<const VkShader&>(shader);
-  m_pipelineFactory.AddShaderStage(vkShader.GetShaderStageInfo());
+
+  m_shaders.PushBack(vkShader);
+  m_pipelineFactory.AddShaderStage(m_shaders[m_shaders.GetSize() - 1].GetShaderStageInfo());
+}
+
+void VkDrawablePool::CleanUp() const {
+  m_buffer.CleanUp();
+  m_stagingBuffer.CleanUp();
+
+  m_pipeline.CleanUp(m_device);
+
+  vkFreeCommandBuffers(m_device, m_graphicsCommandPool, 1, &m_commandBuffer);
+
+  for (const auto& shader: m_shaders)
+  {
+    shader.CleanUp(m_device);
+  }
 }
 
 VkRenderer::VkRenderer(const ApplicationInfo& appInfo,
@@ -284,15 +310,19 @@ VkRenderer::VkRenderer(const ApplicationInfo& appInfo,
       m_frameBuffers(mainAllocator),
       m_imageAvailableSemaphores(mainAllocator),
       m_renderFinishedSemaphores(mainAllocator),
-      mInFlightFences(mainAllocator),
+      m_inFlightFences(mainAllocator),
       m_mainAllocator(mainAllocator),
       m_drawPoolAllocator(drawAllocator) {
-  STACK_ALLOCATOR(Temporary, Memory::MonotonicAllocator, 2048);
+  STACK_ALLOCATOR(Temporary, Memory::MonotonicAllocator, 16384);
 
   Vector<const char*> extensions(4, allocatorTemporary);
   VkPlatform::GetInstanceExtensions(extensions);
 
   m_instance = VkCore::CreateInstance(GetApplicationInfo(), extensions);
+#ifdef BUILD_DEBUG
+  m_callback = VkCore::SetupDebug(m_instance);
+#endif
+
   m_surface  = VkPlatform::CreateSurface(m_window.GetHandle(), m_instance);
 
   m_physicalDevice = VkCore::SelectPhysicalDevice(m_instance, m_surface, GetDeviceRequirements());
@@ -312,8 +342,7 @@ VkRenderer::VkRenderer(const ApplicationInfo& appInfo,
   m_swapChain = VkCore::CreateSwapChain(m_device, m_surface, m_queueIndices, swapChainDeviceSupport,
                                         swapChainRequirement, mainAllocator);
 
-  // TODO(vasumahesh1): Needs Changes
-
+  // TODO(vasumahesh1):[RENDER PASS]: Needs Changes
   m_renderPass = VkCore::CreateRenderPass(m_device, m_swapChain.m_surfaceFormat.format);
 
   const U32 uniformCount = appRequirements.m_uniformBuffers.GetSize();
@@ -329,7 +358,7 @@ VkRenderer::VkRenderer(const ApplicationInfo& appInfo,
 
   m_descriptorSetLayout = VkCore::CreateDescriptorSetLayout(m_device, layoutBindings);
 
-  // TODO(vasumahesh1):[EXT]: Add support for more than 1 set
+  // TODO(vasumahesh1):[DESCRIPTOR]: Add support for more than 1 set
   const Containers::Vector<VkDescriptorSetLayout> sets({m_descriptorSetLayout}, allocatorTemporary);
   m_pipelineLayout = VkCore::CreatePipelineLayout(m_device, sets);
 
@@ -346,14 +375,61 @@ VkRenderer::VkRenderer(const ApplicationInfo& appInfo,
 
   m_imageAvailableSemaphores.Resize(syncCount);
   m_renderFinishedSemaphores.Resize(syncCount);
-  mInFlightFences.Resize(syncCount);
+  m_inFlightFences.Resize(syncCount);
 
   VkCore::CreateSemaphores(m_device, syncCount, m_imageAvailableSemaphores);
   VkCore::CreateSemaphores(m_device, syncCount, m_renderFinishedSemaphores);
-  VkCore::CreateFences(m_device, syncCount, VK_FENCE_CREATE_SIGNALED_BIT, mInFlightFences);
+  VkCore::CreateFences(m_device, syncCount, VK_FENCE_CREATE_SIGNALED_BIT, m_inFlightFences);
 }
 
-VkRenderer::~VkRenderer() = default;
+VkRenderer::~VkRenderer()
+{
+  vkDeviceWaitIdle(m_device);
+
+#ifdef BUILD_DEBUG
+  VkCore::DestroyDebugReportCallbackEXT(m_instance, m_callback, nullptr);
+#endif
+
+  for (const auto& buffer: m_frameBuffers)
+  {
+    vkDestroyFramebuffer(m_device, buffer, nullptr);
+  }
+  
+  for (const auto& semaphore: m_imageAvailableSemaphores)
+  {
+    vkDestroySemaphore(m_device, semaphore, nullptr);
+  }
+  
+  for (const auto& semaphore: m_renderFinishedSemaphores)
+  {
+    vkDestroySemaphore(m_device, semaphore, nullptr);
+  }
+  
+  for (const auto& fences: m_inFlightFences)
+  {
+    vkDestroyFence(m_device, fences, nullptr);
+  }
+
+  for (const auto& pool : m_drawablePools)
+  {
+    pool.CleanUp();
+  }
+
+  m_swapChain.CleanUp(m_device);
+
+  vkDestroyPipelineLayout(m_device, m_pipelineLayout, nullptr);
+  vkDestroyRenderPass(m_device, m_renderPass, nullptr);
+
+  vkDestroyDescriptorSetLayout(m_device, m_descriptorSetLayout, nullptr);
+
+  vkDestroyCommandPool(m_device, m_graphicsCommandPool, nullptr);
+  vkDestroyCommandPool(m_device, m_transferCommandPool, nullptr);
+
+  vkDestroySurfaceKHR(m_instance, m_surface, nullptr);
+
+  vkDestroyDevice(m_device, nullptr); // Queues are also deleted
+  vkDestroyInstance(m_instance, nullptr); // m_device also Deleted
+};
 
 DrawablePool& VkRenderer::CreateDrawablePool(const DrawablePoolCreateInfo& createInfo) {
   STACK_ALLOCATOR(Temporary, Memory::MonotonicAllocator, 2048);
@@ -364,11 +440,11 @@ DrawablePool& VkRenderer::CreateDrawablePool(const DrawablePoolCreateInfo& creat
   // TODO(vasumahesh1): This isn't as performance optimized as it should be. We can probably find a way to insert a
   // buffer inside each pool?
   // Also, using default Viewport.
-  VkDrawablePool pool = VkDrawablePool(createInfo.m_numDrawables, createInfo.m_byteSize, m_device,
+  VkDrawablePool pool = VkDrawablePool(createInfo, m_device,
                                        VK_BUFFER_USAGE_INDEX_BUFFER_BIT | VK_BUFFER_USAGE_VERTEX_BUFFER_BIT | VK_BUFFER_USAGE_UNIFORM_BUFFER_BIT,
                                        VK_MEMORY_PROPERTY_HOST_VISIBLE_BIT | VK_MEMORY_PROPERTY_HOST_COHERENT_BIT,
                                        m_pipelineLayout, m_descriptorSetLayout, m_graphicsCommandPool, m_renderPass, GetApplicationRequirements(), m_window.GetViewport(), memProperties,
-                                       m_swapChain, m_drawPoolAllocator, allocatorTemporary);
+                                       m_swapChain, m_drawPoolAllocator, m_mainAllocator);
 
   m_drawablePools.PushBack(std::move(pool));
 
