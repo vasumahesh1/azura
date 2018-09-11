@@ -62,7 +62,7 @@ VkPipelineFactory& VkPipelineFactory::AddAttributeDescription(RawStorageFormat r
   // TODO(vasumahesh1): Handle 64bit formats taking 2 locations
   bindingInfo.m_location++;
 
-  bindingInfo.m_offset += GetFormatSize(rawFormat);
+  bindingInfo.m_offset += GetFormatSizeBits(rawFormat);
 
   m_bindingMap[binding] = bindingInfo;
 

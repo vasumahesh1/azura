@@ -9,12 +9,23 @@
 
 namespace Azura {
 namespace Vulkan {
+class VkScopedBuffer;
+}
+}
+
+namespace Azura {
+namespace Vulkan {
 namespace VkCore {
 
 #ifdef BUILD_DEBUG
 VkDebugReportCallbackEXT SetupDebug(VkInstance instance);
-void DestroyDebugReportCallbackEXT(VkInstance instance, VkDebugReportCallbackEXT callback, const VkAllocationCallbacks* pAllocator);
-VkResult CreateDebugReportCallbackEXT(VkInstance instance, const VkDebugReportCallbackCreateInfoEXT* pCreateInfo, const VkAllocationCallbacks* pAllocator, VkDebugReportCallbackEXT* pCallback);
+void DestroyDebugReportCallbackEXT(VkInstance instance,
+                                   VkDebugReportCallbackEXT callback,
+                                   const VkAllocationCallbacks* pAllocator);
+VkResult CreateDebugReportCallbackEXT(VkInstance instance,
+                                      const VkDebugReportCallbackCreateInfoEXT* pCreateInfo,
+                                      const VkAllocationCallbacks* pAllocator,
+                                      VkDebugReportCallbackEXT* pCallback);
 #endif
 
 VkInstance CreateInstance(const ApplicationInfo& applicationData, const Containers::Vector<const char*>& vkExtensions);
@@ -91,14 +102,21 @@ VkDescriptorSet CreateDescriptorSet(VkDevice device,
                                     const Containers::Vector<VkDescriptorSetLayout>& descriptorSets);
 
 VkWriteDescriptorSet CreateWriteDescriptorForUniformBuffer(
-    VkDescriptorSet set, U32 layoutIndex, U32 binding, const Containers::Vector<VkDescriptorBufferInfo>& bufferInfos);
+  VkDescriptorSet set,
+  U32 layoutIndex,
+  U32 binding,
+  const Containers::Vector<VkDescriptorBufferInfo>& bufferInfos);
 
 void UpdateDescriptorSets(VkDevice device, const Containers::Vector<VkWriteDescriptorSet>& descriptorWrites);
 
 VkCommandBuffer CreateCommandBuffer(VkDevice device, VkCommandPool commandPool, VkCommandBufferLevel level);
 
 Containers::Vector<VkCommandBuffer> CreateCommandBuffers(
-    VkDevice device, U32 count, VkCommandPool commandPool, VkCommandBufferLevel level, Memory::Allocator& allocator);
+  VkDevice device,
+  U32 count,
+  VkCommandPool commandPool,
+  VkCommandBufferLevel level,
+  Memory::Allocator& allocator);
 
 void CreateCommandBuffers(VkDevice device,
                           VkCommandPool commandPool,
@@ -106,7 +124,9 @@ void CreateCommandBuffers(VkDevice device,
                           Containers::Vector<VkCommandBuffer>& commandBuffers);
 
 void BeginCommandBuffer(VkCommandBuffer buffer, VkCommandBufferUsageFlags flags);
-void BeginCommandBuffer(VkCommandBuffer buffer, VkCommandBufferUsageFlags flags, const VkCommandBufferInheritanceInfo& inheritanceInfo);
+void BeginCommandBuffer(VkCommandBuffer buffer,
+                        VkCommandBufferUsageFlags flags,
+                        const VkCommandBufferInheritanceInfo& inheritanceInfo);
 
 void EndCommandBuffer(VkCommandBuffer buffer);
 
@@ -125,6 +145,13 @@ Containers::Vector<VkFence> CreateFences(VkDevice device,
                                          VkFenceCreateFlags flags,
                                          Memory::Allocator& allocator);
 
-}  // namespace VkCore
-}  // namespace Vulkan
-}  // namespace Azura
+void CopyBuffer(VkDevice device,
+                VkQueue queue,
+                const VkScopedBuffer& srcBuffer,
+                const VkScopedBuffer& dstBuffer,
+                const VkDeviceSize size,
+                const VkCommandPool commandPool);
+
+} // namespace VkCore
+} // namespace Vulkan
+} // namespace Azura

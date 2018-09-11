@@ -10,7 +10,6 @@
 namespace Azura {
 struct UniformBufferData
 {
-  int m_data;
   mathfu::Matrix<float, 4, 4> m_model;
   mathfu::Matrix<float, 4, 4> m_view;
   mathfu::Matrix<float, 4, 4> m_proj;

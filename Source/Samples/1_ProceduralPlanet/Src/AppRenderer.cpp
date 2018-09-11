@@ -44,6 +44,9 @@ void AppRenderer::Initialize() {
   const int uboBinding = 0;
 
   UniformBufferData uboData = {};
+  uboData.m_model = mathfu::Matrix<float, 4, 4>::Identity();
+  uboData.m_view = mathfu::Matrix<float, 4, 4>::LookAt(mathfu::Vector<float, 3>(0.0f, 0.0f, 0.0f), mathfu::Vector<float, 3>(0.0f, 0.0f, 10.0f), mathfu::Vector<float, 3>(0.0f, 1.0f, 0.0f));
+  uboData.m_proj = mathfu::Matrix<float, 4, 4>::Perspective(45.0f, 16.0f / 9.0f, 0.1f, 1000.0f);
 
   // TODO(vasumahesh1):[Q]:Allocator?
   ApplicationRequirements applicationRequirements(m_mainAllocator);
@@ -61,18 +64,18 @@ void AppRenderer::Initialize() {
   vertShader->SetStage(ShaderStage::Vertex);
 
 
-  // auto pixelShader = RenderSystem::
-  //   CreateShader(*m_renderer, "Shaders/" + m_renderer->GetRenderingAPI() + "/test.pixel");
-  // pixelShader->SetStage(ShaderStage::Pixel);
+  auto pixelShader = RenderSystem::
+    CreateShader(*m_renderer, "Shaders/" + m_renderer->GetRenderingAPI() + "/test.pixel");
+  pixelShader->SetStage(ShaderStage::Pixel);
 
   DrawablePoolCreateInfo poolInfo = {};
   poolInfo.m_byteSize             = 4096;
   poolInfo.m_numDrawables         = 1;
-  poolInfo.m_numShaders         = 1;
+  poolInfo.m_numShaders         = 2;
   DrawablePool& pool              = m_renderer->CreateDrawablePool(poolInfo);
 
   pool.AddShader(*vertShader);
-  // pool.AddShader(*pixelShader);
+  pool.AddShader(*pixelShader);
 
   Slot vertexDataSlot      = {};
   vertexDataSlot.m_binding = 0;
@@ -91,8 +94,8 @@ void AppRenderer::Initialize() {
   }, allocatorTemporary);
 
   Vector<U32> indexData = Vector<U32>({
-    0, 1, 2,
-    2, 3, 1
+    0, 2, 1,
+    2, 0, 3
   }, allocatorTemporary);
 
   const auto bufferStart = reinterpret_cast<U8*>(vertexData.Data()); // NOLINT
@@ -106,13 +109,13 @@ void AppRenderer::Initialize() {
   drawable.SetVertexCount(vertexData.GetSize());
   drawable.SetInstanceCount(1);
   drawable.SetUniformCount(1);
-  drawable.SetIndexFormat(RawStorageFormat::R32_SNORM);
+  drawable.SetIndexFormat(RawStorageFormat::R32_UNORM);
 
   drawable.SetInstanceDataCount(0);
   drawable.SetVertexDataCount(1);
   drawable.SetUniformDataCount(1);
 
-  drawable.AddVertexData(bufferStart, vertexData.GetSize() * sizeof(vertexData), vertexDataSlot);
+  drawable.AddVertexData(bufferStart, vertexData.GetSize() * sizeof(Vertex), vertexDataSlot);
   drawable.SetIndexData(indexBufferStart, indexData.GetSize() * sizeof(U32));
   drawable.AddUniformData(uboDataBuffer, sizeof(UniformBufferData), 0);
 

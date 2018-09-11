@@ -45,6 +45,7 @@ class VkDrawablePool final : public DrawablePool {
  public:
   VkDrawablePool(const DrawablePoolCreateInfo& createInfo,
                  VkDevice device,
+                 VkQueue graphicsQueue,
                  VkBufferUsageFlags usage,
                  VkMemoryPropertyFlags memoryProperties,
                  VkPipelineLayout pipelineLayout,
@@ -90,6 +91,8 @@ class VkDrawablePool final : public DrawablePool {
 
   VkCommandBuffer m_commandBuffer{};
   VkCommandPool m_graphicsCommandPool;
+
+  VkQueue m_graphicsQueue;
 
   const VkScopedSwapChain& m_swapChain;
   const ApplicationRequirements& m_appRequirements;

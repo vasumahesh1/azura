@@ -158,6 +158,7 @@ enum class RawStorageFormat
   RAW_STORAGE_FORMAT_ITERATOR(GET_FORMAT_NAME_FOR_LIST_FROM_TUPLE)
 };
 
+U32 GetFormatSizeBits(RawStorageFormat format);
 U32 GetFormatSize(RawStorageFormat format);
 
 }  // namespace Azura

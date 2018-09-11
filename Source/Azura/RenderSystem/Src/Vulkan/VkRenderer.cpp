@@ -124,6 +124,7 @@ void VkDrawable::CleanUp(VkDevice device) const {
 
 VkDrawablePool::VkDrawablePool(const DrawablePoolCreateInfo& createInfo,
                                VkDevice device,
+                               VkQueue graphicsQueue,
                                VkBufferUsageFlags usage,
                                VkMemoryPropertyFlags memoryProperties,
                                VkPipelineLayout pipelineLayout,
@@ -150,6 +151,7 @@ VkDrawablePool::VkDrawablePool(const DrawablePoolCreateInfo& createInfo,
     m_pipelineLayout(pipelineLayout),
     m_pipelineFactory(device, allocatorTemporary),
     m_graphicsCommandPool(graphicsCommandPool),
+  m_graphicsQueue(graphicsQueue),
     m_swapChain(swapChain),
     m_appRequirements(appReq),
     m_physicalDeviceProperties(physicalDeviceProperties),
@@ -206,7 +208,7 @@ void VkDrawablePool::Submit() {
   CreateDescriptorPool(m_appRequirements);
 
   m_pipelineFactory.SetInputAssemblyStage(PrimitiveTopology::TriangleList);
-  m_pipelineFactory.SetRasterizerStage(CullMode::BackBit, FrontFace::CounterClockwise);
+  m_pipelineFactory.SetRasterizerStage(CullMode::None, FrontFace::CounterClockwise);
   m_pipelineFactory.SetPipelineLayout(m_pipelineLayout);
   m_pipelineFactory.SetRenderPass(m_renderPass);
   m_pipelineFactory.SetViewportStage(m_viewport, m_swapChain);
@@ -225,6 +227,8 @@ void VkDrawablePool::Submit() {
   VkCore::BeginCommandBuffer(m_commandBuffer, VK_COMMAND_BUFFER_USAGE_SIMULTANEOUS_USE_BIT | VK_COMMAND_BUFFER_USAGE_RENDER_PASS_CONTINUE_BIT, inheritanceInfo);
 
   vkCmdBindPipeline(m_commandBuffer, VK_PIPELINE_BIND_POINT_GRAPHICS, m_pipeline.Real());
+
+  VkCore::CopyBuffer(m_device, m_graphicsQueue, m_stagingBuffer, m_buffer, GetOffset(), m_graphicsCommandPool);
 
   VkBuffer mainBuffer = m_buffer.Real();
 
@@ -279,8 +283,6 @@ void VkDrawablePool::AddBufferBinding(Slot slot, const Containers::Vector<RawSto
   for (const auto& stride : strides) {
     totalBufferStride += GetFormatSize(stride);
   }
-
-  totalBufferStride /= 8;
 
   m_pipelineFactory.AddBindingDescription(totalBufferStride, slot);
 }
@@ -450,7 +452,7 @@ DrawablePool& VkRenderer::CreateDrawablePool(const DrawablePoolCreateInfo& creat
   // TODO(vasumahesh1): This isn't as performance optimized as it should be. We can probably find a way to insert a
   // buffer inside each pool?
   // Also, using default Viewport.
-  VkDrawablePool pool = VkDrawablePool(createInfo, m_device,
+  VkDrawablePool pool = VkDrawablePool(createInfo, m_device, m_graphicsQueue,
                                        VK_BUFFER_USAGE_INDEX_BUFFER_BIT | VK_BUFFER_USAGE_VERTEX_BUFFER_BIT |
                                        VK_BUFFER_USAGE_UNIFORM_BUFFER_BIT,
                                        VK_MEMORY_PROPERTY_HOST_VISIBLE_BIT | VK_MEMORY_PROPERTY_HOST_COHERENT_BIT,
