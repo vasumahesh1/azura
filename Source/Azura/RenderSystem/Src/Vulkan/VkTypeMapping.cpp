@@ -75,7 +75,7 @@ namespace Vulkan {
 
 
 #define RAW_STORAGE_TO_VK_INDEX_TYPE_MAPPING(FUNC)                                                                      \
-  FUNC(RawStorageFormat::R32_UNORM, VK_INDEX_TYPE_UINT16)                                                               \
+  FUNC(RawStorageFormat::R16_UNORM, VK_INDEX_TYPE_UINT16)                                                               \
   FUNC(RawStorageFormat::R32_SNORM, VK_INDEX_TYPE_UINT32)                                                               \
 
 #define COLOR_SPACE_TO_VK_COLOR_SPACE_MAPPING(FUNC)                                                                    \

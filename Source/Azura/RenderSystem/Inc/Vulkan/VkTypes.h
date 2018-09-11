@@ -45,6 +45,7 @@ struct VkScopedSwapChain {
   VkScopedSwapChain(Memory::Allocator& allocator);
 
   void CleanUp(VkDevice device);
+  VkSwapchainKHR Real() const;
 };
 }  // namespace Vulkan
 }  // namespace Azura

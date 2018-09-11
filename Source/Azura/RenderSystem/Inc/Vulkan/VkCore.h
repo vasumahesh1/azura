@@ -40,7 +40,7 @@ VkScopedSwapChain CreateSwapChain(VkDevice device,
                                   VkSurfaceKHR surface,
                                   const VkQueueIndices& queueIndices,
                                   const SwapChainDeviceSupport& swapChainSupport,
-                                  const SwapChainRequirement& swapChainRequirement,
+                                  const SwapChainRequirements& swapChainRequirement,
                                   Memory::Allocator& allocator);
 
 VkImageView CreateImageView(VkDevice device,

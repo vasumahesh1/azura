@@ -24,8 +24,8 @@ ViewportDimensions Window::GetViewport() const {
   return dimension;
 }
 
-SwapChainRequirement Window::GetSwapChainRequirements() const {
-  SwapChainRequirement requirement;
+SwapChainRequirements Window::GetSwapChainRequirements() const {
+  SwapChainRequirements requirement;
   requirement.m_colorSpace = ColorSpace::SRGB;
   requirement.m_format = RawStorageFormat::B8G8R8A8_UNORM;
   requirement.m_extent = Bounds2D(m_width, m_height);

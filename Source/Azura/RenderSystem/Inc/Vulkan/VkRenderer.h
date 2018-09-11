@@ -54,6 +54,7 @@ class VkDrawablePool final : public DrawablePool {
                  const ApplicationRequirements& appReq,
                  const ViewportDimensions& viewport,
                  const VkPhysicalDeviceMemoryProperties& phyDeviceMemoryProperties,
+                 const VkPhysicalDeviceProperties& physicalDeviceProperties,
                  const VkScopedSwapChain& swapChain,
                  Memory::Allocator& allocator,
                  Memory::Allocator& allocatorTemporary);
@@ -70,6 +71,8 @@ class VkDrawablePool final : public DrawablePool {
   void AddShader(const Shader& shader) override;
 
   void CleanUp() const;
+
+  const VkCommandBuffer& GetCommandBuffer() const;
 
  private:
   VkScopedBuffer m_buffer;
@@ -90,6 +93,7 @@ class VkDrawablePool final : public DrawablePool {
 
   const VkScopedSwapChain& m_swapChain;
   const ApplicationRequirements& m_appRequirements;
+  const VkPhysicalDeviceProperties& m_physicalDeviceProperties;
 
   Containers::Vector<VkDrawable> m_drawables;
   Containers::Vector<VkShader> m_shaders;
@@ -100,7 +104,7 @@ class VkRenderer : public Renderer {
   VkRenderer(const ApplicationInfo& appInfo,
              const DeviceRequirements& deviceRequirements,
              const ApplicationRequirements& appRequirements,
-             const SwapChainRequirement& swapChainRequirement,
+             const SwapChainRequirements& swapChainRequirement,
              Memory::Allocator& mainAllocator,
              Memory::Allocator& drawAllocator,
              Window& window);
@@ -117,6 +121,7 @@ class VkRenderer : public Renderer {
   VkDevice GetDevice() const;
   String GetRenderingAPI() const override;
   void Submit() override;
+  void RenderFrame() override;
 
  private:
   Window& m_window;
@@ -140,6 +145,7 @@ class VkRenderer : public Renderer {
   Containers::Vector<VkSemaphore> m_imageAvailableSemaphores;
   Containers::Vector<VkSemaphore> m_renderFinishedSemaphores;
   Containers::Vector<VkFence> m_inFlightFences;
+  Containers::Vector<VkCommandBuffer> m_primaryCommandBuffers;
 
   VkCommandPool m_graphicsCommandPool;
   VkCommandPool m_transferCommandPool;
@@ -147,6 +153,8 @@ class VkRenderer : public Renderer {
   VkQueue m_graphicsQueue;
   VkQueue m_presentQueue;
   VkQueue m_transferQueue;
+
+  VkPhysicalDeviceProperties m_physicalDeviceProperties{};
 
   std::reference_wrapper<Memory::Allocator> m_mainAllocator;
   std::reference_wrapper<Memory::Allocator> m_drawPoolAllocator;

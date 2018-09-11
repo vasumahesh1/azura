@@ -66,7 +66,7 @@ void AppRenderer::Initialize() {
   // pixelShader->SetStage(ShaderStage::Pixel);
 
   DrawablePoolCreateInfo poolInfo = {};
-  poolInfo.m_byteSize             = 2048;
+  poolInfo.m_byteSize             = 4096;
   poolInfo.m_numDrawables         = 1;
   poolInfo.m_numShaders         = 1;
   DrawablePool& pool              = m_renderer->CreateDrawablePool(poolInfo);
@@ -90,12 +90,13 @@ void AppRenderer::Initialize() {
     Vertex{{0, 1, 0, 1}, {1, 1, 1, 1}}
   }, allocatorTemporary);
 
-  Vector<U8> indexData = Vector<U8>({
+  Vector<U32> indexData = Vector<U32>({
     0, 1, 2,
     2, 3, 1
   }, allocatorTemporary);
 
   const auto bufferStart = reinterpret_cast<U8*>(vertexData.Data()); // NOLINT
+  const auto indexBufferStart = reinterpret_cast<U8*>(indexData.Data()); // NOLINT
   const auto uboDataBuffer = reinterpret_cast<U8*>(&uboData); // NOLINT
 
   // Create Drawable from Pool
@@ -105,22 +106,22 @@ void AppRenderer::Initialize() {
   drawable.SetVertexCount(vertexData.GetSize());
   drawable.SetInstanceCount(1);
   drawable.SetUniformCount(1);
+  drawable.SetIndexFormat(RawStorageFormat::R32_SNORM);
 
   drawable.SetInstanceDataCount(0);
   drawable.SetVertexDataCount(1);
   drawable.SetUniformDataCount(1);
 
   drawable.AddVertexData(bufferStart, vertexData.GetSize() * sizeof(vertexData), vertexDataSlot);
-  drawable.SetIndexData(indexData);
+  drawable.SetIndexData(indexBufferStart, indexData.GetSize() * sizeof(U32));
   drawable.AddUniformData(uboDataBuffer, sizeof(UniformBufferData), 0);
 
   // All Drawables Done
-  pool.Submit();
-
   m_renderer->Submit();
 }
 
 void AppRenderer::WindowUpdate() {
+  m_renderer->RenderFrame();
 }
 
 void AppRenderer::Run() const {

@@ -23,7 +23,7 @@ class Window {
 
   ViewportDimensions GetViewport() const;
 
-  SwapChainRequirement GetSwapChainRequirements() const;
+  SwapChainRequirements GetSwapChainRequirements() const;
 
  protected:
   U32 GetWidth() const;

@@ -39,5 +39,9 @@ void VkScopedSwapChain::CleanUp(VkDevice device) {
   vkDestroySwapchainKHR(device, m_swapChain, nullptr);
 }
 
+VkSwapchainKHR VkScopedSwapChain::Real() const {
+  return m_swapChain;
+}
+
 }  // namespace Vulkan
 }  // namespace Azura

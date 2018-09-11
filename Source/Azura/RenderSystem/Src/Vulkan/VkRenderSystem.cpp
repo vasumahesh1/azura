@@ -7,7 +7,7 @@ namespace Azura {
 std::unique_ptr<Renderer> RenderSystem::CreateRenderer(const ApplicationInfo& appInfo,
                                                        const DeviceRequirements& deviceRequirements,
                                                        const ApplicationRequirements& appRequirements,
-                                                       const SwapChainRequirement& swapChainRequirement,
+                                                       const SwapChainRequirements& swapChainRequirement,
                                                        Memory::Allocator& mainAllocator,
                                                        Memory::Allocator& drawAllocator,
                                                        Window& window) {

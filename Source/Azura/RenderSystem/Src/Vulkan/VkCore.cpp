@@ -150,7 +150,7 @@ int GetDeviceScore(VkPhysicalDevice device,
 }
 
 VkSurfaceFormatKHR ChooseSwapSurfaceFormat(const Containers::Vector<VkSurfaceFormatKHR>& availableFormats,
-                                           const SwapChainRequirement& requirement) {
+                                           const SwapChainRequirements& requirement) {
   const auto format = ToVkFormat(requirement.m_format);
   VERIFY_OPT(format, "Unknown Format");
 
@@ -186,7 +186,7 @@ VkPresentModeKHR ChooseSwapPresentMode(const Containers::Vector<VkPresentModeKHR
   return bestMode;
 }
 
-VkExtent2D ChooseSwapExtent(const VkSurfaceCapabilitiesKHR& capabilities, const SwapChainRequirement& requirement) {
+VkExtent2D ChooseSwapExtent(const VkSurfaceCapabilitiesKHR& capabilities, const SwapChainRequirements& requirement) {
   if (capabilities.currentExtent.width != std::numeric_limits<U32>::max()) {
     return capabilities.currentExtent;
   }
@@ -437,7 +437,7 @@ VkScopedSwapChain VkCore::CreateSwapChain(VkDevice device,
                                           VkSurfaceKHR surface,
                                           const VkQueueIndices& queueIndices,
                                           const SwapChainDeviceSupport& swapChainSupport,
-                                          const SwapChainRequirement& swapChainRequirement,
+                                          const SwapChainRequirements& swapChainRequirement,
                                           Memory::Allocator& allocator) {
   VkScopedSwapChain scopedSwapChain(allocator);
 

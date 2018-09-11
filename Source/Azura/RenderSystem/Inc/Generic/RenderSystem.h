@@ -14,7 +14,7 @@ namespace RenderSystem {
 std::unique_ptr<Renderer> CreateRenderer(const ApplicationInfo& appInfo,
                                          const DeviceRequirements& deviceRequirements,
                                          const ApplicationRequirements& appRequirements,
-                                         const SwapChainRequirement& swapChainRequirement,
+                                         const SwapChainRequirements& swapChainRequirement,
                                          Memory::Allocator& mainAllocator,
                                          Memory::Allocator& drawAllocator,
                                          Window& window);
