@@ -19,12 +19,13 @@ void VkScopedPipeline::CleanUp(VkDevice device) const {
 }
 
 // TODO(vasumahesh1): Figure out a way to adjust size properly
-VkPipelineFactory::VkPipelineFactory(VkDevice device, Memory::Allocator& allocator)
+VkPipelineFactory::VkPipelineFactory(VkDevice device, Memory::Allocator& allocator, Log logger)
   : m_device(device),
     m_stages(10, allocator),
     m_bindingInfo(10, allocator),
     m_attributeDescription(10, allocator),
-    m_colorBlendAttachment() {
+    m_colorBlendAttachment(),
+    log_VulkanRenderSystem(std::move(logger)) {
 }
 
 VkPipelineFactory& VkPipelineFactory::AddShaderStage(const VkPipelineShaderStageCreateInfo& shaderStageCreateInfo) {
@@ -37,7 +38,7 @@ VkPipelineFactory& VkPipelineFactory::AddBindingDescription(U32 stride, Slot slo
   VkVertexInputBindingDescription bindingDesc;
 
   const auto rate = ToVkVertexInputRate(slot.m_rate);
-  VERIFY_OPT(rate, "Unknown Format");
+  VERIFY_OPT(log_VulkanRenderSystem, rate, "Unknown Format");
 
   bindingDesc.binding   = slot.m_binding;
   bindingDesc.stride    = stride;
@@ -51,7 +52,7 @@ VkPipelineFactory& VkPipelineFactory::AddAttributeDescription(RawStorageFormat r
   auto bindingInfo = m_bindingMap[binding];
 
   const auto format = ToVkFormat(rawFormat);
-  VERIFY_OPT(format, "Unknown Format");
+  VERIFY_OPT(log_VulkanRenderSystem, format, "Unknown Format");
 
   VkVertexInputAttributeDescription attrDesc;
   attrDesc.binding  = binding;
@@ -76,7 +77,7 @@ VkPipelineFactory& VkPipelineFactory::BulkAddAttributeDescription(const Containe
 
   for (const auto& rawFormat : strides) {
     const auto format = ToVkFormat(rawFormat);
-    VERIFY_OPT(format, "Unknown Format");
+    VERIFY_OPT(log_VulkanRenderSystem, format, "Unknown Format");
 
     VkVertexInputAttributeDescription attrDesc;
     attrDesc.binding  = binding;
@@ -99,7 +100,7 @@ VkPipelineFactory& VkPipelineFactory::BulkAddAttributeDescription(const Containe
 
 VkPipelineFactory& VkPipelineFactory::SetInputAssemblyStage(PrimitiveTopology topology) {
   const auto vkTopology = ToVkPrimitiveTopology(topology);
-  VERIFY_OPT(vkTopology, "Unknown Topology");
+  VERIFY_OPT(log_VulkanRenderSystem, vkTopology, "Unknown Topology");
 
   m_inputAssemblyStage.sType    = VK_STRUCTURE_TYPE_PIPELINE_INPUT_ASSEMBLY_STATE_CREATE_INFO;
   m_inputAssemblyStage.topology = vkTopology.value();
@@ -135,10 +136,10 @@ VkPipelineFactory& VkPipelineFactory::SetViewportStage(ViewportDimensions viewpo
 
 VkPipelineFactory& VkPipelineFactory::SetRasterizerStage(CullMode cullMode, FrontFace faceOrder) {
   const auto vkCullMode = ToVkCullModeFlags(cullMode);
-  VERIFY_OPT(vkCullMode, "Unknown Cull Mode");
+  VERIFY_OPT(log_VulkanRenderSystem, vkCullMode, "Unknown Cull Mode");
 
   const auto vkFrontFace = ToVkFrontFace(faceOrder);
-  VERIFY_OPT(vkFrontFace, "Unknown Face Order");
+  VERIFY_OPT(log_VulkanRenderSystem, vkFrontFace, "Unknown Face Order");
 
   // TODO(vasumahesh1): Might need to expose some values later on
   m_rasterizerStage.sType                   = VK_STRUCTURE_TYPE_PIPELINE_RASTERIZATION_STATE_CREATE_INFO;
@@ -217,7 +218,7 @@ VkScopedPipeline VkPipelineFactory::Submit() const {
   pipelineInfo.basePipelineIndex            = -1;
 
   VkPipeline pipeline;
-  VERIFY_VK_OP(vkCreateGraphicsPipelines(m_device, VK_NULL_HANDLE, 1, &pipelineInfo, nullptr, &pipeline),
+  VERIFY_VK_OP(log_VulkanRenderSystem, vkCreateGraphicsPipelines(m_device, VK_NULL_HANDLE, 1, &pipelineInfo, nullptr, &pipeline),
     "Failed to create pipeline");
   return VkScopedPipeline(pipeline);
 }

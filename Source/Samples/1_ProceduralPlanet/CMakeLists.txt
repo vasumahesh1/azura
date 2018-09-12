@@ -22,4 +22,4 @@ AzuraSetGLFWForTarget(ProceduralPlanet)
 AzuraAddSPIRVShadersToTarget(ProceduralPlanet ${VULKAN_SHADERS})
 
 target_include_directories(ProceduralPlanet PUBLIC ${PROJECT_SOURCE_DIR}/Inc)
-target_link_libraries(ProceduralPlanet VulkanRenderSystem GLFW_STATIC MathFu)
+target_link_libraries(ProceduralPlanet VulkanRenderSystem Log GLFW_STATIC MathFu)

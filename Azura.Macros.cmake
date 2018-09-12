@@ -7,6 +7,22 @@ macro(AzuraSilenceEnumGuard TargetName)
                         PROPERTIES COMPILE_FLAGS "${CMAKE_CXX_FLAGS} /wd4061")
 endmacro(AzuraSilenceEnumGuard)
 
+macro(AzuraGlobalSilenceEnumGuard)
+  if(MSVC)
+    string(REPLACE " /we4061"
+                   ""
+                   CMAKE_CXX_FLAGS
+                   "${CMAKE_CXX_FLAGS}")
+
+    set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} /wd4061")
+  elseif(CMAKE_COMPILER_IS_GNUCC OR CMAKE_COMPILER_IS_GNUCXX)
+    string(REPLACE " -Wswitch-enum"
+                   ""
+                   CMAKE_CXX_FLAGS
+                   "${CMAKE_CXX_FLAGS}")
+  endif()
+endmacro(AzuraSilenceEnumGuard)
+
 macro(AzuraSilenceWarningsForMathfu TargetName)
   if(MSVC)
     target_compile_options(${TargetName}
@@ -58,3 +74,7 @@ endmacro(AzuraAddUnitTest)
 macro(AzuraSetGLFWForTarget TargetName)
   set_target_properties(${TargetName} PROPERTIES LINK_FLAGS "/NODEFAULTLIB:MSVCRT")
 endmacro(AzuraSetGLFWForTarget)
+
+macro(AzuraAddLoggingSupport TargetName Level)
+  target_compile_definitions(${TargetName} PUBLIC LOG_LEVEL=${Level})
+endmacro(AzuraEnableWarningsAsErrors)

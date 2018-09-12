@@ -3,6 +3,7 @@
 #include "Renderer.h"
 
 namespace Azura {
+class Log;
 class Window;
 }
 
@@ -21,7 +22,7 @@ std::unique_ptr<Renderer> CreateRenderer(const ApplicationInfo& appInfo,
 
 std::unique_ptr<Window> CreateApplicationWindow(String title, U32 width, U32 height);
 
-std::unique_ptr<Shader> CreateShader(const Renderer& renderer, const String& fileName);
+std::unique_ptr<Shader> CreateShader(const Renderer& renderer, const String& fileName, const Log& logger);
 
 }  // namespace RenderSystem
 }  // namespace Azura

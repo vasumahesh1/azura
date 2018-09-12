@@ -4,7 +4,6 @@
 #include "Generic/Shader.h"
 #include "Memory/MemoryFactory.h"
 #include "Memory/MonotonicAllocator.h"
-#include "Vulkan/VkMacros.h"
 
 namespace Azura {
 using namespace Containers; // NOLINT
@@ -17,7 +16,8 @@ struct Vertex {
 AppRenderer::AppRenderer()
   : m_mainBuffer(4096 * 4),
     m_mainAllocator(m_mainBuffer, 2048),
-    m_drawableAllocator(m_mainBuffer, 2048) {
+    m_drawableAllocator(m_mainBuffer, 2048),
+    log_AppRenderer(Log("AppRenderer")) {
 }
 
 void AppRenderer::Initialize() {
@@ -29,7 +29,7 @@ void AppRenderer::Initialize() {
     WindowUpdate();
   });
 
-  VERIFY_TRUE(m_window->Initialize(), "Cannot Initialize Window");
+  VERIFY_TRUE(log_AppRenderer, m_window->Initialize(), "Cannot Initialize Window");
 
   ApplicationInfo appInfo;
   appInfo.m_name    = "Procedural Planet";
@@ -45,11 +45,14 @@ void AppRenderer::Initialize() {
 
   UniformBufferData uboData = {};
   uboData.m_model = mathfu::Matrix<float, 4, 4>::Identity();
-  uboData.m_view = mathfu::Matrix<float, 4, 4>::LookAt(mathfu::Vector<float, 3>(0.0f, 0.0f, 0.0f), mathfu::Vector<float, 3>(0.0f, 0.0f, 10.0f), mathfu::Vector<float, 3>(0.0f, 1.0f, 0.0f));
-  uboData.m_proj = mathfu::Matrix<float, 4, 4>::Perspective(45.0f, 16.0f / 9.0f, 0.1f, 1000.0f);
+  uboData.m_view = mathfu::Matrix<float, 4, 4>::LookAt(mathfu::Vector<float, 3>(0.0f, 0.1f, 0.0f), mathfu::Vector<float, 3>(0.0f, 0.1f, -6.0f), mathfu::Vector<float, 3>(0.0f, 1.0f, 0.0f), -1.0f);
+  uboData.m_proj = mathfu::Matrix<float, 4, 4>::Perspective(45.0f, 16.0f / 9.0f, 0.1f, 100.0f, -1.0f);
 
   // TODO(vasumahesh1):[Q]:Allocator?
   ApplicationRequirements applicationRequirements(m_mainAllocator);
+  applicationRequirements.m_clearColor[0] = 0.2f;
+  applicationRequirements.m_clearColor[1] = 0.2f;
+  applicationRequirements.m_clearColor[2] = 0.2f;
   applicationRequirements.m_uniformBuffers.Reserve(1);
   applicationRequirements.m_uniformBuffers.PushBack(std::make_pair(ShaderStage::Vertex,
                                                                    UniformBufferDesc{sizeof(UniformBufferData), 1, uboBinding}));
@@ -60,12 +63,12 @@ void AppRenderer::Initialize() {
   m_renderer->SetDrawablePoolCount(1);
 
   auto vertShader = RenderSystem::
-    CreateShader(*m_renderer, "Shaders/" + m_renderer->GetRenderingAPI() + "/test.vertex");
+    CreateShader(*m_renderer, "Shaders/" + m_renderer->GetRenderingAPI() + "/test.vertex", log_AppRenderer);
   vertShader->SetStage(ShaderStage::Vertex);
 
 
   auto pixelShader = RenderSystem::
-    CreateShader(*m_renderer, "Shaders/" + m_renderer->GetRenderingAPI() + "/test.pixel");
+    CreateShader(*m_renderer, "Shaders/" + m_renderer->GetRenderingAPI() + "/test.pixel", log_AppRenderer);
   pixelShader->SetStage(ShaderStage::Pixel);
 
   DrawablePoolCreateInfo poolInfo = {};
@@ -87,10 +90,10 @@ void AppRenderer::Initialize() {
   pool.AddBufferBinding(vertexDataSlot, vertexStride);
 
   Vector<Vertex> vertexData = Vector<Vertex>({
-    Vertex{{0, 0, 0, 1}, {1, 0, 0, 1}},
-    Vertex{{1, 0, 0, 1}, {0, 1, 0, 1}},
-    Vertex{{1, 1, 0, 1}, {0, 0, 1, 1}},
-    Vertex{{0, 1, 0, 1}, {1, 1, 1, 1}}
+    Vertex{{0, 0, 1, 1}, {1, 0, 0, 1}},
+    Vertex{{1, 0, 1, 1}, {0, 1, 0, 1}},
+    Vertex{{1, 1, 1, 1}, {0, 0, 1, 1}},
+    Vertex{{0, 1, 1, 1}, {1, 1, 1, 1}}
   }, allocatorTemporary);
 
   Vector<U32> indexData = Vector<U32>({

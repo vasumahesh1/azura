@@ -49,6 +49,12 @@ elseif(CMAKE_COMPILER_IS_GNUCC OR CMAKE_COMPILER_IS_GNUCXX)
     )
 endif()
 
+if(PROJECT_BUILD)
+  message(STATUS "Disabling all Warnings for Project Build")
+  AzuraDisableWarningsAsErrors()
+  AzuraGlobalSilenceEnumGuard()
+endif()
+
 if(CMAKE_BUILD_TYPE MATCHES DEBUG)
   add_definitions(-DBUILD_DEBUG)
 elseif(CMAKE_BUILD_TYPE MATCHES RELEASE)

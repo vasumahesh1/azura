@@ -27,3 +27,21 @@
 #define REVERSE_MAPPING(TYPE_A, TYPE_B)                                                                                \
   case TYPE_B:                                                                                                         \
     return TYPE_A;
+
+#define VERIFY_TRUE(Logger, res, message)                                                            \
+  if ((res) != true) {                                                                               \
+    LOG_ERR(Logger, LOG_LEVEL, message);                                                             \
+    throw std::runtime_error(message);                                                               \
+  }
+
+#define VERIFY_OPT(Logger, res, message)                                                             \
+  if (!(res)) {                                                                                      \
+    LOG_ERR(Logger, LOG_LEVEL, message);                                                             \
+    throw std::runtime_error(message);                                                               \
+  }
+
+#define FAIL_IF(Logger, res, message)                                                                \
+  if ((res)) {                                                                                       \
+    LOG_ERR(Logger, LOG_LEVEL, message);                                                             \
+    throw std::runtime_error(message);                                                               \
+  }

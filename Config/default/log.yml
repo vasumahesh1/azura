@@ -3,14 +3,14 @@ Settings:
   OutputDir: X:\AzuraLogs
 
 LogStreams:
-  VkRenderer:
-    Levels: D0 I30 W50 E0 F0
+  VulkanRenderSystem:
+    Levels: D100 I30 W0 E0 F0
     Streams:
       - File
       - Console
 
-  Common:
-    Levels: D0 I50 W50 E0 F0
+  AppRenderer:
+    Levels: D100 I30 W0 E0 F0
     Streams:
-      # - File
+      - File
       - Console

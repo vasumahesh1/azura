@@ -260,6 +260,7 @@ def run():
     cmakeArgs.append("-B%s" % buildArgs.projectPath)
     cmakeArgs.append("-H.")
     cmakeArgs.append("-DCMAKE_BUILD_TYPE=" + buildArgs.build.upper())
+    cmakeArgs.append("-DPROJECT_BUILD=ON")
 
     cmakeArgs = addTargetCmakeArgs(cmakeArgs)
 

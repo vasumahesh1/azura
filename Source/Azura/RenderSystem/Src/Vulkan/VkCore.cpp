@@ -151,12 +151,12 @@ int GetDeviceScore(VkPhysicalDevice device,
 }
 
 VkSurfaceFormatKHR ChooseSwapSurfaceFormat(const Containers::Vector<VkSurfaceFormatKHR>& availableFormats,
-                                           const SwapChainRequirements& requirement) {
+                                           const SwapChainRequirements& requirement, const Log& log_VulkanRenderSystem) {
   const auto format = ToVkFormat(requirement.m_format);
-  VERIFY_OPT(format, "Unknown Format");
+  VERIFY_OPT(log_VulkanRenderSystem, format, "Unknown Format");
 
   const auto colorSpace = ToVkColorSpaceKHR(requirement.m_colorSpace);
-  VERIFY_OPT(colorSpace, "Unknown Colorspace");
+  VERIFY_OPT(log_VulkanRenderSystem, colorSpace, "Unknown Colorspace");
 
   // no preferred format
   if (availableFormats.GetSize() == 1 && availableFormats[0].format == VK_FORMAT_UNDEFINED) {
@@ -225,7 +225,7 @@ void VkCore::DestroyDebugReportCallbackEXT(VkInstance instance, VkDebugReportCal
 }
 
 
-VkDebugReportCallbackEXT VkCore::SetupDebug(VkInstance instance)
+VkDebugReportCallbackEXT VkCore::SetupDebug(VkInstance instance, const Log& log_VulkanRenderSystem)
 {
   // Attach callback since we have validation turned on
   VkDebugReportCallbackCreateInfoEXT createInfo = {};
@@ -234,13 +234,13 @@ VkDebugReportCallbackEXT VkCore::SetupDebug(VkInstance instance)
   createInfo.pfnCallback = DebugReportCallback;
 
   VkDebugReportCallbackEXT callback;
-  VERIFY_VK_OP(CreateDebugReportCallbackEXT(instance, &createInfo, nullptr, &callback), "Failed to create Debug Callback");
+  VERIFY_VK_OP(log_VulkanRenderSystem, CreateDebugReportCallbackEXT(instance, &createInfo, nullptr, &callback), "Failed to create Debug Callback");
   return callback;
 }
 #endif
 
 VkInstance VkCore::CreateInstance(const ApplicationInfo& applicationData,
-                                  const Containers::Vector<const char*>& vkExtensions) {
+                                  const Containers::Vector<const char*>& vkExtensions, const Log& log_VulkanRenderSystem) {
   VkApplicationInfo appInfo = {};
   appInfo.sType             = VK_STRUCTURE_TYPE_APPLICATION_INFO;
   appInfo.pApplicationName  = applicationData.m_name.c_str();
@@ -262,7 +262,7 @@ VkInstance VkCore::CreateInstance(const ApplicationInfo& applicationData,
   createInfo.ppEnabledExtensionNames = vkExtensions.Data();
 
   // Validation Layers Check
-  VERIFY_TRUE(CheckValidationLayerSupport(), "Validation layers requested, but not available on device");
+  VERIFY_TRUE(log_VulkanRenderSystem, CheckValidationLayerSupport(), "Validation layers requested, but not available on device");
 
 #ifdef BUILD_DEBUG
   createInfo.enabledLayerCount   = U32(VALIDATION_LAYERS.size());
@@ -273,7 +273,7 @@ VkInstance VkCore::CreateInstance(const ApplicationInfo& applicationData,
 #endif
 
   VkInstance result;
-  VERIFY_VK_OP(vkCreateInstance(&createInfo, nullptr, &result), "Failed to create VkInstance");
+  VERIFY_VK_OP(log_VulkanRenderSystem, vkCreateInstance(&createInfo, nullptr, &result), "Failed to create VkInstance");
   return result;
 }
 
@@ -343,14 +343,14 @@ SwapChainDeviceSupport VkCore::QuerySwapChainSupport(VkPhysicalDevice device,
 
 VkPhysicalDevice VkCore::SelectPhysicalDevice(VkInstance instance,
                                               VkSurfaceKHR surface,
-                                              const DeviceRequirements& requirements) {
+                                              const DeviceRequirements& requirements, const Log& log_VulkanRenderSystem) {
   VkPhysicalDevice physicalDevice = VK_NULL_HANDLE;
 
   // Query for Available Devices
   U32 availableDeviceCount = 0;
   vkEnumeratePhysicalDevices(instance, &availableDeviceCount, nullptr);
 
-  VERIFY_TRUE(availableDeviceCount != 0, "No supported GPUs found with Vulkan");
+  VERIFY_TRUE(log_VulkanRenderSystem, availableDeviceCount != 0, "No supported GPUs found with Vulkan");
 
   const U32 maxDevices = 4;
   STACK_ALLOCATOR(Device, Memory::MonotonicAllocator, sizeof(VkPhysicalDevice) * maxDevices);
@@ -374,13 +374,13 @@ VkPhysicalDevice VkCore::SelectPhysicalDevice(VkInstance instance,
     physicalDevice = candidates.rbegin()->second;
   }
 
-  VERIFY_TRUE(physicalDevice != VK_NULL_HANDLE, "No suitable GPU found for Vulkan");
+  VERIFY_TRUE(log_VulkanRenderSystem, physicalDevice != VK_NULL_HANDLE, "No suitable GPU found for Vulkan");
   return physicalDevice;
 }
 
 VkDevice VkCore::CreateLogicalDevice(VkPhysicalDevice physicalDevice,
                                      const VkQueueIndices& queueIndices,
-                                     const DeviceRequirements& requirements) {
+                                     const DeviceRequirements& requirements, const Log& log_VulkanRenderSystem) {
   // Create Queue Infos
   const std::set<int> uniqueQueueFamilies = {queueIndices.m_graphicsFamily, queueIndices.m_presentFamily,
                                              queueIndices.m_transferFamily};
@@ -424,7 +424,7 @@ VkDevice VkCore::CreateLogicalDevice(VkPhysicalDevice physicalDevice,
 #endif
 
   VkDevice device;
-  VERIFY_VK_OP(vkCreateDevice(physicalDevice, &createInfo, nullptr, &device), "Failed to create VkDevice");
+  VERIFY_VK_OP(log_VulkanRenderSystem, vkCreateDevice(physicalDevice, &createInfo, nullptr, &device), "Failed to create VkDevice");
   return device;
 }
 
@@ -439,11 +439,11 @@ VkScopedSwapChain VkCore::CreateSwapChain(VkDevice device,
                                           const VkQueueIndices& queueIndices,
                                           const SwapChainDeviceSupport& swapChainSupport,
                                           const SwapChainRequirements& swapChainRequirement,
-                                          Memory::Allocator& allocator) {
+                                          Memory::Allocator& allocator, const Log& log_VulkanRenderSystem) {
   VkScopedSwapChain scopedSwapChain(allocator);
 
   const VkPresentModeKHR presentMode = ChooseSwapPresentMode(swapChainSupport.m_presentModes);
-  scopedSwapChain.m_surfaceFormat    = ChooseSwapSurfaceFormat(swapChainSupport.m_formats, swapChainRequirement);
+  scopedSwapChain.m_surfaceFormat    = ChooseSwapSurfaceFormat(swapChainSupport.m_formats, swapChainRequirement, log_VulkanRenderSystem);
   scopedSwapChain.m_extent           = ChooseSwapExtent(swapChainSupport.m_capabilities, swapChainRequirement);
 
   // TODO(vasumahesh1): Need requirement?
@@ -482,7 +482,7 @@ VkScopedSwapChain VkCore::CreateSwapChain(VkDevice device,
   createInfo.clipped        = VK_TRUE;
   createInfo.oldSwapchain   = VK_NULL_HANDLE;
 
-  VERIFY_VK_OP(vkCreateSwapchainKHR(device, &createInfo, nullptr, &scopedSwapChain.m_swapChain),
+  VERIFY_VK_OP(log_VulkanRenderSystem, vkCreateSwapchainKHR(device, &createInfo, nullptr, &scopedSwapChain.m_swapChain),
                "Failed to create swap chain");
 
   vkGetSwapchainImagesKHR(device, scopedSwapChain.m_swapChain, &scopedSwapChain.m_imageCount, nullptr);
@@ -494,7 +494,7 @@ VkScopedSwapChain VkCore::CreateSwapChain(VkDevice device,
   for (U32 idx = 0; idx < scopedSwapChain.m_imageCount; ++idx) {
     scopedSwapChain.m_imageViews[idx] =
         CreateImageView(device, scopedSwapChain.m_images[idx], VK_IMAGE_VIEW_TYPE_2D,
-                        scopedSwapChain.m_surfaceFormat.format, VK_IMAGE_ASPECT_COLOR_BIT);
+                        scopedSwapChain.m_surfaceFormat.format, VK_IMAGE_ASPECT_COLOR_BIT, log_VulkanRenderSystem);
   }
 
   return scopedSwapChain;
@@ -505,6 +505,7 @@ VkImageView VkCore::CreateImageView(VkDevice device,
                                     VkImageViewType viewType,
                                     VkFormat viewFormat,
                                     VkImageAspectFlags aspectMask,
+                                    const Log& log_VulkanRenderSystem,
                                     U32 baseMip,
                                     U32 levelCount,
                                     U32 baseArrayLayer,
@@ -530,12 +531,12 @@ VkImageView VkCore::CreateImageView(VkDevice device,
   createInfo.subresourceRange.layerCount     = layerCount;
 
   VkImageView imageView;
-  VERIFY_VK_OP(vkCreateImageView(device, &createInfo, nullptr, &imageView), "Failed to create image view");
+  VERIFY_VK_OP(log_VulkanRenderSystem, vkCreateImageView(device, &createInfo, nullptr, &imageView), "Failed to create image view");
   return imageView;
 }
 
 // TODO(vasumahesh1): Needs serious changes here
-VkRenderPass VkCore::CreateRenderPass(VkDevice device, VkFormat colorFormat) {
+VkRenderPass VkCore::CreateRenderPass(VkDevice device, VkFormat colorFormat, const Log& log_VulkanRenderSystem) {
   VkAttachmentDescription colorAttachment = {};
   colorAttachment.format                  = colorFormat;
   colorAttachment.samples                 = VK_SAMPLE_COUNT_1_BIT;
@@ -578,7 +579,7 @@ VkRenderPass VkCore::CreateRenderPass(VkDevice device, VkFormat colorFormat) {
   renderPassInfo.pDependencies   = &dependency;
 
   VkRenderPass renderPass;
-  VERIFY_VK_OP(vkCreateRenderPass(device, &renderPassInfo, nullptr, &renderPass), "Failed to create render pass");
+  VERIFY_VK_OP(log_VulkanRenderSystem, vkCreateRenderPass(device, &renderPassInfo, nullptr, &renderPass), "Failed to create render pass");
   return renderPass;
 }
 
@@ -596,20 +597,20 @@ void VkCore::CreateUniformBufferBinding(Containers::Vector<VkDescriptorSetLayout
 }
 
 VkDescriptorSetLayout VkCore::CreateDescriptorSetLayout(
-    VkDevice device, const Containers::Vector<VkDescriptorSetLayoutBinding>& bindings) {
+    VkDevice device, const Containers::Vector<VkDescriptorSetLayoutBinding>& bindings, const Log& log_VulkanRenderSystem) {
   VkDescriptorSetLayoutCreateInfo layoutInfo = {};
   layoutInfo.sType                           = VK_STRUCTURE_TYPE_DESCRIPTOR_SET_LAYOUT_CREATE_INFO;
   layoutInfo.bindingCount                    = bindings.GetSize();
   layoutInfo.pBindings                       = bindings.Data();
 
   VkDescriptorSetLayout descriptorSet;
-  VERIFY_VK_OP(vkCreateDescriptorSetLayout(device, &layoutInfo, nullptr, &descriptorSet),
+  VERIFY_VK_OP(log_VulkanRenderSystem, vkCreateDescriptorSetLayout(device, &layoutInfo, nullptr, &descriptorSet),
                "Failed to create descriptor set layout");
   return descriptorSet;
 }
 
 VkPipelineLayout VkCore::CreatePipelineLayout(VkDevice device,
-                                              const Containers::Vector<VkDescriptorSetLayout>& descriptorSets) {
+                                              const Containers::Vector<VkDescriptorSetLayout>& descriptorSets, const Log& log_VulkanRenderSystem) {
   VkPipelineLayoutCreateInfo pipelineLayoutInfo = {};
   pipelineLayoutInfo.sType                      = VK_STRUCTURE_TYPE_PIPELINE_LAYOUT_CREATE_INFO;
 
@@ -618,12 +619,12 @@ VkPipelineLayout VkCore::CreatePipelineLayout(VkDevice device,
   pipelineLayoutInfo.setLayoutCount = descriptorSets.GetSize();
 
   VkPipelineLayout pipelineLayout;
-  VERIFY_VK_OP(vkCreatePipelineLayout(device, &pipelineLayoutInfo, nullptr, &pipelineLayout),
+  VERIFY_VK_OP(log_VulkanRenderSystem, vkCreatePipelineLayout(device, &pipelineLayoutInfo, nullptr, &pipelineLayout),
                "Failed to create pipeline layout");
   return pipelineLayout;
 }
 
-VkShaderModule VkCore::CreateShaderModule(VkDevice device, const Containers::Vector<U8>& code) {
+VkShaderModule VkCore::CreateShaderModule(VkDevice device, const Containers::Vector<U8>& code, const Log& log_VulkanRenderSystem) {
   VkShaderModuleCreateInfo createInfo = {};
   createInfo.sType                    = VK_STRUCTURE_TYPE_SHADER_MODULE_CREATE_INFO;
   createInfo.codeSize                 = code.GetSize();
@@ -631,14 +632,14 @@ VkShaderModule VkCore::CreateShaderModule(VkDevice device, const Containers::Vec
   createInfo.pCode = reinterpret_cast<const U32*>(code.Data());  // byte code ptr conversion
 
   VkShaderModule shaderModule;
-  VERIFY_VK_OP(vkCreateShaderModule(device, &createInfo, nullptr, &shaderModule), "Failed to create shader module");
+  VERIFY_VK_OP(log_VulkanRenderSystem, vkCreateShaderModule(device, &createInfo, nullptr, &shaderModule), "Failed to create shader module");
   return shaderModule;
 }
 
 Containers::Vector<VkFramebuffer> VkCore::CreateFrameBuffers(VkDevice device,
                                                              VkRenderPass renderPass,
                                                              const VkScopedSwapChain& scopedSwapChain,
-                                                             Memory::Allocator& allocator) {
+                                                             Memory::Allocator& allocator, const Log& log_VulkanRenderSystem) {
   const auto& swapChainImageViews = scopedSwapChain.m_imageViews;
 
   Containers::Vector<VkFramebuffer> frameBuffers(ContainerExtent{swapChainImageViews.GetSize()}, allocator);
@@ -655,7 +656,7 @@ Containers::Vector<VkFramebuffer> VkCore::CreateFrameBuffers(VkDevice device,
     framebufferInfo.height                  = scopedSwapChain.m_extent.height;
     framebufferInfo.layers                  = 1;
 
-    VERIFY_VK_OP(vkCreateFramebuffer(device, &framebufferInfo, nullptr, &frameBuffers[idx]),
+    VERIFY_VK_OP(log_VulkanRenderSystem, vkCreateFramebuffer(device, &framebufferInfo, nullptr, &frameBuffers[idx]),
                  "Failed to create framebuffer");
   }
 
@@ -665,7 +666,7 @@ Containers::Vector<VkFramebuffer> VkCore::CreateFrameBuffers(VkDevice device,
 void VkCore::CreateFrameBuffers(VkDevice device,
                                 VkRenderPass renderPass,
                                 const VkScopedSwapChain& scopedSwapChain,
-                                Containers::Vector<VkFramebuffer>& frameBuffers) {
+                                Containers::Vector<VkFramebuffer>& frameBuffers, const Log& log_VulkanRenderSystem) {
   const auto& swapChainImageViews = scopedSwapChain.m_imageViews;
 
   frameBuffers.Resize(swapChainImageViews.GetSize());
@@ -682,19 +683,19 @@ void VkCore::CreateFrameBuffers(VkDevice device,
     framebufferInfo.height                  = scopedSwapChain.m_extent.height;
     framebufferInfo.layers                  = 1;
 
-    VERIFY_VK_OP(vkCreateFramebuffer(device, &framebufferInfo, nullptr, &frameBuffers[idx]),
+    VERIFY_VK_OP(log_VulkanRenderSystem, vkCreateFramebuffer(device, &framebufferInfo, nullptr, &frameBuffers[idx]),
                  "Failed to create framebuffer");
   }
 }
 
-VkCommandPool VkCore::CreateCommandPool(VkDevice device, int queueIndex, VkCommandPoolCreateFlags flags) {
+VkCommandPool VkCore::CreateCommandPool(VkDevice device, int queueIndex, VkCommandPoolCreateFlags flags, const Log& log_VulkanRenderSystem) {
   VkCommandPoolCreateInfo poolInfo = {};
   poolInfo.sType                   = VK_STRUCTURE_TYPE_COMMAND_POOL_CREATE_INFO;
   poolInfo.queueFamilyIndex        = queueIndex;
   poolInfo.flags                   = flags;
 
   VkCommandPool commandPool;
-  VERIFY_VK_OP(vkCreateCommandPool(device, &poolInfo, nullptr, &commandPool), "Failed to create command pool");
+  VERIFY_VK_OP(log_VulkanRenderSystem, vkCreateCommandPool(device, &poolInfo, nullptr, &commandPool), "Failed to create command pool");
   return commandPool;
 }
 
@@ -722,7 +723,7 @@ VkDescriptorPoolSize VkCore::CreateDescriptorPoolSize(VkDescriptorType type, U32
 
 VkDescriptorPool VkCore::CreateDescriptorPool(VkDevice device,
                                               const Containers::Vector<VkDescriptorPoolSize>& pools,
-                                              U32 maxSets) {
+                                              U32 maxSets, const Log& log_VulkanRenderSystem) {
   VkDescriptorPoolCreateInfo poolInfo = {};
   poolInfo.sType                      = VK_STRUCTURE_TYPE_DESCRIPTOR_POOL_CREATE_INFO;
   poolInfo.poolSizeCount              = pools.GetSize();
@@ -730,13 +731,13 @@ VkDescriptorPool VkCore::CreateDescriptorPool(VkDevice device,
   poolInfo.maxSets                    = maxSets;
 
   VkDescriptorPool descriptorPool;
-  VERIFY_VK_OP(vkCreateDescriptorPool(device, &poolInfo, nullptr, &descriptorPool), "Failed to create descriptor pool");
+  VERIFY_VK_OP(log_VulkanRenderSystem, vkCreateDescriptorPool(device, &poolInfo, nullptr, &descriptorPool), "Failed to create descriptor pool");
   return descriptorPool;
 }
 
 VkDescriptorSet VkCore::CreateDescriptorSet(VkDevice device,
                                             VkDescriptorPool descriptorPool,
-                                            const Containers::Vector<VkDescriptorSetLayout>& descriptorSets) {
+                                            const Containers::Vector<VkDescriptorSetLayout>& descriptorSets, const Log& log_VulkanRenderSystem) {
   VkDescriptorSetAllocateInfo allocInfo = {};
   allocInfo.sType                       = VK_STRUCTURE_TYPE_DESCRIPTOR_SET_ALLOCATE_INFO;
   allocInfo.descriptorPool              = descriptorPool;
@@ -744,7 +745,7 @@ VkDescriptorSet VkCore::CreateDescriptorSet(VkDevice device,
   allocInfo.pSetLayouts                 = descriptorSets.Data();
 
   VkDescriptorSet descriptorSet;
-  VERIFY_VK_OP(vkAllocateDescriptorSets(device, &allocInfo, &descriptorSet), "Failed to allocate descriptor set");
+  VERIFY_VK_OP(log_VulkanRenderSystem, vkAllocateDescriptorSets(device, &allocInfo, &descriptorSet), "Failed to allocate descriptor set");
   return descriptorSet;
 }
 
@@ -770,7 +771,7 @@ void VkCore::UpdateDescriptorSets(VkDevice device, const Containers::Vector<VkWr
   vkUpdateDescriptorSets(device, U32(descriptorWrites.GetSize()), descriptorWrites.Data(), 0, nullptr);
 }
 
-VkCommandBuffer VkCore::CreateCommandBuffer(VkDevice device, VkCommandPool commandPool, VkCommandBufferLevel level) {
+VkCommandBuffer VkCore::CreateCommandBuffer(VkDevice device, VkCommandPool commandPool, VkCommandBufferLevel level, const Log& log_VulkanRenderSystem) {
   VkCommandBuffer commandBuffer;
 
   VkCommandBufferAllocateInfo allocInfo = {};
@@ -779,103 +780,103 @@ VkCommandBuffer VkCore::CreateCommandBuffer(VkDevice device, VkCommandPool comma
   allocInfo.level                       = level;
   allocInfo.commandBufferCount          = 1;
 
-  VERIFY_VK_OP(vkAllocateCommandBuffers(device, &allocInfo, &commandBuffer), "Failed to allocate command buffers");
+  VERIFY_VK_OP(log_VulkanRenderSystem, vkAllocateCommandBuffers(device, &allocInfo, &commandBuffer), "Failed to allocate command buffers");
 
   return commandBuffer;
 }
 
 Containers::Vector<VkCommandBuffer> VkCore::CreateCommandBuffers(
-    VkDevice device, U32 count, VkCommandPool commandPool, VkCommandBufferLevel level, Memory::Allocator& allocator) {
+    VkDevice device, U32 count, VkCommandPool commandPool, VkCommandBufferLevel level, Memory::Allocator& allocator, const Log& log_VulkanRenderSystem) {
   Containers::Vector<VkCommandBuffer> commandBuffers(ContainerExtent{count}, allocator);
-  CreateCommandBuffers(device, commandPool, level, commandBuffers);
+  CreateCommandBuffers(device, commandPool, level, commandBuffers, log_VulkanRenderSystem);
   return commandBuffers;
 }
 
 void VkCore::CreateCommandBuffers(VkDevice device,
                                   VkCommandPool commandPool,
                                   VkCommandBufferLevel level,
-                                  Containers::Vector<VkCommandBuffer>& commandBuffers) {
+                                  Containers::Vector<VkCommandBuffer>& commandBuffers, const Log& log_VulkanRenderSystem) {
   VkCommandBufferAllocateInfo allocInfo = {};
   allocInfo.sType                       = VK_STRUCTURE_TYPE_COMMAND_BUFFER_ALLOCATE_INFO;
   allocInfo.commandPool                 = commandPool;
   allocInfo.level                       = level;
   allocInfo.commandBufferCount          = commandBuffers.GetSize();
 
-  VERIFY_VK_OP(vkAllocateCommandBuffers(device, &allocInfo, commandBuffers.Data()), "Failed to create command buffers");
+  VERIFY_VK_OP(log_VulkanRenderSystem, vkAllocateCommandBuffers(device, &allocInfo, commandBuffers.Data()), "Failed to create command buffers");
 }
 
-void VkCore::BeginCommandBuffer(VkCommandBuffer buffer, VkCommandBufferUsageFlags flags) {
+void VkCore::BeginCommandBuffer(VkCommandBuffer buffer, VkCommandBufferUsageFlags flags, const Log& log_VulkanRenderSystem) {
   VkCommandBufferBeginInfo beginInfo = {};
   beginInfo.sType                    = VK_STRUCTURE_TYPE_COMMAND_BUFFER_BEGIN_INFO;
   beginInfo.flags                    = flags;
   beginInfo.pInheritanceInfo         = nullptr;
 
-  VERIFY_VK_OP(vkBeginCommandBuffer(buffer, &beginInfo), "Failed to begin recording command buffer");
+  VERIFY_VK_OP(log_VulkanRenderSystem, vkBeginCommandBuffer(buffer, &beginInfo), "Failed to begin recording command buffer");
 }
 
-void VkCore::BeginCommandBuffer(VkCommandBuffer buffer, VkCommandBufferUsageFlags flags, const VkCommandBufferInheritanceInfo& inheritanceInfo) {
+void VkCore::BeginCommandBuffer(VkCommandBuffer buffer, VkCommandBufferUsageFlags flags, const VkCommandBufferInheritanceInfo& inheritanceInfo, const Log& log_VulkanRenderSystem) {
   VkCommandBufferBeginInfo beginInfo = {};
   beginInfo.sType                    = VK_STRUCTURE_TYPE_COMMAND_BUFFER_BEGIN_INFO;
   beginInfo.flags                    = flags;
   beginInfo.pInheritanceInfo         = &inheritanceInfo;
 
-  VERIFY_VK_OP(vkBeginCommandBuffer(buffer, &beginInfo), "Failed to begin recording command buffer");
+  VERIFY_VK_OP(log_VulkanRenderSystem, vkBeginCommandBuffer(buffer, &beginInfo), "Failed to begin recording command buffer");
 }
 
-void VkCore::EndCommandBuffer(VkCommandBuffer buffer) {
-  VERIFY_VK_OP(vkEndCommandBuffer(buffer), "Failed to begin recording command buffer");
+void VkCore::EndCommandBuffer(VkCommandBuffer buffer, const Log& log_VulkanRenderSystem) {
+  VERIFY_VK_OP(log_VulkanRenderSystem, vkEndCommandBuffer(buffer), "Failed to begin recording command buffer");
 }
 
-VkSemaphore VkCore::CreateSemaphore(VkDevice device) {
+VkSemaphore VkCore::CreateSemaphore(VkDevice device, const Log& log_VulkanRenderSystem) {
   VkSemaphoreCreateInfo semaphoreInfo = {};
   semaphoreInfo.sType                 = VK_STRUCTURE_TYPE_SEMAPHORE_CREATE_INFO;
   VkSemaphore semaphore;
-  VERIFY_VK_OP(vkCreateSemaphore(device, &semaphoreInfo, nullptr, &semaphore), "Failed to create semaphore");
+  VERIFY_VK_OP(log_VulkanRenderSystem, vkCreateSemaphore(device, &semaphoreInfo, nullptr, &semaphore), "Failed to create semaphore");
   return semaphore;
 }
 
-void VkCore::CreateSemaphores(VkDevice device, U32 count, Containers::Vector<VkSemaphore>& semaphores) {
+void VkCore::CreateSemaphores(VkDevice device, U32 count, Containers::Vector<VkSemaphore>& semaphores, const Log& log_VulkanRenderSystem) {
   VkSemaphoreCreateInfo semaphoreInfo = {};
   semaphoreInfo.sType                 = VK_STRUCTURE_TYPE_SEMAPHORE_CREATE_INFO;
 
   for (U32 idx = 0; idx < count; ++idx) {
-    VERIFY_VK_OP(vkCreateSemaphore(device, &semaphoreInfo, nullptr, &semaphores[idx]),
+    VERIFY_VK_OP(log_VulkanRenderSystem, vkCreateSemaphore(device, &semaphoreInfo, nullptr, &semaphores[idx]),
                  "Failed to create semaphore [multi-create]");
   }
 }
 
-Containers::Vector<VkSemaphore> VkCore::CreateSemaphores(VkDevice device, U32 count, Memory::Allocator& allocator) {
+Containers::Vector<VkSemaphore> VkCore::CreateSemaphores(VkDevice device, U32 count, Memory::Allocator& allocator, const Log& log_VulkanRenderSystem) {
   Containers::Vector<VkSemaphore> semaphores(ContainerExtent{count}, allocator);
-  CreateSemaphores(device, count, semaphores);
+  CreateSemaphores(device, count, semaphores, log_VulkanRenderSystem);
   return semaphores;
 }
 
-VkFence VkCore::CreateFence(VkDevice device, VkFenceCreateFlags flags) {
+VkFence VkCore::CreateFence(VkDevice device, VkFenceCreateFlags flags, const Log& log_VulkanRenderSystem) {
   VkFenceCreateInfo fenceInfo = {};
   fenceInfo.sType             = VK_STRUCTURE_TYPE_FENCE_CREATE_INFO;
   fenceInfo.flags             = flags;
 
   VkFence fence;
-  VERIFY_VK_OP(vkCreateFence(device, &fenceInfo, nullptr, &fence), "Failed to create fence");
+  VERIFY_VK_OP(log_VulkanRenderSystem, vkCreateFence(device, &fenceInfo, nullptr, &fence), "Failed to create fence");
   return fence;
 }
 
-void VkCore::CreateFences(VkDevice device, U32 count, VkFenceCreateFlags flags, Containers::Vector<VkFence>& fences) {
+void VkCore::CreateFences(VkDevice device, U32 count, VkFenceCreateFlags flags, Containers::Vector<VkFence>& fences, const Log& log_VulkanRenderSystem) {
   VkFenceCreateInfo fenceInfo = {};
   fenceInfo.sType             = VK_STRUCTURE_TYPE_FENCE_CREATE_INFO;
   fenceInfo.flags             = flags;
 
   for (U32 idx = 0; idx < count; ++idx) {
-    VERIFY_VK_OP(vkCreateFence(device, &fenceInfo, nullptr, &fences[idx]), "Failed to create fences [multi-create]");
+    VERIFY_VK_OP(log_VulkanRenderSystem, vkCreateFence(device, &fenceInfo, nullptr, &fences[idx]), "Failed to create fences [multi-create]");
   }
 }
 
 Containers::Vector<VkFence> VkCore::CreateFences(VkDevice device,
                                                  U32 count,
                                                  VkFenceCreateFlags flags,
-                                                 Memory::Allocator& allocator) {
+                                                 Memory::Allocator& allocator, const Log& log_VulkanRenderSystem) {
   Containers::Vector<VkFence> fences(ContainerExtent{count}, allocator);
-  CreateFences(device, count, flags, fences);
+  CreateFences(device, count, flags, fences, log_VulkanRenderSystem);
   return fences;
 }
 

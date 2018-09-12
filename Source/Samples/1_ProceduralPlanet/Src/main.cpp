@@ -1,16 +1,19 @@
 #include "ProceduralPlanet/AppRenderer.h"
-#include <iostream>
+#include "Log/Log.h"
+
 int main()
 {
+  auto log_AppMain = Azura::Log("AppMain");
+
   try {
     Azura::AppRenderer app;
     app.Initialize();
     app.Run();
     app.Destroy();
   }
-  catch(std::runtime_error e)
+  catch(const std::runtime_error& e)
   {
-    std::cout << e.what();
+    LOG_ERR(log_AppMain, LOG_LEVEL, e.what());
   }
   return 0;
 }

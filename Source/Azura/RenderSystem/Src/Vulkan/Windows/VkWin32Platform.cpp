@@ -8,7 +8,7 @@
 namespace Azura {
 namespace Vulkan {
 
-VkSurfaceKHR VkPlatform::CreateSurface(const void* windowHandle, VkInstance instance) {
+VkSurfaceKHR VkPlatform::CreateSurface(const void* windowHandle, VkInstance instance, const Log& log_VulkanRenderSystem) {
   VkWin32SurfaceCreateInfoKHR createInfo = {};
   createInfo.sType                       = VK_STRUCTURE_TYPE_WIN32_SURFACE_CREATE_INFO_KHR;
 
@@ -19,10 +19,10 @@ VkSurfaceKHR VkPlatform::CreateSurface(const void* windowHandle, VkInstance inst
   const auto CreateWin32SurfaceKHR =
       // NOLINTNEXTLINE(cppcoreguidelines-pro-type-reinterpret-cast)
       reinterpret_cast<PFN_vkCreateWin32SurfaceKHR>(vkGetInstanceProcAddr(instance, "vkCreateWin32SurfaceKHR"));
-  FAIL_IF(CreateWin32SurfaceKHR == nullptr, "Cannot find PFN_vkCreateWin32SurfaceKHR");
+  FAIL_IF(log_VulkanRenderSystem, CreateWin32SurfaceKHR == nullptr, "Cannot find PFN_vkCreateWin32SurfaceKHR");
 
   VkSurfaceKHR surface;
-  VERIFY_VK_OP(CreateWin32SurfaceKHR(instance, &createInfo, nullptr, &surface), "Failed to create window surface");
+  VERIFY_VK_OP(log_VulkanRenderSystem, CreateWin32SurfaceKHR(instance, &createInfo, nullptr, &surface), "Failed to create window surface");
   return surface;
 }
 

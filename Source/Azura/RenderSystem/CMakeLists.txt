@@ -54,9 +54,11 @@ source_group(Vulkan\\Src REGULAR_EXPRESSION "Src/Vulkan/.*")
 
 add_library(VulkanRenderSystem ${VULKAN_SOURCES})
 
+AzuraAddLoggingSupport(VulkanRenderSystem 50)
+
 target_compile_definitions(VulkanRenderSystem PUBLIC API_VULKAN=1)
 
 target_include_directories(VulkanRenderSystem
                            PUBLIC ${BOOST_ROOT}/ ${PROJECT_SOURCE_DIR}/Inc)
 
-target_link_libraries(VulkanRenderSystem Common VULKAN_STATIC GLFW_STATIC)
+target_link_libraries(VulkanRenderSystem Common Log VULKAN_STATIC GLFW_STATIC)

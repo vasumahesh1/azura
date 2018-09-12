@@ -14,17 +14,17 @@ namespace {
 const String SPRIV_EXT = "spv";
 }  // namespace
 
-VkShader::VkShader(VkDevice device, const String& fileName)
-    : Shader(fileName, SPRIV_EXT) {
+VkShader::VkShader(VkDevice device, const String& fileName, Log logger)
+    : Shader(fileName, SPRIV_EXT), log_VulkanRenderSystem(std::move(logger)) {
   HEAP_ALLOCATOR(Temporary, Memory::MonotonicAllocator, 8192);
 
   const auto fileContents = FileReader::GetFileContents(GetFilePath(), allocatorTemporary);
-  m_module                = VkCore::CreateShaderModule(device, fileContents);
+  m_module                = VkCore::CreateShaderModule(device, fileContents, log_VulkanRenderSystem);
 }
 
 VkPipelineShaderStageCreateInfo VkShader::GetShaderStageInfo() const {
   const auto vkShaderStage = ToVkShaderStageFlagBits(GetShaderStage());
-  VERIFY_OPT(vkShaderStage, "Unknown Shader Stage");
+  VERIFY_OPT(log_VulkanRenderSystem, vkShaderStage, "Unknown Shader Stage");
 
   VkPipelineShaderStageCreateInfo shaderStage = {};
   shaderStage.sType                           = VK_STRUCTURE_TYPE_PIPELINE_SHADER_STAGE_CREATE_INFO;

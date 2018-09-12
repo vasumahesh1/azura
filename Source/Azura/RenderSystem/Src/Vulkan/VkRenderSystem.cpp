@@ -15,8 +15,8 @@ std::unique_ptr<Renderer> RenderSystem::CreateRenderer(const ApplicationInfo& ap
                                               drawAllocator, window);
 }
 
-std::unique_ptr<Shader> RenderSystem::CreateShader(const Renderer& renderer, const String& fileName) {
+std::unique_ptr<Shader> RenderSystem::CreateShader(const Renderer& renderer, const String& fileName, const Log& logger) {
   const auto& vkRenderer = reinterpret_cast<const Vulkan::VkRenderer&>(renderer); // NOLINT(cppcoreguidelines-pro-type-reinterpret-cast)
-  return std::make_unique<Vulkan::VkShader>(vkRenderer.GetDevice(), fileName);
+  return std::make_unique<Vulkan::VkShader>(vkRenderer.GetDevice(), fileName, logger);
 }
 }  // namespace Azura

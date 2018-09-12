@@ -9,12 +9,16 @@ VkScopedBuffer::VkScopedBuffer(VkDevice device,
                                const VkBufferUsageFlags usage,
                                const U32 bufferSize,
                                const VkMemoryPropertyFlags memoryProperties,
-                               const VkPhysicalDeviceMemoryProperties& phyDeviceMemoryProperties)
-    : m_device(device) {
+                               const VkPhysicalDeviceMemoryProperties& phyDeviceMemoryProperties,
+                               Log logger)
+  : m_device(device),
+    log_VulkanRenderSystem(std::move(logger)) {
   Create(device, usage, bufferSize, memoryProperties, phyDeviceMemoryProperties);
 }
 
-VkScopedBuffer::VkScopedBuffer() : m_device() {}
+VkScopedBuffer::VkScopedBuffer(Log logger)
+  : m_device(), log_VulkanRenderSystem(std::move(logger)) {
+}
 
 void VkScopedBuffer::Create(VkDevice device,
                             VkBufferUsageFlags usage,
@@ -31,7 +35,8 @@ void VkScopedBuffer::Create(VkDevice device,
 
   // TODO(vasumahesh1): Need an encapsulation for Sharing Mode
 
-  VERIFY_VK_OP(vkCreateBuffer(device, &bufferInfo, nullptr, &m_buffer), "Failed to create buffer");
+  VERIFY_VK_OP(log_VulkanRenderSystem, vkCreateBuffer(device, &bufferInfo, nullptr, &m_buffer),
+    "Failed to create buffer");
 
   VkMemoryRequirements memRequirements;
   vkGetBufferMemoryRequirements(device, m_buffer, &memRequirements);
@@ -39,10 +44,11 @@ void VkScopedBuffer::Create(VkDevice device,
   VkMemoryAllocateInfo allocInfo = {};
   allocInfo.sType                = VK_STRUCTURE_TYPE_MEMORY_ALLOCATE_INFO;
   allocInfo.allocationSize       = memRequirements.size;
-  allocInfo.memoryTypeIndex =
-      VkCore::FindMemoryType(memRequirements.memoryTypeBits, memoryProperties, phyDeviceMemoryProperties);
+  allocInfo.memoryTypeIndex      =
+    VkCore::FindMemoryType(memRequirements.memoryTypeBits, memoryProperties, phyDeviceMemoryProperties);
 
-  VERIFY_VK_OP(vkAllocateMemory(device, &allocInfo, nullptr, &m_memory), "Failed to allocate buffer memory")
+  VERIFY_VK_OP(log_VulkanRenderSystem, vkAllocateMemory(device, &allocInfo, nullptr, &m_memory),
+    "Failed to allocate buffer memory")
 
   vkBindBufferMemory(device, m_buffer, m_memory, 0);
 }
@@ -78,5 +84,5 @@ void VkScopedBuffer::CleanUp() const {
   vkDestroyBuffer(m_device, m_buffer, nullptr);
   vkFreeMemory(m_device, m_memory, nullptr);
 }
-}  // namespace Vulkan
-}  // namespace Azura
+} // namespace Vulkan
+} // namespace Azura

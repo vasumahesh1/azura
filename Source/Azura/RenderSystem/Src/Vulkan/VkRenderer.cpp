@@ -12,10 +12,11 @@ using namespace Azura::Containers; // NOLINT - Freedom to use using namespace in
 namespace Azura {
 namespace Vulkan {
 
-VkDrawable::VkDrawable(Memory::Allocator& allocator, VkDrawablePool& parentPool)
+VkDrawable::VkDrawable(Memory::Allocator& allocator, VkDrawablePool& parentPool, Log logger)
   : Drawable(allocator),
     m_parentPool(parentPool),
-    m_descriptorSet() {
+    m_descriptorSet(),
+    log_VulkanRenderSystem(std::move(logger)) {
 }
 
 void VkDrawable::AddVertexData(const U8* buffer, U32 size, Slot slot) {
@@ -83,7 +84,7 @@ void VkDrawable::Submit() {
   allocInfo.descriptorSetCount          = 1;
   allocInfo.pSetLayouts                 = &m_parentPool.m_descriptorSetLayout;
 
-  VERIFY_VK_OP(vkAllocateDescriptorSets(m_parentPool.m_device, &allocInfo, &m_descriptorSet),
+  VERIFY_VK_OP(log_VulkanRenderSystem, vkAllocateDescriptorSets(m_parentPool.m_device, &allocInfo, &m_descriptorSet),
     "Failed to Allocate Descriptor Set");
 
   Vector<VkWriteDescriptorSet> descriptorWrites(m_uniformBufferInfos.GetSize(), allocatorTemporary);
@@ -137,31 +138,33 @@ VkDrawablePool::VkDrawablePool(const DrawablePoolCreateInfo& createInfo,
                                const VkPhysicalDeviceProperties& physicalDeviceProperties,
                                const VkScopedSwapChain& swapChain,
                                Memory::Allocator& allocator,
-                               Memory::Allocator& allocatorTemporary)
+                               Memory::Allocator& allocatorTemporary,
+                               Log logger)
   : DrawablePool(createInfo.m_byteSize, allocator),
     m_buffer(device, VK_BUFFER_USAGE_TRANSFER_DST_BIT | usage, createInfo.m_byteSize, memoryProperties,
-             phyDeviceMemoryProperties),
+             phyDeviceMemoryProperties, logger),
     m_stagingBuffer(device, VK_BUFFER_USAGE_TRANSFER_SRC_BIT, createInfo.m_byteSize, memoryProperties,
-                    phyDeviceMemoryProperties),
+                    phyDeviceMemoryProperties, logger),
     m_device(device),
     m_renderPass(renderPass),
     m_viewport(viewport),
     m_descriptorSetLayout(descriptorSetLayout),
     m_pipeline({}),
     m_pipelineLayout(pipelineLayout),
-    m_pipelineFactory(device, allocatorTemporary),
+    m_pipelineFactory(device, allocatorTemporary, logger),
     m_graphicsCommandPool(graphicsCommandPool),
-  m_graphicsQueue(graphicsQueue),
+    m_graphicsQueue(graphicsQueue),
     m_swapChain(swapChain),
     m_appRequirements(appReq),
     m_physicalDeviceProperties(physicalDeviceProperties),
     m_drawables(createInfo.m_numDrawables, allocator),
-    m_shaders(createInfo.m_numShaders, allocator) {
+    m_shaders(createInfo.m_numShaders, allocator),
+    log_VulkanRenderSystem(std::move(logger)) {
 }
 
 
 Drawable& VkDrawablePool::CreateDrawable() {
-  VkDrawable drawable = VkDrawable(GetAllocator(), *this);
+  VkDrawable drawable = VkDrawable(GetAllocator(), *this, log_VulkanRenderSystem);
   m_drawables.PushBack(std::move(drawable));
 
   return m_drawables[m_drawables.GetSize() - 1];
@@ -200,7 +203,7 @@ void VkDrawablePool::CreateDescriptorPool(const ApplicationRequirements& appReq)
   poolInfo.pPoolSizes                 = descriptorPool.Data();
   poolInfo.maxSets                    = m_drawables.GetSize();
 
-  VERIFY_VK_OP(vkCreateDescriptorPool(m_device, &poolInfo, nullptr, &m_descriptorPool),
+  VERIFY_VK_OP(log_VulkanRenderSystem, vkCreateDescriptorPool(m_device, &poolInfo, nullptr, &m_descriptorPool),
     "Unable to create Descriptor Pool");
 }
 
@@ -217,14 +220,16 @@ void VkDrawablePool::Submit() {
 
   m_pipeline = m_pipelineFactory.Submit();
 
-  m_commandBuffer = VkCore::CreateCommandBuffer(m_device, m_graphicsCommandPool, VK_COMMAND_BUFFER_LEVEL_SECONDARY);
+  m_commandBuffer = VkCore::CreateCommandBuffer(m_device, m_graphicsCommandPool, VK_COMMAND_BUFFER_LEVEL_SECONDARY, log_VulkanRenderSystem);
 
   VkCommandBufferInheritanceInfo inheritanceInfo = {};
   inheritanceInfo.sType                          = VK_STRUCTURE_TYPE_COMMAND_BUFFER_INHERITANCE_INFO;
   inheritanceInfo.renderPass                     = m_renderPass;
   inheritanceInfo.framebuffer                    = VK_NULL_HANDLE;
 
-  VkCore::BeginCommandBuffer(m_commandBuffer, VK_COMMAND_BUFFER_USAGE_SIMULTANEOUS_USE_BIT | VK_COMMAND_BUFFER_USAGE_RENDER_PASS_CONTINUE_BIT, inheritanceInfo);
+  VkCore::BeginCommandBuffer(m_commandBuffer,
+                             VK_COMMAND_BUFFER_USAGE_SIMULTANEOUS_USE_BIT |
+                             VK_COMMAND_BUFFER_USAGE_RENDER_PASS_CONTINUE_BIT, inheritanceInfo, log_VulkanRenderSystem);
 
   vkCmdBindPipeline(m_commandBuffer, VK_PIPELINE_BIND_POINT_GRAPHICS, m_pipeline.Real());
 
@@ -252,7 +257,7 @@ void VkDrawablePool::Submit() {
     const auto& indexBufferInfo = drawable.GetIndexBufferInfo();
 
     const auto indexType = ToVkIndexType(drawable.GetIndexType());
-    VERIFY_OPT(indexType, "Invalid VkIndexType converted");
+    VERIFY_OPT(log_VulkanRenderSystem, indexType, "Invalid VkIndexType converted");
 
     vkCmdBindIndexBuffer(m_commandBuffer, mainBuffer, indexBufferInfo.m_offset, indexType.value());
 
@@ -272,7 +277,7 @@ void VkDrawablePool::Submit() {
     }
   }
 
-  VkCore::EndCommandBuffer(m_commandBuffer);
+  VkCore::EndCommandBuffer(m_commandBuffer, log_VulkanRenderSystem);
 }
 
 void VkDrawablePool::AddBufferBinding(Slot slot, const Containers::Vector<RawStorageFormat>& strides) {
@@ -329,22 +334,23 @@ VkRenderer::VkRenderer(const ApplicationInfo& appInfo,
     m_inFlightFences(mainAllocator),
     m_primaryCommandBuffers(mainAllocator),
     m_mainAllocator(mainAllocator),
-    m_drawPoolAllocator(drawAllocator) {
+    m_drawPoolAllocator(drawAllocator),
+    log_VulkanRenderSystem(Log("VulkanRenderSystem")) {
   STACK_ALLOCATOR(Temporary, Memory::MonotonicAllocator, 16384);
 
   Vector<const char*> extensions(4, allocatorTemporary);
   VkPlatform::GetInstanceExtensions(extensions);
 
-  m_instance = VkCore::CreateInstance(GetApplicationInfo(), extensions);
+  m_instance = VkCore::CreateInstance(GetApplicationInfo(), extensions, log_VulkanRenderSystem);
 #ifdef BUILD_DEBUG
-  m_callback = VkCore::SetupDebug(m_instance);
+  m_callback = VkCore::SetupDebug(m_instance, log_VulkanRenderSystem);
 #endif
 
-  m_surface = VkPlatform::CreateSurface(m_window.GetHandle(), m_instance);
+  m_surface = VkPlatform::CreateSurface(m_window.GetHandle(), m_instance, log_VulkanRenderSystem);
 
-  m_physicalDevice = VkCore::SelectPhysicalDevice(m_instance, m_surface, GetDeviceRequirements());
+  m_physicalDevice = VkCore::SelectPhysicalDevice(m_instance, m_surface, GetDeviceRequirements(), log_VulkanRenderSystem);
   m_queueIndices   = VkCore::FindQueueFamiliesInDevice(m_physicalDevice, m_surface, GetDeviceRequirements());
-  m_device         = VkCore::CreateLogicalDevice(m_physicalDevice, m_queueIndices, GetDeviceRequirements());
+  m_device         = VkCore::CreateLogicalDevice(m_physicalDevice, m_queueIndices, GetDeviceRequirements(), log_VulkanRenderSystem);
 
   vkGetPhysicalDeviceProperties(m_physicalDevice, &m_physicalDeviceProperties);
 
@@ -359,34 +365,34 @@ VkRenderer::VkRenderer(const ApplicationInfo& appInfo,
   }
 
   m_swapChain = VkCore::CreateSwapChain(m_device, m_surface, m_queueIndices, swapChainDeviceSupport,
-                                        swapChainRequirement, mainAllocator);
+                                        swapChainRequirement, mainAllocator, log_VulkanRenderSystem);
 
   // TODO(vasumahesh1):[RENDER PASS]: Needs Changes
-  m_renderPass = VkCore::CreateRenderPass(m_device, m_swapChain.m_surfaceFormat.format);
+  m_renderPass = VkCore::CreateRenderPass(m_device, m_swapChain.m_surfaceFormat.format, log_VulkanRenderSystem);
 
   const U32 uniformCount = appRequirements.m_uniformBuffers.GetSize();
   Containers::Vector<VkDescriptorSetLayoutBinding> layoutBindings(uniformCount, allocatorTemporary);
 
   for (const auto& bufferDesc : appRequirements.m_uniformBuffers) {
     const auto vkShaderStage = ToVkShaderStageFlagBits(bufferDesc.first);
-    VERIFY_OPT(vkShaderStage, "Unknown Shader Stage");
+    VERIFY_OPT(log_VulkanRenderSystem, vkShaderStage, "Unknown Shader Stage");
 
     VkCore::CreateUniformBufferBinding(layoutBindings, bufferDesc.second, vkShaderStage.value());
   }
 
-  m_descriptorSetLayout = VkCore::CreateDescriptorSetLayout(m_device, layoutBindings);
+  m_descriptorSetLayout = VkCore::CreateDescriptorSetLayout(m_device, layoutBindings, log_VulkanRenderSystem);
 
   // TODO(vasumahesh1):[DESCRIPTOR]: Add support for more than 1 set
   const Containers::Vector<VkDescriptorSetLayout> sets({m_descriptorSetLayout}, allocatorTemporary);
-  m_pipelineLayout = VkCore::CreatePipelineLayout(m_device, sets);
+  m_pipelineLayout = VkCore::CreatePipelineLayout(m_device, sets, log_VulkanRenderSystem);
 
-  VkCore::CreateFrameBuffers(m_device, m_renderPass, m_swapChain, m_frameBuffers);
+  VkCore::CreateFrameBuffers(m_device, m_renderPass, m_swapChain, m_frameBuffers, log_VulkanRenderSystem);
 
-  m_graphicsCommandPool = VkCore::CreateCommandPool(m_device, m_queueIndices.m_graphicsFamily, 0);
+  m_graphicsCommandPool = VkCore::CreateCommandPool(m_device, m_queueIndices.m_graphicsFamily, 0, log_VulkanRenderSystem);
 
   if (m_queueIndices.m_isTransferQueueRequired) {
     m_transferCommandPool =
-      VkCore::CreateCommandPool(m_device, m_queueIndices.m_transferFamily, VK_COMMAND_POOL_CREATE_TRANSIENT_BIT);
+      VkCore::CreateCommandPool(m_device, m_queueIndices.m_transferFamily, VK_COMMAND_POOL_CREATE_TRANSIENT_BIT, log_VulkanRenderSystem);
   }
 
   const U32 syncCount = swapChainRequirement.m_framesInFlight;
@@ -395,9 +401,9 @@ VkRenderer::VkRenderer(const ApplicationInfo& appInfo,
   m_renderFinishedSemaphores.Resize(syncCount);
   m_inFlightFences.Resize(syncCount);
 
-  VkCore::CreateSemaphores(m_device, syncCount, m_imageAvailableSemaphores);
-  VkCore::CreateSemaphores(m_device, syncCount, m_renderFinishedSemaphores);
-  VkCore::CreateFences(m_device, syncCount, VK_FENCE_CREATE_SIGNALED_BIT, m_inFlightFences);
+  VkCore::CreateSemaphores(m_device, syncCount, m_imageAvailableSemaphores, log_VulkanRenderSystem);
+  VkCore::CreateSemaphores(m_device, syncCount, m_renderFinishedSemaphores, log_VulkanRenderSystem);
+  VkCore::CreateFences(m_device, syncCount, VK_FENCE_CREATE_SIGNALED_BIT, m_inFlightFences, log_VulkanRenderSystem);
 }
 
 VkRenderer::~VkRenderer() {
@@ -459,7 +465,7 @@ DrawablePool& VkRenderer::CreateDrawablePool(const DrawablePoolCreateInfo& creat
                                        m_pipelineLayout, m_descriptorSetLayout, m_graphicsCommandPool, m_renderPass,
                                        GetApplicationRequirements(), m_window.GetViewport(), memProperties,
                                        m_physicalDeviceProperties,
-                                       m_swapChain, m_drawPoolAllocator, m_mainAllocator);
+                                       m_swapChain, m_drawPoolAllocator, m_mainAllocator, log_VulkanRenderSystem);
 
   m_drawablePools.PushBack(std::move(pool));
 
@@ -481,7 +487,7 @@ String VkRenderer::GetRenderingAPI() const {
 void VkRenderer::Submit() {
   m_primaryCommandBuffers.Resize(m_frameBuffers.GetSize());
   VkCore::CreateCommandBuffers(m_device, m_graphicsCommandPool, VK_COMMAND_BUFFER_LEVEL_PRIMARY,
-                               m_primaryCommandBuffers);
+                               m_primaryCommandBuffers, log_VulkanRenderSystem);
 
   const auto& clearColor = GetApplicationRequirements().m_clearColor;
 
@@ -489,7 +495,7 @@ void VkRenderer::Submit() {
 
   for (U32 idx                = 0; idx < m_primaryCommandBuffers.GetSize(); ++idx) {
     const auto& commandBuffer = m_primaryCommandBuffers[idx];
-    VkCore::BeginCommandBuffer(commandBuffer, VK_COMMAND_BUFFER_USAGE_SIMULTANEOUS_USE_BIT);
+    VkCore::BeginCommandBuffer(commandBuffer, VK_COMMAND_BUFFER_USAGE_SIMULTANEOUS_USE_BIT, log_VulkanRenderSystem);
 
     VkRenderPassBeginInfo renderPassInfo = {};
     renderPassInfo.sType                 = VK_STRUCTURE_TYPE_RENDER_PASS_BEGIN_INFO;
@@ -509,7 +515,7 @@ void VkRenderer::Submit() {
 
     vkCmdEndRenderPass(commandBuffer);
 
-    VkCore::EndCommandBuffer(commandBuffer);
+    VkCore::EndCommandBuffer(commandBuffer, log_VulkanRenderSystem);
   }
 }
 
@@ -531,26 +537,27 @@ void VkRenderer::RenderFrame() {
     return;
   }
 
-  VERIFY_TRUE(result == VK_SUCCESS || result == VK_SUBOPTIMAL_KHR, "Failed to acquire swap chain image");
+  VERIFY_TRUE(log_VulkanRenderSystem, result == VK_SUCCESS || result == VK_SUBOPTIMAL_KHR,
+    "Failed to acquire swap chain image");
 
   // SUCCESS OR SUBOPTIMAL
   VkSubmitInfo submitInfo = {};
   submitInfo.sType        = VK_STRUCTURE_TYPE_SUBMIT_INFO;
 
-  std::array<VkSemaphore, 1> waitSemaphores = {m_imageAvailableSemaphores[currentFrame]};
-  std::array<VkPipelineStageFlags, 1> waitStages = { VK_PIPELINE_STAGE_COLOR_ATTACHMENT_OUTPUT_BIT };
-  submitInfo.waitSemaphoreCount     = 1;
-  submitInfo.pWaitSemaphores        = waitSemaphores.data();
-  submitInfo.pWaitDstStageMask      = waitStages.data();
+  std::array<VkSemaphore, 1> waitSemaphores      = {m_imageAvailableSemaphores[currentFrame]};
+  std::array<VkPipelineStageFlags, 1> waitStages = {VK_PIPELINE_STAGE_COLOR_ATTACHMENT_OUTPUT_BIT};
+  submitInfo.waitSemaphoreCount                  = 1;
+  submitInfo.pWaitSemaphores                     = waitSemaphores.data();
+  submitInfo.pWaitDstStageMask                   = waitStages.data();
 
   submitInfo.commandBufferCount = 1;
   submitInfo.pCommandBuffers    = &m_primaryCommandBuffers[imageIndex];
 
-  std::array<VkSemaphore, 1> signalSemaphores = { m_renderFinishedSemaphores[currentFrame] };
-  submitInfo.signalSemaphoreCount = U32(signalSemaphores.size());
-  submitInfo.pSignalSemaphores    = signalSemaphores.data();
+  std::array<VkSemaphore, 1> signalSemaphores = {m_renderFinishedSemaphores[currentFrame]};
+  submitInfo.signalSemaphoreCount             = U32(signalSemaphores.size());
+  submitInfo.pSignalSemaphores                = signalSemaphores.data();
 
-  VERIFY_VK_OP(vkQueueSubmit(m_graphicsQueue, 1, &submitInfo, m_inFlightFences[currentFrame]),
+  VERIFY_VK_OP(log_VulkanRenderSystem, vkQueueSubmit(m_graphicsQueue, 1, &submitInfo, m_inFlightFences[currentFrame]),
     "Failed to submit draw command buffer");
 
   VkPresentInfoKHR presentInfo   = {};
@@ -558,11 +565,11 @@ void VkRenderer::RenderFrame() {
   presentInfo.waitSemaphoreCount = 1;
   presentInfo.pWaitSemaphores    = signalSemaphores.data();
 
-  std::array<VkSwapchainKHR, 1> swapChains = { m_swapChain.Real() };
-  presentInfo.swapchainCount        = U32(swapChains.size());
-  presentInfo.pSwapchains           = swapChains.data();
-  presentInfo.pImageIndices         = &imageIndex;
-  presentInfo.pResults              = nullptr;
+  std::array<VkSwapchainKHR, 1> swapChains = {m_swapChain.Real()};
+  presentInfo.swapchainCount               = U32(swapChains.size());
+  presentInfo.pSwapchains                  = swapChains.data();
+  presentInfo.pImageIndices                = &imageIndex;
+  presentInfo.pResults                     = nullptr;
 
   vkQueuePresentKHR(m_presentQueue, &presentInfo);
 

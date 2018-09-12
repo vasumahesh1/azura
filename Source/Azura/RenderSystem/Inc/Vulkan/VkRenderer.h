@@ -9,6 +9,7 @@
 #include "VkScopedBuffer.h"
 #include "VkScopedPipeline.h"
 #include "VkShader.h"
+#include "Log/Log.h"
 
 namespace Azura {
 class Window;
@@ -21,7 +22,7 @@ class VkDrawablePool;
 
 class VkDrawable final : public Drawable {
  public:
-  VkDrawable(Memory::Allocator& allocator, VkDrawablePool& parentPool);
+  VkDrawable(Memory::Allocator& allocator, VkDrawablePool& parentPool, Log logger);
 
   void AddVertexData(const U8* buffer, U32 size, Slot slot) override;
   void AddInstanceData(const U8* buffer, U32 size, Slot slot) override;
@@ -37,6 +38,7 @@ class VkDrawable final : public Drawable {
  private:
   VkDrawablePool& m_parentPool;
   VkDescriptorSet m_descriptorSet;
+  const Log log_VulkanRenderSystem;
 };
 
 class VkDrawablePool final : public DrawablePool {
@@ -58,7 +60,8 @@ class VkDrawablePool final : public DrawablePool {
                  const VkPhysicalDeviceProperties& physicalDeviceProperties,
                  const VkScopedSwapChain& swapChain,
                  Memory::Allocator& allocator,
-                 Memory::Allocator& allocatorTemporary);
+                 Memory::Allocator& allocatorTemporary,
+                 Log logger);
 
   Drawable& CreateDrawable() override;
   void AppendBytes(const U8* buffer, U32 bufferSize) override;
@@ -100,6 +103,8 @@ class VkDrawablePool final : public DrawablePool {
 
   Containers::Vector<VkDrawable> m_drawables;
   Containers::Vector<VkShader> m_shaders;
+
+  const Log log_VulkanRenderSystem;
 };
 
 class VkRenderer : public Renderer {
@@ -161,6 +166,8 @@ class VkRenderer : public Renderer {
 
   std::reference_wrapper<Memory::Allocator> m_mainAllocator;
   std::reference_wrapper<Memory::Allocator> m_drawPoolAllocator;
+
+  Log log_VulkanRenderSystem;
 };
 }  // namespace Vulkan
 }  // namespace Azura

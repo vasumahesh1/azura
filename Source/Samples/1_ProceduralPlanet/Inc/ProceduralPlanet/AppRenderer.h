@@ -6,6 +6,7 @@
 #include "Memory/HeapMemoryBuffer.h"
 
 #include "mathfu/matrix.h"
+#include "Log/Log.h"
 
 namespace Azura {
 struct UniformBufferData
@@ -32,5 +33,7 @@ private:
 
   std::unique_ptr<Renderer> m_renderer{nullptr};
   std::unique_ptr<Window> m_window{nullptr};
+
+  Log log_AppRenderer;
 };
 } // namespace

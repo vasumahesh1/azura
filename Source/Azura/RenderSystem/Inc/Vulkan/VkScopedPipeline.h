@@ -5,6 +5,7 @@
 #include "Containers/Vector.h"
 #include "Generic/GenericTypes.h"
 #include "Vulkan/VkTypes.h"
+#include "Log/Log.h"
 
 namespace Azura {
 namespace Vulkan {
@@ -21,7 +22,7 @@ private:
 
 class VkPipelineFactory {
  public:
-  VkPipelineFactory(VkDevice device, Memory::Allocator& allocator);
+  VkPipelineFactory(VkDevice device, Memory::Allocator& allocator, Log logger);
 
   VkPipelineFactory& AddShaderStage(const VkPipelineShaderStageCreateInfo& shaderStageCreateInfo);
 
@@ -66,6 +67,8 @@ class VkPipelineFactory {
 
   VkViewport m_viewport{};
   VkRect2D m_scissors{};
+
+  const Log log_VulkanRenderSystem;
 };
 
 }  // namespace Vulkan
