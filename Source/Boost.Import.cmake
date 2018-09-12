@@ -9,8 +9,8 @@ endif()
 
 set(Boost_USE_STATIC_LIBS ON)
 
-find_package(Boost ${BOOST_VERSION} EXACT REQUIRED COMPONENTS log filesystem system)
+set(BOOST_INCLUDEDIR ${BOOST_ROOT} CACHE STRING "" FORCE)
 
-set(BOOST_LIBRARYDIR ${BOOST_ROOT}/stage/lib/ CACHE STRING "" FORCE)
+find_package(Boost ${BOOST_VERSION} EXACT REQUIRED COMPONENTS log filesystem system)
 
 message(STATUS "BOOST_ROOT: ${BOOST_ROOT}")
