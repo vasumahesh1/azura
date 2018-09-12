@@ -6,7 +6,7 @@
 namespace Azura {
 
 Containers::Vector<U8> FileReader::GetFileContents(const String& filePath, Memory::Allocator& allocator) {
-  std::ifstream fileStream(filePath);
+  std::ifstream fileStream(filePath, std::ios::binary);
   Containers::Vector<U8> buffer(allocator);
 
   fileStream.seekg(0, std::ios::end);

@@ -46,6 +46,10 @@ macro(AzuraAddBuildFlags TargetName)
   endif()
 endmacro(AzuraAddBuildFlags)
 
+macro(AzuraSilenceCRTSecureWarnings TargetName)
+  target_compile_definitions(${TargetName} PUBLIC _CRT_SECURE_NO_WARNINGS)
+endmacro(AzuraSilenceCRTSecureWarnings)
+
 macro(AzuraAddUnitTest TargetName)
   add_test(UnitTests ${TargetName})
   target_compile_definitions(${TargetName} PUBLIC BUILD_UNIT_TEST=1)

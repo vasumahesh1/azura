@@ -1,6 +1,16 @@
 Settings:
-  - Key: VkRenderer
-    Levels: I50 W50 E0 F0
+  AutoFlush: true
+  OutputDir: X:\AzuraLogs
+
+LogStreams:
+  VkRenderer:
+    Levels: D0 I30 W50 E0 F0
     Streams:
       - File
+      - Console
+
+  Common:
+    Levels: D0 I50 W50 E0 F0
+    Streams:
+      # - File
       - Console

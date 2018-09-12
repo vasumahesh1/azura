@@ -1,12 +1,19 @@
-# project(Log)
+project(Log)
 
-# # -----------  Main Target  -----------
+# -----------  Main Target  -----------
 
-# set(
-#   SOURCES
-  
-# )
+set(
+  SOURCES
+  "Inc/Log/Log.h"
+  "Src/Log.cpp"
+)
 
-# add_library(Log ${SOURCES})
+add_library(Log ${SOURCES})
 
-# target_include_directories(Log PUBLIC ${PROJECT_SOURCE_DIR}/Inc)
+AzuraSilenceCRTSecureWarnings(Log)
+AzuraSilenceClangTidy(Log)
+AzuraSilenceEnumGuard(Log)
+
+target_include_directories(Log PUBLIC ${PROJECT_SOURCE_DIR}/Inc)
+
+target_link_libraries(Log PUBLIC Common yaml-cpp Boost::log Boost::filesystem)

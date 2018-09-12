@@ -6,4 +6,9 @@ if ("${BUILD_PLATFORM}" STREQUAL "Windows")
   endif()
 endif()
 
+
+set(Boost_USE_STATIC_LIBS ON)
+
+find_package(Boost ${BOOST_VERSION} EXACT REQUIRED COMPONENTS log filesystem system)
+
 set(BOOST_LIBRARYDIR ${BOOST_ROOT}/stage/lib/ CACHE STRING "" FORCE)
