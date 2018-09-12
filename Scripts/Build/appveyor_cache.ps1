@@ -17,6 +17,11 @@ echo "Downloading Ninja ..."
 appveyor DownloadFile $env:NINJA_URL -FileName ninja.zip > $null
 7z x ninja.zip -oC:\AppveyorCache\Ninja\ > $null
 
+# Download CMake
+echo "Downloading CMake ..."
+appveyor DownloadFile $env:CMAKE_11_4_URL -FileName cmake.zip > $null
+7z x cmake.zip -oC:\AppveyorCache\CMake\ > $null
+
 # Download GLFW
 echo "Downloading GLFW ..."
 appveyor DownloadFile $env:GLFW_64_URL -FileName glfw64.zip > $null
