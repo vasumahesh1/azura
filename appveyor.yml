@@ -32,8 +32,6 @@ build: off
 install:
   - ps: git submodule -q update --init --recursive
 
-  - ps: dir C:\Libraries\boost_1_67_0\
-
   # -------------------------- CACHE CHECK --------------------------
 
   - ps: ./Scripts/Build/appveyor_cache.ps1

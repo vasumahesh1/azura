@@ -7,10 +7,8 @@ if ("${BUILD_PLATFORM}" STREQUAL "Windows")
 endif()
 
 
+set(BOOST_ROOT ${BOOST_ROOT} CACHE STRING "" FORCE)
 set(Boost_USE_STATIC_LIBS ON)
-
-set(BOOST_INCLUDEDIR ${BOOST_ROOT} CACHE STRING "" FORCE)
-
 find_package(Boost ${BOOST_VERSION} EXACT REQUIRED COMPONENTS log filesystem system)
 
 message(STATUS "BOOST_ROOT: ${BOOST_ROOT}")
