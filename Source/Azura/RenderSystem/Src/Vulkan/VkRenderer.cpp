@@ -306,6 +306,8 @@ void VkDrawablePool::CleanUp() const {
 
   m_pipeline.CleanUp(m_device);
 
+  vkDestroyDescriptorPool(m_device, m_descriptorPool, nullptr);
+
   vkFreeCommandBuffers(m_device, m_graphicsCommandPool, 1, &m_commandBuffer);
 
   for (const auto& shader : m_shaders) {
@@ -433,6 +435,8 @@ VkRenderer::~VkRenderer() {
     pool.CleanUp();
   }
 
+  vkFreeCommandBuffers(m_device, m_graphicsCommandPool, m_primaryCommandBuffers.GetSize(), m_primaryCommandBuffers.Data());
+
   m_swapChain.CleanUp(m_device);
 
   vkDestroyPipelineLayout(m_device, m_pipelineLayout, nullptr);
@@ -441,7 +445,10 @@ VkRenderer::~VkRenderer() {
   vkDestroyDescriptorSetLayout(m_device, m_descriptorSetLayout, nullptr);
 
   vkDestroyCommandPool(m_device, m_graphicsCommandPool, nullptr);
-  vkDestroyCommandPool(m_device, m_transferCommandPool, nullptr);
+
+  if (m_queueIndices.m_isTransferQueueRequired) {
+    vkDestroyCommandPool(m_device, m_transferCommandPool, nullptr);
+  }
 
   vkDestroySurfaceKHR(m_instance, m_surface, nullptr);
 
