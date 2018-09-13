@@ -52,6 +52,16 @@ This will download most of the code dependencies.
 Building
 =================
 
+## TLDR
+
+if you want to just do a simple build:
+
+```
+python build.py --project all --target Win64
+```
+
+## All Options
+
 Building Azura may seem complicated but it is essentially 1 python script doing all the magic. Here is a list of options available to the user:
 
 ```bash
@@ -106,11 +116,60 @@ optional arguments:
 
 It is highly customizable and uses `.ini` files to change configs. For example, the difference between Appveyor and my current local repository is 1 .ini file.
 
-if you want to just do a simple build:
+## Custom CMake Overrides
+
+There are two important config (.ini) files that you can provide to Azura build system.
 
 ```
-python build.py --project all --target Win64
+--configFile CONFIGFILE
+                        Config File Override
+
+--cmakeConfigFile CMAKECONFIGFILE
+                        CMake Config File Override
 ```
+
+  * **--configFile**
+
+    Config File is your Environment Config.
+
+    ```
+    [Windows]
+    CMake=Tools/CMake/cmake-3.11.4-win64-x64/bin/
+    Ninja=Tools/Ninja/
+    LLVM=Tools/LLVM/x64/LLVM/bin/
+    VSBuildTools=VisualStudioBuildTools/
+    MSVCPath=VisualStudioBuildTools/VC/Tools/MSVC/14.14.26428/
+    Windows10SDKLib=Windows Kits/10/Lib/10.0.17134.0/
+    Windows10SDKBin=Windows Kits/10/bin/10.0.17134.0/
+    Windows10SDKInc=Windows Kits/10/Include/10.0.17134.0/
+
+    [Linux]
+    ...
+
+    [MacOS]
+    ...
+    ```
+
+    If you have custom locations for these above files, you can make a custom ini file and tell Azura to use it. Appveyor basically has its own config located [here](https://github.com/vasumahesh1/azura/blob/master/External/AppveyorConfig.ini).
+
+
+  * **--cmakeConfigFile**
+
+    These are custom CMake Overrides. Here, you can define custom variables that you want. Appveyor for example already has boost, so we just point boost to the correct place and we are done!
+
+    ```
+    [Defines]
+    VULKAN_1_1_77_0_ROOT=C:/AppveyorCache/VulkanSDK/1.1.77.0/
+    BOOST_ROOT=C:/Libraries/boost_1_67_0
+    GLFW_3_2_1_32_ROOT=C:/AppveyorCache/GLFW/glfw-3.2.1.bin.WIN32/
+    GLFW_3_2_1_64_ROOT=C:/AppveyorCache/GLFW/glfw-3.2.1.bin.WIN64/
+    ```
+
+    You can also build private repositories:
+
+    ```
+    FORCE_INCLUDE_SUB_DIRECTORIES=Sandbox;MyCustomPrivateRepo
+    ```
 
 
 Benchmarking
