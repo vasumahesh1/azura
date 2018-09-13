@@ -149,10 +149,12 @@ def setCompileSettings():
   global buildArgs
   global currentBuildArch
 
-  buildArgs.buildPath = os.path.join(buildArgs.buildPath, buildArgs.target)
+  folderPath = buildArgs.target + '_' + buildArgs.build.upper()
+
+  buildArgs.buildPath = os.path.join(buildArgs.buildPath, folderPath)
   mkdir_p(buildArgs.buildPath)
 
-  buildArgs.projectPath = os.path.join(buildArgs.projectPath, buildArgs.target)
+  buildArgs.projectPath = os.path.join(buildArgs.projectPath, folderPath)
   mkdir_p(buildArgs.projectPath)
 
   if (buildArgs.target == 'Win64'):
@@ -176,6 +178,16 @@ def addTargetCmakeArgs(cmakeArgs):
 
   return cmakeArgs
 
+
+def verifyBeforeRun():
+  global buildArgs
+
+  if (buildArgs.build.upper() != "DEBUG" and buildArgs.build.upper() != "RELEASE"):
+    az_log.error('Invalid Build Flag: must be Debug or Release')
+    return False
+
+  return True
+
 def run():
   global hostExternalConfig
   global executableMap
@@ -193,6 +205,9 @@ def run():
     return
 
   setCompileSettings()
+
+  if (not verifyBeforeRun()):
+    return
 
   externalConfig = ConfigParser.ConfigParser()
   externalConfig.read(buildArgs.configFile)

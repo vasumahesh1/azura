@@ -108,9 +108,10 @@ struct Slot {
 struct BufferInfo {
   U32 m_offset;
   U32 m_byteSize;
+  U32 m_maxByteSize;
   Slot m_slot;
 
-  BufferInfo() : m_offset(0), m_byteSize(0), m_slot() {}
+  BufferInfo() : m_offset(0), m_byteSize(0), m_maxByteSize(0), m_slot() {}
 };
 
 }  // namespace Azura

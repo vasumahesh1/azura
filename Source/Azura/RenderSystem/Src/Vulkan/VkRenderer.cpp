@@ -19,25 +19,27 @@ VkDrawable::VkDrawable(Memory::Allocator& allocator, VkDrawablePool& parentPool,
     log_VulkanRenderSystem(std::move(logger)) {
 }
 
-void VkDrawable::AddVertexData(const U8* buffer, U32 size, Slot slot) {
+void VkDrawable::AddVertexData(const Slot& slot, const U8* buffer, U32 size) {
 
   BufferInfo info = BufferInfo();
 
-  info.m_byteSize = size;
-  info.m_offset   = m_parentPool.GetOffset();
-  info.m_slot     = slot;
+  info.m_maxByteSize = size;
+  info.m_byteSize    = size;
+  info.m_offset      = m_parentPool.GetOffset();
+  info.m_slot        = slot;
 
   m_vertexBufferInfos.PushBack(std::move(info));
 
   m_parentPool.AppendBytes(buffer, size);
 }
 
-void VkDrawable::AddInstanceData(const U8* buffer, U32 size, Slot slot) {
+void VkDrawable::AddInstanceData(const Slot& slot, const U8* buffer, U32 size) {
   BufferInfo info = BufferInfo();
 
-  info.m_byteSize = size;
-  info.m_offset   = m_parentPool.GetOffset();
-  info.m_slot     = slot;
+  info.m_maxByteSize = size;
+  info.m_byteSize    = size;
+  info.m_offset      = m_parentPool.GetOffset();
+  info.m_slot        = slot;
 
   m_instanceBufferInfos.PushBack(std::move(info));
 
@@ -220,7 +222,8 @@ void VkDrawablePool::Submit() {
 
   m_pipeline = m_pipelineFactory.Submit();
 
-  m_commandBuffer = VkCore::CreateCommandBuffer(m_device, m_graphicsCommandPool, VK_COMMAND_BUFFER_LEVEL_SECONDARY, log_VulkanRenderSystem);
+  m_commandBuffer = VkCore::CreateCommandBuffer(m_device, m_graphicsCommandPool, VK_COMMAND_BUFFER_LEVEL_SECONDARY,
+                                                log_VulkanRenderSystem);
 
   VkCommandBufferInheritanceInfo inheritanceInfo = {};
   inheritanceInfo.sType                          = VK_STRUCTURE_TYPE_COMMAND_BUFFER_INHERITANCE_INFO;
@@ -350,9 +353,11 @@ VkRenderer::VkRenderer(const ApplicationInfo& appInfo,
 
   m_surface = VkPlatform::CreateSurface(m_window.GetHandle(), m_instance, log_VulkanRenderSystem);
 
-  m_physicalDevice = VkCore::SelectPhysicalDevice(m_instance, m_surface, GetDeviceRequirements(), log_VulkanRenderSystem);
-  m_queueIndices   = VkCore::FindQueueFamiliesInDevice(m_physicalDevice, m_surface, GetDeviceRequirements());
-  m_device         = VkCore::CreateLogicalDevice(m_physicalDevice, m_queueIndices, GetDeviceRequirements(), log_VulkanRenderSystem);
+  m_physicalDevice = VkCore::SelectPhysicalDevice(m_instance, m_surface, GetDeviceRequirements(),
+                                                  log_VulkanRenderSystem);
+  m_queueIndices = VkCore::FindQueueFamiliesInDevice(m_physicalDevice, m_surface, GetDeviceRequirements());
+  m_device       = VkCore::CreateLogicalDevice(m_physicalDevice, m_queueIndices, GetDeviceRequirements(),
+                                               log_VulkanRenderSystem);
 
   vkGetPhysicalDeviceProperties(m_physicalDevice, &m_physicalDeviceProperties);
 
@@ -390,11 +395,13 @@ VkRenderer::VkRenderer(const ApplicationInfo& appInfo,
 
   VkCore::CreateFrameBuffers(m_device, m_renderPass, m_swapChain, m_frameBuffers, log_VulkanRenderSystem);
 
-  m_graphicsCommandPool = VkCore::CreateCommandPool(m_device, m_queueIndices.m_graphicsFamily, 0, log_VulkanRenderSystem);
+  m_graphicsCommandPool = VkCore::CreateCommandPool(m_device, m_queueIndices.m_graphicsFamily, 0,
+                                                    log_VulkanRenderSystem);
 
   if (m_queueIndices.m_isTransferQueueRequired) {
     m_transferCommandPool =
-      VkCore::CreateCommandPool(m_device, m_queueIndices.m_transferFamily, VK_COMMAND_POOL_CREATE_TRANSIENT_BIT, log_VulkanRenderSystem);
+      VkCore::CreateCommandPool(m_device, m_queueIndices.m_transferFamily, VK_COMMAND_POOL_CREATE_TRANSIENT_BIT,
+                                log_VulkanRenderSystem);
   }
 
   const U32 syncCount = swapChainRequirement.m_framesInFlight;
@@ -435,7 +442,8 @@ VkRenderer::~VkRenderer() {
     pool.CleanUp();
   }
 
-  vkFreeCommandBuffers(m_device, m_graphicsCommandPool, m_primaryCommandBuffers.GetSize(), m_primaryCommandBuffers.Data());
+  vkFreeCommandBuffers(m_device, m_graphicsCommandPool, m_primaryCommandBuffers.GetSize(),
+                       m_primaryCommandBuffers.Data());
 
   m_swapChain.CleanUp(m_device);
 

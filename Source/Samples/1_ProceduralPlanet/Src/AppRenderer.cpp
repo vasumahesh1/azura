@@ -118,7 +118,7 @@ void AppRenderer::Initialize() {
   drawable.SetVertexDataCount(1);
   drawable.SetUniformDataCount(1);
 
-  drawable.AddVertexData(bufferStart, vertexData.GetSize() * sizeof(Vertex), vertexDataSlot);
+  drawable.AddVertexData(vertexDataSlot, bufferStart, vertexData.GetSize() * sizeof(Vertex));
   drawable.SetIndexData(indexBufferStart, indexData.GetSize() * sizeof(U32));
   drawable.AddUniformData(uboDataBuffer, sizeof(UniformBufferData), 0);
 

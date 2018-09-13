@@ -39,13 +39,7 @@ void* MonotonicAllocator::Allocate(U32 size, U32 alignment) {
   const UPTR misalignment = (m_headPtr & mask);
 
   // TODO(vasumahesh1): Need to figure this out.
-  const AddressDiff adjustment = [&]() {
-    if (misalignment > 0) {
-      return alignment - misalignment;
-    }
-
-    return AddressPtr(0);
-  }();
+  const AddressDiff adjustment = alignment - misalignment;
 
   const UPTR addr = m_headPtr + adjustment;
   m_headPtr       = addr + alignedSize;

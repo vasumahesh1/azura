@@ -18,20 +18,20 @@ void Drawable::SetVertexDataCount(const U32 count) {
   m_vertexBufferInfos.Reserve(count);
 }
 
-void Drawable::SetInstanceDataCount(U32 count) {
+void Drawable::SetInstanceDataCount(const U32 count) {
   m_instanceBufferInfos.Reserve(count);
 }
 
-void Drawable::SetUniformDataCount(U32 count) {
+void Drawable::SetUniformDataCount(const U32 count) {
   m_uniformBufferInfos.Reserve(count);
 }
 
-void Drawable::AddVertexData(const Containers::Vector<U8>& buffer, Slot slot) {
-  AddVertexData(buffer.Data(), buffer.GetSize(), slot);
+void Drawable::AddVertexData(const Slot& slot, const Containers::Vector<U8>& buffer) {
+  AddVertexData(slot, buffer.Data(), buffer.GetSize());
 }
 
-void Drawable::AddInstanceData(const Containers::Vector<U8>& buffer, Slot slot) {
-  AddInstanceData(buffer.Data(), buffer.GetSize(), slot);
+void Drawable::AddInstanceData(const Slot& slot, const Containers::Vector<U8>& buffer) {
+  AddInstanceData(slot, buffer.Data(), buffer.GetSize());
 }
 
 void Drawable::AddUniformData(const Containers::Vector<U8>& buffer, U32 binding) {

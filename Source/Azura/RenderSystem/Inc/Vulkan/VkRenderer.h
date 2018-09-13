@@ -24,8 +24,8 @@ class VkDrawable final : public Drawable {
  public:
   VkDrawable(Memory::Allocator& allocator, VkDrawablePool& parentPool, Log logger);
 
-  void AddVertexData(const U8* buffer, U32 size, Slot slot) override;
-  void AddInstanceData(const U8* buffer, U32 size, Slot slot) override;
+  void AddVertexData(const Slot& slot, const U8* buffer, U32 size) override;
+  void AddInstanceData(const Slot& slot, const U8* buffer, U32 size) override;
   void AddUniformData(const U8* buffer, U32 size, U32 binding) override;
 
   void SetIndexData(const U8* buffer, U32 size) override;

@@ -37,6 +37,9 @@ public:
 
   Vector(UINT maxSize, Memory::Allocator& alloc);
 
+  Vector(UINT currentSize, UINT maxSize, Memory::Allocator& alloc);
+
+
   Vector(const std::initializer_list<Type>& list, Memory::Allocator& alloc);
 
   template <typename... Args>
@@ -298,6 +301,15 @@ Vector<Type>::Vector(const UINT maxSize, Memory::Allocator& alloc)
     m_allocator(alloc),
     m_base(m_allocator.get().RawNewArray<Type>(m_maxSize)) {
 }
+
+template <typename Type>
+Vector<Type>::Vector(UINT currentSize, UINT maxSize, Memory::Allocator& alloc)
+    :
+    m_size(currentSize),
+    m_maxSize(maxSize),
+    m_allocator(alloc),
+    m_base(m_allocator.get().RawNewArray<Type>(m_maxSize)) {
+  }
 
 template <typename Type>
 Vector<Type>::Vector(const std::initializer_list<Type>& list, Memory::Allocator& alloc)

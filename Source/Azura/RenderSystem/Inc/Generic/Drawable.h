@@ -20,11 +20,11 @@ class Drawable {
   void SetInstanceDataCount(U32 count);
   void SetUniformDataCount(U32 count);
 
-  void AddVertexData(const Containers::Vector<U8>& buffer, Slot slot);
-  virtual void AddVertexData(const U8* buffer, U32 size, Slot slot)   = 0;
+  void AddVertexData(const Slot& slot, const Containers::Vector<U8>& buffer);
+  virtual void AddVertexData(const Slot& slot, const U8* buffer, U32 size)   = 0;
 
-  void AddInstanceData(const Containers::Vector<U8>& buffer, Slot slot);
-  virtual void AddInstanceData(const U8* buffer, U32 size, Slot slot)   = 0;
+  void AddInstanceData(const Slot& slot, const Containers::Vector<U8>& buffer);
+  virtual void AddInstanceData(const Slot& slot, const U8* buffer, U32 size)   = 0;
 
   void AddUniformData(const Containers::Vector<U8>& buffer, U32 binding);
   virtual void AddUniformData(const U8* buffer, U32 size, U32 binding)   = 0;

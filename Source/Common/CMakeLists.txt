@@ -76,3 +76,27 @@ azurasilenceclangtidy(CommonTest)
 azuraaddunittest(CommonTest)
 
 target_link_libraries(CommonTest gtest_main Common)
+
+
+# -----------  Benchmark Target  -----------
+
+add_executable(
+  CommonBenchmark
+  "Benchmark/Vector_benchmark.h"
+  "Benchmark/Vector_benchmark.cpp"
+  "Benchmark/benchmark.cpp"
+)
+
+azurasilenceclangtidy(CommonBenchmark)
+target_link_libraries(CommonBenchmark benchmark Common)
+
+
+add_executable(
+  StdBenchmark
+  "Benchmark/StdVector_benchmark.h"
+  "Benchmark/StdVector_benchmark.cpp"
+  "Benchmark/benchmark.cpp"
+)
+
+azurasilenceclangtidy(StdBenchmark)
+target_link_libraries(StdBenchmark benchmark Common)
