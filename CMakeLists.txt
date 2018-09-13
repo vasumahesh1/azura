@@ -25,6 +25,18 @@ set_property(GLOBAL PROPERTY USE_FOLDERS ON)
 if(MSVC)
   # AzuraConfigureMSVC()
 
+  string(REGEX
+         REPLACE "/MD"
+                 ""
+                 CMAKE_CXX_FLAGS
+                 "${CMAKE_CXX_FLAGS}")
+
+  string(REGEX
+         REPLACE "/MDd"
+                 ""
+                 CMAKE_CXX_FLAGS
+                 "${CMAKE_CXX_FLAGS}")
+
   if(CMAKE_CXX_FLAGS MATCHES "/W[0-4]")
     string(REGEX
            REPLACE "/W[0-4]"
@@ -36,11 +48,9 @@ if(MSVC)
   endif()
   set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} /WX /we4061 /wd4127 /D_SCL_SECURE_NO_WARNINGS")
 
-  if(CMAKE_BUILD_TYPE MATCHES DEBUG)
-    set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} /MDd")
-  elseif(CMAKE_BUILD_TYPE MATCHES RELEASE)
-    set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} /MD")
-  endif()
+
+  set(CMAKE_CXX_FLAGS_RELEASE "/MT")
+  set(CMAKE_CXX_FLAGS_DEBUG "/MTd")
 
 elseif(CMAKE_COMPILER_IS_GNUCC OR CMAKE_COMPILER_IS_GNUCXX)
   set(
