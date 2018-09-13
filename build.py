@@ -164,6 +164,9 @@ def setCompileSettings():
     currentBuildArch = "32"
 
 def addTargetCmakeArgs(cmakeArgs):
+  if (buildArgs.includeTests):
+    cmakeArgs.append("-DINCLUDE_TESTS=ON")
+
   if (buildArgs.target == 'Win64'):
     cmakeArgs.append("-DBUILD_TARGET=Win64")
     cmakeArgs.append("-DBUILD_ARCH=64")

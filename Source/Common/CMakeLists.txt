@@ -52,31 +52,31 @@ add_library(Common ${SOURCES})
 target_include_directories(Common PUBLIC ${PROJECT_SOURCE_DIR}/Inc)
 
 # -----------  Testing Target  -----------
+if (INCLUDE_TESTS)
+  add_executable(
+    CommonTest
+    "Test/test.cpp"
+    "Test/MonotonicAllocator_test.h"
+    "Test/MonotonicAllocator_test.cpp"
+    "Test/RangeAllocator_test.h"
+    "Test/RangeAllocator_test.cpp"
+    "Test/Vector_test.h"
+    "Test/Vector_test.cpp"
+    "Test/Array_test.h"
+    "Test/Array_test.cpp"
+    "Test/Hash_test.h"
+    "Test/Hash_test.cpp"
+    "Test/HeapMemoryBuffer_test.h"
+    "Test/HeapMemoryBuffer_test.cpp"
+    "Test/StackMemoryBuffer_test.h"
+    "Test/StackMemoryBuffer_test.cpp"
+  )
 
-add_executable(
-  CommonTest
-  "Test/test.cpp"
-  "Test/MonotonicAllocator_test.h"
-  "Test/MonotonicAllocator_test.cpp"
-  "Test/RangeAllocator_test.h"
-  "Test/RangeAllocator_test.cpp"
-  "Test/Vector_test.h"
-  "Test/Vector_test.cpp"
-  "Test/Array_test.h"
-  "Test/Array_test.cpp"
-  "Test/Hash_test.h"
-  "Test/Hash_test.cpp"
-  "Test/HeapMemoryBuffer_test.h"
-  "Test/HeapMemoryBuffer_test.cpp"
-  "Test/StackMemoryBuffer_test.h"
-  "Test/StackMemoryBuffer_test.cpp"
-)
+  azurasilenceclangtidy(CommonTest)
+  azuraaddunittest(CommonTest)
 
-azurasilenceclangtidy(CommonTest)
-azuraaddunittest(CommonTest)
-
-target_link_libraries(CommonTest gtest_main Common)
-
+  target_link_libraries(CommonTest gtest_main Common)
+endif()
 
 # -----------  Benchmark Target  -----------
 

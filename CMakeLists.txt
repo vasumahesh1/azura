@@ -13,7 +13,10 @@ set(CLANG_TIDY_EXECUTABLE ${CLANG_PATH}/bin/clang-tidy.exe
     FORCE)
 
 # Install GTest
-include("./GTest.cmake")
+if (INCLUDE_TESTS)
+  include("./GTest.cmake")
+endif()
+
 include("./Azura.Macros.cmake")
 include("./Azura.Functions.cmake")
 
@@ -23,20 +26,6 @@ enable_testing()
 set_property(GLOBAL PROPERTY USE_FOLDERS ON)
 
 if(MSVC)
-  # AzuraConfigureMSVC()
-
-  string(REGEX
-         REPLACE "/MD"
-                 ""
-                 CMAKE_CXX_FLAGS
-                 "${CMAKE_CXX_FLAGS}")
-
-  string(REGEX
-         REPLACE "/MDd"
-                 ""
-                 CMAKE_CXX_FLAGS
-                 "${CMAKE_CXX_FLAGS}")
-
   if(CMAKE_CXX_FLAGS MATCHES "/W[0-4]")
     string(REGEX
            REPLACE "/W[0-4]"
@@ -48,9 +37,8 @@ if(MSVC)
   endif()
   set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} /WX /we4061 /wd4127 /D_SCL_SECURE_NO_WARNINGS")
 
-
-  set(CMAKE_CXX_FLAGS_RELEASE "/MT")
-  set(CMAKE_CXX_FLAGS_DEBUG "/MTd")
+  set(CMAKE_CXX_FLAGS_RELEASE "/MD")
+  set(CMAKE_CXX_FLAGS_DEBUG "/MDd")
 
 elseif(CMAKE_COMPILER_IS_GNUCC OR CMAKE_COMPILER_IS_GNUCXX)
   set(
@@ -66,9 +54,11 @@ if(PROJECT_BUILD)
 endif()
 
 if(CMAKE_BUILD_TYPE MATCHES DEBUG)
+  message(STATUS "Building Debug Build")
   add_definitions(-DBUILD_DEBUG)
 elseif(CMAKE_BUILD_TYPE MATCHES RELEASE)
   add_definitions(-DBUILD_RELEASE)
+  message(STATUS "Building Release Build")
   set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -O2")
 endif()
 

@@ -15,9 +15,17 @@ if ("${BUILD_PLATFORM}" STREQUAL "Windows")
   endif()
 endif()
 
+if(CMAKE_BUILD_TYPE MATCHES DEBUG)
+  set(Boost_USE_DEBUG_LIBS ON)
+  set(Boost_USE_RELEASE_LIBS OFF)
+elseif(CMAKE_BUILD_TYPE MATCHES RELEASE)
+  set(Boost_USE_DEBUG_LIBS OFF)
+  set(Boost_USE_RELEASE_LIBS ON)
+endif()
+
 set(Boost_USE_MULTITHREADED ON)
 set(Boost_USE_STATIC_LIBS ON)
-set(Boost_USE_STATIC_RUNTIME ON)
+set(Boost_USE_STATIC_RUNTIME OFF)
 find_package(Boost ${BOOST_VERSION} EXACT REQUIRED COMPONENTS log filesystem system)
 
 message(STATUS "BOOST_ROOT: ${BOOST_ROOT}")
