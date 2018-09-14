@@ -18,10 +18,13 @@ namespace {
 SizeType AlignAhead(SizeType size, SizeType alignment) {
   return (size + (alignment - 1)) & ~(alignment - 1);
 }
-}  // namespace
+} // namespace
 
 MonotonicAllocator::MonotonicAllocator(MemoryBuffer& buffer, U32 size)
-    : Allocator(buffer.Allocate(size), size), m_headPtr(BasePtr()), m_sourceBuffer(buffer) {}
+  : Allocator(buffer.Allocate(size), size),
+    m_headPtr(BasePtr()),
+    m_sourceBuffer(buffer) {
+}
 
 MonotonicAllocator::~MonotonicAllocator() {
   // NOLINTNEXTLINE(cppcoreguidelines-pro-type-reinterpret-cast)
@@ -39,7 +42,14 @@ void* MonotonicAllocator::Allocate(U32 size, U32 alignment) {
   const UPTR misalignment = (m_headPtr & mask);
 
   // TODO(vasumahesh1): Need to figure this out.
-  const AddressDiff adjustment = alignment - misalignment;
+  const AddressDiff adjustment = [&]() -> AddressDiff
+  {
+    if (misalignment > 0) {
+      return alignment - misalignment;
+    }
+
+    return AddressPtr(0);
+  }();
 
   const UPTR addr = m_headPtr + adjustment;
   m_headPtr       = addr + alignedSize;
@@ -61,5 +71,5 @@ void MonotonicAllocator::Reset() {
   m_headPtr = BasePtr();
 }
 
-}  // namespace Memory
-}  // namespace Azura
+} // namespace Memory
+} // namespace Azura
