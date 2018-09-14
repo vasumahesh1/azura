@@ -192,7 +192,7 @@ void VkDrawablePool::CreateDescriptorPool(const ApplicationRequirements& appReq)
 
   // TODO(vasumahesh1):[DESCRIPTOR]: How to use Uniform Buffer Arrays?
   VkDescriptorPoolSize uniformPoolSize = {};
-  uniformPoolSize.type                 = VK_DESCRIPTOR_TYPE_UNIFORM_BUFFER_DYNAMIC;
+  uniformPoolSize.type                 = VK_DESCRIPTOR_TYPE_UNIFORM_BUFFER;
   uniformPoolSize.descriptorCount      = appReq.m_uniformBuffers.GetSize();
 
   // TODO(vasumahesh1):[TEXTURE]: Add support for Descriptor Pools
@@ -509,6 +509,10 @@ void VkRenderer::Submit() {
 
   const VkClearValue clearValue = {clearColor[0], clearColor[1], clearColor[2], clearColor[3]};
 
+  for (auto& drawablePool : m_drawablePools) {
+    drawablePool.Submit();
+  }
+
   for (U32 idx                = 0; idx < m_primaryCommandBuffers.GetSize(); ++idx) {
     const auto& commandBuffer = m_primaryCommandBuffers[idx];
     VkCore::BeginCommandBuffer(commandBuffer, VK_COMMAND_BUFFER_USAGE_SIMULTANEOUS_USE_BIT, log_VulkanRenderSystem);
@@ -525,7 +529,6 @@ void VkRenderer::Submit() {
     vkCmdBeginRenderPass(commandBuffer, &renderPassInfo, VK_SUBPASS_CONTENTS_SECONDARY_COMMAND_BUFFERS);
 
     for (auto& drawablePool : m_drawablePools) {
-      drawablePool.Submit();
       vkCmdExecuteCommands(commandBuffer, 1, &drawablePool.GetCommandBuffer());
     }
 
@@ -596,7 +599,8 @@ void VkRenderer::SnapshotFrame(const String& exportPath) const {
   // TODO(vasumahesh):[TEXTURE]: VkScopedImage
   VkDeviceMemory dstMemory;
 
-  const RawStorageFormat storageFormat = RawStorageFormat::B8G8R8A8_UNORM;
+  // TODO(vasumahesh1):[SNAPSHOT]: Use same format as Swap Chain currently
+  const RawStorageFormat storageFormat = GetSwapchainRequirements().m_format;
 
   const bool supportsBlit = [this, storageFormat]() -> bool
   {

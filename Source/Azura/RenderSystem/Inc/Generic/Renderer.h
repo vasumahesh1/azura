@@ -98,6 +98,7 @@ protected:
   const ApplicationInfo& GetApplicationInfo() const;
   const DeviceRequirements& GetDeviceRequirements() const;
   const ApplicationRequirements& GetApplicationRequirements() const;
+  const SwapChainRequirements& GetSwapchainRequirements() const;
   Memory::Allocator& GetAllocator() const;
 
   U32 GetCurrentFrame() const;

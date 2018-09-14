@@ -22,9 +22,8 @@ namespace Azura {
 namespace Vulkan {
 namespace {
 #ifdef BUILD_DEBUG
-const std::array<const char*, 2> VALIDATION_LAYERS = {
-  "VK_LAYER_LUNARG_standard_validation",
-  "VK_LAYER_LUNARG_core_validation"
+const std::array<const char*, 1> VALIDATION_LAYERS = {
+  "VK_LAYER_LUNARG_standard_validation"
 };
 
 VKAPI_ATTR VkBool32 VKAPI_CALL DebugReportCallback(

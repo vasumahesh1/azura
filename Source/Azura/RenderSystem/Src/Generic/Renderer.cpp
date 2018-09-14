@@ -36,6 +36,10 @@ const ApplicationRequirements& Renderer::GetApplicationRequirements() const {
   return m_appRequirements;
 }
 
+const SwapChainRequirements& Renderer::GetSwapchainRequirements() const {
+  return m_swapChainRequirements;
+}
+
 Memory::Allocator& Renderer::GetAllocator() const {
   return m_allocator;
 }

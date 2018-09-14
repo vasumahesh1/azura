@@ -45,7 +45,7 @@ void AppRenderer::Initialize() {
 
   UniformBufferData uboData = {};
   uboData.m_model = mathfu::Matrix<float, 4, 4>::Identity();
-  uboData.m_view = mathfu::Matrix<float, 4, 4>::LookAt(mathfu::Vector<float, 3>(0.0f, 0.1f, 0.0f), mathfu::Vector<float, 3>(0.0f, 0.1f, -6.0f), mathfu::Vector<float, 3>(0.0f, 1.0f, 0.0f), -1.0f);
+  uboData.m_view = mathfu::Matrix<float, 4, 4>::LookAt(mathfu::Vector<float, 3>(0.5f, 0.5f, 0.0f), mathfu::Vector<float, 3>(0.5f, 0.5f, -6.0f), mathfu::Vector<float, 3>(0.0f, 1.0f, 0.0f), -1.0f);
   uboData.m_proj = mathfu::Matrix<float, 4, 4>::Perspective(45.0f, 16.0f / 9.0f, 0.1f, 100.0f, -1.0f);
 
   // TODO(vasumahesh1):[Q]:Allocator?
@@ -135,12 +135,12 @@ void AppRenderer::WindowUpdate() {
 void AppRenderer::Run() const {
   LOG_INF(log_AppRenderer, LOG_LEVEL, "Running AppRenderer");
   m_renderer->RenderFrame();
-  m_renderer->RenderFrame();
-  m_renderer->RenderFrame();
-  m_renderer->RenderFrame();
-  m_renderer->SnapshotFrame("./temp.data");
+  // m_renderer->RenderFrame();
+  // m_renderer->RenderFrame();
+  // m_renderer->RenderFrame();
+  // m_renderer->SnapshotFrame("./temp.data");
 
-  m_window->StartListening();
+  // m_window->StartListening();
 }
 
 void AppRenderer::Destroy() const {
