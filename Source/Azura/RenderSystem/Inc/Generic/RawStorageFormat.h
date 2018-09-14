@@ -77,6 +77,7 @@ using ChannelDesc = std::tuple<Channel, ChannelDataType, U32>;
   FUNC((D24_UNORM_S8_UINT,          /* CHANNELS START */ ((Depth, UNorm, 24))       ((Stencil, UInt, 8))                                                                   /* CHANNELS END */))  \
   FUNC((D32_FLOAT,                  /* CHANNELS START */ ((Depth, Float, 32))                                                                                              /* CHANNELS END */))  \
   FUNC((D32_FLOAT_S8X24_UINT,       /* CHANNELS START */ ((Depth, Float, 32))       ((Stencil, UInt, 8))        ((Padding, Float, 24))                                     /* CHANNELS END */))  \
+  FUNC((R8G8B8A8_UNORM,             /* CHANNELS START */ ((Red, UNorm, 8))          ((Green, UNorm, 8))         ((Blue, UNorm, 8))            ((Alpha, UNorm, 8))          /* CHANNELS END */))  \
   FUNC((R11G11B10_FLOAT,            /* CHANNELS START */ ((Red, Float, 11))         ((Green, Float, 11))        ((Blue, Float, 10))                                        /* CHANNELS END */))  \
   FUNC((R16_FLOAT,                  /* CHANNELS START */ ((Red, Float, 16))                                                                                                /* CHANNELS END */))  \
   FUNC((R16_SINT,                   /* CHANNELS START */ ((Red, SInt, 16))                                                                                                 /* CHANNELS END */))  \

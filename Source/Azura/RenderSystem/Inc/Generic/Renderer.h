@@ -92,6 +92,8 @@ public:
   virtual void EnterRenderFrame();
   virtual void ExitRenderFrame();
 
+  virtual void SnapshotFrame(const String& exportPath) const = 0;
+
 protected:
   const ApplicationInfo& GetApplicationInfo() const;
   const DeviceRequirements& GetDeviceRequirements() const;

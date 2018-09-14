@@ -16,6 +16,7 @@ namespace Vulkan {
   FUNC(RawStorageFormat::B8G8R8A8_UINT, VK_FORMAT_B8G8R8A8_UINT)                                                       \
   FUNC(RawStorageFormat::B8G8R8A8_SINT, VK_FORMAT_B8G8R8A8_SINT)                                                       \
   FUNC(RawStorageFormat::B8G8R8A8_SRGB, VK_FORMAT_B8G8R8A8_SRGB)                                                       \
+  FUNC(RawStorageFormat::R8G8B8A8_UNORM, VK_FORMAT_R8G8B8A8_UNORM)                                                     \
   FUNC(RawStorageFormat::R16_FLOAT, VK_FORMAT_R16_SFLOAT)                                                              \
   FUNC(RawStorageFormat::R16_UINT, VK_FORMAT_R16_UINT)                                                                 \
   FUNC(RawStorageFormat::R16_SINT, VK_FORMAT_R16_SINT)                                                                 \
@@ -124,6 +125,11 @@ namespace Vulkan {
   FUNC(BufferUsageRate::PerVertex, VK_VERTEX_INPUT_RATE_VERTEX)                                                        \
   FUNC(BufferUsageRate::PerInstance, VK_VERTEX_INPUT_RATE_INSTANCE)
 
+#define IMAGE_TYPE_TO_VK_IMAGE_TYPE(FUNC)                                                        \
+  FUNC(ImageType::Image1D, VK_IMAGE_TYPE_1D)                                                        \
+  FUNC(ImageType::Image2D, VK_IMAGE_TYPE_2D)                                                        \
+  FUNC(ImageType::Image3D, VK_IMAGE_TYPE_3D)
+
 #define CREATE_MAPPER_CPP(FROM_FORMAT, TO_FORMAT, MAPPING_TABLE, CASE_MAPPING_FUNC)                                    \
   CREATE_MAPPER_H(FROM_FORMAT, TO_FORMAT) {                                                                            \
     switch (inputFormat) { MAPPING_TABLE(CASE_MAPPING_FUNC) }                                                          \
@@ -166,6 +172,9 @@ CREATE_MAPPER_CPP(BufferUsageRate,
                   BUFFER_USAGE_RATE_TO_VK_VERTEX_INPUT_RATE_MAPPING,
                   FORWARD_MAPPING)
 // CREATE_MAPPER_CPP(VkFrontFace, FrontFace, FRONT_FACE_TO_VK_FRONT_FACE_MAPPING, REVERSE_MAPPING)
+
+CREATE_MAPPER_CPP(ImageType, VkImageType, IMAGE_TYPE_TO_VK_IMAGE_TYPE, FORWARD_MAPPING);
+// CREATE_MAPPER_CPP(ImageType, VkImageType, IMAGE_TYPE_TO_VK_IMAGE_TYPE, REVERSE_MAPPING)
 
 }  // namespace Vulkan
 }  // namespace Azura

@@ -124,6 +124,8 @@ void AppRenderer::Initialize() {
 
   // All Drawables Done
   m_renderer->Submit();
+
+  LOG_INF(log_AppRenderer, LOG_LEVEL, "Initialized AppRenderer");
 }
 
 void AppRenderer::WindowUpdate() {
@@ -131,6 +133,13 @@ void AppRenderer::WindowUpdate() {
 }
 
 void AppRenderer::Run() const {
+  LOG_INF(log_AppRenderer, LOG_LEVEL, "Running AppRenderer");
+  m_renderer->RenderFrame();
+  m_renderer->RenderFrame();
+  m_renderer->RenderFrame();
+  m_renderer->RenderFrame();
+  m_renderer->SnapshotFrame("./temp.data");
+
   m_window->StartListening();
 }
 

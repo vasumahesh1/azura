@@ -131,6 +131,8 @@ class VkRenderer : public Renderer {
   void Submit() override;
   void RenderFrame() override;
 
+  void SnapshotFrame(const String& exportPath) const override;
+
  private:
   Window& m_window;
   Containers::Vector<VkDrawablePool> m_drawablePools;

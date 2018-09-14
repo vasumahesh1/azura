@@ -21,7 +21,7 @@ macro(AzuraGlobalSilenceEnumGuard)
                    CMAKE_CXX_FLAGS
                    "${CMAKE_CXX_FLAGS}")
   endif()
-endmacro(AzuraSilenceEnumGuard)
+endmacro(AzuraGlobalSilenceEnumGuard)
 
 macro(AzuraSilenceWarningsForMathfu TargetName)
   if(MSVC)
@@ -73,4 +73,4 @@ endmacro(AzuraAddUnitTest)
 
 macro(AzuraAddLoggingSupport TargetName Level)
   target_compile_definitions(${TargetName} PUBLIC LOG_LEVEL=${Level})
-endmacro(AzuraEnableWarningsAsErrors)
+endmacro(AzuraAddLoggingSupport)

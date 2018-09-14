@@ -6,6 +6,7 @@
 #include "Vulkan/VkShader.h"
 #include "Vulkan/VkTypeMapping.h"
 #include "Vulkan/VkMacros.h"
+#include <fstream>
 
 using namespace Azura::Containers; // NOLINT - Freedom to use using namespace in CPP files.
 
@@ -589,6 +590,165 @@ void VkRenderer::RenderFrame() {
   vkQueuePresentKHR(m_presentQueue, &presentInfo);
 
   ExitRenderFrame();
+}
+
+void VkRenderer::SnapshotFrame(const String& exportPath) const {
+  // TODO(vasumahesh):[TEXTURE]: VkScopedImage
+  VkDeviceMemory dstMemory;
+
+  const RawStorageFormat storageFormat = RawStorageFormat::B8G8R8A8_UNORM;
+
+  const bool supportsBlit = [this, storageFormat]() -> bool
+  {
+    const auto vkFormat = ToVkFormat(storageFormat);
+    VERIFY_OPT(log_VulkanRenderSystem, vkFormat, "Unknown Vk Format");
+
+    VkFormatProperties formatProps;
+    vkGetPhysicalDeviceFormatProperties(m_physicalDevice, m_swapChain.m_surfaceFormat.format, &formatProps);
+    if ((formatProps.optimalTilingFeatures & VK_FORMAT_FEATURE_BLIT_SRC_BIT) == 0u) {
+      LOG_WRN(log_VulkanRenderSystem, LOG_LEVEL, "Swapchain Format doesn't support Blit, Will use Image Copy");
+      return false;
+    }
+
+    vkGetPhysicalDeviceFormatProperties(m_physicalDevice, vkFormat.value(), &formatProps);
+    if ((formatProps.linearTilingFeatures & VK_FORMAT_FEATURE_BLIT_DST_BIT)  == 0u) {
+      LOG_WRN(log_VulkanRenderSystem, LOG_LEVEL,
+        "Destination Image Format doesn't support linear blit, Will use Image Copy");
+      return false;
+    }
+
+    return true;
+  }();
+
+  const auto& currentFrame = GetCurrentFrame();
+
+  // TODO(vasumahesh):[TEXTURE]: VkScopedImage
+  // TODO(vasumahesh):[LINT]: Remove Lint overrides
+  const VkImage srcImage = m_swapChain.m_images[currentFrame];
+  const VkImage dstImage = VkCore::CreateImage(m_device, storageFormat, ImageType::Image2D,
+                                         Bounds2D{m_swapChain.m_extent.width, m_swapChain.m_extent.height}, 1, 1, 1,
+                                         VK_IMAGE_TILING_LINEAR, VK_IMAGE_USAGE_TRANSFER_DST_BIT,
+                                         log_VulkanRenderSystem);
+
+  VkMemoryRequirements memRequirements;
+  vkGetImageMemoryRequirements(m_device, dstImage, &memRequirements);
+
+  VkPhysicalDeviceMemoryProperties memProperties;
+  vkGetPhysicalDeviceMemoryProperties(m_physicalDevice, &memProperties);
+
+  VkMemoryAllocateInfo allocInfo = {};
+  allocInfo.sType                = VK_STRUCTURE_TYPE_MEMORY_ALLOCATE_INFO;
+  allocInfo.allocationSize       = memRequirements.size;
+  allocInfo.memoryTypeIndex      = VkCore::FindMemoryType(memRequirements.memoryTypeBits,
+                                                          VK_MEMORY_PROPERTY_HOST_VISIBLE_BIT | VK_MEMORY_PROPERTY_HOST_COHERENT_BIT, memProperties);
+
+  VERIFY_VK_OP(log_VulkanRenderSystem, vkAllocateMemory(m_device, &allocInfo, nullptr, &dstMemory),
+    "Snapshot: Unable to allocate Texture Memory for snapshot");
+  VERIFY_VK_OP(log_VulkanRenderSystem, vkBindImageMemory(m_device, dstImage, dstMemory, 0),
+    "Snapshot: Failed to bind Image and Image Memory");
+
+  VkCommandBuffer snapshotCmdBuffer = VkCore::CreateCommandBuffer(m_device, m_graphicsCommandPool,
+                                                                  VK_COMMAND_BUFFER_LEVEL_PRIMARY,
+                                                                  log_VulkanRenderSystem);
+  VkCore::BeginCommandBuffer(snapshotCmdBuffer, VK_COMMAND_BUFFER_USAGE_ONE_TIME_SUBMIT_BIT, log_VulkanRenderSystem);
+
+  VkCore::TransitionImageLayout(
+                                snapshotCmdBuffer,
+                                dstImage,
+                                0,
+                                VK_ACCESS_TRANSFER_WRITE_BIT,
+                                VK_IMAGE_LAYOUT_UNDEFINED,
+                                VK_IMAGE_LAYOUT_TRANSFER_DST_OPTIMAL,
+                                VK_PIPELINE_STAGE_TRANSFER_BIT,
+                                VK_PIPELINE_STAGE_TRANSFER_BIT,
+                                VkImageSubresourceRange{VK_IMAGE_ASPECT_COLOR_BIT, 0, 1, 0, 1});
+
+  // Transition swapchain image from present to transfer source layout
+  VkCore::TransitionImageLayout(
+                                snapshotCmdBuffer,
+                                srcImage,
+                                VK_ACCESS_MEMORY_READ_BIT,
+                                VK_ACCESS_TRANSFER_READ_BIT,
+                                VK_IMAGE_LAYOUT_PRESENT_SRC_KHR,
+                                VK_IMAGE_LAYOUT_TRANSFER_SRC_OPTIMAL,
+                                VK_PIPELINE_STAGE_TRANSFER_BIT,
+                                VK_PIPELINE_STAGE_TRANSFER_BIT,
+                                VkImageSubresourceRange{VK_IMAGE_ASPECT_COLOR_BIT, 0, 1, 0, 1}
+                               );
+
+  if (supportsBlit) {
+    VkCore::ImageBlit(snapshotCmdBuffer, srcImage, dstImage, VK_IMAGE_ASPECT_COLOR_BIT, VK_IMAGE_ASPECT_COLOR_BIT,
+                      Bounds3D{m_swapChain.m_extent.width, m_swapChain.m_extent.height, 1});
+  } else {
+    VkCore::ImageCopy(snapshotCmdBuffer, srcImage, dstImage, VK_IMAGE_ASPECT_COLOR_BIT, VK_IMAGE_ASPECT_COLOR_BIT,
+                      {m_swapChain.m_extent.width, m_swapChain.m_extent.height, 1});
+  }
+
+  VkCore::TransitionImageLayout(
+    snapshotCmdBuffer,
+    dstImage,
+    VK_ACCESS_TRANSFER_WRITE_BIT,
+    VK_ACCESS_MEMORY_READ_BIT,
+    VK_IMAGE_LAYOUT_TRANSFER_DST_OPTIMAL,
+    VK_IMAGE_LAYOUT_GENERAL,
+    VK_PIPELINE_STAGE_TRANSFER_BIT,
+    VK_PIPELINE_STAGE_TRANSFER_BIT,
+    VkImageSubresourceRange{ VK_IMAGE_ASPECT_COLOR_BIT, 0, 1, 0, 1 }
+  );
+
+  // Transition source image back to its original layout
+  VkCore::TransitionImageLayout(
+    snapshotCmdBuffer,
+    srcImage,
+    VK_ACCESS_TRANSFER_READ_BIT,
+    VK_ACCESS_MEMORY_READ_BIT,
+    VK_IMAGE_LAYOUT_TRANSFER_SRC_OPTIMAL,
+    VK_IMAGE_LAYOUT_PRESENT_SRC_KHR,
+    VK_PIPELINE_STAGE_TRANSFER_BIT,
+    VK_PIPELINE_STAGE_TRANSFER_BIT,
+    VkImageSubresourceRange{ VK_IMAGE_ASPECT_COLOR_BIT, 0, 1, 0, 1 }
+  );
+
+  VkCore::FlushCommandBuffer(m_device, snapshotCmdBuffer, m_graphicsQueue, log_VulkanRenderSystem);
+  vkFreeCommandBuffers(m_device, m_graphicsCommandPool, 1, &snapshotCmdBuffer);
+
+  // Get layout of the image (including row pitch)
+  VkImageSubresource subResource { VK_IMAGE_ASPECT_COLOR_BIT, 0, 0 };
+  VkSubresourceLayout subResourceLayout;
+  vkGetImageSubresourceLayout(m_device, dstImage, &subResource, &subResourceLayout);
+
+  const char* data;
+  vkMapMemory(m_device, dstMemory, 0, VK_WHOLE_SIZE, 0, (void**)&data); // NOLINT
+  data += subResourceLayout.offset; // NOLINT
+
+  const U32 imageSize = m_swapChain.m_extent.width * m_swapChain.m_extent.height * (GetFormatSize(storageFormat));
+  std::vector<char> imageData(imageSize);
+
+  memcpy(imageData.data(), data, imageSize);
+
+  std::ofstream file(exportPath, std::ios::out | std::ios::binary);
+  file.write(&imageData[0], imageData.size());
+
+  // for (uint32_t y = 0; y < m_swapChain.m_extent.height; y++) 
+  // {
+  //   const auto* row = static_cast<const char*>(data); // NOLINT
+  //   for (uint32_t x = 0; x < m_swapChain.m_extent.width; x++) 
+  //   {
+  //     file.write(row, 3);
+  //     row++; // NOLINT
+  //   }
+  //
+  //   data += subResourceLayout.rowPitch; // NOLINT
+  // }
+
+  file.close();
+
+  vkUnmapMemory(m_device, dstMemory);
+  vkFreeMemory(m_device, dstMemory, nullptr);
+  vkDestroyImage(m_device, dstImage, nullptr);
+
+  LOG_INF(log_VulkanRenderSystem, LOG_LEVEL, "Snapshot Saved");
+  LOG_INF(log_VulkanRenderSystem, LOG_LEVEL, "Size: " + std::to_string(m_swapChain.m_extent.width) + "x" + std::to_string(m_swapChain.m_extent.height));
 }
 
 } // namespace Vulkan

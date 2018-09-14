@@ -42,5 +42,7 @@ CREATE_MAPPER_H(FrontFace, VkFrontFace);
 
 CREATE_MAPPER_H(BufferUsageRate, VkVertexInputRate);
 
+CREATE_MAPPER_H(ImageType, VkImageType);
+
 }  // namespace Vulkan
 }  // namespace Azura

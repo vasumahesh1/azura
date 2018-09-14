@@ -84,6 +84,13 @@ enum class DrawType
   InstancedIndexedIndirect
 };
 
+enum class ImageType
+{
+  Image1D,
+  Image2D,
+  Image3D
+};
+
 struct ShaderStageInfo {
   ShaderStage m_stage;
   String m_entryPoint;
@@ -112,6 +119,18 @@ struct BufferInfo {
   Slot m_slot;
 
   BufferInfo() : m_offset(0), m_byteSize(0), m_maxByteSize(0), m_slot() {}
+};
+
+struct LayerSubresource
+{
+  U32 m_layerCount{1};
+  U32 m_baseLayer{0};
+};
+
+struct TextureSubresource
+{
+  LayerSubresource m_layerInfo{};
+  U32 m_mipLevel{0};
 };
 
 }  // namespace Azura

@@ -166,6 +166,8 @@ def setCompileSettings():
 def addTargetCmakeArgs(cmakeArgs):
   if (buildArgs.includeTests):
     cmakeArgs.append("-DINCLUDE_TESTS=ON")
+  else:
+    cmakeArgs.append("-DINCLUDE_TESTS=OFF")
 
   if (buildArgs.target == 'Win64'):
     cmakeArgs.append("-DBUILD_TARGET=Win64")
