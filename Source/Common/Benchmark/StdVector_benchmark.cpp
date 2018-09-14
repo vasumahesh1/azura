@@ -90,7 +90,7 @@ BENCHMARK_F(VectorBenchmarkFixture, BM_EmptyCreation_ComplexType)(benchmark::Sta
 
 BENCHMARK_DEFINE_F(VectorBenchmarkFixture, BM_AllocateCreation)(benchmark::State& st) {
   for (auto _ : st) {
-    std::vector<int> v(st.range(0));
+    std::vector<int> v(U32(st.range(0)));
   }
 }
 BENCHMARK_REGISTER_F(VectorBenchmarkFixture, BM_AllocateCreation)->RangeMultiplier(2)->Range(8, 8 << 10);
@@ -98,7 +98,7 @@ BENCHMARK_REGISTER_F(VectorBenchmarkFixture, BM_AllocateCreation)->RangeMultipli
 BENCHMARK_DEFINE_F(VectorBenchmarkFixture, BM_InsertWithReserve)(benchmark::State& st) {
   for (auto _ : st) {
     std::vector<int> v;
-    v.reserve(st.range(0));
+    v.reserve(U32(st.range(0)));
 
     for (U32 i = 0; i < U32(st.range(0)); ++i)
     {
@@ -126,7 +126,7 @@ BENCHMARK_REGISTER_F(VectorBenchmarkFixture, BM_InsertWithReserve_Heavy)->RangeM
 
 BENCHMARK_DEFINE_F(VectorBenchmarkFixture, BM_SetWithResize)(benchmark::State& st) {
   for (auto _ : st) {
-    std::vector<int> v(st.range(0));
+    std::vector<int> v(U32(st.range(0)));
 
     for (U32 i = 0; i < U32(st.range(0)); ++i)
     {
