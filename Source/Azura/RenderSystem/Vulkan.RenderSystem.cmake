@@ -64,7 +64,7 @@ target_link_libraries(VulkanRenderSystem Common Log VULKAN_STATIC GLFW_STATIC)
 
 # -----------  Testing Target  -----------
 
-if (INCLUDE_TESTS)
+if (INCLUDE_TESTS OR PROJECT_BUILD)
   add_executable(
     VulkanRenderSystemTest
     "Test/test.cpp"
@@ -81,8 +81,8 @@ if (INCLUDE_TESTS)
     )
 
 
-  azurasilenceclangtidy(VulkanRenderSystemTest)
-  azuraaddunittest(VulkanRenderSystemTest)
+  AzuraSilenceClangTidy(VulkanRenderSystemTest)
+  AzuraAddGraphicsTest(VulkanRenderSystemTest)
   AzuraAddSPIRVShadersToTarget(VulkanRenderSystemTest ${VULKAN_SHADERS})
   AzuraSilenceWarningsForMathfu(VulkanRenderSystemTest)
 

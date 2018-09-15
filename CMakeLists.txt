@@ -21,7 +21,7 @@ set(CLANG_TIDY_EXECUTABLE ${CLANG_PATH}/bin/clang-tidy.exe
     FORCE)
 
 # Install GTest
-if (INCLUDE_TESTS)
+if (INCLUDE_TESTS OR PROJECT_BUILD)
   include("./GTest.cmake")
 endif()
 

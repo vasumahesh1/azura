@@ -21,10 +21,35 @@
 #include <boost/log/attributes/named_scope.hpp>
 
 #include "yaml-cpp/yaml.h"
+#include "Utils/Macros.h"
 
 namespace fs = boost::filesystem;
 
 namespace Azura {
+
+namespace {
+void OneTimeSetup(const YAML::Node& settingsNode, const boost::log::formatter& logFmt) {
+
+  const auto logKeyStreams         = settingsNode["Streams"];
+  const auto flushLogs             = settingsNode["AutoFlush"].as<bool>();
+  const String outputDir           = settingsNode["OutputDir"].as<String>();
+  const fs::path fileLogOutputPath = fs::path(outputDir);
+
+  for (YAML::const_iterator itr = logKeyStreams.begin(); itr != logKeyStreams.end(); ++itr) {
+    const String logKeyStream   = itr->as<String>();
+  
+    if (logKeyStream == "File") {
+      const fs::path finalPath = fileLogOutputPath / fs::path("DefaultStaticLog.log");
+      auto fsSink              = boost::log::add_file_log(finalPath.string());
+      fsSink->locked_backend()->auto_flush(flushLogs);
+      fsSink->set_formatter(logFmt);
+    } else if (logKeyStream == "Console") {
+      auto consoleSink = boost::log::add_console_log(std::clog);
+      consoleSink->set_formatter(logFmt);
+    }
+  }
+}
+} // namespace
 
 Log::Log(String key)
   : m_debugLevel(0),
@@ -52,47 +77,51 @@ Log::Log(String key)
     return;
   }
 
-  static const YAML::Node s_mainConfig = [&]() -> YAML::Node
-  {
-    YAML::Node mainConfig = YAML::LoadFile(fullPath.string());
-    if (!mainConfig) {
-      std::cout << "Invalid YAML in log.yml. \n";
-      return {};
-    }
-
-    return mainConfig;
-  }();
-
-  if (s_mainConfig.IsNull()) {
-    return;
-  }
-
-  boost::log::add_common_attributes();
-  boost::log::core::get()->add_global_attribute("Scope", boost::log::attributes::named_scope());
-
   try {
-    bool isActive = false;
-    YAML::Node logNode;
-    YAML::Node logStreamsNode = s_mainConfig["LogStreams"];
-    YAML::Node settingsNode   = s_mainConfig["Settings"];
-    const String outputDir   = settingsNode["OutputDir"].as<String>();
-    const auto flushLogs   = settingsNode["AutoFlush"].as<bool>();
+    boost::log::add_common_attributes();
+    boost::log::core::get()->add_global_attribute("Scope", boost::log::attributes::named_scope());
 
-    const fs::path fileLogOutputPath = fs::path(outputDir);
-
-    auto fmtTimeStamp = boost::log::expressions::format_date_time<boost::posix_time::ptime>("TimeStamp", "%Y-%m-%d %H:%M:%S.%f");
+    auto fmtTimeStamp = boost::log::expressions::format_date_time<boost::posix_time::ptime>("TimeStamp",
+                                                                                            "%Y-%m-%d %H:%M:%S.%f");
     auto fmtThreadId = boost::log::expressions::attr<boost::log::attributes::current_thread_id::value_type>("ThreadID");
     auto fmtSeverity = boost::log::expressions::attr<boost::log::trivial::severity_level>("Severity");
-    
-    auto fmtScope = boost::log::expressions::format_named_scope("Scope",
-      boost::log::keywords::format = "%n(%f:%l)",
-      boost::log::keywords::iteration = boost::log::expressions::reverse,
-      boost::log::keywords::depth = 2);
+
+    auto fmtScope = boost::log::
+      expressions::format_named_scope("Scope",
+                                      boost::log::keywords::format    = "%n(%f:%l)",
+                                      boost::log::keywords::iteration = boost::log::
+                                      expressions::reverse,
+                                      boost::log::keywords::depth = 2);
 
     const boost::log::formatter logFmt =
       boost::log::expressions::format("[%1%] (%2%) [%3%] [%4%] %5%")
       % fmtTimeStamp % fmtThreadId % fmtSeverity % fmtScope
       % boost::log::expressions::smessage;
+
+    static const YAML::Node s_mainConfig = [&]() -> YAML::Node
+    {
+      YAML::Node mainConfig = YAML::LoadFile(fullPath.string());
+      if (!mainConfig) {
+        std::cout << "Invalid YAML in log.yml. \n";
+        return {};
+      }
+
+      const YAML::Node settingsNode = mainConfig["Settings"];
+      OneTimeSetup(settingsNode, logFmt);
+
+      return mainConfig;
+    }();
+
+    if (s_mainConfig.IsNull()) {
+      return;
+    }
+
+    bool isActive   = false;
+    bool hasDefault = false;
+    YAML::Node logNode;
+    YAML::Node defaultLogNode;
+    YAML::Node logStreamsNode = s_mainConfig["LogStreams"];
+    YAML::Node settingsNode   = s_mainConfig["Settings"];
 
     // Format of Log Stream:
     //  Settings:
@@ -116,32 +145,23 @@ Log::Log(String key)
       if (m_key == activeLogKey) {
         logNode  = itr->second;
         isActive = true;
-        break;
+      } else if (activeLogKey == "Default") {
+        hasDefault     = true;
+        defaultLogNode = itr->second;
       }
     }
 
-    if (!isActive) {
+    if (!isActive && !hasDefault) {
       return;
     }
 
-    const auto levelString   = logNode["Levels"].as<String>();
-    const auto logKeyStreams = logNode["Streams"];
-
-    ParseLevelString(levelString);
-
-    for (YAML::const_iterator itr = logKeyStreams.begin(); itr != logKeyStreams.end(); ++itr) {
-      const String logKeyStream   = itr->as<String>();
-
-      if (logKeyStream == "File") {
-        const fs::path finalPath = fileLogOutputPath / fs::path(m_key + ".log");
-        auto fsSink = boost::log::add_file_log(finalPath.string());
-        fsSink->locked_backend()->auto_flush(flushLogs);
-        fsSink->set_formatter(logFmt);
-      } else if (logKeyStream == "Console") {
-        auto consoleSink = boost::log::add_console_log(std::clog);
-        consoleSink->set_formatter(logFmt);
-      }
+    // Take Default if present & key not present
+    if (!isActive && hasDefault) {
+      logNode = defaultLogNode;
     }
+
+    const auto levelString = logNode["Levels"].as<String>();
+    ParseLevelString(levelString);
 
     m_isReady = true;
   } catch (const std::runtime_error& error) {

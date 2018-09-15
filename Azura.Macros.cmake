@@ -68,8 +68,13 @@ endmacro(AzuraSilenceCRTSecureWarnings)
 
 macro(AzuraAddUnitTest TargetName)
   add_test(UnitTests ${TargetName})
-  target_compile_definitions(${TargetName} PUBLIC BUILD_UNIT_TEST=1)
+  target_compile_definitions(${TargetName} PUBLIC BUILD_UNIT_TEST=1 BUILD_TEST=1)
 endmacro(AzuraAddUnitTest)
+
+macro(AzuraAddGraphicsTest TargetName)
+  add_test(AutoGraphicsTests ${TargetName})
+  target_compile_definitions(${TargetName} PUBLIC BUILD_GRAPHICS_TEST=1 BUILD_TEST=1)
+endmacro(AzuraAddGraphicsTest)
 
 macro(AzuraAddLoggingSupport TargetName Level)
   target_compile_definitions(${TargetName} PUBLIC LOG_LEVEL=${Level})
