@@ -501,6 +501,7 @@ String VkRenderer::GetRenderingAPI() const {
 }
 
 void VkRenderer::Submit() {
+  STACK_ALLOCATOR(Temporary, Memory::MonotonicAllocator, 1024);
   m_primaryCommandBuffers.Resize(m_frameBuffers.GetSize());
   VkCore::CreateCommandBuffers(m_device, m_graphicsCommandPool, VK_COMMAND_BUFFER_LEVEL_PRIMARY,
                                m_primaryCommandBuffers, log_VulkanRenderSystem);
@@ -509,8 +510,10 @@ void VkRenderer::Submit() {
 
   const VkClearValue clearValue = {clearColor[0], clearColor[1], clearColor[2], clearColor[3]};
 
+  Vector<VkCommandBuffer> secondaryBuffers(m_drawablePools.GetSize(), allocatorTemporary);
   for (auto& drawablePool : m_drawablePools) {
     drawablePool.Submit();
+    secondaryBuffers.PushBack(drawablePool.GetCommandBuffer());
   }
 
   for (U32 idx                = 0; idx < m_primaryCommandBuffers.GetSize(); ++idx) {
@@ -528,9 +531,7 @@ void VkRenderer::Submit() {
 
     vkCmdBeginRenderPass(commandBuffer, &renderPassInfo, VK_SUBPASS_CONTENTS_SECONDARY_COMMAND_BUFFERS);
 
-    for (auto& drawablePool : m_drawablePools) {
-      vkCmdExecuteCommands(commandBuffer, 1, &drawablePool.GetCommandBuffer());
-    }
+    vkCmdExecuteCommands(commandBuffer, secondaryBuffers.GetSize(), secondaryBuffers.Data());
 
     vkCmdEndRenderPass(commandBuffer);
 
