@@ -1,5 +1,13 @@
 cmake_minimum_required(VERSION 3.11 FATAL_ERROR)
 
+project(Mundus)
+
+# The term "Mundus" is Latin for "world" or "universe."
+#
+# Mundus is the plane or realm of existence that encompasses Nirn,
+# its moons, and attendant Aedric planets. It is surrounded by Oblivion
+# and Oblivion is surrounded by Aetherius.
+
 set(CMAKE_CXX_STANDARD 17)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
 set(CMAKE_CXX_EXTENSIONS OFF)

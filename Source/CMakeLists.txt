@@ -1,3 +1,5 @@
+project(Azura)
+
 set(BOOST_VERSION 1.67.0 CACHE STRING "" FORCE)
 
 message(STATUS "Build Target: ${BUILD_TARGET}")
@@ -14,6 +16,7 @@ add_subdirectory(Common)
 add_subdirectory(Azura)
 add_subdirectory(Samples)
 add_subdirectory(Log)
+add_subdirectory(Math)
 
 if(DEFINED FORCE_INCLUDE_SUB_DIRECTORIES)
 	foreach(dir ${FORCE_INCLUDE_SUB_DIRECTORIES})

@@ -93,5 +93,5 @@ if (INCLUDE_TESTS)
                 ${PROJECT_SOURCE_DIR}/Test/ReferenceImages/
                 ${PROJECT_BINARY_DIR}/ReferenceImages/)
 
-  target_link_libraries(VulkanRenderSystemTest VulkanRenderSystem Log GLFW_STATIC MathFu gtest_main)
+  target_link_libraries(VulkanRenderSystemTest VulkanRenderSystem Log Math GLFW_STATIC gtest_main)
 endif()

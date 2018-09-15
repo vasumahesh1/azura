@@ -3,6 +3,7 @@
 #include "Generic/Shader.h"
 #include "Memory/MonotonicAllocator.h"
 #include "Memory/MemoryFactory.h"
+#include "Math/Transform.h"
 
 using namespace Azura;             // NOLINT
 using namespace Azura::Containers; // NOLINT
@@ -61,11 +62,9 @@ void RenderTestCases::ExecuteBasicRenderTest(Azura::Renderer& renderer,
   }, allocatorTemporary);
 
   UniformBufferData uboData = {};
-  uboData.m_model           = mathfu::Matrix<float, 4, 4>::Identity();
-  uboData.m_view            = mathfu::Matrix<float, 4, 4>::LookAt(mathfu::Vector<float, 3>(0.5f, 0.5f, 0.0f),
-                                                                  mathfu::Vector<float, 3>(0.5f, 0.5f, -6.0f),
-                                                                  mathfu::Vector<float, 3>(0.0f, 1.0f, 0.0f), -1.0f);
-  uboData.m_proj = mathfu::Matrix<float, 4, 4>::Perspective(45.0f, 16.0f / 9.0f, 0.1f, 100.0f, -1.0f);
+  uboData.m_model = Matrix4f::Identity();
+  uboData.m_view = Transform::LookAt(Vector3f(0.5f, 0.5f, 0.0f), Vector3f(0.5f, 0.5f, -6.0f), Vector3f(0.0f, 1.0f, 0.0f));
+  uboData.m_proj = Transform::Perspective(45.0f, 16.0f / 9.0f, 0.1f, 100.0f);
 
   const auto bufferStart      = reinterpret_cast<U8*>(vertexData.Data()); // NOLINT
   const auto indexBufferStart = reinterpret_cast<U8*>(indexData.Data());  // NOLINT

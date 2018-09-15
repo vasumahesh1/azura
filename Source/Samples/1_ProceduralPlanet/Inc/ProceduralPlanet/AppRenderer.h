@@ -5,15 +5,15 @@
 #include "Memory/RangeAllocator.h"
 #include "Memory/HeapMemoryBuffer.h"
 
-#include "mathfu/matrix.h"
 #include "Log/Log.h"
+#include "Math/Core.h"
 
 namespace Azura {
 struct UniformBufferData
 {
-  mathfu::Matrix<float, 4, 4> m_model;
-  mathfu::Matrix<float, 4, 4> m_view;
-  mathfu::Matrix<float, 4, 4> m_proj;
+  Matrix4f m_model;
+  Matrix4f m_view;
+  Matrix4f m_proj;
 };
 
 class AppRenderer {

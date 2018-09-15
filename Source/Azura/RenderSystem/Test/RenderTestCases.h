@@ -1,12 +1,13 @@
 #pragma once
 #include "Generic/Renderer.h"
-#include <mathfu/matrix.h>
+#include "Math/Core.h"
+
 
 struct UniformBufferData
 {
-  mathfu::Matrix<float, 4, 4> m_model;
-  mathfu::Matrix<float, 4, 4> m_view;
-  mathfu::Matrix<float, 4, 4> m_proj;
+  Azura::Matrix4f m_model;
+  Azura::Matrix4f m_view;
+  Azura::Matrix4f m_proj;
 };
 
 namespace Azura {

@@ -4,6 +4,7 @@
 #include "Generic/Shader.h"
 #include "Memory/MemoryFactory.h"
 #include "Memory/MonotonicAllocator.h"
+#include "Math/Transform.h"
 
 namespace Azura {
 using namespace Containers; // NOLINT
@@ -44,9 +45,9 @@ void AppRenderer::Initialize() {
   const int uboBinding = 0;
 
   UniformBufferData uboData = {};
-  uboData.m_model = mathfu::Matrix<float, 4, 4>::Identity();
-  uboData.m_view = mathfu::Matrix<float, 4, 4>::LookAt(mathfu::Vector<float, 3>(0.5f, 0.5f, 0.0f), mathfu::Vector<float, 3>(0.5f, 0.5f, -6.0f), mathfu::Vector<float, 3>(0.0f, 1.0f, 0.0f), -1.0f);
-  uboData.m_proj = mathfu::Matrix<float, 4, 4>::Perspective(45.0f, 16.0f / 9.0f, 0.1f, 100.0f, -1.0f);
+  uboData.m_model = Matrix4f::Identity();
+  uboData.m_view = Transform::LookAt(Vector3f(0.5f, 0.5f, 0.0f), Vector3f(0.5f, 0.5f, -6.0f), Vector3f(0.0f, 1.0f, 0.0f));
+  uboData.m_proj = Transform::Perspective(45.0f, 16.0f / 9.0f, 0.1f, 100.0f);
 
   // TODO(vasumahesh1):[Q]:Allocator?
   ApplicationRequirements applicationRequirements(m_mainAllocator);
@@ -134,13 +135,7 @@ void AppRenderer::WindowUpdate() {
 
 void AppRenderer::Run() const {
   LOG_INF(log_AppRenderer, LOG_LEVEL, "Running AppRenderer");
-  m_renderer->RenderFrame();
-  // m_renderer->RenderFrame();
-  // m_renderer->RenderFrame();
-  // m_renderer->RenderFrame();
-  // m_renderer->SnapshotFrame("./temp.data");
-
-  // m_window->StartListening();
+  m_window->StartListening();
 }
 
 void AppRenderer::Destroy() const {
