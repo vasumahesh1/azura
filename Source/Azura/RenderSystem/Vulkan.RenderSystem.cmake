@@ -59,7 +59,7 @@ target_compile_definitions(VulkanRenderSystem PUBLIC API_VULKAN=1)
 target_include_directories(VulkanRenderSystem
                            PUBLIC ${BOOST_ROOT}/ ${PROJECT_SOURCE_DIR}/Inc)
 
-target_link_libraries(VulkanRenderSystem Common Log VULKAN_STATIC GLFW_STATIC)
+target_link_libraries(VulkanRenderSystem Common Log VULKAN_STATIC glfw)
 
 
 # -----------  Testing Target  -----------
@@ -92,5 +92,5 @@ if (INCLUDE_TESTS OR PROJECT_BUILD)
                 ${PROJECT_SOURCE_DIR}/Test/ReferenceImages/
                 ${PROJECT_BINARY_DIR}/ReferenceImages/)
 
-  target_link_libraries(VulkanRenderSystemTest VulkanRenderSystem Log Math GLFW_STATIC gtest_main)
+  target_link_libraries(VulkanRenderSystemTest VulkanRenderSystem Log Math glfw gtest_main)
 endif()

@@ -20,4 +20,4 @@ add_executable(ProceduralPlanet ${SOURCES})
 AzuraAddSPIRVShadersToTarget(ProceduralPlanet ${VULKAN_SHADERS})
 
 target_include_directories(ProceduralPlanet PUBLIC ${PROJECT_SOURCE_DIR}/Inc)
-target_link_libraries(ProceduralPlanet VulkanRenderSystem Log GLFW_STATIC Math)
+target_link_libraries(ProceduralPlanet VulkanRenderSystem Log glfw Math)

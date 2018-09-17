@@ -23,3 +23,17 @@ add_subdirectory(benchmark)
 AzuraSilenceClangTidy(benchmark)
 AzuraSilenceEnumGuard(benchmark)
 AzuraEnableWarningsAsErrors()
+
+
+# GLFW
+AzuraDisableWarningsAsErrors()
+set(BUILD_SHARED_LIBS OFF CACHE BOOL "Build shared libraries" FORCE)
+set(GLFW_BUILD_EXAMPLES OFF CACHE BOOL "Build the GLFW example programs" FORCE)
+set(GLFW_BUILD_TESTS OFF CACHE BOOL "Build the GLFW test programs" FORCE)
+set(GLFW_BUILD_DOCS OFF CACHE BOOL "Build the GLFW documentation" FORCE)
+set(GLFW_INSTALL OFF CACHE BOOL "Generate installation target" FORCE)
+set(GLFW_VULKAN_STATIC ON CACHE BOOL "Use the Vulkan loader statically linked into application" FORCE)
+add_subdirectory(glfw)
+AzuraSilenceClangTidy(glfw)
+AzuraSilenceEnumGuard(glfw)
+AzuraEnableWarningsAsErrors()
