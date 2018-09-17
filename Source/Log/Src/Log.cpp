@@ -25,6 +25,8 @@
 
 namespace fs = boost::filesystem;
 
+const int DEFAULT_LOG_BUFFER_SIZE = 4096;
+
 namespace Azura {
 
 namespace {
@@ -58,7 +60,8 @@ Log::Log(String key)
     m_errorLevel(0),
     m_fatalLevel(0),
     m_key(std::move(key)),
-    m_isReady(false) {
+    m_isReady(false),
+    m_temporaryBuffer(4096) {
 
   const char* configEnv = std::getenv("AZURA_CONFIG");
   if (configEnv == nullptr) {
@@ -206,44 +209,74 @@ void Log::ParseLevelString(const String& levelStr) {
   }
 }
 
-void Log::Debug(U32 level, const String& str) const {
+void Log::Debug(U32 level, const char* fmt, ...) const {
   if (!m_isReady || level < m_debugLevel) {
     return;
   }
 
-  BOOST_LOG_TRIVIAL(debug) << str.c_str();
+  va_list arg;
+  va_start(arg, fmt);
+  const int bufferLength = std::min(1 + std::vsnprintf(nullptr, 0, fmt, arg), DEFAULT_LOG_BUFFER_SIZE);
+  std::vsnprintf(const_cast<char *>(m_temporaryBuffer.data()), bufferLength, fmt, arg);
+  va_end(arg);
+
+  BOOST_LOG_TRIVIAL(debug) << m_temporaryBuffer.data();
 }
 
-void Log::Info(U32 level, const String& str) const {
+void Log::Info(U32 level, const char* fmt, ...) const {
   if (!m_isReady || level < m_infoLevel) {
     return;
   }
 
-  BOOST_LOG_TRIVIAL(info) << str.c_str();
+  va_list arg;
+  va_start(arg, fmt);
+  const int bufferLength = std::min(1 + std::vsnprintf(nullptr, 0, fmt, arg), DEFAULT_LOG_BUFFER_SIZE);
+  std::vsnprintf(const_cast<char *>(m_temporaryBuffer.data()), bufferLength, fmt, arg);
+  va_end(arg);
+
+  BOOST_LOG_TRIVIAL(info) << m_temporaryBuffer.data();
 }
 
 
-void Log::Warning(U32 level, const String& str) const {
+void Log::Warning(U32 level, const char* fmt, ...) const {
   if (!m_isReady || level < m_warningLevel) {
     return;
   }
 
-  BOOST_LOG_TRIVIAL(warning) << str.c_str();
+  va_list arg;
+  va_start(arg, fmt);
+  const int bufferLength = std::min(1 + std::vsnprintf(nullptr, 0, fmt, arg), DEFAULT_LOG_BUFFER_SIZE);
+  std::vsnprintf(const_cast<char *>(m_temporaryBuffer.data()), bufferLength, fmt, arg);
+  va_end(arg);
+
+  BOOST_LOG_TRIVIAL(warning) << m_temporaryBuffer.data();
 }
 
-void Log::Error(U32 level, const String& str) const {
+void Log::Error(U32 level, const char* fmt, ...) const {
   if (!m_isReady || level < m_errorLevel) {
     return;
   }
 
-  BOOST_LOG_TRIVIAL(error) << str.c_str();
+  va_list arg;
+  va_start(arg, fmt);
+  const int bufferLength = std::min(1 + std::vsnprintf(nullptr, 0, fmt, arg), DEFAULT_LOG_BUFFER_SIZE);
+  std::vsnprintf(const_cast<char *>(m_temporaryBuffer.data()), bufferLength, fmt, arg);
+  va_end(arg);
+
+  BOOST_LOG_TRIVIAL(error) << m_temporaryBuffer.data();
 }
 
-void Log::Fatal(U32 level, const String& str) const {
+void Log::Fatal(U32 level, const char* fmt, ...) const {
   if (!m_isReady || level < m_fatalLevel) {
     return;
   }
 
-  BOOST_LOG_TRIVIAL(fatal) << str.c_str();
+  va_list arg;
+  va_start(arg, fmt);
+  const int bufferLength = std::min(1 + std::vsnprintf(nullptr, 0, fmt, arg), DEFAULT_LOG_BUFFER_SIZE);
+  std::vsnprintf(const_cast<char *>(m_temporaryBuffer.data()), bufferLength, fmt, arg);
+  va_end(arg);
+
+  BOOST_LOG_TRIVIAL(fatal) << m_temporaryBuffer.data();
 }
 } // namespace Azura

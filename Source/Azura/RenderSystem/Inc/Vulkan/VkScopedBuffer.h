@@ -12,9 +12,9 @@ class VkScopedBuffer {
                  VkBufferUsageFlags usage,
                  U32 bufferSize,
                  VkMemoryPropertyFlags memoryProperties,
-                 const VkPhysicalDeviceMemoryProperties& phyDeviceMemoryProperties, Log logger);
+                 const VkPhysicalDeviceMemoryProperties& phyDeviceMemoryProperties, const Log& logger);
 
-  VkScopedBuffer(Log logger);
+  VkScopedBuffer(const Log& logger);
 
   void Create(VkDevice device,
               VkBufferUsageFlags usage,

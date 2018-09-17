@@ -10,13 +10,13 @@ VkScopedBuffer::VkScopedBuffer(VkDevice device,
                                const U32 bufferSize,
                                const VkMemoryPropertyFlags memoryProperties,
                                const VkPhysicalDeviceMemoryProperties& phyDeviceMemoryProperties,
-                               Log logger)
+  const Log& logger)
   : m_device(device),
     log_VulkanRenderSystem(std::move(logger)) {
   Create(device, usage, bufferSize, memoryProperties, phyDeviceMemoryProperties);
 }
 
-VkScopedBuffer::VkScopedBuffer(Log logger)
+VkScopedBuffer::VkScopedBuffer(const Log& logger)
   : m_device(), log_VulkanRenderSystem(std::move(logger)) {
 }
 

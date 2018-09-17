@@ -160,6 +160,8 @@ VkSurfaceFormatKHR ChooseSwapSurfaceFormat(const Containers::Vector<VkSurfaceFor
 
   // no preferred format
   if (availableFormats.GetSize() == 1 && availableFormats[0].format == VK_FORMAT_UNDEFINED) {
+    LOG_DBG(log_VulkanRenderSystem, LOG_LEVEL, "Only 1 available image format available");
+
     return {format.value(), colorSpace.value()};
   }
 

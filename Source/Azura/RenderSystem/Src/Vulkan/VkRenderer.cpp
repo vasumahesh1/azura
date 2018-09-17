@@ -752,8 +752,7 @@ void VkRenderer::SnapshotFrame(const String& exportPath) const {
   vkFreeMemory(m_device, dstMemory, nullptr);
   vkDestroyImage(m_device, dstImage, nullptr);
 
-  LOG_INF(log_VulkanRenderSystem, LOG_LEVEL, "Snapshot Saved");
-  LOG_INF(log_VulkanRenderSystem, LOG_LEVEL, "Size: " + std::to_string(m_swapChain.m_extent.width) + "x" + std::to_string(m_swapChain.m_extent.height));
+  LOG_INF(log_VulkanRenderSystem, LOG_LEVEL, "Snapshot Saved: Size: %d x %d", m_swapChain.m_extent.width, m_swapChain.m_extent.height);
 }
 
 } // namespace Vulkan
