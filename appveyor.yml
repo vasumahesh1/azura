@@ -14,12 +14,6 @@ environment:
   CMAKE_11_4_URL: https://cmake.org/files/v3.11/cmake-3.11.4-win64-x64.zip
 
   matrix:
-    - BUILD: 'DEBUG'
-      TARGET: 'Win64'
-
-    - BUILD: 'DEBUG'
-      TARGET: 'Win32'
-
     - BUILD: 'RELEASE'
       TARGET: 'Win64'
 
@@ -62,16 +56,5 @@ after_test:
 cache:
   - C:\AppveyorCache\ -> .cicache
 
-# artifacts:
-#   # pushing a single file
-#   - path: test.zip
-
-#   # pushing a single file with environment variable in path and "Deployment name" specified
-#   - path: MyProject\bin\$(configuration)
-#     name: myapp
-
-#   # pushing entire folder as a zip archive
-#   - path: logs
-
-#   # pushing all *.nupkg files in build directory recursively
-#   - path: '**\*.nupkg'
+artifacts:
+  - path: C:\AzuraLogs\

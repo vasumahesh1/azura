@@ -19,5 +19,7 @@ add_executable(ProceduralPlanet ${SOURCES})
 
 AzuraAddSPIRVShadersToTarget(ProceduralPlanet ${VULKAN_SHADERS})
 
+set_target_properties(ProceduralPlanet PROPERTIES LINK_FLAGS "/DEFAULTLIB:MSVCRT")
+
 target_include_directories(ProceduralPlanet PUBLIC ${PROJECT_SOURCE_DIR}/Inc)
 target_link_libraries(ProceduralPlanet VulkanRenderSystem Log GLFW_STATIC Math)

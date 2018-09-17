@@ -64,12 +64,12 @@ void AppRenderer::Initialize() {
   m_renderer->SetDrawablePoolCount(1);
 
   auto vertShader = RenderSystem::
-    CreateShader(*m_renderer, "Shaders/" + m_renderer->GetRenderingAPI() + "/test.vertex", log_AppRenderer);
+    CreateShader(*m_renderer, "Shaders/" + m_renderer->GetRenderingAPI() + "/RenderSystemTest.vertex", log_AppRenderer);
   vertShader->SetStage(ShaderStage::Vertex);
 
 
   auto pixelShader = RenderSystem::
-    CreateShader(*m_renderer, "Shaders/" + m_renderer->GetRenderingAPI() + "/test.pixel", log_AppRenderer);
+    CreateShader(*m_renderer, "Shaders/" + m_renderer->GetRenderingAPI() + "/RenderSystemTest.pixel", log_AppRenderer);
   pixelShader->SetStage(ShaderStage::Pixel);
 
   DrawablePoolCreateInfo poolInfo = {};

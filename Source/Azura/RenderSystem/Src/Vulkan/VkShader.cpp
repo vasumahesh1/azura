@@ -12,10 +12,11 @@ namespace Vulkan {
 
 namespace {
 const String SPRIV_EXT = "spv";
-}  // namespace
+} // namespace
 
-VkShader::VkShader(VkDevice device, const String& fileName, Log logger)
-    : Shader(fileName, SPRIV_EXT), log_VulkanRenderSystem(std::move(logger)) {
+VkShader::VkShader(VkDevice device, const String& fileName, const Log& logger) // NOLINT
+  : Shader(fileName, SPRIV_EXT),
+    log_VulkanRenderSystem(logger) {
   HEAP_ALLOCATOR(Temporary, Memory::MonotonicAllocator, 8192);
 
   const auto fileContents = FileReader::GetFileContents(GetFilePath(), allocatorTemporary);
@@ -39,5 +40,5 @@ void VkShader::CleanUp(VkDevice device) const {
   vkDestroyShaderModule(device, m_module, nullptr);
 }
 
-}  // namespace Vulkan
-}  // namespace Azura
+} // namespace Vulkan
+} // namespace Azura

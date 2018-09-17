@@ -109,6 +109,9 @@ bool CheckDeviceExtensionSupport(VkPhysicalDevice device) {
 
 void LogDeviceFeatures(VkPhysicalDeviceFeatures features, const Log& log_VulkanRenderSystem)
 {
+  UNUSED(features);
+  UNUSED(log_VulkanRenderSystem);
+
   LOG_DBG(log_VulkanRenderSystem, LOG_LEVEL, "Robust Buffer Access: %d", features.robustBufferAccess);
   LOG_DBG(log_VulkanRenderSystem, LOG_LEVEL, "Full Draw Index Uint32: %d", features.fullDrawIndexUint32);
   LOG_DBG(log_VulkanRenderSystem, LOG_LEVEL, "Image Cube Array: %d", features.imageCubeArray);
@@ -231,8 +234,6 @@ VkSurfaceFormatKHR ChooseSwapSurfaceFormat(const Containers::Vector<VkSurfaceFor
 
   // no preferred format
   if (availableFormats.GetSize() == 1 && availableFormats[0].format == VK_FORMAT_UNDEFINED) {
-    LOG_DBG(log_VulkanRenderSystem, LOG_LEVEL, "Only 1 available image format available");
-
     return {format.value(), colorSpace.value()};
   }
 
@@ -341,6 +342,8 @@ VkInstance VkCore::CreateInstance(const ApplicationInfo& applicationData,
   LOG_DBG(log_VulkanRenderSystem, LOG_LEVEL, "Instance Creation: Loading Device Extensions");
   for(const auto& extension : vkExtensions)
   {
+    // TODO(vasumahesh1):[PERF]: Check compiler optimization here
+    UNUSED(extension);
     LOG_DBG(log_VulkanRenderSystem, LOG_LEVEL, "= Instance Extensions: %s", extension);
   }
 
@@ -367,6 +370,8 @@ VkQueueIndices VkCore::FindQueueFamiliesInDevice(VkPhysicalDevice device,
                                                  const Log& log_VulkanRenderSystem) {
   VkQueueIndices result;
   result.m_isTransferQueueRequired = requirements.m_transferQueue;
+
+  UNUSED(log_VulkanRenderSystem);
 
   const U32 maxQueueFamilies = 4;
   STACK_ALLOCATOR(QueueFamily, Memory::MonotonicAllocator, sizeof(VkQueueFamilyProperties) * maxQueueFamilies)
@@ -527,6 +532,8 @@ VkDevice VkCore::CreateLogicalDevice(VkPhysicalDevice physicalDevice,
   LOG_DBG(log_VulkanRenderSystem, LOG_LEVEL, "Device Creation: Loading Device Extensions");
   for(const auto& extension : DEVICE_EXTENSIONS)
   {
+    // TODO(vasumahesh1):[PERF]: Check compiler optimization here
+    UNUSED(extension);
     LOG_DBG(log_VulkanRenderSystem, LOG_LEVEL, "= Device Extensions: %s", extension);
   }
 

@@ -80,7 +80,6 @@ if (INCLUDE_TESTS OR PROJECT_BUILD)
         "${PROJECT_SOURCE_DIR}/Test/Shaders/Vulkan/RenderSystemTest.pixel|-S frag"
     )
 
-
   AzuraSilenceClangTidy(VulkanRenderSystemTest)
   AzuraAddGraphicsTest(VulkanRenderSystemTest)
   AzuraAddSPIRVShadersToTarget(VulkanRenderSystemTest ${VULKAN_SHADERS})
