@@ -72,10 +72,10 @@ bool CompareImageBytes(const String& referenceFile, const String& testFile)
 }
 
 TEST_F(RendererTest, BasicRenderTest) {
-  HeapMemoryBuffer mainBuffer(4096 * 4);
+  HeapMemoryBuffer mainBuffer(16384);
 
-  RangeAllocator mainAllocator(mainBuffer, 2048);
-  RangeAllocator drawableAllocator(mainBuffer, 2048);
+  RangeAllocator mainAllocator(mainBuffer, 8192);
+  RangeAllocator drawableAllocator(mainBuffer, 8192);
 
   const auto window = CreateDefaultWindow();
   const auto renderer = CreateDefaultRenderer(*window, mainAllocator, drawableAllocator);

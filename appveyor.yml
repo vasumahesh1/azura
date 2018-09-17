@@ -14,6 +14,12 @@ environment:
   CMAKE_11_4_URL: https://cmake.org/files/v3.11/cmake-3.11.4-win64-x64.zip
 
   matrix:
+    - BUILD: 'DEBUG'
+      TARGET: 'Win64'
+
+    - BUILD: 'DEBUG'
+      TARGET: 'Win32'
+
     - BUILD: 'RELEASE'
       TARGET: 'Win64'
 

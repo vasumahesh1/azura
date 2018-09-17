@@ -36,7 +36,11 @@ void* MonotonicAllocator::Allocate(U32 size, U32 alignment) {
   assert((alignment & (alignment - 1)) == 0);
 
   const SizeType alignedSize = AlignAhead(size, alignment);
-  assert(Size() - (m_headPtr - BasePtr()) >= alignedSize);
+
+  if (Size() - (m_headPtr - BasePtr()) < alignedSize)
+  {
+    return nullptr;
+  }
 
   const SizeType mask     = alignment - 1;
   const UPTR misalignment = (m_headPtr & mask);

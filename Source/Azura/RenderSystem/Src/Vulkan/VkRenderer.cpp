@@ -342,7 +342,7 @@ VkRenderer::VkRenderer(const ApplicationInfo& appInfo,
     m_mainAllocator(mainAllocator),
     m_drawPoolAllocator(drawAllocator),
     log_VulkanRenderSystem(Log("VulkanRenderSystem")) {
-  STACK_ALLOCATOR(Temporary, Memory::MonotonicAllocator, 16384);
+  HEAP_ALLOCATOR(Temporary, Memory::MonotonicAllocator, 16384);
 
   Vector<const char*> extensions(4, allocatorTemporary);
   VkPlatform::GetInstanceExtensions(extensions);

@@ -15,14 +15,14 @@ struct Vertex {
 };
 
 AppRenderer::AppRenderer()
-  : m_mainBuffer(4096 * 4),
-    m_mainAllocator(m_mainBuffer, 2048),
-    m_drawableAllocator(m_mainBuffer, 2048),
+  : m_mainBuffer(16384),
+    m_mainAllocator(m_mainBuffer, 8192),
+    m_drawableAllocator(m_mainBuffer, 8192),
     log_AppRenderer(Log("AppRenderer")) {
 }
 
 void AppRenderer::Initialize() {
-  STACK_ALLOCATOR(Temporary, Memory::MonotonicAllocator, 1024);
+  STACK_ALLOCATOR(Temporary, Memory::MonotonicAllocator, 2048);
   m_window = RenderSystem::CreateApplicationWindow("ProceduralPlanet", 1280, 720);
 
   m_window->SetUpdateCallback([this] ()
@@ -64,12 +64,12 @@ void AppRenderer::Initialize() {
   m_renderer->SetDrawablePoolCount(1);
 
   auto vertShader = RenderSystem::
-    CreateShader(*m_renderer, "Shaders/" + m_renderer->GetRenderingAPI() + "/RenderSystemTest.vertex", log_AppRenderer);
+    CreateShader(*m_renderer, "Shaders/" + m_renderer->GetRenderingAPI() + "/Terrain.vertex", log_AppRenderer);
   vertShader->SetStage(ShaderStage::Vertex);
 
 
   auto pixelShader = RenderSystem::
-    CreateShader(*m_renderer, "Shaders/" + m_renderer->GetRenderingAPI() + "/RenderSystemTest.pixel", log_AppRenderer);
+    CreateShader(*m_renderer, "Shaders/" + m_renderer->GetRenderingAPI() + "/Terrain.pixel", log_AppRenderer);
   pixelShader->SetStage(ShaderStage::Pixel);
 
   DrawablePoolCreateInfo poolInfo = {};

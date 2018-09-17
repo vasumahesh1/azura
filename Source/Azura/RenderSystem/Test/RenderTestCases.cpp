@@ -16,7 +16,7 @@ struct Vertex {
 void RenderTestCases::ExecuteBasicRenderTest(Azura::Renderer& renderer,
                                              Azura::Window& window,
                                              const Azura::Log& log_TestCase) {
-  STACK_ALLOCATOR(Temporary, Memory::MonotonicAllocator, 1024);
+  HEAP_ALLOCATOR(Temporary, Memory::MonotonicAllocator, 16384);
   UNUSED(window);
 
   renderer.SetDrawablePoolCount(1);

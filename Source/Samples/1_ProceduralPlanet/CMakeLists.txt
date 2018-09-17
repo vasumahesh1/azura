@@ -11,15 +11,13 @@ set(
 
 set(
   VULKAN_SHADERS
-    "${PROJECT_SOURCE_DIR}/Shaders/Vulkan/test.vertex|-S vert"
-    "${PROJECT_SOURCE_DIR}/Shaders/Vulkan/test.pixel|-S frag"
+    "${PROJECT_SOURCE_DIR}/Shaders/Vulkan/Terrain.vertex|-S vert"
+    "${PROJECT_SOURCE_DIR}/Shaders/Vulkan/Terrain.pixel|-S frag"
 )
 
 add_executable(ProceduralPlanet ${SOURCES})
 
 AzuraAddSPIRVShadersToTarget(ProceduralPlanet ${VULKAN_SHADERS})
-
-set_target_properties(ProceduralPlanet PROPERTIES LINK_FLAGS "/DEFAULTLIB:MSVCRT")
 
 target_include_directories(ProceduralPlanet PUBLIC ${PROJECT_SOURCE_DIR}/Inc)
 target_link_libraries(ProceduralPlanet VulkanRenderSystem Log GLFW_STATIC Math)
