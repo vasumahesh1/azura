@@ -356,7 +356,7 @@ VkRenderer::VkRenderer(const ApplicationInfo& appInfo,
 
   m_physicalDevice = VkCore::SelectPhysicalDevice(m_instance, m_surface, GetDeviceRequirements(),
                                                   log_VulkanRenderSystem);
-  m_queueIndices = VkCore::FindQueueFamiliesInDevice(m_physicalDevice, m_surface, GetDeviceRequirements());
+  m_queueIndices = VkCore::FindQueueFamiliesInDevice(m_physicalDevice, m_surface, GetDeviceRequirements(), log_VulkanRenderSystem);
   m_device       = VkCore::CreateLogicalDevice(m_physicalDevice, m_queueIndices, GetDeviceRequirements(),
                                                log_VulkanRenderSystem);
 

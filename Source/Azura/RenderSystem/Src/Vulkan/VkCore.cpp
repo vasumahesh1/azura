@@ -107,17 +107,86 @@ bool CheckDeviceExtensionSupport(VkPhysicalDevice device) {
   return true;
 }
 
+void LogDeviceFeatures(VkPhysicalDeviceFeatures features, const Log& log_VulkanRenderSystem)
+{
+  LOG_DBG(log_VulkanRenderSystem, LOG_LEVEL, "Robust Buffer Access: %d", features.robustBufferAccess);
+  LOG_DBG(log_VulkanRenderSystem, LOG_LEVEL, "Full Draw Index Uint32: %d", features.fullDrawIndexUint32);
+  LOG_DBG(log_VulkanRenderSystem, LOG_LEVEL, "Image Cube Array: %d", features.imageCubeArray);
+  LOG_DBG(log_VulkanRenderSystem, LOG_LEVEL, "Independent Blend: %d", features.independentBlend);
+  LOG_DBG(log_VulkanRenderSystem, LOG_LEVEL, "Geometry Shader: %d", features.geometryShader);
+  LOG_DBG(log_VulkanRenderSystem, LOG_LEVEL, "Tessellation Shader: %d", features.tessellationShader);
+  LOG_DBG(log_VulkanRenderSystem, LOG_LEVEL, "Sample Rate Shading: %d", features.sampleRateShading);
+  LOG_DBG(log_VulkanRenderSystem, LOG_LEVEL, "Dual Src Blend: %d", features.dualSrcBlend);
+  LOG_DBG(log_VulkanRenderSystem, LOG_LEVEL, "Logic Op: %d", features.logicOp);
+  LOG_DBG(log_VulkanRenderSystem, LOG_LEVEL, "Multi Draw Indirect: %d", features.multiDrawIndirect);
+  LOG_DBG(log_VulkanRenderSystem, LOG_LEVEL, "Draw Indirect First Instance: %d", features.drawIndirectFirstInstance);
+  LOG_DBG(log_VulkanRenderSystem, LOG_LEVEL, "Depth Clamp: %d", features.depthClamp);
+  LOG_DBG(log_VulkanRenderSystem, LOG_LEVEL, "Depth Bias Clamp: %d", features.depthBiasClamp);
+  LOG_DBG(log_VulkanRenderSystem, LOG_LEVEL, "Fill Mode Non Solid: %d", features.fillModeNonSolid);
+  LOG_DBG(log_VulkanRenderSystem, LOG_LEVEL, "Depth Bounds: %d", features.depthBounds);
+  LOG_DBG(log_VulkanRenderSystem, LOG_LEVEL, "Wide Lines: %d", features.wideLines);
+  LOG_DBG(log_VulkanRenderSystem, LOG_LEVEL, "Large Points: %d", features.largePoints);
+  LOG_DBG(log_VulkanRenderSystem, LOG_LEVEL, "Alpha To One: %d", features.alphaToOne);
+  LOG_DBG(log_VulkanRenderSystem, LOG_LEVEL, "Multi Viewport: %d", features.multiViewport);
+  LOG_DBG(log_VulkanRenderSystem, LOG_LEVEL, "Sampler Anisotropy: %d", features.samplerAnisotropy);
+  LOG_DBG(log_VulkanRenderSystem, LOG_LEVEL, "Texture Compression ETC 2: %d", features.textureCompressionETC2);
+  LOG_DBG(log_VulkanRenderSystem, LOG_LEVEL, "Texture Compression ASTC LDR: %d", features.textureCompressionASTC_LDR);
+  LOG_DBG(log_VulkanRenderSystem, LOG_LEVEL, "texture Compression BC: %d", features.textureCompressionBC);
+  LOG_DBG(log_VulkanRenderSystem, LOG_LEVEL, "Occlusion Query Precise: %d", features.occlusionQueryPrecise);
+  LOG_DBG(log_VulkanRenderSystem, LOG_LEVEL, "Pipeline Statistics Query: %d", features.pipelineStatisticsQuery);
+  LOG_DBG(log_VulkanRenderSystem, LOG_LEVEL, "Vertex Pipeline Stores And Atomics: %d", features.vertexPipelineStoresAndAtomics);
+  LOG_DBG(log_VulkanRenderSystem, LOG_LEVEL, "Fragment Stores And Atomics: %d", features.fragmentStoresAndAtomics);
+  LOG_DBG(log_VulkanRenderSystem, LOG_LEVEL, "Shader Tessellation And Geometry Point Size: %d", features.shaderTessellationAndGeometryPointSize);
+  LOG_DBG(log_VulkanRenderSystem, LOG_LEVEL, "Shader Image Gather Extended: %d", features.shaderImageGatherExtended);
+  LOG_DBG(log_VulkanRenderSystem, LOG_LEVEL, "Shader Storage Image Extended Formats: %d", features.shaderStorageImageExtendedFormats);
+  LOG_DBG(log_VulkanRenderSystem, LOG_LEVEL, "Shader Storage Image Multisample: %d", features.shaderStorageImageMultisample);
+  LOG_DBG(log_VulkanRenderSystem, LOG_LEVEL, "Shader StorageImageRead Without Format: %d", features.shaderStorageImageReadWithoutFormat);
+  LOG_DBG(log_VulkanRenderSystem, LOG_LEVEL, "Shader Storage ImageWrite Without Format: %d", features.shaderStorageImageWriteWithoutFormat);
+  LOG_DBG(log_VulkanRenderSystem, LOG_LEVEL, "Shader Uniform Buffer Array Dynamic Indexing: %d", features.shaderUniformBufferArrayDynamicIndexing);
+  LOG_DBG(log_VulkanRenderSystem, LOG_LEVEL, "Shader Sampled Image Array Dynamic Indexing: %d", features.shaderSampledImageArrayDynamicIndexing);
+  LOG_DBG(log_VulkanRenderSystem, LOG_LEVEL, "Shader Storage Buffer Array Dynamic Indexing: %d", features.shaderStorageBufferArrayDynamicIndexing);
+  LOG_DBG(log_VulkanRenderSystem, LOG_LEVEL, "Shader Storage Image Array Dynamic Indexing: %d", features.shaderStorageImageArrayDynamicIndexing);
+  LOG_DBG(log_VulkanRenderSystem, LOG_LEVEL, "Shader Clip Distance: %d", features.shaderClipDistance);
+  LOG_DBG(log_VulkanRenderSystem, LOG_LEVEL, "Shader Cull Distance: %d", features.shaderCullDistance);
+  LOG_DBG(log_VulkanRenderSystem, LOG_LEVEL, "Shader Float64: %d", features.shaderFloat64);
+  LOG_DBG(log_VulkanRenderSystem, LOG_LEVEL, "Shader Int64: %d", features.shaderInt64);
+  LOG_DBG(log_VulkanRenderSystem, LOG_LEVEL, "Shader Int16: %d", features.shaderInt16);
+  LOG_DBG(log_VulkanRenderSystem, LOG_LEVEL, "Shader Resource Residency: %d", features.shaderResourceResidency);
+  LOG_DBG(log_VulkanRenderSystem, LOG_LEVEL, "ShaderResource Min Lod: %d", features.shaderResourceMinLod);
+  LOG_DBG(log_VulkanRenderSystem, LOG_LEVEL, "Sparse Binding: %d", features.sparseBinding);
+  LOG_DBG(log_VulkanRenderSystem, LOG_LEVEL, "Sparse Residency Buffer: %d", features.sparseResidencyBuffer);
+  LOG_DBG(log_VulkanRenderSystem, LOG_LEVEL, "Sparse Residency Image2 D: %d", features.sparseResidencyImage2D);
+  LOG_DBG(log_VulkanRenderSystem, LOG_LEVEL, "Sparse Residency Image3 D: %d", features.sparseResidencyImage3D);
+  LOG_DBG(log_VulkanRenderSystem, LOG_LEVEL, "Sparse Residency2 Samples: %d", features.sparseResidency2Samples);
+  LOG_DBG(log_VulkanRenderSystem, LOG_LEVEL, "Sparse Residency4 Samples: %d", features.sparseResidency4Samples);
+  LOG_DBG(log_VulkanRenderSystem, LOG_LEVEL, "Sparse Residency8 Samples: %d", features.sparseResidency8Samples);
+  LOG_DBG(log_VulkanRenderSystem, LOG_LEVEL, "Sparse Residency16 Samples: %d", features.sparseResidency16Samples);
+  LOG_DBG(log_VulkanRenderSystem, LOG_LEVEL, "Sparse Residency Aliased: %d", features.sparseResidencyAliased);
+  LOG_DBG(log_VulkanRenderSystem, LOG_LEVEL, "Variable Multisample Rate: %d", features.variableMultisampleRate);
+  LOG_DBG(log_VulkanRenderSystem, LOG_LEVEL, "Inherited Queries: %d", features.inheritedQueries);
+}
+
 int GetDeviceScore(VkPhysicalDevice device,
                    VkSurfaceKHR surface,
                    const DeviceRequirements& requirements,
-                   const SwapChainDeviceSupport& swapChainSupport) {
+                   const SwapChainDeviceSupport& swapChainSupport, const Log& log_VulkanRenderSystem) {
   int score = 0;
   VkPhysicalDeviceProperties deviceProperties;
   VkPhysicalDeviceFeatures deviceFeatures;
   vkGetPhysicalDeviceProperties(device, &deviceProperties);
   vkGetPhysicalDeviceFeatures(device, &deviceFeatures);
 
-  const VkQueueIndices indices      = VkCore::FindQueueFamiliesInDevice(device, surface, requirements);
+  LOG_DBG(log_VulkanRenderSystem, LOG_LEVEL, "Device Info: Device: %s", deviceProperties.deviceName);
+  LOG_DBG(log_VulkanRenderSystem, LOG_LEVEL, "Device ID: %d", deviceProperties.deviceID);
+  LOG_DBG(log_VulkanRenderSystem, LOG_LEVEL, "API Version: %d", deviceProperties.apiVersion);
+  LOG_DBG(log_VulkanRenderSystem, LOG_LEVEL, "Driver Version: %d", deviceProperties.driverVersion);
+  LOG_DBG(log_VulkanRenderSystem, LOG_LEVEL, "Device Type: %s", VkPhysicalDeviceTypeToString(deviceProperties.deviceType));
+  LOG_DBG(log_VulkanRenderSystem, LOG_LEVEL, "Vendor ID: %d", deviceProperties.vendorID);
+
+  LOG_DBG(log_VulkanRenderSystem, LOG_LEVEL, "Device Features: Device: %s", deviceProperties.deviceName);
+  LogDeviceFeatures(deviceFeatures, log_VulkanRenderSystem);
+
+  const VkQueueIndices indices      = VkCore::FindQueueFamiliesInDevice(device, surface, requirements, log_VulkanRenderSystem);
   const bool areExtensionsSupported = CheckDeviceExtensionSupport(device);
 
   if (!areExtensionsSupported) {
@@ -157,6 +226,8 @@ VkSurfaceFormatKHR ChooseSwapSurfaceFormat(const Containers::Vector<VkSurfaceFor
 
   const auto colorSpace = ToVkColorSpaceKHR(requirement.m_colorSpace);
   VERIFY_OPT(log_VulkanRenderSystem, colorSpace, "Unknown Colorspace");
+
+  LOG_DBG(log_VulkanRenderSystem, LOG_LEVEL, "Checking for %d availableFormats", availableFormats.GetSize());
 
   // no preferred format
   if (availableFormats.GetSize() == 1 && availableFormats[0].format == VK_FORMAT_UNDEFINED) {
@@ -256,7 +327,7 @@ VkInstance VkCore::CreateInstance(const ApplicationInfo& applicationData,
   const U32 patchVer         = std::get<SemverPatch>(applicationData.m_version);
   appInfo.applicationVersion = VK_MAKE_VERSION(majorVer, minorVer, patchVer);
 
-  appInfo.pEngineName   = "";
+  appInfo.pEngineName   = "Azura";
   appInfo.engineVersion =
     VK_MAKE_VERSION(RENDER_SYSTEM_MAJOR_SEMVER, RENDER_SYSTEM_MINOR_SEMVER, RENDER_SYSTEM_PATCH_SEMVER);
   appInfo.apiVersion = VK_API_VERSION_1_1;
@@ -266,6 +337,12 @@ VkInstance VkCore::CreateInstance(const ApplicationInfo& applicationData,
   createInfo.pApplicationInfo        = &appInfo;
   createInfo.enabledExtensionCount   = vkExtensions.GetSize();
   createInfo.ppEnabledExtensionNames = vkExtensions.Data();
+
+  LOG_DBG(log_VulkanRenderSystem, LOG_LEVEL, "Instance Creation: Loading Device Extensions");
+  for(const auto& extension : vkExtensions)
+  {
+    LOG_DBG(log_VulkanRenderSystem, LOG_LEVEL, "= Instance Extensions: %s", extension);
+  }
 
   // Validation Layers Check
   VERIFY_TRUE(log_VulkanRenderSystem, CheckValidationLayerSupport(),
@@ -286,7 +363,8 @@ VkInstance VkCore::CreateInstance(const ApplicationInfo& applicationData,
 
 VkQueueIndices VkCore::FindQueueFamiliesInDevice(VkPhysicalDevice device,
                                                  VkSurfaceKHR surface,
-                                                 const DeviceRequirements& requirements) {
+                                                 const DeviceRequirements& requirements,
+                                                 const Log& log_VulkanRenderSystem) {
   VkQueueIndices result;
   result.m_isTransferQueueRequired = requirements.m_transferQueue;
 
@@ -302,11 +380,13 @@ VkQueueIndices VkCore::FindQueueFamiliesInDevice(VkPhysicalDevice device,
   int idx = 0;
   for (const auto& queueFamily : queueFamilies) {
     if (queueFamily.queueCount > 0 && (queueFamily.queueFlags & VK_QUEUE_GRAPHICS_BIT) != 0) {
+      LOG_DBG(log_VulkanRenderSystem, LOG_LEVEL, "Found Graphics Queue At: %d", idx);
       result.m_graphicsFamily = idx;
     }
 
     if (queueFamily.queueCount > 0 && !((queueFamily.queueFlags & VK_QUEUE_GRAPHICS_BIT) != 0)
         && (queueFamily.queueFlags & VK_QUEUE_TRANSFER_BIT) != 0) {
+      LOG_DBG(log_VulkanRenderSystem, LOG_LEVEL, "Found Transfer Queue At (was Required): %d", idx);
       result.m_transferFamily = idx;
     }
 
@@ -314,6 +394,7 @@ VkQueueIndices VkCore::FindQueueFamiliesInDevice(VkPhysicalDevice device,
     vkGetPhysicalDeviceSurfaceSupportKHR(device, idx, surface, &canPresent);
 
     if (queueFamily.queueCount > 0 && canPresent != 0u) {
+      LOG_DBG(log_VulkanRenderSystem, LOG_LEVEL, "Found Present Queue At: %d", idx);
       result.m_presentFamily = idx;
     }
 
@@ -374,13 +455,30 @@ VkPhysicalDevice VkCore::SelectPhysicalDevice(VkInstance instance,
   // Rate and Select the best GPU
   for (const auto& device : availableDevices) {
     const auto swapChainSupport = QuerySwapChainSupport(device, surface, allocatorSwapChainSupport);
-    int tempScore               = GetDeviceScore(device, surface, requirements, swapChainSupport);
+    int tempScore               = GetDeviceScore(device, surface, requirements, swapChainSupport, log_VulkanRenderSystem);
     candidates.insert(std::make_pair(tempScore, device));
   }
 
   if (candidates.rbegin()->first > 0) {
     physicalDevice = candidates.rbegin()->second;
   }
+
+#ifdef BUILD_DEBUG
+  VkPhysicalDeviceProperties deviceProperties;
+  VkPhysicalDeviceFeatures deviceFeatures;
+  vkGetPhysicalDeviceProperties(physicalDevice, &deviceProperties);
+  vkGetPhysicalDeviceFeatures(physicalDevice, &deviceFeatures);
+
+  LOG_DBG(log_VulkanRenderSystem, LOG_LEVEL, "[SELECTED DEVICE] Device Info: Device: %s", deviceProperties.deviceName);
+  LOG_DBG(log_VulkanRenderSystem, LOG_LEVEL, "Device ID: %d", deviceProperties.deviceID);
+  LOG_DBG(log_VulkanRenderSystem, LOG_LEVEL, "API Version: %d", deviceProperties.apiVersion);
+  LOG_DBG(log_VulkanRenderSystem, LOG_LEVEL, "Driver Version: %d", deviceProperties.driverVersion);
+  LOG_DBG(log_VulkanRenderSystem, LOG_LEVEL, "Device Type: %s", VkPhysicalDeviceTypeToString(deviceProperties.deviceType));
+  LOG_DBG(log_VulkanRenderSystem, LOG_LEVEL, "Vendor ID: %d", deviceProperties.vendorID);
+
+  LOG_DBG(log_VulkanRenderSystem, LOG_LEVEL, "Device Features: Device: %s", deviceProperties.deviceName);
+  LogDeviceFeatures(deviceFeatures, log_VulkanRenderSystem);
+#endif
 
   VERIFY_TRUE(log_VulkanRenderSystem, physicalDevice != VK_NULL_HANDLE, "No suitable GPU found for Vulkan");
   return physicalDevice;
@@ -426,7 +524,19 @@ VkDevice VkCore::CreateLogicalDevice(VkPhysicalDevice physicalDevice,
   createInfo.enabledExtensionCount   = U32(DEVICE_EXTENSIONS.size());
   createInfo.ppEnabledExtensionNames = DEVICE_EXTENSIONS.data();
 
+  LOG_DBG(log_VulkanRenderSystem, LOG_LEVEL, "Device Creation: Loading Device Extensions");
+  for(const auto& extension : DEVICE_EXTENSIONS)
+  {
+    LOG_DBG(log_VulkanRenderSystem, LOG_LEVEL, "= Device Extensions: %s", extension);
+  }
+
 #ifdef BUILD_DEBUG
+  LOG_DBG(log_VulkanRenderSystem, LOG_LEVEL, "Device Creation: Loading Device Validation Layers");
+  for(const auto& layer : VALIDATION_LAYERS)
+  {
+    LOG_DBG(log_VulkanRenderSystem, LOG_LEVEL, "= Device Extensions: %s", layer);
+  }
+
   createInfo.enabledLayerCount   = U32(VALIDATION_LAYERS.size());
   createInfo.ppEnabledLayerNames = VALIDATION_LAYERS.data();
 #else
@@ -572,7 +682,7 @@ VkImageView VkCore::CreateImageView(VkDevice device,
   createInfo.viewType              = viewType;
   createInfo.format                = viewFormat;
 
-  // TODO(vasumahesh1): Add Swizzle support
+  // TODO(vasumahesh1):[TEXTURE]: Add Swizzle support
   // Default Swizzle
   createInfo.components.r = VK_COMPONENT_SWIZZLE_IDENTITY;
   createInfo.components.g = VK_COMPONENT_SWIZZLE_IDENTITY;
@@ -592,7 +702,7 @@ VkImageView VkCore::CreateImageView(VkDevice device,
   return imageView;
 }
 
-// TODO(vasumahesh1): Needs serious changes here
+// TODO(vasumahesh1):[PIPELINE]: Needs serious changes here
 VkRenderPass VkCore::CreateRenderPass(VkDevice device, VkFormat colorFormat, const Log& log_VulkanRenderSystem) {
   VkAttachmentDescription colorAttachment = {};
   colorAttachment.format                  = colorFormat;

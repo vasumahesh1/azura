@@ -2,11 +2,11 @@
 
 namespace Azura {
 namespace Vulkan {
-const char* VkResultToString(const VkResult err) {
 #define CASE_STR(r)   \
     case r:           \
         return #r
 
+const char* VkResultToString(const VkResult err) {
   switch (err) {
     CASE_STR(VK_SUCCESS);
     CASE_STR(VK_NOT_READY);
@@ -43,8 +43,21 @@ const char* VkResultToString(const VkResult err) {
     default:
       return "UNKNOWN_RESULT";
   }
+}
 
-#undef CASE_STR
+const char* VkPhysicalDeviceTypeToString(const VkPhysicalDeviceType deviceType) {
+  switch (deviceType) {
+    CASE_STR(VK_PHYSICAL_DEVICE_TYPE_OTHER);
+    CASE_STR(VK_PHYSICAL_DEVICE_TYPE_INTEGRATED_GPU);
+    CASE_STR(VK_PHYSICAL_DEVICE_TYPE_DISCRETE_GPU);
+    CASE_STR(VK_PHYSICAL_DEVICE_TYPE_VIRTUAL_GPU);
+    CASE_STR(VK_PHYSICAL_DEVICE_TYPE_CPU);
+    CASE_STR(VK_PHYSICAL_DEVICE_TYPE_RANGE_SIZE);
+    CASE_STR(VK_PHYSICAL_DEVICE_TYPE_MAX_ENUM);
+
+    default:
+    return "UNKNOWN_DEVICE";
+  }
 }
 } // namespace Vulkan
 } // namespace Azura

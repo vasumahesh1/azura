@@ -49,7 +49,8 @@ VkDevice CreateLogicalDevice(VkPhysicalDevice physicalDevice,
 
 VkQueueIndices FindQueueFamiliesInDevice(VkPhysicalDevice device,
                                          VkSurfaceKHR surface,
-                                         const DeviceRequirements& requirements);
+                                         const DeviceRequirements& requirements,
+                                         const Log& log_VulkanRenderSystem);
 
 VkQueue GetQueueFromDevice(VkDevice device, int queueIndex);
 
@@ -210,19 +211,53 @@ void TransitionImageLayout(VkCommandBuffer cmdBuffer,
                            VkPipelineStageFlags dstStageMask,
                            VkImageSubresourceRange imageSubresourceRange);
 
-void ImageBlit(VkCommandBuffer cmdBuffer, VkImage srcImage, VkImage dstImage, VkImageAspectFlagBits srcAspect, VkImageAspectFlagBits dstAspect, const Bounds3D & blitRegion, const LayerSubresource & srcLayerResource, const LayerSubresource & dstLayerResource, U32 srcMipLevel, U32 dstMipLevel, VkFilter blitFilter);
+void ImageBlit(VkCommandBuffer cmdBuffer,
+               VkImage srcImage,
+               VkImage dstImage,
+               VkImageAspectFlagBits srcAspect,
+               VkImageAspectFlagBits dstAspect,
+               const Bounds3D& blitRegion,
+               const LayerSubresource& srcLayerResource,
+               const LayerSubresource& dstLayerResource,
+               U32 srcMipLevel,
+               U32 dstMipLevel,
+               VkFilter blitFilter);
 
-void ImageBlit(VkCommandBuffer cmdBuffer, VkImage srcImage, VkImage dstImage, VkImageAspectFlagBits srcAspect, VkImageAspectFlagBits dstAspect, const Bounds3D & blitRegion);
+void ImageBlit(VkCommandBuffer cmdBuffer,
+               VkImage srcImage,
+               VkImage dstImage,
+               VkImageAspectFlagBits srcAspect,
+               VkImageAspectFlagBits dstAspect,
+               const Bounds3D& blitRegion);
 
-void ImageCopy(VkCommandBuffer cmdBuffer, VkImage srcImage, VkImage dstImage, const Containers::Vector<VkImageCopy>& copyRegions);
+void ImageCopy(VkCommandBuffer cmdBuffer,
+               VkImage srcImage,
+               VkImage dstImage,
+               const Containers::Vector<VkImageCopy>& copyRegions);
 
-VkImageCopy GetImageCopyRegion(VkImageAspectFlagBits srcAspect, VkImageAspectFlagBits dstAspect, const Bounds3D & copyRegion, const TextureSubresource & srcSubresource, const TextureSubresource & dstSubresource);
+VkImageCopy GetImageCopyRegion(VkImageAspectFlagBits srcAspect,
+                               VkImageAspectFlagBits dstAspect,
+                               const Bounds3D& copyRegion,
+                               const TextureSubresource& srcSubresource,
+                               const TextureSubresource& dstSubresource);
 
-void ImageCopy(VkCommandBuffer cmdBuffer, VkImage srcImage, VkImage dstImage, VkImageAspectFlagBits srcAspect, VkImageAspectFlagBits dstAspect, const Bounds3D & copyRegion, const TextureSubresource & srcSubresource, const TextureSubresource & dstSubresource);
+void ImageCopy(VkCommandBuffer cmdBuffer,
+               VkImage srcImage,
+               VkImage dstImage,
+               VkImageAspectFlagBits srcAspect,
+               VkImageAspectFlagBits dstAspect,
+               const Bounds3D& copyRegion,
+               const TextureSubresource& srcSubresource,
+               const TextureSubresource& dstSubresource);
 
-void ImageCopy(VkCommandBuffer cmdBuffer, VkImage srcImage, VkImage dstImage, VkImageAspectFlagBits srcAspect, VkImageAspectFlagBits dstAspect, const Bounds3D & copyRegion);
+void ImageCopy(VkCommandBuffer cmdBuffer,
+               VkImage srcImage,
+               VkImage dstImage,
+               VkImageAspectFlagBits srcAspect,
+               VkImageAspectFlagBits dstAspect,
+               const Bounds3D& copyRegion);
 
-void FlushCommandBuffer(VkDevice device, VkCommandBuffer cmdBuffer, VkQueue queue, const Log & log_VulkanRenderSystem);
+void FlushCommandBuffer(VkDevice device, VkCommandBuffer cmdBuffer, VkQueue queue, const Log& log_VulkanRenderSystem);
 
 
 } // namespace VkCore

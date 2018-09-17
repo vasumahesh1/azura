@@ -10,5 +10,6 @@ namespace Vulkan {
  * \return String converted for debug
  */
 const char* VkResultToString(const VkResult err);
+const char* VkPhysicalDeviceTypeToString(const VkPhysicalDeviceType deviceType);
 } // namespace Vulkan
 } // namespace Azura
