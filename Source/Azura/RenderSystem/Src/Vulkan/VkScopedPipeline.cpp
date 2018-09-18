@@ -56,12 +56,12 @@ VkPipelineFactory& VkPipelineFactory::AddAttributeDescription(RawStorageFormat r
 
   VkVertexInputAttributeDescription attrDesc;
   attrDesc.binding  = binding;
-  attrDesc.location = bindingInfo.m_location;
+  attrDesc.location = m_currentLocation;
   attrDesc.format   = format.value();
   attrDesc.offset   = bindingInfo.m_offset;
 
-  // TODO(vasumahesh1): Handle 64bit formats taking 2 locations
-  bindingInfo.m_location++;
+  // TODO(vasumahesh1):[FORMATS]: Handle 64bit formats taking 2 locations
+  m_currentLocation++;
 
   bindingInfo.m_offset += GetFormatSizeBits(rawFormat);
 
@@ -81,12 +81,12 @@ VkPipelineFactory& VkPipelineFactory::BulkAddAttributeDescription(const Containe
 
     VkVertexInputAttributeDescription attrDesc;
     attrDesc.binding  = binding;
-    attrDesc.location = bindingInfo.m_location;
+    attrDesc.location = m_currentLocation;
     attrDesc.format   = format.value();
     attrDesc.offset   = bindingInfo.m_offset;
 
-    // TODO(vasumahesh1): Handle 64bit formats taking 2 locations
-    bindingInfo.m_location++;
+    // TODO(vasumahesh1):[FORMATS]: Handle 64bit formats taking 2 locations
+    m_currentLocation++;
 
     bindingInfo.m_offset += GetFormatSize(rawFormat);
 
@@ -198,6 +198,11 @@ VkScopedPipeline VkPipelineFactory::Submit() const {
   vertexInputInfo.pVertexBindingDescriptions           = m_bindingInfo.Data();
   vertexInputInfo.vertexAttributeDescriptionCount      = m_attributeDescription.GetSize();
   vertexInputInfo.pVertexAttributeDescriptions         = m_attributeDescription.Data();
+
+  LOG_DBG(log_VulkanRenderSystem, LOG_LEVEL, "Creating Pipeline");
+  LOG_DBG(log_VulkanRenderSystem, LOG_LEVEL, "Num Attribute Descriptions: %d", m_attributeDescription.GetSize());
+  LOG_DBG(log_VulkanRenderSystem, LOG_LEVEL, "Num Binding Info: %d", m_bindingInfo.GetSize());
+  LOG_DBG(log_VulkanRenderSystem, LOG_LEVEL, "Total Shader Stages: %d", m_stages.GetSize());
 
   VkGraphicsPipelineCreateInfo pipelineInfo = {};
   pipelineInfo.sType                        = VK_STRUCTURE_TYPE_GRAPHICS_PIPELINE_CREATE_INFO;

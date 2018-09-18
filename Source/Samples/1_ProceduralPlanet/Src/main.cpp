@@ -3,7 +3,7 @@
 
 int main()
 {
-  auto log_AppMain = Azura::Log("AppMain");
+  auto log_AppMain = Azura::Log("VulkanRenderSystem");
 
   try {
     Azura::AppRenderer app;

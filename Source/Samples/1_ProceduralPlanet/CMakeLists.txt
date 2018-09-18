@@ -17,6 +17,8 @@ set(
 
 add_executable(ProceduralPlanet ${SOURCES})
 
+AzuraAddLoggingSupport(ProceduralPlanet 50)
+
 AzuraAddSPIRVShadersToTarget(ProceduralPlanet ${VULKAN_SHADERS})
 
 target_include_directories(ProceduralPlanet PUBLIC ${PROJECT_SOURCE_DIR}/Inc)

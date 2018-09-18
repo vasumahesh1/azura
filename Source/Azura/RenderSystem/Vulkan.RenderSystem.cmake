@@ -78,6 +78,9 @@ if (INCLUDE_TESTS OR PROJECT_BUILD)
     VULKAN_SHADERS
         "${PROJECT_SOURCE_DIR}/Test/Shaders/Vulkan/RenderSystemTest.vertex|-S vert"
         "${PROJECT_SOURCE_DIR}/Test/Shaders/Vulkan/RenderSystemTest.pixel|-S frag"
+
+        "${PROJECT_SOURCE_DIR}/Test/Shaders/Vulkan/BasicInstancingTest.vertex|-S vert"
+        "${PROJECT_SOURCE_DIR}/Test/Shaders/Vulkan/BasicInstancingTest.pixel|-S frag"
     )
 
   AzuraSilenceClangTidy(VulkanRenderSystemTest)

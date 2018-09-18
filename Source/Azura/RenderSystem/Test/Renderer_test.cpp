@@ -84,3 +84,17 @@ TEST_F(RendererTest, BasicRenderTest) {
 
   ASSERT_TRUE(CompareImageBytes("./ReferenceImages/BasicRenderTest.data", "./BasicRenderTest.data"));
 }
+
+TEST_F(RendererTest, BasicInstancingTest) {
+  HeapMemoryBuffer mainBuffer(16384);
+
+  RangeAllocator mainAllocator(mainBuffer, 8192);
+  RangeAllocator drawableAllocator(mainBuffer, 8192);
+
+  const auto window = CreateDefaultWindow();
+  const auto renderer = CreateDefaultRenderer(*window, mainAllocator, drawableAllocator);
+
+  RenderTestCases::ExecuteBasicInstancingTest(*renderer, *window, log_TestRenderer);
+
+  ASSERT_TRUE(CompareImageBytes("./ReferenceImages/BasicInstancingTest.data", "./BasicInstancingTest.data"));
+}

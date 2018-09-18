@@ -13,6 +13,10 @@ struct Vertex {
   float m_col[4];
 };
 
+struct Instance {
+  float m_pos[4];
+};
+
 void RenderTestCases::ExecuteBasicRenderTest(Azura::Renderer& renderer,
                                              Azura::Window& window,
                                              const Azura::Log& log_TestCase) {
@@ -93,4 +97,101 @@ void RenderTestCases::ExecuteBasicRenderTest(Azura::Renderer& renderer,
   renderer.RenderFrame();
   renderer.RenderFrame();
   renderer.SnapshotFrame("./BasicRenderTest.data");
+}
+
+void RenderTestCases::ExecuteBasicInstancingTest(Azura::Renderer& renderer,
+  Azura::Window& window,
+  const Azura::Log& log_TestCase) {
+  HEAP_ALLOCATOR(Temporary, Memory::MonotonicAllocator, 16384);
+  UNUSED(window);
+
+  renderer.SetDrawablePoolCount(1);
+
+  auto vertShader = RenderSystem::CreateShader(renderer,
+    "Shaders/" + renderer.GetRenderingAPI() + "/BasicInstancingTest.vertex",
+    log_TestCase);
+  vertShader->SetStage(ShaderStage::Vertex);
+
+  auto pixelShader = RenderSystem::CreateShader(renderer,
+    "Shaders/" + renderer.GetRenderingAPI() + "/BasicInstancingTest.pixel",
+    log_TestCase);
+  pixelShader->SetStage(ShaderStage::Pixel);
+
+  DrawablePoolCreateInfo poolInfo = {};
+  poolInfo.m_byteSize             = 4096;
+  poolInfo.m_numDrawables         = 1;
+  poolInfo.m_numShaders           = 2;
+  DrawablePool& pool              = renderer.CreateDrawablePool(poolInfo);
+
+  pool.AddShader(*vertShader);
+  pool.AddShader(*pixelShader);
+
+  Slot vertexDataSlot      = {};
+  vertexDataSlot.m_binding = 0;
+  vertexDataSlot.m_rate    = BufferUsageRate::PerVertex;
+
+  Slot instanceDataSlot      = {};
+  instanceDataSlot.m_binding = 1;
+  instanceDataSlot.m_rate    = BufferUsageRate::PerInstance;
+
+  Vector<RawStorageFormat> vertexStride = Vector<RawStorageFormat>(ContainerExtent{2}, allocatorTemporary);
+  vertexStride[0]                       = RawStorageFormat::R32G32B32A32_FLOAT;
+  vertexStride[1]                       = RawStorageFormat::R32G32B32A32_FLOAT;
+  pool.AddBufferBinding(vertexDataSlot, vertexStride);
+
+  Vector<RawStorageFormat> instanceStride = Vector<RawStorageFormat>(ContainerExtent{1}, allocatorTemporary);
+  instanceStride[0]                       = RawStorageFormat::R32G32B32A32_FLOAT;
+  pool.AddBufferBinding(instanceDataSlot, instanceStride);
+
+  Vector<Vertex> vertexData = Vector<Vertex>({
+    Vertex{{0, 0, 1, 1}, {1, 0, 0, 1}},
+    Vertex{{1, 0, 1, 1}, {0, 1, 0, 1}},
+    Vertex{{1, 1, 1, 1}, {0, 0, 1, 1}},
+    Vertex{{0, 1, 1, 1}, {1, 1, 1, 1}}
+    }, allocatorTemporary);
+
+  Vector<Instance> instanceData = Vector<Instance>({
+    Instance{{-2, 0, 0, 1}},
+    Instance{{2, 0, 0, 1}}
+    }, allocatorTemporary);
+
+  Vector<U32> indexData = Vector<U32>({
+    0, 2, 1,
+    2, 0, 3
+    }, allocatorTemporary);
+
+  UniformBufferData uboData = {};
+  uboData.m_model = Matrix4f::Identity();
+  uboData.m_view = Transform::LookAt(Vector3f(0.5f, 0.5f, 0.0f), Vector3f(0.5f, 0.5f, -6.0f), Vector3f(0.0f, 1.0f, 0.0f));
+  uboData.m_proj = Transform::Perspective(45.0f, 16.0f / 9.0f, 0.1f, 100.0f);
+
+  const auto bufferStart      = reinterpret_cast<U8*>(vertexData.Data()); // NOLINT
+  const auto instanceStart      = reinterpret_cast<U8*>(instanceData.Data()); // NOLINT
+  const auto indexBufferStart = reinterpret_cast<U8*>(indexData.Data());  // NOLINT
+  const auto uboDataBuffer    = reinterpret_cast<U8*>(&uboData);          // NOLINT
+                                                                          // Create Drawable from Pool
+  Drawable& drawable = pool.CreateDrawable();
+  drawable.SetDrawMode(DrawType::InstancedIndexed);
+  drawable.SetIndexCount(indexData.GetSize());
+  drawable.SetVertexCount(vertexData.GetSize());
+  drawable.SetInstanceCount(2);
+  drawable.SetUniformCount(1);
+  drawable.SetIndexFormat(RawStorageFormat::R32_UNORM);
+
+  drawable.SetInstanceDataCount(1);
+  drawable.SetVertexDataCount(1);
+  drawable.SetUniformDataCount(1);
+
+  drawable.AddVertexData(vertexDataSlot, bufferStart, vertexData.GetSize() * sizeof(Vertex));
+  drawable.AddInstanceData(instanceDataSlot, instanceStart, instanceData.GetSize() * sizeof(Instance));
+  drawable.SetIndexData(indexBufferStart, indexData.GetSize() * sizeof(U32));
+  drawable.AddUniformData(uboDataBuffer, sizeof(UniformBufferData), 0);
+
+  // All Drawables Done
+  renderer.Submit();
+  renderer.RenderFrame();
+  renderer.RenderFrame();
+  renderer.RenderFrame();
+  renderer.RenderFrame();
+  renderer.SnapshotFrame("./BasicInstancingTest.data");
 }

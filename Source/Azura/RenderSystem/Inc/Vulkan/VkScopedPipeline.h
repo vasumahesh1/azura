@@ -43,7 +43,6 @@ class VkPipelineFactory {
  private:
   struct BindingInfo {
     U32 m_offset{0};
-    U32 m_location{0};
   };
 
   const VkDevice m_device;
@@ -67,6 +66,7 @@ class VkPipelineFactory {
 
   VkViewport m_viewport{};
   VkRect2D m_scissors{};
+  U32 m_currentLocation{0};
 
   const Log log_VulkanRenderSystem;
 };

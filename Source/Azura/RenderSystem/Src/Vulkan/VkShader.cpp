@@ -6,6 +6,7 @@
 #include "Memory/MemoryFactory.h"
 #include "Memory/MonotonicAllocator.h"
 #include "Memory/HeapMemoryBuffer.h"
+#include <iostream>
 
 namespace Azura {
 namespace Vulkan {
@@ -20,7 +21,7 @@ VkShader::VkShader(VkDevice device, const String& fileName, const Log& logger) /
   HEAP_ALLOCATOR(Temporary, Memory::MonotonicAllocator, 8192);
 
   const auto fileContents = FileReader::GetFileContents(GetFilePath(), allocatorTemporary);
-  m_module                = VkCore::CreateShaderModule(device, fileContents, log_VulkanRenderSystem);
+  m_module = VkCore::CreateShaderModule(device, fileContents, log_VulkanRenderSystem);
 }
 
 VkPipelineShaderStageCreateInfo VkShader::GetShaderStageInfo() const {

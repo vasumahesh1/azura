@@ -17,4 +17,5 @@ class Window;
 
 namespace RenderTestCases {
   void ExecuteBasicRenderTest(Azura::Renderer& renderer, Azura::Window& window, const Azura::Log& log_TestCase);
+  void ExecuteBasicInstancingTest(Azura::Renderer& renderer, Azura::Window& window, const Azura::Log& log_TestCase);
 } // namespace RenderTestCases

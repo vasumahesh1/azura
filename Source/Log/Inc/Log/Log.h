@@ -39,7 +39,7 @@ private:
   std::vector<char> m_temporaryBuffer;
 };
 
-#ifdef BUILD_DEBUG
+#if defined BUILD_DEBUG || defined FORCE_LOGGING
 
 // TODO(vasumahesh1):[LOG]: Fix BOOST_LOG_NAMED_SCOPE("") here.
 #define LOG_DEBUG(LOG, LEVEL, STR, ...) \
