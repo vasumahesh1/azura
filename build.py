@@ -314,6 +314,10 @@ def run():
     az_log.banner("Running Tests")
 
     ctestArgs = [executableMap['ctest']]
+
+    if (buildArgs.testRegex):
+      ctestArgs.append('-R ' + buildArgs.testRegex)
+
     ctestArgs.append('-DGTEST_COLOR=1')
     ctestArgs.append('--verbose')
 
