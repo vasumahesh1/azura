@@ -12,6 +12,7 @@ environment:
   GLFW_64_URL: https://github.com/glfw/glfw/releases/download/3.2.1/glfw-3.2.1.bin.WIN64.zip
   GLFW_32_URL: https://github.com/glfw/glfw/releases/download/3.2.1/glfw-3.2.1.bin.WIN32.zip
   CMAKE_11_4_URL: https://cmake.org/files/v3.11/cmake-3.11.4-win64-x64.zip
+  VULKAN_SDK: C:/AppveyorCache/VulkanSDK/1.1.77.0/
 
   matrix:
     - BUILD: 'DEBUG'
