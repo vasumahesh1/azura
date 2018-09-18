@@ -26,6 +26,7 @@ if ("${BUILD_PLATFORM}" STREQUAL "Windows")
 	endif()
 
 	target_link_libraries(VULKAN_STATIC INTERFACE ${VULKAN_LIB}/vulkan-1.lib)
+	set(ENV{VULKAN_SDK} ${VULKAN_1_1_77_0_ROOT})
 endif()
 
 target_include_directories(VULKAN_STATIC INTERFACE ${VULKAN_INCLUDE})
