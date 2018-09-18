@@ -38,7 +38,7 @@ build: off
 
 install:
   - ps: git submodule -q update --init --recursive
-  - ps: mkdir C:\AzuraLogs\ -ea 0 > $null
+  - ps: mkdir C:\azura\BuildLogs\ -ea 0 > $null
 
   # -------------------------- CACHE CHECK --------------------------
 
@@ -63,4 +63,4 @@ cache:
   - C:\AppveyorCache\ -> .cicache
 
 artifacts:
-  - path: ../AzuraLogs/DefaultStaticLog.log
+  - path: BuildLogs/DefaultStaticLog.log
