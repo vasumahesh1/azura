@@ -47,20 +47,10 @@ struct ApplicationInfo {
   Version m_version;
 };
 
-struct UniformBufferDesc
-{
-  U32 m_size;
-  U32 m_count;
-  U32 m_binding;
-};
+
 
 struct ApplicationRequirements {
-  Containers::Vector<std::pair<ShaderStage, UniformBufferDesc>> m_uniformBuffers;
   float m_clearColor[4] {0, 0, 0, 1.0f};
-
-  ApplicationRequirements(Memory::Allocator& alloc) : m_uniformBuffers(alloc)
-  {
-  }
 };
 
 struct SwapChainRequirements {

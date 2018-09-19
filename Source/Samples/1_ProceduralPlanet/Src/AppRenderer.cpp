@@ -48,7 +48,16 @@ void AppRenderer::Initialize() {
   requirements.m_int64         = false;
   requirements.m_transferQueue = false;
 
-  const int uboBinding = 0;
+  Slot vertexDataSlot      = {};
+  vertexDataSlot.m_binding = 0;
+  vertexDataSlot.m_rate    = BufferUsageRate::PerVertex;
+
+  Slot instanceDataSlot      = {};
+  instanceDataSlot.m_binding = 1;
+  instanceDataSlot.m_rate    = BufferUsageRate::PerInstance;
+
+  Slot uniformSlot      = {};
+  uniformSlot.m_binding = 0;
 
   UniformBufferData uboData = {};
   uboData.m_model           = Matrix4f::Identity();
@@ -57,15 +66,10 @@ void AppRenderer::Initialize() {
   uboData.m_proj = Transform::Perspective(45.0f, 16.0f / 9.0f, 0.1f, 100.0f);
 
   // TODO(vasumahesh1):[Q]:Allocator?
-  ApplicationRequirements applicationRequirements(m_mainAllocator);
-  applicationRequirements.m_clearColor[0] = 0.2f;
-  applicationRequirements.m_clearColor[1] = 0.2f;
-  applicationRequirements.m_clearColor[2] = 0.2f;
-  applicationRequirements.m_uniformBuffers.Reserve(1);
-  applicationRequirements.m_uniformBuffers.PushBack(std::make_pair(ShaderStage::Vertex,
-                                                                   UniformBufferDesc{
-                                                                     sizeof(UniformBufferData), 1, uboBinding
-                                                                   }));
+  ApplicationRequirements applicationRequirements = {};
+  applicationRequirements.m_clearColor[0]         = 0.2f;
+  applicationRequirements.m_clearColor[1]         = 0.2f;
+  applicationRequirements.m_clearColor[2]         = 0.2f;
 
   m_renderer = RenderSystem::CreateRenderer(appInfo, requirements, applicationRequirements,
                                             m_window->GetSwapChainRequirements(), m_mainAllocator, m_drawableAllocator,
@@ -80,29 +84,25 @@ void AppRenderer::Initialize() {
     CreateShader(*m_renderer, "./Shaders/" + m_renderer->GetRenderingAPI() + "/Terrain.pixel", log_AppRenderer);
   pixelShader->SetStage(ShaderStage::Pixel);
 
-  DrawablePoolCreateInfo poolInfo = {};
-  poolInfo.m_byteSize             = 4096;
-  poolInfo.m_numDrawables         = 1;
-  poolInfo.m_numShaders           = 2;
-  poolInfo.m_drawType = DrawType::InstancedIndexed;
-  poolInfo.m_slotInfo.m_numVertexSlots = 1;
+  DrawablePoolCreateInfo poolInfo(allocatorTemporary);
+  poolInfo.m_byteSize                    = 4096;
+  poolInfo.m_numDrawables                = 1;
+  poolInfo.m_numShaders                  = 2;
+  poolInfo.m_drawType                    = DrawType::InstancedIndexed;
+  poolInfo.m_slotInfo.m_numVertexSlots   = 1;
   poolInfo.m_slotInfo.m_numInstanceSlots = 1;
-  poolInfo.m_slotInfo.m_numUniformSlots = 1;
-  DrawablePool& pool              = m_renderer->CreateDrawablePool(poolInfo);
+
+  // UBO Info
+  poolInfo.m_uniformBuffers.Reserve(1);
+  poolInfo.m_uniformBuffers.PushBack(std::make_pair(uniformSlot,
+                                                    UniformBufferDesc{
+                                                      sizeof(UniformBufferData), 1, ShaderStage::Vertex
+                                                    }));
+
+  DrawablePool& pool = m_renderer->CreateDrawablePool(poolInfo);
 
   pool.AddShader(*vertShader);
   pool.AddShader(*pixelShader);
-
-  Slot vertexDataSlot      = {};
-  vertexDataSlot.m_binding = 0;
-  vertexDataSlot.m_rate    = BufferUsageRate::PerVertex;
-
-  Slot instanceDataSlot      = {};
-  instanceDataSlot.m_binding = 1;
-  instanceDataSlot.m_rate    = BufferUsageRate::PerInstance;
-
-  Slot uniformSlot      = {};
-  uniformSlot.m_binding = 0;
 
   Vector<RawStorageFormat> vertexStride = Vector<RawStorageFormat>(ContainerExtent{2}, allocatorTemporary);
   vertexStride[0]                       = RawStorageFormat::R32G32B32A32_FLOAT;
@@ -137,10 +137,10 @@ void AppRenderer::Initialize() {
 
   // Create Drawable from Pool
   DrawableCreateInfo createInfo = {};
-  createInfo.m_vertexCount = vertexData.GetSize();
-  createInfo.m_indexCount = indexData.GetSize();
-  createInfo.m_instanceCount = 2;
-  createInfo.m_indexType = RawStorageFormat::R32_UINT;
+  createInfo.m_vertexCount      = vertexData.GetSize();
+  createInfo.m_indexCount       = indexData.GetSize();
+  createInfo.m_instanceCount    = 2;
+  createInfo.m_indexType        = RawStorageFormat::R32_UINT;
 
   const auto drawableId = pool.CreateDrawable(createInfo);
   pool.BindVertexData(drawableId, vertexDataSlot, bufferStart, vertexData.GetSize() * sizeof(Vertex));

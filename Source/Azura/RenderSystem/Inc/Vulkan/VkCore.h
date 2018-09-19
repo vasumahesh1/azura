@@ -87,8 +87,10 @@ VkImageView CreateImageView(VkDevice device,
 VkRenderPass CreateRenderPass(VkDevice device, VkFormat colorFormat, const Log& log_VulkanRenderSystem);
 
 void CreateUniformBufferBinding(Containers::Vector<VkDescriptorSetLayoutBinding>& bindings,
+                                const Slot& slot,
                                 const UniformBufferDesc& desc,
                                 VkShaderStageFlags stageFlag);
+
 VkDescriptorSetLayout CreateDescriptorSetLayout(VkDevice device,
                                                 const Containers::Vector<VkDescriptorSetLayoutBinding>& bindings,
                                                 const Log& log_VulkanRenderSystem);

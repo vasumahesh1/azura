@@ -19,12 +19,11 @@ struct DrawableCreateInfo {
 struct DrawablePoolSlotInfo {
   U32 m_numVertexSlots{0};
   U32 m_numInstanceSlots{0};
-  U32 m_numUniformSlots{0};
 };
 
 class Drawable {
 public:
-  Drawable(const DrawableCreateInfo& info, const DrawablePoolSlotInfo& slotInfo, Memory::Allocator& allocator);
+  Drawable(const DrawableCreateInfo& info, U32 numVertexSlots, U32 numInstanceSlots, U32 numUniformSlots, Memory::Allocator& allocator);
   virtual ~Drawable() = default;
 
   Drawable(const Drawable& other) = delete;
@@ -68,12 +67,29 @@ private:
   std::reference_wrapper<Memory::Allocator> m_allocator;
 };
 
+struct UniformBufferDesc
+{
+  U32 m_size;
+  U32 m_count;
+  ShaderStage m_stage;
+};
+
 struct DrawablePoolCreateInfo {
   U32 m_byteSize{0};
   U32 m_numDrawables{0};
   U32 m_numShaders{0};
   DrawablePoolSlotInfo m_slotInfo{};
   DrawType m_drawType{DrawType::InstancedIndexed};
+  Containers::Vector<std::pair<Slot, UniformBufferDesc>> m_uniformBuffers;
+
+  ~DrawablePoolCreateInfo() = default;
+
+  DrawablePoolCreateInfo(const DrawablePoolCreateInfo& other) = delete;
+  DrawablePoolCreateInfo(DrawablePoolCreateInfo&& other) noexcept = default;
+  DrawablePoolCreateInfo& operator=(const DrawablePoolCreateInfo& other) = delete;
+  DrawablePoolCreateInfo& operator=(DrawablePoolCreateInfo&& other) noexcept = default;
+  
+  DrawablePoolCreateInfo(Memory::Allocator& alloc);
 };
 
 class DrawablePool {
@@ -111,12 +127,15 @@ public:
 protected:
   Memory::Allocator& GetAllocator() const;
   DrawType GetDrawType() const;
-  const DrawablePoolSlotInfo& GetSlotInfo() const;
+
+  U32 m_numVertexSlots;
+  U32 m_numInstanceSlots;
+  U32 m_numUniformSlots;
 
 private:
   U32 m_byteSize;
   DrawType m_drawType;
-  const DrawablePoolSlotInfo m_slotInfo;
+ 
 
   std::reference_wrapper<Memory::Allocator> m_allocator;
 };

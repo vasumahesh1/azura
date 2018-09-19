@@ -759,10 +759,11 @@ VkRenderPass VkCore::CreateRenderPass(VkDevice device, VkFormat colorFormat, con
 }
 
 void VkCore::CreateUniformBufferBinding(Containers::Vector<VkDescriptorSetLayoutBinding>& bindings,
+                                        const Slot& slot,
                                         const UniformBufferDesc& desc,
                                         VkShaderStageFlags stageFlag) {
   VkDescriptorSetLayoutBinding uboLayoutBinding = {};
-  uboLayoutBinding.binding                      = desc.m_binding;
+  uboLayoutBinding.binding                      = slot.m_binding;
   uboLayoutBinding.descriptorType               = VK_DESCRIPTOR_TYPE_UNIFORM_BUFFER;
   uboLayoutBinding.descriptorCount              = desc.m_count;
   uboLayoutBinding.stageFlags                   = stageFlag;

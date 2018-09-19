@@ -31,13 +31,10 @@ std::unique_ptr<Azura::Renderer> CreateDefaultRenderer(Azura::Window& window, Al
   requirements.m_int64         = false;
   requirements.m_transferQueue = false;
 
-  ApplicationRequirements applicationRequirements(mainAllocator);
+  ApplicationRequirements applicationRequirements = {};
   applicationRequirements.m_clearColor[0] = 0.2f;
   applicationRequirements.m_clearColor[1] = 0.2f;
   applicationRequirements.m_clearColor[2] = 0.2f;
-  applicationRequirements.m_uniformBuffers.Reserve(1);
-  applicationRequirements.m_uniformBuffers.PushBack(std::make_pair(ShaderStage::Vertex,
-    UniformBufferDesc{sizeof(UniformBufferData), 1, UNIFORM_BUFFER_BINDING_ID}));
 
   std::unique_ptr<Azura::Renderer> renderer = RenderSystem::CreateRenderer(appInfo, requirements, applicationRequirements,
     window.GetSwapChainRequirements(), mainAllocator, drawableAllocator,

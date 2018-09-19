@@ -2,10 +2,14 @@
 
 namespace Azura {
 
-Drawable::Drawable(const DrawableCreateInfo& info, const DrawablePoolSlotInfo& slotInfo, Memory::Allocator& allocator)
-  : m_vertexBufferInfos(slotInfo.m_numVertexSlots, allocator),
-    m_instanceBufferInfos(slotInfo.m_numInstanceSlots, allocator),
-    m_uniformBufferInfos(slotInfo.m_numUniformSlots, allocator),
+Drawable::Drawable(const DrawableCreateInfo& info,
+                   U32 numVertexSlots,
+                   U32 numInstanceSlots,
+                   U32 numUniformSlots,
+                   Memory::Allocator& allocator)
+  : m_vertexBufferInfos(numVertexSlots, allocator),
+    m_instanceBufferInfos(numInstanceSlots, allocator),
+    m_uniformBufferInfos(numUniformSlots, allocator),
     m_vertexCount(info.m_vertexCount),
     m_indexCount(info.m_indexCount),
     m_indexType(info.m_indexType),
@@ -61,10 +65,16 @@ const BufferInfo& Drawable::GetIndexBufferInfo() const {
   return m_indexBufferInfo;
 }
 
+DrawablePoolCreateInfo::DrawablePoolCreateInfo(Memory::Allocator& alloc)
+  : m_uniformBuffers(alloc) {
+}
+
 DrawablePool::DrawablePool(const DrawablePoolCreateInfo& createInfo, Memory::Allocator& allocator)
   : m_byteSize(createInfo.m_byteSize),
     m_drawType(createInfo.m_drawType),
-    m_slotInfo(createInfo.m_slotInfo),
+    m_numVertexSlots(createInfo.m_slotInfo.m_numVertexSlots),
+    m_numInstanceSlots(createInfo.m_slotInfo.m_numInstanceSlots),
+    m_numUniformSlots(createInfo.m_uniformBuffers.GetSize()),
     m_allocator(allocator) {
 }
 
@@ -96,7 +106,4 @@ DrawType DrawablePool::GetDrawType() const {
   return m_drawType;
 }
 
-const DrawablePoolSlotInfo& DrawablePool::GetSlotInfo() const {
-  return m_slotInfo;
-}
 } // namespace Azura

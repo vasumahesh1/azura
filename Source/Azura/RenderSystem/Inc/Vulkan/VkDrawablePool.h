@@ -26,7 +26,9 @@ public:
              VkDescriptorSetLayout descriptorSetLayout,
              VkDescriptorPool descriptorPool,
              const DrawableCreateInfo& info,
-             const DrawablePoolSlotInfo& slotInfo,
+    U32 numVertexSlots,
+    U32 numInstanceSlots,
+    U32 numUniformSlots,
              Memory::Allocator& allocator,
              Log logger);
 
@@ -68,7 +70,7 @@ public:
 
   DrawableID CreateDrawable(const DrawableCreateInfo& createInfo) override;
 
-  void CreateDescriptorInfo(const DrawablePoolCreateInfo& createInfo, const ApplicationRequirements& applicationRequirements);
+  void CreateDescriptorInfo(const DrawablePoolCreateInfo& createInfo);
 
   void Submit() override;
   void AddBufferBinding(Slot slot, const Containers::Vector<RawStorageFormat>& strides) override;

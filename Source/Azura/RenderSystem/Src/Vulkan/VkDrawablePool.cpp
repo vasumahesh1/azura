@@ -17,10 +17,10 @@ VkDrawable::VkDrawable(VkDevice device,
                        VkDescriptorSetLayout descriptorSetLayout,
                        VkDescriptorPool descriptorPool,
                        const DrawableCreateInfo& info,
-                       const DrawablePoolSlotInfo& slotInfo,
+  U32 numVertexSlots, U32 numInstanceSlots, U32 numUniformSlots,
                        Memory::Allocator& allocator,
                        Log logger)
-  : Drawable(info, slotInfo, allocator),
+  : Drawable(info, numVertexSlots, numInstanceSlots, numUniformSlots, allocator),
     m_device(device),
     m_descriptorSetLayout(descriptorSetLayout),
     m_descriptorPool(descriptorPool),
@@ -112,13 +112,13 @@ VkDrawablePool::VkDrawablePool(const DrawablePoolCreateInfo& createInfo,
     m_drawables(createInfo.m_numDrawables, allocator),
     m_shaders(createInfo.m_numShaders, allocator),
     log_VulkanRenderSystem(std::move(logger)) {
-  CreateDescriptorInfo(createInfo, m_appRequirements);
+  CreateDescriptorInfo(createInfo);
 }
 
 
 DrawableID VkDrawablePool::CreateDrawable(const DrawableCreateInfo& createInfo) {
   VkDrawable drawable = VkDrawable(m_device, m_buffer.Real(), m_descriptorSetLayout, m_descriptorPool, createInfo,
-                                   GetSlotInfo(), GetAllocator(), log_VulkanRenderSystem);
+                                   m_numVertexSlots, m_numInstanceSlots, m_numUniformSlots, GetAllocator(), log_VulkanRenderSystem);
   m_drawables.PushBack(std::move(drawable));
   return m_drawables.GetSize() - 1;
 }
@@ -132,17 +132,19 @@ void VkDrawablePool::AppendToMainBuffer(const U8* buffer, U32 bufferSize) {
   m_mainBufferOffset += bufferSize;
 }
 
-void VkDrawablePool::CreateDescriptorInfo(const DrawablePoolCreateInfo& createInfo, const ApplicationRequirements& applicationRequirements) {
+void VkDrawablePool::CreateDescriptorInfo(const DrawablePoolCreateInfo& createInfo) {
   STACK_ALLOCATOR(Temporary, Memory::MonotonicAllocator, 2048);
 
-  const U32 uniformCount = GetSlotInfo().m_numUniformSlots;
+  const U32 uniformCount = m_numUniformSlots;
   Containers::Vector<VkDescriptorSetLayoutBinding> layoutBindings(uniformCount, allocatorTemporary);
 
-  for (const auto& bufferDesc : applicationRequirements.m_uniformBuffers) {
-    const auto vkShaderStage = ToVkShaderStageFlagBits(bufferDesc.first);
+  for (const auto& uniformBufferPair : createInfo.m_uniformBuffers) {
+    const auto& slot = uniformBufferPair.first;
+    const auto& bufferDesc = uniformBufferPair.second;
+    const auto vkShaderStage = ToVkShaderStageFlagBits(bufferDesc.m_stage);
     VERIFY_OPT(log_VulkanRenderSystem, vkShaderStage, "Unknown Shader Stage");
 
-    VkCore::CreateUniformBufferBinding(layoutBindings, bufferDesc.second, vkShaderStage.value());
+    VkCore::CreateUniformBufferBinding(layoutBindings, slot, bufferDesc, vkShaderStage.value());
   }
 
   m_descriptorSetLayout = VkCore::CreateDescriptorSetLayout(m_device, layoutBindings, log_VulkanRenderSystem);
@@ -155,7 +157,7 @@ void VkDrawablePool::CreateDescriptorInfo(const DrawablePoolCreateInfo& createIn
   // TODO(vasumahesh1):[DESCRIPTOR]: How to use Uniform Buffer Arrays?
   VkDescriptorPoolSize uniformPoolSize = {};
   uniformPoolSize.type                 = VK_DESCRIPTOR_TYPE_UNIFORM_BUFFER;
-  uniformPoolSize.descriptorCount      = GetSlotInfo().m_numUniformSlots;
+  uniformPoolSize.descriptorCount      = m_numUniformSlots;
 
   // TODO(vasumahesh1):[TEXTURE]: Add support for Descriptor Pools
   Vector<VkDescriptorPoolSize> descriptorPool(1, allocatorTemporary);
