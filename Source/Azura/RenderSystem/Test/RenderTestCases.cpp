@@ -39,6 +39,10 @@ void RenderTestCases::ExecuteBasicRenderTest(Azura::Renderer& renderer,
   poolInfo.m_byteSize             = 4096;
   poolInfo.m_numDrawables         = 1;
   poolInfo.m_numShaders           = 2;
+  poolInfo.m_drawType = DrawType::InstancedIndexed;
+  poolInfo.m_slotInfo.m_numVertexSlots = 1;
+  poolInfo.m_slotInfo.m_numInstanceSlots = 0;
+  poolInfo.m_slotInfo.m_numUniformSlots = 1;
   DrawablePool& pool              = renderer.CreateDrawablePool(poolInfo);
 
   pool.AddShader(*vertShader);
@@ -47,6 +51,9 @@ void RenderTestCases::ExecuteBasicRenderTest(Azura::Renderer& renderer,
   Slot vertexDataSlot      = {};
   vertexDataSlot.m_binding = 0;
   vertexDataSlot.m_rate    = BufferUsageRate::PerVertex;
+
+  Slot uniformSlot      = {};
+  uniformSlot.m_binding = 0;
 
   Vector<RawStorageFormat> vertexStride = Vector<RawStorageFormat>(ContainerExtent{2, 2}, allocatorTemporary);
   vertexStride[0]                       = RawStorageFormat::R32G32B32A32_FLOAT;
@@ -74,21 +81,16 @@ void RenderTestCases::ExecuteBasicRenderTest(Azura::Renderer& renderer,
   const auto indexBufferStart = reinterpret_cast<U8*>(indexData.Data());  // NOLINT
   const auto uboDataBuffer    = reinterpret_cast<U8*>(&uboData);          // NOLINT
   // Create Drawable from Pool
-  Drawable& drawable = pool.CreateDrawable();
-  drawable.SetDrawMode(DrawType::InstancedIndexed);
-  drawable.SetIndexCount(indexData.GetSize());
-  drawable.SetVertexCount(vertexData.GetSize());
-  drawable.SetInstanceCount(1);
-  drawable.SetUniformCount(1);
-  drawable.SetIndexFormat(RawStorageFormat::R32_UNORM);
+  DrawableCreateInfo createInfo = {};
+  createInfo.m_vertexCount = vertexData.GetSize();
+  createInfo.m_indexCount = indexData.GetSize();
+  createInfo.m_instanceCount = 1;
+  createInfo.m_indexType = RawStorageFormat::R32_UINT;
 
-  drawable.SetInstanceDataCount(0);
-  drawable.SetVertexDataCount(1);
-  drawable.SetUniformDataCount(1);
-
-  drawable.AddVertexData(vertexDataSlot, bufferStart, vertexData.GetSize() * sizeof(Vertex));
-  drawable.SetIndexData(indexBufferStart, indexData.GetSize() * sizeof(U32));
-  drawable.AddUniformData(uboDataBuffer, sizeof(UniformBufferData), 0);
+  const auto drawableId = pool.CreateDrawable(createInfo);
+  pool.BindVertexData(drawableId, vertexDataSlot, bufferStart, vertexData.GetSize() * sizeof(Vertex));
+  pool.SetIndexData(drawableId, indexBufferStart, indexData.GetSize() * sizeof(U32));
+  pool.BindUniformData(drawableId, uniformSlot, uboDataBuffer, sizeof(UniformBufferData));
 
   // All Drawables Done
   renderer.Submit();
@@ -121,6 +123,9 @@ void RenderTestCases::ExecuteBasicInstancingTest(Azura::Renderer& renderer,
   poolInfo.m_byteSize             = 4096;
   poolInfo.m_numDrawables         = 1;
   poolInfo.m_numShaders           = 2;
+  poolInfo.m_slotInfo.m_numVertexSlots = 1;
+  poolInfo.m_slotInfo.m_numInstanceSlots = 1;
+  poolInfo.m_slotInfo.m_numUniformSlots = 1;
   DrawablePool& pool              = renderer.CreateDrawablePool(poolInfo);
 
   pool.AddShader(*vertShader);
@@ -133,6 +138,9 @@ void RenderTestCases::ExecuteBasicInstancingTest(Azura::Renderer& renderer,
   Slot instanceDataSlot      = {};
   instanceDataSlot.m_binding = 1;
   instanceDataSlot.m_rate    = BufferUsageRate::PerInstance;
+
+  Slot uniformSlot      = {};
+  uniformSlot.m_binding = 0;
 
   Vector<RawStorageFormat> vertexStride = Vector<RawStorageFormat>(ContainerExtent{2}, allocatorTemporary);
   vertexStride[0]                       = RawStorageFormat::R32G32B32A32_FLOAT;
@@ -170,22 +178,17 @@ void RenderTestCases::ExecuteBasicInstancingTest(Azura::Renderer& renderer,
   const auto indexBufferStart = reinterpret_cast<U8*>(indexData.Data());  // NOLINT
   const auto uboDataBuffer    = reinterpret_cast<U8*>(&uboData);          // NOLINT
                                                                           // Create Drawable from Pool
-  Drawable& drawable = pool.CreateDrawable();
-  drawable.SetDrawMode(DrawType::InstancedIndexed);
-  drawable.SetIndexCount(indexData.GetSize());
-  drawable.SetVertexCount(vertexData.GetSize());
-  drawable.SetInstanceCount(2);
-  drawable.SetUniformCount(1);
-  drawable.SetIndexFormat(RawStorageFormat::R32_UNORM);
+  DrawableCreateInfo createInfo = {};
+  createInfo.m_vertexCount = vertexData.GetSize();
+  createInfo.m_indexCount = indexData.GetSize();
+  createInfo.m_instanceCount = 2;
+  createInfo.m_indexType = RawStorageFormat::R32_UINT;
 
-  drawable.SetInstanceDataCount(1);
-  drawable.SetVertexDataCount(1);
-  drawable.SetUniformDataCount(1);
-
-  drawable.AddVertexData(vertexDataSlot, bufferStart, vertexData.GetSize() * sizeof(Vertex));
-  drawable.AddInstanceData(instanceDataSlot, instanceStart, instanceData.GetSize() * sizeof(Instance));
-  drawable.SetIndexData(indexBufferStart, indexData.GetSize() * sizeof(U32));
-  drawable.AddUniformData(uboDataBuffer, sizeof(UniformBufferData), 0);
+  const auto drawableId = pool.CreateDrawable(createInfo);
+  pool.BindVertexData(drawableId, vertexDataSlot, bufferStart, vertexData.GetSize() * sizeof(Vertex));
+  pool.BindInstanceData(drawableId, instanceDataSlot, instanceStart, instanceData.GetSize() * sizeof(Instance));
+  pool.SetIndexData(drawableId, indexBufferStart, indexData.GetSize() * sizeof(U32));
+  pool.BindUniformData(drawableId, uniformSlot, uboDataBuffer, sizeof(UniformBufferData));
 
   // All Drawables Done
   renderer.Submit();

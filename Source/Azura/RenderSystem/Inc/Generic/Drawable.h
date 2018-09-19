@@ -2,50 +2,45 @@
 #include "Containers/Vector.h"
 #include "GenericTypes.h"
 #include "Types.h"
+#include "RawStorageFormat.h"
 
 namespace Azura {
+using DrawableID = U32;
+
 class Shader;
 
+struct DrawableCreateInfo {
+  U32 m_vertexCount{0};
+  U32 m_instanceCount{0};
+  U32 m_indexCount{0};
+  RawStorageFormat m_indexType{RawStorageFormat::R32_UINT};
+};
+
+struct DrawablePoolSlotInfo {
+  U32 m_numVertexSlots{0};
+  U32 m_numInstanceSlots{0};
+  U32 m_numUniformSlots{0};
+};
+
 class Drawable {
- public:
-  Drawable(Memory::Allocator& allocator);
+public:
+  Drawable(const DrawableCreateInfo& info, const DrawablePoolSlotInfo& slotInfo, Memory::Allocator& allocator);
   virtual ~Drawable() = default;
 
-  Drawable(const Drawable& other)     = delete;
+  Drawable(const Drawable& other) = delete;
   Drawable(Drawable&& other) noexcept = default;
   Drawable& operator=(const Drawable& other) = delete;
-  Drawable& operator=(Drawable&& other) noexcept = default;
+  Drawable& operator=(Drawable&& other) noexcept = delete;
 
-  void SetVertexDataCount(U32 count);
-  void SetInstanceDataCount(U32 count);
-  void SetUniformDataCount(U32 count);
-
-  void AddVertexData(const Slot& slot, const Containers::Vector<U8>& buffer);
-  virtual void AddVertexData(const Slot& slot, const U8* buffer, U32 size)   = 0;
-
-  void AddInstanceData(const Slot& slot, const Containers::Vector<U8>& buffer);
-  virtual void AddInstanceData(const Slot& slot, const U8* buffer, U32 size)   = 0;
-
-  void AddUniformData(const Containers::Vector<U8>& buffer, U32 binding);
-  virtual void AddUniformData(const U8* buffer, U32 size, U32 binding)   = 0;
-
-  void SetIndexData(const Containers::Vector<U8>& buffer);
-  virtual void SetIndexData(const U8* buffer, U32 size)   = 0;
-  void SetIndexFormat(RawStorageFormat indexType);
-
-  virtual void SetDrawMode(DrawType drawMode);
+  void AddVertexBufferInfo(BufferInfo&& info);
+  void AddInstanceBufferInfo(BufferInfo&& info);
+  void AddUniformBufferInfo(BufferInfo&& info);
+  void SetIndexBufferInfo(BufferInfo&& info);
 
   U32 GetVertexCount() const;
   U32 GetIndexCount() const;
   U32 GetInstanceCount() const;
-  U32 GetUniformCount() const;
-  DrawType GetDrawType() const;
   RawStorageFormat GetIndexType() const;
-
-  void SetVertexCount(U32 count);
-  void SetInstanceCount(U32 count);
-  void SetIndexCount(U32 count);
-  void SetUniformCount(U32 count);
 
   const Containers::Vector<BufferInfo>& GetVertexBufferInfos() const;
   const Containers::Vector<BufferInfo>& GetInstanceBufferInfos() const;
@@ -53,63 +48,77 @@ class Drawable {
 
   virtual void Submit() = 0;
 
- protected:
+protected:
   Memory::Allocator& GetAllocator() const;
 
   Containers::Vector<BufferInfo> m_vertexBufferInfos;
   Containers::Vector<BufferInfo> m_instanceBufferInfos;
   Containers::Vector<BufferInfo> m_uniformBufferInfos;
   BufferInfo m_indexBufferInfo;
+  DrawableCreateInfo m_createInfo;
 
- private:
+private:
   // Shared as they are editable by APIs
-  U32 m_vertexCount;
-  U32 m_indexCount;
-  U32 m_instanceCount;
-  U32 m_uniformCount{};
-  RawStorageFormat m_indexType;
+  const U32 m_vertexCount;
+  const U32 m_indexCount;
+  const RawStorageFormat m_indexType;
 
-  DrawType m_drawMode;
+  U32 m_instanceCount;
+
   std::reference_wrapper<Memory::Allocator> m_allocator;
 };
 
 struct DrawablePoolCreateInfo {
-  U32 m_byteSize;
-  U32 m_numDrawables;
-  U32 m_numShaders;
+  U32 m_byteSize{0};
+  U32 m_numDrawables{0};
+  U32 m_numShaders{0};
+  DrawablePoolSlotInfo m_slotInfo{};
+  DrawType m_drawType{DrawType::InstancedIndexed};
 };
 
 class DrawablePool {
- public:
-  explicit DrawablePool(U32 byteSize, Memory::Allocator& allocator);
+public:
+  explicit DrawablePool(const DrawablePoolCreateInfo& createInfo, Memory::Allocator& allocator);
   virtual ~DrawablePool() = default;
 
-  DrawablePool(const DrawablePool& other)     = delete;
+  DrawablePool(const DrawablePool& other) = delete;
   DrawablePool(DrawablePool&& other) noexcept = default;
   DrawablePool& operator=(const DrawablePool& other) = delete;
   DrawablePool& operator=(DrawablePool&& other) noexcept = default;
 
-  virtual Drawable& CreateDrawable() = 0;
+  virtual DrawableID CreateDrawable(const DrawableCreateInfo& createInfo) = 0;
 
   virtual void AddShader(const Shader& shader) = 0;
 
   virtual void AddBufferBinding(Slot slot, const Containers::Vector<RawStorageFormat>& strides) = 0;
 
-  virtual void AppendBytes(const Containers::Vector<U8>& buffer);
-  virtual void AppendBytes(const U8* buffer, U32 bufferSize) = 0;
-  void MoveOffset(U32 bufferSize);
+  void BindVertexData(DrawableID drawableId, const Slot& slot, const Containers::Vector<U8>& buffer);
+  virtual void BindVertexData(DrawableID drawableId, const Slot& slot, const U8* buffer, U32 size) = 0;
+
+  void BindInstanceData(DrawableID drawableId, const Slot& slot, const Containers::Vector<U8>& buffer);
+  virtual void BindInstanceData(DrawableID drawableId, const Slot& slot, const U8* buffer, U32 size) = 0;
+
+  void BindUniformData(DrawableID drawableId, const Slot& slot, const Containers::Vector<U8>& buffer);
+  virtual void BindUniformData(DrawableID drawableId, const Slot& slot, const U8* buffer, U32 size) = 0;
+
+  void SetIndexData(DrawableID drawableId, const Containers::Vector<U8>& buffer);
+  virtual void SetIndexData(DrawableID drawableId, const U8* buffer, U32 size) = 0;
 
   virtual void Submit() = 0;
 
- protected:
-  U32 GetOffset() const;
   U32 GetSize() const;
-  Memory::Allocator& GetAllocator() const;
 
- private:
+protected:
+  Memory::Allocator& GetAllocator() const;
+  DrawType GetDrawType() const;
+  const DrawablePoolSlotInfo& GetSlotInfo() const;
+
+private:
   U32 m_byteSize;
-  U32 m_offset;
+  DrawType m_drawType;
+  const DrawablePoolSlotInfo m_slotInfo;
+
   std::reference_wrapper<Memory::Allocator> m_allocator;
 };
 
-}  // namespace Azura
+} // namespace Azura

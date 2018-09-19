@@ -83,6 +83,8 @@ TEST_F(RendererTest, BasicRenderTest) {
   RenderTestCases::ExecuteBasicRenderTest(*renderer, *window, log_TestRenderer);
 
   ASSERT_TRUE(CompareImageBytes("./ReferenceImages/BasicRenderTest.data", "./BasicRenderTest.data"));
+
+  window->Destroy();
 }
 
 TEST_F(RendererTest, BasicInstancingTest) {
@@ -97,4 +99,6 @@ TEST_F(RendererTest, BasicInstancingTest) {
   RenderTestCases::ExecuteBasicInstancingTest(*renderer, *window, log_TestRenderer);
 
   ASSERT_TRUE(CompareImageBytes("./ReferenceImages/BasicInstancingTest.data", "./BasicInstancingTest.data"));
+
+  window->Destroy();
 }

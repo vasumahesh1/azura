@@ -10,6 +10,8 @@ layout(binding = 0) uniform UBOData {
 layout(location = 0) in vec4 inPosition;
 layout(location = 1) in vec4 inColor;
 
+layout(location = 2) in vec4 perInstancePosition;
+
 layout(location = 0) out vec4 fragColor;
 
 out gl_PerVertex {
@@ -17,6 +19,8 @@ out gl_PerVertex {
 };
 
 void main() {
-    gl_Position = ubo.proj * ubo.view * ubo.model * inPosition;
-    fragColor = inColor;
+  mat4 instanceModel = mat4(1.0f);
+  instanceModel[3] = perInstancePosition;
+  gl_Position = ubo.proj * ubo.view * instanceModel * ubo.model * inPosition;
+  fragColor = inColor;
 }

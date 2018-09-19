@@ -2,56 +2,35 @@
 
 namespace Azura {
 
-Drawable::Drawable(Memory::Allocator& allocator)
-  : m_vertexBufferInfos(allocator),
-    m_instanceBufferInfos(allocator),
-    m_uniformBufferInfos(allocator),
-    m_vertexCount(0),
-    m_indexCount(0),
-    m_instanceCount(0),
-    m_indexType(),
-    m_drawMode(DrawType::InstancedIndexed),
+Drawable::Drawable(const DrawableCreateInfo& info, const DrawablePoolSlotInfo& slotInfo, Memory::Allocator& allocator)
+  : m_vertexBufferInfos(slotInfo.m_numVertexSlots, allocator),
+    m_instanceBufferInfos(slotInfo.m_numInstanceSlots, allocator),
+    m_uniformBufferInfos(slotInfo.m_numUniformSlots, allocator),
+    m_vertexCount(info.m_vertexCount),
+    m_indexCount(info.m_indexCount),
+    m_indexType(info.m_indexType),
+    m_instanceCount(info.m_instanceCount),
     m_allocator(allocator) {
-}
-
-void Drawable::SetVertexDataCount(const U32 count) {
-  m_vertexBufferInfos.Reserve(count);
-}
-
-void Drawable::SetInstanceDataCount(const U32 count) {
-  m_instanceBufferInfos.Reserve(count);
-}
-
-void Drawable::SetUniformDataCount(const U32 count) {
-  m_uniformBufferInfos.Reserve(count);
-}
-
-void Drawable::AddVertexData(const Slot& slot, const Containers::Vector<U8>& buffer) {
-  AddVertexData(slot, buffer.Data(), buffer.GetSize());
-}
-
-void Drawable::AddInstanceData(const Slot& slot, const Containers::Vector<U8>& buffer) {
-  AddInstanceData(slot, buffer.Data(), buffer.GetSize());
-}
-
-void Drawable::AddUniformData(const Containers::Vector<U8>& buffer, U32 binding) {
-  AddUniformData(buffer.Data(), buffer.GetSize(), binding);
-}
-
-void Drawable::SetIndexData(const Containers::Vector<U8>& buffer) {
-  SetIndexData(buffer.Data(), buffer.GetSize());
-}
-
-void Drawable::SetIndexFormat(RawStorageFormat indexType) {
-  m_indexType = indexType;
-}
-
-void Drawable::SetDrawMode(const DrawType drawMode) {
-  m_drawMode = drawMode;
 }
 
 Memory::Allocator& Drawable::GetAllocator() const {
   return m_allocator.get();
+}
+
+void Drawable::AddVertexBufferInfo(BufferInfo&& info) {
+  m_vertexBufferInfos.PushBack(info);
+}
+
+void Drawable::AddInstanceBufferInfo(BufferInfo&& info) {
+  m_instanceBufferInfos.PushBack(info);
+}
+
+void Drawable::AddUniformBufferInfo(BufferInfo&& info) {
+  m_uniformBufferInfos.PushBack(info);
+}
+
+void Drawable::SetIndexBufferInfo(BufferInfo&& info) {
+  m_indexBufferInfo = info;
 }
 
 U32 Drawable::GetVertexCount() const {
@@ -66,32 +45,8 @@ U32 Drawable::GetInstanceCount() const {
   return m_instanceCount;
 }
 
-U32 Drawable::GetUniformCount() const {
-  return m_uniformCount;
-}
-
-DrawType Drawable::GetDrawType() const {
-  return m_drawMode;
-}
-
 RawStorageFormat Drawable::GetIndexType() const {
   return m_indexType;
-}
-
-void Drawable::SetVertexCount(U32 count) {
-  m_vertexCount = count;
-}
-
-void Drawable::SetIndexCount(U32 count) {
-  m_indexCount = count;
-}
-
-void Drawable::SetUniformCount(U32 count) {
-  m_uniformCount = count;
-}
-
-void Drawable::SetInstanceCount(U32 count) {
-  m_instanceCount = count;
 }
 
 const Containers::Vector<BufferInfo>& Drawable::GetVertexBufferInfos() const {
@@ -106,19 +61,27 @@ const BufferInfo& Drawable::GetIndexBufferInfo() const {
   return m_indexBufferInfo;
 }
 
-DrawablePool::DrawablePool(const U32 byteSize, Memory::Allocator& allocator)
-    : m_byteSize(byteSize), m_offset(0), m_allocator(allocator) {}
-
-void DrawablePool::AppendBytes(const Containers::Vector<U8>& buffer) {
-  AppendBytes(buffer.Data(), buffer.GetSize());
+DrawablePool::DrawablePool(const DrawablePoolCreateInfo& createInfo, Memory::Allocator& allocator)
+  : m_byteSize(createInfo.m_byteSize),
+    m_drawType(createInfo.m_drawType),
+    m_slotInfo(createInfo.m_slotInfo),
+    m_allocator(allocator) {
 }
 
-void DrawablePool::MoveOffset(U32 bufferSize) {
-  m_offset += bufferSize;
+void DrawablePool::BindVertexData(DrawableID drawableId, const Slot& slot, const Containers::Vector<U8>& buffer) {
+  BindVertexData(drawableId, slot, buffer.Data(), buffer.GetSize());
 }
 
-U32 DrawablePool::GetOffset() const {
-  return m_offset;
+void DrawablePool::BindInstanceData(DrawableID drawableId, const Slot& slot, const Containers::Vector<U8>& buffer) {
+  BindInstanceData(drawableId, slot, buffer.Data(), buffer.GetSize());
+}
+
+void DrawablePool::BindUniformData(DrawableID drawableId, const Slot& slot, const Containers::Vector<U8>& buffer) {
+  BindUniformData(drawableId, slot, buffer.Data(), buffer.GetSize());
+}
+
+void DrawablePool::SetIndexData(DrawableID drawableId, const Containers::Vector<U8>& buffer) {
+  SetIndexData(drawableId, buffer.Data(), buffer.GetSize());
 }
 
 U32 DrawablePool::GetSize() const {
@@ -128,4 +91,12 @@ U32 DrawablePool::GetSize() const {
 Memory::Allocator& DrawablePool::GetAllocator() const {
   return m_allocator;
 }
-}  // namespace Azura
+
+DrawType DrawablePool::GetDrawType() const {
+  return m_drawType;
+}
+
+const DrawablePoolSlotInfo& DrawablePool::GetSlotInfo() const {
+  return m_slotInfo;
+}
+} // namespace Azura
