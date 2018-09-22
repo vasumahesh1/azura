@@ -84,7 +84,7 @@ IcoSphere::IcoSphere(U32 subDivisions)
     m_triangles(BASE_TRIANGLES.begin(), BASE_TRIANGLES.end()) {
 
   m_vertices.reserve(10 * U32(std::pow(4, subDivisions)));
-  m_triangles.reserve(20 * U32(std::pow(4, subDivisions)));
+  m_triangles.reserve(10 * U32(std::pow(4, subDivisions)));
 
   for (U32 idx  = 0; idx < subDivisions; ++idx) {
     m_triangles = SubDivide(m_vertices, m_triangles);
