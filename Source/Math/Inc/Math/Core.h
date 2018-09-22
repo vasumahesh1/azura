@@ -4,6 +4,11 @@
 
 namespace Azura
 {
+  using Vector4d = mathfu::Vector<double, 4>;
+  using Vector4f = mathfu::Vector<float, 4>;
+  using Vector4i = mathfu::Vector<int, 4>;
+  using Vector4u = mathfu::Vector<U32, 4>;
+
   using Vector3d = mathfu::Vector<double, 3>;
   using Vector3f = mathfu::Vector<float, 3>;
   using Vector3i = mathfu::Vector<int, 3>;

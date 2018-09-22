@@ -7,8 +7,6 @@ struct UBOData {
 struct VertexShaderInput
 {
   float4 inPosition : POSITION;
-  float4 inColor : COLOR;
-  float4 instancePos : INSTANCE_POS;
 };
 
 struct PixelShaderInput

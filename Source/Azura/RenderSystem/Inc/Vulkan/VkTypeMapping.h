@@ -4,7 +4,7 @@
 #include <map>
 #include <optional>
 #include "Generic/GenericTypes.h"
-#include "Generic/RawStorageFormat.h"
+#include "Core/RawStorageFormat.h"
 
 namespace Azura {
 namespace Vulkan {

@@ -4,7 +4,7 @@
 #include "Containers/Vector.h"
 #include "Drawable.h"
 #include "GenericTypes.h"
-#include "RawStorageFormat.h"
+#include "Core/RawStorageFormat.h"
 
 namespace Azura {
 const U32 DEFAULT_FRAMES_IN_FLIGHT = 2;

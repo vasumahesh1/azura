@@ -6,7 +6,6 @@ set(VULKAN_SOURCES
     "Inc/Generic/Drawable.h"
     "Inc/Generic/GenericTypes.h"
     "Inc/Generic/GLFWWindow.h"
-    "Inc/Generic/RawStorageFormat.h"
     "Inc/Generic/Renderer.h"
     "Inc/Generic/RenderSystem.h"
     "Inc/Generic/Shader.h"
@@ -28,7 +27,6 @@ set(VULKAN_SOURCES
     # Source
     "Src/Generic/Drawable.cpp"
     "Src/Generic/GLFWWindow.cpp"
-    "Src/Generic/RawStorageFormat.cpp"
     "Src/Generic/Renderer.cpp"
     "Src/Generic/Shader.cpp"
     "Src/Generic/Window.cpp"
@@ -63,9 +61,9 @@ AzuraAddLoggingSupport(VulkanRenderSystem 50)
 target_compile_definitions(VulkanRenderSystem PUBLIC API_VULKAN=1)
 
 target_include_directories(VulkanRenderSystem
-                           PUBLIC ${BOOST_ROOT}/ ${PROJECT_SOURCE_DIR}/Inc)
+                           PUBLIC ${PROJECT_SOURCE_DIR}/Inc)
 
-target_link_libraries(VulkanRenderSystem Common Log VULKAN_STATIC glfw)
+target_link_libraries(VulkanRenderSystem Common Log Core VULKAN_STATIC glfw)
 
 
 # -----------  Testing Target  -----------

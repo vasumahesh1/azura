@@ -14,4 +14,8 @@ Matrix4f Transform::LookAt(const Vector3f& at, const Vector3f& eye, const Vector
 Matrix4f Transform::Perspective(const float fovY, const float aspect, const float zNear, const float zFar) {
   return Matrix4f::Perspective(fovY, aspect, zNear, zFar, MATHFU_HANDEDNESS);
 }
+
+Vector3f Transform::Downgrade(const Vector4f& vec) {
+  return Vector3f(vec[0], vec[1], vec[2]);
+}
 } // namespace Azura

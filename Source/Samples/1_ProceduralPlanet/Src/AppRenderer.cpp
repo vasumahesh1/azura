@@ -1,13 +1,15 @@
 #include "ProceduralPlanet/AppRenderer.h"
-#include "Generic/RawStorageFormat.h"
+#include "Core/RawStorageFormat.h"
 #include "Generic/RenderSystem.h"
 #include "Generic/Shader.h"
 #include "Memory/MemoryFactory.h"
 #include "Memory/MonotonicAllocator.h"
 #include "Math/Transform.h"
+#include "Math/Icosphere.h"
 
 namespace Azura {
 using namespace Containers; // NOLINT
+using namespace Math; // NOLINT
 
 struct Vertex {
   float m_pos[4];
@@ -85,12 +87,12 @@ void AppRenderer::Initialize() {
   pixelShader->SetStage(ShaderStage::Pixel);
 
   DrawablePoolCreateInfo poolInfo(allocatorTemporary);
-  poolInfo.m_byteSize                    = 4096;
+  poolInfo.m_byteSize                    = 0xFFFFFF; // 15MB Pool
   poolInfo.m_numDrawables                = 1;
   poolInfo.m_numShaders                  = 2;
   poolInfo.m_drawType                    = DrawType::InstancedIndexed;
   poolInfo.m_slotInfo.m_numVertexSlots   = 1;
-  poolInfo.m_slotInfo.m_numInstanceSlots = 1;
+  poolInfo.m_slotInfo.m_numInstanceSlots = 0;
 
   // UBO Info
   poolInfo.m_uniformBuffers.Reserve(1);
@@ -104,48 +106,24 @@ void AppRenderer::Initialize() {
   pool.AddShader(*vertShader);
   pool.AddShader(*pixelShader);
 
-  Vector<RawStorageFormat> vertexStride = Vector<RawStorageFormat>(ContainerExtent{2}, allocatorTemporary);
-  vertexStride[0]                       = RawStorageFormat::R32G32B32A32_FLOAT;
-  vertexStride[1]                       = RawStorageFormat::R32G32B32A32_FLOAT;
+  IcoSphere sphere(7);
+
+  Vector<RawStorageFormat> vertexStride = Vector<RawStorageFormat>(1, allocatorTemporary);
+  vertexStride.PushBack(sphere.GetVertexFormat());
   pool.AddBufferBinding(vertexDataSlot, vertexStride);
 
-  Vector<RawStorageFormat> instanceStride = Vector<RawStorageFormat>(ContainerExtent{1}, allocatorTemporary);
-  instanceStride[0]                       = RawStorageFormat::R32G32B32A32_FLOAT;
-  pool.AddBufferBinding(instanceDataSlot, instanceStride);
-
-  Vector<Vertex> vertexData = Vector<Vertex>({
-    Vertex{{0, 0, 1, 1}, {1, 0, 0, 1}},
-    Vertex{{1, 0, 1, 1}, {0, 1, 0, 1}},
-    Vertex{{1, 1, 1, 1}, {0, 0, 1, 1}},
-    Vertex{{0, 1, 1, 1}, {1, 1, 1, 1}}
-  }, allocatorTemporary);
-
-  Vector<Instance> instanceData = Vector<Instance>({
-    Instance{{-2, 0, 0, 1}},
-    Instance{{2, 0, 0, 1}}
-  }, allocatorTemporary);
-
-  Vector<U32> indexData = Vector<U32>({
-    0, 2, 1,
-    2, 0, 3
-  }, allocatorTemporary);
-
-  const auto bufferStart      = reinterpret_cast<U8*>(vertexData.Data());   // NOLINT
-  const auto instanceStart    = reinterpret_cast<U8*>(instanceData.Data()); // NOLINT
-  const auto indexBufferStart = reinterpret_cast<U8*>(indexData.Data());    // NOLINT
   const auto uboDataBuffer    = reinterpret_cast<U8*>(&uboData);            // NOLINT
 
   // Create Drawable from Pool
   DrawableCreateInfo createInfo = {};
-  createInfo.m_vertexCount      = vertexData.GetSize();
-  createInfo.m_indexCount       = indexData.GetSize();
-  createInfo.m_instanceCount    = 2;
-  createInfo.m_indexType        = RawStorageFormat::R32_UINT;
+  createInfo.m_vertexCount      = sphere.GetVertexCount();
+  createInfo.m_indexCount       = sphere.GetIndexCount();
+  createInfo.m_instanceCount    = 1;
+  createInfo.m_indexType        = sphere.GetIndexFormat();
 
   const auto drawableId = pool.CreateDrawable(createInfo);
-  pool.BindVertexData(drawableId, vertexDataSlot, bufferStart, vertexData.GetSize() * sizeof(Vertex));
-  pool.BindInstanceData(drawableId, instanceDataSlot, instanceStart, instanceData.GetSize() * sizeof(Instance));
-  pool.SetIndexData(drawableId, indexBufferStart, indexData.GetSize() * sizeof(U32));
+  pool.BindVertexData(drawableId, vertexDataSlot, sphere.VertexData(), sphere.VertexDataSize());
+  pool.SetIndexData(drawableId, sphere.IndexData(), sphere.IndexDataSize());
   pool.BindUniformData(drawableId, uniformSlot, uboDataBuffer, sizeof(UniformBufferData));
 
   // All Drawables Done

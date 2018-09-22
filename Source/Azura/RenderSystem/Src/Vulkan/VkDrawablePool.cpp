@@ -6,6 +6,7 @@
 #include "Generic/Renderer.h"
 #include "Vulkan/VkCore.h"
 #include "Vulkan/VkTypeMapping.h"
+#include "Core/RawStorageFormat.h"
 
 using namespace Azura::Containers; // NOLINT - Freedom to use using namespace in CPP files.
 
