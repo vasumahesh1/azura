@@ -12,6 +12,9 @@ environment:
   GLFW_64_URL: https://github.com/glfw/glfw/releases/download/3.2.1/glfw-3.2.1.bin.WIN64.zip
   GLFW_32_URL: https://github.com/glfw/glfw/releases/download/3.2.1/glfw-3.2.1.bin.WIN32.zip
   CMAKE_11_4_URL: https://cmake.org/files/v3.11/cmake-3.11.4-win64-x64.zip
+  
+  # TODO(vasumahesh1): Needs changes
+  SLANG_COMPILER: https://ci.appveyor.com/api/buildjobs/t8a0u3xvbn8lqvha/artifacts/slang-dev-7250ed1-win64.zip
 
   matrix:
     - BUILD: 'DEBUG'

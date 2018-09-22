@@ -9,6 +9,7 @@ message(STATUS "Build Arch: ${BUILD_ARCH}")
 include("./GLFW.Import.cmake")
 include("./Vulkan.Import.cmake")
 include("./Boost.Import.cmake")
+include("./Slang.Import.cmake")
 
 add_subdirectory(Imports)
 

@@ -19,3 +19,37 @@ function(AzuraAddSPIRVShadersToTarget TARGET)
   add_custom_target(${TARGET}_VulkanShaders DEPENDS ${SPIRV_BINARY_FILES})
   add_dependencies(${TARGET} ${TARGET}_VulkanShaders)
 endfunction()
+
+
+
+function(AzuraAddSlangShaders TARGET API)
+  foreach(SHADER_TUPLE_STR ${ARGN})
+
+    message(${SHADER_TUPLE_STR})
+
+    string(REPLACE "|" ";" SHADER_TUPLE ${SHADER_TUPLE_STR})
+
+    list(GET SHADER_TUPLE 0 SHADER_INPUT_FILE)
+    list(GET SHADER_TUPLE 1 SHADER_TYPE)
+
+    string(TOLOWER ${SHADER_TYPE}_5_0 SLANG_PROFILE)
+
+    set(OUTPUT_FILE "")
+
+    get_filename_component(SHADER_FILE_NAME ${SHADER_INPUT_FILE} NAME)
+    string(REGEX REPLACE "\\.[^.]*$" "" SHADER_FILE_WITHOUT_EXT ${SHADER_FILE_NAME})
+
+    if ("${API}" STREQUAL "VULKAN")
+      set(OUTPUT_FILE "${PROJECT_BINARY_DIR}/Shaders/Vulkan/${SHADER_FILE_WITHOUT_EXT}.spv")
+    endif()
+
+    add_custom_command(OUTPUT ${OUTPUT_FILE}
+                       COMMAND ${CMAKE_COMMAND} -E make_directory "${PROJECT_BINARY_DIR}/Shaders/Vulkan/"
+                       COMMAND ${SLANG_COMPILER} ${SHADER_INPUT_FILE} -profile ${SLANG_PROFILE} -entry main -o ${OUTPUT_FILE}
+                       DEPENDS ${SHADER_INPUT_FILE})
+    list(APPEND SPIRV_BINARY_FILES ${OUTPUT_FILE})
+  endforeach(SHADER_TUPLE_STR)
+
+  add_custom_target(${TARGET}_VulkanShaders DEPENDS ${SPIRV_BINARY_FILES})
+  add_dependencies(${TARGET} ${TARGET}_VulkanShaders)
+endfunction()

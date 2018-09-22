@@ -22,6 +22,11 @@ echo "Downloading CMake ..."
 appveyor DownloadFile $env:CMAKE_11_4_URL -FileName cmake.zip > $null
 7z x cmake.zip -oC:\AppveyorCache\CMake\ > $null
 
+# Download Slang Compiler
+echo "Downloading Slang Compiler ..."
+appveyor DownloadFile $env:SLANG_COMPILER -FileName slang.zip > $null
+7z x slang.zip -oC:\AppveyorCache\Slang\ > $null
+
 # Download GLFW
 echo "Downloading GLFW ..."
 appveyor DownloadFile $env:GLFW_64_URL -FileName glfw64.zip > $null

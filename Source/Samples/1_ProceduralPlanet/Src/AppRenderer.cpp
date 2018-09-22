@@ -77,11 +77,11 @@ void AppRenderer::Initialize() {
   m_renderer->SetDrawablePoolCount(1);
 
   auto vertShader = RenderSystem::
-    CreateShader(*m_renderer, "./Shaders/" + m_renderer->GetRenderingAPI() + "/Terrain.vertex", log_AppRenderer);
+    CreateShader(*m_renderer, "./Shaders/" + m_renderer->GetRenderingAPI() + "/Terrain.vs", log_AppRenderer);
   vertShader->SetStage(ShaderStage::Vertex);
 
   auto pixelShader = RenderSystem::
-    CreateShader(*m_renderer, "./Shaders/" + m_renderer->GetRenderingAPI() + "/Terrain.pixel", log_AppRenderer);
+    CreateShader(*m_renderer, "./Shaders/" + m_renderer->GetRenderingAPI() + "/Terrain.ps", log_AppRenderer);
   pixelShader->SetStage(ShaderStage::Pixel);
 
   DrawablePoolCreateInfo poolInfo(allocatorTemporary);
