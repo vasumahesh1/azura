@@ -9,7 +9,7 @@
 
 namespace Azura {
 using namespace Containers; // NOLINT
-using namespace Math; // NOLINT
+using namespace Math;       // NOLINT
 
 struct Vertex {
   float m_pos[4];
@@ -18,6 +18,23 @@ struct Vertex {
 
 struct Instance {
   float m_pos[4];
+};
+
+struct UniformBufferData
+{
+  Matrix4f m_model;
+  Matrix4f m_view;
+  Matrix4f m_proj;
+};
+
+struct ShaderControls {
+  float m_shoreLevel{0.5f};
+  float m_elevation{0.5f};
+  float m_noiseScale{0.5f};
+
+  Color3f m_sandColor{237.0f / 255.0f, 209.0f / 255.0f, 127.0f / 255.0f};
+  Color3f m_bedrock1Color{68.0f / 255.0f, 85.0f / 255.0f, 102.0f / 255.0f};
+  Color3f m_bedrock2Color{34.0f / 255.0f, 43.0f / 255.0f, 51.0f / 255.0f};
 };
 
 AppRenderer::AppRenderer()
@@ -60,12 +77,17 @@ void AppRenderer::Initialize() {
 
   Slot uniformSlot      = {};
   uniformSlot.m_binding = 0;
+  
+  Slot shaderControlSlot      = {};
+  shaderControlSlot.m_binding = 1;
 
   UniformBufferData uboData = {};
   uboData.m_model           = Matrix4f::Identity();
   uboData.m_view            = Transform::LookAt(Vector3f(0.5f, 0.5f, 0.0f), Vector3f(0.5f, 0.5f, -6.0f),
                                                 Vector3f(0.0f, 1.0f, 0.0f));
   uboData.m_proj = Transform::Perspective(45.0f, 16.0f / 9.0f, 0.1f, 100.0f);
+
+  ShaderControls shaderControls{};
 
   // TODO(vasumahesh1):[Q]:Allocator?
   ApplicationRequirements applicationRequirements = {};
@@ -86,8 +108,10 @@ void AppRenderer::Initialize() {
     CreateShader(*m_renderer, "./Shaders/" + m_renderer->GetRenderingAPI() + "/Terrain.ps", log_AppRenderer);
   pixelShader->SetStage(ShaderStage::Pixel);
 
+  IcoSphere sphere(7);
+
   DrawablePoolCreateInfo poolInfo(allocatorTemporary);
-  poolInfo.m_byteSize                    = 0xFFFFFF; // 15MB Pool
+  poolInfo.m_byteSize                    = sphere.TotalDataSize() + 0xFFFF;
   poolInfo.m_numDrawables                = 1;
   poolInfo.m_numShaders                  = 2;
   poolInfo.m_drawType                    = DrawType::InstancedIndexed;
@@ -95,10 +119,14 @@ void AppRenderer::Initialize() {
   poolInfo.m_slotInfo.m_numInstanceSlots = 0;
 
   // UBO Info
-  poolInfo.m_uniformBuffers.Reserve(1);
+  poolInfo.m_uniformBuffers.Reserve(2);
   poolInfo.m_uniformBuffers.PushBack(std::make_pair(uniformSlot,
                                                     UniformBufferDesc{
                                                       sizeof(UniformBufferData), 1, ShaderStage::Vertex
+                                                    }));
+  poolInfo.m_uniformBuffers.PushBack(std::make_pair(shaderControlSlot,
+                                                    UniformBufferDesc{
+                                                      sizeof(ShaderControls), 1, ShaderStage::Vertex
                                                     }));
 
   DrawablePool& pool = m_renderer->CreateDrawablePool(poolInfo);
@@ -106,13 +134,12 @@ void AppRenderer::Initialize() {
   pool.AddShader(*vertShader);
   pool.AddShader(*pixelShader);
 
-  IcoSphere sphere(7);
-
   Vector<RawStorageFormat> vertexStride = Vector<RawStorageFormat>(1, allocatorTemporary);
   vertexStride.PushBack(sphere.GetVertexFormat());
   pool.AddBufferBinding(vertexDataSlot, vertexStride);
 
-  const auto uboDataBuffer    = reinterpret_cast<U8*>(&uboData);            // NOLINT
+  const auto uboDataBuffer = reinterpret_cast<U8*>(&uboData); // NOLINT
+  const auto shaderControlBuffer = reinterpret_cast<U8*>(&shaderControls); // NOLINT
 
   // Create Drawable from Pool
   DrawableCreateInfo createInfo = {};
@@ -125,6 +152,7 @@ void AppRenderer::Initialize() {
   pool.BindVertexData(drawableId, vertexDataSlot, sphere.VertexData(), sphere.VertexDataSize());
   pool.SetIndexData(drawableId, sphere.IndexData(), sphere.IndexDataSize());
   pool.BindUniformData(drawableId, uniformSlot, uboDataBuffer, sizeof(UniformBufferData));
+  pool.BindUniformData(drawableId, shaderControlSlot, shaderControlBuffer, sizeof(ShaderControls));
 
   // All Drawables Done
   m_renderer->Submit();

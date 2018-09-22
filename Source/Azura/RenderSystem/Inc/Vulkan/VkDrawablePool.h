@@ -23,7 +23,7 @@ class VkDrawable : public Drawable {
 public:
   VkDrawable(VkDevice device,
              VkBuffer mainBuffer,
-             VkDescriptorSetLayout descriptorSetLayout,
+    const Containers::Vector<VkDescriptorSetLayout>& descriptorSetLayouts,
              VkDescriptorPool descriptorPool,
              const DrawableCreateInfo& info,
     U32 numVertexSlots,
@@ -34,17 +34,17 @@ public:
 
   void Submit() override;
 
-  const VkDescriptorSet& GetDescriptorSet() const;
+  const Containers::Vector<VkDescriptorSet>& GetDescriptorSet() const;
 
   void CleanUp(VkDevice device) const;
 
 private:
   VkDevice m_device;
-  VkDescriptorSetLayout m_descriptorSetLayout;
+  Containers::Vector<VkDescriptorSetLayout> m_descriptorSetLayouts;
   VkDescriptorPool m_descriptorPool;
   VkBuffer m_mainBuffer;
 
-  VkDescriptorSet m_descriptorSet;
+  Containers::Vector<VkDescriptorSet> m_descriptorSets;
   const Log log_VulkanRenderSystem;
 };
 
@@ -96,7 +96,7 @@ private:
   ViewportDimensions m_viewport;
 
   VkDescriptorPool m_descriptorPool{};
-  VkDescriptorSetLayout m_descriptorSetLayout;
+  Containers::Vector<VkDescriptorSetLayout> m_descriptorSetLayouts;
 
   VkScopedPipeline m_pipeline;
   VkPipelineLayout m_pipelineLayout;

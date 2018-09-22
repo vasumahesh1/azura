@@ -41,6 +41,8 @@ function(AzuraAddSlangShaders TARGET API)
 
     if ("${API}" STREQUAL "VULKAN")
       set(OUTPUT_FILE "${PROJECT_BINARY_DIR}/Shaders/Vulkan/${SHADER_FILE_WITHOUT_EXT}.spv")
+    elseif ("${API}" STREQUAL "GLSL")
+      set(OUTPUT_FILE "${PROJECT_BINARY_DIR}/Shaders/Vulkan/${SHADER_FILE_WITHOUT_EXT}.glsl")
     endif()
 
     add_custom_command(OUTPUT ${OUTPUT_FILE}
@@ -50,6 +52,8 @@ function(AzuraAddSlangShaders TARGET API)
     list(APPEND SPIRV_BINARY_FILES ${OUTPUT_FILE})
   endforeach(SHADER_TUPLE_STR)
 
-  add_custom_target(${TARGET}_VulkanShaders DEPENDS ${SPIRV_BINARY_FILES})
-  add_dependencies(${TARGET} ${TARGET}_VulkanShaders)
+  set(SHADERS_TARGET ${TARGET}_Shaders_${API})
+
+  add_custom_target(${SHADERS_TARGET} DEPENDS ${SPIRV_BINARY_FILES})
+  add_dependencies(${TARGET} ${SHADERS_TARGET})
 endfunction()

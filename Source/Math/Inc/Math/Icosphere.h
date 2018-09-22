@@ -19,6 +19,7 @@ public:
   RawStorageFormat GetIndexFormat() const override;
   U32 GetVertexCount() const override;
   U32 GetIndexCount() const override;
+  U32 TotalDataSize() const override;
 
 private:
   std::vector<Vector4f> m_vertices{};

@@ -124,5 +124,9 @@ U32 IcoSphere::GetVertexCount() const {
 U32 IcoSphere::GetIndexCount() const {
   return U32(m_triangles.size() * 3);
 }
+
+U32 IcoSphere::TotalDataSize() const {
+  return VertexDataSize() + IndexDataSize();
+}
 } // namespace Math
 } // namespace Azura

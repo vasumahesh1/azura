@@ -50,6 +50,8 @@ public:
   // Copy Ctor
   Vector(const Vector& other);
 
+  Vector(const Vector & other, Memory::Allocator & alloc);
+
   // Move Ctor
   Vector(Vector&& other) noexcept;
 
@@ -357,6 +359,25 @@ Vector<Type>::Vector(const Vector& other)
   : m_size(other.m_size),
     m_maxSize(other.m_maxSize),
     m_allocator(other.m_allocator) {
+  // Allocate Memory
+  m_base = m_allocator.get().RawNewArray<Type>(m_maxSize);
+
+  if constexpr (std::is_trivially_copyable_v<Type>) {
+    // Copy over Contents
+    std::memcpy(m_base.get(), other.m_base.get(), other.m_size * sizeof(Type));
+  } else {
+    // Manually Copy Construct each item
+    for (U32 idx = 0; idx < other.m_size; ++idx) {
+      new(&m_base[idx]) Type(other.m_base[idx]);
+    }
+  }
+}
+
+template <typename Type>
+Vector<Type>::Vector(const Vector& other, Memory::Allocator& alloc)
+  : m_size(other.m_size),
+  m_maxSize(other.m_maxSize),
+  m_allocator(alloc) {
   // Allocate Memory
   m_base = m_allocator.get().RawNewArray<Type>(m_maxSize);
 

@@ -15,18 +15,20 @@ namespace Vulkan {
 
 VkDrawable::VkDrawable(VkDevice device,
                        VkBuffer mainBuffer,
-                       VkDescriptorSetLayout descriptorSetLayout,
+                       const Containers::Vector<VkDescriptorSetLayout>& descriptorSetLayouts,
                        VkDescriptorPool descriptorPool,
                        const DrawableCreateInfo& info,
-  U32 numVertexSlots, U32 numInstanceSlots, U32 numUniformSlots,
+                       U32 numVertexSlots,
+                       U32 numInstanceSlots,
+                       U32 numUniformSlots,
                        Memory::Allocator& allocator,
                        Log logger)
   : Drawable(info, numVertexSlots, numInstanceSlots, numUniformSlots, allocator),
     m_device(device),
-    m_descriptorSetLayout(descriptorSetLayout),
+    m_descriptorSetLayouts(descriptorSetLayouts, allocator),
     m_descriptorPool(descriptorPool),
     m_mainBuffer(mainBuffer),
-    m_descriptorSet(),
+    m_descriptorSets(ContainerExtent{descriptorSetLayouts.GetSize()}, allocator),
     log_VulkanRenderSystem(std::move(logger)) {
 }
 
@@ -36,10 +38,10 @@ void VkDrawable::Submit() {
   VkDescriptorSetAllocateInfo allocInfo = {};
   allocInfo.sType                       = VK_STRUCTURE_TYPE_DESCRIPTOR_SET_ALLOCATE_INFO;
   allocInfo.descriptorPool              = m_descriptorPool;
-  allocInfo.descriptorSetCount          = 1;
-  allocInfo.pSetLayouts                 = &m_descriptorSetLayout;
+  allocInfo.descriptorSetCount          = m_descriptorSetLayouts.GetSize();
+  allocInfo.pSetLayouts                 = m_descriptorSetLayouts.Data();
 
-  VERIFY_VK_OP(log_VulkanRenderSystem, vkAllocateDescriptorSets(m_device, &allocInfo, &m_descriptorSet),
+  VERIFY_VK_OP(log_VulkanRenderSystem, vkAllocateDescriptorSets(m_device, &allocInfo, m_descriptorSets.Data()),
     "Failed to Allocate Descriptor Set");
 
   Vector<VkWriteDescriptorSet> descriptorWrites(m_uniformBufferInfos.GetSize(), allocatorTemporary);
@@ -47,6 +49,7 @@ void VkDrawable::Submit() {
   // TODO(vasumahesh1):[DESCRIPTOR]: How to use Uniform Buffer Arrays?
   // TODO(vasumahesh1):[TEXTURE]: Add support for Textures
 
+  U32 idx = 0;
   for (const auto& ubInfo : m_uniformBufferInfos) {
     VkDescriptorBufferInfo uniformBufferInfo = {};
     uniformBufferInfo.buffer                 = m_mainBuffer;
@@ -55,7 +58,7 @@ void VkDrawable::Submit() {
 
     VkWriteDescriptorSet uniformDescriptorWrite = {};
     uniformDescriptorWrite.sType                = VK_STRUCTURE_TYPE_WRITE_DESCRIPTOR_SET;
-    uniformDescriptorWrite.dstSet               = m_descriptorSet;
+    uniformDescriptorWrite.dstSet               = m_descriptorSets[idx];
     uniformDescriptorWrite.dstBinding           = 0;
     uniformDescriptorWrite.dstArrayElement      = 0;
     uniformDescriptorWrite.descriptorType       = VK_DESCRIPTOR_TYPE_UNIFORM_BUFFER;
@@ -64,14 +67,14 @@ void VkDrawable::Submit() {
     uniformDescriptorWrite.pImageInfo           = nullptr;
     uniformDescriptorWrite.pTexelBufferView     = nullptr;
 
-    descriptorWrites.PushBack(std::move(uniformDescriptorWrite));
+    // TODO(vasumahesh1):[PERF]: Can optimize
+    vkUpdateDescriptorSets(m_device, 1, &uniformDescriptorWrite, 0, nullptr);
+    idx++;
   }
-
-  vkUpdateDescriptorSets(m_device, descriptorWrites.GetSize(), descriptorWrites.Data(), 0, nullptr);
 }
 
-const VkDescriptorSet& VkDrawable::GetDescriptorSet() const {
-  return m_descriptorSet;
+const Containers::Vector<VkDescriptorSet>& VkDrawable::GetDescriptorSet() const {
+  return m_descriptorSets;
 }
 
 void VkDrawable::CleanUp(VkDevice device) const {
@@ -101,7 +104,7 @@ VkDrawablePool::VkDrawablePool(const DrawablePoolCreateInfo& createInfo,
     m_device(device),
     m_renderPass(renderPass),
     m_viewport(viewport),
-    m_descriptorSetLayout(),
+    m_descriptorSetLayouts(allocator),
     m_pipeline({}),
     m_pipelineLayout(),
     m_pipelineFactory(device, allocatorTemporary, logger),
@@ -118,8 +121,9 @@ VkDrawablePool::VkDrawablePool(const DrawablePoolCreateInfo& createInfo,
 
 
 DrawableID VkDrawablePool::CreateDrawable(const DrawableCreateInfo& createInfo) {
-  VkDrawable drawable = VkDrawable(m_device, m_buffer.Real(), m_descriptorSetLayout, m_descriptorPool, createInfo,
-                                   m_numVertexSlots, m_numInstanceSlots, m_numUniformSlots, GetAllocator(), log_VulkanRenderSystem);
+  VkDrawable drawable = VkDrawable(m_device, m_buffer.Real(), m_descriptorSetLayouts, m_descriptorPool, createInfo,
+                                   m_numVertexSlots, m_numInstanceSlots, m_numUniformSlots, GetAllocator(),
+                                   log_VulkanRenderSystem);
   m_drawables.PushBack(std::move(drawable));
   return m_drawables.GetSize() - 1;
 }
@@ -136,24 +140,22 @@ void VkDrawablePool::AppendToMainBuffer(const U8* buffer, U32 bufferSize) {
 void VkDrawablePool::CreateDescriptorInfo(const DrawablePoolCreateInfo& createInfo) {
   STACK_ALLOCATOR(Temporary, Memory::MonotonicAllocator, 2048);
 
-  const U32 uniformCount = m_numUniformSlots;
-  Containers::Vector<VkDescriptorSetLayoutBinding> layoutBindings(uniformCount, allocatorTemporary);
+  m_descriptorSetLayouts.Reserve(m_numUniformSlots);
 
   for (const auto& uniformBufferPair : createInfo.m_uniformBuffers) {
-    const auto& slot = uniformBufferPair.first;
-    const auto& bufferDesc = uniformBufferPair.second;
+    Containers::Vector<VkDescriptorSetLayoutBinding> layoutBindings(1, allocatorTemporary);
+    const auto& bufferDesc   = uniformBufferPair.second;
     const auto vkShaderStage = ToVkShaderStageFlagBits(bufferDesc.m_stage);
     VERIFY_OPT(log_VulkanRenderSystem, vkShaderStage, "Unknown Shader Stage");
 
-    VkCore::CreateUniformBufferBinding(layoutBindings, slot, bufferDesc, vkShaderStage.value());
+    // TODO(vasumahesh1):[DESCRIPTOR]: Hacky AF.
+    VkCore::CreateUniformBufferBinding(layoutBindings, Slot{}, bufferDesc, vkShaderStage.value());
+
+    m_descriptorSetLayouts.
+      PushBack(VkCore::CreateDescriptorSetLayout(m_device, layoutBindings, log_VulkanRenderSystem));
   }
 
-  m_descriptorSetLayout = VkCore::CreateDescriptorSetLayout(m_device, layoutBindings, log_VulkanRenderSystem);
-
-  // TODO(vasumahesh1):[DESCRIPTOR]: Add support for more than 1 set
-  const Containers::Vector<VkDescriptorSetLayout> sets({m_descriptorSetLayout}, allocatorTemporary);
-  m_pipelineLayout = VkCore::CreatePipelineLayout(m_device, sets, log_VulkanRenderSystem);
-
+  m_pipelineLayout = VkCore::CreatePipelineLayout(m_device, m_descriptorSetLayouts, log_VulkanRenderSystem);
 
   // TODO(vasumahesh1):[DESCRIPTOR]: How to use Uniform Buffer Arrays?
   VkDescriptorPoolSize uniformPoolSize = {};
@@ -169,7 +171,7 @@ void VkDrawablePool::CreateDescriptorInfo(const DrawablePoolCreateInfo& createIn
   poolInfo.sType                      = VK_STRUCTURE_TYPE_DESCRIPTOR_POOL_CREATE_INFO;
   poolInfo.poolSizeCount              = descriptorPool.GetSize();
   poolInfo.pPoolSizes                 = descriptorPool.Data();
-  poolInfo.maxSets                    = createInfo.m_numDrawables;
+  poolInfo.maxSets                    = createInfo.m_numDrawables * m_numUniformSlots;
 
   VERIFY_VK_OP(log_VulkanRenderSystem, vkCreateDescriptorPool(m_device, &poolInfo, nullptr, &m_descriptorPool),
     "Unable to create Descriptor Pool");
@@ -228,8 +230,10 @@ void VkDrawablePool::Submit() {
 
     vkCmdBindIndexBuffer(m_commandBuffer, mainBuffer, indexBufferInfo.m_offset, indexType.value());
 
-    vkCmdBindDescriptorSets(m_commandBuffer, VK_PIPELINE_BIND_POINT_GRAPHICS, m_pipelineLayout, 0, 1,
-                            &drawable.GetDescriptorSet(), 0, nullptr);
+    const auto& descriptorSets = drawable.GetDescriptorSet();
+
+    vkCmdBindDescriptorSets(m_commandBuffer, VK_PIPELINE_BIND_POINT_GRAPHICS, m_pipelineLayout, 0,
+                            descriptorSets.GetSize(), descriptorSets.Data(), 0, nullptr);
 
     switch (GetDrawType()) {
       case DrawType::InstancedIndexed:
@@ -276,7 +280,11 @@ void VkDrawablePool::CleanUp() const {
   vkDestroyDescriptorPool(m_device, m_descriptorPool, nullptr);
 
   vkDestroyPipelineLayout(m_device, m_pipelineLayout, nullptr);
-  vkDestroyDescriptorSetLayout(m_device, m_descriptorSetLayout, nullptr);
+
+  for (const auto& setLayout : m_descriptorSetLayouts)
+  {
+    vkDestroyDescriptorSetLayout(m_device, setLayout, nullptr);
+  }
 
   vkFreeCommandBuffers(m_device, m_graphicsCommandPool, 1, &m_commandBuffer);
 
