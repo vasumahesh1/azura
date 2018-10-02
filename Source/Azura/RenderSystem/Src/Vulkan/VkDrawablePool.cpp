@@ -179,7 +179,7 @@ void VkDrawablePool::CreateDescriptorInfo(const DrawablePoolCreateInfo& createIn
 
 void VkDrawablePool::Submit() {
   m_pipelineFactory.SetInputAssemblyStage(PrimitiveTopology::TriangleList);
-  m_pipelineFactory.SetRasterizerStage(CullMode::None, FrontFace::CounterClockwise);
+  m_pipelineFactory.SetRasterizerStage(CullMode::FrontBit, FrontFace::CounterClockwise);
   m_pipelineFactory.SetPipelineLayout(m_pipelineLayout);
   m_pipelineFactory.SetRenderPass(m_renderPass);
   m_pipelineFactory.SetViewportStage(m_viewport, m_swapChain);

@@ -16,6 +16,7 @@ const float Z = 0.850650808352039932f;
 const float N = 0.0f;
 
 const RawStorageFormat VERTEX_FORMAT = RawStorageFormat::R32G32B32A32_FLOAT;
+const RawStorageFormat NORMAL_FORMAT = RawStorageFormat::R32G32B32_FLOAT;
 const RawStorageFormat INDEX_FORMAT  = RawStorageFormat::R32_UINT;
 using Lookup = std::map<std::pair<U32, U32>, U32>;
 
@@ -84,10 +85,16 @@ IcoSphere::IcoSphere(U32 subDivisions)
     m_triangles(BASE_TRIANGLES.begin(), BASE_TRIANGLES.end()) {
 
   m_vertices.reserve(10 * U32(std::pow(4, subDivisions)));
+  m_normals.reserve(10 * U32(std::pow(4, subDivisions)));
   m_triangles.reserve(10 * U32(std::pow(4, subDivisions)));
 
   for (U32 idx  = 0; idx < subDivisions; ++idx) {
     m_triangles = SubDivide(m_vertices, m_triangles);
+  }
+
+  for (const auto& vertex: m_vertices)
+  {
+    m_normals.push_back(Transform::Downgrade(vertex).Normalized());
   }
 }
 
@@ -97,6 +104,10 @@ U32 IcoSphere::VertexDataSize() const {
 
 U32 IcoSphere::IndexDataSize() const {
   return U32(m_triangles.size() * GetFormatSize(INDEX_FORMAT) * 3);
+}
+
+U32 IcoSphere::NormalDataSize() const {
+  return U32(m_normals.size() * GetFormatSize(NORMAL_FORMAT));
 }
 
 const U8* IcoSphere::VertexData() const {
@@ -109,12 +120,21 @@ const U8* IcoSphere::IndexData() const {
   return reinterpret_cast<const U8*>(m_triangles.data());
 }
 
+const U8* IcoSphere::NormalData() const {
+  // NOLINTNEXTLINE(cppcoreguidelines-pro-type-reinterpret-cast)
+  return reinterpret_cast<const U8*>(m_normals.data());
+}
+
 RawStorageFormat IcoSphere::GetVertexFormat() const {
   return VERTEX_FORMAT;
 }
 
 RawStorageFormat IcoSphere::GetIndexFormat() const {
   return INDEX_FORMAT;
+}
+
+RawStorageFormat IcoSphere::GetNormalFormat() const {
+  return NORMAL_FORMAT;
 }
 
 U32 IcoSphere::GetVertexCount() const {
@@ -126,7 +146,8 @@ U32 IcoSphere::GetIndexCount() const {
 }
 
 U32 IcoSphere::TotalDataSize() const {
-  return VertexDataSize() + IndexDataSize();
+  return VertexDataSize() + IndexDataSize() + NormalDataSize();
 }
+
 } // namespace Math
 } // namespace Azura

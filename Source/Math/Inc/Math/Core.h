@@ -34,6 +34,11 @@ namespace Azura
   using Matrix2i = mathfu::Matrix<int, 2, 2>;
   using Matrix2u = mathfu::Matrix<U32, 2, 2>;
 
+  using Color4d = Vector4d;
+  using Color4f = Vector4f;
+  using Color4i = Vector4i;
+  using Color4u = Vector4u;
+
   using Color3d = Vector3d;
   using Color3f = Vector3f;
   using Color3i = Vector3i;

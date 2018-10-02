@@ -20,13 +20,16 @@ public:
   // Overrides
   virtual U32 VertexDataSize() const = 0;
   virtual U32 IndexDataSize() const = 0;
+  virtual U32 NormalDataSize() const = 0;
   virtual U32 TotalDataSize() const = 0;
 
   virtual U32 GetVertexCount() const = 0;
   virtual U32 GetIndexCount() const = 0;
   virtual const U8* VertexData() const = 0;
+  virtual const U8* NormalData() const = 0;
   virtual const U8* IndexData() const = 0;
   virtual RawStorageFormat GetVertexFormat() const = 0;
+  virtual RawStorageFormat GetNormalFormat() const = 0;
   virtual RawStorageFormat GetIndexFormat() const = 0;
 };
 

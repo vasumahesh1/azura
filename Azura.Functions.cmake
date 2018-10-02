@@ -24,9 +24,6 @@ endfunction()
 
 function(AzuraAddSlangShaders TARGET API)
   foreach(SHADER_TUPLE_STR ${ARGN})
-
-    message(${SHADER_TUPLE_STR})
-
     string(REPLACE "|" ";" SHADER_TUPLE ${SHADER_TUPLE_STR})
 
     list(GET SHADER_TUPLE 0 SHADER_INPUT_FILE)

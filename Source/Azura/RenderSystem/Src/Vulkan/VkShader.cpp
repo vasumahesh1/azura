@@ -18,10 +18,17 @@ const String SPRIV_EXT = "spv";
 VkShader::VkShader(VkDevice device, const String& fileName, const Log& logger) // NOLINT
   : Shader(fileName, SPRIV_EXT),
     log_VulkanRenderSystem(logger) {
-  HEAP_ALLOCATOR(Temporary, Memory::MonotonicAllocator, 8192);
+  HEAP_ALLOCATOR(Temporary, Memory::MonotonicAllocator, 0x800000);
+
+  LOG_DEBUG(log_VulkanRenderSystem, LOG_LEVEL, "VkShader: Loading Shader: %s", GetFilePath().c_str());
 
   const auto fileContents = FileReader::GetFileContents(GetFilePath(), allocatorTemporary);
+
+  LOG_DEBUG(log_VulkanRenderSystem, LOG_LEVEL, "VkShader: File Loaded: %s", GetFilePath().c_str());
+  
   m_module = VkCore::CreateShaderModule(device, fileContents, log_VulkanRenderSystem);
+
+  LOG_DEBUG(log_VulkanRenderSystem, LOG_LEVEL, "VkShader: Successfully Created Shader: %s", GetFilePath().c_str());
 }
 
 VkPipelineShaderStageCreateInfo VkShader::GetShaderStageInfo() const {

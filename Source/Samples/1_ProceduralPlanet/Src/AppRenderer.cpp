@@ -23,18 +23,27 @@ struct Instance {
 struct UniformBufferData
 {
   Matrix4f m_model;
-  Matrix4f m_view;
-  Matrix4f m_proj;
+  Matrix4f m_modelInvTranspose;
+  Matrix4f m_viewProj;
 };
 
-struct ShaderControls {
+struct ShaderControls { // NOLINT
   float m_shoreLevel{0.5f};
   float m_elevation{0.5f};
   float m_noiseScale{0.5f};
+  float pad1;
 
-  Color3f m_sandColor{237.0f / 255.0f, 209.0f / 255.0f, 127.0f / 255.0f};
-  Color3f m_bedrock1Color{68.0f / 255.0f, 85.0f / 255.0f, 102.0f / 255.0f};
-  Color3f m_bedrock2Color{34.0f / 255.0f, 43.0f / 255.0f, 51.0f / 255.0f};
+  Color4f m_sandColor{237.0f / 255.0f, 209.0f / 255.0f, 127.0f / 255.0f, 1.0f};
+
+  Color4f m_bedrock1Color{68.0f / 255.0f, 85.0f / 255.0f, 102.0f / 255.0f, 1.0f};
+
+  Color4f m_bedrock2Color{34.0f / 255.0f, 43.0f / 255.0f, 51.0f / 255.0f, 1.0f};
+
+  Vector4f m_lightPos{ 0, 0, 15, 1 };
+  Vector4f m_eye{ 0.0f, 0.0f, 6.0f, 1.0f };
+
+  Color4f m_waterControls{ 0.5f, 0.65f, 0, 0 };
+  Color4f m_waterColor{ 21.0, 92.0, 158.0, 1.0f };
 };
 
 AppRenderer::AppRenderer()
@@ -71,23 +80,27 @@ void AppRenderer::Initialize() {
   vertexDataSlot.m_binding = 0;
   vertexDataSlot.m_rate    = BufferUsageRate::PerVertex;
 
-  Slot instanceDataSlot      = {};
-  instanceDataSlot.m_binding = 1;
-  instanceDataSlot.m_rate    = BufferUsageRate::PerInstance;
+  Slot normalDataSlot      = {};
+  normalDataSlot.m_binding = 1;
+  normalDataSlot.m_rate    = BufferUsageRate::PerVertex;
+
+  Slot shaderControlSlot      = {};
+  shaderControlSlot.m_binding = 0;
 
   Slot uniformSlot      = {};
-  uniformSlot.m_binding = 0;
-  
-  Slot shaderControlSlot      = {};
-  shaderControlSlot.m_binding = 1;
+  uniformSlot.m_binding = 1;
+
+  ShaderControls shaderControls{};
 
   UniformBufferData uboData = {};
   uboData.m_model           = Matrix4f::Identity();
-  uboData.m_view            = Transform::LookAt(Vector3f(0.5f, 0.5f, 0.0f), Vector3f(0.5f, 0.5f, -6.0f),
+  const Matrix4f view            = Transform::LookAt(Vector3f(0.0f, 0.0f, 1.0f), shaderControls.m_eye.xyz(),
                                                 Vector3f(0.0f, 1.0f, 0.0f));
-  uboData.m_proj = Transform::Perspective(45.0f, 16.0f / 9.0f, 0.1f, 100.0f);
+  const Matrix4f proj = Transform::Perspective(45.0f, 16.0f / 9.0f, 0.1f, 100.0f);
 
-  ShaderControls shaderControls{};
+  uboData.m_viewProj = proj * view;
+
+  uboData.m_modelInvTranspose = uboData.m_model.Inverse().Transpose();
 
   // TODO(vasumahesh1):[Q]:Allocator?
   ApplicationRequirements applicationRequirements = {};
@@ -115,7 +128,7 @@ void AppRenderer::Initialize() {
   poolInfo.m_numDrawables                = 1;
   poolInfo.m_numShaders                  = 2;
   poolInfo.m_drawType                    = DrawType::InstancedIndexed;
-  poolInfo.m_slotInfo.m_numVertexSlots   = 1;
+  poolInfo.m_slotInfo.m_numVertexSlots   = 2;
   poolInfo.m_slotInfo.m_numInstanceSlots = 0;
 
   // UBO Info
@@ -138,6 +151,8 @@ void AppRenderer::Initialize() {
   vertexStride.PushBack(sphere.GetVertexFormat());
   pool.AddBufferBinding(vertexDataSlot, vertexStride);
 
+  pool.AddBufferBinding(normalDataSlot, {{ sphere.GetNormalFormat() }, allocatorTemporary });
+
   const auto uboDataBuffer = reinterpret_cast<U8*>(&uboData); // NOLINT
   const auto shaderControlBuffer = reinterpret_cast<U8*>(&shaderControls); // NOLINT
 
@@ -150,6 +165,7 @@ void AppRenderer::Initialize() {
 
   const auto drawableId = pool.CreateDrawable(createInfo);
   pool.BindVertexData(drawableId, vertexDataSlot, sphere.VertexData(), sphere.VertexDataSize());
+  pool.BindVertexData(drawableId, normalDataSlot, sphere.NormalData(), sphere.NormalDataSize());
   pool.SetIndexData(drawableId, sphere.IndexData(), sphere.IndexDataSize());
   pool.BindUniformData(drawableId, uniformSlot, uboDataBuffer, sizeof(UniformBufferData));
   pool.BindUniformData(drawableId, shaderControlSlot, shaderControlBuffer, sizeof(ShaderControls));

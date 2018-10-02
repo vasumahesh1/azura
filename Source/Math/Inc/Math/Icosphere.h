@@ -21,9 +21,13 @@ public:
   U32 GetIndexCount() const override;
   U32 TotalDataSize() const override;
 
+  U32 NormalDataSize() const override;
+  const U8* NormalData() const override;
+  RawStorageFormat GetNormalFormat() const override;
 private:
-  std::vector<Vector4f> m_vertices{};
-  std::vector<Vector3u> m_triangles{};
+  std::vector<Vector4f> m_vertices;
+  std::vector<Vector3f> m_normals{};
+  std::vector<Vector3u> m_triangles;
 };
 } // namespace Math
 } // namespace Azura
