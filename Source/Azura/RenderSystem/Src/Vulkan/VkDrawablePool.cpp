@@ -49,7 +49,6 @@ void VkDrawable::Submit() {
   // TODO(vasumahesh1):[DESCRIPTOR]: How to use Uniform Buffer Arrays?
   // TODO(vasumahesh1):[TEXTURE]: Add support for Textures
 
-  U32 idx = 0;
   for (const auto& ubInfo : m_uniformBufferInfos) {
     VkDescriptorBufferInfo uniformBufferInfo = {};
     uniformBufferInfo.buffer                 = m_mainBuffer;
@@ -58,7 +57,7 @@ void VkDrawable::Submit() {
 
     VkWriteDescriptorSet uniformDescriptorWrite = {};
     uniformDescriptorWrite.sType                = VK_STRUCTURE_TYPE_WRITE_DESCRIPTOR_SET;
-    uniformDescriptorWrite.dstSet               = m_descriptorSets[idx];
+    uniformDescriptorWrite.dstSet               = m_descriptorSets[ubInfo.m_slot.m_binding];
     uniformDescriptorWrite.dstBinding           = 0;
     uniformDescriptorWrite.dstArrayElement      = 0;
     uniformDescriptorWrite.descriptorType       = VK_DESCRIPTOR_TYPE_UNIFORM_BUFFER;
@@ -69,7 +68,6 @@ void VkDrawable::Submit() {
 
     // TODO(vasumahesh1):[PERF]: Can optimize
     vkUpdateDescriptorSets(m_device, 1, &uniformDescriptorWrite, 0, nullptr);
-    idx++;
   }
 }
 

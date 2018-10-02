@@ -138,9 +138,9 @@ void AppRenderer::Initialize() {
                                                       sizeof(UniformBufferData), 1, ShaderStage::Vertex
                                                     }));
   poolInfo.m_uniformBuffers.PushBack(std::make_pair(shaderControlSlot,
-                                                    UniformBufferDesc{
-                                                      sizeof(ShaderControls), 1, ShaderStage::Vertex
-                                                    }));
+    UniformBufferDesc{
+      sizeof(ShaderControls), 1, ShaderStage::Vertex
+    }));
 
   DrawablePool& pool = m_renderer->CreateDrawablePool(poolInfo);
 

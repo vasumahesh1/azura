@@ -1,6 +1,6 @@
 import Common;
 
-ParameterBlock<ShaderControls> controls;
+// ParameterBlock<ShaderControls> controls;
 
 float4 main(PixelShaderInput input) : SV_Target
 {
