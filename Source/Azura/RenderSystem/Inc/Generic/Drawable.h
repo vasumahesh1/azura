@@ -71,7 +71,6 @@ struct UniformBufferDesc
 {
   U32 m_size;
   U32 m_count;
-  ShaderStage m_stage;
 };
 
 struct DrawablePoolCreateInfo {

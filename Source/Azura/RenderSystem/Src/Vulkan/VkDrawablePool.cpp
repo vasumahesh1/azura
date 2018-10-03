@@ -143,10 +143,9 @@ void VkDrawablePool::CreateDescriptorInfo(const DrawablePoolCreateInfo& createIn
   for (const auto& uniformBufferPair : createInfo.m_uniformBuffers) {
     Containers::Vector<VkDescriptorSetLayoutBinding> layoutBindings(1, allocatorTemporary);
     const auto& bufferDesc   = uniformBufferPair.second;
-    const auto vkShaderStage = GetCombinedShaderStageFlag(bufferDesc.m_stage);
 
-    // TODO(vasumahesh1):[DESCRIPTOR]: Hacky AF.
-    VkCore::CreateUniformBufferBinding(layoutBindings, Slot{}, bufferDesc, vkShaderStage);
+    // TODO(vasumahesh1):[DESCRIPTOR]: Hacky AF. Need to change Shader Stage later on.
+    VkCore::CreateUniformBufferBinding(layoutBindings, Slot{}, bufferDesc, VK_SHADER_STAGE_ALL);
 
     m_descriptorSetLayouts.
       PushBack(VkCore::CreateDescriptorSetLayout(m_device, layoutBindings, log_VulkanRenderSystem));

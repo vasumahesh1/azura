@@ -30,7 +30,7 @@ enum class PresentModes
   SharedContinuous
 };
 
-enum class ShaderStage
+enum class ShaderStage : U32
 {
   All = 0x00001111,
   Vertex = 0x00000001,

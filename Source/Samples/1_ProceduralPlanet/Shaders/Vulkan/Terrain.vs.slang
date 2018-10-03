@@ -146,7 +146,7 @@ void RenderPlanet(inout float4 vertexPosition, inout float4 vertexNormal, out in
   const float noiseScale = (controls.u_noiseScale / 0.5) * 3.0;
   const float waterThreshold = controls.u_waterControls.x - 0.5;
   const float shoreThreshold = waterThreshold + (controls.u_shoreLevel / 0.5) * 0.04;
-  const float elevation = (0.5 / controls.u_elevation) * 4.0;
+  const float elevation = (0.5 / controls.u_elevation) * 5.0;
 
   const float4 originalPosition = vertexPosition;
   const float4 originalNormal = vertexNormal;
@@ -182,9 +182,22 @@ void RenderPlanet(inout float4 vertexPosition, inout float4 vertexNormal, out in
       // Sand
       vertexTextureID = SAND_TEXTURE_ID;
     }
-    else if (noiseValue > shoreThreshold + grassDarkJitter) {
+    else if (noiseValue > shoreThreshold + grassDarkJitter && noiseValue < waterThreshold + 0.3) {
       // Grass 2
       vertexTextureID = GRASS_2_TEXTURE_ID;
+    }
+    else if (noiseValue > waterThreshold + 0.3) {
+      float snowAppearance = dot(normalize(derivative), float3(0, 1, 0));
+      float snowJitter = snoiseFractal(vertexPosition.xyz * 7.0) * 0.05;
+
+      vertexNormal = float4(normalize(originalNormal.xyz - (derivative * 0.45)), 0);
+
+      if (noiseValue > waterThreshold + 0.4 + snowJitter && snowAppearance > 0.5) {
+        vertexTextureID = SNOW_TEXTURE_ID;
+      }
+      else {
+        vertexTextureID = ROCK_TEXTURE_ID; 
+      }
     }
 
     vertexNormal = float4(normalize(vertexNormal.xyz - (derivative * 0.36)), 0);

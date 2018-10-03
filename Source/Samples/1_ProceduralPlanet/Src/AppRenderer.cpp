@@ -40,7 +40,7 @@ struct ShaderControls { // NOLINT
   Color4f m_bedrock2Color{34.0f / 255.0f, 43.0f / 255.0f, 51.0f / 255.0f, 1.0f};
 
   Vector4f m_lightPos{ 0, 0, 15, 1 };
-  Vector4f m_eye{ 0.0f, 0.0f, 6.0f, 1.0f };
+  Vector4f m_eye{ 0.0f, 0.0f, 4.0f, 1.0f };
 
   Color4f m_waterControls{ 0.5f, 0.65f, 0, 0 };
   Color4f m_waterColor{ 21.0, 92.0, 158.0, 1.0f };
@@ -121,7 +121,7 @@ void AppRenderer::Initialize() {
     CreateShader(*m_renderer, "./Shaders/" + m_renderer->GetRenderingAPI() + "/Terrain.ps", log_AppRenderer);
   pixelShader->SetStage(ShaderStage::Pixel);
 
-  IcoSphere sphere(7);
+  IcoSphere sphere(8);
 
   DrawablePoolCreateInfo poolInfo(allocatorTemporary);
   poolInfo.m_byteSize                    = sphere.TotalDataSize() + 0xFFFF;
@@ -132,14 +132,15 @@ void AppRenderer::Initialize() {
   poolInfo.m_slotInfo.m_numInstanceSlots = 0;
 
   // UBO Info
-  poolInfo.m_uniformBuffers.Reserve(3);
-  poolInfo.m_uniformBuffers.PushBack(std::make_pair(uniformSlot,
-                                                    UniformBufferDesc{
-                                                      sizeof(UniformBufferData), 1, ShaderStage::Vertex
-                                                    }));
+  poolInfo.m_uniformBuffers.Reserve(2);
   poolInfo.m_uniformBuffers.PushBack(std::make_pair(shaderControlSlot,
     UniformBufferDesc{
-      sizeof(ShaderControls), 1, (ShaderStage::All)
+      sizeof(ShaderControls), 1
+    }));
+
+  poolInfo.m_uniformBuffers.PushBack(std::make_pair(uniformSlot,
+    UniformBufferDesc{
+      sizeof(UniformBufferData), 1
     }));
 
   DrawablePool& pool = m_renderer->CreateDrawablePool(poolInfo);
