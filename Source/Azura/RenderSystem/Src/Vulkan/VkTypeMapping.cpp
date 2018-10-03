@@ -77,8 +77,7 @@ namespace Vulkan {
 
 #define RAW_STORAGE_TO_VK_INDEX_TYPE_MAPPING(FUNC)                                                                      \
   FUNC(RawStorageFormat::R16_UINT, VK_INDEX_TYPE_UINT16)                                                               \
-  FUNC(RawStorageFormat::R32_UINT, VK_INDEX_TYPE_UINT32)                                                               \
-
+  FUNC(RawStorageFormat::R32_UINT, VK_INDEX_TYPE_UINT32)
 #define COLOR_SPACE_TO_VK_COLOR_SPACE_MAPPING(FUNC)                                                                    \
   FUNC(ColorSpace::SRGB, VK_COLOR_SPACE_SRGB_NONLINEAR_KHR)                                                            \
   FUNC(ColorSpace::HDR10, VK_COLOR_SPACE_HDR10_HLG_EXT)
@@ -155,9 +154,9 @@ CREATE_MAPPER_CPP(ShaderStage, VkShaderStageFlagBits, SHADER_STAGE_TO_SHADER_STA
 // CREATE_MAPPER_CPP(VkShaderStageFlagBits, ShaderStage, SHADER_STAGE_TO_SHADER_STAGE_FLAGS_MAPPING, REVERSE_MAPPING)
 
 CREATE_MAPPER_CPP(PrimitiveTopology,
-                  VkPrimitiveTopology,
-                  PRIMITIVE_TOPOLOGY_TO_VK_PRIMITIVE_TOPOLOGY_MAPPING,
-                  FORWARD_MAPPING)
+  VkPrimitiveTopology,
+  PRIMITIVE_TOPOLOGY_TO_VK_PRIMITIVE_TOPOLOGY_MAPPING,
+  FORWARD_MAPPING)
 // CREATE_MAPPER_CPP(VkPrimitiveTopology, PrimitiveTopology, PRIMITIVE_TOPOLOGY_TO_VK_PRIMITIVE_TOPOLOGY_MAPPING,
 // REVERSE_MAPPING)
 
@@ -168,13 +167,40 @@ CREATE_MAPPER_CPP(FrontFace, VkFrontFace, FRONT_FACE_TO_VK_FRONT_FACE_MAPPING, F
 // CREATE_MAPPER_CPP(VkFrontFace, FrontFace, FRONT_FACE_TO_VK_FRONT_FACE_MAPPING, REVERSE_MAPPING)
 
 CREATE_MAPPER_CPP(BufferUsageRate,
-                  VkVertexInputRate,
-                  BUFFER_USAGE_RATE_TO_VK_VERTEX_INPUT_RATE_MAPPING,
-                  FORWARD_MAPPING)
+  VkVertexInputRate,
+  BUFFER_USAGE_RATE_TO_VK_VERTEX_INPUT_RATE_MAPPING,
+  FORWARD_MAPPING)
 // CREATE_MAPPER_CPP(VkFrontFace, FrontFace, FRONT_FACE_TO_VK_FRONT_FACE_MAPPING, REVERSE_MAPPING)
 
 CREATE_MAPPER_CPP(ImageType, VkImageType, IMAGE_TYPE_TO_VK_IMAGE_TYPE, FORWARD_MAPPING);
 // CREATE_MAPPER_CPP(ImageType, VkImageType, IMAGE_TYPE_TO_VK_IMAGE_TYPE, REVERSE_MAPPING)
 
-}  // namespace Vulkan
-}  // namespace Azura
+VkShaderStageFlagBits GetCombinedShaderStageFlag(ShaderStage stage) {
+  if (ENUM_HAS(stage, ShaderStage::All)) {
+    return ToVkShaderStageFlagBits(ShaderStage::All).value();
+  }
+
+  U32 result = 0;
+
+  if (ENUM_HAS(stage, ShaderStage::Vertex)) {
+    result = result | ToVkShaderStageFlagBits(ShaderStage::Vertex).value();
+  }
+
+  if (ENUM_HAS(stage, ShaderStage::Pixel)) {
+    result = result | ToVkShaderStageFlagBits(ShaderStage::Pixel).value();
+  }
+
+  if (ENUM_HAS(stage, ShaderStage::Compute)) {
+    result = result | ToVkShaderStageFlagBits(ShaderStage::Compute).value();
+  }
+
+  if (ENUM_HAS(stage, ShaderStage::Geometry)) {
+    result = result | ToVkShaderStageFlagBits(ShaderStage::Geometry).value();
+  }
+
+  // TODO(vasumahesh1):[ENUM]: Check safety
+  return static_cast<VkShaderStageFlagBits>(result);
+}
+
+} // namespace Vulkan
+} // namespace Azura

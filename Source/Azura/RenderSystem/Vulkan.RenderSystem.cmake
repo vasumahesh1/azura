@@ -26,6 +26,7 @@ set(VULKAN_SOURCES
     "Inc/Vulkan/VkTypes.h"
     # Source
     "Src/Generic/Drawable.cpp"
+    "Src/Generic/GenericTypes.cpp"
     "Src/Generic/GLFWWindow.cpp"
     "Src/Generic/Renderer.cpp"
     "Src/Generic/Shader.cpp"

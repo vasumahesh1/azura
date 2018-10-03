@@ -3,6 +3,8 @@
 #include "Containers/Vector.h"
 #include "Types.h"
 
+#include <boost/detail/bitmask.hpp>
+
 namespace Azura {
 enum class RawStorageFormat;
 
@@ -30,12 +32,14 @@ enum class PresentModes
 
 enum class ShaderStage
 {
-  All,
-  Vertex,
-  Pixel,
-  Compute,
-  Geometry
+  All = 0x00001111,
+  Vertex = 0x00000001,
+  Pixel = 0x00000010,
+  Compute = 0x00000100,
+  Geometry = 0x00001000
 };
+
+BOOST_BITMASK(ShaderStage);
 
 enum class BufferUsage
 {

@@ -1,6 +1,8 @@
 #include "ProceduralPlanet/AppRenderer.h"
 #include "Log/Log.h"
 
+#include <iostream>
+
 int main()
 {
   auto log_AppMain = Azura::Log("VulkanRenderSystem");
@@ -14,6 +16,7 @@ int main()
   catch(const std::runtime_error& e)
   {
     LOG_ERR(log_AppMain, LOG_LEVEL, e.what());
+    std::cout << e.what();
   }
   return 0;
 }

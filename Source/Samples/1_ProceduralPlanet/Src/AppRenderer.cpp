@@ -132,14 +132,14 @@ void AppRenderer::Initialize() {
   poolInfo.m_slotInfo.m_numInstanceSlots = 0;
 
   // UBO Info
-  poolInfo.m_uniformBuffers.Reserve(2);
+  poolInfo.m_uniformBuffers.Reserve(3);
   poolInfo.m_uniformBuffers.PushBack(std::make_pair(uniformSlot,
                                                     UniformBufferDesc{
                                                       sizeof(UniformBufferData), 1, ShaderStage::Vertex
                                                     }));
   poolInfo.m_uniformBuffers.PushBack(std::make_pair(shaderControlSlot,
     UniformBufferDesc{
-      sizeof(ShaderControls), 1, ShaderStage::Vertex
+      sizeof(ShaderControls), 1, (ShaderStage::All)
     }));
 
   DrawablePool& pool = m_renderer->CreateDrawablePool(poolInfo);

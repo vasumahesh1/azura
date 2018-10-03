@@ -45,3 +45,6 @@
     LOG_ERR(Logger, LOG_LEVEL, message);                                                             \
     throw std::runtime_error(message);                                                               \
   }
+
+#define ENUM_HAS(enumVar, value) \
+  (enumVar & value) == value

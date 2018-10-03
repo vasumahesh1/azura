@@ -1,6 +1,6 @@
 import Common;
 
-// ParameterBlock<ShaderControls> controls;
+ParameterBlock<ShaderControls> controls;
 
 float4 main(PixelShaderInput input) : SV_Target
 {
@@ -8,12 +8,12 @@ float4 main(PixelShaderInput input) : SV_Target
 
   float4 diffuseColor = float4(0.0, 0.0, 0.0, 0.0);
 
-  // if (input.textureID == BEDROCK_1_TEXTURE_ID) {
-  //   diffuseColor = controls.u_waterBedrock1Color;
-  // }
-  // else if (input.textureID == BEDROCK_2_TEXTURE_ID) {
-  //   diffuseColor = controls.u_waterBedrock2Color;
-  // }
+  if (input.textureID == BEDROCK_1_TEXTURE_ID) {
+    diffuseColor = controls.u_waterBedrock1Color;
+  }
+  else if (input.textureID == BEDROCK_2_TEXTURE_ID) {
+    diffuseColor = controls.u_waterBedrock2Color;
+  }
 
   float alpha = diffuseColor.a;
 

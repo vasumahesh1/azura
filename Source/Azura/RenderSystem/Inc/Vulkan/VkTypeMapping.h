@@ -12,7 +12,7 @@ namespace Impl {
 
 #define CREATE_MAPPER_H(FROM_FORMAT, TO_FORMAT) std::optional<TO_FORMAT> To##TO_FORMAT(FROM_FORMAT inputFormat)
 
-}  // namespace Impl
+} // namespace Impl
 
 // TODO(vasumahesh1): Enable enum mappings when all mappings are complete to prevent -Wswitch issues
 
@@ -44,5 +44,7 @@ CREATE_MAPPER_H(BufferUsageRate, VkVertexInputRate);
 
 CREATE_MAPPER_H(ImageType, VkImageType);
 
-}  // namespace Vulkan
-}  // namespace Azura
+VkShaderStageFlagBits GetCombinedShaderStageFlag(ShaderStage stage);
+
+} // namespace Vulkan
+} // namespace Azura
