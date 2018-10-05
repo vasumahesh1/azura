@@ -38,7 +38,7 @@ alloc.Reset();
 #### Insert lots of elements but reserve first
 
 ```cpp
-// InsertWithReserve
+// InsertWithReserveHeavy
 
 // namespace std
 for (U32 size = 0; size < U32(st.range(0)); ++size)
