@@ -9,6 +9,7 @@ set(VULKAN_SOURCES
     "Inc/Generic/Renderer.h"
     "Inc/Generic/RenderSystem.h"
     "Inc/Generic/Shader.h"
+    "Inc/Generic/TextureManager.h"
     "Inc/Generic/Window.h"
     "Inc/Generic/Windows/Win32GLFWWindow.h"
     "Inc/Vulkan/VkBasicDrawablePool.h"
@@ -22,6 +23,7 @@ set(VULKAN_SOURCES
     "Inc/Vulkan/VkScopedBuffer.h"
     "Inc/Vulkan/VkScopedPipeline.h"
     "Inc/Vulkan/VkShader.h"
+    "Inc/Vulkan/VkTextureManager.h"
     "Inc/Vulkan/VkTypeMapping.h"
     "Inc/Vulkan/VkTypes.h"
     # Source
@@ -30,6 +32,7 @@ set(VULKAN_SOURCES
     "Src/Generic/GLFWWindow.cpp"
     "Src/Generic/Renderer.cpp"
     "Src/Generic/Shader.cpp"
+    "Src/Generic/TextureManager.cpp"
     "Src/Generic/Window.cpp"
     "Src/Generic/Windows/Win32GLFWWindow.cpp"
     "Src/Vulkan/VkBasicDrawablePool.cpp"
@@ -42,6 +45,7 @@ set(VULKAN_SOURCES
     "Src/Vulkan/VkScopedBuffer.cpp"
     "Src/Vulkan/VkScopedPipeline.cpp"
     "Src/Vulkan/VkShader.cpp"
+    "Src/Vulkan/VkTextureManager.cpp"
     "Src/Vulkan/VkTypeMapping.cpp"
     "Src/Vulkan/VkTypes.cpp"
     "Src/Vulkan/Windows/VkWin32Platform.cpp"
@@ -62,7 +66,7 @@ AzuraAddLoggingSupport(VulkanRenderSystem 50)
 target_compile_definitions(VulkanRenderSystem PUBLIC API_VULKAN=1)
 
 target_include_directories(VulkanRenderSystem
-                           PUBLIC ${PROJECT_SOURCE_DIR}/Inc)
+                           PUBLIC ${PROJECT_SOURCE_DIR}/Inc ${STB_INCLUDE_DIR})
 
 target_link_libraries(VulkanRenderSystem Common Log Core VULKAN_STATIC glfw)
 

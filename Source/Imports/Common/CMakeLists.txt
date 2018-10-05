@@ -37,3 +37,6 @@ add_subdirectory(glfw)
 AzuraSilenceClangTidy(glfw)
 AzuraSilenceEnumGuard(glfw)
 AzuraEnableWarningsAsErrors()
+
+# STB Include
+set(STB_INCLUDE_DIR ${CMAKE_CURRENT_SOURCE_DIR}/stb/ CACHE STRING "STB Files Directory" FORCE)
