@@ -33,12 +33,6 @@ struct ShaderControls { // NOLINT
   float m_noiseScale{0.5f};
   float pad1;
 
-  Color4f m_sandColor{237.0f / 255.0f, 209.0f / 255.0f, 127.0f / 255.0f, 1.0f};
-
-  Color4f m_bedrock1Color{68.0f / 255.0f, 85.0f / 255.0f, 102.0f / 255.0f, 1.0f};
-
-  Color4f m_bedrock2Color{34.0f / 255.0f, 43.0f / 255.0f, 51.0f / 255.0f, 1.0f};
-
   Vector4f m_lightPos{ 0, 0, 15, 1 };
   Vector4f m_eye{ 0.0f, 0.0f, 4.0f, 1.0f };
 
@@ -121,7 +115,7 @@ void AppRenderer::Initialize() {
     CreateShader(*m_renderer, "./Shaders/" + m_renderer->GetRenderingAPI() + "/Terrain.ps", log_AppRenderer);
   pixelShader->SetStage(ShaderStage::Pixel);
 
-  IcoSphere sphere(8);
+  IcoSphere sphere(6);
 
   DrawablePoolCreateInfo poolInfo(allocatorTemporary);
   poolInfo.m_byteSize                    = sphere.TotalDataSize() + 0xFFFF;

@@ -10,10 +10,6 @@ struct ShaderControls {
   float u_noiseScale;
   float pad1;
 
-  float4 u_sandColor;
-  float4 u_waterBedrock1Color;
-  float4 u_waterBedrock2Color;
-
   float4 u_lightPos;
   float4 u_eye;
 
@@ -34,13 +30,13 @@ struct PixelShaderInput
   float4 normal : NORMAL;
   float4 modelPos : MODEL_POSITION;
   float4 lightVec : LIGHT_VEC;
-  int textureID : TEXTURE_ID;
+  float2 textureOffset : TEXTURE_OFFSET;
 };
 
-static const int ROCK_TEXTURE_ID = 1;
-static const int SNOW_TEXTURE_ID = 2;
-static const int GRASS_1_TEXTURE_ID = 3;
-static const int GRASS_2_TEXTURE_ID = 4;
-static const int BEDROCK_1_TEXTURE_ID = 5;
-static const int BEDROCK_2_TEXTURE_ID = 6;
-static const int SAND_TEXTURE_ID = 7;
+static const float2 ROCK_OFFSET = float2(0.5, 0.0);
+static const float2 SNOW_OFFSET = float2(0.0, 0.0);
+static const float2 GRASS_1_OFFSET = float2(0.25, 0.0);
+static const float2 GRASS_2_OFFSET = float2(0.75, 0.0);
+static const float2 BEDROCK_1_OFFSET = float2(0.25, 0.25);
+static const float2 BEDROCK_2_OFFSET = float2(0.5, 0.25);
+static const float2 SAND_OFFSET = float2(0.0, 0.25);

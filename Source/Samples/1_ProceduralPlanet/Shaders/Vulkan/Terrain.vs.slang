@@ -141,7 +141,7 @@ float snoiseFractal(float3 m) {
 // =====  End of Simplex3D by Nikita Miropolskiy  ======
 
 
-void RenderPlanet(inout float4 vertexPosition, inout float4 vertexNormal, out int vertexTextureID)
+void RenderPlanet(inout float4 vertexPosition, inout float4 vertexNormal, out float2 baseUVOffset)
 {
   const float noiseScale = (controls.u_noiseScale / 0.5) * 3.0;
   const float waterThreshold = controls.u_waterControls.x - 0.5;
@@ -155,62 +155,62 @@ void RenderPlanet(inout float4 vertexPosition, inout float4 vertexNormal, out in
 
   const float dist = length(vertexPosition.xyz - controls.u_eye.xyz);
   const int LOD = int(8.0 * (1.0 - smoothstep(0.0, 2.5, log(dist)))) + 4;
-  const float4 noiseVector = fbmad(noiseInput, LOD);
+  const float4 noiseVector = fbmad(noiseInput, 8.0); // TODO: Put LOD
   const float noiseValue = noiseVector.x;
   const float3 derivative = noiseVector.yzw;
 
   const bool isVertexWater = noiseValue < waterThreshold;
 
-  vertexPosition = originalPosition + (originalNormal * noiseValue / elevation);
+  vertexNormal = float4(normalize(vertexNormal.xyz - (derivative * 0.36)), 0);
 
   if (isVertexWater) {
-    vertexTextureID = BEDROCK_1_TEXTURE_ID;
+    baseUVOffset = BEDROCK_1_OFFSET;
     vertexNormal = float4(normalize(vertexNormal.xyz - (derivative * 0.5)), 0);
 
     // Deep Water
     if (noiseValue < waterThreshold - 0.15) {
-      vertexTextureID = BEDROCK_2_TEXTURE_ID;
+      baseUVOffset = BEDROCK_2_OFFSET;
     }
   }
   else {
     // Grass
-    vertexTextureID = GRASS_1_TEXTURE_ID;
+    baseUVOffset = GRASS_1_OFFSET;
 
     const float grassDarkJitter = snoiseFractal(originalPosition.xyz * 13.0) * 0.1;
 
     if (noiseValue < shoreThreshold) {
       // Sand
-      vertexTextureID = SAND_TEXTURE_ID;
+      baseUVOffset = SAND_OFFSET;
     }
     else if (noiseValue > shoreThreshold + grassDarkJitter && noiseValue < waterThreshold + 0.3) {
       // Grass 2
-      vertexTextureID = GRASS_2_TEXTURE_ID;
+      baseUVOffset = GRASS_2_OFFSET;
     }
     else if (noiseValue > waterThreshold + 0.3) {
       float snowAppearance = dot(normalize(derivative), float3(0, 1, 0));
-      float snowJitter = snoiseFractal(vertexPosition.xyz * 7.0) * 0.05;
+      float snowJitter = snoiseFractal(originalPosition.xyz * 7.0) * 0.05;
 
       vertexNormal = float4(normalize(originalNormal.xyz - (derivative * 0.45)), 0);
 
       if (noiseValue > waterThreshold + 0.4 + snowJitter && snowAppearance > 0.5) {
-        vertexTextureID = SNOW_TEXTURE_ID;
+        baseUVOffset = SNOW_OFFSET;
       }
       else {
-        vertexTextureID = ROCK_TEXTURE_ID; 
+        baseUVOffset = ROCK_OFFSET; 
       }
     }
-
-    vertexNormal = float4(normalize(vertexNormal.xyz - (derivative * 0.36)), 0);
   }
+
+  vertexPosition = originalPosition + (vertexNormal * noiseValue / elevation);
 }
 
 PixelShaderInput main(VertexShaderInput input)
 {
   float4 vertexPosition = input.in_Pos;
   float4 vertexNormal = input.in_Normal;
-  int vertexTextureID;
+  float2 baseUVOffset;
 
-  RenderPlanet(vertexPosition, vertexNormal, vertexTextureID);
+  RenderPlanet(vertexPosition, vertexNormal, baseUVOffset);
 
   PixelShaderInput output;
 
@@ -218,7 +218,7 @@ PixelShaderInput main(VertexShaderInput input)
   output.lightVec = controls.u_lightPos - output.modelPos;
 
   output.pos = mul(ubo.u_viewProj, output.modelPos);
-  output.textureID = vertexTextureID;
+  output.textureOffset = baseUVOffset;
   output.normal = mul(ubo.u_modelInvTranspose, vertexNormal);
   return output;
 }
