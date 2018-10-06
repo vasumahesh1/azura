@@ -176,6 +176,7 @@ struct VertexSlot {
 struct DescriptorSlot {
   SizeType m_key;
   DescriptorType m_type;
+  ShaderStage m_stages;
 };
 
 struct BufferInfo {

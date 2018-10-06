@@ -25,24 +25,24 @@ struct Instance {
   float m_pos[4];
 };
 
-struct UniformBufferData
-{
+struct UniformBufferData {
   Matrix4f m_model;
   Matrix4f m_modelInvTranspose;
   Matrix4f m_viewProj;
 };
 
-struct ShaderControls { // NOLINT
+struct ShaderControls {
+  // NOLINT
   float m_shoreLevel{0.5f};
   float m_elevation{0.5f};
   float m_noiseScale{0.5f};
   float pad1;
 
-  Vector4f m_lightPos{ 0, 0, 15, 1 };
-  Vector4f m_eye{ 0.0f, 0.0f, 4.0f, 1.0f };
+  Vector4f m_lightPos{0, 0, 15, 1};
+  Vector4f m_eye{0.0f, 0.0f, 4.0f, 1.0f};
 
-  Color4f m_waterControls{ 0.5f, 0.65f, 0, 0 };
-  Color4f m_waterColor{ 21.0, 92.0, 158.0, 1.0f };
+  Color4f m_waterControls{0.5f, 0.65f, 0, 0};
+  Color4f m_waterColor{21.0, 92.0, 158.0, 1.0f};
 };
 
 AppRenderer::AppRenderer()
@@ -79,7 +79,7 @@ void AppRenderer::Initialize() {
 
   UniformBufferData uboData = {};
   uboData.m_model           = Matrix4f::Identity();
-  const Matrix4f view            = Transform::LookAt(Vector3f(0.0f, 0.0f, 1.0f), shaderControls.m_eye.xyz(),
+  const Matrix4f view       = Transform::LookAt(Vector3f(0.0f, 0.0f, 1.0f), shaderControls.m_eye.xyz(),
                                                 Vector3f(0.0f, 1.0f, 0.0f));
   const Matrix4f proj = Transform::Perspective(45.0f, 16.0f / 9.0f, 0.1f, 100.0f);
 
@@ -109,13 +109,24 @@ void AppRenderer::Initialize() {
   IcoSphere sphere(6);
 
   DrawablePoolCreateInfo poolInfo(allocatorTemporary);
-  poolInfo.m_byteSize                    = sphere.TotalDataSize() + 0xFFFF;
-  poolInfo.m_numDrawables                = 1;
-  poolInfo.m_numShaders                  = 2;
-  poolInfo.m_drawType                    = DrawType::InstancedIndexed;
-  poolInfo.m_vertexDataSlots = {{{ VERTEX_SLOT, BufferUsageRate::PerVertex}, { NORMAL_SLOT, BufferUsageRate::PerVertex}}, allocatorTemporary };
-  poolInfo.m_vertexStageDescriptorSlots = {{{ UBO_SLOT, DescriptorType::UniformBuffer }, { SHADER_CONTROLS_SLOT, DescriptorType::UniformBuffer } }, allocatorTemporary };
-  poolInfo.m_pixelStageDescriptorSlots = {{{ SHADER_CONTROLS_SLOT, DescriptorType::UniformBuffer } }, allocatorTemporary };
+  poolInfo.m_byteSize        = sphere.TotalDataSize() + 0xFFFF;
+  poolInfo.m_numDrawables    = 1;
+  poolInfo.m_numShaders      = 2;
+  poolInfo.m_drawType        = DrawType::InstancedIndexed;
+  poolInfo.m_vertexDataSlots = {
+    {
+      {VERTEX_SLOT, BufferUsageRate::PerVertex},
+      {NORMAL_SLOT, BufferUsageRate::PerVertex}
+    },
+    allocatorTemporary
+  };
+  poolInfo.m_descriptorSlots = {
+    {
+      {SHADER_CONTROLS_SLOT, DescriptorType::UniformBuffer, ShaderStage::Vertex | ShaderStage::Pixel},
+      {UBO_SLOT, DescriptorType::UniformBuffer, ShaderStage::Vertex}
+    },
+    allocatorTemporary
+  };
 
   DrawablePool& pool = m_renderer->CreateDrawablePool(poolInfo);
 
@@ -126,9 +137,9 @@ void AppRenderer::Initialize() {
   vertexStride.PushBack(sphere.GetVertexFormat());
   pool.AddBufferBinding(VERTEX_SLOT, vertexStride);
 
-  pool.AddBufferBinding(NORMAL_SLOT, {{ sphere.GetNormalFormat() }, allocatorTemporary });
+  pool.AddBufferBinding(NORMAL_SLOT, {{sphere.GetNormalFormat()}, allocatorTemporary});
 
-  const auto uboDataBuffer = reinterpret_cast<U8*>(&uboData); // NOLINT
+  const auto uboDataBuffer       = reinterpret_cast<U8*>(&uboData);        // NOLINT
   const auto shaderControlBuffer = reinterpret_cast<U8*>(&shaderControls); // NOLINT
 
   // Create Drawable from Pool

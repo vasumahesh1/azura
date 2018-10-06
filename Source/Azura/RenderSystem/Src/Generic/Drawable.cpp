@@ -79,8 +79,7 @@ const BufferInfo& Drawable::GetIndexBufferInfo() const {
 
 DrawablePoolCreateInfo::DrawablePoolCreateInfo(Memory::Allocator& alloc)
   : m_vertexDataSlots(alloc),
-    m_vertexStageDescriptorSlots(alloc),
-    m_pixelStageDescriptorSlots(alloc) {
+    m_descriptorSlots(alloc) {
 }
 
 DrawablePool::DrawablePool(const DrawablePoolCreateInfo& createInfo, Memory::Allocator& allocator)
@@ -88,21 +87,11 @@ DrawablePool::DrawablePool(const DrawablePoolCreateInfo& createInfo, Memory::All
                                    IsPerVertexSlot)),
     m_numInstanceSlots(std::count_if(createInfo.m_vertexDataSlots.Begin(), createInfo.m_vertexDataSlots.End(),
                                      IsPerInstanceSlot)),
-    m_descriptorSlots(createInfo.m_vertexStageDescriptorSlots.GetSize() + createInfo.m_pixelStageDescriptorSlots.GetSize(), allocator),
+    m_descriptorSlots(createInfo.m_descriptorSlots, allocator),
     m_vertexDataSlots(createInfo.m_vertexDataSlots, allocator),
     m_byteSize(createInfo.m_byteSize),
     m_drawType(createInfo.m_drawType),
     m_allocator(allocator) {
-
-  for(const auto& slot : createInfo.m_vertexStageDescriptorSlots)
-  {
-    m_descriptorSlots.PushBack(slot);
-  }
-
-  for(const auto& slot : createInfo.m_pixelStageDescriptorSlots)
-  {
-    m_descriptorSlots.PushBack(slot);
-  }
 
   m_numUniformSlots = std::count_if(m_descriptorSlots.Begin(), m_descriptorSlots.End(), [](const DescriptorSlot& item) -> bool { return item.m_type == DescriptorType::UniformBuffer; });
   m_numSamplerSlots = std::count_if(m_descriptorSlots.Begin(), m_descriptorSlots.End(), [](const DescriptorSlot& item) -> bool { return item.m_type == DescriptorType::Sampler; });

@@ -70,8 +70,7 @@ struct DrawablePoolCreateInfo {
 
   Containers::Vector<VertexSlot> m_vertexDataSlots;
 
-  Containers::Vector<DescriptorSlot> m_vertexStageDescriptorSlots;
-  Containers::Vector<DescriptorSlot> m_pixelStageDescriptorSlots;
+  Containers::Vector<DescriptorSlot> m_descriptorSlots;
 
   ~DrawablePoolCreateInfo() = default;
 

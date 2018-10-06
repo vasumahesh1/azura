@@ -141,17 +141,16 @@ void VkDrawablePool::CreateDescriptorInfo(const DrawablePoolCreateInfo& createIn
 
   for (const auto& slot : m_descriptorSlots) {
     Containers::Vector<VkDescriptorSetLayoutBinding> layoutBindings(1, allocatorTemporary);
+    const auto combinedShaderFlagBits = GetCombinedShaderStageFlag(slot.m_stages);
 
-    // TODO(vasumahesh1):[DESCRIPTOR]: Hacky AF. Need to change Shader Stage later on.
     switch (slot.m_type)
     {
-
     case DescriptorType::UniformBuffer:
-      VkCore::CreateUniformBufferBinding(layoutBindings, 0, 1, VK_SHADER_STAGE_ALL);
+      VkCore::CreateUniformBufferBinding(layoutBindings, 0, 1, combinedShaderFlagBits);
       break;
 
     case DescriptorType::Sampler:
-      VkCore::CreateSamplerBinding(layoutBindings, 0, 1, VK_SHADER_STAGE_ALL);
+      VkCore::CreateSamplerBinding(layoutBindings, 0, 1, combinedShaderFlagBits);
       break;
 
     case DescriptorType::PushConstant:
