@@ -21,6 +21,7 @@ set(VULKAN_SOURCES
     "Inc/Vulkan/VkPlatform.h"
     "Inc/Vulkan/VkRenderer.h"
     "Inc/Vulkan/VkScopedBuffer.h"
+    "Inc/Vulkan/VkScopedImage.h"
     "Inc/Vulkan/VkScopedPipeline.h"
     "Inc/Vulkan/VkShader.h"
     "Inc/Vulkan/VkTextureManager.h"
@@ -43,6 +44,7 @@ set(VULKAN_SOURCES
     "Src/Vulkan/VkRenderer.cpp"
     "Src/Vulkan/VkRenderSystem.cpp"
     "Src/Vulkan/VkScopedBuffer.cpp"
+    "Src/Vulkan/VkScopedImage.cpp"
     "Src/Vulkan/VkScopedPipeline.cpp"
     "Src/Vulkan/VkShader.cpp"
     "Src/Vulkan/VkTextureManager.cpp"
@@ -68,7 +70,7 @@ target_compile_definitions(VulkanRenderSystem PUBLIC API_VULKAN=1)
 target_include_directories(VulkanRenderSystem
                            PUBLIC ${PROJECT_SOURCE_DIR}/Inc ${STB_INCLUDE_DIR})
 
-target_link_libraries(VulkanRenderSystem Common Log Core VULKAN_STATIC glfw)
+target_link_libraries(VulkanRenderSystem PUBLIC Common Containers Platform Log Core VULKAN_STATIC glfw)
 
 
 # -----------  Testing Target  -----------

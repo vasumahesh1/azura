@@ -11,30 +11,6 @@ const U32 DEFAULT_FRAMES_IN_FLIGHT = 2;
 
 struct DrawablePoolCreateInfo;
 
-struct Bounds3D {
-  U32 m_width{0};
-  U32 m_height{0};
-  U32 m_depth{0};
-
-  Bounds3D(U32 width, U32 height, U32 depth)
-    : m_width(width),
-      m_height(height),
-      m_depth(depth) {
-
-  }
-};
-
-struct Bounds2D {
-  U32 m_width{0};
-  U32 m_height{0};
-
-  Bounds2D(U32 width, U32 height)
-    : m_width(width),
-      m_height(height) {
-
-  }
-};
-
 struct DeviceRequirements {
   bool m_discreteGPU{true};
   bool m_transferQueue{false};
@@ -46,8 +22,6 @@ struct ApplicationInfo {
   std::string m_name;
   Version m_version;
 };
-
-
 
 struct ApplicationRequirements {
   float m_clearColor[4] {0, 0, 0, 1.0f};

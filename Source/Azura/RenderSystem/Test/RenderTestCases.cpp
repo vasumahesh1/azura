@@ -52,7 +52,7 @@ void RenderTestCases::ExecuteBasicRenderTest(Azura::Renderer& renderer,
   poolInfo.m_uniformBuffers.Reserve(1);
   poolInfo.m_uniformBuffers.PushBack(std::make_pair(uniformSlot,
                                                     UniformBufferDesc{
-                                                      sizeof(UniformBufferData), 1, ShaderStage::Vertex
+                                                      sizeof(UniformBufferData), 1
                                                     }));
 
   DrawablePool& pool = renderer.CreateDrawablePool(poolInfo);
@@ -73,8 +73,8 @@ void RenderTestCases::ExecuteBasicRenderTest(Azura::Renderer& renderer,
   }, allocatorTemporary);
 
   Vector<U32> indexData = Vector<U32>({
-    0, 2, 1,
-    2, 0, 3
+    0, 1, 2,
+    2, 3, 0
   }, allocatorTemporary);
 
   UniformBufferData uboData = {};
@@ -145,7 +145,7 @@ void RenderTestCases::ExecuteBasicInstancingTest(Azura::Renderer& renderer,
   poolInfo.m_uniformBuffers.Reserve(1);
   poolInfo.m_uniformBuffers.PushBack(std::make_pair(uniformSlot,
                                                     UniformBufferDesc{
-                                                      sizeof(UniformBufferData), 1, ShaderStage::Vertex
+                                                      sizeof(UniformBufferData), 1
                                                     }));
 
   DrawablePool& pool = renderer.CreateDrawablePool(poolInfo);
@@ -175,8 +175,8 @@ void RenderTestCases::ExecuteBasicInstancingTest(Azura::Renderer& renderer,
   }, allocatorTemporary);
 
   Vector<U32> indexData = Vector<U32>({
-    0, 2, 1,
-    2, 0, 3
+    0, 1, 2,
+    2, 3, 0
   }, allocatorTemporary);
 
   UniformBufferData uboData = {};

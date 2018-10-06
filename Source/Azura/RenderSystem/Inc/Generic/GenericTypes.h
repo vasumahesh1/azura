@@ -95,6 +95,30 @@ enum class ImageType
   Image3D
 };
 
+struct Bounds3D {
+  U32 m_width{0};
+  U32 m_height{0};
+  U32 m_depth{0};
+
+  Bounds3D(U32 width, U32 height, U32 depth)
+    : m_width(width),
+    m_height(height),
+    m_depth(depth) {
+
+  }
+};
+
+struct Bounds2D {
+  U32 m_width{0};
+  U32 m_height{0};
+
+  Bounds2D(U32 width, U32 height)
+    : m_width(width),
+    m_height(height) {
+
+  }
+};
+
 struct ShaderStageInfo {
   ShaderStage m_stage;
   String m_entryPoint;

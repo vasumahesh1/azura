@@ -14,6 +14,8 @@ include("./Slang.Import.cmake")
 add_subdirectory(Imports)
 
 add_subdirectory(Common)
+add_subdirectory(Containers)
+add_subdirectory(Platform)
 add_subdirectory(Core)
 add_subdirectory(Azura)
 add_subdirectory(Samples)

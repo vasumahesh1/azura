@@ -666,6 +666,9 @@ VkImage VkCore::CreateImage(VkDevice device,
   createInfo.samples       = VK_SAMPLE_COUNT_1_BIT;
   createInfo.tiling        = tiling;
   createInfo.usage         = imageUsage;
+  createInfo.flags         = 0;
+
+  // TODO(vasumahesh1):[TEXTURE]: Add support for Cube Maps
 
   VkImage resultImage;
   VERIFY_VK_OP(log_VulkanRenderSystem, vkCreateImage(device, &createInfo, nullptr, &resultImage),
