@@ -5,7 +5,7 @@ TEST(Test, Sanity) {
 }
 
 int main(int argc, char **argv) {
-  std::cout << "Testing Common Library" << std::endl;
+  std::cout << "Testing Containers Library" << std::endl;
   ::testing::InitGoogleTest(&argc, argv);
   return RUN_ALL_TESTS();
 }

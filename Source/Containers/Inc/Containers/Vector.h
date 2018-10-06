@@ -286,6 +286,8 @@ public:
   Iterator end() const;
 
 private:
+  void GrowIfNeeded();
+
   U32 m_size{0};
   U32 m_maxSize{0};
   std::reference_wrapper<Memory::Allocator> m_allocator;
@@ -446,17 +448,61 @@ Vector<Type>& Vector<Type>::operator=(Vector&& other) noexcept {
 
   return *this;
 }
+  
+template <typename Type>
+void Vector<Type>::GrowIfNeeded() {
+  if (m_size < m_maxSize)
+  {
+    return;
+  }
+
+  if (m_maxSize == 0)
+  {
+#ifdef BUILD_DEBUG
+    printf("\nDebug Warning: Vector was not initialized with any size. Set a size using the ctor or Reserve() or Resize().\n");
+#endif
+    Reserve(1);
+    return;
+  }
+
+#ifdef BUILD_DEBUG
+  printf("\nDebug Warning: Vector Growing in Size. This is underperformant -- consider setting the initial size.\n");
+#endif
+
+  m_maxSize = 2 * m_maxSize;
+
+  // Grow Vector
+  auto newDataHandle = m_allocator.get().RawNewArray<Type>(m_maxSize);
+
+  if constexpr (std::is_trivially_copyable_v<Type>) {
+    // Copy over Contents
+    std::memmove(newDataHandle.get(), m_base.get(), m_size * sizeof(Type));
+  }
+  else {
+    // Manually Move Construct each item into new space
+    for (U32 idx = 0; idx < m_size; ++idx) {
+      new(&newDataHandle[idx]) Type(std::move(m_base[idx]));
+
+      // TODO(vasumahesh1): MSVC gives a NoDiscard warning here. Not sure why, but due to C++17.
+      UNUSED(m_base[idx].~Type());
+    }
+  }
+
+  m_base = std::move(newDataHandle);
+}
 
 template <typename Type>
 void Vector<Type>::PushBack(const Type& data) {
-  assert(m_size < m_maxSize);
+  GrowIfNeeded();
+
   new(&m_base[m_size]) Type(data);
   ++m_size;
 }
 
 template <typename Type>
 void Vector<Type>::PushBack(Type&& data) {
-  assert(m_size < m_maxSize);
+  GrowIfNeeded();
+
   new(&m_base[m_size]) Type(std::move(data));
   ++m_size;
 }
@@ -464,7 +510,8 @@ void Vector<Type>::PushBack(Type&& data) {
 template <typename Type>
 template <typename... Args>
 void Vector<Type>::EmplaceBack(Args ... args) {
-  assert(m_size < m_maxSize);
+  GrowIfNeeded();
+
   new(&m_base[m_size]) Type(args...);
   ++m_size;
 }

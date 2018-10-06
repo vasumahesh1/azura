@@ -30,6 +30,15 @@ public:
     // std::cout << "Reset" << std::endl;
   }
 
+  static void PrintStats() {
+    std::cout << "s_ctorCalls: " << s_ctorCalls << '\n';
+    std::cout << "s_dtorCalls: " << s_dtorCalls << '\n';
+    std::cout << "s_copyCtorCalls: " << s_copyCtorCalls << '\n';
+    std::cout << "s_moveCtorCalls: " << s_moveCtorCalls << '\n';
+    std::cout << "s_copyAssignCalls: " << s_copyAssignCalls << '\n';
+    std::cout << "s_moveAssignCalls: " << s_moveAssignCalls << '\n';
+  }
+
   ComplexType(int data)
     : m_data(data) {
     // std::cout << "Ctor" << std::endl;
@@ -139,6 +148,36 @@ TEST_F(VectorTest, NormalPush) {
   v.PushBack(30);
 
   ASSERT_EQ(v.GetSize(), 3u);
+  ASSERT_EQ(v[0], 10);
+  ASSERT_EQ(v[1], 20);
+  ASSERT_EQ(v[2], 30);
+}
+
+TEST_F(VectorTest, GrowPush) {
+  alloc.Reset();
+  Vector<int> v{2, alloc};
+
+  v.PushBack(10);
+  v.PushBack(20);
+  v.PushBack(30);
+
+  ASSERT_EQ(v.GetSize(), 3u);
+  ASSERT_EQ(v.GetMaxSize(), 4u);
+  ASSERT_EQ(v[0], 10);
+  ASSERT_EQ(v[1], 20);
+  ASSERT_EQ(v[2], 30);
+}
+
+TEST_F(VectorTest, GrowPushDirect) {
+  alloc.Reset();
+  Vector<int> v{alloc};
+
+  v.PushBack(10);
+  v.PushBack(20);
+  v.PushBack(30);
+
+  ASSERT_EQ(v.GetSize(), 3u);
+  ASSERT_EQ(v.GetMaxSize(), 4u);
   ASSERT_EQ(v[0], 10);
   ASSERT_EQ(v[1], 20);
   ASSERT_EQ(v[2], 30);
@@ -419,6 +458,42 @@ TEST_F(VectorTest, PushBackComplexTypesMove) {
 
   ASSERT_EQ(ComplexType::s_moveCtorCalls, expectedMoveCtor);
   ASSERT_EQ(ComplexType::s_moveAssignCalls, expectedMoveAssign);
+}
+
+TEST_F(VectorTest, PushBackComplexTypesMoveWithGrow) {
+  alloc.Reset();
+  ComplexType::ResetStats();
+
+  const int expectedCtors      = 4;
+  const int expectedDtors      = 6;
+  const int expectedCopyCtor   = 0;
+  const int expectedCopyAssign = 0;
+  const int expectedMoveCtor   = 6;
+  const int expectedMoveAssign = 0;
+
+  Vector<ComplexType> v{2, alloc};
+
+  v.PushBack(ComplexType{10});
+  v.PushBack(ComplexType{20});
+  v.PushBack(ComplexType{30});
+  v.PushBack(ComplexType{40});
+
+  ASSERT_EQ(ComplexType::s_ctorCalls, expectedCtors);
+  ASSERT_EQ(ComplexType::s_dtorCalls, expectedDtors);
+
+  ASSERT_EQ(ComplexType::s_copyCtorCalls, expectedCopyCtor);
+  ASSERT_EQ(ComplexType::s_copyAssignCalls, expectedCopyAssign);
+
+  ASSERT_EQ(ComplexType::s_moveCtorCalls, expectedMoveCtor);
+  ASSERT_EQ(ComplexType::s_moveAssignCalls, expectedMoveAssign);
+
+  ASSERT_EQ(10, v[0].Data());
+  ASSERT_EQ(20, v[1].Data());
+  ASSERT_EQ(30, v[2].Data());
+  ASSERT_EQ(40, v[3].Data());
+
+  // Note: This test doesn't compare with std::vector because the growth is highly implementation dependent.
+  // GCC doubles the capacity but MSVC does a 1.5 * capacity
 }
 
 TEST_F(VectorTest, EmplaceBackComplexTypes) {
