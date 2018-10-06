@@ -1,6 +1,18 @@
 ﻿#include "Generic/Drawable.h"
+#include <algorithm>
 
 namespace Azura {
+
+namespace {
+bool IsPerVertexSlot(const VertexSlot& slot) {
+  return slot.m_rate == BufferUsageRate::PerVertex;
+}
+
+bool IsPerInstanceSlot(const VertexSlot& slot) {
+  return slot.m_rate == BufferUsageRate::PerInstance;
+}
+
+} // namespace
 
 Drawable::Drawable(const DrawableCreateInfo& info,
                    U32 numVertexSlots,
@@ -66,28 +78,45 @@ const BufferInfo& Drawable::GetIndexBufferInfo() const {
 }
 
 DrawablePoolCreateInfo::DrawablePoolCreateInfo(Memory::Allocator& alloc)
-  : m_uniformBuffers(alloc), m_samplers(alloc) {
+  : m_vertexDataSlots(alloc),
+    m_vertexStageDescriptorSlots(alloc),
+    m_pixelStageDescriptorSlots(alloc) {
 }
 
 DrawablePool::DrawablePool(const DrawablePoolCreateInfo& createInfo, Memory::Allocator& allocator)
-  : m_numVertexSlots(createInfo.m_slotInfo.m_numVertexSlots),
-    m_numInstanceSlots(createInfo.m_slotInfo.m_numInstanceSlots),
-    m_numUniformSlots(createInfo.m_uniformBuffers.GetSize()),
-    m_numSamplerSlots(createInfo.m_samplers.GetSize()),
+  : m_numVertexSlots(std::count_if(createInfo.m_vertexDataSlots.Begin(), createInfo.m_vertexDataSlots.End(),
+                                   IsPerVertexSlot)),
+    m_numInstanceSlots(std::count_if(createInfo.m_vertexDataSlots.Begin(), createInfo.m_vertexDataSlots.End(),
+                                     IsPerInstanceSlot)),
+    m_descriptorSlots(createInfo.m_vertexStageDescriptorSlots.GetSize() + createInfo.m_pixelStageDescriptorSlots.GetSize(), allocator),
+    m_vertexDataSlots(createInfo.m_vertexDataSlots, allocator),
     m_byteSize(createInfo.m_byteSize),
     m_drawType(createInfo.m_drawType),
     m_allocator(allocator) {
+
+  for(const auto& slot : createInfo.m_vertexStageDescriptorSlots)
+  {
+    m_descriptorSlots.PushBack(slot);
+  }
+
+  for(const auto& slot : createInfo.m_pixelStageDescriptorSlots)
+  {
+    m_descriptorSlots.PushBack(slot);
+  }
+
+  m_numUniformSlots = std::count_if(m_descriptorSlots.Begin(), m_descriptorSlots.End(), [](const DescriptorSlot& item) -> bool { return item.m_type == DescriptorType::UniformBuffer; });
+  m_numSamplerSlots = std::count_if(m_descriptorSlots.Begin(), m_descriptorSlots.End(), [](const DescriptorSlot& item) -> bool { return item.m_type == DescriptorType::Sampler; });
 }
 
-void DrawablePool::BindVertexData(DrawableID drawableId, const Slot& slot, const Containers::Vector<U8>& buffer) {
+void DrawablePool::BindVertexData(DrawableID drawableId, SlotID slot, const Containers::Vector<U8>& buffer) {
   BindVertexData(drawableId, slot, buffer.Data(), buffer.GetSize());
 }
 
-void DrawablePool::BindInstanceData(DrawableID drawableId, const Slot& slot, const Containers::Vector<U8>& buffer) {
+void DrawablePool::BindInstanceData(DrawableID drawableId, SlotID slot, const Containers::Vector<U8>& buffer) {
   BindInstanceData(drawableId, slot, buffer.Data(), buffer.GetSize());
 }
 
-void DrawablePool::BindUniformData(DrawableID drawableId, const Slot& slot, const Containers::Vector<U8>& buffer) {
+void DrawablePool::BindUniformData(DrawableID drawableId, SlotID slot, const Containers::Vector<U8>& buffer) {
   BindUniformData(drawableId, slot, buffer.Data(), buffer.GetSize());
 }
 
@@ -105,6 +134,28 @@ Memory::Allocator& DrawablePool::GetAllocator() const {
 
 DrawType DrawablePool::GetDrawType() const {
   return m_drawType;
+}
+
+int DrawablePool::GetVertexSlotIndex(SlotID id) const {
+  auto it = std::find_if(m_vertexDataSlots.Begin(), m_vertexDataSlots.End(), [id](const VertexSlot& slot) -> bool { return slot.m_key == id; });
+
+  if (it == m_vertexDataSlots.End())
+  {
+    return -1;
+  }
+
+  return it - m_vertexDataSlots.Begin();
+}
+
+int DrawablePool::GetDescriptorSlotIndex(SlotID id) const {
+  auto it = std::find_if(m_descriptorSlots.Begin(), m_descriptorSlots.End(), [id](const DescriptorSlot& slot) -> bool { return slot.m_key == id; });
+
+  if (it == m_descriptorSlots.End())
+  {
+    return -1;
+  }
+
+  return it - m_descriptorSlots.Begin();
 }
 
 } // namespace Azura

@@ -35,11 +35,11 @@ void RenderTestCases::ExecuteBasicRenderTest(Azura::Renderer& renderer,
                                                 log_TestCase);
   pixelShader->SetStage(ShaderStage::Pixel);
 
-  Slot vertexDataSlot      = {};
+  VertexSlot vertexDataSlot      = {};
   vertexDataSlot.m_binding = 0;
   vertexDataSlot.m_rate    = BufferUsageRate::PerVertex;
 
-  Slot uniformSlot      = {};
+  VertexSlot uniformSlot      = {};
   uniformSlot.m_binding = 0;
 
   DrawablePoolCreateInfo poolInfo        = {allocatorTemporary};
@@ -125,15 +125,15 @@ void RenderTestCases::ExecuteBasicInstancingTest(Azura::Renderer& renderer,
                                                 log_TestCase);
   pixelShader->SetStage(ShaderStage::Pixel);
 
-  Slot vertexDataSlot      = {};
+  VertexSlot vertexDataSlot      = {};
   vertexDataSlot.m_binding = 0;
   vertexDataSlot.m_rate    = BufferUsageRate::PerVertex;
 
-  Slot instanceDataSlot      = {};
+  VertexSlot instanceDataSlot      = {};
   instanceDataSlot.m_binding = 1;
   instanceDataSlot.m_rate    = BufferUsageRate::PerInstance;
 
-  Slot uniformSlot      = {};
+  VertexSlot uniformSlot      = {};
   uniformSlot.m_binding = 0;
 
   DrawablePoolCreateInfo poolInfo{allocatorTemporary};

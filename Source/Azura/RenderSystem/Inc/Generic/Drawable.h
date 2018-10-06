@@ -6,7 +6,6 @@
 
 namespace Azura {
 using DrawableID = U32;
-
 class Shader;
 
 struct DrawableCreateInfo {
@@ -14,11 +13,6 @@ struct DrawableCreateInfo {
   U32 m_instanceCount{0};
   U32 m_indexCount{0};
   RawStorageFormat m_indexType{RawStorageFormat::R32_UINT};
-};
-
-struct DrawablePoolSlotInfo {
-  U32 m_numVertexSlots{0};
-  U32 m_numInstanceSlots{0};
 };
 
 class Drawable {
@@ -67,25 +61,17 @@ private:
   std::reference_wrapper<Memory::Allocator> m_allocator;
 };
 
-struct UniformBufferDesc
-{
-  U32 m_size;
-  U32 m_count;
-};
-  
-struct SamplerDesc
-{
-  SamplerType m_type;
-};
-
 struct DrawablePoolCreateInfo {
   U32 m_byteSize{0};
   U32 m_numDrawables{0};
   U32 m_numShaders{0};
-  DrawablePoolSlotInfo m_slotInfo{};
+
   DrawType m_drawType{DrawType::InstancedIndexed};
-  Containers::Vector<std::pair<Slot, UniformBufferDesc>> m_uniformBuffers;
-  Containers::Vector<std::pair<Slot, SamplerDesc>> m_samplers;
+
+  Containers::Vector<VertexSlot> m_vertexDataSlots;
+
+  Containers::Vector<DescriptorSlot> m_vertexStageDescriptorSlots;
+  Containers::Vector<DescriptorSlot> m_pixelStageDescriptorSlots;
 
   ~DrawablePoolCreateInfo() = default;
 
@@ -111,16 +97,16 @@ public:
 
   virtual void AddShader(const Shader& shader) = 0;
 
-  virtual void AddBufferBinding(Slot slot, const Containers::Vector<RawStorageFormat>& strides) = 0;
+  virtual void AddBufferBinding(SlotID slot, const Containers::Vector<RawStorageFormat>& strides) = 0;
 
-  void BindVertexData(DrawableID drawableId, const Slot& slot, const Containers::Vector<U8>& buffer);
-  virtual void BindVertexData(DrawableID drawableId, const Slot& slot, const U8* buffer, U32 size) = 0;
+  void BindVertexData(DrawableID drawableId, SlotID slot, const Containers::Vector<U8>& buffer);
+  virtual void BindVertexData(DrawableID drawableId, SlotID slot, const U8* buffer, U32 size) = 0;
 
-  void BindInstanceData(DrawableID drawableId, const Slot& slot, const Containers::Vector<U8>& buffer);
-  virtual void BindInstanceData(DrawableID drawableId, const Slot& slot, const U8* buffer, U32 size) = 0;
+  void BindInstanceData(DrawableID drawableId, SlotID slot, const Containers::Vector<U8>& buffer);
+  virtual void BindInstanceData(DrawableID drawableId, SlotID slot, const U8* buffer, U32 size) = 0;
 
-  void BindUniformData(DrawableID drawableId, const Slot& slot, const Containers::Vector<U8>& buffer);
-  virtual void BindUniformData(DrawableID drawableId, const Slot& slot, const U8* buffer, U32 size) = 0;
+  void BindUniformData(DrawableID drawableId, SlotID slot, const Containers::Vector<U8>& buffer);
+  virtual void BindUniformData(DrawableID drawableId, SlotID slot, const U8* buffer, U32 size) = 0;
 
   void SetIndexData(DrawableID drawableId, const Containers::Vector<U8>& buffer);
   virtual void SetIndexData(DrawableID drawableId, const U8* buffer, U32 size) = 0;
@@ -133,15 +119,20 @@ protected:
   Memory::Allocator& GetAllocator() const;
   DrawType GetDrawType() const;
 
+  int GetVertexSlotIndex(SlotID id) const;
+  int GetDescriptorSlotIndex(SlotID id) const;
+
   U32 m_numVertexSlots;
   U32 m_numInstanceSlots;
   U32 m_numUniformSlots;
   U32 m_numSamplerSlots;
 
+  Containers::Vector<DescriptorSlot> m_descriptorSlots;
+  Containers::Vector<VertexSlot> m_vertexDataSlots;
+
 private:
   U32 m_byteSize;
   DrawType m_drawType;
- 
 
   std::reference_wrapper<Memory::Allocator> m_allocator;
 };

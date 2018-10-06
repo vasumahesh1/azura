@@ -11,6 +11,11 @@ namespace Azura {
 using namespace Containers; // NOLINT
 using namespace Math;       // NOLINT
 
+#define VERTEX_SLOT 0
+#define NORMAL_SLOT 1
+#define UBO_SLOT 2
+#define SHADER_CONTROLS_SLOT 3
+
 struct Vertex {
   float m_pos[4];
   float m_col[4];
@@ -70,20 +75,6 @@ void AppRenderer::Initialize() {
   requirements.m_int64         = false;
   requirements.m_transferQueue = false;
 
-  Slot vertexDataSlot      = {};
-  vertexDataSlot.m_binding = 0;
-  vertexDataSlot.m_rate    = BufferUsageRate::PerVertex;
-
-  Slot normalDataSlot      = {};
-  normalDataSlot.m_binding = 1;
-  normalDataSlot.m_rate    = BufferUsageRate::PerVertex;
-
-  Slot shaderControlSlot      = {};
-  shaderControlSlot.m_binding = 0;
-
-  Slot uniformSlot      = {};
-  uniformSlot.m_binding = 1;
-
   ShaderControls shaderControls{};
 
   UniformBufferData uboData = {};
@@ -122,20 +113,9 @@ void AppRenderer::Initialize() {
   poolInfo.m_numDrawables                = 1;
   poolInfo.m_numShaders                  = 2;
   poolInfo.m_drawType                    = DrawType::InstancedIndexed;
-  poolInfo.m_slotInfo.m_numVertexSlots   = 2;
-  poolInfo.m_slotInfo.m_numInstanceSlots = 0;
-
-  // UBO Info
-  poolInfo.m_uniformBuffers.Reserve(2);
-  poolInfo.m_uniformBuffers.PushBack(std::make_pair(shaderControlSlot,
-    UniformBufferDesc{
-      sizeof(ShaderControls), 1
-    }));
-
-  poolInfo.m_uniformBuffers.PushBack(std::make_pair(uniformSlot,
-    UniformBufferDesc{
-      sizeof(UniformBufferData), 1
-    }));
+  poolInfo.m_vertexDataSlots = {{{ VERTEX_SLOT, BufferUsageRate::PerVertex}, { NORMAL_SLOT, BufferUsageRate::PerVertex}}, allocatorTemporary };
+  poolInfo.m_vertexStageDescriptorSlots = {{{ UBO_SLOT, DescriptorType::UniformBuffer }, { SHADER_CONTROLS_SLOT, DescriptorType::UniformBuffer } }, allocatorTemporary };
+  poolInfo.m_pixelStageDescriptorSlots = {{{ SHADER_CONTROLS_SLOT, DescriptorType::UniformBuffer } }, allocatorTemporary };
 
   DrawablePool& pool = m_renderer->CreateDrawablePool(poolInfo);
 
@@ -144,9 +124,9 @@ void AppRenderer::Initialize() {
 
   Vector<RawStorageFormat> vertexStride = Vector<RawStorageFormat>(1, allocatorTemporary);
   vertexStride.PushBack(sphere.GetVertexFormat());
-  pool.AddBufferBinding(vertexDataSlot, vertexStride);
+  pool.AddBufferBinding(VERTEX_SLOT, vertexStride);
 
-  pool.AddBufferBinding(normalDataSlot, {{ sphere.GetNormalFormat() }, allocatorTemporary });
+  pool.AddBufferBinding(NORMAL_SLOT, {{ sphere.GetNormalFormat() }, allocatorTemporary });
 
   const auto uboDataBuffer = reinterpret_cast<U8*>(&uboData); // NOLINT
   const auto shaderControlBuffer = reinterpret_cast<U8*>(&shaderControls); // NOLINT
@@ -159,11 +139,11 @@ void AppRenderer::Initialize() {
   createInfo.m_indexType        = sphere.GetIndexFormat();
 
   const auto drawableId = pool.CreateDrawable(createInfo);
-  pool.BindVertexData(drawableId, vertexDataSlot, sphere.VertexData(), sphere.VertexDataSize());
-  pool.BindVertexData(drawableId, normalDataSlot, sphere.NormalData(), sphere.NormalDataSize());
+  pool.BindVertexData(drawableId, VERTEX_SLOT, sphere.VertexData(), sphere.VertexDataSize());
+  pool.BindVertexData(drawableId, NORMAL_SLOT, sphere.NormalData(), sphere.NormalDataSize());
   pool.SetIndexData(drawableId, sphere.IndexData(), sphere.IndexDataSize());
-  pool.BindUniformData(drawableId, uniformSlot, uboDataBuffer, sizeof(UniformBufferData));
-  pool.BindUniformData(drawableId, shaderControlSlot, shaderControlBuffer, sizeof(ShaderControls));
+  pool.BindUniformData(drawableId, UBO_SLOT, uboDataBuffer, sizeof(UniformBufferData));
+  pool.BindUniformData(drawableId, SHADER_CONTROLS_SLOT, shaderControlBuffer, sizeof(ShaderControls));
 
   // All Drawables Done
   m_renderer->Submit();

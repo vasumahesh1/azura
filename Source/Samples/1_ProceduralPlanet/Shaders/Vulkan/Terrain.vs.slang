@@ -1,7 +1,7 @@
 import Common;
 
-ParameterBlock<ShaderControls> controls;
 ParameterBlock<UBOData> ubo;
+ParameterBlock<ShaderControls> controls;
 
 // ----------  Shader Constants  ----------
 static const float DEGREE_TO_RAD = 0.0174533;

@@ -73,7 +73,7 @@ public:
   void CreateDescriptorInfo(const DrawablePoolCreateInfo& createInfo);
 
   void Submit() override;
-  void AddBufferBinding(Slot slot, const Containers::Vector<RawStorageFormat>& strides) override;
+  void AddBufferBinding(SlotID slotId, const Containers::Vector<RawStorageFormat>& strides) override;
 
   void AddShader(const Shader& shader) override;
 
@@ -81,9 +81,9 @@ public:
 
   const VkCommandBuffer& GetCommandBuffer() const;
 
-  void BindVertexData(DrawableID drawableId, const Slot& slot, const U8* buffer, U32 size) override;
-  void BindInstanceData(DrawableID drawableId, const Slot& slot, const U8* buffer, U32 size) override;
-  void BindUniformData(DrawableID drawableId, const Slot& slot, const U8* buffer, U32 size) override;
+  void BindVertexData(DrawableID drawableId, SlotID slot, const U8* buffer, U32 size) override;
+  void BindInstanceData(DrawableID drawableId, SlotID slot, const U8* buffer, U32 size) override;
+  void BindUniformData(DrawableID drawableId, SlotID slot, const U8* buffer, U32 size) override;
   void SetIndexData(DrawableID drawableId, const U8* buffer, U32 size) override;
 
   void AppendToMainBuffer(const U8* buffer, U32 bufferSize);

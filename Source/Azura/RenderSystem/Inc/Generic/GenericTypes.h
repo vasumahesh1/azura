@@ -4,6 +4,7 @@
 #include "Types.h"
 
 #include <boost/detail/bitmask.hpp>
+#include "Utils/Hash.h"
 
 namespace Azura {
 enum class RawStorageFormat;
@@ -113,6 +114,13 @@ enum class SamplerType
   Sampler3D
 };
 
+enum class DescriptorType
+{
+  UniformBuffer,
+  Sampler,
+  PushConstant
+};
+
 struct Bounds3D {
   U32 m_width{0};
   U32 m_height{0};
@@ -153,18 +161,30 @@ struct ViewportDimensions {
   float m_maxDepth;
 };
 
-struct Slot {
-  U32 m_binding;
+using SlotID = SizeType;
+
+constexpr SlotID GenSlot(const char* str)
+{
+  return FNVHash(str, sizeof(str), DEFAULT_SEED, DEFAULT_PRIME);
+}
+
+struct VertexSlot {
+  SizeType m_key;
   BufferUsageRate m_rate;
+};
+
+struct DescriptorSlot {
+  SizeType m_key;
+  DescriptorType m_type;
 };
 
 struct BufferInfo {
   U32 m_offset;
   U32 m_byteSize;
   U32 m_maxByteSize;
-  Slot m_slot;
+  U32 m_binding;
 
-  BufferInfo() : m_offset(0), m_byteSize(0), m_maxByteSize(0), m_slot() {}
+  BufferInfo() : m_offset(0), m_byteSize(0), m_maxByteSize(0), m_binding(0) {}
 };
 
 struct LayerSubresource

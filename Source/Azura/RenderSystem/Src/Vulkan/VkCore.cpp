@@ -541,7 +541,7 @@ VkDevice VkCore::CreateLogicalDevice(VkPhysicalDevice physicalDevice,
   LOG_DBG(log_VulkanRenderSystem, LOG_LEVEL, "Device Creation: Loading Device Validation Layers");
   for(const auto& layer : VALIDATION_LAYERS)
   {
-    LOG_DBG(log_VulkanRenderSystem, LOG_LEVEL, "= Device Extensions: %s", layer);
+    LOG_DBG(log_VulkanRenderSystem, LOG_LEVEL, "= Validation Layer: %s", layer);
   }
 
   createInfo.enabledLayerCount   = U32(VALIDATION_LAYERS.size());
@@ -551,9 +551,12 @@ VkDevice VkCore::CreateLogicalDevice(VkPhysicalDevice physicalDevice,
   createInfo.ppEnabledLayerNames = nullptr;
 #endif
 
+
   VkDevice device;
   VERIFY_VK_OP(log_VulkanRenderSystem, vkCreateDevice(physicalDevice, &createInfo, nullptr, &device),
     "Failed to create VkDevice");
+
+  LOG_DBG(log_VulkanRenderSystem, LOG_LEVEL, "Created VkDevice Successfully");
   return device;
 }
 
@@ -762,13 +765,13 @@ VkRenderPass VkCore::CreateRenderPass(VkDevice device, VkFormat colorFormat, con
 }
 
 void VkCore::CreateUniformBufferBinding(Containers::Vector<VkDescriptorSetLayoutBinding>& bindings,
-                                        const Slot& slot,
-                                        const UniformBufferDesc& desc,
+                                        const U32 binding,
+                                        const U32 count,
                                         VkShaderStageFlags stageFlag) {
   VkDescriptorSetLayoutBinding uboLayoutBinding = {};
-  uboLayoutBinding.binding                      = slot.m_binding;
+  uboLayoutBinding.binding                      = binding;
   uboLayoutBinding.descriptorType               = VK_DESCRIPTOR_TYPE_UNIFORM_BUFFER;
-  uboLayoutBinding.descriptorCount              = desc.m_count;
+  uboLayoutBinding.descriptorCount              = count;
   uboLayoutBinding.stageFlags                   = stageFlag;
   uboLayoutBinding.pImmutableSamplers           = nullptr;
 
@@ -776,13 +779,13 @@ void VkCore::CreateUniformBufferBinding(Containers::Vector<VkDescriptorSetLayout
 }
 
 void VkCore::CreateSamplerBinding(Containers::Vector<VkDescriptorSetLayoutBinding>& bindings,
-  const Slot& slot,
-  const SamplerDesc& desc,
+  U32 binding,
+  U32 count,
   VkShaderStageFlags stageFlag) {
   VkDescriptorSetLayoutBinding uboLayoutBinding = {};
-  uboLayoutBinding.binding                      = slot.m_binding;
+  uboLayoutBinding.binding                      = binding;
   uboLayoutBinding.descriptorType               = VK_DESCRIPTOR_TYPE_COMBINED_IMAGE_SAMPLER;
-  uboLayoutBinding.descriptorCount              = 1;
+  uboLayoutBinding.descriptorCount              = count;
   uboLayoutBinding.stageFlags                   = stageFlag;
   uboLayoutBinding.pImmutableSamplers           = nullptr;
 

@@ -34,13 +34,13 @@ VkPipelineFactory& VkPipelineFactory::AddShaderStage(const VkPipelineShaderStage
   return *this;
 }
 
-VkPipelineFactory& VkPipelineFactory::AddBindingDescription(U32 stride, Slot slot) {
+VkPipelineFactory& VkPipelineFactory::AddBindingDescription(U32 stride, VertexSlot slot, U32 binding) {
   VkVertexInputBindingDescription bindingDesc;
 
   const auto rate = ToVkVertexInputRate(slot.m_rate);
   VERIFY_OPT(log_VulkanRenderSystem, rate, "Unknown Format");
 
-  bindingDesc.binding   = slot.m_binding;
+  bindingDesc.binding   = binding;
   bindingDesc.stride    = stride;
   bindingDesc.inputRate = rate.value();
 

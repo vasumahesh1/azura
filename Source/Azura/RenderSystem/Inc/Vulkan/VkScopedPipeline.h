@@ -26,7 +26,7 @@ class VkPipelineFactory {
 
   VkPipelineFactory& AddShaderStage(const VkPipelineShaderStageCreateInfo& shaderStageCreateInfo);
 
-  VkPipelineFactory& AddBindingDescription(U32 stride, Slot slot);
+  VkPipelineFactory& AddBindingDescription(U32 stride, VertexSlot slot, U32 binding);
   VkPipelineFactory& AddAttributeDescription(RawStorageFormat rawFormat, U32 binding);
   VkPipelineFactory& BulkAddAttributeDescription(const Containers::Vector<RawStorageFormat>& strides, U32 binding);
 

@@ -6,10 +6,14 @@
 #include "Memory/MonotonicAllocator.h"
 #include "Math/Transform.h"
 #include "Math/Icosphere.h"
+#include "Vulkan/VkTypeMapping.h"
 
 namespace Azura {
 using namespace Containers; // NOLINT
 using namespace Math;       // NOLINT
+
+#define VERTEX_SLOT 0
+#define UBO_SLOT 1
 
 struct Vertex {
   float m_pos[4];
@@ -38,7 +42,7 @@ AppRenderer::AppRenderer()
 void AppRenderer::Initialize() {
   LOG_INF(log_AppRenderer, LOG_LEVEL, "Starting Init of AppRenderer");
 
-  STACK_ALLOCATOR(Temporary, Memory::MonotonicAllocator, 2048);
+  HEAP_ALLOCATOR(Temporary, Memory::MonotonicAllocator, 16384);
   m_window = RenderSystem::CreateApplicationWindow("TestZone", 1280, 720);
 
   m_window->SetUpdateCallback([this]()
@@ -58,19 +62,9 @@ void AppRenderer::Initialize() {
   requirements.m_int64         = false;
   requirements.m_transferQueue = false;
 
-  Slot vertexDataSlot      = {};
-  vertexDataSlot.m_binding = 0;
-  vertexDataSlot.m_rate    = BufferUsageRate::PerVertex;
-
-  Slot uniformSlot      = {};
-  uniformSlot.m_binding = 0;
-
-  Slot samplerSlot      = {};
-  samplerSlot.m_binding = 0;
-
   UniformBufferData uboData = {};
   uboData.m_model           = Matrix4f::Identity();
-  const Matrix4f view            = Transform::LookAt(Vector3f(0.0f, 0.0f, 1.0f), Vector3f(0.0f, 0.0f, -4.0f),
+  const Matrix4f view            = Transform::LookAt(Vector3f(0.5f, 0.5f, 1.0f), Vector3f(0.5f, 0.5f, -4.0f),
                                                 Vector3f(0.0f, 1.0f, 0.0f));
   const Matrix4f proj = Transform::Perspective(45.0f, 16.0f / 9.0f, 0.1f, 100.0f);
 
@@ -104,19 +98,8 @@ void AppRenderer::Initialize() {
   poolInfo.m_numDrawables                = 1;
   poolInfo.m_numShaders                  = 2;
   poolInfo.m_drawType                    = DrawType::InstancedIndexed;
-  poolInfo.m_slotInfo.m_numVertexSlots   = 1;
-  poolInfo.m_slotInfo.m_numInstanceSlots = 0;
-  poolInfo.m_uniformBuffers.Reserve(1);
-  poolInfo.m_uniformBuffers.PushBack(std::make_pair(uniformSlot,
-    UniformBufferDesc{
-      sizeof(UniformBufferData), 1
-    }));
-
-  poolInfo.m_samplers.Reserve(1);
-  poolInfo.m_samplers.PushBack(std::make_pair(samplerSlot,
-    SamplerDesc{
-      SamplerType::Sampler2D
-    }));
+  poolInfo.m_vertexDataSlots = {{{ VERTEX_SLOT, BufferUsageRate::PerVertex}}, allocatorTemporary };
+  poolInfo.m_vertexStageDescriptorSlots = {{{ UBO_SLOT, DescriptorType::UniformBuffer } }, allocatorTemporary };
 
   DrawablePool& pool = m_renderer->CreateDrawablePool(poolInfo);
 
@@ -127,7 +110,7 @@ void AppRenderer::Initialize() {
   vertexStride[0]                       = RawStorageFormat::R32G32B32A32_FLOAT;
   vertexStride[1]                       = RawStorageFormat::R32G32B32A32_FLOAT;
   vertexStride[2]                       = RawStorageFormat::R32G32_FLOAT;
-  pool.AddBufferBinding(vertexDataSlot, vertexStride);
+  pool.AddBufferBinding(VERTEX_SLOT, vertexStride);
 
   Vector<Vertex> vertexData = Vector<Vertex>({
     Vertex{{0, 0, 1, 1}, {1, 0, 0, 1}, {0, 0}},
@@ -152,9 +135,9 @@ void AppRenderer::Initialize() {
   createInfo.m_indexType        = RawStorageFormat::R32_UINT;
 
   const auto drawableId = pool.CreateDrawable(createInfo);
-  pool.BindVertexData(drawableId, vertexDataSlot, bufferStart, vertexData.GetSize() * sizeof(Vertex));
+  pool.BindVertexData(drawableId, VERTEX_SLOT, bufferStart, vertexData.GetSize() * sizeof(Vertex));
   pool.SetIndexData(drawableId, indexBufferStart, indexData.GetSize() * sizeof(U32));
-  pool.BindUniformData(drawableId, uniformSlot, uboDataBuffer, sizeof(UniformBufferData));
+  pool.BindUniformData(drawableId, UBO_SLOT, uboDataBuffer, sizeof(UniformBufferData));
 
   // All Drawables Done
   m_renderer->Submit();
@@ -167,11 +150,6 @@ void AppRenderer::WindowUpdate() {
 }
 
 void AppRenderer::Run() const {
-  m_renderer->RenderFrame();
-  m_renderer->RenderFrame();
-  m_renderer->RenderFrame();
-  m_renderer->SnapshotFrame("BasicInstancingTest.data");
-
   LOG_INF(log_AppRenderer, LOG_LEVEL, "Running AppRenderer");
   m_window->StartListening();
 }
