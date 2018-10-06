@@ -1,1 +1,2 @@
+add_subdirectory(0_TestZone)
 add_subdirectory(1_ProceduralPlanet)

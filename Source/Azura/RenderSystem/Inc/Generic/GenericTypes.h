@@ -95,6 +95,24 @@ enum class ImageType
   Image3D
 };
 
+enum class ImageViewType
+{
+  ImageView1D,
+  ImageView1DArray,
+  ImageView2D,
+  ImageView2DArray,
+  ImageView3D,
+  ImageViewCubeMap,
+  ImageViewCubeMapArray,
+};
+
+enum class SamplerType
+{
+  Sampler1D,
+  Sampler2D,
+  Sampler3D
+};
+
 struct Bounds3D {
   U32 m_width{0};
   U32 m_height{0};

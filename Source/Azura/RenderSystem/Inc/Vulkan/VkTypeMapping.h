@@ -44,6 +44,9 @@ CREATE_MAPPER_H(BufferUsageRate, VkVertexInputRate);
 
 CREATE_MAPPER_H(ImageType, VkImageType);
 
+CREATE_MAPPER_H(ImageViewType, VkImageViewType);
+// CREATE_MAPPER_H(VkImageType, ImageType)
+
 VkShaderStageFlagBits GetCombinedShaderStageFlag(ShaderStage stage);
 
 } // namespace Vulkan

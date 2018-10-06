@@ -91,6 +91,8 @@ void CreateUniformBufferBinding(Containers::Vector<VkDescriptorSetLayoutBinding>
                                 const UniformBufferDesc& desc,
                                 VkShaderStageFlags stageFlag);
 
+void CreateSamplerBinding(Containers::Vector<VkDescriptorSetLayoutBinding>& bindings, const Slot & slot, const SamplerDesc & desc, VkShaderStageFlags stageFlag);
+
 VkDescriptorSetLayout CreateDescriptorSetLayout(VkDevice device,
                                                 const Containers::Vector<VkDescriptorSetLayoutBinding>& bindings,
                                                 const Log& log_VulkanRenderSystem);

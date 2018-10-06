@@ -72,6 +72,11 @@ struct UniformBufferDesc
   U32 m_size;
   U32 m_count;
 };
+  
+struct SamplerDesc
+{
+  SamplerType m_type;
+};
 
 struct DrawablePoolCreateInfo {
   U32 m_byteSize{0};
@@ -80,6 +85,7 @@ struct DrawablePoolCreateInfo {
   DrawablePoolSlotInfo m_slotInfo{};
   DrawType m_drawType{DrawType::InstancedIndexed};
   Containers::Vector<std::pair<Slot, UniformBufferDesc>> m_uniformBuffers;
+  Containers::Vector<std::pair<Slot, SamplerDesc>> m_samplers;
 
   ~DrawablePoolCreateInfo() = default;
 
@@ -130,6 +136,7 @@ protected:
   U32 m_numVertexSlots;
   U32 m_numInstanceSlots;
   U32 m_numUniformSlots;
+  U32 m_numSamplerSlots;
 
 private:
   U32 m_byteSize;

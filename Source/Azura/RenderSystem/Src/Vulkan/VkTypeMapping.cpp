@@ -124,10 +124,19 @@ namespace Vulkan {
   FUNC(BufferUsageRate::PerVertex, VK_VERTEX_INPUT_RATE_VERTEX)                                                        \
   FUNC(BufferUsageRate::PerInstance, VK_VERTEX_INPUT_RATE_INSTANCE)
 
-#define IMAGE_TYPE_TO_VK_IMAGE_TYPE(FUNC)                                                        \
+#define IMAGE_TYPE_TO_VK_IMAGE_TYPE(FUNC)                                                           \
   FUNC(ImageType::Image1D, VK_IMAGE_TYPE_1D)                                                        \
   FUNC(ImageType::Image2D, VK_IMAGE_TYPE_2D)                                                        \
   FUNC(ImageType::Image3D, VK_IMAGE_TYPE_3D)
+
+#define IMAGE_VIEW_TYPE_TO_VK_IMAGE_TYPE(FUNC)                               \
+  FUNC(ImageViewType::ImageView1D, VK_IMAGE_VIEW_TYPE_1D)                    \
+  FUNC(ImageViewType::ImageView2D, VK_IMAGE_VIEW_TYPE_2D)                    \
+  FUNC(ImageViewType::ImageView3D, VK_IMAGE_VIEW_TYPE_3D)                    \
+  FUNC(ImageViewType::ImageViewCubeMap, VK_IMAGE_VIEW_TYPE_CUBE)             \
+  FUNC(ImageViewType::ImageView1DArray, VK_IMAGE_VIEW_TYPE_1D_ARRAY)         \
+  FUNC(ImageViewType::ImageView2DArray, VK_IMAGE_VIEW_TYPE_2D_ARRAY)         \
+  FUNC(ImageViewType::ImageViewCubeMapArray, VK_IMAGE_VIEW_TYPE_CUBE_ARRAY)  
 
 #define CREATE_MAPPER_CPP(FROM_FORMAT, TO_FORMAT, MAPPING_TABLE, CASE_MAPPING_FUNC)                                    \
   CREATE_MAPPER_H(FROM_FORMAT, TO_FORMAT) {                                                                            \
@@ -173,6 +182,9 @@ CREATE_MAPPER_CPP(BufferUsageRate,
 // CREATE_MAPPER_CPP(VkFrontFace, FrontFace, FRONT_FACE_TO_VK_FRONT_FACE_MAPPING, REVERSE_MAPPING)
 
 CREATE_MAPPER_CPP(ImageType, VkImageType, IMAGE_TYPE_TO_VK_IMAGE_TYPE, FORWARD_MAPPING);
+// CREATE_MAPPER_CPP(ImageType, VkImageType, IMAGE_TYPE_TO_VK_IMAGE_TYPE, REVERSE_MAPPING)
+
+CREATE_MAPPER_CPP(ImageViewType, VkImageViewType, IMAGE_VIEW_TYPE_TO_VK_IMAGE_TYPE, FORWARD_MAPPING);
 // CREATE_MAPPER_CPP(ImageType, VkImageType, IMAGE_TYPE_TO_VK_IMAGE_TYPE, REVERSE_MAPPING)
 
 VkShaderStageFlagBits GetCombinedShaderStageFlag(ShaderStage stage) {

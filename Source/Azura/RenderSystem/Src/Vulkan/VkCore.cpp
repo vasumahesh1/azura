@@ -775,6 +775,21 @@ void VkCore::CreateUniformBufferBinding(Containers::Vector<VkDescriptorSetLayout
   bindings.PushBack(std::move(uboLayoutBinding));
 }
 
+void VkCore::CreateSamplerBinding(Containers::Vector<VkDescriptorSetLayoutBinding>& bindings,
+  const Slot& slot,
+  const SamplerDesc& desc,
+  VkShaderStageFlags stageFlag) {
+  VkDescriptorSetLayoutBinding uboLayoutBinding = {};
+  uboLayoutBinding.binding                      = slot.m_binding;
+  uboLayoutBinding.descriptorType               = VK_DESCRIPTOR_TYPE_COMBINED_IMAGE_SAMPLER;
+  uboLayoutBinding.descriptorCount              = 1;
+  uboLayoutBinding.stageFlags                   = stageFlag;
+  uboLayoutBinding.pImmutableSamplers           = nullptr;
+
+  bindings.PushBack(std::move(uboLayoutBinding));
+}
+
+
 VkDescriptorSetLayout VkCore::CreateDescriptorSetLayout(
   VkDevice device,
   const Containers::Vector<VkDescriptorSetLayoutBinding>& bindings,

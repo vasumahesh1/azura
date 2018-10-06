@@ -66,15 +66,16 @@ const BufferInfo& Drawable::GetIndexBufferInfo() const {
 }
 
 DrawablePoolCreateInfo::DrawablePoolCreateInfo(Memory::Allocator& alloc)
-  : m_uniformBuffers(alloc) {
+  : m_uniformBuffers(alloc), m_samplers(alloc) {
 }
 
 DrawablePool::DrawablePool(const DrawablePoolCreateInfo& createInfo, Memory::Allocator& allocator)
-  : m_byteSize(createInfo.m_byteSize),
-    m_drawType(createInfo.m_drawType),
-    m_numVertexSlots(createInfo.m_slotInfo.m_numVertexSlots),
+  : m_numVertexSlots(createInfo.m_slotInfo.m_numVertexSlots),
     m_numInstanceSlots(createInfo.m_slotInfo.m_numInstanceSlots),
     m_numUniformSlots(createInfo.m_uniformBuffers.GetSize()),
+    m_numSamplerSlots(createInfo.m_samplers.GetSize()),
+    m_byteSize(createInfo.m_byteSize),
+    m_drawType(createInfo.m_drawType),
     m_allocator(allocator) {
 }
 

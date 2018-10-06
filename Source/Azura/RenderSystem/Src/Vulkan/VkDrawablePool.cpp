@@ -138,7 +138,7 @@ void VkDrawablePool::AppendToMainBuffer(const U8* buffer, U32 bufferSize) {
 void VkDrawablePool::CreateDescriptorInfo(const DrawablePoolCreateInfo& createInfo) {
   STACK_ALLOCATOR(Temporary, Memory::MonotonicAllocator, 2048);
 
-  m_descriptorSetLayouts.Reserve(m_numUniformSlots);
+  m_descriptorSetLayouts.Reserve(m_numUniformSlots + m_numSamplerSlots);
 
   for (const auto& uniformBufferPair : createInfo.m_uniformBuffers) {
     Containers::Vector<VkDescriptorSetLayoutBinding> layoutBindings(1, allocatorTemporary);
@@ -146,6 +146,17 @@ void VkDrawablePool::CreateDescriptorInfo(const DrawablePoolCreateInfo& createIn
 
     // TODO(vasumahesh1):[DESCRIPTOR]: Hacky AF. Need to change Shader Stage later on.
     VkCore::CreateUniformBufferBinding(layoutBindings, Slot{}, bufferDesc, VK_SHADER_STAGE_ALL);
+
+    m_descriptorSetLayouts.
+      PushBack(VkCore::CreateDescriptorSetLayout(m_device, layoutBindings, log_VulkanRenderSystem));
+  }
+
+  for (const auto& samplerPair : createInfo.m_samplers) {
+    Containers::Vector<VkDescriptorSetLayoutBinding> layoutBindings(1, allocatorTemporary);
+    const auto& samplerDesc   = samplerPair.second;
+
+    // TODO(vasumahesh1):[DESCRIPTOR]: Hacky AF. Need to change Shader Stage later on.
+    VkCore::CreateSamplerBinding(layoutBindings, Slot{}, samplerDesc, VK_SHADER_STAGE_ALL);
 
     m_descriptorSetLayouts.
       PushBack(VkCore::CreateDescriptorSetLayout(m_device, layoutBindings, log_VulkanRenderSystem));
