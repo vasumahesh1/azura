@@ -108,8 +108,7 @@ bool CheckDeviceExtensionSupport(VkPhysicalDevice device) {
   return true;
 }
 
-void LogDeviceFeatures(VkPhysicalDeviceFeatures features, const Log& log_VulkanRenderSystem)
-{
+void LogDeviceFeatures(VkPhysicalDeviceFeatures features, const Log& log_VulkanRenderSystem) {
   UNUSED(features);
   UNUSED(log_VulkanRenderSystem);
 
@@ -138,18 +137,28 @@ void LogDeviceFeatures(VkPhysicalDeviceFeatures features, const Log& log_VulkanR
   LOG_DBG(log_VulkanRenderSystem, LOG_LEVEL, "texture Compression BC: %d", features.textureCompressionBC);
   LOG_DBG(log_VulkanRenderSystem, LOG_LEVEL, "Occlusion Query Precise: %d", features.occlusionQueryPrecise);
   LOG_DBG(log_VulkanRenderSystem, LOG_LEVEL, "Pipeline Statistics Query: %d", features.pipelineStatisticsQuery);
-  LOG_DBG(log_VulkanRenderSystem, LOG_LEVEL, "Vertex Pipeline Stores And Atomics: %d", features.vertexPipelineStoresAndAtomics);
+  LOG_DBG(log_VulkanRenderSystem, LOG_LEVEL, "Vertex Pipeline Stores And Atomics: %d", features.
+    vertexPipelineStoresAndAtomics);
   LOG_DBG(log_VulkanRenderSystem, LOG_LEVEL, "Fragment Stores And Atomics: %d", features.fragmentStoresAndAtomics);
-  LOG_DBG(log_VulkanRenderSystem, LOG_LEVEL, "Shader Tessellation And Geometry Point Size: %d", features.shaderTessellationAndGeometryPointSize);
+  LOG_DBG(log_VulkanRenderSystem, LOG_LEVEL, "Shader Tessellation And Geometry Point Size: %d", features.
+    shaderTessellationAndGeometryPointSize);
   LOG_DBG(log_VulkanRenderSystem, LOG_LEVEL, "Shader Image Gather Extended: %d", features.shaderImageGatherExtended);
-  LOG_DBG(log_VulkanRenderSystem, LOG_LEVEL, "Shader Storage Image Extended Formats: %d", features.shaderStorageImageExtendedFormats);
-  LOG_DBG(log_VulkanRenderSystem, LOG_LEVEL, "Shader Storage Image Multisample: %d", features.shaderStorageImageMultisample);
-  LOG_DBG(log_VulkanRenderSystem, LOG_LEVEL, "Shader StorageImageRead Without Format: %d", features.shaderStorageImageReadWithoutFormat);
-  LOG_DBG(log_VulkanRenderSystem, LOG_LEVEL, "Shader Storage ImageWrite Without Format: %d", features.shaderStorageImageWriteWithoutFormat);
-  LOG_DBG(log_VulkanRenderSystem, LOG_LEVEL, "Shader Uniform Buffer Array Dynamic Indexing: %d", features.shaderUniformBufferArrayDynamicIndexing);
-  LOG_DBG(log_VulkanRenderSystem, LOG_LEVEL, "Shader Sampled Image Array Dynamic Indexing: %d", features.shaderSampledImageArrayDynamicIndexing);
-  LOG_DBG(log_VulkanRenderSystem, LOG_LEVEL, "Shader Storage Buffer Array Dynamic Indexing: %d", features.shaderStorageBufferArrayDynamicIndexing);
-  LOG_DBG(log_VulkanRenderSystem, LOG_LEVEL, "Shader Storage Image Array Dynamic Indexing: %d", features.shaderStorageImageArrayDynamicIndexing);
+  LOG_DBG(log_VulkanRenderSystem, LOG_LEVEL, "Shader Storage Image Extended Formats: %d", features.
+    shaderStorageImageExtendedFormats);
+  LOG_DBG(log_VulkanRenderSystem, LOG_LEVEL, "Shader Storage Image Multisample: %d", features.
+    shaderStorageImageMultisample);
+  LOG_DBG(log_VulkanRenderSystem, LOG_LEVEL, "Shader StorageImageRead Without Format: %d", features.
+    shaderStorageImageReadWithoutFormat);
+  LOG_DBG(log_VulkanRenderSystem, LOG_LEVEL, "Shader Storage ImageWrite Without Format: %d", features.
+    shaderStorageImageWriteWithoutFormat);
+  LOG_DBG(log_VulkanRenderSystem, LOG_LEVEL, "Shader Uniform Buffer Array Dynamic Indexing: %d", features.
+    shaderUniformBufferArrayDynamicIndexing);
+  LOG_DBG(log_VulkanRenderSystem, LOG_LEVEL, "Shader Sampled Image Array Dynamic Indexing: %d", features.
+    shaderSampledImageArrayDynamicIndexing);
+  LOG_DBG(log_VulkanRenderSystem, LOG_LEVEL, "Shader Storage Buffer Array Dynamic Indexing: %d", features.
+    shaderStorageBufferArrayDynamicIndexing);
+  LOG_DBG(log_VulkanRenderSystem, LOG_LEVEL, "Shader Storage Image Array Dynamic Indexing: %d", features.
+    shaderStorageImageArrayDynamicIndexing);
   LOG_DBG(log_VulkanRenderSystem, LOG_LEVEL, "Shader Clip Distance: %d", features.shaderClipDistance);
   LOG_DBG(log_VulkanRenderSystem, LOG_LEVEL, "Shader Cull Distance: %d", features.shaderCullDistance);
   LOG_DBG(log_VulkanRenderSystem, LOG_LEVEL, "Shader Float64: %d", features.shaderFloat64);
@@ -173,7 +182,8 @@ void LogDeviceFeatures(VkPhysicalDeviceFeatures features, const Log& log_VulkanR
 int GetDeviceScore(VkPhysicalDevice device,
                    VkSurfaceKHR surface,
                    const DeviceRequirements& requirements,
-                   const SwapChainDeviceSupport& swapChainSupport, const Log& log_VulkanRenderSystem) {
+                   const SwapChainDeviceSupport& swapChainSupport,
+                   const Log& log_VulkanRenderSystem) {
   int score = 0;
   VkPhysicalDeviceProperties deviceProperties;
   VkPhysicalDeviceFeatures deviceFeatures;
@@ -184,13 +194,15 @@ int GetDeviceScore(VkPhysicalDevice device,
   LOG_DBG(log_VulkanRenderSystem, LOG_LEVEL, "Device ID: %d", deviceProperties.deviceID);
   LOG_DBG(log_VulkanRenderSystem, LOG_LEVEL, "API Version: %d", deviceProperties.apiVersion);
   LOG_DBG(log_VulkanRenderSystem, LOG_LEVEL, "Driver Version: %d", deviceProperties.driverVersion);
-  LOG_DBG(log_VulkanRenderSystem, LOG_LEVEL, "Device Type: %s", VkPhysicalDeviceTypeToString(deviceProperties.deviceType));
+  LOG_DBG(log_VulkanRenderSystem, LOG_LEVEL, "Device Type: %s", VkPhysicalDeviceTypeToString(deviceProperties.deviceType
+  ));
   LOG_DBG(log_VulkanRenderSystem, LOG_LEVEL, "Vendor ID: %d", deviceProperties.vendorID);
 
   LOG_DBG(log_VulkanRenderSystem, LOG_LEVEL, "Device Features: Device: %s", deviceProperties.deviceName);
   LogDeviceFeatures(deviceFeatures, log_VulkanRenderSystem);
 
-  const VkQueueIndices indices      = VkCore::FindQueueFamiliesInDevice(device, surface, requirements, log_VulkanRenderSystem);
+  const VkQueueIndices indices = VkCore::FindQueueFamiliesInDevice(device, surface, requirements,
+                                                                   log_VulkanRenderSystem);
   const bool areExtensionsSupported = CheckDeviceExtensionSupport(device);
 
   if (!areExtensionsSupported) {
@@ -288,8 +300,7 @@ VkInstance VkCore::CreateInstance(const ApplicationInfo& applicationData,
   createInfo.ppEnabledExtensionNames = vkExtensions.Data();
 
   LOG_DBG(log_VulkanRenderSystem, LOG_LEVEL, "Instance Creation: Loading Device Extensions");
-  for(const auto& extension : vkExtensions)
-  {
+  for (const auto& extension : vkExtensions) {
     // TODO(vasumahesh1):[PERF]: Check compiler optimization here
     UNUSED(extension);
     LOG_DBG(log_VulkanRenderSystem, LOG_LEVEL, "= Instance Extensions: %s", extension);
@@ -408,7 +419,8 @@ VkPhysicalDevice VkCore::SelectPhysicalDevice(VkInstance instance,
   // Rate and Select the best GPU
   for (const auto& device : availableDevices) {
     const auto swapChainSupport = QuerySwapChainSupport(device, surface, allocatorSwapChainSupport);
-    int tempScore               = GetDeviceScore(device, surface, requirements, swapChainSupport, log_VulkanRenderSystem);
+    int tempScore               = GetDeviceScore(device, surface, requirements, swapChainSupport,
+                                                 log_VulkanRenderSystem);
     candidates.insert(std::make_pair(tempScore, device));
   }
 
@@ -426,7 +438,8 @@ VkPhysicalDevice VkCore::SelectPhysicalDevice(VkInstance instance,
   LOG_DBG(log_VulkanRenderSystem, LOG_LEVEL, "Device ID: %d", deviceProperties.deviceID);
   LOG_DBG(log_VulkanRenderSystem, LOG_LEVEL, "API Version: %d", deviceProperties.apiVersion);
   LOG_DBG(log_VulkanRenderSystem, LOG_LEVEL, "Driver Version: %d", deviceProperties.driverVersion);
-  LOG_DBG(log_VulkanRenderSystem, LOG_LEVEL, "Device Type: %s", VkPhysicalDeviceTypeToString(deviceProperties.deviceType));
+  LOG_DBG(log_VulkanRenderSystem, LOG_LEVEL, "Device Type: %s", VkPhysicalDeviceTypeToString(deviceProperties.deviceType
+  ));
   LOG_DBG(log_VulkanRenderSystem, LOG_LEVEL, "Vendor ID: %d", deviceProperties.vendorID);
 
   LOG_DBG(log_VulkanRenderSystem, LOG_LEVEL, "Device Features: Device: %s", deviceProperties.deviceName);
@@ -478,8 +491,7 @@ VkDevice VkCore::CreateLogicalDevice(VkPhysicalDevice physicalDevice,
   createInfo.ppEnabledExtensionNames = DEVICE_EXTENSIONS.data();
 
   LOG_DBG(log_VulkanRenderSystem, LOG_LEVEL, "Device Creation: Loading Device Extensions");
-  for(const auto& extension : DEVICE_EXTENSIONS)
-  {
+  for (const auto& extension : DEVICE_EXTENSIONS) {
     // TODO(vasumahesh1):[PERF]: Check compiler optimization here
     UNUSED(extension);
     LOG_DBG(log_VulkanRenderSystem, LOG_LEVEL, "= Device Extensions: %s", extension);
@@ -487,8 +499,7 @@ VkDevice VkCore::CreateLogicalDevice(VkPhysicalDevice physicalDevice,
 
 #ifdef BUILD_DEBUG
   LOG_DBG(log_VulkanRenderSystem, LOG_LEVEL, "Device Creation: Loading Device Validation Layers");
-  for(const auto& layer : VALIDATION_LAYERS)
-  {
+  for (const auto& layer : VALIDATION_LAYERS) {
     LOG_DBG(log_VulkanRenderSystem, LOG_LEVEL, "= Validation Layer: %s", layer);
   }
 
@@ -498,7 +509,6 @@ VkDevice VkCore::CreateLogicalDevice(VkPhysicalDevice physicalDevice,
   createInfo.enabledLayerCount   = 0;
   createInfo.ppEnabledLayerNames = nullptr;
 #endif
-
 
   VkDevice device;
   VERIFY_VK_OP(log_VulkanRenderSystem, vkCreateDevice(physicalDevice, &createInfo, nullptr, &device),
@@ -597,7 +607,9 @@ VkImageView VkCore::CreateImageView(VkDevice device,
 }
 
 // TODO(vasumahesh1):[PIPELINE]: Needs serious changes here
-VkRenderPass VkCore::CreateRenderPass(VkDevice device, const VkScopedSwapChain& swapChain, const Log& log_VulkanRenderSystem) {
+VkRenderPass VkCore::CreateRenderPass(VkDevice device,
+                                      const VkScopedSwapChain& swapChain,
+                                      const Log& log_VulkanRenderSystem) {
   VkAttachmentDescription colorAttachment = {};
   colorAttachment.format                  = swapChain.GetSurfaceFormat();
   colorAttachment.samples                 = VK_SAMPLE_COUNT_1_BIT;
@@ -612,28 +624,28 @@ VkRenderPass VkCore::CreateRenderPass(VkDevice device, const VkScopedSwapChain& 
   colorAttachment.finalLayout   = VK_IMAGE_LAYOUT_PRESENT_SRC_KHR;
 
   VkAttachmentDescription depthAttachment = {};
-  depthAttachment.format = swapChain.GetDepthFormat();
-  depthAttachment.samples = VK_SAMPLE_COUNT_1_BIT;
-  depthAttachment.loadOp = VK_ATTACHMENT_LOAD_OP_CLEAR;
-  depthAttachment.storeOp = VK_ATTACHMENT_STORE_OP_DONT_CARE;
-  depthAttachment.stencilLoadOp = VK_ATTACHMENT_LOAD_OP_DONT_CARE;
-  depthAttachment.stencilStoreOp = VK_ATTACHMENT_STORE_OP_DONT_CARE;
-  depthAttachment.initialLayout = VK_IMAGE_LAYOUT_UNDEFINED;
-  depthAttachment.finalLayout = VK_IMAGE_LAYOUT_DEPTH_STENCIL_ATTACHMENT_OPTIMAL;
+  depthAttachment.format                  = swapChain.GetDepthFormat();
+  depthAttachment.samples                 = VK_SAMPLE_COUNT_1_BIT;
+  depthAttachment.loadOp                  = VK_ATTACHMENT_LOAD_OP_CLEAR;
+  depthAttachment.storeOp                 = VK_ATTACHMENT_STORE_OP_DONT_CARE;
+  depthAttachment.stencilLoadOp           = VK_ATTACHMENT_LOAD_OP_DONT_CARE;
+  depthAttachment.stencilStoreOp          = VK_ATTACHMENT_STORE_OP_DONT_CARE;
+  depthAttachment.initialLayout           = VK_IMAGE_LAYOUT_UNDEFINED;
+  depthAttachment.finalLayout             = VK_IMAGE_LAYOUT_DEPTH_STENCIL_ATTACHMENT_OPTIMAL;
 
   VkAttachmentReference colorAttachmentRef = {};
   colorAttachmentRef.attachment            = 0;
   colorAttachmentRef.layout                = VK_IMAGE_LAYOUT_COLOR_ATTACHMENT_OPTIMAL;
 
   VkAttachmentReference depthAttachmentRef = {};
-  depthAttachmentRef.attachment = 1;
-  depthAttachmentRef.layout = VK_IMAGE_LAYOUT_DEPTH_STENCIL_ATTACHMENT_OPTIMAL;
+  depthAttachmentRef.attachment            = 1;
+  depthAttachmentRef.layout                = VK_IMAGE_LAYOUT_DEPTH_STENCIL_ATTACHMENT_OPTIMAL;
 
-  VkSubpassDescription subpass = {};
-  subpass.pipelineBindPoint    = VK_PIPELINE_BIND_POINT_GRAPHICS;
-  subpass.colorAttachmentCount = 1;
-  subpass.pColorAttachments    = &colorAttachmentRef;
-  subpass.pDepthStencilAttachment    = &depthAttachmentRef;
+  VkSubpassDescription subpass    = {};
+  subpass.pipelineBindPoint       = VK_PIPELINE_BIND_POINT_GRAPHICS;
+  subpass.colorAttachmentCount    = 1;
+  subpass.pColorAttachments       = &colorAttachmentRef;
+  subpass.pDepthStencilAttachment = &depthAttachmentRef;
 
   std::array<VkAttachmentDescription, 2> attachments = {colorAttachment, depthAttachment};
 
@@ -677,9 +689,9 @@ void VkCore::CreateUniformBufferBinding(Containers::Vector<VkDescriptorSetLayout
 }
 
 void VkCore::CreateSamplerBinding(Containers::Vector<VkDescriptorSetLayoutBinding>& bindings,
-  U32 binding,
-  U32 count,
-  VkShaderStageFlags stageFlag) {
+                                  U32 binding,
+                                  U32 count,
+                                  VkShaderStageFlags stageFlag) {
   VkDescriptorSetLayoutBinding uboLayoutBinding = {};
   uboLayoutBinding.binding                      = binding;
   uboLayoutBinding.descriptorType               = VK_DESCRIPTOR_TYPE_SAMPLER;
@@ -691,9 +703,9 @@ void VkCore::CreateSamplerBinding(Containers::Vector<VkDescriptorSetLayoutBindin
 }
 
 void VkCore::CreateSampledImageBinding(Containers::Vector<VkDescriptorSetLayoutBinding>& bindings,
-  U32 binding,
-  U32 count,
-  VkShaderStageFlags stageFlag) {
+                                       U32 binding,
+                                       U32 count,
+                                       VkShaderStageFlags stageFlag) {
   VkDescriptorSetLayoutBinding uboLayoutBinding = {};
   uboLayoutBinding.binding                      = binding;
   uboLayoutBinding.descriptorType               = VK_DESCRIPTOR_TYPE_SAMPLED_IMAGE;
@@ -705,9 +717,9 @@ void VkCore::CreateSampledImageBinding(Containers::Vector<VkDescriptorSetLayoutB
 }
 
 void VkCore::CreateCombinedImageSamplerBinding(Containers::Vector<VkDescriptorSetLayoutBinding>& bindings,
-  U32 binding,
-  U32 count,
-  VkShaderStageFlags stageFlag) {
+                                               U32 binding,
+                                               U32 count,
+                                               VkShaderStageFlags stageFlag) {
   VkDescriptorSetLayoutBinding uboLayoutBinding = {};
   uboLayoutBinding.binding                      = binding;
   uboLayoutBinding.descriptorType               = VK_DESCRIPTOR_TYPE_COMBINED_IMAGE_SAMPLER;
@@ -770,7 +782,7 @@ Containers::Vector<VkFramebuffer> VkCore::CreateFrameBuffers(VkDevice device,
                                                              const VkScopedSwapChain& scopedSwapChain,
                                                              Memory::Allocator& allocator,
                                                              const Log& log_VulkanRenderSystem) {
-  const auto& allImages = scopedSwapChain.GetAllImages();
+  const auto& allImages      = scopedSwapChain.GetAllImages();
   const auto swapChainExtent = scopedSwapChain.GetExtent();
 
   Containers::Vector<VkFramebuffer> frameBuffers(ContainerExtent{allImages.GetSize()}, allocator);
@@ -800,8 +812,8 @@ void VkCore::CreateFrameBuffers(VkDevice device,
                                 const VkScopedSwapChain& scopedSwapChain,
                                 Containers::Vector<VkFramebuffer>& frameBuffers,
                                 const Log& log_VulkanRenderSystem) {
-  
-  const auto& allImages = scopedSwapChain.GetAllImages();
+
+  const auto& allImages      = scopedSwapChain.GetAllImages();
   const auto swapChainExtent = scopedSwapChain.GetExtent();
 
   frameBuffers.Resize(allImages.GetSize());
@@ -1187,14 +1199,13 @@ void VkCore::ImageCopy(
   VkImage srcImage,
   VkImage dstImage,
   const Containers::Vector<VkImageCopy>& copyRegions
-)
-{
+) {
   vkCmdCopyImage(
-    cmdBuffer,
-    srcImage, VK_IMAGE_LAYOUT_TRANSFER_SRC_OPTIMAL,
-    dstImage, VK_IMAGE_LAYOUT_TRANSFER_DST_OPTIMAL,
-    copyRegions.GetSize(),
-    copyRegions.Data());
+                 cmdBuffer,
+                 srcImage, VK_IMAGE_LAYOUT_TRANSFER_SRC_OPTIMAL,
+                 dstImage, VK_IMAGE_LAYOUT_TRANSFER_DST_OPTIMAL,
+                 copyRegions.GetSize(),
+                 copyRegions.Data());
 }
 
 VkImageCopy VkCore::GetImageCopyRegion(
@@ -1202,22 +1213,21 @@ VkImageCopy VkCore::GetImageCopyRegion(
   VkImageAspectFlagBits dstAspect,
   const Bounds3D& copyRegion,
   const TextureSubresource& srcSubresource,
-  const TextureSubresource& dstSubresource)
-{
-  VkImageCopy imageCopyRegion = {};
-  imageCopyRegion.srcSubresource.aspectMask = srcAspect;
-  imageCopyRegion.srcSubresource.layerCount = srcSubresource.m_layerInfo.m_layerCount;
+  const TextureSubresource& dstSubresource) {
+  VkImageCopy imageCopyRegion                   = {};
+  imageCopyRegion.srcSubresource.aspectMask     = srcAspect;
+  imageCopyRegion.srcSubresource.layerCount     = srcSubresource.m_layerInfo.m_layerCount;
   imageCopyRegion.srcSubresource.baseArrayLayer = srcSubresource.m_layerInfo.m_baseLayer;
-  imageCopyRegion.srcSubresource.mipLevel = srcSubresource.m_mipLevel;
+  imageCopyRegion.srcSubresource.mipLevel       = srcSubresource.m_mipLevel;
 
-  imageCopyRegion.dstSubresource.aspectMask = dstAspect;
-  imageCopyRegion.dstSubresource.layerCount = dstSubresource.m_layerInfo.m_layerCount;
+  imageCopyRegion.dstSubresource.aspectMask     = dstAspect;
+  imageCopyRegion.dstSubresource.layerCount     = dstSubresource.m_layerInfo.m_layerCount;
   imageCopyRegion.dstSubresource.baseArrayLayer = dstSubresource.m_layerInfo.m_baseLayer;
-  imageCopyRegion.dstSubresource.mipLevel = dstSubresource.m_mipLevel;
+  imageCopyRegion.dstSubresource.mipLevel       = dstSubresource.m_mipLevel;
 
-  imageCopyRegion.extent.width = copyRegion.m_width;
+  imageCopyRegion.extent.width  = copyRegion.m_width;
   imageCopyRegion.extent.height = copyRegion.m_height;
-  imageCopyRegion.extent.depth = copyRegion.m_depth;
+  imageCopyRegion.extent.depth  = copyRegion.m_depth;
 
   return imageCopyRegion;
 }
@@ -1231,8 +1241,7 @@ void VkCore::ImageCopy(
   const Bounds3D& copyRegion,
   const TextureSubresource& srcSubresource,
   const TextureSubresource& dstSubresource
-)
-{
+) {
   STACK_ALLOCATOR(Temporary, Memory::MonotonicAllocator, 1024);
   Containers::Vector<VkImageCopy> imageCopyRegions(1, allocatorTemporary);
   imageCopyRegions.PushBack(GetImageCopyRegion(srcAspect, dstAspect, copyRegion, srcSubresource, dstSubresource));
@@ -1247,8 +1256,7 @@ void VkCore::ImageCopy(
   VkImageAspectFlagBits srcAspect,
   VkImageAspectFlagBits dstAspect,
   const Bounds3D& copyRegion
-)
-{
+) {
   STACK_ALLOCATOR(Temporary, Memory::MonotonicAllocator, 1024);
   Containers::Vector<VkImageCopy> imageCopyRegions(1, allocatorTemporary);
   imageCopyRegions.PushBack(GetImageCopyRegion(srcAspect, dstAspect, copyRegion, {}, {}));
@@ -1256,37 +1264,41 @@ void VkCore::ImageCopy(
   ImageCopy(cmdBuffer, srcImage, dstImage, imageCopyRegions);
 }
 
-void VkCore::FlushCommandBuffer(VkDevice device, VkCommandBuffer cmdBuffer, VkQueue queue, const Log& log_VulkanRenderSystem)
-{
+void VkCore::FlushCommandBuffer(VkDevice device,
+                                VkCommandBuffer cmdBuffer,
+                                VkQueue queue,
+                                const Log& log_VulkanRenderSystem) {
   EndCommandBuffer(cmdBuffer, log_VulkanRenderSystem);
 
-  VkSubmitInfo submitInfo = {};
-  submitInfo.sType        = VK_STRUCTURE_TYPE_SUBMIT_INFO;
+  VkSubmitInfo submitInfo       = {};
+  submitInfo.sType              = VK_STRUCTURE_TYPE_SUBMIT_INFO;
   submitInfo.commandBufferCount = 1;
-  submitInfo.pCommandBuffers = &cmdBuffer;
+  submitInfo.pCommandBuffers    = &cmdBuffer;
 
   VkFence fence = CreateFence(device, VK_FENCE_CREATE_SIGNALED_BIT, log_VulkanRenderSystem);
   vkResetFences(device, 1, &fence);
 
   // Submit to the queue
-  VERIFY_VK_OP(log_VulkanRenderSystem, vkQueueSubmit(queue, 1, &submitInfo, fence), "Flush Command Buffer: Failed to submit to queue");
-  
+  VERIFY_VK_OP(log_VulkanRenderSystem, vkQueueSubmit(queue, 1, &submitInfo, fence),
+    "Flush Command Buffer: Failed to submit to queue");
+
   // Wait for the fence to signal that command buffer has finished executing
-  VERIFY_VK_OP(log_VulkanRenderSystem, vkWaitForFences(device, 1, &fence, VK_TRUE, std::numeric_limits<uint64_t>::max()), "Wait Fence failed");
+  VERIFY_VK_OP(log_VulkanRenderSystem, vkWaitForFences(device, 1, &fence, VK_TRUE, std::numeric_limits<uint64_t>::max())
+    , "Wait Fence failed");
 
   vkDestroyFence(device, fence, nullptr);
 }
 
-bool VkCore::QueryFormatFeatureSupport(VkPhysicalDevice physicalDevice, VkFormat format, std::function<bool(const VkFormatProperties&)> queryFunction)
-{
+bool VkCore::QueryFormatFeatureSupport(VkPhysicalDevice physicalDevice,
+                                       VkFormat format,
+                                       std::function<bool(const VkFormatProperties&)> queryFunction) {
   VkFormatProperties formatProps;
   vkGetPhysicalDeviceFormatProperties(physicalDevice, format, &formatProps);
 
   return queryFunction(formatProps);
 }
 
-VkFormat VkCore::GetVkFormat(RawStorageFormat rawFormat, const Log& log_VulkanRenderSystem)
-{
+VkFormat VkCore::GetVkFormat(RawStorageFormat rawFormat, const Log& log_VulkanRenderSystem) {
   const auto format = ToVkFormat(rawFormat);
   VERIFY_OPT(log_VulkanRenderSystem, format, "Unknown Format");
   return format.value();

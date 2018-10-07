@@ -114,7 +114,7 @@ void AppRenderer::Initialize() {
   poolInfo.m_byteSize        = sphere.TotalDataSize() + 0x400000;
   poolInfo.m_numDrawables    = 1;
   poolInfo.m_numShaders      = 2;
-  poolInfo.m_cullMode        = CullMode::None;
+  poolInfo.m_cullMode        = CullMode::FrontBit;
   poolInfo.m_drawType        = DrawType::InstancedIndexed;
   poolInfo.m_vertexDataSlots = {
     {
