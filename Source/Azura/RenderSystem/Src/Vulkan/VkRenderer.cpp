@@ -53,20 +53,20 @@ VkRenderer::VkRenderer(const ApplicationInfo& appInfo,
                                          log_VulkanRenderSystem);
 
   // Check if Depth Format is supported by Device or not.
-  // const bool depthFormatCheck = VkCore::QueryFormatFeatureSupport(
-  //                                                                 m_physicalDevice,
-  //                                                                 VkCore::GetVkFormat(GetSwapchainRequirements().
-  //                                                                                     m_depthFormat,
-  //                                                                                     log_VulkanRenderSystem),
-  //                                                                 [](const VkFormatProperties& prop) -> bool
-  //                                                                 {
-  //                                                                   return (prop.optimalTilingFeatures &
-  //                                                                           VK_FORMAT_FEATURE_DEPTH_STENCIL_ATTACHMENT_BIT
-  //                                                                          ) ==
-  //                                                                          VK_FORMAT_FEATURE_DEPTH_STENCIL_ATTACHMENT_BIT;
-  //                                                                 });
-  //
-  // VERIFY_TRUE(log_VulkanRenderSystem, depthFormatCheck, "Depth Format Not Supported");
+  const bool depthFormatCheck = VkCore::QueryFormatFeatureSupport(
+                                                                  m_physicalDevice,
+                                                                  VkCore::GetVkFormat(GetSwapchainRequirements().
+                                                                                      m_depthFormat,
+                                                                                      log_VulkanRenderSystem),
+                                                                  [](const VkFormatProperties& prop) -> bool
+                                                                  {
+                                                                    return (prop.optimalTilingFeatures &
+                                                                            VK_FORMAT_FEATURE_DEPTH_STENCIL_ATTACHMENT_BIT
+                                                                           ) ==
+                                                                           VK_FORMAT_FEATURE_DEPTH_STENCIL_ATTACHMENT_BIT;
+                                                                  });
+
+  VERIFY_TRUE(log_VulkanRenderSystem, depthFormatCheck, "Depth Format Not Supported");
 
   // m_depthTexture.Create(m_device, )
 
