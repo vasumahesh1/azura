@@ -99,3 +99,19 @@ TEST_F(RendererTest, BasicInstancingTest) {
 
   window->Destroy();
 }
+
+TEST_F(RendererTest, BasicTextureTest) {
+  HeapMemoryBuffer mainBuffer(16384);
+
+  RangeAllocator mainAllocator(mainBuffer, 8192);
+  RangeAllocator drawableAllocator(mainBuffer, 8192);
+
+  const auto window = CreateDefaultWindow();
+  const auto renderer = CreateDefaultRenderer(*window, mainAllocator, drawableAllocator);
+
+  RenderTestCases::ExecuteBasicTextureTest(*renderer, *window, log_TestRenderer);
+
+  ASSERT_TRUE(CompareImageBytes("./ReferenceImages/BasicTextureTest.data", "./BasicTextureTest.data"));
+
+  window->Destroy();
+}

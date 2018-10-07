@@ -8,9 +8,20 @@
 using namespace Azura;             // NOLINT
 using namespace Azura::Containers; // NOLINT
 
+#define VERTEX_SLOT 0
+#define INSTANCE_SLOT 1
+#define UBO_SLOT 2
+#define SAMPLER_SLOT 3
+#define SAMPLED_IMAGE_SLOT 4
+
 struct Vertex {
   float m_pos[4];
   float m_col[4];
+};
+
+struct VertexWithUV {
+  float m_pos[4];
+  float m_uv[2];
 };
 
 struct Instance {
@@ -26,34 +37,34 @@ void RenderTestCases::ExecuteBasicRenderTest(Azura::Renderer& renderer,
   renderer.SetDrawablePoolCount(1);
 
   auto vertShader = RenderSystem::CreateShader(renderer,
-                                               "Shaders/" + renderer.GetRenderingAPI() + "/RenderSystemTest.vertex",
+                                               "Shaders/" + renderer.GetRenderingAPI() + "/BasicRenderTest.vs",
                                                log_TestCase);
   vertShader->SetStage(ShaderStage::Vertex);
 
   auto pixelShader = RenderSystem::CreateShader(renderer,
-                                                "Shaders/" + renderer.GetRenderingAPI() + "/RenderSystemTest.pixel",
+                                                "Shaders/" + renderer.GetRenderingAPI() + "/BasicRenderTest.ps",
                                                 log_TestCase);
   pixelShader->SetStage(ShaderStage::Pixel);
 
-  VertexSlot vertexDataSlot      = {};
-  vertexDataSlot.m_binding = 0;
-  vertexDataSlot.m_rate    = BufferUsageRate::PerVertex;
-
-  VertexSlot uniformSlot      = {};
-  uniformSlot.m_binding = 0;
 
   DrawablePoolCreateInfo poolInfo        = {allocatorTemporary};
-  poolInfo.m_byteSize                    = 4096;
+  poolInfo.m_byteSize                    = 0x400000;
   poolInfo.m_numDrawables                = 1;
   poolInfo.m_numShaders                  = 2;
   poolInfo.m_drawType                    = DrawType::InstancedIndexed;
-  poolInfo.m_slotInfo.m_numVertexSlots   = 1;
-  poolInfo.m_slotInfo.m_numInstanceSlots = 0;
-  poolInfo.m_uniformBuffers.Reserve(1);
-  poolInfo.m_uniformBuffers.PushBack(std::make_pair(uniformSlot,
-                                                    UniformBufferDesc{
-                                                      sizeof(UniformBufferData), 1
-                                                    }));
+  poolInfo.m_vertexDataSlots      = {
+    {
+      {VERTEX_SLOT, BufferUsageRate::PerVertex}
+    },
+    allocatorTemporary
+  };
+
+  poolInfo.m_descriptorSlots = {
+    {
+      {UBO_SLOT, DescriptorType::UniformBuffer, ShaderStage::Vertex}
+    },
+    allocatorTemporary
+  };
 
   DrawablePool& pool = renderer.CreateDrawablePool(poolInfo);
 
@@ -63,7 +74,7 @@ void RenderTestCases::ExecuteBasicRenderTest(Azura::Renderer& renderer,
   Vector<RawStorageFormat> vertexStride = Vector<RawStorageFormat>(ContainerExtent{2, 2}, allocatorTemporary);
   vertexStride[0]                       = RawStorageFormat::R32G32B32A32_FLOAT;
   vertexStride[1]                       = RawStorageFormat::R32G32B32A32_FLOAT;
-  pool.AddBufferBinding(vertexDataSlot, vertexStride);
+  pool.AddBufferBinding(VERTEX_SLOT, vertexStride);
 
   Vector<Vertex> vertexData = Vector<Vertex>({
     Vertex{{0, 0, 1, 1}, {1, 0, 0, 1}},
@@ -79,9 +90,12 @@ void RenderTestCases::ExecuteBasicRenderTest(Azura::Renderer& renderer,
 
   UniformBufferData uboData = {};
   uboData.m_model           = Matrix4f::Identity();
-  uboData.m_view            = Transform::LookAt(Vector3f(0.5f, 0.5f, 0.0f), Vector3f(0.5f, 0.5f, -6.0f),
+  const auto view            = Transform::LookAt(Vector3f(0.5f, 0.5f, 0.0f), Vector3f(0.5f, 0.5f, 6.0f),
                                                 Vector3f(0.0f, 1.0f, 0.0f));
-  uboData.m_proj = Transform::Perspective(45.0f, 16.0f / 9.0f, 0.1f, 100.0f);
+  const auto proj = Transform::Perspective(45.0f, 16.0f / 9.0f, 0.1f, 100.0f);
+
+  uboData.m_viewProj = proj * view;
+  uboData.m_modelInvTranspose = uboData.m_model.Inverse().Transpose();
 
   const auto bufferStart      = reinterpret_cast<U8*>(vertexData.Data()); // NOLINT
   const auto indexBufferStart = reinterpret_cast<U8*>(indexData.Data());  // NOLINT
@@ -94,9 +108,9 @@ void RenderTestCases::ExecuteBasicRenderTest(Azura::Renderer& renderer,
   createInfo.m_indexType        = RawStorageFormat::R32_UINT;
 
   const auto drawableId = pool.CreateDrawable(createInfo);
-  pool.BindVertexData(drawableId, vertexDataSlot, bufferStart, vertexData.GetSize() * sizeof(Vertex));
+  pool.BindVertexData(drawableId, VERTEX_SLOT, bufferStart, vertexData.GetSize() * sizeof(Vertex));
   pool.SetIndexData(drawableId, indexBufferStart, indexData.GetSize() * sizeof(U32));
-  pool.BindUniformData(drawableId, uniformSlot, uboDataBuffer, sizeof(UniformBufferData));
+  pool.BindUniformData(drawableId, UBO_SLOT, uboDataBuffer, sizeof(UniformBufferData));
 
   // All Drawables Done
   renderer.Submit();
@@ -116,37 +130,34 @@ void RenderTestCases::ExecuteBasicInstancingTest(Azura::Renderer& renderer,
   renderer.SetDrawablePoolCount(1);
 
   auto vertShader = RenderSystem::CreateShader(renderer,
-                                               "Shaders/" + renderer.GetRenderingAPI() + "/BasicInstancingTest.vertex",
+                                               "Shaders/" + renderer.GetRenderingAPI() + "/BasicInstancingTest.vs",
                                                log_TestCase);
   vertShader->SetStage(ShaderStage::Vertex);
 
   auto pixelShader = RenderSystem::CreateShader(renderer,
-                                                "Shaders/" + renderer.GetRenderingAPI() + "/BasicInstancingTest.pixel",
+                                                "Shaders/" + renderer.GetRenderingAPI() + "/BasicInstancingTest.ps",
                                                 log_TestCase);
   pixelShader->SetStage(ShaderStage::Pixel);
 
-  VertexSlot vertexDataSlot      = {};
-  vertexDataSlot.m_binding = 0;
-  vertexDataSlot.m_rate    = BufferUsageRate::PerVertex;
-
-  VertexSlot instanceDataSlot      = {};
-  instanceDataSlot.m_binding = 1;
-  instanceDataSlot.m_rate    = BufferUsageRate::PerInstance;
-
-  VertexSlot uniformSlot      = {};
-  uniformSlot.m_binding = 0;
 
   DrawablePoolCreateInfo poolInfo{allocatorTemporary};
-  poolInfo.m_byteSize                    = 4096;
+  poolInfo.m_byteSize                    = 0x400000;
   poolInfo.m_numDrawables                = 1;
   poolInfo.m_numShaders                  = 2;
-  poolInfo.m_slotInfo.m_numVertexSlots   = 1;
-  poolInfo.m_slotInfo.m_numInstanceSlots = 1;
-  poolInfo.m_uniformBuffers.Reserve(1);
-  poolInfo.m_uniformBuffers.PushBack(std::make_pair(uniformSlot,
-                                                    UniformBufferDesc{
-                                                      sizeof(UniformBufferData), 1
-                                                    }));
+  poolInfo.m_vertexDataSlots      = {
+    {
+      {VERTEX_SLOT, BufferUsageRate::PerVertex},
+      {INSTANCE_SLOT, BufferUsageRate::PerInstance}
+    },
+    allocatorTemporary
+  };
+
+  poolInfo.m_descriptorSlots = {
+    {
+      {UBO_SLOT, DescriptorType::UniformBuffer, ShaderStage::Vertex}
+    },
+    allocatorTemporary
+  };
 
   DrawablePool& pool = renderer.CreateDrawablePool(poolInfo);
 
@@ -156,11 +167,11 @@ void RenderTestCases::ExecuteBasicInstancingTest(Azura::Renderer& renderer,
   Vector<RawStorageFormat> vertexStride = Vector<RawStorageFormat>(ContainerExtent{2}, allocatorTemporary);
   vertexStride[0]                       = RawStorageFormat::R32G32B32A32_FLOAT;
   vertexStride[1]                       = RawStorageFormat::R32G32B32A32_FLOAT;
-  pool.AddBufferBinding(vertexDataSlot, vertexStride);
+  pool.AddBufferBinding(VERTEX_SLOT, vertexStride);
 
   Vector<RawStorageFormat> instanceStride = Vector<RawStorageFormat>(ContainerExtent{1}, allocatorTemporary);
   instanceStride[0]                       = RawStorageFormat::R32G32B32A32_FLOAT;
-  pool.AddBufferBinding(instanceDataSlot, instanceStride);
+  pool.AddBufferBinding(INSTANCE_SLOT, instanceStride);
 
   Vector<Vertex> vertexData = Vector<Vertex>({
     Vertex{{0, 0, 1, 1}, {1, 0, 0, 1}},
@@ -181,9 +192,12 @@ void RenderTestCases::ExecuteBasicInstancingTest(Azura::Renderer& renderer,
 
   UniformBufferData uboData = {};
   uboData.m_model           = Matrix4f::Identity();
-  uboData.m_view            = Transform::LookAt(Vector3f(0.5f, 0.5f, 0.0f), Vector3f(0.5f, 0.5f, -6.0f),
+  const auto view            = Transform::LookAt(Vector3f(0.5f, 0.5f, 0.0f), Vector3f(0.5f, 0.5f, 6.0f),
                                                 Vector3f(0.0f, 1.0f, 0.0f));
-  uboData.m_proj = Transform::Perspective(45.0f, 16.0f / 9.0f, 0.1f, 100.0f);
+  const auto proj = Transform::Perspective(45.0f, 16.0f / 9.0f, 0.1f, 100.0f);
+
+  uboData.m_viewProj = proj * view;
+  uboData.m_modelInvTranspose = uboData.m_model.Inverse().Transpose();
 
   const auto bufferStart      = reinterpret_cast<U8*>(vertexData.Data());   // NOLINT
   const auto instanceStart    = reinterpret_cast<U8*>(instanceData.Data()); // NOLINT
@@ -197,10 +211,10 @@ void RenderTestCases::ExecuteBasicInstancingTest(Azura::Renderer& renderer,
   createInfo.m_indexType        = RawStorageFormat::R32_UINT;
 
   const auto drawableId = pool.CreateDrawable(createInfo);
-  pool.BindVertexData(drawableId, vertexDataSlot, bufferStart, vertexData.GetSize() * sizeof(Vertex));
-  pool.BindInstanceData(drawableId, instanceDataSlot, instanceStart, instanceData.GetSize() * sizeof(Instance));
+  pool.BindVertexData(drawableId, VERTEX_SLOT, bufferStart, vertexData.GetSize() * sizeof(Vertex));
+  pool.BindInstanceData(drawableId, INSTANCE_SLOT, instanceStart, instanceData.GetSize() * sizeof(Instance));
   pool.SetIndexData(drawableId, indexBufferStart, indexData.GetSize() * sizeof(U32));
-  pool.BindUniformData(drawableId, uniformSlot, uboDataBuffer, sizeof(UniformBufferData));
+  pool.BindUniformData(drawableId, UBO_SLOT, uboDataBuffer, sizeof(UniformBufferData));
 
   // All Drawables Done
   renderer.Submit();
@@ -209,4 +223,112 @@ void RenderTestCases::ExecuteBasicInstancingTest(Azura::Renderer& renderer,
   renderer.RenderFrame();
   renderer.RenderFrame();
   renderer.SnapshotFrame("./BasicInstancingTest.data");
+}
+
+void RenderTestCases::ExecuteBasicTextureTest(Azura::Renderer& renderer,
+  Azura::Window& window,
+  const Azura::Log& log_TestCase) {
+  HEAP_ALLOCATOR(Temporary, Memory::MonotonicAllocator, 16384);
+  UNUSED(window);
+
+  TextureRequirements textureRequirements = {};
+  textureRequirements.m_maxCount = 1;
+  textureRequirements.m_poolSize = 0x400000; // 4MB
+  auto texManager = RenderSystem::CreateTextureManager(renderer, textureRequirements, log_TestCase);
+
+  const U32 nocturnalTexture = texManager->Load("Textures/Nocturnal.jpg");
+
+  renderer.SetDrawablePoolCount(1);
+
+  auto vertShader = RenderSystem::CreateShader(renderer,
+    "Shaders/" + renderer.GetRenderingAPI() + "/BasicTextureTest.vs",
+    log_TestCase);
+  vertShader->SetStage(ShaderStage::Vertex);
+
+  auto pixelShader = RenderSystem::CreateShader(renderer,
+    "Shaders/" + renderer.GetRenderingAPI() + "/BasicTextureTest.ps",
+    log_TestCase);
+  pixelShader->SetStage(ShaderStage::Pixel);
+
+
+  DrawablePoolCreateInfo poolInfo        = {allocatorTemporary};
+  poolInfo.m_byteSize                    = 0x400000;
+  poolInfo.m_numDrawables                = 1;
+  poolInfo.m_numShaders                  = 2;
+  poolInfo.m_drawType                    = DrawType::InstancedIndexed;
+  poolInfo.m_vertexDataSlots      = {
+    {
+      {VERTEX_SLOT, BufferUsageRate::PerVertex}
+    },
+    allocatorTemporary
+  };
+
+  poolInfo.m_descriptorSlots = {
+    {
+      {UBO_SLOT, DescriptorType::UniformBuffer, ShaderStage::Vertex},
+      {SAMPLER_SLOT, DescriptorType::Sampler, ShaderStage::Pixel},
+      {SAMPLED_IMAGE_SLOT, DescriptorType::SampledImage, ShaderStage::Pixel, DescriptorBinding::Same}
+    },
+    allocatorTemporary
+  };
+
+  DrawablePool& pool = renderer.CreateDrawablePool(poolInfo);
+
+  pool.AddShader(*vertShader);
+  pool.AddShader(*pixelShader);
+
+  Vector<RawStorageFormat> vertexStride = Vector<RawStorageFormat>(ContainerExtent{2, 2}, allocatorTemporary);
+  vertexStride[0]                       = RawStorageFormat::R32G32B32A32_FLOAT;
+  vertexStride[1]                       = RawStorageFormat::R32G32_FLOAT;
+  pool.AddBufferBinding(VERTEX_SLOT, vertexStride);
+
+  const TextureDesc* desc = texManager->GetInfo(nocturnalTexture);
+  VERIFY_TRUE(log_TestCase, desc != nullptr, "Texture Description was Null");
+
+  pool.BindTextureData(SAMPLED_IMAGE_SLOT, *desc, texManager->GetData(nocturnalTexture));
+  pool.BindSampler(SAMPLER_SLOT, {});
+
+  Vector<VertexWithUV> vertexData = Vector<VertexWithUV>({
+    VertexWithUV{{0, 0, 1, 1}, {0, 0}},
+    VertexWithUV{{1, 0, 1, 1}, {1, 0}},
+    VertexWithUV{{1, 1, 1, 1}, {1, 1}},
+    VertexWithUV{{0, 1, 1, 1}, {0, 1}}
+    }, allocatorTemporary);
+
+  Vector<U32> indexData = Vector<U32>({
+    0, 1, 2,
+    2, 3, 0
+    }, allocatorTemporary);
+
+  UniformBufferData uboData = {};
+  uboData.m_model           = Matrix4f::Identity();
+  const Matrix4f view       = Transform::LookAt(Vector3f(0.5f, 0.5f, 1.0f), Vector3f(0.5f, 0.5f, 4.0f), Vector3f(0.0f, 1.0f, 0.0f));
+  const Matrix4f proj = Transform::Perspective(45.0f, 16.0f / 9.0f, 0.1f, 100.0f);
+
+  uboData.m_viewProj = proj * view;
+  uboData.m_modelInvTranspose = uboData.m_model.Inverse().Transpose();
+
+  const auto bufferStart      = reinterpret_cast<U8*>(vertexData.Data()); // NOLINT
+  const auto indexBufferStart = reinterpret_cast<U8*>(indexData.Data());  // NOLINT
+  const auto uboDataBuffer    = reinterpret_cast<U8*>(&uboData);          // NOLINT
+                                                                          // Create Drawable from Pool
+  DrawableCreateInfo createInfo = {};
+  createInfo.m_vertexCount      = vertexData.GetSize();
+  createInfo.m_indexCount       = indexData.GetSize();
+  createInfo.m_instanceCount    = 1;
+  createInfo.m_indexType        = RawStorageFormat::R32_UINT;
+
+  const auto drawableId = pool.CreateDrawable(createInfo);
+  pool.BindVertexData(drawableId, VERTEX_SLOT, bufferStart, vertexData.GetSize() * sizeof(VertexWithUV));
+  pool.SetIndexData(drawableId, indexBufferStart, indexData.GetSize() * sizeof(U32));
+  pool.BindUniformData(drawableId, UBO_SLOT, uboDataBuffer, sizeof(UniformBufferData));
+
+  // All Drawables Done
+  renderer.Submit();
+  renderer.RenderFrame();
+  renderer.RenderFrame();
+  renderer.RenderFrame();
+  renderer.RenderFrame();
+  renderer.SnapshotFrame("./BasicTextureTest.data");
+
 }

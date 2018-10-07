@@ -9,6 +9,11 @@ Containers::Vector<U8> FileReader::GetFileContents(const String& filePath, Memor
   std::ifstream fileStream(filePath, std::ios::binary);
   Containers::Vector<U8> buffer(allocator);
 
+  if (!fileStream.good())
+  {
+    throw std::runtime_error("Can't find File");
+  }
+
   fileStream.seekg(0, std::ios::end);
   buffer.Resize(U32(fileStream.tellg()));
   fileStream.seekg(0, std::ios::beg);

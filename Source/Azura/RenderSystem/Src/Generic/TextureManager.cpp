@@ -18,6 +18,7 @@ TextureManager::TextureManager(const TextureRequirements& requirements)
     m_textureAllocator(m_textureBuffer, requirements.m_poolSize + requirements.m_maxCount * sizeof(TextureEntry)),
     m_storedTextures(requirements.m_maxCount, m_textureAllocator),
     log_TextureManager(Log("TextureManager")) {
+  // stbi_set_flip_vertically_on_load(true);
 }
 
 U32 TextureManager::Load(const String& path) {

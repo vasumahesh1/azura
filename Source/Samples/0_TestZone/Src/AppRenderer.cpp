@@ -65,7 +65,7 @@ void AppRenderer::Initialize() {
 
   UniformBufferData uboData = {};
   uboData.m_model           = Matrix4f::Identity();
-  const Matrix4f view       = Transform::LookAt(Vector3f(0.5f, 0.5f, 1.0f), Vector3f(0.5f, 0.5f, -4.0f),
+  const Matrix4f view       = Transform::LookAt(Vector3f(0.5f, 0.5f, 1.0f), Vector3f(0.5f, 0.5f, 4.0f),
                                                 Vector3f(0.0f, 1.0f, 0.0f));
   const Matrix4f proj = Transform::Perspective(45.0f, 16.0f / 9.0f, 0.1f, 100.0f);
 

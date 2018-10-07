@@ -87,19 +87,15 @@ if (INCLUDE_TESTS OR PROJECT_BUILD)
     "Test/Renderer_test.cpp"
   )
 
-  set(
-    VULKAN_SHADERS
-        "${PROJECT_SOURCE_DIR}/Test/Shaders/Vulkan/RenderSystemTest.vertex|-S vert"
-        "${PROJECT_SOURCE_DIR}/Test/Shaders/Vulkan/RenderSystemTest.pixel|-S frag"
-
-        "${PROJECT_SOURCE_DIR}/Test/Shaders/Vulkan/BasicInstancingTest.vertex|-S vert"
-        "${PROJECT_SOURCE_DIR}/Test/Shaders/Vulkan/BasicInstancingTest.pixel|-S frag"
-    )
-
   AzuraSilenceClangTidy(VulkanRenderSystemTest)
   AzuraAddGraphicsTest(VulkanRenderSystemTest)
-  AzuraAddSPIRVShadersToTarget(VulkanRenderSystemTest ${VULKAN_SHADERS})
   AzuraSilenceWarningsForMathfu(VulkanRenderSystemTest)
+
+  AzuraAddSlangShaders(VulkanRenderSystemTest VULKAN ${RENDER_SYSTEM_TEST_SHADERS})
+  AzuraAddSlangShaders(VulkanRenderSystemTest GLSL ${RENDER_SYSTEM_TEST_SHADERS})
+
+  add_custom_target(VulkanRenderSystemTest_Textures COMMAND ${CMAKE_COMMAND} -E copy_directory ${CMAKE_CURRENT_SOURCE_DIR}/Test/Textures ${CMAKE_CURRENT_BINARY_DIR}/Textures)
+  add_dependencies(VulkanRenderSystemTest VulkanRenderSystemTest_Textures)
 
   add_custom_command(
         TARGET VulkanRenderSystemTest POST_BUILD

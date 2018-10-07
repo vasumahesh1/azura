@@ -1,7 +1,7 @@
 import Common;
 
-[[vk::binding(0,1)]] Texture2D        g_txDiffuse : register(t1);
-[[vk::binding(1,1)]] SamplerState     g_sampler : register(s1);
+[[vk::binding(0,1)]] SamplerState     g_sampler : register(s1);
+[[vk::binding(1,1)]] Texture2D        g_txDiffuse : register(t1);
 
 float4 main(PixelShaderInput input) : SV_Target
 {

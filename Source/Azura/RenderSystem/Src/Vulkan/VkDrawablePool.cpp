@@ -335,7 +335,7 @@ void VkDrawablePool::Submit() {
   STACK_ALLOCATOR(Temporary, Memory::MonotonicAllocator, 4096);
 
   m_pipelineFactory.SetInputAssemblyStage(PrimitiveTopology::TriangleList);
-  m_pipelineFactory.SetRasterizerStage(CullMode::FrontBit, FrontFace::CounterClockwise);
+  m_pipelineFactory.SetRasterizerStage(CullMode::BackBit, FrontFace::CounterClockwise);
   m_pipelineFactory.SetPipelineLayout(m_pipelineLayout);
   m_pipelineFactory.SetRenderPass(m_renderPass);
   m_pipelineFactory.SetViewportStage(m_viewport, m_swapChain);
