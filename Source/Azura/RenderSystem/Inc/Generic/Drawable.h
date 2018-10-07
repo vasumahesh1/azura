@@ -65,6 +65,7 @@ struct DrawablePoolCreateInfo {
   U32 m_byteSize{0};
   U32 m_numDrawables{0};
   U32 m_numShaders{0};
+  CullMode m_cullMode{CullMode::BackBit};
 
   DrawType m_drawType{DrawType::InstancedIndexed};
 
@@ -139,6 +140,8 @@ protected:
 
   Containers::Vector<TextureBufferInfo> m_textureBufferInfos;
   Containers::Vector<SamplerInfo> m_samplerInfos;
+
+  CullMode m_cullMode;
 
 private:
   U32 m_byteSize;

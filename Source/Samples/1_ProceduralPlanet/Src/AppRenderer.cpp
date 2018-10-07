@@ -15,6 +15,8 @@ using namespace Math;       // NOLINT
 #define NORMAL_SLOT 1
 #define UBO_SLOT 2
 #define SHADER_CONTROLS_SLOT 3
+#define SAMPLER_SLOT 4
+#define PLANET_TEXTURE_SLOT 5
 
 struct Vertex {
   float m_pos[4];
@@ -38,7 +40,7 @@ struct ShaderControls {
   float m_noiseScale{0.5f};
   float pad1;
 
-  Vector4f m_lightPos{0, 0, 15, 1};
+  Vector4f m_lightPos{0.0f, 0.0f, 15.0f, 1.0f};
   Vector4f m_eye{0.0f, 0.0f, 4.0f, 1.0f};
 
   Color4f m_waterControls{0.5f, 0.65f, 0, 0};
@@ -109,9 +111,10 @@ void AppRenderer::Initialize() {
   IcoSphere sphere(6);
 
   DrawablePoolCreateInfo poolInfo(allocatorTemporary);
-  poolInfo.m_byteSize        = sphere.TotalDataSize() + 0xFFFF;
+  poolInfo.m_byteSize        = sphere.TotalDataSize() + 0x400000;
   poolInfo.m_numDrawables    = 1;
   poolInfo.m_numShaders      = 2;
+  poolInfo.m_cullMode        = CullMode::None;
   poolInfo.m_drawType        = DrawType::InstancedIndexed;
   poolInfo.m_vertexDataSlots = {
     {
@@ -122,16 +125,34 @@ void AppRenderer::Initialize() {
   };
   poolInfo.m_descriptorSlots = {
     {
+      // 0
+      {UBO_SLOT, DescriptorType::UniformBuffer, ShaderStage::Vertex},
+      // 1
       {SHADER_CONTROLS_SLOT, DescriptorType::UniformBuffer, ShaderStage::Vertex | ShaderStage::Pixel},
-      {UBO_SLOT, DescriptorType::UniformBuffer, ShaderStage::Vertex}
+      // 2
+      {SAMPLER_SLOT, DescriptorType::Sampler, ShaderStage::Pixel},
+      {PLANET_TEXTURE_SLOT, DescriptorType::SampledImage, ShaderStage::Pixel, DescriptorBinding::Same}
     },
     allocatorTemporary
   };
+
+  TextureRequirements textureRequirements = {};
+  textureRequirements.m_maxCount = 1;
+  textureRequirements.m_poolSize = 0x400000; // 4MB
+
+  m_textureManager = RenderSystem::CreateTextureManager(*m_renderer, textureRequirements, log_AppRenderer);
+
+  const U32 planet1Texture = m_textureManager->Load("Textures/Planet1_Texture.jpg");
+  const TextureDesc* planet1Desc = m_textureManager->GetInfo(planet1Texture);
+  VERIFY_TRUE(log_AppRenderer, planet1Desc != nullptr, "planet1Desc was Null");
 
   DrawablePool& pool = m_renderer->CreateDrawablePool(poolInfo);
 
   pool.AddShader(*vertShader);
   pool.AddShader(*pixelShader);
+
+  pool.BindTextureData(PLANET_TEXTURE_SLOT, *planet1Desc, m_textureManager->GetData(planet1Texture));
+  pool.BindSampler(SAMPLER_SLOT, {});
 
   Vector<RawStorageFormat> vertexStride = Vector<RawStorageFormat>(1, allocatorTemporary);
   vertexStride.PushBack(sphere.GetVertexFormat());

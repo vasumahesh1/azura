@@ -1,13 +1,11 @@
 import Common;
 
-ParameterBlock<ShaderControls> controls;
 ParameterBlock<UBOData> ubo;
+ParameterBlock<ShaderControls> controls;
 
 // ----------  Shader Constants  ----------
 static const float DEGREE_TO_RAD = 0.0174533;
 static const float RAD_TO_DEGREE = 57.2958;
-static const float NO_MATCAP = 0.0;
-static const float NO_SPEC = 0.0;
 
 // ======================================================
 //             FMB with Analytical Derivative           
@@ -215,7 +213,6 @@ PixelShaderInput main(VertexShaderInput input)
   PixelShaderInput output;
 
   output.modelPos = mul(ubo.u_model, vertexPosition);
-  output.lightVec = controls.u_lightPos - output.modelPos;
 
   output.pos = mul(ubo.u_viewProj, output.modelPos);
   output.textureOffset = baseUVOffset;

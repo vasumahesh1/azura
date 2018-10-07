@@ -47,6 +47,8 @@ class VkRenderer : public Renderer {
   void SnapshotFrame(const String& exportPath) const override;
 
  private:
+  Log log_VulkanRenderSystem;
+
   Window& m_window;
   Containers::Vector<VkDrawablePool> m_drawablePools;
 
@@ -80,7 +82,7 @@ class VkRenderer : public Renderer {
   std::reference_wrapper<Memory::Allocator> m_mainAllocator;
   std::reference_wrapper<Memory::Allocator> m_drawPoolAllocator;
 
-  Log log_VulkanRenderSystem;
+  VkScopedImage m_depthTexture;
 };
 }  // namespace Vulkan
 }  // namespace Azura

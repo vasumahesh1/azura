@@ -46,12 +46,11 @@ void RenderTestCases::ExecuteBasicRenderTest(Azura::Renderer& renderer,
                                                 log_TestCase);
   pixelShader->SetStage(ShaderStage::Pixel);
 
-
-  DrawablePoolCreateInfo poolInfo        = {allocatorTemporary};
-  poolInfo.m_byteSize                    = 0x400000;
-  poolInfo.m_numDrawables                = 1;
-  poolInfo.m_numShaders                  = 2;
-  poolInfo.m_drawType                    = DrawType::InstancedIndexed;
+  DrawablePoolCreateInfo poolInfo = {allocatorTemporary};
+  poolInfo.m_byteSize             = 0x400000;
+  poolInfo.m_numDrawables         = 1;
+  poolInfo.m_numShaders           = 2;
+  poolInfo.m_drawType             = DrawType::InstancedIndexed;
   poolInfo.m_vertexDataSlots      = {
     {
       {VERTEX_SLOT, BufferUsageRate::PerVertex}
@@ -90,11 +89,11 @@ void RenderTestCases::ExecuteBasicRenderTest(Azura::Renderer& renderer,
 
   UniformBufferData uboData = {};
   uboData.m_model           = Matrix4f::Identity();
-  const auto view            = Transform::LookAt(Vector3f(0.5f, 0.5f, 0.0f), Vector3f(0.5f, 0.5f, 6.0f),
+  const auto view           = Transform::LookAt(Vector3f(0.5f, 0.5f, 0.0f), Vector3f(0.5f, 0.5f, 6.0f),
                                                 Vector3f(0.0f, 1.0f, 0.0f));
   const auto proj = Transform::Perspective(45.0f, 16.0f / 9.0f, 0.1f, 100.0f);
 
-  uboData.m_viewProj = proj * view;
+  uboData.m_viewProj          = proj * view;
   uboData.m_modelInvTranspose = uboData.m_model.Inverse().Transpose();
 
   const auto bufferStart      = reinterpret_cast<U8*>(vertexData.Data()); // NOLINT
@@ -139,12 +138,11 @@ void RenderTestCases::ExecuteBasicInstancingTest(Azura::Renderer& renderer,
                                                 log_TestCase);
   pixelShader->SetStage(ShaderStage::Pixel);
 
-
   DrawablePoolCreateInfo poolInfo{allocatorTemporary};
-  poolInfo.m_byteSize                    = 0x400000;
-  poolInfo.m_numDrawables                = 1;
-  poolInfo.m_numShaders                  = 2;
-  poolInfo.m_vertexDataSlots      = {
+  poolInfo.m_byteSize        = 0x400000;
+  poolInfo.m_numDrawables    = 1;
+  poolInfo.m_numShaders      = 2;
+  poolInfo.m_vertexDataSlots = {
     {
       {VERTEX_SLOT, BufferUsageRate::PerVertex},
       {INSTANCE_SLOT, BufferUsageRate::PerInstance}
@@ -192,11 +190,11 @@ void RenderTestCases::ExecuteBasicInstancingTest(Azura::Renderer& renderer,
 
   UniformBufferData uboData = {};
   uboData.m_model           = Matrix4f::Identity();
-  const auto view            = Transform::LookAt(Vector3f(0.5f, 0.5f, 0.0f), Vector3f(0.5f, 0.5f, 6.0f),
+  const auto view           = Transform::LookAt(Vector3f(0.5f, 0.5f, 0.0f), Vector3f(0.5f, 0.5f, 6.0f),
                                                 Vector3f(0.0f, 1.0f, 0.0f));
   const auto proj = Transform::Perspective(45.0f, 16.0f / 9.0f, 0.1f, 100.0f);
 
-  uboData.m_viewProj = proj * view;
+  uboData.m_viewProj          = proj * view;
   uboData.m_modelInvTranspose = uboData.m_model.Inverse().Transpose();
 
   const auto bufferStart      = reinterpret_cast<U8*>(vertexData.Data());   // NOLINT
@@ -226,36 +224,36 @@ void RenderTestCases::ExecuteBasicInstancingTest(Azura::Renderer& renderer,
 }
 
 void RenderTestCases::ExecuteBasicTextureTest(Azura::Renderer& renderer,
-  Azura::Window& window,
-  const Azura::Log& log_TestCase) {
+                                              Azura::Window& window,
+                                              const Azura::Log& log_TestCase) {
   HEAP_ALLOCATOR(Temporary, Memory::MonotonicAllocator, 16384);
   UNUSED(window);
 
   TextureRequirements textureRequirements = {};
-  textureRequirements.m_maxCount = 1;
-  textureRequirements.m_poolSize = 0x400000; // 4MB
-  auto texManager = RenderSystem::CreateTextureManager(renderer, textureRequirements, log_TestCase);
+  textureRequirements.m_maxCount          = 1;
+  textureRequirements.m_poolSize          = 0x400000; // 4MB
+  auto texManager                         = RenderSystem::CreateTextureManager(renderer, textureRequirements,
+                                                                               log_TestCase);
 
   const U32 nocturnalTexture = texManager->Load("Textures/Nocturnal.jpg");
 
   renderer.SetDrawablePoolCount(1);
 
   auto vertShader = RenderSystem::CreateShader(renderer,
-    "Shaders/" + renderer.GetRenderingAPI() + "/BasicTextureTest.vs",
-    log_TestCase);
+                                               "Shaders/" + renderer.GetRenderingAPI() + "/BasicTextureTest.vs",
+                                               log_TestCase);
   vertShader->SetStage(ShaderStage::Vertex);
 
   auto pixelShader = RenderSystem::CreateShader(renderer,
-    "Shaders/" + renderer.GetRenderingAPI() + "/BasicTextureTest.ps",
-    log_TestCase);
+                                                "Shaders/" + renderer.GetRenderingAPI() + "/BasicTextureTest.ps",
+                                                log_TestCase);
   pixelShader->SetStage(ShaderStage::Pixel);
 
-
-  DrawablePoolCreateInfo poolInfo        = {allocatorTemporary};
-  poolInfo.m_byteSize                    = 0x400000;
-  poolInfo.m_numDrawables                = 1;
-  poolInfo.m_numShaders                  = 2;
-  poolInfo.m_drawType                    = DrawType::InstancedIndexed;
+  DrawablePoolCreateInfo poolInfo = {allocatorTemporary};
+  poolInfo.m_byteSize             = 0x400000;
+  poolInfo.m_numDrawables         = 1;
+  poolInfo.m_numShaders           = 2;
+  poolInfo.m_drawType             = DrawType::InstancedIndexed;
   poolInfo.m_vertexDataSlots      = {
     {
       {VERTEX_SLOT, BufferUsageRate::PerVertex}
@@ -293,25 +291,26 @@ void RenderTestCases::ExecuteBasicTextureTest(Azura::Renderer& renderer,
     VertexWithUV{{1, 0, 1, 1}, {1, 0}},
     VertexWithUV{{1, 1, 1, 1}, {1, 1}},
     VertexWithUV{{0, 1, 1, 1}, {0, 1}}
-    }, allocatorTemporary);
+  }, allocatorTemporary);
 
   Vector<U32> indexData = Vector<U32>({
     0, 1, 2,
     2, 3, 0
-    }, allocatorTemporary);
+  }, allocatorTemporary);
 
   UniformBufferData uboData = {};
   uboData.m_model           = Matrix4f::Identity();
-  const Matrix4f view       = Transform::LookAt(Vector3f(0.5f, 0.5f, 1.0f), Vector3f(0.5f, 0.5f, 4.0f), Vector3f(0.0f, 1.0f, 0.0f));
+  const Matrix4f view       = Transform::LookAt(Vector3f(0.5f, 0.5f, 1.0f), Vector3f(0.5f, 0.5f, 4.0f),
+                                                Vector3f(0.0f, 1.0f, 0.0f));
   const Matrix4f proj = Transform::Perspective(45.0f, 16.0f / 9.0f, 0.1f, 100.0f);
 
-  uboData.m_viewProj = proj * view;
+  uboData.m_viewProj          = proj * view;
   uboData.m_modelInvTranspose = uboData.m_model.Inverse().Transpose();
 
   const auto bufferStart      = reinterpret_cast<U8*>(vertexData.Data()); // NOLINT
   const auto indexBufferStart = reinterpret_cast<U8*>(indexData.Data());  // NOLINT
   const auto uboDataBuffer    = reinterpret_cast<U8*>(&uboData);          // NOLINT
-                                                                          // Create Drawable from Pool
+  // Create Drawable from Pool
   DrawableCreateInfo createInfo = {};
   createInfo.m_vertexCount      = vertexData.GetSize();
   createInfo.m_indexCount       = indexData.GetSize();

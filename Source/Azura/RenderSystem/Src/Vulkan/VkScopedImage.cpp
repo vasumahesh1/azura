@@ -16,6 +16,18 @@ VkScopedImage::VkScopedImage(VkDevice device,
   : m_device(device),
     m_desc(textureDesc),
     log_VulkanRenderSystem(std::move(logger)) {
+  Create(m_device, textureDesc, usage, physicalDeviceMemoryProperties);
+}
+
+VkScopedImage::VkScopedImage(Log logger)
+  : m_device(),
+    log_VulkanRenderSystem(std::move(logger)) {
+}
+
+void VkScopedImage::Create(VkDevice device,
+                           const TextureDesc& textureDesc,
+                           VkImageUsageFlags usage,
+                           const VkPhysicalDeviceMemoryProperties& physicalDeviceMemoryProperties) {
 
   m_image = VkCore::CreateImage(device, textureDesc.m_format, textureDesc.m_type,
                                 {textureDesc.m_bounds.m_width, textureDesc.m_bounds.m_height},

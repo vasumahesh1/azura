@@ -11,11 +11,13 @@ set(
 
 set(
   PROJECT_SHADERS
-    "${PROJECT_SOURCE_DIR}/Shaders/Vulkan/Terrain.vs.slang|VS"
-    "${PROJECT_SOURCE_DIR}/Shaders/Vulkan/Terrain.ps.slang|PS"
+    "${PROJECT_SOURCE_DIR}/Shaders/Terrain.vs.slang|VS"
+    "${PROJECT_SOURCE_DIR}/Shaders/Terrain.ps.slang|PS"
 )
 
 add_executable(ProceduralPlanet ${SOURCES})
+
+AzuraDeployFolder(ProceduralPlanet Textures)
 
 AzuraAddLoggingSupport(ProceduralPlanet 50)
 

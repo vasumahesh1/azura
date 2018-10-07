@@ -7,6 +7,7 @@
 
 #include "Log/Log.h"
 #include "Math/Core.h"
+#include "Generic/TextureManager.h"
 
 namespace Azura {
 class AppRenderer {
@@ -26,6 +27,7 @@ private:
 
   std::unique_ptr<Renderer> m_renderer{nullptr};
   std::unique_ptr<Window> m_window{nullptr};
+  std::unique_ptr<TextureManager> m_textureManager{nullptr};
 
   Log log_AppRenderer;
 };

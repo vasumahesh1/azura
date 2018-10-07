@@ -90,38 +90,38 @@ DrawablePoolCreateInfo::DrawablePoolCreateInfo(Memory::Allocator& alloc)
 
 DrawablePool::DrawablePool(const DrawablePoolCreateInfo& createInfo, Memory::Allocator& allocator)
   : m_numVertexSlots(std::count_if(createInfo.m_vertexDataSlots.Begin(), createInfo.m_vertexDataSlots.End(),
-    IsPerVertexSlot)),
-  m_numInstanceSlots(std::count_if(createInfo.m_vertexDataSlots.Begin(), createInfo.m_vertexDataSlots.End(),
-    IsPerInstanceSlot)),
-  m_numUniformSlots(0),
-  m_numSamplerSlots(0),
-  m_numCombinedSamplerSlots(0),
-  m_numSampledImageSlots(0),
-  m_numPushConstantsSlots(0),
-  m_descriptorSlots(createInfo.m_descriptorSlots.GetSize(), allocator),
-  m_vertexDataSlots(createInfo.m_vertexDataSlots, allocator),
-  m_textureBufferInfos(allocator),
-  m_samplerInfos(allocator),
-  m_byteSize(createInfo.m_byteSize),
-  m_drawType(createInfo.m_drawType),
-  m_allocator(allocator) {
+                                   IsPerVertexSlot)),
+    m_numInstanceSlots(std::count_if(createInfo.m_vertexDataSlots.Begin(), createInfo.m_vertexDataSlots.End(),
+                                     IsPerInstanceSlot)),
+    m_numUniformSlots(0),
+    m_numSamplerSlots(0),
+    m_numCombinedSamplerSlots(0),
+    m_numSampledImageSlots(0),
+    m_numPushConstantsSlots(0),
+    m_descriptorSlots(createInfo.m_descriptorSlots.GetSize(), allocator),
+    m_vertexDataSlots(createInfo.m_vertexDataSlots, allocator),
+    m_textureBufferInfos(allocator),
+    m_samplerInfos(allocator),
+    m_cullMode(createInfo.m_cullMode),
+    m_byteSize(createInfo.m_byteSize),
+    m_drawType(createInfo.m_drawType),
+    m_allocator(allocator) {
 
-  int parent = -1;
+  int parent  = -1;
   int bindIdx = 0;
-  for (const auto& slot : createInfo.m_descriptorSlots)
-  {
+  for (const auto& slot : createInfo.m_descriptorSlots) {
     if (slot.m_binding != DescriptorBinding::Same) {
       ++parent;
       bindIdx = 0;
     }
 
     DescriptorSlot setSlot = {};
-    setSlot.m_key = slot.m_key;
-    setSlot.m_type = slot.m_type;
-    setSlot.m_stages = slot.m_stages;
-    setSlot.m_binding = slot.m_binding;
-    setSlot.m_setIdx = parent;
-    setSlot.m_bindIdx = bindIdx;
+    setSlot.m_key          = slot.m_key;
+    setSlot.m_type         = slot.m_type;
+    setSlot.m_stages       = slot.m_stages;
+    setSlot.m_binding      = slot.m_binding;
+    setSlot.m_setIdx       = parent;
+    setSlot.m_bindIdx      = bindIdx;
 
     ++bindIdx;
 

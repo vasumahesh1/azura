@@ -267,6 +267,11 @@ void ImageCopy(VkCommandBuffer cmdBuffer,
 
 void FlushCommandBuffer(VkDevice device, VkCommandBuffer cmdBuffer, VkQueue queue, const Log& log_VulkanRenderSystem);
 
+bool QueryFormatFeatureSupport(VkPhysicalDevice physicalDevice, VkFormat format, std::function<bool(const VkFormatProperties&)>
+                               queryFunction);
+
+VkFormat GetVkFormat(RawStorageFormat rawFormat, const Log & log_VulkanRenderSystem);
+
 
 } // namespace VkCore
 } // namespace Vulkan

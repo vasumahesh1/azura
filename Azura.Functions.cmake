@@ -20,7 +20,10 @@ function(AzuraAddSPIRVShadersToTarget TARGET)
   add_dependencies(${TARGET} ${TARGET}_VulkanShaders)
 endfunction()
 
-
+function(AzuraDeployFolder TARGET FOLDER)
+  add_custom_target(${TARGET}_Textures COMMAND ${CMAKE_COMMAND} -E copy_directory ${CMAKE_CURRENT_SOURCE_DIR}/${FOLDER} ${CMAKE_CURRENT_BINARY_DIR}/${FOLDER})
+  add_dependencies(${TARGET} ${TARGET}_Textures)
+endfunction()
 
 function(AzuraAddSlangShaders TARGET API)
   foreach(SHADER_TUPLE_STR ${ARGN})

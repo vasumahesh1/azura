@@ -1372,5 +1372,20 @@ void VkCore::FlushCommandBuffer(VkDevice device, VkCommandBuffer cmdBuffer, VkQu
   vkDestroyFence(device, fence, nullptr);
 }
 
+bool VkCore::QueryFormatFeatureSupport(VkPhysicalDevice physicalDevice, VkFormat format, std::function<bool(const VkFormatProperties&)> queryFunction)
+{
+  VkFormatProperties formatProps;
+  vkGetPhysicalDeviceFormatProperties(physicalDevice, format, &formatProps);
+
+  return queryFunction(formatProps);
+}
+
+VkFormat VkCore::GetVkFormat(RawStorageFormat rawFormat, const Log& log_VulkanRenderSystem)
+{
+  const auto format = ToVkFormat(rawFormat);
+  VERIFY_OPT(log_VulkanRenderSystem, format, "Unknown Format");
+  return format.value();
+}
+
 } // namespace Vulkan
 } // namespace Azura

@@ -29,6 +29,7 @@ struct ApplicationRequirements {
 
 struct SwapChainRequirements {
   RawStorageFormat m_format{};
+  RawStorageFormat m_depthFormat{};
   Bounds2D m_extent{0u, 0u};
   ColorSpace m_colorSpace{};
   U32 m_framesInFlight{DEFAULT_FRAMES_IN_FLIGHT};

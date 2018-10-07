@@ -29,7 +29,6 @@ struct PixelShaderInput
   float4 pos : SV_Position;
   float4 normal : NORMAL;
   float4 modelPos : MODEL_POSITION;
-  float4 lightVec : LIGHT_VEC;
   float2 textureOffset : TEXTURE_OFFSET;
 };
 

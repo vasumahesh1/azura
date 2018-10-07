@@ -21,6 +21,7 @@ VkRenderer::VkRenderer(const ApplicationInfo& appInfo,
                        Memory::Allocator& drawAllocator,
                        Window& window)
   : Renderer(appInfo, deviceRequirements, appRequirements, swapChainRequirement, mainAllocator),
+    log_VulkanRenderSystem(Log("VulkanRenderSystem")),
     m_window(window),
     m_drawablePools(drawAllocator),
     m_swapChain(mainAllocator),
@@ -31,7 +32,7 @@ VkRenderer::VkRenderer(const ApplicationInfo& appInfo,
     m_primaryCommandBuffers(mainAllocator),
     m_mainAllocator(mainAllocator),
     m_drawPoolAllocator(drawAllocator),
-    log_VulkanRenderSystem(Log("VulkanRenderSystem")) {
+    m_depthTexture(log_VulkanRenderSystem) {
   HEAP_ALLOCATOR(Temporary, Memory::MonotonicAllocator, 16384);
 
   Vector<const char*> extensions(4, allocatorTemporary);
@@ -50,6 +51,24 @@ VkRenderer::VkRenderer(const ApplicationInfo& appInfo,
                                                      log_VulkanRenderSystem);
   m_device = VkCore::CreateLogicalDevice(m_physicalDevice, m_queueIndices, GetDeviceRequirements(),
                                          log_VulkanRenderSystem);
+
+  // Check if Depth Format is supported by Device or not.
+  // const bool depthFormatCheck = VkCore::QueryFormatFeatureSupport(
+  //                                                                 m_physicalDevice,
+  //                                                                 VkCore::GetVkFormat(GetSwapchainRequirements().
+  //                                                                                     m_depthFormat,
+  //                                                                                     log_VulkanRenderSystem),
+  //                                                                 [](const VkFormatProperties& prop) -> bool
+  //                                                                 {
+  //                                                                   return (prop.optimalTilingFeatures &
+  //                                                                           VK_FORMAT_FEATURE_DEPTH_STENCIL_ATTACHMENT_BIT
+  //                                                                          ) ==
+  //                                                                          VK_FORMAT_FEATURE_DEPTH_STENCIL_ATTACHMENT_BIT;
+  //                                                                 });
+  //
+  // VERIFY_TRUE(log_VulkanRenderSystem, depthFormatCheck, "Depth Format Not Supported");
+
+  // m_depthTexture.Create(m_device, )
 
   vkGetPhysicalDeviceProperties(m_physicalDevice, &m_physicalDeviceProperties);
 
