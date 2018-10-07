@@ -32,20 +32,5 @@ struct SwapChainDeviceSupport {
   explicit SwapChainDeviceSupport(Memory::Allocator& allocator);
   bool IsSupported() const;
 };
-
-struct VkScopedSwapChain {
-  VkSwapchainKHR m_swapChain;
-  VkExtent2D m_extent;
-  VkSurfaceFormatKHR m_surfaceFormat;
-  U32 m_imageCount{0};
-  Containers::Vector<VkImage> m_images;
-
-  Containers::Vector<VkImageView> m_imageViews;
-
-  VkScopedSwapChain(Memory::Allocator& allocator);
-
-  void CleanUp(VkDevice device);
-  VkSwapchainKHR Real() const;
-};
 }  // namespace Vulkan
 }  // namespace Azura

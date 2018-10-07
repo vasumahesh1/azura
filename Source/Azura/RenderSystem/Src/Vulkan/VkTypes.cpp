@@ -28,20 +28,5 @@ bool SwapChainDeviceSupport::IsSupported() const {
   return !m_formats.IsEmpty() && !m_presentModes.IsEmpty();
 }
 
-VkScopedSwapChain::VkScopedSwapChain(Memory::Allocator& allocator)
-    : m_swapChain(), m_extent(), m_surfaceFormat(), m_images(allocator), m_imageViews(allocator) {}
-
-void VkScopedSwapChain::CleanUp(VkDevice device) {
-  for (const VkImageView& imageView : m_imageViews) {
-    vkDestroyImageView(device, imageView, nullptr);
-  }
-
-  vkDestroySwapchainKHR(device, m_swapChain, nullptr);
-}
-
-VkSwapchainKHR VkScopedSwapChain::Real() const {
-  return m_swapChain;
-}
-
 }  // namespace Vulkan
 }  // namespace Azura

@@ -22,6 +22,11 @@ public:
                 const VkPhysicalDeviceMemoryProperties& physicalDeviceMemoryProperties,
                 Log logger);
 
+  VkScopedImage(VkDevice device,
+    const TextureDesc& textureDesc,
+    VkImage image,
+    Log logger);
+
   explicit VkScopedImage(Log logger);
 
   void Create(VkDevice device,

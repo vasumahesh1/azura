@@ -16,8 +16,6 @@ struct ApplicationRequirements;
 
 namespace Azura {
 namespace Vulkan {
-struct VkScopedSwapChain;
-
 
 class VkDrawablePool;
 

@@ -12,6 +12,7 @@
 #include "Log/Log.h"
 #include "VkDrawablePool.h"
 #include "VkTextureManager.h"
+#include "VkScopedSwapChain.h"
 
 namespace Azura {
 class Window;

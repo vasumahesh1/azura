@@ -10,6 +10,7 @@
 
 namespace Azura {
 namespace Vulkan {
+class VkScopedSwapChain;
 class VkScopedBuffer;
 }
 }
@@ -53,14 +54,6 @@ VkQueueIndices FindQueueFamiliesInDevice(VkPhysicalDevice device,
                                          const Log& log_VulkanRenderSystem);
 
 VkQueue GetQueueFromDevice(VkDevice device, int queueIndex);
-
-VkScopedSwapChain CreateSwapChain(VkDevice device,
-                                  VkSurfaceKHR surface,
-                                  const VkQueueIndices& queueIndices,
-                                  const SwapChainDeviceSupport& swapChainSupport,
-                                  const SwapChainRequirements& swapChainRequirement,
-                                  Memory::Allocator& allocator,
-                                  const Log& log_VulkanRenderSystem);
 
 VkImage CreateImage(VkDevice device,
                     RawStorageFormat format,

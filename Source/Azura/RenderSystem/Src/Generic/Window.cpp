@@ -28,6 +28,7 @@ SwapChainRequirements Window::GetSwapChainRequirements() const {
   SwapChainRequirements requirement;
   requirement.m_colorSpace = ColorSpace::SRGB;
   requirement.m_format = RawStorageFormat::B8G8R8A8_UNORM;
+  requirement.m_depthFormat = RawStorageFormat::D32_FLOAT;
   requirement.m_extent = Bounds2D(m_width, m_height);
   requirement.m_framesInFlight = 2u;
 

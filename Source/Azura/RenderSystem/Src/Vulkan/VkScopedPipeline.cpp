@@ -122,7 +122,7 @@ VkPipelineFactory& VkPipelineFactory::SetViewportStage(ViewportDimensions viewpo
 
   // TODO(vasumahesh1): Might need custom scissoring
   m_scissors.offset = {0, 0};
-  m_scissors.extent = swapChain.m_extent;
+  m_scissors.extent = swapChain.GetExtent();
 
   // TODO(vasumahesh1): Might need arrays here one day
   m_viewportStage.sType         = VK_STRUCTURE_TYPE_PIPELINE_VIEWPORT_STATE_CREATE_INFO;

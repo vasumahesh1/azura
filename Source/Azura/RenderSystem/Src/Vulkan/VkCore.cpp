@@ -11,6 +11,7 @@
 #include "Vulkan/VkMacros.h"
 #include "Vulkan/VkTypeMapping.h"
 #include "Vulkan/VkScopedBuffer.h"
+#include "Vulkan/VkScopedSwapChain.h"
 
 #ifdef BUILD_DEBUG
 #include <iostream>
@@ -219,59 +220,6 @@ int GetDeviceScore(VkPhysicalDevice device,
   }
 
   return score;
-}
-
-VkSurfaceFormatKHR ChooseSwapSurfaceFormat(const Containers::Vector<VkSurfaceFormatKHR>& availableFormats,
-                                           const SwapChainRequirements& requirement,
-                                           const Log& log_VulkanRenderSystem) {
-  const auto format = ToVkFormat(requirement.m_format);
-  VERIFY_OPT(log_VulkanRenderSystem, format, "Unknown Format");
-
-  const auto colorSpace = ToVkColorSpaceKHR(requirement.m_colorSpace);
-  VERIFY_OPT(log_VulkanRenderSystem, colorSpace, "Unknown Colorspace");
-
-  LOG_DBG(log_VulkanRenderSystem, LOG_LEVEL, "Checking for %d availableFormats", availableFormats.GetSize());
-
-  // no preferred format
-  if (availableFormats.GetSize() == 1 && availableFormats[0].format == VK_FORMAT_UNDEFINED) {
-    return {format.value(), colorSpace.value()};
-  }
-
-  for (const auto& availableFormat : availableFormats) {
-    if (availableFormat.format == format.value() && availableFormat.colorSpace == colorSpace.value()) {
-      return availableFormat;
-    }
-  }
-
-  return availableFormats[0];
-}
-
-VkPresentModeKHR ChooseSwapPresentMode(const Containers::Vector<VkPresentModeKHR>& availablePresentModes) {
-  VkPresentModeKHR bestMode = VK_PRESENT_MODE_FIFO_KHR;
-  for (const auto& availablePresentMode : availablePresentModes) {
-    if (availablePresentMode == VK_PRESENT_MODE_MAILBOX_KHR) {
-      return availablePresentMode;
-    }
-
-    if (availablePresentMode == VK_PRESENT_MODE_IMMEDIATE_KHR) {
-      bestMode = availablePresentMode;
-    }
-  }
-
-  return bestMode;
-}
-
-VkExtent2D ChooseSwapExtent(const VkSurfaceCapabilitiesKHR& capabilities, const SwapChainRequirements& requirement) {
-  if (capabilities.currentExtent.width != std::numeric_limits<U32>::max()) {
-    return capabilities.currentExtent;
-  }
-
-  VkExtent2D actualExtent = {requirement.m_extent.m_width, requirement.m_extent.m_height};
-  actualExtent.width      =
-    std::max(capabilities.minImageExtent.width, std::min(capabilities.maxImageExtent.width, actualExtent.width));
-  actualExtent.height =
-    std::max(capabilities.minImageExtent.height, std::min(capabilities.maxImageExtent.height, actualExtent.height));
-  return actualExtent;
 }
 } // namespace
 
@@ -566,73 +514,6 @@ VkQueue VkCore::GetQueueFromDevice(VkDevice device, int queueIndex) {
   return queue;
 }
 
-VkScopedSwapChain VkCore::CreateSwapChain(VkDevice device,
-                                          VkSurfaceKHR surface,
-                                          const VkQueueIndices& queueIndices,
-                                          const SwapChainDeviceSupport& swapChainSupport,
-                                          const SwapChainRequirements& swapChainRequirement,
-                                          Memory::Allocator& allocator,
-                                          const Log& log_VulkanRenderSystem) {
-  VkScopedSwapChain scopedSwapChain(allocator);
-
-  const VkPresentModeKHR presentMode = ChooseSwapPresentMode(swapChainSupport.m_presentModes);
-  scopedSwapChain.m_surfaceFormat    = ChooseSwapSurfaceFormat(swapChainSupport.m_formats, swapChainRequirement,
-                                                               log_VulkanRenderSystem);
-  scopedSwapChain.m_extent = ChooseSwapExtent(swapChainSupport.m_capabilities, swapChainRequirement);
-
-  // TODO(vasumahesh1): Need requirement?
-  // Set Queue Length of SwapChain
-  scopedSwapChain.m_imageCount = swapChainSupport.m_capabilities.minImageCount + 1;
-  if (swapChainSupport.m_capabilities.maxImageCount > 0
-      && scopedSwapChain.m_imageCount > swapChainSupport.m_capabilities.maxImageCount) {
-    scopedSwapChain.m_imageCount = swapChainSupport.m_capabilities.maxImageCount;
-  }
-
-  VkSwapchainCreateInfoKHR createInfo = {};
-  createInfo.sType                    = VK_STRUCTURE_TYPE_SWAPCHAIN_CREATE_INFO_KHR;
-  createInfo.surface                  = surface;
-  createInfo.minImageCount            = scopedSwapChain.m_imageCount;
-  createInfo.imageFormat              = scopedSwapChain.m_surfaceFormat.format;
-  createInfo.imageColorSpace          = scopedSwapChain.m_surfaceFormat.colorSpace;
-  createInfo.imageExtent              = scopedSwapChain.m_extent;
-  createInfo.imageArrayLayers         = 1;
-  createInfo.imageUsage               = VK_IMAGE_USAGE_COLOR_ATTACHMENT_BIT | VK_IMAGE_USAGE_TRANSFER_SRC_BIT;
-
-  // TODO(vasumahesh1): Possible bug if Graphics Queue is not the same as Present Queue. How to handle?
-  if (queueIndices.m_transferFamily != -1 && queueIndices.m_isTransferQueueRequired) {
-    createInfo.imageSharingMode      = VK_SHARING_MODE_CONCURRENT;
-    createInfo.queueFamilyIndexCount = queueIndices.GetActiveSize();
-    createInfo.pQueueFamilyIndices   = queueIndices.GetIndicesArray().data();
-  } else {
-    createInfo.imageSharingMode      = VK_SHARING_MODE_EXCLUSIVE;
-    createInfo.queueFamilyIndexCount = 0;
-    createInfo.pQueueFamilyIndices   = nullptr;
-  }
-
-  createInfo.preTransform   = swapChainSupport.m_capabilities.currentTransform;
-  createInfo.compositeAlpha = VK_COMPOSITE_ALPHA_OPAQUE_BIT_KHR;
-  createInfo.presentMode    = presentMode;
-  createInfo.clipped        = VK_TRUE;
-  createInfo.oldSwapchain   = VK_NULL_HANDLE;
-
-  VERIFY_VK_OP(log_VulkanRenderSystem, vkCreateSwapchainKHR(device, &createInfo, nullptr, &scopedSwapChain.m_swapChain),
-    "Failed to create swap chain");
-
-  vkGetSwapchainImagesKHR(device, scopedSwapChain.m_swapChain, &scopedSwapChain.m_imageCount, nullptr);
-  scopedSwapChain.m_images.Resize(scopedSwapChain.m_imageCount);
-  scopedSwapChain.m_imageViews.Resize(scopedSwapChain.m_imageCount);
-  vkGetSwapchainImagesKHR(device, scopedSwapChain.m_swapChain, &scopedSwapChain.m_imageCount,
-                          scopedSwapChain.m_images.Data());
-
-  for (U32 idx                        = 0; idx < scopedSwapChain.m_imageCount; ++idx) {
-    scopedSwapChain.m_imageViews[idx] =
-      CreateImageView(device, scopedSwapChain.m_images[idx], VK_IMAGE_VIEW_TYPE_2D,
-                      scopedSwapChain.m_surfaceFormat.format, VK_IMAGE_ASPECT_COLOR_BIT, log_VulkanRenderSystem);
-  }
-
-  return scopedSwapChain;
-}
-
 VkImage VkCore::CreateImage(VkDevice device,
                             RawStorageFormat format,
                             ImageType imageType,
@@ -872,20 +753,22 @@ Containers::Vector<VkFramebuffer> VkCore::CreateFrameBuffers(VkDevice device,
                                                              const VkScopedSwapChain& scopedSwapChain,
                                                              Memory::Allocator& allocator,
                                                              const Log& log_VulkanRenderSystem) {
-  const auto& swapChainImageViews = scopedSwapChain.m_imageViews;
+  const auto& allImages = scopedSwapChain.GetAllImages();
+  const auto swapChainExtent = scopedSwapChain.GetExtent();
 
-  Containers::Vector<VkFramebuffer> frameBuffers(ContainerExtent{swapChainImageViews.GetSize()}, allocator);
+  Containers::Vector<VkFramebuffer> frameBuffers(ContainerExtent{allImages.GetSize()}, allocator);
 
-  for (U32 idx                                   = 0; idx < swapChainImageViews.GetSize(); ++idx) {
-    const std::array<VkImageView, 1> attachments = {swapChainImageViews[idx]};
+  for (U32 idx = 0; idx < allImages.GetSize(); ++idx) {
+
+    const std::array<VkImageView, 1> attachments = {allImages[idx].View()};
 
     VkFramebufferCreateInfo framebufferInfo = {};
     framebufferInfo.sType                   = VK_STRUCTURE_TYPE_FRAMEBUFFER_CREATE_INFO;
     framebufferInfo.renderPass              = renderPass;
     framebufferInfo.attachmentCount         = U32(attachments.size());
     framebufferInfo.pAttachments            = attachments.data();
-    framebufferInfo.width                   = scopedSwapChain.m_extent.width;
-    framebufferInfo.height                  = scopedSwapChain.m_extent.height;
+    framebufferInfo.width                   = swapChainExtent.width;
+    framebufferInfo.height                  = swapChainExtent.height;
     framebufferInfo.layers                  = 1;
 
     VERIFY_VK_OP(log_VulkanRenderSystem, vkCreateFramebuffer(device, &framebufferInfo, nullptr, &frameBuffers[idx]),
@@ -900,20 +783,23 @@ void VkCore::CreateFrameBuffers(VkDevice device,
                                 const VkScopedSwapChain& scopedSwapChain,
                                 Containers::Vector<VkFramebuffer>& frameBuffers,
                                 const Log& log_VulkanRenderSystem) {
-  const auto& swapChainImageViews = scopedSwapChain.m_imageViews;
+  
+  const auto& allImages = scopedSwapChain.GetAllImages();
+  const auto swapChainExtent = scopedSwapChain.GetExtent();
 
-  frameBuffers.Resize(swapChainImageViews.GetSize());
+  frameBuffers.Resize(allImages.GetSize());
 
-  for (U32 idx                                   = 0; idx < swapChainImageViews.GetSize(); ++idx) {
-    const std::array<VkImageView, 1> attachments = {swapChainImageViews[idx]};
+  for (U32 idx = 0; idx < allImages.GetSize(); ++idx) {
+
+    const std::array<VkImageView, 1> attachments = {allImages[idx].View()};
 
     VkFramebufferCreateInfo framebufferInfo = {};
     framebufferInfo.sType                   = VK_STRUCTURE_TYPE_FRAMEBUFFER_CREATE_INFO;
     framebufferInfo.renderPass              = renderPass;
     framebufferInfo.attachmentCount         = U32(attachments.size());
     framebufferInfo.pAttachments            = attachments.data();
-    framebufferInfo.width                   = scopedSwapChain.m_extent.width;
-    framebufferInfo.height                  = scopedSwapChain.m_extent.height;
+    framebufferInfo.width                   = swapChainExtent.width;
+    framebufferInfo.height                  = swapChainExtent.height;
     framebufferInfo.layers                  = 1;
 
     VERIFY_VK_OP(log_VulkanRenderSystem, vkCreateFramebuffer(device, &framebufferInfo, nullptr, &frameBuffers[idx]),

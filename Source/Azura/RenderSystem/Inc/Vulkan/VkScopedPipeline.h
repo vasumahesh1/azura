@@ -4,7 +4,7 @@
 #include <map>
 #include "Containers/Vector.h"
 #include "Generic/GenericTypes.h"
-#include "Vulkan/VkTypes.h"
+#include "Vulkan/VkScopedSwapChain.h"
 #include "Log/Log.h"
 
 namespace Azura {

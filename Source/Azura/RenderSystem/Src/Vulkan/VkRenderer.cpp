@@ -24,7 +24,7 @@ VkRenderer::VkRenderer(const ApplicationInfo& appInfo,
     log_VulkanRenderSystem(Log("VulkanRenderSystem")),
     m_window(window),
     m_drawablePools(drawAllocator),
-    m_swapChain(mainAllocator),
+    m_swapChain(mainAllocator, log_VulkanRenderSystem),
     m_frameBuffers(mainAllocator),
     m_imageAvailableSemaphores(mainAllocator),
     m_renderFinishedSemaphores(mainAllocator),
@@ -82,11 +82,10 @@ VkRenderer::VkRenderer(const ApplicationInfo& appInfo,
     m_transferQueue = VkCore::GetQueueFromDevice(m_device, m_queueIndices.m_transferFamily);
   }
 
-  m_swapChain = VkCore::CreateSwapChain(m_device, m_surface, m_queueIndices, swapChainDeviceSupport,
-                                        swapChainRequirement, mainAllocator, log_VulkanRenderSystem);
+  m_swapChain.Create(m_device, m_surface, m_queueIndices, swapChainDeviceSupport, swapChainRequirement);
 
   // TODO(vasumahesh1):[RENDER PASS]: Needs Changes
-  m_renderPass = VkCore::CreateRenderPass(m_device, m_swapChain.m_surfaceFormat.format, log_VulkanRenderSystem);
+  m_renderPass = VkCore::CreateRenderPass(m_device, m_swapChain.GetSurfaceFormat(), log_VulkanRenderSystem);
 
   VkCore::CreateFrameBuffers(m_device, m_renderPass, m_swapChain, m_frameBuffers, log_VulkanRenderSystem);
 
@@ -216,7 +215,7 @@ void VkRenderer::Submit() {
     renderPassInfo.renderPass            = m_renderPass;
     renderPassInfo.framebuffer           = m_frameBuffers[idx];
     renderPassInfo.renderArea.offset     = {0, 0};
-    renderPassInfo.renderArea.extent     = m_swapChain.m_extent;
+    renderPassInfo.renderArea.extent     = m_swapChain.GetExtent();
     renderPassInfo.clearValueCount       = 1;
     renderPassInfo.pClearValues          = &clearValue;
 
@@ -300,7 +299,7 @@ void VkRenderer::SnapshotFrame(const String& exportPath) const {
     VERIFY_OPT(log_VulkanRenderSystem, vkFormat, "Unknown Vk Format");
 
     VkFormatProperties formatProps;
-    vkGetPhysicalDeviceFormatProperties(m_physicalDevice, m_swapChain.m_surfaceFormat.format, &formatProps);
+    vkGetPhysicalDeviceFormatProperties(m_physicalDevice, m_swapChain.GetSurfaceFormat(), &formatProps);
     if ((formatProps.optimalTilingFeatures & VK_FORMAT_FEATURE_BLIT_SRC_BIT) == 0u) {
       LOG_WRN(log_VulkanRenderSystem, LOG_LEVEL, "Swapchain Format doesn't support Blit, Will use Image Copy");
       return false;
@@ -320,12 +319,14 @@ void VkRenderer::SnapshotFrame(const String& exportPath) const {
 
   // TODO(vasumahesh):[TEXTURE]: VkScopedImage
   // TODO(vasumahesh):[LINT]: Remove Lint overrides
-  const VkImage srcImage = m_swapChain.m_images[currentFrame];
-  const VkImage dstImage = VkCore::CreateImage(m_device, storageFormat, ImageType::Image2D,
-                                               Bounds2D{m_swapChain.m_extent.width, m_swapChain.m_extent.height}, 1, 1,
-                                               1,
-                                               VK_IMAGE_TILING_LINEAR, VK_IMAGE_USAGE_TRANSFER_DST_BIT,
-                                               log_VulkanRenderSystem);
+  const VkScopedImage& srcImage = m_swapChain.GetImage(currentFrame);
+
+  const auto swapChainExtent = m_swapChain.GetExtent();
+  const VkImage dstImage     = VkCore::CreateImage(m_device, storageFormat, ImageType::Image2D,
+                                                   Bounds2D{swapChainExtent.width, swapChainExtent.height}, 1, 1,
+                                                   1,
+                                                   VK_IMAGE_TILING_LINEAR, VK_IMAGE_USAGE_TRANSFER_DST_BIT,
+                                                   log_VulkanRenderSystem);
 
   VkMemoryRequirements memRequirements;
   vkGetImageMemoryRequirements(m_device, dstImage, &memRequirements);
@@ -364,7 +365,7 @@ void VkRenderer::SnapshotFrame(const String& exportPath) const {
   // Transition swapchain image from present to transfer source layout
   VkCore::TransitionImageLayout(
                                 snapshotCmdBuffer,
-                                srcImage,
+                                srcImage.Real(),
                                 VK_ACCESS_MEMORY_READ_BIT,
                                 VK_ACCESS_TRANSFER_READ_BIT,
                                 VK_IMAGE_LAYOUT_PRESENT_SRC_KHR,
@@ -375,11 +376,13 @@ void VkRenderer::SnapshotFrame(const String& exportPath) const {
                                );
 
   if (supportsBlit) {
-    VkCore::ImageBlit(snapshotCmdBuffer, srcImage, dstImage, VK_IMAGE_ASPECT_COLOR_BIT, VK_IMAGE_ASPECT_COLOR_BIT,
-                      Bounds3D{m_swapChain.m_extent.width, m_swapChain.m_extent.height, 1});
+    VkCore::ImageBlit(snapshotCmdBuffer, srcImage.Real(), dstImage, VK_IMAGE_ASPECT_COLOR_BIT,
+                      VK_IMAGE_ASPECT_COLOR_BIT,
+                      Bounds3D{swapChainExtent.width, swapChainExtent.height, 1});
   } else {
-    VkCore::ImageCopy(snapshotCmdBuffer, srcImage, dstImage, VK_IMAGE_ASPECT_COLOR_BIT, VK_IMAGE_ASPECT_COLOR_BIT,
-                      {m_swapChain.m_extent.width, m_swapChain.m_extent.height, 1});
+    VkCore::ImageCopy(snapshotCmdBuffer, srcImage.Real(), dstImage, VK_IMAGE_ASPECT_COLOR_BIT,
+                      VK_IMAGE_ASPECT_COLOR_BIT,
+                      {swapChainExtent.width, swapChainExtent.height, 1});
   }
 
   VkCore::TransitionImageLayout(
@@ -397,7 +400,7 @@ void VkRenderer::SnapshotFrame(const String& exportPath) const {
   // Transition source image back to its original layout
   VkCore::TransitionImageLayout(
                                 snapshotCmdBuffer,
-                                srcImage,
+                                srcImage.Real(),
                                 VK_ACCESS_TRANSFER_READ_BIT,
                                 VK_ACCESS_MEMORY_READ_BIT,
                                 VK_IMAGE_LAYOUT_TRANSFER_SRC_OPTIMAL,
@@ -419,7 +422,7 @@ void VkRenderer::SnapshotFrame(const String& exportPath) const {
   vkMapMemory(m_device, dstMemory, 0, VK_WHOLE_SIZE, 0, (void**)&data); // NOLINT
   data += subResourceLayout.offset;                                     // NOLINT
 
-  const U32 imageSize = m_swapChain.m_extent.width * m_swapChain.m_extent.height * (GetFormatSize(storageFormat));
+  const U32 imageSize = swapChainExtent.width * swapChainExtent.height * (GetFormatSize(storageFormat));
   std::vector<char> imageData(imageSize);
 
   memcpy(imageData.data(), data, imageSize);
@@ -433,8 +436,8 @@ void VkRenderer::SnapshotFrame(const String& exportPath) const {
   vkFreeMemory(m_device, dstMemory, nullptr);
   vkDestroyImage(m_device, dstImage, nullptr);
 
-  LOG_INF(log_VulkanRenderSystem, LOG_LEVEL, "Snapshot Saved: Size: %d x %d", m_swapChain.m_extent.width, m_swapChain.
-    m_extent.height);
+  LOG_INF(log_VulkanRenderSystem, LOG_LEVEL, "Snapshot Saved: Size: %d x %d", swapChainExtent.width, swapChainExtent.
+    height);
 }
 
 } // namespace Vulkan
