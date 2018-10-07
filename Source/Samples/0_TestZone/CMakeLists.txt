@@ -15,7 +15,11 @@ set(
     "${PROJECT_SOURCE_DIR}/Shaders/Vulkan/TestZone.ps.slang|PS"
 )
 
+add_custom_target(TestZone_Textures COMMAND ${CMAKE_COMMAND} -E copy_directory ${CMAKE_CURRENT_SOURCE_DIR}/Textures ${CMAKE_CURRENT_BINARY_DIR}/Textures)
+
 add_executable(TestZone ${SOURCES})
+
+add_dependencies(TestZone TestZone_Textures)
 
 AzuraAddLoggingSupport(TestZone 50)
 

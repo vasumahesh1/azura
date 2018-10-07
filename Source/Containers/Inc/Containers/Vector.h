@@ -126,6 +126,9 @@ public:
   Type& operator[](U32 idx);
   Type& operator[](U32 idx) const;
 
+  Type& Last();
+  Type& Last() const;
+
   U32 GetSize() const {
     return m_size;
   }
@@ -601,6 +604,16 @@ template <typename Type>
 Type& Vector<Type>::operator[](const U32 idx) const {
   assert(idx < m_size);
   return m_base[idx];
+}
+
+template <typename Type>
+Type& Vector<Type>::Last() {
+  return m_base[m_size - 1];
+}
+
+template <typename Type>
+Type& Vector<Type>::Last() const {
+  return m_base[m_size - 1];
 }
 
 template <typename Type>

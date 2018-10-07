@@ -12,11 +12,11 @@ TextureManager::TextureEntry::TextureEntry(Memory::MonotonicAllocator& allocator
     m_data(allocator) {
 }
 
-TextureManager::TextureManager(U32 poolSize, U32 maxTextures)
-  : m_maxTextures(maxTextures),
-    m_textureBuffer(poolSize + maxTextures * sizeof(TextureEntry)),
-    m_textureAllocator(m_textureBuffer, poolSize + maxTextures * sizeof(TextureEntry)),
-    m_storedTextures(maxTextures, m_textureAllocator),
+TextureManager::TextureManager(const TextureRequirements& requirements)
+  : m_maxTextures(requirements.m_maxCount),
+    m_textureBuffer(requirements.m_poolSize + requirements.m_maxCount * sizeof(TextureEntry)),
+    m_textureAllocator(m_textureBuffer, requirements.m_poolSize + requirements.m_maxCount * sizeof(TextureEntry)),
+    m_storedTextures(requirements.m_maxCount, m_textureAllocator),
     log_TextureManager(Log("TextureManager")) {
 }
 
@@ -32,7 +32,7 @@ U32 TextureManager::Load(const String& path) {
   int height   = 0;
   int channels = 0;
 
-  const auto imagePixels = stbi_load(path.c_str(), &width, &height, &channels, 0);
+  const auto imagePixels = stbi_load(path.c_str(), &width, &height, &channels, 4);
 
   if (imagePixels == nullptr) {
     // Load failed
@@ -42,8 +42,9 @@ U32 TextureManager::Load(const String& path) {
 
   s_currentTextureId++;
 
-  const U32 bytePerPixel = channels;
+  const U32 bytePerPixel = 4;
 
+  // TODO(vasumahesh1):[TEXTURE]: Support Mip Maps
   TextureEntry entry    = {m_textureAllocator};
   entry.m_desc.m_bounds.m_width  = width;
   entry.m_desc.m_bounds.m_height = height;

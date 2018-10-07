@@ -14,6 +14,8 @@ using namespace Math;       // NOLINT
 
 #define VERTEX_SLOT 0
 #define UBO_SLOT 1
+#define SAMPLER_SLOT 2
+#define BASIC_TEXTURE_SLOT 3
 
 struct Vertex {
   float m_pos[4];
@@ -76,11 +78,19 @@ void AppRenderer::Initialize() {
   applicationRequirements.m_clearColor[0]         = 0.2f;
   applicationRequirements.m_clearColor[1]         = 0.2f;
   applicationRequirements.m_clearColor[2]         = 0.2f;
+  
+  TextureRequirements textureRequirements = {};
+  textureRequirements.m_maxCount = 1;
+  textureRequirements.m_poolSize = 0x400000; // 4MB
 
   m_renderer = RenderSystem::CreateRenderer(appInfo, requirements, applicationRequirements,
                                             m_window->GetSwapChainRequirements(), m_mainAllocator, m_drawableAllocator,
                                             *m_window);
   m_renderer->SetDrawablePoolCount(1);
+
+  m_textureManager = RenderSystem::CreateTextureManager(*m_renderer, textureRequirements, log_AppRenderer);
+
+  const U32 nocturnalTexture = m_textureManager->Load("Textures/Nocturnal.jpg");
 
   auto vertShader = RenderSystem::CreateShader(*m_renderer,
                                                "Shaders/" + m_renderer->GetRenderingAPI() + "/TestZone.vs",
@@ -93,7 +103,7 @@ void AppRenderer::Initialize() {
   pixelShader->SetStage(ShaderStage::Pixel);
 
   DrawablePoolCreateInfo poolInfo = {allocatorTemporary};
-  poolInfo.m_byteSize             = 4096;
+  poolInfo.m_byteSize             = 0x400000;
   poolInfo.m_numDrawables         = 1;
   poolInfo.m_numShaders           = 2;
   poolInfo.m_drawType             = DrawType::InstancedIndexed;
@@ -106,7 +116,9 @@ void AppRenderer::Initialize() {
 
   poolInfo.m_descriptorSlots = {
     {
-      {UBO_SLOT, DescriptorType::UniformBuffer, ShaderStage::Vertex}
+      {UBO_SLOT, DescriptorType::UniformBuffer, ShaderStage::Vertex},
+      {SAMPLER_SLOT, DescriptorType::Sampler, ShaderStage::Pixel},
+      {BASIC_TEXTURE_SLOT, DescriptorType::SampledImage, ShaderStage::Pixel, DescriptorBinding::Same}
     },
     allocatorTemporary
   };
@@ -116,11 +128,19 @@ void AppRenderer::Initialize() {
   pool.AddShader(*vertShader);
   pool.AddShader(*pixelShader);
 
-  Vector<RawStorageFormat> vertexStride = Vector<RawStorageFormat>(ContainerExtent{3}, allocatorTemporary);
-  vertexStride[0]                       = RawStorageFormat::R32G32B32A32_FLOAT;
-  vertexStride[1]                       = RawStorageFormat::R32G32B32A32_FLOAT;
-  vertexStride[2]                       = RawStorageFormat::R32G32_FLOAT;
+  const Vector<RawStorageFormat> vertexStride = Vector<RawStorageFormat>({
+    RawStorageFormat::R32G32B32A32_FLOAT, // Pos
+    RawStorageFormat::R32G32B32A32_FLOAT, // Color
+    RawStorageFormat::R32G32_FLOAT        // UV
+  }, allocatorTemporary);
+
   pool.AddBufferBinding(VERTEX_SLOT, vertexStride);
+
+  const TextureDesc* desc = m_textureManager->GetInfo(nocturnalTexture);
+  VERIFY_TRUE(log_AppRenderer, desc != nullptr, "Texture Description was Null");
+
+  pool.BindTextureData(BASIC_TEXTURE_SLOT, *desc, m_textureManager->GetData(nocturnalTexture));
+  pool.BindSampler(SAMPLER_SLOT, {});
 
   Vector<Vertex> vertexData = Vector<Vertex>({
     Vertex{{0, 0, 1, 1}, {1, 0, 0, 1}, {0, 0}},

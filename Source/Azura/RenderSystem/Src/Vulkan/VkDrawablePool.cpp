@@ -4,6 +4,7 @@
 #include "Containers/Vector.h"
 #include "Memory/MonotonicAllocator.h"
 #include "Generic/Renderer.h"
+#include "Generic/TextureManager.h"
 #include "Vulkan/VkCore.h"
 #include "Vulkan/VkTypeMapping.h"
 #include "Core/RawStorageFormat.h"
@@ -30,11 +31,8 @@ VkDrawable::VkDrawable(VkDevice device,
     m_mainBuffer(mainBuffer),
     m_descriptorSets(ContainerExtent{descriptorSetLayouts.GetSize()}, allocator),
     log_VulkanRenderSystem(std::move(logger)) {
-}
 
-void VkDrawable::Submit() {
-  STACK_ALLOCATOR(Temporary, Memory::MonotonicAllocator, 2048);
-
+  // Allocate the Descriptor Sets
   VkDescriptorSetAllocateInfo allocInfo = {};
   allocInfo.sType                       = VK_STRUCTURE_TYPE_DESCRIPTOR_SET_ALLOCATE_INFO;
   allocInfo.descriptorPool              = m_descriptorPool;
@@ -43,30 +41,82 @@ void VkDrawable::Submit() {
 
   VERIFY_VK_OP(log_VulkanRenderSystem, vkAllocateDescriptorSets(m_device, &allocInfo, m_descriptorSets.Data()),
     "Failed to Allocate Descriptor Set");
+}
 
-  Vector<VkWriteDescriptorSet> descriptorWrites(m_uniformBufferInfos.GetSize(), allocatorTemporary);
+void VkDrawable::WriteDescriptorSets(
+  const Vector<TextureBufferInfo>& textureBufferInfos,
+  const Vector<SamplerInfo>& samplerInfos,
+  const Vector<VkScopedSampler>& samplers,
+  const Vector<VkScopedImage>& images) {
+  STACK_ALLOCATOR(Temporary, Memory::MonotonicAllocator, 2048);
+
+  U32 totalWrites = m_uniformBufferInfos.GetSize() + samplerInfos.GetSize() + images.GetSize();
+
+  Vector<VkWriteDescriptorSet> descriptorWrites(totalWrites, allocatorTemporary);
 
   // TODO(vasumahesh1):[DESCRIPTOR]: How to use Uniform Buffer Arrays?
-  // TODO(vasumahesh1):[TEXTURE]: Add support for Textures
   for (const auto& ubInfo : m_uniformBufferInfos) {
     VkDescriptorBufferInfo uniformBufferInfo = {};
     uniformBufferInfo.buffer                 = m_mainBuffer;
     uniformBufferInfo.offset                 = ubInfo.m_offset;
     uniformBufferInfo.range                  = ubInfo.m_byteSize;
 
-    VkWriteDescriptorSet uniformDescriptorWrite = {};
-    uniformDescriptorWrite.sType                = VK_STRUCTURE_TYPE_WRITE_DESCRIPTOR_SET;
-    uniformDescriptorWrite.dstSet               = m_descriptorSets[ubInfo.m_binding];
-    uniformDescriptorWrite.dstBinding           = 0;
-    uniformDescriptorWrite.dstArrayElement      = 0;
-    uniformDescriptorWrite.descriptorType       = VK_DESCRIPTOR_TYPE_UNIFORM_BUFFER;
-    uniformDescriptorWrite.descriptorCount      = 1;
-    uniformDescriptorWrite.pBufferInfo          = &uniformBufferInfo;
-    uniformDescriptorWrite.pImageInfo           = nullptr;
-    uniformDescriptorWrite.pTexelBufferView     = nullptr;
+    VkWriteDescriptorSet descriptorWrite = {};
+    descriptorWrite.sType                = VK_STRUCTURE_TYPE_WRITE_DESCRIPTOR_SET;
+    descriptorWrite.dstSet               = m_descriptorSets[ubInfo.m_set];
+    descriptorWrite.dstBinding           = ubInfo.m_binding;
+    descriptorWrite.dstArrayElement      = 0;
+    descriptorWrite.descriptorType       = VK_DESCRIPTOR_TYPE_UNIFORM_BUFFER;
+    descriptorWrite.descriptorCount      = 1;
+    descriptorWrite.pBufferInfo          = &uniformBufferInfo;
+    descriptorWrite.pImageInfo           = nullptr;
+    descriptorWrite.pTexelBufferView     = nullptr;
 
-    // TODO(vasumahesh1):[PERF]: Can optimize
-    vkUpdateDescriptorSets(m_device, 1, &uniformDescriptorWrite, 0, nullptr);
+    vkUpdateDescriptorSets(m_device, 1, &descriptorWrite, 0, nullptr);
+  }
+
+  for (U32 idx = 0; idx < textureBufferInfos.GetSize(); ++idx) {
+    const auto& texInfo = textureBufferInfos[idx];
+    const auto& scopedImage = images[idx];
+
+    VkDescriptorImageInfo sampledImageInfo = {};
+    // TODO(vasumahesh1):[TEXTURE]: Depth Stencil
+    sampledImageInfo.imageLayout =  VK_IMAGE_LAYOUT_SHADER_READ_ONLY_OPTIMAL;
+    sampledImageInfo.imageView = scopedImage.View();
+
+    VkWriteDescriptorSet descriptorWrite = {};
+    descriptorWrite.sType                = VK_STRUCTURE_TYPE_WRITE_DESCRIPTOR_SET;
+    descriptorWrite.dstSet               = m_descriptorSets[texInfo.m_set];
+    descriptorWrite.dstBinding           = texInfo.m_binding;
+    descriptorWrite.dstArrayElement      = 0;
+    descriptorWrite.descriptorType       = VK_DESCRIPTOR_TYPE_SAMPLED_IMAGE;
+    descriptorWrite.descriptorCount      = 1;
+    descriptorWrite.pBufferInfo          = nullptr;
+    descriptorWrite.pImageInfo           = &sampledImageInfo;
+    descriptorWrite.pTexelBufferView     = nullptr;
+
+    vkUpdateDescriptorSets(m_device, 1, &descriptorWrite, 0, nullptr);
+  }
+
+  for (U32 idx = 0; idx < samplerInfos.GetSize(); ++idx) {
+    const auto& samInfo = samplerInfos[idx];
+    const auto& scopedSampler = samplers[idx];
+
+    VkDescriptorImageInfo samplerImageInfo = {};
+    samplerImageInfo.sampler = scopedSampler.Real();
+
+    VkWriteDescriptorSet descriptorWrite = {};
+    descriptorWrite.sType                = VK_STRUCTURE_TYPE_WRITE_DESCRIPTOR_SET;
+    descriptorWrite.dstSet               = m_descriptorSets[samInfo.m_set];
+    descriptorWrite.dstBinding           = samInfo.m_binding;
+    descriptorWrite.dstArrayElement      = 0;
+    descriptorWrite.descriptorType       = VK_DESCRIPTOR_TYPE_SAMPLER;
+    descriptorWrite.descriptorCount      = 1;
+    descriptorWrite.pBufferInfo          = nullptr;
+    descriptorWrite.pImageInfo           = &samplerImageInfo;
+    descriptorWrite.pTexelBufferView     = nullptr;
+
+    vkUpdateDescriptorSets(m_device, 1, &descriptorWrite, 0, nullptr);
   }
 }
 
@@ -94,13 +144,14 @@ VkDrawablePool::VkDrawablePool(const DrawablePoolCreateInfo& createInfo,
                                Memory::Allocator& allocatorTemporary,
                                Log logger)
   : DrawablePool(createInfo, allocator),
-    m_buffer(device, VK_BUFFER_USAGE_TRANSFER_DST_BIT | usage, createInfo.m_byteSize, memoryProperties,
+    m_buffer(device, VK_BUFFER_USAGE_TRANSFER_DST_BIT | VK_BUFFER_USAGE_TRANSFER_SRC_BIT | usage, createInfo.m_byteSize, memoryProperties,
              phyDeviceMemoryProperties, logger),
     m_stagingBuffer(device, VK_BUFFER_USAGE_TRANSFER_SRC_BIT, createInfo.m_byteSize, memoryProperties,
                     phyDeviceMemoryProperties, logger),
     m_device(device),
     m_renderPass(renderPass),
     m_viewport(viewport),
+    m_physicalDeviceMemoryProperties(phyDeviceMemoryProperties),
     m_descriptorSetLayouts(allocator),
     m_pipeline({}),
     m_pipelineLayout(),
@@ -112,8 +163,13 @@ VkDrawablePool::VkDrawablePool(const DrawablePoolCreateInfo& createInfo,
     m_physicalDeviceProperties(physicalDeviceProperties),
     m_drawables(createInfo.m_numDrawables, allocator),
     m_shaders(createInfo.m_numShaders, allocator),
+    m_images(allocator),
+    m_samplers(allocator),
     log_VulkanRenderSystem(std::move(logger)) {
+  
   CreateDescriptorInfo(createInfo);
+
+  m_samplers.Reserve(m_samplerInfos.GetMaxSize());
 }
 
 
@@ -135,62 +191,149 @@ void VkDrawablePool::AppendToMainBuffer(const U8* buffer, U32 bufferSize) {
 }
 
 void VkDrawablePool::CreateDescriptorInfo(const DrawablePoolCreateInfo& createInfo) {
-  STACK_ALLOCATOR(Temporary, Memory::MonotonicAllocator, 2048);
+  STACK_ALLOCATOR(Temporary, Memory::MonotonicAllocator, 4096);
 
-  m_descriptorSetLayouts.Reserve(m_descriptorSlots.GetSize());
+  Vector<int> bindingSetSizes{m_descriptorSlots.GetSize(), allocatorTemporary};
 
   for (const auto& slot : m_descriptorSlots) {
-    Containers::Vector<VkDescriptorSetLayoutBinding> layoutBindings(1, allocatorTemporary);
-    const auto combinedShaderFlagBits = GetCombinedShaderStageFlag(slot.m_stages);
-
-    switch (slot.m_type)
-    {
-    case DescriptorType::UniformBuffer:
-      VkCore::CreateUniformBufferBinding(layoutBindings, 0, 1, combinedShaderFlagBits);
-      break;
-
-    case DescriptorType::Sampler:
-      VkCore::CreateSamplerBinding(layoutBindings, 0, 1, combinedShaderFlagBits);
-      break;
-
-    case DescriptorType::PushConstant:
-      break;
-    default:
-      LOG_ERR(log_VulkanRenderSystem, LOG_LEVEL, "Unknown Descriptor Type");
-      break;
+    if (slot.m_binding == DescriptorBinding::Same) {
+      bindingSetSizes.Last() += 1;
+      continue;
     }
 
-    m_descriptorSetLayouts.PushBack(VkCore::CreateDescriptorSetLayout(m_device, layoutBindings, log_VulkanRenderSystem));
+    bindingSetSizes.PushBack(1);
+  }
+
+  m_descriptorSetLayouts.Reserve(bindingSetSizes.GetSize());
+
+  int offset = 0;
+  for (const auto& bindingSize : bindingSetSizes) {
+    Vector<VkDescriptorSetLayoutBinding> currentBindings(bindingSize, allocatorTemporary);
+
+    for (int idx = offset; idx < offset + bindingSize; ++idx) {
+
+      const auto& slot                  = m_descriptorSlots[idx];
+      const auto combinedShaderFlagBits = GetCombinedShaderStageFlag(slot.m_stages);
+
+      const auto bindingId = U32(idx - offset);
+
+      switch (slot.m_type) {
+        case DescriptorType::UniformBuffer:
+          VkCore::CreateUniformBufferBinding(currentBindings, bindingId, 1, combinedShaderFlagBits);
+          break;
+
+        case DescriptorType::Sampler:
+          VkCore::CreateSamplerBinding(currentBindings, bindingId, 1, combinedShaderFlagBits);
+          break;
+
+        case DescriptorType::SampledImage:
+          VkCore::CreateSampledImageBinding(currentBindings, bindingId, 1, combinedShaderFlagBits);
+          break;
+
+        case DescriptorType::PushConstant:
+        case DescriptorType::CombinedImageSampler:
+        default:
+          LOG_ERR(log_VulkanRenderSystem, LOG_LEVEL, "Unknown Descriptor Type");
+          break;
+      }
+    }
+
+    m_descriptorSetLayouts.
+      PushBack(VkCore::CreateDescriptorSetLayout(m_device, currentBindings, log_VulkanRenderSystem));
+
+    offset += bindingSize;
   }
 
   m_pipelineLayout = VkCore::CreatePipelineLayout(m_device, m_descriptorSetLayouts, log_VulkanRenderSystem);
+
+  Vector<VkDescriptorPoolSize> descriptorPoolSizes(MAX_DESCRIPTOR_TYPE_COUNT, allocatorTemporary);
 
   // TODO(vasumahesh1):[DESCRIPTOR]: How to use Uniform Buffer Arrays?
   VkDescriptorPoolSize uniformPoolSize = {};
   uniformPoolSize.type                 = VK_DESCRIPTOR_TYPE_UNIFORM_BUFFER;
   uniformPoolSize.descriptorCount      = m_numUniformSlots;
+  descriptorPoolSizes.PushBack(uniformPoolSize);
 
   if (m_numSamplerSlots > 0) {
     VkDescriptorPoolSize samplerPoolSize = {};
-    samplerPoolSize.type = VK_DESCRIPTOR_TYPE_COMBINED_IMAGE_SAMPLER;
-    samplerPoolSize.descriptorCount = m_numSamplerSlots;
+    samplerPoolSize.type                 = VK_DESCRIPTOR_TYPE_SAMPLER;
+    samplerPoolSize.descriptorCount      = m_numSamplerSlots;
+    descriptorPoolSizes.PushBack(samplerPoolSize);
   }
 
-  // TODO(vasumahesh1):[TEXTURE]: Add support for Descriptor Pools
-  Vector<VkDescriptorPoolSize> descriptorPool({ uniformPoolSize }, allocatorTemporary);
+  if (m_numSampledImageSlots > 0) {
+    VkDescriptorPoolSize sampledImagePoolSize = {};
+    sampledImagePoolSize.type                 = VK_DESCRIPTOR_TYPE_SAMPLED_IMAGE;
+    sampledImagePoolSize.descriptorCount      = m_numSampledImageSlots;
+    descriptorPoolSizes.PushBack(sampledImagePoolSize);
+  }
 
-  // TODO(vasumahesh1):[DESCRIPTOR]: 1 Set per Drawable?
+  // TODO(vasumahesh1):[DESCRIPTOR]: 1 Set per Drawable? Need to Check
   VkDescriptorPoolCreateInfo poolInfo = {};
   poolInfo.sType                      = VK_STRUCTURE_TYPE_DESCRIPTOR_POOL_CREATE_INFO;
-  poolInfo.poolSizeCount              = descriptorPool.GetSize();
-  poolInfo.pPoolSizes                 = descriptorPool.Data();
-  poolInfo.maxSets                    = createInfo.m_numDrawables * (m_numUniformSlots + m_numSamplerSlots);
+  poolInfo.poolSizeCount              = descriptorPoolSizes.GetSize();
+  poolInfo.pPoolSizes                 = descriptorPoolSizes.Data();
+  poolInfo.maxSets                    = createInfo.m_numDrawables * m_descriptorSetLayouts.GetSize();
 
   VERIFY_VK_OP(log_VulkanRenderSystem, vkCreateDescriptorPool(m_device, &poolInfo, nullptr, &m_descriptorPool),
     "Unable to create Descriptor Pool");
 }
 
+
+void VkDrawablePool::SubmitTextureData() {
+  STACK_ALLOCATOR(Temporary, Memory::MonotonicAllocator, 4096);
+
+  VkCommandBuffer textureCmdBuffer = VkCore::CreateCommandBuffer(m_device, m_graphicsCommandPool,
+                                                                 VK_COMMAND_BUFFER_LEVEL_PRIMARY,
+                                                                 log_VulkanRenderSystem);
+  VkCore::BeginCommandBuffer(textureCmdBuffer, VK_COMMAND_BUFFER_USAGE_ONE_TIME_SUBMIT_BIT, log_VulkanRenderSystem);
+
+  const VkBuffer mainBuffer = m_buffer.Real();
+
+  m_images.Reserve(m_textureBufferInfos.GetSize());
+
+  const VkImageUsageFlags textureUsage = (VK_IMAGE_USAGE_TRANSFER_SRC_BIT | VK_IMAGE_USAGE_TRANSFER_DST_BIT |
+                                          VK_IMAGE_USAGE_SAMPLED_BIT);
+
+  const ImageTransition layoutUndefined{
+    VK_IMAGE_LAYOUT_UNDEFINED, 0, VK_PIPELINE_STAGE_TOP_OF_PIPE_BIT
+  };
+
+  const ImageTransition layoutDst{
+    VK_IMAGE_LAYOUT_TRANSFER_DST_OPTIMAL, VK_ACCESS_TRANSFER_WRITE_BIT, VK_PIPELINE_STAGE_TRANSFER_BIT
+  };
+
+  const ImageTransition layoutShaderRead{
+    VK_IMAGE_LAYOUT_SHADER_READ_ONLY_OPTIMAL, VK_ACCESS_SHADER_READ_BIT, VK_PIPELINE_STAGE_FRAGMENT_SHADER_BIT
+  };
+
+  for (const auto& textureInfo : m_textureBufferInfos) {
+    VkScopedImage image = VkScopedImage(m_device, textureInfo.m_desc, textureUsage, m_physicalDeviceMemoryProperties,
+                                        log_VulkanRenderSystem);
+    image.TransitionLayout(textureCmdBuffer, layoutUndefined, layoutDst);
+    image.CopyFromBuffer(textureCmdBuffer, textureInfo, mainBuffer);
+    image.TransitionLayout(textureCmdBuffer, layoutDst, layoutShaderRead);
+    m_images.PushBack(image);
+  }
+
+  // Flush & Wait
+  VkCore::FlushCommandBuffer(m_device, textureCmdBuffer, m_graphicsQueue, log_VulkanRenderSystem);
+  vkFreeCommandBuffers(m_device, m_graphicsCommandPool, 1, &textureCmdBuffer);
+
+  for(auto& image : m_images)
+  {
+    // TODO(vasumahesh1):[TEXTURE]: Remove Hard Code
+    image.CreateImageView(ImageViewType::ImageView2D);
+  }
+
+  for (auto& drawable : m_drawables) {
+    drawable.WriteDescriptorSets(m_textureBufferInfos, m_samplerInfos, m_samplers, m_images);
+  }
+}
+
 void VkDrawablePool::Submit() {
+  STACK_ALLOCATOR(Temporary, Memory::MonotonicAllocator, 4096);
+
   m_pipelineFactory.SetInputAssemblyStage(PrimitiveTopology::TriangleList);
   m_pipelineFactory.SetRasterizerStage(CullMode::FrontBit, FrontFace::CounterClockwise);
   m_pipelineFactory.SetPipelineLayout(m_pipelineLayout);
@@ -217,10 +360,12 @@ void VkDrawablePool::Submit() {
 
   VkCore::CopyBuffer(m_device, m_graphicsQueue, m_stagingBuffer, m_buffer, m_mainBufferOffset, m_graphicsCommandPool);
 
+  SubmitTextureData();
+
   VkBuffer mainBuffer = m_buffer.Real();
 
   for (auto& drawable : m_drawables) {
-    drawable.Submit();
+    const auto& descriptorSets = drawable.GetDescriptorSet();
 
     const auto& vertBufferInfos = drawable.GetVertexBufferInfos();
 
@@ -242,8 +387,6 @@ void VkDrawablePool::Submit() {
     VERIFY_OPT(log_VulkanRenderSystem, indexType, "Invalid VkIndexType converted");
 
     vkCmdBindIndexBuffer(m_commandBuffer, mainBuffer, indexBufferInfo.m_offset, indexType.value());
-
-    const auto& descriptorSets = drawable.GetDescriptorSet();
 
     vkCmdBindDescriptorSets(m_commandBuffer, VK_PIPELINE_BIND_POINT_GRAPHICS, m_pipelineLayout, 0,
                             descriptorSets.GetSize(), descriptorSets.Data(), 0, nullptr);
@@ -267,8 +410,7 @@ void VkDrawablePool::Submit() {
 void VkDrawablePool::AddBufferBinding(SlotID slotId, const Containers::Vector<RawStorageFormat>& strides) {
   const int idx = GetVertexSlotIndex(slotId);
 
-  if (idx < 0)
-  {
+  if (idx < 0) {
     LOG_ERR(log_VulkanRenderSystem, LOG_LEVEL, "Invalid Slot ID for Buffer Binding: %d", slotId);
     return;
   }
@@ -302,8 +444,15 @@ void VkDrawablePool::CleanUp() const {
 
   vkDestroyPipelineLayout(m_device, m_pipelineLayout, nullptr);
 
-  for (const auto& setLayout : m_descriptorSetLayouts)
-  {
+  for (const auto& image : m_images) {
+    image.CleanUp();
+  }
+
+  for (const auto& sampler : m_samplers) {
+    sampler.CleanUp();
+  }
+
+  for (const auto& setLayout : m_descriptorSetLayouts) {
     vkDestroyDescriptorSetLayout(m_device, setLayout, nullptr);
   }
 
@@ -325,8 +474,7 @@ void VkDrawablePool::BindVertexData(DrawableID drawableId, SlotID slot, const U8
 
   const int idx = GetVertexSlotIndex(slot);
 
-  if (idx < 0)
-  {
+  if (idx < 0) {
     LOG_ERR(log_VulkanRenderSystem, LOG_LEVEL, "Invalid Slot ID for Binding Vertex Data: %d", slot);
     return;
   }
@@ -348,8 +496,7 @@ void VkDrawablePool::BindInstanceData(DrawableID drawableId, SlotID slot, const 
 
   const int idx = GetVertexSlotIndex(slot);
 
-  if (idx < 0)
-  {
+  if (idx < 0) {
     LOG_ERR(log_VulkanRenderSystem, LOG_LEVEL, "Invalid Slot ID for Binding Instance Data: %d", slot);
     return;
   }
@@ -367,12 +514,11 @@ void VkDrawablePool::BindInstanceData(DrawableID drawableId, SlotID slot, const 
 void VkDrawablePool::BindUniformData(DrawableID drawableId, SlotID slot, const U8* buffer, U32 size) {
   const int idx = GetDescriptorSlotIndex(slot);
 
-  if (idx < 0)
-  {
+  if (idx < 0) {
     LOG_ERR(log_VulkanRenderSystem, LOG_LEVEL, "Invalid Slot ID for Binding Descriptor Data: %d", slot);
     return;
   }
-  
+
   const auto minAlignment = U32(m_physicalDeviceProperties.limits.minUniformBufferOffsetAlignment);
 
   assert(m_drawables.GetSize() > drawableId);
@@ -387,13 +533,64 @@ void VkDrawablePool::BindUniformData(DrawableID drawableId, SlotID slot, const U
   const U32 newOffset     = (currentOffset + minAlignment - 1) & ~(minAlignment - 1);
   m_mainBufferOffset += newOffset - currentOffset;
 
-  BufferInfo info = BufferInfo();
-  info.m_byteSize = size;
-  info.m_offset   = newOffset;
-  info.m_binding  = idx;
+  const auto& descriptorSlot = m_descriptorSlots[idx];
+
+  UniformBufferInfo info = UniformBufferInfo();
+  info.m_byteSize        = size;
+  info.m_offset          = newOffset;
+  info.m_binding         = descriptorSlot.m_bindIdx;
+  info.m_set             = descriptorSlot.m_setIdx;
 
   drawable.AddUniformBufferInfo(std::move(info));
   AppendToMainBuffer(buffer, size);
+}
+
+void VkDrawablePool::BindTextureData(SlotID slot, const TextureDesc& desc, const U8* buffer) {
+  const int idx = GetDescriptorSlotIndex(slot);
+
+  if (idx < 0) {
+    LOG_ERR(log_VulkanRenderSystem, LOG_LEVEL, "Invalid Slot ID for Binding Texture Descriptor Data: %d", slot);
+    return;
+  }
+
+  const U32 size = desc.m_size;
+
+  const auto& descriptorSlot = m_descriptorSlots[idx];
+
+  TextureBufferInfo info = TextureBufferInfo();
+  info.m_byteSize        = size;
+  info.m_offset          = m_mainBufferOffset;
+  info.m_desc            = desc;
+  info.m_binding         = descriptorSlot.m_bindIdx;
+  info.m_set             = descriptorSlot.m_setIdx;
+
+  m_textureBufferInfos.PushBack(info);
+  AppendToMainBuffer(buffer, size);
+}
+
+void VkDrawablePool::BindSampler(SlotID slot, const SamplerDesc& desc) {
+  UNUSED(desc);
+  const int idx = GetDescriptorSlotIndex(slot);
+
+  if (idx < 0) {
+    LOG_ERR(log_VulkanRenderSystem, LOG_LEVEL, "Invalid Slot ID for Binding Texture Descriptor Data: %d", slot);
+    return;
+  }
+
+  const auto& descriptorSlot = m_descriptorSlots[idx];
+
+  if (descriptorSlot.m_type != DescriptorType::Sampler)
+  {
+    LOG_ERR(log_VulkanRenderSystem, LOG_LEVEL, "Slot is not a Sampler: %d", slot);
+    return;
+  }
+
+  SamplerInfo sInfo = {};
+  sInfo.m_set = descriptorSlot.m_setIdx;
+  sInfo.m_binding = descriptorSlot.m_bindIdx;
+
+  m_samplerInfos.PushBack(sInfo);
+  m_samplers.PushBack(VkScopedSampler(m_device, log_VulkanRenderSystem));
 }
 
 void VkDrawablePool::SetIndexData(DrawableID drawableId, const U8* buffer, U32 size) {

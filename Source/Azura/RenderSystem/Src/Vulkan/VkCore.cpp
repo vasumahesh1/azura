@@ -641,7 +641,7 @@ VkImage VkCore::CreateImage(VkDevice device,
                             U32 layers,
                             U32 mips,
                             VkImageTiling tiling,
-                            VkImageUsageFlagBits imageUsage,
+                            VkImageUsageFlags imageUsage,
                             const Log& log_VulkanRenderSystem) {
   const auto imageFormat = ToVkFormat(format);
   VERIFY_OPT(log_VulkanRenderSystem, imageFormat, "Unknown Format");
@@ -779,6 +779,34 @@ void VkCore::CreateUniformBufferBinding(Containers::Vector<VkDescriptorSetLayout
 }
 
 void VkCore::CreateSamplerBinding(Containers::Vector<VkDescriptorSetLayoutBinding>& bindings,
+  U32 binding,
+  U32 count,
+  VkShaderStageFlags stageFlag) {
+  VkDescriptorSetLayoutBinding uboLayoutBinding = {};
+  uboLayoutBinding.binding                      = binding;
+  uboLayoutBinding.descriptorType               = VK_DESCRIPTOR_TYPE_SAMPLER;
+  uboLayoutBinding.descriptorCount              = count;
+  uboLayoutBinding.stageFlags                   = stageFlag;
+  uboLayoutBinding.pImmutableSamplers           = nullptr;
+
+  bindings.PushBack(std::move(uboLayoutBinding));
+}
+
+void VkCore::CreateSampledImageBinding(Containers::Vector<VkDescriptorSetLayoutBinding>& bindings,
+  U32 binding,
+  U32 count,
+  VkShaderStageFlags stageFlag) {
+  VkDescriptorSetLayoutBinding uboLayoutBinding = {};
+  uboLayoutBinding.binding                      = binding;
+  uboLayoutBinding.descriptorType               = VK_DESCRIPTOR_TYPE_SAMPLED_IMAGE;
+  uboLayoutBinding.descriptorCount              = count;
+  uboLayoutBinding.stageFlags                   = stageFlag;
+  uboLayoutBinding.pImmutableSamplers           = nullptr;
+
+  bindings.PushBack(std::move(uboLayoutBinding));
+}
+
+void VkCore::CreateCombinedImageSamplerBinding(Containers::Vector<VkDescriptorSetLayoutBinding>& bindings,
   U32 binding,
   U32 count,
   VkShaderStageFlags stageFlag) {

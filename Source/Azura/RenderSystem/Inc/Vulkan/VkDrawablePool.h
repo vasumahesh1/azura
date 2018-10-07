@@ -7,6 +7,8 @@
 #include "VkShader.h"
 #include "VkScopedPipeline.h"
 #include "Log/Log.h"
+#include "VkScopedImage.h"
+#include "VkScopedSampler.h"
 
 namespace Azura {
 struct ApplicationRequirements;
@@ -32,7 +34,11 @@ public:
              Memory::Allocator& allocator,
              Log logger);
 
-  void Submit() override;
+  void WriteDescriptorSets(
+    const Containers::Vector<TextureBufferInfo>& textureBufferInfos,
+    const Containers::Vector<SamplerInfo>& samplerInfos,
+    const Containers::Vector<VkScopedSampler>& samplers,
+    const Containers::Vector<VkScopedImage>& images);
 
   const Containers::Vector<VkDescriptorSet>& GetDescriptorSet() const;
 
@@ -81,19 +87,28 @@ public:
 
   const VkCommandBuffer& GetCommandBuffer() const;
 
+  // Drawable Scope Binds
   void BindVertexData(DrawableID drawableId, SlotID slot, const U8* buffer, U32 size) override;
   void BindInstanceData(DrawableID drawableId, SlotID slot, const U8* buffer, U32 size) override;
   void BindUniformData(DrawableID drawableId, SlotID slot, const U8* buffer, U32 size) override;
+  
+  // Pool Scope Binds
+  void BindTextureData(SlotID slot, const TextureDesc& desc, const U8* buffer) override;
+  void BindSampler(SlotID slot, const SamplerDesc& desc) override;
+
   void SetIndexData(DrawableID drawableId, const U8* buffer, U32 size) override;
 
   void AppendToMainBuffer(const U8* buffer, U32 bufferSize);
 
 private:
+  void SubmitTextureData();
+
   VkScopedBuffer m_buffer;
   VkScopedBuffer m_stagingBuffer;
   VkDevice m_device;
   VkRenderPass m_renderPass;
   ViewportDimensions m_viewport;
+  VkPhysicalDeviceMemoryProperties m_physicalDeviceMemoryProperties;
 
   VkDescriptorPool m_descriptorPool{};
   Containers::Vector<VkDescriptorSetLayout> m_descriptorSetLayouts;
@@ -115,6 +130,8 @@ private:
 
   Containers::Vector<VkDrawable> m_drawables;
   Containers::Vector<VkShader> m_shaders;
+  Containers::Vector<VkScopedImage> m_images;
+  Containers::Vector<VkScopedSampler> m_samplers;
 
   const Log log_VulkanRenderSystem;
 };

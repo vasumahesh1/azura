@@ -2,6 +2,7 @@
 
 #include "Containers/Vector.h"
 #include "Types.h"
+#include "Core/RawStorageFormat.h"
 
 #include <boost/detail/bitmask.hpp>
 #include "Utils/Hash.h"
@@ -118,19 +119,34 @@ enum class DescriptorType
 {
   UniformBuffer,
   Sampler,
+  SampledImage,
+  CombinedImageSampler,
   PushConstant
 };
 
+const U32 MAX_DESCRIPTOR_TYPE_COUNT = 5;
+
+enum class DescriptorBinding
+{
+  Default,
+  Same
+};
+
 struct Bounds3D {
-  U32 m_width{0};
-  U32 m_height{0};
-  U32 m_depth{0};
+  U32 m_width{1};
+  U32 m_height{1};
+  U32 m_depth{1};
 
   Bounds3D(U32 width, U32 height, U32 depth)
     : m_width(width),
     m_height(height),
     m_depth(depth) {
 
+  }
+
+  U32 GetSize() const
+  {
+    return m_width * m_height * m_depth;
   }
 };
 
@@ -173,10 +189,35 @@ struct VertexSlot {
   BufferUsageRate m_rate;
 };
 
-struct DescriptorSlot {
-  SizeType m_key;
-  DescriptorType m_type;
-  ShaderStage m_stages;
+struct DescriptorSlotCreateInfo {
+  SizeType m_key{0};
+  DescriptorType m_type{DescriptorType::UniformBuffer};
+  ShaderStage m_stages{ShaderStage::All};
+  DescriptorBinding m_binding{ DescriptorBinding::Default };
+};
+
+struct DescriptorSlot
+{
+  SizeType m_key{0};
+  DescriptorType m_type{DescriptorType::UniformBuffer};
+  ShaderStage m_stages{ShaderStage::All};
+  DescriptorBinding m_binding{ DescriptorBinding::Default };
+  U32 m_setIdx{0};
+  U32 m_bindIdx{0};
+};
+
+struct TextureDesc
+{
+  Bounds3D m_bounds{ 1, 1, 1 };
+  U32 m_size{0};
+  U32 m_mipLevels{1};
+  U32 m_arrayLayers{1};
+  ImageType m_type{ImageType::Image2D};
+  RawStorageFormat m_format{ RawStorageFormat::R8G8B8A8_UNORM };
+};
+
+struct SamplerDesc
+{
 };
 
 struct BufferInfo {
@@ -186,6 +227,23 @@ struct BufferInfo {
   U32 m_binding;
 
   BufferInfo() : m_offset(0), m_byteSize(0), m_maxByteSize(0), m_binding(0) {}
+};
+
+struct TextureBufferInfo final : public BufferInfo
+{
+  TextureDesc m_desc;
+  U32 m_set{0};
+};
+
+struct SamplerInfo
+{
+  U32 m_set{0};
+  U32 m_binding{0};
+};
+
+struct UniformBufferInfo final : public BufferInfo
+{
+  U32 m_set{0};
 };
 
 struct LayerSubresource
@@ -198,6 +256,12 @@ struct TextureSubresource
 {
   LayerSubresource m_layerInfo{};
   U32 m_mipLevel{0};
+};
+
+struct TextureRequirements
+{
+  U32 m_maxCount{ 0 };
+  U32 m_poolSize{ 0 };
 };
 
 }  // namespace Azura

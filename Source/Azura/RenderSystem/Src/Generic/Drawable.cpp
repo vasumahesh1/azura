@@ -1,5 +1,7 @@
 ﻿#include "Generic/Drawable.h"
 #include <algorithm>
+#include "Log/Log.h"
+#include "Generic/TextureManager.h"
 
 namespace Azura {
 
@@ -41,7 +43,7 @@ void Drawable::AddInstanceBufferInfo(BufferInfo&& info) {
   m_instanceBufferInfos.PushBack(info);
 }
 
-void Drawable::AddUniformBufferInfo(BufferInfo&& info) {
+void Drawable::AddUniformBufferInfo(UniformBufferInfo&& info) {
   m_uniformBufferInfos.PushBack(info);
 }
 
@@ -73,6 +75,10 @@ const Containers::Vector<BufferInfo>& Drawable::GetInstanceBufferInfos() const {
   return m_instanceBufferInfos;
 }
 
+const Containers::Vector<UniformBufferInfo>& Drawable::GetUniformBufferInfos() const {
+  return m_uniformBufferInfos;
+}
+
 const BufferInfo& Drawable::GetIndexBufferInfo() const {
   return m_indexBufferInfo;
 }
@@ -84,17 +90,71 @@ DrawablePoolCreateInfo::DrawablePoolCreateInfo(Memory::Allocator& alloc)
 
 DrawablePool::DrawablePool(const DrawablePoolCreateInfo& createInfo, Memory::Allocator& allocator)
   : m_numVertexSlots(std::count_if(createInfo.m_vertexDataSlots.Begin(), createInfo.m_vertexDataSlots.End(),
-                                   IsPerVertexSlot)),
-    m_numInstanceSlots(std::count_if(createInfo.m_vertexDataSlots.Begin(), createInfo.m_vertexDataSlots.End(),
-                                     IsPerInstanceSlot)),
-    m_descriptorSlots(createInfo.m_descriptorSlots, allocator),
-    m_vertexDataSlots(createInfo.m_vertexDataSlots, allocator),
-    m_byteSize(createInfo.m_byteSize),
-    m_drawType(createInfo.m_drawType),
-    m_allocator(allocator) {
+    IsPerVertexSlot)),
+  m_numInstanceSlots(std::count_if(createInfo.m_vertexDataSlots.Begin(), createInfo.m_vertexDataSlots.End(),
+    IsPerInstanceSlot)),
+  m_numUniformSlots(0),
+  m_numSamplerSlots(0),
+  m_numCombinedSamplerSlots(0),
+  m_numSampledImageSlots(0),
+  m_numPushConstantsSlots(0),
+  m_descriptorSlots(createInfo.m_descriptorSlots.GetSize(), allocator),
+  m_vertexDataSlots(createInfo.m_vertexDataSlots, allocator),
+  m_textureBufferInfos(allocator),
+  m_samplerInfos(allocator),
+  m_byteSize(createInfo.m_byteSize),
+  m_drawType(createInfo.m_drawType),
+  m_allocator(allocator) {
 
-  m_numUniformSlots = std::count_if(m_descriptorSlots.Begin(), m_descriptorSlots.End(), [](const DescriptorSlot& item) -> bool { return item.m_type == DescriptorType::UniformBuffer; });
-  m_numSamplerSlots = std::count_if(m_descriptorSlots.Begin(), m_descriptorSlots.End(), [](const DescriptorSlot& item) -> bool { return item.m_type == DescriptorType::Sampler; });
+  int parent = -1;
+  int bindIdx = 0;
+  for (const auto& slot : createInfo.m_descriptorSlots)
+  {
+    if (slot.m_binding != DescriptorBinding::Same) {
+      ++parent;
+      bindIdx = 0;
+    }
+
+    DescriptorSlot setSlot = {};
+    setSlot.m_key = slot.m_key;
+    setSlot.m_type = slot.m_type;
+    setSlot.m_stages = slot.m_stages;
+    setSlot.m_binding = slot.m_binding;
+    setSlot.m_setIdx = parent;
+    setSlot.m_bindIdx = bindIdx;
+
+    ++bindIdx;
+
+    m_descriptorSlots.PushBack(std::move(setSlot));
+  }
+
+  for (const auto& slot : createInfo.m_descriptorSlots) {
+    switch (slot.m_type) {
+
+      case DescriptorType::UniformBuffer:
+        ++m_numUniformSlots;
+        break;
+
+      case DescriptorType::Sampler:
+        ++m_numSamplerSlots;
+        break;
+      case DescriptorType::SampledImage:
+        ++m_numSampledImageSlots;
+        break;
+      case DescriptorType::CombinedImageSampler:
+        ++m_numCombinedSamplerSlots;
+        break;
+
+      case DescriptorType::PushConstant:
+        ++m_numPushConstantsSlots;
+        break;
+      default:
+        break;
+    }
+  }
+
+  m_textureBufferInfos.Reserve(m_numSampledImageSlots);
+  m_samplerInfos.Reserve(m_numSamplerSlots);
 }
 
 void DrawablePool::BindVertexData(DrawableID drawableId, SlotID slot, const Containers::Vector<U8>& buffer) {
@@ -126,10 +186,12 @@ DrawType DrawablePool::GetDrawType() const {
 }
 
 int DrawablePool::GetVertexSlotIndex(SlotID id) const {
-  auto it = std::find_if(m_vertexDataSlots.Begin(), m_vertexDataSlots.End(), [id](const VertexSlot& slot) -> bool { return slot.m_key == id; });
-
-  if (it == m_vertexDataSlots.End())
+  auto it = std::find_if(m_vertexDataSlots.Begin(), m_vertexDataSlots.End(), [id](const VertexSlot& slot) -> bool
   {
+    return slot.m_key == id;
+  });
+
+  if (it == m_vertexDataSlots.End()) {
     return -1;
   }
 
@@ -137,10 +199,12 @@ int DrawablePool::GetVertexSlotIndex(SlotID id) const {
 }
 
 int DrawablePool::GetDescriptorSlotIndex(SlotID id) const {
-  auto it = std::find_if(m_descriptorSlots.Begin(), m_descriptorSlots.End(), [id](const DescriptorSlot& slot) -> bool { return slot.m_key == id; });
-
-  if (it == m_descriptorSlots.End())
+  auto it = std::find_if(m_descriptorSlots.Begin(), m_descriptorSlots.End(), [id](const DescriptorSlot& slot) -> bool
   {
+    return slot.m_key == id;
+  });
+
+  if (it == m_descriptorSlots.End()) {
     return -1;
   }
 

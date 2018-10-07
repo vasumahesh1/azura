@@ -16,6 +16,7 @@ namespace Vulkan {
   FUNC(RawStorageFormat::B8G8R8A8_UINT, VK_FORMAT_B8G8R8A8_UINT)                                                       \
   FUNC(RawStorageFormat::B8G8R8A8_SINT, VK_FORMAT_B8G8R8A8_SINT)                                                       \
   FUNC(RawStorageFormat::B8G8R8A8_SRGB, VK_FORMAT_B8G8R8A8_SRGB)                                                       \
+  FUNC(RawStorageFormat::R8G8B8_UNORM, VK_FORMAT_R8G8B8_UNORM)                                                         \
   FUNC(RawStorageFormat::R8G8B8A8_UNORM, VK_FORMAT_R8G8B8A8_UNORM)                                                     \
   FUNC(RawStorageFormat::R16_FLOAT, VK_FORMAT_R16_SFLOAT)                                                              \
   FUNC(RawStorageFormat::R16_UINT, VK_FORMAT_R16_UINT)                                                                 \

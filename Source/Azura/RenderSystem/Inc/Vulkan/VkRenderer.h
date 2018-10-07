@@ -11,6 +11,7 @@
 #include "VkShader.h"
 #include "Log/Log.h"
 #include "VkDrawablePool.h"
+#include "VkTextureManager.h"
 
 namespace Azura {
 class Window;

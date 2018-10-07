@@ -2,10 +2,12 @@
 #include "Vulkan/VkTextureManager.h"
 
 namespace Azura {
+namespace Vulkan {
 
-VkTextureManager::VkTextureManager(VkDevice device, U32 poolSize, U32 maxTextures, Log log)
-  : TextureManager(poolSize, maxTextures),
+VkTextureManager::VkTextureManager(VkDevice device, const TextureRequirements& requirements, Log log)
+  : TextureManager(requirements),
     m_device(device),
     log_VulkanRenderSystem(std::move(log)) {
 }
+} // namespace Vulkan
 } // namespace Azura

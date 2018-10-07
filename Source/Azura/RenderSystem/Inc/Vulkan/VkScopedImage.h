@@ -3,27 +3,44 @@
 #include <vulkan/vulkan_core.h>
 #include "Types.h"
 #include "Log/Log.h"
-
-namespace Azura {
-struct TextureDesc;
-}
+#include "Generic/TextureManager.h"
 
 namespace Azura {
 namespace Vulkan {
+
+struct ImageTransition {
+  VkImageLayout m_layout;
+  VkAccessFlags m_accessMask;
+  VkPipelineStageFlags m_stageMask;
+};
+
 class VkScopedImage {
 public:
-  VkScopedImage(VkDevice device, const TextureDesc& textureDesc, VkImageUsageFlagBits usage, const VkPhysicalDeviceMemoryProperties& physicalDeviceMemoryProperties, Log logger);
+  VkScopedImage(VkDevice device,
+                const TextureDesc& textureDesc,
+                VkImageUsageFlags usage,
+                const VkPhysicalDeviceMemoryProperties& physicalDeviceMemoryProperties,
+                Log logger);
 
   VkImage Real() const;
+  VkImageView View() const;
   VkDeviceMemory Memory() const;
 
   void CleanUp() const;
+
+  void TransitionLayout(VkCommandBuffer commandBuffer, ImageTransition oldTransition, ImageTransition newTransition) const;
+  void CopyFromBuffer(VkCommandBuffer commandBuffer, const TextureBufferInfo& bufferInfo, VkBuffer buffer) const;
+
+  void CreateImageView(ImageViewType imageView);
 
 private:
   VkDevice m_device;
 
   VkImage m_image;
+  VkImageView m_imageView{};
   VkDeviceMemory m_memory{};
+
+  TextureDesc m_desc;
 
   const Log log_VulkanRenderSystem;
 };

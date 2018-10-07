@@ -4,6 +4,10 @@ struct UBOData {
   float4x4 u_viewProj;
 };
 
+struct Controls {
+  float4 color;
+};
+
 struct VertexShaderInput
 {
   float4 in_Pos : IN_POSITION;

@@ -70,7 +70,7 @@ VkImage CreateImage(VkDevice device,
                     U32 layers,
                     U32 mips,
                     VkImageTiling tiling,
-                    VkImageUsageFlagBits imageUsage,
+                    VkImageUsageFlags imageUsage,
                     const Log& log_VulkanRenderSystem);
 
 VkImageView CreateImageView(VkDevice device,
@@ -92,6 +92,10 @@ void CreateUniformBufferBinding(Containers::Vector<VkDescriptorSetLayoutBinding>
                                 VkShaderStageFlags stageFlag);
 
 void CreateSamplerBinding(Containers::Vector<VkDescriptorSetLayoutBinding>& bindings, U32 binding, U32 count, VkShaderStageFlags stageFlag);
+
+void CreateSampledImageBinding(Containers::Vector<VkDescriptorSetLayoutBinding>& bindings, U32 binding, U32 count, VkShaderStageFlags stageFlag);
+
+void CreateCombinedImageSamplerBinding(Containers::Vector<VkDescriptorSetLayoutBinding>& bindings, U32 binding, U32 count, VkShaderStageFlags stageFlag);
 
 VkDescriptorSetLayout CreateDescriptorSetLayout(VkDevice device,
                                                 const Containers::Vector<VkDescriptorSetLayoutBinding>& bindings,

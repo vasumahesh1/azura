@@ -4,15 +4,17 @@
 #include "Vulkan/VkTextureManager.h"
 #include "Vulkan/VkCore.h"
 #include "Vulkan/VkMacros.h"
+#include "Memory/MemoryFactory.h"
 
 namespace Azura {
 namespace Vulkan {
 VkScopedImage::VkScopedImage(VkDevice device,
                              const TextureDesc& textureDesc,
-                             VkImageUsageFlagBits usage,
+                             VkImageUsageFlags usage,
                              const VkPhysicalDeviceMemoryProperties& physicalDeviceMemoryProperties,
                              Log logger)
   : m_device(device),
+    m_desc(textureDesc),
     log_VulkanRenderSystem(std::move(logger)) {
 
   m_image = VkCore::CreateImage(device, textureDesc.m_format, textureDesc.m_type,
@@ -39,6 +41,10 @@ VkImage VkScopedImage::Real() const {
   return m_image;
 }
 
+VkImageView VkScopedImage::View() const {
+  return m_imageView;
+}
+
 VkDeviceMemory VkScopedImage::Memory() const {
   return m_memory;
 }
@@ -46,6 +52,77 @@ VkDeviceMemory VkScopedImage::Memory() const {
 void VkScopedImage::CleanUp() const {
   vkDestroyImage(m_device, m_image, nullptr);
   vkFreeMemory(m_device, m_memory, nullptr);
+  vkDestroyImageView(m_device, m_imageView, nullptr);
 }
+
+void VkScopedImage::TransitionLayout(VkCommandBuffer commandBuffer,
+                                     ImageTransition oldTransition,
+                                     ImageTransition newTransition) const {
+  // TODO(vasumahesh1):[TEXTURE]: Add support for Depth and Stencil related Aspects
+  const VkImageSubresourceRange resourceRange = {
+    VK_IMAGE_ASPECT_COLOR_BIT, 0, m_desc.m_mipLevels, 0, m_desc.m_arrayLayers
+  };
+  VkCore::TransitionImageLayout(commandBuffer, m_image, oldTransition.m_accessMask, newTransition.m_accessMask,
+                                oldTransition.m_layout, newTransition.m_layout, oldTransition.m_stageMask,
+                                newTransition.m_stageMask, resourceRange);
+
+}
+
+void VkScopedImage::CopyFromBuffer(VkCommandBuffer commandBuffer,
+                                   const TextureBufferInfo& bufferInfo,
+                                   VkBuffer buffer) const {
+  // TODO(vasumahesh1):[TEXTURE]: Add support for Depth and Stencil related Aspects
+  U32 currentWidth  = m_desc.m_bounds.m_width;
+  U32 currentHeight = m_desc.m_bounds.m_height;
+  U32 currentDepth  = m_desc.m_bounds.m_depth;
+
+  VkBufferImageCopy region               = {};
+  region.bufferOffset                    = bufferInfo.m_offset;
+  region.bufferRowLength                 = 0;
+  region.bufferImageHeight               = 0;
+  region.imageSubresource.aspectMask     = VK_IMAGE_ASPECT_COLOR_BIT;
+  region.imageSubresource.mipLevel       = 0;
+  region.imageSubresource.baseArrayLayer = 0;
+  region.imageSubresource.layerCount     = 1;
+
+  region.imageOffset = {0, 0, 0};
+  region.imageExtent = {
+    currentWidth,
+    currentHeight,
+    currentDepth
+  };
+
+  vkCmdCopyBufferToImage(
+                         commandBuffer,
+                         buffer,
+                         m_image,
+                         VK_IMAGE_LAYOUT_TRANSFER_DST_OPTIMAL,
+                         1,
+                         &region);
+}
+
+void VkScopedImage::CreateImageView(ImageViewType imageView) {
+  const auto vkImageView = ToVkImageViewType(imageView);
+  VERIFY_OPT(log_VulkanRenderSystem, vkImageView, "Unknown VkImageViewType");
+
+  const auto vkFormat = ToVkFormat(m_desc.m_format);
+  VERIFY_OPT(log_VulkanRenderSystem, vkFormat, "Unknown VkFormat");
+
+  // TODO(vasumahesh1):[TEXTURE]: Add support for Depth and Stencil related Aspects
+  VkImageViewCreateInfo viewInfo           = {};
+  viewInfo.sType                           = VK_STRUCTURE_TYPE_IMAGE_VIEW_CREATE_INFO;
+  viewInfo.image                           = m_image;
+  viewInfo.viewType                        = vkImageView.value();
+  viewInfo.format                          = vkFormat.value();
+  viewInfo.subresourceRange.aspectMask     = VK_IMAGE_ASPECT_COLOR_BIT;
+  viewInfo.subresourceRange.baseMipLevel   = 0;
+  viewInfo.subresourceRange.levelCount     = m_desc.m_mipLevels;
+  viewInfo.subresourceRange.baseArrayLayer = 0;
+  viewInfo.subresourceRange.layerCount     = m_desc.m_arrayLayers;
+
+  VERIFY_VK_OP(log_VulkanRenderSystem, vkCreateImageView(m_device, &viewInfo, nullptr, &m_imageView),
+    "Failed to create texture image view");
+}
+
 } // namespace Vulkan
 } // namespace Azura

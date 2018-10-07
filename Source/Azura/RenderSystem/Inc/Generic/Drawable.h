@@ -5,6 +5,7 @@
 #include "Core/RawStorageFormat.h"
 
 namespace Azura {
+struct TextureDesc;
 using DrawableID = U32;
 class Shader;
 
@@ -27,7 +28,7 @@ public:
 
   void AddVertexBufferInfo(BufferInfo&& info);
   void AddInstanceBufferInfo(BufferInfo&& info);
-  void AddUniformBufferInfo(BufferInfo&& info);
+  void AddUniformBufferInfo(UniformBufferInfo&& info);
   void SetIndexBufferInfo(BufferInfo&& info);
 
   U32 GetVertexCount() const;
@@ -37,16 +38,15 @@ public:
 
   const Containers::Vector<BufferInfo>& GetVertexBufferInfos() const;
   const Containers::Vector<BufferInfo>& GetInstanceBufferInfos() const;
+  const Containers::Vector<UniformBufferInfo>& GetUniformBufferInfos() const;
   const BufferInfo& GetIndexBufferInfo() const;
-
-  virtual void Submit() = 0;
 
 protected:
   Memory::Allocator& GetAllocator() const;
 
   Containers::Vector<BufferInfo> m_vertexBufferInfos;
   Containers::Vector<BufferInfo> m_instanceBufferInfos;
-  Containers::Vector<BufferInfo> m_uniformBufferInfos;
+  Containers::Vector<UniformBufferInfo> m_uniformBufferInfos;
   BufferInfo m_indexBufferInfo;
   DrawableCreateInfo m_createInfo;
 
@@ -70,7 +70,7 @@ struct DrawablePoolCreateInfo {
 
   Containers::Vector<VertexSlot> m_vertexDataSlots;
 
-  Containers::Vector<DescriptorSlot> m_descriptorSlots;
+  Containers::Vector<DescriptorSlotCreateInfo> m_descriptorSlots;
 
   ~DrawablePoolCreateInfo() = default;
 
@@ -98,6 +98,7 @@ public:
 
   virtual void AddBufferBinding(SlotID slot, const Containers::Vector<RawStorageFormat>& strides) = 0;
 
+  // Drawable Scope Binds
   void BindVertexData(DrawableID drawableId, SlotID slot, const Containers::Vector<U8>& buffer);
   virtual void BindVertexData(DrawableID drawableId, SlotID slot, const U8* buffer, U32 size) = 0;
 
@@ -109,6 +110,10 @@ public:
 
   void SetIndexData(DrawableID drawableId, const Containers::Vector<U8>& buffer);
   virtual void SetIndexData(DrawableID drawableId, const U8* buffer, U32 size) = 0;
+
+  // Pool Scope Binds
+  virtual void BindTextureData(SlotID slot, const TextureDesc& desc, const U8* buffer) = 0;
+  virtual void BindSampler(SlotID slot, const SamplerDesc& desc) = 0;
 
   virtual void Submit() = 0;
 
@@ -125,9 +130,15 @@ protected:
   U32 m_numInstanceSlots;
   U32 m_numUniformSlots;
   U32 m_numSamplerSlots;
+  U32 m_numCombinedSamplerSlots;
+  U32 m_numSampledImageSlots;
+  U32 m_numPushConstantsSlots;
 
   Containers::Vector<DescriptorSlot> m_descriptorSlots;
   Containers::Vector<VertexSlot> m_vertexDataSlots;
+
+  Containers::Vector<TextureBufferInfo> m_textureBufferInfos;
+  Containers::Vector<SamplerInfo> m_samplerInfos;
 
 private:
   U32 m_byteSize;
