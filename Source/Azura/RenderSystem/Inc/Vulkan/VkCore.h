@@ -77,7 +77,7 @@ VkImageView CreateImageView(VkDevice device,
                             U32 baseArrayLayer = 0,
                             U32 layerCount     = 1);
 
-VkRenderPass CreateRenderPass(VkDevice device, VkFormat colorFormat, const Log& log_VulkanRenderSystem);
+VkRenderPass CreateRenderPass(VkDevice device, const VkScopedSwapChain& swapChain, const Log& log_VulkanRenderSystem);
 
 void CreateUniformBufferBinding(Containers::Vector<VkDescriptorSetLayoutBinding>& bindings,
                                 U32 binding,

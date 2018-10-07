@@ -36,6 +36,9 @@ void VkScopedImage::Create(VkDevice device,
                            VkImageUsageFlags usage,
                            const VkPhysicalDeviceMemoryProperties& physicalDeviceMemoryProperties) {
 
+  m_device = device;
+  m_desc = textureDesc;
+
   m_image = VkCore::CreateImage(device, textureDesc.m_format, textureDesc.m_type,
                                 {textureDesc.m_bounds.m_width, textureDesc.m_bounds.m_height},
                                 textureDesc.m_bounds.m_depth, textureDesc.m_arrayLayers, textureDesc.m_mipLevels,
@@ -68,6 +71,17 @@ VkDeviceMemory VkScopedImage::Memory() const {
   return m_memory;
 }
 
+VkFormat VkScopedImage::GetRealFormat() const {
+  const auto vkFormat = ToVkFormat(GetFormat());
+  VERIFY_OPT(log_VulkanRenderSystem, vkFormat, "Unknown VkFormat");
+
+  return vkFormat.value();
+}
+
+RawStorageFormat VkScopedImage::GetFormat() const {
+  return m_desc.m_format;
+}
+
 void VkScopedImage::CleanUp() const {
   vkDestroyImage(m_device, m_image, nullptr);
   vkFreeMemory(m_device, m_memory, nullptr);
@@ -77,10 +91,23 @@ void VkScopedImage::CleanUp() const {
 void VkScopedImage::TransitionLayout(VkCommandBuffer commandBuffer,
                                      ImageTransition oldTransition,
                                      ImageTransition newTransition) const {
-  // TODO(vasumahesh1):[TEXTURE]: Add support for Depth and Stencil related Aspects
+  
+  int flagBits = VK_IMAGE_ASPECT_COLOR_BIT;
+
+  if (HasDepthComponent(m_desc.m_format))
+  {
+    flagBits = VK_IMAGE_ASPECT_DEPTH_BIT;
+
+    if (HasStencilComponent(m_desc.m_format))
+    {
+      flagBits = flagBits | VK_IMAGE_ASPECT_STENCIL_BIT;
+    }
+  }
+
   const VkImageSubresourceRange resourceRange = {
-    VK_IMAGE_ASPECT_COLOR_BIT, 0, m_desc.m_mipLevels, 0, m_desc.m_arrayLayers
+    flagBits, 0, m_desc.m_mipLevels, 0, m_desc.m_arrayLayers
   };
+
   VkCore::TransitionImageLayout(commandBuffer, m_image, oldTransition.m_accessMask, newTransition.m_accessMask,
                                 oldTransition.m_layout, newTransition.m_layout, oldTransition.m_stageMask,
                                 newTransition.m_stageMask, resourceRange);
@@ -90,7 +117,19 @@ void VkScopedImage::TransitionLayout(VkCommandBuffer commandBuffer,
 void VkScopedImage::CopyFromBuffer(VkCommandBuffer commandBuffer,
                                    const TextureBufferInfo& bufferInfo,
                                    VkBuffer buffer) const {
-  // TODO(vasumahesh1):[TEXTURE]: Add support for Depth and Stencil related Aspects
+  
+  int flagBits = VK_IMAGE_ASPECT_COLOR_BIT;
+
+  if (HasDepthComponent(m_desc.m_format))
+  {
+    flagBits = VK_IMAGE_ASPECT_DEPTH_BIT;
+
+    if (HasStencilComponent(m_desc.m_format))
+    {
+      flagBits = flagBits | VK_IMAGE_ASPECT_STENCIL_BIT;
+    }
+  }
+
   U32 currentWidth  = m_desc.m_bounds.m_width;
   U32 currentHeight = m_desc.m_bounds.m_height;
   U32 currentDepth  = m_desc.m_bounds.m_depth;
@@ -99,7 +138,7 @@ void VkScopedImage::CopyFromBuffer(VkCommandBuffer commandBuffer,
   region.bufferOffset                    = bufferInfo.m_offset;
   region.bufferRowLength                 = 0;
   region.bufferImageHeight               = 0;
-  region.imageSubresource.aspectMask     = VK_IMAGE_ASPECT_COLOR_BIT;
+  region.imageSubresource.aspectMask     = flagBits;
   region.imageSubresource.mipLevel       = 0;
   region.imageSubresource.baseArrayLayer = 0;
   region.imageSubresource.layerCount     = 1;
@@ -127,13 +166,25 @@ void VkScopedImage::CreateImageView(ImageViewType imageView) {
   const auto vkFormat = ToVkFormat(m_desc.m_format);
   VERIFY_OPT(log_VulkanRenderSystem, vkFormat, "Unknown VkFormat");
 
-  // TODO(vasumahesh1):[TEXTURE]: Add support for Depth and Stencil related Aspects
+
+  int flagBits = VK_IMAGE_ASPECT_COLOR_BIT;
+
+  if (HasDepthComponent(m_desc.m_format))
+  {
+    flagBits = VK_IMAGE_ASPECT_DEPTH_BIT;
+
+    if (HasStencilComponent(m_desc.m_format))
+    {
+      flagBits = flagBits | VK_IMAGE_ASPECT_STENCIL_BIT;
+    }
+  }
+
   VkImageViewCreateInfo viewInfo           = {};
   viewInfo.sType                           = VK_STRUCTURE_TYPE_IMAGE_VIEW_CREATE_INFO;
   viewInfo.image                           = m_image;
   viewInfo.viewType                        = vkImageView.value();
   viewInfo.format                          = vkFormat.value();
-  viewInfo.subresourceRange.aspectMask     = VK_IMAGE_ASPECT_COLOR_BIT;
+  viewInfo.subresourceRange.aspectMask     = flagBits;
   viewInfo.subresourceRange.baseMipLevel   = 0;
   viewInfo.subresourceRange.levelCount     = m_desc.m_mipLevels;
   viewInfo.subresourceRange.baseArrayLayer = 0;
@@ -142,6 +193,5 @@ void VkScopedImage::CreateImageView(ImageViewType imageView) {
   VERIFY_VK_OP(log_VulkanRenderSystem, vkCreateImageView(m_device, &viewInfo, nullptr, &m_imageView),
     "Failed to create texture image view");
 }
-
 } // namespace Vulkan
 } // namespace Azura

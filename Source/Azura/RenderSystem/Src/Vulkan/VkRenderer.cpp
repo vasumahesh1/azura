@@ -52,24 +52,6 @@ VkRenderer::VkRenderer(const ApplicationInfo& appInfo,
   m_device = VkCore::CreateLogicalDevice(m_physicalDevice, m_queueIndices, GetDeviceRequirements(),
                                          log_VulkanRenderSystem);
 
-  // Check if Depth Format is supported by Device or not.
-  const bool depthFormatCheck = VkCore::QueryFormatFeatureSupport(
-                                                                  m_physicalDevice,
-                                                                  VkCore::GetVkFormat(GetSwapchainRequirements().
-                                                                                      m_depthFormat,
-                                                                                      log_VulkanRenderSystem),
-                                                                  [](const VkFormatProperties& prop) -> bool
-                                                                  {
-                                                                    return (prop.optimalTilingFeatures &
-                                                                            VK_FORMAT_FEATURE_DEPTH_STENCIL_ATTACHMENT_BIT
-                                                                           ) ==
-                                                                           VK_FORMAT_FEATURE_DEPTH_STENCIL_ATTACHMENT_BIT;
-                                                                  });
-
-  VERIFY_TRUE(log_VulkanRenderSystem, depthFormatCheck, "Depth Format Not Supported");
-
-  // m_depthTexture.Create(m_device, )
-
   vkGetPhysicalDeviceProperties(m_physicalDevice, &m_physicalDeviceProperties);
 
   m_graphicsQueue = VkCore::GetQueueFromDevice(m_device, m_queueIndices.m_graphicsFamily);
@@ -82,21 +64,24 @@ VkRenderer::VkRenderer(const ApplicationInfo& appInfo,
     m_transferQueue = VkCore::GetQueueFromDevice(m_device, m_queueIndices.m_transferFamily);
   }
 
-  m_swapChain.Create(m_device, m_surface, m_queueIndices, swapChainDeviceSupport, swapChainRequirement);
-
-  // TODO(vasumahesh1):[RENDER PASS]: Needs Changes
-  m_renderPass = VkCore::CreateRenderPass(m_device, m_swapChain.GetSurfaceFormat(), log_VulkanRenderSystem);
-
-  VkCore::CreateFrameBuffers(m_device, m_renderPass, m_swapChain, m_frameBuffers, log_VulkanRenderSystem);
-
   m_graphicsCommandPool = VkCore::CreateCommandPool(m_device, m_queueIndices.m_graphicsFamily, 0,
-                                                    log_VulkanRenderSystem);
+    log_VulkanRenderSystem);
 
   if (m_queueIndices.m_isTransferQueueRequired) {
     m_transferCommandPool =
       VkCore::CreateCommandPool(m_device, m_queueIndices.m_transferFamily, VK_COMMAND_POOL_CREATE_TRANSIENT_BIT,
-                                log_VulkanRenderSystem);
+        log_VulkanRenderSystem);
   }
+
+  VkPhysicalDeviceMemoryProperties memProperties;
+  vkGetPhysicalDeviceMemoryProperties(m_physicalDevice, &memProperties);
+
+  m_swapChain.Create(m_device, m_physicalDevice, m_graphicsQueue, m_graphicsCommandPool, m_surface, m_queueIndices, swapChainDeviceSupport, swapChainRequirement, memProperties);
+
+  // TODO(vasumahesh1):[RENDER PASS]: Needs Changes
+  m_renderPass = VkCore::CreateRenderPass(m_device, m_swapChain, log_VulkanRenderSystem);
+
+  VkCore::CreateFrameBuffers(m_device, m_renderPass, m_swapChain, m_frameBuffers, log_VulkanRenderSystem);
 
   const U32 syncCount = swapChainRequirement.m_framesInFlight;
 
@@ -197,8 +182,11 @@ void VkRenderer::Submit() {
                                m_primaryCommandBuffers, log_VulkanRenderSystem);
 
   const auto& clearColor = GetApplicationRequirements().m_clearColor;
+  const auto& clearDepthStencil = GetApplicationRequirements().m_depthStencilClear;
 
-  const VkClearValue clearValue = {clearColor[0], clearColor[1], clearColor[2], clearColor[3]};
+  std::array<VkClearValue, 2> clearData{};
+  clearData[0].color = { clearColor[0], clearColor[1], clearColor[2], clearColor[3] };
+  clearData[1].depthStencil = {clearDepthStencil[0], U32(clearDepthStencil[1])};
 
   Vector<VkCommandBuffer> secondaryBuffers(m_drawablePools.GetSize(), allocatorTemporary);
   for (auto& drawablePool : m_drawablePools) {
@@ -216,8 +204,8 @@ void VkRenderer::Submit() {
     renderPassInfo.framebuffer           = m_frameBuffers[idx];
     renderPassInfo.renderArea.offset     = {0, 0};
     renderPassInfo.renderArea.extent     = m_swapChain.GetExtent();
-    renderPassInfo.clearValueCount       = 1;
-    renderPassInfo.pClearValues          = &clearValue;
+    renderPassInfo.clearValueCount       = U32(clearData.size());
+    renderPassInfo.pClearValues          = clearData.data();
 
     vkCmdBeginRenderPass(commandBuffer, &renderPassInfo, VK_SUBPASS_CONTENTS_SECONDARY_COMMAND_BUFFERS);
 

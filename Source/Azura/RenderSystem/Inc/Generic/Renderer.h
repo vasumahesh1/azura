@@ -25,6 +25,7 @@ struct ApplicationInfo {
 
 struct ApplicationRequirements {
   float m_clearColor[4] {0, 0, 0, 1.0f};
+  float m_depthStencilClear[2] {1.0f, 0};
 };
 
 struct SwapChainRequirements {

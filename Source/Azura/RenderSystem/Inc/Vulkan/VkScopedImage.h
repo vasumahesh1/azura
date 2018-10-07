@@ -38,6 +38,9 @@ public:
   VkImageView View() const;
   VkDeviceMemory Memory() const;
 
+  VkFormat GetRealFormat() const;
+  RawStorageFormat GetFormat() const;
+
   void CleanUp() const;
 
   void TransitionLayout(VkCommandBuffer commandBuffer,

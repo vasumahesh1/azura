@@ -20,17 +20,24 @@ public:
   VkScopedSwapChain(Memory::Allocator& allocator, Log logger);
 
   void Create(VkDevice device,
+              VkPhysicalDevice physicalDevice,
+              VkQueue graphicsQueue,
+              VkCommandPool graphicsCommandPool,
               VkSurfaceKHR surface,
               const VkQueueIndices& queueIndices,
               const SwapChainDeviceSupport& swapChainSupport,
-              const SwapChainRequirements& swapChainRequirement);
+              const SwapChainRequirements& swapChainRequirement,
+              const VkPhysicalDeviceMemoryProperties& physicalDeviceMemoryProperties);
 
   void CleanUp(VkDevice device);
   VkSwapchainKHR Real() const;
 
   VkFormat GetSurfaceFormat() const;
+  VkFormat GetDepthFormat() const;
+
   const VkExtent2D& GetExtent() const;
   const VkScopedImage& GetImage(int frameIdx) const;
+  const VkScopedImage& GetDepthImage() const;
 
   const Containers::Vector<VkScopedImage>& GetAllImages() const;
 
@@ -43,9 +50,7 @@ private:
   U32 m_imageCount{0};
 
   Containers::Vector<VkScopedImage> m_images;
-
-  // Containers::Vector<VkImage> m_images;
-  // Containers::Vector<VkImageView> m_imageViews;
+  VkScopedImage m_depthImage;
 };
 
 } // namespace Vulkan

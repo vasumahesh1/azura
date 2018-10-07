@@ -204,6 +204,19 @@ VkScopedPipeline VkPipelineFactory::Submit() const {
   LOG_DBG(log_VulkanRenderSystem, LOG_LEVEL, "Num Binding Info: %d", m_bindingInfo.GetSize());
   LOG_DBG(log_VulkanRenderSystem, LOG_LEVEL, "Total Shader Stages: %d", m_stages.GetSize());
 
+  // TODO(vasumahesh1):[DEPTH-STENCIL]: Expose this via an API
+  VkPipelineDepthStencilStateCreateInfo depthStencil = {};
+  depthStencil.sType = VK_STRUCTURE_TYPE_PIPELINE_DEPTH_STENCIL_STATE_CREATE_INFO;
+  depthStencil.depthTestEnable = VK_TRUE;
+  depthStencil.depthWriteEnable = VK_TRUE;
+  depthStencil.depthCompareOp = VK_COMPARE_OP_LESS; // *
+  depthStencil.depthBoundsTestEnable = VK_FALSE;
+  depthStencil.minDepthBounds = 0.0f; // Optional
+  depthStencil.maxDepthBounds = 1.0f; // Optional
+  depthStencil.stencilTestEnable = VK_FALSE;
+  depthStencil.front = {}; // Optional
+  depthStencil.back = {}; // Optional
+
   VkGraphicsPipelineCreateInfo pipelineInfo = {};
   pipelineInfo.sType                        = VK_STRUCTURE_TYPE_GRAPHICS_PIPELINE_CREATE_INFO;
   pipelineInfo.stageCount                   = m_stages.GetSize();
@@ -213,7 +226,7 @@ VkScopedPipeline VkPipelineFactory::Submit() const {
   pipelineInfo.pViewportState               = &m_viewportStage;
   pipelineInfo.pRasterizationState          = &m_rasterizerStage;
   pipelineInfo.pMultisampleState            = &m_multisampleStage;
-  pipelineInfo.pDepthStencilState           = nullptr;
+  pipelineInfo.pDepthStencilState           = &depthStencil;
   pipelineInfo.pColorBlendState             = &m_colorBlendStage;
   pipelineInfo.pDynamicState                = nullptr;
   pipelineInfo.layout                       = m_layout;
