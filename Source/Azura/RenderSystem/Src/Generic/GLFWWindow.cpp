@@ -20,6 +20,11 @@ bool GLFWWindow::Initialize() {
   glfwWindowHint(GLFW_RESIZABLE, GLFW_FALSE);
 
   p_window = glfwCreateWindow(GetWidth(), GetHeight(), GetTitle(), nullptr, nullptr);
+
+  glfwSetMouseButtonCallback(p_window, MouseEventCallback);
+
+  glfwSetWindowUserPointer(p_window, this);
+
   return true;
 }
 
@@ -51,6 +56,28 @@ void GLFWWindow::StartListening() {
     }
 #endif
 
+    double currCursorX;
+    double currCursorY;
+    glfwGetCursorPos(p_window, &currCursorX, &currCursorY);
+
+    if (m_mouseLeftDown)
+    {
+      const double diffX = currCursorX - m_prevCursorX;
+      const double diffY = currCursorY - m_prevCursorY;
+
+      if (diffX > 0.001 || diffY > 0.001)
+      {
+        MouseEvent evt = {};
+        evt.m_internalType = MouseEventType::Drag;
+        evt.m_eventX = float(diffX);
+        evt.m_eventY = float(diffY);
+        CallMouseEventFunction(evt);
+      }
+
+      m_prevCursorX = currCursorX;
+      m_prevCursorY = currCursorY;
+    }
+
     CallUpdateFunction();
     glfwPollEvents();
   }
@@ -58,6 +85,22 @@ void GLFWWindow::StartListening() {
 
 GLFWwindow* GLFWWindow::GetGLFWHandle() const {
   return p_window;
+}
+
+void GLFWWindow::MouseEventCallback(GLFWwindow* window, int button, int action, int mods) {
+  UNUSED(mods);
+
+  GLFWWindow* wrapper = reinterpret_cast<GLFWWindow*>(glfwGetWindowUserPointer(window)); // NOLINT
+
+  if (button == GLFW_MOUSE_BUTTON_LEFT) {
+    if (GLFW_PRESS == action) {
+      wrapper->m_mouseLeftDown = true;
+      glfwGetCursorPos(window, &(wrapper->m_prevCursorX), &(wrapper->m_prevCursorY));
+    }
+    else if (GLFW_RELEASE == action) {
+      wrapper->m_mouseLeftDown = false;
+    }
+  }
 }
 
 } // namespace Azura

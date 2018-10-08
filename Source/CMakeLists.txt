@@ -21,6 +21,7 @@ add_subdirectory(Azura)
 add_subdirectory(Samples)
 add_subdirectory(Log)
 add_subdirectory(Math)
+add_subdirectory(Camera)
 
 if(DEFINED FORCE_INCLUDE_SUB_DIRECTORIES)
 	foreach(dir ${FORCE_INCLUDE_SUB_DIRECTORIES})

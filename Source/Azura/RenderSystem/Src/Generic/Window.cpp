@@ -3,14 +3,19 @@
 
 namespace Azura {
 Window::Window(String title, const U32 width, const U32 height)
-    : m_width(width),
-      m_height(height),
-      m_title(std::move(title)),
-
-      p_windowResource(nullptr) {}
+  : log_Window(std::move(Log("Window"))),
+    m_width(width),
+    m_height(height),
+    m_title(std::move(title)),
+    p_windowResource(nullptr) {
+}
 
 void Window::SetUpdateCallback(std::function<void()> eventUpdate) {
   p_updateFunc = eventUpdate;
+}
+
+void Window::SetMouseEventCallback(std::function<void(MouseEvent)> eventFunc) {
+  p_mouseEventFunc = eventFunc;
 }
 
 ViewportDimensions Window::GetViewport() const {
@@ -26,10 +31,10 @@ ViewportDimensions Window::GetViewport() const {
 
 SwapChainRequirements Window::GetSwapChainRequirements() const {
   SwapChainRequirements requirement;
-  requirement.m_colorSpace = ColorSpace::SRGB;
-  requirement.m_format = RawStorageFormat::B8G8R8A8_UNORM;
-  requirement.m_depthFormat = RawStorageFormat::D32_FLOAT;
-  requirement.m_extent = Bounds2D(m_width, m_height);
+  requirement.m_colorSpace     = ColorSpace::SRGB;
+  requirement.m_format         = RawStorageFormat::B8G8R8A8_UNORM;
+  requirement.m_depthFormat    = RawStorageFormat::D32_FLOAT;
+  requirement.m_extent         = Bounds2D(m_width, m_height);
   requirement.m_framesInFlight = 2u;
 
   return requirement;
@@ -54,4 +59,16 @@ void Window::SetHandle(void* window) {
 const char* Window::GetTitle() const {
   return m_title.c_str();
 }
-}  // namespace Azura
+
+void Window::CallUpdateFunction() const {
+  p_updateFunc();
+}
+
+void Window::CallMouseEventFunction(MouseEvent e) const {
+  if (!p_mouseEventFunc) {
+    return;
+  }
+
+  p_mouseEventFunc(e);
+}
+} // namespace Azura

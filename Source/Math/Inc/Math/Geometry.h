@@ -5,6 +5,16 @@
 namespace Azura {
 namespace Math {
 
+constexpr float PI = 3.14159265358979323846f;
+constexpr float TWO_PI = 6.28318530717958647692f;
+constexpr float INV_PI = 0.31830988618379067154f;
+constexpr float INV2_PI = 0.15915494309189533577f;
+constexpr float INV4_PI = 0.07957747154594766788f;
+constexpr float PI_OVER2 = 1.57079632679489661923f;
+constexpr float PI_OVER4 = 0.78539816339744830961f;
+constexpr float SQRT_2 = 1.41421356237309504880f;
+constexpr float ONE_MINUS_EPSILON = 0.99999994f;
+
 class Geometry
 {
 public:
@@ -32,6 +42,9 @@ public:
   virtual RawStorageFormat GetNormalFormat() const = 0;
   virtual RawStorageFormat GetIndexFormat() const = 0;
 };
+
+float ToRadians(float degrees);
+float ToAngle(float radians);
 
 } // namespace Math
 } // namespace Azura

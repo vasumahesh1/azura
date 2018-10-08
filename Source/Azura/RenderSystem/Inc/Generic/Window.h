@@ -3,45 +3,50 @@
 #include "GenericTypes.h"
 #include "Types.h"
 #include "Renderer.h"
+#include "Core/Events.h"
+#include "Log/Log.h"
 
 namespace Azura {
 class Window {
- public:
+public:
   virtual ~Window() = default;
   Window(String title, U32 width, U32 height);
   virtual const void* GetHandle() const;
 
-  Window(const Window& other)     = delete;
+  Window(const Window& other) = delete;
   Window(Window&& other) noexcept = delete;
   Window& operator=(const Window& other) = delete;
   Window& operator=(Window&& other) noexcept = delete;
 
-  virtual bool Initialize()     = 0;
+  virtual bool Initialize() = 0;
   virtual void StartListening() = 0;
   void SetUpdateCallback(std::function<void()> eventUpdate);
+  void SetMouseEventCallback(std::function<void(MouseEvent)> eventFunc);
   virtual void Destroy() = 0;
 
   ViewportDimensions GetViewport() const;
 
   SwapChainRequirements GetSwapChainRequirements() const;
 
- protected:
+protected:
   U32 GetWidth() const;
   U32 GetHeight() const;
 
   void SetHandle(void* window);
   const char* GetTitle() const;
 
-  void CallUpdateFunction() const {
-    p_updateFunc();
-  }
+  void CallUpdateFunction() const;
+  void CallMouseEventFunction(MouseEvent e) const;
 
- private:
+  Log log_Window;
+
+private:
   U32 m_width;
   U32 m_height;
   String m_title;
   void* p_windowResource;
 
   std::function<void()> p_updateFunc;
+  std::function<void(MouseEvent)> p_mouseEventFunc{nullptr};
 };
-}  // namespace Azura
+} // namespace Azura

@@ -3,6 +3,7 @@ project(Core)
 set(
   SOURCES
   "Inc/Core/RawStorageFormat.h"
+  "Inc/Core/Events.h"
   "Src/RawStorageFormat.cpp"
 )
 

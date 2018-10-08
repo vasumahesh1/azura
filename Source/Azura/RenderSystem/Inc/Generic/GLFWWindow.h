@@ -17,6 +17,13 @@ class GLFWWindow : public Window {
   GLFWwindow* GetGLFWHandle() const;
 
  private:
+  static void MouseEventCallback(GLFWwindow* window, int button, int action, int mods);
+
+  bool m_mouseLeftDown{false};
+
+  double m_prevCursorX{0};
+  double m_prevCursorY{0};
+
   GLFWwindow* p_window;
 };
 

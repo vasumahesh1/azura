@@ -25,4 +25,4 @@ AzuraAddSlangShaders(ProceduralPlanet VULKAN ${PROJECT_SHADERS})
 AzuraAddSlangShaders(ProceduralPlanet GLSL ${PROJECT_SHADERS})
 
 target_include_directories(ProceduralPlanet PUBLIC ${PROJECT_SOURCE_DIR}/Inc)
-target_link_libraries(ProceduralPlanet VulkanRenderSystem Log glfw Math)
+target_link_libraries(ProceduralPlanet Camera VulkanRenderSystem Log glfw Math)

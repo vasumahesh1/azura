@@ -51,6 +51,7 @@ AppRenderer::AppRenderer()
   : m_mainBuffer(16384),
     m_mainAllocator(m_mainBuffer, 8192),
     m_drawableAllocator(m_mainBuffer, 8192),
+    m_camera(1280, 720),
     log_AppRenderer(Log("AppRenderer")) {
 }
 
@@ -63,6 +64,11 @@ void AppRenderer::Initialize() {
   m_window->SetUpdateCallback([this]()
   {
     WindowUpdate();
+  });
+
+  m_window->SetMouseEventCallback([this](MouseEvent e)
+  {
+    m_camera.OnMouseEvent(e);
   });
 
   VERIFY_TRUE(log_AppRenderer, m_window->Initialize(), "Cannot Initialize Window");
@@ -81,11 +87,7 @@ void AppRenderer::Initialize() {
 
   UniformBufferData uboData = {};
   uboData.m_model           = Matrix4f::Identity();
-  const Matrix4f view       = Transform::LookAt(Vector3f(0.0f, 0.0f, 1.0f), shaderControls.m_eye.xyz(),
-                                                Vector3f(0.0f, 1.0f, 0.0f));
-  const Matrix4f proj = Transform::Perspective(45.0f, 16.0f / 9.0f, 0.1f, 100.0f);
-
-  uboData.m_viewProj = proj * view;
+  uboData.m_viewProj = m_camera.GetViewProjMatrix();
 
   uboData.m_modelInvTranspose = uboData.m_model.Inverse().Transpose();
 

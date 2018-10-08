@@ -8,6 +8,7 @@
 #include "Log/Log.h"
 #include "Math/Core.h"
 #include "Generic/TextureManager.h"
+#include "Camera/PolarCamera.h"
 
 namespace Azura {
 class AppRenderer {
@@ -28,6 +29,8 @@ private:
   std::unique_ptr<Renderer> m_renderer{nullptr};
   std::unique_ptr<Window> m_window{nullptr};
   std::unique_ptr<TextureManager> m_textureManager{nullptr};
+
+  PolarCamera m_camera;
 
   Log log_AppRenderer;
 };
