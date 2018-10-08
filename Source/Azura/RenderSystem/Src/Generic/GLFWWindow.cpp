@@ -29,8 +29,10 @@ void GLFWWindow::Destroy() {
 }
 
 void GLFWWindow::StartListening() {
+#ifdef BUILD_DEBUG
   int frameCount{0};
   double previousTime = glfwGetTime();
+#endif
 
   // TODO(vasumahesh1):[GAME]: Need a Performance Timer here
 
