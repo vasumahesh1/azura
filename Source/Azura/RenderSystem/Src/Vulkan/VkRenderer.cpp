@@ -185,8 +185,8 @@ void VkRenderer::Submit() {
   const auto& clearDepthStencil = GetApplicationRequirements().m_depthStencilClear;
 
   std::array<VkClearValue, 2> clearData{};
-  clearData[0].color = { clearColor[0], clearColor[1], clearColor[2], clearColor[3] };
-  clearData[1].depthStencil = {clearDepthStencil[0], U32(clearDepthStencil[1])};
+  clearData[0].color = { clearColor[0], clearColor[1], clearColor[2], clearColor[3] }; // NOLINT
+  clearData[1].depthStencil = {clearDepthStencil[0], U32(clearDepthStencil[1])}; // NOLINT
 
   Vector<VkCommandBuffer> secondaryBuffers(m_drawablePools.GetSize(), allocatorTemporary);
   for (auto& drawablePool : m_drawablePools) {

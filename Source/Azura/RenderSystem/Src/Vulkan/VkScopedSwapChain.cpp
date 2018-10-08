@@ -233,5 +233,5 @@ const VkScopedImage& VkScopedSwapChain::GetDepthImage() const {
 const Containers::Vector<VkScopedImage>& VkScopedSwapChain::GetAllImages() const {
   return m_images;
 }
-}
-}
+} // namespace Vulkan
+} // namespace Azura

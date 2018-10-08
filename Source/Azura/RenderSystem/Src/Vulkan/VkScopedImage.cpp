@@ -92,11 +92,11 @@ void VkScopedImage::TransitionLayout(VkCommandBuffer commandBuffer,
                                      ImageTransition oldTransition,
                                      ImageTransition newTransition) const {
   
-  int flagBits = VK_IMAGE_ASPECT_COLOR_BIT;
+  auto flagBits = int(VK_IMAGE_ASPECT_COLOR_BIT);
 
   if (HasDepthComponent(m_desc.m_format))
   {
-    flagBits = VK_IMAGE_ASPECT_DEPTH_BIT;
+    flagBits = int(VK_IMAGE_ASPECT_DEPTH_BIT);
 
     if (HasStencilComponent(m_desc.m_format))
     {
@@ -105,7 +105,7 @@ void VkScopedImage::TransitionLayout(VkCommandBuffer commandBuffer,
   }
 
   const VkImageSubresourceRange resourceRange = {
-    flagBits, 0, m_desc.m_mipLevels, 0, m_desc.m_arrayLayers
+    VkImageAspectFlags(flagBits), 0, m_desc.m_mipLevels, 0, m_desc.m_arrayLayers
   };
 
   VkCore::TransitionImageLayout(commandBuffer, m_image, oldTransition.m_accessMask, newTransition.m_accessMask,
@@ -118,11 +118,11 @@ void VkScopedImage::CopyFromBuffer(VkCommandBuffer commandBuffer,
                                    const TextureBufferInfo& bufferInfo,
                                    VkBuffer buffer) const {
   
-  int flagBits = VK_IMAGE_ASPECT_COLOR_BIT;
+  auto flagBits = int(VK_IMAGE_ASPECT_COLOR_BIT);
 
   if (HasDepthComponent(m_desc.m_format))
   {
-    flagBits = VK_IMAGE_ASPECT_DEPTH_BIT;
+    flagBits = int(VK_IMAGE_ASPECT_DEPTH_BIT);
 
     if (HasStencilComponent(m_desc.m_format))
     {
@@ -167,11 +167,11 @@ void VkScopedImage::CreateImageView(ImageViewType imageView) {
   VERIFY_OPT(log_VulkanRenderSystem, vkFormat, "Unknown VkFormat");
 
 
-  int flagBits = VK_IMAGE_ASPECT_COLOR_BIT;
+  auto flagBits = int(VK_IMAGE_ASPECT_COLOR_BIT);
 
   if (HasDepthComponent(m_desc.m_format))
   {
-    flagBits = VK_IMAGE_ASPECT_DEPTH_BIT;
+    flagBits = int(VK_IMAGE_ASPECT_DEPTH_BIT);
 
     if (HasStencilComponent(m_desc.m_format))
     {
