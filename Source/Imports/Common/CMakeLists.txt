@@ -22,6 +22,8 @@ endif()
 add_subdirectory(benchmark)
 AzuraSilenceClangTidy(benchmark)
 AzuraSilenceEnumGuard(benchmark)
+AzuraSilenceClangTidy(benchmark_main)
+AzuraSilenceEnumGuard(benchmark_main)
 AzuraEnableWarningsAsErrors()
 
 

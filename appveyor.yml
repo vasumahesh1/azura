@@ -40,6 +40,7 @@ build: off
 
 install:
   - ps: git submodule -q update --init --recursive
+  - ps: git submodule
   - ps: mkdir C:\azura\BuildLogs\ -ea 0 > $null
 
   # -------------------------- CACHE CHECK --------------------------

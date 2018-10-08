@@ -20,13 +20,15 @@ set(CLANG_TIDY_EXECUTABLE ${CLANG_PATH}/bin/clang-tidy.exe
     CACHE STRING ""
     FORCE)
 
+include("./Azura.Macros.cmake")
+include("./Azura.Functions.cmake")
+
 # Install GTest
 if (INCLUDE_TESTS OR PROJECT_BUILD)
   include("./GTest.cmake")
+  AzuraSilenceClangTidy(gtest)
+  AzuraSilenceClangTidy(gtest_main)
 endif()
-
-include("./Azura.Macros.cmake")
-include("./Azura.Functions.cmake")
 
 enable_testing()
 
