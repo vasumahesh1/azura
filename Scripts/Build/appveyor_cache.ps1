@@ -24,8 +24,14 @@ appveyor DownloadFile $env:CMAKE_11_4_URL -FileName cmake.zip > $null
 
 # Download Slang Compiler
 echo "Downloading Slang Compiler ..."
-appveyor DownloadFile $env:SLANG_COMPILER -FileName slang.zip > $null
+appveyor DownloadFile $env:SLANG_COMPILER_URL -FileName slang.zip > $null
 7z x slang.zip -oC:\AppveyorCache\Slang\ > $null
+
+# Download LLVM
+echo "Downloading LLVM Compiler ..."
+appveyor DownloadFile $env:LLVM_COMPILER_URL -FileName llvm.exe > $null
+echo "Installing LLVM ..."
+cmd /c "llvm.exe /S /D=C:\AppveyorCache\LLVM\ && exit" > $null
 
 # Download GLFW
 echo "Downloading GLFW ..."

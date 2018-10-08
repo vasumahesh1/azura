@@ -12,7 +12,8 @@ environment:
   GLFW_64_URL: https://github.com/glfw/glfw/releases/download/3.2.1/glfw-3.2.1.bin.WIN64.zip
   GLFW_32_URL: https://github.com/glfw/glfw/releases/download/3.2.1/glfw-3.2.1.bin.WIN32.zip
   CMAKE_11_4_URL: https://cmake.org/files/v3.11/cmake-3.11.4-win64-x64.zip
-  SLANG_COMPILER: https://github.com/shader-slang/slang/releases/download/v0.10.35/slang-0.10.35-win64.zip
+  SLANG_COMPILER_URL: https://github.com/shader-slang/slang/releases/download/v0.10.35/slang-0.10.35-win64.zip
+  LLVM_COMPILER_URL: http://releases.llvm.org/6.0.1/LLVM-6.0.1-win64.exe
 
   matrix:
     - BUILD: 'DEBUG'
