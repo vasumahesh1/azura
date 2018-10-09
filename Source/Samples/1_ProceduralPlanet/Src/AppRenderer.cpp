@@ -110,7 +110,7 @@ void AppRenderer::Initialize() {
     CreateShader(*m_renderer, "./Shaders/" + m_renderer->GetRenderingAPI() + "/Terrain.ps", log_AppRenderer);
   pixelShader->SetStage(ShaderStage::Pixel);
 
-  IcoSphere sphere(6);
+  IcoSphere sphere(7);
 
   DrawablePoolCreateInfo poolInfo(allocatorTemporary);
   poolInfo.m_byteSize        = sphere.TotalDataSize() + 0x400000;

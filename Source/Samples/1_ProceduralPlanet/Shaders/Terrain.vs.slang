@@ -153,7 +153,7 @@ void RenderPlanet(inout float4 vertexPosition, inout float4 vertexNormal, out fl
 
   const float dist = length(vertexPosition.xyz - controls.u_eye.xyz);
   const int LOD = int(8.0 * (1.0 - smoothstep(0.0, 2.5, log(dist)))) + 4;
-  const float4 noiseVector = fbmad(noiseInput, 8.0); // TODO: Put LOD
+  const float4 noiseVector = fbmad(noiseInput, LOD);
   const float noiseValue = noiseVector.x;
   const float3 derivative = noiseVector.yzw;
 
