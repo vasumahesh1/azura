@@ -9,7 +9,6 @@ Note: This is still a WIP and very much an active project.
 | ------------- |:-------------:|
 | [![Build Status: Windows](https://ci.appveyor.com/api/projects/status/github/vasumahesh1/azura)](https://ci.appveyor.com/project/vasumahesh1/azura) | Soon(tm) |
 
-
 Table of Contents
 =================
   * [Dependencies](#dependencies)
@@ -170,6 +169,12 @@ There are two important config (.ini) files that you can provide to Azura build 
     ```
     FORCE_INCLUDE_SUB_DIRECTORIES=Sandbox;MyCustomPrivateRepo
     ```
+
+Misc
+=================
+
+Some pseudo APIs I work on before implementing it on Azura:
+[Design Gist Link](https://gist.github.com/vasumahesh1/08fa44f16daba245574794e18ebd47dd)
 
 
 License

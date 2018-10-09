@@ -6,7 +6,12 @@
 #include "GenericTypes.h"
 #include "Core/RawStorageFormat.h"
 
+#include <boost/container/small_vector.hpp>
+
 namespace Azura {
+template<typename T, SizeType N>
+using SmallVector = boost::container::small_vector<T, N>;
+
 const U32 DEFAULT_FRAMES_IN_FLIGHT = 2;
 
 struct DrawablePoolCreateInfo;
@@ -34,6 +39,41 @@ struct SwapChainRequirements {
   Bounds2D m_extent{0u, 0u};
   ColorSpace m_colorSpace{};
   U32 m_framesInFlight{DEFAULT_FRAMES_IN_FLIGHT};
+};
+
+enum RenderPassId
+{
+  UNKNOWN,
+
+  GB_TARGET_1,
+  GB_TARGET_2,
+  GB_TARGET_3,
+  GB_TARGET_4,
+
+  POST_PASS_1,
+  POST_PASS_2,
+  POST_PASS_3,
+  POST_PASS_4,
+
+  PRESENT
+};
+
+struct RenderPassBufferCreateInfo
+{
+  RenderPassId m_id{UNKNOWN};
+  RawStorageFormat m_colorFormat{RawStorageFormat::UNKNOWN};
+  RawStorageFormat m_depthFormat{RawStorageFormat::UNKNOWN};
+};
+
+struct RenderPassCreateInfo
+{
+  U32 m_id{};
+
+  String m_vertexShader{};
+  String m_pixelShader{};
+
+  SmallVector<RenderPassId, 4> m_inputs{};
+  SmallVector<RenderPassId, 4> m_outputs{};
 };
 
 class Renderer {
