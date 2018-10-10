@@ -165,6 +165,7 @@ VkDrawablePool::VkDrawablePool(const DrawablePoolCreateInfo& createInfo,
     m_pipelines(allocator),
     m_pipelineLayout(pipelineLayout),
     m_pipelineFactory(device, allocatorTemporary, logger),
+    m_commandBuffers(allocator),
     m_graphicsCommandPool(graphicsCommandPool),
     m_graphicsQueue(graphicsQueue),
     m_swapChain(swapChain),
@@ -259,56 +260,61 @@ void VkDrawablePool::Submit() {
 
   m_pipelineFactory.Submit(m_renderPasses, m_pipelines);
 
-  m_commandBuffer = VkCore::CreateCommandBuffer(m_device, m_graphicsCommandPool, VK_COMMAND_BUFFER_LEVEL_SECONDARY,
-                                                log_VulkanRenderSystem);
+  m_commandBuffers.Reserve(m_renderPasses.GetSize());
+  VkCore::CreateCommandBuffers(m_device, m_graphicsCommandPool, VK_COMMAND_BUFFER_LEVEL_SECONDARY, m_commandBuffers, log_VulkanRenderSystem);
 
-  VkCommandBufferInheritanceInfo inheritanceInfo = {};
-  inheritanceInfo.sType                          = VK_STRUCTURE_TYPE_COMMAND_BUFFER_INHERITANCE_INFO;
-  inheritanceInfo.renderPass                     = m_renderPass;
-  inheritanceInfo.framebuffer                    = VK_NULL_HANDLE;
+  U32 count = 0;
+  for (const auto& renderPass : m_renderPasses) {
+    const auto& commandBuffer = m_commandBuffers[count];
+    const auto& pipeline = m_pipelines[count];
 
-  VkCore::BeginCommandBuffer(m_commandBuffer,
-                             VK_COMMAND_BUFFER_USAGE_SIMULTANEOUS_USE_BIT |
-                             VK_COMMAND_BUFFER_USAGE_RENDER_PASS_CONTINUE_BIT, inheritanceInfo, log_VulkanRenderSystem);
+    VkCommandBufferInheritanceInfo inheritanceInfo = {};
+    inheritanceInfo.sType = VK_STRUCTURE_TYPE_COMMAND_BUFFER_INHERITANCE_INFO;
+    inheritanceInfo.renderPass = renderPass.GetRenderPass();
+    inheritanceInfo.framebuffer = renderPass.GetFrameBuffer();
 
-  vkCmdBindPipeline(m_commandBuffer, VK_PIPELINE_BIND_POINT_GRAPHICS, m_pipeline.Real());
+    VkCore::BeginCommandBuffer(commandBuffer,
+      VK_COMMAND_BUFFER_USAGE_SIMULTANEOUS_USE_BIT |
+      VK_COMMAND_BUFFER_USAGE_RENDER_PASS_CONTINUE_BIT, inheritanceInfo, log_VulkanRenderSystem);
 
-  VkCore::CopyBuffer(m_device, m_graphicsQueue, m_stagingBuffer, m_buffer, m_mainBufferOffset, m_graphicsCommandPool);
+    vkCmdBindPipeline(commandBuffer, VK_PIPELINE_BIND_POINT_GRAPHICS, pipeline.Real());
 
-  SubmitTextureData();
+    VkCore::CopyBuffer(m_device, m_graphicsQueue, m_stagingBuffer, m_buffer, m_mainBufferOffset, m_graphicsCommandPool);
 
-  VkBuffer mainBuffer = m_buffer.Real();
+    SubmitTextureData();
 
-  for (auto& drawable : m_drawables) {
-    const auto& descriptorSets = drawable.GetDescriptorSet();
+    VkBuffer mainBuffer = m_buffer.Real();
 
-    const auto& vertBufferInfos = drawable.GetVertexBufferInfos();
+    for (auto& drawable : m_drawables) {
+      const auto& descriptorSets = drawable.GetDescriptorSet();
 
-    for (const auto& vertexBuffer : vertBufferInfos) {
-      VkDeviceSize offsets[] = {vertexBuffer.m_offset};
-      vkCmdBindVertexBuffers(m_commandBuffer, vertexBuffer.m_binding, 1, &mainBuffer, &offsets[0]);
-    }
+      const auto& vertBufferInfos = drawable.GetVertexBufferInfos();
 
-    const auto& instanceBufferInfos = drawable.GetInstanceBufferInfos();
+      for (const auto& vertexBuffer : vertBufferInfos) {
+        VkDeviceSize offsets[] = { vertexBuffer.m_offset };
+        vkCmdBindVertexBuffers(commandBuffer, vertexBuffer.m_binding, 1, &mainBuffer, &offsets[0]);
+      }
 
-    for (const auto& instanceBuffer : instanceBufferInfos) {
-      VkDeviceSize offsets[] = {instanceBuffer.m_offset};
-      vkCmdBindVertexBuffers(m_commandBuffer, instanceBuffer.m_binding, 1, &mainBuffer, &offsets[0]);
-    }
+      const auto& instanceBufferInfos = drawable.GetInstanceBufferInfos();
 
-    const auto& indexBufferInfo = drawable.GetIndexBufferInfo();
+      for (const auto& instanceBuffer : instanceBufferInfos) {
+        VkDeviceSize offsets[] = { instanceBuffer.m_offset };
+        vkCmdBindVertexBuffers(commandBuffer, instanceBuffer.m_binding, 1, &mainBuffer, &offsets[0]);
+      }
 
-    const auto indexType = ToVkIndexType(drawable.GetIndexType());
-    VERIFY_OPT(log_VulkanRenderSystem, indexType, "Invalid VkIndexType converted");
+      const auto& indexBufferInfo = drawable.GetIndexBufferInfo();
 
-    vkCmdBindIndexBuffer(m_commandBuffer, mainBuffer, indexBufferInfo.m_offset, indexType.value());
+      const auto indexType = ToVkIndexType(drawable.GetIndexType());
+      VERIFY_OPT(log_VulkanRenderSystem, indexType, "Invalid VkIndexType converted");
 
-    vkCmdBindDescriptorSets(m_commandBuffer, VK_PIPELINE_BIND_POINT_GRAPHICS, m_pipelineLayout, 0,
-                            descriptorSets.GetSize(), descriptorSets.Data(), 0, nullptr);
+      vkCmdBindIndexBuffer(commandBuffer, mainBuffer, indexBufferInfo.m_offset, indexType.value());
 
-    switch (GetDrawType()) {
+      vkCmdBindDescriptorSets(commandBuffer, VK_PIPELINE_BIND_POINT_GRAPHICS, m_pipelineLayout, 0,
+        descriptorSets.GetSize(), descriptorSets.Data(), 0, nullptr);
+
+      switch (GetDrawType()) {
       case DrawType::InstancedIndexed:
-        vkCmdDrawIndexed(m_commandBuffer, drawable.GetIndexCount(), drawable.GetInstanceCount(), 0, 0, 0);
+        vkCmdDrawIndexed(commandBuffer, drawable.GetIndexCount(), drawable.GetInstanceCount(), 0, 0, 0);
         break;
 
       case DrawType::InstancedIndexedIndirect:
@@ -316,10 +322,13 @@ void VkDrawablePool::Submit() {
 
       default:
         break;
+      }
     }
-  }
 
-  VkCore::EndCommandBuffer(m_commandBuffer, log_VulkanRenderSystem);
+    VkCore::EndCommandBuffer(commandBuffer, log_VulkanRenderSystem);
+
+    ++count;
+  }
 }
 
 void VkDrawablePool::AddBufferBinding(SlotID slotId, const Containers::Vector<RawStorageFormat>& strides) {
@@ -366,11 +375,11 @@ void VkDrawablePool::CleanUp() const {
     vkDestroyDescriptorSetLayout(m_device, setLayout, nullptr);
   }
 
-  vkFreeCommandBuffers(m_device, m_graphicsCommandPool, 1, &m_commandBuffer);
+  vkFreeCommandBuffers(m_device, m_graphicsCommandPool, m_commandBuffers.GetSize(), m_commandBuffers.Data());
 }
 
-const VkCommandBuffer& VkDrawablePool::GetCommandBuffer() const {
-  return m_commandBuffer;
+const VkCommandBuffer& VkDrawablePool::GetCommandBuffer(U32 idx) const {
+  return m_commandBuffers[idx];
 }
 
 void VkDrawablePool::BindVertexData(DrawableID drawableId, SlotID slot, const U8* buffer, U32 size) {

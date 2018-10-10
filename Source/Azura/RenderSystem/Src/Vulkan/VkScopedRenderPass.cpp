@@ -29,8 +29,7 @@ void VkScopedRenderPass::Create(VkDevice device,
 
   m_shaderPipelineInfos.Reserve(U32(createInfo.m_shaders.size()));
 
-  for (const auto& vkShaderId : createInfo.m_shaders)
-  {
+  for (const auto& vkShaderId : createInfo.m_shaders) {
     const auto& vkShader = allShaders[vkShaderId];
     m_shaderPipelineInfos.PushBack(vkShader.GetShaderStageInfo());
   }
@@ -98,16 +97,25 @@ void VkScopedRenderPass::Create(VkDevice device,
   renderPassInfo.pSubpasses             = &subpass;
 
   // Tell special subpass to wait for Image acquisition from semaphore
-  VkSubpassDependency dependency = {};
-  dependency.srcSubpass          = VK_SUBPASS_EXTERNAL;
-  dependency.dstSubpass          = 0;
-  dependency.srcStageMask        = VK_PIPELINE_STAGE_COLOR_ATTACHMENT_OUTPUT_BIT;
-  dependency.srcAccessMask       = 0;
-  dependency.dstStageMask        = VK_PIPELINE_STAGE_COLOR_ATTACHMENT_OUTPUT_BIT;
-  dependency.dstAccessMask       = VK_ACCESS_COLOR_ATTACHMENT_READ_BIT | VK_ACCESS_COLOR_ATTACHMENT_WRITE_BIT;
+  std::array<VkSubpassDependency, 2> dependencies = {};
 
-  renderPassInfo.dependencyCount = 1;
-  renderPassInfo.pDependencies   = &dependency;
+  dependencies[0].srcSubpass    = VK_SUBPASS_EXTERNAL;
+  dependencies[0].dstSubpass    = 0;
+  dependencies[0].srcStageMask  = VK_PIPELINE_STAGE_COLOR_ATTACHMENT_OUTPUT_BIT;
+  dependencies[0].srcAccessMask = 0;
+  dependencies[0].dstStageMask  = VK_PIPELINE_STAGE_COLOR_ATTACHMENT_OUTPUT_BIT;
+  dependencies[0].dstAccessMask = VK_ACCESS_COLOR_ATTACHMENT_READ_BIT | VK_ACCESS_COLOR_ATTACHMENT_WRITE_BIT;
+
+  dependencies[1].srcSubpass      = 0;
+  dependencies[1].dstSubpass      = VK_SUBPASS_EXTERNAL;
+  dependencies[1].srcStageMask    = VK_PIPELINE_STAGE_COLOR_ATTACHMENT_OUTPUT_BIT;
+  dependencies[1].dstStageMask    = VK_PIPELINE_STAGE_BOTTOM_OF_PIPE_BIT;
+  dependencies[1].srcAccessMask   = VK_ACCESS_COLOR_ATTACHMENT_READ_BIT | VK_ACCESS_COLOR_ATTACHMENT_WRITE_BIT;
+  dependencies[1].dstAccessMask   = VK_ACCESS_MEMORY_READ_BIT;
+  dependencies[1].dependencyFlags = VK_DEPENDENCY_BY_REGION_BIT;
+
+  renderPassInfo.dependencyCount = U32(dependencies.size());
+  renderPassInfo.pDependencies   = dependencies.data();
 
   VERIFY_VK_OP(log_VulkanRenderSystem, vkCreateRenderPass(m_device, &renderPassInfo, nullptr, &m_renderPass),
     "Failed to create render pass");

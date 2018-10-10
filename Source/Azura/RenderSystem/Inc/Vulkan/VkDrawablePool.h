@@ -84,7 +84,7 @@ public:
 
   void CleanUp() const;
 
-  const VkCommandBuffer& GetCommandBuffer() const;
+  const VkCommandBuffer& GetCommandBuffer(U32 idx) const;
 
   // Drawable Scope Binds
   void BindVertexData(DrawableID drawableId, SlotID slot, const U8* buffer, U32 size) override;
@@ -118,7 +118,7 @@ private:
   VkPipelineLayout m_pipelineLayout;
   VkPipelineFactory m_pipelineFactory;
 
-  VkCommandBuffer m_commandBuffer{};
+  Containers::Vector<VkCommandBuffer> m_commandBuffers;
   VkCommandPool m_graphicsCommandPool;
 
   VkQueue m_graphicsQueue;
