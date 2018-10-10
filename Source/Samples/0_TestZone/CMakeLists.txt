@@ -11,8 +11,8 @@ set(
 
 set(
   PROJECT_SHADERS
-    "${PROJECT_SOURCE_DIR}/Shaders/Vulkan/TestZone.vs.slang|VS"
-    "${PROJECT_SOURCE_DIR}/Shaders/Vulkan/TestZone.ps.slang|PS"
+    "${PROJECT_SOURCE_DIR}/Shaders/TestZone.vs.slang|VS"
+    "${PROJECT_SOURCE_DIR}/Shaders/TestZone.ps.slang|PS"
 )
 
 add_executable(TestZone ${SOURCES})

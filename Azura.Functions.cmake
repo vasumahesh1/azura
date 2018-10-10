@@ -32,12 +32,24 @@ function(AzuraAddSlangShaders TARGET API)
     list(GET SHADER_TUPLE 0 SHADER_INPUT_FILE)
     list(GET SHADER_TUPLE 1 SHADER_TYPE)
 
+    set(SHADER_ENTRY_POINT "main")
+
+    list(LENGTH SHADER_TUPLE TUPLE_LENGTH)
+
+    if (TUPLE_LENGTH GREATER 2)
+      list(GET SHADER_TUPLE 2 SHADER_ENTRY_POINT)
+    endif()
+
     string(TOLOWER ${SHADER_TYPE}_5_0 SLANG_PROFILE)
 
     set(OUTPUT_FILE "")
 
     get_filename_component(SHADER_FILE_NAME ${SHADER_INPUT_FILE} NAME)
     string(REGEX REPLACE "\\.[^.]*$" "" SHADER_FILE_WITHOUT_EXT ${SHADER_FILE_NAME})
+
+    string(TOLOWER ${SHADER_TYPE} SHADER_TYPE_LOWER)
+
+    set(SHADER_FILE_WITHOUT_EXT ${SHADER_FILE_WITHOUT_EXT}.${SHADER_TYPE_LOWER})
 
     if ("${API}" STREQUAL "VULKAN")
       set(OUTPUT_FILE "${PROJECT_BINARY_DIR}/Shaders/Vulkan/${SHADER_FILE_WITHOUT_EXT}.spv")
@@ -47,7 +59,7 @@ function(AzuraAddSlangShaders TARGET API)
 
     add_custom_command(OUTPUT ${OUTPUT_FILE}
                        COMMAND ${CMAKE_COMMAND} -E make_directory "${PROJECT_BINARY_DIR}/Shaders/Vulkan/"
-                       COMMAND ${SLANG_COMPILER} ${SHADER_INPUT_FILE} -profile ${SLANG_PROFILE} -entry main -o ${OUTPUT_FILE}
+                       COMMAND ${SLANG_COMPILER} ${SHADER_INPUT_FILE} -profile ${SLANG_PROFILE} -entry ${SHADER_ENTRY_POINT} -o ${OUTPUT_FILE}
                        DEPENDS ${SHADER_INPUT_FILE})
     list(APPEND SPIRV_BINARY_FILES ${OUTPUT_FILE})
   endforeach(SHADER_TUPLE_STR)
