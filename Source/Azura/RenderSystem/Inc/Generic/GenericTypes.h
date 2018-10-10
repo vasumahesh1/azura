@@ -4,26 +4,27 @@
 #include "Types.h"
 #include "Core/RawStorageFormat.h"
 
+#include <boost/container/small_vector.hpp>
 #include <boost/detail/bitmask.hpp>
 #include "Utils/Hash.h"
 
 namespace Azura {
+template <typename T, SizeType N>
+using SmallVector = boost::container::small_vector<T, N>;
+
 enum class RawStorageFormat;
 
-enum class RS
-{
+enum class RS {
   Success = 0,
   UnknownError,
 };
 
-enum class ColorSpace
-{
+enum class ColorSpace {
   SRGB,
   HDR10
 };
 
-enum class PresentModes
-{
+enum class PresentModes {
   Immediate,
   Mailbox,
   FIFO,
@@ -32,8 +33,7 @@ enum class PresentModes
   SharedContinuous
 };
 
-enum class ShaderStage : U32
-{
+enum class ShaderStage : U32 {
   All = 0x00001111,
   Vertex = 0x00000001,
   Pixel = 0x00000010,
@@ -43,20 +43,17 @@ enum class ShaderStage : U32
 
 BOOST_BITMASK(ShaderStage);
 
-enum class BufferUsage
-{
+enum class BufferUsage {
   Vertex,
   Index,
 };
 
-enum class BufferUsageRate
-{
+enum class BufferUsageRate {
   PerVertex,
   PerInstance
 };
 
-enum class PrimitiveTopology
-{
+enum class PrimitiveTopology {
   PointList,
   LineList,
   LineStrip,
@@ -70,35 +67,30 @@ enum class PrimitiveTopology
   PatchList
 };
 
-enum class CullMode
-{
+enum class CullMode {
   None,
   FrontBit,
   BackBit,
   FrontAndBack
 };
 
-enum class FrontFace
-{
+enum class FrontFace {
   CounterClockwise,
   Clockwise
 };
 
-enum class DrawType
-{
+enum class DrawType {
   InstancedIndexed,
   InstancedIndexedIndirect
 };
 
-enum class ImageType
-{
+enum class ImageType {
   Image1D,
   Image2D,
   Image3D
 };
 
-enum class ImageViewType
-{
+enum class ImageViewType {
   ImageView1D,
   ImageView1DArray,
   ImageView2D,
@@ -108,15 +100,13 @@ enum class ImageViewType
   ImageViewCubeMapArray,
 };
 
-enum class SamplerType
-{
+enum class SamplerType {
   Sampler1D,
   Sampler2D,
   Sampler3D
 };
 
-enum class DescriptorType
-{
+enum class DescriptorType {
   UniformBuffer,
   Sampler,
   SampledImage,
@@ -126,8 +116,7 @@ enum class DescriptorType
 
 const U32 MAX_DESCRIPTOR_TYPE_COUNT = 5;
 
-enum class DescriptorBinding
-{
+enum class DescriptorBinding {
   Default,
   Same
 };
@@ -139,13 +128,12 @@ struct Bounds3D {
 
   Bounds3D(U32 width, U32 height, U32 depth)
     : m_width(width),
-    m_height(height),
-    m_depth(depth) {
+      m_height(height),
+      m_depth(depth) {
 
   }
 
-  U32 GetSize() const
-  {
+  U32 GetSize() const {
     return m_width * m_height * m_depth;
   }
 };
@@ -156,7 +144,7 @@ struct Bounds2D {
 
   Bounds2D(U32 width, U32 height)
     : m_width(width),
-    m_height(height) {
+      m_height(height) {
 
   }
 };
@@ -179,8 +167,7 @@ struct ViewportDimensions {
 
 using SlotID = SizeType;
 
-constexpr SlotID GenSlot(const char* str)
-{
+constexpr SlotID GenSlot(const char* str) {
   return FNVHash(str, sizeof(str), DEFAULT_SEED, DEFAULT_PRIME);
 }
 
@@ -193,31 +180,28 @@ struct DescriptorSlotCreateInfo {
   SizeType m_key{0};
   DescriptorType m_type{DescriptorType::UniformBuffer};
   ShaderStage m_stages{ShaderStage::All};
-  DescriptorBinding m_binding{ DescriptorBinding::Default };
+  DescriptorBinding m_binding{DescriptorBinding::Default};
 };
 
-struct DescriptorSlot
-{
+struct DescriptorSlot {
   SizeType m_key{0};
   DescriptorType m_type{DescriptorType::UniformBuffer};
   ShaderStage m_stages{ShaderStage::All};
-  DescriptorBinding m_binding{ DescriptorBinding::Default };
+  DescriptorBinding m_binding{DescriptorBinding::Default};
   U32 m_setIdx{0};
   U32 m_bindIdx{0};
 };
 
-struct TextureDesc
-{
-  Bounds3D m_bounds{ 1, 1, 1 };
+struct TextureDesc {
+  Bounds3D m_bounds{1, 1, 1};
   U32 m_size{0};
   U32 m_mipLevels{1};
   U32 m_arrayLayers{1};
   ImageType m_type{ImageType::Image2D};
-  RawStorageFormat m_format{ RawStorageFormat::R8G8B8A8_UNORM };
+  RawStorageFormat m_format{RawStorageFormat::R8G8B8A8_UNORM};
 };
 
-struct SamplerDesc
-{
+struct SamplerDesc {
 };
 
 struct BufferInfo {
@@ -226,42 +210,75 @@ struct BufferInfo {
   U32 m_maxByteSize;
   U32 m_binding;
 
-  BufferInfo() : m_offset(0), m_byteSize(0), m_maxByteSize(0), m_binding(0) {}
+  BufferInfo()
+    : m_offset(0),
+      m_byteSize(0),
+      m_maxByteSize(0),
+      m_binding(0) {
+  }
 };
 
-struct TextureBufferInfo final : public BufferInfo
-{
+struct TextureBufferInfo final : public BufferInfo {
   TextureDesc m_desc;
   U32 m_set{0};
 };
 
-struct SamplerInfo
-{
+struct SamplerInfo {
   U32 m_set{0};
   U32 m_binding{0};
 };
 
-struct UniformBufferInfo final : public BufferInfo
-{
+struct UniformBufferInfo final : public BufferInfo {
   U32 m_set{0};
 };
 
-struct LayerSubresource
-{
+struct LayerSubresource {
   U32 m_layerCount{1};
   U32 m_baseLayer{0};
 };
 
-struct TextureSubresource
-{
+struct TextureSubresource {
   LayerSubresource m_layerInfo{};
   U32 m_mipLevel{0};
 };
 
-struct TextureRequirements
-{
-  U32 m_maxCount{ 0 };
-  U32 m_poolSize{ 0 };
+struct TextureRequirements {
+  U32 m_maxCount{0};
+  U32 m_poolSize{0};
 };
 
-}  // namespace Azura
+enum RenderPassId {
+  UNKNOWN,
+
+  GB_TARGET_1,
+  GB_TARGET_2,
+  GB_TARGET_3,
+  GB_TARGET_4,
+
+  POST_PASS_1,
+  POST_PASS_2,
+  POST_PASS_3,
+  POST_PASS_4,
+
+  PRESENT
+};
+
+struct RenderPassBufferCreateInfo {
+  RenderPassId m_id{UNKNOWN};
+  RawStorageFormat m_colorFormat{RawStorageFormat::UNKNOWN};
+  RawStorageFormat m_depthFormat{RawStorageFormat::UNKNOWN};
+};
+
+using ShaderPath = std::pair<String, ShaderStage>;
+
+struct PipelinePassCreateInfo {
+  U32 m_id{};
+
+  SmallVector<ShaderPath, 5> m_shaderPaths{};
+
+  SmallVector<RenderPassId, 4> m_inputs{};
+  SmallVector<RenderPassId, 4> m_outputs{};
+  SmallVector<U32, 4> m_descriptors{};
+};
+
+} // namespace Azura

@@ -6,12 +6,7 @@
 #include "GenericTypes.h"
 #include "Core/RawStorageFormat.h"
 
-#include <boost/container/small_vector.hpp>
-
 namespace Azura {
-template<typename T, SizeType N>
-using SmallVector = boost::container::small_vector<T, N>;
-
 const U32 DEFAULT_FRAMES_IN_FLIGHT = 2;
 
 struct DrawablePoolCreateInfo;
@@ -41,39 +36,19 @@ struct SwapChainRequirements {
   U32 m_framesInFlight{DEFAULT_FRAMES_IN_FLIGHT};
 };
 
-enum RenderPassId
+struct RenderPassRequirements
 {
-  UNKNOWN,
+  Containers::Vector<RenderPassBufferCreateInfo> m_renderPassBuffers;
+  Containers::Vector<PipelinePassCreateInfo> m_renderPassSequence;
 
-  GB_TARGET_1,
-  GB_TARGET_2,
-  GB_TARGET_3,
-  GB_TARGET_4,
-
-  POST_PASS_1,
-  POST_PASS_2,
-  POST_PASS_3,
-  POST_PASS_4,
-
-  PRESENT
+  explicit RenderPassRequirements(Memory::Allocator& alloc);
 };
 
-struct RenderPassBufferCreateInfo
+struct DescriptorRequirements
 {
-  RenderPassId m_id{UNKNOWN};
-  RawStorageFormat m_colorFormat{RawStorageFormat::UNKNOWN};
-  RawStorageFormat m_depthFormat{RawStorageFormat::UNKNOWN};
-};
+  Containers::Vector<DescriptorSlotCreateInfo> m_descriptorSlots;
 
-struct RenderPassCreateInfo
-{
-  U32 m_id{};
-
-  String m_vertexShader{};
-  String m_pixelShader{};
-
-  SmallVector<RenderPassId, 4> m_inputs{};
-  SmallVector<RenderPassId, 4> m_outputs{};
+  explicit DescriptorRequirements(Memory::Allocator& alloc);
 };
 
 class Renderer {

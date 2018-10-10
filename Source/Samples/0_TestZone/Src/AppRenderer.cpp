@@ -17,6 +17,9 @@ using namespace Math;       // NOLINT
 #define SAMPLER_SLOT 2
 #define BASIC_TEXTURE_SLOT 3
 
+#define GBUFFER_PASS 0
+#define SHADING_PASS 1
+
 struct Vertex {
   float m_pos[4];
   float m_col[4];
@@ -78,13 +81,58 @@ void AppRenderer::Initialize() {
   applicationRequirements.m_clearColor[0]         = 0.2f;
   applicationRequirements.m_clearColor[1]         = 0.2f;
   applicationRequirements.m_clearColor[2]         = 0.2f;
-  
+
   TextureRequirements textureRequirements = {};
-  textureRequirements.m_maxCount = 1;
-  textureRequirements.m_poolSize = 0x400000; // 4MB
+  textureRequirements.m_maxCount          = 1;
+  textureRequirements.m_poolSize          = 0x400000; // 4MB
+
+  DescriptorRequirements descriptorRequirements = DescriptorRequirements(allocatorTemporary);
+  descriptorRequirements.m_descriptorSlots      = {
+    {
+      {UBO_SLOT, DescriptorType::UniformBuffer, ShaderStage::Vertex},
+      {SAMPLER_SLOT, DescriptorType::Sampler, ShaderStage::Pixel},
+      {BASIC_TEXTURE_SLOT, DescriptorType::SampledImage, ShaderStage::Pixel, DescriptorBinding::Same}
+    },
+    allocatorTemporary
+  };
+
+  RenderPassRequirements renderPassRequirements = RenderPassRequirements(allocatorTemporary);
+  renderPassRequirements.m_renderPassBuffers    = {
+    {
+      {GB_TARGET_1, RawStorageFormat::R32G32B32A32_FLOAT},
+    },
+    allocatorTemporary
+  };
+
+  renderPassRequirements.m_renderPassSequence = {
+    {
+      {
+        GBUFFER_PASS, // ID
+        {
+          {"GBuffer.vs", ShaderStage::Vertex},
+          {"GBuffer.ps", ShaderStage::Pixel}
+        },             // SHADERS
+        {},            // INPUT BUFFERS
+        {GB_TARGET_1}, // OUTPUTS
+        {UBO_SLOT}     // DESCRIPTORS
+      },
+      {
+        SHADING_PASS,
+        {
+          {"Shading.vs", ShaderStage::Vertex},
+          {"Shading.ps", ShaderStage::Pixel}
+        },
+        {GB_TARGET_1},
+        {PRESENT}, // END OF RENDERING
+        {UBO_SLOT, SAMPLER_SLOT, BASIC_TEXTURE_SLOT}
+      }
+    },
+    allocatorTemporary
+  };
 
   m_renderer = RenderSystem::CreateRenderer(appInfo, requirements, applicationRequirements,
-                                            m_window->GetSwapChainRequirements(), m_mainAllocator, m_drawableAllocator,
+                                            m_window->GetSwapChainRequirements(), renderPassRequirements,
+                                            descriptorRequirements, m_mainAllocator, m_drawableAllocator,
                                             *m_window);
   m_renderer->SetDrawablePoolCount(1);
 
@@ -110,15 +158,6 @@ void AppRenderer::Initialize() {
   poolInfo.m_vertexDataSlots      = {
     {
       {VERTEX_SLOT, BufferUsageRate::PerVertex}
-    },
-    allocatorTemporary
-  };
-
-  poolInfo.m_descriptorSlots = {
-    {
-      {UBO_SLOT, DescriptorType::UniformBuffer, ShaderStage::Vertex},
-      {SAMPLER_SLOT, DescriptorType::Sampler, ShaderStage::Pixel},
-      {BASIC_TEXTURE_SLOT, DescriptorType::SampledImage, ShaderStage::Pixel, DescriptorBinding::Same}
     },
     allocatorTemporary
   };

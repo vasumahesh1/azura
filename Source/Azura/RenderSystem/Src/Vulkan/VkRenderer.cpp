@@ -17,6 +17,8 @@ VkRenderer::VkRenderer(const ApplicationInfo& appInfo,
                        const DeviceRequirements& deviceRequirements,
                        const ApplicationRequirements& appRequirements,
                        const SwapChainRequirements& swapChainRequirement,
+                       const RenderPassRequirements& renderPassRequirements,
+                       const DescriptorRequirements& descriptorRequirements,
                        Memory::Allocator& mainAllocator,
                        Memory::Allocator& drawAllocator,
                        Window& window)
@@ -65,18 +67,19 @@ VkRenderer::VkRenderer(const ApplicationInfo& appInfo,
   }
 
   m_graphicsCommandPool = VkCore::CreateCommandPool(m_device, m_queueIndices.m_graphicsFamily, 0,
-    log_VulkanRenderSystem);
+                                                    log_VulkanRenderSystem);
 
   if (m_queueIndices.m_isTransferQueueRequired) {
     m_transferCommandPool =
       VkCore::CreateCommandPool(m_device, m_queueIndices.m_transferFamily, VK_COMMAND_POOL_CREATE_TRANSIENT_BIT,
-        log_VulkanRenderSystem);
+                                log_VulkanRenderSystem);
   }
 
   VkPhysicalDeviceMemoryProperties memProperties;
   vkGetPhysicalDeviceMemoryProperties(m_physicalDevice, &memProperties);
 
-  m_swapChain.Create(m_device, m_physicalDevice, m_graphicsQueue, m_graphicsCommandPool, m_surface, m_queueIndices, swapChainDeviceSupport, swapChainRequirement, memProperties);
+  m_swapChain.Create(m_device, m_physicalDevice, m_graphicsQueue, m_graphicsCommandPool, m_surface, m_queueIndices,
+                     swapChainDeviceSupport, swapChainRequirement, memProperties);
 
   // TODO(vasumahesh1):[RENDER PASS]: Needs Changes
   m_renderPass = VkCore::CreateRenderPass(m_device, m_swapChain, log_VulkanRenderSystem);
@@ -181,12 +184,12 @@ void VkRenderer::Submit() {
   VkCore::CreateCommandBuffers(m_device, m_graphicsCommandPool, VK_COMMAND_BUFFER_LEVEL_PRIMARY,
                                m_primaryCommandBuffers, log_VulkanRenderSystem);
 
-  const auto& clearColor = GetApplicationRequirements().m_clearColor;
+  const auto& clearColor        = GetApplicationRequirements().m_clearColor;
   const auto& clearDepthStencil = GetApplicationRequirements().m_depthStencilClear;
 
   std::array<VkClearValue, 2> clearData{};
-  clearData[0].color = { clearColor[0], clearColor[1], clearColor[2], clearColor[3] }; // NOLINT
-  clearData[1].depthStencil = {clearDepthStencil[0], U32(clearDepthStencil[1])}; // NOLINT
+  clearData[0].color        = {clearColor[0], clearColor[1], clearColor[2], clearColor[3]}; // NOLINT
+  clearData[1].depthStencil = {clearDepthStencil[0], U32(clearDepthStencil[1])};            // NOLINT
 
   Vector<VkCommandBuffer> secondaryBuffers(m_drawablePools.GetSize(), allocatorTemporary);
   for (auto& drawablePool : m_drawablePools) {

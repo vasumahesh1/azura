@@ -71,8 +71,6 @@ struct DrawablePoolCreateInfo {
 
   Containers::Vector<VertexSlot> m_vertexDataSlots;
 
-  Containers::Vector<DescriptorSlotCreateInfo> m_descriptorSlots;
-
   ~DrawablePoolCreateInfo() = default;
 
   DrawablePoolCreateInfo(const DrawablePoolCreateInfo& other) = delete;

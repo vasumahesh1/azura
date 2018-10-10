@@ -4,6 +4,14 @@
 
 namespace Azura {
 
+RenderPassRequirements::RenderPassRequirements(Memory::Allocator& alloc)
+  : m_renderPassBuffers(alloc),
+    m_renderPassSequence(alloc) {
+}
+
+DescriptorRequirements::DescriptorRequirements(Memory::Allocator& alloc) : m_descriptorSlots(alloc) {
+}
+
 Renderer::Renderer(ApplicationInfo appInfo,
                    const DeviceRequirements& deviceRequirements,
                    ApplicationRequirements appRequirements,

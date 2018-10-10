@@ -9,10 +9,12 @@ std::unique_ptr<Renderer> RenderSystem::CreateRenderer(const ApplicationInfo& ap
                                                        const DeviceRequirements& deviceRequirements,
                                                        const ApplicationRequirements& appRequirements,
                                                        const SwapChainRequirements& swapChainRequirement,
+                                                       const RenderPassRequirements& renderPassRequirements,
+                                                       const DescriptorRequirements& descriptorRequirements,
                                                        Memory::Allocator& mainAllocator,
                                                        Memory::Allocator& drawAllocator,
                                                        Window& window) {
-  return std::make_unique<Vulkan::VkRenderer>(appInfo, deviceRequirements, appRequirements, swapChainRequirement, mainAllocator,
+  return std::make_unique<Vulkan::VkRenderer>(appInfo, deviceRequirements, appRequirements, swapChainRequirement, renderPassRequirements, descriptorRequirements, mainAllocator,
                                               drawAllocator, window);
 }
 

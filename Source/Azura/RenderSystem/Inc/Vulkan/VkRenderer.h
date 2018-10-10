@@ -22,17 +22,19 @@ namespace Azura {
 namespace Vulkan {
 
 class VkRenderer : public Renderer {
- public:
+public:
   VkRenderer(const ApplicationInfo& appInfo,
              const DeviceRequirements& deviceRequirements,
              const ApplicationRequirements& appRequirements,
              const SwapChainRequirements& swapChainRequirement,
+             const RenderPassRequirements& renderPassRequirements,
+             const DescriptorRequirements& descriptorRequirements,
              Memory::Allocator& mainAllocator,
              Memory::Allocator& drawAllocator,
              Window& window);
   ~VkRenderer();
 
-  VkRenderer(const VkRenderer& other)     = delete;
+  VkRenderer(const VkRenderer& other) = delete;
   VkRenderer(VkRenderer&& other) noexcept = delete;
   VkRenderer& operator=(const VkRenderer& other) = delete;
   VkRenderer& operator=(VkRenderer&& other) noexcept = delete;
@@ -47,7 +49,7 @@ class VkRenderer : public Renderer {
 
   void SnapshotFrame(const String& exportPath) const override;
 
- private:
+private:
   Log log_VulkanRenderSystem;
 
   Window& m_window;
@@ -85,5 +87,5 @@ class VkRenderer : public Renderer {
 
   VkScopedImage m_depthTexture;
 };
-}  // namespace Vulkan
-}  // namespace Azura
+} // namespace Vulkan
+} // namespace Azura
