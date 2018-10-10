@@ -2,6 +2,10 @@ version: "{build}"
 
 image: Visual Studio 2017
 
+branches:
+  only:
+    - master
+
 clone_folder: c:\azura
 
 environment:
