@@ -13,10 +13,17 @@ class VkScopedRenderPass {
 public:
   VkScopedRenderPass(Memory::Allocator& mainAllocator, Log logger);
 
-  void Create(VkDevice device, const PipelinePassCreateInfo& createInfo, const Containers::Vector<RenderPassBufferCreateInfo>& pipelineBuffers, const Containers::Vector<VkScopedImage>& pipelineBufferImages, const VkScopedSwapChain& swapChain);
+  void Create(VkDevice device,
+              const PipelinePassCreateInfo& createInfo,
+              const Containers::Vector<RenderTargetCreateInfo>& pipelineBuffers,
+              const Containers::Vector<VkScopedImage>& pipelineBufferImages,
+              const Containers::Vector<VkShader>& allShaders,
+              const VkScopedSwapChain& swapChain);
 
   VkRenderPass GetRenderPass() const;
   VkFramebuffer GetFrameBuffer() const;
+
+  const Containers::Vector<VkPipelineShaderStageCreateInfo>& GetShaderStageInfo() const;
 
   void CleanUp() const;
 
@@ -27,7 +34,7 @@ private:
   VkFramebuffer m_frameBuffer;
 
   VkRenderPass m_renderPass{};
-  Containers::Vector<int> m_shaders;
+  Containers::Vector<VkPipelineShaderStageCreateInfo> m_shaderPipelineInfos;
 };
 
 } // namespace Vulkan

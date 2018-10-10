@@ -5,6 +5,7 @@
 #include "Containers/Vector.h"
 #include "Generic/GenericTypes.h"
 #include "Vulkan/VkScopedSwapChain.h"
+#include "Vulkan/VkScopedRenderPass.h"
 #include "Log/Log.h"
 
 namespace Azura {
@@ -24,8 +25,6 @@ class VkPipelineFactory {
  public:
   VkPipelineFactory(VkDevice device, Memory::Allocator& allocator, Log logger);
 
-  VkPipelineFactory& AddShaderStage(const VkPipelineShaderStageCreateInfo& shaderStageCreateInfo);
-
   VkPipelineFactory& AddBindingDescription(U32 stride, VertexSlot slot, U32 binding);
   VkPipelineFactory& AddAttributeDescription(RawStorageFormat rawFormat, U32 binding);
   VkPipelineFactory& BulkAddAttributeDescription(const Containers::Vector<RawStorageFormat>& strides, U32 binding);
@@ -36,9 +35,8 @@ class VkPipelineFactory {
   VkPipelineFactory& SetMultisampleStage();
   VkPipelineFactory& SetColorBlendStage();
   VkPipelineFactory& SetPipelineLayout(VkPipelineLayout layout);
-  VkPipelineFactory& SetRenderPass(VkRenderPass renderPass);
 
-  VkScopedPipeline Submit() const;
+  void Submit(Containers::Vector<VkScopedRenderPass> renderPasses, Containers::Vector<VkScopedPipeline>& result) const;
 
  private:
   struct BindingInfo {
@@ -50,7 +48,6 @@ class VkPipelineFactory {
   // TODO(vasumahesh1): Make our own map
   std::map<U32, BindingInfo> m_bindingMap;
 
-  Containers::Vector<VkPipelineShaderStageCreateInfo> m_stages;
   Containers::Vector<VkVertexInputBindingDescription> m_bindingInfo;
   Containers::Vector<VkVertexInputAttributeDescription> m_attributeDescription;
 
@@ -62,7 +59,6 @@ class VkPipelineFactory {
   VkPipelineColorBlendAttachmentState m_colorBlendAttachment;
 
   VkPipelineLayout m_layout{};
-  VkRenderPass m_renderPass{};
 
   VkViewport m_viewport{};
   VkRect2D m_scissors{};

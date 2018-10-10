@@ -2,9 +2,8 @@
 
 namespace Azura {
 
-Shader::Shader(U32 id, const String& filePath, const String& extension)
-  : m_id(id),
-    m_filePath(filePath + "." + extension),
+Shader::Shader(const String& filePath, const String& extension)
+  : m_filePath(filePath + "." + extension),
     m_stage(),
     m_entryPoint("main") {
 }
@@ -15,10 +14,6 @@ void Shader::SetStage(const ShaderStage stage) {
 
 void Shader::SetEntryPoint(const String& entryPoint) {
   m_entryPoint = entryPoint;
-}
-
-U32 Shader::GetId() const {
-  return m_id;
 }
 
 const String& Shader::GetFilePath() const {

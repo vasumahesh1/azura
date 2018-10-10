@@ -70,6 +70,7 @@ struct DrawablePoolCreateInfo {
   DrawType m_drawType{DrawType::InstancedIndexed};
 
   Containers::Vector<VertexSlot> m_vertexDataSlots;
+  Containers::Vector<U32> m_renderPasses;
 
   ~DrawablePoolCreateInfo() = default;
 
@@ -83,7 +84,7 @@ struct DrawablePoolCreateInfo {
 
 class DrawablePool {
 public:
-  explicit DrawablePool(const DrawablePoolCreateInfo& createInfo, Memory::Allocator& allocator);
+  explicit DrawablePool(const DrawablePoolCreateInfo& createInfo, DescriptorCount descriptorCount, Memory::Allocator& allocator);
   virtual ~DrawablePool() = default;
 
   DrawablePool(const DrawablePool& other) = delete;
@@ -125,13 +126,9 @@ protected:
 
   U32 m_numVertexSlots;
   U32 m_numInstanceSlots;
-  U32 m_numUniformSlots;
-  U32 m_numSamplerSlots;
-  U32 m_numCombinedSamplerSlots;
-  U32 m_numSampledImageSlots;
-  U32 m_numPushConstantsSlots;
 
-  Containers::Vector<DescriptorSlot> m_descriptorSlots;
+  DescriptorCount m_descriptorCount;
+
   Containers::Vector<VertexSlot> m_vertexDataSlots;
 
   Containers::Vector<TextureBufferInfo> m_textureBufferInfos;

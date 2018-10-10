@@ -21,17 +21,10 @@ void VkScopedPipeline::CleanUp(VkDevice device) const {
 // TODO(vasumahesh1): Figure out a way to adjust size properly
 VkPipelineFactory::VkPipelineFactory(VkDevice device, Memory::Allocator& allocator, Log logger)
   : m_device(device),
-    m_stages(10, allocator),
     m_bindingInfo(10, allocator),
     m_attributeDescription(10, allocator),
     m_colorBlendAttachment(),
     log_VulkanRenderSystem(std::move(logger)) {
-}
-
-VkPipelineFactory& VkPipelineFactory::AddShaderStage(const VkPipelineShaderStageCreateInfo& shaderStageCreateInfo) {
-  // TODO(vasumahesh1): Emplace?
-  m_stages.PushBack(shaderStageCreateInfo);
-  return *this;
 }
 
 VkPipelineFactory& VkPipelineFactory::AddBindingDescription(U32 stride, VertexSlot slot, U32 binding) {
@@ -185,13 +178,9 @@ VkPipelineFactory& VkPipelineFactory::SetPipelineLayout(VkPipelineLayout layout)
   return *this;
 }
 
-// TODO(vasumahesh1): Fix this, find a generic way to make a render pass
-VkPipelineFactory& VkPipelineFactory::SetRenderPass(VkRenderPass renderPass) {
-  m_renderPass = renderPass;
-  return *this;
-}
+void VkPipelineFactory::Submit(Containers::Vector<VkScopedRenderPass> renderPasses, Containers::Vector<VkScopedPipeline>& result) const {
+  result.Reserve(renderPasses.GetSize());
 
-VkScopedPipeline VkPipelineFactory::Submit() const {
   VkPipelineVertexInputStateCreateInfo vertexInputInfo = {};
   vertexInputInfo.sType                                = VK_STRUCTURE_TYPE_PIPELINE_VERTEX_INPUT_STATE_CREATE_INFO;
   vertexInputInfo.vertexBindingDescriptionCount        = m_bindingInfo.GetSize();
@@ -202,7 +191,6 @@ VkScopedPipeline VkPipelineFactory::Submit() const {
   LOG_DBG(log_VulkanRenderSystem, LOG_LEVEL, "Creating Pipeline");
   LOG_DBG(log_VulkanRenderSystem, LOG_LEVEL, "Num Attribute Descriptions: %d", m_attributeDescription.GetSize());
   LOG_DBG(log_VulkanRenderSystem, LOG_LEVEL, "Num Binding Info: %d", m_bindingInfo.GetSize());
-  LOG_DBG(log_VulkanRenderSystem, LOG_LEVEL, "Total Shader Stages: %d", m_stages.GetSize());
 
   // TODO(vasumahesh1):[DEPTH-STENCIL]: Expose this via an API
   VkPipelineDepthStencilStateCreateInfo depthStencil = {};
@@ -219,8 +207,7 @@ VkScopedPipeline VkPipelineFactory::Submit() const {
 
   VkGraphicsPipelineCreateInfo pipelineInfo = {};
   pipelineInfo.sType                        = VK_STRUCTURE_TYPE_GRAPHICS_PIPELINE_CREATE_INFO;
-  pipelineInfo.stageCount                   = m_stages.GetSize();
-  pipelineInfo.pStages                      = m_stages.Data();
+  
   pipelineInfo.pVertexInputState            = &vertexInputInfo;
   pipelineInfo.pInputAssemblyState          = &m_inputAssemblyStage;
   pipelineInfo.pViewportState               = &m_viewportStage;
@@ -230,15 +217,27 @@ VkScopedPipeline VkPipelineFactory::Submit() const {
   pipelineInfo.pColorBlendState             = &m_colorBlendStage;
   pipelineInfo.pDynamicState                = nullptr;
   pipelineInfo.layout                       = m_layout;
-  pipelineInfo.renderPass                   = m_renderPass;
+  
   pipelineInfo.subpass                      = 0;
   pipelineInfo.basePipelineHandle           = VK_NULL_HANDLE;
   pipelineInfo.basePipelineIndex            = -1;
 
-  VkPipeline pipeline;
-  VERIFY_VK_OP(log_VulkanRenderSystem, vkCreateGraphicsPipelines(m_device, VK_NULL_HANDLE, 1, &pipelineInfo, nullptr, &pipeline),
-    "Failed to create pipeline");
-  return VkScopedPipeline(pipeline);
+  for (const auto& renderPass : renderPasses)
+  {
+    const auto& stages = renderPass.GetShaderStageInfo();
+
+    pipelineInfo.stageCount                   = stages.GetSize();
+    pipelineInfo.pStages                      = stages.Data();
+    pipelineInfo.renderPass                   = renderPass.GetRenderPass();
+
+    LOG_DBG(log_VulkanRenderSystem, LOG_LEVEL, "Total Shader Stages: %d", stages.GetSize());
+
+    VkPipeline pipeline;
+    VERIFY_VK_OP(log_VulkanRenderSystem, vkCreateGraphicsPipelines(m_device, VK_NULL_HANDLE, 1, &pipelineInfo, nullptr, &pipeline),
+      "Failed to create pipeline");
+
+    result.PushBack(VkScopedPipeline(pipeline));
+  }
 }
 } // namespace Vulkan
 } // namespace Azura

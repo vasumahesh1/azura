@@ -13,15 +13,6 @@ using namespace Containers; // NOLINT
 using namespace Math;       // NOLINT
 
 #define VERTEX_SLOT 0
-#define UBO_SLOT 1
-#define SAMPLER_SLOT 2
-#define BASIC_TEXTURE_SLOT 3
-
-#define GBUFFER_PASS 0
-#define SHADING_PASS 1
-
-#define VERTEX_SHADER_ID 0
-#define PIXEL_SHADER_ID 1
 
 struct Vertex {
   float m_pos[4];
@@ -89,61 +80,35 @@ void AppRenderer::Initialize() {
   textureRequirements.m_maxCount          = 1;
   textureRequirements.m_poolSize          = 0x400000; // 4MB
 
-  DescriptorRequirements descriptorRequirements = DescriptorRequirements(allocatorTemporary);
-  descriptorRequirements.m_descriptorSlots      = {
-    {
-      {UBO_SLOT, DescriptorType::UniformBuffer, ShaderStage::Vertex},
-      {SAMPLER_SLOT, DescriptorType::Sampler, ShaderStage::Pixel},
-      {BASIC_TEXTURE_SLOT, DescriptorType::SampledImage, ShaderStage::Pixel, DescriptorBinding::Same}
-    },
-    allocatorTemporary
-  };
+  DescriptorRequirements descriptorRequirements = DescriptorRequirements(3, allocatorTemporary);
+  const U32 UBO_SLOT = descriptorRequirements.AddDescriptor({ DescriptorType::UniformBuffer, ShaderStage::Vertex });
+  const U32 SAMPLER_SLOT = descriptorRequirements.AddDescriptor({DescriptorType::Sampler, ShaderStage::Pixel});
+  const U32 BASIC_TEXTURE_SLOT = descriptorRequirements.AddDescriptor({DescriptorType::SampledImage, ShaderStage::Pixel, DescriptorBinding::Same});
 
-  RenderPassRequirements renderPassRequirements = RenderPassRequirements(allocatorTemporary);
-  renderPassRequirements.m_renderPassBuffers    = {
-    {
-      {GB_TARGET_1, RawStorageFormat::R32G32B32A32_FLOAT},
-    },
-    allocatorTemporary
-  };
+  ShaderRequirements shaderRequirements = ShaderRequirements(2, allocatorTemporary);
+  const U32 VERTEX_SHADER_ID = shaderRequirements.AddShader({ ShaderStage::Vertex, "TestZone.vs", AssetLocation::Shaders });
+  const U32 PIXEL_SHADER_ID = shaderRequirements.AddShader({ ShaderStage::Pixel, "TestZone.ps", AssetLocation::Shaders });
 
-  renderPassRequirements.m_shaders = {
-    {
-      {VERTEX_SHADER_ID, ShaderStage::Vertex, "TestZone.vs", AssetLocation::Shaders},
-      {PIXEL_SHADER_ID, ShaderStage::Pixel, "TestZone.ps", AssetLocation::Shaders}
-    },
-    allocatorTemporary
-  };
+  RenderPassRequirements renderPassRequirements = RenderPassRequirements(1, 2, allocatorTemporary);
+  const U32 GB_TARGET_1 = renderPassRequirements.AddTarget({RawStorageFormat::R32G32B32A32_FLOAT});
 
-  renderPassRequirements.m_renderPassSequence = {
-    {
-      {
-        GBUFFER_PASS, // ID
-        {
-          {"GBuffer.vs", ShaderStage::Vertex},
-          {"GBuffer.ps", ShaderStage::Pixel}
-        },             // SHADERS
-        {},            // INPUT BUFFERS
-        {GB_TARGET_1}, // OUTPUTS
-        {UBO_SLOT}     // DESCRIPTORS
-      },
-      {
-        SHADING_PASS,
-        {
-          {"Shading.vs", ShaderStage::Vertex},
-          {"Shading.ps", ShaderStage::Pixel}
-        },
-        {GB_TARGET_1},
-        {PRESENT}, // END OF RENDERING
-        {UBO_SLOT, SAMPLER_SLOT, BASIC_TEXTURE_SLOT}
-      }
-    },
-    allocatorTemporary
-  };
+  const U32 GBUFFER_PASS = renderPassRequirements.AddPass({
+    {VERTEX_SHADER_ID, PIXEL_SHADER_ID}, // SHADERS
+    {},            // INPUT TARGETS
+    {GB_TARGET_1}, // OUTPUT TARGETS
+    {UBO_SLOT}     // DESCRIPTORS
+  });
+
+  const U32 SHADING_PASS = renderPassRequirements.AddPass({
+    {VERTEX_SHADER_ID, PIXEL_SHADER_ID},
+    {GB_TARGET_1},
+    {PRESENT_TARGET}, // END OF RENDERING
+    {UBO_SLOT, SAMPLER_SLOT, BASIC_TEXTURE_SLOT}
+  });
 
   m_renderer = RenderSystem::CreateRenderer(appInfo, requirements, applicationRequirements,
                                             m_window->GetSwapChainRequirements(), renderPassRequirements,
-                                            descriptorRequirements, m_mainAllocator, m_drawableAllocator,
+                                            descriptorRequirements, shaderRequirements, m_mainAllocator, m_drawableAllocator,
                                             *m_window);
   m_renderer->SetDrawablePoolCount(1);
 

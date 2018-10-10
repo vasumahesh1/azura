@@ -1,16 +1,19 @@
 #pragma once
 
 #include "Containers/Vector.h"
+#include "Generic/Constants.h"
 #include "Types.h"
 #include "Core/RawStorageFormat.h"
+#include "Utils/Hash.h"
 
 #include <boost/container/small_vector.hpp>
 #include <boost/detail/bitmask.hpp>
-#include "Utils/Hash.h"
 
 namespace Azura {
 template <typename T, SizeType N>
 using SmallVector = boost::container::small_vector<T, N>;
+
+const U32 PRESENT_TARGET = 100;
 
 enum class RawStorageFormat;
 
@@ -177,7 +180,6 @@ struct VertexSlot {
 };
 
 struct DescriptorSlotCreateInfo {
-  SizeType m_key{0};
   DescriptorType m_type{DescriptorType::UniformBuffer};
   ShaderStage m_stages{ShaderStage::All};
   DescriptorBinding m_binding{DescriptorBinding::Default};
@@ -247,45 +249,87 @@ struct TextureRequirements {
   U32 m_poolSize{0};
 };
 
-enum RenderPassId {
-  UNKNOWN,
-
-  GB_TARGET_1,
-  GB_TARGET_2,
-  GB_TARGET_3,
-  GB_TARGET_4,
-
-  POST_PASS_1,
-  POST_PASS_2,
-  POST_PASS_3,
-  POST_PASS_4,
-
-  PRESENT
-};
-
-struct RenderPassBufferCreateInfo {
-  RenderPassId m_id{UNKNOWN};
-  RawStorageFormat m_format{RawStorageFormat::UNKNOWN};
-};
-
-using ShaderPath = std::pair<String, ShaderStage>;
-
-struct PipelinePassCreateInfo {
-  U32 m_id{};
-
-  SmallVector<ShaderPath, 5> m_shaderPaths{};
-
-  SmallVector<RenderPassId, 4> m_inputs{};
-  SmallVector<RenderPassId, 4> m_outputs{};
-  SmallVector<U32, 4> m_descriptors{};
-};
-
-enum class AssetLocation
-{
+enum class AssetLocation {
   Shaders,
   Textures,
   Audio,
   Meshes
+};
+
+struct DeviceRequirements {
+  bool m_discreteGPU{true};
+  bool m_transferQueue{false};
+  bool m_float64{false};
+  bool m_int64{false};
+};
+
+struct ApplicationInfo {
+  std::string m_name;
+  Version m_version;
+};
+
+const U32 DEFAULT_FRAMES_IN_FLIGHT = 2;
+
+struct ApplicationRequirements {
+  float m_clearColor[4]{0, 0, 0, 1.0f};
+  float m_depthStencilClear[2]{1.0f, 0};
+};
+
+struct SwapChainRequirements {
+  RawStorageFormat m_format{};
+  RawStorageFormat m_depthFormat{};
+  Bounds2D m_extent{0u, 0u};
+  ColorSpace m_colorSpace{};
+  U32 m_framesInFlight{DEFAULT_FRAMES_IN_FLIGHT};
+};
+
+struct ShaderCreateInfo {
+  ShaderStage m_stage;
+  String m_shaderFileName;
+  AssetLocation location;
+};
+
+struct RenderTargetCreateInfo {
+  RawStorageFormat m_format{RawStorageFormat::UNKNOWN};
+};
+
+struct PipelinePassCreateInfo {
+  SmallVector<U32, 5> m_shaders{};
+
+  SmallVector<U32, 4> m_inputs{};
+  SmallVector<U32, 4> m_outputs{};
+  SmallVector<U32, 4> m_descriptors{};
+};
+
+struct DescriptorRequirements {
+  DescriptorRequirements(U32 numDescriptors, Memory::Allocator& alloc);
+  U32 AddDescriptor(const DescriptorSlotCreateInfo& info);
+
+  Containers::Vector<DescriptorSlotCreateInfo> m_descriptorSlots;
+};
+
+struct ShaderRequirements {
+  ShaderRequirements(U32 numShaders, Memory::Allocator& allocator);
+  U32 AddShader(const ShaderCreateInfo& info);
+
+  Containers::Vector<ShaderCreateInfo> m_shaders;
+};
+
+struct RenderPassRequirements {
+  RenderPassRequirements(U32 numRenderTargets, U32 numPasses, Memory::Allocator& alloc);
+  U32 AddTarget(const RenderTargetCreateInfo& info);
+  U32 AddPass(const PipelinePassCreateInfo& info);
+
+  Containers::Vector<RenderTargetCreateInfo> m_targets;
+  Containers::Vector<PipelinePassCreateInfo> m_passSequence;
+};
+
+struct DescriptorCount {
+  U32 m_numUniformSlots{0};
+  U32 m_numSamplerSlots{0};
+  U32 m_numCombinedSamplerSlots{0};
+  U32 m_numSampledImageSlots{0};
+  U32 m_numPushConstantsSlots{0};
 };
 
 } // namespace Azura

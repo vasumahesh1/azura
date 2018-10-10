@@ -85,20 +85,15 @@ const BufferInfo& Drawable::GetIndexBufferInfo() const {
 
 DrawablePoolCreateInfo::DrawablePoolCreateInfo(Memory::Allocator& alloc)
   : m_vertexDataSlots(alloc),
-    m_descriptorSlots(alloc) {
+    m_renderPasses(alloc) {
 }
 
-DrawablePool::DrawablePool(const DrawablePoolCreateInfo& createInfo, Memory::Allocator& allocator)
+DrawablePool::DrawablePool(const DrawablePoolCreateInfo& createInfo, DescriptorCount descriptorCount, Memory::Allocator& allocator)
   : m_numVertexSlots(std::count_if(createInfo.m_vertexDataSlots.Begin(), createInfo.m_vertexDataSlots.End(),
                                    IsPerVertexSlot)),
     m_numInstanceSlots(std::count_if(createInfo.m_vertexDataSlots.Begin(), createInfo.m_vertexDataSlots.End(),
                                      IsPerInstanceSlot)),
-    m_numUniformSlots(0),
-    m_numSamplerSlots(0),
-    m_numCombinedSamplerSlots(0),
-    m_numSampledImageSlots(0),
-    m_numPushConstantsSlots(0),
-    m_descriptorSlots(createInfo.m_descriptorSlots.GetSize(), allocator),
+    m_descriptorCount(descriptorCount),
     m_vertexDataSlots(createInfo.m_vertexDataSlots, allocator),
     m_textureBufferInfos(allocator),
     m_samplerInfos(allocator),
@@ -107,54 +102,8 @@ DrawablePool::DrawablePool(const DrawablePoolCreateInfo& createInfo, Memory::All
     m_drawType(createInfo.m_drawType),
     m_allocator(allocator) {
 
-  int parent  = -1;
-  int bindIdx = 0;
-  for (const auto& slot : createInfo.m_descriptorSlots) {
-    if (slot.m_binding != DescriptorBinding::Same) {
-      ++parent;
-      bindIdx = 0;
-    }
-
-    DescriptorSlot setSlot = {};
-    setSlot.m_key          = slot.m_key;
-    setSlot.m_type         = slot.m_type;
-    setSlot.m_stages       = slot.m_stages;
-    setSlot.m_binding      = slot.m_binding;
-    setSlot.m_setIdx       = parent;
-    setSlot.m_bindIdx      = bindIdx;
-
-    ++bindIdx;
-
-    m_descriptorSlots.PushBack(std::move(setSlot));
-  }
-
-  for (const auto& slot : createInfo.m_descriptorSlots) {
-    switch (slot.m_type) {
-
-      case DescriptorType::UniformBuffer:
-        ++m_numUniformSlots;
-        break;
-
-      case DescriptorType::Sampler:
-        ++m_numSamplerSlots;
-        break;
-      case DescriptorType::SampledImage:
-        ++m_numSampledImageSlots;
-        break;
-      case DescriptorType::CombinedImageSampler:
-        ++m_numCombinedSamplerSlots;
-        break;
-
-      case DescriptorType::PushConstant:
-        ++m_numPushConstantsSlots;
-        break;
-      default:
-        break;
-    }
-  }
-
-  m_textureBufferInfos.Reserve(m_numSampledImageSlots);
-  m_samplerInfos.Reserve(m_numSamplerSlots);
+  m_textureBufferInfos.Reserve(m_descriptorCount.m_numSampledImageSlots);
+  m_samplerInfos.Reserve(m_descriptorCount.m_numSamplerSlots);
 }
 
 void DrawablePool::BindVertexData(DrawableID drawableId, SlotID slot, const Containers::Vector<U8>& buffer) {
@@ -197,18 +146,4 @@ int DrawablePool::GetVertexSlotIndex(SlotID id) const {
 
   return it - m_vertexDataSlots.Begin();
 }
-
-int DrawablePool::GetDescriptorSlotIndex(SlotID id) const {
-  auto it = std::find_if(m_descriptorSlots.Begin(), m_descriptorSlots.End(), [id](const DescriptorSlot& slot) -> bool
-  {
-    return slot.m_key == id;
-  });
-
-  if (it == m_descriptorSlots.End()) {
-    return -1;
-  }
-
-  return it - m_descriptorSlots.Begin();
-}
-
 } // namespace Azura

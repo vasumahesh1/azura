@@ -1305,5 +1305,4 @@ VkFormat VkCore::GetVkFormat(RawStorageFormat rawFormat, const Log& log_VulkanRe
 }
 
 } // namespace Vulkan
-} // namespace Vulkan
 } // namespace Azura

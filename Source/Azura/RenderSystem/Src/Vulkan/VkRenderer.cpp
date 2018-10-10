@@ -19,22 +19,24 @@ VkRenderer::VkRenderer(const ApplicationInfo& appInfo,
                        const SwapChainRequirements& swapChainRequirement,
                        const RenderPassRequirements& renderPassRequirements,
                        const DescriptorRequirements& descriptorRequirements,
+                       const ShaderRequirements& shaderRequirements,
                        Memory::Allocator& mainAllocator,
                        Memory::Allocator& drawAllocator,
                        Window& window)
-  : Renderer(appInfo, deviceRequirements, appRequirements, swapChainRequirement, mainAllocator),
+  : Renderer(appInfo, deviceRequirements, appRequirements, swapChainRequirement, descriptorRequirements, mainAllocator),
     log_VulkanRenderSystem(Log("VulkanRenderSystem")),
     m_window(window),
     m_drawablePools(drawAllocator),
     m_swapChain(mainAllocator, log_VulkanRenderSystem),
-    m_renderPasses(renderPassRequirements.m_renderPassSequence.GetSize(), mainAllocator),
+    m_renderPasses(renderPassRequirements.m_passSequence.GetSize(), mainAllocator),
+    m_descriptorSetLayouts(mainAllocator),
     m_frameBuffers(mainAllocator),
     m_imageAvailableSemaphores(mainAllocator),
     m_renderFinishedSemaphores(mainAllocator),
     m_inFlightFences(mainAllocator),
     m_primaryCommandBuffers(mainAllocator),
-    m_shaders(renderPassRequirements.m_shaders.GetSize(), mainAllocator),
-    m_renderPassAttachmentImages(renderPassRequirements.m_renderPassBuffers.GetSize(), mainAllocator),
+    m_shaders(shaderRequirements.m_shaders.GetSize(), mainAllocator),
+    m_renderPassAttachmentImages(renderPassRequirements.m_targets.GetSize(), mainAllocator),
     m_mainAllocator(mainAllocator),
     m_drawPoolAllocator(drawAllocator),
     m_depthTexture(log_VulkanRenderSystem) {
@@ -59,8 +61,8 @@ VkRenderer::VkRenderer(const ApplicationInfo& appInfo,
 
   vkGetPhysicalDeviceProperties(m_physicalDevice, &m_physicalDeviceProperties);
 
-  for (const auto& shaderCreateInfo : renderPassRequirements.m_shaders) {
-    AddShader(shaderCreateInfo);
+  for (const auto& shaderCreateInfo : shaderRequirements.m_shaders) {
+    VkRenderer::AddShader(shaderCreateInfo);
   }
 
   m_graphicsQueue = VkCore::GetQueueFromDevice(m_device, m_queueIndices.m_graphicsFamily);
@@ -82,13 +84,15 @@ VkRenderer::VkRenderer(const ApplicationInfo& appInfo,
                                 log_VulkanRenderSystem);
   }
 
+  CreateDescriptorInfo();
+
   VkPhysicalDeviceMemoryProperties memProperties;
   vkGetPhysicalDeviceMemoryProperties(m_physicalDevice, &memProperties);
 
   m_swapChain.Create(m_device, m_physicalDevice, m_graphicsQueue, m_graphicsCommandPool, m_surface, m_queueIndices,
                      swapChainDeviceSupport, swapChainRequirement, memProperties);
 
-  for (const auto& bufferCreateInfo : renderPassRequirements.m_renderPassBuffers) {
+  for (const auto& bufferCreateInfo : renderPassRequirements.m_targets) {
     TextureDesc desc = {};
     desc.m_format    = bufferCreateInfo.m_format;
     desc.m_bounds    = Bounds3D{m_swapChain.GetExtent().width, m_swapChain.GetExtent().height, 1};
@@ -97,9 +101,14 @@ VkRenderer::VkRenderer(const ApplicationInfo& appInfo,
                                                         memProperties, log_VulkanRenderSystem));
   }
 
-  for (const auto& passCreateInfo : renderPassRequirements.m_renderPassSequence) {
+  for (const auto& passCreateInfo : renderPassRequirements.m_passSequence) {
     VkScopedRenderPass renderPass = VkScopedRenderPass(mainAllocator, log_VulkanRenderSystem);
-    renderPass.Create(m_device, passCreateInfo, renderPassRequirements.m_renderPassBuffers, m_renderPassAttachmentImages, m_swapChain);
+    renderPass.Create(m_device,
+                      passCreateInfo,
+                      renderPassRequirements.m_targets,
+                      m_renderPassAttachmentImages,
+                      m_shaders,
+                      m_swapChain);
 
     m_renderPasses.PushBack(renderPass);
   }
@@ -147,13 +156,16 @@ VkRenderer::~VkRenderer() {
     pool.CleanUp();
   }
 
+  for (const auto& shader : m_shaders) {
+    shader.CleanUp(m_device);
+  }
+
   vkFreeCommandBuffers(m_device, m_graphicsCommandPool, m_primaryCommandBuffers.GetSize(),
                        m_primaryCommandBuffers.Data());
 
   m_swapChain.CleanUp(m_device);
 
-  for (const auto& renderPass : m_renderPasses)
-  {
+  for (const auto& renderPass : m_renderPasses) {
     renderPass.CleanUp();
   }
 
@@ -182,10 +194,13 @@ DrawablePool& VkRenderer::CreateDrawablePool(const DrawablePoolCreateInfo& creat
                                        VK_BUFFER_USAGE_INDEX_BUFFER_BIT | VK_BUFFER_USAGE_VERTEX_BUFFER_BIT |
                                        VK_BUFFER_USAGE_UNIFORM_BUFFER_BIT,
                                        VK_MEMORY_PROPERTY_HOST_VISIBLE_BIT | VK_MEMORY_PROPERTY_HOST_COHERENT_BIT,
-                                       m_graphicsCommandPool, m_renderPasses,
+                                       m_graphicsCommandPool,
+                                       m_pipelineLayout, m_descriptorPool, m_descriptorSetLayouts,
+                                       m_renderPasses,
                                        GetApplicationRequirements(), m_window.GetViewport(), memProperties,
                                        m_physicalDeviceProperties,
-                                       m_swapChain, m_drawPoolAllocator, m_mainAllocator, log_VulkanRenderSystem);
+                                       m_swapChain, m_descriptorSlots, m_descriptorCount, m_drawPoolAllocator,
+                                       m_mainAllocator, log_VulkanRenderSystem);
 
   m_drawablePools.PushBack(std::move(pool));
 
@@ -244,6 +259,97 @@ void VkRenderer::Submit() {
 
     VkCore::EndCommandBuffer(commandBuffer, log_VulkanRenderSystem);
   }
+}
+
+void VkRenderer::CreateDescriptorInfo() {
+  STACK_ALLOCATOR(Temporary, Memory::MonotonicAllocator, 4096);
+
+  Vector<int> bindingSetSizes{m_descriptorSlots.GetSize(), allocatorTemporary};
+
+  for (const auto& slot : m_descriptorSlots) {
+    if (slot.m_binding == DescriptorBinding::Same) {
+      bindingSetSizes.Last() += 1;
+      continue;
+    }
+
+    bindingSetSizes.PushBack(1);
+  }
+
+  m_descriptorSetLayouts.Reserve(bindingSetSizes.GetSize());
+
+  int offset = 0;
+  for (const auto& bindingSize : bindingSetSizes) {
+    Vector<VkDescriptorSetLayoutBinding> currentBindings(bindingSize, allocatorTemporary);
+
+    for (int idx = offset; idx < offset + bindingSize; ++idx) {
+
+      const auto& slot                  = m_descriptorSlots[idx];
+      const auto combinedShaderFlagBits = GetCombinedShaderStageFlag(slot.m_stages);
+
+      const auto bindingId = U32(idx - offset);
+
+      switch (slot.m_type) {
+        case DescriptorType::UniformBuffer:
+          VkCore::CreateUniformBufferBinding(currentBindings, bindingId, 1, combinedShaderFlagBits);
+          break;
+
+        case DescriptorType::Sampler:
+          VkCore::CreateSamplerBinding(currentBindings, bindingId, 1, combinedShaderFlagBits);
+          break;
+
+        case DescriptorType::SampledImage:
+          VkCore::CreateSampledImageBinding(currentBindings, bindingId, 1, combinedShaderFlagBits);
+          break;
+
+        case DescriptorType::PushConstant:
+        case DescriptorType::CombinedImageSampler:
+        default:
+          LOG_ERR(log_VulkanRenderSystem, LOG_LEVEL, "Unknown Descriptor Type");
+          break;
+      }
+    }
+
+    m_descriptorSetLayouts.
+      PushBack(VkCore::CreateDescriptorSetLayout(m_device, currentBindings, log_VulkanRenderSystem));
+
+    offset += bindingSize;
+  }
+
+  m_pipelineLayout = VkCore::CreatePipelineLayout(m_device, m_descriptorSetLayouts, log_VulkanRenderSystem);
+
+  Vector<VkDescriptorPoolSize> descriptorPoolSizes(MAX_DESCRIPTOR_TYPE_COUNT, allocatorTemporary);
+
+  // TODO(vasumahesh1):[DESCRIPTOR]: How to use Uniform Buffer Arrays?
+  VkDescriptorPoolSize uniformPoolSize = {};
+  uniformPoolSize.type                 = VK_DESCRIPTOR_TYPE_UNIFORM_BUFFER;
+  uniformPoolSize.descriptorCount      = m_descriptorCount.m_numUniformSlots;
+  descriptorPoolSizes.PushBack(uniformPoolSize);
+
+  if (m_descriptorCount.m_numSamplerSlots > 0) {
+    VkDescriptorPoolSize samplerPoolSize = {};
+    samplerPoolSize.type                 = VK_DESCRIPTOR_TYPE_SAMPLER;
+    samplerPoolSize.descriptorCount      = m_descriptorCount.m_numSamplerSlots;
+    descriptorPoolSizes.PushBack(samplerPoolSize);
+  }
+
+  if (m_descriptorCount.m_numSampledImageSlots > 0) {
+    VkDescriptorPoolSize sampledImagePoolSize = {};
+    sampledImagePoolSize.type                 = VK_DESCRIPTOR_TYPE_SAMPLED_IMAGE;
+    sampledImagePoolSize.descriptorCount      = m_descriptorCount.m_numSampledImageSlots;
+    descriptorPoolSizes.PushBack(sampledImagePoolSize);
+  }
+
+  // TODO(vasumahesh1):[DESCRIPTOR]: 1 Set per Drawable? Need to Check
+  VkDescriptorPoolCreateInfo poolInfo = {};
+  poolInfo.sType                      = VK_STRUCTURE_TYPE_DESCRIPTOR_POOL_CREATE_INFO;
+  poolInfo.poolSizeCount              = descriptorPoolSizes.GetSize();
+  poolInfo.pPoolSizes                 = descriptorPoolSizes.Data();
+
+  // TODO(vasumahesh1):[DESCRIPTORS]: Max Sets issue!
+  poolInfo.maxSets = m_descriptorSetLayouts.GetSize();
+
+  VERIFY_VK_OP(log_VulkanRenderSystem, vkCreateDescriptorPool(m_device, &poolInfo, nullptr, &m_descriptorPool),
+    "Unable to create Descriptor Pool");
 }
 
 void VkRenderer::RenderFrame() {
@@ -460,7 +566,7 @@ void VkRenderer::SnapshotFrame(const String& exportPath) const {
 void VkRenderer::AddShader(const ShaderCreateInfo& info) {
   // TODO(vasumahesh1):[ASSETS]: Manage assets
   const String fullPath = "Shaders/" + GetRenderingAPI() + "/" + info.m_shaderFileName;
-  m_shaders.EmplaceBack(info.m_id, m_device, fullPath, log_VulkanRenderSystem);
+  m_shaders.EmplaceBack(m_device, fullPath, log_VulkanRenderSystem);
   m_shaders.Last().SetStage(info.m_stage);
 }
 

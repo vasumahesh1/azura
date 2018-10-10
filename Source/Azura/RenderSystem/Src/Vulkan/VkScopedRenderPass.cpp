@@ -14,47 +14,40 @@ using namespace Containers; // NOLINT
 VkScopedRenderPass::VkScopedRenderPass(Memory::Allocator& mainAllocator, Log logger)
   : log_VulkanRenderSystem(std::move(logger)),
     m_frameBuffer(),
-    m_shaders(mainAllocator) {
+    m_shaderPipelineInfos(mainAllocator) {
 }
 
 void VkScopedRenderPass::Create(VkDevice device,
                                 const PipelinePassCreateInfo& createInfo,
-                                const Vector<RenderPassBufferCreateInfo>& pipelineBuffers,
+                                const Vector<RenderTargetCreateInfo>& pipelineBuffers,
                                 const Vector<VkScopedImage>& pipelineBufferImages,
+                                const Vector<VkShader>& allShaders,
                                 const VkScopedSwapChain& swapChain) {
   STACK_ALLOCATOR(Temporary, Memory::MonotonicAllocator, 2048);
 
   m_device = device;
 
-  m_shaders.Reserve(U32(createInfo.m_outputs.size()));
+  m_shaderPipelineInfos.Reserve(U32(createInfo.m_shaders.size()));
 
-  Vector<VkAttachmentReference> colorReferences{createInfo.m_outputs.size(), allocatorTemporary};
+  for (const auto& vkShaderId : createInfo.m_shaders)
+  {
+    const auto& vkShader = allShaders[vkShaderId];
+    m_shaderPipelineInfos.PushBack(vkShader.GetShaderStageInfo());
+  }
+
+  Vector<VkAttachmentReference> colorReferences{U32(createInfo.m_outputs.size()), allocatorTemporary};
   VkAttachmentReference depthReference;
-  Vector<VkAttachmentDescription> attachments{createInfo.m_outputs.size(), allocatorTemporary};
-  Vector<VkImageView> attachmentViews{createInfo.m_outputs.size(), allocatorTemporary};
+  Vector<VkAttachmentDescription> attachments{U32(createInfo.m_outputs.size()), allocatorTemporary};
+  Vector<VkImageView> attachmentViews{U32(createInfo.m_outputs.size()), allocatorTemporary};
 
   U32 refCount  = 0;
   bool hasDepth = false;
 
   for (const auto& output : createInfo.m_outputs) {
-    int selectedIdx      = -1;
-    for (int idx         = 0; idx < pipelineBuffers.GetSize(); ++idx) {
-      const auto& buffer = pipelineBuffers[idx];
-      if (buffer.m_id == output) {
-        selectedIdx = idx;
-        break;
-      }
-    }
-
-    if (selectedIdx == -1) {
-      LOG_ERR(log_VulkanRenderSystem, LOG_LEVEL, "Unknown Output in Render Pass supplied");
-      continue;
-    }
-
-    const auto& selected = pipelineBuffers[selectedIdx];
+    const auto& selected = pipelineBuffers[output];
 
     // Push View to Vector as we process output
-    attachmentViews.PushBack(pipelineBufferImages[selectedIdx].View());
+    attachmentViews.PushBack(pipelineBufferImages[output].View());
 
     const auto vkFormat = VkCore::GetVkFormat(selected.m_format, log_VulkanRenderSystem);
 
@@ -138,6 +131,10 @@ VkRenderPass VkScopedRenderPass::GetRenderPass() const {
 
 VkFramebuffer VkScopedRenderPass::GetFrameBuffer() const {
   return m_frameBuffer;
+}
+
+const Vector<VkPipelineShaderStageCreateInfo>& VkScopedRenderPass::GetShaderStageInfo() const {
+  return m_shaderPipelineInfos;
 }
 
 void VkScopedRenderPass::CleanUp() const {

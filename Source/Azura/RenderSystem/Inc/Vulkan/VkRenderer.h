@@ -30,6 +30,7 @@ public:
              const SwapChainRequirements& swapChainRequirement,
              const RenderPassRequirements& renderPassRequirements,
              const DescriptorRequirements& descriptorRequirements,
+             const ShaderRequirements& shaderRequirements,
              Memory::Allocator& mainAllocator,
              Memory::Allocator& drawAllocator,
              Window& window);
@@ -46,6 +47,7 @@ public:
   VkDevice GetDevice() const;
   String GetRenderingAPI() const override;
   void Submit() override;
+  void CreateDescriptorInfo();
   void RenderFrame() override;
 
   void SnapshotFrame(const String& exportPath) const override;
@@ -69,15 +71,16 @@ private:
   VkDevice m_device;
   VkScopedSwapChain m_swapChain;
   Containers::Vector<VkScopedRenderPass> m_renderPasses;
+  Containers::Vector<VkDescriptorSetLayout> m_descriptorSetLayouts;
 
   Containers::Vector<VkFramebuffer> m_frameBuffers;
   Containers::Vector<VkSemaphore> m_imageAvailableSemaphores;
   Containers::Vector<VkSemaphore> m_renderFinishedSemaphores;
   Containers::Vector<VkFence> m_inFlightFences;
   Containers::Vector<VkCommandBuffer> m_primaryCommandBuffers;
-  
+
   Containers::Vector<VkShader> m_shaders;
-  
+
   Containers::Vector<VkScopedImage> m_renderPassAttachmentImages;
 
   VkCommandPool m_graphicsCommandPool;
@@ -91,6 +94,9 @@ private:
 
   std::reference_wrapper<Memory::Allocator> m_mainAllocator;
   std::reference_wrapper<Memory::Allocator> m_drawPoolAllocator;
+
+  VkPipelineLayout m_pipelineLayout{};
+  VkDescriptorPool m_descriptorPool{};
 
   VkScopedImage m_depthTexture;
 };

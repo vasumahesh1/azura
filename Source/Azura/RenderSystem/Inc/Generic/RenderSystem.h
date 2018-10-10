@@ -19,6 +19,7 @@ std::unique_ptr<Renderer> CreateRenderer(const ApplicationInfo& appInfo,
                                          const SwapChainRequirements& swapChainRequirement,
                                          const RenderPassRequirements& renderPassRequirements,
                                          const DescriptorRequirements& descriptorRequirements,
+                                         const ShaderRequirements& shaderRequirements,
                                          Memory::Allocator& mainAllocator,
                                          Memory::Allocator& drawAllocator,
                                          Window& window);

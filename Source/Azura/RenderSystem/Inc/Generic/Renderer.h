@@ -7,63 +7,17 @@
 #include "Core/RawStorageFormat.h"
 
 namespace Azura {
-const U32 DEFAULT_FRAMES_IN_FLIGHT = 2;
 
 struct DrawablePoolCreateInfo;
 
-struct DeviceRequirements {
-  bool m_discreteGPU{true};
-  bool m_transferQueue{false};
-  bool m_float64{false};
-  bool m_int64{false};
-};
-
-struct ApplicationInfo {
-  std::string m_name;
-  Version m_version;
-};
-
-struct ApplicationRequirements {
-  float m_clearColor[4] {0, 0, 0, 1.0f};
-  float m_depthStencilClear[2] {1.0f, 0};
-};
-
-struct SwapChainRequirements {
-  RawStorageFormat m_format{};
-  RawStorageFormat m_depthFormat{};
-  Bounds2D m_extent{0u, 0u};
-  ColorSpace m_colorSpace{};
-  U32 m_framesInFlight{DEFAULT_FRAMES_IN_FLIGHT};
-};
-
-struct ShaderCreateInfo
-{
-  U32 m_id;
-  ShaderStage m_stage;
-  String m_shaderFileName;
-  AssetLocation location;
-};
-
-struct RenderPassRequirements
-{
-  Containers::Vector<RenderPassBufferCreateInfo> m_renderPassBuffers;
-  Containers::Vector<PipelinePassCreateInfo> m_renderPassSequence;
-  Containers::Vector<ShaderCreateInfo> m_shaders;
-
-  explicit RenderPassRequirements(Memory::Allocator& alloc);
-};
-
-struct DescriptorRequirements
-{
-  Containers::Vector<DescriptorSlotCreateInfo> m_descriptorSlots;
-
-  explicit DescriptorRequirements(Memory::Allocator& alloc);
-};
-
 class Renderer {
 public:
-  Renderer(ApplicationInfo appInfo, const DeviceRequirements& deviceRequirements,
-           ApplicationRequirements appRequirements, const SwapChainRequirements& swapChainRequirements, Memory::Allocator& allocator);
+  Renderer(ApplicationInfo appInfo,
+           const DeviceRequirements& deviceRequirements,
+           ApplicationRequirements appRequirements,
+           const SwapChainRequirements& swapChainRequirements,
+           const DescriptorRequirements& descriptorRequirements,
+           Memory::Allocator& allocator);
   virtual ~Renderer() = default;
 
   Renderer(const Renderer& other) = delete;
@@ -92,6 +46,10 @@ protected:
   Memory::Allocator& GetAllocator() const;
 
   U32 GetCurrentFrame() const;
+
+  Containers::Vector<DescriptorSlot> m_descriptorSlots;
+
+  DescriptorCount m_descriptorCount;
 
 private:
   virtual void AddShader(const ShaderCreateInfo& info) = 0;
