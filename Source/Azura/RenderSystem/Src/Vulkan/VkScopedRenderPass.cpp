@@ -1,51 +1,62 @@
+#include <utility>
 #include "Vulkan/VkScopedRenderPass.h"
 #include "Vulkan/VkTypeMapping.h"
 #include "Vulkan/VkCore.h"
 #include "Memory/MemoryFactory.h"
 #include "Vulkan/VkMacros.h"
+#include "Vulkan/VkScopedSwapChain.h"
 
 namespace Azura {
 namespace Vulkan {
 
 using namespace Containers; // NOLINT
 
-VkScopedRenderPass::VkScopedRenderPass(VkDevice device,
-                                       const PipelinePassCreateInfo& createInfo,
-                                       const Containers::Vector<RenderPassBufferCreateInfo>& pipelineBuffers,
-                                       Memory::Allocator& mainAllocator,
-                                       Log logger)
-  : log_VulkanRenderSystem(logger),
-    m_device(device),
-    m_attachments(U32(createInfo.m_outputs.size()), mainAllocator) {
+VkScopedRenderPass::VkScopedRenderPass(Memory::Allocator& mainAllocator, Log logger)
+  : log_VulkanRenderSystem(std::move(logger)),
+    m_frameBuffer(),
+    m_shaders(mainAllocator) {
+}
 
+void VkScopedRenderPass::Create(VkDevice device,
+                                const PipelinePassCreateInfo& createInfo,
+                                const Vector<RenderPassBufferCreateInfo>& pipelineBuffers,
+                                const Vector<VkScopedImage>& pipelineBufferImages,
+                                const VkScopedSwapChain& swapChain) {
   STACK_ALLOCATOR(Temporary, Memory::MonotonicAllocator, 2048);
+
+  m_device = device;
+
+  m_shaders.Reserve(U32(createInfo.m_outputs.size()));
 
   Vector<VkAttachmentReference> colorReferences{createInfo.m_outputs.size(), allocatorTemporary};
   VkAttachmentReference depthReference;
   Vector<VkAttachmentDescription> attachments{createInfo.m_outputs.size(), allocatorTemporary};
+  Vector<VkImageView> attachmentViews{createInfo.m_outputs.size(), allocatorTemporary};
 
-  U32 refCount = 0;
+  U32 refCount  = 0;
   bool hasDepth = false;
 
-  for(const auto& output : createInfo.m_outputs)
-  {
-    RenderPassBufferCreateInfo* selected = nullptr;
-    for(auto& buffer : pipelineBuffers)
-    {
-      if (buffer.m_id == output)
-      {
-        selected = &buffer;
+  for (const auto& output : createInfo.m_outputs) {
+    int selectedIdx      = -1;
+    for (int idx         = 0; idx < pipelineBuffers.GetSize(); ++idx) {
+      const auto& buffer = pipelineBuffers[idx];
+      if (buffer.m_id == output) {
+        selectedIdx = idx;
         break;
       }
     }
 
-    if (selected == nullptr)
-    {
+    if (selectedIdx == -1) {
       LOG_ERR(log_VulkanRenderSystem, LOG_LEVEL, "Unknown Output in Render Pass supplied");
       continue;
     }
 
-    const auto vkFormat = VkCore::GetVkFormat(selected->m_colorFormat, log_VulkanRenderSystem);
+    const auto& selected = pipelineBuffers[selectedIdx];
+
+    // Push View to Vector as we process output
+    attachmentViews.PushBack(pipelineBufferImages[selectedIdx].View());
+
+    const auto vkFormat = VkCore::GetVkFormat(selected.m_format, log_VulkanRenderSystem);
 
     VkAttachmentDescription attachmentDescription = {};
     attachmentDescription.format                  = vkFormat;
@@ -57,21 +68,18 @@ VkScopedRenderPass::VkScopedRenderPass(VkDevice device,
     attachmentDescription.stencilLoadOp  = VK_ATTACHMENT_LOAD_OP_DONT_CARE;
     attachmentDescription.stencilStoreOp = VK_ATTACHMENT_STORE_OP_DONT_CARE;
 
-    if (HasDepthComponent(selected->m_colorFormat) || HasStencilComponent(selected->m_colorFormat))
-    {
+    if (HasDepthComponent(selected.m_format) || HasStencilComponent(selected.m_format)) {
       // Record Depth Reference
-      depthReference = VkAttachmentReference{ refCount, VK_IMAGE_LAYOUT_DEPTH_STENCIL_ATTACHMENT_OPTIMAL };
+      depthReference = VkAttachmentReference{refCount, VK_IMAGE_LAYOUT_DEPTH_STENCIL_ATTACHMENT_OPTIMAL};
 
       hasDepth = true;
 
       // Shader Read for Color
       attachmentDescription.initialLayout = VK_IMAGE_LAYOUT_UNDEFINED;
       attachmentDescription.finalLayout   = VK_IMAGE_LAYOUT_DEPTH_STENCIL_ATTACHMENT_OPTIMAL;
-    }
-    else
-    {
+    } else {
       // Record Color Reference
-      colorReferences.PushBack({ refCount, VK_IMAGE_LAYOUT_COLOR_ATTACHMENT_OPTIMAL });
+      colorReferences.PushBack({refCount, VK_IMAGE_LAYOUT_COLOR_ATTACHMENT_OPTIMAL});
 
       // Shader Read for Color
       attachmentDescription.initialLayout = VK_IMAGE_LAYOUT_UNDEFINED;
@@ -111,6 +119,17 @@ VkScopedRenderPass::VkScopedRenderPass(VkDevice device,
   VERIFY_VK_OP(log_VulkanRenderSystem, vkCreateRenderPass(m_device, &renderPassInfo, nullptr, &m_renderPass),
     "Failed to create render pass");
 
+  VkFramebufferCreateInfo framebufferInfo = {};
+  framebufferInfo.sType                   = VK_STRUCTURE_TYPE_FRAMEBUFFER_CREATE_INFO;
+  framebufferInfo.renderPass              = m_renderPass;
+  framebufferInfo.attachmentCount         = U32(attachmentViews.GetSize());
+  framebufferInfo.pAttachments            = attachmentViews.Data();
+  framebufferInfo.width                   = swapChain.GetExtent().width;
+  framebufferInfo.height                  = swapChain.GetExtent().height;
+  framebufferInfo.layers                  = 1;
+
+  VERIFY_VK_OP(log_VulkanRenderSystem, vkCreateFramebuffer(device, &framebufferInfo, nullptr, &m_frameBuffer),
+    "Failed to create single framebuffer");
 }
 
 VkRenderPass VkScopedRenderPass::GetRenderPass() const {
@@ -119,6 +138,12 @@ VkRenderPass VkScopedRenderPass::GetRenderPass() const {
 
 VkFramebuffer VkScopedRenderPass::GetFrameBuffer() const {
   return m_frameBuffer;
+}
+
+void VkScopedRenderPass::CleanUp() const {
+  vkDestroyRenderPass(m_device, m_renderPass, nullptr);
+  vkDestroyFramebuffer(m_device, m_frameBuffer, nullptr);
+
 }
 } // namespace Vulkan
 } // namespace Azura

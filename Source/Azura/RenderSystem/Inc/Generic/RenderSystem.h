@@ -25,8 +25,6 @@ std::unique_ptr<Renderer> CreateRenderer(const ApplicationInfo& appInfo,
 
 std::unique_ptr<Window> CreateApplicationWindow(String title, U32 width, U32 height);
 
-std::unique_ptr<Shader> CreateShader(const Renderer& renderer, const String& fileName, const Log& logger);
-
 std::unique_ptr<TextureManager> CreateTextureManager(const Renderer& renderer,
                                                      const TextureRequirements& textureRequirements,
                                                      const Log& logger);

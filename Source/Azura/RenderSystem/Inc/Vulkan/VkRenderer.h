@@ -13,6 +13,7 @@
 #include "VkDrawablePool.h"
 #include "VkTextureManager.h"
 #include "VkScopedSwapChain.h"
+#include "VkScopedRenderPass.h"
 
 namespace Azura {
 class Window;
@@ -50,6 +51,8 @@ public:
   void SnapshotFrame(const String& exportPath) const override;
 
 private:
+  void AddShader(const ShaderCreateInfo& info) override;
+
   Log log_VulkanRenderSystem;
 
   Window& m_window;
@@ -65,13 +68,17 @@ private:
   VkQueueIndices m_queueIndices;
   VkDevice m_device;
   VkScopedSwapChain m_swapChain;
-  VkRenderPass m_renderPass;
+  Containers::Vector<VkScopedRenderPass> m_renderPasses;
 
   Containers::Vector<VkFramebuffer> m_frameBuffers;
   Containers::Vector<VkSemaphore> m_imageAvailableSemaphores;
   Containers::Vector<VkSemaphore> m_renderFinishedSemaphores;
   Containers::Vector<VkFence> m_inFlightFences;
   Containers::Vector<VkCommandBuffer> m_primaryCommandBuffers;
+  
+  Containers::Vector<VkShader> m_shaders;
+  
+  Containers::Vector<VkScopedImage> m_renderPassAttachmentImages;
 
   VkCommandPool m_graphicsCommandPool;
   VkCommandPool m_transferCommandPool;

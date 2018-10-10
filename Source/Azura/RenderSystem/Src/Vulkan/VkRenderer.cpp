@@ -27,11 +27,14 @@ VkRenderer::VkRenderer(const ApplicationInfo& appInfo,
     m_window(window),
     m_drawablePools(drawAllocator),
     m_swapChain(mainAllocator, log_VulkanRenderSystem),
+    m_renderPasses(renderPassRequirements.m_renderPassSequence.GetSize(), mainAllocator),
     m_frameBuffers(mainAllocator),
     m_imageAvailableSemaphores(mainAllocator),
     m_renderFinishedSemaphores(mainAllocator),
     m_inFlightFences(mainAllocator),
     m_primaryCommandBuffers(mainAllocator),
+    m_shaders(renderPassRequirements.m_shaders.GetSize(), mainAllocator),
+    m_renderPassAttachmentImages(renderPassRequirements.m_renderPassBuffers.GetSize(), mainAllocator),
     m_mainAllocator(mainAllocator),
     m_drawPoolAllocator(drawAllocator),
     m_depthTexture(log_VulkanRenderSystem) {
@@ -55,6 +58,10 @@ VkRenderer::VkRenderer(const ApplicationInfo& appInfo,
                                          log_VulkanRenderSystem);
 
   vkGetPhysicalDeviceProperties(m_physicalDevice, &m_physicalDeviceProperties);
+
+  for (const auto& shaderCreateInfo : renderPassRequirements.m_shaders) {
+    AddShader(shaderCreateInfo);
+  }
 
   m_graphicsQueue = VkCore::GetQueueFromDevice(m_device, m_queueIndices.m_graphicsFamily);
   m_presentQueue  = VkCore::GetQueueFromDevice(m_device, m_queueIndices.m_presentFamily);
@@ -81,10 +88,26 @@ VkRenderer::VkRenderer(const ApplicationInfo& appInfo,
   m_swapChain.Create(m_device, m_physicalDevice, m_graphicsQueue, m_graphicsCommandPool, m_surface, m_queueIndices,
                      swapChainDeviceSupport, swapChainRequirement, memProperties);
 
-  // TODO(vasumahesh1):[RENDER PASS]: Needs Changes
-  m_renderPass = VkCore::CreateRenderPass(m_device, m_swapChain, log_VulkanRenderSystem);
+  for (const auto& bufferCreateInfo : renderPassRequirements.m_renderPassBuffers) {
+    TextureDesc desc = {};
+    desc.m_format    = bufferCreateInfo.m_format;
+    desc.m_bounds    = Bounds3D{m_swapChain.GetExtent().width, m_swapChain.GetExtent().height, 1};
 
-  VkCore::CreateFrameBuffers(m_device, m_renderPass, m_swapChain, m_frameBuffers, log_VulkanRenderSystem);
+    m_renderPassAttachmentImages.PushBack(VkScopedImage(m_device, desc, VK_IMAGE_USAGE_COLOR_ATTACHMENT_BIT,
+                                                        memProperties, log_VulkanRenderSystem));
+  }
+
+  for (const auto& passCreateInfo : renderPassRequirements.m_renderPassSequence) {
+    VkScopedRenderPass renderPass = VkScopedRenderPass(mainAllocator, log_VulkanRenderSystem);
+    renderPass.Create(m_device, passCreateInfo, renderPassRequirements.m_renderPassBuffers, m_renderPassAttachmentImages, m_swapChain);
+
+    m_renderPasses.PushBack(renderPass);
+  }
+
+  // TODO(vasumahesh1):[RENDER PASS]: Needs Changes
+  // m_renderPasses = VkCore::CreateRenderPass(m_device, m_swapChain, log_VulkanRenderSystem);
+
+  // VkCore::CreateFrameBuffers(m_device, m_renderPasses, m_swapChain, m_frameBuffers, log_VulkanRenderSystem);
 
   const U32 syncCount = swapChainRequirement.m_framesInFlight;
 
@@ -129,7 +152,10 @@ VkRenderer::~VkRenderer() {
 
   m_swapChain.CleanUp(m_device);
 
-  vkDestroyRenderPass(m_device, m_renderPass, nullptr);
+  for (const auto& renderPass : m_renderPasses)
+  {
+    renderPass.CleanUp();
+  }
 
   vkDestroyCommandPool(m_device, m_graphicsCommandPool, nullptr);
 
@@ -156,7 +182,7 @@ DrawablePool& VkRenderer::CreateDrawablePool(const DrawablePoolCreateInfo& creat
                                        VK_BUFFER_USAGE_INDEX_BUFFER_BIT | VK_BUFFER_USAGE_VERTEX_BUFFER_BIT |
                                        VK_BUFFER_USAGE_UNIFORM_BUFFER_BIT,
                                        VK_MEMORY_PROPERTY_HOST_VISIBLE_BIT | VK_MEMORY_PROPERTY_HOST_COHERENT_BIT,
-                                       m_graphicsCommandPool, m_renderPass,
+                                       m_graphicsCommandPool, m_renderPasses,
                                        GetApplicationRequirements(), m_window.GetViewport(), memProperties,
                                        m_physicalDeviceProperties,
                                        m_swapChain, m_drawPoolAllocator, m_mainAllocator, log_VulkanRenderSystem);
@@ -203,7 +229,7 @@ void VkRenderer::Submit() {
 
     VkRenderPassBeginInfo renderPassInfo = {};
     renderPassInfo.sType                 = VK_STRUCTURE_TYPE_RENDER_PASS_BEGIN_INFO;
-    renderPassInfo.renderPass            = m_renderPass;
+    renderPassInfo.renderPass            = m_renderPasses;
     renderPassInfo.framebuffer           = m_frameBuffers[idx];
     renderPassInfo.renderArea.offset     = {0, 0};
     renderPassInfo.renderArea.extent     = m_swapChain.GetExtent();
@@ -429,6 +455,13 @@ void VkRenderer::SnapshotFrame(const String& exportPath) const {
 
   LOG_INF(log_VulkanRenderSystem, LOG_LEVEL, "Snapshot Saved: Size: %d x %d", swapChainExtent.width, swapChainExtent.
     height);
+}
+
+void VkRenderer::AddShader(const ShaderCreateInfo& info) {
+  // TODO(vasumahesh1):[ASSETS]: Manage assets
+  const String fullPath = "Shaders/" + GetRenderingAPI() + "/" + info.m_shaderFileName;
+  m_shaders.EmplaceBack(info.m_id, m_device, fullPath, log_VulkanRenderSystem);
+  m_shaders.Last().SetStage(info.m_stage);
 }
 
 } // namespace Vulkan

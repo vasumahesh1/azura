@@ -15,8 +15,8 @@ namespace {
 const String SPRIV_EXT = "spv";
 } // namespace
 
-VkShader::VkShader(VkDevice device, const String& fileName, const Log& logger) // NOLINT
-  : Shader(fileName, SPRIV_EXT),
+VkShader::VkShader(U32 id, VkDevice device, const String& fileName, const Log& logger) // NOLINT
+  : Shader(id, fileName, SPRIV_EXT),
     log_VulkanRenderSystem(logger) {
   HEAP_ALLOCATOR(Temporary, Memory::MonotonicAllocator, 0x800000);
 

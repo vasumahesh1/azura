@@ -265,8 +265,7 @@ enum RenderPassId {
 
 struct RenderPassBufferCreateInfo {
   RenderPassId m_id{UNKNOWN};
-  RawStorageFormat m_colorFormat{RawStorageFormat::UNKNOWN};
-  RawStorageFormat m_depthFormat{RawStorageFormat::UNKNOWN};
+  RawStorageFormat m_format{RawStorageFormat::UNKNOWN};
 };
 
 using ShaderPath = std::pair<String, ShaderStage>;
@@ -279,6 +278,14 @@ struct PipelinePassCreateInfo {
   SmallVector<RenderPassId, 4> m_inputs{};
   SmallVector<RenderPassId, 4> m_outputs{};
   SmallVector<U32, 4> m_descriptors{};
+};
+
+enum class AssetLocation
+{
+  Shaders,
+  Textures,
+  Audio,
+  Meshes
 };
 
 } // namespace Azura

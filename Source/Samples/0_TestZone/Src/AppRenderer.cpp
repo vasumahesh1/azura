@@ -20,6 +20,9 @@ using namespace Math;       // NOLINT
 #define GBUFFER_PASS 0
 #define SHADING_PASS 1
 
+#define VERTEX_SHADER_ID 0
+#define PIXEL_SHADER_ID 1
+
 struct Vertex {
   float m_pos[4];
   float m_col[4];
@@ -104,6 +107,14 @@ void AppRenderer::Initialize() {
     allocatorTemporary
   };
 
+  renderPassRequirements.m_shaders = {
+    {
+      {VERTEX_SHADER_ID, ShaderStage::Vertex, "TestZone.vs", AssetLocation::Shaders},
+      {PIXEL_SHADER_ID, ShaderStage::Pixel, "TestZone.ps", AssetLocation::Shaders}
+    },
+    allocatorTemporary
+  };
+
   renderPassRequirements.m_renderPassSequence = {
     {
       {
@@ -140,16 +151,6 @@ void AppRenderer::Initialize() {
 
   const U32 nocturnalTexture = m_textureManager->Load("Textures/Nocturnal.jpg");
 
-  auto vertShader = RenderSystem::CreateShader(*m_renderer,
-                                               "Shaders/" + m_renderer->GetRenderingAPI() + "/TestZone.vs",
-                                               log_AppRenderer);
-  vertShader->SetStage(ShaderStage::Vertex);
-
-  auto pixelShader = RenderSystem::CreateShader(*m_renderer,
-                                                "Shaders/" + m_renderer->GetRenderingAPI() + "/TestZone.ps",
-                                                log_AppRenderer);
-  pixelShader->SetStage(ShaderStage::Pixel);
-
   DrawablePoolCreateInfo poolInfo = {allocatorTemporary};
   poolInfo.m_byteSize             = 0x400000;
   poolInfo.m_numDrawables         = 1;
@@ -163,9 +164,6 @@ void AppRenderer::Initialize() {
   };
 
   DrawablePool& pool = m_renderer->CreateDrawablePool(poolInfo);
-
-  pool.AddShader(*vertShader);
-  pool.AddShader(*pixelShader);
 
   const Vector<RawStorageFormat> vertexStride = Vector<RawStorageFormat>({
     RawStorageFormat::R32G32B32A32_FLOAT, // Pos

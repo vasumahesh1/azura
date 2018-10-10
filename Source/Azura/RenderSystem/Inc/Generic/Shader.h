@@ -4,19 +4,22 @@
 namespace Azura {
 
 class Shader {
- public:
-  Shader(const String& filePath, const String& extension);
+public:
+  Shader(U32 id, const String& filePath, const String& extension);
   void SetStage(ShaderStage stage);
   void SetEntryPoint(const String& entryPoint);
 
- protected:
+  U32 GetId() const;
+
+protected:
   const String& GetFilePath() const;
   const String& GetShaderEntryPoint() const;
   ShaderStage GetShaderStage() const;
 
- private:
+private:
+  U32 m_id;
   const String m_filePath;
   ShaderStage m_stage;
   String m_entryPoint;
 };
-}  // namespace Azura
+} // namespace Azura

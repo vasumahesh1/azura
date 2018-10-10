@@ -3,30 +3,31 @@
 #include "Log/Log.h"
 #include "Generic/GenericTypes.h"
 #include "VkScopedImage.h"
+#include "VkShader.h"
 
 namespace Azura {
 namespace Vulkan {
+class VkScopedSwapChain;
 
 class VkScopedRenderPass {
 public:
-  VkScopedRenderPass(VkDevice device,
-                     const PipelinePassCreateInfo& createInfo,
-                     const Containers::Vector<RenderPassBufferCreateInfo>& pipelineBuffers,
-                     Memory::Allocator& mainAllocator,
-                     Log logger);
+  VkScopedRenderPass(Memory::Allocator& mainAllocator, Log logger);
+
+  void Create(VkDevice device, const PipelinePassCreateInfo& createInfo, const Containers::Vector<RenderPassBufferCreateInfo>& pipelineBuffers, const Containers::Vector<VkScopedImage>& pipelineBufferImages, const VkScopedSwapChain& swapChain);
 
   VkRenderPass GetRenderPass() const;
   VkFramebuffer GetFrameBuffer() const;
 
+  void CleanUp() const;
+
 private:
   Log log_VulkanRenderSystem;
-  VkDevice m_device;
+  VkDevice m_device{};
 
   VkFramebuffer m_frameBuffer;
-  Containers::Vector<VkScopedImage> m_attachments;
 
-  VkRenderPass m_renderPass;
-
+  VkRenderPass m_renderPass{};
+  Containers::Vector<int> m_shaders;
 };
 
 } // namespace Vulkan

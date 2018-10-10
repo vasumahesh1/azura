@@ -18,11 +18,6 @@ std::unique_ptr<Renderer> RenderSystem::CreateRenderer(const ApplicationInfo& ap
                                               drawAllocator, window);
 }
 
-std::unique_ptr<Shader> RenderSystem::CreateShader(const Renderer& renderer, const String& fileName, const Log& logger) {
-  const auto& vkRenderer = reinterpret_cast<const Vulkan::VkRenderer&>(renderer); // NOLINT(cppcoreguidelines-pro-type-reinterpret-cast)
-  return std::make_unique<Vulkan::VkShader>(vkRenderer.GetDevice(), fileName, logger);
-}
-
 std::unique_ptr<TextureManager> RenderSystem::CreateTextureManager(const Renderer& renderer, const TextureRequirements& textureRequirements, const Log& logger)
 {
   const auto& vkRenderer = reinterpret_cast<const Vulkan::VkRenderer&>(renderer); // NOLINT(cppcoreguidelines-pro-type-reinterpret-cast)

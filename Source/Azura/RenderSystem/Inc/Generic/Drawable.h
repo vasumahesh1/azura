@@ -93,8 +93,6 @@ public:
 
   virtual DrawableID CreateDrawable(const DrawableCreateInfo& createInfo) = 0;
 
-  virtual void AddShader(const Shader& shader) = 0;
-
   virtual void AddBufferBinding(SlotID slot, const Containers::Vector<RawStorageFormat>& strides) = 0;
 
   // Drawable Scope Binds

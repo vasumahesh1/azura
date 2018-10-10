@@ -14,7 +14,7 @@ namespace Vulkan {
 
 class VkShader : public Shader {
  public:
-  VkShader(VkDevice device, const String& fileName, const Log& logger);
+  VkShader(U32 id, VkDevice device, const String& fileName, const Log& logger);
   VkPipelineShaderStageCreateInfo GetShaderStageInfo() const;
 
   void CleanUp(VkDevice device) const;

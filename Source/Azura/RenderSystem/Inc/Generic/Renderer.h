@@ -36,10 +36,19 @@ struct SwapChainRequirements {
   U32 m_framesInFlight{DEFAULT_FRAMES_IN_FLIGHT};
 };
 
+struct ShaderCreateInfo
+{
+  U32 m_id;
+  ShaderStage m_stage;
+  String m_shaderFileName;
+  AssetLocation location;
+};
+
 struct RenderPassRequirements
 {
   Containers::Vector<RenderPassBufferCreateInfo> m_renderPassBuffers;
   Containers::Vector<PipelinePassCreateInfo> m_renderPassSequence;
+  Containers::Vector<ShaderCreateInfo> m_shaders;
 
   explicit RenderPassRequirements(Memory::Allocator& alloc);
 };
@@ -85,6 +94,8 @@ protected:
   U32 GetCurrentFrame() const;
 
 private:
+  virtual void AddShader(const ShaderCreateInfo& info) = 0;
+
   const ApplicationInfo m_applicationInfo;
   const DeviceRequirements m_deviceRequirements;
   const ApplicationRequirements m_appRequirements;
