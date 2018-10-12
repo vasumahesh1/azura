@@ -1003,7 +1003,7 @@ void VkCore::BeginCommandBuffer(VkCommandBuffer buffer,
 }
 
 void VkCore::EndCommandBuffer(VkCommandBuffer buffer, const Log& log_VulkanRenderSystem) {
-  VERIFY_VK_OP(log_VulkanRenderSystem, vkEndCommandBuffer(buffer), "Failed to begin recording command buffer");
+  VERIFY_VK_OP(log_VulkanRenderSystem, vkEndCommandBuffer(buffer), "Failed to end recording command buffer");
 }
 
 VkSemaphore VkCore::CreateSemaphore(VkDevice device, const Log& log_VulkanRenderSystem) {

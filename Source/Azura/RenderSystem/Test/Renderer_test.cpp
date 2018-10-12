@@ -19,30 +19,6 @@ const RawStorageFormat SWAPCHAIN_DEFAULT_FORMAT = RawStorageFormat::B8G8R8A8_UNO
 
 const U32 SWAPCHAIN_BYTE_SIZE = WINDOW_WIDTH * WINDOW_HEIGHT * GetFormatSize(SWAPCHAIN_DEFAULT_FORMAT);
 
-std::unique_ptr<Azura::Renderer> CreateDefaultRenderer(Azura::Window& window, Allocator& mainAllocator, Allocator& drawableAllocator)
-{
-  ApplicationInfo appInfo;
-  appInfo.m_name    = TEST_SUITE;
-  appInfo.m_version = Version(1, 0, 0);
-
-  DeviceRequirements requirements;
-  requirements.m_discreteGPU   = true;
-  requirements.m_float64       = false;
-  requirements.m_int64         = false;
-  requirements.m_transferQueue = false;
-
-  ApplicationRequirements applicationRequirements = {};
-  applicationRequirements.m_clearColor[0] = 0.2f;
-  applicationRequirements.m_clearColor[1] = 0.2f;
-  applicationRequirements.m_clearColor[2] = 0.2f;
-
-  std::unique_ptr<Azura::Renderer> renderer = RenderSystem::CreateRenderer(appInfo, requirements, applicationRequirements,
-    window.GetSwapChainRequirements(), mainAllocator, drawableAllocator,
-    window);
-
-  return renderer;
-}
-
 std::unique_ptr<Azura::Window> CreateDefaultWindow()
 {
   std::unique_ptr<Azura::Window> windowPtr = RenderSystem::CreateApplicationWindow(TEST_SUITE, WINDOW_WIDTH, WINDOW_HEIGHT);
@@ -69,15 +45,52 @@ bool CompareImageBytes(const String& referenceFile, const String& testFile)
 }
 
 TEST_F(RendererTest, BasicRenderTest) {
+  HEAP_ALLOCATOR(Temporary, Memory::MonotonicAllocator, 16384);
+
   HeapMemoryBuffer mainBuffer(16384);
 
   RangeAllocator mainAllocator(mainBuffer, 8192);
   RangeAllocator drawableAllocator(mainBuffer, 8192);
 
   const auto window = CreateDefaultWindow();
-  const auto renderer = CreateDefaultRenderer(*window, mainAllocator, drawableAllocator);
 
-  RenderTestCases::ExecuteBasicRenderTest(*renderer, *window, log_TestRenderer);
+  ApplicationInfo appInfo;
+  appInfo.m_name    = TEST_SUITE;
+  appInfo.m_version = Version(1, 0, 0);
+
+  DeviceRequirements requirements;
+  requirements.m_discreteGPU   = true;
+  requirements.m_float64       = false;
+  requirements.m_int64         = false;
+  requirements.m_transferQueue = false;
+
+  ApplicationRequirements applicationRequirements = {};
+  applicationRequirements.m_clearColor[0] = 0.2f;
+  applicationRequirements.m_clearColor[1] = 0.2f;
+  applicationRequirements.m_clearColor[2] = 0.2f;
+
+  DescriptorRequirements descriptorRequirements = DescriptorRequirements(3, allocatorTemporary);
+  const U32 UBO_SLOT = descriptorRequirements.AddDescriptor({ DescriptorType::UniformBuffer, ShaderStage::Vertex });
+
+  ShaderRequirements shaderRequirements = ShaderRequirements(2, allocatorTemporary);
+  const U32 VERTEX_SHADER_ID = shaderRequirements.AddShader({ ShaderStage::Vertex, "BasicRenderTest.vs", AssetLocation::Shaders });
+  const U32 PIXEL_SHADER_ID = shaderRequirements.AddShader({ ShaderStage::Pixel, "BasicRenderTest.ps", AssetLocation::Shaders });
+
+  RenderPassRequirements renderPassRequirements = RenderPassRequirements(0, 1, allocatorTemporary);
+
+  const U32 SINGLE_PASS = renderPassRequirements.AddPass({
+    PipelinePassCreateInfo::Shaders{VERTEX_SHADER_ID, PIXEL_SHADER_ID},  // SHADERS
+    PipelinePassCreateInfo::Inputs{},                                    // INPUT TARGETS
+    PipelinePassCreateInfo::Outputs{},                     // OUTPUT TARGETS
+    PipelinePassCreateInfo::Descriptors{UBO_SLOT}                        // DESCRIPTORS
+    });
+
+  std::unique_ptr<Azura::Renderer> renderer = RenderSystem::CreateRenderer(appInfo, requirements, applicationRequirements,
+    window->GetSwapChainRequirements(), renderPassRequirements,
+    descriptorRequirements, shaderRequirements, mainAllocator, drawableAllocator,
+    *window);
+
+  RenderTestCases::ExecuteBasicRenderTest(*renderer, *window, SINGLE_PASS, UBO_SLOT, log_TestRenderer);
 
   ASSERT_TRUE(CompareImageBytes("./ReferenceImages/BasicRenderTest.data", "./BasicRenderTest.data"));
 
@@ -85,15 +98,52 @@ TEST_F(RendererTest, BasicRenderTest) {
 }
 
 TEST_F(RendererTest, BasicInstancingTest) {
+  HEAP_ALLOCATOR(Temporary, Memory::MonotonicAllocator, 16384);
+
   HeapMemoryBuffer mainBuffer(16384);
 
   RangeAllocator mainAllocator(mainBuffer, 8192);
   RangeAllocator drawableAllocator(mainBuffer, 8192);
 
   const auto window = CreateDefaultWindow();
-  const auto renderer = CreateDefaultRenderer(*window, mainAllocator, drawableAllocator);
 
-  RenderTestCases::ExecuteBasicInstancingTest(*renderer, *window, log_TestRenderer);
+  ApplicationInfo appInfo;
+  appInfo.m_name    = TEST_SUITE;
+  appInfo.m_version = Version(1, 0, 0);
+
+  DeviceRequirements requirements;
+  requirements.m_discreteGPU   = true;
+  requirements.m_float64       = false;
+  requirements.m_int64         = false;
+  requirements.m_transferQueue = false;
+
+  ApplicationRequirements applicationRequirements = {};
+  applicationRequirements.m_clearColor[0] = 0.2f;
+  applicationRequirements.m_clearColor[1] = 0.2f;
+  applicationRequirements.m_clearColor[2] = 0.2f;
+
+  DescriptorRequirements descriptorRequirements = DescriptorRequirements(3, allocatorTemporary);
+  const U32 UBO_SLOT = descriptorRequirements.AddDescriptor({ DescriptorType::UniformBuffer, ShaderStage::Vertex });
+
+  ShaderRequirements shaderRequirements = ShaderRequirements(2, allocatorTemporary);
+  const U32 VERTEX_SHADER_ID = shaderRequirements.AddShader({ ShaderStage::Vertex, "BasicInstancingTest.vs", AssetLocation::Shaders });
+  const U32 PIXEL_SHADER_ID = shaderRequirements.AddShader({ ShaderStage::Pixel, "BasicInstancingTest.ps", AssetLocation::Shaders });
+
+  RenderPassRequirements renderPassRequirements = RenderPassRequirements(0, 1, allocatorTemporary);
+
+  const U32 SINGLE_PASS = renderPassRequirements.AddPass({
+    PipelinePassCreateInfo::Shaders{VERTEX_SHADER_ID, PIXEL_SHADER_ID},  // SHADERS
+    PipelinePassCreateInfo::Inputs{},                                    // INPUT TARGETS
+    PipelinePassCreateInfo::Outputs{},                     // OUTPUT TARGETS
+    PipelinePassCreateInfo::Descriptors{UBO_SLOT}                        // DESCRIPTORS
+    });
+
+  std::unique_ptr<Azura::Renderer> renderer = RenderSystem::CreateRenderer(appInfo, requirements, applicationRequirements,
+    window->GetSwapChainRequirements(), renderPassRequirements,
+    descriptorRequirements, shaderRequirements, mainAllocator, drawableAllocator,
+    *window);
+
+  RenderTestCases::ExecuteBasicInstancingTest(*renderer, *window, SINGLE_PASS, UBO_SLOT, log_TestRenderer);
 
   ASSERT_TRUE(CompareImageBytes("./ReferenceImages/BasicInstancingTest.data", "./BasicInstancingTest.data"));
 
@@ -101,15 +151,54 @@ TEST_F(RendererTest, BasicInstancingTest) {
 }
 
 TEST_F(RendererTest, BasicTextureTest) {
+  HEAP_ALLOCATOR(Temporary, Memory::MonotonicAllocator, 16384);
+
   HeapMemoryBuffer mainBuffer(16384);
 
   RangeAllocator mainAllocator(mainBuffer, 8192);
   RangeAllocator drawableAllocator(mainBuffer, 8192);
 
   const auto window = CreateDefaultWindow();
-  const auto renderer = CreateDefaultRenderer(*window, mainAllocator, drawableAllocator);
 
-  RenderTestCases::ExecuteBasicTextureTest(*renderer, *window, log_TestRenderer);
+  ApplicationInfo appInfo;
+  appInfo.m_name    = TEST_SUITE;
+  appInfo.m_version = Version(1, 0, 0);
+
+  DeviceRequirements requirements;
+  requirements.m_discreteGPU   = true;
+  requirements.m_float64       = false;
+  requirements.m_int64         = false;
+  requirements.m_transferQueue = false;
+
+  ApplicationRequirements applicationRequirements = {};
+  applicationRequirements.m_clearColor[0] = 0.2f;
+  applicationRequirements.m_clearColor[1] = 0.2f;
+  applicationRequirements.m_clearColor[2] = 0.2f;
+
+  DescriptorRequirements descriptorRequirements = DescriptorRequirements(3, allocatorTemporary);
+  const U32 UBO_SLOT = descriptorRequirements.AddDescriptor({ DescriptorType::UniformBuffer, ShaderStage::Vertex });
+  const U32 SAMPLER_SLOT = descriptorRequirements.AddDescriptor({DescriptorType::Sampler, ShaderStage::Pixel});
+  const U32 BASIC_TEXTURE_SLOT = descriptorRequirements.AddDescriptor({DescriptorType::SampledImage, ShaderStage::Pixel, DescriptorBinding::Same});
+
+  ShaderRequirements shaderRequirements = ShaderRequirements(2, allocatorTemporary);
+  const U32 VERTEX_SHADER_ID = shaderRequirements.AddShader({ ShaderStage::Vertex, "BasicTextureTest.vs", AssetLocation::Shaders });
+  const U32 PIXEL_SHADER_ID = shaderRequirements.AddShader({ ShaderStage::Pixel, "BasicTextureTest.ps", AssetLocation::Shaders });
+
+  RenderPassRequirements renderPassRequirements = RenderPassRequirements(0, 1, allocatorTemporary);
+
+  const U32 SINGLE_PASS = renderPassRequirements.AddPass({
+    PipelinePassCreateInfo::Shaders{VERTEX_SHADER_ID, PIXEL_SHADER_ID},  // SHADERS
+    PipelinePassCreateInfo::Inputs{},                                    // INPUT TARGETS
+    PipelinePassCreateInfo::Outputs{},                     // OUTPUT TARGETS
+    PipelinePassCreateInfo::Descriptors{UBO_SLOT, SAMPLER_SLOT, BASIC_TEXTURE_SLOT}                        // DESCRIPTORS
+    });
+
+  std::unique_ptr<Azura::Renderer> renderer = RenderSystem::CreateRenderer(appInfo, requirements, applicationRequirements,
+    window->GetSwapChainRequirements(), renderPassRequirements,
+    descriptorRequirements, shaderRequirements, mainAllocator, drawableAllocator,
+    *window);
+
+  RenderTestCases::ExecuteBasicTextureTest(*renderer, *window, SINGLE_PASS, UBO_SLOT, SAMPLER_SLOT, BASIC_TEXTURE_SLOT, log_TestRenderer);
 
   ASSERT_TRUE(CompareImageBytes("./ReferenceImages/BasicTextureTest.data", "./BasicTextureTest.data"));
 

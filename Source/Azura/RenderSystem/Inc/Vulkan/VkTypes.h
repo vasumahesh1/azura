@@ -4,6 +4,7 @@
 #include <vector>
 #include "Containers/Vector.h"
 #include "Types.h"
+#include "VkScopedImage.h"
 
 namespace Azura {
 namespace Vulkan {

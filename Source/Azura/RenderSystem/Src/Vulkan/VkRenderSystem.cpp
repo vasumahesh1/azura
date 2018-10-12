@@ -9,22 +9,23 @@ std::unique_ptr<Renderer> RenderSystem::CreateRenderer(const ApplicationInfo& ap
                                                        const DeviceRequirements& deviceRequirements,
                                                        const ApplicationRequirements& appRequirements,
                                                        const SwapChainRequirements& swapChainRequirement,
+                                                       const RenderPassRequirements& renderPassRequirements,
+                                                       const DescriptorRequirements& descriptorRequirements,
+                                                       const ShaderRequirements& shaderRequirements,
                                                        Memory::Allocator& mainAllocator,
                                                        Memory::Allocator& drawAllocator,
                                                        Window& window) {
-  return std::make_unique<Vulkan::VkRenderer>(appInfo, deviceRequirements, appRequirements, swapChainRequirement, mainAllocator,
+  return std::make_unique<Vulkan::VkRenderer>(appInfo, deviceRequirements, appRequirements, swapChainRequirement,
+                                              renderPassRequirements, descriptorRequirements, shaderRequirements, mainAllocator,
                                               drawAllocator, window);
 }
 
-std::unique_ptr<Shader> RenderSystem::CreateShader(const Renderer& renderer, const String& fileName, const Log& logger) {
-  const auto& vkRenderer = reinterpret_cast<const Vulkan::VkRenderer&>(renderer); // NOLINT(cppcoreguidelines-pro-type-reinterpret-cast)
-  return std::make_unique<Vulkan::VkShader>(vkRenderer.GetDevice(), fileName, logger);
-}
-
-std::unique_ptr<TextureManager> RenderSystem::CreateTextureManager(const Renderer& renderer, const TextureRequirements& textureRequirements, const Log& logger)
-{
-  const auto& vkRenderer = reinterpret_cast<const Vulkan::VkRenderer&>(renderer); // NOLINT(cppcoreguidelines-pro-type-reinterpret-cast)
+std::unique_ptr<TextureManager> RenderSystem::CreateTextureManager(const Renderer& renderer,
+                                                                   const TextureRequirements& textureRequirements,
+                                                                   const Log& logger) {
+  // NOLINTNEXTLINE(cppcoreguidelines-pro-type-reinterpret-cast)
+  const auto& vkRenderer = reinterpret_cast<const Vulkan::VkRenderer&>(renderer);
   return std::make_unique<Vulkan::VkTextureManager>(vkRenderer.GetDevice(), textureRequirements, logger);
 }
 
-}  // namespace Azura
+} // namespace Azura

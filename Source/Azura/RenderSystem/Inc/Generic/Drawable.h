@@ -64,14 +64,12 @@ private:
 struct DrawablePoolCreateInfo {
   U32 m_byteSize{0};
   U32 m_numDrawables{0};
-  U32 m_numShaders{0};
   CullMode m_cullMode{CullMode::BackBit};
 
   DrawType m_drawType{DrawType::InstancedIndexed};
 
   Containers::Vector<VertexSlot> m_vertexDataSlots;
-
-  Containers::Vector<DescriptorSlotCreateInfo> m_descriptorSlots;
+  Containers::Vector<U32> m_renderPasses;
 
   ~DrawablePoolCreateInfo() = default;
 
@@ -85,7 +83,7 @@ struct DrawablePoolCreateInfo {
 
 class DrawablePool {
 public:
-  explicit DrawablePool(const DrawablePoolCreateInfo& createInfo, Memory::Allocator& allocator);
+  explicit DrawablePool(const DrawablePoolCreateInfo& createInfo, DescriptorCount descriptorCount, Memory::Allocator& allocator);
   virtual ~DrawablePool() = default;
 
   DrawablePool(const DrawablePool& other) = delete;
@@ -94,8 +92,6 @@ public:
   DrawablePool& operator=(DrawablePool&& other) noexcept = default;
 
   virtual DrawableID CreateDrawable(const DrawableCreateInfo& createInfo) = 0;
-
-  virtual void AddShader(const Shader& shader) = 0;
 
   virtual void AddBufferBinding(SlotID slot, const Containers::Vector<RawStorageFormat>& strides) = 0;
 
@@ -119,24 +115,21 @@ public:
   virtual void Submit() = 0;
 
   U32 GetSize() const;
+  bool CanRenderInPass(U32 renderPassId) const;
 
 protected:
   Memory::Allocator& GetAllocator() const;
   DrawType GetDrawType() const;
 
   int GetVertexSlotIndex(SlotID id) const;
-  int GetDescriptorSlotIndex(SlotID id) const;
 
   U32 m_numVertexSlots;
   U32 m_numInstanceSlots;
-  U32 m_numUniformSlots;
-  U32 m_numSamplerSlots;
-  U32 m_numCombinedSamplerSlots;
-  U32 m_numSampledImageSlots;
-  U32 m_numPushConstantsSlots;
 
-  Containers::Vector<DescriptorSlot> m_descriptorSlots;
+  DescriptorCount m_descriptorCount;
+
   Containers::Vector<VertexSlot> m_vertexDataSlots;
+  Containers::Vector<U32> m_renderPasses;
 
   Containers::Vector<TextureBufferInfo> m_textureBufferInfos;
   Containers::Vector<SamplerInfo> m_samplerInfos;

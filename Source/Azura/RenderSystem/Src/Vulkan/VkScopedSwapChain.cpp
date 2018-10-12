@@ -203,6 +203,8 @@ void VkScopedSwapChain::CleanUp(VkDevice device) {
     vkDestroyImageView(device, image.View(), nullptr);
   }
 
+  m_depthImage.CleanUp();
+
   vkDestroySwapchainKHR(device, m_swapChain, nullptr);
 }
 

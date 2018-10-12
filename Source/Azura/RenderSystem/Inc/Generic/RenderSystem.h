@@ -17,15 +17,18 @@ std::unique_ptr<Renderer> CreateRenderer(const ApplicationInfo& appInfo,
                                          const DeviceRequirements& deviceRequirements,
                                          const ApplicationRequirements& appRequirements,
                                          const SwapChainRequirements& swapChainRequirement,
+                                         const RenderPassRequirements& renderPassRequirements,
+                                         const DescriptorRequirements& descriptorRequirements,
+                                         const ShaderRequirements& shaderRequirements,
                                          Memory::Allocator& mainAllocator,
                                          Memory::Allocator& drawAllocator,
                                          Window& window);
 
 std::unique_ptr<Window> CreateApplicationWindow(String title, U32 width, U32 height);
 
-std::unique_ptr<Shader> CreateShader(const Renderer& renderer, const String& fileName, const Log& logger);
+std::unique_ptr<TextureManager> CreateTextureManager(const Renderer& renderer,
+                                                     const TextureRequirements& textureRequirements,
+                                                     const Log& logger);
 
-std::unique_ptr<TextureManager> CreateTextureManager(const Renderer& renderer, const TextureRequirements& textureRequirements, const Log& logger);
-
-}  // namespace RenderSystem
-}  // namespace Azura
+} // namespace RenderSystem
+} // namespace Azura

@@ -4,11 +4,11 @@
 
 #include "Generic/Drawable.h"
 #include "VkScopedBuffer.h"
-#include "VkShader.h"
 #include "VkScopedPipeline.h"
 #include "Log/Log.h"
 #include "VkScopedImage.h"
 #include "VkScopedSampler.h"
+#include "VkScopedRenderPass.h"
 
 namespace Azura {
 struct ApplicationRequirements;
@@ -23,20 +23,22 @@ class VkDrawable : public Drawable {
 public:
   VkDrawable(VkDevice device,
              VkBuffer mainBuffer,
-    const Containers::Vector<VkDescriptorSetLayout>& descriptorSetLayouts,
+             const Containers::Vector<VkDescriptorSetLayout>& descriptorSetLayouts,
              VkDescriptorPool descriptorPool,
              const DrawableCreateInfo& info,
-    U32 numVertexSlots,
-    U32 numInstanceSlots,
-    U32 numUniformSlots,
+             U32 numVertexSlots,
+             U32 numInstanceSlots,
+             U32 numUniformSlots,
              Memory::Allocator& allocator,
              Log logger);
 
   void WriteDescriptorSets(
     const Containers::Vector<TextureBufferInfo>& textureBufferInfos,
+    const Containers::Vector<std::reference_wrapper<VkScopedRenderPass>>& renderPasses,
     const Containers::Vector<SamplerInfo>& samplerInfos,
     const Containers::Vector<VkScopedSampler>& samplers,
-    const Containers::Vector<VkScopedImage>& images);
+    const Containers::Vector<VkScopedImage>& images,
+    const Containers::Vector<VkScopedImage>& renderPassAttachments);
 
   const Containers::Vector<VkDescriptorSet>& GetDescriptorSet() const;
 
@@ -62,34 +64,36 @@ public:
                  VkBufferUsageFlags usage,
                  VkMemoryPropertyFlags memoryProperties,
                  VkCommandPool graphicsCommandPool,
-                 VkRenderPass renderPass,
+                 VkPipelineLayout pipelineLayout,
+                 VkDescriptorPool descriptorPool,
+                 const Containers::Vector<VkDescriptorSetLayout>& descriptorSetLayouts,
+                 const Containers::Vector<VkScopedRenderPass>& renderPasses,
+                 const Containers::Vector<VkScopedImage>& renderPassAttachments,
                  const ApplicationRequirements& appReq,
                  const ViewportDimensions& viewport,
                  const VkPhysicalDeviceMemoryProperties& phyDeviceMemoryProperties,
                  const VkPhysicalDeviceProperties& physicalDeviceProperties,
                  const VkScopedSwapChain& swapChain,
+                 const Containers::Vector<DescriptorSlot>& descriptorSlots,
+                 const DescriptorCount& descriptorCount,
                  Memory::Allocator& allocator,
                  Memory::Allocator& allocatorTemporary,
                  Log logger);
 
   DrawableID CreateDrawable(const DrawableCreateInfo& createInfo) override;
 
-  void CreateDescriptorInfo(const DrawablePoolCreateInfo& createInfo);
-
   void Submit() override;
   void AddBufferBinding(SlotID slotId, const Containers::Vector<RawStorageFormat>& strides) override;
 
-  void AddShader(const Shader& shader) override;
-
   void CleanUp() const;
 
-  const VkCommandBuffer& GetCommandBuffer() const;
+  void GetCommandBuffers(Containers::Vector<std::pair<U32, VkCommandBuffer>>& commandBuffers) const;
 
   // Drawable Scope Binds
   void BindVertexData(DrawableID drawableId, SlotID slot, const U8* buffer, U32 size) override;
   void BindInstanceData(DrawableID drawableId, SlotID slot, const U8* buffer, U32 size) override;
   void BindUniformData(DrawableID drawableId, SlotID slot, const U8* buffer, U32 size) override;
-  
+
   // Pool Scope Binds
   void BindTextureData(SlotID slot, const TextureDesc& desc, const U8* buffer) override;
   void BindSampler(SlotID slot, const SamplerDesc& desc) override;
@@ -104,18 +108,21 @@ private:
   VkScopedBuffer m_buffer;
   VkScopedBuffer m_stagingBuffer;
   VkDevice m_device;
-  VkRenderPass m_renderPass;
+  Containers::Vector<std::reference_wrapper<VkScopedRenderPass>> m_renderPasses;
+  const Containers::Vector<VkDescriptorSetLayout>& m_descriptorSetLayouts;
+  const Containers::Vector<DescriptorSlot>& m_descriptorSlots;
+  const Containers::Vector<VkScopedImage>& m_renderPassAttachments;
+
   ViewportDimensions m_viewport;
   VkPhysicalDeviceMemoryProperties m_physicalDeviceMemoryProperties;
 
-  VkDescriptorPool m_descriptorPool{};
-  Containers::Vector<VkDescriptorSetLayout> m_descriptorSetLayouts;
+  VkDescriptorPool m_descriptorPool;
 
-  VkScopedPipeline m_pipeline;
+  Containers::Vector<VkScopedPipeline> m_pipelines;
   VkPipelineLayout m_pipelineLayout;
   VkPipelineFactory m_pipelineFactory;
 
-  VkCommandBuffer m_commandBuffer{};
+  Containers::Vector<VkCommandBuffer> m_commandBuffers;
   VkCommandPool m_graphicsCommandPool;
 
   VkQueue m_graphicsQueue;
@@ -127,7 +134,6 @@ private:
   const VkPhysicalDeviceProperties& m_physicalDeviceProperties;
 
   Containers::Vector<VkDrawable> m_drawables;
-  Containers::Vector<VkShader> m_shaders;
   Containers::Vector<VkScopedImage> m_images;
   Containers::Vector<VkScopedSampler> m_samplers;
 

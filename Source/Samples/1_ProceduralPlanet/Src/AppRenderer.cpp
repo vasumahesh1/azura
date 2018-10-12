@@ -13,10 +13,6 @@ using namespace Math;       // NOLINT
 
 #define VERTEX_SLOT 0
 #define NORMAL_SLOT 1
-#define UBO_SLOT 2
-#define SHADER_CONTROLS_SLOT 3
-#define SAMPLER_SLOT 4
-#define PLANET_TEXTURE_SLOT 5
 
 struct Vertex {
   float m_pos[4];
@@ -97,43 +93,49 @@ void AppRenderer::Initialize() {
   applicationRequirements.m_clearColor[1]         = 0.2f;
   applicationRequirements.m_clearColor[2]         = 0.2f;
 
+  DescriptorRequirements descriptorRequirements = DescriptorRequirements(4, allocatorTemporary);
+  // Set 0
+  const U32 UBO_SLOT = descriptorRequirements.AddDescriptor({ DescriptorType::UniformBuffer, ShaderStage::Vertex });
+  
+  // Set 1
+  const U32 SHADER_CONTROLS_SLOT = descriptorRequirements.AddDescriptor({ DescriptorType::UniformBuffer, ShaderStage::Vertex | ShaderStage::Pixel });
+
+  // Set 2
+  const U32 SAMPLER_SLOT = descriptorRequirements.AddDescriptor({DescriptorType::Sampler, ShaderStage::Pixel});
+  const U32 PLANET_TEXTURE_SLOT = descriptorRequirements.AddDescriptor({DescriptorType::SampledImage, ShaderStage::Pixel, DescriptorBinding::Same});
+
+
+  ShaderRequirements shaderRequirements = ShaderRequirements(2, allocatorTemporary);
+  const U32 VERTEX_SHADER_ID = shaderRequirements.AddShader({ ShaderStage::Vertex, "Terrain.vs", AssetLocation::Shaders });
+  const U32 PIXEL_SHADER_ID = shaderRequirements.AddShader({ ShaderStage::Pixel, "Terrain.ps", AssetLocation::Shaders });
+
+  RenderPassRequirements renderPassRequirements = RenderPassRequirements(0, 1, allocatorTemporary);
+
+  const U32 SINGLE_PASS = renderPassRequirements.AddPass({
+    PipelinePassCreateInfo::Shaders{VERTEX_SHADER_ID, PIXEL_SHADER_ID},  // SHADERS
+    PipelinePassCreateInfo::Inputs{},                                    // INPUT TARGETS
+    PipelinePassCreateInfo::Outputs{},                                   // OUTPUT TARGETS
+    PipelinePassCreateInfo::Descriptors{UBO_SLOT}                        // DESCRIPTORS
+    });
+
   m_renderer = RenderSystem::CreateRenderer(appInfo, requirements, applicationRequirements,
-                                            m_window->GetSwapChainRequirements(), m_mainAllocator, m_drawableAllocator,
-                                            *m_window);
+    m_window->GetSwapChainRequirements(), renderPassRequirements,
+    descriptorRequirements, shaderRequirements, m_mainAllocator, m_drawableAllocator,
+    *m_window);
   m_renderer->SetDrawablePoolCount(1);
-
-  auto vertShader = RenderSystem::
-    CreateShader(*m_renderer, "./Shaders/" + m_renderer->GetRenderingAPI() + "/Terrain.vs", log_AppRenderer);
-  vertShader->SetStage(ShaderStage::Vertex);
-
-  auto pixelShader = RenderSystem::
-    CreateShader(*m_renderer, "./Shaders/" + m_renderer->GetRenderingAPI() + "/Terrain.ps", log_AppRenderer);
-  pixelShader->SetStage(ShaderStage::Pixel);
 
   IcoSphere sphere(7);
 
   DrawablePoolCreateInfo poolInfo(allocatorTemporary);
   poolInfo.m_byteSize        = sphere.TotalDataSize() + 0x400000;
   poolInfo.m_numDrawables    = 1;
-  poolInfo.m_numShaders      = 2;
   poolInfo.m_cullMode        = CullMode::FrontBit;
   poolInfo.m_drawType        = DrawType::InstancedIndexed;
+  poolInfo.m_renderPasses    = {{SINGLE_PASS}, allocatorTemporary};
   poolInfo.m_vertexDataSlots = {
     {
       {VERTEX_SLOT, BufferUsageRate::PerVertex},
       {NORMAL_SLOT, BufferUsageRate::PerVertex}
-    },
-    allocatorTemporary
-  };
-  poolInfo.m_descriptorSlots = {
-    {
-      // 0
-      {UBO_SLOT, DescriptorType::UniformBuffer, ShaderStage::Vertex},
-      // 1
-      {SHADER_CONTROLS_SLOT, DescriptorType::UniformBuffer, ShaderStage::Vertex | ShaderStage::Pixel},
-      // 2
-      {SAMPLER_SLOT, DescriptorType::Sampler, ShaderStage::Pixel},
-      {PLANET_TEXTURE_SLOT, DescriptorType::SampledImage, ShaderStage::Pixel, DescriptorBinding::Same}
     },
     allocatorTemporary
   };
@@ -149,9 +151,6 @@ void AppRenderer::Initialize() {
   VERIFY_TRUE(log_AppRenderer, planet1Desc != nullptr, "planet1Desc was Null");
 
   DrawablePool& pool = m_renderer->CreateDrawablePool(poolInfo);
-
-  pool.AddShader(*vertShader);
-  pool.AddShader(*pixelShader);
 
   pool.BindTextureData(PLANET_TEXTURE_SLOT, *planet1Desc, m_textureManager->GetData(planet1Texture));
   pool.BindSampler(SAMPLER_SLOT, {});
