@@ -91,13 +91,12 @@ void AppRenderer::Initialize() {
 
   RenderPassRequirements renderPassRequirements = RenderPassRequirements(1, 2, allocatorTemporary);
   const U32 COLOR_TARGET_1 = renderPassRequirements.AddTarget({RawStorageFormat::R32G32B32A32_FLOAT});
-  const U32 DEPTH_TARGET_1 = renderPassRequirements.AddTarget({RawStorageFormat::D32_FLOAT});
 
   const U32 GBUFFER_PASS = renderPassRequirements.AddPass({
-    {VERTEX_SHADER_ID, PIXEL_SHADER_ID}, // SHADERS
-    {},            // INPUT TARGETS
-    {COLOR_TARGET_1, DEPTH_TARGET_1}, // OUTPUT TARGETS
-    {UBO_SLOT}     // DESCRIPTORS
+    {VERTEX_SHADER_ID, PIXEL_SHADER_ID},  // SHADERS
+    {},                                   // INPUT TARGETS
+    {COLOR_TARGET_1},     // OUTPUT TARGETS
+    {UBO_SLOT}                            // DESCRIPTORS
   });
 
   // const U32 SHADING_PASS = renderPassRequirements.AddPass({

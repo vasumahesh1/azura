@@ -144,7 +144,7 @@ VkDrawablePool::VkDrawablePool(const DrawablePoolCreateInfo& createInfo,
                                const VkPhysicalDeviceMemoryProperties& phyDeviceMemoryProperties,
                                const VkPhysicalDeviceProperties& physicalDeviceProperties,
                                const VkScopedSwapChain& swapChain,
-  const Containers::Vector<DescriptorSlot>& descriptorSlots,
+                               const Containers::Vector<DescriptorSlot>& descriptorSlots,
                                const DescriptorCount& descriptorCount,
                                Memory::Allocator& allocator,
                                Memory::Allocator& allocatorTemporary,
@@ -261,21 +261,24 @@ void VkDrawablePool::Submit() {
   m_pipelineFactory.Submit(m_renderPasses, m_pipelines);
 
   m_commandBuffers.Resize(m_renderPasses.GetSize());
-  VkCore::CreateCommandBuffers(m_device, m_graphicsCommandPool, VK_COMMAND_BUFFER_LEVEL_SECONDARY, m_commandBuffers, log_VulkanRenderSystem);
+  VkCore::CreateCommandBuffers(m_device, m_graphicsCommandPool, VK_COMMAND_BUFFER_LEVEL_SECONDARY, m_commandBuffers,
+                               log_VulkanRenderSystem);
 
   U32 count = 0;
   for (const auto& renderPass : m_renderPasses) {
     const auto& commandBuffer = m_commandBuffers[count];
-    const auto& pipeline = m_pipelines[count];
+    const auto& pipeline      = m_pipelines[count];
 
     VkCommandBufferInheritanceInfo inheritanceInfo = {};
-    inheritanceInfo.sType = VK_STRUCTURE_TYPE_COMMAND_BUFFER_INHERITANCE_INFO;
-    inheritanceInfo.renderPass = renderPass.GetRenderPass();
-    inheritanceInfo.framebuffer = renderPass.GetFrameBuffer();
+    inheritanceInfo.sType                          = VK_STRUCTURE_TYPE_COMMAND_BUFFER_INHERITANCE_INFO;
+    inheritanceInfo.renderPass                     = renderPass.GetRenderPass();
+    inheritanceInfo.framebuffer                    = VK_NULL_HANDLE;
+    // TODO(vasumahesh1):[PERF]: renderPass.GetFrameBuffer();
 
     VkCore::BeginCommandBuffer(commandBuffer,
-      VK_COMMAND_BUFFER_USAGE_SIMULTANEOUS_USE_BIT |
-      VK_COMMAND_BUFFER_USAGE_RENDER_PASS_CONTINUE_BIT, inheritanceInfo, log_VulkanRenderSystem);
+                               VK_COMMAND_BUFFER_USAGE_SIMULTANEOUS_USE_BIT |
+                               VK_COMMAND_BUFFER_USAGE_RENDER_PASS_CONTINUE_BIT, inheritanceInfo,
+                               log_VulkanRenderSystem);
 
     vkCmdBindPipeline(commandBuffer, VK_PIPELINE_BIND_POINT_GRAPHICS, pipeline.Real());
 
@@ -291,14 +294,14 @@ void VkDrawablePool::Submit() {
       const auto& vertBufferInfos = drawable.GetVertexBufferInfos();
 
       for (const auto& vertexBuffer : vertBufferInfos) {
-        VkDeviceSize offsets[] = { vertexBuffer.m_offset };
+        VkDeviceSize offsets[] = {vertexBuffer.m_offset};
         vkCmdBindVertexBuffers(commandBuffer, vertexBuffer.m_binding, 1, &mainBuffer, &offsets[0]);
       }
 
       const auto& instanceBufferInfos = drawable.GetInstanceBufferInfos();
 
       for (const auto& instanceBuffer : instanceBufferInfos) {
-        VkDeviceSize offsets[] = { instanceBuffer.m_offset };
+        VkDeviceSize offsets[] = {instanceBuffer.m_offset};
         vkCmdBindVertexBuffers(commandBuffer, instanceBuffer.m_binding, 1, &mainBuffer, &offsets[0]);
       }
 
@@ -310,18 +313,18 @@ void VkDrawablePool::Submit() {
       vkCmdBindIndexBuffer(commandBuffer, mainBuffer, indexBufferInfo.m_offset, indexType.value());
 
       vkCmdBindDescriptorSets(commandBuffer, VK_PIPELINE_BIND_POINT_GRAPHICS, m_pipelineLayout, 0,
-        descriptorSets.GetSize(), descriptorSets.Data(), 0, nullptr);
+                              descriptorSets.GetSize(), descriptorSets.Data(), 0, nullptr);
 
       switch (GetDrawType()) {
-      case DrawType::InstancedIndexed:
-        vkCmdDrawIndexed(commandBuffer, drawable.GetIndexCount(), drawable.GetInstanceCount(), 0, 0, 0);
-        break;
+        case DrawType::InstancedIndexed:
+          vkCmdDrawIndexed(commandBuffer, drawable.GetIndexCount(), drawable.GetInstanceCount(), 0, 0, 0);
+          break;
 
-      case DrawType::InstancedIndexedIndirect:
-        break;
+        case DrawType::InstancedIndexedIndirect:
+          break;
 
-      default:
-        break;
+        default:
+          break;
       }
     }
 
@@ -354,8 +357,7 @@ void VkDrawablePool::CleanUp() const {
   m_buffer.CleanUp();
   m_stagingBuffer.CleanUp();
 
-  for(auto& pipeline: m_pipelines)
-  {
+  for (auto& pipeline : m_pipelines) {
     pipeline.CleanUp(m_device);
   }
 
@@ -382,8 +384,7 @@ void VkDrawablePool::GetCommandBuffers(Vector<std::pair<U32, VkCommandBuffer>>& 
   U32 idx = 0;
   commandBuffers.Reserve(m_renderPasses.GetSize());
 
-  for(const auto& renderPass : m_renderPasses)
-  {
+  for (const auto& renderPass : m_renderPasses) {
     commandBuffers.PushBack(std::make_pair(renderPass.GetId(), m_commandBuffers[idx]));
     ++idx;
   }
@@ -478,7 +479,7 @@ void VkDrawablePool::BindTextureData(SlotID slot, const TextureDesc& desc, const
 
 void VkDrawablePool::BindSampler(SlotID slot, const SamplerDesc& desc) {
   UNUSED(desc);
-  
+
   const auto& descriptorSlot = m_descriptorSlots[slot];
 
   if (descriptorSlot.m_type != DescriptorType::Sampler) {

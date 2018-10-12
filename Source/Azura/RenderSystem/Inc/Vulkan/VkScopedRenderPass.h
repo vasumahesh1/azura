@@ -15,16 +15,26 @@ public:
 
   void Create(VkDevice device,
               VkCommandPool commandPool,
-              bool createFrameBuffer,
               const PipelinePassCreateInfo& createInfo,
               const Containers::Vector<RenderTargetCreateInfo>& pipelineBuffers,
               const Containers::Vector<VkScopedImage>& pipelineBufferImages,
               const Containers::Vector<VkShader>& allShaders,
               const VkScopedSwapChain& swapChain);
 
+  void CreateForSwapChain(VkDevice device,
+    VkCommandPool commandPool,
+    const PipelinePassCreateInfo& createInfo,
+    const Containers::Vector<RenderTargetCreateInfo>& pipelineBuffers,
+    const Containers::Vector<VkScopedImage>& pipelineBufferImages,
+    const Containers::Vector<VkShader>& allShaders,
+    const VkScopedSwapChain& swapChain);
+
   VkRenderPass GetRenderPass() const;
-  VkFramebuffer GetFrameBuffer() const;
-  VkCommandBuffer GetCommandBuffer() const;
+  VkFramebuffer GetFrameBuffer(U32 idx) const;
+  VkCommandBuffer GetCommandBuffer(U32 idx) const;
+
+  U32 GetFrameBufferCount() const;
+  VkSemaphore GetRenderSemaphore() const;
 
   U32 GetId() const;
 
@@ -40,8 +50,10 @@ private:
 
   U32 m_id;
 
-  VkFramebuffer m_frameBuffer;
-  VkCommandBuffer m_commandBuffer{};
+  VkSemaphore m_beginRenderSemaphore;
+
+  Containers::Vector<VkFramebuffer> m_frameBuffers;
+  Containers::Vector<VkCommandBuffer> m_commandBuffers;
 
   VkRenderPass m_renderPass{};
   Containers::Vector<VkPipelineShaderStageCreateInfo> m_shaderPipelineInfos;

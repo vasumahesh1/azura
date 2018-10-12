@@ -25,16 +25,18 @@ VkRenderer::VkRenderer(const ApplicationInfo& appInfo,
                        Window& window)
   : Renderer(appInfo, deviceRequirements, appRequirements, swapChainRequirement, descriptorRequirements, mainAllocator),
     log_VulkanRenderSystem(Log("VulkanRenderSystem")),
+    m_perFrameBuffer(4096),
+    m_perFrameAllocator(m_perFrameBuffer, 4096),
     m_window(window),
     m_drawablePools(drawAllocator),
     m_swapChain(mainAllocator, log_VulkanRenderSystem),
     m_renderPasses(renderPassRequirements.m_passSequence.GetSize(), mainAllocator),
     m_descriptorSetLayouts(mainAllocator),
-    m_frameBuffers(mainAllocator),
+    // m_frameBuffers(mainAllocator),
     m_imageAvailableSemaphores(mainAllocator),
     m_renderFinishedSemaphores(mainAllocator),
     m_inFlightFences(mainAllocator),
-    m_primaryCommandBuffers(mainAllocator),
+    // m_primaryCommandBuffers(mainAllocator),
     m_shaders(shaderRequirements.m_shaders.GetSize(), mainAllocator),
     m_renderPassAttachmentImages(renderPassRequirements.m_targets.GetSize(), mainAllocator),
     m_mainAllocator(mainAllocator),
@@ -104,21 +106,33 @@ VkRenderer::VkRenderer(const ApplicationInfo& appInfo,
   U32 passCount = 0;
   for (const auto& passCreateInfo : renderPassRequirements.m_passSequence) {
     VkScopedRenderPass renderPass = VkScopedRenderPass(m_renderPasses.GetSize(), mainAllocator, log_VulkanRenderSystem);
-    renderPass.Create(m_device,
-                      m_graphicsCommandPool,
-                      passCount != (renderPassRequirements.m_passSequence.GetSize() - 1),
-                      passCreateInfo,
-                      renderPassRequirements.m_targets,
-                      m_renderPassAttachmentImages,
-                      m_shaders,
-                      m_swapChain);
+
+    if (passCount != (renderPassRequirements.m_passSequence.GetSize() - 1)) {
+      renderPass.Create(m_device,
+        m_graphicsCommandPool,
+        passCreateInfo,
+        renderPassRequirements.m_targets,
+        m_renderPassAttachmentImages,
+        m_shaders,
+        m_swapChain);
+    }
+    else
+    {
+      renderPass.CreateForSwapChain(m_device,
+        m_graphicsCommandPool,
+        passCreateInfo,
+        renderPassRequirements.m_targets,
+        m_renderPassAttachmentImages,
+        m_shaders,
+        m_swapChain);
+    }
 
     m_renderPasses.PushBack(renderPass);
     ++passCount;
   }
 
   // TODO(vasumahesh1):[RENDER PASS]: Needs Changes
-  VkCore::CreateFrameBuffers(m_device, m_renderPasses.Last().GetRenderPass(), m_swapChain, m_frameBuffers, log_VulkanRenderSystem);
+  // VkCore::CreateFrameBuffers(m_device, m_renderPasses.Last().GetRenderPass(), m_swapChain, m_frameBuffers, log_VulkanRenderSystem);
 
   const U32 syncCount = swapChainRequirement.m_framesInFlight;
 
@@ -138,9 +152,9 @@ VkRenderer::~VkRenderer() {
   VkCore::DestroyDebugReportCallbackEXT(m_instance, m_callback, nullptr);
 #endif
 
-  for (const auto& buffer : m_frameBuffers) {
-    vkDestroyFramebuffer(m_device, buffer, nullptr);
-  }
+  // for (const auto& buffer : m_frameBuffers) {
+  //   vkDestroyFramebuffer(m_device, buffer, nullptr);
+  // }
 
   for (const auto& semaphore : m_imageAvailableSemaphores) {
     vkDestroySemaphore(m_device, semaphore, nullptr);
@@ -165,6 +179,11 @@ VkRenderer::~VkRenderer() {
   // vkFreeCommandBuffers(m_device, m_graphicsCommandPool, m_primaryCommandBuffers.GetSize(), m_primaryCommandBuffers.Data());
 
   m_swapChain.CleanUp(m_device);
+
+  for (const auto& attachments : m_renderPassAttachmentImages)
+  {
+    attachments.CleanUp();
+  }
 
   for (const auto& renderPass : m_renderPasses) {
     renderPass.CleanUp(m_device, m_graphicsCommandPool);
@@ -222,9 +241,9 @@ String VkRenderer::GetRenderingAPI() const {
 
 void VkRenderer::Submit() {
   STACK_ALLOCATOR(Temporary, Memory::MonotonicAllocator, 4096);
-  m_primaryCommandBuffers.Resize(m_frameBuffers.GetSize());
-  VkCore::CreateCommandBuffers(m_device, m_graphicsCommandPool, VK_COMMAND_BUFFER_LEVEL_PRIMARY,
-                               m_primaryCommandBuffers, log_VulkanRenderSystem);
+  // m_primaryCommandBuffers.Resize(m_frameBuffers.GetSize());
+  // VkCore::CreateCommandBuffers(m_device, m_graphicsCommandPool, VK_COMMAND_BUFFER_LEVEL_PRIMARY,
+  //                              m_primaryCommandBuffers, log_VulkanRenderSystem);
 
   const auto& clearColor        = GetApplicationRequirements().m_clearColor;
   const auto& clearDepthStencil = GetApplicationRequirements().m_depthStencilClear;
@@ -263,7 +282,7 @@ void VkRenderer::Submit() {
     renderPass.Begin(m_swapChain, clearData);
 
     const auto& cmdBuffers = secondaryCmdBuffers[renderPass.GetId()];
-    vkCmdExecuteCommands(renderPass.GetCommandBuffer(), cmdBuffers.GetSize(), cmdBuffers.Data());
+    vkCmdExecuteCommands(renderPass.GetCommandBuffer(0), cmdBuffers.GetSize(), cmdBuffers.Data());
 
     renderPass.End();
   }
@@ -271,27 +290,11 @@ void VkRenderer::Submit() {
   const auto& lastPass = m_renderPasses.Last();
   const auto& lastPassCommands = secondaryCmdBuffers.Last();
 
-  for (U32 idx                = 0; idx < m_primaryCommandBuffers.GetSize(); ++idx) {
-    const auto& commandBuffer = m_primaryCommandBuffers[idx];
-    VkCore::BeginCommandBuffer(commandBuffer, VK_COMMAND_BUFFER_USAGE_SIMULTANEOUS_USE_BIT, log_VulkanRenderSystem);
-
-    VkRenderPassBeginInfo renderPassInfo = {};
-    renderPassInfo.sType                 = VK_STRUCTURE_TYPE_RENDER_PASS_BEGIN_INFO;
-    renderPassInfo.renderPass            = lastPass.GetRenderPass();
-    renderPassInfo.framebuffer           = m_frameBuffers[idx];
-    renderPassInfo.renderArea.offset     = {0, 0};
-    renderPassInfo.renderArea.extent     = m_swapChain.GetExtent();
-    renderPassInfo.clearValueCount       = U32(clearData.size());
-    renderPassInfo.pClearValues          = clearData.data();
-
-    vkCmdBeginRenderPass(commandBuffer, &renderPassInfo, VK_SUBPASS_CONTENTS_SECONDARY_COMMAND_BUFFERS);
-
-    vkCmdExecuteCommands(commandBuffer, lastPassCommands.GetSize(), lastPassCommands.Data());
-
-    vkCmdEndRenderPass(commandBuffer);
-
-    VkCore::EndCommandBuffer(commandBuffer, log_VulkanRenderSystem);
+  lastPass.Begin(m_swapChain, clearData);
+  for (U32 idx = 0; idx < lastPass.GetFrameBufferCount(); ++idx) {
+    vkCmdExecuteCommands(lastPass.GetCommandBuffer(idx), lastPassCommands.GetSize(), lastPassCommands.Data());
   }
+  lastPass.End();
 }
 
 void VkRenderer::CreateDescriptorInfo() {
@@ -393,7 +396,7 @@ void VkRenderer::RenderFrame() {
   vkWaitForFences(m_device, 1, &m_inFlightFences[currentFrame], VK_TRUE, std::numeric_limits<uint64_t>::max());
   vkResetFences(m_device, 1, &m_inFlightFences[currentFrame]);
 
-  uint32_t imageIndex;
+  U32 imageIndex;
   const VkResult result = vkAcquireNextImageKHR(m_device, m_swapChain.Real(), std::numeric_limits<uint64_t>::max(),
                                                 m_imageAvailableSemaphores[currentFrame], VK_NULL_HANDLE, &imageIndex);
 
@@ -406,30 +409,62 @@ void VkRenderer::RenderFrame() {
   VERIFY_TRUE(log_VulkanRenderSystem, result == VK_SUCCESS || result == VK_SUBOPTIMAL_KHR,
     "Failed to acquire swap chain image");
 
-  // SUCCESS OR SUBOPTIMAL
-  VkSubmitInfo submitInfo = {};
-  submitInfo.sType        = VK_STRUCTURE_TYPE_SUBMIT_INFO;
+  // std::array<VkSemaphore, 1> initialWaitSemaphores      = {};
+  // std::array<VkSemaphore, 1> finalSignalSemaphores = {m_renderFinishedSemaphores[currentFrame]};
 
-  std::array<VkSemaphore, 1> waitSemaphores      = {m_imageAvailableSemaphores[currentFrame]};
   std::array<VkPipelineStageFlags, 1> waitStages = {VK_PIPELINE_STAGE_COLOR_ATTACHMENT_OUTPUT_BIT};
-  submitInfo.waitSemaphoreCount                  = 1;
-  submitInfo.pWaitSemaphores                     = waitSemaphores.data();
-  submitInfo.pWaitDstStageMask                   = waitStages.data();
 
-  submitInfo.commandBufferCount = 1;
-  submitInfo.pCommandBuffers    = &m_primaryCommandBuffers[imageIndex];
+  for (U32 idx = 0; idx < m_renderPasses.GetSize(); ++idx) {
+    const auto& renderPass = m_renderPasses[idx];
 
-  std::array<VkSemaphore, 1> signalSemaphores = {m_renderFinishedSemaphores[currentFrame]};
-  submitInfo.signalSemaphoreCount             = U32(signalSemaphores.size());
-  submitInfo.pSignalSemaphores                = signalSemaphores.data();
+    VkCommandBuffer passBuffer;
+    VkFence waitFence = VK_NULL_HANDLE;
+    Vector<VkSemaphore> waitSemaphores(1, m_perFrameAllocator);
+    Vector<VkSemaphore> signalSemaphores(1, m_perFrameAllocator);
 
-  VERIFY_VK_OP(log_VulkanRenderSystem, vkQueueSubmit(m_graphicsQueue, 1, &submitInfo, m_inFlightFences[currentFrame]),
-    "Failed to submit draw command buffer");
+    // Start of Render
+    if (idx == 0) {
+      waitSemaphores.PushBack(m_imageAvailableSemaphores[currentFrame]);
+    }
+    // Somewhere in Middle
+    else if (idx < m_renderPasses.GetSize() - 1) {
+      passBuffer = renderPass.GetCommandBuffer(0);
+
+      const auto& nextPass = m_renderPasses[idx + 1];
+      waitSemaphores.PushBack(renderPass.GetRenderSemaphore());
+      signalSemaphores.PushBack(nextPass.GetRenderSemaphore());
+    }
+
+    // End of Render
+    if (idx == m_renderPasses.GetSize() - 1)
+    {
+      signalSemaphores.PushBack(m_renderFinishedSemaphores[currentFrame]);
+
+      passBuffer = renderPass.GetCommandBuffer(imageIndex);
+      waitFence = m_inFlightFences[currentFrame];
+    }
+
+    // SUCCESS OR SUBOPTIMAL
+    VkSubmitInfo submitInfo = {};
+    submitInfo.sType = VK_STRUCTURE_TYPE_SUBMIT_INFO;
+    submitInfo.waitSemaphoreCount = 1;
+    submitInfo.pWaitSemaphores = waitSemaphores.Data();
+    submitInfo.pWaitDstStageMask = waitStages.data();
+    submitInfo.commandBufferCount = 1;
+    submitInfo.pCommandBuffers = &passBuffer;
+    submitInfo.signalSemaphoreCount = signalSemaphores.GetSize();
+    submitInfo.pSignalSemaphores = signalSemaphores.Data();
+
+    VERIFY_VK_OP(log_VulkanRenderSystem, vkQueueSubmit(m_graphicsQueue, 1, &submitInfo, waitFence),
+      "Failed to submit draw command buffer");
+  }
+
+  Vector<VkSemaphore> presentWaitSemaphores({m_renderFinishedSemaphores[currentFrame]}, m_perFrameAllocator);
 
   VkPresentInfoKHR presentInfo   = {};
   presentInfo.sType              = VK_STRUCTURE_TYPE_PRESENT_INFO_KHR;
-  presentInfo.waitSemaphoreCount = 1;
-  presentInfo.pWaitSemaphores    = signalSemaphores.data();
+  presentInfo.waitSemaphoreCount = presentWaitSemaphores.GetSize();
+  presentInfo.pWaitSemaphores    = presentWaitSemaphores.Data();
 
   std::array<VkSwapchainKHR, 1> swapChains = {m_swapChain.Real()};
   presentInfo.swapchainCount               = U32(swapChains.size());
@@ -438,6 +473,8 @@ void VkRenderer::RenderFrame() {
   presentInfo.pResults                     = nullptr;
 
   vkQueuePresentKHR(m_presentQueue, &presentInfo);
+
+  m_perFrameAllocator.Reset();
 
   ExitRenderFrame();
 }
