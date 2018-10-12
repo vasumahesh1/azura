@@ -21,3 +21,11 @@ struct PixelShaderInput
   float4 color : COLOR;
   float2 uv : UV;
 };
+
+struct SamplerBlock {
+  SamplerState g_sampler;
+  Texture2D g_txDiffuse;
+};
+
+ParameterBlock<UBOData> ubo;
+ParameterBlock<SamplerBlock> samplerBlock;
