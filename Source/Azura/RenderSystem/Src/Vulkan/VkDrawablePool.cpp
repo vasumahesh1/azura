@@ -127,7 +127,7 @@ void VkDrawable::WriteDescriptorSets(
     const auto& inputs = renderPass.get().GetPassInputs();
     const auto setId = renderPass.get().GetDescriptorSetId();
 
-    Vector<VkWriteDescriptorSet> inputDescriptorWrites(allocatorTemporary);
+    Vector<VkWriteDescriptorSet> inputDescriptorWrites(inputs.GetSize(), allocatorTemporary);
 
     U32 bindingId = 0;
     for (U32 idx = 0; idx < inputs.GetSize(); ++idx) {
@@ -193,7 +193,7 @@ VkDrawablePool::VkDrawablePool(const DrawablePoolCreateInfo& createInfo,
     m_stagingBuffer(device, VK_BUFFER_USAGE_TRANSFER_SRC_BIT, createInfo.m_byteSize, memoryProperties,
                     phyDeviceMemoryProperties, logger),
     m_device(device),
-    m_renderPasses(allocator),
+    m_renderPasses(renderPasses.GetSize(), allocator),
     m_viewport(viewport),
     m_descriptorSetLayouts(descriptorSetLayouts),
     m_descriptorSlots(descriptorSlots),
@@ -415,20 +415,12 @@ void VkDrawablePool::CleanUp() const {
     pipeline.CleanUp(m_device);
   }
 
-  vkDestroyDescriptorPool(m_device, m_descriptorPool, nullptr);
-
-  vkDestroyPipelineLayout(m_device, m_pipelineLayout, nullptr);
-
   for (const auto& image : m_images) {
     image.CleanUp();
   }
 
   for (const auto& sampler : m_samplers) {
     sampler.CleanUp();
-  }
-
-  for (const auto& setLayout : m_descriptorSetLayouts) {
-    vkDestroyDescriptorSetLayout(m_device, setLayout, nullptr);
   }
 
   vkFreeCommandBuffers(m_device, m_graphicsCommandPool, m_commandBuffers.GetSize(), m_commandBuffers.Data());

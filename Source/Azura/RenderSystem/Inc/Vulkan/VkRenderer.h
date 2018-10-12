@@ -76,11 +76,9 @@ private:
   Containers::Vector<VkScopedRenderPass> m_renderPasses;
   Containers::Vector<VkDescriptorSetLayout> m_descriptorSetLayouts;
 
-  // Containers::Vector<VkFramebuffer> m_frameBuffers;
   Containers::Vector<VkSemaphore> m_imageAvailableSemaphores;
   Containers::Vector<VkSemaphore> m_renderFinishedSemaphores;
   Containers::Vector<VkFence> m_inFlightFences;
-  // Containers::Vector<VkCommandBuffer> m_primaryCommandBuffers;
 
   Containers::Vector<VkShader> m_shaders;
 

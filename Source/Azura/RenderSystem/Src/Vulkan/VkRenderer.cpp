@@ -32,11 +32,9 @@ VkRenderer::VkRenderer(const ApplicationInfo& appInfo,
     m_swapChain(mainAllocator, log_VulkanRenderSystem),
     m_renderPasses(renderPassRequirements.m_passSequence.GetSize(), mainAllocator),
     m_descriptorSetLayouts(mainAllocator),
-    // m_frameBuffers(mainAllocator),
     m_imageAvailableSemaphores(mainAllocator),
     m_renderFinishedSemaphores(mainAllocator),
     m_inFlightFences(mainAllocator),
-    // m_primaryCommandBuffers(mainAllocator),
     m_shaders(shaderRequirements.m_shaders.GetSize(), mainAllocator),
     m_renderPassAttachmentImages(renderPassRequirements.m_targets.GetSize(), mainAllocator),
     m_mainAllocator(mainAllocator),
@@ -131,9 +129,6 @@ VkRenderer::VkRenderer(const ApplicationInfo& appInfo,
 
   CreateDescriptorInfo();
 
-  // TODO(vasumahesh1):[RENDER PASS]: Needs Changes
-  // VkCore::CreateFrameBuffers(m_device, m_renderPasses.Last().GetRenderPass(), m_swapChain, m_frameBuffers, log_VulkanRenderSystem);
-
   const U32 syncCount = swapChainRequirement.m_framesInFlight;
 
   m_imageAvailableSemaphores.Resize(syncCount);
@@ -151,10 +146,6 @@ VkRenderer::~VkRenderer() {
 #ifdef BUILD_DEBUG
   VkCore::DestroyDebugReportCallbackEXT(m_instance, m_callback, nullptr);
 #endif
-
-  // for (const auto& buffer : m_frameBuffers) {
-  //   vkDestroyFramebuffer(m_device, buffer, nullptr);
-  // }
 
   for (const auto& semaphore : m_imageAvailableSemaphores) {
     vkDestroySemaphore(m_device, semaphore, nullptr);
@@ -176,7 +167,14 @@ VkRenderer::~VkRenderer() {
     shader.CleanUp(m_device);
   }
 
-  // vkFreeCommandBuffers(m_device, m_graphicsCommandPool, m_primaryCommandBuffers.GetSize(), m_primaryCommandBuffers.Data());
+  for (const auto& setLayout : m_descriptorSetLayouts) {
+    vkDestroyDescriptorSetLayout(m_device, setLayout, nullptr);
+  }
+
+  vkDestroyPipelineLayout(m_device, m_pipelineLayout, nullptr);
+
+  vkDestroyDescriptorPool(m_device, m_descriptorPool, nullptr);
+
 
   m_swapChain.CleanUp(m_device);
 
@@ -241,9 +239,6 @@ String VkRenderer::GetRenderingAPI() const {
 
 void VkRenderer::Submit() {
   STACK_ALLOCATOR(Temporary, Memory::MonotonicAllocator, 4096);
-  // m_primaryCommandBuffers.Resize(m_frameBuffers.GetSize());
-  // VkCore::CreateCommandBuffers(m_device, m_graphicsCommandPool, VK_COMMAND_BUFFER_LEVEL_PRIMARY,
-  //                              m_primaryCommandBuffers, log_VulkanRenderSystem);
 
   const auto& clearColor        = GetApplicationRequirements().m_clearColor;
   const auto& clearDepthStencil = GetApplicationRequirements().m_depthStencilClear;
