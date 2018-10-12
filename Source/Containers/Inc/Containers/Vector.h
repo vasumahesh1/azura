@@ -462,14 +462,14 @@ void Vector<Type>::GrowIfNeeded() {
   if (m_maxSize == 0)
   {
 #ifdef BUILD_DEBUG
-    printf("\nDebug Warning: Vector was not initialized with any size. Set a size using the ctor or Reserve() or Resize().\n");
+    printf("=== Debug Warning: Vector was not initialized with any size. Set a size using the ctor or Reserve() or Resize(). ===\n");
 #endif
     Reserve(1);
     return;
   }
 
 #ifdef BUILD_DEBUG
-  printf("\nDebug Warning: Vector Growing in Size. This is underperformant -- consider setting the initial size.\n");
+  printf("=== Debug Warning: Vector Growing in Size. This is underperformant -- consider setting the initial size. ===\n");
 #endif
 
   m_maxSize = 2 * m_maxSize;
