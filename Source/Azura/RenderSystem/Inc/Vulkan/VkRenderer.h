@@ -99,7 +99,6 @@ private:
   VkPipelineLayout m_pipelineLayout{};
   VkDescriptorPool m_descriptorPool{};
 
-  VkScopedImage m_depthTexture;
 };
 } // namespace Vulkan
 } // namespace Azura

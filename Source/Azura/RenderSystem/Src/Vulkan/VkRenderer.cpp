@@ -38,8 +38,7 @@ VkRenderer::VkRenderer(const ApplicationInfo& appInfo,
     m_shaders(shaderRequirements.m_shaders.GetSize(), mainAllocator),
     m_renderPassAttachmentImages(renderPassRequirements.m_targets.GetSize(), mainAllocator),
     m_mainAllocator(mainAllocator),
-    m_drawPoolAllocator(drawAllocator),
-    m_depthTexture(log_VulkanRenderSystem) {
+    m_drawPoolAllocator(drawAllocator) {
   HEAP_ALLOCATOR(Temporary, Memory::MonotonicAllocator, 16384);
 
   Vector<const char*> extensions(4, allocatorTemporary);
@@ -180,8 +179,6 @@ VkRenderer::~VkRenderer() {
   for (const auto& attachments : m_renderPassAttachmentImages) {
     attachments.CleanUp();
   }
-
-  m_depthTexture.CleanUp();
 
   for (const auto& renderPass : m_renderPasses) {
     renderPass.CleanUp(m_device, m_graphicsCommandPool);

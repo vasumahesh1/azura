@@ -296,6 +296,11 @@ struct PipelinePassInput
 };
 
 struct PipelinePassCreateInfo {
+  using Shaders = SmallVector<U32, 5>;
+  using Outputs = SmallVector<U32, 4>;
+  using Inputs = SmallVector<PipelinePassInput, 4>;
+  using Descriptors = SmallVector<U32, 4>;
+
   SmallVector<U32, 5> m_shaders{};
 
   SmallVector<PipelinePassInput, 4> m_inputs{};

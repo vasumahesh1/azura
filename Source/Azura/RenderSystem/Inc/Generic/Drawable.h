@@ -64,7 +64,6 @@ private:
 struct DrawablePoolCreateInfo {
   U32 m_byteSize{0};
   U32 m_numDrawables{0};
-  U32 m_numShaders{0};
   CullMode m_cullMode{CullMode::BackBit};
 
   DrawType m_drawType{DrawType::InstancedIndexed};

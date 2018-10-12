@@ -101,17 +101,17 @@ void AppRenderer::Initialize() {
   const U32 COLOR_TARGET_1 = renderPassRequirements.AddTarget({RawStorageFormat::R32G32B32A32_FLOAT});
 
   const U32 GBUFFER_PASS = renderPassRequirements.AddPass({
-    {VERTEX_SHADER_ID, PIXEL_SHADER_ID},  // SHADERS
-    {},                                   // INPUT TARGETS
-    {COLOR_TARGET_1},     // OUTPUT TARGETS
-    {UBO_SLOT}                            // DESCRIPTORS
+    PipelinePassCreateInfo::Shaders{VERTEX_SHADER_ID, PIXEL_SHADER_ID},  // SHADERS
+    PipelinePassCreateInfo::Inputs{},                                    // INPUT TARGETS
+    PipelinePassCreateInfo::Outputs{COLOR_TARGET_1},                     // OUTPUT TARGETS
+    PipelinePassCreateInfo::Descriptors{UBO_SLOT}                        // DESCRIPTORS
   });
 
   const U32 SHADING_PASS = renderPassRequirements.AddPass({
-    {DEF_VERTEX_SHADER_ID, DEF_PIXEL_SHADER_ID},
-    {{COLOR_TARGET_1, ShaderStage::Pixel}},
-    {PRESENT_TARGET}, // END OF RENDERING
-    {SAMPLER_SLOT}
+    PipelinePassCreateInfo::Shaders{DEF_VERTEX_SHADER_ID, DEF_PIXEL_SHADER_ID},
+    PipelinePassCreateInfo::Inputs{{COLOR_TARGET_1, ShaderStage::Pixel}},
+    PipelinePassCreateInfo::Outputs{PRESENT_TARGET}, // END OF RENDERING
+    PipelinePassCreateInfo::Descriptors{SAMPLER_SLOT}
   });
 
   m_renderer = RenderSystem::CreateRenderer(appInfo, requirements, applicationRequirements,
@@ -127,7 +127,6 @@ void AppRenderer::Initialize() {
   DrawablePoolCreateInfo poolInfo = {allocatorTemporary};
   poolInfo.m_byteSize             = 0x400000;
   poolInfo.m_numDrawables         = 1;
-  poolInfo.m_numShaders           = 2;
   poolInfo.m_drawType             = DrawType::InstancedIndexed;
   poolInfo.m_renderPasses = {{GBUFFER_PASS}, allocatorTemporary};
   poolInfo.m_vertexDataSlots      = {
@@ -185,7 +184,6 @@ void AppRenderer::Initialize() {
   DrawablePoolCreateInfo quadPoolInfo = {allocatorTemporary};
   quadPoolInfo.m_byteSize             = 0x400000;
   quadPoolInfo.m_numDrawables         = 1;
-  quadPoolInfo.m_numShaders           = 2;
   quadPoolInfo.m_drawType             = DrawType::InstancedIndexed;
   quadPoolInfo.m_cullMode             = CullMode::None;
   quadPoolInfo.m_renderPasses = {{SHADING_PASS}, allocatorTemporary};

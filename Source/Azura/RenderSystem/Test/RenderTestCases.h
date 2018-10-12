@@ -15,7 +15,7 @@ struct UniformBufferData {
 }
 
 namespace RenderTestCases {
-  void ExecuteBasicRenderTest(Azura::Renderer& renderer, Azura::Window& window, const Azura::Log& log_TestCase);
-  void ExecuteBasicInstancingTest(Azura::Renderer& renderer, Azura::Window& window, const Azura::Log& log_TestCase);
-  void ExecuteBasicTextureTest(Azura::Renderer& renderer, Azura::Window& window, const Azura::Log& log_TestCase);
+  void ExecuteBasicRenderTest(Azura::Renderer& renderer, Azura::Window& window, Azura::U32 renderPass, Azura::U32 uboSlot, const Azura::Log& log_TestCase);
+  void ExecuteBasicInstancingTest(Azura::Renderer& renderer, Azura::Window& window, Azura::U32 renderPass, Azura::U32 uboSlot, const Azura::Log& log_TestCase);
+  void ExecuteBasicTextureTest(Azura::Renderer& renderer, Azura::Window& window, Azura::U32 renderPass, Azura::U32 uboSlot, Azura::U32 samplerSlot, Azura::U32 samplerTextureSlot, const Azura::Log& log_TestCase);
 } // namespace RenderTestCases
