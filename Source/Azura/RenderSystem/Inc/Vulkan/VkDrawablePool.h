@@ -84,7 +84,7 @@ public:
 
   void CleanUp() const;
 
-  const VkCommandBuffer& GetCommandBuffer(U32 idx) const;
+  void GetCommandBuffers(Containers::Vector<std::pair<U32, VkCommandBuffer>>& commandBuffers) const;
 
   // Drawable Scope Binds
   void BindVertexData(DrawableID drawableId, SlotID slot, const U8* buffer, U32 size) override;

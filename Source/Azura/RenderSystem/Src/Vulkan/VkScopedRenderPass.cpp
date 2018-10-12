@@ -11,21 +11,22 @@ namespace Vulkan {
 
 using namespace Containers; // NOLINT
 
-VkScopedRenderPass::VkScopedRenderPass(Memory::Allocator& mainAllocator, Log logger)
+VkScopedRenderPass::VkScopedRenderPass(U32 idx, Memory::Allocator& mainAllocator, Log logger)
   : log_VulkanRenderSystem(std::move(logger)),
+    m_id(idx),
     m_frameBuffer(),
     m_shaderPipelineInfos(mainAllocator) {
 }
 
 void VkScopedRenderPass::Create(VkDevice device,
+                                VkCommandPool commandPool,
+                                bool createFrameBuffer,
                                 const PipelinePassCreateInfo& createInfo,
                                 const Vector<RenderTargetCreateInfo>& pipelineBuffers,
                                 const Vector<VkScopedImage>& pipelineBufferImages,
                                 const Vector<VkShader>& allShaders,
                                 const VkScopedSwapChain& swapChain) {
   STACK_ALLOCATOR(Temporary, Memory::MonotonicAllocator, 2048);
-
-  m_device = device;
 
   m_shaderPipelineInfos.Reserve(U32(createInfo.m_shaders.size()));
 
@@ -117,8 +118,13 @@ void VkScopedRenderPass::Create(VkDevice device,
   renderPassInfo.dependencyCount = U32(dependencies.size());
   renderPassInfo.pDependencies   = dependencies.data();
 
-  VERIFY_VK_OP(log_VulkanRenderSystem, vkCreateRenderPass(m_device, &renderPassInfo, nullptr, &m_renderPass),
+  VERIFY_VK_OP(log_VulkanRenderSystem, vkCreateRenderPass(device, &renderPassInfo, nullptr, &m_renderPass),
     "Failed to create render pass");
+
+  if (!createFrameBuffer)
+  {
+    return;
+  }
 
   VkFramebufferCreateInfo framebufferInfo = {};
   framebufferInfo.sType                   = VK_STRUCTURE_TYPE_FRAMEBUFFER_CREATE_INFO;
@@ -131,6 +137,9 @@ void VkScopedRenderPass::Create(VkDevice device,
 
   VERIFY_VK_OP(log_VulkanRenderSystem, vkCreateFramebuffer(device, &framebufferInfo, nullptr, &m_frameBuffer),
     "Failed to create single framebuffer");
+
+  m_commandBuffer = VkCore::CreateCommandBuffer(device, commandPool, VK_COMMAND_BUFFER_LEVEL_PRIMARY,
+                                                log_VulkanRenderSystem);
 }
 
 VkRenderPass VkScopedRenderPass::GetRenderPass() const {
@@ -141,14 +150,40 @@ VkFramebuffer VkScopedRenderPass::GetFrameBuffer() const {
   return m_frameBuffer;
 }
 
+VkCommandBuffer VkScopedRenderPass::GetCommandBuffer() const {
+  return m_commandBuffer;
+}
+
+U32 VkScopedRenderPass::GetId() const {
+  return m_id;
+}
+
+void VkScopedRenderPass::Begin(const VkScopedSwapChain& swapChain, std::array<VkClearValue, 2> clearData) const {
+  VkRenderPassBeginInfo renderPassInfo = {};
+  renderPassInfo.sType                 = VK_STRUCTURE_TYPE_RENDER_PASS_BEGIN_INFO;
+  renderPassInfo.renderPass            = m_renderPass;
+  renderPassInfo.framebuffer           = m_frameBuffer;
+  renderPassInfo.renderArea.offset     = {0, 0};
+  renderPassInfo.renderArea.extent     = swapChain.GetExtent();
+  renderPassInfo.clearValueCount       = U32(clearData.size());
+  renderPassInfo.pClearValues          = clearData.data();
+
+  vkCmdBeginRenderPass(m_commandBuffer, &renderPassInfo, VK_SUBPASS_CONTENTS_SECONDARY_COMMAND_BUFFERS);
+}
+
+void VkScopedRenderPass::End() const {
+  vkCmdEndRenderPass(m_commandBuffer);
+  VkCore::EndCommandBuffer(m_commandBuffer, log_VulkanRenderSystem);
+}
+
 const Vector<VkPipelineShaderStageCreateInfo>& VkScopedRenderPass::GetShaderStageInfo() const {
   return m_shaderPipelineInfos;
 }
 
-void VkScopedRenderPass::CleanUp() const {
-  vkDestroyRenderPass(m_device, m_renderPass, nullptr);
-  vkDestroyFramebuffer(m_device, m_frameBuffer, nullptr);
-
+void VkScopedRenderPass::CleanUp(VkDevice device, VkCommandPool commandPool) const {
+  vkDestroyRenderPass(device, m_renderPass, nullptr);
+  vkDestroyFramebuffer(device, m_frameBuffer, nullptr);
+  vkFreeCommandBuffers(device, commandPool, 1, &m_commandBuffer);
 }
 } // namespace Vulkan
 } // namespace Azura

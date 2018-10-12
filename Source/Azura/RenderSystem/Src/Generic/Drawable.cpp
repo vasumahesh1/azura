@@ -95,6 +95,7 @@ DrawablePool::DrawablePool(const DrawablePoolCreateInfo& createInfo, DescriptorC
                                      IsPerInstanceSlot)),
     m_descriptorCount(descriptorCount),
     m_vertexDataSlots(createInfo.m_vertexDataSlots, allocator),
+    m_renderPasses(createInfo.m_renderPasses, allocator),
     m_textureBufferInfos(allocator),
     m_samplerInfos(allocator),
     m_cullMode(createInfo.m_cullMode),
@@ -145,5 +146,17 @@ int DrawablePool::GetVertexSlotIndex(SlotID id) const {
   }
 
   return it - m_vertexDataSlots.Begin();
+}
+
+bool DrawablePool::CanRenderInPass(U32 renderPassId) const {
+  for(const auto& pass: m_renderPasses)
+  {
+    if (pass == renderPassId)
+    {
+      return true;
+    }
+  }
+
+  return false;
 }
 } // namespace Azura

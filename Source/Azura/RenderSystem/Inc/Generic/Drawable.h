@@ -116,13 +116,13 @@ public:
   virtual void Submit() = 0;
 
   U32 GetSize() const;
+  bool CanRenderInPass(U32 renderPassId) const;
 
 protected:
   Memory::Allocator& GetAllocator() const;
   DrawType GetDrawType() const;
 
   int GetVertexSlotIndex(SlotID id) const;
-  int GetDescriptorSlotIndex(SlotID id) const;
 
   U32 m_numVertexSlots;
   U32 m_numInstanceSlots;
@@ -130,6 +130,7 @@ protected:
   DescriptorCount m_descriptorCount;
 
   Containers::Vector<VertexSlot> m_vertexDataSlots;
+  Containers::Vector<U32> m_renderPasses;
 
   Containers::Vector<TextureBufferInfo> m_textureBufferInfos;
   Containers::Vector<SamplerInfo> m_samplerInfos;

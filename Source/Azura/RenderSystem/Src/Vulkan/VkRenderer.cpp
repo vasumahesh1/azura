@@ -101,9 +101,12 @@ VkRenderer::VkRenderer(const ApplicationInfo& appInfo,
                                                         memProperties, log_VulkanRenderSystem));
   }
 
+  U32 passCount = 0;
   for (const auto& passCreateInfo : renderPassRequirements.m_passSequence) {
-    VkScopedRenderPass renderPass = VkScopedRenderPass(mainAllocator, log_VulkanRenderSystem);
+    VkScopedRenderPass renderPass = VkScopedRenderPass(m_renderPasses.GetSize(), mainAllocator, log_VulkanRenderSystem);
     renderPass.Create(m_device,
+                      m_graphicsCommandPool,
+                      passCount != (renderPassRequirements.m_passSequence.GetSize() - 1),
                       passCreateInfo,
                       renderPassRequirements.m_targets,
                       m_renderPassAttachmentImages,
@@ -111,12 +114,11 @@ VkRenderer::VkRenderer(const ApplicationInfo& appInfo,
                       m_swapChain);
 
     m_renderPasses.PushBack(renderPass);
+    ++passCount;
   }
 
   // TODO(vasumahesh1):[RENDER PASS]: Needs Changes
-  // m_renderPasses = VkCore::CreateRenderPass(m_device, m_swapChain, log_VulkanRenderSystem);
-
-  // VkCore::CreateFrameBuffers(m_device, m_renderPasses, m_swapChain, m_frameBuffers, log_VulkanRenderSystem);
+  VkCore::CreateFrameBuffers(m_device, m_renderPasses.Last().GetRenderPass(), m_swapChain, m_frameBuffers, log_VulkanRenderSystem);
 
   const U32 syncCount = swapChainRequirement.m_framesInFlight;
 
@@ -160,13 +162,12 @@ VkRenderer::~VkRenderer() {
     shader.CleanUp(m_device);
   }
 
-  vkFreeCommandBuffers(m_device, m_graphicsCommandPool, m_primaryCommandBuffers.GetSize(),
-                       m_primaryCommandBuffers.Data());
+  // vkFreeCommandBuffers(m_device, m_graphicsCommandPool, m_primaryCommandBuffers.GetSize(), m_primaryCommandBuffers.Data());
 
   m_swapChain.CleanUp(m_device);
 
   for (const auto& renderPass : m_renderPasses) {
-    renderPass.CleanUp();
+    renderPass.CleanUp(m_device, m_graphicsCommandPool);
   }
 
   vkDestroyCommandPool(m_device, m_graphicsCommandPool, nullptr);
@@ -220,7 +221,7 @@ String VkRenderer::GetRenderingAPI() const {
 }
 
 void VkRenderer::Submit() {
-  STACK_ALLOCATOR(Temporary, Memory::MonotonicAllocator, 1024);
+  STACK_ALLOCATOR(Temporary, Memory::MonotonicAllocator, 4096);
   m_primaryCommandBuffers.Resize(m_frameBuffers.GetSize());
   VkCore::CreateCommandBuffers(m_device, m_graphicsCommandPool, VK_COMMAND_BUFFER_LEVEL_PRIMARY,
                                m_primaryCommandBuffers, log_VulkanRenderSystem);
@@ -232,11 +233,43 @@ void VkRenderer::Submit() {
   clearData[0].color        = {clearColor[0], clearColor[1], clearColor[2], clearColor[3]}; // NOLINT
   clearData[1].depthStencil = {clearDepthStencil[0], U32(clearDepthStencil[1])};            // NOLINT
 
-  Vector<VkCommandBuffer> secondaryBuffers(m_drawablePools.GetSize(), allocatorTemporary);
+  Vector<Vector<VkCommandBuffer>> secondaryCmdBuffers(m_renderPasses.GetSize(), allocatorTemporary);
+
+  for(const auto& renderPass : m_renderPasses)
+  {
+    Vector<VkCommandBuffer> poolCmdBuffers(m_drawablePools.GetSize(), allocatorTemporary);
+    secondaryCmdBuffers.PushBack(poolCmdBuffers);
+  }
+
   for (auto& drawablePool : m_drawablePools) {
     drawablePool.Submit();
-    secondaryBuffers.PushBack(drawablePool.GetCommandBuffer());
   }
+
+  for (auto& drawablePool : m_drawablePools)
+  {
+    Vector<std::pair<U32, VkCommandBuffer>> drawableBuffer(allocatorTemporary);
+    drawablePool.GetCommandBuffers(drawableBuffer);
+
+    for(const auto& bufferPair : drawableBuffer)
+    {
+      secondaryCmdBuffers[bufferPair.first].PushBack(bufferPair.second);
+    }
+  }
+
+  // Don't call last pass
+  for (U32 idx = 0; idx < m_renderPasses.GetSize() - 1; ++idx) {
+    const auto& renderPass = m_renderPasses[idx];
+
+    renderPass.Begin(m_swapChain, clearData);
+
+    const auto& cmdBuffers = secondaryCmdBuffers[renderPass.GetId()];
+    vkCmdExecuteCommands(renderPass.GetCommandBuffer(), cmdBuffers.GetSize(), cmdBuffers.Data());
+
+    renderPass.End();
+  }
+
+  const auto& lastPass = m_renderPasses.Last();
+  const auto& lastPassCommands = secondaryCmdBuffers.Last();
 
   for (U32 idx                = 0; idx < m_primaryCommandBuffers.GetSize(); ++idx) {
     const auto& commandBuffer = m_primaryCommandBuffers[idx];
@@ -244,7 +277,7 @@ void VkRenderer::Submit() {
 
     VkRenderPassBeginInfo renderPassInfo = {};
     renderPassInfo.sType                 = VK_STRUCTURE_TYPE_RENDER_PASS_BEGIN_INFO;
-    renderPassInfo.renderPass            = m_renderPasses;
+    renderPassInfo.renderPass            = lastPass.GetRenderPass();
     renderPassInfo.framebuffer           = m_frameBuffers[idx];
     renderPassInfo.renderArea.offset     = {0, 0};
     renderPassInfo.renderArea.extent     = m_swapChain.GetExtent();
@@ -253,7 +286,7 @@ void VkRenderer::Submit() {
 
     vkCmdBeginRenderPass(commandBuffer, &renderPassInfo, VK_SUBPASS_CONTENTS_SECONDARY_COMMAND_BUFFERS);
 
-    vkCmdExecuteCommands(commandBuffer, secondaryBuffers.GetSize(), secondaryBuffers.Data());
+    vkCmdExecuteCommands(commandBuffer, lastPassCommands.GetSize(), lastPassCommands.Data());
 
     vkCmdEndRenderPass(commandBuffer);
 

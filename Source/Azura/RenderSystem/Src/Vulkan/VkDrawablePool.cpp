@@ -17,7 +17,7 @@ namespace Vulkan {
 
 VkDrawable::VkDrawable(VkDevice device,
                        VkBuffer mainBuffer,
-                       const Containers::Vector<VkDescriptorSetLayout>& descriptorSetLayouts,
+                       const Vector<VkDescriptorSetLayout>& descriptorSetLayouts,
                        VkDescriptorPool descriptorPool,
                        const DrawableCreateInfo& info,
                        U32 numVertexSlots,
@@ -260,7 +260,7 @@ void VkDrawablePool::Submit() {
 
   m_pipelineFactory.Submit(m_renderPasses, m_pipelines);
 
-  m_commandBuffers.Reserve(m_renderPasses.GetSize());
+  m_commandBuffers.Resize(m_renderPasses.GetSize());
   VkCore::CreateCommandBuffers(m_device, m_graphicsCommandPool, VK_COMMAND_BUFFER_LEVEL_SECONDARY, m_commandBuffers, log_VulkanRenderSystem);
 
   U32 count = 0;
@@ -378,8 +378,15 @@ void VkDrawablePool::CleanUp() const {
   vkFreeCommandBuffers(m_device, m_graphicsCommandPool, m_commandBuffers.GetSize(), m_commandBuffers.Data());
 }
 
-const VkCommandBuffer& VkDrawablePool::GetCommandBuffer(U32 idx) const {
-  return m_commandBuffers[idx];
+void VkDrawablePool::GetCommandBuffers(Vector<std::pair<U32, VkCommandBuffer>>& commandBuffers) const {
+  U32 idx = 0;
+  commandBuffers.Reserve(m_renderPasses.GetSize());
+
+  for(const auto& renderPass : m_renderPasses)
+  {
+    commandBuffers.PushBack(std::make_pair(renderPass.GetId(), m_commandBuffers[idx]));
+    ++idx;
+  }
 }
 
 void VkDrawablePool::BindVertexData(DrawableID drawableId, SlotID slot, const U8* buffer, U32 size) {
@@ -427,13 +434,6 @@ void VkDrawablePool::BindInstanceData(DrawableID drawableId, SlotID slot, const 
 }
 
 void VkDrawablePool::BindUniformData(DrawableID drawableId, SlotID slot, const U8* buffer, U32 size) {
-  const int idx = GetDescriptorSlotIndex(slot);
-
-  if (idx < 0) {
-    LOG_ERR(log_VulkanRenderSystem, LOG_LEVEL, "Invalid Slot ID for Binding Descriptor Data: %d", slot);
-    return;
-  }
-
   const auto minAlignment = U32(m_physicalDeviceProperties.limits.minUniformBufferOffsetAlignment);
 
   assert(m_drawables.GetSize() > drawableId);
@@ -448,7 +448,7 @@ void VkDrawablePool::BindUniformData(DrawableID drawableId, SlotID slot, const U
   const U32 newOffset     = (currentOffset + minAlignment - 1) & ~(minAlignment - 1);
   m_mainBufferOffset += newOffset - currentOffset;
 
-  const auto& descriptorSlot = m_descriptorSlots[idx];
+  const auto& descriptorSlot = m_descriptorSlots[slot];
 
   UniformBufferInfo info = UniformBufferInfo();
   info.m_byteSize        = size;
@@ -461,16 +461,9 @@ void VkDrawablePool::BindUniformData(DrawableID drawableId, SlotID slot, const U
 }
 
 void VkDrawablePool::BindTextureData(SlotID slot, const TextureDesc& desc, const U8* buffer) {
-  const int idx = GetDescriptorSlotIndex(slot);
-
-  if (idx < 0) {
-    LOG_ERR(log_VulkanRenderSystem, LOG_LEVEL, "Invalid Slot ID for Binding Texture Descriptor Data: %d", slot);
-    return;
-  }
-
   const U32 size = desc.m_size;
 
-  const auto& descriptorSlot = m_descriptorSlots[idx];
+  const auto& descriptorSlot = m_descriptorSlots[slot];
 
   TextureBufferInfo info = TextureBufferInfo();
   info.m_byteSize        = size;
@@ -485,14 +478,8 @@ void VkDrawablePool::BindTextureData(SlotID slot, const TextureDesc& desc, const
 
 void VkDrawablePool::BindSampler(SlotID slot, const SamplerDesc& desc) {
   UNUSED(desc);
-  const int idx = GetDescriptorSlotIndex(slot);
-
-  if (idx < 0) {
-    LOG_ERR(log_VulkanRenderSystem, LOG_LEVEL, "Invalid Slot ID for Binding Texture Descriptor Data: %d", slot);
-    return;
-  }
-
-  const auto& descriptorSlot = m_descriptorSlots[idx];
+  
+  const auto& descriptorSlot = m_descriptorSlots[slot];
 
   if (descriptorSlot.m_type != DescriptorType::Sampler) {
     LOG_ERR(log_VulkanRenderSystem, LOG_LEVEL, "Slot is not a Sampler: %d", slot);

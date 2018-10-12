@@ -90,21 +90,22 @@ void AppRenderer::Initialize() {
   const U32 PIXEL_SHADER_ID = shaderRequirements.AddShader({ ShaderStage::Pixel, "TestZone.ps", AssetLocation::Shaders });
 
   RenderPassRequirements renderPassRequirements = RenderPassRequirements(1, 2, allocatorTemporary);
-  const U32 GB_TARGET_1 = renderPassRequirements.AddTarget({RawStorageFormat::R32G32B32A32_FLOAT});
+  const U32 COLOR_TARGET_1 = renderPassRequirements.AddTarget({RawStorageFormat::R32G32B32A32_FLOAT});
+  const U32 DEPTH_TARGET_1 = renderPassRequirements.AddTarget({RawStorageFormat::D32_FLOAT});
 
   const U32 GBUFFER_PASS = renderPassRequirements.AddPass({
     {VERTEX_SHADER_ID, PIXEL_SHADER_ID}, // SHADERS
     {},            // INPUT TARGETS
-    {GB_TARGET_1}, // OUTPUT TARGETS
+    {COLOR_TARGET_1, DEPTH_TARGET_1}, // OUTPUT TARGETS
     {UBO_SLOT}     // DESCRIPTORS
   });
 
-  const U32 SHADING_PASS = renderPassRequirements.AddPass({
-    {VERTEX_SHADER_ID, PIXEL_SHADER_ID},
-    {GB_TARGET_1},
-    {PRESENT_TARGET}, // END OF RENDERING
-    {UBO_SLOT, SAMPLER_SLOT, BASIC_TEXTURE_SLOT}
-  });
+  // const U32 SHADING_PASS = renderPassRequirements.AddPass({
+  //   {VERTEX_SHADER_ID, PIXEL_SHADER_ID},
+  //   {GB_TARGET_1},
+  //   {PRESENT_TARGET}, // END OF RENDERING
+  //   {UBO_SLOT, SAMPLER_SLOT, BASIC_TEXTURE_SLOT}
+  // });
 
   m_renderer = RenderSystem::CreateRenderer(appInfo, requirements, applicationRequirements,
                                             m_window->GetSwapChainRequirements(), renderPassRequirements,
@@ -121,6 +122,7 @@ void AppRenderer::Initialize() {
   poolInfo.m_numDrawables         = 1;
   poolInfo.m_numShaders           = 2;
   poolInfo.m_drawType             = DrawType::InstancedIndexed;
+  poolInfo.m_renderPasses = {{GBUFFER_PASS}, allocatorTemporary};
   poolInfo.m_vertexDataSlots      = {
     {
       {VERTEX_SLOT, BufferUsageRate::PerVertex}

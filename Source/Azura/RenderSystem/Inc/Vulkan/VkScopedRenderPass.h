@@ -11,9 +11,11 @@ class VkScopedSwapChain;
 
 class VkScopedRenderPass {
 public:
-  VkScopedRenderPass(Memory::Allocator& mainAllocator, Log logger);
+  VkScopedRenderPass(U32 id, Memory::Allocator& mainAllocator, Log logger);
 
   void Create(VkDevice device,
+              VkCommandPool commandPool,
+              bool createFrameBuffer,
               const PipelinePassCreateInfo& createInfo,
               const Containers::Vector<RenderTargetCreateInfo>& pipelineBuffers,
               const Containers::Vector<VkScopedImage>& pipelineBufferImages,
@@ -22,16 +24,24 @@ public:
 
   VkRenderPass GetRenderPass() const;
   VkFramebuffer GetFrameBuffer() const;
+  VkCommandBuffer GetCommandBuffer() const;
+
+  U32 GetId() const;
+
+  void Begin(const VkScopedSwapChain& swapChain, std::array<VkClearValue, 2> clearData) const;
+  void End() const;
 
   const Containers::Vector<VkPipelineShaderStageCreateInfo>& GetShaderStageInfo() const;
 
-  void CleanUp() const;
+  void CleanUp(VkDevice device, VkCommandPool commandPool) const;
 
 private:
   Log log_VulkanRenderSystem;
-  VkDevice m_device{};
+
+  U32 m_id;
 
   VkFramebuffer m_frameBuffer;
+  VkCommandBuffer m_commandBuffer{};
 
   VkRenderPass m_renderPass{};
   Containers::Vector<VkPipelineShaderStageCreateInfo> m_shaderPipelineInfos;
