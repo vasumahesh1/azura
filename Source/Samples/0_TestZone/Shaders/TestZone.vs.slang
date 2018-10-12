@@ -1,7 +1,5 @@
 import Common;
 
-ParameterBlock<UBOData> ubo;
-
 PixelShaderInput main(VertexShaderInput input)
 {
   float4 vertexPosition = input.in_Pos;
