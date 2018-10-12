@@ -34,9 +34,11 @@ public:
 
   void WriteDescriptorSets(
     const Containers::Vector<TextureBufferInfo>& textureBufferInfos,
+    const Containers::Vector<std::reference_wrapper<VkScopedRenderPass>>& renderPasses,
     const Containers::Vector<SamplerInfo>& samplerInfos,
     const Containers::Vector<VkScopedSampler>& samplers,
-    const Containers::Vector<VkScopedImage>& images);
+    const Containers::Vector<VkScopedImage>& images,
+    const Containers::Vector<VkScopedImage>& renderPassAttachments);
 
   const Containers::Vector<VkDescriptorSet>& GetDescriptorSet() const;
 
@@ -66,6 +68,7 @@ public:
                  VkDescriptorPool descriptorPool,
                  const Containers::Vector<VkDescriptorSetLayout>& descriptorSetLayouts,
                  const Containers::Vector<VkScopedRenderPass>& renderPasses,
+                 const Containers::Vector<VkScopedImage>& renderPassAttachments,
                  const ApplicationRequirements& appReq,
                  const ViewportDimensions& viewport,
                  const VkPhysicalDeviceMemoryProperties& phyDeviceMemoryProperties,
@@ -105,9 +108,10 @@ private:
   VkScopedBuffer m_buffer;
   VkScopedBuffer m_stagingBuffer;
   VkDevice m_device;
-  const Containers::Vector<VkScopedRenderPass>& m_renderPasses;
+  Containers::Vector<std::reference_wrapper<VkScopedRenderPass>> m_renderPasses;
   const Containers::Vector<VkDescriptorSetLayout>& m_descriptorSetLayouts;
   const Containers::Vector<DescriptorSlot>& m_descriptorSlots;
+  const Containers::Vector<VkScopedImage>& m_renderPassAttachments;
 
   ViewportDimensions m_viewport;
   VkPhysicalDeviceMemoryProperties m_physicalDeviceMemoryProperties;

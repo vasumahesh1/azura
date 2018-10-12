@@ -11,7 +11,7 @@ class VkScopedSwapChain;
 
 class VkScopedRenderPass {
 public:
-  VkScopedRenderPass(U32 id, Memory::Allocator& mainAllocator, Log logger);
+  VkScopedRenderPass(U32 idx, Memory::Allocator& mainAllocator, Log logger);
 
   void Create(VkDevice device,
               VkCommandPool commandPool,
@@ -24,8 +24,6 @@ public:
   void CreateForSwapChain(VkDevice device,
     VkCommandPool commandPool,
     const PipelinePassCreateInfo& createInfo,
-    const Containers::Vector<RenderTargetCreateInfo>& pipelineBuffers,
-    const Containers::Vector<VkScopedImage>& pipelineBufferImages,
     const Containers::Vector<VkShader>& allShaders,
     const VkScopedSwapChain& swapChain);
 
@@ -33,10 +31,16 @@ public:
   VkFramebuffer GetFrameBuffer(U32 idx) const;
   VkCommandBuffer GetCommandBuffer(U32 idx) const;
 
+  const Containers::Vector<PipelinePassInput>& GetPassInputs() const;
+
   U32 GetFrameBufferCount() const;
   VkSemaphore GetRenderSemaphore() const;
+  VkDescriptorSetLayout GetDescriptorSetLayout() const;
 
   U32 GetId() const;
+
+  U32 GetDescriptorSetId() const;
+  void SetDescriptorSetId(U32 id);
 
   void Begin(const VkScopedSwapChain& swapChain, std::array<VkClearValue, 2> clearData) const;
   void End() const;
@@ -46,14 +50,19 @@ public:
   void CleanUp(VkDevice device, VkCommandPool commandPool) const;
 
 private:
+  void CreateDescriptorSetLayout(VkDevice device, const PipelinePassCreateInfo& createInfo);
+
   Log log_VulkanRenderSystem;
 
   U32 m_id;
+  U32 m_descriptorSet{0};
 
-  VkSemaphore m_beginRenderSemaphore;
+  VkSemaphore m_beginRenderSemaphore{};
+  VkDescriptorSetLayout m_descriptorSetLayout;
 
   Containers::Vector<VkFramebuffer> m_frameBuffers;
   Containers::Vector<VkCommandBuffer> m_commandBuffers;
+  Containers::Vector<PipelinePassInput> m_inputAttachments;
 
   VkRenderPass m_renderPass{};
   Containers::Vector<VkPipelineShaderStageCreateInfo> m_shaderPipelineInfos;

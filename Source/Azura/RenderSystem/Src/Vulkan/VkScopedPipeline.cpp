@@ -178,7 +178,7 @@ VkPipelineFactory& VkPipelineFactory::SetPipelineLayout(VkPipelineLayout layout)
   return *this;
 }
 
-void VkPipelineFactory::Submit(Containers::Vector<VkScopedRenderPass> renderPasses, Containers::Vector<VkScopedPipeline>& result) const {
+void VkPipelineFactory::Submit(Containers::Vector<std::reference_wrapper<VkScopedRenderPass>> renderPasses, Containers::Vector<VkScopedPipeline>& result) const {
   result.Reserve(renderPasses.GetSize());
 
   VkPipelineVertexInputStateCreateInfo vertexInputInfo = {};
@@ -224,11 +224,11 @@ void VkPipelineFactory::Submit(Containers::Vector<VkScopedRenderPass> renderPass
 
   for (const auto& renderPass : renderPasses)
   {
-    const auto& stages = renderPass.GetShaderStageInfo();
+    const auto& stages = renderPass.get().GetShaderStageInfo();
 
     pipelineInfo.stageCount                   = stages.GetSize();
     pipelineInfo.pStages                      = stages.Data();
-    pipelineInfo.renderPass                   = renderPass.GetRenderPass();
+    pipelineInfo.renderPass                   = renderPass.get().GetRenderPass();
 
     LOG_DBG(log_VulkanRenderSystem, LOG_LEVEL, "Total Shader Stages: %d", stages.GetSize());
 

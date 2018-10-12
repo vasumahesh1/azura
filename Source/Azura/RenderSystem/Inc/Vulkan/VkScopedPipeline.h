@@ -36,7 +36,7 @@ class VkPipelineFactory {
   VkPipelineFactory& SetColorBlendStage();
   VkPipelineFactory& SetPipelineLayout(VkPipelineLayout layout);
 
-  void Submit(Containers::Vector<VkScopedRenderPass> renderPasses, Containers::Vector<VkScopedPipeline>& result) const;
+  void Submit(Containers::Vector<std::reference_wrapper<VkScopedRenderPass>> renderPasses, Containers::Vector<VkScopedPipeline>& result) const;
 
  private:
   struct BindingInfo {

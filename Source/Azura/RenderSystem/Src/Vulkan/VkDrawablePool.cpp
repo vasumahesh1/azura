@@ -46,14 +46,16 @@ VkDrawable::VkDrawable(VkDevice device,
 
 void VkDrawable::WriteDescriptorSets(
   const Vector<TextureBufferInfo>& textureBufferInfos,
+  const Vector<std::reference_wrapper<VkScopedRenderPass>>& renderPasses,
   const Vector<SamplerInfo>& samplerInfos,
   const Vector<VkScopedSampler>& samplers,
-  const Vector<VkScopedImage>& images) {
+  const Vector<VkScopedImage>& images,
+  const Vector<VkScopedImage>& renderPassAttachments) {
   STACK_ALLOCATOR(Temporary, Memory::MonotonicAllocator, 2048);
 
-  U32 totalWrites = m_uniformBufferInfos.GetSize() + samplerInfos.GetSize() + images.GetSize();
+  // U32 totalWrites = m_uniformBufferInfos.GetSize() + samplerInfos.GetSize() + images.GetSize();
 
-  Vector<VkWriteDescriptorSet> descriptorWrites(totalWrites, allocatorTemporary);
+  // Vector<VkWriteDescriptorSet> descriptorWrites(totalWrites, allocatorTemporary);
 
   // TODO(vasumahesh1):[DESCRIPTOR]: How to use Uniform Buffer Arrays?
   for (const auto& ubInfo : m_uniformBufferInfos) {
@@ -119,6 +121,40 @@ void VkDrawable::WriteDescriptorSets(
 
     vkUpdateDescriptorSets(m_device, 1, &descriptorWrite, 0, nullptr);
   }
+
+  for (const auto& renderPass : renderPasses)
+  {
+    const auto& inputs = renderPass.get().GetPassInputs();
+    const auto setId = renderPass.get().GetDescriptorSetId();
+
+    Vector<VkWriteDescriptorSet> inputDescriptorWrites(allocatorTemporary);
+
+    U32 bindingId = 0;
+    for (U32 idx = 0; idx < inputs.GetSize(); ++idx) {
+      const auto& inputInfo = inputs[idx];
+
+      VkDescriptorImageInfo sampledImageInfo = {};
+      // TODO(vasumahesh1):[TEXTURE]: Depth Stencil
+      sampledImageInfo.imageLayout = VK_IMAGE_LAYOUT_SHADER_READ_ONLY_OPTIMAL;
+      sampledImageInfo.imageView   = renderPassAttachments[inputInfo.m_id].View();
+
+      VkWriteDescriptorSet descriptorWrite = {};
+      descriptorWrite.sType                = VK_STRUCTURE_TYPE_WRITE_DESCRIPTOR_SET;
+      descriptorWrite.dstSet               = m_descriptorSets[setId];
+      descriptorWrite.dstBinding           = bindingId;
+      descriptorWrite.dstArrayElement      = 0;
+      descriptorWrite.descriptorType       = VK_DESCRIPTOR_TYPE_SAMPLED_IMAGE;
+      descriptorWrite.descriptorCount      = 1;
+      descriptorWrite.pBufferInfo          = nullptr;
+      descriptorWrite.pImageInfo           = &sampledImageInfo;
+      descriptorWrite.pTexelBufferView     = nullptr;
+
+      inputDescriptorWrites.PushBack(descriptorWrite);
+      ++bindingId;
+    }
+
+    vkUpdateDescriptorSets(m_device, inputDescriptorWrites.GetSize(), inputDescriptorWrites.Data(), 0, nullptr);
+  }
 }
 
 const Containers::Vector<VkDescriptorSet>& VkDrawable::GetDescriptorSet() const {
@@ -139,6 +175,7 @@ VkDrawablePool::VkDrawablePool(const DrawablePoolCreateInfo& createInfo,
                                VkDescriptorPool descriptorPool,
                                const Vector<VkDescriptorSetLayout>& descriptorSetLayouts,
                                const Vector<VkScopedRenderPass>& renderPasses,
+                               const Vector<VkScopedImage>& renderPassAttachments,
                                const ApplicationRequirements& appReq,
                                const ViewportDimensions& viewport,
                                const VkPhysicalDeviceMemoryProperties& phyDeviceMemoryProperties,
@@ -156,10 +193,11 @@ VkDrawablePool::VkDrawablePool(const DrawablePoolCreateInfo& createInfo,
     m_stagingBuffer(device, VK_BUFFER_USAGE_TRANSFER_SRC_BIT, createInfo.m_byteSize, memoryProperties,
                     phyDeviceMemoryProperties, logger),
     m_device(device),
-    m_renderPasses(renderPasses),
+    m_renderPasses(allocator),
     m_viewport(viewport),
     m_descriptorSetLayouts(descriptorSetLayouts),
     m_descriptorSlots(descriptorSlots),
+    m_renderPassAttachments(renderPassAttachments),
     m_physicalDeviceMemoryProperties(phyDeviceMemoryProperties),
     m_descriptorPool(descriptorPool),
     m_pipelines(allocator),
@@ -176,6 +214,22 @@ VkDrawablePool::VkDrawablePool(const DrawablePoolCreateInfo& createInfo,
     m_samplers(allocator),
     log_VulkanRenderSystem(std::move(logger)) {
   m_samplers.Reserve(m_samplerInfos.GetMaxSize());
+
+  U32 idx = 0;
+  for(const auto& renderPass : renderPasses)
+  {
+    auto it = std::find_if(createInfo.m_renderPasses.Begin(), createInfo.m_renderPasses.End(), [&](U32 passId)
+    {
+      return renderPass.GetId() == passId;
+    });
+
+    if (it != createInfo.m_renderPasses.End())
+    {
+      m_renderPasses.PushBack(std::reference_wrapper<VkScopedRenderPass>(renderPasses[idx]));
+    }
+
+    ++idx;
+  }
 }
 
 
@@ -244,7 +298,7 @@ void VkDrawablePool::SubmitTextureData() {
   }
 
   for (auto& drawable : m_drawables) {
-    drawable.WriteDescriptorSets(m_textureBufferInfos, m_samplerInfos, m_samplers, m_images);
+    drawable.WriteDescriptorSets(m_textureBufferInfos, m_renderPasses, m_samplerInfos, m_samplers, m_images, m_renderPassAttachments);
   }
 }
 
@@ -271,7 +325,7 @@ void VkDrawablePool::Submit() {
 
     VkCommandBufferInheritanceInfo inheritanceInfo = {};
     inheritanceInfo.sType                          = VK_STRUCTURE_TYPE_COMMAND_BUFFER_INHERITANCE_INFO;
-    inheritanceInfo.renderPass                     = renderPass.GetRenderPass();
+    inheritanceInfo.renderPass                     = renderPass.get().GetRenderPass();
     inheritanceInfo.framebuffer                    = VK_NULL_HANDLE;
     // TODO(vasumahesh1):[PERF]: renderPass.GetFrameBuffer();
 
@@ -385,7 +439,7 @@ void VkDrawablePool::GetCommandBuffers(Vector<std::pair<U32, VkCommandBuffer>>& 
   commandBuffers.Reserve(m_renderPasses.GetSize());
 
   for (const auto& renderPass : m_renderPasses) {
-    commandBuffers.PushBack(std::make_pair(renderPass.GetId(), m_commandBuffers[idx]));
+    commandBuffers.PushBack(std::make_pair(renderPass.get().GetId(), m_commandBuffers[idx]));
     ++idx;
   }
 }

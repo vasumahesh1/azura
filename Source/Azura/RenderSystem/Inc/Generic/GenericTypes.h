@@ -168,14 +168,10 @@ struct ViewportDimensions {
   float m_maxDepth;
 };
 
-using SlotID = SizeType;
-
-constexpr SlotID GenSlot(const char* str) {
-  return FNVHash(str, sizeof(str), DEFAULT_SEED, DEFAULT_PRIME);
-}
+using SlotID = U32;
 
 struct VertexSlot {
-  SizeType m_key;
+  U32 m_key;
   BufferUsageRate m_rate;
 };
 
@@ -186,7 +182,7 @@ struct DescriptorSlotCreateInfo {
 };
 
 struct DescriptorSlot {
-  SizeType m_key{0};
+  U32 m_key{0};
   DescriptorType m_type{DescriptorType::UniformBuffer};
   ShaderStage m_stages{ShaderStage::All};
   DescriptorBinding m_binding{DescriptorBinding::Default};
@@ -293,10 +289,16 @@ struct RenderTargetCreateInfo {
   RawStorageFormat m_format{RawStorageFormat::UNKNOWN};
 };
 
+struct PipelinePassInput
+{
+  U32 m_id;
+  ShaderStage m_stages;
+};
+
 struct PipelinePassCreateInfo {
   SmallVector<U32, 5> m_shaders{};
 
-  SmallVector<U32, 4> m_inputs{};
+  SmallVector<PipelinePassInput, 4> m_inputs{};
   SmallVector<U32, 4> m_outputs{};
   SmallVector<U32, 4> m_descriptors{};
 };

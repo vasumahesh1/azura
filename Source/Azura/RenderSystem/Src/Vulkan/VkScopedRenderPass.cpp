@@ -14,8 +14,10 @@ using namespace Containers; // NOLINT
 VkScopedRenderPass::VkScopedRenderPass(U32 idx, Memory::Allocator& mainAllocator, Log logger)
   : log_VulkanRenderSystem(std::move(logger)),
     m_id(idx),
+    m_descriptorSetLayout(VK_NULL_HANDLE),
     m_frameBuffers(mainAllocator),
     m_commandBuffers(mainAllocator),
+    m_inputAttachments(mainAllocator),
     m_shaderPipelineInfos(mainAllocator) {
 }
 
@@ -30,6 +32,8 @@ void VkScopedRenderPass::Create(VkDevice device,
 
   m_commandBuffers.Reserve(1);
   m_frameBuffers.Resize(1);
+
+  CreateDescriptorSetLayout(device, createInfo);
 
   m_shaderPipelineInfos.Reserve(U32(createInfo.m_shaders.size()));
 
@@ -146,11 +150,11 @@ void VkScopedRenderPass::Create(VkDevice device,
 void VkScopedRenderPass::CreateForSwapChain(VkDevice device,
   VkCommandPool commandPool,
   const PipelinePassCreateInfo& createInfo,
-  const Vector<RenderTargetCreateInfo>& pipelineBuffers,
-  const Vector<VkScopedImage>& pipelineBufferImages,
   const Vector<VkShader>& allShaders,
   const VkScopedSwapChain& swapChain) {
   STACK_ALLOCATOR(Temporary, Memory::MonotonicAllocator, 2048);
+
+  CreateDescriptorSetLayout(device, createInfo);
 
   m_shaderPipelineInfos.Reserve(U32(createInfo.m_shaders.size()));
 
@@ -248,6 +252,8 @@ void VkScopedRenderPass::CreateForSwapChain(VkDevice device,
   m_commandBuffers.Resize(m_frameBuffers.GetSize());
   VkCore::CreateCommandBuffers(device, commandPool, VK_COMMAND_BUFFER_LEVEL_PRIMARY,
     m_commandBuffers, log_VulkanRenderSystem);
+
+  m_beginRenderSemaphore = VkCore::CreateSemaphore(device, log_VulkanRenderSystem);
 }
 
 VkRenderPass VkScopedRenderPass::GetRenderPass() const {
@@ -262,6 +268,10 @@ VkCommandBuffer VkScopedRenderPass::GetCommandBuffer(U32 idx) const {
   return m_commandBuffers[idx];
 }
 
+const Containers::Vector<PipelinePassInput>& VkScopedRenderPass::GetPassInputs() const {
+  return m_inputAttachments;
+}
+
 U32 VkScopedRenderPass::GetFrameBufferCount() const {
   return m_frameBuffers.GetSize();
 }
@@ -270,8 +280,20 @@ VkSemaphore VkScopedRenderPass::GetRenderSemaphore() const {
   return m_beginRenderSemaphore;
 }
 
+VkDescriptorSetLayout VkScopedRenderPass::GetDescriptorSetLayout() const {
+  return m_descriptorSetLayout;
+}
+
 U32 VkScopedRenderPass::GetId() const {
   return m_id;
+}
+
+U32 VkScopedRenderPass::GetDescriptorSetId() const {
+  return m_descriptorSet;
+}
+
+void VkScopedRenderPass::SetDescriptorSetId(U32 id) {
+  m_descriptorSet = id;
 }
 
 void VkScopedRenderPass::Begin(const VkScopedSwapChain& swapChain, std::array<VkClearValue, 2> clearData) const {
@@ -313,6 +335,32 @@ void VkScopedRenderPass::CleanUp(VkDevice device, VkCommandPool commandPool) con
   vkDestroySemaphore(device, m_beginRenderSemaphore, nullptr);
 
   vkFreeCommandBuffers(device, commandPool, m_commandBuffers.GetSize(), m_commandBuffers.Data());
+}
+
+void VkScopedRenderPass::CreateDescriptorSetLayout(VkDevice device, const PipelinePassCreateInfo& createInfo) {
+  if (createInfo.m_inputs.empty())
+  {
+    return;
+  }
+  
+  STACK_ALLOCATOR(Temporary, Memory::MonotonicAllocator, 1024);
+
+  U32 bindingId = 0;
+
+  m_inputAttachments.Reserve(U32(createInfo.m_inputs.size()));
+
+  Vector<VkDescriptorSetLayoutBinding> currentBindings(U32(createInfo.m_inputs.size()), allocatorTemporary);
+  for(const auto& input : createInfo.m_inputs)
+  {
+    m_inputAttachments.PushBack(input);
+
+    const auto combinedShaderFlagBits = GetCombinedShaderStageFlag(input.m_stages);
+    VkCore::CreateSampledImageBinding(currentBindings, bindingId, 1, combinedShaderFlagBits);
+
+    ++bindingId;
+  }
+
+  m_descriptorSetLayout = VkCore::CreateDescriptorSetLayout(device, currentBindings, log_VulkanRenderSystem);
 }
 } // namespace Vulkan
 } // namespace Azura

@@ -86,8 +86,6 @@ VkRenderer::VkRenderer(const ApplicationInfo& appInfo,
                                 log_VulkanRenderSystem);
   }
 
-  CreateDescriptorInfo();
-
   VkPhysicalDeviceMemoryProperties memProperties;
   vkGetPhysicalDeviceMemoryProperties(m_physicalDevice, &memProperties);
 
@@ -99,8 +97,10 @@ VkRenderer::VkRenderer(const ApplicationInfo& appInfo,
     desc.m_format    = bufferCreateInfo.m_format;
     desc.m_bounds    = Bounds3D{m_swapChain.GetExtent().width, m_swapChain.GetExtent().height, 1};
 
-    m_renderPassAttachmentImages.PushBack(VkScopedImage(m_device, desc, VK_IMAGE_USAGE_COLOR_ATTACHMENT_BIT,
+    m_renderPassAttachmentImages.PushBack(VkScopedImage(m_device, desc, VK_IMAGE_USAGE_COLOR_ATTACHMENT_BIT | VK_IMAGE_USAGE_SAMPLED_BIT,
                                                         memProperties, log_VulkanRenderSystem));
+
+    m_renderPassAttachmentImages.Last().CreateImageView(ImageViewType::ImageView2D);
   }
 
   U32 passCount = 0;
@@ -121,8 +121,6 @@ VkRenderer::VkRenderer(const ApplicationInfo& appInfo,
       renderPass.CreateForSwapChain(m_device,
         m_graphicsCommandPool,
         passCreateInfo,
-        renderPassRequirements.m_targets,
-        m_renderPassAttachmentImages,
         m_shaders,
         m_swapChain);
     }
@@ -130,6 +128,8 @@ VkRenderer::VkRenderer(const ApplicationInfo& appInfo,
     m_renderPasses.PushBack(renderPass);
     ++passCount;
   }
+
+  CreateDescriptorInfo();
 
   // TODO(vasumahesh1):[RENDER PASS]: Needs Changes
   // VkCore::CreateFrameBuffers(m_device, m_renderPasses.Last().GetRenderPass(), m_swapChain, m_frameBuffers, log_VulkanRenderSystem);
@@ -216,7 +216,7 @@ DrawablePool& VkRenderer::CreateDrawablePool(const DrawablePoolCreateInfo& creat
                                        VK_MEMORY_PROPERTY_HOST_VISIBLE_BIT | VK_MEMORY_PROPERTY_HOST_COHERENT_BIT,
                                        m_graphicsCommandPool,
                                        m_pipelineLayout, m_descriptorPool, m_descriptorSetLayouts,
-                                       m_renderPasses,
+                                       m_renderPasses, m_renderPassAttachmentImages,
                                        GetApplicationRequirements(), m_window.GetViewport(), memProperties,
                                        m_physicalDeviceProperties,
                                        m_swapChain, m_descriptorSlots, m_descriptorCount, m_drawPoolAllocator,
@@ -254,8 +254,7 @@ void VkRenderer::Submit() {
 
   Vector<Vector<VkCommandBuffer>> secondaryCmdBuffers(m_renderPasses.GetSize(), allocatorTemporary);
 
-  for(const auto& renderPass : m_renderPasses)
-  {
+  for (U32 idx = 0; idx < m_renderPasses.GetSize(); ++idx) {
     Vector<VkCommandBuffer> poolCmdBuffers(m_drawablePools.GetSize(), allocatorTemporary);
     secondaryCmdBuffers.PushBack(poolCmdBuffers);
   }
@@ -311,7 +310,7 @@ void VkRenderer::CreateDescriptorInfo() {
     bindingSetSizes.PushBack(1);
   }
 
-  m_descriptorSetLayouts.Reserve(bindingSetSizes.GetSize());
+  m_descriptorSetLayouts.Reserve(bindingSetSizes.GetSize() + m_renderPasses.GetSize());
 
   int offset = 0;
   for (const auto& bindingSize : bindingSetSizes) {
@@ -351,6 +350,16 @@ void VkRenderer::CreateDescriptorInfo() {
     offset += bindingSize;
   }
 
+  for (auto& renderPass : m_renderPasses)
+  {
+    const auto& setLayout = renderPass.GetDescriptorSetLayout();
+    if (setLayout != VK_NULL_HANDLE)
+    {
+      renderPass.SetDescriptorSetId(m_descriptorSetLayouts.GetSize());
+      m_descriptorSetLayouts.PushBack(setLayout);
+    }
+  }
+
   m_pipelineLayout = VkCore::CreatePipelineLayout(m_device, m_descriptorSetLayouts, log_VulkanRenderSystem);
 
   Vector<VkDescriptorPoolSize> descriptorPoolSizes(MAX_DESCRIPTOR_TYPE_COUNT, allocatorTemporary);
@@ -382,7 +391,7 @@ void VkRenderer::CreateDescriptorInfo() {
   poolInfo.pPoolSizes                 = descriptorPoolSizes.Data();
 
   // TODO(vasumahesh1):[DESCRIPTORS]: Max Sets issue!
-  poolInfo.maxSets = m_descriptorSetLayouts.GetSize();
+  poolInfo.maxSets = 2 * m_descriptorSetLayouts.GetSize();
 
   VERIFY_VK_OP(log_VulkanRenderSystem, vkCreateDescriptorPool(m_device, &poolInfo, nullptr, &m_descriptorPool),
     "Unable to create Descriptor Pool");
@@ -412,32 +421,41 @@ void VkRenderer::RenderFrame() {
   // std::array<VkSemaphore, 1> initialWaitSemaphores      = {};
   // std::array<VkSemaphore, 1> finalSignalSemaphores = {m_renderFinishedSemaphores[currentFrame]};
 
-  std::array<VkPipelineStageFlags, 1> waitStages = {VK_PIPELINE_STAGE_COLOR_ATTACHMENT_OUTPUT_BIT};
+  // std::array<VkPipelineStageFlags, 1> waitStages = {VK_PIPELINE_STAGE_COLOR_ATTACHMENT_OUTPUT_BIT};
 
   for (U32 idx = 0; idx < m_renderPasses.GetSize(); ++idx) {
     const auto& renderPass = m_renderPasses[idx];
 
     VkCommandBuffer passBuffer;
     VkFence waitFence = VK_NULL_HANDLE;
-    Vector<VkSemaphore> waitSemaphores(1, m_perFrameAllocator);
-    Vector<VkSemaphore> signalSemaphores(1, m_perFrameAllocator);
+    Vector<VkSemaphore> waitSemaphores(2, m_perFrameAllocator);
+    Vector<VkPipelineStageFlags> waitStages(2, m_perFrameAllocator);
+    Vector<VkSemaphore> signalSemaphores(2, m_perFrameAllocator);
 
     // Start of Render
     if (idx == 0) {
       waitSemaphores.PushBack(m_imageAvailableSemaphores[currentFrame]);
+      waitStages.PushBack(VK_PIPELINE_STAGE_COLOR_ATTACHMENT_OUTPUT_BIT);
+
+      const auto& nextPass = m_renderPasses[idx + 1];
+      signalSemaphores.PushBack(nextPass.GetRenderSemaphore());
     }
     // Somewhere in Middle
     else if (idx < m_renderPasses.GetSize() - 1) {
-      passBuffer = renderPass.GetCommandBuffer(0);
-
       const auto& nextPass = m_renderPasses[idx + 1];
+
       waitSemaphores.PushBack(renderPass.GetRenderSemaphore());
+      waitStages.PushBack(VK_PIPELINE_STAGE_COLOR_ATTACHMENT_OUTPUT_BIT);
       signalSemaphores.PushBack(nextPass.GetRenderSemaphore());
     }
+
+    passBuffer = renderPass.GetCommandBuffer(0);
 
     // End of Render
     if (idx == m_renderPasses.GetSize() - 1)
     {
+      waitSemaphores.PushBack(renderPass.GetRenderSemaphore());
+      waitStages.PushBack(VK_PIPELINE_STAGE_COLOR_ATTACHMENT_OUTPUT_BIT);
       signalSemaphores.PushBack(m_renderFinishedSemaphores[currentFrame]);
 
       passBuffer = renderPass.GetCommandBuffer(imageIndex);
@@ -447,9 +465,9 @@ void VkRenderer::RenderFrame() {
     // SUCCESS OR SUBOPTIMAL
     VkSubmitInfo submitInfo = {};
     submitInfo.sType = VK_STRUCTURE_TYPE_SUBMIT_INFO;
-    submitInfo.waitSemaphoreCount = 1;
+    submitInfo.waitSemaphoreCount = waitSemaphores.GetSize();
     submitInfo.pWaitSemaphores = waitSemaphores.Data();
-    submitInfo.pWaitDstStageMask = waitStages.data();
+    submitInfo.pWaitDstStageMask = waitStages.Data();
     submitInfo.commandBufferCount = 1;
     submitInfo.pCommandBuffers = &passBuffer;
     submitInfo.signalSemaphoreCount = signalSemaphores.GetSize();
@@ -635,7 +653,7 @@ void VkRenderer::SnapshotFrame(const String& exportPath) const {
 
 void VkRenderer::AddShader(const ShaderCreateInfo& info) {
   // TODO(vasumahesh1):[ASSETS]: Manage assets
-  const String fullPath = "Shaders/" + GetRenderingAPI() + "/" + info.m_shaderFileName;
+  const String fullPath = "Shaders/" + VkRenderer::GetRenderingAPI() + "/" + info.m_shaderFileName;
   m_shaders.EmplaceBack(m_device, fullPath, log_VulkanRenderSystem);
   m_shaders.Last().SetStage(info.m_stage);
 }

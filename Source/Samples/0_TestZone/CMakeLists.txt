@@ -13,6 +13,9 @@ set(
   PROJECT_SHADERS
     "${PROJECT_SOURCE_DIR}/Shaders/TestZone.vs.slang|VS"
     "${PROJECT_SOURCE_DIR}/Shaders/TestZone.ps.slang|PS"
+
+    "${PROJECT_SOURCE_DIR}/Shaders/TestZone.Deferred.vs.slang|VS"
+    "${PROJECT_SOURCE_DIR}/Shaders/TestZone.Deferred.ps.slang|PS"
 )
 
 add_executable(TestZone ${SOURCES})
