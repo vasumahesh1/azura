@@ -437,8 +437,11 @@ void VkRenderer::RenderFrame() {
       waitSemaphores.PushBack(m_imageAvailableSemaphores[currentFrame]);
       waitStages.PushBack(VK_PIPELINE_STAGE_COLOR_ATTACHMENT_OUTPUT_BIT);
 
-      const auto& nextPass = m_renderPasses[idx + 1];
-      signalSemaphores.PushBack(nextPass.GetRenderSemaphore());
+      if (idx != m_renderPasses.GetSize() - 1)
+      {
+        const auto& nextPass = m_renderPasses[idx + 1];
+        signalSemaphores.PushBack(nextPass.GetRenderSemaphore());
+      }
     }
     // Somewhere in Middle
     else if (idx < m_renderPasses.GetSize() - 1) {
@@ -454,8 +457,11 @@ void VkRenderer::RenderFrame() {
     // End of Render
     if (idx == m_renderPasses.GetSize() - 1)
     {
-      waitSemaphores.PushBack(renderPass.GetRenderSemaphore());
-      waitStages.PushBack(VK_PIPELINE_STAGE_COLOR_ATTACHMENT_OUTPUT_BIT);
+      if (idx != 0) {
+        waitSemaphores.PushBack(renderPass.GetRenderSemaphore());
+        waitStages.PushBack(VK_PIPELINE_STAGE_COLOR_ATTACHMENT_OUTPUT_BIT);
+      }
+
       signalSemaphores.PushBack(m_renderFinishedSemaphores[currentFrame]);
 
       passBuffer = renderPass.GetCommandBuffer(imageIndex);

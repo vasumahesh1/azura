@@ -318,6 +318,8 @@ void VkDrawablePool::Submit() {
   VkCore::CreateCommandBuffers(m_device, m_graphicsCommandPool, VK_COMMAND_BUFFER_LEVEL_SECONDARY, m_commandBuffers,
                                log_VulkanRenderSystem);
 
+  VkCore::CopyBuffer(m_device, m_graphicsQueue, m_stagingBuffer, m_buffer, m_mainBufferOffset, m_graphicsCommandPool);
+
   U32 count = 0;
   for (const auto& renderPass : m_renderPasses) {
     const auto& commandBuffer = m_commandBuffers[count];
@@ -335,8 +337,6 @@ void VkDrawablePool::Submit() {
                                log_VulkanRenderSystem);
 
     vkCmdBindPipeline(commandBuffer, VK_PIPELINE_BIND_POINT_GRAPHICS, pipeline.Real());
-
-    VkCore::CopyBuffer(m_device, m_graphicsQueue, m_stagingBuffer, m_buffer, m_mainBufferOffset, m_graphicsCommandPool);
 
     SubmitTextureData();
 
