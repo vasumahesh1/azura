@@ -28,6 +28,7 @@ struct UniformBufferData {
   Matrix4f m_model;
   Matrix4f m_modelInvTranspose;
   Matrix4f m_viewProj;
+  Matrix4f m_invViewProj;
 };
 
 struct ShaderControls {
@@ -85,8 +86,12 @@ void AppRenderer::Initialize() {
   UniformBufferData uboData = {};
   uboData.m_model           = Matrix4f::Identity();
   uboData.m_viewProj = m_camera.GetViewProjMatrix();
+  uboData.m_invViewProj = m_camera.GetInvViewProjMatrix();
 
   uboData.m_modelInvTranspose = uboData.m_model.Inverse().Transpose();
+
+  const auto uboDataBuffer       = reinterpret_cast<U8*>(&uboData);        // NOLINT
+  const auto shaderControlBuffer = reinterpret_cast<U8*>(&shaderControls); // NOLINT
 
   // TODO(vasumahesh1):[Q]:Allocator?
   ApplicationRequirements applicationRequirements = {};
@@ -96,7 +101,7 @@ void AppRenderer::Initialize() {
 
   DescriptorRequirements descriptorRequirements = DescriptorRequirements(4, allocatorTemporary);
   // Set 0
-  const U32 UBO_SLOT = descriptorRequirements.AddDescriptor({ DescriptorType::UniformBuffer, ShaderStage::Vertex });
+  const U32 UBO_SLOT = descriptorRequirements.AddDescriptor({ DescriptorType::UniformBuffer, ShaderStage::Vertex | ShaderStage::Pixel });
   
   // Set 1
   const U32 SHADER_CONTROLS_SLOT = descriptorRequirements.AddDescriptor({ DescriptorType::UniformBuffer, ShaderStage::Vertex | ShaderStage::Pixel });
@@ -131,6 +136,8 @@ void AppRenderer::Initialize() {
   DrawablePool& screenQuad = PoolPrimitives::AddScreenQuad(*m_renderer, SINGLE_PASS, allocatorTemporary);
   screenQuad.AddShader(SKY_VERTEX_SHADER_ID);
   screenQuad.AddShader(SKY_PIXEL_SHADER_ID);
+  screenQuad.BindUniformData(0, UBO_SLOT, uboDataBuffer, sizeof(UniformBufferData));
+  screenQuad.BindUniformData(0, SHADER_CONTROLS_SLOT, shaderControlBuffer, sizeof(ShaderControls));
 
   IcoSphere sphere(8);
 
@@ -168,9 +175,6 @@ void AppRenderer::Initialize() {
   pool.AddBufferBinding(VERTEX_SLOT, vertexStride);
 
   pool.AddBufferBinding(NORMAL_SLOT, {{sphere.GetNormalFormat()}, allocatorTemporary});
-
-  const auto uboDataBuffer       = reinterpret_cast<U8*>(&uboData);        // NOLINT
-  const auto shaderControlBuffer = reinterpret_cast<U8*>(&shaderControls); // NOLINT
 
   // Create Drawable from Pool
   DrawableCreateInfo createInfo = {};

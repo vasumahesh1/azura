@@ -259,6 +259,11 @@ void VkDrawablePool::AppendToMainBuffer(const U8* buffer, U32 bufferSize) {
 
 
 void VkDrawablePool::SubmitTextureData() {
+  if (m_textureBufferInfos.GetSize() == 0)
+  {
+    return;
+  }
+
   STACK_ALLOCATOR(Temporary, Memory::MonotonicAllocator, 4096);
 
   VkCommandBuffer textureCmdBuffer = VkCore::CreateCommandBuffer(m_device, m_graphicsCommandPool,
@@ -302,10 +307,6 @@ void VkDrawablePool::SubmitTextureData() {
     // TODO(vasumahesh1):[TEXTURE]: Remove Hard Code
     image.CreateImageView(ImageViewType::ImageView2D);
   }
-
-  for (auto& drawable : m_drawables) {
-    drawable.WriteDescriptorSets(m_textureBufferInfos, m_renderPasses, m_samplerInfos, m_samplers, m_images, m_renderPassAttachments);
-  }
 }
 
 void VkDrawablePool::Submit() {
@@ -326,6 +327,12 @@ void VkDrawablePool::Submit() {
 
   VkCore::CopyBuffer(m_device, m_graphicsQueue, m_stagingBuffer, m_buffer, m_mainBufferOffset, m_graphicsCommandPool);
 
+  SubmitTextureData();
+
+  for (auto& drawable : m_drawables) {
+    drawable.WriteDescriptorSets(m_textureBufferInfos, m_renderPasses, m_samplerInfos, m_samplers, m_images, m_renderPassAttachments);
+  }
+
   U32 count = 0;
   for (const auto& renderPass : m_renderPasses) {
     const auto& commandBuffer = m_commandBuffers[count];
@@ -343,8 +350,6 @@ void VkDrawablePool::Submit() {
                                log_VulkanRenderSystem);
 
     vkCmdBindPipeline(commandBuffer, VK_PIPELINE_BIND_POINT_GRAPHICS, pipeline.Real());
-
-    SubmitTextureData();
 
     VkBuffer mainBuffer = m_buffer.Real();
 

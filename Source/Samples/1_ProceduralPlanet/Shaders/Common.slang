@@ -2,6 +2,7 @@ struct UBOData {
   float4x4 u_model;
   float4x4 u_modelInvTranspose;
   float4x4 u_viewProj;
+  float4x4 u_invViewProj;
 };
 
 struct ShaderControls {

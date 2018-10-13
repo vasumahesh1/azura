@@ -37,10 +37,10 @@ DrawablePool& PoolPrimitives::AddScreenQuad(Renderer& renderer, U32 renderPass, 
   quadPool.AddBufferBinding(DEFAULT_VERTEX_SLOT, quadStride);
 
   Vector<VertexWithUV> quadVertexData = Vector<VertexWithUV>({
-    VertexWithUV{{-1, -1, 0.9999, 1}, {0, 0}},
-    VertexWithUV{{1, -1, 0.9999, 1}, {1, 0}},
-    VertexWithUV{{1, 1, 0.9999, 1}, {1, 1}},
-    VertexWithUV{{-1, 1, 0.9999, 1}, {0, 1}}
+    VertexWithUV{{-1, -1, 0.9999f, 1}, {0, 0}},
+    VertexWithUV{{1, -1, 0.9999f, 1}, {1, 0}},
+    VertexWithUV{{1, 1, 0.9999f, 1}, {1, 1}},
+    VertexWithUV{{-1, 1, 0.9999f, 1}, {0, 1}}
   }, allocatorTemporary);
 
   Vector<U32> quadIndexData = Vector<U32>({
