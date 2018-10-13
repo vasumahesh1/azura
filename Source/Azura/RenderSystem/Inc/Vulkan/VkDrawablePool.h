@@ -69,6 +69,7 @@ public:
                  const Containers::Vector<VkDescriptorSetLayout>& descriptorSetLayouts,
                  const Containers::Vector<VkScopedRenderPass>& renderPasses,
                  const Containers::Vector<VkScopedImage>& renderPassAttachments,
+                 const Containers::Vector<VkShader>& allShaders,
                  const ApplicationRequirements& appReq,
                  const ViewportDimensions& viewport,
                  const VkPhysicalDeviceMemoryProperties& phyDeviceMemoryProperties,
@@ -81,6 +82,8 @@ public:
                  Log logger);
 
   DrawableID CreateDrawable(const DrawableCreateInfo& createInfo) override;
+
+  void AddShader(U32 shaderId) override;
 
   void Submit() override;
   void AddBufferBinding(SlotID slotId, const Containers::Vector<RawStorageFormat>& strides) override;
@@ -112,6 +115,7 @@ private:
   const Containers::Vector<VkDescriptorSetLayout>& m_descriptorSetLayouts;
   const Containers::Vector<DescriptorSlot>& m_descriptorSlots;
   const Containers::Vector<VkScopedImage>& m_renderPassAttachments;
+  const Containers::Vector<VkShader>& m_allShaders;
 
   ViewportDimensions m_viewport;
   VkPhysicalDeviceMemoryProperties m_physicalDeviceMemoryProperties;

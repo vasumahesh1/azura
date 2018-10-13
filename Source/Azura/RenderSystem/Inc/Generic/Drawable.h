@@ -18,7 +18,11 @@ struct DrawableCreateInfo {
 
 class Drawable {
 public:
-  Drawable(const DrawableCreateInfo& info, U32 numVertexSlots, U32 numInstanceSlots, U32 numUniformSlots, Memory::Allocator& allocator);
+  Drawable(const DrawableCreateInfo& info,
+           U32 numVertexSlots,
+           U32 numInstanceSlots,
+           U32 numUniformSlots,
+           Memory::Allocator& allocator);
   virtual ~Drawable() = default;
 
   Drawable(const Drawable& other) = delete;
@@ -77,13 +81,15 @@ struct DrawablePoolCreateInfo {
   DrawablePoolCreateInfo(DrawablePoolCreateInfo&& other) noexcept = default;
   DrawablePoolCreateInfo& operator=(const DrawablePoolCreateInfo& other) = delete;
   DrawablePoolCreateInfo& operator=(DrawablePoolCreateInfo&& other) noexcept = default;
-  
+
   DrawablePoolCreateInfo(Memory::Allocator& alloc);
 };
 
 class DrawablePool {
 public:
-  explicit DrawablePool(const DrawablePoolCreateInfo& createInfo, DescriptorCount descriptorCount, Memory::Allocator& allocator);
+  explicit DrawablePool(const DrawablePoolCreateInfo& createInfo,
+                        DescriptorCount descriptorCount,
+                        Memory::Allocator& allocator);
   virtual ~DrawablePool() = default;
 
   DrawablePool(const DrawablePool& other) = delete;
@@ -109,6 +115,7 @@ public:
   virtual void SetIndexData(DrawableID drawableId, const U8* buffer, U32 size) = 0;
 
   // Pool Scope Binds
+  virtual void AddShader(U32 shaderId) = 0;
   virtual void BindTextureData(SlotID slot, const TextureDesc& desc, const U8* buffer) = 0;
   virtual void BindSampler(SlotID slot, const SamplerDesc& desc) = 0;
 

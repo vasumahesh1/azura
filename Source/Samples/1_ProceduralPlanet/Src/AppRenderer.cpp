@@ -6,6 +6,7 @@
 #include "Memory/MonotonicAllocator.h"
 #include "Math/Transform.h"
 #include "Math/Icosphere.h"
+#include "Generic/PoolPrimitives.h"
 
 namespace Azura {
 using namespace Containers; // NOLINT
@@ -105,9 +106,12 @@ void AppRenderer::Initialize() {
   const U32 PLANET_TEXTURE_SLOT = descriptorRequirements.AddDescriptor({DescriptorType::SampledImage, ShaderStage::Pixel, DescriptorBinding::Same});
 
 
-  ShaderRequirements shaderRequirements = ShaderRequirements(2, allocatorTemporary);
+  ShaderRequirements shaderRequirements = ShaderRequirements(4, allocatorTemporary);
   const U32 VERTEX_SHADER_ID = shaderRequirements.AddShader({ ShaderStage::Vertex, "Terrain.vs", AssetLocation::Shaders });
   const U32 PIXEL_SHADER_ID = shaderRequirements.AddShader({ ShaderStage::Pixel, "Terrain.ps", AssetLocation::Shaders });
+
+  const U32 SKY_VERTEX_SHADER_ID = shaderRequirements.AddShader({ ShaderStage::Vertex, "Sky.vs", AssetLocation::Shaders });
+  const U32 SKY_PIXEL_SHADER_ID = shaderRequirements.AddShader({ ShaderStage::Pixel, "Sky.ps", AssetLocation::Shaders });
 
   RenderPassRequirements renderPassRequirements = RenderPassRequirements(0, 1, allocatorTemporary);
 
@@ -122,9 +126,13 @@ void AppRenderer::Initialize() {
     m_window->GetSwapChainRequirements(), renderPassRequirements,
     descriptorRequirements, shaderRequirements, m_mainAllocator, m_drawableAllocator,
     *m_window);
-  m_renderer->SetDrawablePoolCount(1);
+  m_renderer->SetDrawablePoolCount(2);
 
-  IcoSphere sphere(7);
+  DrawablePool& screenQuad = PoolPrimitives::AddScreenQuad(*m_renderer, SINGLE_PASS, allocatorTemporary);
+  screenQuad.AddShader(SKY_VERTEX_SHADER_ID);
+  screenQuad.AddShader(SKY_PIXEL_SHADER_ID);
+
+  IcoSphere sphere(8);
 
   DrawablePoolCreateInfo poolInfo(allocatorTemporary);
   poolInfo.m_byteSize        = sphere.TotalDataSize() + 0x400000;

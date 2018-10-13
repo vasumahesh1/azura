@@ -176,6 +176,7 @@ VkDrawablePool::VkDrawablePool(const DrawablePoolCreateInfo& createInfo,
                                const Vector<VkDescriptorSetLayout>& descriptorSetLayouts,
                                const Vector<VkScopedRenderPass>& renderPasses,
                                const Vector<VkScopedImage>& renderPassAttachments,
+                               const Vector<VkShader>& allShaders,
                                const ApplicationRequirements& appReq,
                                const ViewportDimensions& viewport,
                                const VkPhysicalDeviceMemoryProperties& phyDeviceMemoryProperties,
@@ -198,6 +199,7 @@ VkDrawablePool::VkDrawablePool(const DrawablePoolCreateInfo& createInfo,
     m_descriptorSetLayouts(descriptorSetLayouts),
     m_descriptorSlots(descriptorSlots),
     m_renderPassAttachments(renderPassAttachments),
+    m_allShaders(allShaders),
     m_physicalDeviceMemoryProperties(phyDeviceMemoryProperties),
     m_descriptorPool(descriptorPool),
     m_pipelines(allocator),
@@ -230,6 +232,10 @@ VkDrawablePool::VkDrawablePool(const DrawablePoolCreateInfo& createInfo,
 
     ++idx;
   }
+}
+
+void VkDrawablePool::AddShader(const U32 shaderId) {
+  m_pipelineFactory.AddShaderStage(m_allShaders[shaderId ].GetShaderStageInfo());
 }
 
 
