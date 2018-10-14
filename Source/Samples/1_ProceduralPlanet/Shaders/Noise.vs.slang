@@ -149,7 +149,7 @@ void RenderPlanet(inout float4 vertexPosition, inout float4 vertexNormal, out fl
   }
 }
 
-PixelShaderInput main(VertexShaderInput input)
+NoiseInput_PS main(NoiseInput_VS input)
 {
   float4 vertexPosition = input.in_Pos;
   float4 vertexNormal = input.in_Normal;
@@ -157,12 +157,12 @@ PixelShaderInput main(VertexShaderInput input)
 
   RenderPlanet(vertexPosition, vertexNormal, baseUVOffset);
 
-  PixelShaderInput output;
+  NoiseInput_PS output;
 
+  output.originalPos = mul(ubo.u_model, input.in_Pos);
   output.modelPos = mul(ubo.u_model, vertexPosition);
-
   output.pos = mul(ubo.u_viewProj, output.modelPos);
-  output.textureOffset = baseUVOffset;
   output.normal = mul(ubo.u_modelInvTranspose, vertexNormal);
+  output.baseUVOffset = baseUVOffset;
   return output;
 }

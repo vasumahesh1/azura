@@ -267,8 +267,6 @@ struct ApplicationInfo {
 const U32 DEFAULT_FRAMES_IN_FLIGHT = 2;
 
 struct ApplicationRequirements {
-  float m_clearColor[4]{0, 0, 0, 1.0f};
-  float m_depthStencilClear[2]{1.0f, 0};
 };
 
 struct SwapChainRequirements {
@@ -289,10 +287,15 @@ struct RenderTargetCreateInfo {
   RawStorageFormat m_format{RawStorageFormat::UNKNOWN};
 };
 
-struct PipelinePassInput
-{
+struct PipelinePassInput {
   U32 m_id;
   ShaderStage m_stages;
+};
+
+struct ClearData {
+  float m_color[4]{0.0f, 0.0f, 0.0f, 1.0f};
+  float m_depth{1.0f};
+  U32 m_stencil{0};
 };
 
 struct PipelinePassCreateInfo {
@@ -306,6 +309,8 @@ struct PipelinePassCreateInfo {
   SmallVector<PipelinePassInput, 4> m_inputs{};
   SmallVector<U32, 4> m_outputs{};
   SmallVector<U32, 4> m_descriptors{};
+
+  ClearData m_clearData{};
 };
 
 struct DescriptorRequirements {
@@ -329,6 +334,8 @@ struct RenderPassRequirements {
 
   Containers::Vector<RenderTargetCreateInfo> m_targets;
   Containers::Vector<PipelinePassCreateInfo> m_passSequence;
+
+  U32 m_maxPools{1};
 };
 
 struct DescriptorCount {

@@ -53,10 +53,6 @@ void VkDrawable::WriteDescriptorSets(
   const Vector<VkScopedImage>& renderPassAttachments) {
   STACK_ALLOCATOR(Temporary, Memory::MonotonicAllocator, 2048);
 
-  // U32 totalWrites = m_uniformBufferInfos.GetSize() + samplerInfos.GetSize() + images.GetSize();
-
-  // Vector<VkWriteDescriptorSet> descriptorWrites(totalWrites, allocatorTemporary);
-
   // TODO(vasumahesh1):[DESCRIPTOR]: How to use Uniform Buffer Arrays?
   for (const auto& ubInfo : m_uniformBufferInfos) {
     VkDescriptorBufferInfo uniformBufferInfo = {};
@@ -125,35 +121,43 @@ void VkDrawable::WriteDescriptorSets(
   for (const auto& renderPass : renderPasses)
   {
     const auto& inputs = renderPass.get().GetPassInputs();
+
+    // No Inputs then No need to write the descriptor set
+    if (inputs.GetSize() == 0)
+    {
+      continue;
+    }
+
     const auto setId = renderPass.get().GetDescriptorSetId();
+    LOG_DBG(log_VulkanRenderSystem, LOG_LEVEL, "Input Attachment: Set: %d", setId);
 
-    Vector<VkWriteDescriptorSet> inputDescriptorWrites(inputs.GetSize(), allocatorTemporary);
+    Vector<VkDescriptorImageInfo> descriptorSetInfo(inputs.GetSize(), allocatorTemporary);
 
-    U32 bindingId = 0;
     for (U32 idx = 0; idx < inputs.GetSize(); ++idx) {
       const auto& inputInfo = inputs[idx];
+
+      LOG_DBG(log_VulkanRenderSystem, LOG_LEVEL, "Input Attachment: Set: %d Binding: %d Input ID: %d", setId, descriptorSetInfo.GetSize(), inputInfo.m_id);
 
       VkDescriptorImageInfo sampledImageInfo = {};
       // TODO(vasumahesh1):[TEXTURE]: Depth Stencil
       sampledImageInfo.imageLayout = VK_IMAGE_LAYOUT_SHADER_READ_ONLY_OPTIMAL;
       sampledImageInfo.imageView   = renderPassAttachments[inputInfo.m_id].View();
 
-      VkWriteDescriptorSet descriptorWrite = {};
-      descriptorWrite.sType                = VK_STRUCTURE_TYPE_WRITE_DESCRIPTOR_SET;
-      descriptorWrite.dstSet               = m_descriptorSets[setId];
-      descriptorWrite.dstBinding           = bindingId;
-      descriptorWrite.dstArrayElement      = 0;
-      descriptorWrite.descriptorType       = VK_DESCRIPTOR_TYPE_SAMPLED_IMAGE;
-      descriptorWrite.descriptorCount      = 1;
-      descriptorWrite.pBufferInfo          = nullptr;
-      descriptorWrite.pImageInfo           = &sampledImageInfo;
-      descriptorWrite.pTexelBufferView     = nullptr;
-
-      inputDescriptorWrites.PushBack(descriptorWrite);
-      ++bindingId;
+      descriptorSetInfo.PushBack(sampledImageInfo);
     }
 
-    vkUpdateDescriptorSets(m_device, inputDescriptorWrites.GetSize(), inputDescriptorWrites.Data(), 0, nullptr);
+    VkWriteDescriptorSet descriptorWrite = {};
+    descriptorWrite.sType                = VK_STRUCTURE_TYPE_WRITE_DESCRIPTOR_SET;
+    descriptorWrite.dstSet               = m_descriptorSets[setId];
+    descriptorWrite.dstBinding           = 0;
+    descriptorWrite.dstArrayElement      = 0;
+    descriptorWrite.descriptorType       = VK_DESCRIPTOR_TYPE_SAMPLED_IMAGE;
+    descriptorWrite.descriptorCount      = descriptorSetInfo.GetSize();
+    descriptorWrite.pBufferInfo          = nullptr;
+    descriptorWrite.pImageInfo           = descriptorSetInfo.Data();
+    descriptorWrite.pTexelBufferView     = nullptr;
+
+    vkUpdateDescriptorSets(m_device, 1, &descriptorWrite, 0, nullptr);
   }
 }
 
@@ -317,7 +321,6 @@ void VkDrawablePool::Submit() {
   m_pipelineFactory.SetPipelineLayout(m_pipelineLayout);
   m_pipelineFactory.SetViewportStage(m_viewport, m_swapChain);
   m_pipelineFactory.SetMultisampleStage();
-  m_pipelineFactory.SetColorBlendStage();
 
   m_pipelineFactory.Submit(m_renderPasses, m_pipelines);
 

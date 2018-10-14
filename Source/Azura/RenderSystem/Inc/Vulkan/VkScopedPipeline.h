@@ -33,7 +33,6 @@ class VkPipelineFactory {
   VkPipelineFactory& SetViewportStage(ViewportDimensions viewportDimensions, const VkScopedSwapChain& swapChain);
   VkPipelineFactory& SetRasterizerStage(CullMode cullMode, FrontFace faceOrder);
   VkPipelineFactory& SetMultisampleStage();
-  VkPipelineFactory& SetColorBlendStage();
   VkPipelineFactory& SetPipelineLayout(VkPipelineLayout layout);
   VkPipelineFactory& AddShaderStage(const VkPipelineShaderStageCreateInfo& shaderStageCreateInfo);
 
@@ -57,8 +56,7 @@ class VkPipelineFactory {
   VkPipelineViewportStateCreateInfo m_viewportStage{};
   VkPipelineRasterizationStateCreateInfo m_rasterizerStage{};
   VkPipelineMultisampleStateCreateInfo m_multisampleStage{};
-  VkPipelineColorBlendStateCreateInfo m_colorBlendStage{};
-  VkPipelineColorBlendAttachmentState m_colorBlendAttachment;
+
 
   VkPipelineLayout m_layout{};
 

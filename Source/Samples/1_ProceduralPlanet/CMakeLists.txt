@@ -11,11 +11,14 @@ set(
 
 set(
   PROJECT_SHADERS
-    "${PROJECT_SOURCE_DIR}/Shaders/Terrain.vs.slang|VS"
     "${PROJECT_SOURCE_DIR}/Shaders/Terrain.ps.slang|PS"
-
-    "${PROJECT_SOURCE_DIR}/Shaders/Sky.vs.slang|VS"
     "${PROJECT_SOURCE_DIR}/Shaders/Sky.ps.slang|PS"
+    "${PROJECT_SOURCE_DIR}/Shaders/Water.ps.slang|PS"
+
+    "${PROJECT_SOURCE_DIR}/Shaders/ScreenQuad.vs.slang|VS"
+
+    "${PROJECT_SOURCE_DIR}/Shaders/Noise.vs.slang|VS"
+    "${PROJECT_SOURCE_DIR}/Shaders/Noise.ps.slang|PS"
 )
 
 add_executable(ProceduralPlanet ${SOURCES})

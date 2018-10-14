@@ -64,10 +64,7 @@ TEST_F(RendererTest, BasicRenderTest) {
   requirements.m_int64         = false;
   requirements.m_transferQueue = false;
 
-  ApplicationRequirements applicationRequirements = {};
-  applicationRequirements.m_clearColor[0] = 0.2f;
-  applicationRequirements.m_clearColor[1] = 0.2f;
-  applicationRequirements.m_clearColor[2] = 0.2f;
+  const ApplicationRequirements applicationRequirements = {};
 
   DescriptorRequirements descriptorRequirements = DescriptorRequirements(3, allocatorTemporary);
   const U32 UBO_SLOT = descriptorRequirements.AddDescriptor({ DescriptorType::UniformBuffer, ShaderStage::Vertex });
@@ -82,11 +79,14 @@ TEST_F(RendererTest, BasicRenderTest) {
     PipelinePassCreateInfo::Shaders{VERTEX_SHADER_ID, PIXEL_SHADER_ID},  // SHADERS
     PipelinePassCreateInfo::Inputs{},                                    // INPUT TARGETS
     PipelinePassCreateInfo::Outputs{},                     // OUTPUT TARGETS
-    PipelinePassCreateInfo::Descriptors{UBO_SLOT}                        // DESCRIPTORS
+    PipelinePassCreateInfo::Descriptors{UBO_SLOT},                        // DESCRIPTORS
+    ClearData{{0.2f, 0.2f, 0.2f, 1.0f}, 1.0f, 0}
     });
 
+  auto swapChainRequirements = window->GetSwapChainRequirements();
+
   std::unique_ptr<Azura::Renderer> renderer = RenderSystem::CreateRenderer(appInfo, requirements, applicationRequirements,
-    window->GetSwapChainRequirements(), renderPassRequirements,
+    swapChainRequirements, renderPassRequirements,
     descriptorRequirements, shaderRequirements, mainAllocator, drawableAllocator,
     *window);
 
@@ -117,10 +117,7 @@ TEST_F(RendererTest, BasicInstancingTest) {
   requirements.m_int64         = false;
   requirements.m_transferQueue = false;
 
-  ApplicationRequirements applicationRequirements = {};
-  applicationRequirements.m_clearColor[0] = 0.2f;
-  applicationRequirements.m_clearColor[1] = 0.2f;
-  applicationRequirements.m_clearColor[2] = 0.2f;
+  const ApplicationRequirements applicationRequirements = {};
 
   DescriptorRequirements descriptorRequirements = DescriptorRequirements(3, allocatorTemporary);
   const U32 UBO_SLOT = descriptorRequirements.AddDescriptor({ DescriptorType::UniformBuffer, ShaderStage::Vertex });
@@ -135,11 +132,14 @@ TEST_F(RendererTest, BasicInstancingTest) {
     PipelinePassCreateInfo::Shaders{VERTEX_SHADER_ID, PIXEL_SHADER_ID},  // SHADERS
     PipelinePassCreateInfo::Inputs{},                                    // INPUT TARGETS
     PipelinePassCreateInfo::Outputs{},                     // OUTPUT TARGETS
-    PipelinePassCreateInfo::Descriptors{UBO_SLOT}                        // DESCRIPTORS
+    PipelinePassCreateInfo::Descriptors{UBO_SLOT},                        // DESCRIPTORS
+    ClearData{{0.2f, 0.2f, 0.2f, 1.0f}, 1.0f, 0}
     });
 
+  auto swapChainRequirements = window->GetSwapChainRequirements();
+
   std::unique_ptr<Azura::Renderer> renderer = RenderSystem::CreateRenderer(appInfo, requirements, applicationRequirements,
-    window->GetSwapChainRequirements(), renderPassRequirements,
+    swapChainRequirements, renderPassRequirements,
     descriptorRequirements, shaderRequirements, mainAllocator, drawableAllocator,
     *window);
 
@@ -170,10 +170,7 @@ TEST_F(RendererTest, BasicTextureTest) {
   requirements.m_int64         = false;
   requirements.m_transferQueue = false;
 
-  ApplicationRequirements applicationRequirements = {};
-  applicationRequirements.m_clearColor[0] = 0.2f;
-  applicationRequirements.m_clearColor[1] = 0.2f;
-  applicationRequirements.m_clearColor[2] = 0.2f;
+  const ApplicationRequirements applicationRequirements = {};
 
   DescriptorRequirements descriptorRequirements = DescriptorRequirements(3, allocatorTemporary);
   const U32 UBO_SLOT = descriptorRequirements.AddDescriptor({ DescriptorType::UniformBuffer, ShaderStage::Vertex });
@@ -190,11 +187,14 @@ TEST_F(RendererTest, BasicTextureTest) {
     PipelinePassCreateInfo::Shaders{VERTEX_SHADER_ID, PIXEL_SHADER_ID},  // SHADERS
     PipelinePassCreateInfo::Inputs{},                                    // INPUT TARGETS
     PipelinePassCreateInfo::Outputs{},                     // OUTPUT TARGETS
-    PipelinePassCreateInfo::Descriptors{UBO_SLOT, SAMPLER_SLOT, BASIC_TEXTURE_SLOT}                        // DESCRIPTORS
+    PipelinePassCreateInfo::Descriptors{UBO_SLOT, SAMPLER_SLOT, BASIC_TEXTURE_SLOT},                        // DESCRIPTORS
+    ClearData{{0.2f, 0.2f, 0.2f, 1.0f}, 1.0f, 0}
     });
 
+  auto swapChainRequirements = window->GetSwapChainRequirements();
+
   std::unique_ptr<Azura::Renderer> renderer = RenderSystem::CreateRenderer(appInfo, requirements, applicationRequirements,
-    window->GetSwapChainRequirements(), renderPassRequirements,
+    swapChainRequirements, renderPassRequirements,
     descriptorRequirements, shaderRequirements, mainAllocator, drawableAllocator,
     *window);
 
@@ -225,10 +225,7 @@ TEST_F(RendererTest, BasicDeferredTest) {
   requirements.m_int64         = false;
   requirements.m_transferQueue = false;
 
-  ApplicationRequirements applicationRequirements = {};
-  applicationRequirements.m_clearColor[0] = 0.2f;
-  applicationRequirements.m_clearColor[1] = 0.2f;
-  applicationRequirements.m_clearColor[2] = 0.2f;
+  const ApplicationRequirements applicationRequirements = {};
 
   DescriptorRequirements descriptorRequirements = DescriptorRequirements(3, allocatorTemporary);
   const U32 UBO_SLOT = descriptorRequirements.AddDescriptor({ DescriptorType::UniformBuffer, ShaderStage::Vertex });
@@ -243,24 +240,30 @@ TEST_F(RendererTest, BasicDeferredTest) {
   const U32 DEF_PIXEL_SHADER_ID = shaderRequirements.AddShader({ ShaderStage::Pixel, "BasicDeferredTest.Deferred.ps", AssetLocation::Shaders });
 
   RenderPassRequirements renderPassRequirements = RenderPassRequirements(1, 2, allocatorTemporary);
+  renderPassRequirements.m_maxPools = 2;
+
   const U32 COLOR_TARGET_1 = renderPassRequirements.AddTarget({RawStorageFormat::R32G32B32A32_FLOAT});
 
   const U32 GBUFFER_PASS = renderPassRequirements.AddPass({
     PipelinePassCreateInfo::Shaders{VERTEX_SHADER_ID, PIXEL_SHADER_ID},  // SHADERS
     PipelinePassCreateInfo::Inputs{},                                    // INPUT TARGETS
     PipelinePassCreateInfo::Outputs{COLOR_TARGET_1},                     // OUTPUT TARGETS
-    PipelinePassCreateInfo::Descriptors{UBO_SLOT}                        // DESCRIPTORS
+    PipelinePassCreateInfo::Descriptors{UBO_SLOT},                        // DESCRIPTORS
+    ClearData{{0.2f, 0.2f, 0.2f, 1.0f}, 1.0f, 0}
     });
 
   const U32 SHADING_PASS = renderPassRequirements.AddPass({
     PipelinePassCreateInfo::Shaders{DEF_VERTEX_SHADER_ID, DEF_PIXEL_SHADER_ID},
     PipelinePassCreateInfo::Inputs{{COLOR_TARGET_1, ShaderStage::Pixel}},
     PipelinePassCreateInfo::Outputs{PRESENT_TARGET}, // END OF RENDERING
-    PipelinePassCreateInfo::Descriptors{SAMPLER_SLOT}
+    PipelinePassCreateInfo::Descriptors{SAMPLER_SLOT},
+    ClearData{{0.2f, 0.2f, 0.2f, 1.0f}, 1.0f, 0}
     });
 
+  auto swapChainRequirements = window->GetSwapChainRequirements();
+
   std::unique_ptr<Azura::Renderer> renderer = RenderSystem::CreateRenderer(appInfo, requirements, applicationRequirements,
-    window->GetSwapChainRequirements(), renderPassRequirements,
+    swapChainRequirements, renderPassRequirements,
     descriptorRequirements, shaderRequirements, mainAllocator, drawableAllocator,
     *window);
 

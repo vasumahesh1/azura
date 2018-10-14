@@ -1,6 +1,8 @@
 #include "Core/RawStorageFormat.h"
 #include "Utils/Macros.h"
 
+#include <boost/preprocessor/stringize.hpp>
+
 namespace Azura {
 
 #define ENUM_SIZE_CASE(ENUM_TUPLE)                                                                                     \
@@ -13,6 +15,13 @@ namespace Azura {
 #define ENUM_ASPECT_STENCIL_CHECK(ENUM_TUPLE)                                                                            \
   case GET_FULL_FORMAT_NAME_FROM_TUPLE(ENUM_TUPLE):                                                                      \
     return (GET_ASPECT_MASK_FROM_TUPLE(ENUM_TUPLE) & AspectMaskBits::StencilBit) == AspectMaskBits::StencilBit;
+
+#define TO_STRING_MACRO(VAR) #VAR
+
+#define ENUM_TO_STRING_CASE(ENUM_TUPLE)                                                                                     \
+  FORWARD_MAPPING(GET_FULL_FORMAT_NAME_FROM_TUPLE(ENUM_TUPLE), BOOST_PP_STRINGIZE(GET_FORMAT_NAME_FROM_TUPLE(ENUM_TUPLE)))
+
+  
 
 U32 GetFormatSizeBits(RawStorageFormat format) {
   switch (format) {
@@ -46,4 +55,15 @@ bool HasStencilComponent(RawStorageFormat format)
 U32 GetFormatSize(RawStorageFormat format) {
   return GetFormatSizeBits(format) / 8;
 }
+
+String ToString(RawStorageFormat format)
+{
+  switch (format) {
+    RAW_STORAGE_FORMAT_ITERATOR(ENUM_TO_STRING_CASE)
+
+  default:
+    return "Invalid Format";
+  }
+}
+
 }  // namespace Azura
