@@ -47,5 +47,5 @@ float4 main(QuadInput_PS input) : SV_Target
   // finalColor = float4(1.0, 1.0, 0.0, 1.0);
   // finalColor = float4((normalize(lightVec) + float3(1,1,1)) / 2.0, 1.0);
 
-  return float4(0, 0, 1, 0.5);
+  return float4(controls.u_waterColor.rgb, controls.u_waterControls.y);
 }

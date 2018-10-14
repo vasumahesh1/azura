@@ -45,7 +45,13 @@ CREATE_MAPPER_H(BufferUsageRate, VkVertexInputRate);
 CREATE_MAPPER_H(ImageType, VkImageType);
 
 CREATE_MAPPER_H(ImageViewType, VkImageViewType);
-// CREATE_MAPPER_H(VkImageType, ImageType)
+// CREATE_MAPPER_H(VkImageType, ImageType);
+
+CREATE_MAPPER_H(BlendFactor, VkBlendFactor);
+// CREATE_MAPPER_H(VkBlendFactor, BlendFactor);
+
+CREATE_MAPPER_H(BlendOp, VkBlendOp);
+// CREATE_MAPPER_H(VkBlendOp, BlendOp);
 
 VkShaderStageFlagBits GetCombinedShaderStageFlag(ShaderStage stage);
 

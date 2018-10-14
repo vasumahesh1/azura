@@ -42,7 +42,7 @@ struct ShaderControls {
   Vector4f m_eye{0.0f, 0.0f, 4.0f, 1.0f};
 
   Color4f m_waterControls{0.5f, 0.65f, 0, 0};
-  Color4f m_waterColor{21.0, 92.0, 158.0, 1.0f};
+  Color4f m_waterColor{21.0f / 255.0f, 92.0f / 255.0f, 158.0f / 255.0f, 1.0f};
 };
 
 AppRenderer::AppRenderer()
@@ -135,7 +135,9 @@ void AppRenderer::Initialize() {
   const U32 SINGLE_PASS = renderPassRequirements.AddPass({
     PipelinePassCreateInfo::Shaders{},                                   // SHADERS
     PipelinePassCreateInfo::Inputs{{NOISE_TARGET_1, ShaderStage::Pixel}, {NOISE_TARGET_2, ShaderStage::Pixel}, {NOISE_TARGET_3, ShaderStage::Pixel}},      // INPUT TARGETS
-    PipelinePassCreateInfo::Outputs{}                                   // OUTPUT TARGETS
+    PipelinePassCreateInfo::Outputs{},                                   // OUTPUT TARGETS
+    {}, {},
+    BlendState{true, {SrcAlpha, OneMinusSrcAlpha}, {SrcAlpha, OneMinusSrcAlpha}}
     });
 
   SwapChainRequirements swapChainRequirements = m_window->GetSwapChainRequirements();

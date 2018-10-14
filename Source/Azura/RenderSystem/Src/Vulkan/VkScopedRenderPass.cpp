@@ -35,6 +35,8 @@ void VkScopedRenderPass::Create(VkDevice device,
   m_commandBuffers.Reserve(1);
   m_frameBuffers.Resize(1);
 
+  LOG_DBG(log_VulkanRenderSystem, LOG_LEVEL, "Creating Render Pass: ID %d", m_id);
+
   CreateDescriptorSetLayout(device, createInfo);
 
   m_shaderPipelineInfos.Reserve(U32(createInfo.m_shaders.size()));
@@ -97,13 +99,37 @@ void VkScopedRenderPass::Create(VkDevice device,
 
       VkPipelineColorBlendAttachmentState colorBlendAttachment = {};
       colorBlendAttachment.colorWriteMask = VK_COLOR_COMPONENT_R_BIT | VK_COLOR_COMPONENT_G_BIT | VK_COLOR_COMPONENT_B_BIT | VK_COLOR_COMPONENT_A_BIT;
-      colorBlendAttachment.blendEnable = VK_FALSE;
-      colorBlendAttachment.srcColorBlendFactor = VK_BLEND_FACTOR_BEGIN_RANGE;
-      colorBlendAttachment.srcAlphaBlendFactor = VK_BLEND_FACTOR_BEGIN_RANGE;
-      colorBlendAttachment.dstColorBlendFactor = VK_BLEND_FACTOR_BEGIN_RANGE;
-      colorBlendAttachment.dstAlphaBlendFactor = VK_BLEND_FACTOR_BEGIN_RANGE;
-      colorBlendAttachment.colorBlendOp = VK_BLEND_OP_BEGIN_RANGE;
-      colorBlendAttachment.alphaBlendOp = VK_BLEND_OP_BEGIN_RANGE;
+      colorBlendAttachment.blendEnable = VkBool32(createInfo.m_blendState.m_enable);
+
+      if (createInfo.m_blendState.m_enable) {
+        LOG_DBG(log_VulkanRenderSystem, LOG_LEVEL, "Enabling Blend State For Render Pass");
+
+        const auto colorSrcFactor = ToVkBlendFactor(createInfo.m_blendState.m_color.m_srcFactor);
+        VERIFY_OPT(log_VulkanRenderSystem, colorSrcFactor, "Invalid colorSrcFactor converted for Blend State");
+
+        const auto colorDstFactor = ToVkBlendFactor(createInfo.m_blendState.m_color.m_dstFactor);
+        VERIFY_OPT(log_VulkanRenderSystem, colorDstFactor, "Invalid colorDstFactor converted for Blend State");
+
+        const auto colorOp = ToVkBlendOp(createInfo.m_blendState.m_color.m_op);
+        VERIFY_OPT(log_VulkanRenderSystem, colorOp, "Invalid colorOp converted for Blend State");
+
+        const auto alphaSrcFactor = ToVkBlendFactor(createInfo.m_blendState.m_alpha.m_srcFactor);
+        VERIFY_OPT(log_VulkanRenderSystem, alphaSrcFactor, "Invalid alphaSrcFactor converted for Blend State");
+
+        const auto alphaDstFactor = ToVkBlendFactor(createInfo.m_blendState.m_alpha.m_dstFactor);
+        VERIFY_OPT(log_VulkanRenderSystem, alphaDstFactor, "Invalid alphaDstFactor converted for Blend State");
+
+        const auto alphaOp = ToVkBlendOp(createInfo.m_blendState.m_alpha.m_op);
+        VERIFY_OPT(log_VulkanRenderSystem, alphaOp, "Invalid alphaOp converted for Blend State");
+
+        colorBlendAttachment.srcColorBlendFactor = colorSrcFactor.value();
+        colorBlendAttachment.dstColorBlendFactor = colorDstFactor.value();
+        colorBlendAttachment.colorBlendOp = colorOp.value();
+
+        colorBlendAttachment.srcAlphaBlendFactor = alphaSrcFactor.value();
+        colorBlendAttachment.dstAlphaBlendFactor = alphaDstFactor.value();
+        colorBlendAttachment.alphaBlendOp = alphaOp.value();
+      }
 
       m_colorBlendAttachments.PushBack(colorBlendAttachment);
 
@@ -182,6 +208,8 @@ void VkScopedRenderPass::CreateForSwapChain(VkDevice device,
 
   CreateDescriptorSetLayout(device, createInfo);
 
+  LOG_DBG(log_VulkanRenderSystem, LOG_LEVEL, "Creating Render Pass (Swap Chain): ID %d", m_id);
+
   m_shaderPipelineInfos.Reserve(U32(createInfo.m_shaders.size()));
   m_clearValues.Reserve(2);
 
@@ -206,15 +234,41 @@ void VkScopedRenderPass::CreateForSwapChain(VkDevice device,
   colorAttachment.finalLayout   = VK_IMAGE_LAYOUT_PRESENT_SRC_KHR;
 
   m_colorBlendAttachments.Reserve(1);
+
   VkPipelineColorBlendAttachmentState colorBlendAttachment = {};
   colorBlendAttachment.colorWriteMask = VK_COLOR_COMPONENT_R_BIT | VK_COLOR_COMPONENT_G_BIT | VK_COLOR_COMPONENT_B_BIT | VK_COLOR_COMPONENT_A_BIT;
-  colorBlendAttachment.blendEnable = VK_FALSE;
-  colorBlendAttachment.srcColorBlendFactor = VK_BLEND_FACTOR_BEGIN_RANGE;
-  colorBlendAttachment.srcAlphaBlendFactor = VK_BLEND_FACTOR_BEGIN_RANGE;
-  colorBlendAttachment.dstColorBlendFactor = VK_BLEND_FACTOR_BEGIN_RANGE;
-  colorBlendAttachment.dstAlphaBlendFactor = VK_BLEND_FACTOR_BEGIN_RANGE;
-  colorBlendAttachment.colorBlendOp = VK_BLEND_OP_BEGIN_RANGE;
-  colorBlendAttachment.alphaBlendOp = VK_BLEND_OP_BEGIN_RANGE;
+  colorBlendAttachment.blendEnable = VkBool32(createInfo.m_blendState.m_enable);
+
+  if (createInfo.m_blendState.m_enable) {
+    LOG_DBG(log_VulkanRenderSystem, LOG_LEVEL, "Enabling Blend State For Render Pass");
+
+    const auto colorSrcFactor = ToVkBlendFactor(createInfo.m_blendState.m_color.m_srcFactor);
+    VERIFY_OPT(log_VulkanRenderSystem, colorSrcFactor, "Invalid colorSrcFactor converted for Blend State");
+
+    const auto colorDstFactor = ToVkBlendFactor(createInfo.m_blendState.m_color.m_dstFactor);
+    VERIFY_OPT(log_VulkanRenderSystem, colorDstFactor, "Invalid colorDstFactor converted for Blend State");
+
+    const auto colorOp = ToVkBlendOp(createInfo.m_blendState.m_color.m_op);
+    VERIFY_OPT(log_VulkanRenderSystem, colorOp, "Invalid colorOp converted for Blend State");
+
+    const auto alphaSrcFactor = ToVkBlendFactor(createInfo.m_blendState.m_alpha.m_srcFactor);
+    VERIFY_OPT(log_VulkanRenderSystem, alphaSrcFactor, "Invalid alphaSrcFactor converted for Blend State");
+
+    const auto alphaDstFactor = ToVkBlendFactor(createInfo.m_blendState.m_alpha.m_dstFactor);
+    VERIFY_OPT(log_VulkanRenderSystem, alphaDstFactor, "Invalid alphaDstFactor converted for Blend State");
+
+    const auto alphaOp = ToVkBlendOp(createInfo.m_blendState.m_alpha.m_op);
+    VERIFY_OPT(log_VulkanRenderSystem, alphaOp, "Invalid alphaOp converted for Blend State");
+
+    colorBlendAttachment.srcColorBlendFactor = colorSrcFactor.value();
+    colorBlendAttachment.dstColorBlendFactor = colorDstFactor.value();
+    colorBlendAttachment.colorBlendOp = colorOp.value();
+
+    colorBlendAttachment.srcAlphaBlendFactor = alphaSrcFactor.value();
+    colorBlendAttachment.dstAlphaBlendFactor = alphaDstFactor.value();
+    colorBlendAttachment.alphaBlendOp = alphaOp.value();
+  }
+
   m_colorBlendAttachments.PushBack(colorBlendAttachment);
 
   VkAttachmentDescription depthAttachment = {};

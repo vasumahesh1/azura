@@ -139,6 +139,37 @@ namespace Vulkan {
   FUNC(ImageViewType::ImageView2DArray, VK_IMAGE_VIEW_TYPE_2D_ARRAY)         \
   FUNC(ImageViewType::ImageViewCubeMapArray, VK_IMAGE_VIEW_TYPE_CUBE_ARRAY)  
 
+#define BLEND_OP_TO_VK_BLEND_OP(FUNC)                              \
+  FUNC(BlendOp::Add, VK_BLEND_OP_ADD)                              \
+  FUNC(BlendOp::Subtract, VK_BLEND_OP_SUBTRACT)                    \
+  FUNC(BlendOp::ReverseSubtract, VK_BLEND_OP_REVERSE_SUBTRACT)     \
+  FUNC(BlendOp::Min, VK_BLEND_OP_MIN)                              \
+  FUNC(BlendOp::Max, VK_BLEND_OP_MAX)
+
+
+
+#define BLEND_FACTOR_TO_VK_BLEND_FACTOR(FUNC)                                          \
+  FUNC(BlendFactor::Zero, VK_BLEND_FACTOR_ZERO)                                        \
+  FUNC(BlendFactor::One, VK_BLEND_FACTOR_ONE)                                          \
+  FUNC(BlendFactor::SrcColor, VK_BLEND_FACTOR_SRC_COLOR)                               \
+  FUNC(BlendFactor::OneMinusSrcColor, VK_BLEND_FACTOR_ONE_MINUS_SRC_COLOR)             \
+  FUNC(BlendFactor::DstColor, VK_BLEND_FACTOR_DST_COLOR)                               \
+  FUNC(BlendFactor::OneMinusDstColor, VK_BLEND_FACTOR_ONE_MINUS_DST_COLOR)             \
+  FUNC(BlendFactor::SrcAlpha, VK_BLEND_FACTOR_SRC_ALPHA)                               \
+  FUNC(BlendFactor::OneMinusSrcAlpha, VK_BLEND_FACTOR_ONE_MINUS_SRC_ALPHA)             \
+  FUNC(BlendFactor::DstAlpha, VK_BLEND_FACTOR_DST_ALPHA)                               \
+  FUNC(BlendFactor::OneMinusDstAlpha, VK_BLEND_FACTOR_ONE_MINUS_DST_ALPHA)             \
+  FUNC(BlendFactor::ConstantColor, VK_BLEND_FACTOR_CONSTANT_COLOR)                     \
+  FUNC(BlendFactor::OneMinusConstantColor, VK_BLEND_FACTOR_ONE_MINUS_CONSTANT_COLOR)   \
+  FUNC(BlendFactor::ConstantAlpha, VK_BLEND_FACTOR_CONSTANT_ALPHA)                     \
+  FUNC(BlendFactor::OneMinusConstantAlpha, VK_BLEND_FACTOR_ONE_MINUS_CONSTANT_ALPHA)   \
+  FUNC(BlendFactor::SrcAlphaSaturate, VK_BLEND_FACTOR_SRC_ALPHA_SATURATE)              \
+  FUNC(BlendFactor::Src1Color, VK_BLEND_FACTOR_SRC1_COLOR)                             \
+  FUNC(BlendFactor::OneMinusSrc1Color, VK_BLEND_FACTOR_ONE_MINUS_SRC1_COLOR)           \
+  FUNC(BlendFactor::Src1Alpha, VK_BLEND_FACTOR_SRC1_ALPHA)                             \
+  FUNC(BlendFactor::OneMinusSrc1Alpha, VK_BLEND_FACTOR_ONE_MINUS_SRC1_ALPHA)
+
+
 #define CREATE_MAPPER_CPP(FROM_FORMAT, TO_FORMAT, MAPPING_TABLE, CASE_MAPPING_FUNC)                                    \
   CREATE_MAPPER_H(FROM_FORMAT, TO_FORMAT) {                                                                            \
     switch (inputFormat) { MAPPING_TABLE(CASE_MAPPING_FUNC) }                                                          \
@@ -187,6 +218,12 @@ CREATE_MAPPER_CPP(ImageType, VkImageType, IMAGE_TYPE_TO_VK_IMAGE_TYPE, FORWARD_M
 
 CREATE_MAPPER_CPP(ImageViewType, VkImageViewType, IMAGE_VIEW_TYPE_TO_VK_IMAGE_TYPE, FORWARD_MAPPING);
 // CREATE_MAPPER_CPP(ImageType, VkImageType, IMAGE_TYPE_TO_VK_IMAGE_TYPE, REVERSE_MAPPING)
+
+CREATE_MAPPER_CPP(BlendFactor, VkBlendFactor, BLEND_FACTOR_TO_VK_BLEND_FACTOR, FORWARD_MAPPING);
+// CREATE_MAPPER_CPP(BlendFactor, VkBlendFactor, BLEND_FACTOR_TO_VK_BLEND_FACTOR, REVERSE_MAPPING);
+
+CREATE_MAPPER_CPP(BlendOp, VkBlendOp, BLEND_OP_TO_VK_BLEND_OP, FORWARD_MAPPING);
+// CREATE_MAPPER_CPP(BlendOp, VkBlendOp, BLEND_OP_TO_VK_BLEND_OP, REVERSE_MAPPING); // NOLINT
 
 VkShaderStageFlagBits GetCombinedShaderStageFlag(ShaderStage stage) {
   if (ENUM_HAS(stage, ShaderStage::All)) {

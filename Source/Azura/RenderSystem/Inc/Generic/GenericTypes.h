@@ -56,6 +56,52 @@ enum class BufferUsageRate {
   PerInstance
 };
 
+enum BlendFactor
+{
+  Zero,
+  One,
+  SrcColor,
+  OneMinusSrcColor,
+  DstColor,
+  OneMinusDstColor,
+  SrcAlpha,
+  OneMinusSrcAlpha,
+  DstAlpha,
+  OneMinusDstAlpha,
+  ConstantColor,
+  OneMinusConstantColor,
+  ConstantAlpha,
+  OneMinusConstantAlpha,
+  SrcAlphaSaturate,
+  Src1Color,
+  OneMinusSrc1Color,
+  Src1Alpha,
+  OneMinusSrc1Alpha
+};
+
+enum BlendOp
+{
+  Add,
+  Subtract,
+  ReverseSubtract,
+  Min,
+  Max
+};
+
+struct BlendingEq
+{
+  BlendFactor m_srcFactor{};
+  BlendFactor m_dstFactor{};
+  BlendOp m_op{};
+};
+
+struct BlendState
+{
+  bool m_enable{false};
+  BlendingEq m_color{};
+  BlendingEq m_alpha{};
+};
+
 enum class PrimitiveTopology {
   PointList,
   LineList,
@@ -311,6 +357,7 @@ struct PipelinePassCreateInfo {
   SmallVector<U32, 4> m_descriptors{};
 
   ClearData m_clearData{};
+  BlendState m_blendState{};
 };
 
 struct DescriptorRequirements {
