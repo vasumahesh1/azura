@@ -28,7 +28,7 @@ VkRenderer::VkRenderer(const ApplicationInfo& appInfo,
     m_perFrameBuffer(4096),
     m_perFrameAllocator(m_perFrameBuffer, 4096),
     m_window(window),
-    m_drawablePools(drawAllocator),
+    m_drawablePools(renderPassRequirements.m_maxPools, drawAllocator),
     m_swapChain(mainAllocator, log_VulkanRenderSystem),
     m_renderPasses(renderPassRequirements.m_passSequence.GetSize(), mainAllocator),
     m_descriptorSetLayouts(mainAllocator),
@@ -94,9 +94,17 @@ VkRenderer::VkRenderer(const ApplicationInfo& appInfo,
     desc.m_format    = bufferCreateInfo.m_format;
     desc.m_bounds    = Bounds3D{m_swapChain.GetExtent().width, m_swapChain.GetExtent().height, 1};
 
+    VkImageUsageFlags usageFlags = VK_IMAGE_USAGE_COLOR_ATTACHMENT_BIT | VK_IMAGE_USAGE_SAMPLED_BIT;
+
+    if (HasDepthComponent(bufferCreateInfo.m_format) || HasStencilComponent(bufferCreateInfo.m_format))
+    {
+      usageFlags = VK_IMAGE_USAGE_DEPTH_STENCIL_ATTACHMENT_BIT | VK_IMAGE_USAGE_SAMPLED_BIT;
+    }
+
+    LOG_DBG(log_VulkanRenderSystem, LOG_LEVEL, "Creating Attachment Input at: %d for %s", m_renderPassAttachmentImages.GetSize(), ToString(bufferCreateInfo.m_format).c_str());
+
     m_renderPassAttachmentImages.PushBack(VkScopedImage(m_device, desc,
-                                                        VK_IMAGE_USAGE_COLOR_ATTACHMENT_BIT |
-                                                        VK_IMAGE_USAGE_SAMPLED_BIT,
+                                                        usageFlags,
                                                         memProperties, log_VulkanRenderSystem));
 
     m_renderPassAttachmentImages.Last().CreateImageView(ImageViewType::ImageView2D);
@@ -219,11 +227,7 @@ DrawablePool& VkRenderer::CreateDrawablePool(const DrawablePoolCreateInfo& creat
 
   m_drawablePools.PushBack(std::move(pool));
 
-  return m_drawablePools[m_drawablePools.GetSize() - 1];
-}
-
-void VkRenderer::SetDrawablePoolCount(U32 count) {
-  m_drawablePools.Reserve(count);
+  return m_drawablePools.Last();
 }
 
 VkDevice VkRenderer::GetDevice() const {
@@ -236,13 +240,6 @@ String VkRenderer::GetRenderingAPI() const {
 
 void VkRenderer::Submit() {
   STACK_ALLOCATOR(Temporary, Memory::MonotonicAllocator, 4096);
-
-  const auto& clearColor        = GetApplicationRequirements().m_clearColor;
-  const auto& clearDepthStencil = GetApplicationRequirements().m_depthStencilClear;
-
-  std::array<VkClearValue, 2> clearData{};
-  clearData[0].color        = {clearColor[0], clearColor[1], clearColor[2], clearColor[3]}; // NOLINT
-  clearData[1].depthStencil = {clearDepthStencil[0], U32(clearDepthStencil[1])};            // NOLINT
 
   Vector<Vector<VkCommandBuffer>> secondaryCmdBuffers(m_renderPasses.GetSize(), allocatorTemporary);
 
@@ -268,7 +265,7 @@ void VkRenderer::Submit() {
   for (U32 idx             = 0; idx < m_renderPasses.GetSize() - 1; ++idx) {
     const auto& renderPass = m_renderPasses[idx];
 
-    renderPass.Begin(m_swapChain, clearData);
+    renderPass.Begin(m_swapChain);
 
     const auto& cmdBuffers = secondaryCmdBuffers[renderPass.GetId()];
     vkCmdExecuteCommands(renderPass.GetCommandBuffer(0), cmdBuffers.GetSize(), cmdBuffers.Data());
@@ -279,7 +276,7 @@ void VkRenderer::Submit() {
   const auto& lastPass         = m_renderPasses.Last();
   const auto& lastPassCommands = secondaryCmdBuffers.Last();
 
-  lastPass.Begin(m_swapChain, clearData);
+  lastPass.Begin(m_swapChain);
   for (U32 idx = 0; idx < lastPass.GetFrameBufferCount(); ++idx) {
     vkCmdExecuteCommands(lastPass.GetCommandBuffer(idx), lastPassCommands.GetSize(), lastPassCommands.Data());
   }
@@ -379,7 +376,7 @@ void VkRenderer::CreateDescriptorInfo() {
   poolInfo.pPoolSizes                 = descriptorPoolSizes.Data();
 
   // TODO(vasumahesh1):[DESCRIPTORS]: Max Sets issue!
-  poolInfo.maxSets = 2 * m_descriptorSetLayouts.GetSize();
+  poolInfo.maxSets = m_drawablePools.GetMaxSize() * m_descriptorSetLayouts.GetSize();
 
   VERIFY_VK_OP(log_VulkanRenderSystem, vkCreateDescriptorPool(m_device, &poolInfo, nullptr, &m_descriptorPool),
     "Unable to create Descriptor Pool");

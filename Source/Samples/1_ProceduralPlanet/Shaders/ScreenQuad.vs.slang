@@ -1,8 +1,8 @@
 import Common;
 
-SkyInput_PS main(SkyInput_VS input)
+QuadInput_PS main(QuadInput_VS input)
 {
-  SkyInput_PS output;
+  QuadInput_PS output;
   output.pos = input.in_Pos;
   output.uv = input.in_UV;
   return output;

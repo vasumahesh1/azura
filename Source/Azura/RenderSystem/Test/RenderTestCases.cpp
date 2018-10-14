@@ -34,8 +34,6 @@ void RenderTestCases::ExecuteBasicRenderTest(Azura::Renderer& renderer,
   UNUSED(log_TestCase);
   UNUSED(window);
 
-  renderer.SetDrawablePoolCount(1);
-
   DrawablePoolCreateInfo poolInfo = {allocatorTemporary};
   poolInfo.m_byteSize             = 0x400000;
   poolInfo.m_numDrawables         = 1;
@@ -108,8 +106,6 @@ void RenderTestCases::ExecuteBasicInstancingTest(Azura::Renderer& renderer,
   HEAP_ALLOCATOR(Temporary, Memory::MonotonicAllocator, 16384);
   UNUSED(window);
   UNUSED(log_TestCase);
-
-  renderer.SetDrawablePoolCount(1);
 
   DrawablePoolCreateInfo poolInfo{allocatorTemporary};
   poolInfo.m_byteSize        = 0x400000;
@@ -203,8 +199,6 @@ void RenderTestCases::ExecuteBasicTextureTest(Azura::Renderer& renderer,
                                                                                log_TestCase);
 
   const U32 nocturnalTexture = texManager->Load("Textures/Nocturnal.jpg");
-
-  renderer.SetDrawablePoolCount(1);
 
   DrawablePoolCreateInfo poolInfo = {allocatorTemporary};
   poolInfo.m_byteSize             = 0x400000;
@@ -307,8 +301,6 @@ void RenderTestCases::ExecuteBasicDeferredTest(Azura::Renderer& renderer,
   uboData.m_modelInvTranspose = uboData.m_model.Inverse().Transpose();
 
   const U32 nocturnalTexture = texManager->Load("Textures/Nocturnal.jpg");
-
-  renderer.SetDrawablePoolCount(2);
 
   DrawablePoolCreateInfo poolInfo = {allocatorTemporary};
   poolInfo.m_byteSize             = 0x400000;

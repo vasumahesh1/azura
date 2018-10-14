@@ -25,16 +25,38 @@ struct VertexShaderInput
   float4 in_Normal : IN_NORMAL;
 };
 
-struct SkyInput_VS
+struct NoiseInput_VS
 {
   float4 in_Pos : IN_POSITION;
-  float4 in_UV : IN_UV;
+  float4 in_Normal : IN_NORMAL;
 };
 
-struct SkyInput_PS
+struct NoiseInput_PS
 {
   float4 pos : SV_Position;
-  float4 uv : UV;
+  float4 normal : NORMAL;
+  float4 originalPos : ORIGINAL_POSITION;
+  float4 modelPos : MODEL_POSITION;
+  float2 baseUVOffset : UV_OFFSET;
+};
+
+struct NoiseOuput_PS
+{
+  float4 target1 : SV_Target0;
+  float4 target2 : SV_Target1;
+  float4 target3 : SV_Target2;
+};
+
+struct QuadInput_VS
+{
+  float4 in_Pos : IN_POSITION;
+  float2 in_UV : IN_UV;
+};
+
+struct QuadInput_PS
+{
+  float4 pos : SV_Position;
+  float2 uv : UV;
 };
 
 struct PixelShaderInput
@@ -50,6 +72,12 @@ struct TextureState {
   Texture2D target;
 };
 
+struct AttachmentState {
+  Texture2D target1;
+  Texture2D target2;
+  Texture2D target3;
+};
+
 static const float2 ROCK_OFFSET = float2(0.5, 0.0);
 static const float2 SNOW_OFFSET = float2(0.0, 0.0);
 static const float2 GRASS_1_OFFSET = float2(0.25, 0.0);
@@ -61,3 +89,5 @@ static const float2 SAND_OFFSET = float2(0.0, 0.25);
 ParameterBlock<UBOData> ubo;
 ParameterBlock<ShaderControls> controls;
 ParameterBlock<TextureState> textureState;
+ParameterBlock<AttachmentState> attachments;
+

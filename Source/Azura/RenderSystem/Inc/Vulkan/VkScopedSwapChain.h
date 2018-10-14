@@ -35,6 +35,8 @@ public:
   VkFormat GetSurfaceFormat() const;
   VkFormat GetDepthFormat() const;
 
+  bool HasDepthSupport() const;
+
   const VkExtent2D& GetExtent() const;
   const VkScopedImage& GetImage(int frameIdx) const;
   const VkScopedImage& GetDepthImage() const;
@@ -48,6 +50,7 @@ private:
   VkExtent2D m_extent;
   VkSurfaceFormatKHR m_surfaceFormat;
   U32 m_imageCount{0};
+  bool m_hasDepthSupport{false};
 
   Containers::Vector<VkScopedImage> m_images;
   VkScopedImage m_depthImage;

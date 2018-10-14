@@ -18,6 +18,8 @@ VkScopedRenderPass::VkScopedRenderPass(U32 idx, Memory::Allocator& mainAllocator
     m_frameBuffers(mainAllocator),
     m_commandBuffers(mainAllocator),
     m_inputAttachments(mainAllocator),
+    m_colorBlendAttachments(mainAllocator),
+    m_clearValues(mainAllocator),
     m_shaderPipelineInfos(mainAllocator) {
 }
 
@@ -33,6 +35,8 @@ void VkScopedRenderPass::Create(VkDevice device,
   m_commandBuffers.Reserve(1);
   m_frameBuffers.Resize(1);
 
+  LOG_DBG(log_VulkanRenderSystem, LOG_LEVEL, "Creating Render Pass: ID %d", m_id);
+
   CreateDescriptorSetLayout(device, createInfo);
 
   m_shaderPipelineInfos.Reserve(U32(createInfo.m_shaders.size()));
@@ -46,12 +50,16 @@ void VkScopedRenderPass::Create(VkDevice device,
   VkAttachmentReference depthReference;
   Vector<VkAttachmentDescription> attachments{U32(createInfo.m_outputs.size()), allocatorTemporary};
   Vector<VkImageView> attachmentViews{U32(createInfo.m_outputs.size()), allocatorTemporary};
+  m_colorBlendAttachments.Reserve(U32(createInfo.m_outputs.size()));
+  m_clearValues.Reserve(U32(createInfo.m_outputs.size()));
 
   U32 refCount  = 0;
   bool hasDepth = false;
 
   for (const auto& output : createInfo.m_outputs) {
     const auto& selected = pipelineBuffers[output];
+
+    VkClearValue clearValue = {};
 
     // Push View to Vector as we process output
     attachmentViews.PushBack(pipelineBufferImages[output].View());
@@ -77,6 +85,10 @@ void VkScopedRenderPass::Create(VkDevice device,
       // Shader Read for Color
       attachmentDescription.initialLayout = VK_IMAGE_LAYOUT_UNDEFINED;
       attachmentDescription.finalLayout   = VK_IMAGE_LAYOUT_DEPTH_STENCIL_ATTACHMENT_OPTIMAL;
+
+      clearValue.depthStencil = { createInfo.m_clearData.m_depth, createInfo.m_clearData.m_stencil };
+      m_clearValues.PushBack(clearValue);
+
     } else {
       // Record Color Reference
       colorReferences.PushBack({refCount, VK_IMAGE_LAYOUT_COLOR_ATTACHMENT_OPTIMAL});
@@ -84,6 +96,45 @@ void VkScopedRenderPass::Create(VkDevice device,
       // Shader Read for Color
       attachmentDescription.initialLayout = VK_IMAGE_LAYOUT_UNDEFINED;
       attachmentDescription.finalLayout   = VK_IMAGE_LAYOUT_SHADER_READ_ONLY_OPTIMAL;
+
+      VkPipelineColorBlendAttachmentState colorBlendAttachment = {};
+      colorBlendAttachment.colorWriteMask = VK_COLOR_COMPONENT_R_BIT | VK_COLOR_COMPONENT_G_BIT | VK_COLOR_COMPONENT_B_BIT | VK_COLOR_COMPONENT_A_BIT;
+      colorBlendAttachment.blendEnable = VkBool32(createInfo.m_blendState.m_enable);
+
+      if (createInfo.m_blendState.m_enable) {
+        LOG_DBG(log_VulkanRenderSystem, LOG_LEVEL, "Enabling Blend State For Render Pass");
+
+        const auto colorSrcFactor = ToVkBlendFactor(createInfo.m_blendState.m_color.m_srcFactor);
+        VERIFY_OPT(log_VulkanRenderSystem, colorSrcFactor, "Invalid colorSrcFactor converted for Blend State");
+
+        const auto colorDstFactor = ToVkBlendFactor(createInfo.m_blendState.m_color.m_dstFactor);
+        VERIFY_OPT(log_VulkanRenderSystem, colorDstFactor, "Invalid colorDstFactor converted for Blend State");
+
+        const auto colorOp = ToVkBlendOp(createInfo.m_blendState.m_color.m_op);
+        VERIFY_OPT(log_VulkanRenderSystem, colorOp, "Invalid colorOp converted for Blend State");
+
+        const auto alphaSrcFactor = ToVkBlendFactor(createInfo.m_blendState.m_alpha.m_srcFactor);
+        VERIFY_OPT(log_VulkanRenderSystem, alphaSrcFactor, "Invalid alphaSrcFactor converted for Blend State");
+
+        const auto alphaDstFactor = ToVkBlendFactor(createInfo.m_blendState.m_alpha.m_dstFactor);
+        VERIFY_OPT(log_VulkanRenderSystem, alphaDstFactor, "Invalid alphaDstFactor converted for Blend State");
+
+        const auto alphaOp = ToVkBlendOp(createInfo.m_blendState.m_alpha.m_op);
+        VERIFY_OPT(log_VulkanRenderSystem, alphaOp, "Invalid alphaOp converted for Blend State");
+
+        colorBlendAttachment.srcColorBlendFactor = colorSrcFactor.value();
+        colorBlendAttachment.dstColorBlendFactor = colorDstFactor.value();
+        colorBlendAttachment.colorBlendOp = colorOp.value();
+
+        colorBlendAttachment.srcAlphaBlendFactor = alphaSrcFactor.value();
+        colorBlendAttachment.dstAlphaBlendFactor = alphaDstFactor.value();
+        colorBlendAttachment.alphaBlendOp = alphaOp.value();
+      }
+
+      m_colorBlendAttachments.PushBack(colorBlendAttachment);
+
+      clearValue.color = { createInfo.m_clearData.m_color[0], createInfo.m_clearData.m_color[1], createInfo.m_clearData.m_color[2], createInfo.m_clearData.m_color[3] };
+      m_clearValues.PushBack(clearValue);
     }
 
     attachments.PushBack(attachmentDescription);
@@ -137,26 +188,32 @@ void VkScopedRenderPass::Create(VkDevice device,
   framebufferInfo.height                  = swapChain.GetExtent().height;
   framebufferInfo.layers                  = 1;
 
+  m_numAttachments = attachmentViews.GetSize();
+
   VERIFY_VK_OP(log_VulkanRenderSystem, vkCreateFramebuffer(device, &framebufferInfo, nullptr, m_frameBuffers.Data()),
     "Failed to create single framebuffer");
 
   m_commandBuffers.PushBack(VkCore::CreateCommandBuffer(device, commandPool, VK_COMMAND_BUFFER_LEVEL_PRIMARY,
-                                                log_VulkanRenderSystem));
-
+                                                        log_VulkanRenderSystem));
 
   m_beginRenderSemaphore = VkCore::CreateSemaphore(device, log_VulkanRenderSystem);
 }
 
 void VkScopedRenderPass::CreateForSwapChain(VkDevice device,
-  VkCommandPool commandPool,
-  const PipelinePassCreateInfo& createInfo,
-  const Vector<VkShader>& allShaders,
-  const VkScopedSwapChain& swapChain) {
+                                            VkCommandPool commandPool,
+                                            const PipelinePassCreateInfo& createInfo,
+                                            const Vector<VkShader>& allShaders,
+                                            const VkScopedSwapChain& swapChain) {
   STACK_ALLOCATOR(Temporary, Memory::MonotonicAllocator, 2048);
 
   CreateDescriptorSetLayout(device, createInfo);
 
+  LOG_DBG(log_VulkanRenderSystem, LOG_LEVEL, "Creating Render Pass (Swap Chain): ID %d", m_id);
+
   m_shaderPipelineInfos.Reserve(U32(createInfo.m_shaders.size()));
+  m_clearValues.Reserve(2);
+
+  VkClearValue clearValue;
 
   for (const auto& vkShaderId : createInfo.m_shaders) {
     const auto& vkShader = allShaders[vkShaderId];
@@ -175,6 +232,44 @@ void VkScopedRenderPass::CreateForSwapChain(VkDevice device,
 
   colorAttachment.initialLayout = VK_IMAGE_LAYOUT_UNDEFINED;
   colorAttachment.finalLayout   = VK_IMAGE_LAYOUT_PRESENT_SRC_KHR;
+
+  m_colorBlendAttachments.Reserve(1);
+
+  VkPipelineColorBlendAttachmentState colorBlendAttachment = {};
+  colorBlendAttachment.colorWriteMask = VK_COLOR_COMPONENT_R_BIT | VK_COLOR_COMPONENT_G_BIT | VK_COLOR_COMPONENT_B_BIT | VK_COLOR_COMPONENT_A_BIT;
+  colorBlendAttachment.blendEnable = VkBool32(createInfo.m_blendState.m_enable);
+
+  if (createInfo.m_blendState.m_enable) {
+    LOG_DBG(log_VulkanRenderSystem, LOG_LEVEL, "Enabling Blend State For Render Pass");
+
+    const auto colorSrcFactor = ToVkBlendFactor(createInfo.m_blendState.m_color.m_srcFactor);
+    VERIFY_OPT(log_VulkanRenderSystem, colorSrcFactor, "Invalid colorSrcFactor converted for Blend State");
+
+    const auto colorDstFactor = ToVkBlendFactor(createInfo.m_blendState.m_color.m_dstFactor);
+    VERIFY_OPT(log_VulkanRenderSystem, colorDstFactor, "Invalid colorDstFactor converted for Blend State");
+
+    const auto colorOp = ToVkBlendOp(createInfo.m_blendState.m_color.m_op);
+    VERIFY_OPT(log_VulkanRenderSystem, colorOp, "Invalid colorOp converted for Blend State");
+
+    const auto alphaSrcFactor = ToVkBlendFactor(createInfo.m_blendState.m_alpha.m_srcFactor);
+    VERIFY_OPT(log_VulkanRenderSystem, alphaSrcFactor, "Invalid alphaSrcFactor converted for Blend State");
+
+    const auto alphaDstFactor = ToVkBlendFactor(createInfo.m_blendState.m_alpha.m_dstFactor);
+    VERIFY_OPT(log_VulkanRenderSystem, alphaDstFactor, "Invalid alphaDstFactor converted for Blend State");
+
+    const auto alphaOp = ToVkBlendOp(createInfo.m_blendState.m_alpha.m_op);
+    VERIFY_OPT(log_VulkanRenderSystem, alphaOp, "Invalid alphaOp converted for Blend State");
+
+    colorBlendAttachment.srcColorBlendFactor = colorSrcFactor.value();
+    colorBlendAttachment.dstColorBlendFactor = colorDstFactor.value();
+    colorBlendAttachment.colorBlendOp = colorOp.value();
+
+    colorBlendAttachment.srcAlphaBlendFactor = alphaSrcFactor.value();
+    colorBlendAttachment.dstAlphaBlendFactor = alphaDstFactor.value();
+    colorBlendAttachment.alphaBlendOp = alphaOp.value();
+  }
+
+  m_colorBlendAttachments.PushBack(colorBlendAttachment);
 
   VkAttachmentDescription depthAttachment = {};
   depthAttachment.format                  = swapChain.GetDepthFormat();
@@ -198,16 +293,30 @@ void VkScopedRenderPass::CreateForSwapChain(VkDevice device,
   subpass.pipelineBindPoint       = VK_PIPELINE_BIND_POINT_GRAPHICS;
   subpass.colorAttachmentCount    = 1;
   subpass.pColorAttachments       = &colorAttachmentRef;
-  subpass.pDepthStencilAttachment = &depthAttachmentRef;
+  subpass.pDepthStencilAttachment = swapChain.HasDepthSupport() ? &depthAttachmentRef : nullptr;
 
-  std::array<VkAttachmentDescription, 2> attachments = {colorAttachment, depthAttachment};
+  Vector<VkAttachmentDescription> attachments{ 2, allocatorTemporary };
+  attachments.PushBack(colorAttachment);
+
+  clearValue.color = { createInfo.m_clearData.m_color[0], createInfo.m_clearData.m_color[1], createInfo.m_clearData.m_color[2], createInfo.m_clearData.m_color[3] };
+  m_clearValues.PushBack(clearValue);
+
+  if (swapChain.HasDepthSupport())
+  {
+    attachments.PushBack(depthAttachment);
+
+    clearValue.depthStencil = { createInfo.m_clearData.m_depth, createInfo.m_clearData.m_stencil };
+    m_clearValues.PushBack(clearValue);
+  }
 
   VkRenderPassCreateInfo renderPassInfo = {};
   renderPassInfo.sType                  = VK_STRUCTURE_TYPE_RENDER_PASS_CREATE_INFO;
-  renderPassInfo.attachmentCount        = U32(attachments.size());
-  renderPassInfo.pAttachments           = attachments.data();
+  renderPassInfo.attachmentCount        = attachments.GetSize();
+  renderPassInfo.pAttachments           = attachments.Data();
   renderPassInfo.subpassCount           = 1;
   renderPassInfo.pSubpasses             = &subpass;
+
+  m_numAttachments = attachments.GetSize();
 
   // Tell special subpass to wait for Image acquisition from semaphore
   std::array<VkSubpassDependency, 1> dependencies = {};
@@ -233,14 +342,19 @@ void VkScopedRenderPass::CreateForSwapChain(VkDevice device,
   const VkImageView depthImageView = swapChain.GetDepthImage().View();
 
   for (U32 idx = 0; idx < allImages.GetSize(); ++idx) {
+    Vector<VkImageView> swapAttachments{ 2, allocatorTemporary };
+    swapAttachments.PushBack(allImages[idx].View());
 
-    const std::array<VkImageView, 2> swapAttachments = {allImages[idx].View(), depthImageView};
+    if (swapChain.HasDepthSupport())
+    {
+      swapAttachments.PushBack(depthImageView);
+    }
 
     VkFramebufferCreateInfo framebufferInfo = {};
     framebufferInfo.sType                   = VK_STRUCTURE_TYPE_FRAMEBUFFER_CREATE_INFO;
     framebufferInfo.renderPass              = m_renderPass;
-    framebufferInfo.attachmentCount         = U32(swapAttachments.size());
-    framebufferInfo.pAttachments            = swapAttachments.data();
+    framebufferInfo.attachmentCount         = swapAttachments.GetSize();
+    framebufferInfo.pAttachments            = swapAttachments.Data();
     framebufferInfo.width                   = swapChainExtent.width;
     framebufferInfo.height                  = swapChainExtent.height;
     framebufferInfo.layers                  = 1;
@@ -251,7 +365,7 @@ void VkScopedRenderPass::CreateForSwapChain(VkDevice device,
 
   m_commandBuffers.Resize(m_frameBuffers.GetSize());
   VkCore::CreateCommandBuffers(device, commandPool, VK_COMMAND_BUFFER_LEVEL_PRIMARY,
-    m_commandBuffers, log_VulkanRenderSystem);
+                               m_commandBuffers, log_VulkanRenderSystem);
 
   m_beginRenderSemaphore = VkCore::CreateSemaphore(device, log_VulkanRenderSystem);
 }
@@ -296,10 +410,10 @@ void VkScopedRenderPass::SetDescriptorSetId(U32 id) {
   m_descriptorSet = id;
 }
 
-void VkScopedRenderPass::Begin(const VkScopedSwapChain& swapChain, std::array<VkClearValue, 2> clearData) const {
-
+void VkScopedRenderPass::Begin(const VkScopedSwapChain& swapChain) const {
   for (U32 idx = 0; idx < m_frameBuffers.GetSize(); ++idx) {
-    VkCore::BeginCommandBuffer(m_commandBuffers[idx], VK_COMMAND_BUFFER_USAGE_SIMULTANEOUS_USE_BIT, log_VulkanRenderSystem);
+    VkCore::BeginCommandBuffer(m_commandBuffers[idx], VK_COMMAND_BUFFER_USAGE_SIMULTANEOUS_USE_BIT,
+                               log_VulkanRenderSystem);
 
     VkRenderPassBeginInfo renderPassInfo = {};
     renderPassInfo.sType                 = VK_STRUCTURE_TYPE_RENDER_PASS_BEGIN_INFO;
@@ -307,8 +421,8 @@ void VkScopedRenderPass::Begin(const VkScopedSwapChain& swapChain, std::array<Vk
     renderPassInfo.framebuffer           = m_frameBuffers[idx];
     renderPassInfo.renderArea.offset     = {0, 0};
     renderPassInfo.renderArea.extent     = swapChain.GetExtent();
-    renderPassInfo.clearValueCount       = U32(clearData.size());
-    renderPassInfo.pClearValues          = clearData.data();
+    renderPassInfo.clearValueCount       = m_clearValues.GetSize();
+    renderPassInfo.pClearValues          = m_clearValues.Data();
 
     vkCmdBeginRenderPass(m_commandBuffers[idx], &renderPassInfo, VK_SUBPASS_CONTENTS_SECONDARY_COMMAND_BUFFERS);
   }
@@ -325,6 +439,10 @@ const Vector<VkPipelineShaderStageCreateInfo>& VkScopedRenderPass::GetShaderStag
   return m_shaderPipelineInfos;
 }
 
+const Containers::Vector<VkPipelineColorBlendAttachmentState>& VkScopedRenderPass::GetColorBlendAttachments() const {
+  return m_colorBlendAttachments;
+}
+
 void VkScopedRenderPass::CleanUp(VkDevice device, VkCommandPool commandPool) const {
   vkDestroyRenderPass(device, m_renderPass, nullptr);
 
@@ -338,11 +456,10 @@ void VkScopedRenderPass::CleanUp(VkDevice device, VkCommandPool commandPool) con
 }
 
 void VkScopedRenderPass::CreateDescriptorSetLayout(VkDevice device, const PipelinePassCreateInfo& createInfo) {
-  if (createInfo.m_inputs.empty())
-  {
+  if (createInfo.m_inputs.empty()) {
     return;
   }
-  
+
   STACK_ALLOCATOR(Temporary, Memory::MonotonicAllocator, 1024);
 
   U32 bindingId = 0;
@@ -350,8 +467,7 @@ void VkScopedRenderPass::CreateDescriptorSetLayout(VkDevice device, const Pipeli
   m_inputAttachments.Reserve(U32(createInfo.m_inputs.size()));
 
   Vector<VkDescriptorSetLayoutBinding> currentBindings(U32(createInfo.m_inputs.size()), allocatorTemporary);
-  for(const auto& input : createInfo.m_inputs)
-  {
+  for (const auto& input : createInfo.m_inputs) {
     m_inputAttachments.PushBack(input);
 
     const auto combinedShaderFlagBits = GetCombinedShaderStageFlag(input.m_stages);

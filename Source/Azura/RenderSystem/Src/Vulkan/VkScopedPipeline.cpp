@@ -24,7 +24,6 @@ VkPipelineFactory::VkPipelineFactory(VkDevice device, Memory::Allocator& allocat
     m_bindingInfo(10, allocator),
     m_attributeDescription(10, allocator),
     m_stages(10, allocator),
-    m_colorBlendAttachment(),
     log_VulkanRenderSystem(std::move(logger)) {
 }
 
@@ -159,21 +158,6 @@ VkPipelineFactory& VkPipelineFactory::SetMultisampleStage() {
   return *this;
 }
 
-VkPipelineFactory& VkPipelineFactory::SetColorBlendStage() {
-  m_colorBlendAttachment                = {};
-  m_colorBlendAttachment.colorWriteMask = VK_COLOR_COMPONENT_R_BIT | VK_COLOR_COMPONENT_G_BIT | VK_COLOR_COMPONENT_B_BIT
-                                          | VK_COLOR_COMPONENT_A_BIT;
-  m_colorBlendAttachment.blendEnable = VK_FALSE;
-
-  // TODO(vasumahesh1): Add Support for Blending
-  m_colorBlendStage.sType           = VK_STRUCTURE_TYPE_PIPELINE_COLOR_BLEND_STATE_CREATE_INFO;
-  m_colorBlendStage.logicOpEnable   = VK_FALSE;
-  m_colorBlendStage.attachmentCount = 1;
-  m_colorBlendStage.pAttachments    = &m_colorBlendAttachment;
-
-  return *this;
-}
-
 VkPipelineFactory& VkPipelineFactory::SetPipelineLayout(VkPipelineLayout layout) {
   m_layout = layout;
   return *this;
@@ -185,7 +169,8 @@ VkPipelineFactory& VkPipelineFactory::AddShaderStage(const VkPipelineShaderStage
   return *this;
 }
 
-void VkPipelineFactory::Submit(Containers::Vector<std::reference_wrapper<VkScopedRenderPass>> renderPasses, Containers::Vector<VkScopedPipeline>& result) const {
+void VkPipelineFactory::Submit(Containers::Vector<std::reference_wrapper<VkScopedRenderPass>> renderPasses,
+                               Containers::Vector<VkScopedPipeline>& result) const {
   result.Reserve(renderPasses.GetSize());
 
   VkPipelineVertexInputStateCreateInfo vertexInputInfo = {};
@@ -201,53 +186,62 @@ void VkPipelineFactory::Submit(Containers::Vector<std::reference_wrapper<VkScope
 
   // TODO(vasumahesh1):[DEPTH-STENCIL]: Expose this via an API
   VkPipelineDepthStencilStateCreateInfo depthStencil = {};
-  depthStencil.sType = VK_STRUCTURE_TYPE_PIPELINE_DEPTH_STENCIL_STATE_CREATE_INFO;
-  depthStencil.depthTestEnable = VK_TRUE;
-  depthStencil.depthWriteEnable = VK_TRUE;
-  depthStencil.depthCompareOp = VK_COMPARE_OP_LESS; // *
-  depthStencil.depthBoundsTestEnable = VK_FALSE;
-  depthStencil.minDepthBounds = 0.0f; // Optional
-  depthStencil.maxDepthBounds = 1.0f; // Optional
-  depthStencil.stencilTestEnable = VK_FALSE;
-  depthStencil.front = {}; // Optional
-  depthStencil.back = {}; // Optional
+  depthStencil.sType                                 = VK_STRUCTURE_TYPE_PIPELINE_DEPTH_STENCIL_STATE_CREATE_INFO;
+  depthStencil.depthTestEnable                       = VK_TRUE;
+  depthStencil.depthWriteEnable                      = VK_TRUE;
+  depthStencil.depthCompareOp                        = VK_COMPARE_OP_LESS; // *
+  depthStencil.depthBoundsTestEnable                 = VK_FALSE;
+  depthStencil.minDepthBounds                        = 0.0f; // Optional
+  depthStencil.maxDepthBounds                        = 1.0f; // Optional
+  depthStencil.stencilTestEnable                     = VK_FALSE;
+  depthStencil.front                                 = {}; // Optional
+  depthStencil.back                                  = {}; // Optional
 
   VkGraphicsPipelineCreateInfo pipelineInfo = {};
   pipelineInfo.sType                        = VK_STRUCTURE_TYPE_GRAPHICS_PIPELINE_CREATE_INFO;
-  
-  pipelineInfo.pVertexInputState            = &vertexInputInfo;
-  pipelineInfo.pInputAssemblyState          = &m_inputAssemblyStage;
-  pipelineInfo.pViewportState               = &m_viewportStage;
-  pipelineInfo.pRasterizationState          = &m_rasterizerStage;
-  pipelineInfo.pMultisampleState            = &m_multisampleStage;
-  pipelineInfo.pDepthStencilState           = &depthStencil;
-  pipelineInfo.pColorBlendState             = &m_colorBlendStage;
-  pipelineInfo.pDynamicState                = nullptr;
-  pipelineInfo.layout                       = m_layout;
-  
-  pipelineInfo.subpass                      = 0;
-  pipelineInfo.basePipelineHandle           = VK_NULL_HANDLE;
-  pipelineInfo.basePipelineIndex            = -1;
 
-  for (const auto& renderPass : renderPasses)
-  {
+  pipelineInfo.pVertexInputState   = &vertexInputInfo;
+  pipelineInfo.pInputAssemblyState = &m_inputAssemblyStage;
+  pipelineInfo.pViewportState      = &m_viewportStage;
+  pipelineInfo.pRasterizationState = &m_rasterizerStage;
+  pipelineInfo.pMultisampleState   = &m_multisampleStage;
+  pipelineInfo.pDepthStencilState  = &depthStencil;
+  pipelineInfo.pDynamicState       = nullptr;
+  pipelineInfo.layout              = m_layout;
+
+  pipelineInfo.subpass            = 0;
+  pipelineInfo.basePipelineHandle = VK_NULL_HANDLE;
+  pipelineInfo.basePipelineIndex  = -1;
+
+  VkPipelineColorBlendStateCreateInfo colorBlendStage{};
+  colorBlendStage.sType = VK_STRUCTURE_TYPE_PIPELINE_COLOR_BLEND_STATE_CREATE_INFO;
+
+  for (const auto& renderPass : renderPasses) {
+    const auto& colorBlendAttachments = renderPass.get().GetColorBlendAttachments();
+
+    colorBlendStage.logicOpEnable   = VK_FALSE;
+    colorBlendStage.attachmentCount = colorBlendAttachments.GetSize();
+    colorBlendStage.pAttachments    = colorBlendAttachments.Data();
+    pipelineInfo.pColorBlendState   = &colorBlendStage;
+
     const auto& stages = renderPass.get().GetShaderStageInfo();
 
-    pipelineInfo.stageCount                   = stages.GetSize();
-    pipelineInfo.pStages                      = stages.Data();
-    pipelineInfo.renderPass                   = renderPass.get().GetRenderPass();
+    pipelineInfo.stageCount = stages.GetSize();
+    pipelineInfo.pStages    = stages.Data();
+    pipelineInfo.renderPass = renderPass.get().GetRenderPass();
 
     // Locally assigned Shaders present
-    if (m_stages.GetSize() > 0)
-    {
+    if (m_stages.GetSize() > 0) {
       pipelineInfo.stageCount = m_stages.GetSize();
-      pipelineInfo.pStages = m_stages.Data();
+      pipelineInfo.pStages    = m_stages.Data();
     }
 
-    LOG_DBG(log_VulkanRenderSystem, LOG_LEVEL, "Total Shader Stages: %d", stages.GetSize());
+    LOG_DBG(log_VulkanRenderSystem, LOG_LEVEL, "Pipeline Creation: Local Shader Stages: %d", stages.GetSize());
+    LOG_DBG(log_VulkanRenderSystem, LOG_LEVEL, "Pipeline Creation: Render Pass Shader Stages: %d", stages.GetSize());
 
     VkPipeline pipeline;
-    VERIFY_VK_OP(log_VulkanRenderSystem, vkCreateGraphicsPipelines(m_device, VK_NULL_HANDLE, 1, &pipelineInfo, nullptr, &pipeline),
+    VERIFY_VK_OP(log_VulkanRenderSystem, vkCreateGraphicsPipelines(m_device, VK_NULL_HANDLE, 1, &pipelineInfo, nullptr,
+        &pipeline),
       "Failed to create pipeline");
 
     result.PushBack(VkScopedPipeline(pipeline));

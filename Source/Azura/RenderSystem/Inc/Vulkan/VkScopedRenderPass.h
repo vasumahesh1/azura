@@ -42,10 +42,12 @@ public:
   U32 GetDescriptorSetId() const;
   void SetDescriptorSetId(U32 id);
 
-  void Begin(const VkScopedSwapChain& swapChain, std::array<VkClearValue, 2> clearData) const;
+  void Begin(const VkScopedSwapChain& swapChain) const;
   void End() const;
 
   const Containers::Vector<VkPipelineShaderStageCreateInfo>& GetShaderStageInfo() const;
+  const Containers::Vector<VkPipelineColorBlendAttachmentState>& GetColorBlendAttachments() const;
+
 
   void CleanUp(VkDevice device, VkCommandPool commandPool) const;
 
@@ -56,6 +58,7 @@ private:
 
   U32 m_id;
   U32 m_descriptorSet{0};
+  U32 m_numAttachments{0};
 
   VkSemaphore m_beginRenderSemaphore{};
   VkDescriptorSetLayout m_descriptorSetLayout;
@@ -63,6 +66,8 @@ private:
   Containers::Vector<VkFramebuffer> m_frameBuffers;
   Containers::Vector<VkCommandBuffer> m_commandBuffers;
   Containers::Vector<PipelinePassInput> m_inputAttachments;
+  Containers::Vector<VkPipelineColorBlendAttachmentState> m_colorBlendAttachments;
+  Containers::Vector<VkClearValue> m_clearValues;
 
   VkRenderPass m_renderPass{};
   Containers::Vector<VkPipelineShaderStageCreateInfo> m_shaderPipelineInfos;

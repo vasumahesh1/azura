@@ -27,7 +27,7 @@ float4 GetSkyColor(in float3 rayDir) {
   return color;
 }
 
-float4 main(SkyInput_PS input) : SV_Target
+float4 main(QuadInput_PS input) : SV_Target
 {
   // Convert Pixel Coords to 0 to 1 and then to NDC -1 to 1
   float2 ndc = input.uv.xy;

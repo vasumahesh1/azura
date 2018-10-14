@@ -179,5 +179,6 @@ U32 GetFormatSizeBits(RawStorageFormat format);
 U32 GetFormatSize(RawStorageFormat format);
 bool HasDepthComponent(RawStorageFormat format);
 bool HasStencilComponent(RawStorageFormat format);
+String ToString(RawStorageFormat format);
 
 }  // namespace Azura

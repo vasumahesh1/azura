@@ -42,7 +42,6 @@ public:
   VkRenderer& operator=(VkRenderer&& other) noexcept = delete;
 
   DrawablePool& CreateDrawablePool(const DrawablePoolCreateInfo& createInfo) override;
-  void SetDrawablePoolCount(U32 count) override;
 
   VkDevice GetDevice() const;
   String GetRenderingAPI() const override;

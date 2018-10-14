@@ -42,13 +42,13 @@ struct ShaderControls {
   Vector4f m_eye{0.0f, 0.0f, 4.0f, 1.0f};
 
   Color4f m_waterControls{0.5f, 0.65f, 0, 0};
-  Color4f m_waterColor{21.0, 92.0, 158.0, 1.0f};
+  Color4f m_waterColor{21.0f / 255.0f, 92.0f / 255.0f, 158.0f / 255.0f, 1.0f};
 };
 
 AppRenderer::AppRenderer()
-  : m_mainBuffer(16384),
-    m_mainAllocator(m_mainBuffer, 8192),
-    m_drawableAllocator(m_mainBuffer, 8192),
+  : m_mainBuffer(16384 * 2),
+    m_mainAllocator(m_mainBuffer, 16384),
+    m_drawableAllocator(m_mainBuffer, 16384),
     m_camera(1280, 720),
     log_AppRenderer(Log("AppRenderer")) {
 }
@@ -94,10 +94,7 @@ void AppRenderer::Initialize() {
   const auto shaderControlBuffer = reinterpret_cast<U8*>(&shaderControls); // NOLINT
 
   // TODO(vasumahesh1):[Q]:Allocator?
-  ApplicationRequirements applicationRequirements = {};
-  applicationRequirements.m_clearColor[0]         = 0.2f;
-  applicationRequirements.m_clearColor[1]         = 0.2f;
-  applicationRequirements.m_clearColor[2]         = 0.2f;
+  ApplicationRequirements applicationRequirements = {}; // NOLINT
 
   DescriptorRequirements descriptorRequirements = DescriptorRequirements(4, allocatorTemporary);
   // Set 0
@@ -111,33 +108,45 @@ void AppRenderer::Initialize() {
   const U32 PLANET_TEXTURE_SLOT = descriptorRequirements.AddDescriptor({DescriptorType::SampledImage, ShaderStage::Pixel, DescriptorBinding::Same});
 
 
-  ShaderRequirements shaderRequirements = ShaderRequirements(4, allocatorTemporary);
-  const U32 VERTEX_SHADER_ID = shaderRequirements.AddShader({ ShaderStage::Vertex, "Terrain.vs", AssetLocation::Shaders });
-  const U32 PIXEL_SHADER_ID = shaderRequirements.AddShader({ ShaderStage::Pixel, "Terrain.ps", AssetLocation::Shaders });
+  ShaderRequirements shaderRequirements = ShaderRequirements(5, allocatorTemporary);
+  const U32 SCREEN_QUAD_VERTEX_SHADER_ID = shaderRequirements.AddShader({ ShaderStage::Vertex, "ScreenQuad.vs", AssetLocation::Shaders });
 
-  const U32 SKY_VERTEX_SHADER_ID = shaderRequirements.AddShader({ ShaderStage::Vertex, "Sky.vs", AssetLocation::Shaders });
+  const U32 NOISE_VERTEX_SHADER_ID = shaderRequirements.AddShader({ ShaderStage::Vertex, "Noise.vs", AssetLocation::Shaders });
+  const U32 NOISE_PIXEL_SHADER_ID = shaderRequirements.AddShader({ ShaderStage::Pixel, "Noise.ps", AssetLocation::Shaders });
+  
+  const U32 TERRAIN_PIXEL_SHADER_ID = shaderRequirements.AddShader({ ShaderStage::Pixel, "Terrain.ps", AssetLocation::Shaders });
   const U32 SKY_PIXEL_SHADER_ID = shaderRequirements.AddShader({ ShaderStage::Pixel, "Sky.ps", AssetLocation::Shaders });
+  const U32 WATER_PIXEL_SHADER_ID = shaderRequirements.AddShader({ ShaderStage::Pixel, "Water.ps", AssetLocation::Shaders });
 
-  RenderPassRequirements renderPassRequirements = RenderPassRequirements(0, 1, allocatorTemporary);
+  RenderPassRequirements renderPassRequirements = RenderPassRequirements(4, 2, allocatorTemporary);
+  renderPassRequirements.m_maxPools = 4;
 
-  const U32 SINGLE_PASS = renderPassRequirements.AddPass({
-    PipelinePassCreateInfo::Shaders{VERTEX_SHADER_ID, PIXEL_SHADER_ID},  // SHADERS
-    PipelinePassCreateInfo::Inputs{},                                    // INPUT TARGETS
-    PipelinePassCreateInfo::Outputs{},                                   // OUTPUT TARGETS
-    PipelinePassCreateInfo::Descriptors{UBO_SLOT}                        // DESCRIPTORS
+  const U32 NOISE_TARGET_1 = renderPassRequirements.AddTarget({RawStorageFormat::R32G32B32A32_FLOAT});
+  const U32 NOISE_TARGET_2 = renderPassRequirements.AddTarget({RawStorageFormat::R32G32B32A32_FLOAT});
+  const U32 NOISE_TARGET_3 = renderPassRequirements.AddTarget({RawStorageFormat::R32G32B32A32_FLOAT});
+  const U32 NOISE_DEPTH = renderPassRequirements.AddTarget({RawStorageFormat::D32_FLOAT});
+
+  const U32 NOISE_PASS = renderPassRequirements.AddPass({
+    PipelinePassCreateInfo::Shaders{NOISE_VERTEX_SHADER_ID, NOISE_PIXEL_SHADER_ID},  // SHADERS
+    PipelinePassCreateInfo::Inputs{},                                                // INPUT TARGETS
+    PipelinePassCreateInfo::Outputs{NOISE_TARGET_1, NOISE_TARGET_2, NOISE_TARGET_3, NOISE_DEPTH}  // OUTPUT TARGETS
     });
 
+  const U32 SINGLE_PASS = renderPassRequirements.AddPass({
+    PipelinePassCreateInfo::Shaders{},                                   // SHADERS
+    PipelinePassCreateInfo::Inputs{{NOISE_TARGET_1, ShaderStage::Pixel}, {NOISE_TARGET_2, ShaderStage::Pixel}, {NOISE_TARGET_3, ShaderStage::Pixel}},      // INPUT TARGETS
+    PipelinePassCreateInfo::Outputs{},                                   // OUTPUT TARGETS
+    {}, {},
+    BlendState{true, {SrcAlpha, OneMinusSrcAlpha}, {SrcAlpha, OneMinusSrcAlpha}}
+    });
+
+  SwapChainRequirements swapChainRequirements = m_window->GetSwapChainRequirements();
+  swapChainRequirements.m_depthFormat = RawStorageFormat::UNKNOWN;
+
   m_renderer = RenderSystem::CreateRenderer(appInfo, requirements, applicationRequirements,
-    m_window->GetSwapChainRequirements(), renderPassRequirements,
+    swapChainRequirements, renderPassRequirements,
     descriptorRequirements, shaderRequirements, m_mainAllocator, m_drawableAllocator,
     *m_window);
-  m_renderer->SetDrawablePoolCount(2);
-
-  DrawablePool& screenQuad = PoolPrimitives::AddScreenQuad(*m_renderer, SINGLE_PASS, allocatorTemporary);
-  screenQuad.AddShader(SKY_VERTEX_SHADER_ID);
-  screenQuad.AddShader(SKY_PIXEL_SHADER_ID);
-  screenQuad.BindUniformData(0, UBO_SLOT, uboDataBuffer, sizeof(UniformBufferData));
-  screenQuad.BindUniformData(0, SHADER_CONTROLS_SLOT, shaderControlBuffer, sizeof(ShaderControls));
 
   IcoSphere sphere(8);
 
@@ -146,7 +155,7 @@ void AppRenderer::Initialize() {
   poolInfo.m_numDrawables    = 1;
   poolInfo.m_cullMode        = CullMode::FrontBit;
   poolInfo.m_drawType        = DrawType::InstancedIndexed;
-  poolInfo.m_renderPasses    = {{SINGLE_PASS}, allocatorTemporary};
+  poolInfo.m_renderPasses    = {{NOISE_PASS}, allocatorTemporary};
   poolInfo.m_vertexDataSlots = {
     {
       {VERTEX_SLOT, BufferUsageRate::PerVertex},
@@ -167,9 +176,6 @@ void AppRenderer::Initialize() {
 
   DrawablePool& pool = m_renderer->CreateDrawablePool(poolInfo);
 
-  pool.BindTextureData(PLANET_TEXTURE_SLOT, *planet1Desc, m_textureManager->GetData(planet1Texture));
-  pool.BindSampler(SAMPLER_SLOT, {});
-
   Vector<RawStorageFormat> vertexStride = Vector<RawStorageFormat>(1, allocatorTemporary);
   vertexStride.PushBack(sphere.GetVertexFormat());
   pool.AddBufferBinding(VERTEX_SLOT, vertexStride);
@@ -189,6 +195,29 @@ void AppRenderer::Initialize() {
   pool.SetIndexData(drawableId, sphere.IndexData(), sphere.IndexDataSize());
   pool.BindUniformData(drawableId, UBO_SLOT, uboDataBuffer, sizeof(UniformBufferData));
   pool.BindUniformData(drawableId, SHADER_CONTROLS_SLOT, shaderControlBuffer, sizeof(ShaderControls));
+
+  DrawablePool& skyQuad = PoolPrimitives::AddScreenQuad(*m_renderer, SINGLE_PASS, allocatorTemporary);
+  skyQuad.AddShader(SCREEN_QUAD_VERTEX_SHADER_ID);
+  skyQuad.AddShader(SKY_PIXEL_SHADER_ID);
+  skyQuad.BindUniformData(0, UBO_SLOT, uboDataBuffer, sizeof(UniformBufferData));
+  skyQuad.BindUniformData(0, SHADER_CONTROLS_SLOT, shaderControlBuffer, sizeof(ShaderControls));
+  skyQuad.BindSampler(SAMPLER_SLOT, {});
+
+  DrawablePool& terrainQuad = PoolPrimitives::AddScreenQuad(*m_renderer, SINGLE_PASS, allocatorTemporary);
+  terrainQuad.AddShader(SCREEN_QUAD_VERTEX_SHADER_ID);
+  terrainQuad.AddShader(TERRAIN_PIXEL_SHADER_ID);
+  terrainQuad.BindUniformData(0, UBO_SLOT, uboDataBuffer, sizeof(UniformBufferData));
+  terrainQuad.BindUniformData(0, SHADER_CONTROLS_SLOT, shaderControlBuffer, sizeof(ShaderControls));
+  terrainQuad.BindTextureData(PLANET_TEXTURE_SLOT, *planet1Desc, m_textureManager->GetData(planet1Texture));
+  terrainQuad.BindSampler(SAMPLER_SLOT, {});
+
+  DrawablePool& waterQuad = PoolPrimitives::AddScreenQuad(*m_renderer, SINGLE_PASS, allocatorTemporary);
+  waterQuad.AddShader(SCREEN_QUAD_VERTEX_SHADER_ID);
+  waterQuad.AddShader(WATER_PIXEL_SHADER_ID);
+  waterQuad.BindUniformData(0, UBO_SLOT, uboDataBuffer, sizeof(UniformBufferData));
+  waterQuad.BindUniformData(0, SHADER_CONTROLS_SLOT, shaderControlBuffer, sizeof(ShaderControls));
+  waterQuad.BindTextureData(PLANET_TEXTURE_SLOT, *planet1Desc, m_textureManager->GetData(planet1Texture));
+  waterQuad.BindSampler(SAMPLER_SLOT, {});
 
   // All Drawables Done
   m_renderer->Submit();

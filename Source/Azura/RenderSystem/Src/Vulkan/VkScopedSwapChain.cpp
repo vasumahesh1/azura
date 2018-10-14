@@ -86,6 +86,8 @@ void VkScopedSwapChain::Create(VkDevice device,
 
   STACK_ALLOCATOR(Temporary, Memory::MonotonicAllocator, 1024);
 
+  m_hasDepthSupport = swapChainRequirement.m_depthFormat != RawStorageFormat::UNKNOWN;
+
   const VkPresentModeKHR presentMode = ChooseSwapPresentMode(swapChainSupport.m_presentModes);
   m_surfaceFormat                    = ChooseSwapSurfaceFormat(swapChainSupport.m_formats, swapChainRequirement,
                                                                log_VulkanRenderSystem);
@@ -151,6 +153,12 @@ void VkScopedSwapChain::Create(VkDevice device,
     m_images.PushBack(scopedImage);
   }
 
+  if (!m_hasDepthSupport)
+  {
+    LOG_DBG(log_VulkanRenderSystem, LOG_LEVEL, "Depth Format Not Supplied; Will not create Depth Attachment Image");
+    return;
+  }
+
   // Check if Depth Format is supported by Device or not.
   const bool depthFormatCheck = VkCore::QueryFormatFeatureSupport(
                                                                   physicalDevice,
@@ -202,8 +210,9 @@ void VkScopedSwapChain::CleanUp(VkDevice device) {
   for (const auto& image : m_images) {
     vkDestroyImageView(device, image.View(), nullptr);
   }
-
-  m_depthImage.CleanUp();
+  if (m_hasDepthSupport) {
+    m_depthImage.CleanUp();
+  }
 
   vkDestroySwapchainKHR(device, m_swapChain, nullptr);
 }
@@ -218,6 +227,10 @@ VkFormat VkScopedSwapChain::GetSurfaceFormat() const {
 
 VkFormat VkScopedSwapChain::GetDepthFormat() const {
   return m_depthImage.GetRealFormat();
+}
+
+bool VkScopedSwapChain::HasDepthSupport() const {
+  return m_hasDepthSupport;
 }
 
 const VkExtent2D& VkScopedSwapChain::GetExtent() const {

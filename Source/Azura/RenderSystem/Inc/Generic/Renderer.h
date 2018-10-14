@@ -27,7 +27,6 @@ public:
 
   virtual String GetRenderingAPI() const = 0;
 
-  virtual void SetDrawablePoolCount(U32 count) = 0;
   virtual DrawablePool& CreateDrawablePool(const DrawablePoolCreateInfo& createInfo) = 0;
 
   virtual void Submit() = 0;

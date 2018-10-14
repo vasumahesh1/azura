@@ -76,10 +76,7 @@ void AppRenderer::Initialize() {
   uboData.m_modelInvTranspose = uboData.m_model.Inverse().Transpose();
 
   // TODO(vasumahesh1):[Q]:Allocator?
-  ApplicationRequirements applicationRequirements = {};
-  applicationRequirements.m_clearColor[0]         = 0.2f;
-  applicationRequirements.m_clearColor[1]         = 0.2f;
-  applicationRequirements.m_clearColor[2]         = 0.2f;
+  const ApplicationRequirements applicationRequirements = {};
 
   TextureRequirements textureRequirements = {};
   textureRequirements.m_maxCount          = 1;
@@ -98,6 +95,8 @@ void AppRenderer::Initialize() {
   const U32 DEF_PIXEL_SHADER_ID = shaderRequirements.AddShader({ ShaderStage::Pixel, "TestZone.Deferred.ps", AssetLocation::Shaders });
 
   RenderPassRequirements renderPassRequirements = RenderPassRequirements(1, 2, allocatorTemporary);
+  renderPassRequirements.m_maxPools = 2;
+
   const U32 COLOR_TARGET_1 = renderPassRequirements.AddTarget({RawStorageFormat::R32G32B32A32_FLOAT});
 
   const U32 GBUFFER_PASS = renderPassRequirements.AddPass({
@@ -118,7 +117,6 @@ void AppRenderer::Initialize() {
                                             m_window->GetSwapChainRequirements(), renderPassRequirements,
                                             descriptorRequirements, shaderRequirements, m_mainAllocator, m_drawableAllocator,
                                             *m_window);
-  m_renderer->SetDrawablePoolCount(2);
 
   m_textureManager = RenderSystem::CreateTextureManager(*m_renderer, textureRequirements, log_AppRenderer);
 
