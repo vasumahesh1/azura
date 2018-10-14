@@ -23,6 +23,7 @@ VkPipelineFactory::VkPipelineFactory(VkDevice device, Memory::Allocator& allocat
   : m_device(device),
     m_bindingInfo(10, allocator),
     m_attributeDescription(10, allocator),
+    m_stages(10, allocator),
     m_colorBlendAttachment(),
     log_VulkanRenderSystem(std::move(logger)) {
 }
@@ -178,6 +179,12 @@ VkPipelineFactory& VkPipelineFactory::SetPipelineLayout(VkPipelineLayout layout)
   return *this;
 }
 
+VkPipelineFactory& VkPipelineFactory::AddShaderStage(const VkPipelineShaderStageCreateInfo& shaderStageCreateInfo) {
+  // TODO(vasumahesh1): Emplace?
+  m_stages.PushBack(shaderStageCreateInfo);
+  return *this;
+}
+
 void VkPipelineFactory::Submit(Containers::Vector<std::reference_wrapper<VkScopedRenderPass>> renderPasses, Containers::Vector<VkScopedPipeline>& result) const {
   result.Reserve(renderPasses.GetSize());
 
@@ -229,6 +236,13 @@ void VkPipelineFactory::Submit(Containers::Vector<std::reference_wrapper<VkScope
     pipelineInfo.stageCount                   = stages.GetSize();
     pipelineInfo.pStages                      = stages.Data();
     pipelineInfo.renderPass                   = renderPass.get().GetRenderPass();
+
+    // Locally assigned Shaders present
+    if (m_stages.GetSize() > 0)
+    {
+      pipelineInfo.stageCount = m_stages.GetSize();
+      pipelineInfo.pStages = m_stages.Data();
+    }
 
     LOG_DBG(log_VulkanRenderSystem, LOG_LEVEL, "Total Shader Stages: %d", stages.GetSize());
 

@@ -2,6 +2,7 @@
 #include <algorithm>
 #include "Log/Log.h"
 #include "Generic/TextureManager.h"
+#include "Containers/Vector.h"
 
 namespace Azura {
 
@@ -13,7 +14,6 @@ bool IsPerVertexSlot(const VertexSlot& slot) {
 bool IsPerInstanceSlot(const VertexSlot& slot) {
   return slot.m_rate == BufferUsageRate::PerInstance;
 }
-
 } // namespace
 
 Drawable::Drawable(const DrawableCreateInfo& info,
@@ -88,7 +88,9 @@ DrawablePoolCreateInfo::DrawablePoolCreateInfo(Memory::Allocator& alloc)
     m_renderPasses(alloc) {
 }
 
-DrawablePool::DrawablePool(const DrawablePoolCreateInfo& createInfo, DescriptorCount descriptorCount, Memory::Allocator& allocator)
+DrawablePool::DrawablePool(const DrawablePoolCreateInfo& createInfo,
+                           DescriptorCount descriptorCount,
+                           Memory::Allocator& allocator)
   : m_numVertexSlots(std::count_if(createInfo.m_vertexDataSlots.Begin(), createInfo.m_vertexDataSlots.End(),
                                    IsPerVertexSlot)),
     m_numInstanceSlots(std::count_if(createInfo.m_vertexDataSlots.Begin(), createInfo.m_vertexDataSlots.End(),
@@ -149,10 +151,8 @@ int DrawablePool::GetVertexSlotIndex(SlotID id) const {
 }
 
 bool DrawablePool::CanRenderInPass(U32 renderPassId) const {
-  for(const auto& pass: m_renderPasses)
-  {
-    if (pass == renderPassId)
-    {
+  for (const auto& pass : m_renderPasses) {
+    if (pass == renderPassId) {
       return true;
     }
   }

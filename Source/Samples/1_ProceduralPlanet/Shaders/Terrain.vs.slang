@@ -1,7 +1,5 @@
 import Common;
-
-ParameterBlock<UBOData> ubo;
-ParameterBlock<ShaderControls> controls;
+import Simplex3D;
 
 // ----------  Shader Constants  ----------
 static const float DEGREE_TO_RAD = 0.0174533;
@@ -68,76 +66,26 @@ float4 fbmad(in float3 x, int octaves) {
   float s = 0.49;
   float a = 0.0;
   float b = 0.5;
-  float3 d = float3(0.0);
-  float3x3 m = float3x3(1.0, 0.0, 0.0, 0.0, 1.0, 0.0, 0.0, 0.0, 1.0);
+  float3 d = float3(0.0, 0.0, 0.0);
+  float3x3 m = float3x3(
+    1.0, 0.0, 0.0,
+    0.0, 1.0, 0.0,
+    0.0, 0.0, 1.0
+  );
 
   for (int i = 0; i < octaves; i++) {
     float4 n = noised(x);
     a += b * n.x;
     d += b * mul(m, n.yzw);
+
     b *= s;
+
     x = f * mul(m3, x);
-    m = f * m3i * m;
+    m = f * mul(m3i, m);
   }
   return float4(a, d.x, d.y, d.z);
 }
 // =====  End of FMB with Analytical Derivative  ======
-
-// =======================================================
-// =            Simplex3D by Nikita Miropolskiy            =
-// =======================================================*/
-float3 random3(float3 c) {
-  float j = 4096.0 * sin(dot(c, float3(17.0, 59.4, 15.0)));
-  float3 r;
-  r.z = frac(512.0 * j);
-  j *= .125;
-  r.x = frac(512.0 * j);
-  j *= .125;
-  r.y = frac(512.0 * j);
-  return r - 0.5;
-}
-
-static const float F3 = 0.3333333;
-static const float G3 = 0.1666667;
-float snoise(float3 p) {
-  float3 s = floor(p + dot(p, float3(F3)));
-  float3 x = p - s + dot(s, float3(G3));
-
-  float3 e = step(float3(0.0), x - x.yzx);
-  float3 i1 = e * (1.0 - e.zxy);
-  float3 i2 = 1.0 - e.zxy * (1.0 - e);
-
-  float3 x1 = x - i1 + G3;
-  float3 x2 = x - i2 + 2.0 * G3;
-  float3 x3 = x - 1.0 + 3.0 * G3;
-
-  float4 w, d;
-
-  w.x = dot(x, x);
-  w.y = dot(x1, x1);
-  w.z = dot(x2, x2);
-  w.w = dot(x3, x3);
-
-  w = max(0.6 - w, 0.0);
-
-  d.x = dot(random3(s), x);
-  d.y = dot(random3(s + i1), x1);
-  d.z = dot(random3(s + i2), x2);
-  d.w = dot(random3(s + 1.0), x3);
-
-  w *= w;
-  w *= w;
-  d *= w;
-
-  return dot(d, float4(52.0));
-}
-
-float snoiseFractal(float3 m) {
-  return 0.5333333 * snoise(m) + 0.2666667 * snoise(2.0 * m) +
-         0.1333333 * snoise(4.0 * m) + 0.0666667 * snoise(8.0 * m);
-}
-// =====  End of Simplex3D by Nikita Miropolskiy  ======
-
 
 void RenderPlanet(inout float4 vertexPosition, inout float4 vertexNormal, out float2 baseUVOffset)
 {
@@ -160,6 +108,7 @@ void RenderPlanet(inout float4 vertexPosition, inout float4 vertexNormal, out fl
   const bool isVertexWater = noiseValue < waterThreshold;
 
   vertexNormal = float4(normalize(vertexNormal.xyz - (derivative * 0.36)), 0);
+  vertexPosition = originalPosition + float4(originalNormal.xyz * (noiseValue / elevation), 0.0);
 
   if (isVertexWater) {
     baseUVOffset = BEDROCK_1_OFFSET;
@@ -174,7 +123,7 @@ void RenderPlanet(inout float4 vertexPosition, inout float4 vertexNormal, out fl
     // Grass
     baseUVOffset = GRASS_1_OFFSET;
 
-    const float grassDarkJitter = snoiseFractal(originalPosition.xyz * 13.0) * 0.1;
+    const float grassDarkJitter = snoise_fractal(originalPosition.xyz * 13.0) * 0.1;
 
     if (noiseValue < shoreThreshold) {
       // Sand
@@ -186,7 +135,7 @@ void RenderPlanet(inout float4 vertexPosition, inout float4 vertexNormal, out fl
     }
     else if (noiseValue > waterThreshold + 0.3) {
       float snowAppearance = dot(normalize(derivative), float3(0, 1, 0));
-      float snowJitter = snoiseFractal(originalPosition.xyz * 7.0) * 0.05;
+      float snowJitter = snoise_fractal(originalPosition.xyz * 7.0) * 0.05;
 
       vertexNormal = float4(normalize(originalNormal.xyz - (derivative * 0.45)), 0);
 
@@ -198,8 +147,6 @@ void RenderPlanet(inout float4 vertexPosition, inout float4 vertexNormal, out fl
       }
     }
   }
-
-  vertexPosition = originalPosition + (vertexNormal * noiseValue / elevation);
 }
 
 PixelShaderInput main(VertexShaderInput input)

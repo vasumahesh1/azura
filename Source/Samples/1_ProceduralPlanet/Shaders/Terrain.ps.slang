@@ -1,10 +1,5 @@
 import Common;
 
-[[vk::binding(0, 1)]] ParameterBlock<ShaderControls> controls;
-
-[[vk::binding(0, 2)]] SamplerState     linearSampler : register(s2);
-[[vk::binding(1, 2)]] Texture2D        targetTexture : register(t2);
-
 static const float TEXTURE_GRID_SIZE = 4;
 static const float3 TEXTURE_GRID_VEC = float3(1.0 / TEXTURE_GRID_SIZE, 1.0 / TEXTURE_GRID_SIZE, 1.0 / TEXTURE_GRID_SIZE);
 
@@ -15,7 +10,7 @@ float4 main(PixelShaderInput input) : SV_Target
   float3 lightVec = (controls.u_lightPos - input.modelPos).xyz;
 
   float3 normalDir = float3((input.normal.xyz + float3(1,1,1)) / 2.0) * TEXTURE_GRID_VEC;
-  float4 diffuseColor = float4(targetTexture.Sample(linearSampler, normalDir.xy + input.textureOffset).rgb, 1.0);
+  float4 diffuseColor = float4(textureState.target.Sample(textureState.linearSampler, normalDir.xy + input.textureOffset).rgb, 1.0);
 
   float diffuseTerm = dot(normalize(input.normal.xyz), normalize(lightVec));
   diffuseTerm = clamp(diffuseTerm, 0.0, 1.0);

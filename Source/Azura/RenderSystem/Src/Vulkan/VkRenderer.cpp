@@ -211,7 +211,7 @@ DrawablePool& VkRenderer::CreateDrawablePool(const DrawablePoolCreateInfo& creat
                                        VK_MEMORY_PROPERTY_HOST_VISIBLE_BIT | VK_MEMORY_PROPERTY_HOST_COHERENT_BIT,
                                        m_graphicsCommandPool,
                                        m_pipelineLayout, m_descriptorPool, m_descriptorSetLayouts,
-                                       m_renderPasses, m_renderPassAttachmentImages,
+                                       m_renderPasses, m_renderPassAttachmentImages, m_shaders,
                                        GetApplicationRequirements(), m_window.GetViewport(), memProperties,
                                        m_physicalDeviceProperties,
                                        m_swapChain, m_descriptorSlots, m_descriptorCount, m_drawPoolAllocator,

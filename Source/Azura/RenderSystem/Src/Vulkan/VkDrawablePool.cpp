@@ -176,6 +176,7 @@ VkDrawablePool::VkDrawablePool(const DrawablePoolCreateInfo& createInfo,
                                const Vector<VkDescriptorSetLayout>& descriptorSetLayouts,
                                const Vector<VkScopedRenderPass>& renderPasses,
                                const Vector<VkScopedImage>& renderPassAttachments,
+                               const Vector<VkShader>& allShaders,
                                const ApplicationRequirements& appReq,
                                const ViewportDimensions& viewport,
                                const VkPhysicalDeviceMemoryProperties& phyDeviceMemoryProperties,
@@ -198,6 +199,7 @@ VkDrawablePool::VkDrawablePool(const DrawablePoolCreateInfo& createInfo,
     m_descriptorSetLayouts(descriptorSetLayouts),
     m_descriptorSlots(descriptorSlots),
     m_renderPassAttachments(renderPassAttachments),
+    m_allShaders(allShaders),
     m_physicalDeviceMemoryProperties(phyDeviceMemoryProperties),
     m_descriptorPool(descriptorPool),
     m_pipelines(allocator),
@@ -232,6 +234,10 @@ VkDrawablePool::VkDrawablePool(const DrawablePoolCreateInfo& createInfo,
   }
 }
 
+void VkDrawablePool::AddShader(const U32 shaderId) {
+  m_pipelineFactory.AddShaderStage(m_allShaders[shaderId ].GetShaderStageInfo());
+}
+
 
 DrawableID VkDrawablePool::CreateDrawable(const DrawableCreateInfo& createInfo) {
   VkDrawable drawable = VkDrawable(m_device, m_buffer.Real(), m_descriptorSetLayouts, m_descriptorPool, createInfo,
@@ -253,6 +259,11 @@ void VkDrawablePool::AppendToMainBuffer(const U8* buffer, U32 bufferSize) {
 
 
 void VkDrawablePool::SubmitTextureData() {
+  if (m_textureBufferInfos.GetSize() == 0)
+  {
+    return;
+  }
+
   STACK_ALLOCATOR(Temporary, Memory::MonotonicAllocator, 4096);
 
   VkCommandBuffer textureCmdBuffer = VkCore::CreateCommandBuffer(m_device, m_graphicsCommandPool,
@@ -296,10 +307,6 @@ void VkDrawablePool::SubmitTextureData() {
     // TODO(vasumahesh1):[TEXTURE]: Remove Hard Code
     image.CreateImageView(ImageViewType::ImageView2D);
   }
-
-  for (auto& drawable : m_drawables) {
-    drawable.WriteDescriptorSets(m_textureBufferInfos, m_renderPasses, m_samplerInfos, m_samplers, m_images, m_renderPassAttachments);
-  }
 }
 
 void VkDrawablePool::Submit() {
@@ -320,6 +327,12 @@ void VkDrawablePool::Submit() {
 
   VkCore::CopyBuffer(m_device, m_graphicsQueue, m_stagingBuffer, m_buffer, m_mainBufferOffset, m_graphicsCommandPool);
 
+  SubmitTextureData();
+
+  for (auto& drawable : m_drawables) {
+    drawable.WriteDescriptorSets(m_textureBufferInfos, m_renderPasses, m_samplerInfos, m_samplers, m_images, m_renderPassAttachments);
+  }
+
   U32 count = 0;
   for (const auto& renderPass : m_renderPasses) {
     const auto& commandBuffer = m_commandBuffers[count];
@@ -337,8 +350,6 @@ void VkDrawablePool::Submit() {
                                log_VulkanRenderSystem);
 
     vkCmdBindPipeline(commandBuffer, VK_PIPELINE_BIND_POINT_GRAPHICS, pipeline.Real());
-
-    SubmitTextureData();
 
     VkBuffer mainBuffer = m_buffer.Real();
 

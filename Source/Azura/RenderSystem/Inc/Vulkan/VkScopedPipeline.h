@@ -35,6 +35,7 @@ class VkPipelineFactory {
   VkPipelineFactory& SetMultisampleStage();
   VkPipelineFactory& SetColorBlendStage();
   VkPipelineFactory& SetPipelineLayout(VkPipelineLayout layout);
+  VkPipelineFactory& AddShaderStage(const VkPipelineShaderStageCreateInfo& shaderStageCreateInfo);
 
   void Submit(Containers::Vector<std::reference_wrapper<VkScopedRenderPass>> renderPasses, Containers::Vector<VkScopedPipeline>& result) const;
 
@@ -50,6 +51,7 @@ class VkPipelineFactory {
 
   Containers::Vector<VkVertexInputBindingDescription> m_bindingInfo;
   Containers::Vector<VkVertexInputAttributeDescription> m_attributeDescription;
+  Containers::Vector<VkPipelineShaderStageCreateInfo> m_stages;
 
   VkPipelineInputAssemblyStateCreateInfo m_inputAssemblyStage{};
   VkPipelineViewportStateCreateInfo m_viewportStage{};
