@@ -56,7 +56,7 @@ enum class BufferUsageRate {
   PerInstance
 };
 
-enum BlendFactor
+enum class BlendFactor
 {
   Zero,
   One,
@@ -79,7 +79,7 @@ enum BlendFactor
   OneMinusSrc1Alpha
 };
 
-enum BlendOp
+enum class BlendOp
 {
   Add,
   Subtract,

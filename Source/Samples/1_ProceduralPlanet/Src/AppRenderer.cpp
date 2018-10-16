@@ -108,7 +108,7 @@ void AppRenderer::Initialize() {
   const U32 PLANET_TEXTURE_SLOT = descriptorRequirements.AddDescriptor({DescriptorType::SampledImage, ShaderStage::Pixel, DescriptorBinding::Same});
 
 
-  ShaderRequirements shaderRequirements = ShaderRequirements(5, allocatorTemporary);
+  ShaderRequirements shaderRequirements = ShaderRequirements(6, allocatorTemporary);
   const U32 SCREEN_QUAD_VERTEX_SHADER_ID = shaderRequirements.AddShader({ ShaderStage::Vertex, "ScreenQuad.vs", AssetLocation::Shaders });
 
   const U32 NOISE_VERTEX_SHADER_ID = shaderRequirements.AddShader({ ShaderStage::Vertex, "Noise.vs", AssetLocation::Shaders });
@@ -137,7 +137,7 @@ void AppRenderer::Initialize() {
     PipelinePassCreateInfo::Inputs{{NOISE_TARGET_1, ShaderStage::Pixel}, {NOISE_TARGET_2, ShaderStage::Pixel}, {NOISE_TARGET_3, ShaderStage::Pixel}},      // INPUT TARGETS
     PipelinePassCreateInfo::Outputs{},                                   // OUTPUT TARGETS
     {}, {},
-    BlendState{true, {SrcAlpha, OneMinusSrcAlpha}, {SrcAlpha, OneMinusSrcAlpha}}
+    BlendState{true, {BlendFactor::SrcAlpha, BlendFactor::OneMinusSrcAlpha}, {BlendFactor::SrcAlpha, BlendFactor::OneMinusSrcAlpha}}
     });
 
   SwapChainRequirements swapChainRequirements = m_window->GetSwapChainRequirements();
