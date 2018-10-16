@@ -216,7 +216,7 @@ DrawablePool& VkRenderer::CreateDrawablePool(const DrawablePoolCreateInfo& creat
   VkDrawablePool pool = VkDrawablePool(createInfo, m_device, m_graphicsQueue,
                                        VK_BUFFER_USAGE_INDEX_BUFFER_BIT | VK_BUFFER_USAGE_VERTEX_BUFFER_BIT |
                                        VK_BUFFER_USAGE_UNIFORM_BUFFER_BIT,
-                                       VK_MEMORY_PROPERTY_HOST_VISIBLE_BIT | VK_MEMORY_PROPERTY_HOST_COHERENT_BIT,
+                                       VK_MEMORY_PROPERTY_HOST_VISIBLE_BIT,
                                        m_graphicsCommandPool,
                                        m_pipelineLayout, m_descriptorPool, m_descriptorSetLayouts,
                                        m_renderPasses, m_renderPassAttachmentImages, m_shaders,

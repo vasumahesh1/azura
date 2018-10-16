@@ -328,6 +328,16 @@ void VkDrawablePool::Submit() {
   VkCore::CreateCommandBuffers(m_device, m_graphicsCommandPool, VK_COMMAND_BUFFER_LEVEL_SECONDARY, m_commandBuffers,
                                log_VulkanRenderSystem);
 
+  // Flush Entire Staging Buffer to GPU
+  UNUSED(m_stagingBuffer.MapMemory(m_mainBufferOffset, 0));
+  VkMappedMemoryRange currentRange = {};
+  currentRange.sType = VK_STRUCTURE_TYPE_MAPPED_MEMORY_RANGE;
+  currentRange.memory = m_stagingBuffer.Memory();
+  currentRange.size = VK_WHOLE_SIZE;
+  currentRange.offset = 0;
+  vkFlushMappedMemoryRanges(m_device, 1, &currentRange);
+  m_stagingBuffer.UnMapMemory();
+
   VkCore::CopyBuffer(m_device, m_graphicsQueue, m_stagingBuffer, m_buffer, m_mainBufferOffset, m_graphicsCommandPool);
 
   SubmitTextureData();
