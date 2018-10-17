@@ -1,8 +1,10 @@
 #pragma once
 #include "Generic/Drawable.h"
-#include "D3D12/D3D12Core.h"
 #include "Log/Log.h"
-#include "D3D12ScopedPipeline.h"
+
+#include "D3D12/D3D12Core.h"
+#include "D3D12/D3D12ScopedPipeline.h"
+#include "D3D12/D3D12Drawable.h"
 
 
 namespace Azura {
@@ -30,9 +32,13 @@ public:
   void BindSampler(SlotID slot, const SamplerDesc& desc) override;
   void Submit() override;
 
+  ID3D12DescriptorHeap* GetDescriptorHeap() const;
+  ID3D12RootSignature* GetRootSignature() const;
+
 private:
   void CreateRootSignature(const Microsoft::WRL::ComPtr<ID3D12Device>& device);
   void CreateInputAttributes(const DrawablePoolCreateInfo& createInfo);
+  void CreateDescriptorHeap(const DrawablePoolCreateInfo& createInfo);
 
   Log log_D3D12RenderSystem;
 
@@ -40,10 +46,12 @@ private:
   const Containers::Vector<D3D12ScopedShader>& m_shaders;
 
   Containers::Vector<D3D12ScopedPipeline> m_pipelines;
+  Containers::Vector<D3D12Drawable> m_drawables;
 
   D3D12PipelineFactory m_pipelineFactory;
 
   Microsoft::WRL::ComPtr<ID3D12RootSignature> m_rootSignature;
+  Microsoft::WRL::ComPtr<ID3D12DescriptorHeap> m_descriptorHeap;
 };
 
 } // namespace D3D12

@@ -102,7 +102,7 @@ String D3D12Renderer::GetRenderingAPI() const {
 }
 
 DrawablePool& D3D12Renderer::CreateDrawablePool(const DrawablePoolCreateInfo& createInfo) {
-  D3D12DrawablePool pool = D3D12DrawablePool(m_device, createInfo, m_descriptorCount, m_drawPoolAllocator, log_D3D12RenderSystem);
+  D3D12DrawablePool pool = D3D12DrawablePool(m_device, createInfo, m_descriptorCount, m_shaders, m_drawPoolAllocator, m_initAllocator, log_D3D12RenderSystem);
   m_drawablePools.PushBack(std::move(pool));
 
   return m_drawablePools.Last();
