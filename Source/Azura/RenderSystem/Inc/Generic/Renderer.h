@@ -7,6 +7,7 @@
 #include "Core/RawStorageFormat.h"
 
 namespace Azura {
+class Window;
 
 struct DrawablePoolCreateInfo;
 
@@ -17,7 +18,9 @@ public:
            ApplicationRequirements appRequirements,
            const SwapChainRequirements& swapChainRequirements,
            const DescriptorRequirements& descriptorRequirements,
-           Memory::Allocator& allocator);
+           Memory::Allocator& mainAllocator,
+           Memory::Allocator& drawAllocator,
+           Window& window);
   virtual ~Renderer() = default;
 
   Renderer(const Renderer& other) = delete;
@@ -42,13 +45,17 @@ protected:
   const DeviceRequirements& GetDeviceRequirements() const;
   const ApplicationRequirements& GetApplicationRequirements() const;
   const SwapChainRequirements& GetSwapchainRequirements() const;
-  Memory::Allocator& GetAllocator() const;
 
   U32 GetCurrentFrame() const;
 
   Containers::Vector<DescriptorSlot> m_descriptorSlots;
 
   DescriptorCount m_descriptorCount;
+
+  std::reference_wrapper<Memory::Allocator> m_mainAllocator;
+  std::reference_wrapper<Memory::Allocator> m_drawPoolAllocator;
+
+  std::reference_wrapper<Window> m_window;
 
 private:
   virtual void AddShader(const ShaderCreateInfo& info) = 0;
@@ -57,7 +64,6 @@ private:
   const DeviceRequirements m_deviceRequirements;
   const ApplicationRequirements m_appRequirements;
   SwapChainRequirements m_swapChainRequirements;
-  Memory::Allocator& m_allocator;
 
   U32 m_frameCount;
 };

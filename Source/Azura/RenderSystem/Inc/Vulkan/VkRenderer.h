@@ -34,6 +34,7 @@ public:
              Memory::Allocator& mainAllocator,
              Memory::Allocator& drawAllocator,
              Window& window);
+
   ~VkRenderer();
 
   VkRenderer(const VkRenderer& other) = delete;
@@ -59,7 +60,6 @@ private:
   Memory::HeapMemoryBuffer m_perFrameBuffer;
   Memory::MonotonicAllocator m_perFrameAllocator;
 
-  Window& m_window;
   Containers::Vector<VkDrawablePool> m_drawablePools;
 
 #ifdef BUILD_DEBUG
@@ -91,9 +91,6 @@ private:
   VkQueue m_transferQueue;
 
   VkPhysicalDeviceProperties m_physicalDeviceProperties{};
-
-  std::reference_wrapper<Memory::Allocator> m_mainAllocator;
-  std::reference_wrapper<Memory::Allocator> m_drawPoolAllocator;
 
   VkPipelineLayout m_pipelineLayout{};
   VkDescriptorPool m_descriptorPool{};

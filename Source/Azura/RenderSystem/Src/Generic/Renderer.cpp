@@ -1,6 +1,7 @@
 #include "Generic/Renderer.h"
+
 #include <utility>
-#include "Utils/Macros.h"
+#include "Generic/Window.h"
 
 namespace Azura {
 
@@ -9,13 +10,17 @@ Renderer::Renderer(ApplicationInfo appInfo,
                    ApplicationRequirements appRequirements,
                    const SwapChainRequirements& swapChainRequirements,
                    const DescriptorRequirements& descriptorRequirements,
-                   Memory::Allocator& allocator)
-  : m_descriptorSlots(descriptorRequirements.m_descriptorSlots.GetSize(), allocator),
+                   Memory::Allocator& mainAllocator,
+                   Memory::Allocator& drawAllocator,
+                   Window& window)
+  : m_descriptorSlots(descriptorRequirements.m_descriptorSlots.GetSize(), mainAllocator),
+    m_mainAllocator(mainAllocator),
+    m_drawPoolAllocator(drawAllocator),
+    m_window(window),
     m_applicationInfo(std::move(appInfo)),
     m_deviceRequirements(deviceRequirements),
     m_appRequirements(std::move(appRequirements)),
     m_swapChainRequirements(swapChainRequirements),
-    m_allocator(allocator),
     m_frameCount(0) {
 
   int parent  = -1;
@@ -41,25 +46,25 @@ Renderer::Renderer(ApplicationInfo appInfo,
   for (const auto& slot : descriptorRequirements.m_descriptorSlots) {
     switch (slot.m_type) {
 
-    case DescriptorType::UniformBuffer:
-      ++m_descriptorCount.m_numUniformSlots;
-      break;
+      case DescriptorType::UniformBuffer:
+        ++m_descriptorCount.m_numUniformSlots;
+        break;
 
-    case DescriptorType::Sampler:
-      ++m_descriptorCount.m_numSamplerSlots;
-      break;
-    case DescriptorType::SampledImage:
-      ++m_descriptorCount.m_numSampledImageSlots;
-      break;
-    case DescriptorType::CombinedImageSampler:
-      ++m_descriptorCount.m_numCombinedSamplerSlots;
-      break;
+      case DescriptorType::Sampler:
+        ++m_descriptorCount.m_numSamplerSlots;
+        break;
+      case DescriptorType::SampledImage:
+        ++m_descriptorCount.m_numSampledImageSlots;
+        break;
+      case DescriptorType::CombinedImageSampler:
+        ++m_descriptorCount.m_numCombinedSamplerSlots;
+        break;
 
-    case DescriptorType::PushConstant:
-      ++m_descriptorCount.m_numPushConstantsSlots;
-      break;
-    default:
-      break;
+      case DescriptorType::PushConstant:
+        ++m_descriptorCount.m_numPushConstantsSlots;
+        break;
+      default:
+        break;
     }
   }
 }
@@ -85,10 +90,6 @@ const ApplicationRequirements& Renderer::GetApplicationRequirements() const {
 
 const SwapChainRequirements& Renderer::GetSwapchainRequirements() const {
   return m_swapChainRequirements;
-}
-
-Memory::Allocator& Renderer::GetAllocator() const {
-  return m_allocator;
 }
 
 U32 Renderer::GetCurrentFrame() const {

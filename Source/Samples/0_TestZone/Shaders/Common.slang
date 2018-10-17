@@ -4,28 +4,33 @@ struct UBOData {
   float4x4 u_viewProj;
 };
 
-struct Controls {
-  float4 color;
-};
-
-struct VertexShaderInput
+struct BasicRenderTestVertexInput
 {
   float4 in_Pos : IN_POSITION;
   float4 in_Color : IN_COLOR;
+};
+
+struct BasicInstanceTestVertexInput
+{
+  float4 in_Pos : IN_POSITION;
+  float4 in_Color : IN_COLOR;
+  float4 in_InstancePos : IN_INSTANCE_POS;
+};
+
+struct BasicTextureTestVertexInput
+{
+  float4 in_Pos : IN_POSITION;
   float2 in_UV : IN_UV;
 };
 
-struct PixelShaderInput
+struct ColorPixelInput
 {
   float4 pos : SV_Position;
   float4 color : COLOR;
+};
+
+struct UVPixelInput
+{
+  float4 pos : SV_Position;
   float2 uv : UV;
 };
-
-struct SamplerBlock {
-  SamplerState g_sampler;
-  Texture2D g_txDiffuse;
-};
-
-ParameterBlock<UBOData> ubo;
-ParameterBlock<SamplerBlock> samplerBlock;

@@ -168,7 +168,7 @@ void AppRenderer::Initialize() {
   textureRequirements.m_maxCount = 1;
   textureRequirements.m_poolSize = 0x400000; // 4MB
 
-  m_textureManager = RenderSystem::CreateTextureManager(*m_renderer, textureRequirements, log_AppRenderer);
+  m_textureManager = RenderSystem::CreateTextureManager(textureRequirements);
 
   const U32 planet1Texture = m_textureManager->Load("Textures/Planet1_Texture.jpg");
   const TextureDesc* planet1Desc = m_textureManager->GetInfo(planet1Texture);

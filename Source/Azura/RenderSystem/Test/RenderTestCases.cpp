@@ -195,8 +195,7 @@ void RenderTestCases::ExecuteBasicTextureTest(Azura::Renderer& renderer,
   TextureRequirements textureRequirements = {};
   textureRequirements.m_maxCount          = 1;
   textureRequirements.m_poolSize          = 0x400000; // 4MB
-  auto texManager                         = RenderSystem::CreateTextureManager(renderer, textureRequirements,
-                                                                               log_TestCase);
+  auto texManager                         = RenderSystem::CreateTextureManager(textureRequirements);
 
   const U32 nocturnalTexture = texManager->Load("Textures/Nocturnal.jpg");
 
@@ -287,8 +286,7 @@ void RenderTestCases::ExecuteBasicDeferredTest(Azura::Renderer& renderer,
   TextureRequirements textureRequirements = {};
   textureRequirements.m_maxCount          = 1;
   textureRequirements.m_poolSize          = 0x400000; // 4MB
-  auto texManager                         = RenderSystem::CreateTextureManager(renderer, textureRequirements,
-    log_TestCase);
+  auto texManager                         = RenderSystem::CreateTextureManager(textureRequirements);
 
   UniformBufferData uboData = {};
   uboData.m_model           = Matrix4f::Identity();

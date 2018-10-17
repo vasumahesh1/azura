@@ -6,15 +6,12 @@
 namespace Azura {
 namespace Vulkan {
 
-class VkTextureManager : public TextureManager
+class VkTextureManager final : public TextureManager
 {
 public:
-  VkTextureManager(VkDevice device, const TextureRequirements& requirements, Log log);
+  VkTextureManager(const TextureRequirements& requirements);
 
 private:
-  VkDevice m_device;
-
-  Log log_VulkanRenderSystem;
 };
 
 } // namespace Vulkan

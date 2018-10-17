@@ -11,11 +11,14 @@ set(
 
 set(
   PROJECT_SHADERS
-    "${PROJECT_SOURCE_DIR}/Shaders/TestZone.vs.slang|VS"
-    "${PROJECT_SOURCE_DIR}/Shaders/TestZone.ps.slang|PS"
+    # "${PROJECT_SOURCE_DIR}/Shaders/TestZone.vs.slang|VS"
+    # "${PROJECT_SOURCE_DIR}/Shaders/TestZone.ps.slang|PS"
 
-    "${PROJECT_SOURCE_DIR}/Shaders/TestZone.Deferred.vs.slang|VS"
-    "${PROJECT_SOURCE_DIR}/Shaders/TestZone.Deferred.ps.slang|PS"
+    # "${PROJECT_SOURCE_DIR}/Shaders/TestZone.Deferred.vs.slang|VS"
+    # "${PROJECT_SOURCE_DIR}/Shaders/TestZone.Deferred.ps.slang|PS"
+
+    "${PROJECT_SOURCE_DIR}/Shaders/BasicRenderTest.vs.slang|VS"
+    "${PROJECT_SOURCE_DIR}/Shaders/BasicRenderTest.ps.slang|PS"
 )
 
 add_executable(TestZone ${SOURCES})
@@ -28,4 +31,4 @@ AzuraAddSlangShaders(TestZone VULKAN ${PROJECT_SHADERS})
 AzuraAddSlangShaders(TestZone GLSL ${PROJECT_SHADERS})
 
 target_include_directories(TestZone PUBLIC ${PROJECT_SOURCE_DIR}/Inc)
-target_link_libraries(TestZone VulkanRenderSystem Log glfw Math)
+target_link_libraries(TestZone D3D12RenderSystem Log glfw Math)
