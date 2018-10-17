@@ -47,6 +47,7 @@ protected:
   const SwapChainRequirements& GetSwapchainRequirements() const;
 
   U32 GetCurrentFrame() const;
+  void SetCurrentFrame(U32 frameIdx);
 
   Containers::Vector<DescriptorSlot> m_descriptorSlots;
 

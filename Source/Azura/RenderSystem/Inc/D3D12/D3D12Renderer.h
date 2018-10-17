@@ -2,6 +2,10 @@
 #include "Generic/Renderer.h"
 #include "Generic/Window.h"
 
+#include "Log/Log.h"
+#include "D3D12/D3D12DrawablePool.h"
+#include "D3D12/D3D12Core.h"
+
 
 namespace Azura {
 namespace D3D12 {
@@ -28,6 +32,22 @@ public:
 
 private:
   void AddShader(const ShaderCreateInfo& info) override;
+
+  Log log_D3D12RenderSystem;
+
+  Microsoft::WRL::ComPtr<IDXGISwapChain3> m_swapChain;
+  Microsoft::WRL::ComPtr<ID3D12Device> m_device;
+
+  Microsoft::WRL::ComPtr<ID3D12CommandAllocator> m_commandAllocator;
+  Microsoft::WRL::ComPtr<ID3D12CommandQueue> m_commandQueue;
+
+  Microsoft::WRL::ComPtr<ID3D12DescriptorHeap> m_rtvHeap;
+  Microsoft::WRL::ComPtr<ID3D12GraphicsCommandList> m_commandList;
+  UINT m_rtvDescriptorSize;
+
+  Containers::Vector<Microsoft::WRL::ComPtr<ID3D12Resource>> m_renderTargets;
+
+  Containers::Vector<D3D12DrawablePool> m_drawablePools;
 };
 
 } // namespace D3D12

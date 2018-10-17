@@ -1,5 +1,7 @@
 set(D3D12_SOURCES
     # Include
+    "Inc/D3D12/d3dx12.h"
+    "Inc/D3D12/D3D12Core.h"
     "Inc/D3D12/D3D12DrawablePool.h"
     "Inc/D3D12/D3D12Macros.h"
     "Inc/D3D12/D3D12Renderer.h"
@@ -10,6 +12,7 @@ set(D3D12_SOURCES
     "Inc/D3D12/D3D12TextureManager.h"
 
     # Source
+    "Src/D3D12/D3D12Core.cpp"
     "Src/D3D12/D3D12DrawablePool.cpp"
     "Src/D3D12/D3D12Renderer.cpp"
     "Src/D3D12/D3D12RenderSystem.cpp"

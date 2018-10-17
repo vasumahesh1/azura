@@ -95,4 +95,8 @@ const SwapChainRequirements& Renderer::GetSwapchainRequirements() const {
 U32 Renderer::GetCurrentFrame() const {
   return m_frameCount;
 }
+
+void Renderer::SetCurrentFrame(U32 frameIdx) {
+  m_frameCount = frameIdx;
+}
 } // namespace Azura
