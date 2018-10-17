@@ -9,10 +9,11 @@ public:
   void SetStage(ShaderStage stage);
   void SetEntryPoint(const String& entryPoint);
 
+  ShaderStage GetShaderStage() const;
+
 protected:
   const String& GetFilePath() const;
   const String& GetShaderEntryPoint() const;
-  ShaderStage GetShaderStage() const;
 
 private:
   const String m_filePath;

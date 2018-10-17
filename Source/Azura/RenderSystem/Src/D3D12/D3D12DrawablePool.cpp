@@ -11,12 +11,19 @@ namespace D3D12 {
 D3D12DrawablePool::D3D12DrawablePool(const ComPtr<ID3D12Device>& device,
                                      const DrawablePoolCreateInfo& createInfo,
                                      const DescriptorCount& descriptorCount,
-                                     Memory::Allocator& allocator,
+                                     const Containers::Vector<D3D12ScopedShader>& shaders,
+                                     Memory::Allocator& mainAllocator,
+                                     Memory::Allocator& initAllocator,
                                      Log log)
-  : DrawablePool(createInfo, descriptorCount, allocator),
-    log_D3D12RenderSystem(std::move(log)) {
+  : DrawablePool(createInfo, descriptorCount, mainAllocator),
+    log_D3D12RenderSystem(std::move(log)),
+    m_device(device),
+    m_shaders(shaders),
+    m_pipelines(mainAllocator),
+    m_pipelineFactory(initAllocator, log_D3D12RenderSystem) {
   LOG_DBG(log_D3D12RenderSystem, LOG_LEVEL, "Creating D3D12 Drawable Pool");
   CreateRootSignature(device);
+  CreateInputAttributes(createInfo);
 }
 
 DrawableID D3D12DrawablePool::CreateDrawable(const DrawableCreateInfo& createInfo) {
@@ -41,6 +48,7 @@ void D3D12DrawablePool::SetIndexData(DrawableID drawableId, const U8* buffer, U3
 
 void D3D12DrawablePool::AddShader(U32 shaderId) {
   LOG_DBG(log_D3D12RenderSystem, LOG_LEVEL, "D3D12 Drawable Pool: Binding Shader Requested, ID: %d", shaderId);
+  m_pipelineFactory.AddShaderStage(m_shaders[shaderId]);
 }
 
 void D3D12DrawablePool::BindTextureData(SlotID slot, const TextureDesc& desc, const U8* buffer) {
@@ -52,6 +60,7 @@ void D3D12DrawablePool::BindSampler(SlotID slot, const SamplerDesc& desc) {
 }
 
 void D3D12DrawablePool::Submit() {
+  m_pipelineFactory.Submit(m_device, m_rootSignature, m_pipelines);
 }
 
 void D3D12DrawablePool::CreateRootSignature(const ComPtr<ID3D12Device>& device) {
@@ -63,6 +72,15 @@ void D3D12DrawablePool::CreateRootSignature(const ComPtr<ID3D12Device>& device) 
   ComPtr<ID3DBlob> error;
   VERIFY_D3D_OP(log_D3D12RenderSystem, D3D12SerializeRootSignature(&rootSignatureDesc, D3D_ROOT_SIGNATURE_VERSION_1, &signature, &error), "Failed to serialize D3D12 Root Signature");
   VERIFY_D3D_OP(log_D3D12RenderSystem, device->CreateRootSignature(0, signature->GetBufferPointer(), signature->GetBufferSize(), IID_PPV_ARGS(&m_rootSignature)), "Failed to create Root Signature");
+}
+
+void D3D12DrawablePool::CreateInputAttributes(const DrawablePoolCreateInfo& createInfo) {
+  U32 idx = 0;
+  for(const auto& vertexSlot : createInfo.m_vertexDataSlots)
+  {
+    m_pipelineFactory.BulkAddAttributeDescription(vertexSlot, idx);
+    ++idx;
+  }
 }
 } // namespace D3D12
 } // namespace Azura

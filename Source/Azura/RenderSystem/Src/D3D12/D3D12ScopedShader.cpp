@@ -25,7 +25,7 @@ D3D12ScopedShader::D3D12ScopedShader(const String& filePath, Memory::Allocator& 
   ));
 }
 
-CD3DX12_SHADER_BYTECODE D3D12ScopedShader::GetByteCode() {
+CD3DX12_SHADER_BYTECODE D3D12ScopedShader::GetByteCode() const {
   return CD3DX12_SHADER_BYTECODE(m_byteCode.Data(), m_byteCode.GetSize());
 }
 

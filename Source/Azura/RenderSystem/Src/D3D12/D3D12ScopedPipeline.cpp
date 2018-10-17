@@ -36,6 +36,8 @@ D3D12PipelineFactory& D3D12PipelineFactory::BulkAddAttributeDescription(const Ve
     const auto usageRate = ToD3D12_INPUT_CLASSIFICATION(vertexSlot.m_rate);
     VERIFY_OPT(log_D3D12RenderSystem, usageRate, "Unknown Buffer Usage Rate");
 
+    LOG_DBG(log_D3D12RenderSystem, LOG_LEVEL, "Binding Vertex Attribute: Binding: %d  Semantic: %s  Format: %s", binding, semanticStride.m_name, ToString(semanticStride.m_format).c_str());
+
     D3D12_INPUT_ELEMENT_DESC attrDesc;
     attrDesc.Format = format.value();
     attrDesc.SemanticName = semanticStride.m_name;
@@ -56,12 +58,54 @@ D3D12PipelineFactory& D3D12PipelineFactory::BulkAddAttributeDescription(const Ve
 }
 
 D3D12PipelineFactory& D3D12PipelineFactory::SetInputAssemblyStage(PrimitiveTopology topology) {
+  return *this;
 }
 
 D3D12PipelineFactory& D3D12PipelineFactory::AddShaderStage(const D3D12ScopedShader& shader) {
+  switch(shader.GetShaderStage())
+  {
+    case ShaderStage::Vertex:
+      m_vertexShaderModule = shader.GetByteCode();
+      break;
+
+    case ShaderStage::Pixel:
+      m_pixelShaderModule = shader.GetByteCode();
+      break;
+
+    case ShaderStage::Compute:
+    case ShaderStage::Geometry:
+    case ShaderStage::All:
+      LOG_ERR(log_D3D12RenderSystem, LOG_LEVEL, "Unsupported Shader Stage for Pipeline Factory");
+      break;
+
+    default:
+      LOG_ERR(log_D3D12RenderSystem, LOG_LEVEL, "Unknown Shader Stage for Pipeline Factory");
+    break;
+  }
+
+  return *this;
 }
 
-void D3D12PipelineFactory::Submit(ID3D12RootSignature* rootSignature) const {
+void D3D12PipelineFactory::Submit(const Microsoft::WRL::ComPtr<ID3D12Device>& device, const Microsoft::WRL::ComPtr<ID3D12RootSignature>& rootSignature, Containers::Vector<D3D12ScopedPipeline>& resultPipelines) const {
+
+  D3D12_GRAPHICS_PIPELINE_STATE_DESC psoDesc = {};
+  psoDesc.InputLayout = { m_inputElementDescs.Data(), m_inputElementDescs.GetSize() };
+  psoDesc.pRootSignature = rootSignature.Get();
+  psoDesc.VS = m_vertexShaderModule;
+  psoDesc.PS = m_pixelShaderModule;
+  psoDesc.RasterizerState = CD3DX12_RASTERIZER_DESC(D3D12_DEFAULT);
+  psoDesc.BlendState = CD3DX12_BLEND_DESC(D3D12_DEFAULT);
+  psoDesc.DepthStencilState.DepthEnable = FALSE;
+  psoDesc.DepthStencilState.StencilEnable = FALSE;
+  psoDesc.SampleMask = UINT_MAX;
+  psoDesc.PrimitiveTopologyType = D3D12_PRIMITIVE_TOPOLOGY_TYPE_TRIANGLE;
+  psoDesc.NumRenderTargets = 1;
+  psoDesc.RTVFormats[0] = DXGI_FORMAT_R8G8B8A8_UNORM;
+  psoDesc.SampleDesc.Count = 1;
+
+  resultPipelines.Reserve(1);
+  resultPipelines.PushBack(D3D12ScopedPipeline(device, psoDesc, log_D3D12RenderSystem));
+
 }
 } // namespace D3D12
 } // namespace Azura

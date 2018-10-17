@@ -14,7 +14,7 @@ class D3D12ScopedShader final : public Shader {
 public:
   D3D12ScopedShader(const String& filePath, Memory::Allocator& shaderCodeAllocator, Log log);
 
-  CD3DX12_SHADER_BYTECODE GetByteCode();
+  CD3DX12_SHADER_BYTECODE GetByteCode() const;
 
 private:
   Log log_D3D12RenderSystem;

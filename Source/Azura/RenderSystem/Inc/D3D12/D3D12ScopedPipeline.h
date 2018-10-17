@@ -27,7 +27,7 @@ namespace D3D12 {
     D3D12PipelineFactory& SetInputAssemblyStage(PrimitiveTopology topology);
     D3D12PipelineFactory& AddShaderStage(const D3D12ScopedShader& shader);
 
-    void Submit(ID3D12RootSignature* rootSignature) const;
+    void Submit(const Microsoft::WRL::ComPtr<ID3D12Device>& device, const Microsoft::WRL::ComPtr<ID3D12RootSignature>& rootSignature, Containers::Vector<D3D12ScopedPipeline>& resultPipelines) const;
 
   private:
     const Log log_D3D12RenderSystem;
