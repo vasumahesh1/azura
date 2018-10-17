@@ -12,7 +12,7 @@ namespace D3D12 {
   class D3D12ScopedPipeline {
   public:
     D3D12ScopedPipeline(const Microsoft::WRL::ComPtr<ID3D12Device>& device, D3D12_GRAPHICS_PIPELINE_STATE_DESC psoDesc, const Log& log);
-    Microsoft::WRL::ComPtr<ID3D12PipelineState> Real() const;
+    ID3D12PipelineState* GetState() const;
 
   private:
     Microsoft::WRL::ComPtr<ID3D12PipelineState> m_pipeline;

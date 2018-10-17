@@ -14,8 +14,8 @@ D3D12ScopedPipeline::D3D12ScopedPipeline(const Microsoft::WRL::ComPtr<ID3D12Devi
     "Failed to create pipeline");
 }
 
-Microsoft::WRL::ComPtr<ID3D12PipelineState> D3D12ScopedPipeline::Real() const {
-  return m_pipeline;
+ID3D12PipelineState* D3D12ScopedPipeline::GetState() const {
+  return m_pipeline.Get();
 }
 
 D3D12PipelineFactory::D3D12PipelineFactory(Memory::Allocator& allocator, Log logger)

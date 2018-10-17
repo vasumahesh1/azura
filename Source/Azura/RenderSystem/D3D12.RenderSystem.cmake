@@ -10,6 +10,7 @@ set(D3D12_SOURCES
     "Inc/D3D12/D3D12ScopedShader.h"
     "Inc/D3D12/D3D12TextureManager.h"
     "Inc/D3D12/D3D12TypeMapping.h"
+    "Inc/D3D12/D3D12ScopedCommandBuffer.h"
 
     "Inc/D3D12/d3dx12.h"
 
@@ -24,6 +25,7 @@ set(D3D12_SOURCES
     "Src/D3D12/D3D12ScopedShader.cpp"
     "Src/D3D12/D3D12TextureManager.cpp"
     "Src/D3D12/D3D12TypeMapping.cpp"
+    "Src/D3D12/D3D12ScopedCommandBuffer.cpp"
 )
 
 source_group(Generic\\Inc REGULAR_EXPRESSION "Inc/Generic/.*")

@@ -27,7 +27,8 @@ D3D12Renderer::D3D12Renderer(const ApplicationInfo& appInfo,
     m_initAllocator(m_initBuffer, 0x400000),
     m_renderTargets(swapChainRequirements.m_framesInFlight, mainAllocator),
     m_drawablePools(renderPassRequirements.m_maxPools, drawAllocator),
-    m_shaders(shaderRequirements.m_shaders.GetSize(), mainAllocator) {
+    m_shaders(shaderRequirements.m_shaders.GetSize(), mainAllocator),
+    m_primaryCommandBuffers(swapChainRequirements.m_framesInFlight, mainAllocator) {
   UNUSED(renderPassRequirements);
   UNUSED(shaderRequirements);
 
@@ -89,7 +90,11 @@ D3D12Renderer::D3D12Renderer(const ApplicationInfo& appInfo,
     rtvHandle.Offset(1, m_rtvDescriptorSize);
   }
 
-  VERIFY_D3D_OP(log_D3D12RenderSystem, m_device->CreateCommandAllocator(D3D12_COMMAND_LIST_TYPE_DIRECT, IID_PPV_ARGS(&m_commandAllocator)), "Failed to create command allocator");
+  for (UINT n = 0; n < swapChainRequirements.m_framesInFlight; n++)
+  {
+    D3D12ScopedCommandBuffer primaryCmdBuffer = D3D12ScopedCommandBuffer(m_device, D3D12_COMMAND_LIST_TYPE_DIRECT, log_D3D12RenderSystem);
+    m_primaryCommandBuffers.PushBack(primaryCmdBuffer);
+  }
 }
 
 String D3D12Renderer::GetRenderingAPI() const {

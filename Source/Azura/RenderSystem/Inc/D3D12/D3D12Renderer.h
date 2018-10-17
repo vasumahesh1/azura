@@ -9,6 +9,7 @@
 
 #include "Memory/MonotonicAllocator.h"
 #include "Memory/HeapMemoryBuffer.h"
+#include "D3D12ScopedCommandBuffer.h"
 
 
 namespace Azura {
@@ -59,6 +60,7 @@ private:
 
   Containers::Vector<D3D12DrawablePool> m_drawablePools;
   Containers::Vector<D3D12ScopedShader> m_shaders;
+  Containers::Vector<D3D12ScopedCommandBuffer> m_primaryCommandBuffers;
 
 };
 

@@ -61,6 +61,9 @@ void D3D12DrawablePool::BindSampler(SlotID slot, const SamplerDesc& desc) {
 
 void D3D12DrawablePool::Submit() {
   m_pipelineFactory.Submit(m_device, m_rootSignature, m_pipelines);
+
+
+
 }
 
 void D3D12DrawablePool::CreateRootSignature(const ComPtr<ID3D12Device>& device) {
