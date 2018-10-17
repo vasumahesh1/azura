@@ -1,7 +1,6 @@
 #pragma once
 
 #include <vulkan/vulkan_core.h>
-#include <map>
 #include <optional>
 #include "Generic/GenericTypes.h"
 #include "Core/RawStorageFormat.h"

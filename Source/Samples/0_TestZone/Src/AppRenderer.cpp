@@ -11,8 +11,6 @@ namespace Azura {
 using namespace Containers; // NOLINT
 using namespace Math;       // NOLINT
 
-#define VERTEX_SLOT 0
-
 struct Vertex {
   float m_pos[4];
   float m_col[4];
@@ -99,19 +97,10 @@ void AppRenderer::Initialize() {
   poolInfo.m_numDrawables         = 1;
   poolInfo.m_drawType             = DrawType::InstancedIndexed;
   poolInfo.m_renderPasses = {{SINGLE_PASS}, allocatorTemporary};
-  poolInfo.m_vertexDataSlots      = {
-    {
-      {VERTEX_SLOT, BufferUsageRate::PerVertex}
-    },
-    allocatorTemporary
-  };
+
+  const U32 VERTEX_SLOT = poolInfo.AddInputSlot({ BufferUsageRate::PerVertex, { {"POSITION", RawStorageFormat::R32G32B32A32_FLOAT}, {"COLOR", RawStorageFormat::R32G32B32A32_FLOAT}} });
 
   DrawablePool& pool = m_renderer->CreateDrawablePool(poolInfo);
-
-  Vector<RawStorageFormat> vertexStride = Vector<RawStorageFormat>(ContainerExtent{2, 2}, allocatorTemporary);
-  vertexStride[0]                       = RawStorageFormat::R32G32B32A32_FLOAT;
-  vertexStride[1]                       = RawStorageFormat::R32G32B32A32_FLOAT;
-  pool.AddBufferBinding(VERTEX_SLOT, vertexStride);
 
   Vector<Vertex> vertexData = Vector<Vertex>({
     Vertex{{0, 0, 1, 1}, {1, 0, 0, 1}},

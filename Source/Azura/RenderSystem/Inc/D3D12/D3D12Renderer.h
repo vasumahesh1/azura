@@ -5,6 +5,10 @@
 #include "Log/Log.h"
 #include "D3D12/D3D12DrawablePool.h"
 #include "D3D12/D3D12Core.h"
+#include "D3D12/D3D12ScopedShader.h"
+
+#include "Memory/MonotonicAllocator.h"
+#include "Memory/HeapMemoryBuffer.h"
 
 
 namespace Azura {
@@ -35,6 +39,12 @@ private:
 
   Log log_D3D12RenderSystem;
 
+  Memory::HeapMemoryBuffer m_perFrameBuffer;
+  Memory::MonotonicAllocator m_perFrameAllocator;
+
+  Memory::HeapMemoryBuffer m_initBuffer;
+  Memory::MonotonicAllocator m_initAllocator;
+
   Microsoft::WRL::ComPtr<IDXGISwapChain3> m_swapChain;
   Microsoft::WRL::ComPtr<ID3D12Device> m_device;
 
@@ -48,6 +58,8 @@ private:
   Containers::Vector<Microsoft::WRL::ComPtr<ID3D12Resource>> m_renderTargets;
 
   Containers::Vector<D3D12DrawablePool> m_drawablePools;
+  Containers::Vector<D3D12ScopedShader> m_shaders;
+
 };
 
 } // namespace D3D12

@@ -41,35 +41,12 @@ VkPipelineFactory& VkPipelineFactory::AddBindingDescription(U32 stride, VertexSl
   return *this;
 }
 
-VkPipelineFactory& VkPipelineFactory::AddAttributeDescription(RawStorageFormat rawFormat, U32 binding) {
+VkPipelineFactory& VkPipelineFactory::BulkAddAttributeDescription(const VertexSlot& vertexSlot, U32 binding) {
   auto bindingInfo = m_bindingMap[binding];
 
-  const auto format = ToVkFormat(rawFormat);
-  VERIFY_OPT(log_VulkanRenderSystem, format, "Unknown Format");
-
-  VkVertexInputAttributeDescription attrDesc;
-  attrDesc.binding  = binding;
-  attrDesc.location = m_currentLocation;
-  attrDesc.format   = format.value();
-  attrDesc.offset   = bindingInfo.m_offset;
-
-  // TODO(vasumahesh1):[FORMATS]: Handle 64bit formats taking 2 locations
-  m_currentLocation++;
-
-  bindingInfo.m_offset += GetFormatSizeBits(rawFormat);
-
-  m_bindingMap[binding] = bindingInfo;
-
-  m_attributeDescription.PushBack(attrDesc);
-  return *this;
-}
-
-VkPipelineFactory& VkPipelineFactory::BulkAddAttributeDescription(const Containers::Vector<RawStorageFormat>& strides,
-                                                                  U32 binding) {
-  auto bindingInfo = m_bindingMap[binding];
-
-  for (const auto& rawFormat : strides) {
-    const auto format = ToVkFormat(rawFormat);
+  for (const auto& semanticStride : vertexSlot.m_stride) {
+    const auto format = ToVkFormat(semanticStride.m_format);
+    LOG_DBG(log_VulkanRenderSystem, LOG_LEVEL, "Binding Vertex Attribute: Binding: %d   Location: %d   Format: %s", binding, m_currentLocation, ToString(semanticStride.m_format).c_str());
     VERIFY_OPT(log_VulkanRenderSystem, format, "Unknown Format");
 
     VkVertexInputAttributeDescription attrDesc;
@@ -81,7 +58,7 @@ VkPipelineFactory& VkPipelineFactory::BulkAddAttributeDescription(const Containe
     // TODO(vasumahesh1):[FORMATS]: Handle 64bit formats taking 2 locations
     m_currentLocation++;
 
-    bindingInfo.m_offset += GetFormatSize(rawFormat);
+    bindingInfo.m_offset += GetFormatSize(semanticStride.m_format);
 
     m_attributeDescription.PushBack(attrDesc);
   }

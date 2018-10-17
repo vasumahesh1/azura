@@ -8,9 +8,6 @@
 using namespace Azura;             // NOLINT
 using namespace Azura::Containers; // NOLINT
 
-#define VERTEX_SLOT 0
-#define INSTANCE_SLOT 1
-
 struct Vertex {
   float m_pos[4];
   float m_col[4];
@@ -39,19 +36,10 @@ void RenderTestCases::ExecuteBasicRenderTest(Azura::Renderer& renderer,
   poolInfo.m_numDrawables         = 1;
   poolInfo.m_drawType             = DrawType::InstancedIndexed;
   poolInfo.m_renderPasses = {{renderPass}, allocatorTemporary};
-  poolInfo.m_vertexDataSlots      = {
-    {
-      {VERTEX_SLOT, BufferUsageRate::PerVertex}
-    },
-    allocatorTemporary
-  };
+
+  const auto VERTEX_SLOT = poolInfo.AddInputSlot({ BufferUsageRate::PerVertex, {{"POSITION", RawStorageFormat::R32G32B32A32_FLOAT}, {"COLOR", RawStorageFormat::R32G32B32A32_FLOAT}} });
 
   DrawablePool& pool = renderer.CreateDrawablePool(poolInfo);
-
-  Vector<RawStorageFormat> vertexStride = Vector<RawStorageFormat>(ContainerExtent{2, 2}, allocatorTemporary);
-  vertexStride[0]                       = RawStorageFormat::R32G32B32A32_FLOAT;
-  vertexStride[1]                       = RawStorageFormat::R32G32B32A32_FLOAT;
-  pool.AddBufferBinding(VERTEX_SLOT, vertexStride);
 
   Vector<Vertex> vertexData = Vector<Vertex>({
     Vertex{{0, 0, 1, 1}, {1, 0, 0, 1}},
@@ -111,24 +99,11 @@ void RenderTestCases::ExecuteBasicInstancingTest(Azura::Renderer& renderer,
   poolInfo.m_byteSize        = 0x400000;
   poolInfo.m_numDrawables    = 1;
   poolInfo.m_renderPasses = {{renderPass}, allocatorTemporary};
-  poolInfo.m_vertexDataSlots = {
-    {
-      {VERTEX_SLOT, BufferUsageRate::PerVertex},
-      {INSTANCE_SLOT, BufferUsageRate::PerInstance}
-    },
-    allocatorTemporary
-  };
+
+  const auto VERTEX_SLOT = poolInfo.AddInputSlot({ BufferUsageRate::PerVertex, { {"POSITION", RawStorageFormat::R32G32B32A32_FLOAT}, {"COLOR", RawStorageFormat::R32G32B32A32_FLOAT} } });
+  const auto INSTANCE_SLOT = poolInfo.AddInputSlot({ BufferUsageRate::PerInstance, { {"INSTANCE_POSITION", RawStorageFormat::R32G32B32A32_FLOAT} } });
 
   DrawablePool& pool = renderer.CreateDrawablePool(poolInfo);
-
-  Vector<RawStorageFormat> vertexStride = Vector<RawStorageFormat>(ContainerExtent{2}, allocatorTemporary);
-  vertexStride[0]                       = RawStorageFormat::R32G32B32A32_FLOAT;
-  vertexStride[1]                       = RawStorageFormat::R32G32B32A32_FLOAT;
-  pool.AddBufferBinding(VERTEX_SLOT, vertexStride);
-
-  Vector<RawStorageFormat> instanceStride = Vector<RawStorageFormat>(ContainerExtent{1}, allocatorTemporary);
-  instanceStride[0]                       = RawStorageFormat::R32G32B32A32_FLOAT;
-  pool.AddBufferBinding(INSTANCE_SLOT, instanceStride);
 
   Vector<Vertex> vertexData = Vector<Vertex>({
     Vertex{{0, 0, 1, 1}, {1, 0, 0, 1}},
@@ -204,20 +179,10 @@ void RenderTestCases::ExecuteBasicTextureTest(Azura::Renderer& renderer,
   poolInfo.m_numDrawables         = 1;
   poolInfo.m_renderPasses = {{renderPass}, allocatorTemporary};
   poolInfo.m_drawType             = DrawType::InstancedIndexed;
-  poolInfo.m_vertexDataSlots      = {
-    {
-      {VERTEX_SLOT, BufferUsageRate::PerVertex}
-    },
-    allocatorTemporary
-  };
 
+  const auto VERTEX_SLOT = poolInfo.AddInputSlot({ BufferUsageRate::PerVertex, { {"POSITION", RawStorageFormat::R32G32B32A32_FLOAT}, {"UV", RawStorageFormat::R32G32_FLOAT} } });
 
   DrawablePool& pool = renderer.CreateDrawablePool(poolInfo);
-
-  Vector<RawStorageFormat> vertexStride = Vector<RawStorageFormat>(ContainerExtent{2, 2}, allocatorTemporary);
-  vertexStride[0]                       = RawStorageFormat::R32G32B32A32_FLOAT;
-  vertexStride[1]                       = RawStorageFormat::R32G32_FLOAT;
-  pool.AddBufferBinding(VERTEX_SLOT, vertexStride);
 
   const TextureDesc* desc = texManager->GetInfo(nocturnalTexture);
   VERIFY_TRUE(log_TestCase, desc != nullptr, "Texture Description was Null");
@@ -305,21 +270,10 @@ void RenderTestCases::ExecuteBasicDeferredTest(Azura::Renderer& renderer,
   poolInfo.m_numDrawables         = 1;
   poolInfo.m_drawType             = DrawType::InstancedIndexed;
   poolInfo.m_renderPasses = {{renderPass1}, allocatorTemporary};
-  poolInfo.m_vertexDataSlots      = {
-    {
-      {VERTEX_SLOT, BufferUsageRate::PerVertex}
-    },
-    allocatorTemporary
-  };
+  
+  const auto VERTEX_SLOT = poolInfo.AddInputSlot({ BufferUsageRate::PerVertex, { {"POSITION", RawStorageFormat::R32G32B32A32_FLOAT}, {"UV", RawStorageFormat::R32G32_FLOAT} } });
 
   DrawablePool& pool = renderer.CreateDrawablePool(poolInfo);
-
-  const Vector<RawStorageFormat> vertexStride = Vector<RawStorageFormat>({
-    RawStorageFormat::R32G32B32A32_FLOAT, // Pos
-    RawStorageFormat::R32G32_FLOAT        // UV
-    }, allocatorTemporary);
-
-  pool.AddBufferBinding(VERTEX_SLOT, vertexStride);
 
   const TextureDesc* desc = texManager->GetInfo(nocturnalTexture);
   VERIFY_TRUE(log_TestCase, desc != nullptr, "Texture Description was Null");
@@ -362,21 +316,9 @@ void RenderTestCases::ExecuteBasicDeferredTest(Azura::Renderer& renderer,
   quadPoolInfo.m_drawType             = DrawType::InstancedIndexed;
   quadPoolInfo.m_cullMode             = CullMode::None;
   quadPoolInfo.m_renderPasses = {{renderPass2}, allocatorTemporary};
-  quadPoolInfo.m_vertexDataSlots      = {
-    {
-      {VERTEX_SLOT, BufferUsageRate::PerVertex}
-    },
-    allocatorTemporary
-  };
+  const auto QUAD_VERTEX_SLOT = quadPoolInfo.AddInputSlot({ BufferUsageRate::PerVertex, { {"POSITION", RawStorageFormat::R32G32B32A32_FLOAT}, {"UV", RawStorageFormat::R32G32_FLOAT} } });
 
   DrawablePool& quadPool = renderer.CreateDrawablePool(quadPoolInfo);
-
-  const Vector<RawStorageFormat> quadStride = Vector<RawStorageFormat>({
-    RawStorageFormat::R32G32B32A32_FLOAT, // Pos
-    RawStorageFormat::R32G32_FLOAT // UV
-    }, allocatorTemporary);
-
-  quadPool.AddBufferBinding(VERTEX_SLOT, quadStride);
 
   quadPool.BindSampler(samplerSlot, {});
 
@@ -403,7 +345,7 @@ void RenderTestCases::ExecuteBasicDeferredTest(Azura::Renderer& renderer,
   createInfo.m_indexType        = RawStorageFormat::R32_UINT;
 
   const auto quadId = quadPool.CreateDrawable(createInfo);
-  quadPool.BindVertexData(quadId, VERTEX_SLOT, quadBufferStart, quadVertexData.GetSize() * sizeof(VertexWithUV));
+  quadPool.BindVertexData(quadId, QUAD_VERTEX_SLOT, quadBufferStart, quadVertexData.GetSize() * sizeof(VertexWithUV));
   quadPool.SetIndexData(quadId, quadIndexStart, quadIndexData.GetSize() * sizeof(U32));
 
 

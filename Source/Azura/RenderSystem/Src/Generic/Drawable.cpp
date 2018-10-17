@@ -88,6 +88,12 @@ DrawablePoolCreateInfo::DrawablePoolCreateInfo(Memory::Allocator& alloc)
     m_renderPasses(alloc) {
 }
 
+U32 DrawablePoolCreateInfo::AddInputSlot(const VertexSlot& slotInfo) {
+  const U32 id = m_vertexDataSlots.GetSize();
+  m_vertexDataSlots.PushBack(slotInfo);
+  return id;
+}
+
 DrawablePool::DrawablePool(const DrawablePoolCreateInfo& createInfo,
                            DescriptorCount descriptorCount,
                            Memory::Allocator& allocator)
@@ -135,19 +141,6 @@ Memory::Allocator& DrawablePool::GetAllocator() const {
 
 DrawType DrawablePool::GetDrawType() const {
   return m_drawType;
-}
-
-int DrawablePool::GetVertexSlotIndex(SlotID id) const {
-  auto it = std::find_if(m_vertexDataSlots.Begin(), m_vertexDataSlots.End(), [id](const VertexSlot& slot) -> bool
-  {
-    return slot.m_key == id;
-  });
-
-  if (it == m_vertexDataSlots.End()) {
-    return -1;
-  }
-
-  return it - m_vertexDataSlots.Begin();
 }
 
 bool DrawablePool::CanRenderInPass(U32 renderPassId) const {

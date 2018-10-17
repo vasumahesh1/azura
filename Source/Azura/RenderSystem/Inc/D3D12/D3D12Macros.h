@@ -16,12 +16,15 @@ inline std::string HrToString(HRESULT hr)
   return std::string(s_str);
 }
 
-#define VERIFY_D3D_OP(Logger, res, message)                                                          \
-  if (FAILED(res))                                                                                   \
-  {                                                                                                  \
-    LOG_ERR(Logger, LOG_LEVEL, message);                                                             \
-    LOG_ERR(Logger, LOG_LEVEL, HrToString(res).c_str());                                             \
-    throw std::runtime_error(message);                                                               \
+#define VERIFY_D3D_OP(Logger, expr, message)                                                           \
+  {                                                                                                    \
+    HRESULT hr =  expr;                                                                                \
+    if (FAILED(hr))                                                                                    \
+    {                                                                                                  \
+      LOG_ERR(Logger, LOG_LEVEL, message);                                                             \
+      LOG_ERR(Logger, LOG_LEVEL, HrToString(hr).c_str());                                              \
+      throw std::runtime_error(message);                                                               \
+    }                                                                                                  \
   }
 
 } // namespace D3D12

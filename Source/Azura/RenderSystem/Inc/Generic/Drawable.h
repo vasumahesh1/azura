@@ -83,6 +83,8 @@ struct DrawablePoolCreateInfo {
   DrawablePoolCreateInfo& operator=(DrawablePoolCreateInfo&& other) noexcept = default;
 
   DrawablePoolCreateInfo(Memory::Allocator& alloc);
+
+  U32 AddInputSlot(const VertexSlot& slotInfo);
 };
 
 class DrawablePool {
@@ -98,8 +100,6 @@ public:
   DrawablePool& operator=(DrawablePool&& other) noexcept = default;
 
   virtual DrawableID CreateDrawable(const DrawableCreateInfo& createInfo) = 0;
-
-  virtual void AddBufferBinding(SlotID slot, const Containers::Vector<RawStorageFormat>& strides) = 0;
 
   // Drawable Scope Binds
   void BindVertexData(DrawableID drawableId, SlotID slot, const Containers::Vector<U8>& buffer);
@@ -127,8 +127,6 @@ public:
 protected:
   Memory::Allocator& GetAllocator() const;
   DrawType GetDrawType() const;
-
-  int GetVertexSlotIndex(SlotID id) const;
 
   U32 m_numVertexSlots;
   U32 m_numInstanceSlots;

@@ -86,7 +86,6 @@ public:
   void AddShader(U32 shaderId) override;
 
   void Submit() override;
-  void AddBufferBinding(SlotID slotId, const Containers::Vector<RawStorageFormat>& strides) override;
 
   void CleanUp() const;
 

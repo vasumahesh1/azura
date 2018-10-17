@@ -2,6 +2,7 @@
 
 #include "Log/Log.h"
 #include "D3D12/D3D12Macros.h"
+#include "D3D12/D3D12TypeMapping.h"
 
 using namespace Microsoft::WRL; // NOLINT
 
@@ -14,12 +15,15 @@ ComPtr<IDXGISwapChain1> D3D12Core::CreateSwapChain(const ComPtr<IDXGIFactory4>& 
                                                    const SwapChainRequirements& swapChainRequirements,
                                                    const Log& log_D3D12RenderSystem) {
 
+  const auto swapChainFormat = ToDXGI_FORMAT(swapChainRequirements.m_format);
+  VERIFY_OPT(log_D3D12RenderSystem, swapChainFormat, "Unknown Swap Chain Format");
+
   // Describe and create the swap chain.
   DXGI_SWAP_CHAIN_DESC1 swapChainDesc = {};
   swapChainDesc.BufferCount           = swapChainRequirements.m_framesInFlight;
   swapChainDesc.Width                 = swapChainRequirements.m_extent.m_width;
   swapChainDesc.Height                = swapChainRequirements.m_extent.m_height;
-  swapChainDesc.Format                = DXGI_FORMAT_R8G8B8A8_UNORM;
+  swapChainDesc.Format                = swapChainFormat.value();
   swapChainDesc.BufferUsage           = DXGI_USAGE_RENDER_TARGET_OUTPUT;
   swapChainDesc.SwapEffect            = DXGI_SWAP_EFFECT_FLIP_DISCARD;
   swapChainDesc.SampleDesc.Count      = 1;

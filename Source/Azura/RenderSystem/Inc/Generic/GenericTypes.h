@@ -216,9 +216,16 @@ struct ViewportDimensions {
 
 using SlotID = U32;
 
+struct SlotSemantic
+{
+  const char* m_name;
+  RawStorageFormat m_format;
+  U32 m_id{0};
+};
+
 struct VertexSlot {
-  U32 m_key;
   BufferUsageRate m_rate;
+  SmallVector<SlotSemantic, 10> m_stride;
 };
 
 struct DescriptorSlotCreateInfo {

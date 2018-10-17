@@ -25,6 +25,23 @@ Containers::Vector<U8> FileReader::GetFileContents(const String& filePath, Memor
   return buffer;
 }
 
+void FileReader::GetFileContents(const String& filePath, Containers::Vector<U8>& buffer) {
+  std::ifstream fileStream(filePath, std::ios::binary);
+
+  if (!fileStream.good())
+  {
+    throw std::runtime_error("Can't find File");
+  }
+
+  fileStream.seekg(0, std::ios::end);
+  buffer.Resize(U32(fileStream.tellg()));
+  fileStream.seekg(0, std::ios::beg);
+
+  buffer.Assign(std::istreambuf_iterator<char>(fileStream), std::istreambuf_iterator<char>());
+
+  fileStream.close();
+}
+
 SizeType FileReader::GetFileSize(const String& filePath) {
   std::ifstream fileStream(filePath);
 

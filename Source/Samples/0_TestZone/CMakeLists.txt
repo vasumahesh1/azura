@@ -27,8 +27,11 @@ AzuraDeployFolder(TestZone Textures)
 
 AzuraAddLoggingSupport(TestZone 50)
 
-AzuraAddSlangShaders(TestZone VULKAN ${PROJECT_SHADERS})
 AzuraAddSlangShaders(TestZone GLSL ${PROJECT_SHADERS})
+AzuraAddSlangShaders(TestZone VULKAN ${PROJECT_SHADERS})
+
+AzuraAddSlangShaders(TestZone HLSL ${PROJECT_SHADERS})
+AzuraAddSlangShaders(TestZone DXBC ${PROJECT_SHADERS})
 
 target_include_directories(TestZone PUBLIC ${PROJECT_SOURCE_DIR}/Inc)
 target_link_libraries(TestZone D3D12RenderSystem Log glfw Math)

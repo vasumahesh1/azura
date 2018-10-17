@@ -12,9 +12,6 @@ namespace Azura {
 using namespace Containers; // NOLINT
 using namespace Math;       // NOLINT
 
-#define VERTEX_SLOT 0
-#define NORMAL_SLOT 1
-
 struct Vertex {
   float m_pos[4];
   float m_col[4];
@@ -156,13 +153,9 @@ void AppRenderer::Initialize() {
   poolInfo.m_cullMode        = CullMode::FrontBit;
   poolInfo.m_drawType        = DrawType::InstancedIndexed;
   poolInfo.m_renderPasses    = {{NOISE_PASS}, allocatorTemporary};
-  poolInfo.m_vertexDataSlots = {
-    {
-      {VERTEX_SLOT, BufferUsageRate::PerVertex},
-      {NORMAL_SLOT, BufferUsageRate::PerVertex}
-    },
-    allocatorTemporary
-  };
+
+  const auto VERTEX_SLOT = poolInfo.AddInputSlot({ BufferUsageRate::PerVertex, { {"POSITION", sphere.GetVertexFormat()}} });
+  const auto NORMAL_SLOT = poolInfo.AddInputSlot({ BufferUsageRate::PerVertex, { {"NORMAL", sphere.GetNormalFormat()}} });
 
   TextureRequirements textureRequirements = {};
   textureRequirements.m_maxCount = 1;
@@ -175,12 +168,6 @@ void AppRenderer::Initialize() {
   VERIFY_TRUE(log_AppRenderer, planet1Desc != nullptr, "planet1Desc was Null");
 
   DrawablePool& pool = m_renderer->CreateDrawablePool(poolInfo);
-
-  Vector<RawStorageFormat> vertexStride = Vector<RawStorageFormat>(1, allocatorTemporary);
-  vertexStride.PushBack(sphere.GetVertexFormat());
-  pool.AddBufferBinding(VERTEX_SLOT, vertexStride);
-
-  pool.AddBufferBinding(NORMAL_SLOT, {{sphere.GetNormalFormat()}, allocatorTemporary});
 
   // Create Drawable from Pool
   DrawableCreateInfo createInfo = {};

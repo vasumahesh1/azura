@@ -21,8 +21,13 @@ D3D12Renderer::D3D12Renderer(const ApplicationInfo& appInfo,
   : Renderer(appInfo, deviceRequirements, appRequirements, swapChainRequirements, descriptorRequirements,
              mainAllocator, drawAllocator, window),
     log_D3D12RenderSystem(Log("D3D12RenderSystem")),
+    m_perFrameBuffer(8192),
+    m_perFrameAllocator(m_perFrameBuffer, 8192),
+    m_initBuffer(0x400000),
+    m_initAllocator(m_initBuffer, 0x400000),
     m_renderTargets(swapChainRequirements.m_framesInFlight, mainAllocator),
-    m_drawablePools(renderPassRequirements.m_maxPools, drawAllocator) {
+    m_drawablePools(renderPassRequirements.m_maxPools, drawAllocator),
+    m_shaders(shaderRequirements.m_shaders.GetSize(), mainAllocator) {
   UNUSED(renderPassRequirements);
   UNUSED(shaderRequirements);
 
@@ -59,6 +64,10 @@ D3D12Renderer::D3D12Renderer(const ApplicationInfo& appInfo,
 
   SetCurrentFrame(m_swapChain->GetCurrentBackBufferIndex());
 
+  for (const auto& shaderCreateInfo : shaderRequirements.m_shaders) {
+    D3D12Renderer::AddShader(shaderCreateInfo);
+  }
+
   // TODO(vasumahesh1):[RENDER-PASS]: We might need to create multiple RTV per pass
   // Describe and create a render target view (RTV) descriptor heap.
   D3D12_DESCRIPTOR_HEAP_DESC rtvHeapDesc = {};
@@ -79,6 +88,8 @@ D3D12Renderer::D3D12Renderer(const ApplicationInfo& appInfo,
     m_device->CreateRenderTargetView(m_renderTargets[n].Get(), nullptr, rtvHandle);
     rtvHandle.Offset(1, m_rtvDescriptorSize);
   }
+
+  VERIFY_D3D_OP(log_D3D12RenderSystem, m_device->CreateCommandAllocator(D3D12_COMMAND_LIST_TYPE_DIRECT, IID_PPV_ARGS(&m_commandAllocator)), "Failed to create command allocator");
 }
 
 String D3D12Renderer::GetRenderingAPI() const {
@@ -86,7 +97,7 @@ String D3D12Renderer::GetRenderingAPI() const {
 }
 
 DrawablePool& D3D12Renderer::CreateDrawablePool(const DrawablePoolCreateInfo& createInfo) {
-  D3D12DrawablePool pool = D3D12DrawablePool(createInfo, m_descriptorCount, m_drawPoolAllocator);
+  D3D12DrawablePool pool = D3D12DrawablePool(m_device, createInfo, m_descriptorCount, m_drawPoolAllocator, log_D3D12RenderSystem);
   m_drawablePools.PushBack(std::move(pool));
 
   return m_drawablePools.Last();
@@ -102,6 +113,12 @@ void D3D12Renderer::SnapshotFrame(const String& exportPath) const {
 }
 
 void D3D12Renderer::AddShader(const ShaderCreateInfo& info) {
+  const String fullPath = "Shaders/" + D3D12Renderer::GetRenderingAPI() + "/" + info.m_shaderFileName;
+
+  D3D12ScopedShader shader = D3D12ScopedShader(fullPath, m_initAllocator, log_D3D12RenderSystem);
+  m_shaders.PushBack(std::move(shader));
+
+  m_shaders.Last().SetStage(info.m_stage);
 }
 } // namespace D3D12
 } // namespace Azura

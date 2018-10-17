@@ -26,8 +26,8 @@ class VkPipelineFactory {
   VkPipelineFactory(VkDevice device, Memory::Allocator& allocator, Log logger);
 
   VkPipelineFactory& AddBindingDescription(U32 stride, VertexSlot slot, U32 binding);
-  VkPipelineFactory& AddAttributeDescription(RawStorageFormat rawFormat, U32 binding);
-  VkPipelineFactory& BulkAddAttributeDescription(const Containers::Vector<RawStorageFormat>& strides, U32 binding);
+
+  VkPipelineFactory& BulkAddAttributeDescription(const VertexSlot& vertexSlot, U32 binding);
 
   VkPipelineFactory& SetInputAssemblyStage(PrimitiveTopology topology);
   VkPipelineFactory& SetViewportStage(ViewportDimensions viewportDimensions, const VkScopedSwapChain& swapChain);
