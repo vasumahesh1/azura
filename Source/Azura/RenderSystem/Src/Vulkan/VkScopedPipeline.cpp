@@ -84,9 +84,9 @@ VkPipelineFactory& VkPipelineFactory::SetInputAssemblyStage(PrimitiveTopology to
 VkPipelineFactory& VkPipelineFactory::SetViewportStage(ViewportDimensions viewportDimensions,
                                                        const VkScopedSwapChain& swapChain) {
   m_viewport.x        = viewportDimensions.m_x;
-  m_viewport.y        = viewportDimensions.m_y;
+  m_viewport.y        = viewportDimensions.m_height - viewportDimensions.m_y;
   m_viewport.width    = viewportDimensions.m_width;
-  m_viewport.height   = viewportDimensions.m_height;
+  m_viewport.height   = -viewportDimensions.m_height; // Flipped
   m_viewport.minDepth = viewportDimensions.m_minDepth;
   m_viewport.maxDepth = viewportDimensions.m_maxDepth;
 

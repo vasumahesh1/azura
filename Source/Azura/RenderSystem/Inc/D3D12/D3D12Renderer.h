@@ -33,6 +33,7 @@ public:
   DrawablePool& CreateDrawablePool(const DrawablePoolCreateInfo& createInfo) override;
   void Submit() override;
   void RenderFrame() override;
+  void WaitForGPU();
   void SnapshotFrame(const String& exportPath) const override;
 
 private:

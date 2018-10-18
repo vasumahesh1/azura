@@ -95,8 +95,8 @@ D3D12Renderer::D3D12Renderer(const ApplicationInfo& appInfo,
   CD3DX12_CPU_DESCRIPTOR_HANDLE rtvHandle(m_rtvHeap->GetCPUDescriptorHandleForHeapStart());
 
   // Create a RTV for each frame.
-  for (UINT n = 0; n < swapChainRequirements.m_framesInFlight; n++) {
-    auto& renderTarget = m_renderTargets[n];
+  for (U32 n = 0; n < swapChainRequirements.m_framesInFlight; n++) {
+    auto& renderTarget = m_renderTargets[n]; // NOLINT
     VERIFY_D3D_OP(log_D3D12RenderSystem, m_swapChain->GetBuffer(n, IID_PPV_ARGS(&renderTarget)),
       "Failed to get swapchain buffer");
     m_device->CreateRenderTargetView(renderTarget.Get(), nullptr, rtvHandle);
@@ -149,7 +149,7 @@ void D3D12Renderer::Submit() {
   for (auto& primaryBuffer : m_primaryCommandBuffers) {
     auto commandList = primaryBuffer.GetGraphicsCommandList();
 
-    auto& renderTarget = m_renderTargets[idx];
+    auto& renderTarget = m_renderTargets[idx]; // NOLINT
 
     CD3DX12_RESOURCE_BARRIER backBufferBarrierStart = CD3DX12_RESOURCE_BARRIER::Transition(renderTarget.Get(),
                                                                                            D3D12_RESOURCE_STATE_PRESENT,
@@ -197,11 +197,23 @@ void D3D12Renderer::RenderFrame() {
   // Present and update the frame index for the next frame.
   VERIFY_D3D_OP(log_D3D12RenderSystem, m_swapChain->Present(1, 0), "Present Failed");
 
-  // Signal and increment the fence value.
+  WaitForGPU();
+
+  ExitRenderFrame();
+}
+
+void D3D12Renderer::WaitForGPU()
+{
+  const U32 fence = m_fenceValue;
   VERIFY_D3D_OP(log_D3D12RenderSystem, m_commandQueue->Signal(m_fence.Get(), m_fenceValue), "Fence wait failed");
   m_fenceValue++;
 
-  ExitRenderFrame();
+  // Wait until the previous frame is finished.
+  if (m_fence->GetCompletedValue() < fence)
+  {
+    VERIFY_D3D_OP(log_D3D12RenderSystem, m_fence->SetEventOnCompletion(fence, m_fenceEvent), "Failed to set event completion on Fence");
+    WaitForSingleObject(m_fenceEvent, INFINITE);
+  }
 }
 
 void D3D12Renderer::SnapshotFrame(const String& exportPath) const {

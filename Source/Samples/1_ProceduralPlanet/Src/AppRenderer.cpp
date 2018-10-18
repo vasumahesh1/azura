@@ -53,7 +53,7 @@ AppRenderer::AppRenderer()
 void AppRenderer::Initialize() {
   LOG_INF(log_AppRenderer, LOG_LEVEL, "Starting Init of AppRenderer");
 
-  STACK_ALLOCATOR(Temporary, Memory::MonotonicAllocator, 2048);
+  HEAP_ALLOCATOR(Temporary, Memory::MonotonicAllocator, 8192);
   m_window = RenderSystem::CreateApplicationWindow("ProceduralPlanet", 1280, 720);
 
   m_window->SetUpdateCallback([this]()
@@ -150,7 +150,7 @@ void AppRenderer::Initialize() {
   DrawablePoolCreateInfo poolInfo(allocatorTemporary);
   poolInfo.m_byteSize        = sphere.TotalDataSize() + 0x400000;
   poolInfo.m_numDrawables    = 1;
-  poolInfo.m_cullMode        = CullMode::FrontBit;
+  poolInfo.m_cullMode        = CullMode::BackBit;
   poolInfo.m_drawType        = DrawType::InstancedIndexed;
   poolInfo.m_renderPasses    = {{NOISE_PASS}, allocatorTemporary};
 

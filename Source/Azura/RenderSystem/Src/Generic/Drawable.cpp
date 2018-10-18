@@ -84,25 +84,24 @@ const BufferInfo& Drawable::GetIndexBufferInfo() const {
 }
 
 DrawablePoolCreateInfo::DrawablePoolCreateInfo(Memory::Allocator& alloc)
-  : m_vertexDataSlots(alloc),
-    m_renderPasses(alloc) {
+  : m_renderPasses(alloc) {
 }
 
 U32 DrawablePoolCreateInfo::AddInputSlot(const VertexSlot& slotInfo) {
-  const U32 id = m_vertexDataSlots.GetSize();
-  m_vertexDataSlots.PushBack(slotInfo);
+  const auto id = U32(m_vertexDataSlots.size());
+  m_vertexDataSlots.push_back(slotInfo);
   return id;
 }
 
 DrawablePool::DrawablePool(const DrawablePoolCreateInfo& createInfo,
                            DescriptorCount descriptorCount,
                            Memory::Allocator& allocator)
-  : m_numVertexSlots(std::count_if(createInfo.m_vertexDataSlots.Begin(), createInfo.m_vertexDataSlots.End(),
-                                   IsPerVertexSlot)),
-    m_numInstanceSlots(std::count_if(createInfo.m_vertexDataSlots.Begin(), createInfo.m_vertexDataSlots.End(),
-                                     IsPerInstanceSlot)),
+  : m_numVertexSlots(U32(std::count_if(createInfo.m_vertexDataSlots.begin(), createInfo.m_vertexDataSlots.end(),
+                                   IsPerVertexSlot))),
+    m_numInstanceSlots(U32(std::count_if(createInfo.m_vertexDataSlots.begin(), createInfo.m_vertexDataSlots.end(),
+                                     IsPerInstanceSlot))),
     m_descriptorCount(descriptorCount),
-    m_vertexDataSlots(createInfo.m_vertexDataSlots, allocator),
+    m_vertexDataSlots(allocator),
     m_renderPasses(createInfo.m_renderPasses, allocator),
     m_textureBufferInfos(allocator),
     m_samplerInfos(allocator),
@@ -111,11 +110,15 @@ DrawablePool::DrawablePool(const DrawablePoolCreateInfo& createInfo,
     m_drawType(createInfo.m_drawType),
     m_allocator(allocator) {
 
-  for(auto& slot : m_vertexDataSlots)
+  m_vertexDataSlots.Reserve(U32(createInfo.m_vertexDataSlots.size()));
+
+  for(auto& slot : createInfo.m_vertexDataSlots)
   {
+    m_vertexDataSlots.PushBack(slot);
+
     for(const auto& stride : slot.m_stride)
     {
-      slot.m_strideSize += GetFormatSize(stride.m_format);
+      m_vertexDataSlots.Last().m_strideSize += GetFormatSize(stride.m_format);
     }
   }
 

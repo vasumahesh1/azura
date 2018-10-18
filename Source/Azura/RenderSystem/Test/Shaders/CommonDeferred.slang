@@ -1,13 +1,13 @@
 struct VertexShaderInput
 {
-  float4 in_Pos : IN_POSITION;
-  float2 in_UV : IN_UV;
+  float4 in_Pos : POSITION;
+  float2 in_UV : UV;
 };
 
 struct PixelShaderInput
 {
   float4 pos : SV_Position;
-  float2 uv : UV;
+  float2 uv : PS_UV;
 };
 
 struct UBOData {

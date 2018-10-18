@@ -68,19 +68,19 @@ private:
 struct DrawablePoolCreateInfo {
   U32 m_byteSize{0};
   U32 m_numDrawables{0};
-  CullMode m_cullMode{CullMode::BackBit};
+  CullMode m_cullMode{CullMode::None};
 
   DrawType m_drawType{DrawType::InstancedIndexed};
 
-  Containers::Vector<VertexSlot> m_vertexDataSlots;
+  SmallVector<VertexSlot, 4> m_vertexDataSlots;
   Containers::Vector<U32> m_renderPasses;
 
   ~DrawablePoolCreateInfo() = default;
 
   DrawablePoolCreateInfo(const DrawablePoolCreateInfo& other) = delete;
-  DrawablePoolCreateInfo(DrawablePoolCreateInfo&& other) noexcept = default;
+  DrawablePoolCreateInfo(DrawablePoolCreateInfo&& other) noexcept = delete;
   DrawablePoolCreateInfo& operator=(const DrawablePoolCreateInfo& other) = delete;
-  DrawablePoolCreateInfo& operator=(DrawablePoolCreateInfo&& other) noexcept = default;
+  DrawablePoolCreateInfo& operator=(DrawablePoolCreateInfo&& other) noexcept = delete;
 
   DrawablePoolCreateInfo(Memory::Allocator& alloc);
 

@@ -49,32 +49,32 @@ target_link_libraries(D3D12RenderSystem PUBLIC Common Containers Platform Log Co
 
 # -----------  Testing Target  -----------
 
-# if (INCLUDE_TESTS OR PROJECT_BUILD)
-#   add_executable(
-#     D3D12RenderSystemTest
-#     "Test/test.cpp"
-#     "Test/RenderTestCases.h"
-#     "Test/RenderTestCases.cpp"
-#     "Test/Renderer_test.h"
-#     "Test/Renderer_test.cpp"
-#   )
+if (INCLUDE_TESTS OR PROJECT_BUILD)
+  add_executable(
+    D3D12RenderSystemTest
+    "Test/test.cpp"
+    "Test/RenderTestCases.h"
+    "Test/RenderTestCases.cpp"
+    "Test/Renderer_test.h"
+    "Test/Renderer_test.cpp"
+  )
 
-#   AzuraSilenceClangTidy(D3D12RenderSystemTest)
-#   AzuraAddGraphicsTest(D3D12RenderSystemTest)
-#   AzuraSilenceWarningsForMathfu(D3D12RenderSystemTest)
+  AzuraSilenceClangTidy(D3D12RenderSystemTest)
+  AzuraAddGraphicsTest(D3D12RenderSystemTest)
+  AzuraSilenceWarningsForMathfu(D3D12RenderSystemTest)
 
-#   AzuraAddSlangShaders(D3D12RenderSystemTest VULKAN ${RENDER_SYSTEM_TEST_SHADERS})
-#   AzuraAddSlangShaders(D3D12RenderSystemTest GLSL ${RENDER_SYSTEM_TEST_SHADERS})
+  AzuraAddSlangShaders(D3D12RenderSystemTest HLSL ${RENDER_SYSTEM_TEST_SHADERS})
+  AzuraAddSlangShaders(D3D12RenderSystemTest DXBC ${RENDER_SYSTEM_TEST_SHADERS})
 
-#   add_custom_target(D3D12RenderSystemTest_Textures COMMAND ${CMAKE_COMMAND} -E copy_directory ${CMAKE_CURRENT_SOURCE_DIR}/Test/Textures ${CMAKE_CURRENT_BINARY_DIR}/Textures)
-#   add_dependencies(D3D12RenderSystemTest D3D12RenderSystemTest_Textures)
+  add_custom_target(D3D12RenderSystemTest_Textures COMMAND ${CMAKE_COMMAND} -E copy_directory ${CMAKE_CURRENT_SOURCE_DIR}/Test/Textures ${CMAKE_CURRENT_BINARY_DIR}/Textures)
+  add_dependencies(D3D12RenderSystemTest D3D12RenderSystemTest_Textures)
 
-#   add_custom_command(
-#         TARGET D3D12RenderSystemTest POST_BUILD
-#         COMMAND ${CMAKE_COMMAND} -E make_directory "${PROJECT_BINARY_DIR}/ReferenceImages/"
-#         COMMAND ${CMAKE_COMMAND} -E copy_directory
-#                 ${PROJECT_SOURCE_DIR}/Test/ReferenceImages/
-#                 ${PROJECT_BINARY_DIR}/ReferenceImages/)
+  add_custom_command(
+        TARGET D3D12RenderSystemTest POST_BUILD
+        COMMAND ${CMAKE_COMMAND} -E make_directory "${PROJECT_BINARY_DIR}/ReferenceImages/"
+        COMMAND ${CMAKE_COMMAND} -E copy_directory
+                ${PROJECT_SOURCE_DIR}/Test/ReferenceImages/
+                ${PROJECT_BINARY_DIR}/ReferenceImages/)
 
-#   target_link_libraries(D3D12RenderSystemTest D3D12RenderSystem Log Math glfw gtest_main)
-# endif()
+  target_link_libraries(D3D12RenderSystemTest D3D12RenderSystem Log Math gtest_main)
+endif()
