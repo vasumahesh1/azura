@@ -226,6 +226,7 @@ struct SlotSemantic
 struct VertexSlot {
   BufferUsageRate m_rate;
   SmallVector<SlotSemantic, 10> m_stride;
+  U32 m_strideSize{0};
 };
 
 struct DescriptorSlotCreateInfo {

@@ -111,6 +111,14 @@ DrawablePool::DrawablePool(const DrawablePoolCreateInfo& createInfo,
     m_drawType(createInfo.m_drawType),
     m_allocator(allocator) {
 
+  for(auto& slot : m_vertexDataSlots)
+  {
+    for(const auto& stride : slot.m_stride)
+    {
+      slot.m_strideSize += GetFormatSize(stride.m_format);
+    }
+  }
+
   m_textureBufferInfos.Reserve(m_descriptorCount.m_numSampledImageSlots);
   m_samplerInfos.Reserve(m_descriptorCount.m_numSamplerSlots);
 }

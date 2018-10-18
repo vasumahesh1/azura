@@ -57,10 +57,6 @@ D3D12PipelineFactory& D3D12PipelineFactory::BulkAddAttributeDescription(const Ve
   return *this;
 }
 
-D3D12PipelineFactory& D3D12PipelineFactory::SetInputAssemblyStage(PrimitiveTopology topology) {
-  return *this;
-}
-
 D3D12PipelineFactory& D3D12PipelineFactory::AddShaderStage(const D3D12ScopedShader& shader) {
   switch(shader.GetShaderStage())
   {

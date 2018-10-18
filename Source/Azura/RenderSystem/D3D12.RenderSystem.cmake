@@ -44,7 +44,7 @@ target_compile_definitions(D3D12RenderSystem PUBLIC API_D3D12=1)
 target_include_directories(D3D12RenderSystem
                            PUBLIC ${PROJECT_SOURCE_DIR}/Inc ${STB_INCLUDE_DIR})
 
-target_link_libraries(D3D12RenderSystem PUBLIC Common Containers Platform Log Core glfw)
+target_link_libraries(D3D12RenderSystem PUBLIC Common Containers Platform Log Core glfw D3d12.lib dxgi.lib)
 
 
 # -----------  Testing Target  -----------

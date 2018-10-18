@@ -53,8 +53,14 @@ private:
   Microsoft::WRL::ComPtr<ID3D12CommandQueue> m_commandQueue;
 
   Microsoft::WRL::ComPtr<ID3D12DescriptorHeap> m_rtvHeap;
-  Microsoft::WRL::ComPtr<ID3D12GraphicsCommandList> m_commandList;
   UINT m_rtvDescriptorSize;
+
+  CD3DX12_VIEWPORT m_viewport;
+  CD3DX12_RECT m_scissorRect;
+
+  HANDLE m_fenceEvent;
+  U32 m_fenceValue{0};
+  Microsoft::WRL::ComPtr<ID3D12Fence> m_fence;
 
   Containers::Vector<Microsoft::WRL::ComPtr<ID3D12Resource>> m_renderTargets;
 

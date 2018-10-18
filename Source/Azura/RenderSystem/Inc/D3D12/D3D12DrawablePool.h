@@ -5,6 +5,8 @@
 #include "D3D12/D3D12Core.h"
 #include "D3D12/D3D12ScopedPipeline.h"
 #include "D3D12/D3D12Drawable.h"
+#include "D3D12/D3D12ScopedBuffer.h"
+#include "D3D12/D3D12ScopedCommandBuffer.h"
 
 
 namespace Azura {
@@ -16,6 +18,7 @@ public:
   D3D12DrawablePool(const Microsoft::WRL::ComPtr<ID3D12Device>& device,
                     const DrawablePoolCreateInfo& createInfo,
                     const DescriptorCount& descriptorCount,
+                    const Containers::Vector<DescriptorSlot>& descriptorSlots,
                     const Containers::Vector<D3D12ScopedShader>& shaders,
                     Memory::Allocator& mainAllocator,
                     Memory::Allocator& initAllocator,
@@ -34,6 +37,8 @@ public:
 
   ID3D12DescriptorHeap* GetDescriptorHeap() const;
   ID3D12RootSignature* GetRootSignature() const;
+  ID3D12PipelineState * GetPipelineState() const;
+  ID3D12GraphicsCommandList* GetSecondaryCommandList() const;
 
 private:
   void CreateRootSignature(const Microsoft::WRL::ComPtr<ID3D12Device>& device);
@@ -43,12 +48,18 @@ private:
   Log log_D3D12RenderSystem;
 
   const Microsoft::WRL::ComPtr<ID3D12Device>& m_device;
+  const Containers::Vector<DescriptorSlot>& m_descriptorSlots;
   const Containers::Vector<D3D12ScopedShader>& m_shaders;
 
   Containers::Vector<D3D12ScopedPipeline> m_pipelines;
   Containers::Vector<D3D12Drawable> m_drawables;
 
   D3D12PipelineFactory m_pipelineFactory;
+  D3D12ScopedBuffer m_stagingBuffer;
+
+  D3D12ScopedCommandBuffer m_secondaryCommandBuffer;
+
+  U32 m_descriptorsPerDrawable{0};
 
   Microsoft::WRL::ComPtr<ID3D12RootSignature> m_rootSignature;
   Microsoft::WRL::ComPtr<ID3D12DescriptorHeap> m_descriptorHeap;

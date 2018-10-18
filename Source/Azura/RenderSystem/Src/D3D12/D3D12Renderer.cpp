@@ -25,19 +25,23 @@ D3D12Renderer::D3D12Renderer(const ApplicationInfo& appInfo,
     m_perFrameAllocator(m_perFrameBuffer, 8192),
     m_initBuffer(0x400000),
     m_initAllocator(m_initBuffer, 0x400000),
-    m_renderTargets(swapChainRequirements.m_framesInFlight, mainAllocator),
+    m_renderTargets(mainAllocator),
     m_drawablePools(renderPassRequirements.m_maxPools, drawAllocator),
     m_shaders(shaderRequirements.m_shaders.GetSize(), mainAllocator),
     m_primaryCommandBuffers(swapChainRequirements.m_framesInFlight, mainAllocator) {
   UNUSED(renderPassRequirements);
   UNUSED(shaderRequirements);
 
+  const auto viewportDimensions = window.GetViewport();
+  m_viewport                    = CD3DX12_VIEWPORT(0.0f, 0.0f, viewportDimensions.m_width, viewportDimensions.m_height);
+  m_scissorRect                 = CD3DX12_RECT(0, 0, static_cast<LONG>(viewportDimensions.m_width),
+                                               static_cast<LONG>(viewportDimensions.m_height));
+
   UINT dxgiFactoryFlags = 0;
 
 #ifdef BUILD_DEBUG
   ComPtr<ID3D12Debug> debugController;
-  if (SUCCEEDED(D3D12GetDebugInterface(IID_PPV_ARGS(&debugController))))
-  {
+  if (SUCCEEDED(D3D12GetDebugInterface(IID_PPV_ARGS(&debugController)))) {
     debugController->EnableDebugLayer();
 
     // Enable additional debug layers.
@@ -46,21 +50,25 @@ D3D12Renderer::D3D12Renderer(const ApplicationInfo& appInfo,
 #endif
 
   ComPtr<IDXGIFactory4> factory;
-  VERIFY_D3D_OP(log_D3D12RenderSystem, CreateDXGIFactory2(dxgiFactoryFlags, IID_PPV_ARGS(&factory)), "Failed to create DXGI Factory");
+  VERIFY_D3D_OP(log_D3D12RenderSystem, CreateDXGIFactory2(dxgiFactoryFlags, IID_PPV_ARGS(&factory)),
+    "Failed to create DXGI Factory");
 
   ComPtr<IDXGIAdapter1> hardwareAdapter;
   D3D12Core::GetHardwareAdapter(factory.Get(), &hardwareAdapter);
 
-  VERIFY_D3D_OP(log_D3D12RenderSystem, D3D12CreateDevice(hardwareAdapter.Get(), D3D_FEATURE_LEVEL_11_0, IID_PPV_ARGS(&m_device)), "Failed to create D3D12 Device");
+  VERIFY_D3D_OP(log_D3D12RenderSystem, D3D12CreateDevice(hardwareAdapter.Get(), D3D_FEATURE_LEVEL_11_0, IID_PPV_ARGS(&
+    m_device)), "Failed to create D3D12 Device");
 
   // Describe and create the command queue.
   D3D12_COMMAND_QUEUE_DESC queueDesc = {};
-  queueDesc.Flags = D3D12_COMMAND_QUEUE_FLAG_NONE;
-  queueDesc.Type = D3D12_COMMAND_LIST_TYPE_DIRECT;
+  queueDesc.Flags                    = D3D12_COMMAND_QUEUE_FLAG_NONE;
+  queueDesc.Type                     = D3D12_COMMAND_LIST_TYPE_DIRECT;
 
-  VERIFY_D3D_OP(log_D3D12RenderSystem, m_device->CreateCommandQueue(&queueDesc, IID_PPV_ARGS(&m_commandQueue)), "Failed to create command Queue");
+  VERIFY_D3D_OP(log_D3D12RenderSystem, m_device->CreateCommandQueue(&queueDesc, IID_PPV_ARGS(&m_commandQueue)),
+    "Failed to create command Queue");
 
-  auto swapChain = D3D12Core::CreateSwapChain(factory, m_commandQueue, m_window.get().GetHandle(), swapChainRequirements, log_D3D12RenderSystem);
+  auto swapChain = D3D12Core::CreateSwapChain(factory, m_commandQueue, m_window.get().GetHandle(),
+                                              swapChainRequirements, log_D3D12RenderSystem);
   VERIFY_D3D_OP(log_D3D12RenderSystem, swapChain.As(&m_swapChain), "Swapchain typecast failed");
 
   SetCurrentFrame(m_swapChain->GetCurrentBackBufferIndex());
@@ -72,28 +80,42 @@ D3D12Renderer::D3D12Renderer(const ApplicationInfo& appInfo,
   // TODO(vasumahesh1):[RENDER-PASS]: We might need to create multiple RTV per pass
   // Describe and create a render target view (RTV) descriptor heap.
   D3D12_DESCRIPTOR_HEAP_DESC rtvHeapDesc = {};
-  rtvHeapDesc.NumDescriptors = swapChainRequirements.m_framesInFlight;
-  rtvHeapDesc.Type = D3D12_DESCRIPTOR_HEAP_TYPE_RTV;
-  rtvHeapDesc.Flags = D3D12_DESCRIPTOR_HEAP_FLAG_NONE;
-  VERIFY_D3D_OP(log_D3D12RenderSystem, m_device->CreateDescriptorHeap(&rtvHeapDesc, IID_PPV_ARGS(&m_rtvHeap)), "Failed to create descriptor heaps for RTV");
+  rtvHeapDesc.NumDescriptors             = swapChainRequirements.m_framesInFlight;
+  rtvHeapDesc.Type                       = D3D12_DESCRIPTOR_HEAP_TYPE_RTV;
+  rtvHeapDesc.Flags                      = D3D12_DESCRIPTOR_HEAP_FLAG_NONE;
+  VERIFY_D3D_OP(log_D3D12RenderSystem, m_device->CreateDescriptorHeap(&rtvHeapDesc, IID_PPV_ARGS(&m_rtvHeap)),
+    "Failed to create descriptor heaps for RTV");
 
   m_rtvDescriptorSize = m_device->GetDescriptorHandleIncrementSize(D3D12_DESCRIPTOR_HEAP_TYPE_RTV);
 
   // Create Frame buffers
   CD3DX12_CPU_DESCRIPTOR_HANDLE rtvHandle(m_rtvHeap->GetCPUDescriptorHandleForHeapStart());
 
+  m_renderTargets.Resize(swapChainRequirements.m_framesInFlight);
+
   // Create a RTV for each frame.
-  for (UINT n = 0; n < swapChainRequirements.m_framesInFlight; n++)
-  {
-    VERIFY_D3D_OP(log_D3D12RenderSystem, m_swapChain->GetBuffer(n, IID_PPV_ARGS(&m_renderTargets[n])), "Failed to get swapchain buffer");
+  for (UINT n = 0; n < swapChainRequirements.m_framesInFlight; n++) {
+    VERIFY_D3D_OP(log_D3D12RenderSystem, m_swapChain->GetBuffer(n, IID_PPV_ARGS(&m_renderTargets[n])),
+      "Failed to get swapchain buffer");
     m_device->CreateRenderTargetView(m_renderTargets[n].Get(), nullptr, rtvHandle);
     rtvHandle.Offset(1, m_rtvDescriptorSize);
   }
 
-  for (UINT n = 0; n < swapChainRequirements.m_framesInFlight; n++)
-  {
-    D3D12ScopedCommandBuffer primaryCmdBuffer = D3D12ScopedCommandBuffer(m_device, D3D12_COMMAND_LIST_TYPE_DIRECT, log_D3D12RenderSystem);
+  for (UINT n                                 = 0; n < swapChainRequirements.m_framesInFlight; n++) {
+    D3D12ScopedCommandBuffer primaryCmdBuffer = D3D12ScopedCommandBuffer(m_device, D3D12_COMMAND_LIST_TYPE_DIRECT,
+                                                                         log_D3D12RenderSystem);
+    primaryCmdBuffer.CreateGraphicsCommandList(m_device, nullptr, log_D3D12RenderSystem);
     m_primaryCommandBuffers.PushBack(primaryCmdBuffer);
+  }
+
+  VERIFY_D3D_OP(log_D3D12RenderSystem, m_device->CreateFence(m_fenceValue, D3D12_FENCE_FLAG_NONE, IID_PPV_ARGS(&m_fence)
+  ), "Failed to create fence");
+  m_fenceValue++;
+
+  // Create an event handle to use for frame synchronization.
+  m_fenceEvent = CreateEvent(nullptr, FALSE, FALSE, nullptr);
+  if (m_fenceEvent == nullptr) {
+    VERIFY_D3D_OP(log_D3D12RenderSystem, HRESULT_FROM_WIN32(GetLastError()), "Fence Event Null");
   }
 }
 
@@ -102,19 +124,84 @@ String D3D12Renderer::GetRenderingAPI() const {
 }
 
 DrawablePool& D3D12Renderer::CreateDrawablePool(const DrawablePoolCreateInfo& createInfo) {
-  D3D12DrawablePool pool = D3D12DrawablePool(m_device, createInfo, m_descriptorCount, m_shaders, m_drawPoolAllocator, m_initAllocator, log_D3D12RenderSystem);
+  D3D12DrawablePool pool = D3D12DrawablePool(m_device,
+                                             createInfo,
+                                             m_descriptorCount,
+                                             m_descriptorSlots,
+                                             m_shaders,
+                                             m_drawPoolAllocator,
+                                             m_initAllocator,
+                                             log_D3D12RenderSystem);
+
   m_drawablePools.PushBack(std::move(pool));
 
   return m_drawablePools.Last();
 }
 
 void D3D12Renderer::Submit() {
+  for (auto& drawablePool : m_drawablePools) {
+    drawablePool.Submit();
+  }
+
+  U32 idx = 0;
+  for (auto& primaryBuffer : m_primaryCommandBuffers) {
+    auto commandList = primaryBuffer.GetGraphicsCommandList();
+
+    CD3DX12_RESOURCE_BARRIER backBufferBarrierStart = CD3DX12_RESOURCE_BARRIER::Transition(m_renderTargets[idx].Get(),
+                                                                                           D3D12_RESOURCE_STATE_PRESENT,
+                                                                                           D3D12_RESOURCE_STATE_RENDER_TARGET);
+    CD3DX12_RESOURCE_BARRIER backBufferBarrierEnd = CD3DX12_RESOURCE_BARRIER::Transition(m_renderTargets[idx].Get(),
+                                                                                         D3D12_RESOURCE_STATE_RENDER_TARGET,
+                                                                                         D3D12_RESOURCE_STATE_PRESENT);
+
+    commandList->RSSetViewports(1, &m_viewport);
+    commandList->RSSetScissorRects(1, &m_scissorRect);
+
+    commandList->ResourceBarrier(1, &backBufferBarrierStart);
+
+    CD3DX12_CPU_DESCRIPTOR_HANDLE rtvHandle(m_rtvHeap->GetCPUDescriptorHandleForHeapStart(), idx, m_rtvDescriptorSize);
+    commandList->OMSetRenderTargets(1, &rtvHandle, FALSE, nullptr);
+
+    const float clearColor[] = {0.2f, 0.2f, 0.2f, 1.0f};
+    commandList->ClearRenderTargetView(rtvHandle, clearColor, 0, nullptr); // NOLINT
+
+    for (auto& drawablePool : m_drawablePools) {
+      commandList->SetPipelineState(drawablePool.GetPipelineState());
+      commandList->SetGraphicsRootSignature(drawablePool.GetRootSignature());
+
+      ID3D12DescriptorHeap* ppHeaps[] = {drawablePool.GetDescriptorHeap()};
+      commandList->SetDescriptorHeaps(_countof(ppHeaps), ppHeaps); // NOLINT
+
+      commandList->ExecuteBundle(drawablePool.GetSecondaryCommandList());
+    }
+
+    commandList->ResourceBarrier(1, &backBufferBarrierEnd);
+
+    commandList->Close();
+    ++idx;
+  }
 }
 
 void D3D12Renderer::RenderFrame() {
+  EnterRenderFrame();
+
+  const auto& currentFrame = GetCurrentFrame();
+
+  ID3D12CommandList* ppCommandLists[] = {m_primaryCommandBuffers[currentFrame].GetGraphicsCommandList()};
+  m_commandQueue->ExecuteCommandLists(_countof(ppCommandLists), ppCommandLists); // NOLINT
+
+  // Present and update the frame index for the next frame.
+  VERIFY_D3D_OP(log_D3D12RenderSystem, m_swapChain->Present(1, 0), "Present Failed");
+
+  // Signal and increment the fence value.
+  VERIFY_D3D_OP(log_D3D12RenderSystem, m_commandQueue->Signal(m_fence.Get(), m_fenceValue), "Fence wait failed");
+  m_fenceValue++;
+
+  ExitRenderFrame();
 }
 
 void D3D12Renderer::SnapshotFrame(const String& exportPath) const {
+  LOG_DBG(log_D3D12RenderSystem, LOG_LEVEL, "Exporting Screenshot: %s", exportPath.c_str());
 }
 
 void D3D12Renderer::AddShader(const ShaderCreateInfo& info) {

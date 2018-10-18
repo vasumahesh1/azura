@@ -24,7 +24,6 @@ namespace D3D12 {
 
     D3D12PipelineFactory& BulkAddAttributeDescription(const VertexSlot& vertexSlot, U32 binding);
 
-    D3D12PipelineFactory& SetInputAssemblyStage(PrimitiveTopology topology);
     D3D12PipelineFactory& AddShaderStage(const D3D12ScopedShader& shader);
 
     void Submit(const Microsoft::WRL::ComPtr<ID3D12Device>& device, const Microsoft::WRL::ComPtr<ID3D12RootSignature>& rootSignature, Containers::Vector<D3D12ScopedPipeline>& resultPipelines) const;
