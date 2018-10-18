@@ -34,3 +34,9 @@ struct UVPixelInput
   float4 pos : SV_Position;
   float2 uv : UV;
 };
+
+struct TextureState {
+  SamplerState linearSampler;
+  Texture2D target;
+};
+

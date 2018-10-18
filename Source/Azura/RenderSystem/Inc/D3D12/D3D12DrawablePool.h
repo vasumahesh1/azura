@@ -2,6 +2,8 @@
 #include "Generic/Drawable.h"
 #include "Log/Log.h"
 
+#include <array>
+
 #include "D3D12/D3D12Core.h"
 #include "D3D12/D3D12ScopedPipeline.h"
 #include "D3D12/D3D12Drawable.h"
@@ -33,9 +35,10 @@ public:
   void AddShader(U32 shaderId) override;
   void BindTextureData(SlotID slot, const TextureDesc& desc, const U8* buffer) override;
   void BindSampler(SlotID slot, const SamplerDesc& desc) override;
+  void SetTextureData(ID3D12GraphicsCommandList* bundleCommandList);
   void Submit() override;
 
-  ID3D12DescriptorHeap* GetDescriptorHeap() const;
+  const Containers::Vector<ID3D12DescriptorHeap*>& GetAllDescriptorHeaps() const;
   ID3D12RootSignature* GetRootSignature() const;
   ID3D12PipelineState * GetPipelineState() const;
   ID3D12GraphicsCommandList* GetSecondaryCommandList() const;
@@ -57,12 +60,20 @@ private:
   D3D12PipelineFactory m_pipelineFactory;
   D3D12ScopedBuffer m_stagingBuffer;
 
+  U32 m_descriptorsPerDrawable;
+  U32 m_offsetForCommonDescriptors{};
+
+  U32 m_cbvSrvDescriptorElementSize{0};
+
+  Containers::Vector<D3D12DescriptorEntry> m_descriptorTableSizes;
   D3D12ScopedCommandBuffer m_secondaryCommandBuffer;
 
-  U32 m_descriptorsPerDrawable{0};
-
   Microsoft::WRL::ComPtr<ID3D12RootSignature> m_rootSignature;
-  Microsoft::WRL::ComPtr<ID3D12DescriptorHeap> m_descriptorHeap;
+  Microsoft::WRL::ComPtr<ID3D12DescriptorHeap> m_descriptorDrawableHeap;
+  Microsoft::WRL::ComPtr<ID3D12DescriptorHeap> m_descriptorTextureHeap;
+  Microsoft::WRL::ComPtr<ID3D12DescriptorHeap> m_descriptorSamplerHeap;
+
+  Containers::Vector<ID3D12DescriptorHeap*> m_allHeaps;
 };
 
 } // namespace D3D12

@@ -7,8 +7,12 @@
 namespace Azura {
 namespace D3D12 {
 
-class D3D12Drawable : public Drawable
-{
+struct D3D12DescriptorEntry {
+  int m_count{1};
+  int m_cumulativeCount{0};
+};
+
+class D3D12Drawable : public Drawable {
 
 public:
   D3D12Drawable(const DrawableCreateInfo& info,
@@ -17,9 +21,19 @@ public:
                 U32 numUniformSlots,
                 Memory::Allocator& allocator);
 
-  void CreateResourceViews(const Microsoft::WRL::ComPtr<ID3D12Device>& device, ID3D12Resource* parentBuffer, const Containers::Vector<VertexSlot>& vertexSlots, CD3DX12_CPU_DESCRIPTOR_HANDLE drawableHeapHandle, UINT heapElementSize, const Log& log_D3D12RenderSystem);
+  void CreateResourceViews(const Microsoft::WRL::ComPtr<ID3D12Device>& device,
+                           ID3D12Resource* parentBuffer,
+                           const Containers::Vector<VertexSlot>& vertexSlots,
+                           CD3DX12_CPU_DESCRIPTOR_HANDLE drawableHeapHandle,
+                           UINT heapElementSize,
+                           const Containers::Vector<D3D12DescriptorEntry>& descriptorEntry,
+                           const Log& log_D3D12RenderSystem);
 
-  void RecordCommands(ID3D12GraphicsCommandList* commandList, CD3DX12_GPU_DESCRIPTOR_HANDLE drawableHeapHandle, UINT heapElementSize, const Log& log_D3D12RenderSystem);
+  void RecordCommands(ID3D12GraphicsCommandList* commandList,
+                      CD3DX12_GPU_DESCRIPTOR_HANDLE drawableHeapHandle,
+                      UINT heapElementSize,
+                      const Containers::Vector<D3D12DescriptorEntry>& descriptorEntry,
+                      const Log& log_D3D12RenderSystem);
 
 private:
 

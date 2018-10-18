@@ -1,5 +1,6 @@
 #include "D3D12/D3D12Drawable.h"
 #include "D3D12/D3D12TypeMapping.h"
+#include <algorithm>
 
 namespace Azura {
 namespace D3D12 {
@@ -16,15 +17,30 @@ D3D12Drawable::D3D12Drawable(const DrawableCreateInfo& info,
     m_indexBufferView() {
 }
 
-void D3D12Drawable::CreateResourceViews(const Microsoft::WRL::ComPtr<ID3D12Device>& device, ID3D12Resource* parentBuffer, const Containers::Vector<VertexSlot>& vertexSlots, CD3DX12_CPU_DESCRIPTOR_HANDLE drawableHeapHandle, UINT heapElementSize, const Log& log_D3D12RenderSystem) {
+void D3D12Drawable::CreateResourceViews(const Microsoft::WRL::ComPtr<ID3D12Device>& device, ID3D12Resource* parentBuffer, const Containers::Vector<VertexSlot>& vertexSlots, CD3DX12_CPU_DESCRIPTOR_HANDLE drawableHeapHandle, UINT heapElementSize, const Containers::Vector<D3D12DescriptorEntry>& descriptorEntry, const Log& log_D3D12RenderSystem) {
   const auto gpuAddress = parentBuffer->GetGPUVirtualAddress();
+  
+  std::sort(m_uniformBufferInfos.Begin(), m_uniformBufferInfos.End(), [](const UniformBufferInfo& a, const UniformBufferInfo& b) -> bool
+  {
+    if (a.m_set == b.m_set)
+    {
+      return a.m_binding < b.m_binding;
+    }
+
+    return a.m_set < b.m_set;
+  });
+  
   for (const auto& ubInfo : m_uniformBufferInfos) {
+    const U32 offsetInHeap = descriptorEntry[ubInfo.m_set].m_cumulativeCount + ubInfo.m_binding;
+
+    CD3DX12_CPU_DESCRIPTOR_HANDLE handle;
+    CD3DX12_CPU_DESCRIPTOR_HANDLE::InitOffsetted(handle, drawableHeapHandle, heapElementSize *  offsetInHeap);
+
     D3D12_CONSTANT_BUFFER_VIEW_DESC constantBufferViewDesc = {
       gpuAddress + ubInfo.m_offset, ubInfo.m_byteSize
     };
 
-    device->CreateConstantBufferView(&constantBufferViewDesc, drawableHeapHandle);
-    drawableHeapHandle.Offset(heapElementSize);
+    device->CreateConstantBufferView(&constantBufferViewDesc, handle);
   }
 
   for (const auto& vbInfos : m_vertexBufferInfos) {
@@ -57,7 +73,7 @@ void D3D12Drawable::CreateResourceViews(const Microsoft::WRL::ComPtr<ID3D12Devic
   };
 }
 
-void D3D12Drawable::RecordCommands(ID3D12GraphicsCommandList* commandList, CD3DX12_GPU_DESCRIPTOR_HANDLE drawableHeapHandle, UINT heapElementSize, const Log& log_D3D12RenderSystem) {
+void D3D12Drawable::RecordCommands(ID3D12GraphicsCommandList* commandList, CD3DX12_GPU_DESCRIPTOR_HANDLE drawableHeapHandle, UINT heapElementSize, const Containers::Vector<D3D12DescriptorEntry>& descriptorEntry, const Log& log_D3D12RenderSystem) {
   LOG_DBG(log_D3D12RenderSystem, LOG_LEVEL, "D3D12Drawable: Recording Commands for Drawable");
   
   commandList->IASetIndexBuffer(&m_indexBufferView);
@@ -74,10 +90,21 @@ void D3D12Drawable::RecordCommands(ID3D12GraphicsCommandList* commandList, CD3DX
     ++idx;
   }
 
-  idx = 0;
+  int lastSet = -1;
   for (const auto& ubInfo : m_uniformBufferInfos) {
-    drawableHeapHandle.Offset(idx * heapElementSize);
-    commandList->SetGraphicsRootDescriptorTable(ubInfo.m_set, drawableHeapHandle);
+
+    if (int(ubInfo.m_set) == lastSet)
+    {
+      continue;
+    }
+
+    lastSet = ubInfo.m_set;
+
+    const U32 offsetInHeap = descriptorEntry[ubInfo.m_set].m_cumulativeCount;
+
+    CD3DX12_GPU_DESCRIPTOR_HANDLE handle;
+    CD3DX12_GPU_DESCRIPTOR_HANDLE::InitOffsetted(handle, drawableHeapHandle, heapElementSize * offsetInHeap);
+    commandList->SetGraphicsRootDescriptorTable(ubInfo.m_set, handle);
     ++idx;
   }
 

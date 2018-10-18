@@ -102,6 +102,10 @@ void AppRenderer::Initialize() {
 
   DrawablePool& pool = m_renderer->CreateDrawablePool(poolInfo);
 
+  // TODO(vasumahesh1): Remove when render passes added
+  pool.AddShader(VERTEX_SHADER_ID);
+  pool.AddShader(PIXEL_SHADER_ID);
+
   Vector<Vertex> vertexData = Vector<Vertex>({
     Vertex{{0, 0, 1, 1}, {1, 0, 0, 1}},
     Vertex{{1, 0, 1, 1}, {0, 1, 0, 1}},

@@ -2,8 +2,11 @@
 
 #include "D3D12/d3dx12.h"
 #include "D3D12/D3D12Macros.h"
+#include "Memory/MemoryFactory.h"
+#include "Memory/MonotonicAllocator.h"
 
 using namespace Microsoft::WRL; // NOLINT
+using namespace Azura::Containers; // NOLINT
 
 namespace Azura {
 namespace D3D12 {
@@ -24,7 +27,10 @@ D3D12DrawablePool::D3D12DrawablePool(const ComPtr<ID3D12Device>& device,
     m_pipelines(mainAllocator),
     m_drawables(createInfo.m_numDrawables , mainAllocator),
     m_pipelineFactory(initAllocator, log_D3D12RenderSystem),
-    m_secondaryCommandBuffer(device, D3D12_COMMAND_LIST_TYPE_BUNDLE, log_D3D12RenderSystem) {
+    m_descriptorsPerDrawable(descriptorCount.m_numUniformSlots),
+    m_descriptorTableSizes(mainAllocator),
+    m_secondaryCommandBuffer(device, D3D12_COMMAND_LIST_TYPE_BUNDLE, log_D3D12RenderSystem),
+    m_allHeaps(mainAllocator) {
   LOG_DBG(log_D3D12RenderSystem, LOG_LEVEL, "Creating D3D12 Drawable Pool");
   CreateRootSignature(device);
   CreateInputAttributes(createInfo);
@@ -141,9 +147,28 @@ void D3D12DrawablePool::BindSampler(SlotID slot, const SamplerDesc& desc) {
   UNUSED(desc);
 }
 
+void D3D12DrawablePool::SetTextureData(ID3D12GraphicsCommandList* bundleCommandList)
+{
+  if (m_textureBufferInfos.GetSize() == 0)
+  {
+    return;
+  }
+
+  LOG_DBG(log_D3D12RenderSystem, LOG_LEVEL, "D3D12 Drawable Pool: Texture Data Found");
+
+  const CD3DX12_GPU_DESCRIPTOR_HANDLE textureGPUHandle(m_descriptorTextureHeap->GetGPUDescriptorHandleForHeapStart());
+  for (const auto& textBufInfo : m_textureBufferInfos) {
+    const U32 offsetInHeap = m_descriptorTableSizes[textBufInfo.m_set].m_cumulativeCount;
+
+    CD3DX12_GPU_DESCRIPTOR_HANDLE handle;
+    CD3DX12_GPU_DESCRIPTOR_HANDLE::InitOffsetted(handle, textureGPUHandle, m_cbvSrvDescriptorElementSize * offsetInHeap);
+
+    bundleCommandList->SetGraphicsRootDescriptorTable(textBufInfo.m_set, handle);
+  }
+}
+
 void D3D12DrawablePool::Submit() {
   LOG_DBG(log_D3D12RenderSystem, LOG_LEVEL, "D3D12 Drawable Pool: Submitting");
-
   m_pipelineFactory.Submit(m_device, m_rootSignature, m_pipelines);
 
   LOG_DBG(log_D3D12RenderSystem, LOG_LEVEL, "D3D12 Drawable Pool: Created Pipelines");
@@ -151,47 +176,40 @@ void D3D12DrawablePool::Submit() {
   m_secondaryCommandBuffer.CreateGraphicsCommandList(m_device, m_pipelines[0].GetState(), log_D3D12RenderSystem);
   auto bundleCommandList = m_secondaryCommandBuffer.GetGraphicsCommandList();
 
-  const auto heapElementSize = m_device->GetDescriptorHandleIncrementSize(D3D12_DESCRIPTOR_HEAP_TYPE_CBV_SRV_UAV);
+  m_cbvSrvDescriptorElementSize = m_device->GetDescriptorHandleIncrementSize(D3D12_DESCRIPTOR_HEAP_TYPE_CBV_SRV_UAV);
+  const U32 heapStepOffset = m_descriptorsPerDrawable * m_cbvSrvDescriptorElementSize;
 
-  CD3DX12_CPU_DESCRIPTOR_HANDLE heapHandle(m_descriptorHeap->GetCPUDescriptorHandleForHeapStart());
+  CD3DX12_CPU_DESCRIPTOR_HANDLE heapHandle(m_descriptorDrawableHeap->GetCPUDescriptorHandleForHeapStart());
 
   LOG_DBG(log_D3D12RenderSystem, LOG_LEVEL, "D3D12 Drawable Pool: Creating Resource Views");
 
-  U32 idx = 0;
   for (auto& drawable : m_drawables) {
-    const U32 heapOffset = idx * m_descriptorsPerDrawable * heapElementSize;
-    heapHandle.Offset(heapOffset);
-
-    drawable.CreateResourceViews(m_device, m_stagingBuffer.Real(), m_vertexDataSlots, heapHandle, heapElementSize, log_D3D12RenderSystem);
-    ++idx;
+    drawable.CreateResourceViews(m_device, m_stagingBuffer.Real(), m_vertexDataSlots, heapHandle, m_cbvSrvDescriptorElementSize, m_descriptorTableSizes, log_D3D12RenderSystem);
+    heapHandle.Offset(heapStepOffset);
   }
 
   LOG_DBG(log_D3D12RenderSystem, LOG_LEVEL, "D3D12 Drawable Pool: Created Resource Views");
 
-  ID3D12DescriptorHeap* ppHeaps[] = { m_descriptorHeap.Get() };
-  bundleCommandList->SetDescriptorHeaps(_countof(ppHeaps), ppHeaps); // NOLINT
+  bundleCommandList->SetDescriptorHeaps(UINT(m_allHeaps.GetSize()), m_allHeaps.Data());
   bundleCommandList->IASetPrimitiveTopology(D3D_PRIMITIVE_TOPOLOGY_TRIANGLELIST);
   bundleCommandList->SetGraphicsRootSignature(m_rootSignature.Get());
 
-  CD3DX12_GPU_DESCRIPTOR_HANDLE gpuHeapHandle(m_descriptorHeap->GetGPUDescriptorHandleForHeapStart());
+  SetTextureData(bundleCommandList);  
 
+  CD3DX12_GPU_DESCRIPTOR_HANDLE gpuHeapHandle(m_descriptorDrawableHeap->GetGPUDescriptorHandleForHeapStart());
   LOG_DBG(log_D3D12RenderSystem, LOG_LEVEL, "D3D12 Drawable Pool: Recording Commands");
 
-  idx = 0;
   for (auto& drawable : m_drawables) {
-    const U32 heapOffset = idx * m_descriptorsPerDrawable * heapElementSize;
-    gpuHeapHandle.Offset(heapOffset);
-
-    drawable.RecordCommands(bundleCommandList, gpuHeapHandle, heapElementSize, log_D3D12RenderSystem);
-    ++idx;
+    drawable.RecordCommands(bundleCommandList, gpuHeapHandle, m_cbvSrvDescriptorElementSize, m_descriptorTableSizes, log_D3D12RenderSystem);
+    gpuHeapHandle.Offset(heapStepOffset);
   }
 
   LOG_DBG(log_D3D12RenderSystem, LOG_LEVEL, "D3D12 Drawable Pool: Closing Bundle Command Buffer");
   VERIFY_D3D_OP(log_D3D12RenderSystem, bundleCommandList->Close(), "Failed to close bundle Command Buffer");
 }
 
-ID3D12DescriptorHeap* D3D12DrawablePool::GetDescriptorHeap() const {
-  return m_descriptorHeap.Get();
+const Containers::Vector<ID3D12DescriptorHeap*>& D3D12DrawablePool::GetAllDescriptorHeaps() const {
+  return m_allHeaps;
 }
 
 ID3D12RootSignature* D3D12DrawablePool::GetRootSignature() const {
@@ -208,15 +226,74 @@ ID3D12GraphicsCommandList* D3D12DrawablePool::GetSecondaryCommandList() const {
 
 void D3D12DrawablePool::CreateRootSignature(const ComPtr<ID3D12Device>& device) {
   LOG_DBG(log_D3D12RenderSystem, LOG_LEVEL, "D3D12 Drawable Pool: Creating Root Signature");
+  STACK_ALLOCATOR(Temporary, Memory::MonotonicAllocator, 2048);
 
-  CD3DX12_DESCRIPTOR_RANGE range;
-  CD3DX12_ROOT_PARAMETER parameter;
+  m_descriptorTableSizes.Reserve(m_descriptorSlots.GetSize());
 
-  range.Init(D3D12_DESCRIPTOR_RANGE_TYPE_CBV, 1, 0);
-  parameter.InitAsDescriptorTable(1, &range, D3D12_SHADER_VISIBILITY_VERTEX);
+  int totalCount = 0;
+  for (const auto& slot : m_descriptorSlots) {
+    if (slot.m_binding == DescriptorBinding::Same) {
+      m_descriptorTableSizes.Last().m_count += 1;
+
+      ++totalCount;
+      continue;
+    }
+
+    m_descriptorTableSizes.PushBack({1, totalCount});
+    ++totalCount;
+  }
+
+  Vector<CD3DX12_ROOT_PARAMETER> descriptorTables(m_descriptorTableSizes.GetSize(), allocatorTemporary);
+
+  int offset = 0;
+  for (const auto& bindingSize : m_descriptorTableSizes) {
+    Vector<CD3DX12_DESCRIPTOR_RANGE> currentRanges(bindingSize.m_count, allocatorTemporary);
+
+    U32 cbvOffset = 0;
+    U32 srvOffset = 0;
+    U32 samplerOffset = 0;
+
+    for (int idx = offset; idx < offset + bindingSize.m_count; ++idx) {
+      CD3DX12_DESCRIPTOR_RANGE rangeData;
+
+      const auto& slot = m_descriptorSlots[idx];
+
+      switch (slot.m_type) {
+      case DescriptorType::UniformBuffer:
+        rangeData.Init(D3D12_DESCRIPTOR_RANGE_TYPE_CBV, 1, cbvOffset);
+        currentRanges.PushBack(rangeData);
+        ++cbvOffset;
+        break;
+
+      case DescriptorType::Sampler:
+        rangeData.Init(D3D12_DESCRIPTOR_RANGE_TYPE_SAMPLER, 1, samplerOffset);
+        currentRanges.PushBack(rangeData);
+        ++samplerOffset;
+        break;
+
+      case DescriptorType::SampledImage:
+        rangeData.Init(D3D12_DESCRIPTOR_RANGE_TYPE_SRV, 1, srvOffset);
+        currentRanges.PushBack(rangeData);
+        ++srvOffset;
+        break;
+
+      case DescriptorType::PushConstant:
+      case DescriptorType::CombinedImageSampler:
+      default:
+        LOG_ERR(log_D3D12RenderSystem, LOG_LEVEL, "Unsupported Descriptor Type");
+        break;
+      }
+
+      CD3DX12_ROOT_PARAMETER rootParameter;
+      rootParameter.InitAsDescriptorTable(currentRanges.GetSize(), currentRanges.Data(), D3D12_SHADER_VISIBILITY_ALL);
+      descriptorTables.PushBack(rootParameter);
+    }
+
+    offset += bindingSize.m_count;
+  }
 
   CD3DX12_ROOT_SIGNATURE_DESC rootSignatureDesc;
-  rootSignatureDesc.Init(1, &parameter, 0, nullptr, D3D12_ROOT_SIGNATURE_FLAG_ALLOW_INPUT_ASSEMBLER_INPUT_LAYOUT);
+  rootSignatureDesc.Init(descriptorTables.GetSize(), descriptorTables.Data(), 0, nullptr, D3D12_ROOT_SIGNATURE_FLAG_ALLOW_INPUT_ASSEMBLER_INPUT_LAYOUT);
 
   ComPtr<ID3DBlob> signature;
   ComPtr<ID3DBlob> error;
@@ -235,13 +312,34 @@ void D3D12DrawablePool::CreateInputAttributes(const DrawablePoolCreateInfo& crea
 }
 
 void D3D12DrawablePool::CreateDescriptorHeap(const DrawablePoolCreateInfo& createInfo) {
-  m_descriptorsPerDrawable = m_descriptorCount.m_numUniformSlots + m_descriptorCount.m_numSampledImageSlots;
-
+  m_allHeaps.Reserve(3);
+  
   D3D12_DESCRIPTOR_HEAP_DESC heapDesc = {};
   heapDesc.NumDescriptors = createInfo.m_numDrawables * m_descriptorsPerDrawable;
   heapDesc.Type  = D3D12_DESCRIPTOR_HEAP_TYPE_CBV_SRV_UAV;
   heapDesc.Flags = D3D12_DESCRIPTOR_HEAP_FLAG_SHADER_VISIBLE;
-  VERIFY_D3D_OP(log_D3D12RenderSystem, m_device->CreateDescriptorHeap(&heapDesc, IID_PPV_ARGS(&m_descriptorHeap)), "Failed to create CBV SRV UAV Descriptor Heap");
+  VERIFY_D3D_OP(log_D3D12RenderSystem, m_device->CreateDescriptorHeap(&heapDesc, IID_PPV_ARGS(&m_descriptorDrawableHeap)), "Failed to create Drawable Descriptor Heap");
+  m_allHeaps.PushBack(m_descriptorDrawableHeap.Get());
+
+  if (m_descriptorCount.m_numSampledImageSlots > 0) {
+    D3D12_DESCRIPTOR_HEAP_DESC textureDesc = {};
+    textureDesc.NumDescriptors = m_descriptorCount.m_numSampledImageSlots;
+    textureDesc.Type = D3D12_DESCRIPTOR_HEAP_TYPE_CBV_SRV_UAV;
+    textureDesc.Flags = D3D12_DESCRIPTOR_HEAP_FLAG_SHADER_VISIBLE;
+    VERIFY_D3D_OP(log_D3D12RenderSystem, m_device->CreateDescriptorHeap(&textureDesc, IID_PPV_ARGS(&m_descriptorTextureHeap)), "Failed to create Texture Descriptor Heap");
+
+    m_allHeaps.PushBack(m_descriptorTextureHeap.Get());
+  }
+
+  if (m_descriptorCount.m_numSamplerSlots > 0) {
+    D3D12_DESCRIPTOR_HEAP_DESC samplerDesc = {};
+    samplerDesc.NumDescriptors = m_descriptorCount.m_numSamplerSlots;
+    samplerDesc.Type = D3D12_DESCRIPTOR_HEAP_TYPE_SAMPLER;
+    samplerDesc.Flags = D3D12_DESCRIPTOR_HEAP_FLAG_SHADER_VISIBLE;
+    VERIFY_D3D_OP(log_D3D12RenderSystem, m_device->CreateDescriptorHeap(&samplerDesc, IID_PPV_ARGS(&m_descriptorSamplerHeap)), "Failed to create Sampler Descriptor Heap");
+
+    m_allHeaps.PushBack(m_descriptorSamplerHeap.Get());
+  }
 }
 } // namespace D3D12
 } // namespace Azura

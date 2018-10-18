@@ -173,8 +173,8 @@ void D3D12Renderer::Submit() {
       commandList->SetPipelineState(drawablePool.GetPipelineState());
       commandList->SetGraphicsRootSignature(drawablePool.GetRootSignature());
 
-      ID3D12DescriptorHeap* ppHeaps[] = {drawablePool.GetDescriptorHeap()};
-      commandList->SetDescriptorHeaps(_countof(ppHeaps), ppHeaps); // NOLINT
+      const auto& allHeaps = drawablePool.GetAllDescriptorHeaps();
+      commandList->SetDescriptorHeaps(UINT(allHeaps.GetSize()), allHeaps.Data());
 
       commandList->ExecuteBundle(drawablePool.GetSecondaryCommandList());
     }
