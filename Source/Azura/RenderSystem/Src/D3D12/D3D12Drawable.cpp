@@ -20,7 +20,7 @@ void D3D12Drawable::CreateResourceViews(const Microsoft::WRL::ComPtr<ID3D12Devic
   const auto gpuAddress = parentBuffer->GetGPUVirtualAddress();
   for (const auto& ubInfo : m_uniformBufferInfos) {
     D3D12_CONSTANT_BUFFER_VIEW_DESC constantBufferViewDesc = {
-      gpuAddress + ubInfo.m_offset, sizeof(ubInfo.m_byteSize)
+      gpuAddress + ubInfo.m_offset, ubInfo.m_byteSize
     };
 
     device->CreateConstantBufferView(&constantBufferViewDesc, drawableHeapHandle);
@@ -74,9 +74,11 @@ void D3D12Drawable::RecordCommands(ID3D12GraphicsCommandList* commandList, CD3DX
     ++idx;
   }
 
+  idx = 0;
   for (const auto& ubInfo : m_uniformBufferInfos) {
+    drawableHeapHandle.Offset(idx * heapElementSize);
     commandList->SetGraphicsRootDescriptorTable(ubInfo.m_set, drawableHeapHandle);
-    drawableHeapHandle.Offset(heapElementSize);
+    ++idx;
   }
 
   commandList->DrawIndexedInstanced(GetIndexCount(), GetInstanceCount(), 0, 0, 0);

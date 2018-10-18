@@ -6,21 +6,21 @@ struct UBOData {
 
 struct BasicRenderTestVertexInput
 {
-  float4 in_Pos : IN_POSITION;
-  float4 in_Color : IN_COLOR;
+  float4 in_Pos : POSITION;
+  float4 in_Color : COLOR;
 };
 
 struct BasicInstanceTestVertexInput
 {
-  float4 in_Pos : IN_POSITION;
-  float4 in_Color : IN_COLOR;
-  float4 in_InstancePos : IN_INSTANCE_POS;
+  float4 in_Pos : POSITION;
+  float4 in_Color : COLOR;
+  float4 in_InstancePos : INSTANCE_POSITION;
 };
 
 struct BasicTextureTestVertexInput
 {
-  float4 in_Pos : IN_POSITION;
-  float2 in_UV : IN_UV;
+  float4 in_Pos : POSITION;
+  float2 in_UV : UV;
 };
 
 struct ColorPixelInput

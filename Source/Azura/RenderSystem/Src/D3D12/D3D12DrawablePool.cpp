@@ -93,6 +93,8 @@ void D3D12DrawablePool::BindUniformData(DrawableID drawableId, SlotID slot, cons
 
   auto& drawable = m_drawables[drawableId];
 
+  size = (size + D3D12_CONSTANT_BUFFER_DATA_PLACEMENT_ALIGNMENT - 1) & ~(D3D12_CONSTANT_BUFFER_DATA_PLACEMENT_ALIGNMENT - 1);
+
   // TODO(vasumahesh1):[INPUT]: Could be an issue with sizeof(float)
   const U32 offset = m_stagingBuffer.AppendData(buffer, size, D3D12_CONSTANT_BUFFER_DATA_PLACEMENT_ALIGNMENT, log_D3D12RenderSystem);
 
@@ -144,12 +146,16 @@ void D3D12DrawablePool::Submit() {
 
   m_pipelineFactory.Submit(m_device, m_rootSignature, m_pipelines);
 
+  LOG_DBG(log_D3D12RenderSystem, LOG_LEVEL, "D3D12 Drawable Pool: Created Pipelines");
+
   m_secondaryCommandBuffer.CreateGraphicsCommandList(m_device, m_pipelines[0].GetState(), log_D3D12RenderSystem);
   auto bundleCommandList = m_secondaryCommandBuffer.GetGraphicsCommandList();
 
   const auto heapElementSize = m_device->GetDescriptorHandleIncrementSize(D3D12_DESCRIPTOR_HEAP_TYPE_CBV_SRV_UAV);
 
   CD3DX12_CPU_DESCRIPTOR_HANDLE heapHandle(m_descriptorHeap->GetCPUDescriptorHandleForHeapStart());
+
+  LOG_DBG(log_D3D12RenderSystem, LOG_LEVEL, "D3D12 Drawable Pool: Creating Resource Views");
 
   U32 idx = 0;
   for (auto& drawable : m_drawables) {
@@ -160,11 +166,16 @@ void D3D12DrawablePool::Submit() {
     ++idx;
   }
 
+  LOG_DBG(log_D3D12RenderSystem, LOG_LEVEL, "D3D12 Drawable Pool: Created Resource Views");
+
   ID3D12DescriptorHeap* ppHeaps[] = { m_descriptorHeap.Get() };
   bundleCommandList->SetDescriptorHeaps(_countof(ppHeaps), ppHeaps); // NOLINT
   bundleCommandList->IASetPrimitiveTopology(D3D_PRIMITIVE_TOPOLOGY_TRIANGLELIST);
+  bundleCommandList->SetGraphicsRootSignature(m_rootSignature.Get());
 
   CD3DX12_GPU_DESCRIPTOR_HANDLE gpuHeapHandle(m_descriptorHeap->GetGPUDescriptorHandleForHeapStart());
+
+  LOG_DBG(log_D3D12RenderSystem, LOG_LEVEL, "D3D12 Drawable Pool: Recording Commands");
 
   idx = 0;
   for (auto& drawable : m_drawables) {
@@ -175,6 +186,7 @@ void D3D12DrawablePool::Submit() {
     ++idx;
   }
 
+  LOG_DBG(log_D3D12RenderSystem, LOG_LEVEL, "D3D12 Drawable Pool: Closing Bundle Command Buffer");
   VERIFY_D3D_OP(log_D3D12RenderSystem, bundleCommandList->Close(), "Failed to close bundle Command Buffer");
 }
 
@@ -196,8 +208,15 @@ ID3D12GraphicsCommandList* D3D12DrawablePool::GetSecondaryCommandList() const {
 
 void D3D12DrawablePool::CreateRootSignature(const ComPtr<ID3D12Device>& device) {
   LOG_DBG(log_D3D12RenderSystem, LOG_LEVEL, "D3D12 Drawable Pool: Creating Root Signature");
+
+  CD3DX12_DESCRIPTOR_RANGE range;
+  CD3DX12_ROOT_PARAMETER parameter;
+
+  range.Init(D3D12_DESCRIPTOR_RANGE_TYPE_CBV, 1, 0);
+  parameter.InitAsDescriptorTable(1, &range, D3D12_SHADER_VISIBILITY_VERTEX);
+
   CD3DX12_ROOT_SIGNATURE_DESC rootSignatureDesc;
-  rootSignatureDesc.Init(0, nullptr, 0, nullptr, D3D12_ROOT_SIGNATURE_FLAG_ALLOW_INPUT_ASSEMBLER_INPUT_LAYOUT);
+  rootSignatureDesc.Init(1, &parameter, 0, nullptr, D3D12_ROOT_SIGNATURE_FLAG_ALLOW_INPUT_ASSEMBLER_INPUT_LAYOUT);
 
   ComPtr<ID3DBlob> signature;
   ComPtr<ID3DBlob> error;

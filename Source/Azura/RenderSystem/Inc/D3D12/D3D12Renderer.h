@@ -62,7 +62,7 @@ private:
   U32 m_fenceValue{0};
   Microsoft::WRL::ComPtr<ID3D12Fence> m_fence;
 
-  Containers::Vector<Microsoft::WRL::ComPtr<ID3D12Resource>> m_renderTargets;
+  Microsoft::WRL::ComPtr<ID3D12Resource> m_renderTargets[GLOBAL_INFLIGHT_FRAMES];
 
   Containers::Vector<D3D12DrawablePool> m_drawablePools;
   Containers::Vector<D3D12ScopedShader> m_shaders;

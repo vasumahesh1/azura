@@ -11,6 +11,8 @@ class Window;
 
 struct DrawablePoolCreateInfo;
 
+constexpr U32 GLOBAL_INFLIGHT_FRAMES = 2;
+
 class Renderer {
 public:
   Renderer(ApplicationInfo appInfo,

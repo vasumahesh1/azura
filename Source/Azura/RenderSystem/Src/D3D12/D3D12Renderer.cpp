@@ -25,7 +25,6 @@ D3D12Renderer::D3D12Renderer(const ApplicationInfo& appInfo,
     m_perFrameAllocator(m_perFrameBuffer, 8192),
     m_initBuffer(0x400000),
     m_initAllocator(m_initBuffer, 0x400000),
-    m_renderTargets(mainAllocator),
     m_drawablePools(renderPassRequirements.m_maxPools, drawAllocator),
     m_shaders(shaderRequirements.m_shaders.GetSize(), mainAllocator),
     m_primaryCommandBuffers(swapChainRequirements.m_framesInFlight, mainAllocator) {
@@ -41,8 +40,12 @@ D3D12Renderer::D3D12Renderer(const ApplicationInfo& appInfo,
 
 #ifdef BUILD_DEBUG
   ComPtr<ID3D12Debug> debugController;
+  ComPtr<ID3D12Debug1> debugController1;
   if (SUCCEEDED(D3D12GetDebugInterface(IID_PPV_ARGS(&debugController)))) {
     debugController->EnableDebugLayer();
+
+    debugController->QueryInterface(IID_PPV_ARGS(&debugController1));
+    debugController1->SetEnableGPUBasedValidation(true); // NOLINT
 
     // Enable additional debug layers.
     dxgiFactoryFlags |= DXGI_CREATE_FACTORY_DEBUG;
@@ -91,13 +94,12 @@ D3D12Renderer::D3D12Renderer(const ApplicationInfo& appInfo,
   // Create Frame buffers
   CD3DX12_CPU_DESCRIPTOR_HANDLE rtvHandle(m_rtvHeap->GetCPUDescriptorHandleForHeapStart());
 
-  m_renderTargets.Resize(swapChainRequirements.m_framesInFlight);
-
   // Create a RTV for each frame.
   for (UINT n = 0; n < swapChainRequirements.m_framesInFlight; n++) {
-    VERIFY_D3D_OP(log_D3D12RenderSystem, m_swapChain->GetBuffer(n, IID_PPV_ARGS(&m_renderTargets[n])),
+    auto& renderTarget = m_renderTargets[n];
+    VERIFY_D3D_OP(log_D3D12RenderSystem, m_swapChain->GetBuffer(n, IID_PPV_ARGS(&renderTarget)),
       "Failed to get swapchain buffer");
-    m_device->CreateRenderTargetView(m_renderTargets[n].Get(), nullptr, rtvHandle);
+    m_device->CreateRenderTargetView(renderTarget.Get(), nullptr, rtvHandle);
     rtvHandle.Offset(1, m_rtvDescriptorSize);
   }
 
@@ -147,10 +149,12 @@ void D3D12Renderer::Submit() {
   for (auto& primaryBuffer : m_primaryCommandBuffers) {
     auto commandList = primaryBuffer.GetGraphicsCommandList();
 
-    CD3DX12_RESOURCE_BARRIER backBufferBarrierStart = CD3DX12_RESOURCE_BARRIER::Transition(m_renderTargets[idx].Get(),
+    auto& renderTarget = m_renderTargets[idx];
+
+    CD3DX12_RESOURCE_BARRIER backBufferBarrierStart = CD3DX12_RESOURCE_BARRIER::Transition(renderTarget.Get(),
                                                                                            D3D12_RESOURCE_STATE_PRESENT,
                                                                                            D3D12_RESOURCE_STATE_RENDER_TARGET);
-    CD3DX12_RESOURCE_BARRIER backBufferBarrierEnd = CD3DX12_RESOURCE_BARRIER::Transition(m_renderTargets[idx].Get(),
+    CD3DX12_RESOURCE_BARRIER backBufferBarrierEnd = CD3DX12_RESOURCE_BARRIER::Transition(renderTarget.Get(),
                                                                                          D3D12_RESOURCE_STATE_RENDER_TARGET,
                                                                                          D3D12_RESOURCE_STATE_PRESENT);
 
