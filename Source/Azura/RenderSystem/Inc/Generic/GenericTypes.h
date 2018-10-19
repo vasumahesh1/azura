@@ -165,11 +165,6 @@ enum class DescriptorType {
 
 const U32 MAX_DESCRIPTOR_TYPE_COUNT = 5;
 
-enum class DescriptorBinding {
-  Default,
-  Same
-};
-
 struct Bounds3D {
   U32 m_width{1};
   U32 m_height{1};
@@ -232,14 +227,12 @@ struct VertexSlot {
 struct DescriptorSlotCreateInfo {
   DescriptorType m_type{DescriptorType::UniformBuffer};
   ShaderStage m_stages{ShaderStage::All};
-  DescriptorBinding m_binding{DescriptorBinding::Default};
 };
 
 struct DescriptorSlot {
   U32 m_key{0};
   DescriptorType m_type{DescriptorType::UniformBuffer};
   ShaderStage m_stages{ShaderStage::All};
-  DescriptorBinding m_binding{DescriptorBinding::Default};
   U32 m_setIdx{0};
   U32 m_bindIdx{0};
 };
@@ -318,7 +311,11 @@ struct ApplicationInfo {
   Version m_version;
 };
 
-const U32 DEFAULT_FRAMES_IN_FLIGHT = 2;
+constexpr U32 DEFAULT_FRAMES_IN_FLIGHT = 2;
+constexpr U32 MAX_RENDER_PASS_INPUTS = 4;
+constexpr U32 MAX_RENDER_PASS_OUTPUTS = 4;
+constexpr U32 MAX_RENDER_PASS_SETS = 8;
+constexpr U32 MAX_RENDER_PASS_SHADERS = 4;
 
 struct ApplicationRequirements {
 };
@@ -349,30 +346,35 @@ struct PipelinePassInput {
 struct ClearData {
   float m_color[4]{0.0f, 0.0f, 0.0f, 1.0f};
   float m_depth{1.0f};
-  U32 m_stencil{0};
+  U8 m_stencil{0};
 };
 
 struct PipelinePassCreateInfo {
-  using Shaders = SmallVector<U32, 5>;
-  using Outputs = SmallVector<U32, 4>;
-  using Inputs = SmallVector<PipelinePassInput, 4>;
-  using Descriptors = SmallVector<U32, 4>;
+  using Shaders = SmallVector<U32, MAX_RENDER_PASS_SHADERS>;
+  using Outputs = SmallVector<U32, MAX_RENDER_PASS_OUTPUTS>;
+  using Inputs = SmallVector<PipelinePassInput, MAX_RENDER_PASS_INPUTS>;
+  using DescriptorSets = SmallVector<U32, MAX_RENDER_PASS_SETS>;
 
-  SmallVector<U32, 5> m_shaders{};
+  Shaders m_shaders{};
 
-  SmallVector<PipelinePassInput, 4> m_inputs{};
-  SmallVector<U32, 4> m_outputs{};
-  SmallVector<U32, 4> m_descriptors{};
+  Inputs m_inputs{};
+  Outputs m_outputs{};
+  DescriptorSets m_descriptorSets{};
 
   ClearData m_clearData{};
   BlendState m_blendState{};
 };
 
 struct DescriptorRequirements {
-  DescriptorRequirements(U32 numDescriptors, Memory::Allocator& alloc);
+  DescriptorRequirements(U32 numDescriptors, U32 numSets, Memory::Allocator& alloc);
   U32 AddDescriptor(const DescriptorSlotCreateInfo& info);
+  U32 AddSet(const std::initializer_list<U32>& sets);
 
   Containers::Vector<DescriptorSlotCreateInfo> m_descriptorSlots;
+  Containers::Vector<Containers::Vector<U32>> m_descriptorSets;
+
+private:
+  std::reference_wrapper<Memory::Allocator> m_allocator;
 };
 
 struct ShaderRequirements {
@@ -399,6 +401,12 @@ struct DescriptorCount {
   U32 m_numCombinedSamplerSlots{0};
   U32 m_numSampledImageSlots{0};
   U32 m_numPushConstantsSlots{0};
+};
+
+struct DescriptorTableEntry {
+  int m_count{1};
+  int m_cumulativeCount{0};
+  DescriptorType m_type;
 };
 
 } // namespace Azura

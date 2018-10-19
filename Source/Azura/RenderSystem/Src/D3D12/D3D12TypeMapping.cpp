@@ -93,6 +93,25 @@ namespace D3D12 {
   FUNC(ImageViewType::ImageViewCubeMap, D3D12_SRV_DIMENSION_TEXTURECUBE)                  \
   FUNC(ImageViewType::ImageViewCubeMapArray, D3D12_SRV_DIMENSION_TEXTURECUBEARRAY)
 
+#define IMAGE_VIEW_TYPE_TO_DSV_DIMENSION(FUNC)                                            \
+  FUNC(ImageViewType::ImageView1D, D3D12_DSV_DIMENSION_TEXTURE1D)                         \
+  FUNC(ImageViewType::ImageView1DArray, D3D12_DSV_DIMENSION_TEXTURE1DARRAY)               \
+  FUNC(ImageViewType::ImageView2D, D3D12_DSV_DIMENSION_TEXTURE2D)                         \
+  FUNC(ImageViewType::ImageView2DArray, D3D12_DSV_DIMENSION_TEXTURE2DARRAY)               \
+  FUNC(ImageViewType::ImageView3D, D3D12_DSV_DIMENSION_UNKNOWN)                         \
+  FUNC(ImageViewType::ImageViewCubeMap, D3D12_DSV_DIMENSION_UNKNOWN)                  \
+  FUNC(ImageViewType::ImageViewCubeMapArray, D3D12_DSV_DIMENSION_UNKNOWN)
+
+
+#define IMAGE_VIEW_TYPE_TO_RTV_DIMENSION(FUNC)                                            \
+  FUNC(ImageViewType::ImageView1D, D3D12_RTV_DIMENSION_TEXTURE1D)                         \
+  FUNC(ImageViewType::ImageView1DArray, D3D12_RTV_DIMENSION_TEXTURE1DARRAY)               \
+  FUNC(ImageViewType::ImageView2D, D3D12_RTV_DIMENSION_TEXTURE2D)                         \
+  FUNC(ImageViewType::ImageView2DArray, D3D12_RTV_DIMENSION_TEXTURE2DARRAY)               \
+  FUNC(ImageViewType::ImageView3D, D3D12_RTV_DIMENSION_TEXTURE3D)                         \
+  FUNC(ImageViewType::ImageViewCubeMap, D3D12_RTV_DIMENSION_UNKNOWN)                  \
+  FUNC(ImageViewType::ImageViewCubeMapArray, D3D12_RTV_DIMENSION_UNKNOWN)
+
 
 #define CREATE_MAPPER_CPP(FROM_FORMAT, TO_FORMAT, MAPPING_TABLE, CASE_MAPPING_FUNC)                                    \
   CREATE_MAPPER_H(FROM_FORMAT, TO_FORMAT) {                                                                            \
@@ -106,6 +125,8 @@ CREATE_MAPPER_CPP(BufferUsageRate, D3D12_INPUT_CLASSIFICATION, BUFFER_USAGE_RATE
 
 CREATE_MAPPER_CPP(ImageType, D3D12_RESOURCE_DIMENSION, IMAGE_TYPE_TO_RESOURCE_DIMENSION, FORWARD_MAPPING)
 CREATE_MAPPER_CPP(ImageViewType, D3D12_SRV_DIMENSION, IMAGE_VIEW_TYPE_TO_SRV_DIMENSION, FORWARD_MAPPING)
+CREATE_MAPPER_CPP(ImageViewType, D3D12_DSV_DIMENSION, IMAGE_VIEW_TYPE_TO_DSV_DIMENSION, FORWARD_MAPPING)
+CREATE_MAPPER_CPP(ImageViewType, D3D12_RTV_DIMENSION, IMAGE_VIEW_TYPE_TO_RTV_DIMENSION, FORWARD_MAPPING)
 
 } // namespace D3D12
 } // namespace Azura

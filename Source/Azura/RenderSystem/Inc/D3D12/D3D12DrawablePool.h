@@ -9,10 +9,18 @@
 #include "D3D12/D3D12ScopedCommandBuffer.h"
 #include "D3D12/D3D12ScopedImage.h"
 #include "D3D12/D3D12ScopedSampler.h"
+#include "D3D12/D3D12ScopedRenderPass.h"
 
 
 namespace Azura {
 namespace D3D12 {
+
+struct D3D12RenderPassRecordEntry
+{
+  ID3D12PipelineState* m_pso;
+  ID3D12GraphicsCommandList* m_bundle;
+  U32 m_poolIdx;
+};
 
 class D3D12DrawablePool : public DrawablePool {
 
@@ -22,6 +30,7 @@ public:
                     const DescriptorCount& descriptorCount,
                     const Containers::Vector<DescriptorSlot>& descriptorSlots,
                     const Containers::Vector<D3D12ScopedShader>& shaders,
+                    const Containers::Vector<D3D12ScopedRenderPass>& renderPasses,
                     Memory::Allocator& mainAllocator,
                     Memory::Allocator& initAllocator,
                     Log log);
@@ -38,26 +47,28 @@ public:
   void Submit() override;
 
   const Containers::Vector<ID3D12DescriptorHeap*>& GetAllDescriptorHeaps() const;
-  ID3D12RootSignature* GetRootSignature() const;
-  ID3D12PipelineState * GetPipelineState() const;
-  ID3D12GraphicsCommandList* GetSecondaryCommandList() const;
+  ID3D12PipelineState* GetPipelineState(U32 renderPassId) const;
+  ID3D12GraphicsCommandList* GetSecondaryCommandList(U32 renderPassId) const;
+
+  void GetRecordEntries(Containers::Vector<std::pair<U32, D3D12RenderPassRecordEntry>>& recordList) const;
 
 private:
-  void CreateRootSignature(const Microsoft::WRL::ComPtr<ID3D12Device>& device);
+  void CreateRenderPassReferences(const DrawablePoolCreateInfo& createInfo, const Containers::Vector<D3D12ScopedRenderPass>& renderPasses);
   void CreateInputAttributes(const DrawablePoolCreateInfo& createInfo);
   void CreateDescriptorHeap(const DrawablePoolCreateInfo& createInfo);
 
   void SetTextureData(ID3D12GraphicsCommandList* oneTimeCommandList);
-  void RecordTextureData(ID3D12GraphicsCommandList * bundleCommandList);
 
   Log log_D3D12RenderSystem;
 
   const Microsoft::WRL::ComPtr<ID3D12Device>& m_device;
-  const Containers::Vector<DescriptorSlot>& m_descriptorSlots;
+  const Containers::Vector<DescriptorSlot>& m_globalDescriptorSlots;
   const Containers::Vector<D3D12ScopedShader>& m_shaders;
 
   Containers::Vector<D3D12ScopedPipeline> m_pipelines;
   Containers::Vector<D3D12Drawable> m_drawables;
+
+  Containers::Vector<std::reference_wrapper<D3D12ScopedRenderPass>> m_renderPasses;
 
   D3D12PipelineFactory m_pipelineFactory;
   D3D12ScopedBuffer m_stagingBuffer;
@@ -66,14 +77,14 @@ private:
   U32 m_descriptorsPerDrawable;
 
   U32 m_cbvSrvDescriptorElementSize{0};
+  U32 m_samplerDescriptorElementSize{0};
   U32 m_offsetToDrawableHeap{0};
+  U32 m_offsetToRenderPassInputs{0};
 
-  Containers::Vector<D3D12DescriptorEntry> m_descriptorTableSizes;
   Containers::Vector<D3D12ScopedImage> m_images;
   Containers::Vector<D3D12ScopedSampler> m_samplers;
-  D3D12ScopedCommandBuffer m_secondaryCommandBuffer;
+  Containers::Vector<D3D12ScopedCommandBuffer> m_secondaryCommandBuffers;
 
-  Microsoft::WRL::ComPtr<ID3D12RootSignature> m_rootSignature;
   Microsoft::WRL::ComPtr<ID3D12DescriptorHeap> m_descriptorDrawableHeap;
   Microsoft::WRL::ComPtr<ID3D12DescriptorHeap> m_descriptorSamplerHeap;
 

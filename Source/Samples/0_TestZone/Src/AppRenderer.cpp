@@ -73,10 +73,13 @@ void AppRenderer::Initialize() {
   textureRequirements.m_maxCount          = 1;
   textureRequirements.m_poolSize          = 0x400000; // 4MB
 
-  DescriptorRequirements descriptorRequirements = DescriptorRequirements(3, allocatorTemporary);
+  DescriptorRequirements descriptorRequirements = DescriptorRequirements(3, 2, allocatorTemporary);
   const U32 UBO_SLOT = descriptorRequirements.AddDescriptor({ DescriptorType::UniformBuffer, ShaderStage::Vertex });
   const U32 SAMPLER_SLOT = descriptorRequirements.AddDescriptor({DescriptorType::Sampler, ShaderStage::Pixel});
   const U32 BASIC_TEXTURE_SLOT = descriptorRequirements.AddDescriptor({DescriptorType::SampledImage, ShaderStage::Pixel});
+
+  const U32 UBO_SET = descriptorRequirements.AddSet({ UBO_SLOT });
+  const U32 SAMPLER_SET = descriptorRequirements.AddSet({ SAMPLER_SLOT, BASIC_TEXTURE_SLOT });
 
   ShaderRequirements shaderRequirements = ShaderRequirements(2, allocatorTemporary);
   const U32 VERTEX_SHADER_ID = shaderRequirements.AddShader({ ShaderStage::Vertex, "BasicTextureTest.vs", AssetLocation::Shaders });
@@ -87,8 +90,8 @@ void AppRenderer::Initialize() {
   const U32 SINGLE_PASS = renderPassRequirements.AddPass({
     PipelinePassCreateInfo::Shaders{VERTEX_SHADER_ID, PIXEL_SHADER_ID},  // SHADERS
     PipelinePassCreateInfo::Inputs{},                                    // INPUT TARGETS
-    PipelinePassCreateInfo::Outputs{},                     // OUTPUT TARGETS
-    PipelinePassCreateInfo::Descriptors{UBO_SLOT},                        // DESCRIPTORS
+    PipelinePassCreateInfo::Outputs{},                                   // OUTPUT TARGETS
+    PipelinePassCreateInfo::DescriptorSets{UBO_SET, SAMPLER_SET},        // DESCRIPTOR SETS
     ClearData{{0.2f, 0.2f, 0.2f, 1.0f}, 1.0f, 0}
   });
 

@@ -52,6 +52,7 @@ protected:
   void SetCurrentFrame(U32 frameIdx);
 
   Containers::Vector<DescriptorSlot> m_descriptorSlots;
+  Containers::Vector<DescriptorTableEntry> m_descriptorSetTable;
 
   DescriptorCount m_descriptorCount;
 

@@ -93,17 +93,15 @@ void AppRenderer::Initialize() {
   // TODO(vasumahesh1):[Q]:Allocator?
   ApplicationRequirements applicationRequirements = {}; // NOLINT
 
-  DescriptorRequirements descriptorRequirements = DescriptorRequirements(4, allocatorTemporary);
-  // Set 0
+  DescriptorRequirements descriptorRequirements = DescriptorRequirements(4, 3, allocatorTemporary);
   const U32 UBO_SLOT = descriptorRequirements.AddDescriptor({ DescriptorType::UniformBuffer, ShaderStage::Vertex | ShaderStage::Pixel });
-  
-  // Set 1
   const U32 SHADER_CONTROLS_SLOT = descriptorRequirements.AddDescriptor({ DescriptorType::UniformBuffer, ShaderStage::Vertex | ShaderStage::Pixel });
-
-  // Set 2
   const U32 SAMPLER_SLOT = descriptorRequirements.AddDescriptor({DescriptorType::Sampler, ShaderStage::Pixel});
-  const U32 PLANET_TEXTURE_SLOT = descriptorRequirements.AddDescriptor({DescriptorType::SampledImage, ShaderStage::Pixel, DescriptorBinding::Same});
+  const U32 PLANET_TEXTURE_SLOT = descriptorRequirements.AddDescriptor({DescriptorType::SampledImage, ShaderStage::Pixel});
 
+  const U32 UBO_SET = descriptorRequirements.AddSet({ UBO_SLOT });
+  const U32 CONTROLS_SET = descriptorRequirements.AddSet({ SHADER_CONTROLS_SLOT });
+  const U32 TEXTURE_SET = descriptorRequirements.AddSet({ SAMPLER_SLOT, PLANET_TEXTURE_SLOT });
 
   ShaderRequirements shaderRequirements = ShaderRequirements(6, allocatorTemporary);
   const U32 SCREEN_QUAD_VERTEX_SHADER_ID = shaderRequirements.AddShader({ ShaderStage::Vertex, "ScreenQuad.vs", AssetLocation::Shaders });
@@ -126,14 +124,16 @@ void AppRenderer::Initialize() {
   const U32 NOISE_PASS = renderPassRequirements.AddPass({
     PipelinePassCreateInfo::Shaders{NOISE_VERTEX_SHADER_ID, NOISE_PIXEL_SHADER_ID},  // SHADERS
     PipelinePassCreateInfo::Inputs{},                                                // INPUT TARGETS
-    PipelinePassCreateInfo::Outputs{NOISE_TARGET_1, NOISE_TARGET_2, NOISE_TARGET_3, NOISE_DEPTH}  // OUTPUT TARGETS
+    PipelinePassCreateInfo::Outputs{NOISE_TARGET_1, NOISE_TARGET_2, NOISE_TARGET_3, NOISE_DEPTH} , // OUTPUT TARGETS
+    PipelinePassCreateInfo::DescriptorSets{UBO_SET, CONTROLS_SET}
     });
 
   const U32 SINGLE_PASS = renderPassRequirements.AddPass({
     PipelinePassCreateInfo::Shaders{},                                   // SHADERS
     PipelinePassCreateInfo::Inputs{{NOISE_TARGET_1, ShaderStage::Pixel}, {NOISE_TARGET_2, ShaderStage::Pixel}, {NOISE_TARGET_3, ShaderStage::Pixel}},      // INPUT TARGETS
     PipelinePassCreateInfo::Outputs{},                                   // OUTPUT TARGETS
-    {}, {},
+    PipelinePassCreateInfo::DescriptorSets{CONTROLS_SET, TEXTURE_SET},
+    {},
     BlendState{true, {BlendFactor::SrcAlpha, BlendFactor::OneMinusSrcAlpha}, {BlendFactor::SrcAlpha, BlendFactor::OneMinusSrcAlpha}}
     });
 

@@ -1,6 +1,7 @@
 #include "D3D12/D3D12ScopedPipeline.h"
 #include "D3D12/D3D12Macros.h"
 #include "D3D12/D3D12TypeMapping.h"
+#include "D3D12/D3D12ScopedRenderPass.h"
 
 
 namespace Azura {
@@ -82,25 +83,62 @@ D3D12PipelineFactory& D3D12PipelineFactory::AddShaderStage(const D3D12ScopedShad
   return *this;
 }
 
-void D3D12PipelineFactory::Submit(const Microsoft::WRL::ComPtr<ID3D12Device>& device, const Microsoft::WRL::ComPtr<ID3D12RootSignature>& rootSignature, Containers::Vector<D3D12ScopedPipeline>& resultPipelines) const {
+void D3D12PipelineFactory::Submit(const Microsoft::WRL::ComPtr<ID3D12Device>& device, const Containers::Vector<std::reference_wrapper<D3D12ScopedRenderPass>>& renderPasses, Containers::Vector<D3D12ScopedPipeline>& resultPipelines) const {
 
-  D3D12_GRAPHICS_PIPELINE_STATE_DESC psoDesc = {};
-  psoDesc.InputLayout = { m_inputElementDescs.Data(), m_inputElementDescs.GetSize() };
-  psoDesc.pRootSignature = rootSignature.Get();
-  psoDesc.VS = m_vertexShaderModule;
-  psoDesc.PS = m_pixelShaderModule;
-  psoDesc.RasterizerState = CD3DX12_RASTERIZER_DESC(D3D12_DEFAULT);
-  psoDesc.BlendState = CD3DX12_BLEND_DESC(D3D12_DEFAULT);
-  psoDesc.DepthStencilState.DepthEnable = FALSE;
-  psoDesc.DepthStencilState.StencilEnable = FALSE;
-  psoDesc.SampleMask = UINT_MAX;
-  psoDesc.PrimitiveTopologyType = D3D12_PRIMITIVE_TOPOLOGY_TYPE_TRIANGLE;
-  psoDesc.NumRenderTargets = 1;
-  psoDesc.RTVFormats[0] = DXGI_FORMAT_B8G8R8A8_UNORM;
-  psoDesc.SampleDesc.Count = 1;
+  for(const auto& renderPass : renderPasses)
+  {
+    D3D12_GRAPHICS_PIPELINE_STATE_DESC psoDesc = {};
+    psoDesc.InputLayout = { m_inputElementDescs.Data(), m_inputElementDescs.GetSize() };
+    psoDesc.pRootSignature = renderPass.get().GetRootSignature();
 
-  resultPipelines.Reserve(1);
-  resultPipelines.PushBack(D3D12ScopedPipeline(device, psoDesc, log_D3D12RenderSystem));
+
+    for(const auto& shader : renderPass.get().GetShaders())
+    {
+      switch(shader.get().GetShaderStage())
+      {
+        case ShaderStage::All: break;
+
+        case ShaderStage::Vertex:
+          psoDesc.VS = shader.get().GetByteCode();
+        break;
+
+        case ShaderStage::Pixel:
+          psoDesc.VS = shader.get().GetByteCode();
+        break;
+
+        case ShaderStage::Compute:
+        break;
+
+        case ShaderStage::Geometry:
+          psoDesc.GS = shader.get().GetByteCode();
+        break;
+
+        default: break;
+      }
+    }
+
+    if (m_vertexShaderModule.has_value())
+    {
+      psoDesc.VS = m_vertexShaderModule.value();
+    }
+
+    if (m_pixelShaderModule.has_value())
+    {
+      psoDesc.PS = m_pixelShaderModule.value();
+    }
+
+    psoDesc.RasterizerState = CD3DX12_RASTERIZER_DESC(D3D12_DEFAULT);
+    psoDesc.BlendState = CD3DX12_BLEND_DESC(D3D12_DEFAULT);
+    psoDesc.DepthStencilState.DepthEnable = FALSE;
+    psoDesc.DepthStencilState.StencilEnable = FALSE;
+    psoDesc.SampleMask = UINT_MAX;
+    psoDesc.PrimitiveTopologyType = D3D12_PRIMITIVE_TOPOLOGY_TYPE_TRIANGLE;
+    psoDesc.NumRenderTargets = 1;
+    psoDesc.RTVFormats[0] = DXGI_FORMAT_B8G8R8A8_UNORM;
+    psoDesc.SampleDesc.Count = 1;
+
+    resultPipelines.PushBack(D3D12ScopedPipeline(device, psoDesc, log_D3D12RenderSystem));
+  }
 
 }
 } // namespace D3D12

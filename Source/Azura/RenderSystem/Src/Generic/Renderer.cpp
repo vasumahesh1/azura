@@ -14,6 +14,7 @@ Renderer::Renderer(ApplicationInfo appInfo,
                    Memory::Allocator& drawAllocator,
                    Window& window)
   : m_descriptorSlots(descriptorRequirements.m_descriptorSlots.GetSize(), mainAllocator),
+    m_descriptorSetTable(descriptorRequirements.m_descriptorSets.GetSize(), mainAllocator),
     m_mainAllocator(mainAllocator),
     m_drawPoolAllocator(drawAllocator),
     m_window(window),
@@ -23,27 +24,36 @@ Renderer::Renderer(ApplicationInfo appInfo,
     m_swapChainRequirements(swapChainRequirements),
     m_frameCount(0) {
 
-  int parent  = -1;
-  int bindIdx = 0;
-  for (const auto& slot : descriptorRequirements.m_descriptorSlots) {
-    if (slot.m_binding != DescriptorBinding::Same) {
-      ++parent;
-      bindIdx = 0;
+  U32 setIdx = 0;
+  for (const auto& set : descriptorRequirements.m_descriptorSets) {
+
+    U32 bindIdx = 0;
+    for(const auto& descriptorId : set)
+    {
+      const auto& slot = descriptorRequirements.m_descriptorSlots[descriptorId];
+
+      DescriptorSlot setSlot = {};
+      setSlot.m_type         = slot.m_type;
+      setSlot.m_stages       = slot.m_stages;
+      setSlot.m_setIdx       = setIdx;
+      setSlot.m_bindIdx      = bindIdx;
+
+      m_descriptorSlots.PushBack(std::move(setSlot));
+      ++bindIdx;
     }
 
-    DescriptorSlot setSlot = {};
-    setSlot.m_type         = slot.m_type;
-    setSlot.m_stages       = slot.m_stages;
-    setSlot.m_binding      = slot.m_binding;
-    setSlot.m_setIdx       = parent;
-    setSlot.m_bindIdx      = bindIdx;
+    const auto& typeSlot = descriptorRequirements.m_descriptorSlots[set[0]];
 
-    ++bindIdx;
+    DescriptorTableEntry entry = {};
+    entry.m_count = bindIdx;
+    entry.m_type = typeSlot.m_type;
 
-    m_descriptorSlots.PushBack(std::move(setSlot));
+    m_descriptorSetTable.PushBack(entry);
+
+    ++setIdx;
   }
 
-  for (const auto& slot : descriptorRequirements.m_descriptorSlots) {
+  for (const auto& slot : m_descriptorSlots) {
     switch (slot.m_type) {
 
       case DescriptorType::UniformBuffer:

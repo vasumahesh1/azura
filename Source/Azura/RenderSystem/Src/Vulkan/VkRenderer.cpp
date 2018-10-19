@@ -286,11 +286,14 @@ void VkRenderer::CreateDescriptorInfo() {
 
   Vector<int> bindingSetSizes{m_descriptorSlots.GetSize(), allocatorTemporary};
 
+  int lastSet = -1;
   for (const auto& slot : m_descriptorSlots) {
-    if (slot.m_binding == DescriptorBinding::Same) {
+    if (lastSet == int(slot.m_setIdx)) {
       bindingSetSizes.Last() += 1;
       continue;
     }
+
+    lastSet = int(slot.m_setIdx);
 
     bindingSetSizes.PushBack(1);
   }

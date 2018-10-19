@@ -9,7 +9,9 @@
 
 #include "Memory/MonotonicAllocator.h"
 #include "Memory/HeapMemoryBuffer.h"
-#include "D3D12ScopedCommandBuffer.h"
+#include "D3D12/D3D12ScopedCommandBuffer.h"
+#include "D3D12/D3D12ScopedSwapChain.h"
+#include "D3D12ScopedRenderPass.h"
 
 
 namespace Azura {
@@ -47,28 +49,23 @@ private:
   Memory::HeapMemoryBuffer m_initBuffer;
   Memory::MonotonicAllocator m_initAllocator;
 
-  Microsoft::WRL::ComPtr<IDXGISwapChain3> m_swapChain;
+  D3D12ScopedSwapChain m_swapChain;
   Microsoft::WRL::ComPtr<ID3D12Device> m_device;
 
   Microsoft::WRL::ComPtr<ID3D12CommandAllocator> m_commandAllocator;
   Microsoft::WRL::ComPtr<ID3D12CommandQueue> m_commandQueue;
 
-  Microsoft::WRL::ComPtr<ID3D12DescriptorHeap> m_rtvHeap;
   UINT m_rtvDescriptorSize;
+  UINT m_dsvDescriptorSize;
 
   CD3DX12_VIEWPORT m_viewport;
   CD3DX12_RECT m_scissorRect;
 
-  HANDLE m_fenceEvent;
-  U32 m_fenceValue{0};
-  Microsoft::WRL::ComPtr<ID3D12Fence> m_fence;
-
-  Microsoft::WRL::ComPtr<ID3D12Resource> m_renderTargets[GLOBAL_INFLIGHT_FRAMES];
+  Containers::Vector<D3D12ScopedImage> m_renderTargetImages;
+  Containers::Vector<D3D12ScopedRenderPass> m_renderPasses;
 
   Containers::Vector<D3D12DrawablePool> m_drawablePools;
   Containers::Vector<D3D12ScopedShader> m_shaders;
-  Containers::Vector<D3D12ScopedCommandBuffer> m_primaryCommandBuffers;
-
 };
 
 } // namespace D3D12

@@ -14,11 +14,17 @@ public:
               const TextureDesc& desc,
               const Log& log_D3D12RenderSystem);
 
-  static D3D12_SHADER_RESOURCE_VIEW_DESC GetSRV(const TextureDesc& desc,
+  static D3D12_SHADER_RESOURCE_VIEW_DESC GetSRV(RawStorageFormat viewFormat,
                                                 ImageViewType imageView,
                                                 const Log& log_D3D12RenderSystem);
 
+  static D3D12_DEPTH_STENCIL_VIEW_DESC GetDSV(RawStorageFormat viewFormat, ImageViewType imageView, const Log & log_D3D12RenderSystem);
+
+  static D3D12_RENDER_TARGET_VIEW_DESC GetRTV(RawStorageFormat viewFormat, ImageViewType imageView, const Log & log_D3D12RenderSystem);
+
   ID3D12Resource* Real() const;
+
+  Microsoft::WRL::ComPtr<ID3D12Resource> RealComPtr() const;
 
   void CopyFromBuffer(const Microsoft::WRL::ComPtr<ID3D12Device>& device,
                       ID3D12GraphicsCommandList* commandList,

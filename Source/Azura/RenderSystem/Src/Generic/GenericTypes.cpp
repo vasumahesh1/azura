@@ -27,13 +27,18 @@ U32 RenderPassRequirements::AddPass(const PipelinePassCreateInfo& info) {
   return m_passSequence.GetSize() - 1;
 }
 
-DescriptorRequirements::DescriptorRequirements(U32 numDescriptors, Memory::Allocator& alloc)
-  : m_descriptorSlots(numDescriptors, alloc) {
+DescriptorRequirements::DescriptorRequirements(U32 numDescriptors, U32 numSets, Memory::Allocator& alloc)
+  : m_descriptorSlots(numDescriptors, alloc), m_descriptorSets(numSets, alloc), m_allocator(alloc) {
 }
 
 U32 DescriptorRequirements::AddDescriptor(const DescriptorSlotCreateInfo& info) {
   m_descriptorSlots.PushBack(info);
   return m_descriptorSlots.GetSize() - 1;
+}
+
+U32 DescriptorRequirements::AddSet(const std::initializer_list<U32>& sets) {
+  m_descriptorSets.EmplaceBack(sets, m_allocator);
+  return m_descriptorSets.GetSize() - 1;
 }
 
 } // namespace Azura

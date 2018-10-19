@@ -79,7 +79,7 @@ TEST_F(RendererTest, BasicRenderTest) {
     PipelinePassCreateInfo::Shaders{VERTEX_SHADER_ID, PIXEL_SHADER_ID},  // SHADERS
     PipelinePassCreateInfo::Inputs{},                                    // INPUT TARGETS
     PipelinePassCreateInfo::Outputs{},                     // OUTPUT TARGETS
-    PipelinePassCreateInfo::Descriptors{UBO_SLOT},                        // DESCRIPTORS
+    PipelinePassCreateInfo::DescriptorSets{UBO_SLOT},                        // DESCRIPTORS
     ClearData{{0.2f, 0.2f, 0.2f, 1.0f}, 1.0f, 0}
     });
 
@@ -132,7 +132,7 @@ TEST_F(RendererTest, BasicInstancingTest) {
     PipelinePassCreateInfo::Shaders{VERTEX_SHADER_ID, PIXEL_SHADER_ID},  // SHADERS
     PipelinePassCreateInfo::Inputs{},                                    // INPUT TARGETS
     PipelinePassCreateInfo::Outputs{},                     // OUTPUT TARGETS
-    PipelinePassCreateInfo::Descriptors{UBO_SLOT},                        // DESCRIPTORS
+    PipelinePassCreateInfo::DescriptorSets{UBO_SLOT},                        // DESCRIPTORS
     ClearData{{0.2f, 0.2f, 0.2f, 1.0f}, 1.0f, 0}
     });
 
@@ -187,7 +187,7 @@ TEST_F(RendererTest, BasicTextureTest) {
     PipelinePassCreateInfo::Shaders{VERTEX_SHADER_ID, PIXEL_SHADER_ID},  // SHADERS
     PipelinePassCreateInfo::Inputs{},                                    // INPUT TARGETS
     PipelinePassCreateInfo::Outputs{},                     // OUTPUT TARGETS
-    PipelinePassCreateInfo::Descriptors{UBO_SLOT, SAMPLER_SLOT, BASIC_TEXTURE_SLOT},                        // DESCRIPTORS
+    PipelinePassCreateInfo::DescriptorSets{UBO_SLOT, SAMPLER_SLOT, BASIC_TEXTURE_SLOT},                        // DESCRIPTORS
     ClearData{{0.2f, 0.2f, 0.2f, 1.0f}, 1.0f, 0}
     });
 
@@ -248,7 +248,7 @@ TEST_F(RendererTest, BasicDeferredTest) {
     PipelinePassCreateInfo::Shaders{VERTEX_SHADER_ID, PIXEL_SHADER_ID},  // SHADERS
     PipelinePassCreateInfo::Inputs{},                                    // INPUT TARGETS
     PipelinePassCreateInfo::Outputs{COLOR_TARGET_1},                     // OUTPUT TARGETS
-    PipelinePassCreateInfo::Descriptors{UBO_SLOT},                        // DESCRIPTORS
+    PipelinePassCreateInfo::DescriptorSets{UBO_SLOT},                        // DESCRIPTORS
     ClearData{{0.2f, 0.2f, 0.2f, 1.0f}, 1.0f, 0}
     });
 
@@ -256,7 +256,7 @@ TEST_F(RendererTest, BasicDeferredTest) {
     PipelinePassCreateInfo::Shaders{DEF_VERTEX_SHADER_ID, DEF_PIXEL_SHADER_ID},
     PipelinePassCreateInfo::Inputs{{COLOR_TARGET_1, ShaderStage::Pixel}},
     PipelinePassCreateInfo::Outputs{PRESENT_TARGET}, // END OF RENDERING
-    PipelinePassCreateInfo::Descriptors{SAMPLER_SLOT},
+    PipelinePassCreateInfo::DescriptorSets{SAMPLER_SLOT},
     ClearData{{0.2f, 0.2f, 0.2f, 1.0f}, 1.0f, 0}
     });
 

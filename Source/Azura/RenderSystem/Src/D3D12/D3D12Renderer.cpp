@@ -2,8 +2,10 @@
 #include "D3D12/D3D12Macros.h"
 
 #include "D3D12/d3dx12.h"
+#include "Memory/MemoryFactory.h"
 
-using namespace Microsoft::WRL; // NOLINT
+using namespace Microsoft::WRL;    // NOLINT
+using namespace Azura::Containers; // NOLINT
 
 namespace Azura {
 namespace D3D12 {
@@ -25,11 +27,10 @@ D3D12Renderer::D3D12Renderer(const ApplicationInfo& appInfo,
     m_perFrameAllocator(m_perFrameBuffer, 8192),
     m_initBuffer(0x400000),
     m_initAllocator(m_initBuffer, 0x400000),
+    m_renderTargetImages(renderPassRequirements.m_targets.GetSize(), mainAllocator),
+    m_renderPasses(renderPassRequirements.m_passSequence.GetSize(), mainAllocator),
     m_drawablePools(renderPassRequirements.m_maxPools, drawAllocator),
-    m_shaders(shaderRequirements.m_shaders.GetSize(), mainAllocator),
-    m_primaryCommandBuffers(swapChainRequirements.m_framesInFlight, mainAllocator) {
-  UNUSED(renderPassRequirements);
-  UNUSED(shaderRequirements);
+    m_shaders(shaderRequirements.m_shaders.GetSize(), mainAllocator) {
 
   const auto viewportDimensions = window.GetViewport();
   m_viewport                    = CD3DX12_VIEWPORT(0.0f, 0.0f, viewportDimensions.m_width, viewportDimensions.m_height);
@@ -70,54 +71,61 @@ D3D12Renderer::D3D12Renderer(const ApplicationInfo& appInfo,
   VERIFY_D3D_OP(log_D3D12RenderSystem, m_device->CreateCommandQueue(&queueDesc, IID_PPV_ARGS(&m_commandQueue)),
     "Failed to create command Queue");
 
-  auto swapChain = D3D12Core::CreateSwapChain(factory, m_commandQueue, m_window.get().GetHandle(),
-                                              swapChainRequirements, log_D3D12RenderSystem);
-  VERIFY_D3D_OP(log_D3D12RenderSystem, swapChain.As(&m_swapChain), "Swapchain typecast failed");
+  m_swapChain.Create(factory, m_commandQueue, m_window.get(), swapChainRequirements, log_D3D12RenderSystem);
 
-  SetCurrentFrame(m_swapChain->GetCurrentBackBufferIndex());
+  SetCurrentFrame(m_swapChain.RealComPtr()->GetCurrentBackBufferIndex());
 
   for (const auto& shaderCreateInfo : shaderRequirements.m_shaders) {
     D3D12Renderer::AddShader(shaderCreateInfo);
   }
 
-  // TODO(vasumahesh1):[RENDER-PASS]: We might need to create multiple RTV per pass
-  // Describe and create a render target view (RTV) descriptor heap.
-  D3D12_DESCRIPTOR_HEAP_DESC rtvHeapDesc = {};
-  rtvHeapDesc.NumDescriptors             = swapChainRequirements.m_framesInFlight;
-  rtvHeapDesc.Type                       = D3D12_DESCRIPTOR_HEAP_TYPE_RTV;
-  rtvHeapDesc.Flags                      = D3D12_DESCRIPTOR_HEAP_FLAG_NONE;
-  VERIFY_D3D_OP(log_D3D12RenderSystem, m_device->CreateDescriptorHeap(&rtvHeapDesc, IID_PPV_ARGS(&m_rtvHeap)),
-    "Failed to create descriptor heaps for RTV");
+  for (const auto& renderTarget : renderPassRequirements.m_targets) {
+    TextureDesc desc = {};
+    desc.m_format    = renderTarget.m_format;
+    desc.m_bounds    = Bounds3D{swapChainRequirements.m_extent.m_width, swapChainRequirements.m_extent.m_height, 1};
+
+    LOG_DBG(log_D3D12RenderSystem, LOG_LEVEL, "Creating Attachment Input at: %d for %s", m_renderTargetImages.
+      GetSize(), ToString(renderTarget.m_format).c_str());
+
+    D3D12_RESOURCE_STATES resourceState = D3D12_RESOURCE_STATE_RENDER_TARGET;
+    if (HasDepthComponent(renderTarget.m_format) || HasStencilComponent(renderTarget.m_format)) {
+      resourceState = D3D12_RESOURCE_STATE_DEPTH_WRITE;
+    }
+
+    m_renderTargetImages.PushBack(D3D12ScopedImage());
+    m_renderTargetImages.Last().Create(m_device, resourceState, desc, log_D3D12RenderSystem);
+  }
 
   m_rtvDescriptorSize = m_device->GetDescriptorHandleIncrementSize(D3D12_DESCRIPTOR_HEAP_TYPE_RTV);
+  m_dsvDescriptorSize = m_device->GetDescriptorHandleIncrementSize(D3D12_DESCRIPTOR_HEAP_TYPE_DSV);
 
-  // Create Frame buffers
-  CD3DX12_CPU_DESCRIPTOR_HANDLE rtvHandle(m_rtvHeap->GetCPUDescriptorHandleForHeapStart());
+  U32 passCount = 0;
+  for (const auto& passCreateInfo : renderPassRequirements.m_passSequence) {
+    D3D12ScopedRenderPass renderPass = D3D12ScopedRenderPass(m_renderPasses.GetSize(), mainAllocator,
+                                                             log_D3D12RenderSystem);
 
-  // Create a RTV for each frame.
-  for (U32 n = 0; n < swapChainRequirements.m_framesInFlight; n++) {
-    auto& renderTarget = m_renderTargets[n]; // NOLINT
-    VERIFY_D3D_OP(log_D3D12RenderSystem, m_swapChain->GetBuffer(n, IID_PPV_ARGS(&renderTarget)),
-      "Failed to get swapchain buffer");
-    m_device->CreateRenderTargetView(renderTarget.Get(), nullptr, rtvHandle);
-    rtvHandle.Offset(1, m_rtvDescriptorSize);
-  }
+    if (passCount != (renderPassRequirements.m_passSequence.GetSize() - 1)) {
+      renderPass.Create(m_device,
+                        passCreateInfo,
+                        renderPassRequirements.m_targets,
+                        m_renderTargetImages,
+                        m_descriptorSlots,
+                        m_descriptorSetTable,
+                        m_shaders,
+                        m_swapChain, m_rtvDescriptorSize, m_dsvDescriptorSize);
+    } else {
+      renderPass.CreateForSwapChain(m_device,
+                                    passCreateInfo,
+                                    renderPassRequirements.m_targets,
+                                    m_renderTargetImages,
+                                    m_descriptorSlots,
+                                    m_descriptorSetTable,
+                                    m_shaders,
+                                    m_swapChain, m_rtvDescriptorSize, m_dsvDescriptorSize);
+    }
 
-  for (UINT n                                 = 0; n < swapChainRequirements.m_framesInFlight; n++) {
-    D3D12ScopedCommandBuffer primaryCmdBuffer = D3D12ScopedCommandBuffer(m_device, D3D12_COMMAND_LIST_TYPE_DIRECT,
-                                                                         log_D3D12RenderSystem);
-    primaryCmdBuffer.CreateGraphicsCommandList(m_device, nullptr, log_D3D12RenderSystem);
-    m_primaryCommandBuffers.PushBack(primaryCmdBuffer);
-  }
-
-  VERIFY_D3D_OP(log_D3D12RenderSystem, m_device->CreateFence(m_fenceValue, D3D12_FENCE_FLAG_NONE, IID_PPV_ARGS(&m_fence)
-  ), "Failed to create fence");
-  m_fenceValue++;
-
-  // Create an event handle to use for frame synchronization.
-  m_fenceEvent = CreateEvent(nullptr, FALSE, FALSE, nullptr);
-  if (m_fenceEvent == nullptr) {
-    VERIFY_D3D_OP(log_D3D12RenderSystem, HRESULT_FROM_WIN32(GetLastError()), "Fence Event Null");
+    m_renderPasses.PushBack(renderPass);
+    ++passCount;
   }
 }
 
@@ -131,6 +139,7 @@ DrawablePool& D3D12Renderer::CreateDrawablePool(const DrawablePoolCreateInfo& cr
                                              m_descriptorCount,
                                              m_descriptorSlots,
                                              m_shaders,
+                                             m_renderPasses,
                                              m_drawPoolAllocator,
                                              m_initAllocator,
                                              log_D3D12RenderSystem);
@@ -141,79 +150,104 @@ DrawablePool& D3D12Renderer::CreateDrawablePool(const DrawablePoolCreateInfo& cr
 }
 
 void D3D12Renderer::Submit() {
+  STACK_ALLOCATOR(Temporary, Memory::MonotonicAllocator, 4096);
+
   for (auto& drawablePool : m_drawablePools) {
     drawablePool.Submit();
   }
 
-  U32 idx = 0;
-  for (auto& primaryBuffer : m_primaryCommandBuffers) {
-    auto commandList = primaryBuffer.GetGraphicsCommandList();
+  Vector<Vector<D3D12RenderPassRecordEntry>> renderPassEntries(m_renderPasses.GetSize(), allocatorTemporary);
+  for (U32 idx = 0; idx < m_renderPasses.GetSize(); ++idx) {
+    Vector<D3D12RenderPassRecordEntry> poolEntries(m_drawablePools.GetSize(), allocatorTemporary);
+    renderPassEntries.PushBack(poolEntries);
+  }
 
-    auto& renderTarget = m_renderTargets[idx]; // NOLINT
+  U32 poolIdx = 0;
+  for (auto& drawablePool : m_drawablePools) {
+    Vector<std::pair<U32, D3D12RenderPassRecordEntry>> poolEntries(allocatorTemporary);
+    drawablePool.GetRecordEntries(poolEntries);
 
-    CD3DX12_RESOURCE_BARRIER backBufferBarrierStart = CD3DX12_RESOURCE_BARRIER::Transition(renderTarget.Get(),
-                                                                                           D3D12_RESOURCE_STATE_PRESENT,
-                                                                                           D3D12_RESOURCE_STATE_RENDER_TARGET);
-    CD3DX12_RESOURCE_BARRIER backBufferBarrierEnd = CD3DX12_RESOURCE_BARRIER::Transition(renderTarget.Get(),
-                                                                                         D3D12_RESOURCE_STATE_RENDER_TARGET,
-                                                                                         D3D12_RESOURCE_STATE_PRESENT);
-
-    commandList->RSSetViewports(1, &m_viewport);
-    commandList->RSSetScissorRects(1, &m_scissorRect);
-
-    commandList->ResourceBarrier(1, &backBufferBarrierStart);
-
-    CD3DX12_CPU_DESCRIPTOR_HANDLE rtvHandle(m_rtvHeap->GetCPUDescriptorHandleForHeapStart(), idx, m_rtvDescriptorSize);
-    commandList->OMSetRenderTargets(1, &rtvHandle, FALSE, nullptr);
-
-    const float clearColor[] = {0.2f, 0.2f, 0.2f, 1.0f};
-    commandList->ClearRenderTargetView(rtvHandle, clearColor, 0, nullptr); // NOLINT
-
-    for (auto& drawablePool : m_drawablePools) {
-      commandList->SetPipelineState(drawablePool.GetPipelineState());
-      commandList->SetGraphicsRootSignature(drawablePool.GetRootSignature());
-
-      const auto& allHeaps = drawablePool.GetAllDescriptorHeaps();
-      commandList->SetDescriptorHeaps(UINT(allHeaps.GetSize()), allHeaps.Data());
-
-      commandList->ExecuteBundle(drawablePool.GetSecondaryCommandList());
+    for (const auto& bufferPair : poolEntries) {
+      renderPassEntries[bufferPair.first].PushBack(bufferPair.second);
+      renderPassEntries[bufferPair.first].Last().m_poolIdx = poolIdx;
     }
 
-    commandList->ResourceBarrier(1, &backBufferBarrierEnd);
+    ++poolIdx;
+  }
 
-    commandList->Close();
-    ++idx;
+  for (U32 idx = 0; idx < m_renderPasses.GetSize(); ++idx) {
+
+    const auto& renderPass = m_renderPasses[idx];
+
+    const bool isLast = idx == m_renderPasses.GetSize() - 1;
+
+    const U32 commandBuffers = renderPass.GetCommandBufferCount();
+
+    for (U32 cIdx      = 0; cIdx < commandBuffers; ++cIdx) {
+      auto commandList = renderPass.GetPrimaryGraphicsCommandList(cIdx);
+
+      if (isLast) {
+        renderPass.RecordImageAcquireBarrier(commandList, cIdx);
+      }
+
+      renderPass.RecordResourceBarriers(commandList);
+
+      commandList->RSSetViewports(1, &m_viewport);
+      commandList->RSSetScissorRects(1, &m_scissorRect);
+
+      renderPass.SetRenderTargets(commandList);
+
+      const auto& renderPassRecords = renderPassEntries[idx];
+
+      commandList->SetGraphicsRootSignature(renderPass.GetRootSignature());
+
+      for (auto& recordEntry : renderPassRecords) {
+        const auto& targetPool = m_drawablePools[recordEntry.m_poolIdx];
+
+        commandList->SetPipelineState(recordEntry.m_pso);
+
+        const auto& allHeaps = targetPool.GetAllDescriptorHeaps();
+        commandList->SetDescriptorHeaps(UINT(allHeaps.GetSize()), allHeaps.Data());
+
+        commandList->ExecuteBundle(recordEntry.m_bundle);
+      }
+
+      if (isLast) {
+        renderPass.RecordPresentBarrier(commandList, cIdx);
+      }
+
+      commandList->Close();
+    }
   }
 }
 
 void D3D12Renderer::RenderFrame() {
   EnterRenderFrame();
 
+  SmallVector<ID3D12CommandList*, 10> pCommandLists;
+
   const auto& currentFrame = GetCurrentFrame();
 
-  ID3D12CommandList* ppCommandLists[] = {m_primaryCommandBuffers[currentFrame].GetGraphicsCommandList()};
-  m_commandQueue->ExecuteCommandLists(_countof(ppCommandLists), ppCommandLists); // NOLINT
+  for (U32 idx = 0; idx < m_renderPasses.GetSize() - 1; ++idx) {
+    pCommandLists.push_back(m_renderPasses[idx].GetPrimaryGraphicsCommandList(0));
+  }
+
+  pCommandLists.push_back(m_renderPasses.Last().GetPrimaryGraphicsCommandList(currentFrame));
+
+  m_commandQueue->ExecuteCommandLists(pCommandLists.size(), pCommandLists.data()); // NOLINT
 
   // Present and update the frame index for the next frame.
-  VERIFY_D3D_OP(log_D3D12RenderSystem, m_swapChain->Present(1, 0), "Present Failed");
+  VERIFY_D3D_OP(log_D3D12RenderSystem, m_swapChain.RealComPtr()->Present(1, 0), "Present Failed");
 
   WaitForGPU();
+
+  m_perFrameAllocator.Reset();
 
   ExitRenderFrame();
 }
 
-void D3D12Renderer::WaitForGPU()
-{
-  const U32 fence = m_fenceValue;
-  VERIFY_D3D_OP(log_D3D12RenderSystem, m_commandQueue->Signal(m_fence.Get(), m_fenceValue), "Fence wait failed");
-  m_fenceValue++;
-
-  // Wait until the previous frame is finished.
-  if (m_fence->GetCompletedValue() < fence)
-  {
-    VERIFY_D3D_OP(log_D3D12RenderSystem, m_fence->SetEventOnCompletion(fence, m_fenceEvent), "Failed to set event completion on Fence");
-    WaitForSingleObject(m_fenceEvent, INFINITE);
-  }
+void D3D12Renderer::WaitForGPU() {
+  m_renderPasses.Last().WaitForGPU(m_commandQueue.Get());
 }
 
 void D3D12Renderer::SnapshotFrame(const String& exportPath) const {
