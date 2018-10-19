@@ -1,7 +1,9 @@
 #include "D3D12/D3D12ScopedImage.h"
 #include "D3D12/D3D12TypeMapping.h"
-#include "D3D12/d3dx12.h"
 #include "D3D12/D3D12Macros.h"
+#include "D3D12/D3D12ScopedBuffer.h"
+
+#include "D3D12/d3dx12.h"
 
 
 namespace Azura {
@@ -67,6 +69,21 @@ D3D12_SHADER_RESOURCE_VIEW_DESC D3D12ScopedImage::GetSRV(const TextureDesc& desc
 
 ID3D12Resource* D3D12ScopedImage::Real() const {
   return m_texture.Get();
+}
+
+void D3D12ScopedImage::CopyFromBuffer(const Microsoft::WRL::ComPtr<ID3D12Device>& device, ID3D12GraphicsCommandList* commandList, const D3D12ScopedBuffer& sourceBuffer, UINT64 sourceOffset) const {
+  const auto textureDesc = m_texture->GetDesc();
+
+  D3D12_PLACED_SUBRESOURCE_FOOTPRINT layouts;
+  UINT64 rowSizesInBytes;
+  UINT numRows;
+  UINT64 requiredSize;
+
+  device->GetCopyableFootprints(&textureDesc, 0, 1, sourceOffset, &layouts, &numRows, &rowSizesInBytes, &requiredSize);
+
+  CD3DX12_TEXTURE_COPY_LOCATION Dst(m_texture.Get(), 0);
+  CD3DX12_TEXTURE_COPY_LOCATION Src(sourceBuffer.Real(), layouts);
+  commandList->CopyTextureRegion(&Dst, 0, 0, 0, &Src, nullptr);
 }
 
 } // namespace D3D12

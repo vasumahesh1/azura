@@ -20,11 +20,16 @@ public:
 
   ID3D12Resource* Real() const;
 
-private:
+  void CopyFromBuffer(const Microsoft::WRL::ComPtr<ID3D12Device>& device,
+                      ID3D12GraphicsCommandList* commandList,
+                      const D3D12ScopedBuffer& sourceBuffer,
+                      UINT64 sourceOffset) const;
+
   void Transition(ID3D12GraphicsCommandList* commandList,
                   D3D12_RESOURCE_STATES fromState,
                   D3D12_RESOURCE_STATES toState) const;
 
+private:
   Microsoft::WRL::ComPtr<ID3D12Resource> m_texture;
 };
 

@@ -7,6 +7,7 @@
 #include "D3D12/D3D12Drawable.h"
 #include "D3D12/D3D12ScopedBuffer.h"
 #include "D3D12/D3D12ScopedCommandBuffer.h"
+#include "D3D12/D3D12ScopedImage.h"
 
 
 namespace Azura {
@@ -66,6 +67,7 @@ private:
   U32 m_cbvSrvDescriptorElementSize{0};
 
   Containers::Vector<D3D12DescriptorEntry> m_descriptorTableSizes;
+  Containers::Vector<D3D12ScopedImage> m_images;
   D3D12ScopedCommandBuffer m_secondaryCommandBuffer;
 
   Microsoft::WRL::ComPtr<ID3D12RootSignature> m_rootSignature;

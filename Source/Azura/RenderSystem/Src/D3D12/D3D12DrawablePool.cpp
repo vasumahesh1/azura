@@ -30,6 +30,7 @@ D3D12DrawablePool::D3D12DrawablePool(const ComPtr<ID3D12Device>& device,
     m_pipelineFactory(initAllocator, log_D3D12RenderSystem),
     m_descriptorsPerDrawable(descriptorCount.m_numUniformSlots),
     m_descriptorTableSizes(mainAllocator),
+    m_images(mainAllocator),
     m_secondaryCommandBuffer(device, D3D12_COMMAND_LIST_TYPE_BUNDLE, log_D3D12RenderSystem),
     m_allHeaps(mainAllocator) {
   LOG_DBG(log_D3D12RenderSystem, LOG_LEVEL, "Creating D3D12 Drawable Pool");
@@ -184,13 +185,23 @@ void D3D12DrawablePool::SetTextureData(ID3D12GraphicsCommandList* oneTimeCommand
 
   const CD3DX12_CPU_DESCRIPTOR_HANDLE textureCPUHandle(m_descriptorTextureHeap->GetCPUDescriptorHandleForHeapStart());
 
+  m_images.Reserve(m_textureBufferInfos.GetSize());
+
   U32 idx = 0;
   for (const auto& textBufInfo : m_textureBufferInfos) {
+
+    D3D12ScopedImage image = {};
+    image.Create(m_device, D3D12_RESOURCE_STATE_COPY_DEST, textBufInfo.m_desc, log_D3D12RenderSystem);
+    image.CopyFromBuffer(m_device, oneTimeCommandList, m_mainBuffer, textBufInfo.m_offset);
+    image.Transition(oneTimeCommandList, D3D12_RESOURCE_STATE_COPY_DEST, D3D12_RESOURCE_STATE_PIXEL_SHADER_RESOURCE);
+
+    m_images.PushBack(std::move(image));
+
     CD3DX12_CPU_DESCRIPTOR_HANDLE cpuHandle;
     CD3DX12_CPU_DESCRIPTOR_HANDLE::InitOffsetted(cpuHandle, textureCPUHandle, m_cbvSrvDescriptorElementSize * idx);
 
     const auto srvDesc = D3D12ScopedImage::GetSRV(textBufInfo.m_desc, ImageViewType::ImageView2D, log_D3D12RenderSystem);
-    // m_device->CreateShaderResourceView(m_texture.Get(), &srvDesc, cpuHandle);
+    m_device->CreateShaderResourceView(m_images.Last().Real(), &srvDesc, cpuHandle);
     ++idx;
   }
 }
