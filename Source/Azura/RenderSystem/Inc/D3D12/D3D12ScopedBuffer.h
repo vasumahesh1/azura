@@ -16,6 +16,7 @@ public:
               U32 size,
               D3D12_RESOURCE_STATES resourceStates,
               const Log& log_D3D12RenderSystem);
+  void Map();
 
   HRESULT SubAllocateFromBuffer(U32 size, U32 alignment);
 
@@ -25,6 +26,10 @@ public:
 
   U32 GetSize() const;
   U32 GetCurrentOffset() const;
+
+  void Transition(ID3D12GraphicsCommandList* commandList,
+    D3D12_RESOURCE_STATES fromState,
+    D3D12_RESOURCE_STATES toState) const;
 
 private:
   Microsoft::WRL::ComPtr<ID3D12Resource> m_buffer;

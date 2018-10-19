@@ -2,8 +2,6 @@
 #include "Generic/Drawable.h"
 #include "Log/Log.h"
 
-#include <array>
-
 #include "D3D12/D3D12Core.h"
 #include "D3D12/D3D12ScopedPipeline.h"
 #include "D3D12/D3D12Drawable.h"
@@ -35,7 +33,6 @@ public:
   void AddShader(U32 shaderId) override;
   void BindTextureData(SlotID slot, const TextureDesc& desc, const U8* buffer) override;
   void BindSampler(SlotID slot, const SamplerDesc& desc) override;
-  void SetTextureData(ID3D12GraphicsCommandList* bundleCommandList);
   void Submit() override;
 
   const Containers::Vector<ID3D12DescriptorHeap*>& GetAllDescriptorHeaps() const;
@@ -48,6 +45,9 @@ private:
   void CreateInputAttributes(const DrawablePoolCreateInfo& createInfo);
   void CreateDescriptorHeap(const DrawablePoolCreateInfo& createInfo);
 
+  void SetTextureData(ID3D12GraphicsCommandList* oneTimeCommandList);
+  void RecordTextureData(ID3D12GraphicsCommandList * bundleCommandList);
+
   Log log_D3D12RenderSystem;
 
   const Microsoft::WRL::ComPtr<ID3D12Device>& m_device;
@@ -59,9 +59,9 @@ private:
 
   D3D12PipelineFactory m_pipelineFactory;
   D3D12ScopedBuffer m_stagingBuffer;
+  D3D12ScopedBuffer m_mainBuffer;
 
   U32 m_descriptorsPerDrawable;
-  U32 m_offsetForCommonDescriptors{};
 
   U32 m_cbvSrvDescriptorElementSize{0};
 

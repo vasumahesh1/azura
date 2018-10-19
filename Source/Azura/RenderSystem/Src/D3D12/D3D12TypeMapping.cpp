@@ -79,6 +79,21 @@ namespace D3D12 {
   FUNC(BufferUsageRate::PerVertex, D3D12_INPUT_CLASSIFICATION_PER_VERTEX_DATA)                                \
   FUNC(BufferUsageRate::PerInstance, D3D12_INPUT_CLASSIFICATION_PER_INSTANCE_DATA)
 
+#define IMAGE_TYPE_TO_RESOURCE_DIMENSION(FUNC)                    \
+  FUNC(ImageType::Image1D, D3D12_RESOURCE_DIMENSION_TEXTURE1D)    \
+  FUNC(ImageType::Image2D, D3D12_RESOURCE_DIMENSION_TEXTURE2D)    \
+  FUNC(ImageType::Image3D, D3D12_RESOURCE_DIMENSION_TEXTURE3D)
+
+#define IMAGE_VIEW_TYPE_TO_SRV_DIMENSION(FUNC)                                            \
+  FUNC(ImageViewType::ImageView1D, D3D12_SRV_DIMENSION_TEXTURE1D)                         \
+  FUNC(ImageViewType::ImageView1DArray, D3D12_SRV_DIMENSION_TEXTURE1DARRAY)               \
+  FUNC(ImageViewType::ImageView2D, D3D12_SRV_DIMENSION_TEXTURE2D)                         \
+  FUNC(ImageViewType::ImageView2DArray, D3D12_SRV_DIMENSION_TEXTURE2DARRAY)               \
+  FUNC(ImageViewType::ImageView3D, D3D12_SRV_DIMENSION_TEXTURE3D)                         \
+  FUNC(ImageViewType::ImageViewCubeMap, D3D12_SRV_DIMENSION_TEXTURECUBE)                  \
+  FUNC(ImageViewType::ImageViewCubeMapArray, D3D12_SRV_DIMENSION_TEXTURECUBEARRAY)
+
+
 #define CREATE_MAPPER_CPP(FROM_FORMAT, TO_FORMAT, MAPPING_TABLE, CASE_MAPPING_FUNC)                                    \
   CREATE_MAPPER_H(FROM_FORMAT, TO_FORMAT) {                                                                            \
     switch (inputFormat) { MAPPING_TABLE(CASE_MAPPING_FUNC) }                                                          \
@@ -88,6 +103,9 @@ namespace D3D12 {
 CREATE_MAPPER_CPP(RawStorageFormat, DXGI_FORMAT, RAW_STORAGE_TO_DXGI_FORMAT_MAPPING, FORWARD_MAPPING)
 
 CREATE_MAPPER_CPP(BufferUsageRate, D3D12_INPUT_CLASSIFICATION, BUFFER_USAGE_RATE_TO_INPUT_CLASSIFICATION, FORWARD_MAPPING)
+
+CREATE_MAPPER_CPP(ImageType, D3D12_RESOURCE_DIMENSION, IMAGE_TYPE_TO_RESOURCE_DIMENSION, FORWARD_MAPPING)
+CREATE_MAPPER_CPP(ImageViewType, D3D12_SRV_DIMENSION, IMAGE_VIEW_TYPE_TO_SRV_DIMENSION, FORWARD_MAPPING)
 
 } // namespace D3D12
 } // namespace Azura

@@ -22,5 +22,31 @@ ID3D12GraphicsCommandList* D3D12ScopedCommandBuffer::GetGraphicsCommandList() co
   return m_commandList.Get();
 }
 
+void D3D12ScopedCommandBuffer::Execute(const Microsoft::WRL::ComPtr<ID3D12Device>& device, ID3D12CommandQueue* commandQueue, const Log& log_D3D12RenderSystem) {
+
+  VERIFY_D3D_OP(log_D3D12RenderSystem, device->CreateFence(m_fenceValue, D3D12_FENCE_FLAG_NONE, IID_PPV_ARGS(&m_fence)
+  ), "Failed to create fence");
+  m_fenceValue++;
+
+  // Create an event handle to use for frame synchronization.
+  m_fenceEvent = CreateEvent(nullptr, FALSE, FALSE, nullptr);
+  if (m_fenceEvent == nullptr) {
+    VERIFY_D3D_OP(log_D3D12RenderSystem, HRESULT_FROM_WIN32(GetLastError()), "Fence Event Null");
+  }
+
+  ID3D12CommandList* ppCommandLists[] = { m_commandList.Get() };
+  commandQueue->ExecuteCommandLists(1, ppCommandLists);
+}
+
+void D3D12ScopedCommandBuffer::WaitForComplete(ID3D12CommandQueue* commandQueue, const Log& log_D3D12RenderSystem) {
+  const U32 fence = m_fenceValue;
+  VERIFY_D3D_OP(log_D3D12RenderSystem, commandQueue->Signal(m_fence.Get(), m_fenceValue), "Fence wait failed");
+  m_fenceValue++;
+
+  // Wait until the previous frame is finished.
+  VERIFY_D3D_OP(log_D3D12RenderSystem, m_fence->SetEventOnCompletion(fence, m_fenceEvent), "Failed to set event completion on Fence");
+  WaitForSingleObject(m_fenceEvent, INFINITE);
+}
+
 } // namespace D3D12
 } // namespace Azura

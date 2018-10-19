@@ -34,7 +34,10 @@ void D3D12ScopedBuffer::Create(const Microsoft::WRL::ComPtr<ID3D12Device>& devic
     resourceStates,
     nullptr,
     IID_PPV_ARGS(&m_buffer)), "Failed to create Buffer");
+}
 
+void D3D12ScopedBuffer::Map()
+{
   void* pData;
   CD3DX12_RANGE readRange(0, 0);
   m_buffer->Map(0, &readRange, &pData);
@@ -69,6 +72,13 @@ U32 D3D12ScopedBuffer::GetSize() const {
 
 U32 D3D12ScopedBuffer::GetCurrentOffset() const {
   return U32(p_dataCur - p_dataBegin);
+}
+
+void D3D12ScopedBuffer::Transition(ID3D12GraphicsCommandList* commandList,
+  D3D12_RESOURCE_STATES fromState,
+  D3D12_RESOURCE_STATES toState) const {
+  const auto resourceBarrier = CD3DX12_RESOURCE_BARRIER::Transition(m_buffer.Get(), fromState, toState);
+  commandList->ResourceBarrier(1, &resourceBarrier);
 }
 } // namespace D3D12
 } // namespace Azura

@@ -3,6 +3,8 @@
 #include "Log/Log.h"
 #include "D3D12/D3D12Macros.h"
 #include "D3D12/D3D12TypeMapping.h"
+#include "D3D12/D3D12ScopedBuffer.h"
+#include "D3D12/D3D12ScopedCommandBuffer.h"
 
 using namespace Microsoft::WRL; // NOLINT
 
@@ -46,26 +48,39 @@ void D3D12Core::GetHardwareAdapter(IDXGIFactory2* pFactory, IDXGIAdapter1** ppAd
   ComPtr<IDXGIAdapter1> adapter;
   *ppAdapter = nullptr;
 
-  for (UINT adapterIndex = 0; DXGI_ERROR_NOT_FOUND != pFactory->EnumAdapters1(adapterIndex, &adapter); ++adapterIndex)
-  {
+  for (UINT adapterIndex = 0; DXGI_ERROR_NOT_FOUND != pFactory->EnumAdapters1(adapterIndex, &adapter); ++adapterIndex) {
     DXGI_ADAPTER_DESC1 desc;
     adapter->GetDesc1(&desc);
 
-    if ((desc.Flags & DXGI_ADAPTER_FLAG_SOFTWARE) != 0u)
-    {
+    if ((desc.Flags & DXGI_ADAPTER_FLAG_SOFTWARE) != 0u) {
       // Don't select the Basic Render Driver adapter.
       continue;
     }
 
     // Check to see if the adapter supports Direct3D 12, but don't create the
     // actual device yet.
-    if (SUCCEEDED(D3D12CreateDevice(adapter.Get(), D3D_FEATURE_LEVEL_11_0, _uuidof(ID3D12Device), nullptr)))
-    {
+    if (SUCCEEDED(D3D12CreateDevice(adapter.Get(), D3D_FEATURE_LEVEL_11_0, _uuidof(ID3D12Device), nullptr))) {
       break;
     }
   }
 
   *ppAdapter = adapter.Detach();
+}
+
+void D3D12Core::CopyBuffer(ID3D12GraphicsCommandList* commandList,
+                           const D3D12ScopedBuffer& dest,
+                           const D3D12ScopedBuffer& src,
+                           UINT64 size) {
+  return CopyBuffer(commandList, dest, 0, src, 0, size);
+}
+
+void D3D12Core::CopyBuffer(ID3D12GraphicsCommandList* commandList,
+                           const D3D12ScopedBuffer& dest,
+                           UINT64 dstOffset,
+                           const D3D12ScopedBuffer& src,
+                           UINT64 srcOffset,
+                           UINT64 size) {
+  commandList->CopyBufferRegion(dest.Real(), dstOffset, src.Real(), srcOffset, size);
 }
 
 } // namespace D3D12
