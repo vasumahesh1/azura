@@ -79,7 +79,8 @@ void AppRenderer::Initialize() {
   const U32 BASIC_TEXTURE_SLOT = descriptorRequirements.AddDescriptor({DescriptorType::SampledImage, ShaderStage::Pixel});
 
   const U32 UBO_SET = descriptorRequirements.AddSet({ UBO_SLOT });
-  const U32 SAMPLER_SET = descriptorRequirements.AddSet({ SAMPLER_SLOT, BASIC_TEXTURE_SLOT });
+  const U32 SAMPLER_SET = descriptorRequirements.AddSet({ SAMPLER_SLOT });
+  const U32 TEXTURE_SET = descriptorRequirements.AddSet({ BASIC_TEXTURE_SLOT });
 
   ShaderRequirements shaderRequirements = ShaderRequirements(2, allocatorTemporary);
   const U32 VERTEX_SHADER_ID = shaderRequirements.AddShader({ ShaderStage::Vertex, "BasicTextureTest.vs", AssetLocation::Shaders });
@@ -91,7 +92,7 @@ void AppRenderer::Initialize() {
     PipelinePassCreateInfo::Shaders{VERTEX_SHADER_ID, PIXEL_SHADER_ID},  // SHADERS
     PipelinePassCreateInfo::Inputs{},                                    // INPUT TARGETS
     PipelinePassCreateInfo::Outputs{},                                   // OUTPUT TARGETS
-    PipelinePassCreateInfo::DescriptorSets{UBO_SET, SAMPLER_SET},        // DESCRIPTOR SETS
+    PipelinePassCreateInfo::DescriptorSets{UBO_SET, SAMPLER_SET, TEXTURE_SET},        // DESCRIPTOR SETS
     ClearData{{0.2f, 0.2f, 0.2f, 1.0f}, 1.0f, 0}
   });
 

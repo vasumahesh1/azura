@@ -189,13 +189,15 @@ void D3D12Renderer::Submit() {
       if (isLast) {
         renderPass.RecordImageAcquireBarrier(commandList, cIdx);
       }
-
-      renderPass.RecordResourceBarriers(commandList);
+      else
+      {
+        renderPass.RecordResourceBarriers(commandList);
+      }
 
       commandList->RSSetViewports(1, &m_viewport);
       commandList->RSSetScissorRects(1, &m_scissorRect);
 
-      renderPass.SetRenderTargets(commandList);
+      renderPass.SetRenderTargets(commandList, cIdx, m_rtvDescriptorSize);
 
       const auto& renderPassRecords = renderPassEntries[idx];
 

@@ -31,15 +31,28 @@ void D3D12ScopedRenderPass::Create(const Microsoft::WRL::ComPtr<ID3D12Device>& d
   CreateBase(device, createInfo, descriptorSlots, descriptorSetTable, pipelineBuffers, pipelineBufferImages,
              allShaders);
 
+  U32 numDSV = 0;
+  U32 numRTV = 0;
+  for (const auto& output : createInfo.m_outputs) {
+    const auto& targetBuffer = pipelineBuffers[output];
+
+    if (HasDepthComponent(targetBuffer.m_format) || HasStencilComponent(targetBuffer.m_format)) {
+      ++numDSV;
+      continue;
+    }
+
+    ++numRTV;
+  }
+
   D3D12_DESCRIPTOR_HEAP_DESC rtvHeapDesc = {};
-  rtvHeapDesc.NumDescriptors             = m_numRTV;
+  rtvHeapDesc.NumDescriptors             = numRTV;
   rtvHeapDesc.Type                       = D3D12_DESCRIPTOR_HEAP_TYPE_RTV;
   rtvHeapDesc.Flags                      = D3D12_DESCRIPTOR_HEAP_FLAG_NONE;
   VERIFY_D3D_OP(log_D3D12RenderSystem, device->CreateDescriptorHeap(&rtvHeapDesc, IID_PPV_ARGS(&m_rtvHeap)),
     "Failed to create RTV Heap for Render Pass");
 
   D3D12_DESCRIPTOR_HEAP_DESC dsvHeapDesc = {};
-  rtvHeapDesc.NumDescriptors             = m_numDSV;
+  rtvHeapDesc.NumDescriptors             = numDSV;
   rtvHeapDesc.Type                       = D3D12_DESCRIPTOR_HEAP_TYPE_DSV;
   rtvHeapDesc.Flags                      = D3D12_DESCRIPTOR_HEAP_FLAG_NONE;
   VERIFY_D3D_OP(log_D3D12RenderSystem, device->CreateDescriptorHeap(&dsvHeapDesc, IID_PPV_ARGS(&m_dsvHeap)),
@@ -93,7 +106,7 @@ void D3D12ScopedRenderPass::CreateForSwapChain(const Microsoft::WRL::ComPtr<ID3D
   CreateBase(device, createInfo, descriptorSlots, descriptorSetTable, pipelineBuffers, pipelineBufferImages,
              allShaders);
 
-  hasDepth          = true;
+  hasDepth          = false;
   isTargetSwapChain = true;
 
   D3D12_DESCRIPTOR_HEAP_DESC rtvHeapDesc = {};
@@ -167,9 +180,9 @@ void D3D12ScopedRenderPass::RecordPresentBarrier(ID3D12GraphicsCommandList* comm
   commandList->ResourceBarrier(1, &endBarrier);
 }
 
-void D3D12ScopedRenderPass::SetRenderTargets(ID3D12GraphicsCommandList* commandList) const {
+void D3D12ScopedRenderPass::SetRenderTargets(ID3D12GraphicsCommandList* commandList, U32 cBufferIdx, UINT rtvDescriptorSize) const {
 
-  CD3DX12_CPU_DESCRIPTOR_HANDLE rtvHandle(m_rtvHeap->GetCPUDescriptorHandleForHeapStart());
+  CD3DX12_CPU_DESCRIPTOR_HANDLE rtvHandle(m_rtvHeap->GetCPUDescriptorHandleForHeapStart(), cBufferIdx, rtvDescriptorSize);
 
   const U32 numRTV = isTargetSwapChain ? 1 : m_renderOutputs.size();
 
@@ -282,20 +295,7 @@ void D3D12ScopedRenderPass::CreateBase(
     }
   }
 
-  for (const auto& output : createInfo.m_outputs) {
-    const auto& targetBuffer = pipelineBuffers[output];
-
-    if (HasDepthComponent(targetBuffer.m_format) || HasStencilComponent(targetBuffer.m_format)) {
-      ++m_numDSV;
-      continue;
-    }
-
-    ++m_numRTV;
-  }
-
-  LOG_DBG(log_D3D12RenderSystem, LOG_LEVEL, "D3D12 Drawable Pool: Creating Root Signature");
-
-  int offset = 0;
+  LOG_DBG(log_D3D12RenderSystem, LOG_LEVEL, "D3D12 Render Pass: Creating Root Signature");
 
   Vector<CD3DX12_ROOT_PARAMETER> descriptorTables(U32(createInfo.m_descriptorSets.size()), allocatorTemporary);
 
@@ -306,11 +306,11 @@ void D3D12ScopedRenderPass::CreateBase(
 
     m_rootSignatureTable.PushBack(tableEntry);
 
-    Vector<CD3DX12_DESCRIPTOR_RANGE> currentRanges(tableEntry.m_count, allocatorTemporary);
-
     U32 cbvOffset     = 0;
     U32 srvOffset     = 0;
     U32 samplerOffset = 0;
+
+    Vector<CD3DX12_DESCRIPTOR_RANGE> currentRanges(tableEntry.m_count, allocatorTemporary);
 
     for (const auto& slot : descriptorSlots) {
       if (slot.m_setIdx != setId) {
@@ -350,12 +350,11 @@ void D3D12ScopedRenderPass::CreateBase(
           LOG_ERR(log_D3D12RenderSystem, LOG_LEVEL, "Unsupported Descriptor Type for D3D12");
           break;
       }
-
-      CD3DX12_ROOT_PARAMETER rootParameter;
-      rootParameter.InitAsDescriptorTable(currentRanges.GetSize(), currentRanges.Data(), D3D12_SHADER_VISIBILITY_ALL);
-      descriptorTables.PushBack(rootParameter);
-
     }
+
+    CD3DX12_ROOT_PARAMETER rootParameter;
+    rootParameter.InitAsDescriptorTable(currentRanges.GetSize(), currentRanges.Data(), D3D12_SHADER_VISIBILITY_ALL);
+    descriptorTables.PushBack(rootParameter);
   }
 
   CD3DX12_ROOT_SIGNATURE_DESC rootSignatureDesc;
@@ -366,6 +365,8 @@ void D3D12ScopedRenderPass::CreateBase(
   ComPtr<ID3DBlob> error;
   VERIFY_D3D_OP(log_D3D12RenderSystem, D3D12SerializeRootSignature(&rootSignatureDesc, D3D_ROOT_SIGNATURE_VERSION_1, &
     signature, &error), "Failed to serialize D3D12 Root Signature");
+
+
   VERIFY_D3D_OP(log_D3D12RenderSystem, device->CreateRootSignature(0, signature->GetBufferPointer(), signature->
     GetBufferSize(), IID_PPV_ARGS(&m_rootSignature)), "Failed to create Root Signature");
 }

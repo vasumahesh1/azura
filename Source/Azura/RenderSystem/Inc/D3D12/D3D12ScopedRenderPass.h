@@ -55,7 +55,7 @@ public:
 
   void RecordPresentBarrier(ID3D12GraphicsCommandList* commandList, U32 idx) const;
 
-  void SetRenderTargets(ID3D12GraphicsCommandList* commandList) const;
+  void SetRenderTargets(ID3D12GraphicsCommandList* commandList, U32 cBufferIdx, UINT rtvDescriptorSize) const;
 
   const Containers::Vector<std::reference_wrapper<const D3D12ScopedShader>>& GetShaders() const;
   const Containers::Vector<std::reference_wrapper<const RenderTargetCreateInfo>>& GetInputInfo() const;
@@ -80,9 +80,6 @@ private:
 
   const Log log_D3D12RenderSystem;
   U32 m_id;
-
-  U32 m_numRTV{0};
-  U32 m_numDSV{0};
 
   bool hasDepth{false};
   bool isTargetSwapChain{false};
