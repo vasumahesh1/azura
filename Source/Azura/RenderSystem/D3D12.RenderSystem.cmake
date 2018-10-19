@@ -6,12 +6,13 @@ set(D3D12_SOURCES
     "Inc/D3D12/D3D12Macros.h"
     "Inc/D3D12/D3D12Renderer.h"
     "Inc/D3D12/D3D12ScopedBuffer.h"
+    "Inc/D3D12/D3D12ScopedCommandBuffer.h"
     "Inc/D3D12/D3D12ScopedImage.h"
     "Inc/D3D12/D3D12ScopedPipeline.h"
+    "Inc/D3D12/D3D12ScopedSampler.h"
     "Inc/D3D12/D3D12ScopedShader.h"
     "Inc/D3D12/D3D12TextureManager.h"
     "Inc/D3D12/D3D12TypeMapping.h"
-    "Inc/D3D12/D3D12ScopedCommandBuffer.h"
 
     "Inc/D3D12/d3dx12.h"
 
@@ -22,12 +23,13 @@ set(D3D12_SOURCES
     "Src/D3D12/D3D12Renderer.cpp"
     "Src/D3D12/D3D12RenderSystem.cpp"
     "Src/D3D12/D3D12ScopedBuffer.cpp"
+    "Src/D3D12/D3D12ScopedCommandBuffer.cpp"
     "Src/D3D12/D3D12ScopedImage.cpp"
     "Src/D3D12/D3D12ScopedPipeline.cpp"
+    "Src/D3D12/D3D12ScopedSampler.cpp"
     "Src/D3D12/D3D12ScopedShader.cpp"
     "Src/D3D12/D3D12TextureManager.cpp"
     "Src/D3D12/D3D12TypeMapping.cpp"
-    "Src/D3D12/D3D12ScopedCommandBuffer.cpp"
 )
 
 source_group(Generic\\Inc REGULAR_EXPRESSION "Inc/Generic/.*")

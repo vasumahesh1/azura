@@ -5,6 +5,7 @@
 #include "Memory/MemoryFactory.h"
 #include "Memory/MonotonicAllocator.h"
 #include "D3D12/D3D12ScopedImage.h"
+#include <algorithm>
 
 using namespace Microsoft::WRL;    // NOLINT
 using namespace Azura::Containers; // NOLINT
@@ -31,6 +32,7 @@ D3D12DrawablePool::D3D12DrawablePool(const ComPtr<ID3D12Device>& device,
     m_descriptorsPerDrawable(descriptorCount.m_numUniformSlots),
     m_descriptorTableSizes(mainAllocator),
     m_images(mainAllocator),
+    m_samplers(mainAllocator),
     m_secondaryCommandBuffer(device, D3D12_COMMAND_LIST_TYPE_BUNDLE, log_D3D12RenderSystem),
     m_allHeaps(mainAllocator) {
   LOG_DBG(log_D3D12RenderSystem, LOG_LEVEL, "Creating D3D12 Drawable Pool");
@@ -186,7 +188,7 @@ void D3D12DrawablePool::SetTextureData(ID3D12GraphicsCommandList* oneTimeCommand
 
   LOG_DBG(log_D3D12RenderSystem, LOG_LEVEL, "D3D12 Drawable Pool: Texture Data Found");
 
-  const CD3DX12_CPU_DESCRIPTOR_HANDLE textureCPUHandle(m_descriptorTextureHeap->GetCPUDescriptorHandleForHeapStart());
+  const CD3DX12_CPU_DESCRIPTOR_HANDLE textureCPUHandle(m_descriptorDrawableHeap->GetCPUDescriptorHandleForHeapStart());
 
   m_images.Reserve(m_textureBufferInfos.GetSize());
 
@@ -208,6 +210,23 @@ void D3D12DrawablePool::SetTextureData(ID3D12GraphicsCommandList* oneTimeCommand
     m_device->CreateShaderResourceView(m_images.Last().Real(), &srvDesc, cpuHandle);
     ++idx;
   }
+
+  const CD3DX12_CPU_DESCRIPTOR_HANDLE samplerCPUHandle(m_descriptorSamplerHeap->GetCPUDescriptorHandleForHeapStart());
+
+  m_samplers.Reserve(m_samplerInfos.GetSize());
+
+  idx = 0;
+  for (const auto& samplerInfo : m_samplerInfos) {
+    D3D12ScopedSampler sampler = {};
+    sampler.Create();
+
+    CD3DX12_CPU_DESCRIPTOR_HANDLE cpuHandle;
+    CD3DX12_CPU_DESCRIPTOR_HANDLE::InitOffsetted(cpuHandle, samplerCPUHandle, m_cbvSrvDescriptorElementSize * idx);
+
+    m_device->CreateSampler(&sampler.GetDesc(), cpuHandle);
+
+    ++idx;
+  }
 }
 
 void D3D12DrawablePool::RecordTextureData(ID3D12GraphicsCommandList* bundleCommandList) {
@@ -217,19 +236,69 @@ void D3D12DrawablePool::RecordTextureData(ID3D12GraphicsCommandList* bundleComma
 
   LOG_DBG(log_D3D12RenderSystem, LOG_LEVEL, "D3D12 Drawable Pool: Recording Texture Data");
 
-  const CD3DX12_GPU_DESCRIPTOR_HANDLE textureGPUHandle(m_descriptorTextureHeap->GetGPUDescriptorHandleForHeapStart());
+  const CD3DX12_GPU_DESCRIPTOR_HANDLE textureGPUHandle(m_descriptorDrawableHeap->GetGPUDescriptorHandleForHeapStart());
 
   U32 idx = 0;
+  int lastSet = -1;
   for (const auto& textBufInfo : m_textureBufferInfos) {
+    if (int(textBufInfo.m_set) == lastSet)
+    {
+      ++idx;
+      continue;
+    }
+
+    lastSet = textBufInfo.m_set;
+
     CD3DX12_GPU_DESCRIPTOR_HANDLE gpuHandle;
     CD3DX12_GPU_DESCRIPTOR_HANDLE::InitOffsetted(gpuHandle, textureGPUHandle, m_cbvSrvDescriptorElementSize * idx);
 
     bundleCommandList->SetGraphicsRootDescriptorTable(textBufInfo.m_set, gpuHandle);
     ++idx;
   }
+
+  const CD3DX12_GPU_DESCRIPTOR_HANDLE samplerGPUHandle(m_descriptorSamplerHeap->GetGPUDescriptorHandleForHeapStart());
+
+
+  lastSet = -1;
+  idx = 0;
+  for (const auto& samplerInfo : m_samplerInfos) {
+    if (int(samplerInfo.m_set) == lastSet)
+    {
+      ++idx;
+      continue;
+    }
+
+    lastSet = samplerInfo.m_set;
+
+    CD3DX12_GPU_DESCRIPTOR_HANDLE gpuHandle;
+    CD3DX12_GPU_DESCRIPTOR_HANDLE::InitOffsetted(gpuHandle, samplerGPUHandle, m_cbvSrvDescriptorElementSize * idx);
+
+    bundleCommandList->SetGraphicsRootDescriptorTable(samplerInfo.m_set, gpuHandle);
+    ++idx;
+  }
 }
 
 void D3D12DrawablePool::Submit() {
+  std::sort(m_textureBufferInfos.Begin(), m_textureBufferInfos.End(), [](const TextureBufferInfo& a, const TextureBufferInfo& b) -> bool
+  {
+    if (a.m_set == b.m_set)
+    {
+      return a.m_binding < b.m_binding;
+    }
+
+    return a.m_set < b.m_set;
+  });
+
+  std::sort(m_samplerInfos.Begin(), m_samplerInfos.End(), [](const SamplerInfo& a, const SamplerInfo& b) -> bool
+  {
+    if (a.m_set == b.m_set)
+    {
+      return a.m_binding < b.m_binding;
+    }
+
+    return a.m_set < b.m_set;
+  });
+
   LOG_DBG(log_D3D12RenderSystem, LOG_LEVEL, "D3D12 Drawable Pool: Submitting");
   m_pipelineFactory.Submit(m_device, m_rootSignature, m_pipelines);
 
@@ -251,10 +320,11 @@ void D3D12DrawablePool::Submit() {
   const UINT64 stagingBufferSize = GetRequiredIntermediateSize(m_stagingBuffer.Real(), 0, 1);
   D3D12Core::CopyBuffer(oneTimeCommandList, m_mainBuffer, m_stagingBuffer, stagingBufferSize);
 
-  m_mainBuffer.Transition(oneTimeCommandList, D3D12_RESOURCE_STATE_COPY_DEST,
-                          D3D12_RESOURCE_STATE_PIXEL_SHADER_RESOURCE);
+  m_mainBuffer.Transition(oneTimeCommandList, D3D12_RESOURCE_STATE_COPY_DEST, D3D12_RESOURCE_STATE_COPY_SOURCE);
 
   SetTextureData(oneTimeCommandList);
+
+  m_mainBuffer.Transition(oneTimeCommandList, D3D12_RESOURCE_STATE_COPY_SOURCE, D3D12_RESOURCE_STATE_VERTEX_AND_CONSTANT_BUFFER);
 
   oneTimeCommandList->Close();
 
@@ -266,7 +336,7 @@ void D3D12DrawablePool::Submit() {
   m_cbvSrvDescriptorElementSize = m_device->GetDescriptorHandleIncrementSize(D3D12_DESCRIPTOR_HEAP_TYPE_CBV_SRV_UAV);
   const U32 heapStepOffset      = m_descriptorsPerDrawable * m_cbvSrvDescriptorElementSize;
 
-  CD3DX12_CPU_DESCRIPTOR_HANDLE heapHandle(m_descriptorDrawableHeap->GetCPUDescriptorHandleForHeapStart());
+  CD3DX12_CPU_DESCRIPTOR_HANDLE heapHandle(m_descriptorDrawableHeap->GetCPUDescriptorHandleForHeapStart(), m_offsetToDrawableHeap, m_cbvSrvDescriptorElementSize);
 
   LOG_DBG(log_D3D12RenderSystem, LOG_LEVEL, "D3D12 Drawable Pool: Creating Resource Views");
 
@@ -291,7 +361,7 @@ void D3D12DrawablePool::Submit() {
 
   RecordTextureData(bundleCommandList);
 
-  CD3DX12_GPU_DESCRIPTOR_HANDLE gpuHeapHandle(m_descriptorDrawableHeap->GetGPUDescriptorHandleForHeapStart());
+  CD3DX12_GPU_DESCRIPTOR_HANDLE gpuHeapHandle(m_descriptorDrawableHeap->GetGPUDescriptorHandleForHeapStart(), m_offsetToDrawableHeap, m_cbvSrvDescriptorElementSize);
   LOG_DBG(log_D3D12RenderSystem, LOG_LEVEL, "D3D12 Drawable Pool: Recording Commands");
 
   for (auto& drawable : m_drawables) {
@@ -411,24 +481,15 @@ void D3D12DrawablePool::CreateInputAttributes(const DrawablePoolCreateInfo& crea
 void D3D12DrawablePool::CreateDescriptorHeap(const DrawablePoolCreateInfo& createInfo) {
   m_allHeaps.Reserve(3);
 
+  m_offsetToDrawableHeap = m_descriptorCount.m_numSampledImageSlots;
+
   D3D12_DESCRIPTOR_HEAP_DESC heapDesc = {};
-  heapDesc.NumDescriptors             = createInfo.m_numDrawables * m_descriptorsPerDrawable;
+  heapDesc.NumDescriptors             = m_offsetToDrawableHeap + createInfo.m_numDrawables * m_descriptorsPerDrawable;
   heapDesc.Type                       = D3D12_DESCRIPTOR_HEAP_TYPE_CBV_SRV_UAV;
   heapDesc.Flags                      = D3D12_DESCRIPTOR_HEAP_FLAG_SHADER_VISIBLE;
   VERIFY_D3D_OP(log_D3D12RenderSystem, m_device->CreateDescriptorHeap(&heapDesc, IID_PPV_ARGS(&m_descriptorDrawableHeap)
   ), "Failed to create Drawable Descriptor Heap");
   m_allHeaps.PushBack(m_descriptorDrawableHeap.Get());
-
-  if (m_descriptorCount.m_numSampledImageSlots > 0) {
-    D3D12_DESCRIPTOR_HEAP_DESC textureDesc = {};
-    textureDesc.NumDescriptors             = m_descriptorCount.m_numSampledImageSlots;
-    textureDesc.Type                       = D3D12_DESCRIPTOR_HEAP_TYPE_CBV_SRV_UAV;
-    textureDesc.Flags                      = D3D12_DESCRIPTOR_HEAP_FLAG_SHADER_VISIBLE;
-    VERIFY_D3D_OP(log_D3D12RenderSystem, m_device->CreateDescriptorHeap(&textureDesc, IID_PPV_ARGS(&
-      m_descriptorTextureHeap)), "Failed to create Texture Descriptor Heap");
-
-    m_allHeaps.PushBack(m_descriptorTextureHeap.Get());
-  }
 
   if (m_descriptorCount.m_numSamplerSlots > 0) {
     D3D12_DESCRIPTOR_HEAP_DESC samplerDesc = {};

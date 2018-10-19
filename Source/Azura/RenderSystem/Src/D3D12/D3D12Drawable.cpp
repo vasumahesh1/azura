@@ -95,6 +95,7 @@ void D3D12Drawable::RecordCommands(ID3D12GraphicsCommandList* commandList, CD3DX
 
     if (int(ubInfo.m_set) == lastSet)
     {
+      ++idx;
       continue;
     }
 

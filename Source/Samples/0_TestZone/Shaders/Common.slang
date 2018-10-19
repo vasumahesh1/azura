@@ -26,7 +26,7 @@ struct BasicTextureTestVertexInput
 struct ColorPixelInput
 {
   float4 pos : SV_Position;
-  float4 color : COLOR;
+  float4 color : PS_COLOR;
 };
 
 struct UVPixelInput
@@ -34,3 +34,9 @@ struct UVPixelInput
   float4 pos : SV_Position;
   float2 uv : UV;
 };
+
+struct TextureState {
+  SamplerState linearSampler;
+  Texture2D target;
+};
+

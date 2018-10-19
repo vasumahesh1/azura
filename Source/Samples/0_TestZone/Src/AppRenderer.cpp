@@ -16,6 +16,11 @@ struct Vertex {
   float m_col[4];
 };
 
+struct VertexWithUV {
+  float m_pos[4];
+  float m_uv[2];
+};
+
 struct UniformBufferData {
   Matrix4f m_model;
   Matrix4f m_modelInvTranspose;
@@ -70,10 +75,12 @@ void AppRenderer::Initialize() {
 
   DescriptorRequirements descriptorRequirements = DescriptorRequirements(3, allocatorTemporary);
   const U32 UBO_SLOT = descriptorRequirements.AddDescriptor({ DescriptorType::UniformBuffer, ShaderStage::Vertex });
+  const U32 SAMPLER_SLOT = descriptorRequirements.AddDescriptor({DescriptorType::Sampler, ShaderStage::Pixel});
+  const U32 BASIC_TEXTURE_SLOT = descriptorRequirements.AddDescriptor({DescriptorType::SampledImage, ShaderStage::Pixel});
 
   ShaderRequirements shaderRequirements = ShaderRequirements(2, allocatorTemporary);
-  const U32 VERTEX_SHADER_ID = shaderRequirements.AddShader({ ShaderStage::Vertex, "BasicRenderTest.vs", AssetLocation::Shaders });
-  const U32 PIXEL_SHADER_ID = shaderRequirements.AddShader({ ShaderStage::Pixel, "BasicRenderTest.ps", AssetLocation::Shaders });
+  const U32 VERTEX_SHADER_ID = shaderRequirements.AddShader({ ShaderStage::Vertex, "BasicTextureTest.vs", AssetLocation::Shaders });
+  const U32 PIXEL_SHADER_ID = shaderRequirements.AddShader({ ShaderStage::Pixel, "BasicTextureTest.ps", AssetLocation::Shaders });
 
   RenderPassRequirements renderPassRequirements = RenderPassRequirements(0, 1, allocatorTemporary);
 
@@ -92,34 +99,39 @@ void AppRenderer::Initialize() {
 
   m_textureManager = RenderSystem::CreateTextureManager(textureRequirements);
 
+
+  const U32 nocturnalTexture = m_textureManager->Load("Textures/Nocturnal.jpg");
+
   DrawablePoolCreateInfo poolInfo = {allocatorTemporary};
   poolInfo.m_byteSize             = 0x400000;
   poolInfo.m_numDrawables         = 1;
-  poolInfo.m_drawType             = DrawType::InstancedIndexed;
   poolInfo.m_renderPasses = {{SINGLE_PASS}, allocatorTemporary};
+  poolInfo.m_drawType             = DrawType::InstancedIndexed;
 
-  const U32 VERTEX_SLOT = poolInfo.AddInputSlot({ BufferUsageRate::PerVertex, { {"POSITION", RawStorageFormat::R32G32B32A32_FLOAT}, {"COLOR", RawStorageFormat::R32G32B32A32_FLOAT}} });
+  const auto VERTEX_SLOT = poolInfo.AddInputSlot({ BufferUsageRate::PerVertex, { {"POSITION", RawStorageFormat::R32G32B32A32_FLOAT}, {"UV", RawStorageFormat::R32G32_FLOAT} } });
 
   DrawablePool& pool = m_renderer->CreateDrawablePool(poolInfo);
 
-  // TODO(vasumahesh1): Remove when render passes added
   pool.AddShader(VERTEX_SHADER_ID);
   pool.AddShader(PIXEL_SHADER_ID);
 
-  Vector<Vertex> vertexData = Vector<Vertex>({
-    Vertex{{0, 0, 1, 1}, {1, 0, 0, 1}},
-    Vertex{{1, 0, 1, 1}, {0, 1, 0, 1}},
-    Vertex{{1, 1, 1, 1}, {0, 0, 1, 1}},
-    Vertex{{0, 1, 1, 1}, {1, 1, 1, 1}}
+  const TextureDesc* desc = m_textureManager->GetInfo(nocturnalTexture);
+  VERIFY_TRUE(log_AppRenderer, desc != nullptr, "Texture Description was Null");
+
+  pool.BindTextureData(BASIC_TEXTURE_SLOT, *desc, m_textureManager->GetData(nocturnalTexture));
+  pool.BindSampler(SAMPLER_SLOT, {});
+
+  Vector<VertexWithUV> vertexData = Vector<VertexWithUV>({
+    VertexWithUV{{0, 0, 1, 1}, {0, 0}},
+    VertexWithUV{{1, 0, 1, 1}, {1, 0}},
+    VertexWithUV{{1, 1, 1, 1}, {1, 1}},
+    VertexWithUV{{0, 1, 1, 1}, {0, 1}}
     }, allocatorTemporary);
 
   Vector<U32> indexData = Vector<U32>({
     0, 1, 2,
     2, 3, 0
     }, allocatorTemporary);
-
-  uboData.m_viewProj          = proj * view;
-  uboData.m_modelInvTranspose = uboData.m_model.Inverse().Transpose();
 
   const auto bufferStart      = reinterpret_cast<U8*>(vertexData.Data()); // NOLINT
   const auto indexBufferStart = reinterpret_cast<U8*>(indexData.Data());  // NOLINT
@@ -132,9 +144,10 @@ void AppRenderer::Initialize() {
   createInfo.m_indexType        = RawStorageFormat::R32_UINT;
 
   const auto drawableId = pool.CreateDrawable(createInfo);
-  pool.BindVertexData(drawableId, VERTEX_SLOT, bufferStart, vertexData.GetSize() * sizeof(Vertex));
+  pool.BindVertexData(drawableId, VERTEX_SLOT, bufferStart, vertexData.GetSize() * sizeof(VertexWithUV));
   pool.SetIndexData(drawableId, indexBufferStart, indexData.GetSize() * sizeof(U32));
   pool.BindUniformData(drawableId, UBO_SLOT, uboDataBuffer, sizeof(UniformBufferData));
+
 
   // All Drawables Done
   m_renderer->Submit();

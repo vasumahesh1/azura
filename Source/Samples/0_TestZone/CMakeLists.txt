@@ -19,6 +19,9 @@ set(
 
     "${PROJECT_SOURCE_DIR}/Shaders/BasicRenderTest.vs.slang|VS"
     "${PROJECT_SOURCE_DIR}/Shaders/BasicRenderTest.ps.slang|PS"
+
+    "${PROJECT_SOURCE_DIR}/Shaders/BasicTextureTest.vs.slang|VS"
+    "${PROJECT_SOURCE_DIR}/Shaders/BasicTextureTest.ps.slang|PS"
 )
 
 add_executable(TestZone ${SOURCES})
