@@ -61,6 +61,17 @@ void D3D12ScopedImage::Create(const Microsoft::WRL::ComPtr<ID3D12Device>& device
 
   const auto heapProperties = CD3DX12_HEAP_PROPERTIES(D3D12_HEAP_TYPE_DEFAULT);
 
+  // D3D12_CLEAR_VALUE clearValue = {};
+  // clearValue.Color[0] = 0.2f;
+  // clearValue.Color[1] = 0.2f;
+  // clearValue.Color[2] = 0.2f;
+  // clearValue.Color[3] = 1.0f;
+  // clearValue.Format = format.value();
+  //
+  // if (HasDepthOrStencilComponent(desc.m_format)) {
+  //   clearValue = { format.value() , 1.0f };
+  // }
+
   VERIFY_D3D_OP(log_D3D12RenderSystem, device->CreateCommittedResource(
     &heapProperties,
     D3D12_HEAP_FLAG_NONE,

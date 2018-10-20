@@ -21,14 +21,14 @@ struct ShaderControls {
 
 struct VertexShaderInput
 {
-  float4 in_Pos : IN_POSITION;
-  float4 in_Normal : IN_NORMAL;
+  float4 in_Pos : POSITION;
+  float4 in_Normal : NORMAL;
 };
 
 struct NoiseInput_VS
 {
-  float4 in_Pos : IN_POSITION;
-  float4 in_Normal : IN_NORMAL;
+  float4 in_Pos : POSITION;
+  float4 in_Normal : NORMAL;
 };
 
 struct NoiseInput_PS
@@ -49,8 +49,8 @@ struct NoiseOuput_PS
 
 struct QuadInput_VS
 {
-  float4 in_Pos : IN_POSITION;
-  float2 in_UV : IN_UV;
+  float4 in_Pos : POSITION;
+  float2 in_UV : UV;
 };
 
 struct QuadInput_PS
@@ -68,8 +68,11 @@ struct PixelShaderInput
 };
 
 struct TextureState {
-  SamplerState linearSampler;
   Texture2D target;
+};
+
+struct SamplerBlock {
+  SamplerState linearSampler;
 };
 
 struct AttachmentState {
@@ -85,9 +88,4 @@ static const float2 GRASS_2_OFFSET = float2(0.75, 0.0);
 static const float2 BEDROCK_1_OFFSET = float2(0.25, 0.25);
 static const float2 BEDROCK_2_OFFSET = float2(0.5, 0.25);
 static const float2 SAND_OFFSET = float2(0.0, 0.25);
-
-ParameterBlock<UBOData> ubo;
-ParameterBlock<ShaderControls> controls;
-ParameterBlock<TextureState> textureState;
-ParameterBlock<AttachmentState> attachments;
 

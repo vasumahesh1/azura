@@ -1,17 +1,18 @@
 import Common;
+import Pass2;
 
 static const float TEXTURE_GRID_SIZE = 4;
 static const float3 TEXTURE_GRID_VEC = float3(1.0 / TEXTURE_GRID_SIZE, 1.0 / TEXTURE_GRID_SIZE, 1.0 / TEXTURE_GRID_SIZE);
 
 float4 main(QuadInput_PS input) : SV_Target
 {
-  float4 fragNoiseData = attachments.target1.Sample(textureState.linearSampler, input.uv);
+  float4 fragNoiseData = attachments.target1.Sample(samplerBlock.linearSampler, input.uv);
 
   if (fragNoiseData.x <= 0.0) {
     discard;
   }
 
-  float4 fragModelPos = attachments.target2.Sample(textureState.linearSampler, input.uv);
+  float4 fragModelPos = attachments.target2.Sample(samplerBlock.linearSampler, input.uv);
 
   const float waterThreshold = controls.u_waterControls.x - 0.5;
   const float elevation = (0.5 / controls.u_elevation) * 5.0;

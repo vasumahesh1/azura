@@ -1,4 +1,5 @@
 import Common;
+import Pass2;
 import Perlin3D;
 
 float fbm(float3 x) {

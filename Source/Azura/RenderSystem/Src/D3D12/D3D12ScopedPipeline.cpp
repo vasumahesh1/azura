@@ -56,6 +56,16 @@ D3D12PipelineFactory& D3D12PipelineFactory::BulkAddAttributeDescription(const Ve
   return *this;
 }
 
+D3D12PipelineFactory& D3D12PipelineFactory::SetRasterizerStage(CullMode cullMode, FrontFace faceOrder) {
+  const auto d3dCullMode = ToD3D12_CULL_MODE(cullMode);
+  VERIFY_OPT(log_D3D12RenderSystem, d3dCullMode, "Unknown D3D12 Cull Mode");
+
+  m_rasterizerDesc.CullMode = d3dCullMode.value();
+  m_rasterizerDesc.FrontCounterClockwise = static_cast<BOOL>(faceOrder == FrontFace::CounterClockwise);
+
+  return *this;
+}
+
 D3D12PipelineFactory& D3D12PipelineFactory::AddShaderStage(const D3D12ScopedShader& shader) {
   switch(shader.GetShaderStage())
   {
@@ -125,8 +135,7 @@ void D3D12PipelineFactory::Submit(const Microsoft::WRL::ComPtr<ID3D12Device>& de
       psoDesc.PS = m_pixelShaderModule.value();
     }
 
-    psoDesc.RasterizerState = CD3DX12_RASTERIZER_DESC(D3D12_DEFAULT);
-    psoDesc.RasterizerState.CullMode = D3D12_CULL_MODE_NONE;
+    psoDesc.RasterizerState = m_rasterizerDesc;
 
     psoDesc.BlendState = CD3DX12_BLEND_DESC(D3D12_DEFAULT);
     psoDesc.DepthStencilState.DepthEnable = FALSE;

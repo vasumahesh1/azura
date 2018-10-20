@@ -39,7 +39,7 @@ void D3D12ScopedRenderPass::Create(const Microsoft::WRL::ComPtr<ID3D12Device>& d
   for (const auto& output : createInfo.m_outputs) {
     const auto& targetBuffer = pipelineBuffers[output];
 
-    if (HasDepthComponent(targetBuffer.m_format) || HasStencilComponent(targetBuffer.m_format)) {
+    if (HasDepthOrStencilComponent(targetBuffer.m_format)) {
       ++numDSV;
       continue;
     }
@@ -55,9 +55,9 @@ void D3D12ScopedRenderPass::Create(const Microsoft::WRL::ComPtr<ID3D12Device>& d
     "Failed to create RTV Heap for Render Pass");
 
   D3D12_DESCRIPTOR_HEAP_DESC dsvHeapDesc = {};
-  rtvHeapDesc.NumDescriptors             = numDSV;
-  rtvHeapDesc.Type                       = D3D12_DESCRIPTOR_HEAP_TYPE_DSV;
-  rtvHeapDesc.Flags                      = D3D12_DESCRIPTOR_HEAP_FLAG_NONE;
+  dsvHeapDesc.NumDescriptors             = numDSV;
+  dsvHeapDesc.Type                       = D3D12_DESCRIPTOR_HEAP_TYPE_DSV;
+  dsvHeapDesc.Flags                      = D3D12_DESCRIPTOR_HEAP_FLAG_NONE;
   VERIFY_D3D_OP(log_D3D12RenderSystem, device->CreateDescriptorHeap(&dsvHeapDesc, IID_PPV_ARGS(&m_dsvHeap)),
     "Failed to create DSV Heap for Render Pass");
 
@@ -68,7 +68,7 @@ void D3D12ScopedRenderPass::Create(const Microsoft::WRL::ComPtr<ID3D12Device>& d
     const auto& targetBuffer = pipelineBuffers[output];
     auto& gpuTexture   = pipelineBufferImages[output];
 
-    if (HasDepthComponent(targetBuffer.m_format) || HasStencilComponent(targetBuffer.m_format)) {
+    if (HasDepthOrStencilComponent(targetBuffer.m_format)) {
       const auto dsvDesc = D3D12ScopedImage::GetDSV(targetBuffer.m_format, ImageViewType::ImageView2D,
                                                     log_D3D12RenderSystem);
       device->CreateDepthStencilView(gpuTexture.Real(), &dsvDesc, dsvHandle);
@@ -452,6 +452,9 @@ void D3D12ScopedRenderPass::CreateBase(
 
   VERIFY_D3D_OP(log_D3D12RenderSystem, device->CreateRootSignature(0, signature->GetBufferPointer(), signature->
     GetBufferSize(), IID_PPV_ARGS(&m_rootSignature)), "Failed to create Root Signature");
+
+  LOG_DBG(log_D3D12RenderSystem, LOG_LEVEL, "D3D12 Render Pass: Completed Root Signature");
+
 }
 } // namespace D3D12
 } // namespace Azura

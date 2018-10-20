@@ -112,6 +112,11 @@ namespace D3D12 {
   FUNC(ImageViewType::ImageViewCubeMap, D3D12_RTV_DIMENSION_UNKNOWN)                  \
   FUNC(ImageViewType::ImageViewCubeMapArray, D3D12_RTV_DIMENSION_UNKNOWN)
 
+#define CULL_MODE_TO_D3D12_CULL_MODE_MAPPING(FUNC)                                                                        \
+  FUNC(CullMode::None, D3D12_CULL_MODE_NONE)                                                                              \
+  FUNC(CullMode::FrontBit, D3D12_CULL_MODE_FRONT)                                                                     \
+  FUNC(CullMode::BackBit, D3D12_CULL_MODE_BACK)                                                                       \
+  FUNC(CullMode::FrontAndBack, D3D12_CULL_MODE_NONE)
 
 #define CREATE_MAPPER_CPP(FROM_FORMAT, TO_FORMAT, MAPPING_TABLE, CASE_MAPPING_FUNC)                                    \
   CREATE_MAPPER_H(FROM_FORMAT, TO_FORMAT) {                                                                            \
@@ -127,6 +132,7 @@ CREATE_MAPPER_CPP(ImageType, D3D12_RESOURCE_DIMENSION, IMAGE_TYPE_TO_RESOURCE_DI
 CREATE_MAPPER_CPP(ImageViewType, D3D12_SRV_DIMENSION, IMAGE_VIEW_TYPE_TO_SRV_DIMENSION, FORWARD_MAPPING)
 CREATE_MAPPER_CPP(ImageViewType, D3D12_DSV_DIMENSION, IMAGE_VIEW_TYPE_TO_DSV_DIMENSION, FORWARD_MAPPING)
 CREATE_MAPPER_CPP(ImageViewType, D3D12_RTV_DIMENSION, IMAGE_VIEW_TYPE_TO_RTV_DIMENSION, FORWARD_MAPPING)
+CREATE_MAPPER_CPP(CullMode, D3D12_CULL_MODE, CULL_MODE_TO_D3D12_CULL_MODE_MAPPING, FORWARD_MAPPING)
 
 } // namespace D3D12
 } // namespace Azura

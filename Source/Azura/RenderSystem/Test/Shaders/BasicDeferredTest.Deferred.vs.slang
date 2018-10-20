@@ -1,4 +1,4 @@
-import CommonDeferred;
+import CommonDeferredPost;
 
 PixelShaderInput main(VertexShaderInput input)
 {

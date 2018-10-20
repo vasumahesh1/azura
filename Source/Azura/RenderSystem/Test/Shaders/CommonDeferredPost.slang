@@ -28,6 +28,5 @@ struct AttachmentBlock1 {
   Texture2D g_attachmentTexture;
 };
 
-ParameterBlock<UBOData> ubo;
 ParameterBlock<SamplerBlock> samplerBlock;
-ParameterBlock<TextureBlock> textureBlock;
+ParameterBlock<AttachmentBlock1> attachmentBlock;

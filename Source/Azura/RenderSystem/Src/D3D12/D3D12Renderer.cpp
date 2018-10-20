@@ -60,6 +60,11 @@ D3D12Renderer::D3D12Renderer(const ApplicationInfo& appInfo,
   ComPtr<IDXGIAdapter1> hardwareAdapter;
   D3D12Core::GetHardwareAdapter(factory.Get(), &hardwareAdapter);
 
+#ifdef BUILD_DEBUG
+  ComPtr<IDXGIAdapter> warpAdapter;
+  VERIFY_D3D_OP(log_D3D12RenderSystem, factory->EnumWarpAdapter(IID_PPV_ARGS(&warpAdapter)), "Failed to create Warp adapter");
+#endif
+
   VERIFY_D3D_OP(log_D3D12RenderSystem, D3D12CreateDevice(hardwareAdapter.Get(), D3D_FEATURE_LEVEL_11_0, IID_PPV_ARGS(&
     m_device)), "Failed to create D3D12 Device");
 

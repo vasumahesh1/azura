@@ -27,6 +27,8 @@ namespace D3D12 {
 
     D3D12PipelineFactory& BulkAddAttributeDescription(const VertexSlot& vertexSlot, U32 binding);
 
+    D3D12PipelineFactory & SetRasterizerStage(CullMode cullMode, FrontFace faceOrder);
+
     D3D12PipelineFactory& AddShaderStage(const D3D12ScopedShader& shader);
 
     void Submit(const Microsoft::WRL::ComPtr<ID3D12Device>& device, const Containers::Vector<std::reference_wrapper<D3D12ScopedRenderPass>>& renderPasses, Containers::Vector<D3D12ScopedPipeline>& resultPipelines) const;
@@ -40,6 +42,8 @@ namespace D3D12 {
 
     // TODO(vasumahesh1): Make our own map
     std::map<U32, BindingInfo> m_bindingMap;
+
+    D3D12_RASTERIZER_DESC m_rasterizerDesc{CD3DX12_RASTERIZER_DESC(D3D12_DEFAULT)};
 
     Containers::Vector<D3D12_INPUT_ELEMENT_DESC> m_inputElementDescs;
     std::optional<D3D12_SHADER_BYTECODE> m_vertexShaderModule;

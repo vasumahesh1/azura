@@ -93,7 +93,7 @@ void AppRenderer::Initialize() {
   // TODO(vasumahesh1):[Q]:Allocator?
   ApplicationRequirements applicationRequirements = {}; // NOLINT
 
-  DescriptorRequirements descriptorRequirements = DescriptorRequirements(4, 3, allocatorTemporary);
+  DescriptorRequirements descriptorRequirements = DescriptorRequirements(4, 4, allocatorTemporary);
   const U32 UBO_SLOT = descriptorRequirements.AddDescriptor({ DescriptorType::UniformBuffer, ShaderStage::Vertex | ShaderStage::Pixel });
   const U32 SHADER_CONTROLS_SLOT = descriptorRequirements.AddDescriptor({ DescriptorType::UniformBuffer, ShaderStage::Vertex | ShaderStage::Pixel });
   const U32 SAMPLER_SLOT = descriptorRequirements.AddDescriptor({DescriptorType::Sampler, ShaderStage::Pixel});
@@ -101,7 +101,8 @@ void AppRenderer::Initialize() {
 
   const U32 UBO_SET = descriptorRequirements.AddSet({ UBO_SLOT });
   const U32 CONTROLS_SET = descriptorRequirements.AddSet({ SHADER_CONTROLS_SLOT });
-  const U32 TEXTURE_SET = descriptorRequirements.AddSet({ SAMPLER_SLOT, PLANET_TEXTURE_SLOT });
+  const U32 SAMPLER_SET = descriptorRequirements.AddSet({ SAMPLER_SLOT });
+  const U32 TEXTURE_SET = descriptorRequirements.AddSet({ PLANET_TEXTURE_SLOT });
 
   ShaderRequirements shaderRequirements = ShaderRequirements(6, allocatorTemporary);
   const U32 SCREEN_QUAD_VERTEX_SHADER_ID = shaderRequirements.AddShader({ ShaderStage::Vertex, "ScreenQuad.vs", AssetLocation::Shaders });
@@ -132,7 +133,7 @@ void AppRenderer::Initialize() {
     PipelinePassCreateInfo::Shaders{},                                   // SHADERS
     PipelinePassCreateInfo::Inputs{{NOISE_TARGET_1, ShaderStage::Pixel}, {NOISE_TARGET_2, ShaderStage::Pixel}, {NOISE_TARGET_3, ShaderStage::Pixel}},      // INPUT TARGETS
     PipelinePassCreateInfo::Outputs{},                                   // OUTPUT TARGETS
-    PipelinePassCreateInfo::DescriptorSets{CONTROLS_SET, TEXTURE_SET},
+    PipelinePassCreateInfo::DescriptorSets{UBO_SET, CONTROLS_SET, SAMPLER_SET, TEXTURE_SET},
     {},
     BlendState{true, {BlendFactor::SrcAlpha, BlendFactor::OneMinusSrcAlpha}, {BlendFactor::SrcAlpha, BlendFactor::OneMinusSrcAlpha}}
     });

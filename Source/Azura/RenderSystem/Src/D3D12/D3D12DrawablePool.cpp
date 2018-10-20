@@ -38,6 +38,8 @@ D3D12DrawablePool::D3D12DrawablePool(const ComPtr<ID3D12Device>& device,
     m_allHeaps(mainAllocator) {
   LOG_DBG(log_D3D12RenderSystem, LOG_LEVEL, "Creating D3D12 Drawable Pool");
 
+  m_pipelineFactory.SetRasterizerStage(createInfo.m_cullMode, FrontFace::CounterClockwise);
+  
   CreateRenderPassReferences(createInfo, renderPasses);
   CreateInputAttributes(createInfo);
   CreateDescriptorHeap(createInfo);
@@ -157,7 +159,7 @@ void D3D12DrawablePool::BindTextureData(SlotID slot, const TextureDesc& desc, co
   const auto& descriptorSlot = m_globalDescriptorSlots[slot];
 
   // TODO(vasumahesh1):[INPUT]: Could be an issue with sizeof(float)
-  const U32 offset = m_stagingBuffer.AppendData(buffer, size, sizeof(float), log_D3D12RenderSystem);
+  const U32 offset = m_stagingBuffer.AppendData(buffer, size, 512, log_D3D12RenderSystem);
 
   TextureBufferInfo info = TextureBufferInfo();
   info.m_byteSize        = size;
