@@ -34,20 +34,19 @@ DXGI_FORMAT ConvertDepthFormatForSRV(DXGI_FORMAT format) {
 
 void D3D12ScopedImage::Create(const Microsoft::WRL::ComPtr<ID3D12Device>& device,
                               D3D12_RESOURCE_STATES initState,
+                              D3D12_RESOURCE_FLAGS resourceFlags,
                               const TextureDesc& desc,
                               const Log& log_D3D12RenderSystem) {
 
   const auto format = ToDXGI_FORMAT(desc.m_format);
   VERIFY_OPT(log_D3D12RenderSystem, format, "Unknown Format");
 
+  m_format = desc.m_format;
+
+  m_currentState = initState;
+
   const auto resourceDimension = ToD3D12_RESOURCE_DIMENSION(desc.m_type);
   VERIFY_OPT(log_D3D12RenderSystem, resourceDimension, "Unknown Resource Dimension");
-
-  D3D12_RESOURCE_FLAGS resourceFlags = D3D12_RESOURCE_FLAG_NONE;
-
-  if (HasDepthComponent(desc.m_format) || HasStencilComponent(desc.m_format)) {
-    resourceFlags = D3D12_RESOURCE_FLAG_ALLOW_DEPTH_STENCIL;
-  }
 
   D3D12_RESOURCE_DESC textureDesc = {};
   textureDesc.MipLevels           = UINT16(desc.m_mipLevels);
@@ -78,11 +77,22 @@ void D3D12ScopedImage::Transition(ID3D12GraphicsCommandList* commandList,
   commandList->ResourceBarrier(1, &resourceBarrier);
 }
 
+void D3D12ScopedImage::Transition(ID3D12GraphicsCommandList* commandList,
+  D3D12_RESOURCE_STATES toState) const {
+  if (m_currentState == toState)
+  {
+    return;
+  }
+
+  const auto resourceBarrier = CD3DX12_RESOURCE_BARRIER::Transition(m_texture.Get(), m_currentState, toState);
+  commandList->ResourceBarrier(1, &resourceBarrier);
+}
+
 D3D12_SHADER_RESOURCE_VIEW_DESC D3D12ScopedImage::GetSRV(RawStorageFormat viewFormat,
                                                          ImageViewType imageView,
                                                          const Log& log_D3D12RenderSystem) {
   const auto format = ToDXGI_FORMAT(viewFormat);
-  VERIFY_OPT(log_D3D12RenderSystem, format, "Unknown Format: %s", ToString(viewFormat).c_str());
+  VERIFY_OPT(log_D3D12RenderSystem, format, "Unknown Format");
 
   const auto srvView = ToD3D12_SRV_DIMENSION(imageView);
   VERIFY_OPT(log_D3D12RenderSystem, format, "Unknown SRV View Dimensions");
@@ -151,6 +161,10 @@ D3D12_RENDER_TARGET_VIEW_DESC D3D12ScopedImage::GetRTV(RawStorageFormat viewForm
 
 ID3D12Resource* D3D12ScopedImage::Real() const {
   return m_texture.Get();
+}
+
+RawStorageFormat D3D12ScopedImage::GetFormat() const {
+  return m_format;
 }
 
 Microsoft::WRL::ComPtr<ID3D12Resource> D3D12ScopedImage::RealComPtr() const {

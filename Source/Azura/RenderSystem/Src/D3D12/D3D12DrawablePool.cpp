@@ -37,7 +37,7 @@ D3D12DrawablePool::D3D12DrawablePool(const ComPtr<ID3D12Device>& device,
     m_secondaryCommandBuffers(createInfo.m_renderPasses.GetSize(), mainAllocator),
     m_allHeaps(mainAllocator) {
   LOG_DBG(log_D3D12RenderSystem, LOG_LEVEL, "Creating D3D12 Drawable Pool");
-  
+
   CreateRenderPassReferences(createInfo, renderPasses);
   CreateInputAttributes(createInfo);
   CreateDescriptorHeap(createInfo);
@@ -198,7 +198,8 @@ void D3D12DrawablePool::SetTextureData(ID3D12GraphicsCommandList* oneTimeCommand
   for (const auto& textBufInfo : m_textureBufferInfos) {
 
     D3D12ScopedImage image = {};
-    image.Create(m_device, D3D12_RESOURCE_STATE_COPY_DEST, textBufInfo.m_desc, log_D3D12RenderSystem);
+    image.Create(m_device, D3D12_RESOURCE_STATE_COPY_DEST, D3D12_RESOURCE_FLAG_NONE, textBufInfo.m_desc,
+                 log_D3D12RenderSystem);
     image.CopyFromBuffer(m_device, oneTimeCommandList, m_mainBuffer, textBufInfo.m_offset);
     image.Transition(oneTimeCommandList, D3D12_RESOURCE_STATE_COPY_DEST, D3D12_RESOURCE_STATE_PIXEL_SHADER_RESOURCE);
 
@@ -212,18 +213,26 @@ void D3D12DrawablePool::SetTextureData(ID3D12GraphicsCommandList* oneTimeCommand
     m_device->CreateShaderResourceView(m_images.Last().Real(), &srvDesc, cpuHandle);
     ++idx;
   }
+}
+
+void D3D12DrawablePool::SetSamplerData() {
+  if (m_samplerInfos.GetSize() == 0) {
+    return;
+  }
 
   const CD3DX12_CPU_DESCRIPTOR_HANDLE samplerCPUHandle(m_descriptorSamplerHeap->GetCPUDescriptorHandleForHeapStart());
 
   m_samplers.Reserve(m_samplerInfos.GetSize());
 
-  idx = 0;
+  U32 idx = 0;
   for (const auto& samplerInfo : m_samplerInfos) {
+    UNUSED(samplerInfo);
+
     D3D12ScopedSampler sampler = {};
     sampler.Create();
 
     CD3DX12_CPU_DESCRIPTOR_HANDLE cpuHandle;
-    CD3DX12_CPU_DESCRIPTOR_HANDLE::InitOffsetted(cpuHandle, samplerCPUHandle, m_cbvSrvDescriptorElementSize * idx);
+    CD3DX12_CPU_DESCRIPTOR_HANDLE::InitOffsetted(cpuHandle, samplerCPUHandle, m_samplerDescriptorElementSize * idx);
 
     m_device->CreateSampler(&sampler.GetDesc(), cpuHandle);
 
@@ -231,31 +240,59 @@ void D3D12DrawablePool::SetTextureData(ID3D12GraphicsCommandList* oneTimeCommand
   }
 }
 
-void D3D12DrawablePool::Submit() {
-  std::sort(m_textureBufferInfos.Begin(), m_textureBufferInfos.End(), [](const TextureBufferInfo& a, const TextureBufferInfo& b) -> bool
-  {
-    if (a.m_set == b.m_set)
-    {
-      return a.m_binding < b.m_binding;
-    }
+void D3D12DrawablePool::CreateRenderPassInputTargetSRV(
+  const Vector<std::reference_wrapper<const D3D12ScopedImage>>& renderPassInputs,
+  U32 offsetTillThis) const {
+  const CD3DX12_CPU_DESCRIPTOR_HANDLE inputCPUHandle(m_descriptorDrawableHeap->GetCPUDescriptorHandleForHeapStart(),
+                                                     m_offsetToRenderPassInputs + offsetTillThis,
+                                                     m_cbvSrvDescriptorElementSize);
 
-    return a.m_set < b.m_set;
-  });
+  U32 idx = 0;
+  for (const auto& imageRef : renderPassInputs) {
+    CD3DX12_CPU_DESCRIPTOR_HANDLE cpuHandle;
+    CD3DX12_CPU_DESCRIPTOR_HANDLE::InitOffsetted(cpuHandle, inputCPUHandle, m_cbvSrvDescriptorElementSize * idx);
+
+    const auto srvDesc = D3D12ScopedImage::GetSRV(imageRef.get().GetFormat(), ImageViewType::ImageView2D,
+                                                  log_D3D12RenderSystem);
+    m_device->CreateShaderResourceView(imageRef.get().Real(), &srvDesc, cpuHandle);
+    ++idx;
+  }
+}
+
+void D3D12DrawablePool::Submit() {
+  m_cbvSrvDescriptorElementSize  = m_device->GetDescriptorHandleIncrementSize(D3D12_DESCRIPTOR_HEAP_TYPE_CBV_SRV_UAV);
+  m_samplerDescriptorElementSize = m_device->GetDescriptorHandleIncrementSize(D3D12_DESCRIPTOR_HEAP_TYPE_SAMPLER);
+
+  std::sort(m_textureBufferInfos.Begin(), m_textureBufferInfos.End(),
+            [](const TextureBufferInfo& a, const TextureBufferInfo& b) -> bool
+            {
+              if (a.m_set == b.m_set) {
+                return a.m_binding < b.m_binding;
+              }
+
+              return a.m_set < b.m_set;
+            });
 
   std::sort(m_samplerInfos.Begin(), m_samplerInfos.End(), [](const SamplerInfo& a, const SamplerInfo& b) -> bool
   {
-    if (a.m_set == b.m_set)
-    {
+    if (a.m_set == b.m_set) {
       return a.m_binding < b.m_binding;
     }
 
     return a.m_set < b.m_set;
   });
 
-  for(U32 idx = 0; idx < m_renderPasses.GetSize(); ++idx)
-  {
+  U32 inputsTillNow = 0;
+  for (U32 idx      = 0; idx < m_renderPasses.GetSize(); ++idx) {
     D3D12ScopedCommandBuffer cmdBuffer(m_device, D3D12_COMMAND_LIST_TYPE_BUNDLE, log_D3D12RenderSystem);
     m_secondaryCommandBuffers.PushBack(cmdBuffer);
+
+    const auto& renderPassInputs = m_renderPasses[idx].get().GetInputImages();
+
+    if (renderPassInputs.GetSize() > 0) {
+      CreateRenderPassInputTargetSRV(renderPassInputs, inputsTillNow);
+      inputsTillNow += renderPassInputs.GetSize();
+    }
   }
 
   m_pipelines.Reserve(m_renderPasses.GetSize());
@@ -274,7 +311,7 @@ void D3D12DrawablePool::Submit() {
     "Failed to create command Queue");
 
   auto oneTimeSubmitBuffer = D3D12ScopedCommandBuffer(m_device, D3D12_COMMAND_LIST_TYPE_DIRECT, log_D3D12RenderSystem);
-  oneTimeSubmitBuffer.CreateGraphicsCommandList(m_device, m_pipelines[0].GetState(), log_D3D12RenderSystem);
+  oneTimeSubmitBuffer.CreateGraphicsCommandList(m_device, nullptr, log_D3D12RenderSystem);
 
   auto oneTimeCommandList = oneTimeSubmitBuffer.GetGraphicsCommandList();
 
@@ -284,8 +321,10 @@ void D3D12DrawablePool::Submit() {
   m_mainBuffer.Transition(oneTimeCommandList, D3D12_RESOURCE_STATE_COPY_DEST, D3D12_RESOURCE_STATE_COPY_SOURCE);
 
   SetTextureData(oneTimeCommandList);
+  SetSamplerData();
 
-  m_mainBuffer.Transition(oneTimeCommandList, D3D12_RESOURCE_STATE_COPY_SOURCE, D3D12_RESOURCE_STATE_VERTEX_AND_CONSTANT_BUFFER);
+  m_mainBuffer.Transition(oneTimeCommandList, D3D12_RESOURCE_STATE_COPY_SOURCE,
+                          D3D12_RESOURCE_STATE_VERTEX_AND_CONSTANT_BUFFER);
 
   oneTimeCommandList->Close();
 
@@ -294,11 +333,10 @@ void D3D12DrawablePool::Submit() {
 
   LOG_DBG(log_D3D12RenderSystem, LOG_LEVEL, "D3D12 Drawable Pool: Created Pipelines");
 
-  m_cbvSrvDescriptorElementSize = m_device->GetDescriptorHandleIncrementSize(D3D12_DESCRIPTOR_HEAP_TYPE_CBV_SRV_UAV);
-  m_samplerDescriptorElementSize = m_device->GetDescriptorHandleIncrementSize(D3D12_DESCRIPTOR_HEAP_TYPE_SAMPLER);
-  const U32 drawableHeapOffset      = m_descriptorsPerDrawable * m_cbvSrvDescriptorElementSize;
+  const U32 drawableHeapOffset   = m_descriptorsPerDrawable * m_cbvSrvDescriptorElementSize;
 
-  CD3DX12_CPU_DESCRIPTOR_HANDLE heapHandle(m_descriptorDrawableHeap->GetCPUDescriptorHandleForHeapStart(), m_offsetToDrawableHeap, m_cbvSrvDescriptorElementSize);
+  CD3DX12_CPU_DESCRIPTOR_HANDLE heapHandle(m_descriptorDrawableHeap->GetCPUDescriptorHandleForHeapStart(),
+                                           m_offsetToDrawableHeap, m_cbvSrvDescriptorElementSize);
 
   LOG_DBG(log_D3D12RenderSystem, LOG_LEVEL, "D3D12 Drawable Pool: Creating Resource Views");
 
@@ -315,36 +353,45 @@ void D3D12DrawablePool::Submit() {
   U32 idx = 0;
 
   U32 sampledImageRecorded = 0;
-  U32 samplersRecorded = 0;
-  for(const auto& renderPassRef : m_renderPasses)
-  {
-    const auto& renderPass = renderPassRef.get();
-    const auto& renderPassDescriptorCount = renderPass.GetDescriptorCount();
+  U32 inputsRecorded       = 0;
+  U32 samplersRecorded     = 0;
+  for (const auto& renderPassRef : m_renderPasses) {
+    const auto& renderPass                   = renderPassRef.get();
+    const auto& renderPassDescriptorCount    = renderPass.GetDescriptorCount();
     const auto& renderPassRootSignatureTable = renderPass.GetRootSignatureTable();
-    m_secondaryCommandBuffers[idx].CreateGraphicsCommandList(m_device, m_pipelines[idx].GetState(), log_D3D12RenderSystem);
+    const auto& renderPassInputs             = renderPass.GetInputInfo();
+    m_secondaryCommandBuffers[idx].CreateGraphicsCommandList(m_device, m_pipelines[idx].GetState(),
+                                                             log_D3D12RenderSystem);
     auto bundleCommandList = m_secondaryCommandBuffers[idx].GetGraphicsCommandList();
 
     // Define Heap Handles
-    CD3DX12_GPU_DESCRIPTOR_HANDLE textureGPUHandle(m_descriptorDrawableHeap->GetGPUDescriptorHandleForHeapStart(), sampledImageRecorded, m_cbvSrvDescriptorElementSize);
-    CD3DX12_GPU_DESCRIPTOR_HANDLE samplerGPUHandle(m_descriptorSamplerHeap->GetGPUDescriptorHandleForHeapStart(), samplersRecorded, m_samplerDescriptorElementSize);
+    CD3DX12_GPU_DESCRIPTOR_HANDLE textureGPUHandle(m_descriptorDrawableHeap->GetGPUDescriptorHandleForHeapStart(),
+                                                   sampledImageRecorded, m_cbvSrvDescriptorElementSize);
+    const CD3DX12_GPU_DESCRIPTOR_HANDLE inputsGPUHandle(m_descriptorDrawableHeap->GetGPUDescriptorHandleForHeapStart(),
+                                                        m_offsetToRenderPassInputs + inputsRecorded,
+                                                        m_cbvSrvDescriptorElementSize);
 
-    CD3DX12_GPU_DESCRIPTOR_HANDLE uboGPUHandle(m_descriptorDrawableHeap->GetGPUDescriptorHandleForHeapStart(), m_offsetToDrawableHeap, m_cbvSrvDescriptorElementSize);
+    CD3DX12_GPU_DESCRIPTOR_HANDLE samplerGPUHandle;
+    if (renderPassDescriptorCount.m_numSamplerSlots > 0) {
+      samplerGPUHandle = CD3DX12_GPU_DESCRIPTOR_HANDLE(m_descriptorSamplerHeap->GetGPUDescriptorHandleForHeapStart(),
+                                                       samplersRecorded, m_samplerDescriptorElementSize);
+    }
 
+    CD3DX12_GPU_DESCRIPTOR_HANDLE uboGPUHandle(m_descriptorDrawableHeap->GetGPUDescriptorHandleForHeapStart(),
+                                               m_offsetToDrawableHeap, m_cbvSrvDescriptorElementSize);
 
     bundleCommandList->SetDescriptorHeaps(UINT(m_allHeaps.GetSize()), m_allHeaps.Data());
     bundleCommandList->IASetPrimitiveTopology(D3D_PRIMITIVE_TOPOLOGY_TRIANGLELIST);
     bundleCommandList->SetGraphicsRootSignature(renderPass.GetRootSignature());
 
     U32 tableIdx = 0;
-    for(const auto& tableEntry : renderPassRootSignatureTable)
-    {
-      if (tableEntry.m_type == DescriptorType::SampledImage)
-      {
+    for (const auto& tableEntry : renderPassRootSignatureTable) {
+      if (tableEntry.m_type == DescriptorType::SampledImage) {
+        LOG_DEBUG(log_D3D12RenderSystem, LOG_LEVEL, "Setting Texture Descriptor Table at %d", tableIdx);
         bundleCommandList->SetGraphicsRootDescriptorTable(tableIdx, textureGPUHandle);
         textureGPUHandle.Offset(tableEntry.m_count, m_cbvSrvDescriptorElementSize);
-      }
-      else if (tableEntry.m_type == DescriptorType::Sampler)
-      {
+      } else if (tableEntry.m_type == DescriptorType::Sampler) {
+        LOG_DEBUG(log_D3D12RenderSystem, LOG_LEVEL, "Setting Sampler Descriptor Table at %d", tableIdx);
         bundleCommandList->SetGraphicsRootDescriptorTable(tableIdx, samplerGPUHandle);
         samplerGPUHandle.Offset(tableEntry.m_count, m_samplerDescriptorElementSize);
       }
@@ -352,13 +399,20 @@ void D3D12DrawablePool::Submit() {
       ++tableIdx;
     }
 
+    if (renderPassInputs.GetSize() > 0) {
+      bundleCommandList->SetGraphicsRootDescriptorTable(renderPassRootSignatureTable.GetSize(), inputsGPUHandle);
+      LOG_DEBUG(log_D3D12RenderSystem, LOG_LEVEL, "Setting Input Attachment Descriptor Table at %d", renderPassRootSignatureTable.GetSize());
+    }
+
+    inputsRecorded += renderPassInputs.GetSize();
     samplersRecorded += renderPassDescriptorCount.m_numSamplerSlots;
     sampledImageRecorded += renderPassDescriptorCount.m_numSampledImageSlots;
 
     LOG_DBG(log_D3D12RenderSystem, LOG_LEVEL, "D3D12 Drawable Pool: Recording Commands For Drawables");
 
     for (auto& drawable : m_drawables) {
-      drawable.RecordCommands(bundleCommandList, uboGPUHandle, m_cbvSrvDescriptorElementSize, renderPassRootSignatureTable, log_D3D12RenderSystem);
+      drawable.RecordCommands(bundleCommandList, uboGPUHandle, m_cbvSrvDescriptorElementSize,
+                              renderPassRootSignatureTable, log_D3D12RenderSystem);
       uboGPUHandle.Offset(drawableHeapOffset);
     }
 
@@ -383,13 +437,12 @@ ID3D12GraphicsCommandList* D3D12DrawablePool::GetSecondaryCommandList(U32 render
 
 void D3D12DrawablePool::GetRecordEntries(Vector<std::pair<U32, D3D12RenderPassRecordEntry>>& recordList) const {
   recordList.Reserve(m_renderPasses.GetSize());
-  
+
   U32 idx = 0;
-  for(const auto& renderPass : m_renderPasses)
-  {
+  for (const auto& renderPass : m_renderPasses) {
     D3D12RenderPassRecordEntry entry = {};
-    entry.m_bundle = GetSecondaryCommandList(idx);
-    entry.m_pso = GetPipelineState(idx);
+    entry.m_bundle                   = GetSecondaryCommandList(idx);
+    entry.m_pso                      = GetPipelineState(idx);
 
     recordList.PushBack(std::make_pair(renderPass.get().GetId(), entry));
   }
@@ -397,18 +450,17 @@ void D3D12DrawablePool::GetRecordEntries(Vector<std::pair<U32, D3D12RenderPassRe
   ++idx;
 }
 
-void D3D12DrawablePool::CreateRenderPassReferences(const DrawablePoolCreateInfo& createInfo, const Containers::Vector<D3D12ScopedRenderPass>& renderPasses) {
+void D3D12DrawablePool::CreateRenderPassReferences(const DrawablePoolCreateInfo& createInfo,
+                                                   const Containers::Vector<D3D12ScopedRenderPass>& renderPasses) {
 
   U32 idx = 0;
-  for(const auto& renderPass : renderPasses)
-  {
+  for (const auto& renderPass : renderPasses) {
     auto it = std::find_if(createInfo.m_renderPasses.Begin(), createInfo.m_renderPasses.End(), [&](U32 passId)
     {
       return renderPass.GetId() == passId;
     });
 
-    if (it != createInfo.m_renderPasses.End())
-    {
+    if (it != createInfo.m_renderPasses.End()) {
       m_renderPasses.PushBack(std::reference_wrapper<D3D12ScopedRenderPass>(renderPasses[idx]));
     }
 
@@ -427,13 +479,12 @@ void D3D12DrawablePool::CreateInputAttributes(const DrawablePoolCreateInfo& crea
 void D3D12DrawablePool::CreateDescriptorHeap(const DrawablePoolCreateInfo& createInfo) {
   m_allHeaps.Reserve(2);
 
-  m_offsetToDrawableHeap = 0;
+  m_offsetToDrawableHeap     = 0;
   m_offsetToRenderPassInputs = 0;
 
   U32 numSamplers = 0;
 
-  for(const auto& renderPass : m_renderPasses)
-  {
+  for (const auto& renderPass : m_renderPasses) {
     const auto& count = renderPass.get().GetDescriptorCount();
     m_offsetToDrawableHeap += count.m_numSampledImageSlots;
     m_offsetToDrawableHeap += renderPass.get().GetInputInfo().GetSize(); // RTV as inputs

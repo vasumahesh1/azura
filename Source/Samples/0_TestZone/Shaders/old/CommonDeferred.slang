@@ -31,4 +31,3 @@ struct AttachmentBlock1 {
 ParameterBlock<UBOData> ubo;
 ParameterBlock<SamplerBlock> samplerBlock;
 ParameterBlock<TextureBlock> textureBlock;
-ParameterBlock<AttachmentBlock1> attachmentBlock;

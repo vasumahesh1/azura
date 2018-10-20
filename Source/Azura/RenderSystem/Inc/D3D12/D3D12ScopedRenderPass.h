@@ -17,9 +17,14 @@ class Allocator;
 namespace Azura {
 namespace D3D12 {
 
+struct D3D12RenderOutputInfo
+{
+  RawStorageFormat m_format;
+};
+
 class D3D12ScopedRenderPass {
 public:
-  D3D12ScopedRenderPass(U32 idx, Memory::Allocator& mainAllocator, Log logger);
+  D3D12ScopedRenderPass(U32 idx, const D3D12ScopedSwapChain& swapChain, Memory::Allocator& mainAllocator, Log logger);
 
   void Create(const Microsoft::WRL::ComPtr<ID3D12Device>& device,
               const PipelinePassCreateInfo& createInfo,
@@ -28,7 +33,6 @@ public:
               const Containers::Vector<DescriptorSlot>& descriptorSlots,
               const Containers::Vector<DescriptorTableEntry>& descriptorSetTable,
               const Containers::Vector<D3D12ScopedShader>& allShaders,
-              const D3D12ScopedSwapChain& swapChain,
               UINT rtvDescriptorSize,
               UINT dsvDescriptorSize);
 
@@ -39,7 +43,6 @@ public:
                           const Containers::Vector<DescriptorSlot>& descriptorSlots,
                           const Containers::Vector<DescriptorTableEntry>& descriptorSetTable,
                           const Containers::Vector<D3D12ScopedShader>& allShaders,
-                          const D3D12ScopedSwapChain& swapChain,
                           UINT rtvDescriptorSize,
                           UINT dsvDescriptorSize);
 
@@ -60,6 +63,8 @@ public:
   const Containers::Vector<std::reference_wrapper<const D3D12ScopedShader>>& GetShaders() const;
   const Containers::Vector<std::reference_wrapper<const RenderTargetCreateInfo>>& GetInputInfo() const;
 
+  const Containers::Vector<std::reference_wrapper<const D3D12ScopedImage>>& GetInputImages() const;
+
   const Containers::Vector<DescriptorTableEntry>& GetRootSignatureTable() const;
 
   void RecordResourceBarriers(ID3D12GraphicsCommandList* commandList) const;
@@ -67,6 +72,8 @@ public:
   void WaitForGPU(ID3D12CommandQueue* commandQueue);
 
   U32 GetCommandBufferCount() const;
+
+  void UpdatePipelineInfo(D3D12_GRAPHICS_PIPELINE_STATE_DESC& psoDesc);
 
 private:
   void CreateBase(
@@ -82,18 +89,25 @@ private:
   U32 m_id;
 
   bool hasDepth{false};
-  bool isTargetSwapChain{false};
+  bool m_isTargetSwapChain{false};
+
+  std::reference_wrapper<const D3D12ScopedSwapChain> m_swapChainRef;
 
   Containers::Vector<DescriptorTableEntry> m_rootSignatureTable;
+  Containers::Vector<D3D12RenderOutputInfo> m_renderOutputInfo;
 
   Containers::Vector<std::reference_wrapper<const D3D12ScopedShader>> m_passShaders;
   Containers::Vector<std::reference_wrapper<const RenderTargetCreateInfo>> m_passInputs;
 
   SmallVector<D3D12ScopedCommandBuffer, DEFAULT_FRAMES_IN_FLIGHT> m_commandBuffers;
-  SmallVector<Microsoft::WRL::ComPtr<ID3D12Resource>, MAX_RENDER_PASS_OUTPUTS> m_renderOutputs;
+  SmallVector<ID3D12Resource*, DEFAULT_FRAMES_IN_FLIGHT> m_swapChainImageResources;
+
+  SmallVector<std::reference_wrapper<D3D12ScopedImage>, MAX_RENDER_PASS_OUTPUTS> m_renderOutputs;
   SmallVector<std::reference_wrapper<D3D12ScopedImage>, MAX_RENDER_PASS_OUTPUTS> m_renderInputs;
-  SmallVector<Microsoft::WRL::ComPtr<ID3D12Resource>, MAX_RENDER_PASS_OUTPUTS> m_depthOutputs;
+  SmallVector<std::reference_wrapper<D3D12ScopedImage>, MAX_RENDER_PASS_OUTPUTS> m_depthOutputs;
   SmallVector<std::reference_wrapper<D3D12ScopedImage>, MAX_RENDER_PASS_OUTPUTS> m_depthInputs;
+
+  Containers::Vector<std::reference_wrapper<const D3D12ScopedImage>> m_allRenderInputs;
 
   Microsoft::WRL::ComPtr<ID3D12DescriptorHeap> m_rtvHeap;
   Microsoft::WRL::ComPtr<ID3D12DescriptorHeap> m_dsvHeap;

@@ -73,7 +73,7 @@ endmacro(AzuraAddUnitTest)
 
 macro(AzuraAddGraphicsTest TargetName)
   if ((NOT DEFINED CI_PROVIDER))
-  add_test(AutoGraphicsTests ${TargetName})
+  add_test(${TargetName} ${TargetName})
   target_compile_definitions(${TargetName} PUBLIC BUILD_GRAPHICS_TEST=1 BUILD_TEST=1)
   endif()
 endmacro(AzuraAddGraphicsTest)

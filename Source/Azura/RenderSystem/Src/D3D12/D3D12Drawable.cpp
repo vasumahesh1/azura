@@ -17,7 +17,7 @@ D3D12Drawable::D3D12Drawable(const DrawableCreateInfo& info,
     m_indexBufferView() {
 }
 
-void D3D12Drawable::CreateResourceViews(const Microsoft::WRL::ComPtr<ID3D12Device>& device, ID3D12Resource* parentBuffer, const Containers::Vector<VertexSlot>& vertexSlots, CD3DX12_CPU_DESCRIPTOR_HANDLE drawableHeapHandle, UINT heapElementSize, const const Log& log_D3D12RenderSystem) {
+void D3D12Drawable::CreateResourceViews(const Microsoft::WRL::ComPtr<ID3D12Device>& device, ID3D12Resource* parentBuffer, const Containers::Vector<VertexSlot>& vertexSlots, CD3DX12_CPU_DESCRIPTOR_HANDLE drawableHeapHandle, UINT heapElementSize, const Log& log_D3D12RenderSystem) {
   const auto gpuAddress = parentBuffer->GetGPUVirtualAddress();
   
   std::sort(m_uniformBufferInfos.Begin(), m_uniformBufferInfos.End(), [](const UniformBufferInfo& a, const UniformBufferInfo& b) -> bool

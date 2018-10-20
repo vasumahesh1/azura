@@ -88,12 +88,17 @@ D3D12Renderer::D3D12Renderer(const ApplicationInfo& appInfo,
       GetSize(), ToString(renderTarget.m_format).c_str());
 
     D3D12_RESOURCE_STATES resourceState = D3D12_RESOURCE_STATE_RENDER_TARGET;
-    if (HasDepthComponent(renderTarget.m_format) || HasStencilComponent(renderTarget.m_format)) {
+    if (HasDepthOrStencilComponent(renderTarget.m_format)) {
       resourceState = D3D12_RESOURCE_STATE_DEPTH_WRITE;
     }
 
+    D3D12_RESOURCE_FLAGS resourceFlags = D3D12_RESOURCE_FLAG_ALLOW_RENDER_TARGET;
+    if (HasDepthComponent(desc.m_format) || HasStencilComponent(desc.m_format)) {
+      resourceFlags = D3D12_RESOURCE_FLAG_ALLOW_DEPTH_STENCIL;
+    }
+
     m_renderTargetImages.PushBack(D3D12ScopedImage());
-    m_renderTargetImages.Last().Create(m_device, resourceState, desc, log_D3D12RenderSystem);
+    m_renderTargetImages.Last().Create(m_device, resourceState, resourceFlags, desc, log_D3D12RenderSystem);
   }
 
   m_rtvDescriptorSize = m_device->GetDescriptorHandleIncrementSize(D3D12_DESCRIPTOR_HEAP_TYPE_RTV);
@@ -101,7 +106,7 @@ D3D12Renderer::D3D12Renderer(const ApplicationInfo& appInfo,
 
   U32 passCount = 0;
   for (const auto& passCreateInfo : renderPassRequirements.m_passSequence) {
-    D3D12ScopedRenderPass renderPass = D3D12ScopedRenderPass(m_renderPasses.GetSize(), mainAllocator,
+    D3D12ScopedRenderPass renderPass = D3D12ScopedRenderPass(m_renderPasses.GetSize(), m_swapChain, mainAllocator,
                                                              log_D3D12RenderSystem);
 
     if (passCount != (renderPassRequirements.m_passSequence.GetSize() - 1)) {
@@ -112,7 +117,7 @@ D3D12Renderer::D3D12Renderer(const ApplicationInfo& appInfo,
                         m_descriptorSlots,
                         m_descriptorSetTable,
                         m_shaders,
-                        m_swapChain, m_rtvDescriptorSize, m_dsvDescriptorSize);
+                        m_rtvDescriptorSize, m_dsvDescriptorSize);
     } else {
       renderPass.CreateForSwapChain(m_device,
                                     passCreateInfo,
@@ -121,7 +126,7 @@ D3D12Renderer::D3D12Renderer(const ApplicationInfo& appInfo,
                                     m_descriptorSlots,
                                     m_descriptorSetTable,
                                     m_shaders,
-                                    m_swapChain, m_rtvDescriptorSize, m_dsvDescriptorSize);
+                                    m_rtvDescriptorSize, m_dsvDescriptorSize);
     }
 
     m_renderPasses.PushBack(renderPass);
@@ -188,9 +193,7 @@ void D3D12Renderer::Submit() {
 
       if (isLast) {
         renderPass.RecordImageAcquireBarrier(commandList, cIdx);
-      }
-      else
-      {
+      } else {
         renderPass.RecordResourceBarriers(commandList);
       }
 
@@ -226,6 +229,7 @@ void D3D12Renderer::Submit() {
 void D3D12Renderer::RenderFrame() {
   EnterRenderFrame();
 
+  // TODO(vasumahesh1): Change
   SmallVector<ID3D12CommandList*, 10> pCommandLists;
 
   const auto& currentFrame = GetCurrentFrame();
@@ -236,7 +240,7 @@ void D3D12Renderer::RenderFrame() {
 
   pCommandLists.push_back(m_renderPasses.Last().GetPrimaryGraphicsCommandList(currentFrame));
 
-  m_commandQueue->ExecuteCommandLists(pCommandLists.size(), pCommandLists.data()); // NOLINT
+  m_commandQueue->ExecuteCommandLists(UINT(pCommandLists.size()), pCommandLists.data()); // NOLINT
 
   // Present and update the frame index for the next frame.
   VERIFY_D3D_OP(log_D3D12RenderSystem, m_swapChain.RealComPtr()->Present(1, 0), "Present Failed");

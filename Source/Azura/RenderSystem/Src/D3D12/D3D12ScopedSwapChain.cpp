@@ -14,6 +14,8 @@ void D3D12ScopedSwapChain::Create(
   const SwapChainRequirements& swapChainRequirements,
   const Log& log_D3D12RenderSystem) {
 
+  m_format = swapChainRequirements.m_format;
+
   auto swapChain = D3D12Core::CreateSwapChain(factory, commandQueue, windowHandle.GetHandle(),
                                               swapChainRequirements, log_D3D12RenderSystem);
   VERIFY_D3D_OP(log_D3D12RenderSystem, swapChain.As(&m_swapChain), "Swapchain typecast failed");
@@ -25,6 +27,10 @@ const Microsoft::WRL::ComPtr<IDXGISwapChain3>& D3D12ScopedSwapChain::RealComPtr(
 
 IDXGISwapChain3* D3D12ScopedSwapChain::Real() const {
   return m_swapChain.Get();
+}
+
+RawStorageFormat D3D12ScopedSwapChain::GetFormat() const {
+  return m_format;
 }
 } // namespace D3D12
 } // namespace Azura

@@ -20,8 +20,17 @@ set(
     "${PROJECT_SOURCE_DIR}/Shaders/BasicRenderTest.vs.slang|VS"
     "${PROJECT_SOURCE_DIR}/Shaders/BasicRenderTest.ps.slang|PS"
 
+    "${PROJECT_SOURCE_DIR}/Shaders/BasicInstancingTest.vs.slang|VS"
+    "${PROJECT_SOURCE_DIR}/Shaders/BasicInstancingTest.ps.slang|PS"
+
     "${PROJECT_SOURCE_DIR}/Shaders/BasicTextureTest.vs.slang|VS"
     "${PROJECT_SOURCE_DIR}/Shaders/BasicTextureTest.ps.slang|PS"
+
+    "${PROJECT_SOURCE_DIR}/Shaders/BasicDeferredTest.vs.slang|VS"
+    "${PROJECT_SOURCE_DIR}/Shaders/BasicDeferredTest.ps.slang|PS"
+
+    "${PROJECT_SOURCE_DIR}/Shaders/BasicDeferredTest.Deferred.vs.slang|VS"
+    "${PROJECT_SOURCE_DIR}/Shaders/BasicDeferredTest.Deferred.ps.slang|PS"
 )
 
 add_executable(TestZone ${SOURCES})

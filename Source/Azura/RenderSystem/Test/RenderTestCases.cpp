@@ -83,6 +83,10 @@ void RenderTestCases::ExecuteBasicRenderTest(Azura::Renderer& renderer,
   renderer.RenderFrame();
   renderer.RenderFrame();
   renderer.RenderFrame();
+  renderer.RenderFrame();
+  renderer.RenderFrame();
+  renderer.RenderFrame();
+  renderer.RenderFrame();
   renderer.SnapshotFrame("./BasicRenderTest.data");
 }
 
@@ -150,6 +154,10 @@ void RenderTestCases::ExecuteBasicInstancingTest(Azura::Renderer& renderer,
 
   // All Drawables Done
   renderer.Submit();
+  renderer.RenderFrame();
+  renderer.RenderFrame();
+  renderer.RenderFrame();
+  renderer.RenderFrame();
   renderer.RenderFrame();
   renderer.RenderFrame();
   renderer.RenderFrame();
@@ -228,6 +236,10 @@ void RenderTestCases::ExecuteBasicTextureTest(Azura::Renderer& renderer,
 
   // All Drawables Done
   renderer.Submit();
+  renderer.RenderFrame();
+  renderer.RenderFrame();
+  renderer.RenderFrame();
+  renderer.RenderFrame();
   renderer.RenderFrame();
   renderer.RenderFrame();
   renderer.RenderFrame();
@@ -352,6 +364,10 @@ void RenderTestCases::ExecuteBasicDeferredTest(Azura::Renderer& renderer,
   
   // All Drawables Done
   renderer.Submit();
+  renderer.RenderFrame();
+  renderer.RenderFrame();
+  renderer.RenderFrame();
+  renderer.RenderFrame();
   renderer.RenderFrame();
   renderer.RenderFrame();
   renderer.RenderFrame();

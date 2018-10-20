@@ -21,9 +21,7 @@ ID3D12PipelineState* D3D12ScopedPipeline::GetState() const {
 
 D3D12PipelineFactory::D3D12PipelineFactory(Memory::Allocator& allocator, Log logger)
   : log_D3D12RenderSystem(std::move(logger)),
-    m_inputElementDescs(10, allocator),
-    m_vertexShaderModule(),
-    m_pixelShaderModule() {
+    m_inputElementDescs(10, allocator) {
 }
 
 D3D12PipelineFactory& D3D12PipelineFactory::BulkAddAttributeDescription(const VertexSlot& vertexSlot, U32 binding) {
@@ -46,7 +44,7 @@ D3D12PipelineFactory& D3D12PipelineFactory::BulkAddAttributeDescription(const Ve
     attrDesc.InputSlot = binding;
     attrDesc.AlignedByteOffset = bindingInfo.m_offset;
     attrDesc.InputSlotClass = usageRate.value();
-    attrDesc.InstanceDataStepRate = 0;
+    attrDesc.InstanceDataStepRate = vertexSlot.m_rate == BufferUsageRate::PerInstance ? 1 : 0;
 
     bindingInfo.m_offset += GetFormatSize(semanticStride.m_format);
 
@@ -103,7 +101,7 @@ void D3D12PipelineFactory::Submit(const Microsoft::WRL::ComPtr<ID3D12Device>& de
         break;
 
         case ShaderStage::Pixel:
-          psoDesc.VS = shader.get().GetByteCode();
+          psoDesc.PS = shader.get().GetByteCode();
         break;
 
         case ShaderStage::Compute:
@@ -128,13 +126,17 @@ void D3D12PipelineFactory::Submit(const Microsoft::WRL::ComPtr<ID3D12Device>& de
     }
 
     psoDesc.RasterizerState = CD3DX12_RASTERIZER_DESC(D3D12_DEFAULT);
+    psoDesc.RasterizerState.CullMode = D3D12_CULL_MODE_NONE;
+
     psoDesc.BlendState = CD3DX12_BLEND_DESC(D3D12_DEFAULT);
     psoDesc.DepthStencilState.DepthEnable = FALSE;
     psoDesc.DepthStencilState.StencilEnable = FALSE;
     psoDesc.SampleMask = UINT_MAX;
     psoDesc.PrimitiveTopologyType = D3D12_PRIMITIVE_TOPOLOGY_TYPE_TRIANGLE;
-    psoDesc.NumRenderTargets = 1;
-    psoDesc.RTVFormats[0] = DXGI_FORMAT_B8G8R8A8_UNORM;
+
+    // Update Output Targets
+    renderPass.get().UpdatePipelineInfo(psoDesc);
+
     psoDesc.SampleDesc.Count = 1;
 
     resultPipelines.PushBack(D3D12ScopedPipeline(device, psoDesc, log_D3D12RenderSystem));

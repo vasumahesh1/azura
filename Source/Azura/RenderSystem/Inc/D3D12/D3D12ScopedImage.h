@@ -11,6 +11,7 @@ class D3D12ScopedImage {
 public:
   void Create(const Microsoft::WRL::ComPtr<ID3D12Device>& device,
               D3D12_RESOURCE_STATES initState,
+              D3D12_RESOURCE_FLAGS resourceFlags,
               const TextureDesc& desc,
               const Log& log_D3D12RenderSystem);
 
@@ -24,6 +25,8 @@ public:
 
   ID3D12Resource* Real() const;
 
+  RawStorageFormat GetFormat() const;
+
   Microsoft::WRL::ComPtr<ID3D12Resource> RealComPtr() const;
 
   void CopyFromBuffer(const Microsoft::WRL::ComPtr<ID3D12Device>& device,
@@ -35,8 +38,12 @@ public:
                   D3D12_RESOURCE_STATES fromState,
                   D3D12_RESOURCE_STATES toState) const;
 
+  void Transition(ID3D12GraphicsCommandList * commandList, D3D12_RESOURCE_STATES toState) const;
+
 private:
   Microsoft::WRL::ComPtr<ID3D12Resource> m_texture;
+  RawStorageFormat m_format{};
+  D3D12_RESOURCE_STATES m_currentState{};
 };
 
 } // namespace D3D12

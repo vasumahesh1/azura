@@ -58,6 +58,9 @@ private:
   void CreateDescriptorHeap(const DrawablePoolCreateInfo& createInfo);
 
   void SetTextureData(ID3D12GraphicsCommandList* oneTimeCommandList);
+  void SetSamplerData();
+
+  void CreateRenderPassInputTargetSRV(const Containers::Vector<std::reference_wrapper<const D3D12ScopedImage>>& renderPassInputs, U32 offsetTillThis) const;
 
   Log log_D3D12RenderSystem;
 

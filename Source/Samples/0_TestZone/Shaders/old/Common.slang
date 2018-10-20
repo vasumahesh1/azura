@@ -35,11 +35,8 @@ struct UVPixelInput
   float2 uv : UV;
 };
 
-struct TextureBlock {
-  Texture2D target;
-};
-
-struct SamplerBlock {
+struct TextureState {
   SamplerState linearSampler;
+  Texture2D target;
 };
 
