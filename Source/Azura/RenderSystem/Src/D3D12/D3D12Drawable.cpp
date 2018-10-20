@@ -74,6 +74,7 @@ void D3D12Drawable::CreateResourceViews(const Microsoft::WRL::ComPtr<ID3D12Devic
 }
 
 void D3D12Drawable::RecordCommands(ID3D12GraphicsCommandList* commandList, CD3DX12_GPU_DESCRIPTOR_HANDLE drawableHeapHandle, UINT heapElementSize, const Containers::Vector<DescriptorTableEntry>& descriptorRootSignatureTable, const Log& log_D3D12RenderSystem) {
+  UNUSED(log_D3D12RenderSystem); // For Release
   LOG_DBG(log_D3D12RenderSystem, LOG_LEVEL, "D3D12Drawable: Recording Commands for Drawable");
   
   commandList->IASetIndexBuffer(&m_indexBufferView);

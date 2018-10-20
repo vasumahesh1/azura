@@ -44,13 +44,21 @@ ComPtr<IDXGISwapChain1> D3D12Core::CreateSwapChain(const ComPtr<IDXGIFactory4>& 
   return swapChain;
 }
 
-void D3D12Core::GetHardwareAdapter(IDXGIFactory2* pFactory, IDXGIAdapter1** ppAdapter) {
+void D3D12Core::GetHardwareAdapter(IDXGIFactory2* pFactory, IDXGIAdapter1** ppAdapter, const Log& log_D3D12RenderSystem) {
   ComPtr<IDXGIAdapter1> adapter;
   *ppAdapter = nullptr;
+
+  UNUSED(log_D3D12RenderSystem);
 
   for (UINT adapterIndex = 0; DXGI_ERROR_NOT_FOUND != pFactory->EnumAdapters1(adapterIndex, &adapter); ++adapterIndex) {
     DXGI_ADAPTER_DESC1 desc;
     adapter->GetDesc1(&desc);
+
+    LOG_DEBUG(log_D3D12RenderSystem, LOG_LEVEL, "Found GPU: %ls", desc.Description);
+    LOG_DEBUG(log_D3D12RenderSystem, LOG_LEVEL, "Device ID: %d", desc.DeviceId);
+    LOG_DEBUG(log_D3D12RenderSystem, LOG_LEVEL, "Vendor ID: %d", desc.VendorId);
+    LOG_DEBUG(log_D3D12RenderSystem, LOG_LEVEL, "System Memory: %zu", desc.DedicatedSystemMemory);
+    LOG_DEBUG(log_D3D12RenderSystem, LOG_LEVEL, "Video Memory: %zu", desc.DedicatedVideoMemory);
 
     if ((desc.Flags & DXGI_ADAPTER_FLAG_SOFTWARE) != 0u) {
       // Don't select the Basic Render Driver adapter.
@@ -60,6 +68,9 @@ void D3D12Core::GetHardwareAdapter(IDXGIFactory2* pFactory, IDXGIAdapter1** ppAd
     // Check to see if the adapter supports Direct3D 12, but don't create the
     // actual device yet.
     if (SUCCEEDED(D3D12CreateDevice(adapter.Get(), D3D_FEATURE_LEVEL_11_0, _uuidof(ID3D12Device), nullptr))) {
+      
+      LOG_DEBUG(log_D3D12RenderSystem, LOG_LEVEL, "Selected GPU: %ls", desc.Description);
+      
       break;
     }
   }

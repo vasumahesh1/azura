@@ -37,9 +37,8 @@ D3D12Renderer::D3D12Renderer(const ApplicationInfo& appInfo,
   m_scissorRect                 = CD3DX12_RECT(0, 0, static_cast<LONG>(viewportDimensions.m_width),
                                                static_cast<LONG>(viewportDimensions.m_height));
 
-  UINT dxgiFactoryFlags = 0;
-
 #ifdef BUILD_DEBUG
+  UINT dxgiFactoryFlags = 0;
   ComPtr<ID3D12Debug> debugController;
   ComPtr<ID3D12Debug1> debugController1;
   if (SUCCEEDED(D3D12GetDebugInterface(IID_PPV_ARGS(&debugController)))) {
@@ -51,6 +50,8 @@ D3D12Renderer::D3D12Renderer(const ApplicationInfo& appInfo,
     // Enable additional debug layers.
     dxgiFactoryFlags |= DXGI_CREATE_FACTORY_DEBUG;
   }
+#elif defined(BUILD_RELEASE)
+  const UINT dxgiFactoryFlags = 0;
 #endif
 
   ComPtr<IDXGIFactory4> factory;
@@ -58,7 +59,7 @@ D3D12Renderer::D3D12Renderer(const ApplicationInfo& appInfo,
     "Failed to create DXGI Factory");
 
   ComPtr<IDXGIAdapter1> hardwareAdapter;
-  D3D12Core::GetHardwareAdapter(factory.Get(), &hardwareAdapter);
+  D3D12Core::GetHardwareAdapter(factory.Get(), &hardwareAdapter, log_D3D12RenderSystem);
 
 #ifdef BUILD_DEBUG
   ComPtr<IDXGIAdapter> warpAdapter;
@@ -198,8 +199,6 @@ void D3D12Renderer::Submit() {
 
       if (isLast) {
         renderPass.RecordImageAcquireBarrier(commandList, cIdx);
-      } else {
-        renderPass.RecordResourceBarriersForOutputs(commandList);
       }
 
       renderPass.RecordResourceBarriersForReadingInputs(commandList);
@@ -267,6 +266,7 @@ void D3D12Renderer::WaitForGPU() {
 
 void D3D12Renderer::SnapshotFrame(const String& exportPath) const {
   LOG_DBG(log_D3D12RenderSystem, LOG_LEVEL, "Exporting Screenshot: %s", exportPath.c_str());
+  UNUSED(exportPath);
 }
 
 void D3D12Renderer::AddShader(const ShaderCreateInfo& info) {

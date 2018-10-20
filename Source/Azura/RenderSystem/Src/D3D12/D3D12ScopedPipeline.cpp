@@ -142,11 +142,10 @@ void D3D12PipelineFactory::Submit(const Microsoft::WRL::ComPtr<ID3D12Device>& de
     psoDesc.DepthStencilState.StencilEnable = FALSE;
     psoDesc.SampleMask = UINT_MAX;
     psoDesc.PrimitiveTopologyType = D3D12_PRIMITIVE_TOPOLOGY_TYPE_TRIANGLE;
+    psoDesc.SampleDesc.Count = 1;
 
     // Update Output Targets
     renderPass.get().UpdatePipelineInfo(psoDesc);
-
-    psoDesc.SampleDesc.Count = 1;
 
     resultPipelines.PushBack(D3D12ScopedPipeline(device, psoDesc, log_D3D12RenderSystem));
   }

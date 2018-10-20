@@ -27,7 +27,8 @@ Microsoft::WRL::ComPtr<IDXGISwapChain1> CreateSwapChain(const Microsoft::WRL::Co
                                                         const void* windowHandle,
                                                         const SwapChainRequirements& swapChainRequirements,
                                                         const Log& log_D3D12RenderSystem);
-void GetHardwareAdapter(IDXGIFactory2* pFactory, IDXGIAdapter1** ppAdapter);
+
+void GetHardwareAdapter(IDXGIFactory2* pFactory, IDXGIAdapter1** ppAdapter, const Log& log_D3D12RenderSystem);
 
 void CopyBuffer(ID3D12GraphicsCommandList* commandList,
                 const D3D12ScopedBuffer& dest,

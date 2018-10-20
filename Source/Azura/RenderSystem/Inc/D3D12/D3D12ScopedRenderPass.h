@@ -125,6 +125,7 @@ private:
   HANDLE m_fenceEvent{};
   Microsoft::WRL::ComPtr<ID3D12Fence> m_signalFence;
   SmallVector<Microsoft::WRL::ComPtr<ID3D12Fence>, MAX_RENDER_PASS_INPUTS> m_waitFences;
+  BlendState m_blendState;
 };
 
 } // namespace D3D12

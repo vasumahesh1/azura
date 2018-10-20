@@ -315,6 +315,8 @@ void D3D12ScopedRenderPass::CreateBase(
   VERIFY_D3D_OP(log_D3D12RenderSystem, device->CreateFence(0, D3D12_FENCE_FLAG_NONE, IID_PPV_ARGS(&m_signalFence)),
     "Failed to create fence");
 
+  m_blendState = createInfo.m_blendState;
+
   m_clearData = createInfo.m_clearData;
 
   // Create an event handle to use for frame synchronization.
