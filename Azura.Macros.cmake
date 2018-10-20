@@ -32,6 +32,15 @@ macro(AzuraSilenceWarningsForMathfu TargetName)
   endif()
 endmacro(AzuraSilenceWarningsForMathfu)
 
+macro(AzuraSilenceWarningsForGLTFSDK TargetName)
+  if(MSVC)
+    target_compile_options(${TargetName}
+      PUBLIC
+      "/wd4061"
+    )
+  endif()
+endmacro()
+
 macro(AzuraDisableWarningsAsErrors)
   if(MSVC)
     string(REPLACE " /WX"

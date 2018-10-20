@@ -10,10 +10,13 @@ public:
   void Recompute() override;
   void OnMouseEvent(MouseEvent mouseEvent) override;
 
-private:
+  void SetZoom(float value);
+  void SetZoomAndRecompute(float value);
+
   void RotateAboutUp(float deg);
   void RotateAboutRight(float deg);
 
+private:
   float m_theta{0.0f};
   float m_phi{0.0f};
   float m_zoom{4.0f};

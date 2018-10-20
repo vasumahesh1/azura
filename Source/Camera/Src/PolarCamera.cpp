@@ -44,15 +44,23 @@ void PolarCamera::OnMouseEvent(MouseEvent mouseEvent) {
   const float anglePerPixel = 5;
   RotateAboutUp(mouseEvent.m_eventX * anglePerPixel * m_sensitivity);
   RotateAboutRight(mouseEvent.m_eventY * anglePerPixel * m_sensitivity);
+  Recompute();
+}
+
+void PolarCamera::SetZoom(float value) {
+  m_zoom = value;
+}
+
+void PolarCamera::SetZoomAndRecompute(float value) {
+  SetZoom(value);
+  Recompute();
 }
 
 void PolarCamera::RotateAboutUp(float deg) {
   m_theta += Math::ToRadians(deg);
-  Recompute();
 }
 
 void PolarCamera::RotateAboutRight(float deg) {
   m_phi += Math::ToRadians(deg);
-  Recompute();
 }
 } // namespace Azura

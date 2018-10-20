@@ -42,3 +42,21 @@ AzuraEnableWarningsAsErrors()
 
 # STB Include
 set(STB_INCLUDE_DIR ${CMAKE_CURRENT_SOURCE_DIR}/stb/ CACHE STRING "STB Files Directory" FORCE)
+
+
+# GLTF SDK
+if ("${BUILD_PLATFORM}" STREQUAL "Windows")
+  if ("${BUILD_ARCH}" STREQUAL "64")
+    set(CMAKE_GENERATOR_PLATFORM "x64")
+  elseif("${BUILD_ARCH}" STREQUAL "32")
+    set(CMAKE_GENERATOR_PLATFORM "Win32")
+  endif()
+endif()
+
+AzuraDisableWarningsAsErrors()
+set(ENABLE_UNIT_TESTS OFF CACHE BOOL "Disable Tests for GLTF SDK" FORCE)
+set(ENABLE_SAMPLES OFF CACHE BOOL "Disable Samples for GLTF SDK" FORCE)
+add_subdirectory(glTF-SDK)
+AzuraSilenceClangTidy(GLTFSDK)
+AzuraSilenceEnumGuard(GLTFSDK)
+AzuraEnableWarningsAsErrors()

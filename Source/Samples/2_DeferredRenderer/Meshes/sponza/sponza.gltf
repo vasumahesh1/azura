@@ -1,0 +1,297 @@
+{
+  "accessors": [
+    {
+      "bufferView": 2,
+      "byteOffset": 0,
+      "componentType": 5125,
+      "count": 199269,
+      "type": "SCALAR",
+      "min": [
+        0
+      ],
+      "max": [
+        199268
+      ],
+      "name": "accessor_index_0"
+    },
+    {
+      "bufferView": 0,
+      "byteOffset": 0,
+      "componentType": 5126,
+      "count": 148975,
+      "min": [
+        -17.268321990966797,
+        -0.006653999909758568,
+        -7.7815141677856445
+      ],
+      "max": [
+        17.551677703857422,
+        15.55334758758545,
+        7.818483829498291
+      ],
+      "type": "VEC3",
+      "name": "accessor_position"
+    },
+    {
+      "bufferView": 0,
+      "byteOffset": 1787700,
+      "componentType": 5126,
+      "count": 148975,
+      "type": "VEC3",
+      "min": [
+        -1,
+        -1,
+        -1
+      ],
+      "max": [
+        1,
+        1,
+        1
+      ],
+      "name": "accessor_normal"
+    },
+    {
+      "bufferView": 1,
+      "byteOffset": 0,
+      "componentType": 5126,
+      "count": 148975,
+      "type": "VEC2",
+      "min": [
+        -57.04376983642578,
+        -61.176544189453125
+      ],
+      "max": [
+        57.97621536254883,
+        62.176544189453125
+      ],
+      "name": "accessor_uv"
+    }
+  ],
+  "asset": {
+    "generator": "OBJ2GLTF",
+    "version": "2.0"
+  },
+  "buffers": [
+    {
+      "name": "buffer_0",
+      "byteLength": 5564276,
+      "uri": "buffer_0.bin"
+    }
+  ],
+  "bufferViews": [
+    {
+      "buffer": 0,
+      "byteLength": 3575400,
+      "byteOffset": 0,
+      "target": 34962,
+      "name": "bufferView_0",
+      "byteStride": 12
+    },
+    {
+      "buffer": 0,
+      "byteLength": 1191800,
+      "byteOffset": 3575400,
+      "target": 34962,
+      "name": "bufferView_0",
+      "byteStride": 8
+    },
+    {
+      "buffer": 0,
+      "byteLength": 797076,
+      "byteOffset": 4767200,
+      "target": 34963,
+      "name": "bufferView_1"
+    }
+  ],
+  "images": [
+    {
+      "name": "color",
+      "uri": "color.jpeg"
+    },
+    {
+      "name": "normal",
+      "uri": "normal.png"
+    }
+  ],
+  "materials": [
+    {
+      "name": "lambert2SG",
+      "extensions": {
+        "KHR_techniques_webgl": {
+          "technique": 0,
+          "values": {
+            "u_ambient": [
+              0,
+              0,
+              0,
+              1
+            ],
+            "u_diffuse": {
+              "index": 0,
+              "texCoord": 0
+            },
+            "u_normal": {
+              "index": 1,
+              "texCoord": 0
+            },
+            "u_emission": [
+              0,
+              0,
+              0,
+              1
+            ],
+            "u_specular": [
+              0,
+              0,
+              0,
+              1
+            ],
+            "u_shininess": 0,
+            "u_transparency": 1
+          }
+        }
+      },
+      "emissiveFactor": [
+        0,
+        0,
+        0
+      ],
+      "alphaMode": "OPAQUE",
+      "doubleSided": false
+    }
+  ],
+  "meshes": [
+    {
+      "name": "sponza",
+      "primitives": [
+        {
+          "attributes": {
+            "POSITION": 1,
+            "NORMAL": 2,
+            "TEXCOORD_0": 3
+          },
+          "indices": 0,
+          "material": 0,
+          "mode": 4
+        }
+      ]
+    }
+  ],
+  "nodes": [
+    {
+      "name": "rootNode",
+      "mesh": 0
+    }
+  ],
+  "samplers": [
+    {
+      "magFilter": 9729,
+      "minFilter": 9986,
+      "wrapS": 10497,
+      "wrapT": 10497,
+      "name": "sampler_0"
+    }
+  ],
+  "scene": 0,
+  "scenes": [
+    {
+      "nodes": [
+        0
+      ],
+      "name": "scene_sponza"
+    }
+  ],
+  "textures": [
+    {
+      "sampler": 0,
+      "source": 0,
+      "name": "texture_color"
+    },
+    {
+      "sampler": 0,
+      "source": 1,
+      "name": "texture_normal"
+    }
+  ],
+  "extensionsUsed": [
+    "KHR_techniques_webgl"
+  ],
+  "extensions": {
+    "KHR_techniques_webgl": {
+      "programs": [
+        {
+          "name": "program0",
+          "fragmentShader": 0,
+          "vertexShader": 1
+        }
+      ],
+      "shaders": [
+        {
+          "type": 35632,
+          "name": "fragmentShader0",
+          "uri": "fragmentShader0.glsl"
+        },
+        {
+          "type": 35633,
+          "name": "vertexShader0",
+          "uri": "vertexShader0.glsl"
+        }
+      ],
+      "techniques": [
+        {
+          "name": "technique0",
+          "program": 0,
+          "attributes": {
+            "a_position": {
+              "semantic": "POSITION"
+            },
+            "a_normal": {
+              "semantic": "NORMAL"
+            },
+            "a_texcoord_0": {
+              "semantic": "TEXCOORD_0"
+            }
+          },
+          "uniforms": {
+            "u_modelViewMatrix": {
+              "type": 35676,
+              "semantic": "MODELVIEW"
+            },
+            "u_projectionMatrix": {
+              "type": 35676,
+              "semantic": "PROJECTION"
+            },
+            "u_normalMatrix": {
+              "type": 35675,
+              "semantic": "MODELVIEWINVERSETRANSPOSE"
+            },
+            "u_ambient": {
+              "type": 35666
+            },
+            "u_diffuse": {
+              "type": 35678
+            },
+            "u_normal": {
+              "type": 35678
+            },
+            "u_emission": {
+              "type": 35666
+            },
+            "u_specular": {
+              "type": 35666
+            },
+            "u_shininess": {
+              "type": 5126
+            },
+            "u_transparency": {
+              "type": 5126
+            }
+          }
+        }
+      ]
+    }
+  },
+  "extensionsRequired": [
+    "KHR_techniques_webgl"
+  ]
+}

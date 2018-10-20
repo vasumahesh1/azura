@@ -6,6 +6,7 @@ message(STATUS "Build Target: ${BUILD_TARGET}")
 message(STATUS "Build Platform: ${BUILD_PLATFORM}")
 message(STATUS "Build Arch: ${BUILD_ARCH}")
 
+include("./Windows.Settings.cmake")
 include("./GLFW.Import.cmake")
 include("./Vulkan.Import.cmake")
 include("./Boost.Import.cmake")
@@ -13,6 +14,7 @@ include("./Slang.Import.cmake")
 
 add_subdirectory(Imports)
 
+add_subdirectory(AssetManager)
 add_subdirectory(Common)
 add_subdirectory(Containers)
 add_subdirectory(Platform)
