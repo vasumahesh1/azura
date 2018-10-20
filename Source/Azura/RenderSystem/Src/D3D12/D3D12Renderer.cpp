@@ -194,8 +194,10 @@ void D3D12Renderer::Submit() {
       if (isLast) {
         renderPass.RecordImageAcquireBarrier(commandList, cIdx);
       } else {
-        renderPass.RecordResourceBarriers(commandList);
+        renderPass.RecordResourceBarriersForOutputs(commandList);
       }
+
+      renderPass.RecordResourceBarriersForReadingInputs(commandList);
 
       commandList->RSSetViewports(1, &m_viewport);
       commandList->RSSetScissorRects(1, &m_scissorRect);
@@ -216,6 +218,8 @@ void D3D12Renderer::Submit() {
 
         commandList->ExecuteBundle(recordEntry.m_bundle);
       }
+
+      renderPass.RecordResourceBarriersForWritingInputs(commandList);
 
       if (isLast) {
         renderPass.RecordPresentBarrier(commandList, cIdx);

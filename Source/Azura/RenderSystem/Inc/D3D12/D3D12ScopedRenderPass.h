@@ -67,7 +67,10 @@ public:
 
   const Containers::Vector<DescriptorTableEntry>& GetRootSignatureTable() const;
 
-  void RecordResourceBarriers(ID3D12GraphicsCommandList* commandList) const;
+  void RecordResourceBarriersForOutputs(ID3D12GraphicsCommandList* commandList) const;
+  void RecordResourceBarriersForReadingInputs(ID3D12GraphicsCommandList* commandList) const;
+
+  void RecordResourceBarriersForWritingInputs(ID3D12GraphicsCommandList * commandList) const;
 
   void WaitForGPU(ID3D12CommandQueue* commandQueue);
 

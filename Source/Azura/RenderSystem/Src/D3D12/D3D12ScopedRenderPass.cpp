@@ -223,7 +223,7 @@ const Containers::Vector<DescriptorTableEntry>& D3D12ScopedRenderPass::GetRootSi
   return m_rootSignatureTable;
 }
 
-void D3D12ScopedRenderPass::RecordResourceBarriers(ID3D12GraphicsCommandList* commandList) const {
+void D3D12ScopedRenderPass::RecordResourceBarriersForOutputs(ID3D12GraphicsCommandList* commandList) const {
   for (const auto& rtv : m_renderOutputs) {
     rtv.get().Transition(commandList, D3D12_RESOURCE_STATE_RENDER_TARGET);
   }
@@ -231,13 +231,25 @@ void D3D12ScopedRenderPass::RecordResourceBarriers(ID3D12GraphicsCommandList* co
   for (const auto& dsv : m_depthOutputs) {
     dsv.get().Transition(commandList, D3D12_RESOURCE_STATE_DEPTH_WRITE);
   }
+}
 
+void D3D12ScopedRenderPass::RecordResourceBarriersForReadingInputs(ID3D12GraphicsCommandList* commandList) const {
   for (const auto& rtv : m_renderInputs) {
-    rtv.get().Transition(commandList, D3D12_RESOURCE_STATE_GENERIC_READ);
+    rtv.get().Transition(commandList, D3D12_RESOURCE_STATE_RENDER_TARGET, D3D12_RESOURCE_STATE_GENERIC_READ);
   }
 
   for (const auto& dsv : m_depthInputs) {
-    dsv.get().Transition(commandList, D3D12_RESOURCE_STATE_GENERIC_READ);
+    dsv.get().Transition(commandList, D3D12_RESOURCE_STATE_DEPTH_WRITE, D3D12_RESOURCE_STATE_GENERIC_READ);
+  }
+}
+
+void D3D12ScopedRenderPass::RecordResourceBarriersForWritingInputs(ID3D12GraphicsCommandList* commandList) const {
+  for (const auto& rtv : m_renderInputs) {
+    rtv.get().Transition(commandList, D3D12_RESOURCE_STATE_GENERIC_READ, D3D12_RESOURCE_STATE_RENDER_TARGET);
+  }
+
+  for (const auto& dsv : m_depthInputs) {
+    dsv.get().Transition(commandList, D3D12_RESOURCE_STATE_GENERIC_READ, D3D12_RESOURCE_STATE_DEPTH_WRITE);
   }
 }
 
