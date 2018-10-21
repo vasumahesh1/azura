@@ -61,6 +61,8 @@ private:
   CD3DX12_VIEWPORT m_viewport;
   CD3DX12_RECT m_scissorRect;
 
+  D3D12ScopedImage m_depthTexture{};
+
   Containers::Vector<D3D12ScopedImage> m_renderTargetImages;
   Containers::Vector<D3D12ScopedRenderPass> m_renderPasses;
 

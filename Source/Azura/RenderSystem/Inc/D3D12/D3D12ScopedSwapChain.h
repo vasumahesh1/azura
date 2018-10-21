@@ -26,9 +26,11 @@ public:
   IDXGISwapChain3* Real() const;
 
   RawStorageFormat GetFormat() const;
+  RawStorageFormat GetDepthFormat() const;
 
 private:
   RawStorageFormat m_format{};
+  RawStorageFormat m_depthFormat{};
 
   Microsoft::WRL::ComPtr<IDXGISwapChain3> m_swapChain;
   Microsoft::WRL::ComPtr<ID3D12Resource> m_renderTargets[GLOBAL_INFLIGHT_FRAMES];

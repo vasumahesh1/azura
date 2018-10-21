@@ -15,6 +15,11 @@ PolarCamera::PolarCamera(U32 width, U32 height)
   PolarCamera::Recompute();
 }
 
+PolarCamera::PolarCamera(U32 width, U32 height, float thethaDeg, float phiDeg, float zoom)
+  : Camera(width, height), m_theta(Math::ToRadians(thethaDeg)), m_phi(Math::ToRadians(phiDeg)), m_zoom(zoom) {
+  PolarCamera::Recompute();
+}
+
 void PolarCamera::Recompute() {
   const Matrix4f transform = Matrix4f::FromRotationMatrix(Matrix4f::RotationY(m_theta)) *
                        Matrix4f::FromRotationMatrix(Matrix3f::RotationX(m_phi)) *

@@ -15,6 +15,7 @@ void D3D12ScopedSwapChain::Create(
   const Log& log_D3D12RenderSystem) {
 
   m_format = swapChainRequirements.m_format;
+  m_depthFormat = swapChainRequirements.m_depthFormat;
 
   auto swapChain = D3D12Core::CreateSwapChain(factory, commandQueue, windowHandle.GetHandle(),
                                               swapChainRequirements, log_D3D12RenderSystem);
@@ -31,6 +32,10 @@ IDXGISwapChain3* D3D12ScopedSwapChain::Real() const {
 
 RawStorageFormat D3D12ScopedSwapChain::GetFormat() const {
   return m_format;
+}
+
+RawStorageFormat D3D12ScopedSwapChain::GetDepthFormat() const {
+  return m_depthFormat;
 }
 } // namespace D3D12
 } // namespace Azura

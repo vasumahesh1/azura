@@ -18,7 +18,7 @@ AppRenderer::AppRenderer()
     m_mainBuffer(16384),
     m_mainAllocator(m_mainBuffer, 8192),
     m_drawableAllocator(m_mainBuffer, 8192),
-    m_camera(1280, 720),
+    m_camera(1280, 720, -90, -45, 10),
     log_AppRenderer(Log("AppRenderer")) {
 }
 
@@ -26,11 +26,11 @@ void AppRenderer::LoadAssets() const {
   HEAP_ALLOCATOR(Temporary, Memory::MonotonicAllocator, 4096);
 
   DrawablePoolCreateInfo poolInfo = {allocatorTemporary};
-  poolInfo.m_byteSize             = 0x800000;
+  poolInfo.m_byteSize             = 0xF00000;
   poolInfo.m_numDrawables         = 1;
   poolInfo.m_renderPasses         = {{m_forwardRenderer.m_passId}, allocatorTemporary};
   poolInfo.m_drawType             = DrawType::InstancedIndexed;
-  poolInfo.m_cullMode = CullMode::None;
+  poolInfo.m_cullMode             = CullMode::None;
 
   const auto VERTEX_SLOT = poolInfo.AddInputSlot({
     BufferUsageRate::PerVertex, {{"POSITION", RawStorageFormat::R32G32B32_FLOAT}}
@@ -46,8 +46,8 @@ void AppRenderer::LoadAssets() const {
   pool.BindSampler(m_forwardRenderer.m_sampSlot, {});
 
   // Bind Texture
-  const U32 colorTexture = m_textureManager->Load("Meshes/sponza/color.jpeg");
-  const U32 normalTexture = m_textureManager->Load("Meshes/sponza/normals.jpeg");
+  const U32 colorTexture = m_textureManager->Load("Meshes/sponza/color.png");
+  const U32 normalTexture = m_textureManager->Load("Meshes/sponza/normal.png");
 
   const TextureDesc* colorDesc = m_textureManager->GetInfo(colorTexture);
   const TextureDesc* normalDesc = m_textureManager->GetInfo(normalTexture);
@@ -120,12 +120,17 @@ void AppRenderer::Initialize() {
   requirements.m_int64 = false;
   requirements.m_transferQueue = false;
 
-  m_camera.RotateAboutRight(0);
-  m_camera.RotateAboutUp(90);
-  m_camera.SetZoomAndRecompute(10);
+  // m_camera.RotateAboutRight(0);
+  // m_camera.RotateAboutUp(90);
+  // m_camera.SetZoomAndRecompute(10);
 
   m_sceneUBO         = {};
   m_sceneUBO.m_model           = Matrix4f::Identity();
+  m_sceneUBO.m_model(1, 3) = -5;
+  // m_sceneUBO.m_model(1, 1) = 2;
+  // m_sceneUBO.m_model(0, 0) = 2;
+  // m_sceneUBO.m_model(2, 2) = 2;
+
   m_sceneUBO.m_viewProj = m_camera.GetViewProjMatrix();
   m_sceneUBO.m_modelInvTranspose = m_sceneUBO.m_model.Inverse().Transpose();
 
@@ -134,7 +139,7 @@ void AppRenderer::Initialize() {
 
   TextureRequirements textureRequirements = {};
   textureRequirements.m_maxCount          = 10;
-  textureRequirements.m_poolSize          = 0x400000; // 4MB
+  textureRequirements.m_poolSize          = 0xF00000;
 
   DescriptorRequirements descriptorRequirements = DescriptorRequirements(1, 1, allocatorTemporary);
 

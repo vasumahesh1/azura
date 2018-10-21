@@ -7,6 +7,8 @@ class PolarCamera final : public Camera {
 public:
   PolarCamera(U32 width, U32 height);
 
+  PolarCamera(U32 width, U32 height, float thethaDeg, float phiDeg, float zoom);
+
   void Recompute() override;
   void OnMouseEvent(MouseEvent mouseEvent) override;
 

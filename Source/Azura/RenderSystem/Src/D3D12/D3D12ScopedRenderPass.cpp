@@ -74,7 +74,7 @@ void D3D12ScopedRenderPass::Create(const Microsoft::WRL::ComPtr<ID3D12Device>& d
       device->CreateDepthStencilView(gpuTexture.Real(), &dsvDesc, dsvHandle);
       dsvHandle.Offset(1, dsvDescriptorSize);
 
-      hasDepth = true;
+      m_hasDepth = true;
 
       m_depthOutputs.push_back(gpuTexture);
       continue;
@@ -99,6 +99,7 @@ void D3D12ScopedRenderPass::CreateForSwapChain(const Microsoft::WRL::ComPtr<ID3D
                                                const PipelinePassCreateInfo& createInfo,
                                                const Containers::Vector<RenderTargetCreateInfo>& pipelineBuffers,
                                                const Containers::Vector<D3D12ScopedImage>& pipelineBufferImages,
+                                               const D3D12ScopedImage& depthImage,
                                                const Containers::Vector<DescriptorSlot>& descriptorSlots,
                                                const Containers::Vector<DescriptorTableEntry>& descriptorSetTable,
                                                const Containers::Vector<D3D12ScopedShader>& allShaders,
@@ -109,7 +110,7 @@ void D3D12ScopedRenderPass::CreateForSwapChain(const Microsoft::WRL::ComPtr<ID3D
   CreateBase(device, createInfo, descriptorSlots, descriptorSetTable, pipelineBuffers, pipelineBufferImages,
              allShaders);
 
-  hasDepth          = false;
+  m_hasDepth          = true;
   m_isTargetSwapChain = true;
 
   D3D12_DESCRIPTOR_HEAP_DESC rtvHeapDesc = {};
@@ -120,17 +121,18 @@ void D3D12ScopedRenderPass::CreateForSwapChain(const Microsoft::WRL::ComPtr<ID3D
     "Failed to create RTV Heap for Swap Chain");
 
   D3D12_DESCRIPTOR_HEAP_DESC dsvHeapDesc = {};
-  rtvHeapDesc.NumDescriptors             = GLOBAL_INFLIGHT_FRAMES;
-  rtvHeapDesc.Type                       = D3D12_DESCRIPTOR_HEAP_TYPE_DSV;
-  rtvHeapDesc.Flags                      = D3D12_DESCRIPTOR_HEAP_FLAG_NONE;
+  dsvHeapDesc.NumDescriptors             = 1;
+  dsvHeapDesc.Type                       = D3D12_DESCRIPTOR_HEAP_TYPE_DSV;
+  dsvHeapDesc.Flags                      = D3D12_DESCRIPTOR_HEAP_FLAG_NONE;
   VERIFY_D3D_OP(log_D3D12RenderSystem, device->CreateDescriptorHeap(&dsvHeapDesc, IID_PPV_ARGS(&m_dsvHeap)),
     "Failed to create DSV Heap for Swap Chain");
 
   // Create Frame buffers
   CD3DX12_CPU_DESCRIPTOR_HANDLE rtvHandle(m_rtvHeap->GetCPUDescriptorHandleForHeapStart());
+  const CD3DX12_CPU_DESCRIPTOR_HANDLE dsvHandle(m_dsvHeap->GetCPUDescriptorHandleForHeapStart());
 
   // Create a RTV for each frame.
-  for (U32 idx                                          = 0; idx < GLOBAL_INFLIGHT_FRAMES; idx++) {
+  for (U32 idx = 0; idx < GLOBAL_INFLIGHT_FRAMES; idx++) {
     Microsoft::WRL::ComPtr<ID3D12Resource> renderTarget = {};
     VERIFY_D3D_OP(log_D3D12RenderSystem, m_swapChainRef.get().RealComPtr()->GetBuffer(idx, IID_PPV_ARGS(&renderTarget)),
       "Failed to get swapchain buffer");
@@ -147,6 +149,9 @@ void D3D12ScopedRenderPass::CreateForSwapChain(const Microsoft::WRL::ComPtr<ID3D
     primaryCmdBuffer.CreateGraphicsCommandList(device, nullptr, log_D3D12RenderSystem);
     m_commandBuffers.push_back(primaryCmdBuffer);
   }
+
+  const auto dsvDesc = D3D12ScopedImage::GetDSV(depthImage.GetFormat(), ImageViewType::ImageView2D, log_D3D12RenderSystem);
+  device->CreateDepthStencilView(depthImage.Real(), &dsvDesc, dsvHandle);
 }
 
 U32 D3D12ScopedRenderPass::GetId() const {
@@ -191,10 +196,10 @@ void D3D12ScopedRenderPass::SetRenderTargets(ID3D12GraphicsCommandList* commandL
   const U32 numRTV = m_isTargetSwapChain ? 1u : U32(m_renderOutputs.size());
 
   // Set Both Depth & RTV
-  if (hasDepth) {
+  if (m_hasDepth) {
     CD3DX12_CPU_DESCRIPTOR_HANDLE dsvHandle(m_dsvHeap->GetCPUDescriptorHandleForHeapStart());
     commandList->OMSetRenderTargets(numRTV, &rtvHandle, 1, &dsvHandle);
-    commandList->ClearDepthStencilView(dsvHandle, D3D12_CLEAR_FLAG_DEPTH | D3D12_CLEAR_FLAG_STENCIL,
+    commandList->ClearDepthStencilView(dsvHandle, D3D12_CLEAR_FLAG_DEPTH,
                                        m_clearData.m_depth, m_clearData.m_stencil, 0, nullptr);
   }
     // Set Only RTV
@@ -276,6 +281,13 @@ void D3D12ScopedRenderPass::UpdatePipelineInfo(D3D12_GRAPHICS_PIPELINE_STATE_DES
     const auto format = ToDXGI_FORMAT(m_swapChainRef.get().GetFormat());
     VERIFY_OPT(log_D3D12RenderSystem, format, "Unknown Format - Swap Chain - For Pipeline Render Target Format");
 
+    if (m_hasDepth) {
+      const auto depthFormat = ToDXGI_FORMAT(m_swapChainRef.get().GetDepthFormat());
+      VERIFY_OPT(log_D3D12RenderSystem, depthFormat, "Unknown Depth Format - Swap Chain - For Pipeline Render Target Format");
+      psoDesc.DSVFormat = depthFormat.value();
+    }
+
+    psoDesc.DepthStencilState = CD3DX12_DEPTH_STENCIL_DESC(D3D12_DEFAULT);
 
     psoDesc.RTVFormats[0] = format.value();
     psoDesc.NumRenderTargets = 1;
@@ -291,6 +303,7 @@ void D3D12ScopedRenderPass::UpdatePipelineInfo(D3D12_GRAPHICS_PIPELINE_STATE_DES
     if (HasDepthOrStencilComponent(outputInfo.m_format))
     {
       psoDesc.DSVFormat = format.value();
+      psoDesc.DepthStencilState = CD3DX12_DEPTH_STENCIL_DESC(D3D12_DEFAULT);
       continue;
     }
 

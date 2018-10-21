@@ -40,6 +40,7 @@ public:
                           const PipelinePassCreateInfo& createInfo,
                           const Containers::Vector<RenderTargetCreateInfo>& pipelineBuffers,
                           const Containers::Vector<D3D12ScopedImage>& pipelineBufferImages,
+                          const D3D12ScopedImage& depthImage,
                           const Containers::Vector<DescriptorSlot>& descriptorSlots,
                           const Containers::Vector<DescriptorTableEntry>& descriptorSetTable,
                           const Containers::Vector<D3D12ScopedShader>& allShaders,
@@ -91,7 +92,7 @@ private:
   const Log log_D3D12RenderSystem;
   U32 m_id;
 
-  bool hasDepth{false};
+  bool m_hasDepth{false};
   bool m_isTargetSwapChain{false};
 
   std::reference_wrapper<const D3D12ScopedSwapChain> m_swapChainRef;
