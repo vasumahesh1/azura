@@ -8,7 +8,7 @@ namespace D3D12 {
 class D3D12ScopedSampler
 {
 public:
-  void Create();
+  void Create(const SamplerDesc& desc, const Log& log_D3D12RenderSystem);
   const D3D12_SAMPLER_DESC& GetDesc() const;
 
 private:

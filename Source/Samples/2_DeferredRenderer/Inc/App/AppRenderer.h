@@ -10,26 +10,27 @@
 #include "Generic/TextureManager.h"
 #include "Camera/PolarCamera.h"
 
+#include "App/LightTexture.h"
+
 namespace Azura {
 
 struct ForwardRenderer {
   U32 m_passId;
+
   U32 m_uboSlot;
+
   U32 m_texSlot;
   U32 m_normalSlot;
+  // U32 m_lightTexSlot;
+
   U32 m_sampSlot;
+  // U32 m_lightSampSlot;
 };
 
 struct UniformBufferData {
   Matrix4f m_model;
   Matrix4f m_modelInvTranspose;
   Matrix4f m_viewProj;
-};
-
-struct Vertex {
-  float m_pos[4];
-  float m_norm[4];
-  float m_color[4];
 };
 
 class AppRenderer {
@@ -44,6 +45,8 @@ public:
 private:
   void LoadAssets() const;
 
+  SamplerDesc m_lightSamplerDesc{};
+
   UniformBufferData m_sceneUBO;
 
   ForwardRenderer m_forwardRenderer;
@@ -52,6 +55,8 @@ private:
 
   Memory::RangeAllocator m_mainAllocator;
   Memory::RangeAllocator m_drawableAllocator;
+
+  LightTexture m_lightTexture;
 
   PolarCamera m_camera;
 

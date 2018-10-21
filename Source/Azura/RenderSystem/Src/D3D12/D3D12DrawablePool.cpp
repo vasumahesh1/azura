@@ -173,7 +173,6 @@ void D3D12DrawablePool::BindTextureData(SlotID slot, const TextureDesc& desc, co
 
 void D3D12DrawablePool::BindSampler(SlotID slot, const SamplerDesc& desc) {
   LOG_DBG(log_D3D12RenderSystem, LOG_LEVEL, "D3D12 Drawable Pool: Binding Sampler Requested for Slot: %d", slot);
-  UNUSED(desc);
 
   const auto& descriptorSlot = m_globalDescriptorSlots[slot];
   assert(descriptorSlot.m_type == DescriptorType::Sampler);
@@ -181,6 +180,7 @@ void D3D12DrawablePool::BindSampler(SlotID slot, const SamplerDesc& desc) {
   SamplerInfo sInfo = {};
   sInfo.m_set       = descriptorSlot.m_setIdx;
   sInfo.m_binding   = descriptorSlot.m_bindIdx;
+  sInfo.m_desc      = desc;
 
   m_samplerInfos.PushBack(sInfo);
 }
@@ -228,10 +228,8 @@ void D3D12DrawablePool::SetSamplerData() {
 
   U32 idx = 0;
   for (const auto& samplerInfo : m_samplerInfos) {
-    UNUSED(samplerInfo);
-
     D3D12ScopedSampler sampler = {};
-    sampler.Create();
+    sampler.Create(samplerInfo.m_desc, log_D3D12RenderSystem);
 
     CD3DX12_CPU_DESCRIPTOR_HANDLE cpuHandle;
     CD3DX12_CPU_DESCRIPTOR_HANDLE::InitOffsetted(cpuHandle, samplerCPUHandle, m_samplerDescriptorElementSize * idx);

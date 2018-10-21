@@ -1,15 +1,29 @@
 #include "D3D12/D3D12ScopedSampler.h"
 #include "Log/Log.h"
+#include "D3D12/D3D12TypeMapping.h"
 
 
 namespace Azura {
 namespace D3D12 {
 
-void D3D12ScopedSampler::Create() {
-  m_desc.Filter = D3D12_FILTER_MIN_MAG_MIP_LINEAR;
-  m_desc.AddressU = D3D12_TEXTURE_ADDRESS_MODE_WRAP;
-  m_desc.AddressV = D3D12_TEXTURE_ADDRESS_MODE_WRAP;
-  m_desc.AddressW = D3D12_TEXTURE_ADDRESS_MODE_WRAP;
+void D3D12ScopedSampler::Create(const SamplerDesc& desc, const Log& log_D3D12RenderSystem) {
+  const auto textureFilter = ToD3D12_FILTER(desc.m_filter);
+  VERIFY_OPT(log_D3D12RenderSystem, textureFilter, "Unknown Texture Filter");
+
+  const auto addressU = ToD3D12_TEXTURE_ADDRESS_MODE(desc.m_addressModeU);
+  VERIFY_OPT(log_D3D12RenderSystem, addressU, "Unknown Address Mode U");
+
+  const auto addressV = ToD3D12_TEXTURE_ADDRESS_MODE(desc.m_addressModeV);
+  VERIFY_OPT(log_D3D12RenderSystem, addressU, "Unknown Address Mode V");
+
+  const auto addressW = ToD3D12_TEXTURE_ADDRESS_MODE(desc.m_addressModeW);
+  VERIFY_OPT(log_D3D12RenderSystem, addressU, "Unknown Address Mode W");
+
+  // TODO(vasumahesh1):[SAMPLER]: Expose more options later on
+  m_desc.Filter = textureFilter.value();
+  m_desc.AddressU = addressU.value();
+  m_desc.AddressV = addressV.value();
+  m_desc.AddressW = addressW.value();
   m_desc.MipLODBias = 0;
   m_desc.MaxAnisotropy = 0;
   m_desc.ComparisonFunc = D3D12_COMPARISON_FUNC_NEVER;

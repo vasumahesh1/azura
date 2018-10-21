@@ -118,6 +118,24 @@ namespace D3D12 {
   FUNC(CullMode::BackBit, D3D12_CULL_MODE_BACK)                                                                       \
   FUNC(CullMode::FrontAndBack, D3D12_CULL_MODE_NONE)
 
+#define TEXTURE_ADDRESS_MODE_TO_D3D12_TEXTURE_ADDRESS_MODE(FUNC)                               \
+  FUNC(TextureAddressMode::Wrap, D3D12_TEXTURE_ADDRESS_MODE_WRAP)                              \
+  FUNC(TextureAddressMode::Mirror, D3D12_TEXTURE_ADDRESS_MODE_MIRROR)                          \
+  FUNC(TextureAddressMode::Clamp, D3D12_TEXTURE_ADDRESS_MODE_CLAMP)                            \
+  FUNC(TextureAddressMode::Border, D3D12_TEXTURE_ADDRESS_MODE_BORDER)                          \
+  FUNC(TextureAddressMode::MirrorOnce, D3D12_TEXTURE_ADDRESS_MODE_MIRROR_ONCE)
+
+#define TEXTURE_FILTER_TO_D3D12_FILTER(FUNC)                                                            \
+  FUNC(TextureFilter::MinMagMipPoint, D3D12_FILTER_MIN_MAG_MIP_POINT)                                   \
+  FUNC(TextureFilter::MinMagPoint_MipLinear, D3D12_FILTER_MIN_MAG_POINT_MIP_LINEAR)                     \
+  FUNC(TextureFilter::MinPoint_MagLinear_MipPoint, D3D12_FILTER_MIN_POINT_MAG_LINEAR_MIP_POINT)         \
+  FUNC(TextureFilter::MinPoint_MagMipLinear, D3D12_FILTER_MIN_POINT_MAG_MIP_LINEAR)                     \
+  FUNC(TextureFilter::MinLinear_MagMipPoint, D3D12_FILTER_MIN_LINEAR_MAG_MIP_POINT)                     \
+  FUNC(TextureFilter::MinLinear_MagPoint_MipLinear, D3D12_FILTER_MIN_LINEAR_MAG_POINT_MIP_LINEAR)       \
+  FUNC(TextureFilter::MinMagLinear_MipPoint, D3D12_FILTER_MIN_MAG_LINEAR_MIP_POINT)                     \
+  FUNC(TextureFilter::MinMagMipLinear, D3D12_FILTER_MIN_MAG_MIP_LINEAR)                                 \
+  FUNC(TextureFilter::Anisotropic, D3D12_FILTER_ANISOTROPIC)
+
 #define CREATE_MAPPER_CPP(FROM_FORMAT, TO_FORMAT, MAPPING_TABLE, CASE_MAPPING_FUNC)                                    \
   CREATE_MAPPER_H(FROM_FORMAT, TO_FORMAT) {                                                                            \
     switch (inputFormat) { MAPPING_TABLE(CASE_MAPPING_FUNC) }                                                          \
@@ -133,6 +151,8 @@ CREATE_MAPPER_CPP(ImageViewType, D3D12_SRV_DIMENSION, IMAGE_VIEW_TYPE_TO_SRV_DIM
 CREATE_MAPPER_CPP(ImageViewType, D3D12_DSV_DIMENSION, IMAGE_VIEW_TYPE_TO_DSV_DIMENSION, FORWARD_MAPPING)
 CREATE_MAPPER_CPP(ImageViewType, D3D12_RTV_DIMENSION, IMAGE_VIEW_TYPE_TO_RTV_DIMENSION, FORWARD_MAPPING)
 CREATE_MAPPER_CPP(CullMode, D3D12_CULL_MODE, CULL_MODE_TO_D3D12_CULL_MODE_MAPPING, FORWARD_MAPPING)
+CREATE_MAPPER_CPP(TextureAddressMode, D3D12_TEXTURE_ADDRESS_MODE, TEXTURE_ADDRESS_MODE_TO_D3D12_TEXTURE_ADDRESS_MODE, FORWARD_MAPPING)
+CREATE_MAPPER_CPP(TextureFilter, D3D12_FILTER, TEXTURE_FILTER_TO_D3D12_FILTER, FORWARD_MAPPING)
 
 } // namespace D3D12
 } // namespace Azura

@@ -21,6 +21,7 @@ struct ColorPixelInput
 struct TextureBlock {
   Texture2D tex;
   Texture2D norm;
+  // Texture2D light;
 };
 
 struct SamplerBlock {

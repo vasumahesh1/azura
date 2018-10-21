@@ -5,7 +5,10 @@ project(TestZone)
 set(
   SOURCES
     "Inc/App/AppRenderer.h"
+    "Inc/App/LightTexture.h"
+    "Inc/App/LightDefinitions.h"
     "Src/AppRenderer.cpp"
+    "Src/LightTexture.cpp"
     "Src/main.cpp"
 )
 

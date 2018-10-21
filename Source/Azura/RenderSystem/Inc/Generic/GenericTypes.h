@@ -56,8 +56,7 @@ enum class BufferUsageRate {
   PerInstance
 };
 
-enum class BlendFactor
-{
+enum class BlendFactor {
   Zero,
   One,
   SrcColor,
@@ -79,8 +78,7 @@ enum class BlendFactor
   OneMinusSrc1Alpha
 };
 
-enum class BlendOp
-{
+enum class BlendOp {
   Add,
   Subtract,
   ReverseSubtract,
@@ -88,15 +86,13 @@ enum class BlendOp
   Max
 };
 
-struct BlendingEq
-{
+struct BlendingEq {
   BlendFactor m_srcFactor{};
   BlendFactor m_dstFactor{};
   BlendOp m_op{};
 };
 
-struct BlendState
-{
+struct BlendState {
   bool m_enable{false};
   BlendingEq m_color{};
   BlendingEq m_alpha{};
@@ -211,8 +207,7 @@ struct ViewportDimensions {
 
 using SlotID = U32;
 
-struct SlotSemantic
-{
+struct SlotSemantic {
   const char* m_name;
   RawStorageFormat m_format;
   U32 m_id{0};
@@ -246,7 +241,32 @@ struct TextureDesc {
   RawStorageFormat m_format{RawStorageFormat::R8G8B8A8_UNORM};
 };
 
+enum class TextureAddressMode {
+  Wrap,
+  Mirror,
+  Clamp,
+  Border,
+  MirrorOnce
+};
+
+enum class TextureFilter {
+  MinMagMipPoint,
+  MinMagPoint_MipLinear,
+  MinPoint_MagLinear_MipPoint,
+  MinPoint_MagMipLinear,
+  MinLinear_MagMipPoint,
+  MinLinear_MagPoint_MipLinear,
+  MinMagLinear_MipPoint,
+  MinMagMipLinear,
+  Anisotropic,
+};
+
 struct SamplerDesc {
+  TextureAddressMode m_addressModeU{TextureAddressMode::Wrap};
+  TextureAddressMode m_addressModeV{TextureAddressMode::Wrap};
+  TextureAddressMode m_addressModeW{TextureAddressMode::Wrap};
+
+  TextureFilter m_filter{TextureFilter::MinMagMipLinear};
 };
 
 struct BufferInfo {
@@ -271,6 +291,7 @@ struct TextureBufferInfo final : public BufferInfo {
 struct SamplerInfo {
   U32 m_set{0};
   U32 m_binding{0};
+  SamplerDesc m_desc{};
 };
 
 struct UniformBufferInfo final : public BufferInfo {
@@ -312,10 +333,10 @@ struct ApplicationInfo {
 };
 
 constexpr U32 DEFAULT_FRAMES_IN_FLIGHT = 2;
-constexpr U32 MAX_RENDER_PASS_INPUTS = 4;
-constexpr U32 MAX_RENDER_PASS_OUTPUTS = 4;
-constexpr U32 MAX_RENDER_PASS_SETS = 8;
-constexpr U32 MAX_RENDER_PASS_SHADERS = 4;
+constexpr U32 MAX_RENDER_PASS_INPUTS   = 4;
+constexpr U32 MAX_RENDER_PASS_OUTPUTS  = 4;
+constexpr U32 MAX_RENDER_PASS_SETS     = 8;
+constexpr U32 MAX_RENDER_PASS_SHADERS  = 4;
 
 struct ApplicationRequirements {
 };

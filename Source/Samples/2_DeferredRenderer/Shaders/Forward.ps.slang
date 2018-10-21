@@ -27,5 +27,5 @@ float4 main(ColorPixelInput input) : SV_Target
   float3 ambientLight = float3(1.0);
   fragColor += albedo * ambientLight;
 
-  return float4(fragColor, 1.0);
+  return normalColor; // float4(fragColor, 1.0);
 }

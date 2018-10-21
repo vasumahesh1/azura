@@ -13,11 +13,15 @@ namespace Azura {
 using namespace Containers; // NOLINT
 using namespace Math;       // NOLINT
 
+constexpr U32 NUM_LIGHTS = 10;
+
 AppRenderer::AppRenderer()
-  : m_forwardRenderer(),
+  : 
+  m_forwardRenderer(),
     m_mainBuffer(16384),
     m_mainAllocator(m_mainBuffer, 8192),
     m_drawableAllocator(m_mainBuffer, 8192),
+    m_lightTexture(NUM_LIGHTS, 7, m_mainAllocator),
     m_camera(1280, 720, -90, -45, 10),
     log_AppRenderer(Log("AppRenderer")) {
 }
@@ -44,6 +48,7 @@ void AppRenderer::LoadAssets() const {
 
   // Pool Binds
   pool.BindSampler(m_forwardRenderer.m_sampSlot, {});
+  // pool.BindSampler(m_forwardRenderer.m_lightSampSlot, m_lightSamplerDesc);
 
   // Bind Texture
   const U32 colorTexture = m_textureManager->Load("Meshes/sponza/color.png");
@@ -100,6 +105,11 @@ void AppRenderer::LoadAssets() const {
 void AppRenderer::Initialize() {
   LOG_INF(log_AppRenderer, LOG_LEVEL, "Starting Init of AppRenderer");
 
+  m_lightSamplerDesc.m_filter = TextureFilter::MinMagMipPoint;
+  m_lightSamplerDesc.m_addressModeU = TextureAddressMode::Clamp;
+  m_lightSamplerDesc.m_addressModeV = TextureAddressMode::Clamp;
+  m_lightSamplerDesc.m_addressModeW = TextureAddressMode::Clamp;
+
   HEAP_ALLOCATOR(Temporary, Memory::MonotonicAllocator, 16384);
   m_window = RenderSystem::CreateApplicationWindow("TestZone", 1280, 720);
 
@@ -120,16 +130,9 @@ void AppRenderer::Initialize() {
   requirements.m_int64 = false;
   requirements.m_transferQueue = false;
 
-  // m_camera.RotateAboutRight(0);
-  // m_camera.RotateAboutUp(90);
-  // m_camera.SetZoomAndRecompute(10);
-
   m_sceneUBO         = {};
   m_sceneUBO.m_model           = Matrix4f::Identity();
   m_sceneUBO.m_model(1, 3) = -5;
-  // m_sceneUBO.m_model(1, 1) = 2;
-  // m_sceneUBO.m_model(0, 0) = 2;
-  // m_sceneUBO.m_model(2, 2) = 2;
 
   m_sceneUBO.m_viewProj = m_camera.GetViewProjMatrix();
   m_sceneUBO.m_modelInvTranspose = m_sceneUBO.m_model.Inverse().Transpose();
@@ -141,16 +144,23 @@ void AppRenderer::Initialize() {
   textureRequirements.m_maxCount          = 10;
   textureRequirements.m_poolSize          = 0xF00000;
 
-  DescriptorRequirements descriptorRequirements = DescriptorRequirements(1, 1, allocatorTemporary);
+  DescriptorRequirements descriptorRequirements = DescriptorRequirements(6, 4, allocatorTemporary);
 
+  // UBs
   m_forwardRenderer.m_uboSlot = descriptorRequirements.AddDescriptor({
     DescriptorType::UniformBuffer, ShaderStage::Vertex
   });
 
+  // SAMPLERS
   m_forwardRenderer.m_sampSlot = descriptorRequirements.AddDescriptor({
     DescriptorType::Sampler, ShaderStage::Pixel
-  });
+    });
 
+  // m_forwardRenderer.m_lightSampSlot = descriptorRequirements.AddDescriptor({
+  //   DescriptorType::Sampler, ShaderStage::Pixel
+  //   });
+
+  // TEXTURES
   m_forwardRenderer.m_texSlot = descriptorRequirements.AddDescriptor({
     DescriptorType::SampledImage, ShaderStage::Pixel
   });
@@ -159,9 +169,14 @@ void AppRenderer::Initialize() {
     DescriptorType::SampledImage, ShaderStage::Pixel
     });
 
-  const U32 UBO_SET = descriptorRequirements.AddSet({m_forwardRenderer.m_uboSlot});
-  const U32 SAMPLER_SET = descriptorRequirements.AddSet({m_forwardRenderer.m_sampSlot});
-  const U32 TEXTURE_SET = descriptorRequirements.AddSet({m_forwardRenderer.m_texSlot, m_forwardRenderer.m_normalSlot});
+  // m_forwardRenderer.m_lightTexSlot = descriptorRequirements.AddDescriptor({
+  //   DescriptorType::SampledImage, ShaderStage::Pixel
+  //   });
+
+  const U32 UBO_SET = descriptorRequirements.AddSet({ m_forwardRenderer.m_uboSlot });
+  const U32 SAMPLER_SET = descriptorRequirements.AddSet({ m_forwardRenderer.m_sampSlot});
+  const U32 TEXTURE_SET = descriptorRequirements.AddSet({ m_forwardRenderer.m_texSlot, m_forwardRenderer.m_normalSlot, /* m_forwardRenderer.m_lightTexSlot */ });
+  // const U32 LIGHT_SAMPLER_SET = descriptorRequirements.AddSet({ m_forwardRenderer.m_lightSampSlot });
 
   ShaderRequirements shaderRequirements = ShaderRequirements(2, allocatorTemporary);
   const U32 VERTEX_SHADER_ID            = shaderRequirements.AddShader({
@@ -178,7 +193,7 @@ void AppRenderer::Initialize() {
     PipelinePassCreateInfo::Shaders{VERTEX_SHADER_ID, PIXEL_SHADER_ID}, // SHADERS
     PipelinePassCreateInfo::Inputs{},                                   // INPUT TARGETS
     PipelinePassCreateInfo::Outputs{},                                  // OUTPUT TARGETS
-    PipelinePassCreateInfo::DescriptorSets{UBO_SET, SAMPLER_SET, TEXTURE_SET},                    // DESCRIPTORS
+    PipelinePassCreateInfo::DescriptorSets{UBO_SET, SAMPLER_SET, /* LIGHT_SAMPLER_SET ,*/ TEXTURE_SET},                    // DESCRIPTORS
     ClearData{{0.2f, 0.2f, 0.2f, 1.0f}, 1.0f, 0}
   });
 
