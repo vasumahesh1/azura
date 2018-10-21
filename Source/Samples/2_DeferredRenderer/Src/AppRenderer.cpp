@@ -1,4 +1,8 @@
 #include "App/AppRenderer.h"
+
+#include <random>
+#include <cmath>
+
 #include "Core/RawStorageFormat.h"
 #include "Generic/RenderSystem.h"
 #include "Generic/Shader.h"
@@ -12,16 +16,22 @@
 namespace Azura {
 using namespace Containers; // NOLINT
 using namespace Math;       // NOLINT
+namespace {
+  constexpr U32 NUM_LIGHTS = 20;
+  const Vector3f LIGHT_MIN = {-14.0f, 0.0f, -6.0f };
+  const Vector3f LIGHT_MAX = { 14.0f, 20.0f, 6.0f };
+  constexpr float LIGHT_RADIUS = 5.0;
+  // constexpr float LIGHT_DT = -0.03;
 
-constexpr U32 NUM_LIGHTS = 10;
+} // namespace
 
 AppRenderer::AppRenderer()
-  : 
-  m_forwardRenderer(),
+  : m_forwardRenderer(),
     m_mainBuffer(16384),
     m_mainAllocator(m_mainBuffer, 8192),
     m_drawableAllocator(m_mainBuffer, 8192),
     m_lightTexture(NUM_LIGHTS, 7, m_mainAllocator),
+    m_lights(NUM_LIGHTS, m_mainAllocator),
     m_camera(1280, 720, -90, -45, 10),
     log_AppRenderer(Log("AppRenderer")) {
 }
@@ -48,19 +58,22 @@ void AppRenderer::LoadAssets() const {
 
   // Pool Binds
   pool.BindSampler(m_forwardRenderer.m_sampSlot, {});
-  // pool.BindSampler(m_forwardRenderer.m_lightSampSlot, m_lightSamplerDesc);
+  pool.BindSampler(m_forwardRenderer.m_lightSampSlot, m_lightSamplerDesc);
 
   // Bind Texture
-  const U32 colorTexture = m_textureManager->Load("Meshes/sponza/color.png");
+  const U32 colorTexture  = m_textureManager->Load("Meshes/sponza/color.png");
   const U32 normalTexture = m_textureManager->Load("Meshes/sponza/normal.png");
 
-  const TextureDesc* colorDesc = m_textureManager->GetInfo(colorTexture);
+  const TextureDesc* colorDesc  = m_textureManager->GetInfo(colorTexture);
   const TextureDesc* normalDesc = m_textureManager->GetInfo(normalTexture);
 
   VERIFY_TRUE(log_AppRenderer, colorDesc != nullptr, "Color Texture Description was Null");
   VERIFY_TRUE(log_AppRenderer, normalDesc != nullptr, "Normal Texture Description was Null");
   pool.BindTextureData(m_forwardRenderer.m_texSlot, *colorDesc, m_textureManager->GetData(colorTexture));
   pool.BindTextureData(m_forwardRenderer.m_normalSlot, *normalDesc, m_textureManager->GetData(normalTexture));
+
+  // Bind Light Texture
+  pool.BindTextureData(m_forwardRenderer.m_lightTexSlot, m_lightTexture.GetTextureDesc(), m_lightTexture.GetBuffer());
 
   const auto meshInterface = Azura::GLTFLoader::LoadFromJSON("sponza", AssetLocation::Meshes, log_AppRenderer);
 
@@ -102,13 +115,44 @@ void AppRenderer::LoadAssets() const {
   pool.BindUniformData(drawableId, m_forwardRenderer.m_uboSlot, uboDataBuffer, sizeof(UniformBufferData));
 }
 
+void AppRenderer::LoadLightTexture() {
+  std::random_device rd;
+  std::mt19937 mt(rd());
+
+  const std::uniform_real_distribution<float> uniformX(LIGHT_MIN.x, LIGHT_MAX.x);
+  const std::uniform_real_distribution<float> uniformY(LIGHT_MIN.y, LIGHT_MAX.y);
+  const std::uniform_real_distribution<float> uniformZ(LIGHT_MIN.z, LIGHT_MAX.z);
+
+  const std::uniform_real_distribution<float> color(-0.5f, 0.5f);
+
+  for (U32 idx = 0; idx < NUM_LIGHTS; ++idx) {
+
+    PointLight light = {};
+    light.m_position = { uniformX(mt), uniformY(mt), uniformZ(mt) };
+    light.m_color = { 0.5f, 0.5f, 0.5f };
+    light.m_color += Vector3f(color(mt), color(mt), color(mt));
+    light.m_radius = LIGHT_RADIUS;
+
+    LOG_DBG(log_AppRenderer, LOG_LEVEL, "Generating Light:", light.m_position.x, light.m_position.y, light.m_position.z);
+    LOG_DBG(log_AppRenderer, LOG_LEVEL, "Pos: %f, %f, %f", light.m_position.x, light.m_position.y, light.m_position.z);
+    LOG_DBG(log_AppRenderer, LOG_LEVEL, "Col: %f, %f, %f", light.m_color.x, light.m_color.y, light.m_color.z);
+
+    m_lights.PushBack(light);
+  }
+
+  m_lightTexture.Fill(m_lights);
+}
+
 void AppRenderer::Initialize() {
+
   LOG_INF(log_AppRenderer, LOG_LEVEL, "Starting Init of AppRenderer");
 
-  m_lightSamplerDesc.m_filter = TextureFilter::MinMagMipPoint;
+  m_lightSamplerDesc.m_filter       = TextureFilter::MinMagMipPoint;
   m_lightSamplerDesc.m_addressModeU = TextureAddressMode::Clamp;
   m_lightSamplerDesc.m_addressModeV = TextureAddressMode::Clamp;
   m_lightSamplerDesc.m_addressModeW = TextureAddressMode::Clamp;
+
+  LoadLightTexture();
 
   HEAP_ALLOCATOR(Temporary, Memory::MonotonicAllocator, 16384);
   m_window = RenderSystem::CreateApplicationWindow("TestZone", 1280, 720);
@@ -121,20 +165,20 @@ void AppRenderer::Initialize() {
   VERIFY_TRUE(log_AppRenderer, m_window->Initialize(), "Cannot Initialize Window");
 
   ApplicationInfo appInfo;
-  appInfo.m_name = "TestZone";
+  appInfo.m_name    = "TestZone";
   appInfo.m_version = Version(1, 0, 0);
 
   DeviceRequirements requirements;
-  requirements.m_discreteGPU = true;
-  requirements.m_float64 = false;
-  requirements.m_int64 = false;
+  requirements.m_discreteGPU   = true;
+  requirements.m_float64       = false;
+  requirements.m_int64         = false;
   requirements.m_transferQueue = false;
 
-  m_sceneUBO         = {};
-  m_sceneUBO.m_model           = Matrix4f::Identity();
+  m_sceneUBO               = {};
+  m_sceneUBO.m_model       = Matrix4f::Identity();
   m_sceneUBO.m_model(1, 3) = -5;
 
-  m_sceneUBO.m_viewProj = m_camera.GetViewProjMatrix();
+  m_sceneUBO.m_viewProj          = m_camera.GetViewProjMatrix();
   m_sceneUBO.m_modelInvTranspose = m_sceneUBO.m_model.Inverse().Transpose();
 
   // TODO(vasumahesh1):[Q]:Allocator?
@@ -146,37 +190,40 @@ void AppRenderer::Initialize() {
 
   DescriptorRequirements descriptorRequirements = DescriptorRequirements(6, 4, allocatorTemporary);
 
-  // UBs
+  // SET 0
   m_forwardRenderer.m_uboSlot = descriptorRequirements.AddDescriptor({
     DescriptorType::UniformBuffer, ShaderStage::Vertex
   });
 
-  // SAMPLERS
+  // SET 1
   m_forwardRenderer.m_sampSlot = descriptorRequirements.AddDescriptor({
     DescriptorType::Sampler, ShaderStage::Pixel
-    });
+  });
 
-  // m_forwardRenderer.m_lightSampSlot = descriptorRequirements.AddDescriptor({
-  //   DescriptorType::Sampler, ShaderStage::Pixel
-  //   });
+  m_forwardRenderer.m_lightSampSlot = descriptorRequirements.AddDescriptor({
+    DescriptorType::Sampler, ShaderStage::Pixel
+  });
 
-  // TEXTURES
+  // SET 2
   m_forwardRenderer.m_texSlot = descriptorRequirements.AddDescriptor({
     DescriptorType::SampledImage, ShaderStage::Pixel
   });
 
   m_forwardRenderer.m_normalSlot = descriptorRequirements.AddDescriptor({
     DescriptorType::SampledImage, ShaderStage::Pixel
-    });
+  });
 
-  // m_forwardRenderer.m_lightTexSlot = descriptorRequirements.AddDescriptor({
-  //   DescriptorType::SampledImage, ShaderStage::Pixel
-  //   });
+  m_forwardRenderer.m_lightTexSlot = descriptorRequirements.AddDescriptor({
+    DescriptorType::SampledImage, ShaderStage::Pixel
+  });
 
-  const U32 UBO_SET = descriptorRequirements.AddSet({ m_forwardRenderer.m_uboSlot });
-  const U32 SAMPLER_SET = descriptorRequirements.AddSet({ m_forwardRenderer.m_sampSlot});
-  const U32 TEXTURE_SET = descriptorRequirements.AddSet({ m_forwardRenderer.m_texSlot, m_forwardRenderer.m_normalSlot, /* m_forwardRenderer.m_lightTexSlot */ });
-  // const U32 LIGHT_SAMPLER_SET = descriptorRequirements.AddSet({ m_forwardRenderer.m_lightSampSlot });
+  const U32 UBO_SET     = descriptorRequirements.AddSet({m_forwardRenderer.m_uboSlot});
+  const U32 SAMPLER_SET = descriptorRequirements.AddSet({
+    m_forwardRenderer.m_sampSlot, m_forwardRenderer.m_lightSampSlot
+  });
+  const U32 TEXTURE_SET = descriptorRequirements.AddSet({
+    m_forwardRenderer.m_texSlot, m_forwardRenderer.m_normalSlot, m_forwardRenderer.m_lightTexSlot
+  });
 
   ShaderRequirements shaderRequirements = ShaderRequirements(2, allocatorTemporary);
   const U32 VERTEX_SHADER_ID            = shaderRequirements.AddShader({
@@ -190,10 +237,10 @@ void AppRenderer::Initialize() {
   renderPassRequirements.m_maxPools             = 1;
 
   m_forwardRenderer.m_passId = renderPassRequirements.AddPass({
-    PipelinePassCreateInfo::Shaders{VERTEX_SHADER_ID, PIXEL_SHADER_ID}, // SHADERS
-    PipelinePassCreateInfo::Inputs{},                                   // INPUT TARGETS
-    PipelinePassCreateInfo::Outputs{},                                  // OUTPUT TARGETS
-    PipelinePassCreateInfo::DescriptorSets{UBO_SET, SAMPLER_SET, /* LIGHT_SAMPLER_SET ,*/ TEXTURE_SET},                    // DESCRIPTORS
+    PipelinePassCreateInfo::Shaders{VERTEX_SHADER_ID, PIXEL_SHADER_ID},        // SHADERS
+    PipelinePassCreateInfo::Inputs{},                                          // INPUT TARGETS
+    PipelinePassCreateInfo::Outputs{},                                         // OUTPUT TARGETS
+    PipelinePassCreateInfo::DescriptorSets{UBO_SET, SAMPLER_SET, TEXTURE_SET}, // DESCRIPTORS
     ClearData{{0.2f, 0.2f, 0.2f, 1.0f}, 1.0f, 0}
   });
 

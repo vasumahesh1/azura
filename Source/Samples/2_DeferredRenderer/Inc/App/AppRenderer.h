@@ -19,12 +19,12 @@ struct ForwardRenderer {
 
   U32 m_uboSlot;
 
+  U32 m_sampSlot;
+  U32 m_lightSampSlot;
+
   U32 m_texSlot;
   U32 m_normalSlot;
-  // U32 m_lightTexSlot;
-
-  U32 m_sampSlot;
-  // U32 m_lightSampSlot;
+  U32 m_lightTexSlot;
 };
 
 struct UniformBufferData {
@@ -44,6 +44,7 @@ public:
 
 private:
   void LoadAssets() const;
+  void LoadLightTexture();
 
   SamplerDesc m_lightSamplerDesc{};
 
@@ -57,6 +58,7 @@ private:
   Memory::RangeAllocator m_drawableAllocator;
 
   LightTexture m_lightTexture;
+  Containers::Vector<PointLight> m_lights;
 
   PolarCamera m_camera;
 

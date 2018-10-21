@@ -7,8 +7,11 @@ ColorPixelInput main(ForwardVertexInput input)
   float3 vertexNormal = input.in_Normal;
   float2 vertexUV = input.in_UV;
 
+  float4 modelPos = mul(ubo.u_model, vertexPosition);
+
   ColorPixelInput output;
-  output.pos = mul(ubo.u_viewProj, mul(ubo.u_model, vertexPosition));
+  output.pos = mul(ubo.u_viewProj, modelPos);
+  output.worldPos = modelPos;
   output.normal = mul(ubo.u_modelInvTranspose, float4(vertexNormal, 0.0)).xyz;
   output.uv = vertexUV;
   return output;
