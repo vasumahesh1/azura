@@ -46,4 +46,4 @@ float cubicGaussian(float h) {
   }
 }
 
-const static int NUM_LIGHTS = 20;
+const static int NUM_LIGHTS = 5;

@@ -6,6 +6,7 @@
 #include "Memory/MonotonicAllocator.h"
 #include "D3D12/D3D12ScopedImage.h"
 #include <algorithm>
+#include <utility>
 
 using namespace Microsoft::WRL;    // NOLINT
 using namespace Azura::Containers; // NOLINT
@@ -19,6 +20,7 @@ D3D12DrawablePool::D3D12DrawablePool(const ComPtr<ID3D12Device>& device,
                                      const Vector<DescriptorSlot>& descriptorSlots,
                                      const Vector<D3D12ScopedShader>& shaders,
                                      const Vector<D3D12ScopedRenderPass>& renderPasses,
+                                     ComPtr<ID3D12CommandQueue> commandQueue,
                                      Memory::Allocator& mainAllocator,
                                      Memory::Allocator& initAllocator,
                                      Log log)
@@ -30,6 +32,7 @@ D3D12DrawablePool::D3D12DrawablePool(const ComPtr<ID3D12Device>& device,
     m_pipelines(mainAllocator),
     m_drawables(createInfo.m_numDrawables, mainAllocator),
     m_renderPasses(createInfo.m_renderPasses.GetSize(), mainAllocator),
+    m_graphicsCommandQueue(std::move(commandQueue)),
     m_pipelineFactory(initAllocator, log_D3D12RenderSystem),
     m_descriptorsPerDrawable(0),
     m_images(mainAllocator),
@@ -39,15 +42,20 @@ D3D12DrawablePool::D3D12DrawablePool(const ComPtr<ID3D12Device>& device,
   LOG_DBG(log_D3D12RenderSystem, LOG_LEVEL, "Creating D3D12 Drawable Pool");
 
   m_pipelineFactory.SetRasterizerStage(createInfo.m_cullMode, FrontFace::CounterClockwise);
-  
+
   CreateRenderPassReferences(createInfo, renderPasses);
   CreateInputAttributes(createInfo);
   CreateDescriptorHeap(createInfo);
 
-  // Create Buffer
+  // Create Buffers
   m_stagingBuffer.Create(device, CD3DX12_HEAP_PROPERTIES(D3D12_HEAP_TYPE_UPLOAD), createInfo.m_byteSize,
                          D3D12_RESOURCE_STATE_GENERIC_READ, log_D3D12RenderSystem);
   m_stagingBuffer.Map();
+
+  m_updateBuffer.Create(device, CD3DX12_HEAP_PROPERTIES(D3D12_HEAP_TYPE_UPLOAD), createInfo.m_byteSize,
+    D3D12_RESOURCE_STATE_GENERIC_READ, log_D3D12RenderSystem);
+  m_updateBuffer.Map();
+
   m_mainBuffer.Create(device, CD3DX12_HEAP_PROPERTIES(D3D12_HEAP_TYPE_DEFAULT), createInfo.m_byteSize,
                       D3D12_RESOURCE_STATE_COPY_DEST, log_D3D12RenderSystem);
 }
@@ -300,16 +308,6 @@ void D3D12DrawablePool::Submit() {
   LOG_DBG(log_D3D12RenderSystem, LOG_LEVEL, "D3D12 Drawable Pool: Submitting");
   m_pipelineFactory.Submit(m_device, m_renderPasses, m_pipelines);
 
-  // Create a Command Buffer to submit data for drawable
-  // Describe and create the command queue.
-  D3D12_COMMAND_QUEUE_DESC queueDesc = {};
-  queueDesc.Flags                    = D3D12_COMMAND_QUEUE_FLAG_NONE;
-  queueDesc.Type                     = D3D12_COMMAND_LIST_TYPE_DIRECT;
-
-  ComPtr<ID3D12CommandQueue> commandQueue;
-  VERIFY_D3D_OP(log_D3D12RenderSystem, m_device->CreateCommandQueue(&queueDesc, IID_PPV_ARGS(&commandQueue)),
-    "Failed to create command Queue");
-
   auto oneTimeSubmitBuffer = D3D12ScopedCommandBuffer(m_device, D3D12_COMMAND_LIST_TYPE_DIRECT, log_D3D12RenderSystem);
   oneTimeSubmitBuffer.CreateGraphicsCommandList(m_device, nullptr, log_D3D12RenderSystem);
 
@@ -328,12 +326,12 @@ void D3D12DrawablePool::Submit() {
 
   oneTimeCommandList->Close();
 
-  oneTimeSubmitBuffer.Execute(m_device, commandQueue.Get(), log_D3D12RenderSystem);
-  oneTimeSubmitBuffer.WaitForComplete(commandQueue.Get(), log_D3D12RenderSystem);
+  oneTimeSubmitBuffer.Execute(m_device, m_graphicsCommandQueue.Get(), log_D3D12RenderSystem);
+  oneTimeSubmitBuffer.WaitForComplete(m_graphicsCommandQueue.Get(), log_D3D12RenderSystem);
 
   LOG_DBG(log_D3D12RenderSystem, LOG_LEVEL, "D3D12 Drawable Pool: Created Pipelines");
 
-  const U32 drawableHeapOffset   = m_descriptorsPerDrawable * m_cbvSrvDescriptorElementSize;
+  const U32 drawableHeapOffset = m_descriptorsPerDrawable * m_cbvSrvDescriptorElementSize;
 
   CD3DX12_CPU_DESCRIPTOR_HANDLE heapHandle(m_descriptorDrawableHeap->GetCPUDescriptorHandleForHeapStart(),
                                            m_offsetToDrawableHeap, m_cbvSrvDescriptorElementSize);
@@ -401,7 +399,8 @@ void D3D12DrawablePool::Submit() {
 
     if (renderPassInputs.GetSize() > 0) {
       bundleCommandList->SetGraphicsRootDescriptorTable(renderPassRootSignatureTable.GetSize(), inputsGPUHandle);
-      LOG_DEBUG(log_D3D12RenderSystem, LOG_LEVEL, "Setting Input Attachment Descriptor Table at %d", renderPassRootSignatureTable.GetSize());
+      LOG_DEBUG(log_D3D12RenderSystem, LOG_LEVEL, "Setting Input Attachment Descriptor Table at %d",
+        renderPassRootSignatureTable.GetSize());
     }
 
     inputsRecorded += renderPassInputs.GetSize();
@@ -421,6 +420,61 @@ void D3D12DrawablePool::Submit() {
 
     ++idx;
   }
+}
+
+void D3D12DrawablePool::BeginUpdates() {
+  m_updateBuffer.Reset();
+  m_bufferUpdates.Reset();
+}
+
+void D3D12DrawablePool::UpdateUniformData(DrawableID drawableId, SlotID slot, const U8* buffer, U32 size) {
+  LOG_DBG(log_D3D12RenderSystem, LOG_LEVEL,
+    "D3D12 Drawable Pool: Update Uniform Requested for Drawable: %d for Slot: %d of Size: %d bytes", drawableId, slot,
+    size);
+
+  assert(m_drawables.GetSize() > drawableId);
+
+  auto& drawable = m_drawables[drawableId];
+
+  size = (size + D3D12_CONSTANT_BUFFER_DATA_PLACEMENT_ALIGNMENT - 1) & ~(D3D12_CONSTANT_BUFFER_DATA_PLACEMENT_ALIGNMENT - 1);
+
+  const U32 offset = m_updateBuffer.AppendData(buffer, size, D3D12_CONSTANT_BUFFER_DATA_PLACEMENT_ALIGNMENT, log_D3D12RenderSystem);
+
+  const auto& descriptorSlot = m_globalDescriptorSlots[slot];
+  const U32 bufferId = drawable.GetSingleUniformBufferInfo(descriptorSlot);
+
+  const auto& allUboInfos = drawable.GetUniformBufferInfos();
+
+  BufferUpdate info = {};
+  info.m_idx = bufferId;
+  info.m_updateOffset = offset;
+  info.m_updateByteSize = size;
+  info.m_gpuOffset = allUboInfos[bufferId].m_offset;
+  info.m_gpuByteSize = allUboInfos[bufferId].m_byteSize;
+
+  m_bufferUpdates.PushBack(info);
+}
+
+void D3D12DrawablePool::SubmitUpdates() {
+  auto oneTimeSubmitBuffer = D3D12ScopedCommandBuffer(m_device, D3D12_COMMAND_LIST_TYPE_DIRECT, log_D3D12RenderSystem);
+  oneTimeSubmitBuffer.CreateGraphicsCommandList(m_device, nullptr, log_D3D12RenderSystem);
+
+  auto oneTimeCommandList = oneTimeSubmitBuffer.GetGraphicsCommandList();
+
+  m_mainBuffer.Transition(oneTimeCommandList,D3D12_RESOURCE_STATE_VERTEX_AND_CONSTANT_BUFFER, D3D12_RESOURCE_STATE_COPY_DEST);
+
+  // Copy Custom Regions
+  for(const auto& updateRegion : m_bufferUpdates)
+  {
+    oneTimeCommandList->CopyBufferRegion(m_mainBuffer.Real(), updateRegion.m_gpuOffset, m_updateBuffer.Real(), updateRegion.m_updateOffset, updateRegion.m_updateByteSize);
+  }
+
+  m_mainBuffer.Transition(oneTimeCommandList, D3D12_RESOURCE_STATE_COPY_DEST, D3D12_RESOURCE_STATE_VERTEX_AND_CONSTANT_BUFFER);
+
+  oneTimeCommandList->Close();
+
+  oneTimeSubmitBuffer.Execute(m_device, m_graphicsCommandQueue.Get(), log_D3D12RenderSystem);
+  oneTimeSubmitBuffer.WaitForComplete(m_graphicsCommandQueue.Get(), log_D3D12RenderSystem);
 }
 
 const Vector<ID3D12DescriptorHeap*>& D3D12DrawablePool::GetAllDescriptorHeaps() const {

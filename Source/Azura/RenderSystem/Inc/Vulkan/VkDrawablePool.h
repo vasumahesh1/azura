@@ -104,6 +104,10 @@ public:
 
   void AppendToMainBuffer(const U8* buffer, U32 bufferSize);
 
+  void BeginUpdates() override;
+  void UpdateUniformData(DrawableID drawableId, SlotID slot, const U8* buffer, U32 size) override;
+  void SubmitUpdates() override;
+
 private:
   void SubmitTextureData();
 

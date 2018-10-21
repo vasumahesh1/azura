@@ -31,6 +31,7 @@ public:
                     const Containers::Vector<DescriptorSlot>& descriptorSlots,
                     const Containers::Vector<D3D12ScopedShader>& shaders,
                     const Containers::Vector<D3D12ScopedRenderPass>& renderPasses,
+                    Microsoft::WRL::ComPtr<ID3D12CommandQueue> commandQueue,
                     Memory::Allocator& mainAllocator,
                     Memory::Allocator& initAllocator,
                     Log log);
@@ -45,6 +46,10 @@ public:
   void BindTextureData(SlotID slot, const TextureDesc& desc, const U8* buffer) override;
   void BindSampler(SlotID slot, const SamplerDesc& desc) override;
   void Submit() override;
+
+  void BeginUpdates() override;
+  void UpdateUniformData(DrawableID drawableId, SlotID slot, const U8* buffer, U32 size) override;
+  void SubmitUpdates() override;
 
   const Containers::Vector<ID3D12DescriptorHeap*>& GetAllDescriptorHeaps() const;
   ID3D12PipelineState* GetPipelineState(U32 renderPassId) const;
@@ -73,7 +78,10 @@ private:
 
   Containers::Vector<std::reference_wrapper<D3D12ScopedRenderPass>> m_renderPasses;
 
+  Microsoft::WRL::ComPtr<ID3D12CommandQueue> m_graphicsCommandQueue;
+
   D3D12PipelineFactory m_pipelineFactory;
+  D3D12ScopedBuffer m_updateBuffer;
   D3D12ScopedBuffer m_stagingBuffer;
   D3D12ScopedBuffer m_mainBuffer;
 

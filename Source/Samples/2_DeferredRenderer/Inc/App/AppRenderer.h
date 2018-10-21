@@ -43,8 +43,13 @@ public:
   void Destroy() const;
 
 private:
-  void LoadAssets() const;
+  void LoadAssets();
   void LoadLightTexture();
+
+  bool m_sceneInit{false};
+
+  DrawablePool* m_mainPool;
+  DrawableID m_sponzaId;
 
   SamplerDesc m_lightSamplerDesc{};
 

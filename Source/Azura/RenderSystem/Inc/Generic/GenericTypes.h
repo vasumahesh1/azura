@@ -283,6 +283,16 @@ struct BufferInfo {
   }
 };
 
+struct BufferUpdate
+{
+  U32 m_idx;
+  U32 m_gpuOffset;
+  U32 m_gpuByteSize;
+
+  U32 m_updateOffset;
+  U32 m_updateByteSize;
+};
+
 struct TextureBufferInfo final : public BufferInfo {
   TextureDesc m_desc;
   U32 m_set{0};

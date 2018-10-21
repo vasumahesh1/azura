@@ -13,14 +13,14 @@ LightTexture::LightTexture(U32 numLights, U32 componentsPerLight, Memory::Alloca
 void LightTexture::Fill(const Containers::Vector<PointLight>& lights) {
   U32 idx = 0;
   for (const auto& light : lights) {
-    m_buffer[idx + 0] = light.m_position.x;
-    m_buffer[idx + 1] = light.m_position.y;
-    m_buffer[idx + 2] = light.m_position.z;
+    m_buffer[idx + 0] = light.m_position[0];
+    m_buffer[idx + 1] = light.m_position[1];
+    m_buffer[idx + 2] = light.m_position[2];
     m_buffer[idx + 3] = light.m_radius;
 
-    m_buffer[idx + 4] = light.m_color.x;
-    m_buffer[idx + 5] = light.m_color.y;
-    m_buffer[idx + 6] = light.m_color.z;
+    m_buffer[idx + 4] = light.m_color[0];
+    m_buffer[idx + 5] = light.m_color[1];
+    m_buffer[idx + 6] = light.m_color[2];
     m_buffer[idx + 7] = 0;
 
     idx += 8;

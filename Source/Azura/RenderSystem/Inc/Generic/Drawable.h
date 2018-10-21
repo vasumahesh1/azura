@@ -33,6 +33,7 @@ public:
   void AddVertexBufferInfo(BufferInfo&& info);
   void AddInstanceBufferInfo(BufferInfo&& info);
   void AddUniformBufferInfo(UniformBufferInfo&& info);
+  U32 GetSingleUniformBufferInfo(const DescriptorSlot & slot);
   void SetIndexBufferInfo(BufferInfo&& info);
 
   U32 GetVertexCount() const;
@@ -119,7 +120,12 @@ public:
   virtual void BindTextureData(SlotID slot, const TextureDesc& desc, const U8* buffer) = 0;
   virtual void BindSampler(SlotID slot, const SamplerDesc& desc) = 0;
 
+  virtual void BeginUpdates() = 0;
+  void UpdateUniformData(DrawableID drawableId, SlotID slot, const Containers::Vector<U8>& buffer);
+  virtual void UpdateUniformData(DrawableID drawableId, SlotID slot, const U8* buffer, U32 size) = 0;
+
   virtual void Submit() = 0;
+  virtual void SubmitUpdates() = 0;
 
   U32 GetSize() const;
   bool CanRenderInPass(U32 renderPassId) const;
@@ -138,6 +144,8 @@ protected:
 
   Containers::Vector<TextureBufferInfo> m_textureBufferInfos;
   Containers::Vector<SamplerInfo> m_samplerInfos;
+
+  Containers::Vector<BufferUpdate> m_bufferUpdates;
 
   CullMode m_cullMode;
 

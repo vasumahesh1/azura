@@ -123,6 +123,8 @@ public:
 
   const Type* Data() const;
 
+  void Reset();
+
   Type& operator[](U32 idx);
   Type& operator[](U32 idx) const;
 
@@ -592,6 +594,11 @@ Type* Vector<Type>::Data() {
 template <typename Type>
 const Type* Vector<Type>::Data() const {
   return m_base.get();
+}
+
+template <typename Type>
+void Vector<Type>::Reset() {
+  m_size = 0;
 }
 
 template <typename Type>

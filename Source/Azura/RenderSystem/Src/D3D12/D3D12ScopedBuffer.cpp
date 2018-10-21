@@ -74,6 +74,11 @@ U32 D3D12ScopedBuffer::GetCurrentOffset() const {
   return U32(p_dataCur - p_dataBegin);
 }
 
+void D3D12ScopedBuffer::Reset()
+{
+  p_dataCur = p_dataBegin;
+}
+
 void D3D12ScopedBuffer::Transition(ID3D12GraphicsCommandList* commandList,
   D3D12_RESOURCE_STATES fromState,
   D3D12_RESOURCE_STATES toState) const {

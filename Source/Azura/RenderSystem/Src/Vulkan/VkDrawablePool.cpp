@@ -277,6 +277,19 @@ void VkDrawablePool::AppendToMainBuffer(const U8* buffer, U32 bufferSize) {
   m_mainBufferOffset += bufferSize;
 }
 
+void VkDrawablePool::BeginUpdates() {
+}
+
+void VkDrawablePool::UpdateUniformData(DrawableID drawableId, SlotID slot, const U8* buffer, U32 size) {
+  UNUSED(drawableId);
+  UNUSED(slot);
+  UNUSED(buffer);
+  UNUSED(size);
+}
+
+void VkDrawablePool::SubmitUpdates() {
+}
+
 
 void VkDrawablePool::SubmitTextureData() {
   if (m_textureBufferInfos.GetSize() == 0)

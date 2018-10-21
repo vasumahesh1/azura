@@ -17,7 +17,7 @@ namespace Azura {
 using namespace Containers; // NOLINT
 using namespace Math;       // NOLINT
 namespace {
-  constexpr U32 NUM_LIGHTS = 20;
+  constexpr U32 NUM_LIGHTS = 5;
   const Vector3f LIGHT_MIN = {-14.0f, 0.0f, -6.0f };
   const Vector3f LIGHT_MAX = { 14.0f, 20.0f, 6.0f };
   constexpr float LIGHT_RADIUS = 5.0;
@@ -26,7 +26,9 @@ namespace {
 } // namespace
 
 AppRenderer::AppRenderer()
-  : m_forwardRenderer(),
+  : m_mainPool(nullptr),
+    m_sponzaId(0),
+    m_forwardRenderer(),
     m_mainBuffer(16384),
     m_mainAllocator(m_mainBuffer, 8192),
     m_drawableAllocator(m_mainBuffer, 8192),
@@ -36,7 +38,7 @@ AppRenderer::AppRenderer()
     log_AppRenderer(Log("AppRenderer")) {
 }
 
-void AppRenderer::LoadAssets() const {
+void AppRenderer::LoadAssets() {
   HEAP_ALLOCATOR(Temporary, Memory::MonotonicAllocator, 4096);
 
   DrawablePoolCreateInfo poolInfo = {allocatorTemporary};
@@ -55,6 +57,8 @@ void AppRenderer::LoadAssets() const {
   const auto UV_SLOT = poolInfo.AddInputSlot({BufferUsageRate::PerVertex, {{"UV", RawStorageFormat::R32G32_FLOAT}}});
 
   DrawablePool& pool = m_renderer->CreateDrawablePool(poolInfo);
+
+  m_mainPool = &pool;
 
   // Pool Binds
   pool.BindSampler(m_forwardRenderer.m_sampSlot, {});
@@ -107,21 +111,21 @@ void AppRenderer::LoadAssets() const {
   createInfo.m_indexType        = RawStorageFormat::R32_UINT;
 
   // Drawable Binds
-  const auto drawableId = pool.CreateDrawable(createInfo);
-  pool.BindVertexData(drawableId, VERTEX_SLOT, vertexStart, vertexDataSize);
-  pool.BindVertexData(drawableId, NORMAL_SLOT, normalStart, normalDataSize);
-  pool.BindVertexData(drawableId, UV_SLOT, uvStart, uvDataSize);
-  pool.SetIndexData(drawableId, indexBufferStart, indexDataSize);
-  pool.BindUniformData(drawableId, m_forwardRenderer.m_uboSlot, uboDataBuffer, sizeof(UniformBufferData));
+  m_sponzaId = pool.CreateDrawable(createInfo);
+  pool.BindVertexData(m_sponzaId, VERTEX_SLOT, vertexStart, vertexDataSize);
+  pool.BindVertexData(m_sponzaId, NORMAL_SLOT, normalStart, normalDataSize);
+  pool.BindVertexData(m_sponzaId, UV_SLOT, uvStart, uvDataSize);
+  pool.SetIndexData(m_sponzaId, indexBufferStart, indexDataSize);
+  pool.BindUniformData(m_sponzaId, m_forwardRenderer.m_uboSlot, uboDataBuffer, sizeof(UniformBufferData));
 }
 
 void AppRenderer::LoadLightTexture() {
   std::random_device rd;
   std::mt19937 mt(rd());
 
-  const std::uniform_real_distribution<float> uniformX(LIGHT_MIN.x, LIGHT_MAX.x);
-  const std::uniform_real_distribution<float> uniformY(LIGHT_MIN.y, LIGHT_MAX.y);
-  const std::uniform_real_distribution<float> uniformZ(LIGHT_MIN.z, LIGHT_MAX.z);
+  const std::uniform_real_distribution<float> uniformX(LIGHT_MIN[0], LIGHT_MAX[0]);
+  const std::uniform_real_distribution<float> uniformY(LIGHT_MIN[1], LIGHT_MAX[1]);
+  const std::uniform_real_distribution<float> uniformZ(LIGHT_MIN[2], LIGHT_MAX[2]);
 
   const std::uniform_real_distribution<float> color(-0.5f, 0.5f);
 
@@ -133,9 +137,9 @@ void AppRenderer::LoadLightTexture() {
     light.m_color += Vector3f(color(mt), color(mt), color(mt));
     light.m_radius = LIGHT_RADIUS;
 
-    LOG_DBG(log_AppRenderer, LOG_LEVEL, "Generating Light:", light.m_position.x, light.m_position.y, light.m_position.z);
-    LOG_DBG(log_AppRenderer, LOG_LEVEL, "Pos: %f, %f, %f", light.m_position.x, light.m_position.y, light.m_position.z);
-    LOG_DBG(log_AppRenderer, LOG_LEVEL, "Col: %f, %f, %f", light.m_color.x, light.m_color.y, light.m_color.z);
+    LOG_DBG(log_AppRenderer, LOG_LEVEL, "Generating Light:", light.m_position[0], light.m_position[1], light.m_position[2]);
+    LOG_DBG(log_AppRenderer, LOG_LEVEL, "Pos: %f, %f, %f", light.m_position[0], light.m_position[1], light.m_position[2]);
+    LOG_DBG(log_AppRenderer, LOG_LEVEL, "Col: %f, %f, %f", light.m_color[0], light.m_color[1], light.m_color[2]);
 
     m_lights.PushBack(light);
   }
@@ -161,6 +165,13 @@ void AppRenderer::Initialize() {
   {
     WindowUpdate();
   });
+
+  m_window->SetMouseEventCallback([this](MouseEvent e)
+  {
+    m_camera.OnMouseEvent(e);
+  });
+
+  m_camera.SetSensitivity(0.2f);
 
   VERIFY_TRUE(log_AppRenderer, m_window->Initialize(), "Cannot Initialize Window");
 
@@ -258,9 +269,26 @@ void AppRenderer::Initialize() {
   m_renderer->Submit();
 
   LOG_INF(log_AppRenderer, LOG_LEVEL, "Initialized AppRenderer");
+
+  m_sceneInit = true;
 }
 
 void AppRenderer::WindowUpdate() {
+  if (!m_sceneInit)
+  {
+    return;
+  }
+
+  m_sceneUBO.m_viewProj = m_camera.GetViewProjMatrix();
+
+  m_mainPool->BeginUpdates();
+
+  const auto uboDataBuffer    = reinterpret_cast<const U8*>(&m_sceneUBO); // NOLINT
+  m_mainPool->UpdateUniformData(m_sponzaId, m_forwardRenderer.m_uboSlot, uboDataBuffer, sizeof(UniformBufferData));
+
+  m_mainPool->SubmitUpdates();
+
+
   m_renderer->RenderFrame();
 }
 

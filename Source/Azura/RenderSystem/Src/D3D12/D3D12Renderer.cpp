@@ -160,6 +160,7 @@ DrawablePool& D3D12Renderer::CreateDrawablePool(const DrawablePoolCreateInfo& cr
                                              m_descriptorSlots,
                                              m_shaders,
                                              m_renderPasses,
+                                             m_commandQueue,
                                              m_drawPoolAllocator,
                                              m_initAllocator,
                                              log_D3D12RenderSystem);

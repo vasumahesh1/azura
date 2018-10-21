@@ -34,15 +34,14 @@ void GLFWWindow::Destroy() {
 }
 
 void GLFWWindow::StartListening() {
-#ifdef BUILD_DEBUG
+
   int frameCount{0};
   double previousTime = glfwGetTime();
-#endif
 
   // TODO(vasumahesh1):[GAME]: Need a Performance Timer here
 
   while (glfwWindowShouldClose(p_window) == GLFW_FALSE) {
-#ifdef BUILD_DEBUG
+
     const double currentTime = glfwGetTime();
     frameCount++;
 
@@ -54,7 +53,6 @@ void GLFWWindow::StartListening() {
       frameCount   = 0;
       previousTime = currentTime;
     }
-#endif
 
     double currCursorX;
     double currCursorY;

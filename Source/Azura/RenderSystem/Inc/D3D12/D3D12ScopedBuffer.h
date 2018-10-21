@@ -27,6 +27,8 @@ public:
   U32 GetSize() const;
   U32 GetCurrentOffset() const;
 
+  void Reset();
+
   void Transition(ID3D12GraphicsCommandList* commandList,
     D3D12_RESOURCE_STATES fromState,
     D3D12_RESOURCE_STATES toState) const;
