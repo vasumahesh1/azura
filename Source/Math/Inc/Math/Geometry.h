@@ -14,6 +14,7 @@ constexpr float PI_OVER2 = 1.57079632679489661923f;
 constexpr float PI_OVER4 = 0.78539816339744830961f;
 constexpr float SQRT_2 = 1.41421356237309504880f;
 constexpr float ONE_MINUS_EPSILON = 0.99999994f;
+constexpr float ONE_DEGREE_RADIAN = 0.0174533f;
 
 class Geometry
 {

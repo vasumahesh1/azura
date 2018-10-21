@@ -34,7 +34,7 @@ AppRenderer::AppRenderer()
     m_drawableAllocator(m_mainBuffer, 8192),
     m_lightTexture(NUM_LIGHTS, 7, m_mainAllocator),
     m_lights(NUM_LIGHTS, m_mainAllocator),
-    m_camera(1280, 720, -90, -45, 10),
+    m_camera(1280, 720),
     log_AppRenderer(Log("AppRenderer")) {
 }
 
@@ -160,8 +160,11 @@ void AppRenderer::Initialize() {
 
   HEAP_ALLOCATOR(Temporary, Memory::MonotonicAllocator, 16384);
   m_window = RenderSystem::CreateApplicationWindow("TestZone", 1280, 720);
+  VERIFY_TRUE(log_AppRenderer, m_window->Initialize(), "Cannot Initialize Window");
 
-  m_window->SetUpdateCallback([this]()
+  m_window->SetCursorState(CursorState::Hidden);
+
+  m_window->SetUpdateCallback([this](double timeSinceLastFrame)
   {
     WindowUpdate();
   });
@@ -169,11 +172,16 @@ void AppRenderer::Initialize() {
   m_window->SetMouseEventCallback([this](MouseEvent e)
   {
     m_camera.OnMouseEvent(e);
+    m_window->ResetCursor();
   });
 
-  m_camera.SetSensitivity(0.2f);
+  m_window->SetKeyEventCallback([this](KeyEvent e)
+  {
+    m_camera.OnKeyEvent(e);
+  });
 
-  VERIFY_TRUE(log_AppRenderer, m_window->Initialize(), "Cannot Initialize Window");
+  m_camera.SetTranslationStepSize(0.2f);
+  m_camera.SetSensitivity(0.5f);
 
   ApplicationInfo appInfo;
   appInfo.m_name    = "TestZone";

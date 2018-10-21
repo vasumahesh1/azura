@@ -1,6 +1,7 @@
 #include "Camera/PolarCamera.h"
 #include "Math/Transform.h"
 #include "Math/Geometry.h"
+#include "Utils/Macros.h"
 
 namespace Azura {
 namespace {
@@ -50,6 +51,10 @@ void PolarCamera::OnMouseEvent(MouseEvent mouseEvent) {
   RotateAboutUp(mouseEvent.m_eventX * anglePerPixel * m_sensitivity);
   RotateAboutRight(mouseEvent.m_eventY * anglePerPixel * m_sensitivity);
   Recompute();
+}
+
+void PolarCamera::OnKeyEvent(KeyEvent keyEvent) {
+  UNUSED(keyEvent);
 }
 
 void PolarCamera::SetZoom(float value) {

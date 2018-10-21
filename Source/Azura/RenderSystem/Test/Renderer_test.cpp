@@ -23,9 +23,11 @@ std::unique_ptr<Azura::Window> CreateDefaultWindow()
 {
   std::unique_ptr<Azura::Window> windowPtr = RenderSystem::CreateApplicationWindow(TEST_SUITE, WINDOW_WIDTH, WINDOW_HEIGHT);
 
-  windowPtr->SetUpdateCallback([] ()
+  windowPtr->SetUpdateCallback([] (double timeSinceLastFrame)
   {
+    UNUSED(timeSinceLastFrame);
   });
+
 
   if (!windowPtr->Initialize())
   {

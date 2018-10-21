@@ -11,6 +11,7 @@ public:
 
   void Recompute() override;
   void OnMouseEvent(MouseEvent mouseEvent) override;
+  void OnKeyEvent(KeyEvent keyEvent) override;
 
   void SetZoom(float value);
   void SetZoomAndRecompute(float value);

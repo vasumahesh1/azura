@@ -3,7 +3,8 @@
 namespace Azura {
 
 enum class EventType {
-  MouseEvent
+  MouseEvent,
+  KeyEvent
 };
 
 enum class MouseEventType {
@@ -11,7 +12,18 @@ enum class MouseEventType {
   RightClick,
   Drag,
   ScrollUp,
-  ScrollDown
+  ScrollDown,
+  MouseMove,
+  MouseUpdate
+};
+
+enum class KeyEventType {
+  Unmapped,
+  W,
+  A,
+  S,
+  D,
+  Esc,
 };
 
 struct Event {
@@ -28,6 +40,18 @@ struct MouseEvent final : public Event {
       m_internalType(MouseEventType::LeftClick),
       m_eventX(0),
       m_eventY(0) {
+  }
+};
+
+struct KeyEvent final : public Event {
+  int m_keyValue;
+  KeyEventType m_internalType;
+
+  KeyEvent(int key, KeyEventType eventType)
+    : Event({EventType::KeyEvent}),
+      m_keyValue(key),
+      m_internalType(eventType) {
+
   }
 };
 

@@ -8,7 +8,7 @@
 #include "Log/Log.h"
 #include "Math/Core.h"
 #include "Generic/TextureManager.h"
-#include "Camera/PolarCamera.h"
+#include "Camera/FlyThroughCamera.h"
 
 #include "App/LightTexture.h"
 
@@ -65,7 +65,7 @@ private:
   LightTexture m_lightTexture;
   Containers::Vector<PointLight> m_lights;
 
-  PolarCamera m_camera;
+  FlyThroughCamera m_camera;
 
   std::unique_ptr<Renderer> m_renderer{nullptr};
   std::unique_ptr<Window> m_window{nullptr};

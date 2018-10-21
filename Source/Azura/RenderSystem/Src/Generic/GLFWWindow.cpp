@@ -23,6 +23,8 @@ bool GLFWWindow::Initialize() {
 
   glfwSetMouseButtonCallback(p_window, MouseEventCallback);
 
+  glfwSetKeyCallback(p_window, KeyPressCallback);
+
   glfwSetWindowUserPointer(p_window, this);
 
   return true;
@@ -45,7 +47,9 @@ void GLFWWindow::StartListening() {
     const double currentTime = glfwGetTime();
     frameCount++;
 
-    if (currentTime - previousTime >= 1.0) {
+    const double timeDelta = currentTime - previousTime;
+
+    if (timeDelta >= 1.0) {
       String windowTitle = String(GetTitle()) + " - FPS: " + std::to_string(frameCount) + " - Frame Time: " + std::
                            to_string(1000.0 / frameCount) + "ms";
       glfwSetWindowTitle(p_window, windowTitle.c_str());
@@ -57,6 +61,12 @@ void GLFWWindow::StartListening() {
     double currCursorX;
     double currCursorY;
     glfwGetCursorPos(p_window, &currCursorX, &currCursorY);
+
+    MouseEvent mouseEvent = {};
+    mouseEvent.m_internalType = MouseEventType::MouseUpdate;
+    mouseEvent.m_eventX = float(currCursorX);
+    mouseEvent.m_eventY = float(currCursorY);
+    CallMouseEventFunction(mouseEvent);
 
     if (m_mouseLeftDown)
     {
@@ -76,13 +86,83 @@ void GLFWWindow::StartListening() {
       m_prevCursorY = currCursorY;
     }
 
-    CallUpdateFunction();
+    if (m_keyPress)
+    {
+      KeyEventType keyType = KeyEventType::Unmapped;
+
+      switch(m_activeKey)
+      {
+      case GLFW_KEY_W:
+        keyType = KeyEventType::W;
+        break;
+
+      case GLFW_KEY_A:
+        keyType = KeyEventType::A;
+        break;
+
+      case GLFW_KEY_S:
+        keyType = KeyEventType::S;
+        break;
+
+      case GLFW_KEY_D:
+        keyType = KeyEventType::D;
+        break;
+        
+      case GLFW_KEY_ESCAPE:
+        keyType = KeyEventType::Esc;
+        break;
+      }
+
+      CallKeyEventFunction(KeyEvent(m_activeKey, keyType));
+    }
+
+    CallUpdateFunction(timeDelta);
     glfwPollEvents();
   }
 }
 
+void GLFWWindow::ResetCursor() {
+  glfwSetCursorPos(p_window, m_midWidth, m_midHeight);
+}
+
 GLFWwindow* GLFWWindow::GetGLFWHandle() const {
   return p_window;
+}
+
+void GLFWWindow::KeyPressCallback(GLFWwindow* window, int key, int scanCode, int action, int mods) {
+  UNUSED(mods);
+  UNUSED(scanCode);
+
+  GLFWWindow* wrapper = reinterpret_cast<GLFWWindow*>(glfwGetWindowUserPointer(window)); // NOLINT
+
+  if (action == GLFW_PRESS)
+  {
+    wrapper->m_keyPress = true;
+    wrapper->m_activeKey = key;
+  }
+  else if (action == GLFW_RELEASE)
+  {
+    wrapper->m_keyPress = false;
+    wrapper->m_activeKey = -1;
+  }
+}
+
+void GLFWWindow::SetCursorState(CursorState state) {
+  switch(state)
+  {
+    case CursorState::Visible:
+      glfwSetInputMode(p_window, GLFW_CURSOR, GLFW_CURSOR_NORMAL);
+    break;
+    case CursorState::Hidden:
+      glfwSetInputMode(p_window, GLFW_CURSOR, GLFW_CURSOR_HIDDEN);
+    break;
+    case CursorState::Disabled:
+      glfwSetInputMode(p_window, GLFW_CURSOR, GLFW_CURSOR_DISABLED);
+    break;
+    
+    default:
+    break;
+  }
 }
 
 void GLFWWindow::MouseEventCallback(GLFWwindow* window, int button, int action, int mods) {

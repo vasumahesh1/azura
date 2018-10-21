@@ -56,8 +56,9 @@ void AppRenderer::Initialize() {
   HEAP_ALLOCATOR(Temporary, Memory::MonotonicAllocator, 8192);
   m_window = RenderSystem::CreateApplicationWindow("ProceduralPlanet", 1280, 720);
 
-  m_window->SetUpdateCallback([this]()
+  m_window->SetUpdateCallback([this](double timeSinceLastFrame)
   {
+    UNUSED(timeSinceLastFrame);
     WindowUpdate();
   });
 

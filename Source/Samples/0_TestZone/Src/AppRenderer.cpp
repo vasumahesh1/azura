@@ -40,8 +40,9 @@ void AppRenderer::Initialize() {
   HEAP_ALLOCATOR(Temporary, Memory::MonotonicAllocator, 16384);
   m_window = RenderSystem::CreateApplicationWindow("TestZone", 1280, 720);
 
-  m_window->SetUpdateCallback([this]()
+  m_window->SetUpdateCallback([this](double timeSinceLastFrame)
   {
+    UNUSED(timeSinceLastFrame);
     WindowUpdate();
   });
 

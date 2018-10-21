@@ -7,6 +7,13 @@
 #include "Log/Log.h"
 
 namespace Azura {
+enum class CursorState
+{
+  Visible,
+  Hidden,
+  Disabled
+};
+
 class Window {
 public:
   virtual ~Window() = default;
@@ -20,9 +27,13 @@ public:
 
   virtual bool Initialize() = 0;
   virtual void StartListening() = 0;
-  void SetUpdateCallback(std::function<void()> eventUpdate);
+  void SetUpdateCallback(std::function<void(double)> eventUpdate);
   void SetMouseEventCallback(std::function<void(MouseEvent)> eventFunc);
+  void SetKeyEventCallback(std::function<void(KeyEvent)> eventFunc);
   virtual void Destroy() = 0;
+
+  virtual void SetCursorState(CursorState state) = 0;
+  virtual void ResetCursor() = 0;
 
   ViewportDimensions GetViewport() const;
 
@@ -35,18 +46,25 @@ protected:
   void SetHandle(void* window);
   const char* GetTitle() const;
 
-  void CallUpdateFunction() const;
+  void CallUpdateFunction(double timeDelta) const;
   void CallMouseEventFunction(MouseEvent e) const;
 
+  void CallKeyEventFunction(KeyEvent e) const;
+
   Log log_Window;
+
+  float m_midWidth;
+  float m_midHeight;
 
 private:
   U32 m_width;
   U32 m_height;
+
   String m_title;
   void* p_windowResource;
 
-  std::function<void()> p_updateFunc;
+  std::function<void(double)> p_updateFunc;
   std::function<void(MouseEvent)> p_mouseEventFunc{nullptr};
+  std::function<void(KeyEvent)> p_keyEventFunc{nullptr};
 };
 } // namespace Azura

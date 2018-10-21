@@ -32,10 +32,13 @@ public:
 
   virtual void Recompute() = 0;
   virtual void OnMouseEvent(MouseEvent mouseEvent) = 0;
+  virtual void OnKeyEvent(KeyEvent keyEvent) = 0;
 
 protected:
   U32 m_width;
   U32 m_height;
+
+  float m_aspect;
 
   float m_sensitivity{0.5f};
 
