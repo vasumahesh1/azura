@@ -3,6 +3,7 @@
 
 #include "D3D12/d3dx12.h"
 #include "Memory/MemoryFactory.h"
+#include <array>
 
 using namespace Microsoft::WRL;    // NOLINT
 using namespace Azura::Containers; // NOLINT
@@ -247,31 +248,25 @@ void D3D12Renderer::Submit() {
 void D3D12Renderer::RenderFrame() {
   EnterRenderFrame();
 
-  // TODO(vasumahesh1): Change
-  SmallVector<ID3D12CommandList*, 10> pCommandLists;
-
   const auto& currentFrame = GetCurrentFrame();
 
   for (U32 idx = 0; idx < m_renderPasses.GetSize() - 1; ++idx) {
-    pCommandLists.push_back(m_renderPasses[idx].GetPrimaryGraphicsCommandList(0));
+    std::array<ID3D12CommandList*, 1> list = { m_renderPasses[idx].GetPrimaryGraphicsCommandList(0) };
+    m_commandQueue->ExecuteCommandLists(UINT(list.size()), list.data());
+    m_renderPasses[idx].WaitForGPU(m_commandQueue.Get());
   }
 
-  pCommandLists.push_back(m_renderPasses.Last().GetPrimaryGraphicsCommandList(currentFrame));
-
-  m_commandQueue->ExecuteCommandLists(UINT(pCommandLists.size()), pCommandLists.data()); // NOLINT
+  std::array<ID3D12CommandList*, 1> swapChainList = {m_renderPasses.Last().GetPrimaryGraphicsCommandList(currentFrame)};
+  m_commandQueue->ExecuteCommandLists(UINT(swapChainList.size()), swapChainList.data()); // NOLINT
 
   // Present and update the frame index for the next frame.
   VERIFY_D3D_OP(log_D3D12RenderSystem, m_swapChain.RealComPtr()->Present(1, 0), "Present Failed");
 
-  WaitForGPU();
+  m_renderPasses.Last().WaitForGPU(m_commandQueue.Get());
 
   m_perFrameAllocator.Reset();
 
   ExitRenderFrame();
-}
-
-void D3D12Renderer::WaitForGPU() {
-  m_renderPasses.Last().WaitForGPU(m_commandQueue.Get());
 }
 
 void D3D12Renderer::SnapshotFrame(const String& exportPath) const {
