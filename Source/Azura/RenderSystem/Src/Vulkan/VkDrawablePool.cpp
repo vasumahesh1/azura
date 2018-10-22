@@ -287,6 +287,11 @@ void VkDrawablePool::UpdateUniformData(DrawableID drawableId, SlotID slot, const
   UNUSED(size);
 }
 
+void VkDrawablePool::UpdateTextureData(SlotID slot, const U8* buffer) {
+  UNUSED(slot);
+  UNUSED(buffer);
+}
+
 void VkDrawablePool::SubmitUpdates() {
 }
 

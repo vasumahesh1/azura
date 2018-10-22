@@ -123,6 +123,9 @@ public:
   virtual void BeginUpdates() = 0;
   void UpdateUniformData(DrawableID drawableId, SlotID slot, const Containers::Vector<U8>& buffer);
   virtual void UpdateUniformData(DrawableID drawableId, SlotID slot, const U8* buffer, U32 size) = 0;
+  virtual void UpdateTextureData(SlotID slot, const U8* buffer) = 0;
+
+  U32 GetSingleTextureBufferInfo(const DescriptorSlot & slot);
 
   virtual void Submit() = 0;
   virtual void SubmitUpdates() = 0;

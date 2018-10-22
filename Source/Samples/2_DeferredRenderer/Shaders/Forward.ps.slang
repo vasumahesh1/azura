@@ -21,6 +21,8 @@ float ExtractFloat(Texture2D tex, int textureWidth, int textureHeight, int index
   } else if (pixelComponent == 3) {
     return texel[3];
   }
+
+  return 0.0;
 }
 
 Light UnpackLight(int index) {

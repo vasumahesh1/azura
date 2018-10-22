@@ -166,8 +166,10 @@ void D3D12DrawablePool::BindTextureData(SlotID slot, const TextureDesc& desc, co
 
   const auto& descriptorSlot = m_globalDescriptorSlots[slot];
 
+  const U32 textureWidthBytes = desc.m_bounds.m_width * GetFormatSize(desc.m_format);
+
   // TODO(vasumahesh1):[INPUT]: Could be an issue with sizeof(float)
-  const U32 offset = m_stagingBuffer.AppendData(buffer, size, 512, log_D3D12RenderSystem);
+  const U32 offset = m_stagingBuffer.AppendTextureData(buffer, size, 512, textureWidthBytes, D3D12_TEXTURE_DATA_PITCH_ALIGNMENT, log_D3D12RenderSystem);
 
   TextureBufferInfo info = TextureBufferInfo();
   info.m_byteSize        = size;
@@ -446,6 +448,7 @@ void D3D12DrawablePool::UpdateUniformData(DrawableID drawableId, SlotID slot, co
   const auto& allUboInfos = drawable.GetUniformBufferInfos();
 
   BufferUpdate info = {};
+  info.m_type = DescriptorType::UniformBuffer;
   info.m_idx = bufferId;
   info.m_updateOffset = offset;
   info.m_updateByteSize = size;
@@ -453,6 +456,32 @@ void D3D12DrawablePool::UpdateUniformData(DrawableID drawableId, SlotID slot, co
   info.m_gpuByteSize = allUboInfos[bufferId].m_byteSize;
 
   m_bufferUpdates.PushBack(info);
+}
+
+void D3D12DrawablePool::UpdateTextureData(SlotID slot, const U8* buffer) {
+  const auto& descriptorSlot = m_globalDescriptorSlots[slot];
+  const U32 bufferId = GetSingleTextureBufferInfo(descriptorSlot);
+
+  const TextureDesc& desc = m_textureBufferInfos[bufferId].m_desc;
+
+  LOG_DBG(log_D3D12RenderSystem, LOG_LEVEL,
+    "D3D12 Drawable Pool: Updating Texture Requested for Slot: %d of Size: %d bytes", slot, desc.m_size);
+
+  const U32 textureWidthBytes = desc.m_bounds.m_width * GetFormatSize(desc.m_format);
+
+  // TODO(vasumahesh1):[INPUT]: Could be an issue with sizeof(float)
+  const U32 offset = m_updateBuffer.AppendTextureData(buffer, desc.m_size, 512, textureWidthBytes, D3D12_TEXTURE_DATA_PITCH_ALIGNMENT, log_D3D12RenderSystem);
+
+  BufferUpdate info = {};
+  info.m_type = DescriptorType::SampledImage;
+  info.m_idx = bufferId;
+  info.m_updateOffset = offset;
+  info.m_updateByteSize = desc.m_size;
+  info.m_gpuOffset = m_textureBufferInfos[bufferId].m_offset;
+  info.m_gpuByteSize = m_textureBufferInfos[bufferId].m_byteSize;
+
+  m_bufferUpdates.PushBack(info);
+
 }
 
 void D3D12DrawablePool::SubmitUpdates() {
@@ -466,7 +495,16 @@ void D3D12DrawablePool::SubmitUpdates() {
   // Copy Custom Regions
   for(const auto& updateRegion : m_bufferUpdates)
   {
-    oneTimeCommandList->CopyBufferRegion(m_mainBuffer.Real(), updateRegion.m_gpuOffset, m_updateBuffer.Real(), updateRegion.m_updateOffset, updateRegion.m_updateByteSize);
+    if (updateRegion.m_type == DescriptorType::UniformBuffer) {
+      oneTimeCommandList->CopyBufferRegion(m_mainBuffer.Real(), updateRegion.m_gpuOffset, m_updateBuffer.Real(), updateRegion.m_updateOffset, updateRegion.m_updateByteSize);
+    }
+    else if (updateRegion.m_type == DescriptorType::SampledImage)
+    {
+      const auto& targetImage = m_images[updateRegion.m_idx];
+      targetImage.Transition(oneTimeCommandList, D3D12_RESOURCE_STATE_PIXEL_SHADER_RESOURCE, D3D12_RESOURCE_STATE_COPY_DEST);
+      targetImage.CopyFromBuffer(m_device, oneTimeCommandList, m_updateBuffer, updateRegion.m_updateOffset);
+      targetImage.Transition(oneTimeCommandList, D3D12_RESOURCE_STATE_COPY_DEST, D3D12_RESOURCE_STATE_PIXEL_SHADER_RESOURCE);
+    }
   }
 
   m_mainBuffer.Transition(oneTimeCommandList, D3D12_RESOURCE_STATE_COPY_DEST, D3D12_RESOURCE_STATE_VERTEX_AND_CONSTANT_BUFFER);

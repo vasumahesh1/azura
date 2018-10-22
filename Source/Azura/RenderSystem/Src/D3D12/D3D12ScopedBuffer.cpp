@@ -62,6 +62,28 @@ U32 D3D12ScopedBuffer::AppendData(const void* pData, U32 byteSize, U32 alignment
   return byteOffset;
 }
 
+U32 D3D12ScopedBuffer::AppendTextureData(const void* pData, U32 byteSize, U32 alignment, U32 textureWidth, U32 textureRowPitch, const Log& log_D3D12RenderSystem) {
+  const U32 numRows = byteSize / textureWidth;
+  const U32 scaledRowPitch = SCALE_SIZE(textureWidth, textureRowPitch);
+  const U32 requiredSize = scaledRowPitch * numRows;
+  
+  VERIFY_D3D_OP(log_D3D12RenderSystem, SubAllocateFromBuffer(requiredSize, alignment),
+    "Failed to Sub allocate inside buffer");
+
+  const auto byteOffset = GetCurrentOffset();
+
+  const U8* textureData = reinterpret_cast<const U8*>(pData); // NOLINT
+
+  for (U32 idx = 0; idx < numRows; ++idx) {
+    std::memcpy(p_dataCur, textureData, textureWidth);
+
+    p_dataCur += scaledRowPitch; // NOLINT
+    textureData += textureWidth; // NOLINT
+  }
+
+  return byteOffset;
+}
+
 ID3D12Resource* D3D12ScopedBuffer::Real() const {
   return m_buffer.Get();
 }

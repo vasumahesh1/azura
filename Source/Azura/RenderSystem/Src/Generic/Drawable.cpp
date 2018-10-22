@@ -164,6 +164,22 @@ void DrawablePool::UpdateUniformData(DrawableID drawableId, SlotID slot, const C
   UpdateUniformData(drawableId, slot, buffer.Data(), buffer.GetSize());
 }
 
+U32 DrawablePool::GetSingleTextureBufferInfo(const DescriptorSlot& slot) {
+  U32 idx = 0;
+  for(const auto& textureBufferInfo : m_textureBufferInfos)
+  {
+    if (textureBufferInfo.m_binding == slot.m_bindIdx && textureBufferInfo.m_set == slot.m_setIdx)
+    {
+      return idx;
+    }
+
+    ++idx;
+  }
+
+  throw std::runtime_error("Tried to Update Slot that was never bound");
+
+}
+
 U32 DrawablePool::GetSize() const {
   return m_byteSize;
 }

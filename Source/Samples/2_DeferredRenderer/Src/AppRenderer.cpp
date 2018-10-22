@@ -17,11 +17,11 @@ namespace Azura {
 using namespace Containers; // NOLINT
 using namespace Math;       // NOLINT
 namespace {
-  constexpr U32 NUM_LIGHTS = 5;
-  const Vector3f LIGHT_MIN = {-14.0f, 0.0f, -6.0f };
-  const Vector3f LIGHT_MAX = { 14.0f, 20.0f, 6.0f };
-  constexpr float LIGHT_RADIUS = 5.0;
-  // constexpr float LIGHT_DT = -0.03;
+  constexpr U32 NUM_LIGHTS = 100;
+  const Vector3f LIGHT_MIN = {-5.0f, 0.0f, -5.0f };
+  const Vector3f LIGHT_MAX = { 5.0f, 15.0f, 5.0f };
+  constexpr float LIGHT_RADIUS = 5.0f;
+  constexpr float LIGHT_DT = -2.5f;
 
 } // namespace
 
@@ -29,9 +29,9 @@ AppRenderer::AppRenderer()
   : m_mainPool(nullptr),
     m_sponzaId(0),
     m_forwardRenderer(),
-    m_mainBuffer(16384),
-    m_mainAllocator(m_mainBuffer, 8192),
-    m_drawableAllocator(m_mainBuffer, 8192),
+    m_mainBuffer(0xF00000 * 2),
+    m_mainAllocator(m_mainBuffer, 0xF00000),
+    m_drawableAllocator(m_mainBuffer, 0xF00000),
     m_lightTexture(NUM_LIGHTS, 7, m_mainAllocator),
     m_lights(NUM_LIGHTS, m_mainAllocator),
     m_camera(1280, 720),
@@ -127,7 +127,7 @@ void AppRenderer::LoadLightTexture() {
   const std::uniform_real_distribution<float> uniformY(LIGHT_MIN[1], LIGHT_MAX[1]);
   const std::uniform_real_distribution<float> uniformZ(LIGHT_MIN[2], LIGHT_MAX[2]);
 
-  const std::uniform_real_distribution<float> color(-0.5f, 0.5f);
+  const std::uniform_real_distribution<float> color(-0.25f, 0.5f);
 
   for (U32 idx = 0; idx < NUM_LIGHTS; ++idx) {
 
@@ -137,9 +137,9 @@ void AppRenderer::LoadLightTexture() {
     light.m_color += Vector3f(color(mt), color(mt), color(mt));
     light.m_radius = LIGHT_RADIUS;
 
-    LOG_DBG(log_AppRenderer, LOG_LEVEL, "Generating Light:", light.m_position[0], light.m_position[1], light.m_position[2]);
-    LOG_DBG(log_AppRenderer, LOG_LEVEL, "Pos: %f, %f, %f", light.m_position[0], light.m_position[1], light.m_position[2]);
-    LOG_DBG(log_AppRenderer, LOG_LEVEL, "Col: %f, %f, %f", light.m_color[0], light.m_color[1], light.m_color[2]);
+    LOG_DBG(log_AppRenderer, LOG_LEVEL, "Generating Light:");
+    LOG_DBG(log_AppRenderer, LOG_LEVEL, "\tPos: %f, %f, %f", light.m_position[0], light.m_position[1], light.m_position[2]);
+    LOG_DBG(log_AppRenderer, LOG_LEVEL, "\tCol: %f, %f, %f", light.m_color[0], light.m_color[1], light.m_color[2]);
 
     m_lights.PushBack(light);
   }
@@ -287,6 +287,15 @@ void AppRenderer::WindowUpdate(float timeDelta) {
     return;
   }
 
+  for (auto& light : m_lights) {
+    light.m_position[1] += (LIGHT_DT * timeDelta);
+    
+    // Wrap lights from bottom to top
+    light.m_position[1] = std::fmod(light.m_position[1] + LIGHT_MAX[1] - LIGHT_MIN[1], LIGHT_MAX[1] + LIGHT_MIN[1]);
+  }
+
+  m_lightTexture.Fill(m_lights);
+
   m_camera.Update(timeDelta);
 
   m_sceneUBO.m_viewProj = m_camera.GetViewProjMatrix();
@@ -295,9 +304,8 @@ void AppRenderer::WindowUpdate(float timeDelta) {
 
   const auto uboDataBuffer    = reinterpret_cast<const U8*>(&m_sceneUBO); // NOLINT
   m_mainPool->UpdateUniformData(m_sponzaId, m_forwardRenderer.m_uboSlot, uboDataBuffer, sizeof(UniformBufferData));
-
+  m_mainPool->UpdateTextureData(m_forwardRenderer.m_lightTexSlot, m_lightTexture.GetBuffer());
   m_mainPool->SubmitUpdates();
-
 
   m_renderer->RenderFrame();
 }

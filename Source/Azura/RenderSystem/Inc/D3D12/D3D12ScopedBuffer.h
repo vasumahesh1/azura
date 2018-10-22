@@ -22,6 +22,8 @@ public:
 
   U32 AppendData(const void* pData, U32 byteSize, U32 alignment, const Log& log_D3D12RenderSystem);
 
+  U32 AppendTextureData(const void * pData, U32 byteSize, U32 alignment, U32 textureWidth, U32 textureRowPitch, const Log & log_D3D12RenderSystem);
+
   ID3D12Resource* Real() const;
 
   U32 GetSize() const;

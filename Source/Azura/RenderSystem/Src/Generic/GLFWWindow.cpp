@@ -23,6 +23,9 @@ namespace
     case GLFW_KEY_D:
       return KeyboardKey::D;
 
+    case GLFW_KEY_R:
+      return KeyboardKey::R;
+
     case GLFW_KEY_ESCAPE:
       return KeyboardKey::Esc;
 

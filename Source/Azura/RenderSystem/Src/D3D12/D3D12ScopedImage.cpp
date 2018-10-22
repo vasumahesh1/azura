@@ -187,14 +187,14 @@ void D3D12ScopedImage::CopyFromBuffer(const Microsoft::WRL::ComPtr<ID3D12Device>
                                       const D3D12ScopedBuffer& sourceBuffer,
                                       UINT64 sourceOffset) const {
   const auto textureDesc = m_texture->GetDesc();
-
+  
   D3D12_PLACED_SUBRESOURCE_FOOTPRINT layouts;
   UINT64 rowSizesInBytes;
   UINT numRows;
   UINT64 requiredSize;
-
+  
   device->GetCopyableFootprints(&textureDesc, 0, 1, sourceOffset, &layouts, &numRows, &rowSizesInBytes, &requiredSize);
-
+  
   CD3DX12_TEXTURE_COPY_LOCATION Dst(m_texture.Get(), 0);
   CD3DX12_TEXTURE_COPY_LOCATION Src(sourceBuffer.Real(), layouts);
   commandList->CopyTextureRegion(&Dst, 0, 0, 0, &Src, nullptr);

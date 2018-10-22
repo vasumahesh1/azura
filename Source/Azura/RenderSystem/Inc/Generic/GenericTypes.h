@@ -285,6 +285,8 @@ struct BufferInfo {
 
 struct BufferUpdate
 {
+  DescriptorType m_type;
+
   U32 m_idx;
   U32 m_gpuOffset;
   U32 m_gpuByteSize;

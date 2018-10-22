@@ -20,6 +20,8 @@
 
 #define UNUSED(x) (void)(x)
 
+#define SCALE_SIZE(val, size) ((val + size - 1) & ~(size - 1))
+
 #define FORWARD_MAPPING(TYPE_A, TYPE_B)                                                                                \
   case TYPE_A:                                                                                                         \
     return TYPE_B;
