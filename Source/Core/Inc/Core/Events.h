@@ -18,6 +18,11 @@ enum class MouseEventType {
 };
 
 enum class KeyEventType {
+  KeyPress,
+  KeyRelease
+};
+
+enum class KeyboardKey {
   Unmapped,
   W,
   A,
@@ -46,11 +51,13 @@ struct MouseEvent final : public Event {
 struct KeyEvent final : public Event {
   int m_keyValue;
   KeyEventType m_internalType;
+  KeyboardKey m_key;
 
-  KeyEvent(int key, KeyEventType eventType)
+  KeyEvent(int key, KeyboardKey keyboardKey, KeyEventType eventType)
     : Event({EventType::KeyEvent}),
       m_keyValue(key),
-      m_internalType(eventType) {
+      m_internalType(eventType),
+      m_key(keyboardKey) {
 
   }
 };

@@ -73,4 +73,8 @@ void PolarCamera::RotateAboutUp(float deg) {
 void PolarCamera::RotateAboutRight(float deg) {
   m_phi += Math::ToRadians(deg);
 }
+
+void PolarCamera::Update(float timeDelta) {
+  UNUSED(timeDelta);
+}
 } // namespace Azura

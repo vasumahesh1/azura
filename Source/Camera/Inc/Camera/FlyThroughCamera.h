@@ -26,6 +26,8 @@ public:
 
   void TranslateAlongRight(float amt);
 
+  void Update(float timeDelta) override;
+
 private:
   Vector3f m_right{1, 0, 0};
   Vector3f m_look{0, 0, 1};
@@ -37,6 +39,9 @@ private:
 
   float m_cachedMouseX;
   float m_cachedMouseY;
+
+  int m_moveForwardFactor{0};
+  int m_moveRightFactor{0};
 
 };
 

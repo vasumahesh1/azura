@@ -27,7 +27,7 @@ public:
 
   virtual bool Initialize() = 0;
   virtual void StartListening() = 0;
-  void SetUpdateCallback(std::function<void(double)> eventUpdate);
+  void SetUpdateCallback(std::function<void(float)> eventUpdate);
   void SetMouseEventCallback(std::function<void(MouseEvent)> eventFunc);
   void SetKeyEventCallback(std::function<void(KeyEvent)> eventFunc);
   virtual void Destroy() = 0;
@@ -46,7 +46,7 @@ protected:
   void SetHandle(void* window);
   const char* GetTitle() const;
 
-  void CallUpdateFunction(double timeDelta) const;
+  void CallUpdateFunction(float timeDelta) const;
   void CallMouseEventFunction(MouseEvent e) const;
 
   void CallKeyEventFunction(KeyEvent e) const;
@@ -63,7 +63,7 @@ private:
   String m_title;
   void* p_windowResource;
 
-  std::function<void(double)> p_updateFunc;
+  std::function<void(float)> p_updateFunc;
   std::function<void(MouseEvent)> p_mouseEventFunc{nullptr};
   std::function<void(KeyEvent)> p_keyEventFunc{nullptr};
 };

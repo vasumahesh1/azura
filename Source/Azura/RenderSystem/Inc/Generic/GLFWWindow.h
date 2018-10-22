@@ -25,9 +25,6 @@ class GLFWWindow : public Window {
   static void KeyPressCallback(GLFWwindow* window, int key, int scanCode, int action, int mods);
 
   bool m_mouseLeftDown{false};
-  bool m_keyPress{false};
-
-  int m_activeKey{-1};
 
   double m_prevCursorX{0};
   double m_prevCursorY{0};

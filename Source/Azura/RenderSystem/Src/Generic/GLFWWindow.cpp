@@ -5,6 +5,34 @@
 #include "Generic/GLFWWindow.h"
 
 namespace Azura {
+namespace
+{
+  KeyboardKey GetKey(int key)
+  {
+    switch(key)
+    {
+    case GLFW_KEY_W:
+      return KeyboardKey::W;
+
+    case GLFW_KEY_A:
+      return KeyboardKey::A;
+
+    case GLFW_KEY_S:
+      return KeyboardKey::S;
+
+    case GLFW_KEY_D:
+      return KeyboardKey::D;
+
+    case GLFW_KEY_ESCAPE:
+      return KeyboardKey::Esc;
+
+    default:
+      return KeyboardKey::Unmapped;
+
+    }
+  }
+} // namespace
+
 
 GLFWWindow::GLFWWindow(String title, U32 width, U32 height)
   : Window(title, width, height),
@@ -38,7 +66,8 @@ void GLFWWindow::Destroy() {
 void GLFWWindow::StartListening() {
 
   int frameCount{0};
-  double previousTime = glfwGetTime();
+  double previousStatsTime = glfwGetTime();
+  double previousFrameTime = glfwGetTime();
 
   // TODO(vasumahesh1):[GAME]: Need a Performance Timer here
 
@@ -47,15 +76,15 @@ void GLFWWindow::StartListening() {
     const double currentTime = glfwGetTime();
     frameCount++;
 
-    const double timeDelta = currentTime - previousTime;
+    const double statsTimeDelta = currentTime - previousStatsTime;
 
-    if (timeDelta >= 1.0) {
+    if (statsTimeDelta >= 1.0) {
       String windowTitle = String(GetTitle()) + " - FPS: " + std::to_string(frameCount) + " - Frame Time: " + std::
                            to_string(1000.0 / frameCount) + "ms";
       glfwSetWindowTitle(p_window, windowTitle.c_str());
 
       frameCount   = 0;
-      previousTime = currentTime;
+      previousStatsTime = currentTime;
     }
 
     double currCursorX;
@@ -86,38 +115,10 @@ void GLFWWindow::StartListening() {
       m_prevCursorY = currCursorY;
     }
 
-    if (m_keyPress)
-    {
-      KeyEventType keyType = KeyEventType::Unmapped;
-
-      switch(m_activeKey)
-      {
-      case GLFW_KEY_W:
-        keyType = KeyEventType::W;
-        break;
-
-      case GLFW_KEY_A:
-        keyType = KeyEventType::A;
-        break;
-
-      case GLFW_KEY_S:
-        keyType = KeyEventType::S;
-        break;
-
-      case GLFW_KEY_D:
-        keyType = KeyEventType::D;
-        break;
-        
-      case GLFW_KEY_ESCAPE:
-        keyType = KeyEventType::Esc;
-        break;
-      }
-
-      CallKeyEventFunction(KeyEvent(m_activeKey, keyType));
-    }
-
-    CallUpdateFunction(timeDelta);
+    CallUpdateFunction(float(currentTime - previousFrameTime));
     glfwPollEvents();
+
+    previousFrameTime = currentTime;
   }
 }
 
@@ -137,13 +138,11 @@ void GLFWWindow::KeyPressCallback(GLFWwindow* window, int key, int scanCode, int
 
   if (action == GLFW_PRESS)
   {
-    wrapper->m_keyPress = true;
-    wrapper->m_activeKey = key;
+    wrapper->CallKeyEventFunction(KeyEvent(key, GetKey(key), KeyEventType::KeyPress));
   }
   else if (action == GLFW_RELEASE)
   {
-    wrapper->m_keyPress = false;
-    wrapper->m_activeKey = -1;
+    wrapper->CallKeyEventFunction(KeyEvent(key, GetKey(key), KeyEventType::KeyRelease));
   }
 }
 

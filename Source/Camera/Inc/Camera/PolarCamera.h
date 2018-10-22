@@ -19,6 +19,8 @@ public:
   void RotateAboutUp(float deg);
   void RotateAboutRight(float deg);
 
+  void Update(float timeDelta) override;
+
 private:
   float m_theta{0.0f};
   float m_phi{0.0f};

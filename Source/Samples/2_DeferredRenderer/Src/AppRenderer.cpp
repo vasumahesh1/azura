@@ -164,9 +164,9 @@ void AppRenderer::Initialize() {
 
   m_window->SetCursorState(CursorState::Hidden);
 
-  m_window->SetUpdateCallback([this](double timeSinceLastFrame)
+  m_window->SetUpdateCallback([this](float timeDelta)
   {
-    WindowUpdate();
+    WindowUpdate(timeDelta);
   });
 
   m_window->SetMouseEventCallback([this](MouseEvent e)
@@ -180,7 +180,7 @@ void AppRenderer::Initialize() {
     m_camera.OnKeyEvent(e);
   });
 
-  m_camera.SetTranslationStepSize(0.2f);
+  m_camera.SetTranslationStepSize(5.0f);
   m_camera.SetSensitivity(0.5f);
 
   ApplicationInfo appInfo;
@@ -281,11 +281,13 @@ void AppRenderer::Initialize() {
   m_sceneInit = true;
 }
 
-void AppRenderer::WindowUpdate() {
+void AppRenderer::WindowUpdate(float timeDelta) {
   if (!m_sceneInit)
   {
     return;
   }
+
+  m_camera.Update(timeDelta);
 
   m_sceneUBO.m_viewProj = m_camera.GetViewProjMatrix();
 

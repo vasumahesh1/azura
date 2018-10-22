@@ -12,7 +12,7 @@ Window::Window(String title, const U32 width, const U32 height)
     p_windowResource(nullptr) {
 }
 
-void Window::SetUpdateCallback(std::function<void(double)> eventUpdate) {
+void Window::SetUpdateCallback(std::function<void(float)> eventUpdate) {
   p_updateFunc = eventUpdate;
 }
 
@@ -66,7 +66,7 @@ const char* Window::GetTitle() const {
   return m_title.c_str();
 }
 
-void Window::CallUpdateFunction(double timeDelta) const {
+void Window::CallUpdateFunction(float timeDelta) const {
   p_updateFunc(timeDelta);
 }
 

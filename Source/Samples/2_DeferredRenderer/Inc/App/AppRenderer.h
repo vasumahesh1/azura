@@ -38,7 +38,7 @@ public:
   AppRenderer();
 
   void Initialize();
-  void WindowUpdate();
+  void WindowUpdate(float timeDelta);
   void Run() const;
   void Destroy() const;
 

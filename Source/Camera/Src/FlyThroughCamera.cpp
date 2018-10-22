@@ -47,37 +47,59 @@ void FlyThroughCamera::OnMouseEvent(MouseEvent mouseEvent) {
   const float diffY = currentY - m_cachedMouseY;
 
   RotateAboutRight(diffY * m_sensitivity * 2.0f);
-  RotateAboutUp(diffX* m_sensitivity * 2.0f);
+  RotateAboutUp(diffX * m_sensitivity * 2.0f);
 
   Recompute();
 }
 
 void FlyThroughCamera::OnKeyEvent(KeyEvent keyEvent) {
-  switch (keyEvent.m_internalType)
-  {
-    case KeyEventType::W:
-      TranslateAlongLook(m_stepSize * m_sensitivity);
-    break;
+  if (keyEvent.m_internalType == KeyEventType::KeyPress) {
+    switch (keyEvent.m_key) {
+      case KeyboardKey::W:
+        m_moveForwardFactor = 1;
+        break;
 
-    case KeyEventType::A:
-      TranslateAlongRight(-m_stepSize * m_sensitivity);
-    break;
+      case KeyboardKey::S:
+        m_moveForwardFactor = -1;
+        break;
 
-    case KeyEventType::S:
-      TranslateAlongLook(-m_stepSize * m_sensitivity);
-    break;
+      case KeyboardKey::D:
+        m_moveRightFactor = 1;
+        break;
 
-    case KeyEventType::D:
-      TranslateAlongRight(m_stepSize * m_sensitivity);
-    break;
+      case KeyboardKey::A:
+        m_moveRightFactor = -1;
+        break;
 
-    case KeyEventType::Unmapped:
-    case KeyEventType::Esc:
-    default:
-      break;
+      case KeyboardKey::Unmapped:
+      case KeyboardKey::Esc:
+      default:
+        break;
+    }
+  } else if (keyEvent.m_internalType == KeyEventType::KeyRelease) {
+    switch (keyEvent.m_key) {
+      case KeyboardKey::W:
+        m_moveForwardFactor = 0;
+        break;
+
+      case KeyboardKey::S:
+        m_moveForwardFactor = 0;
+        break;
+
+      case KeyboardKey::D:
+        m_moveRightFactor = 0;
+        break;
+
+      case KeyboardKey::A:
+        m_moveRightFactor = 0;
+        break;
+
+      case KeyboardKey::Unmapped:
+      case KeyboardKey::Esc:
+      default:
+        break;
+    }
   }
-
-  Recompute();
 }
 
 void FlyThroughCamera::SetTranslationStepSize(float amount) {
@@ -98,7 +120,7 @@ void FlyThroughCamera::RotateAboutUp(float degrees) {
 
 void FlyThroughCamera::SetAngleAboutRight(float ndcY) {
   const float deg = ndcY * 89 * -1;
-  m_phi = Math::ToRadians(deg);
+  m_phi           = Math::ToRadians(deg);
 }
 
 void FlyThroughCamera::RotateAboutRight(float degrees) {
@@ -125,6 +147,26 @@ void FlyThroughCamera::TranslateAlongRight(float amt) {
 
   m_eye += translation;
   m_ref += translation;
+}
+
+void FlyThroughCamera::Update(float timeDelta) {
+  const float distance = m_stepSize * timeDelta;
+
+  bool needsRecompute = false;
+
+  if (m_moveForwardFactor != 0) {
+    TranslateAlongLook(distance * m_moveForwardFactor);
+    needsRecompute = true;
+  }
+
+  if (m_moveRightFactor != 0) {
+    TranslateAlongRight(distance * m_moveRightFactor);
+    needsRecompute = true;
+  }
+
+  if (needsRecompute) {
+    Recompute();
+  }
 }
 
 } // namespace Azura

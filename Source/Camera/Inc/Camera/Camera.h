@@ -31,6 +31,7 @@ public:
   Matrix4f GetInvViewProjMatrix() const;
 
   virtual void Recompute() = 0;
+  virtual void Update(float timeDelta) = 0;
   virtual void OnMouseEvent(MouseEvent mouseEvent) = 0;
   virtual void OnKeyEvent(KeyEvent keyEvent) = 0;
 
