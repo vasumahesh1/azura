@@ -5,7 +5,7 @@ using Azura::Containers::Vector; // NOLINT
 
 namespace Azura {
 namespace {
-const U32 DEFAULT_VERTEX_SLOT = 0;
+
 
 struct VertexWithUV {
   float m_pos[4];
@@ -20,21 +20,10 @@ DrawablePool& PoolPrimitives::AddScreenQuad(Renderer& renderer, U32 renderPass, 
   quadPoolInfo.m_drawType             = DrawType::InstancedIndexed;
   quadPoolInfo.m_cullMode             = CullMode::None;
   quadPoolInfo.m_renderPasses         = {{renderPass}, allocatorTemporary};
-  quadPoolInfo.m_vertexDataSlots      = {
-    {
-      {DEFAULT_VERTEX_SLOT, BufferUsageRate::PerVertex}
-    },
-    allocatorTemporary
-  };
+  
+  const U32 DEFAULT_VERTEX_SLOT = quadPoolInfo.AddInputSlot({ BufferUsageRate::PerVertex, { {"POSITION", RawStorageFormat::R32G32B32A32_FLOAT}, {"UV", RawStorageFormat::R32G32_FLOAT} } });
 
   DrawablePool& quadPool = renderer.CreateDrawablePool(quadPoolInfo);
-
-  const Vector<RawStorageFormat> quadStride = Vector<RawStorageFormat>({
-    RawStorageFormat::R32G32B32A32_FLOAT, // Pos
-    RawStorageFormat::R32G32_FLOAT        // UV
-  }, allocatorTemporary);
-
-  quadPool.AddBufferBinding(DEFAULT_VERTEX_SLOT, quadStride);
 
   Vector<VertexWithUV> quadVertexData = Vector<VertexWithUV>({
     VertexWithUV{{-1, -1, 0.9999f, 1}, {0, 0}},

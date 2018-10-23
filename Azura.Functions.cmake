@@ -39,6 +39,7 @@ function(AzuraAddSlangShaders TARGET API)
     string(TOLOWER ${SHADER_TYPE}_5_0 SLANG_PROFILE)
 
     set(OUTPUT_FILE "")
+    set(OUTPUT_DIRECTORY "")
 
     get_filename_component(SHADER_FILE_NAME ${SHADER_INPUT_FILE} NAME)
     string(REGEX REPLACE "\\.[^.]*$" "" SHADER_FILE_WITHOUT_EXT ${SHADER_FILE_NAME})
@@ -52,12 +53,20 @@ function(AzuraAddSlangShaders TARGET API)
 
     if ("${API}" STREQUAL "VULKAN")
       set(OUTPUT_FILE "${PROJECT_BINARY_DIR}/Shaders/Vulkan/${SHADER_FILE_WITHOUT_EXT}.spv")
+      set(OUTPUT_DIRECTORY "Shaders/Vulkan/")
     elseif ("${API}" STREQUAL "GLSL")
       set(OUTPUT_FILE "${PROJECT_BINARY_DIR}/Shaders/Vulkan/${SHADER_FILE_WITHOUT_EXT}.glsl")
+      set(OUTPUT_DIRECTORY "Shaders/Vulkan/")
+    elseif ("${API}" STREQUAL "HLSL")
+      set(OUTPUT_FILE "${PROJECT_BINARY_DIR}/Shaders/D3D12/${SHADER_FILE_WITHOUT_EXT}.hlsl")
+      set(OUTPUT_DIRECTORY "Shaders/D3D12/")
+    elseif ("${API}" STREQUAL "DXBC")
+      set(OUTPUT_FILE "${PROJECT_BINARY_DIR}/Shaders/D3D12/${SHADER_FILE_WITHOUT_EXT}.dxbc")
+      set(OUTPUT_DIRECTORY "Shaders/D3D12/")
     endif()
 
     add_custom_command(OUTPUT ${OUTPUT_FILE}
-                       COMMAND ${CMAKE_COMMAND} -E make_directory "${PROJECT_BINARY_DIR}/Shaders/Vulkan/"
+                       COMMAND ${CMAKE_COMMAND} -E make_directory "${PROJECT_BINARY_DIR}/${OUTPUT_DIRECTORY}"
                        COMMAND ${SLANG_COMPILER} ${SHADER_INPUT_FILE} -profile ${SLANG_PROFILE} -entry ${SHADER_ENTRY_POINT} -o ${OUTPUT_FILE}
                        DEPENDS ${SHADER_INPUT_FILE})
     list(APPEND SPIRV_BINARY_FILES ${OUTPUT_FILE})

@@ -5,10 +5,14 @@
 #include "Drawable.h"
 #include "GenericTypes.h"
 #include "Core/RawStorageFormat.h"
+#include "ComputePool.h"
 
 namespace Azura {
+class Window;
 
 struct DrawablePoolCreateInfo;
+
+constexpr U32 GLOBAL_INFLIGHT_FRAMES = 2;
 
 class Renderer {
 public:
@@ -17,7 +21,9 @@ public:
            ApplicationRequirements appRequirements,
            const SwapChainRequirements& swapChainRequirements,
            const DescriptorRequirements& descriptorRequirements,
-           Memory::Allocator& allocator);
+           Memory::Allocator& mainAllocator,
+           Memory::Allocator& drawAllocator,
+           Window& window);
   virtual ~Renderer() = default;
 
   Renderer(const Renderer& other) = delete;
@@ -28,6 +34,7 @@ public:
   virtual String GetRenderingAPI() const = 0;
 
   virtual DrawablePool& CreateDrawablePool(const DrawablePoolCreateInfo& createInfo) = 0;
+  virtual ComputePool& CreateComputePool(const ComputePoolCreateInfo& createInfo) = 0;
 
   virtual void Submit() = 0;
   virtual void RenderFrame() = 0;
@@ -42,13 +49,19 @@ protected:
   const DeviceRequirements& GetDeviceRequirements() const;
   const ApplicationRequirements& GetApplicationRequirements() const;
   const SwapChainRequirements& GetSwapchainRequirements() const;
-  Memory::Allocator& GetAllocator() const;
 
   U32 GetCurrentFrame() const;
+  void SetCurrentFrame(U32 frameIdx);
 
   Containers::Vector<DescriptorSlot> m_descriptorSlots;
+  Containers::Vector<DescriptorTableEntry> m_descriptorSetTable;
 
   DescriptorCount m_descriptorCount;
+
+  std::reference_wrapper<Memory::Allocator> m_mainAllocator;
+  std::reference_wrapper<Memory::Allocator> m_drawPoolAllocator;
+
+  std::reference_wrapper<Window> m_window;
 
 private:
   virtual void AddShader(const ShaderCreateInfo& info) = 0;
@@ -57,7 +70,6 @@ private:
   const DeviceRequirements m_deviceRequirements;
   const ApplicationRequirements m_appRequirements;
   SwapChainRequirements m_swapChainRequirements;
-  Memory::Allocator& m_allocator;
 
   U32 m_frameCount;
 };

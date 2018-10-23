@@ -9,6 +9,9 @@ set(
 
   "Inc/Camera/PolarCamera.h"
   "Src/PolarCamera.cpp"
+
+  "Inc/Camera/FlyThroughCamera.h"
+  "Src/FlyThroughCamera.cpp"
 )
 
 add_library(Camera ${SOURCES})

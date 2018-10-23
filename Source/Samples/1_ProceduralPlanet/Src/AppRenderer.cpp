@@ -12,9 +12,6 @@ namespace Azura {
 using namespace Containers; // NOLINT
 using namespace Math;       // NOLINT
 
-#define VERTEX_SLOT 0
-#define NORMAL_SLOT 1
-
 struct Vertex {
   float m_pos[4];
   float m_col[4];
@@ -56,11 +53,12 @@ AppRenderer::AppRenderer()
 void AppRenderer::Initialize() {
   LOG_INF(log_AppRenderer, LOG_LEVEL, "Starting Init of AppRenderer");
 
-  STACK_ALLOCATOR(Temporary, Memory::MonotonicAllocator, 2048);
+  HEAP_ALLOCATOR(Temporary, Memory::MonotonicAllocator, 8192);
   m_window = RenderSystem::CreateApplicationWindow("ProceduralPlanet", 1280, 720);
 
-  m_window->SetUpdateCallback([this]()
+  m_window->SetUpdateCallback([this](float timeSinceLastFrame)
   {
+    UNUSED(timeSinceLastFrame);
     WindowUpdate();
   });
 
@@ -96,19 +94,18 @@ void AppRenderer::Initialize() {
   // TODO(vasumahesh1):[Q]:Allocator?
   ApplicationRequirements applicationRequirements = {}; // NOLINT
 
-  DescriptorRequirements descriptorRequirements = DescriptorRequirements(4, allocatorTemporary);
-  // Set 0
+  DescriptorRequirements descriptorRequirements = DescriptorRequirements(4, 4, allocatorTemporary);
   const U32 UBO_SLOT = descriptorRequirements.AddDescriptor({ DescriptorType::UniformBuffer, ShaderStage::Vertex | ShaderStage::Pixel });
-  
-  // Set 1
   const U32 SHADER_CONTROLS_SLOT = descriptorRequirements.AddDescriptor({ DescriptorType::UniformBuffer, ShaderStage::Vertex | ShaderStage::Pixel });
-
-  // Set 2
   const U32 SAMPLER_SLOT = descriptorRequirements.AddDescriptor({DescriptorType::Sampler, ShaderStage::Pixel});
-  const U32 PLANET_TEXTURE_SLOT = descriptorRequirements.AddDescriptor({DescriptorType::SampledImage, ShaderStage::Pixel, DescriptorBinding::Same});
+  const U32 PLANET_TEXTURE_SLOT = descriptorRequirements.AddDescriptor({DescriptorType::SampledImage, ShaderStage::Pixel});
 
+  const U32 UBO_SET = descriptorRequirements.AddSet({ UBO_SLOT });
+  const U32 CONTROLS_SET = descriptorRequirements.AddSet({ SHADER_CONTROLS_SLOT });
+  const U32 SAMPLER_SET = descriptorRequirements.AddSet({ SAMPLER_SLOT });
+  const U32 TEXTURE_SET = descriptorRequirements.AddSet({ PLANET_TEXTURE_SLOT });
 
-  ShaderRequirements shaderRequirements = ShaderRequirements(5, allocatorTemporary);
+  ShaderRequirements shaderRequirements = ShaderRequirements(6, allocatorTemporary);
   const U32 SCREEN_QUAD_VERTEX_SHADER_ID = shaderRequirements.AddShader({ ShaderStage::Vertex, "ScreenQuad.vs", AssetLocation::Shaders });
 
   const U32 NOISE_VERTEX_SHADER_ID = shaderRequirements.AddShader({ ShaderStage::Vertex, "Noise.vs", AssetLocation::Shaders });
@@ -129,15 +126,17 @@ void AppRenderer::Initialize() {
   const U32 NOISE_PASS = renderPassRequirements.AddPass({
     PipelinePassCreateInfo::Shaders{NOISE_VERTEX_SHADER_ID, NOISE_PIXEL_SHADER_ID},  // SHADERS
     PipelinePassCreateInfo::Inputs{},                                                // INPUT TARGETS
-    PipelinePassCreateInfo::Outputs{NOISE_TARGET_1, NOISE_TARGET_2, NOISE_TARGET_3, NOISE_DEPTH}  // OUTPUT TARGETS
+    PipelinePassCreateInfo::Outputs{NOISE_TARGET_1, NOISE_TARGET_2, NOISE_TARGET_3, NOISE_DEPTH} , // OUTPUT TARGETS
+    PipelinePassCreateInfo::DescriptorSets{UBO_SET, CONTROLS_SET}
     });
 
   const U32 SINGLE_PASS = renderPassRequirements.AddPass({
     PipelinePassCreateInfo::Shaders{},                                   // SHADERS
     PipelinePassCreateInfo::Inputs{{NOISE_TARGET_1, ShaderStage::Pixel}, {NOISE_TARGET_2, ShaderStage::Pixel}, {NOISE_TARGET_3, ShaderStage::Pixel}},      // INPUT TARGETS
     PipelinePassCreateInfo::Outputs{},                                   // OUTPUT TARGETS
-    {}, {},
-    BlendState{true, {SrcAlpha, OneMinusSrcAlpha}, {SrcAlpha, OneMinusSrcAlpha}}
+    PipelinePassCreateInfo::DescriptorSets{UBO_SET, CONTROLS_SET, SAMPLER_SET, TEXTURE_SET},
+    {},
+    BlendState{true, {BlendFactor::SrcAlpha, BlendFactor::OneMinusSrcAlpha}, {BlendFactor::SrcAlpha, BlendFactor::OneMinusSrcAlpha}}
     });
 
   SwapChainRequirements swapChainRequirements = m_window->GetSwapChainRequirements();
@@ -153,34 +152,24 @@ void AppRenderer::Initialize() {
   DrawablePoolCreateInfo poolInfo(allocatorTemporary);
   poolInfo.m_byteSize        = sphere.TotalDataSize() + 0x400000;
   poolInfo.m_numDrawables    = 1;
-  poolInfo.m_cullMode        = CullMode::FrontBit;
+  poolInfo.m_cullMode        = CullMode::BackBit;
   poolInfo.m_drawType        = DrawType::InstancedIndexed;
   poolInfo.m_renderPasses    = {{NOISE_PASS}, allocatorTemporary};
-  poolInfo.m_vertexDataSlots = {
-    {
-      {VERTEX_SLOT, BufferUsageRate::PerVertex},
-      {NORMAL_SLOT, BufferUsageRate::PerVertex}
-    },
-    allocatorTemporary
-  };
+
+  const auto VERTEX_SLOT = poolInfo.AddInputSlot({ BufferUsageRate::PerVertex, { {"POSITION", sphere.GetVertexFormat()}} });
+  const auto NORMAL_SLOT = poolInfo.AddInputSlot({ BufferUsageRate::PerVertex, { {"NORMAL", sphere.GetNormalFormat()}} });
 
   TextureRequirements textureRequirements = {};
   textureRequirements.m_maxCount = 1;
   textureRequirements.m_poolSize = 0x400000; // 4MB
 
-  m_textureManager = RenderSystem::CreateTextureManager(*m_renderer, textureRequirements, log_AppRenderer);
+  m_textureManager = RenderSystem::CreateTextureManager(textureRequirements);
 
   const U32 planet1Texture = m_textureManager->Load("Textures/Planet1_Texture.jpg");
   const TextureDesc* planet1Desc = m_textureManager->GetInfo(planet1Texture);
   VERIFY_TRUE(log_AppRenderer, planet1Desc != nullptr, "planet1Desc was Null");
 
   DrawablePool& pool = m_renderer->CreateDrawablePool(poolInfo);
-
-  Vector<RawStorageFormat> vertexStride = Vector<RawStorageFormat>(1, allocatorTemporary);
-  vertexStride.PushBack(sphere.GetVertexFormat());
-  pool.AddBufferBinding(VERTEX_SLOT, vertexStride);
-
-  pool.AddBufferBinding(NORMAL_SLOT, {{sphere.GetNormalFormat()}, allocatorTemporary});
 
   // Create Drawable from Pool
   DrawableCreateInfo createInfo = {};

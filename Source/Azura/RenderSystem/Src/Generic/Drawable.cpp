@@ -47,6 +47,21 @@ void Drawable::AddUniformBufferInfo(UniformBufferInfo&& info) {
   m_uniformBufferInfos.PushBack(info);
 }
 
+U32 Drawable::GetSingleUniformBufferInfo(const DescriptorSlot& slot) {
+  U32 idx = 0;
+  for(const auto& ubInfo : m_uniformBufferInfos)
+  {
+    if (ubInfo.m_binding == slot.m_bindIdx && ubInfo.m_set == slot.m_setIdx)
+    {
+      return idx;
+    }
+
+    ++idx;
+  }
+
+  throw std::runtime_error("Tried to Update Slot that was never bound");
+}
+
 void Drawable::SetIndexBufferInfo(BufferInfo&& info) {
   m_indexBufferInfo = info;
 }
@@ -84,26 +99,46 @@ const BufferInfo& Drawable::GetIndexBufferInfo() const {
 }
 
 DrawablePoolCreateInfo::DrawablePoolCreateInfo(Memory::Allocator& alloc)
-  : m_vertexDataSlots(alloc),
-    m_renderPasses(alloc) {
+  : m_renderPasses(alloc) {
+}
+
+U32 DrawablePoolCreateInfo::AddInputSlot(const VertexSlot& slotInfo) {
+  const auto id = U32(m_vertexDataSlots.size());
+  m_vertexDataSlots.push_back(slotInfo);
+  return id;
 }
 
 DrawablePool::DrawablePool(const DrawablePoolCreateInfo& createInfo,
                            DescriptorCount descriptorCount,
                            Memory::Allocator& allocator)
-  : m_numVertexSlots(std::count_if(createInfo.m_vertexDataSlots.Begin(), createInfo.m_vertexDataSlots.End(),
-                                   IsPerVertexSlot)),
-    m_numInstanceSlots(std::count_if(createInfo.m_vertexDataSlots.Begin(), createInfo.m_vertexDataSlots.End(),
-                                     IsPerInstanceSlot)),
+  : m_numVertexSlots(U32(std::count_if(createInfo.m_vertexDataSlots.begin(), createInfo.m_vertexDataSlots.end(),
+                                   IsPerVertexSlot))),
+    m_numInstanceSlots(U32(std::count_if(createInfo.m_vertexDataSlots.begin(), createInfo.m_vertexDataSlots.end(),
+                                     IsPerInstanceSlot))),
     m_descriptorCount(descriptorCount),
-    m_vertexDataSlots(createInfo.m_vertexDataSlots, allocator),
+    m_vertexDataSlots(allocator),
     m_renderPasses(createInfo.m_renderPasses, allocator),
     m_textureBufferInfos(allocator),
     m_samplerInfos(allocator),
+    m_bufferUpdates(allocator),
     m_cullMode(createInfo.m_cullMode),
     m_byteSize(createInfo.m_byteSize),
     m_drawType(createInfo.m_drawType),
     m_allocator(allocator) {
+
+  m_vertexDataSlots.Reserve(U32(createInfo.m_vertexDataSlots.size()));
+
+  for(auto& slot : createInfo.m_vertexDataSlots)
+  {
+    m_vertexDataSlots.PushBack(slot);
+
+    for(const auto& stride : slot.m_stride)
+    {
+      m_vertexDataSlots.Last().m_strideSize += GetFormatSize(stride.m_format);
+    }
+  }
+
+  m_bufferUpdates.Reserve(m_descriptorCount.m_numSampledImageSlots + m_descriptorCount.m_numUniformSlots);
 
   m_textureBufferInfos.Reserve(m_descriptorCount.m_numSampledImageSlots);
   m_samplerInfos.Reserve(m_descriptorCount.m_numSamplerSlots);
@@ -125,6 +160,26 @@ void DrawablePool::SetIndexData(DrawableID drawableId, const Containers::Vector<
   SetIndexData(drawableId, buffer.Data(), buffer.GetSize());
 }
 
+void DrawablePool::UpdateUniformData(DrawableID drawableId, SlotID slot, const Containers::Vector<U8>& buffer) {
+  UpdateUniformData(drawableId, slot, buffer.Data(), buffer.GetSize());
+}
+
+U32 DrawablePool::GetSingleTextureBufferInfo(const DescriptorSlot& slot) {
+  U32 idx = 0;
+  for(const auto& textureBufferInfo : m_textureBufferInfos)
+  {
+    if (textureBufferInfo.m_binding == slot.m_bindIdx && textureBufferInfo.m_set == slot.m_setIdx)
+    {
+      return idx;
+    }
+
+    ++idx;
+  }
+
+  throw std::runtime_error("Tried to Update Slot that was never bound");
+
+}
+
 U32 DrawablePool::GetSize() const {
   return m_byteSize;
 }
@@ -135,19 +190,6 @@ Memory::Allocator& DrawablePool::GetAllocator() const {
 
 DrawType DrawablePool::GetDrawType() const {
   return m_drawType;
-}
-
-int DrawablePool::GetVertexSlotIndex(SlotID id) const {
-  auto it = std::find_if(m_vertexDataSlots.Begin(), m_vertexDataSlots.End(), [id](const VertexSlot& slot) -> bool
-  {
-    return slot.m_key == id;
-  });
-
-  if (it == m_vertexDataSlots.End()) {
-    return -1;
-  }
-
-  return it - m_vertexDataSlots.Begin();
 }
 
 bool DrawablePool::CanRenderInPass(U32 renderPassId) const {

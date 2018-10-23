@@ -5,6 +5,37 @@
 #include "Generic/GLFWWindow.h"
 
 namespace Azura {
+namespace
+{
+  KeyboardKey GetKey(int key)
+  {
+    switch(key)
+    {
+    case GLFW_KEY_W:
+      return KeyboardKey::W;
+
+    case GLFW_KEY_A:
+      return KeyboardKey::A;
+
+    case GLFW_KEY_S:
+      return KeyboardKey::S;
+
+    case GLFW_KEY_D:
+      return KeyboardKey::D;
+
+    case GLFW_KEY_R:
+      return KeyboardKey::R;
+
+    case GLFW_KEY_ESCAPE:
+      return KeyboardKey::Esc;
+
+    default:
+      return KeyboardKey::Unmapped;
+
+    }
+  }
+} // namespace
+
 
 GLFWWindow::GLFWWindow(String title, U32 width, U32 height)
   : Window(title, width, height),
@@ -23,6 +54,8 @@ bool GLFWWindow::Initialize() {
 
   glfwSetMouseButtonCallback(p_window, MouseEventCallback);
 
+  glfwSetKeyCallback(p_window, KeyPressCallback);
+
   glfwSetWindowUserPointer(p_window, this);
 
   return true;
@@ -34,31 +67,38 @@ void GLFWWindow::Destroy() {
 }
 
 void GLFWWindow::StartListening() {
-#ifdef BUILD_DEBUG
+
   int frameCount{0};
-  double previousTime = glfwGetTime();
-#endif
+  double previousStatsTime = glfwGetTime();
+  double previousFrameTime = glfwGetTime();
 
   // TODO(vasumahesh1):[GAME]: Need a Performance Timer here
 
   while (glfwWindowShouldClose(p_window) == GLFW_FALSE) {
-#ifdef BUILD_DEBUG
+
     const double currentTime = glfwGetTime();
     frameCount++;
 
-    if (currentTime - previousTime >= 1.0) {
+    const double statsTimeDelta = currentTime - previousStatsTime;
+
+    if (statsTimeDelta >= 1.0) {
       String windowTitle = String(GetTitle()) + " - FPS: " + std::to_string(frameCount) + " - Frame Time: " + std::
                            to_string(1000.0 / frameCount) + "ms";
       glfwSetWindowTitle(p_window, windowTitle.c_str());
 
       frameCount   = 0;
-      previousTime = currentTime;
+      previousStatsTime = currentTime;
     }
-#endif
 
     double currCursorX;
     double currCursorY;
     glfwGetCursorPos(p_window, &currCursorX, &currCursorY);
+
+    MouseEvent mouseEvent = {};
+    mouseEvent.m_internalType = MouseEventType::MouseUpdate;
+    mouseEvent.m_eventX = float(currCursorX);
+    mouseEvent.m_eventY = float(currCursorY);
+    CallMouseEventFunction(mouseEvent);
 
     if (m_mouseLeftDown)
     {
@@ -78,13 +118,53 @@ void GLFWWindow::StartListening() {
       m_prevCursorY = currCursorY;
     }
 
-    CallUpdateFunction();
+    CallUpdateFunction(float(currentTime - previousFrameTime));
     glfwPollEvents();
+
+    previousFrameTime = currentTime;
   }
+}
+
+void GLFWWindow::ResetCursor() {
+  glfwSetCursorPos(p_window, m_midWidth, m_midHeight);
 }
 
 GLFWwindow* GLFWWindow::GetGLFWHandle() const {
   return p_window;
+}
+
+void GLFWWindow::KeyPressCallback(GLFWwindow* window, int key, int scanCode, int action, int mods) {
+  UNUSED(mods);
+  UNUSED(scanCode);
+
+  GLFWWindow* wrapper = reinterpret_cast<GLFWWindow*>(glfwGetWindowUserPointer(window)); // NOLINT
+
+  if (action == GLFW_PRESS)
+  {
+    wrapper->CallKeyEventFunction(KeyEvent(key, GetKey(key), KeyEventType::KeyPress));
+  }
+  else if (action == GLFW_RELEASE)
+  {
+    wrapper->CallKeyEventFunction(KeyEvent(key, GetKey(key), KeyEventType::KeyRelease));
+  }
+}
+
+void GLFWWindow::SetCursorState(CursorState state) {
+  switch(state)
+  {
+    case CursorState::Visible:
+      glfwSetInputMode(p_window, GLFW_CURSOR, GLFW_CURSOR_NORMAL);
+    break;
+    case CursorState::Hidden:
+      glfwSetInputMode(p_window, GLFW_CURSOR, GLFW_CURSOR_HIDDEN);
+    break;
+    case CursorState::Disabled:
+      glfwSetInputMode(p_window, GLFW_CURSOR, GLFW_CURSOR_DISABLED);
+    break;
+    
+    default:
+    break;
+  }
 }
 
 void GLFWWindow::MouseEventCallback(GLFWwindow* window, int button, int action, int mods) {

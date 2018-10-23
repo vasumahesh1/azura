@@ -5,15 +5,16 @@
 #include "Containers/Vector.h"
 #include "Generic/Renderer.h"
 #include "VkCore.h"
-#include "VkPlatform.h"
-#include "VkScopedBuffer.h"
-#include "VkScopedPipeline.h"
-#include "VkShader.h"
+#include "Vulkan/VkPlatform.h"
+#include "Vulkan/VkScopedBuffer.h"
+#include "Vulkan/VkScopedPipeline.h"
+#include "Vulkan/VkShader.h"
 #include "Log/Log.h"
-#include "VkDrawablePool.h"
-#include "VkTextureManager.h"
-#include "VkScopedSwapChain.h"
-#include "VkScopedRenderPass.h"
+#include "Vulkan/VkDrawablePool.h"
+#include "Vulkan/VkTextureManager.h"
+#include "Vulkan/VkScopedSwapChain.h"
+#include "Vulkan/VkScopedRenderPass.h"
+#include "Vulkan/VkComputePool.h"
 
 namespace Azura {
 class Window;
@@ -34,6 +35,7 @@ public:
              Memory::Allocator& mainAllocator,
              Memory::Allocator& drawAllocator,
              Window& window);
+
   ~VkRenderer();
 
   VkRenderer(const VkRenderer& other) = delete;
@@ -42,6 +44,7 @@ public:
   VkRenderer& operator=(VkRenderer&& other) noexcept = delete;
 
   DrawablePool& CreateDrawablePool(const DrawablePoolCreateInfo& createInfo) override;
+  ComputePool& CreateComputePool(const ComputePoolCreateInfo& createInfo) override;
 
   VkDevice GetDevice() const;
   String GetRenderingAPI() const override;
@@ -59,8 +62,8 @@ private:
   Memory::HeapMemoryBuffer m_perFrameBuffer;
   Memory::MonotonicAllocator m_perFrameAllocator;
 
-  Window& m_window;
   Containers::Vector<VkDrawablePool> m_drawablePools;
+  Containers::Vector<VkComputePool> m_computePools;
 
 #ifdef BUILD_DEBUG
   VkDebugReportCallbackEXT m_callback;
@@ -91,9 +94,6 @@ private:
   VkQueue m_transferQueue;
 
   VkPhysicalDeviceProperties m_physicalDeviceProperties{};
-
-  std::reference_wrapper<Memory::Allocator> m_mainAllocator;
-  std::reference_wrapper<Memory::Allocator> m_drawPoolAllocator;
 
   VkPipelineLayout m_pipelineLayout{};
   VkDescriptorPool m_descriptorPool{};

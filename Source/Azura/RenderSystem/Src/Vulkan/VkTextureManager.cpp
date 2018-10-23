@@ -4,10 +4,8 @@
 namespace Azura {
 namespace Vulkan {
 
-VkTextureManager::VkTextureManager(VkDevice device, const TextureRequirements& requirements, Log log)
-  : TextureManager(requirements),
-    m_device(device),
-    log_VulkanRenderSystem(std::move(log)) {
+VkTextureManager::VkTextureManager(const TextureRequirements& requirements)
+  : TextureManager(requirements) {
 }
 } // namespace Vulkan
 } // namespace Azura

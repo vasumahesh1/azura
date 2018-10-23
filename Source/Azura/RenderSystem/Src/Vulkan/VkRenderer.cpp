@@ -23,12 +23,13 @@ VkRenderer::VkRenderer(const ApplicationInfo& appInfo,
                        Memory::Allocator& mainAllocator,
                        Memory::Allocator& drawAllocator,
                        Window& window)
-  : Renderer(appInfo, deviceRequirements, appRequirements, swapChainRequirement, descriptorRequirements, mainAllocator),
+  : Renderer(appInfo, deviceRequirements, appRequirements, swapChainRequirement, descriptorRequirements, mainAllocator,
+             drawAllocator, window),
     log_VulkanRenderSystem(Log("VulkanRenderSystem")),
     m_perFrameBuffer(4096),
     m_perFrameAllocator(m_perFrameBuffer, 4096),
-    m_window(window),
     m_drawablePools(renderPassRequirements.m_maxPools, drawAllocator),
+    m_computePools(renderPassRequirements.m_maxPools, drawAllocator),
     m_swapChain(mainAllocator, log_VulkanRenderSystem),
     m_renderPasses(renderPassRequirements.m_passSequence.GetSize(), mainAllocator),
     m_descriptorSetLayouts(mainAllocator),
@@ -36,9 +37,7 @@ VkRenderer::VkRenderer(const ApplicationInfo& appInfo,
     m_renderFinishedSemaphores(mainAllocator),
     m_inFlightFences(mainAllocator),
     m_shaders(shaderRequirements.m_shaders.GetSize(), mainAllocator),
-    m_renderPassAttachmentImages(renderPassRequirements.m_targets.GetSize(), mainAllocator),
-    m_mainAllocator(mainAllocator),
-    m_drawPoolAllocator(drawAllocator) {
+    m_renderPassAttachmentImages(renderPassRequirements.m_targets.GetSize(), mainAllocator) {
   HEAP_ALLOCATOR(Temporary, Memory::MonotonicAllocator, 16384);
 
   Vector<const char*> extensions(4, allocatorTemporary);
@@ -49,7 +48,7 @@ VkRenderer::VkRenderer(const ApplicationInfo& appInfo,
   m_callback = VkCore::SetupDebug(m_instance, log_VulkanRenderSystem);
 #endif
 
-  m_surface = VkPlatform::CreateSurface(m_window.GetHandle(), m_instance, log_VulkanRenderSystem);
+  m_surface = VkPlatform::CreateSurface(m_window.get().GetHandle(), m_instance, log_VulkanRenderSystem);
 
   m_physicalDevice = VkCore::SelectPhysicalDevice(m_instance, m_surface, GetDeviceRequirements(),
                                                   log_VulkanRenderSystem);
@@ -96,12 +95,12 @@ VkRenderer::VkRenderer(const ApplicationInfo& appInfo,
 
     VkImageUsageFlags usageFlags = VK_IMAGE_USAGE_COLOR_ATTACHMENT_BIT | VK_IMAGE_USAGE_SAMPLED_BIT;
 
-    if (HasDepthComponent(bufferCreateInfo.m_format) || HasStencilComponent(bufferCreateInfo.m_format))
-    {
+    if (HasDepthComponent(bufferCreateInfo.m_format) || HasStencilComponent(bufferCreateInfo.m_format)) {
       usageFlags = VK_IMAGE_USAGE_DEPTH_STENCIL_ATTACHMENT_BIT | VK_IMAGE_USAGE_SAMPLED_BIT;
     }
 
-    LOG_DBG(log_VulkanRenderSystem, LOG_LEVEL, "Creating Attachment Input at: %d for %s", m_renderPassAttachmentImages.GetSize(), ToString(bufferCreateInfo.m_format).c_str());
+    LOG_DBG(log_VulkanRenderSystem, LOG_LEVEL, "Creating Attachment Input at: %d for %s", m_renderPassAttachmentImages.
+      GetSize(), ToString(bufferCreateInfo.m_format).c_str());
 
     m_renderPassAttachmentImages.PushBack(VkScopedImage(m_device, desc,
                                                         usageFlags,
@@ -220,7 +219,7 @@ DrawablePool& VkRenderer::CreateDrawablePool(const DrawablePoolCreateInfo& creat
                                        m_graphicsCommandPool,
                                        m_pipelineLayout, m_descriptorPool, m_descriptorSetLayouts,
                                        m_renderPasses, m_renderPassAttachmentImages, m_shaders,
-                                       GetApplicationRequirements(), m_window.GetViewport(), memProperties,
+                                       GetApplicationRequirements(), m_window.get().GetViewport(), memProperties,
                                        m_physicalDeviceProperties,
                                        m_swapChain, m_descriptorSlots, m_descriptorCount, m_drawPoolAllocator,
                                        m_mainAllocator, log_VulkanRenderSystem);
@@ -228,6 +227,12 @@ DrawablePool& VkRenderer::CreateDrawablePool(const DrawablePoolCreateInfo& creat
   m_drawablePools.PushBack(std::move(pool));
 
   return m_drawablePools.Last();
+}
+
+ComputePool& VkRenderer::CreateComputePool(const ComputePoolCreateInfo& createInfo) {
+  VkComputePool pool = VkComputePool(createInfo, m_descriptorCount, m_mainAllocator);
+  m_computePools.PushBack(std::move(pool));
+  return m_computePools.Last();
 }
 
 VkDevice VkRenderer::GetDevice() const {
@@ -288,11 +293,14 @@ void VkRenderer::CreateDescriptorInfo() {
 
   Vector<int> bindingSetSizes{m_descriptorSlots.GetSize(), allocatorTemporary};
 
+  int lastSet = -1;
   for (const auto& slot : m_descriptorSlots) {
-    if (slot.m_binding == DescriptorBinding::Same) {
+    if (lastSet == int(slot.m_setIdx)) {
       bindingSetSizes.Last() += 1;
       continue;
     }
+
+    lastSet = int(slot.m_setIdx);
 
     bindingSetSizes.PushBack(1);
   }

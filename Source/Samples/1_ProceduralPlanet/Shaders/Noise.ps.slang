@@ -1,4 +1,5 @@
 import Common;
+import Pass1;
 
 NoiseOuput_PS main(NoiseInput_PS input) : SV_Target
 {

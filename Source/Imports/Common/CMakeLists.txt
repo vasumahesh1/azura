@@ -34,7 +34,7 @@ set(GLFW_BUILD_EXAMPLES OFF CACHE BOOL "Build the GLFW example programs" FORCE)
 set(GLFW_BUILD_TESTS OFF CACHE BOOL "Build the GLFW test programs" FORCE)
 set(GLFW_BUILD_DOCS OFF CACHE BOOL "Build the GLFW documentation" FORCE)
 set(GLFW_INSTALL OFF CACHE BOOL "Generate installation target" FORCE)
-set(GLFW_VULKAN_STATIC ON CACHE BOOL "Use the Vulkan loader statically linked into application" FORCE)
+set(GLFW_VULKAN_STATIC OFF CACHE BOOL "Use the Vulkan loader statically linked into application" FORCE)
 add_subdirectory(glfw)
 AzuraSilenceClangTidy(glfw)
 AzuraSilenceEnumGuard(glfw)
@@ -42,3 +42,21 @@ AzuraEnableWarningsAsErrors()
 
 # STB Include
 set(STB_INCLUDE_DIR ${CMAKE_CURRENT_SOURCE_DIR}/stb/ CACHE STRING "STB Files Directory" FORCE)
+
+
+# GLTF SDK
+if ("${BUILD_PLATFORM}" STREQUAL "Windows")
+  if ("${BUILD_ARCH}" STREQUAL "64")
+    set(CMAKE_GENERATOR_PLATFORM "x64")
+  elseif("${BUILD_ARCH}" STREQUAL "32")
+    set(CMAKE_GENERATOR_PLATFORM "Win32")
+  endif()
+endif()
+
+AzuraDisableWarningsAsErrors()
+set(ENABLE_UNIT_TESTS OFF CACHE BOOL "Disable Tests for GLTF SDK" FORCE)
+set(ENABLE_SAMPLES OFF CACHE BOOL "Disable Samples for GLTF SDK" FORCE)
+add_subdirectory(glTF-SDK)
+AzuraSilenceClangTidy(GLTFSDK)
+AzuraSilenceEnumGuard(GLTFSDK)
+AzuraEnableWarningsAsErrors()

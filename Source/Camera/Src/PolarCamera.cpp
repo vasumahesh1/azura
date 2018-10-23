@@ -1,6 +1,7 @@
 #include "Camera/PolarCamera.h"
 #include "Math/Transform.h"
 #include "Math/Geometry.h"
+#include "Utils/Macros.h"
 
 namespace Azura {
 namespace {
@@ -12,6 +13,11 @@ const Vector3f UNIT_EYE   = Vector3f(0, 0, 0);
 
 PolarCamera::PolarCamera(U32 width, U32 height)
   : Camera(width, height) {
+  PolarCamera::Recompute();
+}
+
+PolarCamera::PolarCamera(U32 width, U32 height, float thethaDeg, float phiDeg, float zoom)
+  : Camera(width, height), m_theta(Math::ToRadians(thethaDeg)), m_phi(Math::ToRadians(phiDeg)), m_zoom(zoom) {
   PolarCamera::Recompute();
 }
 
@@ -44,15 +50,31 @@ void PolarCamera::OnMouseEvent(MouseEvent mouseEvent) {
   const float anglePerPixel = 5;
   RotateAboutUp(mouseEvent.m_eventX * anglePerPixel * m_sensitivity);
   RotateAboutRight(mouseEvent.m_eventY * anglePerPixel * m_sensitivity);
+  Recompute();
+}
+
+void PolarCamera::OnKeyEvent(KeyEvent keyEvent) {
+  UNUSED(keyEvent);
+}
+
+void PolarCamera::SetZoom(float value) {
+  m_zoom = value;
+}
+
+void PolarCamera::SetZoomAndRecompute(float value) {
+  SetZoom(value);
+  Recompute();
 }
 
 void PolarCamera::RotateAboutUp(float deg) {
   m_theta += Math::ToRadians(deg);
-  Recompute();
 }
 
 void PolarCamera::RotateAboutRight(float deg) {
   m_phi += Math::ToRadians(deg);
-  Recompute();
+}
+
+void PolarCamera::Update(float timeDelta) {
+  UNUSED(timeDelta);
 }
 } // namespace Azura

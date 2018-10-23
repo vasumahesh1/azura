@@ -28,13 +28,13 @@ public:
   const TextureDesc* GetInfo(U32 handle) const;
   const U8* GetData(U32 handle) const;
 
+  Log log_TextureManager;
+
 private:
   const U32 m_maxTextures;
   Memory::HeapMemoryBuffer m_textureBuffer;
   Memory::MonotonicAllocator m_textureAllocator;
   Containers::Vector<TextureEntry> m_storedTextures;
-
-  Log log_TextureManager;
 };
   
 } // namespace Azura

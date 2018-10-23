@@ -2,22 +2,12 @@
 
 set(VULKAN_SOURCES
     # Include
-    "Inc/Generic/Constants.h"
-    "Inc/Generic/Drawable.h"
-    "Inc/Generic/GenericTypes.h"
-    "Inc/Generic/GLFWWindow.h"
-    "Inc/Generic/PoolPrimitives.h"
-    "Inc/Generic/Renderer.h"
-    "Inc/Generic/RenderSystem.h"
-    "Inc/Generic/Shader.h"
-    "Inc/Generic/TextureManager.h"
-    "Inc/Generic/Window.h"
-    "Inc/Generic/Windows/Win32GLFWWindow.h"
     "Inc/Vulkan/VkBasicDrawablePool.h"
     "Inc/Vulkan/VkCore.h"
     "Inc/Vulkan/VkDebug.h"
     "Inc/Vulkan/VkDrawablePool.h"
     "Inc/Vulkan/VkIndirectDrawablePool.h"
+    "Inc/Vulkan/VkComputePool.h"
     "Inc/Vulkan/VkMacros.h"
     "Inc/Vulkan/VkPlatform.h"
     "Inc/Vulkan/VkRenderer.h"
@@ -31,21 +21,14 @@ set(VULKAN_SOURCES
     "Inc/Vulkan/VkTextureManager.h"
     "Inc/Vulkan/VkTypeMapping.h"
     "Inc/Vulkan/VkTypes.h"
+
     # Source
-    "Src/Generic/Drawable.cpp"
-    "Src/Generic/GenericTypes.cpp"
-    "Src/Generic/GLFWWindow.cpp"
-    "Src/Generic/PoolPrimitives.cpp"
-    "Src/Generic/Renderer.cpp"
-    "Src/Generic/Shader.cpp"
-    "Src/Generic/TextureManager.cpp"
-    "Src/Generic/Window.cpp"
-    "Src/Generic/Windows/Win32GLFWWindow.cpp"
     "Src/Vulkan/VkBasicDrawablePool.cpp"
     "Src/Vulkan/VkCore.cpp"
     "Src/Vulkan/VkDebug.cpp"
     "Src/Vulkan/VkDrawablePool.cpp"
     "Src/Vulkan/VkIndirectDrawablePool.cpp"
+    "Src/Vulkan/VkComputePool.cpp"
     "Src/Vulkan/VkRenderer.cpp"
     "Src/Vulkan/VkRenderSystem.cpp"
     "Src/Vulkan/VkScopedBuffer.cpp"
@@ -64,12 +47,10 @@ set(VULKAN_SOURCES
 
 source_group(Generic\\Inc REGULAR_EXPRESSION "Inc/Generic/.*")
 source_group(Generic\\Src REGULAR_EXPRESSION "Src/Generic/.*")
-source_group(D3D12\\Inc REGULAR_EXPRESSION "Inc/D3D12/.*")
-source_group(D3D12\\Src REGULAR_EXPRESSION "Src/D3D12/.*")
 source_group(Vulkan\\Inc REGULAR_EXPRESSION "Inc/Vulkan/.*")
 source_group(Vulkan\\Src REGULAR_EXPRESSION "Src/Vulkan/.*")
 
-add_library(VulkanRenderSystem ${VULKAN_SOURCES})
+add_library(VulkanRenderSystem ${GENERIC_SOURCES} ${VULKAN_SOURCES})
 
 AzuraAddLoggingSupport(VulkanRenderSystem 50)
 

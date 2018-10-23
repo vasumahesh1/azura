@@ -86,7 +86,6 @@ public:
   void AddShader(U32 shaderId) override;
 
   void Submit() override;
-  void AddBufferBinding(SlotID slotId, const Containers::Vector<RawStorageFormat>& strides) override;
 
   void CleanUp() const;
 
@@ -104,6 +103,11 @@ public:
   void SetIndexData(DrawableID drawableId, const U8* buffer, U32 size) override;
 
   void AppendToMainBuffer(const U8* buffer, U32 bufferSize);
+
+  void BeginUpdates() override;
+  void UpdateUniformData(DrawableID drawableId, SlotID slot, const U8* buffer, U32 size) override;
+  void UpdateTextureData(SlotID slot, const U8* buffer) override;
+  void SubmitUpdates() override;
 
 private:
   void SubmitTextureData();

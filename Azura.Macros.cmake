@@ -32,6 +32,15 @@ macro(AzuraSilenceWarningsForMathfu TargetName)
   endif()
 endmacro(AzuraSilenceWarningsForMathfu)
 
+macro(AzuraSilenceWarningsForGLTFSDK TargetName)
+  if(MSVC)
+    target_compile_options(${TargetName}
+      PUBLIC
+      "/wd4061"
+    )
+  endif()
+endmacro()
+
 macro(AzuraDisableWarningsAsErrors)
   if(MSVC)
     string(REPLACE " /WX"
@@ -73,7 +82,7 @@ endmacro(AzuraAddUnitTest)
 
 macro(AzuraAddGraphicsTest TargetName)
   if ((NOT DEFINED CI_PROVIDER))
-  add_test(AutoGraphicsTests ${TargetName})
+  add_test(${TargetName} ${TargetName})
   target_compile_definitions(${TargetName} PUBLIC BUILD_GRAPHICS_TEST=1 BUILD_TEST=1)
   endif()
 endmacro(AzuraAddGraphicsTest)

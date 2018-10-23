@@ -1,4 +1,5 @@
 import Common;
+import Pass1;
 import Simplex3D;
 
 // ----------  Shader Constants  ----------

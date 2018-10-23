@@ -4,18 +4,24 @@
 namespace Azura {
 Window::Window(String title, const U32 width, const U32 height)
   : log_Window(std::move(Log("Window"))),
+    m_midWidth(width / 2.0f),
+    m_midHeight(height / 2.0f),
     m_width(width),
     m_height(height),
     m_title(std::move(title)),
     p_windowResource(nullptr) {
 }
 
-void Window::SetUpdateCallback(std::function<void()> eventUpdate) {
+void Window::SetUpdateCallback(std::function<void(float)> eventUpdate) {
   p_updateFunc = eventUpdate;
 }
 
 void Window::SetMouseEventCallback(std::function<void(MouseEvent)> eventFunc) {
   p_mouseEventFunc = eventFunc;
+}
+
+void Window::SetKeyEventCallback(std::function<void(KeyEvent)> eventFunc) {
+  p_keyEventFunc = eventFunc;
 }
 
 ViewportDimensions Window::GetViewport() const {
@@ -60,8 +66,8 @@ const char* Window::GetTitle() const {
   return m_title.c_str();
 }
 
-void Window::CallUpdateFunction() const {
-  p_updateFunc();
+void Window::CallUpdateFunction(float timeDelta) const {
+  p_updateFunc(timeDelta);
 }
 
 void Window::CallMouseEventFunction(MouseEvent e) const {
@@ -70,5 +76,13 @@ void Window::CallMouseEventFunction(MouseEvent e) const {
   }
 
   p_mouseEventFunc(e);
+}
+
+void Window::CallKeyEventFunction(KeyEvent e) const {
+  if (!p_keyEventFunc) {
+    return;
+  }
+
+  p_keyEventFunc(e);
 }
 } // namespace Azura

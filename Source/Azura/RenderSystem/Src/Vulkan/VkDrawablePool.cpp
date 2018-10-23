@@ -236,6 +236,22 @@ VkDrawablePool::VkDrawablePool(const DrawablePoolCreateInfo& createInfo,
 
     ++idx;
   }
+
+  idx = 0;
+  for(const auto& vertexSlot : createInfo.m_vertexDataSlots)
+  {
+    m_pipelineFactory.BulkAddAttributeDescription(vertexSlot, idx);
+
+    U32 totalBufferStride = 0;
+
+    for (const auto& semanticStride : vertexSlot.m_stride) {
+      totalBufferStride += GetFormatSize(semanticStride.m_format);
+    }
+
+    m_pipelineFactory.AddBindingDescription(totalBufferStride, m_vertexDataSlots[idx], idx);
+
+    ++idx;
+  }
 }
 
 void VkDrawablePool::AddShader(const U32 shaderId) {
@@ -259,6 +275,24 @@ void VkDrawablePool::AppendToMainBuffer(const U8* buffer, U32 bufferSize) {
 
   // Record Offset Changes
   m_mainBufferOffset += bufferSize;
+}
+
+void VkDrawablePool::BeginUpdates() {
+}
+
+void VkDrawablePool::UpdateUniformData(DrawableID drawableId, SlotID slot, const U8* buffer, U32 size) {
+  UNUSED(drawableId);
+  UNUSED(slot);
+  UNUSED(buffer);
+  UNUSED(size);
+}
+
+void VkDrawablePool::UpdateTextureData(SlotID slot, const U8* buffer) {
+  UNUSED(slot);
+  UNUSED(buffer);
+}
+
+void VkDrawablePool::SubmitUpdates() {
 }
 
 
@@ -412,25 +446,6 @@ void VkDrawablePool::Submit() {
   }
 }
 
-void VkDrawablePool::AddBufferBinding(SlotID slotId, const Containers::Vector<RawStorageFormat>& strides) {
-  const int idx = GetVertexSlotIndex(slotId);
-
-  if (idx < 0) {
-    LOG_ERR(log_VulkanRenderSystem, LOG_LEVEL, "Invalid Slot ID for Buffer Binding: %d", slotId);
-    return;
-  }
-
-  m_pipelineFactory.BulkAddAttributeDescription(strides, idx);
-
-  U32 totalBufferStride = 0;
-
-  for (const auto& stride : strides) {
-    totalBufferStride += GetFormatSize(stride);
-  }
-
-  m_pipelineFactory.AddBindingDescription(totalBufferStride, m_vertexDataSlots[idx], idx);
-}
-
 void VkDrawablePool::CleanUp() const {
   m_buffer.CleanUp();
   m_stagingBuffer.CleanUp();
@@ -465,18 +480,11 @@ void VkDrawablePool::BindVertexData(DrawableID drawableId, SlotID slot, const U8
 
   auto& drawable = m_drawables[drawableId];
 
-  const int idx = GetVertexSlotIndex(slot);
-
-  if (idx < 0) {
-    LOG_ERR(log_VulkanRenderSystem, LOG_LEVEL, "Invalid Slot ID for Binding Vertex Data: %d", slot);
-    return;
-  }
-
   BufferInfo info    = BufferInfo();
   info.m_maxByteSize = size;
   info.m_byteSize    = size;
   info.m_offset      = m_mainBufferOffset;
-  info.m_binding     = idx;
+  info.m_binding     = slot;
 
   drawable.AddVertexBufferInfo(std::move(info));
   AppendToMainBuffer(buffer, size);
@@ -487,18 +495,11 @@ void VkDrawablePool::BindInstanceData(DrawableID drawableId, SlotID slot, const 
 
   auto& drawable = m_drawables[drawableId];
 
-  const int idx = GetVertexSlotIndex(slot);
-
-  if (idx < 0) {
-    LOG_ERR(log_VulkanRenderSystem, LOG_LEVEL, "Invalid Slot ID for Binding Instance Data: %d", slot);
-    return;
-  }
-
   BufferInfo info    = BufferInfo();
   info.m_maxByteSize = size;
   info.m_byteSize    = size;
   info.m_offset      = m_mainBufferOffset;
-  info.m_binding     = idx;
+  info.m_binding     = slot;
 
   drawable.AddInstanceBufferInfo(std::move(info));
   AppendToMainBuffer(buffer, size);

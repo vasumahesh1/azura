@@ -36,6 +36,18 @@ enum class PresentModes {
   SharedContinuous
 };
 
+enum class PipelineType
+{
+  Graphics,
+  Compute
+};
+
+enum class RenderPassType
+{
+  Graphics,
+  Compute
+};
+
 enum class ShaderStage : U32 {
   All = 0x00001111,
   Vertex = 0x00000001,
@@ -56,8 +68,7 @@ enum class BufferUsageRate {
   PerInstance
 };
 
-enum BlendFactor
-{
+enum class BlendFactor {
   Zero,
   One,
   SrcColor,
@@ -79,8 +90,7 @@ enum BlendFactor
   OneMinusSrc1Alpha
 };
 
-enum BlendOp
-{
+enum class BlendOp {
   Add,
   Subtract,
   ReverseSubtract,
@@ -88,15 +98,13 @@ enum BlendOp
   Max
 };
 
-struct BlendingEq
-{
+struct BlendingEq {
   BlendFactor m_srcFactor{};
   BlendFactor m_dstFactor{};
   BlendOp m_op{};
 };
 
-struct BlendState
-{
+struct BlendState {
   bool m_enable{false};
   BlendingEq m_color{};
   BlendingEq m_alpha{};
@@ -160,15 +168,11 @@ enum class DescriptorType {
   Sampler,
   SampledImage,
   CombinedImageSampler,
-  PushConstant
+  PushConstant,
+  UnorderedView
 };
 
 const U32 MAX_DESCRIPTOR_TYPE_COUNT = 5;
-
-enum class DescriptorBinding {
-  Default,
-  Same
-};
 
 struct Bounds3D {
   U32 m_width{1};
@@ -216,22 +220,27 @@ struct ViewportDimensions {
 
 using SlotID = U32;
 
+struct SlotSemantic {
+  const char* m_name;
+  RawStorageFormat m_format;
+  U32 m_id{0};
+};
+
 struct VertexSlot {
-  U32 m_key;
   BufferUsageRate m_rate;
+  SmallVector<SlotSemantic, 10> m_stride;
+  U32 m_strideSize{0};
 };
 
 struct DescriptorSlotCreateInfo {
   DescriptorType m_type{DescriptorType::UniformBuffer};
   ShaderStage m_stages{ShaderStage::All};
-  DescriptorBinding m_binding{DescriptorBinding::Default};
 };
 
 struct DescriptorSlot {
   U32 m_key{0};
   DescriptorType m_type{DescriptorType::UniformBuffer};
   ShaderStage m_stages{ShaderStage::All};
-  DescriptorBinding m_binding{DescriptorBinding::Default};
   U32 m_setIdx{0};
   U32 m_bindIdx{0};
 };
@@ -245,7 +254,32 @@ struct TextureDesc {
   RawStorageFormat m_format{RawStorageFormat::R8G8B8A8_UNORM};
 };
 
+enum class TextureAddressMode {
+  Wrap,
+  Mirror,
+  Clamp,
+  Border,
+  MirrorOnce
+};
+
+enum class TextureFilter {
+  MinMagMipPoint,
+  MinMagPoint_MipLinear,
+  MinPoint_MagLinear_MipPoint,
+  MinPoint_MagMipLinear,
+  MinLinear_MagMipPoint,
+  MinLinear_MagPoint_MipLinear,
+  MinMagLinear_MipPoint,
+  MinMagMipLinear,
+  Anisotropic,
+};
+
 struct SamplerDesc {
+  TextureAddressMode m_addressModeU{TextureAddressMode::Wrap};
+  TextureAddressMode m_addressModeV{TextureAddressMode::Wrap};
+  TextureAddressMode m_addressModeW{TextureAddressMode::Wrap};
+
+  TextureFilter m_filter{TextureFilter::MinMagMipLinear};
 };
 
 struct BufferInfo {
@@ -262,6 +296,18 @@ struct BufferInfo {
   }
 };
 
+struct BufferUpdate
+{
+  DescriptorType m_type;
+
+  U32 m_idx;
+  U32 m_gpuOffset;
+  U32 m_gpuByteSize;
+
+  U32 m_updateOffset;
+  U32 m_updateByteSize;
+};
+
 struct TextureBufferInfo final : public BufferInfo {
   TextureDesc m_desc;
   U32 m_set{0};
@@ -270,6 +316,7 @@ struct TextureBufferInfo final : public BufferInfo {
 struct SamplerInfo {
   U32 m_set{0};
   U32 m_binding{0};
+  SamplerDesc m_desc{};
 };
 
 struct UniformBufferInfo final : public BufferInfo {
@@ -310,7 +357,11 @@ struct ApplicationInfo {
   Version m_version;
 };
 
-const U32 DEFAULT_FRAMES_IN_FLIGHT = 2;
+constexpr U32 DEFAULT_FRAMES_IN_FLIGHT = 2;
+constexpr U32 MAX_RENDER_PASS_INPUTS   = 4;
+constexpr U32 MAX_RENDER_PASS_OUTPUTS  = 4;
+constexpr U32 MAX_RENDER_PASS_SETS     = 8;
+constexpr U32 MAX_RENDER_PASS_SHADERS  = 4;
 
 struct ApplicationRequirements {
 };
@@ -331,6 +382,9 @@ struct ShaderCreateInfo {
 
 struct RenderTargetCreateInfo {
   RawStorageFormat m_format{RawStorageFormat::UNKNOWN};
+  int m_width{-1};
+  int m_height{-1};
+  int m_depth{1};
 };
 
 struct PipelinePassInput {
@@ -341,30 +395,36 @@ struct PipelinePassInput {
 struct ClearData {
   float m_color[4]{0.0f, 0.0f, 0.0f, 1.0f};
   float m_depth{1.0f};
-  U32 m_stencil{0};
+  U8 m_stencil{0};
 };
 
 struct PipelinePassCreateInfo {
-  using Shaders = SmallVector<U32, 5>;
-  using Outputs = SmallVector<U32, 4>;
-  using Inputs = SmallVector<PipelinePassInput, 4>;
-  using Descriptors = SmallVector<U32, 4>;
+  using Shaders = SmallVector<U32, MAX_RENDER_PASS_SHADERS>;
+  using Outputs = SmallVector<U32, MAX_RENDER_PASS_OUTPUTS>;
+  using Inputs = SmallVector<PipelinePassInput, MAX_RENDER_PASS_INPUTS>;
+  using DescriptorSets = SmallVector<U32, MAX_RENDER_PASS_SETS>;
 
-  SmallVector<U32, 5> m_shaders{};
+  Shaders m_shaders{};
 
-  SmallVector<PipelinePassInput, 4> m_inputs{};
-  SmallVector<U32, 4> m_outputs{};
-  SmallVector<U32, 4> m_descriptors{};
+  Inputs m_inputs{};
+  Outputs m_outputs{};
+  DescriptorSets m_descriptorSets{};
 
   ClearData m_clearData{};
   BlendState m_blendState{};
+  RenderPassType m_type{RenderPassType::Graphics};
 };
 
 struct DescriptorRequirements {
-  DescriptorRequirements(U32 numDescriptors, Memory::Allocator& alloc);
+  DescriptorRequirements(U32 numDescriptors, U32 numSets, Memory::Allocator& alloc);
   U32 AddDescriptor(const DescriptorSlotCreateInfo& info);
+  U32 AddSet(const std::initializer_list<U32>& sets);
 
   Containers::Vector<DescriptorSlotCreateInfo> m_descriptorSlots;
+  Containers::Vector<Containers::Vector<U32>> m_descriptorSets;
+
+private:
+  std::reference_wrapper<Memory::Allocator> m_allocator;
 };
 
 struct ShaderRequirements {
@@ -391,6 +451,20 @@ struct DescriptorCount {
   U32 m_numCombinedSamplerSlots{0};
   U32 m_numSampledImageSlots{0};
   U32 m_numPushConstantsSlots{0};
+  U32 m_numUnorderedViewSlots{0};
+};
+
+struct ThreadGroupDimensions
+{
+  U32 m_x{1};
+  U32 m_y{1};
+  U32 m_z{1};
+};
+
+struct DescriptorTableEntry {
+  int m_count{1};
+  int m_cumulativeCount{0};
+  DescriptorType m_type;
 };
 
 } // namespace Azura

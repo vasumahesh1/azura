@@ -33,6 +33,7 @@ public:
   void AddVertexBufferInfo(BufferInfo&& info);
   void AddInstanceBufferInfo(BufferInfo&& info);
   void AddUniformBufferInfo(UniformBufferInfo&& info);
+  U32 GetSingleUniformBufferInfo(const DescriptorSlot & slot);
   void SetIndexBufferInfo(BufferInfo&& info);
 
   U32 GetVertexCount() const;
@@ -68,21 +69,23 @@ private:
 struct DrawablePoolCreateInfo {
   U32 m_byteSize{0};
   U32 m_numDrawables{0};
-  CullMode m_cullMode{CullMode::BackBit};
+  CullMode m_cullMode{CullMode::None};
 
   DrawType m_drawType{DrawType::InstancedIndexed};
 
-  Containers::Vector<VertexSlot> m_vertexDataSlots;
+  SmallVector<VertexSlot, 4> m_vertexDataSlots;
   Containers::Vector<U32> m_renderPasses;
 
   ~DrawablePoolCreateInfo() = default;
 
   DrawablePoolCreateInfo(const DrawablePoolCreateInfo& other) = delete;
-  DrawablePoolCreateInfo(DrawablePoolCreateInfo&& other) noexcept = default;
+  DrawablePoolCreateInfo(DrawablePoolCreateInfo&& other) noexcept = delete;
   DrawablePoolCreateInfo& operator=(const DrawablePoolCreateInfo& other) = delete;
-  DrawablePoolCreateInfo& operator=(DrawablePoolCreateInfo&& other) noexcept = default;
+  DrawablePoolCreateInfo& operator=(DrawablePoolCreateInfo&& other) noexcept = delete;
 
   DrawablePoolCreateInfo(Memory::Allocator& alloc);
+
+  U32 AddInputSlot(const VertexSlot& slotInfo);
 };
 
 class DrawablePool {
@@ -98,8 +101,6 @@ public:
   DrawablePool& operator=(DrawablePool&& other) noexcept = default;
 
   virtual DrawableID CreateDrawable(const DrawableCreateInfo& createInfo) = 0;
-
-  virtual void AddBufferBinding(SlotID slot, const Containers::Vector<RawStorageFormat>& strides) = 0;
 
   // Drawable Scope Binds
   void BindVertexData(DrawableID drawableId, SlotID slot, const Containers::Vector<U8>& buffer);
@@ -119,7 +120,15 @@ public:
   virtual void BindTextureData(SlotID slot, const TextureDesc& desc, const U8* buffer) = 0;
   virtual void BindSampler(SlotID slot, const SamplerDesc& desc) = 0;
 
+  virtual void BeginUpdates() = 0;
+  void UpdateUniformData(DrawableID drawableId, SlotID slot, const Containers::Vector<U8>& buffer);
+  virtual void UpdateUniformData(DrawableID drawableId, SlotID slot, const U8* buffer, U32 size) = 0;
+  virtual void UpdateTextureData(SlotID slot, const U8* buffer) = 0;
+
+  U32 GetSingleTextureBufferInfo(const DescriptorSlot & slot);
+
   virtual void Submit() = 0;
+  virtual void SubmitUpdates() = 0;
 
   U32 GetSize() const;
   bool CanRenderInPass(U32 renderPassId) const;
@@ -127,8 +136,6 @@ public:
 protected:
   Memory::Allocator& GetAllocator() const;
   DrawType GetDrawType() const;
-
-  int GetVertexSlotIndex(SlotID id) const;
 
   U32 m_numVertexSlots;
   U32 m_numInstanceSlots;
@@ -140,6 +147,8 @@ protected:
 
   Containers::Vector<TextureBufferInfo> m_textureBufferInfos;
   Containers::Vector<SamplerInfo> m_samplerInfos;
+
+  Containers::Vector<BufferUpdate> m_bufferUpdates;
 
   CullMode m_cullMode;
 

@@ -30,5 +30,8 @@ AzuraAddLoggingSupport(ProceduralPlanet 50)
 AzuraAddSlangShaders(ProceduralPlanet VULKAN ${PROJECT_SHADERS})
 AzuraAddSlangShaders(ProceduralPlanet GLSL ${PROJECT_SHADERS})
 
+AzuraAddSlangShaders(ProceduralPlanet HLSL ${PROJECT_SHADERS})
+AzuraAddSlangShaders(ProceduralPlanet DXBC ${PROJECT_SHADERS})
+
 target_include_directories(ProceduralPlanet PUBLIC ${PROJECT_SOURCE_DIR}/Inc)
-target_link_libraries(ProceduralPlanet Camera VulkanRenderSystem Log glfw Math)
+target_link_libraries(ProceduralPlanet Camera D3D12RenderSystem Log glfw Math)

@@ -52,6 +52,16 @@ bool HasStencilComponent(RawStorageFormat format)
   }
 }
 
+bool HasDepthOrStencilComponent(RawStorageFormat format)
+{
+  return HasDepthComponent(format) || HasStencilComponent(format);
+}
+
+bool HasDepthAndStencilComponent(RawStorageFormat format)
+{
+  return HasDepthComponent(format) || HasStencilComponent(format);
+}
+
 U32 GetFormatSize(RawStorageFormat format) {
   return GetFormatSizeBits(format) / 8;
 }

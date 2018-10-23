@@ -23,9 +23,11 @@ std::unique_ptr<Azura::Window> CreateDefaultWindow()
 {
   std::unique_ptr<Azura::Window> windowPtr = RenderSystem::CreateApplicationWindow(TEST_SUITE, WINDOW_WIDTH, WINDOW_HEIGHT);
 
-  windowPtr->SetUpdateCallback([] ()
+  windowPtr->SetUpdateCallback([] (float timeSinceLastFrame)
   {
+    UNUSED(timeSinceLastFrame);
   });
+
 
   if (!windowPtr->Initialize())
   {
@@ -66,8 +68,10 @@ TEST_F(RendererTest, BasicRenderTest) {
 
   const ApplicationRequirements applicationRequirements = {};
 
-  DescriptorRequirements descriptorRequirements = DescriptorRequirements(3, allocatorTemporary);
+  DescriptorRequirements descriptorRequirements = DescriptorRequirements(3, 1, allocatorTemporary);
   const U32 UBO_SLOT = descriptorRequirements.AddDescriptor({ DescriptorType::UniformBuffer, ShaderStage::Vertex });
+
+  const U32 UBO_SET = descriptorRequirements.AddSet({ UBO_SLOT });
 
   ShaderRequirements shaderRequirements = ShaderRequirements(2, allocatorTemporary);
   const U32 VERTEX_SHADER_ID = shaderRequirements.AddShader({ ShaderStage::Vertex, "BasicRenderTest.vs", AssetLocation::Shaders });
@@ -79,7 +83,7 @@ TEST_F(RendererTest, BasicRenderTest) {
     PipelinePassCreateInfo::Shaders{VERTEX_SHADER_ID, PIXEL_SHADER_ID},  // SHADERS
     PipelinePassCreateInfo::Inputs{},                                    // INPUT TARGETS
     PipelinePassCreateInfo::Outputs{},                     // OUTPUT TARGETS
-    PipelinePassCreateInfo::Descriptors{UBO_SLOT},                        // DESCRIPTORS
+    PipelinePassCreateInfo::DescriptorSets{UBO_SET},                        // DESCRIPTORS
     ClearData{{0.2f, 0.2f, 0.2f, 1.0f}, 1.0f, 0}
     });
 
@@ -119,8 +123,10 @@ TEST_F(RendererTest, BasicInstancingTest) {
 
   const ApplicationRequirements applicationRequirements = {};
 
-  DescriptorRequirements descriptorRequirements = DescriptorRequirements(3, allocatorTemporary);
+  DescriptorRequirements descriptorRequirements = DescriptorRequirements(3, 1, allocatorTemporary);
   const U32 UBO_SLOT = descriptorRequirements.AddDescriptor({ DescriptorType::UniformBuffer, ShaderStage::Vertex });
+
+  const U32 UBO_SET = descriptorRequirements.AddSet({ UBO_SLOT });
 
   ShaderRequirements shaderRequirements = ShaderRequirements(2, allocatorTemporary);
   const U32 VERTEX_SHADER_ID = shaderRequirements.AddShader({ ShaderStage::Vertex, "BasicInstancingTest.vs", AssetLocation::Shaders });
@@ -132,7 +138,7 @@ TEST_F(RendererTest, BasicInstancingTest) {
     PipelinePassCreateInfo::Shaders{VERTEX_SHADER_ID, PIXEL_SHADER_ID},  // SHADERS
     PipelinePassCreateInfo::Inputs{},                                    // INPUT TARGETS
     PipelinePassCreateInfo::Outputs{},                     // OUTPUT TARGETS
-    PipelinePassCreateInfo::Descriptors{UBO_SLOT},                        // DESCRIPTORS
+    PipelinePassCreateInfo::DescriptorSets{UBO_SET},                        // DESCRIPTORS
     ClearData{{0.2f, 0.2f, 0.2f, 1.0f}, 1.0f, 0}
     });
 
@@ -172,10 +178,14 @@ TEST_F(RendererTest, BasicTextureTest) {
 
   const ApplicationRequirements applicationRequirements = {};
 
-  DescriptorRequirements descriptorRequirements = DescriptorRequirements(3, allocatorTemporary);
+  DescriptorRequirements descriptorRequirements = DescriptorRequirements(3, 3, allocatorTemporary);
   const U32 UBO_SLOT = descriptorRequirements.AddDescriptor({ DescriptorType::UniformBuffer, ShaderStage::Vertex });
   const U32 SAMPLER_SLOT = descriptorRequirements.AddDescriptor({DescriptorType::Sampler, ShaderStage::Pixel});
-  const U32 BASIC_TEXTURE_SLOT = descriptorRequirements.AddDescriptor({DescriptorType::SampledImage, ShaderStage::Pixel, DescriptorBinding::Same});
+  const U32 BASIC_TEXTURE_SLOT = descriptorRequirements.AddDescriptor({DescriptorType::SampledImage, ShaderStage::Pixel});
+
+  const U32 UBO_SET = descriptorRequirements.AddSet({ UBO_SLOT });
+  const U32 SAMPLER_SET = descriptorRequirements.AddSet({ SAMPLER_SLOT });
+  const U32 BASIC_TEXTURE_SET = descriptorRequirements.AddSet({ BASIC_TEXTURE_SLOT });
 
   ShaderRequirements shaderRequirements = ShaderRequirements(2, allocatorTemporary);
   const U32 VERTEX_SHADER_ID = shaderRequirements.AddShader({ ShaderStage::Vertex, "BasicTextureTest.vs", AssetLocation::Shaders });
@@ -187,7 +197,7 @@ TEST_F(RendererTest, BasicTextureTest) {
     PipelinePassCreateInfo::Shaders{VERTEX_SHADER_ID, PIXEL_SHADER_ID},  // SHADERS
     PipelinePassCreateInfo::Inputs{},                                    // INPUT TARGETS
     PipelinePassCreateInfo::Outputs{},                     // OUTPUT TARGETS
-    PipelinePassCreateInfo::Descriptors{UBO_SLOT, SAMPLER_SLOT, BASIC_TEXTURE_SLOT},                        // DESCRIPTORS
+    PipelinePassCreateInfo::DescriptorSets{UBO_SET, SAMPLER_SET, BASIC_TEXTURE_SET},                        // DESCRIPTORS
     ClearData{{0.2f, 0.2f, 0.2f, 1.0f}, 1.0f, 0}
     });
 
@@ -227,10 +237,14 @@ TEST_F(RendererTest, BasicDeferredTest) {
 
   const ApplicationRequirements applicationRequirements = {};
 
-  DescriptorRequirements descriptorRequirements = DescriptorRequirements(3, allocatorTemporary);
+  DescriptorRequirements descriptorRequirements = DescriptorRequirements(3, 3, allocatorTemporary);
   const U32 UBO_SLOT = descriptorRequirements.AddDescriptor({ DescriptorType::UniformBuffer, ShaderStage::Vertex });
   const U32 SAMPLER_SLOT = descriptorRequirements.AddDescriptor({DescriptorType::Sampler, ShaderStage::Pixel});
-  const U32 BASIC_TEXTURE_SLOT = descriptorRequirements.AddDescriptor({DescriptorType::SampledImage, ShaderStage::Pixel, DescriptorBinding::Same});
+  const U32 BASIC_TEXTURE_SLOT = descriptorRequirements.AddDescriptor({DescriptorType::SampledImage, ShaderStage::Pixel});
+
+  const U32 UBO_SET = descriptorRequirements.AddSet({ UBO_SLOT });
+  const U32 SAMPLER_SET = descriptorRequirements.AddSet({ SAMPLER_SLOT });
+  const U32 BASIC_TEXTURE_SET = descriptorRequirements.AddSet({ BASIC_TEXTURE_SLOT });
 
   ShaderRequirements shaderRequirements = ShaderRequirements(2, allocatorTemporary);
   const U32 VERTEX_SHADER_ID = shaderRequirements.AddShader({ ShaderStage::Vertex, "BasicDeferredTest.vs", AssetLocation::Shaders });
@@ -248,7 +262,7 @@ TEST_F(RendererTest, BasicDeferredTest) {
     PipelinePassCreateInfo::Shaders{VERTEX_SHADER_ID, PIXEL_SHADER_ID},  // SHADERS
     PipelinePassCreateInfo::Inputs{},                                    // INPUT TARGETS
     PipelinePassCreateInfo::Outputs{COLOR_TARGET_1},                     // OUTPUT TARGETS
-    PipelinePassCreateInfo::Descriptors{UBO_SLOT},                        // DESCRIPTORS
+    PipelinePassCreateInfo::DescriptorSets{UBO_SET, SAMPLER_SET, BASIC_TEXTURE_SET},                        // DESCRIPTORS
     ClearData{{0.2f, 0.2f, 0.2f, 1.0f}, 1.0f, 0}
     });
 
@@ -256,7 +270,7 @@ TEST_F(RendererTest, BasicDeferredTest) {
     PipelinePassCreateInfo::Shaders{DEF_VERTEX_SHADER_ID, DEF_PIXEL_SHADER_ID},
     PipelinePassCreateInfo::Inputs{{COLOR_TARGET_1, ShaderStage::Pixel}},
     PipelinePassCreateInfo::Outputs{PRESENT_TARGET}, // END OF RENDERING
-    PipelinePassCreateInfo::Descriptors{SAMPLER_SLOT},
+    PipelinePassCreateInfo::DescriptorSets{SAMPLER_SET},
     ClearData{{0.2f, 0.2f, 0.2f, 1.0f}, 1.0f, 0}
     });
 

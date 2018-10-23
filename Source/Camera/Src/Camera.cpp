@@ -3,7 +3,8 @@
 namespace Azura {
 Camera::Camera(U32 width, U32 height)
   : m_width(width),
-    m_height(height) {
+    m_height(height),
+    m_aspect(width / float(height)) {
 }
 
 void Camera::SetSensitivity(float value) {

@@ -20,12 +20,8 @@ std::unique_ptr<Renderer> RenderSystem::CreateRenderer(const ApplicationInfo& ap
                                               drawAllocator, window);
 }
 
-std::unique_ptr<TextureManager> RenderSystem::CreateTextureManager(const Renderer& renderer,
-                                                                   const TextureRequirements& textureRequirements,
-                                                                   const Log& logger) {
-  // NOLINTNEXTLINE(cppcoreguidelines-pro-type-reinterpret-cast)
-  const auto& vkRenderer = reinterpret_cast<const Vulkan::VkRenderer&>(renderer);
-  return std::make_unique<Vulkan::VkTextureManager>(vkRenderer.GetDevice(), textureRequirements, logger);
+std::unique_ptr<TextureManager> RenderSystem::CreateTextureManager(const TextureRequirements& textureRequirements) {
+  return std::make_unique<Vulkan::VkTextureManager>(textureRequirements);
 }
 
 } // namespace Azura
