@@ -122,6 +122,30 @@ void D3D12ComputePool::BindSampler(SlotID slot, const SamplerDesc& desc) {
   m_samplerInfos.PushBack(sInfo);
 }
 
+void D3D12ComputePool::SetUniformBufferData() {
+  if (m_uniformBufferInfos.GetSize() == 0)
+  {
+    return;
+  }
+
+  const auto gpuAddress = m_mainBuffer.Real()->GetGPUVirtualAddress();
+
+  const CD3DX12_CPU_DESCRIPTOR_HANDLE uboCPUHandle(m_descriptorComputeHeap->GetCPUDescriptorHandleForHeapStart(), m_offsetToConstantBuffers, m_cbvSrvDescriptorElementSize);
+
+  U32 idx = 0;
+  for (const auto& ubInfo : m_uniformBufferInfos) {
+    CD3DX12_CPU_DESCRIPTOR_HANDLE handle;
+    CD3DX12_CPU_DESCRIPTOR_HANDLE::InitOffsetted(handle, uboCPUHandle, m_cbvSrvDescriptorElementSize *  idx);
+
+    D3D12_CONSTANT_BUFFER_VIEW_DESC constantBufferViewDesc = {
+      gpuAddress + ubInfo.m_offset, ubInfo.m_byteSize
+    };
+
+    m_device->CreateConstantBufferView(&constantBufferViewDesc, handle);
+    ++idx;
+  }
+}
+
 void D3D12ComputePool::SetTextureData(ID3D12GraphicsCommandList* oneTimeCommandList) {
   if (m_textureBufferInfos.GetSize() == 0) {
     return;
@@ -238,6 +262,15 @@ void D3D12ComputePool::Submit() {
     return a.m_set < b.m_set;
   });
 
+  std::sort(m_uniformBufferInfos.Begin(), m_uniformBufferInfos.End(), [](const UniformBufferInfo& a, const UniformBufferInfo& b) -> bool
+  {
+    if (a.m_set == b.m_set) {
+      return a.m_binding < b.m_binding;
+    }
+
+    return a.m_set < b.m_set;
+  });
+
   U32 inputsTillNow = 0;
   U32 outputsTillNow = 0;
   for (U32 idx      = 0; idx < m_computePasses.GetSize(); ++idx) {
@@ -283,6 +316,8 @@ void D3D12ComputePool::Submit() {
 
   oneTimeSubmitBuffer.Execute(m_device, m_graphicsCommandQueue.Get(), log_D3D12RenderSystem);
   oneTimeSubmitBuffer.WaitForComplete(m_graphicsCommandQueue.Get(), log_D3D12RenderSystem);
+
+  SetUniformBufferData();
 
   LOG_DBG(log_D3D12RenderSystem, LOG_LEVEL, "D3D12 Drawable Pool: Created Pipelines");
 
@@ -399,8 +434,8 @@ void D3D12ComputePool::UpdateUniformData(SlotID slot, const U8* buffer, U32 size
   info.m_idx = bufferId;
   info.m_updateOffset = offset;
   info.m_updateByteSize = size;
-  info.m_gpuOffset = m_textureBufferInfos[bufferId].m_offset;
-  info.m_gpuByteSize = m_textureBufferInfos[bufferId].m_byteSize;
+  info.m_gpuOffset = m_uniformBufferInfos[bufferId].m_offset;
+  info.m_gpuByteSize = m_uniformBufferInfos[bufferId].m_byteSize;
 
   m_bufferUpdates.PushBack(info);
 }

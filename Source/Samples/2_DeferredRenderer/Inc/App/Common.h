@@ -22,7 +22,7 @@ struct PointLight {
   float m_radius;
 
   Vector3f m_color;
-  float pad;
+  float _pad;
 };
 
 struct MeshObject

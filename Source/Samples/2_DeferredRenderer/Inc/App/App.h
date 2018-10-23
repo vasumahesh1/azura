@@ -9,6 +9,7 @@
 #include "App/Common.h"
 #include "App/Scene.h"
 #include "Forward/ForwardScene.h"
+#include "Forward/ForwardComputeScene.h"
 
 namespace Azura
 {
@@ -44,6 +45,7 @@ private:
   Scene* p_activeScene{nullptr};
 
   ForwardScene m_forwardScene;
+  ForwardComputeScene m_forwardComputeScene;
 
   std::unique_ptr<Window> p_window{nullptr};
 };

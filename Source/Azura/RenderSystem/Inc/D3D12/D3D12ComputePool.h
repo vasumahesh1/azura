@@ -39,6 +39,7 @@ public:
   void AddShader(U32 shaderId) override;
   void BindTextureData(SlotID slot, const TextureDesc& desc, const U8* buffer) override;
   void BindSampler(SlotID slot, const SamplerDesc& desc) override;
+  void SetUniformBufferData();
   void BindUniformData(SlotID slot, const U8* buffer, U32 size) override;
   void Submit() override;
   void Record();

@@ -27,6 +27,10 @@ set(
   PROJECT_SHADERS
     "${PROJECT_SOURCE_DIR}/Shaders/Forward.vs.slang|VS"
     "${PROJECT_SOURCE_DIR}/Shaders/Forward.ps.slang|PS"
+
+    "${PROJECT_SOURCE_DIR}/Shaders/ForwardCompute.vs.slang|VS"
+    "${PROJECT_SOURCE_DIR}/Shaders/ForwardCompute.ps.slang|PS"
+    "${PROJECT_SOURCE_DIR}/Shaders/ForwardCompute.cs.slang|CS"
 )
 
 add_executable(DeferredRenderer ${SOURCES})
@@ -34,6 +38,8 @@ add_executable(DeferredRenderer ${SOURCES})
 AzuraDeployFolder(DeferredRenderer Meshes)
 
 AzuraAddLoggingSupport(DeferredRenderer 50)
+
+target_compile_definitions(DeferredRenderer PUBLIC FORCE_LOGGING=1)
 
 AzuraAddSlangShaders(DeferredRenderer GLSL ${PROJECT_SHADERS})
 AzuraAddSlangShaders(DeferredRenderer VULKAN ${PROJECT_SHADERS})
