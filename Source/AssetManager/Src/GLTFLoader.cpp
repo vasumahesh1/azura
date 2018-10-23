@@ -10,6 +10,7 @@
 
 #include "Log/Log.h"
 #include "Utils/Macros.h"
+#include "Memory/Allocator.h"
 
 
 using namespace Microsoft::glTF;          // NOLINT
@@ -129,11 +130,13 @@ const Microsoft::glTF::MeshPrimitive& GLTFMeshInterface::GetMeshPrimitive(const 
 }
 
 GLTFMeshInterface GLTFLoader::LoadFromJSON(const String& assetName, AssetLocation location, const Log& log) {
-  UNUSED(log);
   UNUSED(location);
+  UNUSED(log); // Release Mode
 
   filesystem::path filePath = filesystem::current_path() / filesystem::
                               path("Meshes/" + assetName + "/" + assetName + ".gltf");
+
+  LOG_DBG(log, LOG_LEVEL, "Loading Mesh: %s", filePath.c_str());
 
   auto streamReader = std::make_unique<StreamReader>(filePath.parent_path());
 

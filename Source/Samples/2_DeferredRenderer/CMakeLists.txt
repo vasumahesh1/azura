@@ -4,11 +4,22 @@ project(TestZone)
 
 set(
   SOURCES
-    "Inc/App/AppRenderer.h"
+    "Inc/App/App.h"
+    "Inc/App/Scene.h"
+    "Inc/App/Common.h"
     "Inc/App/LightTexture.h"
-    "Inc/App/LightDefinitions.h"
-    "Src/AppRenderer.cpp"
+
+    "Src/App.cpp"
     "Src/LightTexture.cpp"
+
+    # Forward Renderer
+    "Inc/Forward/ForwardScene.h"
+    "Src/ForwardScene.cpp"
+
+    # Forward Renderer with Compute
+    "Inc/Forward/ForwardComputeScene.h"
+    "Src/ForwardComputeScene.cpp"
+
     "Src/main.cpp"
 )
 
