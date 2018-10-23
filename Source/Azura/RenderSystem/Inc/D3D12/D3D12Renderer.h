@@ -11,7 +11,9 @@
 #include "Memory/HeapMemoryBuffer.h"
 #include "D3D12/D3D12ScopedCommandBuffer.h"
 #include "D3D12/D3D12ScopedSwapChain.h"
-#include "D3D12ScopedRenderPass.h"
+#include "D3D12/D3D12ScopedRenderPass.h"
+#include "D3D12/D3D12ScopedComputePass.h"
+#include "D3D12/D3D12ComputePool.h"
 
 
 namespace Azura {
@@ -32,7 +34,10 @@ public:
                 Window& window);
 
   String GetRenderingAPI() const override;
+
   DrawablePool& CreateDrawablePool(const DrawablePoolCreateInfo& createInfo) override;
+  ComputePool& CreateComputePool(const ComputePoolCreateInfo& createInfo) override;
+
   void Submit() override;
   void RenderFrame() override;
 
@@ -53,7 +58,8 @@ private:
   Microsoft::WRL::ComPtr<ID3D12Device> m_device;
 
   Microsoft::WRL::ComPtr<ID3D12CommandAllocator> m_commandAllocator;
-  Microsoft::WRL::ComPtr<ID3D12CommandQueue> m_commandQueue;
+  Microsoft::WRL::ComPtr<ID3D12CommandQueue> m_mainGraphicsCommandQueue;
+  Microsoft::WRL::ComPtr<ID3D12CommandQueue> m_mainComputeCommandQueue;
 
   UINT m_rtvDescriptorSize;
   UINT m_dsvDescriptorSize;
@@ -63,10 +69,14 @@ private:
 
   D3D12ScopedImage m_depthTexture{};
 
+  Containers::Vector<std::pair<U32, RenderPassType>> m_renderSequence;
+
   Containers::Vector<D3D12ScopedImage> m_renderTargetImages;
   Containers::Vector<D3D12ScopedRenderPass> m_renderPasses;
+  Containers::Vector<D3D12ScopedComputePass> m_computePasses;
 
   Containers::Vector<D3D12DrawablePool> m_drawablePools;
+  Containers::Vector<D3D12ComputePool> m_computePools;
   Containers::Vector<D3D12ScopedShader> m_shaders;
 };
 

@@ -1,4 +1,4 @@
-#include "D3D12/D3D12DrawablePool.h"
+#include "D3D12/D3D12ComputePool.h"
 
 #include "D3D12/d3dx12.h"
 #include "D3D12/D3D12Macros.h"
@@ -14,38 +14,35 @@ using namespace Azura::Containers; // NOLINT
 namespace Azura {
 namespace D3D12 {
 
-D3D12DrawablePool::D3D12DrawablePool(const ComPtr<ID3D12Device>& device,
-                                     const DrawablePoolCreateInfo& createInfo,
+D3D12ComputePool::D3D12ComputePool(const ComPtr<ID3D12Device>& device,
+                                     const ComputePoolCreateInfo& createInfo,
                                      const DescriptorCount& descriptorCount,
                                      const Vector<DescriptorSlot>& descriptorSlots,
                                      const Vector<D3D12ScopedShader>& shaders,
-                                     const Vector<D3D12ScopedRenderPass>& renderPasses,
+                                     const Vector<D3D12ScopedComputePass>& renderPasses,
                                      ComPtr<ID3D12CommandQueue> commandQueue,
                                      Memory::Allocator& mainAllocator,
                                      Memory::Allocator& initAllocator,
                                      Log log)
-  : DrawablePool(createInfo, descriptorCount, mainAllocator),
+  : ComputePool(createInfo, descriptorCount, mainAllocator),
     log_D3D12RenderSystem(std::move(log)),
     m_device(device),
     m_globalDescriptorSlots(descriptorSlots),
     m_shaders(shaders),
     m_pipelines(mainAllocator),
-    m_drawables(createInfo.m_numDrawables, mainAllocator),
-    m_renderPasses(createInfo.m_renderPasses.GetSize(), mainAllocator),
+    m_computePasses(createInfo.m_computePasses.GetSize(), mainAllocator),
     m_graphicsCommandQueue(std::move(commandQueue)),
     m_pipelineFactory(initAllocator, log_D3D12RenderSystem),
-    m_descriptorsPerDrawable(0),
     m_images(mainAllocator),
     m_samplers(mainAllocator),
-    m_secondaryCommandBuffers(createInfo.m_renderPasses.GetSize(), mainAllocator),
+    m_secondaryCommandBuffers(createInfo.m_computePasses.GetSize(), mainAllocator),
     m_allHeaps(mainAllocator) {
   LOG_DBG(log_D3D12RenderSystem, LOG_LEVEL, "Creating D3D12 Drawable Pool");
 
-  m_pipelineFactory.SetRasterizerStage(createInfo.m_cullMode, FrontFace::CounterClockwise);
+  m_pipelineFactory.SetPipelineType(PipelineType::Compute);
 
   CreateRenderPassReferences(createInfo, renderPasses);
-  CreateInputAttributes(createInfo);
-  CreateDescriptorHeap(createInfo);
+  CreateDescriptorHeap();
 
   // Create Buffers
   m_stagingBuffer.Create(device, CD3DX12_HEAP_PROPERTIES(D3D12_HEAP_TYPE_UPLOAD), createInfo.m_byteSize,
@@ -60,65 +57,10 @@ D3D12DrawablePool::D3D12DrawablePool(const ComPtr<ID3D12Device>& device,
                       D3D12_RESOURCE_STATE_COPY_DEST, log_D3D12RenderSystem);
 }
 
-DrawableID D3D12DrawablePool::CreateDrawable(const DrawableCreateInfo& createInfo) {
-  LOG_DBG(log_D3D12RenderSystem, LOG_LEVEL, "Creating a D3D12 Drawable");
-
-  D3D12Drawable drawable = D3D12Drawable(createInfo, m_numVertexSlots, m_numInstanceSlots,
-                                         m_descriptorCount.m_numUniformSlots, GetAllocator());
-  m_drawables.PushBack(std::move(drawable));
-  return m_drawables.GetSize() - 1;
-}
-
-void D3D12DrawablePool::BindVertexData(DrawableID drawableId, SlotID slot, const U8* buffer, U32 size) {
+void D3D12ComputePool::BindUniformData(SlotID slot, const U8* buffer, U32 size) {
   LOG_DBG(log_D3D12RenderSystem, LOG_LEVEL,
-    "D3D12 Drawable Pool: Binding Vertex Requested for Drawable: %d for Slot: %d of Size: %d bytes", drawableId, slot,
+    "D3D12 Drawable Pool: Binding Uniform Requested for Slot: %d of Size: %d bytes", slot,
     size);
-
-  assert(m_drawables.GetSize() > drawableId);
-
-  auto& drawable = m_drawables[drawableId];
-
-  // TODO(vasumahesh1):[INPUT]: Could be an issue with sizeof(float)
-  const U32 offset = m_stagingBuffer.AppendData(buffer, size, sizeof(float), log_D3D12RenderSystem);
-
-  BufferInfo info    = BufferInfo();
-  info.m_maxByteSize = size;
-  info.m_byteSize    = size;
-  info.m_offset      = offset;
-  info.m_binding     = slot;
-
-  drawable.AddVertexBufferInfo(std::move(info));
-}
-
-void D3D12DrawablePool::BindInstanceData(DrawableID drawableId, SlotID slot, const U8* buffer, U32 size) {
-  LOG_DBG(log_D3D12RenderSystem, LOG_LEVEL,
-    "D3D12 Drawable Pool: Binding Instance Requested for Drawable: %d for Slot: %d of Size: %d bytes", drawableId, slot,
-    size);
-
-  assert(m_drawables.GetSize() > drawableId);
-
-  auto& drawable = m_drawables[drawableId];
-
-  // TODO(vasumahesh1):[INPUT]: Could be an issue with sizeof(float)
-  const U32 offset = m_stagingBuffer.AppendData(buffer, size, sizeof(float), log_D3D12RenderSystem);
-
-  BufferInfo info    = BufferInfo();
-  info.m_maxByteSize = size;
-  info.m_byteSize    = size;
-  info.m_offset      = offset;
-  info.m_binding     = slot;
-
-  drawable.AddInstanceBufferInfo(std::move(info));
-}
-
-void D3D12DrawablePool::BindUniformData(DrawableID drawableId, SlotID slot, const U8* buffer, U32 size) {
-  LOG_DBG(log_D3D12RenderSystem, LOG_LEVEL,
-    "D3D12 Drawable Pool: Binding Uniform Requested for Drawable: %d for Slot: %d of Size: %d bytes", drawableId, slot,
-    size);
-
-  assert(m_drawables.GetSize() > drawableId);
-
-  auto& drawable = m_drawables[drawableId];
 
   size = (size + D3D12_CONSTANT_BUFFER_DATA_PLACEMENT_ALIGNMENT - 1) & ~(
            D3D12_CONSTANT_BUFFER_DATA_PLACEMENT_ALIGNMENT - 1);
@@ -135,30 +77,15 @@ void D3D12DrawablePool::BindUniformData(DrawableID drawableId, SlotID slot, cons
   info.m_binding         = descriptorSlot.m_bindIdx;
   info.m_set             = descriptorSlot.m_setIdx;
 
-  drawable.AddUniformBufferInfo(std::move(info));
+  m_uniformBufferInfos.PushBack(std::move(info));
 }
 
-void D3D12DrawablePool::SetIndexData(DrawableID drawableId, const U8* buffer, U32 size) {
-  LOG_DBG(log_D3D12RenderSystem, LOG_LEVEL,
-    "D3D12 Drawable Pool: Binding Index Requested for Drawable: %d of Size: %d bytes", drawableId, size);
-
-  auto& drawable = m_drawables[drawableId];
-
-  const U32 offset = m_stagingBuffer.AppendData(buffer, size, sizeof(U32), log_D3D12RenderSystem);
-
-  BufferInfo info = BufferInfo();
-  info.m_byteSize = size;
-  info.m_offset   = offset;
-
-  drawable.SetIndexBufferInfo(std::move(info));
-}
-
-void D3D12DrawablePool::AddShader(U32 shaderId) {
+void D3D12ComputePool::AddShader(U32 shaderId) {
   LOG_DBG(log_D3D12RenderSystem, LOG_LEVEL, "D3D12 Drawable Pool: Binding Shader Requested, ID: %d", shaderId);
   m_pipelineFactory.AddShaderStage(m_shaders[shaderId]);
 }
 
-void D3D12DrawablePool::BindTextureData(SlotID slot, const TextureDesc& desc, const U8* buffer) {
+void D3D12ComputePool::BindTextureData(SlotID slot, const TextureDesc& desc, const U8* buffer) {
   LOG_DBG(log_D3D12RenderSystem, LOG_LEVEL,
     "D3D12 Drawable Pool: Binding Texture Requested for Slot: %d of Size: %d bytes", slot, desc.m_size);
 
@@ -181,7 +108,7 @@ void D3D12DrawablePool::BindTextureData(SlotID slot, const TextureDesc& desc, co
   m_textureBufferInfos.PushBack(info);
 }
 
-void D3D12DrawablePool::BindSampler(SlotID slot, const SamplerDesc& desc) {
+void D3D12ComputePool::BindSampler(SlotID slot, const SamplerDesc& desc) {
   LOG_DBG(log_D3D12RenderSystem, LOG_LEVEL, "D3D12 Drawable Pool: Binding Sampler Requested for Slot: %d", slot);
 
   const auto& descriptorSlot = m_globalDescriptorSlots[slot];
@@ -195,14 +122,14 @@ void D3D12DrawablePool::BindSampler(SlotID slot, const SamplerDesc& desc) {
   m_samplerInfos.PushBack(sInfo);
 }
 
-void D3D12DrawablePool::SetTextureData(ID3D12GraphicsCommandList* oneTimeCommandList) {
+void D3D12ComputePool::SetTextureData(ID3D12GraphicsCommandList* oneTimeCommandList) {
   if (m_textureBufferInfos.GetSize() == 0) {
     return;
   }
 
   LOG_DBG(log_D3D12RenderSystem, LOG_LEVEL, "D3D12 Drawable Pool: Texture Data Found");
 
-  const CD3DX12_CPU_DESCRIPTOR_HANDLE textureCPUHandle(m_descriptorDrawableHeap->GetCPUDescriptorHandleForHeapStart());
+  const CD3DX12_CPU_DESCRIPTOR_HANDLE textureCPUHandle(m_descriptorComputeHeap->GetCPUDescriptorHandleForHeapStart());
 
   m_images.Reserve(m_textureBufferInfos.GetSize());
 
@@ -227,7 +154,7 @@ void D3D12DrawablePool::SetTextureData(ID3D12GraphicsCommandList* oneTimeCommand
   }
 }
 
-void D3D12DrawablePool::SetSamplerData() {
+void D3D12ComputePool::SetSamplerData() {
   if (m_samplerInfos.GetSize() == 0) {
     return;
   }
@@ -250,11 +177,11 @@ void D3D12DrawablePool::SetSamplerData() {
   }
 }
 
-void D3D12DrawablePool::CreateRenderPassInputTargetSRV(
-  const Vector<std::reference_wrapper<const D3D12ScopedImage>>& renderPassInputs,
+void D3D12ComputePool::CreateComputePassInputTargetSRV(
+  const Vector<std::reference_wrapper<D3D12ScopedImage>>& renderPassInputs,
   U32 offsetTillThis) const {
-  const CD3DX12_CPU_DESCRIPTOR_HANDLE inputCPUHandle(m_descriptorDrawableHeap->GetCPUDescriptorHandleForHeapStart(),
-                                                     m_offsetToRenderPassInputs + offsetTillThis,
+  const CD3DX12_CPU_DESCRIPTOR_HANDLE inputCPUHandle(m_descriptorComputeHeap->GetCPUDescriptorHandleForHeapStart(),
+                                                     m_offsetToComputePassInputs + offsetTillThis,
                                                      m_cbvSrvDescriptorElementSize);
 
   U32 idx = 0;
@@ -269,7 +196,26 @@ void D3D12DrawablePool::CreateRenderPassInputTargetSRV(
   }
 }
 
-void D3D12DrawablePool::Submit() {
+void D3D12ComputePool::CreateComputePassInputTargetUAV(
+  const Vector<std::reference_wrapper<D3D12ScopedImage>>& computePassOutputs,
+  U32 offsetTillThis) const {
+  const CD3DX12_CPU_DESCRIPTOR_HANDLE inputCPUHandle(m_descriptorComputeHeap->GetCPUDescriptorHandleForHeapStart(),
+    m_offsetToComputePassOutputs + offsetTillThis,
+    m_cbvSrvDescriptorElementSize);
+
+  U32 idx = 0;
+  for (const auto& imageRef : computePassOutputs) {
+    CD3DX12_CPU_DESCRIPTOR_HANDLE cpuHandle;
+    CD3DX12_CPU_DESCRIPTOR_HANDLE::InitOffsetted(cpuHandle, inputCPUHandle, m_cbvSrvDescriptorElementSize * idx);
+
+    const auto uavDesc = D3D12ScopedImage::GetUAV(imageRef.get().GetFormat(), ImageViewType::ImageView2D,
+      log_D3D12RenderSystem);
+    m_device->CreateUnorderedAccessView(imageRef.get().Real(), nullptr, &uavDesc, cpuHandle);
+    ++idx;
+  }
+}
+
+void D3D12ComputePool::Submit() {
   m_cbvSrvDescriptorElementSize  = m_device->GetDescriptorHandleIncrementSize(D3D12_DESCRIPTOR_HEAP_TYPE_CBV_SRV_UAV);
   m_samplerDescriptorElementSize = m_device->GetDescriptorHandleIncrementSize(D3D12_DESCRIPTOR_HEAP_TYPE_SAMPLER);
 
@@ -293,22 +239,29 @@ void D3D12DrawablePool::Submit() {
   });
 
   U32 inputsTillNow = 0;
-  for (U32 idx      = 0; idx < m_renderPasses.GetSize(); ++idx) {
+  U32 outputsTillNow = 0;
+  for (U32 idx      = 0; idx < m_computePasses.GetSize(); ++idx) {
     D3D12ScopedCommandBuffer cmdBuffer(m_device, D3D12_COMMAND_LIST_TYPE_BUNDLE, log_D3D12RenderSystem);
     m_secondaryCommandBuffers.PushBack(cmdBuffer);
 
-    const auto& renderPassInputs = m_renderPasses[idx].get().GetInputImages();
+    const auto& renderPassInputs = m_computePasses[idx].get().GetInputImages();
+    const auto& renderPassOutputs = m_computePasses[idx].get().GetOutputImages();
 
     if (renderPassInputs.GetSize() > 0) {
-      CreateRenderPassInputTargetSRV(renderPassInputs, inputsTillNow);
+      CreateComputePassInputTargetSRV(renderPassInputs, inputsTillNow);
       inputsTillNow += renderPassInputs.GetSize();
+    }
+    
+    if (renderPassOutputs.GetSize() > 0) {
+      CreateComputePassInputTargetUAV(renderPassOutputs, outputsTillNow);
+      outputsTillNow += renderPassOutputs.GetSize();
     }
   }
 
-  m_pipelines.Reserve(m_renderPasses.GetSize());
+  m_pipelines.Reserve(m_computePasses.GetSize());
 
   LOG_DBG(log_D3D12RenderSystem, LOG_LEVEL, "D3D12 Drawable Pool: Submitting");
-  m_pipelineFactory.Submit(m_device, m_renderPasses, m_pipelines);
+  m_pipelineFactory.Submit(m_device, m_computePasses, m_pipelines);
 
   auto oneTimeSubmitBuffer = D3D12ScopedCommandBuffer(m_device, D3D12_COMMAND_LIST_TYPE_DIRECT, log_D3D12RenderSystem);
   oneTimeSubmitBuffer.CreateGraphicsCommandList(m_device, nullptr, log_D3D12RenderSystem);
@@ -333,43 +286,40 @@ void D3D12DrawablePool::Submit() {
 
   LOG_DBG(log_D3D12RenderSystem, LOG_LEVEL, "D3D12 Drawable Pool: Created Pipelines");
 
-  const U32 drawableHeapOffset = m_descriptorsPerDrawable * m_cbvSrvDescriptorElementSize;
-
-  CD3DX12_CPU_DESCRIPTOR_HANDLE heapHandle(m_descriptorDrawableHeap->GetCPUDescriptorHandleForHeapStart(),
-                                           m_offsetToDrawableHeap, m_cbvSrvDescriptorElementSize);
-
-  LOG_DBG(log_D3D12RenderSystem, LOG_LEVEL, "D3D12 Drawable Pool: Creating Resource Views");
-
-  for (auto& drawable : m_drawables) {
-    drawable.CreateResourceViews(m_device, m_mainBuffer.Real(), m_vertexDataSlots, heapHandle,
-                                 m_cbvSrvDescriptorElementSize, log_D3D12RenderSystem);
-    heapHandle.Offset(drawableHeapOffset);
-  }
-
   // Record Command Buffer
 
   LOG_DBG(log_D3D12RenderSystem, LOG_LEVEL, "D3D12 Drawable Pool: Begin Recording");
 
   U32 idx = 0;
 
+  U32 cbRecorded = 0;
   U32 sampledImageRecorded = 0;
   U32 inputsRecorded       = 0;
+  U32 outputsRecorded       = 0;
   U32 samplersRecorded     = 0;
-  for (const auto& renderPassRef : m_renderPasses) {
+
+  for (const auto& renderPassRef : m_computePasses) {
     const auto& renderPass                   = renderPassRef.get();
-    const auto& renderPassDescriptorCount    = renderPass.GetDescriptorCount();
-    const auto& renderPassRootSignatureTable = renderPass.GetRootSignatureTable();
-    const auto& renderPassInputs             = renderPass.GetInputInfo();
-    m_secondaryCommandBuffers[idx].CreateGraphicsCommandList(m_device, m_pipelines[idx].GetState(),
-                                                             log_D3D12RenderSystem);
+
+    m_secondaryCommandBuffers[idx].CreateGraphicsCommandList(m_device, m_pipelines[idx].GetState(), log_D3D12RenderSystem);
     auto bundleCommandList = m_secondaryCommandBuffers[idx].GetGraphicsCommandList();
 
+    const auto& renderPassDescriptorCount    = renderPass.GetDescriptorCount();
+    const auto& renderPassRootSignatureTable = renderPass.GetRootSignatureTable();
+    const auto& renderPassInputs             = renderPass.GetInputImages();
+    const auto& renderPassOutputs             = renderPass.GetOutputImages();
+
     // Define Heap Handles
-    CD3DX12_GPU_DESCRIPTOR_HANDLE textureGPUHandle(m_descriptorDrawableHeap->GetGPUDescriptorHandleForHeapStart(),
+    CD3DX12_GPU_DESCRIPTOR_HANDLE textureGPUHandle(m_descriptorComputeHeap->GetGPUDescriptorHandleForHeapStart(),
                                                    sampledImageRecorded, m_cbvSrvDescriptorElementSize);
-    const CD3DX12_GPU_DESCRIPTOR_HANDLE inputsGPUHandle(m_descriptorDrawableHeap->GetGPUDescriptorHandleForHeapStart(),
-                                                        m_offsetToRenderPassInputs + inputsRecorded,
+
+    const CD3DX12_GPU_DESCRIPTOR_HANDLE inputsGPUHandle(m_descriptorComputeHeap->GetGPUDescriptorHandleForHeapStart(),
+                                                        m_offsetToComputePassInputs + inputsRecorded,
                                                         m_cbvSrvDescriptorElementSize);
+
+    const CD3DX12_GPU_DESCRIPTOR_HANDLE outputsGPUHandle(m_descriptorComputeHeap->GetGPUDescriptorHandleForHeapStart(),
+      m_offsetToComputePassOutputs + outputsRecorded,
+      m_cbvSrvDescriptorElementSize);
 
     CD3DX12_GPU_DESCRIPTOR_HANDLE samplerGPUHandle;
     if (renderPassDescriptorCount.m_numSamplerSlots > 0) {
@@ -377,88 +327,85 @@ void D3D12DrawablePool::Submit() {
                                                        samplersRecorded, m_samplerDescriptorElementSize);
     }
 
-    CD3DX12_GPU_DESCRIPTOR_HANDLE uboGPUHandle(m_descriptorDrawableHeap->GetGPUDescriptorHandleForHeapStart(),
-                                               m_offsetToDrawableHeap, m_cbvSrvDescriptorElementSize);
+    CD3DX12_GPU_DESCRIPTOR_HANDLE uboGPUHandle(m_descriptorComputeHeap->GetGPUDescriptorHandleForHeapStart(), cbRecorded + m_offsetToConstantBuffers, m_cbvSrvDescriptorElementSize);
 
     bundleCommandList->SetDescriptorHeaps(UINT(m_allHeaps.GetSize()), m_allHeaps.Data());
-    bundleCommandList->IASetPrimitiveTopology(D3D_PRIMITIVE_TOPOLOGY_TRIANGLELIST);
-    bundleCommandList->SetGraphicsRootSignature(renderPass.GetRootSignature());
+    bundleCommandList->SetComputeRootSignature(renderPass.GetRootSignature());
 
     U32 tableIdx = 0;
     for (const auto& tableEntry : renderPassRootSignatureTable) {
       if (tableEntry.m_type == DescriptorType::SampledImage) {
         LOG_DEBUG(log_D3D12RenderSystem, LOG_LEVEL, "Setting Texture Descriptor Table at %d", tableIdx);
-        bundleCommandList->SetGraphicsRootDescriptorTable(tableIdx, textureGPUHandle);
+        bundleCommandList->SetComputeRootDescriptorTable(tableIdx, textureGPUHandle);
         textureGPUHandle.Offset(tableEntry.m_count, m_cbvSrvDescriptorElementSize);
       } else if (tableEntry.m_type == DescriptorType::Sampler) {
         LOG_DEBUG(log_D3D12RenderSystem, LOG_LEVEL, "Setting Sampler Descriptor Table at %d", tableIdx);
-        bundleCommandList->SetGraphicsRootDescriptorTable(tableIdx, samplerGPUHandle);
+        bundleCommandList->SetComputeRootDescriptorTable(tableIdx, samplerGPUHandle);
         samplerGPUHandle.Offset(tableEntry.m_count, m_samplerDescriptorElementSize);
+      } else if (tableEntry.m_type == DescriptorType::UniformBuffer) {
+        LOG_DEBUG(log_D3D12RenderSystem, LOG_LEVEL, "Setting Uniform Descriptor Table at %d", tableIdx);
+        bundleCommandList->SetComputeRootDescriptorTable(tableIdx, uboGPUHandle);
+        uboGPUHandle.Offset(tableEntry.m_count, m_cbvSrvDescriptorElementSize);
       }
 
       ++tableIdx;
     }
 
     if (renderPassInputs.GetSize() > 0) {
-      bundleCommandList->SetGraphicsRootDescriptorTable(renderPassRootSignatureTable.GetSize(), inputsGPUHandle);
+      bundleCommandList->SetComputeRootDescriptorTable(renderPass.GetInputRootDescriptorTableId(), inputsGPUHandle);
+      LOG_DEBUG(log_D3D12RenderSystem, LOG_LEVEL, "Setting Input Attachment Descriptor Table at %d",
+        renderPassRootSignatureTable.GetSize());
+    }
+    
+    if (renderPassOutputs.GetSize() > 0) {
+      bundleCommandList->SetComputeRootDescriptorTable(renderPass.GetOutputRootDescriptorTableId(), outputsGPUHandle);
       LOG_DEBUG(log_D3D12RenderSystem, LOG_LEVEL, "Setting Input Attachment Descriptor Table at %d",
         renderPassRootSignatureTable.GetSize());
     }
 
     inputsRecorded += renderPassInputs.GetSize();
+    outputsRecorded += renderPassOutputs.GetSize();
     samplersRecorded += renderPassDescriptorCount.m_numSamplerSlots;
+    cbRecorded += renderPassDescriptorCount.m_numUniformSlots;
     sampledImageRecorded += renderPassDescriptorCount.m_numSampledImageSlots;
 
-    LOG_DBG(log_D3D12RenderSystem, LOG_LEVEL, "D3D12 Drawable Pool: Recording Commands For Drawables");
+    LOG_DBG(log_D3D12RenderSystem, LOG_LEVEL, "D3D12 Drawable Pool: Recording Commands For Dispatch");
 
-    for (auto& drawable : m_drawables) {
-      drawable.RecordCommands(bundleCommandList, uboGPUHandle, m_cbvSrvDescriptorElementSize,
-                              renderPassRootSignatureTable, log_D3D12RenderSystem);
-      uboGPUHandle.Offset(drawableHeapOffset);
-    }
-
-    LOG_DBG(log_D3D12RenderSystem, LOG_LEVEL, "D3D12 Drawable Pool: Closing Bundle Command Buffer");
-    VERIFY_D3D_OP(log_D3D12RenderSystem, bundleCommandList->Close(), "Failed to close bundle Command Buffer");
+    bundleCommandList->Dispatch(UINT(m_launchDims.m_x), UINT(m_launchDims.m_y), UINT(m_launchDims.m_z));
 
     ++idx;
   }
 }
 
-void D3D12DrawablePool::BeginUpdates() {
+void D3D12ComputePool::BeginUpdates() {
   m_updateBuffer.Reset();
   m_bufferUpdates.Reset();
 }
 
-void D3D12DrawablePool::UpdateUniformData(DrawableID drawableId, SlotID slot, const U8* buffer, U32 size) {
+void D3D12ComputePool::UpdateUniformData(SlotID slot, const U8* buffer, U32 size) {
   LOG_DBG(log_D3D12RenderSystem, LOG_LEVEL,
-    "D3D12 Drawable Pool: Update Uniform Requested for Drawable: %d for Slot: %d of Size: %d bytes", drawableId, slot,
+    "D3D12 Drawable Pool: Update Uniform Requested for Slot: %d of Size: %d bytes", slot,
     size);
-
-  assert(m_drawables.GetSize() > drawableId);
-
-  auto& drawable = m_drawables[drawableId];
 
   size = (size + D3D12_CONSTANT_BUFFER_DATA_PLACEMENT_ALIGNMENT - 1) & ~(D3D12_CONSTANT_BUFFER_DATA_PLACEMENT_ALIGNMENT - 1);
 
   const U32 offset = m_updateBuffer.AppendData(buffer, size, D3D12_CONSTANT_BUFFER_DATA_PLACEMENT_ALIGNMENT, log_D3D12RenderSystem);
 
   const auto& descriptorSlot = m_globalDescriptorSlots[slot];
-  const U32 bufferId = drawable.GetSingleUniformBufferInfo(descriptorSlot);
-
-  const auto& allUboInfos = drawable.GetUniformBufferInfos();
+  const U32 bufferId = GetSingleUniformBufferInfo(descriptorSlot);
 
   BufferUpdate info = {};
   info.m_type = DescriptorType::UniformBuffer;
   info.m_idx = bufferId;
   info.m_updateOffset = offset;
   info.m_updateByteSize = size;
-  info.m_gpuOffset = allUboInfos[bufferId].m_offset;
-  info.m_gpuByteSize = allUboInfos[bufferId].m_byteSize;
+  info.m_gpuOffset = m_textureBufferInfos[bufferId].m_offset;
+  info.m_gpuByteSize = m_textureBufferInfos[bufferId].m_byteSize;
 
   m_bufferUpdates.PushBack(info);
 }
 
-void D3D12DrawablePool::UpdateTextureData(SlotID slot, const U8* buffer) {
+void D3D12ComputePool::UpdateTextureData(SlotID slot, const U8* buffer) {
   const auto& descriptorSlot = m_globalDescriptorSlots[slot];
   const U32 bufferId = GetSingleTextureBufferInfo(descriptorSlot);
 
@@ -484,7 +431,7 @@ void D3D12DrawablePool::UpdateTextureData(SlotID slot, const U8* buffer) {
 
 }
 
-void D3D12DrawablePool::SubmitUpdates() {
+void D3D12ComputePool::SubmitUpdates() {
   auto oneTimeSubmitBuffer = D3D12ScopedCommandBuffer(m_device, D3D12_COMMAND_LIST_TYPE_DIRECT, log_D3D12RenderSystem);
   oneTimeSubmitBuffer.CreateGraphicsCommandList(m_device, nullptr, log_D3D12RenderSystem);
 
@@ -515,26 +462,26 @@ void D3D12DrawablePool::SubmitUpdates() {
   oneTimeSubmitBuffer.WaitForComplete(m_graphicsCommandQueue.Get(), log_D3D12RenderSystem);
 }
 
-const Vector<ID3D12DescriptorHeap*>& D3D12DrawablePool::GetAllDescriptorHeaps() const {
+const Vector<ID3D12DescriptorHeap*>& D3D12ComputePool::GetAllDescriptorHeaps() const {
   return m_allHeaps;
 }
 
-ID3D12PipelineState* D3D12DrawablePool::GetPipelineState(U32 renderPassId) const {
+ID3D12PipelineState* D3D12ComputePool::GetPipelineState(U32 renderPassId) const {
   return m_pipelines[renderPassId].GetState();
 }
 
-ID3D12GraphicsCommandList* D3D12DrawablePool::GetSecondaryCommandList(U32 renderPassId) const {
+ID3D12GraphicsCommandList* D3D12ComputePool::GetSecondaryCommandList(U32 renderPassId) const {
   return m_secondaryCommandBuffers[renderPassId].GetGraphicsCommandList();
 }
 
-void D3D12DrawablePool::GetRecordEntries(Vector<std::pair<U32, D3D12RenderPassRecordEntry>>& recordList) const {
-  recordList.Reserve(m_renderPasses.GetSize());
+void D3D12ComputePool::GetRecordEntries(Vector<std::pair<U32, D3D12ComputePassRecordEntry>>& recordList) const {
+  recordList.Reserve(m_computePasses.GetSize());
 
   U32 idx = 0;
-  for (const auto& renderPass : m_renderPasses) {
-    D3D12RenderPassRecordEntry entry = {};
-    entry.m_bundle                   = GetSecondaryCommandList(idx);
-    entry.m_pso                      = GetPipelineState(idx);
+  for (const auto& renderPass : m_computePasses) {
+    D3D12ComputePassRecordEntry entry = {};
+    entry.m_pso                       = GetPipelineState(idx);
+    entry.m_bundle                    = GetSecondaryCommandList(idx);
 
     recordList.PushBack(std::make_pair(renderPass.get().GetInternalId(), entry));
   }
@@ -542,58 +489,59 @@ void D3D12DrawablePool::GetRecordEntries(Vector<std::pair<U32, D3D12RenderPassRe
   ++idx;
 }
 
-void D3D12DrawablePool::CreateRenderPassReferences(const DrawablePoolCreateInfo& createInfo,
-                                                   const Containers::Vector<D3D12ScopedRenderPass>& renderPasses) {
+void D3D12ComputePool::CreateRenderPassReferences(const ComputePoolCreateInfo& createInfo,
+                                                   const Containers::Vector<D3D12ScopedComputePass>& renderPasses) {
 
   U32 idx = 0;
   for (const auto& renderPass : renderPasses) {
-    auto it = std::find_if(createInfo.m_renderPasses.Begin(), createInfo.m_renderPasses.End(), [&](U32 passId)
+    auto it = std::find_if(createInfo.m_computePasses.Begin(), createInfo.m_computePasses.End(), [&](U32 passId)
     {
       return renderPass.GetId() == passId;
     });
 
-    if (it != createInfo.m_renderPasses.End()) {
-      m_renderPasses.PushBack(std::reference_wrapper<D3D12ScopedRenderPass>(renderPasses[idx]));
+    if (it != createInfo.m_computePasses.End()) {
+      m_computePasses.PushBack(std::reference_wrapper<D3D12ScopedComputePass>(renderPasses[idx]));
     }
 
     ++idx;
   }
 }
 
-void D3D12DrawablePool::CreateInputAttributes(const DrawablePoolCreateInfo& createInfo) {
-  U32 idx = 0;
-  for (const auto& vertexSlot : createInfo.m_vertexDataSlots) {
-    m_pipelineFactory.BulkAddAttributeDescription(vertexSlot, idx);
-    ++idx;
-  }
-}
-
-void D3D12DrawablePool::CreateDescriptorHeap(const DrawablePoolCreateInfo& createInfo) {
+void D3D12ComputePool::CreateDescriptorHeap() {
   m_allHeaps.Reserve(2);
 
-  m_offsetToDrawableHeap     = 0;
-  m_offsetToRenderPassInputs = 0;
+  m_offsetToComputePassInputs = 0;
+  m_offsetToComputePassOutputs = 0;
+  m_offsetToConstantBuffers = 0;
+
+  U32 totalDescriptors = 0;
 
   U32 numSamplers = 0;
 
-  for (const auto& renderPass : m_renderPasses) {
+  for (const auto& renderPass : m_computePasses) {
     const auto& count = renderPass.get().GetDescriptorCount();
-    m_offsetToDrawableHeap += count.m_numSampledImageSlots;
-    m_offsetToDrawableHeap += renderPass.get().GetInputInfo().GetSize(); // RTV as inputs
 
-    m_offsetToRenderPassInputs += count.m_numSampledImageSlots;
+    const U32 numOutputs = renderPass.get().GetOutputImages().GetSize();
+    const U32 numInputs = renderPass.get().GetInputImages().GetSize();
+    const U32 numSRVs = count.m_numSampledImageSlots;
+    const U32 numUBO = count.m_numUniformSlots;
 
-    m_descriptorsPerDrawable += count.m_numUniformSlots;
+    m_offsetToConstantBuffers += numSRVs;
+    m_offsetToComputePassInputs += numSRVs + numUBO;
+    m_offsetToComputePassOutputs += numSRVs + numUBO + numInputs;
+
+    totalDescriptors += numOutputs + numInputs + numSRVs + numUBO;
+
     numSamplers += count.m_numSamplerSlots;
   }
 
   D3D12_DESCRIPTOR_HEAP_DESC heapDesc = {};
-  heapDesc.NumDescriptors             = m_offsetToDrawableHeap + createInfo.m_numDrawables * m_descriptorsPerDrawable;
+  heapDesc.NumDescriptors             = totalDescriptors;
   heapDesc.Type                       = D3D12_DESCRIPTOR_HEAP_TYPE_CBV_SRV_UAV;
   heapDesc.Flags                      = D3D12_DESCRIPTOR_HEAP_FLAG_SHADER_VISIBLE;
-  VERIFY_D3D_OP(log_D3D12RenderSystem, m_device->CreateDescriptorHeap(&heapDesc, IID_PPV_ARGS(&m_descriptorDrawableHeap)
+  VERIFY_D3D_OP(log_D3D12RenderSystem, m_device->CreateDescriptorHeap(&heapDesc, IID_PPV_ARGS(&m_descriptorComputeHeap)
   ), "Failed to create Drawable Descriptor Heap");
-  m_allHeaps.PushBack(m_descriptorDrawableHeap.Get());
+  m_allHeaps.PushBack(m_descriptorComputeHeap.Get());
 
   if (numSamplers > 0) {
     D3D12_DESCRIPTOR_HEAP_DESC samplerDesc = {};

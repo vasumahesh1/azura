@@ -6,6 +6,7 @@ set(
 
     # Headers
     "Inc/Generic/Constants.h"
+    "Inc/Generic/ComputePool.h"
     "Inc/Generic/Drawable.h"
     "Inc/Generic/GenericTypes.h"
     "Inc/Generic/GLFWWindow.h"
@@ -18,6 +19,7 @@ set(
     "Inc/Generic/Windows/Win32GLFWWindow.h"
 
     # Sources
+    "Src/Generic/ComputePool.cpp"
     "Src/Generic/Drawable.cpp"
     "Src/Generic/GenericTypes.cpp"
     "Src/Generic/GLFWWindow.cpp"

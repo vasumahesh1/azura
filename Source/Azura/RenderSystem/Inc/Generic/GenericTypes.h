@@ -36,6 +36,18 @@ enum class PresentModes {
   SharedContinuous
 };
 
+enum class PipelineType
+{
+  Graphics,
+  Compute
+};
+
+enum class RenderPassType
+{
+  Graphics,
+  Compute
+};
+
 enum class ShaderStage : U32 {
   All = 0x00001111,
   Vertex = 0x00000001,
@@ -156,7 +168,8 @@ enum class DescriptorType {
   Sampler,
   SampledImage,
   CombinedImageSampler,
-  PushConstant
+  PushConstant,
+  UnorderedView
 };
 
 const U32 MAX_DESCRIPTOR_TYPE_COUNT = 5;
@@ -369,6 +382,9 @@ struct ShaderCreateInfo {
 
 struct RenderTargetCreateInfo {
   RawStorageFormat m_format{RawStorageFormat::UNKNOWN};
+  int m_width{-1};
+  int m_height{-1};
+  int m_depth{1};
 };
 
 struct PipelinePassInput {
@@ -396,6 +412,7 @@ struct PipelinePassCreateInfo {
 
   ClearData m_clearData{};
   BlendState m_blendState{};
+  RenderPassType m_type{RenderPassType::Graphics};
 };
 
 struct DescriptorRequirements {
@@ -434,6 +451,14 @@ struct DescriptorCount {
   U32 m_numCombinedSamplerSlots{0};
   U32 m_numSampledImageSlots{0};
   U32 m_numPushConstantsSlots{0};
+  U32 m_numUnorderedViewSlots{0};
+};
+
+struct ThreadGroupDimensions
+{
+  U32 m_x{1};
+  U32 m_y{1};
+  U32 m_z{1};
 };
 
 struct DescriptorTableEntry {

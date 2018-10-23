@@ -10,9 +10,10 @@ using namespace Azura::Containers; // NOLINT
 namespace Azura {
 namespace D3D12 {
 
-D3D12ScopedRenderPass::D3D12ScopedRenderPass(U32 idx, const D3D12ScopedSwapChain& swapChain, Memory::Allocator& mainAllocator, Log logger)
+D3D12ScopedRenderPass::D3D12ScopedRenderPass(U32 idx, U32 internalId, const D3D12ScopedSwapChain& swapChain, Memory::Allocator& mainAllocator, Log logger)
   : log_D3D12RenderSystem(std::move(logger)),
     m_id(idx),
+    m_internalId(internalId),
     m_swapChainRef(swapChain),
     m_rootSignatureTable(mainAllocator),
     m_renderOutputInfo(mainAllocator),
@@ -158,6 +159,10 @@ U32 D3D12ScopedRenderPass::GetId() const {
   return m_id;
 }
 
+U32 D3D12ScopedRenderPass::GetInternalId() const {
+  return m_internalId;
+}
+
 ID3D12GraphicsCommandList* D3D12ScopedRenderPass::GetPrimaryGraphicsCommandList(U32 idx) const {
   return m_commandBuffers[idx].GetGraphicsCommandList();
 }
@@ -228,32 +233,52 @@ const Containers::Vector<DescriptorTableEntry>& D3D12ScopedRenderPass::GetRootSi
   return m_rootSignatureTable;
 }
 
-void D3D12ScopedRenderPass::RecordResourceBarriersForOutputs(ID3D12GraphicsCommandList* commandList) const {
-  for (const auto& rtv : m_renderOutputs) {
+void D3D12ScopedRenderPass::RecordResourceBarriersForOutputsStart(ID3D12GraphicsCommandList* commandList) const {
+  for (auto& rtv : m_renderOutputs) {
     rtv.get().Transition(commandList, D3D12_RESOURCE_STATE_RENDER_TARGET);
   }
 
-  for (const auto& dsv : m_depthOutputs) {
+  for (auto& dsv : m_depthOutputs) {
     dsv.get().Transition(commandList, D3D12_RESOURCE_STATE_DEPTH_WRITE);
   }
 }
-
-void D3D12ScopedRenderPass::RecordResourceBarriersForReadingInputs(ID3D12GraphicsCommandList* commandList) const {
-  for (const auto& rtv : m_renderInputs) {
-    rtv.get().Transition(commandList, D3D12_RESOURCE_STATE_RENDER_TARGET, D3D12_RESOURCE_STATE_GENERIC_READ);
+  
+void D3D12ScopedRenderPass::RecordResourceBarriersForOutputsEnd(ID3D12GraphicsCommandList* commandList) const {
+  for (auto& rtv : m_renderOutputs) {
+    rtv.get().Transition(commandList, D3D12_RESOURCE_STATE_COMMON);
   }
 
-  for (const auto& dsv : m_depthInputs) {
-    dsv.get().Transition(commandList, D3D12_RESOURCE_STATE_DEPTH_WRITE, D3D12_RESOURCE_STATE_GENERIC_READ);
+  for (auto& dsv : m_depthOutputs) {
+    dsv.get().Transition(commandList, D3D12_RESOURCE_STATE_COMMON);
+  }
+}
+
+void D3D12ScopedRenderPass::RecordResourceBarriersForInputsStart(ID3D12GraphicsCommandList* commandList) const {
+  for (auto& rtv : m_renderInputs) {
+    rtv.get().Transition(commandList, D3D12_RESOURCE_STATE_GENERIC_READ);
+  }
+
+  for (auto& dsv : m_depthInputs) {
+    dsv.get().Transition(commandList, D3D12_RESOURCE_STATE_GENERIC_READ);
+  }
+}
+  
+void D3D12ScopedRenderPass::RecordResourceBarriersForInputsEnd(ID3D12GraphicsCommandList* commandList) const {
+  for (auto& rtv : m_renderInputs) {
+    rtv.get().Transition(commandList, D3D12_RESOURCE_STATE_COMMON);
+  }
+
+  for (auto& dsv : m_depthInputs) {
+    dsv.get().Transition(commandList, D3D12_RESOURCE_STATE_COMMON);
   }
 }
 
 void D3D12ScopedRenderPass::RecordResourceBarriersForWritingInputs(ID3D12GraphicsCommandList* commandList) const {
-  for (const auto& rtv : m_renderInputs) {
+  for (auto& rtv : m_renderInputs) {
     rtv.get().Transition(commandList, D3D12_RESOURCE_STATE_GENERIC_READ, D3D12_RESOURCE_STATE_RENDER_TARGET);
   }
 
-  for (const auto& dsv : m_depthInputs) {
+  for (auto& dsv : m_depthInputs) {
     dsv.get().Transition(commandList, D3D12_RESOURCE_STATE_GENERIC_READ, D3D12_RESOURCE_STATE_DEPTH_WRITE);
   }
 }
@@ -429,6 +454,7 @@ void D3D12ScopedRenderPass::CreateBase(
 
         case DescriptorType::PushConstant:
         case DescriptorType::CombinedImageSampler:
+        case DescriptorType::UnorderedView:
         default:
           LOG_ERR(log_D3D12RenderSystem, LOG_LEVEL, "Unsupported Descriptor Type for D3D12");
           break;

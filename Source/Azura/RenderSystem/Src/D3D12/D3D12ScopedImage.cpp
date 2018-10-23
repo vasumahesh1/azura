@@ -89,7 +89,7 @@ void D3D12ScopedImage::Transition(ID3D12GraphicsCommandList* commandList,
 }
 
 void D3D12ScopedImage::Transition(ID3D12GraphicsCommandList* commandList,
-  D3D12_RESOURCE_STATES toState) const {
+  D3D12_RESOURCE_STATES toState) {
   if (m_currentState == toState)
   {
     return;
@@ -97,6 +97,8 @@ void D3D12ScopedImage::Transition(ID3D12GraphicsCommandList* commandList,
 
   const auto resourceBarrier = CD3DX12_RESOURCE_BARRIER::Transition(m_texture.Get(), m_currentState, toState);
   commandList->ResourceBarrier(1, &resourceBarrier);
+
+  m_currentState = toState;
 }
 
 D3D12_SHADER_RESOURCE_VIEW_DESC D3D12ScopedImage::GetSRV(RawStorageFormat viewFormat,
@@ -120,6 +122,29 @@ D3D12_SHADER_RESOURCE_VIEW_DESC D3D12ScopedImage::GetSRV(RawStorageFormat viewFo
   srvDesc.Texture2D.MipLevels             = 1; // NOLINT
 
   return srvDesc;
+}
+
+D3D12_UNORDERED_ACCESS_VIEW_DESC D3D12ScopedImage::GetUAV(RawStorageFormat viewFormat,
+  ImageViewType imageView,
+  const Log& log_D3D12RenderSystem) {
+  const auto format = ToDXGI_FORMAT(viewFormat);
+  VERIFY_OPT(log_D3D12RenderSystem, format, "Unknown Format");
+
+  const auto uavView = ToD3D12_UAV_DIMENSION(imageView);
+  VERIFY_OPT(log_D3D12RenderSystem, format, "Unknown SRV View Dimensions");
+
+  DXGI_FORMAT uavFormat = format.value();
+  if (HasDepthComponent(viewFormat) || HasStencilComponent(viewFormat)) {
+    uavFormat = ConvertDepthFormatForSRV(uavFormat);
+  }
+
+  D3D12_UNORDERED_ACCESS_VIEW_DESC uavDesc = {};
+  uavDesc.Format = uavFormat;
+  uavDesc.ViewDimension = uavView.value();
+  uavDesc.Texture2D.MipSlice = 0; // NOLINT
+  uavDesc.Texture2D.PlaneSlice = 0; // NOLINT
+
+  return uavDesc;
 }
 
 D3D12_DEPTH_STENCIL_VIEW_DESC D3D12ScopedImage::GetDSV(RawStorageFormat viewFormat,

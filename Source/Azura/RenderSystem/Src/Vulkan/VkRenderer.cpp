@@ -29,6 +29,7 @@ VkRenderer::VkRenderer(const ApplicationInfo& appInfo,
     m_perFrameBuffer(4096),
     m_perFrameAllocator(m_perFrameBuffer, 4096),
     m_drawablePools(renderPassRequirements.m_maxPools, drawAllocator),
+    m_computePools(renderPassRequirements.m_maxPools, drawAllocator),
     m_swapChain(mainAllocator, log_VulkanRenderSystem),
     m_renderPasses(renderPassRequirements.m_passSequence.GetSize(), mainAllocator),
     m_descriptorSetLayouts(mainAllocator),
@@ -226,6 +227,12 @@ DrawablePool& VkRenderer::CreateDrawablePool(const DrawablePoolCreateInfo& creat
   m_drawablePools.PushBack(std::move(pool));
 
   return m_drawablePools.Last();
+}
+
+ComputePool& VkRenderer::CreateComputePool(const ComputePoolCreateInfo& createInfo) {
+  VkComputePool pool = VkComputePool(createInfo, m_descriptorCount, m_mainAllocator);
+  m_computePools.PushBack(std::move(pool));
+  return m_computePools.Last();
 }
 
 VkDevice VkRenderer::GetDevice() const {

@@ -24,7 +24,7 @@ struct D3D12RenderOutputInfo
 
 class D3D12ScopedRenderPass {
 public:
-  D3D12ScopedRenderPass(U32 idx, const D3D12ScopedSwapChain& swapChain, Memory::Allocator& mainAllocator, Log logger);
+  D3D12ScopedRenderPass(U32 idx, U32 internalId, const D3D12ScopedSwapChain& swapChain, Memory::Allocator& mainAllocator, Log logger);
 
   void Create(const Microsoft::WRL::ComPtr<ID3D12Device>& device,
               const PipelinePassCreateInfo& createInfo,
@@ -48,6 +48,7 @@ public:
                           UINT dsvDescriptorSize);
 
   U32 GetId() const;
+  U32 GetInternalId() const;
 
   ID3D12GraphicsCommandList* GetPrimaryGraphicsCommandList(U32 idx) const;
 
@@ -68,8 +69,10 @@ public:
 
   const Containers::Vector<DescriptorTableEntry>& GetRootSignatureTable() const;
 
-  void RecordResourceBarriersForOutputs(ID3D12GraphicsCommandList* commandList) const;
-  void RecordResourceBarriersForReadingInputs(ID3D12GraphicsCommandList* commandList) const;
+  void RecordResourceBarriersForOutputsStart(ID3D12GraphicsCommandList* commandList) const;
+  void RecordResourceBarriersForOutputsEnd(ID3D12GraphicsCommandList* commandList) const;
+  void RecordResourceBarriersForInputsStart(ID3D12GraphicsCommandList* commandList) const;
+  void RecordResourceBarriersForInputsEnd(ID3D12GraphicsCommandList* commandList) const;
 
   void RecordResourceBarriersForWritingInputs(ID3D12GraphicsCommandList * commandList) const;
 
@@ -91,6 +94,7 @@ private:
 
   const Log log_D3D12RenderSystem;
   U32 m_id;
+  U32 m_internalId;
 
   bool m_hasDepth{false};
   bool m_isTargetSwapChain{false};

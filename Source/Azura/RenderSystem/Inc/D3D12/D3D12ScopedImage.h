@@ -19,6 +19,8 @@ public:
                                                 ImageViewType imageView,
                                                 const Log& log_D3D12RenderSystem);
 
+  static D3D12_UNORDERED_ACCESS_VIEW_DESC GetUAV(RawStorageFormat viewFormat, ImageViewType imageView, const Log & log_D3D12RenderSystem);
+
   static D3D12_DEPTH_STENCIL_VIEW_DESC GetDSV(RawStorageFormat viewFormat, ImageViewType imageView, const Log & log_D3D12RenderSystem);
 
   static D3D12_RENDER_TARGET_VIEW_DESC GetRTV(RawStorageFormat viewFormat, ImageViewType imageView, const Log & log_D3D12RenderSystem);
@@ -38,7 +40,7 @@ public:
                   D3D12_RESOURCE_STATES fromState,
                   D3D12_RESOURCE_STATES toState) const;
 
-  void Transition(ID3D12GraphicsCommandList * commandList, D3D12_RESOURCE_STATES toState) const;
+  void Transition(ID3D12GraphicsCommandList * commandList, D3D12_RESOURCE_STATES toState);
 
 private:
   Microsoft::WRL::ComPtr<ID3D12Resource> m_texture;

@@ -2,6 +2,7 @@
 #include "D3D12/D3D12Macros.h"
 #include "D3D12/D3D12TypeMapping.h"
 #include "D3D12/D3D12ScopedRenderPass.h"
+#include "D3D12/D3D12ScopedComputePass.h"
 
 
 namespace Azura {
@@ -9,19 +10,38 @@ namespace D3D12 {
 
 D3D12ScopedPipeline::D3D12ScopedPipeline(const Microsoft::WRL::ComPtr<ID3D12Device>& device,
                                          D3D12_GRAPHICS_PIPELINE_STATE_DESC psoDesc,
-                                         const Log& log) {
+                                         const Log& log) : m_type(PipelineType::Graphics) {
 
   VERIFY_D3D_OP(log, device->CreateGraphicsPipelineState(&psoDesc, IID_PPV_ARGS(&m_pipeline)),
-    "Failed to create pipeline");
+    "Failed to create graphics pipeline");
+}
+
+D3D12ScopedPipeline::D3D12ScopedPipeline(const Microsoft::WRL::ComPtr<ID3D12Device>& device,
+  D3D12_COMPUTE_PIPELINE_STATE_DESC psoDesc,
+  const Log& log) : m_type(PipelineType::Compute) {
+
+  VERIFY_D3D_OP(log, device->CreateComputePipelineState(&psoDesc, IID_PPV_ARGS(&m_pipeline)),
+    "Failed to create compute pipeline");
 }
 
 ID3D12PipelineState* D3D12ScopedPipeline::GetState() const {
   return m_pipeline.Get();
 }
 
+PipelineType D3D12ScopedPipeline::GetType() const {
+  return m_type;
+}
+
 D3D12PipelineFactory::D3D12PipelineFactory(Memory::Allocator& allocator, Log logger)
   : log_D3D12RenderSystem(std::move(logger)),
+    m_type(PipelineType::Graphics),
     m_inputElementDescs(10, allocator) {
+}
+
+D3D12PipelineFactory& D3D12PipelineFactory::SetPipelineType(PipelineType type) {
+  m_type = type;
+
+  return *this;
 }
 
 D3D12PipelineFactory& D3D12PipelineFactory::BulkAddAttributeDescription(const VertexSlot& vertexSlot, U32 binding) {
@@ -78,6 +98,9 @@ D3D12PipelineFactory& D3D12PipelineFactory::AddShaderStage(const D3D12ScopedShad
       break;
 
     case ShaderStage::Compute:
+      m_computeShaderModule = shader.GetByteCode();
+      break;
+
     case ShaderStage::Geometry:
     case ShaderStage::All:
       LOG_ERR(log_D3D12RenderSystem, LOG_LEVEL, "Unsupported Shader Stage for Pipeline Factory");
@@ -92,36 +115,37 @@ D3D12PipelineFactory& D3D12PipelineFactory::AddShaderStage(const D3D12ScopedShad
 }
 
 void D3D12PipelineFactory::Submit(const Microsoft::WRL::ComPtr<ID3D12Device>& device, const Containers::Vector<std::reference_wrapper<D3D12ScopedRenderPass>>& renderPasses, Containers::Vector<D3D12ScopedPipeline>& resultPipelines) const {
+  assert(m_type == PipelineType::Graphics);
 
-  for(const auto& renderPass : renderPasses)
+  for (const auto& renderPass : renderPasses)
   {
     D3D12_GRAPHICS_PIPELINE_STATE_DESC psoDesc = {};
     psoDesc.InputLayout = { m_inputElementDescs.Data(), m_inputElementDescs.GetSize() };
     psoDesc.pRootSignature = renderPass.get().GetRootSignature();
 
 
-    for(const auto& shader : renderPass.get().GetShaders())
+    for (const auto& shader : renderPass.get().GetShaders())
     {
-      switch(shader.get().GetShaderStage())
+      switch (shader.get().GetShaderStage())
       {
-        case ShaderStage::All: break;
+      case ShaderStage::All: break;
 
-        case ShaderStage::Vertex:
-          psoDesc.VS = shader.get().GetByteCode();
+      case ShaderStage::Vertex:
+        psoDesc.VS = shader.get().GetByteCode();
         break;
 
-        case ShaderStage::Pixel:
-          psoDesc.PS = shader.get().GetByteCode();
+      case ShaderStage::Pixel:
+        psoDesc.PS = shader.get().GetByteCode();
         break;
 
-        case ShaderStage::Compute:
+      case ShaderStage::Compute:
         break;
 
-        case ShaderStage::Geometry:
-          psoDesc.GS = shader.get().GetByteCode();
+      case ShaderStage::Geometry:
+        psoDesc.GS = shader.get().GetByteCode();
         break;
 
-        default: break;
+      default: break;
       }
     }
 
@@ -150,6 +174,44 @@ void D3D12PipelineFactory::Submit(const Microsoft::WRL::ComPtr<ID3D12Device>& de
     resultPipelines.PushBack(D3D12ScopedPipeline(device, psoDesc, log_D3D12RenderSystem));
   }
 
+}
+
+void D3D12PipelineFactory::Submit(const Microsoft::WRL::ComPtr<ID3D12Device>& device,
+  const Containers::Vector<std::reference_wrapper<D3D12ScopedComputePass>>& computePasses,
+  Containers::Vector<D3D12ScopedPipeline>& resultPipelines) const {
+  
+  assert(m_type == PipelineType::Compute);
+
+  for (const auto& computePass : computePasses)
+  {
+    D3D12_COMPUTE_PIPELINE_STATE_DESC psoDesc = {};
+    psoDesc.pRootSignature = computePass.get().GetRootSignature();
+
+
+    for (const auto& shader : computePass.get().GetShaders())
+    {
+      switch (shader.get().GetShaderStage())
+      {
+      case ShaderStage::Compute:
+        psoDesc.CS = shader.get().GetByteCode();
+        break;
+
+      case ShaderStage::All:
+      case ShaderStage::Vertex:
+      case ShaderStage::Pixel:
+      case ShaderStage::Geometry:
+      default:
+        break;
+      }
+    }
+
+    if (m_computeShaderModule.has_value())
+    {
+      psoDesc.CS = m_computeShaderModule.value();
+    }
+
+    resultPipelines.PushBack(D3D12ScopedPipeline(device, psoDesc, log_D3D12RenderSystem));
+  }
 }
 } // namespace D3D12
 } // namespace Azura

@@ -31,6 +31,10 @@ set(
 
     "${PROJECT_SOURCE_DIR}/Shaders/BasicDeferredTest.Deferred.vs.slang|VS"
     "${PROJECT_SOURCE_DIR}/Shaders/BasicDeferredTest.Deferred.ps.slang|PS"
+
+    "${PROJECT_SOURCE_DIR}/Shaders/BasicCompute.vs.slang|VS"
+    "${PROJECT_SOURCE_DIR}/Shaders/BasicCompute.ps.slang|PS"
+    "${PROJECT_SOURCE_DIR}/Shaders/BasicCompute.cs.slang|CS"
 )
 
 add_executable(TestZone ${SOURCES})

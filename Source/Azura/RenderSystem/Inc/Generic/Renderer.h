@@ -5,6 +5,7 @@
 #include "Drawable.h"
 #include "GenericTypes.h"
 #include "Core/RawStorageFormat.h"
+#include "ComputePool.h"
 
 namespace Azura {
 class Window;
@@ -33,6 +34,7 @@ public:
   virtual String GetRenderingAPI() const = 0;
 
   virtual DrawablePool& CreateDrawablePool(const DrawablePoolCreateInfo& createInfo) = 0;
+  virtual ComputePool& CreateComputePool(const ComputePoolCreateInfo& createInfo) = 0;
 
   virtual void Submit() = 0;
   virtual void RenderFrame() = 0;
