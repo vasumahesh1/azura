@@ -29,6 +29,7 @@ D3D12Renderer::D3D12Renderer(const ApplicationInfo& appInfo,
     m_initBuffer(0x400000),
     m_initAllocator(m_initBuffer, 0x400000),
     m_renderSequence(renderPassRequirements.m_passSequence.GetSize(), mainAllocator),
+    m_renderTargetUpdates(renderPassRequirements.m_targets.GetSize(), m_initAllocator),
     m_renderTargetImages(renderPassRequirements.m_targets.GetSize(), mainAllocator),
     m_renderPasses(renderPassRequirements.m_passSequence.GetSize(), mainAllocator),
     m_computePasses(renderPassRequirements.m_passSequence.GetSize(), mainAllocator),
@@ -91,6 +92,12 @@ D3D12Renderer::D3D12Renderer(const ApplicationInfo& appInfo,
   m_swapChain.Create(factory, m_mainGraphicsCommandQueue, m_window.get(), swapChainRequirements, log_D3D12RenderSystem);
 
   SetCurrentFrame(m_swapChain.RealComPtr()->GetCurrentBackBufferIndex());
+
+  // Create Buffers
+  m_stagingBuffer.Create(m_device, CD3DX12_HEAP_PROPERTIES(D3D12_HEAP_TYPE_UPLOAD), GetApplicationRequirements().m_renderer.m_stagingBufferSize,
+    D3D12_RESOURCE_STATE_GENERIC_READ, log_D3D12RenderSystem);
+  m_stagingBuffer.Map();
+
 
   for (const auto& shaderCreateInfo : shaderRequirements.m_shaders) {
     D3D12Renderer::AddShader(shaderCreateInfo);
@@ -229,7 +236,27 @@ ComputePool& D3D12Renderer::CreateComputePool(const ComputePoolCreateInfo& creat
 void D3D12Renderer::Submit() {
   LOG_DBG(log_D3D12RenderSystem, LOG_LEVEL, "Submitting Renderer");
 
-  STACK_ALLOCATOR(Temporary, Memory::MonotonicAllocator, 4096);
+  HEAP_ALLOCATOR(Temporary, Memory::MonotonicAllocator, 8192);
+
+  if (m_renderTargetUpdates.GetSize() > 0) {
+    auto oneTimeSubmitBuffer = D3D12ScopedCommandBuffer(m_device, D3D12_COMMAND_LIST_TYPE_DIRECT, log_D3D12RenderSystem);
+    oneTimeSubmitBuffer.CreateGraphicsCommandList(m_device, nullptr, log_D3D12RenderSystem);
+    auto oneTimeCommandList = oneTimeSubmitBuffer.GetGraphicsCommandList();
+
+    for (const auto& renderTargetUpdate : m_renderTargetUpdates)
+    {
+      // TODO(vasumahesh1):[STATES]: Get current state and don't hardcode
+      auto& targetImage = m_renderTargetImages[renderTargetUpdate.m_binding];
+      targetImage.Transition(oneTimeCommandList, D3D12_RESOURCE_STATE_COMMON, D3D12_RESOURCE_STATE_COPY_DEST);
+      targetImage.CopyFromBuffer(m_device, oneTimeCommandList, m_stagingBuffer, renderTargetUpdate.m_offset);
+      targetImage.Transition(oneTimeCommandList, D3D12_RESOURCE_STATE_COPY_DEST, D3D12_RESOURCE_STATE_COMMON);
+    }
+
+    oneTimeCommandList->Close();
+    oneTimeSubmitBuffer.Execute(m_device, m_mainGraphicsCommandQueue.Get(), log_D3D12RenderSystem);
+    oneTimeSubmitBuffer.WaitForComplete(m_mainGraphicsCommandQueue.Get(), log_D3D12RenderSystem);
+  }
+
 
   for (auto& drawablePool : m_drawablePools) {
     drawablePool.Submit();
@@ -396,5 +423,27 @@ void D3D12Renderer::AddShader(const ShaderCreateInfo& info) {
 
   m_shaders.Last().SetStage(info.m_stage);
 }
+
+void D3D12Renderer::BindRenderTarget(U32 renderTargetId, const TextureDesc& desc, const U8* buffer) {
+  LOG_DBG(log_D3D12RenderSystem, LOG_LEVEL,
+    "D3D12 Render Target: Updating Render Target: %d of Size: %d bytes", renderTargetId, desc.m_size);
+
+  const U32 size = desc.m_size;
+
+  const U32 textureWidthBytes = desc.m_bounds.m_width * GetFormatSize(desc.m_format);
+
+  // TODO(vasumahesh1):[INPUT]: Could be an issue with sizeof(float)
+  const U32 offset = m_stagingBuffer.AppendTextureData(buffer, size, 512, textureWidthBytes, D3D12_TEXTURE_DATA_PITCH_ALIGNMENT, log_D3D12RenderSystem);
+
+  TextureBufferInfo info = TextureBufferInfo();
+  info.m_byteSize        = size;
+  info.m_offset          = offset;
+  info.m_desc            = desc;
+  info.m_binding         = renderTargetId;
+  info.m_set             = 0;
+
+  m_renderTargetUpdates.PushBack(info);
+}
+
 } // namespace D3D12
 } // namespace Azura

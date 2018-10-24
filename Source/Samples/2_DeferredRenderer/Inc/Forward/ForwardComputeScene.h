@@ -39,6 +39,7 @@ private:
   ForwardComputePass m_pass{};
   DrawablePool* m_mainPool{nullptr};
   ComputePool* m_computePool{nullptr};
+  LightTexture m_lightTexture;
 };
 
 } // namespace Azura

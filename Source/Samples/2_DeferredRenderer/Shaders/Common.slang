@@ -49,7 +49,8 @@ struct Light {
 };
 
 struct LightUBO {
-  Light lights[NUM_LIGHTS];
+  float timeDelta;
+  float3 _pad;
 };
 
 float cubicGaussian(float h) {

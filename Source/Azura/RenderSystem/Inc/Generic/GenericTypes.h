@@ -363,7 +363,12 @@ constexpr U32 MAX_RENDER_PASS_OUTPUTS  = 4;
 constexpr U32 MAX_RENDER_PASS_SETS     = 8;
 constexpr U32 MAX_RENDER_PASS_SHADERS  = 4;
 
+struct MemoryRequirements {
+  U32 m_stagingBufferSize{0x4000000};
+};
+
 struct ApplicationRequirements {
+  MemoryRequirements m_renderer;
 };
 
 struct SwapChainRequirements {
