@@ -8,7 +8,7 @@ namespace Azura {
 
 
 ForwardComputeScene::ForwardComputeScene(Memory::Allocator& mainAllocator, Memory::Allocator& drawAllocator)
-  : Scene("ForwardComputeScene", mainAllocator, drawAllocator) {
+  : Scene("ForwardComputeScene", mainAllocator, drawAllocator), m_lightTexture(NUM_LIGHTS, 7, mainAllocator) {
 }
 
 void ForwardComputeScene::Initialize(Window& window,
@@ -124,6 +124,8 @@ void ForwardComputeScene::Initialize(Window& window,
   m_textureManager = RenderSystem::CreateTextureManager(textureRequirements);
 
   // Load Assets
+  m_lightTexture.Fill(lights);
+  m_renderer->BindRenderTarget(LIGHT_TARGET, m_lightTexture.GetTextureDesc(), m_lightTexture.GetBuffer());
 
   ComputePoolCreateInfo computePoolInfo = { allocatorTemporary };
   computePoolInfo.m_byteSize = 0xF00000;
@@ -133,9 +135,9 @@ void ForwardComputeScene::Initialize(Window& window,
   ComputePool& computePool = m_renderer->CreateComputePool(computePoolInfo);
   m_computePool         = &computePool;
 
-  const auto lightUBOStart      = reinterpret_cast<const U8*>(lights.Data()); // NOLINT
-
-  computePool.BindUniformData(m_pass.m_computeUBO, lightUBOStart, sizeof(PointLight) * lights.GetSize());
+  const LightUBO temp{};
+  const auto lightUBOStart      = reinterpret_cast<const U8*>(&temp); // NOLINT
+  computePool.BindUniformData(m_pass.m_computeUBO, lightUBOStart, sizeof(LightUBO));
 
   DrawablePoolCreateInfo poolInfo = {allocatorTemporary};
   poolInfo.m_byteSize             = 0xF00000;
@@ -201,13 +203,16 @@ void ForwardComputeScene::Update(float timeDelta,
                                  const UniformBufferData& uboData,
                                  const Containers::Vector<PointLight>& lights) {
 
-  UNUSED(timeDelta);
+  UNUSED(lights);
+
+  LightUBO frameUBO = {};
+  frameUBO.timeDelta = timeDelta;
 
   const auto uboDataBuffer = reinterpret_cast<const U8*>(&uboData); // NOLINT
-  const auto lightUBOStart      = reinterpret_cast<const U8*>(lights.Data()); // NOLINT
+  const auto lightUBOStart = reinterpret_cast<const U8*>(&frameUBO); // NOLINT
 
   m_computePool->BeginUpdates();
-  m_computePool->UpdateUniformData(m_pass.m_computeUBO, lightUBOStart, sizeof(PointLight) * lights.GetSize());
+  m_computePool->UpdateUniformData(m_pass.m_computeUBO, lightUBOStart, sizeof(LightUBO));
   m_computePool->SubmitUpdates();
   
   m_mainPool->BeginUpdates();

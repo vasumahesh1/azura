@@ -648,6 +648,12 @@ void VkRenderer::SnapshotFrame(const String& exportPath) const {
     height);
 }
 
+void VkRenderer::BindRenderTarget(U32 renderTargetId, const TextureDesc& desc, const U8* buffer) {
+  UNUSED(renderTargetId);
+  UNUSED(desc);
+  UNUSED(buffer);
+}
+
 void VkRenderer::AddShader(const ShaderCreateInfo& info) {
   // TODO(vasumahesh1):[ASSETS]: Manage assets
   const String fullPath = "Shaders/" + VkRenderer::GetRenderingAPI() + "/" + info.m_shaderFileName;

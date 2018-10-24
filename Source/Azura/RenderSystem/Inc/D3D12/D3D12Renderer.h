@@ -43,6 +43,8 @@ public:
 
   void SnapshotFrame(const String& exportPath) const override;
 
+  void BindRenderTarget(U32 renderTargetId, const TextureDesc& desc, const U8* buffer) override;
+
 private:
   void AddShader(const ShaderCreateInfo& info) override;
 
@@ -68,6 +70,10 @@ private:
   CD3DX12_RECT m_scissorRect;
 
   D3D12ScopedImage m_depthTexture{};
+
+  D3D12ScopedBuffer m_stagingBuffer;
+
+  Containers::Vector<TextureBufferInfo> m_renderTargetUpdates;
 
   Containers::Vector<std::pair<U32, RenderPassType>> m_renderSequence;
 

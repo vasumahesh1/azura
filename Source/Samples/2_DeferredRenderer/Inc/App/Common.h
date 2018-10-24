@@ -47,4 +47,10 @@ struct MeshObject
   U32 m_normalDataSize{0};
 };
 
+struct LightUBO
+{
+  float timeDelta{ 0.0f };
+  float _pad[3];
+};
+
 } // namespace Azura
