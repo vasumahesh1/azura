@@ -35,7 +35,6 @@ D3D12ComputePool::D3D12ComputePool(const ComPtr<ID3D12Device>& device,
     m_pipelineFactory(initAllocator, log_D3D12RenderSystem),
     m_images(mainAllocator),
     m_samplers(mainAllocator),
-    m_secondaryCommandBuffers(createInfo.m_computePasses.GetSize(), mainAllocator),
     m_allHeaps(mainAllocator) {
   LOG_DBG(log_D3D12RenderSystem, LOG_LEVEL, "Creating D3D12 Drawable Pool");
 
@@ -274,9 +273,6 @@ void D3D12ComputePool::Submit() {
   U32 inputsTillNow = 0;
   U32 outputsTillNow = 0;
   for (U32 idx      = 0; idx < m_computePasses.GetSize(); ++idx) {
-    D3D12ScopedCommandBuffer cmdBuffer(m_device, D3D12_COMMAND_LIST_TYPE_BUNDLE, log_D3D12RenderSystem);
-    m_secondaryCommandBuffers.PushBack(cmdBuffer);
-
     const auto& renderPassInputs = m_computePasses[idx].get().GetInputImages();
     const auto& renderPassOutputs = m_computePasses[idx].get().GetOutputImages();
 
@@ -321,6 +317,11 @@ void D3D12ComputePool::Submit() {
 
   LOG_DBG(log_D3D12RenderSystem, LOG_LEVEL, "D3D12 Drawable Pool: Created Pipelines");
 
+  
+}
+
+void D3D12ComputePool::Record()
+{
   // Record Command Buffer
 
   LOG_DBG(log_D3D12RenderSystem, LOG_LEVEL, "D3D12 Drawable Pool: Begin Recording");
@@ -336,8 +337,7 @@ void D3D12ComputePool::Submit() {
   for (const auto& renderPassRef : m_computePasses) {
     const auto& renderPass                   = renderPassRef.get();
 
-    m_secondaryCommandBuffers[idx].CreateGraphicsCommandList(m_device, m_pipelines[idx].GetState(), log_D3D12RenderSystem);
-    auto bundleCommandList = m_secondaryCommandBuffers[idx].GetGraphicsCommandList();
+    ID3D12GraphicsCommandList* secondaryCommandList = renderPass.GetPrimaryComputeCommandList(0);
 
     const auto& renderPassDescriptorCount    = renderPass.GetDescriptorCount();
     const auto& renderPassRootSignatureTable = renderPass.GetRootSignatureTable();
@@ -345,41 +345,42 @@ void D3D12ComputePool::Submit() {
     const auto& renderPassOutputs             = renderPass.GetOutputImages();
 
     // Define Heap Handles
-    CD3DX12_GPU_DESCRIPTOR_HANDLE textureGPUHandle(m_descriptorComputeHeap->GetGPUDescriptorHandleForHeapStart(),
-                                                   sampledImageRecorded, m_cbvSrvDescriptorElementSize);
+    CD3DX12_GPU_DESCRIPTOR_HANDLE textureGPUHandle = CD3DX12_GPU_DESCRIPTOR_HANDLE(m_descriptorComputeHeap->GetGPUDescriptorHandleForHeapStart(),
+      sampledImageRecorded, m_cbvSrvDescriptorElementSize);
 
-    const CD3DX12_GPU_DESCRIPTOR_HANDLE inputsGPUHandle(m_descriptorComputeHeap->GetGPUDescriptorHandleForHeapStart(),
-                                                        m_offsetToComputePassInputs + inputsRecorded,
-                                                        m_cbvSrvDescriptorElementSize);
+    const CD3DX12_GPU_DESCRIPTOR_HANDLE inputsGPUHandle = CD3DX12_GPU_DESCRIPTOR_HANDLE(m_descriptorComputeHeap->GetGPUDescriptorHandleForHeapStart(),
+      m_offsetToComputePassInputs + inputsRecorded,
+      m_cbvSrvDescriptorElementSize);
 
-    const CD3DX12_GPU_DESCRIPTOR_HANDLE outputsGPUHandle(m_descriptorComputeHeap->GetGPUDescriptorHandleForHeapStart(),
+    const CD3DX12_GPU_DESCRIPTOR_HANDLE outputsGPUHandle = CD3DX12_GPU_DESCRIPTOR_HANDLE(m_descriptorComputeHeap->GetGPUDescriptorHandleForHeapStart(),
       m_offsetToComputePassOutputs + outputsRecorded,
       m_cbvSrvDescriptorElementSize);
 
-    CD3DX12_GPU_DESCRIPTOR_HANDLE samplerGPUHandle;
+    CD3DX12_GPU_DESCRIPTOR_HANDLE samplerGPUHandle = {};
     if (renderPassDescriptorCount.m_numSamplerSlots > 0) {
       samplerGPUHandle = CD3DX12_GPU_DESCRIPTOR_HANDLE(m_descriptorSamplerHeap->GetGPUDescriptorHandleForHeapStart(),
-                                                       samplersRecorded, m_samplerDescriptorElementSize);
+        samplersRecorded, m_samplerDescriptorElementSize);
     }
 
     CD3DX12_GPU_DESCRIPTOR_HANDLE uboGPUHandle(m_descriptorComputeHeap->GetGPUDescriptorHandleForHeapStart(), cbRecorded + m_offsetToConstantBuffers, m_cbvSrvDescriptorElementSize);
 
-    bundleCommandList->SetDescriptorHeaps(UINT(m_allHeaps.GetSize()), m_allHeaps.Data());
-    bundleCommandList->SetComputeRootSignature(renderPass.GetRootSignature());
+    secondaryCommandList->SetDescriptorHeaps(UINT(m_allHeaps.GetSize()), m_allHeaps.Data());
+    secondaryCommandList->SetComputeRootSignature(renderPass.GetRootSignature());
+    secondaryCommandList->SetPipelineState(m_pipelines[idx].GetState());
 
     U32 tableIdx = 0;
     for (const auto& tableEntry : renderPassRootSignatureTable) {
       if (tableEntry.m_type == DescriptorType::SampledImage) {
         LOG_DEBUG(log_D3D12RenderSystem, LOG_LEVEL, "Setting Texture Descriptor Table at %d", tableIdx);
-        bundleCommandList->SetComputeRootDescriptorTable(tableIdx, textureGPUHandle);
+        secondaryCommandList->SetComputeRootDescriptorTable(tableIdx, textureGPUHandle);
         textureGPUHandle.Offset(tableEntry.m_count, m_cbvSrvDescriptorElementSize);
-      } else if (tableEntry.m_type == DescriptorType::Sampler) {
+      } else if (renderPassDescriptorCount.m_numSamplerSlots > 0 && tableEntry.m_type == DescriptorType::Sampler) {
         LOG_DEBUG(log_D3D12RenderSystem, LOG_LEVEL, "Setting Sampler Descriptor Table at %d", tableIdx);
-        bundleCommandList->SetComputeRootDescriptorTable(tableIdx, samplerGPUHandle);
+        secondaryCommandList->SetComputeRootDescriptorTable(tableIdx, samplerGPUHandle);
         samplerGPUHandle.Offset(tableEntry.m_count, m_samplerDescriptorElementSize);
       } else if (tableEntry.m_type == DescriptorType::UniformBuffer) {
         LOG_DEBUG(log_D3D12RenderSystem, LOG_LEVEL, "Setting Uniform Descriptor Table at %d", tableIdx);
-        bundleCommandList->SetComputeRootDescriptorTable(tableIdx, uboGPUHandle);
+        secondaryCommandList->SetComputeRootDescriptorTable(tableIdx, uboGPUHandle);
         uboGPUHandle.Offset(tableEntry.m_count, m_cbvSrvDescriptorElementSize);
       }
 
@@ -387,13 +388,13 @@ void D3D12ComputePool::Submit() {
     }
 
     if (renderPassInputs.GetSize() > 0) {
-      bundleCommandList->SetComputeRootDescriptorTable(renderPass.GetInputRootDescriptorTableId(), inputsGPUHandle);
+      secondaryCommandList->SetComputeRootDescriptorTable(renderPass.GetInputRootDescriptorTableId(), inputsGPUHandle);
       LOG_DEBUG(log_D3D12RenderSystem, LOG_LEVEL, "Setting Input Attachment Descriptor Table at %d",
         renderPassRootSignatureTable.GetSize());
     }
-    
+
     if (renderPassOutputs.GetSize() > 0) {
-      bundleCommandList->SetComputeRootDescriptorTable(renderPass.GetOutputRootDescriptorTableId(), outputsGPUHandle);
+      secondaryCommandList->SetComputeRootDescriptorTable(renderPass.GetOutputRootDescriptorTableId(), outputsGPUHandle);
       LOG_DEBUG(log_D3D12RenderSystem, LOG_LEVEL, "Setting Input Attachment Descriptor Table at %d",
         renderPassRootSignatureTable.GetSize());
     }
@@ -406,7 +407,7 @@ void D3D12ComputePool::Submit() {
 
     LOG_DBG(log_D3D12RenderSystem, LOG_LEVEL, "D3D12 Drawable Pool: Recording Commands For Dispatch");
 
-    bundleCommandList->Dispatch(UINT(m_launchDims.m_x), UINT(m_launchDims.m_y), UINT(m_launchDims.m_z));
+    secondaryCommandList->Dispatch(UINT(m_launchDims.m_x), UINT(m_launchDims.m_y), UINT(m_launchDims.m_z));
 
     ++idx;
   }
@@ -503,25 +504,6 @@ const Vector<ID3D12DescriptorHeap*>& D3D12ComputePool::GetAllDescriptorHeaps() c
 
 ID3D12PipelineState* D3D12ComputePool::GetPipelineState(U32 renderPassId) const {
   return m_pipelines[renderPassId].GetState();
-}
-
-ID3D12GraphicsCommandList* D3D12ComputePool::GetSecondaryCommandList(U32 renderPassId) const {
-  return m_secondaryCommandBuffers[renderPassId].GetGraphicsCommandList();
-}
-
-void D3D12ComputePool::GetRecordEntries(Vector<std::pair<U32, D3D12ComputePassRecordEntry>>& recordList) const {
-  recordList.Reserve(m_computePasses.GetSize());
-
-  U32 idx = 0;
-  for (const auto& pass : m_computePasses) {
-    D3D12ComputePassRecordEntry entry = {};
-    entry.m_pso                       = GetPipelineState(idx);
-    entry.m_bundle                    = GetSecondaryCommandList(idx);
-
-    recordList.PushBack(std::make_pair(pass.get().GetInternalId(), entry));
-  }
-
-  ++idx;
 }
 
 void D3D12ComputePool::CreateRenderPassReferences(const ComputePoolCreateInfo& createInfo,

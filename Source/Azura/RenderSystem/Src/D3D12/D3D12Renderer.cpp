@@ -43,17 +43,17 @@ D3D12Renderer::D3D12Renderer(const ApplicationInfo& appInfo,
 
 #ifdef BUILD_DEBUG
   UINT dxgiFactoryFlags = 0;
-  // ComPtr<ID3D12Debug> debugController;
-  // ComPtr<ID3D12Debug1> debugController1;
-  // if (SUCCEEDED(D3D12GetDebugInterface(IID_PPV_ARGS(&debugController)))) {
-  //   debugController->EnableDebugLayer();
-  //
-  //   debugController->QueryInterface(IID_PPV_ARGS(&debugController1));
-  //   debugController1->SetEnableGPUBasedValidation(true); // NOLINT
-  //
-  //   // Enable additional debug layers.
-  //   dxgiFactoryFlags |= DXGI_CREATE_FACTORY_DEBUG;
-  // }
+  ComPtr<ID3D12Debug> debugController;
+  ComPtr<ID3D12Debug1> debugController1;
+  if (SUCCEEDED(D3D12GetDebugInterface(IID_PPV_ARGS(&debugController)))) {
+    debugController->EnableDebugLayer();
+  
+    debugController->QueryInterface(IID_PPV_ARGS(&debugController1));
+    debugController1->SetEnableGPUBasedValidation(true); // NOLINT
+  
+    // Enable additional debug layers.
+    dxgiFactoryFlags |= DXGI_CREATE_FACTORY_DEBUG;
+  }
 #elif defined(BUILD_RELEASE)
   const UINT dxgiFactoryFlags = 0;
 #endif
@@ -310,51 +310,29 @@ void D3D12Renderer::Submit() {
     computePool.Submit();
   }
 
-  Vector<Vector<D3D12ComputePassRecordEntry>> computePassEntries(m_computePasses.GetSize(), allocatorTemporary);
-  for (U32 idx = 0; idx < m_computePasses.GetSize(); ++idx) {
-    Vector<D3D12ComputePassRecordEntry> poolEntries(m_computePools.GetSize(), allocatorTemporary);
-    computePassEntries.PushBack(poolEntries);
-  }
-
-  U32 computeIdx = 0;
-  for (auto& computePool : m_computePools) {
-    Vector<std::pair<U32, D3D12ComputePassRecordEntry>> poolEntries(allocatorTemporary);
-    computePool.GetRecordEntries(poolEntries);
-
-    for (const auto& bufferPair : poolEntries) {
-      computePassEntries[bufferPair.first].PushBack(bufferPair.second);
-      computePassEntries[bufferPair.first].Last().m_poolIdx = computeIdx;
-    }
-
-    ++computeIdx;
-  }
-
+  // Begin Recording - Open all command buffers
   for (U32 idx = 0; idx < m_computePasses.GetSize(); ++idx) {
     auto& computePass = m_computePasses[idx];
 
-    auto commandList = computePass.GetPrimaryComputeCommandList(0);
+    const auto commandList = computePass.GetPrimaryComputeCommandList(0);
 
     computePass.RecordResourceBarriersForOutputsStart(commandList);
     computePass.RecordResourceBarriersForInputsStart(commandList);
+  }
 
-    const auto& computePassRecords = computePassEntries[idx];
+  // Record Pool Wise - Pass Wise data
+  for (auto& computePool : m_computePools) {
+    computePool.Record();
+  }
 
-    commandList->SetComputeRootSignature(computePass.GetRootSignature());
+  // Close Recording
+  for (U32 idx = 0; idx < m_computePasses.GetSize(); ++idx) {
+    auto& computePass = m_computePasses[idx];
 
-    for (auto& recordEntry : computePassRecords) {
-      const auto& targetPool = m_computePools[recordEntry.m_poolIdx];
-
-      commandList->SetPipelineState(recordEntry.m_pso);
-
-      const auto& allHeaps = targetPool.GetAllDescriptorHeaps();
-      commandList->SetDescriptorHeaps(UINT(allHeaps.GetSize()), allHeaps.Data());
-
-      // commandList->ExecuteBundle(recordEntry.m_bundle);
-    }
+    const auto commandList = computePass.GetPrimaryComputeCommandList(0);
 
     computePass.RecordResourceBarriersForOutputsEnd(commandList);
     computePass.RecordResourceBarriersForInputsEnd(commandList);
-
     commandList->Close();
   }
 

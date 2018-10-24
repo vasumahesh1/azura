@@ -202,19 +202,17 @@ void ForwardComputeScene::Update(float timeDelta,
                                  const Containers::Vector<PointLight>& lights) {
 
   UNUSED(timeDelta);
-  UNUSED(uboData);
-  UNUSED(lights);
 
-  // const auto uboDataBuffer = reinterpret_cast<const U8*>(&uboData); // NOLINT
-  // const auto lightUBOStart      = reinterpret_cast<const U8*>(lights.Data()); // NOLINT
+  const auto uboDataBuffer = reinterpret_cast<const U8*>(&uboData); // NOLINT
+  const auto lightUBOStart      = reinterpret_cast<const U8*>(lights.Data()); // NOLINT
 
-  // m_computePool->BeginUpdates();
-  // m_computePool->UpdateUniformData(m_pass.m_computeUBO, lightUBOStart, sizeof(PointLight) * lights.GetSize());
-  // m_computePool->SubmitUpdates();
-  //
-  // m_mainPool->BeginUpdates();
-  // m_mainPool->UpdateUniformData(m_sponzaId, m_pass.m_uboSlot, uboDataBuffer, sizeof(UniformBufferData));
-  // m_mainPool->SubmitUpdates();
+  m_computePool->BeginUpdates();
+  m_computePool->UpdateUniformData(m_pass.m_computeUBO, lightUBOStart, sizeof(PointLight) * lights.GetSize());
+  m_computePool->SubmitUpdates();
+  
+  m_mainPool->BeginUpdates();
+  m_mainPool->UpdateUniformData(m_sponzaId, m_pass.m_uboSlot, uboDataBuffer, sizeof(UniformBufferData));
+  m_mainPool->SubmitUpdates();
 
   m_renderer->RenderFrame();
 }

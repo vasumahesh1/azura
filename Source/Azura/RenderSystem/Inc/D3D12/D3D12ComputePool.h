@@ -52,10 +52,6 @@ public:
   const Containers::Vector<ID3D12DescriptorHeap*>& GetAllDescriptorHeaps() const;
   ID3D12PipelineState* GetPipelineState(U32 renderPassId) const;
 
-  void GetRecordEntries(Containers::Vector<std::pair<U32, D3D12ComputePassRecordEntry>>& recordList) const;
-
-  ID3D12GraphicsCommandList* GetSecondaryCommandList(U32 renderPassId) const;
-
 private:
   void CreateRenderPassReferences(const ComputePoolCreateInfo& createInfo, const Containers::Vector<D3D12ScopedComputePass>& renderPasses);
   void CreateDescriptorHeap();
@@ -93,7 +89,6 @@ private:
 
   Containers::Vector<D3D12ScopedImage> m_images;
   Containers::Vector<D3D12ScopedSampler> m_samplers;
-  Containers::Vector<D3D12ScopedCommandBuffer> m_secondaryCommandBuffers;
 
   Microsoft::WRL::ComPtr<ID3D12DescriptorHeap> m_descriptorComputeHeap;
   Microsoft::WRL::ComPtr<ID3D12DescriptorHeap> m_descriptorSamplerHeap;
