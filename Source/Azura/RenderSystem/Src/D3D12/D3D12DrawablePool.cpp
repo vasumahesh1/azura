@@ -561,11 +561,15 @@ void D3D12DrawablePool::CreateRenderPassReferences(const DrawablePoolCreateInfo&
 }
 
 void D3D12DrawablePool::CreateInputAttributes(const DrawablePoolCreateInfo& createInfo) {
+  LOG_DBG(log_D3D12RenderSystem, LOG_LEVEL, "Adding Input Attributes to Pipeline");
+  
   U32 idx = 0;
   for (const auto& vertexSlot : createInfo.m_vertexDataSlots) {
     m_pipelineFactory.BulkAddAttributeDescription(vertexSlot, idx);
     ++idx;
   }
+
+  LOG_DBG(log_D3D12RenderSystem, LOG_LEVEL, "Finished Adding Input Attributes to Pipeline");
 }
 
 void D3D12DrawablePool::CreateDescriptorHeap(const DrawablePoolCreateInfo& createInfo) {
@@ -586,6 +590,11 @@ void D3D12DrawablePool::CreateDescriptorHeap(const DrawablePoolCreateInfo& creat
     m_descriptorsPerDrawable += count.m_numUniformSlots;
     numSamplers += count.m_numSamplerSlots;
   }
+
+  LOG_DBG(log_D3D12RenderSystem, LOG_LEVEL, "Allocating Descriptor Heaps");
+  LOG_DBG(log_D3D12RenderSystem, LOG_LEVEL, "Offset to Drawable: %d", m_offsetToDrawableHeap);
+  LOG_DBG(log_D3D12RenderSystem, LOG_LEVEL, "Offset to Render Pass: %d", m_offsetToRenderPassInputs);
+  LOG_DBG(log_D3D12RenderSystem, LOG_LEVEL, "Num Samplers: %d", numSamplers);
 
   D3D12_DESCRIPTOR_HEAP_DESC heapDesc = {};
   heapDesc.NumDescriptors             = m_offsetToDrawableHeap + createInfo.m_numDrawables * m_descriptorsPerDrawable;

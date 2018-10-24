@@ -29,7 +29,6 @@ namespace GLTFLoader
 {
   GLTFMeshInterface LoadFromJSON(const String& assetName, AssetLocation location, const Log& log);
 
-
 } // namespace GLTFLoader
 
 } // namespace Azura

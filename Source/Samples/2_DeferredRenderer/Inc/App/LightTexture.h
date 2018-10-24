@@ -2,7 +2,7 @@
 #include "Types.h"
 #include <Containers/Vector.h>
 
-#include "App/LightDefinitions.h"
+#include "App/Common.h"
 #include "D3D12/D3D12TextureManager.h"
 
 namespace Azura {

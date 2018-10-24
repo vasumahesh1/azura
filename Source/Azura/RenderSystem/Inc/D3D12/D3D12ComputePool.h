@@ -39,6 +39,7 @@ public:
   void AddShader(U32 shaderId) override;
   void BindTextureData(SlotID slot, const TextureDesc& desc, const U8* buffer) override;
   void BindSampler(SlotID slot, const SamplerDesc& desc) override;
+  void SetUniformBufferData();
   void BindUniformData(SlotID slot, const U8* buffer, U32 size) override;
   void Submit() override;
   void Record();
@@ -50,10 +51,6 @@ public:
 
   const Containers::Vector<ID3D12DescriptorHeap*>& GetAllDescriptorHeaps() const;
   ID3D12PipelineState* GetPipelineState(U32 renderPassId) const;
-
-  void GetRecordEntries(Containers::Vector<std::pair<U32, D3D12ComputePassRecordEntry>>& recordList) const;
-
-  ID3D12GraphicsCommandList* GetSecondaryCommandList(U32 renderPassId) const;
 
 private:
   void CreateRenderPassReferences(const ComputePoolCreateInfo& createInfo, const Containers::Vector<D3D12ScopedComputePass>& renderPasses);
@@ -92,7 +89,6 @@ private:
 
   Containers::Vector<D3D12ScopedImage> m_images;
   Containers::Vector<D3D12ScopedSampler> m_samplers;
-  Containers::Vector<D3D12ScopedCommandBuffer> m_secondaryCommandBuffers;
 
   Microsoft::WRL::ComPtr<ID3D12DescriptorHeap> m_descriptorComputeHeap;
   Microsoft::WRL::ComPtr<ID3D12DescriptorHeap> m_descriptorSamplerHeap;

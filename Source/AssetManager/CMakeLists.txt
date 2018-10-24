@@ -11,6 +11,8 @@ set(
 
 add_library(AssetManager ${SOURCES})
 
+AzuraAddLoggingSupport(AssetManager 50)
+
 target_include_directories(AssetManager PUBLIC ${PROJECT_SOURCE_DIR}/Inc)
 
 target_link_libraries(AssetManager PUBLIC Common Core Log GLTFSDK Boost::filesystem)

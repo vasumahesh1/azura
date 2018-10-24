@@ -1,3 +1,5 @@
+const static int NUM_LIGHTS = 128;
+
 struct UBOData {
   float4x4 u_model;
   float4x4 u_modelInvTranspose;
@@ -25,6 +27,15 @@ struct TextureBlock {
   Texture2D light;
 };
 
+struct TextureBlockCompute {
+  Texture2D tex;
+  Texture2D norm;
+};
+
+struct ComputeAttachment {
+  Texture2D light;
+};
+
 struct SamplerBlock {
   SamplerState samp;
   SamplerState lightSamp;
@@ -34,6 +45,11 @@ struct Light {
   float3 position;
   float radius;
   float3 color;
+  float _pad;
+};
+
+struct LightUBO {
+  Light lights[NUM_LIGHTS];
 };
 
 float cubicGaussian(float h) {
@@ -45,5 +61,3 @@ float cubicGaussian(float h) {
     return 0.0;
   }
 }
-
-const static int NUM_LIGHTS = 100;
