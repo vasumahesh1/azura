@@ -43,17 +43,17 @@ D3D12Renderer::D3D12Renderer(const ApplicationInfo& appInfo,
 
 #ifdef BUILD_DEBUG
   UINT dxgiFactoryFlags = 0;
-  ComPtr<ID3D12Debug> debugController;
-  ComPtr<ID3D12Debug1> debugController1;
-  if (SUCCEEDED(D3D12GetDebugInterface(IID_PPV_ARGS(&debugController)))) {
-    debugController->EnableDebugLayer();
-
-    debugController->QueryInterface(IID_PPV_ARGS(&debugController1));
-    debugController1->SetEnableGPUBasedValidation(true); // NOLINT
-
-    // Enable additional debug layers.
-    dxgiFactoryFlags |= DXGI_CREATE_FACTORY_DEBUG;
-  }
+  // ComPtr<ID3D12Debug> debugController;
+  // ComPtr<ID3D12Debug1> debugController1;
+  // if (SUCCEEDED(D3D12GetDebugInterface(IID_PPV_ARGS(&debugController)))) {
+  //   debugController->EnableDebugLayer();
+  //
+  //   debugController->QueryInterface(IID_PPV_ARGS(&debugController1));
+  //   debugController1->SetEnableGPUBasedValidation(true); // NOLINT
+  //
+  //   // Enable additional debug layers.
+  //   dxgiFactoryFlags |= DXGI_CREATE_FACTORY_DEBUG;
+  // }
 #elif defined(BUILD_RELEASE)
   const UINT dxgiFactoryFlags = 0;
 #endif
@@ -227,6 +227,8 @@ ComputePool& D3D12Renderer::CreateComputePool(const ComputePoolCreateInfo& creat
 }
 
 void D3D12Renderer::Submit() {
+  LOG_DBG(log_D3D12RenderSystem, LOG_LEVEL, "Submitting Renderer");
+
   STACK_ALLOCATOR(Temporary, Memory::MonotonicAllocator, 4096);
 
   for (auto& drawablePool : m_drawablePools) {
@@ -328,7 +330,7 @@ void D3D12Renderer::Submit() {
   }
 
   for (U32 idx = 0; idx < m_computePasses.GetSize(); ++idx) {
-    const auto& computePass = m_computePasses[idx];
+    auto& computePass = m_computePasses[idx];
 
     auto commandList = computePass.GetPrimaryComputeCommandList(0);
 
@@ -340,14 +342,14 @@ void D3D12Renderer::Submit() {
     commandList->SetComputeRootSignature(computePass.GetRootSignature());
 
     for (auto& recordEntry : computePassRecords) {
-      const auto& targetPool = m_drawablePools[recordEntry.m_poolIdx];
+      const auto& targetPool = m_computePools[recordEntry.m_poolIdx];
 
       commandList->SetPipelineState(recordEntry.m_pso);
 
       const auto& allHeaps = targetPool.GetAllDescriptorHeaps();
       commandList->SetDescriptorHeaps(UINT(allHeaps.GetSize()), allHeaps.Data());
 
-      commandList->ExecuteBundle(recordEntry.m_bundle);
+      // commandList->ExecuteBundle(recordEntry.m_bundle);
     }
 
     computePass.RecordResourceBarriersForOutputsEnd(commandList);
@@ -355,6 +357,8 @@ void D3D12Renderer::Submit() {
 
     commandList->Close();
   }
+
+  LOG_DBG(log_D3D12RenderSystem, LOG_LEVEL, "Submit Complete - All Render Passes recorded");
 }
 
 void D3D12Renderer::RenderFrame() {
@@ -398,7 +402,6 @@ void D3D12Renderer::RenderFrame() {
   m_renderPasses.Last().WaitForGPU(m_mainGraphicsCommandQueue.Get());
 
   m_perFrameAllocator.Reset();
-
   ExitRenderFrame();
 }
 

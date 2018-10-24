@@ -513,12 +513,12 @@ void D3D12ComputePool::GetRecordEntries(Vector<std::pair<U32, D3D12ComputePassRe
   recordList.Reserve(m_computePasses.GetSize());
 
   U32 idx = 0;
-  for (const auto& renderPass : m_computePasses) {
+  for (const auto& pass : m_computePasses) {
     D3D12ComputePassRecordEntry entry = {};
     entry.m_pso                       = GetPipelineState(idx);
     entry.m_bundle                    = GetSecondaryCommandList(idx);
 
-    recordList.PushBack(std::make_pair(renderPass.get().GetInternalId(), entry));
+    recordList.PushBack(std::make_pair(pass.get().GetInternalId(), entry));
   }
 
   ++idx;
