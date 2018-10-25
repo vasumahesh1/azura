@@ -1,25 +1,27 @@
-const static uint NUM_LIGHTS = 128;
+static const uint NUM_LIGHTS = 128;
 
-const static uint BLOCK_SIZE = 16;
-const static uint MAX_LIGHTS_PER_CLUSTER = 128;
+static const uint BLOCK_SIZE = 16;
+static const uint MAX_LIGHTS_PER_CLUSTER = 124;
 
-const static float LIGHT_DT = -2.5;
-const static float3 LIGHT_MIN = {-5.0, 0.0, -5.0 };
-const static float3 LIGHT_MAX = { 5.0, 15.0, 5.0 };
-const static uint SCREEN_WIDTH = 1280;
-const static uint SCREEN_HEIGHT = 720;
-const static uint TILES_X = 16;
-const static uint TILES_Y = 16;
-const static uint TILES_Z = 16;
+static const float LIGHT_DT = -2.5;
+static const float3 LIGHT_MIN = {-5.0, 0.0, -5.0 };
+static const float3 LIGHT_MAX = { 5.0, 15.0, 5.0 };
+static const uint SCREEN_WIDTH = 1280;
+static const uint SCREEN_HEIGHT = 720;
+static const uint TILES_X = 16;
+static const uint TILES_Y = 16;
+static const uint TILES_Z = 16;
 
-const static uint WIDTH_PER_TILE = SCREEN_WIDTH / TILES_X;
-const static uint HEIGHT_PER_TILE = SCREEN_HEIGHT / TILES_Y;
+static const uint WIDTH_PER_TILE = SCREEN_WIDTH / TILES_X;
+static const uint HEIGHT_PER_TILE = SCREEN_HEIGHT / TILES_Y;
 
-const static uint THREAD_COUNT = BLOCK_SIZE * BLOCK_SIZE;
+static const uint THREAD_COUNT = BLOCK_SIZE * BLOCK_SIZE;
 
-const static uint LIGHTS_PER_THREAD = (NUM_LIGHTS + THREAD_COUNT - 1) / THREAD_COUNT;
+static const uint LIGHTS_PER_THREAD = (NUM_LIGHTS + THREAD_COUNT - 1) / THREAD_COUNT;
 
 static const float3 AMBIENT_LIGHT_INTENSITY = float3(0.1);
+
+static const uint CLUSTER_PIXEL_HEIGHT = 1 + (MAX_LIGHTS_PER_CLUSTER / 4);
 
 struct UBOData {
   float4x4 u_model;
@@ -66,7 +68,7 @@ struct ComputeAttachment {
 
 struct ForwardPlusComputeTexture_Pass2 {
   RWTexture2D<float4> lightTexture;
-  // RWTexture2D<float4> clusterTexture;
+  RWTexture2D<float4> clusterTexture;
 };
 
 struct ForwardPlusComputeAttachment_Pass2 {
@@ -91,7 +93,7 @@ struct ForwardPlusComputeAttachment_Pass3 {
   Texture2D gbuffer2;
   Texture2D gbuffer3;
   Texture2D light;
-  // Texture2D clusterTexture;
+  Texture2D clusterTexture;
 };
 
 struct SamplerBlock {

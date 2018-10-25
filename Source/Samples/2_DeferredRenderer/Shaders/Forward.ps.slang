@@ -39,16 +39,6 @@ Light UnpackLight(int index) {
   return light;
 }
 
-float3 applyNormalMap(float3 geomnor, float3 normap) {
-  normap = normap * 2.0 - 1.0;
-
-  float3 up = normalize(float3(0.001, 1, 0.001));
-  float3 surftan = normalize(cross(geomnor, up));
-  float3 surfbinor = cross(geomnor, surftan);
-
-  return normap.y * surftan + normap.x * surfbinor + normap.z * geomnor;
-}
-
 float4 main(ColorPixelInput input) : SV_Target
 {
   float3 albedo = textureBlock.tex.Sample(samplerBlock.samp, input.uv).rgb;

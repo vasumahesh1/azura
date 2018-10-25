@@ -6,6 +6,7 @@
 namespace Azura {
 
 constexpr U32 NUM_LIGHTS = 128;
+constexpr U32 MAX_LIGHTS_PER_CLUSTER = 124;
 const Vector3f LIGHT_MIN = {-5.0f, 0.0f, -5.0f };
 const Vector3f LIGHT_MAX = { 5.0f, 15.0f, 5.0f };
 constexpr float LIGHT_RADIUS = 5.0f;
@@ -14,6 +15,8 @@ constexpr float LIGHT_DT = -2.5f;
 constexpr U32 TILES_X = 16;
 constexpr U32 TILES_Y = 16;
 constexpr U32 TILES_Z = 16;
+
+constexpr U32 CLUSTER_PIXEL_HEIGHT = 1 + (MAX_LIGHTS_PER_CLUSTER / 4);
 
 struct UniformBufferData {
   Matrix4f m_model;
