@@ -23,6 +23,14 @@ void Camera::SetFarClip(const float value) {
   m_farClip = value;
 }
 
+float Camera::GetNearClip() const {
+  return m_nearClip;
+}
+
+float Camera::GetFarClip() const {
+  return m_farClip;
+}
+
 void Camera::SetFOVY(float value) {
   m_fovY = value;
 }
@@ -45,5 +53,13 @@ Matrix4f Camera::GetViewProjMatrix() const {
 
 Matrix4f Camera::GetInvViewProjMatrix() const {
   return m_invViewProj;
+}
+
+Matrix4f Camera::GetViewMatrix() const {
+  return m_view;
+}
+
+Matrix4f Camera::GetProjMatrix() const {
+  return m_proj;
 }
 } // namespace Azura

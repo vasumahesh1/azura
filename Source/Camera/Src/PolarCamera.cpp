@@ -34,10 +34,10 @@ void PolarCamera::Recompute() {
   m_eye = Transform::Downgrade(transform * Vector4f(UNIT_EYE, 1.0f));
 
 
-  const Matrix4f view = Transform::LookAt(m_ref, m_eye, m_up);
-  const Matrix4f proj = Transform::Perspective(45.0f, 16.0f / 9.0f, 0.1f, 100.0f);
+  m_view = Transform::LookAt(m_ref, m_eye, m_up);
+  m_proj = Transform::Perspective(45.0f, 16.0f / 9.0f, 0.1f, 100.0f);
 
-  m_viewProj = proj * view;
+  m_viewProj = m_proj * m_view;
   m_invViewProj = m_viewProj.Inverse();
 }
 

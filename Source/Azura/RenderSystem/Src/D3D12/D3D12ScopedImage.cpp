@@ -85,6 +85,7 @@ void D3D12ScopedImage::Create(const Microsoft::WRL::ComPtr<ID3D12Device>& device
 void D3D12ScopedImage::Transition(ID3D12GraphicsCommandList* commandList,
                                   D3D12_RESOURCE_STATES fromState,
                                   D3D12_RESOURCE_STATES toState, const Log& log_D3D12RenderSystem) const {
+  UNUSED(log_D3D12RenderSystem); // Release Mode
 
   LOG_DBG(log_D3D12RenderSystem, LOG_LEVEL, "[FORCE] Transitioning State: %s => %s", D3D12ResourceStateToString(fromState), D3D12ResourceStateToString(toState));
 
@@ -94,6 +95,8 @@ void D3D12ScopedImage::Transition(ID3D12GraphicsCommandList* commandList,
 
 void D3D12ScopedImage::Transition(ID3D12GraphicsCommandList* commandList,
   D3D12_RESOURCE_STATES toState, const Log& log_D3D12RenderSystem) {
+  UNUSED(log_D3D12RenderSystem); // Release Mode
+
   if (m_currentState == toState)
   {
     LOG_DBG(log_D3D12RenderSystem, LOG_LEVEL, "Current State is same as Transition State: %s", D3D12ResourceStateToString(toState));

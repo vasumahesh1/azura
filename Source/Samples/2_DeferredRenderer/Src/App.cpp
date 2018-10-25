@@ -71,9 +71,9 @@ void App::Initialize() {
   GenerateLights();
 
   // Init All Scenes here
-  // m_forwardScene.Initialize(*p_window, m_sponza, m_sceneUBO, m_lightSamplerDesc, m_lights);
-  // m_forwardComputeScene.Initialize(*p_window, m_sponza, m_sceneUBO, m_lightSamplerDesc, m_lights);
-  m_forwardPlusComputeScene.Initialize(*p_window, m_sponza, m_sceneUBO, m_lightSamplerDesc, m_lights);
+  // m_forwardScene.Initialize(*p_window, m_camera, m_sponza, m_sceneUBO, m_lightSamplerDesc, m_lights);
+  // m_forwardComputeScene.Initialize(*p_window, m_camera, m_sponza, m_sceneUBO, m_lightSamplerDesc, m_lights);
+  m_forwardPlusComputeScene.Initialize(*p_window, m_camera, m_sponza, m_sceneUBO, m_lightSamplerDesc, m_lights);
 
   p_activeScene = &m_forwardPlusComputeScene;
 }
@@ -90,7 +90,7 @@ void App::Update(float timeDelta) {
   m_camera.Update(timeDelta);
   m_sceneUBO.m_viewProj = m_camera.GetViewProjMatrix();
 
-  p_activeScene->Update(timeDelta, m_sceneUBO, m_lights);
+  p_activeScene->Update(timeDelta, m_camera, m_sceneUBO, m_lights);
 }
 
 void App::Run() const {

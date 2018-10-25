@@ -4,11 +4,6 @@ struct RWBlock {
     RWTexture2D<float4> rwTexture;
 };
 
-const static float LIGHT_DT = -2.5;
-const static float3 LIGHT_MIN = {-5.0, 0.0, -5.0 };
-const static float3 LIGHT_MAX = { 5.0, 15.0, 5.0 };
-
-
 ParameterBlock<LightUBO> lightUBO;
 ParameterBlock<RWBlock> rwBlock;
 

@@ -13,6 +13,7 @@ ForwardPlusComputeOut_PS main(ColorPixelInput input) : SV_Target
 
   result.target1 = float4(albedo, 1.0);
   result.target2 = float4(finalNormal, 1.0);
+  result.target3 = float4(input.worldPos.xyz, 1.0);
 
   return result;
 }

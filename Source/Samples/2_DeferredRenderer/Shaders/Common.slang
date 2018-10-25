@@ -1,4 +1,25 @@
-const static int NUM_LIGHTS = 128;
+const static uint NUM_LIGHTS = 128;
+
+const static uint BLOCK_SIZE = 16;
+const static uint MAX_LIGHTS_PER_CLUSTER = 128;
+
+const static float LIGHT_DT = -2.5;
+const static float3 LIGHT_MIN = {-5.0, 0.0, -5.0 };
+const static float3 LIGHT_MAX = { 5.0, 15.0, 5.0 };
+const static uint SCREEN_WIDTH = 1280;
+const static uint SCREEN_HEIGHT = 720;
+const static uint TILES_X = 16;
+const static uint TILES_Y = 16;
+const static uint TILES_Z = 16;
+
+const static uint WIDTH_PER_TILE = SCREEN_WIDTH / TILES_X;
+const static uint HEIGHT_PER_TILE = SCREEN_HEIGHT / TILES_Y;
+
+const static uint THREAD_COUNT = BLOCK_SIZE * BLOCK_SIZE;
+
+const static uint LIGHTS_PER_THREAD = (NUM_LIGHTS + THREAD_COUNT - 1) / THREAD_COUNT;
+
+static const float3 AMBIENT_LIGHT_INTENSITY = float3(0.1);
 
 struct UBOData {
   float4x4 u_model;
@@ -25,6 +46,7 @@ struct ForwardPlusComputeOut_PS
 {
   float4 target1 : SV_Target0;
   float4 target2 : SV_Target1;
+  float4 target3 : SV_Target2;
 };
 
 struct TextureBlock {
@@ -67,6 +89,7 @@ struct QuadInput_PS
 struct ForwardPlusComputeAttachment_Pass3 {
   Texture2D gbuffer1;
   Texture2D gbuffer2;
+  Texture2D gbuffer3;
   Texture2D light;
   // Texture2D clusterTexture;
 };
@@ -92,8 +115,14 @@ struct Light {
 };
 
 struct LightUBO {
+  float4x4 view;
+
+  float nearPlane;
+  float farPlane;
+  float2 _pad1;
+
   float timeDelta;
-  float3 _pad;
+  float3 _pad2;
 };
 
 float cubicGaussian(float h) {
@@ -105,42 +134,6 @@ float cubicGaussian(float h) {
     return 0.0;
   }
 }
-
-// float ExtractFloat(Texture2D tex, int textureWidth, int textureHeight, int index, int component) {
-//   float u = float(index + 1) / float(textureWidth + 1);
-//   int pixel = component / 4;
-//   float v = float(pixel + 1) / float(textureHeight + 1);
-
-//   float4 texel = tex.Sample(samplerBlock.lightSamp, float2(u, v));
-
-//   int pixelComponent = component - pixel * 4;
-
-//   if (pixelComponent == 0) {
-//     return texel[0];
-//   } else if (pixelComponent == 1) {
-//     return texel[1];
-//   } else if (pixelComponent == 2) {
-//     return texel[2];
-//   } else if (pixelComponent == 3) {
-//     return texel[3];
-//   }
-
-//   return 0.0;
-// }
-
-// Light UnpackLight(int index) {
-//   Light light;
-//   float u = float(index + 1) / float(NUM_LIGHTS + 1);
-  
-//   float4 v1 = attachmentBlock.light.Sample(samplerBlock.lightSamp, float2(u, 0.0));
-//   float4 v2 = attachmentBlock.light.Sample(samplerBlock.lightSamp, float2(u, 0.5));
-
-//   light.position = v1.xyz;
-//   light.radius = ExtractFloat(attachmentBlock.light, NUM_LIGHTS, 2, index, 3);
-//   light.color = v2.rgb;
-  
-//   return light;
-// }
 
 float3 applyNormalMap(float3 geomnor, float3 normap) {
   normap = normap * 2.0 - 1.0;
