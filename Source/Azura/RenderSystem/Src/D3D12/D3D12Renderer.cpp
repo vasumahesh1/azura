@@ -4,6 +4,7 @@
 #include "D3D12/d3dx12.h"
 #include "Memory/MemoryFactory.h"
 #include <array>
+#include "Log/Log.h"
 
 using namespace Microsoft::WRL;    // NOLINT
 using namespace Azura::Containers; // NOLINT
@@ -29,7 +30,7 @@ D3D12Renderer::D3D12Renderer(const ApplicationInfo& appInfo,
     m_initBuffer(0x400000),
     m_initAllocator(m_initBuffer, 0x400000),
     m_renderSequence(renderPassRequirements.m_passSequence.GetSize(), mainAllocator),
-    m_renderTargetUpdates(renderPassRequirements.m_targets.GetSize(), m_initAllocator),
+    m_renderTargetUpdates(renderPassRequirements.m_targets.GetSize(), mainAllocator),
     m_renderTargetImages(renderPassRequirements.m_targets.GetSize(), mainAllocator),
     m_renderPasses(renderPassRequirements.m_passSequence.GetSize(), mainAllocator),
     m_computePasses(renderPassRequirements.m_passSequence.GetSize(), mainAllocator),
@@ -124,7 +125,7 @@ D3D12Renderer::D3D12Renderer(const ApplicationInfo& appInfo,
 
     D3D12_RESOURCE_FLAGS resourceFlags = D3D12_RESOURCE_FLAG_ALLOW_RENDER_TARGET | D3D12_RESOURCE_FLAG_ALLOW_UNORDERED_ACCESS;
     if (HasDepthComponent(desc.m_format) || HasStencilComponent(desc.m_format)) {
-      resourceFlags = D3D12_RESOURCE_FLAG_ALLOW_DEPTH_STENCIL | D3D12_RESOURCE_FLAG_ALLOW_UNORDERED_ACCESS;
+      resourceFlags = D3D12_RESOURCE_FLAG_ALLOW_DEPTH_STENCIL;
     }
 
     m_renderTargetImages.PushBack(D3D12ScopedImage());
@@ -223,6 +224,7 @@ ComputePool& D3D12Renderer::CreateComputePool(const ComputePoolCreateInfo& creat
     m_descriptorSlots,
     m_shaders,
     m_computePasses,
+    m_mainComputeCommandQueue,
     m_mainGraphicsCommandQueue,
     m_drawPoolAllocator,
     m_initAllocator,
@@ -247,9 +249,9 @@ void D3D12Renderer::Submit() {
     {
       // TODO(vasumahesh1):[STATES]: Get current state and don't hardcode
       auto& targetImage = m_renderTargetImages[renderTargetUpdate.m_binding];
-      targetImage.Transition(oneTimeCommandList, D3D12_RESOURCE_STATE_COMMON, D3D12_RESOURCE_STATE_COPY_DEST);
+      targetImage.Transition(oneTimeCommandList, D3D12_RESOURCE_STATE_COMMON, D3D12_RESOURCE_STATE_COPY_DEST, log_D3D12RenderSystem);
       targetImage.CopyFromBuffer(m_device, oneTimeCommandList, m_stagingBuffer, renderTargetUpdate.m_offset);
-      targetImage.Transition(oneTimeCommandList, D3D12_RESOURCE_STATE_COPY_DEST, D3D12_RESOURCE_STATE_COMMON);
+      targetImage.Transition(oneTimeCommandList, D3D12_RESOURCE_STATE_COPY_DEST, D3D12_RESOURCE_STATE_COMMON, log_D3D12RenderSystem);
     }
 
     oneTimeCommandList->Close();
@@ -341,6 +343,8 @@ void D3D12Renderer::Submit() {
   for (U32 idx = 0; idx < m_computePasses.GetSize(); ++idx) {
     auto& computePass = m_computePasses[idx];
 
+    LOG_DBG(log_D3D12RenderSystem, LOG_LEVEL, "Begin Recording Compute Pass: %d", idx);
+
     const auto commandList = computePass.GetPrimaryComputeCommandList(0);
 
     computePass.RecordResourceBarriersForOutputsStart(commandList);
@@ -361,6 +365,8 @@ void D3D12Renderer::Submit() {
     computePass.RecordResourceBarriersForOutputsEnd(commandList);
     computePass.RecordResourceBarriersForInputsEnd(commandList);
     commandList->Close();
+
+    LOG_DBG(log_D3D12RenderSystem, LOG_LEVEL, "End Recording Compute Pass: %d", idx);
   }
 
   LOG_DBG(log_D3D12RenderSystem, LOG_LEVEL, "Submit Complete - All Render Passes recorded");

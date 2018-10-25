@@ -15,7 +15,8 @@ App::App() :
   m_lights(NUM_LIGHTS, m_mainAllocator),
   m_camera(1280, 720),
   m_forwardScene(m_mainAllocator, m_drawableAllocator),
-  m_forwardComputeScene(m_mainAllocator, m_drawableAllocator) {
+  m_forwardComputeScene(m_mainAllocator, m_drawableAllocator),
+  m_forwardPlusComputeScene(m_mainAllocator, m_drawableAllocator) {
 }
 
 void App::Initialize() {
@@ -71,9 +72,10 @@ void App::Initialize() {
 
   // Init All Scenes here
   // m_forwardScene.Initialize(*p_window, m_sponza, m_sceneUBO, m_lightSamplerDesc, m_lights);
-  m_forwardComputeScene.Initialize(*p_window, m_sponza, m_sceneUBO, m_lightSamplerDesc, m_lights);
+  // m_forwardComputeScene.Initialize(*p_window, m_sponza, m_sceneUBO, m_lightSamplerDesc, m_lights);
+  m_forwardPlusComputeScene.Initialize(*p_window, m_sponza, m_sceneUBO, m_lightSamplerDesc, m_lights);
 
-  p_activeScene = &m_forwardComputeScene;
+  p_activeScene = &m_forwardPlusComputeScene;
 }
 
 void App::Update(float timeDelta) {

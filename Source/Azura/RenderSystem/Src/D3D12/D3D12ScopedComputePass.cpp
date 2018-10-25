@@ -79,33 +79,33 @@ const Vector<DescriptorTableEntry>& D3D12ScopedComputePass::GetRootSignatureTabl
 
 void D3D12ScopedComputePass::RecordResourceBarriersForOutputsStart(ID3D12GraphicsCommandList* commandList) const {
   for (auto& rtv : m_computeOutputs) {
-    rtv.get().Transition(commandList, D3D12_RESOURCE_STATE_UNORDERED_ACCESS);
+    rtv.get().Transition(commandList, D3D12_RESOURCE_STATE_UNORDERED_ACCESS, log_D3D12RenderSystem);
   }
 }
   
 void D3D12ScopedComputePass::RecordResourceBarriersForOutputsEnd(ID3D12GraphicsCommandList* commandList) const {
   for (auto& rtv : m_computeOutputs) {
-    rtv.get().Transition(commandList, D3D12_RESOURCE_STATE_COMMON);
+    rtv.get().Transition(commandList, D3D12_RESOURCE_STATE_COMMON, log_D3D12RenderSystem);
   }
 }
 
 void D3D12ScopedComputePass::RecordResourceBarriersForInputsStart(ID3D12GraphicsCommandList* commandList) const {
   for (auto& rtv : m_computeInputs) {
-    rtv.get().Transition(commandList, D3D12_RESOURCE_STATE_GENERIC_READ);
+    rtv.get().Transition(commandList, D3D12_RESOURCE_STATE_NON_PIXEL_SHADER_RESOURCE, log_D3D12RenderSystem);
   }
 
   for (auto& dsv : m_computeDepthInputs) {
-    dsv.get().Transition(commandList, D3D12_RESOURCE_STATE_GENERIC_READ);
+    dsv.get().Transition(commandList, D3D12_RESOURCE_STATE_NON_PIXEL_SHADER_RESOURCE, log_D3D12RenderSystem);
   }
 }
   
 void D3D12ScopedComputePass::RecordResourceBarriersForInputsEnd(ID3D12GraphicsCommandList* commandList) const {
   for (auto& rtv : m_computeInputs) {
-    rtv.get().Transition(commandList, D3D12_RESOURCE_STATE_COMMON);
+    rtv.get().Transition(commandList, D3D12_RESOURCE_STATE_COMMON, log_D3D12RenderSystem);
   }
 
   for (auto& dsv : m_computeDepthInputs) {
-    dsv.get().Transition(commandList, D3D12_RESOURCE_STATE_COMMON);
+    dsv.get().Transition(commandList, D3D12_RESOURCE_STATE_COMMON, log_D3D12RenderSystem);
   }
 }
 
@@ -185,7 +185,7 @@ void D3D12ScopedComputePass::CreateBase(
 
   LOG_DBG(log_D3D12RenderSystem, LOG_LEVEL, "======== D3D12 Render Pass: Root Signature ========");
 
-  Vector<CD3DX12_ROOT_PARAMETER> descriptorTables(U32(createInfo.m_descriptorSets.size() + 1), allocatorTemporary);
+  Vector<CD3DX12_ROOT_PARAMETER> descriptorTables(U32(createInfo.m_descriptorSets.size() + 2), allocatorTemporary);
 
   m_rootSignatureTable.Reserve(U32(createInfo.m_descriptorSets.size()));
 

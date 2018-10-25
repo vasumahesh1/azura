@@ -20,6 +20,10 @@ set(
     "Inc/Forward/ForwardComputeScene.h"
     "Src/ForwardComputeScene.cpp"
 
+    # Forward+ Renderer with Compute
+    "Inc/ForwardPlus/ForwardPlusComputeScene.h"
+    "Src/ForwardPlusComputeScene.cpp"
+
     "Src/main.cpp"
 )
 
@@ -31,6 +35,15 @@ set(
     "${PROJECT_SOURCE_DIR}/Shaders/ForwardCompute.vs.slang|VS"
     "${PROJECT_SOURCE_DIR}/Shaders/ForwardCompute.ps.slang|PS"
     "${PROJECT_SOURCE_DIR}/Shaders/ForwardCompute.cs.slang|CS"
+
+    # Forward Plus Compute
+    "${PROJECT_SOURCE_DIR}/Shaders/ForwardPlusComputePass1.vs.slang|VS"
+    "${PROJECT_SOURCE_DIR}/Shaders/ForwardPlusComputePass1.ps.slang|PS"
+
+    "${PROJECT_SOURCE_DIR}/Shaders/ForwardPlusComputePass2.cs.slang|CS"
+
+    "${PROJECT_SOURCE_DIR}/Shaders/ScreenQuad.vs.slang|VS"
+    "${PROJECT_SOURCE_DIR}/Shaders/ForwardPlusComputePass3.ps.slang|PS"
 )
 
 add_executable(DeferredRenderer ${SOURCES})

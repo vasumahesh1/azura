@@ -4,6 +4,7 @@
 #include "D3D12/D3D12ScopedBuffer.h"
 
 #include "D3D12/d3dx12.h"
+#include "D3D12/D3D12Debug.h"
 
 
 namespace Azura {
@@ -83,17 +84,23 @@ void D3D12ScopedImage::Create(const Microsoft::WRL::ComPtr<ID3D12Device>& device
 
 void D3D12ScopedImage::Transition(ID3D12GraphicsCommandList* commandList,
                                   D3D12_RESOURCE_STATES fromState,
-                                  D3D12_RESOURCE_STATES toState) const {
+                                  D3D12_RESOURCE_STATES toState, const Log& log_D3D12RenderSystem) const {
+
+  LOG_DBG(log_D3D12RenderSystem, LOG_LEVEL, "[FORCE] Transitioning State: %s => %s", D3D12ResourceStateToString(fromState), D3D12ResourceStateToString(toState));
+
   const auto resourceBarrier = CD3DX12_RESOURCE_BARRIER::Transition(m_texture.Get(), fromState, toState);
   commandList->ResourceBarrier(1, &resourceBarrier);
 }
 
 void D3D12ScopedImage::Transition(ID3D12GraphicsCommandList* commandList,
-  D3D12_RESOURCE_STATES toState) {
+  D3D12_RESOURCE_STATES toState, const Log& log_D3D12RenderSystem) {
   if (m_currentState == toState)
   {
+    LOG_DBG(log_D3D12RenderSystem, LOG_LEVEL, "Current State is same as Transition State: %s", D3D12ResourceStateToString(toState));
     return;
   }
+
+  LOG_DBG(log_D3D12RenderSystem, LOG_LEVEL, "Transitioning State: %s => %s", D3D12ResourceStateToString(m_currentState), D3D12ResourceStateToString(toState));
 
   const auto resourceBarrier = CD3DX12_RESOURCE_BARRIER::Transition(m_texture.Get(), m_currentState, toState);
   commandList->ResourceBarrier(1, &resourceBarrier);

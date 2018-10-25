@@ -7,6 +7,7 @@
 #include "D3D12/D3D12ScopedImage.h"
 #include <algorithm>
 #include <utility>
+#include "D3D12/D3D12ScopedCommandBuffer.h"
 
 using namespace Microsoft::WRL;    // NOLINT
 using namespace Azura::Containers; // NOLINT
@@ -21,6 +22,7 @@ D3D12ComputePool::D3D12ComputePool(const ComPtr<ID3D12Device>& device,
                                      const Vector<D3D12ScopedShader>& shaders,
                                      const Vector<D3D12ScopedComputePass>& renderPasses,
                                      ComPtr<ID3D12CommandQueue> commandQueue,
+                                     ComPtr<ID3D12CommandQueue> graphicsQueue,
                                      Memory::Allocator& mainAllocator,
                                      Memory::Allocator& initAllocator,
                                      Log log)
@@ -31,7 +33,8 @@ D3D12ComputePool::D3D12ComputePool(const ComPtr<ID3D12Device>& device,
     m_shaders(shaders),
     m_pipelines(mainAllocator),
     m_computePasses(createInfo.m_computePasses.GetSize(), mainAllocator),
-    m_graphicsCommandQueue(std::move(commandQueue)),
+    m_computeCommandQueue(std::move(commandQueue)),
+    m_graphicsCommandQueue(std::move(graphicsQueue)),
     m_pipelineFactory(initAllocator, log_D3D12RenderSystem),
     m_images(mainAllocator),
     m_samplers(mainAllocator),
@@ -163,7 +166,7 @@ void D3D12ComputePool::SetTextureData(ID3D12GraphicsCommandList* oneTimeCommandL
     image.Create(m_device, D3D12_RESOURCE_STATE_COPY_DEST, D3D12_RESOURCE_FLAG_NONE, textBufInfo.m_desc,
                  log_D3D12RenderSystem);
     image.CopyFromBuffer(m_device, oneTimeCommandList, m_mainBuffer, textBufInfo.m_offset);
-    image.Transition(oneTimeCommandList, D3D12_RESOURCE_STATE_COPY_DEST, D3D12_RESOURCE_STATE_PIXEL_SHADER_RESOURCE);
+    image.Transition(oneTimeCommandList, D3D12_RESOURCE_STATE_COPY_DEST, D3D12_RESOURCE_STATE_PIXEL_SHADER_RESOURCE, log_D3D12RenderSystem);
 
     m_images.PushBack(std::move(image));
 
@@ -484,9 +487,9 @@ void D3D12ComputePool::SubmitUpdates() {
     else if (updateRegion.m_type == DescriptorType::SampledImage)
     {
       const auto& targetImage = m_images[updateRegion.m_idx];
-      targetImage.Transition(oneTimeCommandList, D3D12_RESOURCE_STATE_PIXEL_SHADER_RESOURCE, D3D12_RESOURCE_STATE_COPY_DEST);
+      targetImage.Transition(oneTimeCommandList, D3D12_RESOURCE_STATE_PIXEL_SHADER_RESOURCE, D3D12_RESOURCE_STATE_COPY_DEST, log_D3D12RenderSystem);
       targetImage.CopyFromBuffer(m_device, oneTimeCommandList, m_updateBuffer, updateRegion.m_updateOffset);
-      targetImage.Transition(oneTimeCommandList, D3D12_RESOURCE_STATE_COPY_DEST, D3D12_RESOURCE_STATE_PIXEL_SHADER_RESOURCE);
+      targetImage.Transition(oneTimeCommandList, D3D12_RESOURCE_STATE_COPY_DEST, D3D12_RESOURCE_STATE_PIXEL_SHADER_RESOURCE, log_D3D12RenderSystem);
     }
   }
 

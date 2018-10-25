@@ -11,6 +11,10 @@ const Vector3f LIGHT_MAX = { 5.0f, 15.0f, 5.0f };
 constexpr float LIGHT_RADIUS = 5.0f;
 constexpr float LIGHT_DT = -2.5f;
 
+constexpr U32 TILES_X = 16;
+constexpr U32 TILES_Y = 16;
+constexpr U32 TILES_Z = 16;
+
 struct UniformBufferData {
   Matrix4f m_model;
   Matrix4f m_modelInvTranspose;

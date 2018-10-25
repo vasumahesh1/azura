@@ -213,7 +213,7 @@ void D3D12DrawablePool::SetTextureData(ID3D12GraphicsCommandList* oneTimeCommand
     image.Create(m_device, D3D12_RESOURCE_STATE_COPY_DEST, D3D12_RESOURCE_FLAG_NONE, textBufInfo.m_desc,
                  log_D3D12RenderSystem);
     image.CopyFromBuffer(m_device, oneTimeCommandList, m_mainBuffer, textBufInfo.m_offset);
-    image.Transition(oneTimeCommandList, D3D12_RESOURCE_STATE_COPY_DEST, D3D12_RESOURCE_STATE_PIXEL_SHADER_RESOURCE);
+    image.Transition(oneTimeCommandList, D3D12_RESOURCE_STATE_COPY_DEST, D3D12_RESOURCE_STATE_PIXEL_SHADER_RESOURCE, log_D3D12RenderSystem);
 
     m_images.PushBack(std::move(image));
 
@@ -501,9 +501,9 @@ void D3D12DrawablePool::SubmitUpdates() {
     else if (updateRegion.m_type == DescriptorType::SampledImage)
     {
       const auto& targetImage = m_images[updateRegion.m_idx];
-      targetImage.Transition(oneTimeCommandList, D3D12_RESOURCE_STATE_PIXEL_SHADER_RESOURCE, D3D12_RESOURCE_STATE_COPY_DEST);
+      targetImage.Transition(oneTimeCommandList, D3D12_RESOURCE_STATE_PIXEL_SHADER_RESOURCE, D3D12_RESOURCE_STATE_COPY_DEST, log_D3D12RenderSystem);
       targetImage.CopyFromBuffer(m_device, oneTimeCommandList, m_updateBuffer, updateRegion.m_updateOffset);
-      targetImage.Transition(oneTimeCommandList, D3D12_RESOURCE_STATE_COPY_DEST, D3D12_RESOURCE_STATE_PIXEL_SHADER_RESOURCE);
+      targetImage.Transition(oneTimeCommandList, D3D12_RESOURCE_STATE_COPY_DEST, D3D12_RESOURCE_STATE_PIXEL_SHADER_RESOURCE, log_D3D12RenderSystem);
     }
   }
 
@@ -553,11 +553,14 @@ void D3D12DrawablePool::CreateRenderPassReferences(const DrawablePoolCreateInfo&
     });
 
     if (it != createInfo.m_renderPasses.End()) {
+      LOG_DBG(log_D3D12RenderSystem, LOG_LEVEL, "Adding Pool for Render Pass: %d", idx);
       m_renderPasses.PushBack(std::reference_wrapper<D3D12ScopedRenderPass>(renderPasses[idx]));
     }
 
     ++idx;
   }
+
+  LOG_DBG(log_D3D12RenderSystem, LOG_LEVEL, "Finished Adding Render Passes");
 }
 
 void D3D12DrawablePool::CreateInputAttributes(const DrawablePoolCreateInfo& createInfo) {

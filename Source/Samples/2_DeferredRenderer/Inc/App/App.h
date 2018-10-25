@@ -10,6 +10,7 @@
 #include "App/Scene.h"
 #include "Forward/ForwardScene.h"
 #include "Forward/ForwardComputeScene.h"
+#include "ForwardPlus/ForwardPlusComputeScene.h"
 
 namespace Azura
 {
@@ -30,8 +31,8 @@ private:
 
   Memory::HeapMemoryBuffer m_mainBuffer;
 
-  Memory::RangeAllocator m_mainAllocator;
-  Memory::RangeAllocator m_drawableAllocator;
+  Memory::MonotonicAllocator m_mainAllocator;
+  Memory::MonotonicAllocator m_drawableAllocator;
 
   Containers::Vector<PointLight> m_lights;
 
@@ -46,6 +47,7 @@ private:
 
   ForwardScene m_forwardScene;
   ForwardComputeScene m_forwardComputeScene;
+  ForwardPlusComputeScene m_forwardPlusComputeScene;
 
   std::unique_ptr<Window> p_window{nullptr};
 };

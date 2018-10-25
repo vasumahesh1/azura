@@ -32,6 +32,7 @@ public:
                     const Containers::Vector<D3D12ScopedShader>& shaders,
                     const Containers::Vector<D3D12ScopedComputePass>& renderPasses,
                     Microsoft::WRL::ComPtr<ID3D12CommandQueue> commandQueue,
+                    Microsoft::WRL::ComPtr<ID3D12CommandQueue> graphicsQueue,
                     Memory::Allocator& mainAllocator,
                     Memory::Allocator& initAllocator,
                     Log log);
@@ -74,6 +75,7 @@ private:
 
   Containers::Vector<std::reference_wrapper<D3D12ScopedComputePass>> m_computePasses;
 
+  Microsoft::WRL::ComPtr<ID3D12CommandQueue> m_computeCommandQueue;
   Microsoft::WRL::ComPtr<ID3D12CommandQueue> m_graphicsCommandQueue;
 
   D3D12PipelineFactory m_pipelineFactory;

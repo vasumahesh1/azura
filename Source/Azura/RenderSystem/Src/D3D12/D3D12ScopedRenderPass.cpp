@@ -3,6 +3,9 @@
 #include "Memory/MonotonicAllocator.h"
 #include "Memory/MemoryFactory.h"
 #include "D3D12/D3D12TypeMapping.h"
+#include "D3D12/D3D12ScopedSwapChain.h"
+#include "D3D12/D3D12ScopedImage.h"
+#include "D3D12/D3D12ScopedShader.h"
 
 using namespace Microsoft::WRL;    // NOLINT
 using namespace Azura::Containers; // NOLINT
@@ -235,51 +238,51 @@ const Containers::Vector<DescriptorTableEntry>& D3D12ScopedRenderPass::GetRootSi
 
 void D3D12ScopedRenderPass::RecordResourceBarriersForOutputsStart(ID3D12GraphicsCommandList* commandList) const {
   for (auto& rtv : m_renderOutputs) {
-    rtv.get().Transition(commandList, D3D12_RESOURCE_STATE_RENDER_TARGET);
+    rtv.get().Transition(commandList, D3D12_RESOURCE_STATE_RENDER_TARGET, log_D3D12RenderSystem);
   }
 
   for (auto& dsv : m_depthOutputs) {
-    dsv.get().Transition(commandList, D3D12_RESOURCE_STATE_DEPTH_WRITE);
+    dsv.get().Transition(commandList, D3D12_RESOURCE_STATE_DEPTH_WRITE, log_D3D12RenderSystem);
   }
 }
   
 void D3D12ScopedRenderPass::RecordResourceBarriersForOutputsEnd(ID3D12GraphicsCommandList* commandList) const {
   for (auto& rtv : m_renderOutputs) {
-    rtv.get().Transition(commandList, D3D12_RESOURCE_STATE_COMMON);
+    rtv.get().Transition(commandList, D3D12_RESOURCE_STATE_COMMON, log_D3D12RenderSystem);
   }
 
   for (auto& dsv : m_depthOutputs) {
-    dsv.get().Transition(commandList, D3D12_RESOURCE_STATE_COMMON);
+    dsv.get().Transition(commandList, D3D12_RESOURCE_STATE_COMMON, log_D3D12RenderSystem);
   }
 }
 
 void D3D12ScopedRenderPass::RecordResourceBarriersForInputsStart(ID3D12GraphicsCommandList* commandList) const {
   for (auto& rtv : m_renderInputs) {
-    rtv.get().Transition(commandList, D3D12_RESOURCE_STATE_GENERIC_READ);
+    rtv.get().Transition(commandList, D3D12_RESOURCE_STATE_GENERIC_READ, log_D3D12RenderSystem);
   }
 
   for (auto& dsv : m_depthInputs) {
-    dsv.get().Transition(commandList, D3D12_RESOURCE_STATE_GENERIC_READ);
+    dsv.get().Transition(commandList, D3D12_RESOURCE_STATE_GENERIC_READ, log_D3D12RenderSystem);
   }
 }
   
 void D3D12ScopedRenderPass::RecordResourceBarriersForInputsEnd(ID3D12GraphicsCommandList* commandList) const {
   for (auto& rtv : m_renderInputs) {
-    rtv.get().Transition(commandList, D3D12_RESOURCE_STATE_COMMON);
+    rtv.get().Transition(commandList, D3D12_RESOURCE_STATE_COMMON, log_D3D12RenderSystem);
   }
 
   for (auto& dsv : m_depthInputs) {
-    dsv.get().Transition(commandList, D3D12_RESOURCE_STATE_COMMON);
+    dsv.get().Transition(commandList, D3D12_RESOURCE_STATE_COMMON, log_D3D12RenderSystem);
   }
 }
 
 void D3D12ScopedRenderPass::RecordResourceBarriersForWritingInputs(ID3D12GraphicsCommandList* commandList) const {
   for (auto& rtv : m_renderInputs) {
-    rtv.get().Transition(commandList, D3D12_RESOURCE_STATE_GENERIC_READ, D3D12_RESOURCE_STATE_RENDER_TARGET);
+    rtv.get().Transition(commandList, D3D12_RESOURCE_STATE_GENERIC_READ, D3D12_RESOURCE_STATE_RENDER_TARGET, log_D3D12RenderSystem);
   }
 
   for (auto& dsv : m_depthInputs) {
-    dsv.get().Transition(commandList, D3D12_RESOURCE_STATE_GENERIC_READ, D3D12_RESOURCE_STATE_DEPTH_WRITE);
+    dsv.get().Transition(commandList, D3D12_RESOURCE_STATE_GENERIC_READ, D3D12_RESOURCE_STATE_DEPTH_WRITE, log_D3D12RenderSystem);
   }
 }
 

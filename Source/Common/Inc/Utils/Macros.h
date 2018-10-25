@@ -50,3 +50,7 @@
 
 #define ENUM_HAS(enumVar, value) \
   (enumVar & value) == value
+
+#define CASE_STR(r)   \
+    case r:           \
+        return #r
