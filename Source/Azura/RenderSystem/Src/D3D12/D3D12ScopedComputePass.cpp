@@ -305,6 +305,8 @@ void D3D12ScopedComputePass::CreateBase(
     m_computeInputTargetTableIdx = descriptorTables.GetSize();
 
     descriptorTables.PushBack(inputsRootParameter);
+
+    srvOffset += U32(createInfo.m_inputTargets.size());
   }
 
   // Have some inputs buffers
@@ -315,12 +317,13 @@ void D3D12ScopedComputePass::CreateBase(
       "D3D12 Render Pass: [Attachments] Applying %d Buffer Attachments as register t(%d) to t(%d)", createInfo.m_inputBuffers.
       size(), srvOffset, srvOffset + createInfo.m_inputBuffers.size() - 1);
 
-    inputBufferRangeData.Init(D3D12_DESCRIPTOR_RANGE_TYPE_UAV, UINT(createInfo.m_inputBuffers.size()), srvOffset);
+    inputBufferRangeData.Init(D3D12_DESCRIPTOR_RANGE_TYPE_SRV, UINT(createInfo.m_inputBuffers.size()), srvOffset);
     inputsRootParameter.InitAsDescriptorTable(1, &inputBufferRangeData, D3D12_SHADER_VISIBILITY_ALL);
 
     m_computeInputBufferTableIdx = descriptorTables.GetSize();
 
     descriptorTables.PushBack(inputsRootParameter);
+    srvOffset += U32(createInfo.m_inputBuffers.size()); // NOLINT
   }
 
   if (!createInfo.m_outputs.empty()) {

@@ -37,11 +37,16 @@ public:
   void CleanUp() override;
 
 private:
+  void FillFrustums(const Window& window, const Camera& camera);
+
   ForwardPlusComputePass m_pass{};
   DrawablePool* m_mainPool{nullptr};
   ComputePool* m_computePool{nullptr};
   LightTexture m_lightTexture;
   LightUBO m_lightUBO;
+
+  Containers::Vector<Frustum> m_frustums;
+
 };
 
 } // namespace Azura

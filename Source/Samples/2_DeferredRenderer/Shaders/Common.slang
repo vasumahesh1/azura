@@ -1,7 +1,7 @@
 static const uint NUM_LIGHTS = 128;
 
 static const uint BLOCK_SIZE = 16;
-static const uint MAX_LIGHTS_PER_CLUSTER = 124;
+static const uint MAX_LIGHTS_PER_CLUSTER = 252;
 
 static const float LIGHT_DT = -2.5;
 static const float3 LIGHT_MIN = {-5.0, 0.0, -5.0 };

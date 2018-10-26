@@ -37,27 +37,46 @@ Light UnpackLight(int index) {
   return light;
 }
 
+float3 ShadeLightByIndex(int index, float3 worldPos, float3 normal, float3 albedo) {
+  Light light = UnpackLight(index);
+
+  float lightDistance = distance(light.position, worldPos);
+
+  float3 L = (light.position - worldPos) / lightDistance;
+
+  float lightIntensity = cubicGaussian(2.0 * lightDistance / light.radius);
+  float lambertTerm = max(dot(L, normal), 0.0);
+  return albedo * lambertTerm * light.color * float3(lightIntensity);
+}
+
 float4 main(QuadInput_PS input) : SV_Target
 {
   float2 screenUV = input.uv;
   screenUV.y = 1.0 - screenUV.y;
 
-  float3 albedo = attachmentBlock.gbuffer1.Sample(samplerBlock.samp, screenUV).rgb;
-  float3 normal = attachmentBlock.gbuffer2.Sample(samplerBlock.samp, screenUV).rgb;
-  float3 worldPos = attachmentBlock.gbuffer3.Sample(samplerBlock.samp, screenUV).rgb;
+  const float3 albedo = attachmentBlock.gbuffer1.Sample(samplerBlock.samp, screenUV).rgb;
+  const float3 normal = attachmentBlock.gbuffer2.Sample(samplerBlock.samp, screenUV).rgb;
+  const float3 worldPos = attachmentBlock.gbuffer3.Sample(samplerBlock.samp, screenUV).rgb;
+
+  const uint tileX = floor((screenUV.x * SCREEN_WIDTH) / WIDTH_PER_TILE);
+  const uint tileY = floor((screenUV.y * SCREEN_HEIGHT) / HEIGHT_PER_TILE);
+
+  const uint fragClusterIdx = ((tileX * TILES_Y) + tileY);
+  // const float linearTile = fragClusterIdx / (TILES_X * TILES_Y);
+
+  // const float2 clusterStartUV = float2(linearTile, 0);
+  // const float4 clusterStart = attachmentBlock.clusterTexture.Sample(lightSamplerBlock.lightSamp, clusterStartUV);
+  // const uint numLights = clusterStart.r;
+
+  float numLights = ExtractFloat(attachmentBlock.clusterTexture, TILES_X * TILES_Y, CLUSTER_PIXEL_HEIGHT, fragClusterIdx, 0);
 
   float3 fragColor = float3(0.0);
 
-  for (int i = 0; i < NUM_LIGHTS; ++i) {
-    Light light = UnpackLight(i);
-
-    float lightDistance = distance(light.position, worldPos);
-
-    float3 L = (light.position - worldPos) / lightDistance;
-
-    float lightIntensity = cubicGaussian(2.0 * lightDistance / light.radius);
-    float lambertTerm = max(dot(L, normal), 0.0);
-    fragColor += albedo * lambertTerm * light.color * float3(lightIntensity);
+  uint height = 4;
+  for (uint i = 0; i < numLights; ++i) {
+    float lightIdx = ExtractFloat(attachmentBlock.clusterTexture, TILES_X * TILES_Y, CLUSTER_PIXEL_HEIGHT, fragClusterIdx, height);
+    fragColor += ShadeLightByIndex(int(lightIdx), worldPos, normal, albedo);
+    ++height;
   }
 
   // float4 normalColor = float4((normal + float3(1.0, 1.0, 1.0)) / 2.0, 1.0);

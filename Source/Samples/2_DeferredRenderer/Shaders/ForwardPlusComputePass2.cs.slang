@@ -7,21 +7,27 @@ groupshared uint maxDepthInt;
 groupshared uint groupLightCount;
 groupshared uint groupLightIndices[MAX_LIGHTS_PER_CLUSTER];
 
-Plane computePlane(float3 p0, float3 p1, float3 p2)
+#define EPSILON 0.0001
+
+bool IsSphereBehindPlane(float3 center, float radius, Plane plane)
 {
-    Plane plane;
- 
-    float3 v0 = p1 - p0;
-    float3 v2 = p2 - p0;
- 
-    plane.normal = normalize( cross( v0, v2 ) );
- 
-    // Compute the distance to the origin using p0.
-    plane.dist = dot(plane.normal, p0);
- 
-    return plane;
+    return (dot(plane.normal, center) - plane.dist) < ((-radius) - EPSILON);
 }
 
+bool ComputeFrustumIntersection(float3 lightViewPos, float lightRadius, Frustum frustum, float minZ, float maxZ)
+{
+    return true;
+
+    bool result = true;
+
+    for (int i = 0; i < 4 && result; i++ ) {
+        if (IsSphereBehindPlane(lightViewPos, lightRadius, frustum.planes[i])) {
+            result = false;
+        }
+    }
+
+    return result;
+}
 
 
 [numthreads(BLOCK_SIZE, BLOCK_SIZE, 1)]
@@ -32,27 +38,35 @@ void main(
     uint3 dispatchThreadId : SV_DispatchThreadID
 )
 {
+    if (groupIndex == 0) {
+        groupLightCount = 0;
+        minDepthInt = 0xFFFFFFFF;
+        maxDepthInt = 0;
+    }
+
     // 1. Update Light Positions
 
-    for(uint idx = 0; idx < LIGHTS_PER_THREAD; ++idx) {
-        const uint lightIdx = idx * THREAD_COUNT + groupIndex;
+    // if (groupID.x == 0 && groupID.y == 0) {
+    //     for(uint idx = 0; idx < LIGHTS_PER_THREAD; ++idx) {
+    //         const uint lightIdx = idx * THREAD_COUNT + groupIndex;
 
-        if (lightIdx >= NUM_LIGHTS) {
-            break;
-        }
+    //         if (lightIdx >= NUM_LIGHTS) {
+    //             break;
+    //         }
 
-        const float2 upper = float2(lightIdx, 0);
+    //         const float2 upper = float2(lightIdx, 0);
 
-        float4 currentLightPosRad = rwBlock.lightTexture[upper];
+    //         float4 currentLightPosRad = rwBlock.lightTexture[upper];
 
-        currentLightPosRad.y += (LIGHT_DT * lightUBO.timeDelta);
+    //         currentLightPosRad.y += (LIGHT_DT * lightUBO.timeDelta);
 
-        if (currentLightPosRad.y < LIGHT_MIN.y) {
-            currentLightPosRad.y = LIGHT_MAX.y;
-        }
+    //         if (currentLightPosRad.y < LIGHT_MIN.y) {
+    //             currentLightPosRad.y = LIGHT_MAX.y;
+    //         }
 
-        rwBlock.lightTexture[upper] = currentLightPosRad;
-    }
+    //         rwBlock.lightTexture[upper] = currentLightPosRad;
+    //     }
+    // }
 
     GroupMemoryBarrierWithGroupSync();
 
@@ -79,53 +93,12 @@ void main(
     // float minGroupDepth = asfloat(minDepthInt);
     // float maxGroupDepth = asfloat(maxDepthInt);
 
-
-    // uint screenX1 = groupID.x * WIDTH_PER_TILE;
-    // uint screenY1 = groupID.y * HEIGHT_PER_TILE;
-
-    // uint screenX2 = (groupID.x + 1) * WIDTH_PER_TILE;
-    // uint screenY2 = (groupID.y + 1) * HEIGHT_PER_TILE;
-
-    // float2 tileP1 = float2(screenX1, screenY1);
-    // float2 tileP2 = float2(screenX1, screenY2);
-    // float2 tileP3 = float2(screenX2, screenY2);
-    // float2 tileP4 = float2(screenX2, screenY1);
-
-    // // To NDC
-    // tileP1 = tileP1 / float2(SCREEN_WIDTH, SCREEN_HEIGHT);
-    // tileP2 = tileP2 / float2(SCREEN_WIDTH, SCREEN_HEIGHT);
-    // tileP3 = tileP3 / float2(SCREEN_WIDTH, SCREEN_HEIGHT);
-    // tileP4 = tileP4 / float2(SCREEN_WIDTH, SCREEN_HEIGHT);
-
-    // tileP1.x = (tileP1.x * 2.0) - 1.0;
-    // tileP2.x = (tileP2.x * 2.0) - 1.0;
-    // tileP3.x = (tileP3.x * 2.0) - 1.0;
-    // tileP4.x = (tileP4.x * 2.0) - 1.0;
-
-    // tileP1.y = 1.0 - (2.0 * tileP1.y);
-    // tileP2.y = 1.0 - (2.0 * tileP2.y);
-    // tileP3.y = 1.0 - (2.0 * tileP3.y);
-    // tileP4.y = 1.0 - (2.0 * tileP4.y);
-
-    // // To View Space
-    // float4 viewP1 = float4(tileP1, 1.0, 1.0) * lightUBO.farPlane;
-    // float4 viewP2 = float4(tileP2, 1.0, 1.0) * lightUBO.farPlane;
-    // float4 viewP3 = float4(tileP3, 1.0, 1.0) * lightUBO.farPlane;
-    // float4 viewP4 = float4(tileP4, 1.0, 1.0) * lightUBO.farPlane;
-
-    // viewP1 = lightUBO.invProj * viewP1;
-    // viewP2 = lightUBO.invProj * viewP2;
-    // viewP3 = lightUBO.invProj * viewP3;
-    // viewP4 = lightUBO.invProj * viewP4;
+    // Frustum per Thread Group
+    const uint frustIdx = (groupID.x * TILES_Y) + groupID.y;
+    Frustum f = frustumBlock.frustums[frustIdx];
 
     // 3. Light Cull
-    for(uint idx = 0; idx < LIGHTS_PER_THREAD; ++idx) {
-        uint lightIdx = idx * THREAD_COUNT + groupIndex;
-
-        if (lightIdx >= NUM_LIGHTS) {
-            break;
-        }
-
+    for(uint lightIdx = groupIndex; lightIdx < NUM_LIGHTS; lightIdx += THREAD_COUNT) {
         const float2 upper = float2(lightIdx, 0);
         const float2 lower = float2(lightIdx, 1);
 
@@ -133,8 +106,48 @@ void main(
         const float4 lightViewPos = mul(lightUBO.view, float4(currentLightPosRad.xyz, 1.0));
 
         // Check Intersection for Tile (Thread Group)
+        if (ComputeFrustumIntersection(lightViewPos.xyz, currentLightPosRad.w, f, 0.0, 0.0)) {
+            uint offset;
+            InterlockedAdd(groupLightCount, 1, offset);
+
+            if (offset < MAX_LIGHTS_PER_CLUSTER) {
+                groupLightIndices[offset] = lightIdx;
+            }
+        }
     }
 
     GroupMemoryBarrierWithGroupSync();
 
+    // 4. Write to Texture
+    if (groupIndex == 0) {
+        const float2 countUV = float2(frustIdx, 0);
+        rwBlock.clusterTexture[countUV] = float4(groupLightCount, 0.0, 0.0, 0.0);
+        
+        uint fullSets = floor(groupLightCount / 4) * 4;
+        uint remainingSets = groupLightCount - fullSets; // can be 0 - 3 Eg 52 53 54 55 56
+
+        uint height = 1;
+        for(uint idx = 0; idx < fullSets; idx += 4) {
+            const float2 writeUV = float2(frustIdx, height);
+            rwBlock.clusterTexture[writeUV] = float4(groupLightIndices[idx], groupLightIndices[idx + 1], groupLightIndices[idx + 2], groupLightIndices[idx + 3]);
+            ++height;
+        }
+
+        // Encode Last Set of Lights
+        float4 lastEncode = float4(0.0, 0.0, 0.0, 0.0);
+        float2 remainingUV = float2(frustIdx, height);
+        if (remainingSets >= 1) {
+            lastEncode.x = groupLightIndices[fullSets];
+        }
+
+        if (remainingSets >= 2) {
+            lastEncode.y = groupLightIndices[fullSets + 1];
+        }
+
+        if (remainingSets >= 3) {
+            lastEncode.z = groupLightIndices[fullSets + 2];
+        }
+
+        rwBlock.clusterTexture[remainingUV] = lastEncode;
+    }
 }

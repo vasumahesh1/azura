@@ -60,6 +60,9 @@ void App::Initialize() {
   m_camera.SetTranslationStepSize(5.0f);
   m_camera.SetSensitivity(0.5f);
 
+  // Trigger a recompute
+  m_camera.Recompute();
+
   // Init UBO Buffer
   m_sceneUBO               = {};
   m_sceneUBO.m_model       = Matrix4f::Identity();

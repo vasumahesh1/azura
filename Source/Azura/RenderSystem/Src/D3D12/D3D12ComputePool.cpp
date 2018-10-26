@@ -223,7 +223,7 @@ void D3D12ComputePool::CreateComputePassInputTargetSRV(
   }
 }
 
-void D3D12ComputePool::CreateComputePassInputBufferUAV(
+void D3D12ComputePool::CreateComputePassInputBufferSRV(
   const Vector<std::reference_wrapper<D3D12ScopedBuffer>>& bufferInputs,
   U32 offsetTillThis) const {
   const CD3DX12_CPU_DESCRIPTOR_HANDLE inputCPUHandle(m_descriptorComputeHeap->GetCPUDescriptorHandleForHeapStart(),
@@ -235,8 +235,8 @@ void D3D12ComputePool::CreateComputePassInputBufferUAV(
     CD3DX12_CPU_DESCRIPTOR_HANDLE cpuHandle;
     CD3DX12_CPU_DESCRIPTOR_HANDLE::InitOffsetted(cpuHandle, inputCPUHandle, m_cbvSrvDescriptorElementSize * idx);
 
-    const auto uavDesc = bufferRef.get().GetUAV();
-    m_device->CreateUnorderedAccessView(bufferRef.get().Real(), nullptr, &uavDesc, cpuHandle);
+    const auto srvDesc = bufferRef.get().GetSRV();
+    m_device->CreateShaderResourceView(bufferRef.get().Real(), &srvDesc, cpuHandle);
     ++idx;
   }
 }
@@ -306,7 +306,7 @@ void D3D12ComputePool::Submit() {
     }
     
     if (renderPassInputBuffers.GetSize() > 0) {
-      CreateComputePassInputBufferUAV(renderPassInputBuffers, inputBuffersTillNow);
+      CreateComputePassInputBufferSRV(renderPassInputBuffers, inputBuffersTillNow);
       inputBuffersTillNow += renderPassInputBuffers.GetSize();
     }
     

@@ -61,7 +61,7 @@ private:
   void SetSamplerData();
 
   void CreateComputePassInputTargetSRV(const Containers::Vector<std::reference_wrapper<D3D12ScopedImage>>& renderPassInputs, U32 offsetTillThis) const;
-  void CreateComputePassInputBufferUAV(
+  void CreateComputePassInputBufferSRV(
     const Containers::Vector<std::reference_wrapper<D3D12ScopedBuffer>>& bufferInputs,
     U32 offsetTillThis) const;
   void CreateComputePassInputTargetUAV(
