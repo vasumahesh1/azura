@@ -77,11 +77,12 @@ TEST_F(RendererTest, BasicRenderTest) {
   const U32 VERTEX_SHADER_ID = shaderRequirements.AddShader({ ShaderStage::Vertex, "BasicRenderTest.vs", AssetLocation::Shaders });
   const U32 PIXEL_SHADER_ID = shaderRequirements.AddShader({ ShaderStage::Pixel, "BasicRenderTest.ps", AssetLocation::Shaders });
 
-  RenderPassRequirements renderPassRequirements = RenderPassRequirements(0, 1, allocatorTemporary);
+  RenderPassRequirements renderPassRequirements = RenderPassRequirements(0, 1, 0, allocatorTemporary);
 
   const U32 SINGLE_PASS = renderPassRequirements.AddPass({
     PipelinePassCreateInfo::Shaders{VERTEX_SHADER_ID, PIXEL_SHADER_ID},  // SHADERS
-    PipelinePassCreateInfo::Inputs{},                                    // INPUT TARGETS
+    PipelinePassCreateInfo::InputTargets{},                                    // INPUT TARGETS
+    PipelinePassCreateInfo::InputBuffers{},
     PipelinePassCreateInfo::Outputs{},                     // OUTPUT TARGETS
     PipelinePassCreateInfo::DescriptorSets{UBO_SET},                        // DESCRIPTORS
     ClearData{{0.2f, 0.2f, 0.2f, 1.0f}, 1.0f, 0}
@@ -132,11 +133,12 @@ TEST_F(RendererTest, BasicInstancingTest) {
   const U32 VERTEX_SHADER_ID = shaderRequirements.AddShader({ ShaderStage::Vertex, "BasicInstancingTest.vs", AssetLocation::Shaders });
   const U32 PIXEL_SHADER_ID = shaderRequirements.AddShader({ ShaderStage::Pixel, "BasicInstancingTest.ps", AssetLocation::Shaders });
 
-  RenderPassRequirements renderPassRequirements = RenderPassRequirements(0, 1, allocatorTemporary);
+  RenderPassRequirements renderPassRequirements = RenderPassRequirements(0, 1, 0, allocatorTemporary);
 
   const U32 SINGLE_PASS = renderPassRequirements.AddPass({
     PipelinePassCreateInfo::Shaders{VERTEX_SHADER_ID, PIXEL_SHADER_ID},  // SHADERS
-    PipelinePassCreateInfo::Inputs{},                                    // INPUT TARGETS
+    PipelinePassCreateInfo::InputTargets{},                                    // INPUT TARGETS
+    PipelinePassCreateInfo::InputBuffers{},
     PipelinePassCreateInfo::Outputs{},                     // OUTPUT TARGETS
     PipelinePassCreateInfo::DescriptorSets{UBO_SET},                        // DESCRIPTORS
     ClearData{{0.2f, 0.2f, 0.2f, 1.0f}, 1.0f, 0}
@@ -191,11 +193,12 @@ TEST_F(RendererTest, BasicTextureTest) {
   const U32 VERTEX_SHADER_ID = shaderRequirements.AddShader({ ShaderStage::Vertex, "BasicTextureTest.vs", AssetLocation::Shaders });
   const U32 PIXEL_SHADER_ID = shaderRequirements.AddShader({ ShaderStage::Pixel, "BasicTextureTest.ps", AssetLocation::Shaders });
 
-  RenderPassRequirements renderPassRequirements = RenderPassRequirements(0, 1, allocatorTemporary);
+  RenderPassRequirements renderPassRequirements = RenderPassRequirements(0, 1, 0, allocatorTemporary);
 
   const U32 SINGLE_PASS = renderPassRequirements.AddPass({
     PipelinePassCreateInfo::Shaders{VERTEX_SHADER_ID, PIXEL_SHADER_ID},  // SHADERS
-    PipelinePassCreateInfo::Inputs{},                                    // INPUT TARGETS
+    PipelinePassCreateInfo::InputTargets{},                                    // INPUT TARGETS
+    PipelinePassCreateInfo::InputBuffers{},
     PipelinePassCreateInfo::Outputs{},                     // OUTPUT TARGETS
     PipelinePassCreateInfo::DescriptorSets{UBO_SET, SAMPLER_SET, BASIC_TEXTURE_SET},                        // DESCRIPTORS
     ClearData{{0.2f, 0.2f, 0.2f, 1.0f}, 1.0f, 0}
@@ -253,14 +256,15 @@ TEST_F(RendererTest, BasicDeferredTest) {
   const U32 DEF_VERTEX_SHADER_ID = shaderRequirements.AddShader({ ShaderStage::Vertex, "BasicDeferredTest.Deferred.vs", AssetLocation::Shaders });
   const U32 DEF_PIXEL_SHADER_ID = shaderRequirements.AddShader({ ShaderStage::Pixel, "BasicDeferredTest.Deferred.ps", AssetLocation::Shaders });
 
-  RenderPassRequirements renderPassRequirements = RenderPassRequirements(1, 2, allocatorTemporary);
+  RenderPassRequirements renderPassRequirements = RenderPassRequirements(1, 2, 0, allocatorTemporary);
   renderPassRequirements.m_maxPools = 2;
 
   const U32 COLOR_TARGET_1 = renderPassRequirements.AddTarget({RawStorageFormat::R32G32B32A32_FLOAT});
 
   const U32 GBUFFER_PASS = renderPassRequirements.AddPass({
     PipelinePassCreateInfo::Shaders{VERTEX_SHADER_ID, PIXEL_SHADER_ID},  // SHADERS
-    PipelinePassCreateInfo::Inputs{},                                    // INPUT TARGETS
+    PipelinePassCreateInfo::InputTargets{},                                    // INPUT TARGETS
+    PipelinePassCreateInfo::InputBuffers{},
     PipelinePassCreateInfo::Outputs{COLOR_TARGET_1},                     // OUTPUT TARGETS
     PipelinePassCreateInfo::DescriptorSets{UBO_SET, SAMPLER_SET, BASIC_TEXTURE_SET},                        // DESCRIPTORS
     ClearData{{0.2f, 0.2f, 0.2f, 1.0f}, 1.0f, 0}
@@ -268,7 +272,8 @@ TEST_F(RendererTest, BasicDeferredTest) {
 
   const U32 SHADING_PASS = renderPassRequirements.AddPass({
     PipelinePassCreateInfo::Shaders{DEF_VERTEX_SHADER_ID, DEF_PIXEL_SHADER_ID},
-    PipelinePassCreateInfo::Inputs{{COLOR_TARGET_1, ShaderStage::Pixel}},
+    PipelinePassCreateInfo::InputTargets{{COLOR_TARGET_1, ShaderStage::Pixel}},
+    PipelinePassCreateInfo::InputBuffers{},
     PipelinePassCreateInfo::Outputs{PRESENT_TARGET}, // END OF RENDERING
     PipelinePassCreateInfo::DescriptorSets{SAMPLER_SET},
     ClearData{{0.2f, 0.2f, 0.2f, 1.0f}, 1.0f, 0}

@@ -66,4 +66,16 @@ struct LightUBO
   float _pad2[3];
 };
 
+struct Plane
+{
+  Vector3f m_normal;
+  float  m_distanceToOrigin;
+};
+
+struct Frustum
+{
+  Plane m_planes[4];
+};
+
+
 } // namespace Azura

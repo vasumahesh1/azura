@@ -44,6 +44,7 @@ public:
   void SnapshotFrame(const String& exportPath) const override;
 
   void BindRenderTarget(U32 renderTargetId, const TextureDesc& desc, const U8* buffer) override;
+  void BindBufferTarget(U32 bufferTargetId, const U8* buffer) override;
 
 private:
   void AddShader(const ShaderCreateInfo& info) override;
@@ -74,10 +75,13 @@ private:
   D3D12ScopedBuffer m_stagingBuffer;
 
   Containers::Vector<TextureBufferInfo> m_renderTargetUpdates;
+  Containers::Vector<BufferTargetInfo> m_bufferTargetUpdates;
 
   Containers::Vector<std::pair<U32, RenderPassType>> m_renderSequence;
 
-  Containers::Vector<D3D12ScopedImage> m_renderTargetImages;
+  Containers::Vector<D3D12ScopedImage> m_targetImages;
+  Containers::Vector<D3D12ScopedBuffer> m_targetBuffers;
+
   Containers::Vector<D3D12ScopedRenderPass> m_renderPasses;
   Containers::Vector<D3D12ScopedComputePass> m_computePasses;
 

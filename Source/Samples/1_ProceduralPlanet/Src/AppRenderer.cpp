@@ -115,7 +115,7 @@ void AppRenderer::Initialize() {
   const U32 SKY_PIXEL_SHADER_ID = shaderRequirements.AddShader({ ShaderStage::Pixel, "Sky.ps", AssetLocation::Shaders });
   const U32 WATER_PIXEL_SHADER_ID = shaderRequirements.AddShader({ ShaderStage::Pixel, "Water.ps", AssetLocation::Shaders });
 
-  RenderPassRequirements renderPassRequirements = RenderPassRequirements(4, 2, allocatorTemporary);
+  RenderPassRequirements renderPassRequirements = RenderPassRequirements(4, 2, 0, allocatorTemporary);
   renderPassRequirements.m_maxPools = 4;
 
   const U32 NOISE_TARGET_1 = renderPassRequirements.AddTarget({RawStorageFormat::R32G32B32A32_FLOAT});
@@ -125,14 +125,16 @@ void AppRenderer::Initialize() {
 
   const U32 NOISE_PASS = renderPassRequirements.AddPass({
     PipelinePassCreateInfo::Shaders{NOISE_VERTEX_SHADER_ID, NOISE_PIXEL_SHADER_ID},  // SHADERS
-    PipelinePassCreateInfo::Inputs{},                                                // INPUT TARGETS
+    PipelinePassCreateInfo::InputTargets{},                                                // INPUT TARGETS
+    PipelinePassCreateInfo::InputBuffers{},
     PipelinePassCreateInfo::Outputs{NOISE_TARGET_1, NOISE_TARGET_2, NOISE_TARGET_3, NOISE_DEPTH} , // OUTPUT TARGETS
     PipelinePassCreateInfo::DescriptorSets{UBO_SET, CONTROLS_SET}
     });
 
   const U32 SINGLE_PASS = renderPassRequirements.AddPass({
     PipelinePassCreateInfo::Shaders{},                                   // SHADERS
-    PipelinePassCreateInfo::Inputs{{NOISE_TARGET_1, ShaderStage::Pixel}, {NOISE_TARGET_2, ShaderStage::Pixel}, {NOISE_TARGET_3, ShaderStage::Pixel}},      // INPUT TARGETS
+    PipelinePassCreateInfo::InputTargets{{NOISE_TARGET_1, ShaderStage::Pixel}, {NOISE_TARGET_2, ShaderStage::Pixel}, {NOISE_TARGET_3, ShaderStage::Pixel}},      // INPUT TARGETS
+    PipelinePassCreateInfo::InputBuffers{},
     PipelinePassCreateInfo::Outputs{},                                   // OUTPUT TARGETS
     PipelinePassCreateInfo::DescriptorSets{UBO_SET, CONTROLS_SET, SAMPLER_SET, TEXTURE_SET},
     {},

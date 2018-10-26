@@ -19,21 +19,22 @@ D3D12ScopedComputePass::D3D12ScopedComputePass(U32 idx, U32 internalId,
     m_rootSignatureTable(mainAllocator),
     m_passShaders(mainAllocator),
     m_computeOutputs(mainAllocator),
-    m_computeInputs(mainAllocator),
-    m_computeDepthInputs(mainAllocator),
-    m_allComputeInputs(mainAllocator) {
+    m_computeInputBuffers(mainAllocator),
+    m_computeInputTargets(mainAllocator),
+    m_computeDepthInputTargets(mainAllocator),
+    m_allComputeInputTargets(mainAllocator) {
 }
 
 void D3D12ScopedComputePass::Create(const Microsoft::WRL::ComPtr<ID3D12Device>& device,
                                     const PipelinePassCreateInfo& createInfo,
-                                    const Containers::Vector<RenderTargetCreateInfo>& pipelineBuffers,
-                                    const Containers::Vector<D3D12ScopedImage>& pipelineBufferImages,
+                                    const Containers::Vector<RenderTargetCreateInfo>& targetCreateInfos,
+                                    const Containers::Vector<D3D12ScopedImage>& pipelineImages,
+                                    const Containers::Vector<D3D12ScopedBuffer>& pipelineStructuredBuffers,
                                     const Containers::Vector<DescriptorSlot>& descriptorSlots,
                                     const Containers::Vector<DescriptorTableEntry>& descriptorSetTable,
                                     const Containers::Vector<D3D12ScopedShader>& allShaders) {
 
-  CreateBase(device, createInfo, descriptorSlots, descriptorSetTable, pipelineBuffers, pipelineBufferImages,
-             allShaders);
+  CreateBase(device, createInfo, descriptorSlots, descriptorSetTable, targetCreateInfos, pipelineImages, pipelineStructuredBuffers, allShaders);
 
   D3D12ScopedCommandBuffer primaryCmdBuffer = D3D12ScopedCommandBuffer(device, D3D12_COMMAND_LIST_TYPE_COMPUTE,
                                                                        log_D3D12RenderSystem);
@@ -66,7 +67,11 @@ const Vector<std::reference_wrapper<const D3D12ScopedShader>>& D3D12ScopedComput
 }
 
 const Vector<std::reference_wrapper<D3D12ScopedImage>>& D3D12ScopedComputePass::GetInputImages() const {
-  return m_allComputeInputs;
+  return m_allComputeInputTargets;
+}
+
+const Containers::Vector<std::reference_wrapper<D3D12ScopedBuffer>>& D3D12ScopedComputePass::GetInputBuffers() const {
+  return m_computeInputBuffers;
 }
 
 const Vector<std::reference_wrapper<D3D12ScopedImage>>& D3D12ScopedComputePass::GetOutputImages() const {
@@ -90,21 +95,21 @@ void D3D12ScopedComputePass::RecordResourceBarriersForOutputsEnd(ID3D12GraphicsC
 }
 
 void D3D12ScopedComputePass::RecordResourceBarriersForInputsStart(ID3D12GraphicsCommandList* commandList) const {
-  for (auto& rtv : m_computeInputs) {
+  for (auto& rtv : m_computeInputTargets) {
     rtv.get().Transition(commandList, D3D12_RESOURCE_STATE_NON_PIXEL_SHADER_RESOURCE, log_D3D12RenderSystem);
   }
 
-  for (auto& dsv : m_computeDepthInputs) {
+  for (auto& dsv : m_computeDepthInputTargets) {
     dsv.get().Transition(commandList, D3D12_RESOURCE_STATE_NON_PIXEL_SHADER_RESOURCE, log_D3D12RenderSystem);
   }
 }
   
 void D3D12ScopedComputePass::RecordResourceBarriersForInputsEnd(ID3D12GraphicsCommandList* commandList) const {
-  for (auto& rtv : m_computeInputs) {
+  for (auto& rtv : m_computeInputTargets) {
     rtv.get().Transition(commandList, D3D12_RESOURCE_STATE_COMMON, log_D3D12RenderSystem);
   }
 
-  for (auto& dsv : m_computeDepthInputs) {
+  for (auto& dsv : m_computeDepthInputTargets) {
     dsv.get().Transition(commandList, D3D12_RESOURCE_STATE_COMMON, log_D3D12RenderSystem);
   }
 }
@@ -127,8 +132,12 @@ U32 D3D12ScopedComputePass::GetCommandBufferCount() const {
   return U32(m_commandBuffers.size());
 }
 
-U32 D3D12ScopedComputePass::GetInputRootDescriptorTableId() const {
-  return m_computeInputTableIdx;
+U32 D3D12ScopedComputePass::GetInputTargetRootDescriptorTableId() const {
+  return m_computeInputTargetTableIdx;
+}
+
+U32 D3D12ScopedComputePass::GetInputBufferRootDescriptorTableId() const {
+  return m_computeInputBufferTableIdx;
 }
 
 U32 D3D12ScopedComputePass::GetOutputRootDescriptorTableId() const {
@@ -140,8 +149,9 @@ void D3D12ScopedComputePass::CreateBase(
   const PipelinePassCreateInfo& createInfo,
   const Containers::Vector<DescriptorSlot>& descriptorSlots,
   const Containers::Vector<DescriptorTableEntry>& descriptorSetTable,
-  const Containers::Vector<RenderTargetCreateInfo>& pipelineBuffers,
-  const Containers::Vector<D3D12ScopedImage>& pipelineBufferImages,
+  const Containers::Vector<RenderTargetCreateInfo>& targetCreateInfos,
+  const Containers::Vector<D3D12ScopedImage>& pipelineImages,
+  const Containers::Vector<D3D12ScopedBuffer>& pipelineStructuredBuffers,
   const Containers::Vector<D3D12ScopedShader>& allShaders) {
 
   STACK_ALLOCATOR(Temporary, Memory::MonotonicAllocator, 2048);
@@ -156,13 +166,14 @@ void D3D12ScopedComputePass::CreateBase(
   }
 
   m_passShaders.Reserve(U32(createInfo.m_shaders.size()));
-  m_computeInputs.Reserve(U32(createInfo.m_inputs.size()));
-  m_computeDepthInputs.Reserve(U32(createInfo.m_inputs.size()));
-  m_allComputeInputs.Reserve(U32(createInfo.m_inputs.size()));
+  m_computeInputBuffers.Reserve(U32(createInfo.m_inputBuffers.size()));
+  m_computeInputTargets.Reserve(U32(createInfo.m_inputTargets.size()));
+  m_computeDepthInputTargets.Reserve(U32(createInfo.m_inputTargets.size()));
+  m_allComputeInputTargets.Reserve(U32(createInfo.m_inputTargets.size()));
   m_computeOutputs.Reserve(U32(createInfo.m_outputs.size()));
 
   for (const auto& outputId : createInfo.m_outputs) {
-    m_computeOutputs.PushBack(pipelineBufferImages[outputId]);
+    m_computeOutputs.PushBack(pipelineImages[outputId]);
   }
 
   for (const auto& shaderId : createInfo.m_shaders) {
@@ -170,17 +181,21 @@ void D3D12ScopedComputePass::CreateBase(
     m_passShaders.PushBack(shaderRef);
   }
 
-  for (const auto& inputId : createInfo.m_inputs) {
+  for (const auto& inputId : createInfo.m_inputTargets) {
     // TODO(vasumahesh1):[?]: Respect shader stages here for correct binding
-    const auto& targetBufferRef = pipelineBuffers[inputId.m_id];
+    const auto& targetBufferRef = targetCreateInfos[inputId.m_id];
 
     if (HasDepthOrStencilComponent(targetBufferRef.m_format)) {
-      m_computeDepthInputs.PushBack(pipelineBufferImages[inputId.m_id]);
+      m_computeDepthInputTargets.PushBack(pipelineImages[inputId.m_id]);
     } else {
-      m_computeInputs.PushBack(pipelineBufferImages[inputId.m_id]);
+      m_computeInputTargets.PushBack(pipelineImages[inputId.m_id]);
     }
 
-    m_allComputeInputs.PushBack(pipelineBufferImages[inputId.m_id]);
+    m_allComputeInputTargets.PushBack(pipelineImages[inputId.m_id]);
+  }
+
+  for (const auto& inputBuffer : createInfo.m_inputBuffers) {
+    m_computeInputBuffers.PushBack(pipelineStructuredBuffers[inputBuffer.m_id]);
   }
 
   LOG_DBG(log_D3D12RenderSystem, LOG_LEVEL, "======== D3D12 Render Pass: Root Signature ========");
@@ -272,21 +287,38 @@ void D3D12ScopedComputePass::CreateBase(
 
   CD3DX12_ROOT_PARAMETER inputsRootParameter;
   CD3DX12_ROOT_PARAMETER ouputsRootParameter;
-  CD3DX12_DESCRIPTOR_RANGE inputRangeData;
+  CD3DX12_DESCRIPTOR_RANGE inputTargetRangeData;
+  CD3DX12_DESCRIPTOR_RANGE inputBufferRangeData;
   CD3DX12_DESCRIPTOR_RANGE outputRangeData;
 
-  // Have some inputs
-  if (!createInfo.m_inputs.empty()) {
+  // Have some inputs targets
+  if (!createInfo.m_inputTargets.empty()) {
     LOG_DBG(log_D3D12RenderSystem, LOG_LEVEL, "D3D12 Render Pass: Generating SRV for Set Position: %d", descriptorTables.
       GetSize());
     LOG_DBG(log_D3D12RenderSystem, LOG_LEVEL,
-      "D3D12 Render Pass: [Attachments] Applying %d Image Attachments as register t(%d) to t(%d)", createInfo.m_inputs.
-      size(), srvOffset, srvOffset + createInfo.m_inputs.size() - 1);
+      "D3D12 Render Pass: [Attachments] Applying %d Image Attachments as register t(%d) to t(%d)", createInfo.m_inputTargets.
+      size(), srvOffset, srvOffset + createInfo.m_inputTargets.size() - 1);
 
-    inputRangeData.Init(D3D12_DESCRIPTOR_RANGE_TYPE_SRV, UINT(createInfo.m_inputs.size()), srvOffset);
-    inputsRootParameter.InitAsDescriptorTable(1, &inputRangeData, D3D12_SHADER_VISIBILITY_ALL);
+    inputTargetRangeData.Init(D3D12_DESCRIPTOR_RANGE_TYPE_SRV, UINT(createInfo.m_inputTargets.size()), srvOffset);
+    inputsRootParameter.InitAsDescriptorTable(1, &inputTargetRangeData, D3D12_SHADER_VISIBILITY_ALL);
 
-    m_computeInputTableIdx = descriptorTables.GetSize();
+    m_computeInputTargetTableIdx = descriptorTables.GetSize();
+
+    descriptorTables.PushBack(inputsRootParameter);
+  }
+
+  // Have some inputs buffers
+  if (!createInfo.m_inputBuffers.empty()) {
+    LOG_DBG(log_D3D12RenderSystem, LOG_LEVEL, "D3D12 Render Pass: Generating SRV for Set Position: %d", descriptorTables.
+      GetSize());
+    LOG_DBG(log_D3D12RenderSystem, LOG_LEVEL,
+      "D3D12 Render Pass: [Attachments] Applying %d Buffer Attachments as register t(%d) to t(%d)", createInfo.m_inputBuffers.
+      size(), srvOffset, srvOffset + createInfo.m_inputBuffers.size() - 1);
+
+    inputBufferRangeData.Init(D3D12_DESCRIPTOR_RANGE_TYPE_UAV, UINT(createInfo.m_inputBuffers.size()), srvOffset);
+    inputsRootParameter.InitAsDescriptorTable(1, &inputBufferRangeData, D3D12_SHADER_VISIBILITY_ALL);
+
+    m_computeInputBufferTableIdx = descriptorTables.GetSize();
 
     descriptorTables.PushBack(inputsRootParameter);
   }

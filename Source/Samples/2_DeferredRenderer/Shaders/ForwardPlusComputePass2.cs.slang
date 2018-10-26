@@ -7,13 +7,6 @@ groupshared uint maxDepthInt;
 groupshared uint groupLightCount;
 groupshared uint groupLightIndices[MAX_LIGHTS_PER_CLUSTER];
 
-
-struct Plane
-{
-    float3 N;
-    float  d;
-};
-
 Plane computePlane(float3 p0, float3 p1, float3 p2)
 {
     Plane plane;
@@ -21,18 +14,14 @@ Plane computePlane(float3 p0, float3 p1, float3 p2)
     float3 v0 = p1 - p0;
     float3 v2 = p2 - p0;
  
-    plane.N = normalize( cross( v0, v2 ) );
+    plane.normal = normalize( cross( v0, v2 ) );
  
     // Compute the distance to the origin using p0.
-    plane.d = dot(plane.N, p0);
+    plane.dist = dot(plane.normal, p0);
  
     return plane;
 }
 
-struct Frustum
-{
-    Plane planes[4];
-};
 
 
 [numthreads(BLOCK_SIZE, BLOCK_SIZE, 1)]

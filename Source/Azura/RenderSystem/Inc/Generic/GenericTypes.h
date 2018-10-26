@@ -323,6 +323,11 @@ struct UniformBufferInfo final : public BufferInfo {
   U32 m_set{0};
 };
 
+struct BufferTargetInfo final : public BufferInfo {
+  U32 m_set{0};
+};
+
+
 struct LayerSubresource {
   U32 m_layerCount{1};
   U32 m_baseLayer{0};
@@ -392,6 +397,11 @@ struct RenderTargetCreateInfo {
   int m_depth{1};
 };
 
+struct StructuredBufferCreateInfo {
+  U32 m_size;
+  U32 m_stride;
+};
+
 struct PipelinePassInput {
   U32 m_id;
   ShaderStage m_stages;
@@ -406,12 +416,14 @@ struct ClearData {
 struct PipelinePassCreateInfo {
   using Shaders = SmallVector<U32, MAX_RENDER_PASS_SHADERS>;
   using Outputs = SmallVector<U32, MAX_RENDER_PASS_OUTPUTS>;
-  using Inputs = SmallVector<PipelinePassInput, MAX_RENDER_PASS_INPUTS>;
+  using InputTargets = SmallVector<PipelinePassInput, MAX_RENDER_PASS_INPUTS>;
+  using InputBuffers = SmallVector<PipelinePassInput, MAX_RENDER_PASS_INPUTS>;
   using DescriptorSets = SmallVector<U32, MAX_RENDER_PASS_SETS>;
 
   Shaders m_shaders{};
 
-  Inputs m_inputs{};
+  InputTargets m_inputTargets{};
+  InputBuffers m_inputBuffers{};
   Outputs m_outputs{};
   DescriptorSets m_descriptorSets{};
 
@@ -440,10 +452,12 @@ struct ShaderRequirements {
 };
 
 struct RenderPassRequirements {
-  RenderPassRequirements(U32 numRenderTargets, U32 numPasses, Memory::Allocator& alloc);
+  RenderPassRequirements(U32 numRenderTargets, U32 numPasses, U32 numBuffers, Memory::Allocator& alloc);
   U32 AddTarget(const RenderTargetCreateInfo& info);
+  U32 AddBuffer(const StructuredBufferCreateInfo& info);
   U32 AddPass(const PipelinePassCreateInfo& info);
 
+  Containers::Vector<StructuredBufferCreateInfo> m_buffers;
   Containers::Vector<RenderTargetCreateInfo> m_targets;
   Containers::Vector<PipelinePassCreateInfo> m_passSequence;
 

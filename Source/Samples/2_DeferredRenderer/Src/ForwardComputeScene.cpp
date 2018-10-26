@@ -96,14 +96,15 @@ void ForwardComputeScene::Initialize(Window& window,
     ShaderStage::Compute, "ForwardCompute.cs", AssetLocation::Shaders
   });
 
-  RenderPassRequirements renderPassRequirements = RenderPassRequirements(1, 2, allocatorTemporary);
+  RenderPassRequirements renderPassRequirements = RenderPassRequirements(1, 2, 0, allocatorTemporary);
   renderPassRequirements.m_maxPools             = 1;
 
   const U32 LIGHT_TARGET = renderPassRequirements.AddTarget({RawStorageFormat::R32G32B32A32_FLOAT, NUM_LIGHTS, 2});
 
   m_pass.m_computePassId = renderPassRequirements.AddPass({
     PipelinePassCreateInfo::Shaders{COMPUTE_SHADER_ID},    // SHADERS
-    PipelinePassCreateInfo::Inputs{},                      // INPUT TARGETS
+    PipelinePassCreateInfo::InputTargets{},                      // INPUT TARGETS
+    PipelinePassCreateInfo::InputBuffers{},
     PipelinePassCreateInfo::Outputs{LIGHT_TARGET},         // OUTPUT TARGETS
     PipelinePassCreateInfo::DescriptorSets{LIGHT_UBO_SET}, // DESCRIPTORS
     ClearData{{0.2f, 0.2f, 0.2f, 1.0f}, 1.0f, 0},
@@ -113,7 +114,8 @@ void ForwardComputeScene::Initialize(Window& window,
 
   m_pass.m_passId = renderPassRequirements.AddPass({
     PipelinePassCreateInfo::Shaders{VERTEX_SHADER_ID, PIXEL_SHADER_ID},        // SHADERS
-    PipelinePassCreateInfo::Inputs{{LIGHT_TARGET, ShaderStage::Pixel}},        // INPUT TARGETS
+    PipelinePassCreateInfo::InputTargets{{LIGHT_TARGET, ShaderStage::Pixel}},        // INPUT TARGETS
+    PipelinePassCreateInfo::InputBuffers{},
     PipelinePassCreateInfo::Outputs{},                                         // OUTPUT TARGETS
     PipelinePassCreateInfo::DescriptorSets{UBO_SET, SAMPLER_SET, TEXTURE_SET}, // DESCRIPTORS
     ClearData{{0.2f, 0.2f, 0.2f, 1.0f}, 1.0f, 0}

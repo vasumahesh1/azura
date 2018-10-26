@@ -97,14 +97,15 @@ namespace Azura {
       ShaderStage::Pixel, "BasicCompute.ps", AssetLocation::Shaders
       });
 
-    RenderPassRequirements renderPassRequirements = RenderPassRequirements(1, 2, allocatorTemporary);
+    RenderPassRequirements renderPassRequirements = RenderPassRequirements(1, 2, 0, allocatorTemporary);
     renderPassRequirements.m_maxPools             = 2;
 
     const U32 COLOR_TARGET_1 = renderPassRequirements.AddTarget({RawStorageFormat::R32G32B32A32_FLOAT, 32, 32});
 
     const U32 COMPUTE_PASS = renderPassRequirements.AddPass({
       PipelinePassCreateInfo::Shaders{COMPUTE_SHADER_ID},
-      PipelinePassCreateInfo::Inputs{},
+      PipelinePassCreateInfo::InputTargets{},
+      PipelinePassCreateInfo::InputBuffers{},
       PipelinePassCreateInfo::Outputs{COLOR_TARGET_1},
       PipelinePassCreateInfo::DescriptorSets{},
       ClearData{{0.2f, 0.2f, 0.2f, 1.0f}, 1.0f, 0},
@@ -114,7 +115,8 @@ namespace Azura {
 
     const U32 SHADE_PASS = renderPassRequirements.AddPass({
       PipelinePassCreateInfo::Shaders{DEF_VERTEX_SHADER_ID, DEF_PIXEL_SHADER_ID},        // SHADERS
-      PipelinePassCreateInfo::Inputs{{COLOR_TARGET_1, ShaderStage::Pixel}},                                          // INPUT TARGETS
+      PipelinePassCreateInfo::InputTargets{{COLOR_TARGET_1, ShaderStage::Pixel}},
+      PipelinePassCreateInfo::InputBuffers{},
       PipelinePassCreateInfo::Outputs{},
       PipelinePassCreateInfo::DescriptorSets{UBO_SET, SAMPLER_SET},
       ClearData{{0.2f, 0.2f, 0.2f, 1.0f}, 1.0f, 0}

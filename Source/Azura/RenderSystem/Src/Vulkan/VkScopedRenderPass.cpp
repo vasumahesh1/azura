@@ -456,7 +456,7 @@ void VkScopedRenderPass::CleanUp(VkDevice device, VkCommandPool commandPool) con
 }
 
 void VkScopedRenderPass::CreateDescriptorSetLayout(VkDevice device, const PipelinePassCreateInfo& createInfo) {
-  if (createInfo.m_inputs.empty()) {
+  if (createInfo.m_inputTargets.empty()) {
     return;
   }
 
@@ -464,10 +464,10 @@ void VkScopedRenderPass::CreateDescriptorSetLayout(VkDevice device, const Pipeli
 
   U32 bindingId = 0;
 
-  m_inputAttachments.Reserve(U32(createInfo.m_inputs.size()));
+  m_inputAttachments.Reserve(U32(createInfo.m_inputTargets.size()));
 
-  Vector<VkDescriptorSetLayoutBinding> currentBindings(U32(createInfo.m_inputs.size()), allocatorTemporary);
-  for (const auto& input : createInfo.m_inputs) {
+  Vector<VkDescriptorSetLayoutBinding> currentBindings(U32(createInfo.m_inputTargets.size()), allocatorTemporary);
+  for (const auto& input : createInfo.m_inputTargets) {
     m_inputAttachments.PushBack(input);
 
     const auto combinedShaderFlagBits = GetCombinedShaderStageFlag(input.m_stages);

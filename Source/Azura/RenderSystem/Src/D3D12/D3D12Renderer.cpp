@@ -31,7 +31,9 @@ D3D12Renderer::D3D12Renderer(const ApplicationInfo& appInfo,
     m_initAllocator(m_initBuffer, 0x400000),
     m_renderSequence(renderPassRequirements.m_passSequence.GetSize(), mainAllocator),
     m_renderTargetUpdates(renderPassRequirements.m_targets.GetSize(), mainAllocator),
-    m_renderTargetImages(renderPassRequirements.m_targets.GetSize(), mainAllocator),
+    m_bufferTargetUpdates(renderPassRequirements.m_buffers.GetSize(), mainAllocator),
+    m_targetImages(renderPassRequirements.m_targets.GetSize(), mainAllocator),
+    m_targetBuffers(renderPassRequirements.m_buffers.GetSize(), mainAllocator),
     m_renderPasses(renderPassRequirements.m_passSequence.GetSize(), mainAllocator),
     m_computePasses(renderPassRequirements.m_passSequence.GetSize(), mainAllocator),
     m_drawablePools(renderPassRequirements.m_maxPools, drawAllocator),
@@ -114,22 +116,27 @@ D3D12Renderer::D3D12Renderer(const ApplicationInfo& appInfo,
       desc.m_bounds = Bounds3D{U32(renderTarget.m_width), U32(renderTarget.m_height), U32(renderTarget.m_depth)};
     }
 
-    LOG_DBG(log_D3D12RenderSystem, LOG_LEVEL, "Creating Attachment Input at: %d for %s", m_renderTargetImages.
+    LOG_DBG(log_D3D12RenderSystem, LOG_LEVEL, "Creating Attachment Input at: %d for %s", m_targetImages.
       GetSize(), ToString(renderTarget.m_format).c_str());
 
-    D3D12_RESOURCE_STATES resourceState = D3D12_RESOURCE_STATE_COMMON;
-    // D3D12_RESOURCE_STATES resourceState = D3D12_RESOURCE_STATE_RENDER_TARGET;
-    // if (HasDepthOrStencilComponent(renderTarget.m_format)) {
-    //   resourceState = D3D12_RESOURCE_STATE_DEPTH_WRITE;
-    // }
+    const D3D12_RESOURCE_STATES resourceState = D3D12_RESOURCE_STATE_COMMON;
 
     D3D12_RESOURCE_FLAGS resourceFlags = D3D12_RESOURCE_FLAG_ALLOW_RENDER_TARGET | D3D12_RESOURCE_FLAG_ALLOW_UNORDERED_ACCESS;
     if (HasDepthComponent(desc.m_format) || HasStencilComponent(desc.m_format)) {
       resourceFlags = D3D12_RESOURCE_FLAG_ALLOW_DEPTH_STENCIL;
     }
 
-    m_renderTargetImages.PushBack(D3D12ScopedImage());
-    m_renderTargetImages.Last().Create(m_device, resourceState, resourceFlags, desc, log_D3D12RenderSystem);
+    m_targetImages.PushBack(D3D12ScopedImage());
+    m_targetImages.Last().Create(m_device, resourceState, resourceFlags, desc, log_D3D12RenderSystem);
+  }
+
+  for (const auto& bufferTarget : renderPassRequirements.m_buffers) {
+    const D3D12_RESOURCE_STATES resourceState = D3D12_RESOURCE_STATE_COMMON;
+    const D3D12_RESOURCE_FLAGS resourceFlags = D3D12_RESOURCE_FLAG_ALLOW_UNORDERED_ACCESS;
+
+    m_targetBuffers.PushBack(D3D12ScopedBuffer());
+    m_targetBuffers.Last().Create(m_device, CD3DX12_HEAP_PROPERTIES(D3D12_HEAP_TYPE_DEFAULT), bufferTarget.m_size, resourceState, resourceFlags, log_D3D12RenderSystem);
+    m_targetBuffers.Last().SetStride(bufferTarget.m_stride);
   }
 
   TextureDesc desc = {};
@@ -154,7 +161,7 @@ D3D12Renderer::D3D12Renderer(const ApplicationInfo& appInfo,
         renderPass.Create(m_device,
           passCreateInfo,
           renderPassRequirements.m_targets,
-          m_renderTargetImages,
+          m_targetImages,
           m_descriptorSlots,
           m_descriptorSetTable,
           m_shaders,
@@ -164,7 +171,7 @@ D3D12Renderer::D3D12Renderer(const ApplicationInfo& appInfo,
         renderPass.CreateForSwapChain(m_device,
           passCreateInfo,
           renderPassRequirements.m_targets,
-          m_renderTargetImages,
+          m_targetImages,
           m_depthTexture,
           m_descriptorSlots,
           m_descriptorSetTable,
@@ -183,7 +190,8 @@ D3D12Renderer::D3D12Renderer(const ApplicationInfo& appInfo,
       computePass.Create(m_device,
         passCreateInfo,
         renderPassRequirements.m_targets,
-        m_renderTargetImages,
+        m_targetImages,
+        m_targetBuffers,
         m_descriptorSlots,
         m_descriptorSetTable,
         m_shaders);
@@ -240,25 +248,39 @@ void D3D12Renderer::Submit() {
 
   HEAP_ALLOCATOR(Temporary, Memory::MonotonicAllocator, 8192);
 
-  if (m_renderTargetUpdates.GetSize() > 0) {
+  const bool haveSubmits = m_renderTargetUpdates.GetSize() > 0 || m_bufferTargetUpdates.GetSize() > 0;
+
+  if (haveSubmits)
+  {
     auto oneTimeSubmitBuffer = D3D12ScopedCommandBuffer(m_device, D3D12_COMMAND_LIST_TYPE_DIRECT, log_D3D12RenderSystem);
     oneTimeSubmitBuffer.CreateGraphicsCommandList(m_device, nullptr, log_D3D12RenderSystem);
     auto oneTimeCommandList = oneTimeSubmitBuffer.GetGraphicsCommandList();
 
+    LOG_DBG(log_D3D12RenderSystem, LOG_LEVEL, "Updating Render Targets with Initial Data");
+
     for (const auto& renderTargetUpdate : m_renderTargetUpdates)
     {
       // TODO(vasumahesh1):[STATES]: Get current state and don't hardcode
-      auto& targetImage = m_renderTargetImages[renderTargetUpdate.m_binding];
+      auto& targetImage = m_targetImages[renderTargetUpdate.m_binding];
       targetImage.Transition(oneTimeCommandList, D3D12_RESOURCE_STATE_COMMON, D3D12_RESOURCE_STATE_COPY_DEST, log_D3D12RenderSystem);
       targetImage.CopyFromBuffer(m_device, oneTimeCommandList, m_stagingBuffer, renderTargetUpdate.m_offset);
       targetImage.Transition(oneTimeCommandList, D3D12_RESOURCE_STATE_COPY_DEST, D3D12_RESOURCE_STATE_COMMON, log_D3D12RenderSystem);
+    }
+
+    LOG_DBG(log_D3D12RenderSystem, LOG_LEVEL, "Updating Buffer Targets with Initial Data");
+
+    for (const auto& bufferTargetUpdate : m_bufferTargetUpdates)
+    {
+      auto& targetBuffer = m_targetBuffers[bufferTargetUpdate.m_binding];
+      targetBuffer.Transition(oneTimeCommandList, D3D12_RESOURCE_STATE_COMMON, D3D12_RESOURCE_STATE_COPY_DEST);
+      D3D12Core::CopyBuffer(oneTimeCommandList, targetBuffer, 0, m_stagingBuffer, bufferTargetUpdate.m_offset, bufferTargetUpdate.m_byteSize);
+      targetBuffer.Transition(oneTimeCommandList, D3D12_RESOURCE_STATE_COPY_DEST, D3D12_RESOURCE_STATE_COMMON);
     }
 
     oneTimeCommandList->Close();
     oneTimeSubmitBuffer.Execute(m_device, m_mainGraphicsCommandQueue.Get(), log_D3D12RenderSystem);
     oneTimeSubmitBuffer.WaitForComplete(m_mainGraphicsCommandQueue.Get(), log_D3D12RenderSystem);
   }
-
 
   for (auto& drawablePool : m_drawablePools) {
     drawablePool.Submit();
@@ -449,6 +471,24 @@ void D3D12Renderer::BindRenderTarget(U32 renderTargetId, const TextureDesc& desc
   info.m_set             = 0;
 
   m_renderTargetUpdates.PushBack(info);
+}
+
+void D3D12Renderer::BindBufferTarget(U32 bufferTargetId, const U8* buffer) {
+  const U32 size = m_targetBuffers[bufferTargetId].GetSize();
+
+  LOG_DBG(log_D3D12RenderSystem, LOG_LEVEL,
+    "D3D12 Render Target: Updating Buffer Target: %d of Size: %d bytes", bufferTargetId, size);
+
+  // TODO(vasumahesh1):[INPUT]: Could be an issue with sizeof(float)
+  const U32 offset = m_stagingBuffer.AppendData(buffer, size, sizeof(float), log_D3D12RenderSystem);
+
+  BufferTargetInfo info = BufferTargetInfo();
+  info.m_byteSize        = size;
+  info.m_offset          = offset;
+  info.m_binding         = bufferTargetId;
+  info.m_set             = 0;
+
+  m_bufferTargetUpdates.PushBack(info);
 }
 
 } // namespace D3D12

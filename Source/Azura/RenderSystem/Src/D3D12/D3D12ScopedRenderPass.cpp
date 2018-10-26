@@ -367,9 +367,9 @@ void D3D12ScopedRenderPass::CreateBase(
   }
 
   m_passShaders.Reserve(U32(createInfo.m_shaders.size()));
-  m_passInputs.Reserve(U32(createInfo.m_inputs.size()));
+  m_passInputs.Reserve(U32(createInfo.m_inputTargets.size()));
   m_renderOutputInfo.Reserve(U32(createInfo.m_outputs.size()));
-  m_allRenderInputs.Reserve(U32(createInfo.m_inputs.size()));
+  m_allRenderInputs.Reserve(U32(createInfo.m_inputTargets.size()));
 
   for(const auto& outputId : createInfo.m_outputs)
   {
@@ -382,7 +382,7 @@ void D3D12ScopedRenderPass::CreateBase(
     m_passShaders.PushBack(shaderRef);
   }
 
-  for (const auto& inputId : createInfo.m_inputs) {
+  for (const auto& inputId : createInfo.m_inputTargets) {
     // TODO(vasumahesh1):[?]: Respect shader stages here for correct binding
     const auto& targetBufferRef = pipelineBuffers[inputId.m_id];
     m_passInputs.PushBack(targetBufferRef);
@@ -473,12 +473,12 @@ void D3D12ScopedRenderPass::CreateBase(
   CD3DX12_DESCRIPTOR_RANGE inputRangeData;
 
   // Have some inputs
-  if (!createInfo.m_inputs.empty())
+  if (!createInfo.m_inputTargets.empty())
   {
     LOG_DBG(log_D3D12RenderSystem, LOG_LEVEL, "D3D12 Render Pass: Generating for Set Position: %d", descriptorTables.GetSize());
-    LOG_DBG(log_D3D12RenderSystem, LOG_LEVEL, "D3D12 Render Pass: [Attachments] Applying %d Image Attachments as register t(%d) to t(%d)", createInfo.m_inputs.size(), srvOffset, srvOffset + createInfo.m_inputs.size() - 1);
+    LOG_DBG(log_D3D12RenderSystem, LOG_LEVEL, "D3D12 Render Pass: [Attachments] Applying %d Image Attachments as register t(%d) to t(%d)", createInfo.m_inputTargets.size(), srvOffset, srvOffset + createInfo.m_inputTargets.size() - 1);
 
-    inputRangeData.Init(D3D12_DESCRIPTOR_RANGE_TYPE_SRV, UINT(createInfo.m_inputs.size()), srvOffset);
+    inputRangeData.Init(D3D12_DESCRIPTOR_RANGE_TYPE_SRV, UINT(createInfo.m_inputTargets.size()), srvOffset);
     inputsRootParameter.InitAsDescriptorTable(1, &inputRangeData, D3D12_SHADER_VISIBILITY_ALL);
 
     descriptorTables.PushBack(inputsRootParameter);

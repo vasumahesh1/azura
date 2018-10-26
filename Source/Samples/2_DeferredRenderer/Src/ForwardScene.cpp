@@ -83,12 +83,13 @@ void ForwardScene::Initialize(Window& window,
     ShaderStage::Pixel, "Forward.ps", AssetLocation::Shaders
   });
 
-  RenderPassRequirements renderPassRequirements = RenderPassRequirements(1, 2, allocatorTemporary);
+  RenderPassRequirements renderPassRequirements = RenderPassRequirements(1, 2, 0, allocatorTemporary);
   renderPassRequirements.m_maxPools             = 1;
 
   m_pass.m_passId = renderPassRequirements.AddPass({
     PipelinePassCreateInfo::Shaders{VERTEX_SHADER_ID, PIXEL_SHADER_ID},        // SHADERS
-    PipelinePassCreateInfo::Inputs{},                                          // INPUT TARGETS
+    PipelinePassCreateInfo::InputTargets{},                                          // INPUT TARGETS
+    PipelinePassCreateInfo::InputBuffers{},
     PipelinePassCreateInfo::Outputs{},                                         // OUTPUT TARGETS
     PipelinePassCreateInfo::DescriptorSets{UBO_SET, SAMPLER_SET, TEXTURE_SET}, // DESCRIPTORS
     ClearData{{0.2f, 0.2f, 0.2f, 1.0f}, 1.0f, 0}

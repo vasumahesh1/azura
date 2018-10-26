@@ -127,6 +127,19 @@ struct LightUBO {
   float3 _pad2;
 };
 
+struct Plane {
+    float3 normal;
+    float  dist;
+};
+
+struct Frustum {
+    Plane planes[4];
+};
+
+struct FrustumBlock {
+    StructuredBuffer<Frustum> frustums;
+};
+
 float cubicGaussian(float h) {
   if (h < 1.0) {
     return 0.25 * pow(2.0 - h, 3.0) - pow(1.0 - h, 3.0);

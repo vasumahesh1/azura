@@ -108,7 +108,7 @@ void ForwardPlusComputeScene::Initialize(Window& window,
     ShaderStage::Pixel, "ForwardPlusComputePass3.ps", AssetLocation::Shaders
     });
 
-  RenderPassRequirements renderPassRequirements = RenderPassRequirements(6, 3, allocatorTemporary);
+  RenderPassRequirements renderPassRequirements = RenderPassRequirements(6, 3, 1, allocatorTemporary);
   renderPassRequirements.m_maxPools             = 3;
 
   const U32 GBUFFER_1 = renderPassRequirements.AddTarget({ RawStorageFormat::R32G32B32A32_FLOAT });
@@ -117,10 +117,13 @@ void ForwardPlusComputeScene::Initialize(Window& window,
   const U32 DEPTH_BUFFER = renderPassRequirements.AddTarget({ RawStorageFormat::D32_FLOAT });
   const U32 LIGHT_TARGET = renderPassRequirements.AddTarget({ RawStorageFormat::R32G32B32A32_FLOAT, NUM_LIGHTS, 2 });
   const U32 CLUSTER_TARGET = renderPassRequirements.AddTarget({ RawStorageFormat::R32G32B32A32_FLOAT, TILES_X * TILES_Y, CLUSTER_PIXEL_HEIGHT });
+  
+  const U32 FRUSTUM_BUFFER = renderPassRequirements.AddBuffer({ TILES_X * TILES_Y * U32(sizeof(Frustum)), U32(sizeof(Frustum)) });
 
   m_pass.m_gBufferPassId = renderPassRequirements.AddPass({
     PipelinePassCreateInfo::Shaders{VERTEX_SHADER_ID, PIXEL_SHADER_ID},
-    PipelinePassCreateInfo::Inputs{},
+    PipelinePassCreateInfo::InputTargets{},
+    PipelinePassCreateInfo::InputBuffers{},
     PipelinePassCreateInfo::Outputs{GBUFFER_1, GBUFFER_2, GBUFFER_3, DEPTH_BUFFER},
     PipelinePassCreateInfo::DescriptorSets{UBO_SET, TEXTURE_SAMPLER_SET, TEXTURE_SET},
     ClearData{{0.0f, 0.0f, 0.0f, 1.0f}, 1.0f, 0}
@@ -128,7 +131,8 @@ void ForwardPlusComputeScene::Initialize(Window& window,
 
   m_pass.m_computePassId = renderPassRequirements.AddPass({
     PipelinePassCreateInfo::Shaders{COMPUTE_SHADER_ID},
-    PipelinePassCreateInfo::Inputs{{DEPTH_BUFFER, ShaderStage::Compute}},
+    PipelinePassCreateInfo::InputTargets{{DEPTH_BUFFER, ShaderStage::Compute}},
+    PipelinePassCreateInfo::InputBuffers{FRUSTUM_BUFFER},
     PipelinePassCreateInfo::Outputs{LIGHT_TARGET, CLUSTER_TARGET},
     PipelinePassCreateInfo::DescriptorSets{COMPUTE_UBO_SET},
     ClearData{{0.0f, 0.0f, 0.0f, 1.0f}, 1.0f, 0},
@@ -138,7 +142,8 @@ void ForwardPlusComputeScene::Initialize(Window& window,
 
   m_pass.m_shadingPassId = renderPassRequirements.AddPass({
     PipelinePassCreateInfo::Shaders{SHADING_VERTEX_SHADER_ID, SHADING_PIXEL_SHADER_ID},
-    PipelinePassCreateInfo::Inputs{{GBUFFER_1, ShaderStage::Pixel}, {GBUFFER_2, ShaderStage::Pixel}, {GBUFFER_3, ShaderStage::Pixel}, {LIGHT_TARGET, ShaderStage::Pixel}, {CLUSTER_TARGET, ShaderStage::Pixel}},
+    PipelinePassCreateInfo::InputTargets{{GBUFFER_1, ShaderStage::Pixel}, {GBUFFER_2, ShaderStage::Pixel}, {GBUFFER_3, ShaderStage::Pixel}, {LIGHT_TARGET, ShaderStage::Pixel}, {CLUSTER_TARGET, ShaderStage::Pixel}},
+    PipelinePassCreateInfo::InputBuffers{},
     PipelinePassCreateInfo::Outputs{},
     PipelinePassCreateInfo::DescriptorSets{TEXTURE_SAMPLER_SET, LIGHT_SAMPLER_SET},
     ClearData{{0.0f, 0.0f, 0.0f, 1.0f}, 1.0f, 0}

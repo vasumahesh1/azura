@@ -55,6 +55,7 @@ public:
   void SnapshotFrame(const String& exportPath) const override;
 
   void BindRenderTarget(U32 renderTargetId, const TextureDesc& desc, const U8* buffer) override;
+  void BindBufferTarget(U32 bufferTargetId, const U8* buffer) override;
 
 private:
   void AddShader(const ShaderCreateInfo& info) override;
