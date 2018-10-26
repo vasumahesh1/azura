@@ -73,11 +73,11 @@ float4 main(QuadInput_PS input) : SV_Target
   float3 fragColor = float3(0.0);
 
   uint height = 4;
-  for (uint i = 0; i < numLights; ++i) {
-    float lightIdx = ExtractFloat(attachmentBlock.clusterTexture, TILES_X * TILES_Y, CLUSTER_PIXEL_HEIGHT, fragClusterIdx, height);
-    fragColor += ShadeLightByIndex(int(lightIdx), worldPos, normal, albedo);
-    ++height;
-  }
+  // for (uint i = 0; i < numLights; ++i) {
+  //   float lightIdx = ExtractFloat(attachmentBlock.clusterTexture, TILES_X * TILES_Y, CLUSTER_PIXEL_HEIGHT, fragClusterIdx, height);
+  //   fragColor += ShadeLightByIndex(int(lightIdx), worldPos, normal, albedo);
+  //   ++height;
+  // }
 
   // float4 normalColor = float4((normal + float3(1.0, 1.0, 1.0)) / 2.0, 1.0);
   // float4 uvColor = float4(input.uv.x, input.uv.y, 0.0, 1.0);

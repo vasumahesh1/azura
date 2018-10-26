@@ -78,27 +78,27 @@ void main(
 
     // 2. Calculate Min and Max Depth per Cluster
 
-    // float depthValue = attachmentBlock.depthBuffer.Load(uint3(dispatchThreadId.xy, 0)).r;
-    // uint depthInt = asuint(depthValue);
+    float depthValue = attachmentBlock.depthBuffer.Load(uint3(dispatchThreadId.xy, 0)).r;
+    uint depthInt = asuint(depthValue);
 
-    // GroupMemoryBarrierWithGroupSync();
+    GroupMemoryBarrierWithGroupSync();
 
-    // InterlockedMin(minDepthInt, depthInt);
-    // InterlockedMax(maxDepthInt, depthInt);
+    InterlockedMin(minDepthInt, depthInt);
+    InterlockedMax(maxDepthInt, depthInt);
 
-    // GroupMemoryBarrierWithGroupSync();
+    GroupMemoryBarrierWithGroupSync();
 
-    // float minGroupDepth = asfloat(minDepthInt);
-    // float maxGroupDepth = asfloat(maxDepthInt);
+    float minGroupDepth = asfloat(minDepthInt);
+    float maxGroupDepth = asfloat(maxDepthInt);
 
-    // float4 minDepthVec = mul(lightUBO.invProj, float4(0, 0, minGroupDepth, 1));
-    // float4 maxDepthVec = mul(lightUBO.invProj, float4(0, 0, maxGroupDepth, 1));
+    float4 minDepthVec = mul(lightUBO.invProj, float4(0, 0, minGroupDepth, 1));
+    float4 maxDepthVec = mul(lightUBO.invProj, float4(0, 0, maxGroupDepth, 1));
 
-    // minDepthVec = minDepthVec / minDepthVec.w;
-    // maxDepthVec = maxDepthVec / maxDepthVec.w;
+    minDepthVec = minDepthVec / minDepthVec.w;
+    maxDepthVec = maxDepthVec / maxDepthVec.w;
 
-    // minGroupDepth = minDepthVec.z;
-    // maxGroupDepth = maxDepthVec.z;
+    minGroupDepth = minDepthVec.z;
+    maxGroupDepth = maxDepthVec.z;
 
     // Frustum per Thread Group
     const uint frustIdx = (groupID.x * TILES_Y) + groupID.y;
