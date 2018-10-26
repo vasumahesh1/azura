@@ -118,6 +118,7 @@ struct Light {
 
 struct LightUBO {
   float4x4 view;
+  float4x4 invProj;
 
   float nearPlane;
   float farPlane;

@@ -200,6 +200,7 @@ void ForwardPlusComputeScene::Initialize(Window& window,
   m_lightUBO.m_nearPlane = camera.GetNearClip();
   m_lightUBO.m_farPlane  = camera.GetFarClip();
   m_lightUBO.m_view      = camera.GetViewMatrix();
+  m_lightUBO.m_invProj   = camera.GetProjMatrix().Inverse();
 
   const auto lightUBOStart = reinterpret_cast<const U8*>(&m_lightUBO); // NOLINT
   computePool.BindUniformData(m_pass.m_computeUBO, lightUBOStart, sizeof(LightUBO));
@@ -280,6 +281,7 @@ void ForwardPlusComputeScene::Update(float timeDelta,
   m_lightUBO.m_view      = camera.GetViewMatrix();
   m_lightUBO.m_nearPlane = camera.GetNearClip();
   m_lightUBO.m_farPlane  = camera.GetFarClip();
+  m_lightUBO.m_invProj   = camera.GetProjMatrix().Inverse();
 
   const auto uboDataBuffer = reinterpret_cast<const U8*>(&uboData);    // NOLINT
   const auto lightUBOStart = reinterpret_cast<const U8*>(&m_lightUBO); // NOLINT
@@ -335,25 +337,25 @@ void ForwardPlusComputeScene::FillFrustums(const Window& window, const Camera& c
       tileP4[1] = 1.0f - (2.0f * tileP4[1]);
 
       // To View Space
-      Vector4f viewP1 = Vector4f(tileP1[0], tileP1[1], 1.0f, 1.0f) * camera.GetFarClip();
-      Vector4f viewP2 = Vector4f(tileP2[0], tileP2[1], 1.0f, 1.0f) * camera.GetFarClip();
-      Vector4f viewP3 = Vector4f(tileP3[0], tileP3[1], 1.0f, 1.0f) * camera.GetFarClip();
-      Vector4f viewP4 = Vector4f(tileP4[0], tileP4[1], 1.0f, 1.0f) * camera.GetFarClip();
+      Vector4f viewP1 = Vector4f(tileP1[0], tileP1[1], 1.0f, 1.0f);
+      Vector4f viewP2 = Vector4f(tileP2[0], tileP2[1], 1.0f, 1.0f);
+      Vector4f viewP3 = Vector4f(tileP3[0], tileP3[1], 1.0f, 1.0f);
+      Vector4f viewP4 = Vector4f(tileP4[0], tileP4[1], 1.0f, 1.0f);
 
       viewP1 = invProj * viewP1;
       viewP2 = invProj * viewP2;
       viewP3 = invProj * viewP3;
       viewP4 = invProj * viewP4;
 
-      // viewP1 = viewP1 / viewP1[3];
-      // viewP2 = viewP2 / viewP2[3];
-      // viewP3 = viewP3 / viewP3[3];
-      // viewP4 = viewP4 / viewP4[3];
+      viewP1 = viewP1 / viewP1[3];
+      viewP2 = viewP2 / viewP2[3];
+      viewP3 = viewP3 / viewP3[3];
+      viewP4 = viewP4 / viewP4[3];
 
-      viewP1.w = 1.0f; // NOLINT
-      viewP2.w = 1.0f; // NOLINT
-      viewP3.w = 1.0f; // NOLINT
-      viewP4.w = 1.0f; // NOLINT
+      // viewP1.w = 1.0f; // NOLINT
+      // viewP2.w = 1.0f; // NOLINT
+      // viewP3.w = 1.0f; // NOLINT
+      // viewP4.w = 1.0f; // NOLINT
 
       Frustum frustum;
       frustum.m_planes[0] = ComputePlane(Vector3f(0,0,0), viewP1.xyz(), viewP2.xyz());

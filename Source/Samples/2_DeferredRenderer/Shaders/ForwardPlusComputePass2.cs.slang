@@ -1,11 +1,11 @@
 import Common;
 import ForwardPlusComputeCommonPass2;
 
-groupshared uint minDepthInt;
-groupshared uint maxDepthInt;
-
 groupshared uint groupLightCount;
 groupshared uint groupLightIndices[MAX_LIGHTS_PER_CLUSTER];
+
+groupshared uint minDepthInt;
+groupshared uint maxDepthInt;
 
 #define EPSILON 0.0001
 
@@ -16,9 +16,14 @@ bool IsSphereBehindPlane(float3 center, float radius, Plane plane)
 
 bool ComputeFrustumIntersection(float3 lightViewPos, float lightRadius, Frustum frustum, float minZ, float maxZ)
 {
-    return true;
+    // return true;
 
     bool result = true;
+
+    // if (lightViewPos.z + lightRadius < minZ || lightViewPos.z - lightRadius > maxZ )
+    // {
+    //     result = false;
+    // }
 
     for (int i = 0; i < 4 && result; i++ ) {
         if (IsSphereBehindPlane(lightViewPos, lightRadius, frustum.planes[i])) {
@@ -44,44 +49,37 @@ void main(
         maxDepthInt = 0;
     }
 
+    GroupMemoryBarrierWithGroupSync();
+
     // 1. Update Light Positions
 
-    // if (groupID.x == 0 && groupID.y == 0) {
-    //     for(uint idx = 0; idx < LIGHTS_PER_THREAD; ++idx) {
-    //         const uint lightIdx = idx * THREAD_COUNT + groupIndex;
+    if (groupID.x == 0 && groupID.y == 0) {
+        for(uint idx = 0; idx < LIGHTS_PER_THREAD; ++idx) {
+            const uint lightIdx = idx * THREAD_COUNT + groupIndex;
 
-    //         if (lightIdx >= NUM_LIGHTS) {
-    //             break;
-    //         }
+            if (lightIdx >= NUM_LIGHTS) {
+                break;
+            }
 
-    //         const float2 upper = float2(lightIdx, 0);
+            const float2 upper = float2(lightIdx, 0);
 
-    //         float4 currentLightPosRad = rwBlock.lightTexture[upper];
+            float4 currentLightPosRad = rwBlock.lightTexture[upper];
 
-    //         currentLightPosRad.y += (LIGHT_DT * lightUBO.timeDelta);
+            currentLightPosRad.y += (LIGHT_DT * lightUBO.timeDelta);
 
-    //         if (currentLightPosRad.y < LIGHT_MIN.y) {
-    //             currentLightPosRad.y = LIGHT_MAX.y;
-    //         }
+            if (currentLightPosRad.y < LIGHT_MIN.y) {
+                currentLightPosRad.y = LIGHT_MAX.y;
+            }
 
-    //         rwBlock.lightTexture[upper] = currentLightPosRad;
-    //     }
-    // }
-
-    GroupMemoryBarrierWithGroupSync();
+            rwBlock.lightTexture[upper] = currentLightPosRad;
+        }
+    }
 
 
     // 2. Calculate Min and Max Depth per Cluster
 
-    // int texCoordX = (groupID.x * WIDTH_PER_TILE) + groupThreadId.x;
-
-    // uint2 texCoord;
-
-    // float depthValue = attachmentBlock.depthBuffer.Load(uint3(0, 0, 0)).r;
+    // float depthValue = attachmentBlock.depthBuffer.Load(uint3(dispatchThreadId.xy, 0)).r;
     // uint depthInt = asuint(depthValue);
-
-    // minDepthInt = 0xFFFFFFFF;
-    // maxDepthInt = 0;
 
     // GroupMemoryBarrierWithGroupSync();
 
@@ -92,6 +90,15 @@ void main(
 
     // float minGroupDepth = asfloat(minDepthInt);
     // float maxGroupDepth = asfloat(maxDepthInt);
+
+    // float4 minDepthVec = mul(lightUBO.invProj, float4(0, 0, minGroupDepth, 1));
+    // float4 maxDepthVec = mul(lightUBO.invProj, float4(0, 0, maxGroupDepth, 1));
+
+    // minDepthVec = minDepthVec / minDepthVec.w;
+    // maxDepthVec = maxDepthVec / maxDepthVec.w;
+
+    // minGroupDepth = minDepthVec.z;
+    // maxGroupDepth = maxDepthVec.z;
 
     // Frustum per Thread Group
     const uint frustIdx = (groupID.x * TILES_Y) + groupID.y;

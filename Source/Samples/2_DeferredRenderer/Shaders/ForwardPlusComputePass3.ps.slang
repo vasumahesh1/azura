@@ -1,14 +1,14 @@
 import Common;
 import ForwardPlusComputeCommonPass3;
 
-float ExtractFloat(Texture2D tex, int textureWidth, int textureHeight, int index, int component) {
+float ExtractFloat(Texture2D tex, uint textureWidth, uint textureHeight, uint index, uint component) {
   float u = float(index + 1) / float(textureWidth + 1);
-  int pixel = component / 4;
+  uint pixel = component / 4;
   float v = float(pixel + 1) / float(textureHeight + 1);
 
   float4 texel = tex.Sample(lightSamplerBlock.lightSamp, float2(u, v));
 
-  int pixelComponent = component - pixel * 4;
+  uint pixelComponent = component - pixel * 4;
 
   if (pixelComponent == 0) {
     return texel[0];

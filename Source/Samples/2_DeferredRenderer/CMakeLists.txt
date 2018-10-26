@@ -54,8 +54,9 @@ AzuraAddLoggingSupport(DeferredRenderer 50)
 
 target_compile_definitions(DeferredRenderer PUBLIC FORCE_LOGGING=1)
 
-AzuraAddSlangShaders(DeferredRenderer GLSL ${PROJECT_SHADERS})
-AzuraAddSlangShaders(DeferredRenderer VULKAN ${PROJECT_SHADERS})
+# Extension issue
+# AzuraAddSlangShaders(DeferredRenderer GLSL ${PROJECT_SHADERS})
+# AzuraAddSlangShaders(DeferredRenderer VULKAN ${PROJECT_SHADERS})
 
 AzuraAddSlangShaders(DeferredRenderer HLSL ${PROJECT_SHADERS})
 AzuraAddSlangShaders(DeferredRenderer DXBC ${PROJECT_SHADERS})
