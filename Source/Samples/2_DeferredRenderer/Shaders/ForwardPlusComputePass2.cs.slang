@@ -126,23 +126,18 @@ void main(
     GroupMemoryBarrierWithGroupSync();
 
     // 4. Write to Texture
+    uint fullSets = floor(groupLightCount / 4) * 4;
+    uint remainingSets = groupLightCount - fullSets; // can be 0 - 3 Eg 52 53 54 55 56
+    uint fullSetIdx = (fullSets / 4);
+
+    // 4. Write to Texture
     if (groupIndex == 0) {
         const float2 countUV = float2(frustIdx, 0);
         rwBlock.clusterTexture[countUV] = float4(groupLightCount, 0.0, 0.0, 0.0);
-        
-        uint fullSets = floor(groupLightCount / 4) * 4;
-        uint remainingSets = groupLightCount - fullSets; // can be 0 - 3 Eg 52 53 54 55 56
-
-        uint height = 1;
-        for(uint idx = 0; idx < fullSets; idx += 4) {
-            const float2 writeUV = float2(frustIdx, height);
-            rwBlock.clusterTexture[writeUV] = float4(groupLightIndices[idx], groupLightIndices[idx + 1], groupLightIndices[idx + 2], groupLightIndices[idx + 3]);
-            ++height;
-        }
 
         // Encode Last Set of Lights
         float4 lastEncode = float4(0.0, 0.0, 0.0, 0.0);
-        float2 remainingUV = float2(frustIdx, height);
+        float2 remainingUV = float2(frustIdx, fullSetIdx + 1);
         if (remainingSets >= 1) {
             lastEncode.x = groupLightIndices[fullSets];
         }
@@ -156,5 +151,12 @@ void main(
         }
 
         rwBlock.clusterTexture[remainingUV] = lastEncode;
+    }
+
+    // Parallel Write into Texture
+    if (groupIndex < fullSetIdx) {
+        const float2 writeUV = float2(frustIdx, groupIndex + 1);
+        uint indices = 4 * groupIndex;
+        rwBlock.clusterTexture[writeUV] = float4(groupLightIndices[indices], groupLightIndices[indices + 1], groupLightIndices[indices + 2], groupLightIndices[indices + 3]);
     }
 }
