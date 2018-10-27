@@ -35,8 +35,16 @@ void App::Initialize() {
   m_lightSamplerDesc.m_addressModeV = TextureAddressMode::Clamp;
   m_lightSamplerDesc.m_addressModeW = TextureAddressMode::Clamp;
 
+#if defined(FORWARD_SCENE)
+  const String appName = "Forward without Compute";
+#elif defined(FORWARD_COMPUTE_SCENE)
+  const String appName = "Forward with Compute";
+#elif defined(FORWARD_PLUS_COMPUTE_SCENE)
+  const String appName = "Forward Plus with Compute";
+#endif
+
   // Init Window & Camera
-  p_window = RenderSystem::CreateApplicationWindow("TestZone", 1280, 720);
+  p_window = RenderSystem::CreateApplicationWindow(appName, 1280, 720);
   VERIFY_TRUE(log_App, p_window->Initialize(), "Cannot Initialize Window");
 
   p_window->SetCursorState(CursorState::Hidden);
@@ -74,11 +82,16 @@ void App::Initialize() {
   GenerateLights();
 
   // Init All Scenes here
-  // m_forwardScene.Initialize(*p_window, m_camera, m_sponza, m_sceneUBO, m_lightSamplerDesc, m_lights);
-  // m_forwardComputeScene.Initialize(*p_window, m_camera, m_sponza, m_sceneUBO, m_lightSamplerDesc, m_lights);
+#if defined(FORWARD_SCENE)
+  m_forwardScene.Initialize(*p_window, m_camera, m_sponza, m_sceneUBO, m_lightSamplerDesc, m_lights);
+  p_activeScene = &m_forwardScene;
+#elif defined(FORWARD_COMPUTE_SCENE)
+  m_forwardComputeScene.Initialize(*p_window, m_camera, m_sponza, m_sceneUBO, m_lightSamplerDesc, m_lights);
+  p_activeScene = &m_forwardComputeScene;
+#elif defined(FORWARD_PLUS_COMPUTE_SCENE)
   m_forwardPlusComputeScene.Initialize(*p_window, m_camera, m_sponza, m_sceneUBO, m_lightSamplerDesc, m_lights);
-
   p_activeScene = &m_forwardPlusComputeScene;
+#endif
 }
 
 void App::Update(float timeDelta) {

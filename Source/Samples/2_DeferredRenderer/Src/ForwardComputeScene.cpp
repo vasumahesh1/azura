@@ -136,7 +136,7 @@ void ForwardComputeScene::Initialize(Window& window,
   ComputePoolCreateInfo computePoolInfo = {allocatorTemporary};
   computePoolInfo.m_byteSize            = 0xF00000;
   computePoolInfo.m_computePasses       = {{m_pass.m_computePassId}, allocatorTemporary};
-  computePoolInfo.m_launchDims          = ThreadGroupDimensions{32, 1, 1};
+  computePoolInfo.m_launchDims          = ThreadGroupDimensions{TILES_X, 1, 1};
 
   ComputePool& computePool = m_renderer->CreateComputePool(computePoolInfo);
   m_computePool            = &computePool;
