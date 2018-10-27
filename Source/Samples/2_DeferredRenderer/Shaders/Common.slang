@@ -1,11 +1,12 @@
-static const uint NUM_LIGHTS = 128;
+static const uint NUM_LIGHTS = 256;
 
-static const uint BLOCK_SIZE = 16;
-static const uint MAX_LIGHTS_PER_CLUSTER = 252;
+static const uint BLOCK_SIZE_X = 16;
+static const uint BLOCK_SIZE_Y = 16;
+static const uint MAX_LIGHTS_PER_CLUSTER = 1020;
 
 static const float LIGHT_DT = -2.5;
-static const float3 LIGHT_MIN = {-5.0, 0.0, -5.0 };
-static const float3 LIGHT_MAX = { 5.0, 15.0, 5.0 };
+static const float3 LIGHT_MIN = {-10.0, 0.0, -5.0 };
+static const float3 LIGHT_MAX = { 10.0, 15.0, 5.0 };
 static const uint SCREEN_WIDTH = 1280;
 static const uint SCREEN_HEIGHT = 720;
 static const uint TILES_X = 16;
@@ -15,7 +16,7 @@ static const uint TILES_Z = 16;
 static const uint WIDTH_PER_TILE = SCREEN_WIDTH / TILES_X;
 static const uint HEIGHT_PER_TILE = SCREEN_HEIGHT / TILES_Y;
 
-static const uint THREAD_COUNT = BLOCK_SIZE * BLOCK_SIZE;
+static const uint THREAD_COUNT = BLOCK_SIZE_X * BLOCK_SIZE_Y;
 
 static const uint LIGHTS_PER_THREAD = (NUM_LIGHTS + THREAD_COUNT - 1) / THREAD_COUNT;
 

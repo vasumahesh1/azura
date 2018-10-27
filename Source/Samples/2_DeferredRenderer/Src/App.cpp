@@ -68,6 +68,9 @@ void App::Initialize() {
   m_camera.SetTranslationStepSize(5.0f);
   m_camera.SetSensitivity(0.5f);
 
+  m_camera.SetPosition(Vector3f(-10, 10, 0));
+  m_camera.SetReferencePoint(Vector3f(-5, 10, 0));
+
   // Trigger a recompute
   m_camera.Recompute();
 

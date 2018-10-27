@@ -7,9 +7,9 @@ struct RWBlock {
 ParameterBlock<LightUBO> lightUBO;
 ParameterBlock<RWBlock> rwBlock;
 
-const static int lightsPerThread = NUM_LIGHTS / BLOCK_SIZE;
+const static int lightsPerThread = NUM_LIGHTS / BLOCK_SIZE_X;
 
-[numthreads(BLOCK_SIZE, 1, 1)]
+[numthreads(BLOCK_SIZE_X, 1, 1)]
 void main(uint3 groupID : SV_GroupID,
     uint3 groupThreadId : SV_GroupThreadID,
     uint groupIndex : SV_GroupIndex,

@@ -77,8 +77,6 @@ target_link_libraries(ForwardRenderer D3D12RenderSystem Camera Log glfw Math Ass
 # -------------------------------
 add_executable(ForwardComputeRenderer ${SOURCES})
 
-AzuraDeployFolder(ForwardComputeRenderer Meshes)
-
 AzuraAddLoggingSupport(ForwardComputeRenderer 50)
 
 target_compile_definitions(ForwardComputeRenderer PUBLIC FORCE_LOGGING=1 FORWARD_COMPUTE_SCENE=1)
@@ -97,8 +95,6 @@ target_link_libraries(ForwardComputeRenderer D3D12RenderSystem Camera Log glfw M
 # Forward Plus Compute
 # -------------------------------
 add_executable(ForwardPlusComputeRenderer ${SOURCES})
-
-AzuraDeployFolder(ForwardPlusComputeRenderer Meshes)
 
 AzuraAddLoggingSupport(ForwardPlusComputeRenderer 50)
 

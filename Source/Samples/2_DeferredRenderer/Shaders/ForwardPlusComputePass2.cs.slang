@@ -35,7 +35,7 @@ bool ComputeFrustumIntersection(float3 lightViewPos, float lightRadius, Frustum 
 }
 
 
-[numthreads(BLOCK_SIZE, BLOCK_SIZE, 1)]
+[numthreads(BLOCK_SIZE_X, BLOCK_SIZE_Y, 1)]
 void main(
     uint3 groupID : SV_GroupID,
     uint3 groupThreadId : SV_GroupThreadID,

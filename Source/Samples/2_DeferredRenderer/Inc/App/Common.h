@@ -5,10 +5,10 @@
 
 namespace Azura {
 
-constexpr U32 NUM_LIGHTS = 128;
-constexpr U32 MAX_LIGHTS_PER_CLUSTER = 252;
-const Vector3f LIGHT_MIN = {-5.0f, 0.0f, -5.0f };
-const Vector3f LIGHT_MAX = { 5.0f, 15.0f, 5.0f };
+constexpr U32 NUM_LIGHTS = 256;
+constexpr U32 MAX_LIGHTS_PER_CLUSTER = 1020;
+const Vector3f LIGHT_MIN = {-10.0f, 0.0f, -5.0f };
+const Vector3f LIGHT_MAX = { 10.0f, 15.0f, 5.0f };
 constexpr float LIGHT_RADIUS = 5.0f;
 constexpr float LIGHT_DT = -2.5f;
 

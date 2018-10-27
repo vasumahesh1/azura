@@ -1,0 +1,67 @@
+Forward:
+128: 120fps
+256: 73fps
+512: 33fps
+1024: 20fps
+
+ForwardWithCompute:
+16x16
+128: 140fps
+256: 74fps
+512: 34fps
+1024: 24fps
+
+ForwardPlus:
+16x16 Tiles
+256 Threads
+128: 240fps
+256: 150fps
+512: 80fps
+1024: 42fps
+
+512 lights
+256 Threads
+8x8: 68fps
+16x16: 80fps
+32x32: 75fps
+48x48: 69fps
+64x64: 68fps
+
+512 lights
+512 Threads
+8x8: 68fps
+16x16: 77fps
+32x32: 76fps
+
+
+Profiling:
+16x16 256 Threads 512 Lights:
+Prepass: 1.65ms
+Compute Pass: 0.02ms
+Shade Pass: 5.86ms
+
+16x16 256 Threads 256 Lights:
+Prepass: 1.51ms
+Compute Pass: 0.02ms
+Shade Pass: 5.67ms
+
+16x16 256 Threads 1024 Lights:
+Prepass: 1.29ms
+Compute Pass: 0.04ms
+Shade Pass: 27.65ms
+
+Forward Renderer 512 Lights:
+Shade Pass: 52.30ms
+
+Forward Renderer with Compute 256 Threads 512 Lights:
+Compute: 0.02ms
+Shade Pass: 50.78ms
+
+Forward Renderer 256 Lights:
+Shade Pass: 20.08ms
+
+Forward Renderer with Compute 256 Threads 256 Lights:
+Compute: 0.01ms
+Shade Pass: 21.05ms
+
+

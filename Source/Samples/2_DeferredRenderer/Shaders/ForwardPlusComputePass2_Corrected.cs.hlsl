@@ -12,12 +12,13 @@ static groupshared uint maxDepthInt_0;
 
 
 #line 1 "X:/AzuraStudio/Source/Samples/2_DeferredRenderer/Shaders/Common.slang"
-static const uint NUM_LIGHTS_0 = (uint) 128;
+static const uint NUM_LIGHTS_0 = (uint) 256;
 
 static const uint BLOCK_SIZE_0 = (uint) 16;
+static const uint BLOCK_SIZE_1 = (uint) 16;
 
 #line 18
-static const uint THREAD_COUNT_0 = BLOCK_SIZE_0 * BLOCK_SIZE_0;
+static const uint THREAD_COUNT_0 = BLOCK_SIZE_0 * BLOCK_SIZE_1;
 
 static const uint LIGHTS_PER_THREAD_0 = (NUM_LIGHTS_0 + THREAD_COUNT_0 - (uint) 1) / THREAD_COUNT_0;
 
@@ -140,10 +141,10 @@ bool ComputeFrustumIntersection_0(vector<float,3> lightViewPos_0, float lightRad
 
 
 #line 4 "X:/AzuraStudio/Source/Samples/2_DeferredRenderer/Shaders/Common.slang"
-static const uint MAX_LIGHTS_PER_CLUSTER_0 = (uint) 252;
+static const uint MAX_LIGHTS_PER_CLUSTER_0 = (uint) 1020;
 
 #line 5 "X:/AzuraStudio/Source/Samples/2_DeferredRenderer/Shaders/ForwardPlusComputePass2.cs.slang"
-static groupshared uint  groupLightIndices_0[252];
+static groupshared uint  groupLightIndices_0[1020];
 
 
 #line 39

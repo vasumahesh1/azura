@@ -103,13 +103,13 @@ float ExtractFloat_0(Texture2D<vector<float,4> > tex_0, uint textureWidth_0, uin
 
 
 #line 4 "X:/AzuraStudio/Source/Samples/2_DeferredRenderer/Shaders/Common.slang"
-static const uint MAX_LIGHTS_PER_CLUSTER_0 = (uint) 252;
+static const uint MAX_LIGHTS_PER_CLUSTER_0 = (uint) 1020;
 
 #line 24
 static const uint CLUSTER_PIXEL_HEIGHT_0 = (uint) 1 + MAX_LIGHTS_PER_CLUSTER_0 / (uint) 4;
 
 #line 1
-static const uint NUM_LIGHTS_0 = (uint) 128;
+static const uint NUM_LIGHTS_0 = (uint) 256;
 
 #line 112
 struct Light_0
