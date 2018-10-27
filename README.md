@@ -1,23 +1,29 @@
+
 Azura
 =================
 
 A repository containing tools for real-time rendering, general C++, memory allocators, path tracers and more!
 
-Note: This is still a WIP and very much an active project.
+Active Platforms on Azura:
 
 | Windows        | Linux        |
 | ------------- |:-------------:|
 | [![Build Status: Windows](https://ci.appveyor.com/api/projects/status/github/vasumahesh1/azura)](https://ci.appveyor.com/project/vasumahesh1/azura) | Soon(tm) |
 
+
+Active Draw APIs on Azura:
+
+| D3D12         | Vulkan        |
+|:-------------:|:-------------:|
+| Supported     | Supported        |
+
+![](https://github.com/vasumahesh1/azura/raw/dev/Source/Samples/1_ProceduralPlanet/Images/planet_low.gif)
+
 Table of Contents
 =================
   * [Dependencies](#dependencies)
+  * [Documentation Site](https://vasumahesh1.github.io/azura_docs/)
   * [Building](#building)
-  * [Projects](#projects)
-    * [Render System](#render-system)
-    * [Common](#common)
-    * [Log](#Log)
-  * [Renders](#renders)
   * [Benchmarking](BENCHMARKS.md)
   * [License](#license)
 
@@ -39,6 +45,7 @@ Code dependencies:
   * [mathfu](https://github.com/google/mathfu)
   * [Vulkan SDK](https://www.lunarg.com/vulkan-sdk/)
   * [GLFW](https://www.glfw.org/)
+  * [GLTF SDK](https://github.com/Microsoft/glTF-SDK)
 
 Most of the dependencies are located at Source/Imports/ and are pulled automatically using git submodule. If you cloned this repository, you can run:
 
