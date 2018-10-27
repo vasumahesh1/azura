@@ -54,7 +54,53 @@ void PolarCamera::OnMouseEvent(MouseEvent mouseEvent) {
 }
 
 void PolarCamera::OnKeyEvent(KeyEvent keyEvent) {
-  UNUSED(keyEvent);
+  if (keyEvent.m_internalType == KeyEventType::KeyPress) {
+    switch (keyEvent.m_key) {
+    case KeyboardKey::W:
+      m_moveUpFactor = 1;
+      break;
+
+    case KeyboardKey::S:
+      m_moveUpFactor = -1;
+      break;
+
+    case KeyboardKey::D:
+      m_moveRightFactor = -1;
+      break;
+
+    case KeyboardKey::A:
+      m_moveRightFactor = 1;
+      break;
+
+    case KeyboardKey::Unmapped:
+    case KeyboardKey::Esc:
+    default:
+      break;
+    }
+  } else if (keyEvent.m_internalType == KeyEventType::KeyRelease) {
+    switch (keyEvent.m_key) {
+    case KeyboardKey::W:
+      m_moveUpFactor = 0;
+      break;
+
+    case KeyboardKey::S:
+      m_moveUpFactor = 0;
+      break;
+
+    case KeyboardKey::D:
+      m_moveRightFactor = 0;
+      break;
+
+    case KeyboardKey::A:
+      m_moveRightFactor = 0;
+      break;
+
+    case KeyboardKey::Unmapped:
+    case KeyboardKey::Esc:
+    default:
+      break;
+    }
+  }
 }
 
 void PolarCamera::SetZoom(float value) {
@@ -75,6 +121,22 @@ void PolarCamera::RotateAboutRight(float deg) {
 }
 
 void PolarCamera::Update(float timeDelta) {
-  UNUSED(timeDelta);
+  const float distance = m_stepSize * timeDelta;
+
+  bool needsRecompute = false;
+
+  if (m_moveUpFactor != 0) {
+    RotateAboutRight(distance * m_moveUpFactor);
+    needsRecompute = true;
+  }
+
+  if (m_moveRightFactor != 0) {
+    RotateAboutUp(distance * m_moveRightFactor);
+    needsRecompute = true;
+  }
+
+  if (needsRecompute) {
+    Recompute();
+  }
 }
 } // namespace Azura

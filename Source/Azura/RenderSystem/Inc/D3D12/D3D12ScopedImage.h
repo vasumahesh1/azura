@@ -53,7 +53,7 @@ public:
 
 private:
   Microsoft::WRL::ComPtr<ID3D12Resource> m_texture;
-  RawStorageFormat m_format{};
+  RawStorageFormat m_format{RawStorageFormat::UNKNOWN};
   D3D12_RESOURCE_STATES m_currentState{};
 };
 

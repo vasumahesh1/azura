@@ -139,13 +139,15 @@ D3D12Renderer::D3D12Renderer(const ApplicationInfo& appInfo,
     m_targetBuffers.Last().SetStride(bufferTarget.m_stride);
   }
 
-  TextureDesc desc = {};
-  desc.m_format    = swapChainRequirements.m_depthFormat;
-  desc.m_bounds    = Bounds3D{swapChainRequirements.m_extent.m_width, swapChainRequirements.m_extent.m_height, 1};
+  if (swapChainRequirements.m_depthFormat != RawStorageFormat::UNKNOWN) {
+    TextureDesc desc = {};
+    desc.m_format = swapChainRequirements.m_depthFormat;
+    desc.m_bounds = Bounds3D{ swapChainRequirements.m_extent.m_width, swapChainRequirements.m_extent.m_height, 1 };
 
-  const D3D12_RESOURCE_STATES resourceState = D3D12_RESOURCE_STATE_DEPTH_WRITE;
-  const D3D12_RESOURCE_FLAGS resourceFlags = D3D12_RESOURCE_FLAG_ALLOW_DEPTH_STENCIL;
-  m_depthTexture.Create(m_device, resourceState, resourceFlags, desc, log_D3D12RenderSystem);
+    const D3D12_RESOURCE_STATES resourceState = D3D12_RESOURCE_STATE_DEPTH_WRITE;
+    const D3D12_RESOURCE_FLAGS resourceFlags = D3D12_RESOURCE_FLAG_ALLOW_DEPTH_STENCIL;
+    m_depthTexture.Create(m_device, resourceState, resourceFlags, desc, log_D3D12RenderSystem);
+  }
 
   m_rtvDescriptorSize = m_device->GetDescriptorHandleIncrementSize(D3D12_DESCRIPTOR_HEAP_TYPE_RTV);
   m_dsvDescriptorSize = m_device->GetDescriptorHandleIncrementSize(D3D12_DESCRIPTOR_HEAP_TYPE_DSV);

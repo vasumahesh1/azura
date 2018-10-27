@@ -92,6 +92,8 @@ private:
     const Containers::Vector<D3D12ScopedImage>& pipelineBufferImages,
     const Containers::Vector<D3D12ScopedShader>& allShaders);
 
+  void ApplyBlendToPSO(D3D12_GRAPHICS_PIPELINE_STATE_DESC & psoDesc, U32 id) const;
+
   const Log log_D3D12RenderSystem;
   U32 m_id;
   U32 m_internalId;

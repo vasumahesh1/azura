@@ -145,6 +145,37 @@ namespace D3D12 {
   FUNC(TextureFilter::MinMagMipLinear, D3D12_FILTER_MIN_MAG_MIP_LINEAR)                                 \
   FUNC(TextureFilter::Anisotropic, D3D12_FILTER_ANISOTROPIC)
 
+
+#define BLEND_OP_TO_D3D12_BLEND_OP(FUNC)                       \
+  FUNC(BlendOp::Add, D3D12_BLEND_OP_ADD)                       \
+  FUNC(BlendOp::Subtract, D3D12_BLEND_OP_SUBTRACT)             \
+  FUNC(BlendOp::ReverseSubtract, D3D12_BLEND_OP_REV_SUBTRACT)  \
+  FUNC(BlendOp::Min, D3D12_BLEND_OP_MIN)                       \
+  FUNC(BlendOp::Max, D3D12_BLEND_OP_MAX)
+
+#define BLEND_OP_TO_D3D12_BLEND(FUNC)                                  \
+  FUNC(BlendFactor::Zero, D3D12_BLEND_ZERO)                            \
+  FUNC(BlendFactor::One, D3D12_BLEND_ONE)                              \
+  FUNC(BlendFactor::SrcColor, D3D12_BLEND_SRC_COLOR)                   \
+  FUNC(BlendFactor::OneMinusSrcColor, D3D12_BLEND_INV_SRC_COLOR)       \
+  FUNC(BlendFactor::DstColor, D3D12_BLEND_DEST_COLOR)                  \
+  FUNC(BlendFactor::OneMinusDstColor, D3D12_BLEND_INV_DEST_COLOR)      \
+  FUNC(BlendFactor::SrcAlpha, D3D12_BLEND_SRC_ALPHA)                   \
+  FUNC(BlendFactor::OneMinusSrcAlpha, D3D12_BLEND_INV_SRC_ALPHA)       \
+  FUNC(BlendFactor::DstAlpha, D3D12_BLEND_DEST_ALPHA)                  \
+  FUNC(BlendFactor::OneMinusDstAlpha, D3D12_BLEND_INV_DEST_ALPHA)      \
+  FUNC(BlendFactor::ConstantColor, D3D12_BLEND_ZERO)                   \
+  FUNC(BlendFactor::OneMinusConstantColor, D3D12_BLEND_ZERO)           \
+  FUNC(BlendFactor::ConstantAlpha, D3D12_BLEND_ZERO)                   \
+  FUNC(BlendFactor::OneMinusConstantAlpha, D3D12_BLEND_ZERO)           \
+  FUNC(BlendFactor::SrcAlphaSaturate, D3D12_BLEND_ZERO)                \
+  FUNC(BlendFactor::Src1Color, D3D12_BLEND_SRC1_COLOR)                 \
+  FUNC(BlendFactor::OneMinusSrc1Color, D3D12_BLEND_INV_SRC1_COLOR)     \
+  FUNC(BlendFactor::Src1Alpha, D3D12_BLEND_SRC1_ALPHA)                 \
+  FUNC(BlendFactor::OneMinusSrc1Alpha, D3D12_BLEND_INV_SRC1_ALPHA)
+
+
+
 #define CREATE_MAPPER_CPP(FROM_FORMAT, TO_FORMAT, MAPPING_TABLE, CASE_MAPPING_FUNC)                                    \
   CREATE_MAPPER_H(FROM_FORMAT, TO_FORMAT) {                                                                            \
     switch (inputFormat) { MAPPING_TABLE(CASE_MAPPING_FUNC) }                                                          \
@@ -163,6 +194,8 @@ CREATE_MAPPER_CPP(ImageViewType, D3D12_RTV_DIMENSION, IMAGE_VIEW_TYPE_TO_RTV_DIM
 CREATE_MAPPER_CPP(CullMode, D3D12_CULL_MODE, CULL_MODE_TO_D3D12_CULL_MODE_MAPPING, FORWARD_MAPPING)
 CREATE_MAPPER_CPP(TextureAddressMode, D3D12_TEXTURE_ADDRESS_MODE, TEXTURE_ADDRESS_MODE_TO_D3D12_TEXTURE_ADDRESS_MODE, FORWARD_MAPPING)
 CREATE_MAPPER_CPP(TextureFilter, D3D12_FILTER, TEXTURE_FILTER_TO_D3D12_FILTER, FORWARD_MAPPING)
+CREATE_MAPPER_CPP(BlendOp, D3D12_BLEND_OP, BLEND_OP_TO_D3D12_BLEND_OP, FORWARD_MAPPING)
+CREATE_MAPPER_CPP(BlendFactor, D3D12_BLEND, BLEND_OP_TO_D3D12_BLEND, FORWARD_MAPPING)
 
 } // namespace D3D12
 } // namespace Azura
