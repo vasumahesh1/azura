@@ -59,14 +59,13 @@ struct MeshObject
 struct LightUBO
 {
   Matrix4f m_view{};
-  Matrix4f m_invProj{};
 
   float m_nearPlane{0.0f};
   float m_farPlane{0.0f};
-  float _pad1[2];
-
   float m_timeDelta{ 0.0f };
-  float _pad2[3];
+  float _pad1[1];
+
+  Matrix4f m_proj{};
 };
 
 struct Plane

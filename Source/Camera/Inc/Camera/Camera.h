@@ -48,8 +48,8 @@ protected:
 
   float m_sensitivity{0.5f};
 
-  float m_nearClip{0.01f};
-  float m_farClip{100.0f};
+  float m_nearClip{0.0001f};
+  float m_farClip{1000.0f};
   float m_fovY{45.0f};
 
   Vector3f m_eye{0, 0, 0};

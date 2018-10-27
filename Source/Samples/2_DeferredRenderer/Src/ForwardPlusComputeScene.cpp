@@ -200,7 +200,7 @@ void ForwardPlusComputeScene::Initialize(Window& window,
   m_lightUBO.m_nearPlane = camera.GetNearClip();
   m_lightUBO.m_farPlane  = camera.GetFarClip();
   m_lightUBO.m_view      = camera.GetViewMatrix();
-  m_lightUBO.m_invProj   = camera.GetProjMatrix().Inverse();
+  m_lightUBO.m_proj   = camera.GetProjMatrix();
 
   const auto lightUBOStart = reinterpret_cast<const U8*>(&m_lightUBO); // NOLINT
   computePool.BindUniformData(m_pass.m_computeUBO, lightUBOStart, sizeof(LightUBO));
@@ -281,7 +281,7 @@ void ForwardPlusComputeScene::Update(float timeDelta,
   m_lightUBO.m_view      = camera.GetViewMatrix();
   m_lightUBO.m_nearPlane = camera.GetNearClip();
   m_lightUBO.m_farPlane  = camera.GetFarClip();
-  m_lightUBO.m_invProj   = camera.GetProjMatrix().Inverse();
+  m_lightUBO.m_proj   = camera.GetProjMatrix();
 
   const auto uboDataBuffer = reinterpret_cast<const U8*>(&uboData);    // NOLINT
   const auto lightUBOStart = reinterpret_cast<const U8*>(&m_lightUBO); // NOLINT
