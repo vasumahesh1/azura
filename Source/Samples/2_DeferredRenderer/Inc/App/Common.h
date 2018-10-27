@@ -5,11 +5,20 @@
 
 namespace Azura {
 
-constexpr U32 NUM_LIGHTS = 128;
-const Vector3f LIGHT_MIN = {-5.0f, 0.0f, -5.0f };
-const Vector3f LIGHT_MAX = { 5.0f, 15.0f, 5.0f };
+constexpr U32 NUM_LIGHTS = 256;
+constexpr U32 MAX_LIGHTS_PER_CLUSTER = 1020;
+const Vector3f LIGHT_MIN = {-10.0f, 0.0f, -5.0f };
+const Vector3f LIGHT_MAX = { 10.0f, 15.0f, 5.0f };
 constexpr float LIGHT_RADIUS = 5.0f;
 constexpr float LIGHT_DT = -2.5f;
+
+constexpr U32 TILES_X = 16;
+constexpr U32 TILES_Y = 16;
+constexpr U32 TILES_Z = 16;
+
+constexpr U32 CLUSTER_PIXEL_HEIGHT = 1 + (MAX_LIGHTS_PER_CLUSTER / 4);
+
+constexpr U32 FPLUS_NUM_FRUSTRUMS = TILES_X * TILES_Y;
 
 struct UniformBufferData {
   Matrix4f m_model;
@@ -49,8 +58,26 @@ struct MeshObject
 
 struct LightUBO
 {
-  float timeDelta{ 0.0f };
-  float _pad[3];
+  Matrix4f m_view{};
+
+  float m_nearPlane{0.0f};
+  float m_farPlane{0.0f};
+  float m_timeDelta{ 0.0f };
+  float _pad1[1];
+
+  Matrix4f m_proj{};
 };
+
+struct Plane
+{
+  Vector3f m_normal;
+  float  m_distanceToOrigin;
+};
+
+struct Frustum
+{
+  Plane m_planes[4];
+};
+
 
 } // namespace Azura

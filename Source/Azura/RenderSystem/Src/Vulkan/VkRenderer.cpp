@@ -654,6 +654,11 @@ void VkRenderer::BindRenderTarget(U32 renderTargetId, const TextureDesc& desc, c
   UNUSED(buffer);
 }
 
+void VkRenderer::BindBufferTarget(U32 bufferTargetId, const U8* buffer) {
+  UNUSED(bufferTargetId);
+  UNUSED(buffer);
+}
+
 void VkRenderer::AddShader(const ShaderCreateInfo& info) {
   // TODO(vasumahesh1):[ASSETS]: Manage assets
   const String fullPath = "Shaders/" + VkRenderer::GetRenderingAPI() + "/" + info.m_shaderFileName;

@@ -3,6 +3,7 @@
 #include "App/Common.h"
 #include "Generic/Window.h"
 #include "Generic/TextureManager.h"
+#include "Camera/Camera.h"
 
 namespace Azura {
 
@@ -22,11 +23,13 @@ public:
   Scene& operator=(Scene&& other) noexcept = delete;
 
   virtual void Initialize(Window& window,
+                          const Camera& camera,
                           const MeshObject& sceneMesh,
                           const UniformBufferData& uboData,
                           const SamplerDesc& lightSamplerDesc,
                           const Containers::Vector<PointLight>& lights) = 0;
   virtual void Update(float timeDelta,
+                      const Camera& camera,
                       const UniformBufferData& uboData,
                       const Containers::Vector<PointLight>& lights) = 0;
   virtual void CleanUp() = 0;

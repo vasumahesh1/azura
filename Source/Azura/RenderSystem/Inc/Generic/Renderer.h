@@ -45,6 +45,7 @@ public:
   virtual void SnapshotFrame(const String& exportPath) const = 0;
 
   virtual void BindRenderTarget(U32 renderTargetId, const TextureDesc& desc, const U8* buffer) = 0;
+  virtual void BindBufferTarget(U32 bufferTargetId, const U8* buffer) = 0;
 
 protected:
   const ApplicationInfo& GetApplicationInfo() const;

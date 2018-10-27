@@ -4,22 +4,24 @@ struct RWBlock {
     RWTexture2D<float4> rwTexture;
 };
 
-const static float LIGHT_DT = -2.5;
-const static float3 LIGHT_MIN = {-5.0, 0.0, -5.0 };
-const static float3 LIGHT_MAX = { 5.0, 15.0, 5.0 };
-
-
 ParameterBlock<LightUBO> lightUBO;
 ParameterBlock<RWBlock> rwBlock;
 
-const static int lightsPerThread = NUM_LIGHTS / 32;
+const static int lightsPerThread = NUM_LIGHTS / BLOCK_SIZE_X;
 
-[numthreads(32, 1, 1)]
-void main(uint3 DTid : SV_DispatchThreadID)
+[numthreads(BLOCK_SIZE_X, 1, 1)]
+void main(uint3 groupID : SV_GroupID,
+    uint3 groupThreadId : SV_GroupThreadID,
+    uint groupIndex : SV_GroupIndex,
+    uint3 dispatchThreadId : SV_DispatchThreadID)
 {
-    int offset = lightsPerThread * DTid.x;
+    int offset = lightsPerThread * dispatchThreadId.x;
 
     for(int idx = offset; idx < offset + lightsPerThread; ++idx) {
+        if (idx >= NUM_LIGHTS) {
+            break;
+        }
+
         float2 upper = float2(idx, 0);
         float2 lower = float2(idx, 1);
 

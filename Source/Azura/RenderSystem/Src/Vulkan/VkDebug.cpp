@@ -1,10 +1,8 @@
 #include "Vulkan/VkDebug.h"
+#include "Utils/Macros.h"
 
 namespace Azura {
 namespace Vulkan {
-#define CASE_STR(r)   \
-    case r:           \
-        return #r
 
 const char* VkResultToString(const VkResult err) {
   switch (err) {

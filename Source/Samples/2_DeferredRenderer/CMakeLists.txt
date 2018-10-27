@@ -1,4 +1,4 @@
-project(TestZone)
+project(DeferredRenderer)
 
 # -----------  Main Target  -----------
 
@@ -20,32 +20,92 @@ set(
     "Inc/Forward/ForwardComputeScene.h"
     "Src/ForwardComputeScene.cpp"
 
+    # Forward+ Renderer with Compute
+    "Inc/ForwardPlus/ForwardPlusComputeScene.h"
+    "Src/ForwardPlusComputeScene.cpp"
+
     "Src/main.cpp"
 )
 
 set(
-  PROJECT_SHADERS
+    FORWARD_SHADERS
     "${PROJECT_SOURCE_DIR}/Shaders/Forward.vs.slang|VS"
     "${PROJECT_SOURCE_DIR}/Shaders/Forward.ps.slang|PS"
+)
 
+set(
+    FORWARD_COMPUTE_SHADERS
     "${PROJECT_SOURCE_DIR}/Shaders/ForwardCompute.vs.slang|VS"
     "${PROJECT_SOURCE_DIR}/Shaders/ForwardCompute.ps.slang|PS"
     "${PROJECT_SOURCE_DIR}/Shaders/ForwardCompute.cs.slang|CS"
 )
 
-add_executable(DeferredRenderer ${SOURCES})
+set(
+    FORWARD_PLUS_COMPUTE_SHADERS
+    "${PROJECT_SOURCE_DIR}/Shaders/ForwardPlusComputePass1.vs.slang|VS"
+    "${PROJECT_SOURCE_DIR}/Shaders/ForwardPlusComputePass1.ps.slang|PS"
 
-AzuraDeployFolder(DeferredRenderer Meshes)
+    "${PROJECT_SOURCE_DIR}/Shaders/ForwardPlusComputePass2.cs.slang|CS"
 
-AzuraAddLoggingSupport(DeferredRenderer 50)
+    "${PROJECT_SOURCE_DIR}/Shaders/ScreenQuad.vs.slang|VS"
+    "${PROJECT_SOURCE_DIR}/Shaders/ForwardPlusComputePass3.ps.slang|PS"
+)
 
-target_compile_definitions(DeferredRenderer PUBLIC FORCE_LOGGING=1)
+# 
+# Forward
+# -------------------------------
+add_executable(ForwardRenderer ${SOURCES})
 
-AzuraAddSlangShaders(DeferredRenderer GLSL ${PROJECT_SHADERS})
-AzuraAddSlangShaders(DeferredRenderer VULKAN ${PROJECT_SHADERS})
+AzuraDeployFolder(ForwardRenderer Meshes)
 
-AzuraAddSlangShaders(DeferredRenderer HLSL ${PROJECT_SHADERS})
-AzuraAddSlangShaders(DeferredRenderer DXBC ${PROJECT_SHADERS})
+AzuraAddLoggingSupport(ForwardRenderer 50)
 
-target_include_directories(DeferredRenderer PUBLIC ${PROJECT_SOURCE_DIR}/Inc)
-target_link_libraries(DeferredRenderer D3D12RenderSystem Camera Log glfw Math AssetManager)
+target_compile_definitions(ForwardRenderer PUBLIC FORCE_LOGGING=1 FORWARD_SCENE=1)
+
+# Extension issue
+# AzuraAddSlangShaders(ForwardRenderer GLSL ${FORWARD_SHADERS})
+# AzuraAddSlangShaders(ForwardRenderer VULKAN ${FORWARD_SHADERS})
+
+AzuraAddSlangShaders(ForwardRenderer HLSL ${FORWARD_SHADERS})
+AzuraAddSlangShaders(ForwardRenderer DXBC ${FORWARD_SHADERS})
+
+target_include_directories(ForwardRenderer PUBLIC ${PROJECT_SOURCE_DIR}/Inc)
+target_link_libraries(ForwardRenderer D3D12RenderSystem Camera Log glfw Math AssetManager)
+
+# 
+# Forward Compute
+# -------------------------------
+add_executable(ForwardComputeRenderer ${SOURCES})
+
+AzuraAddLoggingSupport(ForwardComputeRenderer 50)
+
+target_compile_definitions(ForwardComputeRenderer PUBLIC FORCE_LOGGING=1 FORWARD_COMPUTE_SCENE=1)
+
+# Extension issue
+# AzuraAddSlangShaders(ForwardComputeRenderer GLSL ${FORWARD_COMPUTE_SHADERS})
+# AzuraAddSlangShaders(ForwardComputeRenderer VULKAN ${FORWARD_COMPUTE_SHADERS})
+
+AzuraAddSlangShaders(ForwardComputeRenderer HLSL ${FORWARD_COMPUTE_SHADERS})
+AzuraAddSlangShaders(ForwardComputeRenderer DXBC ${FORWARD_COMPUTE_SHADERS})
+
+target_include_directories(ForwardComputeRenderer PUBLIC ${PROJECT_SOURCE_DIR}/Inc)
+target_link_libraries(ForwardComputeRenderer D3D12RenderSystem Camera Log glfw Math AssetManager)
+
+# 
+# Forward Plus Compute
+# -------------------------------
+add_executable(ForwardPlusComputeRenderer ${SOURCES})
+
+AzuraAddLoggingSupport(ForwardPlusComputeRenderer 50)
+
+target_compile_definitions(ForwardPlusComputeRenderer PUBLIC FORCE_LOGGING=1 FORWARD_PLUS_COMPUTE_SCENE=1)
+
+# Extension issue
+# AzuraAddSlangShaders(ForwardPlusComputeRenderer GLSL ${FORWARD_PLUS_COMPUTE_SHADERS})
+# AzuraAddSlangShaders(ForwardPlusComputeRenderer VULKAN ${FORWARD_PLUS_COMPUTE_SHADERS})
+
+AzuraAddSlangShaders(ForwardPlusComputeRenderer HLSL ${FORWARD_PLUS_COMPUTE_SHADERS})
+AzuraAddSlangShaders(ForwardPlusComputeRenderer DXBC ${FORWARD_PLUS_COMPUTE_SHADERS})
+
+target_include_directories(ForwardPlusComputeRenderer PUBLIC ${PROJECT_SOURCE_DIR}/Inc)
+target_link_libraries(ForwardPlusComputeRenderer D3D12RenderSystem Camera Log glfw Math AssetManager)

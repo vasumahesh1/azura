@@ -7,6 +7,8 @@
 #include "D3D12/D3D12ScopedImage.h"
 #include <algorithm>
 #include <utility>
+#include "D3D12/D3D12ScopedCommandBuffer.h"
+#include "D3D12/D3D12ScopedBuffer.h"
 
 using namespace Microsoft::WRL;    // NOLINT
 using namespace Azura::Containers; // NOLINT
@@ -21,6 +23,7 @@ D3D12ComputePool::D3D12ComputePool(const ComPtr<ID3D12Device>& device,
                                      const Vector<D3D12ScopedShader>& shaders,
                                      const Vector<D3D12ScopedComputePass>& renderPasses,
                                      ComPtr<ID3D12CommandQueue> commandQueue,
+                                     ComPtr<ID3D12CommandQueue> graphicsQueue,
                                      Memory::Allocator& mainAllocator,
                                      Memory::Allocator& initAllocator,
                                      Log log)
@@ -31,7 +34,8 @@ D3D12ComputePool::D3D12ComputePool(const ComPtr<ID3D12Device>& device,
     m_shaders(shaders),
     m_pipelines(mainAllocator),
     m_computePasses(createInfo.m_computePasses.GetSize(), mainAllocator),
-    m_graphicsCommandQueue(std::move(commandQueue)),
+    m_computeCommandQueue(std::move(commandQueue)),
+    m_graphicsCommandQueue(std::move(graphicsQueue)),
     m_pipelineFactory(initAllocator, log_D3D12RenderSystem),
     m_images(mainAllocator),
     m_samplers(mainAllocator),
@@ -163,7 +167,7 @@ void D3D12ComputePool::SetTextureData(ID3D12GraphicsCommandList* oneTimeCommandL
     image.Create(m_device, D3D12_RESOURCE_STATE_COPY_DEST, D3D12_RESOURCE_FLAG_NONE, textBufInfo.m_desc,
                  log_D3D12RenderSystem);
     image.CopyFromBuffer(m_device, oneTimeCommandList, m_mainBuffer, textBufInfo.m_offset);
-    image.Transition(oneTimeCommandList, D3D12_RESOURCE_STATE_COPY_DEST, D3D12_RESOURCE_STATE_PIXEL_SHADER_RESOURCE);
+    image.Transition(oneTimeCommandList, D3D12_RESOURCE_STATE_COPY_DEST, D3D12_RESOURCE_STATE_PIXEL_SHADER_RESOURCE, log_D3D12RenderSystem);
 
     m_images.PushBack(std::move(image));
 
@@ -204,7 +208,7 @@ void D3D12ComputePool::CreateComputePassInputTargetSRV(
   const Vector<std::reference_wrapper<D3D12ScopedImage>>& renderPassInputs,
   U32 offsetTillThis) const {
   const CD3DX12_CPU_DESCRIPTOR_HANDLE inputCPUHandle(m_descriptorComputeHeap->GetCPUDescriptorHandleForHeapStart(),
-                                                     m_offsetToComputePassInputs + offsetTillThis,
+                                                     m_offsetToComputePassInputTargets + offsetTillThis,
                                                      m_cbvSrvDescriptorElementSize);
 
   U32 idx = 0;
@@ -215,6 +219,24 @@ void D3D12ComputePool::CreateComputePassInputTargetSRV(
     const auto srvDesc = D3D12ScopedImage::GetSRV(imageRef.get().GetFormat(), ImageViewType::ImageView2D,
                                                   log_D3D12RenderSystem);
     m_device->CreateShaderResourceView(imageRef.get().Real(), &srvDesc, cpuHandle);
+    ++idx;
+  }
+}
+
+void D3D12ComputePool::CreateComputePassInputBufferSRV(
+  const Vector<std::reference_wrapper<D3D12ScopedBuffer>>& bufferInputs,
+  U32 offsetTillThis) const {
+  const CD3DX12_CPU_DESCRIPTOR_HANDLE inputCPUHandle(m_descriptorComputeHeap->GetCPUDescriptorHandleForHeapStart(),
+    m_offsetToComputePassInputBuffers + offsetTillThis,
+    m_cbvSrvDescriptorElementSize);
+
+  U32 idx = 0;
+  for (const auto& bufferRef : bufferInputs) {
+    CD3DX12_CPU_DESCRIPTOR_HANDLE cpuHandle;
+    CD3DX12_CPU_DESCRIPTOR_HANDLE::InitOffsetted(cpuHandle, inputCPUHandle, m_cbvSrvDescriptorElementSize * idx);
+
+    const auto srvDesc = bufferRef.get().GetSRV();
+    m_device->CreateShaderResourceView(bufferRef.get().Real(), &srvDesc, cpuHandle);
     ++idx;
   }
 }
@@ -270,15 +292,22 @@ void D3D12ComputePool::Submit() {
     return a.m_set < b.m_set;
   });
 
-  U32 inputsTillNow = 0;
+  U32 inputTargetsTillNow = 0;
+  U32 inputBuffersTillNow = 0;
   U32 outputsTillNow = 0;
   for (U32 idx      = 0; idx < m_computePasses.GetSize(); ++idx) {
-    const auto& renderPassInputs = m_computePasses[idx].get().GetInputImages();
+    const auto& renderPassInputTargets = m_computePasses[idx].get().GetInputImages();
+    const auto& renderPassInputBuffers = m_computePasses[idx].get().GetInputBuffers();
     const auto& renderPassOutputs = m_computePasses[idx].get().GetOutputImages();
 
-    if (renderPassInputs.GetSize() > 0) {
-      CreateComputePassInputTargetSRV(renderPassInputs, inputsTillNow);
-      inputsTillNow += renderPassInputs.GetSize();
+    if (renderPassInputTargets.GetSize() > 0) {
+      CreateComputePassInputTargetSRV(renderPassInputTargets, inputTargetsTillNow);
+      inputTargetsTillNow += renderPassInputTargets.GetSize();
+    }
+    
+    if (renderPassInputBuffers.GetSize() > 0) {
+      CreateComputePassInputBufferSRV(renderPassInputBuffers, inputBuffersTillNow);
+      inputBuffersTillNow += renderPassInputBuffers.GetSize();
     }
     
     if (renderPassOutputs.GetSize() > 0) {
@@ -330,7 +359,8 @@ void D3D12ComputePool::Record()
 
   U32 cbRecorded = 0;
   U32 sampledImageRecorded = 0;
-  U32 inputsRecorded       = 0;
+  U32 inputTargetsRecorded       = 0;
+  U32 inputBuffersRecorded       = 0;
   U32 outputsRecorded       = 0;
   U32 samplersRecorded     = 0;
 
@@ -341,15 +371,20 @@ void D3D12ComputePool::Record()
 
     const auto& renderPassDescriptorCount    = renderPass.GetDescriptorCount();
     const auto& renderPassRootSignatureTable = renderPass.GetRootSignatureTable();
-    const auto& renderPassInputs             = renderPass.GetInputImages();
+    const auto& renderPassInputTargets             = renderPass.GetInputImages();
+    const auto& renderPassInputBuffers             = renderPass.GetInputBuffers();
     const auto& renderPassOutputs             = renderPass.GetOutputImages();
 
     // Define Heap Handles
     CD3DX12_GPU_DESCRIPTOR_HANDLE textureGPUHandle = CD3DX12_GPU_DESCRIPTOR_HANDLE(m_descriptorComputeHeap->GetGPUDescriptorHandleForHeapStart(),
       sampledImageRecorded, m_cbvSrvDescriptorElementSize);
 
-    const CD3DX12_GPU_DESCRIPTOR_HANDLE inputsGPUHandle = CD3DX12_GPU_DESCRIPTOR_HANDLE(m_descriptorComputeHeap->GetGPUDescriptorHandleForHeapStart(),
-      m_offsetToComputePassInputs + inputsRecorded,
+    const CD3DX12_GPU_DESCRIPTOR_HANDLE inputTargetsGPUHandle = CD3DX12_GPU_DESCRIPTOR_HANDLE(m_descriptorComputeHeap->GetGPUDescriptorHandleForHeapStart(),
+      m_offsetToComputePassInputTargets + inputTargetsRecorded,
+      m_cbvSrvDescriptorElementSize);
+    
+    const CD3DX12_GPU_DESCRIPTOR_HANDLE inputBuffersGPUHandle = CD3DX12_GPU_DESCRIPTOR_HANDLE(m_descriptorComputeHeap->GetGPUDescriptorHandleForHeapStart(),
+      m_offsetToComputePassInputBuffers + inputBuffersRecorded,
       m_cbvSrvDescriptorElementSize);
 
     const CD3DX12_GPU_DESCRIPTOR_HANDLE outputsGPUHandle = CD3DX12_GPU_DESCRIPTOR_HANDLE(m_descriptorComputeHeap->GetGPUDescriptorHandleForHeapStart(),
@@ -387,19 +422,26 @@ void D3D12ComputePool::Record()
       ++tableIdx;
     }
 
-    if (renderPassInputs.GetSize() > 0) {
-      secondaryCommandList->SetComputeRootDescriptorTable(renderPass.GetInputRootDescriptorTableId(), inputsGPUHandle);
+    if (renderPassInputTargets.GetSize() > 0) {
+      secondaryCommandList->SetComputeRootDescriptorTable(renderPass.GetInputTargetRootDescriptorTableId(), inputTargetsGPUHandle);
       LOG_DEBUG(log_D3D12RenderSystem, LOG_LEVEL, "Setting Input Attachment Descriptor Table at %d",
-        renderPassRootSignatureTable.GetSize());
+        renderPass.GetInputTargetRootDescriptorTableId());
+    }
+
+    if (renderPassInputBuffers.GetSize() > 0) {
+      secondaryCommandList->SetComputeRootDescriptorTable(renderPass.GetInputBufferRootDescriptorTableId(), inputBuffersGPUHandle);
+      LOG_DEBUG(log_D3D12RenderSystem, LOG_LEVEL, "Setting Input Buffer Descriptor Table at %d",
+        renderPass.GetInputBufferRootDescriptorTableId());
     }
 
     if (renderPassOutputs.GetSize() > 0) {
       secondaryCommandList->SetComputeRootDescriptorTable(renderPass.GetOutputRootDescriptorTableId(), outputsGPUHandle);
       LOG_DEBUG(log_D3D12RenderSystem, LOG_LEVEL, "Setting Input Attachment Descriptor Table at %d",
-        renderPassRootSignatureTable.GetSize());
+        renderPass.GetOutputRootDescriptorTableId());
     }
 
-    inputsRecorded += renderPassInputs.GetSize();
+    inputTargetsRecorded += renderPassInputTargets.GetSize();
+    inputBuffersRecorded += renderPassInputBuffers.GetSize();
     outputsRecorded += renderPassOutputs.GetSize();
     samplersRecorded += renderPassDescriptorCount.m_numSamplerSlots;
     cbRecorded += renderPassDescriptorCount.m_numUniformSlots;
@@ -484,9 +526,9 @@ void D3D12ComputePool::SubmitUpdates() {
     else if (updateRegion.m_type == DescriptorType::SampledImage)
     {
       const auto& targetImage = m_images[updateRegion.m_idx];
-      targetImage.Transition(oneTimeCommandList, D3D12_RESOURCE_STATE_PIXEL_SHADER_RESOURCE, D3D12_RESOURCE_STATE_COPY_DEST);
+      targetImage.Transition(oneTimeCommandList, D3D12_RESOURCE_STATE_PIXEL_SHADER_RESOURCE, D3D12_RESOURCE_STATE_COPY_DEST, log_D3D12RenderSystem);
       targetImage.CopyFromBuffer(m_device, oneTimeCommandList, m_updateBuffer, updateRegion.m_updateOffset);
-      targetImage.Transition(oneTimeCommandList, D3D12_RESOURCE_STATE_COPY_DEST, D3D12_RESOURCE_STATE_PIXEL_SHADER_RESOURCE);
+      targetImage.Transition(oneTimeCommandList, D3D12_RESOURCE_STATE_COPY_DEST, D3D12_RESOURCE_STATE_PIXEL_SHADER_RESOURCE, log_D3D12RenderSystem);
     }
   }
 
@@ -527,7 +569,8 @@ void D3D12ComputePool::CreateRenderPassReferences(const ComputePoolCreateInfo& c
 void D3D12ComputePool::CreateDescriptorHeap() {
   m_allHeaps.Reserve(2);
 
-  m_offsetToComputePassInputs = 0;
+  m_offsetToComputePassInputTargets = 0;
+  m_offsetToComputePassInputBuffers = 0;
   m_offsetToComputePassOutputs = 0;
   m_offsetToConstantBuffers = 0;
 
@@ -539,15 +582,17 @@ void D3D12ComputePool::CreateDescriptorHeap() {
     const auto& count = renderPass.get().GetDescriptorCount();
 
     const U32 numOutputs = renderPass.get().GetOutputImages().GetSize();
-    const U32 numInputs = renderPass.get().GetInputImages().GetSize();
+    const U32 numInputTargets = renderPass.get().GetInputImages().GetSize();
+    const U32 numInputBuffers = renderPass.get().GetInputBuffers().GetSize();
     const U32 numSRVs = count.m_numSampledImageSlots;
     const U32 numUBO = count.m_numUniformSlots;
 
     m_offsetToConstantBuffers += numSRVs;
-    m_offsetToComputePassInputs += numSRVs + numUBO;
-    m_offsetToComputePassOutputs += numSRVs + numUBO + numInputs;
+    m_offsetToComputePassInputTargets += numSRVs + numUBO;
+    m_offsetToComputePassInputBuffers += numSRVs + numUBO + numInputTargets;
+    m_offsetToComputePassOutputs += numSRVs + numUBO + numInputTargets + numInputBuffers;
 
-    totalDescriptors += numOutputs + numInputs + numSRVs + numUBO;
+    totalDescriptors += numOutputs + numInputTargets + numInputBuffers + numSRVs + numUBO;
 
     numSamplers += count.m_numSamplerSlots;
   }

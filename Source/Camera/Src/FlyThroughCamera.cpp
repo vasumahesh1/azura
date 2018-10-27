@@ -28,10 +28,10 @@ void FlyThroughCamera::Recompute() {
   m_ref = m_look.Normalized();
   m_ref += m_eye;
 
-  const Matrix4f view = Transform::LookAt(m_ref, m_eye, m_up);
-  const Matrix4f proj = Transform::Perspective(m_fovY, m_aspect, m_nearClip, m_farClip);
+  m_view = Transform::LookAt(m_ref, m_eye, m_up);
+  m_proj = Transform::Perspective(m_fovY, m_aspect, m_nearClip, m_farClip);
 
-  m_viewProj    = proj * view;
+  m_viewProj    = m_proj * m_view;
   m_invViewProj = m_viewProj.Inverse();
 }
 

@@ -26,11 +26,15 @@ public:
   explicit ForwardScene(Memory::Allocator& mainAllocator, Memory::Allocator& drawAllocator);
 
   void Initialize(Window& window,
+                  const Camera& camera,
                   const MeshObject& sceneMesh,
                   const UniformBufferData& uboData,
                   const SamplerDesc& lightSamplerDesc,
                   const Containers::Vector<PointLight>& lights) override;
-  void Update(float timeDelta, const UniformBufferData& uboData, const Containers::Vector<PointLight>& lights) override;
+  void Update(float timeDelta,
+              const Camera& camera,
+              const UniformBufferData& uboData,
+              const Containers::Vector<PointLight>& lights) override;
   void CleanUp() override;
 
 private:

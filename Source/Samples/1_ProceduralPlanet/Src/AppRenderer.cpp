@@ -21,13 +21,6 @@ struct Instance {
   float m_pos[4];
 };
 
-struct UniformBufferData {
-  Matrix4f m_model;
-  Matrix4f m_modelInvTranspose;
-  Matrix4f m_viewProj;
-  Matrix4f m_invViewProj;
-};
-
 struct ShaderControls {
   // NOLINT
   float m_shoreLevel{0.5f};
@@ -43,9 +36,9 @@ struct ShaderControls {
 };
 
 AppRenderer::AppRenderer()
-  : m_mainBuffer(16384 * 2),
-    m_mainAllocator(m_mainBuffer, 16384),
-    m_drawableAllocator(m_mainBuffer, 16384),
+  : m_mainBuffer(0x400000 * 2),
+    m_mainAllocator(m_mainBuffer, 0x400000),
+    m_drawableAllocator(m_mainBuffer, 0x400000),
     m_camera(1280, 720),
     log_AppRenderer(Log("AppRenderer")) {
 }
@@ -56,15 +49,21 @@ void AppRenderer::Initialize() {
   HEAP_ALLOCATOR(Temporary, Memory::MonotonicAllocator, 8192);
   m_window = RenderSystem::CreateApplicationWindow("ProceduralPlanet", 1280, 720);
 
-  m_window->SetUpdateCallback([this](float timeSinceLastFrame)
+  m_window->SetUpdateCallback([this](float timeDelta)
   {
-    UNUSED(timeSinceLastFrame);
-    WindowUpdate();
+    WindowUpdate(timeDelta);
   });
 
-  m_window->SetMouseEventCallback([this](MouseEvent e)
+  m_window->SetKeyEventCallback([this](KeyEvent evt)
   {
-    m_camera.OnMouseEvent(e);
+    m_camera.OnKeyEvent(evt);
+  });
+
+  m_window->SetMouseEventCallback([this](MouseEvent evt)
+  {
+    UNUSED(evt);
+    // Disable as it has bugs
+    // m_camera.OnMouseEvent(e);
   });
 
   VERIFY_TRUE(log_AppRenderer, m_window->Initialize(), "Cannot Initialize Window");
@@ -81,14 +80,14 @@ void AppRenderer::Initialize() {
 
   ShaderControls shaderControls{};
 
-  UniformBufferData uboData = {};
-  uboData.m_model           = Matrix4f::Identity();
-  uboData.m_viewProj = m_camera.GetViewProjMatrix();
-  uboData.m_invViewProj = m_camera.GetInvViewProjMatrix();
+  m_sceneUBO = {};
+  m_sceneUBO.m_model           = Matrix4f::Identity();
+  m_sceneUBO.m_viewProj = m_camera.GetViewProjMatrix();
+  m_sceneUBO.m_invViewProj = m_camera.GetInvViewProjMatrix();
 
-  uboData.m_modelInvTranspose = uboData.m_model.Inverse().Transpose();
+  m_sceneUBO.m_modelInvTranspose = m_sceneUBO.m_model.Inverse().Transpose();
 
-  const auto uboDataBuffer       = reinterpret_cast<U8*>(&uboData);        // NOLINT
+  const auto uboDataBuffer       = reinterpret_cast<U8*>(&m_sceneUBO);        // NOLINT
   const auto shaderControlBuffer = reinterpret_cast<U8*>(&shaderControls); // NOLINT
 
   // TODO(vasumahesh1):[Q]:Allocator?
@@ -99,6 +98,8 @@ void AppRenderer::Initialize() {
   const U32 SHADER_CONTROLS_SLOT = descriptorRequirements.AddDescriptor({ DescriptorType::UniformBuffer, ShaderStage::Vertex | ShaderStage::Pixel });
   const U32 SAMPLER_SLOT = descriptorRequirements.AddDescriptor({DescriptorType::Sampler, ShaderStage::Pixel});
   const U32 PLANET_TEXTURE_SLOT = descriptorRequirements.AddDescriptor({DescriptorType::SampledImage, ShaderStage::Pixel});
+
+  m_pass1.m_uboSlot = UBO_SLOT;
 
   const U32 UBO_SET = descriptorRequirements.AddSet({ UBO_SLOT });
   const U32 CONTROLS_SET = descriptorRequirements.AddSet({ SHADER_CONTROLS_SLOT });
@@ -115,7 +116,7 @@ void AppRenderer::Initialize() {
   const U32 SKY_PIXEL_SHADER_ID = shaderRequirements.AddShader({ ShaderStage::Pixel, "Sky.ps", AssetLocation::Shaders });
   const U32 WATER_PIXEL_SHADER_ID = shaderRequirements.AddShader({ ShaderStage::Pixel, "Water.ps", AssetLocation::Shaders });
 
-  RenderPassRequirements renderPassRequirements = RenderPassRequirements(4, 2, allocatorTemporary);
+  RenderPassRequirements renderPassRequirements = RenderPassRequirements(4, 2, 0, allocatorTemporary);
   renderPassRequirements.m_maxPools = 4;
 
   const U32 NOISE_TARGET_1 = renderPassRequirements.AddTarget({RawStorageFormat::R32G32B32A32_FLOAT});
@@ -125,14 +126,16 @@ void AppRenderer::Initialize() {
 
   const U32 NOISE_PASS = renderPassRequirements.AddPass({
     PipelinePassCreateInfo::Shaders{NOISE_VERTEX_SHADER_ID, NOISE_PIXEL_SHADER_ID},  // SHADERS
-    PipelinePassCreateInfo::Inputs{},                                                // INPUT TARGETS
+    PipelinePassCreateInfo::InputTargets{},                                                // INPUT TARGETS
+    PipelinePassCreateInfo::InputBuffers{},
     PipelinePassCreateInfo::Outputs{NOISE_TARGET_1, NOISE_TARGET_2, NOISE_TARGET_3, NOISE_DEPTH} , // OUTPUT TARGETS
     PipelinePassCreateInfo::DescriptorSets{UBO_SET, CONTROLS_SET}
     });
 
   const U32 SINGLE_PASS = renderPassRequirements.AddPass({
     PipelinePassCreateInfo::Shaders{},                                   // SHADERS
-    PipelinePassCreateInfo::Inputs{{NOISE_TARGET_1, ShaderStage::Pixel}, {NOISE_TARGET_2, ShaderStage::Pixel}, {NOISE_TARGET_3, ShaderStage::Pixel}},      // INPUT TARGETS
+    PipelinePassCreateInfo::InputTargets{{NOISE_TARGET_1, ShaderStage::Pixel}, {NOISE_TARGET_2, ShaderStage::Pixel}, {NOISE_TARGET_3, ShaderStage::Pixel}},      // INPUT TARGETS
+    PipelinePassCreateInfo::InputBuffers{},
     PipelinePassCreateInfo::Outputs{},                                   // OUTPUT TARGETS
     PipelinePassCreateInfo::DescriptorSets{UBO_SET, CONTROLS_SET, SAMPLER_SET, TEXTURE_SET},
     {},
@@ -171,6 +174,8 @@ void AppRenderer::Initialize() {
 
   DrawablePool& pool = m_renderer->CreateDrawablePool(poolInfo);
 
+  m_mainPool = &pool;
+
   // Create Drawable from Pool
   DrawableCreateInfo createInfo = {};
   createInfo.m_vertexCount      = sphere.GetVertexCount();
@@ -178,12 +183,12 @@ void AppRenderer::Initialize() {
   createInfo.m_instanceCount    = 1;
   createInfo.m_indexType        = sphere.GetIndexFormat();
 
-  const auto drawableId = pool.CreateDrawable(createInfo);
-  pool.BindVertexData(drawableId, VERTEX_SLOT, sphere.VertexData(), sphere.VertexDataSize());
-  pool.BindVertexData(drawableId, NORMAL_SLOT, sphere.NormalData(), sphere.NormalDataSize());
-  pool.SetIndexData(drawableId, sphere.IndexData(), sphere.IndexDataSize());
-  pool.BindUniformData(drawableId, UBO_SLOT, uboDataBuffer, sizeof(UniformBufferData));
-  pool.BindUniformData(drawableId, SHADER_CONTROLS_SLOT, shaderControlBuffer, sizeof(ShaderControls));
+  m_icosphereId = pool.CreateDrawable(createInfo);
+  pool.BindVertexData(m_icosphereId, VERTEX_SLOT, sphere.VertexData(), sphere.VertexDataSize());
+  pool.BindVertexData(m_icosphereId, NORMAL_SLOT, sphere.NormalData(), sphere.NormalDataSize());
+  pool.SetIndexData(m_icosphereId, sphere.IndexData(), sphere.IndexDataSize());
+  pool.BindUniformData(m_icosphereId, UBO_SLOT, uboDataBuffer, sizeof(UniformBufferData));
+  pool.BindUniformData(m_icosphereId, SHADER_CONTROLS_SLOT, shaderControlBuffer, sizeof(ShaderControls));
 
   DrawablePool& skyQuad = PoolPrimitives::AddScreenQuad(*m_renderer, SINGLE_PASS, allocatorTemporary);
   skyQuad.AddShader(SCREEN_QUAD_VERTEX_SHADER_ID);
@@ -191,6 +196,8 @@ void AppRenderer::Initialize() {
   skyQuad.BindUniformData(0, UBO_SLOT, uboDataBuffer, sizeof(UniformBufferData));
   skyQuad.BindUniformData(0, SHADER_CONTROLS_SLOT, shaderControlBuffer, sizeof(ShaderControls));
   skyQuad.BindSampler(SAMPLER_SLOT, {});
+
+  m_skyPool = &skyQuad;
 
   DrawablePool& terrainQuad = PoolPrimitives::AddScreenQuad(*m_renderer, SINGLE_PASS, allocatorTemporary);
   terrainQuad.AddShader(SCREEN_QUAD_VERTEX_SHADER_ID);
@@ -214,16 +221,25 @@ void AppRenderer::Initialize() {
   LOG_INF(log_AppRenderer, LOG_LEVEL, "Initialized AppRenderer");
 }
 
-void AppRenderer::WindowUpdate() {
+void AppRenderer::WindowUpdate(float timeDelta) {
+  m_camera.Update(timeDelta);
+
+  m_sceneUBO.m_viewProj = m_camera.GetViewProjMatrix();
+  m_sceneUBO.m_invViewProj = m_camera.GetInvViewProjMatrix();
+  const auto uboDataBuffer       = reinterpret_cast<U8*>(&m_sceneUBO);        // NOLINT
+
+  m_mainPool->BeginUpdates();
+  m_mainPool->UpdateUniformData(m_icosphereId, m_pass1.m_uboSlot, uboDataBuffer, sizeof(UniformBufferData));
+  m_mainPool->SubmitUpdates();
+
+  m_skyPool->BeginUpdates();
+  m_skyPool->UpdateUniformData(0, m_pass1.m_uboSlot, uboDataBuffer, sizeof(UniformBufferData));
+  m_skyPool->SubmitUpdates();
+
   m_renderer->RenderFrame();
 }
 
 void AppRenderer::Run() const {
-  m_renderer->RenderFrame();
-  m_renderer->RenderFrame();
-  m_renderer->RenderFrame();
-  m_renderer->SnapshotFrame("BasicInstancingTest.data");
-
   LOG_INF(log_AppRenderer, LOG_LEVEL, "Running AppRenderer");
   m_window->StartListening();
 }

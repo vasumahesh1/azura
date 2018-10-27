@@ -39,9 +39,10 @@ public:
 
   SwapChainRequirements GetSwapChainRequirements() const;
 
-protected:
   U32 GetWidth() const;
   U32 GetHeight() const;
+
+protected:
 
   void SetHandle(void* window);
   const char* GetTitle() const;

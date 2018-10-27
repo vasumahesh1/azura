@@ -8,15 +8,19 @@ namespace Azura {
 
 
 ForwardScene::ForwardScene(Memory::Allocator& mainAllocator, Memory::Allocator& drawAllocator)
-  : Scene("ForwardScene", mainAllocator, drawAllocator), m_lightTexture(NUM_LIGHTS, 7, mainAllocator) {
+  : Scene("ForwardScene", mainAllocator, drawAllocator),
+    m_lightTexture(NUM_LIGHTS, 7, mainAllocator) {
 }
 
 void ForwardScene::Initialize(Window& window,
+                              const Camera& camera,
                               const MeshObject& sceneMesh,
                               const UniformBufferData& uboData,
                               const SamplerDesc& lightSamplerDesc,
                               const Containers::Vector<PointLight>& lights) {
   HEAP_ALLOCATOR(Temporary, Memory::MonotonicAllocator, 0x40'0000);
+
+  UNUSED(camera);
 
   ApplicationInfo appInfo;
   appInfo.m_name    = "ForwardRenderer";
@@ -66,35 +70,36 @@ void ForwardScene::Initialize(Window& window,
   const U32 UBO_SET     = descriptorRequirements.AddSet({m_pass.m_uboSlot});
   const U32 SAMPLER_SET = descriptorRequirements.AddSet({
     m_pass.m_sampSlot, m_pass.m_lightSampSlot
-    });
+  });
   const U32 TEXTURE_SET = descriptorRequirements.AddSet({
     m_pass.m_texSlot, m_pass.m_normalSlot, m_pass.m_lightTexSlot
-    });
+  });
 
   ShaderRequirements shaderRequirements = ShaderRequirements(2, allocatorTemporary);
   const U32 VERTEX_SHADER_ID            = shaderRequirements.AddShader({
     ShaderStage::Vertex, "Forward.vs", AssetLocation::Shaders
-    });
+  });
   const U32 PIXEL_SHADER_ID = shaderRequirements.AddShader({
     ShaderStage::Pixel, "Forward.ps", AssetLocation::Shaders
-    });
+  });
 
-  RenderPassRequirements renderPassRequirements = RenderPassRequirements(1, 2, allocatorTemporary);
+  RenderPassRequirements renderPassRequirements = RenderPassRequirements(1, 2, 0, allocatorTemporary);
   renderPassRequirements.m_maxPools             = 1;
 
   m_pass.m_passId = renderPassRequirements.AddPass({
     PipelinePassCreateInfo::Shaders{VERTEX_SHADER_ID, PIXEL_SHADER_ID},        // SHADERS
-    PipelinePassCreateInfo::Inputs{},                                          // INPUT TARGETS
+    PipelinePassCreateInfo::InputTargets{},                                          // INPUT TARGETS
+    PipelinePassCreateInfo::InputBuffers{},
     PipelinePassCreateInfo::Outputs{},                                         // OUTPUT TARGETS
     PipelinePassCreateInfo::DescriptorSets{UBO_SET, SAMPLER_SET, TEXTURE_SET}, // DESCRIPTORS
     ClearData{{0.2f, 0.2f, 0.2f, 1.0f}, 1.0f, 0}
-    });
+  });
 
   m_renderer = RenderSystem::CreateRenderer(appInfo, requirements, applicationRequirements,
-    window.GetSwapChainRequirements(), renderPassRequirements,
-    descriptorRequirements, shaderRequirements, m_mainAllocator,
-    m_drawAllocator,
-    window);
+                                            window.GetSwapChainRequirements(), renderPassRequirements,
+                                            descriptorRequirements, shaderRequirements, m_mainAllocator,
+                                            m_drawAllocator,
+                                            window);
 
   m_textureManager = RenderSystem::CreateTextureManager(textureRequirements);
 
@@ -110,14 +115,14 @@ void ForwardScene::Initialize(Window& window,
 
   const auto VERTEX_SLOT = poolInfo.AddInputSlot({
     BufferUsageRate::PerVertex, {{"POSITION", RawStorageFormat::R32G32B32_FLOAT}}
-    });
+  });
   const auto NORMAL_SLOT = poolInfo.AddInputSlot({
     BufferUsageRate::PerVertex, {{"NORMAL", RawStorageFormat::R32G32B32_FLOAT}}
-    });
+  });
   const auto UV_SLOT = poolInfo.AddInputSlot({BufferUsageRate::PerVertex, {{"UV", RawStorageFormat::R32G32_FLOAT}}});
 
   DrawablePool& pool = m_renderer->CreateDrawablePool(poolInfo);
-  m_mainPool = &pool;
+  m_mainPool         = &pool;
 
   // Pool Binds
   pool.BindSampler(m_pass.m_sampSlot, {});
@@ -142,7 +147,7 @@ void ForwardScene::Initialize(Window& window,
   const auto normalStart      = reinterpret_cast<const U8*>(sceneMesh.m_normalData.data()); // NOLINT
   const auto uvStart          = reinterpret_cast<const U8*>(sceneMesh.m_uvData.data());     // NOLINT
   const auto indexBufferStart = reinterpret_cast<const U8*>(sceneMesh.m_indexData.data());  // NOLINT
-  const auto uboDataBuffer    = reinterpret_cast<const U8*>(&uboData);       // NOLINT
+  const auto uboDataBuffer    = reinterpret_cast<const U8*>(&uboData);                      // NOLINT
 
   // Create Drawable from Pool
   DrawableCreateInfo createInfo = {};
@@ -163,15 +168,17 @@ void ForwardScene::Initialize(Window& window,
 }
 
 void ForwardScene::Update(float timeDelta,
+                          const Camera& camera,
                           const UniformBufferData& uboData,
                           const Containers::Vector<PointLight>& lights) {
 
   UNUSED(timeDelta);
+  UNUSED(camera);
 
   m_lightTexture.Fill(lights);
 
   m_mainPool->BeginUpdates();
-  const auto uboDataBuffer    = reinterpret_cast<const U8*>(&uboData); // NOLINT
+  const auto uboDataBuffer = reinterpret_cast<const U8*>(&uboData); // NOLINT
   m_mainPool->UpdateUniformData(m_sponzaId, m_pass.m_uboSlot, uboDataBuffer, sizeof(UniformBufferData));
   m_mainPool->UpdateTextureData(m_pass.m_lightTexSlot, m_lightTexture.GetBuffer());
   m_mainPool->SubmitUpdates();

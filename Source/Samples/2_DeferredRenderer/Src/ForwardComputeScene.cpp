@@ -8,15 +8,19 @@ namespace Azura {
 
 
 ForwardComputeScene::ForwardComputeScene(Memory::Allocator& mainAllocator, Memory::Allocator& drawAllocator)
-  : Scene("ForwardComputeScene", mainAllocator, drawAllocator), m_lightTexture(NUM_LIGHTS, 7, mainAllocator) {
+  : Scene("ForwardComputeScene", mainAllocator, drawAllocator),
+    m_lightTexture(NUM_LIGHTS, 7, mainAllocator) {
 }
 
 void ForwardComputeScene::Initialize(Window& window,
+                                     const Camera& camera,
                                      const MeshObject& sceneMesh,
                                      const UniformBufferData& uboData,
                                      const SamplerDesc& lightSamplerDesc,
                                      const Containers::Vector<PointLight>& lights) {
   HEAP_ALLOCATOR(Temporary, Memory::MonotonicAllocator, 0x40'0000);
+
+  UNUSED(camera);
 
   ApplicationInfo appInfo;
   appInfo.m_name    = "ForwardComputeScene";
@@ -62,7 +66,7 @@ void ForwardComputeScene::Initialize(Window& window,
   // SET 0 for Compute
   m_pass.m_computeUBO = descriptorRequirements.AddDescriptor({
     DescriptorType::UniformBuffer, ShaderStage::Compute
-    });
+  });
 
   const U32 UBO_SET = descriptorRequirements.AddSet({
     m_pass.m_uboSlot
@@ -78,7 +82,7 @@ void ForwardComputeScene::Initialize(Window& window,
 
   const U32 LIGHT_UBO_SET = descriptorRequirements.AddSet({
     m_pass.m_computeUBO
-    });
+  });
 
   ShaderRequirements shaderRequirements = ShaderRequirements(2, allocatorTemporary);
   const U32 VERTEX_SHADER_ID            = shaderRequirements.AddShader({
@@ -90,26 +94,28 @@ void ForwardComputeScene::Initialize(Window& window,
 
   const U32 COMPUTE_SHADER_ID = shaderRequirements.AddShader({
     ShaderStage::Compute, "ForwardCompute.cs", AssetLocation::Shaders
-    });
+  });
 
-  RenderPassRequirements renderPassRequirements = RenderPassRequirements(1, 2, allocatorTemporary);
+  RenderPassRequirements renderPassRequirements = RenderPassRequirements(1, 2, 0, allocatorTemporary);
   renderPassRequirements.m_maxPools             = 1;
 
-  const U32 LIGHT_TARGET = renderPassRequirements.AddTarget({ RawStorageFormat::R32G32B32A32_FLOAT, NUM_LIGHTS, 2 });
+  const U32 LIGHT_TARGET = renderPassRequirements.AddTarget({RawStorageFormat::R32G32B32A32_FLOAT, NUM_LIGHTS, 2});
 
   m_pass.m_computePassId = renderPassRequirements.AddPass({
-    PipelinePassCreateInfo::Shaders{COMPUTE_SHADER_ID},        // SHADERS
-    PipelinePassCreateInfo::Inputs{},                                          // INPUT TARGETS
-    PipelinePassCreateInfo::Outputs{LIGHT_TARGET},                                         // OUTPUT TARGETS
+    PipelinePassCreateInfo::Shaders{COMPUTE_SHADER_ID},    // SHADERS
+    PipelinePassCreateInfo::InputTargets{},                      // INPUT TARGETS
+    PipelinePassCreateInfo::InputBuffers{},
+    PipelinePassCreateInfo::Outputs{LIGHT_TARGET},         // OUTPUT TARGETS
     PipelinePassCreateInfo::DescriptorSets{LIGHT_UBO_SET}, // DESCRIPTORS
     ClearData{{0.2f, 0.2f, 0.2f, 1.0f}, 1.0f, 0},
     BlendState{},
     RenderPassType::Compute
-    });
+  });
 
   m_pass.m_passId = renderPassRequirements.AddPass({
     PipelinePassCreateInfo::Shaders{VERTEX_SHADER_ID, PIXEL_SHADER_ID},        // SHADERS
-    PipelinePassCreateInfo::Inputs{{LIGHT_TARGET, ShaderStage::Pixel}},                                          // INPUT TARGETS
+    PipelinePassCreateInfo::InputTargets{{LIGHT_TARGET, ShaderStage::Pixel}},        // INPUT TARGETS
+    PipelinePassCreateInfo::InputBuffers{},
     PipelinePassCreateInfo::Outputs{},                                         // OUTPUT TARGETS
     PipelinePassCreateInfo::DescriptorSets{UBO_SET, SAMPLER_SET, TEXTURE_SET}, // DESCRIPTORS
     ClearData{{0.2f, 0.2f, 0.2f, 1.0f}, 1.0f, 0}
@@ -127,16 +133,16 @@ void ForwardComputeScene::Initialize(Window& window,
   m_lightTexture.Fill(lights);
   m_renderer->BindRenderTarget(LIGHT_TARGET, m_lightTexture.GetTextureDesc(), m_lightTexture.GetBuffer());
 
-  ComputePoolCreateInfo computePoolInfo = { allocatorTemporary };
-  computePoolInfo.m_byteSize = 0xF00000;
-  computePoolInfo.m_computePasses = { {m_pass.m_computePassId}, allocatorTemporary };
-  computePoolInfo.m_launchDims = ThreadGroupDimensions{ 32, 1, 1 };
+  ComputePoolCreateInfo computePoolInfo = {allocatorTemporary};
+  computePoolInfo.m_byteSize            = 0xF00000;
+  computePoolInfo.m_computePasses       = {{m_pass.m_computePassId}, allocatorTemporary};
+  computePoolInfo.m_launchDims          = ThreadGroupDimensions{TILES_X, 1, 1};
 
   ComputePool& computePool = m_renderer->CreateComputePool(computePoolInfo);
-  m_computePool         = &computePool;
+  m_computePool            = &computePool;
 
   const LightUBO temp{};
-  const auto lightUBOStart      = reinterpret_cast<const U8*>(&temp); // NOLINT
+  const auto lightUBOStart = reinterpret_cast<const U8*>(&temp); // NOLINT
   computePool.BindUniformData(m_pass.m_computeUBO, lightUBOStart, sizeof(LightUBO));
 
   DrawablePoolCreateInfo poolInfo = {allocatorTemporary};
@@ -200,21 +206,23 @@ void ForwardComputeScene::Initialize(Window& window,
 }
 
 void ForwardComputeScene::Update(float timeDelta,
+                                 const Camera& camera,
                                  const UniformBufferData& uboData,
                                  const Containers::Vector<PointLight>& lights) {
 
   UNUSED(lights);
+  UNUSED(camera);
 
-  LightUBO frameUBO = {};
-  frameUBO.timeDelta = timeDelta;
+  LightUBO frameUBO    = {};
+  frameUBO.m_timeDelta = timeDelta;
 
-  const auto uboDataBuffer = reinterpret_cast<const U8*>(&uboData); // NOLINT
+  const auto uboDataBuffer = reinterpret_cast<const U8*>(&uboData);  // NOLINT
   const auto lightUBOStart = reinterpret_cast<const U8*>(&frameUBO); // NOLINT
 
   m_computePool->BeginUpdates();
   m_computePool->UpdateUniformData(m_pass.m_computeUBO, lightUBOStart, sizeof(LightUBO));
   m_computePool->SubmitUpdates();
-  
+
   m_mainPool->BeginUpdates();
   m_mainPool->UpdateUniformData(m_sponzaId, m_pass.m_uboSlot, uboDataBuffer, sizeof(UniformBufferData));
   m_mainPool->SubmitUpdates();

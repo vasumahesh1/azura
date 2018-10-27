@@ -21,6 +21,8 @@ public:
 
   void SetNearClip(float value);
   void SetFarClip(float value);
+  float GetNearClip() const;
+  float GetFarClip() const;
   void SetFOVY(float value);
   void SetPosition(Vector3f value);
   void SetReferencePoint(Vector3f value);
@@ -29,6 +31,9 @@ public:
 
   Matrix4f GetViewProjMatrix() const;
   Matrix4f GetInvViewProjMatrix() const;
+
+  Matrix4f GetViewMatrix() const;
+  Matrix4f GetProjMatrix() const;
 
   virtual void Recompute() = 0;
   virtual void Update(float timeDelta) = 0;
@@ -43,13 +48,15 @@ protected:
 
   float m_sensitivity{0.5f};
 
-  float m_nearClip{0.01f};
-  float m_farClip{100.0f};
+  float m_nearClip{0.0001f};
+  float m_farClip{1000.0f};
   float m_fovY{45.0f};
 
   Vector3f m_eye{0, 0, 0};
   Vector3f m_ref{0, 0, 0};
 
+  Matrix4f m_view;
+  Matrix4f m_proj;
   Matrix4f m_viewProj;
   Matrix4f m_invViewProj;
 };

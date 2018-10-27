@@ -1,5 +1,6 @@
 set(D3D12_SOURCES
     # Include
+    "Inc/D3D12/D3D12Debug.h"
     "Inc/D3D12/D3D12ComputePool.h"
     "Inc/D3D12/D3D12Core.h"
     "Inc/D3D12/D3D12Drawable.h"
@@ -21,6 +22,7 @@ set(D3D12_SOURCES
     "Inc/D3D12/d3dx12.h"
 
     # Source
+    "Src/D3D12/D3D12Debug.cpp"
     "Src/D3D12/D3D12ComputePool.cpp"
     "Src/D3D12/D3D12Core.cpp"
     "Src/D3D12/D3D12Drawable.cpp"

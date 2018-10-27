@@ -30,6 +30,11 @@ private:
   Vector3f m_up;
   Vector3f m_right;
   Vector3f m_look;
+
+  float m_stepSize{10.0f};
+
+  int m_moveUpFactor{0};
+  int m_moveRightFactor{0};
 };
 
 } // namespace Azura

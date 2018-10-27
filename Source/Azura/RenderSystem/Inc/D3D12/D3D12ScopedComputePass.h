@@ -7,6 +7,7 @@
 #include "D3D12/D3D12ScopedShader.h"
 #include "D3D12/D3D12ScopedCommandBuffer.h"
 #include "D3D12/D3D12ScopedSwapChain.h"
+#include "D3D12/D3D12ScopedBuffer.h"
 
 namespace Azura {
 namespace Memory {
@@ -23,8 +24,9 @@ public:
 
   void Create(const Microsoft::WRL::ComPtr<ID3D12Device>& device,
               const PipelinePassCreateInfo& createInfo,
-              const Containers::Vector<RenderTargetCreateInfo>& pipelineBuffers,
-              const Containers::Vector<D3D12ScopedImage>& pipelineBufferImages,
+              const Containers::Vector<RenderTargetCreateInfo>& targetCreateInfos,
+              const Containers::Vector<D3D12ScopedImage>& pipelineImages,
+              const Containers::Vector<D3D12ScopedBuffer>& pipelineStructuredBuffers,
               const Containers::Vector<DescriptorSlot>& descriptorSlots,
               const Containers::Vector<DescriptorTableEntry>& descriptorSetTable,
               const Containers::Vector<D3D12ScopedShader>& allShaders);
@@ -40,6 +42,7 @@ public:
 
   const Containers::Vector<std::reference_wrapper<const D3D12ScopedShader>>& GetShaders() const;
   const Containers::Vector<std::reference_wrapper<D3D12ScopedImage>>& GetInputImages() const;
+  const Containers::Vector<std::reference_wrapper<D3D12ScopedBuffer>>& GetInputBuffers() const;
   const Containers::Vector<std::reference_wrapper<D3D12ScopedImage>>& GetOutputImages() const;
 
   const Containers::Vector<DescriptorTableEntry>& GetRootSignatureTable() const;
@@ -53,7 +56,8 @@ public:
 
   U32 GetCommandBufferCount() const;
 
-  U32 GetInputRootDescriptorTableId() const;
+  U32 GetInputTargetRootDescriptorTableId() const;
+  U32 GetInputBufferRootDescriptorTableId() const;
   U32 GetOutputRootDescriptorTableId() const;
 
 private:
@@ -62,8 +66,9 @@ private:
     const PipelinePassCreateInfo& createInfo,
     const Containers::Vector<DescriptorSlot>& descriptorSlots,
     const Containers::Vector<DescriptorTableEntry>& descriptorSetTable,
-    const Containers::Vector<RenderTargetCreateInfo>& pipelineBuffers,
-    const Containers::Vector<D3D12ScopedImage>& pipelineBufferImages,
+    const Containers::Vector<RenderTargetCreateInfo>& targetCreateInfos,
+    const Containers::Vector<D3D12ScopedImage>& pipelineImages,
+    const Containers::Vector<D3D12ScopedBuffer>& pipelineStructuredBuffers,
     const Containers::Vector<D3D12ScopedShader>& allShaders);
 
   const Log log_D3D12RenderSystem;
@@ -71,7 +76,8 @@ private:
   U32 m_internalId;
 
   U32 m_computeOutputTableIdx{ 0 };
-  U32 m_computeInputTableIdx{ 0 };
+  U32 m_computeInputTargetTableIdx{ 0 };
+  U32 m_computeInputBufferTableIdx{ 0 };
 
   Containers::Vector<DescriptorTableEntry> m_rootSignatureTable;
 
@@ -81,9 +87,10 @@ private:
 
   Containers::Vector<std::reference_wrapper<D3D12ScopedImage>> m_computeOutputs;
 
-  Containers::Vector<std::reference_wrapper<D3D12ScopedImage>> m_computeInputs;
-  Containers::Vector<std::reference_wrapper<D3D12ScopedImage>> m_computeDepthInputs;
-  Containers::Vector<std::reference_wrapper<D3D12ScopedImage>> m_allComputeInputs;
+  Containers::Vector<std::reference_wrapper<D3D12ScopedBuffer>> m_computeInputBuffers;
+  Containers::Vector<std::reference_wrapper<D3D12ScopedImage>> m_computeInputTargets;
+  Containers::Vector<std::reference_wrapper<D3D12ScopedImage>> m_computeDepthInputTargets;
+  Containers::Vector<std::reference_wrapper<D3D12ScopedImage>> m_allComputeInputTargets;
 
   Microsoft::WRL::ComPtr<ID3D12RootSignature> m_rootSignature;
 

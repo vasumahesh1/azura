@@ -12,8 +12,12 @@ U32 ShaderRequirements::AddShader(const ShaderCreateInfo& info) {
   return m_shaders.GetSize() - 1;
 }
 
-RenderPassRequirements::RenderPassRequirements(U32 numRenderTargets, U32 numPasses, Memory::Allocator& alloc)
-  : m_targets(numRenderTargets, alloc),
+RenderPassRequirements::RenderPassRequirements(U32 numRenderTargets,
+                                               U32 numPasses,
+                                               U32 numBuffers,
+                                               Memory::Allocator& alloc)
+  : m_buffers(numBuffers, alloc),
+    m_targets(numRenderTargets, alloc),
     m_passSequence(numPasses, alloc) {
 }
 
@@ -22,13 +26,20 @@ U32 RenderPassRequirements::AddTarget(const RenderTargetCreateInfo& info) {
   return m_targets.GetSize() - 1;
 }
 
+U32 RenderPassRequirements::AddBuffer(const StructuredBufferCreateInfo& info) {
+  m_buffers.PushBack(info);
+  return m_buffers.GetSize() - 1;
+}
+
 U32 RenderPassRequirements::AddPass(const PipelinePassCreateInfo& info) {
   m_passSequence.PushBack(info);
   return m_passSequence.GetSize() - 1;
 }
 
 DescriptorRequirements::DescriptorRequirements(U32 numDescriptors, U32 numSets, Memory::Allocator& alloc)
-  : m_descriptorSlots(numDescriptors, alloc), m_descriptorSets(numSets, alloc), m_allocator(alloc) {
+  : m_descriptorSlots(numDescriptors, alloc),
+    m_descriptorSets(numSets, alloc),
+    m_allocator(alloc) {
 }
 
 U32 DescriptorRequirements::AddDescriptor(const DescriptorSlotCreateInfo& info) {

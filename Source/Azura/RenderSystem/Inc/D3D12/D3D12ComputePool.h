@@ -32,6 +32,7 @@ public:
                     const Containers::Vector<D3D12ScopedShader>& shaders,
                     const Containers::Vector<D3D12ScopedComputePass>& renderPasses,
                     Microsoft::WRL::ComPtr<ID3D12CommandQueue> commandQueue,
+                    Microsoft::WRL::ComPtr<ID3D12CommandQueue> graphicsQueue,
                     Memory::Allocator& mainAllocator,
                     Memory::Allocator& initAllocator,
                     Log log);
@@ -60,6 +61,9 @@ private:
   void SetSamplerData();
 
   void CreateComputePassInputTargetSRV(const Containers::Vector<std::reference_wrapper<D3D12ScopedImage>>& renderPassInputs, U32 offsetTillThis) const;
+  void CreateComputePassInputBufferSRV(
+    const Containers::Vector<std::reference_wrapper<D3D12ScopedBuffer>>& bufferInputs,
+    U32 offsetTillThis) const;
   void CreateComputePassInputTargetUAV(
     const Containers::Vector<std::reference_wrapper<D3D12ScopedImage>>& computePassOutputs,
     U32 offsetTillThis) const;
@@ -74,6 +78,7 @@ private:
 
   Containers::Vector<std::reference_wrapper<D3D12ScopedComputePass>> m_computePasses;
 
+  Microsoft::WRL::ComPtr<ID3D12CommandQueue> m_computeCommandQueue;
   Microsoft::WRL::ComPtr<ID3D12CommandQueue> m_graphicsCommandQueue;
 
   D3D12PipelineFactory m_pipelineFactory;
@@ -84,7 +89,8 @@ private:
   U32 m_cbvSrvDescriptorElementSize{0};
   U32 m_samplerDescriptorElementSize{0};
   U32 m_offsetToConstantBuffers{0};
-  U32 m_offsetToComputePassInputs{0};
+  U32 m_offsetToComputePassInputTargets{0};
+  U32 m_offsetToComputePassInputBuffers{0};
   U32 m_offsetToComputePassOutputs{0};
 
   Containers::Vector<D3D12ScopedImage> m_images;
