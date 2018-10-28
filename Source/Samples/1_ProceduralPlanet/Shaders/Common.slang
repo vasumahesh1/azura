@@ -2,7 +2,10 @@ struct UBOData {
   float4x4 u_model;
   float4x4 u_modelInvTranspose;
   float4x4 u_viewProj;
+  float4x4 u_view;
+  float4x4 u_proj;
   float4x4 u_invViewProj;
+  float4x4 u_invProj;
 };
 
 struct ShaderControls {
@@ -37,14 +40,13 @@ struct NoiseInput_PS
   float4 normal : NORMAL;
   float4 originalPos : ORIGINAL_POSITION;
   float4 modelPos : MODEL_POSITION;
-  float2 baseUVOffset : UV_OFFSET;
+  nointerpolation float2 baseUVOffset : UV_OFFSET;
 };
 
 struct NoiseOuput_PS
 {
   float4 target1 : SV_Target0;
   float4 target2 : SV_Target1;
-  float4 target3 : SV_Target2;
 };
 
 struct QuadInput_VS
@@ -78,7 +80,7 @@ struct SamplerBlock {
 struct AttachmentState {
   Texture2D target1;
   Texture2D target2;
-  Texture2D target3;
+  Texture2D depthTarget;
 };
 
 static const float2 ROCK_OFFSET = float2(0.5, 0.0);
