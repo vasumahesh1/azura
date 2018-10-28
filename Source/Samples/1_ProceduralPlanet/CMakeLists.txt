@@ -35,3 +35,7 @@ AzuraAddSlangShaders(ProceduralPlanet DXBC ${PROJECT_SHADERS})
 
 target_include_directories(ProceduralPlanet PUBLIC ${PROJECT_SOURCE_DIR}/Inc)
 target_link_libraries(ProceduralPlanet Camera D3D12RenderSystem Log glfw Math)
+
+AzuraDeployTarget(ProceduralPlanet)
+AzuraDeployTargetFolder(ProceduralPlanet ${PROJECT_BINARY_DIR}/Shaders Shaders)
+AzuraDeployTargetFolder(ProceduralPlanet ${PROJECT_BINARY_DIR}/Textures Textures)

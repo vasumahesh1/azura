@@ -154,6 +154,9 @@ def setCompileSettings():
   buildArgs.buildPath = os.path.join(buildArgs.buildPath, folderPath)
   mkdir_p(buildArgs.buildPath)
 
+  buildArgs.deployPath = os.path.join(buildArgs.deployPath, folderPath)
+  mkdir_p(buildArgs.deployPath)
+
   buildArgs.projectPath = os.path.join(buildArgs.projectPath, folderPath)
   mkdir_p(buildArgs.projectPath)
 
@@ -209,10 +212,10 @@ def run():
     print("Version: " + VERSION)
     return
 
-  setCompileSettings()
-
   if (not verifyBeforeRun()):
     return
+
+  setCompileSettings()
 
   externalConfig = ConfigParser.ConfigParser()
   externalConfig.read(buildArgs.configFile)
@@ -255,6 +258,7 @@ def run():
   cmakeArgs.append('-G' + buildArgs.generator)
   cmakeArgs.append("-B%s" % buildArgs.buildPath)
   cmakeArgs.append("-H.")
+  cmakeArgs.append("-DCMAKE_INSTALL_PREFIX=" + buildArgs.deployPath)
   cmakeArgs.append("-DCMAKE_BUILD_TYPE=" + buildArgs.build.upper())
   cmakeArgs.append("-DCMAKE_EXPORT_COMPILE_COMMANDS=ON")
   cmakeArgs.append("-DCMAKE_CXX_CLANG_TIDY=" + executableMap['clang-tidy'] + ";-extra-arg=-std=c++17")
@@ -322,6 +326,18 @@ def run():
     ctestArgs.append('--verbose')
 
     executeCommand(ctestArgs)
+
+  if (buildArgs.deploy):
+    az_log.empty()
+    az_log.banner("Deploying Targets")
+
+    cmakeArgs = []
+
+    cmakeArgs.append("-DCOMPONENT=AZURA_DEPLOY_COMPONENT")
+    cmakeArgs.append("-P")
+    cmakeArgs.append("cmake_install.cmake")
+    finalCommand = cmakeCommand + cmakeArgs
+    executeCommand(finalCommand)
 
 
   buildEndTime = datetime.datetime.now()
