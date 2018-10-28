@@ -77,3 +77,17 @@ function(AzuraAddSlangShaders TARGET API)
   add_custom_target(${SHADERS_TARGET} DEPENDS ${SPIRV_BINARY_FILES})
   add_dependencies(${TARGET} ${SHADERS_TARGET})
 endfunction()
+
+
+
+function(AzuraDeployTarget TARGET)
+  install(TARGETS ${TARGET}
+        RUNTIME DESTINATION ${TARGET}/ COMPONENT AZURA_DEPLOY_COMPONENT)
+  install(DIRECTORY ${DEPLOY_CONFIG_FOLDER}
+          DESTINATION ${TARGET}/config/ COMPONENT AZURA_DEPLOY_COMPONENT)
+endfunction()
+
+macro(AzuraDeployTargetFolder TARGET FOLDER_SRC FOLDER_DEST)
+  install(DIRECTORY ${FOLDER_SRC}/
+        DESTINATION ${TARGET}/${FOLDER_DEST}/ COMPONENT AZURA_DEPLOY_COMPONENT)
+endmacro()

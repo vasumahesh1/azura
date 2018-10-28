@@ -20,6 +20,10 @@ set(CLANG_TIDY_EXECUTABLE ${CLANG_PATH}/bin/clang-tidy.exe
     CACHE STRING ""
     FORCE)
 
+set(DEPLOY_CONFIG_FOLDER ${CMAKE_CURRENT_SOURCE_DIR}/Config/deploy_config/
+    CACHE STRING "Default Folder used for all targets"
+    FORCE)
+
 include("./Azura.Macros.cmake")
 include("./Azura.Functions.cmake")
 
