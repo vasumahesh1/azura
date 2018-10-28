@@ -21,20 +21,6 @@ struct Instance {
   float m_pos[4];
 };
 
-struct ShaderControls {
-  // NOLINT
-  float m_shoreLevel{0.5f};
-  float m_elevation{0.5f};
-  float m_noiseScale{0.5f};
-  float pad1;
-
-  Vector4f m_lightPos{0.0f, 0.0f, 15.0f, 1.0f};
-  Vector4f m_eye{0.0f, 0.0f, 4.0f, 1.0f};
-
-  Color4f m_waterControls{0.5f, 0.65f, 0, 0};
-  Color4f m_waterColor{21.0f / 255.0f, 92.0f / 255.0f, 158.0f / 255.0f, 1.0f};
-};
-
 AppRenderer::AppRenderer()
   : m_mainBuffer(0x400000 * 2),
     m_mainAllocator(m_mainBuffer, 0x400000),
@@ -78,17 +64,20 @@ void AppRenderer::Initialize() {
   requirements.m_int64         = false;
   requirements.m_transferQueue = false;
 
-  ShaderControls shaderControls{};
+  m_camera.Recompute();
 
   m_sceneUBO = {};
   m_sceneUBO.m_model           = Matrix4f::Identity();
   m_sceneUBO.m_viewProj = m_camera.GetViewProjMatrix();
+  m_sceneUBO.m_view = m_camera.GetViewMatrix();
+  m_sceneUBO.m_proj = m_camera.GetProjMatrix();
   m_sceneUBO.m_invViewProj = m_camera.GetInvViewProjMatrix();
+  m_sceneUBO.m_invProj = m_sceneUBO.m_proj.Inverse();
 
   m_sceneUBO.m_modelInvTranspose = m_sceneUBO.m_model.Inverse().Transpose();
 
   const auto uboDataBuffer       = reinterpret_cast<U8*>(&m_sceneUBO);        // NOLINT
-  const auto shaderControlBuffer = reinterpret_cast<U8*>(&shaderControls); // NOLINT
+  const auto shaderControlBuffer = reinterpret_cast<U8*>(&m_sceneControls); // NOLINT
 
   // TODO(vasumahesh1):[Q]:Allocator?
   ApplicationRequirements applicationRequirements = {}; // NOLINT
@@ -121,20 +110,19 @@ void AppRenderer::Initialize() {
 
   const U32 NOISE_TARGET_1 = renderPassRequirements.AddTarget({RawStorageFormat::R32G32B32A32_FLOAT});
   const U32 NOISE_TARGET_2 = renderPassRequirements.AddTarget({RawStorageFormat::R32G32B32A32_FLOAT});
-  const U32 NOISE_TARGET_3 = renderPassRequirements.AddTarget({RawStorageFormat::R32G32B32A32_FLOAT});
   const U32 NOISE_DEPTH = renderPassRequirements.AddTarget({RawStorageFormat::D32_FLOAT});
 
   const U32 NOISE_PASS = renderPassRequirements.AddPass({
     PipelinePassCreateInfo::Shaders{NOISE_VERTEX_SHADER_ID, NOISE_PIXEL_SHADER_ID},  // SHADERS
     PipelinePassCreateInfo::InputTargets{},                                                // INPUT TARGETS
     PipelinePassCreateInfo::InputBuffers{},
-    PipelinePassCreateInfo::Outputs{NOISE_TARGET_1, NOISE_TARGET_2, NOISE_TARGET_3, NOISE_DEPTH} , // OUTPUT TARGETS
+    PipelinePassCreateInfo::Outputs{NOISE_TARGET_1, NOISE_TARGET_2, NOISE_DEPTH} , // OUTPUT TARGETS
     PipelinePassCreateInfo::DescriptorSets{UBO_SET, CONTROLS_SET}
     });
 
   const U32 SINGLE_PASS = renderPassRequirements.AddPass({
     PipelinePassCreateInfo::Shaders{},                                   // SHADERS
-    PipelinePassCreateInfo::InputTargets{{NOISE_TARGET_1, ShaderStage::Pixel}, {NOISE_TARGET_2, ShaderStage::Pixel}, {NOISE_TARGET_3, ShaderStage::Pixel}},      // INPUT TARGETS
+    PipelinePassCreateInfo::InputTargets{{NOISE_TARGET_1, ShaderStage::Pixel}, {NOISE_TARGET_2, ShaderStage::Pixel}, {NOISE_DEPTH, ShaderStage::Pixel}},      // INPUT TARGETS
     PipelinePassCreateInfo::InputBuffers{},
     PipelinePassCreateInfo::Outputs{},                                   // OUTPUT TARGETS
     PipelinePassCreateInfo::DescriptorSets{UBO_SET, CONTROLS_SET, SAMPLER_SET, TEXTURE_SET},
@@ -197,8 +185,6 @@ void AppRenderer::Initialize() {
   skyQuad.BindUniformData(0, SHADER_CONTROLS_SLOT, shaderControlBuffer, sizeof(ShaderControls));
   skyQuad.BindSampler(SAMPLER_SLOT, {});
 
-  m_skyPool = &skyQuad;
-
   DrawablePool& terrainQuad = PoolPrimitives::AddScreenQuad(*m_renderer, SINGLE_PASS, allocatorTemporary);
   terrainQuad.AddShader(SCREEN_QUAD_VERTEX_SHADER_ID);
   terrainQuad.AddShader(TERRAIN_PIXEL_SHADER_ID);
@@ -215,6 +201,10 @@ void AppRenderer::Initialize() {
   waterQuad.BindTextureData(PLANET_TEXTURE_SLOT, *planet1Desc, m_textureManager->GetData(planet1Texture));
   waterQuad.BindSampler(SAMPLER_SLOT, {});
 
+  m_skyPool = &skyQuad;
+  m_terrainPool = &terrainQuad;
+  m_waterPool = &waterQuad;
+
   // All Drawables Done
   m_renderer->Submit();
 
@@ -226,6 +216,9 @@ void AppRenderer::WindowUpdate(float timeDelta) {
 
   m_sceneUBO.m_viewProj = m_camera.GetViewProjMatrix();
   m_sceneUBO.m_invViewProj = m_camera.GetInvViewProjMatrix();
+  m_sceneUBO.m_view = m_camera.GetViewMatrix();
+  m_sceneUBO.m_proj = m_camera.GetProjMatrix();
+  m_sceneUBO.m_invProj = m_sceneUBO.m_proj.Inverse();
   const auto uboDataBuffer       = reinterpret_cast<U8*>(&m_sceneUBO);        // NOLINT
 
   m_mainPool->BeginUpdates();
@@ -235,6 +228,14 @@ void AppRenderer::WindowUpdate(float timeDelta) {
   m_skyPool->BeginUpdates();
   m_skyPool->UpdateUniformData(0, m_pass1.m_uboSlot, uboDataBuffer, sizeof(UniformBufferData));
   m_skyPool->SubmitUpdates();
+  
+  m_terrainPool->BeginUpdates();
+  m_terrainPool->UpdateUniformData(0, m_pass1.m_uboSlot, uboDataBuffer, sizeof(UniformBufferData));
+  m_terrainPool->SubmitUpdates();
+  
+  m_waterPool->BeginUpdates();
+  m_waterPool->UpdateUniformData(0, m_pass1.m_uboSlot, uboDataBuffer, sizeof(UniformBufferData));
+  m_waterPool->SubmitUpdates();
 
   m_renderer->RenderFrame();
 }

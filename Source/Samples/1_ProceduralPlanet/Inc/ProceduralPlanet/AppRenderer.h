@@ -20,7 +20,25 @@ struct UniformBufferData {
   Matrix4f m_model;
   Matrix4f m_modelInvTranspose;
   Matrix4f m_viewProj;
+  Matrix4f m_view;
+  Matrix4f m_proj;
   Matrix4f m_invViewProj;
+  Matrix4f m_invProj;
+};
+
+
+struct ShaderControls {
+  // NOLINT
+  float m_shoreLevel{0.5f};
+  float m_elevation{0.5f};
+  float m_noiseScale{0.5f};
+  float pad1;
+
+  Vector4f m_lightPos{0.0f, 0.0f, 15.0f, 1.0f};
+  Vector4f m_eye{0.0f, 0.0f, 4.0f, 1.0f};
+
+  Color4f m_waterControls{0.5f, 0.65f, 0, 0};
+  Color4f m_waterColor{21.0f / 255.0f, 92.0f / 255.0f, 158.0f / 255.0f, 1.0f};
 };
 
 class AppRenderer {
@@ -45,12 +63,15 @@ private:
   PolarCamera m_camera;
 
   UniformBufferData m_sceneUBO;
+  ShaderControls m_sceneControls{};
 
   U32 m_icosphereId{0};
 
   AppPass1 m_pass1{};
   DrawablePool* m_mainPool{nullptr};
   DrawablePool* m_skyPool{nullptr};
+  DrawablePool* m_terrainPool{nullptr};
+  DrawablePool* m_waterPool{nullptr};
 
   Log log_AppRenderer;
 };

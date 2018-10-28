@@ -140,7 +140,7 @@ void RenderPlanet(inout float4 vertexPosition, inout float4 vertexNormal, out fl
 
       vertexNormal = float4(normalize(originalNormal.xyz - (derivative * 0.45)), 0);
 
-      if (noiseValue > waterThreshold + 0.4 + snowJitter && snowAppearance > 0.5) {
+      if (noiseValue > waterThreshold + 0.4 + snowJitter && snowAppearance > 0.3) {
         baseUVOffset = SNOW_OFFSET;
       }
       else {
@@ -163,7 +163,7 @@ NoiseInput_PS main(NoiseInput_VS input)
   output.originalPos = mul(ubo.u_model, input.in_Pos);
   output.modelPos = mul(ubo.u_model, vertexPosition);
   output.pos = mul(ubo.u_viewProj, output.modelPos);
-  output.normal = mul(ubo.u_modelInvTranspose, vertexNormal);
+  output.normal = mul(ubo.u_view, mul(ubo.u_modelInvTranspose, vertexNormal));
   output.baseUVOffset = baseUVOffset;
   return output;
 }

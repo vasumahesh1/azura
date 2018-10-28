@@ -63,6 +63,8 @@ Log::Log(String key)
     m_isReady(false),
     m_temporaryBuffer(4096) {
 
+#ifdef BUILD_DEBUG
+
   const char* configEnv = std::getenv("AZURA_CONFIG");
   if (configEnv == nullptr) {
     std::cout << "No Azura Config Specified. Log Module will run in Default Mode. \n";
@@ -79,6 +81,9 @@ Log::Log(String key)
   if (!fs::exists(fullPath)) {
     return;
   }
+#elif defined(BUILD_RELEASE)
+  const fs::path fullPath = fs::path("config") / fs::path("log.yml");
+#endif
 
   try {
     boost::log::add_common_attributes();
