@@ -331,9 +331,6 @@ def run():
     az_log.empty()
     az_log.banner("Deploying Targets")
 
-    # ninjaBuildArgs = [executableMap['ninja'], 'install']
-    # executeCommand(ninjaBuildArgs)
-
     cmakeArgs = []
 
     cmakeArgs.append("-DCOMPONENT=AZURA_DEPLOY_COMPONENT")
