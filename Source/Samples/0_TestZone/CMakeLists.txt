@@ -35,6 +35,9 @@ set(
     "${PROJECT_SOURCE_DIR}/Shaders/BasicCompute.vs.slang|VS"
     "${PROJECT_SOURCE_DIR}/Shaders/BasicCompute.ps.slang|PS"
     "${PROJECT_SOURCE_DIR}/Shaders/BasicCompute.cs.slang|CS"
+
+    "${PROJECT_SOURCE_DIR}/Shaders/Cloth.ps.slang|PS"
+    "${PROJECT_SOURCE_DIR}/Shaders/Cloth.vs.slang|VS"
 )
 
 add_executable(TestZone ${SOURCES})
@@ -50,4 +53,4 @@ AzuraAddSlangShaders(TestZone HLSL ${PROJECT_SHADERS})
 AzuraAddSlangShaders(TestZone DXBC ${PROJECT_SHADERS})
 
 target_include_directories(TestZone PUBLIC ${PROJECT_SOURCE_DIR}/Inc)
-target_link_libraries(TestZone D3D12RenderSystem Log glfw Math)
+target_link_libraries(TestZone D3D12RenderSystem Camera Log glfw Math)

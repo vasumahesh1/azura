@@ -8,200 +8,200 @@
 #include "Math/Icosphere.h"
 
 namespace Azura {
-  using namespace Containers; // NOLINT
-  using namespace Math;       // NOLINT
+using namespace Containers; // NOLINT
+using namespace Math;       // NOLINT
 
-  struct Vertex {
-    float m_pos[4];
-    float m_col[4];
-  };
+struct Vertex {
+  float m_pos[4];
+  float m_col[4];
+};
 
-  struct VertexWithUV {
-    float m_pos[4];
-    float m_uv[2];
-  };
+struct VertexWithUV {
+  float m_pos[4];
+  float m_uv[2];
+};
 
-  struct UniformBufferData {
-    Matrix4f m_model;
-    Matrix4f m_modelInvTranspose;
-    Matrix4f m_viewProj;
-  };
+struct LightData
+{
+  Vector4f m_lightPos;
+};
 
-  AppRenderer::AppRenderer()
-    : m_mainBuffer(16384),
+AppRenderer::AppRenderer()
+  : m_mainBuffer(16384),
     m_mainAllocator(m_mainBuffer, 8192),
     m_drawableAllocator(m_mainBuffer, 8192),
+    m_camera(1280, 720),
     log_AppRenderer(Log("AppRenderer")) {
-  }
+}
 
-  void AppRenderer::Initialize() {
-    LOG_INF(log_AppRenderer, LOG_LEVEL, "Starting Init of AppRenderer");
+void AppRenderer::Initialize() {
+  LOG_INF(log_AppRenderer, LOG_LEVEL, "Starting Init of AppRenderer");
 
-    HEAP_ALLOCATOR(Temporary, Memory::MonotonicAllocator, 16384);
-    m_window = RenderSystem::CreateApplicationWindow("TestZone", 1280, 720);
+  HEAP_ALLOCATOR(Temporary, Memory::MonotonicAllocator, 16384);
+  m_window = RenderSystem::CreateApplicationWindow("TestZone", 1280, 720);
 
-    m_window->SetUpdateCallback([this](float timeSinceLastFrame)
-    {
-      UNUSED(timeSinceLastFrame);
-      WindowUpdate();
-    });
+  m_window->SetUpdateCallback([this](float deltaTime)
+  {
+    WindowUpdate(deltaTime);
+  });
 
-    VERIFY_TRUE(log_AppRenderer, m_window->Initialize(), "Cannot Initialize Window");
+  m_window->SetKeyEventCallback([this](KeyEvent evt)
+  {
+    m_camera.OnKeyEvent(evt);
+  });
 
-    ApplicationInfo appInfo;
-    appInfo.m_name    = "TestZone";
-    appInfo.m_version = Version(1, 0, 0);
+  m_window->SetMouseEventCallback([this](MouseEvent evt)
+  {
+    UNUSED(evt);
+    // Disable as it has bugs
+    // m_camera.OnMouseEvent(e);
+  });
 
-    DeviceRequirements requirements;
-    requirements.m_discreteGPU   = true;
-    requirements.m_float64       = false;
-    requirements.m_int64         = false;
-    requirements.m_transferQueue = false;
+  m_camera.SetZoom(10);
+  m_camera.RotateAboutRight(-30);
 
-    UniformBufferData uboData = {};
-    uboData.m_model           = Matrix4f::Identity();
-    const auto view           = Transform::LookAt(Vector3f(0.5f, 0.5f, 0.0f), Vector3f(0.5f, 0.5f, 6.0f),
-      Vector3f(0.0f, 1.0f, 0.0f));
-    const auto proj = Transform::Perspective(45.0f, 16.0f / 9.0f, 0.1f, 100.0f);
+  VERIFY_TRUE(log_AppRenderer, m_window->Initialize(), "Cannot Initialize Window");
 
-    uboData.m_viewProj          = proj * view;
-    uboData.m_modelInvTranspose = uboData.m_model.Inverse().Transpose();
+  ApplicationInfo appInfo;
+  appInfo.m_name    = "TestZone";
+  appInfo.m_version = Version(1, 0, 0);
 
-    // TODO(vasumahesh1):[Q]:Allocator?
-    const ApplicationRequirements applicationRequirements = {};
+  DeviceRequirements requirements;
+  requirements.m_discreteGPU   = true;
+  requirements.m_float64       = false;
+  requirements.m_int64         = false;
+  requirements.m_transferQueue = false;
 
-    TextureRequirements textureRequirements = {};
-    textureRequirements.m_maxCount          = 1;
-    textureRequirements.m_poolSize          = 0x400000; // 4MB
+  m_camera.Recompute();
 
-    DescriptorRequirements descriptorRequirements = DescriptorRequirements(4, 4, allocatorTemporary);
-    const U32 UBO_SLOT                            = descriptorRequirements.AddDescriptor({
-      DescriptorType::UniformBuffer, ShaderStage::Vertex
-      });
-    const U32 SAMPLER_SLOT = descriptorRequirements.AddDescriptor({
-      DescriptorType::Sampler, ShaderStage::Pixel
-      });
+  m_sceneUBO = {};
+  m_sceneUBO.m_model           = Matrix4f::Identity();
+  m_sceneUBO.m_viewProj = m_camera.GetViewProjMatrix();
+  m_sceneUBO.m_invViewProj = m_camera.GetInvViewProjMatrix();
+  m_sceneUBO.m_invProj = m_camera.GetProjMatrix().Inverse();
 
-    const U32 UBO_SET     = descriptorRequirements.AddSet({UBO_SLOT});
-    const U32 SAMPLER_SET = descriptorRequirements.AddSet({SAMPLER_SLOT});
+  LightData lightData = {};
 
-    ShaderRequirements shaderRequirements = ShaderRequirements(4, allocatorTemporary);
-    const U32 COMPUTE_SHADER_ID            = shaderRequirements.AddShader({
-      ShaderStage::Compute, "BasicCompute.cs", AssetLocation::Shaders
-      });
+  // TODO(vasumahesh1):[Q]:Allocator?
+  const ApplicationRequirements applicationRequirements = {};
 
-    const U32 DEF_VERTEX_SHADER_ID = shaderRequirements.AddShader({
-      ShaderStage::Vertex, "BasicCompute.vs", AssetLocation::Shaders
-      });
-    const U32 DEF_PIXEL_SHADER_ID = shaderRequirements.AddShader({
-      ShaderStage::Pixel, "BasicCompute.ps", AssetLocation::Shaders
-      });
+  TextureRequirements textureRequirements = {};
+  textureRequirements.m_maxCount          = 1;
+  textureRequirements.m_poolSize          = 0x400000; // 4MB
 
-    RenderPassRequirements renderPassRequirements = RenderPassRequirements(1, 2, 0, allocatorTemporary);
-    renderPassRequirements.m_maxPools             = 2;
+  DescriptorRequirements descriptorRequirements = DescriptorRequirements(2, 2, allocatorTemporary);
+  const U32 UBO_SLOT = descriptorRequirements.AddDescriptor({ DescriptorType::UniformBuffer, ShaderStage::Vertex });
+  const U32 LIGHT_SLOT = descriptorRequirements.AddDescriptor({ DescriptorType::UniformBuffer, ShaderStage::Vertex });
 
-    const U32 COLOR_TARGET_1 = renderPassRequirements.AddTarget({RawStorageFormat::R32G32B32A32_FLOAT, 32, 32});
+  const U32 UBO_SET = descriptorRequirements.AddSet({ UBO_SLOT });
+  const U32 LIGHT_SET = descriptorRequirements.AddSet({ LIGHT_SLOT });
 
-    const U32 COMPUTE_PASS = renderPassRequirements.AddPass({
-      PipelinePassCreateInfo::Shaders{COMPUTE_SHADER_ID},
-      PipelinePassCreateInfo::InputTargets{},
-      PipelinePassCreateInfo::InputBuffers{},
-      PipelinePassCreateInfo::Outputs{COLOR_TARGET_1},
-      PipelinePassCreateInfo::DescriptorSets{},
-      ClearData{{0.2f, 0.2f, 0.2f, 1.0f}, 1.0f, 0},
-      BlendState{},
-      RenderPassType::Compute
-      });
+  ShaderRequirements shaderRequirements = ShaderRequirements(2, allocatorTemporary);
+  const U32 VERTEX_SHADER_ID = shaderRequirements.AddShader({ ShaderStage::Vertex, "Cloth.vs", AssetLocation::Shaders });
+  const U32 PIXEL_SHADER_ID = shaderRequirements.AddShader({ ShaderStage::Pixel, "Cloth.ps", AssetLocation::Shaders });
 
-    const U32 SHADE_PASS = renderPassRequirements.AddPass({
-      PipelinePassCreateInfo::Shaders{DEF_VERTEX_SHADER_ID, DEF_PIXEL_SHADER_ID},        // SHADERS
-      PipelinePassCreateInfo::InputTargets{{COLOR_TARGET_1, ShaderStage::Pixel}},
-      PipelinePassCreateInfo::InputBuffers{},
-      PipelinePassCreateInfo::Outputs{},
-      PipelinePassCreateInfo::DescriptorSets{UBO_SET, SAMPLER_SET},
-      ClearData{{0.2f, 0.2f, 0.2f, 1.0f}, 1.0f, 0}
-      });
+  RenderPassRequirements renderPassRequirements = RenderPassRequirements(1, 2, 0, allocatorTemporary);
+  renderPassRequirements.m_maxPools = 1;
 
-    m_renderer = RenderSystem::CreateRenderer(appInfo, requirements, applicationRequirements,
-      m_window->GetSwapChainRequirements(), renderPassRequirements,
-      descriptorRequirements, shaderRequirements, m_mainAllocator,
-      m_drawableAllocator,
-      *m_window);
+  const U32 SINGLE_PASS = renderPassRequirements.AddPass({
+    PipelinePassCreateInfo::Shaders{VERTEX_SHADER_ID, PIXEL_SHADER_ID},  // SHADERS
+    PipelinePassCreateInfo::InputTargets{},                                    // INPUT TARGETS
+    PipelinePassCreateInfo::InputBuffers{},                                    // INPUT TARGETS
+    PipelinePassCreateInfo::Outputs{},                     // OUTPUT TARGETS
+    PipelinePassCreateInfo::DescriptorSets{UBO_SET, LIGHT_SET},   // DESCRIPTORS
+    ClearData{{0.2f, 0.2f, 0.2f, 1.0f}, 1.0f, 0}
+  });
 
-    m_textureManager = RenderSystem::CreateTextureManager(textureRequirements);
+  m_renderer = RenderSystem::CreateRenderer(appInfo, requirements, applicationRequirements,
+                                            m_window->GetSwapChainRequirements(), renderPassRequirements,
+                                            descriptorRequirements, shaderRequirements, m_mainAllocator, m_drawableAllocator,
+                                            *m_window);
 
-    // COMPUTE
+  m_textureManager = RenderSystem::CreateTextureManager(textureRequirements);
 
-    ComputePoolCreateInfo computePoolCreateInfo = {allocatorTemporary};
-    computePoolCreateInfo.m_byteSize = 0x400000;
-    computePoolCreateInfo.m_computePasses = { {COMPUTE_PASS}, allocatorTemporary };
-    computePoolCreateInfo.m_launchDims = ThreadGroupDimensions{ 50, 50, 1 };
+  IcoSphere sphere(4);
 
+  DrawablePoolCreateInfo poolInfo = {allocatorTemporary};
+  poolInfo.m_byteSize             = 0x400000;
+  poolInfo.m_numDrawables         = 1;
+  poolInfo.m_renderPasses = {{SINGLE_PASS}, allocatorTemporary};
+  poolInfo.m_drawType             = DrawType::InstancedIndexed;
 
-    ComputePool& computePool = m_renderer->CreateComputePool(computePoolCreateInfo);
-    UNUSED(computePool);
+  const auto VERTEX_SLOT = poolInfo.AddInputSlot({ BufferUsageRate::PerVertex, { {"POSITION", RawStorageFormat::R32G32B32A32_FLOAT} } });
+  const auto NORMAL_SLOT = poolInfo.AddInputSlot({ BufferUsageRate::PerVertex, { {"NORMAL", RawStorageFormat::R32G32B32A32_FLOAT} } });
 
+  DrawablePool& pool = m_renderer->CreateDrawablePool(poolInfo);
 
-    // DRAWABLE
+  Vector<float> vertexData = Vector<float>({
+    0, 1, 0, 1,
+    1, 1, 0, 1,
+    1, 1, 1, 1,
+    0, 1, 1, 1
+    }, allocatorTemporary);
 
-    DrawablePoolCreateInfo poolInfo = {allocatorTemporary};
-    poolInfo.m_byteSize             = 0x400000;
-    poolInfo.m_numDrawables         = 1;
-    poolInfo.m_renderPasses         = {{SHADE_PASS}, allocatorTemporary};
-    poolInfo.m_drawType             = DrawType::InstancedIndexed;
+  Vector<float> normalData = Vector<float>({
+    0, 1, 0, 1,
+    0, 1, 0, 1,
+    0, 1, 0, 1,
+    0, 1, 0, 1
+    }, allocatorTemporary);
 
-    const auto VERTEX_SLOT = poolInfo.AddInputSlot({
-      BufferUsageRate::PerVertex,
-      {{"POSITION", RawStorageFormat::R32G32B32A32_FLOAT}, {"UV", RawStorageFormat::R32G32_FLOAT}}
-      });
+  Vector<U32> indexData = Vector<U32>({
+    0, 1, 2,
+    2, 3, 0
+    }, allocatorTemporary);
 
-    DrawablePool& pool = m_renderer->CreateDrawablePool(poolInfo);
+  const auto bufferStart      = reinterpret_cast<U8*>(vertexData.Data()); // NOLINT
+  const auto normalStart      = reinterpret_cast<U8*>(normalData.Data()); // NOLINT
+  const auto indexBufferStart = reinterpret_cast<U8*>(indexData.Data());  // NOLINT
+  const auto uboDataBuffer    = reinterpret_cast<U8*>(&m_sceneUBO);          // NOLINT
+  const auto lightDataBuffer    = reinterpret_cast<U8*>(&lightData);          // NOLINT
+                                                                          // Create Drawable from Pool
+  DrawableCreateInfo createInfo = {};
+  createInfo.m_vertexCount      = vertexData.GetSize();
+  createInfo.m_indexCount       = indexData.GetSize();
+  createInfo.m_instanceCount    = 1;
+  createInfo.m_indexType        = RawStorageFormat::R32_UINT;
 
-    pool.BindSampler(SAMPLER_SLOT, {});
+  const auto drawableId = pool.CreateDrawable(createInfo);
+  pool.BindVertexData(drawableId, VERTEX_SLOT, bufferStart, vertexData.GetSize() * sizeof(float));
+  pool.BindVertexData(drawableId, NORMAL_SLOT, normalStart, normalData.GetSize() * sizeof(float));
+  pool.SetIndexData(drawableId, indexBufferStart, indexData.GetSize() * sizeof(U32));
+  pool.BindUniformData(drawableId, UBO_SLOT, uboDataBuffer, sizeof(SceneUBO));
+  pool.BindUniformData(drawableId, LIGHT_SLOT, lightDataBuffer, sizeof(LightData));
 
-    Vector<VertexWithUV> vertexData = Vector<VertexWithUV>({
-      VertexWithUV{{0, 0, 1, 1}, {0, 0}},
-      VertexWithUV{{1, 0, 1, 1}, {1, 0}},
-      VertexWithUV{{1, 1, 1, 1}, {1, 1}},
-      VertexWithUV{{0, 1, 1, 1}, {0, 1}}
-      }, allocatorTemporary);
+  m_renderPass.m_sceneUBOSlot = UBO_SLOT;
+  m_renderPass.m_clothId = drawableId;
 
-    Vector<U32> indexData = Vector<U32>({
-      0, 1, 2,
-      2, 3, 0
-      }, allocatorTemporary);
+  m_mainPool = &pool;
 
-    const auto bufferStart      = reinterpret_cast<U8*>(vertexData.Data()); // NOLINT
-    const auto indexBufferStart = reinterpret_cast<U8*>(indexData.Data());  // NOLINT
-    const auto uboDataBuffer    = reinterpret_cast<U8*>(&uboData);          // NOLINT
-                                                                            // Create Drawable from Pool
-    DrawableCreateInfo createInfo = {};
-    createInfo.m_vertexCount      = vertexData.GetSize();
-    createInfo.m_indexCount       = indexData.GetSize();
-    createInfo.m_instanceCount    = 1;
-    createInfo.m_indexType        = RawStorageFormat::R32_UINT;
+  // All Drawables Done
+  m_renderer->Submit();
 
-    const auto drawableId = pool.CreateDrawable(createInfo);
-    pool.BindVertexData(drawableId, VERTEX_SLOT, bufferStart, vertexData.GetSize() * sizeof(VertexWithUV));
-    pool.SetIndexData(drawableId, indexBufferStart, indexData.GetSize() * sizeof(U32));
-    pool.BindUniformData(drawableId, UBO_SLOT, uboDataBuffer, sizeof(UniformBufferData));
+  LOG_INF(log_AppRenderer, LOG_LEVEL, "Initialized AppRenderer");
+}
 
-    // All Drawables Done
-    m_renderer->Submit();
+void AppRenderer::WindowUpdate(float timeDelta) {
+  m_camera.Update(timeDelta);
 
-    LOG_INF(log_AppRenderer, LOG_LEVEL, "Initialized AppRenderer");
-  }
+  m_sceneUBO.m_viewProj = m_camera.GetViewProjMatrix();
+  m_sceneUBO.m_invViewProj = m_camera.GetInvViewProjMatrix();
+  m_sceneUBO.m_invProj = m_camera.GetProjMatrix().Inverse();
+  const auto uboDataBuffer       = reinterpret_cast<U8*>(&m_sceneUBO);        // NOLINT
 
-  void AppRenderer::WindowUpdate() {
-    m_renderer->RenderFrame();
-  }
+  m_mainPool->BeginUpdates();
+  m_mainPool->UpdateUniformData(m_renderPass.m_clothId, m_renderPass.m_sceneUBOSlot, uboDataBuffer, sizeof(SceneUBO));
+  m_mainPool->SubmitUpdates();
 
-  void AppRenderer::Run() const {
-    LOG_INF(log_AppRenderer, LOG_LEVEL, "Running AppRenderer");
-    m_window->StartListening();
-  }
+  m_renderer->RenderFrame();
+}
 
-  void AppRenderer::Destroy() const {
-    m_window->Destroy();
-  }
+void AppRenderer::Run() const {
+  LOG_INF(log_AppRenderer, LOG_LEVEL, "Running AppRenderer");
+  m_window->StartListening();
+}
+
+void AppRenderer::Destroy() const {
+  m_window->Destroy();
+}
 } // namespace Azura
