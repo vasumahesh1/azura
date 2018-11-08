@@ -33,7 +33,9 @@ public:
   void AddVertexBufferInfo(BufferInfo&& info);
   void AddInstanceBufferInfo(BufferInfo&& info);
   void AddUniformBufferInfo(UniformBufferInfo&& info);
-  U32 GetSingleUniformBufferInfo(const DescriptorSlot & slot);
+  U32 GetSingleUniformBufferInfo(const DescriptorSlot & slot) const;
+  U32 GetSingleVertexBufferInfo(const SlotID & slot) const;
+  U32 GetSingleInstanceBufferInfo(const SlotID & slot) const;
   void SetIndexBufferInfo(BufferInfo&& info);
 
   U32 GetVertexCount() const;
@@ -123,6 +125,8 @@ public:
   virtual void BeginUpdates() = 0;
   void UpdateUniformData(DrawableID drawableId, SlotID slot, const Containers::Vector<U8>& buffer);
   virtual void UpdateUniformData(DrawableID drawableId, SlotID slot, const U8* buffer, U32 size) = 0;
+  virtual void UpdateVertexData(DrawableID drawableId, SlotID slot, const U8* buffer, U32 size) = 0;
+  virtual void UpdateInstanceData(DrawableID drawableId, SlotID slot, const U8* buffer, U32 size) = 0;
   virtual void UpdateTextureData(SlotID slot, const U8* buffer) = 0;
 
   U32 GetSingleTextureBufferInfo(const DescriptorSlot & slot);

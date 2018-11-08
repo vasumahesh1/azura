@@ -296,9 +296,20 @@ struct BufferInfo {
   }
 };
 
+enum class BufferUpdateType {
+  UniformBuffer,
+  Sampler,
+  SampledImage,
+  CombinedImageSampler,
+  PushConstant,
+  UnorderedView,
+  Vertex,
+  Instance
+};
+
 struct BufferUpdate
 {
-  DescriptorType m_type;
+  BufferUpdateType m_type;
 
   U32 m_idx;
   U32 m_gpuOffset;

@@ -31,6 +31,7 @@ AppRenderer::AppRenderer()
     m_mainAllocator(m_mainBuffer, 8192),
     m_drawableAllocator(m_mainBuffer, 8192),
     m_camera(1280, 720),
+    m_clothVertices(m_mainAllocator),
     log_AppRenderer(Log("AppRenderer")) {
 }
 
@@ -132,18 +133,17 @@ void AppRenderer::Initialize() {
 
   DrawablePool& pool = m_renderer->CreateDrawablePool(poolInfo);
 
-  Vector<float> vertexData = Vector<float>({
-    0, 1, 0, 1,
-    1, 1, 0, 1,
-    1, 1, 1, 1,
-    0, 1, 1, 1
-    }, allocatorTemporary);
+  m_clothVertices.Reserve(4);
+  m_clothVertices.PushBack({0, 1, 0, 1});
+  m_clothVertices.PushBack({1, 1, 0, 1});
+  m_clothVertices.PushBack({1, 1, 1, 1});
+  m_clothVertices.PushBack({0, 1, 1, 1});
 
-  Vector<float> normalData = Vector<float>({
-    0, 1, 0, 1,
-    0, 1, 0, 1,
-    0, 1, 0, 1,
-    0, 1, 0, 1
+  Vector<Vector4f> normalData = Vector<Vector4f>({
+    {0, 1, 0, 1},
+    {0, 1, 0, 1},
+    {0, 1, 0, 1},
+    {0, 1, 0, 1}
     }, allocatorTemporary);
 
   Vector<U32> indexData = Vector<U32>({
@@ -151,21 +151,21 @@ void AppRenderer::Initialize() {
     2, 3, 0
     }, allocatorTemporary);
 
-  const auto bufferStart      = reinterpret_cast<U8*>(vertexData.Data()); // NOLINT
+  const auto bufferStart      = reinterpret_cast<U8*>(m_clothVertices.Data()); // NOLINT
   const auto normalStart      = reinterpret_cast<U8*>(normalData.Data()); // NOLINT
   const auto indexBufferStart = reinterpret_cast<U8*>(indexData.Data());  // NOLINT
   const auto uboDataBuffer    = reinterpret_cast<U8*>(&m_sceneUBO);          // NOLINT
   const auto lightDataBuffer    = reinterpret_cast<U8*>(&lightData);          // NOLINT
                                                                           // Create Drawable from Pool
   DrawableCreateInfo createInfo = {};
-  createInfo.m_vertexCount      = vertexData.GetSize();
+  createInfo.m_vertexCount      = m_clothVertices.GetSize();
   createInfo.m_indexCount       = indexData.GetSize();
   createInfo.m_instanceCount    = 1;
   createInfo.m_indexType        = RawStorageFormat::R32_UINT;
 
   const auto drawableId = pool.CreateDrawable(createInfo);
-  pool.BindVertexData(drawableId, VERTEX_SLOT, bufferStart, vertexData.GetSize() * sizeof(float));
-  pool.BindVertexData(drawableId, NORMAL_SLOT, normalStart, normalData.GetSize() * sizeof(float));
+  pool.BindVertexData(drawableId, VERTEX_SLOT, bufferStart, m_clothVertices.GetSize() * sizeof(Vector4f));
+  pool.BindVertexData(drawableId, NORMAL_SLOT, normalStart, normalData.GetSize() * sizeof(Vector4f));
   pool.SetIndexData(drawableId, indexBufferStart, indexData.GetSize() * sizeof(U32));
   pool.BindUniformData(drawableId, UBO_SLOT, uboDataBuffer, sizeof(SceneUBO));
   pool.BindUniformData(drawableId, LIGHT_SLOT, lightDataBuffer, sizeof(LightData));
@@ -184,13 +184,21 @@ void AppRenderer::Initialize() {
 void AppRenderer::WindowUpdate(float timeDelta) {
   m_camera.Update(timeDelta);
 
+  for (auto& vertex : m_clothVertices)
+  {
+    vertex[1] -= (timeDelta * 0.2f);
+  }
+
   m_sceneUBO.m_viewProj = m_camera.GetViewProjMatrix();
   m_sceneUBO.m_invViewProj = m_camera.GetInvViewProjMatrix();
   m_sceneUBO.m_invProj = m_camera.GetProjMatrix().Inverse();
+  
+  const auto vbStart      = reinterpret_cast<U8*>(m_clothVertices.Data()); // NOLINT
   const auto uboDataBuffer       = reinterpret_cast<U8*>(&m_sceneUBO);        // NOLINT
 
   m_mainPool->BeginUpdates();
   m_mainPool->UpdateUniformData(m_renderPass.m_clothId, m_renderPass.m_sceneUBOSlot, uboDataBuffer, sizeof(SceneUBO));
+  m_mainPool->UpdateVertexData(m_renderPass.m_clothId, m_renderPass.m_sceneUBOSlot, vbStart, m_clothVertices.GetSize() * sizeof(Vector4f));
   m_mainPool->SubmitUpdates();
 
   m_renderer->RenderFrame();

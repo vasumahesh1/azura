@@ -473,7 +473,7 @@ void D3D12ComputePool::UpdateUniformData(SlotID slot, const U8* buffer, U32 size
   const U32 bufferId = GetSingleUniformBufferInfo(descriptorSlot);
 
   BufferUpdate info = {};
-  info.m_type = DescriptorType::UniformBuffer;
+  info.m_type = BufferUpdateType::UniformBuffer;
   info.m_idx = bufferId;
   info.m_updateOffset = offset;
   info.m_updateByteSize = size;
@@ -498,7 +498,7 @@ void D3D12ComputePool::UpdateTextureData(SlotID slot, const U8* buffer) {
   const U32 offset = m_updateBuffer.AppendTextureData(buffer, desc.m_size, 512, textureWidthBytes, D3D12_TEXTURE_DATA_PITCH_ALIGNMENT, log_D3D12RenderSystem);
 
   BufferUpdate info = {};
-  info.m_type = DescriptorType::SampledImage;
+  info.m_type = BufferUpdateType::SampledImage;
   info.m_idx = bufferId;
   info.m_updateOffset = offset;
   info.m_updateByteSize = desc.m_size;
@@ -520,10 +520,10 @@ void D3D12ComputePool::SubmitUpdates() {
   // Copy Custom Regions
   for(const auto& updateRegion : m_bufferUpdates)
   {
-    if (updateRegion.m_type == DescriptorType::UniformBuffer) {
+    if (updateRegion.m_type == BufferUpdateType::UniformBuffer) {
       oneTimeCommandList->CopyBufferRegion(m_mainBuffer.Real(), updateRegion.m_gpuOffset, m_updateBuffer.Real(), updateRegion.m_updateOffset, updateRegion.m_updateByteSize);
     }
-    else if (updateRegion.m_type == DescriptorType::SampledImage)
+    else if (updateRegion.m_type == BufferUpdateType::SampledImage)
     {
       const auto& targetImage = m_images[updateRegion.m_idx];
       targetImage.Transition(oneTimeCommandList, D3D12_RESOURCE_STATE_PIXEL_SHADER_RESOURCE, D3D12_RESOURCE_STATE_COPY_DEST, log_D3D12RenderSystem);

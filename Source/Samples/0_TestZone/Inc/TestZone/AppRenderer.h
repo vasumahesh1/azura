@@ -46,6 +46,7 @@ private:
   std::unique_ptr<TextureManager> m_textureManager{nullptr};
 
   PolarCamera m_camera;
+  Containers::Vector<Vector4f> m_clothVertices;
 
   SceneUBO m_sceneUBO{};
   DrawablePool* m_mainPool{nullptr};

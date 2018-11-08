@@ -448,7 +448,7 @@ void D3D12DrawablePool::UpdateUniformData(DrawableID drawableId, SlotID slot, co
   const auto& allUboInfos = drawable.GetUniformBufferInfos();
 
   BufferUpdate info = {};
-  info.m_type = DescriptorType::UniformBuffer;
+  info.m_type = BufferUpdateType::UniformBuffer;
   info.m_idx = bufferId;
   info.m_updateOffset = offset;
   info.m_updateByteSize = size;
@@ -473,7 +473,7 @@ void D3D12DrawablePool::UpdateTextureData(SlotID slot, const U8* buffer) {
   const U32 offset = m_updateBuffer.AppendTextureData(buffer, desc.m_size, 512, textureWidthBytes, D3D12_TEXTURE_DATA_PITCH_ALIGNMENT, log_D3D12RenderSystem);
 
   BufferUpdate info = {};
-  info.m_type = DescriptorType::SampledImage;
+  info.m_type = BufferUpdateType::SampledImage;
   info.m_idx = bufferId;
   info.m_updateOffset = offset;
   info.m_updateByteSize = desc.m_size;
@@ -482,6 +482,58 @@ void D3D12DrawablePool::UpdateTextureData(SlotID slot, const U8* buffer) {
 
   m_bufferUpdates.PushBack(info);
 
+}
+
+void D3D12DrawablePool::UpdateVertexData(DrawableID drawableId, SlotID slot, const U8* buffer, U32 size) {
+  LOG_DBG(log_D3D12RenderSystem, LOG_LEVEL,
+    "D3D12 Drawable Pool: Update Uniform Requested for Drawable: %d for Slot: %d of Size: %d bytes", drawableId, slot,
+    size);
+
+  assert(m_drawables.GetSize() > drawableId);
+
+  auto& drawable = m_drawables[drawableId];
+
+  const U32 offset = m_updateBuffer.AppendData(buffer, size, sizeof(float), log_D3D12RenderSystem);
+
+  const U32 bufferInfoId = drawable.GetSingleVertexBufferInfo(slot);
+
+  const auto& allVertexBufferInfos = drawable.GetVertexBufferInfos();
+
+  BufferUpdate info = {};
+  info.m_type = BufferUpdateType::Vertex;
+  info.m_idx = bufferInfoId;
+  info.m_updateOffset = offset;
+  info.m_updateByteSize = size;
+  info.m_gpuOffset = allVertexBufferInfos[bufferInfoId].m_offset;
+  info.m_gpuByteSize = allVertexBufferInfos[bufferInfoId].m_byteSize;
+
+  m_bufferUpdates.PushBack(info);
+}
+
+void D3D12DrawablePool::UpdateInstanceData(DrawableID drawableId, SlotID slot, const U8* buffer, U32 size) {
+  LOG_DBG(log_D3D12RenderSystem, LOG_LEVEL,
+    "D3D12 Drawable Pool: Update Uniform Requested for Drawable: %d for Slot: %d of Size: %d bytes", drawableId, slot,
+    size);
+
+  assert(m_drawables.GetSize() > drawableId);
+
+  auto& drawable = m_drawables[drawableId];
+
+  const U32 offset = m_updateBuffer.AppendData(buffer, size, sizeof(float), log_D3D12RenderSystem);
+
+  const U32 bufferInfoId = drawable.GetSingleInstanceBufferInfo(slot);
+
+  const auto& allInstanceBufferInfos = drawable.GetInstanceBufferInfos();
+
+  BufferUpdate info = {};
+  info.m_type = BufferUpdateType::Instance;
+  info.m_idx = bufferInfoId;
+  info.m_updateOffset = offset;
+  info.m_updateByteSize = size;
+  info.m_gpuOffset = allInstanceBufferInfos[bufferInfoId].m_offset;
+  info.m_gpuByteSize = allInstanceBufferInfos[bufferInfoId].m_byteSize;
+
+  m_bufferUpdates.PushBack(info);
 }
 
 void D3D12DrawablePool::SubmitUpdates() {
@@ -495,10 +547,13 @@ void D3D12DrawablePool::SubmitUpdates() {
   // Copy Custom Regions
   for(const auto& updateRegion : m_bufferUpdates)
   {
-    if (updateRegion.m_type == DescriptorType::UniformBuffer) {
+    if (updateRegion.m_type == BufferUpdateType::UniformBuffer) {
       oneTimeCommandList->CopyBufferRegion(m_mainBuffer.Real(), updateRegion.m_gpuOffset, m_updateBuffer.Real(), updateRegion.m_updateOffset, updateRegion.m_updateByteSize);
     }
-    else if (updateRegion.m_type == DescriptorType::SampledImage)
+    else if (updateRegion.m_type == BufferUpdateType::Vertex || updateRegion.m_type == BufferUpdateType::Instance) {
+      oneTimeCommandList->CopyBufferRegion(m_mainBuffer.Real(), updateRegion.m_gpuOffset, m_updateBuffer.Real(), updateRegion.m_updateOffset, updateRegion.m_updateByteSize);
+    }
+    else if (updateRegion.m_type == BufferUpdateType::SampledImage)
     {
       const auto& targetImage = m_images[updateRegion.m_idx];
       targetImage.Transition(oneTimeCommandList, D3D12_RESOURCE_STATE_PIXEL_SHADER_RESOURCE, D3D12_RESOURCE_STATE_COPY_DEST, log_D3D12RenderSystem);

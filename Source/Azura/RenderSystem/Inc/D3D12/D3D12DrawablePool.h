@@ -50,6 +50,8 @@ public:
   void BeginUpdates() override;
   void UpdateUniformData(DrawableID drawableId, SlotID slot, const U8* buffer, U32 size) override;
   void UpdateTextureData(SlotID slot, const U8* buffer) override;
+  void UpdateVertexData(DrawableID drawableId, SlotID slot, const U8* buffer, U32 size) override;
+  void UpdateInstanceData(DrawableID drawableId, SlotID slot, const U8* buffer, U32 size) override;
   void SubmitUpdates() override;
 
   const Containers::Vector<ID3D12DescriptorHeap*>& GetAllDescriptorHeaps() const;
