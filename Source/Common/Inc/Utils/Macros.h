@@ -54,3 +54,24 @@
 #define CASE_STR(r)   \
     case r:           \
         return #r
+
+
+// Credit Source:
+// http://lucumr.pocoo.org/2013/8/18/beautiful-native-libraries/
+#ifndef AZURA_API
+#  ifdef _WIN32
+#     if defined(YL_BUILD_SHARED) /* build dll */
+#         define AZURA_API __declspec(dllexport)
+#     elif !defined(YL_BUILD_STATIC) /* use dll */
+#         define AZURA_API __declspec(dllimport)
+#     else /* static library */
+#         define AZURA_API
+#     endif
+#  else
+#     if __GNUC__ >= 4
+#         define AZURA_API __attribute__((visibility("default")))
+#     else
+#         define AZURA_API
+#     endif
+#  endif
+#endif
