@@ -24,6 +24,7 @@ add_subdirectory(Samples)
 add_subdirectory(Log)
 add_subdirectory(Math)
 add_subdirectory(Camera)
+add_subdirectory(PowerBench)
 
 if(DEFINED FORCE_INCLUDE_SUB_DIRECTORIES)
 	foreach(dir ${FORCE_INCLUDE_SUB_DIRECTORIES})
