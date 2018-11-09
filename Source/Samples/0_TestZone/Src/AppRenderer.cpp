@@ -11,27 +11,32 @@
 namespace Azura {
 using namespace Containers; // NOLINT
 using namespace Math;       // NOLINT
+namespace {
+  struct Vertex {
+    float m_pos[4];
+    float m_col[4];
+  };
 
-struct Vertex {
-  float m_pos[4];
-  float m_col[4];
-};
+  struct VertexWithUV {
+    float m_pos[4];
+    float m_uv[2];
+  };
 
-struct VertexWithUV {
-  float m_pos[4];
-  float m_uv[2];
-};
+  struct LightData {
+    Vector4f m_lightPos;
+  };
 
-struct LightData {
-  Vector4f m_lightPos;
-};
+  constexpr U32 CLOTH_DIV_X = 10;
+  constexpr U32 CLOTH_DIV_Y = 10;
+
+} // namespace
 
 AppRenderer::AppRenderer()
   : m_mainBuffer(16384),
     m_mainAllocator(m_mainBuffer, 8192),
     m_drawableAllocator(m_mainBuffer, 8192),
     m_camera(1280, 720),
-    m_clothPlane(Vector2f(-3.0f, -3.0f), Vector2f(3.0f, 3.0f), Vector2u(10, 10)),
+    m_clothPlane(Vector2f(-3.0f, -3.0f), Vector2f(3.0f, 3.0f), Vector2u(CLOTH_DIV_X, CLOTH_DIV_Y)),
     log_AppRenderer(Log("AppRenderer")) {
 }
 
@@ -75,20 +80,20 @@ void AppRenderer::Initialize() {
 
   m_camera.Recompute();
 
-  m_clothUBO               = {};
-  m_clothUBO.m_model       = Matrix4f::FromTranslationVector(Vector3f(0, 3, 0)) * Matrix4f::FromRotationMatrix(Matrix3f::RotationX(-PI_OVER2));
-  m_clothUBO.m_view        = m_camera.GetViewMatrix();
-  m_clothUBO.m_viewProj    = m_camera.GetViewProjMatrix();
-  m_clothUBO.m_invViewProj = m_camera.GetInvViewProjMatrix();
-  m_clothUBO.m_invProj     = m_camera.GetProjMatrix().Inverse();
+  m_clothUBO                     = {};
+  m_clothUBO.m_model             = Matrix4f::FromTranslationVector(Vector3f(0, 3, 0));
+  m_clothUBO.m_view              = m_camera.GetViewMatrix();
+  m_clothUBO.m_viewProj          = m_camera.GetViewProjMatrix();
+  m_clothUBO.m_invViewProj       = m_camera.GetInvViewProjMatrix();
+  m_clothUBO.m_invProj           = m_camera.GetProjMatrix().Inverse();
   m_clothUBO.m_modelInvTranspose = m_clothUBO.m_model.Inverse().Transpose();
 
-  m_sphereUBO               = {};
-  m_sphereUBO.m_model       = Matrix4f::Identity();
-  m_sphereUBO.m_viewProj    = m_camera.GetViewProjMatrix();
-  m_sphereUBO.m_view        = m_camera.GetViewMatrix();
-  m_sphereUBO.m_invViewProj = m_camera.GetInvViewProjMatrix();
-  m_sphereUBO.m_invProj     = m_camera.GetProjMatrix().Inverse();
+  m_sphereUBO                     = {};
+  m_sphereUBO.m_model             = Matrix4f::Identity();
+  m_sphereUBO.m_viewProj          = m_camera.GetViewProjMatrix();
+  m_sphereUBO.m_view              = m_camera.GetViewMatrix();
+  m_sphereUBO.m_invViewProj       = m_camera.GetInvViewProjMatrix();
+  m_sphereUBO.m_invProj           = m_camera.GetProjMatrix().Inverse();
   m_sphereUBO.m_modelInvTranspose = m_sphereUBO.m_model.Inverse().Transpose();
 
   LightData lightData  = {};
@@ -142,6 +147,39 @@ void AppRenderer::Initialize() {
 
   IcoSphere sphere(4);
 
+  const auto& clothVertices = m_clothPlane.GetVertices();
+
+  m_clothVertexVel.resize(m_clothPlane.GetVertices().size());
+  m_clothProjectedPos.resize(m_clothPlane.GetVertices().size());
+
+  for (U32 idx     = 0; idx < CLOTH_DIV_X; ++idx) {
+    for (U32 idy   = 0; idy < CLOTH_DIV_Y; ++idy) {
+      const U32 i1 = ((CLOTH_DIV_Y + 1) * idx) + idy;
+      const U32 i2 = ((CLOTH_DIV_Y + 1) * (idx + 1)) + idy;
+      const U32 i21 = i2 + 1;
+      const U32 i11 = i1 + 1;
+
+      EdgeConstraints e1 = { i1, i2, (clothVertices[i1] - clothVertices[i2]).Length() };
+      EdgeConstraints e2 = { i1, i11, (clothVertices[i1] - clothVertices[i11]).Length() };
+      EdgeConstraints e3 = { i1, i21, (clothVertices[i1] - clothVertices[i21]).Length() };
+
+      EdgeConstraints e4 = { i2, i11, (clothVertices[i2] - clothVertices[i11]).Length() };
+      EdgeConstraints e5 = { i2, i21, (clothVertices[i2] - clothVertices[i21]).Length() };
+      EdgeConstraints e6 = { i11, i21, (clothVertices[i11] - clothVertices[i21]).Length() };
+
+      m_clothEdgeConstraints.insert(e1);
+      m_clothEdgeConstraints.insert(e2);
+      m_clothEdgeConstraints.insert(e3);
+      m_clothEdgeConstraints.insert(e4);
+      m_clothEdgeConstraints.insert(e5);
+      m_clothEdgeConstraints.insert(e6);
+    }
+  }
+
+  for (auto& velocity : m_clothVertexVel) {
+    velocity = Vector4f(0, 0, 0, 0);
+  }
+
   DrawablePoolCreateInfo poolInfo = {allocatorTemporary};
   poolInfo.m_byteSize             = sphere.TotalDataSize() + m_clothPlane.TotalDataSize() + 0x400000;
   poolInfo.m_numDrawables         = 2;
@@ -157,9 +195,9 @@ void AppRenderer::Initialize() {
 
   DrawablePool& pool = m_renderer->CreateDrawablePool(poolInfo);
 
-  const auto uboDataBuffer    = reinterpret_cast<U8*>(&m_clothUBO);            // NOLINT
-  const auto sphereUBO        = reinterpret_cast<U8*>(&m_sphereUBO);           // NOLINT
-  const auto lightDataBuffer  = reinterpret_cast<U8*>(&lightData);             // NOLINT
+  const auto uboDataBuffer   = reinterpret_cast<U8*>(&m_clothUBO);  // NOLINT
+  const auto sphereUBO       = reinterpret_cast<U8*>(&m_sphereUBO); // NOLINT
+  const auto lightDataBuffer = reinterpret_cast<U8*>(&lightData);   // NOLINT
   // Create Drawable from Pool
   DrawableCreateInfo createInfo = {};
   createInfo.m_vertexCount      = m_clothPlane.GetVertexCount();
@@ -204,30 +242,55 @@ void AppRenderer::WindowUpdate(float timeDelta) {
 
   auto& clothVertices = m_clothPlane.GetVertices();
 
-  for (auto& vertex : clothVertices) {
-    vertex[2] -= (timeDelta * 1.5f);
+  // for (auto& vertex : clothVertices) {
+  //   vertex[1] -= (timeDelta * 1.5f);
+  // }
+
+  // Projected Positions
+  std::memcpy(m_clothProjectedPos.data(), clothVertices.data(), sizeof(Vector4f) * clothVertices.size());
+
+  const Vector4f gravity = {0.0f, -9.8f, 0.0f, 0.0f};
+
+  const U32 numEntries = U32(clothVertices.size());
+
+  for (U32 mainItr = 0; mainItr < 10; ++mainItr) {
+    
+    // External Force Update
+    for (U32 idx = 0; idx < numEntries; ++idx) {
+      m_clothVertexVel[idx] = m_clothVertexVel[idx] + timeDelta * 1.0f * gravity;
+    }
+
+    // Damp
+
+    // Projected Positions
+    for (U32 idx = 0; idx < numEntries; ++idx) {
+      m_clothProjectedPos[idx] = m_clothProjectedPos[idx] +m_clothVertexVel[idx] * timeDelta;
+    }
+
+
   }
 
-  m_clothUBO.m_view        = m_camera.GetViewMatrix();
-  m_clothUBO.m_viewProj    = m_camera.GetViewProjMatrix();
-  m_clothUBO.m_invViewProj = m_camera.GetInvViewProjMatrix();
-  m_clothUBO.m_invProj     = m_camera.GetProjMatrix().Inverse();
+  m_clothUBO.m_view              = m_camera.GetViewMatrix();
+  m_clothUBO.m_viewProj          = m_camera.GetViewProjMatrix();
+  m_clothUBO.m_invViewProj       = m_camera.GetInvViewProjMatrix();
+  m_clothUBO.m_invProj           = m_camera.GetProjMatrix().Inverse();
   m_clothUBO.m_modelInvTranspose = m_clothUBO.m_model.Inverse().Transpose();
 
-  m_sphereUBO.m_view        = m_camera.GetViewMatrix();
-  m_sphereUBO.m_viewProj    = m_camera.GetViewProjMatrix();
-  m_sphereUBO.m_invViewProj = m_camera.GetInvViewProjMatrix();
-  m_sphereUBO.m_invProj     = m_camera.GetProjMatrix().Inverse();
+  m_sphereUBO.m_view              = m_camera.GetViewMatrix();
+  m_sphereUBO.m_viewProj          = m_camera.GetViewProjMatrix();
+  m_sphereUBO.m_invViewProj       = m_camera.GetInvViewProjMatrix();
+  m_sphereUBO.m_invProj           = m_camera.GetProjMatrix().Inverse();
   m_sphereUBO.m_modelInvTranspose = m_sphereUBO.m_model.Inverse().Transpose();
 
   const auto vbStart          = reinterpret_cast<U8*>(clothVertices.data()); // NOLINT
-  const auto uboDataBuffer    = reinterpret_cast<U8*>(&m_clothUBO);            // NOLINT
-  const auto sphereDataBuffer = reinterpret_cast<U8*>(&m_sphereUBO);           // NOLINT
+  const auto uboDataBuffer    = reinterpret_cast<U8*>(&m_clothUBO);          // NOLINT
+  const auto sphereDataBuffer = reinterpret_cast<U8*>(&m_sphereUBO);         // NOLINT
 
   m_mainPool->BeginUpdates();
   // Update Cloth
   m_mainPool->UpdateUniformData(m_renderPass.m_clothId, m_renderPass.m_sceneUBOSlot, uboDataBuffer, sizeof(SceneUBO));
-  m_mainPool->UpdateVertexData(m_renderPass.m_clothId, m_renderPass.m_sceneUBOSlot, vbStart, U32(clothVertices.size()) * sizeof(Vector4f));
+  m_mainPool->UpdateVertexData(m_renderPass.m_clothId, m_renderPass.m_sceneUBOSlot, vbStart,
+                               U32(clothVertices.size()) * sizeof(Vector4f));
 
   // Update Sphere
   m_mainPool->UpdateUniformData(m_renderPass.m_sphereId, m_renderPass.m_sceneUBOSlot, sphereDataBuffer,

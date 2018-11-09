@@ -19,8 +19,8 @@ Plane::Plane(const Vector2f& boundMin, const Vector2f& boundMax, const Vector2u&
 
   for (float xCoord   = boundMin[0]; xCoord <= boundMax[0] + EPSILON;) {
     for (float yCoord = boundMin[1]; yCoord <= boundMax[1] + EPSILON;) {
-      m_vertices.emplace_back(Vector4f(xCoord, yCoord, 0, 1));
-      m_normals.emplace_back(Vector3f(0, 0, 1));
+      m_vertices.emplace_back(Vector4f(xCoord, 0, yCoord, 1));
+      m_normals.emplace_back(Vector3f(0, 1, 0));
       yCoord += stepY;
     }
 
