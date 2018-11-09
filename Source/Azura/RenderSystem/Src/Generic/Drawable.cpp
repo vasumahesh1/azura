@@ -168,7 +168,7 @@ DrawablePool::DrawablePool(const DrawablePoolCreateInfo& createInfo,
     }
   }
 
-  m_bufferUpdates.Reserve(m_descriptorCount.m_numSampledImageSlots + m_descriptorCount.m_numUniformSlots);
+  m_bufferUpdates.Reserve(m_descriptorCount.m_numSampledImageSlots + m_descriptorCount.m_numUniformSlots + m_numVertexSlots + m_numInstanceSlots);
 
   m_textureBufferInfos.Reserve(m_descriptorCount.m_numSampledImageSlots);
   m_samplerInfos.Reserve(m_descriptorCount.m_numSamplerSlots);

@@ -8,6 +8,7 @@ struct UBOData {
 struct SceneUBO {
   float4x4 u_model;
   float4x4 u_modelInvTranspose;
+  float4x4 u_view;
   float4x4 u_viewProj;
   float4x4 u_invViewProj;
   float4x4 u_invProj;
@@ -26,7 +27,7 @@ struct BasicRenderTestVertexInput
 struct ClothVertexInput
 {
   float4 in_Pos : POSITION;
-  float4 in_Normal : NORMAL;
+  float3 in_Normal : NORMAL;
 };
 
 struct BasicInstanceTestVertexInput
@@ -51,7 +52,8 @@ struct ColorPixelInput
 struct NormalPixelInput
 {
   float4 pos : SV_Position;
-  float4 normal : PS_NORMAL;
+  float4 modelPos : PS_MODELPOS;
+  float3 normal : PS_NORMAL;
 };
 
 struct UVPixelInput

@@ -9,12 +9,14 @@
 #include "Math/Core.h"
 #include "Generic/TextureManager.h"
 #include "Camera/PolarCamera.h"
+#include "Math/Plane.h"
 
 namespace Azura {
 
   struct SceneUBO {
     Matrix4f m_model;
     Matrix4f m_modelInvTranspose;
+    Matrix4f m_view;
     Matrix4f m_viewProj;
     Matrix4f m_invViewProj;
     Matrix4f m_invProj;
@@ -23,6 +25,7 @@ namespace Azura {
   struct PassData
   {
     U32 m_clothId;
+    U32 m_sphereId;
     U32 m_sceneUBOSlot;
   };
 
@@ -46,12 +49,14 @@ private:
   std::unique_ptr<TextureManager> m_textureManager{nullptr};
 
   PolarCamera m_camera;
-  Containers::Vector<Vector4f> m_clothVertices;
 
-  SceneUBO m_sceneUBO{};
+  SceneUBO m_clothUBO{};
+  SceneUBO m_sphereUBO{};
   DrawablePool* m_mainPool{nullptr};
 
   PassData m_renderPass{};
+
+  Math::Plane m_clothPlane;
 
 
   Log log_AppRenderer;

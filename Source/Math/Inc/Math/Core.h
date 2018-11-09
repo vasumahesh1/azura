@@ -54,4 +54,7 @@ namespace Azura
     AxisZ = 2,
     AxisW = 3
   };
+
+
+  constexpr float EPSILON = 0.00001f;
 }
