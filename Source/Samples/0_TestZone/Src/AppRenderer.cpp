@@ -8,6 +8,9 @@
 #include "Math/Icosphere.h"
 #include "Math/Plane.h"
 
+#include <algorithm>
+#include <random>
+
 namespace Azura {
 using namespace Containers; // NOLINT
 using namespace Math;       // NOLINT
@@ -29,6 +32,8 @@ namespace {
   constexpr U32 CLOTH_DIV_X = 10;
   constexpr U32 CLOTH_DIV_Y = 10;
 
+  const U32 ANCHOR_IDX_1 = 0;
+  const U32 ANCHOR_IDX_2 = (CLOTH_DIV_X * (CLOTH_DIV_Y + 1));
 } // namespace
 
 AppRenderer::AppRenderer()
@@ -159,21 +164,50 @@ void AppRenderer::Initialize() {
       const U32 i21 = i2 + 1;
       const U32 i11 = i1 + 1;
 
-      EdgeConstraints e1 = { i1, i2, (clothVertices[i1] - clothVertices[i2]).Length() };
-      EdgeConstraints e2 = { i1, i11, (clothVertices[i1] - clothVertices[i11]).Length() };
-      EdgeConstraints e3 = { i1, i21, (clothVertices[i1] - clothVertices[i21]).Length() };
+      float invMass1 = 1.0f;
+      if (i1 == ANCHOR_IDX_1 || i1 == ANCHOR_IDX_2)
+      {
+        invMass1 = 0;
+      }
 
-      EdgeConstraints e4 = { i2, i11, (clothVertices[i2] - clothVertices[i11]).Length() };
-      EdgeConstraints e5 = { i2, i21, (clothVertices[i2] - clothVertices[i21]).Length() };
-      EdgeConstraints e6 = { i11, i21, (clothVertices[i11] - clothVertices[i21]).Length() };
+      float invMass2 = 1.0f;
+      if (i2 == ANCHOR_IDX_1 || i2 == ANCHOR_IDX_2)
+      {
+        invMass2 = 0;
+      }
 
-      m_clothEdgeConstraints.insert(e1);
-      m_clothEdgeConstraints.insert(e2);
-      m_clothEdgeConstraints.insert(e3);
-      m_clothEdgeConstraints.insert(e4);
-      m_clothEdgeConstraints.insert(e5);
-      m_clothEdgeConstraints.insert(e6);
+      float invMass3 = 1.0f;
+      if (i21 == ANCHOR_IDX_1 || i21 == ANCHOR_IDX_2)
+      {
+        invMass3 = 0;
+      }
+
+      float invMass4 = 1.0f;
+      if (i11 == ANCHOR_IDX_1 || i11 == ANCHOR_IDX_2)
+      {
+        invMass4 = 0;
+      }
+
+      EdgeConstraints e1 = { i1, i2, (clothVertices[i1] - clothVertices[i2]).Length(), invMass1, invMass2 };
+      EdgeConstraints e2 = { i1, i11, (clothVertices[i1] - clothVertices[i11]).Length(), invMass1, invMass4 };
+      EdgeConstraints e3 = { i1, i21, (clothVertices[i1] - clothVertices[i21]).Length(), invMass1, invMass3 };
+
+      EdgeConstraints e4 = { i2, i11, (clothVertices[i2] - clothVertices[i11]).Length(), invMass2, invMass4 };
+      EdgeConstraints e5 = { i2, i21, (clothVertices[i2] - clothVertices[i21]).Length(), invMass2, invMass3 };
+      EdgeConstraints e6 = { i11, i21, (clothVertices[i11] - clothVertices[i21]).Length(), invMass4, invMass3 };
+
+      AddEdgeConstraint(e1);
+      AddEdgeConstraint(e2);
+      AddEdgeConstraint(e3);
+      AddEdgeConstraint(e4);
+      AddEdgeConstraint(e5);
+      AddEdgeConstraint(e6);
     }
+  }
+
+  for(SizeType i = 0; i < m_clothEdgeConstraints.size(); ++i)
+  {
+    m_clothConstraintsIdx.push_back(i);
   }
 
   for (auto& velocity : m_clothVertexVel) {
@@ -237,6 +271,18 @@ void AppRenderer::Initialize() {
   LOG_INF(log_AppRenderer, LOG_LEVEL, "Initialized AppRenderer");
 }
 
+void AppRenderer::AddEdgeConstraint(const EdgeConstraints& e) {
+  for (const auto& edge : m_clothEdgeConstraints)
+  {
+    if (edge == e)
+    {
+      return;
+    }
+  }
+
+  m_clothEdgeConstraints.push_back(e);
+}
+
 void AppRenderer::WindowUpdate(float timeDelta) {
   m_camera.Update(timeDelta);
 
@@ -249,25 +295,50 @@ void AppRenderer::WindowUpdate(float timeDelta) {
   // Projected Positions
   std::memcpy(m_clothProjectedPos.data(), clothVertices.data(), sizeof(Vector4f) * clothVertices.size());
 
-  const Vector4f gravity = {0.0f, -9.8f, 0.0f, 0.0f};
+  const Vector4f gravity = {0.0f, -0.8f, 0.0f, 0.0f};
 
   const U32 numEntries = U32(clothVertices.size());
 
-  for (U32 mainItr = 0; mainItr < 10; ++mainItr) {
-    
-    // External Force Update
-    for (U32 idx = 0; idx < numEntries; ++idx) {
-      m_clothVertexVel[idx] = m_clothVertexVel[idx] + timeDelta * 1.0f * gravity;
+  std::random_device rd;
+  std::mt19937 randomizer(rd());
+
+  const U32 solverIterations = 32;
+
+  const float stiffness = 0.4;
+  const float stiffnessPrime = 1.0f - std::pow(1.0f - stiffness, 1.0f / solverIterations);
+
+  // External Force Update
+  for (U32 idx = 0; idx < numEntries; ++idx) {
+    if (idx == ANCHOR_IDX_1 || idx == ANCHOR_IDX_2)
+    {
+      continue;
     }
 
-    // Damp
+    m_clothVertexVel[idx] = m_clothVertexVel[idx] + timeDelta * 1.0f * gravity;
+  }
 
-    // Projected Positions
-    for (U32 idx = 0; idx < numEntries; ++idx) {
-      m_clothProjectedPos[idx] = m_clothProjectedPos[idx] +m_clothVertexVel[idx] * timeDelta;
+  // Damp
+
+  // Projected Positions
+  for (U32 idx = 0; idx < numEntries; ++idx) {
+    m_clothProjectedPos[idx] = m_clothProjectedPos[idx] + m_clothVertexVel[idx] * timeDelta;
+  }
+
+  for (U32 solverItr = 0; solverItr < solverIterations; ++solverItr) {
+    std::shuffle(m_clothConstraintsIdx.begin(), m_clothConstraintsIdx.end(), randomizer);
+    for (const auto& idx : m_clothConstraintsIdx)
+    {
+      const auto deltaX1 = m_clothEdgeConstraints[idx].ComputeDeltaX1(m_clothProjectedPos, stiffnessPrime);
+      const auto deltaX2 = m_clothEdgeConstraints[idx].ComputeDeltaX2(m_clothProjectedPos, stiffnessPrime);
+
+      m_clothProjectedPos[m_clothEdgeConstraints[idx].m_indexA] += deltaX1;
+      m_clothProjectedPos[m_clothEdgeConstraints[idx].m_indexB] += deltaX2;
     }
+  }
 
-
+  for (U32 idx = 0; idx < numEntries; ++idx) {
+    m_clothVertexVel[idx] = (m_clothProjectedPos[idx] - clothVertices[idx]) / timeDelta;
+    clothVertices[idx] = m_clothProjectedPos[idx];
   }
 
   m_clothUBO.m_view              = m_camera.GetViewMatrix();
