@@ -259,6 +259,8 @@ void AppRenderer::Initialize() {
   pool.BindUniformData(sphereId, UBO_SLOT, sphereUBO, sizeof(SceneUBO));
   pool.BindUniformData(sphereId, LIGHT_SLOT, lightDataBuffer, sizeof(LightData));
 
+  m_renderPass.m_vertexSlot = VERTEX_SLOT;
+  m_renderPass.m_normalSlot = NORMAL_SLOT;
   m_renderPass.m_sceneUBOSlot = UBO_SLOT;
   m_renderPass.m_clothId      = clothId;
   m_renderPass.m_sphereId     = sphereId;
@@ -288,23 +290,19 @@ void AppRenderer::WindowUpdate(float timeDelta) {
 
   auto& clothVertices = m_clothPlane.GetVertices();
 
-  // for (auto& vertex : clothVertices) {
-  //   vertex[1] -= (timeDelta * 1.5f);
-  // }
-
   // Projected Positions
   std::memcpy(m_clothProjectedPos.data(), clothVertices.data(), sizeof(Vector4f) * clothVertices.size());
 
   const Vector4f gravity = {0.0f, -0.8f, 0.0f, 0.0f};
 
-  const U32 numEntries = U32(clothVertices.size());
+  const auto numEntries = U32(clothVertices.size());
 
   std::random_device rd;
   std::mt19937 randomizer(rd());
 
-  const U32 solverIterations = 32;
+  const U32 solverIterations = 128;
 
-  const float stiffness = 0.4;
+  const float stiffness = 0.8f;
   const float stiffnessPrime = 1.0f - std::pow(1.0f - stiffness, 1.0f / solverIterations);
 
   // External Force Update
@@ -360,7 +358,7 @@ void AppRenderer::WindowUpdate(float timeDelta) {
   m_mainPool->BeginUpdates();
   // Update Cloth
   m_mainPool->UpdateUniformData(m_renderPass.m_clothId, m_renderPass.m_sceneUBOSlot, uboDataBuffer, sizeof(SceneUBO));
-  m_mainPool->UpdateVertexData(m_renderPass.m_clothId, m_renderPass.m_sceneUBOSlot, vbStart,
+  m_mainPool->UpdateVertexData(m_renderPass.m_clothId, m_renderPass.m_vertexSlot, vbStart,
                                U32(clothVertices.size()) * sizeof(Vector4f));
 
   // Update Sphere

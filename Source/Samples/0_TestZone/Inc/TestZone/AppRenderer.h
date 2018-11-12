@@ -60,6 +60,8 @@ struct PassData {
   U32 m_clothId;
   U32 m_sphereId;
   U32 m_sceneUBOSlot;
+  U32 m_vertexSlot;
+  U32 m_normalSlot;
 };
 
 class AppRenderer {
@@ -72,7 +74,7 @@ public:
   void Destroy() const;
 
 private:
-  void AddEdgeConstraint(const EdgeConstraints& edge);
+  void AddEdgeConstraint(const EdgeConstraints& e);
 
   Memory::HeapMemoryBuffer m_mainBuffer;
 
@@ -95,7 +97,7 @@ private:
   std::vector<Vector4f> m_clothVertexVel;
   std::vector<Vector4f> m_clothProjectedPos;
   std::vector<EdgeConstraints> m_clothEdgeConstraints;
-  std::vector<int> m_clothConstraintsIdx;
+  std::vector<SizeType> m_clothConstraintsIdx;
 
   Log log_AppRenderer;
 };
