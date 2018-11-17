@@ -56,5 +56,5 @@ namespace Azura
   };
 
 
-  constexpr float EPSILON = 0.00001f;
+  constexpr float EPSILON = 0.000001f;
 }
