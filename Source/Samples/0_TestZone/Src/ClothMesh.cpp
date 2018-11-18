@@ -20,7 +20,7 @@ Vector3f ComputeBendingGradient(const std::vector<Vector4f>& currentPositions, c
   Vector3f sum = Vector3f(0.0f);
   for (U32 idj = 0 ; idj < 4; ++idj)
   {
-    sum += Q(rowI, idj) * currentPositions[indices[idj]].xyz();
+    sum += Q(rowI, idj) * currentPositions[indices[idj]].xyz(); // NOLINT
   }
 
   return sum;
@@ -88,7 +88,7 @@ ClothMesh::ClothMesh(const Vector2f& boundMin, const Vector2f& boundMax, const V
       const bool isEvenX = idx % 2 == 0;
       const bool isEvenY = idy % 2 == 0;
 
-      const U32 triangleIdx = m_triangles.size();
+      const auto triangleIdx = U32(m_triangles.size());
 
       if ((isEvenX && !isEvenY) || (!isEvenX && isEvenY))
       {
@@ -257,23 +257,25 @@ std::array<Vector4f, 4> BendingConstraint::Compute(const std::vector<Vector4f>& 
   float cX = 0.0f;
 
   for (int idx = 0; idx < 4; ++idx) {
-    for (int idy = 0; idy <= idx; ++idy) {
-      cX += m_Q(idx, idy) * Vector3f::DotProduct(currentPositions[indices[idx]].xyz(), currentPositions[indices[idy]].xyz());
+    for (int idy = 0; idy < 4; ++idy) {
+      cX += m_Q(idx, idy) * Vector3f::DotProduct(currentPositions[indices[idx]].xyz(), currentPositions[indices[idy]].xyz()); // NOLINT
     }
   }
+
+  cX = cX / 2.0f;
 
   std::array<Vector3f, 4> partialDeltas = {};
   std::array<Vector4f, 4> finalDeltas = { Vector4f(0.0f), Vector4f(0.0f), Vector4f(0.0f), Vector4f(0.0f) };
   float sum = 0.0f;
 
   for (U32 idx = 0; idx < 4; ++idx) {
-    partialDeltas[idx] = ComputeBendingGradient(currentPositions, m_Q, indices, idx);
-    sum += (invMasses[idx] * Vector3f::DotProduct(partialDeltas[idx], partialDeltas[idx]));
+    partialDeltas[idx] = ComputeBendingGradient(currentPositions, m_Q, indices, idx); // NOLINT
+    sum += (invMasses[idx] * Vector3f::DotProduct(partialDeltas[idx], partialDeltas[idx])); // NOLINT
   }
 
   if (std::abs(sum) > EPSILON) {
     for (U32 idx = 0; idx < 4; ++idx) {
-      finalDeltas[idx] = Vector4f((stiffness * -1.0f * cX * invMasses[idx] * partialDeltas[idx]) / sum, 0.0f);
+      finalDeltas[idx] = Vector4f((stiffness * -1.0f * cX * invMasses[idx] * partialDeltas[idx]) / sum, 0.0f); // NOLINT
     }
   }
 

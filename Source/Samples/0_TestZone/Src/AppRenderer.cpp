@@ -294,6 +294,8 @@ void AppRenderer::Initialize() {
 
 void AppRenderer::WindowUpdate(float timeDelta) {
   m_camera.Update(timeDelta);
+  
+  timeDelta = 0.0166667f;
 
   m_clothUBO.m_view              = m_camera.GetViewMatrix();
   m_clothUBO.m_viewProj          = m_camera.GetViewProjMatrix();
