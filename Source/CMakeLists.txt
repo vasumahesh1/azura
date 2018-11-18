@@ -7,7 +7,7 @@ message(STATUS "Build Platform: ${BUILD_PLATFORM}")
 message(STATUS "Build Arch: ${BUILD_ARCH}")
 
 include("./Windows.Settings.cmake")
-include("./GLFW.Import.cmake")
+# include("./GLFW.Import.cmake")
 include("./Vulkan.Import.cmake")
 include("./Boost.Import.cmake")
 include("./Slang.Import.cmake")

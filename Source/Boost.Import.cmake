@@ -23,9 +23,9 @@ endif()
 #   set(Boost_USE_RELEASE_LIBS ON)
 # endif()
 
+message(STATUS "BOOST_ROOT: ${BOOST_ROOT}")
+
 set(Boost_USE_MULTITHREADED ON)
 set(Boost_USE_STATIC_LIBS ON)
 set(Boost_USE_STATIC_RUNTIME OFF)
 find_package(Boost ${BOOST_VERSION} EXACT REQUIRED COMPONENTS log filesystem system)
-
-message(STATUS "BOOST_ROOT: ${BOOST_ROOT}")

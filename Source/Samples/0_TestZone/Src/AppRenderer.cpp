@@ -223,6 +223,8 @@ void AppRenderer::Initialize() {
 
 void AppRenderer::WindowUpdate(float timeDelta) {
   m_camera.Update(timeDelta);
+  
+  timeDelta = 0.0166667f;
 
   auto& clothVertices = m_clothPlane.GetVertices();
 
@@ -233,20 +235,22 @@ void AppRenderer::WindowUpdate(float timeDelta) {
 
   const auto numEntries = U32(clothVertices.size());
 
-  // std::random_device rd;
-  // std::mt19937 randomizer(rd());
+  std::random_device rd;
+  std::mt19937 randomizer(rd());
 
   const U32 solverIterations = 128;
 
-  const float distanceStiffness = 0.8f;
+  const float distanceStiffness = 0.5f;
   const float distanceStiffnessPrime = 1.0f - std::pow(1.0f - distanceStiffness, 1.0f / solverIterations);
 
-  const float bendingStiffness = 0.5f;
+  const float bendingStiffness = 0.3f;
   const float bendingStiffnessPrime = 1.0f - std::pow(1.0f - bendingStiffness, 1.0f / solverIterations);
+  UNUSED(bendingStiffnessPrime);
 
   const auto& anchoredPts = m_clothPlane.GetAnchorIds();
   const auto& edgeConstraints = m_clothPlane.GetEdgeConstraints();
   const auto& bendConstraints = m_clothPlane.GetBendingConstraints();
+  UNUSED(bendConstraints);
 
   // External Force Update
   for (U32 idx = 0; idx < numEntries; ++idx) {
@@ -265,10 +269,8 @@ void AppRenderer::WindowUpdate(float timeDelta) {
     m_clothProjectedPos[idx] = m_clothProjectedPos[idx] + m_clothVertexVel[idx] * timeDelta;
   }
 
-  const SizeType totalConstraints = m_clothPlane.GetEdgeConstraints().size() + m_clothPlane.GetBendingConstraints().size();
-
   for (U32 solverItr = 0; solverItr < solverIterations; ++solverItr) {
-    // std::shuffle(m_clothConstraintsIdx.begin(), m_clothConstraintsIdx.end(), randomizer);
+    std::shuffle(m_clothConstraintsIdx.begin(), m_clothConstraintsIdx.end(), randomizer);
     for (const auto& idx : m_clothConstraintsIdx)
     {
       if (idx < m_clothPlane.GetEdgeConstraints().size()) {
@@ -284,6 +286,7 @@ void AppRenderer::WindowUpdate(float timeDelta) {
         const auto& bendingConstraint = bendConstraints[bendIdx];
 
         const auto deltas = bendingConstraint.Compute(m_clothProjectedPos, bendingStiffnessPrime);
+        // LOG_ERR(log_AppRenderer, LOG_LEVEL, "Delta1: %f %f %f %f", deltas[0][0], deltas[0][1], deltas[0][2], deltas[0][3]);
         m_clothProjectedPos[bendingConstraint.m_indexX0] += deltas[0];
         m_clothProjectedPos[bendingConstraint.m_indexX1] += deltas[1];
         m_clothProjectedPos[bendingConstraint.m_indexX2] += deltas[2];
