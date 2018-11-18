@@ -43,6 +43,7 @@ public:
   const Containers::Vector<std::reference_wrapper<const D3D12ScopedShader>>& GetShaders() const;
   const Containers::Vector<std::reference_wrapper<D3D12ScopedImage>>& GetInputImages() const;
   const Containers::Vector<std::reference_wrapper<D3D12ScopedBuffer>>& GetInputBuffers() const;
+  const Containers::Vector<std::reference_wrapper<D3D12ScopedBuffer>>& GetOutputBuffers() const;
   const Containers::Vector<std::reference_wrapper<D3D12ScopedImage>>& GetOutputImages() const;
 
   const Containers::Vector<DescriptorTableEntry>& GetRootSignatureTable() const;
@@ -58,7 +59,8 @@ public:
 
   U32 GetInputTargetRootDescriptorTableId() const;
   U32 GetInputBufferRootDescriptorTableId() const;
-  U32 GetOutputRootDescriptorTableId() const;
+  U32 GetOutputTargetsRootDescriptorTableId() const;
+  U32 GetOutputBuffersRootDescriptorTableId() const;
 
 private:
   void CreateBase(
@@ -75,7 +77,8 @@ private:
   U32 m_id;
   U32 m_internalId;
 
-  U32 m_computeOutputTableIdx{ 0 };
+  U32 m_computeOutputTargetTableIdx{ 0 };
+  U32 m_computeOutputBufferTableIdx{ 0 };
   U32 m_computeInputTargetTableIdx{ 0 };
   U32 m_computeInputBufferTableIdx{ 0 };
 
@@ -85,7 +88,8 @@ private:
 
   SmallVector<D3D12ScopedCommandBuffer, DEFAULT_FRAMES_IN_FLIGHT> m_commandBuffers;
 
-  Containers::Vector<std::reference_wrapper<D3D12ScopedImage>> m_computeOutputs;
+  Containers::Vector<std::reference_wrapper<D3D12ScopedImage>> m_computeOutputTargets;
+  Containers::Vector<std::reference_wrapper<D3D12ScopedBuffer>> m_computeOutputBuffers;
 
   Containers::Vector<std::reference_wrapper<D3D12ScopedBuffer>> m_computeInputBuffers;
   Containers::Vector<std::reference_wrapper<D3D12ScopedImage>> m_computeInputTargets;

@@ -48,14 +48,13 @@ public:
 
   void Reset();
 
-  void Transition(ID3D12GraphicsCommandList* commandList,
-                  D3D12_RESOURCE_STATES fromState,
-                  D3D12_RESOURCE_STATES toState) const;
+  void Transition(ID3D12GraphicsCommandList * commandList, D3D12_RESOURCE_STATES toState, const Log & log_D3D12RenderSystem);
 
 private:
   Microsoft::WRL::ComPtr<ID3D12Resource> m_buffer;
   U32 m_size{0};
   U32 m_stride{0};
+  D3D12_RESOURCE_STATES m_currentState{};
 
   UINT8* p_dataBegin{nullptr};
   UINT8* p_dataCur{nullptr};

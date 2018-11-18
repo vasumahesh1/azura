@@ -83,7 +83,8 @@ TEST_F(RendererTest, BasicRenderTest) {
     PipelinePassCreateInfo::Shaders{VERTEX_SHADER_ID, PIXEL_SHADER_ID},  // SHADERS
     PipelinePassCreateInfo::InputTargets{},                                    // INPUT TARGETS
     PipelinePassCreateInfo::InputBuffers{},
-    PipelinePassCreateInfo::Outputs{},                     // OUTPUT TARGETS
+    PipelinePassCreateInfo::OutputTargets{},                     // OUTPUT TARGETS
+    PipelinePassCreateInfo::OutputBuffers{},                     // OUTPUT TARGETS
     PipelinePassCreateInfo::DescriptorSets{UBO_SET},                        // DESCRIPTORS
     ClearData{{0.2f, 0.2f, 0.2f, 1.0f}, 1.0f, 0}
     });
@@ -139,7 +140,8 @@ TEST_F(RendererTest, BasicInstancingTest) {
     PipelinePassCreateInfo::Shaders{VERTEX_SHADER_ID, PIXEL_SHADER_ID},  // SHADERS
     PipelinePassCreateInfo::InputTargets{},                                    // INPUT TARGETS
     PipelinePassCreateInfo::InputBuffers{},
-    PipelinePassCreateInfo::Outputs{},                     // OUTPUT TARGETS
+    PipelinePassCreateInfo::OutputTargets{},                     // OUTPUT TARGETS
+    PipelinePassCreateInfo::OutputBuffers{},                     // OUTPUT TARGETS
     PipelinePassCreateInfo::DescriptorSets{UBO_SET},                        // DESCRIPTORS
     ClearData{{0.2f, 0.2f, 0.2f, 1.0f}, 1.0f, 0}
     });
@@ -199,7 +201,8 @@ TEST_F(RendererTest, BasicTextureTest) {
     PipelinePassCreateInfo::Shaders{VERTEX_SHADER_ID, PIXEL_SHADER_ID},  // SHADERS
     PipelinePassCreateInfo::InputTargets{},                                    // INPUT TARGETS
     PipelinePassCreateInfo::InputBuffers{},
-    PipelinePassCreateInfo::Outputs{},                     // OUTPUT TARGETS
+    PipelinePassCreateInfo::OutputTargets{},                     // OUTPUT TARGETS
+    PipelinePassCreateInfo::OutputBuffers{},                     // OUTPUT TARGETS
     PipelinePassCreateInfo::DescriptorSets{UBO_SET, SAMPLER_SET, BASIC_TEXTURE_SET},                        // DESCRIPTORS
     ClearData{{0.2f, 0.2f, 0.2f, 1.0f}, 1.0f, 0}
     });
@@ -265,7 +268,8 @@ TEST_F(RendererTest, BasicDeferredTest) {
     PipelinePassCreateInfo::Shaders{VERTEX_SHADER_ID, PIXEL_SHADER_ID},  // SHADERS
     PipelinePassCreateInfo::InputTargets{},                                    // INPUT TARGETS
     PipelinePassCreateInfo::InputBuffers{},
-    PipelinePassCreateInfo::Outputs{COLOR_TARGET_1},                     // OUTPUT TARGETS
+    PipelinePassCreateInfo::OutputTargets{COLOR_TARGET_1},                     // OUTPUT TARGETS
+    PipelinePassCreateInfo::OutputBuffers{},                     // OUTPUT TARGETS
     PipelinePassCreateInfo::DescriptorSets{UBO_SET, SAMPLER_SET, BASIC_TEXTURE_SET},                        // DESCRIPTORS
     ClearData{{0.2f, 0.2f, 0.2f, 1.0f}, 1.0f, 0}
     });
@@ -274,7 +278,8 @@ TEST_F(RendererTest, BasicDeferredTest) {
     PipelinePassCreateInfo::Shaders{DEF_VERTEX_SHADER_ID, DEF_PIXEL_SHADER_ID},
     PipelinePassCreateInfo::InputTargets{{COLOR_TARGET_1, ShaderStage::Pixel}},
     PipelinePassCreateInfo::InputBuffers{},
-    PipelinePassCreateInfo::Outputs{PRESENT_TARGET}, // END OF RENDERING
+    PipelinePassCreateInfo::OutputTargets{PRESENT_TARGET}, // END OF RENDERING
+    PipelinePassCreateInfo::OutputBuffers{}, // END OF RENDERING
     PipelinePassCreateInfo::DescriptorSets{SAMPLER_SET},
     ClearData{{0.2f, 0.2f, 0.2f, 1.0f}, 1.0f, 0}
     });

@@ -31,6 +31,7 @@ public:
                     const Containers::Vector<DescriptorSlot>& descriptorSlots,
                     const Containers::Vector<D3D12ScopedShader>& shaders,
                     const Containers::Vector<D3D12ScopedRenderPass>& renderPasses,
+                    const Containers::Vector<D3D12ScopedBuffer>& gpuBuffers,
                     Microsoft::WRL::ComPtr<ID3D12CommandQueue> commandQueue,
                     Memory::Allocator& mainAllocator,
                     Memory::Allocator& initAllocator,
@@ -39,6 +40,7 @@ public:
   DrawableID CreateDrawable(const DrawableCreateInfo& createInfo) override;
 
   void BindVertexData(DrawableID drawableId, SlotID slot, const U8* buffer, U32 size) override;
+  void BindVertexData(DrawableID drawableId, SlotID slot, U32 sourceBuffer, U32 offset, U32 size) override;
   void BindInstanceData(DrawableID drawableId, SlotID slot, const U8* buffer, U32 size) override;
   void BindUniformData(DrawableID drawableId, SlotID slot, const U8* buffer, U32 size) override;
   void SetIndexData(DrawableID drawableId, const U8* buffer, U32 size) override;
@@ -80,6 +82,7 @@ private:
   Containers::Vector<D3D12Drawable> m_drawables;
 
   Containers::Vector<std::reference_wrapper<D3D12ScopedRenderPass>> m_renderPasses;
+  Containers::Vector<std::reference_wrapper<const D3D12ScopedBuffer>> m_gpuBuffers;
 
   Microsoft::WRL::ComPtr<ID3D12CommandQueue> m_graphicsCommandQueue;
 

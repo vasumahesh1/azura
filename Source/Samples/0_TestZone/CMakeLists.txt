@@ -40,6 +40,7 @@ set(
 
     "${PROJECT_SOURCE_DIR}/Shaders/Cloth.ps.slang|PS"
     "${PROJECT_SOURCE_DIR}/Shaders/Cloth.vs.slang|VS"
+    "${PROJECT_SOURCE_DIR}/Shaders/Cloth.cs.slang|CS"
 )
 
 add_executable(TestZone ${SOURCES})

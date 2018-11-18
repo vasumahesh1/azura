@@ -116,7 +116,8 @@ void AppRenderer::Initialize() {
     PipelinePassCreateInfo::Shaders{NOISE_VERTEX_SHADER_ID, NOISE_PIXEL_SHADER_ID},  // SHADERS
     PipelinePassCreateInfo::InputTargets{},                                                // INPUT TARGETS
     PipelinePassCreateInfo::InputBuffers{},
-    PipelinePassCreateInfo::Outputs{NOISE_TARGET_1, NOISE_TARGET_2, NOISE_DEPTH} , // OUTPUT TARGETS
+    PipelinePassCreateInfo::OutputTargets{NOISE_TARGET_1, NOISE_TARGET_2, NOISE_DEPTH} , // OUTPUT TARGETS
+    PipelinePassCreateInfo::OutputBuffers{} , // OUTPUT TARGETS
     PipelinePassCreateInfo::DescriptorSets{UBO_SET, CONTROLS_SET}
     });
 
@@ -124,7 +125,8 @@ void AppRenderer::Initialize() {
     PipelinePassCreateInfo::Shaders{},                                   // SHADERS
     PipelinePassCreateInfo::InputTargets{{NOISE_TARGET_1, ShaderStage::Pixel}, {NOISE_TARGET_2, ShaderStage::Pixel}, {NOISE_DEPTH, ShaderStage::Pixel}},      // INPUT TARGETS
     PipelinePassCreateInfo::InputBuffers{},
-    PipelinePassCreateInfo::Outputs{},                                   // OUTPUT TARGETS
+    PipelinePassCreateInfo::OutputTargets{},                                   // OUTPUT TARGETS
+    PipelinePassCreateInfo::OutputBuffers{},                                   // OUTPUT TARGETS
     PipelinePassCreateInfo::DescriptorSets{UBO_SET, CONTROLS_SET, SAMPLER_SET, TEXTURE_SET},
     {},
     BlendState{true, {BlendFactor::SrcAlpha, BlendFactor::OneMinusSrcAlpha}, {BlendFactor::SrcAlpha, BlendFactor::OneMinusSrcAlpha}}

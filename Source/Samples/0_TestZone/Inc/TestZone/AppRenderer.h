@@ -15,6 +15,8 @@
 #include "TestZone/ClothMesh.h"
 
 namespace Azura {
+constexpr U32 BLOCK_SIZE = 512;
+
 struct SceneUBO {
   Matrix4f m_model;
   Matrix4f m_modelInvTranspose;
@@ -22,6 +24,24 @@ struct SceneUBO {
   Matrix4f m_viewProj;
   Matrix4f m_invViewProj;
   Matrix4f m_invProj;
+};
+
+struct ComputeUBO
+{
+  float m_stretchStiffness;
+  float m_bendStiffness;
+  float m_timeDelta;
+  U32 m_numStretchConstraints;
+  
+  U32 m_numBendConstraints;
+  U32 m_numVertices;
+  float m_pad[2];
+};
+
+struct ComputePassData
+{
+  U32 m_computeUBOSlot;
+  U32 m_passId;
 };
 
 struct PassData {
@@ -55,9 +75,13 @@ private:
 
   SceneUBO m_clothUBO{};
   SceneUBO m_sphereUBO{};
+  ComputeUBO m_computeUBO{};
   DrawablePool* m_mainPool{nullptr};
+  DrawablePool* m_spherePool{nullptr};
+  ComputePool* m_computePool{nullptr};
 
   PassData m_renderPass{};
+  ComputePassData m_computePass{};
 
   ClothMesh m_clothPlane;
   std::vector<Vector4f> m_clothVertexVel;

@@ -107,6 +107,7 @@ public:
   // Drawable Scope Binds
   void BindVertexData(DrawableID drawableId, SlotID slot, const Containers::Vector<U8>& buffer);
   virtual void BindVertexData(DrawableID drawableId, SlotID slot, const U8* buffer, U32 size) = 0;
+  virtual void BindVertexData(DrawableID drawableId, SlotID slot, U32 sourceBuffer, U32 offset, U32 size) = 0;
 
   void BindInstanceData(DrawableID drawableId, SlotID slot, const Containers::Vector<U8>& buffer);
   virtual void BindInstanceData(DrawableID drawableId, SlotID slot, const U8* buffer, U32 size) = 0;
