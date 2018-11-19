@@ -26,6 +26,24 @@ float FromUint(uint value, float maxRange, float minRange) {
 	// return (float(value) * ((maxRange - minRange) / float(0x7fffffff))) + minRange;
 }
 
+// void InterlockedAddFloat<T>(uint addr, float value)
+// {
+//   uint i_val = asuint(value);
+//   uint tmp0 = 0;
+//   uint tmp1;
+
+//   [allow_uav_condition] while(true)
+//   {
+// 		InterlockedCompareExchange(T[addr], tmp0, i_val, tmp1);
+
+// 		if (tmp1 == tmp0)
+// 		  break;
+
+// 		tmp0 = tmp1;
+// 		i_val = asuint(value + asfloat(tmp1));
+//   }
+// }
+
 [numthreads(BLOCK_SIZE_X, 1, 1)]
 void main(
     uint3 groupID : SV_GroupID,
@@ -54,14 +72,15 @@ void main(
 	AllMemoryBarrier();
 
 	if (threadIdx < computeUBOBlock.numStretchConstraints) {
-		for (uint solverItr = 0; solverItr < SOLVER_ITERATIONS; ++solverItr) {
+		// for (uint solverItr = 0; solverItr < SOLVER_ITERATIONS; ++solverItr) {
 			const DistanceConstraint dist = constraintBlock.distanceConstraints[threadIdx];
 
 			if (threadIdx < computeUBOBlock.numVertices) {
 				clothDataBlock.constraintCount[threadIdx] = 0;
-				clothDataBlock.deltaX[threadIdx] = 0;
-				clothDataBlock.deltaY[threadIdx] = 0;
-				clothDataBlock.deltaZ[threadIdx] = 0;
+				// clothDataBlock.deltaX[threadIdx] = 0;
+				// clothDataBlock.deltaY[threadIdx] = 0;
+				// clothDataBlock.deltaZ[threadIdx] = 0;
+				clothDataBlock.delta[threadIdx] = float4(0,0,0,0);
 			}
 
 			AllMemoryBarrier();
@@ -74,34 +93,138 @@ void main(
 			const float3 delta1 = (computeUBOBlock.stretchStiffness * -1.0 * invMassFactor1 * (length(x12) - dist.restLength)) * normalize(x12);
 			const float3 delta2 = (computeUBOBlock.stretchStiffness * invMassFactor2 * (length(x12) - dist.restLength)) * normalize(x12);
 
-			//    bool isSet;
-			// do {
+			// [allow_uav_condition] while (true) {
 			// 	uint swappedValue;
 			// 	InterlockedCompareExchange(clothDataBlock.deltaLock[dist.indexA], 0, 1, swappedValue);
-			// 	isSet = (swappedValue == 0);
+			// 	bool isSet = (swappedValue == 0);
 			// 	if (isSet) {
-			// 		clothDataBlock.delta1[dist.indexA] += float4(delta1, 0.0);
-			// 		clothDataBlock.deltaLock[dist.indexA] = 0;
+			// 		clothDataBlock.delta[dist.indexA] += float4(delta1, 0.0);
+					
+			// 		uint dummy;
+			// 		InterlockedCompareExchange(clothDataBlock.deltaLock[dist.indexA], 1, 0, dummy);
+			// 		break;
 			// 	}
-			// } while (isSet);
+			// }
 
 			// do {
 			// 	uint swappedValue;
 			// 	InterlockedCompareExchange(clothDataBlock.deltaLock[dist.indexB], 0, 1, swappedValue);
-			// 	isSet = (swappedValue == 0);
+			// 	bool isSet = (swappedValue == 0);
 			// 	if (isSet) {
-			// 		clothDataBlock.delta1[dist.indexB] += float4(delta2, 0.0);
+			// 		clothDataBlock.delta[dist.indexB] += float4(delta2, 0.0);
 			// 		clothDataBlock.deltaLock[dist.indexB] = 0;
+			// 		break;
 			// 	}
-			// } while (isSet);
+			// } while (true);
 
-			InterlockedAdd(clothDataBlock.deltaX[dist.indexA], ToInt(delta1.x, MAX_FLOAT_RANGE, MIN_FLOAT_RANGE));
-			InterlockedAdd(clothDataBlock.deltaY[dist.indexA], ToInt(delta1.y, MAX_FLOAT_RANGE, MIN_FLOAT_RANGE));
-			InterlockedAdd(clothDataBlock.deltaZ[dist.indexA], ToInt(delta1.z, MAX_FLOAT_RANGE, MIN_FLOAT_RANGE));
+			// InterlockedAdd(clothDataBlock.deltaX[dist.indexA], ToInt(delta1.x, MAX_FLOAT_RANGE, MIN_FLOAT_RANGE));
+			// InterlockedAdd(clothDataBlock.deltaY[dist.indexA], ToInt(delta1.y, MAX_FLOAT_RANGE, MIN_FLOAT_RANGE));
+			// InterlockedAdd(clothDataBlock.deltaZ[dist.indexA], ToInt(delta1.z, MAX_FLOAT_RANGE, MIN_FLOAT_RANGE));
 
-			InterlockedAdd(clothDataBlock.deltaX[dist.indexB], ToInt(delta2.x, MAX_FLOAT_RANGE, MIN_FLOAT_RANGE));
-			InterlockedAdd(clothDataBlock.deltaY[dist.indexB], ToInt(delta2.y, MAX_FLOAT_RANGE, MIN_FLOAT_RANGE));
-			InterlockedAdd(clothDataBlock.deltaZ[dist.indexB], ToInt(delta2.z, MAX_FLOAT_RANGE, MIN_FLOAT_RANGE));
+			// InterlockedAdd(clothDataBlock.deltaX[dist.indexB], ToInt(delta2.x, MAX_FLOAT_RANGE, MIN_FLOAT_RANGE));
+			// InterlockedAdd(clothDataBlock.deltaY[dist.indexB], ToInt(delta2.y, MAX_FLOAT_RANGE, MIN_FLOAT_RANGE));
+			// InterlockedAdd(clothDataBlock.deltaZ[dist.indexB], ToInt(delta2.z, MAX_FLOAT_RANGE, MIN_FLOAT_RANGE));
+
+			// uint i_val = asuint(delta1.x);
+			// uint tmp0 = 0;
+
+			// [allow_uav_condition] while(true)
+			// {
+			// 	uint tmp1;
+			// 	InterlockedCompareExchange(clothDataBlock.deltaX[dist.indexA], tmp0, i_val, tmp1);
+
+			// 	if (tmp1 == tmp0)
+			// 	  break;
+
+			// 	tmp0 = tmp1;
+			// 	i_val = asuint(delta1.x + asfloat(tmp1));
+			// }
+
+			// i_val = asuint(delta1.y);
+			// tmp0 = 0;
+
+			// [allow_uav_condition] while(true)
+			// {
+			// 	uint tmp1;
+			// 	InterlockedCompareExchange(clothDataBlock.deltaY[dist.indexA], tmp0, i_val, tmp1);
+
+			// 	if (tmp1 == tmp0)
+			// 	  break;
+
+			// 	tmp0 = tmp1;
+			// 	i_val = asuint(delta1.y + asfloat(tmp1));
+			// }
+
+			// i_val = asuint(delta1.z);
+			// tmp0 = 0;
+
+			// [allow_uav_condition] while(true)
+			// {
+			// 	uint tmp1;
+			// 	InterlockedCompareExchange(clothDataBlock.deltaZ[dist.indexA], tmp0, i_val, tmp1);
+
+			// 	if (tmp1 == tmp0)
+			// 	  break;
+
+			// 	tmp0 = tmp1;
+			// 	i_val = asuint(delta1.z + asfloat(tmp1));
+			// }
+
+			// // Index B
+
+			// i_val = asuint(delta2.x);
+			// tmp0 = 0;
+
+			// [allow_uav_condition] while(true)
+			// {
+			// 	uint tmp1;
+			// 	InterlockedCompareExchange(clothDataBlock.deltaX[dist.indexB], tmp0, i_val, tmp1);
+
+			// 	if (tmp1 == tmp0)
+			// 	  break;
+
+			// 	tmp0 = tmp1;
+			// 	i_val = asuint(delta2.x + asfloat(tmp1));
+			// }
+
+			// i_val = asuint(delta2.y);
+			// tmp0 = 0;
+
+			// [allow_uav_condition] while(true)
+			// {
+			// 	uint tmp1;
+			// 	InterlockedCompareExchange(clothDataBlock.deltaY[dist.indexB], tmp0, i_val, tmp1);
+
+			// 	if (tmp1 == tmp0)
+			// 	  break;
+
+			// 	tmp0 = tmp1;
+			// 	i_val = asuint(delta2.y + asfloat(tmp1));
+			// }
+
+			// i_val = asuint(delta2.z);
+			// tmp0 = 0;
+
+			// [allow_uav_condition] while(true)
+			// {
+			// 	uint tmp1;
+			// 	InterlockedCompareExchange(clothDataBlock.deltaZ[dist.indexB], tmp0, i_val, tmp1);
+
+			// 	if (tmp1 == tmp0)
+			// 	  break;
+
+			// 	tmp0 = tmp1;
+			// 	i_val = asuint(delta2.z + asfloat(tmp1));
+			// }
+
+
+			// InterlockedAddFloat<clothDataBlock.deltaX>(dist.indexA, delta1.x);
+			// InterlockedAddFloat<clothDataBlock.deltaY>(dist.indexA, delta1.y);
+			// InterlockedAddFloat<clothDataBlock.deltaZ>(dist.indexA, delta1.z);
+
+			// InterlockedAddFloat<clothDataBlock.deltaX>(dist.indexB, delta2.x);
+			// InterlockedAddFloat<clothDataBlock.deltaY>(dist.indexB, delta2.y);
+			// InterlockedAddFloat<clothDataBlock.deltaZ>(dist.indexB, delta2.z);
 
 			InterlockedAdd(clothDataBlock.constraintCount[dist.indexA], 1);
 		  InterlockedAdd(clothDataBlock.constraintCount[dist.indexB], 1);
@@ -110,10 +233,16 @@ void main(
 
 			if (threadIdx < computeUBOBlock.numVertices && clothDataBlock.constraintCount[threadIdx] > 0)
 			{
-				float x = FromInt(clothDataBlock.deltaX[threadIdx], MAX_FLOAT_RANGE, MIN_FLOAT_RANGE);
-				float y = FromInt(clothDataBlock.deltaY[threadIdx], MAX_FLOAT_RANGE, MIN_FLOAT_RANGE);
-				float z = FromInt(clothDataBlock.deltaZ[threadIdx], MAX_FLOAT_RANGE, MIN_FLOAT_RANGE);
-				float3 averaged = (float3(x, y, z)) / float(clothDataBlock.constraintCount[threadIdx]);
+				// float x = FromInt(clothDataBlock.deltaX[threadIdx], MAX_FLOAT_RANGE, MIN_FLOAT_RANGE);
+				// float y = FromInt(clothDataBlock.deltaY[threadIdx], MAX_FLOAT_RANGE, MIN_FLOAT_RANGE);
+				// float z = FromInt(clothDataBlock.deltaZ[threadIdx], MAX_FLOAT_RANGE, MIN_FLOAT_RANGE);
+
+				// float x = asfloat(clothDataBlock.deltaX[threadIdx]);
+				// float y = asfloat(clothDataBlock.deltaY[threadIdx]);
+				// float z = asfloat(clothDataBlock.deltaZ[threadIdx]);
+
+				// float3 averaged = float3(x, y, z) / float(clothDataBlock.constraintCount[threadIdx]);
+				float3 averaged = (clothDataBlock.delta[threadIdx].xyz) / float(clothDataBlock.constraintCount[threadIdx]);
 
 				clothDataBlock.projectedPos[threadIdx] = clothDataBlock.projectedPos[threadIdx] + float4(averaged, 0.0);
 			}
@@ -150,7 +279,7 @@ void main(
 			// 	clothDataBlock.delta2[dist.indexB] += float4(delta2, 0.0);
 			// }
 		}
-	}
+	// }
 
 	AllMemoryBarrier();
 

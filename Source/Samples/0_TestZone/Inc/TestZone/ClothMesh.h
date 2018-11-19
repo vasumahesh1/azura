@@ -39,7 +39,7 @@ struct DistanceConstraint {
 
   bool operator==(const DistanceConstraint& rhs) const
   {
-    return (m_indexA == rhs.m_indexA) && (m_indexB == rhs.m_indexB);
+    return ((m_indexA == rhs.m_indexA) && (m_indexB == rhs.m_indexB)) || ((m_indexA == rhs.m_indexB) && (m_indexB == rhs.m_indexA));
   }
 
   Vector4f ComputeDeltaX1(const std::vector<Vector4f>& currentPositions, float k) const
