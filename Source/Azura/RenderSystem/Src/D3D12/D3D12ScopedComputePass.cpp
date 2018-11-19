@@ -111,6 +111,10 @@ void D3D12ScopedComputePass::RecordResourceBarriersForInputsStart(ID3D12Graphics
   for (auto& rtv : m_computeInputTargets) {
     rtv.get().Transition(commandList, D3D12_RESOURCE_STATE_NON_PIXEL_SHADER_RESOURCE, log_D3D12RenderSystem);
   }
+  
+  for (auto& inputBuffer : m_computeInputBuffers) {
+    inputBuffer.get().Transition(commandList, D3D12_RESOURCE_STATE_NON_PIXEL_SHADER_RESOURCE, log_D3D12RenderSystem);
+  }
 
   for (auto& dsv : m_computeDepthInputTargets) {
     dsv.get().Transition(commandList, D3D12_RESOURCE_STATE_NON_PIXEL_SHADER_RESOURCE, log_D3D12RenderSystem);
@@ -120,6 +124,10 @@ void D3D12ScopedComputePass::RecordResourceBarriersForInputsStart(ID3D12Graphics
 void D3D12ScopedComputePass::RecordResourceBarriersForInputsEnd(ID3D12GraphicsCommandList* commandList) const {
   for (auto& rtv : m_computeInputTargets) {
     rtv.get().Transition(commandList, D3D12_RESOURCE_STATE_COMMON, log_D3D12RenderSystem);
+  }
+
+  for (auto& inputBuffer : m_computeInputBuffers) {
+    inputBuffer.get().Transition(commandList, D3D12_RESOURCE_STATE_COMMON, log_D3D12RenderSystem);
   }
 
   for (auto& dsv : m_computeDepthInputTargets) {

@@ -15,7 +15,8 @@
 #include "TestZone/ClothMesh.h"
 
 namespace Azura {
-constexpr U32 BLOCK_SIZE = 512;
+constexpr U32 BLOCK_SIZE_X = 512;
+constexpr U32 SOLVER_ITERATIONS = 128;
 
 struct SceneUBO {
   Matrix4f m_model;
@@ -35,7 +36,8 @@ struct ComputeUBO
   
   U32 m_numBendConstraints;
   U32 m_numVertices;
-  float m_pad[2];
+  U32 m_numBlocks;
+  float pad;
 };
 
 struct ComputePassData
