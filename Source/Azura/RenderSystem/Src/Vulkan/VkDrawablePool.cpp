@@ -504,6 +504,14 @@ void VkDrawablePool::BindVertexData(DrawableID drawableId, SlotID slot, const U8
   AppendToMainBuffer(buffer, size);
 }
 
+void VkDrawablePool::BindVertexData(DrawableID drawableId, SlotID slot, U32 sourceBuffer, U32 offset, U32 size) {
+  UNUSED(drawableId);
+  UNUSED(slot);
+  UNUSED(sourceBuffer);
+  UNUSED(offset);
+  UNUSED(size);
+}
+
 void VkDrawablePool::BindInstanceData(DrawableID drawableId, SlotID slot, const U8* buffer, U32 size) {
   assert(m_drawables.GetSize() > drawableId);
 

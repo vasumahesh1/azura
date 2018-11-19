@@ -49,8 +49,8 @@ AzuraDeployFolder(TestZone Textures)
 
 AzuraAddLoggingSupport(TestZone 50)
 
-AzuraAddSlangShaders(TestZone GLSL ${PROJECT_SHADERS})
-AzuraAddSlangShaders(TestZone VULKAN ${PROJECT_SHADERS})
+# AzuraAddSlangShaders(TestZone GLSL ${PROJECT_SHADERS})
+# AzuraAddSlangShaders(TestZone VULKAN ${PROJECT_SHADERS})
 
 AzuraAddSlangShaders(TestZone HLSL ${PROJECT_SHADERS})
 AzuraAddSlangShaders(TestZone DXBC ${PROJECT_SHADERS})

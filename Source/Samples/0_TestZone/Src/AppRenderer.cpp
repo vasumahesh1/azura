@@ -158,16 +158,24 @@ void AppRenderer::Initialize() {
     U32(sizeof(Vector4f)) * U32(m_clothPlane.GetVertices().size()), U32(sizeof(Vector4f))
     });
 
-  const U32 COMPUTE_VERTEX_LOCK = renderPassRequirements.AddBuffer({
-    U32(sizeof(U32)) * U32(m_clothPlane.GetVertices().size()), U32(sizeof(U32))
-    });
+  // const U32 COMPUTE_VERTEX_LOCK = renderPassRequirements.AddBuffer({
+  //   U32(sizeof(U32)) * U32(m_clothPlane.GetVertices().size()), U32(sizeof(U32))
+  //   });
 
   const U32 COMPUTE_VERTEX_CONSTRAINT_COUNT = renderPassRequirements.AddBuffer({
     U32(sizeof(U32)) * U32(m_clothPlane.GetVertices().size()), U32(sizeof(U32))
     });
 
-  const U32 COMPUTE_VERTEX_DELTA1 = renderPassRequirements.AddBuffer({
-    U32(sizeof(Vector4f)) * U32(m_clothPlane.GetVertices().size()), U32(sizeof(Vector4f))
+  const U32 COMPUTE_VERTEX_DELTAX = renderPassRequirements.AddBuffer({
+    U32(sizeof(U32)) * U32(m_clothPlane.GetVertices().size()), U32(sizeof(U32))
+    });
+
+  const U32 COMPUTE_VERTEX_DELTAY = renderPassRequirements.AddBuffer({
+    U32(sizeof(U32)) * U32(m_clothPlane.GetVertices().size()), U32(sizeof(U32))
+    });
+
+  const U32 COMPUTE_VERTEX_DELTAZ = renderPassRequirements.AddBuffer({
+    U32(sizeof(U32)) * U32(m_clothPlane.GetVertices().size()), U32(sizeof(U32))
     });
 
   // const U32 COMPUTE_VERTEX_DELTA2 = renderPassRequirements.AddBuffer({
@@ -179,7 +187,7 @@ void AppRenderer::Initialize() {
     PipelinePassCreateInfo::InputTargets{},
     PipelinePassCreateInfo::InputBuffers{{DISTANCE_CONSTRAINTS_BUFFER, ShaderStage::Compute}},
     PipelinePassCreateInfo::OutputTargets{},
-    PipelinePassCreateInfo::OutputBuffers{COMPUTE_VERTEX_BUFFER, COMPUTE_PROJECTION_BUFFER, COMPUTE_VERTEX_VELOCITY, COMPUTE_VERTEX_LOCK, COMPUTE_VERTEX_CONSTRAINT_COUNT, COMPUTE_VERTEX_DELTA1},
+    PipelinePassCreateInfo::OutputBuffers{COMPUTE_VERTEX_BUFFER, COMPUTE_PROJECTION_BUFFER, COMPUTE_VERTEX_VELOCITY, COMPUTE_VERTEX_CONSTRAINT_COUNT, COMPUTE_VERTEX_DELTAX, COMPUTE_VERTEX_DELTAY, COMPUTE_VERTEX_DELTAZ},
     PipelinePassCreateInfo::DescriptorSets{COMPUTE_UBO_SET},
     ClearData{{0.0f, 0.0f, 0.0f, 1.0f}, 1.0f, 0},
     BlendState{},
@@ -200,6 +208,7 @@ void AppRenderer::Initialize() {
   m_clothProjectedPos.resize(m_clothPlane.GetVertices().size());
 
   std::vector<Vector4f> zeroBufferData = std::vector<Vector4f>(m_clothPlane.GetVertexCount(), Vector4f(0.0f));
+  std::vector<Vector4i> zeroIntVecData = std::vector<Vector4i>(m_clothPlane.GetVertexCount(), Vector4i(0));
   std::vector<U32> zeroIntBuffer = std::vector<U32>(m_clothPlane.GetVertexCount(), 0);
 
   const SizeType totalConstraints = m_clothPlane.GetEdgeConstraints().size() + m_clothPlane.GetBendingConstraints().size();
@@ -233,11 +242,13 @@ void AppRenderer::Initialize() {
   m_renderer->BindBufferTarget(COMPUTE_VERTEX_VELOCITY, velocityStart);
   
   const auto bufferLock = reinterpret_cast<const U8*>(zeroIntBuffer.data()); // NOLINT
-  m_renderer->BindBufferTarget(COMPUTE_VERTEX_LOCK, bufferLock);
+  // m_renderer->BindBufferTarget(COMPUTE_VERTEX_LOCK, bufferLock);
   m_renderer->BindBufferTarget(COMPUTE_VERTEX_CONSTRAINT_COUNT, bufferLock);
   
-  const auto deltaStart = reinterpret_cast<const U8*>(zeroBufferData.data()); // NOLINT
-  m_renderer->BindBufferTarget(COMPUTE_VERTEX_DELTA1, deltaStart);
+  const auto deltaStart = reinterpret_cast<const U8*>(zeroIntBuffer.data()); // NOLINT
+  m_renderer->BindBufferTarget(COMPUTE_VERTEX_DELTAX, deltaStart);
+  m_renderer->BindBufferTarget(COMPUTE_VERTEX_DELTAY, deltaStart);
+  m_renderer->BindBufferTarget(COMPUTE_VERTEX_DELTAZ, deltaStart);
   // m_renderer->BindBufferTarget(COMPUTE_VERTEX_DELTA2, deltaStart);
 
   const U32 numBlocks = (U32(m_clothPlane.GetEdgeConstraints().size()) + BLOCK_SIZE_X - 1) / BLOCK_SIZE_X;
@@ -250,10 +261,10 @@ void AppRenderer::Initialize() {
   ComputePool& computePool = m_renderer->CreateComputePool(computePoolInfo);
   m_computePool            = &computePool;
 
-  const float distanceStiffness = 0.8f;
+  const float distanceStiffness = 0.5f;
   const float distanceStiffnessPrime = 1.0f - std::pow(1.0f - distanceStiffness, 1.0f / SOLVER_ITERATIONS);
 
-  const float bendingStiffness = 0.5f;
+  const float bendingStiffness = 0.3f;
   const float bendingStiffnessPrime = 1.0f - std::pow(1.0f - bendingStiffness, 1.0f / SOLVER_ITERATIONS);
 
   m_computeUBO = {};
