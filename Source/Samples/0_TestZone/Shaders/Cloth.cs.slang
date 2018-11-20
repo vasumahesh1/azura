@@ -69,21 +69,23 @@ void main(
 		}
 	}
 
-	AllMemoryBarrier();
+	AllMemoryBarrierWithGroupSync();
 
 	if (threadIdx < computeUBOBlock.numStretchConstraints) {
 		// for (uint solverItr = 0; solverItr < SOLVER_ITERATIONS; ++solverItr) {
-			const DistanceConstraint dist = constraintBlock.distanceConstraints[threadIdx];
+			DistanceConstraint dist = constraintBlock.distanceConstraints[threadIdx];
 
 			if (threadIdx < computeUBOBlock.numVertices) {
 				clothDataBlock.constraintCount[threadIdx] = 0;
-				// clothDataBlock.deltaX[threadIdx] = 0;
-				// clothDataBlock.deltaY[threadIdx] = 0;
-				// clothDataBlock.deltaZ[threadIdx] = 0;
 				clothDataBlock.delta[threadIdx] = float4(0,0,0,0);
 			}
 
-			AllMemoryBarrier();
+			AllMemoryBarrierWithGroupSync();
+
+			InterlockedAdd(clothDataBlock.constraintCount[dist.indexA], 1);
+			InterlockedAdd(clothDataBlock.constraintCount[dist.indexB], 1);
+
+			AllMemoryBarrierWithGroupSync();
 
 			const float invMassSum = (dist.invMass1 + dist.invMass2);
 			const float invMassFactor1 = dist.invMass1 / invMassSum;
@@ -226,10 +228,7 @@ void main(
 			// InterlockedAddFloat<clothDataBlock.deltaY>(dist.indexB, delta2.y);
 			// InterlockedAddFloat<clothDataBlock.deltaZ>(dist.indexB, delta2.z);
 
-			InterlockedAdd(clothDataBlock.constraintCount[dist.indexA], 1);
-		  InterlockedAdd(clothDataBlock.constraintCount[dist.indexB], 1);
-
-			AllMemoryBarrier();
+			AllMemoryBarrierWithGroupSync();
 
 			if (threadIdx < computeUBOBlock.numVertices && clothDataBlock.constraintCount[threadIdx] > 0)
 			{
@@ -247,7 +246,7 @@ void main(
 				clothDataBlock.projectedPos[threadIdx] = clothDataBlock.projectedPos[threadIdx] + float4(averaged, 0.0);
 			}
 
-			AllMemoryBarrier();
+			AllMemoryBarrierWithGroupSync();
 
 			// clothDataBlock.deltas[dist.indexA] += float4(delta1, 0.0);
 			// clothDataBlock.deltas[dist.indexB] += float4(delta2, 0.0);
@@ -278,10 +277,10 @@ void main(
 			// else {
 			// 	clothDataBlock.delta2[dist.indexB] += float4(delta2, 0.0);
 			// }
-		}
-	// }
+		// }
+	}
 
-	AllMemoryBarrier();
+	AllMemoryBarrierWithGroupSync();
 
 	if (threadIdx < computeUBOBlock.numVertices) {
 		// Write Projected Points to Buffer
