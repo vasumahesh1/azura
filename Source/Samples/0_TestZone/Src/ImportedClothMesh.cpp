@@ -1,4 +1,4 @@
-#include "TestZone/ClothMesh.h"
+#include "TestZone/ImportedClothMesh.h"
 
 namespace Azura {
 
@@ -17,11 +17,11 @@ float ComputeBendingC(const std::vector<Vector4f>& vertices, U32 dest1, U32 dest
 
 } // namespace
 
-ClothMesh::ClothMesh(const Vector2f& boundMin, const Vector2f& boundMax)
-  : ClothMesh(boundMin, boundMax, Vector2u(1, 1)) {
+ImportedClothMesh::ImportedClothMesh(const Vector2f& boundMin, const Vector2f& boundMax)
+  : ImportedClothMesh(boundMin, boundMax, Vector2u(1, 1)) {
 }
 
-ClothMesh::ClothMesh(const Vector2f& boundMin, const Vector2f& boundMax, const Vector2u& subDivisions) {
+ImportedClothMesh::ImportedClothMesh(const Vector2f& boundMin, const Vector2f& boundMax, const Vector2u& subDivisions) {
   const float stepX = float(boundMax[0] - boundMin[0]) / subDivisions[0];
   const float stepY = float(boundMax[1] - boundMin[1]) / subDivisions[1];
 
@@ -74,69 +74,34 @@ ClothMesh::ClothMesh(const Vector2f& boundMin, const Vector2f& boundMax, const V
         invMass4 = 0;
       }
 
-      const bool isEvenX = idx % 2 == 0;
-      const bool isEvenY = idy % 2 == 0;
-
       const auto triangleIdx = U32(m_triangles.size());
 
-      if ((isEvenX && !isEvenY) || (!isEvenX && isEvenY))
-      {
-        m_triangles.emplace_back(Vector3u(i1, i2, i21));
-        m_triangles.emplace_back(Vector3u(i1, i21, i11));
+      m_triangles.emplace_back(Vector3u(i1, i2, i21));
+      m_triangles.emplace_back(Vector3u(i1, i21, i11));
 
-        AddEdgeTriangleNeighbor(Edge{ i1, i2 }, triangleIdx);
-        AddEdgeTriangleNeighbor(Edge{ i2, i21 }, triangleIdx);
-        AddEdgeTriangleNeighbor(Edge{ i21, i1 }, triangleIdx);
+      AddEdgeTriangleNeighbor(Edge{ i1, i2 }, triangleIdx);
+      AddEdgeTriangleNeighbor(Edge{ i2, i21 }, triangleIdx);
+      AddEdgeTriangleNeighbor(Edge{ i21, i1 }, triangleIdx);
 
-        AddEdgeTriangleNeighbor(Edge{ i1, i21 }, triangleIdx + 1);
-        AddEdgeTriangleNeighbor(Edge{ i21, i11 }, triangleIdx + 1);
-        AddEdgeTriangleNeighbor(Edge{ i11, i1 }, triangleIdx + 1);
+      AddEdgeTriangleNeighbor(Edge{ i1, i21 }, triangleIdx + 1);
+      AddEdgeTriangleNeighbor(Edge{ i21, i11 }, triangleIdx + 1);
+      AddEdgeTriangleNeighbor(Edge{ i11, i1 }, triangleIdx + 1);
 
-        // Distance Constraints
-        DistanceConstraint e1 = { i1, i2, (m_vertices[i1] - m_vertices[i2]).Length(), invMass1, invMass2 };
-        DistanceConstraint e2 = { i2, i21, (m_vertices[i2] - m_vertices[i21]).Length(), invMass2, invMass3 };
-        DistanceConstraint e3 = { i21, i1, (m_vertices[i21] - m_vertices[i1]).Length(), invMass3, invMass1 };
+      // Distance Constraints
+      DistanceConstraint e1 = { i1, i2, (m_vertices[i1] - m_vertices[i2]).Length(), invMass1, invMass2 };
+      DistanceConstraint e2 = { i2, i21, (m_vertices[i2] - m_vertices[i21]).Length(), invMass2, invMass3 };
+      DistanceConstraint e3 = { i21, i1, (m_vertices[i21] - m_vertices[i1]).Length(), invMass3, invMass1 };
 
-        DistanceConstraint e4 = { i1, i21, (m_vertices[i1] - m_vertices[i21]).Length(), invMass1, invMass3 };
-        DistanceConstraint e5 = { i21, i11, (m_vertices[i21] - m_vertices[i11]).Length(), invMass3, invMass4 };
-        DistanceConstraint e6 = { i11, i1, (m_vertices[i11] - m_vertices[i1]).Length(), invMass4, invMass1 };
+      DistanceConstraint e4 = { i1, i21, (m_vertices[i1] - m_vertices[i21]).Length(), invMass1, invMass3 };
+      DistanceConstraint e5 = { i21, i11, (m_vertices[i21] - m_vertices[i11]).Length(), invMass3, invMass4 };
+      DistanceConstraint e6 = { i11, i1, (m_vertices[i11] - m_vertices[i1]).Length(), invMass4, invMass1 };
 
-        AddEdgeConstraint(e1);
-        AddEdgeConstraint(e2);
-        AddEdgeConstraint(e3);
-        AddEdgeConstraint(e4);
-        AddEdgeConstraint(e5);
-        AddEdgeConstraint(e6);
-      }
-      else
-      {
-        m_triangles.emplace_back(Vector3u(i1, i2, i11));
-        m_triangles.emplace_back(Vector3u(i2, i21, i11));
-
-        AddEdgeTriangleNeighbor(Edge{ i1, i2 }, triangleIdx);
-        AddEdgeTriangleNeighbor(Edge{ i2, i11 }, triangleIdx);
-        AddEdgeTriangleNeighbor(Edge{ i11, i1 }, triangleIdx);
-
-        AddEdgeTriangleNeighbor(Edge{ i2, i21 }, triangleIdx + 1);
-        AddEdgeTriangleNeighbor(Edge{ i21, i11 }, triangleIdx + 1);
-        AddEdgeTriangleNeighbor(Edge{ i11, i2 }, triangleIdx + 1);
-
-        // Distance Constraints
-        DistanceConstraint e1 = { i1, i2, (m_vertices[i1] - m_vertices[i2]).Length(), invMass1, invMass2 };
-        DistanceConstraint e2 = { i2, i11, (m_vertices[i2] - m_vertices[i11]).Length(), invMass2, invMass4 };
-        DistanceConstraint e3 = { i11, i1, (m_vertices[i11] - m_vertices[i1]).Length(), invMass4, invMass1 };
-
-        DistanceConstraint e4 = { i2, i21, (m_vertices[i2] - m_vertices[i21]).Length(), invMass2, invMass3 };
-        DistanceConstraint e5 = { i21, i11, (m_vertices[i21] - m_vertices[i11]).Length(), invMass3, invMass4 };
-        DistanceConstraint e6 = { i11, i2, (m_vertices[i11] - m_vertices[i2]).Length(), invMass4, invMass2 };
-
-        AddEdgeConstraint(e1);
-        AddEdgeConstraint(e2);
-        AddEdgeConstraint(e3);
-        AddEdgeConstraint(e4);
-        AddEdgeConstraint(e5);
-        AddEdgeConstraint(e6);
-      }
+      AddEdgeConstraint(e1);
+      AddEdgeConstraint(e2);
+      AddEdgeConstraint(e3);
+      AddEdgeConstraint(e4);
+      AddEdgeConstraint(e5);
+      AddEdgeConstraint(e6);
     }
   }
 
@@ -239,86 +204,86 @@ ClothMesh::ClothMesh(const Vector2f& boundMin, const Vector2f& boundMax, const V
   }
 }
 
-U32 ClothMesh::VertexDataSize() const {
+U32 ImportedClothMesh::VertexDataSize() const {
   return U32(m_vertices.size() * GetFormatSize(VERTEX_FORMAT));
 }
 
-U32 ClothMesh::IndexDataSize() const {
+U32 ImportedClothMesh::IndexDataSize() const {
   return U32(m_triangles.size() * GetFormatSize(INDEX_FORMAT) * 3);
 }
 
-U32 ClothMesh::NormalDataSize() const {
+U32 ImportedClothMesh::NormalDataSize() const {
   return U32(m_normals.size() * GetFormatSize(NORMAL_FORMAT));
 }
 
-const U8* ClothMesh::VertexData() const {
+const U8* ImportedClothMesh::VertexData() const {
   // NOLINTNEXTLINE(cppcoreguidelines-pro-type-reinterpret-cast)
   return reinterpret_cast<const U8*>(m_vertices.data());
 }
 
-const U8* ClothMesh::IndexData() const {
+const U8* ImportedClothMesh::IndexData() const {
   // NOLINTNEXTLINE(cppcoreguidelines-pro-type-reinterpret-cast)
   return reinterpret_cast<const U8*>(m_triangles.data());
 }
 
-const U8* ClothMesh::NormalData() const {
+const U8* ImportedClothMesh::NormalData() const {
   // NOLINTNEXTLINE(cppcoreguidelines-pro-type-reinterpret-cast)
   return reinterpret_cast<const U8*>(m_normals.data());
 }
 
-RawStorageFormat ClothMesh::GetVertexFormat() const {
+RawStorageFormat ImportedClothMesh::GetVertexFormat() const {
   return VERTEX_FORMAT;
 }
 
-RawStorageFormat ClothMesh::GetIndexFormat() const {
+RawStorageFormat ImportedClothMesh::GetIndexFormat() const {
   return INDEX_FORMAT;
 }
 
-RawStorageFormat ClothMesh::GetNormalFormat() const {
+RawStorageFormat ImportedClothMesh::GetNormalFormat() const {
   return NORMAL_FORMAT;
 }
 
-U32 ClothMesh::GetVertexCount() const {
+U32 ImportedClothMesh::GetVertexCount() const {
   return U32(m_vertices.size());
 }
 
-U32 ClothMesh::GetIndexCount() const {
+U32 ImportedClothMesh::GetIndexCount() const {
   return U32(m_triangles.size() * 3);
 }
 
-U32 ClothMesh::TotalDataSize() const {
+U32 ImportedClothMesh::TotalDataSize() const {
   return VertexDataSize() + IndexDataSize() + NormalDataSize();
 }
 
-const std::vector<Vector4f>& ClothMesh::GetVertices() const {
+const std::vector<Vector4f>& ImportedClothMesh::GetVertices() const {
   return m_vertices;
 }
 
-const std::vector<DistanceConstraint>& ClothMesh::GetEdgeConstraints() const {
+const std::vector<DistanceConstraint>& ImportedClothMesh::GetEdgeConstraints() const {
   return m_distanceConstraints;
 }
 
-const std::vector<BendingConstraint>& ClothMesh::GetBendingConstraints() const {
+const std::vector<BendingConstraint>& ImportedClothMesh::GetBendingConstraints() const {
   return m_bendingConstraints;
 }
 
-const std::vector<U32>& ClothMesh::GetAnchorIds() const {
+const std::vector<U32>& ImportedClothMesh::GetAnchorIds() const {
   return m_anchorIdx;
 }
 
-std::vector<Vector4f>& ClothMesh::GetVertices() {
+std::vector<Vector4f>& ImportedClothMesh::GetVertices() {
   return m_vertices;
 }
 
-const std::vector<Vector3f>& ClothMesh::GetNormals() const {
+const std::vector<Vector3f>& ImportedClothMesh::GetNormals() const {
   return m_normals;
 }
 
-std::vector<Vector3f>& ClothMesh::GetNormals() {
+std::vector<Vector3f>& ImportedClothMesh::GetNormals() {
   return m_normals;
 }
 
-void ClothMesh::AddEdgeTriangleNeighbor(const Edge& edge, const U32 triangleIdx) {
+void ImportedClothMesh::AddEdgeTriangleNeighbor(const Edge& edge, const U32 triangleIdx) {
   const auto itr = m_edgeTriangleMap.find(edge);
   
   if (itr == m_edgeTriangleMap.end())
@@ -330,7 +295,7 @@ void ClothMesh::AddEdgeTriangleNeighbor(const Edge& edge, const U32 triangleIdx)
   m_edgeTriangleMap[edge].push_back(triangleIdx);
 }
 
-void ClothMesh::AddEdgeConstraint(const DistanceConstraint& e) {
+void ImportedClothMesh::AddEdgeConstraint(const DistanceConstraint& e) {
   for (const auto& edge : m_distanceConstraints)
   {
     if (edge == e)

@@ -112,7 +112,7 @@ void main(
 
 			// Projected Pos of that Vertex
 			clothDataBlock.projectedPos[threadIdx] = clothDataBlock.vertices[threadIdx] + updatedVelocity * timeDelta;
-			clothDataBlock.velocities[threadIdx] = updatedVelocity;
+			clothDataBlock.velocities[threadIdx] = 0.95 * updatedVelocity;
 		}
 	}
 
@@ -183,7 +183,6 @@ void main(
 					AtomicAddDeltaZ(bend.indices[idx], delta.z);
 				}
 			}
-			
 		}
 
 		AllMemoryBarrierWithGroupSync();

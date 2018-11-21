@@ -5,9 +5,12 @@ project(TestZone)
 set(
   SOURCES
     "Inc/TestZone/AppRenderer.h"
+    "Inc/TestZone/ClothCommon.h"
     "Inc/TestZone/ClothMesh.h"
+    "Inc/TestZone/ImportedClothMesh.h"
     "Src/AppRenderer.cpp"
     "Src/ClothMesh.cpp"
+    "Src/ImportedClothMesh.cpp"
     "Src/main.cpp"
 )
 

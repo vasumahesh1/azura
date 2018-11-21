@@ -7,10 +7,10 @@
 
 namespace Azura {
 
-class ClothMesh final : public Math::Geometry {
+class ImportedClothMesh final : public Math::Geometry {
 public:
-  ClothMesh(const Vector2f& boundMin , const Vector2f& boundMax);
-  ClothMesh(const Vector2f& boundMin , const Vector2f& boundMax, const Vector2u& subDivisions);
+  ImportedClothMesh(const Vector2f& boundMin , const Vector2f& boundMax);
+  ImportedClothMesh(const Vector2f& boundMin , const Vector2f& boundMax, const Vector2u& subDivisions);
 
   U32 VertexDataSize() const override;
   U32 IndexDataSize() const override;

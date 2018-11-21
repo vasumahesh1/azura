@@ -13,6 +13,7 @@
 #include "Math/Plane.h"
 #include <random>
 #include "TestZone/ClothMesh.h"
+#include "TestZone/ImportedClothMesh.h"
 
 namespace Azura {
 constexpr U32 BLOCK_SIZE_X = 512;
