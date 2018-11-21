@@ -145,6 +145,10 @@ void AppRenderer::Initialize() {
   const U32 DISTANCE_CONSTRAINTS_BUFFER = renderPassRequirements.AddBuffer({
     U32(sizeof(DistanceConstraint)) * U32(m_clothPlane.GetEdgeConstraints().size()), U32(sizeof(DistanceConstraint))
     });
+  
+  const U32 BEND_CONSTRAINTS_BUFFER = renderPassRequirements.AddBuffer({
+    U32(sizeof(BendingConstraint)) * U32(m_clothPlane.GetBendingConstraints().size()), U32(sizeof(BendingConstraint))
+    });
 
   const U32 COMPUTE_VERTEX_BUFFER = renderPassRequirements.AddBuffer({
     U32(sizeof(Vector4f)) * U32(m_clothPlane.GetVertices().size()), U32(sizeof(Vector4f))
@@ -185,7 +189,7 @@ void AppRenderer::Initialize() {
   m_computePass.m_passId = renderPassRequirements.AddPass({
     PipelinePassCreateInfo::Shaders{COMPUTE_SHADER_ID},
     PipelinePassCreateInfo::InputTargets{},
-    PipelinePassCreateInfo::InputBuffers{{DISTANCE_CONSTRAINTS_BUFFER, ShaderStage::Compute}},
+    PipelinePassCreateInfo::InputBuffers{{DISTANCE_CONSTRAINTS_BUFFER, ShaderStage::Compute}, {BEND_CONSTRAINTS_BUFFER, ShaderStage::Compute}},
     PipelinePassCreateInfo::OutputTargets{},
     // PipelinePassCreateInfo::OutputBuffers{COMPUTE_VERTEX_BUFFER, COMPUTE_PROJECTION_BUFFER, COMPUTE_VERTEX_VELOCITY, COMPUTE_VERTEX_CONSTRAINT_COUNT, COMPUTE_VERTEX_LOCK, COMPUTE_VERTEX_DELTA},
     PipelinePassCreateInfo::OutputBuffers{COMPUTE_VERTEX_BUFFER, COMPUTE_PROJECTION_BUFFER, COMPUTE_VERTEX_VELOCITY, COMPUTE_VERTEX_CONSTRAINT_COUNT, COMPUTE_VERTEX_DELTAX, COMPUTE_VERTEX_DELTAY, COMPUTE_VERTEX_DELTAZ},
@@ -238,7 +242,9 @@ void AppRenderer::Initialize() {
   // m_renderer->BindBufferTarget(COMPUTE_VERTEX_DELTA, projectionStart);
   
   const auto distanceConstraintStart = reinterpret_cast<const U8*>(m_clothPlane.GetEdgeConstraints().data()); // NOLINT
+  const auto bendConstraintStart = reinterpret_cast<const U8*>(m_clothPlane.GetBendingConstraints().data()); // NOLINT
   m_renderer->BindBufferTarget(DISTANCE_CONSTRAINTS_BUFFER, distanceConstraintStart);
+  m_renderer->BindBufferTarget(BEND_CONSTRAINTS_BUFFER, bendConstraintStart);
 
   const auto velocityStart = reinterpret_cast<const U8*>(m_clothVertexVel.data()); // NOLINT
   m_renderer->BindBufferTarget(COMPUTE_VERTEX_VELOCITY, velocityStart);
@@ -252,7 +258,8 @@ void AppRenderer::Initialize() {
   m_renderer->BindBufferTarget(COMPUTE_VERTEX_DELTAY, deltaStart);
   m_renderer->BindBufferTarget(COMPUTE_VERTEX_DELTAZ, deltaStart);
 
-  const U32 numBlocks = (U32(m_clothPlane.GetEdgeConstraints().size()) + BLOCK_SIZE_X - 1) / BLOCK_SIZE_X;
+  const auto totalThreads = U32(m_clothPlane.GetEdgeConstraints().size() + m_clothPlane.GetBendingConstraints().size());
+  const U32 numBlocks = (totalThreads + BLOCK_SIZE_X - 1) / BLOCK_SIZE_X;
 
   ComputePoolCreateInfo computePoolInfo = {allocatorTemporary};
   computePoolInfo.m_byteSize            = 0xF00000;
@@ -262,7 +269,7 @@ void AppRenderer::Initialize() {
   ComputePool& computePool = m_renderer->CreateComputePool(computePoolInfo);
   m_computePool            = &computePool;
 
-  const float distanceStiffness = 1.0f;
+  const float distanceStiffness = 0.5f;
   const float distanceStiffnessPrime = 1.0f - std::pow(1.0f - distanceStiffness, 1.0f / SOLVER_ITERATIONS);
 
   const float bendingStiffness = 0.3f;

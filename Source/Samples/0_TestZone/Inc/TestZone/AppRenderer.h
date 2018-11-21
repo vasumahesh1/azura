@@ -16,7 +16,7 @@
 
 namespace Azura {
 constexpr U32 BLOCK_SIZE_X = 512;
-constexpr U32 SOLVER_ITERATIONS = 128;
+constexpr U32 SOLVER_ITERATIONS = 32;
 
 struct SceneUBO {
   Matrix4f m_model;

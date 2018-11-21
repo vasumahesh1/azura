@@ -1,5 +1,7 @@
 static const uint BLOCK_SIZE_X = 512;
-static const uint SOLVER_ITERATIONS = 128;
+static const uint SOLVER_ITERATIONS = 32;
+
+static const float EPSILON = 0.00001;
 
 struct ComputeUBO {
 	float stretchStiffness;
@@ -21,8 +23,17 @@ struct DistanceConstraint {
   float invMass2;
 };
 
+struct BendConstraint {
+  uint indices[4];
+
+  float invMasses[4];
+
+  float4x4 Q;
+};
+
 struct Constraints {
     StructuredBuffer<DistanceConstraint> distanceConstraints;
+    StructuredBuffer<BendConstraint> bendConstraints;
 };
 
 struct VertexBlock {
