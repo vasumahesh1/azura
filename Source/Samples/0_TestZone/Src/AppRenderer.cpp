@@ -29,8 +29,8 @@ namespace {
     Vector4f m_lightPos;
   };
 
-  constexpr U32 CLOTH_DIV_X = 10;
-  constexpr U32 CLOTH_DIV_Y = 10;
+  constexpr U32 CLOTH_DIV_X = 30;
+  constexpr U32 CLOTH_DIV_Y = 30;
 } // namespace
 
 AppRenderer::AppRenderer()
@@ -269,17 +269,14 @@ void AppRenderer::Initialize() {
   ComputePool& computePool = m_renderer->CreateComputePool(computePoolInfo);
   m_computePool            = &computePool;
 
-  const float distanceStiffness = 0.5f;
-  const float distanceStiffnessPrime = 1.0f - std::pow(1.0f - distanceStiffness, 1.0f / SOLVER_ITERATIONS);
-
-  const float bendingStiffness = 0.3f;
-  const float bendingStiffnessPrime = 1.0f - std::pow(1.0f - bendingStiffness, 1.0f / SOLVER_ITERATIONS);
+  const float distanceStiffnessPrime = 1.0f - std::pow(1.0f - DISTANCE_STIFFNESS, 1.0f / SOLVER_ITERATIONS);
+  const float bendingStiffnessPrime = 1.0f - std::pow(1.0f - BENDING_STIFFNESS, 1.0f / SOLVER_ITERATIONS);
 
   m_computeUBO = {};
   m_computeUBO.m_numVertices = m_clothPlane.GetVertexCount();
   m_computeUBO.m_stretchStiffness = distanceStiffnessPrime;
   m_computeUBO.m_bendStiffness = bendingStiffnessPrime;
-  m_computeUBO.m_timeDelta = 0.016667f;
+  m_computeUBO.m_timeDelta = 0.0f;
   m_computeUBO.m_numBlocks = numBlocks;
   m_computeUBO.m_numStretchConstraints = U32(m_clothPlane.GetEdgeConstraints().size());
   m_computeUBO.m_numBendConstraints = U32(m_clothPlane.GetBendingConstraints().size());
@@ -367,9 +364,14 @@ void AppRenderer::Initialize() {
 }
 
 void AppRenderer::WindowUpdate(float timeDelta) {
+  if (timeDelta < EPSILON)
+  {
+    return;
+  }
+
   m_camera.Update(timeDelta);
   
-  timeDelta = 0.0166667f;
+  // timeDelta = 0.0166667f;
 
   m_clothUBO.m_view              = m_camera.GetViewMatrix();
   m_clothUBO.m_viewProj          = m_camera.GetViewProjMatrix();

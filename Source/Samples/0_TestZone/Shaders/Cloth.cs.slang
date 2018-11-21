@@ -1,6 +1,6 @@
 import ClothComputeCommon;
 
-static const float4 GRAVITY = {0, -0.5, 0, 0};
+static const float4 GRAVITY = {0, -9.8, 0, 0};
 
 static const float MIN_FLOAT_RANGE = 0.0;
 static const float MAX_FLOAT_RANGE = 100.0;
@@ -106,13 +106,12 @@ void main(
 	if (threadIdx < computeUBOBlock.numVertices) {
 		clothDataBlock.projectedPos[threadIdx] = clothDataBlock.vertices[threadIdx];
 
-		if (threadIdx != 0 && threadIdx != 110) // HARD CODED ANCHOR
+		if (threadIdx != 0 && threadIdx != 930) // HARD CODED ANCHOR
 		{
-			const float4 updatedVelocity = clothDataBlock.velocities[threadIdx] + timeDelta * 1.0 * GRAVITY;
+			const float4 updatedVelocity = 0.999 * (clothDataBlock.velocities[threadIdx] + timeDelta * 1.0 * GRAVITY);
 
 			// Projected Pos of that Vertex
 			clothDataBlock.projectedPos[threadIdx] = clothDataBlock.vertices[threadIdx] + updatedVelocity * timeDelta;
-			clothDataBlock.velocities[threadIdx] = 0.95 * updatedVelocity;
 		}
 	}
 
@@ -121,14 +120,14 @@ void main(
 	for (uint solverItr = 0; solverItr < SOLVER_ITERATIONS; ++solverItr) {
 		if (threadIdx < computeUBOBlock.numVertices) {
 			clothDataBlock.constraintCount[threadIdx] = 0;
-			// clothDataBlock.delta[threadIdx] = float4(0,0,0,0);
+
 			clothDataBlock.deltaX[threadIdx] = 0;
 			clothDataBlock.deltaY[threadIdx] = 0;
 			clothDataBlock.deltaZ[threadIdx] = 0;
 		}
 
 		AllMemoryBarrierWithGroupSync();
-		
+
 		if (threadIdx < computeUBOBlock.numStretchConstraints) {
 			DistanceConstraint dist = constraintBlock.distanceConstraints[threadIdx];
 
@@ -185,59 +184,42 @@ void main(
 			}
 		}
 
-		AllMemoryBarrierWithGroupSync();
+		if (threadIdx < computeUBOBlock.numStretchConstraints) {
+			DistanceConstraint dist = constraintBlock.distanceConstraints[threadIdx];
 
-		if (threadIdx < computeUBOBlock.numVertices && clothDataBlock.constraintCount[threadIdx] > 0)
-		{
-			// float x = FromInt(clothDataBlock.deltaX[threadIdx], MAX_FLOAT_RANGE, MIN_FLOAT_RANGE);
-			// float y = FromInt(clothDataBlock.deltaY[threadIdx], MAX_FLOAT_RANGE, MIN_FLOAT_RANGE);
-			// float z = FromInt(clothDataBlock.deltaZ[threadIdx], MAX_FLOAT_RANGE, MIN_FLOAT_RANGE);
+			InterlockedAdd(clothDataBlock.constraintCount[dist.indexA], 1);
+			InterlockedAdd(clothDataBlock.constraintCount[dist.indexB], 1);
 
-			float x = asfloat(clothDataBlock.deltaX[threadIdx]);
-			float y = asfloat(clothDataBlock.deltaY[threadIdx]);
-			float z = asfloat(clothDataBlock.deltaZ[threadIdx]);
+			const float invMassSum = (dist.invMass1 + dist.invMass2);
+			const float invMassFactor1 = dist.invMass1 / invMassSum;
+			const float invMassFactor2 = dist.invMass2 / invMassSum;
+			const float3 x12 = (clothDataBlock.projectedPos[dist.indexA] - clothDataBlock.projectedPos[dist.indexB]).xyz;
 
-			// float x = (float(clothDataBlock.deltaX[threadIdx]) / 1000.0) - 10.0;
-			// float y = (float(clothDataBlock.deltaY[threadIdx]) / 1000.0) - 10.0;
-			// float z = (float(clothDataBlock.deltaZ[threadIdx]) / 1000.0) - 10.0;
+			const float3 delta1 = (computeUBOBlock.stretchStiffness * -1.0 * invMassFactor1 * (length(x12) - dist.restLength)) * normalize(x12);
+			const float3 delta2 = (computeUBOBlock.stretchStiffness * invMassFactor2 * (length(x12) - dist.restLength)) * normalize(x12);
 
-			float3 averaged = (float3(x, y, z)) / float(clothDataBlock.constraintCount[threadIdx]);
-			// float3 averaged = (clothDataBlock.delta[threadIdx].xyz) / float(clothDataBlock.constraintCount[threadIdx]);
+			AtomicAddDeltaX(dist.indexA, delta1.x);
+			AtomicAddDeltaY(dist.indexA, delta1.y);
+			AtomicAddDeltaZ(dist.indexA, delta1.z);
 
-			clothDataBlock.projectedPos[threadIdx] = clothDataBlock.projectedPos[threadIdx] + float4(averaged, 0.0);
+			AtomicAddDeltaX(dist.indexB, delta2.x);
+			AtomicAddDeltaY(dist.indexB, delta2.y);
+			AtomicAddDeltaZ(dist.indexB, delta2.z);
 		}
 
 		AllMemoryBarrierWithGroupSync();
 
-		// clothDataBlock.deltas[dist.indexA] += float4(delta1, 0.0);
-		// clothDataBlock.deltas[dist.indexB] += float4(delta2, 0.0);
+		if (threadIdx < computeUBOBlock.numVertices && clothDataBlock.constraintCount[threadIdx] > 0)
+		{
+			float x = asfloat(clothDataBlock.deltaX[threadIdx]);
+			float y = asfloat(clothDataBlock.deltaY[threadIdx]);
+			float z = asfloat(clothDataBlock.deltaZ[threadIdx]);
 
-		// bool isSet = false;
+			float3 averaged = (float3(x, y, z)) / float(clothDataBlock.constraintCount[threadIdx]);
+			clothDataBlock.projectedPos[threadIdx] = clothDataBlock.projectedPos[threadIdx] + float4(averaged, 0.0);
+		}
 
-		// do {
-		// 	isSet = InterlockedCompareStore(clothDataBlock.deltaLock[dist.indexA], 0, 1) == 0;
-
-		// 	if (currentVal == 0)
-
-		// } while(isSet);
-
-	 	//    uint indexA = 0;
-		// InterlockedAdd(clothDataBlock.deltaLock[dist.indexA], 1, indexA);
-		// if (indexA == 0) {
-		// 	clothDataBlock.delta1[dist.indexA] += float4(delta1, 0.0);
-		// }
-		// else {
-		// 	clothDataBlock.delta2[dist.indexA] += float4(delta1, 0.0);
-		// }
-
-		// uint indexB = 0;
-		// InterlockedAdd(clothDataBlock.deltaLock[dist.indexB], 1, indexB);
-		// if (indexB == 0) {
-		// 	clothDataBlock.delta1[dist.indexB] += float4(delta2, 0.0);
-		// }
-		// else {
-		// 	clothDataBlock.delta2[dist.indexB] += float4(delta2, 0.0);
-		// }
+		AllMemoryBarrierWithGroupSync();
 	}
 
 	AllMemoryBarrierWithGroupSync();

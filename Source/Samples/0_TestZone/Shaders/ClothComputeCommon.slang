@@ -1,5 +1,5 @@
 static const uint BLOCK_SIZE_X = 512;
-static const uint SOLVER_ITERATIONS = 32;
+static const uint SOLVER_ITERATIONS = 64;
 
 static const float EPSILON = 0.00001;
 
