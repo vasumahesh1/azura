@@ -30,12 +30,12 @@ struct VertexBlock {
     RWStructuredBuffer<float4> projectedPos;
     RWStructuredBuffer<float4> velocities;
     RWStructuredBuffer<uint> constraintCount;
-    // RWStructuredBuffer<uint> deltaX;
-    // RWStructuredBuffer<uint> deltaY;
-    // RWStructuredBuffer<uint> deltaZ;
+    RWStructuredBuffer<uint> deltaX;
+    RWStructuredBuffer<uint> deltaY;
+    RWStructuredBuffer<uint> deltaZ;
 
-    RWStructuredBuffer<uint> deltaLock;
-    RWStructuredBuffer<float4> delta;
+    // RWStructuredBuffer<uint> deltaLock;
+    // RWStructuredBuffer<float4> delta;
 };
 
 ParameterBlock<ComputeUBO> computeUBOBlock;
