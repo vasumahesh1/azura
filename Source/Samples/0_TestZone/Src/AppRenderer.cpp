@@ -259,7 +259,7 @@ void AppRenderer::Initialize() {
   m_renderer->BindBufferTarget(COMPUTE_VERTEX_DELTAZ, deltaStart);
 
   const auto totalThreads = U32(m_clothPlane.GetEdgeConstraints().size() + m_clothPlane.GetBendingConstraints().size());
-  const U32 numBlocks = (totalThreads + BLOCK_SIZE_X - 1) / BLOCK_SIZE_X;
+  const U32 numBlocks = (totalThreads + DEFAULT_BLOCK_SIZE_X - 1) / DEFAULT_BLOCK_SIZE_X;
 
   ComputePoolCreateInfo computePoolInfo = {allocatorTemporary};
   computePoolInfo.m_byteSize            = 0xF00000;

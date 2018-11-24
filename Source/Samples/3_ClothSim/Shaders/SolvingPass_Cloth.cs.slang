@@ -2,30 +2,6 @@ import SolvingPass;
 
 static const float3 GRAVITY = {0, -9.8, 0};
 
-static const float MIN_FLOAT_RANGE = 0.0;
-static const float MAX_FLOAT_RANGE = 100.0;
-
-int ToInt(float value, float maxRange, float minRange)
-{
-	// return int((value - minRange) * (float(0x7fffffff) / (maxRange - minRange)));
-	return int(float((value - minRange) / (maxRange - minRange)) * int(0x7fffffff));
-}
-
-float FromInt(int value, float maxRange, float minRange) {
-	// return (float(value) * ((maxRange - minRange) / float(0x7fffffff))) + minRange;
-	return ((float(value) / int(0x7fffffff)) * (maxRange - minRange)) + minRange;
-}
-
-uint ToUint(float value, float maxRange, float minRange)
-{
-	return uint(((value - minRange) / (maxRange - minRange)) * 0xffffffff);
-}
-
-float FromUint(uint value, float maxRange, float minRange) {
-	return ((float(value) / float(0xffffffff))  * (maxRange - minRange))  + minRange;
-	// return (float(value) * ((maxRange - minRange) / float(0x7fffffff))) + minRange;
-}
-
 void AtomicAddDeltaX(uint addr, float value)
 {
   uint i_val = asuint(value);
@@ -232,5 +208,10 @@ void main(
 		clothDataBlock.velocities[threadIdx] = (clothDataBlock.projectedPos[threadIdx] - clothDataBlock.vertices[threadIdx]) / timeDelta;
 		// Write Projected Points to Buffer
 		clothDataBlock.vertices[threadIdx] = clothDataBlock.projectedPos[threadIdx];
+
+		// Used by Normals
+		clothDataBlock.deltaX[threadIdx] = 0;
+		clothDataBlock.deltaY[threadIdx] = 0;
+		clothDataBlock.deltaZ[threadIdx] = 0;
 	}
 }

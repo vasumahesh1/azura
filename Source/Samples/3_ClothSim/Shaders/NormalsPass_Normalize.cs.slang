@@ -63,45 +63,29 @@ void main(
 )
 {
   const uint threadIdx = dispatchThreadId.x;
-
-  if (threadIdx < uboBlock.numVertices) {
-    rwBlock.normalX[threadIdx] = 0;
-    rwBlock.normalY[threadIdx] = 0;
-    rwBlock.normalZ[threadIdx] = 0;
+  if (threadIdx >= uboBlock.numTriangles) {
+    return;
   }
 
-  AllMemoryBarrierWithGroupSync();
+  const uint id0 = roBlock.indexBuffer[3 * threadIdx];
+  const uint id1 = roBlock.indexBuffer[3 * threadIdx + 1];
+  const uint id2 = roBlock.indexBuffer[3 * threadIdx + 2];
 
-  if (threadIdx < uboBlock.numTriangles) {
-    const uint id0 = roBlock.indexBuffer[3 * threadIdx];
-    const uint id1 = roBlock.indexBuffer[3 * threadIdx + 1];
-    const uint id2 = roBlock.indexBuffer[3 * threadIdx + 2];
+  const float3 v0 = roBlock.vertices[id0];
+  const float3 v1 = roBlock.vertices[id1];
+  const float3 v2 = roBlock.vertices[id2];
 
-    const float3 v0 = roBlock.vertices[id0];
-    const float3 v1 = roBlock.vertices[id1];
-    const float3 v2 = roBlock.vertices[id2];
+  float3 normal = cross(v2 - v0, v1 - v0);
 
-    float3 normal = cross(v2 - v0, v1 - v0);
+  AtomicAddNormalX(id0, normal.x);
+  AtomicAddNormalX(id1, normal.x);
+  AtomicAddNormalX(id2, normal.x);
 
-    AtomicAddNormalX(id0, normal.x);
-    AtomicAddNormalX(id1, normal.x);
-    AtomicAddNormalX(id2, normal.x);
+  AtomicAddNormalY(id0, normal.y);
+  AtomicAddNormalY(id1, normal.y);
+  AtomicAddNormalY(id2, normal.y);
 
-    AtomicAddNormalY(id0, normal.y);
-    AtomicAddNormalY(id1, normal.y);
-    AtomicAddNormalY(id2, normal.y);
-
-    AtomicAddNormalZ(id0, normal.z);
-    AtomicAddNormalZ(id1, normal.z);
-    AtomicAddNormalZ(id2, normal.z);
-  }
-
-  AllMemoryBarrierWithGroupSync();
-
-  if (threadIdx < uboBlock.numVertices) {
-    float x = asfloat(rwBlock.normalX[threadIdx]);
-    float y = asfloat(rwBlock.normalY[threadIdx]);
-    float z = asfloat(rwBlock.normalZ[threadIdx]);
-    rwBlock.normals[threadIdx] = normalize(float3(x, y, z));
-  }
+  AtomicAddNormalZ(id0, normal.z);
+  AtomicAddNormalZ(id1, normal.z);
+  AtomicAddNormalZ(id2, normal.z);
 }

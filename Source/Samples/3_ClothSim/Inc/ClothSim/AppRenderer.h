@@ -14,11 +14,11 @@
 
 
 namespace Azura {
-constexpr U32 BLOCK_SIZE_X = 512;
+constexpr U32 DEFAULT_BLOCK_SIZE_X = 512;
 constexpr U32 SOLVER_ITERATIONS = 64;
 
 const float DISTANCE_STIFFNESS = 0.9f;
-const float BENDING_STIFFNESS = 0.5f;
+const float BENDING_STIFFNESS = 0.05f;
 
 struct SceneUBO {
   Matrix4f m_model;
@@ -58,7 +58,10 @@ struct NormalsPassData
 struct ComputePassData
 {
   U32 m_computeUBOSlot;
-  U32 m_passId;
+  U32 m_pass1;
+  U32 m_pass2;
+  U32 m_pass3;
+  U32 m_pass4;
 };
 
 struct PassData {
@@ -97,7 +100,7 @@ private:
   NormalUBO m_normalUBO{};
   DrawablePool* m_mainPool{nullptr};
   DrawablePool* m_spherePool{nullptr};
-  ComputePool* m_computePool{nullptr};
+  ComputePool* m_computePools[4]{nullptr, nullptr, nullptr, nullptr};
 
   PassData m_renderPass{};
   ComputePassData m_computePass{};

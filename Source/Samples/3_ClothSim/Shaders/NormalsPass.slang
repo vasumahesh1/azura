@@ -12,7 +12,6 @@ struct ROBlock {
 };
 
 struct RWBlock {
-  RWStructuredBuffer<float3> normals;
   RWStructuredBuffer<uint> normalX;
   RWStructuredBuffer<uint> normalY;
   RWStructuredBuffer<uint> normalZ;
