@@ -46,17 +46,17 @@ void VkScopedRenderPass::Create(VkDevice device,
     m_shaderPipelineInfos.PushBack(vkShader.GetShaderStageInfo());
   }
 
-  Vector<VkAttachmentReference> colorReferences{U32(createInfo.m_outputs.size()), allocatorTemporary};
+  Vector<VkAttachmentReference> colorReferences{U32(createInfo.m_outputTargets.size()), allocatorTemporary};
   VkAttachmentReference depthReference;
-  Vector<VkAttachmentDescription> attachments{U32(createInfo.m_outputs.size()), allocatorTemporary};
-  Vector<VkImageView> attachmentViews{U32(createInfo.m_outputs.size()), allocatorTemporary};
-  m_colorBlendAttachments.Reserve(U32(createInfo.m_outputs.size()));
-  m_clearValues.Reserve(U32(createInfo.m_outputs.size()));
+  Vector<VkAttachmentDescription> attachments{U32(createInfo.m_outputTargets.size()), allocatorTemporary};
+  Vector<VkImageView> attachmentViews{U32(createInfo.m_outputTargets.size()), allocatorTemporary};
+  m_colorBlendAttachments.Reserve(U32(createInfo.m_outputTargets.size()));
+  m_clearValues.Reserve(U32(createInfo.m_outputTargets.size()));
 
   U32 refCount  = 0;
   bool hasDepth = false;
 
-  for (const auto& output : createInfo.m_outputs) {
+  for (const auto& output : createInfo.m_outputTargets) {
     const auto& selected = pipelineBuffers[output];
 
     VkClearValue clearValue = {};

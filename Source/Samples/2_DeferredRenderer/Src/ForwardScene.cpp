@@ -90,7 +90,8 @@ void ForwardScene::Initialize(Window& window,
     PipelinePassCreateInfo::Shaders{VERTEX_SHADER_ID, PIXEL_SHADER_ID},        // SHADERS
     PipelinePassCreateInfo::InputTargets{},                                          // INPUT TARGETS
     PipelinePassCreateInfo::InputBuffers{},
-    PipelinePassCreateInfo::Outputs{},                                         // OUTPUT TARGETS
+    PipelinePassCreateInfo::OutputTargets{},                                         // OUTPUT TARGETS
+    PipelinePassCreateInfo::OutputBuffers{},                                         // OUTPUT TARGETS
     PipelinePassCreateInfo::DescriptorSets{UBO_SET, SAMPLER_SET, TEXTURE_SET}, // DESCRIPTORS
     ClearData{{0.2f, 0.2f, 0.2f, 1.0f}, 1.0f, 0}
   });

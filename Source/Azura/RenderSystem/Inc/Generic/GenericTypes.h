@@ -172,6 +172,11 @@ enum class DescriptorType {
   UnorderedView
 };
 
+enum class BufferSource {
+  Normal,
+  StructuredBuffer
+};
+
 const U32 MAX_DESCRIPTOR_TYPE_COUNT = 5;
 
 struct Bounds3D {
@@ -230,6 +235,7 @@ struct VertexSlot {
   BufferUsageRate m_rate;
   SmallVector<SlotSemantic, 10> m_stride;
   U32 m_strideSize{0};
+  BufferSource m_bufferSource{BufferSource::Normal};
 };
 
 struct DescriptorSlotCreateInfo {
@@ -287,18 +293,31 @@ struct BufferInfo {
   U32 m_byteSize;
   U32 m_maxByteSize;
   U32 m_binding;
+  U32 m_sourceBufferId;
 
   BufferInfo()
     : m_offset(0),
       m_byteSize(0),
       m_maxByteSize(0),
-      m_binding(0) {
+      m_binding(0),
+      m_sourceBufferId(0) {
   }
+};
+
+enum class BufferUpdateType {
+  UniformBuffer,
+  Sampler,
+  SampledImage,
+  CombinedImageSampler,
+  PushConstant,
+  UnorderedView,
+  Vertex,
+  Instance
 };
 
 struct BufferUpdate
 {
-  DescriptorType m_type;
+  BufferUpdateType m_type;
 
   U32 m_idx;
   U32 m_gpuOffset;
@@ -415,7 +434,8 @@ struct ClearData {
 
 struct PipelinePassCreateInfo {
   using Shaders = SmallVector<U32, MAX_RENDER_PASS_SHADERS>;
-  using Outputs = SmallVector<U32, MAX_RENDER_PASS_OUTPUTS>;
+  using OutputTargets = SmallVector<U32, MAX_RENDER_PASS_OUTPUTS>;
+  using OutputBuffers = SmallVector<U32, MAX_RENDER_PASS_OUTPUTS>;
   using InputTargets = SmallVector<PipelinePassInput, MAX_RENDER_PASS_INPUTS>;
   using InputBuffers = SmallVector<PipelinePassInput, MAX_RENDER_PASS_INPUTS>;
   using DescriptorSets = SmallVector<U32, MAX_RENDER_PASS_SETS>;
@@ -424,7 +444,8 @@ struct PipelinePassCreateInfo {
 
   InputTargets m_inputTargets{};
   InputBuffers m_inputBuffers{};
-  Outputs m_outputs{};
+  OutputTargets m_outputTargets{};
+  OutputBuffers m_outputBuffers{};
   DescriptorSets m_descriptorSets{};
 
   ClearData m_clearData{};

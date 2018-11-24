@@ -44,7 +44,7 @@ void D3D12ScopedRenderPass::Create(const Microsoft::WRL::ComPtr<ID3D12Device>& d
 
   U32 numDSV = 0;
   U32 numRTV = 0;
-  for (const auto& output : createInfo.m_outputs) {
+  for (const auto& output : createInfo.m_outputTargets) {
     const auto& targetBuffer = pipelineBuffers[output];
 
     if (HasDepthOrStencilComponent(targetBuffer.m_format)) {
@@ -72,7 +72,7 @@ void D3D12ScopedRenderPass::Create(const Microsoft::WRL::ComPtr<ID3D12Device>& d
   CD3DX12_CPU_DESCRIPTOR_HANDLE rtvHandle(m_rtvHeap->GetCPUDescriptorHandleForHeapStart());
   CD3DX12_CPU_DESCRIPTOR_HANDLE dsvHandle(m_dsvHeap->GetCPUDescriptorHandleForHeapStart());
 
-  for (const auto& output : createInfo.m_outputs) {
+  for (const auto& output : createInfo.m_outputTargets) {
     const auto& targetBuffer = pipelineBuffers[output];
     auto& gpuTexture         = pipelineBufferImages[output];
 
@@ -418,10 +418,10 @@ void D3D12ScopedRenderPass::CreateBase(
 
   m_passShaders.Reserve(U32(createInfo.m_shaders.size()));
   m_passInputs.Reserve(U32(createInfo.m_inputTargets.size()));
-  m_renderOutputInfo.Reserve(U32(createInfo.m_outputs.size()));
+  m_renderOutputInfo.Reserve(U32(createInfo.m_outputTargets.size()));
   m_allRenderInputs.Reserve(U32(createInfo.m_inputTargets.size()));
 
-  for (const auto& outputId : createInfo.m_outputs) {
+  for (const auto& outputId : createInfo.m_outputTargets) {
     const auto& targetBufferRef = pipelineBuffers[outputId];
     m_renderOutputInfo.PushBack({targetBufferRef.m_format});
   }

@@ -7,9 +7,11 @@ set(
   "Inc/Math/Core.h"
   "Inc/Math/Geometry.h"
   "Inc/Math/Icosphere.h"
+  "Inc/Math/Plane.h"
   "Inc/Math/Transform.h"
   "Src/Geometry.cpp"
   "Src/Icosphere.cpp"
+  "Src/Plane.cpp"
   "Src/Transform.cpp"
 )
 

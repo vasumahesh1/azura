@@ -64,9 +64,11 @@ private:
   void CreateComputePassInputBufferSRV(
     const Containers::Vector<std::reference_wrapper<D3D12ScopedBuffer>>& bufferInputs,
     U32 offsetTillThis) const;
-  void CreateComputePassInputTargetUAV(
+  void CreateComputePassOutputTargetUAV(
     const Containers::Vector<std::reference_wrapper<D3D12ScopedImage>>& computePassOutputs,
     U32 offsetTillThis) const;
+
+  void CreateComputePassOutputBufferUAV(const Containers::Vector<std::reference_wrapper<D3D12ScopedBuffer>>& computePassOutputs, U32 offsetTillThis) const;
 
   Log log_D3D12RenderSystem;
 
@@ -91,7 +93,8 @@ private:
   U32 m_offsetToConstantBuffers{0};
   U32 m_offsetToComputePassInputTargets{0};
   U32 m_offsetToComputePassInputBuffers{0};
-  U32 m_offsetToComputePassOutputs{0};
+  U32 m_offsetToComputePassOutputTargets{0};
+  U32 m_offsetToComputePassOutputBuffers{0};
 
   Containers::Vector<D3D12ScopedImage> m_images;
   Containers::Vector<D3D12ScopedSampler> m_samplers;

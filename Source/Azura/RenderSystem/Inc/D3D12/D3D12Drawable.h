@@ -19,6 +19,7 @@ public:
   void CreateResourceViews(const Microsoft::WRL::ComPtr<ID3D12Device>& device,
                            ID3D12Resource* parentBuffer,
                            const Containers::Vector<VertexSlot>& vertexSlots,
+                           const Containers::Vector<std::reference_wrapper<const D3D12ScopedBuffer>>& gpuBuffers,
                            CD3DX12_CPU_DESCRIPTOR_HANDLE drawableHeapHandle,
                            UINT heapElementSize,
                            const Log& log_D3D12RenderSystem);

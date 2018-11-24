@@ -18,7 +18,8 @@ D3D12ScopedComputePass::D3D12ScopedComputePass(U32 idx, U32 internalId,
     m_internalId(internalId),
     m_rootSignatureTable(mainAllocator),
     m_passShaders(mainAllocator),
-    m_computeOutputs(mainAllocator),
+    m_computeOutputTargets(mainAllocator),
+    m_computeOutputBuffers(mainAllocator),
     m_computeInputBuffers(mainAllocator),
     m_computeInputTargets(mainAllocator),
     m_computeDepthInputTargets(mainAllocator),
@@ -74,8 +75,12 @@ const Containers::Vector<std::reference_wrapper<D3D12ScopedBuffer>>& D3D12Scoped
   return m_computeInputBuffers;
 }
 
+const Containers::Vector<std::reference_wrapper<D3D12ScopedBuffer>>& D3D12ScopedComputePass::GetOutputBuffers() const {
+  return m_computeOutputBuffers;
+}
+
 const Vector<std::reference_wrapper<D3D12ScopedImage>>& D3D12ScopedComputePass::GetOutputImages() const {
-  return m_computeOutputs;
+  return m_computeOutputTargets;
 }
 
 const Vector<DescriptorTableEntry>& D3D12ScopedComputePass::GetRootSignatureTable() const {
@@ -83,20 +88,32 @@ const Vector<DescriptorTableEntry>& D3D12ScopedComputePass::GetRootSignatureTabl
 }
 
 void D3D12ScopedComputePass::RecordResourceBarriersForOutputsStart(ID3D12GraphicsCommandList* commandList) const {
-  for (auto& rtv : m_computeOutputs) {
+  for (auto& rtv : m_computeOutputTargets) {
     rtv.get().Transition(commandList, D3D12_RESOURCE_STATE_UNORDERED_ACCESS, log_D3D12RenderSystem);
+  }
+  
+  for (auto& buffer : m_computeOutputBuffers) {
+    buffer.get().Transition(commandList, D3D12_RESOURCE_STATE_UNORDERED_ACCESS, log_D3D12RenderSystem);
   }
 }
   
 void D3D12ScopedComputePass::RecordResourceBarriersForOutputsEnd(ID3D12GraphicsCommandList* commandList) const {
-  for (auto& rtv : m_computeOutputs) {
+  for (auto& rtv : m_computeOutputTargets) {
     rtv.get().Transition(commandList, D3D12_RESOURCE_STATE_COMMON, log_D3D12RenderSystem);
+  }
+
+  for (auto& buffer : m_computeOutputBuffers) {
+    buffer.get().Transition(commandList, D3D12_RESOURCE_STATE_COMMON, log_D3D12RenderSystem);
   }
 }
 
 void D3D12ScopedComputePass::RecordResourceBarriersForInputsStart(ID3D12GraphicsCommandList* commandList) const {
   for (auto& rtv : m_computeInputTargets) {
     rtv.get().Transition(commandList, D3D12_RESOURCE_STATE_NON_PIXEL_SHADER_RESOURCE, log_D3D12RenderSystem);
+  }
+  
+  for (auto& inputBuffer : m_computeInputBuffers) {
+    inputBuffer.get().Transition(commandList, D3D12_RESOURCE_STATE_NON_PIXEL_SHADER_RESOURCE, log_D3D12RenderSystem);
   }
 
   for (auto& dsv : m_computeDepthInputTargets) {
@@ -107,6 +124,10 @@ void D3D12ScopedComputePass::RecordResourceBarriersForInputsStart(ID3D12Graphics
 void D3D12ScopedComputePass::RecordResourceBarriersForInputsEnd(ID3D12GraphicsCommandList* commandList) const {
   for (auto& rtv : m_computeInputTargets) {
     rtv.get().Transition(commandList, D3D12_RESOURCE_STATE_COMMON, log_D3D12RenderSystem);
+  }
+
+  for (auto& inputBuffer : m_computeInputBuffers) {
+    inputBuffer.get().Transition(commandList, D3D12_RESOURCE_STATE_COMMON, log_D3D12RenderSystem);
   }
 
   for (auto& dsv : m_computeDepthInputTargets) {
@@ -140,8 +161,12 @@ U32 D3D12ScopedComputePass::GetInputBufferRootDescriptorTableId() const {
   return m_computeInputBufferTableIdx;
 }
 
-U32 D3D12ScopedComputePass::GetOutputRootDescriptorTableId() const {
-  return m_computeOutputTableIdx;
+U32 D3D12ScopedComputePass::GetOutputTargetsRootDescriptorTableId() const {
+  return m_computeOutputTargetTableIdx;
+}
+
+U32 D3D12ScopedComputePass::GetOutputBuffersRootDescriptorTableId() const {
+  return m_computeOutputBufferTableIdx;
 }
 
 void D3D12ScopedComputePass::CreateBase(
@@ -170,10 +195,15 @@ void D3D12ScopedComputePass::CreateBase(
   m_computeInputTargets.Reserve(U32(createInfo.m_inputTargets.size()));
   m_computeDepthInputTargets.Reserve(U32(createInfo.m_inputTargets.size()));
   m_allComputeInputTargets.Reserve(U32(createInfo.m_inputTargets.size()));
-  m_computeOutputs.Reserve(U32(createInfo.m_outputs.size()));
+  m_computeOutputTargets.Reserve(U32(createInfo.m_outputTargets.size()));
+  m_computeOutputBuffers.Reserve(U32(createInfo.m_outputBuffers.size()));
 
-  for (const auto& outputId : createInfo.m_outputs) {
-    m_computeOutputs.PushBack(pipelineImages[outputId]);
+  for (const auto& outputId : createInfo.m_outputTargets) {
+    m_computeOutputTargets.PushBack(pipelineImages[outputId]);
+  }
+  
+  for (const auto& outputId : createInfo.m_outputBuffers) {
+    m_computeOutputBuffers.PushBack(pipelineStructuredBuffers[outputId]);
   }
 
   for (const auto& shaderId : createInfo.m_shaders) {
@@ -326,17 +356,32 @@ void D3D12ScopedComputePass::CreateBase(
     srvOffset += U32(createInfo.m_inputBuffers.size()); // NOLINT
   }
 
-  if (!createInfo.m_outputs.empty()) {
+  if (!createInfo.m_outputTargets.empty()) {
     LOG_DBG(log_D3D12RenderSystem, LOG_LEVEL, "D3D12 Render Pass: Generating UAV for Set Position: %d", descriptorTables.
       GetSize());
     LOG_DBG(log_D3D12RenderSystem, LOG_LEVEL,
-      "D3D12 Render Pass: [Attachments] Applying %d Image Attachments as register t(%d) to t(%d)", createInfo.m_outputs.
-      size(), uavOffset, uavOffset + createInfo.m_outputs.size() - 1);
+      "D3D12 Render Pass: [Output Attachments] Applying %d Image Attachments as register t(%d) to t(%d)", createInfo.m_outputTargets.
+      size(), uavOffset, uavOffset + createInfo.m_outputTargets.size() - 1);
 
-    outputRangeData.Init(D3D12_DESCRIPTOR_RANGE_TYPE_UAV, UINT(createInfo.m_outputs.size()), uavOffset);
+    outputRangeData.Init(D3D12_DESCRIPTOR_RANGE_TYPE_UAV, UINT(createInfo.m_outputTargets.size()), uavOffset);
     ouputsRootParameter.InitAsDescriptorTable(1, &outputRangeData, D3D12_SHADER_VISIBILITY_ALL);
 
-    m_computeOutputTableIdx = descriptorTables.GetSize();
+    m_computeOutputTargetTableIdx = descriptorTables.GetSize();
+
+    descriptorTables.PushBack(ouputsRootParameter);
+  }
+
+  if (!createInfo.m_outputBuffers.empty()) {
+    LOG_DBG(log_D3D12RenderSystem, LOG_LEVEL, "D3D12 Render Pass: Generating UAV for Set Position: %d", descriptorTables.
+      GetSize());
+    LOG_DBG(log_D3D12RenderSystem, LOG_LEVEL,
+      "D3D12 Render Pass: [Output Attachments] Applying %d Buffer Attachments as register t(%d) to t(%d)", createInfo.m_outputTargets.
+      size(), uavOffset, uavOffset + createInfo.m_outputBuffers.size() - 1);
+
+    outputRangeData.Init(D3D12_DESCRIPTOR_RANGE_TYPE_UAV, UINT(createInfo.m_outputBuffers.size()), uavOffset);
+    ouputsRootParameter.InitAsDescriptorTable(1, &outputRangeData, D3D12_SHADER_VISIBILITY_ALL);
+
+    m_computeOutputBufferTableIdx = descriptorTables.GetSize();
 
     descriptorTables.PushBack(ouputsRootParameter);
   }

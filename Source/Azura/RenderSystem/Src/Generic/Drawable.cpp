@@ -47,11 +47,41 @@ void Drawable::AddUniformBufferInfo(UniformBufferInfo&& info) {
   m_uniformBufferInfos.PushBack(info);
 }
 
-U32 Drawable::GetSingleUniformBufferInfo(const DescriptorSlot& slot) {
+U32 Drawable::GetSingleUniformBufferInfo(const DescriptorSlot& slot) const {
   U32 idx = 0;
   for(const auto& ubInfo : m_uniformBufferInfos)
   {
     if (ubInfo.m_binding == slot.m_bindIdx && ubInfo.m_set == slot.m_setIdx)
+    {
+      return idx;
+    }
+
+    ++idx;
+  }
+
+  throw std::runtime_error("Tried to Update Slot that was never bound");
+}
+
+U32 Drawable::GetSingleVertexBufferInfo(const SlotID& slot) const {
+  U32 idx = 0;
+  for(const auto& vbInfo : m_vertexBufferInfos)
+  {
+    if (vbInfo.m_binding == slot)
+    {
+      return idx;
+    }
+
+    ++idx;
+  }
+
+  throw std::runtime_error("Tried to Update Slot that was never bound");
+}
+
+U32 Drawable::GetSingleInstanceBufferInfo(const SlotID& slot) const {
+  U32 idx = 0;
+  for(const auto& ibInfo : m_instanceBufferInfos)
+  {
+    if (ibInfo.m_binding == slot)
     {
       return idx;
     }
@@ -138,7 +168,7 @@ DrawablePool::DrawablePool(const DrawablePoolCreateInfo& createInfo,
     }
   }
 
-  m_bufferUpdates.Reserve(m_descriptorCount.m_numSampledImageSlots + m_descriptorCount.m_numUniformSlots);
+  m_bufferUpdates.Reserve(m_descriptorCount.m_numSampledImageSlots + m_descriptorCount.m_numUniformSlots + m_numVertexSlots + m_numInstanceSlots);
 
   m_textureBufferInfos.Reserve(m_descriptorCount.m_numSampledImageSlots);
   m_samplerInfos.Reserve(m_descriptorCount.m_numSamplerSlots);

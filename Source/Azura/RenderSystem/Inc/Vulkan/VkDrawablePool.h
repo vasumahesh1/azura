@@ -93,6 +93,7 @@ public:
 
   // Drawable Scope Binds
   void BindVertexData(DrawableID drawableId, SlotID slot, const U8* buffer, U32 size) override;
+  void BindVertexData(DrawableID drawableId, SlotID slot, U32 sourceBuffer, U32 offset, U32 size) override;
   void BindInstanceData(DrawableID drawableId, SlotID slot, const U8* buffer, U32 size) override;
   void BindUniformData(DrawableID drawableId, SlotID slot, const U8* buffer, U32 size) override;
 
@@ -106,6 +107,8 @@ public:
 
   void BeginUpdates() override;
   void UpdateUniformData(DrawableID drawableId, SlotID slot, const U8* buffer, U32 size) override;
+  void UpdateVertexData(DrawableID drawableId, SlotID slot, const U8* buffer, U32 size) override;
+  void UpdateInstanceData(DrawableID drawableId, SlotID slot, const U8* buffer, U32 size) override;
   void UpdateTextureData(SlotID slot, const U8* buffer) override;
   void SubmitUpdates() override;
 

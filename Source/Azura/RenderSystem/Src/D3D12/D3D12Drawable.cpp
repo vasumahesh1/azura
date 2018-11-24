@@ -1,5 +1,6 @@
 #include "D3D12/D3D12Drawable.h"
 #include "D3D12/D3D12TypeMapping.h"
+#include "D3D12/D3D12ScopedBuffer.h"
 #include <algorithm>
 
 namespace Azura {
@@ -17,7 +18,7 @@ D3D12Drawable::D3D12Drawable(const DrawableCreateInfo& info,
     m_indexBufferView() {
 }
 
-void D3D12Drawable::CreateResourceViews(const Microsoft::WRL::ComPtr<ID3D12Device>& device, ID3D12Resource* parentBuffer, const Containers::Vector<VertexSlot>& vertexSlots, CD3DX12_CPU_DESCRIPTOR_HANDLE drawableHeapHandle, UINT heapElementSize, const Log& log_D3D12RenderSystem) {
+void D3D12Drawable::CreateResourceViews(const Microsoft::WRL::ComPtr<ID3D12Device>& device, ID3D12Resource* parentBuffer, const Containers::Vector<VertexSlot>& vertexSlots, const Containers::Vector<std::reference_wrapper<const D3D12ScopedBuffer>>& gpuBuffers, CD3DX12_CPU_DESCRIPTOR_HANDLE drawableHeapHandle, UINT heapElementSize, const Log& log_D3D12RenderSystem) {
   const auto gpuAddress = parentBuffer->GetGPUVirtualAddress();
   
   std::sort(m_uniformBufferInfos.Begin(), m_uniformBufferInfos.End(), [](const UniformBufferInfo& a, const UniformBufferInfo& b) -> bool
@@ -44,13 +45,30 @@ void D3D12Drawable::CreateResourceViews(const Microsoft::WRL::ComPtr<ID3D12Devic
   }
 
   for (const auto& vbInfos : m_vertexBufferInfos) {
-    D3D12_VERTEX_BUFFER_VIEW vertexBufferViewDesc = {
-      gpuAddress + vbInfos.m_offset,
-      vbInfos.m_byteSize,
-      vertexSlots[vbInfos.m_binding].m_strideSize
-    };
+    const auto& slot = vertexSlots[vbInfos.m_binding];
 
-    m_vertexBufferView.PushBack(vertexBufferViewDesc);
+    if (slot.m_bufferSource == BufferSource::Normal) {
+
+      D3D12_VERTEX_BUFFER_VIEW vertexBufferViewDesc = {
+        gpuAddress + vbInfos.m_offset,
+        vbInfos.m_byteSize,
+        slot.m_strideSize
+      };
+
+      m_vertexBufferView.PushBack(vertexBufferViewDesc);
+    }
+    else if (slot.m_bufferSource == BufferSource::StructuredBuffer)
+    {
+      const auto sourceBufferAddress = gpuBuffers[vbInfos.m_sourceBufferId].get().Real()->GetGPUVirtualAddress();
+
+      D3D12_VERTEX_BUFFER_VIEW vertexBufferViewDesc = {
+        sourceBufferAddress + vbInfos.m_offset,
+        vbInfos.m_byteSize,
+        slot.m_strideSize
+      };
+
+      m_vertexBufferView.PushBack(vertexBufferViewDesc);
+    }
   }
 
   for (const auto& ibInfos : m_instanceBufferInfos) {

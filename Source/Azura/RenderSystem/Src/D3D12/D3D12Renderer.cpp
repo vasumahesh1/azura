@@ -217,6 +217,7 @@ DrawablePool& D3D12Renderer::CreateDrawablePool(const DrawablePoolCreateInfo& cr
                                              m_descriptorSlots,
                                              m_shaders,
                                              m_renderPasses,
+                                             m_targetBuffers,
                                              m_mainGraphicsCommandQueue,
                                              m_drawPoolAllocator,
                                              m_initAllocator,
@@ -274,9 +275,9 @@ void D3D12Renderer::Submit() {
     for (const auto& bufferTargetUpdate : m_bufferTargetUpdates)
     {
       auto& targetBuffer = m_targetBuffers[bufferTargetUpdate.m_binding];
-      targetBuffer.Transition(oneTimeCommandList, D3D12_RESOURCE_STATE_COMMON, D3D12_RESOURCE_STATE_COPY_DEST);
+      targetBuffer.Transition(oneTimeCommandList, D3D12_RESOURCE_STATE_COPY_DEST, log_D3D12RenderSystem);
       D3D12Core::CopyBuffer(oneTimeCommandList, targetBuffer, 0, m_stagingBuffer, bufferTargetUpdate.m_offset, bufferTargetUpdate.m_byteSize);
-      targetBuffer.Transition(oneTimeCommandList, D3D12_RESOURCE_STATE_COPY_DEST, D3D12_RESOURCE_STATE_COMMON);
+      targetBuffer.Transition(oneTimeCommandList, D3D12_RESOURCE_STATE_COMMON, log_D3D12RenderSystem);
     }
 
     oneTimeCommandList->Close();

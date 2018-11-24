@@ -20,6 +20,7 @@ D3D12DrawablePool::D3D12DrawablePool(const ComPtr<ID3D12Device>& device,
                                      const Vector<DescriptorSlot>& descriptorSlots,
                                      const Vector<D3D12ScopedShader>& shaders,
                                      const Vector<D3D12ScopedRenderPass>& renderPasses,
+                                     const Vector<D3D12ScopedBuffer>& gpuBuffers,
                                      ComPtr<ID3D12CommandQueue> commandQueue,
                                      Memory::Allocator& mainAllocator,
                                      Memory::Allocator& initAllocator,
@@ -32,6 +33,7 @@ D3D12DrawablePool::D3D12DrawablePool(const ComPtr<ID3D12Device>& device,
     m_pipelines(mainAllocator),
     m_drawables(createInfo.m_numDrawables, mainAllocator),
     m_renderPasses(createInfo.m_renderPasses.GetSize(), mainAllocator),
+    m_gpuBuffers(gpuBuffers.GetSize(), mainAllocator),
     m_graphicsCommandQueue(std::move(commandQueue)),
     m_pipelineFactory(initAllocator, log_D3D12RenderSystem),
     m_descriptorsPerDrawable(0),
@@ -42,6 +44,10 @@ D3D12DrawablePool::D3D12DrawablePool(const ComPtr<ID3D12Device>& device,
   LOG_DBG(log_D3D12RenderSystem, LOG_LEVEL, "Creating D3D12 Drawable Pool");
 
   m_pipelineFactory.SetRasterizerStage(createInfo.m_cullMode, FrontFace::CounterClockwise);
+
+  for (const auto& inputBuffer : gpuBuffers) {
+    m_gpuBuffers.PushBack(inputBuffer);
+  }
 
   CreateRenderPassReferences(createInfo, renderPasses);
   CreateInputAttributes(createInfo);
@@ -86,6 +92,25 @@ void D3D12DrawablePool::BindVertexData(DrawableID drawableId, SlotID slot, const
   info.m_byteSize    = size;
   info.m_offset      = offset;
   info.m_binding     = slot;
+
+  drawable.AddVertexBufferInfo(std::move(info));
+}
+
+void D3D12DrawablePool::BindVertexData(DrawableID drawableId, SlotID slot, U32 sourceBuffer, U32 offset, U32 size) {
+  LOG_DBG(log_D3D12RenderSystem, LOG_LEVEL,
+    "D3D12 Drawable Pool: Binding Vertex Requested for Drawable: %d for Slot: %d of Size: %d bytes", drawableId, slot,
+    size);
+
+  assert(m_drawables.GetSize() > drawableId);
+
+  auto& drawable = m_drawables[drawableId];
+
+  BufferInfo info    = BufferInfo();
+  info.m_maxByteSize = size;
+  info.m_byteSize    = size;
+  info.m_offset      = offset;
+  info.m_binding     = slot;
+  info.m_sourceBufferId = sourceBuffer;
 
   drawable.AddVertexBufferInfo(std::move(info));
 }
@@ -318,13 +343,12 @@ void D3D12DrawablePool::Submit() {
   const UINT64 stagingBufferSize = GetRequiredIntermediateSize(m_stagingBuffer.Real(), 0, 1);
   D3D12Core::CopyBuffer(oneTimeCommandList, m_mainBuffer, m_stagingBuffer, stagingBufferSize);
 
-  m_mainBuffer.Transition(oneTimeCommandList, D3D12_RESOURCE_STATE_COPY_DEST, D3D12_RESOURCE_STATE_COPY_SOURCE);
+  m_mainBuffer.Transition(oneTimeCommandList, D3D12_RESOURCE_STATE_COPY_SOURCE, log_D3D12RenderSystem);
 
   SetTextureData(oneTimeCommandList);
   SetSamplerData();
 
-  m_mainBuffer.Transition(oneTimeCommandList, D3D12_RESOURCE_STATE_COPY_SOURCE,
-                          D3D12_RESOURCE_STATE_VERTEX_AND_CONSTANT_BUFFER);
+  m_mainBuffer.Transition(oneTimeCommandList, D3D12_RESOURCE_STATE_VERTEX_AND_CONSTANT_BUFFER, log_D3D12RenderSystem);
 
   oneTimeCommandList->Close();
 
@@ -341,7 +365,7 @@ void D3D12DrawablePool::Submit() {
   LOG_DBG(log_D3D12RenderSystem, LOG_LEVEL, "D3D12 Drawable Pool: Creating Resource Views");
 
   for (auto& drawable : m_drawables) {
-    drawable.CreateResourceViews(m_device, m_mainBuffer.Real(), m_vertexDataSlots, heapHandle,
+    drawable.CreateResourceViews(m_device, m_mainBuffer.Real(), m_vertexDataSlots, m_gpuBuffers, heapHandle,
                                  m_cbvSrvDescriptorElementSize, log_D3D12RenderSystem);
     heapHandle.Offset(drawableHeapOffset);
   }
@@ -448,7 +472,7 @@ void D3D12DrawablePool::UpdateUniformData(DrawableID drawableId, SlotID slot, co
   const auto& allUboInfos = drawable.GetUniformBufferInfos();
 
   BufferUpdate info = {};
-  info.m_type = DescriptorType::UniformBuffer;
+  info.m_type = BufferUpdateType::UniformBuffer;
   info.m_idx = bufferId;
   info.m_updateOffset = offset;
   info.m_updateByteSize = size;
@@ -473,7 +497,7 @@ void D3D12DrawablePool::UpdateTextureData(SlotID slot, const U8* buffer) {
   const U32 offset = m_updateBuffer.AppendTextureData(buffer, desc.m_size, 512, textureWidthBytes, D3D12_TEXTURE_DATA_PITCH_ALIGNMENT, log_D3D12RenderSystem);
 
   BufferUpdate info = {};
-  info.m_type = DescriptorType::SampledImage;
+  info.m_type = BufferUpdateType::SampledImage;
   info.m_idx = bufferId;
   info.m_updateOffset = offset;
   info.m_updateByteSize = desc.m_size;
@@ -484,21 +508,76 @@ void D3D12DrawablePool::UpdateTextureData(SlotID slot, const U8* buffer) {
 
 }
 
+void D3D12DrawablePool::UpdateVertexData(DrawableID drawableId, SlotID slot, const U8* buffer, U32 size) {
+  LOG_DBG(log_D3D12RenderSystem, LOG_LEVEL,
+    "D3D12 Drawable Pool: Update Uniform Requested for Drawable: %d for Slot: %d of Size: %d bytes", drawableId, slot,
+    size);
+
+  assert(m_drawables.GetSize() > drawableId);
+
+  auto& drawable = m_drawables[drawableId];
+
+  const U32 offset = m_updateBuffer.AppendData(buffer, size, sizeof(float), log_D3D12RenderSystem);
+
+  const U32 bufferInfoId = drawable.GetSingleVertexBufferInfo(slot);
+
+  const auto& allVertexBufferInfos = drawable.GetVertexBufferInfos();
+
+  BufferUpdate info = {};
+  info.m_type = BufferUpdateType::Vertex;
+  info.m_idx = bufferInfoId;
+  info.m_updateOffset = offset;
+  info.m_updateByteSize = size;
+  info.m_gpuOffset = allVertexBufferInfos[bufferInfoId].m_offset;
+  info.m_gpuByteSize = allVertexBufferInfos[bufferInfoId].m_byteSize;
+
+  m_bufferUpdates.PushBack(info);
+}
+
+void D3D12DrawablePool::UpdateInstanceData(DrawableID drawableId, SlotID slot, const U8* buffer, U32 size) {
+  LOG_DBG(log_D3D12RenderSystem, LOG_LEVEL,
+    "D3D12 Drawable Pool: Update Uniform Requested for Drawable: %d for Slot: %d of Size: %d bytes", drawableId, slot,
+    size);
+
+  assert(m_drawables.GetSize() > drawableId);
+
+  auto& drawable = m_drawables[drawableId];
+
+  const U32 offset = m_updateBuffer.AppendData(buffer, size, sizeof(float), log_D3D12RenderSystem);
+
+  const U32 bufferInfoId = drawable.GetSingleInstanceBufferInfo(slot);
+
+  const auto& allInstanceBufferInfos = drawable.GetInstanceBufferInfos();
+
+  BufferUpdate info = {};
+  info.m_type = BufferUpdateType::Instance;
+  info.m_idx = bufferInfoId;
+  info.m_updateOffset = offset;
+  info.m_updateByteSize = size;
+  info.m_gpuOffset = allInstanceBufferInfos[bufferInfoId].m_offset;
+  info.m_gpuByteSize = allInstanceBufferInfos[bufferInfoId].m_byteSize;
+
+  m_bufferUpdates.PushBack(info);
+}
+
 void D3D12DrawablePool::SubmitUpdates() {
   auto oneTimeSubmitBuffer = D3D12ScopedCommandBuffer(m_device, D3D12_COMMAND_LIST_TYPE_DIRECT, log_D3D12RenderSystem);
   oneTimeSubmitBuffer.CreateGraphicsCommandList(m_device, nullptr, log_D3D12RenderSystem);
 
   auto oneTimeCommandList = oneTimeSubmitBuffer.GetGraphicsCommandList();
 
-  m_mainBuffer.Transition(oneTimeCommandList,D3D12_RESOURCE_STATE_VERTEX_AND_CONSTANT_BUFFER, D3D12_RESOURCE_STATE_COPY_DEST);
+  m_mainBuffer.Transition(oneTimeCommandList, D3D12_RESOURCE_STATE_COPY_DEST, log_D3D12RenderSystem);
 
   // Copy Custom Regions
   for(const auto& updateRegion : m_bufferUpdates)
   {
-    if (updateRegion.m_type == DescriptorType::UniformBuffer) {
+    if (updateRegion.m_type == BufferUpdateType::UniformBuffer) {
       oneTimeCommandList->CopyBufferRegion(m_mainBuffer.Real(), updateRegion.m_gpuOffset, m_updateBuffer.Real(), updateRegion.m_updateOffset, updateRegion.m_updateByteSize);
     }
-    else if (updateRegion.m_type == DescriptorType::SampledImage)
+    else if (updateRegion.m_type == BufferUpdateType::Vertex || updateRegion.m_type == BufferUpdateType::Instance) {
+      oneTimeCommandList->CopyBufferRegion(m_mainBuffer.Real(), updateRegion.m_gpuOffset, m_updateBuffer.Real(), updateRegion.m_updateOffset, updateRegion.m_updateByteSize);
+    }
+    else if (updateRegion.m_type == BufferUpdateType::SampledImage)
     {
       const auto& targetImage = m_images[updateRegion.m_idx];
       targetImage.Transition(oneTimeCommandList, D3D12_RESOURCE_STATE_PIXEL_SHADER_RESOURCE, D3D12_RESOURCE_STATE_COPY_DEST, log_D3D12RenderSystem);
@@ -507,7 +586,7 @@ void D3D12DrawablePool::SubmitUpdates() {
     }
   }
 
-  m_mainBuffer.Transition(oneTimeCommandList, D3D12_RESOURCE_STATE_COPY_DEST, D3D12_RESOURCE_STATE_VERTEX_AND_CONSTANT_BUFFER);
+  m_mainBuffer.Transition(oneTimeCommandList, D3D12_RESOURCE_STATE_VERTEX_AND_CONSTANT_BUFFER, log_D3D12RenderSystem);
 
   oneTimeCommandList->Close();
 
