@@ -21,5 +21,7 @@ float4 main(NormalPixelInput input) : SV_Target
   finalColor.y = clamp(finalColor.y, 0.0, 1.0);
   finalColor.z = clamp(finalColor.z, 0.0, 1.0);
 
+  // finalColor = float4((fragNormal + float3(1.0, 1.0, 1.0)) / 2.0, 1.0);
+
   return finalColor;
 }

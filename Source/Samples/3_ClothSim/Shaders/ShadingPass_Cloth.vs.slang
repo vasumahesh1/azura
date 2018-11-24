@@ -3,7 +3,7 @@ import ShadingPass;
 NormalPixelInput main(ClothVertexInput input)
 {
   float4 vertexPosition = float4(input.in_Pos, 1.0);
-  float3 vertexNormal = input.in_Normal;
+  float3 vertexNormal = float3(asfloat(input.in_NormalX), asfloat(input.in_NormalY), asfloat(input.in_NormalZ));
 
   NormalPixelInput output;
   output.pos = mul(ubo.u_viewProj, mul(ubo.u_model, vertexPosition));

@@ -8,7 +8,9 @@ struct NormalPixelInput
 struct ClothVertexInput
 {
   float3 in_Pos : POSITION;
-  float3 in_Normal : NORMAL;
+  uint in_NormalX : NORMALX;
+  uint in_NormalY : NORMALY;
+  uint in_NormalZ : NORMALZ;
 };
 
 struct SceneUBO {

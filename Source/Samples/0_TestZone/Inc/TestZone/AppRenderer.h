@@ -16,7 +16,7 @@
 #include "TestZone/ImportedClothMesh.h"
 
 namespace Azura {
-constexpr U32 BLOCK_SIZE_X = 512;
+constexpr U32 DEFAULT_BLOCK_SIZE_X = 512;
 constexpr U32 SOLVER_ITERATIONS = 64;
 
 const float DISTANCE_STIFFNESS = 0.3f;

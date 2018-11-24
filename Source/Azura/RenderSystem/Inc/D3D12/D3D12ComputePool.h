@@ -43,7 +43,7 @@ public:
   void SetUniformBufferData();
   void BindUniformData(SlotID slot, const U8* buffer, U32 size) override;
   void Submit() override;
-  void Record();
+  void Record(U32 passId);
 
   void BeginUpdates() override;
   void UpdateUniformData(SlotID slot, const U8* buffer, U32 size) override;
@@ -54,7 +54,7 @@ public:
   ID3D12PipelineState* GetPipelineState(U32 renderPassId) const;
 
 private:
-  void CreateRenderPassReferences(const ComputePoolCreateInfo& createInfo, const Containers::Vector<D3D12ScopedComputePass>& renderPasses);
+  void CreateRenderPassReferences(const ComputePoolCreateInfo& createInfo, const Containers::Vector<D3D12ScopedComputePass>& computePasses);
   void CreateDescriptorHeap();
 
   void SetTextureData(ID3D12GraphicsCommandList* oneTimeCommandList);

@@ -14,10 +14,10 @@
 
 
 namespace Azura {
-constexpr U32 BLOCK_SIZE_X = 512;
+constexpr U32 DEFAULT_BLOCK_SIZE_X = 512;
 constexpr U32 SOLVER_ITERATIONS = 64;
 
-const float DISTANCE_STIFFNESS = 0.3f;
+const float DISTANCE_STIFFNESS = 0.9f;
 const float BENDING_STIFFNESS = 0.05f;
 
 struct SceneUBO {
@@ -42,10 +42,26 @@ struct ComputeUBO
   float pad;
 };
 
+struct NormalUBO
+{
+  U32 m_numVertices;
+  U32 m_numTriangles;
+  float m_pad[2];
+};
+
+struct NormalsPassData
+{
+  U32 m_uboSlot;
+  U32 m_passId;
+};
+
 struct ComputePassData
 {
   U32 m_computeUBOSlot;
-  U32 m_passId;
+  U32 m_pass1;
+  U32 m_pass2;
+  U32 m_pass3;
+  U32 m_pass4;
 };
 
 struct PassData {
@@ -81,12 +97,14 @@ private:
   SceneUBO m_clothUBO{};
   SceneUBO m_sphereUBO{};
   ComputeUBO m_computeUBO{};
+  NormalUBO m_normalUBO{};
   DrawablePool* m_mainPool{nullptr};
   DrawablePool* m_spherePool{nullptr};
-  ComputePool* m_computePool{nullptr};
+  ComputePool* m_computePools[4]{nullptr, nullptr, nullptr, nullptr};
 
   PassData m_renderPass{};
   ComputePassData m_computePass{};
+  NormalsPassData m_normalsPass{};
 
   Physics::ClothPlane m_clothPlane;
 

@@ -373,7 +373,7 @@ void D3D12ComputePool::Submit() {
   
 }
 
-void D3D12ComputePool::Record()
+void D3D12ComputePool::Record(U32 passId)
 {
   // Record Command Buffer
 
@@ -391,6 +391,7 @@ void D3D12ComputePool::Record()
 
   for (const auto& renderPassRef : m_computePasses) {
     const auto& renderPass                   = renderPassRef.get();
+    bool shouldRecord = renderPass.GetId() == passId;
 
     ID3D12GraphicsCommandList* secondaryCommandList = renderPass.GetPrimaryComputeCommandList(0);
 
@@ -401,79 +402,82 @@ void D3D12ComputePool::Record()
     const auto& renderPassOutputTargets             = renderPass.GetOutputImages();
     const auto& renderPassOutputBuffers             = renderPass.GetOutputBuffers();
 
-    // Define Heap Handles
-    CD3DX12_GPU_DESCRIPTOR_HANDLE textureGPUHandle = CD3DX12_GPU_DESCRIPTOR_HANDLE(m_descriptorComputeHeap->GetGPUDescriptorHandleForHeapStart(),
-      sampledImageRecorded, m_cbvSrvDescriptorElementSize);
+    if (shouldRecord) {
+      // Define Heap Handles
+      CD3DX12_GPU_DESCRIPTOR_HANDLE textureGPUHandle = CD3DX12_GPU_DESCRIPTOR_HANDLE(m_descriptorComputeHeap->GetGPUDescriptorHandleForHeapStart(),
+        sampledImageRecorded, m_cbvSrvDescriptorElementSize);
 
-    const CD3DX12_GPU_DESCRIPTOR_HANDLE inputTargetsGPUHandle = CD3DX12_GPU_DESCRIPTOR_HANDLE(m_descriptorComputeHeap->GetGPUDescriptorHandleForHeapStart(),
-      m_offsetToComputePassInputTargets + inputTargetsRecorded,
-      m_cbvSrvDescriptorElementSize);
-    
-    const CD3DX12_GPU_DESCRIPTOR_HANDLE inputBuffersGPUHandle = CD3DX12_GPU_DESCRIPTOR_HANDLE(m_descriptorComputeHeap->GetGPUDescriptorHandleForHeapStart(),
-      m_offsetToComputePassInputBuffers + inputBuffersRecorded,
-      m_cbvSrvDescriptorElementSize);
+      const CD3DX12_GPU_DESCRIPTOR_HANDLE inputTargetsGPUHandle = CD3DX12_GPU_DESCRIPTOR_HANDLE(m_descriptorComputeHeap->GetGPUDescriptorHandleForHeapStart(),
+        m_offsetToComputePassInputTargets + inputTargetsRecorded,
+        m_cbvSrvDescriptorElementSize);
+      
+      const CD3DX12_GPU_DESCRIPTOR_HANDLE inputBuffersGPUHandle = CD3DX12_GPU_DESCRIPTOR_HANDLE(m_descriptorComputeHeap->GetGPUDescriptorHandleForHeapStart(),
+        m_offsetToComputePassInputBuffers + inputBuffersRecorded,
+        m_cbvSrvDescriptorElementSize);
 
-    const CD3DX12_GPU_DESCRIPTOR_HANDLE outputTargetsGPUHandle = CD3DX12_GPU_DESCRIPTOR_HANDLE(m_descriptorComputeHeap->GetGPUDescriptorHandleForHeapStart(),
-      m_offsetToComputePassOutputTargets + outputTargetsRecorded,
-      m_cbvSrvDescriptorElementSize);
-    
-    const CD3DX12_GPU_DESCRIPTOR_HANDLE outputBuffersGPUHandle = CD3DX12_GPU_DESCRIPTOR_HANDLE(m_descriptorComputeHeap->GetGPUDescriptorHandleForHeapStart(),
-      m_offsetToComputePassOutputBuffers + outputBuffersRecorded,
-      m_cbvSrvDescriptorElementSize);
+      const CD3DX12_GPU_DESCRIPTOR_HANDLE outputTargetsGPUHandle = CD3DX12_GPU_DESCRIPTOR_HANDLE(m_descriptorComputeHeap->GetGPUDescriptorHandleForHeapStart(),
+        m_offsetToComputePassOutputTargets + outputTargetsRecorded,
+        m_cbvSrvDescriptorElementSize);
+      
+      const CD3DX12_GPU_DESCRIPTOR_HANDLE outputBuffersGPUHandle = CD3DX12_GPU_DESCRIPTOR_HANDLE(m_descriptorComputeHeap->GetGPUDescriptorHandleForHeapStart(),
+        m_offsetToComputePassOutputBuffers + outputBuffersRecorded,
+        m_cbvSrvDescriptorElementSize);
 
-    CD3DX12_GPU_DESCRIPTOR_HANDLE samplerGPUHandle = {};
-    if (renderPassDescriptorCount.m_numSamplerSlots > 0) {
-      samplerGPUHandle = CD3DX12_GPU_DESCRIPTOR_HANDLE(m_descriptorSamplerHeap->GetGPUDescriptorHandleForHeapStart(),
-        samplersRecorded, m_samplerDescriptorElementSize);
-    }
-
-    CD3DX12_GPU_DESCRIPTOR_HANDLE uboGPUHandle(m_descriptorComputeHeap->GetGPUDescriptorHandleForHeapStart(), cbRecorded + m_offsetToConstantBuffers, m_cbvSrvDescriptorElementSize);
-
-    secondaryCommandList->SetDescriptorHeaps(UINT(m_allHeaps.GetSize()), m_allHeaps.Data());
-    secondaryCommandList->SetComputeRootSignature(renderPass.GetRootSignature());
-    secondaryCommandList->SetPipelineState(m_pipelines[idx].GetState());
-
-    U32 tableIdx = 0;
-    for (const auto& tableEntry : renderPassRootSignatureTable) {
-      if (tableEntry.m_type == DescriptorType::SampledImage) {
-        LOG_DEBUG(log_D3D12RenderSystem, LOG_LEVEL, "Setting Texture Descriptor Table at %d", tableIdx);
-        secondaryCommandList->SetComputeRootDescriptorTable(tableIdx, textureGPUHandle);
-        textureGPUHandle.Offset(tableEntry.m_count, m_cbvSrvDescriptorElementSize);
-      } else if (renderPassDescriptorCount.m_numSamplerSlots > 0 && tableEntry.m_type == DescriptorType::Sampler) {
-        LOG_DEBUG(log_D3D12RenderSystem, LOG_LEVEL, "Setting Sampler Descriptor Table at %d", tableIdx);
-        secondaryCommandList->SetComputeRootDescriptorTable(tableIdx, samplerGPUHandle);
-        samplerGPUHandle.Offset(tableEntry.m_count, m_samplerDescriptorElementSize);
-      } else if (tableEntry.m_type == DescriptorType::UniformBuffer) {
-        LOG_DEBUG(log_D3D12RenderSystem, LOG_LEVEL, "Setting Uniform Descriptor Table at %d", tableIdx);
-        secondaryCommandList->SetComputeRootDescriptorTable(tableIdx, uboGPUHandle);
-        uboGPUHandle.Offset(tableEntry.m_count, m_cbvSrvDescriptorElementSize);
+      CD3DX12_GPU_DESCRIPTOR_HANDLE samplerGPUHandle = {};
+      if (renderPassDescriptorCount.m_numSamplerSlots > 0) {
+        samplerGPUHandle = CD3DX12_GPU_DESCRIPTOR_HANDLE(m_descriptorSamplerHeap->GetGPUDescriptorHandleForHeapStart(),
+          samplersRecorded, m_samplerDescriptorElementSize);
       }
 
-      ++tableIdx;
-    }
+      CD3DX12_GPU_DESCRIPTOR_HANDLE uboGPUHandle(m_descriptorComputeHeap->GetGPUDescriptorHandleForHeapStart(), cbRecorded + m_offsetToConstantBuffers, m_cbvSrvDescriptorElementSize);
+      secondaryCommandList->SetDescriptorHeaps(UINT(m_allHeaps.GetSize()), m_allHeaps.Data());
+      secondaryCommandList->SetComputeRootSignature(renderPass.GetRootSignature());
+      secondaryCommandList->SetPipelineState(m_pipelines[idx].GetState());
 
-    if (renderPassInputTargets.GetSize() > 0) {
-      secondaryCommandList->SetComputeRootDescriptorTable(renderPass.GetInputTargetRootDescriptorTableId(), inputTargetsGPUHandle);
-      LOG_DEBUG(log_D3D12RenderSystem, LOG_LEVEL, "Setting Input Attachment Descriptor Table at %d",
-        renderPass.GetInputTargetRootDescriptorTableId());
-    }
+      U32 tableIdx = 0;
+      for (const auto& tableEntry : renderPassRootSignatureTable) {
+        if (tableEntry.m_type == DescriptorType::SampledImage) {
+          LOG_DEBUG(log_D3D12RenderSystem, LOG_LEVEL, "Setting Texture Descriptor Table at %d", tableIdx);
+          secondaryCommandList->SetComputeRootDescriptorTable(tableIdx, textureGPUHandle);
+          textureGPUHandle.Offset(tableEntry.m_count, m_cbvSrvDescriptorElementSize);
+        }
+        else if (renderPassDescriptorCount.m_numSamplerSlots > 0 && tableEntry.m_type == DescriptorType::Sampler) {
+          LOG_DEBUG(log_D3D12RenderSystem, LOG_LEVEL, "Setting Sampler Descriptor Table at %d", tableIdx);
+          secondaryCommandList->SetComputeRootDescriptorTable(tableIdx, samplerGPUHandle);
+          samplerGPUHandle.Offset(tableEntry.m_count, m_samplerDescriptorElementSize);
+        }
+        else if (tableEntry.m_type == DescriptorType::UniformBuffer) {
+          LOG_DEBUG(log_D3D12RenderSystem, LOG_LEVEL, "Setting Uniform Descriptor Table at %d", tableIdx);
+          secondaryCommandList->SetComputeRootDescriptorTable(tableIdx, uboGPUHandle);
+          uboGPUHandle.Offset(tableEntry.m_count, m_cbvSrvDescriptorElementSize);
+        }
 
-    if (renderPassInputBuffers.GetSize() > 0) {
-      secondaryCommandList->SetComputeRootDescriptorTable(renderPass.GetInputBufferRootDescriptorTableId(), inputBuffersGPUHandle);
-      LOG_DEBUG(log_D3D12RenderSystem, LOG_LEVEL, "Setting Input Buffer Descriptor Table at %d",
-        renderPass.GetInputBufferRootDescriptorTableId());
-    }
+        ++tableIdx;
+      }
 
-    if (renderPassOutputTargets.GetSize() > 0) {
-      secondaryCommandList->SetComputeRootDescriptorTable(renderPass.GetOutputTargetsRootDescriptorTableId(), outputTargetsGPUHandle);
-      LOG_DEBUG(log_D3D12RenderSystem, LOG_LEVEL, "Setting Output Attachment Descriptor Table at %d",
-        renderPass.GetOutputTargetsRootDescriptorTableId());
-    }
-    
-    if (renderPassOutputBuffers.GetSize() > 0) {
-      secondaryCommandList->SetComputeRootDescriptorTable(renderPass.GetOutputBuffersRootDescriptorTableId(), outputBuffersGPUHandle);
-      LOG_DEBUG(log_D3D12RenderSystem, LOG_LEVEL, "Setting Output Buffer Descriptor Table at %d",
-        renderPass.GetOutputBuffersRootDescriptorTableId());
+      if (renderPassInputTargets.GetSize() > 0) {
+        secondaryCommandList->SetComputeRootDescriptorTable(renderPass.GetInputTargetRootDescriptorTableId(), inputTargetsGPUHandle);
+        LOG_DEBUG(log_D3D12RenderSystem, LOG_LEVEL, "Setting Input Attachment Descriptor Table at %d",
+          renderPass.GetInputTargetRootDescriptorTableId());
+      }
+
+      if (renderPassInputBuffers.GetSize() > 0) {
+        secondaryCommandList->SetComputeRootDescriptorTable(renderPass.GetInputBufferRootDescriptorTableId(), inputBuffersGPUHandle);
+        LOG_DEBUG(log_D3D12RenderSystem, LOG_LEVEL, "Setting Input Buffer Descriptor Table at %d",
+          renderPass.GetInputBufferRootDescriptorTableId());
+      }
+
+      if (renderPassOutputTargets.GetSize() > 0) {
+        secondaryCommandList->SetComputeRootDescriptorTable(renderPass.GetOutputTargetsRootDescriptorTableId(), outputTargetsGPUHandle);
+        LOG_DEBUG(log_D3D12RenderSystem, LOG_LEVEL, "Setting Output Attachment Descriptor Table at %d",
+          renderPass.GetOutputTargetsRootDescriptorTableId());
+      }
+
+      if (renderPassOutputBuffers.GetSize() > 0) {
+        secondaryCommandList->SetComputeRootDescriptorTable(renderPass.GetOutputBuffersRootDescriptorTableId(), outputBuffersGPUHandle);
+        LOG_DEBUG(log_D3D12RenderSystem, LOG_LEVEL, "Setting Output Buffer Descriptor Table at %d",
+          renderPass.GetOutputBuffersRootDescriptorTableId());
+      }
     }
 
     inputTargetsRecorded += renderPassInputTargets.GetSize();
@@ -484,9 +488,11 @@ void D3D12ComputePool::Record()
     cbRecorded += renderPassDescriptorCount.m_numUniformSlots;
     sampledImageRecorded += renderPassDescriptorCount.m_numSampledImageSlots;
 
-    LOG_DBG(log_D3D12RenderSystem, LOG_LEVEL, "D3D12 Drawable Pool: Recording Commands For Dispatch");
+    LOG_DBG(log_D3D12RenderSystem, LOG_LEVEL, "D3D12 Compute Pool: Recording Commands For Dispatch");
 
-    secondaryCommandList->Dispatch(UINT(m_launchDims.m_x), UINT(m_launchDims.m_y), UINT(m_launchDims.m_z));
+    if (shouldRecord) {
+      secondaryCommandList->Dispatch(UINT(m_launchDims.m_x), UINT(m_launchDims.m_y), UINT(m_launchDims.m_z));
+    }
 
     ++idx;
   }
@@ -586,17 +592,17 @@ ID3D12PipelineState* D3D12ComputePool::GetPipelineState(U32 renderPassId) const 
 }
 
 void D3D12ComputePool::CreateRenderPassReferences(const ComputePoolCreateInfo& createInfo,
-                                                   const Containers::Vector<D3D12ScopedComputePass>& renderPasses) {
+                                                   const Containers::Vector<D3D12ScopedComputePass>& computePasses) {
 
   U32 idx = 0;
-  for (const auto& renderPass : renderPasses) {
+  for (const auto& pass : computePasses) {
     auto it = std::find_if(createInfo.m_computePasses.Begin(), createInfo.m_computePasses.End(), [&](U32 passId)
     {
-      return renderPass.GetId() == passId;
+      return pass.GetId() == passId;
     });
 
     if (it != createInfo.m_computePasses.End()) {
-      m_computePasses.PushBack(std::reference_wrapper<D3D12ScopedComputePass>(renderPasses[idx]));
+      m_computePasses.PushBack(std::reference_wrapper<D3D12ScopedComputePass>(computePasses[idx]));
     }
 
     ++idx;
