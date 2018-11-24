@@ -36,6 +36,10 @@ public:
   const U8* NormalData() const override;
   RawStorageFormat GetNormalFormat() const override;
 
+  U32 UVDataSize() const override;
+  const U8* UVData() const override;
+  RawStorageFormat GetUVFormat() const override;
+
 private:
   void AddEdgeTriangleNeighbor(const Edge& edge, const U32 triangleIdx);
 

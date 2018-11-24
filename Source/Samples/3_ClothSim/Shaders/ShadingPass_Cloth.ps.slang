@@ -4,15 +4,18 @@ const static float AMBIENT_TERM = 0.2;
 
 float4 main(NormalPixelInput input) : SV_Target
 {
-  float4 diffuseColor = float4(1.0, 0.33, 0.05, 1.0);
+  // float4 diffuseColor = float4(1.0, 0.33, 0.05, 1.0);
 
   float3 fragNormal = input.normal;
   float4 modelSpacePoint = input.modelPos;
 
+  float4 diffuseColor = textureBlock.albedo.Sample(samplerBlock.linearSampler, input.uv);
+  float4 aoShadow = textureBlock.ao.Sample(samplerBlock.linearSampler, input.uv);
+
   float3 lightVec = light.u_pos.xyz - modelSpacePoint.xyz;
 
   float diffuseTerm = dot(normalize(fragNormal), normalize(lightVec));
-  diffuseTerm = clamp(diffuseTerm, 0.0, 1.0);
+  diffuseTerm = clamp(diffuseTerm, 0.0, 1.0) * aoShadow.r;
 
   float lightIntensity = AMBIENT_TERM + diffuseTerm;
 

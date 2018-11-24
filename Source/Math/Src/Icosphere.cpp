@@ -137,6 +137,21 @@ RawStorageFormat IcoSphere::GetNormalFormat() const {
   return NORMAL_FORMAT;
 }
 
+U32 IcoSphere::UVDataSize() const {
+  // TODO(vasumahesh1): Not Implemented
+  return 0;
+}
+
+const U8* IcoSphere::UVData() const {
+  // TODO(vasumahesh1): Not Implemented
+  return nullptr;
+}
+
+RawStorageFormat IcoSphere::GetUVFormat() const {
+  // TODO(vasumahesh1): Not Implemented
+  return RawStorageFormat::UNKNOWN;
+}
+
 U32 IcoSphere::GetVertexCount() const {
   return U32(m_vertices.size());
 }

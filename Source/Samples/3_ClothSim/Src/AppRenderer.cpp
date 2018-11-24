@@ -23,6 +23,7 @@ struct LightData {
 
 constexpr U32 CLOTH_DIV_X = 20;
 constexpr U32 CLOTH_DIV_Y = 20;
+constexpr U32 TEXTURE_MEMORY = 0x4000000; // 64 MB
 } // namespace
 
 AppRenderer::AppRenderer()
@@ -100,10 +101,10 @@ void AppRenderer::Initialize() {
   const ApplicationRequirements applicationRequirements = {};
 
   TextureRequirements textureRequirements = {};
-  textureRequirements.m_maxCount          = 1;
-  textureRequirements.m_poolSize          = 0x400000; // 4MB
+  textureRequirements.m_maxCount          = 4;
+  textureRequirements.m_poolSize          = TEXTURE_MEMORY;
 
-  DescriptorRequirements descriptorRequirements = DescriptorRequirements(4, 4, allocatorTemporary);
+  DescriptorRequirements descriptorRequirements = DescriptorRequirements(10, 6, allocatorTemporary);
   // SET 0
   const U32 UBO_SLOT = descriptorRequirements.AddDescriptor({
     DescriptorType::UniformBuffer, ShaderStage::Vertex
@@ -111,6 +112,12 @@ void AppRenderer::Initialize() {
   const U32 LIGHT_SLOT = descriptorRequirements.AddDescriptor({
     DescriptorType::UniformBuffer, ShaderStage::Vertex
   });
+
+  const U32 SAMPLER_SLOT = descriptorRequirements.AddDescriptor({ DescriptorType::Sampler, ShaderStage::Pixel });
+  const U32 TEXTURE_SLOT = descriptorRequirements.AddDescriptor({ DescriptorType::SampledImage, ShaderStage::Pixel });
+  const U32 NORMALS_SLOT = descriptorRequirements.AddDescriptor({ DescriptorType::SampledImage, ShaderStage::Pixel });
+  const U32 ROUGHNESS_SLOT = descriptorRequirements.AddDescriptor({ DescriptorType::SampledImage, ShaderStage::Pixel });
+  const U32 AO_SLOT = descriptorRequirements.AddDescriptor({ DescriptorType::SampledImage, ShaderStage::Pixel });
 
   // SET 0 Compute
   m_computePass.m_computeUBOSlot = descriptorRequirements.AddDescriptor({
@@ -124,6 +131,8 @@ void AppRenderer::Initialize() {
 
   const U32 UBO_SET   = descriptorRequirements.AddSet({UBO_SLOT});
   const U32 LIGHT_SET = descriptorRequirements.AddSet({LIGHT_SLOT});
+  const U32 SAMPLER_SET = descriptorRequirements.AddSet({SAMPLER_SLOT});
+  const U32 TEXTURE_SET = descriptorRequirements.AddSet({TEXTURE_SLOT, NORMALS_SLOT, ROUGHNESS_SLOT, AO_SLOT});
 
   const U32 COMPUTE_UBO_SET = descriptorRequirements.AddSet({m_computePass.m_computeUBOSlot});
   const U32 COMPUTE_NORMALS_UBO_SET = descriptorRequirements.AddSet({m_normalsPass.m_uboSlot});
@@ -168,7 +177,7 @@ void AppRenderer::Initialize() {
   m_normalUBO.m_numTriangles = m_clothPlane.GetIndexCount() / 3;
   m_normalUBO.m_numVertices = m_clothPlane.GetVertexCount();
 
-  RenderPassRequirements renderPassRequirements = RenderPassRequirements(0, 3, 20, allocatorTemporary);
+  RenderPassRequirements renderPassRequirements = RenderPassRequirements(0, 10, 20, allocatorTemporary);
   renderPassRequirements.m_maxPools             = 5;
 
   const U32 COMPUTE_VERTEX_BUFFER = renderPassRequirements.AddBuffer({
@@ -214,6 +223,18 @@ void AppRenderer::Initialize() {
   const U32 COMPUTE_INDEX_BUFFER = renderPassRequirements.AddBuffer({
     U32(sizeof(U32)) * U32(m_clothPlane.GetIndexCount()), U32(sizeof(U32))
     });
+  //
+  // const U32 COMPUTE_VERTEX_TANX = renderPassRequirements.AddBuffer({
+  //   U32(sizeof(U32)) * U32(m_clothPlane.GetVertexCount()), U32(sizeof(U32))
+  //   });
+  //
+  // const U32 COMPUTE_VERTEX_TANY = renderPassRequirements.AddBuffer({
+  //   U32(sizeof(U32)) * U32(m_clothPlane.GetVertexCount()), U32(sizeof(U32))
+  //   });
+  //
+  // const U32 COMPUTE_VERTEX_TANZ = renderPassRequirements.AddBuffer({
+  //   U32(sizeof(U32)) * U32(m_clothPlane.GetVertexCount()), U32(sizeof(U32))
+  //   });
 
   m_computePass.m_pass1 = renderPassRequirements.AddPass({
     PipelinePassCreateInfo::Shaders{},
@@ -305,7 +326,7 @@ void AppRenderer::Initialize() {
     PipelinePassCreateInfo::InputBuffers{},                             // INPUT TARGETS
     PipelinePassCreateInfo::OutputTargets{},                            // OUTPUT TARGETS
     PipelinePassCreateInfo::OutputBuffers{},                            // OUTPUT TARGETS
-    PipelinePassCreateInfo::DescriptorSets{UBO_SET, LIGHT_SET},         // DESCRIPTORS
+    PipelinePassCreateInfo::DescriptorSets{UBO_SET, LIGHT_SET, SAMPLER_SET, TEXTURE_SET},         // DESCRIPTORS
     ClearData{{0.2f, 0.2f, 0.2f, 1.0f}, 1.0f, 0}
   });
 
@@ -322,6 +343,22 @@ void AppRenderer::Initialize() {
                                             *m_window);
 
   m_textureManager = RenderSystem::CreateTextureManager(textureRequirements);
+
+  const U32 albedoTexture = m_textureManager->Load("Textures/Fabric07_col.jpg");
+  const TextureDesc* albedoDesc = m_textureManager->GetInfo(albedoTexture);
+  VERIFY_TRUE(log_AppRenderer, albedoDesc != nullptr, "albedoDesc was Null");
+
+  const U32 normalTexture = m_textureManager->Load("Textures/Fabric07_nrm.jpg");
+  const TextureDesc* normalDesc = m_textureManager->GetInfo(normalTexture);
+  VERIFY_TRUE(log_AppRenderer, normalDesc != nullptr, "normalDesc was Null");
+
+  const U32 roughnessTexture = m_textureManager->Load("Textures/Fabric07_rgh.jpg");
+  const TextureDesc* roughnessDesc = m_textureManager->GetInfo(roughnessTexture);
+  VERIFY_TRUE(log_AppRenderer, roughnessDesc != nullptr, "roughnessDesc was Null");
+
+  const U32 aoTexture = m_textureManager->Load("Textures/Fabric07_AO.jpg");
+  const TextureDesc* aoDesc = m_textureManager->GetInfo(aoTexture);
+  VERIFY_TRUE(log_AppRenderer, aoDesc != nullptr, "aoDesc was Null");
 
   const auto clothParticleMass = reinterpret_cast<const U8*>(m_clothPlane.GetVertexInverseMass().Data()); // NOLINT
   m_renderer->BindBufferTarget(COMPUTE_VERTEX_INV_MASS, clothParticleMass);
@@ -423,7 +460,7 @@ void AppRenderer::Initialize() {
   IcoSphere sphere(4);
 
   DrawablePoolCreateInfo poolInfo = {allocatorTemporary};
-  poolInfo.m_byteSize             = sphere.TotalDataSize() + m_clothPlane.TotalDataSize() + 0x400000;
+  poolInfo.m_byteSize             = sphere.TotalDataSize() + m_clothPlane.TotalDataSize() + TEXTURE_MEMORY + 0x400000;
   poolInfo.m_numDrawables         = 2;
   poolInfo.m_renderPasses         = {{RENDER_PASS}, allocatorTemporary};
   poolInfo.m_drawType             = DrawType::InstancedIndexed;
@@ -431,6 +468,10 @@ void AppRenderer::Initialize() {
   const auto VERTEX_SLOT = poolInfo.AddInputSlot({
     BufferUsageRate::PerVertex, {{"POSITION", m_clothPlane.GetVertexFormat()}}, 0, BufferSource::StructuredBuffer
   });
+
+  const auto UV_SLOT = poolInfo.AddInputSlot({
+    BufferUsageRate::PerVertex, {{"UV", m_clothPlane.GetUVFormat()}}
+    });
 
   const auto NORMAL_SLOT_X = poolInfo.AddInputSlot({
     BufferUsageRate::PerVertex, {{"NORMALX", RawStorageFormat::R32_UINT}}, 0, BufferSource::StructuredBuffer
@@ -444,7 +485,19 @@ void AppRenderer::Initialize() {
     BufferUsageRate::PerVertex, {{"NORMALZ", RawStorageFormat::R32_UINT}}, 0, BufferSource::StructuredBuffer
   });
 
-  DrawablePool& pool = m_renderer->CreateDrawablePool(poolInfo);
+  // const auto TANGENT_SLOT_X = poolInfo.AddInputSlot({
+  //   BufferUsageRate::PerVertex, {{"TANGENTX", RawStorageFormat::R32_UINT}}, 0, BufferSource::StructuredBuffer
+  //   });
+  //
+  // const auto TANGENT_SLOT_Y = poolInfo.AddInputSlot({
+  //   BufferUsageRate::PerVertex, {{"TANGENTY", RawStorageFormat::R32_UINT}}, 0, BufferSource::StructuredBuffer
+  //   });
+  //
+  // const auto TANGENT_SLOT_Z = poolInfo.AddInputSlot({
+  //   BufferUsageRate::PerVertex, {{"TANGENTZ", RawStorageFormat::R32_UINT}}, 0, BufferSource::StructuredBuffer
+  //   });
+
+  DrawablePool& clothPool = m_renderer->CreateDrawablePool(poolInfo);
 
   const auto uboDataBuffer   = reinterpret_cast<U8*>(&m_clothUBO);  // NOLINT
   // const auto sphereUBO       = reinterpret_cast<U8*>(&m_sphereUBO); // NOLINT
@@ -456,14 +509,24 @@ void AppRenderer::Initialize() {
   createInfo.m_instanceCount    = 1;
   createInfo.m_indexType        = RawStorageFormat::R32_UINT;
 
-  const auto clothId = pool.CreateDrawable(createInfo);
-  pool.BindVertexData(clothId, VERTEX_SLOT, COMPUTE_VERTEX_BUFFER, 0, m_clothPlane.VertexDataSize());
-  pool.BindVertexData(clothId, NORMAL_SLOT_X, COMPUTE_VERTEX_DELTAX, 0, m_clothPlane.GetVertexCount() * U32(sizeof(float)));
-  pool.BindVertexData(clothId, NORMAL_SLOT_Y, COMPUTE_VERTEX_DELTAY, 0, m_clothPlane.GetVertexCount() * U32(sizeof(float)));
-  pool.BindVertexData(clothId, NORMAL_SLOT_Z, COMPUTE_VERTEX_DELTAZ, 0, m_clothPlane.GetVertexCount() * U32(sizeof(float)));
-  pool.SetIndexData(clothId, m_clothPlane.IndexData(), m_clothPlane.IndexDataSize());
-  pool.BindUniformData(clothId, UBO_SLOT, uboDataBuffer, sizeof(SceneUBO));
-  pool.BindUniformData(clothId, LIGHT_SLOT, lightDataBuffer, sizeof(LightData));
+  clothPool.BindSampler(SAMPLER_SLOT, {});
+  clothPool.BindTextureData(TEXTURE_SLOT, *albedoDesc, m_textureManager->GetData(albedoTexture));
+  clothPool.BindTextureData(NORMALS_SLOT, *normalDesc, m_textureManager->GetData(normalTexture));
+  clothPool.BindTextureData(ROUGHNESS_SLOT, *roughnessDesc, m_textureManager->GetData(roughnessTexture));
+  clothPool.BindTextureData(AO_SLOT, *aoDesc, m_textureManager->GetData(aoTexture));
+
+  const auto clothId = clothPool.CreateDrawable(createInfo);
+  clothPool.BindVertexData(clothId, VERTEX_SLOT, COMPUTE_VERTEX_BUFFER, 0, m_clothPlane.VertexDataSize());
+  clothPool.BindVertexData(clothId, UV_SLOT, m_clothPlane.UVData(), m_clothPlane.UVDataSize());
+  clothPool.BindVertexData(clothId, NORMAL_SLOT_X, COMPUTE_VERTEX_DELTAX, 0, m_clothPlane.GetVertexCount() * U32(sizeof(float)));
+  clothPool.BindVertexData(clothId, NORMAL_SLOT_Y, COMPUTE_VERTEX_DELTAY, 0, m_clothPlane.GetVertexCount() * U32(sizeof(float)));
+  clothPool.BindVertexData(clothId, NORMAL_SLOT_Z, COMPUTE_VERTEX_DELTAZ, 0, m_clothPlane.GetVertexCount() * U32(sizeof(float)));
+  // clothPool.BindVertexData(clothId, TANGENT_SLOT_X, COMPUTE_VERTEX_TANX, 0, m_clothPlane.GetVertexCount() * U32(sizeof(float)));
+  // clothPool.BindVertexData(clothId, TANGENT_SLOT_Y, COMPUTE_VERTEX_TANY, 0, m_clothPlane.GetVertexCount() * U32(sizeof(float)));
+  // clothPool.BindVertexData(clothId, TANGENT_SLOT_Z, COMPUTE_VERTEX_TANZ, 0, m_clothPlane.GetVertexCount() * U32(sizeof(float)));
+  clothPool.SetIndexData(clothId, m_clothPlane.IndexData(), m_clothPlane.IndexDataSize());
+  clothPool.BindUniformData(clothId, UBO_SLOT, uboDataBuffer, sizeof(SceneUBO));
+  clothPool.BindUniformData(clothId, LIGHT_SLOT, lightDataBuffer, sizeof(LightData));
 
   // DrawableCreateInfo sphereDrawableInfo = {};
   // sphereDrawableInfo.m_vertexCount      = sphere.GetVertexCount();
@@ -499,7 +562,7 @@ void AppRenderer::Initialize() {
   m_renderPass.m_clothId      = clothId;
   // m_renderPass.m_sphereId     = sphereId;
 
-  m_mainPool   = &pool;
+  m_mainPool   = &clothPool;
   // m_spherePool = &spherePool;
 
   // All Drawables Done

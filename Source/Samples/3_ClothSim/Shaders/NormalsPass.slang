@@ -15,6 +15,9 @@ struct RWBlock {
   RWStructuredBuffer<uint> normalX;
   RWStructuredBuffer<uint> normalY;
   RWStructuredBuffer<uint> normalZ;
+  // RWStructuredBuffer<uint> tanX;
+  // RWStructuredBuffer<uint> tanY;
+  // RWStructuredBuffer<uint> tanZ;
 };
 
 ParameterBlock<NormalsUBO> uboBlock;
