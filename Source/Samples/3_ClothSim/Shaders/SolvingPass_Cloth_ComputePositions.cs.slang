@@ -22,8 +22,8 @@ void main(
     clothDataBlock.deltaY[threadIdx] = 0;
     clothDataBlock.deltaZ[threadIdx] = 0;
 
-    // clothDataBlock.tanX[threadIdx] = 0;
-    // clothDataBlock.tanY[threadIdx] = 0;
-    // clothDataBlock.tanZ[threadIdx] = 0;
+    clothDataBlock.tanX[threadIdx] = 0;
+    clothDataBlock.tanY[threadIdx] = 0;
+    clothDataBlock.tanZ[threadIdx] = 0;
   }
 }

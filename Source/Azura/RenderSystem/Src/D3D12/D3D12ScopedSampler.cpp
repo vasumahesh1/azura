@@ -25,7 +25,7 @@ void D3D12ScopedSampler::Create(const SamplerDesc& desc, const Log& log_D3D12Ren
   m_desc.AddressV = addressV.value();
   m_desc.AddressW = addressW.value();
   m_desc.MipLODBias = 0;
-  m_desc.MaxAnisotropy = 0;
+  m_desc.MaxAnisotropy = 16;
   m_desc.ComparisonFunc = D3D12_COMPARISON_FUNC_NEVER;
   m_desc.MinLOD = 0.0f;
   m_desc.MaxLOD = D3D12_FLOAT32_MAX;

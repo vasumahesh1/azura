@@ -3,7 +3,7 @@ struct NormalPixelInput
   float4 pos : SV_Position;
   float4 modelPos : PS_MODELPOS;
   float3 normal : PS_NORMAL;
-  // float3 tangent : PS_TANGENT;
+  float3 tangent : PS_TANGENT;
   float2 uv : PS_UV;
 };
 
@@ -14,9 +14,9 @@ struct ClothVertexInput
   uint in_NormalX : NORMALX;
   uint in_NormalY : NORMALY;
   uint in_NormalZ : NORMALZ;
-  // uint in_TangentX : TANGENTX;
-  // uint in_TangentY : TANGENTY;
-  // uint in_TangentZ : TANGENTZ;
+  uint in_TangentX : TANGENTX;
+  uint in_TangentY : TANGENTY;
+  uint in_TangentZ : TANGENTZ;
 };
 
 struct SceneUBO {

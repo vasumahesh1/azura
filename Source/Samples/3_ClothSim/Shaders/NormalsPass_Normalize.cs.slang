@@ -55,59 +55,59 @@ void AtomicAddNormalZ(uint addr, float value)
 }
 
 // Tangents
-// void AtomicAddTangentX(uint addr, float value)
-// {
-//   uint i_val = asuint(value);
-//   uint tmp0 = 0;
-//   uint tmp1;
+void AtomicAddTangentX(uint addr, float value)
+{
+  uint i_val = asuint(value);
+  uint tmp0 = 0;
+  uint tmp1;
 
-//   [allow_uav_condition] while(true)
-//   {
-//     InterlockedCompareExchange(rwBlock.tanX[addr], tmp0, i_val, tmp1);
+  [allow_uav_condition] while(true)
+  {
+    InterlockedCompareExchange(rwBlock.tanX[addr], tmp0, i_val, tmp1);
 
-//     if (tmp1 == tmp0)
-//       break;
+    if (tmp1 == tmp0)
+      break;
 
-//     tmp0 = tmp1;
-//     i_val = asuint(value + asfloat(tmp1));
-//   }
-// }
+    tmp0 = tmp1;
+    i_val = asuint(value + asfloat(tmp1));
+  }
+}
 
-// void AtomicAddTangentY(uint addr, float value)
-// {
-//   uint i_val = asuint(value);
-//   uint tmp0 = 0;
-//   uint tmp1;
+void AtomicAddTangentY(uint addr, float value)
+{
+  uint i_val = asuint(value);
+  uint tmp0 = 0;
+  uint tmp1;
 
-//   [allow_uav_condition] while(true)
-//   {
-//     InterlockedCompareExchange(rwBlock.tanY[addr], tmp0, i_val, tmp1);
+  [allow_uav_condition] while(true)
+  {
+    InterlockedCompareExchange(rwBlock.tanY[addr], tmp0, i_val, tmp1);
 
-//     if (tmp1 == tmp0)
-//       break;
+    if (tmp1 == tmp0)
+      break;
 
-//     tmp0 = tmp1;
-//     i_val = asuint(value + asfloat(tmp1));
-//   }
-// }
+    tmp0 = tmp1;
+    i_val = asuint(value + asfloat(tmp1));
+  }
+}
 
-// void AtomicAddTangentZ(uint addr, float value)
-// {
-//   uint i_val = asuint(value);
-//   uint tmp0 = 0;
-//   uint tmp1;
+void AtomicAddTangentZ(uint addr, float value)
+{
+  uint i_val = asuint(value);
+  uint tmp0 = 0;
+  uint tmp1;
 
-//   [allow_uav_condition] while(true)
-//   {
-//     InterlockedCompareExchange(rwBlock.tanZ[addr], tmp0, i_val, tmp1);
+  [allow_uav_condition] while(true)
+  {
+    InterlockedCompareExchange(rwBlock.tanZ[addr], tmp0, i_val, tmp1);
 
-//     if (tmp1 == tmp0)
-//       break;
+    if (tmp1 == tmp0)
+      break;
 
-//     tmp0 = tmp1;
-//     i_val = asuint(value + asfloat(tmp1));
-//   }
-// }
+    tmp0 = tmp1;
+    i_val = asuint(value + asfloat(tmp1));
+  }
+}
 
 [numthreads(BLOCK_SIZE_X, 1, 1)]
 void main(
@@ -146,15 +146,15 @@ void main(
   AtomicAddNormalZ(id1, normal.z);
   AtomicAddNormalZ(id2, normal.z);
 
-  // AtomicAddTangentX(id0, v10.x);
-  // AtomicAddTangentX(id1, v10.x);
-  // AtomicAddTangentX(id2, v20.x);
+  AtomicAddTangentX(id0, v10.x);
+  AtomicAddTangentX(id1, v10.x);
+  AtomicAddTangentX(id2, v20.x);
 
-  // AtomicAddTangentY(id0, v10.y);
-  // AtomicAddTangentY(id1, v10.y);
-  // AtomicAddTangentY(id2, v20.y);
+  AtomicAddTangentY(id0, v10.y);
+  AtomicAddTangentY(id1, v10.y);
+  AtomicAddTangentY(id2, v20.y);
 
-  // AtomicAddTangentZ(id0, v10.z);
-  // AtomicAddTangentZ(id1, v10.z);
-  // AtomicAddTangentZ(id2, v20.z);
+  AtomicAddTangentZ(id0, v10.z);
+  AtomicAddTangentZ(id1, v10.z);
+  AtomicAddTangentZ(id2, v20.z);
 }
