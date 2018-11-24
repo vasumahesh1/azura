@@ -17,8 +17,8 @@ namespace Azura {
 constexpr U32 BLOCK_SIZE_X = 512;
 constexpr U32 SOLVER_ITERATIONS = 64;
 
-const float DISTANCE_STIFFNESS = 0.3f;
-const float BENDING_STIFFNESS = 0.05f;
+const float DISTANCE_STIFFNESS = 0.9f;
+const float BENDING_STIFFNESS = 0.5f;
 
 struct SceneUBO {
   Matrix4f m_model;
@@ -40,6 +40,19 @@ struct ComputeUBO
   U32 m_numVertices;
   U32 m_numBlocks;
   float pad;
+};
+
+struct NormalUBO
+{
+  U32 m_numVertices;
+  U32 m_numTriangles;
+  float m_pad[2];
+};
+
+struct NormalsPassData
+{
+  U32 m_uboSlot;
+  U32 m_passId;
 };
 
 struct ComputePassData
@@ -81,12 +94,14 @@ private:
   SceneUBO m_clothUBO{};
   SceneUBO m_sphereUBO{};
   ComputeUBO m_computeUBO{};
+  NormalUBO m_normalUBO{};
   DrawablePool* m_mainPool{nullptr};
   DrawablePool* m_spherePool{nullptr};
   ComputePool* m_computePool{nullptr};
 
   PassData m_renderPass{};
   ComputePassData m_computePass{};
+  NormalsPassData m_normalsPass{};
 
   Physics::ClothPlane m_clothPlane;
 

@@ -374,18 +374,11 @@ void D3D12Renderer::Submit() {
 
     computePass.RecordResourceBarriersForOutputsStart(commandList);
     computePass.RecordResourceBarriersForInputsStart(commandList);
-  }
 
-  // Record Pool Wise - Pass Wise data
-  for (auto& computePool : m_computePools) {
-    computePool.Record();
-  }
-
-  // Close Recording
-  for (U32 idx = 0; idx < m_computePasses.GetSize(); ++idx) {
-    auto& computePass = m_computePasses[idx];
-
-    const auto commandList = computePass.GetPrimaryComputeCommandList(0);
+    // Record Pool Wise - Pass Wise data
+    for (auto& computePool : m_computePools) {
+      computePool.Record(computePass.GetId());
+    }
 
     computePass.RecordResourceBarriersForOutputsEnd(commandList);
     computePass.RecordResourceBarriersForInputsEnd(commandList);

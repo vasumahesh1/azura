@@ -21,8 +21,8 @@ struct LightData {
   Vector4f m_lightPos;
 };
 
-constexpr U32 CLOTH_DIV_X = 30;
-constexpr U32 CLOTH_DIV_Y = 30;
+constexpr U32 CLOTH_DIV_X = 10;
+constexpr U32 CLOTH_DIV_Y = 10;
 } // namespace
 
 AppRenderer::AppRenderer()
@@ -102,7 +102,7 @@ void AppRenderer::Initialize() {
   textureRequirements.m_maxCount          = 1;
   textureRequirements.m_poolSize          = 0x400000; // 4MB
 
-  DescriptorRequirements descriptorRequirements = DescriptorRequirements(3, 3, allocatorTemporary);
+  DescriptorRequirements descriptorRequirements = DescriptorRequirements(4, 4, allocatorTemporary);
   // SET 0
   const U32 UBO_SLOT = descriptorRequirements.AddDescriptor({
     DescriptorType::UniformBuffer, ShaderStage::Vertex
@@ -116,12 +116,18 @@ void AppRenderer::Initialize() {
     DescriptorType::UniformBuffer, ShaderStage::Compute
   });
 
+  // SET 0 Normal Compute
+  m_normalsPass.m_uboSlot = descriptorRequirements.AddDescriptor({
+    DescriptorType::UniformBuffer, ShaderStage::Compute
+    });
+
   const U32 UBO_SET   = descriptorRequirements.AddSet({UBO_SLOT});
   const U32 LIGHT_SET = descriptorRequirements.AddSet({LIGHT_SLOT});
 
   const U32 COMPUTE_UBO_SET = descriptorRequirements.AddSet({m_computePass.m_computeUBOSlot});
+  const U32 COMPUTE_NORMALS_UBO_SET = descriptorRequirements.AddSet({m_normalsPass.m_uboSlot});
 
-  ShaderRequirements shaderRequirements = ShaderRequirements(3, allocatorTemporary);
+  ShaderRequirements shaderRequirements = ShaderRequirements(4, allocatorTemporary);
   const U32 COMPUTE_SHADER_ID           = shaderRequirements.AddShader({
     ShaderStage::Compute, "SolvingPass_Cloth.cs", AssetLocation::Shaders
   });
@@ -133,12 +139,20 @@ void AppRenderer::Initialize() {
     ShaderStage::Pixel, "ShadingPass_Cloth.ps", AssetLocation::Shaders
   });
 
+  const U32 COMPUTE_NORMALS_SHADER_ID           = shaderRequirements.AddShader({
+    ShaderStage::Compute, "NormalsPass_Normalize.cs", AssetLocation::Shaders
+    });
+
   const auto solvingView = m_clothPlane.GetPBDSolvingView(m_localAllocator);
   const auto& clothDistanceConstraints = solvingView.GetDistanceConstraints();
   const auto& clothBendingConstraints = solvingView.GetBendingConstraints();
 
-  RenderPassRequirements renderPassRequirements = RenderPassRequirements(0, 2, 15, allocatorTemporary);
-  renderPassRequirements.m_maxPools             = 2;
+  m_normalUBO = {};
+  m_normalUBO.m_numTriangles = m_clothPlane.GetIndexCount() / 3;
+  m_normalUBO.m_numVertices = m_clothPlane.GetVertexCount();
+
+  RenderPassRequirements renderPassRequirements = RenderPassRequirements(0, 3, 20, allocatorTemporary);
+  renderPassRequirements.m_maxPools             = 3;
 
   const U32 COMPUTE_VERTEX_BUFFER = renderPassRequirements.AddBuffer({
     U32(sizeof(Vector3f)) * U32(m_clothPlane.GetVertexCount()), U32(sizeof(Vector3f))
@@ -180,6 +194,26 @@ void AppRenderer::Initialize() {
     U32(sizeof(BendingConstraint)) * U32(clothBendingConstraints.GetSize()), U32(sizeof(BendingConstraint))
     });
 
+  const U32 COMPUTE_VERTEX_NORMALS = renderPassRequirements.AddBuffer({
+    U32(sizeof(Vector3f)) * U32(m_clothPlane.GetVertexCount()), U32(sizeof(Vector3f))
+    });
+
+  const U32 COMPUTE_VERTEX_NORMAL_X = renderPassRequirements.AddBuffer({
+    U32(sizeof(U32)) * U32(m_clothPlane.GetVertexCount()), U32(sizeof(U32))
+    });
+
+  const U32 COMPUTE_VERTEX_NORMAL_Y = renderPassRequirements.AddBuffer({
+    U32(sizeof(U32)) * U32(m_clothPlane.GetVertexCount()), U32(sizeof(U32))
+    });
+
+  const U32 COMPUTE_VERTEX_NORMAL_Z = renderPassRequirements.AddBuffer({
+    U32(sizeof(U32)) * U32(m_clothPlane.GetVertexCount()), U32(sizeof(U32))
+    });
+
+  const U32 COMPUTE_INDEX_BUFFER = renderPassRequirements.AddBuffer({
+    U32(sizeof(U32)) * U32(m_clothPlane.GetIndexCount()), U32(sizeof(U32))
+    });
+
   m_computePass.m_passId = renderPassRequirements.AddPass({
     PipelinePassCreateInfo::Shaders{COMPUTE_SHADER_ID},
     PipelinePassCreateInfo::InputTargets{},
@@ -196,6 +230,22 @@ void AppRenderer::Initialize() {
     BlendState{},
     RenderPassType::Compute
   });
+
+  m_normalsPass.m_passId = renderPassRequirements.AddPass({
+    PipelinePassCreateInfo::Shaders{COMPUTE_NORMALS_SHADER_ID},
+    PipelinePassCreateInfo::InputTargets{},
+    PipelinePassCreateInfo::InputBuffers{
+      {COMPUTE_INDEX_BUFFER, ShaderStage::Compute}, {COMPUTE_VERTEX_BUFFER, ShaderStage::Compute}
+    },
+    PipelinePassCreateInfo::OutputTargets{},
+    PipelinePassCreateInfo::OutputBuffers{
+      COMPUTE_VERTEX_NORMALS, COMPUTE_VERTEX_NORMAL_X, COMPUTE_VERTEX_NORMAL_Y, COMPUTE_VERTEX_NORMAL_Z
+    },
+    PipelinePassCreateInfo::DescriptorSets{COMPUTE_NORMALS_UBO_SET},
+    ClearData{{0.0f, 0.0f, 0.0f, 1.0f}, 1.0f, 0},
+    BlendState{},
+    RenderPassType::Compute
+    });
 
   const U32 RENDER_PASS = renderPassRequirements.AddPass({
     PipelinePassCreateInfo::Shaders{VERTEX_SHADER_ID, PIXEL_SHADER_ID}, // SHADERS
@@ -246,6 +296,10 @@ void AppRenderer::Initialize() {
   m_renderer->BindBufferTarget(COMPUTE_VERTEX_DELTAY, deltaStart);
   m_renderer->BindBufferTarget(COMPUTE_VERTEX_DELTAZ, deltaStart);
 
+  m_renderer->BindBufferTarget(COMPUTE_INDEX_BUFFER, m_clothPlane.IndexData());
+
+
+  // CREATE COMPUTE POOL - PBD
   const U32 numBlocks     = (totalConstraints + BLOCK_SIZE_X - 1) / BLOCK_SIZE_X;
 
   ComputePoolCreateInfo computePoolInfo = {allocatorTemporary};
@@ -271,6 +325,18 @@ void AppRenderer::Initialize() {
   const auto computeUBOStart = reinterpret_cast<const U8*>(&m_computeUBO); // NOLINT
   computePool.BindUniformData(m_computePass.m_computeUBOSlot, computeUBOStart, sizeof(ComputeUBO));
 
+  // CREATE COMPUTE POOL - NORMALS
+  const U32 numBlocksForNormalize     = (m_normalUBO.m_numVertices + BLOCK_SIZE_X - 1) / BLOCK_SIZE_X;
+
+  ComputePoolCreateInfo normComputePoolInfo = {allocatorTemporary};
+  normComputePoolInfo.m_byteSize            = 0xF00000;
+  normComputePoolInfo.m_computePasses       = {{m_normalsPass.m_passId}, allocatorTemporary};
+  normComputePoolInfo.m_launchDims          = ThreadGroupDimensions{numBlocksForNormalize, 1, 1};
+
+  ComputePool& normComputePool = m_renderer->CreateComputePool(normComputePoolInfo);
+  const auto normUBOStart = reinterpret_cast<const U8*>(&m_normalUBO); // NOLINT
+  normComputePool.BindUniformData(m_normalsPass.m_uboSlot, normUBOStart, sizeof(NormalUBO));
+
   IcoSphere sphere(4);
 
   DrawablePoolCreateInfo poolInfo = {allocatorTemporary};
@@ -284,7 +350,7 @@ void AppRenderer::Initialize() {
   });
 
   const auto NORMAL_SLOT = poolInfo.AddInputSlot({
-    BufferUsageRate::PerVertex, {{"NORMAL", m_clothPlane.GetNormalFormat()}}
+    BufferUsageRate::PerVertex, {{"NORMAL", m_clothPlane.GetNormalFormat()}}, 0, BufferSource::StructuredBuffer
   });
 
   DrawablePool& pool = m_renderer->CreateDrawablePool(poolInfo);
@@ -301,7 +367,7 @@ void AppRenderer::Initialize() {
 
   const auto clothId = pool.CreateDrawable(createInfo);
   pool.BindVertexData(clothId, VERTEX_SLOT, COMPUTE_VERTEX_BUFFER, 0, m_clothPlane.VertexDataSize());
-  pool.BindVertexData(clothId, NORMAL_SLOT, m_clothPlane.NormalData(), m_clothPlane.NormalDataSize());
+  pool.BindVertexData(clothId, NORMAL_SLOT, COMPUTE_VERTEX_NORMALS, 0, m_clothPlane.NormalDataSize());
   pool.SetIndexData(clothId, m_clothPlane.IndexData(), m_clothPlane.IndexDataSize());
   pool.BindUniformData(clothId, UBO_SLOT, uboDataBuffer, sizeof(SceneUBO));
   pool.BindUniformData(clothId, LIGHT_SLOT, lightDataBuffer, sizeof(LightData));
