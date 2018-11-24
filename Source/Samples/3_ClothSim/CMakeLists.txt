@@ -31,3 +31,7 @@ AzuraAddSlangShaders(ClothSim DXBC ${PROJECT_SHADERS})
 
 target_include_directories(ClothSim PUBLIC ${PROJECT_SOURCE_DIR}/Inc)
 target_link_libraries(ClothSim D3D12RenderSystem Camera Log Physics glfw Math)
+
+AzuraDeployTarget(ClothSim)
+AzuraDeployTargetFolder(ClothSim ${PROJECT_BINARY_DIR}/Shaders Shaders)
+AzuraDeployTargetFolder(ClothSim ${PROJECT_BINARY_DIR}/Textures Textures)
