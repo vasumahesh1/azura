@@ -31,6 +31,10 @@ public:
   const U8* NormalData() const override;
   RawStorageFormat GetNormalFormat() const override;
 
+  U32 UVDataSize() const override;
+  const U8* UVData() const override;
+  RawStorageFormat GetUVFormat() const override;
+
   const Containers::Vector<float>& GetVertexInverseMass() const;
 
   // TODO(vasumahesh1): Pending Override
@@ -47,6 +51,7 @@ private:
   Containers::Vector<float> m_vertexInvMass;
   Containers::Vector<Vector3f> m_normals;
   Containers::Vector<Vector3u> m_triangles;
+  Containers::Vector<Vector2f> m_uv;
 };
 
 } // namespace Physics

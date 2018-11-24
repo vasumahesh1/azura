@@ -41,6 +41,9 @@ struct VertexBlock {
     RWStructuredBuffer<uint> deltaX;
     RWStructuredBuffer<uint> deltaY;
     RWStructuredBuffer<uint> deltaZ;
+    RWStructuredBuffer<uint> tanX;
+    RWStructuredBuffer<uint> tanY;
+    RWStructuredBuffer<uint> tanZ;
 };
 
 ParameterBlock<ComputeUBO> computeUBOBlock;

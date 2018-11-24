@@ -9,6 +9,7 @@ using namespace PBD; // NOLINT
 
 namespace {
 const RawStorageFormat VERTEX_FORMAT = RawStorageFormat::R32G32B32_FLOAT;
+const RawStorageFormat UV_FORMAT = RawStorageFormat::R32G32_FLOAT;
 const RawStorageFormat NORMAL_FORMAT = RawStorageFormat::R32G32B32_FLOAT;
 const RawStorageFormat INDEX_FORMAT  = RawStorageFormat::R32_UINT;
 
@@ -33,7 +34,8 @@ ClothPlane::ClothPlane(ClothTriangulation triangulation,
   : m_vertices(allocator),
     m_vertexInvMass(allocator),
     m_normals(allocator),
-    m_triangles(allocator) {
+    m_triangles(allocator),
+    m_uv(allocator) {
   const float stepX = float(boundMax[0] - boundMin[0]) / subDivisions[0];
   const float stepY = float(boundMax[1] - boundMin[1]) / subDivisions[1];
 
@@ -48,16 +50,27 @@ ClothPlane::ClothPlane(ClothTriangulation triangulation,
 
   m_vertices.Reserve(totalVertices);
   m_normals.Reserve(totalVertices);
+  m_uv.Reserve(totalVertices);
   m_triangles.Reserve(subDivisions[0] * subDivisions[1] * 2);
 
+  U32 xCount = 0;
+  U32 yCount = 0;
   for (float xCoord   = boundMin[0]; xCoord <= boundMax[0] + EPSILON;) {
+    yCount = 0;
     for (float yCoord = boundMin[1]; yCoord <= boundMax[1] + EPSILON;) {
       m_vertices.EmplaceBack(xCoord, 0.0f, yCoord);
       m_normals.EmplaceBack(0.0f, 1.0f, 0.0f);
+
+      const float uvX = xCount / float(subDivisions[0]);
+      const float uvY = yCount / float(subDivisions[1]);
+      m_uv.EmplaceBack(uvX, uvY);
+
       yCoord += stepY;
+      ++yCount;
     }
 
     xCoord += stepX;
+    ++xCount;
   }
 
   m_vertexInvMass.Reserve(m_vertices.GetSize());
@@ -122,6 +135,10 @@ U32 ClothPlane::NormalDataSize() const {
   return U32(m_normals.GetSize() * GetFormatSize(NORMAL_FORMAT));
 }
 
+U32 ClothPlane::UVDataSize() const {
+  return U32(m_vertices.GetSize() * GetFormatSize(UV_FORMAT));
+}
+
 const U8* ClothPlane::VertexData() const {
   // NOLINTNEXTLINE(cppcoreguidelines-pro-type-reinterpret-cast)
   return reinterpret_cast<const U8*>(m_vertices.Data());
@@ -137,6 +154,11 @@ const U8* ClothPlane::NormalData() const {
   return reinterpret_cast<const U8*>(m_normals.Data());
 }
 
+const U8* ClothPlane::UVData() const {
+  // NOLINTNEXTLINE(cppcoreguidelines-pro-type-reinterpret-cast)
+  return reinterpret_cast<const U8*>(m_uv.Data());
+}
+
 RawStorageFormat ClothPlane::GetVertexFormat() const {
   return VERTEX_FORMAT;
 }
@@ -147,6 +169,10 @@ RawStorageFormat ClothPlane::GetIndexFormat() const {
 
 RawStorageFormat ClothPlane::GetNormalFormat() const {
   return NORMAL_FORMAT;
+}
+
+RawStorageFormat ClothPlane::GetUVFormat() const {
+  return UV_FORMAT;
 }
 
 const Containers::Vector<float>& ClothPlane::GetVertexInverseMass() const {
@@ -240,7 +266,7 @@ U32 ClothPlane::GetIndexCount() const {
 }
 
 U32 ClothPlane::TotalDataSize() const {
-  return VertexDataSize() + IndexDataSize() + NormalDataSize();
+  return VertexDataSize() + IndexDataSize() + NormalDataSize() + UVDataSize();
 }
 
 void ClothPlane::AddEdgeTriangleNeighbor(const Edge& edge, const U32 triangleIdx) {

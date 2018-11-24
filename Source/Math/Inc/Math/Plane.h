@@ -14,8 +14,11 @@ public:
 
   U32 VertexDataSize() const override;
   U32 IndexDataSize() const override;
+  U32 UVDataSize() const override;
+
   const U8* VertexData() const override;
   const U8* IndexData() const override;
+  const U8* UVData() const override;
   RawStorageFormat GetVertexFormat() const override;
   RawStorageFormat GetIndexFormat() const override;
   U32 GetVertexCount() const override;
@@ -31,6 +34,8 @@ public:
   U32 NormalDataSize() const override;
   const U8* NormalData() const override;
   RawStorageFormat GetNormalFormat() const override;
+  RawStorageFormat GetUVFormat() const override;
+  
 private:
   std::vector<Vector4f> m_vertices;
   std::vector<Vector3f> m_normals{};

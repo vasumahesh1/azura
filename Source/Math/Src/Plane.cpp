@@ -48,6 +48,11 @@ U32 Plane::IndexDataSize() const {
   return U32(m_triangles.size() * GetFormatSize(INDEX_FORMAT) * 3);
 }
 
+U32 Plane::UVDataSize() const {
+  // TODO(vasumahesh1): Not Implemented
+  return 0;
+}
+
 U32 Plane::NormalDataSize() const {
   return U32(m_normals.size() * GetFormatSize(NORMAL_FORMAT));
 }
@@ -60,6 +65,11 @@ const U8* Plane::VertexData() const {
 const U8* Plane::IndexData() const {
   // NOLINTNEXTLINE(cppcoreguidelines-pro-type-reinterpret-cast)
   return reinterpret_cast<const U8*>(m_triangles.data());
+}
+
+const U8* Plane::UVData() const {
+  // TODO(vasumahesh1): Not Implemented
+  return nullptr;
 }
 
 const U8* Plane::NormalData() const {
@@ -77,6 +87,11 @@ RawStorageFormat Plane::GetIndexFormat() const {
 
 RawStorageFormat Plane::GetNormalFormat() const {
   return NORMAL_FORMAT;
+}
+
+RawStorageFormat Plane::GetUVFormat() const {
+  // TODO(vasumahesh1): Not Implemented
+  return RawStorageFormat::UNKNOWN;
 }
 
 U32 Plane::GetVertexCount() const {

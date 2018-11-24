@@ -278,6 +278,21 @@ RawStorageFormat ClothMesh::GetNormalFormat() const {
   return NORMAL_FORMAT;
 }
 
+U32 ClothMesh::UVDataSize() const {
+  // TODO(vasumahesh1): Not Implemented
+  return 0;
+}
+
+const U8* ClothMesh::UVData() const {
+  // TODO(vasumahesh1): Not Implemented
+  return nullptr;
+}
+
+RawStorageFormat ClothMesh::GetUVFormat() const {
+  // TODO(vasumahesh1): Not Implemented
+  return RawStorageFormat::UNKNOWN;
+}
+
 U32 ClothMesh::GetVertexCount() const {
   return U32(m_vertices.size());
 }
