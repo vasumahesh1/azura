@@ -61,7 +61,7 @@ void AppRenderer::Initialize() {
     // m_camera.OnMouseEvent(e);
   });
 
-  m_camera.SetZoom(-35);
+  m_camera.SetZoom(35);
   m_camera.RotateAboutRight(0);
   m_camera.SetStepSize(30.0f);
 

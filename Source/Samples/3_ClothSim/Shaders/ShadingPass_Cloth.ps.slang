@@ -13,11 +13,11 @@ float4 main(NormalPixelInput input) : SV_Target
   float4 aoShadow = textureBlock.ao.Sample(samplerBlock.linearSampler, input.uv);
   float3 textureNormal = normalColor.xyz * 2.0 - 1.0;
 
-  float3 bitangent = normalize(cross(input.tangent, input.normal));
+  float3 bitangent = normalize(cross(-input.tangent, input.normal));
 
   float3x3 tbnT = float3x3(bitangent, input.tangent, input.normal);
 
-  float3 fragNormal = normalize(mul(textureNormal.rgb, tbnT));
+  float3 fragNormal = normalize(mul(tbnT, textureNormal.rgb));
 
   float3 lightVec = light.u_pos.xyz - modelSpacePoint.xyz;
 
