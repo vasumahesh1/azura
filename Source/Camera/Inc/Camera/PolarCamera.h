@@ -19,6 +19,8 @@ public:
   void RotateAboutUp(float deg);
   void RotateAboutRight(float deg);
 
+  void SetStepSize(float value);
+
   void Update(float timeDelta) override;
 
 private:

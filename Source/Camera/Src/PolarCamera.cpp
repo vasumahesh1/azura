@@ -120,6 +120,10 @@ void PolarCamera::RotateAboutRight(float deg) {
   m_phi += Math::ToRadians(deg);
 }
 
+void PolarCamera::SetStepSize(float value) {
+  m_stepSize = value;
+}
+
 void PolarCamera::Update(float timeDelta) {
   const float distance = m_stepSize * timeDelta;
 
