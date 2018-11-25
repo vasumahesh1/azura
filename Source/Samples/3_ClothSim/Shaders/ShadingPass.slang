@@ -7,6 +7,13 @@ struct NormalPixelInput
   float2 uv : PS_UV;
 };
 
+struct SpherePixelInput
+{
+  float4 pos : SV_Position;
+  float4 modelPos : PS_MODELPOS;
+  float3 normal : PS_NORMAL;
+};
+
 struct ClothVertexInput
 {
   float3 in_Pos : POSITION;
@@ -17,6 +24,12 @@ struct ClothVertexInput
   uint in_TangentX : TANGENTX;
   uint in_TangentY : TANGENTY;
   uint in_TangentZ : TANGENTZ;
+};
+
+struct SphereVertexInput
+{
+  float4 in_Pos : POSITION;
+  float3 in_Normal : NORMAL;
 };
 
 struct SceneUBO {

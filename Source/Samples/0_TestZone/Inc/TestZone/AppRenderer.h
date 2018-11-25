@@ -17,10 +17,10 @@
 
 namespace Azura {
 constexpr U32 DEFAULT_BLOCK_SIZE_X = 512;
-constexpr U32 SOLVER_ITERATIONS = 64;
+constexpr U32 SOLVER_ITERATIONS = 32;
 
-const float DISTANCE_STIFFNESS = 0.3f;
-const float BENDING_STIFFNESS = 0.05f;
+const float DISTANCE_STIFFNESS = 0.9f;
+const float BENDING_STIFFNESS = 0.3f;
 
 struct SceneUBO {
   Matrix4f m_model;

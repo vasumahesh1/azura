@@ -132,37 +132,12 @@ void main(
 
       if (abs(sum) > EPSILON) {
         for (uint idx = 0; idx < 4; ++idx) {
-          float3 delta = (computeUBOBlock.stretchStiffness * -1.0 * cX * constraintBlock.invMasses[bend.indices[idx]] * partialDeltas[idx]) / sum;
+          float3 delta = (computeUBOBlock.bendStiffness * -1.0 * cX * constraintBlock.invMasses[bend.indices[idx]] * partialDeltas[idx]) / sum;
           AtomicAddDeltaX(bend.indices[idx], delta.x);
           AtomicAddDeltaY(bend.indices[idx], delta.y);
           AtomicAddDeltaZ(bend.indices[idx], delta.z);
         }
       }
     }
-
-    // if (threadIdx < computeUBOBlock.numStretchConstraints) {
-    //   DistanceConstraint dist = constraintBlock.distanceConstraints[threadIdx];
-
-    //   InterlockedAdd(clothDataBlock.constraintCount[dist.indexA], 1);
-    //   InterlockedAdd(clothDataBlock.constraintCount[dist.indexB], 1);
-
-    //   const float invMassA = constraintBlock.invMasses[dist.indexA];
-    //   const float invMassB = constraintBlock.invMasses[dist.indexB];
-    //   const float invMassSum = (invMassA + invMassB);
-    //   const float invMassFactor1 = invMassA / invMassSum;
-    //   const float invMassFactor2 = invMassB / invMassSum;
-    //   const float3 x12 = (clothDataBlock.projectedPos[dist.indexA] - clothDataBlock.projectedPos[dist.indexB]);
-
-    //   const float3 delta1 = (computeUBOBlock.stretchStiffness * -1.0 * invMassFactor1 * (length(x12) - dist.restLength)) * normalize(x12);
-    //   const float3 delta2 = (computeUBOBlock.stretchStiffness * invMassFactor2 * (length(x12) - dist.restLength)) * normalize(x12);
-
-    //   AtomicAddDeltaX(dist.indexA, delta1.x);
-    //   AtomicAddDeltaY(dist.indexA, delta1.y);
-    //   AtomicAddDeltaZ(dist.indexA, delta1.z);
-
-    //   AtomicAddDeltaX(dist.indexB, delta2.x);
-    //   AtomicAddDeltaY(dist.indexB, delta2.y);
-    //   AtomicAddDeltaZ(dist.indexB, delta2.z);
-    // }
   }
 }

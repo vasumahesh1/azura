@@ -11,10 +11,9 @@ set(
 
 set(
   PROJECT_SHADERS
-    "${PROJECT_SOURCE_DIR}/Shaders/SolvingPass_Cloth.cs.slang|CS"
     
-    "${PROJECT_SOURCE_DIR}/Shaders/SolvingPass_Cloth_ComputeProjectedPositions.cs.slang|CS"
     "${PROJECT_SOURCE_DIR}/Shaders/SolvingPass_Cloth_ApplyConstraints.cs.slang|CS"
+    "${PROJECT_SOURCE_DIR}/Shaders/SolvingPass_Cloth_ComputeProjectedPositions.cs.slang|CS"
     "${PROJECT_SOURCE_DIR}/Shaders/SolvingPass_Cloth_ApplyDelta.cs.slang|CS"
     "${PROJECT_SOURCE_DIR}/Shaders/SolvingPass_Cloth_ComputePositions.cs.slang|CS"
 
@@ -22,6 +21,9 @@ set(
     
     "${PROJECT_SOURCE_DIR}/Shaders/ShadingPass_Cloth.ps.slang|PS"
     "${PROJECT_SOURCE_DIR}/Shaders/ShadingPass_Cloth.vs.slang|VS"
+
+    "${PROJECT_SOURCE_DIR}/Shaders/ShadingPass_Sphere.ps.slang|PS"
+    "${PROJECT_SOURCE_DIR}/Shaders/ShadingPass_Sphere.vs.slang|VS"
 )
 
 add_executable(ClothSim ${SOURCES})

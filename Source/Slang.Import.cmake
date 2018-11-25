@@ -1,6 +1,6 @@
 if ("${BUILD_PLATFORM}" STREQUAL "Windows")
   if(NOT DEFINED SLANG_ROOT)
-    set(SLANG_ROOT ${CMAKE_CURRENT_SOURCE_DIR}/Imports/Windows/Slang/slang-0.11.10/
+    set(SLANG_ROOT ${CMAKE_CURRENT_SOURCE_DIR}/Imports/Windows/Slang/slang-0.11.12/
         CACHE STRING ""
         FORCE)
   endif()
