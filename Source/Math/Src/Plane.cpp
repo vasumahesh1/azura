@@ -6,24 +6,35 @@ namespace Math {
 namespace {
 const RawStorageFormat VERTEX_FORMAT = RawStorageFormat::R32G32B32A32_FLOAT;
 const RawStorageFormat NORMAL_FORMAT = RawStorageFormat::R32G32B32_FLOAT;
+const RawStorageFormat UV_FORMAT = RawStorageFormat::R32G32_FLOAT;
 const RawStorageFormat INDEX_FORMAT  = RawStorageFormat::R32_UINT;
 } // namespace
 
 Plane::Plane(const Vector2f& boundMin, const Vector2f& boundMax)
-  : Plane(boundMin, boundMax, Vector2u(1, 1)) {
+  : Plane(boundMin, boundMax, Vector2u(1, 1), Vector2u(1, 1)) {
 }
 
-Plane::Plane(const Vector2f& boundMin, const Vector2f& boundMax, const Vector2u& subDivisions) {
+Plane::Plane(const Vector2f& boundMin, const Vector2f& boundMax, const Vector2u& subDivisions, const Vector2u& uvScale) {
   const float stepX = float(boundMax[0] - boundMin[0]) / subDivisions[0];
   const float stepY = float(boundMax[1] - boundMin[1]) / subDivisions[1];
 
+  m_vertices.reserve((subDivisions[0] + 1) * (subDivisions[1] + 1));
+  m_normals.reserve(m_vertices.size());
+  m_uv.reserve(m_vertices.size());
+
+  U32 xCount = 0;
   for (float xCoord   = boundMin[0]; xCoord <= boundMax[0] + EPSILON;) {
+    U32 yCount = 0;
     for (float yCoord = boundMin[1]; yCoord <= boundMax[1] + EPSILON;) {
-      m_vertices.emplace_back(Vector4f(xCoord, 0, yCoord, 1));
-      m_normals.emplace_back(Vector3f(0, 1, 0));
+      m_vertices.emplace_back(xCoord, 0.0f, yCoord, 1.0f);
+      m_normals.emplace_back(0.0f, 1.0f, 0.0f);
       yCoord += stepY;
+
+      m_uv.emplace_back(uvScale[0] * float(xCount) / subDivisions[0], uvScale[1] * float(yCount) / subDivisions[1]);
+      ++yCount;
     }
 
+    ++xCount;
     xCoord += stepX;
   }
 
@@ -49,8 +60,7 @@ U32 Plane::IndexDataSize() const {
 }
 
 U32 Plane::UVDataSize() const {
-  // TODO(vasumahesh1): Not Implemented
-  return 0;
+  return U32(m_uv.size() * GetFormatSize(UV_FORMAT));
 }
 
 U32 Plane::NormalDataSize() const {
@@ -68,8 +78,8 @@ const U8* Plane::IndexData() const {
 }
 
 const U8* Plane::UVData() const {
-  // TODO(vasumahesh1): Not Implemented
-  return nullptr;
+  // NOLINTNEXTLINE(cppcoreguidelines-pro-type-reinterpret-cast)
+  return reinterpret_cast<const U8*>(m_uv.data());
 }
 
 const U8* Plane::NormalData() const {
@@ -90,8 +100,7 @@ RawStorageFormat Plane::GetNormalFormat() const {
 }
 
 RawStorageFormat Plane::GetUVFormat() const {
-  // TODO(vasumahesh1): Not Implemented
-  return RawStorageFormat::UNKNOWN;
+  return UV_FORMAT;
 }
 
 U32 Plane::GetVertexCount() const {
@@ -103,7 +112,7 @@ U32 Plane::GetIndexCount() const {
 }
 
 U32 Plane::TotalDataSize() const {
-  return VertexDataSize() + IndexDataSize() + NormalDataSize();
+  return VertexDataSize() + IndexDataSize() + NormalDataSize() + UVDataSize();
 }
 
 const std::vector<Vector4f>& Plane::GetVertices() const {

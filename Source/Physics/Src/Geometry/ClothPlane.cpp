@@ -39,14 +39,7 @@ ClothPlane::ClothPlane(ClothTriangulation triangulation,
   const float stepX = float(boundMax[0] - boundMin[0]) / subDivisions[0];
   const float stepY = float(boundMax[1] - boundMin[1]) / subDivisions[1];
 
-  const U32 ANCHOR_IDX_1 = 0;
-  const U32 ANCHOR_IDX_2 = (subDivisions[0] * (subDivisions[1] + 1));
-
   const U32 totalVertices = (subDivisions[0] + 1) * (subDivisions[1] + 1);
-
-  m_anchorIdx.reserve(2);
-  m_anchorIdx.push_back(ANCHOR_IDX_1);
-  m_anchorIdx.push_back(ANCHOR_IDX_2);
 
   m_vertices.Reserve(totalVertices);
   m_normals.Reserve(totalVertices);
@@ -74,14 +67,6 @@ ClothPlane::ClothPlane(ClothTriangulation triangulation,
   }
 
   m_vertexInvMass.Reserve(m_vertices.GetSize());
-  for (SizeType idx = 0; idx < m_vertices.GetSize(); ++idx) {
-    if (std::find(m_anchorIdx.begin(), m_anchorIdx.end(), idx) != m_anchorIdx.end()) {
-      m_vertexInvMass.PushBack(0.0f);
-      continue;
-    }
-
-    m_vertexInvMass.PushBack(1.0f);
-  }
 
   for (U32 idx      = 0; idx < subDivisions[0]; ++idx) {
     for (U32 idy    = 0; idy < subDivisions[1]; ++idy) {
@@ -175,11 +160,23 @@ RawStorageFormat ClothPlane::GetUVFormat() const {
   return UV_FORMAT;
 }
 
+void ClothPlane::SetAnchorOnIndex(U32 idx) {
+  m_anchorIdx.push_back(idx);
+}
+
 const Containers::Vector<float>& ClothPlane::GetVertexInverseMass() const {
   return m_vertexInvMass;
 }
 
 ClothSolvingView ClothPlane::GetPBDSolvingView(Memory::Allocator& allocator) {
+  for (SizeType idx = 0; idx < m_vertices.GetSize(); ++idx) {
+    if (std::find(m_anchorIdx.begin(), m_anchorIdx.end(), idx) != m_anchorIdx.end()) {
+      m_vertexInvMass.PushBack(0.0f);
+      continue;
+    }
+
+    m_vertexInvMass.PushBack(1.0f);
+  }
 
   U32 numBendingConstraints = 0;
   for (const auto& pair : m_edgeTriangleMap) {

@@ -10,7 +10,7 @@ namespace Math {
 class Plane final : public Geometry {
 public:
   Plane(const Vector2f& boundMin , const Vector2f& boundMax);
-  Plane(const Vector2f& boundMin , const Vector2f& boundMax, const Vector2u& subDivisions);
+  Plane(const Vector2f& boundMin , const Vector2f& boundMax, const Vector2u& subDivisions, const Vector2u& uvScale);
 
   U32 VertexDataSize() const override;
   U32 IndexDataSize() const override;
@@ -38,6 +38,7 @@ public:
   
 private:
   std::vector<Vector4f> m_vertices;
+  std::vector<Vector2f> m_uv;
   std::vector<Vector3f> m_normals{};
   std::vector<Vector3u> m_triangles;
 };

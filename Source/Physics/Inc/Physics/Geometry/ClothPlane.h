@@ -35,6 +35,8 @@ public:
   const U8* UVData() const override;
   RawStorageFormat GetUVFormat() const override;
 
+  void SetAnchorOnIndex(U32 idx);
+
   const Containers::Vector<float>& GetVertexInverseMass() const;
 
   // TODO(vasumahesh1): Pending Override

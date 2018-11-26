@@ -21,10 +21,16 @@ struct LightData {
   Vector4f m_lightPos;
 };
 
+const Vector3f TEST_SPHERE_CENTER = Vector3f(0, -5, 0);
+const Vector3f TEST_PLANE_CENTER = Vector3f(0, -8.01f, 0);
+constexpr float TEST_SPHERE_RADIUS = 2.9f;
 constexpr float CLOTH_SPAN = 5;
 constexpr U32 CLOTH_DIV_X = 30;
 constexpr U32 CLOTH_DIV_Y = 30;
 constexpr U32 TEXTURE_MEMORY = 0x4000000; // 64 MB
+constexpr U32 ANCHOR_IDX_1 = 0;
+constexpr U32 ANCHOR_IDX_2 = (CLOTH_DIV_Y * (CLOTH_DIV_X + 1));
+
 } // namespace
 
 AppRenderer::AppRenderer()
@@ -41,6 +47,12 @@ AppRenderer::AppRenderer()
 void AppRenderer::Initialize() {
   LOG_INF(log_AppRenderer, LOG_LEVEL, "Starting Init of AppRenderer");
 
+  m_clothTransform.SetForwardKey(KeyboardKey::Up);
+  m_clothTransform.SetBackwardKey(KeyboardKey::Down);
+  m_clothTransform.SetLeftKey(KeyboardKey::Left);
+  m_clothTransform.SetRightKey(KeyboardKey::Right);
+  m_clothTransform.SetStepSize(10.0f);
+
   HEAP_ALLOCATOR(Temporary, Memory::MonotonicAllocator, 16384);
   m_window = RenderSystem::CreateApplicationWindow("PBD Cloth Simulation", 1280, 720);
 
@@ -52,6 +64,7 @@ void AppRenderer::Initialize() {
   m_window->SetKeyEventCallback([this](KeyEvent evt)
   {
     m_camera.OnKeyEvent(evt);
+    m_clothTransform.OnKeyEvent(evt);
   });
 
   m_window->SetMouseEventCallback([this](MouseEvent evt)
@@ -61,8 +74,8 @@ void AppRenderer::Initialize() {
     // m_camera.OnMouseEvent(e);
   });
 
-  m_camera.SetZoom(-35);
-  m_camera.RotateAboutRight(0);
+  m_camera.SetZoom(35);
+  m_camera.RotateAboutRight(10);
   m_camera.SetStepSize(30.0f);
 
   VERIFY_TRUE(log_AppRenderer, m_window->Initialize(), "Cannot Initialize Window");
@@ -80,7 +93,7 @@ void AppRenderer::Initialize() {
   m_camera.Recompute();
 
   m_clothUBO                     = {};
-  m_clothUBO.m_model             = Matrix4f::FromTranslationVector(Vector3f(0, 3, 0));
+  m_clothUBO.m_model             = m_clothTransform.GetTransform();
   m_clothUBO.m_view              = m_camera.GetViewMatrix();
   m_clothUBO.m_viewProj          = m_camera.GetViewProjMatrix();
   m_clothUBO.m_invViewProj       = m_camera.GetInvViewProjMatrix();
@@ -88,12 +101,20 @@ void AppRenderer::Initialize() {
   m_clothUBO.m_modelInvTranspose = m_clothUBO.m_model.Inverse().Transpose();
 
   m_sphereUBO                     = {};
-  m_sphereUBO.m_model             = Matrix4f::Identity();
+  m_sphereUBO.m_model             = Matrix4f::FromTranslationVector(TEST_SPHERE_CENTER) * Matrix4f::FromScaleVector(Vector3f(TEST_SPHERE_RADIUS, TEST_SPHERE_RADIUS, TEST_SPHERE_RADIUS));
   m_sphereUBO.m_viewProj          = m_camera.GetViewProjMatrix();
   m_sphereUBO.m_view              = m_camera.GetViewMatrix();
   m_sphereUBO.m_invViewProj       = m_camera.GetInvViewProjMatrix();
   m_sphereUBO.m_invProj           = m_camera.GetProjMatrix().Inverse();
   m_sphereUBO.m_modelInvTranspose = m_sphereUBO.m_model.Inverse().Transpose();
+
+  m_planeUBO = {};
+  m_planeUBO.m_model = Matrix4f::FromTranslationVector(TEST_PLANE_CENTER);
+  m_planeUBO.m_viewProj = m_camera.GetViewProjMatrix();
+  m_planeUBO.m_view = m_camera.GetViewMatrix();
+  m_planeUBO.m_invViewProj = m_camera.GetInvViewProjMatrix();
+  m_planeUBO.m_invProj = m_camera.GetProjMatrix().Inverse();
+  m_planeUBO.m_modelInvTranspose = m_planeUBO.m_model.Inverse().Transpose();
 
   LightData lightData  = {};
   lightData.m_lightPos = Vector4f(0.0f, 15.0f, 20.0f, 1.0f);
@@ -102,7 +123,7 @@ void AppRenderer::Initialize() {
   const ApplicationRequirements applicationRequirements = {};
 
   TextureRequirements textureRequirements = {};
-  textureRequirements.m_maxCount          = 4;
+  textureRequirements.m_maxCount          = 15;
   textureRequirements.m_poolSize          = TEXTURE_MEMORY;
 
   DescriptorRequirements descriptorRequirements = DescriptorRequirements(10, 6, allocatorTemporary);
@@ -138,7 +159,7 @@ void AppRenderer::Initialize() {
   const U32 COMPUTE_UBO_SET = descriptorRequirements.AddSet({m_computePass.m_computeUBOSlot});
   const U32 COMPUTE_NORMALS_UBO_SET = descriptorRequirements.AddSet({m_normalsPass.m_uboSlot});
 
-  ShaderRequirements shaderRequirements = ShaderRequirements(10, allocatorTemporary);
+  ShaderRequirements shaderRequirements = ShaderRequirements(15, allocatorTemporary);
   // const U32 MAIN_COMPUTE_SHADER_ID           = shaderRequirements.AddShader({
   //   ShaderStage::Compute, "SolvingPass_Cloth.cs", AssetLocation::Shaders
   // });
@@ -166,9 +187,26 @@ void AppRenderer::Initialize() {
     ShaderStage::Pixel, "ShadingPass_Cloth.ps", AssetLocation::Shaders
   });
 
+  const U32 SPHERE_VERTEX_SHADER_ID = shaderRequirements.AddShader({
+    ShaderStage::Vertex, "ShadingPass_Sphere.vs", AssetLocation::Shaders
+    });
+  const U32 SPHERE_PIXEL_SHADER_ID = shaderRequirements.AddShader({
+    ShaderStage::Pixel, "ShadingPass_Sphere.ps", AssetLocation::Shaders
+    });
+
+  const U32 PLANE_VERTEX_SHADER_ID = shaderRequirements.AddShader({
+    ShaderStage::Vertex, "ShadingPass_Plane.vs", AssetLocation::Shaders
+    });
+  const U32 PLANE_PIXEL_SHADER_ID = shaderRequirements.AddShader({
+    ShaderStage::Pixel, "ShadingPass_Plane.ps", AssetLocation::Shaders
+    });
+
   const U32 COMPUTE_NORMALS_SHADER_ID           = shaderRequirements.AddShader({
     ShaderStage::Compute, "NormalsPass_Normalize.cs", AssetLocation::Shaders
     });
+
+  m_clothPlane.SetAnchorOnIndex(ANCHOR_IDX_1);
+  m_clothPlane.SetAnchorOnIndex(ANCHOR_IDX_2);
 
   const auto solvingView = m_clothPlane.GetPBDSolvingView(m_localAllocator);
   const auto& clothDistanceConstraints = solvingView.GetDistanceConstraints();
@@ -179,7 +217,7 @@ void AppRenderer::Initialize() {
   m_normalUBO.m_numVertices = m_clothPlane.GetVertexCount();
 
   RenderPassRequirements renderPassRequirements = RenderPassRequirements(0, 10, 20, allocatorTemporary);
-  renderPassRequirements.m_maxPools             = 5;
+  renderPassRequirements.m_maxPools             = 10;
 
   const U32 COMPUTE_VERTEX_BUFFER = renderPassRequirements.AddBuffer({
     U32(sizeof(Vector3f)) * U32(m_clothPlane.GetVertexCount()), U32(sizeof(Vector3f))
@@ -328,7 +366,7 @@ void AppRenderer::Initialize() {
     PipelinePassCreateInfo::OutputTargets{},                            // OUTPUT TARGETS
     PipelinePassCreateInfo::OutputBuffers{},                            // OUTPUT TARGETS
     PipelinePassCreateInfo::DescriptorSets{UBO_SET, LIGHT_SET, SAMPLER_SET, TEXTURE_SET},         // DESCRIPTORS
-    ClearData{{0.2f, 0.2f, 0.2f, 1.0f}, 1.0f, 0}
+    ClearData{{0.1f, 0.1f, 0.1f, 1.0f}, 1.0f, 0}
   });
 
   std::vector<Vector3f> zeroBufferData = std::vector<Vector3f>(m_clothPlane.GetVertexCount(), Vector3f(0.0f));
@@ -360,6 +398,22 @@ void AppRenderer::Initialize() {
   const U32 aoTexture = m_textureManager->Load("Textures/Fabric10_AO.jpg");
   const TextureDesc* aoDesc = m_textureManager->GetInfo(aoTexture);
   VERIFY_TRUE(log_AppRenderer, aoDesc != nullptr, "aoDesc was Null");
+
+  const U32 floorAlbedo = m_textureManager->Load("Textures/PavingStones35_col.jpg");
+  const TextureDesc* floorAlbedoDesc = m_textureManager->GetInfo(floorAlbedo);
+  VERIFY_TRUE(log_AppRenderer, floorAlbedoDesc != nullptr, "floorAlbedoDesc was Null");
+
+  const U32 floorNormal = m_textureManager->Load("Textures/PavingStones35_nrm.jpg");
+  const TextureDesc* floorNormalDesc = m_textureManager->GetInfo(floorNormal);
+  VERIFY_TRUE(log_AppRenderer, floorNormalDesc != nullptr, "floorNormalDesc was Null");
+
+  const U32 floorAO = m_textureManager->Load("Textures/PavingStones35_AO.jpg");
+  const TextureDesc* floorAODesc = m_textureManager->GetInfo(floorAO);
+  VERIFY_TRUE(log_AppRenderer, floorAODesc != nullptr, "floorAODesc was Null");
+  
+  const U32 floorRoughness = m_textureManager->Load("Textures/PavingStones35_rgh.jpg");
+  const TextureDesc* floorRoughnessDesc = m_textureManager->GetInfo(floorRoughness);
+  VERIFY_TRUE(log_AppRenderer, floorRoughnessDesc != nullptr, "floorRoughnessDesc was Null");
 
   const auto clothParticleMass = reinterpret_cast<const U8*>(m_clothPlane.GetVertexInverseMass().Data()); // NOLINT
   m_renderer->BindBufferTarget(COMPUTE_VERTEX_INV_MASS, clothParticleMass);
@@ -424,6 +478,7 @@ void AppRenderer::Initialize() {
   m_computeUBO.m_numBlocks             = numConstraintBlocks;
   m_computeUBO.m_numStretchConstraints = U32(clothDistanceConstraints.GetSize());
   m_computeUBO.m_numBendConstraints    = U32(clothBendingConstraints.GetSize());
+  m_computeUBO.m_clothModelMatrix      = m_clothTransform.GetTransform().Transpose();
   const auto computeUBOStart = reinterpret_cast<const U8*>(&m_computeUBO); // NOLINT
 
   ComputePool& computeProjectedPositions = m_renderer->CreateComputePool(pass1);
@@ -459,6 +514,7 @@ void AppRenderer::Initialize() {
   normComputePool.BindUniformData(m_normalsPass.m_uboSlot, normUBOStart, sizeof(NormalUBO));
 
   IcoSphere sphere(4);
+  Plane plane(Vector2f(-150, -150), Vector2f(150, 150), Vector2u(10, 10), Vector2u(10, 10));
 
   DrawablePoolCreateInfo poolInfo = {allocatorTemporary};
   poolInfo.m_byteSize             = sphere.TotalDataSize() + m_clothPlane.TotalDataSize() + TEXTURE_MEMORY + 0x400000;
@@ -501,7 +557,8 @@ void AppRenderer::Initialize() {
   DrawablePool& clothPool = m_renderer->CreateDrawablePool(poolInfo);
 
   const auto uboDataBuffer   = reinterpret_cast<U8*>(&m_clothUBO);  // NOLINT
-  // const auto sphereUBO       = reinterpret_cast<U8*>(&m_sphereUBO); // NOLINT
+  const auto sphereUBO       = reinterpret_cast<U8*>(&m_sphereUBO); // NOLINT
+  const auto planeUBO        = reinterpret_cast<U8*>(&m_planeUBO); // NOLINT
   const auto lightDataBuffer = reinterpret_cast<U8*>(&lightData);   // NOLINT
   // Create Drawable from Pool
   DrawableCreateInfo createInfo = {};
@@ -534,42 +591,93 @@ void AppRenderer::Initialize() {
   clothPool.BindUniformData(clothId, UBO_SLOT, uboDataBuffer, sizeof(SceneUBO));
   clothPool.BindUniformData(clothId, LIGHT_SLOT, lightDataBuffer, sizeof(LightData));
 
-  // DrawableCreateInfo sphereDrawableInfo = {};
-  // sphereDrawableInfo.m_vertexCount      = sphere.GetVertexCount();
-  // sphereDrawableInfo.m_indexCount       = sphere.GetIndexCount();
-  // sphereDrawableInfo.m_instanceCount    = 1;
-  // sphereDrawableInfo.m_indexType        = sphere.GetIndexFormat();
-  //
-  // DrawablePoolCreateInfo spherePoolInfo = {allocatorTemporary};
-  // spherePoolInfo.m_byteSize             = sphere.TotalDataSize() + 0x400000;
-  // spherePoolInfo.m_numDrawables         = 1;
-  // spherePoolInfo.m_renderPasses         = {{RENDER_PASS}, allocatorTemporary};
-  // spherePoolInfo.m_drawType             = DrawType::InstancedIndexed;
-  //
-  // const auto SPHERE_VERTEX_SLOT = spherePoolInfo.AddInputSlot({
-  //   BufferUsageRate::PerVertex, {{"POSITION", RawStorageFormat::R32G32B32A32_FLOAT}}
-  // });
-  //
-  // const auto SPHERE_NORMAL_SLOT = spherePoolInfo.AddInputSlot({
-  //   BufferUsageRate::PerVertex, {{"NORMAL", RawStorageFormat::R32G32B32_FLOAT}}
-  // });
+   DrawableCreateInfo sphereDrawableInfo = {};
+   sphereDrawableInfo.m_vertexCount      = sphere.GetVertexCount();
+   sphereDrawableInfo.m_indexCount       = sphere.GetIndexCount();
+   sphereDrawableInfo.m_instanceCount    = 1;
+   sphereDrawableInfo.m_indexType        = sphere.GetIndexFormat();
 
-  // DrawablePool& spherePool = m_renderer->CreateDrawablePool(spherePoolInfo);
-  //
-  // const auto sphereId = spherePool.CreateDrawable(sphereDrawableInfo);
-  // spherePool.BindVertexData(sphereId, SPHERE_VERTEX_SLOT, sphere.VertexData(), sphere.VertexDataSize());
-  // spherePool.BindVertexData(sphereId, SPHERE_NORMAL_SLOT, sphere.NormalData(), sphere.NormalDataSize());
-  // spherePool.SetIndexData(sphereId, sphere.IndexData(), sphere.IndexDataSize());
-  // spherePool.BindUniformData(sphereId, UBO_SLOT, sphereUBO, sizeof(SceneUBO));
-  // spherePool.BindUniformData(sphereId, LIGHT_SLOT, lightDataBuffer, sizeof(LightData));
+   DrawableCreateInfo planeDrawableInfo = {};
+   planeDrawableInfo.m_vertexCount = plane.GetVertexCount();
+   planeDrawableInfo.m_indexCount = plane.GetIndexCount();
+   planeDrawableInfo.m_instanceCount = 1;
+   planeDrawableInfo.m_indexType = plane.GetIndexFormat();
+  
+   DrawablePoolCreateInfo spherePoolInfo = {allocatorTemporary};
+   spherePoolInfo.m_byteSize             = sphere.TotalDataSize() + 0x400000;
+   spherePoolInfo.m_numDrawables         = 1;
+   spherePoolInfo.m_renderPasses         = {{RENDER_PASS}, allocatorTemporary};
+   spherePoolInfo.m_drawType             = DrawType::InstancedIndexed;
+  
+   const auto SPHERE_VERTEX_SLOT = spherePoolInfo.AddInputSlot({
+     BufferUsageRate::PerVertex, {{"POSITION", RawStorageFormat::R32G32B32A32_FLOAT}}
+   });
+  
+   const auto SPHERE_NORMAL_SLOT = spherePoolInfo.AddInputSlot({
+     BufferUsageRate::PerVertex, {{"NORMAL", RawStorageFormat::R32G32B32_FLOAT}}
+   });
+
+   DrawablePool& spherePool = m_renderer->CreateDrawablePool(spherePoolInfo);
+   spherePool.AddShader(SPHERE_VERTEX_SHADER_ID);
+   spherePool.AddShader(SPHERE_PIXEL_SHADER_ID);
+  
+   const auto sphereId = spherePool.CreateDrawable(sphereDrawableInfo);
+   spherePool.BindVertexData(sphereId, SPHERE_VERTEX_SLOT, sphere.VertexData(), sphere.VertexDataSize());
+   spherePool.BindVertexData(sphereId, SPHERE_NORMAL_SLOT, sphere.NormalData(), sphere.NormalDataSize());
+   spherePool.SetIndexData(sphereId, sphere.IndexData(), sphere.IndexDataSize());
+   spherePool.BindUniformData(sphereId, UBO_SLOT, sphereUBO, sizeof(SceneUBO));
+   spherePool.BindUniformData(sphereId, LIGHT_SLOT, lightDataBuffer, sizeof(LightData));
+
+   DrawablePoolCreateInfo planePoolInfo = {allocatorTemporary};
+   planePoolInfo.m_byteSize             = plane.TotalDataSize() + 0x400000;
+   planePoolInfo.m_numDrawables         = 1;
+   planePoolInfo.m_renderPasses         = {{RENDER_PASS}, allocatorTemporary};
+   planePoolInfo.m_drawType             = DrawType::InstancedIndexed;
+
+   const auto PLANE_VERTEX_SLOT = planePoolInfo.AddInputSlot({
+     BufferUsageRate::PerVertex, {{"POSITION", plane.GetVertexFormat()}}
+     });
+
+   const auto PLANE_NORMAL_SLOT = planePoolInfo.AddInputSlot({
+     BufferUsageRate::PerVertex, {{"NORMAL", plane.GetNormalFormat()}}
+     });
+
+   const auto PLANE_UV_SLOT = planePoolInfo.AddInputSlot({
+     BufferUsageRate::PerVertex, {{"UV", plane.GetUVFormat()}}
+     });
+
+   DrawablePool& planePool = m_renderer->CreateDrawablePool(planePoolInfo);
+   planePool.AddShader(PLANE_VERTEX_SHADER_ID);
+   planePool.AddShader(PLANE_PIXEL_SHADER_ID);
+
+   SamplerDesc floorSampler = {};
+   floorSampler.m_filter = TextureFilter::MinMagMipLinear;
+   floorSampler.m_addressModeU = TextureAddressMode::Wrap;
+   floorSampler.m_addressModeV = TextureAddressMode::Wrap;
+   floorSampler.m_addressModeW = TextureAddressMode::Wrap;
+   planePool.BindSampler(SAMPLER_SLOT, floorSampler);
+   planePool.BindTextureData(TEXTURE_SLOT, *floorAlbedoDesc, m_textureManager->GetData(floorAlbedo));
+   planePool.BindTextureData(NORMALS_SLOT, *floorNormalDesc, m_textureManager->GetData(floorNormal));
+   planePool.BindTextureData(ROUGHNESS_SLOT, *floorRoughnessDesc, m_textureManager->GetData(floorRoughness));
+   planePool.BindTextureData(AO_SLOT, *floorAODesc, m_textureManager->GetData(floorAO));
+
+   const auto planeId = planePool.CreateDrawable(planeDrawableInfo);
+   planePool.BindVertexData(planeId, PLANE_VERTEX_SLOT, plane.VertexData(), plane.VertexDataSize());
+   planePool.BindVertexData(planeId, PLANE_NORMAL_SLOT, plane.NormalData(), plane.NormalDataSize());
+   planePool.BindVertexData(planeId, PLANE_UV_SLOT, plane.UVData(), plane.UVDataSize());
+   planePool.SetIndexData(planeId, plane.IndexData(), plane.IndexDataSize());
+   planePool.BindUniformData(planeId, UBO_SLOT, planeUBO, sizeof(SceneUBO));
+   planePool.BindUniformData(planeId, LIGHT_SLOT, lightDataBuffer, sizeof(LightData));
 
   m_renderPass.m_vertexSlot   = VERTEX_SLOT;
   m_renderPass.m_sceneUBOSlot = UBO_SLOT;
   m_renderPass.m_clothId      = clothId;
-  // m_renderPass.m_sphereId     = sphereId;
+  m_renderPass.m_sphereId     = sphereId;
+  m_renderPass.m_planeId      = planeId;
 
   m_mainPool   = &clothPool;
-  // m_spherePool = &spherePool;
+  m_spherePool = &spherePool;
+  m_planePool = &planePool;
 
   // All Drawables Done
   m_renderer->Submit();
@@ -583,8 +691,9 @@ void AppRenderer::WindowUpdate(float timeDelta) {
   }
 
   m_camera.Update(timeDelta);
+  m_clothTransform.Update(timeDelta);
 
-  // timeDelta = 0.0166667f;
+   // timeDelta = 0.0166667f;
 
   m_clothUBO.m_view              = m_camera.GetViewMatrix();
   m_clothUBO.m_viewProj          = m_camera.GetViewProjMatrix();
@@ -598,10 +707,18 @@ void AppRenderer::WindowUpdate(float timeDelta) {
   m_sphereUBO.m_invProj           = m_camera.GetProjMatrix().Inverse();
   m_sphereUBO.m_modelInvTranspose = m_sphereUBO.m_model.Inverse().Transpose();
 
+  m_planeUBO.m_view = m_camera.GetViewMatrix();
+  m_planeUBO.m_viewProj = m_camera.GetViewProjMatrix();
+  m_planeUBO.m_invViewProj = m_camera.GetInvViewProjMatrix();
+  m_planeUBO.m_invProj = m_camera.GetProjMatrix().Inverse();
+  m_planeUBO.m_modelInvTranspose = m_planeUBO.m_model.Inverse().Transpose();
+
   m_computeUBO.m_timeDelta = timeDelta;
+  m_computeUBO.m_clothModelMatrix      = m_clothTransform.GetTransform();
 
   const auto uboDataBuffer    = reinterpret_cast<U8*>(&m_clothUBO);         // NOLINT
-  // const auto sphereDataBuffer = reinterpret_cast<U8*>(&m_sphereUBO);        // NOLINT
+  const auto sphereDataBuffer = reinterpret_cast<U8*>(&m_sphereUBO);        // NOLINT
+  const auto planeDataBuffer = reinterpret_cast<U8*>(&m_planeUBO);        // NOLINT
   const auto computeUBOStart  = reinterpret_cast<const U8*>(&m_computeUBO); // NOLINT
 
   for (auto& m_computePool : m_computePools) {
@@ -617,13 +734,17 @@ void AppRenderer::WindowUpdate(float timeDelta) {
   m_mainPool->BeginUpdates();
   // Update Cloth
   m_mainPool->UpdateUniformData(m_renderPass.m_clothId, m_renderPass.m_sceneUBOSlot, uboDataBuffer, sizeof(SceneUBO));
-  // Update Sphere
   m_mainPool->SubmitUpdates();
 
-  // m_spherePool->BeginUpdates();
-  // m_spherePool->UpdateUniformData(m_renderPass.m_sphereId, m_renderPass.m_sceneUBOSlot, sphereDataBuffer,
-  //                                 sizeof(SceneUBO));
-  // m_spherePool->SubmitUpdates();
+   m_spherePool->BeginUpdates();
+   m_spherePool->UpdateUniformData(m_renderPass.m_sphereId, m_renderPass.m_sceneUBOSlot, sphereDataBuffer,
+                                   sizeof(SceneUBO));
+   m_spherePool->SubmitUpdates();
+
+   m_planePool->BeginUpdates();
+   m_planePool->UpdateUniformData(m_renderPass.m_planeId, m_renderPass.m_sceneUBOSlot, planeDataBuffer,
+     sizeof(SceneUBO));
+   m_planePool->SubmitUpdates();
 
   m_renderer->RenderFrame();
 }

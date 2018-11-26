@@ -26,8 +26,32 @@ namespace
     case GLFW_KEY_R:
       return KeyboardKey::R;
 
+    case GLFW_KEY_T:
+      return KeyboardKey::T;
+
+    case GLFW_KEY_Q:
+      return KeyboardKey::Q;
+
+    case GLFW_KEY_E:
+      return KeyboardKey::E;
+
+    case GLFW_KEY_Y:
+      return KeyboardKey::Y;
+
     case GLFW_KEY_ESCAPE:
       return KeyboardKey::Esc;
+
+    case GLFW_KEY_UP:
+      return KeyboardKey::Up;
+
+    case GLFW_KEY_DOWN:
+      return KeyboardKey::Down;
+
+    case GLFW_KEY_RIGHT:
+      return KeyboardKey::Right;
+
+    case GLFW_KEY_LEFT:
+      return KeyboardKey::Left;
 
     default:
       return KeyboardKey::Unmapped;

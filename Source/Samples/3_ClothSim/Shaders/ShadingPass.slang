@@ -7,6 +7,21 @@ struct NormalPixelInput
   float2 uv : PS_UV;
 };
 
+struct SpherePixelInput
+{
+  float4 pos : SV_Position;
+  float4 modelPos : PS_MODELPOS;
+  float3 normal : PS_NORMAL;
+};
+
+struct PlanePixelInput
+{
+  float4 pos : SV_Position;
+  float4 modelPos : PS_MODELPOS;
+  float3 normal : PS_NORMAL;
+  float2 uv : PS_UV;
+};
+
 struct ClothVertexInput
 {
   float3 in_Pos : POSITION;
@@ -17,6 +32,19 @@ struct ClothVertexInput
   uint in_TangentX : TANGENTX;
   uint in_TangentY : TANGENTY;
   uint in_TangentZ : TANGENTZ;
+};
+
+struct SphereVertexInput
+{
+  float4 in_Pos : POSITION;
+  float3 in_Normal : NORMAL;
+};
+
+struct PlaneVertexInput
+{
+  float4 in_Pos : POSITION;
+  float3 in_Normal : NORMAL;
+  float2 in_UV : UV;
 };
 
 struct SceneUBO {
@@ -47,3 +75,6 @@ ParameterBlock<SceneUBO> ubo;
 ParameterBlock<LightData> light;
 ParameterBlock<SamplerBlock> samplerBlock;
 ParameterBlock<TextureBlock> textureBlock;
+
+
+const static float AMBIENT_TERM = 0.3;

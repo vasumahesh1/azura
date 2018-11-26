@@ -72,8 +72,22 @@ void PolarCamera::OnKeyEvent(KeyEvent keyEvent) {
       m_moveRightFactor = 1;
       break;
 
+    case KeyboardKey::Q:
+      m_zoomFactor = 1;
+      break;
+
+    case KeyboardKey::E:
+      m_zoomFactor = -1;
+      break;
+
     case KeyboardKey::Unmapped:
     case KeyboardKey::Esc:
+    case KeyboardKey::Up:
+    case KeyboardKey::Down:
+    case KeyboardKey::Left:
+    case KeyboardKey::Right:
+    case KeyboardKey::T:
+    case KeyboardKey::Y:
     default:
       break;
     }
@@ -95,8 +109,22 @@ void PolarCamera::OnKeyEvent(KeyEvent keyEvent) {
       m_moveRightFactor = 0;
       break;
 
+    case KeyboardKey::Q:
+      m_zoomFactor = 0;
+      break;
+
+    case KeyboardKey::E:
+      m_zoomFactor = 0;
+      break;
+
     case KeyboardKey::Unmapped:
     case KeyboardKey::Esc:
+    case KeyboardKey::Up:
+    case KeyboardKey::Down:
+    case KeyboardKey::Left:
+    case KeyboardKey::Right:
+    case KeyboardKey::T:
+    case KeyboardKey::Y:
     default:
       break;
     }
@@ -120,6 +148,10 @@ void PolarCamera::RotateAboutRight(float deg) {
   m_phi += Math::ToRadians(deg);
 }
 
+void PolarCamera::TranslateAlongLook(float amount) {
+  m_zoom += amount;
+}
+
 void PolarCamera::SetStepSize(float value) {
   m_stepSize = value;
 }
@@ -136,6 +168,11 @@ void PolarCamera::Update(float timeDelta) {
 
   if (m_moveRightFactor != 0) {
     RotateAboutUp(distance * m_moveRightFactor);
+    needsRecompute = true;
+  }
+  
+  if (m_zoomFactor != 0) {
+    TranslateAlongLook(distance * m_zoomFactor);
     needsRecompute = true;
   }
 
