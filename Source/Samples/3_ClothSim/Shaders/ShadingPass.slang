@@ -98,7 +98,7 @@ struct Material
   float roughness;
 };
 
-const static float AMBIENT_TERM = 0.3;
+const static float AMBIENT_TERM = 0.5;
 const static float GAMMA = 0.5;
 const static float PI = 3.1415926535897932384626433832795;
 
