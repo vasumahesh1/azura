@@ -399,19 +399,19 @@ void AppRenderer::Initialize() {
   const TextureDesc* aoDesc = m_textureManager->GetInfo(aoTexture);
   VERIFY_TRUE(log_AppRenderer, aoDesc != nullptr, "aoDesc was Null");
 
-  const U32 floorAlbedo = m_textureManager->Load("Textures/PavingStones35_col.jpg");
+  const U32 floorAlbedo = m_textureManager->Load("Textures/Concrete10_col.jpg");
   const TextureDesc* floorAlbedoDesc = m_textureManager->GetInfo(floorAlbedo);
   VERIFY_TRUE(log_AppRenderer, floorAlbedoDesc != nullptr, "floorAlbedoDesc was Null");
 
-  const U32 floorNormal = m_textureManager->Load("Textures/PavingStones35_nrm.jpg");
+  const U32 floorNormal = m_textureManager->Load("Textures/Concrete10_nrm.jpg");
   const TextureDesc* floorNormalDesc = m_textureManager->GetInfo(floorNormal);
   VERIFY_TRUE(log_AppRenderer, floorNormalDesc != nullptr, "floorNormalDesc was Null");
 
-  const U32 floorAO = m_textureManager->Load("Textures/PavingStones35_AO.jpg");
+  const U32 floorAO = m_textureManager->Load("Textures/Concrete10_AO.jpg");
   const TextureDesc* floorAODesc = m_textureManager->GetInfo(floorAO);
   VERIFY_TRUE(log_AppRenderer, floorAODesc != nullptr, "floorAODesc was Null");
   
-  const U32 floorRoughness = m_textureManager->Load("Textures/PavingStones35_rgh.jpg");
+  const U32 floorRoughness = m_textureManager->Load("Textures/Concrete10_rgh.jpg");
   const TextureDesc* floorRoughnessDesc = m_textureManager->GetInfo(floorRoughness);
   VERIFY_TRUE(log_AppRenderer, floorRoughnessDesc != nullptr, "floorRoughnessDesc was Null");
 
@@ -629,7 +629,7 @@ void AppRenderer::Initialize() {
    spherePool.BindUniformData(sphereId, LIGHT_SLOT, lightDataBuffer, sizeof(LightData));
 
    DrawablePoolCreateInfo planePoolInfo = {allocatorTemporary};
-   planePoolInfo.m_byteSize             = plane.TotalDataSize() + 0x400000;
+   planePoolInfo.m_byteSize             = plane.TotalDataSize() + 0x800000;
    planePoolInfo.m_numDrawables         = 1;
    planePoolInfo.m_renderPasses         = {{RENDER_PASS}, allocatorTemporary};
    planePoolInfo.m_drawType             = DrawType::InstancedIndexed;
