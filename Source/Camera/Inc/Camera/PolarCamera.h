@@ -19,6 +19,8 @@ public:
   void RotateAboutUp(float deg);
   void RotateAboutRight(float deg);
 
+  void TranslateAlongLook(float amount);
+
   void SetStepSize(float value);
 
   void Update(float timeDelta) override;
@@ -37,6 +39,7 @@ private:
 
   int m_moveUpFactor{0};
   int m_moveRightFactor{0};
+  int m_zoomFactor{0};
 };
 
 } // namespace Azura

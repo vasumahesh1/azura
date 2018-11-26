@@ -29,6 +29,12 @@ namespace
     case GLFW_KEY_T:
       return KeyboardKey::T;
 
+    case GLFW_KEY_Q:
+      return KeyboardKey::Q;
+
+    case GLFW_KEY_E:
+      return KeyboardKey::E;
+
     case GLFW_KEY_Y:
       return KeyboardKey::Y;
 

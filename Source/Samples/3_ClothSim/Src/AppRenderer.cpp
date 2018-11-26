@@ -407,6 +407,14 @@ void AppRenderer::Initialize() {
   const TextureDesc* floorNormalDesc = m_textureManager->GetInfo(floorNormal);
   VERIFY_TRUE(log_AppRenderer, floorNormalDesc != nullptr, "floorNormalDesc was Null");
 
+  const U32 floorAO = m_textureManager->Load("Textures/PavingStones35_AO.jpg");
+  const TextureDesc* floorAODesc = m_textureManager->GetInfo(floorAO);
+  VERIFY_TRUE(log_AppRenderer, floorAODesc != nullptr, "floorAODesc was Null");
+  
+  const U32 floorRoughness = m_textureManager->Load("Textures/PavingStones35_rgh.jpg");
+  const TextureDesc* floorRoughnessDesc = m_textureManager->GetInfo(floorRoughness);
+  VERIFY_TRUE(log_AppRenderer, floorRoughnessDesc != nullptr, "floorRoughnessDesc was Null");
+
   const auto clothParticleMass = reinterpret_cast<const U8*>(m_clothPlane.GetVertexInverseMass().Data()); // NOLINT
   m_renderer->BindBufferTarget(COMPUTE_VERTEX_INV_MASS, clothParticleMass);
 
@@ -650,6 +658,8 @@ void AppRenderer::Initialize() {
    planePool.BindSampler(SAMPLER_SLOT, floorSampler);
    planePool.BindTextureData(TEXTURE_SLOT, *floorAlbedoDesc, m_textureManager->GetData(floorAlbedo));
    planePool.BindTextureData(NORMALS_SLOT, *floorNormalDesc, m_textureManager->GetData(floorNormal));
+   planePool.BindTextureData(ROUGHNESS_SLOT, *floorRoughnessDesc, m_textureManager->GetData(floorRoughness));
+   planePool.BindTextureData(AO_SLOT, *floorAODesc, m_textureManager->GetData(floorAO));
 
    const auto planeId = planePool.CreateDrawable(planeDrawableInfo);
    planePool.BindVertexData(planeId, PLANE_VERTEX_SLOT, plane.VertexData(), plane.VertexDataSize());

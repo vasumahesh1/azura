@@ -9,6 +9,7 @@ float4 main(PlanePixelInput input) : SV_Target
   float4 modelSpacePoint = input.modelPos;
   float4 diffuseColor = textureBlock.albedo.Sample(samplerBlock.linearSampler, input.uv);
   float4 normalColor = textureBlock.normal.Sample(samplerBlock.linearSampler, input.uv);
+  float4 aoColor = textureBlock.ao.Sample(samplerBlock.linearSampler, input.uv);
   float3 textureNormal = normalColor.xyz * 2.0 - 1.0;
 
   float3x3 tbnT = float3x3(float3(1, 0, 0), float3(0, 0, 1), input.normal);
@@ -18,7 +19,7 @@ float4 main(PlanePixelInput input) : SV_Target
   float3 lightVec = light.u_pos.xyz - modelSpacePoint.xyz;
 
   float diffuseTerm = dot(normalize(fragNormal), normalize(lightVec));
-  diffuseTerm = clamp(diffuseTerm, 0.0, 1.0);
+  diffuseTerm = clamp(diffuseTerm, 0.0, 1.0) * aoColor.r;
 
   float lightIntensity = AMBIENT_TERM + diffuseTerm;
 
