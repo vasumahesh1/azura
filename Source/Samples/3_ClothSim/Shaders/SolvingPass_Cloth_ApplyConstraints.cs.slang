@@ -78,65 +78,58 @@ void main(
 
   int bendingOffset = threadIdx - computeUBOBlock.numStretchConstraints;
 
-  // if (bendingOffset >= computeUBOBlock.numBendConstraints)
-  // {
-  //   return;
-  // }
+  if (threadIdx < computeUBOBlock.numStretchConstraints) {
+    DistanceConstraint dist = constraintBlock.distanceConstraints[threadIdx];
 
-  for (uint solverItr = 0; solverItr < SOLVER_ITERATIONS; ++solverItr) {
-    if (threadIdx < computeUBOBlock.numStretchConstraints) {
-      DistanceConstraint dist = constraintBlock.distanceConstraints[threadIdx];
+    InterlockedAdd(clothDataBlock.constraintCount[dist.indexA], 1);
+    InterlockedAdd(clothDataBlock.constraintCount[dist.indexB], 1);
 
-      InterlockedAdd(clothDataBlock.constraintCount[dist.indexA], 1);
-      InterlockedAdd(clothDataBlock.constraintCount[dist.indexB], 1);
+    const float invMassA = constraintBlock.invMasses[dist.indexA];
+    const float invMassB = constraintBlock.invMasses[dist.indexB];
+    const float invMassSum = (invMassA + invMassB);
+    const float invMassFactor1 = invMassA / invMassSum;
+    const float invMassFactor2 = invMassB / invMassSum;
+    const float3 x12 = (clothDataBlock.projectedPos[dist.indexA] - clothDataBlock.projectedPos[dist.indexB]);
 
-      const float invMassA = constraintBlock.invMasses[dist.indexA];
-      const float invMassB = constraintBlock.invMasses[dist.indexB];
-      const float invMassSum = (invMassA + invMassB);
-      const float invMassFactor1 = invMassA / invMassSum;
-      const float invMassFactor2 = invMassB / invMassSum;
-      const float3 x12 = (clothDataBlock.projectedPos[dist.indexA] - clothDataBlock.projectedPos[dist.indexB]);
+    const float3 delta1 = (computeUBOBlock.stretchStiffness * -1.0 * invMassFactor1 * (length(x12) - dist.restLength)) * normalize(x12);
+    const float3 delta2 = (computeUBOBlock.stretchStiffness * invMassFactor2 * (length(x12) - dist.restLength)) * normalize(x12);
 
-      const float3 delta1 = (computeUBOBlock.stretchStiffness * -1.0 * invMassFactor1 * (length(x12) - dist.restLength)) * normalize(x12);
-      const float3 delta2 = (computeUBOBlock.stretchStiffness * invMassFactor2 * (length(x12) - dist.restLength)) * normalize(x12);
+    AtomicAddDeltaX(dist.indexA, delta1.x);
+    AtomicAddDeltaY(dist.indexA, delta1.y);
+    AtomicAddDeltaZ(dist.indexA, delta1.z);
 
-      AtomicAddDeltaX(dist.indexA, delta1.x);
-      AtomicAddDeltaY(dist.indexA, delta1.y);
-      AtomicAddDeltaZ(dist.indexA, delta1.z);
+    AtomicAddDeltaX(dist.indexB, delta2.x);
+    AtomicAddDeltaY(dist.indexB, delta2.y);
+    AtomicAddDeltaZ(dist.indexB, delta2.z);
+  }
 
-      AtomicAddDeltaX(dist.indexB, delta2.x);
-      AtomicAddDeltaY(dist.indexB, delta2.y);
-      AtomicAddDeltaZ(dist.indexB, delta2.z);
+  if (bendingOffset < computeUBOBlock.numBendConstraints && bendingOffset >= 0) {
+    BendConstraint bend = constraintBlock.bendConstraints[bendingOffset];
+
+    float cX = 0.0;
+
+    for (int idx = 0; idx < 4; ++idx) {
+      for (int idy = 0; idy < 4; ++idy) {
+        cX += bend.Q[idx][idy] * dot(clothDataBlock.projectedPos[bend.indices[idx]], clothDataBlock.projectedPos[bend.indices[idy]]);
+      }
     }
 
-    if (bendingOffset < computeUBOBlock.numBendConstraints && bendingOffset >= 0) {
-      BendConstraint bend = constraintBlock.bendConstraints[bendingOffset];
+    cX = cX / 2.0;
 
-      float cX = 0.0;
+    float3 partialDeltas[4];
+    float sum = 0.0;
 
-      for (int idx = 0; idx < 4; ++idx) {
-        for (int idy = 0; idy < 4; ++idy) {
-          cX += bend.Q[idx][idy] * dot(clothDataBlock.projectedPos[bend.indices[idx]], clothDataBlock.projectedPos[bend.indices[idy]]);
-        }
-      }
+    for (uint idx = 0; idx < 4; ++idx) {
+      partialDeltas[idx] = ComputeBendingGradient(bend.Q, bend.indices, idx);
+      sum += (constraintBlock.invMasses[bend.indices[idx]] * dot(partialDeltas[idx], partialDeltas[idx]));
+    }
 
-      cX = cX / 2.0;
-
-      float3 partialDeltas[4];
-      float sum = 0.0;
-
+    if (abs(sum) > EPSILON) {
       for (uint idx = 0; idx < 4; ++idx) {
-        partialDeltas[idx] = ComputeBendingGradient(bend.Q, bend.indices, idx);
-        sum += (constraintBlock.invMasses[bend.indices[idx]] * dot(partialDeltas[idx], partialDeltas[idx]));
-      }
-
-      if (abs(sum) > EPSILON) {
-        for (uint idx = 0; idx < 4; ++idx) {
-          float3 delta = (computeUBOBlock.bendStiffness * -1.0 * cX * constraintBlock.invMasses[bend.indices[idx]] * partialDeltas[idx]) / sum;
-          AtomicAddDeltaX(bend.indices[idx], delta.x);
-          AtomicAddDeltaY(bend.indices[idx], delta.y);
-          AtomicAddDeltaZ(bend.indices[idx], delta.z);
-        }
+        float3 delta = (computeUBOBlock.bendStiffness * -1.0 * cX * constraintBlock.invMasses[bend.indices[idx]] * partialDeltas[idx]) / sum;
+        AtomicAddDeltaX(bend.indices[idx], delta.x);
+        AtomicAddDeltaY(bend.indices[idx], delta.y);
+        AtomicAddDeltaZ(bend.indices[idx], delta.z);
       }
     }
   }
