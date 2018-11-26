@@ -99,7 +99,7 @@ struct Material
 };
 
 const static float AMBIENT_TERM = 0.3;
-const static float GAMMA = 2.2;
+const static float GAMMA = 0.5;
 const static float PI = 3.1415926535897932384626433832795;
 
 // 
@@ -164,6 +164,20 @@ float3 GGX(Attributes attributes, Light light, Material material, float3 eye)
 float3 FinalGamma(float3 color)
 {
   return pow(color, 1.0 / GAMMA);
+}
+
+// Source: http://filmicworlds.com/blog/filmic-tonemapping-operators/
+static const float A = 0.15;
+static const float B = 0.50;
+static const float C = 0.10;
+static const float D = 0.20;
+static const float E = 0.02;
+static const float F = 0.30;
+static const float W = 11.2;
+
+float3 Uncharted2Tonemap(float3 x)
+{
+   return ((x*(A*x+C*B)+D*E)/(x*(A*x+B)+D*F))-E/F;
 }
 
 

@@ -1,5 +1,7 @@
 import ShadingPass;
 
+static const float CLOTH_AMBIENT = 0.5;
+
 float4 main(NormalPixelInput input) : SV_Target
 {
   float4 modelSpacePoint = input.modelPos;
@@ -40,13 +42,20 @@ float4 main(NormalPixelInput input) : SV_Target
 
   float NdotL = saturate(dot(fragNormal, lightObj.lightVector));
 
-  float3 diffuse = NdotL * Disney(attributes, lightObj, material, eyeVec) * lightObj.color.rgb * lightObj.intensity + AMBIENT_TERM;
+  float3 diffuse = NdotL * Disney(attributes, lightObj, material, eyeVec) * lightObj.color.rgb * lightObj.intensity + CLOTH_AMBIENT;
 
   float3 specular = NdotL * GGX(attributes, lightObj, material, eyeVec) * lightObj.color.rgb * lightObj.intensity;
 
   float visibility = aoShadow.r;
 
   float3 finalColor = material.albedo.rgb * diffuse.rgb * visibility + (specular * visibility);
+
+  float ExposureBias = 7.0;
+  float3 curr = Uncharted2Tonemap(ExposureBias * finalColor);
+
+  float3 whiteScale = 1.0 / Uncharted2Tonemap(W);
+  finalColor = curr * whiteScale;
+
   finalColor = FinalGamma(finalColor);
   return float4(finalColor, material.albedo.a);
 
