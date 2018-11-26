@@ -4,7 +4,7 @@ static const float3 SPHERE_CENTER = float3(0, -5, 0);
 static const float SPHERE_RADIUS = 3.0;
 static const float SPHERE_RADIUS_SQ = SPHERE_RADIUS * SPHERE_RADIUS;
 static const float SPHERE_RADIUS_DELTA_SQ = (SPHERE_RADIUS + EPSILON) * (SPHERE_RADIUS + EPSILON);
-static const float T_DELTA = 0.01;
+static const float T_DELTA = 0.0001;
 static const float3 WORLD_UP = float3(0, 1, 0);
 static const float3 PLANE_POS = float3(0, -8, 0);
 

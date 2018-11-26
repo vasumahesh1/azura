@@ -96,6 +96,12 @@ void FlyThroughCamera::OnKeyEvent(KeyEvent keyEvent) {
 
       case KeyboardKey::Unmapped:
       case KeyboardKey::Esc:
+      case KeyboardKey::Up:
+      case KeyboardKey::Down:
+      case KeyboardKey::Left:
+      case KeyboardKey::Right:
+      case KeyboardKey::T:
+      case KeyboardKey::Y:
       default:
         break;
     }

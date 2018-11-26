@@ -14,6 +14,8 @@ struct ComputeUBO {
 	uint numVertices;
 	uint numBlocks;
 	float pad;
+
+  float4x4 modelMatrix;
 };
 
 struct DistanceConstraint {

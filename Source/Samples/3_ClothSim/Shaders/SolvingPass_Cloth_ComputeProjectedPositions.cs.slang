@@ -1,6 +1,6 @@
 import SolvingPass;
 
-static const float3 GRAVITY = {0, -0.8, 0};
+static const float3 GRAVITY = {0, -9.8, 0};
 
 [numthreads(BLOCK_SIZE_X, 1, 1)]
 void main(
@@ -18,7 +18,7 @@ void main(
 		return;
 	}
 
-	clothDataBlock.projectedPos[threadIdx] = clothDataBlock.vertices[threadIdx];
+	const float3 vertexPosition = clothDataBlock.vertices[threadIdx];
 
 	clothDataBlock.deltaX[threadIdx] = 0;
 	clothDataBlock.deltaY[threadIdx] = 0;
@@ -28,10 +28,12 @@ void main(
 	const float invMass = constraintBlock.invMasses[threadIdx];
 	if (invMass < EPSILON) // ANCHORS
 	{
+		// Move Anchors by Model Matrix
+		clothDataBlock.projectedPos[threadIdx] = mul(computeUBOBlock.modelMatrix, float4(vertexPosition, 1.0)).xyz;
 		return;
 	}
 
 	const float3 updatedVelocity = 0.999 * (clothDataBlock.velocities[threadIdx] + timeDelta * (1.0 / invMass) * GRAVITY);
 	// Projected Pos of that Vertex
-	clothDataBlock.projectedPos[threadIdx] = clothDataBlock.vertices[threadIdx] + updatedVelocity * timeDelta;
+	clothDataBlock.projectedPos[threadIdx] = vertexPosition + updatedVelocity * timeDelta;
 }

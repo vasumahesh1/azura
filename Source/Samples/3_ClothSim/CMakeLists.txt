@@ -24,6 +24,9 @@ set(
 
     "${PROJECT_SOURCE_DIR}/Shaders/ShadingPass_Sphere.ps.slang|PS"
     "${PROJECT_SOURCE_DIR}/Shaders/ShadingPass_Sphere.vs.slang|VS"
+
+    "${PROJECT_SOURCE_DIR}/Shaders/ShadingPass_Plane.ps.slang|PS"
+    "${PROJECT_SOURCE_DIR}/Shaders/ShadingPass_Plane.vs.slang|VS"
 )
 
 add_executable(ClothSim ${SOURCES})

@@ -1,7 +1,5 @@
 import ShadingPass;
 
-const static float AMBIENT_TERM = 0.2;
-
 float4 main(SpherePixelInput input) : SV_Target
 {
   float4 diffuseColor = float4(1.0, 0.33, 0.05, 1.0);

@@ -9,10 +9,12 @@ set(
   "Inc/Math/Icosphere.h"
   "Inc/Math/Plane.h"
   "Inc/Math/Transform.h"
+  "Inc/Math/TransformComponent.h"
   "Src/Geometry.cpp"
   "Src/Icosphere.cpp"
   "Src/Plane.cpp"
   "Src/Transform.cpp"
+  "Src/TransformComponent.cpp"
 )
 
 add_library(Math ${SOURCES})

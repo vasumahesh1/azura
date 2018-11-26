@@ -11,14 +11,15 @@
 #include "Generic/TextureManager.h"
 #include "Camera/PolarCamera.h"
 #include "Physics/Geometry/ClothPlane.h"
+#include "Math/TransformComponent.h"
 
 
 namespace Azura {
 constexpr U32 DEFAULT_BLOCK_SIZE_X = 512;
 constexpr U32 SOLVER_ITERATIONS = 32;
 
-const float DISTANCE_STIFFNESS = 0.9f;
-const float BENDING_STIFFNESS = 0.5f;
+const float DISTANCE_STIFFNESS = 0.8f;
+const float BENDING_STIFFNESS = 0.8f;
 
 struct SceneUBO {
   Matrix4f m_model;
@@ -40,6 +41,8 @@ struct ComputeUBO
   U32 m_numVertices;
   U32 m_numBlocks;
   float pad;
+
+  Matrix4f m_clothModelMatrix;
 };
 
 struct NormalUBO
@@ -102,11 +105,14 @@ private:
   NormalUBO m_normalUBO{};
   DrawablePool* m_mainPool{nullptr};
   DrawablePool* m_spherePool{nullptr};
+  DrawablePool* m_planePool{nullptr};
   ComputePool* m_computePools[4]{nullptr, nullptr, nullptr, nullptr};
 
   PassData m_renderPass{};
   ComputePassData m_computePass{};
   NormalsPassData m_normalsPass{};
+
+  Math::TransformComponent m_clothTransform{};
 
   Physics::ClothPlane m_clothPlane;
 
