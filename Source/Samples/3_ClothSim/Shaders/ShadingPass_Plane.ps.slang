@@ -51,8 +51,13 @@ float4 main(PlanePixelInput input) : SV_Target
 
   float3 accumulatedColor = material.albedo.rgb * diffuse.rgb * visibility + (specular * visibility);
   accumulatedColor = FinalGamma(accumulatedColor);
-  float4 finalColor = float4(accumulatedColor, material.albedo.a);
+  
+  // accumulatedColor = (attributes.normal + float3(1.0, 1.0, 1.0)) / 2.0;
+  // accumulatedColor = float3(aoShadow.r, aoShadow.r, aoShadow.r);
+  // accumulatedColor = float3(material.roughness, material.roughness, material.roughness);
+  // accumulatedColor = diffuseColor.xyz;
 
+  float4 finalColor = float4(accumulatedColor, material.albedo.a);
   
   float dist = length(modelSpacePoint.xyz);
 

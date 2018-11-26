@@ -55,6 +55,12 @@ float4 main(NormalPixelInput input) : SV_Target
   finalColor = curr * whiteScale;
 
   finalColor = FinalGamma(finalColor);
+
+  // finalColor = (attributes.normal + float3(1.0, 1.0, 1.0)) / 2.0;
+  // finalColor = float3(aoShadow.r, aoShadow.r, aoShadow.r);
+  // finalColor = float3(material.roughness, material.roughness, material.roughness);
+  // finalColor = diffuseColor.xyz;
+
   return float4(finalColor, material.albedo.a);
 
   // float diffuseTerm = dot(normalize(fragNormal), normalize(lightVec));
@@ -66,10 +72,6 @@ float4 main(NormalPixelInput input) : SV_Target
   // finalColor.x = clamp(finalColor.x, 0.0, 1.0);
   // finalColor.y = clamp(finalColor.y, 0.0, 1.0);
   // finalColor.z = clamp(finalColor.z, 0.0, 1.0);
-
-  // finalColor = float4((input.tangent + float3(1.0, 1.0, 1.0)) / 2.0, 1.0);
-  // finalColor = float4(input.uv.x, input.uv.y, 0.0, 1.0);
-  // finalColor = diffuseColor;
 
   // return finalColor;
 }
