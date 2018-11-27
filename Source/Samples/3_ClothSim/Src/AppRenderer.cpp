@@ -24,7 +24,8 @@ struct LightData {
 const Vector3f TEST_SPHERE_CENTER = Vector3f(0, -5, 0);
 const Vector3f TEST_PLANE_CENTER = Vector3f(0, -8.01f, 0);
 constexpr float TEST_SPHERE_RADIUS = 2.9f;
-constexpr float CLOTH_SPAN = 5;
+constexpr float CLOTH_SPAN_X = 5;
+constexpr float CLOTH_SPAN_Y = 5;
 constexpr U32 CLOTH_DIV_X = 30;
 constexpr U32 CLOTH_DIV_Y = 30;
 constexpr U32 TEXTURE_MEMORY = 0x4000000; // 64 MB
@@ -39,7 +40,7 @@ AppRenderer::AppRenderer()
     m_localAllocator(m_mainBuffer, 0x400'0000),
     m_drawableAllocator(m_mainBuffer, 0x400'0000),
     m_camera(1280, 720),
-    m_clothPlane(ClothTriangulation::Regular, Vector2f(-CLOTH_SPAN, -CLOTH_SPAN), Vector2f(CLOTH_SPAN, CLOTH_SPAN),
+    m_clothPlane(ClothTriangulation::Regular, Vector2f(-CLOTH_SPAN_X, -CLOTH_SPAN_Y), Vector2f(CLOTH_SPAN_X, CLOTH_SPAN_Y),
                  Vector2u(CLOTH_DIV_X, CLOTH_DIV_Y), m_localAllocator),
     log_AppRenderer(Log("AppRenderer")) {
 }
@@ -53,7 +54,7 @@ void AppRenderer::Initialize() {
   m_clothTransform.SetRightKey(KeyboardKey::Right);
   m_clothTransform.SetStepSize(10.0f);
 
-  HEAP_ALLOCATOR(Temporary, Memory::MonotonicAllocator, 16384);
+  HEAP_ALLOCATOR(Temporary, Memory::MonotonicAllocator, 0x400'0000);
   m_window = RenderSystem::CreateApplicationWindow("PBD Cloth Simulation", 1280, 720);
 
   m_window->SetUpdateCallback([this](float deltaTime)
@@ -216,8 +217,8 @@ void AppRenderer::Initialize() {
   m_normalUBO.m_numTriangles = m_clothPlane.GetIndexCount() / 3;
   m_normalUBO.m_numVertices = m_clothPlane.GetVertexCount();
 
-  RenderPassRequirements renderPassRequirements = RenderPassRequirements(0, 10, 20, allocatorTemporary);
-  renderPassRequirements.m_maxPools             = 10;
+  RenderPassRequirements renderPassRequirements = RenderPassRequirements(0, 10 + (SOLVER_ITERATIONS * 2), 20, allocatorTemporary);
+  renderPassRequirements.m_maxPools             = 10 + (SOLVER_ITERATIONS * 2);
 
   const U32 COMPUTE_VERTEX_BUFFER = renderPassRequirements.AddBuffer({
     U32(sizeof(Vector3f)) * U32(m_clothPlane.GetVertexCount()), U32(sizeof(Vector3f))
@@ -292,39 +293,45 @@ void AppRenderer::Initialize() {
     RenderPassType::Compute
   });
 
-  m_computePass.m_pass2 = renderPassRequirements.AddPass({
-    PipelinePassCreateInfo::Shaders{},
-    PipelinePassCreateInfo::InputTargets{},
-    PipelinePassCreateInfo::InputBuffers{
-      {DISTANCE_CONSTRAINTS_BUFFER, ShaderStage::Compute}, {BEND_CONSTRAINTS_BUFFER, ShaderStage::Compute}, {COMPUTE_VERTEX_INV_MASS, ShaderStage::Compute}
-    },
-    PipelinePassCreateInfo::OutputTargets{},
-    PipelinePassCreateInfo::OutputBuffers{
-      COMPUTE_VERTEX_BUFFER, COMPUTE_PROJECTION_BUFFER, COMPUTE_VERTEX_VELOCITY, COMPUTE_VERTEX_CONSTRAINT_COUNT,
-      COMPUTE_VERTEX_DELTAX, COMPUTE_VERTEX_DELTAY, COMPUTE_VERTEX_DELTAZ
-    },
-    PipelinePassCreateInfo::DescriptorSets{COMPUTE_UBO_SET},
-    ClearData{{0.0f, 0.0f, 0.0f, 1.0f}, 1.0f, 0},
-    BlendState{},
-    RenderPassType::Compute
-    });
+  m_computePass.m_passItr1.reserve(SOLVER_ITERATIONS);
+  m_computePass.m_passItr2.reserve(SOLVER_ITERATIONS);
+  m_iterativePools.reserve(SOLVER_ITERATIONS);
 
-  m_computePass.m_pass3 = renderPassRequirements.AddPass({
-    PipelinePassCreateInfo::Shaders{},
-    PipelinePassCreateInfo::InputTargets{},
-    PipelinePassCreateInfo::InputBuffers{
-      {DISTANCE_CONSTRAINTS_BUFFER, ShaderStage::Compute}, {BEND_CONSTRAINTS_BUFFER, ShaderStage::Compute}, {COMPUTE_VERTEX_INV_MASS, ShaderStage::Compute}
-    },
-    PipelinePassCreateInfo::OutputTargets{},
-    PipelinePassCreateInfo::OutputBuffers{
-      COMPUTE_VERTEX_BUFFER, COMPUTE_PROJECTION_BUFFER, COMPUTE_VERTEX_VELOCITY, COMPUTE_VERTEX_CONSTRAINT_COUNT,
-      COMPUTE_VERTEX_DELTAX, COMPUTE_VERTEX_DELTAY, COMPUTE_VERTEX_DELTAZ
-    },
-    PipelinePassCreateInfo::DescriptorSets{COMPUTE_UBO_SET},
-    ClearData{{0.0f, 0.0f, 0.0f, 1.0f}, 1.0f, 0},
-    BlendState{},
-    RenderPassType::Compute
-    });
+  for (U32 idx = 0; idx < SOLVER_ITERATIONS; ++idx) {
+    m_computePass.m_passItr1.push_back(renderPassRequirements.AddPass({
+      PipelinePassCreateInfo::Shaders{},
+      PipelinePassCreateInfo::InputTargets{},
+      PipelinePassCreateInfo::InputBuffers{
+        {DISTANCE_CONSTRAINTS_BUFFER, ShaderStage::Compute}, {BEND_CONSTRAINTS_BUFFER, ShaderStage::Compute}, {COMPUTE_VERTEX_INV_MASS, ShaderStage::Compute}
+      },
+      PipelinePassCreateInfo::OutputTargets{},
+      PipelinePassCreateInfo::OutputBuffers{
+        COMPUTE_VERTEX_BUFFER, COMPUTE_PROJECTION_BUFFER, COMPUTE_VERTEX_VELOCITY, COMPUTE_VERTEX_CONSTRAINT_COUNT,
+        COMPUTE_VERTEX_DELTAX, COMPUTE_VERTEX_DELTAY, COMPUTE_VERTEX_DELTAZ
+      },
+      PipelinePassCreateInfo::DescriptorSets{COMPUTE_UBO_SET},
+      ClearData{{0.0f, 0.0f, 0.0f, 1.0f}, 1.0f, 0},
+      BlendState{},
+      RenderPassType::Compute
+      }));
+
+    m_computePass.m_passItr2.push_back(renderPassRequirements.AddPass({
+      PipelinePassCreateInfo::Shaders{},
+      PipelinePassCreateInfo::InputTargets{},
+      PipelinePassCreateInfo::InputBuffers{
+        {DISTANCE_CONSTRAINTS_BUFFER, ShaderStage::Compute}, {BEND_CONSTRAINTS_BUFFER, ShaderStage::Compute}, {COMPUTE_VERTEX_INV_MASS, ShaderStage::Compute}
+      },
+      PipelinePassCreateInfo::OutputTargets{},
+      PipelinePassCreateInfo::OutputBuffers{
+        COMPUTE_VERTEX_BUFFER, COMPUTE_PROJECTION_BUFFER, COMPUTE_VERTEX_VELOCITY, COMPUTE_VERTEX_CONSTRAINT_COUNT,
+        COMPUTE_VERTEX_DELTAX, COMPUTE_VERTEX_DELTAY, COMPUTE_VERTEX_DELTAZ
+      },
+      PipelinePassCreateInfo::DescriptorSets{COMPUTE_UBO_SET},
+      ClearData{{0.0f, 0.0f, 0.0f, 1.0f}, 1.0f, 0},
+      BlendState{},
+      RenderPassType::Compute
+      }));
+  }
 
   m_computePass.m_pass4 = renderPassRequirements.AddPass({
     PipelinePassCreateInfo::Shaders{},
@@ -447,20 +454,10 @@ void AppRenderer::Initialize() {
   const U32 numConstraintBlocks     = (totalConstraints + DEFAULT_BLOCK_SIZE_X - 1) / DEFAULT_BLOCK_SIZE_X;
   const U32 numVerticesBlocks     = (m_clothPlane.GetVertexCount() + DEFAULT_BLOCK_SIZE_X - 1) / DEFAULT_BLOCK_SIZE_X;
 
-  ComputePoolCreateInfo poolInfoConstraints = {allocatorTemporary};
-  poolInfoConstraints.m_byteSize            = 0xF00000;
-  poolInfoConstraints.m_computePasses       = {{m_computePass.m_pass2}, allocatorTemporary};
-  poolInfoConstraints.m_launchDims          = ThreadGroupDimensions{numConstraintBlocks, 1, 1};
-
   ComputePoolCreateInfo pass1 = {allocatorTemporary};
   pass1.m_byteSize            = 0xF00000;
   pass1.m_computePasses       = {{m_computePass.m_pass1}, allocatorTemporary};
   pass1.m_launchDims          = ThreadGroupDimensions{numVerticesBlocks, 1, 1};
-
-  ComputePoolCreateInfo pass2 = {allocatorTemporary};
-  pass2.m_byteSize            = 0xF00000;
-  pass2.m_computePasses       = {{m_computePass.m_pass3}, allocatorTemporary};
-  pass2.m_launchDims          = ThreadGroupDimensions{numVerticesBlocks, 1, 1};
 
   ComputePoolCreateInfo pass3 = {allocatorTemporary};
   pass3.m_byteSize            = 0xF00000;
@@ -486,20 +483,32 @@ void AppRenderer::Initialize() {
   computeProjectedPositions.BindUniformData(m_computePass.m_computeUBOSlot, computeUBOStart, sizeof(ComputeUBO));
   m_computePools[0] = &computeProjectedPositions;
 
-  ComputePool& computeApplyConstraints = m_renderer->CreateComputePool(poolInfoConstraints);
-  computeApplyConstraints.AddShader(COMPUTE_2_PBD);
-  computeApplyConstraints.BindUniformData(m_computePass.m_computeUBOSlot, computeUBOStart, sizeof(ComputeUBO));
-  m_computePools[1] = &computeApplyConstraints;
+  for (U32 idx = 0; idx < SOLVER_ITERATIONS; ++idx) {
+    ComputePoolCreateInfo poolInfoConstraints = { allocatorTemporary };
+    poolInfoConstraints.m_byteSize = 0xF00000;
+    poolInfoConstraints.m_computePasses = { {m_computePass.m_passItr1[idx]}, allocatorTemporary };
+    poolInfoConstraints.m_launchDims = ThreadGroupDimensions{ numConstraintBlocks, 1, 1 };
 
-  ComputePool& computeApplyDelta = m_renderer->CreateComputePool(pass2);
-  computeApplyDelta.AddShader(COMPUTE_3_PBD);
-  computeApplyDelta.BindUniformData(m_computePass.m_computeUBOSlot, computeUBOStart, sizeof(ComputeUBO));
-  m_computePools[2] = &computeApplyDelta;
+    ComputePool& computeApplyConstraints = m_renderer->CreateComputePool(poolInfoConstraints);
+    computeApplyConstraints.AddShader(COMPUTE_2_PBD);
+    computeApplyConstraints.BindUniformData(m_computePass.m_computeUBOSlot, computeUBOStart, sizeof(ComputeUBO));
+    m_iterativePools.push_back(&computeApplyConstraints);
+
+    ComputePoolCreateInfo pass2 = {allocatorTemporary};
+    pass2.m_byteSize            = 0xF00000;
+    pass2.m_computePasses       = {{m_computePass.m_passItr2[idx]}, allocatorTemporary};
+    pass2.m_launchDims          = ThreadGroupDimensions{numVerticesBlocks, 1, 1};
+
+    ComputePool& computeApplyDelta = m_renderer->CreateComputePool(pass2);
+    computeApplyDelta.AddShader(COMPUTE_3_PBD);
+    computeApplyDelta.BindUniformData(m_computePass.m_computeUBOSlot, computeUBOStart, sizeof(ComputeUBO));
+    m_iterativePools.push_back(&computeApplyDelta);
+  }
 
   ComputePool& computeComputePositions = m_renderer->CreateComputePool(pass3);
   computeComputePositions.AddShader(COMPUTE_4_PBD);
   computeComputePositions.BindUniformData(m_computePass.m_computeUBOSlot, computeUBOStart, sizeof(ComputeUBO));
-  m_computePools[3] = &computeComputePositions;
+  m_computePools[1] = &computeComputePositions;
 
   // CREATE COMPUTE POOL - NORMALS
   const U32 numBlocksForNormalize     = (m_normalUBO.m_numTriangles + DEFAULT_BLOCK_SIZE_X - 1) / DEFAULT_BLOCK_SIZE_X;
@@ -693,7 +702,7 @@ void AppRenderer::WindowUpdate(float timeDelta) {
   m_camera.Update(timeDelta);
   m_clothTransform.Update(timeDelta);
 
-   // timeDelta = 0.0166667f;
+  // timeDelta = 0.0166667f;
 
   m_clothUBO.m_view              = m_camera.GetViewMatrix();
   m_clothUBO.m_viewProj          = m_camera.GetViewProjMatrix();
@@ -721,10 +730,16 @@ void AppRenderer::WindowUpdate(float timeDelta) {
   const auto planeDataBuffer = reinterpret_cast<U8*>(&m_planeUBO);        // NOLINT
   const auto computeUBOStart  = reinterpret_cast<const U8*>(&m_computeUBO); // NOLINT
 
-  for (auto& m_computePool : m_computePools) {
-    m_computePool->BeginUpdates();
-    m_computePool->UpdateUniformData(m_computePass.m_computeUBOSlot, computeUBOStart, sizeof(ComputeUBO));
-    m_computePool->SubmitUpdates();
+  for (auto& computePool : m_computePools) {
+    computePool->BeginUpdates();
+    computePool->UpdateUniformData(m_computePass.m_computeUBOSlot, computeUBOStart, sizeof(ComputeUBO));
+    computePool->SubmitUpdates();
+  }
+
+  for (auto& computePool : m_iterativePools) {
+    computePool->BeginUpdates();
+    computePool->UpdateUniformData(m_computePass.m_computeUBOSlot, computeUBOStart, sizeof(ComputeUBO));
+    computePool->SubmitUpdates();
   }
 
   // m_computePool->BeginUpdates();

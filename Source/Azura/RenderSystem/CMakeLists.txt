@@ -5,6 +5,7 @@ set(
     GENERIC_SOURCES
 
     # Headers
+    "Inc/Generic/Debug.h"
     "Inc/Generic/Constants.h"
     "Inc/Generic/ComputePool.h"
     "Inc/Generic/Drawable.h"
@@ -14,11 +15,14 @@ set(
     "Inc/Generic/Renderer.h"
     "Inc/Generic/RenderSystem.h"
     "Inc/Generic/Shader.h"
+    "Inc/Generic/GPUBuffer.h"
+    "Inc/Generic/GPUBufferWriter.h"
     "Inc/Generic/TextureManager.h"
     "Inc/Generic/Window.h"
     "Inc/Generic/Windows/Win32GLFWWindow.h"
 
     # Sources
+    "Src/Generic/Debug.cpp"
     "Src/Generic/ComputePool.cpp"
     "Src/Generic/Drawable.cpp"
     "Src/Generic/GenericTypes.cpp"
@@ -26,6 +30,8 @@ set(
     "Src/Generic/PoolPrimitives.cpp"
     "Src/Generic/Renderer.cpp"
     "Src/Generic/Shader.cpp"
+    "Src/Generic/GPUBuffer.cpp"
+    "Src/Generic/GPUBufferWriter.cpp"
     "Src/Generic/TextureManager.cpp"
     "Src/Generic/Window.cpp"
     "Src/Generic/Windows/Win32GLFWWindow.cpp"

@@ -33,7 +33,7 @@ void main(
 		return;
 	}
 
-	const float3 updatedVelocity = 0.997 * (clothDataBlock.velocities[threadIdx] + timeDelta * (1.0 / invMass) * GRAVITY);
+	const float3 updatedVelocity = 0.995 * (clothDataBlock.velocities[threadIdx] + timeDelta * GRAVITY);
 	// Projected Pos of that Vertex
 	clothDataBlock.projectedPos[threadIdx] = vertexPosition + updatedVelocity * timeDelta;
 }

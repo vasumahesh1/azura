@@ -382,10 +382,10 @@ struct ApplicationInfo {
 };
 
 constexpr U32 DEFAULT_FRAMES_IN_FLIGHT = 2;
-constexpr U32 MAX_RENDER_PASS_INPUTS   = 4;
-constexpr U32 MAX_RENDER_PASS_OUTPUTS  = 4;
-constexpr U32 MAX_RENDER_PASS_SETS     = 8;
-constexpr U32 MAX_RENDER_PASS_SHADERS  = 4;
+constexpr U32 MAX_RENDER_PASS_INPUTS   = 10;
+constexpr U32 MAX_RENDER_PASS_OUTPUTS  = 10;
+constexpr U32 MAX_RENDER_PASS_SETS     = 10;
+constexpr U32 MAX_RENDER_PASS_SHADERS  = 10;
 
 struct MemoryRequirements {
   U32 m_stagingBufferSize{0x4000000};

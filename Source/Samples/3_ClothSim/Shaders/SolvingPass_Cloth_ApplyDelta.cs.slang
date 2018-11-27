@@ -31,7 +31,7 @@ void main(
     float y = asfloat(clothDataBlock.deltaY[threadIdx]);
     float z = asfloat(clothDataBlock.deltaZ[threadIdx]);
 
-    float3 averaged = (10.0 * float3(x, y, z)) / float(clothDataBlock.constraintCount[threadIdx]);
+    float3 averaged = (2.0 * float3(x, y, z)) / float(clothDataBlock.constraintCount[threadIdx]);
     projectedPos = clothDataBlock.projectedPos[threadIdx] + averaged;
   }
   
@@ -79,4 +79,8 @@ void main(
   }
 
   clothDataBlock.projectedPos[threadIdx] = projectedPos;
+  clothDataBlock.deltaX[threadIdx] = 0;
+  clothDataBlock.deltaY[threadIdx] = 0;
+  clothDataBlock.deltaZ[threadIdx] = 0;
+  clothDataBlock.constraintCount[threadIdx] = 0;
 }
