@@ -11,6 +11,10 @@ using namespace Microsoft::WRL; // NOLINT
 namespace Azura {
 namespace D3D12 {
 
+namespace {
+  constexpr UINT NVIDIA_GPU = 4318;
+} // namespace
+
 ComPtr<IDXGISwapChain1> D3D12Core::CreateSwapChain(const ComPtr<IDXGIFactory4>& factory,
                                                    const ComPtr<ID3D12CommandQueue>& commandQueue,
                                                    const void* windowHandle,
@@ -54,7 +58,7 @@ void D3D12Core::GetHardwareAdapter(IDXGIFactory2* pFactory, IDXGIAdapter1** ppAd
     DXGI_ADAPTER_DESC1 desc;
     adapter->GetDesc1(&desc);
 
-    LOG_DEBUG(log_D3D12RenderSystem, LOG_LEVEL, "Found GPU: %ls", desc.Description);
+    LOG_INFO(log_D3D12RenderSystem, LOG_LEVEL, "Found GPU: %ls", desc.Description);
     LOG_DEBUG(log_D3D12RenderSystem, LOG_LEVEL, "Device ID: %d", desc.DeviceId);
     LOG_DEBUG(log_D3D12RenderSystem, LOG_LEVEL, "Vendor ID: %d", desc.VendorId);
     LOG_DEBUG(log_D3D12RenderSystem, LOG_LEVEL, "System Memory: %zu", desc.DedicatedSystemMemory);
@@ -65,11 +69,16 @@ void D3D12Core::GetHardwareAdapter(IDXGIFactory2* pFactory, IDXGIAdapter1** ppAd
       continue;
     }
 
+    if (desc.VendorId != NVIDIA_GPU)
+    {
+      continue;
+    }
+
     // Check to see if the adapter supports Direct3D 12, but don't create the
     // actual device yet.
     if (SUCCEEDED(D3D12CreateDevice(adapter.Get(), D3D_FEATURE_LEVEL_11_0, _uuidof(ID3D12Device), nullptr))) {
       
-      LOG_DEBUG(log_D3D12RenderSystem, LOG_LEVEL, "Selected GPU: %ls", desc.Description);
+      LOG_INFO(log_D3D12RenderSystem, LOG_LEVEL, "Selected GPU: %ls", desc.Description);
       
       break;
     }
