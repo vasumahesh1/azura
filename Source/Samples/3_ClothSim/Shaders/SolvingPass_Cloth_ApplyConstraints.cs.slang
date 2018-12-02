@@ -117,16 +117,20 @@ void main(
     const float invMassFactor2 = invMassB / invMassSum;
     const float3 x12 = (clothDataBlock.projectedPos[dist.indexA] - clothDataBlock.projectedPos[dist.indexB]);
 
-    const float3 delta1 = (computeUBOBlock.longRangeStiffness * -1.0 * invMassFactor1 * (length(x12) - dist.restLength)) * normalize(x12);
-    const float3 delta2 = (computeUBOBlock.longRangeStiffness * invMassFactor2 * (length(x12) - dist.restLength)) * normalize(x12);
+    const float lengthDelta = length(x12) - dist.restLength;
 
-    AtomicAddDeltaX(dist.indexA, delta1.x);
-    AtomicAddDeltaY(dist.indexA, delta1.y);
-    AtomicAddDeltaZ(dist.indexA, delta1.z);
+    if (lengthDelta > 0) {
+      const float3 delta1 = (computeUBOBlock.longRangeStiffness * -1.0 * invMassFactor1 * (lengthDelta)) * normalize(x12);
+      const float3 delta2 = (computeUBOBlock.longRangeStiffness * invMassFactor2 * (lengthDelta)) * normalize(x12);
 
-    AtomicAddDeltaX(dist.indexB, delta2.x);
-    AtomicAddDeltaY(dist.indexB, delta2.y);
-    AtomicAddDeltaZ(dist.indexB, delta2.z);
+      AtomicAddDeltaX(dist.indexA, delta1.x);
+      AtomicAddDeltaY(dist.indexA, delta1.y);
+      AtomicAddDeltaZ(dist.indexA, delta1.z);
+
+      AtomicAddDeltaX(dist.indexB, delta2.x);
+      AtomicAddDeltaY(dist.indexB, delta2.y);
+      AtomicAddDeltaZ(dist.indexB, delta2.z);
+    }
   }
 
   if (bendingOffset < computeUBOBlock.numBendConstraints && bendingOffset >= 0) {
