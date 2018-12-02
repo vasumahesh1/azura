@@ -37,6 +37,26 @@ private:
   float m_restLength;
 };
 
+class LongRangeConstraint {
+
+public:
+  LongRangeConstraint(const ConstraintPoint& x1,
+    const ConstraintPoint& x2,
+    float restLength);
+
+  void Compute(float stiffness, const Containers::Vector<Vector3f>& currentPoints,
+    const Containers::Vector<float>& currentInvMass,
+    Containers::Vector<ConstraintPointDelta>& result);
+
+  bool operator<(const LongRangeConstraint& rhs) const;
+
+  bool operator==(const LongRangeConstraint& rhs) const;
+
+private:
+  ConstraintPoint m_points[2]{};
+  float m_restLength;
+};
+
 
 class BendingConstraint {
 

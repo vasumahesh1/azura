@@ -18,8 +18,9 @@ namespace Azura {
 constexpr U32 DEFAULT_BLOCK_SIZE_X = 512;
 constexpr U32 SOLVER_ITERATIONS = 2;
 
-const float DISTANCE_STIFFNESS = 0.7f;
-const float BENDING_STIFFNESS = 0.3f;
+const float DISTANCE_STIFFNESS = 0.4f;
+const float BENDING_STIFFNESS = 0.2f;
+const float LONG_RANGE_STIFFNESS = 0.01f;
 
 struct SceneUBO {
   Matrix4f m_model;
@@ -34,13 +35,13 @@ struct ComputeUBO
 {
   float m_stretchStiffness;
   float m_bendStiffness;
+  float m_longRangeStiffness;
   float m_timeDelta;
+
   U32 m_numStretchConstraints;
-  
   U32 m_numBendConstraints;
+  U32 m_numLongRangeConstraints;
   U32 m_numVertices;
-  U32 m_numBlocks;
-  float pad;
 
   Matrix4f m_clothModelMatrix;
 };

@@ -7,18 +7,24 @@ static const float EPSILON = 0.00001;
 struct ComputeUBO {
 	float stretchStiffness;
 	float bendStiffness;
+  float longRangeStiffness;
 	float timeDelta;
-	uint numStretchConstraints;
 
+	uint numStretchConstraints;
 	uint numBendConstraints;
+  uint numLongRangeConstraints;
 	uint numVertices;
-	uint numBlocks;
-	float pad;
 
   float4x4 modelMatrix;
 };
 
 struct DistanceConstraint {
+  uint indexA;
+  uint indexB;
+  float restLength;
+};
+
+struct LongRangeConstraint {
   uint indexA;
   uint indexB;
   float restLength;
@@ -32,6 +38,7 @@ struct BendConstraint {
 struct Constraints {
     StructuredBuffer<DistanceConstraint> distanceConstraints;
     StructuredBuffer<BendConstraint> bendConstraints;
+    StructuredBuffer<LongRangeConstraint> longRangeConstraints;
     StructuredBuffer<float> invMasses;
 };
 

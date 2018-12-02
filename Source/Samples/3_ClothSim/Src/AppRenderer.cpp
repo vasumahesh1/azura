@@ -26,8 +26,8 @@ const Vector3f TEST_PLANE_CENTER = Vector3f(0, -8.01f, 0);
 constexpr float TEST_SPHERE_RADIUS = 2.9f;
 constexpr float CLOTH_SPAN_X = 5;
 constexpr float CLOTH_SPAN_Y = 5;
-constexpr U32 CLOTH_DIV_X = 30;
-constexpr U32 CLOTH_DIV_Y = 30;
+constexpr U32 CLOTH_DIV_X = 50;
+constexpr U32 CLOTH_DIV_Y = 50;
 constexpr U32 TEXTURE_MEMORY = 0x4000000; // 64 MB
 constexpr U32 ANCHOR_IDX_1 = 0;
 constexpr U32 ANCHOR_IDX_2 = (CLOTH_DIV_Y * (CLOTH_DIV_X + 1));
@@ -211,6 +211,7 @@ void AppRenderer::Initialize() {
 
   const auto solvingView = m_clothPlane.GetPBDSolvingView(m_localAllocator);
   const auto& clothDistanceConstraints = solvingView.GetDistanceConstraints();
+  const auto& clothLongRangeConstraints = solvingView.GetLongRangeConstraints();
   const auto& clothBendingConstraints = solvingView.GetBendingConstraints();
 
   m_normalUBO = {};
@@ -256,6 +257,10 @@ void AppRenderer::Initialize() {
     U32(sizeof(DistanceConstraint)) * U32(clothDistanceConstraints.GetSize()), U32(sizeof(DistanceConstraint))
     });
 
+  const U32 LONG_RANGE_CONSTRAINTS_BUFFER = renderPassRequirements.AddBuffer({
+    U32(sizeof(LongRangeConstraint)) * U32(clothLongRangeConstraints.GetSize()), U32(sizeof(LongRangeConstraint))
+    });
+
   const U32 BEND_CONSTRAINTS_BUFFER = renderPassRequirements.AddBuffer({
     U32(sizeof(BendingConstraint)) * U32(clothBendingConstraints.GetSize()), U32(sizeof(BendingConstraint))
     });
@@ -280,7 +285,7 @@ void AppRenderer::Initialize() {
     PipelinePassCreateInfo::Shaders{},
     PipelinePassCreateInfo::InputTargets{},
     PipelinePassCreateInfo::InputBuffers{
-      {DISTANCE_CONSTRAINTS_BUFFER, ShaderStage::Compute}, {BEND_CONSTRAINTS_BUFFER, ShaderStage::Compute}, {COMPUTE_VERTEX_INV_MASS, ShaderStage::Compute}
+      {DISTANCE_CONSTRAINTS_BUFFER, ShaderStage::Compute}, {BEND_CONSTRAINTS_BUFFER, ShaderStage::Compute}, {LONG_RANGE_CONSTRAINTS_BUFFER, ShaderStage::Compute}, {COMPUTE_VERTEX_INV_MASS, ShaderStage::Compute}
     },
     PipelinePassCreateInfo::OutputTargets{},
     PipelinePassCreateInfo::OutputBuffers{
@@ -302,7 +307,7 @@ void AppRenderer::Initialize() {
       PipelinePassCreateInfo::Shaders{},
       PipelinePassCreateInfo::InputTargets{},
       PipelinePassCreateInfo::InputBuffers{
-        {DISTANCE_CONSTRAINTS_BUFFER, ShaderStage::Compute}, {BEND_CONSTRAINTS_BUFFER, ShaderStage::Compute}, {COMPUTE_VERTEX_INV_MASS, ShaderStage::Compute}
+        {DISTANCE_CONSTRAINTS_BUFFER, ShaderStage::Compute}, {BEND_CONSTRAINTS_BUFFER, ShaderStage::Compute}, {LONG_RANGE_CONSTRAINTS_BUFFER, ShaderStage::Compute}, {COMPUTE_VERTEX_INV_MASS, ShaderStage::Compute}
       },
       PipelinePassCreateInfo::OutputTargets{},
       PipelinePassCreateInfo::OutputBuffers{
@@ -319,7 +324,7 @@ void AppRenderer::Initialize() {
       PipelinePassCreateInfo::Shaders{},
       PipelinePassCreateInfo::InputTargets{},
       PipelinePassCreateInfo::InputBuffers{
-        {DISTANCE_CONSTRAINTS_BUFFER, ShaderStage::Compute}, {BEND_CONSTRAINTS_BUFFER, ShaderStage::Compute}, {COMPUTE_VERTEX_INV_MASS, ShaderStage::Compute}
+        {DISTANCE_CONSTRAINTS_BUFFER, ShaderStage::Compute}, {BEND_CONSTRAINTS_BUFFER, ShaderStage::Compute}, {LONG_RANGE_CONSTRAINTS_BUFFER, ShaderStage::Compute}, {COMPUTE_VERTEX_INV_MASS, ShaderStage::Compute}
       },
       PipelinePassCreateInfo::OutputTargets{},
       PipelinePassCreateInfo::OutputBuffers{
@@ -337,7 +342,7 @@ void AppRenderer::Initialize() {
     PipelinePassCreateInfo::Shaders{},
     PipelinePassCreateInfo::InputTargets{},
     PipelinePassCreateInfo::InputBuffers{
-      {DISTANCE_CONSTRAINTS_BUFFER, ShaderStage::Compute}, {BEND_CONSTRAINTS_BUFFER, ShaderStage::Compute}, {COMPUTE_VERTEX_INV_MASS, ShaderStage::Compute}
+      {DISTANCE_CONSTRAINTS_BUFFER, ShaderStage::Compute}, {BEND_CONSTRAINTS_BUFFER, ShaderStage::Compute}, {LONG_RANGE_CONSTRAINTS_BUFFER, ShaderStage::Compute}, {COMPUTE_VERTEX_INV_MASS, ShaderStage::Compute}
     },
     PipelinePassCreateInfo::OutputTargets{},
     PipelinePassCreateInfo::OutputBuffers{
@@ -380,7 +385,7 @@ void AppRenderer::Initialize() {
   std::vector<Vector3i> zeroIntVecData = std::vector<Vector3i>(m_clothPlane.GetVertexCount(), Vector3i(0));
   std::vector<U32> zeroIntBuffer       = std::vector<U32>(m_clothPlane.GetVertexCount(), 0);
 
-  const auto totalConstraints = U32(clothDistanceConstraints.GetSize() + clothBendingConstraints.GetSize());
+  const auto totalConstraints = U32(clothDistanceConstraints.GetSize() + clothBendingConstraints.GetSize() + clothLongRangeConstraints.GetSize());
 
   m_renderer = RenderSystem::CreateRenderer(appInfo, requirements, applicationRequirements,
                                             m_window->GetSwapChainRequirements(), renderPassRequirements,
@@ -432,8 +437,10 @@ void AppRenderer::Initialize() {
   m_renderer->BindBufferTarget(COMPUTE_PROJECTION_BUFFER, projectionStart);
 
   const auto distanceConstraintStart = reinterpret_cast<const U8*>(clothDistanceConstraints.Data()); // NOLINT
+  const auto lrConstraintStart = reinterpret_cast<const U8*>(clothLongRangeConstraints.Data()); // NOLINT
   const auto bendConstraintStart = reinterpret_cast<const U8*>(clothBendingConstraints.Data()); // NOLINT
   m_renderer->BindBufferTarget(DISTANCE_CONSTRAINTS_BUFFER, distanceConstraintStart);
+  m_renderer->BindBufferTarget(LONG_RANGE_CONSTRAINTS_BUFFER, lrConstraintStart);
   m_renderer->BindBufferTarget(BEND_CONSTRAINTS_BUFFER, bendConstraintStart);
 
   const auto velocityStart = reinterpret_cast<const U8*>(zeroBufferData.data()); // NOLINT
@@ -465,14 +472,16 @@ void AppRenderer::Initialize() {
   pass3.m_launchDims          = ThreadGroupDimensions{numVerticesBlocks, 1, 1};
 
   const float distanceStiffnessPrime = 1.0f - std::pow(1.0f - DISTANCE_STIFFNESS, 1.0f / SOLVER_ITERATIONS);
+  const float lrStiffnessPrime = 1.0f - std::pow(1.0f - LONG_RANGE_STIFFNESS, 1.0f / SOLVER_ITERATIONS);
   const float bendingStiffnessPrime  = 1.0f - std::pow(1.0f - BENDING_STIFFNESS, 1.0f / SOLVER_ITERATIONS);
 
   m_computeUBO                         = {};
   m_computeUBO.m_numVertices           = m_clothPlane.GetVertexCount();
   m_computeUBO.m_stretchStiffness      = distanceStiffnessPrime;
   m_computeUBO.m_bendStiffness         = bendingStiffnessPrime;
+  m_computeUBO.m_longRangeStiffness    = lrStiffnessPrime;
   m_computeUBO.m_timeDelta             = 0.0f;
-  m_computeUBO.m_numBlocks             = numConstraintBlocks;
+  m_computeUBO.m_numLongRangeConstraints = U32(clothLongRangeConstraints.GetSize());
   m_computeUBO.m_numStretchConstraints = U32(clothDistanceConstraints.GetSize());
   m_computeUBO.m_numBendConstraints    = U32(clothBendingConstraints.GetSize());
   m_computeUBO.m_clothModelMatrix      = m_clothTransform.GetTransform().Transpose();

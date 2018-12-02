@@ -4,12 +4,15 @@ namespace Azura {
 namespace Physics {
 namespace PBD {
 
-ClothSolvingView::ClothSolvingView(Containers::Vector<Vector3f>& dataSet, Containers::Vector<float>& invMassData ,
+ClothSolvingView::ClothSolvingView(Containers::Vector<Vector3f>& dataSet,
+                                   Containers::Vector<float>& invMassData,
                                    U32 numDistanceConstraints,
+                                   U32 numLongRangeConstraints,
                                    U32 numBendingConstraints,
                                    Memory::Allocator& allocator)
   : SolvingView(dataSet, invMassData),
     m_distanceConstraints(numDistanceConstraints, allocator),
+    m_longRangeConstraints(numLongRangeConstraints, allocator),
     m_bendingConstraints(numBendingConstraints, allocator) {
 }
 
@@ -19,6 +22,14 @@ void ClothSolvingView::AddConstraint(const DistanceConstraint& constraint) {
 
 void ClothSolvingView::AddConstraint(DistanceConstraint&& constraint) {
   m_distanceConstraints.PushBack(std::move(constraint));
+}
+
+void ClothSolvingView::AddConstraint(const LongRangeConstraint& constraint) {
+  m_longRangeConstraints.PushBack(constraint);
+}
+
+void ClothSolvingView::AddConstraint(LongRangeConstraint&& constraint) {
+  m_longRangeConstraints.PushBack(std::move(constraint));
 }
 
 void ClothSolvingView::AddConstraint(const BendingConstraint& constraint) {
@@ -32,6 +43,10 @@ void ClothSolvingView::AddConstraint(BendingConstraint&& constraint) {
 
 const Containers::Vector<DistanceConstraint>& ClothSolvingView::GetDistanceConstraints() const {
   return m_distanceConstraints;
+}
+
+const Containers::Vector<LongRangeConstraint>& ClothSolvingView::GetLongRangeConstraints() const {
+  return m_longRangeConstraints;
 }
 
 const Containers::Vector<BendingConstraint>& ClothSolvingView::GetBendingConstraints() const {
