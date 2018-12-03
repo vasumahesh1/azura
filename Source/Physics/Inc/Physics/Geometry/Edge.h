@@ -19,5 +19,11 @@ struct EdgeMapHash {
   }
 };
 
+struct Vector3fHash {
+  std::size_t operator ()(const Vector3f& v) const {
+    return boost::hash_value(v[0]) + boost::hash_value(v[1]) + boost::hash_value(v[2]);
+  }
+};
+
 } // namespace Physics
 } // namespace Azura

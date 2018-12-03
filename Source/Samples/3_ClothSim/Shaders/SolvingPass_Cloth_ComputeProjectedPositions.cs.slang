@@ -18,6 +18,11 @@ void main(
 		return;
 	}
 
+	// Don't Compute Aliases
+	if (constraintBlock.vertexAliases[threadIdx] != -1) {
+		return;
+	}
+
 	const float3 vertexPosition = clothDataBlock.vertices[threadIdx];
 
 	clothDataBlock.deltaX[threadIdx] = 0;

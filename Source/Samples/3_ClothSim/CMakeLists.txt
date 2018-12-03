@@ -31,7 +31,40 @@ set(
 
 add_executable(ClothSim ${SOURCES})
 
-AzuraDeployFolder(ClothSim Textures)
+AzuraAddFilesAsDependency(
+    ClothSim Meshes
+    "Meshes/compcape/compcape.bin"
+    "Meshes/compcape/compcape.gltf"
+
+    "Meshes/CustomCloth/buffer.bin"
+    "Meshes/CustomCloth/CustomCloth.gltf"
+    "Meshes/CustomCloth/ClothDiffuse.jpg"
+
+    "Meshes/Cube/Cube.gltf"
+    "Meshes/CustomCloth2/CustomCloth2.gltf"
+    "Meshes/CustomCloth2/ClothCustom2_col.jpg"
+    "Meshes/CustomCloth2/ClothCustom2_nrm.jpg"
+    "Meshes/CustomCloth2/ClothCustom2_rgh.jpg"
+    "Meshes/CustomCloth2/ClothCustom2_AO.jpg"
+)
+
+AzuraAddFilesAsDependency(
+    ClothSim Textures
+    "Textures/Fabric09_col.jpg"
+    "Textures/Fabric09_nrm.jpg"
+    "Textures/Fabric09_rgh.jpg"
+    "Textures/Fabric09_AO.jpg"
+
+    "Textures/Fabric10_col.jpg"
+    "Textures/Fabric10_nrm.jpg"
+    "Textures/Fabric10_rgh.jpg"
+    "Textures/Fabric10_AO.jpg"
+
+    "Textures/Concrete10_col.jpg"
+    "Textures/Concrete10_nrm.jpg"
+    "Textures/Concrete10_rgh.jpg"
+    "Textures/Concrete10_AO.jpg"
+)
 
 AzuraAddLoggingSupport(ClothSim 50)
 
@@ -47,3 +80,4 @@ target_link_libraries(ClothSim D3D12RenderSystem Camera Log Physics glfw Math)
 AzuraDeployTarget(ClothSim)
 AzuraDeployTargetFolder(ClothSim ${PROJECT_BINARY_DIR}/Shaders Shaders)
 AzuraDeployTargetFolder(ClothSim ${PROJECT_BINARY_DIR}/Textures Textures)
+AzuraDeployTargetFolder(ClothSim ${PROJECT_BINARY_DIR}/Meshes Meshes)

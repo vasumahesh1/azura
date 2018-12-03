@@ -13,17 +13,25 @@ void main(
   const uint threadIdx = dispatchThreadId.x;
 
   if (threadIdx < computeUBOBlock.numVertices) {
-    clothDataBlock.velocities[threadIdx] = (clothDataBlock.projectedPos[threadIdx] - clothDataBlock.vertices[threadIdx]) / timeDelta;
-    // Write Projected Points to Buffer
-    clothDataBlock.vertices[threadIdx] = clothDataBlock.projectedPos[threadIdx];
 
-    // Used by Normals
-    clothDataBlock.deltaX[threadIdx] = 0;
-    clothDataBlock.deltaY[threadIdx] = 0;
-    clothDataBlock.deltaZ[threadIdx] = 0;
+    if (constraintBlock.vertexAliases[threadIdx] == -1) {
+      clothDataBlock.velocities[threadIdx] = (clothDataBlock.projectedPos[threadIdx] - clothDataBlock.vertices[threadIdx]) / timeDelta;
+      // Write Projected Points to Buffer
+      clothDataBlock.vertices[threadIdx] = clothDataBlock.projectedPos[threadIdx];
 
-    clothDataBlock.tanX[threadIdx] = 0;
-    clothDataBlock.tanY[threadIdx] = 0;
-    clothDataBlock.tanZ[threadIdx] = 0;
+      // Used by Normals
+      clothDataBlock.deltaX[threadIdx] = 0;
+      clothDataBlock.deltaY[threadIdx] = 0;
+      clothDataBlock.deltaZ[threadIdx] = 0;
+
+      clothDataBlock.tanX[threadIdx] = 0;
+      clothDataBlock.tanY[threadIdx] = 0;
+      clothDataBlock.tanZ[threadIdx] = 0;
+      return;
+    }
+
+    const int aliasId = constraintBlock.vertexAliases[threadIdx];
+    // Write Alias Projected Points to Buffer
+    clothDataBlock.vertices[threadIdx] = clothDataBlock.projectedPos[aliasId];
   }
 }

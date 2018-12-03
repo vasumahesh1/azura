@@ -40,6 +40,7 @@ struct Constraints {
     StructuredBuffer<BendConstraint> bendConstraints;
     StructuredBuffer<LongRangeConstraint> longRangeConstraints;
     StructuredBuffer<float> invMasses;
+    StructuredBuffer<int> vertexAliases;
 };
 
 struct VertexBlock {
