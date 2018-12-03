@@ -12,6 +12,7 @@ const RawStorageFormat VERTEX_FORMAT = RawStorageFormat::R32G32B32_FLOAT;
 const RawStorageFormat UV_FORMAT = RawStorageFormat::R32G32_FLOAT;
 const RawStorageFormat NORMAL_FORMAT = RawStorageFormat::R32G32B32_FLOAT;
 const RawStorageFormat INDEX_FORMAT  = RawStorageFormat::R32_UINT;
+const float LONG_RANGE_RADIUS = 1.0f;
 
 float ComputeBendingC(const std::vector<Vector4f>& vertices, U32 dest1, U32 dest2, U32 source) {
   Vector3f v1 = vertices[dest1].xyz() - vertices[source].xyz();
@@ -191,15 +192,36 @@ ClothSolvingView ClothPlane::GetPBDSolvingView(Memory::Allocator& allocator) {
     m_vertices,
     m_vertexInvMass,
     U32(m_edgeTriangleMap.size()),
+    U32(m_edgeTriangleMap.size()),
     numBendingConstraints,
     allocator
   );
+
+  U32 vertIdx = 0;
+  for(const auto& vertex : m_vertices)
+  {
+    for (const auto& anchorIdx : m_anchorIdx)
+    {
+      const float distance = (m_vertices[anchorIdx] - vertex).Length();
+
+      if (distance > EPSILON && distance < LONG_RANGE_RADIUS)
+      {
+        solvingView.AddConstraint(LongRangeConstraint{
+          ConstraintPoint{vertIdx},
+          ConstraintPoint{anchorIdx},
+          distance
+          });
+      }
+    }
+
+    ++vertIdx;
+  }
 
   for (const auto& pair : m_edgeTriangleMap) {
     const Edge& edge = pair.first;
 
     // Add Distance Constraint
-    solvingView.AddConstraint({
+    solvingView.AddConstraint(DistanceConstraint{
       ConstraintPoint{edge.m_indexA},
       ConstraintPoint{edge.m_indexB},
       (m_vertices[edge.m_indexA] - m_vertices[edge.m_indexB]).Length()

@@ -59,6 +59,51 @@ bool DistanceConstraint::operator==(const DistanceConstraint& rhs) const {
   return ((indexA == rhsIndexA) && (indexB == rhsIndexB)) || ((indexA == rhsIndexB) && (indexB == rhsIndexA));
 }
 
+LongRangeConstraint::LongRangeConstraint(const ConstraintPoint& x1,
+  const ConstraintPoint& x2,
+  float restLength)
+  : m_restLength(restLength) {
+  m_points[0] = x1;
+  m_points[1] = x2;
+}
+
+void LongRangeConstraint::Compute(float stiffness,
+  const Containers::Vector<Vector3f>& currentPoints,
+  const Containers::Vector<float>& currentInvMass,
+  Containers::Vector<ConstraintPointDelta>& result) {
+
+  const U32 indexA = m_points[0].m_dataIdx;
+  const U32 indexB = m_points[1].m_dataIdx;
+
+  const float invMassSum     = currentInvMass[indexA] + currentInvMass[indexB];
+  const float invMassFactor1 = currentInvMass[indexA] / invMassSum;
+  const float invMassFactor2 = currentInvMass[indexB] / invMassSum;
+
+  const Vector3f x12 = currentPoints[indexA] - currentPoints[indexB];
+
+  result[0] = ConstraintPointDelta{
+    indexA, ((stiffness * -1.0f * invMassFactor1 * (x12.Length() - m_restLength)) * x12.Normalized())
+  };
+  result[1] = ConstraintPointDelta{
+    indexB, ((stiffness * invMassFactor2 * (x12.Length() - m_restLength)) * x12.Normalized())
+  };
+}
+
+bool LongRangeConstraint::operator<(const LongRangeConstraint& rhs) const {
+  return std::tie(m_points[0].m_dataIdx, m_points[1].m_dataIdx) < std::tie(rhs.m_points[0].m_dataIdx,
+    rhs.m_points[1].m_dataIdx);
+}
+
+bool LongRangeConstraint::operator==(const LongRangeConstraint& rhs) const {
+  const U32 indexA = m_points[0].m_dataIdx;
+  const U32 indexB = m_points[0].m_dataIdx;
+
+  const U32 rhsIndexA = rhs.m_points[0].m_dataIdx;
+  const U32 rhsIndexB = rhs.m_points[0].m_dataIdx;
+
+  return ((indexA == rhsIndexA) && (indexB == rhsIndexB)) || ((indexA == rhsIndexB) && (indexB == rhsIndexA));
+}
+
 BendingConstraint::BendingConstraint(const Containers::Vector<Vector3f>& currentPoints,
                                      const ConstraintPoint& x0,
                                      const ConstraintPoint& x1,

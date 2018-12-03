@@ -113,9 +113,27 @@ std::vector<U32> GLTFMeshInterface::GetIndexBuffer(U32 meshId, U32 meshPrimitive
 
   const Accessor& accessor = m_document.accessors.Get(primitive.indicesAccessorId);
 
-  const auto data = m_resourceReader->ReadBinaryData<U32>(m_document, accessor);
 
-  count      = U32(accessor.count);
+  const std::vector<U32> data = [&]()
+  {
+    if (accessor.componentType == COMPONENT_UNSIGNED_SHORT) {
+      const auto u16Data = m_resourceReader->ReadBinaryData<U16>(m_document, accessor);
+
+      std::vector<U32> u32Data;
+      u32Data.reserve(u16Data.size());
+
+      for (const auto value : u16Data)
+      {
+        u32Data.push_back(U32(value));
+      }
+
+      return u32Data;
+    }
+
+    return m_resourceReader->ReadBinaryData<U32>(m_document, accessor);
+  }();
+
+  count = U32(accessor.count);
   bufferSize = U32(data.size() * sizeof(U32));
 
   return data;

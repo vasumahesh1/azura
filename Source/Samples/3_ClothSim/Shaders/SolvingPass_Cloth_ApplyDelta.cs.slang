@@ -23,6 +23,11 @@ void main(
     return;
   }
 
+  // Don't Compute Aliases
+  if (constraintBlock.vertexAliases[threadIdx] != -1) {
+    return;
+  }
+
   float3 projectedPos = clothDataBlock.projectedPos[threadIdx];
 
   if (clothDataBlock.constraintCount[threadIdx] > 0)

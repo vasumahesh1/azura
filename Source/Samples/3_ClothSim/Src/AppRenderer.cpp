@@ -8,9 +8,6 @@
 #include "Math/Icosphere.h"
 #include "Math/Plane.h"
 
-#include <algorithm>
-#include <random>
-
 namespace Azura {
 using namespace Containers;   // NOLINT
 using namespace Math;         // NOLINT
@@ -26,27 +23,39 @@ const Vector3f TEST_PLANE_CENTER = Vector3f(0, -8.01f, 0);
 constexpr float TEST_SPHERE_RADIUS = 2.9f;
 constexpr float CLOTH_SPAN_X = 5;
 constexpr float CLOTH_SPAN_Y = 5;
-constexpr U32 CLOTH_DIV_X = 30;
-constexpr U32 CLOTH_DIV_Y = 30;
+constexpr U32 CLOTH_DIV_X = 50;
+constexpr U32 CLOTH_DIV_Y = 50;
 constexpr U32 TEXTURE_MEMORY = 0x4000000; // 64 MB
 constexpr U32 ANCHOR_IDX_1 = 0;
 constexpr U32 ANCHOR_IDX_2 = (CLOTH_DIV_Y * (CLOTH_DIV_X + 1));
 
+constexpr bool USE_MESH = false;
+
 } // namespace
 
 AppRenderer::AppRenderer()
-  : m_mainBuffer(0xC00'0000),
+  : log_AppRenderer(Log("AppRenderer")),
+    m_mainBuffer(0xC00'0000),
     m_mainAllocator(m_mainBuffer, 0x400'0000),
     m_localAllocator(m_mainBuffer, 0x400'0000),
     m_drawableAllocator(m_mainBuffer, 0x400'0000),
     m_camera(1280, 720),
     m_clothPlane(ClothTriangulation::Regular, Vector2f(-CLOTH_SPAN_X, -CLOTH_SPAN_Y), Vector2f(CLOTH_SPAN_X, CLOTH_SPAN_Y),
                  Vector2u(CLOTH_DIV_X, CLOTH_DIV_Y), m_localAllocator),
-    log_AppRenderer(Log("AppRenderer")) {
+    m_clothMesh("CustomCloth2", AssetLocation::Meshes, m_localAllocator, log_AppRenderer) {
 }
 
 void AppRenderer::Initialize() {
   LOG_INF(log_AppRenderer, LOG_LEVEL, "Starting Init of AppRenderer");
+
+  if (USE_MESH)
+  {
+    p_activeMesh = &m_clothMesh;
+  }
+  else
+  {
+    p_activeMesh = &m_clothPlane;
+  }
 
   m_clothTransform.SetForwardKey(KeyboardKey::Up);
   m_clothTransform.SetBackwardKey(KeyboardKey::Down);
@@ -206,54 +215,70 @@ void AppRenderer::Initialize() {
     ShaderStage::Compute, "NormalsPass_Normalize.cs", AssetLocation::Shaders
     });
 
-  m_clothPlane.SetAnchorOnIndex(ANCHOR_IDX_1);
-  m_clothPlane.SetAnchorOnIndex(ANCHOR_IDX_2);
+  if (USE_MESH)
+  {
+    for (U32 idx = 4095; idx < 4159u; ++idx) {
+      p_activeMesh->SetAnchorOnIndex(idx);
+    }
 
-  const auto solvingView = m_clothPlane.GetPBDSolvingView(m_localAllocator);
+    // p_activeMesh->SetAnchorOnIndex(263);
+  }
+  else
+  {
+    p_activeMesh->SetAnchorOnIndex(ANCHOR_IDX_1);
+    p_activeMesh->SetAnchorOnIndex(ANCHOR_IDX_2);
+  }
+
+  const auto solvingView = p_activeMesh->GetPBDSolvingView(m_localAllocator);
   const auto& clothDistanceConstraints = solvingView.GetDistanceConstraints();
+  const auto& clothLongRangeConstraints = solvingView.GetLongRangeConstraints();
   const auto& clothBendingConstraints = solvingView.GetBendingConstraints();
 
   m_normalUBO = {};
-  m_normalUBO.m_numTriangles = m_clothPlane.GetIndexCount() / 3;
-  m_normalUBO.m_numVertices = m_clothPlane.GetVertexCount();
+  m_normalUBO.m_numTriangles = p_activeMesh->GetIndexCount() / 3;
+  m_normalUBO.m_numVertices = p_activeMesh->GetVertexCount();
 
   RenderPassRequirements renderPassRequirements = RenderPassRequirements(0, 10 + (SOLVER_ITERATIONS * 2), 20, allocatorTemporary);
   renderPassRequirements.m_maxPools             = 10 + (SOLVER_ITERATIONS * 2);
 
   const U32 COMPUTE_VERTEX_BUFFER = renderPassRequirements.AddBuffer({
-    U32(sizeof(Vector3f)) * U32(m_clothPlane.GetVertexCount()), U32(sizeof(Vector3f))
+    U32(sizeof(Vector3f)) * U32(p_activeMesh->GetVertexCount()), U32(sizeof(Vector3f))
   });
 
   const U32 COMPUTE_PROJECTION_BUFFER = renderPassRequirements.AddBuffer({
-    U32(sizeof(Vector3f)) * U32(m_clothPlane.GetVertexCount()), U32(sizeof(Vector3f))
+    U32(sizeof(Vector3f)) * U32(p_activeMesh->GetVertexCount()), U32(sizeof(Vector3f))
   });
 
   const U32 COMPUTE_VERTEX_VELOCITY = renderPassRequirements.AddBuffer({
-    U32(sizeof(Vector3f)) * U32(m_clothPlane.GetVertexCount()), U32(sizeof(Vector3f))
+    U32(sizeof(Vector3f)) * U32(p_activeMesh->GetVertexCount()), U32(sizeof(Vector3f))
   });
 
   const U32 COMPUTE_VERTEX_INV_MASS = renderPassRequirements.AddBuffer({
-    U32(sizeof(float)) * U32(m_clothPlane.GetVertexCount()), U32(sizeof(float))
+    U32(sizeof(float)) * U32(p_activeMesh->GetVertexCount()), U32(sizeof(float))
     });
 
   const U32 COMPUTE_VERTEX_CONSTRAINT_COUNT = renderPassRequirements.AddBuffer({
-    U32(sizeof(U32)) * U32(m_clothPlane.GetVertexCount()), U32(sizeof(U32))
+    U32(sizeof(U32)) * U32(p_activeMesh->GetVertexCount()), U32(sizeof(U32))
   });
 
   const U32 COMPUTE_VERTEX_DELTAX = renderPassRequirements.AddBuffer({
-    U32(sizeof(U32)) * U32(m_clothPlane.GetVertexCount()), U32(sizeof(U32))
+    U32(sizeof(U32)) * U32(p_activeMesh->GetVertexCount()), U32(sizeof(U32))
   });
 
   const U32 COMPUTE_VERTEX_DELTAY = renderPassRequirements.AddBuffer({
-    U32(sizeof(U32)) * U32(m_clothPlane.GetVertexCount()), U32(sizeof(U32))
+    U32(sizeof(U32)) * U32(p_activeMesh->GetVertexCount()), U32(sizeof(U32))
   });
 
   const U32 COMPUTE_VERTEX_DELTAZ = renderPassRequirements.AddBuffer({
-    U32(sizeof(U32)) * U32(m_clothPlane.GetVertexCount()), U32(sizeof(U32))
+    U32(sizeof(U32)) * U32(p_activeMesh->GetVertexCount()), U32(sizeof(U32))
   });
 
   const U32 DISTANCE_CONSTRAINTS_BUFFER = renderPassRequirements.AddBuffer({
     U32(sizeof(DistanceConstraint)) * U32(clothDistanceConstraints.GetSize()), U32(sizeof(DistanceConstraint))
+    });
+
+  const U32 LONG_RANGE_CONSTRAINTS_BUFFER = renderPassRequirements.AddBuffer({
+    U32(sizeof(LongRangeConstraint)) * U32(clothLongRangeConstraints.GetSize()), U32(sizeof(LongRangeConstraint))
     });
 
   const U32 BEND_CONSTRAINTS_BUFFER = renderPassRequirements.AddBuffer({
@@ -261,26 +286,30 @@ void AppRenderer::Initialize() {
     });
 
   const U32 COMPUTE_INDEX_BUFFER = renderPassRequirements.AddBuffer({
-    U32(sizeof(U32)) * U32(m_clothPlane.GetIndexCount()), U32(sizeof(U32))
+    U32(sizeof(U32)) * U32(p_activeMesh->GetIndexCount()), U32(sizeof(U32))
     });
   
   const U32 COMPUTE_VERTEX_TANX = renderPassRequirements.AddBuffer({
-    U32(sizeof(U32)) * U32(m_clothPlane.GetVertexCount()), U32(sizeof(U32))
+    U32(sizeof(U32)) * U32(p_activeMesh->GetVertexCount()), U32(sizeof(U32))
     });
   
   const U32 COMPUTE_VERTEX_TANY = renderPassRequirements.AddBuffer({
-    U32(sizeof(U32)) * U32(m_clothPlane.GetVertexCount()), U32(sizeof(U32))
+    U32(sizeof(U32)) * U32(p_activeMesh->GetVertexCount()), U32(sizeof(U32))
     });
   
   const U32 COMPUTE_VERTEX_TANZ = renderPassRequirements.AddBuffer({
-    U32(sizeof(U32)) * U32(m_clothPlane.GetVertexCount()), U32(sizeof(U32))
+    U32(sizeof(U32)) * U32(p_activeMesh->GetVertexCount()), U32(sizeof(U32))
+    });
+
+  const U32 COMPUTE_VERTEX_ALIAS_BUFFER = renderPassRequirements.AddBuffer({
+    U32(sizeof(int)) * U32(p_activeMesh->GetVertexCount()), U32(sizeof(int))
     });
 
   m_computePass.m_pass1 = renderPassRequirements.AddPass({
     PipelinePassCreateInfo::Shaders{},
     PipelinePassCreateInfo::InputTargets{},
     PipelinePassCreateInfo::InputBuffers{
-      {DISTANCE_CONSTRAINTS_BUFFER, ShaderStage::Compute}, {BEND_CONSTRAINTS_BUFFER, ShaderStage::Compute}, {COMPUTE_VERTEX_INV_MASS, ShaderStage::Compute}
+      {DISTANCE_CONSTRAINTS_BUFFER, ShaderStage::Compute}, {BEND_CONSTRAINTS_BUFFER, ShaderStage::Compute}, {LONG_RANGE_CONSTRAINTS_BUFFER, ShaderStage::Compute}, {COMPUTE_VERTEX_INV_MASS, ShaderStage::Compute}, {COMPUTE_VERTEX_ALIAS_BUFFER, ShaderStage::Compute}
     },
     PipelinePassCreateInfo::OutputTargets{},
     PipelinePassCreateInfo::OutputBuffers{
@@ -302,7 +331,7 @@ void AppRenderer::Initialize() {
       PipelinePassCreateInfo::Shaders{},
       PipelinePassCreateInfo::InputTargets{},
       PipelinePassCreateInfo::InputBuffers{
-        {DISTANCE_CONSTRAINTS_BUFFER, ShaderStage::Compute}, {BEND_CONSTRAINTS_BUFFER, ShaderStage::Compute}, {COMPUTE_VERTEX_INV_MASS, ShaderStage::Compute}
+        {DISTANCE_CONSTRAINTS_BUFFER, ShaderStage::Compute}, {BEND_CONSTRAINTS_BUFFER, ShaderStage::Compute}, {LONG_RANGE_CONSTRAINTS_BUFFER, ShaderStage::Compute}, {COMPUTE_VERTEX_INV_MASS, ShaderStage::Compute}, {COMPUTE_VERTEX_ALIAS_BUFFER, ShaderStage::Compute}
       },
       PipelinePassCreateInfo::OutputTargets{},
       PipelinePassCreateInfo::OutputBuffers{
@@ -319,7 +348,7 @@ void AppRenderer::Initialize() {
       PipelinePassCreateInfo::Shaders{},
       PipelinePassCreateInfo::InputTargets{},
       PipelinePassCreateInfo::InputBuffers{
-        {DISTANCE_CONSTRAINTS_BUFFER, ShaderStage::Compute}, {BEND_CONSTRAINTS_BUFFER, ShaderStage::Compute}, {COMPUTE_VERTEX_INV_MASS, ShaderStage::Compute}
+        {DISTANCE_CONSTRAINTS_BUFFER, ShaderStage::Compute}, {BEND_CONSTRAINTS_BUFFER, ShaderStage::Compute}, {LONG_RANGE_CONSTRAINTS_BUFFER, ShaderStage::Compute}, {COMPUTE_VERTEX_INV_MASS, ShaderStage::Compute}, {COMPUTE_VERTEX_ALIAS_BUFFER, ShaderStage::Compute}
       },
       PipelinePassCreateInfo::OutputTargets{},
       PipelinePassCreateInfo::OutputBuffers{
@@ -337,7 +366,7 @@ void AppRenderer::Initialize() {
     PipelinePassCreateInfo::Shaders{},
     PipelinePassCreateInfo::InputTargets{},
     PipelinePassCreateInfo::InputBuffers{
-      {DISTANCE_CONSTRAINTS_BUFFER, ShaderStage::Compute}, {BEND_CONSTRAINTS_BUFFER, ShaderStage::Compute}, {COMPUTE_VERTEX_INV_MASS, ShaderStage::Compute}
+      {DISTANCE_CONSTRAINTS_BUFFER, ShaderStage::Compute}, {BEND_CONSTRAINTS_BUFFER, ShaderStage::Compute}, {LONG_RANGE_CONSTRAINTS_BUFFER, ShaderStage::Compute}, {COMPUTE_VERTEX_INV_MASS, ShaderStage::Compute}, {COMPUTE_VERTEX_ALIAS_BUFFER, ShaderStage::Compute}
     },
     PipelinePassCreateInfo::OutputTargets{},
     PipelinePassCreateInfo::OutputBuffers{
@@ -376,11 +405,11 @@ void AppRenderer::Initialize() {
     ClearData{{0.1f, 0.1f, 0.1f, 1.0f}, 1.0f, 0}
   });
 
-  std::vector<Vector3f> zeroBufferData = std::vector<Vector3f>(m_clothPlane.GetVertexCount(), Vector3f(0.0f));
-  std::vector<Vector3i> zeroIntVecData = std::vector<Vector3i>(m_clothPlane.GetVertexCount(), Vector3i(0));
-  std::vector<U32> zeroIntBuffer       = std::vector<U32>(m_clothPlane.GetVertexCount(), 0);
+  std::vector<Vector3f> zeroBufferData = std::vector<Vector3f>(p_activeMesh->GetVertexCount(), Vector3f(0.0f));
+  std::vector<Vector3i> zeroIntVecData = std::vector<Vector3i>(p_activeMesh->GetVertexCount(), Vector3i(0));
+  std::vector<U32> zeroIntBuffer       = std::vector<U32>(p_activeMesh->GetVertexCount(), 0);
 
-  const auto totalConstraints = U32(clothDistanceConstraints.GetSize() + clothBendingConstraints.GetSize());
+  const auto totalConstraints = U32(clothDistanceConstraints.GetSize() + clothBendingConstraints.GetSize() + clothLongRangeConstraints.GetSize());
 
   m_renderer = RenderSystem::CreateRenderer(appInfo, requirements, applicationRequirements,
                                             m_window->GetSwapChainRequirements(), renderPassRequirements,
@@ -391,18 +420,23 @@ void AppRenderer::Initialize() {
   m_textureManager = RenderSystem::CreateTextureManager(textureRequirements);
 
   const U32 albedoTexture = m_textureManager->Load("Textures/Fabric10_col.jpg");
+  // const U32 albedoTexture = m_textureManager->Load("Meshes/CustomCloth2/ClothCustom2_col.jpg");
+  // const U32 albedoTexture = m_textureManager->Load("Meshes/Plane/Color plane map.png");
   const TextureDesc* albedoDesc = m_textureManager->GetInfo(albedoTexture);
   VERIFY_TRUE(log_AppRenderer, albedoDesc != nullptr, "albedoDesc was Null");
 
   const U32 normalTexture = m_textureManager->Load("Textures/Fabric10_nrm.jpg");
+  // const U32 normalTexture = m_textureManager->Load("Meshes/CustomCloth2/ClothCustom2_nrm.jpg");
   const TextureDesc* normalDesc = m_textureManager->GetInfo(normalTexture);
   VERIFY_TRUE(log_AppRenderer, normalDesc != nullptr, "normalDesc was Null");
 
   const U32 roughnessTexture = m_textureManager->Load("Textures/Fabric10_rgh.jpg");
+  // const U32 roughnessTexture = m_textureManager->Load("Meshes/CustomCloth2/ClothCustom2_rgh.jpg");
   const TextureDesc* roughnessDesc = m_textureManager->GetInfo(roughnessTexture);
   VERIFY_TRUE(log_AppRenderer, roughnessDesc != nullptr, "roughnessDesc was Null");
 
   const U32 aoTexture = m_textureManager->Load("Textures/Fabric10_AO.jpg");
+  // const U32 aoTexture = m_textureManager->Load("Meshes/CustomCloth2/ClothCustom2_AO.jpg");
   const TextureDesc* aoDesc = m_textureManager->GetInfo(aoTexture);
   VERIFY_TRUE(log_AppRenderer, aoDesc != nullptr, "aoDesc was Null");
 
@@ -422,18 +456,32 @@ void AppRenderer::Initialize() {
   const TextureDesc* floorRoughnessDesc = m_textureManager->GetInfo(floorRoughness);
   VERIFY_TRUE(log_AppRenderer, floorRoughnessDesc != nullptr, "floorRoughnessDesc was Null");
 
-  const auto clothParticleMass = reinterpret_cast<const U8*>(m_clothPlane.GetVertexInverseMass().Data()); // NOLINT
+  const auto clothParticleMass = reinterpret_cast<const U8*>(p_activeMesh->GetVertexInverseMass().Data()); // NOLINT
   m_renderer->BindBufferTarget(COMPUTE_VERTEX_INV_MASS, clothParticleMass);
 
-  const auto clothDataStart = reinterpret_cast<const U8*>(m_clothPlane.VertexData()); // NOLINT
+  if (USE_MESH)
+  {
+    const auto vertexAliases = reinterpret_cast<const U8*>(m_clothMesh.GetVertexAliases().Data()); // NOLINT
+    m_renderer->BindBufferTarget(COMPUTE_VERTEX_ALIAS_BUFFER, vertexAliases);
+  }
+  else
+  {
+    std::vector<int> noAliasBuffer = std::vector<int>(p_activeMesh->GetVertexCount(), -1);
+    const auto vertexAliases = reinterpret_cast<const U8*>(noAliasBuffer.data()); // NOLINT
+    m_renderer->BindBufferTarget(COMPUTE_VERTEX_ALIAS_BUFFER, vertexAliases);
+  }
+
+  const auto clothDataStart = reinterpret_cast<const U8*>(p_activeMesh->VertexData()); // NOLINT
   m_renderer->BindBufferTarget(COMPUTE_VERTEX_BUFFER, clothDataStart);
 
   const auto projectionStart = reinterpret_cast<const U8*>(zeroBufferData.data()); // NOLINT
   m_renderer->BindBufferTarget(COMPUTE_PROJECTION_BUFFER, projectionStart);
 
   const auto distanceConstraintStart = reinterpret_cast<const U8*>(clothDistanceConstraints.Data()); // NOLINT
+  const auto lrConstraintStart = reinterpret_cast<const U8*>(clothLongRangeConstraints.Data()); // NOLINT
   const auto bendConstraintStart = reinterpret_cast<const U8*>(clothBendingConstraints.Data()); // NOLINT
   m_renderer->BindBufferTarget(DISTANCE_CONSTRAINTS_BUFFER, distanceConstraintStart);
+  m_renderer->BindBufferTarget(LONG_RANGE_CONSTRAINTS_BUFFER, lrConstraintStart);
   m_renderer->BindBufferTarget(BEND_CONSTRAINTS_BUFFER, bendConstraintStart);
 
   const auto velocityStart = reinterpret_cast<const U8*>(zeroBufferData.data()); // NOLINT
@@ -447,12 +495,12 @@ void AppRenderer::Initialize() {
   m_renderer->BindBufferTarget(COMPUTE_VERTEX_DELTAY, deltaStart);
   m_renderer->BindBufferTarget(COMPUTE_VERTEX_DELTAZ, deltaStart);
 
-  m_renderer->BindBufferTarget(COMPUTE_INDEX_BUFFER, m_clothPlane.IndexData());
+  m_renderer->BindBufferTarget(COMPUTE_INDEX_BUFFER, p_activeMesh->IndexData());
 
 
   // CREATE COMPUTE POOL - PBD
   const U32 numConstraintBlocks     = (totalConstraints + DEFAULT_BLOCK_SIZE_X - 1) / DEFAULT_BLOCK_SIZE_X;
-  const U32 numVerticesBlocks     = (m_clothPlane.GetVertexCount() + DEFAULT_BLOCK_SIZE_X - 1) / DEFAULT_BLOCK_SIZE_X;
+  const U32 numVerticesBlocks     = (p_activeMesh->GetVertexCount() + DEFAULT_BLOCK_SIZE_X - 1) / DEFAULT_BLOCK_SIZE_X;
 
   ComputePoolCreateInfo pass1 = {allocatorTemporary};
   pass1.m_byteSize            = 0xF00000;
@@ -465,14 +513,16 @@ void AppRenderer::Initialize() {
   pass3.m_launchDims          = ThreadGroupDimensions{numVerticesBlocks, 1, 1};
 
   const float distanceStiffnessPrime = 1.0f - std::pow(1.0f - DISTANCE_STIFFNESS, 1.0f / SOLVER_ITERATIONS);
+  const float lrStiffnessPrime = 1.0f - std::pow(1.0f - LONG_RANGE_STIFFNESS, 1.0f / SOLVER_ITERATIONS);
   const float bendingStiffnessPrime  = 1.0f - std::pow(1.0f - BENDING_STIFFNESS, 1.0f / SOLVER_ITERATIONS);
 
   m_computeUBO                         = {};
-  m_computeUBO.m_numVertices           = m_clothPlane.GetVertexCount();
+  m_computeUBO.m_numVertices           = p_activeMesh->GetVertexCount();
   m_computeUBO.m_stretchStiffness      = distanceStiffnessPrime;
   m_computeUBO.m_bendStiffness         = bendingStiffnessPrime;
+  m_computeUBO.m_longRangeStiffness    = lrStiffnessPrime;
   m_computeUBO.m_timeDelta             = 0.0f;
-  m_computeUBO.m_numBlocks             = numConstraintBlocks;
+  m_computeUBO.m_numLongRangeConstraints = U32(clothLongRangeConstraints.GetSize());
   m_computeUBO.m_numStretchConstraints = U32(clothDistanceConstraints.GetSize());
   m_computeUBO.m_numBendConstraints    = U32(clothBendingConstraints.GetSize());
   m_computeUBO.m_clothModelMatrix      = m_clothTransform.GetTransform().Transpose();
@@ -526,17 +576,17 @@ void AppRenderer::Initialize() {
   Plane plane(Vector2f(-150, -150), Vector2f(150, 150), Vector2u(10, 10), Vector2u(10, 10));
 
   DrawablePoolCreateInfo poolInfo = {allocatorTemporary};
-  poolInfo.m_byteSize             = sphere.TotalDataSize() + m_clothPlane.TotalDataSize() + TEXTURE_MEMORY + 0x400000;
+  poolInfo.m_byteSize             = sphere.TotalDataSize() + p_activeMesh->TotalDataSize() + TEXTURE_MEMORY + 0x400000;
   poolInfo.m_numDrawables         = 2;
   poolInfo.m_renderPasses         = {{RENDER_PASS}, allocatorTemporary};
   poolInfo.m_drawType             = DrawType::InstancedIndexed;
 
   const auto VERTEX_SLOT = poolInfo.AddInputSlot({
-    BufferUsageRate::PerVertex, {{"POSITION", m_clothPlane.GetVertexFormat()}}, 0, BufferSource::StructuredBuffer
+    BufferUsageRate::PerVertex, {{"POSITION", p_activeMesh->GetVertexFormat()}}, 0, BufferSource::StructuredBuffer
   });
 
   const auto UV_SLOT = poolInfo.AddInputSlot({
-    BufferUsageRate::PerVertex, {{"UV", m_clothPlane.GetUVFormat()}}
+    BufferUsageRate::PerVertex, {{"UV", p_activeMesh->GetUVFormat()}}
     });
 
   const auto NORMAL_SLOT_X = poolInfo.AddInputSlot({
@@ -571,8 +621,8 @@ void AppRenderer::Initialize() {
   const auto lightDataBuffer = reinterpret_cast<U8*>(&lightData);   // NOLINT
   // Create Drawable from Pool
   DrawableCreateInfo createInfo = {};
-  createInfo.m_vertexCount      = m_clothPlane.GetVertexCount();
-  createInfo.m_indexCount       = m_clothPlane.GetIndexCount();
+  createInfo.m_vertexCount      = p_activeMesh->GetVertexCount();
+  createInfo.m_indexCount       = p_activeMesh->GetIndexCount();
   createInfo.m_instanceCount    = 1;
   createInfo.m_indexType        = RawStorageFormat::R32_UINT;
 
@@ -588,15 +638,15 @@ void AppRenderer::Initialize() {
   clothPool.BindTextureData(AO_SLOT, *aoDesc, m_textureManager->GetData(aoTexture));
 
   const auto clothId = clothPool.CreateDrawable(createInfo);
-  clothPool.BindVertexData(clothId, VERTEX_SLOT, COMPUTE_VERTEX_BUFFER, 0, m_clothPlane.VertexDataSize());
-  clothPool.BindVertexData(clothId, UV_SLOT, m_clothPlane.UVData(), m_clothPlane.UVDataSize());
-  clothPool.BindVertexData(clothId, NORMAL_SLOT_X, COMPUTE_VERTEX_DELTAX, 0, m_clothPlane.GetVertexCount() * U32(sizeof(float)));
-  clothPool.BindVertexData(clothId, NORMAL_SLOT_Y, COMPUTE_VERTEX_DELTAY, 0, m_clothPlane.GetVertexCount() * U32(sizeof(float)));
-  clothPool.BindVertexData(clothId, NORMAL_SLOT_Z, COMPUTE_VERTEX_DELTAZ, 0, m_clothPlane.GetVertexCount() * U32(sizeof(float)));
-  clothPool.BindVertexData(clothId, TANGENT_SLOT_X, COMPUTE_VERTEX_TANX, 0, m_clothPlane.GetVertexCount() * U32(sizeof(float)));
-  clothPool.BindVertexData(clothId, TANGENT_SLOT_Y, COMPUTE_VERTEX_TANY, 0, m_clothPlane.GetVertexCount() * U32(sizeof(float)));
-  clothPool.BindVertexData(clothId, TANGENT_SLOT_Z, COMPUTE_VERTEX_TANZ, 0, m_clothPlane.GetVertexCount() * U32(sizeof(float)));
-  clothPool.SetIndexData(clothId, m_clothPlane.IndexData(), m_clothPlane.IndexDataSize());
+  clothPool.BindVertexData(clothId, VERTEX_SLOT, COMPUTE_VERTEX_BUFFER, 0, p_activeMesh->VertexDataSize());
+  clothPool.BindVertexData(clothId, UV_SLOT, p_activeMesh->UVData(), p_activeMesh->UVDataSize());
+  clothPool.BindVertexData(clothId, NORMAL_SLOT_X, COMPUTE_VERTEX_DELTAX, 0, p_activeMesh->GetVertexCount() * U32(sizeof(float)));
+  clothPool.BindVertexData(clothId, NORMAL_SLOT_Y, COMPUTE_VERTEX_DELTAY, 0, p_activeMesh->GetVertexCount() * U32(sizeof(float)));
+  clothPool.BindVertexData(clothId, NORMAL_SLOT_Z, COMPUTE_VERTEX_DELTAZ, 0, p_activeMesh->GetVertexCount() * U32(sizeof(float)));
+  clothPool.BindVertexData(clothId, TANGENT_SLOT_X, COMPUTE_VERTEX_TANX, 0, p_activeMesh->GetVertexCount() * U32(sizeof(float)));
+  clothPool.BindVertexData(clothId, TANGENT_SLOT_Y, COMPUTE_VERTEX_TANY, 0, p_activeMesh->GetVertexCount() * U32(sizeof(float)));
+  clothPool.BindVertexData(clothId, TANGENT_SLOT_Z, COMPUTE_VERTEX_TANZ, 0, p_activeMesh->GetVertexCount() * U32(sizeof(float)));
+  clothPool.SetIndexData(clothId, p_activeMesh->IndexData(), p_activeMesh->IndexDataSize());
   clothPool.BindUniformData(clothId, UBO_SLOT, uboDataBuffer, sizeof(SceneUBO));
   clothPool.BindUniformData(clothId, LIGHT_SLOT, lightDataBuffer, sizeof(LightData));
 
@@ -703,6 +753,7 @@ void AppRenderer::WindowUpdate(float timeDelta) {
   m_clothTransform.Update(timeDelta);
 
   // timeDelta = 0.0166667f;
+  // timeDelta = 0.00281f;
 
   m_clothUBO.m_view              = m_camera.GetViewMatrix();
   m_clothUBO.m_viewProj          = m_camera.GetViewProjMatrix();

@@ -1,22 +1,27 @@
 #pragma once
+
 #include <Math/Core.h>
 #include <Core/RawStorageFormat.h>
 #include <Physics/Geometry/Edge.h>
 #include <Physics/PBD/Cloth/ClothSolvingView.h>
-#include <Physics/Geometry/GenericTypes.h>
 #include <Physics/Geometry/IClothPhysicsGeometry.h>
 
 #include <vector>
 #include <unordered_map>
+#include "AssetManager/GLTFLoader.h"
+
+namespace Azura {
+class Log;
+enum class AssetLocation;
+} // namespace Azura
 
 namespace Azura {
 namespace Physics {
 struct Edge;
 
-class ClothPlane final : public IClothPhysicsGeometry {
+class ClothMesh final : public IClothPhysicsGeometry {
 public:
-  ClothPlane(const Vector2f& boundMin , const Vector2f& boundMax, Memory::Allocator& allocator);
-  ClothPlane(ClothTriangulation triangulation, const Vector2f& boundMin , const Vector2f& boundMax, const Vector2u& subDivisions, Memory::Allocator& allocator);
+  ClothMesh(const String& assetName, AssetLocation location, Memory::Allocator& allocator, const Log& log);
 
   U32 VertexDataSize() const override;
   U32 IndexDataSize() const override;
@@ -38,20 +43,26 @@ public:
   // Cloth Physics Overrides
   void SetAnchorOnIndex(U32 idx) override;
   const Containers::Vector<float>& GetVertexInverseMass() const override;
+  const Containers::Vector<int>& GetVertexAliases() const;
   PBD::ClothSolvingView GetPBDSolvingView(Memory::Allocator& allocator) override;
 
 private:
   void AddEdgeTriangleNeighbor(const Edge& edge, const U32 triangleIdx);
+  bool IsVertexAnchorPoint(SizeType idx) const;
 
   std::vector<U32> m_anchorIdx;
 
   std::unordered_map<Edge, std::vector<U32>, EdgeMapHash> m_edgeTriangleMap;
+  std::unordered_map<Vector3f, U32, Vector3fHash> m_vertexAliasMap;
 
   Containers::Vector<Vector3f> m_vertices;
   Containers::Vector<float> m_vertexInvMass;
+  Containers::Vector<int> m_vertexAlias;
   Containers::Vector<Vector3f> m_normals;
   Containers::Vector<Vector3u> m_triangles;
   Containers::Vector<Vector2f> m_uv;
+
+  std::unique_ptr<GLTFMeshInterface> p_interface{nullptr};
 };
 
 } // namespace Physics

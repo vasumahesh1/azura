@@ -18,6 +18,11 @@ void main(
 		return;
 	}
 
+	// Don't Compute Aliases
+	if (constraintBlock.vertexAliases[threadIdx] != -1) {
+		return;
+	}
+
 	const float3 vertexPosition = clothDataBlock.vertices[threadIdx];
 
 	clothDataBlock.deltaX[threadIdx] = 0;
@@ -33,7 +38,7 @@ void main(
 		return;
 	}
 
-	const float3 updatedVelocity = 0.995 * (clothDataBlock.velocities[threadIdx] + timeDelta * GRAVITY);
+	const float3 updatedVelocity = 0.997 * (clothDataBlock.velocities[threadIdx] + timeDelta * GRAVITY);
 	// Projected Pos of that Vertex
 	clothDataBlock.projectedPos[threadIdx] = vertexPosition + updatedVelocity * timeDelta;
 }

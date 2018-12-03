@@ -5,6 +5,7 @@
 #include "Types.h"
 #include "Core/RawStorageFormat.h"
 #include "Utils/Hash.h"
+#include "Core/AssetLocation.h"
 
 #include <boost/container/small_vector.hpp>
 #include <boost/detail/bitmask.hpp>
@@ -360,13 +361,6 @@ struct TextureSubresource {
 struct TextureRequirements {
   U32 m_maxCount{0};
   U32 m_poolSize{0};
-};
-
-enum class AssetLocation {
-  Shaders,
-  Textures,
-  Audio,
-  Meshes
 };
 
 struct DeviceRequirements {

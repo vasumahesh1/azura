@@ -12,14 +12,16 @@
 #include "Camera/PolarCamera.h"
 #include "Physics/Geometry/ClothPlane.h"
 #include "Math/TransformComponent.h"
+#include "Physics/Geometry/ClothMesh.h"
 
 
 namespace Azura {
 constexpr U32 DEFAULT_BLOCK_SIZE_X = 512;
 constexpr U32 SOLVER_ITERATIONS = 2;
 
-const float DISTANCE_STIFFNESS = 0.7f;
-const float BENDING_STIFFNESS = 0.3f;
+const float DISTANCE_STIFFNESS = 0.8f;
+const float BENDING_STIFFNESS = 0.6f;
+const float LONG_RANGE_STIFFNESS = 0.9f;
 
 struct SceneUBO {
   Matrix4f m_model;
@@ -34,13 +36,13 @@ struct ComputeUBO
 {
   float m_stretchStiffness;
   float m_bendStiffness;
+  float m_longRangeStiffness;
   float m_timeDelta;
+
   U32 m_numStretchConstraints;
-  
   U32 m_numBendConstraints;
+  U32 m_numLongRangeConstraints;
   U32 m_numVertices;
-  U32 m_numBlocks;
-  float pad;
 
   Matrix4f m_clothModelMatrix;
 };
@@ -86,6 +88,8 @@ public:
   void Destroy() const;
 
 private:
+  Log log_AppRenderer;
+
   Memory::HeapMemoryBuffer m_mainBuffer;
 
   Memory::MonotonicAllocator m_mainAllocator;
@@ -117,7 +121,8 @@ private:
   Math::TransformComponent m_clothTransform{};
 
   Physics::ClothPlane m_clothPlane;
+  Physics::ClothMesh m_clothMesh;
 
-  Log log_AppRenderer;
+  Physics::IClothPhysicsGeometry* p_activeMesh{nullptr};
 };
 } // namespace

@@ -25,6 +25,23 @@ function(AzuraDeployFolder TARGET FOLDER)
   add_dependencies(${TARGET} ${TARGET}_Textures)
 endfunction()
 
+function(AzuraAddFilesAsDependency TARGET KEY)
+  add_custom_target(${TARGET}_${KEY})
+
+  foreach(FILE_PATH ${ARGN})
+
+    add_custom_command(
+      TARGET ${TARGET}_${KEY}
+      COMMAND ${CMAKE_COMMAND} -E copy_if_different ${CMAKE_CURRENT_SOURCE_DIR}/${FILE_PATH} ${CMAKE_CURRENT_BINARY_DIR}/${FILE_PATH}
+      DEPENDS "${CMAKE_CURRENT_SOURCE_DIR}/${FILE_PATH}"
+      COMMENT "Copying for target ${TARGET}: ${KEY} File Dependency ..."
+      )
+
+  endforeach(FILE_PATH)
+
+  add_dependencies(${TARGET} ${TARGET}_${KEY})
+endfunction()
+
 function(AzuraAddSlangShaders TARGET API)
   foreach(SHADER_TUPLE_STR ${ARGN})
     string(REPLACE "|" ";" SHADER_TUPLE ${SHADER_TUPLE_STR})
