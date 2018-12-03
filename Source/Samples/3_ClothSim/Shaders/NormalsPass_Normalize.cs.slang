@@ -123,8 +123,8 @@ void main(
   }
 
   const uint id0 = roBlock.indexBuffer[3 * threadIdx];
-  const uint id2 = roBlock.indexBuffer[3 * threadIdx + 1];
-  const uint id1 = roBlock.indexBuffer[3 * threadIdx + 2];
+  const uint id1 = roBlock.indexBuffer[3 * threadIdx + 1];
+  const uint id2 = roBlock.indexBuffer[3 * threadIdx + 2];
 
   const float3 v0 = roBlock.vertices[id0];
   const float3 v1 = roBlock.vertices[id1];

@@ -33,14 +33,14 @@ add_executable(ClothSim ${SOURCES})
 
 AzuraAddFilesAsDependency(
     ClothSim Meshes
-    "Meshes/compcape/compcape.bin"
-    "Meshes/compcape/compcape.gltf"
-
     "Meshes/CustomCloth/buffer.bin"
     "Meshes/CustomCloth/CustomCloth.gltf"
     "Meshes/CustomCloth/ClothDiffuse.jpg"
 
-    "Meshes/Cube/Cube.gltf"
+    "Meshes/Plane/Plane.bin"
+    "Meshes/Plane/Plane.gltf"
+    "Meshes/Plane/Color plane map.png"
+
     "Meshes/CustomCloth2/CustomCloth2.gltf"
     "Meshes/CustomCloth2/ClothCustom2_col.jpg"
     "Meshes/CustomCloth2/ClothCustom2_nrm.jpg"

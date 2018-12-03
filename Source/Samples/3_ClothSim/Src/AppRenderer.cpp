@@ -29,7 +29,7 @@ constexpr U32 TEXTURE_MEMORY = 0x4000000; // 64 MB
 constexpr U32 ANCHOR_IDX_1 = 0;
 constexpr U32 ANCHOR_IDX_2 = (CLOTH_DIV_Y * (CLOTH_DIV_X + 1));
 
-constexpr bool USE_MESH = true;
+constexpr bool USE_MESH = false;
 
 } // namespace
 
@@ -419,23 +419,24 @@ void AppRenderer::Initialize() {
 
   m_textureManager = RenderSystem::CreateTextureManager(textureRequirements);
 
-  // const U32 albedoTexture = m_textureManager->Load("Textures/Fabric10_col.jpg");
-  const U32 albedoTexture = m_textureManager->Load("Meshes/CustomCloth2/ClothCustom2_col.jpg");
+  const U32 albedoTexture = m_textureManager->Load("Textures/Fabric10_col.jpg");
+  // const U32 albedoTexture = m_textureManager->Load("Meshes/CustomCloth2/ClothCustom2_col.jpg");
+  // const U32 albedoTexture = m_textureManager->Load("Meshes/Plane/Color plane map.png");
   const TextureDesc* albedoDesc = m_textureManager->GetInfo(albedoTexture);
   VERIFY_TRUE(log_AppRenderer, albedoDesc != nullptr, "albedoDesc was Null");
 
-  // const U32 normalTexture = m_textureManager->Load("Textures/Fabric10_nrm.jpg");
-  const U32 normalTexture = m_textureManager->Load("Meshes/CustomCloth2/ClothCustom2_nrm.jpg");
+  const U32 normalTexture = m_textureManager->Load("Textures/Fabric10_nrm.jpg");
+  // const U32 normalTexture = m_textureManager->Load("Meshes/CustomCloth2/ClothCustom2_nrm.jpg");
   const TextureDesc* normalDesc = m_textureManager->GetInfo(normalTexture);
   VERIFY_TRUE(log_AppRenderer, normalDesc != nullptr, "normalDesc was Null");
 
-  // const U32 roughnessTexture = m_textureManager->Load("Textures/Fabric10_rgh.jpg");
-  const U32 roughnessTexture = m_textureManager->Load("Meshes/CustomCloth2/ClothCustom2_rgh.jpg");
+  const U32 roughnessTexture = m_textureManager->Load("Textures/Fabric10_rgh.jpg");
+  // const U32 roughnessTexture = m_textureManager->Load("Meshes/CustomCloth2/ClothCustom2_rgh.jpg");
   const TextureDesc* roughnessDesc = m_textureManager->GetInfo(roughnessTexture);
   VERIFY_TRUE(log_AppRenderer, roughnessDesc != nullptr, "roughnessDesc was Null");
 
-  // const U32 aoTexture = m_textureManager->Load("Textures/Fabric10_AO.jpg");
-  const U32 aoTexture = m_textureManager->Load("Meshes/CustomCloth2/ClothCustom2_AO.jpg");
+  const U32 aoTexture = m_textureManager->Load("Textures/Fabric10_AO.jpg");
+  // const U32 aoTexture = m_textureManager->Load("Meshes/CustomCloth2/ClothCustom2_AO.jpg");
   const TextureDesc* aoDesc = m_textureManager->GetInfo(aoTexture);
   VERIFY_TRUE(log_AppRenderer, aoDesc != nullptr, "aoDesc was Null");
 
@@ -752,6 +753,7 @@ void AppRenderer::WindowUpdate(float timeDelta) {
   m_clothTransform.Update(timeDelta);
 
   // timeDelta = 0.0166667f;
+  // timeDelta = 0.00281f;
 
   m_clothUBO.m_view              = m_camera.GetViewMatrix();
   m_clothUBO.m_viewProj          = m_camera.GetViewProjMatrix();
