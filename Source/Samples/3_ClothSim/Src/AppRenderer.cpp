@@ -61,10 +61,12 @@ void AppRenderer::Initialize() {
   m_clothTransform.SetBackwardKey(KeyboardKey::Down);
   m_clothTransform.SetLeftKey(KeyboardKey::Left);
   m_clothTransform.SetRightKey(KeyboardKey::Right);
-  m_clothTransform.SetStepSize(10.0f);
+  m_clothTransform.SetStepSize(8.0f);
 
   HEAP_ALLOCATOR(Temporary, Memory::MonotonicAllocator, 0x400'0000);
   m_window = RenderSystem::CreateApplicationWindow("PBD Cloth Simulation", 1280, 720);
+
+  m_window->SetUpdateRate(UpdateRate::Rate120);
 
   m_window->SetUpdateCallback([this](float deltaTime)
   {
@@ -752,9 +754,6 @@ void AppRenderer::WindowUpdate(float timeDelta) {
   m_camera.Update(timeDelta);
   m_clothTransform.Update(timeDelta);
 
-  // timeDelta = 0.0166667f;
-  // timeDelta = 0.00281f;
-
   m_clothUBO.m_view              = m_camera.GetViewMatrix();
   m_clothUBO.m_viewProj          = m_camera.GetViewProjMatrix();
   m_clothUBO.m_invViewProj       = m_camera.GetInvViewProjMatrix();
@@ -792,10 +791,6 @@ void AppRenderer::WindowUpdate(float timeDelta) {
     computePool->UpdateUniformData(m_computePass.m_computeUBOSlot, computeUBOStart, sizeof(ComputeUBO));
     computePool->SubmitUpdates();
   }
-
-  // m_computePool->BeginUpdates();
-  // m_computePool->UpdateUniformData(m_computePass.m_computeUBOSlot, computeUBOStart, sizeof(ComputeUBO));
-  // m_computePool->SubmitUpdates();
 
   m_mainPool->BeginUpdates();
   // Update Cloth

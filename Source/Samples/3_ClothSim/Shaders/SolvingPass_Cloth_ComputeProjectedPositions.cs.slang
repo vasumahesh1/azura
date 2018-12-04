@@ -1,6 +1,6 @@
 import SolvingPass;
 
-static const float3 GRAVITY = {0, -9.8, 0};
+static const float3 GRAVITY = {0, -2.8, 0};
 
 [numthreads(BLOCK_SIZE_X, 1, 1)]
 void main(
@@ -38,7 +38,7 @@ void main(
 		return;
 	}
 
-	const float3 updatedVelocity = 0.997 * (clothDataBlock.velocities[threadIdx] + timeDelta * GRAVITY);
+	const float3 updatedVelocity = 0.996 * (clothDataBlock.velocities[threadIdx] + timeDelta * GRAVITY);
 	// Projected Pos of that Vertex
 	clothDataBlock.projectedPos[threadIdx] = vertexPosition + updatedVelocity * timeDelta;
 }
