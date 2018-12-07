@@ -12,7 +12,6 @@ const RawStorageFormat VERTEX_FORMAT = RawStorageFormat::R32G32B32_FLOAT;
 const RawStorageFormat UV_FORMAT     = RawStorageFormat::R32G32_FLOAT;
 const RawStorageFormat NORMAL_FORMAT = RawStorageFormat::R32G32B32_FLOAT;
 const RawStorageFormat INDEX_FORMAT  = RawStorageFormat::R32_UINT;
-const float LONG_RANGE_RADIUS        = 1.0f;
 
 float ComputeBendingC(const std::vector<Vector4f>& vertices, U32 dest1, U32 dest2, U32 source) {
   Vector3f v1 = vertices[dest1].xyz() - vertices[source].xyz();
@@ -211,14 +210,11 @@ ClothSolvingView ClothMesh::GetPBDSolvingView(Memory::Allocator& allocator) {
 
     for (const auto& anchorIdx : m_anchorIdx) {
       const float distance = (m_vertices[anchorIdx] - vertex).Length();
-
-      if (distance > EPSILON && distance < LONG_RANGE_RADIUS) {
-        solvingView.AddConstraint(LongRangeConstraint{
-          ConstraintPoint{vertIdx},
-          ConstraintPoint{anchorIdx},
-          distance
+      solvingView.AddConstraint(LongRangeConstraint{
+        ConstraintPoint{vertIdx},
+        ConstraintPoint{anchorIdx},
+        distance
         });
-      }
     }
 
     ++vertIdx;

@@ -107,34 +107,34 @@ void main(
     }
   }
 
-  // if (lrOffset < computeUBOBlock.numLongRangeConstraints && lrOffset >= 0) {
-  //   LongRangeConstraint dist = constraintBlock.longRangeConstraints[lrOffset];
+  if (lrOffset < computeUBOBlock.numLongRangeConstraints && lrOffset >= 0) {
+    LongRangeConstraint dist = constraintBlock.longRangeConstraints[lrOffset];
 
-  //   InterlockedAdd(clothDataBlock.constraintCount[dist.indexA], 1);
-  //   InterlockedAdd(clothDataBlock.constraintCount[dist.indexB], 1);
+    InterlockedAdd(clothDataBlock.constraintCount[dist.indexA], 1);
+    InterlockedAdd(clothDataBlock.constraintCount[dist.indexB], 1);
 
-  //   const float invMassA = constraintBlock.invMasses[dist.indexA];
-  //   const float invMassB = constraintBlock.invMasses[dist.indexB];
-  //   const float invMassSum = (invMassA + invMassB);
-  //   const float invMassFactor1 = invMassA / invMassSum;
-  //   const float invMassFactor2 = invMassB / invMassSum;
-  //   const float3 x12 = (clothDataBlock.projectedPos[dist.indexA] - clothDataBlock.projectedPos[dist.indexB]);
+    const float invMassA = constraintBlock.invMasses[dist.indexA];
+    const float invMassB = constraintBlock.invMasses[dist.indexB];
+    const float invMassSum = (invMassA + invMassB);
+    const float invMassFactor1 = invMassA / invMassSum;
+    const float invMassFactor2 = invMassB / invMassSum;
+    const float3 x12 = (clothDataBlock.projectedPos[dist.indexA] - clothDataBlock.projectedPos[dist.indexB]);
 
-  //   const float lengthDelta = length(x12) - dist.restLength;
+    const float lengthDelta = length(x12) - dist.restLength;
 
-  //   if (lengthDelta > 0) {
-  //     const float3 delta1 = (computeUBOBlock.longRangeStiffness * -1.0 * invMassFactor1 * (lengthDelta)) * normalize(x12);
-  //     const float3 delta2 = (computeUBOBlock.longRangeStiffness * invMassFactor2 * (lengthDelta)) * normalize(x12);
+    if (lengthDelta > 0) {
+      const float3 delta1 = (computeUBOBlock.longRangeStiffness * -1.0 * invMassFactor1 * (lengthDelta)) * normalize(x12);
+      const float3 delta2 = (computeUBOBlock.longRangeStiffness * invMassFactor2 * (lengthDelta)) * normalize(x12);
 
-  //     AtomicAddDeltaX(dist.indexA, delta1.x);
-  //     AtomicAddDeltaY(dist.indexA, delta1.y);
-  //     AtomicAddDeltaZ(dist.indexA, delta1.z);
+      AtomicAddDeltaX(dist.indexA, delta1.x);
+      AtomicAddDeltaY(dist.indexA, delta1.y);
+      AtomicAddDeltaZ(dist.indexA, delta1.z);
 
-  //     AtomicAddDeltaX(dist.indexB, delta2.x);
-  //     AtomicAddDeltaY(dist.indexB, delta2.y);
-  //     AtomicAddDeltaZ(dist.indexB, delta2.z);
-  //   }
-  // }
+      AtomicAddDeltaX(dist.indexB, delta2.x);
+      AtomicAddDeltaY(dist.indexB, delta2.y);
+      AtomicAddDeltaZ(dist.indexB, delta2.z);
+    }
+  }
 
   if (bendingOffset < computeUBOBlock.numBendConstraints && bendingOffset >= 0) {
     BendConstraint bend = constraintBlock.bendConstraints[bendingOffset];

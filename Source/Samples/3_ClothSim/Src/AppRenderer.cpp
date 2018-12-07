@@ -23,8 +23,8 @@ const Vector3f TEST_PLANE_CENTER = Vector3f(0, -8.01f, 0);
 constexpr float TEST_SPHERE_RADIUS = 2.9f;
 constexpr float CLOTH_SPAN_X = 5;
 constexpr float CLOTH_SPAN_Y = 5;
-constexpr U32 CLOTH_DIV_X = 50;
-constexpr U32 CLOTH_DIV_Y = 50;
+constexpr U32 CLOTH_DIV_X = 30;
+constexpr U32 CLOTH_DIV_Y = 30;
 constexpr U32 TEXTURE_MEMORY = 0x4000000; // 64 MB
 constexpr U32 ANCHOR_IDX_1 = 0;
 constexpr U32 ANCHOR_IDX_2 = (CLOTH_DIV_Y * (CLOTH_DIV_X + 1));
@@ -66,7 +66,7 @@ void AppRenderer::Initialize() {
   HEAP_ALLOCATOR(Temporary, Memory::MonotonicAllocator, 0x400'0000);
   m_window = RenderSystem::CreateApplicationWindow("PBD Cloth Simulation", 1280, 720);
 
-  m_window->SetUpdateRate(UpdateRate::Rate120);
+  m_window->SetUpdateRate(UpdateRate::Rate60);
 
   m_window->SetUpdateCallback([this](float deltaTime)
   {
