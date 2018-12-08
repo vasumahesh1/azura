@@ -2,6 +2,9 @@ import SolvingPass;
 
 static const float3 GRAVITY = {0, -9.8, 0};
 
+groupshared int3 groupBoundingMin = int3(10000, 10000, 10000);
+groupshared int3 groupBoundingMax = int3(-10000, -10000, -10000);
+
 [numthreads(BLOCK_SIZE_X, 1, 1)]
 void main(
     uint3 groupID : SV_GroupID,
@@ -31,14 +34,31 @@ void main(
 	clothDataBlock.constraintCount[threadIdx] = 0;
 
 	const float invMass = constraintBlock.invMasses[threadIdx];
+
+	float3 projectedPos;
 	if (invMass < EPSILON) // ANCHORS
 	{
 		// Move Anchors by Model Matrix
-		clothDataBlock.projectedPos[threadIdx] = mul(computeUBOBlock.modelMatrix, float4(vertexPosition, 1.0)).xyz;
-		return;
+		projectedPos = mul(computeUBOBlock.modelMatrix, float4(vertexPosition, 1.0)).xyz;
+	}
+	else {
+		const float3 updatedVelocity = 0.98 * (clothDataBlock.velocities[threadIdx] + timeDelta * GRAVITY);
+		// Projected Pos of that Vertex
+		projectedPos = vertexPosition + updatedVelocity * timeDelta;
 	}
 
-	const float3 updatedVelocity = 0.98 * (clothDataBlock.velocities[threadIdx] + timeDelta * GRAVITY);
-	// Projected Pos of that Vertex
-	clothDataBlock.projectedPos[threadIdx] = vertexPosition + updatedVelocity * timeDelta;
+	clothDataBlock.projectedPos[threadIdx] = projectedPos;
+
+	float3 maxVector = max(vertexPosition, projectedPos);
+	float3 minVector = min(vertexPosition, projectedPos);
+	maxVector = ceil(maxVector);
+	minVector = floor(minVector);
+
+	InterlockedMin(clothDataBlock.properties[0].minX, int(minVector.x));
+	InterlockedMin(clothDataBlock.properties[0].minY, int(minVector.y));
+	InterlockedMin(clothDataBlock.properties[0].minZ, int(minVector.z));
+
+	InterlockedMax(clothDataBlock.properties[0].maxX, int(maxVector.x));
+	InterlockedMax(clothDataBlock.properties[0].maxY, int(maxVector.y));
+	InterlockedMax(clothDataBlock.properties[0].maxZ, int(maxVector.z));
 }

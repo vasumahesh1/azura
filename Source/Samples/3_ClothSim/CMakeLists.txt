@@ -13,6 +13,9 @@ set(
   PROJECT_SHADERS
     
     "${PROJECT_SOURCE_DIR}/Shaders/SolvingPass_Cloth_ApplyConstraints.cs.slang|CS"
+    "${PROJECT_SOURCE_DIR}/Shaders/SolvingPass_Cloth_Binning.cs.slang|CS"
+    "${PROJECT_SOURCE_DIR}/Shaders/SolvingPass_Cloth_BinningInit.cs.slang|CS"
+    "${PROJECT_SOURCE_DIR}/Shaders/SolvingPass_Cloth_GenerateSelfCollisions.cs.slang|CS"
     "${PROJECT_SOURCE_DIR}/Shaders/SolvingPass_Cloth_ComputeProjectedPositions.cs.slang|CS"
     "${PROJECT_SOURCE_DIR}/Shaders/SolvingPass_Cloth_ApplyDelta.cs.slang|CS"
     "${PROJECT_SOURCE_DIR}/Shaders/SolvingPass_Cloth_ComputePositions.cs.slang|CS"

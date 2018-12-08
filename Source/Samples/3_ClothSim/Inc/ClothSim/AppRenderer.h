@@ -16,12 +16,6 @@
 
 
 namespace Azura {
-constexpr U32 DEFAULT_BLOCK_SIZE_X = 512;
-constexpr U32 SOLVER_ITERATIONS = 4;
-
-const float DISTANCE_STIFFNESS = 0.8f;
-const float BENDING_STIFFNESS = 0.7f;
-const float LONG_RANGE_STIFFNESS = 0.3f;
 
 struct SceneUBO {
   Matrix4f m_model;
@@ -30,6 +24,12 @@ struct SceneUBO {
   Matrix4f m_viewProj;
   Matrix4f m_invViewProj;
   Matrix4f m_invProj;
+};
+
+struct ClothComputeProperties {
+  Vector3i m_minBounding;
+  Vector3i m_maxBounding;
+  U32 m_numSelfCollisionConstraints;
 };
 
 struct ComputeUBO
@@ -43,6 +43,9 @@ struct ComputeUBO
   U32 m_numBendConstraints;
   U32 m_numLongRangeConstraints;
   U32 m_numVertices;
+
+  U32 m_numTriangles;
+  U32 m_pad[3];
 
   Matrix4f m_clothModelMatrix;
 };
@@ -64,6 +67,9 @@ struct ComputePassData
 {
   U32 m_computeUBOSlot;
   U32 m_pass1;
+  U32 m_passInitialize;
+  U32 m_passBinning;
+  U32 m_passSelfCollisions;
   std::vector<U32> m_passItr1;
   std::vector<U32> m_passItr2;
   U32 m_pass4;
@@ -110,7 +116,7 @@ private:
   DrawablePool* m_mainPool{nullptr};
   DrawablePool* m_spherePool{nullptr};
   DrawablePool* m_planePool{nullptr};
-  ComputePool* m_computePools[2]{nullptr, nullptr};
+  ComputePool* m_computePools[5]{ nullptr, nullptr, nullptr, nullptr, nullptr};
 
   std::vector<ComputePool*> m_iterativePools;
 

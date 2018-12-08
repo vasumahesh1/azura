@@ -8,6 +8,15 @@ void main(
     uint3 dispatchThreadId : SV_DispatchThreadID
 )
 {
+  if (dispatchThreadId.x == 0 && dispatchThreadId.y == 0 && dispatchThreadId.z == 0) {
+    clothDataBlock.properties[0].maxX = asuint(-10000.0f);
+    clothDataBlock.properties[0].maxY = asuint(-10000.0f);
+    clothDataBlock.properties[0].maxZ = asuint(-10000.0f);
+    clothDataBlock.properties[0].minX = asuint(10000.0f);
+    clothDataBlock.properties[0].minY = asuint(10000.0f);
+    clothDataBlock.properties[0].minZ = asuint(10000.0f);
+  }
+
   const float timeDelta = computeUBOBlock.timeDelta;
   
   const uint threadIdx = dispatchThreadId.x;
