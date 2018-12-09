@@ -32,6 +32,16 @@ struct ClothComputeProperties {
   U32 m_numSelfCollisionConstraints;
 };
 
+struct SelfCollisionConstraint {
+  U32 m_pIdx;
+  U32 m_p0;
+  U32 m_p1;
+  U32 m_p2;
+
+  Vector3f m_normal;
+  Vector3f m_debug;
+};
+
 struct ComputeUBO
 {
   float m_stretchStiffness;

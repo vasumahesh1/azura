@@ -43,37 +43,37 @@ void main(
   
   const float3 vi = normalize(projectedPos - clothDataBlock.vertices[threadIdx]);
 
-  // const float3 projVec = projectedPos - SPHERE_CENTER;
-  // float dist = dot(projVec, projVec);
-  // if (dist < SPHERE_RADIUS_DELTA_SQ) {
-  //   const float3 xi = clothDataBlock.vertices[threadIdx];
+  const float3 projVec = projectedPos - SPHERE_CENTER;
+  float dist = dot(projVec, projVec);
+  if (dist < SPHERE_RADIUS_DELTA_SQ) {
+    const float3 xi = clothDataBlock.vertices[threadIdx];
 
-  //   const float3 xixc = xi - SPHERE_CENTER;
-  //   const float vix = dot(vi, xixc);
+    const float3 xixc = xi - SPHERE_CENTER;
+    const float vix = dot(vi, xixc);
 
-  //   const float tPart1 = -1.0 * vix;
-  //   const float D = (vix * vix) - (dot(xixc, xixc) - SPHERE_RADIUS_SQ);
+    const float tPart1 = -1.0 * vix;
+    const float D = (vix * vix) - (dot(xixc, xixc) - SPHERE_RADIUS_SQ);
 
-  //   if (D >= 0) {
-  //     const float tPart2 = sqrt(D);
+    if (D >= 0) {
+      const float tPart2 = sqrt(D);
 
-  //     float t = 1.0;
+      float t = 1.0;
 
-  //     const float t1 = tPart1 - tPart2;
-  //     const float t2 = tPart1 + tPart2;
+      const float t1 = tPart1 - tPart2;
+      const float t2 = tPart1 + tPart2;
 
-  //     if (t1 < t2 && t1 > 0) {
-  //       t = t1;
-  //     }
-  //     else {
-  //       t = t2;
-  //     }
+      if (t1 < t2 && t1 > 0) {
+        t = t1;
+      }
+      else {
+        t = t2;
+      }
 
-  //     if (t >= 0) {
-  //       projectedPos = xi + (t * vi) + (T_DELTA * normalize(projectedPos - SPHERE_CENTER));
-  //     }
-  //   }
-  // }
+      if (t >= 0) {
+        projectedPos = xi + (t * vi) + (T_DELTA * normalize(projectedPos - SPHERE_CENTER));
+      }
+    }
+  }
 
   if (dot(projectedPos - PLANE_POS, WORLD_UP) < 0) {
     const float3 xi = clothDataBlock.vertices[threadIdx] - PLANE_POS;

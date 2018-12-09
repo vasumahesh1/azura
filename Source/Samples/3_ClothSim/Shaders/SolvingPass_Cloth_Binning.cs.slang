@@ -11,6 +11,10 @@ void main(
 	const float timeDelta = computeUBOBlock.timeDelta;
 	const uint threadIdx = dispatchThreadId.x;
 
+	if (dispatchThreadId.x == 0) {
+		clothDataBlock.properties[0].numSelfCollisionConstraints = 0;
+	}
+
 	// Update all points
 	if (threadIdx >= computeUBOBlock.numVertices) {
 		return;

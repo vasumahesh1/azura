@@ -4,10 +4,13 @@ static const uint SOLVER_ITERATIONS = 32;
 static const uint MAX_VERTICES_PER_BIN = 15;
 
 static const float EPSILON = 0.00001;
+static const float POINT_RADIUS = 0.1;
 
-static const uint CLOTH_GRID_X = 3;
-static const uint CLOTH_GRID_Y = 3;
-static const uint CLOTH_GRID_Z = 3;
+static const uint CLOTH_GRID_X = 10;
+static const uint CLOTH_GRID_Y = 10;
+static const uint CLOTH_GRID_Z = 10;
+
+static const uint MAX_SELF_POINT_TRIANGLE_COLLISIONS = 2048;
 
 struct ComputeUBO {
 	float stretchStiffness;
@@ -57,6 +60,16 @@ struct ClothComputeProperties {
   uint numSelfCollisionConstraints;
 };
 
+struct SelfCollisionConstraint {
+  uint pIdx;
+  uint p0;
+  uint p1;
+  uint p2;
+
+  float3 normal;
+  float3 debug;
+};
+
 struct Constraints {
     StructuredBuffer<DistanceConstraint> distanceConstraints;
     StructuredBuffer<BendConstraint> bendConstraints;
@@ -70,6 +83,7 @@ struct VertexBlock {
     RWStructuredBuffer<ClothComputeProperties> properties;
     RWStructuredBuffer<uint> binCount;
     RWStructuredBuffer<uint> binVertices;
+    RWStructuredBuffer<SelfCollisionConstraint> selfCollisionConstraints;
     RWStructuredBuffer<float3> vertices;
     RWStructuredBuffer<float3> projectedPos;
     RWStructuredBuffer<float3> velocities;
