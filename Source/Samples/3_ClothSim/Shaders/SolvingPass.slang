@@ -6,9 +6,9 @@ static const uint MAX_VERTICES_PER_BIN = 15;
 static const float EPSILON = 0.00001;
 static const float POINT_RADIUS = 0.1;
 
-static const uint CLOTH_GRID_X = 10;
-static const uint CLOTH_GRID_Y = 10;
-static const uint CLOTH_GRID_Z = 10;
+static const uint CLOTH_GRID_X = 20;
+static const uint CLOTH_GRID_Y = 20;
+static const uint CLOTH_GRID_Z = 20;
 
 static const uint MAX_SELF_POINT_TRIANGLE_COLLISIONS = 2048;
 
@@ -28,7 +28,7 @@ struct ComputeUBO {
   float pad2;
   float pad3;
 
-  float4x4 modelMatrix;
+  float4x4 modelMatrix[16];
 };
 
 struct DistanceConstraint {
@@ -77,6 +77,7 @@ struct Constraints {
     StructuredBuffer<float> invMasses;
     StructuredBuffer<int> vertexAliases;
     StructuredBuffer<uint> indexBuffer;
+    StructuredBuffer<int> vertexModelMatrices;
 };
 
 struct VertexBlock {

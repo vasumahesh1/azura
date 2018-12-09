@@ -35,11 +35,24 @@ void main(
 
 	const float invMass = constraintBlock.invMasses[threadIdx];
 
+	const int modelIdx = constraintBlock.vertexModelMatrices[threadIdx];
+
+	float4x4 modelMatrix = float4x4(
+		1, 0, 0, 0,
+		0, 1, 0, 0,
+		0, 0, 1, 0,
+		0, 0, 0, 1,
+	);
+
+	if (modelIdx > -1) {
+		modelMatrix = computeUBOBlock.modelMatrix[modelIdx];
+	}
+
 	float3 projectedPos;
 	if (invMass < EPSILON) // ANCHORS
 	{
 		// Move Anchors by Model Matrix
-		projectedPos = mul(computeUBOBlock.modelMatrix, float4(vertexPosition, 1.0)).xyz;
+		projectedPos = mul(modelMatrix, float4(vertexPosition, 1.0)).xyz;
 	}
 	else {
 		const float3 updatedVelocity = 0.98 * (clothDataBlock.velocities[threadIdx] + timeDelta * GRAVITY);

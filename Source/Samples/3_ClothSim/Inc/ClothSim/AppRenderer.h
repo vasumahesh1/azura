@@ -57,7 +57,7 @@ struct ComputeUBO
   U32 m_numTriangles;
   U32 m_pad[3];
 
-  Matrix4f m_clothModelMatrix;
+  Matrix4f m_clothModelMatrix[16];
 };
 
 struct NormalUBO
@@ -135,6 +135,8 @@ private:
   NormalsPassData m_normalsPass{};
 
   Math::TransformComponent m_clothTransform{};
+
+  Containers::Vector<Math::TransformComponent> m_curtainTransforms;
 
   Physics::ClothPlane m_clothPlane;
   Physics::ClothMesh m_clothMesh;

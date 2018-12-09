@@ -29,20 +29,24 @@ const Vector3f TEST_SPHERE_CENTER = Vector3f(0, -5, 0);
 const Vector3f TEST_PLANE_CENTER = Vector3f(0, -8.01f, 0);
 constexpr float TEST_SPHERE_RADIUS = 2.9f;
 constexpr float CLOTH_SPAN_X = 5;
-constexpr float CLOTH_SPAN_Y = 5;
-constexpr U32 CLOTH_DIV_X = 20;
-constexpr U32 CLOTH_DIV_Y = 20;
+constexpr float CLOTH_SPAN_Y = 10;
+constexpr U32 CLOTH_DIV_X = 30;
+constexpr U32 CLOTH_DIV_Y = 30;
 constexpr U32 TEXTURE_MEMORY = 0x4000000; // 64 MB
 constexpr U32 ANCHOR_IDX_1 = 0;
 constexpr U32 ANCHOR_IDX_2 = (CLOTH_DIV_Y * (CLOTH_DIV_X + 1));
 
-constexpr U32 MAX_GRID_RESOLUTION_X = 10;
-constexpr U32 MAX_GRID_RESOLUTION_Y = 10;
-constexpr U32 MAX_GRID_RESOLUTION_Z = 10;
+constexpr U32 MAX_GRID_RESOLUTION_X = 20;
+constexpr U32 MAX_GRID_RESOLUTION_Y = 20;
+constexpr U32 MAX_GRID_RESOLUTION_Z = 20;
 constexpr U32 MAX_GRID_VERTICES = 15;
 constexpr U32 MAX_SELF_POINT_TRIANGLE_COLLISIONS = 2048;
+constexpr U32 MAX_ANCHOR_POINTS = 128;
+constexpr U32 CURTAIN_ANCHORS = 5;
+constexpr float BASE_CURTAIN_STEP_SIZE = 5.0f;
 
 constexpr bool USE_MESH = false;
+constexpr bool USE_CURTAIN = true;
 
 } // namespace
 
@@ -53,9 +57,10 @@ AppRenderer::AppRenderer()
     m_localAllocator(m_mainBuffer, 0x400'0000),
     m_drawableAllocator(m_mainBuffer, 0x400'0000),
     m_camera(1280, 720),
-    m_clothPlane(ClothTriangulation::Regular, Vector2f(-CLOTH_SPAN_X, -CLOTH_SPAN_Y), Vector2f(CLOTH_SPAN_X, CLOTH_SPAN_Y),
+    m_clothPlane(ClothTriangulation::Regular, Vector2f(-CLOTH_SPAN_X, -CLOTH_SPAN_Y), Vector2f(CLOTH_SPAN_X, CLOTH_SPAN_Y), 20.0f,
                  Vector2u(CLOTH_DIV_X, CLOTH_DIV_Y), m_localAllocator),
-    m_clothMesh("CustomCloth2", AssetLocation::Meshes, m_localAllocator, log_AppRenderer) {
+    m_clothMesh("CustomCloth2", AssetLocation::Meshes, m_localAllocator, log_AppRenderer),
+    m_curtainTransforms(ContainerExtent{CURTAIN_ANCHORS}, m_mainAllocator) {
 }
 
 void AppRenderer::Initialize() {
@@ -76,6 +81,18 @@ void AppRenderer::Initialize() {
   m_clothTransform.SetRightKey(KeyboardKey::Right);
   m_clothTransform.SetStepSize(8.0f);
 
+  if (USE_CURTAIN)
+  {
+    for (U32 idx = 0; idx < CURTAIN_ANCHORS; idx++)
+    {
+      m_curtainTransforms[idx].SetForwardKey(KeyboardKey::Up);
+      m_curtainTransforms[idx].SetBackwardKey(KeyboardKey::Down);
+      m_curtainTransforms[idx].SetLeftKey(KeyboardKey::Left);
+      m_curtainTransforms[idx].SetRightKey(KeyboardKey::Right);
+      m_curtainTransforms[idx].SetStepSize((float(idx) / (CURTAIN_ANCHORS - 1)) * BASE_CURTAIN_STEP_SIZE);
+    }
+  }
+
   HEAP_ALLOCATOR(Temporary, Memory::MonotonicAllocator, 0x400'0000);
   m_window = RenderSystem::CreateApplicationWindow("PBD Cloth Simulation", 1280, 720);
 
@@ -90,6 +107,14 @@ void AppRenderer::Initialize() {
   {
     m_camera.OnKeyEvent(evt);
     m_clothTransform.OnKeyEvent(evt);
+
+    if (USE_CURTAIN)
+    {
+      for (U32 idx = 0; idx < CURTAIN_ANCHORS; idx++)
+      {
+        m_curtainTransforms[idx].OnKeyEvent(evt);
+      }
+    }
   });
 
   m_window->SetMouseEventCallback([this](MouseEvent evt)
@@ -242,6 +267,8 @@ void AppRenderer::Initialize() {
     ShaderStage::Compute, "NormalsPass_Normalize.cs", AssetLocation::Shaders
     });
 
+  std::vector<int> vertexModelMatrixIdBuffer = std::vector<int>(p_activeMesh->GetVertexCount(), -1);
+
   if (USE_MESH)
   {
     for (U32 idx = 4095; idx < 4159u; ++idx) {
@@ -252,8 +279,24 @@ void AppRenderer::Initialize() {
   }
   else
   {
-    p_activeMesh->SetAnchorOnIndex(ANCHOR_IDX_1);
-    p_activeMesh->SetAnchorOnIndex(ANCHOR_IDX_2);
+    if (USE_CURTAIN)
+    {
+      const U32 stepSize = U32(CLOTH_DIV_X / (CURTAIN_ANCHORS - 1)) * (CLOTH_DIV_Y + 1);
+      for (U32 idx = 0; idx < CURTAIN_ANCHORS; idx++)
+      {
+        const U32 anchorIdx = idx * stepSize;
+        p_activeMesh->SetAnchorOnIndex(anchorIdx);
+        vertexModelMatrixIdBuffer[anchorIdx] = idx;
+      }
+    }
+    else
+    {
+      p_activeMesh->SetAnchorOnIndex(ANCHOR_IDX_1);
+      p_activeMesh->SetAnchorOnIndex(ANCHOR_IDX_2);
+
+      vertexModelMatrixIdBuffer[ANCHOR_IDX_1] = 0;
+      vertexModelMatrixIdBuffer[ANCHOR_IDX_2] = 1;
+    }
   }
 
   const auto solvingView = p_activeMesh->GetPBDSolvingView(m_localAllocator);
@@ -347,12 +390,16 @@ void AppRenderer::Initialize() {
   const U32 COMPUTE_POINT_TRI_SELF_COLLISIONS_CONSTRAINT = renderPassRequirements.AddBuffer({
     U32(sizeof(SelfCollisionConstraint) * MAX_SELF_POINT_TRIANGLE_COLLISIONS), U32(sizeof(SelfCollisionConstraint))
     });
+  
+  const U32 COMPUTE_VERTEX_MODEL_MATRICES = renderPassRequirements.AddBuffer({
+    U32(sizeof(int) * U32(p_activeMesh->GetVertexCount())), U32(sizeof(int))
+    });
 
   m_computePass.m_pass1 = renderPassRequirements.AddPass({
     PipelinePassCreateInfo::Shaders{},
     PipelinePassCreateInfo::InputTargets{},
     PipelinePassCreateInfo::InputBuffers{
-      {DISTANCE_CONSTRAINTS_BUFFER, ShaderStage::Compute}, {BEND_CONSTRAINTS_BUFFER, ShaderStage::Compute}, {LONG_RANGE_CONSTRAINTS_BUFFER, ShaderStage::Compute}, {COMPUTE_VERTEX_INV_MASS, ShaderStage::Compute}, {COMPUTE_VERTEX_ALIAS_BUFFER, ShaderStage::Compute}, {COMPUTE_INDEX_BUFFER, ShaderStage::Compute}
+      {DISTANCE_CONSTRAINTS_BUFFER, ShaderStage::Compute}, {BEND_CONSTRAINTS_BUFFER, ShaderStage::Compute}, {LONG_RANGE_CONSTRAINTS_BUFFER, ShaderStage::Compute}, {COMPUTE_VERTEX_INV_MASS, ShaderStage::Compute}, {COMPUTE_VERTEX_ALIAS_BUFFER, ShaderStage::Compute}, {COMPUTE_INDEX_BUFFER, ShaderStage::Compute}, {COMPUTE_VERTEX_MODEL_MATRICES, ShaderStage::Compute}
     },
     PipelinePassCreateInfo::OutputTargets{},
     PipelinePassCreateInfo::OutputBuffers{
@@ -369,7 +416,7 @@ void AppRenderer::Initialize() {
     PipelinePassCreateInfo::Shaders{},
     PipelinePassCreateInfo::InputTargets{},
     PipelinePassCreateInfo::InputBuffers{
-      {DISTANCE_CONSTRAINTS_BUFFER, ShaderStage::Compute}, {BEND_CONSTRAINTS_BUFFER, ShaderStage::Compute}, {LONG_RANGE_CONSTRAINTS_BUFFER, ShaderStage::Compute}, {COMPUTE_VERTEX_INV_MASS, ShaderStage::Compute}, {COMPUTE_VERTEX_ALIAS_BUFFER, ShaderStage::Compute}, {COMPUTE_INDEX_BUFFER, ShaderStage::Compute}
+      {DISTANCE_CONSTRAINTS_BUFFER, ShaderStage::Compute}, {BEND_CONSTRAINTS_BUFFER, ShaderStage::Compute}, {LONG_RANGE_CONSTRAINTS_BUFFER, ShaderStage::Compute}, {COMPUTE_VERTEX_INV_MASS, ShaderStage::Compute}, {COMPUTE_VERTEX_ALIAS_BUFFER, ShaderStage::Compute}, {COMPUTE_INDEX_BUFFER, ShaderStage::Compute}, {COMPUTE_VERTEX_MODEL_MATRICES, ShaderStage::Compute}
     },
     PipelinePassCreateInfo::OutputTargets{},
     PipelinePassCreateInfo::OutputBuffers{
@@ -386,7 +433,7 @@ void AppRenderer::Initialize() {
     PipelinePassCreateInfo::Shaders{},
     PipelinePassCreateInfo::InputTargets{},
     PipelinePassCreateInfo::InputBuffers{
-      {DISTANCE_CONSTRAINTS_BUFFER, ShaderStage::Compute}, {BEND_CONSTRAINTS_BUFFER, ShaderStage::Compute}, {LONG_RANGE_CONSTRAINTS_BUFFER, ShaderStage::Compute}, {COMPUTE_VERTEX_INV_MASS, ShaderStage::Compute}, {COMPUTE_VERTEX_ALIAS_BUFFER, ShaderStage::Compute}, {COMPUTE_INDEX_BUFFER, ShaderStage::Compute}
+      {DISTANCE_CONSTRAINTS_BUFFER, ShaderStage::Compute}, {BEND_CONSTRAINTS_BUFFER, ShaderStage::Compute}, {LONG_RANGE_CONSTRAINTS_BUFFER, ShaderStage::Compute}, {COMPUTE_VERTEX_INV_MASS, ShaderStage::Compute}, {COMPUTE_VERTEX_ALIAS_BUFFER, ShaderStage::Compute}, {COMPUTE_INDEX_BUFFER, ShaderStage::Compute}, {COMPUTE_VERTEX_MODEL_MATRICES, ShaderStage::Compute}
     },
     PipelinePassCreateInfo::OutputTargets{},
     PipelinePassCreateInfo::OutputBuffers{
@@ -403,7 +450,7 @@ void AppRenderer::Initialize() {
     PipelinePassCreateInfo::Shaders{},
     PipelinePassCreateInfo::InputTargets{},
     PipelinePassCreateInfo::InputBuffers{
-      {DISTANCE_CONSTRAINTS_BUFFER, ShaderStage::Compute}, {BEND_CONSTRAINTS_BUFFER, ShaderStage::Compute}, {LONG_RANGE_CONSTRAINTS_BUFFER, ShaderStage::Compute}, {COMPUTE_VERTEX_INV_MASS, ShaderStage::Compute}, {COMPUTE_VERTEX_ALIAS_BUFFER, ShaderStage::Compute}, {COMPUTE_INDEX_BUFFER, ShaderStage::Compute}
+      {DISTANCE_CONSTRAINTS_BUFFER, ShaderStage::Compute}, {BEND_CONSTRAINTS_BUFFER, ShaderStage::Compute}, {LONG_RANGE_CONSTRAINTS_BUFFER, ShaderStage::Compute}, {COMPUTE_VERTEX_INV_MASS, ShaderStage::Compute}, {COMPUTE_VERTEX_ALIAS_BUFFER, ShaderStage::Compute}, {COMPUTE_INDEX_BUFFER, ShaderStage::Compute}, {COMPUTE_VERTEX_MODEL_MATRICES, ShaderStage::Compute}
     },
     PipelinePassCreateInfo::OutputTargets{},
     PipelinePassCreateInfo::OutputBuffers{
@@ -425,7 +472,7 @@ void AppRenderer::Initialize() {
       PipelinePassCreateInfo::Shaders{},
       PipelinePassCreateInfo::InputTargets{},
       PipelinePassCreateInfo::InputBuffers{
-        {DISTANCE_CONSTRAINTS_BUFFER, ShaderStage::Compute}, {BEND_CONSTRAINTS_BUFFER, ShaderStage::Compute}, {LONG_RANGE_CONSTRAINTS_BUFFER, ShaderStage::Compute}, {COMPUTE_VERTEX_INV_MASS, ShaderStage::Compute}, {COMPUTE_VERTEX_ALIAS_BUFFER, ShaderStage::Compute}, {COMPUTE_INDEX_BUFFER, ShaderStage::Compute}
+        {DISTANCE_CONSTRAINTS_BUFFER, ShaderStage::Compute}, {BEND_CONSTRAINTS_BUFFER, ShaderStage::Compute}, {LONG_RANGE_CONSTRAINTS_BUFFER, ShaderStage::Compute}, {COMPUTE_VERTEX_INV_MASS, ShaderStage::Compute}, {COMPUTE_VERTEX_ALIAS_BUFFER, ShaderStage::Compute}, {COMPUTE_INDEX_BUFFER, ShaderStage::Compute}, {COMPUTE_VERTEX_MODEL_MATRICES, ShaderStage::Compute}
       },
       PipelinePassCreateInfo::OutputTargets{},
       PipelinePassCreateInfo::OutputBuffers{
@@ -442,7 +489,7 @@ void AppRenderer::Initialize() {
       PipelinePassCreateInfo::Shaders{},
       PipelinePassCreateInfo::InputTargets{},
       PipelinePassCreateInfo::InputBuffers{
-        {DISTANCE_CONSTRAINTS_BUFFER, ShaderStage::Compute}, {BEND_CONSTRAINTS_BUFFER, ShaderStage::Compute}, {LONG_RANGE_CONSTRAINTS_BUFFER, ShaderStage::Compute}, {COMPUTE_VERTEX_INV_MASS, ShaderStage::Compute}, {COMPUTE_VERTEX_ALIAS_BUFFER, ShaderStage::Compute}, {COMPUTE_INDEX_BUFFER, ShaderStage::Compute}
+        {DISTANCE_CONSTRAINTS_BUFFER, ShaderStage::Compute}, {BEND_CONSTRAINTS_BUFFER, ShaderStage::Compute}, {LONG_RANGE_CONSTRAINTS_BUFFER, ShaderStage::Compute}, {COMPUTE_VERTEX_INV_MASS, ShaderStage::Compute}, {COMPUTE_VERTEX_ALIAS_BUFFER, ShaderStage::Compute}, {COMPUTE_INDEX_BUFFER, ShaderStage::Compute}, {COMPUTE_VERTEX_MODEL_MATRICES, ShaderStage::Compute}
       },
       PipelinePassCreateInfo::OutputTargets{},
       PipelinePassCreateInfo::OutputBuffers{
@@ -460,7 +507,7 @@ void AppRenderer::Initialize() {
     PipelinePassCreateInfo::Shaders{},
     PipelinePassCreateInfo::InputTargets{},
     PipelinePassCreateInfo::InputBuffers{
-      {DISTANCE_CONSTRAINTS_BUFFER, ShaderStage::Compute}, {BEND_CONSTRAINTS_BUFFER, ShaderStage::Compute}, {LONG_RANGE_CONSTRAINTS_BUFFER, ShaderStage::Compute}, {COMPUTE_VERTEX_INV_MASS, ShaderStage::Compute}, {COMPUTE_VERTEX_ALIAS_BUFFER, ShaderStage::Compute}, {COMPUTE_INDEX_BUFFER, ShaderStage::Compute}
+      {DISTANCE_CONSTRAINTS_BUFFER, ShaderStage::Compute}, {BEND_CONSTRAINTS_BUFFER, ShaderStage::Compute}, {LONG_RANGE_CONSTRAINTS_BUFFER, ShaderStage::Compute}, {COMPUTE_VERTEX_INV_MASS, ShaderStage::Compute}, {COMPUTE_VERTEX_ALIAS_BUFFER, ShaderStage::Compute}, {COMPUTE_INDEX_BUFFER, ShaderStage::Compute}, {COMPUTE_VERTEX_MODEL_MATRICES, ShaderStage::Compute}
     },
     PipelinePassCreateInfo::OutputTargets{},
     PipelinePassCreateInfo::OutputBuffers{
@@ -602,6 +649,9 @@ void AppRenderer::Initialize() {
   m_renderer->BindBufferTarget(COMPUTE_VERTEX_DELTAY, deltaStart);
   m_renderer->BindBufferTarget(COMPUTE_VERTEX_DELTAZ, deltaStart);
 
+  const auto vertexModelMatrixBufferStart = reinterpret_cast<const U8*>(vertexModelMatrixIdBuffer.data()); // NOLINT
+  m_renderer->BindBufferTarget(COMPUTE_VERTEX_MODEL_MATRICES, vertexModelMatrixBufferStart);
+
   m_renderer->BindBufferTarget(COMPUTE_INDEX_BUFFER, p_activeMesh->IndexData());
 
 
@@ -651,7 +701,19 @@ void AppRenderer::Initialize() {
   m_computeUBO.m_numLongRangeConstraints = U32(clothLongRangeConstraints.GetSize());
   m_computeUBO.m_numStretchConstraints = U32(clothDistanceConstraints.GetSize());
   m_computeUBO.m_numBendConstraints    = U32(clothBendingConstraints.GetSize());
-  m_computeUBO.m_clothModelMatrix      = m_clothTransform.GetTransform().Transpose();
+
+  if (USE_CURTAIN)
+  {
+    for (U32 idx = 0; idx < CURTAIN_ANCHORS; idx++)
+    {
+      m_computeUBO.m_clothModelMatrix[idx] = m_curtainTransforms[idx].GetTransform();
+    }
+  }
+  else {
+    m_computeUBO.m_clothModelMatrix[0] = m_clothTransform.GetTransform().Transpose();
+    m_computeUBO.m_clothModelMatrix[1] = m_clothTransform.GetTransform().Transpose();
+  }
+
   const auto computeUBOStart = reinterpret_cast<const U8*>(&m_computeUBO); // NOLINT
 
   ComputePool& computeProjectedPositions = m_renderer->CreateComputePool(pass1);
@@ -912,7 +974,19 @@ void AppRenderer::WindowUpdate(float timeDelta) {
   m_planeUBO.m_modelInvTranspose = m_planeUBO.m_model.Inverse().Transpose();
 
   m_computeUBO.m_timeDelta = timeDelta;
-  m_computeUBO.m_clothModelMatrix      = m_clothTransform.GetTransform();
+
+  if (USE_CURTAIN)
+  {
+    for (U32 idx = 0; idx < CURTAIN_ANCHORS; idx++)
+    {
+      m_curtainTransforms[idx].Update(timeDelta);
+      m_computeUBO.m_clothModelMatrix[idx] = m_curtainTransforms[idx].GetTransform();
+    }
+  }
+  else {
+    m_computeUBO.m_clothModelMatrix[0] = m_clothTransform.GetTransform().Transpose();
+    m_computeUBO.m_clothModelMatrix[1] = m_clothTransform.GetTransform().Transpose();
+  }
 
   const auto uboDataBuffer    = reinterpret_cast<U8*>(&m_clothUBO);         // NOLINT
   const auto sphereDataBuffer = reinterpret_cast<U8*>(&m_sphereUBO);        // NOLINT
