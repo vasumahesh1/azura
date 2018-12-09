@@ -113,27 +113,6 @@ void main(
 					clothDataBlock.selfCollisionConstraints[offset].p1 = id1;
 					clothDataBlock.selfCollisionConstraints[offset].p2 = id2;
 					clothDataBlock.selfCollisionConstraints[offset].normal = normal;
-
-					const float3 nCap = normalize(normal);
-				    const float3 nMag = length(normal);
-
-				    const float a = nCap.x;
-				    const float b = nCap.y;
-				    const float c = nCap.z;
-
-				    const float a2 = nCap.x * nCap.x;
-				    const float b2 = nCap.y * nCap.y;
-				    const float c2 = nCap.z * nCap.z;
-
-				    float3 nVec = float3(
-				      a - (a2 * a) - (a * b2) - (a * c2),
-				      (-a2 * b) + b - (b2 * b) - (b * c2),
-				      (-a2 * c) - (b2 * c) + c - (c2 * c)
-				    );
-
-				    nVec = nVec / nMag;
-
-				    clothDataBlock.selfCollisionConstraints[offset].debug = nVec;
 				}
 			}
 		}

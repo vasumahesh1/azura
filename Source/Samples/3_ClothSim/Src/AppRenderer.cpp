@@ -19,7 +19,7 @@ struct LightData {
 };
 
 constexpr U32 DEFAULT_BLOCK_SIZE_X = 512;
-constexpr U32 SOLVER_ITERATIONS = 4;
+constexpr U32 SOLVER_ITERATIONS = 2;
 
 // Regular
 const float DISTANCE_STIFFNESS = 0.8f;
@@ -40,7 +40,7 @@ constexpr U32 ANCHOR_IDX_2 = (CLOTH_DIV_Y * (CLOTH_DIV_X + 1));
 constexpr U32 MAX_GRID_RESOLUTION_X = 20;
 constexpr U32 MAX_GRID_RESOLUTION_Y = 20;
 constexpr U32 MAX_GRID_RESOLUTION_Z = 20;
-constexpr U32 MAX_GRID_VERTICES = 15;
+constexpr U32 MAX_VERTICES_PER_BIN = 32;
 constexpr U32 MAX_SELF_POINT_TRIANGLE_COLLISIONS = 2048;
 constexpr U32 MAX_ANCHOR_POINTS = 128;
 constexpr U32 CURTAIN_ANCHORS = 5;
@@ -408,7 +408,7 @@ void AppRenderer::Initialize() {
     });
 
   const U32 COMPUTE_GRID_VERTICES = renderPassRequirements.AddBuffer({
-    U32(sizeof(U32) * MAX_GRID_VERTICES * MAX_GRID_RESOLUTION_X * MAX_GRID_RESOLUTION_Y * MAX_GRID_RESOLUTION_Z), U32(sizeof(U32))
+    U32(sizeof(U32) * MAX_VERTICES_PER_BIN * MAX_GRID_RESOLUTION_X * MAX_GRID_RESOLUTION_Y * MAX_GRID_RESOLUTION_Z), U32(sizeof(U32))
     });
   
   const U32 COMPUTE_POINT_TRI_SELF_COLLISIONS_CONSTRAINT = renderPassRequirements.AddBuffer({
@@ -654,7 +654,7 @@ void AppRenderer::Initialize() {
   m_renderer->BindBufferTarget(COMPUTE_CLOTH_PROPERTIES, clothStart);
 
   const auto binCountVector = std::vector<U32>(MAX_GRID_RESOLUTION_X * MAX_GRID_RESOLUTION_Y * MAX_GRID_RESOLUTION_Z);
-  const auto binVerticesVector = std::vector<U32>(MAX_GRID_VERTICES * MAX_GRID_RESOLUTION_X * MAX_GRID_RESOLUTION_Y * MAX_GRID_RESOLUTION_Z);
+  const auto binVerticesVector = std::vector<U32>(MAX_VERTICES_PER_BIN * MAX_GRID_RESOLUTION_X * MAX_GRID_RESOLUTION_Y * MAX_GRID_RESOLUTION_Z);
   const auto binStart = reinterpret_cast<const U8*>(binCountVector.data()); // NOLINT
   const auto binVerticesStart = reinterpret_cast<const U8*>(binVerticesVector.data()); // NOLINT
   m_renderer->BindBufferTarget(COMPUTE_GRID_COUNT, binStart);
@@ -1058,6 +1058,7 @@ void AppRenderer::WindowUpdate(float timeDelta) {
   m_shehzanUBO.m_modelInvTranspose = m_shehzanUBO.m_model.Inverse().Transpose();
 
   m_computeUBO.m_timeDelta = timeDelta;
+  m_computeUBO.m_frameCount++;
 
   if (USE_CURTAIN)
   {

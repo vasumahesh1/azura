@@ -208,14 +208,22 @@ ClothSolvingView ClothMesh::GetPBDSolvingView(Memory::Allocator& allocator) {
       continue;
     }
 
+    float closestDistance = std::numeric_limits<float>::max();
+    U32 closestAnchorIdx = 0;
+
     for (const auto& anchorIdx : m_anchorIdx) {
       const float distance = (m_vertices[anchorIdx] - vertex).Length();
-      solvingView.AddConstraint(LongRangeConstraint{
-        ConstraintPoint{vertIdx},
-        ConstraintPoint{anchorIdx},
-        distance
-        });
+      if (distance < closestDistance) {
+        closestDistance = distance;
+        closestAnchorIdx = anchorIdx;
+      }
     }
+
+    solvingView.AddConstraint(LongRangeConstraint{
+      ConstraintPoint{vertIdx},
+      ConstraintPoint{closestAnchorIdx},
+      closestDistance
+      });
 
     ++vertIdx;
   }

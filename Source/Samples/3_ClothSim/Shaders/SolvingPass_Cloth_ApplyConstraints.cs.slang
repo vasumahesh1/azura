@@ -212,7 +212,9 @@ void main(
       const float w2 = constraintBlock.invMasses[selfConstraint.p2];
       const float wp = constraintBlock.invMasses[selfConstraint.pIdx];
 
-      const float lambda = constraintValue / (w0 * dot(aVec, aVec) + w1 * dot(bVec, bVec) + w2 * dot(cVec, cVec) + wp);
+      const float denom = w0 * dot(aVec, aVec) + w1 * dot(bVec, bVec) + w2 * dot(cVec, cVec) + wp;
+
+      const float lambda = constraintValue / denom;
 
       const float3 deltaP = -lambda * wp * nCap;
       const float3 delta1 = -lambda * w1 * aVec;

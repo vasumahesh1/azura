@@ -39,7 +39,6 @@ struct SelfCollisionConstraint {
   U32 m_p2;
 
   Vector3f m_normal;
-  Vector3f m_debug;
 };
 
 struct ComputeUBO
@@ -55,7 +54,8 @@ struct ComputeUBO
   U32 m_numVertices;
 
   U32 m_numTriangles;
-  U32 m_pad[3];
+  U32 m_frameCount{0};
+  U32 m_pad[2];
 
   Matrix4f m_clothModelMatrix[16];
 };

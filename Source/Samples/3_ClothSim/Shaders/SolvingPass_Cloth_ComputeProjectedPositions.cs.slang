@@ -48,6 +48,9 @@ void main(
 		modelMatrix = computeUBOBlock.modelMatrix[modelIdx];
 	}
 
+	// TODO(daedalus5): Check here for Frame constraintCount
+	// computeUBOBlock.frameCount;
+
 	float3 projectedPos;
 	if (invMass < EPSILON) // ANCHORS
 	{
