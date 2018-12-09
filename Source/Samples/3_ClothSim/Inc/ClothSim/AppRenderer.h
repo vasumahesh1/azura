@@ -89,6 +89,7 @@ struct PassData {
   U32 m_clothId;
   U32 m_sphereId;
   U32 m_planeId;
+  U32 m_shehzanId;
   U32 m_sceneUBOSlot;
   U32 m_vertexSlot;
   U32 m_normalSlot;
@@ -121,11 +122,13 @@ private:
   SceneUBO m_clothUBO{};
   SceneUBO m_sphereUBO{};
   SceneUBO m_planeUBO{};
+  SceneUBO m_shehzanUBO{};
   ComputeUBO m_computeUBO{};
   NormalUBO m_normalUBO{};
   DrawablePool* m_mainPool{nullptr};
   DrawablePool* m_spherePool{nullptr};
   DrawablePool* m_planePool{nullptr};
+  DrawablePool* m_shehzanPool{nullptr};
   ComputePool* m_computePools[5]{ nullptr, nullptr, nullptr, nullptr, nullptr};
 
   std::vector<ComputePool*> m_iterativePools;

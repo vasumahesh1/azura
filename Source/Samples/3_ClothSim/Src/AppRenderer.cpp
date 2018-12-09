@@ -21,6 +21,7 @@ struct LightData {
 constexpr U32 DEFAULT_BLOCK_SIZE_X = 512;
 constexpr U32 SOLVER_ITERATIONS = 4;
 
+// Regular
 const float DISTANCE_STIFFNESS = 0.8f;
 const float BENDING_STIFFNESS = 0.7f;
 const float LONG_RANGE_STIFFNESS = 0.3f;
@@ -29,7 +30,7 @@ const Vector3f TEST_SPHERE_CENTER = Vector3f(0, -5, 0);
 const Vector3f TEST_PLANE_CENTER = Vector3f(0, -8.01f, 0);
 constexpr float TEST_SPHERE_RADIUS = 2.9f;
 constexpr float CLOTH_SPAN_X = 5;
-constexpr float CLOTH_SPAN_Y = 10;
+constexpr float CLOTH_SPAN_Y = 5;
 constexpr U32 CLOTH_DIV_X = 30;
 constexpr U32 CLOTH_DIV_Y = 30;
 constexpr U32 TEXTURE_MEMORY = 0x4000000; // 64 MB
@@ -46,7 +47,8 @@ constexpr U32 CURTAIN_ANCHORS = 5;
 constexpr float BASE_CURTAIN_STEP_SIZE = 5.0f;
 
 constexpr bool USE_MESH = false;
-constexpr bool USE_CURTAIN = true;
+constexpr bool USE_CURTAIN = false;
+constexpr bool SHEHZAN = false;
 
 } // namespace
 
@@ -57,7 +59,7 @@ AppRenderer::AppRenderer()
     m_localAllocator(m_mainBuffer, 0x400'0000),
     m_drawableAllocator(m_mainBuffer, 0x400'0000),
     m_camera(1280, 720),
-    m_clothPlane(ClothTriangulation::Regular, Vector2f(-CLOTH_SPAN_X, -CLOTH_SPAN_Y), Vector2f(CLOTH_SPAN_X, CLOTH_SPAN_Y), 20.0f,
+    m_clothPlane(ClothTriangulation::Regular, Vector2f(-CLOTH_SPAN_X, -CLOTH_SPAN_Y), Vector2f(CLOTH_SPAN_X, CLOTH_SPAN_Y), 5.0f,
                  Vector2u(CLOTH_DIV_X, CLOTH_DIV_Y), m_localAllocator),
     m_clothMesh("CustomCloth2", AssetLocation::Meshes, m_localAllocator, log_AppRenderer),
     m_curtainTransforms(ContainerExtent{CURTAIN_ANCHORS}, m_mainAllocator) {
@@ -166,6 +168,14 @@ void AppRenderer::Initialize() {
   m_planeUBO.m_invProj = m_camera.GetProjMatrix().Inverse();
   m_planeUBO.m_modelInvTranspose = m_planeUBO.m_model.Inverse().Transpose();
 
+  m_shehzanUBO = {};
+  m_shehzanUBO.m_model = Matrix4f::FromTranslationVector(Vector3f(0, 3, -6)) * Matrix4f::FromRotationMatrix(Matrix4f::RotationX(-Math::PI_OVER2));
+  m_shehzanUBO.m_viewProj = m_camera.GetViewProjMatrix();
+  m_shehzanUBO.m_view = m_camera.GetViewMatrix();
+  m_shehzanUBO.m_invViewProj = m_camera.GetInvViewProjMatrix();
+  m_shehzanUBO.m_invProj = m_camera.GetProjMatrix().Inverse();
+  m_shehzanUBO.m_modelInvTranspose = m_planeUBO.m_model.Inverse().Transpose();
+
   LightData lightData  = {};
   lightData.m_lightPos = Vector4f(0.0f, 15.0f, 20.0f, 1.0f);
 
@@ -262,6 +272,16 @@ void AppRenderer::Initialize() {
   const U32 PLANE_PIXEL_SHADER_ID = shaderRequirements.AddShader({
     ShaderStage::Pixel, "ShadingPass_Plane.ps", AssetLocation::Shaders
     });
+  
+  // NOLINTNEXTLINE
+  const U32 SHEHZAN_VERTEX_SHADER_ID = shaderRequirements.AddShader({
+    ShaderStage::Vertex, "ShadingPass_Shehzan.vs", AssetLocation::Shaders
+    });
+
+  // NOLINTNEXTLINE
+  const U32 SHEHZAN_PIXEL_SHADER_ID = shaderRequirements.AddShader({
+    ShaderStage::Pixel, "ShadingPass_Shehzan.ps", AssetLocation::Shaders
+    });
 
   const U32 COMPUTE_NORMALS_SHADER_ID           = shaderRequirements.AddShader({
     ShaderStage::Compute, "NormalsPass_Normalize.cs", AssetLocation::Shaders
@@ -271,8 +291,12 @@ void AppRenderer::Initialize() {
 
   if (USE_MESH)
   {
+    const auto& aliases = static_cast<ClothMesh*>(p_activeMesh)->GetVertexAliases(); // NOLINT
     for (U32 idx = 4095; idx < 4159u; ++idx) {
       p_activeMesh->SetAnchorOnIndex(idx);
+
+      U32 correctId = aliases[idx] != -1 ? aliases[idx] : idx;
+      vertexModelMatrixIdBuffer[correctId] = 0;
     }
 
     // p_activeMesh->SetAnchorOnIndex(263);
@@ -309,7 +333,7 @@ void AppRenderer::Initialize() {
   m_normalUBO.m_numVertices = p_activeMesh->GetVertexCount();
 
   RenderPassRequirements renderPassRequirements = RenderPassRequirements(0, 15 + (SOLVER_ITERATIONS * 2), 30, allocatorTemporary);
-  renderPassRequirements.m_maxPools             = 10 + (SOLVER_ITERATIONS * 2);
+  renderPassRequirements.m_maxPools             = 15 + (SOLVER_ITERATIONS * 2);
 
   const U32 COMPUTE_VERTEX_BUFFER = renderPassRequirements.AddBuffer({
     U32(sizeof(Vector3f)) * U32(p_activeMesh->GetVertexCount()), U32(sizeof(Vector3f))
@@ -596,6 +620,14 @@ void AppRenderer::Initialize() {
   const U32 floorRoughness = m_textureManager->Load("Textures/Concrete10_rgh.jpg");
   const TextureDesc* floorRoughnessDesc = m_textureManager->GetInfo(floorRoughness);
   VERIFY_TRUE(log_AppRenderer, floorRoughnessDesc != nullptr, "floorRoughnessDesc was Null");
+  
+  U32 shehzanId = 0;
+  const TextureDesc* shehzanDesc = nullptr;
+  if (SHEHZAN && USE_CURTAIN) {
+    shehzanId = m_textureManager->Load("Textures/shehzan.jpg");
+    shehzanDesc = m_textureManager->GetInfo(shehzanId);
+    VERIFY_TRUE(log_AppRenderer, shehzanDesc != nullptr, "shehzanDesc was Null");
+  }
 
   const auto clothParticleMass = reinterpret_cast<const U8*>(p_activeMesh->GetVertexInverseMass().Data()); // NOLINT
   m_renderer->BindBufferTarget(COMPUTE_VERTEX_INV_MASS, clothParticleMass);
@@ -777,6 +809,7 @@ void AppRenderer::Initialize() {
 
   IcoSphere sphere(4);
   Plane plane(Vector2f(-150, -150), Vector2f(150, 150), Vector2u(10, 10), Vector2u(10, 10));
+  Plane shehzanPlane(Vector2f(-5, -5), Vector2f(5, 5), Vector2u(2, 2), Vector2u(1, 1));
 
   DrawablePoolCreateInfo poolInfo = {allocatorTemporary};
   poolInfo.m_byteSize             = sphere.TotalDataSize() + p_activeMesh->TotalDataSize() + TEXTURE_MEMORY + 0x400000;
@@ -821,6 +854,7 @@ void AppRenderer::Initialize() {
   const auto uboDataBuffer   = reinterpret_cast<U8*>(&m_clothUBO);  // NOLINT
   const auto sphereUBO       = reinterpret_cast<U8*>(&m_sphereUBO); // NOLINT
   const auto planeUBO        = reinterpret_cast<U8*>(&m_planeUBO); // NOLINT
+  const auto shehzanUBO        = reinterpret_cast<U8*>(&m_shehzanUBO); // NOLINT
   const auto lightDataBuffer = reinterpret_cast<U8*>(&lightData);   // NOLINT
   // Create Drawable from Pool
   DrawableCreateInfo createInfo = {};
@@ -864,6 +898,12 @@ void AppRenderer::Initialize() {
    planeDrawableInfo.m_indexCount = plane.GetIndexCount();
    planeDrawableInfo.m_instanceCount = 1;
    planeDrawableInfo.m_indexType = plane.GetIndexFormat();
+   
+   DrawableCreateInfo shehzanPlaneDrawableInfo = {};
+   shehzanPlaneDrawableInfo.m_vertexCount = shehzanPlane.GetVertexCount();
+   shehzanPlaneDrawableInfo.m_indexCount = shehzanPlane.GetIndexCount();
+   shehzanPlaneDrawableInfo.m_instanceCount = 1;
+   shehzanPlaneDrawableInfo.m_indexType = shehzanPlane.GetIndexFormat();
   
    DrawablePoolCreateInfo spherePoolInfo = {allocatorTemporary};
    spherePoolInfo.m_byteSize             = sphere.TotalDataSize() + 0x400000;
@@ -931,6 +971,44 @@ void AppRenderer::Initialize() {
    planePool.BindUniformData(planeId, UBO_SLOT, planeUBO, sizeof(SceneUBO));
    planePool.BindUniformData(planeId, LIGHT_SLOT, lightDataBuffer, sizeof(LightData));
 
+   if (SHEHZAN && USE_CURTAIN) {
+     DrawablePoolCreateInfo shehzanPoolInfo = { allocatorTemporary };
+     shehzanPoolInfo.m_byteSize = shehzanPlane.TotalDataSize() + 0x800000;
+     shehzanPoolInfo.m_numDrawables = 1;
+     shehzanPoolInfo.m_renderPasses = { {RENDER_PASS}, allocatorTemporary };
+     shehzanPoolInfo.m_drawType = DrawType::InstancedIndexed;
+
+     const auto SHEHZAN_VERTEX_SLOT = shehzanPoolInfo.AddInputSlot({
+       BufferUsageRate::PerVertex, {{"POSITION", shehzanPlane.GetVertexFormat()}}
+       });
+
+     const auto SHEHZAN_NORMAL_SLOT = shehzanPoolInfo.AddInputSlot({
+       BufferUsageRate::PerVertex, {{"NORMAL", shehzanPlane.GetNormalFormat()}}
+       });
+
+     const auto SHEHZAN_UV_SLOT = shehzanPoolInfo.AddInputSlot({
+       BufferUsageRate::PerVertex, {{"UV", shehzanPlane.GetUVFormat()}}
+       });
+
+     DrawablePool& shehzanPool = m_renderer->CreateDrawablePool(shehzanPoolInfo);
+     shehzanPool.AddShader(SHEHZAN_VERTEX_SHADER_ID);
+     shehzanPool.AddShader(SHEHZAN_PIXEL_SHADER_ID);
+
+     shehzanPool.BindSampler(SAMPLER_SLOT, floorSampler);
+     shehzanPool.BindTextureData(TEXTURE_SLOT, *shehzanDesc, m_textureManager->GetData(shehzanId));
+
+     const auto shehzanPlaneId = shehzanPool.CreateDrawable(shehzanPlaneDrawableInfo);
+     shehzanPool.BindVertexData(shehzanPlaneId, SHEHZAN_VERTEX_SLOT, shehzanPlane.VertexData(), shehzanPlane.VertexDataSize());
+     shehzanPool.BindVertexData(shehzanPlaneId, SHEHZAN_NORMAL_SLOT, shehzanPlane.NormalData(), shehzanPlane.NormalDataSize());
+     shehzanPool.BindVertexData(shehzanPlaneId, SHEHZAN_UV_SLOT, shehzanPlane.UVData(), shehzanPlane.UVDataSize());
+     shehzanPool.SetIndexData(shehzanPlaneId, shehzanPlane.IndexData(), shehzanPlane.IndexDataSize());
+     shehzanPool.BindUniformData(shehzanPlaneId, UBO_SLOT, shehzanUBO, sizeof(SceneUBO));
+     shehzanPool.BindUniformData(shehzanPlaneId, LIGHT_SLOT, lightDataBuffer, sizeof(LightData));
+
+     m_shehzanPool = &shehzanPool;
+     m_renderPass.m_shehzanId = shehzanPlaneId;
+   }
+
   m_renderPass.m_vertexSlot   = VERTEX_SLOT;
   m_renderPass.m_sceneUBOSlot = UBO_SLOT;
   m_renderPass.m_clothId      = clothId;
@@ -972,6 +1050,12 @@ void AppRenderer::WindowUpdate(float timeDelta) {
   m_planeUBO.m_invViewProj = m_camera.GetInvViewProjMatrix();
   m_planeUBO.m_invProj = m_camera.GetProjMatrix().Inverse();
   m_planeUBO.m_modelInvTranspose = m_planeUBO.m_model.Inverse().Transpose();
+  
+  m_shehzanUBO.m_view = m_camera.GetViewMatrix();
+  m_shehzanUBO.m_viewProj = m_camera.GetViewProjMatrix();
+  m_shehzanUBO.m_invViewProj = m_camera.GetInvViewProjMatrix();
+  m_shehzanUBO.m_invProj = m_camera.GetProjMatrix().Inverse();
+  m_shehzanUBO.m_modelInvTranspose = m_shehzanUBO.m_model.Inverse().Transpose();
 
   m_computeUBO.m_timeDelta = timeDelta;
 
@@ -984,13 +1068,14 @@ void AppRenderer::WindowUpdate(float timeDelta) {
     }
   }
   else {
-    m_computeUBO.m_clothModelMatrix[0] = m_clothTransform.GetTransform().Transpose();
-    m_computeUBO.m_clothModelMatrix[1] = m_clothTransform.GetTransform().Transpose();
+    m_computeUBO.m_clothModelMatrix[0] = m_clothTransform.GetTransform();
+    m_computeUBO.m_clothModelMatrix[1] = m_clothTransform.GetTransform();
   }
 
   const auto uboDataBuffer    = reinterpret_cast<U8*>(&m_clothUBO);         // NOLINT
   const auto sphereDataBuffer = reinterpret_cast<U8*>(&m_sphereUBO);        // NOLINT
   const auto planeDataBuffer = reinterpret_cast<U8*>(&m_planeUBO);        // NOLINT
+  const auto shehzanUBOStart = reinterpret_cast<U8*>(&m_shehzanUBO);        // NOLINT
   const auto computeUBOStart  = reinterpret_cast<const U8*>(&m_computeUBO); // NOLINT
 
   for (auto& computePool : m_computePools) {
@@ -1019,6 +1104,12 @@ void AppRenderer::WindowUpdate(float timeDelta) {
    m_planePool->UpdateUniformData(m_renderPass.m_planeId, m_renderPass.m_sceneUBOSlot, planeDataBuffer,
      sizeof(SceneUBO));
    m_planePool->SubmitUpdates();
+
+   if (SHEHZAN && USE_CURTAIN) {
+     m_shehzanPool->BeginUpdates();
+     m_shehzanPool->UpdateUniformData(m_renderPass.m_shehzanId, m_renderPass.m_sceneUBOSlot, shehzanUBOStart, sizeof(SceneUBO));
+     m_shehzanPool->SubmitUpdates();
+   }
 
   m_renderer->RenderFrame();
 }

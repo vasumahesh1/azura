@@ -30,6 +30,9 @@ set(
 
     "${PROJECT_SOURCE_DIR}/Shaders/ShadingPass_Plane.ps.slang|PS"
     "${PROJECT_SOURCE_DIR}/Shaders/ShadingPass_Plane.vs.slang|VS"
+
+    "${PROJECT_SOURCE_DIR}/Shaders/ShadingPass_Shehzan.ps.slang|PS"
+    "${PROJECT_SOURCE_DIR}/Shaders/ShadingPass_Shehzan.vs.slang|VS"
 )
 
 add_executable(ClothSim ${SOURCES})
@@ -67,6 +70,8 @@ AzuraAddFilesAsDependency(
     "Textures/Concrete10_nrm.jpg"
     "Textures/Concrete10_rgh.jpg"
     "Textures/Concrete10_AO.jpg"
+
+    "Textures/shehzan.jpg"
 )
 
 AzuraAddLoggingSupport(ClothSim 50)
