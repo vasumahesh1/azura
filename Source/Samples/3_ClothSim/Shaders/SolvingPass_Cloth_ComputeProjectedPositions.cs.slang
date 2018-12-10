@@ -48,8 +48,10 @@ void main(
 		modelMatrix = computeUBOBlock.modelMatrix[modelIdx];
 	}
 
-	// TODO(daedalus5): Check here for Frame constraintCount
-	// computeUBOBlock.frameCount;
+
+	uint time = computeUBOBlock.frameCount;
+	// float3 WIND = {0, 0, 0};
+	float3 WIND = {0, 0, 10 * (1 + cos(0.033 * time)) * (1 + sin(0.013 * time))};
 
 	float3 projectedPos;
 	if (invMass < EPSILON) // ANCHORS
@@ -58,7 +60,7 @@ void main(
 		projectedPos = mul(modelMatrix, float4(vertexPosition, 1.0)).xyz;
 	}
 	else {
-		const float3 updatedVelocity = 0.98 * (clothDataBlock.velocities[threadIdx] + timeDelta * GRAVITY);
+		const float3 updatedVelocity = 0.98 * (clothDataBlock.velocities[threadIdx] + timeDelta * (GRAVITY + WIND));
 		// Projected Pos of that Vertex
 		projectedPos = vertexPosition + updatedVelocity * timeDelta;
 	}
