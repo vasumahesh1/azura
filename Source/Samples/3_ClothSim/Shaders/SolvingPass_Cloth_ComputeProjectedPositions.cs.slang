@@ -50,8 +50,8 @@ void main(
 
 
 	uint time = computeUBOBlock.frameCount;
-	// float3 WIND = {0, 0, 0};
-	float3 WIND = {0, 0, 10 * (1 + cos(0.033 * time)) * (1 + sin(0.013 * time))};
+	float3 WIND = {0, 0, 0};
+	// float3 WIND = {0, 0, 10 * (1 + cos(0.033 * time)) * (1 + sin(0.013 * time))};
 
 	float3 projectedPos;
 	if (invMass < EPSILON) // ANCHORS

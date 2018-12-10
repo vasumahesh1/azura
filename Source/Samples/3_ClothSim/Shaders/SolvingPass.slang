@@ -4,7 +4,7 @@ static const uint SOLVER_ITERATIONS = 2;
 static const uint MAX_VERTICES_PER_BIN = 32;
 
 static const float EPSILON = 0.00001;
-static const float POINT_RADIUS = 0.1;
+static const float POINT_RADIUS = 0.15;
 
 static const uint CLOTH_GRID_X = 20;
 static const uint CLOTH_GRID_Y = 20;

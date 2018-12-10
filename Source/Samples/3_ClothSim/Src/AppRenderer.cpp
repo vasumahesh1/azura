@@ -41,7 +41,7 @@ constexpr U32 ANCHOR_IDX_3 = CLOTH_DIV_Y;
 constexpr U32 ANCHOR_IDX_4 = ANCHOR_IDX_2 + CLOTH_DIV_Y;
 
 constexpr U32 CLOTH_UV_SCALE_X = 2;
-constexpr U32 CLOTH_UV_SCALE_Y = 3;
+constexpr U32 CLOTH_UV_SCALE_Y = 2;
 
 constexpr U32 MAX_GRID_RESOLUTION_X = 20;
 constexpr U32 MAX_GRID_RESOLUTION_Y = 20;
