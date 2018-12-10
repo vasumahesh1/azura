@@ -31,11 +31,17 @@ const Vector3f TEST_PLANE_CENTER = Vector3f(0, -8.01f, 0);
 constexpr float TEST_SPHERE_RADIUS = 2.9f;
 constexpr float CLOTH_SPAN_X = 5;
 constexpr float CLOTH_SPAN_Y = 5;
+constexpr float CLOTH_WORLD_HEIGHT = 5.0f;
 constexpr U32 CLOTH_DIV_X = 30;
 constexpr U32 CLOTH_DIV_Y = 30;
 constexpr U32 TEXTURE_MEMORY = 0x4000000; // 64 MB
 constexpr U32 ANCHOR_IDX_1 = 0;
 constexpr U32 ANCHOR_IDX_2 = (CLOTH_DIV_Y * (CLOTH_DIV_X + 1));
+constexpr U32 ANCHOR_IDX_3 = CLOTH_DIV_Y;
+constexpr U32 ANCHOR_IDX_4 = ANCHOR_IDX_2 + CLOTH_DIV_Y;
+
+constexpr U32 CLOTH_UV_SCALE_X = 2;
+constexpr U32 CLOTH_UV_SCALE_Y = 3;
 
 constexpr U32 MAX_GRID_RESOLUTION_X = 20;
 constexpr U32 MAX_GRID_RESOLUTION_Y = 20;
@@ -43,12 +49,21 @@ constexpr U32 MAX_GRID_RESOLUTION_Z = 20;
 constexpr U32 MAX_VERTICES_PER_BIN = 32;
 constexpr U32 MAX_SELF_POINT_TRIANGLE_COLLISIONS = 2048;
 constexpr U32 MAX_ANCHOR_POINTS = 128;
-constexpr U32 CURTAIN_ANCHORS = 5;
+constexpr U32 CURTAIN_ANCHORS = 6;
 constexpr float BASE_CURTAIN_STEP_SIZE = 5.0f;
+
+constexpr bool RENDER_FLOOR_PLANE = true;
+constexpr bool RENDER_SPHERE = false;
 
 constexpr bool USE_MESH = false;
 constexpr bool USE_CURTAIN = false;
 constexpr bool SHEHZAN = false;
+
+constexpr bool SCENE_ANGULAR_VELOCITY = false;
+const Vector3f ANGULAR_VELOCITY = Vector3f(0, 4.5f * Math::PI, 0);
+const Vector3f CLOTH_ORIGIN = Vector3f(0, CLOTH_WORLD_HEIGHT, 0);
+
+constexpr bool SCENE_TWIST = false;
 
 } // namespace
 
@@ -59,10 +74,10 @@ AppRenderer::AppRenderer()
     m_localAllocator(m_mainBuffer, 0x400'0000),
     m_drawableAllocator(m_mainBuffer, 0x400'0000),
     m_camera(1280, 720),
-    m_clothPlane(ClothTriangulation::Regular, Vector2f(-CLOTH_SPAN_X, -CLOTH_SPAN_Y), Vector2f(CLOTH_SPAN_X, CLOTH_SPAN_Y), 5.0f,
-                 Vector2u(CLOTH_DIV_X, CLOTH_DIV_Y), m_localAllocator),
-    m_clothMesh("CustomCloth2", AssetLocation::Meshes, m_localAllocator, log_AppRenderer),
-    m_curtainTransforms(ContainerExtent{CURTAIN_ANCHORS}, m_mainAllocator) {
+    m_curtainTransforms(ContainerExtent{CURTAIN_ANCHORS}, m_mainAllocator),
+    m_clothPlane(ClothTriangulation::Regular, Vector2f(-CLOTH_SPAN_X, -CLOTH_SPAN_Y), Vector2f(CLOTH_SPAN_X, CLOTH_SPAN_Y), CLOTH_WORLD_HEIGHT,
+                 Vector2u(CLOTH_DIV_X, CLOTH_DIV_Y), Vector2u(CLOTH_UV_SCALE_X, CLOTH_UV_SCALE_Y), m_localAllocator),
+    m_clothMesh("CustomCloth2", AssetLocation::Meshes, m_localAllocator, log_AppRenderer) {
 }
 
 void AppRenderer::Initialize() {
@@ -98,7 +113,7 @@ void AppRenderer::Initialize() {
   HEAP_ALLOCATOR(Temporary, Memory::MonotonicAllocator, 0x400'0000);
   m_window = RenderSystem::CreateApplicationWindow("PBD Cloth Simulation", 1280, 720);
 
-  m_window->SetUpdateRate(UpdateRate::Rate60);
+  m_window->SetUpdateRate(UpdateRate::Rate120);
 
   m_window->SetUpdateCallback([this](float deltaTime)
   {
@@ -109,6 +124,19 @@ void AppRenderer::Initialize() {
   {
     m_camera.OnKeyEvent(evt);
     m_clothTransform.OnKeyEvent(evt);
+
+    if (evt.m_internalType == KeyEventType::KeyPress && evt.m_key == KeyboardKey::U) {
+      m_rotateFactor = 1;
+    }
+    else if (evt.m_internalType == KeyEventType::KeyPress && evt.m_key == KeyboardKey::I) {
+      m_rotateFactor = -1;
+    }
+    else if (evt.m_internalType == KeyEventType::KeyRelease && evt.m_key == KeyboardKey::U) {
+      m_rotateFactor = 0;
+    }
+    else if (evt.m_internalType == KeyEventType::KeyRelease && evt.m_key == KeyboardKey::I) {
+      m_rotateFactor = 0;
+    }
 
     if (USE_CURTAIN)
     {
@@ -133,31 +161,31 @@ void AppRenderer::Initialize() {
   VERIFY_TRUE(log_AppRenderer, m_window->Initialize(), "Cannot Initialize Window");
 
   ApplicationInfo appInfo;
-  appInfo.m_name    = "PBD Cloth Simulation";
+  appInfo.m_name = "PBD Cloth Simulation";
   appInfo.m_version = Version(1, 0, 0);
 
   DeviceRequirements requirements;
-  requirements.m_discreteGPU   = true;
-  requirements.m_float64       = false;
-  requirements.m_int64         = false;
+  requirements.m_discreteGPU = true;
+  requirements.m_float64 = false;
+  requirements.m_int64 = false;
   requirements.m_transferQueue = false;
 
   m_camera.Recompute();
 
-  m_clothUBO                     = {};
-  m_clothUBO.m_model             = m_clothTransform.GetTransform();
-  m_clothUBO.m_view              = m_camera.GetViewMatrix();
-  m_clothUBO.m_viewProj          = m_camera.GetViewProjMatrix();
-  m_clothUBO.m_invViewProj       = m_camera.GetInvViewProjMatrix();
-  m_clothUBO.m_invProj           = m_camera.GetProjMatrix().Inverse();
+  m_clothUBO = {};
+  m_clothUBO.m_model = m_clothTransform.GetTransform();
+  m_clothUBO.m_view = m_camera.GetViewMatrix();
+  m_clothUBO.m_viewProj = m_camera.GetViewProjMatrix();
+  m_clothUBO.m_invViewProj = m_camera.GetInvViewProjMatrix();
+  m_clothUBO.m_invProj = m_camera.GetProjMatrix().Inverse();
   m_clothUBO.m_modelInvTranspose = m_clothUBO.m_model.Inverse().Transpose();
 
-  m_sphereUBO                     = {};
-  m_sphereUBO.m_model             = Matrix4f::FromTranslationVector(TEST_SPHERE_CENTER) * Matrix4f::FromScaleVector(Vector3f(TEST_SPHERE_RADIUS, TEST_SPHERE_RADIUS, TEST_SPHERE_RADIUS));
-  m_sphereUBO.m_viewProj          = m_camera.GetViewProjMatrix();
-  m_sphereUBO.m_view              = m_camera.GetViewMatrix();
-  m_sphereUBO.m_invViewProj       = m_camera.GetInvViewProjMatrix();
-  m_sphereUBO.m_invProj           = m_camera.GetProjMatrix().Inverse();
+  m_sphereUBO = {};
+  m_sphereUBO.m_model = Matrix4f::FromTranslationVector(TEST_SPHERE_CENTER) * Matrix4f::FromScaleVector(Vector3f(TEST_SPHERE_RADIUS, TEST_SPHERE_RADIUS, TEST_SPHERE_RADIUS));
+  m_sphereUBO.m_viewProj = m_camera.GetViewProjMatrix();
+  m_sphereUBO.m_view = m_camera.GetViewMatrix();
+  m_sphereUBO.m_invViewProj = m_camera.GetInvViewProjMatrix();
+  m_sphereUBO.m_invProj = m_camera.GetProjMatrix().Inverse();
   m_sphereUBO.m_modelInvTranspose = m_sphereUBO.m_model.Inverse().Transpose();
 
   m_planeUBO = {};
@@ -169,31 +197,31 @@ void AppRenderer::Initialize() {
   m_planeUBO.m_modelInvTranspose = m_planeUBO.m_model.Inverse().Transpose();
 
   m_shehzanUBO = {};
-  m_shehzanUBO.m_model = Matrix4f::FromTranslationVector(Vector3f(0, 3, -6)) * Matrix4f::FromRotationMatrix(Matrix4f::RotationX(-Math::PI_OVER2));
+  m_shehzanUBO.m_model = Matrix4f::FromTranslationVector(Vector3f(0, 3, -8)) * Matrix4f::FromRotationMatrix(Matrix4f::RotationX(-Math::PI_OVER2));
   m_shehzanUBO.m_viewProj = m_camera.GetViewProjMatrix();
   m_shehzanUBO.m_view = m_camera.GetViewMatrix();
   m_shehzanUBO.m_invViewProj = m_camera.GetInvViewProjMatrix();
   m_shehzanUBO.m_invProj = m_camera.GetProjMatrix().Inverse();
   m_shehzanUBO.m_modelInvTranspose = m_planeUBO.m_model.Inverse().Transpose();
 
-  LightData lightData  = {};
+  LightData lightData = {};
   lightData.m_lightPos = Vector4f(0.0f, 15.0f, 20.0f, 1.0f);
 
   // TODO(vasumahesh1):[Q]:Allocator?
   const ApplicationRequirements applicationRequirements = {};
 
   TextureRequirements textureRequirements = {};
-  textureRequirements.m_maxCount          = 15;
-  textureRequirements.m_poolSize          = TEXTURE_MEMORY;
+  textureRequirements.m_maxCount = 15;
+  textureRequirements.m_poolSize = TEXTURE_MEMORY;
 
   DescriptorRequirements descriptorRequirements = DescriptorRequirements(10, 6, allocatorTemporary);
   // SET 0
   const U32 UBO_SLOT = descriptorRequirements.AddDescriptor({
     DescriptorType::UniformBuffer, ShaderStage::Vertex
-  });
+    });
   const U32 LIGHT_SLOT = descriptorRequirements.AddDescriptor({
     DescriptorType::UniformBuffer, ShaderStage::Vertex
-  });
+    });
 
   const U32 SAMPLER_SLOT = descriptorRequirements.AddDescriptor({ DescriptorType::Sampler, ShaderStage::Pixel });
   const U32 TEXTURE_SLOT = descriptorRequirements.AddDescriptor({ DescriptorType::SampledImage, ShaderStage::Pixel });
@@ -204,75 +232,81 @@ void AppRenderer::Initialize() {
   // SET 0 Compute
   m_computePass.m_computeUBOSlot = descriptorRequirements.AddDescriptor({
     DescriptorType::UniformBuffer, ShaderStage::Compute
-  });
+    });
 
   // SET 0 Normal Compute
   m_normalsPass.m_uboSlot = descriptorRequirements.AddDescriptor({
     DescriptorType::UniformBuffer, ShaderStage::Compute
     });
 
-  const U32 UBO_SET   = descriptorRequirements.AddSet({UBO_SLOT});
-  const U32 LIGHT_SET = descriptorRequirements.AddSet({LIGHT_SLOT});
-  const U32 SAMPLER_SET = descriptorRequirements.AddSet({SAMPLER_SLOT});
-  const U32 TEXTURE_SET = descriptorRequirements.AddSet({TEXTURE_SLOT, NORMALS_SLOT, ROUGHNESS_SLOT, AO_SLOT});
+  const U32 UBO_SET = descriptorRequirements.AddSet({ UBO_SLOT });
+  const U32 LIGHT_SET = descriptorRequirements.AddSet({ LIGHT_SLOT });
+  const U32 SAMPLER_SET = descriptorRequirements.AddSet({ SAMPLER_SLOT });
+  const U32 TEXTURE_SET = descriptorRequirements.AddSet({ TEXTURE_SLOT, NORMALS_SLOT, ROUGHNESS_SLOT, AO_SLOT });
 
-  const U32 COMPUTE_UBO_SET = descriptorRequirements.AddSet({m_computePass.m_computeUBOSlot});
-  const U32 COMPUTE_NORMALS_UBO_SET = descriptorRequirements.AddSet({m_normalsPass.m_uboSlot});
+  const U32 COMPUTE_UBO_SET = descriptorRequirements.AddSet({ m_computePass.m_computeUBOSlot });
+  const U32 COMPUTE_NORMALS_UBO_SET = descriptorRequirements.AddSet({ m_normalsPass.m_uboSlot });
 
   ShaderRequirements shaderRequirements = ShaderRequirements(15, allocatorTemporary);
   // const U32 MAIN_COMPUTE_SHADER_ID           = shaderRequirements.AddShader({
   //   ShaderStage::Compute, "SolvingPass_Cloth.cs", AssetLocation::Shaders
   // });
 
-  const U32 COMPUTE_1_PBD           = shaderRequirements.AddShader({
+  const U32 COMPUTE_1_PBD = shaderRequirements.AddShader({
       ShaderStage::Compute, "SolvingPass_Cloth_ComputeProjectedPositions.cs", AssetLocation::Shaders
     });
-  
-  const U32 COMPUTE_SELF_COLLSIONS           = shaderRequirements.AddShader({
+
+  const U32 COMPUTE_SELF_COLLSIONS = shaderRequirements.AddShader({
       ShaderStage::Compute, "SolvingPass_Cloth_GenerateSelfCollisions.cs", AssetLocation::Shaders
     });
-  
+
   const U32 COMPUTE_2_BINNING_INIT = shaderRequirements.AddShader({
       ShaderStage::Compute, "SolvingPass_Cloth_BinningInit.cs", AssetLocation::Shaders
     });
-  
+
   const U32 COMPUTE_2_BINNING = shaderRequirements.AddShader({
       ShaderStage::Compute, "SolvingPass_Cloth_Binning.cs", AssetLocation::Shaders
     });
 
-  const U32 COMPUTE_2_PBD           = shaderRequirements.AddShader({
+  const U32 COMPUTE_2_PBD = shaderRequirements.AddShader({
     ShaderStage::Compute, "SolvingPass_Cloth_ApplyConstraints.cs", AssetLocation::Shaders
     });
 
-  const U32 COMPUTE_3_PBD           = shaderRequirements.AddShader({
+  const U32 COMPUTE_3_PBD = shaderRequirements.AddShader({
     ShaderStage::Compute, "SolvingPass_Cloth_ApplyDelta.cs", AssetLocation::Shaders
     });
 
-  const U32 COMPUTE_4_PBD           = shaderRequirements.AddShader({
+  const U32 COMPUTE_4_PBD = shaderRequirements.AddShader({
     ShaderStage::Compute, "SolvingPass_Cloth_ComputePositions.cs", AssetLocation::Shaders
     });
 
   const U32 VERTEX_SHADER_ID = shaderRequirements.AddShader({
     ShaderStage::Vertex, "ShadingPass_Cloth.vs", AssetLocation::Shaders
-  });
+    });
   const U32 PIXEL_SHADER_ID = shaderRequirements.AddShader({
     ShaderStage::Pixel, "ShadingPass_Cloth.ps", AssetLocation::Shaders
-  });
+    });
 
+  // NOLINTNEXTLINE
   const U32 SPHERE_VERTEX_SHADER_ID = shaderRequirements.AddShader({
     ShaderStage::Vertex, "ShadingPass_Sphere.vs", AssetLocation::Shaders
     });
+
+  // NOLINTNEXTLINE
   const U32 SPHERE_PIXEL_SHADER_ID = shaderRequirements.AddShader({
     ShaderStage::Pixel, "ShadingPass_Sphere.ps", AssetLocation::Shaders
     });
 
+  // NOLINTNEXTLINE
   const U32 PLANE_VERTEX_SHADER_ID = shaderRequirements.AddShader({
     ShaderStage::Vertex, "ShadingPass_Plane.vs", AssetLocation::Shaders
     });
+
+  // NOLINTNEXTLINE
   const U32 PLANE_PIXEL_SHADER_ID = shaderRequirements.AddShader({
     ShaderStage::Pixel, "ShadingPass_Plane.ps", AssetLocation::Shaders
     });
-  
+
   // NOLINTNEXTLINE
   const U32 SHEHZAN_VERTEX_SHADER_ID = shaderRequirements.AddShader({
     ShaderStage::Vertex, "ShadingPass_Shehzan.vs", AssetLocation::Shaders
@@ -283,7 +317,7 @@ void AppRenderer::Initialize() {
     ShaderStage::Pixel, "ShadingPass_Shehzan.ps", AssetLocation::Shaders
     });
 
-  const U32 COMPUTE_NORMALS_SHADER_ID           = shaderRequirements.AddShader({
+  const U32 COMPUTE_NORMALS_SHADER_ID = shaderRequirements.AddShader({
     ShaderStage::Compute, "NormalsPass_Normalize.cs", AssetLocation::Shaders
     });
 
@@ -305,7 +339,7 @@ void AppRenderer::Initialize() {
   {
     if (USE_CURTAIN)
     {
-      const U32 stepSize = U32(CLOTH_DIV_X / (CURTAIN_ANCHORS - 1)) * (CLOTH_DIV_Y + 1);
+      const U32 stepSize = U32((CLOTH_DIV_X + 1) / (CURTAIN_ANCHORS - 1)) * (CLOTH_DIV_Y + 1);
       for (U32 idx = 0; idx < CURTAIN_ANCHORS; idx++)
       {
         const U32 anchorIdx = idx * stepSize;
@@ -315,11 +349,26 @@ void AppRenderer::Initialize() {
     }
     else
     {
-      p_activeMesh->SetAnchorOnIndex(ANCHOR_IDX_1);
-      p_activeMesh->SetAnchorOnIndex(ANCHOR_IDX_2);
+      if (!SCENE_ANGULAR_VELOCITY && !SCENE_TWIST) {
+        p_activeMesh->SetAnchorOnIndex(ANCHOR_IDX_1);
+        p_activeMesh->SetAnchorOnIndex(ANCHOR_IDX_2);
 
-      vertexModelMatrixIdBuffer[ANCHOR_IDX_1] = 0;
-      vertexModelMatrixIdBuffer[ANCHOR_IDX_2] = 1;
+        vertexModelMatrixIdBuffer[ANCHOR_IDX_1] = 0;
+        vertexModelMatrixIdBuffer[ANCHOR_IDX_2] = 1;
+      }
+
+      if (SCENE_TWIST)
+      {
+        p_activeMesh->SetAnchorOnIndex(ANCHOR_IDX_1);
+        p_activeMesh->SetAnchorOnIndex(ANCHOR_IDX_2);
+        p_activeMesh->SetAnchorOnIndex(ANCHOR_IDX_3);
+        p_activeMesh->SetAnchorOnIndex(ANCHOR_IDX_4);
+
+        vertexModelMatrixIdBuffer[ANCHOR_IDX_1] = 0;
+        vertexModelMatrixIdBuffer[ANCHOR_IDX_2] = 0;
+        vertexModelMatrixIdBuffer[ANCHOR_IDX_3] = 1;
+        vertexModelMatrixIdBuffer[ANCHOR_IDX_4] = 1;
+      }
     }
   }
 
@@ -327,25 +376,26 @@ void AppRenderer::Initialize() {
   const auto& clothDistanceConstraints = solvingView.GetDistanceConstraints();
   const auto& clothLongRangeConstraints = solvingView.GetLongRangeConstraints();
   const auto& clothBendingConstraints = solvingView.GetBendingConstraints();
+  const auto& clothDataSet = solvingView.GetDataSet();
 
   m_normalUBO = {};
   m_normalUBO.m_numTriangles = p_activeMesh->GetIndexCount() / 3;
   m_normalUBO.m_numVertices = p_activeMesh->GetVertexCount();
 
   RenderPassRequirements renderPassRequirements = RenderPassRequirements(0, 15 + (SOLVER_ITERATIONS * 2), 30, allocatorTemporary);
-  renderPassRequirements.m_maxPools             = 15 + (SOLVER_ITERATIONS * 2);
+  renderPassRequirements.m_maxPools = 15 + (SOLVER_ITERATIONS * 2);
 
   const U32 COMPUTE_VERTEX_BUFFER = renderPassRequirements.AddBuffer({
     U32(sizeof(Vector3f)) * U32(p_activeMesh->GetVertexCount()), U32(sizeof(Vector3f))
-  });
+    });
 
   const U32 COMPUTE_PROJECTION_BUFFER = renderPassRequirements.AddBuffer({
     U32(sizeof(Vector3f)) * U32(p_activeMesh->GetVertexCount()), U32(sizeof(Vector3f))
-  });
+    });
 
   const U32 COMPUTE_VERTEX_VELOCITY = renderPassRequirements.AddBuffer({
     U32(sizeof(Vector3f)) * U32(p_activeMesh->GetVertexCount()), U32(sizeof(Vector3f))
-  });
+    });
 
   const U32 COMPUTE_VERTEX_INV_MASS = renderPassRequirements.AddBuffer({
     U32(sizeof(float)) * U32(p_activeMesh->GetVertexCount()), U32(sizeof(float))
@@ -353,19 +403,19 @@ void AppRenderer::Initialize() {
 
   const U32 COMPUTE_VERTEX_CONSTRAINT_COUNT = renderPassRequirements.AddBuffer({
     U32(sizeof(U32)) * U32(p_activeMesh->GetVertexCount()), U32(sizeof(U32))
-  });
+    });
 
   const U32 COMPUTE_VERTEX_DELTAX = renderPassRequirements.AddBuffer({
     U32(sizeof(U32)) * U32(p_activeMesh->GetVertexCount()), U32(sizeof(U32))
-  });
+    });
 
   const U32 COMPUTE_VERTEX_DELTAY = renderPassRequirements.AddBuffer({
     U32(sizeof(U32)) * U32(p_activeMesh->GetVertexCount()), U32(sizeof(U32))
-  });
+    });
 
   const U32 COMPUTE_VERTEX_DELTAZ = renderPassRequirements.AddBuffer({
     U32(sizeof(U32)) * U32(p_activeMesh->GetVertexCount()), U32(sizeof(U32))
-  });
+    });
 
   const U32 DISTANCE_CONSTRAINTS_BUFFER = renderPassRequirements.AddBuffer({
     U32(sizeof(DistanceConstraint)) * U32(clothDistanceConstraints.GetSize()), U32(sizeof(DistanceConstraint))
@@ -382,15 +432,15 @@ void AppRenderer::Initialize() {
   const U32 COMPUTE_INDEX_BUFFER = renderPassRequirements.AddBuffer({
     U32(sizeof(U32)) * U32(p_activeMesh->GetIndexCount()), U32(sizeof(U32))
     });
-  
+
   const U32 COMPUTE_VERTEX_TANX = renderPassRequirements.AddBuffer({
     U32(sizeof(U32)) * U32(p_activeMesh->GetVertexCount()), U32(sizeof(U32))
     });
-  
+
   const U32 COMPUTE_VERTEX_TANY = renderPassRequirements.AddBuffer({
     U32(sizeof(U32)) * U32(p_activeMesh->GetVertexCount()), U32(sizeof(U32))
     });
-  
+
   const U32 COMPUTE_VERTEX_TANZ = renderPassRequirements.AddBuffer({
     U32(sizeof(U32)) * U32(p_activeMesh->GetVertexCount()), U32(sizeof(U32))
     });
@@ -410,11 +460,11 @@ void AppRenderer::Initialize() {
   const U32 COMPUTE_GRID_VERTICES = renderPassRequirements.AddBuffer({
     U32(sizeof(U32) * MAX_VERTICES_PER_BIN * MAX_GRID_RESOLUTION_X * MAX_GRID_RESOLUTION_Y * MAX_GRID_RESOLUTION_Z), U32(sizeof(U32))
     });
-  
+
   const U32 COMPUTE_POINT_TRI_SELF_COLLISIONS_CONSTRAINT = renderPassRequirements.AddBuffer({
     U32(sizeof(SelfCollisionConstraint) * MAX_SELF_POINT_TRIANGLE_COLLISIONS), U32(sizeof(SelfCollisionConstraint))
     });
-  
+
   const U32 COMPUTE_VERTEX_MODEL_MATRICES = renderPassRequirements.AddBuffer({
     U32(sizeof(int) * U32(p_activeMesh->GetVertexCount())), U32(sizeof(int))
     });
@@ -434,8 +484,8 @@ void AppRenderer::Initialize() {
     ClearData{{0.0f, 0.0f, 0.0f, 1.0f}, 1.0f, 0},
     BlendState{},
     RenderPassType::Compute
-  });
-  
+    });
+
   m_computePass.m_passInitialize = renderPassRequirements.AddPass({
     PipelinePassCreateInfo::Shaders{},
     PipelinePassCreateInfo::InputTargets{},
@@ -451,8 +501,8 @@ void AppRenderer::Initialize() {
     ClearData{{0.0f, 0.0f, 0.0f, 1.0f}, 1.0f, 0},
     BlendState{},
     RenderPassType::Compute
-  });
-  
+    });
+
   m_computePass.m_passBinning = renderPassRequirements.AddPass({
     PipelinePassCreateInfo::Shaders{},
     PipelinePassCreateInfo::InputTargets{},
@@ -468,8 +518,8 @@ void AppRenderer::Initialize() {
     ClearData{{0.0f, 0.0f, 0.0f, 1.0f}, 1.0f, 0},
     BlendState{},
     RenderPassType::Compute
-  });
-  
+    });
+
   m_computePass.m_passSelfCollisions = renderPassRequirements.AddPass({
     PipelinePassCreateInfo::Shaders{},
     PipelinePassCreateInfo::InputTargets{},
@@ -485,7 +535,7 @@ void AppRenderer::Initialize() {
     ClearData{{0.0f, 0.0f, 0.0f, 1.0f}, 1.0f, 0},
     BlendState{},
     RenderPassType::Compute
-  });
+    });
 
   m_computePass.m_passItr1.reserve(SOLVER_ITERATIONS);
   m_computePass.m_passItr2.reserve(SOLVER_ITERATIONS);
@@ -568,19 +618,19 @@ void AppRenderer::Initialize() {
     PipelinePassCreateInfo::OutputBuffers{},                            // OUTPUT TARGETS
     PipelinePassCreateInfo::DescriptorSets{UBO_SET, LIGHT_SET, SAMPLER_SET, TEXTURE_SET},         // DESCRIPTORS
     ClearData{{0.1f, 0.1f, 0.1f, 1.0f}, 1.0f, 0}
-  });
+    });
 
   std::vector<Vector3f> zeroBufferData = std::vector<Vector3f>(p_activeMesh->GetVertexCount(), Vector3f(0.0f));
   std::vector<Vector3i> zeroIntVecData = std::vector<Vector3i>(p_activeMesh->GetVertexCount(), Vector3i(0));
-  std::vector<U32> zeroIntBuffer       = std::vector<U32>(p_activeMesh->GetVertexCount(), 0);
+  std::vector<U32> zeroIntBuffer = std::vector<U32>(p_activeMesh->GetVertexCount(), 0);
 
   const auto totalConstraints = U32(clothDistanceConstraints.GetSize() + clothBendingConstraints.GetSize() + clothLongRangeConstraints.GetSize());
 
   m_renderer = RenderSystem::CreateRenderer(appInfo, requirements, applicationRequirements,
-                                            m_window->GetSwapChainRequirements(), renderPassRequirements,
-                                            descriptorRequirements, shaderRequirements, m_mainAllocator,
-                                            m_drawableAllocator,
-                                            *m_window);
+    m_window->GetSwapChainRequirements(), renderPassRequirements,
+    descriptorRequirements, shaderRequirements, m_mainAllocator,
+    m_drawableAllocator,
+    *m_window);
 
   m_textureManager = RenderSystem::CreateTextureManager(textureRequirements);
 
@@ -616,11 +666,11 @@ void AppRenderer::Initialize() {
   const U32 floorAO = m_textureManager->Load("Textures/Concrete10_AO.jpg");
   const TextureDesc* floorAODesc = m_textureManager->GetInfo(floorAO);
   VERIFY_TRUE(log_AppRenderer, floorAODesc != nullptr, "floorAODesc was Null");
-  
+
   const U32 floorRoughness = m_textureManager->Load("Textures/Concrete10_rgh.jpg");
   const TextureDesc* floorRoughnessDesc = m_textureManager->GetInfo(floorRoughness);
   VERIFY_TRUE(log_AppRenderer, floorRoughnessDesc != nullptr, "floorRoughnessDesc was Null");
-  
+
   U32 shehzanId = 0;
   const TextureDesc* shehzanDesc = nullptr;
   if (SHEHZAN && USE_CURTAIN) {
@@ -670,8 +720,22 @@ void AppRenderer::Initialize() {
   m_renderer->BindBufferTarget(LONG_RANGE_CONSTRAINTS_BUFFER, lrConstraintStart);
   m_renderer->BindBufferTarget(BEND_CONSTRAINTS_BUFFER, bendConstraintStart);
 
-  const auto velocityStart = reinterpret_cast<const U8*>(zeroBufferData.data()); // NOLINT
-  m_renderer->BindBufferTarget(COMPUTE_VERTEX_VELOCITY, velocityStart);
+  if (!SCENE_ANGULAR_VELOCITY) {
+    const auto velocityStart = reinterpret_cast<const U8*>(zeroBufferData.data()); // NOLINT
+    m_renderer->BindBufferTarget(COMPUTE_VERTEX_VELOCITY, velocityStart);
+  }
+  else
+  {
+    std::vector<Vector3f> radialVelocityBuffer = std::vector<Vector3f>(p_activeMesh->GetVertexCount(), Vector3f(0.0f));
+
+    for (U32 idx = 0; idx < p_activeMesh->GetVertexCount(); ++idx) {
+      Vector3f radius = clothDataSet[idx] - CLOTH_ORIGIN;
+      radialVelocityBuffer[idx] = Vector3f::CrossProduct(ANGULAR_VELOCITY, radius);
+    }
+
+    const auto velocityStart = reinterpret_cast<const U8*>(radialVelocityBuffer.data()); // NOLINT
+    m_renderer->BindBufferTarget(COMPUTE_VERTEX_VELOCITY, velocityStart);
+  }
 
   const auto bufferLock = reinterpret_cast<const U8*>(zeroIntBuffer.data()); // NOLINT
   m_renderer->BindBufferTarget(COMPUTE_VERTEX_CONSTRAINT_COUNT, bufferLock);
@@ -688,51 +752,51 @@ void AppRenderer::Initialize() {
 
 
   // CREATE COMPUTE POOL - PBD
-  const U32 numConstraintBlocks     = (totalConstraints + DEFAULT_BLOCK_SIZE_X - 1) / DEFAULT_BLOCK_SIZE_X;
-  const U32 numVerticesBlocks     = (p_activeMesh->GetVertexCount() + DEFAULT_BLOCK_SIZE_X - 1) / DEFAULT_BLOCK_SIZE_X;
-  const U32 numGridBlocks     = ((MAX_GRID_RESOLUTION_X * MAX_GRID_RESOLUTION_Y * MAX_GRID_RESOLUTION_Z) + DEFAULT_BLOCK_SIZE_X - 1) / DEFAULT_BLOCK_SIZE_X;
+  const U32 numConstraintBlocks = (totalConstraints + DEFAULT_BLOCK_SIZE_X - 1) / DEFAULT_BLOCK_SIZE_X;
+  const U32 numVerticesBlocks = (p_activeMesh->GetVertexCount() + DEFAULT_BLOCK_SIZE_X - 1) / DEFAULT_BLOCK_SIZE_X;
+  const U32 numGridBlocks = ((MAX_GRID_RESOLUTION_X * MAX_GRID_RESOLUTION_Y * MAX_GRID_RESOLUTION_Z) + DEFAULT_BLOCK_SIZE_X - 1) / DEFAULT_BLOCK_SIZE_X;
   const U32 numTriangleBlocks = ((p_activeMesh->GetIndexCount() / 3) + DEFAULT_BLOCK_SIZE_X - 1) / DEFAULT_BLOCK_SIZE_X;
 
 
-  ComputePoolCreateInfo pass1 = {allocatorTemporary};
-  pass1.m_byteSize            = 0xF00000;
-  pass1.m_computePasses       = {{m_computePass.m_pass1}, allocatorTemporary};
-  pass1.m_launchDims          = ThreadGroupDimensions{numVerticesBlocks, 1, 1};
+  ComputePoolCreateInfo pass1 = { allocatorTemporary };
+  pass1.m_byteSize = 0xF00000;
+  pass1.m_computePasses = { {m_computePass.m_pass1}, allocatorTemporary };
+  pass1.m_launchDims = ThreadGroupDimensions{ numVerticesBlocks, 1, 1 };
 
   ComputePoolCreateInfo passBin = { allocatorTemporary };
   passBin.m_byteSize = 0xF00000;
   passBin.m_computePasses = { {m_computePass.m_passBinning}, allocatorTemporary };
   passBin.m_launchDims = ThreadGroupDimensions{ numVerticesBlocks, 1, 1 };
-  
+
   ComputePoolCreateInfo passSelfCollisions = { allocatorTemporary };
   passSelfCollisions.m_byteSize = 0xF00000;
   passSelfCollisions.m_computePasses = { {m_computePass.m_passSelfCollisions}, allocatorTemporary };
   passSelfCollisions.m_launchDims = ThreadGroupDimensions{ numTriangleBlocks, 1, 1 };
-  
+
   ComputePoolCreateInfo passBinInit = { allocatorTemporary };
   passBinInit.m_byteSize = 0xF00000;
   passBinInit.m_computePasses = { {m_computePass.m_passInitialize}, allocatorTemporary };
   passBinInit.m_launchDims = ThreadGroupDimensions{ numGridBlocks , 1, 1 };
 
-  ComputePoolCreateInfo pass3 = {allocatorTemporary};
-  pass3.m_byteSize            = 0xF00000;
-  pass3.m_computePasses       = {{m_computePass.m_pass4}, allocatorTemporary};
-  pass3.m_launchDims          = ThreadGroupDimensions{numVerticesBlocks, 1, 1};
+  ComputePoolCreateInfo pass3 = { allocatorTemporary };
+  pass3.m_byteSize = 0xF00000;
+  pass3.m_computePasses = { {m_computePass.m_pass4}, allocatorTemporary };
+  pass3.m_launchDims = ThreadGroupDimensions{ numVerticesBlocks, 1, 1 };
 
   const float distanceStiffnessPrime = 1.0f - std::pow(1.0f - DISTANCE_STIFFNESS, 1.0f / SOLVER_ITERATIONS);
   const float lrStiffnessPrime = 1.0f - std::pow(1.0f - LONG_RANGE_STIFFNESS, 1.0f / SOLVER_ITERATIONS);
-  const float bendingStiffnessPrime  = 1.0f - std::pow(1.0f - BENDING_STIFFNESS, 1.0f / SOLVER_ITERATIONS);
+  const float bendingStiffnessPrime = 1.0f - std::pow(1.0f - BENDING_STIFFNESS, 1.0f / SOLVER_ITERATIONS);
 
-  m_computeUBO                         = {};
-  m_computeUBO.m_numVertices           = p_activeMesh->GetVertexCount();
-  m_computeUBO.m_numTriangles          = p_activeMesh->GetIndexCount() / 3;
-  m_computeUBO.m_stretchStiffness      = distanceStiffnessPrime;
-  m_computeUBO.m_bendStiffness         = bendingStiffnessPrime;
-  m_computeUBO.m_longRangeStiffness    = lrStiffnessPrime;
-  m_computeUBO.m_timeDelta             = 0.0f;
+  m_computeUBO = {};
+  m_computeUBO.m_numVertices = p_activeMesh->GetVertexCount();
+  m_computeUBO.m_numTriangles = p_activeMesh->GetIndexCount() / 3;
+  m_computeUBO.m_stretchStiffness = distanceStiffnessPrime;
+  m_computeUBO.m_bendStiffness = bendingStiffnessPrime;
+  m_computeUBO.m_longRangeStiffness = lrStiffnessPrime;
+  m_computeUBO.m_timeDelta = 0.0f;
   m_computeUBO.m_numLongRangeConstraints = U32(clothLongRangeConstraints.GetSize());
   m_computeUBO.m_numStretchConstraints = U32(clothDistanceConstraints.GetSize());
-  m_computeUBO.m_numBendConstraints    = U32(clothBendingConstraints.GetSize());
+  m_computeUBO.m_numBendConstraints = U32(clothBendingConstraints.GetSize());
 
   if (USE_CURTAIN)
   {
@@ -757,12 +821,12 @@ void AppRenderer::Initialize() {
   computeBinning.AddShader(COMPUTE_2_BINNING);
   computeBinning.BindUniformData(m_computePass.m_computeUBOSlot, computeUBOStart, sizeof(ComputeUBO));
   m_computePools[1] = &computeBinning;
-  
+
   ComputePool& computeGenSelfCol = m_renderer->CreateComputePool(passSelfCollisions);
   computeGenSelfCol.AddShader(COMPUTE_SELF_COLLSIONS);
   computeGenSelfCol.BindUniformData(m_computePass.m_computeUBOSlot, computeUBOStart, sizeof(ComputeUBO));
   m_computePools[2] = &computeGenSelfCol;
-  
+
   ComputePool& computeBinningInit = m_renderer->CreateComputePool(passBinInit);
   computeBinningInit.AddShader(COMPUTE_2_BINNING_INIT);
   computeBinningInit.BindUniformData(m_computePass.m_computeUBOSlot, computeUBOStart, sizeof(ComputeUBO));
@@ -779,10 +843,10 @@ void AppRenderer::Initialize() {
     computeApplyConstraints.BindUniformData(m_computePass.m_computeUBOSlot, computeUBOStart, sizeof(ComputeUBO));
     m_iterativePools.push_back(&computeApplyConstraints);
 
-    ComputePoolCreateInfo pass2 = {allocatorTemporary};
-    pass2.m_byteSize            = 0xF00000;
-    pass2.m_computePasses       = {{m_computePass.m_passItr2[idx]}, allocatorTemporary};
-    pass2.m_launchDims          = ThreadGroupDimensions{numVerticesBlocks, 1, 1};
+    ComputePoolCreateInfo pass2 = { allocatorTemporary };
+    pass2.m_byteSize = 0xF00000;
+    pass2.m_computePasses = { {m_computePass.m_passItr2[idx]}, allocatorTemporary };
+    pass2.m_launchDims = ThreadGroupDimensions{ numVerticesBlocks, 1, 1 };
 
     ComputePool& computeApplyDelta = m_renderer->CreateComputePool(pass2);
     computeApplyDelta.AddShader(COMPUTE_3_PBD);
@@ -796,12 +860,12 @@ void AppRenderer::Initialize() {
   m_computePools[4] = &computeComputePositions;
 
   // CREATE COMPUTE POOL - NORMALS
-  const U32 numBlocksForNormalize     = (m_normalUBO.m_numTriangles + DEFAULT_BLOCK_SIZE_X - 1) / DEFAULT_BLOCK_SIZE_X;
+  const U32 numBlocksForNormalize = (m_normalUBO.m_numTriangles + DEFAULT_BLOCK_SIZE_X - 1) / DEFAULT_BLOCK_SIZE_X;
 
-  ComputePoolCreateInfo normComputePoolInfo = {allocatorTemporary};
-  normComputePoolInfo.m_byteSize            = 0xF00000;
-  normComputePoolInfo.m_computePasses       = {{m_normalsPass.m_passId}, allocatorTemporary};
-  normComputePoolInfo.m_launchDims          = ThreadGroupDimensions{numBlocksForNormalize, 1, 1};
+  ComputePoolCreateInfo normComputePoolInfo = { allocatorTemporary };
+  normComputePoolInfo.m_byteSize = 0xF00000;
+  normComputePoolInfo.m_computePasses = { {m_normalsPass.m_passId}, allocatorTemporary };
+  normComputePoolInfo.m_launchDims = ThreadGroupDimensions{ numBlocksForNormalize, 1, 1 };
 
   ComputePool& normComputePool = m_renderer->CreateComputePool(normComputePoolInfo);
   const auto normUBOStart = reinterpret_cast<const U8*>(&m_normalUBO); // NOLINT
@@ -811,15 +875,15 @@ void AppRenderer::Initialize() {
   Plane plane(Vector2f(-150, -150), Vector2f(150, 150), Vector2u(10, 10), Vector2u(10, 10));
   Plane shehzanPlane(Vector2f(-5, -5), Vector2f(5, 5), Vector2u(2, 2), Vector2u(1, 1));
 
-  DrawablePoolCreateInfo poolInfo = {allocatorTemporary};
-  poolInfo.m_byteSize             = sphere.TotalDataSize() + p_activeMesh->TotalDataSize() + TEXTURE_MEMORY + 0x400000;
-  poolInfo.m_numDrawables         = 2;
-  poolInfo.m_renderPasses         = {{RENDER_PASS}, allocatorTemporary};
-  poolInfo.m_drawType             = DrawType::InstancedIndexed;
+  DrawablePoolCreateInfo poolInfo = { allocatorTemporary };
+  poolInfo.m_byteSize = sphere.TotalDataSize() + p_activeMesh->TotalDataSize() + TEXTURE_MEMORY + 0x400000;
+  poolInfo.m_numDrawables = 2;
+  poolInfo.m_renderPasses = { {RENDER_PASS}, allocatorTemporary };
+  poolInfo.m_drawType = DrawType::InstancedIndexed;
 
   const auto VERTEX_SLOT = poolInfo.AddInputSlot({
     BufferUsageRate::PerVertex, {{"POSITION", p_activeMesh->GetVertexFormat()}}, 0, BufferSource::StructuredBuffer
-  });
+    });
 
   const auto UV_SLOT = poolInfo.AddInputSlot({
     BufferUsageRate::PerVertex, {{"UV", p_activeMesh->GetUVFormat()}}
@@ -827,47 +891,47 @@ void AppRenderer::Initialize() {
 
   const auto NORMAL_SLOT_X = poolInfo.AddInputSlot({
     BufferUsageRate::PerVertex, {{"NORMALX", RawStorageFormat::R32_UINT}}, 0, BufferSource::StructuredBuffer
-  });
-  
+    });
+
   const auto NORMAL_SLOT_Y = poolInfo.AddInputSlot({
     BufferUsageRate::PerVertex, {{"NORMALY", RawStorageFormat::R32_UINT}}, 0, BufferSource::StructuredBuffer
-  });
-  
+    });
+
   const auto NORMAL_SLOT_Z = poolInfo.AddInputSlot({
     BufferUsageRate::PerVertex, {{"NORMALZ", RawStorageFormat::R32_UINT}}, 0, BufferSource::StructuredBuffer
-  });
+    });
 
   const auto TANGENT_SLOT_X = poolInfo.AddInputSlot({
     BufferUsageRate::PerVertex, {{"TANGENTX", RawStorageFormat::R32_UINT}}, 0, BufferSource::StructuredBuffer
     });
-  
+
   const auto TANGENT_SLOT_Y = poolInfo.AddInputSlot({
     BufferUsageRate::PerVertex, {{"TANGENTY", RawStorageFormat::R32_UINT}}, 0, BufferSource::StructuredBuffer
     });
-  
+
   const auto TANGENT_SLOT_Z = poolInfo.AddInputSlot({
     BufferUsageRate::PerVertex, {{"TANGENTZ", RawStorageFormat::R32_UINT}}, 0, BufferSource::StructuredBuffer
     });
 
   DrawablePool& clothPool = m_renderer->CreateDrawablePool(poolInfo);
 
-  const auto uboDataBuffer   = reinterpret_cast<U8*>(&m_clothUBO);  // NOLINT
-  const auto sphereUBO       = reinterpret_cast<U8*>(&m_sphereUBO); // NOLINT
-  const auto planeUBO        = reinterpret_cast<U8*>(&m_planeUBO); // NOLINT
-  const auto shehzanUBO        = reinterpret_cast<U8*>(&m_shehzanUBO); // NOLINT
+  const auto uboDataBuffer = reinterpret_cast<U8*>(&m_clothUBO);  // NOLINT
+  const auto sphereUBO = reinterpret_cast<U8*>(&m_sphereUBO); // NOLINT
+  const auto planeUBO = reinterpret_cast<U8*>(&m_planeUBO); // NOLINT
+  const auto shehzanUBO = reinterpret_cast<U8*>(&m_shehzanUBO); // NOLINT
   const auto lightDataBuffer = reinterpret_cast<U8*>(&lightData);   // NOLINT
   // Create Drawable from Pool
   DrawableCreateInfo createInfo = {};
-  createInfo.m_vertexCount      = p_activeMesh->GetVertexCount();
-  createInfo.m_indexCount       = p_activeMesh->GetIndexCount();
-  createInfo.m_instanceCount    = 1;
-  createInfo.m_indexType        = RawStorageFormat::R32_UINT;
+  createInfo.m_vertexCount = p_activeMesh->GetVertexCount();
+  createInfo.m_indexCount = p_activeMesh->GetIndexCount();
+  createInfo.m_instanceCount = 1;
+  createInfo.m_indexType = RawStorageFormat::R32_UINT;
 
   SamplerDesc desc = {};
   desc.m_filter = TextureFilter::MinMagMipLinear;
-  desc.m_addressModeU = TextureAddressMode::Mirror;
-  desc.m_addressModeV = TextureAddressMode::Mirror;
-  desc.m_addressModeW = TextureAddressMode::Mirror;
+  desc.m_addressModeU = TextureAddressMode::Wrap;
+  desc.m_addressModeV = TextureAddressMode::Wrap;
+  desc.m_addressModeW = TextureAddressMode::Wrap;
   clothPool.BindSampler(SAMPLER_SLOT, desc);
   clothPool.BindTextureData(TEXTURE_SLOT, *albedoDesc, m_textureManager->GetData(albedoTexture));
   clothPool.BindTextureData(NORMALS_SLOT, *normalDesc, m_textureManager->GetData(normalTexture));
@@ -887,89 +951,100 @@ void AppRenderer::Initialize() {
   clothPool.BindUniformData(clothId, UBO_SLOT, uboDataBuffer, sizeof(SceneUBO));
   clothPool.BindUniformData(clothId, LIGHT_SLOT, lightDataBuffer, sizeof(LightData));
 
-   DrawableCreateInfo sphereDrawableInfo = {};
-   sphereDrawableInfo.m_vertexCount      = sphere.GetVertexCount();
-   sphereDrawableInfo.m_indexCount       = sphere.GetIndexCount();
-   sphereDrawableInfo.m_instanceCount    = 1;
-   sphereDrawableInfo.m_indexType        = sphere.GetIndexFormat();
+  DrawableCreateInfo sphereDrawableInfo = {};
+  sphereDrawableInfo.m_vertexCount = sphere.GetVertexCount();
+  sphereDrawableInfo.m_indexCount = sphere.GetIndexCount();
+  sphereDrawableInfo.m_instanceCount = 1;
+  sphereDrawableInfo.m_indexType = sphere.GetIndexFormat();
 
-   DrawableCreateInfo planeDrawableInfo = {};
-   planeDrawableInfo.m_vertexCount = plane.GetVertexCount();
-   planeDrawableInfo.m_indexCount = plane.GetIndexCount();
-   planeDrawableInfo.m_instanceCount = 1;
-   planeDrawableInfo.m_indexType = plane.GetIndexFormat();
-   
-   DrawableCreateInfo shehzanPlaneDrawableInfo = {};
-   shehzanPlaneDrawableInfo.m_vertexCount = shehzanPlane.GetVertexCount();
-   shehzanPlaneDrawableInfo.m_indexCount = shehzanPlane.GetIndexCount();
-   shehzanPlaneDrawableInfo.m_instanceCount = 1;
-   shehzanPlaneDrawableInfo.m_indexType = shehzanPlane.GetIndexFormat();
-  
-   DrawablePoolCreateInfo spherePoolInfo = {allocatorTemporary};
-   spherePoolInfo.m_byteSize             = sphere.TotalDataSize() + 0x400000;
-   spherePoolInfo.m_numDrawables         = 1;
-   spherePoolInfo.m_renderPasses         = {{RENDER_PASS}, allocatorTemporary};
-   spherePoolInfo.m_drawType             = DrawType::InstancedIndexed;
-  
-   const auto SPHERE_VERTEX_SLOT = spherePoolInfo.AddInputSlot({
-     BufferUsageRate::PerVertex, {{"POSITION", RawStorageFormat::R32G32B32A32_FLOAT}}
-   });
-  
-   const auto SPHERE_NORMAL_SLOT = spherePoolInfo.AddInputSlot({
-     BufferUsageRate::PerVertex, {{"NORMAL", RawStorageFormat::R32G32B32_FLOAT}}
-   });
+  DrawableCreateInfo planeDrawableInfo = {};
+  planeDrawableInfo.m_vertexCount = plane.GetVertexCount();
+  planeDrawableInfo.m_indexCount = plane.GetIndexCount();
+  planeDrawableInfo.m_instanceCount = 1;
+  planeDrawableInfo.m_indexType = plane.GetIndexFormat();
 
-   DrawablePool& spherePool = m_renderer->CreateDrawablePool(spherePoolInfo);
-   spherePool.AddShader(SPHERE_VERTEX_SHADER_ID);
-   spherePool.AddShader(SPHERE_PIXEL_SHADER_ID);
-  
-   const auto sphereId = spherePool.CreateDrawable(sphereDrawableInfo);
-   spherePool.BindVertexData(sphereId, SPHERE_VERTEX_SLOT, sphere.VertexData(), sphere.VertexDataSize());
-   spherePool.BindVertexData(sphereId, SPHERE_NORMAL_SLOT, sphere.NormalData(), sphere.NormalDataSize());
-   spherePool.SetIndexData(sphereId, sphere.IndexData(), sphere.IndexDataSize());
-   spherePool.BindUniformData(sphereId, UBO_SLOT, sphereUBO, sizeof(SceneUBO));
-   spherePool.BindUniformData(sphereId, LIGHT_SLOT, lightDataBuffer, sizeof(LightData));
+  DrawableCreateInfo shehzanPlaneDrawableInfo = {};
+  shehzanPlaneDrawableInfo.m_vertexCount = shehzanPlane.GetVertexCount();
+  shehzanPlaneDrawableInfo.m_indexCount = shehzanPlane.GetIndexCount();
+  shehzanPlaneDrawableInfo.m_instanceCount = 1;
+  shehzanPlaneDrawableInfo.m_indexType = shehzanPlane.GetIndexFormat();
 
-   DrawablePoolCreateInfo planePoolInfo = {allocatorTemporary};
-   planePoolInfo.m_byteSize             = plane.TotalDataSize() + 0x800000;
-   planePoolInfo.m_numDrawables         = 1;
-   planePoolInfo.m_renderPasses         = {{RENDER_PASS}, allocatorTemporary};
-   planePoolInfo.m_drawType             = DrawType::InstancedIndexed;
+  if (RENDER_SPHERE) {
+    DrawablePoolCreateInfo spherePoolInfo = { allocatorTemporary };
+    spherePoolInfo.m_byteSize = sphere.TotalDataSize() + 0x400000;
+    spherePoolInfo.m_numDrawables = 1;
+    spherePoolInfo.m_renderPasses = { {RENDER_PASS}, allocatorTemporary };
+    spherePoolInfo.m_drawType = DrawType::InstancedIndexed;
 
-   const auto PLANE_VERTEX_SLOT = planePoolInfo.AddInputSlot({
-     BufferUsageRate::PerVertex, {{"POSITION", plane.GetVertexFormat()}}
-     });
+    const auto SPHERE_VERTEX_SLOT = spherePoolInfo.AddInputSlot({
+      BufferUsageRate::PerVertex, {{"POSITION", RawStorageFormat::R32G32B32A32_FLOAT}}
+      });
 
-   const auto PLANE_NORMAL_SLOT = planePoolInfo.AddInputSlot({
-     BufferUsageRate::PerVertex, {{"NORMAL", plane.GetNormalFormat()}}
-     });
+    const auto SPHERE_NORMAL_SLOT = spherePoolInfo.AddInputSlot({
+      BufferUsageRate::PerVertex, {{"NORMAL", RawStorageFormat::R32G32B32_FLOAT}}
+      });
 
-   const auto PLANE_UV_SLOT = planePoolInfo.AddInputSlot({
-     BufferUsageRate::PerVertex, {{"UV", plane.GetUVFormat()}}
-     });
+    DrawablePool& spherePool = m_renderer->CreateDrawablePool(spherePoolInfo);
+    spherePool.AddShader(SPHERE_VERTEX_SHADER_ID);
+    spherePool.AddShader(SPHERE_PIXEL_SHADER_ID);
 
-   DrawablePool& planePool = m_renderer->CreateDrawablePool(planePoolInfo);
-   planePool.AddShader(PLANE_VERTEX_SHADER_ID);
-   planePool.AddShader(PLANE_PIXEL_SHADER_ID);
+    const auto sphereId = spherePool.CreateDrawable(sphereDrawableInfo);
+    spherePool.BindVertexData(sphereId, SPHERE_VERTEX_SLOT, sphere.VertexData(), sphere.VertexDataSize());
+    spherePool.BindVertexData(sphereId, SPHERE_NORMAL_SLOT, sphere.NormalData(), sphere.NormalDataSize());
+    spherePool.SetIndexData(sphereId, sphere.IndexData(), sphere.IndexDataSize());
+    spherePool.BindUniformData(sphereId, UBO_SLOT, sphereUBO, sizeof(SceneUBO));
+    spherePool.BindUniformData(sphereId, LIGHT_SLOT, lightDataBuffer, sizeof(LightData));
 
-   SamplerDesc floorSampler = {};
-   floorSampler.m_filter = TextureFilter::MinMagMipLinear;
-   floorSampler.m_addressModeU = TextureAddressMode::Wrap;
-   floorSampler.m_addressModeV = TextureAddressMode::Wrap;
-   floorSampler.m_addressModeW = TextureAddressMode::Wrap;
-   planePool.BindSampler(SAMPLER_SLOT, floorSampler);
-   planePool.BindTextureData(TEXTURE_SLOT, *floorAlbedoDesc, m_textureManager->GetData(floorAlbedo));
-   planePool.BindTextureData(NORMALS_SLOT, *floorNormalDesc, m_textureManager->GetData(floorNormal));
-   planePool.BindTextureData(ROUGHNESS_SLOT, *floorRoughnessDesc, m_textureManager->GetData(floorRoughness));
-   planePool.BindTextureData(AO_SLOT, *floorAODesc, m_textureManager->GetData(floorAO));
+    m_renderPass.m_sphereId     = sphereId;
+    m_spherePool = &spherePool;
+  }
 
-   const auto planeId = planePool.CreateDrawable(planeDrawableInfo);
-   planePool.BindVertexData(planeId, PLANE_VERTEX_SLOT, plane.VertexData(), plane.VertexDataSize());
-   planePool.BindVertexData(planeId, PLANE_NORMAL_SLOT, plane.NormalData(), plane.NormalDataSize());
-   planePool.BindVertexData(planeId, PLANE_UV_SLOT, plane.UVData(), plane.UVDataSize());
-   planePool.SetIndexData(planeId, plane.IndexData(), plane.IndexDataSize());
-   planePool.BindUniformData(planeId, UBO_SLOT, planeUBO, sizeof(SceneUBO));
-   planePool.BindUniformData(planeId, LIGHT_SLOT, lightDataBuffer, sizeof(LightData));
+  SamplerDesc floorSampler = {};
+  floorSampler.m_filter = TextureFilter::MinMagMipLinear;
+  floorSampler.m_addressModeU = TextureAddressMode::Wrap;
+  floorSampler.m_addressModeV = TextureAddressMode::Wrap;
+  floorSampler.m_addressModeW = TextureAddressMode::Wrap;
+
+  if (RENDER_FLOOR_PLANE) {
+    DrawablePoolCreateInfo planePoolInfo = { allocatorTemporary };
+    planePoolInfo.m_byteSize = plane.TotalDataSize() + 0x800000;
+    planePoolInfo.m_numDrawables = 1;
+    planePoolInfo.m_renderPasses = { {RENDER_PASS}, allocatorTemporary };
+    planePoolInfo.m_drawType = DrawType::InstancedIndexed;
+
+    const auto PLANE_VERTEX_SLOT = planePoolInfo.AddInputSlot({
+      BufferUsageRate::PerVertex, {{"POSITION", plane.GetVertexFormat()}}
+      });
+
+    const auto PLANE_NORMAL_SLOT = planePoolInfo.AddInputSlot({
+      BufferUsageRate::PerVertex, {{"NORMAL", plane.GetNormalFormat()}}
+      });
+
+    const auto PLANE_UV_SLOT = planePoolInfo.AddInputSlot({
+      BufferUsageRate::PerVertex, {{"UV", plane.GetUVFormat()}}
+      });
+
+    DrawablePool& planePool = m_renderer->CreateDrawablePool(planePoolInfo);
+    planePool.AddShader(PLANE_VERTEX_SHADER_ID);
+    planePool.AddShader(PLANE_PIXEL_SHADER_ID);
+
+    planePool.BindSampler(SAMPLER_SLOT, floorSampler);
+    planePool.BindTextureData(TEXTURE_SLOT, *floorAlbedoDesc, m_textureManager->GetData(floorAlbedo));
+    planePool.BindTextureData(NORMALS_SLOT, *floorNormalDesc, m_textureManager->GetData(floorNormal));
+    planePool.BindTextureData(ROUGHNESS_SLOT, *floorRoughnessDesc, m_textureManager->GetData(floorRoughness));
+    planePool.BindTextureData(AO_SLOT, *floorAODesc, m_textureManager->GetData(floorAO));
+
+    const auto planeId = planePool.CreateDrawable(planeDrawableInfo);
+    planePool.BindVertexData(planeId, PLANE_VERTEX_SLOT, plane.VertexData(), plane.VertexDataSize());
+    planePool.BindVertexData(planeId, PLANE_NORMAL_SLOT, plane.NormalData(), plane.NormalDataSize());
+    planePool.BindVertexData(planeId, PLANE_UV_SLOT, plane.UVData(), plane.UVDataSize());
+    planePool.SetIndexData(planeId, plane.IndexData(), plane.IndexDataSize());
+    planePool.BindUniformData(planeId, UBO_SLOT, planeUBO, sizeof(SceneUBO));
+    planePool.BindUniformData(planeId, LIGHT_SLOT, lightDataBuffer, sizeof(LightData));
+
+    m_renderPass.m_planeId      = planeId;
+    m_planePool = &planePool;
+  }
 
    if (SHEHZAN && USE_CURTAIN) {
      DrawablePoolCreateInfo shehzanPoolInfo = { allocatorTemporary };
@@ -1012,12 +1087,8 @@ void AppRenderer::Initialize() {
   m_renderPass.m_vertexSlot   = VERTEX_SLOT;
   m_renderPass.m_sceneUBOSlot = UBO_SLOT;
   m_renderPass.m_clothId      = clothId;
-  m_renderPass.m_sphereId     = sphereId;
-  m_renderPass.m_planeId      = planeId;
 
   m_mainPool   = &clothPool;
-  m_spherePool = &spherePool;
-  m_planePool = &planePool;
 
   // All Drawables Done
   m_renderer->Submit();
@@ -1069,8 +1140,24 @@ void AppRenderer::WindowUpdate(float timeDelta) {
     }
   }
   else {
-    m_computeUBO.m_clothModelMatrix[0] = m_clothTransform.GetTransform();
-    m_computeUBO.m_clothModelMatrix[1] = m_clothTransform.GetTransform();
+    if (SCENE_TWIST)
+    {
+      Matrix4f rotationDelta0 = Matrix4f::Identity();
+      Matrix4f rotationDelta1 = Matrix4f::Identity();
+      if (m_rotateFactor != 0) {
+        const float rotateAmount = m_rotateFactor * m_rotateStepSize * timeDelta;
+
+        rotationDelta0 = Matrix4f::FromRotationMatrix(Matrix3f::RotationX(rotateAmount));
+        rotationDelta1 = Matrix4f::FromRotationMatrix(Matrix3f::RotationX(-rotateAmount));
+      }
+
+      m_computeUBO.m_clothModelMatrix[0] = rotationDelta0 * m_clothTransform.GetTransform();
+      m_computeUBO.m_clothModelMatrix[1] = rotationDelta1 * m_clothTransform.GetTransform();
+    }
+    else {
+      m_computeUBO.m_clothModelMatrix[0] = m_clothTransform.GetTransform();
+      m_computeUBO.m_clothModelMatrix[1] = m_clothTransform.GetTransform();
+    }
   }
 
   const auto uboDataBuffer    = reinterpret_cast<U8*>(&m_clothUBO);         // NOLINT
@@ -1096,15 +1183,19 @@ void AppRenderer::WindowUpdate(float timeDelta) {
   m_mainPool->UpdateUniformData(m_renderPass.m_clothId, m_renderPass.m_sceneUBOSlot, uboDataBuffer, sizeof(SceneUBO));
   m_mainPool->SubmitUpdates();
 
-   m_spherePool->BeginUpdates();
-   m_spherePool->UpdateUniformData(m_renderPass.m_sphereId, m_renderPass.m_sceneUBOSlot, sphereDataBuffer,
-                                   sizeof(SceneUBO));
-   m_spherePool->SubmitUpdates();
+  if (RENDER_SPHERE) {
+    m_spherePool->BeginUpdates();
+    m_spherePool->UpdateUniformData(m_renderPass.m_sphereId, m_renderPass.m_sceneUBOSlot, sphereDataBuffer,
+      sizeof(SceneUBO));
+    m_spherePool->SubmitUpdates();
+  }
 
-   m_planePool->BeginUpdates();
-   m_planePool->UpdateUniformData(m_renderPass.m_planeId, m_renderPass.m_sceneUBOSlot, planeDataBuffer,
-     sizeof(SceneUBO));
-   m_planePool->SubmitUpdates();
+   if (RENDER_FLOOR_PLANE) {
+     m_planePool->BeginUpdates();
+     m_planePool->UpdateUniformData(m_renderPass.m_planeId, m_renderPass.m_sceneUBOSlot, planeDataBuffer,
+       sizeof(SceneUBO));
+     m_planePool->SubmitUpdates();
+   }
 
    if (SHEHZAN && USE_CURTAIN) {
      m_shehzanPool->BeginUpdates();

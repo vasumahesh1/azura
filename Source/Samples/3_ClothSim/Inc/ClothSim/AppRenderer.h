@@ -145,5 +145,8 @@ private:
   Physics::ClothMesh m_clothMesh;
 
   Physics::IClothPhysicsGeometry* p_activeMesh{nullptr};
+
+  int m_rotateFactor{0};
+  const float m_rotateStepSize{Math::PI_OVER4};
 };
 } // namespace

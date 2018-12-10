@@ -199,8 +199,8 @@ void main(
     InterlockedAdd(clothDataBlock.constraintCount[selfConstraint.p2], 1);
     InterlockedAdd(clothDataBlock.constraintCount[selfConstraint.pIdx], 1);
 
-    const float3 aVec = cross(p2 - p0, nVec);
-    const float3 bVec = cross(p1 - p0, nVec);
+    const float3 aVec = cross(p2 - p0, nVec) - nCap;
+    const float3 bVec = cross(p1 - p0, nVec) - nCap;
     const float3 cVec = cross(p1 - p2, nVec) - nCap;
 
     float D = dot(nCap, p - p0);
@@ -214,28 +214,30 @@ void main(
 
       const float denom = w0 * dot(aVec, aVec) + w1 * dot(bVec, bVec) + w2 * dot(cVec, cVec) + wp;
 
-      const float lambda = constraintValue / denom;
+      if (abs(denom) > EPSILON) {
+        const float lambda = constraintValue / denom;
 
-      const float3 deltaP = -lambda * wp * nCap;
-      const float3 delta1 = -lambda * w1 * aVec;
-      const float3 delta2 = -lambda * w2 * bVec;
-      const float3 delta0 = -lambda * w0 * cVec;
+        const float3 deltaP = -lambda * wp * nCap;
+        const float3 delta1 = -lambda * w1 * aVec;
+        const float3 delta2 = -lambda * w2 * bVec;
+        const float3 delta0 = -lambda * w0 * cVec;
 
-      AtomicAddDeltaX(selfConstraint.pIdx, deltaP.x);
-      AtomicAddDeltaY(selfConstraint.pIdx, deltaP.y);
-      AtomicAddDeltaZ(selfConstraint.pIdx, deltaP.z);
+        AtomicAddDeltaX(selfConstraint.pIdx, deltaP.x);
+        AtomicAddDeltaY(selfConstraint.pIdx, deltaP.y);
+        AtomicAddDeltaZ(selfConstraint.pIdx, deltaP.z);
 
-      AtomicAddDeltaX(selfConstraint.p0, delta0.x);
-      AtomicAddDeltaY(selfConstraint.p0, delta0.y);
-      AtomicAddDeltaZ(selfConstraint.p0, delta0.z);
+        AtomicAddDeltaX(selfConstraint.p0, delta0.x);
+        AtomicAddDeltaY(selfConstraint.p0, delta0.y);
+        AtomicAddDeltaZ(selfConstraint.p0, delta0.z);
 
-      AtomicAddDeltaX(selfConstraint.p1, delta1.x);
-      AtomicAddDeltaY(selfConstraint.p1, delta1.y);
-      AtomicAddDeltaZ(selfConstraint.p1, delta1.z);
+        AtomicAddDeltaX(selfConstraint.p1, delta1.x);
+        AtomicAddDeltaY(selfConstraint.p1, delta1.y);
+        AtomicAddDeltaZ(selfConstraint.p1, delta1.z);
 
-      AtomicAddDeltaX(selfConstraint.p2, delta2.x);
-      AtomicAddDeltaY(selfConstraint.p2, delta2.y);
-      AtomicAddDeltaZ(selfConstraint.p2, delta2.z);
+        AtomicAddDeltaX(selfConstraint.p2, delta2.x);
+        AtomicAddDeltaY(selfConstraint.p2, delta2.y);
+        AtomicAddDeltaZ(selfConstraint.p2, delta2.z);
+      }
     }
   }
 }

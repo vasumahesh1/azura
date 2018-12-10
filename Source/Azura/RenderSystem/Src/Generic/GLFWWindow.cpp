@@ -53,6 +53,12 @@ KeyboardKey GetKey(int key) {
     case GLFW_KEY_Y:
       return KeyboardKey::Y;
 
+    case GLFW_KEY_U:
+      return KeyboardKey::U;
+
+    case GLFW_KEY_I:
+      return KeyboardKey::I;
+
     case GLFW_KEY_ESCAPE:
       return KeyboardKey::Esc;
 

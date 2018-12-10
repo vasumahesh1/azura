@@ -33,6 +33,8 @@ enum class KeyboardKey {
   R,
   T,
   Y,
+  U,
+  I,
   Up,
   Down,
   Left,

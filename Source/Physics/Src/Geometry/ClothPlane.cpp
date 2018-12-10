@@ -23,7 +23,7 @@ float ComputeBendingC(const std::vector<Vector4f>& vertices, U32 dest1, U32 dest
 } // namespace
 
 ClothPlane::ClothPlane(const Vector2f& boundMin, const Vector2f& boundMax, Memory::Allocator& allocator)
-  : ClothPlane(ClothTriangulation::Regular, boundMin, boundMax, 0.0f, Vector2u(1, 1), allocator) {
+  : ClothPlane(ClothTriangulation::Regular, boundMin, boundMax, 0.0f, Vector2u(1, 1), Vector2u(1, 1), allocator) {
 }
 
 ClothPlane::ClothPlane(ClothTriangulation triangulation, 
@@ -31,6 +31,7 @@ ClothPlane::ClothPlane(ClothTriangulation triangulation,
                        const Vector2f& boundMax,
                        float worldHeight,
                        const Vector2u& subDivisions,
+                       const Vector2u& uvScale,
                        Memory::Allocator& allocator)
   : m_vertices(allocator),
     m_vertexInvMass(allocator),
@@ -55,8 +56,8 @@ ClothPlane::ClothPlane(ClothTriangulation triangulation,
       m_vertices.EmplaceBack(xCoord, worldHeight, yCoord);
       m_normals.EmplaceBack(0.0f, 1.0f, 0.0f);
 
-      const float uvX = xCount / float(subDivisions[0]);
-      const float uvY = yCount / float(subDivisions[1]);
+      const float uvX = uvScale[0] * xCount / float(subDivisions[0]);
+      const float uvY = uvScale[1] * yCount / float(subDivisions[1]);
       m_uv.EmplaceBack(uvX, uvY);
 
       yCoord += stepY;
