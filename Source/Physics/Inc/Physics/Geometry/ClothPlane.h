@@ -16,7 +16,7 @@ struct Edge;
 class ClothPlane final : public IClothPhysicsGeometry {
 public:
   ClothPlane(const Vector2f& boundMin , const Vector2f& boundMax, Memory::Allocator& allocator);
-  ClothPlane(ClothTriangulation triangulation, const Vector2f& boundMin , const Vector2f& boundMax, const Vector2u& subDivisions, Memory::Allocator& allocator);
+  ClothPlane(ClothTriangulation triangulation, const Vector2f& boundMin , const Vector2f& boundMax, float worldHeight, const Vector2u& subDivisions, const Vector2u& uvScale, Memory::Allocator& allocator);
 
   U32 VertexDataSize() const override;
   U32 IndexDataSize() const override;

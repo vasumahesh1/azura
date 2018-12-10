@@ -14,6 +14,15 @@ enum class CursorState
   Disabled
 };
 
+enum class UpdateRate
+{
+  RateUnlocked,
+  Rate240,
+  Rate120,
+  Rate60,
+  Rate30
+};
+
 class Window {
 public:
   virtual ~Window() = default;
@@ -36,6 +45,7 @@ public:
   virtual void ResetCursor() = 0;
 
   ViewportDimensions GetViewport() const;
+  void SetUpdateRate(UpdateRate rate);
 
   SwapChainRequirements GetSwapChainRequirements() const;
 
@@ -56,6 +66,7 @@ protected:
 
   float m_midWidth;
   float m_midHeight;
+  UpdateRate m_rate;
 
 private:
   U32 m_width;

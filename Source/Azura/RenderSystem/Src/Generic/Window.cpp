@@ -6,6 +6,7 @@ Window::Window(String title, const U32 width, const U32 height)
   : log_Window(std::move(Log("Window"))),
     m_midWidth(width / 2.0f),
     m_midHeight(height / 2.0f),
+    m_rate(UpdateRate::RateUnlocked),
     m_width(width),
     m_height(height),
     m_title(std::move(title)),
@@ -33,6 +34,10 @@ ViewportDimensions Window::GetViewport() const {
   dimension.m_minDepth = 0.0f;
   dimension.m_maxDepth = 1.0f;
   return dimension;
+}
+
+void Window::SetUpdateRate(UpdateRate rate) {
+  m_rate = rate;
 }
 
 SwapChainRequirements Window::GetSwapChainRequirements() const {

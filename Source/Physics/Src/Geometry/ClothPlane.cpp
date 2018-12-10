@@ -12,7 +12,6 @@ const RawStorageFormat VERTEX_FORMAT = RawStorageFormat::R32G32B32_FLOAT;
 const RawStorageFormat UV_FORMAT = RawStorageFormat::R32G32_FLOAT;
 const RawStorageFormat NORMAL_FORMAT = RawStorageFormat::R32G32B32_FLOAT;
 const RawStorageFormat INDEX_FORMAT  = RawStorageFormat::R32_UINT;
-const float LONG_RANGE_RADIUS = 1.0f;
 
 float ComputeBendingC(const std::vector<Vector4f>& vertices, U32 dest1, U32 dest2, U32 source) {
   Vector3f v1 = vertices[dest1].xyz() - vertices[source].xyz();
@@ -24,13 +23,15 @@ float ComputeBendingC(const std::vector<Vector4f>& vertices, U32 dest1, U32 dest
 } // namespace
 
 ClothPlane::ClothPlane(const Vector2f& boundMin, const Vector2f& boundMax, Memory::Allocator& allocator)
-  : ClothPlane(ClothTriangulation::Regular, boundMin, boundMax, Vector2u(1, 1), allocator) {
+  : ClothPlane(ClothTriangulation::Regular, boundMin, boundMax, 0.0f, Vector2u(1, 1), Vector2u(1, 1), allocator) {
 }
 
 ClothPlane::ClothPlane(ClothTriangulation triangulation, 
                        const Vector2f& boundMin,
                        const Vector2f& boundMax,
+                       float worldHeight,
                        const Vector2u& subDivisions,
+                       const Vector2u& uvScale,
                        Memory::Allocator& allocator)
   : m_vertices(allocator),
     m_vertexInvMass(allocator),
@@ -52,11 +53,11 @@ ClothPlane::ClothPlane(ClothTriangulation triangulation,
   for (float xCoord   = boundMin[0]; xCoord <= boundMax[0] + EPSILON;) {
     yCount = 0;
     for (float yCoord = boundMin[1]; yCoord <= boundMax[1] + EPSILON;) {
-      m_vertices.EmplaceBack(xCoord, 0.0f, yCoord);
+      m_vertices.EmplaceBack(xCoord, worldHeight, yCoord);
       m_normals.EmplaceBack(0.0f, 1.0f, 0.0f);
 
-      const float uvX = xCount / float(subDivisions[0]);
-      const float uvY = yCount / float(subDivisions[1]);
+      const float uvX = uvScale[0] * xCount / float(subDivisions[0]);
+      const float uvY = uvScale[1] * yCount / float(subDivisions[1]);
       m_uv.EmplaceBack(uvX, uvY);
 
       yCoord += stepY;
@@ -198,22 +199,24 @@ ClothSolvingView ClothPlane::GetPBDSolvingView(Memory::Allocator& allocator) {
   );
 
   U32 vertIdx = 0;
+
   for(const auto& vertex : m_vertices)
   {
+    float closestDistance = std::numeric_limits<float>::max();
+    U32 closestAnchorIdx = 0;
     for (const auto& anchorIdx : m_anchorIdx)
     {
       const float distance = (m_vertices[anchorIdx] - vertex).Length();
-
-      if (distance > EPSILON && distance < LONG_RANGE_RADIUS)
-      {
-        solvingView.AddConstraint(LongRangeConstraint{
-          ConstraintPoint{vertIdx},
-          ConstraintPoint{anchorIdx},
-          distance
-          });
+      if (distance < closestDistance) {
+        closestDistance = distance;
+        closestAnchorIdx = anchorIdx;
       }
     }
-
+    solvingView.AddConstraint(LongRangeConstraint{
+      ConstraintPoint{vertIdx},
+      ConstraintPoint{closestAnchorIdx},
+      closestDistance
+      });
     ++vertIdx;
   }
 
