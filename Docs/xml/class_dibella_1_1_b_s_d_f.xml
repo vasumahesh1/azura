@@ -1,0 +1,307 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.8.14">
+  <compounddef id="class_dibella_1_1_b_s_d_f" kind="class" language="C++" prot="public">
+    <compoundname>Dibella::BSDF</compoundname>
+      <sectiondef kind="protected-attrib">
+      <memberdef kind="variable" id="class_dibella_1_1_b_s_d_f_1acbfbeb80ee5256ab1303ee53d1252808" prot="protected" static="no" mutable="no">
+        <type>Matrix3f</type>
+        <definition>Matrix3f Dibella::BSDF::mWorldToTangent</definition>
+        <argsstring></argsstring>
+        <name>mWorldToTangent</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Source/Dibella/Inc/Materials/Primitives/BSDF.h" line="33" column="1" bodyfile="Source/Dibella/Inc/Materials/Primitives/BSDF.h" bodystart="33" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="class_dibella_1_1_b_s_d_f_1ab7c3b287786c851a39af641ca3693cdb" prot="protected" static="no" mutable="no">
+        <type>Matrix3f</type>
+        <definition>Matrix3f Dibella::BSDF::mTangentToWorld</definition>
+        <argsstring></argsstring>
+        <name>mTangentToWorld</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Source/Dibella/Inc/Materials/Primitives/BSDF.h" line="37" column="1" bodyfile="Source/Dibella/Inc/Materials/Primitives/BSDF.h" bodystart="37" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="class_dibella_1_1_b_s_d_f_1a2c50f863ab0c261fe4eba4344e640b48" prot="protected" static="no" mutable="no">
+        <type>Normal3f</type>
+        <definition>Normal3f Dibella::BSDF::mNormal</definition>
+        <argsstring></argsstring>
+        <name>mNormal</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Source/Dibella/Inc/Materials/Primitives/BSDF.h" line="41" column="1" bodyfile="Source/Dibella/Inc/Materials/Primitives/BSDF.h" bodystart="41" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="class_dibella_1_1_b_s_d_f_1ad3a9f756d7cd38f9abc99d6827a881db" prot="protected" static="no" mutable="no">
+        <type>Float</type>
+        <definition>Float Dibella::BSDF::mETA</definition>
+        <argsstring></argsstring>
+        <name>mETA</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Source/Dibella/Inc/Materials/Primitives/BSDF.h" line="44" column="1" bodyfile="Source/Dibella/Inc/Materials/Primitives/BSDF.h" bodystart="44" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="class_dibella_1_1_b_s_d_f_1a7950ae6e9409daa21d5190fdeb85cfd8" prot="protected" static="no" mutable="no">
+        <type>int</type>
+        <definition>int Dibella::BSDF::mNumBxDF</definition>
+        <argsstring></argsstring>
+        <name>mNumBxDF</name>
+        <initializer>{0}</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Source/Dibella/Inc/Materials/Primitives/BSDF.h" line="47" column="1" bodyfile="Source/Dibella/Inc/Materials/Primitives/BSDF.h" bodystart="47" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="class_dibella_1_1_b_s_d_f_1acf35912862427f0725258ec1898fbd89" prot="protected" static="no" mutable="no">
+        <type><ref refid="class_dibella_1_1_bx_d_f" kindref="compound">BxDF</ref> *</type>
+        <definition>BxDF* Dibella::BSDF::bxdfs[MAX_BDSF_BXDF]</definition>
+        <argsstring>[MAX_BDSF_BXDF]</argsstring>
+        <name>bxdfs</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Source/Dibella/Inc/Materials/Primitives/BSDF.h" line="50" column="1" bodyfile="Source/Dibella/Inc/Materials/Primitives/BSDF.h" bodystart="50" bodyend="-1"/>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="public-func">
+      <memberdef kind="function" id="class_dibella_1_1_b_s_d_f_1a26a84b941024c7e3b791831d3288666b" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>Dibella::BSDF::BSDF</definition>
+        <argsstring>(const Intersection &amp;isect, Float eta=1)</argsstring>
+        <name>BSDF</name>
+        <param>
+          <type>const <ref refid="class_dibella_1_1_intersection" kindref="compound">Intersection</ref> &amp;</type>
+          <declname>isect</declname>
+        </param>
+        <param>
+          <type>Float</type>
+          <declname>eta</declname>
+          <defval>1</defval>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Source/Dibella/Inc/Materials/Primitives/BSDF.h" line="10" column="1" bodyfile="Source/Dibella/Src/Materials/Primitives/BSDF.cpp" bodystart="4" bodyend="4"/>
+      </memberdef>
+      <memberdef kind="function" id="class_dibella_1_1_b_s_d_f_1ad313f3bfc89c58159dab6b24a51acb88" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void Dibella::BSDF::Add</definition>
+        <argsstring>(BxDF *b)</argsstring>
+        <name>Add</name>
+        <param>
+          <type><ref refid="class_dibella_1_1_bx_d_f" kindref="compound">BxDF</ref> *</type>
+          <declname>b</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Source/Dibella/Inc/Materials/Primitives/BSDF.h" line="12" column="1" bodyfile="Source/Dibella/Src/Materials/Primitives/BSDF.cpp" bodystart="20" bodyend="24"/>
+      </memberdef>
+      <memberdef kind="function" id="class_dibella_1_1_b_s_d_f_1ade4f0dbe3bbb92fbc9e2f8a636465388" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
+        <type>Color3f</type>
+        <definition>Color3f Dibella::BSDF::CalculateF</definition>
+        <argsstring>(const Vector3f &amp;woW, const Vector3f &amp;wiW, BxDFType flags=BxDFType::BsdfAll) const</argsstring>
+        <name>CalculateF</name>
+        <param>
+          <type>const Vector3f &amp;</type>
+          <declname>woW</declname>
+        </param>
+        <param>
+          <type>const Vector3f &amp;</type>
+          <declname>wiW</declname>
+        </param>
+        <param>
+          <type>BxDFType</type>
+          <declname>flags</declname>
+          <defval>BxDFType::BsdfAll</defval>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Source/Dibella/Inc/Materials/Primitives/BSDF.h" line="14" column="1" bodyfile="Source/Dibella/Src/Materials/Primitives/BSDF.cpp" bodystart="6" bodyend="6"/>
+      </memberdef>
+      <memberdef kind="function" id="class_dibella_1_1_b_s_d_f_1aac402824f1331054bd4ba9bb37289191" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
+        <type>Color3f</type>
+        <definition>Color3f Dibella::BSDF::SampleF</definition>
+        <argsstring>(const Vector3f &amp;woW, Vector3f *wiW, const Point2f &amp;xi, Float *pdf, BxDFType type=BxDFType::BsdfAll, BxDFType *sampledType=nullptr, Float random=0.0f) const</argsstring>
+        <name>SampleF</name>
+        <param>
+          <type>const Vector3f &amp;</type>
+          <declname>woW</declname>
+        </param>
+        <param>
+          <type>Vector3f *</type>
+          <declname>wiW</declname>
+        </param>
+        <param>
+          <type>const Point2f &amp;</type>
+          <declname>xi</declname>
+        </param>
+        <param>
+          <type>Float *</type>
+          <declname>pdf</declname>
+        </param>
+        <param>
+          <type>BxDFType</type>
+          <declname>type</declname>
+          <defval>BxDFType::BsdfAll</defval>
+        </param>
+        <param>
+          <type>BxDFType *</type>
+          <declname>sampledType</declname>
+          <defval>nullptr</defval>
+        </param>
+        <param>
+          <type>Float</type>
+          <declname>random</declname>
+          <defval>0.0f</defval>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Source/Dibella/Inc/Materials/Primitives/BSDF.h" line="16" column="1" bodyfile="Source/Dibella/Src/Materials/Primitives/BSDF.cpp" bodystart="8" bodyend="14"/>
+      </memberdef>
+      <memberdef kind="function" id="class_dibella_1_1_b_s_d_f_1a00dee6537cedba6a601390829bac1318" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
+        <type>Float</type>
+        <definition>Float Dibella::BSDF::CalculatePDF</definition>
+        <argsstring>(const Vector3f &amp;woW, const Vector3f &amp;wiW, BxDFType flags=BxDFType::BsdfAll) const</argsstring>
+        <name>CalculatePDF</name>
+        <param>
+          <type>const Vector3f &amp;</type>
+          <declname>woW</declname>
+        </param>
+        <param>
+          <type>const Vector3f &amp;</type>
+          <declname>wiW</declname>
+        </param>
+        <param>
+          <type>BxDFType</type>
+          <declname>flags</declname>
+          <defval>BxDFType::BsdfAll</defval>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Source/Dibella/Inc/Materials/Primitives/BSDF.h" line="24" column="1" bodyfile="Source/Dibella/Src/Materials/Primitives/BSDF.cpp" bodystart="16" bodyend="16"/>
+      </memberdef>
+      <memberdef kind="function" id="class_dibella_1_1_b_s_d_f_1a6187cd07f462581632e83d084c7f43e3" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
+        <type>int</type>
+        <definition>int Dibella::BSDF::BxDFsMatchingFlags</definition>
+        <argsstring>(BxDFType flags) const</argsstring>
+        <name>BxDFsMatchingFlags</name>
+        <param>
+          <type>BxDFType</type>
+          <declname>flags</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Source/Dibella/Inc/Materials/Primitives/BSDF.h" line="26" column="1" bodyfile="Source/Dibella/Src/Materials/Primitives/BSDF.cpp" bodystart="17" bodyend="17"/>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="public-static-func">
+      <memberdef kind="function" id="class_dibella_1_1_b_s_d_f_1ae2800b915eff53b85d52a9ffbf33f159" prot="public" static="yes" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void Dibella::BSDF::UpdateTangentSpaceMatrices</definition>
+        <argsstring>(const Normal3f &amp;n, const Vector3f &amp;t, const Vector3f b)</argsstring>
+        <name>UpdateTangentSpaceMatrices</name>
+        <param>
+          <type>const Normal3f &amp;</type>
+          <declname>n</declname>
+        </param>
+        <param>
+          <type>const Vector3f &amp;</type>
+          <declname>t</declname>
+        </param>
+        <param>
+          <type>const Vector3f</type>
+          <declname>b</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Source/Dibella/Inc/Materials/Primitives/BSDF.h" line="28" column="1" bodyfile="Source/Dibella/Src/Materials/Primitives/BSDF.cpp" bodystart="18" bodyend="18"/>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <collaborationgraph>
+      <node id="48">
+        <label>Dibella::BSDF</label>
+        <link refid="class_dibella_1_1_b_s_d_f"/>
+        <childnode refid="49" relation="usage">
+          <edgelabel>bxdfs</edgelabel>
+        </childnode>
+      </node>
+      <node id="50">
+        <label>Dibella::AllocationDependent</label>
+        <link refid="class_dibella_1_1_allocation_dependent"/>
+      </node>
+      <node id="49">
+        <label>Dibella::BxDF</label>
+        <link refid="class_dibella_1_1_bx_d_f"/>
+        <childnode refid="50" relation="protected-inheritance">
+        </childnode>
+      </node>
+    </collaborationgraph>
+    <location file="Source/Dibella/Inc/Materials/Primitives/BSDF.h" line="8" column="1" bodyfile="Source/Dibella/Inc/Materials/Primitives/BSDF.h" bodystart="8" bodyend="51"/>
+    <listofallmembers>
+      <member refid="class_dibella_1_1_b_s_d_f_1ad313f3bfc89c58159dab6b24a51acb88" prot="public" virt="non-virtual"><scope>Dibella::BSDF</scope><name>Add</name></member>
+      <member refid="class_dibella_1_1_b_s_d_f_1a26a84b941024c7e3b791831d3288666b" prot="public" virt="non-virtual"><scope>Dibella::BSDF</scope><name>BSDF</name></member>
+      <member refid="class_dibella_1_1_b_s_d_f_1acf35912862427f0725258ec1898fbd89" prot="protected" virt="non-virtual"><scope>Dibella::BSDF</scope><name>bxdfs</name></member>
+      <member refid="class_dibella_1_1_b_s_d_f_1a6187cd07f462581632e83d084c7f43e3" prot="public" virt="non-virtual"><scope>Dibella::BSDF</scope><name>BxDFsMatchingFlags</name></member>
+      <member refid="class_dibella_1_1_b_s_d_f_1ade4f0dbe3bbb92fbc9e2f8a636465388" prot="public" virt="non-virtual"><scope>Dibella::BSDF</scope><name>CalculateF</name></member>
+      <member refid="class_dibella_1_1_b_s_d_f_1a00dee6537cedba6a601390829bac1318" prot="public" virt="non-virtual"><scope>Dibella::BSDF</scope><name>CalculatePDF</name></member>
+      <member refid="class_dibella_1_1_b_s_d_f_1ad3a9f756d7cd38f9abc99d6827a881db" prot="protected" virt="non-virtual"><scope>Dibella::BSDF</scope><name>mETA</name></member>
+      <member refid="class_dibella_1_1_b_s_d_f_1a2c50f863ab0c261fe4eba4344e640b48" prot="protected" virt="non-virtual"><scope>Dibella::BSDF</scope><name>mNormal</name></member>
+      <member refid="class_dibella_1_1_b_s_d_f_1a7950ae6e9409daa21d5190fdeb85cfd8" prot="protected" virt="non-virtual"><scope>Dibella::BSDF</scope><name>mNumBxDF</name></member>
+      <member refid="class_dibella_1_1_b_s_d_f_1ab7c3b287786c851a39af641ca3693cdb" prot="protected" virt="non-virtual"><scope>Dibella::BSDF</scope><name>mTangentToWorld</name></member>
+      <member refid="class_dibella_1_1_b_s_d_f_1acbfbeb80ee5256ab1303ee53d1252808" prot="protected" virt="non-virtual"><scope>Dibella::BSDF</scope><name>mWorldToTangent</name></member>
+      <member refid="class_dibella_1_1_b_s_d_f_1aac402824f1331054bd4ba9bb37289191" prot="public" virt="non-virtual"><scope>Dibella::BSDF</scope><name>SampleF</name></member>
+      <member refid="class_dibella_1_1_b_s_d_f_1ae2800b915eff53b85d52a9ffbf33f159" prot="public" virt="non-virtual"><scope>Dibella::BSDF</scope><name>UpdateTangentSpaceMatrices</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

@@ -1,0 +1,540 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.8.14">
+  <compounddef id="class_azura_1_1_physics_1_1_cloth_plane" kind="class" language="C++" prot="public" final="yes">
+    <compoundname>Azura::Physics::ClothPlane</compoundname>
+    <basecompoundref refid="class_azura_1_1_physics_1_1_i_cloth_physics_geometry" prot="public" virt="non-virtual">Azura::Physics::IClothPhysicsGeometry</basecompoundref>
+      <sectiondef kind="private-attrib">
+      <memberdef kind="variable" id="class_azura_1_1_physics_1_1_cloth_plane_1ada22d38f2236cf424c8e1107c46e1bf1" prot="private" static="no" mutable="no">
+        <type>std::vector&lt; U32 &gt;</type>
+        <definition>std::vector&lt;U32&gt; Azura::Physics::ClothPlane::m_anchorIdx</definition>
+        <argsstring></argsstring>
+        <name>m_anchorIdx</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Source/Physics/Inc/Physics/Geometry/ClothPlane.h" line="46" column="1" bodyfile="Source/Physics/Inc/Physics/Geometry/ClothPlane.h" bodystart="46" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="class_azura_1_1_physics_1_1_cloth_plane_1a0d0966a933060d716b44f144b8966ce2" prot="private" static="no" mutable="no">
+        <type>std::unordered_map&lt; <ref refid="struct_azura_1_1_physics_1_1_edge" kindref="compound">Edge</ref>, std::vector&lt; U32 &gt;, <ref refid="struct_azura_1_1_physics_1_1_edge_map_hash" kindref="compound">EdgeMapHash</ref> &gt;</type>
+        <definition>std::unordered_map&lt;Edge, std::vector&lt;U32&gt;, EdgeMapHash&gt; Azura::Physics::ClothPlane::m_edgeTriangleMap</definition>
+        <argsstring></argsstring>
+        <name>m_edgeTriangleMap</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Source/Physics/Inc/Physics/Geometry/ClothPlane.h" line="48" column="1" bodyfile="Source/Physics/Inc/Physics/Geometry/ClothPlane.h" bodystart="48" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="class_azura_1_1_physics_1_1_cloth_plane_1a2cef89c499304db39517ebb85809dd76" prot="private" static="no" mutable="no">
+        <type><ref refid="class_azura_1_1_containers_1_1_vector" kindref="compound">Containers::Vector</ref>&lt; Vector3f &gt;</type>
+        <definition>Containers::Vector&lt;Vector3f&gt; Azura::Physics::ClothPlane::m_vertices</definition>
+        <argsstring></argsstring>
+        <name>m_vertices</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Source/Physics/Inc/Physics/Geometry/ClothPlane.h" line="50" column="1" bodyfile="Source/Physics/Inc/Physics/Geometry/ClothPlane.h" bodystart="50" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="class_azura_1_1_physics_1_1_cloth_plane_1a8d93cce50d8dfb03afd336dc8453883e" prot="private" static="no" mutable="no">
+        <type><ref refid="class_azura_1_1_containers_1_1_vector" kindref="compound">Containers::Vector</ref>&lt; float &gt;</type>
+        <definition>Containers::Vector&lt;float&gt; Azura::Physics::ClothPlane::m_vertexInvMass</definition>
+        <argsstring></argsstring>
+        <name>m_vertexInvMass</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Source/Physics/Inc/Physics/Geometry/ClothPlane.h" line="51" column="1" bodyfile="Source/Physics/Inc/Physics/Geometry/ClothPlane.h" bodystart="51" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="class_azura_1_1_physics_1_1_cloth_plane_1aa34bd5cd8dc2d359ba806d4db1386abe" prot="private" static="no" mutable="no">
+        <type><ref refid="class_azura_1_1_containers_1_1_vector" kindref="compound">Containers::Vector</ref>&lt; Vector3f &gt;</type>
+        <definition>Containers::Vector&lt;Vector3f&gt; Azura::Physics::ClothPlane::m_normals</definition>
+        <argsstring></argsstring>
+        <name>m_normals</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Source/Physics/Inc/Physics/Geometry/ClothPlane.h" line="52" column="1" bodyfile="Source/Physics/Inc/Physics/Geometry/ClothPlane.h" bodystart="52" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="class_azura_1_1_physics_1_1_cloth_plane_1ad31b980543088dd02d934dbfd509b319" prot="private" static="no" mutable="no">
+        <type><ref refid="class_azura_1_1_containers_1_1_vector" kindref="compound">Containers::Vector</ref>&lt; Vector3u &gt;</type>
+        <definition>Containers::Vector&lt;Vector3u&gt; Azura::Physics::ClothPlane::m_triangles</definition>
+        <argsstring></argsstring>
+        <name>m_triangles</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Source/Physics/Inc/Physics/Geometry/ClothPlane.h" line="53" column="1" bodyfile="Source/Physics/Inc/Physics/Geometry/ClothPlane.h" bodystart="53" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="class_azura_1_1_physics_1_1_cloth_plane_1af9cfc5edbd93a93aa583542d03dcddaa" prot="private" static="no" mutable="no">
+        <type><ref refid="class_azura_1_1_containers_1_1_vector" kindref="compound">Containers::Vector</ref>&lt; Vector2f &gt;</type>
+        <definition>Containers::Vector&lt;Vector2f&gt; Azura::Physics::ClothPlane::m_uv</definition>
+        <argsstring></argsstring>
+        <name>m_uv</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Source/Physics/Inc/Physics/Geometry/ClothPlane.h" line="54" column="1" bodyfile="Source/Physics/Inc/Physics/Geometry/ClothPlane.h" bodystart="54" bodyend="-1"/>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="public-func">
+      <memberdef kind="function" id="class_azura_1_1_physics_1_1_cloth_plane_1a29c2674aa2c6f3ac474a41630be8fc20" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>Azura::Physics::ClothPlane::ClothPlane</definition>
+        <argsstring>(const Vector2f &amp;boundMin, const Vector2f &amp;boundMax, Memory::Allocator &amp;allocator)</argsstring>
+        <name>ClothPlane</name>
+        <param>
+          <type>const Vector2f &amp;</type>
+          <declname>boundMin</declname>
+        </param>
+        <param>
+          <type>const Vector2f &amp;</type>
+          <declname>boundMax</declname>
+        </param>
+        <param>
+          <type><ref refid="class_azura_1_1_memory_1_1_allocator" kindref="compound">Memory::Allocator</ref> &amp;</type>
+          <declname>allocator</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Source/Physics/Inc/Physics/Geometry/ClothPlane.h" line="18" column="1" bodyfile="Source/Physics/Src/Geometry/ClothPlane.cpp" bodystart="25" bodyend="27"/>
+      </memberdef>
+      <memberdef kind="function" id="class_azura_1_1_physics_1_1_cloth_plane_1ac1e5daa24d335de3fe042576435c5f1d" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>Azura::Physics::ClothPlane::ClothPlane</definition>
+        <argsstring>(ClothTriangulation triangulation, const Vector2f &amp;boundMin, const Vector2f &amp;boundMax, float worldHeight, const Vector2u &amp;subDivisions, const Vector2u &amp;uvScale, Memory::Allocator &amp;allocator)</argsstring>
+        <name>ClothPlane</name>
+        <param>
+          <type>ClothTriangulation</type>
+          <declname>triangulation</declname>
+        </param>
+        <param>
+          <type>const Vector2f &amp;</type>
+          <declname>boundMin</declname>
+        </param>
+        <param>
+          <type>const Vector2f &amp;</type>
+          <declname>boundMax</declname>
+        </param>
+        <param>
+          <type>float</type>
+          <declname>worldHeight</declname>
+        </param>
+        <param>
+          <type>const Vector2u &amp;</type>
+          <declname>subDivisions</declname>
+        </param>
+        <param>
+          <type>const Vector2u &amp;</type>
+          <declname>uvScale</declname>
+        </param>
+        <param>
+          <type><ref refid="class_azura_1_1_memory_1_1_allocator" kindref="compound">Memory::Allocator</ref> &amp;</type>
+          <declname>allocator</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Source/Physics/Inc/Physics/Geometry/ClothPlane.h" line="19" column="1" bodyfile="Source/Physics/Src/Geometry/ClothPlane.cpp" bodystart="29" bodyend="111"/>
+      </memberdef>
+      <memberdef kind="function" id="class_azura_1_1_physics_1_1_cloth_plane_1ab6aac3d0cfe9780400e7c0230b7d9deb" prot="public" static="no" const="yes" explicit="no" inline="no" virt="virtual">
+        <type>U32</type>
+        <definition>U32 Azura::Physics::ClothPlane::VertexDataSize</definition>
+        <argsstring>() const override</argsstring>
+        <name>VertexDataSize</name>
+        <reimplements refid="class_azura_1_1_math_1_1_geometry_1ac054e7a5a660c7faac630cff3ee91b86">VertexDataSize</reimplements>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Source/Physics/Inc/Physics/Geometry/ClothPlane.h" line="21" column="1" bodyfile="Source/Physics/Src/Geometry/ClothPlane.cpp" bodystart="113" bodyend="115"/>
+      </memberdef>
+      <memberdef kind="function" id="class_azura_1_1_physics_1_1_cloth_plane_1a0429a289fafbac63d49bc54c4ec38ad5" prot="public" static="no" const="yes" explicit="no" inline="no" virt="virtual">
+        <type>U32</type>
+        <definition>U32 Azura::Physics::ClothPlane::IndexDataSize</definition>
+        <argsstring>() const override</argsstring>
+        <name>IndexDataSize</name>
+        <reimplements refid="class_azura_1_1_math_1_1_geometry_1aaf9593bfa903f9df23aefb3db971fc03">IndexDataSize</reimplements>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Source/Physics/Inc/Physics/Geometry/ClothPlane.h" line="22" column="1" bodyfile="Source/Physics/Src/Geometry/ClothPlane.cpp" bodystart="117" bodyend="119"/>
+      </memberdef>
+      <memberdef kind="function" id="class_azura_1_1_physics_1_1_cloth_plane_1aad72ffb9544834a513dc42226afa1796" prot="public" static="no" const="yes" explicit="no" inline="no" virt="virtual">
+        <type>const U8 *</type>
+        <definition>const U8 * Azura::Physics::ClothPlane::VertexData</definition>
+        <argsstring>() const override</argsstring>
+        <name>VertexData</name>
+        <reimplements refid="class_azura_1_1_math_1_1_geometry_1a81e23486f503335f688d6b9a8b3f3511">VertexData</reimplements>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Source/Physics/Inc/Physics/Geometry/ClothPlane.h" line="23" column="1" bodyfile="Source/Physics/Src/Geometry/ClothPlane.cpp" bodystart="129" bodyend="132"/>
+      </memberdef>
+      <memberdef kind="function" id="class_azura_1_1_physics_1_1_cloth_plane_1a6d34438dc168a739c5eca6fcef790a7c" prot="public" static="no" const="yes" explicit="no" inline="no" virt="virtual">
+        <type>const U8 *</type>
+        <definition>const U8 * Azura::Physics::ClothPlane::IndexData</definition>
+        <argsstring>() const override</argsstring>
+        <name>IndexData</name>
+        <reimplements refid="class_azura_1_1_math_1_1_geometry_1a82e486e4c83e77c7a367a31cc8019223">IndexData</reimplements>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Source/Physics/Inc/Physics/Geometry/ClothPlane.h" line="24" column="1" bodyfile="Source/Physics/Src/Geometry/ClothPlane.cpp" bodystart="134" bodyend="137"/>
+      </memberdef>
+      <memberdef kind="function" id="class_azura_1_1_physics_1_1_cloth_plane_1a539393abd1fdc386e3bae691122188b1" prot="public" static="no" const="yes" explicit="no" inline="no" virt="virtual">
+        <type>RawStorageFormat</type>
+        <definition>RawStorageFormat Azura::Physics::ClothPlane::GetVertexFormat</definition>
+        <argsstring>() const override</argsstring>
+        <name>GetVertexFormat</name>
+        <reimplements refid="class_azura_1_1_math_1_1_geometry_1aff7277c8d60b3b04e75a97238de299a4">GetVertexFormat</reimplements>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Source/Physics/Inc/Physics/Geometry/ClothPlane.h" line="25" column="1" bodyfile="Source/Physics/Src/Geometry/ClothPlane.cpp" bodystart="149" bodyend="151"/>
+      </memberdef>
+      <memberdef kind="function" id="class_azura_1_1_physics_1_1_cloth_plane_1a460be278242cdcbde339f200030d413d" prot="public" static="no" const="yes" explicit="no" inline="no" virt="virtual">
+        <type>RawStorageFormat</type>
+        <definition>RawStorageFormat Azura::Physics::ClothPlane::GetIndexFormat</definition>
+        <argsstring>() const override</argsstring>
+        <name>GetIndexFormat</name>
+        <reimplements refid="class_azura_1_1_math_1_1_geometry_1a3646f53090427c4f34d71f632bf59ff0">GetIndexFormat</reimplements>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Source/Physics/Inc/Physics/Geometry/ClothPlane.h" line="26" column="1" bodyfile="Source/Physics/Src/Geometry/ClothPlane.cpp" bodystart="153" bodyend="155"/>
+      </memberdef>
+      <memberdef kind="function" id="class_azura_1_1_physics_1_1_cloth_plane_1ab9bcdf5d3ca9e50014961df4a71a5d6e" prot="public" static="no" const="yes" explicit="no" inline="no" virt="virtual">
+        <type>U32</type>
+        <definition>U32 Azura::Physics::ClothPlane::GetVertexCount</definition>
+        <argsstring>() const override</argsstring>
+        <name>GetVertexCount</name>
+        <reimplements refid="class_azura_1_1_math_1_1_geometry_1ae114b9fd7f187249ce2c5c19fa3396a8">GetVertexCount</reimplements>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Source/Physics/Inc/Physics/Geometry/ClothPlane.h" line="27" column="1" bodyfile="Source/Physics/Src/Geometry/ClothPlane.cpp" bodystart="282" bodyend="284"/>
+      </memberdef>
+      <memberdef kind="function" id="class_azura_1_1_physics_1_1_cloth_plane_1a3acbf3bc7b57df09c7eb1b617494d6ba" prot="public" static="no" const="yes" explicit="no" inline="no" virt="virtual">
+        <type>U32</type>
+        <definition>U32 Azura::Physics::ClothPlane::GetIndexCount</definition>
+        <argsstring>() const override</argsstring>
+        <name>GetIndexCount</name>
+        <reimplements refid="class_azura_1_1_math_1_1_geometry_1af6a4f5bd5d7b7479cfe37629a60b9f87">GetIndexCount</reimplements>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Source/Physics/Inc/Physics/Geometry/ClothPlane.h" line="28" column="1" bodyfile="Source/Physics/Src/Geometry/ClothPlane.cpp" bodystart="286" bodyend="288"/>
+      </memberdef>
+      <memberdef kind="function" id="class_azura_1_1_physics_1_1_cloth_plane_1a7ad72cba68405769456532988296936e" prot="public" static="no" const="yes" explicit="no" inline="no" virt="virtual">
+        <type>U32</type>
+        <definition>U32 Azura::Physics::ClothPlane::TotalDataSize</definition>
+        <argsstring>() const override</argsstring>
+        <name>TotalDataSize</name>
+        <reimplements refid="class_azura_1_1_math_1_1_geometry_1a149b71e3fb0c73440c46b07482acf76f">TotalDataSize</reimplements>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Source/Physics/Inc/Physics/Geometry/ClothPlane.h" line="29" column="1" bodyfile="Source/Physics/Src/Geometry/ClothPlane.cpp" bodystart="290" bodyend="292"/>
+      </memberdef>
+      <memberdef kind="function" id="class_azura_1_1_physics_1_1_cloth_plane_1a057be4fdbefc9818ee36b418388920a2" prot="public" static="no" const="yes" explicit="no" inline="no" virt="virtual">
+        <type>U32</type>
+        <definition>U32 Azura::Physics::ClothPlane::NormalDataSize</definition>
+        <argsstring>() const override</argsstring>
+        <name>NormalDataSize</name>
+        <reimplements refid="class_azura_1_1_math_1_1_geometry_1a77e056714cf8fde1d7c15d4f7b01e84a">NormalDataSize</reimplements>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Source/Physics/Inc/Physics/Geometry/ClothPlane.h" line="30" column="1" bodyfile="Source/Physics/Src/Geometry/ClothPlane.cpp" bodystart="121" bodyend="123"/>
+      </memberdef>
+      <memberdef kind="function" id="class_azura_1_1_physics_1_1_cloth_plane_1a6e40e12130e5a6789c0eabfa2b1144e5" prot="public" static="no" const="yes" explicit="no" inline="no" virt="virtual">
+        <type>const U8 *</type>
+        <definition>const U8 * Azura::Physics::ClothPlane::NormalData</definition>
+        <argsstring>() const override</argsstring>
+        <name>NormalData</name>
+        <reimplements refid="class_azura_1_1_math_1_1_geometry_1ad3a024bf9d28a6d3d230eeac7d6aa490">NormalData</reimplements>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Source/Physics/Inc/Physics/Geometry/ClothPlane.h" line="31" column="1" bodyfile="Source/Physics/Src/Geometry/ClothPlane.cpp" bodystart="139" bodyend="142"/>
+      </memberdef>
+      <memberdef kind="function" id="class_azura_1_1_physics_1_1_cloth_plane_1aee900816238f9707a55f684e0c9833a2" prot="public" static="no" const="yes" explicit="no" inline="no" virt="virtual">
+        <type>RawStorageFormat</type>
+        <definition>RawStorageFormat Azura::Physics::ClothPlane::GetNormalFormat</definition>
+        <argsstring>() const override</argsstring>
+        <name>GetNormalFormat</name>
+        <reimplements refid="class_azura_1_1_math_1_1_geometry_1a9d33a51d7ddf0c70953e2152be361a4c">GetNormalFormat</reimplements>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Source/Physics/Inc/Physics/Geometry/ClothPlane.h" line="32" column="1" bodyfile="Source/Physics/Src/Geometry/ClothPlane.cpp" bodystart="157" bodyend="159"/>
+      </memberdef>
+      <memberdef kind="function" id="class_azura_1_1_physics_1_1_cloth_plane_1a5fcf4e3163359a9c3d2f9173de210941" prot="public" static="no" const="yes" explicit="no" inline="no" virt="virtual">
+        <type>U32</type>
+        <definition>U32 Azura::Physics::ClothPlane::UVDataSize</definition>
+        <argsstring>() const override</argsstring>
+        <name>UVDataSize</name>
+        <reimplements refid="class_azura_1_1_math_1_1_geometry_1a812a50d6a44b12d6e3697d04a879c1d8">UVDataSize</reimplements>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Source/Physics/Inc/Physics/Geometry/ClothPlane.h" line="34" column="1" bodyfile="Source/Physics/Src/Geometry/ClothPlane.cpp" bodystart="125" bodyend="127"/>
+      </memberdef>
+      <memberdef kind="function" id="class_azura_1_1_physics_1_1_cloth_plane_1a10f00f0b0d38b4a303e33c82fdeb1822" prot="public" static="no" const="yes" explicit="no" inline="no" virt="virtual">
+        <type>const U8 *</type>
+        <definition>const U8 * Azura::Physics::ClothPlane::UVData</definition>
+        <argsstring>() const override</argsstring>
+        <name>UVData</name>
+        <reimplements refid="class_azura_1_1_math_1_1_geometry_1aaef0eabbb1cc1269c20309ca3eac81b8">UVData</reimplements>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Source/Physics/Inc/Physics/Geometry/ClothPlane.h" line="35" column="1" bodyfile="Source/Physics/Src/Geometry/ClothPlane.cpp" bodystart="144" bodyend="147"/>
+      </memberdef>
+      <memberdef kind="function" id="class_azura_1_1_physics_1_1_cloth_plane_1a35dc3af01854d3d3f8100e605e6f3455" prot="public" static="no" const="yes" explicit="no" inline="no" virt="virtual">
+        <type>RawStorageFormat</type>
+        <definition>RawStorageFormat Azura::Physics::ClothPlane::GetUVFormat</definition>
+        <argsstring>() const override</argsstring>
+        <name>GetUVFormat</name>
+        <reimplements refid="class_azura_1_1_math_1_1_geometry_1ad689616ffa31f5bdfcfa50daf5bdc7be">GetUVFormat</reimplements>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Source/Physics/Inc/Physics/Geometry/ClothPlane.h" line="36" column="1" bodyfile="Source/Physics/Src/Geometry/ClothPlane.cpp" bodystart="161" bodyend="163"/>
+      </memberdef>
+      <memberdef kind="function" id="class_azura_1_1_physics_1_1_cloth_plane_1a9f5226c057d7007b3d1241bfe66939f2" prot="public" static="no" const="no" explicit="no" inline="no" virt="virtual">
+        <type>void</type>
+        <definition>void Azura::Physics::ClothPlane::SetAnchorOnIndex</definition>
+        <argsstring>(U32 idx) override</argsstring>
+        <name>SetAnchorOnIndex</name>
+        <reimplements refid="class_azura_1_1_physics_1_1_i_cloth_physics_geometry_1a96c120f3204c0ce597340f0d1d79bda7">SetAnchorOnIndex</reimplements>
+        <param>
+          <type>U32</type>
+          <declname>idx</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Source/Physics/Inc/Physics/Geometry/ClothPlane.h" line="39" column="1" bodyfile="Source/Physics/Src/Geometry/ClothPlane.cpp" bodystart="165" bodyend="167"/>
+      </memberdef>
+      <memberdef kind="function" id="class_azura_1_1_physics_1_1_cloth_plane_1a492cbbaf894f0a4338f98744347c9218" prot="public" static="no" const="yes" explicit="no" inline="no" virt="virtual">
+        <type>const <ref refid="class_azura_1_1_containers_1_1_vector" kindref="compound">Containers::Vector</ref>&lt; float &gt; &amp;</type>
+        <definition>const Containers::Vector&lt; float &gt; &amp; Azura::Physics::ClothPlane::GetVertexInverseMass</definition>
+        <argsstring>() const override</argsstring>
+        <name>GetVertexInverseMass</name>
+        <reimplements refid="class_azura_1_1_physics_1_1_i_cloth_physics_geometry_1a524150d9cbbb565ecdf02777f82f58e1">GetVertexInverseMass</reimplements>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Source/Physics/Inc/Physics/Geometry/ClothPlane.h" line="40" column="1" bodyfile="Source/Physics/Src/Geometry/ClothPlane.cpp" bodystart="169" bodyend="171"/>
+      </memberdef>
+      <memberdef kind="function" id="class_azura_1_1_physics_1_1_cloth_plane_1a1211a696400b62244cabe73f502aff96" prot="public" static="no" const="no" explicit="no" inline="no" virt="virtual">
+        <type><ref refid="class_azura_1_1_physics_1_1_p_b_d_1_1_cloth_solving_view" kindref="compound">PBD::ClothSolvingView</ref></type>
+        <definition>ClothSolvingView Azura::Physics::ClothPlane::GetPBDSolvingView</definition>
+        <argsstring>(Memory::Allocator &amp;allocator) override</argsstring>
+        <name>GetPBDSolvingView</name>
+        <reimplements refid="class_azura_1_1_physics_1_1_i_cloth_physics_geometry_1a35e44d9ac2047b76606d418921b68cdb">GetPBDSolvingView</reimplements>
+        <param>
+          <type><ref refid="class_azura_1_1_memory_1_1_allocator" kindref="compound">Memory::Allocator</ref> &amp;</type>
+          <declname>allocator</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Source/Physics/Inc/Physics/Geometry/ClothPlane.h" line="41" column="1" bodyfile="Source/Physics/Src/Geometry/ClothPlane.cpp" bodystart="173" bodyend="280"/>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="private-func">
+      <memberdef kind="function" id="class_azura_1_1_physics_1_1_cloth_plane_1a1f21e94e52fb71ab9230950a359136bf" prot="private" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void Azura::Physics::ClothPlane::AddEdgeTriangleNeighbor</definition>
+        <argsstring>(const Edge &amp;edge, const U32 triangleIdx)</argsstring>
+        <name>AddEdgeTriangleNeighbor</name>
+        <param>
+          <type>const <ref refid="struct_azura_1_1_physics_1_1_edge" kindref="compound">Edge</ref> &amp;</type>
+          <declname>edge</declname>
+        </param>
+        <param>
+          <type>const U32</type>
+          <declname>triangleIdx</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Source/Physics/Inc/Physics/Geometry/ClothPlane.h" line="44" column="1" bodyfile="Source/Physics/Src/Geometry/ClothPlane.cpp" bodystart="294" bodyend="303"/>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <inheritancegraph>
+      <node id="90">
+        <label>Azura::Physics::IPhysicsGeometry</label>
+        <link refid="class_azura_1_1_physics_1_1_i_physics_geometry"/>
+        <childnode refid="91" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="88">
+        <label>Azura::Physics::ClothPlane</label>
+        <link refid="class_azura_1_1_physics_1_1_cloth_plane"/>
+        <childnode refid="89" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="89">
+        <label>Azura::Physics::IClothPhysicsGeometry</label>
+        <link refid="class_azura_1_1_physics_1_1_i_cloth_physics_geometry"/>
+        <childnode refid="90" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="91">
+        <label>Azura::Math::Geometry</label>
+        <link refid="class_azura_1_1_math_1_1_geometry"/>
+      </node>
+    </inheritancegraph>
+    <collaborationgraph>
+      <node id="94">
+        <label>Azura::Physics::IPhysicsGeometry</label>
+        <link refid="class_azura_1_1_physics_1_1_i_physics_geometry"/>
+        <childnode refid="95" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="92">
+        <label>Azura::Physics::ClothPlane</label>
+        <link refid="class_azura_1_1_physics_1_1_cloth_plane"/>
+        <childnode refid="93" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="93">
+        <label>Azura::Physics::IClothPhysicsGeometry</label>
+        <link refid="class_azura_1_1_physics_1_1_i_cloth_physics_geometry"/>
+        <childnode refid="94" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="95">
+        <label>Azura::Math::Geometry</label>
+        <link refid="class_azura_1_1_math_1_1_geometry"/>
+      </node>
+    </collaborationgraph>
+    <location file="Source/Physics/Inc/Physics/Geometry/ClothPlane.h" line="16" column="1" bodyfile="Source/Physics/Inc/Physics/Geometry/ClothPlane.h" bodystart="16" bodyend="55"/>
+    <listofallmembers>
+      <member refid="class_azura_1_1_physics_1_1_cloth_plane_1a1f21e94e52fb71ab9230950a359136bf" prot="private" virt="non-virtual"><scope>Azura::Physics::ClothPlane</scope><name>AddEdgeTriangleNeighbor</name></member>
+      <member refid="class_azura_1_1_physics_1_1_cloth_plane_1a29c2674aa2c6f3ac474a41630be8fc20" prot="public" virt="non-virtual"><scope>Azura::Physics::ClothPlane</scope><name>ClothPlane</name></member>
+      <member refid="class_azura_1_1_physics_1_1_cloth_plane_1ac1e5daa24d335de3fe042576435c5f1d" prot="public" virt="non-virtual"><scope>Azura::Physics::ClothPlane</scope><name>ClothPlane</name></member>
+      <member refid="class_azura_1_1_math_1_1_geometry_1a7ff397714deef6a88c8e4edddc0ba032" prot="public" virt="non-virtual"><scope>Azura::Physics::ClothPlane</scope><name>Geometry</name></member>
+      <member refid="class_azura_1_1_math_1_1_geometry_1abd1cd8e142652b4dfd80378a52f45e47" prot="public" virt="non-virtual"><scope>Azura::Physics::ClothPlane</scope><name>Geometry</name></member>
+      <member refid="class_azura_1_1_math_1_1_geometry_1ac6d5eb1dbfcfce2d84d5f4fe54640922" prot="public" virt="non-virtual"><scope>Azura::Physics::ClothPlane</scope><name>Geometry</name></member>
+      <member refid="class_azura_1_1_physics_1_1_cloth_plane_1a3acbf3bc7b57df09c7eb1b617494d6ba" prot="public" virt="virtual"><scope>Azura::Physics::ClothPlane</scope><name>GetIndexCount</name></member>
+      <member refid="class_azura_1_1_physics_1_1_cloth_plane_1a460be278242cdcbde339f200030d413d" prot="public" virt="virtual"><scope>Azura::Physics::ClothPlane</scope><name>GetIndexFormat</name></member>
+      <member refid="class_azura_1_1_physics_1_1_cloth_plane_1aee900816238f9707a55f684e0c9833a2" prot="public" virt="virtual"><scope>Azura::Physics::ClothPlane</scope><name>GetNormalFormat</name></member>
+      <member refid="class_azura_1_1_physics_1_1_cloth_plane_1a1211a696400b62244cabe73f502aff96" prot="public" virt="virtual"><scope>Azura::Physics::ClothPlane</scope><name>GetPBDSolvingView</name></member>
+      <member refid="class_azura_1_1_physics_1_1_cloth_plane_1a35dc3af01854d3d3f8100e605e6f3455" prot="public" virt="virtual"><scope>Azura::Physics::ClothPlane</scope><name>GetUVFormat</name></member>
+      <member refid="class_azura_1_1_physics_1_1_cloth_plane_1ab9bcdf5d3ca9e50014961df4a71a5d6e" prot="public" virt="virtual"><scope>Azura::Physics::ClothPlane</scope><name>GetVertexCount</name></member>
+      <member refid="class_azura_1_1_physics_1_1_cloth_plane_1a539393abd1fdc386e3bae691122188b1" prot="public" virt="virtual"><scope>Azura::Physics::ClothPlane</scope><name>GetVertexFormat</name></member>
+      <member refid="class_azura_1_1_physics_1_1_cloth_plane_1a492cbbaf894f0a4338f98744347c9218" prot="public" virt="virtual"><scope>Azura::Physics::ClothPlane</scope><name>GetVertexInverseMass</name></member>
+      <member refid="class_azura_1_1_physics_1_1_cloth_plane_1a6d34438dc168a739c5eca6fcef790a7c" prot="public" virt="virtual"><scope>Azura::Physics::ClothPlane</scope><name>IndexData</name></member>
+      <member refid="class_azura_1_1_physics_1_1_cloth_plane_1a0429a289fafbac63d49bc54c4ec38ad5" prot="public" virt="virtual"><scope>Azura::Physics::ClothPlane</scope><name>IndexDataSize</name></member>
+      <member refid="class_azura_1_1_physics_1_1_cloth_plane_1ada22d38f2236cf424c8e1107c46e1bf1" prot="private" virt="non-virtual"><scope>Azura::Physics::ClothPlane</scope><name>m_anchorIdx</name></member>
+      <member refid="class_azura_1_1_physics_1_1_cloth_plane_1a0d0966a933060d716b44f144b8966ce2" prot="private" virt="non-virtual"><scope>Azura::Physics::ClothPlane</scope><name>m_edgeTriangleMap</name></member>
+      <member refid="class_azura_1_1_physics_1_1_cloth_plane_1aa34bd5cd8dc2d359ba806d4db1386abe" prot="private" virt="non-virtual"><scope>Azura::Physics::ClothPlane</scope><name>m_normals</name></member>
+      <member refid="class_azura_1_1_physics_1_1_cloth_plane_1ad31b980543088dd02d934dbfd509b319" prot="private" virt="non-virtual"><scope>Azura::Physics::ClothPlane</scope><name>m_triangles</name></member>
+      <member refid="class_azura_1_1_physics_1_1_cloth_plane_1af9cfc5edbd93a93aa583542d03dcddaa" prot="private" virt="non-virtual"><scope>Azura::Physics::ClothPlane</scope><name>m_uv</name></member>
+      <member refid="class_azura_1_1_physics_1_1_cloth_plane_1a8d93cce50d8dfb03afd336dc8453883e" prot="private" virt="non-virtual"><scope>Azura::Physics::ClothPlane</scope><name>m_vertexInvMass</name></member>
+      <member refid="class_azura_1_1_physics_1_1_cloth_plane_1a2cef89c499304db39517ebb85809dd76" prot="private" virt="non-virtual"><scope>Azura::Physics::ClothPlane</scope><name>m_vertices</name></member>
+      <member refid="class_azura_1_1_physics_1_1_cloth_plane_1a6e40e12130e5a6789c0eabfa2b1144e5" prot="public" virt="virtual"><scope>Azura::Physics::ClothPlane</scope><name>NormalData</name></member>
+      <member refid="class_azura_1_1_physics_1_1_cloth_plane_1a057be4fdbefc9818ee36b418388920a2" prot="public" virt="virtual"><scope>Azura::Physics::ClothPlane</scope><name>NormalDataSize</name></member>
+      <member refid="class_azura_1_1_math_1_1_geometry_1a1f4182094f19c0f3e4d3a249707f34e9" prot="public" virt="non-virtual"><scope>Azura::Physics::ClothPlane</scope><name>operator=</name></member>
+      <member refid="class_azura_1_1_math_1_1_geometry_1a37a28a7b74fc5abc68f231c9d3af8c72" prot="public" virt="non-virtual"><scope>Azura::Physics::ClothPlane</scope><name>operator=</name></member>
+      <member refid="class_azura_1_1_physics_1_1_cloth_plane_1a9f5226c057d7007b3d1241bfe66939f2" prot="public" virt="virtual"><scope>Azura::Physics::ClothPlane</scope><name>SetAnchorOnIndex</name></member>
+      <member refid="class_azura_1_1_physics_1_1_cloth_plane_1a7ad72cba68405769456532988296936e" prot="public" virt="virtual"><scope>Azura::Physics::ClothPlane</scope><name>TotalDataSize</name></member>
+      <member refid="class_azura_1_1_physics_1_1_cloth_plane_1a10f00f0b0d38b4a303e33c82fdeb1822" prot="public" virt="virtual"><scope>Azura::Physics::ClothPlane</scope><name>UVData</name></member>
+      <member refid="class_azura_1_1_physics_1_1_cloth_plane_1a5fcf4e3163359a9c3d2f9173de210941" prot="public" virt="virtual"><scope>Azura::Physics::ClothPlane</scope><name>UVDataSize</name></member>
+      <member refid="class_azura_1_1_physics_1_1_cloth_plane_1aad72ffb9544834a513dc42226afa1796" prot="public" virt="virtual"><scope>Azura::Physics::ClothPlane</scope><name>VertexData</name></member>
+      <member refid="class_azura_1_1_physics_1_1_cloth_plane_1ab6aac3d0cfe9780400e7c0230b7d9deb" prot="public" virt="virtual"><scope>Azura::Physics::ClothPlane</scope><name>VertexDataSize</name></member>
+      <member refid="class_azura_1_1_math_1_1_geometry_1ae50195fe0fa7af9125260c39de331fdf" prot="public" virt="virtual"><scope>Azura::Physics::ClothPlane</scope><name>~Geometry</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

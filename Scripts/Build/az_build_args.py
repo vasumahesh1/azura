@@ -16,6 +16,7 @@ parser.add_argument("--clean", help="Clean the project", action="store_true", re
 parser.add_argument("--build", help="Build Release or Debug, defaults to Debug Mode", default="Debug", required=False)
 parser.add_argument("--projectFiles", help="Flag to tell the build system to generate project files", action="store_true")
 parser.add_argument("--deploy", help="Flag to tell the build system to generate project files", action="store_true")
+parser.add_argument("--docs", help="Flag to generate docs - This will diregard other inputs as args", action="store_true")
 parser.add_argument("--includeTests", help="Flag to run tests as well", action="store_true")
 parser.add_argument("--testRegex", help="Regex to Filter Test groups", default="", required=False)
 parser.add_argument("-v", help="Version", action="store_true")

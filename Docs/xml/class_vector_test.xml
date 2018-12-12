@@ -1,0 +1,122 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.8.14">
+  <compounddef id="class_vector_test" kind="class" language="C++" prot="public">
+    <compoundname>VectorTest</compoundname>
+    <basecompoundref prot="public" virt="non-virtual">Test</basecompoundref>
+      <sectiondef kind="protected-attrib">
+      <memberdef kind="variable" id="class_vector_test_1a1a1fc89598aa7f3b10c3f4c120df7632" prot="protected" static="no" mutable="no">
+        <type><ref refid="class_azura_1_1_memory_1_1_heap_memory_buffer" kindref="compound">Azura::Memory::HeapMemoryBuffer</ref></type>
+        <definition>Azura::Memory::HeapMemoryBuffer VectorTest::buffer</definition>
+        <argsstring></argsstring>
+        <name>buffer</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Source/Containers/Test/Vector_test.h" line="17" column="1" bodyfile="Source/Containers/Test/Vector_test.h" bodystart="17" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="class_vector_test_1afe68137ad4372b3b76051158ff88a311" prot="protected" static="no" mutable="no">
+        <type><ref refid="class_azura_1_1_memory_1_1_monotonic_allocator" kindref="compound">Azura::Memory::MonotonicAllocator</ref></type>
+        <definition>Azura::Memory::MonotonicAllocator VectorTest::alloc</definition>
+        <argsstring></argsstring>
+        <name>alloc</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Source/Containers/Test/Vector_test.h" line="18" column="1" bodyfile="Source/Containers/Test/Vector_test.h" bodystart="18" bodyend="-1"/>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="protected-func">
+      <memberdef kind="function" id="class_vector_test_1a7fbb9e38d31f779faf2475e75969fd68" prot="protected" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type></type>
+        <definition>VectorTest::VectorTest</definition>
+        <argsstring>()</argsstring>
+        <name>VectorTest</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Source/Containers/Test/Vector_test.h" line="12" column="1" bodyfile="Source/Containers/Test/Vector_test.h" bodystart="12" bodyend="13"/>
+      </memberdef>
+      <memberdef kind="function" id="class_vector_test_1a3c4d17de7055c281c2d94cb2e102d89b" prot="protected" static="no" const="no" explicit="no" inline="yes" virt="virtual">
+        <type></type>
+        <definition>virtual VectorTest::~VectorTest</definition>
+        <argsstring>()</argsstring>
+        <name>~VectorTest</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Source/Containers/Test/Vector_test.h" line="15" column="1" bodyfile="Source/Containers/Test/Vector_test.h" bodystart="15" bodyend="15"/>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <inheritancegraph>
+      <node id="602">
+        <label>Test</label>
+      </node>
+      <node id="601">
+        <label>VectorTest</label>
+        <link refid="class_vector_test"/>
+        <childnode refid="602" relation="public-inheritance">
+        </childnode>
+      </node>
+    </inheritancegraph>
+    <collaborationgraph>
+      <node id="606">
+        <label>Azura::Memory::MemoryBuffer</label>
+        <link refid="class_azura_1_1_memory_1_1_memory_buffer"/>
+      </node>
+      <node id="608">
+        <label>Azura::Memory::Allocator</label>
+        <link refid="class_azura_1_1_memory_1_1_allocator"/>
+      </node>
+      <node id="605">
+        <label>Azura::Memory::HeapMemoryBuffer</label>
+        <link refid="class_azura_1_1_memory_1_1_heap_memory_buffer"/>
+        <childnode refid="606" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="604">
+        <label>Test</label>
+      </node>
+      <node id="603">
+        <label>VectorTest</label>
+        <link refid="class_vector_test"/>
+        <childnode refid="604" relation="public-inheritance">
+        </childnode>
+        <childnode refid="605" relation="usage">
+          <edgelabel>buffer</edgelabel>
+        </childnode>
+        <childnode refid="607" relation="usage">
+          <edgelabel>alloc</edgelabel>
+        </childnode>
+      </node>
+      <node id="607">
+        <label>Azura::Memory::MonotonicAllocator</label>
+        <link refid="class_azura_1_1_memory_1_1_monotonic_allocator"/>
+        <childnode refid="608" relation="public-inheritance">
+        </childnode>
+      </node>
+    </collaborationgraph>
+    <location file="Source/Containers/Test/Vector_test.h" line="10" column="1" bodyfile="Source/Containers/Test/Vector_test.h" bodystart="10" bodyend="19"/>
+    <listofallmembers>
+      <member refid="class_vector_test_1afe68137ad4372b3b76051158ff88a311" prot="protected" virt="non-virtual"><scope>VectorTest</scope><name>alloc</name></member>
+      <member refid="class_vector_test_1a1a1fc89598aa7f3b10c3f4c120df7632" prot="protected" virt="non-virtual"><scope>VectorTest</scope><name>buffer</name></member>
+      <member refid="class_vector_test_1a7fbb9e38d31f779faf2475e75969fd68" prot="protected" virt="non-virtual"><scope>VectorTest</scope><name>VectorTest</name></member>
+      <member refid="class_vector_test_1a3c4d17de7055c281c2d94cb2e102d89b" prot="protected" virt="virtual"><scope>VectorTest</scope><name>~VectorTest</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

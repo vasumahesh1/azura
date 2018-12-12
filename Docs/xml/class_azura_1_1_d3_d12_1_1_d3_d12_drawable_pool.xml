@@ -1,0 +1,1092 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.8.14">
+  <compounddef id="class_azura_1_1_d3_d12_1_1_d3_d12_drawable_pool" kind="class" language="C++" prot="public">
+    <compoundname>Azura::D3D12::D3D12DrawablePool</compoundname>
+    <basecompoundref refid="class_azura_1_1_drawable_pool" prot="public" virt="non-virtual">Azura::DrawablePool</basecompoundref>
+      <sectiondef kind="private-attrib">
+      <memberdef kind="variable" id="class_azura_1_1_d3_d12_1_1_d3_d12_drawable_pool_1a743873e1326db6ebeaf004c718e35391" prot="private" static="no" mutable="no">
+        <type><ref refid="class_azura_1_1_log" kindref="compound">Log</ref></type>
+        <definition>Log Azura::D3D12::D3D12DrawablePool::log_D3D12RenderSystem</definition>
+        <argsstring></argsstring>
+        <name>log_D3D12RenderSystem</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Source/Azura/RenderSystem/Inc/D3D12/D3D12DrawablePool.h" line="75" column="1" bodyfile="Source/Azura/RenderSystem/Inc/D3D12/D3D12DrawablePool.h" bodystart="75" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="class_azura_1_1_d3_d12_1_1_d3_d12_drawable_pool_1ab6fe2a6479e4bbf02494876ce071cd31" prot="private" static="no" mutable="no">
+        <type>const Microsoft::WRL::ComPtr&lt; ID3D12Device &gt; &amp;</type>
+        <definition>const Microsoft::WRL::ComPtr&lt;ID3D12Device&gt;&amp; Azura::D3D12::D3D12DrawablePool::m_device</definition>
+        <argsstring></argsstring>
+        <name>m_device</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Source/Azura/RenderSystem/Inc/D3D12/D3D12DrawablePool.h" line="77" column="1" bodyfile="Source/Azura/RenderSystem/Inc/D3D12/D3D12DrawablePool.h" bodystart="77" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="class_azura_1_1_d3_d12_1_1_d3_d12_drawable_pool_1a36133cfff7941c7b9b6d7ceda92e531b" prot="private" static="no" mutable="no">
+        <type>const <ref refid="class_azura_1_1_containers_1_1_vector" kindref="compound">Containers::Vector</ref>&lt; <ref refid="struct_azura_1_1_descriptor_slot" kindref="compound">DescriptorSlot</ref> &gt; &amp;</type>
+        <definition>const Containers::Vector&lt;DescriptorSlot&gt;&amp; Azura::D3D12::D3D12DrawablePool::m_globalDescriptorSlots</definition>
+        <argsstring></argsstring>
+        <name>m_globalDescriptorSlots</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Source/Azura/RenderSystem/Inc/D3D12/D3D12DrawablePool.h" line="78" column="1" bodyfile="Source/Azura/RenderSystem/Inc/D3D12/D3D12DrawablePool.h" bodystart="78" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="class_azura_1_1_d3_d12_1_1_d3_d12_drawable_pool_1ace55886a31948423b1de59872b13e7f1" prot="private" static="no" mutable="no">
+        <type>const <ref refid="class_azura_1_1_containers_1_1_vector" kindref="compound">Containers::Vector</ref>&lt; <ref refid="class_azura_1_1_d3_d12_1_1_d3_d12_scoped_shader" kindref="compound">D3D12ScopedShader</ref> &gt; &amp;</type>
+        <definition>const Containers::Vector&lt;D3D12ScopedShader&gt;&amp; Azura::D3D12::D3D12DrawablePool::m_shaders</definition>
+        <argsstring></argsstring>
+        <name>m_shaders</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Source/Azura/RenderSystem/Inc/D3D12/D3D12DrawablePool.h" line="79" column="1" bodyfile="Source/Azura/RenderSystem/Inc/D3D12/D3D12DrawablePool.h" bodystart="79" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="class_azura_1_1_d3_d12_1_1_d3_d12_drawable_pool_1a92f5a685478096dc6735fbdf15c22b48" prot="private" static="no" mutable="no">
+        <type><ref refid="class_azura_1_1_containers_1_1_vector" kindref="compound">Containers::Vector</ref>&lt; <ref refid="class_azura_1_1_d3_d12_1_1_d3_d12_scoped_pipeline" kindref="compound">D3D12ScopedPipeline</ref> &gt;</type>
+        <definition>Containers::Vector&lt;D3D12ScopedPipeline&gt; Azura::D3D12::D3D12DrawablePool::m_pipelines</definition>
+        <argsstring></argsstring>
+        <name>m_pipelines</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Source/Azura/RenderSystem/Inc/D3D12/D3D12DrawablePool.h" line="81" column="1" bodyfile="Source/Azura/RenderSystem/Inc/D3D12/D3D12DrawablePool.h" bodystart="81" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="class_azura_1_1_d3_d12_1_1_d3_d12_drawable_pool_1a252cce420f44b567ed5c2686816bfca2" prot="private" static="no" mutable="no">
+        <type><ref refid="class_azura_1_1_containers_1_1_vector" kindref="compound">Containers::Vector</ref>&lt; <ref refid="class_azura_1_1_d3_d12_1_1_d3_d12_drawable" kindref="compound">D3D12Drawable</ref> &gt;</type>
+        <definition>Containers::Vector&lt;D3D12Drawable&gt; Azura::D3D12::D3D12DrawablePool::m_drawables</definition>
+        <argsstring></argsstring>
+        <name>m_drawables</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Source/Azura/RenderSystem/Inc/D3D12/D3D12DrawablePool.h" line="82" column="1" bodyfile="Source/Azura/RenderSystem/Inc/D3D12/D3D12DrawablePool.h" bodystart="82" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="class_azura_1_1_d3_d12_1_1_d3_d12_drawable_pool_1a4a7cde0db192e12cbe100c021ccd0db2" prot="private" static="no" mutable="no">
+        <type><ref refid="class_azura_1_1_containers_1_1_vector" kindref="compound">Containers::Vector</ref>&lt; std::reference_wrapper&lt; <ref refid="class_azura_1_1_d3_d12_1_1_d3_d12_scoped_render_pass" kindref="compound">D3D12ScopedRenderPass</ref> &gt; &gt;</type>
+        <definition>Containers::Vector&lt;std::reference_wrapper&lt;D3D12ScopedRenderPass&gt; &gt; Azura::D3D12::D3D12DrawablePool::m_renderPasses</definition>
+        <argsstring></argsstring>
+        <name>m_renderPasses</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Source/Azura/RenderSystem/Inc/D3D12/D3D12DrawablePool.h" line="84" column="1" bodyfile="Source/Azura/RenderSystem/Inc/D3D12/D3D12DrawablePool.h" bodystart="84" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="class_azura_1_1_d3_d12_1_1_d3_d12_drawable_pool_1a5274a59182d025d9dcd20b35c6cd4322" prot="private" static="no" mutable="no">
+        <type><ref refid="class_azura_1_1_containers_1_1_vector" kindref="compound">Containers::Vector</ref>&lt; std::reference_wrapper&lt; const <ref refid="class_azura_1_1_d3_d12_1_1_d3_d12_scoped_buffer" kindref="compound">D3D12ScopedBuffer</ref> &gt; &gt;</type>
+        <definition>Containers::Vector&lt;std::reference_wrapper&lt;const D3D12ScopedBuffer&gt; &gt; Azura::D3D12::D3D12DrawablePool::m_gpuBuffers</definition>
+        <argsstring></argsstring>
+        <name>m_gpuBuffers</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Source/Azura/RenderSystem/Inc/D3D12/D3D12DrawablePool.h" line="85" column="1" bodyfile="Source/Azura/RenderSystem/Inc/D3D12/D3D12DrawablePool.h" bodystart="85" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="class_azura_1_1_d3_d12_1_1_d3_d12_drawable_pool_1a3d3a5e67221fb5d8a4a26cc70c48398c" prot="private" static="no" mutable="no">
+        <type>Microsoft::WRL::ComPtr&lt; ID3D12CommandQueue &gt;</type>
+        <definition>Microsoft::WRL::ComPtr&lt;ID3D12CommandQueue&gt; Azura::D3D12::D3D12DrawablePool::m_graphicsCommandQueue</definition>
+        <argsstring></argsstring>
+        <name>m_graphicsCommandQueue</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Source/Azura/RenderSystem/Inc/D3D12/D3D12DrawablePool.h" line="87" column="1" bodyfile="Source/Azura/RenderSystem/Inc/D3D12/D3D12DrawablePool.h" bodystart="87" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="class_azura_1_1_d3_d12_1_1_d3_d12_drawable_pool_1ae4ff338892b19f4701dd2fa96ad3a4cf" prot="private" static="no" mutable="no">
+        <type><ref refid="class_azura_1_1_d3_d12_1_1_d3_d12_pipeline_factory" kindref="compound">D3D12PipelineFactory</ref></type>
+        <definition>D3D12PipelineFactory Azura::D3D12::D3D12DrawablePool::m_pipelineFactory</definition>
+        <argsstring></argsstring>
+        <name>m_pipelineFactory</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Source/Azura/RenderSystem/Inc/D3D12/D3D12DrawablePool.h" line="89" column="1" bodyfile="Source/Azura/RenderSystem/Inc/D3D12/D3D12DrawablePool.h" bodystart="89" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="class_azura_1_1_d3_d12_1_1_d3_d12_drawable_pool_1aaa8bb05233cdf5e1575a53103fb5a1fa" prot="private" static="no" mutable="no">
+        <type><ref refid="class_azura_1_1_d3_d12_1_1_d3_d12_scoped_buffer" kindref="compound">D3D12ScopedBuffer</ref></type>
+        <definition>D3D12ScopedBuffer Azura::D3D12::D3D12DrawablePool::m_updateBuffer</definition>
+        <argsstring></argsstring>
+        <name>m_updateBuffer</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Source/Azura/RenderSystem/Inc/D3D12/D3D12DrawablePool.h" line="90" column="1" bodyfile="Source/Azura/RenderSystem/Inc/D3D12/D3D12DrawablePool.h" bodystart="90" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="class_azura_1_1_d3_d12_1_1_d3_d12_drawable_pool_1a3bdddd48092857a1aafbcfd43b125685" prot="private" static="no" mutable="no">
+        <type><ref refid="class_azura_1_1_d3_d12_1_1_d3_d12_scoped_buffer" kindref="compound">D3D12ScopedBuffer</ref></type>
+        <definition>D3D12ScopedBuffer Azura::D3D12::D3D12DrawablePool::m_stagingBuffer</definition>
+        <argsstring></argsstring>
+        <name>m_stagingBuffer</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Source/Azura/RenderSystem/Inc/D3D12/D3D12DrawablePool.h" line="91" column="1" bodyfile="Source/Azura/RenderSystem/Inc/D3D12/D3D12DrawablePool.h" bodystart="91" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="class_azura_1_1_d3_d12_1_1_d3_d12_drawable_pool_1a1d1b996a31ccf868c995a07cdadaa8cf" prot="private" static="no" mutable="no">
+        <type><ref refid="class_azura_1_1_d3_d12_1_1_d3_d12_scoped_buffer" kindref="compound">D3D12ScopedBuffer</ref></type>
+        <definition>D3D12ScopedBuffer Azura::D3D12::D3D12DrawablePool::m_mainBuffer</definition>
+        <argsstring></argsstring>
+        <name>m_mainBuffer</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Source/Azura/RenderSystem/Inc/D3D12/D3D12DrawablePool.h" line="92" column="1" bodyfile="Source/Azura/RenderSystem/Inc/D3D12/D3D12DrawablePool.h" bodystart="92" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="class_azura_1_1_d3_d12_1_1_d3_d12_drawable_pool_1aa6340657343c3e661d954dbe024b2dea" prot="private" static="no" mutable="no">
+        <type>U32</type>
+        <definition>U32 Azura::D3D12::D3D12DrawablePool::m_descriptorsPerDrawable</definition>
+        <argsstring></argsstring>
+        <name>m_descriptorsPerDrawable</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Source/Azura/RenderSystem/Inc/D3D12/D3D12DrawablePool.h" line="94" column="1" bodyfile="Source/Azura/RenderSystem/Inc/D3D12/D3D12DrawablePool.h" bodystart="94" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="class_azura_1_1_d3_d12_1_1_d3_d12_drawable_pool_1a4ebef154c7e5dd067ee3e34142cb416e" prot="private" static="no" mutable="no">
+        <type>U32</type>
+        <definition>U32 Azura::D3D12::D3D12DrawablePool::m_cbvSrvDescriptorElementSize</definition>
+        <argsstring></argsstring>
+        <name>m_cbvSrvDescriptorElementSize</name>
+        <initializer>{0}</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Source/Azura/RenderSystem/Inc/D3D12/D3D12DrawablePool.h" line="96" column="1" bodyfile="Source/Azura/RenderSystem/Inc/D3D12/D3D12DrawablePool.h" bodystart="96" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="class_azura_1_1_d3_d12_1_1_d3_d12_drawable_pool_1a37851924e73fcfc9c21370dd9715fcb3" prot="private" static="no" mutable="no">
+        <type>U32</type>
+        <definition>U32 Azura::D3D12::D3D12DrawablePool::m_samplerDescriptorElementSize</definition>
+        <argsstring></argsstring>
+        <name>m_samplerDescriptorElementSize</name>
+        <initializer>{0}</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Source/Azura/RenderSystem/Inc/D3D12/D3D12DrawablePool.h" line="97" column="1" bodyfile="Source/Azura/RenderSystem/Inc/D3D12/D3D12DrawablePool.h" bodystart="97" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="class_azura_1_1_d3_d12_1_1_d3_d12_drawable_pool_1a68416c0ec8c452637c82af01e81cf4a5" prot="private" static="no" mutable="no">
+        <type>U32</type>
+        <definition>U32 Azura::D3D12::D3D12DrawablePool::m_offsetToDrawableHeap</definition>
+        <argsstring></argsstring>
+        <name>m_offsetToDrawableHeap</name>
+        <initializer>{0}</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Source/Azura/RenderSystem/Inc/D3D12/D3D12DrawablePool.h" line="98" column="1" bodyfile="Source/Azura/RenderSystem/Inc/D3D12/D3D12DrawablePool.h" bodystart="98" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="class_azura_1_1_d3_d12_1_1_d3_d12_drawable_pool_1a64792178bb60ac66b588a4a3248b7850" prot="private" static="no" mutable="no">
+        <type>U32</type>
+        <definition>U32 Azura::D3D12::D3D12DrawablePool::m_offsetToRenderPassInputs</definition>
+        <argsstring></argsstring>
+        <name>m_offsetToRenderPassInputs</name>
+        <initializer>{0}</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Source/Azura/RenderSystem/Inc/D3D12/D3D12DrawablePool.h" line="99" column="1" bodyfile="Source/Azura/RenderSystem/Inc/D3D12/D3D12DrawablePool.h" bodystart="99" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="class_azura_1_1_d3_d12_1_1_d3_d12_drawable_pool_1a3e008cc26f94f40a61e5657c70f4008a" prot="private" static="no" mutable="no">
+        <type><ref refid="class_azura_1_1_containers_1_1_vector" kindref="compound">Containers::Vector</ref>&lt; <ref refid="class_azura_1_1_d3_d12_1_1_d3_d12_scoped_image" kindref="compound">D3D12ScopedImage</ref> &gt;</type>
+        <definition>Containers::Vector&lt;D3D12ScopedImage&gt; Azura::D3D12::D3D12DrawablePool::m_images</definition>
+        <argsstring></argsstring>
+        <name>m_images</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Source/Azura/RenderSystem/Inc/D3D12/D3D12DrawablePool.h" line="101" column="1" bodyfile="Source/Azura/RenderSystem/Inc/D3D12/D3D12DrawablePool.h" bodystart="101" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="class_azura_1_1_d3_d12_1_1_d3_d12_drawable_pool_1a29f972eedd12deef12e86f150400c083" prot="private" static="no" mutable="no">
+        <type><ref refid="class_azura_1_1_containers_1_1_vector" kindref="compound">Containers::Vector</ref>&lt; <ref refid="class_azura_1_1_d3_d12_1_1_d3_d12_scoped_sampler" kindref="compound">D3D12ScopedSampler</ref> &gt;</type>
+        <definition>Containers::Vector&lt;D3D12ScopedSampler&gt; Azura::D3D12::D3D12DrawablePool::m_samplers</definition>
+        <argsstring></argsstring>
+        <name>m_samplers</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Source/Azura/RenderSystem/Inc/D3D12/D3D12DrawablePool.h" line="102" column="1" bodyfile="Source/Azura/RenderSystem/Inc/D3D12/D3D12DrawablePool.h" bodystart="102" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="class_azura_1_1_d3_d12_1_1_d3_d12_drawable_pool_1a18321463dcb2b970a0ea669ccc432b25" prot="private" static="no" mutable="no">
+        <type><ref refid="class_azura_1_1_containers_1_1_vector" kindref="compound">Containers::Vector</ref>&lt; <ref refid="class_azura_1_1_d3_d12_1_1_d3_d12_scoped_command_buffer" kindref="compound">D3D12ScopedCommandBuffer</ref> &gt;</type>
+        <definition>Containers::Vector&lt;D3D12ScopedCommandBuffer&gt; Azura::D3D12::D3D12DrawablePool::m_secondaryCommandBuffers</definition>
+        <argsstring></argsstring>
+        <name>m_secondaryCommandBuffers</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Source/Azura/RenderSystem/Inc/D3D12/D3D12DrawablePool.h" line="103" column="1" bodyfile="Source/Azura/RenderSystem/Inc/D3D12/D3D12DrawablePool.h" bodystart="103" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="class_azura_1_1_d3_d12_1_1_d3_d12_drawable_pool_1a1a413e2ec7587302e32f5df38ee972db" prot="private" static="no" mutable="no">
+        <type>Microsoft::WRL::ComPtr&lt; ID3D12DescriptorHeap &gt;</type>
+        <definition>Microsoft::WRL::ComPtr&lt;ID3D12DescriptorHeap&gt; Azura::D3D12::D3D12DrawablePool::m_descriptorDrawableHeap</definition>
+        <argsstring></argsstring>
+        <name>m_descriptorDrawableHeap</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Source/Azura/RenderSystem/Inc/D3D12/D3D12DrawablePool.h" line="105" column="1" bodyfile="Source/Azura/RenderSystem/Inc/D3D12/D3D12DrawablePool.h" bodystart="105" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="class_azura_1_1_d3_d12_1_1_d3_d12_drawable_pool_1a3ac802af8dbee5848b504cf15a112888" prot="private" static="no" mutable="no">
+        <type>Microsoft::WRL::ComPtr&lt; ID3D12DescriptorHeap &gt;</type>
+        <definition>Microsoft::WRL::ComPtr&lt;ID3D12DescriptorHeap&gt; Azura::D3D12::D3D12DrawablePool::m_descriptorSamplerHeap</definition>
+        <argsstring></argsstring>
+        <name>m_descriptorSamplerHeap</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Source/Azura/RenderSystem/Inc/D3D12/D3D12DrawablePool.h" line="106" column="1" bodyfile="Source/Azura/RenderSystem/Inc/D3D12/D3D12DrawablePool.h" bodystart="106" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="class_azura_1_1_d3_d12_1_1_d3_d12_drawable_pool_1ad17c87c5c5650733ca52c14778b9fe1f" prot="private" static="no" mutable="no">
+        <type><ref refid="class_azura_1_1_containers_1_1_vector" kindref="compound">Containers::Vector</ref>&lt; ID3D12DescriptorHeap * &gt;</type>
+        <definition>Containers::Vector&lt;ID3D12DescriptorHeap*&gt; Azura::D3D12::D3D12DrawablePool::m_allHeaps</definition>
+        <argsstring></argsstring>
+        <name>m_allHeaps</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Source/Azura/RenderSystem/Inc/D3D12/D3D12DrawablePool.h" line="108" column="1" bodyfile="Source/Azura/RenderSystem/Inc/D3D12/D3D12DrawablePool.h" bodystart="108" bodyend="-1"/>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="public-func">
+      <memberdef kind="function" id="class_azura_1_1_d3_d12_1_1_d3_d12_drawable_pool_1ad5f5eb32ff72c500cf944c9ec3edb788" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>Azura::D3D12::D3D12DrawablePool::D3D12DrawablePool</definition>
+        <argsstring>(const Microsoft::WRL::ComPtr&lt; ID3D12Device &gt; &amp;device, const DrawablePoolCreateInfo &amp;createInfo, const DescriptorCount &amp;descriptorCount, const Containers::Vector&lt; DescriptorSlot &gt; &amp;descriptorSlots, const Containers::Vector&lt; D3D12ScopedShader &gt; &amp;shaders, const Containers::Vector&lt; D3D12ScopedRenderPass &gt; &amp;renderPasses, const Containers::Vector&lt; D3D12ScopedBuffer &gt; &amp;gpuBuffers, Microsoft::WRL::ComPtr&lt; ID3D12CommandQueue &gt; commandQueue, Memory::Allocator &amp;mainAllocator, Memory::Allocator &amp;initAllocator, Log log)</argsstring>
+        <name>D3D12DrawablePool</name>
+        <param>
+          <type>const Microsoft::WRL::ComPtr&lt; ID3D12Device &gt; &amp;</type>
+          <declname>device</declname>
+        </param>
+        <param>
+          <type>const <ref refid="struct_azura_1_1_drawable_pool_create_info" kindref="compound">DrawablePoolCreateInfo</ref> &amp;</type>
+          <declname>createInfo</declname>
+        </param>
+        <param>
+          <type>const <ref refid="struct_azura_1_1_descriptor_count" kindref="compound">DescriptorCount</ref> &amp;</type>
+          <declname>descriptorCount</declname>
+        </param>
+        <param>
+          <type>const <ref refid="class_azura_1_1_containers_1_1_vector" kindref="compound">Containers::Vector</ref>&lt; <ref refid="struct_azura_1_1_descriptor_slot" kindref="compound">DescriptorSlot</ref> &gt; &amp;</type>
+          <declname>descriptorSlots</declname>
+        </param>
+        <param>
+          <type>const <ref refid="class_azura_1_1_containers_1_1_vector" kindref="compound">Containers::Vector</ref>&lt; <ref refid="class_azura_1_1_d3_d12_1_1_d3_d12_scoped_shader" kindref="compound">D3D12ScopedShader</ref> &gt; &amp;</type>
+          <declname>shaders</declname>
+        </param>
+        <param>
+          <type>const <ref refid="class_azura_1_1_containers_1_1_vector" kindref="compound">Containers::Vector</ref>&lt; <ref refid="class_azura_1_1_d3_d12_1_1_d3_d12_scoped_render_pass" kindref="compound">D3D12ScopedRenderPass</ref> &gt; &amp;</type>
+          <declname>renderPasses</declname>
+        </param>
+        <param>
+          <type>const <ref refid="class_azura_1_1_containers_1_1_vector" kindref="compound">Containers::Vector</ref>&lt; <ref refid="class_azura_1_1_d3_d12_1_1_d3_d12_scoped_buffer" kindref="compound">D3D12ScopedBuffer</ref> &gt; &amp;</type>
+          <declname>gpuBuffers</declname>
+        </param>
+        <param>
+          <type>Microsoft::WRL::ComPtr&lt; ID3D12CommandQueue &gt;</type>
+          <declname>commandQueue</declname>
+        </param>
+        <param>
+          <type><ref refid="class_azura_1_1_memory_1_1_allocator" kindref="compound">Memory::Allocator</ref> &amp;</type>
+          <declname>mainAllocator</declname>
+        </param>
+        <param>
+          <type><ref refid="class_azura_1_1_memory_1_1_allocator" kindref="compound">Memory::Allocator</ref> &amp;</type>
+          <declname>initAllocator</declname>
+        </param>
+        <param>
+          <type><ref refid="class_azura_1_1_log" kindref="compound">Log</ref></type>
+          <declname>log</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Source/Azura/RenderSystem/Inc/D3D12/D3D12DrawablePool.h" line="28" column="1" bodyfile="Source/Azura/RenderSystem/Src/D3D12/D3D12DrawablePool.cpp" bodystart="17" bodyend="67"/>
+      </memberdef>
+      <memberdef kind="function" id="class_azura_1_1_d3_d12_1_1_d3_d12_drawable_pool_1afc7789db2377b591dad9445074bd004b" prot="public" static="no" const="no" explicit="no" inline="no" virt="virtual">
+        <type>DrawableID</type>
+        <definition>DrawableID Azura::D3D12::D3D12DrawablePool::CreateDrawable</definition>
+        <argsstring>(const DrawableCreateInfo &amp;createInfo) override</argsstring>
+        <name>CreateDrawable</name>
+        <reimplements refid="class_azura_1_1_drawable_pool_1a4ccbcca2c34327ca4a8159619ca15e9f">CreateDrawable</reimplements>
+        <param>
+          <type>const <ref refid="struct_azura_1_1_drawable_create_info" kindref="compound">DrawableCreateInfo</ref> &amp;</type>
+          <declname>createInfo</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Source/Azura/RenderSystem/Inc/D3D12/D3D12DrawablePool.h" line="40" column="1" bodyfile="Source/Azura/RenderSystem/Src/D3D12/D3D12DrawablePool.cpp" bodystart="69" bodyend="76"/>
+      </memberdef>
+      <memberdef kind="function" id="class_azura_1_1_d3_d12_1_1_d3_d12_drawable_pool_1a850ffca31efa9b0f9e2e9ae118db7664" prot="public" static="no" const="no" explicit="no" inline="no" virt="virtual">
+        <type>void</type>
+        <definition>void Azura::D3D12::D3D12DrawablePool::BindVertexData</definition>
+        <argsstring>(DrawableID drawableId, SlotID slot, const U8 *buffer, U32 size) override</argsstring>
+        <name>BindVertexData</name>
+        <reimplements refid="class_azura_1_1_drawable_pool_1a4492bc0bee71bd41c339c5c0539aebfb">BindVertexData</reimplements>
+        <param>
+          <type>DrawableID</type>
+          <declname>drawableId</declname>
+        </param>
+        <param>
+          <type>SlotID</type>
+          <declname>slot</declname>
+        </param>
+        <param>
+          <type>const U8 *</type>
+          <declname>buffer</declname>
+        </param>
+        <param>
+          <type>U32</type>
+          <declname>size</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Source/Azura/RenderSystem/Inc/D3D12/D3D12DrawablePool.h" line="42" column="1" bodyfile="Source/Azura/RenderSystem/Src/D3D12/D3D12DrawablePool.cpp" bodystart="78" bodyend="97"/>
+      </memberdef>
+      <memberdef kind="function" id="class_azura_1_1_d3_d12_1_1_d3_d12_drawable_pool_1a429090b722df191bcabeac132ddaabf2" prot="public" static="no" const="no" explicit="no" inline="no" virt="virtual">
+        <type>void</type>
+        <definition>void Azura::D3D12::D3D12DrawablePool::BindVertexData</definition>
+        <argsstring>(DrawableID drawableId, SlotID slot, U32 sourceBuffer, U32 offset, U32 size) override</argsstring>
+        <name>BindVertexData</name>
+        <reimplements refid="class_azura_1_1_drawable_pool_1a5c8ee8b960e825b34cecd91cd82af35f">BindVertexData</reimplements>
+        <param>
+          <type>DrawableID</type>
+          <declname>drawableId</declname>
+        </param>
+        <param>
+          <type>SlotID</type>
+          <declname>slot</declname>
+        </param>
+        <param>
+          <type>U32</type>
+          <declname>sourceBuffer</declname>
+        </param>
+        <param>
+          <type>U32</type>
+          <declname>offset</declname>
+        </param>
+        <param>
+          <type>U32</type>
+          <declname>size</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Source/Azura/RenderSystem/Inc/D3D12/D3D12DrawablePool.h" line="43" column="1" bodyfile="Source/Azura/RenderSystem/Src/D3D12/D3D12DrawablePool.cpp" bodystart="99" bodyend="116"/>
+      </memberdef>
+      <memberdef kind="function" id="class_azura_1_1_d3_d12_1_1_d3_d12_drawable_pool_1aca4e6ca0c23b9b63143ce07c2a6bc48f" prot="public" static="no" const="no" explicit="no" inline="no" virt="virtual">
+        <type>void</type>
+        <definition>void Azura::D3D12::D3D12DrawablePool::BindInstanceData</definition>
+        <argsstring>(DrawableID drawableId, SlotID slot, const U8 *buffer, U32 size) override</argsstring>
+        <name>BindInstanceData</name>
+        <reimplements refid="class_azura_1_1_drawable_pool_1a41f0eda6d119b700d8d3f3aad8ab2082">BindInstanceData</reimplements>
+        <param>
+          <type>DrawableID</type>
+          <declname>drawableId</declname>
+        </param>
+        <param>
+          <type>SlotID</type>
+          <declname>slot</declname>
+        </param>
+        <param>
+          <type>const U8 *</type>
+          <declname>buffer</declname>
+        </param>
+        <param>
+          <type>U32</type>
+          <declname>size</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Source/Azura/RenderSystem/Inc/D3D12/D3D12DrawablePool.h" line="44" column="1" bodyfile="Source/Azura/RenderSystem/Src/D3D12/D3D12DrawablePool.cpp" bodystart="118" bodyend="137"/>
+      </memberdef>
+      <memberdef kind="function" id="class_azura_1_1_d3_d12_1_1_d3_d12_drawable_pool_1a8a0b88f9ad55427efbd8ae9375018f65" prot="public" static="no" const="no" explicit="no" inline="no" virt="virtual">
+        <type>void</type>
+        <definition>void Azura::D3D12::D3D12DrawablePool::BindUniformData</definition>
+        <argsstring>(DrawableID drawableId, SlotID slot, const U8 *buffer, U32 size) override</argsstring>
+        <name>BindUniformData</name>
+        <reimplements refid="class_azura_1_1_drawable_pool_1afe0f1631b11dd901faa27ee1544b7031">BindUniformData</reimplements>
+        <param>
+          <type>DrawableID</type>
+          <declname>drawableId</declname>
+        </param>
+        <param>
+          <type>SlotID</type>
+          <declname>slot</declname>
+        </param>
+        <param>
+          <type>const U8 *</type>
+          <declname>buffer</declname>
+        </param>
+        <param>
+          <type>U32</type>
+          <declname>size</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Source/Azura/RenderSystem/Inc/D3D12/D3D12DrawablePool.h" line="45" column="1" bodyfile="Source/Azura/RenderSystem/Src/D3D12/D3D12DrawablePool.cpp" bodystart="139" bodyend="164"/>
+      </memberdef>
+      <memberdef kind="function" id="class_azura_1_1_d3_d12_1_1_d3_d12_drawable_pool_1a3d335a5b6e1a282bb0428ca140f57cb3" prot="public" static="no" const="no" explicit="no" inline="no" virt="virtual">
+        <type>void</type>
+        <definition>void Azura::D3D12::D3D12DrawablePool::SetIndexData</definition>
+        <argsstring>(DrawableID drawableId, const U8 *buffer, U32 size) override</argsstring>
+        <name>SetIndexData</name>
+        <reimplements refid="class_azura_1_1_drawable_pool_1a02ec23c817c32239019ae0748f9b53c5">SetIndexData</reimplements>
+        <param>
+          <type>DrawableID</type>
+          <declname>drawableId</declname>
+        </param>
+        <param>
+          <type>const U8 *</type>
+          <declname>buffer</declname>
+        </param>
+        <param>
+          <type>U32</type>
+          <declname>size</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Source/Azura/RenderSystem/Inc/D3D12/D3D12DrawablePool.h" line="46" column="1" bodyfile="Source/Azura/RenderSystem/Src/D3D12/D3D12DrawablePool.cpp" bodystart="166" bodyend="179"/>
+      </memberdef>
+      <memberdef kind="function" id="class_azura_1_1_d3_d12_1_1_d3_d12_drawable_pool_1aaeb11cac5b1ee45227fb1d06aed5e06a" prot="public" static="no" const="no" explicit="no" inline="no" virt="virtual">
+        <type>void</type>
+        <definition>void Azura::D3D12::D3D12DrawablePool::AddShader</definition>
+        <argsstring>(U32 shaderId) override</argsstring>
+        <name>AddShader</name>
+        <reimplements refid="class_azura_1_1_drawable_pool_1a42be7c88e88b997e00838a7783b9a6c0">AddShader</reimplements>
+        <param>
+          <type>U32</type>
+          <declname>shaderId</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Source/Azura/RenderSystem/Inc/D3D12/D3D12DrawablePool.h" line="47" column="1" bodyfile="Source/Azura/RenderSystem/Src/D3D12/D3D12DrawablePool.cpp" bodystart="181" bodyend="184"/>
+      </memberdef>
+      <memberdef kind="function" id="class_azura_1_1_d3_d12_1_1_d3_d12_drawable_pool_1a29ca3e36f7eb38a2d86487fce622851f" prot="public" static="no" const="no" explicit="no" inline="no" virt="virtual">
+        <type>void</type>
+        <definition>void Azura::D3D12::D3D12DrawablePool::BindTextureData</definition>
+        <argsstring>(SlotID slot, const TextureDesc &amp;desc, const U8 *buffer) override</argsstring>
+        <name>BindTextureData</name>
+        <reimplements refid="class_azura_1_1_drawable_pool_1a426ec55637350976963919fefcf38517">BindTextureData</reimplements>
+        <param>
+          <type>SlotID</type>
+          <declname>slot</declname>
+        </param>
+        <param>
+          <type>const <ref refid="struct_azura_1_1_texture_desc" kindref="compound">TextureDesc</ref> &amp;</type>
+          <declname>desc</declname>
+        </param>
+        <param>
+          <type>const U8 *</type>
+          <declname>buffer</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Source/Azura/RenderSystem/Inc/D3D12/D3D12DrawablePool.h" line="48" column="1" bodyfile="Source/Azura/RenderSystem/Src/D3D12/D3D12DrawablePool.cpp" bodystart="186" bodyend="207"/>
+      </memberdef>
+      <memberdef kind="function" id="class_azura_1_1_d3_d12_1_1_d3_d12_drawable_pool_1a31cc9e8a4e0a669520df874f426d9172" prot="public" static="no" const="no" explicit="no" inline="no" virt="virtual">
+        <type>void</type>
+        <definition>void Azura::D3D12::D3D12DrawablePool::BindSampler</definition>
+        <argsstring>(SlotID slot, const SamplerDesc &amp;desc) override</argsstring>
+        <name>BindSampler</name>
+        <reimplements refid="class_azura_1_1_drawable_pool_1aa13975de2c2a84f9295dda249e3d6760">BindSampler</reimplements>
+        <param>
+          <type>SlotID</type>
+          <declname>slot</declname>
+        </param>
+        <param>
+          <type>const <ref refid="struct_azura_1_1_sampler_desc" kindref="compound">SamplerDesc</ref> &amp;</type>
+          <declname>desc</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Source/Azura/RenderSystem/Inc/D3D12/D3D12DrawablePool.h" line="49" column="1" bodyfile="Source/Azura/RenderSystem/Src/D3D12/D3D12DrawablePool.cpp" bodystart="209" bodyend="221"/>
+      </memberdef>
+      <memberdef kind="function" id="class_azura_1_1_d3_d12_1_1_d3_d12_drawable_pool_1a559f86b2f038643bcdf9fd3c0c1b8a93" prot="public" static="no" const="no" explicit="no" inline="no" virt="virtual">
+        <type>void</type>
+        <definition>void Azura::D3D12::D3D12DrawablePool::Submit</definition>
+        <argsstring>() override</argsstring>
+        <name>Submit</name>
+        <reimplements refid="class_azura_1_1_drawable_pool_1a16a6deae24f2c597003e4632a9273bca">Submit</reimplements>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Source/Azura/RenderSystem/Inc/D3D12/D3D12DrawablePool.h" line="50" column="1" bodyfile="Source/Azura/RenderSystem/Src/D3D12/D3D12DrawablePool.cpp" bodystart="297" bodyend="449"/>
+      </memberdef>
+      <memberdef kind="function" id="class_azura_1_1_d3_d12_1_1_d3_d12_drawable_pool_1a7047128d305d4ea1eca0a83ee7940310" prot="public" static="no" const="no" explicit="no" inline="no" virt="virtual">
+        <type>void</type>
+        <definition>void Azura::D3D12::D3D12DrawablePool::BeginUpdates</definition>
+        <argsstring>() override</argsstring>
+        <name>BeginUpdates</name>
+        <reimplements refid="class_azura_1_1_drawable_pool_1a989aea86afcb0280411763d591136eae">BeginUpdates</reimplements>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Source/Azura/RenderSystem/Inc/D3D12/D3D12DrawablePool.h" line="52" column="1" bodyfile="Source/Azura/RenderSystem/Src/D3D12/D3D12DrawablePool.cpp" bodystart="451" bodyend="454"/>
+      </memberdef>
+      <memberdef kind="function" id="class_azura_1_1_d3_d12_1_1_d3_d12_drawable_pool_1a0d559914d4101f5c683089e4a739a39e" prot="public" static="no" const="no" explicit="no" inline="no" virt="virtual">
+        <type>void</type>
+        <definition>void Azura::D3D12::D3D12DrawablePool::UpdateUniformData</definition>
+        <argsstring>(DrawableID drawableId, SlotID slot, const U8 *buffer, U32 size) override</argsstring>
+        <name>UpdateUniformData</name>
+        <reimplements refid="class_azura_1_1_drawable_pool_1ac85d70904599de8da80ddd69333905d7">UpdateUniformData</reimplements>
+        <param>
+          <type>DrawableID</type>
+          <declname>drawableId</declname>
+        </param>
+        <param>
+          <type>SlotID</type>
+          <declname>slot</declname>
+        </param>
+        <param>
+          <type>const U8 *</type>
+          <declname>buffer</declname>
+        </param>
+        <param>
+          <type>U32</type>
+          <declname>size</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Source/Azura/RenderSystem/Inc/D3D12/D3D12DrawablePool.h" line="53" column="1" bodyfile="Source/Azura/RenderSystem/Src/D3D12/D3D12DrawablePool.cpp" bodystart="456" bodyend="483"/>
+      </memberdef>
+      <memberdef kind="function" id="class_azura_1_1_d3_d12_1_1_d3_d12_drawable_pool_1aa28abcdb8d5f43f1a9c278d4e22c83d5" prot="public" static="no" const="no" explicit="no" inline="no" virt="virtual">
+        <type>void</type>
+        <definition>void Azura::D3D12::D3D12DrawablePool::UpdateTextureData</definition>
+        <argsstring>(SlotID slot, const U8 *buffer) override</argsstring>
+        <name>UpdateTextureData</name>
+        <reimplements refid="class_azura_1_1_drawable_pool_1ac36eead60292ce9c0c8bc3ba52b1033e">UpdateTextureData</reimplements>
+        <param>
+          <type>SlotID</type>
+          <declname>slot</declname>
+        </param>
+        <param>
+          <type>const U8 *</type>
+          <declname>buffer</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Source/Azura/RenderSystem/Inc/D3D12/D3D12DrawablePool.h" line="54" column="1" bodyfile="Source/Azura/RenderSystem/Src/D3D12/D3D12DrawablePool.cpp" bodystart="485" bodyend="509"/>
+      </memberdef>
+      <memberdef kind="function" id="class_azura_1_1_d3_d12_1_1_d3_d12_drawable_pool_1a9268af4334e3462c9e18ba83400635f8" prot="public" static="no" const="no" explicit="no" inline="no" virt="virtual">
+        <type>void</type>
+        <definition>void Azura::D3D12::D3D12DrawablePool::UpdateVertexData</definition>
+        <argsstring>(DrawableID drawableId, SlotID slot, const U8 *buffer, U32 size) override</argsstring>
+        <name>UpdateVertexData</name>
+        <reimplements refid="class_azura_1_1_drawable_pool_1a5339c286a35eb14e04e92468866671fe">UpdateVertexData</reimplements>
+        <param>
+          <type>DrawableID</type>
+          <declname>drawableId</declname>
+        </param>
+        <param>
+          <type>SlotID</type>
+          <declname>slot</declname>
+        </param>
+        <param>
+          <type>const U8 *</type>
+          <declname>buffer</declname>
+        </param>
+        <param>
+          <type>U32</type>
+          <declname>size</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Source/Azura/RenderSystem/Inc/D3D12/D3D12DrawablePool.h" line="55" column="1" bodyfile="Source/Azura/RenderSystem/Src/D3D12/D3D12DrawablePool.cpp" bodystart="511" bodyend="535"/>
+      </memberdef>
+      <memberdef kind="function" id="class_azura_1_1_d3_d12_1_1_d3_d12_drawable_pool_1aa605aad4b6564dbd90b574e891624615" prot="public" static="no" const="no" explicit="no" inline="no" virt="virtual">
+        <type>void</type>
+        <definition>void Azura::D3D12::D3D12DrawablePool::UpdateInstanceData</definition>
+        <argsstring>(DrawableID drawableId, SlotID slot, const U8 *buffer, U32 size) override</argsstring>
+        <name>UpdateInstanceData</name>
+        <reimplements refid="class_azura_1_1_drawable_pool_1a4c93b8f0617538b83ff983bf9cc18b65">UpdateInstanceData</reimplements>
+        <param>
+          <type>DrawableID</type>
+          <declname>drawableId</declname>
+        </param>
+        <param>
+          <type>SlotID</type>
+          <declname>slot</declname>
+        </param>
+        <param>
+          <type>const U8 *</type>
+          <declname>buffer</declname>
+        </param>
+        <param>
+          <type>U32</type>
+          <declname>size</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Source/Azura/RenderSystem/Inc/D3D12/D3D12DrawablePool.h" line="56" column="1" bodyfile="Source/Azura/RenderSystem/Src/D3D12/D3D12DrawablePool.cpp" bodystart="537" bodyend="561"/>
+      </memberdef>
+      <memberdef kind="function" id="class_azura_1_1_d3_d12_1_1_d3_d12_drawable_pool_1a5759669b6f58dddc306aef86fd11bd30" prot="public" static="no" const="no" explicit="no" inline="no" virt="virtual">
+        <type>void</type>
+        <definition>void Azura::D3D12::D3D12DrawablePool::SubmitUpdates</definition>
+        <argsstring>() override</argsstring>
+        <name>SubmitUpdates</name>
+        <reimplements refid="class_azura_1_1_drawable_pool_1a1f5b3fcaaea8d46d333f7806a6d152fe">SubmitUpdates</reimplements>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Source/Azura/RenderSystem/Inc/D3D12/D3D12DrawablePool.h" line="57" column="1" bodyfile="Source/Azura/RenderSystem/Src/D3D12/D3D12DrawablePool.cpp" bodystart="563" bodyend="595"/>
+      </memberdef>
+      <memberdef kind="function" id="class_azura_1_1_d3_d12_1_1_d3_d12_drawable_pool_1a44856ddf46de75ed8edc90e996b741fe" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
+        <type>const <ref refid="class_azura_1_1_containers_1_1_vector" kindref="compound">Containers::Vector</ref>&lt; ID3D12DescriptorHeap * &gt; &amp;</type>
+        <definition>const Vector&lt; ID3D12DescriptorHeap * &gt; &amp; Azura::D3D12::D3D12DrawablePool::GetAllDescriptorHeaps</definition>
+        <argsstring>() const</argsstring>
+        <name>GetAllDescriptorHeaps</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Source/Azura/RenderSystem/Inc/D3D12/D3D12DrawablePool.h" line="59" column="1" bodyfile="Source/Azura/RenderSystem/Src/D3D12/D3D12DrawablePool.cpp" bodystart="597" bodyend="599"/>
+      </memberdef>
+      <memberdef kind="function" id="class_azura_1_1_d3_d12_1_1_d3_d12_drawable_pool_1acd095306626385d692f93ee2746c69a2" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
+        <type>ID3D12PipelineState *</type>
+        <definition>ID3D12PipelineState * Azura::D3D12::D3D12DrawablePool::GetPipelineState</definition>
+        <argsstring>(U32 renderPassId) const</argsstring>
+        <name>GetPipelineState</name>
+        <param>
+          <type>U32</type>
+          <declname>renderPassId</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Source/Azura/RenderSystem/Inc/D3D12/D3D12DrawablePool.h" line="60" column="1" bodyfile="Source/Azura/RenderSystem/Src/D3D12/D3D12DrawablePool.cpp" bodystart="601" bodyend="603"/>
+      </memberdef>
+      <memberdef kind="function" id="class_azura_1_1_d3_d12_1_1_d3_d12_drawable_pool_1adfcc2631bc8e6b8078c5ff4116fd8d25" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
+        <type>ID3D12GraphicsCommandList *</type>
+        <definition>ID3D12GraphicsCommandList * Azura::D3D12::D3D12DrawablePool::GetSecondaryCommandList</definition>
+        <argsstring>(U32 renderPassId) const</argsstring>
+        <name>GetSecondaryCommandList</name>
+        <param>
+          <type>U32</type>
+          <declname>renderPassId</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Source/Azura/RenderSystem/Inc/D3D12/D3D12DrawablePool.h" line="61" column="1" bodyfile="Source/Azura/RenderSystem/Src/D3D12/D3D12DrawablePool.cpp" bodystart="605" bodyend="607"/>
+      </memberdef>
+      <memberdef kind="function" id="class_azura_1_1_d3_d12_1_1_d3_d12_drawable_pool_1ae15552ef2f17079ad503e3ae181fa881" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void Azura::D3D12::D3D12DrawablePool::GetRecordEntries</definition>
+        <argsstring>(Containers::Vector&lt; std::pair&lt; U32, D3D12RenderPassRecordEntry &gt;&gt; &amp;recordList) const</argsstring>
+        <name>GetRecordEntries</name>
+        <param>
+          <type><ref refid="class_azura_1_1_containers_1_1_vector" kindref="compound">Containers::Vector</ref>&lt; std::pair&lt; U32, <ref refid="struct_azura_1_1_d3_d12_1_1_d3_d12_render_pass_record_entry" kindref="compound">D3D12RenderPassRecordEntry</ref> &gt;&gt; &amp;</type>
+          <declname>recordList</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Source/Azura/RenderSystem/Inc/D3D12/D3D12DrawablePool.h" line="63" column="1" bodyfile="Source/Azura/RenderSystem/Src/D3D12/D3D12DrawablePool.cpp" bodystart="609" bodyend="622"/>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="private-func">
+      <memberdef kind="function" id="class_azura_1_1_d3_d12_1_1_d3_d12_drawable_pool_1aae53a8181cb355a43bbfd6a73c7654d2" prot="private" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void Azura::D3D12::D3D12DrawablePool::CreateRenderPassReferences</definition>
+        <argsstring>(const DrawablePoolCreateInfo &amp;createInfo, const Containers::Vector&lt; D3D12ScopedRenderPass &gt; &amp;renderPasses)</argsstring>
+        <name>CreateRenderPassReferences</name>
+        <param>
+          <type>const <ref refid="struct_azura_1_1_drawable_pool_create_info" kindref="compound">DrawablePoolCreateInfo</ref> &amp;</type>
+          <declname>createInfo</declname>
+        </param>
+        <param>
+          <type>const <ref refid="class_azura_1_1_containers_1_1_vector" kindref="compound">Containers::Vector</ref>&lt; <ref refid="class_azura_1_1_d3_d12_1_1_d3_d12_scoped_render_pass" kindref="compound">D3D12ScopedRenderPass</ref> &gt; &amp;</type>
+          <declname>renderPasses</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Source/Azura/RenderSystem/Inc/D3D12/D3D12DrawablePool.h" line="66" column="1" bodyfile="Source/Azura/RenderSystem/Src/D3D12/D3D12DrawablePool.cpp" bodystart="624" bodyend="643"/>
+      </memberdef>
+      <memberdef kind="function" id="class_azura_1_1_d3_d12_1_1_d3_d12_drawable_pool_1a718e03d56c5fc8e66125fed1dae76dd9" prot="private" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void Azura::D3D12::D3D12DrawablePool::CreateInputAttributes</definition>
+        <argsstring>(const DrawablePoolCreateInfo &amp;createInfo)</argsstring>
+        <name>CreateInputAttributes</name>
+        <param>
+          <type>const <ref refid="struct_azura_1_1_drawable_pool_create_info" kindref="compound">DrawablePoolCreateInfo</ref> &amp;</type>
+          <declname>createInfo</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Source/Azura/RenderSystem/Inc/D3D12/D3D12DrawablePool.h" line="67" column="1" bodyfile="Source/Azura/RenderSystem/Src/D3D12/D3D12DrawablePool.cpp" bodystart="645" bodyend="655"/>
+      </memberdef>
+      <memberdef kind="function" id="class_azura_1_1_d3_d12_1_1_d3_d12_drawable_pool_1a89fccd3d38bbc2634285dd812cae84cd" prot="private" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void Azura::D3D12::D3D12DrawablePool::CreateDescriptorHeap</definition>
+        <argsstring>(const DrawablePoolCreateInfo &amp;createInfo)</argsstring>
+        <name>CreateDescriptorHeap</name>
+        <param>
+          <type>const <ref refid="struct_azura_1_1_drawable_pool_create_info" kindref="compound">DrawablePoolCreateInfo</ref> &amp;</type>
+          <declname>createInfo</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Source/Azura/RenderSystem/Inc/D3D12/D3D12DrawablePool.h" line="68" column="1" bodyfile="Source/Azura/RenderSystem/Src/D3D12/D3D12DrawablePool.cpp" bodystart="657" bodyend="699"/>
+      </memberdef>
+      <memberdef kind="function" id="class_azura_1_1_d3_d12_1_1_d3_d12_drawable_pool_1afc335cfe02db76e3a32b0c9d04eb1291" prot="private" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void Azura::D3D12::D3D12DrawablePool::SetTextureData</definition>
+        <argsstring>(ID3D12GraphicsCommandList *oneTimeCommandList)</argsstring>
+        <name>SetTextureData</name>
+        <param>
+          <type>ID3D12GraphicsCommandList *</type>
+          <declname>oneTimeCommandList</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Source/Azura/RenderSystem/Inc/D3D12/D3D12DrawablePool.h" line="70" column="1" bodyfile="Source/Azura/RenderSystem/Src/D3D12/D3D12DrawablePool.cpp" bodystart="223" bodyend="253"/>
+      </memberdef>
+      <memberdef kind="function" id="class_azura_1_1_d3_d12_1_1_d3_d12_drawable_pool_1af54c9dafecdcc3b2e2cef536faaf3538" prot="private" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void Azura::D3D12::D3D12DrawablePool::SetSamplerData</definition>
+        <argsstring>()</argsstring>
+        <name>SetSamplerData</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Source/Azura/RenderSystem/Inc/D3D12/D3D12DrawablePool.h" line="71" column="1" bodyfile="Source/Azura/RenderSystem/Src/D3D12/D3D12DrawablePool.cpp" bodystart="255" bodyend="276"/>
+      </memberdef>
+      <memberdef kind="function" id="class_azura_1_1_d3_d12_1_1_d3_d12_drawable_pool_1a145787ffc58bfe28ae438f6750b4001e" prot="private" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void Azura::D3D12::D3D12DrawablePool::CreateRenderPassInputTargetSRV</definition>
+        <argsstring>(const Containers::Vector&lt; std::reference_wrapper&lt; const D3D12ScopedImage &gt;&gt; &amp;renderPassInputs, U32 offsetTillThis) const</argsstring>
+        <name>CreateRenderPassInputTargetSRV</name>
+        <param>
+          <type>const <ref refid="class_azura_1_1_containers_1_1_vector" kindref="compound">Containers::Vector</ref>&lt; std::reference_wrapper&lt; const <ref refid="class_azura_1_1_d3_d12_1_1_d3_d12_scoped_image" kindref="compound">D3D12ScopedImage</ref> &gt;&gt; &amp;</type>
+          <declname>renderPassInputs</declname>
+        </param>
+        <param>
+          <type>U32</type>
+          <declname>offsetTillThis</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Source/Azura/RenderSystem/Inc/D3D12/D3D12DrawablePool.h" line="73" column="1" bodyfile="Source/Azura/RenderSystem/Src/D3D12/D3D12DrawablePool.cpp" bodystart="278" bodyend="295"/>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <inheritancegraph>
+      <node id="148">
+        <label>Azura::D3D12::D3D12DrawablePool</label>
+        <link refid="class_azura_1_1_d3_d12_1_1_d3_d12_drawable_pool"/>
+        <childnode refid="149" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="149">
+        <label>Azura::DrawablePool</label>
+        <link refid="class_azura_1_1_drawable_pool"/>
+      </node>
+    </inheritancegraph>
+    <collaborationgraph>
+      <node id="150">
+        <label>Azura::D3D12::D3D12DrawablePool</label>
+        <link refid="class_azura_1_1_d3_d12_1_1_d3_d12_drawable_pool"/>
+        <childnode refid="151" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="155">
+        <label>Azura::Containers::Vector&lt; Azura::SamplerInfo &gt;</label>
+        <link refid="class_azura_1_1_containers_1_1_vector"/>
+      </node>
+      <node id="156">
+        <label>Azura::Containers::Vector&lt; Azura::VertexSlot &gt;</label>
+        <link refid="class_azura_1_1_containers_1_1_vector"/>
+      </node>
+      <node id="154">
+        <label>Azura::DescriptorCount</label>
+        <link refid="struct_azura_1_1_descriptor_count"/>
+      </node>
+      <node id="153">
+        <label>Azura::Containers::Vector&lt; U32 &gt;</label>
+        <link refid="class_azura_1_1_containers_1_1_vector"/>
+      </node>
+      <node id="157">
+        <label>Azura::Containers::Vector&lt; Azura::TextureBufferInfo &gt;</label>
+        <link refid="class_azura_1_1_containers_1_1_vector"/>
+      </node>
+      <node id="152">
+        <label>Azura::Containers::Vector&lt; Azura::BufferUpdate &gt;</label>
+        <link refid="class_azura_1_1_containers_1_1_vector"/>
+      </node>
+      <node id="151">
+        <label>Azura::DrawablePool</label>
+        <link refid="class_azura_1_1_drawable_pool"/>
+        <childnode refid="152" relation="usage">
+          <edgelabel>m_bufferUpdates</edgelabel>
+        </childnode>
+        <childnode refid="153" relation="usage">
+          <edgelabel>m_renderPasses</edgelabel>
+        </childnode>
+        <childnode refid="154" relation="usage">
+          <edgelabel>m_descriptorCount</edgelabel>
+        </childnode>
+        <childnode refid="155" relation="usage">
+          <edgelabel>m_samplerInfos</edgelabel>
+        </childnode>
+        <childnode refid="156" relation="usage">
+          <edgelabel>m_vertexDataSlots</edgelabel>
+        </childnode>
+        <childnode refid="157" relation="usage">
+          <edgelabel>m_textureBufferInfos</edgelabel>
+        </childnode>
+      </node>
+    </collaborationgraph>
+    <location file="Source/Azura/RenderSystem/Inc/D3D12/D3D12DrawablePool.h" line="25" column="1" bodyfile="Source/Azura/RenderSystem/Inc/D3D12/D3D12DrawablePool.h" bodystart="25" bodyend="109"/>
+    <listofallmembers>
+      <member refid="class_azura_1_1_d3_d12_1_1_d3_d12_drawable_pool_1aaeb11cac5b1ee45227fb1d06aed5e06a" prot="public" virt="virtual"><scope>Azura::D3D12::D3D12DrawablePool</scope><name>AddShader</name></member>
+      <member refid="class_azura_1_1_d3_d12_1_1_d3_d12_drawable_pool_1a7047128d305d4ea1eca0a83ee7940310" prot="public" virt="virtual"><scope>Azura::D3D12::D3D12DrawablePool</scope><name>BeginUpdates</name></member>
+      <member refid="class_azura_1_1_d3_d12_1_1_d3_d12_drawable_pool_1aca4e6ca0c23b9b63143ce07c2a6bc48f" prot="public" virt="virtual"><scope>Azura::D3D12::D3D12DrawablePool</scope><name>BindInstanceData</name></member>
+      <member refid="class_azura_1_1_drawable_pool_1ad203e79f4a29c78cea0c9338b7fe9463" prot="public" virt="non-virtual" ambiguityscope="Azura::DrawablePool::"><scope>Azura::D3D12::D3D12DrawablePool</scope><name>BindInstanceData</name></member>
+      <member refid="class_azura_1_1_d3_d12_1_1_d3_d12_drawable_pool_1a31cc9e8a4e0a669520df874f426d9172" prot="public" virt="virtual"><scope>Azura::D3D12::D3D12DrawablePool</scope><name>BindSampler</name></member>
+      <member refid="class_azura_1_1_d3_d12_1_1_d3_d12_drawable_pool_1a29ca3e36f7eb38a2d86487fce622851f" prot="public" virt="virtual"><scope>Azura::D3D12::D3D12DrawablePool</scope><name>BindTextureData</name></member>
+      <member refid="class_azura_1_1_d3_d12_1_1_d3_d12_drawable_pool_1a8a0b88f9ad55427efbd8ae9375018f65" prot="public" virt="virtual"><scope>Azura::D3D12::D3D12DrawablePool</scope><name>BindUniformData</name></member>
+      <member refid="class_azura_1_1_drawable_pool_1af1bce723e4c6e6392cf6ef2b18554b8f" prot="public" virt="non-virtual" ambiguityscope="Azura::DrawablePool::"><scope>Azura::D3D12::D3D12DrawablePool</scope><name>BindUniformData</name></member>
+      <member refid="class_azura_1_1_d3_d12_1_1_d3_d12_drawable_pool_1a850ffca31efa9b0f9e2e9ae118db7664" prot="public" virt="virtual"><scope>Azura::D3D12::D3D12DrawablePool</scope><name>BindVertexData</name></member>
+      <member refid="class_azura_1_1_d3_d12_1_1_d3_d12_drawable_pool_1a429090b722df191bcabeac132ddaabf2" prot="public" virt="virtual"><scope>Azura::D3D12::D3D12DrawablePool</scope><name>BindVertexData</name></member>
+      <member refid="class_azura_1_1_drawable_pool_1a7a99f75220c8e2cba949c1120705b2b6" prot="public" virt="non-virtual" ambiguityscope="Azura::DrawablePool::"><scope>Azura::D3D12::D3D12DrawablePool</scope><name>BindVertexData</name></member>
+      <member refid="class_azura_1_1_drawable_pool_1a58e8d5a3ff64312db4ce673d5840f52a" prot="public" virt="non-virtual"><scope>Azura::D3D12::D3D12DrawablePool</scope><name>CanRenderInPass</name></member>
+      <member refid="class_azura_1_1_d3_d12_1_1_d3_d12_drawable_pool_1a89fccd3d38bbc2634285dd812cae84cd" prot="private" virt="non-virtual"><scope>Azura::D3D12::D3D12DrawablePool</scope><name>CreateDescriptorHeap</name></member>
+      <member refid="class_azura_1_1_d3_d12_1_1_d3_d12_drawable_pool_1afc7789db2377b591dad9445074bd004b" prot="public" virt="virtual"><scope>Azura::D3D12::D3D12DrawablePool</scope><name>CreateDrawable</name></member>
+      <member refid="class_azura_1_1_d3_d12_1_1_d3_d12_drawable_pool_1a718e03d56c5fc8e66125fed1dae76dd9" prot="private" virt="non-virtual"><scope>Azura::D3D12::D3D12DrawablePool</scope><name>CreateInputAttributes</name></member>
+      <member refid="class_azura_1_1_d3_d12_1_1_d3_d12_drawable_pool_1a145787ffc58bfe28ae438f6750b4001e" prot="private" virt="non-virtual"><scope>Azura::D3D12::D3D12DrawablePool</scope><name>CreateRenderPassInputTargetSRV</name></member>
+      <member refid="class_azura_1_1_d3_d12_1_1_d3_d12_drawable_pool_1aae53a8181cb355a43bbfd6a73c7654d2" prot="private" virt="non-virtual"><scope>Azura::D3D12::D3D12DrawablePool</scope><name>CreateRenderPassReferences</name></member>
+      <member refid="class_azura_1_1_d3_d12_1_1_d3_d12_drawable_pool_1ad5f5eb32ff72c500cf944c9ec3edb788" prot="public" virt="non-virtual"><scope>Azura::D3D12::D3D12DrawablePool</scope><name>D3D12DrawablePool</name></member>
+      <member refid="class_azura_1_1_drawable_pool_1a297853456237e9e487b6397883af4a19" prot="public" virt="non-virtual"><scope>Azura::D3D12::D3D12DrawablePool</scope><name>DrawablePool</name></member>
+      <member refid="class_azura_1_1_drawable_pool_1a79b953054ac1a1ca086398a9a79d7505" prot="public" virt="non-virtual"><scope>Azura::D3D12::D3D12DrawablePool</scope><name>DrawablePool</name></member>
+      <member refid="class_azura_1_1_drawable_pool_1ab3794b52aa96c0ebceca942c612f7b6e" prot="public" virt="non-virtual"><scope>Azura::D3D12::D3D12DrawablePool</scope><name>DrawablePool</name></member>
+      <member refid="class_azura_1_1_d3_d12_1_1_d3_d12_drawable_pool_1a44856ddf46de75ed8edc90e996b741fe" prot="public" virt="non-virtual"><scope>Azura::D3D12::D3D12DrawablePool</scope><name>GetAllDescriptorHeaps</name></member>
+      <member refid="class_azura_1_1_drawable_pool_1ac3390d615df38b112f62225390cc5eff" prot="protected" virt="non-virtual"><scope>Azura::D3D12::D3D12DrawablePool</scope><name>GetAllocator</name></member>
+      <member refid="class_azura_1_1_drawable_pool_1abf159af31cbf19e0961b14fc8d3b3ba1" prot="protected" virt="non-virtual"><scope>Azura::D3D12::D3D12DrawablePool</scope><name>GetDrawType</name></member>
+      <member refid="class_azura_1_1_d3_d12_1_1_d3_d12_drawable_pool_1acd095306626385d692f93ee2746c69a2" prot="public" virt="non-virtual"><scope>Azura::D3D12::D3D12DrawablePool</scope><name>GetPipelineState</name></member>
+      <member refid="class_azura_1_1_d3_d12_1_1_d3_d12_drawable_pool_1ae15552ef2f17079ad503e3ae181fa881" prot="public" virt="non-virtual"><scope>Azura::D3D12::D3D12DrawablePool</scope><name>GetRecordEntries</name></member>
+      <member refid="class_azura_1_1_d3_d12_1_1_d3_d12_drawable_pool_1adfcc2631bc8e6b8078c5ff4116fd8d25" prot="public" virt="non-virtual"><scope>Azura::D3D12::D3D12DrawablePool</scope><name>GetSecondaryCommandList</name></member>
+      <member refid="class_azura_1_1_drawable_pool_1a85f70308874b52fadc7a68c37ca171f3" prot="public" virt="non-virtual"><scope>Azura::D3D12::D3D12DrawablePool</scope><name>GetSingleTextureBufferInfo</name></member>
+      <member refid="class_azura_1_1_drawable_pool_1a765a0254865986059c0930eba1b1daf4" prot="public" virt="non-virtual"><scope>Azura::D3D12::D3D12DrawablePool</scope><name>GetSize</name></member>
+      <member refid="class_azura_1_1_d3_d12_1_1_d3_d12_drawable_pool_1a743873e1326db6ebeaf004c718e35391" prot="private" virt="non-virtual"><scope>Azura::D3D12::D3D12DrawablePool</scope><name>log_D3D12RenderSystem</name></member>
+      <member refid="class_azura_1_1_d3_d12_1_1_d3_d12_drawable_pool_1ad17c87c5c5650733ca52c14778b9fe1f" prot="private" virt="non-virtual"><scope>Azura::D3D12::D3D12DrawablePool</scope><name>m_allHeaps</name></member>
+      <member refid="class_azura_1_1_drawable_pool_1a039f9497a62acfd5be406878ce39e5fd" prot="protected" virt="non-virtual"><scope>Azura::D3D12::D3D12DrawablePool</scope><name>m_bufferUpdates</name></member>
+      <member refid="class_azura_1_1_d3_d12_1_1_d3_d12_drawable_pool_1a4ebef154c7e5dd067ee3e34142cb416e" prot="private" virt="non-virtual"><scope>Azura::D3D12::D3D12DrawablePool</scope><name>m_cbvSrvDescriptorElementSize</name></member>
+      <member refid="class_azura_1_1_drawable_pool_1a9c0e196cb8d6e409d1e8ddafb0adfabe" prot="protected" virt="non-virtual"><scope>Azura::D3D12::D3D12DrawablePool</scope><name>m_cullMode</name></member>
+      <member refid="class_azura_1_1_drawable_pool_1a6e22814af049c3c1b18101e75cb93e5d" prot="protected" virt="non-virtual"><scope>Azura::D3D12::D3D12DrawablePool</scope><name>m_descriptorCount</name></member>
+      <member refid="class_azura_1_1_d3_d12_1_1_d3_d12_drawable_pool_1a1a413e2ec7587302e32f5df38ee972db" prot="private" virt="non-virtual"><scope>Azura::D3D12::D3D12DrawablePool</scope><name>m_descriptorDrawableHeap</name></member>
+      <member refid="class_azura_1_1_d3_d12_1_1_d3_d12_drawable_pool_1a3ac802af8dbee5848b504cf15a112888" prot="private" virt="non-virtual"><scope>Azura::D3D12::D3D12DrawablePool</scope><name>m_descriptorSamplerHeap</name></member>
+      <member refid="class_azura_1_1_d3_d12_1_1_d3_d12_drawable_pool_1aa6340657343c3e661d954dbe024b2dea" prot="private" virt="non-virtual"><scope>Azura::D3D12::D3D12DrawablePool</scope><name>m_descriptorsPerDrawable</name></member>
+      <member refid="class_azura_1_1_d3_d12_1_1_d3_d12_drawable_pool_1ab6fe2a6479e4bbf02494876ce071cd31" prot="private" virt="non-virtual"><scope>Azura::D3D12::D3D12DrawablePool</scope><name>m_device</name></member>
+      <member refid="class_azura_1_1_d3_d12_1_1_d3_d12_drawable_pool_1a252cce420f44b567ed5c2686816bfca2" prot="private" virt="non-virtual"><scope>Azura::D3D12::D3D12DrawablePool</scope><name>m_drawables</name></member>
+      <member refid="class_azura_1_1_d3_d12_1_1_d3_d12_drawable_pool_1a36133cfff7941c7b9b6d7ceda92e531b" prot="private" virt="non-virtual"><scope>Azura::D3D12::D3D12DrawablePool</scope><name>m_globalDescriptorSlots</name></member>
+      <member refid="class_azura_1_1_d3_d12_1_1_d3_d12_drawable_pool_1a5274a59182d025d9dcd20b35c6cd4322" prot="private" virt="non-virtual"><scope>Azura::D3D12::D3D12DrawablePool</scope><name>m_gpuBuffers</name></member>
+      <member refid="class_azura_1_1_d3_d12_1_1_d3_d12_drawable_pool_1a3d3a5e67221fb5d8a4a26cc70c48398c" prot="private" virt="non-virtual"><scope>Azura::D3D12::D3D12DrawablePool</scope><name>m_graphicsCommandQueue</name></member>
+      <member refid="class_azura_1_1_d3_d12_1_1_d3_d12_drawable_pool_1a3e008cc26f94f40a61e5657c70f4008a" prot="private" virt="non-virtual"><scope>Azura::D3D12::D3D12DrawablePool</scope><name>m_images</name></member>
+      <member refid="class_azura_1_1_d3_d12_1_1_d3_d12_drawable_pool_1a1d1b996a31ccf868c995a07cdadaa8cf" prot="private" virt="non-virtual"><scope>Azura::D3D12::D3D12DrawablePool</scope><name>m_mainBuffer</name></member>
+      <member refid="class_azura_1_1_drawable_pool_1a956502ffdf433ea693ae515dc03bfadd" prot="protected" virt="non-virtual"><scope>Azura::D3D12::D3D12DrawablePool</scope><name>m_numInstanceSlots</name></member>
+      <member refid="class_azura_1_1_drawable_pool_1a161813b2e1251fa3fd0e1065e4401867" prot="protected" virt="non-virtual"><scope>Azura::D3D12::D3D12DrawablePool</scope><name>m_numVertexSlots</name></member>
+      <member refid="class_azura_1_1_d3_d12_1_1_d3_d12_drawable_pool_1a68416c0ec8c452637c82af01e81cf4a5" prot="private" virt="non-virtual"><scope>Azura::D3D12::D3D12DrawablePool</scope><name>m_offsetToDrawableHeap</name></member>
+      <member refid="class_azura_1_1_d3_d12_1_1_d3_d12_drawable_pool_1a64792178bb60ac66b588a4a3248b7850" prot="private" virt="non-virtual"><scope>Azura::D3D12::D3D12DrawablePool</scope><name>m_offsetToRenderPassInputs</name></member>
+      <member refid="class_azura_1_1_d3_d12_1_1_d3_d12_drawable_pool_1ae4ff338892b19f4701dd2fa96ad3a4cf" prot="private" virt="non-virtual"><scope>Azura::D3D12::D3D12DrawablePool</scope><name>m_pipelineFactory</name></member>
+      <member refid="class_azura_1_1_d3_d12_1_1_d3_d12_drawable_pool_1a92f5a685478096dc6735fbdf15c22b48" prot="private" virt="non-virtual"><scope>Azura::D3D12::D3D12DrawablePool</scope><name>m_pipelines</name></member>
+      <member refid="class_azura_1_1_d3_d12_1_1_d3_d12_drawable_pool_1a4a7cde0db192e12cbe100c021ccd0db2" prot="private" virt="non-virtual"><scope>Azura::D3D12::D3D12DrawablePool</scope><name>m_renderPasses</name></member>
+      <member refid="class_azura_1_1_d3_d12_1_1_d3_d12_drawable_pool_1a37851924e73fcfc9c21370dd9715fcb3" prot="private" virt="non-virtual"><scope>Azura::D3D12::D3D12DrawablePool</scope><name>m_samplerDescriptorElementSize</name></member>
+      <member refid="class_azura_1_1_drawable_pool_1a1f813d234ad65185d9eaa8673b544bc5" prot="protected" virt="non-virtual"><scope>Azura::D3D12::D3D12DrawablePool</scope><name>m_samplerInfos</name></member>
+      <member refid="class_azura_1_1_d3_d12_1_1_d3_d12_drawable_pool_1a29f972eedd12deef12e86f150400c083" prot="private" virt="non-virtual"><scope>Azura::D3D12::D3D12DrawablePool</scope><name>m_samplers</name></member>
+      <member refid="class_azura_1_1_d3_d12_1_1_d3_d12_drawable_pool_1a18321463dcb2b970a0ea669ccc432b25" prot="private" virt="non-virtual"><scope>Azura::D3D12::D3D12DrawablePool</scope><name>m_secondaryCommandBuffers</name></member>
+      <member refid="class_azura_1_1_d3_d12_1_1_d3_d12_drawable_pool_1ace55886a31948423b1de59872b13e7f1" prot="private" virt="non-virtual"><scope>Azura::D3D12::D3D12DrawablePool</scope><name>m_shaders</name></member>
+      <member refid="class_azura_1_1_d3_d12_1_1_d3_d12_drawable_pool_1a3bdddd48092857a1aafbcfd43b125685" prot="private" virt="non-virtual"><scope>Azura::D3D12::D3D12DrawablePool</scope><name>m_stagingBuffer</name></member>
+      <member refid="class_azura_1_1_drawable_pool_1a422d98f5396b382229b98131d1d73ae1" prot="protected" virt="non-virtual"><scope>Azura::D3D12::D3D12DrawablePool</scope><name>m_textureBufferInfos</name></member>
+      <member refid="class_azura_1_1_d3_d12_1_1_d3_d12_drawable_pool_1aaa8bb05233cdf5e1575a53103fb5a1fa" prot="private" virt="non-virtual"><scope>Azura::D3D12::D3D12DrawablePool</scope><name>m_updateBuffer</name></member>
+      <member refid="class_azura_1_1_drawable_pool_1add4a5e2764fbec5a1cccc72a15f7005d" prot="protected" virt="non-virtual"><scope>Azura::D3D12::D3D12DrawablePool</scope><name>m_vertexDataSlots</name></member>
+      <member refid="class_azura_1_1_drawable_pool_1ad53e9313899c1ce573bfa5dc04de558d" prot="public" virt="non-virtual"><scope>Azura::D3D12::D3D12DrawablePool</scope><name>operator=</name></member>
+      <member refid="class_azura_1_1_drawable_pool_1a8f0ae91009aa0909fd792b026b612122" prot="public" virt="non-virtual"><scope>Azura::D3D12::D3D12DrawablePool</scope><name>operator=</name></member>
+      <member refid="class_azura_1_1_d3_d12_1_1_d3_d12_drawable_pool_1a3d335a5b6e1a282bb0428ca140f57cb3" prot="public" virt="virtual"><scope>Azura::D3D12::D3D12DrawablePool</scope><name>SetIndexData</name></member>
+      <member refid="class_azura_1_1_drawable_pool_1afe156d9c60ec5c2dda6393edcc5d5640" prot="public" virt="non-virtual" ambiguityscope="Azura::DrawablePool::"><scope>Azura::D3D12::D3D12DrawablePool</scope><name>SetIndexData</name></member>
+      <member refid="class_azura_1_1_d3_d12_1_1_d3_d12_drawable_pool_1af54c9dafecdcc3b2e2cef536faaf3538" prot="private" virt="non-virtual"><scope>Azura::D3D12::D3D12DrawablePool</scope><name>SetSamplerData</name></member>
+      <member refid="class_azura_1_1_d3_d12_1_1_d3_d12_drawable_pool_1afc335cfe02db76e3a32b0c9d04eb1291" prot="private" virt="non-virtual"><scope>Azura::D3D12::D3D12DrawablePool</scope><name>SetTextureData</name></member>
+      <member refid="class_azura_1_1_d3_d12_1_1_d3_d12_drawable_pool_1a559f86b2f038643bcdf9fd3c0c1b8a93" prot="public" virt="virtual"><scope>Azura::D3D12::D3D12DrawablePool</scope><name>Submit</name></member>
+      <member refid="class_azura_1_1_d3_d12_1_1_d3_d12_drawable_pool_1a5759669b6f58dddc306aef86fd11bd30" prot="public" virt="virtual"><scope>Azura::D3D12::D3D12DrawablePool</scope><name>SubmitUpdates</name></member>
+      <member refid="class_azura_1_1_d3_d12_1_1_d3_d12_drawable_pool_1aa605aad4b6564dbd90b574e891624615" prot="public" virt="virtual"><scope>Azura::D3D12::D3D12DrawablePool</scope><name>UpdateInstanceData</name></member>
+      <member refid="class_azura_1_1_d3_d12_1_1_d3_d12_drawable_pool_1aa28abcdb8d5f43f1a9c278d4e22c83d5" prot="public" virt="virtual"><scope>Azura::D3D12::D3D12DrawablePool</scope><name>UpdateTextureData</name></member>
+      <member refid="class_azura_1_1_d3_d12_1_1_d3_d12_drawable_pool_1a0d559914d4101f5c683089e4a739a39e" prot="public" virt="virtual"><scope>Azura::D3D12::D3D12DrawablePool</scope><name>UpdateUniformData</name></member>
+      <member refid="class_azura_1_1_drawable_pool_1a1699289968c29f51c562d6fbe42b7b54" prot="public" virt="non-virtual" ambiguityscope="Azura::DrawablePool::"><scope>Azura::D3D12::D3D12DrawablePool</scope><name>UpdateUniformData</name></member>
+      <member refid="class_azura_1_1_d3_d12_1_1_d3_d12_drawable_pool_1a9268af4334e3462c9e18ba83400635f8" prot="public" virt="virtual"><scope>Azura::D3D12::D3D12DrawablePool</scope><name>UpdateVertexData</name></member>
+      <member refid="class_azura_1_1_drawable_pool_1acb0064fb652b3f1f84397c4d0a645bc9" prot="public" virt="virtual"><scope>Azura::D3D12::D3D12DrawablePool</scope><name>~DrawablePool</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

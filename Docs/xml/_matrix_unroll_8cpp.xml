@@ -1,0 +1,185 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.8.14">
+  <compounddef id="_matrix_unroll_8cpp" kind="file" language="C++">
+    <compoundname>MatrixUnroll.cpp</compoundname>
+    <includes refid="_matrix_unroll_8h" local="yes">PowerBench/MatrixUnroll.h</includes>
+    <includes refid="_power_bench_2_inc_2_power_bench_2_utils_8h" local="yes">PowerBench/Utils.h</includes>
+    <incdepgraph>
+      <node id="5751">
+        <label>Source/PowerBench/Src/MatrixUnroll.cpp</label>
+        <link refid="_matrix_unroll_8cpp"/>
+        <childnode refid="5752" relation="include">
+        </childnode>
+        <childnode refid="5754" relation="include">
+        </childnode>
+      </node>
+      <node id="5754">
+        <label>PowerBench/Utils.h</label>
+        <link refid="_power_bench_2_inc_2_power_bench_2_utils_8h_source"/>
+        <childnode refid="5755" relation="include">
+        </childnode>
+        <childnode refid="5756" relation="include">
+        </childnode>
+      </node>
+      <node id="5755">
+        <label>random</label>
+      </node>
+      <node id="5752">
+        <label>PowerBench/MatrixUnroll.h</label>
+        <link refid="_matrix_unroll_8h_source"/>
+        <childnode refid="5753" relation="include">
+        </childnode>
+        <childnode refid="5754" relation="include">
+        </childnode>
+      </node>
+      <node id="5753">
+        <label>benchmark/benchmark.h</label>
+      </node>
+      <node id="5756">
+        <label>vector</label>
+      </node>
+    </incdepgraph>
+      <sectiondef kind="func">
+      <memberdef kind="function" id="_matrix_unroll_8cpp_1a250fd69440b8bd65d81c242361604c5b" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>BENCHMARK_DEFINE_F</definition>
+        <argsstring>(MatrixUnrollFixture, BM_UnrollZach)(benchmark</argsstring>
+        <name>BENCHMARK_DEFINE_F</name>
+        <param>
+          <type><ref refid="class_matrix_unroll_fixture" kindref="compound">MatrixUnrollFixture</ref></type>
+        </param>
+        <param>
+          <type>BM_UnrollZach</type>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Source/PowerBench/Src/MatrixUnroll.cpp" line="84" column="1" bodyfile="Source/PowerBench/Src/MatrixUnroll.cpp" bodystart="84" bodyend="93"/>
+      </memberdef>
+      <memberdef kind="function" id="_matrix_unroll_8cpp_1a9c2f8a5d39d6b50f4b7f626ef810a447" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>BENCHMARK_REGISTER_F</definition>
+        <argsstring>(MatrixUnrollFixture, BM_UnrollZach) -&gt; RangeMultiplier(2) -&gt;Range(256, 256&lt;&lt; 3)</argsstring>
+        <name>BENCHMARK_REGISTER_F</name>
+        <param>
+          <type><ref refid="class_matrix_unroll_fixture" kindref="compound">MatrixUnrollFixture</ref></type>
+        </param>
+        <param>
+          <type>BM_UnrollZach</type>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Source/PowerBench/Src/MatrixUnroll.cpp" line="95" column="1"/>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <programlisting>
+<codeline lineno="1"><highlight class="preprocessor">#include<sp/>&quot;PowerBench/MatrixUnroll.h&quot;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="2"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&quot;PowerBench/Utils.h&quot;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="3"><highlight class="normal"></highlight></codeline>
+<codeline lineno="4"><highlight class="normal"></highlight><highlight class="keyword">using<sp/>namespace<sp/></highlight><highlight class="normal"><ref refid="namespace_utils" kindref="compound">Utils</ref>;</highlight></codeline>
+<codeline lineno="5"><highlight class="normal"></highlight></codeline>
+<codeline lineno="6"><highlight class="normal"></highlight><highlight class="keyword">namespace<sp/></highlight><highlight class="normal">{</highlight></codeline>
+<codeline lineno="7"><highlight class="normal"></highlight></codeline>
+<codeline lineno="8"><highlight class="normal"></highlight><highlight class="comment">//<sp/>void<sp/>BuildStringFromMatrix(double*<sp/>Matrix,<sp/>int<sp/>NumRows,<sp/>int<sp/>NumColumns,<sp/>double*<sp/>outBuffer)<sp/>{</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="9"><highlight class="normal"></highlight><highlight class="comment">//<sp/><sp/><sp/>const<sp/>int<sp/>R<sp/>=<sp/>NumRows;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="10"><highlight class="normal"></highlight><highlight class="comment">//<sp/><sp/><sp/>const<sp/>int<sp/>C<sp/>=<sp/>NumColumns;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="11"><highlight class="normal"></highlight><highlight class="comment">//<sp/><sp/><sp/>if<sp/>(R<sp/>&lt;=<sp/>0<sp/>||<sp/>C<sp/>&lt;=<sp/>0)<sp/>return;<sp/>//<sp/>check<sp/>for<sp/>bad<sp/>inputs</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="12"><highlight class="normal"></highlight><highlight class="comment">//<sp/><sp/><sp/>const<sp/>int<sp/>M<sp/>=<sp/>R<sp/>*<sp/>C;<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>//<sp/>total<sp/>number<sp/>of<sp/>matrix<sp/>elements</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="13"><highlight class="normal"></highlight><highlight class="comment">//</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="14"><highlight class="normal"></highlight><highlight class="comment">//<sp/><sp/><sp/>//<sp/>determine<sp/>the<sp/>number<sp/>of<sp/>spirals<sp/>in<sp/>the<sp/>matrix</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="15"><highlight class="normal"></highlight><highlight class="comment">//<sp/><sp/><sp/>//<sp/>choose<sp/>the<sp/>lesser<sp/>of<sp/>the<sp/>two<sp/>matrix<sp/>dimensions<sp/>and<sp/>divide<sp/>by<sp/>two,<sp/>rounding<sp/>up</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="16"><highlight class="normal"></highlight><highlight class="comment">//<sp/><sp/><sp/>const<sp/>int<sp/>minDim<sp/><sp/><sp/><sp/><sp/>=<sp/>R<sp/>&lt;=<sp/>C<sp/>?<sp/>R<sp/>:<sp/>C;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="17"><highlight class="normal"></highlight><highlight class="comment">//<sp/><sp/><sp/>const<sp/>int<sp/>numSpirals<sp/>=<sp/>minDim<sp/>%<sp/>2<sp/>==<sp/>0<sp/>?<sp/>minDim<sp/>/<sp/>2<sp/>:<sp/>minDim<sp/>/<sp/>2<sp/>+<sp/>1;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="18"><highlight class="normal"></highlight><highlight class="comment">//</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="19"><highlight class="normal"></highlight><highlight class="comment">//<sp/><sp/><sp/>//<sp/>indices<sp/>defining<sp/>the<sp/>rows<sp/>and<sp/>columns<sp/>of<sp/>spiral<sp/>bounding<sp/>box</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="20"><highlight class="normal"></highlight><highlight class="comment">//<sp/><sp/><sp/>//<sp/>this<sp/>box<sp/>shrinks<sp/>along<sp/>one<sp/>dimension<sp/>with<sp/>each<sp/>line/column<sp/>scan</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="21"><highlight class="normal"></highlight><highlight class="comment">//<sp/><sp/><sp/>int<sp/>l<sp/>=<sp/>0;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="22"><highlight class="normal"></highlight><highlight class="comment">//<sp/><sp/><sp/>int<sp/>r<sp/>=<sp/>C<sp/>-<sp/>1;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="23"><highlight class="normal"></highlight><highlight class="comment">//<sp/><sp/><sp/>int<sp/>t<sp/>=<sp/>0;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="24"><highlight class="normal"></highlight><highlight class="comment">//<sp/><sp/><sp/>int<sp/>b<sp/>=<sp/>R<sp/>-<sp/>1;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="25"><highlight class="normal"></highlight><highlight class="comment">//</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="26"><highlight class="normal"></highlight><highlight class="comment">//<sp/><sp/><sp/>int<sp/>m<sp/>=<sp/>0;<sp/>//<sp/>index<sp/>tracking<sp/>number<sp/>of<sp/>input<sp/>matrix<sp/>elements<sp/>added<sp/>to<sp/>outBuffer</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="27"><highlight class="normal"></highlight><highlight class="comment">//<sp/><sp/><sp/>int<sp/>n<sp/>=<sp/>0;<sp/>//<sp/>index<sp/>for<sp/>char*<sp/>outBuffer</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="28"><highlight class="normal"></highlight><highlight class="comment">//</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="29"><highlight class="normal"></highlight><highlight class="comment">//</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="30"><highlight class="normal"></highlight><highlight class="comment">//<sp/><sp/><sp/>for<sp/>(int<sp/>i<sp/>=<sp/>0;<sp/>i<sp/>&lt;<sp/>numSpirals;<sp/>++i)<sp/>{</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="31"><highlight class="normal"></highlight><highlight class="comment">//<sp/><sp/><sp/><sp/><sp/>//<sp/>top<sp/>row<sp/>of<sp/>spiral</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="32"><highlight class="normal"></highlight><highlight class="comment">//<sp/><sp/><sp/><sp/><sp/>for<sp/>(int<sp/>j<sp/>=<sp/>l;<sp/>j<sp/>&lt;=<sp/>r;<sp/>++j)<sp/>{</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="33"><highlight class="normal"></highlight><highlight class="comment">//</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="34"><highlight class="normal"></highlight><highlight class="comment">//<sp/><sp/><sp/><sp/><sp/><sp/><sp/>int<sp/>num_digits<sp/>=<sp/>std::strlen(tempBuffer);</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="35"><highlight class="normal"></highlight><highlight class="comment">//<sp/><sp/><sp/><sp/><sp/><sp/><sp/>std::memcpy(&amp;outBuffer[n],<sp/>tempBuffer,<sp/>sizeof(double)<sp/>*<sp/>num_digits);</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="36"><highlight class="normal"></highlight><highlight class="comment">//<sp/><sp/><sp/><sp/><sp/><sp/><sp/>n<sp/>+=<sp/>num_digits;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="37"><highlight class="normal"></highlight><highlight class="comment">//<sp/><sp/><sp/><sp/><sp/><sp/><sp/>std::memcpy(&amp;outBuffer[n],<sp/>comma,<sp/>sizeof(double)<sp/>*<sp/>2);</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="38"><highlight class="normal"></highlight><highlight class="comment">//<sp/><sp/><sp/><sp/><sp/><sp/><sp/>n<sp/>+=<sp/>2;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="39"><highlight class="normal"></highlight><highlight class="comment">//<sp/><sp/><sp/><sp/><sp/><sp/><sp/>m++;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="40"><highlight class="normal"></highlight><highlight class="comment">//<sp/><sp/><sp/><sp/><sp/>}</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="41"><highlight class="normal"></highlight><highlight class="comment">//<sp/><sp/><sp/><sp/><sp/>t++;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="42"><highlight class="normal"></highlight><highlight class="comment">//</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="43"><highlight class="normal"></highlight><highlight class="comment">//<sp/><sp/><sp/><sp/><sp/>//<sp/>right<sp/>column<sp/>of<sp/>spiral</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="44"><highlight class="normal"></highlight><highlight class="comment">//<sp/><sp/><sp/><sp/><sp/>for<sp/>(int<sp/>j<sp/>=<sp/>t;<sp/>j<sp/>&lt;=<sp/>b<sp/>&amp;&amp;<sp/>m<sp/>&lt;<sp/>M;<sp/>++j)<sp/>{</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="45"><highlight class="normal"></highlight><highlight class="comment">//<sp/><sp/><sp/><sp/><sp/><sp/><sp/>_itoa_s(Matrix[j<sp/>*<sp/>C<sp/>+<sp/>r],<sp/>tempBuffer,<sp/>33,<sp/>10);</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="46"><highlight class="normal"></highlight><highlight class="comment">//<sp/><sp/><sp/><sp/><sp/><sp/><sp/>int<sp/>num_digits<sp/>=<sp/>std::strlen(tempBuffer);</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="47"><highlight class="normal"></highlight><highlight class="comment">//<sp/><sp/><sp/><sp/><sp/><sp/><sp/>std::memcpy(&amp;outBuffer[n],<sp/>tempBuffer,<sp/>sizeof(double)<sp/>*<sp/>num_digits);</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="48"><highlight class="normal"></highlight><highlight class="comment">//<sp/><sp/><sp/><sp/><sp/><sp/><sp/>n<sp/>+=<sp/>num_digits;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="49"><highlight class="normal"></highlight><highlight class="comment">//<sp/><sp/><sp/><sp/><sp/><sp/><sp/>std::memcpy(&amp;outBuffer[n],<sp/>comma,<sp/>sizeof(double)<sp/>*<sp/>2);</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="50"><highlight class="normal"></highlight><highlight class="comment">//<sp/><sp/><sp/><sp/><sp/><sp/><sp/>n<sp/>+=<sp/>2;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="51"><highlight class="normal"></highlight><highlight class="comment">//<sp/><sp/><sp/><sp/><sp/><sp/><sp/>m++;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="52"><highlight class="normal"></highlight><highlight class="comment">//<sp/><sp/><sp/><sp/><sp/>}</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="53"><highlight class="normal"></highlight><highlight class="comment">//<sp/><sp/><sp/><sp/><sp/>r--;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="54"><highlight class="normal"></highlight><highlight class="comment">//</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="55"><highlight class="normal"></highlight><highlight class="comment">//<sp/><sp/><sp/><sp/><sp/>//<sp/>bottom<sp/>row<sp/>of<sp/>spiral</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="56"><highlight class="normal"></highlight><highlight class="comment">//<sp/><sp/><sp/><sp/><sp/>for<sp/>(int<sp/>j<sp/>=<sp/>r;<sp/>j<sp/>&gt;=<sp/>l<sp/>&amp;&amp;<sp/>m<sp/>&lt;<sp/>M;<sp/>--j)<sp/>{</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="57"><highlight class="normal"></highlight><highlight class="comment">//<sp/><sp/><sp/><sp/><sp/><sp/><sp/>_itoa_s(Matrix[b<sp/>*<sp/>C<sp/>+<sp/>j],<sp/>tempBuffer,<sp/>33,<sp/>10);</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="58"><highlight class="normal"></highlight><highlight class="comment">//<sp/><sp/><sp/><sp/><sp/><sp/><sp/>int<sp/>num_digits<sp/>=<sp/>std::strlen(tempBuffer);</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="59"><highlight class="normal"></highlight><highlight class="comment">//<sp/><sp/><sp/><sp/><sp/><sp/><sp/>std::memcpy(&amp;outBuffer[n],<sp/>tempBuffer,<sp/>sizeof(double)<sp/>*<sp/>num_digits);</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="60"><highlight class="normal"></highlight><highlight class="comment">//<sp/><sp/><sp/><sp/><sp/><sp/><sp/>n<sp/>+=<sp/>num_digits;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="61"><highlight class="normal"></highlight><highlight class="comment">//<sp/><sp/><sp/><sp/><sp/><sp/><sp/>std::memcpy(&amp;outBuffer[n],<sp/>comma,<sp/>sizeof(double)<sp/>*<sp/>2);</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="62"><highlight class="normal"></highlight><highlight class="comment">//<sp/><sp/><sp/><sp/><sp/><sp/><sp/>n<sp/>+=<sp/>2;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="63"><highlight class="normal"></highlight><highlight class="comment">//<sp/><sp/><sp/><sp/><sp/><sp/><sp/>m++;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="64"><highlight class="normal"></highlight><highlight class="comment">//<sp/><sp/><sp/><sp/><sp/>}</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="65"><highlight class="normal"></highlight><highlight class="comment">//<sp/><sp/><sp/><sp/><sp/>b--;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="66"><highlight class="normal"></highlight><highlight class="comment">//</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="67"><highlight class="normal"></highlight><highlight class="comment">//<sp/><sp/><sp/><sp/><sp/>//<sp/>left<sp/>column<sp/>of<sp/>spiral</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="68"><highlight class="normal"></highlight><highlight class="comment">//<sp/><sp/><sp/><sp/><sp/>for<sp/>(int<sp/>j<sp/>=<sp/>b;<sp/>j<sp/>&gt;=<sp/>t<sp/>&amp;&amp;<sp/>m<sp/>&lt;<sp/>M;<sp/>--j)<sp/>{</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="69"><highlight class="normal"></highlight><highlight class="comment">//<sp/><sp/><sp/><sp/><sp/><sp/><sp/>_itoa_s(Matrix[j<sp/>*<sp/>C<sp/>+<sp/>l],<sp/>tempBuffer,<sp/>33,<sp/>10);</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="70"><highlight class="normal"></highlight><highlight class="comment">//<sp/><sp/><sp/><sp/><sp/><sp/><sp/>int<sp/>num_digits<sp/>=<sp/>std::strlen(tempBuffer);</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="71"><highlight class="normal"></highlight><highlight class="comment">//<sp/><sp/><sp/><sp/><sp/><sp/><sp/>std::memcpy(&amp;outBuffer[n],<sp/>tempBuffer,<sp/>sizeof(double)<sp/>*<sp/>num_digits);</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="72"><highlight class="normal"></highlight><highlight class="comment">//<sp/><sp/><sp/><sp/><sp/><sp/><sp/>n<sp/>+=<sp/>num_digits;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="73"><highlight class="normal"></highlight><highlight class="comment">//<sp/><sp/><sp/><sp/><sp/><sp/><sp/>std::memcpy(&amp;outBuffer[n],<sp/>comma,<sp/>sizeof(double)<sp/>*<sp/>2);</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="74"><highlight class="normal"></highlight><highlight class="comment">//<sp/><sp/><sp/><sp/><sp/><sp/><sp/>n<sp/>+=<sp/>2;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="75"><highlight class="normal"></highlight><highlight class="comment">//<sp/><sp/><sp/><sp/><sp/><sp/><sp/>m++;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="76"><highlight class="normal"></highlight><highlight class="comment">//<sp/><sp/><sp/><sp/><sp/>}</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="77"><highlight class="normal"></highlight><highlight class="comment">//<sp/><sp/><sp/><sp/><sp/>l++;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="78"><highlight class="normal"></highlight><highlight class="comment">//<sp/><sp/><sp/>}</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="79"><highlight class="normal"></highlight><highlight class="comment">//<sp/><sp/><sp/>outBuffer[n<sp/>-<sp/>2]<sp/>=<sp/>&apos;\0&apos;;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="80"><highlight class="normal"></highlight><highlight class="comment">//<sp/>}</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="81"><highlight class="normal"></highlight></codeline>
+<codeline lineno="82"><highlight class="normal">}<sp/></highlight><highlight class="comment">//<sp/>namespace</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="83"><highlight class="normal"></highlight></codeline>
+<codeline lineno="84"><highlight class="normal">BENCHMARK_DEFINE_F(<ref refid="class_matrix_unroll_fixture" kindref="compound">MatrixUnrollFixture</ref>,<sp/>BM_UnrollZach)(benchmark::State&amp;<sp/>st)<sp/>{</highlight></codeline>
+<codeline lineno="85"><highlight class="normal"><sp/><sp/></highlight><highlight class="keywordflow">for</highlight><highlight class="normal"><sp/>(</highlight><highlight class="keyword">auto</highlight><highlight class="normal"><sp/>_<sp/>:<sp/>st)<sp/>{</highlight></codeline>
+<codeline lineno="86"><highlight class="normal"><sp/><sp/><sp/><sp/>st.PauseTiming();</highlight></codeline>
+<codeline lineno="87"><highlight class="normal"><sp/><sp/><sp/><sp/>Utils::ClearCache();</highlight></codeline>
+<codeline lineno="88"><highlight class="normal"><sp/><sp/><sp/><sp/>st.ResumeTiming();</highlight></codeline>
+<codeline lineno="89"><highlight class="normal"></highlight></codeline>
+<codeline lineno="90"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">auto</highlight><highlight class="normal"><sp/>size<sp/>=<sp/>st.range(0);</highlight></codeline>
+<codeline lineno="91"><highlight class="normal"></highlight></codeline>
+<codeline lineno="92"><highlight class="normal"><sp/><sp/>}</highlight></codeline>
+<codeline lineno="93"><highlight class="normal">}</highlight></codeline>
+<codeline lineno="94"><highlight class="normal"></highlight></codeline>
+<codeline lineno="95"><highlight class="normal">BENCHMARK_REGISTER_F(<ref refid="class_matrix_unroll_fixture" kindref="compound">MatrixUnrollFixture</ref>,<sp/>BM_UnrollZach)-&gt;RangeMultiplier(2)-&gt;Range(256,<sp/>256<sp/>&lt;&lt;<sp/>3);</highlight></codeline>
+    </programlisting>
+    <location file="Source/PowerBench/Src/MatrixUnroll.cpp"/>
+  </compounddef>
+</doxygen>

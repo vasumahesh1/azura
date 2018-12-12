@@ -1,0 +1,134 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.8.14">
+  <compounddef id="struct_azura_1_1_shader_controls" kind="struct" language="C++" prot="public">
+    <compoundname>Azura::ShaderControls</compoundname>
+      <sectiondef kind="public-attrib">
+      <memberdef kind="variable" id="struct_azura_1_1_shader_controls_1a23cc10573b6eb1b6454b5f86c79fa124" prot="public" static="no" mutable="no">
+        <type>float</type>
+        <definition>float Azura::ShaderControls::m_shoreLevel</definition>
+        <argsstring></argsstring>
+        <name>m_shoreLevel</name>
+        <initializer>{0.5f}</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Source/Samples/1_ProceduralPlanet/Inc/ProceduralPlanet/AppRenderer.h" line="32" column="1" bodyfile="Source/Samples/1_ProceduralPlanet/Inc/ProceduralPlanet/AppRenderer.h" bodystart="32" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="struct_azura_1_1_shader_controls_1a542bc9f7ecef959ecf88f4457a04b8b0" prot="public" static="no" mutable="no">
+        <type>float</type>
+        <definition>float Azura::ShaderControls::m_elevation</definition>
+        <argsstring></argsstring>
+        <name>m_elevation</name>
+        <initializer>{0.5f}</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Source/Samples/1_ProceduralPlanet/Inc/ProceduralPlanet/AppRenderer.h" line="33" column="1" bodyfile="Source/Samples/1_ProceduralPlanet/Inc/ProceduralPlanet/AppRenderer.h" bodystart="33" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="struct_azura_1_1_shader_controls_1a9ecf0929c161a095341951f1b8e814cd" prot="public" static="no" mutable="no">
+        <type>float</type>
+        <definition>float Azura::ShaderControls::m_noiseScale</definition>
+        <argsstring></argsstring>
+        <name>m_noiseScale</name>
+        <initializer>{0.5f}</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Source/Samples/1_ProceduralPlanet/Inc/ProceduralPlanet/AppRenderer.h" line="34" column="1" bodyfile="Source/Samples/1_ProceduralPlanet/Inc/ProceduralPlanet/AppRenderer.h" bodystart="34" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="struct_azura_1_1_shader_controls_1aa70921ea055b2afd8b01c2c8ed4057d0" prot="public" static="no" mutable="no">
+        <type>float</type>
+        <definition>float Azura::ShaderControls::pad1</definition>
+        <argsstring></argsstring>
+        <name>pad1</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Source/Samples/1_ProceduralPlanet/Inc/ProceduralPlanet/AppRenderer.h" line="35" column="1" bodyfile="Source/Samples/1_ProceduralPlanet/Inc/ProceduralPlanet/AppRenderer.h" bodystart="35" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="struct_azura_1_1_shader_controls_1a343a528c6cefb350a68d9940256bab13" prot="public" static="no" mutable="no">
+        <type>Vector4f</type>
+        <definition>Vector4f Azura::ShaderControls::m_lightPos</definition>
+        <argsstring></argsstring>
+        <name>m_lightPos</name>
+        <initializer>{0.0f, 0.0f, 15.0f, 1.0f}</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Source/Samples/1_ProceduralPlanet/Inc/ProceduralPlanet/AppRenderer.h" line="37" column="1" bodyfile="Source/Samples/1_ProceduralPlanet/Inc/ProceduralPlanet/AppRenderer.h" bodystart="37" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="struct_azura_1_1_shader_controls_1a693bb9ec77aaebca0ce3843d7159b7fa" prot="public" static="no" mutable="no">
+        <type>Vector4f</type>
+        <definition>Vector4f Azura::ShaderControls::m_eye</definition>
+        <argsstring></argsstring>
+        <name>m_eye</name>
+        <initializer>{0.0f, 0.0f, 4.0f, 1.0f}</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Source/Samples/1_ProceduralPlanet/Inc/ProceduralPlanet/AppRenderer.h" line="38" column="1" bodyfile="Source/Samples/1_ProceduralPlanet/Inc/ProceduralPlanet/AppRenderer.h" bodystart="38" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="struct_azura_1_1_shader_controls_1ab59d8ef502f4e3517070fe274f381eea" prot="public" static="no" mutable="no">
+        <type>Color4f</type>
+        <definition>Color4f Azura::ShaderControls::m_waterControls</definition>
+        <argsstring></argsstring>
+        <name>m_waterControls</name>
+        <initializer>{0.5f, 0.65f, 0, 0}</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Source/Samples/1_ProceduralPlanet/Inc/ProceduralPlanet/AppRenderer.h" line="40" column="1" bodyfile="Source/Samples/1_ProceduralPlanet/Inc/ProceduralPlanet/AppRenderer.h" bodystart="40" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="struct_azura_1_1_shader_controls_1a9910b5d390efdfa22870a8ca4627c292" prot="public" static="no" mutable="no">
+        <type>Color4f</type>
+        <definition>Color4f Azura::ShaderControls::m_waterColor</definition>
+        <argsstring></argsstring>
+        <name>m_waterColor</name>
+        <initializer>{21.0f / 255.0f, 92.0f / 255.0f, 158.0f / 255.0f, 1.0f}</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Source/Samples/1_ProceduralPlanet/Inc/ProceduralPlanet/AppRenderer.h" line="41" column="1" bodyfile="Source/Samples/1_ProceduralPlanet/Inc/ProceduralPlanet/AppRenderer.h" bodystart="41" bodyend="-1"/>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <location file="Source/Samples/1_ProceduralPlanet/Inc/ProceduralPlanet/AppRenderer.h" line="30" column="1" bodyfile="Source/Samples/1_ProceduralPlanet/Inc/ProceduralPlanet/AppRenderer.h" bodystart="30" bodyend="42"/>
+    <listofallmembers>
+      <member refid="struct_azura_1_1_shader_controls_1a542bc9f7ecef959ecf88f4457a04b8b0" prot="public" virt="non-virtual"><scope>Azura::ShaderControls</scope><name>m_elevation</name></member>
+      <member refid="struct_azura_1_1_shader_controls_1a693bb9ec77aaebca0ce3843d7159b7fa" prot="public" virt="non-virtual"><scope>Azura::ShaderControls</scope><name>m_eye</name></member>
+      <member refid="struct_azura_1_1_shader_controls_1a343a528c6cefb350a68d9940256bab13" prot="public" virt="non-virtual"><scope>Azura::ShaderControls</scope><name>m_lightPos</name></member>
+      <member refid="struct_azura_1_1_shader_controls_1a9ecf0929c161a095341951f1b8e814cd" prot="public" virt="non-virtual"><scope>Azura::ShaderControls</scope><name>m_noiseScale</name></member>
+      <member refid="struct_azura_1_1_shader_controls_1a23cc10573b6eb1b6454b5f86c79fa124" prot="public" virt="non-virtual"><scope>Azura::ShaderControls</scope><name>m_shoreLevel</name></member>
+      <member refid="struct_azura_1_1_shader_controls_1a9910b5d390efdfa22870a8ca4627c292" prot="public" virt="non-virtual"><scope>Azura::ShaderControls</scope><name>m_waterColor</name></member>
+      <member refid="struct_azura_1_1_shader_controls_1ab59d8ef502f4e3517070fe274f381eea" prot="public" virt="non-virtual"><scope>Azura::ShaderControls</scope><name>m_waterControls</name></member>
+      <member refid="struct_azura_1_1_shader_controls_1aa70921ea055b2afd8b01c2c8ed4057d0" prot="public" virt="non-virtual"><scope>Azura::ShaderControls</scope><name>pad1</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

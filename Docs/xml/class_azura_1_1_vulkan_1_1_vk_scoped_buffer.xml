@@ -1,0 +1,265 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.8.14">
+  <compounddef id="class_azura_1_1_vulkan_1_1_vk_scoped_buffer" kind="class" language="C++" prot="public">
+    <compoundname>Azura::Vulkan::VkScopedBuffer</compoundname>
+      <sectiondef kind="private-attrib">
+      <memberdef kind="variable" id="class_azura_1_1_vulkan_1_1_vk_scoped_buffer_1a82a52aead22d96ec0ced0fb3829e02e3" prot="private" static="no" mutable="no">
+        <type>VkDevice</type>
+        <definition>VkDevice Azura::Vulkan::VkScopedBuffer::m_device</definition>
+        <argsstring></argsstring>
+        <name>m_device</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Source/Azura/RenderSystem/Inc/Vulkan/VkScopedBuffer.h" line="35" column="1" bodyfile="Source/Azura/RenderSystem/Inc/Vulkan/VkScopedBuffer.h" bodystart="35" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="class_azura_1_1_vulkan_1_1_vk_scoped_buffer_1af87ef69ac42e4beea2c690ce6bee375d" prot="private" static="no" mutable="no">
+        <type>VkBuffer</type>
+        <definition>VkBuffer Azura::Vulkan::VkScopedBuffer::m_buffer</definition>
+        <argsstring></argsstring>
+        <name>m_buffer</name>
+        <initializer>{}</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Source/Azura/RenderSystem/Inc/Vulkan/VkScopedBuffer.h" line="36" column="1" bodyfile="Source/Azura/RenderSystem/Inc/Vulkan/VkScopedBuffer.h" bodystart="36" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="class_azura_1_1_vulkan_1_1_vk_scoped_buffer_1a45a1c07bd57cbf4d0fe906424705d545" prot="private" static="no" mutable="no">
+        <type>VkDeviceMemory</type>
+        <definition>VkDeviceMemory Azura::Vulkan::VkScopedBuffer::m_memory</definition>
+        <argsstring></argsstring>
+        <name>m_memory</name>
+        <initializer>{}</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Source/Azura/RenderSystem/Inc/Vulkan/VkScopedBuffer.h" line="37" column="1" bodyfile="Source/Azura/RenderSystem/Inc/Vulkan/VkScopedBuffer.h" bodystart="37" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="class_azura_1_1_vulkan_1_1_vk_scoped_buffer_1af8cbdf2ae2df1a5b8d79a0e1c2e380ed" prot="private" static="no" mutable="no">
+        <type>const <ref refid="class_azura_1_1_log" kindref="compound">Log</ref></type>
+        <definition>const Log Azura::Vulkan::VkScopedBuffer::log_VulkanRenderSystem</definition>
+        <argsstring></argsstring>
+        <name>log_VulkanRenderSystem</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Source/Azura/RenderSystem/Inc/Vulkan/VkScopedBuffer.h" line="38" column="1" bodyfile="Source/Azura/RenderSystem/Inc/Vulkan/VkScopedBuffer.h" bodystart="38" bodyend="-1"/>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="public-func">
+      <memberdef kind="function" id="class_azura_1_1_vulkan_1_1_vk_scoped_buffer_1aec5c734d721cf54cdceddfb3cae8cff7" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>Azura::Vulkan::VkScopedBuffer::VkScopedBuffer</definition>
+        <argsstring>(VkDevice device, VkBufferUsageFlags usage, U32 bufferSize, VkMemoryPropertyFlags memoryProperties, const VkPhysicalDeviceMemoryProperties &amp;phyDeviceMemoryProperties, const Log &amp;logger)</argsstring>
+        <name>VkScopedBuffer</name>
+        <param>
+          <type>VkDevice</type>
+          <declname>device</declname>
+        </param>
+        <param>
+          <type>VkBufferUsageFlags</type>
+          <declname>usage</declname>
+        </param>
+        <param>
+          <type>U32</type>
+          <declname>bufferSize</declname>
+        </param>
+        <param>
+          <type>VkMemoryPropertyFlags</type>
+          <declname>memoryProperties</declname>
+        </param>
+        <param>
+          <type>const VkPhysicalDeviceMemoryProperties &amp;</type>
+          <declname>phyDeviceMemoryProperties</declname>
+        </param>
+        <param>
+          <type>const <ref refid="class_azura_1_1_log" kindref="compound">Log</ref> &amp;</type>
+          <declname>logger</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Source/Azura/RenderSystem/Inc/Vulkan/VkScopedBuffer.h" line="11" column="1" bodyfile="Source/Azura/RenderSystem/Src/Vulkan/VkScopedBuffer.cpp" bodystart="8" bodyend="17"/>
+      </memberdef>
+      <memberdef kind="function" id="class_azura_1_1_vulkan_1_1_vk_scoped_buffer_1a0d2c970d22e7040e949f27f1078a40c4" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>Azura::Vulkan::VkScopedBuffer::VkScopedBuffer</definition>
+        <argsstring>(const Log &amp;logger)</argsstring>
+        <name>VkScopedBuffer</name>
+        <param>
+          <type>const <ref refid="class_azura_1_1_log" kindref="compound">Log</ref> &amp;</type>
+          <declname>logger</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Source/Azura/RenderSystem/Inc/Vulkan/VkScopedBuffer.h" line="17" column="1" bodyfile="Source/Azura/RenderSystem/Src/Vulkan/VkScopedBuffer.cpp" bodystart="19" bodyend="21"/>
+      </memberdef>
+      <memberdef kind="function" id="class_azura_1_1_vulkan_1_1_vk_scoped_buffer_1a525d7c85ceb1b20d68f87d6a7cd68d9a" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void Azura::Vulkan::VkScopedBuffer::Create</definition>
+        <argsstring>(VkDevice device, VkBufferUsageFlags usage, U32 bufferSize, VkMemoryPropertyFlags memoryProperties, const VkPhysicalDeviceMemoryProperties &amp;phyDeviceMemoryProperties)</argsstring>
+        <name>Create</name>
+        <param>
+          <type>VkDevice</type>
+          <declname>device</declname>
+        </param>
+        <param>
+          <type>VkBufferUsageFlags</type>
+          <declname>usage</declname>
+        </param>
+        <param>
+          <type>U32</type>
+          <declname>bufferSize</declname>
+        </param>
+        <param>
+          <type>VkMemoryPropertyFlags</type>
+          <declname>memoryProperties</declname>
+        </param>
+        <param>
+          <type>const VkPhysicalDeviceMemoryProperties &amp;</type>
+          <declname>phyDeviceMemoryProperties</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Source/Azura/RenderSystem/Inc/Vulkan/VkScopedBuffer.h" line="19" column="1" bodyfile="Source/Azura/RenderSystem/Src/Vulkan/VkScopedBuffer.cpp" bodystart="23" bodyend="54"/>
+      </memberdef>
+      <memberdef kind="function" id="class_azura_1_1_vulkan_1_1_vk_scoped_buffer_1a8781f592a927a0f73ddd48105cbd3efe" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
+        <type>void *</type>
+        <definition>void * Azura::Vulkan::VkScopedBuffer::MapMemory</definition>
+        <argsstring>(VkDeviceSize size, VkDeviceSize offset) const</argsstring>
+        <name>MapMemory</name>
+        <param>
+          <type>VkDeviceSize</type>
+          <declname>size</declname>
+        </param>
+        <param>
+          <type>VkDeviceSize</type>
+          <declname>offset</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Source/Azura/RenderSystem/Inc/Vulkan/VkScopedBuffer.h" line="25" column="1" bodyfile="Source/Azura/RenderSystem/Src/Vulkan/VkScopedBuffer.cpp" bodystart="56" bodyend="60"/>
+      </memberdef>
+      <memberdef kind="function" id="class_azura_1_1_vulkan_1_1_vk_scoped_buffer_1a165355958d932e88fbc3ef65b16f46b1" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void Azura::Vulkan::VkScopedBuffer::UnMapMemory</definition>
+        <argsstring>() const</argsstring>
+        <name>UnMapMemory</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Source/Azura/RenderSystem/Inc/Vulkan/VkScopedBuffer.h" line="26" column="1" bodyfile="Source/Azura/RenderSystem/Src/Vulkan/VkScopedBuffer.cpp" bodystart="62" bodyend="64"/>
+      </memberdef>
+      <memberdef kind="function" id="class_azura_1_1_vulkan_1_1_vk_scoped_buffer_1afd01e9f5ed4b614f263569a5d3ca3f27" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
+        <type>VkBuffer</type>
+        <definition>VkBuffer Azura::Vulkan::VkScopedBuffer::Real</definition>
+        <argsstring>() const</argsstring>
+        <name>Real</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Source/Azura/RenderSystem/Inc/Vulkan/VkScopedBuffer.h" line="28" column="1" bodyfile="Source/Azura/RenderSystem/Src/Vulkan/VkScopedBuffer.cpp" bodystart="66" bodyend="68"/>
+      </memberdef>
+      <memberdef kind="function" id="class_azura_1_1_vulkan_1_1_vk_scoped_buffer_1af1fbafd3df401f4e545dcf6d7a5a5414" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
+        <type>VkDeviceMemory</type>
+        <definition>VkDeviceMemory Azura::Vulkan::VkScopedBuffer::Memory</definition>
+        <argsstring>() const</argsstring>
+        <name>Memory</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Source/Azura/RenderSystem/Inc/Vulkan/VkScopedBuffer.h" line="29" column="1" bodyfile="Source/Azura/RenderSystem/Src/Vulkan/VkScopedBuffer.cpp" bodystart="70" bodyend="72"/>
+      </memberdef>
+      <memberdef kind="function" id="class_azura_1_1_vulkan_1_1_vk_scoped_buffer_1a66f1096ad53bfe97fe562ed365bc2c58" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
+        <type>VkDescriptorBufferInfo</type>
+        <definition>VkDescriptorBufferInfo Azura::Vulkan::VkScopedBuffer::GetDescriptorInfo</definition>
+        <argsstring>(U32 offset, U32 range) const</argsstring>
+        <name>GetDescriptorInfo</name>
+        <param>
+          <type>U32</type>
+          <declname>offset</declname>
+        </param>
+        <param>
+          <type>U32</type>
+          <declname>range</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Source/Azura/RenderSystem/Inc/Vulkan/VkScopedBuffer.h" line="30" column="1" bodyfile="Source/Azura/RenderSystem/Src/Vulkan/VkScopedBuffer.cpp" bodystart="74" bodyend="81"/>
+      </memberdef>
+      <memberdef kind="function" id="class_azura_1_1_vulkan_1_1_vk_scoped_buffer_1af76d0253639ca34e55b72816a79189b6" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void Azura::Vulkan::VkScopedBuffer::CleanUp</definition>
+        <argsstring>() const</argsstring>
+        <name>CleanUp</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Source/Azura/RenderSystem/Inc/Vulkan/VkScopedBuffer.h" line="32" column="1" bodyfile="Source/Azura/RenderSystem/Src/Vulkan/VkScopedBuffer.cpp" bodystart="83" bodyend="86"/>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <location file="Source/Azura/RenderSystem/Inc/Vulkan/VkScopedBuffer.h" line="9" column="1" bodyfile="Source/Azura/RenderSystem/Inc/Vulkan/VkScopedBuffer.h" bodystart="9" bodyend="39"/>
+    <listofallmembers>
+      <member refid="class_azura_1_1_vulkan_1_1_vk_scoped_buffer_1af76d0253639ca34e55b72816a79189b6" prot="public" virt="non-virtual"><scope>Azura::Vulkan::VkScopedBuffer</scope><name>CleanUp</name></member>
+      <member refid="class_azura_1_1_vulkan_1_1_vk_scoped_buffer_1a525d7c85ceb1b20d68f87d6a7cd68d9a" prot="public" virt="non-virtual"><scope>Azura::Vulkan::VkScopedBuffer</scope><name>Create</name></member>
+      <member refid="class_azura_1_1_vulkan_1_1_vk_scoped_buffer_1a66f1096ad53bfe97fe562ed365bc2c58" prot="public" virt="non-virtual"><scope>Azura::Vulkan::VkScopedBuffer</scope><name>GetDescriptorInfo</name></member>
+      <member refid="class_azura_1_1_vulkan_1_1_vk_scoped_buffer_1af8cbdf2ae2df1a5b8d79a0e1c2e380ed" prot="private" virt="non-virtual"><scope>Azura::Vulkan::VkScopedBuffer</scope><name>log_VulkanRenderSystem</name></member>
+      <member refid="class_azura_1_1_vulkan_1_1_vk_scoped_buffer_1af87ef69ac42e4beea2c690ce6bee375d" prot="private" virt="non-virtual"><scope>Azura::Vulkan::VkScopedBuffer</scope><name>m_buffer</name></member>
+      <member refid="class_azura_1_1_vulkan_1_1_vk_scoped_buffer_1a82a52aead22d96ec0ced0fb3829e02e3" prot="private" virt="non-virtual"><scope>Azura::Vulkan::VkScopedBuffer</scope><name>m_device</name></member>
+      <member refid="class_azura_1_1_vulkan_1_1_vk_scoped_buffer_1a45a1c07bd57cbf4d0fe906424705d545" prot="private" virt="non-virtual"><scope>Azura::Vulkan::VkScopedBuffer</scope><name>m_memory</name></member>
+      <member refid="class_azura_1_1_vulkan_1_1_vk_scoped_buffer_1a8781f592a927a0f73ddd48105cbd3efe" prot="public" virt="non-virtual"><scope>Azura::Vulkan::VkScopedBuffer</scope><name>MapMemory</name></member>
+      <member refid="class_azura_1_1_vulkan_1_1_vk_scoped_buffer_1af1fbafd3df401f4e545dcf6d7a5a5414" prot="public" virt="non-virtual"><scope>Azura::Vulkan::VkScopedBuffer</scope><name>Memory</name></member>
+      <member refid="class_azura_1_1_vulkan_1_1_vk_scoped_buffer_1afd01e9f5ed4b614f263569a5d3ca3f27" prot="public" virt="non-virtual"><scope>Azura::Vulkan::VkScopedBuffer</scope><name>Real</name></member>
+      <member refid="class_azura_1_1_vulkan_1_1_vk_scoped_buffer_1a165355958d932e88fbc3ef65b16f46b1" prot="public" virt="non-virtual"><scope>Azura::Vulkan::VkScopedBuffer</scope><name>UnMapMemory</name></member>
+      <member refid="class_azura_1_1_vulkan_1_1_vk_scoped_buffer_1aec5c734d721cf54cdceddfb3cae8cff7" prot="public" virt="non-virtual"><scope>Azura::Vulkan::VkScopedBuffer</scope><name>VkScopedBuffer</name></member>
+      <member refid="class_azura_1_1_vulkan_1_1_vk_scoped_buffer_1a0d2c970d22e7040e949f27f1078a40c4" prot="public" virt="non-virtual"><scope>Azura::Vulkan::VkScopedBuffer</scope><name>VkScopedBuffer</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

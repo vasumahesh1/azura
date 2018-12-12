@@ -1,0 +1,417 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.8.14">
+  <compounddef id="_array__test_8cpp" kind="file" language="C++">
+    <compoundname>Array_test.cpp</compoundname>
+    <includes refid="_array__test_8h" local="yes">Array_test.h</includes>
+    <includes local="no">algorithm</includes>
+    <incdepgraph>
+      <node id="4629">
+        <label>functional</label>
+      </node>
+      <node id="4633">
+        <label>MemoryBuffer.h</label>
+        <link refid="_memory_buffer_8h_source"/>
+        <childnode refid="4630" relation="include">
+        </childnode>
+      </node>
+      <node id="4628">
+        <label>Memory/Allocator.h</label>
+        <link refid="_allocator_8h_source"/>
+        <childnode refid="4629" relation="include">
+        </childnode>
+        <childnode refid="4630" relation="include">
+        </childnode>
+        <childnode refid="4631" relation="include">
+        </childnode>
+      </node>
+      <node id="4626">
+        <label>cassert</label>
+      </node>
+      <node id="4632">
+        <label>Memory/HeapMemoryBuffer.h</label>
+        <link refid="_heap_memory_buffer_8h_source"/>
+        <childnode refid="4633" relation="include">
+        </childnode>
+        <childnode refid="4630" relation="include">
+        </childnode>
+      </node>
+      <node id="4631">
+        <label>Utils/Macros.h</label>
+        <link refid="_macros_8h_source"/>
+      </node>
+      <node id="4625">
+        <label>Containers/Array.h</label>
+        <link refid="_array_8h_source"/>
+        <childnode refid="4626" relation="include">
+        </childnode>
+        <childnode refid="4627" relation="include">
+        </childnode>
+        <childnode refid="4628" relation="include">
+        </childnode>
+        <childnode refid="4630" relation="include">
+        </childnode>
+      </node>
+      <node id="4634">
+        <label>Memory/MonotonicAllocator.h</label>
+        <link refid="_monotonic_allocator_8h_source"/>
+        <childnode refid="4628" relation="include">
+        </childnode>
+        <childnode refid="4630" relation="include">
+        </childnode>
+      </node>
+      <node id="4635">
+        <label>gtest/gtest.h</label>
+      </node>
+      <node id="4623">
+        <label>Source/Containers/Test/Array_test.cpp</label>
+        <link refid="_array__test_8cpp"/>
+        <childnode refid="4624" relation="include">
+        </childnode>
+        <childnode refid="4636" relation="include">
+        </childnode>
+      </node>
+      <node id="4630">
+        <label>Types.h</label>
+      </node>
+      <node id="4636">
+        <label>algorithm</label>
+      </node>
+      <node id="4624">
+        <label>Array_test.h</label>
+        <link refid="_array__test_8h_source"/>
+        <childnode refid="4625" relation="include">
+        </childnode>
+        <childnode refid="4632" relation="include">
+        </childnode>
+        <childnode refid="4634" relation="include">
+        </childnode>
+        <childnode refid="4635" relation="include">
+        </childnode>
+      </node>
+      <node id="4627">
+        <label>cstring</label>
+      </node>
+    </incdepgraph>
+      <sectiondef kind="func">
+      <memberdef kind="function" id="_array__test_8cpp_1aa4ccd4dbbabc5b5df275d80ca2f3ee4f" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>TEST_F</definition>
+        <argsstring>(ArrayTest, Constructs)</argsstring>
+        <name>TEST_F</name>
+        <param>
+          <type><ref refid="class_array_test" kindref="compound">ArrayTest</ref></type>
+        </param>
+        <param>
+          <type>Constructs</type>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Source/Containers/Test/Array_test.cpp" line="7" column="1" bodyfile="Source/Containers/Test/Array_test.cpp" bodystart="7" bodyend="10"/>
+      </memberdef>
+      <memberdef kind="function" id="_array__test_8cpp_1a9f58c064e0947a4af016068235b393b6" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>TEST_F</definition>
+        <argsstring>(ArrayTest, NormalPush)</argsstring>
+        <name>TEST_F</name>
+        <param>
+          <type><ref refid="class_array_test" kindref="compound">ArrayTest</ref></type>
+        </param>
+        <param>
+          <type>NormalPush</type>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Source/Containers/Test/Array_test.cpp" line="12" column="1" bodyfile="Source/Containers/Test/Array_test.cpp" bodystart="12" bodyend="24"/>
+      </memberdef>
+      <memberdef kind="function" id="_array__test_8cpp_1ab64e8a12bb3b50b7bdc205e2a624f0b1" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>TEST_F</definition>
+        <argsstring>(ArrayTest, NormalPop)</argsstring>
+        <name>TEST_F</name>
+        <param>
+          <type><ref refid="class_array_test" kindref="compound">ArrayTest</ref></type>
+        </param>
+        <param>
+          <type>NormalPop</type>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Source/Containers/Test/Array_test.cpp" line="26" column="1" bodyfile="Source/Containers/Test/Array_test.cpp" bodystart="26" bodyend="37"/>
+      </memberdef>
+      <memberdef kind="function" id="_array__test_8cpp_1aebf49bf693f29cd68343c5a862452359" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>TEST_F</definition>
+        <argsstring>(ArrayTest, NormalRemove)</argsstring>
+        <name>TEST_F</name>
+        <param>
+          <type><ref refid="class_array_test" kindref="compound">ArrayTest</ref></type>
+        </param>
+        <param>
+          <type>NormalRemove</type>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Source/Containers/Test/Array_test.cpp" line="39" column="1" bodyfile="Source/Containers/Test/Array_test.cpp" bodystart="39" bodyend="62"/>
+      </memberdef>
+      <memberdef kind="function" id="_array__test_8cpp_1aa22d0d971551247b476531a61caac3b9" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>TEST_F</definition>
+        <argsstring>(ArrayTest, NormalFind)</argsstring>
+        <name>TEST_F</name>
+        <param>
+          <type><ref refid="class_array_test" kindref="compound">ArrayTest</ref></type>
+        </param>
+        <param>
+          <type>NormalFind</type>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Source/Containers/Test/Array_test.cpp" line="64" column="1" bodyfile="Source/Containers/Test/Array_test.cpp" bodystart="64" bodyend="76"/>
+      </memberdef>
+      <memberdef kind="function" id="_array__test_8cpp_1a09b83af735f4d8f86f4596740866d761" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>TEST_F</definition>
+        <argsstring>(ArrayTest, Empty)</argsstring>
+        <name>TEST_F</name>
+        <param>
+          <type><ref refid="class_array_test" kindref="compound">ArrayTest</ref></type>
+        </param>
+        <param>
+          <type>Empty</type>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Source/Containers/Test/Array_test.cpp" line="78" column="1" bodyfile="Source/Containers/Test/Array_test.cpp" bodystart="78" bodyend="92"/>
+      </memberdef>
+      <memberdef kind="function" id="_array__test_8cpp_1a6f7c780191a9813410f36ec018c25083" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>TEST_F</definition>
+        <argsstring>(ArrayTest, IteratorLoop)</argsstring>
+        <name>TEST_F</name>
+        <param>
+          <type><ref refid="class_array_test" kindref="compound">ArrayTest</ref></type>
+        </param>
+        <param>
+          <type>IteratorLoop</type>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Source/Containers/Test/Array_test.cpp" line="94" column="1" bodyfile="Source/Containers/Test/Array_test.cpp" bodystart="94" bodyend="108"/>
+      </memberdef>
+      <memberdef kind="function" id="_array__test_8cpp_1a7d0a863b946b5e9914f39835cbd88aea" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>TEST_F</definition>
+        <argsstring>(ArrayTest, IteratorSort)</argsstring>
+        <name>TEST_F</name>
+        <param>
+          <type><ref refid="class_array_test" kindref="compound">ArrayTest</ref></type>
+        </param>
+        <param>
+          <type>IteratorSort</type>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Source/Containers/Test/Array_test.cpp" line="110" column="1" bodyfile="Source/Containers/Test/Array_test.cpp" bodystart="110" bodyend="125"/>
+      </memberdef>
+      <memberdef kind="function" id="_array__test_8cpp_1a3a4dea2e519474d86e7c9ca54d5db786" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>TEST_F</definition>
+        <argsstring>(ArrayTest, IteratorCount)</argsstring>
+        <name>TEST_F</name>
+        <param>
+          <type><ref refid="class_array_test" kindref="compound">ArrayTest</ref></type>
+        </param>
+        <param>
+          <type>IteratorCount</type>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Source/Containers/Test/Array_test.cpp" line="127" column="1" bodyfile="Source/Containers/Test/Array_test.cpp" bodystart="127" bodyend="141"/>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <programlisting>
+<codeline lineno="1"><highlight class="preprocessor">#include<sp/>&quot;Array_test.h&quot;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="2"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&lt;algorithm&gt;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="3"><highlight class="normal"></highlight></codeline>
+<codeline lineno="4"><highlight class="normal"></highlight><highlight class="keyword">using<sp/>namespace<sp/></highlight><highlight class="normal"><ref refid="namespace_azura" kindref="compound">Azura</ref>;</highlight></codeline>
+<codeline lineno="5"><highlight class="normal"></highlight><highlight class="keyword">using<sp/>namespace<sp/></highlight><highlight class="normal"><ref refid="namespace_azura_1_1_containers" kindref="compound">Azura::Containers</ref>;</highlight></codeline>
+<codeline lineno="6"><highlight class="normal"></highlight></codeline>
+<codeline lineno="7"><highlight class="normal">TEST_F(<ref refid="class_array_test" kindref="compound">ArrayTest</ref>,<sp/>Constructs)<sp/>{</highlight></codeline>
+<codeline lineno="8"><highlight class="normal"><sp/><sp/><ref refid="class_azura_1_1_containers_1_1_array" kindref="compound">Array&lt;int, 16&gt;</ref><sp/>a{alloc};</highlight></codeline>
+<codeline lineno="9"><highlight class="normal"><sp/><sp/>ASSERT_EQ(a.GetSize(),<sp/>0u);</highlight></codeline>
+<codeline lineno="10"><highlight class="normal">}</highlight></codeline>
+<codeline lineno="11"><highlight class="normal"></highlight></codeline>
+<codeline lineno="12"><highlight class="normal">TEST_F(<ref refid="class_array_test" kindref="compound">ArrayTest</ref>,<sp/>NormalPush)<sp/>{</highlight></codeline>
+<codeline lineno="13"><highlight class="normal"><sp/><sp/>alloc.Reset();</highlight></codeline>
+<codeline lineno="14"><highlight class="normal"><sp/><sp/><ref refid="class_azura_1_1_containers_1_1_array" kindref="compound">Array&lt;int, 16&gt;</ref><sp/>a{alloc};</highlight></codeline>
+<codeline lineno="15"><highlight class="normal"></highlight></codeline>
+<codeline lineno="16"><highlight class="normal"><sp/><sp/>a.<ref refid="class_azura_1_1_containers_1_1_array_1a2ba41cb0847f98adc56d52a84935fc1d" kindref="member">PushBack</ref>(10);</highlight></codeline>
+<codeline lineno="17"><highlight class="normal"><sp/><sp/>a.PushBack(20);</highlight></codeline>
+<codeline lineno="18"><highlight class="normal"><sp/><sp/>a.PushBack(30);</highlight></codeline>
+<codeline lineno="19"><highlight class="normal"></highlight></codeline>
+<codeline lineno="20"><highlight class="normal"><sp/><sp/>ASSERT_EQ(a.GetSize(),<sp/>3u);</highlight></codeline>
+<codeline lineno="21"><highlight class="normal"><sp/><sp/>ASSERT_EQ(a[0],<sp/>10);</highlight></codeline>
+<codeline lineno="22"><highlight class="normal"><sp/><sp/>ASSERT_EQ(a[1],<sp/>20);</highlight></codeline>
+<codeline lineno="23"><highlight class="normal"><sp/><sp/>ASSERT_EQ(a[2],<sp/>30);</highlight></codeline>
+<codeline lineno="24"><highlight class="normal">}</highlight></codeline>
+<codeline lineno="25"><highlight class="normal"></highlight></codeline>
+<codeline lineno="26"><highlight class="normal">TEST_F(<ref refid="class_array_test" kindref="compound">ArrayTest</ref>,<sp/>NormalPop)<sp/>{</highlight></codeline>
+<codeline lineno="27"><highlight class="normal"><sp/><sp/>alloc.Reset();</highlight></codeline>
+<codeline lineno="28"><highlight class="normal"><sp/><sp/><ref refid="class_azura_1_1_containers_1_1_array" kindref="compound">Array&lt;int, 16&gt;</ref><sp/>a{alloc};</highlight></codeline>
+<codeline lineno="29"><highlight class="normal"></highlight></codeline>
+<codeline lineno="30"><highlight class="normal"><sp/><sp/>a.<ref refid="class_azura_1_1_containers_1_1_array_1a2ba41cb0847f98adc56d52a84935fc1d" kindref="member">PushBack</ref>(10);</highlight></codeline>
+<codeline lineno="31"><highlight class="normal"><sp/><sp/>a.PushBack(20);</highlight></codeline>
+<codeline lineno="32"><highlight class="normal"><sp/><sp/>a.PushBack(30);</highlight></codeline>
+<codeline lineno="33"><highlight class="normal"></highlight></codeline>
+<codeline lineno="34"><highlight class="normal"><sp/><sp/>ASSERT_EQ(a.GetSize(),<sp/>3u);</highlight></codeline>
+<codeline lineno="35"><highlight class="normal"><sp/><sp/>ASSERT_EQ(a.Pop(),<sp/>30);</highlight></codeline>
+<codeline lineno="36"><highlight class="normal"><sp/><sp/>ASSERT_EQ(a.GetSize(),<sp/>2u);</highlight></codeline>
+<codeline lineno="37"><highlight class="normal">}</highlight></codeline>
+<codeline lineno="38"><highlight class="normal"></highlight></codeline>
+<codeline lineno="39"><highlight class="normal">TEST_F(<ref refid="class_array_test" kindref="compound">ArrayTest</ref>,<sp/>NormalRemove)<sp/>{</highlight></codeline>
+<codeline lineno="40"><highlight class="normal"><sp/><sp/>alloc.Reset();</highlight></codeline>
+<codeline lineno="41"><highlight class="normal"><sp/><sp/><ref refid="class_azura_1_1_containers_1_1_array" kindref="compound">Array&lt;int, 16&gt;</ref><sp/>a{alloc};</highlight></codeline>
+<codeline lineno="42"><highlight class="normal"></highlight></codeline>
+<codeline lineno="43"><highlight class="normal"><sp/><sp/>a.<ref refid="class_azura_1_1_containers_1_1_array_1a2ba41cb0847f98adc56d52a84935fc1d" kindref="member">PushBack</ref>(10);</highlight></codeline>
+<codeline lineno="44"><highlight class="normal"><sp/><sp/>a.PushBack(20);</highlight></codeline>
+<codeline lineno="45"><highlight class="normal"><sp/><sp/>a.PushBack(30);</highlight></codeline>
+<codeline lineno="46"><highlight class="normal"><sp/><sp/>a.PushBack(40);</highlight></codeline>
+<codeline lineno="47"><highlight class="normal"></highlight></codeline>
+<codeline lineno="48"><highlight class="normal"><sp/><sp/>ASSERT_EQ(a.GetSize(),<sp/>4u);</highlight></codeline>
+<codeline lineno="49"><highlight class="normal"></highlight></codeline>
+<codeline lineno="50"><highlight class="normal"><sp/><sp/>a.Remove(20);</highlight></codeline>
+<codeline lineno="51"><highlight class="normal"></highlight></codeline>
+<codeline lineno="52"><highlight class="normal"><sp/><sp/>ASSERT_EQ(a.GetSize(),<sp/>3u);</highlight></codeline>
+<codeline lineno="53"><highlight class="normal"><sp/><sp/>ASSERT_EQ(a[0],<sp/>10);</highlight></codeline>
+<codeline lineno="54"><highlight class="normal"><sp/><sp/>ASSERT_EQ(a[1],<sp/>30);</highlight></codeline>
+<codeline lineno="55"><highlight class="normal"><sp/><sp/>ASSERT_EQ(a[2],<sp/>40);</highlight></codeline>
+<codeline lineno="56"><highlight class="normal"></highlight></codeline>
+<codeline lineno="57"><highlight class="normal"><sp/><sp/>a.Remove(30);</highlight></codeline>
+<codeline lineno="58"><highlight class="normal"></highlight></codeline>
+<codeline lineno="59"><highlight class="normal"><sp/><sp/>ASSERT_EQ(a.GetSize(),<sp/>2u);</highlight></codeline>
+<codeline lineno="60"><highlight class="normal"><sp/><sp/>ASSERT_EQ(a[0],<sp/>10);</highlight></codeline>
+<codeline lineno="61"><highlight class="normal"><sp/><sp/>ASSERT_EQ(a[1],<sp/>40);</highlight></codeline>
+<codeline lineno="62"><highlight class="normal">}</highlight></codeline>
+<codeline lineno="63"><highlight class="normal"></highlight></codeline>
+<codeline lineno="64"><highlight class="normal">TEST_F(<ref refid="class_array_test" kindref="compound">ArrayTest</ref>,<sp/>NormalFind)<sp/>{</highlight></codeline>
+<codeline lineno="65"><highlight class="normal"><sp/><sp/>alloc.Reset();</highlight></codeline>
+<codeline lineno="66"><highlight class="normal"><sp/><sp/><ref refid="class_azura_1_1_containers_1_1_array" kindref="compound">Array&lt;int, 16&gt;</ref><sp/>a{alloc};</highlight></codeline>
+<codeline lineno="67"><highlight class="normal"></highlight></codeline>
+<codeline lineno="68"><highlight class="normal"><sp/><sp/>a.<ref refid="class_azura_1_1_containers_1_1_array_1a2ba41cb0847f98adc56d52a84935fc1d" kindref="member">PushBack</ref>(10);</highlight></codeline>
+<codeline lineno="69"><highlight class="normal"><sp/><sp/>a.PushBack(20);</highlight></codeline>
+<codeline lineno="70"><highlight class="normal"><sp/><sp/>a.PushBack(30);</highlight></codeline>
+<codeline lineno="71"><highlight class="normal"></highlight></codeline>
+<codeline lineno="72"><highlight class="normal"><sp/><sp/>ASSERT_EQ(a.FindFirst(10),<sp/>0);</highlight></codeline>
+<codeline lineno="73"><highlight class="normal"><sp/><sp/>ASSERT_EQ(a.FindFirst(20),<sp/>1);</highlight></codeline>
+<codeline lineno="74"><highlight class="normal"><sp/><sp/>ASSERT_EQ(a.FindFirst(30),<sp/>2);</highlight></codeline>
+<codeline lineno="75"><highlight class="normal"><sp/><sp/>ASSERT_EQ(a.FindFirst(99),<sp/>-1);</highlight></codeline>
+<codeline lineno="76"><highlight class="normal">}</highlight></codeline>
+<codeline lineno="77"><highlight class="normal"></highlight></codeline>
+<codeline lineno="78"><highlight class="normal">TEST_F(<ref refid="class_array_test" kindref="compound">ArrayTest</ref>,<sp/>Empty)<sp/>{</highlight></codeline>
+<codeline lineno="79"><highlight class="normal"><sp/><sp/>alloc.Reset();</highlight></codeline>
+<codeline lineno="80"><highlight class="normal"><sp/><sp/><ref refid="class_azura_1_1_containers_1_1_array" kindref="compound">Array&lt;int, 16&gt;</ref><sp/>a{alloc};</highlight></codeline>
+<codeline lineno="81"><highlight class="normal"></highlight></codeline>
+<codeline lineno="82"><highlight class="normal"><sp/><sp/>ASSERT_EQ(a.IsEmpty(),<sp/></highlight><highlight class="keyword">true</highlight><highlight class="normal">);</highlight></codeline>
+<codeline lineno="83"><highlight class="normal"></highlight></codeline>
+<codeline lineno="84"><highlight class="normal"><sp/><sp/>a.<ref refid="class_azura_1_1_containers_1_1_array_1a2ba41cb0847f98adc56d52a84935fc1d" kindref="member">PushBack</ref>(10);</highlight></codeline>
+<codeline lineno="85"><highlight class="normal"></highlight></codeline>
+<codeline lineno="86"><highlight class="normal"><sp/><sp/>ASSERT_EQ(a.IsEmpty(),<sp/></highlight><highlight class="keyword">false</highlight><highlight class="normal">);</highlight></codeline>
+<codeline lineno="87"><highlight class="normal"></highlight></codeline>
+<codeline lineno="88"><highlight class="normal"><sp/><sp/>a.PushBack(20);</highlight></codeline>
+<codeline lineno="89"><highlight class="normal"><sp/><sp/>a.PushBack(30);</highlight></codeline>
+<codeline lineno="90"><highlight class="normal"></highlight></codeline>
+<codeline lineno="91"><highlight class="normal"><sp/><sp/>ASSERT_EQ(a.IsEmpty(),<sp/></highlight><highlight class="keyword">false</highlight><highlight class="normal">);</highlight></codeline>
+<codeline lineno="92"><highlight class="normal">}</highlight></codeline>
+<codeline lineno="93"><highlight class="normal"></highlight></codeline>
+<codeline lineno="94"><highlight class="normal">TEST_F(<ref refid="class_array_test" kindref="compound">ArrayTest</ref>,<sp/>IteratorLoop)<sp/>{</highlight></codeline>
+<codeline lineno="95"><highlight class="normal"><sp/><sp/>alloc.Reset();</highlight></codeline>
+<codeline lineno="96"><highlight class="normal"><sp/><sp/><ref refid="class_azura_1_1_containers_1_1_array" kindref="compound">Array&lt;int, 16&gt;</ref><sp/>a{alloc};</highlight></codeline>
+<codeline lineno="97"><highlight class="normal"></highlight></codeline>
+<codeline lineno="98"><highlight class="normal"><sp/><sp/>a.<ref refid="class_azura_1_1_containers_1_1_array_1a2ba41cb0847f98adc56d52a84935fc1d" kindref="member">PushBack</ref>(40);</highlight></codeline>
+<codeline lineno="99"><highlight class="normal"><sp/><sp/>a.PushBack(10);</highlight></codeline>
+<codeline lineno="100"><highlight class="normal"><sp/><sp/>a.PushBack(30);</highlight></codeline>
+<codeline lineno="101"><highlight class="normal"><sp/><sp/>a.PushBack(20);</highlight></codeline>
+<codeline lineno="102"><highlight class="normal"></highlight></codeline>
+<codeline lineno="103"><highlight class="normal"><sp/><sp/></highlight><highlight class="keywordtype">int</highlight><highlight class="normal"><sp/>c<sp/>=<sp/>0;</highlight></codeline>
+<codeline lineno="104"><highlight class="normal"><sp/><sp/></highlight><highlight class="keywordflow">for</highlight><highlight class="normal"><sp/>(</highlight><highlight class="keyword">auto</highlight><highlight class="normal"><sp/>i<sp/>=<sp/>a.Begin();<sp/>i<sp/>!=<sp/>a.End();<sp/>++i)<sp/>{</highlight></codeline>
+<codeline lineno="105"><highlight class="normal"><sp/><sp/><sp/><sp/>ASSERT_EQ(a[c],<sp/>*i);</highlight></codeline>
+<codeline lineno="106"><highlight class="normal"><sp/><sp/><sp/><sp/>c++;</highlight></codeline>
+<codeline lineno="107"><highlight class="normal"><sp/><sp/>}</highlight></codeline>
+<codeline lineno="108"><highlight class="normal">}</highlight></codeline>
+<codeline lineno="109"><highlight class="normal"></highlight></codeline>
+<codeline lineno="110"><highlight class="normal">TEST_F(<ref refid="class_array_test" kindref="compound">ArrayTest</ref>,<sp/>IteratorSort)<sp/>{</highlight></codeline>
+<codeline lineno="111"><highlight class="normal"><sp/><sp/>alloc.Reset();</highlight></codeline>
+<codeline lineno="112"><highlight class="normal"><sp/><sp/><ref refid="class_azura_1_1_containers_1_1_array" kindref="compound">Array&lt;int, 16&gt;</ref><sp/>a{alloc};</highlight></codeline>
+<codeline lineno="113"><highlight class="normal"></highlight></codeline>
+<codeline lineno="114"><highlight class="normal"><sp/><sp/>a.<ref refid="class_azura_1_1_containers_1_1_array_1a2ba41cb0847f98adc56d52a84935fc1d" kindref="member">PushBack</ref>(40);</highlight></codeline>
+<codeline lineno="115"><highlight class="normal"><sp/><sp/>a.PushBack(10);</highlight></codeline>
+<codeline lineno="116"><highlight class="normal"><sp/><sp/>a.PushBack(30);</highlight></codeline>
+<codeline lineno="117"><highlight class="normal"><sp/><sp/>a.PushBack(20);</highlight></codeline>
+<codeline lineno="118"><highlight class="normal"></highlight></codeline>
+<codeline lineno="119"><highlight class="normal"><sp/><sp/>std::sort(a.Begin(),<sp/>a.End());</highlight></codeline>
+<codeline lineno="120"><highlight class="normal"></highlight></codeline>
+<codeline lineno="121"><highlight class="normal"><sp/><sp/>ASSERT_EQ(a[0],<sp/>10);</highlight></codeline>
+<codeline lineno="122"><highlight class="normal"><sp/><sp/>ASSERT_EQ(a[1],<sp/>20);</highlight></codeline>
+<codeline lineno="123"><highlight class="normal"><sp/><sp/>ASSERT_EQ(a[2],<sp/>30);</highlight></codeline>
+<codeline lineno="124"><highlight class="normal"><sp/><sp/>ASSERT_EQ(a[3],<sp/>40);</highlight></codeline>
+<codeline lineno="125"><highlight class="normal">}</highlight></codeline>
+<codeline lineno="126"><highlight class="normal"></highlight></codeline>
+<codeline lineno="127"><highlight class="normal">TEST_F(<ref refid="class_array_test" kindref="compound">ArrayTest</ref>,<sp/>IteratorCount)<sp/>{</highlight></codeline>
+<codeline lineno="128"><highlight class="normal"><sp/><sp/>alloc.Reset();</highlight></codeline>
+<codeline lineno="129"><highlight class="normal"><sp/><sp/><ref refid="class_azura_1_1_containers_1_1_array" kindref="compound">Array&lt;int, 16&gt;</ref><sp/>a{alloc};</highlight></codeline>
+<codeline lineno="130"><highlight class="normal"></highlight></codeline>
+<codeline lineno="131"><highlight class="normal"><sp/><sp/>a.<ref refid="class_azura_1_1_containers_1_1_array_1a2ba41cb0847f98adc56d52a84935fc1d" kindref="member">PushBack</ref>(40);</highlight></codeline>
+<codeline lineno="132"><highlight class="normal"><sp/><sp/>a.PushBack(10);</highlight></codeline>
+<codeline lineno="133"><highlight class="normal"><sp/><sp/>a.PushBack(30);</highlight></codeline>
+<codeline lineno="134"><highlight class="normal"><sp/><sp/>a.PushBack(20);</highlight></codeline>
+<codeline lineno="135"><highlight class="normal"><sp/><sp/>a.PushBack(10);</highlight></codeline>
+<codeline lineno="136"><highlight class="normal"></highlight></codeline>
+<codeline lineno="137"><highlight class="normal"><sp/><sp/></highlight><highlight class="keywordtype">int</highlight><highlight class="normal"><sp/>count<sp/>=<sp/>10;</highlight></codeline>
+<codeline lineno="138"><highlight class="normal"></highlight></codeline>
+<codeline lineno="139"><highlight class="normal"><sp/><sp/></highlight><highlight class="keyword">auto</highlight><highlight class="normal"><sp/>countResult<sp/>=<sp/>std::count(a.Begin(),<sp/>a.End(),<sp/>count);</highlight></codeline>
+<codeline lineno="140"><highlight class="normal"><sp/><sp/>ASSERT_EQ(countResult,<sp/>2);</highlight></codeline>
+<codeline lineno="141"><highlight class="normal">}</highlight></codeline>
+    </programlisting>
+    <location file="Source/Containers/Test/Array_test.cpp"/>
+  </compounddef>
+</doxygen>

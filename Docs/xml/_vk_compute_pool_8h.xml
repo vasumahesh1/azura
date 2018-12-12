@@ -1,0 +1,234 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.8.14">
+  <compounddef id="_vk_compute_pool_8h" kind="file" language="C++">
+    <compoundname>VkComputePool.h</compoundname>
+    <includes local="no">vulkan/vulkan_core.h</includes>
+    <includes refid="_drawable_8h" local="yes">Generic/Drawable.h</includes>
+    <includes refid="_compute_pool_8h" local="yes">Generic/ComputePool.h</includes>
+    <includedby refid="_vk_renderer_8h" local="yes">Source/Azura/RenderSystem/Inc/Vulkan/VkRenderer.h</includedby>
+    <includedby refid="_vk_compute_pool_8cpp" local="yes">Source/Azura/RenderSystem/Src/Vulkan/VkComputePool.cpp</includedby>
+    <incdepgraph>
+      <node id="1339">
+        <label>functional</label>
+      </node>
+      <node id="1340">
+        <label>iterator</label>
+      </node>
+      <node id="1353">
+        <label>Utils/Hash.h</label>
+        <link refid="_hash_8h_source"/>
+        <childnode refid="1343" relation="include">
+        </childnode>
+      </node>
+      <node id="1348">
+        <label>Core/RawStorageFormat.h</label>
+        <link refid="_raw_storage_format_8h_source"/>
+        <childnode refid="1343" relation="include">
+        </childnode>
+        <childnode refid="1347" relation="include">
+        </childnode>
+        <childnode refid="1349" relation="include">
+        </childnode>
+        <childnode refid="1350" relation="include">
+        </childnode>
+        <childnode refid="1351" relation="include">
+        </childnode>
+        <childnode refid="1352" relation="include">
+        </childnode>
+      </node>
+      <node id="1342">
+        <label>Memory/Allocator.h</label>
+        <link refid="_allocator_8h_source"/>
+        <childnode refid="1339" relation="include">
+        </childnode>
+        <childnode refid="1343" relation="include">
+        </childnode>
+        <childnode refid="1344" relation="include">
+        </childnode>
+      </node>
+      <node id="1354">
+        <label>Core/AssetLocation.h</label>
+        <link refid="_asset_location_8h_source"/>
+      </node>
+      <node id="1337">
+        <label>cassert</label>
+      </node>
+      <node id="1351">
+        <label>boost/preprocessor/tuple/elem.hpp</label>
+      </node>
+      <node id="1345">
+        <label>GenericTypes.h</label>
+        <link refid="_azura_2_render_system_2_inc_2_generic_2_generic_types_8h_source"/>
+        <childnode refid="1336" relation="include">
+        </childnode>
+        <childnode refid="1346" relation="include">
+        </childnode>
+        <childnode refid="1343" relation="include">
+        </childnode>
+        <childnode refid="1348" relation="include">
+        </childnode>
+        <childnode refid="1353" relation="include">
+        </childnode>
+        <childnode refid="1354" relation="include">
+        </childnode>
+        <childnode refid="1355" relation="include">
+        </childnode>
+        <childnode refid="1352" relation="include">
+        </childnode>
+      </node>
+      <node id="1344">
+        <label>Utils/Macros.h</label>
+        <link refid="_macros_8h_source"/>
+      </node>
+      <node id="1355">
+        <label>boost/container/small_vector.hpp</label>
+      </node>
+      <node id="1346">
+        <label>Generic/Constants.h</label>
+        <link refid="_azura_2_render_system_2_inc_2_generic_2_constants_8h_source"/>
+        <childnode refid="1347" relation="include">
+        </childnode>
+        <childnode refid="1343" relation="include">
+        </childnode>
+      </node>
+      <node id="1352">
+        <label>boost/detail/bitmask.hpp</label>
+      </node>
+      <node id="1333">
+        <label>Source/Azura/RenderSystem/Inc/Vulkan/VkComputePool.h</label>
+        <link refid="_vk_compute_pool_8h"/>
+        <childnode refid="1334" relation="include">
+        </childnode>
+        <childnode refid="1335" relation="include">
+        </childnode>
+        <childnode refid="1356" relation="include">
+        </childnode>
+      </node>
+      <node id="1347">
+        <label>tuple</label>
+      </node>
+      <node id="1341">
+        <label>Array.h</label>
+        <link refid="_array_8h_source"/>
+        <childnode refid="1337" relation="include">
+        </childnode>
+        <childnode refid="1338" relation="include">
+        </childnode>
+        <childnode refid="1342" relation="include">
+        </childnode>
+        <childnode refid="1343" relation="include">
+        </childnode>
+      </node>
+      <node id="1336">
+        <label>Containers/Vector.h</label>
+        <link refid="_vector_8h_source"/>
+        <childnode refid="1337" relation="include">
+        </childnode>
+        <childnode refid="1338" relation="include">
+        </childnode>
+        <childnode refid="1339" relation="include">
+        </childnode>
+        <childnode refid="1340" relation="include">
+        </childnode>
+        <childnode refid="1341" relation="include">
+        </childnode>
+        <childnode refid="1342" relation="include">
+        </childnode>
+        <childnode refid="1343" relation="include">
+        </childnode>
+        <childnode refid="1344" relation="include">
+        </childnode>
+      </node>
+      <node id="1335">
+        <label>Generic/Drawable.h</label>
+        <link refid="_drawable_8h_source"/>
+        <childnode refid="1336" relation="include">
+        </childnode>
+        <childnode refid="1345" relation="include">
+        </childnode>
+        <childnode refid="1343" relation="include">
+        </childnode>
+        <childnode refid="1348" relation="include">
+        </childnode>
+      </node>
+      <node id="1334">
+        <label>vulkan/vulkan_core.h</label>
+      </node>
+      <node id="1349">
+        <label>boost/preprocessor/repetition/repeat.hpp</label>
+      </node>
+      <node id="1343">
+        <label>Types.h</label>
+      </node>
+      <node id="1356">
+        <label>Generic/ComputePool.h</label>
+        <link refid="_compute_pool_8h_source"/>
+        <childnode refid="1336" relation="include">
+        </childnode>
+        <childnode refid="1345" relation="include">
+        </childnode>
+        <childnode refid="1343" relation="include">
+        </childnode>
+      </node>
+      <node id="1338">
+        <label>cstring</label>
+      </node>
+      <node id="1350">
+        <label>boost/preprocessor/seq/for_each.hpp</label>
+      </node>
+    </incdepgraph>
+    <invincdepgraph>
+      <node id="1357">
+        <label>Source/Azura/RenderSystem/Inc/Vulkan/VkComputePool.h</label>
+        <link refid="_vk_compute_pool_8h"/>
+        <childnode refid="1358" relation="include">
+        </childnode>
+      </node>
+      <node id="1358">
+        <label>Source/Azura/RenderSystem/Inc/Vulkan/VkRenderer.h</label>
+        <link refid="_vk_renderer_8h_source"/>
+      </node>
+    </invincdepgraph>
+    <innerclass refid="class_azura_1_1_vulkan_1_1_vk_compute_pool" prot="public">Azura::Vulkan::VkComputePool</innerclass>
+    <innernamespace refid="namespace_azura">Azura</innernamespace>
+    <innernamespace refid="namespace_azura_1_1_vulkan">Azura::Vulkan</innernamespace>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <programlisting>
+<codeline lineno="1"><highlight class="preprocessor">#pragma<sp/>once</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="2"><highlight class="normal"></highlight></codeline>
+<codeline lineno="3"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&lt;vulkan/vulkan_core.h&gt;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="4"><highlight class="normal"></highlight></codeline>
+<codeline lineno="5"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&quot;Generic/Drawable.h&quot;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="6"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&quot;Generic/ComputePool.h&quot;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="7"><highlight class="normal"></highlight></codeline>
+<codeline lineno="8"><highlight class="normal"></highlight></codeline>
+<codeline lineno="9"><highlight class="normal"></highlight><highlight class="keyword">namespace<sp/></highlight><highlight class="normal"><ref refid="namespace_azura" kindref="compound">Azura</ref><sp/>{</highlight></codeline>
+<codeline lineno="10"><highlight class="normal"></highlight><highlight class="keyword">namespace<sp/></highlight><highlight class="normal">Vulkan<sp/>{</highlight></codeline>
+<codeline lineno="11"><highlight class="normal"></highlight></codeline>
+<codeline lineno="12" refid="class_azura_1_1_vulkan_1_1_vk_compute_pool" refkind="compound"><highlight class="normal"></highlight><highlight class="keyword">class<sp/></highlight><highlight class="normal"><ref refid="class_azura_1_1_vulkan_1_1_vk_compute_pool" kindref="compound">VkComputePool</ref><sp/>:<sp/></highlight><highlight class="keyword">public</highlight><highlight class="normal"><sp/><ref refid="class_azura_1_1_compute_pool" kindref="compound">ComputePool</ref><sp/>{</highlight></codeline>
+<codeline lineno="13"><highlight class="normal"></highlight></codeline>
+<codeline lineno="14"><highlight class="normal"></highlight><highlight class="keyword">public</highlight><highlight class="normal">:</highlight></codeline>
+<codeline lineno="15"><highlight class="normal"><sp/><sp/><ref refid="class_azura_1_1_vulkan_1_1_vk_compute_pool" kindref="compound">VkComputePool</ref>(</highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/><ref refid="struct_azura_1_1_compute_pool_create_info" kindref="compound">ComputePoolCreateInfo</ref>&amp;<sp/>createInfo,</highlight></codeline>
+<codeline lineno="16"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/><ref refid="struct_azura_1_1_descriptor_count" kindref="compound">DescriptorCount</ref>&amp;<sp/>descriptorCount,</highlight></codeline>
+<codeline lineno="17"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="class_azura_1_1_memory_1_1_allocator" kindref="compound">Memory::Allocator</ref>&amp;<sp/>allocator);</highlight></codeline>
+<codeline lineno="18"><highlight class="normal"></highlight></codeline>
+<codeline lineno="19"><highlight class="normal"><sp/><sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/>BindUniformData(SlotID<sp/>slot,<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>U8*<sp/>buffer,<sp/>U32<sp/>size)<sp/></highlight><highlight class="keyword">override</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="20"><highlight class="normal"><sp/><sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/>AddShader(U32<sp/>shaderId)<sp/></highlight><highlight class="keyword">override</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="21"><highlight class="normal"><sp/><sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/>BindTextureData(SlotID<sp/>slot,<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/><ref refid="struct_azura_1_1_texture_desc" kindref="compound">TextureDesc</ref>&amp;<sp/>desc,<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>U8*<sp/>buffer)<sp/></highlight><highlight class="keyword">override</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="22"><highlight class="normal"><sp/><sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/>BindSampler(SlotID<sp/>slot,<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/><ref refid="struct_azura_1_1_sampler_desc" kindref="compound">SamplerDesc</ref>&amp;<sp/>desc)<sp/></highlight><highlight class="keyword">override</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="23"><highlight class="normal"><sp/><sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/>BeginUpdates()<sp/></highlight><highlight class="keyword">override</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="24"><highlight class="normal"><sp/><sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/>UpdateUniformData(SlotID<sp/>slot,<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>U8*<sp/>buffer,<sp/>U32<sp/>size)<sp/></highlight><highlight class="keyword">override</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="25"><highlight class="normal"><sp/><sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/>UpdateTextureData(SlotID<sp/>slot,<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>U8*<sp/>buffer)<sp/></highlight><highlight class="keyword">override</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="26"><highlight class="normal"><sp/><sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/>Submit()<sp/></highlight><highlight class="keyword">override</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="27"><highlight class="normal"><sp/><sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/>SubmitUpdates()<sp/></highlight><highlight class="keyword">override</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="28"><highlight class="normal">};</highlight></codeline>
+<codeline lineno="29"><highlight class="normal"></highlight></codeline>
+<codeline lineno="30"><highlight class="normal">}<sp/></highlight><highlight class="comment">//<sp/>namespace<sp/>Vulkan</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="31"><highlight class="normal">}<sp/></highlight><highlight class="comment">//<sp/>namespace<sp/>Azura</highlight><highlight class="normal"></highlight></codeline>
+    </programlisting>
+    <location file="Source/Azura/RenderSystem/Inc/Vulkan/VkComputePool.h"/>
+  </compounddef>
+</doxygen>

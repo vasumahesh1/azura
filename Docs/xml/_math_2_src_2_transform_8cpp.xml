@@ -1,0 +1,80 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.8.14">
+  <compounddef id="_math_2_src_2_transform_8cpp" kind="file" language="C++">
+    <compoundname>Transform.cpp</compoundname>
+    <includes refid="_math_2_inc_2_math_2_transform_8h" local="yes">Math/Transform.h</includes>
+    <incdepgraph>
+      <node id="5166">
+        <label>Core.h</label>
+        <link refid="_core_8h_source"/>
+        <childnode refid="5167" relation="include">
+        </childnode>
+        <childnode refid="5168" relation="include">
+        </childnode>
+      </node>
+      <node id="5164">
+        <label>Source/Math/Src/Transform.cpp</label>
+        <link refid="_math_2_src_2_transform_8cpp"/>
+        <childnode refid="5165" relation="include">
+        </childnode>
+      </node>
+      <node id="5165">
+        <label>Math/Transform.h</label>
+        <link refid="_math_2_inc_2_math_2_transform_8h_source"/>
+        <childnode refid="5166" relation="include">
+        </childnode>
+      </node>
+      <node id="5168">
+        <label>Types.h</label>
+      </node>
+      <node id="5167">
+        <label>mathfu/matrix.h</label>
+      </node>
+    </incdepgraph>
+    <innernamespace refid="namespace_azura">Azura</innernamespace>
+      <sectiondef kind="var">
+      <memberdef kind="variable" id="_math_2_src_2_transform_8cpp_1a3cc772ca4f63a5a92716139ec6912489" prot="public" static="no" mutable="no">
+        <type>const float</type>
+        <definition>const float MATHFU_HANDEDNESS</definition>
+        <argsstring></argsstring>
+        <name>MATHFU_HANDEDNESS</name>
+        <initializer>= -1.0f</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Source/Math/Src/Transform.cpp" line="6" column="1" bodyfile="Source/Math/Src/Transform.cpp" bodystart="6" bodyend="-1"/>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <programlisting>
+<codeline lineno="1"><highlight class="preprocessor">#include<sp/>&quot;Math/Transform.h&quot;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="2"><highlight class="normal"></highlight></codeline>
+<codeline lineno="3"><highlight class="normal"></highlight><highlight class="preprocessor">#ifdef<sp/>AZURA_USE_RHS</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="4"><highlight class="normal"></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">float</highlight><highlight class="normal"><sp/>MATHFU_HANDEDNESS<sp/>=<sp/>1.0f;</highlight></codeline>
+<codeline lineno="5"><highlight class="normal"></highlight><highlight class="preprocessor">#else</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="6"><highlight class="normal"></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">float</highlight><highlight class="normal"><sp/>MATHFU_HANDEDNESS<sp/>=<sp/>-1.0f;</highlight></codeline>
+<codeline lineno="7"><highlight class="normal"></highlight><highlight class="preprocessor">#endif</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="8"><highlight class="normal"></highlight></codeline>
+<codeline lineno="9"><highlight class="normal"></highlight><highlight class="keyword">namespace<sp/></highlight><highlight class="normal"><ref refid="namespace_azura" kindref="compound">Azura</ref><sp/>{</highlight></codeline>
+<codeline lineno="10"><highlight class="normal">Matrix4f<sp/>Transform::LookAt(</highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>Vector3f&amp;<sp/>at,<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>Vector3f&amp;<sp/>eye,<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>Vector3f&amp;<sp/>worldUp)<sp/>{</highlight></codeline>
+<codeline lineno="11"><highlight class="normal"><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>Matrix4f::LookAt(at,<sp/>eye,<sp/>worldUp,<sp/>MATHFU_HANDEDNESS);</highlight></codeline>
+<codeline lineno="12"><highlight class="normal">}</highlight></codeline>
+<codeline lineno="13"><highlight class="normal"></highlight></codeline>
+<codeline lineno="14"><highlight class="normal">Matrix4f<sp/>Transform::Perspective(</highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">float</highlight><highlight class="normal"><sp/>fovY,<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">float</highlight><highlight class="normal"><sp/>aspect,<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">float</highlight><highlight class="normal"><sp/>zNear,<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">float</highlight><highlight class="normal"><sp/>zFar)<sp/>{</highlight></codeline>
+<codeline lineno="15"><highlight class="normal"><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>Matrix4f::Perspective(fovY,<sp/>aspect,<sp/>zNear,<sp/>zFar,<sp/>MATHFU_HANDEDNESS);</highlight></codeline>
+<codeline lineno="16"><highlight class="normal">}</highlight></codeline>
+<codeline lineno="17"><highlight class="normal"></highlight></codeline>
+<codeline lineno="18"><highlight class="normal">Vector3f<sp/>Transform::Downgrade(</highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>Vector4f&amp;<sp/>vec)<sp/>{</highlight></codeline>
+<codeline lineno="19"><highlight class="normal"><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>Vector3f(vec[0],<sp/>vec[1],<sp/>vec[2]);</highlight></codeline>
+<codeline lineno="20"><highlight class="normal">}</highlight></codeline>
+<codeline lineno="21"><highlight class="normal">}<sp/></highlight><highlight class="comment">//<sp/>namespace<sp/>Azura</highlight><highlight class="normal"></highlight></codeline>
+    </programlisting>
+    <location file="Source/Math/Src/Transform.cpp"/>
+  </compounddef>
+</doxygen>

@@ -1,0 +1,466 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.8.14">
+  <compounddef id="_drawable_8cpp" kind="file" language="C++">
+    <compoundname>Drawable.cpp</compoundname>
+    <includes refid="_drawable_8h" local="yes">Generic/Drawable.h</includes>
+    <includes local="no">algorithm</includes>
+    <includes refid="_log_8h" local="yes">Log/Log.h</includes>
+    <includes refid="_texture_manager_8h" local="yes">Generic/TextureManager.h</includes>
+    <includes refid="_vector_8h" local="yes">Containers/Vector.h</includes>
+    <incdepgraph>
+      <node id="2633">
+        <label>functional</label>
+      </node>
+      <node id="2634">
+        <label>iterator</label>
+      </node>
+      <node id="2647">
+        <label>Utils/Hash.h</label>
+        <link refid="_hash_8h_source"/>
+        <childnode refid="2637" relation="include">
+        </childnode>
+      </node>
+      <node id="2642">
+        <label>Core/RawStorageFormat.h</label>
+        <link refid="_raw_storage_format_8h_source"/>
+        <childnode refid="2637" relation="include">
+        </childnode>
+        <childnode refid="2641" relation="include">
+        </childnode>
+        <childnode refid="2643" relation="include">
+        </childnode>
+        <childnode refid="2644" relation="include">
+        </childnode>
+        <childnode refid="2645" relation="include">
+        </childnode>
+        <childnode refid="2646" relation="include">
+        </childnode>
+      </node>
+      <node id="2655">
+        <label>MemoryBuffer.h</label>
+        <link refid="_memory_buffer_8h_source"/>
+        <childnode refid="2637" relation="include">
+        </childnode>
+      </node>
+      <node id="2636">
+        <label>Memory/Allocator.h</label>
+        <link refid="_allocator_8h_source"/>
+        <childnode refid="2633" relation="include">
+        </childnode>
+        <childnode refid="2637" relation="include">
+        </childnode>
+        <childnode refid="2638" relation="include">
+        </childnode>
+      </node>
+      <node id="2648">
+        <label>Core/AssetLocation.h</label>
+        <link refid="_asset_location_8h_source"/>
+      </node>
+      <node id="2631">
+        <label>cassert</label>
+      </node>
+      <node id="2645">
+        <label>boost/preprocessor/tuple/elem.hpp</label>
+      </node>
+      <node id="2639">
+        <label>GenericTypes.h</label>
+        <link refid="_azura_2_render_system_2_inc_2_generic_2_generic_types_8h_source"/>
+        <childnode refid="2630" relation="include">
+        </childnode>
+        <childnode refid="2640" relation="include">
+        </childnode>
+        <childnode refid="2637" relation="include">
+        </childnode>
+        <childnode refid="2642" relation="include">
+        </childnode>
+        <childnode refid="2647" relation="include">
+        </childnode>
+        <childnode refid="2648" relation="include">
+        </childnode>
+        <childnode refid="2649" relation="include">
+        </childnode>
+        <childnode refid="2646" relation="include">
+        </childnode>
+      </node>
+      <node id="2654">
+        <label>Memory/HeapMemoryBuffer.h</label>
+        <link refid="_heap_memory_buffer_8h_source"/>
+        <childnode refid="2655" relation="include">
+        </childnode>
+        <childnode refid="2637" relation="include">
+        </childnode>
+      </node>
+      <node id="2638">
+        <label>Utils/Macros.h</label>
+        <link refid="_macros_8h_source"/>
+      </node>
+      <node id="2649">
+        <label>boost/container/small_vector.hpp</label>
+      </node>
+      <node id="2640">
+        <label>Generic/Constants.h</label>
+        <link refid="_azura_2_render_system_2_inc_2_generic_2_constants_8h_source"/>
+        <childnode refid="2641" relation="include">
+        </childnode>
+        <childnode refid="2637" relation="include">
+        </childnode>
+      </node>
+      <node id="2646">
+        <label>boost/detail/bitmask.hpp</label>
+      </node>
+      <node id="2641">
+        <label>tuple</label>
+      </node>
+      <node id="2635">
+        <label>Array.h</label>
+        <link refid="_array_8h_source"/>
+        <childnode refid="2631" relation="include">
+        </childnode>
+        <childnode refid="2632" relation="include">
+        </childnode>
+        <childnode refid="2636" relation="include">
+        </childnode>
+        <childnode refid="2637" relation="include">
+        </childnode>
+      </node>
+      <node id="2656">
+        <label>Memory/MonotonicAllocator.h</label>
+        <link refid="_monotonic_allocator_8h_source"/>
+        <childnode refid="2636" relation="include">
+        </childnode>
+        <childnode refid="2637" relation="include">
+        </childnode>
+      </node>
+      <node id="2652">
+        <label>vector</label>
+      </node>
+      <node id="2630">
+        <label>Containers/Vector.h</label>
+        <link refid="_vector_8h_source"/>
+        <childnode refid="2631" relation="include">
+        </childnode>
+        <childnode refid="2632" relation="include">
+        </childnode>
+        <childnode refid="2633" relation="include">
+        </childnode>
+        <childnode refid="2634" relation="include">
+        </childnode>
+        <childnode refid="2635" relation="include">
+        </childnode>
+        <childnode refid="2636" relation="include">
+        </childnode>
+        <childnode refid="2637" relation="include">
+        </childnode>
+        <childnode refid="2638" relation="include">
+        </childnode>
+      </node>
+      <node id="2651">
+        <label>Log/Log.h</label>
+        <link refid="_log_8h_source"/>
+        <childnode refid="2637" relation="include">
+        </childnode>
+        <childnode refid="2652" relation="include">
+        </childnode>
+      </node>
+      <node id="2629">
+        <label>Generic/Drawable.h</label>
+        <link refid="_drawable_8h_source"/>
+        <childnode refid="2630" relation="include">
+        </childnode>
+        <childnode refid="2639" relation="include">
+        </childnode>
+        <childnode refid="2637" relation="include">
+        </childnode>
+        <childnode refid="2642" relation="include">
+        </childnode>
+      </node>
+      <node id="2643">
+        <label>boost/preprocessor/repetition/repeat.hpp</label>
+      </node>
+      <node id="2637">
+        <label>Types.h</label>
+      </node>
+      <node id="2628">
+        <label>Source/Azura/RenderSystem/Src/Generic/Drawable.cpp</label>
+        <link refid="_drawable_8cpp"/>
+        <childnode refid="2629" relation="include">
+        </childnode>
+        <childnode refid="2650" relation="include">
+        </childnode>
+        <childnode refid="2651" relation="include">
+        </childnode>
+        <childnode refid="2653" relation="include">
+        </childnode>
+        <childnode refid="2630" relation="include">
+        </childnode>
+      </node>
+      <node id="2650">
+        <label>algorithm</label>
+      </node>
+      <node id="2653">
+        <label>Generic/TextureManager.h</label>
+        <link refid="_texture_manager_8h_source"/>
+        <childnode refid="2637" relation="include">
+        </childnode>
+        <childnode refid="2654" relation="include">
+        </childnode>
+        <childnode refid="2656" relation="include">
+        </childnode>
+        <childnode refid="2630" relation="include">
+        </childnode>
+        <childnode refid="2639" relation="include">
+        </childnode>
+        <childnode refid="2651" relation="include">
+        </childnode>
+      </node>
+      <node id="2632">
+        <label>cstring</label>
+      </node>
+      <node id="2644">
+        <label>boost/preprocessor/seq/for_each.hpp</label>
+      </node>
+    </incdepgraph>
+    <innernamespace refid="namespace_azura">Azura</innernamespace>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <programlisting>
+<codeline lineno="1"><highlight class="preprocessor">#include<sp/>&quot;Generic/Drawable.h&quot;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="2"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&lt;algorithm&gt;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="3"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&quot;Log/Log.h&quot;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="4"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&quot;Generic/TextureManager.h&quot;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="5"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&quot;Containers/Vector.h&quot;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="6"><highlight class="normal"></highlight></codeline>
+<codeline lineno="7"><highlight class="normal"></highlight><highlight class="keyword">namespace<sp/></highlight><highlight class="normal"><ref refid="namespace_azura" kindref="compound">Azura</ref><sp/>{</highlight></codeline>
+<codeline lineno="8"><highlight class="normal"></highlight></codeline>
+<codeline lineno="9"><highlight class="normal"></highlight><highlight class="keyword">namespace<sp/></highlight><highlight class="normal">{</highlight></codeline>
+<codeline lineno="10"><highlight class="normal"></highlight><highlight class="keywordtype">bool</highlight><highlight class="normal"><sp/>IsPerVertexSlot(</highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>VertexSlot&amp;<sp/>slot)<sp/>{</highlight></codeline>
+<codeline lineno="11"><highlight class="normal"><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>slot.m_rate<sp/>==<sp/>BufferUsageRate::PerVertex;</highlight></codeline>
+<codeline lineno="12"><highlight class="normal">}</highlight></codeline>
+<codeline lineno="13"><highlight class="normal"></highlight></codeline>
+<codeline lineno="14"><highlight class="normal"></highlight><highlight class="keywordtype">bool</highlight><highlight class="normal"><sp/>IsPerInstanceSlot(</highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>VertexSlot&amp;<sp/>slot)<sp/>{</highlight></codeline>
+<codeline lineno="15"><highlight class="normal"><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>slot.m_rate<sp/>==<sp/>BufferUsageRate::PerInstance;</highlight></codeline>
+<codeline lineno="16"><highlight class="normal">}</highlight></codeline>
+<codeline lineno="17"><highlight class="normal">}<sp/></highlight><highlight class="comment">//<sp/>namespace</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="18"><highlight class="normal"></highlight></codeline>
+<codeline lineno="19"><highlight class="normal">Drawable::Drawable(</highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>DrawableCreateInfo&amp;<sp/>info,</highlight></codeline>
+<codeline lineno="20"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>U32<sp/>numVertexSlots,</highlight></codeline>
+<codeline lineno="21"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>U32<sp/>numInstanceSlots,</highlight></codeline>
+<codeline lineno="22"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>U32<sp/>numUniformSlots,</highlight></codeline>
+<codeline lineno="23"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>Memory::Allocator&amp;<sp/>allocator)</highlight></codeline>
+<codeline lineno="24"><highlight class="normal"><sp/><sp/>:<sp/>m_vertexBufferInfos(numVertexSlots,<sp/>allocator),</highlight></codeline>
+<codeline lineno="25"><highlight class="normal"><sp/><sp/><sp/><sp/>m_instanceBufferInfos(numInstanceSlots,<sp/>allocator),</highlight></codeline>
+<codeline lineno="26"><highlight class="normal"><sp/><sp/><sp/><sp/>m_uniformBufferInfos(numUniformSlots,<sp/>allocator),</highlight></codeline>
+<codeline lineno="27"><highlight class="normal"><sp/><sp/><sp/><sp/>m_vertexCount(info.m_vertexCount),</highlight></codeline>
+<codeline lineno="28"><highlight class="normal"><sp/><sp/><sp/><sp/>m_indexCount(info.m_indexCount),</highlight></codeline>
+<codeline lineno="29"><highlight class="normal"><sp/><sp/><sp/><sp/>m_indexType(info.m_indexType),</highlight></codeline>
+<codeline lineno="30"><highlight class="normal"><sp/><sp/><sp/><sp/>m_instanceCount(info.m_instanceCount),</highlight></codeline>
+<codeline lineno="31"><highlight class="normal"><sp/><sp/><sp/><sp/>m_allocator(allocator)<sp/>{</highlight></codeline>
+<codeline lineno="32"><highlight class="normal">}</highlight></codeline>
+<codeline lineno="33"><highlight class="normal"></highlight></codeline>
+<codeline lineno="34"><highlight class="normal">Memory::Allocator&amp;<sp/>Drawable::GetAllocator()</highlight><highlight class="keyword"><sp/>const<sp/></highlight><highlight class="normal">{</highlight></codeline>
+<codeline lineno="35"><highlight class="normal"><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>m_allocator.get();</highlight></codeline>
+<codeline lineno="36"><highlight class="normal">}</highlight></codeline>
+<codeline lineno="37"><highlight class="normal"></highlight></codeline>
+<codeline lineno="38"><highlight class="normal"></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/>Drawable::AddVertexBufferInfo(BufferInfo&amp;&amp;<sp/>info)<sp/>{</highlight></codeline>
+<codeline lineno="39"><highlight class="normal"><sp/><sp/>m_vertexBufferInfos.PushBack(info);</highlight></codeline>
+<codeline lineno="40"><highlight class="normal">}</highlight></codeline>
+<codeline lineno="41"><highlight class="normal"></highlight></codeline>
+<codeline lineno="42"><highlight class="normal"></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/>Drawable::AddInstanceBufferInfo(BufferInfo&amp;&amp;<sp/>info)<sp/>{</highlight></codeline>
+<codeline lineno="43"><highlight class="normal"><sp/><sp/>m_instanceBufferInfos.PushBack(info);</highlight></codeline>
+<codeline lineno="44"><highlight class="normal">}</highlight></codeline>
+<codeline lineno="45"><highlight class="normal"></highlight></codeline>
+<codeline lineno="46"><highlight class="normal"></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/>Drawable::AddUniformBufferInfo(UniformBufferInfo&amp;&amp;<sp/>info)<sp/>{</highlight></codeline>
+<codeline lineno="47"><highlight class="normal"><sp/><sp/>m_uniformBufferInfos.PushBack(info);</highlight></codeline>
+<codeline lineno="48"><highlight class="normal">}</highlight></codeline>
+<codeline lineno="49"><highlight class="normal"></highlight></codeline>
+<codeline lineno="50"><highlight class="normal">U32<sp/>Drawable::GetSingleUniformBufferInfo(</highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>DescriptorSlot&amp;<sp/>slot)</highlight><highlight class="keyword"><sp/>const<sp/></highlight><highlight class="normal">{</highlight></codeline>
+<codeline lineno="51"><highlight class="normal"><sp/><sp/>U32<sp/>idx<sp/>=<sp/>0;</highlight></codeline>
+<codeline lineno="52"><highlight class="normal"><sp/><sp/></highlight><highlight class="keywordflow">for</highlight><highlight class="normal">(</highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">auto</highlight><highlight class="normal">&amp;<sp/>ubInfo<sp/>:<sp/>m_uniformBufferInfos)</highlight></codeline>
+<codeline lineno="53"><highlight class="normal"><sp/><sp/>{</highlight></codeline>
+<codeline lineno="54"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">if</highlight><highlight class="normal"><sp/>(ubInfo.m_binding<sp/>==<sp/>slot.m_bindIdx<sp/>&amp;&amp;<sp/>ubInfo.m_set<sp/>==<sp/>slot.m_setIdx)</highlight></codeline>
+<codeline lineno="55"><highlight class="normal"><sp/><sp/><sp/><sp/>{</highlight></codeline>
+<codeline lineno="56"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>idx;</highlight></codeline>
+<codeline lineno="57"><highlight class="normal"><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="58"><highlight class="normal"></highlight></codeline>
+<codeline lineno="59"><highlight class="normal"><sp/><sp/><sp/><sp/>++idx;</highlight></codeline>
+<codeline lineno="60"><highlight class="normal"><sp/><sp/>}</highlight></codeline>
+<codeline lineno="61"><highlight class="normal"></highlight></codeline>
+<codeline lineno="62"><highlight class="normal"><sp/><sp/></highlight><highlight class="keywordflow">throw</highlight><highlight class="normal"><sp/>std::runtime_error(</highlight><highlight class="stringliteral">&quot;Tried<sp/>to<sp/>Update<sp/>Slot<sp/>that<sp/>was<sp/>never<sp/>bound&quot;</highlight><highlight class="normal">);</highlight></codeline>
+<codeline lineno="63"><highlight class="normal">}</highlight></codeline>
+<codeline lineno="64"><highlight class="normal"></highlight></codeline>
+<codeline lineno="65"><highlight class="normal">U32<sp/>Drawable::GetSingleVertexBufferInfo(</highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>SlotID&amp;<sp/>slot)</highlight><highlight class="keyword"><sp/>const<sp/></highlight><highlight class="normal">{</highlight></codeline>
+<codeline lineno="66"><highlight class="normal"><sp/><sp/>U32<sp/>idx<sp/>=<sp/>0;</highlight></codeline>
+<codeline lineno="67"><highlight class="normal"><sp/><sp/></highlight><highlight class="keywordflow">for</highlight><highlight class="normal">(</highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">auto</highlight><highlight class="normal">&amp;<sp/>vbInfo<sp/>:<sp/>m_vertexBufferInfos)</highlight></codeline>
+<codeline lineno="68"><highlight class="normal"><sp/><sp/>{</highlight></codeline>
+<codeline lineno="69"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">if</highlight><highlight class="normal"><sp/>(vbInfo.m_binding<sp/>==<sp/>slot)</highlight></codeline>
+<codeline lineno="70"><highlight class="normal"><sp/><sp/><sp/><sp/>{</highlight></codeline>
+<codeline lineno="71"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>idx;</highlight></codeline>
+<codeline lineno="72"><highlight class="normal"><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="73"><highlight class="normal"></highlight></codeline>
+<codeline lineno="74"><highlight class="normal"><sp/><sp/><sp/><sp/>++idx;</highlight></codeline>
+<codeline lineno="75"><highlight class="normal"><sp/><sp/>}</highlight></codeline>
+<codeline lineno="76"><highlight class="normal"></highlight></codeline>
+<codeline lineno="77"><highlight class="normal"><sp/><sp/></highlight><highlight class="keywordflow">throw</highlight><highlight class="normal"><sp/>std::runtime_error(</highlight><highlight class="stringliteral">&quot;Tried<sp/>to<sp/>Update<sp/>Slot<sp/>that<sp/>was<sp/>never<sp/>bound&quot;</highlight><highlight class="normal">);</highlight></codeline>
+<codeline lineno="78"><highlight class="normal">}</highlight></codeline>
+<codeline lineno="79"><highlight class="normal"></highlight></codeline>
+<codeline lineno="80"><highlight class="normal">U32<sp/>Drawable::GetSingleInstanceBufferInfo(</highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>SlotID&amp;<sp/>slot)</highlight><highlight class="keyword"><sp/>const<sp/></highlight><highlight class="normal">{</highlight></codeline>
+<codeline lineno="81"><highlight class="normal"><sp/><sp/>U32<sp/>idx<sp/>=<sp/>0;</highlight></codeline>
+<codeline lineno="82"><highlight class="normal"><sp/><sp/></highlight><highlight class="keywordflow">for</highlight><highlight class="normal">(</highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">auto</highlight><highlight class="normal">&amp;<sp/>ibInfo<sp/>:<sp/>m_instanceBufferInfos)</highlight></codeline>
+<codeline lineno="83"><highlight class="normal"><sp/><sp/>{</highlight></codeline>
+<codeline lineno="84"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">if</highlight><highlight class="normal"><sp/>(ibInfo.m_binding<sp/>==<sp/>slot)</highlight></codeline>
+<codeline lineno="85"><highlight class="normal"><sp/><sp/><sp/><sp/>{</highlight></codeline>
+<codeline lineno="86"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>idx;</highlight></codeline>
+<codeline lineno="87"><highlight class="normal"><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="88"><highlight class="normal"></highlight></codeline>
+<codeline lineno="89"><highlight class="normal"><sp/><sp/><sp/><sp/>++idx;</highlight></codeline>
+<codeline lineno="90"><highlight class="normal"><sp/><sp/>}</highlight></codeline>
+<codeline lineno="91"><highlight class="normal"></highlight></codeline>
+<codeline lineno="92"><highlight class="normal"><sp/><sp/></highlight><highlight class="keywordflow">throw</highlight><highlight class="normal"><sp/>std::runtime_error(</highlight><highlight class="stringliteral">&quot;Tried<sp/>to<sp/>Update<sp/>Slot<sp/>that<sp/>was<sp/>never<sp/>bound&quot;</highlight><highlight class="normal">);</highlight></codeline>
+<codeline lineno="93"><highlight class="normal">}</highlight></codeline>
+<codeline lineno="94"><highlight class="normal"></highlight></codeline>
+<codeline lineno="95"><highlight class="normal"></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/>Drawable::SetIndexBufferInfo(BufferInfo&amp;&amp;<sp/>info)<sp/>{</highlight></codeline>
+<codeline lineno="96"><highlight class="normal"><sp/><sp/>m_indexBufferInfo<sp/>=<sp/>info;</highlight></codeline>
+<codeline lineno="97"><highlight class="normal">}</highlight></codeline>
+<codeline lineno="98"><highlight class="normal"></highlight></codeline>
+<codeline lineno="99"><highlight class="normal">U32<sp/>Drawable::GetVertexCount()</highlight><highlight class="keyword"><sp/>const<sp/></highlight><highlight class="normal">{</highlight></codeline>
+<codeline lineno="100"><highlight class="normal"><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>m_vertexCount;</highlight></codeline>
+<codeline lineno="101"><highlight class="normal">}</highlight></codeline>
+<codeline lineno="102"><highlight class="normal"></highlight></codeline>
+<codeline lineno="103"><highlight class="normal">U32<sp/>Drawable::GetIndexCount()</highlight><highlight class="keyword"><sp/>const<sp/></highlight><highlight class="normal">{</highlight></codeline>
+<codeline lineno="104"><highlight class="normal"><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>m_indexCount;</highlight></codeline>
+<codeline lineno="105"><highlight class="normal">}</highlight></codeline>
+<codeline lineno="106"><highlight class="normal"></highlight></codeline>
+<codeline lineno="107"><highlight class="normal">U32<sp/>Drawable::GetInstanceCount()</highlight><highlight class="keyword"><sp/>const<sp/></highlight><highlight class="normal">{</highlight></codeline>
+<codeline lineno="108"><highlight class="normal"><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>m_instanceCount;</highlight></codeline>
+<codeline lineno="109"><highlight class="normal">}</highlight></codeline>
+<codeline lineno="110"><highlight class="normal"></highlight></codeline>
+<codeline lineno="111"><highlight class="normal">RawStorageFormat<sp/>Drawable::GetIndexType()</highlight><highlight class="keyword"><sp/>const<sp/></highlight><highlight class="normal">{</highlight></codeline>
+<codeline lineno="112"><highlight class="normal"><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>m_indexType;</highlight></codeline>
+<codeline lineno="113"><highlight class="normal">}</highlight></codeline>
+<codeline lineno="114"><highlight class="normal"></highlight></codeline>
+<codeline lineno="115"><highlight class="normal"></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>Containers::Vector&lt;BufferInfo&gt;&amp;<sp/>Drawable::GetVertexBufferInfos()</highlight><highlight class="keyword"><sp/>const<sp/></highlight><highlight class="normal">{</highlight></codeline>
+<codeline lineno="116"><highlight class="normal"><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>m_vertexBufferInfos;</highlight></codeline>
+<codeline lineno="117"><highlight class="normal">}</highlight></codeline>
+<codeline lineno="118"><highlight class="normal"></highlight></codeline>
+<codeline lineno="119"><highlight class="normal"></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>Containers::Vector&lt;BufferInfo&gt;&amp;<sp/>Drawable::GetInstanceBufferInfos()</highlight><highlight class="keyword"><sp/>const<sp/></highlight><highlight class="normal">{</highlight></codeline>
+<codeline lineno="120"><highlight class="normal"><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>m_instanceBufferInfos;</highlight></codeline>
+<codeline lineno="121"><highlight class="normal">}</highlight></codeline>
+<codeline lineno="122"><highlight class="normal"></highlight></codeline>
+<codeline lineno="123"><highlight class="normal"></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>Containers::Vector&lt;UniformBufferInfo&gt;&amp;<sp/>Drawable::GetUniformBufferInfos()</highlight><highlight class="keyword"><sp/>const<sp/></highlight><highlight class="normal">{</highlight></codeline>
+<codeline lineno="124"><highlight class="normal"><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>m_uniformBufferInfos;</highlight></codeline>
+<codeline lineno="125"><highlight class="normal">}</highlight></codeline>
+<codeline lineno="126"><highlight class="normal"></highlight></codeline>
+<codeline lineno="127"><highlight class="normal"></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>BufferInfo&amp;<sp/>Drawable::GetIndexBufferInfo()</highlight><highlight class="keyword"><sp/>const<sp/></highlight><highlight class="normal">{</highlight></codeline>
+<codeline lineno="128"><highlight class="normal"><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>m_indexBufferInfo;</highlight></codeline>
+<codeline lineno="129"><highlight class="normal">}</highlight></codeline>
+<codeline lineno="130"><highlight class="normal"></highlight></codeline>
+<codeline lineno="131"><highlight class="normal">DrawablePoolCreateInfo::DrawablePoolCreateInfo(Memory::Allocator&amp;<sp/>alloc)</highlight></codeline>
+<codeline lineno="132"><highlight class="normal"><sp/><sp/>:<sp/>m_renderPasses(alloc)<sp/>{</highlight></codeline>
+<codeline lineno="133"><highlight class="normal">}</highlight></codeline>
+<codeline lineno="134"><highlight class="normal"></highlight></codeline>
+<codeline lineno="135"><highlight class="normal">U32<sp/>DrawablePoolCreateInfo::AddInputSlot(</highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>VertexSlot&amp;<sp/>slotInfo)<sp/>{</highlight></codeline>
+<codeline lineno="136"><highlight class="normal"><sp/><sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">auto</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">id</highlight><highlight class="normal"><sp/>=<sp/>U32(m_vertexDataSlots.size());</highlight></codeline>
+<codeline lineno="137"><highlight class="normal"><sp/><sp/>m_vertexDataSlots.push_back(slotInfo);</highlight></codeline>
+<codeline lineno="138"><highlight class="normal"><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>id;</highlight></codeline>
+<codeline lineno="139"><highlight class="normal">}</highlight></codeline>
+<codeline lineno="140"><highlight class="normal"></highlight></codeline>
+<codeline lineno="141"><highlight class="normal">DrawablePool::DrawablePool(</highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>DrawablePoolCreateInfo&amp;<sp/>createInfo,</highlight></codeline>
+<codeline lineno="142"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>DescriptorCount<sp/>descriptorCount,</highlight></codeline>
+<codeline lineno="143"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>Memory::Allocator&amp;<sp/>allocator)</highlight></codeline>
+<codeline lineno="144"><highlight class="normal"><sp/><sp/>:<sp/>m_numVertexSlots(U32(std::count_if(createInfo.m_vertexDataSlots.begin(),<sp/>createInfo.m_vertexDataSlots.end(),</highlight></codeline>
+<codeline lineno="145"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>IsPerVertexSlot))),</highlight></codeline>
+<codeline lineno="146"><highlight class="normal"><sp/><sp/><sp/><sp/>m_numInstanceSlots(U32(std::count_if(createInfo.m_vertexDataSlots.begin(),<sp/>createInfo.m_vertexDataSlots.end(),</highlight></codeline>
+<codeline lineno="147"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>IsPerInstanceSlot))),</highlight></codeline>
+<codeline lineno="148"><highlight class="normal"><sp/><sp/><sp/><sp/>m_descriptorCount(descriptorCount),</highlight></codeline>
+<codeline lineno="149"><highlight class="normal"><sp/><sp/><sp/><sp/>m_vertexDataSlots(allocator),</highlight></codeline>
+<codeline lineno="150"><highlight class="normal"><sp/><sp/><sp/><sp/>m_renderPasses(createInfo.m_renderPasses,<sp/>allocator),</highlight></codeline>
+<codeline lineno="151"><highlight class="normal"><sp/><sp/><sp/><sp/>m_textureBufferInfos(allocator),</highlight></codeline>
+<codeline lineno="152"><highlight class="normal"><sp/><sp/><sp/><sp/>m_samplerInfos(allocator),</highlight></codeline>
+<codeline lineno="153"><highlight class="normal"><sp/><sp/><sp/><sp/>m_bufferUpdates(allocator),</highlight></codeline>
+<codeline lineno="154"><highlight class="normal"><sp/><sp/><sp/><sp/>m_cullMode(createInfo.m_cullMode),</highlight></codeline>
+<codeline lineno="155"><highlight class="normal"><sp/><sp/><sp/><sp/>m_byteSize(createInfo.m_byteSize),</highlight></codeline>
+<codeline lineno="156"><highlight class="normal"><sp/><sp/><sp/><sp/>m_drawType(createInfo.m_drawType),</highlight></codeline>
+<codeline lineno="157"><highlight class="normal"><sp/><sp/><sp/><sp/>m_allocator(allocator)<sp/>{</highlight></codeline>
+<codeline lineno="158"><highlight class="normal"></highlight></codeline>
+<codeline lineno="159"><highlight class="normal"><sp/><sp/>m_vertexDataSlots.Reserve(U32(createInfo.m_vertexDataSlots.size()));</highlight></codeline>
+<codeline lineno="160"><highlight class="normal"></highlight></codeline>
+<codeline lineno="161"><highlight class="normal"><sp/><sp/></highlight><highlight class="keywordflow">for</highlight><highlight class="normal">(</highlight><highlight class="keyword">auto</highlight><highlight class="normal">&amp;<sp/>slot<sp/>:<sp/>createInfo.m_vertexDataSlots)</highlight></codeline>
+<codeline lineno="162"><highlight class="normal"><sp/><sp/>{</highlight></codeline>
+<codeline lineno="163"><highlight class="normal"><sp/><sp/><sp/><sp/>m_vertexDataSlots.PushBack(slot);</highlight></codeline>
+<codeline lineno="164"><highlight class="normal"></highlight></codeline>
+<codeline lineno="165"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">for</highlight><highlight class="normal">(</highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">auto</highlight><highlight class="normal">&amp;<sp/>stride<sp/>:<sp/>slot.m_stride)</highlight></codeline>
+<codeline lineno="166"><highlight class="normal"><sp/><sp/><sp/><sp/>{</highlight></codeline>
+<codeline lineno="167"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/>m_vertexDataSlots.Last().m_strideSize<sp/>+=<sp/>GetFormatSize(stride.m_format);</highlight></codeline>
+<codeline lineno="168"><highlight class="normal"><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="169"><highlight class="normal"><sp/><sp/>}</highlight></codeline>
+<codeline lineno="170"><highlight class="normal"></highlight></codeline>
+<codeline lineno="171"><highlight class="normal"><sp/><sp/>m_bufferUpdates.Reserve(m_descriptorCount.m_numSampledImageSlots<sp/>+<sp/>m_descriptorCount.m_numUniformSlots<sp/>+<sp/>m_numVertexSlots<sp/>+<sp/>m_numInstanceSlots);</highlight></codeline>
+<codeline lineno="172"><highlight class="normal"></highlight></codeline>
+<codeline lineno="173"><highlight class="normal"><sp/><sp/>m_textureBufferInfos.Reserve(m_descriptorCount.m_numSampledImageSlots);</highlight></codeline>
+<codeline lineno="174"><highlight class="normal"><sp/><sp/>m_samplerInfos.Reserve(m_descriptorCount.m_numSamplerSlots);</highlight></codeline>
+<codeline lineno="175"><highlight class="normal">}</highlight></codeline>
+<codeline lineno="176"><highlight class="normal"></highlight></codeline>
+<codeline lineno="177"><highlight class="normal"></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/>DrawablePool::BindVertexData(DrawableID<sp/>drawableId,<sp/>SlotID<sp/>slot,<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>Containers::Vector&lt;U8&gt;&amp;<sp/>buffer)<sp/>{</highlight></codeline>
+<codeline lineno="178"><highlight class="normal"><sp/><sp/>BindVertexData(drawableId,<sp/>slot,<sp/>buffer.Data(),<sp/>buffer.GetSize());</highlight></codeline>
+<codeline lineno="179"><highlight class="normal">}</highlight></codeline>
+<codeline lineno="180"><highlight class="normal"></highlight></codeline>
+<codeline lineno="181"><highlight class="normal"></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/>DrawablePool::BindInstanceData(DrawableID<sp/>drawableId,<sp/>SlotID<sp/>slot,<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>Containers::Vector&lt;U8&gt;&amp;<sp/>buffer)<sp/>{</highlight></codeline>
+<codeline lineno="182"><highlight class="normal"><sp/><sp/>BindInstanceData(drawableId,<sp/>slot,<sp/>buffer.Data(),<sp/>buffer.GetSize());</highlight></codeline>
+<codeline lineno="183"><highlight class="normal">}</highlight></codeline>
+<codeline lineno="184"><highlight class="normal"></highlight></codeline>
+<codeline lineno="185"><highlight class="normal"></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/>DrawablePool::BindUniformData(DrawableID<sp/>drawableId,<sp/>SlotID<sp/>slot,<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>Containers::Vector&lt;U8&gt;&amp;<sp/>buffer)<sp/>{</highlight></codeline>
+<codeline lineno="186"><highlight class="normal"><sp/><sp/>BindUniformData(drawableId,<sp/>slot,<sp/>buffer.Data(),<sp/>buffer.GetSize());</highlight></codeline>
+<codeline lineno="187"><highlight class="normal">}</highlight></codeline>
+<codeline lineno="188"><highlight class="normal"></highlight></codeline>
+<codeline lineno="189"><highlight class="normal"></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/>DrawablePool::SetIndexData(DrawableID<sp/>drawableId,<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>Containers::Vector&lt;U8&gt;&amp;<sp/>buffer)<sp/>{</highlight></codeline>
+<codeline lineno="190"><highlight class="normal"><sp/><sp/>SetIndexData(drawableId,<sp/>buffer.Data(),<sp/>buffer.GetSize());</highlight></codeline>
+<codeline lineno="191"><highlight class="normal">}</highlight></codeline>
+<codeline lineno="192"><highlight class="normal"></highlight></codeline>
+<codeline lineno="193"><highlight class="normal"></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/>DrawablePool::UpdateUniformData(DrawableID<sp/>drawableId,<sp/>SlotID<sp/>slot,<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>Containers::Vector&lt;U8&gt;&amp;<sp/>buffer)<sp/>{</highlight></codeline>
+<codeline lineno="194"><highlight class="normal"><sp/><sp/>UpdateUniformData(drawableId,<sp/>slot,<sp/>buffer.Data(),<sp/>buffer.GetSize());</highlight></codeline>
+<codeline lineno="195"><highlight class="normal">}</highlight></codeline>
+<codeline lineno="196"><highlight class="normal"></highlight></codeline>
+<codeline lineno="197"><highlight class="normal">U32<sp/>DrawablePool::GetSingleTextureBufferInfo(</highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>DescriptorSlot&amp;<sp/>slot)<sp/>{</highlight></codeline>
+<codeline lineno="198"><highlight class="normal"><sp/><sp/>U32<sp/>idx<sp/>=<sp/>0;</highlight></codeline>
+<codeline lineno="199"><highlight class="normal"><sp/><sp/></highlight><highlight class="keywordflow">for</highlight><highlight class="normal">(</highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">auto</highlight><highlight class="normal">&amp;<sp/>textureBufferInfo<sp/>:<sp/>m_textureBufferInfos)</highlight></codeline>
+<codeline lineno="200"><highlight class="normal"><sp/><sp/>{</highlight></codeline>
+<codeline lineno="201"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">if</highlight><highlight class="normal"><sp/>(textureBufferInfo.m_binding<sp/>==<sp/>slot.m_bindIdx<sp/>&amp;&amp;<sp/>textureBufferInfo.m_set<sp/>==<sp/>slot.m_setIdx)</highlight></codeline>
+<codeline lineno="202"><highlight class="normal"><sp/><sp/><sp/><sp/>{</highlight></codeline>
+<codeline lineno="203"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>idx;</highlight></codeline>
+<codeline lineno="204"><highlight class="normal"><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="205"><highlight class="normal"></highlight></codeline>
+<codeline lineno="206"><highlight class="normal"><sp/><sp/><sp/><sp/>++idx;</highlight></codeline>
+<codeline lineno="207"><highlight class="normal"><sp/><sp/>}</highlight></codeline>
+<codeline lineno="208"><highlight class="normal"></highlight></codeline>
+<codeline lineno="209"><highlight class="normal"><sp/><sp/></highlight><highlight class="keywordflow">throw</highlight><highlight class="normal"><sp/>std::runtime_error(</highlight><highlight class="stringliteral">&quot;Tried<sp/>to<sp/>Update<sp/>Slot<sp/>that<sp/>was<sp/>never<sp/>bound&quot;</highlight><highlight class="normal">);</highlight></codeline>
+<codeline lineno="210"><highlight class="normal"></highlight></codeline>
+<codeline lineno="211"><highlight class="normal">}</highlight></codeline>
+<codeline lineno="212"><highlight class="normal"></highlight></codeline>
+<codeline lineno="213"><highlight class="normal">U32<sp/>DrawablePool::GetSize()</highlight><highlight class="keyword"><sp/>const<sp/></highlight><highlight class="normal">{</highlight></codeline>
+<codeline lineno="214"><highlight class="normal"><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>m_byteSize;</highlight></codeline>
+<codeline lineno="215"><highlight class="normal">}</highlight></codeline>
+<codeline lineno="216"><highlight class="normal"></highlight></codeline>
+<codeline lineno="217"><highlight class="normal">Memory::Allocator&amp;<sp/>DrawablePool::GetAllocator()</highlight><highlight class="keyword"><sp/>const<sp/></highlight><highlight class="normal">{</highlight></codeline>
+<codeline lineno="218"><highlight class="normal"><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>m_allocator;</highlight></codeline>
+<codeline lineno="219"><highlight class="normal">}</highlight></codeline>
+<codeline lineno="220"><highlight class="normal"></highlight></codeline>
+<codeline lineno="221"><highlight class="normal">DrawType<sp/>DrawablePool::GetDrawType()</highlight><highlight class="keyword"><sp/>const<sp/></highlight><highlight class="normal">{</highlight></codeline>
+<codeline lineno="222"><highlight class="normal"><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>m_drawType;</highlight></codeline>
+<codeline lineno="223"><highlight class="normal">}</highlight></codeline>
+<codeline lineno="224"><highlight class="normal"></highlight></codeline>
+<codeline lineno="225"><highlight class="normal"></highlight><highlight class="keywordtype">bool</highlight><highlight class="normal"><sp/>DrawablePool::CanRenderInPass(U32<sp/>renderPassId)</highlight><highlight class="keyword"><sp/>const<sp/></highlight><highlight class="normal">{</highlight></codeline>
+<codeline lineno="226"><highlight class="normal"><sp/><sp/></highlight><highlight class="keywordflow">for</highlight><highlight class="normal"><sp/>(</highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">auto</highlight><highlight class="normal">&amp;<sp/>pass<sp/>:<sp/>m_renderPasses)<sp/>{</highlight></codeline>
+<codeline lineno="227"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">if</highlight><highlight class="normal"><sp/>(pass<sp/>==<sp/>renderPassId)<sp/>{</highlight></codeline>
+<codeline lineno="228"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">true</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="229"><highlight class="normal"><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="230"><highlight class="normal"><sp/><sp/>}</highlight></codeline>
+<codeline lineno="231"><highlight class="normal"></highlight></codeline>
+<codeline lineno="232"><highlight class="normal"><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">false</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="233"><highlight class="normal">}</highlight></codeline>
+<codeline lineno="234"><highlight class="normal">}<sp/></highlight><highlight class="comment">//<sp/>namespace<sp/>Azura</highlight><highlight class="normal"></highlight></codeline>
+    </programlisting>
+    <location file="Source/Azura/RenderSystem/Src/Generic/Drawable.cpp"/>
+  </compounddef>
+</doxygen>

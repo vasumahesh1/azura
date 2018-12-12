@@ -1,0 +1,660 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.8.14">
+  <compounddef id="class_azura_1_1_compute_pool" kind="class" language="C++" prot="public" abstract="yes">
+    <compoundname>Azura::ComputePool</compoundname>
+    <derivedcompoundref refid="class_azura_1_1_d3_d12_1_1_d3_d12_compute_pool" prot="public" virt="non-virtual">Azura::D3D12::D3D12ComputePool</derivedcompoundref>
+    <derivedcompoundref refid="class_azura_1_1_vulkan_1_1_vk_compute_pool" prot="public" virt="non-virtual">Azura::Vulkan::VkComputePool</derivedcompoundref>
+      <sectiondef kind="protected-attrib">
+      <memberdef kind="variable" id="class_azura_1_1_compute_pool_1a7de00c2da471b1ad5b645f9711bfeaf2" prot="protected" static="no" mutable="no">
+        <type><ref refid="struct_azura_1_1_descriptor_count" kindref="compound">DescriptorCount</ref></type>
+        <definition>DescriptorCount Azura::ComputePool::m_descriptorCount</definition>
+        <argsstring></argsstring>
+        <name>m_descriptorCount</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Source/Azura/RenderSystem/Inc/Generic/ComputePool.h" line="64" column="1" bodyfile="Source/Azura/RenderSystem/Inc/Generic/ComputePool.h" bodystart="64" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="class_azura_1_1_compute_pool_1a5f1a7177b1d1206f77a96c13e70ac35c" prot="protected" static="no" mutable="no">
+        <type><ref refid="class_azura_1_1_containers_1_1_vector" kindref="compound">Containers::Vector</ref>&lt; U32 &gt;</type>
+        <definition>Containers::Vector&lt;U32&gt; Azura::ComputePool::m_computePasses</definition>
+        <argsstring></argsstring>
+        <name>m_computePasses</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Source/Azura/RenderSystem/Inc/Generic/ComputePool.h" line="66" column="1" bodyfile="Source/Azura/RenderSystem/Inc/Generic/ComputePool.h" bodystart="66" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="class_azura_1_1_compute_pool_1aca52c67e737934789d72e0a7bd213c3d" prot="protected" static="no" mutable="no">
+        <type><ref refid="class_azura_1_1_containers_1_1_vector" kindref="compound">Containers::Vector</ref>&lt; <ref refid="struct_azura_1_1_uniform_buffer_info" kindref="compound">UniformBufferInfo</ref> &gt;</type>
+        <definition>Containers::Vector&lt;UniformBufferInfo&gt; Azura::ComputePool::m_uniformBufferInfos</definition>
+        <argsstring></argsstring>
+        <name>m_uniformBufferInfos</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Source/Azura/RenderSystem/Inc/Generic/ComputePool.h" line="68" column="1" bodyfile="Source/Azura/RenderSystem/Inc/Generic/ComputePool.h" bodystart="68" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="class_azura_1_1_compute_pool_1ad8a3b7585c2860cac725ba9b4a6a4ef9" prot="protected" static="no" mutable="no">
+        <type><ref refid="class_azura_1_1_containers_1_1_vector" kindref="compound">Containers::Vector</ref>&lt; <ref refid="struct_azura_1_1_texture_buffer_info" kindref="compound">TextureBufferInfo</ref> &gt;</type>
+        <definition>Containers::Vector&lt;TextureBufferInfo&gt; Azura::ComputePool::m_textureBufferInfos</definition>
+        <argsstring></argsstring>
+        <name>m_textureBufferInfos</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Source/Azura/RenderSystem/Inc/Generic/ComputePool.h" line="69" column="1" bodyfile="Source/Azura/RenderSystem/Inc/Generic/ComputePool.h" bodystart="69" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="class_azura_1_1_compute_pool_1ac4c92d33ff9ce45bdb633c610611aeeb" prot="protected" static="no" mutable="no">
+        <type><ref refid="class_azura_1_1_containers_1_1_vector" kindref="compound">Containers::Vector</ref>&lt; <ref refid="struct_azura_1_1_sampler_info" kindref="compound">SamplerInfo</ref> &gt;</type>
+        <definition>Containers::Vector&lt;SamplerInfo&gt; Azura::ComputePool::m_samplerInfos</definition>
+        <argsstring></argsstring>
+        <name>m_samplerInfos</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Source/Azura/RenderSystem/Inc/Generic/ComputePool.h" line="70" column="1" bodyfile="Source/Azura/RenderSystem/Inc/Generic/ComputePool.h" bodystart="70" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="class_azura_1_1_compute_pool_1a2364df6fc212c4ada3f000adc9ea0650" prot="protected" static="no" mutable="no">
+        <type><ref refid="class_azura_1_1_containers_1_1_vector" kindref="compound">Containers::Vector</ref>&lt; <ref refid="struct_azura_1_1_buffer_update" kindref="compound">BufferUpdate</ref> &gt;</type>
+        <definition>Containers::Vector&lt;BufferUpdate&gt; Azura::ComputePool::m_bufferUpdates</definition>
+        <argsstring></argsstring>
+        <name>m_bufferUpdates</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Source/Azura/RenderSystem/Inc/Generic/ComputePool.h" line="72" column="1" bodyfile="Source/Azura/RenderSystem/Inc/Generic/ComputePool.h" bodystart="72" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="class_azura_1_1_compute_pool_1ab9e254cde0291fcd98fddf584306cf81" prot="protected" static="no" mutable="no">
+        <type><ref refid="struct_azura_1_1_thread_group_dimensions" kindref="compound">ThreadGroupDimensions</ref></type>
+        <definition>ThreadGroupDimensions Azura::ComputePool::m_launchDims</definition>
+        <argsstring></argsstring>
+        <name>m_launchDims</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Source/Azura/RenderSystem/Inc/Generic/ComputePool.h" line="74" column="1" bodyfile="Source/Azura/RenderSystem/Inc/Generic/ComputePool.h" bodystart="74" bodyend="-1"/>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="private-attrib">
+      <memberdef kind="variable" id="class_azura_1_1_compute_pool_1a8d5fddba1c2008192034cd07b80bc79a" prot="private" static="no" mutable="no">
+        <type>U32</type>
+        <definition>U32 Azura::ComputePool::m_byteSize</definition>
+        <argsstring></argsstring>
+        <name>m_byteSize</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Source/Azura/RenderSystem/Inc/Generic/ComputePool.h" line="77" column="1" bodyfile="Source/Azura/RenderSystem/Inc/Generic/ComputePool.h" bodystart="77" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="class_azura_1_1_compute_pool_1a7714abec31e85c1652728735d7887fd2" prot="private" static="no" mutable="no">
+        <type>std::reference_wrapper&lt; <ref refid="class_azura_1_1_memory_1_1_allocator" kindref="compound">Memory::Allocator</ref> &gt;</type>
+        <definition>std::reference_wrapper&lt;Memory::Allocator&gt; Azura::ComputePool::m_allocator</definition>
+        <argsstring></argsstring>
+        <name>m_allocator</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Source/Azura/RenderSystem/Inc/Generic/ComputePool.h" line="79" column="1" bodyfile="Source/Azura/RenderSystem/Inc/Generic/ComputePool.h" bodystart="79" bodyend="-1"/>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="public-func">
+      <memberdef kind="function" id="class_azura_1_1_compute_pool_1af7d8288c218721d0c747c8665313b802" prot="public" static="no" const="no" explicit="yes" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>Azura::ComputePool::ComputePool</definition>
+        <argsstring>(const ComputePoolCreateInfo &amp;createInfo, DescriptorCount descriptorCount, Memory::Allocator &amp;allocator)</argsstring>
+        <name>ComputePool</name>
+        <param>
+          <type>const <ref refid="struct_azura_1_1_compute_pool_create_info" kindref="compound">ComputePoolCreateInfo</ref> &amp;</type>
+          <declname>createInfo</declname>
+        </param>
+        <param>
+          <type><ref refid="struct_azura_1_1_descriptor_count" kindref="compound">DescriptorCount</ref></type>
+          <declname>descriptorCount</declname>
+        </param>
+        <param>
+          <type><ref refid="class_azura_1_1_memory_1_1_allocator" kindref="compound">Memory::Allocator</ref> &amp;</type>
+          <declname>allocator</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Source/Azura/RenderSystem/Inc/Generic/ComputePool.h" line="28" column="1" bodyfile="Source/Azura/RenderSystem/Src/Generic/ComputePool.cpp" bodystart="13" bodyend="30"/>
+      </memberdef>
+      <memberdef kind="function" id="class_azura_1_1_compute_pool_1ac2fc233b6a0ea26552733c264b6a9478" prot="public" static="no" const="no" explicit="no" inline="no" virt="virtual">
+        <type></type>
+        <definition>virtual Azura::ComputePool::~ComputePool</definition>
+        <argsstring>()=default</argsstring>
+        <name>~ComputePool</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Source/Azura/RenderSystem/Inc/Generic/ComputePool.h" line="31" column="1"/>
+      </memberdef>
+      <memberdef kind="function" id="class_azura_1_1_compute_pool_1a3149c9966cc1ecf4a7ba9947fbd4ae94" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>Azura::ComputePool::ComputePool</definition>
+        <argsstring>(const ComputePool &amp;other)=delete</argsstring>
+        <name>ComputePool</name>
+        <param>
+          <type>const <ref refid="class_azura_1_1_compute_pool" kindref="compound">ComputePool</ref> &amp;</type>
+          <declname>other</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Source/Azura/RenderSystem/Inc/Generic/ComputePool.h" line="33" column="1"/>
+      </memberdef>
+      <memberdef kind="function" id="class_azura_1_1_compute_pool_1abf90deac37ba61e6683953fbee5a0e2c" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>Azura::ComputePool::ComputePool</definition>
+        <argsstring>(ComputePool &amp;&amp;other) noexcept=default</argsstring>
+        <name>ComputePool</name>
+        <param>
+          <type><ref refid="class_azura_1_1_compute_pool" kindref="compound">ComputePool</ref> &amp;&amp;</type>
+          <declname>other</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Source/Azura/RenderSystem/Inc/Generic/ComputePool.h" line="34" column="1"/>
+      </memberdef>
+      <memberdef kind="function" id="class_azura_1_1_compute_pool_1ae5903ef39e7e0238804e02857ce5df80" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="class_azura_1_1_compute_pool" kindref="compound">ComputePool</ref> &amp;</type>
+        <definition>ComputePool&amp; Azura::ComputePool::operator=</definition>
+        <argsstring>(const ComputePool &amp;other)=delete</argsstring>
+        <name>operator=</name>
+        <param>
+          <type>const <ref refid="class_azura_1_1_compute_pool" kindref="compound">ComputePool</ref> &amp;</type>
+          <declname>other</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Source/Azura/RenderSystem/Inc/Generic/ComputePool.h" line="35" column="1"/>
+      </memberdef>
+      <memberdef kind="function" id="class_azura_1_1_compute_pool_1aacc48b6375680c06ba8590a613ada1c0" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="class_azura_1_1_compute_pool" kindref="compound">ComputePool</ref> &amp;</type>
+        <definition>ComputePool&amp; Azura::ComputePool::operator=</definition>
+        <argsstring>(ComputePool &amp;&amp;other) noexcept=default</argsstring>
+        <name>operator=</name>
+        <param>
+          <type><ref refid="class_azura_1_1_compute_pool" kindref="compound">ComputePool</ref> &amp;&amp;</type>
+          <declname>other</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Source/Azura/RenderSystem/Inc/Generic/ComputePool.h" line="36" column="1"/>
+      </memberdef>
+      <memberdef kind="function" id="class_azura_1_1_compute_pool_1af3b3e4d5d2be01bcc5fee2cf8b2cde82" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void Azura::ComputePool::BindUniformData</definition>
+        <argsstring>(SlotID slot, const Containers::Vector&lt; U8 &gt; &amp;buffer)</argsstring>
+        <name>BindUniformData</name>
+        <param>
+          <type>SlotID</type>
+          <declname>slot</declname>
+        </param>
+        <param>
+          <type>const <ref refid="class_azura_1_1_containers_1_1_vector" kindref="compound">Containers::Vector</ref>&lt; U8 &gt; &amp;</type>
+          <declname>buffer</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Source/Azura/RenderSystem/Inc/Generic/ComputePool.h" line="39" column="1" bodyfile="Source/Azura/RenderSystem/Src/Generic/ComputePool.cpp" bodystart="32" bodyend="34"/>
+      </memberdef>
+      <memberdef kind="function" id="class_azura_1_1_compute_pool_1a337bc30ca92019ac3d6530c9afae5b88" prot="public" static="no" const="no" explicit="no" inline="no" virt="pure-virtual">
+        <type>void</type>
+        <definition>virtual void Azura::ComputePool::BindUniformData</definition>
+        <argsstring>(SlotID slot, const U8 *buffer, U32 size)=0</argsstring>
+        <name>BindUniformData</name>
+        <reimplementedby refid="class_azura_1_1_vulkan_1_1_vk_compute_pool_1ad86daae5072bd152ff29679d32238df0">BindUniformData</reimplementedby>
+        <reimplementedby refid="class_azura_1_1_d3_d12_1_1_d3_d12_compute_pool_1ab4749e00ef9a328258ad50213fce8dcd">BindUniformData</reimplementedby>
+        <param>
+          <type>SlotID</type>
+          <declname>slot</declname>
+        </param>
+        <param>
+          <type>const U8 *</type>
+          <declname>buffer</declname>
+        </param>
+        <param>
+          <type>U32</type>
+          <declname>size</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Source/Azura/RenderSystem/Inc/Generic/ComputePool.h" line="40" column="1"/>
+      </memberdef>
+      <memberdef kind="function" id="class_azura_1_1_compute_pool_1a693a26edd6b9cd67489e32e4af5a3702" prot="public" static="no" const="no" explicit="no" inline="no" virt="pure-virtual">
+        <type>void</type>
+        <definition>virtual void Azura::ComputePool::AddShader</definition>
+        <argsstring>(U32 shaderId)=0</argsstring>
+        <name>AddShader</name>
+        <reimplementedby refid="class_azura_1_1_vulkan_1_1_vk_compute_pool_1ab6e2a29eba4abbfc501f8ffd9bce5c7f">AddShader</reimplementedby>
+        <reimplementedby refid="class_azura_1_1_d3_d12_1_1_d3_d12_compute_pool_1a62e8d15f311be927542002cc1d25eadd">AddShader</reimplementedby>
+        <param>
+          <type>U32</type>
+          <declname>shaderId</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Source/Azura/RenderSystem/Inc/Generic/ComputePool.h" line="43" column="1"/>
+      </memberdef>
+      <memberdef kind="function" id="class_azura_1_1_compute_pool_1a6ee4bacc7f2f1bacfefd82ff3177e006" prot="public" static="no" const="no" explicit="no" inline="no" virt="pure-virtual">
+        <type>void</type>
+        <definition>virtual void Azura::ComputePool::BindTextureData</definition>
+        <argsstring>(SlotID slot, const TextureDesc &amp;desc, const U8 *buffer)=0</argsstring>
+        <name>BindTextureData</name>
+        <reimplementedby refid="class_azura_1_1_vulkan_1_1_vk_compute_pool_1a02046e02deb76baeaada55384ac2d265">BindTextureData</reimplementedby>
+        <reimplementedby refid="class_azura_1_1_d3_d12_1_1_d3_d12_compute_pool_1a2a1d9622bde44ac83d235a9c9ea8ee14">BindTextureData</reimplementedby>
+        <param>
+          <type>SlotID</type>
+          <declname>slot</declname>
+        </param>
+        <param>
+          <type>const <ref refid="struct_azura_1_1_texture_desc" kindref="compound">TextureDesc</ref> &amp;</type>
+          <declname>desc</declname>
+        </param>
+        <param>
+          <type>const U8 *</type>
+          <declname>buffer</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Source/Azura/RenderSystem/Inc/Generic/ComputePool.h" line="44" column="1"/>
+      </memberdef>
+      <memberdef kind="function" id="class_azura_1_1_compute_pool_1ad06bf3de491a8a46f4673cc2fc1535df" prot="public" static="no" const="no" explicit="no" inline="no" virt="pure-virtual">
+        <type>void</type>
+        <definition>virtual void Azura::ComputePool::BindSampler</definition>
+        <argsstring>(SlotID slot, const SamplerDesc &amp;desc)=0</argsstring>
+        <name>BindSampler</name>
+        <reimplementedby refid="class_azura_1_1_vulkan_1_1_vk_compute_pool_1accd1d37723654a6b97d10569317be95e">BindSampler</reimplementedby>
+        <reimplementedby refid="class_azura_1_1_d3_d12_1_1_d3_d12_compute_pool_1aa25775c4623645cb938d3ff327603bfb">BindSampler</reimplementedby>
+        <param>
+          <type>SlotID</type>
+          <declname>slot</declname>
+        </param>
+        <param>
+          <type>const <ref refid="struct_azura_1_1_sampler_desc" kindref="compound">SamplerDesc</ref> &amp;</type>
+          <declname>desc</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Source/Azura/RenderSystem/Inc/Generic/ComputePool.h" line="45" column="1"/>
+      </memberdef>
+      <memberdef kind="function" id="class_azura_1_1_compute_pool_1a3bf0f2b8e6f43905e8e290cef64804cd" prot="public" static="no" const="no" explicit="no" inline="no" virt="pure-virtual">
+        <type>void</type>
+        <definition>virtual void Azura::ComputePool::BeginUpdates</definition>
+        <argsstring>()=0</argsstring>
+        <name>BeginUpdates</name>
+        <reimplementedby refid="class_azura_1_1_vulkan_1_1_vk_compute_pool_1aa538da33c44ec2739ac2bceef705afd1">BeginUpdates</reimplementedby>
+        <reimplementedby refid="class_azura_1_1_d3_d12_1_1_d3_d12_compute_pool_1a913eed1e103750dac3e35c0af1cf20d1">BeginUpdates</reimplementedby>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Source/Azura/RenderSystem/Inc/Generic/ComputePool.h" line="47" column="1"/>
+      </memberdef>
+      <memberdef kind="function" id="class_azura_1_1_compute_pool_1abaccf3ec6a2ffa50cbc324977ab2d06a" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void Azura::ComputePool::UpdateUniformData</definition>
+        <argsstring>(SlotID slot, const Containers::Vector&lt; U8 &gt; &amp;buffer)</argsstring>
+        <name>UpdateUniformData</name>
+        <param>
+          <type>SlotID</type>
+          <declname>slot</declname>
+        </param>
+        <param>
+          <type>const <ref refid="class_azura_1_1_containers_1_1_vector" kindref="compound">Containers::Vector</ref>&lt; U8 &gt; &amp;</type>
+          <declname>buffer</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Source/Azura/RenderSystem/Inc/Generic/ComputePool.h" line="48" column="1" bodyfile="Source/Azura/RenderSystem/Src/Generic/ComputePool.cpp" bodystart="36" bodyend="38"/>
+      </memberdef>
+      <memberdef kind="function" id="class_azura_1_1_compute_pool_1a2ab33d6c5af86301e2d72cdb5a653ae1" prot="public" static="no" const="no" explicit="no" inline="no" virt="pure-virtual">
+        <type>void</type>
+        <definition>virtual void Azura::ComputePool::UpdateUniformData</definition>
+        <argsstring>(SlotID slot, const U8 *buffer, U32 size)=0</argsstring>
+        <name>UpdateUniformData</name>
+        <reimplementedby refid="class_azura_1_1_vulkan_1_1_vk_compute_pool_1a112d7966cf3e6bcdfe0e8842616c8612">UpdateUniformData</reimplementedby>
+        <reimplementedby refid="class_azura_1_1_d3_d12_1_1_d3_d12_compute_pool_1a1b335047bda318921968dcea89707ae3">UpdateUniformData</reimplementedby>
+        <param>
+          <type>SlotID</type>
+          <declname>slot</declname>
+        </param>
+        <param>
+          <type>const U8 *</type>
+          <declname>buffer</declname>
+        </param>
+        <param>
+          <type>U32</type>
+          <declname>size</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Source/Azura/RenderSystem/Inc/Generic/ComputePool.h" line="49" column="1"/>
+      </memberdef>
+      <memberdef kind="function" id="class_azura_1_1_compute_pool_1a66ce2d11eb58932a46bc0ec4e42bb444" prot="public" static="no" const="no" explicit="no" inline="no" virt="pure-virtual">
+        <type>void</type>
+        <definition>virtual void Azura::ComputePool::UpdateTextureData</definition>
+        <argsstring>(SlotID slot, const U8 *buffer)=0</argsstring>
+        <name>UpdateTextureData</name>
+        <reimplementedby refid="class_azura_1_1_vulkan_1_1_vk_compute_pool_1a6f1331a82ec740e13d241ac8eccc75ef">UpdateTextureData</reimplementedby>
+        <reimplementedby refid="class_azura_1_1_d3_d12_1_1_d3_d12_compute_pool_1a7241fc7634a2b66eff379ca58d78db93">UpdateTextureData</reimplementedby>
+        <param>
+          <type>SlotID</type>
+          <declname>slot</declname>
+        </param>
+        <param>
+          <type>const U8 *</type>
+          <declname>buffer</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Source/Azura/RenderSystem/Inc/Generic/ComputePool.h" line="50" column="1"/>
+      </memberdef>
+      <memberdef kind="function" id="class_azura_1_1_compute_pool_1a48d0fe241dec4dd32186d7ab2d69b783" prot="public" static="no" const="no" explicit="no" inline="no" virt="pure-virtual">
+        <type>void</type>
+        <definition>virtual void Azura::ComputePool::Submit</definition>
+        <argsstring>()=0</argsstring>
+        <name>Submit</name>
+        <reimplementedby refid="class_azura_1_1_vulkan_1_1_vk_compute_pool_1abfddb37bce27cedd0edd1ffad86bb8ab">Submit</reimplementedby>
+        <reimplementedby refid="class_azura_1_1_d3_d12_1_1_d3_d12_compute_pool_1ad288f24f6a9ace0639e151a85f796c5a">Submit</reimplementedby>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Source/Azura/RenderSystem/Inc/Generic/ComputePool.h" line="52" column="1"/>
+      </memberdef>
+      <memberdef kind="function" id="class_azura_1_1_compute_pool_1a8885f459bd9661049fed5a4f2d0df729" prot="public" static="no" const="no" explicit="no" inline="no" virt="pure-virtual">
+        <type>void</type>
+        <definition>virtual void Azura::ComputePool::SubmitUpdates</definition>
+        <argsstring>()=0</argsstring>
+        <name>SubmitUpdates</name>
+        <reimplementedby refid="class_azura_1_1_vulkan_1_1_vk_compute_pool_1a78e188676d011facf47ea6e316e40c50">SubmitUpdates</reimplementedby>
+        <reimplementedby refid="class_azura_1_1_d3_d12_1_1_d3_d12_compute_pool_1a700af2ec4fe997fea2a7a46d3df33f50">SubmitUpdates</reimplementedby>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Source/Azura/RenderSystem/Inc/Generic/ComputePool.h" line="53" column="1"/>
+      </memberdef>
+      <memberdef kind="function" id="class_azura_1_1_compute_pool_1ab5f446d42e46f2b295ac2c115d4ba8ac" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
+        <type>U32</type>
+        <definition>U32 Azura::ComputePool::GetSize</definition>
+        <argsstring>() const</argsstring>
+        <name>GetSize</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Source/Azura/RenderSystem/Inc/Generic/ComputePool.h" line="55" column="1" bodyfile="Source/Azura/RenderSystem/Src/Generic/ComputePool.cpp" bodystart="67" bodyend="69"/>
+      </memberdef>
+      <memberdef kind="function" id="class_azura_1_1_compute_pool_1a59a0d6fc4a77a8a3d8156092bd9ab831" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool Azura::ComputePool::CanRenderInPass</definition>
+        <argsstring>(U32 renderPassId) const</argsstring>
+        <name>CanRenderInPass</name>
+        <param>
+          <type>U32</type>
+          <declname>renderPassId</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Source/Azura/RenderSystem/Inc/Generic/ComputePool.h" line="56" column="1" bodyfile="Source/Azura/RenderSystem/Src/Generic/ComputePool.cpp" bodystart="75" bodyend="83"/>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="protected-func">
+      <memberdef kind="function" id="class_azura_1_1_compute_pool_1a4f53259b821b6604ebbf08ad6ae29ae1" prot="protected" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>U32</type>
+        <definition>U32 Azura::ComputePool::GetSingleUniformBufferInfo</definition>
+        <argsstring>(const DescriptorSlot &amp;slot)</argsstring>
+        <name>GetSingleUniformBufferInfo</name>
+        <param>
+          <type>const <ref refid="struct_azura_1_1_descriptor_slot" kindref="compound">DescriptorSlot</ref> &amp;</type>
+          <declname>slot</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Source/Azura/RenderSystem/Inc/Generic/ComputePool.h" line="59" column="1" bodyfile="Source/Azura/RenderSystem/Src/Generic/ComputePool.cpp" bodystart="40" bodyend="51"/>
+      </memberdef>
+      <memberdef kind="function" id="class_azura_1_1_compute_pool_1a4dbd764029fac45b55c9dd1b669bfbe5" prot="protected" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>U32</type>
+        <definition>U32 Azura::ComputePool::GetSingleTextureBufferInfo</definition>
+        <argsstring>(const DescriptorSlot &amp;slot)</argsstring>
+        <name>GetSingleTextureBufferInfo</name>
+        <param>
+          <type>const <ref refid="struct_azura_1_1_descriptor_slot" kindref="compound">DescriptorSlot</ref> &amp;</type>
+          <declname>slot</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Source/Azura/RenderSystem/Inc/Generic/ComputePool.h" line="60" column="1" bodyfile="Source/Azura/RenderSystem/Src/Generic/ComputePool.cpp" bodystart="53" bodyend="65"/>
+      </memberdef>
+      <memberdef kind="function" id="class_azura_1_1_compute_pool_1abe104293d1fb3ff97c154ebdf279e0ab" prot="protected" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="class_azura_1_1_memory_1_1_allocator" kindref="compound">Memory::Allocator</ref> &amp;</type>
+        <definition>Memory::Allocator &amp; Azura::ComputePool::GetAllocator</definition>
+        <argsstring>() const</argsstring>
+        <name>GetAllocator</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Source/Azura/RenderSystem/Inc/Generic/ComputePool.h" line="62" column="1" bodyfile="Source/Azura/RenderSystem/Src/Generic/ComputePool.cpp" bodystart="71" bodyend="73"/>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <inheritancegraph>
+      <node id="104">
+        <label>Azura::ComputePool</label>
+        <link refid="class_azura_1_1_compute_pool"/>
+      </node>
+      <node id="106">
+        <label>Azura::Vulkan::VkComputePool</label>
+        <link refid="class_azura_1_1_vulkan_1_1_vk_compute_pool"/>
+        <childnode refid="104" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="105">
+        <label>Azura::D3D12::D3D12ComputePool</label>
+        <link refid="class_azura_1_1_d3_d12_1_1_d3_d12_compute_pool"/>
+        <childnode refid="104" relation="public-inheritance">
+        </childnode>
+      </node>
+    </inheritancegraph>
+    <collaborationgraph>
+      <node id="107">
+        <label>Azura::ComputePool</label>
+        <link refid="class_azura_1_1_compute_pool"/>
+        <childnode refid="108" relation="usage">
+          <edgelabel>m_uniformBufferInfos</edgelabel>
+        </childnode>
+        <childnode refid="109" relation="usage">
+          <edgelabel>m_bufferUpdates</edgelabel>
+        </childnode>
+        <childnode refid="110" relation="usage">
+          <edgelabel>m_launchDims</edgelabel>
+        </childnode>
+        <childnode refid="111" relation="usage">
+          <edgelabel>m_computePasses</edgelabel>
+        </childnode>
+        <childnode refid="112" relation="usage">
+          <edgelabel>m_descriptorCount</edgelabel>
+        </childnode>
+        <childnode refid="113" relation="usage">
+          <edgelabel>m_samplerInfos</edgelabel>
+        </childnode>
+        <childnode refid="114" relation="usage">
+          <edgelabel>m_textureBufferInfos</edgelabel>
+        </childnode>
+      </node>
+      <node id="108">
+        <label>Azura::Containers::Vector&lt; Azura::UniformBufferInfo &gt;</label>
+        <link refid="class_azura_1_1_containers_1_1_vector"/>
+      </node>
+      <node id="113">
+        <label>Azura::Containers::Vector&lt; Azura::SamplerInfo &gt;</label>
+        <link refid="class_azura_1_1_containers_1_1_vector"/>
+      </node>
+      <node id="112">
+        <label>Azura::DescriptorCount</label>
+        <link refid="struct_azura_1_1_descriptor_count"/>
+      </node>
+      <node id="111">
+        <label>Azura::Containers::Vector&lt; U32 &gt;</label>
+        <link refid="class_azura_1_1_containers_1_1_vector"/>
+      </node>
+      <node id="110">
+        <label>Azura::ThreadGroupDimensions</label>
+        <link refid="struct_azura_1_1_thread_group_dimensions"/>
+      </node>
+      <node id="114">
+        <label>Azura::Containers::Vector&lt; Azura::TextureBufferInfo &gt;</label>
+        <link refid="class_azura_1_1_containers_1_1_vector"/>
+      </node>
+      <node id="109">
+        <label>Azura::Containers::Vector&lt; Azura::BufferUpdate &gt;</label>
+        <link refid="class_azura_1_1_containers_1_1_vector"/>
+      </node>
+    </collaborationgraph>
+    <location file="Source/Azura/RenderSystem/Inc/Generic/ComputePool.h" line="26" column="1" bodyfile="Source/Azura/RenderSystem/Inc/Generic/ComputePool.h" bodystart="26" bodyend="80"/>
+    <listofallmembers>
+      <member refid="class_azura_1_1_compute_pool_1a693a26edd6b9cd67489e32e4af5a3702" prot="public" virt="pure-virtual"><scope>Azura::ComputePool</scope><name>AddShader</name></member>
+      <member refid="class_azura_1_1_compute_pool_1a3bf0f2b8e6f43905e8e290cef64804cd" prot="public" virt="pure-virtual"><scope>Azura::ComputePool</scope><name>BeginUpdates</name></member>
+      <member refid="class_azura_1_1_compute_pool_1ad06bf3de491a8a46f4673cc2fc1535df" prot="public" virt="pure-virtual"><scope>Azura::ComputePool</scope><name>BindSampler</name></member>
+      <member refid="class_azura_1_1_compute_pool_1a6ee4bacc7f2f1bacfefd82ff3177e006" prot="public" virt="pure-virtual"><scope>Azura::ComputePool</scope><name>BindTextureData</name></member>
+      <member refid="class_azura_1_1_compute_pool_1af3b3e4d5d2be01bcc5fee2cf8b2cde82" prot="public" virt="non-virtual"><scope>Azura::ComputePool</scope><name>BindUniformData</name></member>
+      <member refid="class_azura_1_1_compute_pool_1a337bc30ca92019ac3d6530c9afae5b88" prot="public" virt="pure-virtual"><scope>Azura::ComputePool</scope><name>BindUniformData</name></member>
+      <member refid="class_azura_1_1_compute_pool_1a59a0d6fc4a77a8a3d8156092bd9ab831" prot="public" virt="non-virtual"><scope>Azura::ComputePool</scope><name>CanRenderInPass</name></member>
+      <member refid="class_azura_1_1_compute_pool_1af7d8288c218721d0c747c8665313b802" prot="public" virt="non-virtual"><scope>Azura::ComputePool</scope><name>ComputePool</name></member>
+      <member refid="class_azura_1_1_compute_pool_1a3149c9966cc1ecf4a7ba9947fbd4ae94" prot="public" virt="non-virtual"><scope>Azura::ComputePool</scope><name>ComputePool</name></member>
+      <member refid="class_azura_1_1_compute_pool_1abf90deac37ba61e6683953fbee5a0e2c" prot="public" virt="non-virtual"><scope>Azura::ComputePool</scope><name>ComputePool</name></member>
+      <member refid="class_azura_1_1_compute_pool_1abe104293d1fb3ff97c154ebdf279e0ab" prot="protected" virt="non-virtual"><scope>Azura::ComputePool</scope><name>GetAllocator</name></member>
+      <member refid="class_azura_1_1_compute_pool_1a4dbd764029fac45b55c9dd1b669bfbe5" prot="protected" virt="non-virtual"><scope>Azura::ComputePool</scope><name>GetSingleTextureBufferInfo</name></member>
+      <member refid="class_azura_1_1_compute_pool_1a4f53259b821b6604ebbf08ad6ae29ae1" prot="protected" virt="non-virtual"><scope>Azura::ComputePool</scope><name>GetSingleUniformBufferInfo</name></member>
+      <member refid="class_azura_1_1_compute_pool_1ab5f446d42e46f2b295ac2c115d4ba8ac" prot="public" virt="non-virtual"><scope>Azura::ComputePool</scope><name>GetSize</name></member>
+      <member refid="class_azura_1_1_compute_pool_1a7714abec31e85c1652728735d7887fd2" prot="private" virt="non-virtual"><scope>Azura::ComputePool</scope><name>m_allocator</name></member>
+      <member refid="class_azura_1_1_compute_pool_1a2364df6fc212c4ada3f000adc9ea0650" prot="protected" virt="non-virtual"><scope>Azura::ComputePool</scope><name>m_bufferUpdates</name></member>
+      <member refid="class_azura_1_1_compute_pool_1a8d5fddba1c2008192034cd07b80bc79a" prot="private" virt="non-virtual"><scope>Azura::ComputePool</scope><name>m_byteSize</name></member>
+      <member refid="class_azura_1_1_compute_pool_1a5f1a7177b1d1206f77a96c13e70ac35c" prot="protected" virt="non-virtual"><scope>Azura::ComputePool</scope><name>m_computePasses</name></member>
+      <member refid="class_azura_1_1_compute_pool_1a7de00c2da471b1ad5b645f9711bfeaf2" prot="protected" virt="non-virtual"><scope>Azura::ComputePool</scope><name>m_descriptorCount</name></member>
+      <member refid="class_azura_1_1_compute_pool_1ab9e254cde0291fcd98fddf584306cf81" prot="protected" virt="non-virtual"><scope>Azura::ComputePool</scope><name>m_launchDims</name></member>
+      <member refid="class_azura_1_1_compute_pool_1ac4c92d33ff9ce45bdb633c610611aeeb" prot="protected" virt="non-virtual"><scope>Azura::ComputePool</scope><name>m_samplerInfos</name></member>
+      <member refid="class_azura_1_1_compute_pool_1ad8a3b7585c2860cac725ba9b4a6a4ef9" prot="protected" virt="non-virtual"><scope>Azura::ComputePool</scope><name>m_textureBufferInfos</name></member>
+      <member refid="class_azura_1_1_compute_pool_1aca52c67e737934789d72e0a7bd213c3d" prot="protected" virt="non-virtual"><scope>Azura::ComputePool</scope><name>m_uniformBufferInfos</name></member>
+      <member refid="class_azura_1_1_compute_pool_1ae5903ef39e7e0238804e02857ce5df80" prot="public" virt="non-virtual"><scope>Azura::ComputePool</scope><name>operator=</name></member>
+      <member refid="class_azura_1_1_compute_pool_1aacc48b6375680c06ba8590a613ada1c0" prot="public" virt="non-virtual"><scope>Azura::ComputePool</scope><name>operator=</name></member>
+      <member refid="class_azura_1_1_compute_pool_1a48d0fe241dec4dd32186d7ab2d69b783" prot="public" virt="pure-virtual"><scope>Azura::ComputePool</scope><name>Submit</name></member>
+      <member refid="class_azura_1_1_compute_pool_1a8885f459bd9661049fed5a4f2d0df729" prot="public" virt="pure-virtual"><scope>Azura::ComputePool</scope><name>SubmitUpdates</name></member>
+      <member refid="class_azura_1_1_compute_pool_1a66ce2d11eb58932a46bc0ec4e42bb444" prot="public" virt="pure-virtual"><scope>Azura::ComputePool</scope><name>UpdateTextureData</name></member>
+      <member refid="class_azura_1_1_compute_pool_1abaccf3ec6a2ffa50cbc324977ab2d06a" prot="public" virt="non-virtual"><scope>Azura::ComputePool</scope><name>UpdateUniformData</name></member>
+      <member refid="class_azura_1_1_compute_pool_1a2ab33d6c5af86301e2d72cdb5a653ae1" prot="public" virt="pure-virtual"><scope>Azura::ComputePool</scope><name>UpdateUniformData</name></member>
+      <member refid="class_azura_1_1_compute_pool_1ac2fc233b6a0ea26552733c264b6a9478" prot="public" virt="virtual"><scope>Azura::ComputePool</scope><name>~ComputePool</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

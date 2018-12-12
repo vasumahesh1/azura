@@ -1,0 +1,285 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.8.14">
+  <compounddef id="class_azura_1_1_d3_d12_1_1_d3_d12_pipeline_factory" kind="class" language="C++" prot="public">
+    <compoundname>Azura::D3D12::D3D12PipelineFactory</compoundname>
+    <innerclass refid="struct_azura_1_1_d3_d12_1_1_d3_d12_pipeline_factory_1_1_binding_info" prot="private">Azura::D3D12::D3D12PipelineFactory::BindingInfo</innerclass>
+      <sectiondef kind="private-attrib">
+      <memberdef kind="variable" id="class_azura_1_1_d3_d12_1_1_d3_d12_pipeline_factory_1ab6626d400543b29e29144a6f38acda7b" prot="private" static="no" mutable="no">
+        <type>const <ref refid="class_azura_1_1_log" kindref="compound">Log</ref></type>
+        <definition>const Log Azura::D3D12::D3D12PipelineFactory::log_D3D12RenderSystem</definition>
+        <argsstring></argsstring>
+        <name>log_D3D12RenderSystem</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Source/Azura/RenderSystem/Inc/D3D12/D3D12ScopedPipeline.h" line="46" column="1" bodyfile="Source/Azura/RenderSystem/Inc/D3D12/D3D12ScopedPipeline.h" bodystart="46" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="class_azura_1_1_d3_d12_1_1_d3_d12_pipeline_factory_1a7f1c53d20b0ebbfac59dd6b05ad89eba" prot="private" static="no" mutable="no">
+        <type>PipelineType</type>
+        <definition>PipelineType Azura::D3D12::D3D12PipelineFactory::m_type</definition>
+        <argsstring></argsstring>
+        <name>m_type</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Source/Azura/RenderSystem/Inc/D3D12/D3D12ScopedPipeline.h" line="48" column="1" bodyfile="Source/Azura/RenderSystem/Inc/D3D12/D3D12ScopedPipeline.h" bodystart="48" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="class_azura_1_1_d3_d12_1_1_d3_d12_pipeline_factory_1abbb8b7872214da209a608e3194adcf85" prot="private" static="no" mutable="no">
+        <type>std::map&lt; U32, BindingInfo &gt;</type>
+        <definition>std::map&lt;U32, BindingInfo&gt; Azura::D3D12::D3D12PipelineFactory::m_bindingMap</definition>
+        <argsstring></argsstring>
+        <name>m_bindingMap</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Source/Azura/RenderSystem/Inc/D3D12/D3D12ScopedPipeline.h" line="55" column="1" bodyfile="Source/Azura/RenderSystem/Inc/D3D12/D3D12ScopedPipeline.h" bodystart="55" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="class_azura_1_1_d3_d12_1_1_d3_d12_pipeline_factory_1a11ab03cc573cfe5b63516c09186a43bf" prot="private" static="no" mutable="no">
+        <type>D3D12_RASTERIZER_DESC</type>
+        <definition>D3D12_RASTERIZER_DESC Azura::D3D12::D3D12PipelineFactory::m_rasterizerDesc</definition>
+        <argsstring></argsstring>
+        <name>m_rasterizerDesc</name>
+        <initializer>{CD3DX12_RASTERIZER_DESC(D3D12_DEFAULT)}</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Source/Azura/RenderSystem/Inc/D3D12/D3D12ScopedPipeline.h" line="57" column="1" bodyfile="Source/Azura/RenderSystem/Inc/D3D12/D3D12ScopedPipeline.h" bodystart="57" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="class_azura_1_1_d3_d12_1_1_d3_d12_pipeline_factory_1a9e14302504d62f93d816ebf8386ed5ba" prot="private" static="no" mutable="no">
+        <type><ref refid="class_azura_1_1_containers_1_1_vector" kindref="compound">Containers::Vector</ref>&lt; D3D12_INPUT_ELEMENT_DESC &gt;</type>
+        <definition>Containers::Vector&lt;D3D12_INPUT_ELEMENT_DESC&gt; Azura::D3D12::D3D12PipelineFactory::m_inputElementDescs</definition>
+        <argsstring></argsstring>
+        <name>m_inputElementDescs</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Source/Azura/RenderSystem/Inc/D3D12/D3D12ScopedPipeline.h" line="59" column="1" bodyfile="Source/Azura/RenderSystem/Inc/D3D12/D3D12ScopedPipeline.h" bodystart="59" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="class_azura_1_1_d3_d12_1_1_d3_d12_pipeline_factory_1a5cef31d0398eddbaa0d7bcda5641f3b8" prot="private" static="no" mutable="no">
+        <type>std::optional&lt; D3D12_SHADER_BYTECODE &gt;</type>
+        <definition>std::optional&lt;D3D12_SHADER_BYTECODE&gt; Azura::D3D12::D3D12PipelineFactory::m_vertexShaderModule</definition>
+        <argsstring></argsstring>
+        <name>m_vertexShaderModule</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Source/Azura/RenderSystem/Inc/D3D12/D3D12ScopedPipeline.h" line="60" column="1" bodyfile="Source/Azura/RenderSystem/Inc/D3D12/D3D12ScopedPipeline.h" bodystart="60" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="class_azura_1_1_d3_d12_1_1_d3_d12_pipeline_factory_1a40e2d4956bb5d8154690850ed55a5176" prot="private" static="no" mutable="no">
+        <type>std::optional&lt; D3D12_SHADER_BYTECODE &gt;</type>
+        <definition>std::optional&lt;D3D12_SHADER_BYTECODE&gt; Azura::D3D12::D3D12PipelineFactory::m_pixelShaderModule</definition>
+        <argsstring></argsstring>
+        <name>m_pixelShaderModule</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Source/Azura/RenderSystem/Inc/D3D12/D3D12ScopedPipeline.h" line="61" column="1" bodyfile="Source/Azura/RenderSystem/Inc/D3D12/D3D12ScopedPipeline.h" bodystart="61" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="class_azura_1_1_d3_d12_1_1_d3_d12_pipeline_factory_1abcacce890c59c740c2e8e8f25c678378" prot="private" static="no" mutable="no">
+        <type>std::optional&lt; D3D12_SHADER_BYTECODE &gt;</type>
+        <definition>std::optional&lt;D3D12_SHADER_BYTECODE&gt; Azura::D3D12::D3D12PipelineFactory::m_computeShaderModule</definition>
+        <argsstring></argsstring>
+        <name>m_computeShaderModule</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Source/Azura/RenderSystem/Inc/D3D12/D3D12ScopedPipeline.h" line="62" column="1" bodyfile="Source/Azura/RenderSystem/Inc/D3D12/D3D12ScopedPipeline.h" bodystart="62" bodyend="-1"/>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="public-func">
+      <memberdef kind="function" id="class_azura_1_1_d3_d12_1_1_d3_d12_pipeline_factory_1ad62737ee5402582db2edd316ac6e067b" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>Azura::D3D12::D3D12PipelineFactory::D3D12PipelineFactory</definition>
+        <argsstring>(Memory::Allocator &amp;allocator, Log logger)</argsstring>
+        <name>D3D12PipelineFactory</name>
+        <param>
+          <type><ref refid="class_azura_1_1_memory_1_1_allocator" kindref="compound">Memory::Allocator</ref> &amp;</type>
+          <declname>allocator</declname>
+        </param>
+        <param>
+          <type><ref refid="class_azura_1_1_log" kindref="compound">Log</ref></type>
+          <declname>logger</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Source/Azura/RenderSystem/Inc/D3D12/D3D12ScopedPipeline.h" line="31" column="1" bodyfile="Source/Azura/RenderSystem/Src/D3D12/D3D12ScopedPipeline.cpp" bodystart="35" bodyend="39"/>
+      </memberdef>
+      <memberdef kind="function" id="class_azura_1_1_d3_d12_1_1_d3_d12_pipeline_factory_1a266eb75d608c484b75244d9b67f70c66" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="class_azura_1_1_d3_d12_1_1_d3_d12_pipeline_factory" kindref="compound">D3D12PipelineFactory</ref> &amp;</type>
+        <definition>D3D12PipelineFactory &amp; Azura::D3D12::D3D12PipelineFactory::SetPipelineType</definition>
+        <argsstring>(PipelineType type)</argsstring>
+        <name>SetPipelineType</name>
+        <param>
+          <type>PipelineType</type>
+          <declname>type</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Source/Azura/RenderSystem/Inc/D3D12/D3D12ScopedPipeline.h" line="33" column="1" bodyfile="Source/Azura/RenderSystem/Src/D3D12/D3D12ScopedPipeline.cpp" bodystart="41" bodyend="45"/>
+      </memberdef>
+      <memberdef kind="function" id="class_azura_1_1_d3_d12_1_1_d3_d12_pipeline_factory_1acda3d3e9b6d423469b72d1a0a0ef6d14" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="class_azura_1_1_d3_d12_1_1_d3_d12_pipeline_factory" kindref="compound">D3D12PipelineFactory</ref> &amp;</type>
+        <definition>D3D12PipelineFactory &amp; Azura::D3D12::D3D12PipelineFactory::BulkAddAttributeDescription</definition>
+        <argsstring>(const VertexSlot &amp;vertexSlot, U32 binding)</argsstring>
+        <name>BulkAddAttributeDescription</name>
+        <param>
+          <type>const <ref refid="struct_azura_1_1_vertex_slot" kindref="compound">VertexSlot</ref> &amp;</type>
+          <declname>vertexSlot</declname>
+        </param>
+        <param>
+          <type>U32</type>
+          <declname>binding</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Source/Azura/RenderSystem/Inc/D3D12/D3D12ScopedPipeline.h" line="35" column="1" bodyfile="Source/Azura/RenderSystem/Src/D3D12/D3D12ScopedPipeline.cpp" bodystart="47" bodyend="77"/>
+      </memberdef>
+      <memberdef kind="function" id="class_azura_1_1_d3_d12_1_1_d3_d12_pipeline_factory_1a0363fb00b02fb82195f9755c54f3554c" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="class_azura_1_1_d3_d12_1_1_d3_d12_pipeline_factory" kindref="compound">D3D12PipelineFactory</ref> &amp;</type>
+        <definition>D3D12PipelineFactory &amp; Azura::D3D12::D3D12PipelineFactory::SetRasterizerStage</definition>
+        <argsstring>(CullMode cullMode, FrontFace faceOrder)</argsstring>
+        <name>SetRasterizerStage</name>
+        <param>
+          <type>CullMode</type>
+          <declname>cullMode</declname>
+        </param>
+        <param>
+          <type>FrontFace</type>
+          <declname>faceOrder</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Source/Azura/RenderSystem/Inc/D3D12/D3D12ScopedPipeline.h" line="37" column="1" bodyfile="Source/Azura/RenderSystem/Src/D3D12/D3D12ScopedPipeline.cpp" bodystart="79" bodyend="87"/>
+      </memberdef>
+      <memberdef kind="function" id="class_azura_1_1_d3_d12_1_1_d3_d12_pipeline_factory_1adb5856ee2fd6e8a5e675277d987b8e75" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="class_azura_1_1_d3_d12_1_1_d3_d12_pipeline_factory" kindref="compound">D3D12PipelineFactory</ref> &amp;</type>
+        <definition>D3D12PipelineFactory &amp; Azura::D3D12::D3D12PipelineFactory::AddShaderStage</definition>
+        <argsstring>(const D3D12ScopedShader &amp;shader)</argsstring>
+        <name>AddShaderStage</name>
+        <param>
+          <type>const <ref refid="class_azura_1_1_d3_d12_1_1_d3_d12_scoped_shader" kindref="compound">D3D12ScopedShader</ref> &amp;</type>
+          <declname>shader</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Source/Azura/RenderSystem/Inc/D3D12/D3D12ScopedPipeline.h" line="39" column="1" bodyfile="Source/Azura/RenderSystem/Src/D3D12/D3D12ScopedPipeline.cpp" bodystart="89" bodyend="115"/>
+      </memberdef>
+      <memberdef kind="function" id="class_azura_1_1_d3_d12_1_1_d3_d12_pipeline_factory_1a87322a3ec39bbaf11f2245eeaf18f426" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void Azura::D3D12::D3D12PipelineFactory::Submit</definition>
+        <argsstring>(const Microsoft::WRL::ComPtr&lt; ID3D12Device &gt; &amp;device, const Containers::Vector&lt; std::reference_wrapper&lt; D3D12ScopedRenderPass &gt;&gt; &amp;renderPasses, Containers::Vector&lt; D3D12ScopedPipeline &gt; &amp;resultPipelines) const</argsstring>
+        <name>Submit</name>
+        <param>
+          <type>const Microsoft::WRL::ComPtr&lt; ID3D12Device &gt; &amp;</type>
+          <declname>device</declname>
+        </param>
+        <param>
+          <type>const <ref refid="class_azura_1_1_containers_1_1_vector" kindref="compound">Containers::Vector</ref>&lt; std::reference_wrapper&lt; <ref refid="class_azura_1_1_d3_d12_1_1_d3_d12_scoped_render_pass" kindref="compound">D3D12ScopedRenderPass</ref> &gt;&gt; &amp;</type>
+          <declname>renderPasses</declname>
+        </param>
+        <param>
+          <type><ref refid="class_azura_1_1_containers_1_1_vector" kindref="compound">Containers::Vector</ref>&lt; <ref refid="class_azura_1_1_d3_d12_1_1_d3_d12_scoped_pipeline" kindref="compound">D3D12ScopedPipeline</ref> &gt; &amp;</type>
+          <declname>resultPipelines</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Source/Azura/RenderSystem/Inc/D3D12/D3D12ScopedPipeline.h" line="41" column="1" bodyfile="Source/Azura/RenderSystem/Src/D3D12/D3D12ScopedPipeline.cpp" bodystart="117" bodyend="177"/>
+      </memberdef>
+      <memberdef kind="function" id="class_azura_1_1_d3_d12_1_1_d3_d12_pipeline_factory_1a353026029b2aa182168661ee18879f6b" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void Azura::D3D12::D3D12PipelineFactory::Submit</definition>
+        <argsstring>(const Microsoft::WRL::ComPtr&lt; ID3D12Device &gt; &amp;device, const Containers::Vector&lt; std::reference_wrapper&lt; D3D12ScopedComputePass &gt;&gt; &amp;computePasses, Containers::Vector&lt; D3D12ScopedPipeline &gt; &amp;resultPipelines) const</argsstring>
+        <name>Submit</name>
+        <param>
+          <type>const Microsoft::WRL::ComPtr&lt; ID3D12Device &gt; &amp;</type>
+          <declname>device</declname>
+        </param>
+        <param>
+          <type>const <ref refid="class_azura_1_1_containers_1_1_vector" kindref="compound">Containers::Vector</ref>&lt; std::reference_wrapper&lt; <ref refid="class_azura_1_1_d3_d12_1_1_d3_d12_scoped_compute_pass" kindref="compound">D3D12ScopedComputePass</ref> &gt;&gt; &amp;</type>
+          <declname>computePasses</declname>
+        </param>
+        <param>
+          <type><ref refid="class_azura_1_1_containers_1_1_vector" kindref="compound">Containers::Vector</ref>&lt; <ref refid="class_azura_1_1_d3_d12_1_1_d3_d12_scoped_pipeline" kindref="compound">D3D12ScopedPipeline</ref> &gt; &amp;</type>
+          <declname>resultPipelines</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Source/Azura/RenderSystem/Inc/D3D12/D3D12ScopedPipeline.h" line="43" column="1" bodyfile="Source/Azura/RenderSystem/Src/D3D12/D3D12ScopedPipeline.cpp" bodystart="179" bodyend="215"/>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <location file="Source/Azura/RenderSystem/Inc/D3D12/D3D12ScopedPipeline.h" line="29" column="1" bodyfile="Source/Azura/RenderSystem/Inc/D3D12/D3D12ScopedPipeline.h" bodystart="29" bodyend="63"/>
+    <listofallmembers>
+      <member refid="class_azura_1_1_d3_d12_1_1_d3_d12_pipeline_factory_1adb5856ee2fd6e8a5e675277d987b8e75" prot="public" virt="non-virtual"><scope>Azura::D3D12::D3D12PipelineFactory</scope><name>AddShaderStage</name></member>
+      <member refid="class_azura_1_1_d3_d12_1_1_d3_d12_pipeline_factory_1acda3d3e9b6d423469b72d1a0a0ef6d14" prot="public" virt="non-virtual"><scope>Azura::D3D12::D3D12PipelineFactory</scope><name>BulkAddAttributeDescription</name></member>
+      <member refid="class_azura_1_1_d3_d12_1_1_d3_d12_pipeline_factory_1ad62737ee5402582db2edd316ac6e067b" prot="public" virt="non-virtual"><scope>Azura::D3D12::D3D12PipelineFactory</scope><name>D3D12PipelineFactory</name></member>
+      <member refid="class_azura_1_1_d3_d12_1_1_d3_d12_pipeline_factory_1ab6626d400543b29e29144a6f38acda7b" prot="private" virt="non-virtual"><scope>Azura::D3D12::D3D12PipelineFactory</scope><name>log_D3D12RenderSystem</name></member>
+      <member refid="class_azura_1_1_d3_d12_1_1_d3_d12_pipeline_factory_1abbb8b7872214da209a608e3194adcf85" prot="private" virt="non-virtual"><scope>Azura::D3D12::D3D12PipelineFactory</scope><name>m_bindingMap</name></member>
+      <member refid="class_azura_1_1_d3_d12_1_1_d3_d12_pipeline_factory_1abcacce890c59c740c2e8e8f25c678378" prot="private" virt="non-virtual"><scope>Azura::D3D12::D3D12PipelineFactory</scope><name>m_computeShaderModule</name></member>
+      <member refid="class_azura_1_1_d3_d12_1_1_d3_d12_pipeline_factory_1a9e14302504d62f93d816ebf8386ed5ba" prot="private" virt="non-virtual"><scope>Azura::D3D12::D3D12PipelineFactory</scope><name>m_inputElementDescs</name></member>
+      <member refid="class_azura_1_1_d3_d12_1_1_d3_d12_pipeline_factory_1a40e2d4956bb5d8154690850ed55a5176" prot="private" virt="non-virtual"><scope>Azura::D3D12::D3D12PipelineFactory</scope><name>m_pixelShaderModule</name></member>
+      <member refid="class_azura_1_1_d3_d12_1_1_d3_d12_pipeline_factory_1a11ab03cc573cfe5b63516c09186a43bf" prot="private" virt="non-virtual"><scope>Azura::D3D12::D3D12PipelineFactory</scope><name>m_rasterizerDesc</name></member>
+      <member refid="class_azura_1_1_d3_d12_1_1_d3_d12_pipeline_factory_1a7f1c53d20b0ebbfac59dd6b05ad89eba" prot="private" virt="non-virtual"><scope>Azura::D3D12::D3D12PipelineFactory</scope><name>m_type</name></member>
+      <member refid="class_azura_1_1_d3_d12_1_1_d3_d12_pipeline_factory_1a5cef31d0398eddbaa0d7bcda5641f3b8" prot="private" virt="non-virtual"><scope>Azura::D3D12::D3D12PipelineFactory</scope><name>m_vertexShaderModule</name></member>
+      <member refid="class_azura_1_1_d3_d12_1_1_d3_d12_pipeline_factory_1a266eb75d608c484b75244d9b67f70c66" prot="public" virt="non-virtual"><scope>Azura::D3D12::D3D12PipelineFactory</scope><name>SetPipelineType</name></member>
+      <member refid="class_azura_1_1_d3_d12_1_1_d3_d12_pipeline_factory_1a0363fb00b02fb82195f9755c54f3554c" prot="public" virt="non-virtual"><scope>Azura::D3D12::D3D12PipelineFactory</scope><name>SetRasterizerStage</name></member>
+      <member refid="class_azura_1_1_d3_d12_1_1_d3_d12_pipeline_factory_1a87322a3ec39bbaf11f2245eeaf18f426" prot="public" virt="non-virtual"><scope>Azura::D3D12::D3D12PipelineFactory</scope><name>Submit</name></member>
+      <member refid="class_azura_1_1_d3_d12_1_1_d3_d12_pipeline_factory_1a353026029b2aa182168661ee18879f6b" prot="public" virt="non-virtual"><scope>Azura::D3D12::D3D12PipelineFactory</scope><name>Submit</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

@@ -1,0 +1,206 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.8.14">
+  <compounddef id="_samples_22___deferred_renderer_2_inc_2_app_2_common_8h" kind="file" language="C++">
+    <compoundname>Common.h</compoundname>
+    <includes refid="_core_8h" local="yes">Math/Core.h</includes>
+    <includes refid="_g_l_t_f_loader_8h" local="yes">AssetManager/GLTFLoader.h</includes>
+    <includedby refid="_app_8h" local="yes">Source/Samples/2_DeferredRenderer/Inc/App/App.h</includedby>
+    <includedby refid="_light_texture_8h" local="yes">Source/Samples/2_DeferredRenderer/Inc/App/LightTexture.h</includedby>
+    <includedby refid="_samples_22___deferred_renderer_2_inc_2_app_2_scene_8h" local="yes">Source/Samples/2_DeferredRenderer/Inc/App/Scene.h</includedby>
+    <incdepgraph>
+      <node id="3">
+        <label>Math/Core.h</label>
+        <link refid="_core_8h_source"/>
+        <childnode refid="4" relation="include">
+        </childnode>
+        <childnode refid="5" relation="include">
+        </childnode>
+      </node>
+      <node id="7">
+        <label>GLTFSDK/Document.h</label>
+      </node>
+      <node id="6">
+        <label>AssetManager/GLTFLoader.h</label>
+        <link refid="_g_l_t_f_loader_8h_source"/>
+        <childnode refid="5" relation="include">
+        </childnode>
+        <childnode refid="7" relation="include">
+        </childnode>
+        <childnode refid="8" relation="include">
+        </childnode>
+      </node>
+      <node id="2">
+        <label>Source/Samples/2_DeferredRenderer/Inc/App/Common.h</label>
+        <link refid="_samples_22___deferred_renderer_2_inc_2_app_2_common_8h"/>
+        <childnode refid="3" relation="include">
+        </childnode>
+        <childnode refid="6" relation="include">
+        </childnode>
+      </node>
+      <node id="5">
+        <label>Types.h</label>
+      </node>
+      <node id="8">
+        <label>GLTFSDK/GLTFResourceReader.h</label>
+      </node>
+      <node id="4">
+        <label>mathfu/matrix.h</label>
+      </node>
+    </incdepgraph>
+    <invincdepgraph>
+      <node id="12">
+        <label>Source/Samples/2_DeferredRenderer/Inc/Forward/ForwardComputeScene.h</label>
+        <link refid="_forward_compute_scene_8h_source"/>
+        <childnode refid="10" relation="include">
+        </childnode>
+      </node>
+      <node id="10">
+        <label>Source/Samples/2_DeferredRenderer/Inc/App/App.h</label>
+        <link refid="_app_8h_source"/>
+      </node>
+      <node id="14">
+        <label>Source/Samples/2_DeferredRenderer/Inc/ForwardPlus/ForwardPlusComputeScene.h</label>
+        <link refid="_forward_plus_compute_scene_8h_source"/>
+        <childnode refid="10" relation="include">
+        </childnode>
+      </node>
+      <node id="11">
+        <label>Source/Samples/2_DeferredRenderer/Inc/App/LightTexture.h</label>
+        <link refid="_light_texture_8h_source"/>
+        <childnode refid="10" relation="include">
+        </childnode>
+        <childnode refid="12" relation="include">
+        </childnode>
+        <childnode refid="13" relation="include">
+        </childnode>
+        <childnode refid="14" relation="include">
+        </childnode>
+      </node>
+      <node id="9">
+        <label>Source/Samples/2_DeferredRenderer/Inc/App/Common.h</label>
+        <link refid="_samples_22___deferred_renderer_2_inc_2_app_2_common_8h"/>
+        <childnode refid="10" relation="include">
+        </childnode>
+        <childnode refid="11" relation="include">
+        </childnode>
+        <childnode refid="15" relation="include">
+        </childnode>
+      </node>
+      <node id="13">
+        <label>Source/Samples/2_DeferredRenderer/Inc/Forward/ForwardScene.h</label>
+        <link refid="_forward_scene_8h_source"/>
+        <childnode refid="10" relation="include">
+        </childnode>
+      </node>
+      <node id="15">
+        <label>Source/Samples/2_DeferredRenderer/Inc/App/Scene.h</label>
+        <link refid="_samples_22___deferred_renderer_2_inc_2_app_2_scene_8h_source"/>
+        <childnode refid="10" relation="include">
+        </childnode>
+        <childnode refid="12" relation="include">
+        </childnode>
+        <childnode refid="13" relation="include">
+        </childnode>
+        <childnode refid="14" relation="include">
+        </childnode>
+      </node>
+    </invincdepgraph>
+    <innerclass refid="struct_azura_1_1_uniform_buffer_data" prot="public">Azura::UniformBufferData</innerclass>
+    <innerclass refid="struct_azura_1_1_point_light" prot="public">Azura::PointLight</innerclass>
+    <innerclass refid="struct_azura_1_1_mesh_object" prot="public">Azura::MeshObject</innerclass>
+    <innerclass refid="struct_azura_1_1_light_u_b_o" prot="public">Azura::LightUBO</innerclass>
+    <innerclass refid="struct_azura_1_1_plane" prot="public">Azura::Plane</innerclass>
+    <innerclass refid="struct_azura_1_1_frustum" prot="public">Azura::Frustum</innerclass>
+    <innernamespace refid="namespace_azura">Azura</innernamespace>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <programlisting>
+<codeline lineno="1"><highlight class="preprocessor">#pragma<sp/>once</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="2"><highlight class="normal"></highlight></codeline>
+<codeline lineno="3"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&quot;Math/Core.h&quot;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="4"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&quot;AssetManager/GLTFLoader.h&quot;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="5"><highlight class="normal"></highlight></codeline>
+<codeline lineno="6"><highlight class="normal"></highlight><highlight class="keyword">namespace<sp/></highlight><highlight class="normal"><ref refid="namespace_azura" kindref="compound">Azura</ref><sp/>{</highlight></codeline>
+<codeline lineno="7"><highlight class="normal"></highlight></codeline>
+<codeline lineno="8"><highlight class="normal">constexpr<sp/>U32<sp/>NUM_LIGHTS<sp/>=<sp/>256;</highlight></codeline>
+<codeline lineno="9"><highlight class="normal">constexpr<sp/>U32<sp/>MAX_LIGHTS_PER_CLUSTER<sp/>=<sp/>1020;</highlight></codeline>
+<codeline lineno="10"><highlight class="normal"></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>Vector3f<sp/>LIGHT_MIN<sp/>=<sp/>{-10.0f,<sp/>0.0f,<sp/>-5.0f<sp/>};</highlight></codeline>
+<codeline lineno="11"><highlight class="normal"></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>Vector3f<sp/>LIGHT_MAX<sp/>=<sp/>{<sp/>10.0f,<sp/>15.0f,<sp/>5.0f<sp/>};</highlight></codeline>
+<codeline lineno="12"><highlight class="normal">constexpr<sp/></highlight><highlight class="keywordtype">float</highlight><highlight class="normal"><sp/>LIGHT_RADIUS<sp/>=<sp/>5.0f;</highlight></codeline>
+<codeline lineno="13"><highlight class="normal">constexpr<sp/></highlight><highlight class="keywordtype">float</highlight><highlight class="normal"><sp/>LIGHT_DT<sp/>=<sp/>-2.5f;</highlight></codeline>
+<codeline lineno="14"><highlight class="normal"></highlight></codeline>
+<codeline lineno="15"><highlight class="normal">constexpr<sp/>U32<sp/>TILES_X<sp/>=<sp/>16;</highlight></codeline>
+<codeline lineno="16"><highlight class="normal">constexpr<sp/>U32<sp/>TILES_Y<sp/>=<sp/>16;</highlight></codeline>
+<codeline lineno="17"><highlight class="normal">constexpr<sp/>U32<sp/>TILES_Z<sp/>=<sp/>16;</highlight></codeline>
+<codeline lineno="18"><highlight class="normal"></highlight></codeline>
+<codeline lineno="19"><highlight class="normal">constexpr<sp/>U32<sp/>CLUSTER_PIXEL_HEIGHT<sp/>=<sp/>1<sp/>+<sp/>(MAX_LIGHTS_PER_CLUSTER<sp/>/<sp/>4);</highlight></codeline>
+<codeline lineno="20"><highlight class="normal"></highlight></codeline>
+<codeline lineno="21"><highlight class="normal">constexpr<sp/>U32<sp/>FPLUS_NUM_FRUSTRUMS<sp/>=<sp/>TILES_X<sp/>*<sp/>TILES_Y;</highlight></codeline>
+<codeline lineno="22"><highlight class="normal"></highlight></codeline>
+<codeline lineno="23"><highlight class="normal"></highlight><highlight class="keyword">struct<sp/></highlight><highlight class="normal">UniformBufferData<sp/>{</highlight></codeline>
+<codeline lineno="24"><highlight class="normal"><sp/><sp/>Matrix4f<sp/>m_model;</highlight></codeline>
+<codeline lineno="25"><highlight class="normal"><sp/><sp/>Matrix4f<sp/>m_modelInvTranspose;</highlight></codeline>
+<codeline lineno="26"><highlight class="normal"><sp/><sp/>Matrix4f<sp/>m_viewProj;</highlight></codeline>
+<codeline lineno="27"><highlight class="normal">};</highlight></codeline>
+<codeline lineno="28"><highlight class="normal"></highlight></codeline>
+<codeline lineno="29" refid="struct_azura_1_1_point_light" refkind="compound"><highlight class="normal"></highlight><highlight class="keyword">struct<sp/></highlight><highlight class="normal"><ref refid="struct_azura_1_1_point_light" kindref="compound">PointLight</ref><sp/>{</highlight></codeline>
+<codeline lineno="30"><highlight class="normal"><sp/><sp/>Vector3f<sp/>m_position;</highlight></codeline>
+<codeline lineno="31"><highlight class="normal"><sp/><sp/></highlight><highlight class="keywordtype">float</highlight><highlight class="normal"><sp/>m_radius;</highlight></codeline>
+<codeline lineno="32"><highlight class="normal"></highlight></codeline>
+<codeline lineno="33"><highlight class="normal"><sp/><sp/>Vector3f<sp/>m_color;</highlight></codeline>
+<codeline lineno="34"><highlight class="normal"><sp/><sp/></highlight><highlight class="keywordtype">float</highlight><highlight class="normal"><sp/>_pad;</highlight></codeline>
+<codeline lineno="35"><highlight class="normal">};</highlight></codeline>
+<codeline lineno="36"><highlight class="normal"></highlight></codeline>
+<codeline lineno="37" refid="struct_azura_1_1_mesh_object" refkind="compound"><highlight class="normal"></highlight><highlight class="keyword">struct<sp/></highlight><highlight class="normal"><ref refid="struct_azura_1_1_mesh_object" kindref="compound">MeshObject</ref></highlight></codeline>
+<codeline lineno="38"><highlight class="normal">{</highlight></codeline>
+<codeline lineno="39"><highlight class="normal"><sp/><sp/>std::unique_ptr&lt;GLTFMeshInterface&gt;<sp/>p_interface{</highlight><highlight class="keyword">nullptr</highlight><highlight class="normal">};</highlight></codeline>
+<codeline lineno="40"><highlight class="normal"></highlight></codeline>
+<codeline lineno="41"><highlight class="normal"><sp/><sp/>std::vector&lt;float&gt;<sp/>m_vertexData{};</highlight></codeline>
+<codeline lineno="42"><highlight class="normal"><sp/><sp/>std::vector&lt;float&gt;<sp/>m_normalData{};</highlight></codeline>
+<codeline lineno="43"><highlight class="normal"><sp/><sp/>std::vector&lt;float&gt;<sp/>m_uvData{};</highlight></codeline>
+<codeline lineno="44"><highlight class="normal"><sp/><sp/>std::vector&lt;U32&gt;<sp/>m_indexData{};</highlight></codeline>
+<codeline lineno="45"><highlight class="normal"></highlight></codeline>
+<codeline lineno="46"><highlight class="normal"><sp/><sp/>U32<sp/>m_numVertices{0};</highlight></codeline>
+<codeline lineno="47"><highlight class="normal"><sp/><sp/>U32<sp/>m_vertexDataSize{0};</highlight></codeline>
+<codeline lineno="48"><highlight class="normal"></highlight></codeline>
+<codeline lineno="49"><highlight class="normal"><sp/><sp/>U32<sp/>m_numIndices{0};</highlight></codeline>
+<codeline lineno="50"><highlight class="normal"><sp/><sp/>U32<sp/>m_indexDataSize{0};</highlight></codeline>
+<codeline lineno="51"><highlight class="normal"></highlight></codeline>
+<codeline lineno="52"><highlight class="normal"><sp/><sp/>U32<sp/>m_numUV{0};</highlight></codeline>
+<codeline lineno="53"><highlight class="normal"><sp/><sp/>U32<sp/>m_uvDataSize{0};</highlight></codeline>
+<codeline lineno="54"><highlight class="normal"></highlight></codeline>
+<codeline lineno="55"><highlight class="normal"><sp/><sp/>U32<sp/>m_numNormals{0};</highlight></codeline>
+<codeline lineno="56"><highlight class="normal"><sp/><sp/>U32<sp/>m_normalDataSize{0};</highlight></codeline>
+<codeline lineno="57"><highlight class="normal">};</highlight></codeline>
+<codeline lineno="58"><highlight class="normal"></highlight></codeline>
+<codeline lineno="59" refid="struct_azura_1_1_light_u_b_o" refkind="compound"><highlight class="normal"></highlight><highlight class="keyword">struct<sp/></highlight><highlight class="normal"><ref refid="struct_azura_1_1_light_u_b_o" kindref="compound">LightUBO</ref></highlight></codeline>
+<codeline lineno="60"><highlight class="normal">{</highlight></codeline>
+<codeline lineno="61"><highlight class="normal"><sp/><sp/>Matrix4f<sp/>m_view{};</highlight></codeline>
+<codeline lineno="62"><highlight class="normal"></highlight></codeline>
+<codeline lineno="63"><highlight class="normal"><sp/><sp/></highlight><highlight class="keywordtype">float</highlight><highlight class="normal"><sp/>m_nearPlane{0.0f};</highlight></codeline>
+<codeline lineno="64"><highlight class="normal"><sp/><sp/></highlight><highlight class="keywordtype">float</highlight><highlight class="normal"><sp/>m_farPlane{0.0f};</highlight></codeline>
+<codeline lineno="65"><highlight class="normal"><sp/><sp/></highlight><highlight class="keywordtype">float</highlight><highlight class="normal"><sp/>m_timeDelta{<sp/>0.0f<sp/>};</highlight></codeline>
+<codeline lineno="66"><highlight class="normal"><sp/><sp/></highlight><highlight class="keywordtype">float</highlight><highlight class="normal"><sp/>_pad1[1];</highlight></codeline>
+<codeline lineno="67"><highlight class="normal"></highlight></codeline>
+<codeline lineno="68"><highlight class="normal"><sp/><sp/>Matrix4f<sp/>m_proj{};</highlight></codeline>
+<codeline lineno="69"><highlight class="normal">};</highlight></codeline>
+<codeline lineno="70"><highlight class="normal"></highlight></codeline>
+<codeline lineno="71" refid="struct_azura_1_1_plane" refkind="compound"><highlight class="normal"></highlight><highlight class="keyword">struct<sp/></highlight><highlight class="normal"><ref refid="class_azura_1_1_math_1_1_plane" kindref="compound">Plane</ref></highlight></codeline>
+<codeline lineno="72"><highlight class="normal">{</highlight></codeline>
+<codeline lineno="73"><highlight class="normal"><sp/><sp/>Vector3f<sp/>m_normal;</highlight></codeline>
+<codeline lineno="74"><highlight class="normal"><sp/><sp/></highlight><highlight class="keywordtype">float</highlight><highlight class="normal"><sp/><sp/>m_distanceToOrigin;</highlight></codeline>
+<codeline lineno="75"><highlight class="normal">};</highlight></codeline>
+<codeline lineno="76"><highlight class="normal"></highlight></codeline>
+<codeline lineno="77" refid="struct_azura_1_1_frustum" refkind="compound"><highlight class="normal"></highlight><highlight class="keyword">struct<sp/></highlight><highlight class="normal"><ref refid="struct_azura_1_1_frustum" kindref="compound">Frustum</ref></highlight></codeline>
+<codeline lineno="78"><highlight class="normal">{</highlight></codeline>
+<codeline lineno="79"><highlight class="normal"><sp/><sp/><ref refid="class_azura_1_1_math_1_1_plane" kindref="compound">Plane</ref><sp/>m_planes[4];</highlight></codeline>
+<codeline lineno="80"><highlight class="normal">};</highlight></codeline>
+<codeline lineno="81"><highlight class="normal"></highlight></codeline>
+<codeline lineno="82"><highlight class="normal"></highlight></codeline>
+<codeline lineno="83"><highlight class="normal">}<sp/></highlight><highlight class="comment">//<sp/>namespace<sp/>Azura</highlight></codeline>
+    </programlisting>
+    <location file="Source/Samples/2_DeferredRenderer/Inc/App/Common.h"/>
+  </compounddef>
+</doxygen>

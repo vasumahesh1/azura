@@ -1,0 +1,232 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.8.14">
+  <compounddef id="class_azura_1_1_memory_1_1_stack_memory_buffer" kind="class" language="C++" prot="public" final="yes">
+    <compoundname>Azura::Memory::StackMemoryBuffer</compoundname>
+    <basecompoundref refid="class_azura_1_1_memory_1_1_memory_buffer" prot="public" virt="non-virtual">Azura::Memory::MemoryBuffer</basecompoundref>
+    <templateparamlist>
+      <param>
+        <type>U32</type>
+        <declname>Size</declname>
+        <defname>Size</defname>
+      </param>
+    </templateparamlist>
+      <sectiondef kind="private-attrib">
+      <memberdef kind="variable" id="class_azura_1_1_memory_1_1_stack_memory_buffer_1a2338e2d75f23f3945fd07307647a07ea" prot="private" static="no" mutable="no">
+        <type>U8</type>
+        <definition>U8 Azura::Memory::StackMemoryBuffer&lt; Size &gt;::m_buffer[Size]</definition>
+        <argsstring>[Size]</argsstring>
+        <name>m_buffer</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Source/Common/Inc/Memory/StackMemoryBuffer.h" line="31" column="1" bodyfile="Source/Common/Inc/Memory/StackMemoryBuffer.h" bodystart="31" bodyend="-1"/>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="public-func">
+      <memberdef kind="function" id="class_azura_1_1_memory_1_1_stack_memory_buffer_1a8294ee6cd78b89b7178ef8e26dc42298" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>Azura::Memory::StackMemoryBuffer&lt; Size &gt;::StackMemoryBuffer</definition>
+        <argsstring>()</argsstring>
+        <name>StackMemoryBuffer</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Source/Common/Inc/Memory/StackMemoryBuffer.h" line="15" column="1" bodyfile="Source/Common/Inc/Memory/StackMemoryBuffer.h" bodystart="35" bodyend="35"/>
+      </memberdef>
+      <memberdef kind="function" id="class_azura_1_1_memory_1_1_stack_memory_buffer_1ad5db955d50671172eef6a119d483e79f" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>Azura::Memory::StackMemoryBuffer&lt; Size &gt;::~StackMemoryBuffer</definition>
+        <argsstring>()=default</argsstring>
+        <name>~StackMemoryBuffer</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Source/Common/Inc/Memory/StackMemoryBuffer.h" line="16" column="1"/>
+      </memberdef>
+      <memberdef kind="function" id="class_azura_1_1_memory_1_1_stack_memory_buffer_1a14b02e5ac7cbdd7643860c94263f2d4a" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>Azura::Memory::StackMemoryBuffer&lt; Size &gt;::StackMemoryBuffer</definition>
+        <argsstring>(const StackMemoryBuffer &amp;other)=delete</argsstring>
+        <name>StackMemoryBuffer</name>
+        <param>
+          <type>const <ref refid="class_azura_1_1_memory_1_1_stack_memory_buffer" kindref="compound">StackMemoryBuffer</ref> &amp;</type>
+          <declname>other</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Source/Common/Inc/Memory/StackMemoryBuffer.h" line="19" column="1"/>
+      </memberdef>
+      <memberdef kind="function" id="class_azura_1_1_memory_1_1_stack_memory_buffer_1ac71fde98be79b8010deb583dd3e5604a" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="class_azura_1_1_memory_1_1_stack_memory_buffer" kindref="compound">StackMemoryBuffer</ref> &amp;</type>
+        <definition>StackMemoryBuffer&amp; Azura::Memory::StackMemoryBuffer&lt; Size &gt;::operator=</definition>
+        <argsstring>(const StackMemoryBuffer &amp;other)=delete</argsstring>
+        <name>operator=</name>
+        <param>
+          <type>const <ref refid="class_azura_1_1_memory_1_1_stack_memory_buffer" kindref="compound">StackMemoryBuffer</ref> &amp;</type>
+          <declname>other</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Source/Common/Inc/Memory/StackMemoryBuffer.h" line="21" column="1"/>
+      </memberdef>
+      <memberdef kind="function" id="class_azura_1_1_memory_1_1_stack_memory_buffer_1a6f3f28db5146e3eea2392cb28e18374f" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>Azura::Memory::StackMemoryBuffer&lt; Size &gt;::StackMemoryBuffer</definition>
+        <argsstring>(StackMemoryBuffer &amp;&amp;other) noexcept=default</argsstring>
+        <name>StackMemoryBuffer</name>
+        <param>
+          <type><ref refid="class_azura_1_1_memory_1_1_stack_memory_buffer" kindref="compound">StackMemoryBuffer</ref> &amp;&amp;</type>
+          <declname>other</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Source/Common/Inc/Memory/StackMemoryBuffer.h" line="23" column="1"/>
+      </memberdef>
+      <memberdef kind="function" id="class_azura_1_1_memory_1_1_stack_memory_buffer_1a3a535e385198bcc28d827107fc2f7c03" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="class_azura_1_1_memory_1_1_stack_memory_buffer" kindref="compound">StackMemoryBuffer</ref> &amp;</type>
+        <definition>StackMemoryBuffer&amp; Azura::Memory::StackMemoryBuffer&lt; Size &gt;::operator=</definition>
+        <argsstring>(StackMemoryBuffer &amp;&amp;other) noexcept=default</argsstring>
+        <name>operator=</name>
+        <param>
+          <type><ref refid="class_azura_1_1_memory_1_1_stack_memory_buffer" kindref="compound">StackMemoryBuffer</ref> &amp;&amp;</type>
+          <declname>other</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Source/Common/Inc/Memory/StackMemoryBuffer.h" line="24" column="1"/>
+      </memberdef>
+      <memberdef kind="function" id="class_azura_1_1_memory_1_1_stack_memory_buffer_1a722df44ade3e3a72f00ab22766d39d70" prot="public" static="no" const="no" explicit="no" inline="no" virt="virtual">
+        <type>void *</type>
+        <definition>void * Azura::Memory::StackMemoryBuffer&lt; Size &gt;::Allocate</definition>
+        <argsstring>(U32 size) override</argsstring>
+        <name>Allocate</name>
+        <reimplements refid="class_azura_1_1_memory_1_1_memory_buffer_1a935667d928738bd604f6087229a13396">Allocate</reimplements>
+        <param>
+          <type>U32</type>
+          <declname>size</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Source/Common/Inc/Memory/StackMemoryBuffer.h" line="26" column="1" bodyfile="Source/Common/Inc/Memory/StackMemoryBuffer.h" bodystart="38" bodyend="43"/>
+      </memberdef>
+      <memberdef kind="function" id="class_azura_1_1_memory_1_1_stack_memory_buffer_1acfb03af94aec98a5768876e479fe1131" prot="public" static="no" const="no" explicit="no" inline="no" virt="virtual">
+        <type>void</type>
+        <definition>void Azura::Memory::StackMemoryBuffer&lt; Size &gt;::Deallocate</definition>
+        <argsstring>(void *address) override</argsstring>
+        <name>Deallocate</name>
+        <reimplements refid="class_azura_1_1_memory_1_1_memory_buffer_1a8dcb91c18e45529d50cfb501d1345833">Deallocate</reimplements>
+        <param>
+          <type>void *</type>
+          <declname>address</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Source/Common/Inc/Memory/StackMemoryBuffer.h" line="27" column="1" bodyfile="Source/Common/Inc/Memory/StackMemoryBuffer.h" bodystart="46" bodyend="48"/>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="private-func">
+      <memberdef kind="function" id="class_azura_1_1_memory_1_1_stack_memory_buffer_1a8a9adf254dc5d356f7cde3cd3746dde2" prot="private" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>UPTR</type>
+        <definition>UPTR Azura::Memory::StackMemoryBuffer&lt; Size &gt;::AllocateRaw</definition>
+        <argsstring>(U32 size)</argsstring>
+        <name>AllocateRaw</name>
+        <param>
+          <type>U32</type>
+          <declname>size</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Source/Common/Inc/Memory/StackMemoryBuffer.h" line="30" column="1" bodyfile="Source/Common/Inc/Memory/StackMemoryBuffer.h" bodystart="51" bodyend="61"/>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <inheritancegraph>
+      <node id="537">
+        <label>Azura::Memory::MemoryBuffer</label>
+        <link refid="class_azura_1_1_memory_1_1_memory_buffer"/>
+      </node>
+      <node id="536">
+        <label>Azura::Memory::StackMemoryBuffer&lt; Size &gt;</label>
+        <link refid="class_azura_1_1_memory_1_1_stack_memory_buffer"/>
+        <childnode refid="537" relation="public-inheritance">
+        </childnode>
+      </node>
+    </inheritancegraph>
+    <collaborationgraph>
+      <node id="539">
+        <label>Azura::Memory::MemoryBuffer</label>
+        <link refid="class_azura_1_1_memory_1_1_memory_buffer"/>
+      </node>
+      <node id="538">
+        <label>Azura::Memory::StackMemoryBuffer&lt; Size &gt;</label>
+        <link refid="class_azura_1_1_memory_1_1_stack_memory_buffer"/>
+        <childnode refid="539" relation="public-inheritance">
+        </childnode>
+      </node>
+    </collaborationgraph>
+    <location file="Source/Common/Inc/Memory/StackMemoryBuffer.h" line="13" column="1" bodyfile="Source/Common/Inc/Memory/StackMemoryBuffer.h" bodystart="13" bodyend="32"/>
+    <listofallmembers>
+      <member refid="class_azura_1_1_memory_1_1_stack_memory_buffer_1a722df44ade3e3a72f00ab22766d39d70" prot="public" virt="virtual"><scope>Azura::Memory::StackMemoryBuffer</scope><name>Allocate</name></member>
+      <member refid="class_azura_1_1_memory_1_1_stack_memory_buffer_1a8a9adf254dc5d356f7cde3cd3746dde2" prot="private" virt="non-virtual"><scope>Azura::Memory::StackMemoryBuffer</scope><name>AllocateRaw</name></member>
+      <member refid="class_azura_1_1_memory_1_1_stack_memory_buffer_1acfb03af94aec98a5768876e479fe1131" prot="public" virt="virtual"><scope>Azura::Memory::StackMemoryBuffer</scope><name>Deallocate</name></member>
+      <member refid="class_azura_1_1_memory_1_1_stack_memory_buffer_1a2338e2d75f23f3945fd07307647a07ea" prot="private" virt="non-virtual"><scope>Azura::Memory::StackMemoryBuffer</scope><name>m_buffer</name></member>
+      <member refid="class_azura_1_1_memory_1_1_memory_buffer_1ac38b3863bc067031d1ebbee9ad4244c7" prot="protected" virt="non-virtual"><scope>Azura::Memory::StackMemoryBuffer</scope><name>m_currentPosition</name></member>
+      <member refid="class_azura_1_1_memory_1_1_memory_buffer_1aeb35b2e5e532ef4b0bb44213dc2bc32e" prot="protected" virt="non-virtual"><scope>Azura::Memory::StackMemoryBuffer</scope><name>m_memoryBlock</name></member>
+      <member refid="class_azura_1_1_memory_1_1_memory_buffer_1aa8344c7f79dc35e5e4e56fcded5db1f5" prot="protected" virt="non-virtual"><scope>Azura::Memory::StackMemoryBuffer</scope><name>m_size</name></member>
+      <member refid="class_azura_1_1_memory_1_1_memory_buffer_1a2107e3d534cb2173b91ebd0b02b7cf1b" prot="public" virt="non-virtual"><scope>Azura::Memory::StackMemoryBuffer</scope><name>MemoryBuffer</name></member>
+      <member refid="class_azura_1_1_memory_1_1_memory_buffer_1a126b73d468aeed82ccd2ebca1d99b44f" prot="public" virt="non-virtual"><scope>Azura::Memory::StackMemoryBuffer</scope><name>MemoryBuffer</name></member>
+      <member refid="class_azura_1_1_memory_1_1_memory_buffer_1ae592bf9de8bb82748a29800807afba55" prot="public" virt="non-virtual"><scope>Azura::Memory::StackMemoryBuffer</scope><name>MemoryBuffer</name></member>
+      <member refid="class_azura_1_1_memory_1_1_memory_buffer_1ae8ff4261854c8c32e52adae4dd00b35b" prot="public" virt="non-virtual"><scope>Azura::Memory::StackMemoryBuffer</scope><name>MemoryBuffer</name></member>
+      <member refid="class_azura_1_1_memory_1_1_memory_buffer_1a9ee5f08674543e04f76dd1a8c9f37714" prot="public" virt="non-virtual"><scope>Azura::Memory::StackMemoryBuffer</scope><name>MemoryBuffer</name></member>
+      <member refid="class_azura_1_1_memory_1_1_stack_memory_buffer_1ac71fde98be79b8010deb583dd3e5604a" prot="public" virt="non-virtual"><scope>Azura::Memory::StackMemoryBuffer</scope><name>operator=</name></member>
+      <member refid="class_azura_1_1_memory_1_1_stack_memory_buffer_1a3a535e385198bcc28d827107fc2f7c03" prot="public" virt="non-virtual"><scope>Azura::Memory::StackMemoryBuffer</scope><name>operator=</name></member>
+      <member refid="class_azura_1_1_memory_1_1_memory_buffer_1acf1033a54da648b987b3e94b79a76444" prot="public" virt="non-virtual" ambiguityscope="Azura::Memory::MemoryBuffer::"><scope>Azura::Memory::StackMemoryBuffer</scope><name>operator=</name></member>
+      <member refid="class_azura_1_1_memory_1_1_memory_buffer_1a2be9ceadac3a0bcd12b836a82f6f9efc" prot="public" virt="non-virtual" ambiguityscope="Azura::Memory::MemoryBuffer::"><scope>Azura::Memory::StackMemoryBuffer</scope><name>operator=</name></member>
+      <member refid="class_azura_1_1_memory_1_1_stack_memory_buffer_1a8294ee6cd78b89b7178ef8e26dc42298" prot="public" virt="non-virtual"><scope>Azura::Memory::StackMemoryBuffer</scope><name>StackMemoryBuffer</name></member>
+      <member refid="class_azura_1_1_memory_1_1_stack_memory_buffer_1a14b02e5ac7cbdd7643860c94263f2d4a" prot="public" virt="non-virtual"><scope>Azura::Memory::StackMemoryBuffer</scope><name>StackMemoryBuffer</name></member>
+      <member refid="class_azura_1_1_memory_1_1_stack_memory_buffer_1a6f3f28db5146e3eea2392cb28e18374f" prot="public" virt="non-virtual"><scope>Azura::Memory::StackMemoryBuffer</scope><name>StackMemoryBuffer</name></member>
+      <member refid="class_azura_1_1_memory_1_1_memory_buffer_1ac57184a3ed195b257daab76f4e1ee2b9" prot="public" virt="virtual"><scope>Azura::Memory::StackMemoryBuffer</scope><name>~MemoryBuffer</name></member>
+      <member refid="class_azura_1_1_memory_1_1_stack_memory_buffer_1ad5db955d50671172eef6a119d483e79f" prot="public" virt="non-virtual"><scope>Azura::Memory::StackMemoryBuffer</scope><name>~StackMemoryBuffer</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

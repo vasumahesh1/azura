@@ -1,0 +1,128 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.8.14">
+  <compounddef id="struct_azura_1_1_buffer_info" kind="struct" language="C++" prot="public">
+    <compoundname>Azura::BufferInfo</compoundname>
+    <derivedcompoundref refid="struct_azura_1_1_buffer_target_info" prot="public" virt="non-virtual">Azura::BufferTargetInfo</derivedcompoundref>
+    <derivedcompoundref refid="struct_azura_1_1_texture_buffer_info" prot="public" virt="non-virtual">Azura::TextureBufferInfo</derivedcompoundref>
+    <derivedcompoundref refid="struct_azura_1_1_uniform_buffer_info" prot="public" virt="non-virtual">Azura::UniformBufferInfo</derivedcompoundref>
+      <sectiondef kind="public-attrib">
+      <memberdef kind="variable" id="struct_azura_1_1_buffer_info_1a68df2d2e92031bc7003f45db66ac9679" prot="public" static="no" mutable="no">
+        <type>U32</type>
+        <definition>U32 Azura::BufferInfo::m_offset</definition>
+        <argsstring></argsstring>
+        <name>m_offset</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Source/Azura/RenderSystem/Inc/Generic/GenericTypes.h" line="293" column="1" bodyfile="Source/Azura/RenderSystem/Inc/Generic/GenericTypes.h" bodystart="293" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="struct_azura_1_1_buffer_info_1af443f3e9c2a71cde4bfbe4959237d2e3" prot="public" static="no" mutable="no">
+        <type>U32</type>
+        <definition>U32 Azura::BufferInfo::m_byteSize</definition>
+        <argsstring></argsstring>
+        <name>m_byteSize</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Source/Azura/RenderSystem/Inc/Generic/GenericTypes.h" line="294" column="1" bodyfile="Source/Azura/RenderSystem/Inc/Generic/GenericTypes.h" bodystart="294" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="struct_azura_1_1_buffer_info_1abb062997c2b354590b2aaf7d1abe0c9d" prot="public" static="no" mutable="no">
+        <type>U32</type>
+        <definition>U32 Azura::BufferInfo::m_maxByteSize</definition>
+        <argsstring></argsstring>
+        <name>m_maxByteSize</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Source/Azura/RenderSystem/Inc/Generic/GenericTypes.h" line="295" column="1" bodyfile="Source/Azura/RenderSystem/Inc/Generic/GenericTypes.h" bodystart="295" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="struct_azura_1_1_buffer_info_1a8570fd644b18dcac21aaab12423d93dc" prot="public" static="no" mutable="no">
+        <type>U32</type>
+        <definition>U32 Azura::BufferInfo::m_binding</definition>
+        <argsstring></argsstring>
+        <name>m_binding</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Source/Azura/RenderSystem/Inc/Generic/GenericTypes.h" line="296" column="1" bodyfile="Source/Azura/RenderSystem/Inc/Generic/GenericTypes.h" bodystart="296" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="struct_azura_1_1_buffer_info_1ab304f58232f7514cf83d5d614ad5555d" prot="public" static="no" mutable="no">
+        <type>U32</type>
+        <definition>U32 Azura::BufferInfo::m_sourceBufferId</definition>
+        <argsstring></argsstring>
+        <name>m_sourceBufferId</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Source/Azura/RenderSystem/Inc/Generic/GenericTypes.h" line="297" column="1" bodyfile="Source/Azura/RenderSystem/Inc/Generic/GenericTypes.h" bodystart="297" bodyend="-1"/>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="public-func">
+      <memberdef kind="function" id="struct_azura_1_1_buffer_info_1a15f674e2f8b0c828ee698ae75105f5a8" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type></type>
+        <definition>Azura::BufferInfo::BufferInfo</definition>
+        <argsstring>()</argsstring>
+        <name>BufferInfo</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Source/Azura/RenderSystem/Inc/Generic/GenericTypes.h" line="299" column="1" bodyfile="Source/Azura/RenderSystem/Inc/Generic/GenericTypes.h" bodystart="299" bodyend="305"/>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <inheritancegraph>
+      <node id="55">
+        <label>Azura::TextureBufferInfo</label>
+        <link refid="struct_azura_1_1_texture_buffer_info"/>
+        <childnode refid="53" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="54">
+        <label>Azura::BufferTargetInfo</label>
+        <link refid="struct_azura_1_1_buffer_target_info"/>
+        <childnode refid="53" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="56">
+        <label>Azura::UniformBufferInfo</label>
+        <link refid="struct_azura_1_1_uniform_buffer_info"/>
+        <childnode refid="53" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="53">
+        <label>Azura::BufferInfo</label>
+        <link refid="struct_azura_1_1_buffer_info"/>
+      </node>
+    </inheritancegraph>
+    <location file="Source/Azura/RenderSystem/Inc/Generic/GenericTypes.h" line="292" column="1" bodyfile="Source/Azura/RenderSystem/Inc/Generic/GenericTypes.h" bodystart="292" bodyend="306"/>
+    <listofallmembers>
+      <member refid="struct_azura_1_1_buffer_info_1a15f674e2f8b0c828ee698ae75105f5a8" prot="public" virt="non-virtual"><scope>Azura::BufferInfo</scope><name>BufferInfo</name></member>
+      <member refid="struct_azura_1_1_buffer_info_1a8570fd644b18dcac21aaab12423d93dc" prot="public" virt="non-virtual"><scope>Azura::BufferInfo</scope><name>m_binding</name></member>
+      <member refid="struct_azura_1_1_buffer_info_1af443f3e9c2a71cde4bfbe4959237d2e3" prot="public" virt="non-virtual"><scope>Azura::BufferInfo</scope><name>m_byteSize</name></member>
+      <member refid="struct_azura_1_1_buffer_info_1abb062997c2b354590b2aaf7d1abe0c9d" prot="public" virt="non-virtual"><scope>Azura::BufferInfo</scope><name>m_maxByteSize</name></member>
+      <member refid="struct_azura_1_1_buffer_info_1a68df2d2e92031bc7003f45db66ac9679" prot="public" virt="non-virtual"><scope>Azura::BufferInfo</scope><name>m_offset</name></member>
+      <member refid="struct_azura_1_1_buffer_info_1ab304f58232f7514cf83d5d614ad5555d" prot="public" virt="non-virtual"><scope>Azura::BufferInfo</scope><name>m_sourceBufferId</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

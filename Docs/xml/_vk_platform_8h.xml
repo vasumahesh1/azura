@@ -1,0 +1,136 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.8.14">
+  <compounddef id="_vk_platform_8h" kind="file" language="C++">
+    <compoundname>VkPlatform.h</compoundname>
+    <includes local="no">vulkan/vulkan_core.h</includes>
+    <includes refid="_vector_8h" local="yes">Containers/Vector.h</includes>
+    <includes refid="_log_8h" local="yes">Log/Log.h</includes>
+    <includedby refid="_vk_renderer_8h" local="yes">Source/Azura/RenderSystem/Inc/Vulkan/VkRenderer.h</includedby>
+    <includedby refid="_vk_win32_platform_8cpp" local="yes">Source/Azura/RenderSystem/Src/Vulkan/Windows/VkWin32Platform.cpp</includedby>
+    <incdepgraph>
+      <node id="1454">
+        <label>functional</label>
+      </node>
+      <node id="1455">
+        <label>iterator</label>
+      </node>
+      <node id="1457">
+        <label>Memory/Allocator.h</label>
+        <link refid="_allocator_8h_source"/>
+        <childnode refid="1454" relation="include">
+        </childnode>
+        <childnode refid="1458" relation="include">
+        </childnode>
+        <childnode refid="1459" relation="include">
+        </childnode>
+      </node>
+      <node id="1452">
+        <label>cassert</label>
+      </node>
+      <node id="1449">
+        <label>Source/Azura/RenderSystem/Inc/Vulkan/VkPlatform.h</label>
+        <link refid="_vk_platform_8h"/>
+        <childnode refid="1450" relation="include">
+        </childnode>
+        <childnode refid="1451" relation="include">
+        </childnode>
+        <childnode refid="1460" relation="include">
+        </childnode>
+      </node>
+      <node id="1459">
+        <label>Utils/Macros.h</label>
+        <link refid="_macros_8h_source"/>
+      </node>
+      <node id="1456">
+        <label>Array.h</label>
+        <link refid="_array_8h_source"/>
+        <childnode refid="1452" relation="include">
+        </childnode>
+        <childnode refid="1453" relation="include">
+        </childnode>
+        <childnode refid="1457" relation="include">
+        </childnode>
+        <childnode refid="1458" relation="include">
+        </childnode>
+      </node>
+      <node id="1461">
+        <label>vector</label>
+      </node>
+      <node id="1451">
+        <label>Containers/Vector.h</label>
+        <link refid="_vector_8h_source"/>
+        <childnode refid="1452" relation="include">
+        </childnode>
+        <childnode refid="1453" relation="include">
+        </childnode>
+        <childnode refid="1454" relation="include">
+        </childnode>
+        <childnode refid="1455" relation="include">
+        </childnode>
+        <childnode refid="1456" relation="include">
+        </childnode>
+        <childnode refid="1457" relation="include">
+        </childnode>
+        <childnode refid="1458" relation="include">
+        </childnode>
+        <childnode refid="1459" relation="include">
+        </childnode>
+      </node>
+      <node id="1460">
+        <label>Log/Log.h</label>
+        <link refid="_log_8h_source"/>
+        <childnode refid="1458" relation="include">
+        </childnode>
+        <childnode refid="1461" relation="include">
+        </childnode>
+      </node>
+      <node id="1450">
+        <label>vulkan/vulkan_core.h</label>
+      </node>
+      <node id="1458">
+        <label>Types.h</label>
+      </node>
+      <node id="1453">
+        <label>cstring</label>
+      </node>
+    </incdepgraph>
+    <invincdepgraph>
+      <node id="1462">
+        <label>Source/Azura/RenderSystem/Inc/Vulkan/VkPlatform.h</label>
+        <link refid="_vk_platform_8h"/>
+        <childnode refid="1463" relation="include">
+        </childnode>
+      </node>
+      <node id="1463">
+        <label>Source/Azura/RenderSystem/Inc/Vulkan/VkRenderer.h</label>
+        <link refid="_vk_renderer_8h_source"/>
+      </node>
+    </invincdepgraph>
+    <innernamespace refid="namespace_azura">Azura</innernamespace>
+    <innernamespace refid="namespace_azura_1_1_vulkan">Azura::Vulkan</innernamespace>
+    <innernamespace refid="namespace_azura_1_1_vulkan_1_1_vk_platform">Azura::Vulkan::VkPlatform</innernamespace>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <programlisting>
+<codeline lineno="1"><highlight class="preprocessor">#pragma<sp/>once</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="2"><highlight class="normal"></highlight></codeline>
+<codeline lineno="3"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&lt;vulkan/vulkan_core.h&gt;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="4"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&quot;Containers/Vector.h&quot;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="5"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&quot;Log/Log.h&quot;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="6"><highlight class="normal"></highlight></codeline>
+<codeline lineno="7"><highlight class="normal"></highlight><highlight class="keyword">namespace<sp/></highlight><highlight class="normal"><ref refid="namespace_azura" kindref="compound">Azura</ref><sp/>{</highlight></codeline>
+<codeline lineno="8"><highlight class="normal"></highlight><highlight class="keyword">namespace<sp/></highlight><highlight class="normal">Vulkan<sp/>{</highlight></codeline>
+<codeline lineno="9"><highlight class="normal"></highlight></codeline>
+<codeline lineno="10"><highlight class="normal"></highlight><highlight class="keyword">namespace<sp/></highlight><highlight class="normal">VkPlatform<sp/>{</highlight></codeline>
+<codeline lineno="11"><highlight class="normal">VkSurfaceKHR<sp/>CreateSurface(</highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal">*<sp/>windowHandle,<sp/>VkInstance<sp/>instance,<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>Log&amp;<sp/>log_VulkanRenderSystem);</highlight></codeline>
+<codeline lineno="12"><highlight class="normal"></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/>GetInstanceExtensions(Containers::Vector&lt;const<sp/>char*&gt;&amp;<sp/>extensions);</highlight></codeline>
+<codeline lineno="13"><highlight class="normal">}<sp/><sp/></highlight><highlight class="comment">//<sp/>namespace<sp/>VkPlatform</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="14"><highlight class="normal"></highlight></codeline>
+<codeline lineno="15"><highlight class="normal">}<sp/><sp/></highlight><highlight class="comment">//<sp/>namespace<sp/>Vulkan</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="16"><highlight class="normal">}<sp/><sp/></highlight><highlight class="comment">//<sp/>namespace<sp/>Azura</highlight><highlight class="normal"></highlight></codeline>
+    </programlisting>
+    <location file="Source/Azura/RenderSystem/Inc/Vulkan/VkPlatform.h"/>
+  </compounddef>
+</doxygen>

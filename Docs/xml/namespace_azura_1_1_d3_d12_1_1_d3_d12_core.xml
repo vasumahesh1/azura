@@ -1,0 +1,137 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.8.14">
+  <compounddef id="namespace_azura_1_1_d3_d12_1_1_d3_d12_core" kind="namespace" language="C++">
+    <compoundname>Azura::D3D12::D3D12Core</compoundname>
+      <sectiondef kind="func">
+      <memberdef kind="function" id="_d3_d12_core_8h_1a071f3c01402983c2d1691e0a646b1c0b" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>Microsoft::WRL::ComPtr&lt; IDXGISwapChain1 &gt;</type>
+        <definition>Microsoft::WRL::ComPtr&lt;IDXGISwapChain1&gt; Azura::D3D12::D3D12Core::CreateSwapChain</definition>
+        <argsstring>(const Microsoft::WRL::ComPtr&lt; IDXGIFactory4 &gt; &amp;factory, const Microsoft::WRL::ComPtr&lt; ID3D12CommandQueue &gt; &amp;commandQueue, const void *windowHandle, const SwapChainRequirements &amp;swapChainRequirements, const Log &amp;log_D3D12RenderSystem)</argsstring>
+        <name>CreateSwapChain</name>
+        <param>
+          <type>const Microsoft::WRL::ComPtr&lt; IDXGIFactory4 &gt; &amp;</type>
+          <declname>factory</declname>
+        </param>
+        <param>
+          <type>const Microsoft::WRL::ComPtr&lt; ID3D12CommandQueue &gt; &amp;</type>
+          <declname>commandQueue</declname>
+        </param>
+        <param>
+          <type>const void *</type>
+          <declname>windowHandle</declname>
+        </param>
+        <param>
+          <type>const <ref refid="struct_azura_1_1_swap_chain_requirements" kindref="compound">SwapChainRequirements</ref> &amp;</type>
+          <declname>swapChainRequirements</declname>
+        </param>
+        <param>
+          <type>const <ref refid="class_azura_1_1_log" kindref="compound">Log</ref> &amp;</type>
+          <declname>log_D3D12RenderSystem</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Source/Azura/RenderSystem/Inc/D3D12/D3D12Core.h" line="25" column="1"/>
+      </memberdef>
+      <memberdef kind="function" id="_d3_d12_core_8h_1afb363abbc84d676b13d340f55034fc89" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void Azura::D3D12::D3D12Core::GetHardwareAdapter</definition>
+        <argsstring>(IDXGIFactory2 *pFactory, IDXGIAdapter1 **ppAdapter, const Log &amp;log_D3D12RenderSystem)</argsstring>
+        <name>GetHardwareAdapter</name>
+        <param>
+          <type>IDXGIFactory2 *</type>
+          <declname>pFactory</declname>
+        </param>
+        <param>
+          <type>IDXGIAdapter1 **</type>
+          <declname>ppAdapter</declname>
+        </param>
+        <param>
+          <type>const <ref refid="class_azura_1_1_log" kindref="compound">Log</ref> &amp;</type>
+          <declname>log_D3D12RenderSystem</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Source/Azura/RenderSystem/Inc/D3D12/D3D12Core.h" line="31" column="1" bodyfile="Source/Azura/RenderSystem/Src/D3D12/D3D12Core.cpp" bodystart="51" bodyend="88"/>
+      </memberdef>
+      <memberdef kind="function" id="_d3_d12_core_8h_1ac972eba51f5500a4e97d0cd07d057c83" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void Azura::D3D12::D3D12Core::CopyBuffer</definition>
+        <argsstring>(ID3D12GraphicsCommandList *commandList, const D3D12ScopedBuffer &amp;dest, const D3D12ScopedBuffer &amp;src, UINT64 size)</argsstring>
+        <name>CopyBuffer</name>
+        <param>
+          <type>ID3D12GraphicsCommandList *</type>
+          <declname>commandList</declname>
+        </param>
+        <param>
+          <type>const <ref refid="class_azura_1_1_d3_d12_1_1_d3_d12_scoped_buffer" kindref="compound">D3D12ScopedBuffer</ref> &amp;</type>
+          <declname>dest</declname>
+        </param>
+        <param>
+          <type>const <ref refid="class_azura_1_1_d3_d12_1_1_d3_d12_scoped_buffer" kindref="compound">D3D12ScopedBuffer</ref> &amp;</type>
+          <declname>src</declname>
+        </param>
+        <param>
+          <type>UINT64</type>
+          <declname>size</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Source/Azura/RenderSystem/Inc/D3D12/D3D12Core.h" line="33" column="1" bodyfile="Source/Azura/RenderSystem/Src/D3D12/D3D12Core.cpp" bodystart="90" bodyend="95"/>
+      </memberdef>
+      <memberdef kind="function" id="_d3_d12_core_8h_1a65be40c511588025d1174472cae19d9b" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void Azura::D3D12::D3D12Core::CopyBuffer</definition>
+        <argsstring>(ID3D12GraphicsCommandList *commandList, const D3D12ScopedBuffer &amp;dest, UINT64 dstOffset, const D3D12ScopedBuffer &amp;src, UINT64 srcOffset, UINT64 size)</argsstring>
+        <name>CopyBuffer</name>
+        <param>
+          <type>ID3D12GraphicsCommandList *</type>
+          <declname>commandList</declname>
+        </param>
+        <param>
+          <type>const <ref refid="class_azura_1_1_d3_d12_1_1_d3_d12_scoped_buffer" kindref="compound">D3D12ScopedBuffer</ref> &amp;</type>
+          <declname>dest</declname>
+        </param>
+        <param>
+          <type>UINT64</type>
+          <declname>dstOffset</declname>
+        </param>
+        <param>
+          <type>const <ref refid="class_azura_1_1_d3_d12_1_1_d3_d12_scoped_buffer" kindref="compound">D3D12ScopedBuffer</ref> &amp;</type>
+          <declname>src</declname>
+        </param>
+        <param>
+          <type>UINT64</type>
+          <declname>srcOffset</declname>
+        </param>
+        <param>
+          <type>UINT64</type>
+          <declname>size</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Source/Azura/RenderSystem/Inc/D3D12/D3D12Core.h" line="38" column="1" bodyfile="Source/Azura/RenderSystem/Src/D3D12/D3D12Core.cpp" bodystart="97" bodyend="104"/>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <location file="Source/Azura/RenderSystem/Inc/D3D12/D3D12Core.h" line="24" column="1"/>
+  </compounddef>
+</doxygen>

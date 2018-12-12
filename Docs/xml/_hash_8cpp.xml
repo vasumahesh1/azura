@@ -1,0 +1,54 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.8.14">
+  <compounddef id="_hash_8cpp" kind="file" language="C++">
+    <compoundname>Hash.cpp</compoundname>
+    <includes refid="_hash_8h" local="yes">Utils/Hash.h</includes>
+    <incdepgraph>
+      <node id="4337">
+        <label>Utils/Hash.h</label>
+        <link refid="_hash_8h_source"/>
+        <childnode refid="4338" relation="include">
+        </childnode>
+      </node>
+      <node id="4338">
+        <label>Types.h</label>
+      </node>
+      <node id="4336">
+        <label>Source/Common/Src/Utils/Hash.cpp</label>
+        <link refid="_hash_8cpp"/>
+        <childnode refid="4337" relation="include">
+        </childnode>
+      </node>
+    </incdepgraph>
+    <innernamespace refid="namespace_azura">Azura</innernamespace>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <programlisting>
+<codeline lineno="1"><highlight class="preprocessor">#include<sp/>&quot;Utils/Hash.h&quot;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="2"><highlight class="normal"></highlight></codeline>
+<codeline lineno="3"><highlight class="normal"></highlight><highlight class="keyword">namespace<sp/></highlight><highlight class="normal"><ref refid="namespace_azura" kindref="compound">Azura</ref><sp/>{</highlight></codeline>
+<codeline lineno="4"><highlight class="normal">HashOperator::HashOperator(SizeType<sp/>seed)<sp/>:<sp/>mSeed(seed)<sp/>{}</highlight></codeline>
+<codeline lineno="5"><highlight class="normal"></highlight></codeline>
+<codeline lineno="6"><highlight class="normal">FNVHashOperator::FNVHashOperator(SizeType<sp/>seed)<sp/>:<sp/>HashOperator(seed)<sp/>{}</highlight></codeline>
+<codeline lineno="7"><highlight class="normal"></highlight></codeline>
+<codeline lineno="8"><highlight class="normal">FNVHashOperator::FNVHashOperator(SizeType<sp/>seed,<sp/>SizeType<sp/>prime)<sp/>:<sp/>HashOperator(seed),<sp/>mPrime(prime)<sp/>{}</highlight></codeline>
+<codeline lineno="9"><highlight class="normal"></highlight></codeline>
+<codeline lineno="10"><highlight class="normal">SizeType<sp/>FNVHashOperator::evaluate(</highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal">*<sp/>bytes,<sp/>U32<sp/>numBytes)</highlight><highlight class="keyword"><sp/>const<sp/></highlight><highlight class="normal">{</highlight></codeline>
+<codeline lineno="11"><highlight class="normal"><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>FNVHash(bytes,<sp/>numBytes,<sp/>mSeed,<sp/>mPrime);</highlight></codeline>
+<codeline lineno="12"><highlight class="normal">}</highlight></codeline>
+<codeline lineno="13"><highlight class="normal"></highlight></codeline>
+<codeline lineno="14"><highlight class="normal">SizeType<sp/>FNVHashOperator::evaluate(</highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">char</highlight><highlight class="normal">*<sp/>bytes,<sp/>U32<sp/>len)</highlight><highlight class="keyword"><sp/>const<sp/></highlight><highlight class="normal">{</highlight></codeline>
+<codeline lineno="15"><highlight class="normal"><sp/><sp/></highlight><highlight class="comment">//<sp/>NOLINTNEXTLINE(cppcoreguidelines-pro-type-reinterpret-cast)</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="16"><highlight class="normal"><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>evaluate(reinterpret_cast&lt;const<sp/>void*&gt;(bytes),<sp/>len);</highlight></codeline>
+<codeline lineno="17"><highlight class="normal">}</highlight></codeline>
+<codeline lineno="18"><highlight class="normal"></highlight></codeline>
+<codeline lineno="19"><highlight class="normal">SizeType<sp/>FNVHashOperator::evaluate(</highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">int</highlight><highlight class="normal">&amp;<sp/>num)</highlight><highlight class="keyword"><sp/>const<sp/></highlight><highlight class="normal">{</highlight></codeline>
+<codeline lineno="20"><highlight class="normal"><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>evaluate(&amp;num,<sp/></highlight><highlight class="keyword">sizeof</highlight><highlight class="normal">(</highlight><highlight class="keywordtype">int</highlight><highlight class="normal">));</highlight></codeline>
+<codeline lineno="21"><highlight class="normal">}</highlight></codeline>
+<codeline lineno="22"><highlight class="normal">}<sp/><sp/></highlight><highlight class="comment">//<sp/>namespace<sp/>Azura</highlight><highlight class="normal"></highlight></codeline>
+    </programlisting>
+    <location file="Source/Common/Src/Utils/Hash.cpp"/>
+  </compounddef>
+</doxygen>

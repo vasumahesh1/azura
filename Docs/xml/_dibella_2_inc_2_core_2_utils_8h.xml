@@ -1,0 +1,102 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.8.14">
+  <compounddef id="_dibella_2_inc_2_core_2_utils_8h" kind="file" language="C++">
+    <compoundname>Utils.h</compoundname>
+    <includes local="no">algorithm</includes>
+    <includes refid="_dibella_2_inc_2_core_2_constants_8h" local="yes">Constants.h</includes>
+    <includes refid="_dibella_2_inc_2_core_2_types_8h" local="yes">Types.h</includes>
+    <includedby refid="_material_8h" local="yes">Source/Dibella/Inc/Materials/Primitives/Material.h</includedby>
+    <incdepgraph>
+      <node id="4856">
+        <label>mathfu/vector.h</label>
+      </node>
+      <node id="4850">
+        <label>Constants.h</label>
+        <link refid="_dibella_2_inc_2_core_2_constants_8h_source"/>
+        <childnode refid="4851" relation="include">
+        </childnode>
+      </node>
+      <node id="4848">
+        <label>Source/Dibella/Inc/Core/Utils.h</label>
+        <link refid="_dibella_2_inc_2_core_2_utils_8h"/>
+        <childnode refid="4849" relation="include">
+        </childnode>
+        <childnode refid="4850" relation="include">
+        </childnode>
+        <childnode refid="4851" relation="include">
+        </childnode>
+      </node>
+      <node id="4854">
+        <label>string</label>
+      </node>
+      <node id="4851">
+        <label>Types.h</label>
+        <link refid="_dibella_2_inc_2_core_2_types_8h_source"/>
+        <childnode refid="4852" relation="include">
+        </childnode>
+        <childnode refid="4853" relation="include">
+        </childnode>
+        <childnode refid="4854" relation="include">
+        </childnode>
+        <childnode refid="4855" relation="include">
+        </childnode>
+        <childnode refid="4856" relation="include">
+        </childnode>
+      </node>
+      <node id="4852">
+        <label>ToolsCore.h</label>
+      </node>
+      <node id="4853">
+        <label>cstddef</label>
+      </node>
+      <node id="4855">
+        <label>mathfu/matrix.h</label>
+      </node>
+      <node id="4849">
+        <label>algorithm</label>
+      </node>
+    </incdepgraph>
+    <invincdepgraph>
+      <node id="4858">
+        <label>Source/Dibella/Inc/Materials/Primitives/Material.h</label>
+        <link refid="_material_8h_source"/>
+      </node>
+      <node id="4857">
+        <label>Source/Dibella/Inc/Core/Utils.h</label>
+        <link refid="_dibella_2_inc_2_core_2_utils_8h"/>
+        <childnode refid="4858" relation="include">
+        </childnode>
+      </node>
+    </invincdepgraph>
+    <innernamespace refid="namespace_dibella">Dibella</innernamespace>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <programlisting>
+<codeline lineno="1"><highlight class="preprocessor">#pragma<sp/>once</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="2"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&lt;algorithm&gt;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="3"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&quot;Constants.h&quot;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="4"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&quot;Types.h&quot;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="5"><highlight class="normal"></highlight></codeline>
+<codeline lineno="6"><highlight class="normal"></highlight><highlight class="keyword">namespace<sp/></highlight><highlight class="normal"><ref refid="namespace_dibella" kindref="compound">Dibella</ref><sp/>{</highlight></codeline>
+<codeline lineno="7"><highlight class="normal"></highlight><highlight class="keyword">inline</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">bool</highlight><highlight class="normal"><sp/>SameHemisphere(</highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>Vector3f&amp;<sp/>w,<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>Vector3f&amp;<sp/>wp)<sp/>{</highlight></codeline>
+<codeline lineno="8"><highlight class="normal"><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>w.z<sp/>*<sp/>wp.z<sp/>&gt;<sp/>0;</highlight></codeline>
+<codeline lineno="9"><highlight class="normal">}</highlight></codeline>
+<codeline lineno="10"><highlight class="normal"></highlight></codeline>
+<codeline lineno="11"><highlight class="normal"></highlight><highlight class="keyword">inline</highlight><highlight class="normal"><sp/>Float<sp/>ToRadians(Float<sp/>degrees)<sp/>{</highlight></codeline>
+<codeline lineno="12"><highlight class="normal"><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>degrees<sp/>*<sp/>(PI<sp/>/<sp/>180.0f);</highlight></codeline>
+<codeline lineno="13"><highlight class="normal">}</highlight></codeline>
+<codeline lineno="14"><highlight class="normal"></highlight></codeline>
+<codeline lineno="15"><highlight class="normal"></highlight><highlight class="keyword">inline</highlight><highlight class="normal"><sp/>Point2i<sp/>UVToPixelSpace(Point2f<sp/>uv,<sp/>SizeType<sp/>width,<sp/>SizeType<sp/>height)<sp/>{</highlight></codeline>
+<codeline lineno="16"><highlight class="normal"><sp/><sp/>Point2i<sp/>result;</highlight></codeline>
+<codeline lineno="17"><highlight class="normal"><sp/><sp/>result.x<sp/>=<sp/>std::min(width<sp/>*<sp/>uv.x,<sp/>width<sp/>-<sp/>1.0f);</highlight></codeline>
+<codeline lineno="18"><highlight class="normal"><sp/><sp/>result.y<sp/>=<sp/>std::min(height<sp/>*<sp/>(1.0f<sp/>-<sp/>uv.y),<sp/>height<sp/>-<sp/>1.0f);</highlight></codeline>
+<codeline lineno="19"><highlight class="normal"></highlight></codeline>
+<codeline lineno="20"><highlight class="normal"><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>result;</highlight></codeline>
+<codeline lineno="21"><highlight class="normal">}</highlight></codeline>
+<codeline lineno="22"><highlight class="normal">}<sp/><sp/></highlight><highlight class="comment">//<sp/>namespace<sp/>Dibella</highlight><highlight class="normal"></highlight></codeline>
+    </programlisting>
+    <location file="Source/Dibella/Inc/Core/Utils.h"/>
+  </compounddef>
+</doxygen>

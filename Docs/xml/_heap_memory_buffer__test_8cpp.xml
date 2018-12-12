@@ -1,0 +1,219 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.8.14">
+  <compounddef id="_heap_memory_buffer__test_8cpp" kind="file" language="C++">
+    <compoundname>HeapMemoryBuffer_test.cpp</compoundname>
+    <includes refid="_heap_memory_buffer__test_8h" local="yes">HeapMemoryBuffer_test.h</includes>
+    <includes refid="_heap_memory_buffer_8h" local="yes">Memory/HeapMemoryBuffer.h</includes>
+    <incdepgraph>
+      <node id="4355">
+        <label>MemoryBuffer.h</label>
+        <link refid="_memory_buffer_8h_source"/>
+        <childnode refid="4356" relation="include">
+        </childnode>
+      </node>
+      <node id="4354">
+        <label>Memory/HeapMemoryBuffer.h</label>
+        <link refid="_heap_memory_buffer_8h_source"/>
+        <childnode refid="4355" relation="include">
+        </childnode>
+        <childnode refid="4356" relation="include">
+        </childnode>
+      </node>
+      <node id="4352">
+        <label>HeapMemoryBuffer_test.h</label>
+        <link refid="_heap_memory_buffer__test_8h_source"/>
+        <childnode refid="4353" relation="include">
+        </childnode>
+      </node>
+      <node id="4353">
+        <label>gtest/gtest.h</label>
+      </node>
+      <node id="4351">
+        <label>Source/Common/Test/HeapMemoryBuffer_test.cpp</label>
+        <link refid="_heap_memory_buffer__test_8cpp"/>
+        <childnode refid="4352" relation="include">
+        </childnode>
+        <childnode refid="4354" relation="include">
+        </childnode>
+      </node>
+      <node id="4356">
+        <label>Types.h</label>
+      </node>
+    </incdepgraph>
+      <sectiondef kind="func">
+      <memberdef kind="function" id="_heap_memory_buffer__test_8cpp_1a450300ecc6c997e7cef135546ba7ba2a" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>TEST</definition>
+        <argsstring>(HeapMemoryBufferTest, Constructs)</argsstring>
+        <name>TEST</name>
+        <param>
+          <type><ref refid="class_heap_memory_buffer_test" kindref="compound">HeapMemoryBufferTest</ref></type>
+        </param>
+        <param>
+          <type>Constructs</type>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Source/Common/Test/HeapMemoryBuffer_test.cpp" line="7" column="1" bodyfile="Source/Common/Test/HeapMemoryBuffer_test.cpp" bodystart="7" bodyend="13"/>
+      </memberdef>
+      <memberdef kind="function" id="_heap_memory_buffer__test_8cpp_1aa53e5a30ed1265335e24ed7b735fa016" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>TEST</definition>
+        <argsstring>(HeapMemoryBufferTest, AlignedConstruction)</argsstring>
+        <name>TEST</name>
+        <param>
+          <type><ref refid="class_heap_memory_buffer_test" kindref="compound">HeapMemoryBufferTest</ref></type>
+        </param>
+        <param>
+          <type>AlignedConstruction</type>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Source/Common/Test/HeapMemoryBuffer_test.cpp" line="15" column="1" bodyfile="Source/Common/Test/HeapMemoryBuffer_test.cpp" bodystart="15" bodyend="27"/>
+      </memberdef>
+      <memberdef kind="function" id="_heap_memory_buffer__test_8cpp_1a1931357e11aa6346c2694b4265e3d478" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>TEST</definition>
+        <argsstring>(HeapMemoryBufferTest, AlignedConstruction32)</argsstring>
+        <name>TEST</name>
+        <param>
+          <type><ref refid="class_heap_memory_buffer_test" kindref="compound">HeapMemoryBufferTest</ref></type>
+        </param>
+        <param>
+          <type>AlignedConstruction32</type>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Source/Common/Test/HeapMemoryBuffer_test.cpp" line="29" column="1" bodyfile="Source/Common/Test/HeapMemoryBuffer_test.cpp" bodystart="29" bodyend="41"/>
+      </memberdef>
+      <memberdef kind="function" id="_heap_memory_buffer__test_8cpp_1ab8f0a56d9d874f472848a982ae8f455b" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>TEST</definition>
+        <argsstring>(HeapMemoryBufferTest, AlignedConstruction256)</argsstring>
+        <name>TEST</name>
+        <param>
+          <type><ref refid="class_heap_memory_buffer_test" kindref="compound">HeapMemoryBufferTest</ref></type>
+        </param>
+        <param>
+          <type>AlignedConstruction256</type>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Source/Common/Test/HeapMemoryBuffer_test.cpp" line="43" column="1" bodyfile="Source/Common/Test/HeapMemoryBuffer_test.cpp" bodystart="43" bodyend="55"/>
+      </memberdef>
+      <memberdef kind="function" id="_heap_memory_buffer__test_8cpp_1a99e04421eb7ab6e84b5fc1d2b9d6653e" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>TEST</definition>
+        <argsstring>(HeapMemoryBufferTest, AllocateNormal)</argsstring>
+        <name>TEST</name>
+        <param>
+          <type><ref refid="class_heap_memory_buffer_test" kindref="compound">HeapMemoryBufferTest</ref></type>
+        </param>
+        <param>
+          <type>AllocateNormal</type>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Source/Common/Test/HeapMemoryBuffer_test.cpp" line="57" column="1" bodyfile="Source/Common/Test/HeapMemoryBuffer_test.cpp" bodystart="57" bodyend="71"/>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <programlisting>
+<codeline lineno="1"><highlight class="preprocessor">#include<sp/>&quot;HeapMemoryBuffer_test.h&quot;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="2"><highlight class="normal"></highlight></codeline>
+<codeline lineno="3"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&quot;Memory/HeapMemoryBuffer.h&quot;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="4"><highlight class="normal"></highlight></codeline>
+<codeline lineno="5"><highlight class="normal"></highlight><highlight class="keyword">using<sp/>namespace<sp/></highlight><highlight class="normal"><ref refid="namespace_azura_1_1_memory" kindref="compound">Azura::Memory</ref>;</highlight></codeline>
+<codeline lineno="6"><highlight class="normal"></highlight></codeline>
+<codeline lineno="7"><highlight class="normal">TEST(<ref refid="class_heap_memory_buffer_test" kindref="compound">HeapMemoryBufferTest</ref>,<sp/>Constructs)<sp/>{</highlight></codeline>
+<codeline lineno="8"><highlight class="normal"><sp/><sp/><ref refid="class_azura_1_1_memory_1_1_heap_memory_buffer" kindref="compound">HeapMemoryBuffer</ref><sp/>target{32};</highlight></codeline>
+<codeline lineno="9"><highlight class="normal"></highlight></codeline>
+<codeline lineno="10"><highlight class="normal"><sp/><sp/>ASSERT_NE(target.GetCurrentPtr(),<sp/>0u);</highlight></codeline>
+<codeline lineno="11"><highlight class="normal"><sp/><sp/>ASSERT_NE(target.GetBasePtr(),<sp/>0u);</highlight></codeline>
+<codeline lineno="12"><highlight class="normal"><sp/><sp/>ASSERT_EQ(target.GetSize(),<sp/>32u);</highlight></codeline>
+<codeline lineno="13"><highlight class="normal">}</highlight></codeline>
+<codeline lineno="14"><highlight class="normal"></highlight></codeline>
+<codeline lineno="15"><highlight class="normal">TEST(<ref refid="class_heap_memory_buffer_test" kindref="compound">HeapMemoryBufferTest</ref>,<sp/>AlignedConstruction)<sp/>{</highlight></codeline>
+<codeline lineno="16"><highlight class="normal"><sp/><sp/>Azura::U32<sp/>alignment<sp/>=<sp/>16;</highlight></codeline>
+<codeline lineno="17"><highlight class="normal"></highlight></codeline>
+<codeline lineno="18"><highlight class="normal"><sp/><sp/><ref refid="class_azura_1_1_memory_1_1_heap_memory_buffer" kindref="compound">HeapMemoryBuffer</ref><sp/>target{32,<sp/>alignment};</highlight></codeline>
+<codeline lineno="19"><highlight class="normal"></highlight></codeline>
+<codeline lineno="20"><highlight class="normal"><sp/><sp/>ASSERT_NE(target.GetCurrentPtr(),<sp/>0u);</highlight></codeline>
+<codeline lineno="21"><highlight class="normal"><sp/><sp/>ASSERT_NE(target.GetBasePtr(),<sp/>0u);</highlight></codeline>
+<codeline lineno="22"><highlight class="normal"><sp/><sp/>ASSERT_EQ(target.GetSize(),<sp/>32u);</highlight></codeline>
+<codeline lineno="23"><highlight class="normal"></highlight></codeline>
+<codeline lineno="24"><highlight class="normal"><sp/><sp/>Azura::U32<sp/>mask<sp/>=<sp/>alignment<sp/>-<sp/>1;</highlight></codeline>
+<codeline lineno="25"><highlight class="normal"></highlight></codeline>
+<codeline lineno="26"><highlight class="normal"><sp/><sp/>ASSERT_EQ((target.GetCurrentPtr()<sp/>&amp;<sp/>mask),<sp/>0u);</highlight></codeline>
+<codeline lineno="27"><highlight class="normal">}</highlight></codeline>
+<codeline lineno="28"><highlight class="normal"></highlight></codeline>
+<codeline lineno="29"><highlight class="normal">TEST(<ref refid="class_heap_memory_buffer_test" kindref="compound">HeapMemoryBufferTest</ref>,<sp/>AlignedConstruction32)<sp/>{</highlight></codeline>
+<codeline lineno="30"><highlight class="normal"><sp/><sp/>Azura::U32<sp/>alignment<sp/>=<sp/>32;</highlight></codeline>
+<codeline lineno="31"><highlight class="normal"></highlight></codeline>
+<codeline lineno="32"><highlight class="normal"><sp/><sp/><ref refid="class_azura_1_1_memory_1_1_heap_memory_buffer" kindref="compound">HeapMemoryBuffer</ref><sp/>target{128,<sp/>alignment};</highlight></codeline>
+<codeline lineno="33"><highlight class="normal"></highlight></codeline>
+<codeline lineno="34"><highlight class="normal"><sp/><sp/>ASSERT_NE(target.GetCurrentPtr(),<sp/>0u);</highlight></codeline>
+<codeline lineno="35"><highlight class="normal"><sp/><sp/>ASSERT_NE(target.GetBasePtr(),<sp/>0u);</highlight></codeline>
+<codeline lineno="36"><highlight class="normal"><sp/><sp/>ASSERT_EQ(target.GetSize(),<sp/>128u);</highlight></codeline>
+<codeline lineno="37"><highlight class="normal"></highlight></codeline>
+<codeline lineno="38"><highlight class="normal"><sp/><sp/>Azura::U32<sp/>mask<sp/>=<sp/>alignment<sp/>-<sp/>1;</highlight></codeline>
+<codeline lineno="39"><highlight class="normal"></highlight></codeline>
+<codeline lineno="40"><highlight class="normal"><sp/><sp/>ASSERT_EQ((target.GetCurrentPtr()<sp/>&amp;<sp/>mask),<sp/>0u);</highlight></codeline>
+<codeline lineno="41"><highlight class="normal">}</highlight></codeline>
+<codeline lineno="42"><highlight class="normal"></highlight></codeline>
+<codeline lineno="43"><highlight class="normal">TEST(<ref refid="class_heap_memory_buffer_test" kindref="compound">HeapMemoryBufferTest</ref>,<sp/>AlignedConstruction256)<sp/>{</highlight></codeline>
+<codeline lineno="44"><highlight class="normal"><sp/><sp/>Azura::U32<sp/>alignment<sp/>=<sp/>256;</highlight></codeline>
+<codeline lineno="45"><highlight class="normal"></highlight></codeline>
+<codeline lineno="46"><highlight class="normal"><sp/><sp/><ref refid="class_azura_1_1_memory_1_1_heap_memory_buffer" kindref="compound">HeapMemoryBuffer</ref><sp/>target{128,<sp/>alignment};</highlight></codeline>
+<codeline lineno="47"><highlight class="normal"></highlight></codeline>
+<codeline lineno="48"><highlight class="normal"><sp/><sp/>ASSERT_NE(target.GetCurrentPtr(),<sp/>0u);</highlight></codeline>
+<codeline lineno="49"><highlight class="normal"><sp/><sp/>ASSERT_NE(target.GetBasePtr(),<sp/>0u);</highlight></codeline>
+<codeline lineno="50"><highlight class="normal"><sp/><sp/>ASSERT_EQ(target.GetSize(),<sp/>128u);</highlight></codeline>
+<codeline lineno="51"><highlight class="normal"></highlight></codeline>
+<codeline lineno="52"><highlight class="normal"><sp/><sp/>Azura::U32<sp/>mask<sp/>=<sp/>alignment<sp/>-<sp/>1;</highlight></codeline>
+<codeline lineno="53"><highlight class="normal"></highlight></codeline>
+<codeline lineno="54"><highlight class="normal"><sp/><sp/>ASSERT_EQ((target.GetCurrentPtr()<sp/>&amp;<sp/>mask),<sp/>0u);</highlight></codeline>
+<codeline lineno="55"><highlight class="normal">}</highlight></codeline>
+<codeline lineno="56"><highlight class="normal"></highlight></codeline>
+<codeline lineno="57"><highlight class="normal">TEST(<ref refid="class_heap_memory_buffer_test" kindref="compound">HeapMemoryBufferTest</ref>,<sp/>AllocateNormal)<sp/>{</highlight></codeline>
+<codeline lineno="58"><highlight class="normal"><sp/><sp/>Azura::U32<sp/>alignment<sp/><sp/><sp/><sp/><sp/><sp/>=<sp/>16;</highlight></codeline>
+<codeline lineno="59"><highlight class="normal"><sp/><sp/>Azura::U32<sp/>allocateAmount<sp/>=<sp/>32;</highlight></codeline>
+<codeline lineno="60"><highlight class="normal"></highlight></codeline>
+<codeline lineno="61"><highlight class="normal"><sp/><sp/><ref refid="class_azura_1_1_memory_1_1_heap_memory_buffer" kindref="compound">HeapMemoryBuffer</ref><sp/>target{128,<sp/>alignment};</highlight></codeline>
+<codeline lineno="62"><highlight class="normal"></highlight></codeline>
+<codeline lineno="63"><highlight class="normal"><sp/><sp/></highlight><highlight class="keyword">auto</highlight><highlight class="normal"><sp/>p1<sp/>=<sp/>target.GetCurrentPtr();</highlight></codeline>
+<codeline lineno="64"><highlight class="normal"></highlight></codeline>
+<codeline lineno="65"><highlight class="normal"><sp/><sp/></highlight><highlight class="keyword">auto</highlight><highlight class="normal"><sp/>p2<sp/>=<sp/>target.Allocate(allocateAmount);</highlight></codeline>
+<codeline lineno="66"><highlight class="normal"></highlight></codeline>
+<codeline lineno="67"><highlight class="normal"><sp/><sp/></highlight><highlight class="keyword">auto</highlight><highlight class="normal"><sp/>p3<sp/>=<sp/>target.GetCurrentPtr();</highlight></codeline>
+<codeline lineno="68"><highlight class="normal"></highlight></codeline>
+<codeline lineno="69"><highlight class="normal"><sp/><sp/>ASSERT_NE(p2,<sp/></highlight><highlight class="keyword">nullptr</highlight><highlight class="normal">);</highlight></codeline>
+<codeline lineno="70"><highlight class="normal"><sp/><sp/>ASSERT_EQ(p3<sp/>-<sp/>p1,<sp/>allocateAmount);</highlight></codeline>
+<codeline lineno="71"><highlight class="normal">}</highlight></codeline>
+    </programlisting>
+    <location file="Source/Common/Test/HeapMemoryBuffer_test.cpp"/>
+  </compounddef>
+</doxygen>

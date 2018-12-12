@@ -1,0 +1,305 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.8.14">
+  <compounddef id="class_azura_1_1_app" kind="class" language="C++" prot="public">
+    <compoundname>Azura::App</compoundname>
+      <sectiondef kind="private-attrib">
+      <memberdef kind="variable" id="class_azura_1_1_app_1a12c908091041d57aaac44a57105d7da7" prot="private" static="no" mutable="no">
+        <type><ref refid="class_azura_1_1_log" kindref="compound">Log</ref></type>
+        <definition>Log Azura::App::log_App</definition>
+        <argsstring></argsstring>
+        <name>log_App</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Source/Samples/2_DeferredRenderer/Inc/App/App.h" line="30" column="1" bodyfile="Source/Samples/2_DeferredRenderer/Inc/App/App.h" bodystart="30" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="class_azura_1_1_app_1a08ed71db5101ddfa5bb865b3ac6085bc" prot="private" static="no" mutable="no">
+        <type><ref refid="class_azura_1_1_memory_1_1_heap_memory_buffer" kindref="compound">Memory::HeapMemoryBuffer</ref></type>
+        <definition>Memory::HeapMemoryBuffer Azura::App::m_mainBuffer</definition>
+        <argsstring></argsstring>
+        <name>m_mainBuffer</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Source/Samples/2_DeferredRenderer/Inc/App/App.h" line="32" column="1" bodyfile="Source/Samples/2_DeferredRenderer/Inc/App/App.h" bodystart="32" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="class_azura_1_1_app_1afffd45e21fa5671363d379372951b40c" prot="private" static="no" mutable="no">
+        <type><ref refid="class_azura_1_1_memory_1_1_monotonic_allocator" kindref="compound">Memory::MonotonicAllocator</ref></type>
+        <definition>Memory::MonotonicAllocator Azura::App::m_mainAllocator</definition>
+        <argsstring></argsstring>
+        <name>m_mainAllocator</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Source/Samples/2_DeferredRenderer/Inc/App/App.h" line="34" column="1" bodyfile="Source/Samples/2_DeferredRenderer/Inc/App/App.h" bodystart="34" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="class_azura_1_1_app_1a7b518bf9770a4a846ae798f5ea621e4a" prot="private" static="no" mutable="no">
+        <type><ref refid="class_azura_1_1_memory_1_1_monotonic_allocator" kindref="compound">Memory::MonotonicAllocator</ref></type>
+        <definition>Memory::MonotonicAllocator Azura::App::m_drawableAllocator</definition>
+        <argsstring></argsstring>
+        <name>m_drawableAllocator</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Source/Samples/2_DeferredRenderer/Inc/App/App.h" line="35" column="1" bodyfile="Source/Samples/2_DeferredRenderer/Inc/App/App.h" bodystart="35" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="class_azura_1_1_app_1aeece1e5cf8dd643bdde38f02b7e5fdda" prot="private" static="no" mutable="no">
+        <type><ref refid="class_azura_1_1_containers_1_1_vector" kindref="compound">Containers::Vector</ref>&lt; <ref refid="struct_azura_1_1_point_light" kindref="compound">PointLight</ref> &gt;</type>
+        <definition>Containers::Vector&lt;PointLight&gt; Azura::App::m_lights</definition>
+        <argsstring></argsstring>
+        <name>m_lights</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Source/Samples/2_DeferredRenderer/Inc/App/App.h" line="37" column="1" bodyfile="Source/Samples/2_DeferredRenderer/Inc/App/App.h" bodystart="37" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="class_azura_1_1_app_1a92e65774242ed8032aedd6951c63e3c3" prot="private" static="no" mutable="no">
+        <type><ref refid="struct_azura_1_1_uniform_buffer_data" kindref="compound">UniformBufferData</ref></type>
+        <definition>UniformBufferData Azura::App::m_sceneUBO</definition>
+        <argsstring></argsstring>
+        <name>m_sceneUBO</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Source/Samples/2_DeferredRenderer/Inc/App/App.h" line="39" column="1" bodyfile="Source/Samples/2_DeferredRenderer/Inc/App/App.h" bodystart="39" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="class_azura_1_1_app_1a4399e03bf25323e426240cc68543e9c3" prot="private" static="no" mutable="no">
+        <type><ref refid="class_azura_1_1_fly_through_camera" kindref="compound">FlyThroughCamera</ref></type>
+        <definition>FlyThroughCamera Azura::App::m_camera</definition>
+        <argsstring></argsstring>
+        <name>m_camera</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Source/Samples/2_DeferredRenderer/Inc/App/App.h" line="40" column="1" bodyfile="Source/Samples/2_DeferredRenderer/Inc/App/App.h" bodystart="40" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="class_azura_1_1_app_1ac0c4724b8a84fbad7dfd74998027ddfb" prot="private" static="no" mutable="no">
+        <type><ref refid="struct_azura_1_1_mesh_object" kindref="compound">MeshObject</ref></type>
+        <definition>MeshObject Azura::App::m_sponza</definition>
+        <argsstring></argsstring>
+        <name>m_sponza</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Source/Samples/2_DeferredRenderer/Inc/App/App.h" line="42" column="1" bodyfile="Source/Samples/2_DeferredRenderer/Inc/App/App.h" bodystart="42" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="class_azura_1_1_app_1a5ba2d71076633a3b9f85dbf2c8f78b02" prot="private" static="no" mutable="no">
+        <type><ref refid="struct_azura_1_1_sampler_desc" kindref="compound">SamplerDesc</ref></type>
+        <definition>SamplerDesc Azura::App::m_lightSamplerDesc</definition>
+        <argsstring></argsstring>
+        <name>m_lightSamplerDesc</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Source/Samples/2_DeferredRenderer/Inc/App/App.h" line="44" column="1" bodyfile="Source/Samples/2_DeferredRenderer/Inc/App/App.h" bodystart="44" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="class_azura_1_1_app_1a00447f09bc24e1b8daac93867a20b3ba" prot="private" static="no" mutable="no">
+        <type><ref refid="class_azura_1_1_scene" kindref="compound">Scene</ref> *</type>
+        <definition>Scene* Azura::App::p_activeScene</definition>
+        <argsstring></argsstring>
+        <name>p_activeScene</name>
+        <initializer>{nullptr}</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Source/Samples/2_DeferredRenderer/Inc/App/App.h" line="46" column="1" bodyfile="Source/Samples/2_DeferredRenderer/Inc/App/App.h" bodystart="46" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="class_azura_1_1_app_1a1e3bf809172fb51f37e4d7337ac9d8ec" prot="private" static="no" mutable="no">
+        <type><ref refid="class_azura_1_1_forward_scene" kindref="compound">ForwardScene</ref></type>
+        <definition>ForwardScene Azura::App::m_forwardScene</definition>
+        <argsstring></argsstring>
+        <name>m_forwardScene</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Source/Samples/2_DeferredRenderer/Inc/App/App.h" line="48" column="1" bodyfile="Source/Samples/2_DeferredRenderer/Inc/App/App.h" bodystart="48" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="class_azura_1_1_app_1aa6f775ee5c275b7dee2b4bcd44f291cb" prot="private" static="no" mutable="no">
+        <type><ref refid="class_azura_1_1_forward_compute_scene" kindref="compound">ForwardComputeScene</ref></type>
+        <definition>ForwardComputeScene Azura::App::m_forwardComputeScene</definition>
+        <argsstring></argsstring>
+        <name>m_forwardComputeScene</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Source/Samples/2_DeferredRenderer/Inc/App/App.h" line="49" column="1" bodyfile="Source/Samples/2_DeferredRenderer/Inc/App/App.h" bodystart="49" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="class_azura_1_1_app_1a20b5a380309bf8c8c4fdb62c479a9846" prot="private" static="no" mutable="no">
+        <type><ref refid="class_azura_1_1_forward_plus_compute_scene" kindref="compound">ForwardPlusComputeScene</ref></type>
+        <definition>ForwardPlusComputeScene Azura::App::m_forwardPlusComputeScene</definition>
+        <argsstring></argsstring>
+        <name>m_forwardPlusComputeScene</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Source/Samples/2_DeferredRenderer/Inc/App/App.h" line="50" column="1" bodyfile="Source/Samples/2_DeferredRenderer/Inc/App/App.h" bodystart="50" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="class_azura_1_1_app_1ac969d3ed11456fef65ba3d94b40d672d" prot="private" static="no" mutable="no">
+        <type>std::unique_ptr&lt; <ref refid="class_azura_1_1_window" kindref="compound">Window</ref> &gt;</type>
+        <definition>std::unique_ptr&lt;Window&gt; Azura::App::p_window</definition>
+        <argsstring></argsstring>
+        <name>p_window</name>
+        <initializer>{nullptr}</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Source/Samples/2_DeferredRenderer/Inc/App/App.h" line="52" column="1" bodyfile="Source/Samples/2_DeferredRenderer/Inc/App/App.h" bodystart="52" bodyend="-1"/>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="public-func">
+      <memberdef kind="function" id="class_azura_1_1_app_1ae3277653a7e39779827250a014e88a26" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>Azura::App::App</definition>
+        <argsstring>()</argsstring>
+        <name>App</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Source/Samples/2_DeferredRenderer/Inc/App/App.h" line="20" column="1" bodyfile="Source/Samples/2_DeferredRenderer/Src/App.cpp" bodystart="10" bodyend="20"/>
+      </memberdef>
+      <memberdef kind="function" id="class_azura_1_1_app_1ab503a9ee73d333ea670c78b32ff2f130" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void Azura::App::Initialize</definition>
+        <argsstring>()</argsstring>
+        <name>Initialize</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Source/Samples/2_DeferredRenderer/Inc/App/App.h" line="22" column="1" bodyfile="Source/Samples/2_DeferredRenderer/Src/App.cpp" bodystart="22" bodyend="98"/>
+      </memberdef>
+      <memberdef kind="function" id="class_azura_1_1_app_1a98264ee1437b829b545afa90f89d3e63" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void Azura::App::Update</definition>
+        <argsstring>(float timeDelta)</argsstring>
+        <name>Update</name>
+        <param>
+          <type>float</type>
+          <declname>timeDelta</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Source/Samples/2_DeferredRenderer/Inc/App/App.h" line="23" column="1" bodyfile="Source/Samples/2_DeferredRenderer/Src/App.cpp" bodystart="100" bodyend="113"/>
+      </memberdef>
+      <memberdef kind="function" id="class_azura_1_1_app_1afe3d88a999894b0d73cddbb47c6f98aa" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void Azura::App::Run</definition>
+        <argsstring>() const</argsstring>
+        <name>Run</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Source/Samples/2_DeferredRenderer/Inc/App/App.h" line="24" column="1" bodyfile="Source/Samples/2_DeferredRenderer/Src/App.cpp" bodystart="115" bodyend="118"/>
+      </memberdef>
+      <memberdef kind="function" id="class_azura_1_1_app_1a1f592ab9d9aa8ec2b7e5d1d168d1cd5c" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void Azura::App::CleanUp</definition>
+        <argsstring>()</argsstring>
+        <name>CleanUp</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Source/Samples/2_DeferredRenderer/Inc/App/App.h" line="25" column="1" bodyfile="Source/Samples/2_DeferredRenderer/Src/App.cpp" bodystart="120" bodyend="123"/>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="private-func">
+      <memberdef kind="function" id="class_azura_1_1_app_1aecb6a4c8cfabd7a99ade8020465b1dc6" prot="private" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void Azura::App::GenerateLights</definition>
+        <argsstring>()</argsstring>
+        <name>GenerateLights</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Source/Samples/2_DeferredRenderer/Inc/App/App.h" line="28" column="1" bodyfile="Source/Samples/2_DeferredRenderer/Src/App.cpp" bodystart="125" bodyend="149"/>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <location file="Source/Samples/2_DeferredRenderer/Inc/App/App.h" line="18" column="1" bodyfile="Source/Samples/2_DeferredRenderer/Inc/App/App.h" bodystart="17" bodyend="53"/>
+    <listofallmembers>
+      <member refid="class_azura_1_1_app_1ae3277653a7e39779827250a014e88a26" prot="public" virt="non-virtual"><scope>Azura::App</scope><name>App</name></member>
+      <member refid="class_azura_1_1_app_1a1f592ab9d9aa8ec2b7e5d1d168d1cd5c" prot="public" virt="non-virtual"><scope>Azura::App</scope><name>CleanUp</name></member>
+      <member refid="class_azura_1_1_app_1aecb6a4c8cfabd7a99ade8020465b1dc6" prot="private" virt="non-virtual"><scope>Azura::App</scope><name>GenerateLights</name></member>
+      <member refid="class_azura_1_1_app_1ab503a9ee73d333ea670c78b32ff2f130" prot="public" virt="non-virtual"><scope>Azura::App</scope><name>Initialize</name></member>
+      <member refid="class_azura_1_1_app_1a12c908091041d57aaac44a57105d7da7" prot="private" virt="non-virtual"><scope>Azura::App</scope><name>log_App</name></member>
+      <member refid="class_azura_1_1_app_1a4399e03bf25323e426240cc68543e9c3" prot="private" virt="non-virtual"><scope>Azura::App</scope><name>m_camera</name></member>
+      <member refid="class_azura_1_1_app_1a7b518bf9770a4a846ae798f5ea621e4a" prot="private" virt="non-virtual"><scope>Azura::App</scope><name>m_drawableAllocator</name></member>
+      <member refid="class_azura_1_1_app_1aa6f775ee5c275b7dee2b4bcd44f291cb" prot="private" virt="non-virtual"><scope>Azura::App</scope><name>m_forwardComputeScene</name></member>
+      <member refid="class_azura_1_1_app_1a20b5a380309bf8c8c4fdb62c479a9846" prot="private" virt="non-virtual"><scope>Azura::App</scope><name>m_forwardPlusComputeScene</name></member>
+      <member refid="class_azura_1_1_app_1a1e3bf809172fb51f37e4d7337ac9d8ec" prot="private" virt="non-virtual"><scope>Azura::App</scope><name>m_forwardScene</name></member>
+      <member refid="class_azura_1_1_app_1aeece1e5cf8dd643bdde38f02b7e5fdda" prot="private" virt="non-virtual"><scope>Azura::App</scope><name>m_lights</name></member>
+      <member refid="class_azura_1_1_app_1a5ba2d71076633a3b9f85dbf2c8f78b02" prot="private" virt="non-virtual"><scope>Azura::App</scope><name>m_lightSamplerDesc</name></member>
+      <member refid="class_azura_1_1_app_1afffd45e21fa5671363d379372951b40c" prot="private" virt="non-virtual"><scope>Azura::App</scope><name>m_mainAllocator</name></member>
+      <member refid="class_azura_1_1_app_1a08ed71db5101ddfa5bb865b3ac6085bc" prot="private" virt="non-virtual"><scope>Azura::App</scope><name>m_mainBuffer</name></member>
+      <member refid="class_azura_1_1_app_1a92e65774242ed8032aedd6951c63e3c3" prot="private" virt="non-virtual"><scope>Azura::App</scope><name>m_sceneUBO</name></member>
+      <member refid="class_azura_1_1_app_1ac0c4724b8a84fbad7dfd74998027ddfb" prot="private" virt="non-virtual"><scope>Azura::App</scope><name>m_sponza</name></member>
+      <member refid="class_azura_1_1_app_1a00447f09bc24e1b8daac93867a20b3ba" prot="private" virt="non-virtual"><scope>Azura::App</scope><name>p_activeScene</name></member>
+      <member refid="class_azura_1_1_app_1ac969d3ed11456fef65ba3d94b40d672d" prot="private" virt="non-virtual"><scope>Azura::App</scope><name>p_window</name></member>
+      <member refid="class_azura_1_1_app_1afe3d88a999894b0d73cddbb47c6f98aa" prot="public" virt="non-virtual"><scope>Azura::App</scope><name>Run</name></member>
+      <member refid="class_azura_1_1_app_1a98264ee1437b829b545afa90f89d3e63" prot="public" virt="non-virtual"><scope>Azura::App</scope><name>Update</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

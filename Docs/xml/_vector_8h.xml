@@ -1,0 +1,1268 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.8.14">
+  <compounddef id="_vector_8h" kind="file" language="C++">
+    <compoundname>Vector.h</compoundname>
+    <includes local="no">cassert</includes>
+    <includes local="no">cstring</includes>
+    <includes local="no">functional</includes>
+    <includes local="no">iterator</includes>
+    <includes refid="_array_8h" local="yes">Array.h</includes>
+    <includes refid="_allocator_8h" local="yes">Memory/Allocator.h</includes>
+    <includes local="yes">Types.h</includes>
+    <includes refid="_macros_8h" local="yes">Utils/Macros.h</includes>
+    <includedby refid="_compute_pool_8h" local="yes">Source/Azura/RenderSystem/Inc/Generic/ComputePool.h</includedby>
+    <includedby refid="_azura_2_render_system_2_inc_2_generic_2_generic_types_8h" local="yes">Source/Azura/RenderSystem/Inc/Generic/GenericTypes.h</includedby>
+    <includedby refid="_drawable_8h" local="yes">Source/Azura/RenderSystem/Inc/Generic/Drawable.h</includedby>
+    <includedby refid="_renderer_8h" local="yes">Source/Azura/RenderSystem/Inc/Generic/Renderer.h</includedby>
+    <includedby refid="_texture_manager_8h" local="yes">Source/Azura/RenderSystem/Inc/Generic/TextureManager.h</includedby>
+    <includedby refid="_vk_core_8h" local="yes">Source/Azura/RenderSystem/Inc/Vulkan/VkCore.h</includedby>
+    <includedby refid="_vk_types_8h" local="yes">Source/Azura/RenderSystem/Inc/Vulkan/VkTypes.h</includedby>
+    <includedby refid="_vk_scoped_pipeline_8h" local="yes">Source/Azura/RenderSystem/Inc/Vulkan/VkScopedPipeline.h</includedby>
+    <includedby refid="_vk_platform_8h" local="yes">Source/Azura/RenderSystem/Inc/Vulkan/VkPlatform.h</includedby>
+    <includedby refid="_vk_renderer_8h" local="yes">Source/Azura/RenderSystem/Inc/Vulkan/VkRenderer.h</includedby>
+    <includedby refid="_vk_scoped_swap_chain_8h" local="no">Source/Azura/RenderSystem/Inc/Vulkan/VkScopedSwapChain.h</includedby>
+    <includedby refid="_compute_pool_8cpp" local="yes">Source/Azura/RenderSystem/Src/Generic/ComputePool.cpp</includedby>
+    <includedby refid="_drawable_8cpp" local="yes">Source/Azura/RenderSystem/Src/Generic/Drawable.cpp</includedby>
+    <includedby refid="_vk_drawable_pool_8cpp" local="yes">Source/Azura/RenderSystem/Src/Vulkan/VkDrawablePool.cpp</includedby>
+    <includedby refid="_vector__benchmark_8cpp" local="yes">Source/Containers/Benchmark/Vector_benchmark.cpp</includedby>
+    <includedby refid="_vector__test_8h" local="yes">Source/Containers/Test/Vector_test.h</includedby>
+    <includedby refid="_dibella_2_inc_2_scene_2_scene_8h" local="yes">Source/Dibella/Inc/Scene/Scene.h</includedby>
+    <includedby refid="_constraints_8h" local="no">Source/Physics/Inc/Physics/PBD/Cloth/Constraints.h</includedby>
+    <includedby refid="_solving_view_8h" local="no">Source/Physics/Inc/Physics/PBD/Common/SolvingView.h</includedby>
+    <includedby refid="_file_reader_8h" local="yes">Source/Platform/Inc/Utils/FileReader.h</includedby>
+    <includedby refid="_light_texture_8h" local="no">Source/Samples/2_DeferredRenderer/Inc/App/LightTexture.h</includedby>
+    <includedby refid="_sandbox_2main_8cpp" local="no">Source/Sandbox/main.cpp</includedby>
+    <incdepgraph>
+      <node id="4555">
+        <label>functional</label>
+      </node>
+      <node id="4556">
+        <label>iterator</label>
+      </node>
+      <node id="4558">
+        <label>Memory/Allocator.h</label>
+        <link refid="_allocator_8h_source"/>
+        <childnode refid="4555" relation="include">
+        </childnode>
+        <childnode refid="4559" relation="include">
+        </childnode>
+        <childnode refid="4560" relation="include">
+        </childnode>
+      </node>
+      <node id="4553">
+        <label>cassert</label>
+      </node>
+      <node id="4560">
+        <label>Utils/Macros.h</label>
+        <link refid="_macros_8h_source"/>
+      </node>
+      <node id="4557">
+        <label>Array.h</label>
+        <link refid="_array_8h_source"/>
+        <childnode refid="4553" relation="include">
+        </childnode>
+        <childnode refid="4554" relation="include">
+        </childnode>
+        <childnode refid="4558" relation="include">
+        </childnode>
+        <childnode refid="4559" relation="include">
+        </childnode>
+      </node>
+      <node id="4552">
+        <label>Source/Containers/Inc/Containers/Vector.h</label>
+        <link refid="_vector_8h"/>
+        <childnode refid="4553" relation="include">
+        </childnode>
+        <childnode refid="4554" relation="include">
+        </childnode>
+        <childnode refid="4555" relation="include">
+        </childnode>
+        <childnode refid="4556" relation="include">
+        </childnode>
+        <childnode refid="4557" relation="include">
+        </childnode>
+        <childnode refid="4558" relation="include">
+        </childnode>
+        <childnode refid="4559" relation="include">
+        </childnode>
+        <childnode refid="4560" relation="include">
+        </childnode>
+      </node>
+      <node id="4559">
+        <label>Types.h</label>
+      </node>
+      <node id="4554">
+        <label>cstring</label>
+      </node>
+    </incdepgraph>
+    <invincdepgraph>
+      <node id="4602">
+        <label>Source/Azura/RenderSystem/Inc/Generic/GPUBufferWriter.h</label>
+        <link refid="_g_p_u_buffer_writer_8h_source"/>
+      </node>
+      <node id="4609">
+        <label>Source/Azura/RenderSystem/Inc/Vulkan/VkScopedPipeline.h</label>
+        <link refid="_vk_scoped_pipeline_8h_source"/>
+        <childnode refid="4600" relation="include">
+        </childnode>
+        <childnode refid="4584" relation="include">
+        </childnode>
+      </node>
+      <node id="4604">
+        <label>Source/Azura/RenderSystem/Inc/D3D12/D3D12TextureManager.h</label>
+        <link refid="_d3_d12_texture_manager_8h_source"/>
+        <childnode refid="4605" relation="include">
+        </childnode>
+      </node>
+      <node id="4616">
+        <label>Source/Dibella/Inc/Scene/Scene.h</label>
+        <link refid="_dibella_2_inc_2_scene_2_scene_8h_source"/>
+      </node>
+      <node id="4622">
+        <label>Source/Platform/Inc/Utils/FileReader.h</label>
+        <link refid="_file_reader_8h_source"/>
+      </node>
+      <node id="4578">
+        <label>Source/Samples/2_DeferredRenderer/Inc/Forward/ForwardComputeScene.h</label>
+        <link refid="_forward_compute_scene_8h_source"/>
+        <childnode refid="4576" relation="include">
+        </childnode>
+      </node>
+      <node id="4593">
+        <label>Source/Azura/RenderSystem/Inc/D3D12/D3D12ScopedImage.h</label>
+        <link refid="_d3_d12_scoped_image_8h_source"/>
+        <childnode refid="4563" relation="include">
+        </childnode>
+        <childnode refid="4570" relation="include">
+        </childnode>
+        <childnode refid="4568" relation="include">
+        </childnode>
+        <childnode refid="4571" relation="include">
+        </childnode>
+      </node>
+      <node id="4565">
+        <label>Source/Azura/RenderSystem/Inc/Generic/Renderer.h</label>
+        <link refid="_renderer_8h_source"/>
+        <childnode refid="4564" relation="include">
+        </childnode>
+        <childnode refid="4566" relation="include">
+        </childnode>
+        <childnode refid="4582" relation="include">
+        </childnode>
+        <childnode refid="4583" relation="include">
+        </childnode>
+        <childnode refid="4584" relation="include">
+        </childnode>
+        <childnode refid="4585" relation="include">
+        </childnode>
+        <childnode refid="4586" relation="include">
+        </childnode>
+        <childnode refid="4574" relation="include">
+        </childnode>
+        <childnode refid="4575" relation="include">
+        </childnode>
+        <childnode refid="4576" relation="include">
+        </childnode>
+        <childnode refid="4581" relation="include">
+        </childnode>
+      </node>
+      <node id="4589">
+        <label>Source/Azura/RenderSystem/Inc/D3D12/D3D12Core.h</label>
+        <link refid="_d3_d12_core_8h_source"/>
+        <childnode refid="4563" relation="include">
+        </childnode>
+        <childnode refid="4590" relation="include">
+        </childnode>
+        <childnode refid="4570" relation="include">
+        </childnode>
+        <childnode refid="4564" relation="include">
+        </childnode>
+        <childnode refid="4591" relation="include">
+        </childnode>
+        <childnode refid="4592" relation="include">
+        </childnode>
+        <childnode refid="4568" relation="include">
+        </childnode>
+        <childnode refid="4593" relation="include">
+        </childnode>
+        <childnode refid="4571" relation="include">
+        </childnode>
+        <childnode refid="4594" relation="include">
+        </childnode>
+        <childnode refid="4595" relation="include">
+        </childnode>
+        <childnode refid="4567" relation="include">
+        </childnode>
+        <childnode refid="4596" relation="include">
+        </childnode>
+      </node>
+      <node id="4563">
+        <label>Source/Azura/RenderSystem/Inc/D3D12/D3D12ComputePool.h</label>
+        <link refid="_d3_d12_compute_pool_8h_source"/>
+        <childnode refid="4564" relation="include">
+        </childnode>
+      </node>
+      <node id="4576">
+        <label>Source/Samples/2_DeferredRenderer/Inc/App/App.h</label>
+        <link refid="_app_8h_source"/>
+      </node>
+      <node id="4621">
+        <label>Source/Physics/Inc/Physics/PBD/Common/SolvingView.h</label>
+        <link refid="_solving_view_8h_source"/>
+        <childnode refid="4618" relation="include">
+        </childnode>
+      </node>
+      <node id="4591">
+        <label>Source/Azura/RenderSystem/Inc/D3D12/D3D12ScopedBuffer.h</label>
+        <link refid="_d3_d12_scoped_buffer_8h_source"/>
+        <childnode refid="4563" relation="include">
+        </childnode>
+        <childnode refid="4570" relation="include">
+        </childnode>
+        <childnode refid="4568" relation="include">
+        </childnode>
+      </node>
+      <node id="4606">
+        <label>Source/Azura/RenderSystem/Inc/Vulkan/VkScopedImage.h</label>
+        <link refid="_vk_scoped_image_8h_source"/>
+        <childnode refid="4607" relation="include">
+        </childnode>
+        <childnode refid="4600" relation="include">
+        </childnode>
+        <childnode refid="4608" relation="include">
+        </childnode>
+        <childnode refid="4610" relation="include">
+        </childnode>
+      </node>
+      <node id="4620">
+        <label>Source/Physics/Inc/Physics/Geometry/ClothPlane.h</label>
+        <link refid="_cloth_plane_8h_source"/>
+        <childnode refid="4581" relation="include">
+        </childnode>
+      </node>
+      <node id="4588">
+        <label>Source/Azura/RenderSystem/Inc/Generic/GenericTypes.h</label>
+        <link refid="_azura_2_render_system_2_inc_2_generic_2_generic_types_8h_source"/>
+        <childnode refid="4589" relation="include">
+        </childnode>
+        <childnode refid="4569" relation="include">
+        </childnode>
+        <childnode refid="4596" relation="include">
+        </childnode>
+        <childnode refid="4562" relation="include">
+        </childnode>
+        <childnode refid="4597" relation="include">
+        </childnode>
+        <childnode refid="4598" relation="include">
+        </childnode>
+        <childnode refid="4566" relation="include">
+        </childnode>
+        <childnode refid="4565" relation="include">
+        </childnode>
+        <childnode refid="4601" relation="include">
+        </childnode>
+        <childnode refid="4603" relation="include">
+        </childnode>
+        <childnode refid="4611" relation="include">
+        </childnode>
+        <childnode refid="4609" relation="include">
+        </childnode>
+        <childnode refid="4608" relation="include">
+        </childnode>
+        <childnode refid="4613" relation="include">
+        </childnode>
+      </node>
+      <node id="4600">
+        <label>Source/Azura/RenderSystem/Inc/Vulkan/VkDrawablePool.h</label>
+        <link refid="_vk_drawable_pool_8h_source"/>
+        <childnode refid="4584" relation="include">
+        </childnode>
+      </node>
+      <node id="4614">
+        <label>Source/Azura/RenderSystem/Inc/Vulkan/VkPlatform.h</label>
+        <link refid="_vk_platform_8h_source"/>
+        <childnode refid="4584" relation="include">
+        </childnode>
+      </node>
+      <node id="4615">
+        <label>Source/Containers/Test/Vector_test.h</label>
+        <link refid="_vector__test_8h_source"/>
+      </node>
+      <node id="4580">
+        <label>Source/Samples/2_DeferredRenderer/Inc/ForwardPlus/ForwardPlusComputeScene.h</label>
+        <link refid="_forward_plus_compute_scene_8h_source"/>
+        <childnode refid="4576" relation="include">
+        </childnode>
+      </node>
+      <node id="4573">
+        <label>Source/Azura/RenderSystem/Inc/Generic/Windows/Win32GLFWWindow.h</label>
+        <link refid="_win32_g_l_f_w_window_8h_source"/>
+      </node>
+      <node id="4569">
+        <label>Source/Azura/RenderSystem/Inc/D3D12/D3D12ScopedPipeline.h</label>
+        <link refid="_d3_d12_scoped_pipeline_8h_source"/>
+        <childnode refid="4563" relation="include">
+        </childnode>
+        <childnode refid="4570" relation="include">
+        </childnode>
+      </node>
+      <node id="4595">
+        <label>Source/Azura/RenderSystem/Inc/D3D12/D3D12ScopedShader.h</label>
+        <link refid="_d3_d12_scoped_shader_8h_source"/>
+        <childnode refid="4564" relation="include">
+        </childnode>
+        <childnode refid="4568" relation="include">
+        </childnode>
+        <childnode refid="4569" relation="include">
+        </childnode>
+        <childnode refid="4571" relation="include">
+        </childnode>
+      </node>
+      <node id="4585">
+        <label>Source/Azura/RenderSystem/Inc/Vulkan/VkTextureManager.h</label>
+        <link refid="_vk_texture_manager_8h_source"/>
+        <childnode refid="4584" relation="include">
+        </childnode>
+      </node>
+      <node id="4594">
+        <label>Source/Azura/RenderSystem/Inc/D3D12/D3D12ScopedSampler.h</label>
+        <link refid="_d3_d12_scoped_sampler_8h_source"/>
+        <childnode refid="4563" relation="include">
+        </childnode>
+        <childnode refid="4570" relation="include">
+        </childnode>
+      </node>
+      <node id="4564">
+        <label>Source/Azura/RenderSystem/Inc/D3D12/D3D12Renderer.h</label>
+        <link refid="_d3_d12_renderer_8h_source"/>
+      </node>
+      <node id="4605">
+        <label>Source/Samples/2_DeferredRenderer/Inc/App/LightTexture.h</label>
+        <link refid="_light_texture_8h_source"/>
+        <childnode refid="4576" relation="include">
+        </childnode>
+        <childnode refid="4578" relation="include">
+        </childnode>
+        <childnode refid="4579" relation="include">
+        </childnode>
+        <childnode refid="4580" relation="include">
+        </childnode>
+      </node>
+      <node id="4571">
+        <label>Source/Azura/RenderSystem/Inc/D3D12/D3D12ScopedRenderPass.h</label>
+        <link refid="_d3_d12_scoped_render_pass_8h_source"/>
+        <childnode refid="4570" relation="include">
+        </childnode>
+        <childnode refid="4564" relation="include">
+        </childnode>
+        <childnode refid="4569" relation="include">
+        </childnode>
+      </node>
+      <node id="4581">
+        <label>Source/Samples/3_ClothSim/Inc/ClothSim/AppRenderer.h</label>
+        <link refid="3___cloth_sim_2_inc_2_cloth_sim_2_app_renderer_8h_source"/>
+      </node>
+      <node id="4567">
+        <label>Source/Azura/RenderSystem/Inc/D3D12/D3D12ScopedSwapChain.h</label>
+        <link refid="_d3_d12_scoped_swap_chain_8h_source"/>
+        <childnode refid="4564" relation="include">
+        </childnode>
+        <childnode refid="4568" relation="include">
+        </childnode>
+        <childnode refid="4571" relation="include">
+        </childnode>
+      </node>
+      <node id="4587">
+        <label>Source/Azura/RenderSystem/Inc/Vulkan/VkComputePool.h</label>
+        <link refid="_vk_compute_pool_8h_source"/>
+        <childnode refid="4584" relation="include">
+        </childnode>
+      </node>
+      <node id="4612">
+        <label>Source/Azura/RenderSystem/Inc/Vulkan/VkShader.h</label>
+        <link refid="_vk_shader_8h_source"/>
+        <childnode refid="4608" relation="include">
+        </childnode>
+        <childnode refid="4584" relation="include">
+        </childnode>
+      </node>
+      <node id="4561">
+        <label>Source/Containers/Inc/Containers/Vector.h</label>
+        <link refid="_vector_8h"/>
+        <childnode refid="4562" relation="include">
+        </childnode>
+        <childnode refid="4588" relation="include">
+        </childnode>
+        <childnode refid="4598" relation="include">
+        </childnode>
+        <childnode refid="4565" relation="include">
+        </childnode>
+        <childnode refid="4603" relation="include">
+        </childnode>
+        <childnode refid="4583" relation="include">
+        </childnode>
+        <childnode refid="4607" relation="include">
+        </childnode>
+        <childnode refid="4609" relation="include">
+        </childnode>
+        <childnode refid="4614" relation="include">
+        </childnode>
+        <childnode refid="4584" relation="include">
+        </childnode>
+        <childnode refid="4610" relation="include">
+        </childnode>
+        <childnode refid="4615" relation="include">
+        </childnode>
+        <childnode refid="4616" relation="include">
+        </childnode>
+        <childnode refid="4617" relation="include">
+        </childnode>
+        <childnode refid="4621" relation="include">
+        </childnode>
+        <childnode refid="4622" relation="include">
+        </childnode>
+        <childnode refid="4605" relation="include">
+        </childnode>
+      </node>
+      <node id="4575">
+        <label>Source/Samples/1_ProceduralPlanet/Inc/ProceduralPlanet/AppRenderer.h</label>
+        <link refid="1___procedural_planet_2_inc_2_procedural_planet_2_app_renderer_8h_source"/>
+      </node>
+      <node id="4574">
+        <label>Source/Samples/0_TestZone/Inc/TestZone/AppRenderer.h</label>
+        <link refid="0___test_zone_2_inc_2_test_zone_2_app_renderer_8h_source"/>
+      </node>
+      <node id="4590">
+        <label>Source/Azura/RenderSystem/Inc/D3D12/D3D12Drawable.h</label>
+        <link refid="_d3_d12_drawable_8h_source"/>
+        <childnode refid="4563" relation="include">
+        </childnode>
+        <childnode refid="4570" relation="include">
+        </childnode>
+      </node>
+      <node id="4572">
+        <label>Source/Azura/RenderSystem/Inc/Generic/GLFWWindow.h</label>
+        <link refid="_g_l_f_w_window_8h_source"/>
+        <childnode refid="4573" relation="include">
+        </childnode>
+      </node>
+      <node id="4610">
+        <label>Source/Azura/RenderSystem/Inc/Vulkan/VkScopedSwapChain.h</label>
+        <link refid="_vk_scoped_swap_chain_8h_source"/>
+        <childnode refid="4609" relation="include">
+        </childnode>
+        <childnode refid="4584" relation="include">
+        </childnode>
+      </node>
+      <node id="4586">
+        <label>Source/Azura/RenderSystem/Test/RenderTestCases.h</label>
+        <link refid="_render_test_cases_8h_source"/>
+      </node>
+      <node id="4601">
+        <label>Source/Azura/RenderSystem/Inc/Generic/GPUBuffer.h</label>
+        <link refid="_g_p_u_buffer_8h_source"/>
+        <childnode refid="4602" relation="include">
+        </childnode>
+      </node>
+      <node id="4599">
+        <label>Source/Azura/RenderSystem/Inc/Generic/PoolPrimitives.h</label>
+        <link refid="_pool_primitives_8h_source"/>
+      </node>
+      <node id="4598">
+        <label>Source/Azura/RenderSystem/Inc/Generic/Drawable.h</label>
+        <link refid="_drawable_8h_source"/>
+        <childnode refid="4590" relation="include">
+        </childnode>
+        <childnode refid="4570" relation="include">
+        </childnode>
+        <childnode refid="4565" relation="include">
+        </childnode>
+        <childnode refid="4599" relation="include">
+        </childnode>
+        <childnode refid="4587" relation="include">
+        </childnode>
+        <childnode refid="4600" relation="include">
+        </childnode>
+      </node>
+      <node id="4618">
+        <label>Source/Physics/Inc/Physics/PBD/Cloth/ClothSolvingView.h</label>
+        <link refid="_cloth_solving_view_8h_source"/>
+        <childnode refid="4619" relation="include">
+        </childnode>
+        <childnode refid="4620" relation="include">
+        </childnode>
+      </node>
+      <node id="4583">
+        <label>Source/Azura/RenderSystem/Inc/Vulkan/VkCore.h</label>
+        <link refid="_vk_core_8h_source"/>
+        <childnode refid="4584" relation="include">
+        </childnode>
+      </node>
+      <node id="4579">
+        <label>Source/Samples/2_DeferredRenderer/Inc/Forward/ForwardScene.h</label>
+        <link refid="_forward_scene_8h_source"/>
+        <childnode refid="4576" relation="include">
+        </childnode>
+      </node>
+      <node id="4570">
+        <label>Source/Azura/RenderSystem/Inc/D3D12/D3D12DrawablePool.h</label>
+        <link refid="_d3_d12_drawable_pool_8h_source"/>
+        <childnode refid="4564" relation="include">
+        </childnode>
+      </node>
+      <node id="4597">
+        <label>Source/Azura/RenderSystem/Inc/Generic/Debug.h</label>
+        <link refid="_debug_8h_source"/>
+      </node>
+      <node id="4582">
+        <label>Source/Azura/RenderSystem/Inc/Generic/RenderSystem.h</label>
+        <link refid="_render_system_8h_source"/>
+      </node>
+      <node id="4566">
+        <label>Source/Azura/RenderSystem/Inc/Generic/Window.h</label>
+        <link refid="_window_8h_source"/>
+        <childnode refid="4564" relation="include">
+        </childnode>
+        <childnode refid="4567" relation="include">
+        </childnode>
+        <childnode refid="4572" relation="include">
+        </childnode>
+        <childnode refid="4574" relation="include">
+        </childnode>
+        <childnode refid="4575" relation="include">
+        </childnode>
+        <childnode refid="4576" relation="include">
+        </childnode>
+        <childnode refid="4577" relation="include">
+        </childnode>
+        <childnode refid="4581" relation="include">
+        </childnode>
+      </node>
+      <node id="4592">
+        <label>Source/Azura/RenderSystem/Inc/D3D12/D3D12ScopedCommandBuffer.h</label>
+        <link refid="_d3_d12_scoped_command_buffer_8h_source"/>
+        <childnode refid="4563" relation="include">
+        </childnode>
+        <childnode refid="4570" relation="include">
+        </childnode>
+        <childnode refid="4564" relation="include">
+        </childnode>
+        <childnode refid="4568" relation="include">
+        </childnode>
+        <childnode refid="4571" relation="include">
+        </childnode>
+      </node>
+      <node id="4584">
+        <label>Source/Azura/RenderSystem/Inc/Vulkan/VkRenderer.h</label>
+        <link refid="_vk_renderer_8h_source"/>
+      </node>
+      <node id="4596">
+        <label>Source/Azura/RenderSystem/Inc/D3D12/D3D12TypeMapping.h</label>
+        <link refid="_d3_d12_type_mapping_8h_source"/>
+      </node>
+      <node id="4577">
+        <label>Source/Samples/2_DeferredRenderer/Inc/App/Scene.h</label>
+        <link refid="_samples_22___deferred_renderer_2_inc_2_app_2_scene_8h_source"/>
+        <childnode refid="4576" relation="include">
+        </childnode>
+        <childnode refid="4578" relation="include">
+        </childnode>
+        <childnode refid="4579" relation="include">
+        </childnode>
+        <childnode refid="4580" relation="include">
+        </childnode>
+      </node>
+      <node id="4562">
+        <label>Source/Azura/RenderSystem/Inc/Generic/ComputePool.h</label>
+        <link refid="_compute_pool_8h_source"/>
+        <childnode refid="4563" relation="include">
+        </childnode>
+        <childnode refid="4565" relation="include">
+        </childnode>
+        <childnode refid="4587" relation="include">
+        </childnode>
+      </node>
+      <node id="4568">
+        <label>Source/Azura/RenderSystem/Inc/D3D12/D3D12ScopedComputePass.h</label>
+        <link refid="_d3_d12_scoped_compute_pass_8h_source"/>
+        <childnode refid="4563" relation="include">
+        </childnode>
+        <childnode refid="4564" relation="include">
+        </childnode>
+        <childnode refid="4569" relation="include">
+        </childnode>
+      </node>
+      <node id="4613">
+        <label>Source/Azura/RenderSystem/Inc/Vulkan/VkTypeMapping.h</label>
+        <link refid="_vk_type_mapping_8h_source"/>
+      </node>
+      <node id="4603">
+        <label>Source/Azura/RenderSystem/Inc/Generic/TextureManager.h</label>
+        <link refid="_texture_manager_8h_source"/>
+        <childnode refid="4604" relation="include">
+        </childnode>
+        <childnode refid="4582" relation="include">
+        </childnode>
+        <childnode refid="4606" relation="include">
+        </childnode>
+        <childnode refid="4585" relation="include">
+        </childnode>
+        <childnode refid="4574" relation="include">
+        </childnode>
+        <childnode refid="4575" relation="include">
+        </childnode>
+        <childnode refid="4577" relation="include">
+        </childnode>
+        <childnode refid="4581" relation="include">
+        </childnode>
+      </node>
+      <node id="4617">
+        <label>Source/Physics/Inc/Physics/PBD/Cloth/Constraints.h</label>
+        <link refid="_constraints_8h_source"/>
+        <childnode refid="4618" relation="include">
+        </childnode>
+      </node>
+      <node id="4608">
+        <label>Source/Azura/RenderSystem/Inc/Vulkan/VkScopedRenderPass.h</label>
+        <link refid="_vk_scoped_render_pass_8h_source"/>
+        <childnode refid="4609" relation="include">
+        </childnode>
+        <childnode refid="4600" relation="include">
+        </childnode>
+        <childnode refid="4584" relation="include">
+        </childnode>
+      </node>
+      <node id="4611">
+        <label>Source/Azura/RenderSystem/Inc/Generic/Shader.h</label>
+        <link refid="_shader_8h_source"/>
+        <childnode refid="4595" relation="include">
+        </childnode>
+        <childnode refid="4612" relation="include">
+        </childnode>
+      </node>
+      <node id="4607">
+        <label>Source/Azura/RenderSystem/Inc/Vulkan/VkTypes.h</label>
+        <link refid="_vk_types_8h_source"/>
+        <childnode refid="4583" relation="include">
+        </childnode>
+      </node>
+      <node id="4619">
+        <label>Source/Physics/Inc/Physics/Geometry/ClothMesh.h</label>
+        <link refid="_physics_2_inc_2_physics_2_geometry_2_cloth_mesh_8h_source"/>
+        <childnode refid="4581" relation="include">
+        </childnode>
+      </node>
+    </invincdepgraph>
+    <innerclass refid="struct_azura_1_1_containers_1_1_container_extent" prot="public">Azura::Containers::ContainerExtent</innerclass>
+    <innerclass refid="class_azura_1_1_containers_1_1_vector" prot="public">Azura::Containers::Vector</innerclass>
+    <innerclass refid="class_azura_1_1_containers_1_1_vector_1_1_iterator" prot="public">Azura::Containers::Vector::Iterator</innerclass>
+    <innernamespace refid="namespace_azura">Azura</innernamespace>
+    <innernamespace refid="namespace_azura_1_1_containers">Azura::Containers</innernamespace>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <programlisting>
+<codeline lineno="1"><highlight class="preprocessor">#pragma<sp/>once</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="2"><highlight class="normal"></highlight></codeline>
+<codeline lineno="3"><highlight class="normal"></highlight><highlight class="comment">//<sp/>for<sp/>memcpy</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="4"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&lt;cassert&gt;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="5"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&lt;cstring&gt;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="6"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&lt;functional&gt;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="7"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&lt;iterator&gt;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="8"><highlight class="normal"></highlight></codeline>
+<codeline lineno="9"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&quot;Array.h&quot;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="10"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&quot;Memory/Allocator.h&quot;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="11"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&quot;Types.h&quot;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="12"><highlight class="normal"></highlight></codeline>
+<codeline lineno="13"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&quot;Utils/Macros.h&quot;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="14"><highlight class="normal"></highlight></codeline>
+<codeline lineno="15"><highlight class="normal"></highlight><highlight class="keyword">namespace<sp/></highlight><highlight class="normal"><ref refid="namespace_azura" kindref="compound">Azura</ref><sp/>{</highlight></codeline>
+<codeline lineno="16"><highlight class="normal"></highlight><highlight class="keyword">namespace<sp/></highlight><highlight class="normal">Containers<sp/>{</highlight></codeline>
+<codeline lineno="17" refid="struct_azura_1_1_containers_1_1_container_extent" refkind="compound"><highlight class="normal"></highlight><highlight class="keyword">struct<sp/></highlight><highlight class="normal"><ref refid="struct_azura_1_1_containers_1_1_container_extent" kindref="compound">ContainerExtent</ref><sp/>{</highlight></codeline>
+<codeline lineno="18"><highlight class="normal"><sp/><sp/>U32<sp/>m_size;</highlight></codeline>
+<codeline lineno="19"><highlight class="normal"><sp/><sp/>U32<sp/>m_reserveSize;</highlight></codeline>
+<codeline lineno="20"><highlight class="normal"></highlight></codeline>
+<codeline lineno="21"><highlight class="normal"><sp/><sp/></highlight><highlight class="keyword">explicit</highlight><highlight class="normal"><sp/><ref refid="struct_azura_1_1_containers_1_1_container_extent" kindref="compound">ContainerExtent</ref>(</highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>U32<sp/>size)</highlight></codeline>
+<codeline lineno="22"><highlight class="normal"><sp/><sp/><sp/><sp/>:<sp/>m_size(size),</highlight></codeline>
+<codeline lineno="23"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/>m_reserveSize(size)<sp/>{</highlight></codeline>
+<codeline lineno="24"><highlight class="normal"><sp/><sp/>}</highlight></codeline>
+<codeline lineno="25"><highlight class="normal"></highlight></codeline>
+<codeline lineno="26"><highlight class="normal"><sp/><sp/><ref refid="struct_azura_1_1_containers_1_1_container_extent" kindref="compound">ContainerExtent</ref>(</highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>U32<sp/>size,<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>U32<sp/>reserveSize)</highlight></codeline>
+<codeline lineno="27"><highlight class="normal"><sp/><sp/><sp/><sp/>:<sp/>m_size(size),</highlight></codeline>
+<codeline lineno="28"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/>m_reserveSize(reserveSize)<sp/>{</highlight></codeline>
+<codeline lineno="29"><highlight class="normal"><sp/><sp/>}</highlight></codeline>
+<codeline lineno="30"><highlight class="normal">};</highlight></codeline>
+<codeline lineno="31"><highlight class="normal"></highlight></codeline>
+<codeline lineno="32"><highlight class="normal"></highlight><highlight class="keyword">template</highlight><highlight class="normal"><sp/>&lt;</highlight><highlight class="keyword">typename</highlight><highlight class="normal"><sp/>Type&gt;</highlight></codeline>
+<codeline lineno="33" refid="class_azura_1_1_containers_1_1_vector" refkind="compound"><highlight class="normal"></highlight><highlight class="keyword">class<sp/></highlight><highlight class="normal"><ref refid="class_azura_1_1_containers_1_1_vector" kindref="compound">Vector</ref><sp/>{</highlight></codeline>
+<codeline lineno="34"><highlight class="normal"></highlight><highlight class="keyword">public</highlight><highlight class="normal">:</highlight></codeline>
+<codeline lineno="35"><highlight class="normal"><sp/><sp/><ref refid="class_azura_1_1_containers_1_1_vector" kindref="compound">Vector</ref>()<sp/>=<sp/></highlight><highlight class="keywordflow">default</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="36"><highlight class="normal"><sp/><sp/></highlight><highlight class="keyword">explicit</highlight><highlight class="normal"><sp/><ref refid="class_azura_1_1_containers_1_1_vector" kindref="compound">Vector</ref>(<ref refid="class_azura_1_1_memory_1_1_allocator" kindref="compound">Memory::Allocator</ref>&amp;<sp/>alloc);</highlight></codeline>
+<codeline lineno="37"><highlight class="normal"></highlight></codeline>
+<codeline lineno="38"><highlight class="normal"><sp/><sp/><ref refid="class_azura_1_1_containers_1_1_vector" kindref="compound">Vector</ref>(UINT<sp/>maxSize,<sp/><ref refid="class_azura_1_1_memory_1_1_allocator" kindref="compound">Memory::Allocator</ref>&amp;<sp/>alloc);</highlight></codeline>
+<codeline lineno="39"><highlight class="normal"></highlight></codeline>
+<codeline lineno="40"><highlight class="normal"><sp/><sp/><ref refid="class_azura_1_1_containers_1_1_vector" kindref="compound">Vector</ref>(UINT<sp/>currentSize,<sp/>UINT<sp/>maxSize,<sp/><ref refid="class_azura_1_1_memory_1_1_allocator" kindref="compound">Memory::Allocator</ref>&amp;<sp/>alloc);</highlight></codeline>
+<codeline lineno="41"><highlight class="normal"></highlight></codeline>
+<codeline lineno="42"><highlight class="normal"></highlight></codeline>
+<codeline lineno="43"><highlight class="normal"><sp/><sp/><ref refid="class_azura_1_1_containers_1_1_vector" kindref="compound">Vector</ref>(</highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>std::initializer_list&lt;Type&gt;&amp;<sp/>list,<sp/><ref refid="class_azura_1_1_memory_1_1_allocator" kindref="compound">Memory::Allocator</ref>&amp;<sp/>alloc);</highlight></codeline>
+<codeline lineno="44"><highlight class="normal"></highlight></codeline>
+<codeline lineno="45"><highlight class="normal"><sp/><sp/></highlight><highlight class="keyword">template</highlight><highlight class="normal"><sp/>&lt;</highlight><highlight class="keyword">typename</highlight><highlight class="normal">...<sp/>Args&gt;</highlight></codeline>
+<codeline lineno="46"><highlight class="normal"><sp/><sp/><ref refid="class_azura_1_1_containers_1_1_vector" kindref="compound">Vector</ref>(<ref refid="struct_azura_1_1_containers_1_1_container_extent" kindref="compound">ContainerExtent</ref><sp/>extent,<sp/><ref refid="class_azura_1_1_memory_1_1_allocator" kindref="compound">Memory::Allocator</ref>&amp;<sp/>alloc,<sp/>Args&amp;&amp;...<sp/>args);</highlight></codeline>
+<codeline lineno="47"><highlight class="normal"></highlight></codeline>
+<codeline lineno="48"><highlight class="normal"><sp/><sp/>~<ref refid="class_azura_1_1_containers_1_1_vector" kindref="compound">Vector</ref>();</highlight></codeline>
+<codeline lineno="49"><highlight class="normal"></highlight></codeline>
+<codeline lineno="50"><highlight class="normal"><sp/><sp/></highlight><highlight class="comment">//<sp/>Copy<sp/>Ctor</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="51"><highlight class="normal"><sp/><sp/><ref refid="class_azura_1_1_containers_1_1_vector" kindref="compound">Vector</ref>(</highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/><ref refid="class_azura_1_1_containers_1_1_vector" kindref="compound">Vector</ref>&amp;<sp/>other);</highlight></codeline>
+<codeline lineno="52"><highlight class="normal"></highlight></codeline>
+<codeline lineno="53"><highlight class="normal"><sp/><sp/><ref refid="class_azura_1_1_containers_1_1_vector" kindref="compound">Vector</ref>(</highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/><ref refid="class_azura_1_1_containers_1_1_vector" kindref="compound">Vector</ref><sp/>&amp;<sp/>other,<sp/><ref refid="class_azura_1_1_memory_1_1_allocator" kindref="compound">Memory::Allocator</ref><sp/>&amp;<sp/>alloc);</highlight></codeline>
+<codeline lineno="54"><highlight class="normal"></highlight></codeline>
+<codeline lineno="55"><highlight class="normal"><sp/><sp/></highlight><highlight class="comment">//<sp/>Move<sp/>Ctor</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="56"><highlight class="normal"><sp/><sp/><ref refid="class_azura_1_1_containers_1_1_vector" kindref="compound">Vector</ref>(<ref refid="class_azura_1_1_containers_1_1_vector" kindref="compound">Vector</ref>&amp;&amp;<sp/>other)<sp/>noexcept;</highlight></codeline>
+<codeline lineno="57"><highlight class="normal"></highlight></codeline>
+<codeline lineno="58"><highlight class="normal"><sp/><sp/><ref refid="class_azura_1_1_containers_1_1_vector" kindref="compound">Vector</ref>&amp;<sp/>operator=(</highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/><ref refid="class_azura_1_1_containers_1_1_vector" kindref="compound">Vector</ref>&amp;<sp/>other);</highlight></codeline>
+<codeline lineno="59"><highlight class="normal"><sp/><sp/><ref refid="class_azura_1_1_containers_1_1_vector" kindref="compound">Vector</ref>&amp;<sp/>operator=(<ref refid="class_azura_1_1_containers_1_1_vector" kindref="compound">Vector</ref>&amp;&amp;<sp/>other)<sp/>noexcept;</highlight></codeline>
+<codeline lineno="60"><highlight class="normal"></highlight></codeline>
+<codeline lineno="65"><highlight class="normal"><sp/><sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/><ref refid="class_azura_1_1_containers_1_1_vector_1aadc803b734b7481d9d7f2e9f86891ce4" kindref="member">PushBack</ref>(</highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>Type&amp;<sp/>data);</highlight></codeline>
+<codeline lineno="66"><highlight class="normal"></highlight></codeline>
+<codeline lineno="71"><highlight class="normal"><sp/><sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/><ref refid="class_azura_1_1_containers_1_1_vector_1aadc803b734b7481d9d7f2e9f86891ce4" kindref="member">PushBack</ref>(Type&amp;&amp;<sp/>data);</highlight></codeline>
+<codeline lineno="72"><highlight class="normal"></highlight></codeline>
+<codeline lineno="77"><highlight class="normal"><sp/><sp/></highlight><highlight class="keyword">template</highlight><highlight class="normal"><sp/>&lt;</highlight><highlight class="keyword">typename</highlight><highlight class="normal">...<sp/>Args&gt;</highlight></codeline>
+<codeline lineno="78"><highlight class="normal"><sp/><sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/><ref refid="class_azura_1_1_containers_1_1_vector_1aadfac4f55765e41e812160022a9a949f" kindref="member">EmplaceBack</ref>(Args<sp/>...<sp/>args);</highlight></codeline>
+<codeline lineno="79"><highlight class="normal"></highlight></codeline>
+<codeline lineno="83"><highlight class="normal"><sp/><sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/><ref refid="class_azura_1_1_containers_1_1_vector_1ad181b9dc858e1ad59fc64b39f795fb75" kindref="member">PopBack</ref>();</highlight></codeline>
+<codeline lineno="84"><highlight class="normal"></highlight></codeline>
+<codeline lineno="90"><highlight class="normal"><sp/><sp/></highlight><highlight class="keywordtype">int</highlight><highlight class="normal"><sp/><ref refid="class_azura_1_1_containers_1_1_vector_1a5da3557964b80e7c40a574fbbb7e24a6" kindref="member">FindFirst</ref>(</highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>Type&amp;<sp/>data);</highlight></codeline>
+<codeline lineno="91"><highlight class="normal"></highlight></codeline>
+<codeline lineno="96"><highlight class="normal"><sp/><sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/><ref refid="class_azura_1_1_containers_1_1_vector_1a4d191b0d876f03c44c5a58e6380a07ee" kindref="member">Remove</ref>(</highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>Type&amp;<sp/>data);</highlight></codeline>
+<codeline lineno="97"><highlight class="normal"></highlight></codeline>
+<codeline lineno="103"><highlight class="normal"><sp/><sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/><ref refid="class_azura_1_1_containers_1_1_vector_1af9aea7a8da9e449530132e50d85ca221" kindref="member">Reserve</ref>(U32<sp/>maxSize);</highlight></codeline>
+<codeline lineno="104"><highlight class="normal"><sp/><sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/>Resize(U32<sp/>maxSize);</highlight></codeline>
+<codeline lineno="105"><highlight class="normal"></highlight></codeline>
+<codeline lineno="110"><highlight class="normal"><sp/><sp/></highlight><highlight class="keywordtype">bool</highlight><highlight class="normal"><sp/><ref refid="class_azura_1_1_containers_1_1_vector_1a3f955f930eefbb486ff9880421bbc7a4" kindref="member">IsEmpty</ref>()<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="111"><highlight class="normal"></highlight></codeline>
+<codeline lineno="117"><highlight class="normal"><sp/><sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/><ref refid="class_azura_1_1_containers_1_1_vector_1a9f350f9bbc7f5aaec6318369444d2d99" kindref="member">InsertAt</ref>(U32<sp/>idx,<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>Type&amp;<sp/>data);</highlight></codeline>
+<codeline lineno="118"><highlight class="normal"></highlight></codeline>
+<codeline lineno="122"><highlight class="normal"><sp/><sp/>Type*<sp/><ref refid="class_azura_1_1_containers_1_1_vector_1a6e3fd44d2821bb97f170b6e5443ec57e" kindref="member">Data</ref>();</highlight></codeline>
+<codeline lineno="123"><highlight class="normal"></highlight></codeline>
+<codeline lineno="124"><highlight class="normal"><sp/><sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>Type*<sp/><ref refid="class_azura_1_1_containers_1_1_vector_1a6e3fd44d2821bb97f170b6e5443ec57e" kindref="member">Data</ref>()<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="125"><highlight class="normal"></highlight></codeline>
+<codeline lineno="126"><highlight class="normal"><sp/><sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/>Reset();</highlight></codeline>
+<codeline lineno="127"><highlight class="normal"></highlight></codeline>
+<codeline lineno="128"><highlight class="normal"><sp/><sp/>Type&amp;<sp/>operator[](U32<sp/>idx);</highlight></codeline>
+<codeline lineno="129"><highlight class="normal"><sp/><sp/>Type&amp;<sp/>operator[](U32<sp/>idx)<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="130"><highlight class="normal"></highlight></codeline>
+<codeline lineno="131"><highlight class="normal"><sp/><sp/>Type&amp;<sp/>Last();</highlight></codeline>
+<codeline lineno="132"><highlight class="normal"><sp/><sp/>Type&amp;<sp/>Last()<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="133"><highlight class="normal"></highlight></codeline>
+<codeline lineno="134"><highlight class="normal"><sp/><sp/>U32<sp/>GetSize()</highlight><highlight class="keyword"><sp/>const<sp/></highlight><highlight class="normal">{</highlight></codeline>
+<codeline lineno="135"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>m_size;</highlight></codeline>
+<codeline lineno="136"><highlight class="normal"><sp/><sp/>}</highlight></codeline>
+<codeline lineno="137"><highlight class="normal"></highlight></codeline>
+<codeline lineno="138"><highlight class="normal"><sp/><sp/>U32<sp/>GetMaxSize()</highlight><highlight class="keyword"><sp/>const<sp/></highlight><highlight class="normal">{</highlight></codeline>
+<codeline lineno="139"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>m_maxSize;</highlight></codeline>
+<codeline lineno="140"><highlight class="normal"><sp/><sp/>}</highlight></codeline>
+<codeline lineno="141"><highlight class="normal"></highlight></codeline>
+<codeline lineno="142"><highlight class="normal"><sp/><sp/></highlight><highlight class="keyword">template</highlight><highlight class="normal"><sp/>&lt;</highlight><highlight class="keyword">class</highlight><highlight class="normal"><sp/>InputIt&gt;</highlight></codeline>
+<codeline lineno="143"><highlight class="normal"><sp/><sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/>Assign(InputIt<sp/>first,<sp/>InputIt<sp/>last);</highlight></codeline>
+<codeline lineno="144"><highlight class="normal"></highlight></codeline>
+<codeline lineno="145" refid="class_azura_1_1_containers_1_1_vector_1_1_iterator" refkind="compound"><highlight class="normal"><sp/><sp/></highlight><highlight class="keyword">class<sp/></highlight><highlight class="normal"><ref refid="class_azura_1_1_containers_1_1_vector_1_1_iterator" kindref="compound">Iterator</ref><sp/>{</highlight></codeline>
+<codeline lineno="146"><highlight class="normal"><sp/><sp/></highlight><highlight class="keyword">public</highlight><highlight class="normal">:</highlight></codeline>
+<codeline lineno="147"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="class_azura_1_1_containers_1_1_vector_1_1_iterator" kindref="compound">Iterator</ref>()<sp/>=<sp/></highlight><highlight class="keywordflow">default</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="148"><highlight class="normal"><sp/><sp/><sp/><sp/>~<ref refid="class_azura_1_1_containers_1_1_vector_1_1_iterator" kindref="compound">Iterator</ref>()<sp/>=<sp/></highlight><highlight class="keywordflow">default</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="149"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="class_azura_1_1_containers_1_1_vector_1_1_iterator" kindref="compound">Iterator</ref>(</highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/><ref refid="class_azura_1_1_containers_1_1_vector_1_1_iterator" kindref="compound">Iterator</ref>&amp;<sp/>other)<sp/>=<sp/></highlight><highlight class="keywordflow">default</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="150"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="class_azura_1_1_containers_1_1_vector_1_1_iterator" kindref="compound">Iterator</ref>&amp;<sp/>operator=(</highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/><ref refid="class_azura_1_1_containers_1_1_vector_1_1_iterator" kindref="compound">Iterator</ref>&amp;<sp/>other)<sp/>=<sp/></highlight><highlight class="keywordflow">default</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="151"><highlight class="normal"></highlight></codeline>
+<codeline lineno="152"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">using</highlight><highlight class="normal"><sp/>iterator_category<sp/>=<sp/>std::random_access_iterator_tag;</highlight></codeline>
+<codeline lineno="153"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">using</highlight><highlight class="normal"><sp/>value_type<sp/>=<sp/>Type;</highlight></codeline>
+<codeline lineno="154"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">using</highlight><highlight class="normal"><sp/>difference_type<sp/>=<sp/>int;</highlight></codeline>
+<codeline lineno="155"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">using</highlight><highlight class="normal"><sp/>pointer<sp/>=<sp/>Type*;</highlight></codeline>
+<codeline lineno="156"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">using</highlight><highlight class="normal"><sp/>reference<sp/>=<sp/>Type&amp;;</highlight></codeline>
+<codeline lineno="157"><highlight class="normal"></highlight></codeline>
+<codeline lineno="158"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="class_azura_1_1_containers_1_1_vector_1_1_iterator" kindref="compound">Iterator</ref>(</highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/><ref refid="class_azura_1_1_containers_1_1_vector" kindref="compound">Vector</ref>*<sp/>ptr,<sp/></highlight><highlight class="keywordtype">int</highlight><highlight class="normal"><sp/>index)</highlight></codeline>
+<codeline lineno="159"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/>:<sp/>mPtr(ptr),</highlight></codeline>
+<codeline lineno="160"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>mIndex(index)<sp/>{</highlight></codeline>
+<codeline lineno="161"><highlight class="normal"><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="162"><highlight class="normal"></highlight></codeline>
+<codeline lineno="163"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="class_azura_1_1_containers_1_1_vector_1_1_iterator" kindref="compound">Iterator</ref>(<ref refid="class_azura_1_1_containers_1_1_vector_1_1_iterator" kindref="compound">Iterator</ref>&amp;&amp;<sp/>other)<sp/>noexcept<sp/>=<sp/></highlight><highlight class="keywordflow">default</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="164"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="class_azura_1_1_containers_1_1_vector_1_1_iterator" kindref="compound">Iterator</ref>&amp;<sp/>operator=(<ref refid="class_azura_1_1_containers_1_1_vector_1_1_iterator" kindref="compound">Iterator</ref>&amp;&amp;<sp/>other)<sp/>noexcept<sp/>=<sp/></highlight><highlight class="keywordflow">default</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="165"><highlight class="normal"></highlight></codeline>
+<codeline lineno="166"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="comment">//<sp/>Pre<sp/>Increment</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="167"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="class_azura_1_1_containers_1_1_vector_1_1_iterator" kindref="compound">Iterator</ref>&amp;<sp/>operator++()<sp/>{</highlight></codeline>
+<codeline lineno="168"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/>++mIndex;</highlight></codeline>
+<codeline lineno="169"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>*</highlight><highlight class="keyword">this</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="170"><highlight class="normal"><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="171"><highlight class="normal"></highlight></codeline>
+<codeline lineno="172"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="comment">//<sp/>Post<sp/>Increment</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="173"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="class_azura_1_1_containers_1_1_vector_1_1_iterator" kindref="compound">Iterator</ref><sp/>operator++(</highlight><highlight class="keywordtype">int</highlight><highlight class="normal">)<sp/>{</highlight></codeline>
+<codeline lineno="174"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="class_azura_1_1_containers_1_1_vector_1_1_iterator" kindref="compound">Iterator</ref><sp/>copy(*</highlight><highlight class="keyword">this</highlight><highlight class="normal">);</highlight></codeline>
+<codeline lineno="175"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/>operator++();</highlight></codeline>
+<codeline lineno="176"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>copy;</highlight></codeline>
+<codeline lineno="177"><highlight class="normal"><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="178"><highlight class="normal"></highlight></codeline>
+<codeline lineno="179"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="comment">//<sp/>Pre<sp/>Decrement</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="180"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="class_azura_1_1_containers_1_1_vector_1_1_iterator" kindref="compound">Iterator</ref>&amp;<sp/>operator--()<sp/>{</highlight></codeline>
+<codeline lineno="181"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/>--mIndex;</highlight></codeline>
+<codeline lineno="182"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>*</highlight><highlight class="keyword">this</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="183"><highlight class="normal"><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="184"><highlight class="normal"></highlight></codeline>
+<codeline lineno="185"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="comment">//<sp/>Post<sp/>Decrement</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="186"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="class_azura_1_1_containers_1_1_vector_1_1_iterator" kindref="compound">Iterator</ref><sp/>operator--(</highlight><highlight class="keywordtype">int</highlight><highlight class="normal">)<sp/>{</highlight></codeline>
+<codeline lineno="187"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="class_azura_1_1_containers_1_1_vector_1_1_iterator" kindref="compound">Iterator</ref><sp/>copy(*</highlight><highlight class="keyword">this</highlight><highlight class="normal">);</highlight></codeline>
+<codeline lineno="188"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/>operator--();</highlight></codeline>
+<codeline lineno="189"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>copy;</highlight></codeline>
+<codeline lineno="190"><highlight class="normal"><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="191"><highlight class="normal"></highlight></codeline>
+<codeline lineno="192"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">bool</highlight><highlight class="normal"><sp/>operator==(</highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/><ref refid="class_azura_1_1_containers_1_1_vector_1_1_iterator" kindref="compound">Iterator</ref>&amp;<sp/>rhs)<sp/>{</highlight></codeline>
+<codeline lineno="193"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>mPtr<sp/>==<sp/>rhs.mPtr<sp/>&amp;&amp;<sp/>mIndex<sp/>==<sp/>rhs.mIndex;</highlight></codeline>
+<codeline lineno="194"><highlight class="normal"><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="195"><highlight class="normal"></highlight></codeline>
+<codeline lineno="196"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">bool</highlight><highlight class="normal"><sp/>operator!=(</highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/><ref refid="class_azura_1_1_containers_1_1_vector_1_1_iterator" kindref="compound">Iterator</ref>&amp;<sp/>rhs)<sp/>{</highlight></codeline>
+<codeline lineno="197"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>!(*</highlight><highlight class="keyword">this</highlight><highlight class="normal"><sp/>==<sp/>rhs);</highlight></codeline>
+<codeline lineno="198"><highlight class="normal"><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="199"><highlight class="normal"></highlight></codeline>
+<codeline lineno="200"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">bool</highlight><highlight class="normal"><sp/>operator&lt;(</highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/><ref refid="class_azura_1_1_containers_1_1_vector_1_1_iterator" kindref="compound">Iterator</ref>&amp;<sp/>rhs)<sp/>{</highlight></codeline>
+<codeline lineno="201"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/>assert(mPtr<sp/>==<sp/>rhs.mPtr);</highlight></codeline>
+<codeline lineno="202"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>mIndex<sp/>&lt;<sp/>rhs.mIndex;</highlight></codeline>
+<codeline lineno="203"><highlight class="normal"><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="204"><highlight class="normal"></highlight></codeline>
+<codeline lineno="205"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">bool</highlight><highlight class="normal"><sp/>operator&lt;=(</highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/><ref refid="class_azura_1_1_containers_1_1_vector_1_1_iterator" kindref="compound">Iterator</ref>&amp;<sp/>rhs)<sp/>{</highlight></codeline>
+<codeline lineno="206"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/>assert(mPtr<sp/>==<sp/>rhs.mPtr);</highlight></codeline>
+<codeline lineno="207"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>mIndex<sp/>&lt;=<sp/>rhs.mIndex;</highlight></codeline>
+<codeline lineno="208"><highlight class="normal"><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="209"><highlight class="normal"></highlight></codeline>
+<codeline lineno="210"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">bool</highlight><highlight class="normal"><sp/>operator&gt;(</highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/><ref refid="class_azura_1_1_containers_1_1_vector_1_1_iterator" kindref="compound">Iterator</ref>&amp;<sp/>rhs)<sp/>{</highlight></codeline>
+<codeline lineno="211"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/>assert(mPtr<sp/>==<sp/>rhs.mPtr);</highlight></codeline>
+<codeline lineno="212"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>mIndex<sp/>&gt;<sp/>rhs.mIndex;</highlight></codeline>
+<codeline lineno="213"><highlight class="normal"><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="214"><highlight class="normal"></highlight></codeline>
+<codeline lineno="215"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">bool</highlight><highlight class="normal"><sp/>operator&gt;=(</highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/><ref refid="class_azura_1_1_containers_1_1_vector_1_1_iterator" kindref="compound">Iterator</ref>&amp;<sp/>rhs)<sp/>{</highlight></codeline>
+<codeline lineno="216"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/>assert(mPtr<sp/>==<sp/>rhs.mPtr);</highlight></codeline>
+<codeline lineno="217"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>mIndex<sp/>&gt;=<sp/>rhs.mIndex;</highlight></codeline>
+<codeline lineno="218"><highlight class="normal"><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="219"><highlight class="normal"></highlight></codeline>
+<codeline lineno="220"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="class_azura_1_1_containers_1_1_vector_1_1_iterator" kindref="compound">Iterator</ref><sp/>operator+(</highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">int</highlight><highlight class="normal">&amp;<sp/>idx)<sp/>{</highlight></codeline>
+<codeline lineno="221"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/><ref refid="class_azura_1_1_containers_1_1_vector_1_1_iterator" kindref="compound">Iterator</ref>(mPtr,<sp/>mIndex<sp/>+<sp/>idx);</highlight></codeline>
+<codeline lineno="222"><highlight class="normal"><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="223"><highlight class="normal"></highlight></codeline>
+<codeline lineno="224"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="class_azura_1_1_containers_1_1_vector_1_1_iterator" kindref="compound">Iterator</ref>&amp;<sp/>operator+=(</highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">int</highlight><highlight class="normal">&amp;<sp/>idx)<sp/>{</highlight></codeline>
+<codeline lineno="225"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/>mIndex<sp/>+=<sp/>idx;</highlight></codeline>
+<codeline lineno="226"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>*</highlight><highlight class="keyword">this</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="227"><highlight class="normal"><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="228"><highlight class="normal"></highlight></codeline>
+<codeline lineno="229"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="class_azura_1_1_containers_1_1_vector_1_1_iterator" kindref="compound">Iterator</ref><sp/>operator-(</highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">int</highlight><highlight class="normal">&amp;<sp/>idx)<sp/>{</highlight></codeline>
+<codeline lineno="230"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/>assert(mIndex<sp/>-<sp/>idx<sp/>&gt;<sp/>0);</highlight></codeline>
+<codeline lineno="231"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/><ref refid="class_azura_1_1_containers_1_1_vector_1_1_iterator" kindref="compound">Iterator</ref>(mPtr,<sp/>mIndex<sp/>-<sp/>idx);</highlight></codeline>
+<codeline lineno="232"><highlight class="normal"><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="233"><highlight class="normal"></highlight></codeline>
+<codeline lineno="234"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="class_azura_1_1_containers_1_1_vector_1_1_iterator" kindref="compound">Iterator</ref>&amp;<sp/>operator-=(</highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">int</highlight><highlight class="normal">&amp;<sp/>idx)<sp/>{</highlight></codeline>
+<codeline lineno="235"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/>assert(mIndex<sp/>-<sp/>idx<sp/>&gt;<sp/>0);</highlight></codeline>
+<codeline lineno="236"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/>mIndex<sp/>-=<sp/>idx;</highlight></codeline>
+<codeline lineno="237"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>*</highlight><highlight class="keyword">this</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="238"><highlight class="normal"><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="239"><highlight class="normal"></highlight></codeline>
+<codeline lineno="240"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">int</highlight><highlight class="normal"><sp/>operator-(</highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/><ref refid="class_azura_1_1_containers_1_1_vector_1_1_iterator" kindref="compound">Iterator</ref>&amp;<sp/>rhs)<sp/>{</highlight></codeline>
+<codeline lineno="241"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/>assert(mPtr<sp/>==<sp/>rhs.mPtr);</highlight></codeline>
+<codeline lineno="242"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>mIndex<sp/>-<sp/>rhs.mIndex;</highlight></codeline>
+<codeline lineno="243"><highlight class="normal"><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="244"><highlight class="normal"></highlight></codeline>
+<codeline lineno="245"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">friend</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">int</highlight><highlight class="normal"><sp/>operator-(</highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/><ref refid="class_azura_1_1_containers_1_1_vector_1_1_iterator" kindref="compound">Iterator</ref>&amp;<sp/>lhs,<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/><ref refid="class_azura_1_1_containers_1_1_vector_1_1_iterator" kindref="compound">Iterator</ref>&amp;<sp/>rhs)<sp/>{</highlight></codeline>
+<codeline lineno="246"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="class_azura_1_1_containers_1_1_vector_1_1_iterator" kindref="compound">Iterator</ref><sp/>copy(lhs);</highlight></codeline>
+<codeline lineno="247"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>copy<sp/>-<sp/>rhs;</highlight></codeline>
+<codeline lineno="248"><highlight class="normal"><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="249"><highlight class="normal"></highlight></codeline>
+<codeline lineno="250"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="comment">//<sp/>Element<sp/>Accessors</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="251"><highlight class="normal"></highlight></codeline>
+<codeline lineno="252"><highlight class="normal"><sp/><sp/><sp/><sp/>Type&amp;<sp/>operator*()<sp/>{</highlight></codeline>
+<codeline lineno="253"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>mPtr-&gt;operator[](mIndex);</highlight></codeline>
+<codeline lineno="254"><highlight class="normal"><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="255"><highlight class="normal"></highlight></codeline>
+<codeline lineno="256"><highlight class="normal"><sp/><sp/><sp/><sp/>Type*<sp/>operator-&gt;()<sp/>{</highlight></codeline>
+<codeline lineno="257"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>&amp;mPtr-&gt;operator[](mIndex);</highlight></codeline>
+<codeline lineno="258"><highlight class="normal"><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="259"><highlight class="normal"></highlight></codeline>
+<codeline lineno="260"><highlight class="normal"><sp/><sp/><sp/><sp/>Type&amp;<sp/>operator[](</highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">int</highlight><highlight class="normal">&amp;<sp/>idx)<sp/>{</highlight></codeline>
+<codeline lineno="261"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>mPtr-&gt;operator[](mIndex<sp/>+<sp/>idx);</highlight></codeline>
+<codeline lineno="262"><highlight class="normal"><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="263"><highlight class="normal"></highlight></codeline>
+<codeline lineno="264"><highlight class="normal"><sp/><sp/></highlight><highlight class="keyword">private</highlight><highlight class="normal">:</highlight></codeline>
+<codeline lineno="265"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/><ref refid="class_azura_1_1_containers_1_1_vector" kindref="compound">Vector&lt;Type&gt;</ref>*<sp/>mPtr{</highlight><highlight class="keyword">nullptr</highlight><highlight class="normal">};</highlight></codeline>
+<codeline lineno="266"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">int</highlight><highlight class="normal"><sp/>mIndex{-1};</highlight></codeline>
+<codeline lineno="267"><highlight class="normal"><sp/><sp/>};</highlight></codeline>
+<codeline lineno="268"><highlight class="normal"></highlight></codeline>
+<codeline lineno="273"><highlight class="normal"><sp/><sp/><ref refid="class_azura_1_1_containers_1_1_vector_1_1_iterator" kindref="compound">Iterator</ref><sp/><ref refid="class_azura_1_1_containers_1_1_vector_1a49e7eba07315528d8f75998944b0e7c5" kindref="member">Begin</ref>()<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="274"><highlight class="normal"></highlight></codeline>
+<codeline lineno="279"><highlight class="normal"><sp/><sp/><ref refid="class_azura_1_1_containers_1_1_vector_1_1_iterator" kindref="compound">Iterator</ref><sp/><ref refid="class_azura_1_1_containers_1_1_vector_1aaf8c1fcfb814e8030e5520b56c094c6a" kindref="member">End</ref>()<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="280"><highlight class="normal"></highlight></codeline>
+<codeline lineno="285"><highlight class="normal"><sp/><sp/><ref refid="class_azura_1_1_containers_1_1_vector_1_1_iterator" kindref="compound">Iterator</ref><sp/><ref refid="class_azura_1_1_containers_1_1_vector_1a324d28755f053b4a83c89982eebeee93" kindref="member">begin</ref>()<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="286"><highlight class="normal"></highlight></codeline>
+<codeline lineno="291"><highlight class="normal"><sp/><sp/><ref refid="class_azura_1_1_containers_1_1_vector_1_1_iterator" kindref="compound">Iterator</ref><sp/><ref refid="class_azura_1_1_containers_1_1_vector_1a364c485414869aa9d6de832f2af0f46f" kindref="member">end</ref>()<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="292"><highlight class="normal"></highlight></codeline>
+<codeline lineno="293"><highlight class="normal"></highlight><highlight class="keyword">private</highlight><highlight class="normal">:</highlight></codeline>
+<codeline lineno="294"><highlight class="normal"><sp/><sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/>GrowIfNeeded();</highlight></codeline>
+<codeline lineno="295"><highlight class="normal"></highlight></codeline>
+<codeline lineno="296"><highlight class="normal"><sp/><sp/>U32<sp/>m_size{0};</highlight></codeline>
+<codeline lineno="297"><highlight class="normal"><sp/><sp/>U32<sp/>m_maxSize{0};</highlight></codeline>
+<codeline lineno="298"><highlight class="normal"><sp/><sp/>std::reference_wrapper&lt;Memory::Allocator&gt;<sp/>m_allocator;</highlight></codeline>
+<codeline lineno="299"><highlight class="normal"><sp/><sp/>Memory::UniqueArrayPtr&lt;Type&gt;<sp/>m_base{</highlight><highlight class="keyword">nullptr</highlight><highlight class="normal">};</highlight></codeline>
+<codeline lineno="300"><highlight class="normal">};</highlight></codeline>
+<codeline lineno="301"><highlight class="normal"></highlight></codeline>
+<codeline lineno="302"><highlight class="normal"></highlight><highlight class="keyword">template</highlight><highlight class="normal"><sp/>&lt;</highlight><highlight class="keyword">typename</highlight><highlight class="normal"><sp/>Type&gt;</highlight></codeline>
+<codeline lineno="303"><highlight class="normal">Vector&lt;Type&gt;::Vector(Memory::Allocator&amp;<sp/>alloc)</highlight></codeline>
+<codeline lineno="304"><highlight class="normal"><sp/><sp/>:<sp/>m_allocator(alloc)<sp/>{</highlight></codeline>
+<codeline lineno="305"><highlight class="normal">}</highlight></codeline>
+<codeline lineno="306"><highlight class="normal"></highlight></codeline>
+<codeline lineno="307"><highlight class="normal"></highlight><highlight class="keyword">template</highlight><highlight class="normal"><sp/>&lt;</highlight><highlight class="keyword">typename</highlight><highlight class="normal"><sp/>Type&gt;</highlight></codeline>
+<codeline lineno="308"><highlight class="normal">Vector&lt;Type&gt;::Vector(</highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>UINT<sp/>maxSize,<sp/>Memory::Allocator&amp;<sp/>alloc)</highlight></codeline>
+<codeline lineno="309"><highlight class="normal"><sp/><sp/>:<sp/>m_maxSize(maxSize),</highlight></codeline>
+<codeline lineno="310"><highlight class="normal"><sp/><sp/><sp/><sp/>m_allocator(alloc),</highlight></codeline>
+<codeline lineno="311"><highlight class="normal"><sp/><sp/><sp/><sp/>m_base(m_allocator.get().RawNewArray&lt;Type&gt;(m_maxSize))<sp/>{</highlight></codeline>
+<codeline lineno="312"><highlight class="normal">}</highlight></codeline>
+<codeline lineno="313"><highlight class="normal"></highlight></codeline>
+<codeline lineno="314"><highlight class="normal"></highlight><highlight class="keyword">template</highlight><highlight class="normal"><sp/>&lt;</highlight><highlight class="keyword">typename</highlight><highlight class="normal"><sp/>Type&gt;</highlight></codeline>
+<codeline lineno="315"><highlight class="normal">Vector&lt;Type&gt;::Vector(UINT<sp/>currentSize,<sp/>UINT<sp/>maxSize,<sp/>Memory::Allocator&amp;<sp/>alloc)</highlight></codeline>
+<codeline lineno="316"><highlight class="normal"><sp/><sp/><sp/><sp/>:</highlight></codeline>
+<codeline lineno="317"><highlight class="normal"><sp/><sp/><sp/><sp/>m_size(currentSize),</highlight></codeline>
+<codeline lineno="318"><highlight class="normal"><sp/><sp/><sp/><sp/>m_maxSize(maxSize),</highlight></codeline>
+<codeline lineno="319"><highlight class="normal"><sp/><sp/><sp/><sp/>m_allocator(alloc),</highlight></codeline>
+<codeline lineno="320"><highlight class="normal"><sp/><sp/><sp/><sp/>m_base(m_allocator.get().RawNewArray&lt;Type&gt;(m_maxSize))<sp/>{</highlight></codeline>
+<codeline lineno="321"><highlight class="normal"><sp/><sp/>}</highlight></codeline>
+<codeline lineno="322"><highlight class="normal"></highlight></codeline>
+<codeline lineno="323"><highlight class="normal"></highlight><highlight class="keyword">template</highlight><highlight class="normal"><sp/>&lt;</highlight><highlight class="keyword">typename</highlight><highlight class="normal"><sp/>Type&gt;</highlight></codeline>
+<codeline lineno="324"><highlight class="normal">Vector&lt;Type&gt;::Vector(</highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>std::initializer_list&lt;Type&gt;&amp;<sp/>list,<sp/>Memory::Allocator&amp;<sp/>alloc)</highlight></codeline>
+<codeline lineno="325"><highlight class="normal"><sp/><sp/>:<sp/>m_size(U32(list.size())),</highlight></codeline>
+<codeline lineno="326"><highlight class="normal"><sp/><sp/><sp/><sp/>m_maxSize(U32(list.size())),</highlight></codeline>
+<codeline lineno="327"><highlight class="normal"><sp/><sp/><sp/><sp/>m_allocator(alloc),</highlight></codeline>
+<codeline lineno="328"><highlight class="normal"><sp/><sp/><sp/><sp/>m_base(m_allocator.get().RawNewArray&lt;Type&gt;(m_maxSize))<sp/>{</highlight></codeline>
+<codeline lineno="329"><highlight class="normal"></highlight></codeline>
+<codeline lineno="330"><highlight class="normal"><sp/><sp/></highlight><highlight class="keywordflow">if</highlight><highlight class="normal"><sp/>constexpr<sp/>(std::is_trivially_copyable_v&lt;Type&gt;)<sp/>{</highlight></codeline>
+<codeline lineno="331"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="comment">//<sp/>Copy<sp/>over<sp/>Contents</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="332"><highlight class="normal"><sp/><sp/><sp/><sp/>std::memcpy(m_base.get(),<sp/>list.begin(),<sp/>m_size<sp/>*<sp/></highlight><highlight class="keyword">sizeof</highlight><highlight class="normal">(Type));</highlight></codeline>
+<codeline lineno="333"><highlight class="normal"><sp/><sp/>}<sp/></highlight><highlight class="keywordflow">else</highlight><highlight class="normal"><sp/>{</highlight></codeline>
+<codeline lineno="334"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>Type*<sp/>start<sp/>=<sp/>list.begin();</highlight></codeline>
+<codeline lineno="335"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="comment">//<sp/>Manually<sp/>Copy<sp/>Construct<sp/>each<sp/>item</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="336"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">for</highlight><highlight class="normal"><sp/>(U32<sp/>idx<sp/>=<sp/>0;<sp/>idx<sp/>&lt;<sp/>m_size;<sp/>++idx)<sp/>{</highlight></codeline>
+<codeline lineno="337"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">new</highlight><highlight class="normal">(&amp;m_base[idx])<sp/>Type(*(start<sp/>+<sp/>idx));</highlight></codeline>
+<codeline lineno="338"><highlight class="normal"><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="339"><highlight class="normal"><sp/><sp/>}</highlight></codeline>
+<codeline lineno="340"><highlight class="normal">}</highlight></codeline>
+<codeline lineno="341"><highlight class="normal"></highlight></codeline>
+<codeline lineno="342"><highlight class="normal"></highlight><highlight class="keyword">template</highlight><highlight class="normal"><sp/>&lt;</highlight><highlight class="keyword">typename</highlight><highlight class="normal"><sp/>Type&gt;</highlight></codeline>
+<codeline lineno="343"><highlight class="normal"></highlight><highlight class="keyword">template</highlight><highlight class="normal"><sp/>&lt;</highlight><highlight class="keyword">typename</highlight><highlight class="normal">...<sp/>Args&gt;</highlight></codeline>
+<codeline lineno="344"><highlight class="normal">Vector&lt;Type&gt;::Vector(<ref refid="struct_azura_1_1_containers_1_1_container_extent" kindref="compound">ContainerExtent</ref><sp/>extent,<sp/>Memory::Allocator&amp;<sp/>alloc,<sp/>Args&amp;&amp;...<sp/>args)</highlight></codeline>
+<codeline lineno="345"><highlight class="normal"><sp/><sp/>:<sp/>m_maxSize(extent.m_reserveSize),</highlight></codeline>
+<codeline lineno="346"><highlight class="normal"><sp/><sp/><sp/><sp/>m_size(extent.m_size),</highlight></codeline>
+<codeline lineno="347"><highlight class="normal"><sp/><sp/><sp/><sp/>m_allocator(alloc),</highlight></codeline>
+<codeline lineno="348"><highlight class="normal"><sp/><sp/><sp/><sp/>m_base(m_allocator.get().RawNewArray&lt;Type&gt;(m_maxSize))<sp/>{</highlight></codeline>
+<codeline lineno="349"><highlight class="normal"><sp/><sp/>assert(m_size<sp/>&lt;=<sp/>m_maxSize);</highlight></codeline>
+<codeline lineno="350"><highlight class="normal"></highlight></codeline>
+<codeline lineno="351"><highlight class="normal"><sp/><sp/></highlight><highlight class="keywordflow">for</highlight><highlight class="normal"><sp/>(U32<sp/>idx<sp/>=<sp/>0;<sp/>idx<sp/>&lt;<sp/>m_size;<sp/>++idx)<sp/>{</highlight></codeline>
+<codeline lineno="352"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">new</highlight><highlight class="normal">(&amp;m_base[idx])<sp/>Type(std::forward&lt;Args&gt;(args)...);</highlight></codeline>
+<codeline lineno="353"><highlight class="normal"><sp/><sp/>}</highlight></codeline>
+<codeline lineno="354"><highlight class="normal">}</highlight></codeline>
+<codeline lineno="355"><highlight class="normal"></highlight></codeline>
+<codeline lineno="356"><highlight class="normal"></highlight><highlight class="keyword">template</highlight><highlight class="normal"><sp/>&lt;</highlight><highlight class="keyword">typename</highlight><highlight class="normal"><sp/>Type&gt;</highlight></codeline>
+<codeline lineno="357"><highlight class="normal">Vector&lt;Type&gt;::~Vector()<sp/>{</highlight></codeline>
+<codeline lineno="358"><highlight class="normal"><sp/><sp/></highlight><highlight class="keywordflow">for</highlight><highlight class="normal"><sp/>(U32<sp/>idx<sp/>=<sp/>0;<sp/>idx<sp/>&lt;<sp/>m_size;<sp/>++idx)<sp/>{</highlight></codeline>
+<codeline lineno="359"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="comment">//<sp/>TODO(vasumahesh1):<sp/>MSVC<sp/>gives<sp/>a<sp/>NoDIscard<sp/>warning<sp/>here.<sp/>Not<sp/>sure<sp/>why,<sp/>but<sp/>due<sp/>to<sp/>C++17.</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="360"><highlight class="normal"><sp/><sp/><sp/><sp/>UNUSED(m_base[idx].~Type());</highlight></codeline>
+<codeline lineno="361"><highlight class="normal"><sp/><sp/>}</highlight></codeline>
+<codeline lineno="362"><highlight class="normal">};</highlight></codeline>
+<codeline lineno="363"><highlight class="normal"></highlight></codeline>
+<codeline lineno="364"><highlight class="normal"></highlight><highlight class="keyword">template</highlight><highlight class="normal"><sp/>&lt;</highlight><highlight class="keyword">typename</highlight><highlight class="normal"><sp/>Type&gt;</highlight></codeline>
+<codeline lineno="365"><highlight class="normal">Vector&lt;Type&gt;::Vector(</highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>Vector&amp;<sp/>other)</highlight></codeline>
+<codeline lineno="366"><highlight class="normal"><sp/><sp/>:<sp/>m_size(other.m_size),</highlight></codeline>
+<codeline lineno="367"><highlight class="normal"><sp/><sp/><sp/><sp/>m_maxSize(other.m_maxSize),</highlight></codeline>
+<codeline lineno="368"><highlight class="normal"><sp/><sp/><sp/><sp/>m_allocator(other.m_allocator)<sp/>{</highlight></codeline>
+<codeline lineno="369"><highlight class="normal"><sp/><sp/></highlight><highlight class="comment">//<sp/>Allocate<sp/>Memory</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="370"><highlight class="normal"><sp/><sp/>m_base<sp/>=<sp/>m_allocator.get().RawNewArray&lt;Type&gt;(m_maxSize);</highlight></codeline>
+<codeline lineno="371"><highlight class="normal"></highlight></codeline>
+<codeline lineno="372"><highlight class="normal"><sp/><sp/></highlight><highlight class="keywordflow">if</highlight><highlight class="normal"><sp/>constexpr<sp/>(std::is_trivially_copyable_v&lt;Type&gt;)<sp/>{</highlight></codeline>
+<codeline lineno="373"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="comment">//<sp/>Copy<sp/>over<sp/>Contents</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="374"><highlight class="normal"><sp/><sp/><sp/><sp/>std::memcpy(m_base.get(),<sp/>other.m_base.get(),<sp/>other.m_size<sp/>*<sp/></highlight><highlight class="keyword">sizeof</highlight><highlight class="normal">(Type));</highlight></codeline>
+<codeline lineno="375"><highlight class="normal"><sp/><sp/>}<sp/></highlight><highlight class="keywordflow">else</highlight><highlight class="normal"><sp/>{</highlight></codeline>
+<codeline lineno="376"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="comment">//<sp/>Manually<sp/>Copy<sp/>Construct<sp/>each<sp/>item</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="377"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">for</highlight><highlight class="normal"><sp/>(U32<sp/>idx<sp/>=<sp/>0;<sp/>idx<sp/>&lt;<sp/>other.m_size;<sp/>++idx)<sp/>{</highlight></codeline>
+<codeline lineno="378"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">new</highlight><highlight class="normal">(&amp;m_base[idx])<sp/>Type(other.m_base[idx]);</highlight></codeline>
+<codeline lineno="379"><highlight class="normal"><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="380"><highlight class="normal"><sp/><sp/>}</highlight></codeline>
+<codeline lineno="381"><highlight class="normal">}</highlight></codeline>
+<codeline lineno="382"><highlight class="normal"></highlight></codeline>
+<codeline lineno="383"><highlight class="normal"></highlight><highlight class="keyword">template</highlight><highlight class="normal"><sp/>&lt;</highlight><highlight class="keyword">typename</highlight><highlight class="normal"><sp/>Type&gt;</highlight></codeline>
+<codeline lineno="384"><highlight class="normal">Vector&lt;Type&gt;::Vector(</highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>Vector&amp;<sp/>other,<sp/>Memory::Allocator&amp;<sp/>alloc)</highlight></codeline>
+<codeline lineno="385"><highlight class="normal"><sp/><sp/>:<sp/>m_size(other.m_size),</highlight></codeline>
+<codeline lineno="386"><highlight class="normal"><sp/><sp/>m_maxSize(other.m_maxSize),</highlight></codeline>
+<codeline lineno="387"><highlight class="normal"><sp/><sp/>m_allocator(alloc)<sp/>{</highlight></codeline>
+<codeline lineno="388"><highlight class="normal"><sp/><sp/></highlight><highlight class="comment">//<sp/>Allocate<sp/>Memory</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="389"><highlight class="normal"><sp/><sp/>m_base<sp/>=<sp/>m_allocator.get().RawNewArray&lt;Type&gt;(m_maxSize);</highlight></codeline>
+<codeline lineno="390"><highlight class="normal"></highlight></codeline>
+<codeline lineno="391"><highlight class="normal"><sp/><sp/></highlight><highlight class="keywordflow">if</highlight><highlight class="normal"><sp/>constexpr<sp/>(std::is_trivially_copyable_v&lt;Type&gt;)<sp/>{</highlight></codeline>
+<codeline lineno="392"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="comment">//<sp/>Copy<sp/>over<sp/>Contents</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="393"><highlight class="normal"><sp/><sp/><sp/><sp/>std::memcpy(m_base.get(),<sp/>other.m_base.get(),<sp/>other.m_size<sp/>*<sp/></highlight><highlight class="keyword">sizeof</highlight><highlight class="normal">(Type));</highlight></codeline>
+<codeline lineno="394"><highlight class="normal"><sp/><sp/>}<sp/></highlight><highlight class="keywordflow">else</highlight><highlight class="normal"><sp/>{</highlight></codeline>
+<codeline lineno="395"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="comment">//<sp/>Manually<sp/>Copy<sp/>Construct<sp/>each<sp/>item</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="396"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">for</highlight><highlight class="normal"><sp/>(U32<sp/>idx<sp/>=<sp/>0;<sp/>idx<sp/>&lt;<sp/>other.m_size;<sp/>++idx)<sp/>{</highlight></codeline>
+<codeline lineno="397"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">new</highlight><highlight class="normal">(&amp;m_base[idx])<sp/>Type(other.m_base[idx]);</highlight></codeline>
+<codeline lineno="398"><highlight class="normal"><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="399"><highlight class="normal"><sp/><sp/>}</highlight></codeline>
+<codeline lineno="400"><highlight class="normal">}</highlight></codeline>
+<codeline lineno="401"><highlight class="normal"></highlight></codeline>
+<codeline lineno="402"><highlight class="normal"></highlight><highlight class="keyword">template</highlight><highlight class="normal"><sp/>&lt;</highlight><highlight class="keyword">typename</highlight><highlight class="normal"><sp/>Type&gt;</highlight></codeline>
+<codeline lineno="403"><highlight class="normal">Vector&lt;Type&gt;::Vector(Vector&amp;&amp;<sp/>other)<sp/>noexcept</highlight></codeline>
+<codeline lineno="404"><highlight class="normal"><sp/><sp/>:<sp/>m_size(std::move(other.m_size)),</highlight></codeline>
+<codeline lineno="405"><highlight class="normal"><sp/><sp/><sp/><sp/>m_maxSize(std::move(other.m_maxSize)),</highlight></codeline>
+<codeline lineno="406"><highlight class="normal"><sp/><sp/><sp/><sp/>m_allocator(other.m_allocator),</highlight></codeline>
+<codeline lineno="407"><highlight class="normal"><sp/><sp/><sp/><sp/>m_base(std::move(other.m_base))<sp/>{</highlight></codeline>
+<codeline lineno="408"><highlight class="normal"><sp/><sp/>other.m_base<sp/><sp/><sp/><sp/>=<sp/></highlight><highlight class="keyword">nullptr</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="409"><highlight class="normal"><sp/><sp/>other.m_size<sp/><sp/><sp/><sp/>=<sp/>0;</highlight></codeline>
+<codeline lineno="410"><highlight class="normal"><sp/><sp/>other.m_maxSize<sp/>=<sp/>0;</highlight></codeline>
+<codeline lineno="411"><highlight class="normal">}</highlight></codeline>
+<codeline lineno="412"><highlight class="normal"></highlight></codeline>
+<codeline lineno="413"><highlight class="normal"></highlight><highlight class="keyword">template</highlight><highlight class="normal"><sp/>&lt;</highlight><highlight class="keyword">typename</highlight><highlight class="normal"><sp/>Type&gt;</highlight></codeline>
+<codeline lineno="414"><highlight class="normal">Vector&lt;Type&gt;&amp;<sp/>Vector&lt;Type&gt;::operator=(</highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>Vector&amp;<sp/>other)<sp/>{</highlight></codeline>
+<codeline lineno="415"><highlight class="normal"><sp/><sp/></highlight><highlight class="keywordflow">if</highlight><highlight class="normal"><sp/>(</highlight><highlight class="keyword">this</highlight><highlight class="normal"><sp/>==<sp/>&amp;other)<sp/>{</highlight></codeline>
+<codeline lineno="416"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>*</highlight><highlight class="keyword">this</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="417"><highlight class="normal"><sp/><sp/>}</highlight></codeline>
+<codeline lineno="418"><highlight class="normal"></highlight></codeline>
+<codeline lineno="419"><highlight class="normal"><sp/><sp/>m_size<sp/><sp/><sp/><sp/><sp/><sp/>=<sp/>other.m_size;</highlight></codeline>
+<codeline lineno="420"><highlight class="normal"><sp/><sp/>m_maxSize<sp/><sp/><sp/>=<sp/>other.m_maxSize;</highlight></codeline>
+<codeline lineno="421"><highlight class="normal"><sp/><sp/>m_allocator<sp/>=<sp/>other.m_allocator;</highlight></codeline>
+<codeline lineno="422"><highlight class="normal"></highlight></codeline>
+<codeline lineno="423"><highlight class="normal"><sp/><sp/></highlight><highlight class="comment">//<sp/>Allocate<sp/>Memory</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="424"><highlight class="normal"><sp/><sp/>m_base<sp/>=<sp/>m_allocator.get().RawNewArray&lt;Type&gt;(m_maxSize);</highlight></codeline>
+<codeline lineno="425"><highlight class="normal"></highlight></codeline>
+<codeline lineno="426"><highlight class="normal"><sp/><sp/></highlight><highlight class="keywordflow">if</highlight><highlight class="normal"><sp/>constexpr<sp/>(std::is_trivially_copyable_v&lt;Type&gt;)<sp/>{</highlight></codeline>
+<codeline lineno="427"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="comment">//<sp/>Copy<sp/>over<sp/>Contents</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="428"><highlight class="normal"><sp/><sp/><sp/><sp/>std::memcpy(m_base.get(),<sp/>other.m_base.get(),<sp/>other.m_size<sp/>*<sp/></highlight><highlight class="keyword">sizeof</highlight><highlight class="normal">(Type));</highlight></codeline>
+<codeline lineno="429"><highlight class="normal"><sp/><sp/>}<sp/></highlight><highlight class="keywordflow">else</highlight><highlight class="normal"><sp/>{</highlight></codeline>
+<codeline lineno="430"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="comment">//<sp/>Manually<sp/>Copy<sp/>Construct<sp/>each<sp/>item</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="431"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">for</highlight><highlight class="normal"><sp/>(U32<sp/>idx<sp/>=<sp/>0;<sp/>idx<sp/>&lt;<sp/>other.m_size;<sp/>++idx)<sp/>{</highlight></codeline>
+<codeline lineno="432"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">new</highlight><highlight class="normal">(&amp;m_base[idx])<sp/>Type(other.m_base[idx]);</highlight></codeline>
+<codeline lineno="433"><highlight class="normal"><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="434"><highlight class="normal"><sp/><sp/>}</highlight></codeline>
+<codeline lineno="435"><highlight class="normal"></highlight></codeline>
+<codeline lineno="436"><highlight class="normal"><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>*</highlight><highlight class="keyword">this</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="437"><highlight class="normal">}</highlight></codeline>
+<codeline lineno="438"><highlight class="normal"></highlight></codeline>
+<codeline lineno="439"><highlight class="normal"></highlight><highlight class="keyword">template</highlight><highlight class="normal"><sp/>&lt;</highlight><highlight class="keyword">typename</highlight><highlight class="normal"><sp/>Type&gt;</highlight></codeline>
+<codeline lineno="440"><highlight class="normal">Vector&lt;Type&gt;&amp;<sp/>Vector&lt;Type&gt;::operator=(Vector&amp;&amp;<sp/>other)<sp/>noexcept<sp/>{</highlight></codeline>
+<codeline lineno="441"><highlight class="normal"><sp/><sp/></highlight><highlight class="keywordflow">if</highlight><highlight class="normal"><sp/>(</highlight><highlight class="keyword">this</highlight><highlight class="normal"><sp/>==<sp/>&amp;other)<sp/>{</highlight></codeline>
+<codeline lineno="442"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>*</highlight><highlight class="keyword">this</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="443"><highlight class="normal"><sp/><sp/>}</highlight></codeline>
+<codeline lineno="444"><highlight class="normal"></highlight></codeline>
+<codeline lineno="445"><highlight class="normal"><sp/><sp/>m_size<sp/><sp/><sp/><sp/><sp/><sp/>=<sp/>std::move(other.m_size);</highlight></codeline>
+<codeline lineno="446"><highlight class="normal"><sp/><sp/>m_maxSize<sp/><sp/><sp/>=<sp/>std::move(other.m_maxSize);</highlight></codeline>
+<codeline lineno="447"><highlight class="normal"><sp/><sp/>m_allocator<sp/>=<sp/>other.m_allocator;</highlight></codeline>
+<codeline lineno="448"><highlight class="normal"><sp/><sp/>m_base<sp/><sp/><sp/><sp/><sp/><sp/>=<sp/>std::move(other.m_base);</highlight></codeline>
+<codeline lineno="449"><highlight class="normal"></highlight></codeline>
+<codeline lineno="450"><highlight class="normal"><sp/><sp/>other.m_base<sp/><sp/><sp/><sp/>=<sp/></highlight><highlight class="keyword">nullptr</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="451"><highlight class="normal"><sp/><sp/>other.m_size<sp/><sp/><sp/><sp/>=<sp/>0;</highlight></codeline>
+<codeline lineno="452"><highlight class="normal"><sp/><sp/>other.m_maxSize<sp/>=<sp/>0;</highlight></codeline>
+<codeline lineno="453"><highlight class="normal"></highlight></codeline>
+<codeline lineno="454"><highlight class="normal"><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>*</highlight><highlight class="keyword">this</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="455"><highlight class="normal">}</highlight></codeline>
+<codeline lineno="456"><highlight class="normal"><sp/><sp/></highlight></codeline>
+<codeline lineno="457"><highlight class="normal"></highlight><highlight class="keyword">template</highlight><highlight class="normal"><sp/>&lt;</highlight><highlight class="keyword">typename</highlight><highlight class="normal"><sp/>Type&gt;</highlight></codeline>
+<codeline lineno="458"><highlight class="normal"></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/>Vector&lt;Type&gt;::GrowIfNeeded()<sp/>{</highlight></codeline>
+<codeline lineno="459"><highlight class="normal"><sp/><sp/></highlight><highlight class="keywordflow">if</highlight><highlight class="normal"><sp/>(m_size<sp/>&lt;<sp/>m_maxSize)</highlight></codeline>
+<codeline lineno="460"><highlight class="normal"><sp/><sp/>{</highlight></codeline>
+<codeline lineno="461"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="462"><highlight class="normal"><sp/><sp/>}</highlight></codeline>
+<codeline lineno="463"><highlight class="normal"></highlight></codeline>
+<codeline lineno="464"><highlight class="normal"><sp/><sp/></highlight><highlight class="keywordflow">if</highlight><highlight class="normal"><sp/>(m_maxSize<sp/>==<sp/>0)</highlight></codeline>
+<codeline lineno="465"><highlight class="normal"><sp/><sp/>{</highlight></codeline>
+<codeline lineno="466"><highlight class="normal"></highlight><highlight class="preprocessor">#ifdef<sp/>BUILD_DEBUG</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="467"><highlight class="normal"><sp/><sp/><sp/><sp/>printf(</highlight><highlight class="stringliteral">&quot;===<sp/>Debug<sp/>Warning:<sp/>Vector<sp/>was<sp/>not<sp/>initialized<sp/>with<sp/>any<sp/>size.<sp/>Set<sp/>a<sp/>size<sp/>using<sp/>the<sp/>ctor<sp/>or<sp/>Reserve()<sp/>or<sp/>Resize().<sp/>===\n&quot;</highlight><highlight class="normal">);</highlight></codeline>
+<codeline lineno="468"><highlight class="normal"></highlight><highlight class="preprocessor">#endif</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="469"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="class_azura_1_1_containers_1_1_vector_1af9aea7a8da9e449530132e50d85ca221" kindref="member">Reserve</ref>(1);</highlight></codeline>
+<codeline lineno="470"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="471"><highlight class="normal"><sp/><sp/>}</highlight></codeline>
+<codeline lineno="472"><highlight class="normal"></highlight></codeline>
+<codeline lineno="473"><highlight class="normal"></highlight><highlight class="preprocessor">#ifdef<sp/>BUILD_DEBUG</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="474"><highlight class="normal"><sp/><sp/>printf(</highlight><highlight class="stringliteral">&quot;===<sp/>Debug<sp/>Warning:<sp/>Vector<sp/>Growing<sp/>in<sp/>Size.<sp/>This<sp/>is<sp/>underperformant<sp/>--<sp/>consider<sp/>setting<sp/>the<sp/>initial<sp/>size.<sp/>===\n&quot;</highlight><highlight class="normal">);</highlight></codeline>
+<codeline lineno="475"><highlight class="normal"></highlight><highlight class="preprocessor">#endif</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="476"><highlight class="normal"></highlight></codeline>
+<codeline lineno="477"><highlight class="normal"><sp/><sp/>m_maxSize<sp/>=<sp/>2<sp/>*<sp/>m_maxSize;</highlight></codeline>
+<codeline lineno="478"><highlight class="normal"></highlight></codeline>
+<codeline lineno="479"><highlight class="normal"><sp/><sp/></highlight><highlight class="comment">//<sp/>Grow<sp/>Vector</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="480"><highlight class="normal"><sp/><sp/></highlight><highlight class="keyword">auto</highlight><highlight class="normal"><sp/>newDataHandle<sp/>=<sp/>m_allocator.get().RawNewArray&lt;Type&gt;(m_maxSize);</highlight></codeline>
+<codeline lineno="481"><highlight class="normal"></highlight></codeline>
+<codeline lineno="482"><highlight class="normal"><sp/><sp/></highlight><highlight class="keywordflow">if</highlight><highlight class="normal"><sp/>constexpr<sp/>(std::is_trivially_copyable_v&lt;Type&gt;)<sp/>{</highlight></codeline>
+<codeline lineno="483"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="comment">//<sp/>Copy<sp/>over<sp/>Contents</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="484"><highlight class="normal"><sp/><sp/><sp/><sp/>std::memmove(newDataHandle.get(),<sp/>m_base.get(),<sp/>m_size<sp/>*<sp/></highlight><highlight class="keyword">sizeof</highlight><highlight class="normal">(Type));</highlight></codeline>
+<codeline lineno="485"><highlight class="normal"><sp/><sp/>}</highlight></codeline>
+<codeline lineno="486"><highlight class="normal"><sp/><sp/></highlight><highlight class="keywordflow">else</highlight><highlight class="normal"><sp/>{</highlight></codeline>
+<codeline lineno="487"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="comment">//<sp/>Manually<sp/>Move<sp/>Construct<sp/>each<sp/>item<sp/>into<sp/>new<sp/>space</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="488"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">for</highlight><highlight class="normal"><sp/>(U32<sp/>idx<sp/>=<sp/>0;<sp/>idx<sp/>&lt;<sp/>m_size;<sp/>++idx)<sp/>{</highlight></codeline>
+<codeline lineno="489"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">new</highlight><highlight class="normal">(&amp;newDataHandle[idx])<sp/>Type(std::move(m_base[idx]));</highlight></codeline>
+<codeline lineno="490"><highlight class="normal"></highlight></codeline>
+<codeline lineno="491"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="comment">//<sp/>TODO(vasumahesh1):<sp/>MSVC<sp/>gives<sp/>a<sp/>NoDiscard<sp/>warning<sp/>here.<sp/>Not<sp/>sure<sp/>why,<sp/>but<sp/>due<sp/>to<sp/>C++17.</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="492"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/>UNUSED(m_base[idx].~Type());</highlight></codeline>
+<codeline lineno="493"><highlight class="normal"><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="494"><highlight class="normal"><sp/><sp/>}</highlight></codeline>
+<codeline lineno="495"><highlight class="normal"></highlight></codeline>
+<codeline lineno="496"><highlight class="normal"><sp/><sp/>m_base<sp/>=<sp/>std::move(newDataHandle);</highlight></codeline>
+<codeline lineno="497"><highlight class="normal">}</highlight></codeline>
+<codeline lineno="498"><highlight class="normal"></highlight></codeline>
+<codeline lineno="499"><highlight class="normal"></highlight><highlight class="keyword">template</highlight><highlight class="normal"><sp/>&lt;</highlight><highlight class="keyword">typename</highlight><highlight class="normal"><sp/>Type&gt;</highlight></codeline>
+<codeline lineno="500" refid="class_azura_1_1_containers_1_1_vector_1aadc803b734b7481d9d7f2e9f86891ce4" refkind="member"><highlight class="normal"></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/><ref refid="class_azura_1_1_containers_1_1_vector_1aadc803b734b7481d9d7f2e9f86891ce4" kindref="member">Vector&lt;Type&gt;::PushBack</ref>(</highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>Type&amp;<sp/>data)<sp/>{</highlight></codeline>
+<codeline lineno="501"><highlight class="normal"><sp/><sp/>GrowIfNeeded();</highlight></codeline>
+<codeline lineno="502"><highlight class="normal"></highlight></codeline>
+<codeline lineno="503"><highlight class="normal"><sp/><sp/></highlight><highlight class="keyword">new</highlight><highlight class="normal">(&amp;m_base[m_size])<sp/>Type(data);</highlight></codeline>
+<codeline lineno="504"><highlight class="normal"><sp/><sp/>++m_size;</highlight></codeline>
+<codeline lineno="505"><highlight class="normal">}</highlight></codeline>
+<codeline lineno="506"><highlight class="normal"></highlight></codeline>
+<codeline lineno="507"><highlight class="normal"></highlight><highlight class="keyword">template</highlight><highlight class="normal"><sp/>&lt;</highlight><highlight class="keyword">typename</highlight><highlight class="normal"><sp/>Type&gt;</highlight></codeline>
+<codeline lineno="508" refid="class_azura_1_1_containers_1_1_vector_1af55839be4b5b355ed020a09201713935" refkind="member"><highlight class="normal"></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/><ref refid="class_azura_1_1_containers_1_1_vector_1aadc803b734b7481d9d7f2e9f86891ce4" kindref="member">Vector&lt;Type&gt;::PushBack</ref>(Type&amp;&amp;<sp/>data)<sp/>{</highlight></codeline>
+<codeline lineno="509"><highlight class="normal"><sp/><sp/>GrowIfNeeded();</highlight></codeline>
+<codeline lineno="510"><highlight class="normal"></highlight></codeline>
+<codeline lineno="511"><highlight class="normal"><sp/><sp/></highlight><highlight class="keyword">new</highlight><highlight class="normal">(&amp;m_base[m_size])<sp/>Type(std::move(data));</highlight></codeline>
+<codeline lineno="512"><highlight class="normal"><sp/><sp/>++m_size;</highlight></codeline>
+<codeline lineno="513"><highlight class="normal">}</highlight></codeline>
+<codeline lineno="514"><highlight class="normal"></highlight></codeline>
+<codeline lineno="515"><highlight class="normal"></highlight><highlight class="keyword">template</highlight><highlight class="normal"><sp/>&lt;</highlight><highlight class="keyword">typename</highlight><highlight class="normal"><sp/>Type&gt;</highlight></codeline>
+<codeline lineno="516"><highlight class="normal"></highlight><highlight class="keyword">template</highlight><highlight class="normal"><sp/>&lt;</highlight><highlight class="keyword">typename</highlight><highlight class="normal">...<sp/>Args&gt;</highlight></codeline>
+<codeline lineno="517" refid="class_azura_1_1_containers_1_1_vector_1aadfac4f55765e41e812160022a9a949f" refkind="member"><highlight class="normal"></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/><ref refid="class_azura_1_1_containers_1_1_vector_1aadfac4f55765e41e812160022a9a949f" kindref="member">Vector&lt;Type&gt;::EmplaceBack</ref>(Args<sp/>...<sp/>args)<sp/>{</highlight></codeline>
+<codeline lineno="518"><highlight class="normal"><sp/><sp/>GrowIfNeeded();</highlight></codeline>
+<codeline lineno="519"><highlight class="normal"></highlight></codeline>
+<codeline lineno="520"><highlight class="normal"><sp/><sp/></highlight><highlight class="keyword">new</highlight><highlight class="normal">(&amp;m_base[m_size])<sp/>Type(args...);</highlight></codeline>
+<codeline lineno="521"><highlight class="normal"><sp/><sp/>++m_size;</highlight></codeline>
+<codeline lineno="522"><highlight class="normal">}</highlight></codeline>
+<codeline lineno="523"><highlight class="normal"></highlight></codeline>
+<codeline lineno="524"><highlight class="normal"></highlight><highlight class="keyword">template</highlight><highlight class="normal"><sp/>&lt;</highlight><highlight class="keyword">typename</highlight><highlight class="normal"><sp/>Type&gt;</highlight></codeline>
+<codeline lineno="525" refid="class_azura_1_1_containers_1_1_vector_1ad181b9dc858e1ad59fc64b39f795fb75" refkind="member"><highlight class="normal"></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/><ref refid="class_azura_1_1_containers_1_1_vector_1ad181b9dc858e1ad59fc64b39f795fb75" kindref="member">Vector&lt;Type&gt;::PopBack</ref>()<sp/>{</highlight></codeline>
+<codeline lineno="526"><highlight class="normal"><sp/><sp/>assert(m_size<sp/>&gt;<sp/>0);</highlight></codeline>
+<codeline lineno="527"><highlight class="normal"></highlight></codeline>
+<codeline lineno="528"><highlight class="normal"><sp/><sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>U32<sp/>targetId<sp/>=<sp/>m_size<sp/>-<sp/>1;</highlight></codeline>
+<codeline lineno="529"><highlight class="normal"><sp/><sp/>m_base[targetId].~Type();</highlight></codeline>
+<codeline lineno="530"><highlight class="normal"><sp/><sp/>--m_size;</highlight></codeline>
+<codeline lineno="531"><highlight class="normal">}</highlight></codeline>
+<codeline lineno="532"><highlight class="normal"></highlight></codeline>
+<codeline lineno="533"><highlight class="normal"></highlight><highlight class="keyword">template</highlight><highlight class="normal"><sp/>&lt;</highlight><highlight class="keyword">typename</highlight><highlight class="normal"><sp/>Type&gt;</highlight></codeline>
+<codeline lineno="534" refid="class_azura_1_1_containers_1_1_vector_1a5da3557964b80e7c40a574fbbb7e24a6" refkind="member"><highlight class="normal"></highlight><highlight class="keywordtype">int</highlight><highlight class="normal"><sp/><ref refid="class_azura_1_1_containers_1_1_vector_1a5da3557964b80e7c40a574fbbb7e24a6" kindref="member">Vector&lt;Type&gt;::FindFirst</ref>(</highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>Type&amp;<sp/>data)<sp/>{</highlight></codeline>
+<codeline lineno="535"><highlight class="normal"><sp/><sp/></highlight><highlight class="keywordtype">int</highlight><highlight class="normal"><sp/>idx<sp/>=<sp/>-1;</highlight></codeline>
+<codeline lineno="536"><highlight class="normal"></highlight></codeline>
+<codeline lineno="537"><highlight class="normal"><sp/><sp/></highlight><highlight class="keywordflow">for</highlight><highlight class="normal"><sp/>(U32<sp/>itr<sp/>=<sp/>0;<sp/>itr<sp/>&lt;<sp/>m_size;<sp/>++itr)<sp/>{</highlight></codeline>
+<codeline lineno="538"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">if</highlight><highlight class="normal"><sp/>(data<sp/>==<sp/>m_base[itr])<sp/>{</highlight></codeline>
+<codeline lineno="539"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/>idx<sp/>=<sp/>itr;</highlight></codeline>
+<codeline lineno="540"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">break</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="541"><highlight class="normal"><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="542"><highlight class="normal"><sp/><sp/>}</highlight></codeline>
+<codeline lineno="543"><highlight class="normal"></highlight></codeline>
+<codeline lineno="544"><highlight class="normal"><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>idx;</highlight></codeline>
+<codeline lineno="545"><highlight class="normal">}</highlight></codeline>
+<codeline lineno="546"><highlight class="normal"></highlight></codeline>
+<codeline lineno="547"><highlight class="normal"></highlight><highlight class="keyword">template</highlight><highlight class="normal"><sp/>&lt;</highlight><highlight class="keyword">typename</highlight><highlight class="normal"><sp/>Type&gt;</highlight></codeline>
+<codeline lineno="548" refid="class_azura_1_1_containers_1_1_vector_1a4d191b0d876f03c44c5a58e6380a07ee" refkind="member"><highlight class="normal"></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/><ref refid="class_azura_1_1_containers_1_1_vector_1a4d191b0d876f03c44c5a58e6380a07ee" kindref="member">Vector&lt;Type&gt;::Remove</ref>(</highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>Type&amp;<sp/>data)<sp/>{</highlight></codeline>
+<codeline lineno="549"><highlight class="normal"><sp/><sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">int</highlight><highlight class="normal"><sp/>idx<sp/>=<sp/><ref refid="class_azura_1_1_containers_1_1_vector_1a5da3557964b80e7c40a574fbbb7e24a6" kindref="member">FindFirst</ref>(data);</highlight></codeline>
+<codeline lineno="550"><highlight class="normal"></highlight></codeline>
+<codeline lineno="551"><highlight class="normal"><sp/><sp/></highlight><highlight class="keywordflow">if</highlight><highlight class="normal"><sp/>(idx<sp/>&gt;=<sp/>0)<sp/>{</highlight></codeline>
+<codeline lineno="552"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">for</highlight><highlight class="normal"><sp/>(U32<sp/>itr<sp/><sp/><sp/><sp/><sp/><sp/>=<sp/>idx<sp/>+<sp/>1;<sp/>itr<sp/>&lt;<sp/>m_size;<sp/>++itr)<sp/>{</highlight></codeline>
+<codeline lineno="553"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/>m_base[itr<sp/>-<sp/>1]<sp/>=<sp/>m_base[itr];</highlight></codeline>
+<codeline lineno="554"><highlight class="normal"><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="555"><highlight class="normal"></highlight></codeline>
+<codeline lineno="556"><highlight class="normal"><sp/><sp/><sp/><sp/>--m_size;</highlight></codeline>
+<codeline lineno="557"><highlight class="normal"><sp/><sp/>}</highlight></codeline>
+<codeline lineno="558"><highlight class="normal">}</highlight></codeline>
+<codeline lineno="559"><highlight class="normal"></highlight></codeline>
+<codeline lineno="560"><highlight class="normal"></highlight><highlight class="keyword">template</highlight><highlight class="normal"><sp/>&lt;</highlight><highlight class="keyword">typename</highlight><highlight class="normal"><sp/>Type&gt;</highlight></codeline>
+<codeline lineno="561" refid="class_azura_1_1_containers_1_1_vector_1af9aea7a8da9e449530132e50d85ca221" refkind="member"><highlight class="normal"></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/><ref refid="class_azura_1_1_containers_1_1_vector_1af9aea7a8da9e449530132e50d85ca221" kindref="member">Vector&lt;Type&gt;::Reserve</ref>(U32<sp/>maxSize)<sp/>{</highlight></codeline>
+<codeline lineno="562"><highlight class="normal"><sp/><sp/>m_maxSize<sp/>=<sp/>maxSize;</highlight></codeline>
+<codeline lineno="563"><highlight class="normal"><sp/><sp/>m_base<sp/><sp/><sp/><sp/>=<sp/>m_allocator.get().RawNewArray&lt;Type&gt;(m_maxSize);</highlight></codeline>
+<codeline lineno="564"><highlight class="normal">}</highlight></codeline>
+<codeline lineno="565"><highlight class="normal"></highlight></codeline>
+<codeline lineno="566"><highlight class="normal"></highlight><highlight class="keyword">template</highlight><highlight class="normal"><sp/>&lt;</highlight><highlight class="keyword">typename</highlight><highlight class="normal"><sp/>Type&gt;</highlight></codeline>
+<codeline lineno="567"><highlight class="normal"></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/><ref refid="class_azura_1_1_containers_1_1_vector" kindref="compound">Vector&lt;Type&gt;::Resize</ref>(U32<sp/>maxSize)<sp/>{</highlight></codeline>
+<codeline lineno="568"><highlight class="normal"><sp/><sp/>m_maxSize<sp/>=<sp/>maxSize;</highlight></codeline>
+<codeline lineno="569"><highlight class="normal"><sp/><sp/>m_size<sp/><sp/><sp/><sp/>=<sp/>maxSize;</highlight></codeline>
+<codeline lineno="570"><highlight class="normal"><sp/><sp/>m_base<sp/><sp/><sp/><sp/>=<sp/>m_allocator.get().RawNewArray&lt;Type&gt;(m_maxSize);</highlight></codeline>
+<codeline lineno="571"><highlight class="normal">}</highlight></codeline>
+<codeline lineno="572"><highlight class="normal"></highlight></codeline>
+<codeline lineno="573"><highlight class="normal"></highlight><highlight class="keyword">template</highlight><highlight class="normal"><sp/>&lt;</highlight><highlight class="keyword">typename</highlight><highlight class="normal"><sp/>Type&gt;</highlight></codeline>
+<codeline lineno="574" refid="class_azura_1_1_containers_1_1_vector_1a3f955f930eefbb486ff9880421bbc7a4" refkind="member"><highlight class="normal"></highlight><highlight class="keywordtype">bool</highlight><highlight class="normal"><sp/><ref refid="class_azura_1_1_containers_1_1_vector_1a3f955f930eefbb486ff9880421bbc7a4" kindref="member">Vector&lt;Type&gt;::IsEmpty</ref>()</highlight><highlight class="keyword"><sp/>const<sp/></highlight><highlight class="normal">{</highlight></codeline>
+<codeline lineno="575"><highlight class="normal"><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>m_size<sp/>==<sp/>0;</highlight></codeline>
+<codeline lineno="576"><highlight class="normal">}</highlight></codeline>
+<codeline lineno="577"><highlight class="normal"></highlight></codeline>
+<codeline lineno="578"><highlight class="normal"></highlight><highlight class="keyword">template</highlight><highlight class="normal"><sp/>&lt;</highlight><highlight class="keyword">typename</highlight><highlight class="normal"><sp/>Type&gt;</highlight></codeline>
+<codeline lineno="579" refid="class_azura_1_1_containers_1_1_vector_1a9f350f9bbc7f5aaec6318369444d2d99" refkind="member"><highlight class="normal"></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/><ref refid="class_azura_1_1_containers_1_1_vector_1a9f350f9bbc7f5aaec6318369444d2d99" kindref="member">Vector&lt;Type&gt;::InsertAt</ref>(U32<sp/>idx,<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>Type&amp;<sp/>data)<sp/>{</highlight></codeline>
+<codeline lineno="580"><highlight class="normal"><sp/><sp/>assert(idx<sp/>&gt;=<sp/>0<sp/>&amp;&amp;<sp/>idx<sp/>&lt;=<sp/>m_size);</highlight></codeline>
+<codeline lineno="581"><highlight class="normal"></highlight></codeline>
+<codeline lineno="582"><highlight class="normal"><sp/><sp/></highlight><highlight class="keywordflow">for</highlight><highlight class="normal"><sp/>(U32<sp/>itr<sp/><sp/>=<sp/>m_size;<sp/>itr<sp/>&gt;<sp/>idx;<sp/>--itr)<sp/>{</highlight></codeline>
+<codeline lineno="583"><highlight class="normal"><sp/><sp/><sp/><sp/>m_base[itr]<sp/>=<sp/>m_base[itr<sp/>-<sp/>1];</highlight></codeline>
+<codeline lineno="584"><highlight class="normal"><sp/><sp/>}</highlight></codeline>
+<codeline lineno="585"><highlight class="normal"></highlight></codeline>
+<codeline lineno="586"><highlight class="normal"><sp/><sp/>m_base[idx]<sp/>=<sp/>data;</highlight></codeline>
+<codeline lineno="587"><highlight class="normal">}</highlight></codeline>
+<codeline lineno="588"><highlight class="normal"></highlight></codeline>
+<codeline lineno="589"><highlight class="normal"></highlight><highlight class="keyword">template</highlight><highlight class="normal"><sp/>&lt;</highlight><highlight class="keyword">typename</highlight><highlight class="normal"><sp/>Type&gt;</highlight></codeline>
+<codeline lineno="590" refid="class_azura_1_1_containers_1_1_vector_1a6e3fd44d2821bb97f170b6e5443ec57e" refkind="member"><highlight class="normal">Type*<sp/><ref refid="class_azura_1_1_containers_1_1_vector_1a6e3fd44d2821bb97f170b6e5443ec57e" kindref="member">Vector&lt;Type&gt;::Data</ref>()<sp/>{</highlight></codeline>
+<codeline lineno="591"><highlight class="normal"><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>m_base.get();</highlight></codeline>
+<codeline lineno="592"><highlight class="normal">}</highlight></codeline>
+<codeline lineno="593"><highlight class="normal"></highlight></codeline>
+<codeline lineno="594"><highlight class="normal"></highlight><highlight class="keyword">template</highlight><highlight class="normal"><sp/>&lt;</highlight><highlight class="keyword">typename</highlight><highlight class="normal"><sp/>Type&gt;</highlight></codeline>
+<codeline lineno="595"><highlight class="normal"></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>Type*<sp/><ref refid="class_azura_1_1_containers_1_1_vector_1a6e3fd44d2821bb97f170b6e5443ec57e" kindref="member">Vector&lt;Type&gt;::Data</ref>()</highlight><highlight class="keyword"><sp/>const<sp/></highlight><highlight class="normal">{</highlight></codeline>
+<codeline lineno="596"><highlight class="normal"><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>m_base.get();</highlight></codeline>
+<codeline lineno="597"><highlight class="normal">}</highlight></codeline>
+<codeline lineno="598"><highlight class="normal"></highlight></codeline>
+<codeline lineno="599"><highlight class="normal"></highlight><highlight class="keyword">template</highlight><highlight class="normal"><sp/>&lt;</highlight><highlight class="keyword">typename</highlight><highlight class="normal"><sp/>Type&gt;</highlight></codeline>
+<codeline lineno="600"><highlight class="normal"></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/><ref refid="class_azura_1_1_containers_1_1_vector" kindref="compound">Vector&lt;Type&gt;::Reset</ref>()<sp/>{</highlight></codeline>
+<codeline lineno="601"><highlight class="normal"><sp/><sp/>m_size<sp/>=<sp/>0;</highlight></codeline>
+<codeline lineno="602"><highlight class="normal">}</highlight></codeline>
+<codeline lineno="603"><highlight class="normal"></highlight></codeline>
+<codeline lineno="604"><highlight class="normal"></highlight><highlight class="keyword">template</highlight><highlight class="normal"><sp/>&lt;</highlight><highlight class="keyword">typename</highlight><highlight class="normal"><sp/>Type&gt;</highlight></codeline>
+<codeline lineno="605"><highlight class="normal">Type&amp;<sp/>Vector&lt;Type&gt;::operator[](</highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>U32<sp/>idx)<sp/>{</highlight></codeline>
+<codeline lineno="606"><highlight class="normal"><sp/><sp/>assert(idx<sp/>&lt;<sp/>m_size);</highlight></codeline>
+<codeline lineno="607"><highlight class="normal"><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>m_base[idx];</highlight></codeline>
+<codeline lineno="608"><highlight class="normal">}</highlight></codeline>
+<codeline lineno="609"><highlight class="normal"></highlight></codeline>
+<codeline lineno="610"><highlight class="normal"></highlight><highlight class="keyword">template</highlight><highlight class="normal"><sp/>&lt;</highlight><highlight class="keyword">typename</highlight><highlight class="normal"><sp/>Type&gt;</highlight></codeline>
+<codeline lineno="611"><highlight class="normal">Type&amp;<sp/>Vector&lt;Type&gt;::operator[](</highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>U32<sp/>idx)</highlight><highlight class="keyword"><sp/>const<sp/></highlight><highlight class="normal">{</highlight></codeline>
+<codeline lineno="612"><highlight class="normal"><sp/><sp/>assert(idx<sp/>&lt;<sp/>m_size);</highlight></codeline>
+<codeline lineno="613"><highlight class="normal"><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>m_base[idx];</highlight></codeline>
+<codeline lineno="614"><highlight class="normal">}</highlight></codeline>
+<codeline lineno="615"><highlight class="normal"></highlight></codeline>
+<codeline lineno="616"><highlight class="normal"></highlight><highlight class="keyword">template</highlight><highlight class="normal"><sp/>&lt;</highlight><highlight class="keyword">typename</highlight><highlight class="normal"><sp/>Type&gt;</highlight></codeline>
+<codeline lineno="617"><highlight class="normal">Type&amp;<sp/>Vector&lt;Type&gt;::Last()<sp/>{</highlight></codeline>
+<codeline lineno="618"><highlight class="normal"><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>m_base[m_size<sp/>-<sp/>1];</highlight></codeline>
+<codeline lineno="619"><highlight class="normal">}</highlight></codeline>
+<codeline lineno="620"><highlight class="normal"></highlight></codeline>
+<codeline lineno="621"><highlight class="normal"></highlight><highlight class="keyword">template</highlight><highlight class="normal"><sp/>&lt;</highlight><highlight class="keyword">typename</highlight><highlight class="normal"><sp/>Type&gt;</highlight></codeline>
+<codeline lineno="622"><highlight class="normal">Type&amp;<sp/>Vector&lt;Type&gt;::Last()</highlight><highlight class="keyword"><sp/>const<sp/></highlight><highlight class="normal">{</highlight></codeline>
+<codeline lineno="623"><highlight class="normal"><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>m_base[m_size<sp/>-<sp/>1];</highlight></codeline>
+<codeline lineno="624"><highlight class="normal">}</highlight></codeline>
+<codeline lineno="625"><highlight class="normal"></highlight></codeline>
+<codeline lineno="626"><highlight class="normal"></highlight><highlight class="keyword">template</highlight><highlight class="normal"><sp/>&lt;</highlight><highlight class="keyword">typename</highlight><highlight class="normal"><sp/>Type&gt;</highlight></codeline>
+<codeline lineno="627"><highlight class="normal"></highlight><highlight class="keyword">template</highlight><highlight class="normal"><sp/>&lt;</highlight><highlight class="keyword">class</highlight><highlight class="normal"><sp/>InputIt&gt;</highlight></codeline>
+<codeline lineno="628"><highlight class="normal"></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/>Vector&lt;Type&gt;::Assign(InputIt<sp/>first,<sp/>InputIt<sp/>last)<sp/>{</highlight></codeline>
+<codeline lineno="629"><highlight class="normal"><sp/><sp/>U32<sp/>count<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>=<sp/>0;</highlight></codeline>
+<codeline lineno="630"><highlight class="normal"><sp/><sp/></highlight><highlight class="keywordflow">for</highlight><highlight class="normal"><sp/>(</highlight><highlight class="keyword">auto</highlight><highlight class="normal"><sp/>itr<sp/><sp/><sp/><sp/><sp/><sp/><sp/>=<sp/>first;<sp/>itr<sp/>!=<sp/>last;<sp/>++itr)<sp/>{</highlight></codeline>
+<codeline lineno="631"><highlight class="normal"><sp/><sp/><sp/><sp/>operator[](count)<sp/>=<sp/>*itr;</highlight></codeline>
+<codeline lineno="632"><highlight class="normal"><sp/><sp/><sp/><sp/>++count;</highlight></codeline>
+<codeline lineno="633"><highlight class="normal"><sp/><sp/>}</highlight></codeline>
+<codeline lineno="634"><highlight class="normal">}</highlight></codeline>
+<codeline lineno="635"><highlight class="normal"></highlight></codeline>
+<codeline lineno="636"><highlight class="normal"></highlight><highlight class="keyword">template</highlight><highlight class="normal"><sp/>&lt;</highlight><highlight class="keyword">typename</highlight><highlight class="normal"><sp/>Type&gt;</highlight></codeline>
+<codeline lineno="637" refid="class_azura_1_1_containers_1_1_vector_1a49e7eba07315528d8f75998944b0e7c5" refkind="member"><highlight class="normal"></highlight><highlight class="keyword">typename</highlight><highlight class="normal"><sp/><ref refid="class_azura_1_1_containers_1_1_vector_1_1_iterator" kindref="compound">Vector&lt;Type&gt;::Iterator</ref><sp/><ref refid="class_azura_1_1_containers_1_1_vector_1a49e7eba07315528d8f75998944b0e7c5" kindref="member">Vector&lt;Type&gt;::Begin</ref>()</highlight><highlight class="keyword"><sp/>const<sp/></highlight><highlight class="normal">{</highlight></codeline>
+<codeline lineno="638"><highlight class="normal"><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>Iterator(</highlight><highlight class="keyword">this</highlight><highlight class="normal">,<sp/>0);</highlight></codeline>
+<codeline lineno="639"><highlight class="normal">}</highlight></codeline>
+<codeline lineno="640"><highlight class="normal"></highlight></codeline>
+<codeline lineno="641"><highlight class="normal"></highlight><highlight class="keyword">template</highlight><highlight class="normal"><sp/>&lt;</highlight><highlight class="keyword">typename</highlight><highlight class="normal"><sp/>Type&gt;</highlight></codeline>
+<codeline lineno="642" refid="class_azura_1_1_containers_1_1_vector_1aaf8c1fcfb814e8030e5520b56c094c6a" refkind="member"><highlight class="normal"></highlight><highlight class="keyword">typename</highlight><highlight class="normal"><sp/><ref refid="class_azura_1_1_containers_1_1_vector_1_1_iterator" kindref="compound">Vector&lt;Type&gt;::Iterator</ref><sp/><ref refid="class_azura_1_1_containers_1_1_vector_1aaf8c1fcfb814e8030e5520b56c094c6a" kindref="member">Vector&lt;Type&gt;::End</ref>()</highlight><highlight class="keyword"><sp/>const<sp/></highlight><highlight class="normal">{</highlight></codeline>
+<codeline lineno="643"><highlight class="normal"><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>Iterator(</highlight><highlight class="keyword">this</highlight><highlight class="normal">,<sp/>m_size);</highlight></codeline>
+<codeline lineno="644"><highlight class="normal">}</highlight></codeline>
+<codeline lineno="645"><highlight class="normal"></highlight></codeline>
+<codeline lineno="646"><highlight class="normal"></highlight><highlight class="keyword">template</highlight><highlight class="normal"><sp/>&lt;</highlight><highlight class="keyword">typename</highlight><highlight class="normal"><sp/>Type&gt;</highlight></codeline>
+<codeline lineno="647" refid="class_azura_1_1_containers_1_1_vector_1a324d28755f053b4a83c89982eebeee93" refkind="member"><highlight class="normal"></highlight><highlight class="keyword">typename</highlight><highlight class="normal"><sp/><ref refid="class_azura_1_1_containers_1_1_vector_1_1_iterator" kindref="compound">Vector&lt;Type&gt;::Iterator</ref><sp/><ref refid="class_azura_1_1_containers_1_1_vector_1a324d28755f053b4a83c89982eebeee93" kindref="member">Vector&lt;Type&gt;::begin</ref>()</highlight><highlight class="keyword"><sp/>const<sp/></highlight><highlight class="normal">{</highlight></codeline>
+<codeline lineno="648"><highlight class="normal"><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/><ref refid="class_azura_1_1_containers_1_1_vector_1a49e7eba07315528d8f75998944b0e7c5" kindref="member">Begin</ref>();</highlight></codeline>
+<codeline lineno="649"><highlight class="normal">}</highlight></codeline>
+<codeline lineno="650"><highlight class="normal"></highlight></codeline>
+<codeline lineno="651"><highlight class="normal"></highlight><highlight class="keyword">template</highlight><highlight class="normal"><sp/>&lt;</highlight><highlight class="keyword">typename</highlight><highlight class="normal"><sp/>Type&gt;</highlight></codeline>
+<codeline lineno="652" refid="class_azura_1_1_containers_1_1_vector_1a364c485414869aa9d6de832f2af0f46f" refkind="member"><highlight class="normal"></highlight><highlight class="keyword">typename</highlight><highlight class="normal"><sp/><ref refid="class_azura_1_1_containers_1_1_vector_1_1_iterator" kindref="compound">Vector&lt;Type&gt;::Iterator</ref><sp/><ref refid="class_azura_1_1_containers_1_1_vector_1a364c485414869aa9d6de832f2af0f46f" kindref="member">Vector&lt;Type&gt;::end</ref>()</highlight><highlight class="keyword"><sp/>const<sp/></highlight><highlight class="normal">{</highlight></codeline>
+<codeline lineno="653"><highlight class="normal"><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/><ref refid="class_azura_1_1_containers_1_1_vector_1aaf8c1fcfb814e8030e5520b56c094c6a" kindref="member">End</ref>();</highlight></codeline>
+<codeline lineno="654"><highlight class="normal">}</highlight></codeline>
+<codeline lineno="655"><highlight class="normal">}<sp/></highlight><highlight class="comment">//<sp/>namespace<sp/>Containers</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="656"><highlight class="normal">}<sp/></highlight><highlight class="comment">//<sp/>namespace<sp/>Azura</highlight><highlight class="normal"></highlight></codeline>
+    </programlisting>
+    <location file="Source/Containers/Inc/Containers/Vector.h"/>
+  </compounddef>
+</doxygen>

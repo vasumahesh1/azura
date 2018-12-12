@@ -1,0 +1,207 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.8.14">
+  <compounddef id="_geometry_8h" kind="file" language="C++">
+    <compoundname>Geometry.h</compoundname>
+    <includes local="yes">Types.h</includes>
+    <includes refid="_raw_storage_format_8h" local="yes">Core/RawStorageFormat.h</includes>
+    <includedby refid="_fly_through_camera_8cpp" local="yes">Source/Camera/Src/FlyThroughCamera.cpp</includedby>
+    <includedby refid="_polar_camera_8cpp" local="yes">Source/Camera/Src/PolarCamera.cpp</includedby>
+    <includedby refid="_icosphere_8h" local="yes">Source/Math/Inc/Math/Icosphere.h</includedby>
+    <includedby refid="_plane_8h" local="yes">Source/Math/Inc/Math/Plane.h</includedby>
+    <includedby refid="_geometry_8cpp" local="yes">Source/Math/Src/Geometry.cpp</includedby>
+    <includedby refid="_i_physics_geometry_8h" local="yes">Source/Physics/Inc/Physics/Geometry/IPhysicsGeometry.h</includedby>
+    <includedby refid="_cloth_common_8h" local="yes">Source/Samples/0_TestZone/Inc/TestZone/ClothCommon.h</includedby>
+    <includedby refid="_samples_20___test_zone_2_inc_2_test_zone_2_cloth_mesh_8h" local="yes">Source/Samples/0_TestZone/Inc/TestZone/ClothMesh.h</includedby>
+    <includedby refid="_imported_cloth_mesh_8h" local="yes">Source/Samples/0_TestZone/Inc/TestZone/ImportedClothMesh.h</includedby>
+    <incdepgraph>
+      <node id="5275">
+        <label>Core/RawStorageFormat.h</label>
+        <link refid="_raw_storage_format_8h_source"/>
+        <childnode refid="5274" relation="include">
+        </childnode>
+        <childnode refid="5276" relation="include">
+        </childnode>
+        <childnode refid="5277" relation="include">
+        </childnode>
+        <childnode refid="5278" relation="include">
+        </childnode>
+        <childnode refid="5279" relation="include">
+        </childnode>
+        <childnode refid="5280" relation="include">
+        </childnode>
+      </node>
+      <node id="5279">
+        <label>boost/preprocessor/tuple/elem.hpp</label>
+      </node>
+      <node id="5280">
+        <label>boost/detail/bitmask.hpp</label>
+      </node>
+      <node id="5276">
+        <label>tuple</label>
+      </node>
+      <node id="5273">
+        <label>Source/Math/Inc/Math/Geometry.h</label>
+        <link refid="_geometry_8h"/>
+        <childnode refid="5274" relation="include">
+        </childnode>
+        <childnode refid="5275" relation="include">
+        </childnode>
+      </node>
+      <node id="5277">
+        <label>boost/preprocessor/repetition/repeat.hpp</label>
+      </node>
+      <node id="5274">
+        <label>Types.h</label>
+      </node>
+      <node id="5278">
+        <label>boost/preprocessor/seq/for_each.hpp</label>
+      </node>
+    </incdepgraph>
+    <invincdepgraph>
+      <node id="5289">
+        <label>Source/Physics/Inc/Physics/Geometry/ClothPlane.h</label>
+        <link refid="_cloth_plane_8h_source"/>
+        <childnode refid="5288" relation="include">
+        </childnode>
+      </node>
+      <node id="5292">
+        <label>Source/Samples/0_TestZone/Inc/TestZone/ImportedClothMesh.h</label>
+        <link refid="_imported_cloth_mesh_8h_source"/>
+        <childnode refid="5284" relation="include">
+        </childnode>
+      </node>
+      <node id="5291">
+        <label>Source/Samples/0_TestZone/Inc/TestZone/ClothMesh.h</label>
+        <link refid="_samples_20___test_zone_2_inc_2_test_zone_2_cloth_mesh_8h_source"/>
+        <childnode refid="5284" relation="include">
+        </childnode>
+      </node>
+      <node id="5288">
+        <label>Source/Samples/3_ClothSim/Inc/ClothSim/AppRenderer.h</label>
+        <link refid="3___cloth_sim_2_inc_2_cloth_sim_2_app_renderer_8h_source"/>
+      </node>
+      <node id="5285">
+        <label>Source/Physics/Inc/Physics/Geometry/IPhysicsGeometry.h</label>
+        <link refid="_i_physics_geometry_8h_source"/>
+        <childnode refid="5286" relation="include">
+        </childnode>
+      </node>
+      <node id="5284">
+        <label>Source/Samples/0_TestZone/Inc/TestZone/AppRenderer.h</label>
+        <link refid="0___test_zone_2_inc_2_test_zone_2_app_renderer_8h_source"/>
+      </node>
+      <node id="5281">
+        <label>Source/Math/Inc/Math/Geometry.h</label>
+        <link refid="_geometry_8h"/>
+        <childnode refid="5282" relation="include">
+        </childnode>
+        <childnode refid="5283" relation="include">
+        </childnode>
+        <childnode refid="5285" relation="include">
+        </childnode>
+        <childnode refid="5290" relation="include">
+        </childnode>
+        <childnode refid="5291" relation="include">
+        </childnode>
+        <childnode refid="5292" relation="include">
+        </childnode>
+      </node>
+      <node id="5286">
+        <label>Source/Physics/Inc/Physics/Geometry/IClothPhysicsGeometry.h</label>
+        <link refid="_i_cloth_physics_geometry_8h_source"/>
+        <childnode refid="5287" relation="include">
+        </childnode>
+        <childnode refid="5289" relation="include">
+        </childnode>
+      </node>
+      <node id="5290">
+        <label>Source/Samples/0_TestZone/Inc/TestZone/ClothCommon.h</label>
+        <link refid="_cloth_common_8h_source"/>
+        <childnode refid="5291" relation="include">
+        </childnode>
+        <childnode refid="5292" relation="include">
+        </childnode>
+      </node>
+      <node id="5282">
+        <label>Source/Math/Inc/Math/Icosphere.h</label>
+        <link refid="_icosphere_8h_source"/>
+      </node>
+      <node id="5283">
+        <label>Source/Math/Inc/Math/Plane.h</label>
+        <link refid="_plane_8h_source"/>
+        <childnode refid="5284" relation="include">
+        </childnode>
+      </node>
+      <node id="5287">
+        <label>Source/Physics/Inc/Physics/Geometry/ClothMesh.h</label>
+        <link refid="_physics_2_inc_2_physics_2_geometry_2_cloth_mesh_8h_source"/>
+        <childnode refid="5288" relation="include">
+        </childnode>
+      </node>
+    </invincdepgraph>
+    <innerclass refid="class_azura_1_1_math_1_1_geometry" prot="public">Azura::Math::Geometry</innerclass>
+    <innernamespace refid="namespace_azura">Azura</innernamespace>
+    <innernamespace refid="namespace_azura_1_1_math">Azura::Math</innernamespace>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <programlisting>
+<codeline lineno="1"><highlight class="preprocessor">#pragma<sp/>once</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="2"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&quot;Types.h&quot;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="3"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&quot;Core/RawStorageFormat.h&quot;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="4"><highlight class="normal"></highlight></codeline>
+<codeline lineno="5"><highlight class="normal"></highlight><highlight class="keyword">namespace<sp/></highlight><highlight class="normal"><ref refid="namespace_azura" kindref="compound">Azura</ref><sp/>{</highlight></codeline>
+<codeline lineno="6"><highlight class="normal"></highlight><highlight class="keyword">namespace<sp/></highlight><highlight class="normal">Math<sp/>{</highlight></codeline>
+<codeline lineno="7"><highlight class="normal"></highlight></codeline>
+<codeline lineno="8"><highlight class="normal">constexpr<sp/></highlight><highlight class="keywordtype">float</highlight><highlight class="normal"><sp/>PI<sp/>=<sp/>3.14159265358979323846f;</highlight></codeline>
+<codeline lineno="9"><highlight class="normal">constexpr<sp/></highlight><highlight class="keywordtype">float</highlight><highlight class="normal"><sp/>TWO_PI<sp/>=<sp/>6.28318530717958647692f;</highlight></codeline>
+<codeline lineno="10"><highlight class="normal">constexpr<sp/></highlight><highlight class="keywordtype">float</highlight><highlight class="normal"><sp/>INV_PI<sp/>=<sp/>0.31830988618379067154f;</highlight></codeline>
+<codeline lineno="11"><highlight class="normal">constexpr<sp/></highlight><highlight class="keywordtype">float</highlight><highlight class="normal"><sp/>INV2_PI<sp/>=<sp/>0.15915494309189533577f;</highlight></codeline>
+<codeline lineno="12"><highlight class="normal">constexpr<sp/></highlight><highlight class="keywordtype">float</highlight><highlight class="normal"><sp/>INV4_PI<sp/>=<sp/>0.07957747154594766788f;</highlight></codeline>
+<codeline lineno="13"><highlight class="normal">constexpr<sp/></highlight><highlight class="keywordtype">float</highlight><highlight class="normal"><sp/>PI_OVER2<sp/>=<sp/>1.57079632679489661923f;</highlight></codeline>
+<codeline lineno="14"><highlight class="normal">constexpr<sp/></highlight><highlight class="keywordtype">float</highlight><highlight class="normal"><sp/>PI_OVER4<sp/>=<sp/>0.78539816339744830961f;</highlight></codeline>
+<codeline lineno="15"><highlight class="normal">constexpr<sp/></highlight><highlight class="keywordtype">float</highlight><highlight class="normal"><sp/>SQRT_2<sp/>=<sp/>1.41421356237309504880f;</highlight></codeline>
+<codeline lineno="16"><highlight class="normal">constexpr<sp/></highlight><highlight class="keywordtype">float</highlight><highlight class="normal"><sp/>ONE_MINUS_EPSILON<sp/>=<sp/>0.99999994f;</highlight></codeline>
+<codeline lineno="17"><highlight class="normal">constexpr<sp/></highlight><highlight class="keywordtype">float</highlight><highlight class="normal"><sp/>ONE_DEGREE_RADIAN<sp/>=<sp/>0.0174533f;</highlight></codeline>
+<codeline lineno="18"><highlight class="normal"></highlight></codeline>
+<codeline lineno="19" refid="class_azura_1_1_math_1_1_geometry" refkind="compound"><highlight class="normal"></highlight><highlight class="keyword">class<sp/></highlight><highlight class="normal"><ref refid="class_azura_1_1_math_1_1_geometry" kindref="compound">Geometry</ref></highlight></codeline>
+<codeline lineno="20"><highlight class="normal">{</highlight></codeline>
+<codeline lineno="21"><highlight class="normal"></highlight><highlight class="keyword">public</highlight><highlight class="normal">:</highlight></codeline>
+<codeline lineno="22"><highlight class="normal"><sp/><sp/><ref refid="class_azura_1_1_math_1_1_geometry" kindref="compound">Geometry</ref>()<sp/>=<sp/></highlight><highlight class="keywordflow">default</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="23"><highlight class="normal"><sp/><sp/></highlight><highlight class="keyword">virtual</highlight><highlight class="normal"><sp/>~<ref refid="class_azura_1_1_math_1_1_geometry" kindref="compound">Geometry</ref>()<sp/>=<sp/></highlight><highlight class="keywordflow">default</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="24"><highlight class="normal"></highlight></codeline>
+<codeline lineno="25"><highlight class="normal"><sp/><sp/></highlight><highlight class="comment">//<sp/>Copy<sp/>&amp;<sp/>Move</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="26"><highlight class="normal"><sp/><sp/><ref refid="class_azura_1_1_math_1_1_geometry" kindref="compound">Geometry</ref>(</highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/><ref refid="class_azura_1_1_math_1_1_geometry" kindref="compound">Geometry</ref>&amp;<sp/>other)<sp/>=<sp/></highlight><highlight class="keyword">delete</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="27"><highlight class="normal"><sp/><sp/><ref refid="class_azura_1_1_math_1_1_geometry" kindref="compound">Geometry</ref>(<ref refid="class_azura_1_1_math_1_1_geometry" kindref="compound">Geometry</ref>&amp;&amp;<sp/>other)<sp/>noexcept<sp/>=<sp/></highlight><highlight class="keyword">delete</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="28"><highlight class="normal"><sp/><sp/><ref refid="class_azura_1_1_math_1_1_geometry" kindref="compound">Geometry</ref>&amp;<sp/>operator=(</highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/><ref refid="class_azura_1_1_math_1_1_geometry" kindref="compound">Geometry</ref>&amp;<sp/>other)<sp/>=<sp/></highlight><highlight class="keyword">delete</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="29"><highlight class="normal"><sp/><sp/><ref refid="class_azura_1_1_math_1_1_geometry" kindref="compound">Geometry</ref>&amp;<sp/>operator=(<ref refid="class_azura_1_1_math_1_1_geometry" kindref="compound">Geometry</ref>&amp;&amp;<sp/>other)<sp/>noexcept<sp/>=<sp/></highlight><highlight class="keyword">delete</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="30"><highlight class="normal"></highlight></codeline>
+<codeline lineno="31"><highlight class="normal"><sp/><sp/></highlight><highlight class="comment">//<sp/>Overrides</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="32"><highlight class="normal"><sp/><sp/></highlight><highlight class="keyword">virtual</highlight><highlight class="normal"><sp/>U32<sp/>VertexDataSize()<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>=<sp/>0;</highlight></codeline>
+<codeline lineno="33"><highlight class="normal"><sp/><sp/></highlight><highlight class="keyword">virtual</highlight><highlight class="normal"><sp/>U32<sp/>IndexDataSize()<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>=<sp/>0;</highlight></codeline>
+<codeline lineno="34"><highlight class="normal"><sp/><sp/></highlight><highlight class="keyword">virtual</highlight><highlight class="normal"><sp/>U32<sp/>NormalDataSize()<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>=<sp/>0;</highlight></codeline>
+<codeline lineno="35"><highlight class="normal"><sp/><sp/></highlight><highlight class="keyword">virtual</highlight><highlight class="normal"><sp/>U32<sp/>UVDataSize()<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>=<sp/>0;</highlight></codeline>
+<codeline lineno="36"><highlight class="normal"><sp/><sp/></highlight><highlight class="keyword">virtual</highlight><highlight class="normal"><sp/>U32<sp/>TotalDataSize()<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>=<sp/>0;</highlight></codeline>
+<codeline lineno="37"><highlight class="normal"></highlight></codeline>
+<codeline lineno="38"><highlight class="normal"><sp/><sp/></highlight><highlight class="keyword">virtual</highlight><highlight class="normal"><sp/>U32<sp/>GetVertexCount()<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>=<sp/>0;</highlight></codeline>
+<codeline lineno="39"><highlight class="normal"><sp/><sp/></highlight><highlight class="keyword">virtual</highlight><highlight class="normal"><sp/>U32<sp/>GetIndexCount()<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>=<sp/>0;</highlight></codeline>
+<codeline lineno="40"><highlight class="normal"><sp/><sp/></highlight><highlight class="keyword">virtual</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>U8*<sp/>VertexData()<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>=<sp/>0;</highlight></codeline>
+<codeline lineno="41"><highlight class="normal"><sp/><sp/></highlight><highlight class="keyword">virtual</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>U8*<sp/>NormalData()<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>=<sp/>0;</highlight></codeline>
+<codeline lineno="42"><highlight class="normal"><sp/><sp/></highlight><highlight class="keyword">virtual</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>U8*<sp/>IndexData()<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>=<sp/>0;</highlight></codeline>
+<codeline lineno="43"><highlight class="normal"><sp/><sp/></highlight><highlight class="keyword">virtual</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>U8*<sp/>UVData()<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>=<sp/>0;</highlight></codeline>
+<codeline lineno="44"><highlight class="normal"><sp/><sp/></highlight><highlight class="keyword">virtual</highlight><highlight class="normal"><sp/>RawStorageFormat<sp/>GetVertexFormat()<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>=<sp/>0;</highlight></codeline>
+<codeline lineno="45"><highlight class="normal"><sp/><sp/></highlight><highlight class="keyword">virtual</highlight><highlight class="normal"><sp/>RawStorageFormat<sp/>GetNormalFormat()<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>=<sp/>0;</highlight></codeline>
+<codeline lineno="46"><highlight class="normal"><sp/><sp/></highlight><highlight class="keyword">virtual</highlight><highlight class="normal"><sp/>RawStorageFormat<sp/>GetIndexFormat()<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>=<sp/>0;</highlight></codeline>
+<codeline lineno="47"><highlight class="normal"><sp/><sp/></highlight><highlight class="keyword">virtual</highlight><highlight class="normal"><sp/>RawStorageFormat<sp/>GetUVFormat()<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>=<sp/>0;</highlight></codeline>
+<codeline lineno="48"><highlight class="normal">};</highlight></codeline>
+<codeline lineno="49"><highlight class="normal"></highlight></codeline>
+<codeline lineno="50"><highlight class="normal"></highlight><highlight class="keywordtype">float</highlight><highlight class="normal"><sp/>ToRadians(</highlight><highlight class="keywordtype">float</highlight><highlight class="normal"><sp/>degrees);</highlight></codeline>
+<codeline lineno="51"><highlight class="normal"></highlight><highlight class="keywordtype">float</highlight><highlight class="normal"><sp/>ToAngle(</highlight><highlight class="keywordtype">float</highlight><highlight class="normal"><sp/>radians);</highlight></codeline>
+<codeline lineno="52"><highlight class="normal"></highlight></codeline>
+<codeline lineno="53"><highlight class="normal">}<sp/></highlight><highlight class="comment">//<sp/>namespace<sp/>Math</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="54"><highlight class="normal">}<sp/></highlight><highlight class="comment">//<sp/>namespace<sp/>Azura</highlight></codeline>
+    </programlisting>
+    <location file="Source/Math/Inc/Math/Geometry.h"/>
+  </compounddef>
+</doxygen>

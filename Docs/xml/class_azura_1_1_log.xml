@@ -1,0 +1,292 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.8.14">
+  <compounddef id="class_azura_1_1_log" kind="class" language="C++" prot="public">
+    <compoundname>Azura::Log</compoundname>
+      <sectiondef kind="private-attrib">
+      <memberdef kind="variable" id="class_azura_1_1_log_1ac21f3014964a775c0584bad37fa9fc28" prot="private" static="no" mutable="no">
+        <type>U8</type>
+        <definition>U8 Azura::Log::m_debugLevel</definition>
+        <argsstring></argsstring>
+        <name>m_debugLevel</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Source/Log/Inc/Log/Log.h" line="31" column="1" bodyfile="Source/Log/Inc/Log/Log.h" bodystart="31" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="class_azura_1_1_log_1a779025240539e4df36e758faab711017" prot="private" static="no" mutable="no">
+        <type>U8</type>
+        <definition>U8 Azura::Log::m_infoLevel</definition>
+        <argsstring></argsstring>
+        <name>m_infoLevel</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Source/Log/Inc/Log/Log.h" line="32" column="1" bodyfile="Source/Log/Inc/Log/Log.h" bodystart="32" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="class_azura_1_1_log_1aed05055b491ef5070f2e50b5237f8435" prot="private" static="no" mutable="no">
+        <type>U8</type>
+        <definition>U8 Azura::Log::m_warningLevel</definition>
+        <argsstring></argsstring>
+        <name>m_warningLevel</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Source/Log/Inc/Log/Log.h" line="33" column="1" bodyfile="Source/Log/Inc/Log/Log.h" bodystart="33" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="class_azura_1_1_log_1abfce4426b2c2d227f44887472a07ba82" prot="private" static="no" mutable="no">
+        <type>U8</type>
+        <definition>U8 Azura::Log::m_errorLevel</definition>
+        <argsstring></argsstring>
+        <name>m_errorLevel</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Source/Log/Inc/Log/Log.h" line="34" column="1" bodyfile="Source/Log/Inc/Log/Log.h" bodystart="34" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="class_azura_1_1_log_1a6b2fe2d889ade0453b85cd92974e94d8" prot="private" static="no" mutable="no">
+        <type>U8</type>
+        <definition>U8 Azura::Log::m_fatalLevel</definition>
+        <argsstring></argsstring>
+        <name>m_fatalLevel</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Source/Log/Inc/Log/Log.h" line="35" column="1" bodyfile="Source/Log/Inc/Log/Log.h" bodystart="35" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="class_azura_1_1_log_1ab905756f956bb02d7c7785c2b08c1565" prot="private" static="no" mutable="no">
+        <type>String</type>
+        <definition>String Azura::Log::m_key</definition>
+        <argsstring></argsstring>
+        <name>m_key</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Source/Log/Inc/Log/Log.h" line="36" column="1" bodyfile="Source/Log/Inc/Log/Log.h" bodystart="36" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="class_azura_1_1_log_1a0713235572e4752226dedb4fd0188f6f" prot="private" static="no" mutable="no">
+        <type>bool</type>
+        <definition>bool Azura::Log::m_isReady</definition>
+        <argsstring></argsstring>
+        <name>m_isReady</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Source/Log/Inc/Log/Log.h" line="37" column="1" bodyfile="Source/Log/Inc/Log/Log.h" bodystart="37" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="class_azura_1_1_log_1adeb4baf4fd3f0c831a34458b9876fe6a" prot="private" static="no" mutable="no">
+        <type>std::vector&lt; char &gt;</type>
+        <definition>std::vector&lt;char&gt; Azura::Log::m_temporaryBuffer</definition>
+        <argsstring></argsstring>
+        <name>m_temporaryBuffer</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Source/Log/Inc/Log/Log.h" line="39" column="1" bodyfile="Source/Log/Inc/Log/Log.h" bodystart="39" bodyend="-1"/>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="public-func">
+      <memberdef kind="function" id="class_azura_1_1_log_1a3a4b1a1aa16dad541046c51373631b67" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>Azura::Log::Log</definition>
+        <argsstring>(String key)</argsstring>
+        <name>Log</name>
+        <param>
+          <type>String</type>
+          <declname>key</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Source/Log/Inc/Log/Log.h" line="16" column="1" bodyfile="Source/Log/Src/Log.cpp" bodystart="56" bodyend="178"/>
+      </memberdef>
+      <memberdef kind="function" id="class_azura_1_1_log_1af1b3c26a0225f649a1d28b412e8006fa" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void Azura::Log::Debug</definition>
+        <argsstring>(U32 level, const char *fmt,...) const</argsstring>
+        <name>Debug</name>
+        <param>
+          <type>U32</type>
+          <declname>level</declname>
+        </param>
+        <param>
+          <type>const char *</type>
+          <declname>fmt</declname>
+        </param>
+        <param>
+          <type>...</type>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Source/Log/Inc/Log/Log.h" line="18" column="1" bodyfile="Source/Log/Src/Log.cpp" bodystart="217" bodyend="229"/>
+      </memberdef>
+      <memberdef kind="function" id="class_azura_1_1_log_1afd78e060318f8629abcad2415241d207" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void Azura::Log::Info</definition>
+        <argsstring>(U32 level, const char *fmt,...) const</argsstring>
+        <name>Info</name>
+        <param>
+          <type>U32</type>
+          <declname>level</declname>
+        </param>
+        <param>
+          <type>const char *</type>
+          <declname>fmt</declname>
+        </param>
+        <param>
+          <type>...</type>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Source/Log/Inc/Log/Log.h" line="20" column="1" bodyfile="Source/Log/Src/Log.cpp" bodystart="231" bodyend="243"/>
+      </memberdef>
+      <memberdef kind="function" id="class_azura_1_1_log_1aa0ee17538a03001384934af0db4cff77" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void Azura::Log::Warning</definition>
+        <argsstring>(U32 level, const char *fmt,...) const</argsstring>
+        <name>Warning</name>
+        <param>
+          <type>U32</type>
+          <declname>level</declname>
+        </param>
+        <param>
+          <type>const char *</type>
+          <declname>fmt</declname>
+        </param>
+        <param>
+          <type>...</type>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Source/Log/Inc/Log/Log.h" line="22" column="1" bodyfile="Source/Log/Src/Log.cpp" bodystart="246" bodyend="258"/>
+      </memberdef>
+      <memberdef kind="function" id="class_azura_1_1_log_1ad9d52ae327651bb6556c74413d68b6c6" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void Azura::Log::Error</definition>
+        <argsstring>(U32 level, const char *fmt,...) const</argsstring>
+        <name>Error</name>
+        <param>
+          <type>U32</type>
+          <declname>level</declname>
+        </param>
+        <param>
+          <type>const char *</type>
+          <declname>fmt</declname>
+        </param>
+        <param>
+          <type>...</type>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Source/Log/Inc/Log/Log.h" line="24" column="1" bodyfile="Source/Log/Src/Log.cpp" bodystart="260" bodyend="272"/>
+      </memberdef>
+      <memberdef kind="function" id="class_azura_1_1_log_1a7da7265a6ebc50965e6e6fae000c0ef2" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void Azura::Log::Fatal</definition>
+        <argsstring>(U32 level, const char *fmt,...) const</argsstring>
+        <name>Fatal</name>
+        <param>
+          <type>U32</type>
+          <declname>level</declname>
+        </param>
+        <param>
+          <type>const char *</type>
+          <declname>fmt</declname>
+        </param>
+        <param>
+          <type>...</type>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Source/Log/Inc/Log/Log.h" line="26" column="1" bodyfile="Source/Log/Src/Log.cpp" bodystart="274" bodyend="286"/>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="private-func">
+      <memberdef kind="function" id="class_azura_1_1_log_1a182cb2652a2be93bb0317600e7f95cb0" prot="private" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void Azura::Log::ParseLevelString</definition>
+        <argsstring>(const String &amp;levelStr)</argsstring>
+        <name>ParseLevelString</name>
+        <param>
+          <type>const String &amp;</type>
+          <declname>levelStr</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Source/Log/Inc/Log/Log.h" line="29" column="1" bodyfile="Source/Log/Src/Log.cpp" bodystart="180" bodyend="215"/>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <location file="Source/Log/Inc/Log/Log.h" line="14" column="1" bodyfile="Source/Log/Inc/Log/Log.h" bodystart="14" bodyend="40"/>
+    <listofallmembers>
+      <member refid="class_azura_1_1_log_1af1b3c26a0225f649a1d28b412e8006fa" prot="public" virt="non-virtual"><scope>Azura::Log</scope><name>Debug</name></member>
+      <member refid="class_azura_1_1_log_1ad9d52ae327651bb6556c74413d68b6c6" prot="public" virt="non-virtual"><scope>Azura::Log</scope><name>Error</name></member>
+      <member refid="class_azura_1_1_log_1a7da7265a6ebc50965e6e6fae000c0ef2" prot="public" virt="non-virtual"><scope>Azura::Log</scope><name>Fatal</name></member>
+      <member refid="class_azura_1_1_log_1afd78e060318f8629abcad2415241d207" prot="public" virt="non-virtual"><scope>Azura::Log</scope><name>Info</name></member>
+      <member refid="class_azura_1_1_log_1a3a4b1a1aa16dad541046c51373631b67" prot="public" virt="non-virtual"><scope>Azura::Log</scope><name>Log</name></member>
+      <member refid="class_azura_1_1_log_1ac21f3014964a775c0584bad37fa9fc28" prot="private" virt="non-virtual"><scope>Azura::Log</scope><name>m_debugLevel</name></member>
+      <member refid="class_azura_1_1_log_1abfce4426b2c2d227f44887472a07ba82" prot="private" virt="non-virtual"><scope>Azura::Log</scope><name>m_errorLevel</name></member>
+      <member refid="class_azura_1_1_log_1a6b2fe2d889ade0453b85cd92974e94d8" prot="private" virt="non-virtual"><scope>Azura::Log</scope><name>m_fatalLevel</name></member>
+      <member refid="class_azura_1_1_log_1a779025240539e4df36e758faab711017" prot="private" virt="non-virtual"><scope>Azura::Log</scope><name>m_infoLevel</name></member>
+      <member refid="class_azura_1_1_log_1a0713235572e4752226dedb4fd0188f6f" prot="private" virt="non-virtual"><scope>Azura::Log</scope><name>m_isReady</name></member>
+      <member refid="class_azura_1_1_log_1ab905756f956bb02d7c7785c2b08c1565" prot="private" virt="non-virtual"><scope>Azura::Log</scope><name>m_key</name></member>
+      <member refid="class_azura_1_1_log_1adeb4baf4fd3f0c831a34458b9876fe6a" prot="private" virt="non-virtual"><scope>Azura::Log</scope><name>m_temporaryBuffer</name></member>
+      <member refid="class_azura_1_1_log_1aed05055b491ef5070f2e50b5237f8435" prot="private" virt="non-virtual"><scope>Azura::Log</scope><name>m_warningLevel</name></member>
+      <member refid="class_azura_1_1_log_1a182cb2652a2be93bb0317600e7f95cb0" prot="private" virt="non-virtual"><scope>Azura::Log</scope><name>ParseLevelString</name></member>
+      <member refid="class_azura_1_1_log_1aa0ee17538a03001384934af0db4cff77" prot="public" virt="non-virtual"><scope>Azura::Log</scope><name>Warning</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

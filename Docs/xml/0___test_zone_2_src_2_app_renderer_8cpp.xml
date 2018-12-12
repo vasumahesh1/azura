@@ -1,0 +1,962 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.8.14">
+  <compounddef id="0___test_zone_2_src_2_app_renderer_8cpp" kind="file" language="C++">
+    <compoundname>AppRenderer.cpp</compoundname>
+    <includes refid="0___test_zone_2_inc_2_test_zone_2_app_renderer_8h" local="yes">TestZone/AppRenderer.h</includes>
+    <includes refid="_raw_storage_format_8h" local="yes">Core/RawStorageFormat.h</includes>
+    <includes refid="_render_system_8h" local="yes">Generic/RenderSystem.h</includes>
+    <includes refid="_shader_8h" local="yes">Generic/Shader.h</includes>
+    <includes refid="_memory_factory_8h" local="yes">Memory/MemoryFactory.h</includes>
+    <includes refid="_monotonic_allocator_8h" local="yes">Memory/MonotonicAllocator.h</includes>
+    <includes refid="_math_2_inc_2_math_2_transform_8h" local="yes">Math/Transform.h</includes>
+    <includes refid="_icosphere_8h" local="yes">Math/Icosphere.h</includes>
+    <includes refid="_plane_8h" local="yes">Math/Plane.h</includes>
+    <includes local="no">algorithm</includes>
+    <includes local="no">random</includes>
+    <incdepgraph>
+      <node id="6141">
+        <label>Camera.h</label>
+        <link refid="_camera_8h_source"/>
+        <childnode refid="6109" relation="include">
+        </childnode>
+        <childnode refid="6136" relation="include">
+        </childnode>
+        <childnode refid="6130" relation="include">
+        </childnode>
+      </node>
+      <node id="6136">
+        <label>Math/Core.h</label>
+        <link refid="_core_8h_source"/>
+        <childnode refid="6137" relation="include">
+        </childnode>
+        <childnode refid="6109" relation="include">
+        </childnode>
+      </node>
+      <node id="6113">
+        <label>functional</label>
+      </node>
+      <node id="6114">
+        <label>iterator</label>
+      </node>
+      <node id="6125">
+        <label>Utils/Hash.h</label>
+        <link refid="_hash_8h_source"/>
+        <childnode refid="6109" relation="include">
+        </childnode>
+      </node>
+      <node id="6152">
+        <label>Memory/MemoryFactory.h</label>
+        <link refid="_memory_factory_8h_source"/>
+        <childnode refid="6153" relation="include">
+        </childnode>
+        <childnode refid="6134" relation="include">
+        </childnode>
+        <childnode refid="6109" relation="include">
+        </childnode>
+      </node>
+      <node id="6106">
+        <label>Generic/Renderer.h</label>
+        <link refid="_renderer_8h_source"/>
+        <childnode refid="6107" relation="include">
+        </childnode>
+        <childnode refid="6110" relation="include">
+        </childnode>
+        <childnode refid="6118" relation="include">
+        </childnode>
+        <childnode refid="6119" relation="include">
+        </childnode>
+        <childnode refid="6120" relation="include">
+        </childnode>
+        <childnode refid="6128" relation="include">
+        </childnode>
+      </node>
+      <node id="6120">
+        <label>Core/RawStorageFormat.h</label>
+        <link refid="_raw_storage_format_8h_source"/>
+        <childnode refid="6109" relation="include">
+        </childnode>
+        <childnode refid="6108" relation="include">
+        </childnode>
+        <childnode refid="6121" relation="include">
+        </childnode>
+        <childnode refid="6122" relation="include">
+        </childnode>
+        <childnode refid="6123" relation="include">
+        </childnode>
+        <childnode refid="6124" relation="include">
+        </childnode>
+      </node>
+      <node id="6133">
+        <label>Memory/RangeAllocator.h</label>
+        <link refid="_range_allocator_8h_source"/>
+        <childnode refid="6116" relation="include">
+        </childnode>
+        <childnode refid="6109" relation="include">
+        </childnode>
+        <childnode refid="6132" relation="include">
+        </childnode>
+      </node>
+      <node id="6148">
+        <label>boost/container_hash/hash.hpp</label>
+      </node>
+      <node id="6135">
+        <label>MemoryBuffer.h</label>
+        <link refid="_memory_buffer_8h_source"/>
+        <childnode refid="6109" relation="include">
+        </childnode>
+      </node>
+      <node id="6116">
+        <label>Memory/Allocator.h</label>
+        <link refid="_allocator_8h_source"/>
+        <childnode refid="6113" relation="include">
+        </childnode>
+        <childnode refid="6109" relation="include">
+        </childnode>
+        <childnode refid="6117" relation="include">
+        </childnode>
+      </node>
+      <node id="6126">
+        <label>Core/AssetLocation.h</label>
+        <link refid="_asset_location_8h_source"/>
+      </node>
+      <node id="6111">
+        <label>cassert</label>
+      </node>
+      <node id="6123">
+        <label>boost/preprocessor/tuple/elem.hpp</label>
+      </node>
+      <node id="6119">
+        <label>GenericTypes.h</label>
+        <link refid="_azura_2_render_system_2_inc_2_generic_2_generic_types_8h_source"/>
+        <childnode refid="6110" relation="include">
+        </childnode>
+        <childnode refid="6107" relation="include">
+        </childnode>
+        <childnode refid="6109" relation="include">
+        </childnode>
+        <childnode refid="6120" relation="include">
+        </childnode>
+        <childnode refid="6125" relation="include">
+        </childnode>
+        <childnode refid="6126" relation="include">
+        </childnode>
+        <childnode refid="6127" relation="include">
+        </childnode>
+        <childnode refid="6124" relation="include">
+        </childnode>
+      </node>
+      <node id="6134">
+        <label>Memory/HeapMemoryBuffer.h</label>
+        <link refid="_heap_memory_buffer_8h_source"/>
+        <childnode refid="6135" relation="include">
+        </childnode>
+        <childnode refid="6109" relation="include">
+        </childnode>
+      </node>
+      <node id="6153">
+        <label>Memory/StackMemoryBuffer.h</label>
+        <link refid="_stack_memory_buffer_8h_source"/>
+        <childnode refid="6111" relation="include">
+        </childnode>
+        <childnode refid="6135" relation="include">
+        </childnode>
+        <childnode refid="6109" relation="include">
+        </childnode>
+        <childnode refid="6117" relation="include">
+        </childnode>
+      </node>
+      <node id="6117">
+        <label>Utils/Macros.h</label>
+        <link refid="_macros_8h_source"/>
+      </node>
+      <node id="6149">
+        <label>TestZone/ImportedClothMesh.h</label>
+        <link refid="_imported_cloth_mesh_8h_source"/>
+        <childnode refid="6146" relation="include">
+        </childnode>
+        <childnode refid="6136" relation="include">
+        </childnode>
+        <childnode refid="6143" relation="include">
+        </childnode>
+      </node>
+      <node id="6145">
+        <label>TestZone/ClothMesh.h</label>
+        <link refid="_samples_20___test_zone_2_inc_2_test_zone_2_cloth_mesh_8h_source"/>
+        <childnode refid="6146" relation="include">
+        </childnode>
+        <childnode refid="6136" relation="include">
+        </childnode>
+        <childnode refid="6143" relation="include">
+        </childnode>
+      </node>
+      <node id="6127">
+        <label>boost/container/small_vector.hpp</label>
+      </node>
+      <node id="6102">
+        <label>Source/Samples/0_TestZone/Src/AppRenderer.cpp</label>
+        <link refid="0___test_zone_2_src_2_app_renderer_8cpp"/>
+        <childnode refid="6103" relation="include">
+        </childnode>
+        <childnode refid="6120" relation="include">
+        </childnode>
+        <childnode refid="6150" relation="include">
+        </childnode>
+        <childnode refid="6151" relation="include">
+        </childnode>
+        <childnode refid="6152" relation="include">
+        </childnode>
+        <childnode refid="6139" relation="include">
+        </childnode>
+        <childnode refid="6154" relation="include">
+        </childnode>
+        <childnode refid="6155" relation="include">
+        </childnode>
+        <childnode refid="6142" relation="include">
+        </childnode>
+        <childnode refid="6156" relation="include">
+        </childnode>
+        <childnode refid="6144" relation="include">
+        </childnode>
+      </node>
+      <node id="6107">
+        <label>Constants.h</label>
+        <link refid="_azura_2_render_system_2_inc_2_generic_2_constants_8h_source"/>
+        <childnode refid="6108" relation="include">
+        </childnode>
+        <childnode refid="6109" relation="include">
+        </childnode>
+      </node>
+      <node id="6124">
+        <label>boost/detail/bitmask.hpp</label>
+      </node>
+      <node id="6144">
+        <label>random</label>
+      </node>
+      <node id="6130">
+        <label>Core/Events.h</label>
+        <link refid="_events_8h_source"/>
+      </node>
+      <node id="6108">
+        <label>tuple</label>
+      </node>
+      <node id="6115">
+        <label>Array.h</label>
+        <link refid="_array_8h_source"/>
+        <childnode refid="6111" relation="include">
+        </childnode>
+        <childnode refid="6112" relation="include">
+        </childnode>
+        <childnode refid="6116" relation="include">
+        </childnode>
+        <childnode refid="6109" relation="include">
+        </childnode>
+      </node>
+      <node id="6139">
+        <label>Memory/MonotonicAllocator.h</label>
+        <link refid="_monotonic_allocator_8h_source"/>
+        <childnode refid="6116" relation="include">
+        </childnode>
+        <childnode refid="6109" relation="include">
+        </childnode>
+      </node>
+      <node id="6132">
+        <label>vector</label>
+      </node>
+      <node id="6110">
+        <label>Containers/Vector.h</label>
+        <link refid="_vector_8h_source"/>
+        <childnode refid="6111" relation="include">
+        </childnode>
+        <childnode refid="6112" relation="include">
+        </childnode>
+        <childnode refid="6113" relation="include">
+        </childnode>
+        <childnode refid="6114" relation="include">
+        </childnode>
+        <childnode refid="6115" relation="include">
+        </childnode>
+        <childnode refid="6116" relation="include">
+        </childnode>
+        <childnode refid="6109" relation="include">
+        </childnode>
+        <childnode refid="6117" relation="include">
+        </childnode>
+      </node>
+      <node id="6103">
+        <label>TestZone/AppRenderer.h</label>
+        <link refid="0___test_zone_2_inc_2_test_zone_2_app_renderer_8h_source"/>
+        <childnode refid="6104" relation="include">
+        </childnode>
+        <childnode refid="6105" relation="include">
+        </childnode>
+        <childnode refid="6106" relation="include">
+        </childnode>
+        <childnode refid="6129" relation="include">
+        </childnode>
+        <childnode refid="6133" relation="include">
+        </childnode>
+        <childnode refid="6134" relation="include">
+        </childnode>
+        <childnode refid="6131" relation="include">
+        </childnode>
+        <childnode refid="6136" relation="include">
+        </childnode>
+        <childnode refid="6138" relation="include">
+        </childnode>
+        <childnode refid="6140" relation="include">
+        </childnode>
+        <childnode refid="6142" relation="include">
+        </childnode>
+        <childnode refid="6144" relation="include">
+        </childnode>
+        <childnode refid="6145" relation="include">
+        </childnode>
+        <childnode refid="6149" relation="include">
+        </childnode>
+      </node>
+      <node id="6131">
+        <label>Log/Log.h</label>
+        <link refid="_log_8h_source"/>
+        <childnode refid="6109" relation="include">
+        </childnode>
+        <childnode refid="6132" relation="include">
+        </childnode>
+      </node>
+      <node id="6143">
+        <label>Math/Geometry.h</label>
+        <link refid="_geometry_8h_source"/>
+        <childnode refid="6109" relation="include">
+        </childnode>
+        <childnode refid="6120" relation="include">
+        </childnode>
+      </node>
+      <node id="6118">
+        <label>Drawable.h</label>
+        <link refid="_drawable_8h_source"/>
+        <childnode refid="6110" relation="include">
+        </childnode>
+        <childnode refid="6119" relation="include">
+        </childnode>
+        <childnode refid="6109" relation="include">
+        </childnode>
+        <childnode refid="6120" relation="include">
+        </childnode>
+      </node>
+      <node id="6146">
+        <label>TestZone/ClothCommon.h</label>
+        <link refid="_cloth_common_8h_source"/>
+        <childnode refid="6136" relation="include">
+        </childnode>
+        <childnode refid="6143" relation="include">
+        </childnode>
+        <childnode refid="6132" relation="include">
+        </childnode>
+        <childnode refid="6147" relation="include">
+        </childnode>
+        <childnode refid="6148" relation="include">
+        </childnode>
+      </node>
+      <node id="6154">
+        <label>Math/Transform.h</label>
+        <link refid="_math_2_inc_2_math_2_transform_8h_source"/>
+        <childnode refid="6136" relation="include">
+        </childnode>
+      </node>
+      <node id="6121">
+        <label>boost/preprocessor/repetition/repeat.hpp</label>
+      </node>
+      <node id="6147">
+        <label>unordered_map</label>
+      </node>
+      <node id="6109">
+        <label>Types.h</label>
+      </node>
+      <node id="6150">
+        <label>Generic/RenderSystem.h</label>
+        <link refid="_render_system_8h_source"/>
+        <childnode refid="6116" relation="include">
+        </childnode>
+        <childnode refid="6106" relation="include">
+        </childnode>
+        <childnode refid="6138" relation="include">
+        </childnode>
+      </node>
+      <node id="6137">
+        <label>mathfu/matrix.h</label>
+      </node>
+      <node id="6129">
+        <label>Generic/Window.h</label>
+        <link refid="_window_8h_source"/>
+        <childnode refid="6113" relation="include">
+        </childnode>
+        <childnode refid="6119" relation="include">
+        </childnode>
+        <childnode refid="6109" relation="include">
+        </childnode>
+        <childnode refid="6106" relation="include">
+        </childnode>
+        <childnode refid="6130" relation="include">
+        </childnode>
+        <childnode refid="6131" relation="include">
+        </childnode>
+      </node>
+      <node id="6155">
+        <label>Math/Icosphere.h</label>
+        <link refid="_icosphere_8h_source"/>
+        <childnode refid="6109" relation="include">
+        </childnode>
+        <childnode refid="6143" relation="include">
+        </childnode>
+        <childnode refid="6136" relation="include">
+        </childnode>
+        <childnode refid="6132" relation="include">
+        </childnode>
+      </node>
+      <node id="6140">
+        <label>Camera/PolarCamera.h</label>
+        <link refid="_polar_camera_8h_source"/>
+        <childnode refid="6141" relation="include">
+        </childnode>
+      </node>
+      <node id="6105">
+        <label>set</label>
+      </node>
+      <node id="6142">
+        <label>Math/Plane.h</label>
+        <link refid="_plane_8h_source"/>
+        <childnode refid="6136" relation="include">
+        </childnode>
+        <childnode refid="6143" relation="include">
+        </childnode>
+        <childnode refid="6132" relation="include">
+        </childnode>
+      </node>
+      <node id="6128">
+        <label>ComputePool.h</label>
+        <link refid="_compute_pool_8h_source"/>
+        <childnode refid="6110" relation="include">
+        </childnode>
+        <childnode refid="6119" relation="include">
+        </childnode>
+        <childnode refid="6109" relation="include">
+        </childnode>
+      </node>
+      <node id="6156">
+        <label>algorithm</label>
+      </node>
+      <node id="6138">
+        <label>Generic/TextureManager.h</label>
+        <link refid="_texture_manager_8h_source"/>
+        <childnode refid="6109" relation="include">
+        </childnode>
+        <childnode refid="6134" relation="include">
+        </childnode>
+        <childnode refid="6139" relation="include">
+        </childnode>
+        <childnode refid="6110" relation="include">
+        </childnode>
+        <childnode refid="6119" relation="include">
+        </childnode>
+        <childnode refid="6131" relation="include">
+        </childnode>
+      </node>
+      <node id="6112">
+        <label>cstring</label>
+      </node>
+      <node id="6104">
+        <label>memory</label>
+      </node>
+      <node id="6151">
+        <label>Generic/Shader.h</label>
+        <link refid="_shader_8h_source"/>
+        <childnode refid="6119" relation="include">
+        </childnode>
+      </node>
+      <node id="6122">
+        <label>boost/preprocessor/seq/for_each.hpp</label>
+      </node>
+    </incdepgraph>
+    <innernamespace refid="namespace_azura">Azura</innernamespace>
+      <sectiondef kind="var">
+      <memberdef kind="variable" id="0___test_zone_2_src_2_app_renderer_8cpp_1a9f070c24d1bcd5d92601a9e4bc5b2239" prot="public" static="no" mutable="no">
+        <type>float</type>
+        <definition>float m_pos[4]</definition>
+        <argsstring>[4]</argsstring>
+        <name>m_pos</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Source/Samples/0_TestZone/Src/AppRenderer.cpp" line="19" column="1" bodyfile="Source/Samples/0_TestZone/Src/AppRenderer.cpp" bodystart="19" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="0___test_zone_2_src_2_app_renderer_8cpp_1abacfef300a31bbd96e041d2139f6a589" prot="public" static="no" mutable="no">
+        <type>float</type>
+        <definition>float m_col[4]</definition>
+        <argsstring>[4]</argsstring>
+        <name>m_col</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Source/Samples/0_TestZone/Src/AppRenderer.cpp" line="20" column="1" bodyfile="Source/Samples/0_TestZone/Src/AppRenderer.cpp" bodystart="20" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="0___test_zone_2_src_2_app_renderer_8cpp_1aa8f87e87e5449f1c7a46b53abdc033e8" prot="public" static="no" mutable="no">
+        <type>float</type>
+        <definition>float m_uv[2]</definition>
+        <argsstring>[2]</argsstring>
+        <name>m_uv</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Source/Samples/0_TestZone/Src/AppRenderer.cpp" line="25" column="1" bodyfile="Source/Samples/0_TestZone/Src/AppRenderer.cpp" bodystart="25" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="0___test_zone_2_src_2_app_renderer_8cpp_1ab0e812335faf45458fb0aeaa849b3556" prot="public" static="no" mutable="no">
+        <type>Vector4f</type>
+        <definition>Vector4f m_lightPos</definition>
+        <argsstring></argsstring>
+        <name>m_lightPos</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Source/Samples/0_TestZone/Src/AppRenderer.cpp" line="29" column="1" bodyfile="Source/Samples/0_TestZone/Src/AppRenderer.cpp" bodystart="29" bodyend="-1"/>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <programlisting>
+<codeline lineno="1"><highlight class="preprocessor">#include<sp/>&quot;TestZone/AppRenderer.h&quot;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="2"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&quot;Core/RawStorageFormat.h&quot;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="3"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&quot;Generic/RenderSystem.h&quot;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="4"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&quot;Generic/Shader.h&quot;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="5"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&quot;Memory/MemoryFactory.h&quot;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="6"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&quot;Memory/MonotonicAllocator.h&quot;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="7"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&quot;Math/Transform.h&quot;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="8"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&quot;Math/Icosphere.h&quot;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="9"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&quot;Math/Plane.h&quot;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="10"><highlight class="normal"></highlight></codeline>
+<codeline lineno="11"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&lt;algorithm&gt;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="12"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&lt;random&gt;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="13"><highlight class="normal"></highlight></codeline>
+<codeline lineno="14"><highlight class="normal"></highlight><highlight class="keyword">namespace<sp/></highlight><highlight class="normal"><ref refid="namespace_azura" kindref="compound">Azura</ref><sp/>{</highlight></codeline>
+<codeline lineno="15"><highlight class="normal"></highlight><highlight class="keyword">using<sp/>namespace<sp/></highlight><highlight class="normal">Containers;<sp/></highlight><highlight class="comment">//<sp/>NOLINT</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="16"><highlight class="normal"></highlight><highlight class="keyword">using<sp/>namespace<sp/></highlight><highlight class="normal">Math;<sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="comment">//<sp/>NOLINT</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="17"><highlight class="normal"></highlight><highlight class="keyword">namespace<sp/></highlight><highlight class="normal">{</highlight></codeline>
+<codeline lineno="18"><highlight class="normal"><sp/><sp/></highlight><highlight class="keyword">struct<sp/></highlight><highlight class="normal"><ref refid="struct_vertex" kindref="compound">Vertex</ref><sp/>{</highlight></codeline>
+<codeline lineno="19"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">float</highlight><highlight class="normal"><sp/>m_pos[4];</highlight></codeline>
+<codeline lineno="20"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">float</highlight><highlight class="normal"><sp/>m_col[4];</highlight></codeline>
+<codeline lineno="21"><highlight class="normal"><sp/><sp/>};</highlight></codeline>
+<codeline lineno="22"><highlight class="normal"></highlight></codeline>
+<codeline lineno="23"><highlight class="normal"><sp/><sp/></highlight><highlight class="keyword">struct<sp/></highlight><highlight class="normal"><ref refid="struct_vertex_with_u_v" kindref="compound">VertexWithUV</ref><sp/>{</highlight></codeline>
+<codeline lineno="24"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">float</highlight><highlight class="normal"><sp/>m_pos[4];</highlight></codeline>
+<codeline lineno="25"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">float</highlight><highlight class="normal"><sp/>m_uv[2];</highlight></codeline>
+<codeline lineno="26"><highlight class="normal"><sp/><sp/>};</highlight></codeline>
+<codeline lineno="27"><highlight class="normal"></highlight></codeline>
+<codeline lineno="28"><highlight class="normal"><sp/><sp/></highlight><highlight class="keyword">struct<sp/></highlight><highlight class="normal">LightData<sp/>{</highlight></codeline>
+<codeline lineno="29"><highlight class="normal"><sp/><sp/><sp/><sp/>Vector4f<sp/>m_lightPos;</highlight></codeline>
+<codeline lineno="30"><highlight class="normal"><sp/><sp/>};</highlight></codeline>
+<codeline lineno="31"><highlight class="normal"></highlight></codeline>
+<codeline lineno="32"><highlight class="normal"><sp/><sp/>constexpr<sp/>U32<sp/>CLOTH_DIV_X<sp/>=<sp/>30;</highlight></codeline>
+<codeline lineno="33"><highlight class="normal"><sp/><sp/>constexpr<sp/>U32<sp/>CLOTH_DIV_Y<sp/>=<sp/>30;</highlight></codeline>
+<codeline lineno="34"><highlight class="normal">}<sp/></highlight><highlight class="comment">//<sp/>namespace</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="35"><highlight class="normal"></highlight></codeline>
+<codeline lineno="36"><highlight class="normal">AppRenderer::AppRenderer()</highlight></codeline>
+<codeline lineno="37"><highlight class="normal"><sp/><sp/>:<sp/>m_mainBuffer(0x640</highlight><highlight class="stringliteral">&apos;0000),</highlight></codeline>
+<codeline lineno="38"><highlight class="stringliteral"><sp/><sp/><sp/><sp/>m_mainAllocator(m_mainBuffer,<sp/>0x320&apos;</highlight><highlight class="normal">0000),</highlight></codeline>
+<codeline lineno="39"><highlight class="normal"><sp/><sp/><sp/><sp/>m_drawableAllocator(m_mainBuffer,<sp/>0x320</highlight><highlight class="stringliteral">&apos;0000),</highlight></codeline>
+<codeline lineno="40"><highlight class="stringliteral"><sp/><sp/><sp/><sp/>m_camera(1280,<sp/>720),</highlight></codeline>
+<codeline lineno="41"><highlight class="stringliteral"><sp/><sp/><sp/><sp/>m_clothPlane(Vector2f(-3.0f,<sp/>-3.0f),<sp/>Vector2f(3.0f,<sp/>3.0f),<sp/>Vector2u(CLOTH_DIV_X,<sp/>CLOTH_DIV_Y)),</highlight></codeline>
+<codeline lineno="42"><highlight class="stringliteral"><sp/><sp/><sp/><sp/>log_AppRenderer(Log(&quot;AppRenderer&quot;))<sp/>{</highlight></codeline>
+<codeline lineno="43"><highlight class="stringliteral">}</highlight></codeline>
+<codeline lineno="44"><highlight class="stringliteral"></highlight></codeline>
+<codeline lineno="45"><highlight class="stringliteral">void<sp/>AppRenderer::Initialize()<sp/>{</highlight></codeline>
+<codeline lineno="46"><highlight class="stringliteral"><sp/><sp/>LOG_INF(log_AppRenderer,<sp/>LOG_LEVEL,<sp/>&quot;Starting<sp/>Init<sp/>of<sp/>AppRenderer&quot;);</highlight></codeline>
+<codeline lineno="47"><highlight class="stringliteral"></highlight></codeline>
+<codeline lineno="48"><highlight class="stringliteral"><sp/><sp/>HEAP_ALLOCATOR(Temporary,<sp/>Memory::MonotonicAllocator,<sp/>16384);</highlight></codeline>
+<codeline lineno="49"><highlight class="stringliteral"><sp/><sp/>m_window<sp/>=<sp/>RenderSystem::CreateApplicationWindow(&quot;TestZone&quot;,<sp/>1280,<sp/>720);</highlight></codeline>
+<codeline lineno="50"><highlight class="stringliteral"></highlight></codeline>
+<codeline lineno="51"><highlight class="stringliteral"><sp/><sp/>m_window-&gt;SetUpdateCallback([this](float<sp/>deltaTime)</highlight></codeline>
+<codeline lineno="52"><highlight class="stringliteral"><sp/><sp/>{</highlight></codeline>
+<codeline lineno="53"><highlight class="stringliteral"><sp/><sp/><sp/><sp/>WindowUpdate(deltaTime);</highlight></codeline>
+<codeline lineno="54"><highlight class="stringliteral"><sp/><sp/>});</highlight></codeline>
+<codeline lineno="55"><highlight class="stringliteral"></highlight></codeline>
+<codeline lineno="56"><highlight class="stringliteral"><sp/><sp/>m_window-&gt;SetKeyEventCallback([this](KeyEvent<sp/>evt)</highlight></codeline>
+<codeline lineno="57"><highlight class="stringliteral"><sp/><sp/>{</highlight></codeline>
+<codeline lineno="58"><highlight class="stringliteral"><sp/><sp/><sp/><sp/>m_camera.OnKeyEvent(evt);</highlight></codeline>
+<codeline lineno="59"><highlight class="stringliteral"><sp/><sp/>});</highlight></codeline>
+<codeline lineno="60"><highlight class="stringliteral"></highlight></codeline>
+<codeline lineno="61"><highlight class="stringliteral"><sp/><sp/>m_window-&gt;SetMouseEventCallback([this](MouseEvent<sp/>evt)</highlight></codeline>
+<codeline lineno="62"><highlight class="stringliteral"><sp/><sp/>{</highlight></codeline>
+<codeline lineno="63"><highlight class="stringliteral"><sp/><sp/><sp/><sp/>UNUSED(evt);</highlight></codeline>
+<codeline lineno="64"><highlight class="stringliteral"><sp/><sp/><sp/><sp/>//<sp/>Disable<sp/>as<sp/>it<sp/>has<sp/>bugs</highlight></codeline>
+<codeline lineno="65"><highlight class="stringliteral"><sp/><sp/><sp/><sp/>//<sp/>m_camera.OnMouseEvent(e);</highlight></codeline>
+<codeline lineno="66"><highlight class="stringliteral"><sp/><sp/>});</highlight></codeline>
+<codeline lineno="67"><highlight class="stringliteral"></highlight></codeline>
+<codeline lineno="68"><highlight class="stringliteral"><sp/><sp/>m_camera.SetZoom(10);</highlight></codeline>
+<codeline lineno="69"><highlight class="stringliteral"><sp/><sp/>m_camera.RotateAboutRight(-30);</highlight></codeline>
+<codeline lineno="70"><highlight class="stringliteral"></highlight></codeline>
+<codeline lineno="71"><highlight class="stringliteral"><sp/><sp/>VERIFY_TRUE(log_AppRenderer,<sp/>m_window-&gt;Initialize(),<sp/>&quot;Cannot<sp/>Initialize<sp/>Window&quot;);</highlight></codeline>
+<codeline lineno="72"><highlight class="stringliteral"></highlight></codeline>
+<codeline lineno="73"><highlight class="stringliteral"><sp/><sp/>ApplicationInfo<sp/>appInfo;</highlight></codeline>
+<codeline lineno="74"><highlight class="stringliteral"><sp/><sp/>appInfo.m_name<sp/><sp/><sp/><sp/>=<sp/>&quot;TestZone&quot;;</highlight></codeline>
+<codeline lineno="75"><highlight class="stringliteral"><sp/><sp/>appInfo.m_version<sp/>=<sp/>Version(1,<sp/>0,<sp/>0);</highlight></codeline>
+<codeline lineno="76"><highlight class="stringliteral"></highlight></codeline>
+<codeline lineno="77"><highlight class="stringliteral"><sp/><sp/>DeviceRequirements<sp/>requirements;</highlight></codeline>
+<codeline lineno="78"><highlight class="stringliteral"><sp/><sp/>requirements.m_discreteGPU<sp/><sp/><sp/>=<sp/>true;</highlight></codeline>
+<codeline lineno="79"><highlight class="stringliteral"><sp/><sp/>requirements.m_float64<sp/><sp/><sp/><sp/><sp/><sp/><sp/>=<sp/>false;</highlight></codeline>
+<codeline lineno="80"><highlight class="stringliteral"><sp/><sp/>requirements.m_int64<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>=<sp/>false;</highlight></codeline>
+<codeline lineno="81"><highlight class="stringliteral"><sp/><sp/>requirements.m_transferQueue<sp/>=<sp/>false;</highlight></codeline>
+<codeline lineno="82"><highlight class="stringliteral"></highlight></codeline>
+<codeline lineno="83"><highlight class="stringliteral"><sp/><sp/>m_camera.Recompute();</highlight></codeline>
+<codeline lineno="84"><highlight class="stringliteral"></highlight></codeline>
+<codeline lineno="85"><highlight class="stringliteral"><sp/><sp/>m_clothUBO<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>=<sp/>{};</highlight></codeline>
+<codeline lineno="86"><highlight class="stringliteral"><sp/><sp/>m_clothUBO.m_model<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>=<sp/>Matrix4f::FromTranslationVector(Vector3f(0,<sp/>3,<sp/>0));</highlight></codeline>
+<codeline lineno="87"><highlight class="stringliteral"><sp/><sp/>m_clothUBO.m_view<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>=<sp/>m_camera.GetViewMatrix();</highlight></codeline>
+<codeline lineno="88"><highlight class="stringliteral"><sp/><sp/>m_clothUBO.m_viewProj<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>=<sp/>m_camera.GetViewProjMatrix();</highlight></codeline>
+<codeline lineno="89"><highlight class="stringliteral"><sp/><sp/>m_clothUBO.m_invViewProj<sp/><sp/><sp/><sp/><sp/><sp/><sp/>=<sp/>m_camera.GetInvViewProjMatrix();</highlight></codeline>
+<codeline lineno="90"><highlight class="stringliteral"><sp/><sp/>m_clothUBO.m_invProj<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>=<sp/>m_camera.GetProjMatrix().Inverse();</highlight></codeline>
+<codeline lineno="91"><highlight class="stringliteral"><sp/><sp/>m_clothUBO.m_modelInvTranspose<sp/>=<sp/>m_clothUBO.m_model.Inverse().Transpose();</highlight></codeline>
+<codeline lineno="92"><highlight class="stringliteral"></highlight></codeline>
+<codeline lineno="93"><highlight class="stringliteral"><sp/><sp/>m_sphereUBO<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>=<sp/>{};</highlight></codeline>
+<codeline lineno="94"><highlight class="stringliteral"><sp/><sp/>m_sphereUBO.m_model<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>=<sp/>Matrix4f::Identity();</highlight></codeline>
+<codeline lineno="95"><highlight class="stringliteral"><sp/><sp/>m_sphereUBO.m_viewProj<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>=<sp/>m_camera.GetViewProjMatrix();</highlight></codeline>
+<codeline lineno="96"><highlight class="stringliteral"><sp/><sp/>m_sphereUBO.m_view<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>=<sp/>m_camera.GetViewMatrix();</highlight></codeline>
+<codeline lineno="97"><highlight class="stringliteral"><sp/><sp/>m_sphereUBO.m_invViewProj<sp/><sp/><sp/><sp/><sp/><sp/><sp/>=<sp/>m_camera.GetInvViewProjMatrix();</highlight></codeline>
+<codeline lineno="98"><highlight class="stringliteral"><sp/><sp/>m_sphereUBO.m_invProj<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>=<sp/>m_camera.GetProjMatrix().Inverse();</highlight></codeline>
+<codeline lineno="99"><highlight class="stringliteral"><sp/><sp/>m_sphereUBO.m_modelInvTranspose<sp/>=<sp/>m_sphereUBO.m_model.Inverse().Transpose();</highlight></codeline>
+<codeline lineno="100"><highlight class="stringliteral"></highlight></codeline>
+<codeline lineno="101"><highlight class="stringliteral"><sp/><sp/>LightData<sp/>lightData<sp/><sp/>=<sp/>{};</highlight></codeline>
+<codeline lineno="102"><highlight class="stringliteral"><sp/><sp/>lightData.m_lightPos<sp/>=<sp/>Vector4f(0.0f,<sp/>15.0f,<sp/>0.0f,<sp/>1.0f);</highlight></codeline>
+<codeline lineno="103"><highlight class="stringliteral"></highlight></codeline>
+<codeline lineno="104"><highlight class="stringliteral"><sp/><sp/>//<sp/>TODO(vasumahesh1):[Q]:Allocator?</highlight></codeline>
+<codeline lineno="105"><highlight class="stringliteral"><sp/><sp/>const<sp/>ApplicationRequirements<sp/>applicationRequirements<sp/>=<sp/>{};</highlight></codeline>
+<codeline lineno="106"><highlight class="stringliteral"></highlight></codeline>
+<codeline lineno="107"><highlight class="stringliteral"><sp/><sp/>TextureRequirements<sp/>textureRequirements<sp/>=<sp/>{};</highlight></codeline>
+<codeline lineno="108"><highlight class="stringliteral"><sp/><sp/>textureRequirements.m_maxCount<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>=<sp/>1;</highlight></codeline>
+<codeline lineno="109"><highlight class="stringliteral"><sp/><sp/>textureRequirements.m_poolSize<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>=<sp/>0x400000;<sp/>//<sp/>4MB</highlight></codeline>
+<codeline lineno="110"><highlight class="stringliteral"></highlight></codeline>
+<codeline lineno="111"><highlight class="stringliteral"><sp/><sp/>DescriptorRequirements<sp/>descriptorRequirements<sp/>=<sp/>DescriptorRequirements(3,<sp/>3,<sp/>allocatorTemporary);</highlight></codeline>
+<codeline lineno="112"><highlight class="stringliteral"><sp/><sp/>//<sp/>SET<sp/>0</highlight></codeline>
+<codeline lineno="113"><highlight class="stringliteral"><sp/><sp/>const<sp/>U32<sp/>UBO_SLOT<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>=<sp/>descriptorRequirements.AddDescriptor({</highlight></codeline>
+<codeline lineno="114"><highlight class="stringliteral"><sp/><sp/><sp/><sp/>DescriptorType::UniformBuffer,<sp/>ShaderStage::Vertex</highlight></codeline>
+<codeline lineno="115"><highlight class="stringliteral"><sp/><sp/>});</highlight></codeline>
+<codeline lineno="116"><highlight class="stringliteral"><sp/><sp/>const<sp/>U32<sp/>LIGHT_SLOT<sp/>=<sp/>descriptorRequirements.AddDescriptor({</highlight></codeline>
+<codeline lineno="117"><highlight class="stringliteral"><sp/><sp/><sp/><sp/>DescriptorType::UniformBuffer,<sp/>ShaderStage::Vertex</highlight></codeline>
+<codeline lineno="118"><highlight class="stringliteral"><sp/><sp/>});</highlight></codeline>
+<codeline lineno="119"><highlight class="stringliteral"></highlight></codeline>
+<codeline lineno="120"><highlight class="stringliteral"><sp/><sp/>//<sp/>SET<sp/>0<sp/>Compute</highlight></codeline>
+<codeline lineno="121"><highlight class="stringliteral"><sp/><sp/>m_computePass.m_computeUBOSlot<sp/>=<sp/>descriptorRequirements.AddDescriptor({</highlight></codeline>
+<codeline lineno="122"><highlight class="stringliteral"><sp/><sp/><sp/><sp/>DescriptorType::UniformBuffer,<sp/>ShaderStage::Compute</highlight></codeline>
+<codeline lineno="123"><highlight class="stringliteral"><sp/><sp/>});</highlight></codeline>
+<codeline lineno="124"><highlight class="stringliteral"></highlight></codeline>
+<codeline lineno="125"><highlight class="stringliteral"><sp/><sp/>const<sp/>U32<sp/>UBO_SET<sp/><sp/><sp/>=<sp/>descriptorRequirements.AddSet({UBO_SLOT});</highlight></codeline>
+<codeline lineno="126"><highlight class="stringliteral"><sp/><sp/>const<sp/>U32<sp/>LIGHT_SET<sp/>=<sp/>descriptorRequirements.AddSet({LIGHT_SLOT});</highlight></codeline>
+<codeline lineno="127"><highlight class="stringliteral"><sp/><sp/></highlight></codeline>
+<codeline lineno="128"><highlight class="stringliteral"><sp/><sp/>const<sp/>U32<sp/>COMPUTE_UBO_SET<sp/>=<sp/>descriptorRequirements.AddSet({m_computePass.m_computeUBOSlot});</highlight></codeline>
+<codeline lineno="129"><highlight class="stringliteral"></highlight></codeline>
+<codeline lineno="130"><highlight class="stringliteral"><sp/><sp/>ShaderRequirements<sp/>shaderRequirements<sp/>=<sp/>ShaderRequirements(3,<sp/>allocatorTemporary);</highlight></codeline>
+<codeline lineno="131"><highlight class="stringliteral"><sp/><sp/>const<sp/>U32<sp/>COMPUTE_SHADER_ID<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>=<sp/>shaderRequirements.AddShader({</highlight></codeline>
+<codeline lineno="132"><highlight class="stringliteral"><sp/><sp/><sp/><sp/>ShaderStage::Compute,<sp/>&quot;Cloth.cs&quot;,<sp/>AssetLocation::Shaders</highlight></codeline>
+<codeline lineno="133"><highlight class="stringliteral"><sp/><sp/><sp/><sp/>});</highlight></codeline>
+<codeline lineno="134"><highlight class="stringliteral"><sp/><sp/></highlight></codeline>
+<codeline lineno="135"><highlight class="stringliteral"><sp/><sp/>const<sp/>U32<sp/>VERTEX_SHADER_ID<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>=<sp/>shaderRequirements.AddShader({</highlight></codeline>
+<codeline lineno="136"><highlight class="stringliteral"><sp/><sp/><sp/><sp/>ShaderStage::Vertex,<sp/>&quot;Cloth.vs&quot;,<sp/>AssetLocation::Shaders</highlight></codeline>
+<codeline lineno="137"><highlight class="stringliteral"><sp/><sp/>});</highlight></codeline>
+<codeline lineno="138"><highlight class="stringliteral"><sp/><sp/>const<sp/>U32<sp/>PIXEL_SHADER_ID<sp/>=<sp/>shaderRequirements.AddShader({</highlight></codeline>
+<codeline lineno="139"><highlight class="stringliteral"><sp/><sp/><sp/><sp/>ShaderStage::Pixel,<sp/>&quot;Cloth.ps&quot;,<sp/>AssetLocation::Shaders</highlight></codeline>
+<codeline lineno="140"><highlight class="stringliteral"><sp/><sp/>});</highlight></codeline>
+<codeline lineno="141"><highlight class="stringliteral"></highlight></codeline>
+<codeline lineno="142"><highlight class="stringliteral"><sp/><sp/>RenderPassRequirements<sp/>renderPassRequirements<sp/>=<sp/>RenderPassRequirements(1,<sp/>2,<sp/>7,<sp/>allocatorTemporary);</highlight></codeline>
+<codeline lineno="143"><highlight class="stringliteral"><sp/><sp/>renderPassRequirements.m_maxPools<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>=<sp/>2;</highlight></codeline>
+<codeline lineno="144"><highlight class="stringliteral"></highlight></codeline>
+<codeline lineno="145"><highlight class="stringliteral"><sp/><sp/>const<sp/>U32<sp/>DISTANCE_CONSTRAINTS_BUFFER<sp/>=<sp/>renderPassRequirements.AddBuffer({</highlight></codeline>
+<codeline lineno="146"><highlight class="stringliteral"><sp/><sp/><sp/><sp/>U32(sizeof(DistanceConstraint))<sp/>*<sp/>U32(m_clothPlane.GetEdgeConstraints().size()),<sp/>U32(sizeof(DistanceConstraint))</highlight></codeline>
+<codeline lineno="147"><highlight class="stringliteral"><sp/><sp/><sp/><sp/>});</highlight></codeline>
+<codeline lineno="148"><highlight class="stringliteral"><sp/><sp/></highlight></codeline>
+<codeline lineno="149"><highlight class="stringliteral"><sp/><sp/>const<sp/>U32<sp/>BEND_CONSTRAINTS_BUFFER<sp/>=<sp/>renderPassRequirements.AddBuffer({</highlight></codeline>
+<codeline lineno="150"><highlight class="stringliteral"><sp/><sp/><sp/><sp/>U32(sizeof(BendingConstraint))<sp/>*<sp/>U32(m_clothPlane.GetBendingConstraints().size()),<sp/>U32(sizeof(BendingConstraint))</highlight></codeline>
+<codeline lineno="151"><highlight class="stringliteral"><sp/><sp/><sp/><sp/>});</highlight></codeline>
+<codeline lineno="152"><highlight class="stringliteral"></highlight></codeline>
+<codeline lineno="153"><highlight class="stringliteral"><sp/><sp/>const<sp/>U32<sp/>COMPUTE_VERTEX_BUFFER<sp/>=<sp/>renderPassRequirements.AddBuffer({</highlight></codeline>
+<codeline lineno="154"><highlight class="stringliteral"><sp/><sp/><sp/><sp/>U32(sizeof(Vector4f))<sp/>*<sp/>U32(m_clothPlane.GetVertices().size()),<sp/>U32(sizeof(Vector4f))</highlight></codeline>
+<codeline lineno="155"><highlight class="stringliteral"><sp/><sp/><sp/><sp/>});</highlight></codeline>
+<codeline lineno="156"><highlight class="stringliteral"></highlight></codeline>
+<codeline lineno="157"><highlight class="stringliteral"><sp/><sp/>const<sp/>U32<sp/>COMPUTE_PROJECTION_BUFFER<sp/>=<sp/>renderPassRequirements.AddBuffer({</highlight></codeline>
+<codeline lineno="158"><highlight class="stringliteral"><sp/><sp/><sp/><sp/>U32(sizeof(Vector4f))<sp/>*<sp/>U32(m_clothPlane.GetVertices().size()),<sp/>U32(sizeof(Vector4f))</highlight></codeline>
+<codeline lineno="159"><highlight class="stringliteral"><sp/><sp/><sp/><sp/>});</highlight></codeline>
+<codeline lineno="160"><highlight class="stringliteral"></highlight></codeline>
+<codeline lineno="161"><highlight class="stringliteral"><sp/><sp/>const<sp/>U32<sp/>COMPUTE_VERTEX_VELOCITY<sp/>=<sp/>renderPassRequirements.AddBuffer({</highlight></codeline>
+<codeline lineno="162"><highlight class="stringliteral"><sp/><sp/><sp/><sp/>U32(sizeof(Vector4f))<sp/>*<sp/>U32(m_clothPlane.GetVertices().size()),<sp/>U32(sizeof(Vector4f))</highlight></codeline>
+<codeline lineno="163"><highlight class="stringliteral"><sp/><sp/><sp/><sp/>});</highlight></codeline>
+<codeline lineno="164"><highlight class="stringliteral"></highlight></codeline>
+<codeline lineno="165"><highlight class="stringliteral"><sp/><sp/>const<sp/>U32<sp/>COMPUTE_VERTEX_CONSTRAINT_COUNT<sp/>=<sp/>renderPassRequirements.AddBuffer({</highlight></codeline>
+<codeline lineno="166"><highlight class="stringliteral"><sp/><sp/><sp/><sp/>U32(sizeof(U32))<sp/>*<sp/>U32(m_clothPlane.GetVertices().size()),<sp/>U32(sizeof(U32))</highlight></codeline>
+<codeline lineno="167"><highlight class="stringliteral"><sp/><sp/><sp/><sp/>});</highlight></codeline>
+<codeline lineno="168"><highlight class="stringliteral"></highlight></codeline>
+<codeline lineno="169"><highlight class="stringliteral"><sp/><sp/>const<sp/>U32<sp/>COMPUTE_VERTEX_DELTAX<sp/>=<sp/>renderPassRequirements.AddBuffer({</highlight></codeline>
+<codeline lineno="170"><highlight class="stringliteral"><sp/><sp/><sp/><sp/>U32(sizeof(U32))<sp/>*<sp/>U32(m_clothPlane.GetVertices().size()),<sp/>U32(sizeof(U32))</highlight></codeline>
+<codeline lineno="171"><highlight class="stringliteral"><sp/><sp/><sp/><sp/>});</highlight></codeline>
+<codeline lineno="172"><highlight class="stringliteral"><sp/><sp/></highlight></codeline>
+<codeline lineno="173"><highlight class="stringliteral"><sp/><sp/>const<sp/>U32<sp/>COMPUTE_VERTEX_DELTAY<sp/>=<sp/>renderPassRequirements.AddBuffer({</highlight></codeline>
+<codeline lineno="174"><highlight class="stringliteral"><sp/><sp/><sp/><sp/>U32(sizeof(U32))<sp/>*<sp/>U32(m_clothPlane.GetVertices().size()),<sp/>U32(sizeof(U32))</highlight></codeline>
+<codeline lineno="175"><highlight class="stringliteral"><sp/><sp/><sp/><sp/>});</highlight></codeline>
+<codeline lineno="176"><highlight class="stringliteral"><sp/><sp/></highlight></codeline>
+<codeline lineno="177"><highlight class="stringliteral"><sp/><sp/>const<sp/>U32<sp/>COMPUTE_VERTEX_DELTAZ<sp/>=<sp/>renderPassRequirements.AddBuffer({</highlight></codeline>
+<codeline lineno="178"><highlight class="stringliteral"><sp/><sp/><sp/><sp/>U32(sizeof(U32))<sp/>*<sp/>U32(m_clothPlane.GetVertices().size()),<sp/>U32(sizeof(U32))</highlight></codeline>
+<codeline lineno="179"><highlight class="stringliteral"><sp/><sp/><sp/><sp/>});</highlight></codeline>
+<codeline lineno="180"><highlight class="stringliteral"></highlight></codeline>
+<codeline lineno="181"><highlight class="stringliteral"><sp/><sp/>//<sp/>const<sp/>U32<sp/>COMPUTE_VERTEX_LOCK<sp/>=<sp/>renderPassRequirements.AddBuffer({</highlight></codeline>
+<codeline lineno="182"><highlight class="stringliteral"><sp/><sp/>//<sp/><sp/><sp/>U32(sizeof(U32))<sp/>*<sp/>U32(m_clothPlane.GetVertices().size()),<sp/>U32(sizeof(U32))</highlight></codeline>
+<codeline lineno="183"><highlight class="stringliteral"><sp/><sp/>//<sp/><sp/><sp/>});</highlight></codeline>
+<codeline lineno="184"><highlight class="stringliteral"><sp/><sp/>//</highlight></codeline>
+<codeline lineno="185"><highlight class="stringliteral"><sp/><sp/>//<sp/>const<sp/>U32<sp/>COMPUTE_VERTEX_DELTA<sp/>=<sp/>renderPassRequirements.AddBuffer({</highlight></codeline>
+<codeline lineno="186"><highlight class="stringliteral"><sp/><sp/>//<sp/><sp/><sp/>U32(sizeof(Vector4f))<sp/>*<sp/>U32(m_clothPlane.GetVertices().size()),<sp/>U32(sizeof(Vector4f))</highlight></codeline>
+<codeline lineno="187"><highlight class="stringliteral"><sp/><sp/>//<sp/><sp/><sp/>});</highlight></codeline>
+<codeline lineno="188"><highlight class="stringliteral"></highlight></codeline>
+<codeline lineno="189"><highlight class="stringliteral"><sp/><sp/>m_computePass.m_passId<sp/>=<sp/>renderPassRequirements.AddPass({</highlight></codeline>
+<codeline lineno="190"><highlight class="stringliteral"><sp/><sp/><sp/><sp/>PipelinePassCreateInfo::Shaders{COMPUTE_SHADER_ID},</highlight></codeline>
+<codeline lineno="191"><highlight class="stringliteral"><sp/><sp/><sp/><sp/>PipelinePassCreateInfo::InputTargets{},</highlight></codeline>
+<codeline lineno="192"><highlight class="stringliteral"><sp/><sp/><sp/><sp/>PipelinePassCreateInfo::InputBuffers{{DISTANCE_CONSTRAINTS_BUFFER,<sp/>ShaderStage::Compute},<sp/>{BEND_CONSTRAINTS_BUFFER,<sp/>ShaderStage::Compute}},</highlight></codeline>
+<codeline lineno="193"><highlight class="stringliteral"><sp/><sp/><sp/><sp/>PipelinePassCreateInfo::OutputTargets{},</highlight></codeline>
+<codeline lineno="194"><highlight class="stringliteral"><sp/><sp/><sp/><sp/>//<sp/>PipelinePassCreateInfo::OutputBuffers{COMPUTE_VERTEX_BUFFER,<sp/>COMPUTE_PROJECTION_BUFFER,<sp/>COMPUTE_VERTEX_VELOCITY,<sp/>COMPUTE_VERTEX_CONSTRAINT_COUNT,<sp/>COMPUTE_VERTEX_LOCK,<sp/>COMPUTE_VERTEX_DELTA},</highlight></codeline>
+<codeline lineno="195"><highlight class="stringliteral"><sp/><sp/><sp/><sp/>PipelinePassCreateInfo::OutputBuffers{COMPUTE_VERTEX_BUFFER,<sp/>COMPUTE_PROJECTION_BUFFER,<sp/>COMPUTE_VERTEX_VELOCITY,<sp/>COMPUTE_VERTEX_CONSTRAINT_COUNT,<sp/>COMPUTE_VERTEX_DELTAX,<sp/>COMPUTE_VERTEX_DELTAY,<sp/>COMPUTE_VERTEX_DELTAZ},</highlight></codeline>
+<codeline lineno="196"><highlight class="stringliteral"><sp/><sp/><sp/><sp/>PipelinePassCreateInfo::DescriptorSets{COMPUTE_UBO_SET},</highlight></codeline>
+<codeline lineno="197"><highlight class="stringliteral"><sp/><sp/><sp/><sp/>ClearData{{0.0f,<sp/>0.0f,<sp/>0.0f,<sp/>1.0f},<sp/>1.0f,<sp/>0},</highlight></codeline>
+<codeline lineno="198"><highlight class="stringliteral"><sp/><sp/><sp/><sp/>BlendState{},</highlight></codeline>
+<codeline lineno="199"><highlight class="stringliteral"><sp/><sp/><sp/><sp/>RenderPassType::Compute</highlight></codeline>
+<codeline lineno="200"><highlight class="stringliteral"><sp/><sp/><sp/><sp/>});</highlight></codeline>
+<codeline lineno="201"><highlight class="stringliteral"></highlight></codeline>
+<codeline lineno="202"><highlight class="stringliteral"><sp/><sp/>const<sp/>U32<sp/>RENDER_PASS<sp/>=<sp/>renderPassRequirements.AddPass({</highlight></codeline>
+<codeline lineno="203"><highlight class="stringliteral"><sp/><sp/><sp/><sp/>PipelinePassCreateInfo::Shaders{VERTEX_SHADER_ID,<sp/>PIXEL_SHADER_ID},<sp/>//<sp/>SHADERS</highlight></codeline>
+<codeline lineno="204"><highlight class="stringliteral"><sp/><sp/><sp/><sp/>PipelinePassCreateInfo::InputTargets{},<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>//<sp/>INPUT<sp/>TARGETS</highlight></codeline>
+<codeline lineno="205"><highlight class="stringliteral"><sp/><sp/><sp/><sp/>PipelinePassCreateInfo::InputBuffers{},<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>//<sp/>INPUT<sp/>TARGETS</highlight></codeline>
+<codeline lineno="206"><highlight class="stringliteral"><sp/><sp/><sp/><sp/>PipelinePassCreateInfo::OutputTargets{},<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>//<sp/>OUTPUT<sp/>TARGETS</highlight></codeline>
+<codeline lineno="207"><highlight class="stringliteral"><sp/><sp/><sp/><sp/>PipelinePassCreateInfo::OutputBuffers{},<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>//<sp/>OUTPUT<sp/>TARGETS</highlight></codeline>
+<codeline lineno="208"><highlight class="stringliteral"><sp/><sp/><sp/><sp/>PipelinePassCreateInfo::DescriptorSets{UBO_SET,<sp/>LIGHT_SET},<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>//<sp/>DESCRIPTORS</highlight></codeline>
+<codeline lineno="209"><highlight class="stringliteral"><sp/><sp/><sp/><sp/>ClearData{{0.2f,<sp/>0.2f,<sp/>0.2f,<sp/>1.0f},<sp/>1.0f,<sp/>0}</highlight></codeline>
+<codeline lineno="210"><highlight class="stringliteral"><sp/><sp/>});</highlight></codeline>
+<codeline lineno="211"><highlight class="stringliteral"></highlight></codeline>
+<codeline lineno="212"><highlight class="stringliteral"><sp/><sp/>m_clothVertexVel.resize(m_clothPlane.GetVertices().size());</highlight></codeline>
+<codeline lineno="213"><highlight class="stringliteral"><sp/><sp/>m_clothProjectedPos.resize(m_clothPlane.GetVertices().size());</highlight></codeline>
+<codeline lineno="214"><highlight class="stringliteral"></highlight></codeline>
+<codeline lineno="215"><highlight class="stringliteral"><sp/><sp/>std::vector&lt;Vector4f&gt;<sp/>zeroBufferData<sp/>=<sp/>std::vector&lt;Vector4f&gt;(m_clothPlane.GetVertexCount(),<sp/>Vector4f(0.0f));</highlight></codeline>
+<codeline lineno="216"><highlight class="stringliteral"><sp/><sp/>std::vector&lt;Vector4i&gt;<sp/>zeroIntVecData<sp/>=<sp/>std::vector&lt;Vector4i&gt;(m_clothPlane.GetVertexCount(),<sp/>Vector4i(0));</highlight></codeline>
+<codeline lineno="217"><highlight class="stringliteral"><sp/><sp/>std::vector&lt;U32&gt;<sp/>zeroIntBuffer<sp/>=<sp/>std::vector&lt;U32&gt;(m_clothPlane.GetVertexCount(),<sp/>0);</highlight></codeline>
+<codeline lineno="218"><highlight class="stringliteral"></highlight></codeline>
+<codeline lineno="219"><highlight class="stringliteral"><sp/><sp/>const<sp/>SizeType<sp/>totalConstraints<sp/>=<sp/>m_clothPlane.GetEdgeConstraints().size()<sp/>+<sp/>m_clothPlane.GetBendingConstraints().size();</highlight></codeline>
+<codeline lineno="220"><highlight class="stringliteral"><sp/><sp/>for(SizeType<sp/>i<sp/>=<sp/>0;<sp/>i<sp/>&lt;<sp/>totalConstraints;<sp/>++i)</highlight></codeline>
+<codeline lineno="221"><highlight class="stringliteral"><sp/><sp/>{</highlight></codeline>
+<codeline lineno="222"><highlight class="stringliteral"><sp/><sp/><sp/><sp/>m_clothConstraintsIdx.push_back(i);</highlight></codeline>
+<codeline lineno="223"><highlight class="stringliteral"><sp/><sp/>}</highlight></codeline>
+<codeline lineno="224"><highlight class="stringliteral"></highlight></codeline>
+<codeline lineno="225"><highlight class="stringliteral"><sp/><sp/>for<sp/>(auto&amp;<sp/>velocity<sp/>:<sp/>m_clothVertexVel)<sp/>{</highlight></codeline>
+<codeline lineno="226"><highlight class="stringliteral"><sp/><sp/><sp/><sp/>velocity<sp/>=<sp/>Vector4f(0,<sp/>0,<sp/>0,<sp/>0);</highlight></codeline>
+<codeline lineno="227"><highlight class="stringliteral"><sp/><sp/>}</highlight></codeline>
+<codeline lineno="228"><highlight class="stringliteral"></highlight></codeline>
+<codeline lineno="229"><highlight class="stringliteral"><sp/><sp/>m_renderer<sp/>=<sp/>RenderSystem::CreateRenderer(appInfo,<sp/>requirements,<sp/>applicationRequirements,</highlight></codeline>
+<codeline lineno="230"><highlight class="stringliteral"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>m_window-&gt;GetSwapChainRequirements(),<sp/>renderPassRequirements,</highlight></codeline>
+<codeline lineno="231"><highlight class="stringliteral"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>descriptorRequirements,<sp/>shaderRequirements,<sp/>m_mainAllocator,</highlight></codeline>
+<codeline lineno="232"><highlight class="stringliteral"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>m_drawableAllocator,</highlight></codeline>
+<codeline lineno="233"><highlight class="stringliteral"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>*m_window);</highlight></codeline>
+<codeline lineno="234"><highlight class="stringliteral"></highlight></codeline>
+<codeline lineno="235"><highlight class="stringliteral"><sp/><sp/>m_textureManager<sp/>=<sp/>RenderSystem::CreateTextureManager(textureRequirements);</highlight></codeline>
+<codeline lineno="236"><highlight class="stringliteral"></highlight></codeline>
+<codeline lineno="237"><highlight class="stringliteral"><sp/><sp/>const<sp/>auto<sp/>clothDataStart<sp/>=<sp/>reinterpret_cast&lt;const<sp/>U8*&gt;(m_clothPlane.GetVertices().data());<sp/>//<sp/>NOLINT</highlight></codeline>
+<codeline lineno="238"><highlight class="stringliteral"><sp/><sp/>m_renderer-&gt;BindBufferTarget(COMPUTE_VERTEX_BUFFER,<sp/>clothDataStart);</highlight></codeline>
+<codeline lineno="239"><highlight class="stringliteral"><sp/><sp/></highlight></codeline>
+<codeline lineno="240"><highlight class="stringliteral"><sp/><sp/>const<sp/>auto<sp/>projectionStart<sp/>=<sp/>reinterpret_cast&lt;const<sp/>U8*&gt;(zeroBufferData.data());<sp/>//<sp/>NOLINT</highlight></codeline>
+<codeline lineno="241"><highlight class="stringliteral"><sp/><sp/>m_renderer-&gt;BindBufferTarget(COMPUTE_PROJECTION_BUFFER,<sp/>projectionStart);</highlight></codeline>
+<codeline lineno="242"><highlight class="stringliteral"><sp/><sp/>//<sp/>m_renderer-&gt;BindBufferTarget(COMPUTE_VERTEX_DELTA,<sp/>projectionStart);</highlight></codeline>
+<codeline lineno="243"><highlight class="stringliteral"><sp/><sp/></highlight></codeline>
+<codeline lineno="244"><highlight class="stringliteral"><sp/><sp/>const<sp/>auto<sp/>distanceConstraintStart<sp/>=<sp/>reinterpret_cast&lt;const<sp/>U8*&gt;(m_clothPlane.GetEdgeConstraints().data());<sp/>//<sp/>NOLINT</highlight></codeline>
+<codeline lineno="245"><highlight class="stringliteral"><sp/><sp/>const<sp/>auto<sp/>bendConstraintStart<sp/>=<sp/>reinterpret_cast&lt;const<sp/>U8*&gt;(m_clothPlane.GetBendingConstraints().data());<sp/>//<sp/>NOLINT</highlight></codeline>
+<codeline lineno="246"><highlight class="stringliteral"><sp/><sp/>m_renderer-&gt;BindBufferTarget(DISTANCE_CONSTRAINTS_BUFFER,<sp/>distanceConstraintStart);</highlight></codeline>
+<codeline lineno="247"><highlight class="stringliteral"><sp/><sp/>m_renderer-&gt;BindBufferTarget(BEND_CONSTRAINTS_BUFFER,<sp/>bendConstraintStart);</highlight></codeline>
+<codeline lineno="248"><highlight class="stringliteral"></highlight></codeline>
+<codeline lineno="249"><highlight class="stringliteral"><sp/><sp/>const<sp/>auto<sp/>velocityStart<sp/>=<sp/>reinterpret_cast&lt;const<sp/>U8*&gt;(m_clothVertexVel.data());<sp/>//<sp/>NOLINT</highlight></codeline>
+<codeline lineno="250"><highlight class="stringliteral"><sp/><sp/>m_renderer-&gt;BindBufferTarget(COMPUTE_VERTEX_VELOCITY,<sp/>velocityStart);</highlight></codeline>
+<codeline lineno="251"><highlight class="stringliteral"><sp/><sp/></highlight></codeline>
+<codeline lineno="252"><highlight class="stringliteral"><sp/><sp/>const<sp/>auto<sp/>bufferLock<sp/>=<sp/>reinterpret_cast&lt;const<sp/>U8*&gt;(zeroIntBuffer.data());<sp/>//<sp/>NOLINT</highlight></codeline>
+<codeline lineno="253"><highlight class="stringliteral"><sp/><sp/>//<sp/>m_renderer-&gt;BindBufferTarget(COMPUTE_VERTEX_LOCK,<sp/>bufferLock);</highlight></codeline>
+<codeline lineno="254"><highlight class="stringliteral"><sp/><sp/>m_renderer-&gt;BindBufferTarget(COMPUTE_VERTEX_CONSTRAINT_COUNT,<sp/>bufferLock);</highlight></codeline>
+<codeline lineno="255"><highlight class="stringliteral"><sp/><sp/></highlight></codeline>
+<codeline lineno="256"><highlight class="stringliteral"><sp/><sp/>const<sp/>auto<sp/>deltaStart<sp/>=<sp/>reinterpret_cast&lt;const<sp/>U8*&gt;(zeroIntBuffer.data());<sp/>//<sp/>NOLINT</highlight></codeline>
+<codeline lineno="257"><highlight class="stringliteral"><sp/><sp/>m_renderer-&gt;BindBufferTarget(COMPUTE_VERTEX_DELTAX,<sp/>deltaStart);</highlight></codeline>
+<codeline lineno="258"><highlight class="stringliteral"><sp/><sp/>m_renderer-&gt;BindBufferTarget(COMPUTE_VERTEX_DELTAY,<sp/>deltaStart);</highlight></codeline>
+<codeline lineno="259"><highlight class="stringliteral"><sp/><sp/>m_renderer-&gt;BindBufferTarget(COMPUTE_VERTEX_DELTAZ,<sp/>deltaStart);</highlight></codeline>
+<codeline lineno="260"><highlight class="stringliteral"></highlight></codeline>
+<codeline lineno="261"><highlight class="stringliteral"><sp/><sp/>const<sp/>auto<sp/>totalThreads<sp/>=<sp/>U32(m_clothPlane.GetEdgeConstraints().size()<sp/>+<sp/>m_clothPlane.GetBendingConstraints().size());</highlight></codeline>
+<codeline lineno="262"><highlight class="stringliteral"><sp/><sp/>const<sp/>U32<sp/>numBlocks<sp/>=<sp/>(totalThreads<sp/>+<sp/>DEFAULT_BLOCK_SIZE_X<sp/>-<sp/>1)<sp/>/<sp/>DEFAULT_BLOCK_SIZE_X;</highlight></codeline>
+<codeline lineno="263"><highlight class="stringliteral"></highlight></codeline>
+<codeline lineno="264"><highlight class="stringliteral"><sp/><sp/>ComputePoolCreateInfo<sp/>computePoolInfo<sp/>=<sp/>{allocatorTemporary};</highlight></codeline>
+<codeline lineno="265"><highlight class="stringliteral"><sp/><sp/>computePoolInfo.m_byteSize<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>=<sp/>0xF00000;</highlight></codeline>
+<codeline lineno="266"><highlight class="stringliteral"><sp/><sp/>computePoolInfo.m_computePasses<sp/><sp/><sp/><sp/><sp/><sp/><sp/>=<sp/>{{m_computePass.m_passId},<sp/>allocatorTemporary};</highlight></codeline>
+<codeline lineno="267"><highlight class="stringliteral"><sp/><sp/>computePoolInfo.m_launchDims<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>=<sp/>ThreadGroupDimensions{numBlocks,<sp/>1,<sp/>1};</highlight></codeline>
+<codeline lineno="268"><highlight class="stringliteral"></highlight></codeline>
+<codeline lineno="269"><highlight class="stringliteral"><sp/><sp/>ComputePool&amp;<sp/>computePool<sp/>=<sp/>m_renderer-&gt;CreateComputePool(computePoolInfo);</highlight></codeline>
+<codeline lineno="270"><highlight class="stringliteral"><sp/><sp/>m_computePool<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>=<sp/>&amp;computePool;</highlight></codeline>
+<codeline lineno="271"><highlight class="stringliteral"></highlight></codeline>
+<codeline lineno="272"><highlight class="stringliteral"><sp/><sp/>const<sp/>float<sp/>distanceStiffnessPrime<sp/>=<sp/>1.0f<sp/>-<sp/>std::pow(1.0f<sp/>-<sp/>DISTANCE_STIFFNESS,<sp/>1.0f<sp/>/<sp/>SOLVER_ITERATIONS);</highlight></codeline>
+<codeline lineno="273"><highlight class="stringliteral"><sp/><sp/>const<sp/>float<sp/>bendingStiffnessPrime<sp/>=<sp/>1.0f<sp/>-<sp/>std::pow(1.0f<sp/>-<sp/>BENDING_STIFFNESS,<sp/>1.0f<sp/>/<sp/>SOLVER_ITERATIONS);</highlight></codeline>
+<codeline lineno="274"><highlight class="stringliteral"></highlight></codeline>
+<codeline lineno="275"><highlight class="stringliteral"><sp/><sp/>m_computeUBO<sp/>=<sp/>{};</highlight></codeline>
+<codeline lineno="276"><highlight class="stringliteral"><sp/><sp/>m_computeUBO.m_numVertices<sp/>=<sp/>m_clothPlane.GetVertexCount();</highlight></codeline>
+<codeline lineno="277"><highlight class="stringliteral"><sp/><sp/>m_computeUBO.m_stretchStiffness<sp/>=<sp/>distanceStiffnessPrime;</highlight></codeline>
+<codeline lineno="278"><highlight class="stringliteral"><sp/><sp/>m_computeUBO.m_bendStiffness<sp/>=<sp/>bendingStiffnessPrime;</highlight></codeline>
+<codeline lineno="279"><highlight class="stringliteral"><sp/><sp/>m_computeUBO.m_timeDelta<sp/>=<sp/>0.0f;</highlight></codeline>
+<codeline lineno="280"><highlight class="stringliteral"><sp/><sp/>m_computeUBO.m_numBlocks<sp/>=<sp/>numBlocks;</highlight></codeline>
+<codeline lineno="281"><highlight class="stringliteral"><sp/><sp/>m_computeUBO.m_numStretchConstraints<sp/>=<sp/>U32(m_clothPlane.GetEdgeConstraints().size());</highlight></codeline>
+<codeline lineno="282"><highlight class="stringliteral"><sp/><sp/>m_computeUBO.m_numBendConstraints<sp/>=<sp/>U32(m_clothPlane.GetBendingConstraints().size());</highlight></codeline>
+<codeline lineno="283"><highlight class="stringliteral"></highlight></codeline>
+<codeline lineno="284"><highlight class="stringliteral"><sp/><sp/>const<sp/>auto<sp/>computeUBOStart<sp/>=<sp/>reinterpret_cast&lt;const<sp/>U8*&gt;(&amp;m_computeUBO);<sp/>//<sp/>NOLINT</highlight></codeline>
+<codeline lineno="285"><highlight class="stringliteral"><sp/><sp/>computePool.BindUniformData(m_computePass.m_computeUBOSlot,<sp/>computeUBOStart,<sp/>sizeof(ComputeUBO));</highlight></codeline>
+<codeline lineno="286"><highlight class="stringliteral"></highlight></codeline>
+<codeline lineno="287"><highlight class="stringliteral"><sp/><sp/>IcoSphere<sp/>sphere(4);</highlight></codeline>
+<codeline lineno="288"><highlight class="stringliteral"></highlight></codeline>
+<codeline lineno="289"><highlight class="stringliteral"><sp/><sp/>DrawablePoolCreateInfo<sp/>poolInfo<sp/>=<sp/>{allocatorTemporary};</highlight></codeline>
+<codeline lineno="290"><highlight class="stringliteral"><sp/><sp/>poolInfo.m_byteSize<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>=<sp/>sphere.TotalDataSize()<sp/>+<sp/>m_clothPlane.TotalDataSize()<sp/>+<sp/>0x400000;</highlight></codeline>
+<codeline lineno="291"><highlight class="stringliteral"><sp/><sp/>poolInfo.m_numDrawables<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>=<sp/>2;</highlight></codeline>
+<codeline lineno="292"><highlight class="stringliteral"><sp/><sp/>poolInfo.m_renderPasses<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>=<sp/>{{RENDER_PASS},<sp/>allocatorTemporary};</highlight></codeline>
+<codeline lineno="293"><highlight class="stringliteral"><sp/><sp/>poolInfo.m_drawType<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>=<sp/>DrawType::InstancedIndexed;</highlight></codeline>
+<codeline lineno="294"><highlight class="stringliteral"></highlight></codeline>
+<codeline lineno="295"><highlight class="stringliteral"><sp/><sp/>const<sp/>auto<sp/>VERTEX_SLOT<sp/>=<sp/>poolInfo.AddInputSlot({</highlight></codeline>
+<codeline lineno="296"><highlight class="stringliteral"><sp/><sp/><sp/><sp/>BufferUsageRate::PerVertex,<sp/>{{&quot;POSITION&quot;,<sp/>RawStorageFormat::R32G32B32A32_FLOAT}},<sp/>0,<sp/>BufferSource::StructuredBuffer</highlight></codeline>
+<codeline lineno="297"><highlight class="stringliteral"><sp/><sp/>});</highlight></codeline>
+<codeline lineno="298"><highlight class="stringliteral"></highlight></codeline>
+<codeline lineno="299"><highlight class="stringliteral"><sp/><sp/>const<sp/>auto<sp/>NORMAL_SLOT<sp/>=<sp/>poolInfo.AddInputSlot({</highlight></codeline>
+<codeline lineno="300"><highlight class="stringliteral"><sp/><sp/><sp/><sp/>BufferUsageRate::PerVertex,<sp/>{{&quot;NORMAL&quot;,<sp/>RawStorageFormat::R32G32B32_FLOAT}}</highlight></codeline>
+<codeline lineno="301"><highlight class="stringliteral"><sp/><sp/>});</highlight></codeline>
+<codeline lineno="302"><highlight class="stringliteral"></highlight></codeline>
+<codeline lineno="303"><highlight class="stringliteral"><sp/><sp/>DrawablePool&amp;<sp/>pool<sp/>=<sp/>m_renderer-&gt;CreateDrawablePool(poolInfo);</highlight></codeline>
+<codeline lineno="304"><highlight class="stringliteral"></highlight></codeline>
+<codeline lineno="305"><highlight class="stringliteral"><sp/><sp/>const<sp/>auto<sp/>uboDataBuffer<sp/><sp/><sp/>=<sp/>reinterpret_cast&lt;U8*&gt;(&amp;m_clothUBO);<sp/><sp/>//<sp/>NOLINT</highlight></codeline>
+<codeline lineno="306"><highlight class="stringliteral"><sp/><sp/>const<sp/>auto<sp/>sphereUBO<sp/><sp/><sp/><sp/><sp/><sp/><sp/>=<sp/>reinterpret_cast&lt;U8*&gt;(&amp;m_sphereUBO);<sp/>//<sp/>NOLINT</highlight></codeline>
+<codeline lineno="307"><highlight class="stringliteral"><sp/><sp/>const<sp/>auto<sp/>lightDataBuffer<sp/>=<sp/>reinterpret_cast&lt;U8*&gt;(&amp;lightData);<sp/><sp/><sp/>//<sp/>NOLINT</highlight></codeline>
+<codeline lineno="308"><highlight class="stringliteral"><sp/><sp/>//<sp/>Create<sp/>Drawable<sp/>from<sp/>Pool</highlight></codeline>
+<codeline lineno="309"><highlight class="stringliteral"><sp/><sp/>DrawableCreateInfo<sp/>createInfo<sp/>=<sp/>{};</highlight></codeline>
+<codeline lineno="310"><highlight class="stringliteral"><sp/><sp/>createInfo.m_vertexCount<sp/><sp/><sp/><sp/><sp/><sp/>=<sp/>m_clothPlane.GetVertexCount();</highlight></codeline>
+<codeline lineno="311"><highlight class="stringliteral"><sp/><sp/>createInfo.m_indexCount<sp/><sp/><sp/><sp/><sp/><sp/><sp/>=<sp/>m_clothPlane.GetIndexCount();</highlight></codeline>
+<codeline lineno="312"><highlight class="stringliteral"><sp/><sp/>createInfo.m_instanceCount<sp/><sp/><sp/><sp/>=<sp/>1;</highlight></codeline>
+<codeline lineno="313"><highlight class="stringliteral"><sp/><sp/>createInfo.m_indexType<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>=<sp/>RawStorageFormat::R32_UINT;</highlight></codeline>
+<codeline lineno="314"><highlight class="stringliteral"></highlight></codeline>
+<codeline lineno="315"><highlight class="stringliteral"><sp/><sp/>const<sp/>auto<sp/>clothId<sp/>=<sp/>pool.CreateDrawable(createInfo);</highlight></codeline>
+<codeline lineno="316"><highlight class="stringliteral"><sp/><sp/>pool.BindVertexData(clothId,<sp/>VERTEX_SLOT,<sp/>COMPUTE_VERTEX_BUFFER,<sp/>0,<sp/>m_clothPlane.VertexDataSize());</highlight></codeline>
+<codeline lineno="317"><highlight class="stringliteral"><sp/><sp/>pool.BindVertexData(clothId,<sp/>NORMAL_SLOT,<sp/>m_clothPlane.NormalData(),<sp/>m_clothPlane.NormalDataSize());</highlight></codeline>
+<codeline lineno="318"><highlight class="stringliteral"><sp/><sp/>pool.SetIndexData(clothId,<sp/>m_clothPlane.IndexData(),<sp/>m_clothPlane.IndexDataSize());</highlight></codeline>
+<codeline lineno="319"><highlight class="stringliteral"><sp/><sp/>pool.BindUniformData(clothId,<sp/>UBO_SLOT,<sp/>uboDataBuffer,<sp/>sizeof(SceneUBO));</highlight></codeline>
+<codeline lineno="320"><highlight class="stringliteral"><sp/><sp/>pool.BindUniformData(clothId,<sp/>LIGHT_SLOT,<sp/>lightDataBuffer,<sp/>sizeof(LightData));</highlight></codeline>
+<codeline lineno="321"><highlight class="stringliteral"></highlight></codeline>
+<codeline lineno="322"><highlight class="stringliteral"><sp/><sp/>DrawableCreateInfo<sp/>sphereDrawableInfo<sp/>=<sp/>{};</highlight></codeline>
+<codeline lineno="323"><highlight class="stringliteral"><sp/><sp/>sphereDrawableInfo.m_vertexCount<sp/><sp/><sp/><sp/><sp/><sp/>=<sp/>sphere.GetVertexCount();</highlight></codeline>
+<codeline lineno="324"><highlight class="stringliteral"><sp/><sp/>sphereDrawableInfo.m_indexCount<sp/><sp/><sp/><sp/><sp/><sp/><sp/>=<sp/>sphere.GetIndexCount();</highlight></codeline>
+<codeline lineno="325"><highlight class="stringliteral"><sp/><sp/>sphereDrawableInfo.m_instanceCount<sp/><sp/><sp/><sp/>=<sp/>1;</highlight></codeline>
+<codeline lineno="326"><highlight class="stringliteral"><sp/><sp/>sphereDrawableInfo.m_indexType<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>=<sp/>sphere.GetIndexFormat();</highlight></codeline>
+<codeline lineno="327"><highlight class="stringliteral"></highlight></codeline>
+<codeline lineno="328"><highlight class="stringliteral"><sp/><sp/>DrawablePoolCreateInfo<sp/>spherePoolInfo<sp/>=<sp/>{allocatorTemporary};</highlight></codeline>
+<codeline lineno="329"><highlight class="stringliteral"><sp/><sp/>spherePoolInfo.m_byteSize<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>=<sp/>sphere.TotalDataSize()<sp/>+<sp/>0x400000;</highlight></codeline>
+<codeline lineno="330"><highlight class="stringliteral"><sp/><sp/>spherePoolInfo.m_numDrawables<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>=<sp/>1;</highlight></codeline>
+<codeline lineno="331"><highlight class="stringliteral"><sp/><sp/>spherePoolInfo.m_renderPasses<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>=<sp/>{{RENDER_PASS},<sp/>allocatorTemporary};</highlight></codeline>
+<codeline lineno="332"><highlight class="stringliteral"><sp/><sp/>spherePoolInfo.m_drawType<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>=<sp/>DrawType::InstancedIndexed;</highlight></codeline>
+<codeline lineno="333"><highlight class="stringliteral"></highlight></codeline>
+<codeline lineno="334"><highlight class="stringliteral"><sp/><sp/>const<sp/>auto<sp/>SPHERE_VERTEX_SLOT<sp/>=<sp/>spherePoolInfo.AddInputSlot({</highlight></codeline>
+<codeline lineno="335"><highlight class="stringliteral"><sp/><sp/><sp/><sp/>BufferUsageRate::PerVertex,<sp/>{{&quot;POSITION&quot;,<sp/>RawStorageFormat::R32G32B32A32_FLOAT}}</highlight></codeline>
+<codeline lineno="336"><highlight class="stringliteral"><sp/><sp/><sp/><sp/>});</highlight></codeline>
+<codeline lineno="337"><highlight class="stringliteral"></highlight></codeline>
+<codeline lineno="338"><highlight class="stringliteral"><sp/><sp/>const<sp/>auto<sp/>SPHERE_NORMAL_SLOT<sp/>=<sp/>spherePoolInfo.AddInputSlot({</highlight></codeline>
+<codeline lineno="339"><highlight class="stringliteral"><sp/><sp/><sp/><sp/>BufferUsageRate::PerVertex,<sp/>{{&quot;NORMAL&quot;,<sp/>RawStorageFormat::R32G32B32_FLOAT}}</highlight></codeline>
+<codeline lineno="340"><highlight class="stringliteral"><sp/><sp/><sp/><sp/>});</highlight></codeline>
+<codeline lineno="341"><highlight class="stringliteral"></highlight></codeline>
+<codeline lineno="342"><highlight class="stringliteral"><sp/><sp/>DrawablePool&amp;<sp/>spherePool<sp/>=<sp/>m_renderer-&gt;CreateDrawablePool(spherePoolInfo);</highlight></codeline>
+<codeline lineno="343"><highlight class="stringliteral"></highlight></codeline>
+<codeline lineno="344"><highlight class="stringliteral"><sp/><sp/>const<sp/>auto<sp/>sphereId<sp/>=<sp/>spherePool.CreateDrawable(sphereDrawableInfo);</highlight></codeline>
+<codeline lineno="345"><highlight class="stringliteral"><sp/><sp/>spherePool.BindVertexData(sphereId,<sp/>SPHERE_VERTEX_SLOT,<sp/>sphere.VertexData(),<sp/>sphere.VertexDataSize());</highlight></codeline>
+<codeline lineno="346"><highlight class="stringliteral"><sp/><sp/>spherePool.BindVertexData(sphereId,<sp/>SPHERE_NORMAL_SLOT,<sp/>sphere.NormalData(),<sp/>sphere.NormalDataSize());</highlight></codeline>
+<codeline lineno="347"><highlight class="stringliteral"><sp/><sp/>spherePool.SetIndexData(sphereId,<sp/>sphere.IndexData(),<sp/>sphere.IndexDataSize());</highlight></codeline>
+<codeline lineno="348"><highlight class="stringliteral"><sp/><sp/>spherePool.BindUniformData(sphereId,<sp/>UBO_SLOT,<sp/>sphereUBO,<sp/>sizeof(SceneUBO));</highlight></codeline>
+<codeline lineno="349"><highlight class="stringliteral"><sp/><sp/>spherePool.BindUniformData(sphereId,<sp/>LIGHT_SLOT,<sp/>lightDataBuffer,<sp/>sizeof(LightData));</highlight></codeline>
+<codeline lineno="350"><highlight class="stringliteral"></highlight></codeline>
+<codeline lineno="351"><highlight class="stringliteral"><sp/><sp/>m_renderPass.m_vertexSlot<sp/>=<sp/>VERTEX_SLOT;</highlight></codeline>
+<codeline lineno="352"><highlight class="stringliteral"><sp/><sp/>m_renderPass.m_normalSlot<sp/>=<sp/>NORMAL_SLOT;</highlight></codeline>
+<codeline lineno="353"><highlight class="stringliteral"><sp/><sp/>m_renderPass.m_sceneUBOSlot<sp/>=<sp/>UBO_SLOT;</highlight></codeline>
+<codeline lineno="354"><highlight class="stringliteral"><sp/><sp/>m_renderPass.m_clothId<sp/><sp/><sp/><sp/><sp/><sp/>=<sp/>clothId;</highlight></codeline>
+<codeline lineno="355"><highlight class="stringliteral"><sp/><sp/>m_renderPass.m_sphereId<sp/><sp/><sp/><sp/><sp/>=<sp/>sphereId;</highlight></codeline>
+<codeline lineno="356"><highlight class="stringliteral"></highlight></codeline>
+<codeline lineno="357"><highlight class="stringliteral"><sp/><sp/>m_mainPool<sp/>=<sp/>&amp;pool;</highlight></codeline>
+<codeline lineno="358"><highlight class="stringliteral"><sp/><sp/>m_spherePool<sp/>=<sp/>&amp;spherePool;</highlight></codeline>
+<codeline lineno="359"><highlight class="stringliteral"></highlight></codeline>
+<codeline lineno="360"><highlight class="stringliteral"><sp/><sp/>//<sp/>All<sp/>Drawables<sp/>Done</highlight></codeline>
+<codeline lineno="361"><highlight class="stringliteral"><sp/><sp/>m_renderer-&gt;Submit();</highlight></codeline>
+<codeline lineno="362"><highlight class="stringliteral"></highlight></codeline>
+<codeline lineno="363"><highlight class="stringliteral"><sp/><sp/>LOG_INF(log_AppRenderer,<sp/>LOG_LEVEL,<sp/>&quot;Initialized<sp/>AppRenderer&quot;);</highlight></codeline>
+<codeline lineno="364"><highlight class="stringliteral">}</highlight></codeline>
+<codeline lineno="365"><highlight class="stringliteral"></highlight></codeline>
+<codeline lineno="366"><highlight class="stringliteral">void<sp/>AppRenderer::WindowUpdate(float<sp/>timeDelta)<sp/>{</highlight></codeline>
+<codeline lineno="367"><highlight class="stringliteral"><sp/><sp/>if<sp/>(timeDelta<sp/>&lt;<sp/>EPSILON)</highlight></codeline>
+<codeline lineno="368"><highlight class="stringliteral"><sp/><sp/>{</highlight></codeline>
+<codeline lineno="369"><highlight class="stringliteral"><sp/><sp/><sp/><sp/>return;</highlight></codeline>
+<codeline lineno="370"><highlight class="stringliteral"><sp/><sp/>}</highlight></codeline>
+<codeline lineno="371"><highlight class="stringliteral"></highlight></codeline>
+<codeline lineno="372"><highlight class="stringliteral"><sp/><sp/>m_camera.Update(timeDelta);</highlight></codeline>
+<codeline lineno="373"><highlight class="stringliteral"><sp/><sp/></highlight></codeline>
+<codeline lineno="374"><highlight class="stringliteral"><sp/><sp/><sp/>timeDelta<sp/>=<sp/>0.0166667f;</highlight></codeline>
+<codeline lineno="375"><highlight class="stringliteral"></highlight></codeline>
+<codeline lineno="376"><highlight class="stringliteral"><sp/><sp/>m_clothUBO.m_view<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>=<sp/>m_camera.GetViewMatrix();</highlight></codeline>
+<codeline lineno="377"><highlight class="stringliteral"><sp/><sp/>m_clothUBO.m_viewProj<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>=<sp/>m_camera.GetViewProjMatrix();</highlight></codeline>
+<codeline lineno="378"><highlight class="stringliteral"><sp/><sp/>m_clothUBO.m_invViewProj<sp/><sp/><sp/><sp/><sp/><sp/><sp/>=<sp/>m_camera.GetInvViewProjMatrix();</highlight></codeline>
+<codeline lineno="379"><highlight class="stringliteral"><sp/><sp/>m_clothUBO.m_invProj<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>=<sp/>m_camera.GetProjMatrix().Inverse();</highlight></codeline>
+<codeline lineno="380"><highlight class="stringliteral"><sp/><sp/>m_clothUBO.m_modelInvTranspose<sp/>=<sp/>m_clothUBO.m_model.Inverse().Transpose();</highlight></codeline>
+<codeline lineno="381"><highlight class="stringliteral"><sp/><sp/></highlight></codeline>
+<codeline lineno="382"><highlight class="stringliteral"><sp/><sp/>m_sphereUBO.m_view<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>=<sp/>m_camera.GetViewMatrix();</highlight></codeline>
+<codeline lineno="383"><highlight class="stringliteral"><sp/><sp/>m_sphereUBO.m_viewProj<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>=<sp/>m_camera.GetViewProjMatrix();</highlight></codeline>
+<codeline lineno="384"><highlight class="stringliteral"><sp/><sp/>m_sphereUBO.m_invViewProj<sp/><sp/><sp/><sp/><sp/><sp/><sp/>=<sp/>m_camera.GetInvViewProjMatrix();</highlight></codeline>
+<codeline lineno="385"><highlight class="stringliteral"><sp/><sp/>m_sphereUBO.m_invProj<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>=<sp/>m_camera.GetProjMatrix().Inverse();</highlight></codeline>
+<codeline lineno="386"><highlight class="stringliteral"><sp/><sp/>m_sphereUBO.m_modelInvTranspose<sp/>=<sp/>m_sphereUBO.m_model.Inverse().Transpose();</highlight></codeline>
+<codeline lineno="387"><highlight class="stringliteral"><sp/><sp/></highlight></codeline>
+<codeline lineno="388"><highlight class="stringliteral"><sp/><sp/>m_computeUBO.m_timeDelta<sp/>=<sp/>timeDelta;</highlight></codeline>
+<codeline lineno="389"><highlight class="stringliteral"><sp/><sp/></highlight></codeline>
+<codeline lineno="390"><highlight class="stringliteral"><sp/><sp/>const<sp/>auto<sp/>uboDataBuffer<sp/><sp/><sp/><sp/>=<sp/>reinterpret_cast&lt;U8*&gt;(&amp;m_clothUBO);<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>//<sp/>NOLINT</highlight></codeline>
+<codeline lineno="391"><highlight class="stringliteral"><sp/><sp/>const<sp/>auto<sp/>sphereDataBuffer<sp/>=<sp/>reinterpret_cast&lt;U8*&gt;(&amp;m_sphereUBO);<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>//<sp/>NOLINT</highlight></codeline>
+<codeline lineno="392"><highlight class="stringliteral"><sp/><sp/>const<sp/>auto<sp/>computeUBOStart<sp/>=<sp/>reinterpret_cast&lt;const<sp/>U8*&gt;(&amp;m_computeUBO);<sp/>//<sp/>NOLINT</highlight></codeline>
+<codeline lineno="393"><highlight class="stringliteral"><sp/><sp/></highlight></codeline>
+<codeline lineno="394"><highlight class="stringliteral"><sp/><sp/>m_computePool-&gt;BeginUpdates();</highlight></codeline>
+<codeline lineno="395"><highlight class="stringliteral"><sp/><sp/>m_computePool-&gt;UpdateUniformData(m_computePass.m_computeUBOSlot,<sp/>computeUBOStart,<sp/>sizeof(ComputeUBO));</highlight></codeline>
+<codeline lineno="396"><highlight class="stringliteral"><sp/><sp/>m_computePool-&gt;SubmitUpdates();</highlight></codeline>
+<codeline lineno="397"><highlight class="stringliteral"><sp/><sp/></highlight></codeline>
+<codeline lineno="398"><highlight class="stringliteral"><sp/><sp/>m_mainPool-&gt;BeginUpdates();</highlight></codeline>
+<codeline lineno="399"><highlight class="stringliteral"><sp/><sp/>//<sp/>Update<sp/>Cloth</highlight></codeline>
+<codeline lineno="400"><highlight class="stringliteral"><sp/><sp/>m_mainPool-&gt;UpdateUniformData(m_renderPass.m_clothId,<sp/>m_renderPass.m_sceneUBOSlot,<sp/>uboDataBuffer,<sp/>sizeof(SceneUBO));</highlight></codeline>
+<codeline lineno="401"><highlight class="stringliteral"><sp/><sp/>//<sp/>Update<sp/>Sphere</highlight></codeline>
+<codeline lineno="402"><highlight class="stringliteral"><sp/><sp/>m_mainPool-&gt;SubmitUpdates();</highlight></codeline>
+<codeline lineno="403"><highlight class="stringliteral"></highlight></codeline>
+<codeline lineno="404"><highlight class="stringliteral"><sp/><sp/>m_spherePool-&gt;BeginUpdates();</highlight></codeline>
+<codeline lineno="405"><highlight class="stringliteral"><sp/><sp/>m_spherePool-&gt;UpdateUniformData(m_renderPass.m_sphereId,<sp/>m_renderPass.m_sceneUBOSlot,<sp/>sphereDataBuffer,</highlight></codeline>
+<codeline lineno="406"><highlight class="stringliteral"><sp/><sp/><sp/><sp/>sizeof(SceneUBO));</highlight></codeline>
+<codeline lineno="407"><highlight class="stringliteral"><sp/><sp/>m_spherePool-&gt;SubmitUpdates();</highlight></codeline>
+<codeline lineno="408"><highlight class="stringliteral"></highlight></codeline>
+<codeline lineno="409"><highlight class="stringliteral"><sp/><sp/>m_renderer-&gt;RenderFrame();</highlight></codeline>
+<codeline lineno="410"><highlight class="stringliteral">}</highlight></codeline>
+<codeline lineno="411"><highlight class="stringliteral"></highlight></codeline>
+<codeline lineno="412"><highlight class="stringliteral">void<sp/>AppRenderer::Run()<sp/>const<sp/>{</highlight></codeline>
+<codeline lineno="413"><highlight class="stringliteral"><sp/><sp/>LOG_INF(log_AppRenderer,<sp/>LOG_LEVEL,<sp/>&quot;Running<sp/>AppRenderer&quot;);</highlight></codeline>
+<codeline lineno="414"><highlight class="stringliteral"><sp/><sp/>m_window-&gt;StartListening();</highlight></codeline>
+<codeline lineno="415"><highlight class="stringliteral">}</highlight></codeline>
+<codeline lineno="416"><highlight class="stringliteral"></highlight></codeline>
+<codeline lineno="417"><highlight class="stringliteral">void<sp/>AppRenderer::Destroy()<sp/>const<sp/>{</highlight></codeline>
+<codeline lineno="418"><highlight class="stringliteral"><sp/><sp/>m_window-&gt;Destroy();</highlight></codeline>
+<codeline lineno="419"><highlight class="stringliteral">}</highlight></codeline>
+<codeline lineno="420"><highlight class="stringliteral">}<sp/>//<sp/>namespace<sp/>Azura</highlight></codeline>
+    </programlisting>
+    <location file="Source/Samples/0_TestZone/Src/AppRenderer.cpp"/>
+  </compounddef>
+</doxygen>

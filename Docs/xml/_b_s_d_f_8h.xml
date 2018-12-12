@@ -1,0 +1,133 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.8.14">
+  <compounddef id="_b_s_d_f_8h" kind="file" language="C++">
+    <compoundname>BSDF.h</compoundname>
+    <includes refid="_dibella_2_inc_2_core_2_constants_8h" local="yes">../../Core/Constants.h</includes>
+    <includes refid="_bx_d_f_8h" local="yes">BxDF.h</includes>
+    <includedby refid="_b_s_d_f_8cpp" local="yes">Source/Dibella/Src/Materials/Primitives/BSDF.cpp</includedby>
+    <incdepgraph>
+      <node id="4890">
+        <label>mathfu/vector.h</label>
+      </node>
+      <node id="4883">
+        <label>Source/Dibella/Inc/Materials/Primitives/BSDF.h</label>
+        <link refid="_b_s_d_f_8h"/>
+        <childnode refid="4884" relation="include">
+        </childnode>
+        <childnode refid="4891" relation="include">
+        </childnode>
+      </node>
+      <node id="4884">
+        <label>../../Core/Constants.h</label>
+        <link refid="_dibella_2_inc_2_core_2_constants_8h_source"/>
+        <childnode refid="4885" relation="include">
+        </childnode>
+      </node>
+      <node id="4892">
+        <label>../../Core/AllocationDependent.h</label>
+        <link refid="_allocation_dependent_8h_source"/>
+      </node>
+      <node id="4888">
+        <label>string</label>
+      </node>
+      <node id="4885">
+        <label>Types.h</label>
+        <link refid="_dibella_2_inc_2_core_2_types_8h_source"/>
+        <childnode refid="4886" relation="include">
+        </childnode>
+        <childnode refid="4887" relation="include">
+        </childnode>
+        <childnode refid="4888" relation="include">
+        </childnode>
+        <childnode refid="4889" relation="include">
+        </childnode>
+        <childnode refid="4890" relation="include">
+        </childnode>
+      </node>
+      <node id="4886">
+        <label>ToolsCore.h</label>
+      </node>
+      <node id="4887">
+        <label>cstddef</label>
+      </node>
+      <node id="4889">
+        <label>mathfu/matrix.h</label>
+      </node>
+      <node id="4891">
+        <label>BxDF.h</label>
+        <link refid="_bx_d_f_8h_source"/>
+        <childnode refid="4892" relation="include">
+        </childnode>
+        <childnode refid="4885" relation="include">
+        </childnode>
+        <childnode refid="4893" relation="include">
+        </childnode>
+      </node>
+      <node id="4893">
+        <label>BxDFType.h</label>
+        <link refid="_bx_d_f_type_8h_source"/>
+      </node>
+    </incdepgraph>
+    <innerclass refid="class_dibella_1_1_b_s_d_f" prot="public">Dibella::BSDF</innerclass>
+    <innernamespace refid="namespace_dibella">Dibella</innernamespace>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <programlisting>
+<codeline lineno="1"><highlight class="preprocessor">#pragma<sp/>once</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="2"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&quot;../../Core/Constants.h&quot;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="3"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&quot;BxDF.h&quot;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="4"><highlight class="normal"></highlight></codeline>
+<codeline lineno="5"><highlight class="normal"></highlight><highlight class="keyword">namespace<sp/></highlight><highlight class="normal"><ref refid="namespace_dibella" kindref="compound">Dibella</ref><sp/>{</highlight></codeline>
+<codeline lineno="6"><highlight class="normal"></highlight><highlight class="keyword">class<sp/></highlight><highlight class="normal">Intersection;</highlight></codeline>
+<codeline lineno="7"><highlight class="normal"></highlight></codeline>
+<codeline lineno="8" refid="class_dibella_1_1_b_s_d_f" refkind="compound"><highlight class="normal"></highlight><highlight class="keyword">class<sp/></highlight><highlight class="normal"><ref refid="class_dibella_1_1_b_s_d_f" kindref="compound">BSDF</ref><sp/>{</highlight></codeline>
+<codeline lineno="9"><highlight class="normal"><sp/></highlight><highlight class="keyword">public</highlight><highlight class="normal">:</highlight></codeline>
+<codeline lineno="10"><highlight class="normal"><sp/><sp/><ref refid="class_dibella_1_1_b_s_d_f" kindref="compound">BSDF</ref>(</highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/><ref refid="class_dibella_1_1_intersection" kindref="compound">Intersection</ref>&amp;<sp/>isect,<sp/>Float<sp/>eta<sp/>=<sp/>1);</highlight></codeline>
+<codeline lineno="11"><highlight class="normal"></highlight></codeline>
+<codeline lineno="12"><highlight class="normal"><sp/><sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/>Add(<ref refid="class_dibella_1_1_bx_d_f" kindref="compound">BxDF</ref>*<sp/>b);</highlight></codeline>
+<codeline lineno="13"><highlight class="normal"></highlight></codeline>
+<codeline lineno="14"><highlight class="normal"><sp/><sp/>Color3f<sp/>CalculateF(</highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>Vector3f&amp;<sp/>woW,<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>Vector3f&amp;<sp/>wiW,<sp/>BxDFType<sp/>flags<sp/>=<sp/>BxDFType::BsdfAll)<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="15"><highlight class="normal"></highlight></codeline>
+<codeline lineno="16"><highlight class="normal"><sp/><sp/>Color3f<sp/>SampleF(</highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>Vector3f&amp;<sp/>woW,</highlight></codeline>
+<codeline lineno="17"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>Vector3f*<sp/>wiW,</highlight></codeline>
+<codeline lineno="18"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>Point2f&amp;<sp/>xi,</highlight></codeline>
+<codeline lineno="19"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>Float*<sp/>pdf,</highlight></codeline>
+<codeline lineno="20"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>BxDFType<sp/>type<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>=<sp/>BxDFType::BsdfAll,</highlight></codeline>
+<codeline lineno="21"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>BxDFType*<sp/>sampledType<sp/>=<sp/></highlight><highlight class="keyword">nullptr</highlight><highlight class="normal">,</highlight></codeline>
+<codeline lineno="22"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>Float<sp/>random<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>=<sp/>0.0f)<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="23"><highlight class="normal"></highlight></codeline>
+<codeline lineno="24"><highlight class="normal"><sp/><sp/>Float<sp/>CalculatePDF(</highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>Vector3f&amp;<sp/>woW,<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>Vector3f&amp;<sp/>wiW,<sp/>BxDFType<sp/>flags<sp/>=<sp/>BxDFType::BsdfAll)<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="25"><highlight class="normal"></highlight></codeline>
+<codeline lineno="26"><highlight class="normal"><sp/><sp/></highlight><highlight class="keywordtype">int</highlight><highlight class="normal"><sp/>BxDFsMatchingFlags(BxDFType<sp/>flags)<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="27"><highlight class="normal"></highlight></codeline>
+<codeline lineno="28"><highlight class="normal"><sp/><sp/></highlight><highlight class="keyword">static</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/>UpdateTangentSpaceMatrices(</highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>Normal3f&amp;<sp/>n,<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>Vector3f&amp;<sp/>t,<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>Vector3f<sp/>b);</highlight></codeline>
+<codeline lineno="29"><highlight class="normal"></highlight></codeline>
+<codeline lineno="30"><highlight class="normal"><sp/></highlight><highlight class="keyword">protected</highlight><highlight class="normal">:</highlight></codeline>
+<codeline lineno="31"><highlight class="normal"><sp/><sp/></highlight><highlight class="comment">//<sp/>Transforms<sp/>rays<sp/>from<sp/>world<sp/>space<sp/>into<sp/>tangent<sp/>space,</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="32"><highlight class="normal"><sp/><sp/></highlight><highlight class="comment">//<sp/>where<sp/>the<sp/>surface<sp/>normal<sp/>is<sp/>always<sp/>treated<sp/>as<sp/>(0,<sp/>0,<sp/>1)</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="33"><highlight class="normal"><sp/><sp/>Matrix3f<sp/>mWorldToTangent;</highlight></codeline>
+<codeline lineno="34"><highlight class="normal"></highlight></codeline>
+<codeline lineno="35"><highlight class="normal"><sp/><sp/></highlight><highlight class="comment">//<sp/>Transforms<sp/>rays<sp/>from<sp/>tangent<sp/>space<sp/>into<sp/>world<sp/>space.</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="36"><highlight class="normal"><sp/><sp/></highlight><highlight class="comment">//<sp/>This<sp/>is<sp/>the<sp/>inverse<sp/>of<sp/>mWorldToTangent<sp/>(incidentally,<sp/>inverse(mWorldToTangent)<sp/>=<sp/>transpose(mWorldToTangent))</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="37"><highlight class="normal"><sp/><sp/>Matrix3f<sp/>mTangentToWorld;</highlight></codeline>
+<codeline lineno="38"><highlight class="normal"></highlight></codeline>
+<codeline lineno="39"><highlight class="normal"><sp/><sp/></highlight><highlight class="comment">//<sp/>May<sp/>be<sp/>the<sp/>geometric<sp/>normal<sp/>OR<sp/>the<sp/>shading<sp/>normal<sp/>at<sp/>the<sp/>point<sp/>of<sp/>intersection.</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="40"><highlight class="normal"><sp/><sp/></highlight><highlight class="comment">//<sp/>If<sp/>the<sp/>Material<sp/>that<sp/>created<sp/>this<sp/>BSDF<sp/>had<sp/>a<sp/>normal<sp/>map,<sp/>then<sp/>this<sp/>will<sp/>be<sp/>the<sp/>latter.</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="41"><highlight class="normal"><sp/><sp/>Normal3f<sp/>mNormal;</highlight></codeline>
+<codeline lineno="42"><highlight class="normal"></highlight></codeline>
+<codeline lineno="43"><highlight class="normal"><sp/><sp/></highlight><highlight class="comment">//<sp/>The<sp/>ratio<sp/>of<sp/>indices<sp/>of<sp/>refraction<sp/>at<sp/>this<sp/>surface<sp/>point.<sp/>Irrelevant<sp/>for<sp/>opaque<sp/>surfaces.</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="44"><highlight class="normal"><sp/><sp/>Float<sp/>mETA;</highlight></codeline>
+<codeline lineno="45"><highlight class="normal"></highlight></codeline>
+<codeline lineno="46"><highlight class="normal"><sp/><sp/></highlight><highlight class="comment">//<sp/>Number<sp/>of<sp/>active<sp/>BxDFs</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="47"><highlight class="normal"><sp/><sp/></highlight><highlight class="keywordtype">int</highlight><highlight class="normal"><sp/>mNumBxDF{0};</highlight></codeline>
+<codeline lineno="48"><highlight class="normal"></highlight></codeline>
+<codeline lineno="49"><highlight class="normal"><sp/><sp/></highlight><highlight class="comment">//<sp/>The<sp/>collection<sp/>of<sp/>BxDFs<sp/>contained<sp/>in<sp/>this<sp/>BSDF</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="50"><highlight class="normal"><sp/><sp/><ref refid="class_dibella_1_1_bx_d_f" kindref="compound">BxDF</ref>*<sp/>bxdfs[MAX_BDSF_BXDF];</highlight></codeline>
+<codeline lineno="51"><highlight class="normal">};</highlight></codeline>
+<codeline lineno="52"><highlight class="normal">}<sp/><sp/></highlight><highlight class="comment">//<sp/>namespace<sp/>Dibella</highlight><highlight class="normal"></highlight></codeline>
+    </programlisting>
+    <location file="Source/Dibella/Inc/Materials/Primitives/BSDF.h"/>
+  </compounddef>
+</doxygen>

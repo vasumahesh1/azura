@@ -1,0 +1,63 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.8.14">
+  <compounddef id="_math_2_inc_2_math_2_transform_8h" kind="file" language="C++">
+    <compoundname>Transform.h</compoundname>
+    <includes refid="_core_8h" local="yes">Core.h</includes>
+    <includedby refid="_render_test_cases_8cpp" local="yes">Source/Azura/RenderSystem/Test/RenderTestCases.cpp</includedby>
+    <includedby refid="_fly_through_camera_8cpp" local="yes">Source/Camera/Src/FlyThroughCamera.cpp</includedby>
+    <includedby refid="_polar_camera_8cpp" local="yes">Source/Camera/Src/PolarCamera.cpp</includedby>
+    <includedby refid="_dibella_2_src_2_scene_2_primitives_2_transform_8cpp" local="yes">Source/Dibella/Src/Scene/Primitives/Transform.cpp</includedby>
+    <includedby refid="_icosphere_8cpp" local="yes">Source/Math/Src/Icosphere.cpp</includedby>
+    <includedby refid="_math_2_src_2_transform_8cpp" local="yes">Source/Math/Src/Transform.cpp</includedby>
+    <includedby refid="_app_renderer_8_basic_8cpp" local="yes">Source/Samples/0_TestZone/Src/AppRenderer.Basic.cpp</includedby>
+    <includedby refid="_app_renderer_8_cloth_8cpp" local="yes">Source/Samples/0_TestZone/Src/AppRenderer.Cloth.cpp</includedby>
+    <includedby refid="_app_renderer_8_compute_8cpp" local="yes">Source/Samples/0_TestZone/Src/AppRenderer.Compute.cpp</includedby>
+    <includedby refid="0___test_zone_2_src_2_app_renderer_8cpp" local="yes">Source/Samples/0_TestZone/Src/AppRenderer.cpp</includedby>
+    <includedby refid="_app_renderer_8_deferred_8cpp" local="yes">Source/Samples/0_TestZone/Src/AppRenderer.Deferred.cpp</includedby>
+    <includedby refid="_app_renderer_8_instanced_8cpp" local="yes">Source/Samples/0_TestZone/Src/AppRenderer.Instanced.cpp</includedby>
+    <includedby refid="1___procedural_planet_2_src_2_app_renderer_8cpp" local="yes">Source/Samples/1_ProceduralPlanet/Src/AppRenderer.cpp</includedby>
+    <includedby refid="3___cloth_sim_2_src_2_app_renderer_8cpp" local="yes">Source/Samples/3_ClothSim/Src/AppRenderer.cpp</includedby>
+    <incdepgraph>
+      <node id="4980">
+        <label>Core.h</label>
+        <link refid="_core_8h_source"/>
+        <childnode refid="4981" relation="include">
+        </childnode>
+        <childnode refid="4982" relation="include">
+        </childnode>
+      </node>
+      <node id="4979">
+        <label>Source/Math/Inc/Math/Transform.h</label>
+        <link refid="_math_2_inc_2_math_2_transform_8h"/>
+        <childnode refid="4980" relation="include">
+        </childnode>
+      </node>
+      <node id="4982">
+        <label>Types.h</label>
+      </node>
+      <node id="4981">
+        <label>mathfu/matrix.h</label>
+      </node>
+    </incdepgraph>
+    <innernamespace refid="namespace_azura">Azura</innernamespace>
+    <innernamespace refid="namespace_azura_1_1_transform">Azura::Transform</innernamespace>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <programlisting>
+<codeline lineno="1"><highlight class="preprocessor">#pragma<sp/>once</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="2"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&quot;Core.h&quot;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="3"><highlight class="normal"></highlight></codeline>
+<codeline lineno="4"><highlight class="normal"></highlight><highlight class="keyword">namespace<sp/></highlight><highlight class="normal"><ref refid="namespace_azura" kindref="compound">Azura</ref><sp/>{</highlight></codeline>
+<codeline lineno="5"><highlight class="normal"></highlight><highlight class="keyword">namespace<sp/></highlight><highlight class="normal">Transform<sp/>{</highlight></codeline>
+<codeline lineno="6"><highlight class="normal">Matrix4f<sp/>LookAt(</highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>Vector3f&amp;<sp/>at,<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>Vector3f&amp;<sp/>eye,<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>Vector3f&amp;<sp/>worldUp);</highlight></codeline>
+<codeline lineno="7"><highlight class="normal">Matrix4f<sp/>Perspective(</highlight><highlight class="keywordtype">float</highlight><highlight class="normal"><sp/>fovY,<sp/></highlight><highlight class="keywordtype">float</highlight><highlight class="normal"><sp/>aspect,<sp/></highlight><highlight class="keywordtype">float</highlight><highlight class="normal"><sp/>zNear,<sp/></highlight><highlight class="keywordtype">float</highlight><highlight class="normal"><sp/>zFar);</highlight></codeline>
+<codeline lineno="8"><highlight class="normal"></highlight></codeline>
+<codeline lineno="9"><highlight class="normal">Vector3f<sp/>Downgrade(</highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>Vector4f&amp;<sp/>vec);</highlight></codeline>
+<codeline lineno="10"><highlight class="normal">}</highlight></codeline>
+<codeline lineno="11"><highlight class="normal">}</highlight></codeline>
+    </programlisting>
+    <location file="Source/Math/Inc/Math/Transform.h"/>
+  </compounddef>
+</doxygen>

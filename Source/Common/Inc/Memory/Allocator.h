@@ -19,6 +19,10 @@ struct MemoryRange {
   MemoryRange(U32 offset, U32 size);
 };
 
+/**
+ * \brief Base class for an Allocator
+ * \ingroup Common
+ */
 class Allocator {
  public:
   Allocator(void* resource, U32 size);

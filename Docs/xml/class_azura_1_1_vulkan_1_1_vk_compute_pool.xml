@@ -1,0 +1,326 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.8.14">
+  <compounddef id="class_azura_1_1_vulkan_1_1_vk_compute_pool" kind="class" language="C++" prot="public">
+    <compoundname>Azura::Vulkan::VkComputePool</compoundname>
+    <basecompoundref refid="class_azura_1_1_compute_pool" prot="public" virt="non-virtual">Azura::ComputePool</basecompoundref>
+      <sectiondef kind="public-func">
+      <memberdef kind="function" id="class_azura_1_1_vulkan_1_1_vk_compute_pool_1a344667da36ab81df3c313166bd093e2f" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>Azura::Vulkan::VkComputePool::VkComputePool</definition>
+        <argsstring>(const ComputePoolCreateInfo &amp;createInfo, const DescriptorCount &amp;descriptorCount, Memory::Allocator &amp;allocator)</argsstring>
+        <name>VkComputePool</name>
+        <param>
+          <type>const <ref refid="struct_azura_1_1_compute_pool_create_info" kindref="compound">ComputePoolCreateInfo</ref> &amp;</type>
+          <declname>createInfo</declname>
+        </param>
+        <param>
+          <type>const <ref refid="struct_azura_1_1_descriptor_count" kindref="compound">DescriptorCount</ref> &amp;</type>
+          <declname>descriptorCount</declname>
+        </param>
+        <param>
+          <type><ref refid="class_azura_1_1_memory_1_1_allocator" kindref="compound">Memory::Allocator</ref> &amp;</type>
+          <declname>allocator</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Source/Azura/RenderSystem/Inc/Vulkan/VkComputePool.h" line="15" column="1" bodyfile="Source/Azura/RenderSystem/Src/Vulkan/VkComputePool.cpp" bodystart="6" bodyend="10"/>
+      </memberdef>
+      <memberdef kind="function" id="class_azura_1_1_vulkan_1_1_vk_compute_pool_1ad86daae5072bd152ff29679d32238df0" prot="public" static="no" const="no" explicit="no" inline="no" virt="virtual">
+        <type>void</type>
+        <definition>void Azura::Vulkan::VkComputePool::BindUniformData</definition>
+        <argsstring>(SlotID slot, const U8 *buffer, U32 size) override</argsstring>
+        <name>BindUniformData</name>
+        <reimplements refid="class_azura_1_1_compute_pool_1a337bc30ca92019ac3d6530c9afae5b88">BindUniformData</reimplements>
+        <param>
+          <type>SlotID</type>
+          <declname>slot</declname>
+        </param>
+        <param>
+          <type>const U8 *</type>
+          <declname>buffer</declname>
+        </param>
+        <param>
+          <type>U32</type>
+          <declname>size</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Source/Azura/RenderSystem/Inc/Vulkan/VkComputePool.h" line="19" column="1" bodyfile="Source/Azura/RenderSystem/Src/Vulkan/VkComputePool.cpp" bodystart="12" bodyend="16"/>
+      </memberdef>
+      <memberdef kind="function" id="class_azura_1_1_vulkan_1_1_vk_compute_pool_1ab6e2a29eba4abbfc501f8ffd9bce5c7f" prot="public" static="no" const="no" explicit="no" inline="no" virt="virtual">
+        <type>void</type>
+        <definition>void Azura::Vulkan::VkComputePool::AddShader</definition>
+        <argsstring>(U32 shaderId) override</argsstring>
+        <name>AddShader</name>
+        <reimplements refid="class_azura_1_1_compute_pool_1a693a26edd6b9cd67489e32e4af5a3702">AddShader</reimplements>
+        <param>
+          <type>U32</type>
+          <declname>shaderId</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Source/Azura/RenderSystem/Inc/Vulkan/VkComputePool.h" line="20" column="1" bodyfile="Source/Azura/RenderSystem/Src/Vulkan/VkComputePool.cpp" bodystart="18" bodyend="20"/>
+      </memberdef>
+      <memberdef kind="function" id="class_azura_1_1_vulkan_1_1_vk_compute_pool_1a02046e02deb76baeaada55384ac2d265" prot="public" static="no" const="no" explicit="no" inline="no" virt="virtual">
+        <type>void</type>
+        <definition>void Azura::Vulkan::VkComputePool::BindTextureData</definition>
+        <argsstring>(SlotID slot, const TextureDesc &amp;desc, const U8 *buffer) override</argsstring>
+        <name>BindTextureData</name>
+        <reimplements refid="class_azura_1_1_compute_pool_1a6ee4bacc7f2f1bacfefd82ff3177e006">BindTextureData</reimplements>
+        <param>
+          <type>SlotID</type>
+          <declname>slot</declname>
+        </param>
+        <param>
+          <type>const <ref refid="struct_azura_1_1_texture_desc" kindref="compound">TextureDesc</ref> &amp;</type>
+          <declname>desc</declname>
+        </param>
+        <param>
+          <type>const U8 *</type>
+          <declname>buffer</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Source/Azura/RenderSystem/Inc/Vulkan/VkComputePool.h" line="21" column="1" bodyfile="Source/Azura/RenderSystem/Src/Vulkan/VkComputePool.cpp" bodystart="22" bodyend="26"/>
+      </memberdef>
+      <memberdef kind="function" id="class_azura_1_1_vulkan_1_1_vk_compute_pool_1accd1d37723654a6b97d10569317be95e" prot="public" static="no" const="no" explicit="no" inline="no" virt="virtual">
+        <type>void</type>
+        <definition>void Azura::Vulkan::VkComputePool::BindSampler</definition>
+        <argsstring>(SlotID slot, const SamplerDesc &amp;desc) override</argsstring>
+        <name>BindSampler</name>
+        <reimplements refid="class_azura_1_1_compute_pool_1ad06bf3de491a8a46f4673cc2fc1535df">BindSampler</reimplements>
+        <param>
+          <type>SlotID</type>
+          <declname>slot</declname>
+        </param>
+        <param>
+          <type>const <ref refid="struct_azura_1_1_sampler_desc" kindref="compound">SamplerDesc</ref> &amp;</type>
+          <declname>desc</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Source/Azura/RenderSystem/Inc/Vulkan/VkComputePool.h" line="22" column="1" bodyfile="Source/Azura/RenderSystem/Src/Vulkan/VkComputePool.cpp" bodystart="28" bodyend="31"/>
+      </memberdef>
+      <memberdef kind="function" id="class_azura_1_1_vulkan_1_1_vk_compute_pool_1aa538da33c44ec2739ac2bceef705afd1" prot="public" static="no" const="no" explicit="no" inline="no" virt="virtual">
+        <type>void</type>
+        <definition>void Azura::Vulkan::VkComputePool::BeginUpdates</definition>
+        <argsstring>() override</argsstring>
+        <name>BeginUpdates</name>
+        <reimplements refid="class_azura_1_1_compute_pool_1a3bf0f2b8e6f43905e8e290cef64804cd">BeginUpdates</reimplements>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Source/Azura/RenderSystem/Inc/Vulkan/VkComputePool.h" line="23" column="1" bodyfile="Source/Azura/RenderSystem/Src/Vulkan/VkComputePool.cpp" bodystart="33" bodyend="34"/>
+      </memberdef>
+      <memberdef kind="function" id="class_azura_1_1_vulkan_1_1_vk_compute_pool_1a112d7966cf3e6bcdfe0e8842616c8612" prot="public" static="no" const="no" explicit="no" inline="no" virt="virtual">
+        <type>void</type>
+        <definition>void Azura::Vulkan::VkComputePool::UpdateUniformData</definition>
+        <argsstring>(SlotID slot, const U8 *buffer, U32 size) override</argsstring>
+        <name>UpdateUniformData</name>
+        <reimplements refid="class_azura_1_1_compute_pool_1a2ab33d6c5af86301e2d72cdb5a653ae1">UpdateUniformData</reimplements>
+        <param>
+          <type>SlotID</type>
+          <declname>slot</declname>
+        </param>
+        <param>
+          <type>const U8 *</type>
+          <declname>buffer</declname>
+        </param>
+        <param>
+          <type>U32</type>
+          <declname>size</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Source/Azura/RenderSystem/Inc/Vulkan/VkComputePool.h" line="24" column="1" bodyfile="Source/Azura/RenderSystem/Src/Vulkan/VkComputePool.cpp" bodystart="36" bodyend="40"/>
+      </memberdef>
+      <memberdef kind="function" id="class_azura_1_1_vulkan_1_1_vk_compute_pool_1a6f1331a82ec740e13d241ac8eccc75ef" prot="public" static="no" const="no" explicit="no" inline="no" virt="virtual">
+        <type>void</type>
+        <definition>void Azura::Vulkan::VkComputePool::UpdateTextureData</definition>
+        <argsstring>(SlotID slot, const U8 *buffer) override</argsstring>
+        <name>UpdateTextureData</name>
+        <reimplements refid="class_azura_1_1_compute_pool_1a66ce2d11eb58932a46bc0ec4e42bb444">UpdateTextureData</reimplements>
+        <param>
+          <type>SlotID</type>
+          <declname>slot</declname>
+        </param>
+        <param>
+          <type>const U8 *</type>
+          <declname>buffer</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Source/Azura/RenderSystem/Inc/Vulkan/VkComputePool.h" line="25" column="1" bodyfile="Source/Azura/RenderSystem/Src/Vulkan/VkComputePool.cpp" bodystart="42" bodyend="45"/>
+      </memberdef>
+      <memberdef kind="function" id="class_azura_1_1_vulkan_1_1_vk_compute_pool_1abfddb37bce27cedd0edd1ffad86bb8ab" prot="public" static="no" const="no" explicit="no" inline="no" virt="virtual">
+        <type>void</type>
+        <definition>void Azura::Vulkan::VkComputePool::Submit</definition>
+        <argsstring>() override</argsstring>
+        <name>Submit</name>
+        <reimplements refid="class_azura_1_1_compute_pool_1a48d0fe241dec4dd32186d7ab2d69b783">Submit</reimplements>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Source/Azura/RenderSystem/Inc/Vulkan/VkComputePool.h" line="26" column="1" bodyfile="Source/Azura/RenderSystem/Src/Vulkan/VkComputePool.cpp" bodystart="47" bodyend="48"/>
+      </memberdef>
+      <memberdef kind="function" id="class_azura_1_1_vulkan_1_1_vk_compute_pool_1a78e188676d011facf47ea6e316e40c50" prot="public" static="no" const="no" explicit="no" inline="no" virt="virtual">
+        <type>void</type>
+        <definition>void Azura::Vulkan::VkComputePool::SubmitUpdates</definition>
+        <argsstring>() override</argsstring>
+        <name>SubmitUpdates</name>
+        <reimplements refid="class_azura_1_1_compute_pool_1a8885f459bd9661049fed5a4f2d0df729">SubmitUpdates</reimplements>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Source/Azura/RenderSystem/Inc/Vulkan/VkComputePool.h" line="27" column="1" bodyfile="Source/Azura/RenderSystem/Src/Vulkan/VkComputePool.cpp" bodystart="50" bodyend="51"/>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <inheritancegraph>
+      <node id="622">
+        <label>Azura::ComputePool</label>
+        <link refid="class_azura_1_1_compute_pool"/>
+      </node>
+      <node id="621">
+        <label>Azura::Vulkan::VkComputePool</label>
+        <link refid="class_azura_1_1_vulkan_1_1_vk_compute_pool"/>
+        <childnode refid="622" relation="public-inheritance">
+        </childnode>
+      </node>
+    </inheritancegraph>
+    <collaborationgraph>
+      <node id="624">
+        <label>Azura::ComputePool</label>
+        <link refid="class_azura_1_1_compute_pool"/>
+        <childnode refid="625" relation="usage">
+          <edgelabel>m_uniformBufferInfos</edgelabel>
+        </childnode>
+        <childnode refid="626" relation="usage">
+          <edgelabel>m_bufferUpdates</edgelabel>
+        </childnode>
+        <childnode refid="627" relation="usage">
+          <edgelabel>m_launchDims</edgelabel>
+        </childnode>
+        <childnode refid="628" relation="usage">
+          <edgelabel>m_computePasses</edgelabel>
+        </childnode>
+        <childnode refid="629" relation="usage">
+          <edgelabel>m_descriptorCount</edgelabel>
+        </childnode>
+        <childnode refid="630" relation="usage">
+          <edgelabel>m_samplerInfos</edgelabel>
+        </childnode>
+        <childnode refid="631" relation="usage">
+          <edgelabel>m_textureBufferInfos</edgelabel>
+        </childnode>
+      </node>
+      <node id="625">
+        <label>Azura::Containers::Vector&lt; Azura::UniformBufferInfo &gt;</label>
+        <link refid="class_azura_1_1_containers_1_1_vector"/>
+      </node>
+      <node id="630">
+        <label>Azura::Containers::Vector&lt; Azura::SamplerInfo &gt;</label>
+        <link refid="class_azura_1_1_containers_1_1_vector"/>
+      </node>
+      <node id="623">
+        <label>Azura::Vulkan::VkComputePool</label>
+        <link refid="class_azura_1_1_vulkan_1_1_vk_compute_pool"/>
+        <childnode refid="624" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="629">
+        <label>Azura::DescriptorCount</label>
+        <link refid="struct_azura_1_1_descriptor_count"/>
+      </node>
+      <node id="628">
+        <label>Azura::Containers::Vector&lt; U32 &gt;</label>
+        <link refid="class_azura_1_1_containers_1_1_vector"/>
+      </node>
+      <node id="627">
+        <label>Azura::ThreadGroupDimensions</label>
+        <link refid="struct_azura_1_1_thread_group_dimensions"/>
+      </node>
+      <node id="631">
+        <label>Azura::Containers::Vector&lt; Azura::TextureBufferInfo &gt;</label>
+        <link refid="class_azura_1_1_containers_1_1_vector"/>
+      </node>
+      <node id="626">
+        <label>Azura::Containers::Vector&lt; Azura::BufferUpdate &gt;</label>
+        <link refid="class_azura_1_1_containers_1_1_vector"/>
+      </node>
+    </collaborationgraph>
+    <location file="Source/Azura/RenderSystem/Inc/Vulkan/VkComputePool.h" line="12" column="1" bodyfile="Source/Azura/RenderSystem/Inc/Vulkan/VkComputePool.h" bodystart="12" bodyend="28"/>
+    <listofallmembers>
+      <member refid="class_azura_1_1_vulkan_1_1_vk_compute_pool_1ab6e2a29eba4abbfc501f8ffd9bce5c7f" prot="public" virt="virtual"><scope>Azura::Vulkan::VkComputePool</scope><name>AddShader</name></member>
+      <member refid="class_azura_1_1_vulkan_1_1_vk_compute_pool_1aa538da33c44ec2739ac2bceef705afd1" prot="public" virt="virtual"><scope>Azura::Vulkan::VkComputePool</scope><name>BeginUpdates</name></member>
+      <member refid="class_azura_1_1_vulkan_1_1_vk_compute_pool_1accd1d37723654a6b97d10569317be95e" prot="public" virt="virtual"><scope>Azura::Vulkan::VkComputePool</scope><name>BindSampler</name></member>
+      <member refid="class_azura_1_1_vulkan_1_1_vk_compute_pool_1a02046e02deb76baeaada55384ac2d265" prot="public" virt="virtual"><scope>Azura::Vulkan::VkComputePool</scope><name>BindTextureData</name></member>
+      <member refid="class_azura_1_1_vulkan_1_1_vk_compute_pool_1ad86daae5072bd152ff29679d32238df0" prot="public" virt="virtual"><scope>Azura::Vulkan::VkComputePool</scope><name>BindUniformData</name></member>
+      <member refid="class_azura_1_1_compute_pool_1af3b3e4d5d2be01bcc5fee2cf8b2cde82" prot="public" virt="non-virtual" ambiguityscope="Azura::ComputePool::"><scope>Azura::Vulkan::VkComputePool</scope><name>BindUniformData</name></member>
+      <member refid="class_azura_1_1_compute_pool_1a59a0d6fc4a77a8a3d8156092bd9ab831" prot="public" virt="non-virtual"><scope>Azura::Vulkan::VkComputePool</scope><name>CanRenderInPass</name></member>
+      <member refid="class_azura_1_1_compute_pool_1af7d8288c218721d0c747c8665313b802" prot="public" virt="non-virtual"><scope>Azura::Vulkan::VkComputePool</scope><name>ComputePool</name></member>
+      <member refid="class_azura_1_1_compute_pool_1a3149c9966cc1ecf4a7ba9947fbd4ae94" prot="public" virt="non-virtual"><scope>Azura::Vulkan::VkComputePool</scope><name>ComputePool</name></member>
+      <member refid="class_azura_1_1_compute_pool_1abf90deac37ba61e6683953fbee5a0e2c" prot="public" virt="non-virtual"><scope>Azura::Vulkan::VkComputePool</scope><name>ComputePool</name></member>
+      <member refid="class_azura_1_1_compute_pool_1abe104293d1fb3ff97c154ebdf279e0ab" prot="protected" virt="non-virtual"><scope>Azura::Vulkan::VkComputePool</scope><name>GetAllocator</name></member>
+      <member refid="class_azura_1_1_compute_pool_1a4dbd764029fac45b55c9dd1b669bfbe5" prot="protected" virt="non-virtual"><scope>Azura::Vulkan::VkComputePool</scope><name>GetSingleTextureBufferInfo</name></member>
+      <member refid="class_azura_1_1_compute_pool_1a4f53259b821b6604ebbf08ad6ae29ae1" prot="protected" virt="non-virtual"><scope>Azura::Vulkan::VkComputePool</scope><name>GetSingleUniformBufferInfo</name></member>
+      <member refid="class_azura_1_1_compute_pool_1ab5f446d42e46f2b295ac2c115d4ba8ac" prot="public" virt="non-virtual"><scope>Azura::Vulkan::VkComputePool</scope><name>GetSize</name></member>
+      <member refid="class_azura_1_1_compute_pool_1a2364df6fc212c4ada3f000adc9ea0650" prot="protected" virt="non-virtual"><scope>Azura::Vulkan::VkComputePool</scope><name>m_bufferUpdates</name></member>
+      <member refid="class_azura_1_1_compute_pool_1a5f1a7177b1d1206f77a96c13e70ac35c" prot="protected" virt="non-virtual"><scope>Azura::Vulkan::VkComputePool</scope><name>m_computePasses</name></member>
+      <member refid="class_azura_1_1_compute_pool_1a7de00c2da471b1ad5b645f9711bfeaf2" prot="protected" virt="non-virtual"><scope>Azura::Vulkan::VkComputePool</scope><name>m_descriptorCount</name></member>
+      <member refid="class_azura_1_1_compute_pool_1ab9e254cde0291fcd98fddf584306cf81" prot="protected" virt="non-virtual"><scope>Azura::Vulkan::VkComputePool</scope><name>m_launchDims</name></member>
+      <member refid="class_azura_1_1_compute_pool_1ac4c92d33ff9ce45bdb633c610611aeeb" prot="protected" virt="non-virtual"><scope>Azura::Vulkan::VkComputePool</scope><name>m_samplerInfos</name></member>
+      <member refid="class_azura_1_1_compute_pool_1ad8a3b7585c2860cac725ba9b4a6a4ef9" prot="protected" virt="non-virtual"><scope>Azura::Vulkan::VkComputePool</scope><name>m_textureBufferInfos</name></member>
+      <member refid="class_azura_1_1_compute_pool_1aca52c67e737934789d72e0a7bd213c3d" prot="protected" virt="non-virtual"><scope>Azura::Vulkan::VkComputePool</scope><name>m_uniformBufferInfos</name></member>
+      <member refid="class_azura_1_1_compute_pool_1ae5903ef39e7e0238804e02857ce5df80" prot="public" virt="non-virtual"><scope>Azura::Vulkan::VkComputePool</scope><name>operator=</name></member>
+      <member refid="class_azura_1_1_compute_pool_1aacc48b6375680c06ba8590a613ada1c0" prot="public" virt="non-virtual"><scope>Azura::Vulkan::VkComputePool</scope><name>operator=</name></member>
+      <member refid="class_azura_1_1_vulkan_1_1_vk_compute_pool_1abfddb37bce27cedd0edd1ffad86bb8ab" prot="public" virt="virtual"><scope>Azura::Vulkan::VkComputePool</scope><name>Submit</name></member>
+      <member refid="class_azura_1_1_vulkan_1_1_vk_compute_pool_1a78e188676d011facf47ea6e316e40c50" prot="public" virt="virtual"><scope>Azura::Vulkan::VkComputePool</scope><name>SubmitUpdates</name></member>
+      <member refid="class_azura_1_1_vulkan_1_1_vk_compute_pool_1a6f1331a82ec740e13d241ac8eccc75ef" prot="public" virt="virtual"><scope>Azura::Vulkan::VkComputePool</scope><name>UpdateTextureData</name></member>
+      <member refid="class_azura_1_1_vulkan_1_1_vk_compute_pool_1a112d7966cf3e6bcdfe0e8842616c8612" prot="public" virt="virtual"><scope>Azura::Vulkan::VkComputePool</scope><name>UpdateUniformData</name></member>
+      <member refid="class_azura_1_1_compute_pool_1abaccf3ec6a2ffa50cbc324977ab2d06a" prot="public" virt="non-virtual" ambiguityscope="Azura::ComputePool::"><scope>Azura::Vulkan::VkComputePool</scope><name>UpdateUniformData</name></member>
+      <member refid="class_azura_1_1_vulkan_1_1_vk_compute_pool_1a344667da36ab81df3c313166bd093e2f" prot="public" virt="non-virtual"><scope>Azura::Vulkan::VkComputePool</scope><name>VkComputePool</name></member>
+      <member refid="class_azura_1_1_compute_pool_1ac2fc233b6a0ea26552733c264b6a9478" prot="public" virt="virtual"><scope>Azura::Vulkan::VkComputePool</scope><name>~ComputePool</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>
