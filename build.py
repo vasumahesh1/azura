@@ -80,7 +80,9 @@ def buildExecutableMap(config, platform):
   executableMap['cmake'] = config['cmake'] + sep + 'cmake' + ext
   executableMap['ctest'] = config['cmake'] + sep + 'ctest' + ext
   executableMap['clang-tidy'] = config['llvm'] + sep + 'clang-tidy' + ext
-  executableMap['doxygen'] = config['doxygen'] + sep + 'doxygen' + ext
+
+  if ('doxygen' in config):
+    executableMap['doxygen'] = config['doxygen'] + sep + 'doxygen' + ext
 
 def printConfig(item):
   for key, value in item.iteritems():
