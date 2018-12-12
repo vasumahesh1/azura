@@ -1,0 +1,161 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.8.14">
+  <compounddef id="class_vector_benchmark_fixture" kind="class" language="C++" prot="public">
+    <compoundname>VectorBenchmarkFixture</compoundname>
+    <basecompoundref prot="public" virt="non-virtual">Fixture</basecompoundref>
+    <basecompoundref prot="public" virt="non-virtual">Fixture</basecompoundref>
+      <sectiondef kind="public-attrib">
+      <memberdef kind="variable" id="class_vector_benchmark_fixture_1a4ec3e868a0f02e33b42b7f137cfe53be" prot="public" static="no" mutable="no">
+        <type><ref refid="class_azura_1_1_memory_1_1_heap_memory_buffer" kindref="compound">Azura::Memory::HeapMemoryBuffer</ref></type>
+        <definition>Azura::Memory::HeapMemoryBuffer VectorBenchmarkFixture::buffer</definition>
+        <argsstring></argsstring>
+        <name>buffer</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Source/Containers/Benchmark/Vector_benchmark.h" line="21" column="1" bodyfile="Source/Containers/Benchmark/Vector_benchmark.h" bodystart="21" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="class_vector_benchmark_fixture_1a92b427053f373a668b4ba0e45dccc699" prot="public" static="no" mutable="no">
+        <type><ref refid="class_azura_1_1_memory_1_1_monotonic_allocator" kindref="compound">Azura::Memory::MonotonicAllocator</ref></type>
+        <definition>Azura::Memory::MonotonicAllocator VectorBenchmarkFixture::alloc</definition>
+        <argsstring></argsstring>
+        <name>alloc</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Source/Containers/Benchmark/Vector_benchmark.h" line="22" column="1" bodyfile="Source/Containers/Benchmark/Vector_benchmark.h" bodystart="22" bodyend="-1"/>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="public-func">
+      <memberdef kind="function" id="class_vector_benchmark_fixture_1a36a7e198267be7c70284e906b75a2d00" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type></type>
+        <definition>VectorBenchmarkFixture::VectorBenchmarkFixture</definition>
+        <argsstring>()</argsstring>
+        <name>VectorBenchmarkFixture</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Source/Containers/Benchmark/StdVector_benchmark.h" line="7" column="1" bodyfile="Source/Containers/Benchmark/StdVector_benchmark.h" bodystart="7" bodyend="7"/>
+      </memberdef>
+      <memberdef kind="function" id="class_vector_benchmark_fixture_1a379f7e712c0527221413fd005ffcf51d" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>void VectorBenchmarkFixture::TearDown</definition>
+        <argsstring>(const benchmark::State &amp;) override</argsstring>
+        <name>TearDown</name>
+        <param>
+          <type>const benchmark::State &amp;</type>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Source/Containers/Benchmark/StdVector_benchmark.h" line="9" column="1" bodyfile="Source/Containers/Benchmark/StdVector_benchmark.h" bodystart="9" bodyend="10"/>
+      </memberdef>
+      <memberdef kind="function" id="class_vector_benchmark_fixture_1a36a7e198267be7c70284e906b75a2d00" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type></type>
+        <definition>VectorBenchmarkFixture::VectorBenchmarkFixture</definition>
+        <argsstring>()</argsstring>
+        <name>VectorBenchmarkFixture</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Source/Containers/Benchmark/Vector_benchmark.h" line="11" column="1" bodyfile="Source/Containers/Benchmark/Vector_benchmark.h" bodystart="11" bodyend="13"/>
+      </memberdef>
+      <memberdef kind="function" id="class_vector_benchmark_fixture_1a379f7e712c0527221413fd005ffcf51d" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>void VectorBenchmarkFixture::TearDown</definition>
+        <argsstring>(const benchmark::State &amp;) override</argsstring>
+        <name>TearDown</name>
+        <param>
+          <type>const benchmark::State &amp;</type>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Source/Containers/Benchmark/Vector_benchmark.h" line="15" column="1" bodyfile="Source/Containers/Benchmark/Vector_benchmark.h" bodystart="15" bodyend="18"/>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <inheritancegraph>
+      <node id="594">
+        <label>Fixture</label>
+      </node>
+      <node id="593">
+        <label>VectorBenchmarkFixture</label>
+        <link refid="class_vector_benchmark_fixture"/>
+        <childnode refid="594" relation="public-inheritance">
+        </childnode>
+        <childnode refid="594" relation="public-inheritance">
+        </childnode>
+      </node>
+    </inheritancegraph>
+    <collaborationgraph>
+      <node id="598">
+        <label>Azura::Memory::MemoryBuffer</label>
+        <link refid="class_azura_1_1_memory_1_1_memory_buffer"/>
+      </node>
+      <node id="600">
+        <label>Azura::Memory::Allocator</label>
+        <link refid="class_azura_1_1_memory_1_1_allocator"/>
+      </node>
+      <node id="597">
+        <label>Azura::Memory::HeapMemoryBuffer</label>
+        <link refid="class_azura_1_1_memory_1_1_heap_memory_buffer"/>
+        <childnode refid="598" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="596">
+        <label>Fixture</label>
+      </node>
+      <node id="595">
+        <label>VectorBenchmarkFixture</label>
+        <link refid="class_vector_benchmark_fixture"/>
+        <childnode refid="596" relation="public-inheritance">
+        </childnode>
+        <childnode refid="596" relation="public-inheritance">
+        </childnode>
+        <childnode refid="597" relation="usage">
+          <edgelabel>buffer</edgelabel>
+        </childnode>
+        <childnode refid="599" relation="usage">
+          <edgelabel>alloc</edgelabel>
+        </childnode>
+      </node>
+      <node id="599">
+        <label>Azura::Memory::MonotonicAllocator</label>
+        <link refid="class_azura_1_1_memory_1_1_monotonic_allocator"/>
+        <childnode refid="600" relation="public-inheritance">
+        </childnode>
+      </node>
+    </collaborationgraph>
+    <location file="Source/Containers/Benchmark/StdVector_benchmark.h" line="5" column="1" bodyfile="Source/Containers/Benchmark/StdVector_benchmark.h" bodystart="4" bodyend="11"/>
+    <listofallmembers>
+      <member refid="class_vector_benchmark_fixture_1a92b427053f373a668b4ba0e45dccc699" prot="public" virt="non-virtual"><scope>VectorBenchmarkFixture</scope><name>alloc</name></member>
+      <member refid="class_vector_benchmark_fixture_1a4ec3e868a0f02e33b42b7f137cfe53be" prot="public" virt="non-virtual"><scope>VectorBenchmarkFixture</scope><name>buffer</name></member>
+      <member refid="class_vector_benchmark_fixture_1a379f7e712c0527221413fd005ffcf51d" prot="public" virt="non-virtual"><scope>VectorBenchmarkFixture</scope><name>TearDown</name></member>
+      <member refid="class_vector_benchmark_fixture_1a379f7e712c0527221413fd005ffcf51d" prot="public" virt="non-virtual"><scope>VectorBenchmarkFixture</scope><name>TearDown</name></member>
+      <member refid="class_vector_benchmark_fixture_1a36a7e198267be7c70284e906b75a2d00" prot="public" virt="non-virtual"><scope>VectorBenchmarkFixture</scope><name>VectorBenchmarkFixture</name></member>
+      <member refid="class_vector_benchmark_fixture_1a36a7e198267be7c70284e906b75a2d00" prot="public" virt="non-virtual"><scope>VectorBenchmarkFixture</scope><name>VectorBenchmarkFixture</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

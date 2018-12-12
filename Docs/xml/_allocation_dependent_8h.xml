@@ -1,0 +1,47 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.8.14">
+  <compounddef id="_allocation_dependent_8h" kind="file" language="C++">
+    <compoundname>AllocationDependent.h</compoundname>
+    <includedby refid="_bx_d_f_8h" local="yes">Source/Dibella/Inc/Materials/Primitives/BxDF.h</includedby>
+    <invincdepgraph>
+      <node id="4847">
+        <label>Source/Dibella/Inc/Materials/Primitives/BSDF.h</label>
+        <link refid="_b_s_d_f_8h_source"/>
+      </node>
+      <node id="4845">
+        <label>Source/Dibella/Inc/Core/AllocationDependent.h</label>
+        <link refid="_allocation_dependent_8h"/>
+        <childnode refid="4846" relation="include">
+        </childnode>
+      </node>
+      <node id="4846">
+        <label>Source/Dibella/Inc/Materials/Primitives/BxDF.h</label>
+        <link refid="_bx_d_f_8h_source"/>
+        <childnode refid="4847" relation="include">
+        </childnode>
+      </node>
+    </invincdepgraph>
+    <innerclass refid="class_dibella_1_1_allocation_dependent" prot="public">Dibella::AllocationDependent</innerclass>
+    <innernamespace refid="namespace_dibella">Dibella</innernamespace>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <programlisting>
+<codeline lineno="1"><highlight class="preprocessor">#pragma<sp/>once</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="2"><highlight class="normal"></highlight></codeline>
+<codeline lineno="3"><highlight class="normal"></highlight><highlight class="keyword">namespace<sp/></highlight><highlight class="normal"><ref refid="namespace_dibella" kindref="compound">Dibella</ref><sp/>{</highlight></codeline>
+<codeline lineno="4"><highlight class="normal"></highlight><highlight class="keyword">class<sp/></highlight><highlight class="normal">Allocator;</highlight></codeline>
+<codeline lineno="5"><highlight class="normal"></highlight></codeline>
+<codeline lineno="6" refid="class_dibella_1_1_allocation_dependent" refkind="compound"><highlight class="normal"></highlight><highlight class="keyword">class<sp/></highlight><highlight class="normal"><ref refid="class_dibella_1_1_allocation_dependent" kindref="compound">AllocationDependent</ref><sp/>{</highlight></codeline>
+<codeline lineno="7"><highlight class="normal"><sp/></highlight><highlight class="keyword">protected</highlight><highlight class="normal">:</highlight></codeline>
+<codeline lineno="8"><highlight class="normal"><sp/><sp/></highlight><highlight class="keyword">explicit</highlight><highlight class="normal"><sp/><ref refid="class_dibella_1_1_allocation_dependent" kindref="compound">AllocationDependent</ref>(Allocator*<sp/>alloc);</highlight></codeline>
+<codeline lineno="9"><highlight class="normal"><sp/><sp/>Allocator*<sp/>mAllocator;</highlight></codeline>
+<codeline lineno="10"><highlight class="normal">};</highlight></codeline>
+<codeline lineno="11"><highlight class="normal"></highlight></codeline>
+<codeline lineno="12"><highlight class="normal"></highlight><highlight class="keyword">inline</highlight><highlight class="normal"><sp/>AllocationDependent::AllocationDependent(Allocator*<sp/>alloc)<sp/>:<sp/>mAllocator(alloc)<sp/>{}</highlight></codeline>
+<codeline lineno="13"><highlight class="normal">}<sp/><sp/></highlight><highlight class="comment">//<sp/>namespace<sp/>Dibella</highlight><highlight class="normal"></highlight></codeline>
+    </programlisting>
+    <location file="Source/Dibella/Inc/Core/AllocationDependent.h"/>
+  </compounddef>
+</doxygen>

@@ -1,0 +1,159 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.8.14">
+  <compounddef id="struct_azura_1_1_mapped_g_p_u_buffer" kind="struct" language="C++" prot="public">
+    <compoundname>Azura::MappedGPUBuffer</compoundname>
+    <basecompoundref refid="struct_azura_1_1_g_p_u_buffer" prot="public" virt="non-virtual">Azura::GPUBuffer</basecompoundref>
+      <sectiondef kind="public-attrib">
+      <memberdef kind="variable" id="struct_azura_1_1_mapped_g_p_u_buffer_1a6ab132c2a77abef32485acee7125256e" prot="public" static="no" mutable="no">
+        <type>U8 *</type>
+        <definition>U8* Azura::MappedGPUBuffer::p_dataCur</definition>
+        <argsstring></argsstring>
+        <name>p_dataCur</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Source/Azura/RenderSystem/Inc/Generic/GPUBuffer.h" line="34" column="1" bodyfile="Source/Azura/RenderSystem/Inc/Generic/GPUBuffer.h" bodystart="34" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="struct_azura_1_1_mapped_g_p_u_buffer_1a65b301736ff2bdcfb10ceaa9348f8f1d" prot="public" static="no" mutable="no">
+        <type>U8 *</type>
+        <definition>U8* Azura::MappedGPUBuffer::p_dataBeg</definition>
+        <argsstring></argsstring>
+        <name>p_dataBeg</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Source/Azura/RenderSystem/Inc/Generic/GPUBuffer.h" line="35" column="1" bodyfile="Source/Azura/RenderSystem/Inc/Generic/GPUBuffer.h" bodystart="35" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="struct_azura_1_1_mapped_g_p_u_buffer_1ad12a8bee42e6ffb37e7274e890564883" prot="public" static="no" mutable="no">
+        <type>U8 *</type>
+        <definition>U8* Azura::MappedGPUBuffer::p_dataEnd</definition>
+        <argsstring></argsstring>
+        <name>p_dataEnd</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Source/Azura/RenderSystem/Inc/Generic/GPUBuffer.h" line="36" column="1" bodyfile="Source/Azura/RenderSystem/Inc/Generic/GPUBuffer.h" bodystart="36" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="struct_azura_1_1_mapped_g_p_u_buffer_1a6d8d7bf23780541e1215e052fe87db51" prot="public" static="no" mutable="no">
+        <type><ref refid="class_azura_1_1_containers_1_1_vector" kindref="compound">Containers::Vector</ref>&lt; <ref refid="struct_azura_1_1_buffer_entry" kindref="compound">BufferEntry</ref> &gt;</type>
+        <definition>Containers::Vector&lt;BufferEntry&gt; Azura::MappedGPUBuffer::m_entries</definition>
+        <argsstring></argsstring>
+        <name>m_entries</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Source/Azura/RenderSystem/Inc/Generic/GPUBuffer.h" line="39" column="1" bodyfile="Source/Azura/RenderSystem/Inc/Generic/GPUBuffer.h" bodystart="39" bodyend="-1"/>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="public-func">
+      <memberdef kind="function" id="struct_azura_1_1_mapped_g_p_u_buffer_1aad8d16e1e8ebf21e69de19165d4415ab" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>Azura::MappedGPUBuffer::MappedGPUBuffer</definition>
+        <argsstring>(U8 *beginPtr, U32 maxEntries, U32 size, Memory::Allocator &amp;allocator)</argsstring>
+        <name>MappedGPUBuffer</name>
+        <param>
+          <type>U8 *</type>
+          <declname>beginPtr</declname>
+        </param>
+        <param>
+          <type>U32</type>
+          <declname>maxEntries</declname>
+        </param>
+        <param>
+          <type>U32</type>
+          <declname>size</declname>
+        </param>
+        <param>
+          <type><ref refid="class_azura_1_1_memory_1_1_allocator" kindref="compound">Memory::Allocator</ref> &amp;</type>
+          <declname>allocator</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Source/Azura/RenderSystem/Inc/Generic/GPUBuffer.h" line="29" column="1" bodyfile="Source/Azura/RenderSystem/Src/Generic/GPUBuffer.cpp" bodystart="25" bodyend="36"/>
+      </memberdef>
+      <memberdef kind="function" id="struct_azura_1_1_mapped_g_p_u_buffer_1ad2c527f9e274226e4ef7e9dea37de132" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool Azura::MappedGPUBuffer::SubAllocate</definition>
+        <argsstring>(U32 size, U32 alignment)</argsstring>
+        <name>SubAllocate</name>
+        <param>
+          <type>U32</type>
+          <declname>size</declname>
+        </param>
+        <param>
+          <type>U32</type>
+          <declname>alignment</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Source/Azura/RenderSystem/Inc/Generic/GPUBuffer.h" line="31" column="1" bodyfile="Source/Azura/RenderSystem/Src/Generic/GPUBuffer.cpp" bodystart="38" bodyend="44"/>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <inheritancegraph>
+      <node id="388">
+        <label>Azura::GPUBuffer</label>
+        <link refid="struct_azura_1_1_g_p_u_buffer"/>
+      </node>
+      <node id="387">
+        <label>Azura::MappedGPUBuffer</label>
+        <link refid="struct_azura_1_1_mapped_g_p_u_buffer"/>
+        <childnode refid="388" relation="public-inheritance">
+        </childnode>
+      </node>
+    </inheritancegraph>
+    <collaborationgraph>
+      <node id="391">
+        <label>Azura::Containers::Vector&lt; Azura::BufferEntry &gt;</label>
+        <link refid="class_azura_1_1_containers_1_1_vector"/>
+      </node>
+      <node id="390">
+        <label>Azura::GPUBuffer</label>
+        <link refid="struct_azura_1_1_g_p_u_buffer"/>
+      </node>
+      <node id="389">
+        <label>Azura::MappedGPUBuffer</label>
+        <link refid="struct_azura_1_1_mapped_g_p_u_buffer"/>
+        <childnode refid="390" relation="public-inheritance">
+        </childnode>
+        <childnode refid="391" relation="usage">
+          <edgelabel>m_entries</edgelabel>
+        </childnode>
+      </node>
+    </collaborationgraph>
+    <location file="Source/Azura/RenderSystem/Inc/Generic/GPUBuffer.h" line="27" column="1" bodyfile="Source/Azura/RenderSystem/Inc/Generic/GPUBuffer.h" bodystart="27" bodyend="40"/>
+    <listofallmembers>
+      <member refid="struct_azura_1_1_g_p_u_buffer_1a4c3fb2aeae0232f04e7d9fe40db6151c" prot="public" virt="non-virtual"><scope>Azura::MappedGPUBuffer</scope><name>GPUBuffer</name></member>
+      <member refid="struct_azura_1_1_g_p_u_buffer_1a11ec71786b8163658495cd1613e3e23a" prot="public" virt="non-virtual"><scope>Azura::MappedGPUBuffer</scope><name>m_byteSize</name></member>
+      <member refid="struct_azura_1_1_mapped_g_p_u_buffer_1a6d8d7bf23780541e1215e052fe87db51" prot="public" virt="non-virtual"><scope>Azura::MappedGPUBuffer</scope><name>m_entries</name></member>
+      <member refid="struct_azura_1_1_mapped_g_p_u_buffer_1aad8d16e1e8ebf21e69de19165d4415ab" prot="public" virt="non-virtual"><scope>Azura::MappedGPUBuffer</scope><name>MappedGPUBuffer</name></member>
+      <member refid="struct_azura_1_1_mapped_g_p_u_buffer_1a65b301736ff2bdcfb10ceaa9348f8f1d" prot="public" virt="non-virtual"><scope>Azura::MappedGPUBuffer</scope><name>p_dataBeg</name></member>
+      <member refid="struct_azura_1_1_mapped_g_p_u_buffer_1a6ab132c2a77abef32485acee7125256e" prot="public" virt="non-virtual"><scope>Azura::MappedGPUBuffer</scope><name>p_dataCur</name></member>
+      <member refid="struct_azura_1_1_mapped_g_p_u_buffer_1ad12a8bee42e6ffb37e7274e890564883" prot="public" virt="non-virtual"><scope>Azura::MappedGPUBuffer</scope><name>p_dataEnd</name></member>
+      <member refid="struct_azura_1_1_mapped_g_p_u_buffer_1ad2c527f9e274226e4ef7e9dea37de132" prot="public" virt="non-virtual"><scope>Azura::MappedGPUBuffer</scope><name>SubAllocate</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

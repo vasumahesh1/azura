@@ -1,0 +1,264 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.8.14">
+  <compounddef id="class_azura_1_1_d3_d12_1_1_d3_d12_drawable" kind="class" language="C++" prot="public">
+    <compoundname>Azura::D3D12::D3D12Drawable</compoundname>
+    <basecompoundref refid="class_azura_1_1_drawable" prot="public" virt="non-virtual">Azura::Drawable</basecompoundref>
+      <sectiondef kind="private-attrib">
+      <memberdef kind="variable" id="class_azura_1_1_d3_d12_1_1_d3_d12_drawable_1acfae4258c0c9b59b8c73b45ebd854d02" prot="private" static="no" mutable="no">
+        <type><ref refid="class_azura_1_1_containers_1_1_vector" kindref="compound">Containers::Vector</ref>&lt; D3D12_VERTEX_BUFFER_VIEW &gt;</type>
+        <definition>Containers::Vector&lt;D3D12_VERTEX_BUFFER_VIEW&gt; Azura::D3D12::D3D12Drawable::m_vertexBufferView</definition>
+        <argsstring></argsstring>
+        <name>m_vertexBufferView</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Source/Azura/RenderSystem/Inc/D3D12/D3D12Drawable.h" line="35" column="1" bodyfile="Source/Azura/RenderSystem/Inc/D3D12/D3D12Drawable.h" bodystart="35" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="class_azura_1_1_d3_d12_1_1_d3_d12_drawable_1a663888ff00d546b468a5b2e64f1a4830" prot="private" static="no" mutable="no">
+        <type><ref refid="class_azura_1_1_containers_1_1_vector" kindref="compound">Containers::Vector</ref>&lt; D3D12_VERTEX_BUFFER_VIEW &gt;</type>
+        <definition>Containers::Vector&lt;D3D12_VERTEX_BUFFER_VIEW&gt; Azura::D3D12::D3D12Drawable::m_instanceBufferView</definition>
+        <argsstring></argsstring>
+        <name>m_instanceBufferView</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Source/Azura/RenderSystem/Inc/D3D12/D3D12Drawable.h" line="36" column="1" bodyfile="Source/Azura/RenderSystem/Inc/D3D12/D3D12Drawable.h" bodystart="36" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="class_azura_1_1_d3_d12_1_1_d3_d12_drawable_1a2d8c51ef1a29995aeafcfdf56804354f" prot="private" static="no" mutable="no">
+        <type><ref refid="class_azura_1_1_containers_1_1_vector" kindref="compound">Containers::Vector</ref>&lt; D3D12_CONSTANT_BUFFER_VIEW_DESC &gt;</type>
+        <definition>Containers::Vector&lt;D3D12_CONSTANT_BUFFER_VIEW_DESC&gt; Azura::D3D12::D3D12Drawable::m_constantBufferView</definition>
+        <argsstring></argsstring>
+        <name>m_constantBufferView</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Source/Azura/RenderSystem/Inc/D3D12/D3D12Drawable.h" line="37" column="1" bodyfile="Source/Azura/RenderSystem/Inc/D3D12/D3D12Drawable.h" bodystart="37" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="class_azura_1_1_d3_d12_1_1_d3_d12_drawable_1a2b9f6314025150c65f16a33cec3cf1c6" prot="private" static="no" mutable="no">
+        <type>D3D12_INDEX_BUFFER_VIEW</type>
+        <definition>D3D12_INDEX_BUFFER_VIEW Azura::D3D12::D3D12Drawable::m_indexBufferView</definition>
+        <argsstring></argsstring>
+        <name>m_indexBufferView</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Source/Azura/RenderSystem/Inc/D3D12/D3D12Drawable.h" line="39" column="1" bodyfile="Source/Azura/RenderSystem/Inc/D3D12/D3D12Drawable.h" bodystart="39" bodyend="-1"/>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="public-func">
+      <memberdef kind="function" id="class_azura_1_1_d3_d12_1_1_d3_d12_drawable_1a522a01d2643fd2efe0516329b688b7e9" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>Azura::D3D12::D3D12Drawable::D3D12Drawable</definition>
+        <argsstring>(const DrawableCreateInfo &amp;info, U32 numVertexSlots, U32 numInstanceSlots, U32 numUniformSlots, Memory::Allocator &amp;allocator)</argsstring>
+        <name>D3D12Drawable</name>
+        <param>
+          <type>const <ref refid="struct_azura_1_1_drawable_create_info" kindref="compound">DrawableCreateInfo</ref> &amp;</type>
+          <declname>info</declname>
+        </param>
+        <param>
+          <type>U32</type>
+          <declname>numVertexSlots</declname>
+        </param>
+        <param>
+          <type>U32</type>
+          <declname>numInstanceSlots</declname>
+        </param>
+        <param>
+          <type>U32</type>
+          <declname>numUniformSlots</declname>
+        </param>
+        <param>
+          <type><ref refid="class_azura_1_1_memory_1_1_allocator" kindref="compound">Memory::Allocator</ref> &amp;</type>
+          <declname>allocator</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Source/Azura/RenderSystem/Inc/D3D12/D3D12Drawable.h" line="13" column="1" bodyfile="Source/Azura/RenderSystem/Src/D3D12/D3D12Drawable.cpp" bodystart="9" bodyend="19"/>
+      </memberdef>
+      <memberdef kind="function" id="class_azura_1_1_d3_d12_1_1_d3_d12_drawable_1af5f28626a76e3ca144eb8474249e9a5b" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void Azura::D3D12::D3D12Drawable::CreateResourceViews</definition>
+        <argsstring>(const Microsoft::WRL::ComPtr&lt; ID3D12Device &gt; &amp;device, ID3D12Resource *parentBuffer, const Containers::Vector&lt; VertexSlot &gt; &amp;vertexSlots, const Containers::Vector&lt; std::reference_wrapper&lt; const D3D12ScopedBuffer &gt;&gt; &amp;gpuBuffers, CD3DX12_CPU_DESCRIPTOR_HANDLE drawableHeapHandle, UINT heapElementSize, const Log &amp;log_D3D12RenderSystem)</argsstring>
+        <name>CreateResourceViews</name>
+        <param>
+          <type>const Microsoft::WRL::ComPtr&lt; ID3D12Device &gt; &amp;</type>
+          <declname>device</declname>
+        </param>
+        <param>
+          <type>ID3D12Resource *</type>
+          <declname>parentBuffer</declname>
+        </param>
+        <param>
+          <type>const <ref refid="class_azura_1_1_containers_1_1_vector" kindref="compound">Containers::Vector</ref>&lt; <ref refid="struct_azura_1_1_vertex_slot" kindref="compound">VertexSlot</ref> &gt; &amp;</type>
+          <declname>vertexSlots</declname>
+        </param>
+        <param>
+          <type>const <ref refid="class_azura_1_1_containers_1_1_vector" kindref="compound">Containers::Vector</ref>&lt; std::reference_wrapper&lt; const <ref refid="class_azura_1_1_d3_d12_1_1_d3_d12_scoped_buffer" kindref="compound">D3D12ScopedBuffer</ref> &gt;&gt; &amp;</type>
+          <declname>gpuBuffers</declname>
+        </param>
+        <param>
+          <type>CD3DX12_CPU_DESCRIPTOR_HANDLE</type>
+          <declname>drawableHeapHandle</declname>
+        </param>
+        <param>
+          <type>UINT</type>
+          <declname>heapElementSize</declname>
+        </param>
+        <param>
+          <type>const <ref refid="class_azura_1_1_log" kindref="compound">Log</ref> &amp;</type>
+          <declname>log_D3D12RenderSystem</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Source/Azura/RenderSystem/Inc/D3D12/D3D12Drawable.h" line="19" column="1" bodyfile="Source/Azura/RenderSystem/Src/D3D12/D3D12Drawable.cpp" bodystart="21" bodyend="92"/>
+      </memberdef>
+      <memberdef kind="function" id="class_azura_1_1_d3_d12_1_1_d3_d12_drawable_1a80c446d60a89de205fa7786733ce14ea" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void Azura::D3D12::D3D12Drawable::RecordCommands</definition>
+        <argsstring>(ID3D12GraphicsCommandList *commandList, CD3DX12_GPU_DESCRIPTOR_HANDLE drawableHeapHandle, UINT heapElementSize, const Containers::Vector&lt; DescriptorTableEntry &gt; &amp;descriptorRootSignatureTable, const Log &amp;log_D3D12RenderSystem)</argsstring>
+        <name>RecordCommands</name>
+        <param>
+          <type>ID3D12GraphicsCommandList *</type>
+          <declname>commandList</declname>
+        </param>
+        <param>
+          <type>CD3DX12_GPU_DESCRIPTOR_HANDLE</type>
+          <declname>drawableHeapHandle</declname>
+        </param>
+        <param>
+          <type>UINT</type>
+          <declname>heapElementSize</declname>
+        </param>
+        <param>
+          <type>const <ref refid="class_azura_1_1_containers_1_1_vector" kindref="compound">Containers::Vector</ref>&lt; <ref refid="struct_azura_1_1_descriptor_table_entry" kindref="compound">DescriptorTableEntry</ref> &gt; &amp;</type>
+          <declname>descriptorRootSignatureTable</declname>
+        </param>
+        <param>
+          <type>const <ref refid="class_azura_1_1_log" kindref="compound">Log</ref> &amp;</type>
+          <declname>log_D3D12RenderSystem</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Source/Azura/RenderSystem/Inc/D3D12/D3D12Drawable.h" line="27" column="1" bodyfile="Source/Azura/RenderSystem/Src/D3D12/D3D12Drawable.cpp" bodystart="94" bodyend="126"/>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <inheritancegraph>
+      <node id="141">
+        <label>Azura::Drawable</label>
+        <link refid="class_azura_1_1_drawable"/>
+      </node>
+      <node id="140">
+        <label>Azura::D3D12::D3D12Drawable</label>
+        <link refid="class_azura_1_1_d3_d12_1_1_d3_d12_drawable"/>
+        <childnode refid="141" relation="public-inheritance">
+        </childnode>
+      </node>
+    </inheritancegraph>
+    <collaborationgraph>
+      <node id="144">
+        <label>Azura::Containers::Vector&lt; Azura::UniformBufferInfo &gt;</label>
+        <link refid="class_azura_1_1_containers_1_1_vector"/>
+      </node>
+      <node id="147">
+        <label>Azura::DrawableCreateInfo</label>
+        <link refid="struct_azura_1_1_drawable_create_info"/>
+      </node>
+      <node id="146">
+        <label>Azura::Containers::Vector&lt; Azura::BufferInfo &gt;</label>
+        <link refid="class_azura_1_1_containers_1_1_vector"/>
+      </node>
+      <node id="143">
+        <label>Azura::Drawable</label>
+        <link refid="class_azura_1_1_drawable"/>
+        <childnode refid="144" relation="usage">
+          <edgelabel>m_uniformBufferInfos</edgelabel>
+        </childnode>
+        <childnode refid="145" relation="usage">
+          <edgelabel>m_indexBufferInfo</edgelabel>
+        </childnode>
+        <childnode refid="146" relation="usage">
+          <edgelabel>m_vertexBufferInfos</edgelabel>
+          <edgelabel>m_instanceBufferInfos</edgelabel>
+        </childnode>
+        <childnode refid="147" relation="usage">
+          <edgelabel>m_createInfo</edgelabel>
+        </childnode>
+      </node>
+      <node id="142">
+        <label>Azura::D3D12::D3D12Drawable</label>
+        <link refid="class_azura_1_1_d3_d12_1_1_d3_d12_drawable"/>
+        <childnode refid="143" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="145">
+        <label>Azura::BufferInfo</label>
+        <link refid="struct_azura_1_1_buffer_info"/>
+      </node>
+    </collaborationgraph>
+    <location file="Source/Azura/RenderSystem/Inc/D3D12/D3D12Drawable.h" line="10" column="1" bodyfile="Source/Azura/RenderSystem/Inc/D3D12/D3D12Drawable.h" bodystart="10" bodyend="40"/>
+    <listofallmembers>
+      <member refid="class_azura_1_1_drawable_1ac439512f470f664bcbae709a6562e180" prot="public" virt="non-virtual"><scope>Azura::D3D12::D3D12Drawable</scope><name>AddInstanceBufferInfo</name></member>
+      <member refid="class_azura_1_1_drawable_1a4ad523a976da70aa2c007bee7e015235" prot="public" virt="non-virtual"><scope>Azura::D3D12::D3D12Drawable</scope><name>AddUniformBufferInfo</name></member>
+      <member refid="class_azura_1_1_drawable_1a835a5105c7e7c41a1957cef3e2b4b964" prot="public" virt="non-virtual"><scope>Azura::D3D12::D3D12Drawable</scope><name>AddVertexBufferInfo</name></member>
+      <member refid="class_azura_1_1_d3_d12_1_1_d3_d12_drawable_1af5f28626a76e3ca144eb8474249e9a5b" prot="public" virt="non-virtual"><scope>Azura::D3D12::D3D12Drawable</scope><name>CreateResourceViews</name></member>
+      <member refid="class_azura_1_1_d3_d12_1_1_d3_d12_drawable_1a522a01d2643fd2efe0516329b688b7e9" prot="public" virt="non-virtual"><scope>Azura::D3D12::D3D12Drawable</scope><name>D3D12Drawable</name></member>
+      <member refid="class_azura_1_1_drawable_1a27d8ff981a1b6c635bbd116adef63a4d" prot="public" virt="non-virtual"><scope>Azura::D3D12::D3D12Drawable</scope><name>Drawable</name></member>
+      <member refid="class_azura_1_1_drawable_1a53a71775dd5842a06bf24f49080bf440" prot="public" virt="non-virtual"><scope>Azura::D3D12::D3D12Drawable</scope><name>Drawable</name></member>
+      <member refid="class_azura_1_1_drawable_1ac17dcd49f0abe29a680fa4f5841367d8" prot="public" virt="non-virtual"><scope>Azura::D3D12::D3D12Drawable</scope><name>Drawable</name></member>
+      <member refid="class_azura_1_1_drawable_1aba3c2f6d0356b41616a1e2ab84bfe25f" prot="protected" virt="non-virtual"><scope>Azura::D3D12::D3D12Drawable</scope><name>GetAllocator</name></member>
+      <member refid="class_azura_1_1_drawable_1a933edff922464480187db49b60179a67" prot="public" virt="non-virtual"><scope>Azura::D3D12::D3D12Drawable</scope><name>GetIndexBufferInfo</name></member>
+      <member refid="class_azura_1_1_drawable_1a525329732fb5a90c78230513e5580b58" prot="public" virt="non-virtual"><scope>Azura::D3D12::D3D12Drawable</scope><name>GetIndexCount</name></member>
+      <member refid="class_azura_1_1_drawable_1a620dbbe7e3779ad953ee47511a347d6c" prot="public" virt="non-virtual"><scope>Azura::D3D12::D3D12Drawable</scope><name>GetIndexType</name></member>
+      <member refid="class_azura_1_1_drawable_1a47191ea179dffb1ad75c10a35c01e238" prot="public" virt="non-virtual"><scope>Azura::D3D12::D3D12Drawable</scope><name>GetInstanceBufferInfos</name></member>
+      <member refid="class_azura_1_1_drawable_1a6a54a61f21d84fd952c6c67823358a45" prot="public" virt="non-virtual"><scope>Azura::D3D12::D3D12Drawable</scope><name>GetInstanceCount</name></member>
+      <member refid="class_azura_1_1_drawable_1a30ee7041742a3494d7440dd08e2b3774" prot="public" virt="non-virtual"><scope>Azura::D3D12::D3D12Drawable</scope><name>GetSingleInstanceBufferInfo</name></member>
+      <member refid="class_azura_1_1_drawable_1a7f588571fda9ee34744984e6bb432ba4" prot="public" virt="non-virtual"><scope>Azura::D3D12::D3D12Drawable</scope><name>GetSingleUniformBufferInfo</name></member>
+      <member refid="class_azura_1_1_drawable_1aa75594d6783494ac39c3fd8bb8cb7119" prot="public" virt="non-virtual"><scope>Azura::D3D12::D3D12Drawable</scope><name>GetSingleVertexBufferInfo</name></member>
+      <member refid="class_azura_1_1_drawable_1a6799b0b0db85fde096885bf8b34270ed" prot="public" virt="non-virtual"><scope>Azura::D3D12::D3D12Drawable</scope><name>GetUniformBufferInfos</name></member>
+      <member refid="class_azura_1_1_drawable_1a538a1cddda24152bcb76df2e2f0c2656" prot="public" virt="non-virtual"><scope>Azura::D3D12::D3D12Drawable</scope><name>GetVertexBufferInfos</name></member>
+      <member refid="class_azura_1_1_drawable_1a1058bd5cafd419626e493065c71b032b" prot="public" virt="non-virtual"><scope>Azura::D3D12::D3D12Drawable</scope><name>GetVertexCount</name></member>
+      <member refid="class_azura_1_1_d3_d12_1_1_d3_d12_drawable_1a2d8c51ef1a29995aeafcfdf56804354f" prot="private" virt="non-virtual"><scope>Azura::D3D12::D3D12Drawable</scope><name>m_constantBufferView</name></member>
+      <member refid="class_azura_1_1_drawable_1a8b6834f354330460726f9ba072b7ef3b" prot="protected" virt="non-virtual"><scope>Azura::D3D12::D3D12Drawable</scope><name>m_createInfo</name></member>
+      <member refid="class_azura_1_1_drawable_1a7064c03ca7f87f13933b1dd94d0603d4" prot="protected" virt="non-virtual"><scope>Azura::D3D12::D3D12Drawable</scope><name>m_indexBufferInfo</name></member>
+      <member refid="class_azura_1_1_d3_d12_1_1_d3_d12_drawable_1a2b9f6314025150c65f16a33cec3cf1c6" prot="private" virt="non-virtual"><scope>Azura::D3D12::D3D12Drawable</scope><name>m_indexBufferView</name></member>
+      <member refid="class_azura_1_1_drawable_1aab3f9242b2e44c295dcdd4a21ff7af05" prot="protected" virt="non-virtual"><scope>Azura::D3D12::D3D12Drawable</scope><name>m_instanceBufferInfos</name></member>
+      <member refid="class_azura_1_1_d3_d12_1_1_d3_d12_drawable_1a663888ff00d546b468a5b2e64f1a4830" prot="private" virt="non-virtual"><scope>Azura::D3D12::D3D12Drawable</scope><name>m_instanceBufferView</name></member>
+      <member refid="class_azura_1_1_drawable_1ab6981103f0d5b45c91e44c65c6862d98" prot="protected" virt="non-virtual"><scope>Azura::D3D12::D3D12Drawable</scope><name>m_uniformBufferInfos</name></member>
+      <member refid="class_azura_1_1_drawable_1abd7a2b1505fecdceecb01f69dce4f141" prot="protected" virt="non-virtual"><scope>Azura::D3D12::D3D12Drawable</scope><name>m_vertexBufferInfos</name></member>
+      <member refid="class_azura_1_1_d3_d12_1_1_d3_d12_drawable_1acfae4258c0c9b59b8c73b45ebd854d02" prot="private" virt="non-virtual"><scope>Azura::D3D12::D3D12Drawable</scope><name>m_vertexBufferView</name></member>
+      <member refid="class_azura_1_1_drawable_1aeb5d3015f46324a2b17181527a33705c" prot="public" virt="non-virtual"><scope>Azura::D3D12::D3D12Drawable</scope><name>operator=</name></member>
+      <member refid="class_azura_1_1_drawable_1adabf558bd08369d9477abf1e1f3758fb" prot="public" virt="non-virtual"><scope>Azura::D3D12::D3D12Drawable</scope><name>operator=</name></member>
+      <member refid="class_azura_1_1_d3_d12_1_1_d3_d12_drawable_1a80c446d60a89de205fa7786733ce14ea" prot="public" virt="non-virtual"><scope>Azura::D3D12::D3D12Drawable</scope><name>RecordCommands</name></member>
+      <member refid="class_azura_1_1_drawable_1a9182a5366303de8cdda41d15fc8de6fb" prot="public" virt="non-virtual"><scope>Azura::D3D12::D3D12Drawable</scope><name>SetIndexBufferInfo</name></member>
+      <member refid="class_azura_1_1_drawable_1a3a609a68de6ec35e2b4c162d3f093154" prot="public" virt="virtual"><scope>Azura::D3D12::D3D12Drawable</scope><name>~Drawable</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

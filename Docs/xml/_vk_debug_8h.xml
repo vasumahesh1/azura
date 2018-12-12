@@ -1,0 +1,51 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.8.14">
+  <compounddef id="_vk_debug_8h" kind="file" language="C++">
+    <compoundname>VkDebug.h</compoundname>
+    <includes local="no">vulkan/vulkan_core.h</includes>
+    <includedby refid="_vk_macros_8h" local="yes">Source/Azura/RenderSystem/Inc/Vulkan/VkMacros.h</includedby>
+    <includedby refid="_vk_debug_8cpp" local="yes">Source/Azura/RenderSystem/Src/Vulkan/VkDebug.cpp</includedby>
+    <incdepgraph>
+      <node id="1395">
+        <label>Source/Azura/RenderSystem/Inc/Vulkan/VkDebug.h</label>
+        <link refid="_vk_debug_8h"/>
+        <childnode refid="1396" relation="include">
+        </childnode>
+      </node>
+      <node id="1396">
+        <label>vulkan/vulkan_core.h</label>
+      </node>
+    </incdepgraph>
+    <invincdepgraph>
+      <node id="1397">
+        <label>Source/Azura/RenderSystem/Inc/Vulkan/VkDebug.h</label>
+        <link refid="_vk_debug_8h"/>
+        <childnode refid="1398" relation="include">
+        </childnode>
+      </node>
+      <node id="1398">
+        <label>Source/Azura/RenderSystem/Inc/Vulkan/VkMacros.h</label>
+        <link refid="_vk_macros_8h_source"/>
+      </node>
+    </invincdepgraph>
+    <innernamespace refid="namespace_azura">Azura</innernamespace>
+    <innernamespace refid="namespace_azura_1_1_vulkan">Azura::Vulkan</innernamespace>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <programlisting>
+<codeline lineno="1"><highlight class="preprocessor">#pragma<sp/>once</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="2"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&lt;vulkan/vulkan_core.h&gt;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="3"><highlight class="normal"></highlight></codeline>
+<codeline lineno="4"><highlight class="normal"></highlight><highlight class="keyword">namespace<sp/></highlight><highlight class="normal"><ref refid="namespace_azura" kindref="compound">Azura</ref><sp/>{</highlight></codeline>
+<codeline lineno="5"><highlight class="normal"></highlight><highlight class="keyword">namespace<sp/></highlight><highlight class="normal">Vulkan<sp/>{</highlight></codeline>
+<codeline lineno="6"><highlight class="normal"></highlight></codeline>
+<codeline lineno="12"><highlight class="keyword">const</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">char</highlight><highlight class="normal">*<sp/>VkResultToString(</highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>VkResult<sp/>err);</highlight></codeline>
+<codeline lineno="13"><highlight class="normal"></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">char</highlight><highlight class="normal">*<sp/>VkPhysicalDeviceTypeToString(</highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>VkPhysicalDeviceType<sp/>deviceType);</highlight></codeline>
+<codeline lineno="14"><highlight class="normal">}<sp/></highlight><highlight class="comment">//<sp/>namespace<sp/>Vulkan</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="15"><highlight class="normal">}<sp/></highlight><highlight class="comment">//<sp/>namespace<sp/>Azura</highlight><highlight class="normal"></highlight></codeline>
+    </programlisting>
+    <location file="Source/Azura/RenderSystem/Inc/Vulkan/VkDebug.h"/>
+  </compounddef>
+</doxygen>

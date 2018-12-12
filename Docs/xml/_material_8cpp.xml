@@ -1,0 +1,97 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.8.14">
+  <compounddef id="_material_8cpp" kind="file" language="C++">
+    <compoundname>Material.cpp</compoundname>
+    <includes refid="_material_8h" local="yes">Material.h</includes>
+    <includes local="yes">../../Interfaces/ImageHandler.h</includes>
+    <incdepgraph>
+      <node id="5096">
+        <label>mathfu/vector.h</label>
+      </node>
+      <node id="5099">
+        <label>Constants.h</label>
+        <link refid="_dibella_2_inc_2_core_2_constants_8h_source"/>
+        <childnode refid="5091" relation="include">
+        </childnode>
+      </node>
+      <node id="5090">
+        <label>Material.h</label>
+        <link refid="_material_8h_source"/>
+        <childnode refid="5091" relation="include">
+        </childnode>
+        <childnode refid="5097" relation="include">
+        </childnode>
+      </node>
+      <node id="5097">
+        <label>../../Core/Utils.h</label>
+        <link refid="_dibella_2_inc_2_core_2_utils_8h_source"/>
+        <childnode refid="5098" relation="include">
+        </childnode>
+        <childnode refid="5099" relation="include">
+        </childnode>
+        <childnode refid="5091" relation="include">
+        </childnode>
+      </node>
+      <node id="5100">
+        <label>../../Interfaces/ImageHandler.h</label>
+      </node>
+      <node id="5094">
+        <label>string</label>
+      </node>
+      <node id="5091">
+        <label>../../Core/Types.h</label>
+        <link refid="_dibella_2_inc_2_core_2_types_8h_source"/>
+        <childnode refid="5092" relation="include">
+        </childnode>
+        <childnode refid="5093" relation="include">
+        </childnode>
+        <childnode refid="5094" relation="include">
+        </childnode>
+        <childnode refid="5095" relation="include">
+        </childnode>
+        <childnode refid="5096" relation="include">
+        </childnode>
+      </node>
+      <node id="5089">
+        <label>Source/Dibella/Src/Materials/Primitives/Material.cpp</label>
+        <link refid="_material_8cpp"/>
+        <childnode refid="5090" relation="include">
+        </childnode>
+        <childnode refid="5100" relation="include">
+        </childnode>
+      </node>
+      <node id="5092">
+        <label>ToolsCore.h</label>
+      </node>
+      <node id="5093">
+        <label>cstddef</label>
+      </node>
+      <node id="5095">
+        <label>mathfu/matrix.h</label>
+      </node>
+      <node id="5098">
+        <label>algorithm</label>
+      </node>
+    </incdepgraph>
+    <innernamespace refid="namespace_dibella">Dibella</innernamespace>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <programlisting>
+<codeline lineno="1"><highlight class="preprocessor">#include<sp/>&quot;Material.h&quot;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="2"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&quot;../../Interfaces/ImageHandler.h&quot;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="3"><highlight class="normal"></highlight></codeline>
+<codeline lineno="4"><highlight class="normal"></highlight><highlight class="keyword">namespace<sp/></highlight><highlight class="normal"><ref refid="namespace_dibella" kindref="compound">Dibella</ref><sp/>{</highlight></codeline>
+<codeline lineno="5"><highlight class="normal">Color3f<sp/>Material::GetImageColor(</highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>Point2f&amp;<sp/>uv,<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>ImageHandler*<sp/>handle)<sp/>{</highlight></codeline>
+<codeline lineno="6"><highlight class="normal"><sp/><sp/></highlight><highlight class="keywordflow">if</highlight><highlight class="normal"><sp/>(handle<sp/>==<sp/></highlight><highlight class="keyword">nullptr</highlight><highlight class="normal">)<sp/>{</highlight></codeline>
+<codeline lineno="7"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>Color3f(1.0f);</highlight></codeline>
+<codeline lineno="8"><highlight class="normal"><sp/><sp/>}</highlight></codeline>
+<codeline lineno="9"><highlight class="normal"></highlight></codeline>
+<codeline lineno="10"><highlight class="normal"><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>handle-&gt;GetPixel(UVToPixelSpace(uv,<sp/>handle-&gt;GetWidth(),<sp/>handle-&gt;GetHeight()));</highlight></codeline>
+<codeline lineno="11"><highlight class="normal">}</highlight></codeline>
+<codeline lineno="12"><highlight class="normal">}<sp/><sp/></highlight><highlight class="comment">//<sp/>namespace<sp/>Dibella</highlight><highlight class="normal"></highlight></codeline>
+    </programlisting>
+    <location file="Source/Dibella/Src/Materials/Primitives/Material.cpp"/>
+  </compounddef>
+</doxygen>

@@ -81,6 +81,9 @@ def buildExecutableMap(config, platform):
   executableMap['ctest'] = config['cmake'] + sep + 'ctest' + ext
   executableMap['clang-tidy'] = config['llvm'] + sep + 'clang-tidy' + ext
 
+  if ('doxygen' in config):
+    executableMap['doxygen'] = config['doxygen'] + sep + 'doxygen' + ext
+
 def printConfig(item):
   for key, value in item.iteritems():
     message = "Using %32s = " % key.upper()
@@ -230,6 +233,18 @@ def run():
   az_log.info('> Executable Config:')
   buildExecutableMap(hostExternalConfig, hostOS)
   printConfig(executableMap)
+
+  if (buildArgs.docs):
+    az_log.info('> Building Docs:')
+    print("Building Doxygen XML")
+    docsCommand = [executableMap['doxygen'], 'Doxyfile']
+    executeCommand(docsCommand)
+    print("Building Markdown Files")
+    # moxygen --anchors --groups --output "Docs/Module - %s.md" Docs/xml/
+    docsCommand = ['moxygen', '--anchors', '--groups', '--output "Docs/Module - %s.md" Docs/xml/']
+    executeCommand(docsCommand)
+    az_log.flush();
+    return
 
   cmakeDefines = {}
   if (buildArgs.cmakeConfigFile):

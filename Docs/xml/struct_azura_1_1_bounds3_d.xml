@@ -1,0 +1,102 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.8.14">
+  <compounddef id="struct_azura_1_1_bounds3_d" kind="struct" language="C++" prot="public">
+    <compoundname>Azura::Bounds3D</compoundname>
+      <sectiondef kind="public-attrib">
+      <memberdef kind="variable" id="struct_azura_1_1_bounds3_d_1ac1005984f7b97b9a4580d28e19a3f88d" prot="public" static="no" mutable="no">
+        <type>U32</type>
+        <definition>U32 Azura::Bounds3D::m_width</definition>
+        <argsstring></argsstring>
+        <name>m_width</name>
+        <initializer>{1}</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Source/Azura/RenderSystem/Inc/Generic/GenericTypes.h" line="184" column="1" bodyfile="Source/Azura/RenderSystem/Inc/Generic/GenericTypes.h" bodystart="184" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="struct_azura_1_1_bounds3_d_1a2572bf91b551f2d24fe1dac1ba91e35e" prot="public" static="no" mutable="no">
+        <type>U32</type>
+        <definition>U32 Azura::Bounds3D::m_height</definition>
+        <argsstring></argsstring>
+        <name>m_height</name>
+        <initializer>{1}</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Source/Azura/RenderSystem/Inc/Generic/GenericTypes.h" line="185" column="1" bodyfile="Source/Azura/RenderSystem/Inc/Generic/GenericTypes.h" bodystart="185" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="struct_azura_1_1_bounds3_d_1a5601c88eaaa48fd9267baab34da3d4ab" prot="public" static="no" mutable="no">
+        <type>U32</type>
+        <definition>U32 Azura::Bounds3D::m_depth</definition>
+        <argsstring></argsstring>
+        <name>m_depth</name>
+        <initializer>{1}</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Source/Azura/RenderSystem/Inc/Generic/GenericTypes.h" line="186" column="1" bodyfile="Source/Azura/RenderSystem/Inc/Generic/GenericTypes.h" bodystart="186" bodyend="-1"/>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="public-func">
+      <memberdef kind="function" id="struct_azura_1_1_bounds3_d_1aaf080e29eea59a0c49ea11a9a603146d" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type></type>
+        <definition>Azura::Bounds3D::Bounds3D</definition>
+        <argsstring>(U32 width, U32 height, U32 depth)</argsstring>
+        <name>Bounds3D</name>
+        <param>
+          <type>U32</type>
+          <declname>width</declname>
+        </param>
+        <param>
+          <type>U32</type>
+          <declname>height</declname>
+        </param>
+        <param>
+          <type>U32</type>
+          <declname>depth</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Source/Azura/RenderSystem/Inc/Generic/GenericTypes.h" line="188" column="1" bodyfile="Source/Azura/RenderSystem/Inc/Generic/GenericTypes.h" bodystart="188" bodyend="193"/>
+      </memberdef>
+      <memberdef kind="function" id="struct_azura_1_1_bounds3_d_1a6315cab2c1be2fc25760a1b2fb15bfe0" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <type>U32</type>
+        <definition>U32 Azura::Bounds3D::GetSize</definition>
+        <argsstring>() const</argsstring>
+        <name>GetSize</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Source/Azura/RenderSystem/Inc/Generic/GenericTypes.h" line="195" column="1" bodyfile="Source/Azura/RenderSystem/Inc/Generic/GenericTypes.h" bodystart="195" bodyend="197"/>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <location file="Source/Azura/RenderSystem/Inc/Generic/GenericTypes.h" line="183" column="1" bodyfile="Source/Azura/RenderSystem/Inc/Generic/GenericTypes.h" bodystart="183" bodyend="198"/>
+    <listofallmembers>
+      <member refid="struct_azura_1_1_bounds3_d_1aaf080e29eea59a0c49ea11a9a603146d" prot="public" virt="non-virtual"><scope>Azura::Bounds3D</scope><name>Bounds3D</name></member>
+      <member refid="struct_azura_1_1_bounds3_d_1a6315cab2c1be2fc25760a1b2fb15bfe0" prot="public" virt="non-virtual"><scope>Azura::Bounds3D</scope><name>GetSize</name></member>
+      <member refid="struct_azura_1_1_bounds3_d_1a5601c88eaaa48fd9267baab34da3d4ab" prot="public" virt="non-virtual"><scope>Azura::Bounds3D</scope><name>m_depth</name></member>
+      <member refid="struct_azura_1_1_bounds3_d_1a2572bf91b551f2d24fe1dac1ba91e35e" prot="public" virt="non-virtual"><scope>Azura::Bounds3D</scope><name>m_height</name></member>
+      <member refid="struct_azura_1_1_bounds3_d_1ac1005984f7b97b9a4580d28e19a3f88d" prot="public" virt="non-virtual"><scope>Azura::Bounds3D</scope><name>m_width</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

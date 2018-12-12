@@ -1,0 +1,141 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.8.14">
+  <compounddef id="_scene_object_8cpp" kind="file" language="C++">
+    <compoundname>SceneObject.cpp</compoundname>
+    <includes refid="_scene_object_8h" local="yes">SceneObject.h</includes>
+    <includes local="yes">../../Materials/Primitives/Material.h</includes>
+    <includes local="yes">../../RayTracing/Primitives/Intersection.h</includes>
+    <includes refid="_shape_8h" local="yes">Shape.h</includes>
+    <incdepgraph>
+      <node id="5138">
+        <label>mathfu/vector.h</label>
+      </node>
+      <node id="5136">
+        <label>string</label>
+      </node>
+      <node id="5141">
+        <label>Shape.h</label>
+        <link refid="_shape_8h_source"/>
+        <childnode refid="5133" relation="include">
+        </childnode>
+        <childnode refid="5142" relation="include">
+        </childnode>
+        <childnode refid="5144" relation="include">
+        </childnode>
+      </node>
+      <node id="5139">
+        <label>../../Materials/Primitives/Material.h</label>
+      </node>
+      <node id="5144">
+        <label>Transform.h</label>
+        <link refid="_dibella_2_inc_2_scene_2_primitives_2_transform_8h_source"/>
+        <childnode refid="5133" relation="include">
+        </childnode>
+      </node>
+      <node id="5133">
+        <label>../../Core/Types.h</label>
+        <link refid="_dibella_2_inc_2_core_2_types_8h_source"/>
+        <childnode refid="5134" relation="include">
+        </childnode>
+        <childnode refid="5135" relation="include">
+        </childnode>
+        <childnode refid="5136" relation="include">
+        </childnode>
+        <childnode refid="5137" relation="include">
+        </childnode>
+        <childnode refid="5138" relation="include">
+        </childnode>
+      </node>
+      <node id="5143">
+        <label>Ray.h</label>
+        <link refid="_ray_8h_source"/>
+        <childnode refid="5133" relation="include">
+        </childnode>
+      </node>
+      <node id="5140">
+        <label>../../RayTracing/Primitives/Intersection.h</label>
+      </node>
+      <node id="5142">
+        <label>../../RayTracing/Primitives/Intersection.h</label>
+        <link refid="_intersection_8h_source"/>
+        <childnode refid="5133" relation="include">
+        </childnode>
+        <childnode refid="5143" relation="include">
+        </childnode>
+      </node>
+      <node id="5134">
+        <label>ToolsCore.h</label>
+      </node>
+      <node id="5135">
+        <label>cstddef</label>
+      </node>
+      <node id="5132">
+        <label>SceneObject.h</label>
+        <link refid="_scene_object_8h_source"/>
+        <childnode refid="5133" relation="include">
+        </childnode>
+      </node>
+      <node id="5137">
+        <label>mathfu/matrix.h</label>
+      </node>
+      <node id="5131">
+        <label>Source/Dibella/Src/Scene/Primitives/SceneObject.cpp</label>
+        <link refid="_scene_object_8cpp"/>
+        <childnode refid="5132" relation="include">
+        </childnode>
+        <childnode refid="5139" relation="include">
+        </childnode>
+        <childnode refid="5140" relation="include">
+        </childnode>
+        <childnode refid="5141" relation="include">
+        </childnode>
+      </node>
+    </incdepgraph>
+    <innernamespace refid="namespace_dibella">Dibella</innernamespace>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <programlisting>
+<codeline lineno="1"><highlight class="preprocessor">#include<sp/>&quot;SceneObject.h&quot;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="2"><highlight class="normal"></highlight></codeline>
+<codeline lineno="3"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&quot;../../Materials/Primitives/Material.h&quot;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="4"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&quot;../../RayTracing/Primitives/Intersection.h&quot;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="5"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&quot;Shape.h&quot;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="6"><highlight class="normal"></highlight></codeline>
+<codeline lineno="7"><highlight class="normal"></highlight><highlight class="keyword">namespace<sp/></highlight><highlight class="normal"><ref refid="namespace_dibella" kindref="compound">Dibella</ref><sp/>{</highlight></codeline>
+<codeline lineno="8"><highlight class="normal">SceneObject::SceneObject()<sp/>:<sp/>mName(</highlight><highlight class="stringliteral">&quot;Some<sp/>SceneObject&quot;</highlight><highlight class="normal">),<sp/>mShape(nullptr),<sp/>mMaterial(nullptr),<sp/>mLight(nullptr)<sp/>{}</highlight></codeline>
+<codeline lineno="9"><highlight class="normal"></highlight></codeline>
+<codeline lineno="10"><highlight class="normal">SceneObject::SceneObject(Shape*<sp/>shape,<sp/>Material*<sp/>material,<sp/>Light*<sp/>light)</highlight></codeline>
+<codeline lineno="11"><highlight class="normal"><sp/><sp/><sp/><sp/>:<sp/>mShape(shape),<sp/>mMaterial(material),<sp/>mLight(light)<sp/>{}</highlight></codeline>
+<codeline lineno="12"><highlight class="normal"></highlight></codeline>
+<codeline lineno="13"><highlight class="normal"></highlight><highlight class="keywordtype">bool</highlight><highlight class="normal"><sp/>SceneObject::Intersect(</highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>Ray&amp;<sp/>r,<sp/>Intersection*<sp/>isect)</highlight><highlight class="keyword"><sp/>const<sp/></highlight><highlight class="normal">{</highlight></codeline>
+<codeline lineno="14"><highlight class="normal"><sp/><sp/></highlight><highlight class="keywordflow">if</highlight><highlight class="normal"><sp/>(!mShape-&gt;Intersect(r,<sp/>isect))<sp/>{</highlight></codeline>
+<codeline lineno="15"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">false</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="16"><highlight class="normal"><sp/><sp/>}</highlight></codeline>
+<codeline lineno="17"><highlight class="normal"></highlight></codeline>
+<codeline lineno="18"><highlight class="normal"><sp/><sp/>isect-&gt;mTargetHit<sp/>=<sp/></highlight><highlight class="keyword">this</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="19"><highlight class="normal"><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">true</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="20"><highlight class="normal">}</highlight></codeline>
+<codeline lineno="21"><highlight class="normal"></highlight></codeline>
+<codeline lineno="22"><highlight class="normal"></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>Light*<sp/>SceneObject::GetLight()</highlight><highlight class="keyword"><sp/>const<sp/></highlight><highlight class="normal">{</highlight></codeline>
+<codeline lineno="23"><highlight class="normal"><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>mLight;</highlight></codeline>
+<codeline lineno="24"><highlight class="normal">}</highlight></codeline>
+<codeline lineno="25"><highlight class="normal"></highlight></codeline>
+<codeline lineno="26"><highlight class="normal"></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>Material*<sp/>SceneObject::GetMaterial()</highlight><highlight class="keyword"><sp/>const<sp/></highlight><highlight class="normal">{</highlight></codeline>
+<codeline lineno="27"><highlight class="normal"><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>mMaterial;</highlight></codeline>
+<codeline lineno="28"><highlight class="normal">}</highlight></codeline>
+<codeline lineno="29"><highlight class="normal"></highlight></codeline>
+<codeline lineno="30"><highlight class="normal"></highlight><highlight class="keywordtype">bool</highlight><highlight class="normal"><sp/>SceneObject::GenerateBSDF(Intersection*<sp/>isect,<sp/>Allocator*<sp/>allocator)</highlight><highlight class="keyword"><sp/>const<sp/></highlight><highlight class="normal">{</highlight></codeline>
+<codeline lineno="31"><highlight class="normal"><sp/><sp/></highlight><highlight class="keywordflow">if</highlight><highlight class="normal"><sp/>(mMaterial)<sp/>{</highlight></codeline>
+<codeline lineno="32"><highlight class="normal"><sp/><sp/><sp/><sp/>mMaterial-&gt;GenerateBSDF(isect,<sp/>allocator);</highlight></codeline>
+<codeline lineno="33"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">true</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="34"><highlight class="normal"><sp/><sp/>}</highlight></codeline>
+<codeline lineno="35"><highlight class="normal"></highlight></codeline>
+<codeline lineno="36"><highlight class="normal"><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">false</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="37"><highlight class="normal">}</highlight></codeline>
+<codeline lineno="38"><highlight class="normal">}<sp/><sp/></highlight><highlight class="comment">//<sp/>namespace<sp/>Dibella</highlight><highlight class="normal"></highlight></codeline>
+    </programlisting>
+    <location file="Source/Dibella/Src/Scene/Primitives/SceneObject.cpp"/>
+  </compounddef>
+</doxygen>

@@ -1,0 +1,112 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.8.14">
+  <compounddef id="_i_physics_geometry_8h" kind="file" language="C++">
+    <compoundname>IPhysicsGeometry.h</compoundname>
+    <includes refid="_geometry_8h" local="yes">Math/Geometry.h</includes>
+    <includedby refid="_i_cloth_physics_geometry_8h" local="yes">Source/Physics/Inc/Physics/Geometry/IClothPhysicsGeometry.h</includedby>
+    <incdepgraph>
+      <node id="5486">
+        <label>Core/RawStorageFormat.h</label>
+        <link refid="_raw_storage_format_8h_source"/>
+        <childnode refid="5485" relation="include">
+        </childnode>
+        <childnode refid="5487" relation="include">
+        </childnode>
+        <childnode refid="5488" relation="include">
+        </childnode>
+        <childnode refid="5489" relation="include">
+        </childnode>
+        <childnode refid="5490" relation="include">
+        </childnode>
+        <childnode refid="5491" relation="include">
+        </childnode>
+      </node>
+      <node id="5490">
+        <label>boost/preprocessor/tuple/elem.hpp</label>
+      </node>
+      <node id="5491">
+        <label>boost/detail/bitmask.hpp</label>
+      </node>
+      <node id="5483">
+        <label>Source/Physics/Inc/Physics/Geometry/IPhysicsGeometry.h</label>
+        <link refid="_i_physics_geometry_8h"/>
+        <childnode refid="5484" relation="include">
+        </childnode>
+      </node>
+      <node id="5487">
+        <label>tuple</label>
+      </node>
+      <node id="5484">
+        <label>Math/Geometry.h</label>
+        <link refid="_geometry_8h_source"/>
+        <childnode refid="5485" relation="include">
+        </childnode>
+        <childnode refid="5486" relation="include">
+        </childnode>
+      </node>
+      <node id="5488">
+        <label>boost/preprocessor/repetition/repeat.hpp</label>
+      </node>
+      <node id="5485">
+        <label>Types.h</label>
+      </node>
+      <node id="5489">
+        <label>boost/preprocessor/seq/for_each.hpp</label>
+      </node>
+    </incdepgraph>
+    <invincdepgraph>
+      <node id="5496">
+        <label>Source/Physics/Inc/Physics/Geometry/ClothPlane.h</label>
+        <link refid="_cloth_plane_8h_source"/>
+        <childnode refid="5495" relation="include">
+        </childnode>
+      </node>
+      <node id="5495">
+        <label>Source/Samples/3_ClothSim/Inc/ClothSim/AppRenderer.h</label>
+        <link refid="3___cloth_sim_2_inc_2_cloth_sim_2_app_renderer_8h_source"/>
+      </node>
+      <node id="5492">
+        <label>Source/Physics/Inc/Physics/Geometry/IPhysicsGeometry.h</label>
+        <link refid="_i_physics_geometry_8h"/>
+        <childnode refid="5493" relation="include">
+        </childnode>
+      </node>
+      <node id="5493">
+        <label>Source/Physics/Inc/Physics/Geometry/IClothPhysicsGeometry.h</label>
+        <link refid="_i_cloth_physics_geometry_8h_source"/>
+        <childnode refid="5494" relation="include">
+        </childnode>
+        <childnode refid="5496" relation="include">
+        </childnode>
+      </node>
+      <node id="5494">
+        <label>Source/Physics/Inc/Physics/Geometry/ClothMesh.h</label>
+        <link refid="_physics_2_inc_2_physics_2_geometry_2_cloth_mesh_8h_source"/>
+        <childnode refid="5495" relation="include">
+        </childnode>
+      </node>
+    </invincdepgraph>
+    <innerclass refid="class_azura_1_1_physics_1_1_i_physics_geometry" prot="public">Azura::Physics::IPhysicsGeometry</innerclass>
+    <innernamespace refid="namespace_azura">Azura</innernamespace>
+    <innernamespace refid="namespace_azura_1_1_physics">Azura::Physics</innernamespace>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <programlisting>
+<codeline lineno="1"><highlight class="preprocessor">#pragma<sp/>once</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="2"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&quot;Math/Geometry.h&quot;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="3"><highlight class="normal"></highlight></codeline>
+<codeline lineno="4"><highlight class="normal"></highlight><highlight class="keyword">namespace<sp/></highlight><highlight class="normal"><ref refid="namespace_azura" kindref="compound">Azura</ref><sp/>{</highlight></codeline>
+<codeline lineno="5"><highlight class="normal"></highlight><highlight class="keyword">namespace<sp/></highlight><highlight class="normal">Physics<sp/>{</highlight></codeline>
+<codeline lineno="6"><highlight class="normal"></highlight></codeline>
+<codeline lineno="7" refid="class_azura_1_1_physics_1_1_i_physics_geometry" refkind="compound"><highlight class="normal"></highlight><highlight class="keyword">class<sp/></highlight><highlight class="normal"><ref refid="class_azura_1_1_physics_1_1_i_physics_geometry" kindref="compound">IPhysicsGeometry</ref><sp/>:<sp/></highlight><highlight class="keyword">public</highlight><highlight class="normal"><sp/><ref refid="class_azura_1_1_math_1_1_geometry" kindref="compound">Math::Geometry</ref><sp/>{</highlight></codeline>
+<codeline lineno="8"><highlight class="normal"></highlight><highlight class="keyword">public</highlight><highlight class="normal">:</highlight></codeline>
+<codeline lineno="9"><highlight class="normal">};</highlight></codeline>
+<codeline lineno="10"><highlight class="normal"></highlight></codeline>
+<codeline lineno="11"><highlight class="normal">}<sp/></highlight><highlight class="comment">//<sp/>namespace<sp/>Physics</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="12"><highlight class="normal">}<sp/></highlight><highlight class="comment">//<sp/>namespace<sp/>Azura</highlight><highlight class="normal"></highlight></codeline>
+    </programlisting>
+    <location file="Source/Physics/Inc/Physics/Geometry/IPhysicsGeometry.h"/>
+  </compounddef>
+</doxygen>

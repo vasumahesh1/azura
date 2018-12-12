@@ -1,0 +1,571 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.8.14">
+  <compounddef id="class_azura_1_1_containers_1_1_vector_1_1_iterator" kind="class" language="C++" prot="public">
+    <compoundname>Azura::Containers::Vector::Iterator</compoundname>
+      <sectiondef kind="public-type">
+      <memberdef kind="typedef" id="class_azura_1_1_containers_1_1_vector_1_1_iterator_1aecb5d648b44a857de1f86493ea88a728" prot="public" static="no">
+        <type>std::random_access_iterator_tag</type>
+        <definition>using Azura::Containers::Vector&lt; Type &gt;::Iterator::iterator_category =  std::random_access_iterator_tag</definition>
+        <argsstring></argsstring>
+        <name>iterator_category</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Source/Containers/Inc/Containers/Vector.h" line="152" column="1" bodyfile="Source/Containers/Inc/Containers/Vector.h" bodystart="152" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="typedef" id="class_azura_1_1_containers_1_1_vector_1_1_iterator_1af07ed38fc881e1a2ec7c5bbe567e493b" prot="public" static="no">
+        <type>Type</type>
+        <definition>using Azura::Containers::Vector&lt; Type &gt;::Iterator::value_type =  Type</definition>
+        <argsstring></argsstring>
+        <name>value_type</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Source/Containers/Inc/Containers/Vector.h" line="153" column="1" bodyfile="Source/Containers/Inc/Containers/Vector.h" bodystart="153" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="typedef" id="class_azura_1_1_containers_1_1_vector_1_1_iterator_1a2e87006386373176d26f9033d574472f" prot="public" static="no">
+        <type>int</type>
+        <definition>using Azura::Containers::Vector&lt; Type &gt;::Iterator::difference_type =  int</definition>
+        <argsstring></argsstring>
+        <name>difference_type</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Source/Containers/Inc/Containers/Vector.h" line="154" column="1" bodyfile="Source/Containers/Inc/Containers/Vector.h" bodystart="154" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="typedef" id="class_azura_1_1_containers_1_1_vector_1_1_iterator_1adaa4c0480ed1e2a5f04d8c7e84e80349" prot="public" static="no">
+        <type>Type *</type>
+        <definition>using Azura::Containers::Vector&lt; Type &gt;::Iterator::pointer =  Type*</definition>
+        <argsstring></argsstring>
+        <name>pointer</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Source/Containers/Inc/Containers/Vector.h" line="155" column="1" bodyfile="Source/Containers/Inc/Containers/Vector.h" bodystart="155" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="typedef" id="class_azura_1_1_containers_1_1_vector_1_1_iterator_1a23f491d759145ca662290968dbc1cf51" prot="public" static="no">
+        <type>Type &amp;</type>
+        <definition>using Azura::Containers::Vector&lt; Type &gt;::Iterator::reference =  Type&amp;</definition>
+        <argsstring></argsstring>
+        <name>reference</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Source/Containers/Inc/Containers/Vector.h" line="156" column="1" bodyfile="Source/Containers/Inc/Containers/Vector.h" bodystart="156" bodyend="-1"/>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="private-attrib">
+      <memberdef kind="variable" id="class_azura_1_1_containers_1_1_vector_1_1_iterator_1a35a2f4fc19a31a9b8b2a74db3a1b2e83" prot="private" static="no" mutable="no">
+        <type>const <ref refid="class_azura_1_1_containers_1_1_vector" kindref="compound">Vector</ref>&lt; Type &gt; *</type>
+        <definition>const Vector&lt;Type&gt;* Azura::Containers::Vector&lt; Type &gt;::Iterator::mPtr</definition>
+        <argsstring></argsstring>
+        <name>mPtr</name>
+        <initializer>{nullptr}</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Source/Containers/Inc/Containers/Vector.h" line="265" column="1" bodyfile="Source/Containers/Inc/Containers/Vector.h" bodystart="265" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="class_azura_1_1_containers_1_1_vector_1_1_iterator_1a42e528c6886429b3f0b379ce6320ceb3" prot="private" static="no" mutable="no">
+        <type>int</type>
+        <definition>int Azura::Containers::Vector&lt; Type &gt;::Iterator::mIndex</definition>
+        <argsstring></argsstring>
+        <name>mIndex</name>
+        <initializer>{-1}</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Source/Containers/Inc/Containers/Vector.h" line="266" column="1" bodyfile="Source/Containers/Inc/Containers/Vector.h" bodystart="266" bodyend="-1"/>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="public-func">
+      <memberdef kind="function" id="class_azura_1_1_containers_1_1_vector_1_1_iterator_1acfa041ed3ef71f6040f39d0e09b4c8f7" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>Azura::Containers::Vector&lt; Type &gt;::Iterator::Iterator</definition>
+        <argsstring>()=default</argsstring>
+        <name>Iterator</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Source/Containers/Inc/Containers/Vector.h" line="147" column="1"/>
+      </memberdef>
+      <memberdef kind="function" id="class_azura_1_1_containers_1_1_vector_1_1_iterator_1a162f9659467fa77d572fa4fb5b9ec3bb" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>Azura::Containers::Vector&lt; Type &gt;::Iterator::~Iterator</definition>
+        <argsstring>()=default</argsstring>
+        <name>~Iterator</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Source/Containers/Inc/Containers/Vector.h" line="148" column="1"/>
+      </memberdef>
+      <memberdef kind="function" id="class_azura_1_1_containers_1_1_vector_1_1_iterator_1a574766424a2a773a7db57066acc04d66" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>Azura::Containers::Vector&lt; Type &gt;::Iterator::Iterator</definition>
+        <argsstring>(const Iterator &amp;other)=default</argsstring>
+        <name>Iterator</name>
+        <param>
+          <type>const <ref refid="class_azura_1_1_containers_1_1_vector_1_1_iterator" kindref="compound">Iterator</ref> &amp;</type>
+          <declname>other</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Source/Containers/Inc/Containers/Vector.h" line="149" column="1"/>
+      </memberdef>
+      <memberdef kind="function" id="class_azura_1_1_containers_1_1_vector_1_1_iterator_1af3149f451bcbab6e20a039bb875bf556" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="class_azura_1_1_containers_1_1_vector_1_1_iterator" kindref="compound">Iterator</ref> &amp;</type>
+        <definition>Iterator&amp; Azura::Containers::Vector&lt; Type &gt;::Iterator::operator=</definition>
+        <argsstring>(const Iterator &amp;other)=default</argsstring>
+        <name>operator=</name>
+        <param>
+          <type>const <ref refid="class_azura_1_1_containers_1_1_vector_1_1_iterator" kindref="compound">Iterator</ref> &amp;</type>
+          <declname>other</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Source/Containers/Inc/Containers/Vector.h" line="150" column="1"/>
+      </memberdef>
+      <memberdef kind="function" id="class_azura_1_1_containers_1_1_vector_1_1_iterator_1a76b9d4e3b9789e385abd29669f669bad" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type></type>
+        <definition>Azura::Containers::Vector&lt; Type &gt;::Iterator::Iterator</definition>
+        <argsstring>(const Vector *ptr, int index)</argsstring>
+        <name>Iterator</name>
+        <param>
+          <type>const <ref refid="class_azura_1_1_containers_1_1_vector" kindref="compound">Vector</ref> *</type>
+          <declname>ptr</declname>
+        </param>
+        <param>
+          <type>int</type>
+          <declname>index</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Source/Containers/Inc/Containers/Vector.h" line="158" column="1" bodyfile="Source/Containers/Inc/Containers/Vector.h" bodystart="158" bodyend="161"/>
+      </memberdef>
+      <memberdef kind="function" id="class_azura_1_1_containers_1_1_vector_1_1_iterator_1a3f27d5a62b0c22537083afb53069b0b6" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>Azura::Containers::Vector&lt; Type &gt;::Iterator::Iterator</definition>
+        <argsstring>(Iterator &amp;&amp;other) noexcept=default</argsstring>
+        <name>Iterator</name>
+        <param>
+          <type><ref refid="class_azura_1_1_containers_1_1_vector_1_1_iterator" kindref="compound">Iterator</ref> &amp;&amp;</type>
+          <declname>other</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Source/Containers/Inc/Containers/Vector.h" line="163" column="1"/>
+      </memberdef>
+      <memberdef kind="function" id="class_azura_1_1_containers_1_1_vector_1_1_iterator_1a7cf9fd2f5f7a8cebd0934aaafbbcaf63" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="class_azura_1_1_containers_1_1_vector_1_1_iterator" kindref="compound">Iterator</ref> &amp;</type>
+        <definition>Iterator&amp; Azura::Containers::Vector&lt; Type &gt;::Iterator::operator=</definition>
+        <argsstring>(Iterator &amp;&amp;other) noexcept=default</argsstring>
+        <name>operator=</name>
+        <param>
+          <type><ref refid="class_azura_1_1_containers_1_1_vector_1_1_iterator" kindref="compound">Iterator</ref> &amp;&amp;</type>
+          <declname>other</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Source/Containers/Inc/Containers/Vector.h" line="164" column="1"/>
+      </memberdef>
+      <memberdef kind="function" id="class_azura_1_1_containers_1_1_vector_1_1_iterator_1a979da8f970d715c01ab7534f6a3c4de0" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type><ref refid="class_azura_1_1_containers_1_1_vector_1_1_iterator" kindref="compound">Iterator</ref> &amp;</type>
+        <definition>Iterator&amp; Azura::Containers::Vector&lt; Type &gt;::Iterator::operator++</definition>
+        <argsstring>()</argsstring>
+        <name>operator++</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Source/Containers/Inc/Containers/Vector.h" line="167" column="1" bodyfile="Source/Containers/Inc/Containers/Vector.h" bodystart="167" bodyend="170"/>
+      </memberdef>
+      <memberdef kind="function" id="class_azura_1_1_containers_1_1_vector_1_1_iterator_1af605a2a5a0702ed63a75c78cce2fcdf6" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type><ref refid="class_azura_1_1_containers_1_1_vector_1_1_iterator" kindref="compound">Iterator</ref></type>
+        <definition>Iterator Azura::Containers::Vector&lt; Type &gt;::Iterator::operator++</definition>
+        <argsstring>(int)</argsstring>
+        <name>operator++</name>
+        <param>
+          <type>int</type>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Source/Containers/Inc/Containers/Vector.h" line="173" column="1" bodyfile="Source/Containers/Inc/Containers/Vector.h" bodystart="173" bodyend="177"/>
+      </memberdef>
+      <memberdef kind="function" id="class_azura_1_1_containers_1_1_vector_1_1_iterator_1a6f002266c0919cb3df3833e894402612" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type><ref refid="class_azura_1_1_containers_1_1_vector_1_1_iterator" kindref="compound">Iterator</ref> &amp;</type>
+        <definition>Iterator&amp; Azura::Containers::Vector&lt; Type &gt;::Iterator::operator--</definition>
+        <argsstring>()</argsstring>
+        <name>operator--</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Source/Containers/Inc/Containers/Vector.h" line="180" column="1" bodyfile="Source/Containers/Inc/Containers/Vector.h" bodystart="180" bodyend="183"/>
+      </memberdef>
+      <memberdef kind="function" id="class_azura_1_1_containers_1_1_vector_1_1_iterator_1a3d331aba5acd78bdc362fc1554866a29" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type><ref refid="class_azura_1_1_containers_1_1_vector_1_1_iterator" kindref="compound">Iterator</ref></type>
+        <definition>Iterator Azura::Containers::Vector&lt; Type &gt;::Iterator::operator--</definition>
+        <argsstring>(int)</argsstring>
+        <name>operator--</name>
+        <param>
+          <type>int</type>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Source/Containers/Inc/Containers/Vector.h" line="186" column="1" bodyfile="Source/Containers/Inc/Containers/Vector.h" bodystart="186" bodyend="190"/>
+      </memberdef>
+      <memberdef kind="function" id="class_azura_1_1_containers_1_1_vector_1_1_iterator_1ac43354d9be9c91b10c46d2f2ad8e26d2" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool Azura::Containers::Vector&lt; Type &gt;::Iterator::operator==</definition>
+        <argsstring>(const Iterator &amp;rhs)</argsstring>
+        <name>operator==</name>
+        <param>
+          <type>const <ref refid="class_azura_1_1_containers_1_1_vector_1_1_iterator" kindref="compound">Iterator</ref> &amp;</type>
+          <declname>rhs</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Source/Containers/Inc/Containers/Vector.h" line="192" column="1" bodyfile="Source/Containers/Inc/Containers/Vector.h" bodystart="192" bodyend="194"/>
+      </memberdef>
+      <memberdef kind="function" id="class_azura_1_1_containers_1_1_vector_1_1_iterator_1af223ef31b943242205c0189d9488067f" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool Azura::Containers::Vector&lt; Type &gt;::Iterator::operator!=</definition>
+        <argsstring>(const Iterator &amp;rhs)</argsstring>
+        <name>operator!=</name>
+        <param>
+          <type>const <ref refid="class_azura_1_1_containers_1_1_vector_1_1_iterator" kindref="compound">Iterator</ref> &amp;</type>
+          <declname>rhs</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Source/Containers/Inc/Containers/Vector.h" line="196" column="1" bodyfile="Source/Containers/Inc/Containers/Vector.h" bodystart="196" bodyend="198"/>
+      </memberdef>
+      <memberdef kind="function" id="class_azura_1_1_containers_1_1_vector_1_1_iterator_1a34e5644a80c5242f60bd1c5887a3760e" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool Azura::Containers::Vector&lt; Type &gt;::Iterator::operator&lt;</definition>
+        <argsstring>(const Iterator &amp;rhs)</argsstring>
+        <name>operator&lt;</name>
+        <param>
+          <type>const <ref refid="class_azura_1_1_containers_1_1_vector_1_1_iterator" kindref="compound">Iterator</ref> &amp;</type>
+          <declname>rhs</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Source/Containers/Inc/Containers/Vector.h" line="200" column="1" bodyfile="Source/Containers/Inc/Containers/Vector.h" bodystart="200" bodyend="203"/>
+      </memberdef>
+      <memberdef kind="function" id="class_azura_1_1_containers_1_1_vector_1_1_iterator_1abc17caa8b283404518a014eb5f246569" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool Azura::Containers::Vector&lt; Type &gt;::Iterator::operator&lt;=</definition>
+        <argsstring>(const Iterator &amp;rhs)</argsstring>
+        <name>operator&lt;=</name>
+        <param>
+          <type>const <ref refid="class_azura_1_1_containers_1_1_vector_1_1_iterator" kindref="compound">Iterator</ref> &amp;</type>
+          <declname>rhs</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Source/Containers/Inc/Containers/Vector.h" line="205" column="1" bodyfile="Source/Containers/Inc/Containers/Vector.h" bodystart="205" bodyend="208"/>
+      </memberdef>
+      <memberdef kind="function" id="class_azura_1_1_containers_1_1_vector_1_1_iterator_1a4c3d985c01083c455e7165bfe9eb2317" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool Azura::Containers::Vector&lt; Type &gt;::Iterator::operator&gt;</definition>
+        <argsstring>(const Iterator &amp;rhs)</argsstring>
+        <name>operator&gt;</name>
+        <param>
+          <type>const <ref refid="class_azura_1_1_containers_1_1_vector_1_1_iterator" kindref="compound">Iterator</ref> &amp;</type>
+          <declname>rhs</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Source/Containers/Inc/Containers/Vector.h" line="210" column="1" bodyfile="Source/Containers/Inc/Containers/Vector.h" bodystart="210" bodyend="213"/>
+      </memberdef>
+      <memberdef kind="function" id="class_azura_1_1_containers_1_1_vector_1_1_iterator_1a686007e1bbb2ccb1f7dae61ad86b34ad" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool Azura::Containers::Vector&lt; Type &gt;::Iterator::operator&gt;=</definition>
+        <argsstring>(const Iterator &amp;rhs)</argsstring>
+        <name>operator&gt;=</name>
+        <param>
+          <type>const <ref refid="class_azura_1_1_containers_1_1_vector_1_1_iterator" kindref="compound">Iterator</ref> &amp;</type>
+          <declname>rhs</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Source/Containers/Inc/Containers/Vector.h" line="215" column="1" bodyfile="Source/Containers/Inc/Containers/Vector.h" bodystart="215" bodyend="218"/>
+      </memberdef>
+      <memberdef kind="function" id="class_azura_1_1_containers_1_1_vector_1_1_iterator_1a2506b2d02a37e3d7f788d07b544729d8" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type><ref refid="class_azura_1_1_containers_1_1_vector_1_1_iterator" kindref="compound">Iterator</ref></type>
+        <definition>Iterator Azura::Containers::Vector&lt; Type &gt;::Iterator::operator+</definition>
+        <argsstring>(const int &amp;idx)</argsstring>
+        <name>operator+</name>
+        <param>
+          <type>const int &amp;</type>
+          <declname>idx</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Source/Containers/Inc/Containers/Vector.h" line="220" column="1" bodyfile="Source/Containers/Inc/Containers/Vector.h" bodystart="220" bodyend="222"/>
+      </memberdef>
+      <memberdef kind="function" id="class_azura_1_1_containers_1_1_vector_1_1_iterator_1ae34a589281bfdccbbdd84787b347db54" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type><ref refid="class_azura_1_1_containers_1_1_vector_1_1_iterator" kindref="compound">Iterator</ref> &amp;</type>
+        <definition>Iterator&amp; Azura::Containers::Vector&lt; Type &gt;::Iterator::operator+=</definition>
+        <argsstring>(const int &amp;idx)</argsstring>
+        <name>operator+=</name>
+        <param>
+          <type>const int &amp;</type>
+          <declname>idx</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Source/Containers/Inc/Containers/Vector.h" line="224" column="1" bodyfile="Source/Containers/Inc/Containers/Vector.h" bodystart="224" bodyend="227"/>
+      </memberdef>
+      <memberdef kind="function" id="class_azura_1_1_containers_1_1_vector_1_1_iterator_1a7171a0531c79f825cea673477810a5ee" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type><ref refid="class_azura_1_1_containers_1_1_vector_1_1_iterator" kindref="compound">Iterator</ref></type>
+        <definition>Iterator Azura::Containers::Vector&lt; Type &gt;::Iterator::operator-</definition>
+        <argsstring>(const int &amp;idx)</argsstring>
+        <name>operator-</name>
+        <param>
+          <type>const int &amp;</type>
+          <declname>idx</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Source/Containers/Inc/Containers/Vector.h" line="229" column="1" bodyfile="Source/Containers/Inc/Containers/Vector.h" bodystart="229" bodyend="232"/>
+      </memberdef>
+      <memberdef kind="function" id="class_azura_1_1_containers_1_1_vector_1_1_iterator_1a0ea9eb84d4befa12d31cacb4fc34ac6b" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type><ref refid="class_azura_1_1_containers_1_1_vector_1_1_iterator" kindref="compound">Iterator</ref> &amp;</type>
+        <definition>Iterator&amp; Azura::Containers::Vector&lt; Type &gt;::Iterator::operator-=</definition>
+        <argsstring>(const int &amp;idx)</argsstring>
+        <name>operator-=</name>
+        <param>
+          <type>const int &amp;</type>
+          <declname>idx</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Source/Containers/Inc/Containers/Vector.h" line="234" column="1" bodyfile="Source/Containers/Inc/Containers/Vector.h" bodystart="234" bodyend="238"/>
+      </memberdef>
+      <memberdef kind="function" id="class_azura_1_1_containers_1_1_vector_1_1_iterator_1a86667234a77b035806a7f45b7a55e7c0" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>int</type>
+        <definition>int Azura::Containers::Vector&lt; Type &gt;::Iterator::operator-</definition>
+        <argsstring>(const Iterator &amp;rhs)</argsstring>
+        <name>operator-</name>
+        <param>
+          <type>const <ref refid="class_azura_1_1_containers_1_1_vector_1_1_iterator" kindref="compound">Iterator</ref> &amp;</type>
+          <declname>rhs</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Source/Containers/Inc/Containers/Vector.h" line="240" column="1" bodyfile="Source/Containers/Inc/Containers/Vector.h" bodystart="240" bodyend="243"/>
+      </memberdef>
+      <memberdef kind="function" id="class_azura_1_1_containers_1_1_vector_1_1_iterator_1ab3ef0b00ab5000868683dccdf4c87014" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>Type &amp;</type>
+        <definition>Type&amp; Azura::Containers::Vector&lt; Type &gt;::Iterator::operator*</definition>
+        <argsstring>()</argsstring>
+        <name>operator*</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Source/Containers/Inc/Containers/Vector.h" line="252" column="1" bodyfile="Source/Containers/Inc/Containers/Vector.h" bodystart="252" bodyend="254"/>
+      </memberdef>
+      <memberdef kind="function" id="class_azura_1_1_containers_1_1_vector_1_1_iterator_1af9de1ca39787b15d06b3ef68abc6ebfa" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>Type *</type>
+        <definition>Type* Azura::Containers::Vector&lt; Type &gt;::Iterator::operator-&gt;</definition>
+        <argsstring>()</argsstring>
+        <name>operator-&gt;</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Source/Containers/Inc/Containers/Vector.h" line="256" column="1" bodyfile="Source/Containers/Inc/Containers/Vector.h" bodystart="256" bodyend="258"/>
+      </memberdef>
+      <memberdef kind="function" id="class_azura_1_1_containers_1_1_vector_1_1_iterator_1a67a32e3dcf1bdf66c8ce5436a1f4fbc5" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>Type &amp;</type>
+        <definition>Type&amp; Azura::Containers::Vector&lt; Type &gt;::Iterator::operator[]</definition>
+        <argsstring>(const int &amp;idx)</argsstring>
+        <name>operator[]</name>
+        <param>
+          <type>const int &amp;</type>
+          <declname>idx</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Source/Containers/Inc/Containers/Vector.h" line="260" column="1" bodyfile="Source/Containers/Inc/Containers/Vector.h" bodystart="260" bodyend="262"/>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="friend">
+      <memberdef kind="friend" id="class_azura_1_1_containers_1_1_vector_1_1_iterator_1a93661b1094ed6450a2921e0ff69b46ff" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>friend int</type>
+        <definition>int operator-</definition>
+        <argsstring>(const Iterator &amp;lhs, const Iterator &amp;rhs)</argsstring>
+        <name>operator-</name>
+        <param>
+          <type>const <ref refid="class_azura_1_1_containers_1_1_vector_1_1_iterator" kindref="compound">Iterator</ref> &amp;</type>
+          <declname>lhs</declname>
+        </param>
+        <param>
+          <type>const <ref refid="class_azura_1_1_containers_1_1_vector_1_1_iterator" kindref="compound">Iterator</ref> &amp;</type>
+          <declname>rhs</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Source/Containers/Inc/Containers/Vector.h" line="245" column="1" bodyfile="Source/Containers/Inc/Containers/Vector.h" bodystart="245" bodyend="248"/>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <location file="Source/Containers/Inc/Containers/Vector.h" line="145" column="1" bodyfile="Source/Containers/Inc/Containers/Vector.h" bodystart="145" bodyend="267"/>
+    <listofallmembers>
+      <member refid="class_azura_1_1_containers_1_1_vector_1_1_iterator_1a2e87006386373176d26f9033d574472f" prot="public" virt="non-virtual"><scope>Azura::Containers::Vector::Iterator</scope><name>difference_type</name></member>
+      <member refid="class_azura_1_1_containers_1_1_vector_1_1_iterator_1acfa041ed3ef71f6040f39d0e09b4c8f7" prot="public" virt="non-virtual"><scope>Azura::Containers::Vector::Iterator</scope><name>Iterator</name></member>
+      <member refid="class_azura_1_1_containers_1_1_vector_1_1_iterator_1a574766424a2a773a7db57066acc04d66" prot="public" virt="non-virtual"><scope>Azura::Containers::Vector::Iterator</scope><name>Iterator</name></member>
+      <member refid="class_azura_1_1_containers_1_1_vector_1_1_iterator_1a76b9d4e3b9789e385abd29669f669bad" prot="public" virt="non-virtual"><scope>Azura::Containers::Vector::Iterator</scope><name>Iterator</name></member>
+      <member refid="class_azura_1_1_containers_1_1_vector_1_1_iterator_1a3f27d5a62b0c22537083afb53069b0b6" prot="public" virt="non-virtual"><scope>Azura::Containers::Vector::Iterator</scope><name>Iterator</name></member>
+      <member refid="class_azura_1_1_containers_1_1_vector_1_1_iterator_1aecb5d648b44a857de1f86493ea88a728" prot="public" virt="non-virtual"><scope>Azura::Containers::Vector::Iterator</scope><name>iterator_category</name></member>
+      <member refid="class_azura_1_1_containers_1_1_vector_1_1_iterator_1a42e528c6886429b3f0b379ce6320ceb3" prot="private" virt="non-virtual"><scope>Azura::Containers::Vector::Iterator</scope><name>mIndex</name></member>
+      <member refid="class_azura_1_1_containers_1_1_vector_1_1_iterator_1a35a2f4fc19a31a9b8b2a74db3a1b2e83" prot="private" virt="non-virtual"><scope>Azura::Containers::Vector::Iterator</scope><name>mPtr</name></member>
+      <member refid="class_azura_1_1_containers_1_1_vector_1_1_iterator_1af223ef31b943242205c0189d9488067f" prot="public" virt="non-virtual"><scope>Azura::Containers::Vector::Iterator</scope><name>operator!=</name></member>
+      <member refid="class_azura_1_1_containers_1_1_vector_1_1_iterator_1ab3ef0b00ab5000868683dccdf4c87014" prot="public" virt="non-virtual"><scope>Azura::Containers::Vector::Iterator</scope><name>operator*</name></member>
+      <member refid="class_azura_1_1_containers_1_1_vector_1_1_iterator_1a2506b2d02a37e3d7f788d07b544729d8" prot="public" virt="non-virtual"><scope>Azura::Containers::Vector::Iterator</scope><name>operator+</name></member>
+      <member refid="class_azura_1_1_containers_1_1_vector_1_1_iterator_1a979da8f970d715c01ab7534f6a3c4de0" prot="public" virt="non-virtual"><scope>Azura::Containers::Vector::Iterator</scope><name>operator++</name></member>
+      <member refid="class_azura_1_1_containers_1_1_vector_1_1_iterator_1af605a2a5a0702ed63a75c78cce2fcdf6" prot="public" virt="non-virtual"><scope>Azura::Containers::Vector::Iterator</scope><name>operator++</name></member>
+      <member refid="class_azura_1_1_containers_1_1_vector_1_1_iterator_1ae34a589281bfdccbbdd84787b347db54" prot="public" virt="non-virtual"><scope>Azura::Containers::Vector::Iterator</scope><name>operator+=</name></member>
+      <member refid="class_azura_1_1_containers_1_1_vector_1_1_iterator_1a7171a0531c79f825cea673477810a5ee" prot="public" virt="non-virtual"><scope>Azura::Containers::Vector::Iterator</scope><name>operator-</name></member>
+      <member refid="class_azura_1_1_containers_1_1_vector_1_1_iterator_1a86667234a77b035806a7f45b7a55e7c0" prot="public" virt="non-virtual"><scope>Azura::Containers::Vector::Iterator</scope><name>operator-</name></member>
+      <member refid="class_azura_1_1_containers_1_1_vector_1_1_iterator_1a93661b1094ed6450a2921e0ff69b46ff" prot="public" virt="non-virtual"><scope>Azura::Containers::Vector::Iterator</scope><name>operator-</name></member>
+      <member refid="class_azura_1_1_containers_1_1_vector_1_1_iterator_1a6f002266c0919cb3df3833e894402612" prot="public" virt="non-virtual"><scope>Azura::Containers::Vector::Iterator</scope><name>operator--</name></member>
+      <member refid="class_azura_1_1_containers_1_1_vector_1_1_iterator_1a3d331aba5acd78bdc362fc1554866a29" prot="public" virt="non-virtual"><scope>Azura::Containers::Vector::Iterator</scope><name>operator--</name></member>
+      <member refid="class_azura_1_1_containers_1_1_vector_1_1_iterator_1a0ea9eb84d4befa12d31cacb4fc34ac6b" prot="public" virt="non-virtual"><scope>Azura::Containers::Vector::Iterator</scope><name>operator-=</name></member>
+      <member refid="class_azura_1_1_containers_1_1_vector_1_1_iterator_1af9de1ca39787b15d06b3ef68abc6ebfa" prot="public" virt="non-virtual"><scope>Azura::Containers::Vector::Iterator</scope><name>operator-&gt;</name></member>
+      <member refid="class_azura_1_1_containers_1_1_vector_1_1_iterator_1a34e5644a80c5242f60bd1c5887a3760e" prot="public" virt="non-virtual"><scope>Azura::Containers::Vector::Iterator</scope><name>operator&lt;</name></member>
+      <member refid="class_azura_1_1_containers_1_1_vector_1_1_iterator_1abc17caa8b283404518a014eb5f246569" prot="public" virt="non-virtual"><scope>Azura::Containers::Vector::Iterator</scope><name>operator&lt;=</name></member>
+      <member refid="class_azura_1_1_containers_1_1_vector_1_1_iterator_1af3149f451bcbab6e20a039bb875bf556" prot="public" virt="non-virtual"><scope>Azura::Containers::Vector::Iterator</scope><name>operator=</name></member>
+      <member refid="class_azura_1_1_containers_1_1_vector_1_1_iterator_1a7cf9fd2f5f7a8cebd0934aaafbbcaf63" prot="public" virt="non-virtual"><scope>Azura::Containers::Vector::Iterator</scope><name>operator=</name></member>
+      <member refid="class_azura_1_1_containers_1_1_vector_1_1_iterator_1ac43354d9be9c91b10c46d2f2ad8e26d2" prot="public" virt="non-virtual"><scope>Azura::Containers::Vector::Iterator</scope><name>operator==</name></member>
+      <member refid="class_azura_1_1_containers_1_1_vector_1_1_iterator_1a4c3d985c01083c455e7165bfe9eb2317" prot="public" virt="non-virtual"><scope>Azura::Containers::Vector::Iterator</scope><name>operator&gt;</name></member>
+      <member refid="class_azura_1_1_containers_1_1_vector_1_1_iterator_1a686007e1bbb2ccb1f7dae61ad86b34ad" prot="public" virt="non-virtual"><scope>Azura::Containers::Vector::Iterator</scope><name>operator&gt;=</name></member>
+      <member refid="class_azura_1_1_containers_1_1_vector_1_1_iterator_1a67a32e3dcf1bdf66c8ce5436a1f4fbc5" prot="public" virt="non-virtual"><scope>Azura::Containers::Vector::Iterator</scope><name>operator[]</name></member>
+      <member refid="class_azura_1_1_containers_1_1_vector_1_1_iterator_1adaa4c0480ed1e2a5f04d8c7e84e80349" prot="public" virt="non-virtual"><scope>Azura::Containers::Vector::Iterator</scope><name>pointer</name></member>
+      <member refid="class_azura_1_1_containers_1_1_vector_1_1_iterator_1a23f491d759145ca662290968dbc1cf51" prot="public" virt="non-virtual"><scope>Azura::Containers::Vector::Iterator</scope><name>reference</name></member>
+      <member refid="class_azura_1_1_containers_1_1_vector_1_1_iterator_1af07ed38fc881e1a2ec7c5bbe567e493b" prot="public" virt="non-virtual"><scope>Azura::Containers::Vector::Iterator</scope><name>value_type</name></member>
+      <member refid="class_azura_1_1_containers_1_1_vector_1_1_iterator_1a162f9659467fa77d572fa4fb5b9ec3bb" prot="public" virt="non-virtual"><scope>Azura::Containers::Vector::Iterator</scope><name>~Iterator</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

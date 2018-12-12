@@ -1,0 +1,108 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.8.14">
+  <compounddef id="namespace_azura_1_1_render_system" kind="namespace" language="C++">
+    <compoundname>Azura::RenderSystem</compoundname>
+      <sectiondef kind="func">
+      <memberdef kind="function" id="_render_system_8h_1a436def8530c91e9a87369030abf1bf76" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>std::unique_ptr&lt; <ref refid="class_azura_1_1_renderer" kindref="compound">Renderer</ref> &gt;</type>
+        <definition>std::unique_ptr&lt; Renderer &gt; Azura::RenderSystem::CreateRenderer</definition>
+        <argsstring>(const ApplicationInfo &amp;appInfo, const DeviceRequirements &amp;deviceRequirements, const ApplicationRequirements &amp;appRequirements, const SwapChainRequirements &amp;swapChainRequirement, const RenderPassRequirements &amp;renderPassRequirements, const DescriptorRequirements &amp;descriptorRequirements, const ShaderRequirements &amp;shaderRequirements, Memory::Allocator &amp;mainAllocator, Memory::Allocator &amp;drawAllocator, Window &amp;window)</argsstring>
+        <name>CreateRenderer</name>
+        <param>
+          <type>const <ref refid="struct_azura_1_1_application_info" kindref="compound">ApplicationInfo</ref> &amp;</type>
+          <declname>appInfo</declname>
+        </param>
+        <param>
+          <type>const <ref refid="struct_azura_1_1_device_requirements" kindref="compound">DeviceRequirements</ref> &amp;</type>
+          <declname>deviceRequirements</declname>
+        </param>
+        <param>
+          <type>const <ref refid="struct_azura_1_1_application_requirements" kindref="compound">ApplicationRequirements</ref> &amp;</type>
+          <declname>appRequirements</declname>
+        </param>
+        <param>
+          <type>const <ref refid="struct_azura_1_1_swap_chain_requirements" kindref="compound">SwapChainRequirements</ref> &amp;</type>
+          <declname>swapChainRequirement</declname>
+        </param>
+        <param>
+          <type>const <ref refid="struct_azura_1_1_render_pass_requirements" kindref="compound">RenderPassRequirements</ref> &amp;</type>
+          <declname>renderPassRequirements</declname>
+        </param>
+        <param>
+          <type>const <ref refid="struct_azura_1_1_descriptor_requirements" kindref="compound">DescriptorRequirements</ref> &amp;</type>
+          <declname>descriptorRequirements</declname>
+        </param>
+        <param>
+          <type>const <ref refid="struct_azura_1_1_shader_requirements" kindref="compound">ShaderRequirements</ref> &amp;</type>
+          <declname>shaderRequirements</declname>
+        </param>
+        <param>
+          <type><ref refid="class_azura_1_1_memory_1_1_allocator" kindref="compound">Memory::Allocator</ref> &amp;</type>
+          <declname>mainAllocator</declname>
+        </param>
+        <param>
+          <type><ref refid="class_azura_1_1_memory_1_1_allocator" kindref="compound">Memory::Allocator</ref> &amp;</type>
+          <declname>drawAllocator</declname>
+        </param>
+        <param>
+          <type><ref refid="class_azura_1_1_window" kindref="compound">Window</ref> &amp;</type>
+          <declname>window</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Source/Azura/RenderSystem/Inc/Generic/RenderSystem.h" line="16" column="1" bodyfile="Source/Azura/RenderSystem/Src/D3D12/D3D12RenderSystem.cpp" bodystart="8" bodyend="22"/>
+      </memberdef>
+      <memberdef kind="function" id="_render_system_8h_1abb0fc2d98c44d96b421e42936c605cba" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>std::unique_ptr&lt; <ref refid="class_azura_1_1_window" kindref="compound">Window</ref> &gt;</type>
+        <definition>std::unique_ptr&lt; Window &gt; Azura::RenderSystem::CreateApplicationWindow</definition>
+        <argsstring>(String title, U32 width, U32 height)</argsstring>
+        <name>CreateApplicationWindow</name>
+        <param>
+          <type>String</type>
+          <declname>title</declname>
+        </param>
+        <param>
+          <type>U32</type>
+          <declname>width</declname>
+        </param>
+        <param>
+          <type>U32</type>
+          <declname>height</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Source/Azura/RenderSystem/Inc/Generic/RenderSystem.h" line="27" column="1" bodyfile="Source/Azura/RenderSystem/Src/D3D12/D3D12RenderSystem.cpp" bodystart="28" bodyend="30"/>
+      </memberdef>
+      <memberdef kind="function" id="_render_system_8h_1a9c6c4e72584af0c723bbc4611caa21ee" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>std::unique_ptr&lt; <ref refid="class_azura_1_1_texture_manager" kindref="compound">TextureManager</ref> &gt;</type>
+        <definition>std::unique_ptr&lt; TextureManager &gt; Azura::RenderSystem::CreateTextureManager</definition>
+        <argsstring>(const TextureRequirements &amp;textureRequirements)</argsstring>
+        <name>CreateTextureManager</name>
+        <param>
+          <type>const <ref refid="struct_azura_1_1_texture_requirements" kindref="compound">TextureRequirements</ref> &amp;</type>
+          <declname>textureRequirements</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Source/Azura/RenderSystem/Inc/Generic/RenderSystem.h" line="29" column="1" bodyfile="Source/Azura/RenderSystem/Src/D3D12/D3D12RenderSystem.cpp" bodystart="24" bodyend="26"/>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <location file="Source/Azura/RenderSystem/Inc/Generic/RenderSystem.h" line="12" column="1"/>
+  </compounddef>
+</doxygen>

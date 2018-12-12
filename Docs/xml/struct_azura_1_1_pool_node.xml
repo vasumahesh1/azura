@@ -1,0 +1,58 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.8.14">
+  <compounddef id="struct_azura_1_1_pool_node" kind="struct" language="C++" prot="public">
+    <compoundname>Azura::PoolNode</compoundname>
+    <templateparamlist>
+      <param>
+        <type>typename T</type>
+      </param>
+    </templateparamlist>
+      <sectiondef kind="public-attrib">
+      <memberdef kind="variable" id="struct_azura_1_1_pool_node_1ae353afd944950922063018fa866da5e0" prot="public" static="no" mutable="no">
+        <type>T</type>
+        <definition>T Azura::PoolNode&lt; T &gt;::mData</definition>
+        <argsstring></argsstring>
+        <name>mData</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Source/Common/Inc/Memory/PoolAllocator.h" line="10" column="1" bodyfile="Source/Common/Inc/Memory/PoolAllocator.h" bodystart="10" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="struct_azura_1_1_pool_node_1a046767397b7357282b1ae7db22074eab" prot="public" static="no" mutable="no">
+        <type><ref refid="struct_azura_1_1_pool_node" kindref="compound">PoolNode</ref> *</type>
+        <definition>PoolNode* Azura::PoolNode&lt; T &gt;::pNext</definition>
+        <argsstring></argsstring>
+        <name>pNext</name>
+        <initializer>{nullptr}</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Source/Common/Inc/Memory/PoolAllocator.h" line="11" column="1" bodyfile="Source/Common/Inc/Memory/PoolAllocator.h" bodystart="11" bodyend="-1"/>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <collaborationgraph>
+      <node id="456">
+        <label>Azura::PoolNode&lt; T &gt;</label>
+        <link refid="struct_azura_1_1_pool_node"/>
+        <childnode refid="456" relation="usage">
+          <edgelabel>pNext</edgelabel>
+        </childnode>
+      </node>
+    </collaborationgraph>
+    <location file="Source/Common/Inc/Memory/PoolAllocator.h" line="9" column="1" bodyfile="Source/Common/Inc/Memory/PoolAllocator.h" bodystart="9" bodyend="12"/>
+    <listofallmembers>
+      <member refid="struct_azura_1_1_pool_node_1ae353afd944950922063018fa866da5e0" prot="public" virt="non-virtual"><scope>Azura::PoolNode</scope><name>mData</name></member>
+      <member refid="struct_azura_1_1_pool_node_1a046767397b7357282b1ae7db22074eab" prot="public" virt="non-virtual"><scope>Azura::PoolNode</scope><name>pNext</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

@@ -1,0 +1,125 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.8.14">
+  <compounddef id="class_azura_1_1_d3_d12_1_1_d3_d12_scoped_pipeline" kind="class" language="C++" prot="public">
+    <compoundname>Azura::D3D12::D3D12ScopedPipeline</compoundname>
+      <sectiondef kind="private-attrib">
+      <memberdef kind="variable" id="class_azura_1_1_d3_d12_1_1_d3_d12_scoped_pipeline_1adda98450dc4dc32fee2add035f4679c0" prot="private" static="no" mutable="no">
+        <type>PipelineType</type>
+        <definition>PipelineType Azura::D3D12::D3D12ScopedPipeline::m_type</definition>
+        <argsstring></argsstring>
+        <name>m_type</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Source/Azura/RenderSystem/Inc/D3D12/D3D12ScopedPipeline.h" line="25" column="1" bodyfile="Source/Azura/RenderSystem/Inc/D3D12/D3D12ScopedPipeline.h" bodystart="25" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="class_azura_1_1_d3_d12_1_1_d3_d12_scoped_pipeline_1a749942d7583374f576ae2f004784a29f" prot="private" static="no" mutable="no">
+        <type>Microsoft::WRL::ComPtr&lt; ID3D12PipelineState &gt;</type>
+        <definition>Microsoft::WRL::ComPtr&lt;ID3D12PipelineState&gt; Azura::D3D12::D3D12ScopedPipeline::m_pipeline</definition>
+        <argsstring></argsstring>
+        <name>m_pipeline</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Source/Azura/RenderSystem/Inc/D3D12/D3D12ScopedPipeline.h" line="26" column="1" bodyfile="Source/Azura/RenderSystem/Inc/D3D12/D3D12ScopedPipeline.h" bodystart="26" bodyend="-1"/>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="public-func">
+      <memberdef kind="function" id="class_azura_1_1_d3_d12_1_1_d3_d12_scoped_pipeline_1a6e72ee53991645efb0a306dc7f0a2dc9" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>Azura::D3D12::D3D12ScopedPipeline::D3D12ScopedPipeline</definition>
+        <argsstring>(const Microsoft::WRL::ComPtr&lt; ID3D12Device &gt; &amp;device, D3D12_GRAPHICS_PIPELINE_STATE_DESC psoDesc, const Log &amp;log)</argsstring>
+        <name>D3D12ScopedPipeline</name>
+        <param>
+          <type>const Microsoft::WRL::ComPtr&lt; ID3D12Device &gt; &amp;</type>
+          <declname>device</declname>
+        </param>
+        <param>
+          <type>D3D12_GRAPHICS_PIPELINE_STATE_DESC</type>
+          <declname>psoDesc</declname>
+        </param>
+        <param>
+          <type>const <ref refid="class_azura_1_1_log" kindref="compound">Log</ref> &amp;</type>
+          <declname>log</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Source/Azura/RenderSystem/Inc/D3D12/D3D12ScopedPipeline.h" line="18" column="1" bodyfile="Source/Azura/RenderSystem/Src/D3D12/D3D12ScopedPipeline.cpp" bodystart="11" bodyend="17"/>
+      </memberdef>
+      <memberdef kind="function" id="class_azura_1_1_d3_d12_1_1_d3_d12_scoped_pipeline_1a5a9749816b09aed1dda9511b4e415b88" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>Azura::D3D12::D3D12ScopedPipeline::D3D12ScopedPipeline</definition>
+        <argsstring>(const Microsoft::WRL::ComPtr&lt; ID3D12Device &gt; &amp;device, D3D12_COMPUTE_PIPELINE_STATE_DESC psoDesc, const Log &amp;log)</argsstring>
+        <name>D3D12ScopedPipeline</name>
+        <param>
+          <type>const Microsoft::WRL::ComPtr&lt; ID3D12Device &gt; &amp;</type>
+          <declname>device</declname>
+        </param>
+        <param>
+          <type>D3D12_COMPUTE_PIPELINE_STATE_DESC</type>
+          <declname>psoDesc</declname>
+        </param>
+        <param>
+          <type>const <ref refid="class_azura_1_1_log" kindref="compound">Log</ref> &amp;</type>
+          <declname>log</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Source/Azura/RenderSystem/Inc/D3D12/D3D12ScopedPipeline.h" line="19" column="1" bodyfile="Source/Azura/RenderSystem/Src/D3D12/D3D12ScopedPipeline.cpp" bodystart="19" bodyend="25"/>
+      </memberdef>
+      <memberdef kind="function" id="class_azura_1_1_d3_d12_1_1_d3_d12_scoped_pipeline_1a68ff7e8589360d5c9cc22e0af607b8e2" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
+        <type>ID3D12PipelineState *</type>
+        <definition>ID3D12PipelineState * Azura::D3D12::D3D12ScopedPipeline::GetState</definition>
+        <argsstring>() const</argsstring>
+        <name>GetState</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Source/Azura/RenderSystem/Inc/D3D12/D3D12ScopedPipeline.h" line="20" column="1" bodyfile="Source/Azura/RenderSystem/Src/D3D12/D3D12ScopedPipeline.cpp" bodystart="27" bodyend="29"/>
+      </memberdef>
+      <memberdef kind="function" id="class_azura_1_1_d3_d12_1_1_d3_d12_scoped_pipeline_1a89b3a3a551815e41206d93578dd9a73d" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
+        <type>PipelineType</type>
+        <definition>PipelineType Azura::D3D12::D3D12ScopedPipeline::GetType</definition>
+        <argsstring>() const</argsstring>
+        <name>GetType</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Source/Azura/RenderSystem/Inc/D3D12/D3D12ScopedPipeline.h" line="22" column="1" bodyfile="Source/Azura/RenderSystem/Src/D3D12/D3D12ScopedPipeline.cpp" bodystart="31" bodyend="33"/>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <location file="Source/Azura/RenderSystem/Inc/D3D12/D3D12ScopedPipeline.h" line="16" column="1" bodyfile="Source/Azura/RenderSystem/Inc/D3D12/D3D12ScopedPipeline.h" bodystart="16" bodyend="27"/>
+    <listofallmembers>
+      <member refid="class_azura_1_1_d3_d12_1_1_d3_d12_scoped_pipeline_1a6e72ee53991645efb0a306dc7f0a2dc9" prot="public" virt="non-virtual"><scope>Azura::D3D12::D3D12ScopedPipeline</scope><name>D3D12ScopedPipeline</name></member>
+      <member refid="class_azura_1_1_d3_d12_1_1_d3_d12_scoped_pipeline_1a5a9749816b09aed1dda9511b4e415b88" prot="public" virt="non-virtual"><scope>Azura::D3D12::D3D12ScopedPipeline</scope><name>D3D12ScopedPipeline</name></member>
+      <member refid="class_azura_1_1_d3_d12_1_1_d3_d12_scoped_pipeline_1a68ff7e8589360d5c9cc22e0af607b8e2" prot="public" virt="non-virtual"><scope>Azura::D3D12::D3D12ScopedPipeline</scope><name>GetState</name></member>
+      <member refid="class_azura_1_1_d3_d12_1_1_d3_d12_scoped_pipeline_1a89b3a3a551815e41206d93578dd9a73d" prot="public" virt="non-virtual"><scope>Azura::D3D12::D3D12ScopedPipeline</scope><name>GetType</name></member>
+      <member refid="class_azura_1_1_d3_d12_1_1_d3_d12_scoped_pipeline_1a749942d7583374f576ae2f004784a29f" prot="private" virt="non-virtual"><scope>Azura::D3D12::D3D12ScopedPipeline</scope><name>m_pipeline</name></member>
+      <member refid="class_azura_1_1_d3_d12_1_1_d3_d12_scoped_pipeline_1adda98450dc4dc32fee2add035f4679c0" prot="private" virt="non-virtual"><scope>Azura::D3D12::D3D12ScopedPipeline</scope><name>m_type</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

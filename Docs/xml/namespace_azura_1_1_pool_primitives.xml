@@ -1,0 +1,38 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.8.14">
+  <compounddef id="namespace_azura_1_1_pool_primitives" kind="namespace" language="C++">
+    <compoundname>Azura::PoolPrimitives</compoundname>
+      <sectiondef kind="func">
+      <memberdef kind="function" id="_pool_primitives_8h_1a36b66c5048e5cb128abf797a66077fc6" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="class_azura_1_1_drawable_pool" kindref="compound">DrawablePool</ref> &amp;</type>
+        <definition>DrawablePool &amp; Azura::PoolPrimitives::AddScreenQuad</definition>
+        <argsstring>(Renderer &amp;renderer, U32 renderPass, Memory::Allocator &amp;allocatorTemporary)</argsstring>
+        <name>AddScreenQuad</name>
+        <param>
+          <type><ref refid="class_azura_1_1_renderer" kindref="compound">Renderer</ref> &amp;</type>
+          <declname>renderer</declname>
+        </param>
+        <param>
+          <type>U32</type>
+          <declname>renderPass</declname>
+        </param>
+        <param>
+          <type><ref refid="class_azura_1_1_memory_1_1_allocator" kindref="compound">Memory::Allocator</ref> &amp;</type>
+          <declname>allocatorTemporary</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Source/Azura/RenderSystem/Inc/Generic/PoolPrimitives.h" line="17" column="1" bodyfile="Source/Azura/RenderSystem/Src/Generic/PoolPrimitives.cpp" bodystart="16" bodyend="56"/>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <location file="Source/Azura/RenderSystem/Inc/Generic/PoolPrimitives.h" line="16" column="1"/>
+  </compounddef>
+</doxygen>

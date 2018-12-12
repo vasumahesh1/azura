@@ -1,0 +1,132 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.8.14">
+  <compounddef id="_shape_8cpp" kind="file" language="C++">
+    <compoundname>Shape.cpp</compoundname>
+    <includes refid="_shape_8h" local="yes">Shape.h</includes>
+    <includes local="no">cmath</includes>
+    <includes local="yes">../../Core/Constants.h</includes>
+    <incdepgraph>
+      <node id="5153">
+        <label>mathfu/vector.h</label>
+      </node>
+      <node id="5157">
+        <label>cmath</label>
+      </node>
+      <node id="5151">
+        <label>string</label>
+      </node>
+      <node id="5147">
+        <label>Shape.h</label>
+        <link refid="_shape_8h_source"/>
+        <childnode refid="5148" relation="include">
+        </childnode>
+        <childnode refid="5154" relation="include">
+        </childnode>
+        <childnode refid="5156" relation="include">
+        </childnode>
+      </node>
+      <node id="5156">
+        <label>Transform.h</label>
+        <link refid="_dibella_2_inc_2_scene_2_primitives_2_transform_8h_source"/>
+        <childnode refid="5148" relation="include">
+        </childnode>
+      </node>
+      <node id="5148">
+        <label>../../Core/Types.h</label>
+        <link refid="_dibella_2_inc_2_core_2_types_8h_source"/>
+        <childnode refid="5149" relation="include">
+        </childnode>
+        <childnode refid="5150" relation="include">
+        </childnode>
+        <childnode refid="5151" relation="include">
+        </childnode>
+        <childnode refid="5152" relation="include">
+        </childnode>
+        <childnode refid="5153" relation="include">
+        </childnode>
+      </node>
+      <node id="5155">
+        <label>Ray.h</label>
+        <link refid="_ray_8h_source"/>
+        <childnode refid="5148" relation="include">
+        </childnode>
+      </node>
+      <node id="5154">
+        <label>../../RayTracing/Primitives/Intersection.h</label>
+        <link refid="_intersection_8h_source"/>
+        <childnode refid="5148" relation="include">
+        </childnode>
+        <childnode refid="5155" relation="include">
+        </childnode>
+      </node>
+      <node id="5158">
+        <label>../../Core/Constants.h</label>
+      </node>
+      <node id="5146">
+        <label>Source/Dibella/Src/Scene/Primitives/Shape.cpp</label>
+        <link refid="_shape_8cpp"/>
+        <childnode refid="5147" relation="include">
+        </childnode>
+        <childnode refid="5157" relation="include">
+        </childnode>
+        <childnode refid="5158" relation="include">
+        </childnode>
+      </node>
+      <node id="5149">
+        <label>ToolsCore.h</label>
+      </node>
+      <node id="5150">
+        <label>cstddef</label>
+      </node>
+      <node id="5152">
+        <label>mathfu/matrix.h</label>
+      </node>
+    </incdepgraph>
+    <innernamespace refid="namespace_dibella">Dibella</innernamespace>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <programlisting>
+<codeline lineno="1"><highlight class="preprocessor">#include<sp/>&quot;Shape.h&quot;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="2"><highlight class="normal"></highlight></codeline>
+<codeline lineno="3"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&lt;cmath&gt;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="4"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&quot;../../Core/Constants.h&quot;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="5"><highlight class="normal"></highlight></codeline>
+<codeline lineno="6"><highlight class="normal"></highlight><highlight class="keyword">namespace<sp/></highlight><highlight class="normal"><ref refid="namespace_dibella" kindref="compound">Dibella</ref><sp/>{</highlight></codeline>
+<codeline lineno="7"><highlight class="normal"></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/>Shape::InitializeIntersection(Intersection*<sp/>isect,<sp/>Float<sp/>paramT,<sp/>Point3f<sp/>pLocal)</highlight><highlight class="keyword"><sp/>const<sp/></highlight><highlight class="normal">{</highlight></codeline>
+<codeline lineno="8"><highlight class="normal"><sp/><sp/>ComputeTBN(pLocal,<sp/>&amp;(isect-&gt;mNormalGeometric),<sp/>&amp;(isect-&gt;mTangent),<sp/>&amp;(isect-&gt;mBitangent));</highlight></codeline>
+<codeline lineno="9"><highlight class="normal"></highlight></codeline>
+<codeline lineno="10"><highlight class="normal"><sp/><sp/>isect-&gt;mPoint<sp/><sp/>=<sp/>Point3f((mTransform.Get()<sp/>*<sp/>Vector4f(pLocal,<sp/>1)).xyz());</highlight></codeline>
+<codeline lineno="11"><highlight class="normal"><sp/><sp/>isect-&gt;mUV<sp/><sp/><sp/><sp/><sp/>=<sp/>GetUVCoordinates(pLocal);</highlight></codeline>
+<codeline lineno="12"><highlight class="normal"><sp/><sp/>isect-&gt;mParamT<sp/>=<sp/>paramT;</highlight></codeline>
+<codeline lineno="13"><highlight class="normal">}</highlight></codeline>
+<codeline lineno="14"><highlight class="normal"></highlight></codeline>
+<codeline lineno="15"><highlight class="normal">Intersection<sp/>Shape::Sample(</highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>Intersection&amp;<sp/>ref,<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>Point2f&amp;<sp/>xi,<sp/>Float*<sp/>pdf)</highlight><highlight class="keyword"><sp/>const<sp/></highlight><highlight class="normal">{</highlight></codeline>
+<codeline lineno="16"><highlight class="normal"><sp/><sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>Intersection<sp/>isectShape<sp/>=<sp/><ref refid="struct_sample" kindref="compound">Sample</ref>(xi,<sp/>pdf);</highlight></codeline>
+<codeline lineno="17"><highlight class="normal"></highlight></codeline>
+<codeline lineno="18"><highlight class="normal"><sp/><sp/>Vector3f<sp/>toRef<sp/>=<sp/>isectShape.mPoint<sp/>-<sp/>ref.mPoint;</highlight></codeline>
+<codeline lineno="19"><highlight class="normal"></highlight></codeline>
+<codeline lineno="20"><highlight class="normal"><sp/><sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>Vector3f<sp/>wi<sp/>=<sp/>toRef.Normalized();</highlight></codeline>
+<codeline lineno="21"><highlight class="normal"></highlight></codeline>
+<codeline lineno="22"><highlight class="normal"><sp/><sp/></highlight><highlight class="comment">//<sp/>TODO:<sp/>[REMOVAL]<sp/>Might<sp/>Remove?</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="23"><highlight class="normal"><sp/><sp/>toRef<sp/>=<sp/>-toRef;</highlight></codeline>
+<codeline lineno="24"><highlight class="normal"></highlight></codeline>
+<codeline lineno="25"><highlight class="normal"><sp/><sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>Float<sp/>dist<sp/>=<sp/>toRef.LengthSquared();</highlight></codeline>
+<codeline lineno="26"><highlight class="normal"></highlight></codeline>
+<codeline lineno="27"><highlight class="normal"><sp/><sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>Float<sp/>dot<sp/>=<sp/>std::abs(Vector3f::DotProduct(isectShape.mNormalGeometric,<sp/>-wi));</highlight></codeline>
+<codeline lineno="28"><highlight class="normal"></highlight></codeline>
+<codeline lineno="29"><highlight class="normal"><sp/><sp/></highlight><highlight class="keywordflow">if</highlight><highlight class="normal"><sp/>(dot<sp/>&lt;=<sp/>EPSILON)<sp/>{</highlight></codeline>
+<codeline lineno="30"><highlight class="normal"><sp/><sp/><sp/><sp/>*pdf<sp/>=<sp/>0;</highlight></codeline>
+<codeline lineno="31"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>isectShape;</highlight></codeline>
+<codeline lineno="32"><highlight class="normal"><sp/><sp/>}</highlight></codeline>
+<codeline lineno="33"><highlight class="normal"></highlight></codeline>
+<codeline lineno="34"><highlight class="normal"><sp/><sp/>*pdf<sp/>=<sp/>dist<sp/>/<sp/>(dot<sp/>/<sp/>*pdf);</highlight></codeline>
+<codeline lineno="35"><highlight class="normal"></highlight></codeline>
+<codeline lineno="36"><highlight class="normal"><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>isectShape;</highlight></codeline>
+<codeline lineno="37"><highlight class="normal">}</highlight></codeline>
+<codeline lineno="38"><highlight class="normal">}<sp/><sp/></highlight><highlight class="comment">//<sp/>namespace<sp/>Dibella</highlight><highlight class="normal"></highlight></codeline>
+    </programlisting>
+    <location file="Source/Dibella/Src/Scene/Primitives/Shape.cpp"/>
+  </compounddef>
+</doxygen>

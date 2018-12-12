@@ -1,0 +1,60 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.8.14">
+  <compounddef id="struct_azura_1_1_clear_data" kind="struct" language="C++" prot="public">
+    <compoundname>Azura::ClearData</compoundname>
+      <sectiondef kind="public-attrib">
+      <memberdef kind="variable" id="struct_azura_1_1_clear_data_1a47c03db794402af19915837101f490d1" prot="public" static="no" mutable="no">
+        <type>float</type>
+        <definition>float Azura::ClearData::m_color[4]</definition>
+        <argsstring>[4]</argsstring>
+        <name>m_color</name>
+        <initializer>{0.0f, 0.0f, 0.0f, 1.0f}</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Source/Azura/RenderSystem/Inc/Generic/GenericTypes.h" line="424" column="1" bodyfile="Source/Azura/RenderSystem/Inc/Generic/GenericTypes.h" bodystart="424" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="struct_azura_1_1_clear_data_1a069c070e82fdd3d48b32b5ac2a9400cc" prot="public" static="no" mutable="no">
+        <type>float</type>
+        <definition>float Azura::ClearData::m_depth</definition>
+        <argsstring></argsstring>
+        <name>m_depth</name>
+        <initializer>{1.0f}</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Source/Azura/RenderSystem/Inc/Generic/GenericTypes.h" line="425" column="1" bodyfile="Source/Azura/RenderSystem/Inc/Generic/GenericTypes.h" bodystart="425" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="struct_azura_1_1_clear_data_1a473afad9880805e788ab44f968aa7ab4" prot="public" static="no" mutable="no">
+        <type>U8</type>
+        <definition>U8 Azura::ClearData::m_stencil</definition>
+        <argsstring></argsstring>
+        <name>m_stencil</name>
+        <initializer>{0}</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Source/Azura/RenderSystem/Inc/Generic/GenericTypes.h" line="426" column="1" bodyfile="Source/Azura/RenderSystem/Inc/Generic/GenericTypes.h" bodystart="426" bodyend="-1"/>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <location file="Source/Azura/RenderSystem/Inc/Generic/GenericTypes.h" line="423" column="1" bodyfile="Source/Azura/RenderSystem/Inc/Generic/GenericTypes.h" bodystart="423" bodyend="427"/>
+    <listofallmembers>
+      <member refid="struct_azura_1_1_clear_data_1a47c03db794402af19915837101f490d1" prot="public" virt="non-virtual"><scope>Azura::ClearData</scope><name>m_color</name></member>
+      <member refid="struct_azura_1_1_clear_data_1a069c070e82fdd3d48b32b5ac2a9400cc" prot="public" virt="non-virtual"><scope>Azura::ClearData</scope><name>m_depth</name></member>
+      <member refid="struct_azura_1_1_clear_data_1a473afad9880805e788ab44f968aa7ab4" prot="public" virt="non-virtual"><scope>Azura::ClearData</scope><name>m_stencil</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

@@ -1,0 +1,68 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.8.14">
+  <compounddef id="class_azura_1_1_d3_d12_1_1_d3_d12_scoped_sampler" kind="class" language="C++" prot="public">
+    <compoundname>Azura::D3D12::D3D12ScopedSampler</compoundname>
+      <sectiondef kind="private-attrib">
+      <memberdef kind="variable" id="class_azura_1_1_d3_d12_1_1_d3_d12_scoped_sampler_1aab62ea630f515cdb00d16950a6186f42" prot="private" static="no" mutable="no">
+        <type>D3D12_SAMPLER_DESC</type>
+        <definition>D3D12_SAMPLER_DESC Azura::D3D12::D3D12ScopedSampler::m_desc</definition>
+        <argsstring></argsstring>
+        <name>m_desc</name>
+        <initializer>{}</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Source/Azura/RenderSystem/Inc/D3D12/D3D12ScopedSampler.h" line="15" column="1" bodyfile="Source/Azura/RenderSystem/Inc/D3D12/D3D12ScopedSampler.h" bodystart="15" bodyend="-1"/>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="public-func">
+      <memberdef kind="function" id="class_azura_1_1_d3_d12_1_1_d3_d12_scoped_sampler_1a1fbadeef4d8d6ab7934bc53b6f70b945" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void Azura::D3D12::D3D12ScopedSampler::Create</definition>
+        <argsstring>(const SamplerDesc &amp;desc, const Log &amp;log_D3D12RenderSystem)</argsstring>
+        <name>Create</name>
+        <param>
+          <type>const <ref refid="struct_azura_1_1_sampler_desc" kindref="compound">SamplerDesc</ref> &amp;</type>
+          <declname>desc</declname>
+        </param>
+        <param>
+          <type>const <ref refid="class_azura_1_1_log" kindref="compound">Log</ref> &amp;</type>
+          <declname>log_D3D12RenderSystem</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Source/Azura/RenderSystem/Inc/D3D12/D3D12ScopedSampler.h" line="11" column="1" bodyfile="Source/Azura/RenderSystem/Src/D3D12/D3D12ScopedSampler.cpp" bodystart="9" bodyend="32"/>
+      </memberdef>
+      <memberdef kind="function" id="class_azura_1_1_d3_d12_1_1_d3_d12_scoped_sampler_1a46edb25388c028ab6bb9bad10939d3b3" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
+        <type>const D3D12_SAMPLER_DESC &amp;</type>
+        <definition>const D3D12_SAMPLER_DESC &amp; Azura::D3D12::D3D12ScopedSampler::GetDesc</definition>
+        <argsstring>() const</argsstring>
+        <name>GetDesc</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Source/Azura/RenderSystem/Inc/D3D12/D3D12ScopedSampler.h" line="12" column="1" bodyfile="Source/Azura/RenderSystem/Src/D3D12/D3D12ScopedSampler.cpp" bodystart="34" bodyend="36"/>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <location file="Source/Azura/RenderSystem/Inc/D3D12/D3D12ScopedSampler.h" line="9" column="1" bodyfile="Source/Azura/RenderSystem/Inc/D3D12/D3D12ScopedSampler.h" bodystart="8" bodyend="16"/>
+    <listofallmembers>
+      <member refid="class_azura_1_1_d3_d12_1_1_d3_d12_scoped_sampler_1a1fbadeef4d8d6ab7934bc53b6f70b945" prot="public" virt="non-virtual"><scope>Azura::D3D12::D3D12ScopedSampler</scope><name>Create</name></member>
+      <member refid="class_azura_1_1_d3_d12_1_1_d3_d12_scoped_sampler_1a46edb25388c028ab6bb9bad10939d3b3" prot="public" virt="non-virtual"><scope>Azura::D3D12::D3D12ScopedSampler</scope><name>GetDesc</name></member>
+      <member refid="class_azura_1_1_d3_d12_1_1_d3_d12_scoped_sampler_1aab62ea630f515cdb00d16950a6186f42" prot="private" virt="non-virtual"><scope>Azura::D3D12::D3D12ScopedSampler</scope><name>m_desc</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

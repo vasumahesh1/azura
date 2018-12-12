@@ -1,0 +1,675 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.8.14">
+  <compounddef id="class_azura_1_1_d3_d12_1_1_d3_d12_renderer" kind="class" language="C++" prot="public">
+    <compoundname>Azura::D3D12::D3D12Renderer</compoundname>
+    <basecompoundref refid="class_azura_1_1_renderer" prot="public" virt="non-virtual">Azura::Renderer</basecompoundref>
+      <sectiondef kind="private-attrib">
+      <memberdef kind="variable" id="class_azura_1_1_d3_d12_1_1_d3_d12_renderer_1a4a1ed8d1f33a086b598132bf542e54cb" prot="private" static="no" mutable="no">
+        <type><ref refid="class_azura_1_1_log" kindref="compound">Log</ref></type>
+        <definition>Log Azura::D3D12::D3D12Renderer::log_D3D12RenderSystem</definition>
+        <argsstring></argsstring>
+        <name>log_D3D12RenderSystem</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Source/Azura/RenderSystem/Inc/D3D12/D3D12Renderer.h" line="52" column="1" bodyfile="Source/Azura/RenderSystem/Inc/D3D12/D3D12Renderer.h" bodystart="52" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="class_azura_1_1_d3_d12_1_1_d3_d12_renderer_1ad0833711cb1c57eda8f0e9b7df1ae62f" prot="private" static="no" mutable="no">
+        <type><ref refid="class_azura_1_1_memory_1_1_heap_memory_buffer" kindref="compound">Memory::HeapMemoryBuffer</ref></type>
+        <definition>Memory::HeapMemoryBuffer Azura::D3D12::D3D12Renderer::m_perFrameBuffer</definition>
+        <argsstring></argsstring>
+        <name>m_perFrameBuffer</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Source/Azura/RenderSystem/Inc/D3D12/D3D12Renderer.h" line="54" column="1" bodyfile="Source/Azura/RenderSystem/Inc/D3D12/D3D12Renderer.h" bodystart="54" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="class_azura_1_1_d3_d12_1_1_d3_d12_renderer_1a5d5c305067fee4187aad079b0ad9152a" prot="private" static="no" mutable="no">
+        <type><ref refid="class_azura_1_1_memory_1_1_monotonic_allocator" kindref="compound">Memory::MonotonicAllocator</ref></type>
+        <definition>Memory::MonotonicAllocator Azura::D3D12::D3D12Renderer::m_perFrameAllocator</definition>
+        <argsstring></argsstring>
+        <name>m_perFrameAllocator</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Source/Azura/RenderSystem/Inc/D3D12/D3D12Renderer.h" line="55" column="1" bodyfile="Source/Azura/RenderSystem/Inc/D3D12/D3D12Renderer.h" bodystart="55" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="class_azura_1_1_d3_d12_1_1_d3_d12_renderer_1a25f2f09b5da14c863687dbb0bdc2da57" prot="private" static="no" mutable="no">
+        <type><ref refid="class_azura_1_1_memory_1_1_heap_memory_buffer" kindref="compound">Memory::HeapMemoryBuffer</ref></type>
+        <definition>Memory::HeapMemoryBuffer Azura::D3D12::D3D12Renderer::m_initBuffer</definition>
+        <argsstring></argsstring>
+        <name>m_initBuffer</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Source/Azura/RenderSystem/Inc/D3D12/D3D12Renderer.h" line="57" column="1" bodyfile="Source/Azura/RenderSystem/Inc/D3D12/D3D12Renderer.h" bodystart="57" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="class_azura_1_1_d3_d12_1_1_d3_d12_renderer_1a1f2f07eb844d2ac5ee82ae4fd4ab47ab" prot="private" static="no" mutable="no">
+        <type><ref refid="class_azura_1_1_memory_1_1_monotonic_allocator" kindref="compound">Memory::MonotonicAllocator</ref></type>
+        <definition>Memory::MonotonicAllocator Azura::D3D12::D3D12Renderer::m_initAllocator</definition>
+        <argsstring></argsstring>
+        <name>m_initAllocator</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Source/Azura/RenderSystem/Inc/D3D12/D3D12Renderer.h" line="58" column="1" bodyfile="Source/Azura/RenderSystem/Inc/D3D12/D3D12Renderer.h" bodystart="58" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="class_azura_1_1_d3_d12_1_1_d3_d12_renderer_1ac6bd17004828c9d6a03c6d9a06fb5bc7" prot="private" static="no" mutable="no">
+        <type><ref refid="class_azura_1_1_d3_d12_1_1_d3_d12_scoped_swap_chain" kindref="compound">D3D12ScopedSwapChain</ref></type>
+        <definition>D3D12ScopedSwapChain Azura::D3D12::D3D12Renderer::m_swapChain</definition>
+        <argsstring></argsstring>
+        <name>m_swapChain</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Source/Azura/RenderSystem/Inc/D3D12/D3D12Renderer.h" line="60" column="1" bodyfile="Source/Azura/RenderSystem/Inc/D3D12/D3D12Renderer.h" bodystart="60" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="class_azura_1_1_d3_d12_1_1_d3_d12_renderer_1aceabc75197ab88afe6ad4d7a56b6c7de" prot="private" static="no" mutable="no">
+        <type>Microsoft::WRL::ComPtr&lt; ID3D12Device &gt;</type>
+        <definition>Microsoft::WRL::ComPtr&lt;ID3D12Device&gt; Azura::D3D12::D3D12Renderer::m_device</definition>
+        <argsstring></argsstring>
+        <name>m_device</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Source/Azura/RenderSystem/Inc/D3D12/D3D12Renderer.h" line="61" column="1" bodyfile="Source/Azura/RenderSystem/Inc/D3D12/D3D12Renderer.h" bodystart="61" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="class_azura_1_1_d3_d12_1_1_d3_d12_renderer_1a3448713bb1c01503356dcdd10a4b704e" prot="private" static="no" mutable="no">
+        <type>Microsoft::WRL::ComPtr&lt; ID3D12CommandAllocator &gt;</type>
+        <definition>Microsoft::WRL::ComPtr&lt;ID3D12CommandAllocator&gt; Azura::D3D12::D3D12Renderer::m_commandAllocator</definition>
+        <argsstring></argsstring>
+        <name>m_commandAllocator</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Source/Azura/RenderSystem/Inc/D3D12/D3D12Renderer.h" line="63" column="1" bodyfile="Source/Azura/RenderSystem/Inc/D3D12/D3D12Renderer.h" bodystart="63" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="class_azura_1_1_d3_d12_1_1_d3_d12_renderer_1a122c3e1f4a41459263da43bb9c3e0534" prot="private" static="no" mutable="no">
+        <type>Microsoft::WRL::ComPtr&lt; ID3D12CommandQueue &gt;</type>
+        <definition>Microsoft::WRL::ComPtr&lt;ID3D12CommandQueue&gt; Azura::D3D12::D3D12Renderer::m_mainGraphicsCommandQueue</definition>
+        <argsstring></argsstring>
+        <name>m_mainGraphicsCommandQueue</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Source/Azura/RenderSystem/Inc/D3D12/D3D12Renderer.h" line="64" column="1" bodyfile="Source/Azura/RenderSystem/Inc/D3D12/D3D12Renderer.h" bodystart="64" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="class_azura_1_1_d3_d12_1_1_d3_d12_renderer_1a28d453b9795d13b145ac0dccbebe1366" prot="private" static="no" mutable="no">
+        <type>Microsoft::WRL::ComPtr&lt; ID3D12CommandQueue &gt;</type>
+        <definition>Microsoft::WRL::ComPtr&lt;ID3D12CommandQueue&gt; Azura::D3D12::D3D12Renderer::m_mainComputeCommandQueue</definition>
+        <argsstring></argsstring>
+        <name>m_mainComputeCommandQueue</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Source/Azura/RenderSystem/Inc/D3D12/D3D12Renderer.h" line="65" column="1" bodyfile="Source/Azura/RenderSystem/Inc/D3D12/D3D12Renderer.h" bodystart="65" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="class_azura_1_1_d3_d12_1_1_d3_d12_renderer_1ae4c5820d246618fdbd6f70a7b12a21e1" prot="private" static="no" mutable="no">
+        <type>UINT</type>
+        <definition>UINT Azura::D3D12::D3D12Renderer::m_rtvDescriptorSize</definition>
+        <argsstring></argsstring>
+        <name>m_rtvDescriptorSize</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Source/Azura/RenderSystem/Inc/D3D12/D3D12Renderer.h" line="67" column="1" bodyfile="Source/Azura/RenderSystem/Inc/D3D12/D3D12Renderer.h" bodystart="67" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="class_azura_1_1_d3_d12_1_1_d3_d12_renderer_1a90e9138635c5e6c36bceb20d9cbf7dd9" prot="private" static="no" mutable="no">
+        <type>UINT</type>
+        <definition>UINT Azura::D3D12::D3D12Renderer::m_dsvDescriptorSize</definition>
+        <argsstring></argsstring>
+        <name>m_dsvDescriptorSize</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Source/Azura/RenderSystem/Inc/D3D12/D3D12Renderer.h" line="68" column="1" bodyfile="Source/Azura/RenderSystem/Inc/D3D12/D3D12Renderer.h" bodystart="68" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="class_azura_1_1_d3_d12_1_1_d3_d12_renderer_1a038b31437a83bb23c1a69b2eb25fef6c" prot="private" static="no" mutable="no">
+        <type>CD3DX12_VIEWPORT</type>
+        <definition>CD3DX12_VIEWPORT Azura::D3D12::D3D12Renderer::m_viewport</definition>
+        <argsstring></argsstring>
+        <name>m_viewport</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Source/Azura/RenderSystem/Inc/D3D12/D3D12Renderer.h" line="70" column="1" bodyfile="Source/Azura/RenderSystem/Inc/D3D12/D3D12Renderer.h" bodystart="70" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="class_azura_1_1_d3_d12_1_1_d3_d12_renderer_1aec2f4ae78a873050c6b3b8b12bb5ec26" prot="private" static="no" mutable="no">
+        <type>CD3DX12_RECT</type>
+        <definition>CD3DX12_RECT Azura::D3D12::D3D12Renderer::m_scissorRect</definition>
+        <argsstring></argsstring>
+        <name>m_scissorRect</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Source/Azura/RenderSystem/Inc/D3D12/D3D12Renderer.h" line="71" column="1" bodyfile="Source/Azura/RenderSystem/Inc/D3D12/D3D12Renderer.h" bodystart="71" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="class_azura_1_1_d3_d12_1_1_d3_d12_renderer_1a68ee06841989846f4cf272ac36831625" prot="private" static="no" mutable="no">
+        <type><ref refid="class_azura_1_1_d3_d12_1_1_d3_d12_scoped_image" kindref="compound">D3D12ScopedImage</ref></type>
+        <definition>D3D12ScopedImage Azura::D3D12::D3D12Renderer::m_depthTexture</definition>
+        <argsstring></argsstring>
+        <name>m_depthTexture</name>
+        <initializer>{}</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Source/Azura/RenderSystem/Inc/D3D12/D3D12Renderer.h" line="73" column="1" bodyfile="Source/Azura/RenderSystem/Inc/D3D12/D3D12Renderer.h" bodystart="73" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="class_azura_1_1_d3_d12_1_1_d3_d12_renderer_1a7aa10a4d57cec8920494f6542fc8ad06" prot="private" static="no" mutable="no">
+        <type><ref refid="class_azura_1_1_d3_d12_1_1_d3_d12_scoped_buffer" kindref="compound">D3D12ScopedBuffer</ref></type>
+        <definition>D3D12ScopedBuffer Azura::D3D12::D3D12Renderer::m_stagingBuffer</definition>
+        <argsstring></argsstring>
+        <name>m_stagingBuffer</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Source/Azura/RenderSystem/Inc/D3D12/D3D12Renderer.h" line="75" column="1" bodyfile="Source/Azura/RenderSystem/Inc/D3D12/D3D12Renderer.h" bodystart="75" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="class_azura_1_1_d3_d12_1_1_d3_d12_renderer_1ab22280fb9e13a436f1f1c09eec587f8b" prot="private" static="no" mutable="no">
+        <type><ref refid="class_azura_1_1_containers_1_1_vector" kindref="compound">Containers::Vector</ref>&lt; <ref refid="struct_azura_1_1_texture_buffer_info" kindref="compound">TextureBufferInfo</ref> &gt;</type>
+        <definition>Containers::Vector&lt;TextureBufferInfo&gt; Azura::D3D12::D3D12Renderer::m_renderTargetUpdates</definition>
+        <argsstring></argsstring>
+        <name>m_renderTargetUpdates</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Source/Azura/RenderSystem/Inc/D3D12/D3D12Renderer.h" line="77" column="1" bodyfile="Source/Azura/RenderSystem/Inc/D3D12/D3D12Renderer.h" bodystart="77" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="class_azura_1_1_d3_d12_1_1_d3_d12_renderer_1a0587f3798a433e0c8ed33aea7d563d8c" prot="private" static="no" mutable="no">
+        <type><ref refid="class_azura_1_1_containers_1_1_vector" kindref="compound">Containers::Vector</ref>&lt; <ref refid="struct_azura_1_1_buffer_target_info" kindref="compound">BufferTargetInfo</ref> &gt;</type>
+        <definition>Containers::Vector&lt;BufferTargetInfo&gt; Azura::D3D12::D3D12Renderer::m_bufferTargetUpdates</definition>
+        <argsstring></argsstring>
+        <name>m_bufferTargetUpdates</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Source/Azura/RenderSystem/Inc/D3D12/D3D12Renderer.h" line="78" column="1" bodyfile="Source/Azura/RenderSystem/Inc/D3D12/D3D12Renderer.h" bodystart="78" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="class_azura_1_1_d3_d12_1_1_d3_d12_renderer_1adc3a36f54addc67d7273a760e499481f" prot="private" static="no" mutable="no">
+        <type><ref refid="class_azura_1_1_containers_1_1_vector" kindref="compound">Containers::Vector</ref>&lt; std::pair&lt; U32, RenderPassType &gt; &gt;</type>
+        <definition>Containers::Vector&lt;std::pair&lt;U32, RenderPassType&gt; &gt; Azura::D3D12::D3D12Renderer::m_renderSequence</definition>
+        <argsstring></argsstring>
+        <name>m_renderSequence</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Source/Azura/RenderSystem/Inc/D3D12/D3D12Renderer.h" line="80" column="1" bodyfile="Source/Azura/RenderSystem/Inc/D3D12/D3D12Renderer.h" bodystart="80" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="class_azura_1_1_d3_d12_1_1_d3_d12_renderer_1a3ba777564878ee26779e873902ebfc8b" prot="private" static="no" mutable="no">
+        <type><ref refid="class_azura_1_1_containers_1_1_vector" kindref="compound">Containers::Vector</ref>&lt; <ref refid="class_azura_1_1_d3_d12_1_1_d3_d12_scoped_image" kindref="compound">D3D12ScopedImage</ref> &gt;</type>
+        <definition>Containers::Vector&lt;D3D12ScopedImage&gt; Azura::D3D12::D3D12Renderer::m_targetImages</definition>
+        <argsstring></argsstring>
+        <name>m_targetImages</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Source/Azura/RenderSystem/Inc/D3D12/D3D12Renderer.h" line="82" column="1" bodyfile="Source/Azura/RenderSystem/Inc/D3D12/D3D12Renderer.h" bodystart="82" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="class_azura_1_1_d3_d12_1_1_d3_d12_renderer_1ab4ee85e29fa571861587367f7b1243e6" prot="private" static="no" mutable="no">
+        <type><ref refid="class_azura_1_1_containers_1_1_vector" kindref="compound">Containers::Vector</ref>&lt; <ref refid="class_azura_1_1_d3_d12_1_1_d3_d12_scoped_buffer" kindref="compound">D3D12ScopedBuffer</ref> &gt;</type>
+        <definition>Containers::Vector&lt;D3D12ScopedBuffer&gt; Azura::D3D12::D3D12Renderer::m_targetBuffers</definition>
+        <argsstring></argsstring>
+        <name>m_targetBuffers</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Source/Azura/RenderSystem/Inc/D3D12/D3D12Renderer.h" line="83" column="1" bodyfile="Source/Azura/RenderSystem/Inc/D3D12/D3D12Renderer.h" bodystart="83" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="class_azura_1_1_d3_d12_1_1_d3_d12_renderer_1a06ac3e293ba302bad45494a6b53f3e39" prot="private" static="no" mutable="no">
+        <type><ref refid="class_azura_1_1_containers_1_1_vector" kindref="compound">Containers::Vector</ref>&lt; <ref refid="class_azura_1_1_d3_d12_1_1_d3_d12_scoped_render_pass" kindref="compound">D3D12ScopedRenderPass</ref> &gt;</type>
+        <definition>Containers::Vector&lt;D3D12ScopedRenderPass&gt; Azura::D3D12::D3D12Renderer::m_renderPasses</definition>
+        <argsstring></argsstring>
+        <name>m_renderPasses</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Source/Azura/RenderSystem/Inc/D3D12/D3D12Renderer.h" line="85" column="1" bodyfile="Source/Azura/RenderSystem/Inc/D3D12/D3D12Renderer.h" bodystart="85" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="class_azura_1_1_d3_d12_1_1_d3_d12_renderer_1a83b7c717ee46aacb95c445a4bf18501b" prot="private" static="no" mutable="no">
+        <type><ref refid="class_azura_1_1_containers_1_1_vector" kindref="compound">Containers::Vector</ref>&lt; <ref refid="class_azura_1_1_d3_d12_1_1_d3_d12_scoped_compute_pass" kindref="compound">D3D12ScopedComputePass</ref> &gt;</type>
+        <definition>Containers::Vector&lt;D3D12ScopedComputePass&gt; Azura::D3D12::D3D12Renderer::m_computePasses</definition>
+        <argsstring></argsstring>
+        <name>m_computePasses</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Source/Azura/RenderSystem/Inc/D3D12/D3D12Renderer.h" line="86" column="1" bodyfile="Source/Azura/RenderSystem/Inc/D3D12/D3D12Renderer.h" bodystart="86" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="class_azura_1_1_d3_d12_1_1_d3_d12_renderer_1a0e447d4a466915e2ec206e5933aa4d69" prot="private" static="no" mutable="no">
+        <type><ref refid="class_azura_1_1_containers_1_1_vector" kindref="compound">Containers::Vector</ref>&lt; <ref refid="class_azura_1_1_d3_d12_1_1_d3_d12_drawable_pool" kindref="compound">D3D12DrawablePool</ref> &gt;</type>
+        <definition>Containers::Vector&lt;D3D12DrawablePool&gt; Azura::D3D12::D3D12Renderer::m_drawablePools</definition>
+        <argsstring></argsstring>
+        <name>m_drawablePools</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Source/Azura/RenderSystem/Inc/D3D12/D3D12Renderer.h" line="88" column="1" bodyfile="Source/Azura/RenderSystem/Inc/D3D12/D3D12Renderer.h" bodystart="88" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="class_azura_1_1_d3_d12_1_1_d3_d12_renderer_1ad5fa57dce6a6172513177843f3c1e99c" prot="private" static="no" mutable="no">
+        <type><ref refid="class_azura_1_1_containers_1_1_vector" kindref="compound">Containers::Vector</ref>&lt; <ref refid="class_azura_1_1_d3_d12_1_1_d3_d12_compute_pool" kindref="compound">D3D12ComputePool</ref> &gt;</type>
+        <definition>Containers::Vector&lt;D3D12ComputePool&gt; Azura::D3D12::D3D12Renderer::m_computePools</definition>
+        <argsstring></argsstring>
+        <name>m_computePools</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Source/Azura/RenderSystem/Inc/D3D12/D3D12Renderer.h" line="89" column="1" bodyfile="Source/Azura/RenderSystem/Inc/D3D12/D3D12Renderer.h" bodystart="89" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="class_azura_1_1_d3_d12_1_1_d3_d12_renderer_1a5d5c75a62d42868d27ab5a3b7641ad61" prot="private" static="no" mutable="no">
+        <type><ref refid="class_azura_1_1_containers_1_1_vector" kindref="compound">Containers::Vector</ref>&lt; <ref refid="class_azura_1_1_d3_d12_1_1_d3_d12_scoped_shader" kindref="compound">D3D12ScopedShader</ref> &gt;</type>
+        <definition>Containers::Vector&lt;D3D12ScopedShader&gt; Azura::D3D12::D3D12Renderer::m_shaders</definition>
+        <argsstring></argsstring>
+        <name>m_shaders</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Source/Azura/RenderSystem/Inc/D3D12/D3D12Renderer.h" line="90" column="1" bodyfile="Source/Azura/RenderSystem/Inc/D3D12/D3D12Renderer.h" bodystart="90" bodyend="-1"/>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="public-func">
+      <memberdef kind="function" id="class_azura_1_1_d3_d12_1_1_d3_d12_renderer_1a19b6d189abadd65f5df34002b5cea5ad" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>Azura::D3D12::D3D12Renderer::D3D12Renderer</definition>
+        <argsstring>(const ApplicationInfo &amp;appInfo, const DeviceRequirements &amp;deviceRequirements, const ApplicationRequirements &amp;appRequirements, const SwapChainRequirements &amp;swapChainRequirements, const RenderPassRequirements &amp;renderPassRequirements, const DescriptorRequirements &amp;descriptorRequirements, const ShaderRequirements &amp;shaderRequirements, Memory::Allocator &amp;mainAllocator, Memory::Allocator &amp;drawAllocator, Window &amp;window)</argsstring>
+        <name>D3D12Renderer</name>
+        <param>
+          <type>const <ref refid="struct_azura_1_1_application_info" kindref="compound">ApplicationInfo</ref> &amp;</type>
+          <declname>appInfo</declname>
+        </param>
+        <param>
+          <type>const <ref refid="struct_azura_1_1_device_requirements" kindref="compound">DeviceRequirements</ref> &amp;</type>
+          <declname>deviceRequirements</declname>
+        </param>
+        <param>
+          <type>const <ref refid="struct_azura_1_1_application_requirements" kindref="compound">ApplicationRequirements</ref> &amp;</type>
+          <declname>appRequirements</declname>
+        </param>
+        <param>
+          <type>const <ref refid="struct_azura_1_1_swap_chain_requirements" kindref="compound">SwapChainRequirements</ref> &amp;</type>
+          <declname>swapChainRequirements</declname>
+        </param>
+        <param>
+          <type>const <ref refid="struct_azura_1_1_render_pass_requirements" kindref="compound">RenderPassRequirements</ref> &amp;</type>
+          <declname>renderPassRequirements</declname>
+        </param>
+        <param>
+          <type>const <ref refid="struct_azura_1_1_descriptor_requirements" kindref="compound">DescriptorRequirements</ref> &amp;</type>
+          <declname>descriptorRequirements</declname>
+        </param>
+        <param>
+          <type>const <ref refid="struct_azura_1_1_shader_requirements" kindref="compound">ShaderRequirements</ref> &amp;</type>
+          <declname>shaderRequirements</declname>
+        </param>
+        <param>
+          <type><ref refid="class_azura_1_1_memory_1_1_allocator" kindref="compound">Memory::Allocator</ref> &amp;</type>
+          <declname>mainAllocator</declname>
+        </param>
+        <param>
+          <type><ref refid="class_azura_1_1_memory_1_1_allocator" kindref="compound">Memory::Allocator</ref> &amp;</type>
+          <declname>drawAllocator</declname>
+        </param>
+        <param>
+          <type><ref refid="class_azura_1_1_window" kindref="compound">Window</ref> &amp;</type>
+          <declname>window</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Source/Azura/RenderSystem/Inc/D3D12/D3D12Renderer.h" line="25" column="1" bodyfile="Source/Azura/RenderSystem/Src/D3D12/D3D12Renderer.cpp" bodystart="15" bodyend="207"/>
+      </memberdef>
+      <memberdef kind="function" id="class_azura_1_1_d3_d12_1_1_d3_d12_renderer_1a1d53fe29957be4417a40768f55dd1d8f" prot="public" static="no" const="yes" explicit="no" inline="no" virt="virtual">
+        <type>String</type>
+        <definition>String Azura::D3D12::D3D12Renderer::GetRenderingAPI</definition>
+        <argsstring>() const override</argsstring>
+        <name>GetRenderingAPI</name>
+        <reimplements refid="class_azura_1_1_renderer_1aaf7b365a382ca3301dc5fc982ade5209">GetRenderingAPI</reimplements>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Source/Azura/RenderSystem/Inc/D3D12/D3D12Renderer.h" line="36" column="1" bodyfile="Source/Azura/RenderSystem/Src/D3D12/D3D12Renderer.cpp" bodystart="209" bodyend="211"/>
+      </memberdef>
+      <memberdef kind="function" id="class_azura_1_1_d3_d12_1_1_d3_d12_renderer_1a5090400633438bf34318088631161d12" prot="public" static="no" const="no" explicit="no" inline="no" virt="virtual">
+        <type><ref refid="class_azura_1_1_drawable_pool" kindref="compound">DrawablePool</ref> &amp;</type>
+        <definition>DrawablePool &amp; Azura::D3D12::D3D12Renderer::CreateDrawablePool</definition>
+        <argsstring>(const DrawablePoolCreateInfo &amp;createInfo) override</argsstring>
+        <name>CreateDrawablePool</name>
+        <reimplements refid="class_azura_1_1_renderer_1a6ea67ac02797d16185ca3d8e29fc86c9">CreateDrawablePool</reimplements>
+        <param>
+          <type>const <ref refid="struct_azura_1_1_drawable_pool_create_info" kindref="compound">DrawablePoolCreateInfo</ref> &amp;</type>
+          <declname>createInfo</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Source/Azura/RenderSystem/Inc/D3D12/D3D12Renderer.h" line="38" column="1" bodyfile="Source/Azura/RenderSystem/Src/D3D12/D3D12Renderer.cpp" bodystart="213" bodyend="229"/>
+      </memberdef>
+      <memberdef kind="function" id="class_azura_1_1_d3_d12_1_1_d3_d12_renderer_1a0681872adc10dbd7c0da8246fcbc9adc" prot="public" static="no" const="no" explicit="no" inline="no" virt="virtual">
+        <type><ref refid="class_azura_1_1_compute_pool" kindref="compound">ComputePool</ref> &amp;</type>
+        <definition>ComputePool &amp; Azura::D3D12::D3D12Renderer::CreateComputePool</definition>
+        <argsstring>(const ComputePoolCreateInfo &amp;createInfo) override</argsstring>
+        <name>CreateComputePool</name>
+        <reimplements refid="class_azura_1_1_renderer_1ad834cd9005516b88352a021b938c6325">CreateComputePool</reimplements>
+        <param>
+          <type>const <ref refid="struct_azura_1_1_compute_pool_create_info" kindref="compound">ComputePoolCreateInfo</ref> &amp;</type>
+          <declname>createInfo</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Source/Azura/RenderSystem/Inc/D3D12/D3D12Renderer.h" line="39" column="1" bodyfile="Source/Azura/RenderSystem/Src/D3D12/D3D12Renderer.cpp" bodystart="231" bodyend="247"/>
+      </memberdef>
+      <memberdef kind="function" id="class_azura_1_1_d3_d12_1_1_d3_d12_renderer_1ac6016bae4c2d3a0b8aa6b45831bbb27d" prot="public" static="no" const="no" explicit="no" inline="no" virt="virtual">
+        <type>void</type>
+        <definition>void Azura::D3D12::D3D12Renderer::Submit</definition>
+        <argsstring>() override</argsstring>
+        <name>Submit</name>
+        <reimplements refid="class_azura_1_1_renderer_1aa494fc2068e3750ff281444ec23c0dd3">Submit</reimplements>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Source/Azura/RenderSystem/Inc/D3D12/D3D12Renderer.h" line="41" column="1" bodyfile="Source/Azura/RenderSystem/Src/D3D12/D3D12Renderer.cpp" bodystart="249" bodyend="391"/>
+      </memberdef>
+      <memberdef kind="function" id="class_azura_1_1_d3_d12_1_1_d3_d12_renderer_1aa4973ead72d86eb9b58f5b8a82182e0e" prot="public" static="no" const="no" explicit="no" inline="no" virt="virtual">
+        <type>void</type>
+        <definition>void Azura::D3D12::D3D12Renderer::RenderFrame</definition>
+        <argsstring>() override</argsstring>
+        <name>RenderFrame</name>
+        <reimplements refid="class_azura_1_1_renderer_1af0ebec31c1f8a8e11601fc1632b9e54e">RenderFrame</reimplements>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Source/Azura/RenderSystem/Inc/D3D12/D3D12Renderer.h" line="42" column="1" bodyfile="Source/Azura/RenderSystem/Src/D3D12/D3D12Renderer.cpp" bodystart="393" bodyend="435"/>
+      </memberdef>
+      <memberdef kind="function" id="class_azura_1_1_d3_d12_1_1_d3_d12_renderer_1aeb4c8e0e11775653fc69a18afc4e7bb6" prot="public" static="no" const="yes" explicit="no" inline="no" virt="virtual">
+        <type>void</type>
+        <definition>void Azura::D3D12::D3D12Renderer::SnapshotFrame</definition>
+        <argsstring>(const String &amp;exportPath) const override</argsstring>
+        <name>SnapshotFrame</name>
+        <reimplements refid="class_azura_1_1_renderer_1a4a4a63908228880853e8781da6a8131f">SnapshotFrame</reimplements>
+        <param>
+          <type>const String &amp;</type>
+          <declname>exportPath</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Source/Azura/RenderSystem/Inc/D3D12/D3D12Renderer.h" line="44" column="1" bodyfile="Source/Azura/RenderSystem/Src/D3D12/D3D12Renderer.cpp" bodystart="437" bodyend="440"/>
+      </memberdef>
+      <memberdef kind="function" id="class_azura_1_1_d3_d12_1_1_d3_d12_renderer_1a8e9b2e1a00e2b8a604ea678dababa9e7" prot="public" static="no" const="no" explicit="no" inline="no" virt="virtual">
+        <type>void</type>
+        <definition>void Azura::D3D12::D3D12Renderer::BindRenderTarget</definition>
+        <argsstring>(U32 renderTargetId, const TextureDesc &amp;desc, const U8 *buffer) override</argsstring>
+        <name>BindRenderTarget</name>
+        <reimplements refid="class_azura_1_1_renderer_1afffbe190821b6e162f0dcc722f4ce6fc">BindRenderTarget</reimplements>
+        <param>
+          <type>U32</type>
+          <declname>renderTargetId</declname>
+        </param>
+        <param>
+          <type>const <ref refid="struct_azura_1_1_texture_desc" kindref="compound">TextureDesc</ref> &amp;</type>
+          <declname>desc</declname>
+        </param>
+        <param>
+          <type>const U8 *</type>
+          <declname>buffer</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Source/Azura/RenderSystem/Inc/D3D12/D3D12Renderer.h" line="46" column="1" bodyfile="Source/Azura/RenderSystem/Src/D3D12/D3D12Renderer.cpp" bodystart="451" bodyend="470"/>
+      </memberdef>
+      <memberdef kind="function" id="class_azura_1_1_d3_d12_1_1_d3_d12_renderer_1ae261477b63af2383a88932702dae4813" prot="public" static="no" const="no" explicit="no" inline="no" virt="virtual">
+        <type>void</type>
+        <definition>void Azura::D3D12::D3D12Renderer::BindBufferTarget</definition>
+        <argsstring>(U32 bufferTargetId, const U8 *buffer) override</argsstring>
+        <name>BindBufferTarget</name>
+        <reimplements refid="class_azura_1_1_renderer_1adedba457f2836d839d0d611476b22cf3">BindBufferTarget</reimplements>
+        <param>
+          <type>U32</type>
+          <declname>bufferTargetId</declname>
+        </param>
+        <param>
+          <type>const U8 *</type>
+          <declname>buffer</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Source/Azura/RenderSystem/Inc/D3D12/D3D12Renderer.h" line="47" column="1" bodyfile="Source/Azura/RenderSystem/Src/D3D12/D3D12Renderer.cpp" bodystart="472" bodyend="488"/>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="private-func">
+      <memberdef kind="function" id="class_azura_1_1_d3_d12_1_1_d3_d12_renderer_1a8b2ca6847c5e8077d344fcb7eabb70df" prot="private" static="no" const="no" explicit="no" inline="no" virt="virtual">
+        <type>void</type>
+        <definition>void Azura::D3D12::D3D12Renderer::AddShader</definition>
+        <argsstring>(const ShaderCreateInfo &amp;info) override</argsstring>
+        <name>AddShader</name>
+        <reimplements refid="class_azura_1_1_renderer_1ad199a717e1f08ba31264a0e6857f0673">AddShader</reimplements>
+        <param>
+          <type>const <ref refid="struct_azura_1_1_shader_create_info" kindref="compound">ShaderCreateInfo</ref> &amp;</type>
+          <declname>info</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Source/Azura/RenderSystem/Inc/D3D12/D3D12Renderer.h" line="50" column="1" bodyfile="Source/Azura/RenderSystem/Src/D3D12/D3D12Renderer.cpp" bodystart="442" bodyend="449"/>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <inheritancegraph>
+      <node id="160">
+        <label>Azura::D3D12::D3D12Renderer</label>
+        <link refid="class_azura_1_1_d3_d12_1_1_d3_d12_renderer"/>
+        <childnode refid="161" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="161">
+        <label>Azura::Renderer</label>
+        <link refid="class_azura_1_1_renderer"/>
+      </node>
+    </inheritancegraph>
+    <collaborationgraph>
+      <node id="166">
+        <label>Azura::Containers::Vector&lt; Azura::DescriptorSlot &gt;</label>
+        <link refid="class_azura_1_1_containers_1_1_vector"/>
+      </node>
+      <node id="162">
+        <label>Azura::D3D12::D3D12Renderer</label>
+        <link refid="class_azura_1_1_d3_d12_1_1_d3_d12_renderer"/>
+        <childnode refid="163" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="163">
+        <label>Azura::Renderer</label>
+        <link refid="class_azura_1_1_renderer"/>
+        <childnode refid="164" relation="usage">
+          <edgelabel>m_descriptorCount</edgelabel>
+        </childnode>
+        <childnode refid="165" relation="usage">
+          <edgelabel>m_descriptorSetTable</edgelabel>
+        </childnode>
+        <childnode refid="166" relation="usage">
+          <edgelabel>m_descriptorSlots</edgelabel>
+        </childnode>
+      </node>
+      <node id="164">
+        <label>Azura::DescriptorCount</label>
+        <link refid="struct_azura_1_1_descriptor_count"/>
+      </node>
+      <node id="165">
+        <label>Azura::Containers::Vector&lt; Azura::DescriptorTableEntry &gt;</label>
+        <link refid="class_azura_1_1_containers_1_1_vector"/>
+      </node>
+    </collaborationgraph>
+    <location file="Source/Azura/RenderSystem/Inc/D3D12/D3D12Renderer.h" line="22" column="1" bodyfile="Source/Azura/RenderSystem/Inc/D3D12/D3D12Renderer.h" bodystart="22" bodyend="91"/>
+    <listofallmembers>
+      <member refid="class_azura_1_1_d3_d12_1_1_d3_d12_renderer_1a8b2ca6847c5e8077d344fcb7eabb70df" prot="private" virt="virtual"><scope>Azura::D3D12::D3D12Renderer</scope><name>AddShader</name></member>
+      <member refid="class_azura_1_1_d3_d12_1_1_d3_d12_renderer_1ae261477b63af2383a88932702dae4813" prot="public" virt="virtual"><scope>Azura::D3D12::D3D12Renderer</scope><name>BindBufferTarget</name></member>
+      <member refid="class_azura_1_1_d3_d12_1_1_d3_d12_renderer_1a8e9b2e1a00e2b8a604ea678dababa9e7" prot="public" virt="virtual"><scope>Azura::D3D12::D3D12Renderer</scope><name>BindRenderTarget</name></member>
+      <member refid="class_azura_1_1_d3_d12_1_1_d3_d12_renderer_1a0681872adc10dbd7c0da8246fcbc9adc" prot="public" virt="virtual"><scope>Azura::D3D12::D3D12Renderer</scope><name>CreateComputePool</name></member>
+      <member refid="class_azura_1_1_d3_d12_1_1_d3_d12_renderer_1a5090400633438bf34318088631161d12" prot="public" virt="virtual"><scope>Azura::D3D12::D3D12Renderer</scope><name>CreateDrawablePool</name></member>
+      <member refid="class_azura_1_1_d3_d12_1_1_d3_d12_renderer_1a19b6d189abadd65f5df34002b5cea5ad" prot="public" virt="non-virtual"><scope>Azura::D3D12::D3D12Renderer</scope><name>D3D12Renderer</name></member>
+      <member refid="class_azura_1_1_renderer_1a89e45cfaf87d8616a862c63f8e3def4a" prot="public" virt="virtual"><scope>Azura::D3D12::D3D12Renderer</scope><name>EnterRenderFrame</name></member>
+      <member refid="class_azura_1_1_renderer_1a64cba9c177877b7a8aae0dbe80c591b0" prot="public" virt="virtual"><scope>Azura::D3D12::D3D12Renderer</scope><name>ExitRenderFrame</name></member>
+      <member refid="class_azura_1_1_renderer_1a20ae9aefdbe3f8ab5ab413d13279c624" prot="protected" virt="non-virtual"><scope>Azura::D3D12::D3D12Renderer</scope><name>GetApplicationInfo</name></member>
+      <member refid="class_azura_1_1_renderer_1ac03c28c857468e9f6c6c9795db17e9f3" prot="protected" virt="non-virtual"><scope>Azura::D3D12::D3D12Renderer</scope><name>GetApplicationRequirements</name></member>
+      <member refid="class_azura_1_1_renderer_1ad390707811c569f789041d3833841575" prot="protected" virt="non-virtual"><scope>Azura::D3D12::D3D12Renderer</scope><name>GetCurrentFrame</name></member>
+      <member refid="class_azura_1_1_renderer_1a6b13c20fafc1df407083c0fff8db0357" prot="protected" virt="non-virtual"><scope>Azura::D3D12::D3D12Renderer</scope><name>GetDeviceRequirements</name></member>
+      <member refid="class_azura_1_1_d3_d12_1_1_d3_d12_renderer_1a1d53fe29957be4417a40768f55dd1d8f" prot="public" virt="virtual"><scope>Azura::D3D12::D3D12Renderer</scope><name>GetRenderingAPI</name></member>
+      <member refid="class_azura_1_1_renderer_1ac78e2c6d8f9f973dcbb2ec5ee9b937cb" prot="protected" virt="non-virtual"><scope>Azura::D3D12::D3D12Renderer</scope><name>GetSwapchainRequirements</name></member>
+      <member refid="class_azura_1_1_d3_d12_1_1_d3_d12_renderer_1a4a1ed8d1f33a086b598132bf542e54cb" prot="private" virt="non-virtual"><scope>Azura::D3D12::D3D12Renderer</scope><name>log_D3D12RenderSystem</name></member>
+      <member refid="class_azura_1_1_d3_d12_1_1_d3_d12_renderer_1a0587f3798a433e0c8ed33aea7d563d8c" prot="private" virt="non-virtual"><scope>Azura::D3D12::D3D12Renderer</scope><name>m_bufferTargetUpdates</name></member>
+      <member refid="class_azura_1_1_d3_d12_1_1_d3_d12_renderer_1a3448713bb1c01503356dcdd10a4b704e" prot="private" virt="non-virtual"><scope>Azura::D3D12::D3D12Renderer</scope><name>m_commandAllocator</name></member>
+      <member refid="class_azura_1_1_d3_d12_1_1_d3_d12_renderer_1a83b7c717ee46aacb95c445a4bf18501b" prot="private" virt="non-virtual"><scope>Azura::D3D12::D3D12Renderer</scope><name>m_computePasses</name></member>
+      <member refid="class_azura_1_1_d3_d12_1_1_d3_d12_renderer_1ad5fa57dce6a6172513177843f3c1e99c" prot="private" virt="non-virtual"><scope>Azura::D3D12::D3D12Renderer</scope><name>m_computePools</name></member>
+      <member refid="class_azura_1_1_d3_d12_1_1_d3_d12_renderer_1a68ee06841989846f4cf272ac36831625" prot="private" virt="non-virtual"><scope>Azura::D3D12::D3D12Renderer</scope><name>m_depthTexture</name></member>
+      <member refid="class_azura_1_1_renderer_1a1f8af6c4bbf4064bf34bbf7437ec72df" prot="protected" virt="non-virtual"><scope>Azura::D3D12::D3D12Renderer</scope><name>m_descriptorCount</name></member>
+      <member refid="class_azura_1_1_renderer_1a87d7051f01160aa69535345254c2a0a8" prot="protected" virt="non-virtual"><scope>Azura::D3D12::D3D12Renderer</scope><name>m_descriptorSetTable</name></member>
+      <member refid="class_azura_1_1_renderer_1a841f3383edb98b38eb159e5d5787f0e2" prot="protected" virt="non-virtual"><scope>Azura::D3D12::D3D12Renderer</scope><name>m_descriptorSlots</name></member>
+      <member refid="class_azura_1_1_d3_d12_1_1_d3_d12_renderer_1aceabc75197ab88afe6ad4d7a56b6c7de" prot="private" virt="non-virtual"><scope>Azura::D3D12::D3D12Renderer</scope><name>m_device</name></member>
+      <member refid="class_azura_1_1_d3_d12_1_1_d3_d12_renderer_1a0e447d4a466915e2ec206e5933aa4d69" prot="private" virt="non-virtual"><scope>Azura::D3D12::D3D12Renderer</scope><name>m_drawablePools</name></member>
+      <member refid="class_azura_1_1_renderer_1a8dbf98fe051a3691d4626dddc7ff4173" prot="protected" virt="non-virtual"><scope>Azura::D3D12::D3D12Renderer</scope><name>m_drawPoolAllocator</name></member>
+      <member refid="class_azura_1_1_d3_d12_1_1_d3_d12_renderer_1a90e9138635c5e6c36bceb20d9cbf7dd9" prot="private" virt="non-virtual"><scope>Azura::D3D12::D3D12Renderer</scope><name>m_dsvDescriptorSize</name></member>
+      <member refid="class_azura_1_1_d3_d12_1_1_d3_d12_renderer_1a1f2f07eb844d2ac5ee82ae4fd4ab47ab" prot="private" virt="non-virtual"><scope>Azura::D3D12::D3D12Renderer</scope><name>m_initAllocator</name></member>
+      <member refid="class_azura_1_1_d3_d12_1_1_d3_d12_renderer_1a25f2f09b5da14c863687dbb0bdc2da57" prot="private" virt="non-virtual"><scope>Azura::D3D12::D3D12Renderer</scope><name>m_initBuffer</name></member>
+      <member refid="class_azura_1_1_renderer_1a12af92c6e91812549a69d4e01c2ecfab" prot="protected" virt="non-virtual"><scope>Azura::D3D12::D3D12Renderer</scope><name>m_mainAllocator</name></member>
+      <member refid="class_azura_1_1_d3_d12_1_1_d3_d12_renderer_1a28d453b9795d13b145ac0dccbebe1366" prot="private" virt="non-virtual"><scope>Azura::D3D12::D3D12Renderer</scope><name>m_mainComputeCommandQueue</name></member>
+      <member refid="class_azura_1_1_d3_d12_1_1_d3_d12_renderer_1a122c3e1f4a41459263da43bb9c3e0534" prot="private" virt="non-virtual"><scope>Azura::D3D12::D3D12Renderer</scope><name>m_mainGraphicsCommandQueue</name></member>
+      <member refid="class_azura_1_1_d3_d12_1_1_d3_d12_renderer_1a5d5c305067fee4187aad079b0ad9152a" prot="private" virt="non-virtual"><scope>Azura::D3D12::D3D12Renderer</scope><name>m_perFrameAllocator</name></member>
+      <member refid="class_azura_1_1_d3_d12_1_1_d3_d12_renderer_1ad0833711cb1c57eda8f0e9b7df1ae62f" prot="private" virt="non-virtual"><scope>Azura::D3D12::D3D12Renderer</scope><name>m_perFrameBuffer</name></member>
+      <member refid="class_azura_1_1_d3_d12_1_1_d3_d12_renderer_1a06ac3e293ba302bad45494a6b53f3e39" prot="private" virt="non-virtual"><scope>Azura::D3D12::D3D12Renderer</scope><name>m_renderPasses</name></member>
+      <member refid="class_azura_1_1_d3_d12_1_1_d3_d12_renderer_1adc3a36f54addc67d7273a760e499481f" prot="private" virt="non-virtual"><scope>Azura::D3D12::D3D12Renderer</scope><name>m_renderSequence</name></member>
+      <member refid="class_azura_1_1_d3_d12_1_1_d3_d12_renderer_1ab22280fb9e13a436f1f1c09eec587f8b" prot="private" virt="non-virtual"><scope>Azura::D3D12::D3D12Renderer</scope><name>m_renderTargetUpdates</name></member>
+      <member refid="class_azura_1_1_d3_d12_1_1_d3_d12_renderer_1ae4c5820d246618fdbd6f70a7b12a21e1" prot="private" virt="non-virtual"><scope>Azura::D3D12::D3D12Renderer</scope><name>m_rtvDescriptorSize</name></member>
+      <member refid="class_azura_1_1_d3_d12_1_1_d3_d12_renderer_1aec2f4ae78a873050c6b3b8b12bb5ec26" prot="private" virt="non-virtual"><scope>Azura::D3D12::D3D12Renderer</scope><name>m_scissorRect</name></member>
+      <member refid="class_azura_1_1_d3_d12_1_1_d3_d12_renderer_1a5d5c75a62d42868d27ab5a3b7641ad61" prot="private" virt="non-virtual"><scope>Azura::D3D12::D3D12Renderer</scope><name>m_shaders</name></member>
+      <member refid="class_azura_1_1_d3_d12_1_1_d3_d12_renderer_1a7aa10a4d57cec8920494f6542fc8ad06" prot="private" virt="non-virtual"><scope>Azura::D3D12::D3D12Renderer</scope><name>m_stagingBuffer</name></member>
+      <member refid="class_azura_1_1_d3_d12_1_1_d3_d12_renderer_1ac6bd17004828c9d6a03c6d9a06fb5bc7" prot="private" virt="non-virtual"><scope>Azura::D3D12::D3D12Renderer</scope><name>m_swapChain</name></member>
+      <member refid="class_azura_1_1_d3_d12_1_1_d3_d12_renderer_1ab4ee85e29fa571861587367f7b1243e6" prot="private" virt="non-virtual"><scope>Azura::D3D12::D3D12Renderer</scope><name>m_targetBuffers</name></member>
+      <member refid="class_azura_1_1_d3_d12_1_1_d3_d12_renderer_1a3ba777564878ee26779e873902ebfc8b" prot="private" virt="non-virtual"><scope>Azura::D3D12::D3D12Renderer</scope><name>m_targetImages</name></member>
+      <member refid="class_azura_1_1_d3_d12_1_1_d3_d12_renderer_1a038b31437a83bb23c1a69b2eb25fef6c" prot="private" virt="non-virtual"><scope>Azura::D3D12::D3D12Renderer</scope><name>m_viewport</name></member>
+      <member refid="class_azura_1_1_renderer_1a2e3cdf06636b8f2e0e914fffc6f40386" prot="protected" virt="non-virtual"><scope>Azura::D3D12::D3D12Renderer</scope><name>m_window</name></member>
+      <member refid="class_azura_1_1_renderer_1a32052c773664639dce150e99324728c1" prot="public" virt="non-virtual"><scope>Azura::D3D12::D3D12Renderer</scope><name>operator=</name></member>
+      <member refid="class_azura_1_1_renderer_1a77ca39f366cb06456d73d1ba4b3e2b8e" prot="public" virt="non-virtual"><scope>Azura::D3D12::D3D12Renderer</scope><name>operator=</name></member>
+      <member refid="class_azura_1_1_renderer_1a54632abe8c17005a9a9029f3f17df415" prot="public" virt="non-virtual"><scope>Azura::D3D12::D3D12Renderer</scope><name>Renderer</name></member>
+      <member refid="class_azura_1_1_renderer_1a0558f645a2e0108f24cc9f01c94eea54" prot="public" virt="non-virtual"><scope>Azura::D3D12::D3D12Renderer</scope><name>Renderer</name></member>
+      <member refid="class_azura_1_1_renderer_1a546303972ca665980703c1d3de337aa9" prot="public" virt="non-virtual"><scope>Azura::D3D12::D3D12Renderer</scope><name>Renderer</name></member>
+      <member refid="class_azura_1_1_d3_d12_1_1_d3_d12_renderer_1aa4973ead72d86eb9b58f5b8a82182e0e" prot="public" virt="virtual"><scope>Azura::D3D12::D3D12Renderer</scope><name>RenderFrame</name></member>
+      <member refid="class_azura_1_1_renderer_1aa4c13c392bad69615bb9dabdc1be9c23" prot="protected" virt="non-virtual"><scope>Azura::D3D12::D3D12Renderer</scope><name>SetCurrentFrame</name></member>
+      <member refid="class_azura_1_1_d3_d12_1_1_d3_d12_renderer_1aeb4c8e0e11775653fc69a18afc4e7bb6" prot="public" virt="virtual"><scope>Azura::D3D12::D3D12Renderer</scope><name>SnapshotFrame</name></member>
+      <member refid="class_azura_1_1_d3_d12_1_1_d3_d12_renderer_1ac6016bae4c2d3a0b8aa6b45831bbb27d" prot="public" virt="virtual"><scope>Azura::D3D12::D3D12Renderer</scope><name>Submit</name></member>
+      <member refid="class_azura_1_1_renderer_1a88bf8155464cceec60344f094926075b" prot="public" virt="virtual"><scope>Azura::D3D12::D3D12Renderer</scope><name>~Renderer</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

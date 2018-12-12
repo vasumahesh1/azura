@@ -1,0 +1,61 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.8.14">
+  <compounddef id="struct_azura_1_1_uniform_buffer_info" kind="struct" language="C++" prot="public" final="yes">
+    <compoundname>Azura::UniformBufferInfo</compoundname>
+    <basecompoundref refid="struct_azura_1_1_buffer_info" prot="public" virt="non-virtual">Azura::BufferInfo</basecompoundref>
+      <sectiondef kind="public-attrib">
+      <memberdef kind="variable" id="struct_azura_1_1_uniform_buffer_info_1af3ac3b61a68c0bbf60dc753bc2245630" prot="public" static="no" mutable="no">
+        <type>U32</type>
+        <definition>U32 Azura::UniformBufferInfo::m_set</definition>
+        <argsstring></argsstring>
+        <name>m_set</name>
+        <initializer>{0}</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Source/Azura/RenderSystem/Inc/Generic/GenericTypes.h" line="343" column="1" bodyfile="Source/Azura/RenderSystem/Inc/Generic/GenericTypes.h" bodystart="343" bodyend="-1"/>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <inheritancegraph>
+      <node id="585">
+        <label>Azura::UniformBufferInfo</label>
+        <link refid="struct_azura_1_1_uniform_buffer_info"/>
+        <childnode refid="586" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="586">
+        <label>Azura::BufferInfo</label>
+        <link refid="struct_azura_1_1_buffer_info"/>
+      </node>
+    </inheritancegraph>
+    <collaborationgraph>
+      <node id="587">
+        <label>Azura::UniformBufferInfo</label>
+        <link refid="struct_azura_1_1_uniform_buffer_info"/>
+        <childnode refid="588" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="588">
+        <label>Azura::BufferInfo</label>
+        <link refid="struct_azura_1_1_buffer_info"/>
+      </node>
+    </collaborationgraph>
+    <location file="Source/Azura/RenderSystem/Inc/Generic/GenericTypes.h" line="342" column="1" bodyfile="Source/Azura/RenderSystem/Inc/Generic/GenericTypes.h" bodystart="342" bodyend="344"/>
+    <listofallmembers>
+      <member refid="struct_azura_1_1_buffer_info_1a15f674e2f8b0c828ee698ae75105f5a8" prot="public" virt="non-virtual"><scope>Azura::UniformBufferInfo</scope><name>BufferInfo</name></member>
+      <member refid="struct_azura_1_1_buffer_info_1a8570fd644b18dcac21aaab12423d93dc" prot="public" virt="non-virtual"><scope>Azura::UniformBufferInfo</scope><name>m_binding</name></member>
+      <member refid="struct_azura_1_1_buffer_info_1af443f3e9c2a71cde4bfbe4959237d2e3" prot="public" virt="non-virtual"><scope>Azura::UniformBufferInfo</scope><name>m_byteSize</name></member>
+      <member refid="struct_azura_1_1_buffer_info_1abb062997c2b354590b2aaf7d1abe0c9d" prot="public" virt="non-virtual"><scope>Azura::UniformBufferInfo</scope><name>m_maxByteSize</name></member>
+      <member refid="struct_azura_1_1_buffer_info_1a68df2d2e92031bc7003f45db66ac9679" prot="public" virt="non-virtual"><scope>Azura::UniformBufferInfo</scope><name>m_offset</name></member>
+      <member refid="struct_azura_1_1_uniform_buffer_info_1af3ac3b61a68c0bbf60dc753bc2245630" prot="public" virt="non-virtual"><scope>Azura::UniformBufferInfo</scope><name>m_set</name></member>
+      <member refid="struct_azura_1_1_buffer_info_1ab304f58232f7514cf83d5d614ad5555d" prot="public" virt="non-virtual"><scope>Azura::UniformBufferInfo</scope><name>m_sourceBufferId</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>
