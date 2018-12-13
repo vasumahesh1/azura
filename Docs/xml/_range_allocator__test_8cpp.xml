@@ -179,7 +179,7 @@
 <codeline lineno="26"><highlight class="normal"><sp/><sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">auto</highlight><highlight class="normal"><sp/>basePtr<sp/><sp/>=<sp/>rangeAllocator.GetBasePtr();</highlight></codeline>
 <codeline lineno="27"><highlight class="normal"><sp/><sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">auto</highlight><highlight class="normal"><sp/>baseSize<sp/>=<sp/>rangeAllocator.GetSize();</highlight></codeline>
 <codeline lineno="28"><highlight class="normal"></highlight></codeline>
-<codeline lineno="29"><highlight class="normal"><sp/><sp/></highlight><highlight class="keyword">auto</highlight><highlight class="normal"><sp/>ptr<sp/>=<sp/>rangeAllocator.New&lt;</highlight><highlight class="keywordtype">int</highlight><highlight class="normal">&gt;(0);</highlight></codeline>
+<codeline lineno="29"><highlight class="normal"><sp/><sp/></highlight><highlight class="keyword">auto</highlight><highlight class="normal"><sp/>ptr<sp/>=<sp/>rangeAllocator.<ref refid="class_azura_1_1_memory_1_1_allocator_1a499fb3b777375a6b0d32cd8143e1586b" kindref="member">New</ref>&lt;</highlight><highlight class="keywordtype">int</highlight><highlight class="normal">&gt;(0);</highlight></codeline>
 <codeline lineno="30"><highlight class="normal"></highlight></codeline>
 <codeline lineno="31"><highlight class="normal"><sp/><sp/>ASSERT_NE(ptr,<sp/></highlight><highlight class="keyword">nullptr</highlight><highlight class="normal">);</highlight></codeline>
 <codeline lineno="32"><highlight class="normal"><sp/><sp/>ASSERT_EQ(*ptr,<sp/>0);</highlight></codeline>
@@ -211,7 +211,7 @@
 <codeline lineno="58"><highlight class="normal"></highlight></codeline>
 <codeline lineno="59"><highlight class="normal"><sp/><sp/></highlight><highlight class="comment">//<sp/>BLock<sp/>Allocate</highlight><highlight class="normal"></highlight></codeline>
 <codeline lineno="60"><highlight class="normal"><sp/><sp/>{</highlight></codeline>
-<codeline lineno="61"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">auto</highlight><highlight class="normal"><sp/>ptr<sp/>=<sp/>rangeAllocator.New&lt;</highlight><highlight class="keywordtype">int</highlight><highlight class="normal">&gt;(0);</highlight></codeline>
+<codeline lineno="61"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">auto</highlight><highlight class="normal"><sp/>ptr<sp/>=<sp/>rangeAllocator.<ref refid="class_azura_1_1_memory_1_1_allocator_1a499fb3b777375a6b0d32cd8143e1586b" kindref="member">New</ref>&lt;</highlight><highlight class="keywordtype">int</highlight><highlight class="normal">&gt;(0);</highlight></codeline>
 <codeline lineno="62"><highlight class="normal"><sp/><sp/><sp/><sp/>*ptr<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>=<sp/>99;</highlight></codeline>
 <codeline lineno="63"><highlight class="normal"><sp/><sp/>}</highlight></codeline>
 <codeline lineno="64"><highlight class="normal"></highlight></codeline>

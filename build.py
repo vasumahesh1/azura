@@ -239,7 +239,7 @@ def run():
     print("Building Doxygen XML")
     docsCommand = [executableMap['doxygen'], 'Doxyfile']
     executeCommand(docsCommand)
-    print("Building Markdown Files")
+    print("Building Markdown Files: moxygen --anchors --groups --output \"Docs/Module - %s.md\" Docs/xml/")
     # moxygen --anchors --groups --output "Docs/Module - %s.md" Docs/xml/
     docsCommand = ['moxygen', '--anchors', '--groups', '--output "Docs/Module - %s.md" Docs/xml/']
     executeCommand(docsCommand)

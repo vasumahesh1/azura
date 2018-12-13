@@ -186,7 +186,7 @@
 <codeline lineno="22"><highlight class="normal"><sp/><sp/><ref refid="class_azura_1_1_memory_1_1_heap_memory_buffer" kindref="compound">Azura::Memory::HeapMemoryBuffer</ref><sp/>myBuffer<sp/>=<sp/><ref refid="class_azura_1_1_memory_1_1_heap_memory_buffer" kindref="compound">Azura::Memory::HeapMemoryBuffer</ref>(256);</highlight></codeline>
 <codeline lineno="23"><highlight class="normal"><sp/><sp/><ref refid="class_azura_1_1_memory_1_1_monotonic_allocator" kindref="compound">Azura::Memory::MonotonicAllocator</ref><sp/>target<sp/>=<sp/><ref refid="class_azura_1_1_memory_1_1_monotonic_allocator" kindref="compound">Azura::Memory::MonotonicAllocator</ref>(myBuffer,<sp/>128);</highlight></codeline>
 <codeline lineno="24"><highlight class="normal"></highlight></codeline>
-<codeline lineno="25"><highlight class="normal"><sp/><sp/></highlight><highlight class="keyword">auto</highlight><highlight class="normal"><sp/>ptr<sp/>=<sp/>target.New&lt;</highlight><highlight class="keywordtype">int</highlight><highlight class="normal">&gt;(0);</highlight></codeline>
+<codeline lineno="25"><highlight class="normal"><sp/><sp/></highlight><highlight class="keyword">auto</highlight><highlight class="normal"><sp/>ptr<sp/>=<sp/>target.<ref refid="class_azura_1_1_memory_1_1_allocator_1a499fb3b777375a6b0d32cd8143e1586b" kindref="member">New</ref>&lt;</highlight><highlight class="keywordtype">int</highlight><highlight class="normal">&gt;(0);</highlight></codeline>
 <codeline lineno="26"><highlight class="normal"></highlight></codeline>
 <codeline lineno="27"><highlight class="normal"><sp/><sp/>ASSERT_NE(ptr,<sp/></highlight><highlight class="keyword">nullptr</highlight><highlight class="normal">);</highlight></codeline>
 <codeline lineno="28"><highlight class="normal"><sp/><sp/>ASSERT_EQ(*ptr,<sp/>0);</highlight></codeline>
@@ -200,7 +200,7 @@
 <codeline lineno="36"><highlight class="normal"><sp/><sp/><ref refid="class_azura_1_1_memory_1_1_heap_memory_buffer" kindref="compound">Azura::Memory::HeapMemoryBuffer</ref><sp/>myBuffer<sp/>=<sp/><ref refid="class_azura_1_1_memory_1_1_heap_memory_buffer" kindref="compound">Azura::Memory::HeapMemoryBuffer</ref>(256);</highlight></codeline>
 <codeline lineno="37"><highlight class="normal"><sp/><sp/><ref refid="class_azura_1_1_memory_1_1_monotonic_allocator" kindref="compound">Azura::Memory::MonotonicAllocator</ref><sp/>target<sp/>=<sp/><ref refid="class_azura_1_1_memory_1_1_monotonic_allocator" kindref="compound">Azura::Memory::MonotonicAllocator</ref>(myBuffer,<sp/>128);</highlight></codeline>
 <codeline lineno="38"><highlight class="normal"></highlight></codeline>
-<codeline lineno="39"><highlight class="normal"><sp/><sp/></highlight><highlight class="keyword">auto</highlight><highlight class="normal"><sp/>ptr<sp/>=<sp/>target.New&lt;<ref refid="struct_sample" kindref="compound">Sample</ref>&gt;();</highlight></codeline>
+<codeline lineno="39"><highlight class="normal"><sp/><sp/></highlight><highlight class="keyword">auto</highlight><highlight class="normal"><sp/>ptr<sp/>=<sp/>target.<ref refid="class_azura_1_1_memory_1_1_allocator_1a499fb3b777375a6b0d32cd8143e1586b" kindref="member">New</ref>&lt;<ref refid="struct_sample" kindref="compound">Sample</ref>&gt;();</highlight></codeline>
 <codeline lineno="40"><highlight class="normal"></highlight></codeline>
 <codeline lineno="41"><highlight class="normal"><sp/><sp/>ASSERT_NE(ptr,<sp/></highlight><highlight class="keyword">nullptr</highlight><highlight class="normal">);</highlight></codeline>
 <codeline lineno="42"><highlight class="normal"><sp/><sp/>ASSERT_EQ(ptr-&gt;arg1,<sp/>99);</highlight></codeline>
@@ -213,8 +213,8 @@
 <codeline lineno="49"><highlight class="normal"></highlight></codeline>
 <codeline lineno="50"><highlight class="normal"><sp/><sp/>uintptr_t<sp/>base<sp/>=<sp/>target.GetBasePtr();</highlight></codeline>
 <codeline lineno="51"><highlight class="normal"></highlight></codeline>
-<codeline lineno="52"><highlight class="normal"><sp/><sp/></highlight><highlight class="keyword">auto</highlight><highlight class="normal"><sp/>ptr<sp/><sp/><sp/>=<sp/>target.New&lt;<ref refid="struct_sample" kindref="compound">Sample</ref>&gt;();</highlight></codeline>
-<codeline lineno="53"><highlight class="normal"><sp/><sp/></highlight><highlight class="keyword">auto</highlight><highlight class="normal"><sp/>ptr2<sp/><sp/>=<sp/>target.New&lt;<ref refid="struct_sample" kindref="compound">Sample</ref>&gt;();</highlight></codeline>
+<codeline lineno="52"><highlight class="normal"><sp/><sp/></highlight><highlight class="keyword">auto</highlight><highlight class="normal"><sp/>ptr<sp/><sp/><sp/>=<sp/>target.<ref refid="class_azura_1_1_memory_1_1_allocator_1a499fb3b777375a6b0d32cd8143e1586b" kindref="member">New</ref>&lt;<ref refid="struct_sample" kindref="compound">Sample</ref>&gt;();</highlight></codeline>
+<codeline lineno="53"><highlight class="normal"><sp/><sp/></highlight><highlight class="keyword">auto</highlight><highlight class="normal"><sp/>ptr2<sp/><sp/>=<sp/>target.<ref refid="class_azura_1_1_memory_1_1_allocator_1a499fb3b777375a6b0d32cd8143e1586b" kindref="member">New</ref>&lt;<ref refid="struct_sample" kindref="compound">Sample</ref>&gt;();</highlight></codeline>
 <codeline lineno="54"><highlight class="normal"><sp/><sp/>ptr2-&gt;arg1<sp/>=<sp/>12;</highlight></codeline>
 <codeline lineno="55"><highlight class="normal"><sp/><sp/>ptr2-&gt;arg2<sp/>=<sp/>7.0;</highlight></codeline>
 <codeline lineno="56"><highlight class="normal"></highlight></codeline>
