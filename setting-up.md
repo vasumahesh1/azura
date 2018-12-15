@@ -46,10 +46,10 @@ There are two sub steps for dependencies.
 
 2. **Manual download:**
 
-   Sadly, we need to still download some of the stuff manually. This includes some stuff that can't be on github. I recommend checking the [Appveyor YML file](https://github.com/vasumahesh1/azura/blob/master/appveyor.yml) which have a direct download link to these. They are:
+   Sadly, we need to still download some of the stuff manually. This includes some stuff that can't be on github. We recommend checking the [Appveyor YML file](https://github.com/vasumahesh1/azura/blob/master/appveyor.yml) which have a direct download link to **most** of these. They are:
 
    * Vulkan SDK 1.1.77.0 - Located at: `Source/Imports/<Platform>/Vulkan/1.1.77.0/`
-   * Slang 0.11.16 - Located at `Source/Imports/<Platform>/Slang/slang-0.11.10/`
+   * Slang 0.11.16 - Located at `Source/Imports/<Platform>/Slang/slang-0.11.16/`
    * Boost 1.67 - Located at `Source/Imports/<Platform>/Boost/boost_1_67_0/`
 
 They are all versioned appropriately. In case for version changes, we just add a new folder.
