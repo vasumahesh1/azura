@@ -50,6 +50,7 @@ install:
   - ps: git submodule -q update --init --recursive
   - ps: git submodule
   - ps: mkdir C:\azura\BuildLogs\ -ea 0 > $null
+  - ps: dir "C:/Program Files (x86)/Microsoft Visual Studio/2017/Community/VC/Tools/MSVC"
 
   # -------------------------- CACHE CHECK --------------------------
 
