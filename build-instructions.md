@@ -46,7 +46,7 @@ $ python build.py --project all --target Win64
 ```
 
 {% hint style="info" %}
- Defaults to Debug mode
+ Defaults to Debug mode, use `--build Release` to build Release mode.
 {% endhint %}
 
 ## Building IDE Project Files
@@ -55,27 +55,23 @@ You can generate IDE files \(Visual Studio files\) by appending the flag `--proj
 
 Note: You don't have to do this every single time. This will waste a lot of time building them. One should only use `--projectFiles` only when CMakeLists.txt changes with additions / removals related to Shaders / Textures / CPP Files or any other files that are linked to CMake targets.
 
-## Different System - Different Configs
+```bash
+$ python build.py --project all --target Win64 --projectFiles
+```
 
-Azura only needs one thing in your PATH to be operational. It is a link to your Python27 application. Azura creates a copy of your environment variables and modifies them. It injects paths to MSVC Compilers and other platform specific things and calls CMake.
+This will create the required project files in the `BuildProjects/` folder.
+
+#### Windows Specific Project Files:
+
+For Visual Studio open [Mundus](http://elderscrolls.wikia.com/wiki/Mundus).sln
+
+This is the one single visual studio solution containing all projects. You can now set any project \(that is an executable\) as a Start Up Project. You can now build and code as usual.
 
 {% hint style="info" %}
-All Configs are located in the `External` folder
+Visual Studio projects have reduced static analysis and compiler checks. In short, if your visual studio project builds then the main build may or may not build. This is due to stricter checks in the main build allowing you to hack through code in VS. But obviously, correcting the hacks once the code works.
 {% endhint %}
 
-There are now two ways for you to build:
-
-* Build the way Azura builds by default
-  * Involves: Copying your files & extra HDD space
-  * Steps:
-    * Look at the [default config file](https://github.com/vasumahesh1/azura/blob/master/External/Config.ini) Azura picks up
-    * Make sure all of these paths exists - You will need to copy them over to `External/<Platform>/` 
-    * 
-
-
-
-* Build your own way
-  * Involves: Modifying two Config INI files that point to the correct Libraries and Platform SDKs
+## 
 
 
 
