@@ -14,32 +14,167 @@
 
 namespace Azura {
 namespace Containers {
+
+/**
+ * \brief      A struct defining the bounds of a container
+ *
+ * \ingroup    Containers
+ *
+ * \struct
+ *
+ * \details    This struct holds two important sizes for containers.
+ * A current size and a reserved size.
+ * 
+ * There are two ways to initialize this extent.
+ * 
+ * ```cpp
+ * auto extent1 = ContainerExtent{0, 5}; // Size = 0; ReservedSize = 5;
+ * auto extent2 = ContainerExtent{5}; // Size = 5; ReservedSize = 5;
+ * ``` 
+ */
 struct ContainerExtent {
   U32 m_size;
   U32 m_reserveSize;
 
+  /**
+   * \brief      Constructs a ContainerExtent with the same size and reserved size.
+   *
+   * \ingroup    Containers
+   *
+   * \param[in]  size  The container size
+   */
   explicit ContainerExtent(const U32 size)
     : m_size(size),
       m_reserveSize(size) {
   }
 
+  /**
+   * \brief      Constructs a ContainerExtent with the specified size and reservataion size.
+   *
+   * \ingroup    Containers
+   *
+   * \param[in]  size         The size
+   * \param[in]  reserveSize  The reserve size
+   */
   ContainerExtent(const U32 size, const U32 reserveSize)
     : m_size(size),
       m_reserveSize(reserveSize) {
   }
 };
 
+/**
+ * \brief      Class for customized vector.
+ *
+ * \ingroup    Containers
+ *
+ * \details    This class is used to construct a customized Azura vector.
+ * Azura vectors take advantage of a custom allocator. The custom allocators allows
+ * them to be created on the Stack or the Heap.
+ * 
+ * They also don't "allocate" new memory.
+ * Allocation is handled by the supplied Azura::Memory::Allocator class.
+ * 
+ * Azura Vectors are also "reserve" first.
+ * This basically means that the vector reserves a chunk first, instead of reserving and initializing like std::vector.
+ * This is probably the main difference between the two. Here is an example:
+ * 
+ * ```cpp
+ * Containers::Vector<int> arr(5, allocator);
+ * // above code allocates a memory upto 5 ints. But arr[0 to 4] doesn't exist.
+ * // arr.GetSize() will be 0
+ * // arr.GetMaxSize() will be 5
+ * 
+ * std::vector<int> arr(5);
+ * // above code allocates and initializes a memory upto 5 ints.
+ * // arr.size() will be 5
+ * // arr.capacity() will be 5
+ * ```
+ * 
+ * Both vectors tend to grow. But growing vectors are bad so watch out.
+ * Pre-allocate as much as you can beforehand.
+ * 
+ * The API for Azura Vector is similar but Pascal Case'd mostly.
+ * Example:
+ * 
+ * ```cpp
+ * Containers::Vector<int> arr(5, allocator);
+ * arr.PushBack(0); // similar to push_back
+ * arr.Begin();
+ * arr.End();
+ * ```
+ * Pascal case was selected because Azura keeps the API similar across all C++ code.
+ * And most of the Game Engine code that was initially built followed this scheme. 
+ * 
+ * \tparam     Type  Datatype of the vector
+ */
 template <typename Type>
 class Vector {
 public:
   Vector() = default;
   explicit Vector(Memory::Allocator& alloc);
 
+  /**
+   * \brief      Vector constructor accepting reserved size and allocator
+   *
+   * \ingroup    Containers
+   *
+   * \details    Constructs a vector of the given reserved size and allocator.
+   * This constructor **reserves** the specified size in the vector.
+   * The vector is of still size 0.
+   * 
+   * Example:
+   * ```cpp
+   * Containers::Vector<int> arr(5, allocator);
+   * 
+   * // This allocates a 5 sized int vector
+   * // The vector is still of size 0. The capacity is 5.
+   * ```
+   *
+   * \param[in]  maxSize  The maximum size
+   * \param      alloc    The allocator
+   */
   Vector(UINT maxSize, Memory::Allocator& alloc);
 
+  /**
+   * \brief      Construct a vector using size and max size.
+   *
+   * \ingroup    Containers
+   *
+   * \details    Constructs a vector of the given current size & reserved size and allocator.
+   * This constructor **reserves and constructs** the specified sizes in the vector.
+   * 
+   * Example:
+   * ```cpp
+   * Containers::Vector<int> arr(2, 5, allocator);
+   * 
+   * // This allocates a 5 sized int vector
+   * // The vector is of size 2. The capacity is 5.
+   * ```
+   *
+   * \param[in]  currentSize  The current size
+   * \param[in]  maxSize      The maximum size
+   * \param      alloc        The allocator
+   */
   Vector(UINT currentSize, UINT maxSize, Memory::Allocator& alloc);
 
-
+  /**
+   * \brief      Construct a vector using an initializer list
+   *
+   * \ingroup    Containers
+   *
+   * \details    Constructs a vector using an initializer list like a regular vector.
+   * 
+   * Example:
+   * ```cpp
+   * Containers::Vector<int> arr({1, 2, 3, 4, 5}, allocator);
+   * 
+   * // This allocates a 5 sized int vector with that values
+   * // The vector is of size 5. The capacity is 5.
+   * ```
+   *
+   * \param[in]  list   The list
+   * \param      alloc  The allocator
+   */
   Vector(const std::initializer_list<Type>& list, Memory::Allocator& alloc);
 
   template <typename... Args>
