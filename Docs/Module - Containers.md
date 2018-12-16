@@ -8,7 +8,7 @@ This module consists of customized containers that are useful for certain applic
 --------------------------------|---------------------------------------------
 `public inline  explicit `[`ContainerExtent`](#group___containers_1gabdea46cc128f48a9fc317fd5ca797ee8)`(const U32 size)`            | Constructs a [ContainerExtent](#struct_azura_1_1_containers_1_1_container_extent) with the same size and reserved size.
 `public inline  `[`ContainerExtent`](#group___containers_1ga086b568dd8be510400cd02bf146c6141)`(const U32 size,const U32 reserveSize)`            | Constructs a [ContainerExtent](#struct_azura_1_1_containers_1_1_container_extent) with the specified size and reservataion size.
-`class `[`Azura::Containers::Vector`](Docs/module-Containers.md#class_azura_1_1_containers_1_1_vector) | Class for customized vector.
+`class `[`Azura::Containers::Vector`](Docs/Module - Containers.md#class_azura_1_1_containers_1_1_vector) | Class for customized vector.
 
 ## Members
 
@@ -93,7 +93,7 @@ arr.End();
 `public Type * `[`Data`](#class_azura_1_1_containers_1_1_vector_1a6e3fd44d2821bb97f170b6e5443ec57e)`()` | Gets the Data pointer.
 `public const Type * `[`Data`](#class_azura_1_1_containers_1_1_vector_1a512f49e419efb7f312d0a08ddfc675b7)`() const` | Gets the Data pointer.
 `public void `[`Reset`](#class_azura_1_1_containers_1_1_vector_1a9a0fe84cbf357050432a0f851f8a8daa)`()` | Empties the vector.
-`public void `[`Clear`](#class_azura_1_1_containers_1_1_vector_1acf0e0039895ef1262e9060406863351e)`()` | [Vector::Reset()](Docs/module-Containers.md#class_azura_1_1_containers_1_1_vector_1a9a0fe84cbf357050432a0f851f8a8daa)
+`public void `[`Clear`](#class_azura_1_1_containers_1_1_vector_1acf0e0039895ef1262e9060406863351e)`()` | [Vector::Reset()](Docs/Module - Containers.md#class_azura_1_1_containers_1_1_vector_1a9a0fe84cbf357050432a0f851f8a8daa)
 `public Type & `[`operator[]`](#class_azura_1_1_containers_1_1_vector_1a9375fcc59ae44bfe9960d045d322d897)`(U32 idx)` | 
 `public Type & `[`operator[]`](#class_azura_1_1_containers_1_1_vector_1aa88a35925d3013cd8050639e07938d62)`(U32 idx) const` | 
 `public Type & `[`Last`](#class_azura_1_1_containers_1_1_vector_1aff0a689dcc4d698e49a40453f4e40d3b)`()` | 
