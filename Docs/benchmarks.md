@@ -1,7 +1,5 @@
 # BENCHMARKS
 
-[Go Back](./)
-
 ## Benchmarks
 
 ### std::vector vs Containers::Vector

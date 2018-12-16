@@ -1,7 +1,3 @@
----
-description: Azura has some built in wrappers to ease application development.
----
-
 # CMake Wrappers
 
 ## Custom CMake Wrappers
