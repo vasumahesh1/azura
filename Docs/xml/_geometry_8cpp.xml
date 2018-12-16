@@ -4,20 +4,16 @@
     <compoundname>Geometry.cpp</compoundname>
     <includes refid="_geometry_8h" local="yes">Math/Geometry.h</includes>
     <incdepgraph>
-      <node id="5327">
+      <node id="5329">
         <label>Source/Math/Src/Geometry.cpp</label>
         <link refid="_geometry_8cpp"/>
-        <childnode refid="5328" relation="include">
+        <childnode refid="5330" relation="include">
         </childnode>
       </node>
-      <node id="5330">
+      <node id="5332">
         <label>Core/RawStorageFormat.h</label>
         <link refid="_raw_storage_format_8h_source"/>
-        <childnode refid="5329" relation="include">
-        </childnode>
         <childnode refid="5331" relation="include">
-        </childnode>
-        <childnode refid="5332" relation="include">
         </childnode>
         <childnode refid="5333" relation="include">
         </childnode>
@@ -25,31 +21,35 @@
         </childnode>
         <childnode refid="5335" relation="include">
         </childnode>
+        <childnode refid="5336" relation="include">
+        </childnode>
+        <childnode refid="5337" relation="include">
+        </childnode>
       </node>
-      <node id="5334">
+      <node id="5336">
         <label>boost/preprocessor/tuple/elem.hpp</label>
       </node>
-      <node id="5335">
+      <node id="5337">
         <label>boost/detail/bitmask.hpp</label>
       </node>
-      <node id="5331">
+      <node id="5333">
         <label>tuple</label>
       </node>
-      <node id="5328">
+      <node id="5330">
         <label>Math/Geometry.h</label>
         <link refid="_geometry_8h_source"/>
-        <childnode refid="5329" relation="include">
+        <childnode refid="5331" relation="include">
         </childnode>
-        <childnode refid="5330" relation="include">
+        <childnode refid="5332" relation="include">
         </childnode>
       </node>
-      <node id="5332">
+      <node id="5334">
         <label>boost/preprocessor/repetition/repeat.hpp</label>
       </node>
-      <node id="5329">
+      <node id="5331">
         <label>Types.h</label>
       </node>
-      <node id="5333">
+      <node id="5335">
         <label>boost/preprocessor/seq/for_each.hpp</label>
       </node>
     </incdepgraph>

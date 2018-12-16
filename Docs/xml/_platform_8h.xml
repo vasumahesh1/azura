@@ -5,20 +5,20 @@
     <includedby refid="_disable_switch_enum_warning_8h" local="yes">Source/Platform/Inc/CompileWarnings/DisableSwitchEnumWarning.h</includedby>
     <includedby refid="_enable_switch_enum_warning_8h" local="yes">Source/Platform/Inc/CompileWarnings/EnableSwitchEnumWarning.h</includedby>
     <invincdepgraph>
-      <node id="5718">
+      <node id="5720">
         <label>Source/Platform/Inc/CompileWarnings/EnableSwitchEnumWarning.h</label>
         <link refid="_enable_switch_enum_warning_8h_source"/>
       </node>
-      <node id="5717">
+      <node id="5719">
         <label>Source/Platform/Inc/CompileWarnings/DisableSwitchEnumWarning.h</label>
         <link refid="_disable_switch_enum_warning_8h_source"/>
       </node>
-      <node id="5716">
+      <node id="5718">
         <label>Source/Platform/Inc/Utils/Platform.h</label>
         <link refid="_platform_8h"/>
-        <childnode refid="5717" relation="include">
+        <childnode refid="5719" relation="include">
         </childnode>
-        <childnode refid="5718" relation="include">
+        <childnode refid="5720" relation="include">
         </childnode>
       </node>
     </invincdepgraph>

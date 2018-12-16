@@ -853,7 +853,7 @@
 <codeline lineno="372"><highlight class="normal"></highlight></codeline>
 <codeline lineno="373"><highlight class="normal"><sp/><sp/>m_pipelineFactory.Submit(m_renderPasses,<sp/>m_pipelines);</highlight></codeline>
 <codeline lineno="374"><highlight class="normal"></highlight></codeline>
-<codeline lineno="375"><highlight class="normal"><sp/><sp/>m_commandBuffers.Resize(m_renderPasses.GetSize());</highlight></codeline>
+<codeline lineno="375"><highlight class="normal"><sp/><sp/>m_commandBuffers.<ref refid="class_azura_1_1_containers_1_1_vector_1a6d651ba60555cf392c766eb77758bd81" kindref="member">Resize</ref>(m_renderPasses.GetSize());</highlight></codeline>
 <codeline lineno="376"><highlight class="normal"><sp/><sp/>VkCore::CreateCommandBuffers(m_device,<sp/>m_graphicsCommandPool,<sp/>VK_COMMAND_BUFFER_LEVEL_SECONDARY,<sp/>m_commandBuffers,</highlight></codeline>
 <codeline lineno="377"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>log_VulkanRenderSystem);</highlight></codeline>
 <codeline lineno="378"><highlight class="normal"></highlight></codeline>

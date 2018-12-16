@@ -8,383 +8,383 @@
     <includes refid="_render_system_8h" local="yes">Generic/RenderSystem.h</includes>
     <includes refid="_pool_primitives_8h" local="yes">Generic/PoolPrimitives.h</includes>
     <incdepgraph>
-      <node id="6972">
+      <node id="6974">
         <label>Camera/Camera.h</label>
         <link refid="_camera_8h_source"/>
-        <childnode refid="6938" relation="include">
-        </childnode>
-        <childnode refid="6936" relation="include">
-        </childnode>
-        <childnode refid="6965" relation="include">
-        </childnode>
-      </node>
-      <node id="6974">
-        <label>D3D12/D3D12TextureManager.h</label>
-        <link refid="_d3_d12_texture_manager_8h_source"/>
-        <childnode refid="6968" relation="include">
-        </childnode>
-      </node>
-      <node id="6936">
-        <label>Math/Core.h</label>
-        <link refid="_core_8h_source"/>
-        <childnode refid="6937" relation="include">
-        </childnode>
-        <childnode refid="6938" relation="include">
-        </childnode>
-      </node>
-      <node id="6943">
-        <label>functional</label>
-      </node>
-      <node id="6940">
-        <label>GLTFSDK/Document.h</label>
-      </node>
-      <node id="6948">
-        <label>iterator</label>
-      </node>
-      <node id="6959">
-        <label>Utils/Hash.h</label>
-        <link refid="_hash_8h_source"/>
-        <childnode refid="6938" relation="include">
-        </childnode>
-      </node>
-      <node id="6939">
-        <label>AssetManager/GLTFLoader.h</label>
-        <link refid="_g_l_t_f_loader_8h_source"/>
-        <childnode refid="6938" relation="include">
-        </childnode>
         <childnode refid="6940" relation="include">
         </childnode>
-        <childnode refid="6941" relation="include">
-        </childnode>
-      </node>
-      <node id="6975">
-        <label>Memory/MemoryFactory.h</label>
-        <link refid="_memory_factory_8h_source"/>
-        <childnode refid="6976" relation="include">
-        </childnode>
-        <childnode refid="6969" relation="include">
-        </childnode>
-        <childnode refid="6938" relation="include">
-        </childnode>
-      </node>
-      <node id="6962">
-        <label>Renderer.h</label>
-        <link refid="_renderer_8h_source"/>
-        <childnode refid="6952" relation="include">
-        </childnode>
-        <childnode refid="6945" relation="include">
-        </childnode>
-        <childnode refid="6963" relation="include">
-        </childnode>
-        <childnode refid="6944" relation="include">
-        </childnode>
-        <childnode refid="6954" relation="include">
-        </childnode>
-        <childnode refid="6964" relation="include">
-        </childnode>
-      </node>
-      <node id="6954">
-        <label>Core/RawStorageFormat.h</label>
-        <link refid="_raw_storage_format_8h_source"/>
-        <childnode refid="6938" relation="include">
-        </childnode>
-        <childnode refid="6953" relation="include">
-        </childnode>
-        <childnode refid="6955" relation="include">
-        </childnode>
-        <childnode refid="6956" relation="include">
-        </childnode>
-        <childnode refid="6957" relation="include">
-        </childnode>
-        <childnode refid="6958" relation="include">
-        </childnode>
-      </node>
-      <node id="6970">
-        <label>MemoryBuffer.h</label>
-        <link refid="_memory_buffer_8h_source"/>
-        <childnode refid="6938" relation="include">
-        </childnode>
-      </node>
-      <node id="6950">
-        <label>Memory/Allocator.h</label>
-        <link refid="_allocator_8h_source"/>
-        <childnode refid="6943" relation="include">
-        </childnode>
-        <childnode refid="6938" relation="include">
-        </childnode>
-        <childnode refid="6951" relation="include">
-        </childnode>
-      </node>
-      <node id="6960">
-        <label>Core/AssetLocation.h</label>
-        <link refid="_asset_location_8h_source"/>
-      </node>
-      <node id="6946">
-        <label>cassert</label>
-      </node>
-      <node id="6957">
-        <label>boost/preprocessor/tuple/elem.hpp</label>
-      </node>
-      <node id="6944">
-        <label>GenericTypes.h</label>
-        <link refid="_azura_2_render_system_2_inc_2_generic_2_generic_types_8h_source"/>
-        <childnode refid="6945" relation="include">
-        </childnode>
-        <childnode refid="6952" relation="include">
-        </childnode>
-        <childnode refid="6938" relation="include">
-        </childnode>
-        <childnode refid="6954" relation="include">
-        </childnode>
-        <childnode refid="6959" relation="include">
-        </childnode>
-        <childnode refid="6960" relation="include">
-        </childnode>
-        <childnode refid="6961" relation="include">
-        </childnode>
-        <childnode refid="6958" relation="include">
-        </childnode>
-      </node>
-      <node id="6969">
-        <label>Memory/HeapMemoryBuffer.h</label>
-        <link refid="_heap_memory_buffer_8h_source"/>
-        <childnode refid="6970" relation="include">
-        </childnode>
-        <childnode refid="6938" relation="include">
-        </childnode>
-      </node>
-      <node id="6933">
-        <label>ForwardPlus/ForwardPlusComputeScene.h</label>
-        <link refid="_forward_plus_compute_scene_8h_source"/>
-        <childnode refid="6934" relation="include">
-        </childnode>
-        <childnode refid="6938" relation="include">
-        </childnode>
-        <childnode refid="6973" relation="include">
-        </childnode>
-      </node>
-      <node id="6976">
-        <label>Memory/StackMemoryBuffer.h</label>
-        <link refid="_stack_memory_buffer_8h_source"/>
-        <childnode refid="6946" relation="include">
-        </childnode>
-        <childnode refid="6970" relation="include">
-        </childnode>
-        <childnode refid="6938" relation="include">
-        </childnode>
-        <childnode refid="6951" relation="include">
-        </childnode>
-      </node>
-      <node id="6951">
-        <label>Utils/Macros.h</label>
-        <link refid="_macros_8h_source"/>
-      </node>
-      <node id="6973">
-        <label>App/LightTexture.h</label>
-        <link refid="_light_texture_8h_source"/>
-        <childnode refid="6938" relation="include">
-        </childnode>
-        <childnode refid="6945" relation="include">
-        </childnode>
-        <childnode refid="6935" relation="include">
-        </childnode>
-        <childnode refid="6974" relation="include">
-        </childnode>
-      </node>
-      <node id="6961">
-        <label>boost/container/small_vector.hpp</label>
-      </node>
-      <node id="6952">
-        <label>Generic/Constants.h</label>
-        <link refid="_azura_2_render_system_2_inc_2_generic_2_constants_8h_source"/>
-        <childnode refid="6953" relation="include">
-        </childnode>
-        <childnode refid="6938" relation="include">
-        </childnode>
-      </node>
-      <node id="6958">
-        <label>boost/detail/bitmask.hpp</label>
-      </node>
-      <node id="6935">
-        <label>App/Common.h</label>
-        <link refid="_samples_22___deferred_renderer_2_inc_2_app_2_common_8h_source"/>
-        <childnode refid="6936" relation="include">
-        </childnode>
-        <childnode refid="6939" relation="include">
-        </childnode>
-      </node>
-      <node id="6932">
-        <label>Source/Samples/2_DeferredRenderer/Src/ForwardPlusComputeScene.cpp</label>
-        <link refid="_forward_plus_compute_scene_8cpp"/>
-        <childnode refid="6933" relation="include">
-        </childnode>
-        <childnode refid="6971" relation="include">
-        </childnode>
-        <childnode refid="6975" relation="include">
-        </childnode>
-        <childnode refid="6977" relation="include">
-        </childnode>
-        <childnode refid="6978" relation="include">
-        </childnode>
-      </node>
-      <node id="6965">
-        <label>Core/Events.h</label>
-        <link refid="_events_8h_source"/>
-      </node>
-      <node id="6953">
-        <label>tuple</label>
-      </node>
-      <node id="6949">
-        <label>Array.h</label>
-        <link refid="_array_8h_source"/>
-        <childnode refid="6946" relation="include">
-        </childnode>
-        <childnode refid="6947" relation="include">
-        </childnode>
-        <childnode refid="6950" relation="include">
-        </childnode>
-        <childnode refid="6938" relation="include">
-        </childnode>
-      </node>
-      <node id="6971">
-        <label>Memory/MonotonicAllocator.h</label>
-        <link refid="_monotonic_allocator_8h_source"/>
-        <childnode refid="6950" relation="include">
-        </childnode>
-        <childnode refid="6938" relation="include">
-        </childnode>
-      </node>
-      <node id="6967">
-        <label>vector</label>
-      </node>
-      <node id="6945">
-        <label>Containers/Vector.h</label>
-        <link refid="_vector_8h_source"/>
-        <childnode refid="6946" relation="include">
-        </childnode>
-        <childnode refid="6947" relation="include">
-        </childnode>
-        <childnode refid="6943" relation="include">
-        </childnode>
-        <childnode refid="6948" relation="include">
-        </childnode>
-        <childnode refid="6949" relation="include">
-        </childnode>
-        <childnode refid="6950" relation="include">
-        </childnode>
-        <childnode refid="6938" relation="include">
-        </childnode>
-        <childnode refid="6951" relation="include">
-        </childnode>
-      </node>
-      <node id="6966">
-        <label>Log/Log.h</label>
-        <link refid="_log_8h_source"/>
         <childnode refid="6938" relation="include">
         </childnode>
         <childnode refid="6967" relation="include">
         </childnode>
       </node>
-      <node id="6978">
-        <label>Generic/PoolPrimitives.h</label>
-        <link refid="_pool_primitives_8h_source"/>
-        <childnode refid="6938" relation="include">
+      <node id="6976">
+        <label>D3D12/D3D12TextureManager.h</label>
+        <link refid="_d3_d12_texture_manager_8h_source"/>
+        <childnode refid="6970" relation="include">
         </childnode>
-        <childnode refid="6963" relation="include">
-        </childnode>
-      </node>
-      <node id="6963">
-        <label>Drawable.h</label>
-        <link refid="_drawable_8h_source"/>
-        <childnode refid="6945" relation="include">
-        </childnode>
-        <childnode refid="6944" relation="include">
-        </childnode>
-        <childnode refid="6938" relation="include">
-        </childnode>
-        <childnode refid="6954" relation="include">
-        </childnode>
-      </node>
-      <node id="6955">
-        <label>boost/preprocessor/repetition/repeat.hpp</label>
       </node>
       <node id="6938">
-        <label>Types.h</label>
+        <label>Math/Core.h</label>
+        <link refid="_core_8h_source"/>
+        <childnode refid="6939" relation="include">
+        </childnode>
+        <childnode refid="6940" relation="include">
+        </childnode>
       </node>
-      <node id="6977">
-        <label>Generic/RenderSystem.h</label>
-        <link refid="_render_system_8h_source"/>
-        <childnode refid="6950" relation="include">
-        </childnode>
-        <childnode refid="6962" relation="include">
-        </childnode>
-        <childnode refid="6968" relation="include">
+      <node id="6945">
+        <label>functional</label>
+      </node>
+      <node id="6942">
+        <label>GLTFSDK/Document.h</label>
+      </node>
+      <node id="6950">
+        <label>iterator</label>
+      </node>
+      <node id="6961">
+        <label>Utils/Hash.h</label>
+        <link refid="_hash_8h_source"/>
+        <childnode refid="6940" relation="include">
         </childnode>
       </node>
       <node id="6941">
-        <label>GLTFSDK/GLTFResourceReader.h</label>
-      </node>
-      <node id="6937">
-        <label>mathfu/matrix.h</label>
-      </node>
-      <node id="6942">
-        <label>Generic/Window.h</label>
-        <link refid="_window_8h_source"/>
-        <childnode refid="6943" relation="include">
-        </childnode>
-        <childnode refid="6944" relation="include">
-        </childnode>
-        <childnode refid="6938" relation="include">
-        </childnode>
-        <childnode refid="6962" relation="include">
-        </childnode>
-        <childnode refid="6965" relation="include">
-        </childnode>
-        <childnode refid="6966" relation="include">
-        </childnode>
-      </node>
-      <node id="6934">
-        <label>App/Scene.h</label>
-        <link refid="_samples_22___deferred_renderer_2_inc_2_app_2_scene_8h_source"/>
-        <childnode refid="6935" relation="include">
+        <label>AssetManager/GLTFLoader.h</label>
+        <link refid="_g_l_t_f_loader_8h_source"/>
+        <childnode refid="6940" relation="include">
         </childnode>
         <childnode refid="6942" relation="include">
         </childnode>
-        <childnode refid="6968" relation="include">
-        </childnode>
-        <childnode refid="6972" relation="include">
+        <childnode refid="6943" relation="include">
         </childnode>
       </node>
-      <node id="6964">
-        <label>ComputePool.h</label>
-        <link refid="_compute_pool_8h_source"/>
-        <childnode refid="6945" relation="include">
-        </childnode>
-        <childnode refid="6944" relation="include">
-        </childnode>
-        <childnode refid="6938" relation="include">
-        </childnode>
-      </node>
-      <node id="6968">
-        <label>Generic/TextureManager.h</label>
-        <link refid="_texture_manager_8h_source"/>
-        <childnode refid="6938" relation="include">
-        </childnode>
-        <childnode refid="6969" relation="include">
+      <node id="6977">
+        <label>Memory/MemoryFactory.h</label>
+        <link refid="_memory_factory_8h_source"/>
+        <childnode refid="6978" relation="include">
         </childnode>
         <childnode refid="6971" relation="include">
         </childnode>
-        <childnode refid="6945" relation="include">
+        <childnode refid="6940" relation="include">
         </childnode>
-        <childnode refid="6944" relation="include">
+      </node>
+      <node id="6964">
+        <label>Renderer.h</label>
+        <link refid="_renderer_8h_source"/>
+        <childnode refid="6954" relation="include">
+        </childnode>
+        <childnode refid="6947" relation="include">
+        </childnode>
+        <childnode refid="6965" relation="include">
+        </childnode>
+        <childnode refid="6946" relation="include">
+        </childnode>
+        <childnode refid="6956" relation="include">
         </childnode>
         <childnode refid="6966" relation="include">
         </childnode>
       </node>
+      <node id="6956">
+        <label>Core/RawStorageFormat.h</label>
+        <link refid="_raw_storage_format_8h_source"/>
+        <childnode refid="6940" relation="include">
+        </childnode>
+        <childnode refid="6955" relation="include">
+        </childnode>
+        <childnode refid="6957" relation="include">
+        </childnode>
+        <childnode refid="6958" relation="include">
+        </childnode>
+        <childnode refid="6959" relation="include">
+        </childnode>
+        <childnode refid="6960" relation="include">
+        </childnode>
+      </node>
+      <node id="6972">
+        <label>MemoryBuffer.h</label>
+        <link refid="_memory_buffer_8h_source"/>
+        <childnode refid="6940" relation="include">
+        </childnode>
+      </node>
+      <node id="6952">
+        <label>Memory/Allocator.h</label>
+        <link refid="_allocator_8h_source"/>
+        <childnode refid="6945" relation="include">
+        </childnode>
+        <childnode refid="6940" relation="include">
+        </childnode>
+        <childnode refid="6953" relation="include">
+        </childnode>
+      </node>
+      <node id="6962">
+        <label>Core/AssetLocation.h</label>
+        <link refid="_asset_location_8h_source"/>
+      </node>
+      <node id="6948">
+        <label>cassert</label>
+      </node>
+      <node id="6959">
+        <label>boost/preprocessor/tuple/elem.hpp</label>
+      </node>
+      <node id="6946">
+        <label>GenericTypes.h</label>
+        <link refid="_azura_2_render_system_2_inc_2_generic_2_generic_types_8h_source"/>
+        <childnode refid="6947" relation="include">
+        </childnode>
+        <childnode refid="6954" relation="include">
+        </childnode>
+        <childnode refid="6940" relation="include">
+        </childnode>
+        <childnode refid="6956" relation="include">
+        </childnode>
+        <childnode refid="6961" relation="include">
+        </childnode>
+        <childnode refid="6962" relation="include">
+        </childnode>
+        <childnode refid="6963" relation="include">
+        </childnode>
+        <childnode refid="6960" relation="include">
+        </childnode>
+      </node>
+      <node id="6971">
+        <label>Memory/HeapMemoryBuffer.h</label>
+        <link refid="_heap_memory_buffer_8h_source"/>
+        <childnode refid="6972" relation="include">
+        </childnode>
+        <childnode refid="6940" relation="include">
+        </childnode>
+      </node>
+      <node id="6935">
+        <label>ForwardPlus/ForwardPlusComputeScene.h</label>
+        <link refid="_forward_plus_compute_scene_8h_source"/>
+        <childnode refid="6936" relation="include">
+        </childnode>
+        <childnode refid="6940" relation="include">
+        </childnode>
+        <childnode refid="6975" relation="include">
+        </childnode>
+      </node>
+      <node id="6978">
+        <label>Memory/StackMemoryBuffer.h</label>
+        <link refid="_stack_memory_buffer_8h_source"/>
+        <childnode refid="6948" relation="include">
+        </childnode>
+        <childnode refid="6972" relation="include">
+        </childnode>
+        <childnode refid="6940" relation="include">
+        </childnode>
+        <childnode refid="6953" relation="include">
+        </childnode>
+      </node>
+      <node id="6953">
+        <label>Utils/Macros.h</label>
+        <link refid="_macros_8h_source"/>
+      </node>
+      <node id="6975">
+        <label>App/LightTexture.h</label>
+        <link refid="_light_texture_8h_source"/>
+        <childnode refid="6940" relation="include">
+        </childnode>
+        <childnode refid="6947" relation="include">
+        </childnode>
+        <childnode refid="6937" relation="include">
+        </childnode>
+        <childnode refid="6976" relation="include">
+        </childnode>
+      </node>
+      <node id="6963">
+        <label>boost/container/small_vector.hpp</label>
+      </node>
+      <node id="6954">
+        <label>Generic/Constants.h</label>
+        <link refid="_azura_2_render_system_2_inc_2_generic_2_constants_8h_source"/>
+        <childnode refid="6955" relation="include">
+        </childnode>
+        <childnode refid="6940" relation="include">
+        </childnode>
+      </node>
+      <node id="6960">
+        <label>boost/detail/bitmask.hpp</label>
+      </node>
+      <node id="6937">
+        <label>App/Common.h</label>
+        <link refid="_samples_22___deferred_renderer_2_inc_2_app_2_common_8h_source"/>
+        <childnode refid="6938" relation="include">
+        </childnode>
+        <childnode refid="6941" relation="include">
+        </childnode>
+      </node>
+      <node id="6934">
+        <label>Source/Samples/2_DeferredRenderer/Src/ForwardPlusComputeScene.cpp</label>
+        <link refid="_forward_plus_compute_scene_8cpp"/>
+        <childnode refid="6935" relation="include">
+        </childnode>
+        <childnode refid="6973" relation="include">
+        </childnode>
+        <childnode refid="6977" relation="include">
+        </childnode>
+        <childnode refid="6979" relation="include">
+        </childnode>
+        <childnode refid="6980" relation="include">
+        </childnode>
+      </node>
+      <node id="6967">
+        <label>Core/Events.h</label>
+        <link refid="_events_8h_source"/>
+      </node>
+      <node id="6955">
+        <label>tuple</label>
+      </node>
+      <node id="6951">
+        <label>Array.h</label>
+        <link refid="_array_8h_source"/>
+        <childnode refid="6948" relation="include">
+        </childnode>
+        <childnode refid="6949" relation="include">
+        </childnode>
+        <childnode refid="6952" relation="include">
+        </childnode>
+        <childnode refid="6940" relation="include">
+        </childnode>
+      </node>
+      <node id="6973">
+        <label>Memory/MonotonicAllocator.h</label>
+        <link refid="_monotonic_allocator_8h_source"/>
+        <childnode refid="6952" relation="include">
+        </childnode>
+        <childnode refid="6940" relation="include">
+        </childnode>
+      </node>
+      <node id="6969">
+        <label>vector</label>
+      </node>
       <node id="6947">
+        <label>Containers/Vector.h</label>
+        <link refid="_vector_8h_source"/>
+        <childnode refid="6948" relation="include">
+        </childnode>
+        <childnode refid="6949" relation="include">
+        </childnode>
+        <childnode refid="6945" relation="include">
+        </childnode>
+        <childnode refid="6950" relation="include">
+        </childnode>
+        <childnode refid="6951" relation="include">
+        </childnode>
+        <childnode refid="6952" relation="include">
+        </childnode>
+        <childnode refid="6940" relation="include">
+        </childnode>
+        <childnode refid="6953" relation="include">
+        </childnode>
+      </node>
+      <node id="6968">
+        <label>Log/Log.h</label>
+        <link refid="_log_8h_source"/>
+        <childnode refid="6940" relation="include">
+        </childnode>
+        <childnode refid="6969" relation="include">
+        </childnode>
+      </node>
+      <node id="6980">
+        <label>Generic/PoolPrimitives.h</label>
+        <link refid="_pool_primitives_8h_source"/>
+        <childnode refid="6940" relation="include">
+        </childnode>
+        <childnode refid="6965" relation="include">
+        </childnode>
+      </node>
+      <node id="6965">
+        <label>Drawable.h</label>
+        <link refid="_drawable_8h_source"/>
+        <childnode refid="6947" relation="include">
+        </childnode>
+        <childnode refid="6946" relation="include">
+        </childnode>
+        <childnode refid="6940" relation="include">
+        </childnode>
+        <childnode refid="6956" relation="include">
+        </childnode>
+      </node>
+      <node id="6957">
+        <label>boost/preprocessor/repetition/repeat.hpp</label>
+      </node>
+      <node id="6940">
+        <label>Types.h</label>
+      </node>
+      <node id="6979">
+        <label>Generic/RenderSystem.h</label>
+        <link refid="_render_system_8h_source"/>
+        <childnode refid="6952" relation="include">
+        </childnode>
+        <childnode refid="6964" relation="include">
+        </childnode>
+        <childnode refid="6970" relation="include">
+        </childnode>
+      </node>
+      <node id="6943">
+        <label>GLTFSDK/GLTFResourceReader.h</label>
+      </node>
+      <node id="6939">
+        <label>mathfu/matrix.h</label>
+      </node>
+      <node id="6944">
+        <label>Generic/Window.h</label>
+        <link refid="_window_8h_source"/>
+        <childnode refid="6945" relation="include">
+        </childnode>
+        <childnode refid="6946" relation="include">
+        </childnode>
+        <childnode refid="6940" relation="include">
+        </childnode>
+        <childnode refid="6964" relation="include">
+        </childnode>
+        <childnode refid="6967" relation="include">
+        </childnode>
+        <childnode refid="6968" relation="include">
+        </childnode>
+      </node>
+      <node id="6936">
+        <label>App/Scene.h</label>
+        <link refid="_samples_22___deferred_renderer_2_inc_2_app_2_scene_8h_source"/>
+        <childnode refid="6937" relation="include">
+        </childnode>
+        <childnode refid="6944" relation="include">
+        </childnode>
+        <childnode refid="6970" relation="include">
+        </childnode>
+        <childnode refid="6974" relation="include">
+        </childnode>
+      </node>
+      <node id="6966">
+        <label>ComputePool.h</label>
+        <link refid="_compute_pool_8h_source"/>
+        <childnode refid="6947" relation="include">
+        </childnode>
+        <childnode refid="6946" relation="include">
+        </childnode>
+        <childnode refid="6940" relation="include">
+        </childnode>
+      </node>
+      <node id="6970">
+        <label>Generic/TextureManager.h</label>
+        <link refid="_texture_manager_8h_source"/>
+        <childnode refid="6940" relation="include">
+        </childnode>
+        <childnode refid="6971" relation="include">
+        </childnode>
+        <childnode refid="6973" relation="include">
+        </childnode>
+        <childnode refid="6947" relation="include">
+        </childnode>
+        <childnode refid="6946" relation="include">
+        </childnode>
+        <childnode refid="6968" relation="include">
+        </childnode>
+      </node>
+      <node id="6949">
         <label>cstring</label>
       </node>
-      <node id="6956">
+      <node id="6958">
         <label>boost/preprocessor/seq/for_each.hpp</label>
       </node>
     </incdepgraph>

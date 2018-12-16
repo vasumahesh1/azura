@@ -17,7 +17,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Source/Common/Inc/Memory/Allocator.h" line="97" column="1" bodyfile="Source/Common/Inc/Memory/Allocator.h" bodystart="97" bodyend="-1"/>
+        <location file="Source/Common/Inc/Memory/Allocator.h" line="95" column="1" bodyfile="Source/Common/Inc/Memory/Allocator.h" bodystart="95" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="class_azura_1_1_memory_1_1_allocator_1ac0c93896f807657e7de5b41d2a0543be" prot="private" static="no" mutable="no">
         <type>U32</type>
@@ -30,7 +30,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Source/Common/Inc/Memory/Allocator.h" line="98" column="1" bodyfile="Source/Common/Inc/Memory/Allocator.h" bodystart="98" bodyend="-1"/>
+        <location file="Source/Common/Inc/Memory/Allocator.h" line="96" column="1" bodyfile="Source/Common/Inc/Memory/Allocator.h" bodystart="96" bodyend="-1"/>
       </memberdef>
       </sectiondef>
       <sectiondef kind="public-func">
@@ -206,12 +206,11 @@
 <para>The list of arguments that Type needs for construction</para></parameterdescription>
 </parameteritem>
 </parameterlist>
-<simplesect kind="warning"><para>Can return a nullptr in case of failed Allocation</para></simplesect>
 <simplesect kind="return"><para>A unique pointer with a custom deleter </para></simplesect>
 </para>        </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Source/Common/Inc/Memory/Allocator.h" line="63" column="1" bodyfile="Source/Common/Inc/Memory/Allocator.h" bodystart="102" bodyend="104"/>
+        <location file="Source/Common/Inc/Memory/Allocator.h" line="61" column="1" bodyfile="Source/Common/Inc/Memory/Allocator.h" bodystart="100" bodyend="102"/>
       </memberdef>
       <memberdef kind="function" id="class_azura_1_1_memory_1_1_allocator_1af2df83d27feb8bbc652284698dac2351" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <templateparamlist>
@@ -242,7 +241,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Source/Common/Inc/Memory/Allocator.h" line="66" column="1" bodyfile="Source/Common/Inc/Memory/Allocator.h" bodystart="107" bodyend="109"/>
+        <location file="Source/Common/Inc/Memory/Allocator.h" line="64" column="1" bodyfile="Source/Common/Inc/Memory/Allocator.h" bodystart="105" bodyend="107"/>
       </memberdef>
       <memberdef kind="function" id="class_azura_1_1_memory_1_1_allocator_1a7ee8dad5f32dad055f45003e3d4a41eb" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <templateparamlist>
@@ -269,7 +268,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Source/Common/Inc/Memory/Allocator.h" line="69" column="1" bodyfile="Source/Common/Inc/Memory/Allocator.h" bodystart="112" bodyend="114"/>
+        <location file="Source/Common/Inc/Memory/Allocator.h" line="67" column="1" bodyfile="Source/Common/Inc/Memory/Allocator.h" bodystart="110" bodyend="112"/>
       </memberdef>
       <memberdef kind="function" id="class_azura_1_1_memory_1_1_allocator_1a252732e042cebc1256d7a8e5822a1732" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <templateparamlist>
@@ -300,7 +299,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Source/Common/Inc/Memory/Allocator.h" line="72" column="1" bodyfile="Source/Common/Inc/Memory/Allocator.h" bodystart="117" bodyend="119"/>
+        <location file="Source/Common/Inc/Memory/Allocator.h" line="70" column="1" bodyfile="Source/Common/Inc/Memory/Allocator.h" bodystart="115" bodyend="117"/>
       </memberdef>
       </sectiondef>
       <sectiondef kind="protected-func">
@@ -315,7 +314,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Source/Common/Inc/Memory/Allocator.h" line="84" column="1" bodyfile="Source/Common/Src/Memory/Allocator.cpp" bodystart="18" bodyend="20"/>
+        <location file="Source/Common/Inc/Memory/Allocator.h" line="82" column="1" bodyfile="Source/Common/Src/Memory/Allocator.cpp" bodystart="18" bodyend="20"/>
       </memberdef>
       <memberdef kind="function" id="class_azura_1_1_memory_1_1_allocator_1a45e1ae30db48775871f472d09f0ba354" prot="protected" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
         <type>AddressPtr</type>
@@ -328,7 +327,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Source/Common/Inc/Memory/Allocator.h" line="85" column="1" bodyfile="Source/Common/Src/Memory/Allocator.cpp" bodystart="22" bodyend="24"/>
+        <location file="Source/Common/Inc/Memory/Allocator.h" line="83" column="1" bodyfile="Source/Common/Src/Memory/Allocator.cpp" bodystart="22" bodyend="24"/>
       </memberdef>
       <memberdef kind="function" id="class_azura_1_1_memory_1_1_allocator_1a4ea0bf858fb03e351e2b53cf533b28e0" prot="protected" static="no" const="no" explicit="no" inline="no" virt="pure-virtual">
         <type>void *</type>
@@ -351,7 +350,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Source/Common/Inc/Memory/Allocator.h" line="87" column="1"/>
+        <location file="Source/Common/Inc/Memory/Allocator.h" line="85" column="1"/>
       </memberdef>
       <memberdef kind="function" id="class_azura_1_1_memory_1_1_allocator_1aa11b99093ae5c589b86efaddcded4933" prot="protected" static="no" const="no" explicit="no" inline="no" virt="pure-virtual">
         <type>void</type>
@@ -370,7 +369,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Source/Common/Inc/Memory/Allocator.h" line="88" column="1"/>
+        <location file="Source/Common/Inc/Memory/Allocator.h" line="86" column="1"/>
       </memberdef>
       <memberdef kind="function" id="class_azura_1_1_memory_1_1_allocator_1a8e6578ce7e05f6f2d138f9e3385626cc" prot="protected" static="no" const="no" explicit="no" inline="no" virt="virtual">
         <type>void</type>
@@ -384,7 +383,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Source/Common/Inc/Memory/Allocator.h" line="89" column="1" bodyfile="Source/Common/Src/Memory/Allocator.cpp" bodystart="16" bodyend="16"/>
+        <location file="Source/Common/Inc/Memory/Allocator.h" line="87" column="1" bodyfile="Source/Common/Src/Memory/Allocator.cpp" bodystart="16" bodyend="16"/>
       </memberdef>
       </sectiondef>
       <sectiondef kind="private-func">
@@ -426,7 +425,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Source/Common/Inc/Memory/Allocator.h" line="93" column="1" bodyfile="Source/Common/Inc/Memory/Allocator.h" bodystart="122" bodyend="142"/>
+        <location file="Source/Common/Inc/Memory/Allocator.h" line="91" column="1" bodyfile="Source/Common/Inc/Memory/Allocator.h" bodystart="120" bodyend="140"/>
       </memberdef>
       <memberdef kind="function" id="class_azura_1_1_memory_1_1_allocator_1a1c54928bd374d682d5d882381aa0d79a" prot="private" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <templateparamlist>
@@ -470,7 +469,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Source/Common/Inc/Memory/Allocator.h" line="95" column="1" bodyfile="Source/Common/Inc/Memory/Allocator.h" bodystart="145" bodyend="174"/>
+        <location file="Source/Common/Inc/Memory/Allocator.h" line="93" column="1" bodyfile="Source/Common/Inc/Memory/Allocator.h" bodystart="143" bodyend="172"/>
       </memberdef>
       </sectiondef>
     <briefdescription>
@@ -495,7 +494,7 @@
         </childnode>
       </node>
     </inheritancegraph>
-    <location file="Source/Common/Inc/Memory/Allocator.h" line="26" column="1" bodyfile="Source/Common/Inc/Memory/Allocator.h" bodystart="26" bodyend="99"/>
+    <location file="Source/Common/Inc/Memory/Allocator.h" line="26" column="1" bodyfile="Source/Common/Inc/Memory/Allocator.h" bodystart="26" bodyend="97"/>
     <listofallmembers>
       <member refid="class_azura_1_1_memory_1_1_allocator_1a4ea0bf858fb03e351e2b53cf533b28e0" prot="protected" virt="pure-virtual"><scope>Azura::Memory::Allocator</scope><name>Allocate</name></member>
       <member refid="class_azura_1_1_memory_1_1_allocator_1a63f66173b61bcb2936c5ee42e23d6555" prot="public" virt="non-virtual"><scope>Azura::Memory::Allocator</scope><name>Allocator</name></member>

@@ -542,8 +542,8 @@
   <compound refid="struct_azura_1_1_containers_1_1_container_extent" kind="struct"><name>Azura::Containers::ContainerExtent</name>
     <member refid="struct_azura_1_1_containers_1_1_container_extent_1a8a62f876cfc608084f8809ccb7422d59" kind="variable"><name>m_size</name></member>
     <member refid="struct_azura_1_1_containers_1_1_container_extent_1ad91b3c128a7971f9705df80fc2f44274" kind="variable"><name>m_reserveSize</name></member>
-    <member refid="struct_azura_1_1_containers_1_1_container_extent_1abdea46cc128f48a9fc317fd5ca797ee8" kind="function"><name>ContainerExtent</name></member>
-    <member refid="struct_azura_1_1_containers_1_1_container_extent_1a086b568dd8be510400cd02bf146c6141" kind="function"><name>ContainerExtent</name></member>
+    <member refid="group___containers_1gabdea46cc128f48a9fc317fd5ca797ee8" kind="function"><name>ContainerExtent</name></member>
+    <member refid="group___containers_1ga086b568dd8be510400cd02bf146c6141" kind="function"><name>ContainerExtent</name></member>
   </compound>
   <compound refid="struct_azura_1_1_d3_d12_1_1_d3_d12_compute_pass_record_entry" kind="struct"><name>Azura::D3D12::D3D12ComputePassRecordEntry</name>
     <member refid="struct_azura_1_1_d3_d12_1_1_d3_d12_compute_pass_record_entry_1a3a6b07924ee59b874404a0f629b5db92" kind="variable"><name>m_pso</name></member>
@@ -2110,7 +2110,6 @@
     <member refid="class_azura_1_1_containers_1_1_vector_1adfb996e85aa768c6d82678f2c4b1adb2" kind="variable"><name>m_maxSize</name></member>
     <member refid="class_azura_1_1_containers_1_1_vector_1a3da37d3d227c645f49efda73324c3be0" kind="variable"><name>m_allocator</name></member>
     <member refid="class_azura_1_1_containers_1_1_vector_1af9bdce2aa7ada2b8671fba58550bc685" kind="variable"><name>m_base</name></member>
-    <member refid="class_azura_1_1_containers_1_1_vector_1a1501bebfe27b34397ade56d274261d60" kind="function"><name>Vector</name></member>
     <member refid="class_azura_1_1_containers_1_1_vector_1a6f3debb85587cf01eef9bddcb14c58fb" kind="function"><name>Vector</name></member>
     <member refid="class_azura_1_1_containers_1_1_vector_1a57b086de3f62679d082a086300138636" kind="function"><name>Vector</name></member>
     <member refid="class_azura_1_1_containers_1_1_vector_1af816fc5ac5a9e5060f6c88cb4e8beaa3" kind="function"><name>Vector</name></member>
@@ -2128,13 +2127,14 @@
     <member refid="class_azura_1_1_containers_1_1_vector_1ad181b9dc858e1ad59fc64b39f795fb75" kind="function"><name>PopBack</name></member>
     <member refid="class_azura_1_1_containers_1_1_vector_1a5da3557964b80e7c40a574fbbb7e24a6" kind="function"><name>FindFirst</name></member>
     <member refid="class_azura_1_1_containers_1_1_vector_1a4d191b0d876f03c44c5a58e6380a07ee" kind="function"><name>Remove</name></member>
-    <member refid="class_azura_1_1_containers_1_1_vector_1af9aea7a8da9e449530132e50d85ca221" kind="function"><name>Reserve</name></member>
-    <member refid="class_azura_1_1_containers_1_1_vector_1ab527c7c81b62e3cb29d9200ff5dc208a" kind="function"><name>Resize</name></member>
+    <member refid="class_azura_1_1_containers_1_1_vector_1af53da95e8dee524b3b12f2208079741f" kind="function"><name>Reserve</name></member>
+    <member refid="class_azura_1_1_containers_1_1_vector_1a6d651ba60555cf392c766eb77758bd81" kind="function"><name>Resize</name></member>
     <member refid="class_azura_1_1_containers_1_1_vector_1a3f955f930eefbb486ff9880421bbc7a4" kind="function"><name>IsEmpty</name></member>
     <member refid="class_azura_1_1_containers_1_1_vector_1a9f350f9bbc7f5aaec6318369444d2d99" kind="function"><name>InsertAt</name></member>
     <member refid="class_azura_1_1_containers_1_1_vector_1a6e3fd44d2821bb97f170b6e5443ec57e" kind="function"><name>Data</name></member>
     <member refid="class_azura_1_1_containers_1_1_vector_1a512f49e419efb7f312d0a08ddfc675b7" kind="function"><name>Data</name></member>
     <member refid="class_azura_1_1_containers_1_1_vector_1a9a0fe84cbf357050432a0f851f8a8daa" kind="function"><name>Reset</name></member>
+    <member refid="class_azura_1_1_containers_1_1_vector_1acf0e0039895ef1262e9060406863351e" kind="function"><name>Clear</name></member>
     <member refid="class_azura_1_1_containers_1_1_vector_1a9375fcc59ae44bfe9960d045d322d897" kind="function"><name>operator[]</name></member>
     <member refid="class_azura_1_1_containers_1_1_vector_1aa88a35925d3013cd8050639e07938d62" kind="function"><name>operator[]</name></member>
     <member refid="class_azura_1_1_containers_1_1_vector_1aff0a689dcc4d698e49a40453f4e40d3b" kind="function"><name>Last</name></member>
@@ -2520,7 +2520,7 @@
     <member refid="class_azura_1_1_window_1ae5b34dda3a2f2df08be92857f5557cef" kind="function"><name>CallMouseEventFunction</name></member>
     <member refid="class_azura_1_1_window_1a26e8fa5c3ce65455a5650c0a71fa648e" kind="function"><name>CallKeyEventFunction</name></member>
   </compound>
-  <compound refid="namespace_0D237" kind="namespace"><name>@237</name>
+  <compound refid="namespace_0D238" kind="namespace"><name>@238</name>
   </compound>
   <compound refid="namespace_a_z" kind="namespace"><name>AZ</name>
   </compound>
@@ -2851,21 +2851,21 @@
   </compound>
   <compound refid="namespace_azura_1_1_0D117" kind="namespace"><name>Azura::@117</name>
   </compound>
-  <compound refid="namespace_azura_1_1_0D199" kind="namespace"><name>Azura::@199</name>
-  </compound>
   <compound refid="namespace_azura_1_1_0D2" kind="namespace"><name>Azura::@2</name>
   </compound>
-  <compound refid="namespace_azura_1_1_0D243" kind="namespace"><name>Azura::@243</name>
+  <compound refid="namespace_azura_1_1_0D200" kind="namespace"><name>Azura::@200</name>
   </compound>
-  <compound refid="namespace_azura_1_1_0D245" kind="namespace"><name>Azura::@245</name>
+  <compound refid="namespace_azura_1_1_0D244" kind="namespace"><name>Azura::@244</name>
   </compound>
-  <compound refid="namespace_azura_1_1_0D248" kind="namespace"><name>Azura::@248</name>
+  <compound refid="namespace_azura_1_1_0D246" kind="namespace"><name>Azura::@246</name>
   </compound>
   <compound refid="namespace_azura_1_1_0D249" kind="namespace"><name>Azura::@249</name>
   </compound>
-  <compound refid="namespace_azura_1_1_0D263" kind="namespace"><name>Azura::@263</name>
+  <compound refid="namespace_azura_1_1_0D250" kind="namespace"><name>Azura::@250</name>
   </compound>
-  <compound refid="namespace_azura_1_1_0D268" kind="namespace"><name>Azura::@268</name>
+  <compound refid="namespace_azura_1_1_0D264" kind="namespace"><name>Azura::@264</name>
+  </compound>
+  <compound refid="namespace_azura_1_1_0D269" kind="namespace"><name>Azura::@269</name>
   </compound>
   <compound refid="namespace_azura_1_1_0D76" kind="namespace"><name>Azura::@76</name>
   </compound>
@@ -2938,9 +2938,9 @@
     <member refid="_geometry_8h_1a12e8f9c2174d06ad118a5bac3d0ee6a6" kind="function"><name>ToRadians</name></member>
     <member refid="_geometry_8h_1a724043a840c387e298333f121dd98965" kind="function"><name>ToAngle</name></member>
   </compound>
-  <compound refid="namespace_azura_1_1_math_1_1_0D207" kind="namespace"><name>Azura::Math::@207</name>
-  </compound>
   <compound refid="namespace_azura_1_1_math_1_1_0D208" kind="namespace"><name>Azura::Math::@208</name>
+  </compound>
+  <compound refid="namespace_azura_1_1_math_1_1_0D209" kind="namespace"><name>Azura::Math::@209</name>
   </compound>
   <compound refid="namespace_azura_1_1_memory" kind="namespace"><name>Azura::Memory</name>
     <member refid="_allocator_8h_1a71688256967374caeb84ef35e224396e" kind="typedef"><name>UniquePtr</name></member>
@@ -2955,13 +2955,13 @@
     <member refid="dummy_1a52c726030295c6adf328f8d0c55c7c02ad2203cb1237cb6460cbad94564e39345" kind="enumvalue"><name>Regular</name></member>
     <member refid="dummy_1a52c726030295c6adf328f8d0c55c7c02a8f7671185d590914ac21c7511767b699" kind="enumvalue"><name>Diamond</name></member>
   </compound>
-  <compound refid="namespace_azura_1_1_physics_1_1_0D220" kind="namespace"><name>Azura::Physics::@220</name>
-  </compound>
   <compound refid="namespace_azura_1_1_physics_1_1_0D221" kind="namespace"><name>Azura::Physics::@221</name>
+  </compound>
+  <compound refid="namespace_azura_1_1_physics_1_1_0D222" kind="namespace"><name>Azura::Physics::@222</name>
   </compound>
   <compound refid="namespace_azura_1_1_physics_1_1_p_b_d" kind="namespace"><name>Azura::Physics::PBD</name>
   </compound>
-  <compound refid="namespace_azura_1_1_physics_1_1_p_b_d_1_1_0D224" kind="namespace"><name>Azura::Physics::PBD::@224</name>
+  <compound refid="namespace_azura_1_1_physics_1_1_p_b_d_1_1_0D225" kind="namespace"><name>Azura::Physics::PBD::@225</name>
   </compound>
   <compound refid="namespace_azura_1_1_pool_primitives" kind="namespace"><name>Azura::PoolPrimitives</name>
     <member refid="_pool_primitives_8h_1a36b66c5048e5cb128abf797a66077fc6" kind="function"><name>AddScreenQuad</name></member>
@@ -3559,6 +3559,8 @@
   </compound>
   <compound refid="_vector__benchmark_8h" kind="file"><name>Vector_benchmark.h</name>
   </compound>
+  <compound refid="_containers_8dox" kind="file"><name>Containers.dox</name>
+  </compound>
   <compound refid="_array_8h" kind="file"><name>Array.h</name>
   </compound>
   <compound refid="_array_batch_8h" kind="file"><name>ArrayBatch.h</name>
@@ -3868,6 +3870,12 @@
   <compound refid="_light_texture_8cpp" kind="file"><name>LightTexture.cpp</name>
   </compound>
   <compound refid="group___common" kind="group"><name>Common</name>
+  </compound>
+  <compound refid="group___containers" kind="group"><name>Containers</name>
+    <member refid="group___containers_1gabdea46cc128f48a9fc317fd5ca797ee8" kind="function"><name>ContainerExtent</name></member>
+    <member refid="group___containers_1ga086b568dd8be510400cd02bf146c6141" kind="function"><name>ContainerExtent</name></member>
+  </compound>
+  <compound refid="todo" kind="page"><name>todo</name>
   </compound>
   <compound refid="dir_00c33668da3f6cdbf3f77480622dfcb0" kind="dir"><name>Source/Samples/0_TestZone</name>
   </compound>

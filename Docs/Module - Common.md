@@ -1,6 +1,6 @@
 # group `Common` {#group___common}
 
-Put here a longer description.
+This module consists of certain core components that are used by almost everything inside Azura.
 
 ## Summary
 
@@ -70,8 +70,6 @@ The actual returned type is a `UniquePtr<T>` which is a std::unique_ptr with a c
 
 #### Parameters
 * `args` The list of arguments that Type needs for construction
-
-Can return a nullptr in case of failed Allocation
 
 #### Returns
 A unique pointer with a custom deleter
