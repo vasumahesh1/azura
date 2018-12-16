@@ -1,7 +1,3 @@
----
-description: This page documents the python based build system on Azura.
----
-
 # Build Instructions
 
 ## Build Structure

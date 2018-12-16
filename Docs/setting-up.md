@@ -1,7 +1,3 @@
----
-description: Setup guide for Azura
----
-
 # Setting Up
 
 ## 1. Different System Configs
