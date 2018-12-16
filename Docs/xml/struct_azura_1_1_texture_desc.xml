@@ -1,0 +1,118 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.8.14">
+  <compounddef id="struct_azura_1_1_texture_desc" kind="struct" language="C++" prot="public">
+    <compoundname>Azura::TextureDesc</compoundname>
+      <sectiondef kind="public-attrib">
+      <memberdef kind="variable" id="struct_azura_1_1_texture_desc_1a415b76494d434c4c98660146982077e6" prot="public" static="no" mutable="no">
+        <type><ref refid="struct_azura_1_1_bounds3_d" kindref="compound">Bounds3D</ref></type>
+        <definition>Bounds3D Azura::TextureDesc::m_bounds</definition>
+        <argsstring></argsstring>
+        <name>m_bounds</name>
+        <initializer>{1, 1, 1}</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Source/Azura/RenderSystem/Inc/Generic/GenericTypes.h" line="256" column="1" bodyfile="Source/Azura/RenderSystem/Inc/Generic/GenericTypes.h" bodystart="256" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="struct_azura_1_1_texture_desc_1a4aead7738f71b8ed0e20b6de904f5ca3" prot="public" static="no" mutable="no">
+        <type>U32</type>
+        <definition>U32 Azura::TextureDesc::m_size</definition>
+        <argsstring></argsstring>
+        <name>m_size</name>
+        <initializer>{0}</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Source/Azura/RenderSystem/Inc/Generic/GenericTypes.h" line="257" column="1" bodyfile="Source/Azura/RenderSystem/Inc/Generic/GenericTypes.h" bodystart="257" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="struct_azura_1_1_texture_desc_1a0ff7c71c8e774fae66d05e6feeb5fead" prot="public" static="no" mutable="no">
+        <type>U32</type>
+        <definition>U32 Azura::TextureDesc::m_mipLevels</definition>
+        <argsstring></argsstring>
+        <name>m_mipLevels</name>
+        <initializer>{1}</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Source/Azura/RenderSystem/Inc/Generic/GenericTypes.h" line="258" column="1" bodyfile="Source/Azura/RenderSystem/Inc/Generic/GenericTypes.h" bodystart="258" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="struct_azura_1_1_texture_desc_1ae40d5485312c3a066baf4a62adf6df71" prot="public" static="no" mutable="no">
+        <type>U32</type>
+        <definition>U32 Azura::TextureDesc::m_arrayLayers</definition>
+        <argsstring></argsstring>
+        <name>m_arrayLayers</name>
+        <initializer>{1}</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Source/Azura/RenderSystem/Inc/Generic/GenericTypes.h" line="259" column="1" bodyfile="Source/Azura/RenderSystem/Inc/Generic/GenericTypes.h" bodystart="259" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="struct_azura_1_1_texture_desc_1a509c41e7fa00c05ffef2ac0a121d555e" prot="public" static="no" mutable="no">
+        <type>ImageType</type>
+        <definition>ImageType Azura::TextureDesc::m_type</definition>
+        <argsstring></argsstring>
+        <name>m_type</name>
+        <initializer>{ImageType::Image2D}</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Source/Azura/RenderSystem/Inc/Generic/GenericTypes.h" line="260" column="1" bodyfile="Source/Azura/RenderSystem/Inc/Generic/GenericTypes.h" bodystart="260" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="struct_azura_1_1_texture_desc_1a6472a930a1a4e7e7bdf2738498099e40" prot="public" static="no" mutable="no">
+        <type>RawStorageFormat</type>
+        <definition>RawStorageFormat Azura::TextureDesc::m_format</definition>
+        <argsstring></argsstring>
+        <name>m_format</name>
+        <initializer>{RawStorageFormat::R8G8B8A8_UNORM}</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Source/Azura/RenderSystem/Inc/Generic/GenericTypes.h" line="261" column="1" bodyfile="Source/Azura/RenderSystem/Inc/Generic/GenericTypes.h" bodystart="261" bodyend="-1"/>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <collaborationgraph>
+      <node id="561">
+        <label>Azura::Bounds3D</label>
+        <link refid="struct_azura_1_1_bounds3_d"/>
+      </node>
+      <node id="560">
+        <label>Azura::TextureDesc</label>
+        <link refid="struct_azura_1_1_texture_desc"/>
+        <childnode refid="561" relation="usage">
+          <edgelabel>m_bounds</edgelabel>
+        </childnode>
+      </node>
+    </collaborationgraph>
+    <location file="Source/Azura/RenderSystem/Inc/Generic/GenericTypes.h" line="255" column="1" bodyfile="Source/Azura/RenderSystem/Inc/Generic/GenericTypes.h" bodystart="255" bodyend="262"/>
+    <listofallmembers>
+      <member refid="struct_azura_1_1_texture_desc_1ae40d5485312c3a066baf4a62adf6df71" prot="public" virt="non-virtual"><scope>Azura::TextureDesc</scope><name>m_arrayLayers</name></member>
+      <member refid="struct_azura_1_1_texture_desc_1a415b76494d434c4c98660146982077e6" prot="public" virt="non-virtual"><scope>Azura::TextureDesc</scope><name>m_bounds</name></member>
+      <member refid="struct_azura_1_1_texture_desc_1a6472a930a1a4e7e7bdf2738498099e40" prot="public" virt="non-virtual"><scope>Azura::TextureDesc</scope><name>m_format</name></member>
+      <member refid="struct_azura_1_1_texture_desc_1a0ff7c71c8e774fae66d05e6feeb5fead" prot="public" virt="non-virtual"><scope>Azura::TextureDesc</scope><name>m_mipLevels</name></member>
+      <member refid="struct_azura_1_1_texture_desc_1a4aead7738f71b8ed0e20b6de904f5ca3" prot="public" virt="non-virtual"><scope>Azura::TextureDesc</scope><name>m_size</name></member>
+      <member refid="struct_azura_1_1_texture_desc_1a509c41e7fa00c05ffef2ac0a121d555e" prot="public" virt="non-virtual"><scope>Azura::TextureDesc</scope><name>m_type</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

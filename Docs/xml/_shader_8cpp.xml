@@ -1,0 +1,193 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.8.14">
+  <compounddef id="_shader_8cpp" kind="file" language="C++">
+    <compoundname>Shader.cpp</compoundname>
+    <includes refid="_shader_8h" local="yes">Generic/Shader.h</includes>
+    <incdepgraph>
+      <node id="2823">
+        <label>functional</label>
+      </node>
+      <node id="2824">
+        <label>iterator</label>
+      </node>
+      <node id="2836">
+        <label>Utils/Hash.h</label>
+        <link refid="_hash_8h_source"/>
+        <childnode refid="2827" relation="include">
+        </childnode>
+      </node>
+      <node id="2831">
+        <label>Core/RawStorageFormat.h</label>
+        <link refid="_raw_storage_format_8h_source"/>
+        <childnode refid="2827" relation="include">
+        </childnode>
+        <childnode refid="2830" relation="include">
+        </childnode>
+        <childnode refid="2832" relation="include">
+        </childnode>
+        <childnode refid="2833" relation="include">
+        </childnode>
+        <childnode refid="2834" relation="include">
+        </childnode>
+        <childnode refid="2835" relation="include">
+        </childnode>
+      </node>
+      <node id="2826">
+        <label>Memory/Allocator.h</label>
+        <link refid="_allocator_8h_source"/>
+        <childnode refid="2823" relation="include">
+        </childnode>
+        <childnode refid="2827" relation="include">
+        </childnode>
+        <childnode refid="2828" relation="include">
+        </childnode>
+      </node>
+      <node id="2837">
+        <label>Core/AssetLocation.h</label>
+        <link refid="_asset_location_8h_source"/>
+      </node>
+      <node id="2821">
+        <label>cassert</label>
+      </node>
+      <node id="2834">
+        <label>boost/preprocessor/tuple/elem.hpp</label>
+      </node>
+      <node id="2819">
+        <label>GenericTypes.h</label>
+        <link refid="_azura_2_render_system_2_inc_2_generic_2_generic_types_8h_source"/>
+        <childnode refid="2820" relation="include">
+        </childnode>
+        <childnode refid="2829" relation="include">
+        </childnode>
+        <childnode refid="2827" relation="include">
+        </childnode>
+        <childnode refid="2831" relation="include">
+        </childnode>
+        <childnode refid="2836" relation="include">
+        </childnode>
+        <childnode refid="2837" relation="include">
+        </childnode>
+        <childnode refid="2838" relation="include">
+        </childnode>
+        <childnode refid="2835" relation="include">
+        </childnode>
+      </node>
+      <node id="2828">
+        <label>Utils/Macros.h</label>
+        <link refid="_macros_8h_source"/>
+      </node>
+      <node id="2838">
+        <label>boost/container/small_vector.hpp</label>
+      </node>
+      <node id="2829">
+        <label>Generic/Constants.h</label>
+        <link refid="_azura_2_render_system_2_inc_2_generic_2_constants_8h_source"/>
+        <childnode refid="2830" relation="include">
+        </childnode>
+        <childnode refid="2827" relation="include">
+        </childnode>
+      </node>
+      <node id="2835">
+        <label>boost/detail/bitmask.hpp</label>
+      </node>
+      <node id="2830">
+        <label>tuple</label>
+      </node>
+      <node id="2825">
+        <label>Array.h</label>
+        <link refid="_array_8h_source"/>
+        <childnode refid="2821" relation="include">
+        </childnode>
+        <childnode refid="2822" relation="include">
+        </childnode>
+        <childnode refid="2826" relation="include">
+        </childnode>
+        <childnode refid="2827" relation="include">
+        </childnode>
+      </node>
+      <node id="2820">
+        <label>Containers/Vector.h</label>
+        <link refid="_vector_8h_source"/>
+        <childnode refid="2821" relation="include">
+        </childnode>
+        <childnode refid="2822" relation="include">
+        </childnode>
+        <childnode refid="2823" relation="include">
+        </childnode>
+        <childnode refid="2824" relation="include">
+        </childnode>
+        <childnode refid="2825" relation="include">
+        </childnode>
+        <childnode refid="2826" relation="include">
+        </childnode>
+        <childnode refid="2827" relation="include">
+        </childnode>
+        <childnode refid="2828" relation="include">
+        </childnode>
+      </node>
+      <node id="2817">
+        <label>Source/Azura/RenderSystem/Src/Generic/Shader.cpp</label>
+        <link refid="_shader_8cpp"/>
+        <childnode refid="2818" relation="include">
+        </childnode>
+      </node>
+      <node id="2832">
+        <label>boost/preprocessor/repetition/repeat.hpp</label>
+      </node>
+      <node id="2827">
+        <label>Types.h</label>
+      </node>
+      <node id="2822">
+        <label>cstring</label>
+      </node>
+      <node id="2818">
+        <label>Generic/Shader.h</label>
+        <link refid="_shader_8h_source"/>
+        <childnode refid="2819" relation="include">
+        </childnode>
+      </node>
+      <node id="2833">
+        <label>boost/preprocessor/seq/for_each.hpp</label>
+      </node>
+    </incdepgraph>
+    <innernamespace refid="namespace_azura">Azura</innernamespace>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <programlisting>
+<codeline lineno="1"><highlight class="preprocessor">#include<sp/>&quot;Generic/Shader.h&quot;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="2"><highlight class="normal"></highlight></codeline>
+<codeline lineno="3"><highlight class="normal"></highlight><highlight class="keyword">namespace<sp/></highlight><highlight class="normal"><ref refid="namespace_azura" kindref="compound">Azura</ref><sp/>{</highlight></codeline>
+<codeline lineno="4"><highlight class="normal"></highlight></codeline>
+<codeline lineno="5"><highlight class="normal">Shader::Shader(</highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>String&amp;<sp/>filePath,<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>String&amp;<sp/>extension)</highlight></codeline>
+<codeline lineno="6"><highlight class="normal"><sp/><sp/>:<sp/>m_filePath(filePath<sp/>+<sp/></highlight><highlight class="stringliteral">&quot;.&quot;</highlight><highlight class="normal"><sp/>+<sp/>extension),</highlight></codeline>
+<codeline lineno="7"><highlight class="normal"><sp/><sp/><sp/><sp/>m_stage(),</highlight></codeline>
+<codeline lineno="8"><highlight class="normal"><sp/><sp/><sp/><sp/>m_entryPoint(</highlight><highlight class="stringliteral">&quot;main&quot;</highlight><highlight class="normal">)<sp/>{</highlight></codeline>
+<codeline lineno="9"><highlight class="normal">}</highlight></codeline>
+<codeline lineno="10"><highlight class="normal"></highlight></codeline>
+<codeline lineno="11"><highlight class="normal"></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/>Shader::SetStage(</highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>ShaderStage<sp/>stage)<sp/>{</highlight></codeline>
+<codeline lineno="12"><highlight class="normal"><sp/><sp/>m_stage<sp/>=<sp/>stage;</highlight></codeline>
+<codeline lineno="13"><highlight class="normal">}</highlight></codeline>
+<codeline lineno="14"><highlight class="normal"></highlight></codeline>
+<codeline lineno="15"><highlight class="normal"></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/>Shader::SetEntryPoint(</highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>String&amp;<sp/>entryPoint)<sp/>{</highlight></codeline>
+<codeline lineno="16"><highlight class="normal"><sp/><sp/>m_entryPoint<sp/>=<sp/>entryPoint;</highlight></codeline>
+<codeline lineno="17"><highlight class="normal">}</highlight></codeline>
+<codeline lineno="18"><highlight class="normal"></highlight></codeline>
+<codeline lineno="19"><highlight class="normal"></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>String&amp;<sp/>Shader::GetFilePath()</highlight><highlight class="keyword"><sp/>const<sp/></highlight><highlight class="normal">{</highlight></codeline>
+<codeline lineno="20"><highlight class="normal"><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>m_filePath;</highlight></codeline>
+<codeline lineno="21"><highlight class="normal">}</highlight></codeline>
+<codeline lineno="22"><highlight class="normal"></highlight></codeline>
+<codeline lineno="23"><highlight class="normal"></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>String&amp;<sp/>Shader::GetShaderEntryPoint()</highlight><highlight class="keyword"><sp/>const<sp/></highlight><highlight class="normal">{</highlight></codeline>
+<codeline lineno="24"><highlight class="normal"><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>m_entryPoint;</highlight></codeline>
+<codeline lineno="25"><highlight class="normal">}</highlight></codeline>
+<codeline lineno="26"><highlight class="normal"></highlight></codeline>
+<codeline lineno="27"><highlight class="normal">ShaderStage<sp/>Shader::GetShaderStage()</highlight><highlight class="keyword"><sp/>const<sp/></highlight><highlight class="normal">{</highlight></codeline>
+<codeline lineno="28"><highlight class="normal"><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>m_stage;</highlight></codeline>
+<codeline lineno="29"><highlight class="normal">}</highlight></codeline>
+<codeline lineno="30"><highlight class="normal"></highlight></codeline>
+<codeline lineno="31"><highlight class="normal">}<sp/></highlight><highlight class="comment">//<sp/>namespace<sp/>Azura</highlight><highlight class="normal"></highlight></codeline>
+    </programlisting>
+    <location file="Source/Azura/RenderSystem/Src/Generic/Shader.cpp"/>
+  </compounddef>
+</doxygen>

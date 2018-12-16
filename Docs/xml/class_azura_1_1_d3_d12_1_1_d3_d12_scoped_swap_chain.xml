@@ -1,0 +1,193 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.8.14">
+  <compounddef id="class_azura_1_1_d3_d12_1_1_d3_d12_scoped_swap_chain" kind="class" language="C++" prot="public">
+    <compoundname>Azura::D3D12::D3D12ScopedSwapChain</compoundname>
+      <sectiondef kind="private-attrib">
+      <memberdef kind="variable" id="class_azura_1_1_d3_d12_1_1_d3_d12_scoped_swap_chain_1a280593f233c9848ab77a813d4526d24e" prot="private" static="no" mutable="no">
+        <type>RawStorageFormat</type>
+        <definition>RawStorageFormat Azura::D3D12::D3D12ScopedSwapChain::m_format</definition>
+        <argsstring></argsstring>
+        <name>m_format</name>
+        <initializer>{}</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Source/Azura/RenderSystem/Inc/D3D12/D3D12ScopedSwapChain.h" line="32" column="1" bodyfile="Source/Azura/RenderSystem/Inc/D3D12/D3D12ScopedSwapChain.h" bodystart="32" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="class_azura_1_1_d3_d12_1_1_d3_d12_scoped_swap_chain_1a3d3d6b31d83db454e9cec3885af3ac7e" prot="private" static="no" mutable="no">
+        <type>RawStorageFormat</type>
+        <definition>RawStorageFormat Azura::D3D12::D3D12ScopedSwapChain::m_depthFormat</definition>
+        <argsstring></argsstring>
+        <name>m_depthFormat</name>
+        <initializer>{}</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Source/Azura/RenderSystem/Inc/D3D12/D3D12ScopedSwapChain.h" line="33" column="1" bodyfile="Source/Azura/RenderSystem/Inc/D3D12/D3D12ScopedSwapChain.h" bodystart="33" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="class_azura_1_1_d3_d12_1_1_d3_d12_scoped_swap_chain_1a4298b416309563b279fa139432377f1d" prot="private" static="no" mutable="no">
+        <type>Microsoft::WRL::ComPtr&lt; IDXGISwapChain3 &gt;</type>
+        <definition>Microsoft::WRL::ComPtr&lt;IDXGISwapChain3&gt; Azura::D3D12::D3D12ScopedSwapChain::m_swapChain</definition>
+        <argsstring></argsstring>
+        <name>m_swapChain</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Source/Azura/RenderSystem/Inc/D3D12/D3D12ScopedSwapChain.h" line="35" column="1" bodyfile="Source/Azura/RenderSystem/Inc/D3D12/D3D12ScopedSwapChain.h" bodystart="35" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="class_azura_1_1_d3_d12_1_1_d3_d12_scoped_swap_chain_1ad4e685494d23d6f0482bcdfe0afe1630" prot="private" static="no" mutable="no">
+        <type>Microsoft::WRL::ComPtr&lt; ID3D12Resource &gt;</type>
+        <definition>Microsoft::WRL::ComPtr&lt;ID3D12Resource&gt; Azura::D3D12::D3D12ScopedSwapChain::m_renderTargets[GLOBAL_INFLIGHT_FRAMES]</definition>
+        <argsstring>[GLOBAL_INFLIGHT_FRAMES]</argsstring>
+        <name>m_renderTargets</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Source/Azura/RenderSystem/Inc/D3D12/D3D12ScopedSwapChain.h" line="36" column="1" bodyfile="Source/Azura/RenderSystem/Inc/D3D12/D3D12ScopedSwapChain.h" bodystart="36" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="class_azura_1_1_d3_d12_1_1_d3_d12_scoped_swap_chain_1ab92a6da50d5e52baf24a97722009266d" prot="private" static="no" mutable="no">
+        <type>Microsoft::WRL::ComPtr&lt; ID3D12DescriptorHeap &gt;</type>
+        <definition>Microsoft::WRL::ComPtr&lt;ID3D12DescriptorHeap&gt; Azura::D3D12::D3D12ScopedSwapChain::m_rtvHeap</definition>
+        <argsstring></argsstring>
+        <name>m_rtvHeap</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Source/Azura/RenderSystem/Inc/D3D12/D3D12ScopedSwapChain.h" line="38" column="1" bodyfile="Source/Azura/RenderSystem/Inc/D3D12/D3D12ScopedSwapChain.h" bodystart="38" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="class_azura_1_1_d3_d12_1_1_d3_d12_scoped_swap_chain_1a0ad6379c4222773a7db9b33301d2a331" prot="private" static="no" mutable="no">
+        <type>Microsoft::WRL::ComPtr&lt; ID3D12DescriptorHeap &gt;</type>
+        <definition>Microsoft::WRL::ComPtr&lt;ID3D12DescriptorHeap&gt; Azura::D3D12::D3D12ScopedSwapChain::m_dsvHeap</definition>
+        <argsstring></argsstring>
+        <name>m_dsvHeap</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Source/Azura/RenderSystem/Inc/D3D12/D3D12ScopedSwapChain.h" line="39" column="1" bodyfile="Source/Azura/RenderSystem/Inc/D3D12/D3D12ScopedSwapChain.h" bodystart="39" bodyend="-1"/>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="public-func">
+      <memberdef kind="function" id="class_azura_1_1_d3_d12_1_1_d3_d12_scoped_swap_chain_1a0230d8b0a455ea61d5bf78fc5aefa298" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void Azura::D3D12::D3D12ScopedSwapChain::Create</definition>
+        <argsstring>(const Microsoft::WRL::ComPtr&lt; IDXGIFactory4 &gt; &amp;factory, const Microsoft::WRL::ComPtr&lt; ID3D12CommandQueue &gt; &amp;commandQueue, const Window &amp;windowHandle, const SwapChainRequirements &amp;swapChainRequirements, const Log &amp;log_D3D12RenderSystem)</argsstring>
+        <name>Create</name>
+        <param>
+          <type>const Microsoft::WRL::ComPtr&lt; IDXGIFactory4 &gt; &amp;</type>
+          <declname>factory</declname>
+        </param>
+        <param>
+          <type>const Microsoft::WRL::ComPtr&lt; ID3D12CommandQueue &gt; &amp;</type>
+          <declname>commandQueue</declname>
+        </param>
+        <param>
+          <type>const <ref refid="class_azura_1_1_window" kindref="compound">Window</ref> &amp;</type>
+          <declname>windowHandle</declname>
+        </param>
+        <param>
+          <type>const <ref refid="struct_azura_1_1_swap_chain_requirements" kindref="compound">SwapChainRequirements</ref> &amp;</type>
+          <declname>swapChainRequirements</declname>
+        </param>
+        <param>
+          <type>const <ref refid="class_azura_1_1_log" kindref="compound">Log</ref> &amp;</type>
+          <declname>log_D3D12RenderSystem</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Source/Azura/RenderSystem/Inc/D3D12/D3D12ScopedSwapChain.h" line="19" column="1" bodyfile="Source/Azura/RenderSystem/Src/D3D12/D3D12ScopedSwapChain.cpp" bodystart="10" bodyend="23"/>
+      </memberdef>
+      <memberdef kind="function" id="class_azura_1_1_d3_d12_1_1_d3_d12_scoped_swap_chain_1a8aa6c3f10a9d8ac6d2ab9ceafabb8c64" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
+        <type>const Microsoft::WRL::ComPtr&lt; IDXGISwapChain3 &gt; &amp;</type>
+        <definition>const Microsoft::WRL::ComPtr&lt; IDXGISwapChain3 &gt; &amp; Azura::D3D12::D3D12ScopedSwapChain::RealComPtr</definition>
+        <argsstring>() const</argsstring>
+        <name>RealComPtr</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Source/Azura/RenderSystem/Inc/D3D12/D3D12ScopedSwapChain.h" line="25" column="1" bodyfile="Source/Azura/RenderSystem/Src/D3D12/D3D12ScopedSwapChain.cpp" bodystart="25" bodyend="27"/>
+      </memberdef>
+      <memberdef kind="function" id="class_azura_1_1_d3_d12_1_1_d3_d12_scoped_swap_chain_1a69e10190ec36910cbbca03087f5daa0d" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
+        <type>IDXGISwapChain3 *</type>
+        <definition>IDXGISwapChain3 * Azura::D3D12::D3D12ScopedSwapChain::Real</definition>
+        <argsstring>() const</argsstring>
+        <name>Real</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Source/Azura/RenderSystem/Inc/D3D12/D3D12ScopedSwapChain.h" line="26" column="1" bodyfile="Source/Azura/RenderSystem/Src/D3D12/D3D12ScopedSwapChain.cpp" bodystart="29" bodyend="31"/>
+      </memberdef>
+      <memberdef kind="function" id="class_azura_1_1_d3_d12_1_1_d3_d12_scoped_swap_chain_1af00510bab88fcfd2a9d02a0445db9ea2" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
+        <type>RawStorageFormat</type>
+        <definition>RawStorageFormat Azura::D3D12::D3D12ScopedSwapChain::GetFormat</definition>
+        <argsstring>() const</argsstring>
+        <name>GetFormat</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Source/Azura/RenderSystem/Inc/D3D12/D3D12ScopedSwapChain.h" line="28" column="1" bodyfile="Source/Azura/RenderSystem/Src/D3D12/D3D12ScopedSwapChain.cpp" bodystart="33" bodyend="35"/>
+      </memberdef>
+      <memberdef kind="function" id="class_azura_1_1_d3_d12_1_1_d3_d12_scoped_swap_chain_1ae5e121ded228c11e4f0887f19d94d636" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
+        <type>RawStorageFormat</type>
+        <definition>RawStorageFormat Azura::D3D12::D3D12ScopedSwapChain::GetDepthFormat</definition>
+        <argsstring>() const</argsstring>
+        <name>GetDepthFormat</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Source/Azura/RenderSystem/Inc/D3D12/D3D12ScopedSwapChain.h" line="29" column="1" bodyfile="Source/Azura/RenderSystem/Src/D3D12/D3D12ScopedSwapChain.cpp" bodystart="37" bodyend="39"/>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <location file="Source/Azura/RenderSystem/Inc/D3D12/D3D12ScopedSwapChain.h" line="16" column="1" bodyfile="Source/Azura/RenderSystem/Inc/D3D12/D3D12ScopedSwapChain.h" bodystart="15" bodyend="40"/>
+    <listofallmembers>
+      <member refid="class_azura_1_1_d3_d12_1_1_d3_d12_scoped_swap_chain_1a0230d8b0a455ea61d5bf78fc5aefa298" prot="public" virt="non-virtual"><scope>Azura::D3D12::D3D12ScopedSwapChain</scope><name>Create</name></member>
+      <member refid="class_azura_1_1_d3_d12_1_1_d3_d12_scoped_swap_chain_1ae5e121ded228c11e4f0887f19d94d636" prot="public" virt="non-virtual"><scope>Azura::D3D12::D3D12ScopedSwapChain</scope><name>GetDepthFormat</name></member>
+      <member refid="class_azura_1_1_d3_d12_1_1_d3_d12_scoped_swap_chain_1af00510bab88fcfd2a9d02a0445db9ea2" prot="public" virt="non-virtual"><scope>Azura::D3D12::D3D12ScopedSwapChain</scope><name>GetFormat</name></member>
+      <member refid="class_azura_1_1_d3_d12_1_1_d3_d12_scoped_swap_chain_1a3d3d6b31d83db454e9cec3885af3ac7e" prot="private" virt="non-virtual"><scope>Azura::D3D12::D3D12ScopedSwapChain</scope><name>m_depthFormat</name></member>
+      <member refid="class_azura_1_1_d3_d12_1_1_d3_d12_scoped_swap_chain_1a0ad6379c4222773a7db9b33301d2a331" prot="private" virt="non-virtual"><scope>Azura::D3D12::D3D12ScopedSwapChain</scope><name>m_dsvHeap</name></member>
+      <member refid="class_azura_1_1_d3_d12_1_1_d3_d12_scoped_swap_chain_1a280593f233c9848ab77a813d4526d24e" prot="private" virt="non-virtual"><scope>Azura::D3D12::D3D12ScopedSwapChain</scope><name>m_format</name></member>
+      <member refid="class_azura_1_1_d3_d12_1_1_d3_d12_scoped_swap_chain_1ad4e685494d23d6f0482bcdfe0afe1630" prot="private" virt="non-virtual"><scope>Azura::D3D12::D3D12ScopedSwapChain</scope><name>m_renderTargets</name></member>
+      <member refid="class_azura_1_1_d3_d12_1_1_d3_d12_scoped_swap_chain_1ab92a6da50d5e52baf24a97722009266d" prot="private" virt="non-virtual"><scope>Azura::D3D12::D3D12ScopedSwapChain</scope><name>m_rtvHeap</name></member>
+      <member refid="class_azura_1_1_d3_d12_1_1_d3_d12_scoped_swap_chain_1a4298b416309563b279fa139432377f1d" prot="private" virt="non-virtual"><scope>Azura::D3D12::D3D12ScopedSwapChain</scope><name>m_swapChain</name></member>
+      <member refid="class_azura_1_1_d3_d12_1_1_d3_d12_scoped_swap_chain_1a69e10190ec36910cbbca03087f5daa0d" prot="public" virt="non-virtual"><scope>Azura::D3D12::D3D12ScopedSwapChain</scope><name>Real</name></member>
+      <member refid="class_azura_1_1_d3_d12_1_1_d3_d12_scoped_swap_chain_1a8aa6c3f10a9d8ac6d2ab9ceafabb8c64" prot="public" virt="non-virtual"><scope>Azura::D3D12::D3D12ScopedSwapChain</scope><name>RealComPtr</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

@@ -1,0 +1,122 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.8.14">
+  <compounddef id="_vk_macros_8h" kind="file" language="C++">
+    <compoundname>VkMacros.h</compoundname>
+    <includes local="no">vulkan/vulkan_core.h</includes>
+    <includes local="no">stdexcept</includes>
+    <includes refid="_vk_debug_8h" local="yes">VkDebug.h</includes>
+    <includes refid="_log_8h" local="yes">Log/Log.h</includes>
+    <includedby refid="_vk_core_8cpp" local="yes">Source/Azura/RenderSystem/Src/Vulkan/VkCore.cpp</includedby>
+    <includedby refid="_vk_drawable_pool_8cpp" local="yes">Source/Azura/RenderSystem/Src/Vulkan/VkDrawablePool.cpp</includedby>
+    <includedby refid="_vk_renderer_8cpp" local="yes">Source/Azura/RenderSystem/Src/Vulkan/VkRenderer.cpp</includedby>
+    <includedby refid="_vk_scoped_buffer_8cpp" local="yes">Source/Azura/RenderSystem/Src/Vulkan/VkScopedBuffer.cpp</includedby>
+    <includedby refid="_vk_scoped_image_8cpp" local="yes">Source/Azura/RenderSystem/Src/Vulkan/VkScopedImage.cpp</includedby>
+    <includedby refid="_vk_scoped_pipeline_8cpp" local="yes">Source/Azura/RenderSystem/Src/Vulkan/VkScopedPipeline.cpp</includedby>
+    <includedby refid="_vk_scoped_render_pass_8cpp" local="yes">Source/Azura/RenderSystem/Src/Vulkan/VkScopedRenderPass.cpp</includedby>
+    <includedby refid="_vk_scoped_sampler_8cpp" local="yes">Source/Azura/RenderSystem/Src/Vulkan/VkScopedSampler.cpp</includedby>
+    <includedby refid="_vk_scoped_swap_chain_8cpp" local="yes">Source/Azura/RenderSystem/Src/Vulkan/VkScopedSwapChain.cpp</includedby>
+    <includedby refid="_vk_shader_8cpp" local="yes">Source/Azura/RenderSystem/Src/Vulkan/VkShader.cpp</includedby>
+    <includedby refid="_vk_win32_platform_8cpp" local="yes">Source/Azura/RenderSystem/Src/Vulkan/Windows/VkWin32Platform.cpp</includedby>
+    <incdepgraph>
+      <node id="1443">
+        <label>stdexcept</label>
+      </node>
+      <node id="1447">
+        <label>vector</label>
+      </node>
+      <node id="1445">
+        <label>Log/Log.h</label>
+        <link refid="_log_8h_source"/>
+        <childnode refid="1446" relation="include">
+        </childnode>
+        <childnode refid="1447" relation="include">
+        </childnode>
+      </node>
+      <node id="1444">
+        <label>VkDebug.h</label>
+        <link refid="_vk_debug_8h_source"/>
+        <childnode refid="1442" relation="include">
+        </childnode>
+      </node>
+      <node id="1442">
+        <label>vulkan/vulkan_core.h</label>
+      </node>
+      <node id="1446">
+        <label>Types.h</label>
+      </node>
+      <node id="1441">
+        <label>Source/Azura/RenderSystem/Inc/Vulkan/VkMacros.h</label>
+        <link refid="_vk_macros_8h"/>
+        <childnode refid="1442" relation="include">
+        </childnode>
+        <childnode refid="1443" relation="include">
+        </childnode>
+        <childnode refid="1444" relation="include">
+        </childnode>
+        <childnode refid="1445" relation="include">
+        </childnode>
+      </node>
+    </incdepgraph>
+    <innernamespace refid="namespace_azura">Azura</innernamespace>
+    <innernamespace refid="namespace_azura_1_1_vulkan">Azura::Vulkan</innernamespace>
+      <sectiondef kind="define">
+      <memberdef kind="define" id="_vk_macros_8h_1a1098325a6e16064b2be9175028c8e9f0" prot="public" static="no">
+        <name>VERIFY_VK_OP</name>
+        <param><defname>Logger</defname></param>
+        <param><defname>res</defname></param>
+        <param><defname>message</defname></param>
+        <initializer>if ((res) != VK_SUCCESS) {                                                                         \
+    LOG_ERR(Logger, LOG_LEVEL, message);                                                             \
+    LOG_ERR(Logger, LOG_LEVEL, VkResultToString(res));                                               \
+    throw std::runtime_error(message);                                                               \
+  }</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Source/Azura/RenderSystem/Inc/Vulkan/VkMacros.h" line="11" column="9" bodyfile="Source/Azura/RenderSystem/Inc/Vulkan/VkMacros.h" bodystart="11" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="define" id="_vk_macros_8h_1acac85cadb3aa3eae08eebdb2209d3d07" prot="public" static="no">
+        <name>VK_KHR_SURFACE</name>
+        <initializer>&quot;VK_KHR_surface&quot;</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Source/Azura/RenderSystem/Inc/Vulkan/VkMacros.h" line="18" column="9" bodyfile="Source/Azura/RenderSystem/Inc/Vulkan/VkMacros.h" bodystart="18" bodyend="-1"/>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <programlisting>
+<codeline lineno="1"><highlight class="preprocessor">#pragma<sp/>once</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="2"><highlight class="normal"></highlight></codeline>
+<codeline lineno="3"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&lt;vulkan/vulkan_core.h&gt;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="4"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&lt;stdexcept&gt;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="5"><highlight class="normal"></highlight></codeline>
+<codeline lineno="6"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&quot;VkDebug.h&quot;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="7"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&quot;Log/Log.h&quot;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="8"><highlight class="normal"></highlight></codeline>
+<codeline lineno="9"><highlight class="normal"></highlight><highlight class="keyword">namespace<sp/></highlight><highlight class="normal"><ref refid="namespace_azura" kindref="compound">Azura</ref><sp/>{</highlight></codeline>
+<codeline lineno="10"><highlight class="normal"></highlight><highlight class="keyword">namespace<sp/></highlight><highlight class="normal">Vulkan<sp/>{</highlight></codeline>
+<codeline lineno="11"><highlight class="normal"></highlight><highlight class="preprocessor">#define<sp/>VERIFY_VK_OP(Logger,<sp/>res,<sp/>message)<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>\</highlight></codeline>
+<codeline lineno="12"><highlight class="preprocessor"><sp/><sp/>if<sp/>((res)<sp/>!=<sp/>VK_SUCCESS)<sp/>{<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>\</highlight></codeline>
+<codeline lineno="13"><highlight class="preprocessor"><sp/><sp/><sp/><sp/>LOG_ERR(Logger,<sp/>LOG_LEVEL,<sp/>message);<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>\</highlight></codeline>
+<codeline lineno="14"><highlight class="preprocessor"><sp/><sp/><sp/><sp/>LOG_ERR(Logger,<sp/>LOG_LEVEL,<sp/>VkResultToString(res));<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>\</highlight></codeline>
+<codeline lineno="15"><highlight class="preprocessor"><sp/><sp/><sp/><sp/>throw<sp/>std::runtime_error(message);<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>\</highlight></codeline>
+<codeline lineno="16"><highlight class="preprocessor"><sp/><sp/>}</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="17"><highlight class="normal"></highlight></codeline>
+<codeline lineno="18"><highlight class="normal"></highlight><highlight class="preprocessor">#define<sp/>VK_KHR_SURFACE<sp/>&quot;VK_KHR_surface&quot;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="19"><highlight class="normal"></highlight></codeline>
+<codeline lineno="20"><highlight class="normal">}<sp/></highlight><highlight class="comment">//<sp/>namespace<sp/>Vulkan</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="21"><highlight class="normal">}<sp/></highlight><highlight class="comment">//<sp/>namespace<sp/>Azura</highlight><highlight class="normal"></highlight></codeline>
+    </programlisting>
+    <location file="Source/Azura/RenderSystem/Inc/Vulkan/VkMacros.h"/>
+  </compounddef>
+</doxygen>

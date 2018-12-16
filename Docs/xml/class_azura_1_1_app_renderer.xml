@@ -1,0 +1,897 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.8.14">
+  <compounddef id="class_azura_1_1_app_renderer" kind="class" language="C++" prot="public">
+    <compoundname>Azura::AppRenderer</compoundname>
+      <sectiondef kind="private-attrib">
+      <memberdef kind="variable" id="class_azura_1_1_app_renderer_1a0e2a02f932ab37fa91d48a2d5071eb08" prot="private" static="no" mutable="no">
+        <type><ref refid="class_azura_1_1_memory_1_1_heap_memory_buffer" kindref="compound">Memory::HeapMemoryBuffer</ref></type>
+        <definition>Memory::HeapMemoryBuffer Azura::AppRenderer::m_mainBuffer</definition>
+        <argsstring></argsstring>
+        <name>m_mainBuffer</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Source/Samples/0_TestZone/Inc/TestZone/AppRenderer.h" line="71" column="1" bodyfile="Source/Samples/0_TestZone/Inc/TestZone/AppRenderer.h" bodystart="71" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="class_azura_1_1_app_renderer_1ab3a52fdc3a660924a3383d3bbc987a30" prot="private" static="no" mutable="no">
+        <type><ref refid="class_azura_1_1_memory_1_1_range_allocator" kindref="compound">Memory::RangeAllocator</ref></type>
+        <definition>Memory::MonotonicAllocator Azura::AppRenderer::m_mainAllocator</definition>
+        <argsstring></argsstring>
+        <name>m_mainAllocator</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Source/Samples/0_TestZone/Inc/TestZone/AppRenderer.h" line="73" column="1" bodyfile="Source/Samples/0_TestZone/Inc/TestZone/AppRenderer.h" bodystart="73" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="class_azura_1_1_app_renderer_1a73789c6edb6731169f79d452656ab75c" prot="private" static="no" mutable="no">
+        <type><ref refid="class_azura_1_1_memory_1_1_range_allocator" kindref="compound">Memory::RangeAllocator</ref></type>
+        <definition>Memory::MonotonicAllocator Azura::AppRenderer::m_drawableAllocator</definition>
+        <argsstring></argsstring>
+        <name>m_drawableAllocator</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Source/Samples/0_TestZone/Inc/TestZone/AppRenderer.h" line="74" column="1" bodyfile="Source/Samples/0_TestZone/Inc/TestZone/AppRenderer.h" bodystart="74" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="class_azura_1_1_app_renderer_1a003af8d47f98436ab83e54acdf7dec26" prot="private" static="no" mutable="no">
+        <type>std::unique_ptr&lt; <ref refid="class_azura_1_1_renderer" kindref="compound">Renderer</ref> &gt;</type>
+        <definition>std::unique_ptr&lt; Renderer &gt; Azura::AppRenderer::m_renderer</definition>
+        <argsstring></argsstring>
+        <name>m_renderer</name>
+        <initializer>{nullptr}</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Source/Samples/0_TestZone/Inc/TestZone/AppRenderer.h" line="76" column="1" bodyfile="Source/Samples/0_TestZone/Inc/TestZone/AppRenderer.h" bodystart="76" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="class_azura_1_1_app_renderer_1aefefaa4261f51f93a3cde1a050639eaf" prot="private" static="no" mutable="no">
+        <type>std::unique_ptr&lt; <ref refid="class_azura_1_1_window" kindref="compound">Window</ref> &gt;</type>
+        <definition>std::unique_ptr&lt; Window &gt; Azura::AppRenderer::m_window</definition>
+        <argsstring></argsstring>
+        <name>m_window</name>
+        <initializer>{nullptr}</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Source/Samples/0_TestZone/Inc/TestZone/AppRenderer.h" line="77" column="1" bodyfile="Source/Samples/0_TestZone/Inc/TestZone/AppRenderer.h" bodystart="77" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="class_azura_1_1_app_renderer_1aa2bfaf8d5584b47dce7638d8e63e3bc3" prot="private" static="no" mutable="no">
+        <type>std::unique_ptr&lt; <ref refid="class_azura_1_1_texture_manager" kindref="compound">TextureManager</ref> &gt;</type>
+        <definition>std::unique_ptr&lt; TextureManager &gt; Azura::AppRenderer::m_textureManager</definition>
+        <argsstring></argsstring>
+        <name>m_textureManager</name>
+        <initializer>{nullptr}</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Source/Samples/0_TestZone/Inc/TestZone/AppRenderer.h" line="78" column="1" bodyfile="Source/Samples/0_TestZone/Inc/TestZone/AppRenderer.h" bodystart="78" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="class_azura_1_1_app_renderer_1aaaa8dfb217d0a03629c75b9366c9a1f3" prot="private" static="no" mutable="no">
+        <type><ref refid="class_azura_1_1_polar_camera" kindref="compound">PolarCamera</ref></type>
+        <definition>PolarCamera Azura::AppRenderer::m_camera</definition>
+        <argsstring></argsstring>
+        <name>m_camera</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Source/Samples/0_TestZone/Inc/TestZone/AppRenderer.h" line="80" column="1" bodyfile="Source/Samples/0_TestZone/Inc/TestZone/AppRenderer.h" bodystart="80" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="class_azura_1_1_app_renderer_1a60441ffb7a9a97d0c6dd4ac63c92b7a4" prot="private" static="no" mutable="no">
+        <type><ref refid="struct_azura_1_1_scene_u_b_o" kindref="compound">SceneUBO</ref></type>
+        <definition>SceneUBO Azura::AppRenderer::m_clothUBO</definition>
+        <argsstring></argsstring>
+        <name>m_clothUBO</name>
+        <initializer>{}</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Source/Samples/0_TestZone/Inc/TestZone/AppRenderer.h" line="82" column="1" bodyfile="Source/Samples/0_TestZone/Inc/TestZone/AppRenderer.h" bodystart="82" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="class_azura_1_1_app_renderer_1aeca62316132d044119344d771cab5826" prot="private" static="no" mutable="no">
+        <type><ref refid="struct_azura_1_1_scene_u_b_o" kindref="compound">SceneUBO</ref></type>
+        <definition>SceneUBO Azura::AppRenderer::m_sphereUBO</definition>
+        <argsstring></argsstring>
+        <name>m_sphereUBO</name>
+        <initializer>{}</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Source/Samples/0_TestZone/Inc/TestZone/AppRenderer.h" line="83" column="1" bodyfile="Source/Samples/0_TestZone/Inc/TestZone/AppRenderer.h" bodystart="83" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="class_azura_1_1_app_renderer_1afed96b9aaffd5ff442dd72e4c6fa1af2" prot="private" static="no" mutable="no">
+        <type><ref refid="struct_azura_1_1_compute_u_b_o" kindref="compound">ComputeUBO</ref></type>
+        <definition>ComputeUBO Azura::AppRenderer::m_computeUBO</definition>
+        <argsstring></argsstring>
+        <name>m_computeUBO</name>
+        <initializer>{}</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Source/Samples/0_TestZone/Inc/TestZone/AppRenderer.h" line="84" column="1" bodyfile="Source/Samples/0_TestZone/Inc/TestZone/AppRenderer.h" bodystart="84" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="class_azura_1_1_app_renderer_1a60db79c496607b4075340872ec5d0811" prot="private" static="no" mutable="no">
+        <type><ref refid="class_azura_1_1_drawable_pool" kindref="compound">DrawablePool</ref> *</type>
+        <definition>DrawablePool * Azura::AppRenderer::m_mainPool</definition>
+        <argsstring></argsstring>
+        <name>m_mainPool</name>
+        <initializer>{nullptr}</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Source/Samples/0_TestZone/Inc/TestZone/AppRenderer.h" line="85" column="1" bodyfile="Source/Samples/0_TestZone/Inc/TestZone/AppRenderer.h" bodystart="85" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="class_azura_1_1_app_renderer_1a4a5f9e4f4e4d87bf42e086823a087907" prot="private" static="no" mutable="no">
+        <type><ref refid="class_azura_1_1_drawable_pool" kindref="compound">DrawablePool</ref> *</type>
+        <definition>DrawablePool * Azura::AppRenderer::m_spherePool</definition>
+        <argsstring></argsstring>
+        <name>m_spherePool</name>
+        <initializer>{nullptr}</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Source/Samples/0_TestZone/Inc/TestZone/AppRenderer.h" line="86" column="1" bodyfile="Source/Samples/0_TestZone/Inc/TestZone/AppRenderer.h" bodystart="86" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="class_azura_1_1_app_renderer_1a49c92501574c0ce0c49fadbcc6be446a" prot="private" static="no" mutable="no">
+        <type><ref refid="class_azura_1_1_compute_pool" kindref="compound">ComputePool</ref> *</type>
+        <definition>ComputePool* Azura::AppRenderer::m_computePool</definition>
+        <argsstring></argsstring>
+        <name>m_computePool</name>
+        <initializer>{nullptr}</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Source/Samples/0_TestZone/Inc/TestZone/AppRenderer.h" line="87" column="1" bodyfile="Source/Samples/0_TestZone/Inc/TestZone/AppRenderer.h" bodystart="87" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="class_azura_1_1_app_renderer_1afe07a3f505ba079a5b3622a04b07ad23" prot="private" static="no" mutable="no">
+        <type><ref refid="struct_azura_1_1_pass_data" kindref="compound">PassData</ref></type>
+        <definition>PassData Azura::AppRenderer::m_renderPass</definition>
+        <argsstring></argsstring>
+        <name>m_renderPass</name>
+        <initializer>{}</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Source/Samples/0_TestZone/Inc/TestZone/AppRenderer.h" line="89" column="1" bodyfile="Source/Samples/0_TestZone/Inc/TestZone/AppRenderer.h" bodystart="89" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="class_azura_1_1_app_renderer_1a631665bca8478f7e738274b9bc686e62" prot="private" static="no" mutable="no">
+        <type><ref refid="struct_azura_1_1_compute_pass_data" kindref="compound">ComputePassData</ref></type>
+        <definition>ComputePassData Azura::AppRenderer::m_computePass</definition>
+        <argsstring></argsstring>
+        <name>m_computePass</name>
+        <initializer>{}</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Source/Samples/0_TestZone/Inc/TestZone/AppRenderer.h" line="90" column="1" bodyfile="Source/Samples/0_TestZone/Inc/TestZone/AppRenderer.h" bodystart="90" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="class_azura_1_1_app_renderer_1a7082906213ba2e304db1a2a1b8ac82b4" prot="private" static="no" mutable="no">
+        <type><ref refid="class_azura_1_1_physics_1_1_cloth_mesh" kindref="compound">ClothMesh</ref></type>
+        <definition>ClothMesh Azura::AppRenderer::m_clothPlane</definition>
+        <argsstring></argsstring>
+        <name>m_clothPlane</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Source/Samples/0_TestZone/Inc/TestZone/AppRenderer.h" line="92" column="1" bodyfile="Source/Samples/0_TestZone/Inc/TestZone/AppRenderer.h" bodystart="92" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="class_azura_1_1_app_renderer_1a21559ae6b70eb27c61781587ba68b7ec" prot="private" static="no" mutable="no">
+        <type>std::vector&lt; Vector4f &gt;</type>
+        <definition>std::vector&lt;Vector4f&gt; Azura::AppRenderer::m_clothVertexVel</definition>
+        <argsstring></argsstring>
+        <name>m_clothVertexVel</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Source/Samples/0_TestZone/Inc/TestZone/AppRenderer.h" line="93" column="1" bodyfile="Source/Samples/0_TestZone/Inc/TestZone/AppRenderer.h" bodystart="93" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="class_azura_1_1_app_renderer_1ac8daa825208b17800c49d7e952e71c49" prot="private" static="no" mutable="no">
+        <type>std::vector&lt; Vector4f &gt;</type>
+        <definition>std::vector&lt;Vector4f&gt; Azura::AppRenderer::m_clothProjectedPos</definition>
+        <argsstring></argsstring>
+        <name>m_clothProjectedPos</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Source/Samples/0_TestZone/Inc/TestZone/AppRenderer.h" line="94" column="1" bodyfile="Source/Samples/0_TestZone/Inc/TestZone/AppRenderer.h" bodystart="94" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="class_azura_1_1_app_renderer_1a85beafdc213a46a7acc0a71cde462456" prot="private" static="no" mutable="no">
+        <type>std::vector&lt; SizeType &gt;</type>
+        <definition>std::vector&lt;SizeType&gt; Azura::AppRenderer::m_clothConstraintsIdx</definition>
+        <argsstring></argsstring>
+        <name>m_clothConstraintsIdx</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Source/Samples/0_TestZone/Inc/TestZone/AppRenderer.h" line="95" column="1" bodyfile="Source/Samples/0_TestZone/Inc/TestZone/AppRenderer.h" bodystart="95" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="class_azura_1_1_app_renderer_1ac1f086a721d5ef63b100488687954f57" prot="private" static="no" mutable="no">
+        <type><ref refid="class_azura_1_1_log" kindref="compound">Log</ref></type>
+        <definition>Log Azura::AppRenderer::log_AppRenderer</definition>
+        <argsstring></argsstring>
+        <name>log_AppRenderer</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Source/Samples/0_TestZone/Inc/TestZone/AppRenderer.h" line="97" column="1" bodyfile="Source/Samples/0_TestZone/Inc/TestZone/AppRenderer.h" bodystart="97" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="class_azura_1_1_app_renderer_1ab3a52fdc3a660924a3383d3bbc987a30" prot="private" static="no" mutable="no">
+        <type><ref refid="class_azura_1_1_memory_1_1_monotonic_allocator" kindref="compound">Memory::MonotonicAllocator</ref></type>
+        <definition>Memory::MonotonicAllocator Azura::AppRenderer::m_mainAllocator</definition>
+        <argsstring></argsstring>
+        <name>m_mainAllocator</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Source/Samples/1_ProceduralPlanet/Inc/ProceduralPlanet/AppRenderer.h" line="56" column="1" bodyfile="Source/Samples/1_ProceduralPlanet/Inc/ProceduralPlanet/AppRenderer.h" bodystart="56" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="class_azura_1_1_app_renderer_1a73789c6edb6731169f79d452656ab75c" prot="private" static="no" mutable="no">
+        <type><ref refid="class_azura_1_1_memory_1_1_monotonic_allocator" kindref="compound">Memory::MonotonicAllocator</ref></type>
+        <definition>Memory::MonotonicAllocator Azura::AppRenderer::m_drawableAllocator</definition>
+        <argsstring></argsstring>
+        <name>m_drawableAllocator</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Source/Samples/1_ProceduralPlanet/Inc/ProceduralPlanet/AppRenderer.h" line="57" column="1" bodyfile="Source/Samples/1_ProceduralPlanet/Inc/ProceduralPlanet/AppRenderer.h" bodystart="57" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="class_azura_1_1_app_renderer_1a74de12cc5d2777bdfc1273a980695900" prot="private" static="no" mutable="no">
+        <type><ref refid="struct_azura_1_1_uniform_buffer_data" kindref="compound">UniformBufferData</ref></type>
+        <definition>UniformBufferData Azura::AppRenderer::m_sceneUBO</definition>
+        <argsstring></argsstring>
+        <name>m_sceneUBO</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Source/Samples/1_ProceduralPlanet/Inc/ProceduralPlanet/AppRenderer.h" line="65" column="1" bodyfile="Source/Samples/1_ProceduralPlanet/Inc/ProceduralPlanet/AppRenderer.h" bodystart="65" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="class_azura_1_1_app_renderer_1a77867aa355439a56d4ce22f84f357800" prot="private" static="no" mutable="no">
+        <type><ref refid="struct_azura_1_1_shader_controls" kindref="compound">ShaderControls</ref></type>
+        <definition>ShaderControls Azura::AppRenderer::m_sceneControls</definition>
+        <argsstring></argsstring>
+        <name>m_sceneControls</name>
+        <initializer>{}</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Source/Samples/1_ProceduralPlanet/Inc/ProceduralPlanet/AppRenderer.h" line="66" column="1" bodyfile="Source/Samples/1_ProceduralPlanet/Inc/ProceduralPlanet/AppRenderer.h" bodystart="66" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="class_azura_1_1_app_renderer_1ac3a6ea3b2be57b90d8f4ca165591b148" prot="private" static="no" mutable="no">
+        <type>U32</type>
+        <definition>U32 Azura::AppRenderer::m_icosphereId</definition>
+        <argsstring></argsstring>
+        <name>m_icosphereId</name>
+        <initializer>{0}</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Source/Samples/1_ProceduralPlanet/Inc/ProceduralPlanet/AppRenderer.h" line="68" column="1" bodyfile="Source/Samples/1_ProceduralPlanet/Inc/ProceduralPlanet/AppRenderer.h" bodystart="68" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="class_azura_1_1_app_renderer_1a957367778c9b00f836acd48adfb64c5f" prot="private" static="no" mutable="no">
+        <type><ref refid="struct_azura_1_1_app_pass1" kindref="compound">AppPass1</ref></type>
+        <definition>AppPass1 Azura::AppRenderer::m_pass1</definition>
+        <argsstring></argsstring>
+        <name>m_pass1</name>
+        <initializer>{}</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Source/Samples/1_ProceduralPlanet/Inc/ProceduralPlanet/AppRenderer.h" line="70" column="1" bodyfile="Source/Samples/1_ProceduralPlanet/Inc/ProceduralPlanet/AppRenderer.h" bodystart="70" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="class_azura_1_1_app_renderer_1ad384074f6c261bd87028f50afcc6be86" prot="private" static="no" mutable="no">
+        <type><ref refid="class_azura_1_1_drawable_pool" kindref="compound">DrawablePool</ref> *</type>
+        <definition>DrawablePool* Azura::AppRenderer::m_skyPool</definition>
+        <argsstring></argsstring>
+        <name>m_skyPool</name>
+        <initializer>{nullptr}</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Source/Samples/1_ProceduralPlanet/Inc/ProceduralPlanet/AppRenderer.h" line="72" column="1" bodyfile="Source/Samples/1_ProceduralPlanet/Inc/ProceduralPlanet/AppRenderer.h" bodystart="72" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="class_azura_1_1_app_renderer_1a2a5b11935adbfb905099b5e5ccabecc8" prot="private" static="no" mutable="no">
+        <type><ref refid="class_azura_1_1_drawable_pool" kindref="compound">DrawablePool</ref> *</type>
+        <definition>DrawablePool* Azura::AppRenderer::m_terrainPool</definition>
+        <argsstring></argsstring>
+        <name>m_terrainPool</name>
+        <initializer>{nullptr}</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Source/Samples/1_ProceduralPlanet/Inc/ProceduralPlanet/AppRenderer.h" line="73" column="1" bodyfile="Source/Samples/1_ProceduralPlanet/Inc/ProceduralPlanet/AppRenderer.h" bodystart="73" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="class_azura_1_1_app_renderer_1a7d9ca49bc1cbb7610e898a4661cd2020" prot="private" static="no" mutable="no">
+        <type><ref refid="class_azura_1_1_drawable_pool" kindref="compound">DrawablePool</ref> *</type>
+        <definition>DrawablePool* Azura::AppRenderer::m_waterPool</definition>
+        <argsstring></argsstring>
+        <name>m_waterPool</name>
+        <initializer>{nullptr}</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Source/Samples/1_ProceduralPlanet/Inc/ProceduralPlanet/AppRenderer.h" line="74" column="1" bodyfile="Source/Samples/1_ProceduralPlanet/Inc/ProceduralPlanet/AppRenderer.h" bodystart="74" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="class_azura_1_1_app_renderer_1abc0b2795e01b85de53bcfbdcae19df8a" prot="private" static="no" mutable="no">
+        <type><ref refid="class_azura_1_1_memory_1_1_monotonic_allocator" kindref="compound">Memory::MonotonicAllocator</ref></type>
+        <definition>Memory::MonotonicAllocator Azura::AppRenderer::m_localAllocator</definition>
+        <argsstring></argsstring>
+        <name>m_localAllocator</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Source/Samples/3_ClothSim/Inc/ClothSim/AppRenderer.h" line="113" column="1" bodyfile="Source/Samples/3_ClothSim/Inc/ClothSim/AppRenderer.h" bodystart="113" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="class_azura_1_1_app_renderer_1a31549f213e66b6c8277f980cc2550bcb" prot="private" static="no" mutable="no">
+        <type><ref refid="struct_azura_1_1_scene_u_b_o" kindref="compound">SceneUBO</ref></type>
+        <definition>SceneUBO Azura::AppRenderer::m_planeUBO</definition>
+        <argsstring></argsstring>
+        <name>m_planeUBO</name>
+        <initializer>{}</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Source/Samples/3_ClothSim/Inc/ClothSim/AppRenderer.h" line="124" column="1" bodyfile="Source/Samples/3_ClothSim/Inc/ClothSim/AppRenderer.h" bodystart="124" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="class_azura_1_1_app_renderer_1a09e07a755d9e5e6548ac9399c41e3870" prot="private" static="no" mutable="no">
+        <type><ref refid="struct_azura_1_1_scene_u_b_o" kindref="compound">SceneUBO</ref></type>
+        <definition>SceneUBO Azura::AppRenderer::m_shehzanUBO</definition>
+        <argsstring></argsstring>
+        <name>m_shehzanUBO</name>
+        <initializer>{}</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Source/Samples/3_ClothSim/Inc/ClothSim/AppRenderer.h" line="125" column="1" bodyfile="Source/Samples/3_ClothSim/Inc/ClothSim/AppRenderer.h" bodystart="125" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="class_azura_1_1_app_renderer_1aba97969e322a1b629a4092e7b80920d9" prot="private" static="no" mutable="no">
+        <type><ref refid="struct_azura_1_1_normal_u_b_o" kindref="compound">NormalUBO</ref></type>
+        <definition>NormalUBO Azura::AppRenderer::m_normalUBO</definition>
+        <argsstring></argsstring>
+        <name>m_normalUBO</name>
+        <initializer>{}</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Source/Samples/3_ClothSim/Inc/ClothSim/AppRenderer.h" line="127" column="1" bodyfile="Source/Samples/3_ClothSim/Inc/ClothSim/AppRenderer.h" bodystart="127" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="class_azura_1_1_app_renderer_1a695b00c66034dd7263215b68b811d81f" prot="private" static="no" mutable="no">
+        <type><ref refid="class_azura_1_1_drawable_pool" kindref="compound">DrawablePool</ref> *</type>
+        <definition>DrawablePool* Azura::AppRenderer::m_planePool</definition>
+        <argsstring></argsstring>
+        <name>m_planePool</name>
+        <initializer>{nullptr}</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Source/Samples/3_ClothSim/Inc/ClothSim/AppRenderer.h" line="130" column="1" bodyfile="Source/Samples/3_ClothSim/Inc/ClothSim/AppRenderer.h" bodystart="130" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="class_azura_1_1_app_renderer_1a6a917e217e6349a89a260e21e76450c9" prot="private" static="no" mutable="no">
+        <type><ref refid="class_azura_1_1_drawable_pool" kindref="compound">DrawablePool</ref> *</type>
+        <definition>DrawablePool* Azura::AppRenderer::m_shehzanPool</definition>
+        <argsstring></argsstring>
+        <name>m_shehzanPool</name>
+        <initializer>{nullptr}</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Source/Samples/3_ClothSim/Inc/ClothSim/AppRenderer.h" line="131" column="1" bodyfile="Source/Samples/3_ClothSim/Inc/ClothSim/AppRenderer.h" bodystart="131" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="class_azura_1_1_app_renderer_1aa7159b4f1b326bf6477f4e2804262502" prot="private" static="no" mutable="no">
+        <type><ref refid="class_azura_1_1_compute_pool" kindref="compound">ComputePool</ref> *</type>
+        <definition>ComputePool* Azura::AppRenderer::m_computePools[5]</definition>
+        <argsstring>[5]</argsstring>
+        <name>m_computePools</name>
+        <initializer>{ nullptr, nullptr, nullptr, nullptr, nullptr}</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Source/Samples/3_ClothSim/Inc/ClothSim/AppRenderer.h" line="132" column="1" bodyfile="Source/Samples/3_ClothSim/Inc/ClothSim/AppRenderer.h" bodystart="132" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="class_azura_1_1_app_renderer_1ac3c126975bfb54a30773848e82f25df4" prot="private" static="no" mutable="no">
+        <type>std::vector&lt; <ref refid="class_azura_1_1_compute_pool" kindref="compound">ComputePool</ref> * &gt;</type>
+        <definition>std::vector&lt;ComputePool*&gt; Azura::AppRenderer::m_iterativePools</definition>
+        <argsstring></argsstring>
+        <name>m_iterativePools</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Source/Samples/3_ClothSim/Inc/ClothSim/AppRenderer.h" line="134" column="1" bodyfile="Source/Samples/3_ClothSim/Inc/ClothSim/AppRenderer.h" bodystart="134" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="class_azura_1_1_app_renderer_1a8f63d2385211cd02c3c9bd0d791176f1" prot="private" static="no" mutable="no">
+        <type><ref refid="struct_azura_1_1_normals_pass_data" kindref="compound">NormalsPassData</ref></type>
+        <definition>NormalsPassData Azura::AppRenderer::m_normalsPass</definition>
+        <argsstring></argsstring>
+        <name>m_normalsPass</name>
+        <initializer>{}</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Source/Samples/3_ClothSim/Inc/ClothSim/AppRenderer.h" line="138" column="1" bodyfile="Source/Samples/3_ClothSim/Inc/ClothSim/AppRenderer.h" bodystart="138" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="class_azura_1_1_app_renderer_1a264a650942c80fc0c7c665b5eb6bb640" prot="private" static="no" mutable="no">
+        <type><ref refid="class_azura_1_1_math_1_1_transform_component" kindref="compound">Math::TransformComponent</ref></type>
+        <definition>Math::TransformComponent Azura::AppRenderer::m_clothTransform</definition>
+        <argsstring></argsstring>
+        <name>m_clothTransform</name>
+        <initializer>{}</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Source/Samples/3_ClothSim/Inc/ClothSim/AppRenderer.h" line="140" column="1" bodyfile="Source/Samples/3_ClothSim/Inc/ClothSim/AppRenderer.h" bodystart="140" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="class_azura_1_1_app_renderer_1a8dacff0e2c7ac6b0c6d84033aa739134" prot="private" static="no" mutable="no">
+        <type><ref refid="class_azura_1_1_containers_1_1_vector" kindref="compound">Containers::Vector</ref>&lt; <ref refid="class_azura_1_1_math_1_1_transform_component" kindref="compound">Math::TransformComponent</ref> &gt;</type>
+        <definition>Containers::Vector&lt;Math::TransformComponent&gt; Azura::AppRenderer::m_curtainTransforms</definition>
+        <argsstring></argsstring>
+        <name>m_curtainTransforms</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Source/Samples/3_ClothSim/Inc/ClothSim/AppRenderer.h" line="142" column="1" bodyfile="Source/Samples/3_ClothSim/Inc/ClothSim/AppRenderer.h" bodystart="142" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="class_azura_1_1_app_renderer_1a2a4c63803a609ef18ea3d0863ec3a21d" prot="private" static="no" mutable="no">
+        <type><ref refid="class_azura_1_1_physics_1_1_cloth_plane" kindref="compound">Physics::ClothPlane</ref></type>
+        <definition>Physics::ClothPlane Azura::AppRenderer::m_clothPlane</definition>
+        <argsstring></argsstring>
+        <name>m_clothPlane</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Source/Samples/3_ClothSim/Inc/ClothSim/AppRenderer.h" line="144" column="1" bodyfile="Source/Samples/3_ClothSim/Inc/ClothSim/AppRenderer.h" bodystart="144" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="class_azura_1_1_app_renderer_1ad7202d2c9b2ae78f233f3c2a27788822" prot="private" static="no" mutable="no">
+        <type><ref refid="class_azura_1_1_physics_1_1_cloth_mesh" kindref="compound">Physics::ClothMesh</ref></type>
+        <definition>Physics::ClothMesh Azura::AppRenderer::m_clothMesh</definition>
+        <argsstring></argsstring>
+        <name>m_clothMesh</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Source/Samples/3_ClothSim/Inc/ClothSim/AppRenderer.h" line="145" column="1" bodyfile="Source/Samples/3_ClothSim/Inc/ClothSim/AppRenderer.h" bodystart="145" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="class_azura_1_1_app_renderer_1a8e4e38213b2f887c29fa5d1806796b22" prot="private" static="no" mutable="no">
+        <type><ref refid="class_azura_1_1_physics_1_1_i_cloth_physics_geometry" kindref="compound">Physics::IClothPhysicsGeometry</ref> *</type>
+        <definition>Physics::IClothPhysicsGeometry* Azura::AppRenderer::p_activeMesh</definition>
+        <argsstring></argsstring>
+        <name>p_activeMesh</name>
+        <initializer>{nullptr}</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Source/Samples/3_ClothSim/Inc/ClothSim/AppRenderer.h" line="147" column="1" bodyfile="Source/Samples/3_ClothSim/Inc/ClothSim/AppRenderer.h" bodystart="147" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="class_azura_1_1_app_renderer_1a3be2c8993be3114438b09c1a7839ef5a" prot="private" static="no" mutable="no">
+        <type>int</type>
+        <definition>int Azura::AppRenderer::m_rotateFactor</definition>
+        <argsstring></argsstring>
+        <name>m_rotateFactor</name>
+        <initializer>{0}</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Source/Samples/3_ClothSim/Inc/ClothSim/AppRenderer.h" line="149" column="1" bodyfile="Source/Samples/3_ClothSim/Inc/ClothSim/AppRenderer.h" bodystart="149" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="class_azura_1_1_app_renderer_1abfb235548f122bcec16602f6f691cd12" prot="private" static="no" mutable="no">
+        <type>const float</type>
+        <definition>const float Azura::AppRenderer::m_rotateStepSize</definition>
+        <argsstring></argsstring>
+        <name>m_rotateStepSize</name>
+        <initializer>{Math::PI_OVER4}</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Source/Samples/3_ClothSim/Inc/ClothSim/AppRenderer.h" line="150" column="1" bodyfile="Source/Samples/3_ClothSim/Inc/ClothSim/AppRenderer.h" bodystart="150" bodyend="-1"/>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="public-func">
+      <memberdef kind="function" id="class_azura_1_1_app_renderer_1a729999298ed93281f60d03ffc00bfbcd" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>Azura::AppRenderer::AppRenderer</definition>
+        <argsstring>()</argsstring>
+        <name>AppRenderer</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Source/Samples/0_TestZone/Inc/TestZone/AppRenderer.h" line="63" column="1" bodyfile="Source/Samples/0_TestZone/Src/AppRenderer.Basic.cpp" bodystart="30" bodyend="35"/>
+      </memberdef>
+      <memberdef kind="function" id="class_azura_1_1_app_renderer_1a6c476579a5c1ecc340e405169d2d6206" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void Azura::AppRenderer::Initialize</definition>
+        <argsstring>()</argsstring>
+        <name>Initialize</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Source/Samples/0_TestZone/Inc/TestZone/AppRenderer.h" line="65" column="1" bodyfile="Source/Samples/0_TestZone/Src/AppRenderer.Basic.cpp" bodystart="37" bodyend="144"/>
+      </memberdef>
+      <memberdef kind="function" id="class_azura_1_1_app_renderer_1aab613340f99fc4b229be9d90781de0cb" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void Azura::AppRenderer::WindowUpdate</definition>
+        <argsstring>(float timeDelta)</argsstring>
+        <name>WindowUpdate</name>
+        <param>
+          <type>float</type>
+          <declname>timeDelta</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Source/Samples/0_TestZone/Inc/TestZone/AppRenderer.h" line="66" column="1" bodyfile="Source/Samples/0_TestZone/Src/AppRenderer.Cloth.cpp" bodystart="224" bodyend="328"/>
+      </memberdef>
+      <memberdef kind="function" id="class_azura_1_1_app_renderer_1a4b9ae61ecb8a834bfdbf1b848b91fa8a" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void Azura::AppRenderer::Run</definition>
+        <argsstring>() const</argsstring>
+        <name>Run</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Source/Samples/0_TestZone/Inc/TestZone/AppRenderer.h" line="67" column="1" bodyfile="Source/Samples/0_TestZone/Src/AppRenderer.Basic.cpp" bodystart="150" bodyend="153"/>
+      </memberdef>
+      <memberdef kind="function" id="class_azura_1_1_app_renderer_1aef01656abe2966facd73a672cc7e5507" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void Azura::AppRenderer::Destroy</definition>
+        <argsstring>() const</argsstring>
+        <name>Destroy</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Source/Samples/0_TestZone/Inc/TestZone/AppRenderer.h" line="68" column="1" bodyfile="Source/Samples/0_TestZone/Src/AppRenderer.Basic.cpp" bodystart="155" bodyend="157"/>
+      </memberdef>
+      <memberdef kind="function" id="class_azura_1_1_app_renderer_1a729999298ed93281f60d03ffc00bfbcd" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>Azura::AppRenderer::AppRenderer</definition>
+        <argsstring>()</argsstring>
+        <name>AppRenderer</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Source/Samples/1_ProceduralPlanet/Inc/ProceduralPlanet/AppRenderer.h" line="46" column="1"/>
+      </memberdef>
+      <memberdef kind="function" id="class_azura_1_1_app_renderer_1a6c476579a5c1ecc340e405169d2d6206" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void Azura::AppRenderer::Initialize</definition>
+        <argsstring>()</argsstring>
+        <name>Initialize</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Source/Samples/1_ProceduralPlanet/Inc/ProceduralPlanet/AppRenderer.h" line="48" column="1"/>
+      </memberdef>
+      <memberdef kind="function" id="class_azura_1_1_app_renderer_1aab613340f99fc4b229be9d90781de0cb" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void Azura::AppRenderer::WindowUpdate</definition>
+        <argsstring>(float timeDelta)</argsstring>
+        <name>WindowUpdate</name>
+        <param>
+          <type>float</type>
+          <declname>timeDelta</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Source/Samples/1_ProceduralPlanet/Inc/ProceduralPlanet/AppRenderer.h" line="49" column="1"/>
+      </memberdef>
+      <memberdef kind="function" id="class_azura_1_1_app_renderer_1a4b9ae61ecb8a834bfdbf1b848b91fa8a" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void Azura::AppRenderer::Run</definition>
+        <argsstring>() const</argsstring>
+        <name>Run</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Source/Samples/1_ProceduralPlanet/Inc/ProceduralPlanet/AppRenderer.h" line="50" column="1"/>
+      </memberdef>
+      <memberdef kind="function" id="class_azura_1_1_app_renderer_1aef01656abe2966facd73a672cc7e5507" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void Azura::AppRenderer::Destroy</definition>
+        <argsstring>() const</argsstring>
+        <name>Destroy</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Source/Samples/1_ProceduralPlanet/Inc/ProceduralPlanet/AppRenderer.h" line="51" column="1"/>
+      </memberdef>
+      <memberdef kind="function" id="class_azura_1_1_app_renderer_1a729999298ed93281f60d03ffc00bfbcd" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>Azura::AppRenderer::AppRenderer</definition>
+        <argsstring>()</argsstring>
+        <name>AppRenderer</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Source/Samples/3_ClothSim/Inc/ClothSim/AppRenderer.h" line="100" column="1"/>
+      </memberdef>
+      <memberdef kind="function" id="class_azura_1_1_app_renderer_1a6c476579a5c1ecc340e405169d2d6206" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void Azura::AppRenderer::Initialize</definition>
+        <argsstring>()</argsstring>
+        <name>Initialize</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Source/Samples/3_ClothSim/Inc/ClothSim/AppRenderer.h" line="102" column="1"/>
+      </memberdef>
+      <memberdef kind="function" id="class_azura_1_1_app_renderer_1aab613340f99fc4b229be9d90781de0cb" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void Azura::AppRenderer::WindowUpdate</definition>
+        <argsstring>(float timeDelta)</argsstring>
+        <name>WindowUpdate</name>
+        <param>
+          <type>float</type>
+          <declname>timeDelta</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Source/Samples/3_ClothSim/Inc/ClothSim/AppRenderer.h" line="103" column="1"/>
+      </memberdef>
+      <memberdef kind="function" id="class_azura_1_1_app_renderer_1a4b9ae61ecb8a834bfdbf1b848b91fa8a" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void Azura::AppRenderer::Run</definition>
+        <argsstring>() const</argsstring>
+        <name>Run</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Source/Samples/3_ClothSim/Inc/ClothSim/AppRenderer.h" line="104" column="1"/>
+      </memberdef>
+      <memberdef kind="function" id="class_azura_1_1_app_renderer_1aef01656abe2966facd73a672cc7e5507" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void Azura::AppRenderer::Destroy</definition>
+        <argsstring>() const</argsstring>
+        <name>Destroy</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Source/Samples/3_ClothSim/Inc/ClothSim/AppRenderer.h" line="105" column="1"/>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <location file="Source/Samples/0_TestZone/Inc/TestZone/AppRenderer.h" line="61" column="1" bodyfile="Source/Samples/0_TestZone/Inc/TestZone/AppRenderer.h" bodystart="61" bodyend="98"/>
+    <listofallmembers>
+      <member refid="class_azura_1_1_app_renderer_1a729999298ed93281f60d03ffc00bfbcd" prot="public" virt="non-virtual"><scope>Azura::AppRenderer</scope><name>AppRenderer</name></member>
+      <member refid="class_azura_1_1_app_renderer_1a729999298ed93281f60d03ffc00bfbcd" prot="public" virt="non-virtual"><scope>Azura::AppRenderer</scope><name>AppRenderer</name></member>
+      <member refid="class_azura_1_1_app_renderer_1a729999298ed93281f60d03ffc00bfbcd" prot="public" virt="non-virtual"><scope>Azura::AppRenderer</scope><name>AppRenderer</name></member>
+      <member refid="class_azura_1_1_app_renderer_1aef01656abe2966facd73a672cc7e5507" prot="public" virt="non-virtual"><scope>Azura::AppRenderer</scope><name>Destroy</name></member>
+      <member refid="class_azura_1_1_app_renderer_1aef01656abe2966facd73a672cc7e5507" prot="public" virt="non-virtual"><scope>Azura::AppRenderer</scope><name>Destroy</name></member>
+      <member refid="class_azura_1_1_app_renderer_1aef01656abe2966facd73a672cc7e5507" prot="public" virt="non-virtual"><scope>Azura::AppRenderer</scope><name>Destroy</name></member>
+      <member refid="class_azura_1_1_app_renderer_1a6c476579a5c1ecc340e405169d2d6206" prot="public" virt="non-virtual"><scope>Azura::AppRenderer</scope><name>Initialize</name></member>
+      <member refid="class_azura_1_1_app_renderer_1a6c476579a5c1ecc340e405169d2d6206" prot="public" virt="non-virtual"><scope>Azura::AppRenderer</scope><name>Initialize</name></member>
+      <member refid="class_azura_1_1_app_renderer_1a6c476579a5c1ecc340e405169d2d6206" prot="public" virt="non-virtual"><scope>Azura::AppRenderer</scope><name>Initialize</name></member>
+      <member refid="class_azura_1_1_app_renderer_1ac1f086a721d5ef63b100488687954f57" prot="private" virt="non-virtual"><scope>Azura::AppRenderer</scope><name>log_AppRenderer</name></member>
+      <member refid="class_azura_1_1_app_renderer_1aaaa8dfb217d0a03629c75b9366c9a1f3" prot="private" virt="non-virtual"><scope>Azura::AppRenderer</scope><name>m_camera</name></member>
+      <member refid="class_azura_1_1_app_renderer_1a85beafdc213a46a7acc0a71cde462456" prot="private" virt="non-virtual"><scope>Azura::AppRenderer</scope><name>m_clothConstraintsIdx</name></member>
+      <member refid="class_azura_1_1_app_renderer_1ad7202d2c9b2ae78f233f3c2a27788822" prot="private" virt="non-virtual"><scope>Azura::AppRenderer</scope><name>m_clothMesh</name></member>
+      <member refid="class_azura_1_1_app_renderer_1a7082906213ba2e304db1a2a1b8ac82b4" prot="private" virt="non-virtual"><scope>Azura::AppRenderer</scope><name>m_clothPlane</name></member>
+      <member refid="class_azura_1_1_app_renderer_1a2a4c63803a609ef18ea3d0863ec3a21d" prot="private" virt="non-virtual"><scope>Azura::AppRenderer</scope><name>m_clothPlane</name></member>
+      <member refid="class_azura_1_1_app_renderer_1ac8daa825208b17800c49d7e952e71c49" prot="private" virt="non-virtual"><scope>Azura::AppRenderer</scope><name>m_clothProjectedPos</name></member>
+      <member refid="class_azura_1_1_app_renderer_1a264a650942c80fc0c7c665b5eb6bb640" prot="private" virt="non-virtual"><scope>Azura::AppRenderer</scope><name>m_clothTransform</name></member>
+      <member refid="class_azura_1_1_app_renderer_1a60441ffb7a9a97d0c6dd4ac63c92b7a4" prot="private" virt="non-virtual"><scope>Azura::AppRenderer</scope><name>m_clothUBO</name></member>
+      <member refid="class_azura_1_1_app_renderer_1a21559ae6b70eb27c61781587ba68b7ec" prot="private" virt="non-virtual"><scope>Azura::AppRenderer</scope><name>m_clothVertexVel</name></member>
+      <member refid="class_azura_1_1_app_renderer_1a631665bca8478f7e738274b9bc686e62" prot="private" virt="non-virtual"><scope>Azura::AppRenderer</scope><name>m_computePass</name></member>
+      <member refid="class_azura_1_1_app_renderer_1a49c92501574c0ce0c49fadbcc6be446a" prot="private" virt="non-virtual"><scope>Azura::AppRenderer</scope><name>m_computePool</name></member>
+      <member refid="class_azura_1_1_app_renderer_1aa7159b4f1b326bf6477f4e2804262502" prot="private" virt="non-virtual"><scope>Azura::AppRenderer</scope><name>m_computePools</name></member>
+      <member refid="class_azura_1_1_app_renderer_1afed96b9aaffd5ff442dd72e4c6fa1af2" prot="private" virt="non-virtual"><scope>Azura::AppRenderer</scope><name>m_computeUBO</name></member>
+      <member refid="class_azura_1_1_app_renderer_1a8dacff0e2c7ac6b0c6d84033aa739134" prot="private" virt="non-virtual"><scope>Azura::AppRenderer</scope><name>m_curtainTransforms</name></member>
+      <member refid="class_azura_1_1_app_renderer_1a73789c6edb6731169f79d452656ab75c" prot="private" virt="non-virtual"><scope>Azura::AppRenderer</scope><name>m_drawableAllocator</name></member>
+      <member refid="class_azura_1_1_app_renderer_1a73789c6edb6731169f79d452656ab75c" prot="private" virt="non-virtual"><scope>Azura::AppRenderer</scope><name>m_drawableAllocator</name></member>
+      <member refid="class_azura_1_1_app_renderer_1ac3a6ea3b2be57b90d8f4ca165591b148" prot="private" virt="non-virtual"><scope>Azura::AppRenderer</scope><name>m_icosphereId</name></member>
+      <member refid="class_azura_1_1_app_renderer_1ac3c126975bfb54a30773848e82f25df4" prot="private" virt="non-virtual"><scope>Azura::AppRenderer</scope><name>m_iterativePools</name></member>
+      <member refid="class_azura_1_1_app_renderer_1abc0b2795e01b85de53bcfbdcae19df8a" prot="private" virt="non-virtual"><scope>Azura::AppRenderer</scope><name>m_localAllocator</name></member>
+      <member refid="class_azura_1_1_app_renderer_1ab3a52fdc3a660924a3383d3bbc987a30" prot="private" virt="non-virtual"><scope>Azura::AppRenderer</scope><name>m_mainAllocator</name></member>
+      <member refid="class_azura_1_1_app_renderer_1ab3a52fdc3a660924a3383d3bbc987a30" prot="private" virt="non-virtual"><scope>Azura::AppRenderer</scope><name>m_mainAllocator</name></member>
+      <member refid="class_azura_1_1_app_renderer_1a0e2a02f932ab37fa91d48a2d5071eb08" prot="private" virt="non-virtual"><scope>Azura::AppRenderer</scope><name>m_mainBuffer</name></member>
+      <member refid="class_azura_1_1_app_renderer_1a60db79c496607b4075340872ec5d0811" prot="private" virt="non-virtual"><scope>Azura::AppRenderer</scope><name>m_mainPool</name></member>
+      <member refid="class_azura_1_1_app_renderer_1a8f63d2385211cd02c3c9bd0d791176f1" prot="private" virt="non-virtual"><scope>Azura::AppRenderer</scope><name>m_normalsPass</name></member>
+      <member refid="class_azura_1_1_app_renderer_1aba97969e322a1b629a4092e7b80920d9" prot="private" virt="non-virtual"><scope>Azura::AppRenderer</scope><name>m_normalUBO</name></member>
+      <member refid="class_azura_1_1_app_renderer_1a957367778c9b00f836acd48adfb64c5f" prot="private" virt="non-virtual"><scope>Azura::AppRenderer</scope><name>m_pass1</name></member>
+      <member refid="class_azura_1_1_app_renderer_1a695b00c66034dd7263215b68b811d81f" prot="private" virt="non-virtual"><scope>Azura::AppRenderer</scope><name>m_planePool</name></member>
+      <member refid="class_azura_1_1_app_renderer_1a31549f213e66b6c8277f980cc2550bcb" prot="private" virt="non-virtual"><scope>Azura::AppRenderer</scope><name>m_planeUBO</name></member>
+      <member refid="class_azura_1_1_app_renderer_1a003af8d47f98436ab83e54acdf7dec26" prot="private" virt="non-virtual"><scope>Azura::AppRenderer</scope><name>m_renderer</name></member>
+      <member refid="class_azura_1_1_app_renderer_1afe07a3f505ba079a5b3622a04b07ad23" prot="private" virt="non-virtual"><scope>Azura::AppRenderer</scope><name>m_renderPass</name></member>
+      <member refid="class_azura_1_1_app_renderer_1a3be2c8993be3114438b09c1a7839ef5a" prot="private" virt="non-virtual"><scope>Azura::AppRenderer</scope><name>m_rotateFactor</name></member>
+      <member refid="class_azura_1_1_app_renderer_1abfb235548f122bcec16602f6f691cd12" prot="private" virt="non-virtual"><scope>Azura::AppRenderer</scope><name>m_rotateStepSize</name></member>
+      <member refid="class_azura_1_1_app_renderer_1a77867aa355439a56d4ce22f84f357800" prot="private" virt="non-virtual"><scope>Azura::AppRenderer</scope><name>m_sceneControls</name></member>
+      <member refid="class_azura_1_1_app_renderer_1a74de12cc5d2777bdfc1273a980695900" prot="private" virt="non-virtual"><scope>Azura::AppRenderer</scope><name>m_sceneUBO</name></member>
+      <member refid="class_azura_1_1_app_renderer_1a6a917e217e6349a89a260e21e76450c9" prot="private" virt="non-virtual"><scope>Azura::AppRenderer</scope><name>m_shehzanPool</name></member>
+      <member refid="class_azura_1_1_app_renderer_1a09e07a755d9e5e6548ac9399c41e3870" prot="private" virt="non-virtual"><scope>Azura::AppRenderer</scope><name>m_shehzanUBO</name></member>
+      <member refid="class_azura_1_1_app_renderer_1ad384074f6c261bd87028f50afcc6be86" prot="private" virt="non-virtual"><scope>Azura::AppRenderer</scope><name>m_skyPool</name></member>
+      <member refid="class_azura_1_1_app_renderer_1a4a5f9e4f4e4d87bf42e086823a087907" prot="private" virt="non-virtual"><scope>Azura::AppRenderer</scope><name>m_spherePool</name></member>
+      <member refid="class_azura_1_1_app_renderer_1aeca62316132d044119344d771cab5826" prot="private" virt="non-virtual"><scope>Azura::AppRenderer</scope><name>m_sphereUBO</name></member>
+      <member refid="class_azura_1_1_app_renderer_1a2a5b11935adbfb905099b5e5ccabecc8" prot="private" virt="non-virtual"><scope>Azura::AppRenderer</scope><name>m_terrainPool</name></member>
+      <member refid="class_azura_1_1_app_renderer_1aa2bfaf8d5584b47dce7638d8e63e3bc3" prot="private" virt="non-virtual"><scope>Azura::AppRenderer</scope><name>m_textureManager</name></member>
+      <member refid="class_azura_1_1_app_renderer_1a7d9ca49bc1cbb7610e898a4661cd2020" prot="private" virt="non-virtual"><scope>Azura::AppRenderer</scope><name>m_waterPool</name></member>
+      <member refid="class_azura_1_1_app_renderer_1aefefaa4261f51f93a3cde1a050639eaf" prot="private" virt="non-virtual"><scope>Azura::AppRenderer</scope><name>m_window</name></member>
+      <member refid="class_azura_1_1_app_renderer_1a8e4e38213b2f887c29fa5d1806796b22" prot="private" virt="non-virtual"><scope>Azura::AppRenderer</scope><name>p_activeMesh</name></member>
+      <member refid="class_azura_1_1_app_renderer_1a4b9ae61ecb8a834bfdbf1b848b91fa8a" prot="public" virt="non-virtual"><scope>Azura::AppRenderer</scope><name>Run</name></member>
+      <member refid="class_azura_1_1_app_renderer_1a4b9ae61ecb8a834bfdbf1b848b91fa8a" prot="public" virt="non-virtual"><scope>Azura::AppRenderer</scope><name>Run</name></member>
+      <member refid="class_azura_1_1_app_renderer_1a4b9ae61ecb8a834bfdbf1b848b91fa8a" prot="public" virt="non-virtual"><scope>Azura::AppRenderer</scope><name>Run</name></member>
+      <member refid="class_azura_1_1_app_renderer_1aab613340f99fc4b229be9d90781de0cb" prot="public" virt="non-virtual"><scope>Azura::AppRenderer</scope><name>WindowUpdate</name></member>
+      <member refid="class_azura_1_1_app_renderer_1aab613340f99fc4b229be9d90781de0cb" prot="public" virt="non-virtual"><scope>Azura::AppRenderer</scope><name>WindowUpdate</name></member>
+      <member refid="class_azura_1_1_app_renderer_1aab613340f99fc4b229be9d90781de0cb" prot="public" virt="non-virtual"><scope>Azura::AppRenderer</scope><name>WindowUpdate</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

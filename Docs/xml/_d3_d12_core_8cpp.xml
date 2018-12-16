@@ -1,0 +1,376 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.8.14">
+  <compounddef id="_d3_d12_core_8cpp" kind="file" language="C++">
+    <compoundname>D3D12Core.cpp</compoundname>
+    <includes refid="_d3_d12_core_8h" local="yes">D3D12/D3D12Core.h</includes>
+    <includes refid="_log_8h" local="yes">Log/Log.h</includes>
+    <includes refid="_d3_d12_macros_8h" local="yes">D3D12/D3D12Macros.h</includes>
+    <includes refid="_d3_d12_type_mapping_8h" local="yes">D3D12/D3D12TypeMapping.h</includes>
+    <includes refid="_d3_d12_scoped_buffer_8h" local="yes">D3D12/D3D12ScopedBuffer.h</includes>
+    <includes refid="_d3_d12_scoped_command_buffer_8h" local="yes">D3D12/D3D12ScopedCommandBuffer.h</includes>
+    <incdepgraph>
+      <node id="1865">
+        <label>functional</label>
+      </node>
+      <node id="1855">
+        <label>windows.h</label>
+      </node>
+      <node id="1866">
+        <label>iterator</label>
+      </node>
+      <node id="1878">
+        <label>Utils/Hash.h</label>
+        <link refid="_hash_8h_source"/>
+        <childnode refid="1869" relation="include">
+        </childnode>
+      </node>
+      <node id="1854">
+        <label>D3D12/D3D12Core.h</label>
+        <link refid="_d3_d12_core_8h_source"/>
+        <childnode refid="1855" relation="include">
+        </childnode>
+        <childnode refid="1856" relation="include">
+        </childnode>
+        <childnode refid="1857" relation="include">
+        </childnode>
+        <childnode refid="1858" relation="include">
+        </childnode>
+        <childnode refid="1859" relation="include">
+        </childnode>
+        <childnode refid="1860" relation="include">
+        </childnode>
+        <childnode refid="1861" relation="include">
+        </childnode>
+      </node>
+      <node id="1873">
+        <label>Core/RawStorageFormat.h</label>
+        <link refid="_raw_storage_format_8h_source"/>
+        <childnode refid="1869" relation="include">
+        </childnode>
+        <childnode refid="1872" relation="include">
+        </childnode>
+        <childnode refid="1874" relation="include">
+        </childnode>
+        <childnode refid="1875" relation="include">
+        </childnode>
+        <childnode refid="1876" relation="include">
+        </childnode>
+        <childnode refid="1877" relation="include">
+        </childnode>
+      </node>
+      <node id="1856">
+        <label>d3d12.h</label>
+      </node>
+      <node id="1888">
+        <label>D3D12/D3D12ScopedBuffer.h</label>
+        <link refid="_d3_d12_scoped_buffer_8h_source"/>
+        <childnode refid="1889" relation="include">
+        </childnode>
+        <childnode refid="1881" relation="include">
+        </childnode>
+        <childnode refid="1854" relation="include">
+        </childnode>
+      </node>
+      <node id="1868">
+        <label>Memory/Allocator.h</label>
+        <link refid="_allocator_8h_source"/>
+        <childnode refid="1865" relation="include">
+        </childnode>
+        <childnode refid="1869" relation="include">
+        </childnode>
+        <childnode refid="1870" relation="include">
+        </childnode>
+      </node>
+      <node id="1879">
+        <label>Core/AssetLocation.h</label>
+        <link refid="_asset_location_8h_source"/>
+      </node>
+      <node id="1863">
+        <label>cassert</label>
+      </node>
+      <node id="1876">
+        <label>boost/preprocessor/tuple/elem.hpp</label>
+      </node>
+      <node id="1859">
+        <label>wrl.h</label>
+      </node>
+      <node id="1885">
+        <label>stdexcept</label>
+      </node>
+      <node id="1861">
+        <label>Generic/GenericTypes.h</label>
+        <link refid="_azura_2_render_system_2_inc_2_generic_2_generic_types_8h_source"/>
+        <childnode refid="1862" relation="include">
+        </childnode>
+        <childnode refid="1871" relation="include">
+        </childnode>
+        <childnode refid="1869" relation="include">
+        </childnode>
+        <childnode refid="1873" relation="include">
+        </childnode>
+        <childnode refid="1878" relation="include">
+        </childnode>
+        <childnode refid="1879" relation="include">
+        </childnode>
+        <childnode refid="1880" relation="include">
+        </childnode>
+        <childnode refid="1877" relation="include">
+        </childnode>
+      </node>
+      <node id="1853">
+        <label>Source/Azura/RenderSystem/Src/D3D12/D3D12Core.cpp</label>
+        <link refid="_d3_d12_core_8cpp"/>
+        <childnode refid="1854" relation="include">
+        </childnode>
+        <childnode refid="1881" relation="include">
+        </childnode>
+        <childnode refid="1883" relation="include">
+        </childnode>
+        <childnode refid="1886" relation="include">
+        </childnode>
+        <childnode refid="1888" relation="include">
+        </childnode>
+        <childnode refid="1890" relation="include">
+        </childnode>
+      </node>
+      <node id="1870">
+        <label>Utils/Macros.h</label>
+        <link refid="_macros_8h_source"/>
+      </node>
+      <node id="1858">
+        <label>D3Dcompiler.h</label>
+      </node>
+      <node id="1880">
+        <label>boost/container/small_vector.hpp</label>
+      </node>
+      <node id="1871">
+        <label>Generic/Constants.h</label>
+        <link refid="_azura_2_render_system_2_inc_2_generic_2_constants_8h_source"/>
+        <childnode refid="1872" relation="include">
+        </childnode>
+        <childnode refid="1869" relation="include">
+        </childnode>
+      </node>
+      <node id="1877">
+        <label>boost/detail/bitmask.hpp</label>
+      </node>
+      <node id="1872">
+        <label>tuple</label>
+      </node>
+      <node id="1867">
+        <label>Array.h</label>
+        <link refid="_array_8h_source"/>
+        <childnode refid="1863" relation="include">
+        </childnode>
+        <childnode refid="1864" relation="include">
+        </childnode>
+        <childnode refid="1868" relation="include">
+        </childnode>
+        <childnode refid="1869" relation="include">
+        </childnode>
+      </node>
+      <node id="1883">
+        <label>D3D12/D3D12Macros.h</label>
+        <link refid="_d3_d12_macros_8h_source"/>
+        <childnode refid="1884" relation="include">
+        </childnode>
+        <childnode refid="1885" relation="include">
+        </childnode>
+        <childnode refid="1869" relation="include">
+        </childnode>
+      </node>
+      <node id="1887">
+        <label>optional</label>
+      </node>
+      <node id="1882">
+        <label>vector</label>
+      </node>
+      <node id="1862">
+        <label>Containers/Vector.h</label>
+        <link refid="_vector_8h_source"/>
+        <childnode refid="1863" relation="include">
+        </childnode>
+        <childnode refid="1864" relation="include">
+        </childnode>
+        <childnode refid="1865" relation="include">
+        </childnode>
+        <childnode refid="1866" relation="include">
+        </childnode>
+        <childnode refid="1867" relation="include">
+        </childnode>
+        <childnode refid="1868" relation="include">
+        </childnode>
+        <childnode refid="1869" relation="include">
+        </childnode>
+        <childnode refid="1870" relation="include">
+        </childnode>
+      </node>
+      <node id="1881">
+        <label>Log/Log.h</label>
+        <link refid="_log_8h_source"/>
+        <childnode refid="1869" relation="include">
+        </childnode>
+        <childnode refid="1882" relation="include">
+        </childnode>
+      </node>
+      <node id="1857">
+        <label>dxgi1_4.h</label>
+      </node>
+      <node id="1889">
+        <label>wrl/client.h</label>
+      </node>
+      <node id="1874">
+        <label>boost/preprocessor/repetition/repeat.hpp</label>
+      </node>
+      <node id="1869">
+        <label>Types.h</label>
+      </node>
+      <node id="1884">
+        <label>winerror.h</label>
+      </node>
+      <node id="1890">
+        <label>D3D12/D3D12ScopedCommandBuffer.h</label>
+        <link refid="_d3_d12_scoped_command_buffer_8h_source"/>
+        <childnode refid="1854" relation="include">
+        </childnode>
+      </node>
+      <node id="1886">
+        <label>D3D12/D3D12TypeMapping.h</label>
+        <link refid="_d3_d12_type_mapping_8h_source"/>
+        <childnode refid="1887" relation="include">
+        </childnode>
+        <childnode refid="1861" relation="include">
+        </childnode>
+        <childnode refid="1873" relation="include">
+        </childnode>
+        <childnode refid="1854" relation="include">
+        </childnode>
+      </node>
+      <node id="1864">
+        <label>cstring</label>
+      </node>
+      <node id="1860">
+        <label>shellapi.h</label>
+      </node>
+      <node id="1875">
+        <label>boost/preprocessor/seq/for_each.hpp</label>
+      </node>
+    </incdepgraph>
+    <innernamespace refid="namespace_azura">Azura</innernamespace>
+    <innernamespace refid="namespace_azura_1_1_d3_d12">Azura::D3D12</innernamespace>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <programlisting>
+<codeline lineno="1"><highlight class="preprocessor">#include<sp/>&quot;D3D12/D3D12Core.h&quot;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="2"><highlight class="normal"></highlight></codeline>
+<codeline lineno="3"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&quot;Log/Log.h&quot;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="4"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&quot;D3D12/D3D12Macros.h&quot;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="5"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&quot;D3D12/D3D12TypeMapping.h&quot;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="6"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&quot;D3D12/D3D12ScopedBuffer.h&quot;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="7"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&quot;D3D12/D3D12ScopedCommandBuffer.h&quot;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="8"><highlight class="normal"></highlight></codeline>
+<codeline lineno="9"><highlight class="normal"></highlight><highlight class="keyword">using<sp/>namespace<sp/></highlight><highlight class="normal"><ref refid="namespace_microsoft_1_1_w_r_l" kindref="compound">Microsoft::WRL</ref>;<sp/></highlight><highlight class="comment">//<sp/>NOLINT</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="10"><highlight class="normal"></highlight></codeline>
+<codeline lineno="11"><highlight class="normal"></highlight><highlight class="keyword">namespace<sp/></highlight><highlight class="normal"><ref refid="namespace_azura" kindref="compound">Azura</ref><sp/>{</highlight></codeline>
+<codeline lineno="12"><highlight class="normal"></highlight><highlight class="keyword">namespace<sp/></highlight><highlight class="normal">D3D12<sp/>{</highlight></codeline>
+<codeline lineno="13"><highlight class="normal"></highlight></codeline>
+<codeline lineno="14"><highlight class="normal"></highlight><highlight class="keyword">namespace<sp/></highlight><highlight class="normal">{</highlight></codeline>
+<codeline lineno="15"><highlight class="normal"><sp/><sp/>constexpr<sp/>UINT<sp/>NVIDIA_GPU<sp/>=<sp/>4318;</highlight></codeline>
+<codeline lineno="16"><highlight class="normal">}<sp/></highlight><highlight class="comment">//<sp/>namespace</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="17"><highlight class="normal"></highlight></codeline>
+<codeline lineno="18"><highlight class="normal">ComPtr&lt;IDXGISwapChain1&gt;<sp/>D3D12Core::CreateSwapChain(</highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>ComPtr&lt;IDXGIFactory4&gt;&amp;<sp/>factory,</highlight></codeline>
+<codeline lineno="19"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>ComPtr&lt;ID3D12CommandQueue&gt;&amp;<sp/>commandQueue,</highlight></codeline>
+<codeline lineno="20"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal">*<sp/>windowHandle,</highlight></codeline>
+<codeline lineno="21"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>SwapChainRequirements&amp;<sp/>swapChainRequirements,</highlight></codeline>
+<codeline lineno="22"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>Log&amp;<sp/>log_D3D12RenderSystem)<sp/>{</highlight></codeline>
+<codeline lineno="23"><highlight class="normal"></highlight></codeline>
+<codeline lineno="24"><highlight class="normal"><sp/><sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">auto</highlight><highlight class="normal"><sp/>swapChainFormat<sp/>=<sp/>ToDXGI_FORMAT(swapChainRequirements.m_format);</highlight></codeline>
+<codeline lineno="25"><highlight class="normal"><sp/><sp/>VERIFY_OPT(log_D3D12RenderSystem,<sp/>swapChainFormat,<sp/></highlight><highlight class="stringliteral">&quot;Unknown<sp/>Swap<sp/>Chain<sp/>Format&quot;</highlight><highlight class="normal">);</highlight></codeline>
+<codeline lineno="26"><highlight class="normal"></highlight></codeline>
+<codeline lineno="27"><highlight class="normal"><sp/><sp/></highlight><highlight class="comment">//<sp/>Describe<sp/>and<sp/>create<sp/>the<sp/>swap<sp/>chain.</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="28"><highlight class="normal"><sp/><sp/>DXGI_SWAP_CHAIN_DESC1<sp/>swapChainDesc<sp/>=<sp/>{};</highlight></codeline>
+<codeline lineno="29"><highlight class="normal"><sp/><sp/>swapChainDesc.BufferCount<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>=<sp/>swapChainRequirements.m_framesInFlight;</highlight></codeline>
+<codeline lineno="30"><highlight class="normal"><sp/><sp/>swapChainDesc.Width<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>=<sp/>swapChainRequirements.m_extent.m_width;</highlight></codeline>
+<codeline lineno="31"><highlight class="normal"><sp/><sp/>swapChainDesc.Height<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>=<sp/>swapChainRequirements.m_extent.m_height;</highlight></codeline>
+<codeline lineno="32"><highlight class="normal"><sp/><sp/>swapChainDesc.Format<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>=<sp/>swapChainFormat.value();</highlight></codeline>
+<codeline lineno="33"><highlight class="normal"><sp/><sp/>swapChainDesc.BufferUsage<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>=<sp/>DXGI_USAGE_RENDER_TARGET_OUTPUT;</highlight></codeline>
+<codeline lineno="34"><highlight class="normal"><sp/><sp/>swapChainDesc.SwapEffect<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>=<sp/>DXGI_SWAP_EFFECT_FLIP_DISCARD;</highlight></codeline>
+<codeline lineno="35"><highlight class="normal"><sp/><sp/>swapChainDesc.SampleDesc.Count<sp/><sp/><sp/><sp/><sp/><sp/>=<sp/>1;</highlight></codeline>
+<codeline lineno="36"><highlight class="normal"></highlight></codeline>
+<codeline lineno="37"><highlight class="normal"><sp/><sp/>ComPtr&lt;IDXGISwapChain1&gt;<sp/>swapChain;</highlight></codeline>
+<codeline lineno="38"><highlight class="normal"></highlight></codeline>
+<codeline lineno="39"><highlight class="normal"><sp/><sp/>VERIFY_D3D_OP(log_D3D12RenderSystem,<sp/>factory-&gt;CreateSwapChainForHwnd(</highlight></codeline>
+<codeline lineno="40"><highlight class="normal"><sp/><sp/><sp/><sp/>commandQueue.Get(),</highlight></codeline>
+<codeline lineno="41"><highlight class="normal"><sp/><sp/><sp/><sp/>*</highlight><highlight class="keyword">reinterpret_cast&lt;</highlight><highlight class="keyword">const<sp/></highlight><highlight class="normal">HWND*</highlight><highlight class="keyword">&gt;</highlight><highlight class="normal">(windowHandle),<sp/></highlight><highlight class="comment">//<sp/>NOLINT</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="42"><highlight class="normal"><sp/><sp/><sp/><sp/>&amp;swapChainDesc,</highlight></codeline>
+<codeline lineno="43"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">nullptr</highlight><highlight class="normal">,</highlight></codeline>
+<codeline lineno="44"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">nullptr</highlight><highlight class="normal">,</highlight></codeline>
+<codeline lineno="45"><highlight class="normal"><sp/><sp/><sp/><sp/>&amp;swapChain</highlight></codeline>
+<codeline lineno="46"><highlight class="normal"><sp/><sp/>),<sp/></highlight><highlight class="stringliteral">&quot;Failed<sp/>to<sp/>create<sp/>D3D12<sp/>Swapchain&quot;</highlight><highlight class="normal">);</highlight></codeline>
+<codeline lineno="47"><highlight class="normal"></highlight></codeline>
+<codeline lineno="48"><highlight class="normal"><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>swapChain;</highlight></codeline>
+<codeline lineno="49"><highlight class="normal">}</highlight></codeline>
+<codeline lineno="50"><highlight class="normal"></highlight></codeline>
+<codeline lineno="51"><highlight class="normal"></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/>D3D12Core::GetHardwareAdapter(IDXGIFactory2*<sp/>pFactory,<sp/>IDXGIAdapter1**<sp/>ppAdapter,<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>Log&amp;<sp/>log_D3D12RenderSystem)<sp/>{</highlight></codeline>
+<codeline lineno="52"><highlight class="normal"><sp/><sp/>ComPtr&lt;IDXGIAdapter1&gt;<sp/>adapter;</highlight></codeline>
+<codeline lineno="53"><highlight class="normal"><sp/><sp/>*ppAdapter<sp/>=<sp/></highlight><highlight class="keyword">nullptr</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="54"><highlight class="normal"></highlight></codeline>
+<codeline lineno="55"><highlight class="normal"><sp/><sp/>UNUSED(log_D3D12RenderSystem);</highlight></codeline>
+<codeline lineno="56"><highlight class="normal"></highlight></codeline>
+<codeline lineno="57"><highlight class="normal"><sp/><sp/></highlight><highlight class="keywordflow">for</highlight><highlight class="normal"><sp/>(UINT<sp/>adapterIndex<sp/>=<sp/>0;<sp/>DXGI_ERROR_NOT_FOUND<sp/>!=<sp/>pFactory-&gt;EnumAdapters1(adapterIndex,<sp/>&amp;adapter);<sp/>++adapterIndex)<sp/>{</highlight></codeline>
+<codeline lineno="58"><highlight class="normal"><sp/><sp/><sp/><sp/>DXGI_ADAPTER_DESC1<sp/>desc;</highlight></codeline>
+<codeline lineno="59"><highlight class="normal"><sp/><sp/><sp/><sp/>adapter-&gt;GetDesc1(&amp;desc);</highlight></codeline>
+<codeline lineno="60"><highlight class="normal"></highlight></codeline>
+<codeline lineno="61"><highlight class="normal"><sp/><sp/><sp/><sp/>LOG_INFO(log_D3D12RenderSystem,<sp/>LOG_LEVEL,<sp/></highlight><highlight class="stringliteral">&quot;Found<sp/>GPU:<sp/>%ls&quot;</highlight><highlight class="normal">,<sp/>desc.Description);</highlight></codeline>
+<codeline lineno="62"><highlight class="normal"><sp/><sp/><sp/><sp/>LOG_DEBUG(log_D3D12RenderSystem,<sp/>LOG_LEVEL,<sp/></highlight><highlight class="stringliteral">&quot;Device<sp/>ID:<sp/>%d&quot;</highlight><highlight class="normal">,<sp/>desc.DeviceId);</highlight></codeline>
+<codeline lineno="63"><highlight class="normal"><sp/><sp/><sp/><sp/>LOG_DEBUG(log_D3D12RenderSystem,<sp/>LOG_LEVEL,<sp/></highlight><highlight class="stringliteral">&quot;Vendor<sp/>ID:<sp/>%d&quot;</highlight><highlight class="normal">,<sp/>desc.VendorId);</highlight></codeline>
+<codeline lineno="64"><highlight class="normal"><sp/><sp/><sp/><sp/>LOG_DEBUG(log_D3D12RenderSystem,<sp/>LOG_LEVEL,<sp/></highlight><highlight class="stringliteral">&quot;System<sp/>Memory:<sp/>%zu&quot;</highlight><highlight class="normal">,<sp/>desc.DedicatedSystemMemory);</highlight></codeline>
+<codeline lineno="65"><highlight class="normal"><sp/><sp/><sp/><sp/>LOG_DEBUG(log_D3D12RenderSystem,<sp/>LOG_LEVEL,<sp/></highlight><highlight class="stringliteral">&quot;Video<sp/>Memory:<sp/>%zu&quot;</highlight><highlight class="normal">,<sp/>desc.DedicatedVideoMemory);</highlight></codeline>
+<codeline lineno="66"><highlight class="normal"></highlight></codeline>
+<codeline lineno="67"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">if</highlight><highlight class="normal"><sp/>((desc.Flags<sp/>&amp;<sp/>DXGI_ADAPTER_FLAG_SOFTWARE)<sp/>!=<sp/>0u)<sp/>{</highlight></codeline>
+<codeline lineno="68"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="comment">//<sp/>Don&apos;t<sp/>select<sp/>the<sp/>Basic<sp/>Render<sp/>Driver<sp/>adapter.</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="69"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">continue</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="70"><highlight class="normal"><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="71"><highlight class="normal"></highlight></codeline>
+<codeline lineno="72"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">if</highlight><highlight class="normal"><sp/>(desc.VendorId<sp/>!=<sp/>NVIDIA_GPU)</highlight></codeline>
+<codeline lineno="73"><highlight class="normal"><sp/><sp/><sp/><sp/>{</highlight></codeline>
+<codeline lineno="74"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">continue</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="75"><highlight class="normal"><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="76"><highlight class="normal"></highlight></codeline>
+<codeline lineno="77"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="comment">//<sp/>Check<sp/>to<sp/>see<sp/>if<sp/>the<sp/>adapter<sp/>supports<sp/>Direct3D<sp/>12,<sp/>but<sp/>don&apos;t<sp/>create<sp/>the</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="78"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="comment">//<sp/>actual<sp/>device<sp/>yet.</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="79"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">if</highlight><highlight class="normal"><sp/>(SUCCEEDED(D3D12CreateDevice(adapter.Get(),<sp/>D3D_FEATURE_LEVEL_11_0,<sp/>_uuidof(ID3D12Device),<sp/></highlight><highlight class="keyword">nullptr</highlight><highlight class="normal">)))<sp/>{</highlight></codeline>
+<codeline lineno="80"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/></highlight></codeline>
+<codeline lineno="81"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/>LOG_INFO(log_D3D12RenderSystem,<sp/>LOG_LEVEL,<sp/></highlight><highlight class="stringliteral">&quot;Selected<sp/>GPU:<sp/>%ls&quot;</highlight><highlight class="normal">,<sp/>desc.Description);</highlight></codeline>
+<codeline lineno="82"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/></highlight></codeline>
+<codeline lineno="83"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">break</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="84"><highlight class="normal"><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="85"><highlight class="normal"><sp/><sp/>}</highlight></codeline>
+<codeline lineno="86"><highlight class="normal"></highlight></codeline>
+<codeline lineno="87"><highlight class="normal"><sp/><sp/>*ppAdapter<sp/>=<sp/>adapter.Detach();</highlight></codeline>
+<codeline lineno="88"><highlight class="normal">}</highlight></codeline>
+<codeline lineno="89"><highlight class="normal"></highlight></codeline>
+<codeline lineno="90"><highlight class="normal"></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/>D3D12Core::CopyBuffer(ID3D12GraphicsCommandList*<sp/>commandList,</highlight></codeline>
+<codeline lineno="91"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>D3D12ScopedBuffer&amp;<sp/>dest,</highlight></codeline>
+<codeline lineno="92"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>D3D12ScopedBuffer&amp;<sp/>src,</highlight></codeline>
+<codeline lineno="93"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>UINT64<sp/>size)<sp/>{</highlight></codeline>
+<codeline lineno="94"><highlight class="normal"><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>CopyBuffer(commandList,<sp/>dest,<sp/>0,<sp/>src,<sp/>0,<sp/>size);</highlight></codeline>
+<codeline lineno="95"><highlight class="normal">}</highlight></codeline>
+<codeline lineno="96"><highlight class="normal"></highlight></codeline>
+<codeline lineno="97"><highlight class="normal"></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/>D3D12Core::CopyBuffer(ID3D12GraphicsCommandList*<sp/>commandList,</highlight></codeline>
+<codeline lineno="98"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>D3D12ScopedBuffer&amp;<sp/>dest,</highlight></codeline>
+<codeline lineno="99"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>UINT64<sp/>dstOffset,</highlight></codeline>
+<codeline lineno="100"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>D3D12ScopedBuffer&amp;<sp/>src,</highlight></codeline>
+<codeline lineno="101"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>UINT64<sp/>srcOffset,</highlight></codeline>
+<codeline lineno="102"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>UINT64<sp/>size)<sp/>{</highlight></codeline>
+<codeline lineno="103"><highlight class="normal"><sp/><sp/>commandList-&gt;CopyBufferRegion(dest.Real(),<sp/>dstOffset,<sp/>src.Real(),<sp/>srcOffset,<sp/>size);</highlight></codeline>
+<codeline lineno="104"><highlight class="normal">}</highlight></codeline>
+<codeline lineno="105"><highlight class="normal"></highlight></codeline>
+<codeline lineno="106"><highlight class="normal">}<sp/></highlight><highlight class="comment">//<sp/>namespace<sp/>D3D12</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="107"><highlight class="normal">}<sp/></highlight><highlight class="comment">//<sp/>namespace<sp/>Azura</highlight><highlight class="normal"></highlight></codeline>
+    </programlisting>
+    <location file="Source/Azura/RenderSystem/Src/D3D12/D3D12Core.cpp"/>
+  </compounddef>
+</doxygen>

@@ -1,0 +1,158 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.8.14">
+  <compounddef id="class_azura_1_1_pool_allocator" kind="class" language="C++" prot="public">
+    <compoundname>Azura::PoolAllocator</compoundname>
+    <templateparamlist>
+      <param>
+        <type>typename T</type>
+      </param>
+    </templateparamlist>
+      <sectiondef kind="private-type">
+      <memberdef kind="typedef" id="class_azura_1_1_pool_allocator_1a6a972140fd72454f4b763c6ab32a3299" prot="private" static="no">
+        <type><ref refid="struct_azura_1_1_pool_node" kindref="compound">PoolNode</ref>&lt; T &gt;</type>
+        <definition>using Azura::PoolAllocator&lt; T &gt;::Node =  PoolNode&lt;T&gt;</definition>
+        <argsstring></argsstring>
+        <name>Node</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Source/Common/Inc/Memory/PoolAllocator.h" line="16" column="1" bodyfile="Source/Common/Inc/Memory/PoolAllocator.h" bodystart="16" bodyend="-1"/>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="private-attrib">
+      <memberdef kind="variable" id="class_azura_1_1_pool_allocator_1a02f9f14f8063549d0cf27721929b69db" prot="private" static="no" mutable="no">
+        <type>U32</type>
+        <definition>U32 Azura::PoolAllocator&lt; T &gt;::mCount</definition>
+        <argsstring></argsstring>
+        <name>mCount</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Source/Common/Inc/Memory/PoolAllocator.h" line="26" column="1" bodyfile="Source/Common/Inc/Memory/PoolAllocator.h" bodystart="26" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="class_azura_1_1_pool_allocator_1afcf001e6f34746f1e0db450e4639e3df" prot="private" static="no" mutable="no">
+        <type><ref refid="struct_azura_1_1_pool_node" kindref="compound">Node</ref> *</type>
+        <definition>Node* Azura::PoolAllocator&lt; T &gt;::pHead</definition>
+        <argsstring></argsstring>
+        <name>pHead</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Source/Common/Inc/Memory/PoolAllocator.h" line="27" column="1" bodyfile="Source/Common/Inc/Memory/PoolAllocator.h" bodystart="27" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="class_azura_1_1_pool_allocator_1a0d543736f481786fc02aa09c438a6e8a" prot="private" static="no" mutable="no">
+        <type><ref refid="struct_azura_1_1_pool_node" kindref="compound">Node</ref> *</type>
+        <definition>Node* Azura::PoolAllocator&lt; T &gt;::pTail</definition>
+        <argsstring></argsstring>
+        <name>pTail</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Source/Common/Inc/Memory/PoolAllocator.h" line="28" column="1" bodyfile="Source/Common/Inc/Memory/PoolAllocator.h" bodystart="28" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="class_azura_1_1_pool_allocator_1a9f39f3d26b20f7875be9c8887b380dd9" prot="private" static="no" mutable="no">
+        <type>void *</type>
+        <definition>void* Azura::PoolAllocator&lt; T &gt;::pMemory</definition>
+        <argsstring></argsstring>
+        <name>pMemory</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Source/Common/Inc/Memory/PoolAllocator.h" line="29" column="1" bodyfile="Source/Common/Inc/Memory/PoolAllocator.h" bodystart="29" bodyend="-1"/>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="public-func">
+      <memberdef kind="function" id="class_azura_1_1_pool_allocator_1a6cee71433cf9c300206fffea7444c5bc" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>Azura::PoolAllocator&lt; T &gt;::PoolAllocator</definition>
+        <argsstring>(U32 totalElements)</argsstring>
+        <name>PoolAllocator</name>
+        <param>
+          <type>U32</type>
+          <declname>totalElements</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Source/Common/Inc/Memory/PoolAllocator.h" line="19" column="1" bodyfile="Source/Common/Inc/Memory/PoolAllocator.h" bodystart="33" bodyend="53"/>
+      </memberdef>
+      <memberdef kind="function" id="class_azura_1_1_pool_allocator_1a0bc6d1486767ad7ed2a95ea31c7bb325" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>Azura::PoolAllocator&lt; T &gt;::~PoolAllocator</definition>
+        <argsstring>()</argsstring>
+        <name>~PoolAllocator</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Source/Common/Inc/Memory/PoolAllocator.h" line="20" column="1" bodyfile="Source/Common/Inc/Memory/PoolAllocator.h" bodystart="56" bodyend="58"/>
+      </memberdef>
+      <memberdef kind="function" id="class_azura_1_1_pool_allocator_1a740b48e14582e7ca06bbb98412145af0" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>T *</type>
+        <definition>T * Azura::PoolAllocator&lt; T &gt;::allocate</definition>
+        <argsstring>()</argsstring>
+        <name>allocate</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Source/Common/Inc/Memory/PoolAllocator.h" line="22" column="1" bodyfile="Source/Common/Inc/Memory/PoolAllocator.h" bodystart="61" bodyend="76"/>
+      </memberdef>
+      <memberdef kind="function" id="class_azura_1_1_pool_allocator_1ae79458cf430e732c7ecec8ff258d3a37" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void Azura::PoolAllocator&lt; T &gt;::deallocate</definition>
+        <argsstring>(T *data)</argsstring>
+        <name>deallocate</name>
+        <param>
+          <type>T *</type>
+          <declname>data</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Source/Common/Inc/Memory/PoolAllocator.h" line="23" column="1" bodyfile="Source/Common/Inc/Memory/PoolAllocator.h" bodystart="79" bodyend="89"/>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <location file="Source/Common/Inc/Memory/PoolAllocator.h" line="15" column="1" bodyfile="Source/Common/Inc/Memory/PoolAllocator.h" bodystart="15" bodyend="30"/>
+    <listofallmembers>
+      <member refid="class_azura_1_1_pool_allocator_1a740b48e14582e7ca06bbb98412145af0" prot="public" virt="non-virtual"><scope>Azura::PoolAllocator</scope><name>allocate</name></member>
+      <member refid="class_azura_1_1_pool_allocator_1ae79458cf430e732c7ecec8ff258d3a37" prot="public" virt="non-virtual"><scope>Azura::PoolAllocator</scope><name>deallocate</name></member>
+      <member refid="class_azura_1_1_pool_allocator_1a02f9f14f8063549d0cf27721929b69db" prot="private" virt="non-virtual"><scope>Azura::PoolAllocator</scope><name>mCount</name></member>
+      <member refid="class_azura_1_1_pool_allocator_1a6a972140fd72454f4b763c6ab32a3299" prot="private" virt="non-virtual"><scope>Azura::PoolAllocator</scope><name>Node</name></member>
+      <member refid="class_azura_1_1_pool_allocator_1afcf001e6f34746f1e0db450e4639e3df" prot="private" virt="non-virtual"><scope>Azura::PoolAllocator</scope><name>pHead</name></member>
+      <member refid="class_azura_1_1_pool_allocator_1a9f39f3d26b20f7875be9c8887b380dd9" prot="private" virt="non-virtual"><scope>Azura::PoolAllocator</scope><name>pMemory</name></member>
+      <member refid="class_azura_1_1_pool_allocator_1a6cee71433cf9c300206fffea7444c5bc" prot="public" virt="non-virtual"><scope>Azura::PoolAllocator</scope><name>PoolAllocator</name></member>
+      <member refid="class_azura_1_1_pool_allocator_1a0d543736f481786fc02aa09c438a6e8a" prot="private" virt="non-virtual"><scope>Azura::PoolAllocator</scope><name>pTail</name></member>
+      <member refid="class_azura_1_1_pool_allocator_1a0bc6d1486767ad7ed2a95ea31c7bb325" prot="public" virt="non-virtual"><scope>Azura::PoolAllocator</scope><name>~PoolAllocator</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

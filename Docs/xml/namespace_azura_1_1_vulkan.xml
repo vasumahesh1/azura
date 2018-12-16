@@ -1,0 +1,531 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.8.14">
+  <compounddef id="namespace_azura_1_1_vulkan" kind="namespace" language="C++">
+    <compoundname>Azura::Vulkan</compoundname>
+    <innerclass refid="struct_azura_1_1_vulkan_1_1_image_transition" prot="public">Azura::Vulkan::ImageTransition</innerclass>
+    <innerclass refid="struct_azura_1_1_vulkan_1_1_swap_chain_device_support" prot="public">Azura::Vulkan::SwapChainDeviceSupport</innerclass>
+    <innerclass refid="class_azura_1_1_vulkan_1_1_vk_compute_pool" prot="public">Azura::Vulkan::VkComputePool</innerclass>
+    <innerclass refid="class_azura_1_1_vulkan_1_1_vk_drawable" prot="public">Azura::Vulkan::VkDrawable</innerclass>
+    <innerclass refid="class_azura_1_1_vulkan_1_1_vk_drawable_pool" prot="public">Azura::Vulkan::VkDrawablePool</innerclass>
+    <innerclass refid="class_azura_1_1_vulkan_1_1_vk_pipeline_factory" prot="public">Azura::Vulkan::VkPipelineFactory</innerclass>
+    <innerclass refid="struct_azura_1_1_vulkan_1_1_vk_queue_indices" prot="public">Azura::Vulkan::VkQueueIndices</innerclass>
+    <innerclass refid="class_azura_1_1_vulkan_1_1_vk_renderer" prot="public">Azura::Vulkan::VkRenderer</innerclass>
+    <innerclass refid="class_azura_1_1_vulkan_1_1_vk_scoped_buffer" prot="public">Azura::Vulkan::VkScopedBuffer</innerclass>
+    <innerclass refid="class_azura_1_1_vulkan_1_1_vk_scoped_image" prot="public">Azura::Vulkan::VkScopedImage</innerclass>
+    <innerclass refid="class_azura_1_1_vulkan_1_1_vk_scoped_pipeline" prot="public">Azura::Vulkan::VkScopedPipeline</innerclass>
+    <innerclass refid="class_azura_1_1_vulkan_1_1_vk_scoped_render_pass" prot="public">Azura::Vulkan::VkScopedRenderPass</innerclass>
+    <innerclass refid="class_azura_1_1_vulkan_1_1_vk_scoped_sampler" prot="public">Azura::Vulkan::VkScopedSampler</innerclass>
+    <innerclass refid="class_azura_1_1_vulkan_1_1_vk_scoped_swap_chain" prot="public">Azura::Vulkan::VkScopedSwapChain</innerclass>
+    <innerclass refid="class_azura_1_1_vulkan_1_1_vk_shader" prot="public">Azura::Vulkan::VkShader</innerclass>
+    <innerclass refid="class_azura_1_1_vulkan_1_1_vk_texture_manager" prot="public">Azura::Vulkan::VkTextureManager</innerclass>
+    <innernamespace refid="namespace_azura_1_1_vulkan_1_1_impl">Azura::Vulkan::Impl</innernamespace>
+    <innernamespace refid="namespace_azura_1_1_vulkan_1_1_vk_core">Azura::Vulkan::VkCore</innernamespace>
+    <innernamespace refid="namespace_azura_1_1_vulkan_1_1_vk_platform">Azura::Vulkan::VkPlatform</innernamespace>
+      <sectiondef kind="var">
+      <memberdef kind="variable" id="_vk_type_mapping_8cpp_1a876c496837c218b4898698c9f2b834aa" prot="public" static="no" mutable="no">
+        <type></type>
+        <definition>Azura::Vulkan::VkPrimitiveTopology</definition>
+        <argsstring></argsstring>
+        <name>VkPrimitiveTopology</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Source/Azura/RenderSystem/Src/Vulkan/VkTypeMapping.cpp" line="198" column="1" bodyfile="Source/Azura/RenderSystem/Src/Vulkan/VkTypeMapping.cpp" bodystart="198" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="_vk_type_mapping_8cpp_1aa70ad2578c8d7c24073cf62884f73e07" prot="public" static="no" mutable="no">
+        <type></type>
+        <definition>Azura::Vulkan::PRIMITIVE_TOPOLOGY_TO_VK_PRIMITIVE_TOPOLOGY_MAPPING</definition>
+        <argsstring></argsstring>
+        <name>PRIMITIVE_TOPOLOGY_TO_VK_PRIMITIVE_TOPOLOGY_MAPPING</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Source/Azura/RenderSystem/Src/Vulkan/VkTypeMapping.cpp" line="199" column="1" bodyfile="Source/Azura/RenderSystem/Src/Vulkan/VkTypeMapping.cpp" bodystart="198" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="_vk_type_mapping_8cpp_1a11a48824011de37e701d0c4a98e8747b" prot="public" static="no" mutable="no">
+        <type>FORWARD_MAPPING</type>
+        <definition>FORWARD_MAPPING Azura::Vulkan::VkImageType</definition>
+        <argsstring></argsstring>
+        <name>VkImageType</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Source/Azura/RenderSystem/Src/Vulkan/VkTypeMapping.cpp" line="216" column="1" bodyfile="Source/Azura/RenderSystem/Src/Vulkan/VkTypeMapping.cpp" bodystart="216" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="_vk_type_mapping_8cpp_1ac41aaaddc5866aa59e38cc49136b6664" prot="public" static="no" mutable="no">
+        <type>FORWARD_MAPPING</type>
+        <definition>FORWARD_MAPPING Azura::Vulkan::IMAGE_TYPE_TO_VK_IMAGE_TYPE</definition>
+        <argsstring></argsstring>
+        <name>IMAGE_TYPE_TO_VK_IMAGE_TYPE</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Source/Azura/RenderSystem/Src/Vulkan/VkTypeMapping.cpp" line="216" column="1" bodyfile="Source/Azura/RenderSystem/Src/Vulkan/VkTypeMapping.cpp" bodystart="216" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="_vk_type_mapping_8cpp_1a311c295822114a32429f1d18f6eb35df" prot="public" static="no" mutable="no">
+        <type>FORWARD_MAPPING</type>
+        <definition>FORWARD_MAPPING Azura::Vulkan::FORWARD_MAPPING</definition>
+        <argsstring></argsstring>
+        <name>FORWARD_MAPPING</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Source/Azura/RenderSystem/Src/Vulkan/VkTypeMapping.cpp" line="216" column="1" bodyfile="Source/Azura/RenderSystem/Src/Vulkan/VkTypeMapping.cpp" bodystart="216" bodyend="-1"/>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="func">
+      <memberdef kind="function" id="_vk_debug_8h_1a2e8f6adc14d922282488b6798938c736" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>const char *</type>
+        <definition>const char * Azura::Vulkan::VkResultToString</definition>
+        <argsstring>(const VkResult err)</argsstring>
+        <name>VkResultToString</name>
+        <param>
+          <type>const VkResult</type>
+          <declname>err</declname>
+        </param>
+        <briefdescription>
+<para>Converts VkResult to console printable string. </para>        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>err</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>VkResult Error </para></parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>String converted for debug </para></simplesect>
+</para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Source/Azura/RenderSystem/Inc/Vulkan/VkDebug.h" line="12" column="1" bodyfile="Source/Azura/RenderSystem/Src/Vulkan/VkDebug.cpp" bodystart="7" bodyend="44"/>
+      </memberdef>
+      <memberdef kind="function" id="_vk_debug_8h_1a05e4f7172ac96db60029afd78ab04d6f" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>const char *</type>
+        <definition>const char * Azura::Vulkan::VkPhysicalDeviceTypeToString</definition>
+        <argsstring>(const VkPhysicalDeviceType deviceType)</argsstring>
+        <name>VkPhysicalDeviceTypeToString</name>
+        <param>
+          <type>const VkPhysicalDeviceType</type>
+          <declname>deviceType</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Source/Azura/RenderSystem/Inc/Vulkan/VkDebug.h" line="13" column="1" bodyfile="Source/Azura/RenderSystem/Src/Vulkan/VkDebug.cpp" bodystart="46" bodyend="59"/>
+      </memberdef>
+      <memberdef kind="function" id="_vk_type_mapping_8h_1aad1bce6080ce322f37234a64c371a938" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>Azura::Vulkan::CREATE_MAPPER_H</definition>
+        <argsstring>(RawStorageFormat, VkFormat)</argsstring>
+        <name>CREATE_MAPPER_H</name>
+        <param>
+          <type>RawStorageFormat</type>
+        </param>
+        <param>
+          <type>VkFormat</type>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Source/Azura/RenderSystem/Inc/Vulkan/VkTypeMapping.h" line="18" column="1"/>
+      </memberdef>
+      <memberdef kind="function" id="_vk_type_mapping_8h_1a2274f0ae40490d72977d4cdbb9176d5f" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>Azura::Vulkan::CREATE_MAPPER_H</definition>
+        <argsstring>(RawStorageFormat, VkIndexType)</argsstring>
+        <name>CREATE_MAPPER_H</name>
+        <param>
+          <type>RawStorageFormat</type>
+        </param>
+        <param>
+          <type>VkIndexType</type>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Source/Azura/RenderSystem/Inc/Vulkan/VkTypeMapping.h" line="21" column="1"/>
+      </memberdef>
+      <memberdef kind="function" id="_vk_type_mapping_8h_1a5d5c4ab0a48730622ead77eaf25ba81e" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>Azura::Vulkan::CREATE_MAPPER_H</definition>
+        <argsstring>(ColorSpace, VkColorSpaceKHR)</argsstring>
+        <name>CREATE_MAPPER_H</name>
+        <param>
+          <type>ColorSpace</type>
+        </param>
+        <param>
+          <type>VkColorSpaceKHR</type>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Source/Azura/RenderSystem/Inc/Vulkan/VkTypeMapping.h" line="24" column="1"/>
+      </memberdef>
+      <memberdef kind="function" id="_vk_type_mapping_8h_1a62e0b9fd83259b240a7a7c50b2fd33d2" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>Azura::Vulkan::CREATE_MAPPER_H</definition>
+        <argsstring>(PresentModes, VkPresentModeKHR)</argsstring>
+        <name>CREATE_MAPPER_H</name>
+        <param>
+          <type>PresentModes</type>
+        </param>
+        <param>
+          <type>VkPresentModeKHR</type>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Source/Azura/RenderSystem/Inc/Vulkan/VkTypeMapping.h" line="27" column="1"/>
+      </memberdef>
+      <memberdef kind="function" id="_vk_type_mapping_8h_1a0d6350634fdac4280eb486d1c0a7857c" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>Azura::Vulkan::CREATE_MAPPER_H</definition>
+        <argsstring>(ShaderStage, VkShaderStageFlagBits)</argsstring>
+        <name>CREATE_MAPPER_H</name>
+        <param>
+          <type>ShaderStage</type>
+        </param>
+        <param>
+          <type>VkShaderStageFlagBits</type>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Source/Azura/RenderSystem/Inc/Vulkan/VkTypeMapping.h" line="30" column="1"/>
+      </memberdef>
+      <memberdef kind="function" id="_vk_type_mapping_8h_1ac953a6922a08b0f1801368ddbbe325b7" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>Azura::Vulkan::CREATE_MAPPER_H</definition>
+        <argsstring>(PrimitiveTopology, VkPrimitiveTopology)</argsstring>
+        <name>CREATE_MAPPER_H</name>
+        <param>
+          <type>PrimitiveTopology</type>
+        </param>
+        <param>
+          <type>VkPrimitiveTopology</type>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Source/Azura/RenderSystem/Inc/Vulkan/VkTypeMapping.h" line="33" column="1"/>
+      </memberdef>
+      <memberdef kind="function" id="_vk_type_mapping_8h_1a2fc41b9a7c32b6018ca706ffbaa6c82c" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>Azura::Vulkan::CREATE_MAPPER_H</definition>
+        <argsstring>(CullMode, VkCullModeFlags)</argsstring>
+        <name>CREATE_MAPPER_H</name>
+        <param>
+          <type>CullMode</type>
+        </param>
+        <param>
+          <type>VkCullModeFlags</type>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Source/Azura/RenderSystem/Inc/Vulkan/VkTypeMapping.h" line="36" column="1"/>
+      </memberdef>
+      <memberdef kind="function" id="_vk_type_mapping_8h_1a05be6096045a349cf3b614f9408b736d" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>Azura::Vulkan::CREATE_MAPPER_H</definition>
+        <argsstring>(FrontFace, VkFrontFace)</argsstring>
+        <name>CREATE_MAPPER_H</name>
+        <param>
+          <type>FrontFace</type>
+        </param>
+        <param>
+          <type>VkFrontFace</type>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Source/Azura/RenderSystem/Inc/Vulkan/VkTypeMapping.h" line="39" column="1"/>
+      </memberdef>
+      <memberdef kind="function" id="_vk_type_mapping_8h_1a8300d1e6835ab0dfce882b25f97a4076" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>Azura::Vulkan::CREATE_MAPPER_H</definition>
+        <argsstring>(BufferUsageRate, VkVertexInputRate)</argsstring>
+        <name>CREATE_MAPPER_H</name>
+        <param>
+          <type>BufferUsageRate</type>
+        </param>
+        <param>
+          <type>VkVertexInputRate</type>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Source/Azura/RenderSystem/Inc/Vulkan/VkTypeMapping.h" line="42" column="1"/>
+      </memberdef>
+      <memberdef kind="function" id="_vk_type_mapping_8h_1a537983c059737afbfc412beceea797c7" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>Azura::Vulkan::CREATE_MAPPER_H</definition>
+        <argsstring>(ImageType, VkImageType)</argsstring>
+        <name>CREATE_MAPPER_H</name>
+        <param>
+          <type>ImageType</type>
+        </param>
+        <param>
+          <type>VkImageType</type>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Source/Azura/RenderSystem/Inc/Vulkan/VkTypeMapping.h" line="44" column="1"/>
+      </memberdef>
+      <memberdef kind="function" id="_vk_type_mapping_8h_1aaf372111bf5eedf590ac932b28ffeb49" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>Azura::Vulkan::CREATE_MAPPER_H</definition>
+        <argsstring>(ImageViewType, VkImageViewType)</argsstring>
+        <name>CREATE_MAPPER_H</name>
+        <param>
+          <type>ImageViewType</type>
+        </param>
+        <param>
+          <type>VkImageViewType</type>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Source/Azura/RenderSystem/Inc/Vulkan/VkTypeMapping.h" line="46" column="1"/>
+      </memberdef>
+      <memberdef kind="function" id="_vk_type_mapping_8h_1a16e7b3eb02ed0e49f4f068ed026bae8b" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>Azura::Vulkan::CREATE_MAPPER_H</definition>
+        <argsstring>(BlendFactor, VkBlendFactor)</argsstring>
+        <name>CREATE_MAPPER_H</name>
+        <param>
+          <type>BlendFactor</type>
+        </param>
+        <param>
+          <type>VkBlendFactor</type>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Source/Azura/RenderSystem/Inc/Vulkan/VkTypeMapping.h" line="49" column="1"/>
+      </memberdef>
+      <memberdef kind="function" id="_vk_type_mapping_8h_1af9e815320a38705557e7b220b34adfe4" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>Azura::Vulkan::CREATE_MAPPER_H</definition>
+        <argsstring>(BlendOp, VkBlendOp)</argsstring>
+        <name>CREATE_MAPPER_H</name>
+        <param>
+          <type>BlendOp</type>
+        </param>
+        <param>
+          <type>VkBlendOp</type>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Source/Azura/RenderSystem/Inc/Vulkan/VkTypeMapping.h" line="52" column="1"/>
+      </memberdef>
+      <memberdef kind="function" id="_vk_type_mapping_8h_1a503ffe6d4ae218b0bf04ae7fb2362a68" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>VkShaderStageFlagBits</type>
+        <definition>VkShaderStageFlagBits Azura::Vulkan::GetCombinedShaderStageFlag</definition>
+        <argsstring>(ShaderStage stage)</argsstring>
+        <name>GetCombinedShaderStageFlag</name>
+        <param>
+          <type>ShaderStage</type>
+          <declname>stage</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Source/Azura/RenderSystem/Inc/Vulkan/VkTypeMapping.h" line="55" column="1" bodyfile="Source/Azura/RenderSystem/Src/Vulkan/VkTypeMapping.cpp" bodystart="228" bodyend="253"/>
+      </memberdef>
+      <memberdef kind="function" id="_vk_type_mapping_8cpp_1a1aedf6b8922fd185e9779c7adc02f714" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>Azura::Vulkan::CREATE_MAPPER_CPP</definition>
+        <argsstring>(RawStorageFormat, VkIndexType, RAW_STORAGE_TO_VK_INDEX_TYPE_MAPPING, FORWARD_MAPPING) CREATE_MAPPER_CPP(PrimitiveTopology</argsstring>
+        <name>CREATE_MAPPER_CPP</name>
+        <param>
+          <type>RawStorageFormat</type>
+        </param>
+        <param>
+          <type>VkIndexType</type>
+        </param>
+        <param>
+          <type>RAW_STORAGE_TO_VK_INDEX_TYPE_MAPPING</type>
+        </param>
+        <param>
+          <type>FORWARD_MAPPING</type>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Source/Azura/RenderSystem/Src/Vulkan/VkTypeMapping.cpp" line="185" column="1"/>
+      </memberdef>
+      <memberdef kind="function" id="_vk_type_mapping_8cpp_1a0f246b27a07ae184cd4ffa21b01602b6" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>FORWARD_MAPPING</type>
+        <definition>FORWARD_MAPPING Azura::Vulkan::CREATE_MAPPER_CPP</definition>
+        <argsstring>(BufferUsageRate, VkVertexInputRate, BUFFER_USAGE_RATE_TO_VK_VERTEX_INPUT_RATE_MAPPING, FORWARD_MAPPING) CREATE_MAPPER_CPP(ImageType</argsstring>
+        <name>CREATE_MAPPER_CPP</name>
+        <param>
+          <type>BufferUsageRate</type>
+        </param>
+        <param>
+          <type>VkVertexInputRate</type>
+        </param>
+        <param>
+          <type>BUFFER_USAGE_RATE_TO_VK_VERTEX_INPUT_RATE_MAPPING</type>
+        </param>
+        <param>
+          <type>FORWARD_MAPPING</type>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Source/Azura/RenderSystem/Src/Vulkan/VkTypeMapping.cpp" line="210" column="1"/>
+      </memberdef>
+      <memberdef kind="function" id="_vk_type_mapping_8cpp_1a191a58ce826347d391c12068723365d3" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>Azura::Vulkan::CREATE_MAPPER_CPP</definition>
+        <argsstring>(ImageViewType, VkImageViewType, IMAGE_VIEW_TYPE_TO_VK_IMAGE_TYPE, FORWARD_MAPPING)</argsstring>
+        <name>CREATE_MAPPER_CPP</name>
+        <param>
+          <type>ImageViewType</type>
+        </param>
+        <param>
+          <type>VkImageViewType</type>
+        </param>
+        <param>
+          <type>IMAGE_VIEW_TYPE_TO_VK_IMAGE_TYPE</type>
+        </param>
+        <param>
+          <type>FORWARD_MAPPING</type>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Source/Azura/RenderSystem/Src/Vulkan/VkTypeMapping.cpp" line="219" column="1"/>
+      </memberdef>
+      <memberdef kind="function" id="_vk_type_mapping_8cpp_1ac09d82b74c113e67c74326345290ae85" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>Azura::Vulkan::CREATE_MAPPER_CPP</definition>
+        <argsstring>(BlendFactor, VkBlendFactor, BLEND_FACTOR_TO_VK_BLEND_FACTOR, FORWARD_MAPPING)</argsstring>
+        <name>CREATE_MAPPER_CPP</name>
+        <param>
+          <type>BlendFactor</type>
+        </param>
+        <param>
+          <type>VkBlendFactor</type>
+        </param>
+        <param>
+          <type>BLEND_FACTOR_TO_VK_BLEND_FACTOR</type>
+        </param>
+        <param>
+          <type>FORWARD_MAPPING</type>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Source/Azura/RenderSystem/Src/Vulkan/VkTypeMapping.cpp" line="222" column="1"/>
+      </memberdef>
+      <memberdef kind="function" id="_vk_type_mapping_8cpp_1a4a38b6d16db436c0a61aa4c31afed0c3" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>Azura::Vulkan::CREATE_MAPPER_CPP</definition>
+        <argsstring>(BlendOp, VkBlendOp, BLEND_OP_TO_VK_BLEND_OP, FORWARD_MAPPING)</argsstring>
+        <name>CREATE_MAPPER_CPP</name>
+        <param>
+          <type>BlendOp</type>
+        </param>
+        <param>
+          <type>VkBlendOp</type>
+        </param>
+        <param>
+          <type>BLEND_OP_TO_VK_BLEND_OP</type>
+        </param>
+        <param>
+          <type>FORWARD_MAPPING</type>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Source/Azura/RenderSystem/Src/Vulkan/VkTypeMapping.cpp" line="225" column="1"/>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <location file="Source/Azura/RenderSystem/Inc/Vulkan/VkBasicDrawablePool.h" line="4" column="1"/>
+  </compounddef>
+</doxygen>

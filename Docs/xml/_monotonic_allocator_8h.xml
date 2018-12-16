@@ -1,0 +1,318 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.8.14">
+  <compounddef id="_monotonic_allocator_8h" kind="file" language="C++">
+    <compoundname>MonotonicAllocator.h</compoundname>
+    <includes refid="_allocator_8h" local="yes">Allocator.h</includes>
+    <includes local="yes">Types.h</includes>
+    <includedby refid="_d3_d12_renderer_8h" local="yes">Source/Azura/RenderSystem/Inc/D3D12/D3D12Renderer.h</includedby>
+    <includedby refid="_texture_manager_8h" local="yes">Source/Azura/RenderSystem/Inc/Generic/TextureManager.h</includedby>
+    <includedby refid="_d3_d12_compute_pool_8cpp" local="yes">Source/Azura/RenderSystem/Src/D3D12/D3D12ComputePool.cpp</includedby>
+    <includedby refid="_d3_d12_drawable_pool_8cpp" local="yes">Source/Azura/RenderSystem/Src/D3D12/D3D12DrawablePool.cpp</includedby>
+    <includedby refid="_d3_d12_scoped_compute_pass_8cpp" local="yes">Source/Azura/RenderSystem/Src/D3D12/D3D12ScopedComputePass.cpp</includedby>
+    <includedby refid="_d3_d12_scoped_render_pass_8cpp" local="yes">Source/Azura/RenderSystem/Src/D3D12/D3D12ScopedRenderPass.cpp</includedby>
+    <includedby refid="_d3_d12_scoped_shader_8cpp" local="yes">Source/Azura/RenderSystem/Src/D3D12/D3D12ScopedShader.cpp</includedby>
+    <includedby refid="_vk_core_8cpp" local="yes">Source/Azura/RenderSystem/Src/Vulkan/VkCore.cpp</includedby>
+    <includedby refid="_vk_drawable_pool_8cpp" local="yes">Source/Azura/RenderSystem/Src/Vulkan/VkDrawablePool.cpp</includedby>
+    <includedby refid="_vk_renderer_8cpp" local="yes">Source/Azura/RenderSystem/Src/Vulkan/VkRenderer.cpp</includedby>
+    <includedby refid="_vk_shader_8cpp" local="yes">Source/Azura/RenderSystem/Src/Vulkan/VkShader.cpp</includedby>
+    <includedby refid="_renderer__test_8h" local="yes">Source/Azura/RenderSystem/Test/Renderer_test.h</includedby>
+    <includedby refid="_render_test_cases_8cpp" local="yes">Source/Azura/RenderSystem/Test/RenderTestCases.cpp</includedby>
+    <includedby refid="_monotonic_allocator_8cpp" local="yes">Source/Common/Src/Memory/MonotonicAllocator.cpp</includedby>
+    <includedby refid="_monotonic_allocator__test_8h" local="yes">Source/Common/Test/MonotonicAllocator_test.h</includedby>
+    <includedby refid="_vector__benchmark_8h" local="yes">Source/Containers/Benchmark/Vector_benchmark.h</includedby>
+    <includedby refid="_array__test_8h" local="yes">Source/Containers/Test/Array_test.h</includedby>
+    <includedby refid="_vector__test_8h" local="yes">Source/Containers/Test/Vector_test.h</includedby>
+    <includedby refid="_app_renderer_8_basic_8cpp" local="yes">Source/Samples/0_TestZone/Src/AppRenderer.Basic.cpp</includedby>
+    <includedby refid="_app_renderer_8_cloth_8cpp" local="yes">Source/Samples/0_TestZone/Src/AppRenderer.Cloth.cpp</includedby>
+    <includedby refid="_app_renderer_8_compute_8cpp" local="yes">Source/Samples/0_TestZone/Src/AppRenderer.Compute.cpp</includedby>
+    <includedby refid="0___test_zone_2_src_2_app_renderer_8cpp" local="yes">Source/Samples/0_TestZone/Src/AppRenderer.cpp</includedby>
+    <includedby refid="_app_renderer_8_deferred_8cpp" local="yes">Source/Samples/0_TestZone/Src/AppRenderer.Deferred.cpp</includedby>
+    <includedby refid="_app_renderer_8_instanced_8cpp" local="yes">Source/Samples/0_TestZone/Src/AppRenderer.Instanced.cpp</includedby>
+    <includedby refid="1___procedural_planet_2_inc_2_procedural_planet_2_app_renderer_8h" local="yes">Source/Samples/1_ProceduralPlanet/Inc/ProceduralPlanet/AppRenderer.h</includedby>
+    <includedby refid="1___procedural_planet_2_src_2_app_renderer_8cpp" local="yes">Source/Samples/1_ProceduralPlanet/Src/AppRenderer.cpp</includedby>
+    <includedby refid="_forward_compute_scene_8cpp" local="yes">Source/Samples/2_DeferredRenderer/Src/ForwardComputeScene.cpp</includedby>
+    <includedby refid="_forward_plus_compute_scene_8cpp" local="yes">Source/Samples/2_DeferredRenderer/Src/ForwardPlusComputeScene.cpp</includedby>
+    <includedby refid="_forward_scene_8cpp" local="yes">Source/Samples/2_DeferredRenderer/Src/ForwardScene.cpp</includedby>
+    <includedby refid="3___cloth_sim_2_src_2_app_renderer_8cpp" local="yes">Source/Samples/3_ClothSim/Src/AppRenderer.cpp</includedby>
+    <includedby refid="_sandbox_2main_8cpp" local="yes">Source/Sandbox/main.cpp</includedby>
+    <incdepgraph>
+      <node id="3968">
+        <label>functional</label>
+      </node>
+      <node id="3967">
+        <label>Allocator.h</label>
+        <link refid="_allocator_8h_source"/>
+        <childnode refid="3968" relation="include">
+        </childnode>
+        <childnode refid="3969" relation="include">
+        </childnode>
+        <childnode refid="3970" relation="include">
+        </childnode>
+      </node>
+      <node id="3970">
+        <label>Utils/Macros.h</label>
+        <link refid="_macros_8h_source"/>
+      </node>
+      <node id="3966">
+        <label>Source/Common/Inc/Memory/MonotonicAllocator.h</label>
+        <link refid="_monotonic_allocator_8h"/>
+        <childnode refid="3967" relation="include">
+        </childnode>
+        <childnode refid="3969" relation="include">
+        </childnode>
+      </node>
+      <node id="3969">
+        <label>Types.h</label>
+      </node>
+    </incdepgraph>
+    <invincdepgraph>
+      <node id="3987">
+        <label>Source/Azura/RenderSystem/Inc/Vulkan/VkScopedPipeline.h</label>
+        <link refid="_vk_scoped_pipeline_8h_source"/>
+        <childnode refid="3985" relation="include">
+        </childnode>
+        <childnode refid="3984" relation="include">
+        </childnode>
+      </node>
+      <node id="3974">
+        <label>Source/Azura/RenderSystem/Inc/D3D12/D3D12TextureManager.h</label>
+        <link refid="_d3_d12_texture_manager_8h_source"/>
+        <childnode refid="3975" relation="include">
+        </childnode>
+      </node>
+      <node id="3977">
+        <label>Source/Samples/2_DeferredRenderer/Inc/Forward/ForwardComputeScene.h</label>
+        <link refid="_forward_compute_scene_8h_source"/>
+        <childnode refid="3976" relation="include">
+        </childnode>
+      </node>
+      <node id="3976">
+        <label>Source/Samples/2_DeferredRenderer/Inc/App/App.h</label>
+        <link refid="_app_8h_source"/>
+      </node>
+      <node id="3981">
+        <label>Source/Azura/RenderSystem/Inc/Vulkan/VkScopedImage.h</label>
+        <link refid="_vk_scoped_image_8h_source"/>
+        <childnode refid="3982" relation="include">
+        </childnode>
+        <childnode refid="3985" relation="include">
+        </childnode>
+        <childnode refid="3986" relation="include">
+        </childnode>
+        <childnode refid="3988" relation="include">
+        </childnode>
+      </node>
+      <node id="3996">
+        <label>Source/Containers/Benchmark/Vector_benchmark.h</label>
+        <link refid="_vector__benchmark_8h_source"/>
+      </node>
+      <node id="3985">
+        <label>Source/Azura/RenderSystem/Inc/Vulkan/VkDrawablePool.h</label>
+        <link refid="_vk_drawable_pool_8h_source"/>
+        <childnode refid="3984" relation="include">
+        </childnode>
+      </node>
+      <node id="3998">
+        <label>Source/Containers/Test/Vector_test.h</label>
+        <link refid="_vector__test_8h_source"/>
+      </node>
+      <node id="3979">
+        <label>Source/Samples/2_DeferredRenderer/Inc/ForwardPlus/ForwardPlusComputeScene.h</label>
+        <link refid="_forward_plus_compute_scene_8h_source"/>
+        <childnode refid="3976" relation="include">
+        </childnode>
+      </node>
+      <node id="3989">
+        <label>Source/Azura/RenderSystem/Inc/Vulkan/VkTextureManager.h</label>
+        <link refid="_vk_texture_manager_8h_source"/>
+        <childnode refid="3984" relation="include">
+        </childnode>
+      </node>
+      <node id="3995">
+        <label>Source/Common/Test/MonotonicAllocator_test.h</label>
+        <link refid="_monotonic_allocator__test_8h_source"/>
+      </node>
+      <node id="3972">
+        <label>Source/Azura/RenderSystem/Inc/D3D12/D3D12Renderer.h</label>
+        <link refid="_d3_d12_renderer_8h_source"/>
+      </node>
+      <node id="3975">
+        <label>Source/Samples/2_DeferredRenderer/Inc/App/LightTexture.h</label>
+        <link refid="_light_texture_8h_source"/>
+        <childnode refid="3976" relation="include">
+        </childnode>
+        <childnode refid="3977" relation="include">
+        </childnode>
+        <childnode refid="3978" relation="include">
+        </childnode>
+        <childnode refid="3979" relation="include">
+        </childnode>
+      </node>
+      <node id="3993">
+        <label>Source/Samples/3_ClothSim/Inc/ClothSim/AppRenderer.h</label>
+        <link refid="3___cloth_sim_2_inc_2_cloth_sim_2_app_renderer_8h_source"/>
+      </node>
+      <node id="3971">
+        <label>Source/Common/Inc/Memory/MonotonicAllocator.h</label>
+        <link refid="_monotonic_allocator_8h"/>
+        <childnode refid="3972" relation="include">
+        </childnode>
+        <childnode refid="3973" relation="include">
+        </childnode>
+        <childnode refid="3994" relation="include">
+        </childnode>
+        <childnode refid="3995" relation="include">
+        </childnode>
+        <childnode refid="3996" relation="include">
+        </childnode>
+        <childnode refid="3997" relation="include">
+        </childnode>
+        <childnode refid="3998" relation="include">
+        </childnode>
+        <childnode refid="3991" relation="include">
+        </childnode>
+      </node>
+      <node id="3991">
+        <label>Source/Samples/1_ProceduralPlanet/Inc/ProceduralPlanet/AppRenderer.h</label>
+        <link refid="1___procedural_planet_2_inc_2_procedural_planet_2_app_renderer_8h_source"/>
+      </node>
+      <node id="3990">
+        <label>Source/Samples/0_TestZone/Inc/TestZone/AppRenderer.h</label>
+        <link refid="0___test_zone_2_inc_2_test_zone_2_app_renderer_8h_source"/>
+      </node>
+      <node id="3988">
+        <label>Source/Azura/RenderSystem/Inc/Vulkan/VkScopedSwapChain.h</label>
+        <link refid="_vk_scoped_swap_chain_8h_source"/>
+        <childnode refid="3987" relation="include">
+        </childnode>
+        <childnode refid="3984" relation="include">
+        </childnode>
+      </node>
+      <node id="3983">
+        <label>Source/Azura/RenderSystem/Inc/Vulkan/VkCore.h</label>
+        <link refid="_vk_core_8h_source"/>
+        <childnode refid="3984" relation="include">
+        </childnode>
+      </node>
+      <node id="3978">
+        <label>Source/Samples/2_DeferredRenderer/Inc/Forward/ForwardScene.h</label>
+        <link refid="_forward_scene_8h_source"/>
+        <childnode refid="3976" relation="include">
+        </childnode>
+      </node>
+      <node id="3980">
+        <label>Source/Azura/RenderSystem/Inc/Generic/RenderSystem.h</label>
+        <link refid="_render_system_8h_source"/>
+      </node>
+      <node id="3984">
+        <label>Source/Azura/RenderSystem/Inc/Vulkan/VkRenderer.h</label>
+        <link refid="_vk_renderer_8h_source"/>
+      </node>
+      <node id="3992">
+        <label>Source/Samples/2_DeferredRenderer/Inc/App/Scene.h</label>
+        <link refid="_samples_22___deferred_renderer_2_inc_2_app_2_scene_8h_source"/>
+        <childnode refid="3976" relation="include">
+        </childnode>
+        <childnode refid="3977" relation="include">
+        </childnode>
+        <childnode refid="3978" relation="include">
+        </childnode>
+        <childnode refid="3979" relation="include">
+        </childnode>
+      </node>
+      <node id="3994">
+        <label>Source/Azura/RenderSystem/Test/Renderer_test.h</label>
+        <link refid="_renderer__test_8h_source"/>
+      </node>
+      <node id="3973">
+        <label>Source/Azura/RenderSystem/Inc/Generic/TextureManager.h</label>
+        <link refid="_texture_manager_8h_source"/>
+        <childnode refid="3974" relation="include">
+        </childnode>
+        <childnode refid="3980" relation="include">
+        </childnode>
+        <childnode refid="3981" relation="include">
+        </childnode>
+        <childnode refid="3989" relation="include">
+        </childnode>
+        <childnode refid="3990" relation="include">
+        </childnode>
+        <childnode refid="3991" relation="include">
+        </childnode>
+        <childnode refid="3992" relation="include">
+        </childnode>
+        <childnode refid="3993" relation="include">
+        </childnode>
+      </node>
+      <node id="3997">
+        <label>Source/Containers/Test/Array_test.h</label>
+        <link refid="_array__test_8h_source"/>
+      </node>
+      <node id="3986">
+        <label>Source/Azura/RenderSystem/Inc/Vulkan/VkScopedRenderPass.h</label>
+        <link refid="_vk_scoped_render_pass_8h_source"/>
+        <childnode refid="3987" relation="include">
+        </childnode>
+        <childnode refid="3985" relation="include">
+        </childnode>
+        <childnode refid="3984" relation="include">
+        </childnode>
+      </node>
+      <node id="3982">
+        <label>Source/Azura/RenderSystem/Inc/Vulkan/VkTypes.h</label>
+        <link refid="_vk_types_8h_source"/>
+        <childnode refid="3983" relation="include">
+        </childnode>
+      </node>
+    </invincdepgraph>
+    <innerclass refid="class_azura_1_1_memory_1_1_monotonic_allocator" prot="public">Azura::Memory::MonotonicAllocator</innerclass>
+    <innernamespace refid="namespace_azura">Azura</innernamespace>
+    <innernamespace refid="namespace_azura_1_1_memory">Azura::Memory</innernamespace>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <programlisting>
+<codeline lineno="1"><highlight class="preprocessor">#pragma<sp/>once</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="2"><highlight class="normal"></highlight></codeline>
+<codeline lineno="3"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&quot;Allocator.h&quot;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="4"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&quot;Types.h&quot;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="5"><highlight class="normal"></highlight></codeline>
+<codeline lineno="6"><highlight class="normal"></highlight><highlight class="keyword">namespace<sp/></highlight><highlight class="normal"><ref refid="namespace_azura" kindref="compound">Azura</ref><sp/>{</highlight></codeline>
+<codeline lineno="7"><highlight class="normal"></highlight><highlight class="keyword">namespace<sp/></highlight><highlight class="normal">Memory<sp/>{</highlight></codeline>
+<codeline lineno="8"><highlight class="normal"></highlight><highlight class="keyword">class<sp/></highlight><highlight class="normal">MemoryBuffer;</highlight></codeline>
+<codeline lineno="9"><highlight class="normal"></highlight></codeline>
+<codeline lineno="10" refid="class_azura_1_1_memory_1_1_monotonic_allocator" refkind="compound"><highlight class="normal"></highlight><highlight class="keyword">class<sp/></highlight><highlight class="normal"><ref refid="class_azura_1_1_memory_1_1_monotonic_allocator" kindref="compound">MonotonicAllocator</ref><sp/>final<sp/>:<sp/></highlight><highlight class="keyword">public</highlight><highlight class="normal"><sp/><ref refid="class_azura_1_1_memory_1_1_allocator" kindref="compound">Allocator</ref><sp/>{</highlight></codeline>
+<codeline lineno="11"><highlight class="normal"><sp/></highlight><highlight class="keyword">public</highlight><highlight class="normal">:</highlight></codeline>
+<codeline lineno="12"><highlight class="normal"><sp/><sp/><ref refid="class_azura_1_1_memory_1_1_monotonic_allocator" kindref="compound">MonotonicAllocator</ref>(<ref refid="class_azura_1_1_memory_1_1_memory_buffer" kindref="compound">MemoryBuffer</ref>&amp;<sp/>buffer,<sp/>U32<sp/>size);</highlight></codeline>
+<codeline lineno="13"><highlight class="normal"><sp/><sp/>~<ref refid="class_azura_1_1_memory_1_1_monotonic_allocator" kindref="compound">MonotonicAllocator</ref>()<sp/></highlight><highlight class="keyword">override</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="14"><highlight class="normal"></highlight></codeline>
+<codeline lineno="15"><highlight class="normal"><sp/><sp/><ref refid="class_azura_1_1_memory_1_1_monotonic_allocator" kindref="compound">MonotonicAllocator</ref>(</highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/><ref refid="class_azura_1_1_memory_1_1_monotonic_allocator" kindref="compound">MonotonicAllocator</ref>&amp;<sp/>other)<sp/>=<sp/></highlight><highlight class="keyword">delete</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="16"><highlight class="normal"><sp/><sp/><ref refid="class_azura_1_1_memory_1_1_monotonic_allocator" kindref="compound">MonotonicAllocator</ref>&amp;<sp/>operator=(</highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/><ref refid="class_azura_1_1_memory_1_1_monotonic_allocator" kindref="compound">MonotonicAllocator</ref>&amp;<sp/>other)<sp/>=<sp/></highlight><highlight class="keyword">delete</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="17"><highlight class="normal"></highlight></codeline>
+<codeline lineno="18"><highlight class="normal"><sp/><sp/><ref refid="class_azura_1_1_memory_1_1_monotonic_allocator" kindref="compound">MonotonicAllocator</ref>(<ref refid="class_azura_1_1_memory_1_1_monotonic_allocator" kindref="compound">MonotonicAllocator</ref>&amp;&amp;<sp/>other)<sp/>noexcept<sp/>=<sp/></highlight><highlight class="keywordflow">default</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="19"><highlight class="normal"><sp/><sp/><ref refid="class_azura_1_1_memory_1_1_monotonic_allocator" kindref="compound">MonotonicAllocator</ref>&amp;<sp/>operator=(<ref refid="class_azura_1_1_memory_1_1_monotonic_allocator" kindref="compound">MonotonicAllocator</ref>&amp;&amp;<sp/>other)<sp/>noexcept<sp/>=<sp/></highlight><highlight class="keyword">delete</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="20"><highlight class="normal"></highlight></codeline>
+<codeline lineno="21"><highlight class="normal"></highlight><highlight class="preprocessor">#ifdef<sp/>BUILD_UNIT_TEST</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="22"><highlight class="normal"><sp/><sp/>AddressPtr<sp/>GetCurrentPtr()</highlight><highlight class="keyword"><sp/>const<sp/></highlight><highlight class="normal">{</highlight></codeline>
+<codeline lineno="23"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>m_headPtr;</highlight></codeline>
+<codeline lineno="24"><highlight class="normal"><sp/><sp/>};</highlight></codeline>
+<codeline lineno="25"><highlight class="normal"></highlight><highlight class="preprocessor">#endif</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="26"><highlight class="normal"></highlight></codeline>
+<codeline lineno="30"><highlight class="normal"><sp/><sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/><ref refid="class_azura_1_1_memory_1_1_monotonic_allocator_1a5c31a835742876a7e041b6f46df17aa1" kindref="member">Reset</ref>()<sp/></highlight><highlight class="keyword">override</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="31"><highlight class="normal"></highlight></codeline>
+<codeline lineno="32"><highlight class="normal"><sp/></highlight><highlight class="keyword">protected</highlight><highlight class="normal">:</highlight></codeline>
+<codeline lineno="39"><highlight class="normal"><sp/><sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal">*<sp/><ref refid="class_azura_1_1_memory_1_1_monotonic_allocator_1a5a3a0d00854453236515762f28a0bfe7" kindref="member">Allocate</ref>(U32<sp/>size,<sp/>U32<sp/>alignment)<sp/></highlight><highlight class="keyword">override</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="40"><highlight class="normal"></highlight></codeline>
+<codeline lineno="45"><highlight class="normal"><sp/><sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/><ref refid="class_azura_1_1_memory_1_1_monotonic_allocator_1a6f81ae431111a6db680ca159d9a575e1" kindref="member">Deallocate</ref>(</highlight><highlight class="keywordtype">void</highlight><highlight class="normal">*<sp/>address)<sp/></highlight><highlight class="keyword">override</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="46"><highlight class="normal"></highlight></codeline>
+<codeline lineno="47"><highlight class="normal"><sp/></highlight><highlight class="keyword">private</highlight><highlight class="normal">:</highlight></codeline>
+<codeline lineno="48"><highlight class="normal"><sp/><sp/>AddressPtr<sp/>m_headPtr;</highlight></codeline>
+<codeline lineno="49"><highlight class="normal"><sp/><sp/><ref refid="class_azura_1_1_memory_1_1_memory_buffer" kindref="compound">MemoryBuffer</ref>&amp;<sp/>m_sourceBuffer;</highlight></codeline>
+<codeline lineno="50"><highlight class="normal">};</highlight></codeline>
+<codeline lineno="51"><highlight class="normal">}<sp/><sp/></highlight><highlight class="comment">//<sp/>namespace<sp/>Memory</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="52"><highlight class="normal">}<sp/><sp/></highlight><highlight class="comment">//<sp/>namespace<sp/>Azura</highlight><highlight class="normal"></highlight></codeline>
+    </programlisting>
+    <location file="Source/Common/Inc/Memory/MonotonicAllocator.h"/>
+  </compounddef>
+</doxygen>

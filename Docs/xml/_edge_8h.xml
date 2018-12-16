@@ -1,0 +1,105 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.8.14">
+  <compounddef id="_edge_8h" kind="file" language="C++">
+    <compoundname>Edge.h</compoundname>
+    <includes refid="_core_8h" local="no">Math/Core.h</includes>
+    <includes local="no">boost/container_hash/hash.hpp</includes>
+    <includedby refid="_physics_2_inc_2_physics_2_geometry_2_cloth_mesh_8h" local="no">Source/Physics/Inc/Physics/Geometry/ClothMesh.h</includedby>
+    <includedby refid="_cloth_plane_8h" local="no">Source/Physics/Inc/Physics/Geometry/ClothPlane.h</includedby>
+    <includedby refid="_edge_8cpp" local="yes">Source/Physics/Src/Geometry/Edge.cpp</includedby>
+    <incdepgraph>
+      <node id="5463">
+        <label>Math/Core.h</label>
+        <link refid="_core_8h_source"/>
+        <childnode refid="5464" relation="include">
+        </childnode>
+        <childnode refid="5465" relation="include">
+        </childnode>
+      </node>
+      <node id="5466">
+        <label>boost/container_hash/hash.hpp</label>
+      </node>
+      <node id="5462">
+        <label>Source/Physics/Inc/Physics/Geometry/Edge.h</label>
+        <link refid="_edge_8h"/>
+        <childnode refid="5463" relation="include">
+        </childnode>
+        <childnode refid="5466" relation="include">
+        </childnode>
+      </node>
+      <node id="5465">
+        <label>Types.h</label>
+      </node>
+      <node id="5464">
+        <label>mathfu/matrix.h</label>
+      </node>
+    </incdepgraph>
+    <invincdepgraph>
+      <node id="5470">
+        <label>Source/Physics/Inc/Physics/Geometry/ClothPlane.h</label>
+        <link refid="_cloth_plane_8h_source"/>
+        <childnode refid="5469" relation="include">
+        </childnode>
+      </node>
+      <node id="5469">
+        <label>Source/Samples/3_ClothSim/Inc/ClothSim/AppRenderer.h</label>
+        <link refid="3___cloth_sim_2_inc_2_cloth_sim_2_app_renderer_8h_source"/>
+      </node>
+      <node id="5467">
+        <label>Source/Physics/Inc/Physics/Geometry/Edge.h</label>
+        <link refid="_edge_8h"/>
+        <childnode refid="5468" relation="include">
+        </childnode>
+        <childnode refid="5470" relation="include">
+        </childnode>
+      </node>
+      <node id="5468">
+        <label>Source/Physics/Inc/Physics/Geometry/ClothMesh.h</label>
+        <link refid="_physics_2_inc_2_physics_2_geometry_2_cloth_mesh_8h_source"/>
+        <childnode refid="5469" relation="include">
+        </childnode>
+      </node>
+    </invincdepgraph>
+    <innerclass refid="struct_azura_1_1_physics_1_1_edge" prot="public">Azura::Physics::Edge</innerclass>
+    <innerclass refid="struct_azura_1_1_physics_1_1_edge_map_hash" prot="public">Azura::Physics::EdgeMapHash</innerclass>
+    <innerclass refid="struct_azura_1_1_physics_1_1_vector3f_hash" prot="public">Azura::Physics::Vector3fHash</innerclass>
+    <innernamespace refid="namespace_azura">Azura</innernamespace>
+    <innernamespace refid="namespace_azura_1_1_physics">Azura::Physics</innernamespace>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <programlisting>
+<codeline lineno="1"><highlight class="preprocessor">#pragma<sp/>once</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="2"><highlight class="normal"></highlight></codeline>
+<codeline lineno="3"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&lt;Math/Core.h&gt;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="4"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&lt;boost/container_hash/hash.hpp&gt;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="5"><highlight class="normal"></highlight></codeline>
+<codeline lineno="6"><highlight class="normal"></highlight><highlight class="keyword">namespace<sp/></highlight><highlight class="normal"><ref refid="namespace_azura" kindref="compound">Azura</ref><sp/>{</highlight></codeline>
+<codeline lineno="7"><highlight class="normal"></highlight><highlight class="keyword">namespace<sp/></highlight><highlight class="normal">Physics<sp/>{</highlight></codeline>
+<codeline lineno="8" refid="struct_azura_1_1_physics_1_1_edge" refkind="compound"><highlight class="normal"></highlight><highlight class="keyword">struct<sp/></highlight><highlight class="normal"><ref refid="struct_azura_1_1_physics_1_1_edge" kindref="compound">Edge</ref><sp/>{</highlight></codeline>
+<codeline lineno="9"><highlight class="normal"><sp/><sp/>U32<sp/>m_indexA;</highlight></codeline>
+<codeline lineno="10"><highlight class="normal"><sp/><sp/>U32<sp/>m_indexB;</highlight></codeline>
+<codeline lineno="11"><highlight class="normal"></highlight></codeline>
+<codeline lineno="12"><highlight class="normal"><sp/><sp/></highlight><highlight class="keywordtype">bool</highlight><highlight class="normal"><sp/>operator==(</highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/><ref refid="struct_azura_1_1_physics_1_1_edge" kindref="compound">Edge</ref>&amp;<sp/>rhs)<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="13"><highlight class="normal">};</highlight></codeline>
+<codeline lineno="14"><highlight class="normal"></highlight></codeline>
+<codeline lineno="15" refid="struct_azura_1_1_physics_1_1_edge_map_hash" refkind="compound"><highlight class="normal"></highlight><highlight class="keyword">struct<sp/></highlight><highlight class="normal"><ref refid="struct_azura_1_1_physics_1_1_edge_map_hash" kindref="compound">EdgeMapHash</ref><sp/>{</highlight></codeline>
+<codeline lineno="16"><highlight class="normal"><sp/><sp/>std::size_t<sp/>operator<sp/>()(</highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/><ref refid="struct_azura_1_1_physics_1_1_edge" kindref="compound">Edge</ref>&amp;<sp/>e)</highlight><highlight class="keyword"><sp/>const<sp/></highlight><highlight class="normal">{</highlight></codeline>
+<codeline lineno="17"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>boost::hash_value(std::make_pair(e.m_indexA,<sp/>e.m_indexB))<sp/>+<sp/>boost::</highlight></codeline>
+<codeline lineno="18"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>hash_value(std::make_pair(e.m_indexB,<sp/>e.m_indexA));</highlight></codeline>
+<codeline lineno="19"><highlight class="normal"><sp/><sp/>}</highlight></codeline>
+<codeline lineno="20"><highlight class="normal">};</highlight></codeline>
+<codeline lineno="21"><highlight class="normal"></highlight></codeline>
+<codeline lineno="22" refid="struct_azura_1_1_physics_1_1_vector3f_hash" refkind="compound"><highlight class="normal"></highlight><highlight class="keyword">struct<sp/></highlight><highlight class="normal"><ref refid="struct_azura_1_1_physics_1_1_vector3f_hash" kindref="compound">Vector3fHash</ref><sp/>{</highlight></codeline>
+<codeline lineno="23"><highlight class="normal"><sp/><sp/>std::size_t<sp/>operator<sp/>()(</highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>Vector3f&amp;<sp/>v)</highlight><highlight class="keyword"><sp/>const<sp/></highlight><highlight class="normal">{</highlight></codeline>
+<codeline lineno="24"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>boost::hash_value(v[0])<sp/>+<sp/>boost::hash_value(v[1])<sp/>+<sp/>boost::hash_value(v[2]);</highlight></codeline>
+<codeline lineno="25"><highlight class="normal"><sp/><sp/>}</highlight></codeline>
+<codeline lineno="26"><highlight class="normal">};</highlight></codeline>
+<codeline lineno="27"><highlight class="normal"></highlight></codeline>
+<codeline lineno="28"><highlight class="normal">}<sp/></highlight><highlight class="comment">//<sp/>namespace<sp/>Physics</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="29"><highlight class="normal">}<sp/></highlight><highlight class="comment">//<sp/>namespace<sp/>Azura</highlight><highlight class="normal"></highlight></codeline>
+    </programlisting>
+    <location file="Source/Physics/Inc/Physics/Geometry/Edge.h"/>
+  </compounddef>
+</doxygen>

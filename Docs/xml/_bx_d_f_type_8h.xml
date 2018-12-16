@@ -1,0 +1,55 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.8.14">
+  <compounddef id="_bx_d_f_type_8h" kind="file" language="C++">
+    <compoundname>BxDFType.h</compoundname>
+    <includedby refid="_bx_d_f_8h" local="yes">Source/Dibella/Inc/Materials/Primitives/BxDF.h</includedby>
+    <invincdepgraph>
+      <node id="4911">
+        <label>Source/Dibella/Inc/Materials/Primitives/BSDF.h</label>
+        <link refid="_b_s_d_f_8h_source"/>
+      </node>
+      <node id="4910">
+        <label>Source/Dibella/Inc/Materials/Primitives/BxDF.h</label>
+        <link refid="_bx_d_f_8h_source"/>
+        <childnode refid="4911" relation="include">
+        </childnode>
+      </node>
+      <node id="4909">
+        <label>Source/Dibella/Inc/Materials/Primitives/BxDFType.h</label>
+        <link refid="_bx_d_f_type_8h"/>
+        <childnode refid="4910" relation="include">
+        </childnode>
+      </node>
+    </invincdepgraph>
+    <innernamespace refid="namespace_dibella">Dibella</innernamespace>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <programlisting>
+<codeline lineno="1"><highlight class="preprocessor">#pragma<sp/>once</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="2"><highlight class="normal"></highlight></codeline>
+<codeline lineno="3"><highlight class="normal"></highlight><highlight class="keyword">namespace<sp/></highlight><highlight class="normal"><ref refid="namespace_dibella" kindref="compound">Dibella</ref><sp/>{</highlight></codeline>
+<codeline lineno="4"><highlight class="normal"></highlight><highlight class="keyword">enum<sp/>class</highlight><highlight class="normal"><sp/>BxDFType</highlight></codeline>
+<codeline lineno="5"><highlight class="normal">{</highlight></codeline>
+<codeline lineno="6"><highlight class="normal"><sp/><sp/></highlight><highlight class="comment">//<sp/>This<sp/>BxDF<sp/>handles<sp/>rays<sp/>that<sp/>are<sp/>reflected<sp/>off<sp/>surfaces</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="7"><highlight class="normal"><sp/><sp/>BsdfReflection<sp/>=<sp/>1<sp/>&lt;&lt;<sp/>0,</highlight></codeline>
+<codeline lineno="8"><highlight class="normal"></highlight></codeline>
+<codeline lineno="9"><highlight class="normal"><sp/><sp/></highlight><highlight class="comment">//<sp/>This<sp/>BxDF<sp/>handles<sp/>rays<sp/>that<sp/>are<sp/>transmitted<sp/>through<sp/>surfaces</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="10"><highlight class="normal"><sp/><sp/>BsdfTransmission<sp/>=<sp/>1<sp/>&lt;&lt;<sp/>1,</highlight></codeline>
+<codeline lineno="11"><highlight class="normal"></highlight></codeline>
+<codeline lineno="12"><highlight class="normal"><sp/><sp/></highlight><highlight class="comment">//<sp/>This<sp/>BxDF<sp/>represents<sp/>diffuse<sp/>energy<sp/>scattering,<sp/>which<sp/>is<sp/>uniformly<sp/>random</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="13"><highlight class="normal"><sp/><sp/>BsdfDiffuse<sp/>=<sp/>1<sp/>&lt;&lt;<sp/>2,</highlight></codeline>
+<codeline lineno="14"><highlight class="normal"></highlight></codeline>
+<codeline lineno="15"><highlight class="normal"><sp/><sp/></highlight><highlight class="comment">//<sp/>This<sp/>BxDF<sp/>represents<sp/>glossy<sp/>energy<sp/>scattering,<sp/>which<sp/>is<sp/>biased<sp/>toward<sp/>certain<sp/>directions</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="16"><highlight class="normal"><sp/><sp/>BsdfGlossy<sp/>=<sp/>1<sp/>&lt;&lt;<sp/>3,</highlight></codeline>
+<codeline lineno="17"><highlight class="normal"></highlight></codeline>
+<codeline lineno="18"><highlight class="normal"><sp/><sp/></highlight><highlight class="comment">//<sp/>This<sp/>BxDF<sp/>handles<sp/>specular<sp/>energy<sp/>scattering,<sp/>which<sp/>has<sp/>no<sp/>element<sp/>of<sp/>randomness</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="19"><highlight class="normal"><sp/><sp/>BsdfSpecular<sp/>=<sp/>1<sp/>&lt;&lt;<sp/>4,</highlight></codeline>
+<codeline lineno="20"><highlight class="normal"><sp/><sp/>BsdfAll<sp/><sp/><sp/><sp/><sp/><sp/>=<sp/>BsdfDiffuse<sp/>|<sp/>BsdfGlossy<sp/>|<sp/>BsdfSpecular<sp/>|<sp/>BsdfReflection<sp/>|<sp/>BsdfTransmission</highlight></codeline>
+<codeline lineno="21"><highlight class="normal">};</highlight></codeline>
+<codeline lineno="22"><highlight class="normal">}</highlight></codeline>
+    </programlisting>
+    <location file="Source/Dibella/Inc/Materials/Primitives/BxDFType.h"/>
+  </compounddef>
+</doxygen>
