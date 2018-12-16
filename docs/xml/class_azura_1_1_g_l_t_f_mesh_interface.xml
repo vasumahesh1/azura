@@ -1,0 +1,231 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.8.14">
+  <compounddef id="class_azura_1_1_g_l_t_f_mesh_interface" kind="class" language="C++" prot="public">
+    <compoundname>Azura::GLTFMeshInterface</compoundname>
+      <sectiondef kind="private-attrib">
+      <memberdef kind="variable" id="class_azura_1_1_g_l_t_f_mesh_interface_1a45ba0c5ed2d87ea6f01a7cf76d1f4456" prot="private" static="no" mutable="no">
+        <type>std::unique_ptr&lt; const Microsoft::glTF::GLTFResourceReader &gt;</type>
+        <definition>std::unique_ptr&lt;const Microsoft::glTF::GLTFResourceReader&gt; Azura::GLTFMeshInterface::m_resourceReader</definition>
+        <argsstring></argsstring>
+        <name>m_resourceReader</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Source/AssetManager/Inc/AssetManager/GLTFLoader.h" line="24" column="1" bodyfile="Source/AssetManager/Inc/AssetManager/GLTFLoader.h" bodystart="24" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="class_azura_1_1_g_l_t_f_mesh_interface_1ac32c003d6e80f8920821b56c44629743" prot="private" static="no" mutable="no">
+        <type>Microsoft::glTF::Document</type>
+        <definition>Microsoft::glTF::Document Azura::GLTFMeshInterface::m_document</definition>
+        <argsstring></argsstring>
+        <name>m_document</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Source/AssetManager/Inc/AssetManager/GLTFLoader.h" line="25" column="1" bodyfile="Source/AssetManager/Inc/AssetManager/GLTFLoader.h" bodystart="25" bodyend="-1"/>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="public-func">
+      <memberdef kind="function" id="class_azura_1_1_g_l_t_f_mesh_interface_1af10eaa7f6004fab591a1317e9081c308" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>Azura::GLTFMeshInterface::GLTFMeshInterface</definition>
+        <argsstring>(const String &amp;manifest, std::unique_ptr&lt; const Microsoft::glTF::GLTFResourceReader &gt; resourceReader)</argsstring>
+        <name>GLTFMeshInterface</name>
+        <param>
+          <type>const String &amp;</type>
+          <declname>manifest</declname>
+        </param>
+        <param>
+          <type>std::unique_ptr&lt; const Microsoft::glTF::GLTFResourceReader &gt;</type>
+          <declname>resourceReader</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Source/AssetManager/Inc/AssetManager/GLTFLoader.h" line="13" column="1" bodyfile="Source/AssetManager/Src/GLTFLoader.cpp" bodystart="60" bodyend="64"/>
+      </memberdef>
+      <memberdef kind="function" id="class_azura_1_1_g_l_t_f_mesh_interface_1a0508167f6cd59531f771820635a5481d" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
+        <type>std::vector&lt; float &gt;</type>
+        <definition>std::vector&lt; float &gt; Azura::GLTFMeshInterface::GetPositionBuffer</definition>
+        <argsstring>(U32 meshId, U32 meshPrimitive, U32 &amp;bufferSize, U32 &amp;count) const</argsstring>
+        <name>GetPositionBuffer</name>
+        <param>
+          <type>U32</type>
+          <declname>meshId</declname>
+        </param>
+        <param>
+          <type>U32</type>
+          <declname>meshPrimitive</declname>
+        </param>
+        <param>
+          <type>U32 &amp;</type>
+          <declname>bufferSize</declname>
+        </param>
+        <param>
+          <type>U32 &amp;</type>
+          <declname>count</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Source/AssetManager/Inc/AssetManager/GLTFLoader.h" line="15" column="1" bodyfile="Source/AssetManager/Src/GLTFLoader.cpp" bodystart="66" bodyend="81"/>
+      </memberdef>
+      <memberdef kind="function" id="class_azura_1_1_g_l_t_f_mesh_interface_1a8aab518b79d4c1c125dc1e24353bda2e" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
+        <type>std::vector&lt; float &gt;</type>
+        <definition>std::vector&lt; float &gt; Azura::GLTFMeshInterface::GetNormalBuffer</definition>
+        <argsstring>(U32 meshId, U32 meshPrimitive, U32 &amp;bufferSize, U32 &amp;count) const</argsstring>
+        <name>GetNormalBuffer</name>
+        <param>
+          <type>U32</type>
+          <declname>meshId</declname>
+        </param>
+        <param>
+          <type>U32</type>
+          <declname>meshPrimitive</declname>
+        </param>
+        <param>
+          <type>U32 &amp;</type>
+          <declname>bufferSize</declname>
+        </param>
+        <param>
+          <type>U32 &amp;</type>
+          <declname>count</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Source/AssetManager/Inc/AssetManager/GLTFLoader.h" line="16" column="1" bodyfile="Source/AssetManager/Src/GLTFLoader.cpp" bodystart="84" bodyend="95"/>
+      </memberdef>
+      <memberdef kind="function" id="class_azura_1_1_g_l_t_f_mesh_interface_1ab419d26e6d31faebf357fd12f4e09a1b" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
+        <type>std::vector&lt; float &gt;</type>
+        <definition>std::vector&lt; float &gt; Azura::GLTFMeshInterface::GetUVBuffer</definition>
+        <argsstring>(U32 meshId, U32 meshPrimitive, U32 &amp;bufferSize, U32 &amp;count) const</argsstring>
+        <name>GetUVBuffer</name>
+        <param>
+          <type>U32</type>
+          <declname>meshId</declname>
+        </param>
+        <param>
+          <type>U32</type>
+          <declname>meshPrimitive</declname>
+        </param>
+        <param>
+          <type>U32 &amp;</type>
+          <declname>bufferSize</declname>
+        </param>
+        <param>
+          <type>U32 &amp;</type>
+          <declname>count</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Source/AssetManager/Inc/AssetManager/GLTFLoader.h" line="17" column="1" bodyfile="Source/AssetManager/Src/GLTFLoader.cpp" bodystart="97" bodyend="108"/>
+      </memberdef>
+      <memberdef kind="function" id="class_azura_1_1_g_l_t_f_mesh_interface_1a004f1b03c326262b8e31f7bef014f517" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
+        <type>std::vector&lt; U32 &gt;</type>
+        <definition>std::vector&lt; U32 &gt; Azura::GLTFMeshInterface::GetIndexBuffer</definition>
+        <argsstring>(U32 meshId, U32 meshPrimitive, U32 &amp;bufferSize, U32 &amp;count) const</argsstring>
+        <name>GetIndexBuffer</name>
+        <param>
+          <type>U32</type>
+          <declname>meshId</declname>
+        </param>
+        <param>
+          <type>U32</type>
+          <declname>meshPrimitive</declname>
+        </param>
+        <param>
+          <type>U32 &amp;</type>
+          <declname>bufferSize</declname>
+        </param>
+        <param>
+          <type>U32 &amp;</type>
+          <declname>count</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Source/AssetManager/Inc/AssetManager/GLTFLoader.h" line="18" column="1" bodyfile="Source/AssetManager/Src/GLTFLoader.cpp" bodystart="110" bodyend="140"/>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="private-func">
+      <memberdef kind="function" id="class_azura_1_1_g_l_t_f_mesh_interface_1a0d204c8942b70c57b25cd861068f0c7a" prot="private" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
+        <type>const Microsoft::glTF::Mesh &amp;</type>
+        <definition>const Microsoft::glTF::Mesh &amp; Azura::GLTFMeshInterface::GetMesh</definition>
+        <argsstring>(U32 idx) const</argsstring>
+        <name>GetMesh</name>
+        <param>
+          <type>U32</type>
+          <declname>idx</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Source/AssetManager/Inc/AssetManager/GLTFLoader.h" line="21" column="1" bodyfile="Source/AssetManager/Src/GLTFLoader.cpp" bodystart="142" bodyend="144"/>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="private-static-func">
+      <memberdef kind="function" id="class_azura_1_1_g_l_t_f_mesh_interface_1a727de1b8ee7578e655ac217b07aecc13" prot="private" static="yes" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>const Microsoft::glTF::MeshPrimitive &amp;</type>
+        <definition>const Microsoft::glTF::MeshPrimitive &amp; Azura::GLTFMeshInterface::GetMeshPrimitive</definition>
+        <argsstring>(const Microsoft::glTF::Mesh &amp;mesh, U32 idx)</argsstring>
+        <name>GetMeshPrimitive</name>
+        <param>
+          <type>const Microsoft::glTF::Mesh &amp;</type>
+          <declname>mesh</declname>
+        </param>
+        <param>
+          <type>U32</type>
+          <declname>idx</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Source/AssetManager/Inc/AssetManager/GLTFLoader.h" line="22" column="1" bodyfile="Source/AssetManager/Src/GLTFLoader.cpp" bodystart="146" bodyend="148"/>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <location file="Source/AssetManager/Inc/AssetManager/GLTFLoader.h" line="11" column="1" bodyfile="Source/AssetManager/Inc/AssetManager/GLTFLoader.h" bodystart="10" bodyend="26"/>
+    <listofallmembers>
+      <member refid="class_azura_1_1_g_l_t_f_mesh_interface_1a004f1b03c326262b8e31f7bef014f517" prot="public" virt="non-virtual"><scope>Azura::GLTFMeshInterface</scope><name>GetIndexBuffer</name></member>
+      <member refid="class_azura_1_1_g_l_t_f_mesh_interface_1a0d204c8942b70c57b25cd861068f0c7a" prot="private" virt="non-virtual"><scope>Azura::GLTFMeshInterface</scope><name>GetMesh</name></member>
+      <member refid="class_azura_1_1_g_l_t_f_mesh_interface_1a727de1b8ee7578e655ac217b07aecc13" prot="private" virt="non-virtual"><scope>Azura::GLTFMeshInterface</scope><name>GetMeshPrimitive</name></member>
+      <member refid="class_azura_1_1_g_l_t_f_mesh_interface_1a8aab518b79d4c1c125dc1e24353bda2e" prot="public" virt="non-virtual"><scope>Azura::GLTFMeshInterface</scope><name>GetNormalBuffer</name></member>
+      <member refid="class_azura_1_1_g_l_t_f_mesh_interface_1a0508167f6cd59531f771820635a5481d" prot="public" virt="non-virtual"><scope>Azura::GLTFMeshInterface</scope><name>GetPositionBuffer</name></member>
+      <member refid="class_azura_1_1_g_l_t_f_mesh_interface_1ab419d26e6d31faebf357fd12f4e09a1b" prot="public" virt="non-virtual"><scope>Azura::GLTFMeshInterface</scope><name>GetUVBuffer</name></member>
+      <member refid="class_azura_1_1_g_l_t_f_mesh_interface_1af10eaa7f6004fab591a1317e9081c308" prot="public" virt="non-virtual"><scope>Azura::GLTFMeshInterface</scope><name>GLTFMeshInterface</name></member>
+      <member refid="class_azura_1_1_g_l_t_f_mesh_interface_1ac32c003d6e80f8920821b56c44629743" prot="private" virt="non-virtual"><scope>Azura::GLTFMeshInterface</scope><name>m_document</name></member>
+      <member refid="class_azura_1_1_g_l_t_f_mesh_interface_1a45ba0c5ed2d87ea6f01a7cf76d1f4456" prot="private" virt="non-virtual"><scope>Azura::GLTFMeshInterface</scope><name>m_resourceReader</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

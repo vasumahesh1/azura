@@ -1,0 +1,559 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.8.14">
+  <compounddef id="_vk_scoped_pipeline_8cpp" kind="file" language="C++">
+    <compoundname>VkScopedPipeline.cpp</compoundname>
+    <includes refid="_vk_scoped_pipeline_8h" local="yes">Vulkan/VkScopedPipeline.h</includes>
+    <includes refid="_allocator_8h" local="yes">Memory/Allocator.h</includes>
+    <includes refid="_vk_macros_8h" local="yes">Vulkan/VkMacros.h</includes>
+    <includes refid="_vk_type_mapping_8h" local="yes">Vulkan/VkTypeMapping.h</includes>
+    <incdepgraph>
+      <node id="3266">
+        <label>Vulkan/VkScopedPipeline.h</label>
+        <link refid="_vk_scoped_pipeline_8h_source"/>
+        <childnode refid="3267" relation="include">
+        </childnode>
+        <childnode refid="3268" relation="include">
+        </childnode>
+        <childnode refid="3269" relation="include">
+        </childnode>
+        <childnode refid="3278" relation="include">
+        </childnode>
+        <childnode refid="3289" relation="include">
+        </childnode>
+        <childnode refid="3297" relation="include">
+        </childnode>
+        <childnode refid="3291" relation="include">
+        </childnode>
+      </node>
+      <node id="3272">
+        <label>functional</label>
+      </node>
+      <node id="3273">
+        <label>iterator</label>
+      </node>
+      <node id="3286">
+        <label>Utils/Hash.h</label>
+        <link refid="_hash_8h_source"/>
+        <childnode refid="3276" relation="include">
+        </childnode>
+      </node>
+      <node id="3281">
+        <label>Core/RawStorageFormat.h</label>
+        <link refid="_raw_storage_format_8h_source"/>
+        <childnode refid="3276" relation="include">
+        </childnode>
+        <childnode refid="3280" relation="include">
+        </childnode>
+        <childnode refid="3282" relation="include">
+        </childnode>
+        <childnode refid="3283" relation="include">
+        </childnode>
+        <childnode refid="3284" relation="include">
+        </childnode>
+        <childnode refid="3285" relation="include">
+        </childnode>
+      </node>
+      <node id="3290">
+        <label>VkScopedImage.h</label>
+        <link refid="_vk_scoped_image_8h_source"/>
+        <childnode refid="3267" relation="include">
+        </childnode>
+        <childnode refid="3276" relation="include">
+        </childnode>
+        <childnode refid="3291" relation="include">
+        </childnode>
+        <childnode refid="3293" relation="include">
+        </childnode>
+      </node>
+      <node id="3295">
+        <label>MemoryBuffer.h</label>
+        <link refid="_memory_buffer_8h_source"/>
+        <childnode refid="3276" relation="include">
+        </childnode>
+      </node>
+      <node id="3275">
+        <label>Memory/Allocator.h</label>
+        <link refid="_allocator_8h_source"/>
+        <childnode refid="3272" relation="include">
+        </childnode>
+        <childnode refid="3276" relation="include">
+        </childnode>
+        <childnode refid="3277" relation="include">
+        </childnode>
+      </node>
+      <node id="3287">
+        <label>Core/AssetLocation.h</label>
+        <link refid="_asset_location_8h_source"/>
+      </node>
+      <node id="3270">
+        <label>cassert</label>
+      </node>
+      <node id="3284">
+        <label>boost/preprocessor/tuple/elem.hpp</label>
+      </node>
+      <node id="3301">
+        <label>stdexcept</label>
+      </node>
+      <node id="3278">
+        <label>Generic/GenericTypes.h</label>
+        <link refid="_azura_2_render_system_2_inc_2_generic_2_generic_types_8h_source"/>
+        <childnode refid="3269" relation="include">
+        </childnode>
+        <childnode refid="3279" relation="include">
+        </childnode>
+        <childnode refid="3276" relation="include">
+        </childnode>
+        <childnode refid="3281" relation="include">
+        </childnode>
+        <childnode refid="3286" relation="include">
+        </childnode>
+        <childnode refid="3287" relation="include">
+        </childnode>
+        <childnode refid="3288" relation="include">
+        </childnode>
+        <childnode refid="3285" relation="include">
+        </childnode>
+      </node>
+      <node id="3294">
+        <label>Memory/HeapMemoryBuffer.h</label>
+        <link refid="_heap_memory_buffer_8h_source"/>
+        <childnode refid="3295" relation="include">
+        </childnode>
+        <childnode refid="3276" relation="include">
+        </childnode>
+      </node>
+      <node id="3268">
+        <label>map</label>
+      </node>
+      <node id="3277">
+        <label>Utils/Macros.h</label>
+        <link refid="_macros_8h_source"/>
+      </node>
+      <node id="3288">
+        <label>boost/container/small_vector.hpp</label>
+      </node>
+      <node id="3279">
+        <label>Generic/Constants.h</label>
+        <link refid="_azura_2_render_system_2_inc_2_generic_2_constants_8h_source"/>
+        <childnode refid="3280" relation="include">
+        </childnode>
+        <childnode refid="3276" relation="include">
+        </childnode>
+      </node>
+      <node id="3285">
+        <label>boost/detail/bitmask.hpp</label>
+      </node>
+      <node id="3298">
+        <label>VkShader.h</label>
+        <link refid="_vk_shader_8h_source"/>
+        <childnode refid="3267" relation="include">
+        </childnode>
+        <childnode refid="3268" relation="include">
+        </childnode>
+        <childnode refid="3299" relation="include">
+        </childnode>
+        <childnode refid="3291" relation="include">
+        </childnode>
+      </node>
+      <node id="3280">
+        <label>tuple</label>
+      </node>
+      <node id="3274">
+        <label>Array.h</label>
+        <link refid="_array_8h_source"/>
+        <childnode refid="3270" relation="include">
+        </childnode>
+        <childnode refid="3271" relation="include">
+        </childnode>
+        <childnode refid="3275" relation="include">
+        </childnode>
+        <childnode refid="3276" relation="include">
+        </childnode>
+      </node>
+      <node id="3304">
+        <label>optional</label>
+      </node>
+      <node id="3296">
+        <label>Memory/MonotonicAllocator.h</label>
+        <link refid="_monotonic_allocator_8h_source"/>
+        <childnode refid="3275" relation="include">
+        </childnode>
+        <childnode refid="3276" relation="include">
+        </childnode>
+      </node>
+      <node id="3292">
+        <label>vector</label>
+      </node>
+      <node id="3269">
+        <label>Containers/Vector.h</label>
+        <link refid="_vector_8h_source"/>
+        <childnode refid="3270" relation="include">
+        </childnode>
+        <childnode refid="3271" relation="include">
+        </childnode>
+        <childnode refid="3272" relation="include">
+        </childnode>
+        <childnode refid="3273" relation="include">
+        </childnode>
+        <childnode refid="3274" relation="include">
+        </childnode>
+        <childnode refid="3275" relation="include">
+        </childnode>
+        <childnode refid="3276" relation="include">
+        </childnode>
+        <childnode refid="3277" relation="include">
+        </childnode>
+      </node>
+      <node id="3291">
+        <label>Log/Log.h</label>
+        <link refid="_log_8h_source"/>
+        <childnode refid="3276" relation="include">
+        </childnode>
+        <childnode refid="3292" relation="include">
+        </childnode>
+      </node>
+      <node id="3289">
+        <label>Vulkan/VkScopedSwapChain.h</label>
+        <link refid="_vk_scoped_swap_chain_8h_source"/>
+        <childnode refid="3267" relation="include">
+        </childnode>
+        <childnode refid="3276" relation="include">
+        </childnode>
+        <childnode refid="3269" relation="include">
+        </childnode>
+        <childnode refid="3290" relation="include">
+        </childnode>
+      </node>
+      <node id="3302">
+        <label>VkDebug.h</label>
+        <link refid="_vk_debug_8h_source"/>
+        <childnode refid="3267" relation="include">
+        </childnode>
+      </node>
+      <node id="3267">
+        <label>vulkan/vulkan_core.h</label>
+      </node>
+      <node id="3282">
+        <label>boost/preprocessor/repetition/repeat.hpp</label>
+      </node>
+      <node id="3276">
+        <label>Types.h</label>
+      </node>
+      <node id="3300">
+        <label>Vulkan/VkMacros.h</label>
+        <link refid="_vk_macros_8h_source"/>
+        <childnode refid="3267" relation="include">
+        </childnode>
+        <childnode refid="3301" relation="include">
+        </childnode>
+        <childnode refid="3302" relation="include">
+        </childnode>
+        <childnode refid="3291" relation="include">
+        </childnode>
+      </node>
+      <node id="3303">
+        <label>Vulkan/VkTypeMapping.h</label>
+        <link refid="_vk_type_mapping_8h_source"/>
+        <childnode refid="3267" relation="include">
+        </childnode>
+        <childnode refid="3304" relation="include">
+        </childnode>
+        <childnode refid="3278" relation="include">
+        </childnode>
+        <childnode refid="3281" relation="include">
+        </childnode>
+      </node>
+      <node id="3293">
+        <label>Generic/TextureManager.h</label>
+        <link refid="_texture_manager_8h_source"/>
+        <childnode refid="3276" relation="include">
+        </childnode>
+        <childnode refid="3294" relation="include">
+        </childnode>
+        <childnode refid="3296" relation="include">
+        </childnode>
+        <childnode refid="3269" relation="include">
+        </childnode>
+        <childnode refid="3278" relation="include">
+        </childnode>
+        <childnode refid="3291" relation="include">
+        </childnode>
+      </node>
+      <node id="3265">
+        <label>Source/Azura/RenderSystem/Src/Vulkan/VkScopedPipeline.cpp</label>
+        <link refid="_vk_scoped_pipeline_8cpp"/>
+        <childnode refid="3266" relation="include">
+        </childnode>
+        <childnode refid="3275" relation="include">
+        </childnode>
+        <childnode refid="3300" relation="include">
+        </childnode>
+        <childnode refid="3303" relation="include">
+        </childnode>
+      </node>
+      <node id="3271">
+        <label>cstring</label>
+      </node>
+      <node id="3297">
+        <label>Vulkan/VkScopedRenderPass.h</label>
+        <link refid="_vk_scoped_render_pass_8h_source"/>
+        <childnode refid="3267" relation="include">
+        </childnode>
+        <childnode refid="3291" relation="include">
+        </childnode>
+        <childnode refid="3278" relation="include">
+        </childnode>
+        <childnode refid="3290" relation="include">
+        </childnode>
+        <childnode refid="3298" relation="include">
+        </childnode>
+      </node>
+      <node id="3299">
+        <label>Generic/Shader.h</label>
+        <link refid="_shader_8h_source"/>
+        <childnode refid="3278" relation="include">
+        </childnode>
+      </node>
+      <node id="3283">
+        <label>boost/preprocessor/seq/for_each.hpp</label>
+      </node>
+    </incdepgraph>
+    <innernamespace refid="namespace_azura">Azura</innernamespace>
+    <innernamespace refid="namespace_azura_1_1_vulkan">Azura::Vulkan</innernamespace>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <programlisting>
+<codeline lineno="1"><highlight class="preprocessor">#include<sp/>&quot;Vulkan/VkScopedPipeline.h&quot;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="2"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&quot;Memory/Allocator.h&quot;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="3"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&quot;Vulkan/VkMacros.h&quot;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="4"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&quot;Vulkan/VkTypeMapping.h&quot;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="5"><highlight class="normal"></highlight></codeline>
+<codeline lineno="6"><highlight class="normal"></highlight><highlight class="keyword">namespace<sp/></highlight><highlight class="normal"><ref refid="namespace_azura" kindref="compound">Azura</ref><sp/>{</highlight></codeline>
+<codeline lineno="7"><highlight class="normal"></highlight><highlight class="keyword">namespace<sp/></highlight><highlight class="normal">Vulkan<sp/>{</highlight></codeline>
+<codeline lineno="8"><highlight class="normal"></highlight></codeline>
+<codeline lineno="9"><highlight class="normal">VkScopedPipeline::VkScopedPipeline(VkPipeline<sp/>pipeline)</highlight></codeline>
+<codeline lineno="10"><highlight class="normal"><sp/><sp/>:<sp/>m_pipeline(pipeline)<sp/>{</highlight></codeline>
+<codeline lineno="11"><highlight class="normal">}</highlight></codeline>
+<codeline lineno="12"><highlight class="normal"></highlight></codeline>
+<codeline lineno="13"><highlight class="normal">VkPipeline<sp/>VkScopedPipeline::Real()</highlight><highlight class="keyword"><sp/>const<sp/></highlight><highlight class="normal">{</highlight></codeline>
+<codeline lineno="14"><highlight class="normal"><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>m_pipeline;</highlight></codeline>
+<codeline lineno="15"><highlight class="normal">}</highlight></codeline>
+<codeline lineno="16"><highlight class="normal"></highlight></codeline>
+<codeline lineno="17"><highlight class="normal"></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/>VkScopedPipeline::CleanUp(VkDevice<sp/>device)</highlight><highlight class="keyword"><sp/>const<sp/></highlight><highlight class="normal">{</highlight></codeline>
+<codeline lineno="18"><highlight class="normal"><sp/><sp/>vkDestroyPipeline(device,<sp/>m_pipeline,<sp/></highlight><highlight class="keyword">nullptr</highlight><highlight class="normal">);</highlight></codeline>
+<codeline lineno="19"><highlight class="normal">}</highlight></codeline>
+<codeline lineno="20"><highlight class="normal"></highlight></codeline>
+<codeline lineno="21"><highlight class="normal"></highlight><highlight class="comment">//<sp/>TODO(vasumahesh1):<sp/>Figure<sp/>out<sp/>a<sp/>way<sp/>to<sp/>adjust<sp/>size<sp/>properly</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="22"><highlight class="normal">VkPipelineFactory::VkPipelineFactory(VkDevice<sp/>device,<sp/>Memory::Allocator&amp;<sp/>allocator,<sp/>Log<sp/>logger)</highlight></codeline>
+<codeline lineno="23"><highlight class="normal"><sp/><sp/>:<sp/>m_device(device),</highlight></codeline>
+<codeline lineno="24"><highlight class="normal"><sp/><sp/><sp/><sp/>m_bindingInfo(10,<sp/>allocator),</highlight></codeline>
+<codeline lineno="25"><highlight class="normal"><sp/><sp/><sp/><sp/>m_attributeDescription(10,<sp/>allocator),</highlight></codeline>
+<codeline lineno="26"><highlight class="normal"><sp/><sp/><sp/><sp/>m_stages(10,<sp/>allocator),</highlight></codeline>
+<codeline lineno="27"><highlight class="normal"><sp/><sp/><sp/><sp/>log_VulkanRenderSystem(std::move(logger))<sp/>{</highlight></codeline>
+<codeline lineno="28"><highlight class="normal">}</highlight></codeline>
+<codeline lineno="29"><highlight class="normal"></highlight></codeline>
+<codeline lineno="30"><highlight class="normal">VkPipelineFactory&amp;<sp/>VkPipelineFactory::AddBindingDescription(U32<sp/>stride,<sp/>VertexSlot<sp/>slot,<sp/>U32<sp/>binding)<sp/>{</highlight></codeline>
+<codeline lineno="31"><highlight class="normal"><sp/><sp/>VkVertexInputBindingDescription<sp/>bindingDesc;</highlight></codeline>
+<codeline lineno="32"><highlight class="normal"></highlight></codeline>
+<codeline lineno="33"><highlight class="normal"><sp/><sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">auto</highlight><highlight class="normal"><sp/>rate<sp/>=<sp/>ToVkVertexInputRate(slot.m_rate);</highlight></codeline>
+<codeline lineno="34"><highlight class="normal"><sp/><sp/>VERIFY_OPT(log_VulkanRenderSystem,<sp/>rate,<sp/></highlight><highlight class="stringliteral">&quot;Unknown<sp/>Format&quot;</highlight><highlight class="normal">);</highlight></codeline>
+<codeline lineno="35"><highlight class="normal"></highlight></codeline>
+<codeline lineno="36"><highlight class="normal"><sp/><sp/>bindingDesc.binding<sp/><sp/><sp/>=<sp/>binding;</highlight></codeline>
+<codeline lineno="37"><highlight class="normal"><sp/><sp/>bindingDesc.stride<sp/><sp/><sp/><sp/>=<sp/>stride;</highlight></codeline>
+<codeline lineno="38"><highlight class="normal"><sp/><sp/>bindingDesc.inputRate<sp/>=<sp/>rate.value();</highlight></codeline>
+<codeline lineno="39"><highlight class="normal"></highlight></codeline>
+<codeline lineno="40"><highlight class="normal"><sp/><sp/>m_bindingInfo.<ref refid="class_azura_1_1_containers_1_1_vector_1aadc803b734b7481d9d7f2e9f86891ce4" kindref="member">PushBack</ref>(bindingDesc);</highlight></codeline>
+<codeline lineno="41"><highlight class="normal"><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>*</highlight><highlight class="keyword">this</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="42"><highlight class="normal">}</highlight></codeline>
+<codeline lineno="43"><highlight class="normal"></highlight></codeline>
+<codeline lineno="44"><highlight class="normal">VkPipelineFactory&amp;<sp/>VkPipelineFactory::BulkAddAttributeDescription(</highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>VertexSlot&amp;<sp/>vertexSlot,<sp/>U32<sp/>binding)<sp/>{</highlight></codeline>
+<codeline lineno="45"><highlight class="normal"><sp/><sp/></highlight><highlight class="keyword">auto</highlight><highlight class="normal"><sp/>bindingInfo<sp/>=<sp/>m_bindingMap[binding];</highlight></codeline>
+<codeline lineno="46"><highlight class="normal"></highlight></codeline>
+<codeline lineno="47"><highlight class="normal"><sp/><sp/></highlight><highlight class="keywordflow">for</highlight><highlight class="normal"><sp/>(</highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">auto</highlight><highlight class="normal">&amp;<sp/>semanticStride<sp/>:<sp/>vertexSlot.m_stride)<sp/>{</highlight></codeline>
+<codeline lineno="48"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">auto</highlight><highlight class="normal"><sp/>format<sp/>=<sp/>ToVkFormat(semanticStride.m_format);</highlight></codeline>
+<codeline lineno="49"><highlight class="normal"><sp/><sp/><sp/><sp/>LOG_DBG(log_VulkanRenderSystem,<sp/>LOG_LEVEL,<sp/></highlight><highlight class="stringliteral">&quot;Binding<sp/>Vertex<sp/>Attribute:<sp/>Binding:<sp/>%d<sp/><sp/><sp/>Location:<sp/>%d<sp/><sp/><sp/>Format:<sp/>%s&quot;</highlight><highlight class="normal">,<sp/>binding,<sp/>m_currentLocation,<sp/>ToString(semanticStride.m_format).c_str());</highlight></codeline>
+<codeline lineno="50"><highlight class="normal"><sp/><sp/><sp/><sp/>VERIFY_OPT(log_VulkanRenderSystem,<sp/>format,<sp/></highlight><highlight class="stringliteral">&quot;Unknown<sp/>Format&quot;</highlight><highlight class="normal">);</highlight></codeline>
+<codeline lineno="51"><highlight class="normal"></highlight></codeline>
+<codeline lineno="52"><highlight class="normal"><sp/><sp/><sp/><sp/>VkVertexInputAttributeDescription<sp/>attrDesc;</highlight></codeline>
+<codeline lineno="53"><highlight class="normal"><sp/><sp/><sp/><sp/>attrDesc.binding<sp/><sp/>=<sp/>binding;</highlight></codeline>
+<codeline lineno="54"><highlight class="normal"><sp/><sp/><sp/><sp/>attrDesc.location<sp/>=<sp/>m_currentLocation;</highlight></codeline>
+<codeline lineno="55"><highlight class="normal"><sp/><sp/><sp/><sp/>attrDesc.format<sp/><sp/><sp/>=<sp/>format.value();</highlight></codeline>
+<codeline lineno="56"><highlight class="normal"><sp/><sp/><sp/><sp/>attrDesc.offset<sp/><sp/><sp/>=<sp/>bindingInfo.m_offset;</highlight></codeline>
+<codeline lineno="57"><highlight class="normal"></highlight></codeline>
+<codeline lineno="58"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="comment">//<sp/>TODO(vasumahesh1):[FORMATS]:<sp/>Handle<sp/>64bit<sp/>formats<sp/>taking<sp/>2<sp/>locations</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="59"><highlight class="normal"><sp/><sp/><sp/><sp/>m_currentLocation++;</highlight></codeline>
+<codeline lineno="60"><highlight class="normal"></highlight></codeline>
+<codeline lineno="61"><highlight class="normal"><sp/><sp/><sp/><sp/>bindingInfo.m_offset<sp/>+=<sp/>GetFormatSize(semanticStride.m_format);</highlight></codeline>
+<codeline lineno="62"><highlight class="normal"></highlight></codeline>
+<codeline lineno="63"><highlight class="normal"><sp/><sp/><sp/><sp/>m_attributeDescription.<ref refid="class_azura_1_1_containers_1_1_vector_1aadc803b734b7481d9d7f2e9f86891ce4" kindref="member">PushBack</ref>(attrDesc);</highlight></codeline>
+<codeline lineno="64"><highlight class="normal"><sp/><sp/>}</highlight></codeline>
+<codeline lineno="65"><highlight class="normal"></highlight></codeline>
+<codeline lineno="66"><highlight class="normal"><sp/><sp/>m_bindingMap[binding]<sp/>=<sp/>bindingInfo;</highlight></codeline>
+<codeline lineno="67"><highlight class="normal"></highlight></codeline>
+<codeline lineno="68"><highlight class="normal"><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>*</highlight><highlight class="keyword">this</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="69"><highlight class="normal">}</highlight></codeline>
+<codeline lineno="70"><highlight class="normal"></highlight></codeline>
+<codeline lineno="71"><highlight class="normal">VkPipelineFactory&amp;<sp/>VkPipelineFactory::SetInputAssemblyStage(PrimitiveTopology<sp/>topology)<sp/>{</highlight></codeline>
+<codeline lineno="72"><highlight class="normal"><sp/><sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">auto</highlight><highlight class="normal"><sp/>vkTopology<sp/>=<sp/>ToVkPrimitiveTopology(topology);</highlight></codeline>
+<codeline lineno="73"><highlight class="normal"><sp/><sp/>VERIFY_OPT(log_VulkanRenderSystem,<sp/>vkTopology,<sp/></highlight><highlight class="stringliteral">&quot;Unknown<sp/>Topology&quot;</highlight><highlight class="normal">);</highlight></codeline>
+<codeline lineno="74"><highlight class="normal"></highlight></codeline>
+<codeline lineno="75"><highlight class="normal"><sp/><sp/>m_inputAssemblyStage.sType<sp/><sp/><sp/><sp/>=<sp/>VK_STRUCTURE_TYPE_PIPELINE_INPUT_ASSEMBLY_STATE_CREATE_INFO;</highlight></codeline>
+<codeline lineno="76"><highlight class="normal"><sp/><sp/>m_inputAssemblyStage.topology<sp/>=<sp/>vkTopology.value();</highlight></codeline>
+<codeline lineno="77"><highlight class="normal"></highlight></codeline>
+<codeline lineno="78"><highlight class="normal"><sp/><sp/></highlight><highlight class="comment">//<sp/>TODO(vasumahesh1):<sp/>Might<sp/>need<sp/>to<sp/>expose</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="79"><highlight class="normal"><sp/><sp/>m_inputAssemblyStage.primitiveRestartEnable<sp/>=<sp/>VK_FALSE;</highlight></codeline>
+<codeline lineno="80"><highlight class="normal"></highlight></codeline>
+<codeline lineno="81"><highlight class="normal"><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>*</highlight><highlight class="keyword">this</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="82"><highlight class="normal">}</highlight></codeline>
+<codeline lineno="83"><highlight class="normal"></highlight></codeline>
+<codeline lineno="84"><highlight class="normal">VkPipelineFactory&amp;<sp/>VkPipelineFactory::SetViewportStage(ViewportDimensions<sp/>viewportDimensions,</highlight></codeline>
+<codeline lineno="85"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>VkScopedSwapChain&amp;<sp/>swapChain)<sp/>{</highlight></codeline>
+<codeline lineno="86"><highlight class="normal"><sp/><sp/>m_viewport.x<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>=<sp/>viewportDimensions.m_x;</highlight></codeline>
+<codeline lineno="87"><highlight class="normal"><sp/><sp/>m_viewport.y<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>=<sp/>viewportDimensions.m_height<sp/>-<sp/>viewportDimensions.m_y;</highlight></codeline>
+<codeline lineno="88"><highlight class="normal"><sp/><sp/>m_viewport.width<sp/><sp/><sp/><sp/>=<sp/>viewportDimensions.m_width;</highlight></codeline>
+<codeline lineno="89"><highlight class="normal"><sp/><sp/>m_viewport.height<sp/><sp/><sp/>=<sp/>-viewportDimensions.m_height;<sp/></highlight><highlight class="comment">//<sp/>Flipped</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="90"><highlight class="normal"><sp/><sp/>m_viewport.minDepth<sp/>=<sp/>viewportDimensions.m_minDepth;</highlight></codeline>
+<codeline lineno="91"><highlight class="normal"><sp/><sp/>m_viewport.maxDepth<sp/>=<sp/>viewportDimensions.m_maxDepth;</highlight></codeline>
+<codeline lineno="92"><highlight class="normal"></highlight></codeline>
+<codeline lineno="93"><highlight class="normal"><sp/><sp/></highlight><highlight class="comment">//<sp/>TODO(vasumahesh1):<sp/>Might<sp/>need<sp/>custom<sp/>scissoring</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="94"><highlight class="normal"><sp/><sp/>m_scissors.offset<sp/>=<sp/>{0,<sp/>0};</highlight></codeline>
+<codeline lineno="95"><highlight class="normal"><sp/><sp/>m_scissors.extent<sp/>=<sp/>swapChain.GetExtent();</highlight></codeline>
+<codeline lineno="96"><highlight class="normal"></highlight></codeline>
+<codeline lineno="97"><highlight class="normal"><sp/><sp/></highlight><highlight class="comment">//<sp/>TODO(vasumahesh1):<sp/>Might<sp/>need<sp/>arrays<sp/>here<sp/>one<sp/>day</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="98"><highlight class="normal"><sp/><sp/>m_viewportStage.sType<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>=<sp/>VK_STRUCTURE_TYPE_PIPELINE_VIEWPORT_STATE_CREATE_INFO;</highlight></codeline>
+<codeline lineno="99"><highlight class="normal"><sp/><sp/>m_viewportStage.viewportCount<sp/>=<sp/>1;</highlight></codeline>
+<codeline lineno="100"><highlight class="normal"><sp/><sp/>m_viewportStage.pViewports<sp/><sp/><sp/><sp/>=<sp/>&amp;m_viewport;</highlight></codeline>
+<codeline lineno="101"><highlight class="normal"><sp/><sp/>m_viewportStage.scissorCount<sp/><sp/>=<sp/>1;</highlight></codeline>
+<codeline lineno="102"><highlight class="normal"><sp/><sp/>m_viewportStage.pScissors<sp/><sp/><sp/><sp/><sp/>=<sp/>&amp;m_scissors;</highlight></codeline>
+<codeline lineno="103"><highlight class="normal"></highlight></codeline>
+<codeline lineno="104"><highlight class="normal"><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>*</highlight><highlight class="keyword">this</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="105"><highlight class="normal">}</highlight></codeline>
+<codeline lineno="106"><highlight class="normal"></highlight></codeline>
+<codeline lineno="107"><highlight class="normal">VkPipelineFactory&amp;<sp/>VkPipelineFactory::SetRasterizerStage(CullMode<sp/>cullMode,<sp/>FrontFace<sp/>faceOrder)<sp/>{</highlight></codeline>
+<codeline lineno="108"><highlight class="normal"><sp/><sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">auto</highlight><highlight class="normal"><sp/>vkCullMode<sp/>=<sp/>ToVkCullModeFlags(cullMode);</highlight></codeline>
+<codeline lineno="109"><highlight class="normal"><sp/><sp/>VERIFY_OPT(log_VulkanRenderSystem,<sp/>vkCullMode,<sp/></highlight><highlight class="stringliteral">&quot;Unknown<sp/>Cull<sp/>Mode&quot;</highlight><highlight class="normal">);</highlight></codeline>
+<codeline lineno="110"><highlight class="normal"></highlight></codeline>
+<codeline lineno="111"><highlight class="normal"><sp/><sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">auto</highlight><highlight class="normal"><sp/>vkFrontFace<sp/>=<sp/>ToVkFrontFace(faceOrder);</highlight></codeline>
+<codeline lineno="112"><highlight class="normal"><sp/><sp/>VERIFY_OPT(log_VulkanRenderSystem,<sp/>vkFrontFace,<sp/></highlight><highlight class="stringliteral">&quot;Unknown<sp/>Face<sp/>Order&quot;</highlight><highlight class="normal">);</highlight></codeline>
+<codeline lineno="113"><highlight class="normal"></highlight></codeline>
+<codeline lineno="114"><highlight class="normal"><sp/><sp/></highlight><highlight class="comment">//<sp/>TODO(vasumahesh1):<sp/>Might<sp/>need<sp/>to<sp/>expose<sp/>some<sp/>values<sp/>later<sp/>on</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="115"><highlight class="normal"><sp/><sp/>m_rasterizerStage.sType<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>=<sp/>VK_STRUCTURE_TYPE_PIPELINE_RASTERIZATION_STATE_CREATE_INFO;</highlight></codeline>
+<codeline lineno="116"><highlight class="normal"><sp/><sp/>m_rasterizerStage.depthClampEnable<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>=<sp/>VK_FALSE;</highlight></codeline>
+<codeline lineno="117"><highlight class="normal"><sp/><sp/>m_rasterizerStage.rasterizerDiscardEnable<sp/>=<sp/>VK_FALSE;</highlight></codeline>
+<codeline lineno="118"><highlight class="normal"><sp/><sp/>m_rasterizerStage.polygonMode<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>=<sp/>VK_POLYGON_MODE_FILL;</highlight></codeline>
+<codeline lineno="119"><highlight class="normal"><sp/><sp/>m_rasterizerStage.lineWidth<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>=<sp/>1.0f;</highlight></codeline>
+<codeline lineno="120"><highlight class="normal"><sp/><sp/>m_rasterizerStage.cullMode<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>=<sp/>vkCullMode.value();</highlight></codeline>
+<codeline lineno="121"><highlight class="normal"><sp/><sp/>m_rasterizerStage.frontFace<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>=<sp/>vkFrontFace.value();</highlight></codeline>
+<codeline lineno="122"><highlight class="normal"><sp/><sp/>m_rasterizerStage.depthBiasEnable<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>=<sp/>VK_FALSE;</highlight></codeline>
+<codeline lineno="123"><highlight class="normal"></highlight></codeline>
+<codeline lineno="124"><highlight class="normal"><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>*</highlight><highlight class="keyword">this</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="125"><highlight class="normal">}</highlight></codeline>
+<codeline lineno="126"><highlight class="normal"></highlight></codeline>
+<codeline lineno="127"><highlight class="normal"></highlight><highlight class="comment">//<sp/>Not<sp/>Supported<sp/>Yet</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="128"><highlight class="normal">VkPipelineFactory&amp;<sp/>VkPipelineFactory::SetMultisampleStage()<sp/>{</highlight></codeline>
+<codeline lineno="129"><highlight class="normal"><sp/><sp/>m_multisampleStage.sType<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>=<sp/>VK_STRUCTURE_TYPE_PIPELINE_MULTISAMPLE_STATE_CREATE_INFO;</highlight></codeline>
+<codeline lineno="130"><highlight class="normal"><sp/><sp/>m_multisampleStage.sampleShadingEnable<sp/><sp/>=<sp/>VK_FALSE;</highlight></codeline>
+<codeline lineno="131"><highlight class="normal"><sp/><sp/>m_multisampleStage.rasterizationSamples<sp/>=<sp/>VK_SAMPLE_COUNT_1_BIT;</highlight></codeline>
+<codeline lineno="132"><highlight class="normal"></highlight></codeline>
+<codeline lineno="133"><highlight class="normal"><sp/><sp/></highlight><highlight class="comment">//<sp/>TODO(vasumahesh1):<sp/>Add<sp/>Support</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="134"><highlight class="normal"></highlight></codeline>
+<codeline lineno="135"><highlight class="normal"><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>*</highlight><highlight class="keyword">this</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="136"><highlight class="normal">}</highlight></codeline>
+<codeline lineno="137"><highlight class="normal"></highlight></codeline>
+<codeline lineno="138"><highlight class="normal">VkPipelineFactory&amp;<sp/>VkPipelineFactory::SetPipelineLayout(VkPipelineLayout<sp/>layout)<sp/>{</highlight></codeline>
+<codeline lineno="139"><highlight class="normal"><sp/><sp/>m_layout<sp/>=<sp/>layout;</highlight></codeline>
+<codeline lineno="140"><highlight class="normal"><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>*</highlight><highlight class="keyword">this</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="141"><highlight class="normal">}</highlight></codeline>
+<codeline lineno="142"><highlight class="normal"></highlight></codeline>
+<codeline lineno="143"><highlight class="normal">VkPipelineFactory&amp;<sp/>VkPipelineFactory::AddShaderStage(</highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>VkPipelineShaderStageCreateInfo&amp;<sp/>shaderStageCreateInfo)<sp/>{</highlight></codeline>
+<codeline lineno="144"><highlight class="normal"><sp/><sp/></highlight><highlight class="comment">//<sp/>TODO(vasumahesh1):<sp/>Emplace?</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="145"><highlight class="normal"><sp/><sp/>m_stages.<ref refid="class_azura_1_1_containers_1_1_vector_1aadc803b734b7481d9d7f2e9f86891ce4" kindref="member">PushBack</ref>(shaderStageCreateInfo);</highlight></codeline>
+<codeline lineno="146"><highlight class="normal"><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>*</highlight><highlight class="keyword">this</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="147"><highlight class="normal">}</highlight></codeline>
+<codeline lineno="148"><highlight class="normal"></highlight></codeline>
+<codeline lineno="149"><highlight class="normal"></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/>VkPipelineFactory::Submit(Containers::Vector&lt;std::reference_wrapper&lt;VkScopedRenderPass&gt;&gt;<sp/>renderPasses,</highlight></codeline>
+<codeline lineno="150"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>Containers::Vector&lt;VkScopedPipeline&gt;&amp;<sp/>result)</highlight><highlight class="keyword"><sp/>const<sp/></highlight><highlight class="normal">{</highlight></codeline>
+<codeline lineno="151"><highlight class="normal"><sp/><sp/>result.Reserve(renderPasses.GetSize());</highlight></codeline>
+<codeline lineno="152"><highlight class="normal"></highlight></codeline>
+<codeline lineno="153"><highlight class="normal"><sp/><sp/>VkPipelineVertexInputStateCreateInfo<sp/>vertexInputInfo<sp/>=<sp/>{};</highlight></codeline>
+<codeline lineno="154"><highlight class="normal"><sp/><sp/>vertexInputInfo.sType<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>=<sp/>VK_STRUCTURE_TYPE_PIPELINE_VERTEX_INPUT_STATE_CREATE_INFO;</highlight></codeline>
+<codeline lineno="155"><highlight class="normal"><sp/><sp/>vertexInputInfo.vertexBindingDescriptionCount<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>=<sp/>m_bindingInfo.GetSize();</highlight></codeline>
+<codeline lineno="156"><highlight class="normal"><sp/><sp/>vertexInputInfo.pVertexBindingDescriptions<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>=<sp/>m_bindingInfo.<ref refid="class_azura_1_1_containers_1_1_vector_1a6e3fd44d2821bb97f170b6e5443ec57e" kindref="member">Data</ref>();</highlight></codeline>
+<codeline lineno="157"><highlight class="normal"><sp/><sp/>vertexInputInfo.vertexAttributeDescriptionCount<sp/><sp/><sp/><sp/><sp/><sp/>=<sp/>m_attributeDescription.GetSize();</highlight></codeline>
+<codeline lineno="158"><highlight class="normal"><sp/><sp/>vertexInputInfo.pVertexAttributeDescriptions<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>=<sp/>m_attributeDescription.<ref refid="class_azura_1_1_containers_1_1_vector_1a6e3fd44d2821bb97f170b6e5443ec57e" kindref="member">Data</ref>();</highlight></codeline>
+<codeline lineno="159"><highlight class="normal"></highlight></codeline>
+<codeline lineno="160"><highlight class="normal"><sp/><sp/>LOG_DBG(log_VulkanRenderSystem,<sp/>LOG_LEVEL,<sp/></highlight><highlight class="stringliteral">&quot;Creating<sp/>Pipeline&quot;</highlight><highlight class="normal">);</highlight></codeline>
+<codeline lineno="161"><highlight class="normal"><sp/><sp/>LOG_DBG(log_VulkanRenderSystem,<sp/>LOG_LEVEL,<sp/></highlight><highlight class="stringliteral">&quot;Num<sp/>Attribute<sp/>Descriptions:<sp/>%d&quot;</highlight><highlight class="normal">,<sp/>m_attributeDescription.GetSize());</highlight></codeline>
+<codeline lineno="162"><highlight class="normal"><sp/><sp/>LOG_DBG(log_VulkanRenderSystem,<sp/>LOG_LEVEL,<sp/></highlight><highlight class="stringliteral">&quot;Num<sp/>Binding<sp/>Info:<sp/>%d&quot;</highlight><highlight class="normal">,<sp/>m_bindingInfo.GetSize());</highlight></codeline>
+<codeline lineno="163"><highlight class="normal"></highlight></codeline>
+<codeline lineno="164"><highlight class="normal"><sp/><sp/></highlight><highlight class="comment">//<sp/>TODO(vasumahesh1):[DEPTH-STENCIL]:<sp/>Expose<sp/>this<sp/>via<sp/>an<sp/>API</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="165"><highlight class="normal"><sp/><sp/>VkPipelineDepthStencilStateCreateInfo<sp/>depthStencil<sp/>=<sp/>{};</highlight></codeline>
+<codeline lineno="166"><highlight class="normal"><sp/><sp/>depthStencil.sType<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>=<sp/>VK_STRUCTURE_TYPE_PIPELINE_DEPTH_STENCIL_STATE_CREATE_INFO;</highlight></codeline>
+<codeline lineno="167"><highlight class="normal"><sp/><sp/>depthStencil.depthTestEnable<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>=<sp/>VK_TRUE;</highlight></codeline>
+<codeline lineno="168"><highlight class="normal"><sp/><sp/>depthStencil.depthWriteEnable<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>=<sp/>VK_TRUE;</highlight></codeline>
+<codeline lineno="169"><highlight class="normal"><sp/><sp/>depthStencil.depthCompareOp<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>=<sp/>VK_COMPARE_OP_LESS;<sp/></highlight><highlight class="comment">//<sp/>*</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="170"><highlight class="normal"><sp/><sp/>depthStencil.depthBoundsTestEnable<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>=<sp/>VK_FALSE;</highlight></codeline>
+<codeline lineno="171"><highlight class="normal"><sp/><sp/>depthStencil.minDepthBounds<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>=<sp/>0.0f;<sp/></highlight><highlight class="comment">//<sp/>Optional</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="172"><highlight class="normal"><sp/><sp/>depthStencil.maxDepthBounds<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>=<sp/>1.0f;<sp/></highlight><highlight class="comment">//<sp/>Optional</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="173"><highlight class="normal"><sp/><sp/>depthStencil.stencilTestEnable<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>=<sp/>VK_FALSE;</highlight></codeline>
+<codeline lineno="174"><highlight class="normal"><sp/><sp/>depthStencil.front<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>=<sp/>{};<sp/></highlight><highlight class="comment">//<sp/>Optional</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="175"><highlight class="normal"><sp/><sp/>depthStencil.back<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>=<sp/>{};<sp/></highlight><highlight class="comment">//<sp/>Optional</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="176"><highlight class="normal"></highlight></codeline>
+<codeline lineno="177"><highlight class="normal"><sp/><sp/>VkGraphicsPipelineCreateInfo<sp/>pipelineInfo<sp/>=<sp/>{};</highlight></codeline>
+<codeline lineno="178"><highlight class="normal"><sp/><sp/>pipelineInfo.sType<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>=<sp/>VK_STRUCTURE_TYPE_GRAPHICS_PIPELINE_CREATE_INFO;</highlight></codeline>
+<codeline lineno="179"><highlight class="normal"></highlight></codeline>
+<codeline lineno="180"><highlight class="normal"><sp/><sp/>pipelineInfo.pVertexInputState<sp/><sp/><sp/>=<sp/>&amp;vertexInputInfo;</highlight></codeline>
+<codeline lineno="181"><highlight class="normal"><sp/><sp/>pipelineInfo.pInputAssemblyState<sp/>=<sp/>&amp;m_inputAssemblyStage;</highlight></codeline>
+<codeline lineno="182"><highlight class="normal"><sp/><sp/>pipelineInfo.pViewportState<sp/><sp/><sp/><sp/><sp/><sp/>=<sp/>&amp;m_viewportStage;</highlight></codeline>
+<codeline lineno="183"><highlight class="normal"><sp/><sp/>pipelineInfo.pRasterizationState<sp/>=<sp/>&amp;m_rasterizerStage;</highlight></codeline>
+<codeline lineno="184"><highlight class="normal"><sp/><sp/>pipelineInfo.pMultisampleState<sp/><sp/><sp/>=<sp/>&amp;m_multisampleStage;</highlight></codeline>
+<codeline lineno="185"><highlight class="normal"><sp/><sp/>pipelineInfo.pDepthStencilState<sp/><sp/>=<sp/>&amp;depthStencil;</highlight></codeline>
+<codeline lineno="186"><highlight class="normal"><sp/><sp/>pipelineInfo.pDynamicState<sp/><sp/><sp/><sp/><sp/><sp/><sp/>=<sp/></highlight><highlight class="keyword">nullptr</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="187"><highlight class="normal"><sp/><sp/>pipelineInfo.layout<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>=<sp/>m_layout;</highlight></codeline>
+<codeline lineno="188"><highlight class="normal"></highlight></codeline>
+<codeline lineno="189"><highlight class="normal"><sp/><sp/>pipelineInfo.subpass<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>=<sp/>0;</highlight></codeline>
+<codeline lineno="190"><highlight class="normal"><sp/><sp/>pipelineInfo.basePipelineHandle<sp/>=<sp/>VK_NULL_HANDLE;</highlight></codeline>
+<codeline lineno="191"><highlight class="normal"><sp/><sp/>pipelineInfo.basePipelineIndex<sp/><sp/>=<sp/>-1;</highlight></codeline>
+<codeline lineno="192"><highlight class="normal"></highlight></codeline>
+<codeline lineno="193"><highlight class="normal"><sp/><sp/>VkPipelineColorBlendStateCreateInfo<sp/>colorBlendStage{};</highlight></codeline>
+<codeline lineno="194"><highlight class="normal"><sp/><sp/>colorBlendStage.sType<sp/>=<sp/>VK_STRUCTURE_TYPE_PIPELINE_COLOR_BLEND_STATE_CREATE_INFO;</highlight></codeline>
+<codeline lineno="195"><highlight class="normal"></highlight></codeline>
+<codeline lineno="196"><highlight class="normal"><sp/><sp/></highlight><highlight class="keywordflow">for</highlight><highlight class="normal"><sp/>(</highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">auto</highlight><highlight class="normal">&amp;<sp/>renderPass<sp/>:<sp/>renderPasses)<sp/>{</highlight></codeline>
+<codeline lineno="197"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">auto</highlight><highlight class="normal">&amp;<sp/>colorBlendAttachments<sp/>=<sp/>renderPass.get().GetColorBlendAttachments();</highlight></codeline>
+<codeline lineno="198"><highlight class="normal"></highlight></codeline>
+<codeline lineno="199"><highlight class="normal"><sp/><sp/><sp/><sp/>colorBlendStage.logicOpEnable<sp/><sp/><sp/>=<sp/>VK_FALSE;</highlight></codeline>
+<codeline lineno="200"><highlight class="normal"><sp/><sp/><sp/><sp/>colorBlendStage.attachmentCount<sp/>=<sp/>colorBlendAttachments.GetSize();</highlight></codeline>
+<codeline lineno="201"><highlight class="normal"><sp/><sp/><sp/><sp/>colorBlendStage.pAttachments<sp/><sp/><sp/><sp/>=<sp/>colorBlendAttachments.Data();</highlight></codeline>
+<codeline lineno="202"><highlight class="normal"><sp/><sp/><sp/><sp/>pipelineInfo.pColorBlendState<sp/><sp/><sp/>=<sp/>&amp;colorBlendStage;</highlight></codeline>
+<codeline lineno="203"><highlight class="normal"></highlight></codeline>
+<codeline lineno="204"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">auto</highlight><highlight class="normal">&amp;<sp/>stages<sp/>=<sp/>renderPass.get().GetShaderStageInfo();</highlight></codeline>
+<codeline lineno="205"><highlight class="normal"></highlight></codeline>
+<codeline lineno="206"><highlight class="normal"><sp/><sp/><sp/><sp/>pipelineInfo.stageCount<sp/>=<sp/>stages.GetSize();</highlight></codeline>
+<codeline lineno="207"><highlight class="normal"><sp/><sp/><sp/><sp/>pipelineInfo.pStages<sp/><sp/><sp/><sp/>=<sp/>stages.Data();</highlight></codeline>
+<codeline lineno="208"><highlight class="normal"><sp/><sp/><sp/><sp/>pipelineInfo.renderPass<sp/>=<sp/>renderPass.get().GetRenderPass();</highlight></codeline>
+<codeline lineno="209"><highlight class="normal"></highlight></codeline>
+<codeline lineno="210"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="comment">//<sp/>Locally<sp/>assigned<sp/>Shaders<sp/>present</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="211"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">if</highlight><highlight class="normal"><sp/>(m_stages.GetSize()<sp/>&gt;<sp/>0)<sp/>{</highlight></codeline>
+<codeline lineno="212"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/>pipelineInfo.stageCount<sp/>=<sp/>m_stages.GetSize();</highlight></codeline>
+<codeline lineno="213"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/>pipelineInfo.pStages<sp/><sp/><sp/><sp/>=<sp/>m_stages.<ref refid="class_azura_1_1_containers_1_1_vector_1a6e3fd44d2821bb97f170b6e5443ec57e" kindref="member">Data</ref>();</highlight></codeline>
+<codeline lineno="214"><highlight class="normal"><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="215"><highlight class="normal"></highlight></codeline>
+<codeline lineno="216"><highlight class="normal"><sp/><sp/><sp/><sp/>LOG_DBG(log_VulkanRenderSystem,<sp/>LOG_LEVEL,<sp/></highlight><highlight class="stringliteral">&quot;Pipeline<sp/>Creation:<sp/>Local<sp/>Shader<sp/>Stages:<sp/>%d&quot;</highlight><highlight class="normal">,<sp/>stages.GetSize());</highlight></codeline>
+<codeline lineno="217"><highlight class="normal"><sp/><sp/><sp/><sp/>LOG_DBG(log_VulkanRenderSystem,<sp/>LOG_LEVEL,<sp/></highlight><highlight class="stringliteral">&quot;Pipeline<sp/>Creation:<sp/>Render<sp/>Pass<sp/>Shader<sp/>Stages:<sp/>%d&quot;</highlight><highlight class="normal">,<sp/>stages.GetSize());</highlight></codeline>
+<codeline lineno="218"><highlight class="normal"></highlight></codeline>
+<codeline lineno="219"><highlight class="normal"><sp/><sp/><sp/><sp/>VkPipeline<sp/>pipeline;</highlight></codeline>
+<codeline lineno="220"><highlight class="normal"><sp/><sp/><sp/><sp/>VERIFY_VK_OP(log_VulkanRenderSystem,<sp/>vkCreateGraphicsPipelines(m_device,<sp/>VK_NULL_HANDLE,<sp/>1,<sp/>&amp;pipelineInfo,<sp/></highlight><highlight class="keyword">nullptr</highlight><highlight class="normal">,</highlight></codeline>
+<codeline lineno="221"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>&amp;pipeline),</highlight></codeline>
+<codeline lineno="222"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="stringliteral">&quot;Failed<sp/>to<sp/>create<sp/>pipeline&quot;</highlight><highlight class="normal">);</highlight></codeline>
+<codeline lineno="223"><highlight class="normal"></highlight></codeline>
+<codeline lineno="224"><highlight class="normal"><sp/><sp/><sp/><sp/>result.PushBack(VkScopedPipeline(pipeline));</highlight></codeline>
+<codeline lineno="225"><highlight class="normal"><sp/><sp/>}</highlight></codeline>
+<codeline lineno="226"><highlight class="normal">}</highlight></codeline>
+<codeline lineno="227"><highlight class="normal">}<sp/></highlight><highlight class="comment">//<sp/>namespace<sp/>Vulkan</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="228"><highlight class="normal">}<sp/></highlight><highlight class="comment">//<sp/>namespace<sp/>Azura</highlight><highlight class="normal"></highlight></codeline>
+    </programlisting>
+    <location file="Source/Azura/RenderSystem/Src/Vulkan/VkScopedPipeline.cpp"/>
+  </compounddef>
+</doxygen>

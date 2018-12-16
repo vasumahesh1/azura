@@ -1,0 +1,99 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.8.14">
+  <compounddef id="_material_8h" kind="file" language="C++">
+    <compoundname>Material.h</compoundname>
+    <includes refid="_dibella_2_inc_2_core_2_types_8h" local="yes">../../Core/Types.h</includes>
+    <includes refid="_dibella_2_inc_2_core_2_utils_8h" local="yes">../../Core/Utils.h</includes>
+    <includedby refid="_material_8cpp" local="yes">Source/Dibella/Src/Materials/Primitives/Material.cpp</includedby>
+    <incdepgraph>
+      <node id="4918">
+        <label>mathfu/vector.h</label>
+      </node>
+      <node id="4921">
+        <label>Constants.h</label>
+        <link refid="_dibella_2_inc_2_core_2_constants_8h_source"/>
+        <childnode refid="4913" relation="include">
+        </childnode>
+      </node>
+      <node id="4912">
+        <label>Source/Dibella/Inc/Materials/Primitives/Material.h</label>
+        <link refid="_material_8h"/>
+        <childnode refid="4913" relation="include">
+        </childnode>
+        <childnode refid="4919" relation="include">
+        </childnode>
+      </node>
+      <node id="4919">
+        <label>../../Core/Utils.h</label>
+        <link refid="_dibella_2_inc_2_core_2_utils_8h_source"/>
+        <childnode refid="4920" relation="include">
+        </childnode>
+        <childnode refid="4921" relation="include">
+        </childnode>
+        <childnode refid="4913" relation="include">
+        </childnode>
+      </node>
+      <node id="4916">
+        <label>string</label>
+      </node>
+      <node id="4913">
+        <label>../../Core/Types.h</label>
+        <link refid="_dibella_2_inc_2_core_2_types_8h_source"/>
+        <childnode refid="4914" relation="include">
+        </childnode>
+        <childnode refid="4915" relation="include">
+        </childnode>
+        <childnode refid="4916" relation="include">
+        </childnode>
+        <childnode refid="4917" relation="include">
+        </childnode>
+        <childnode refid="4918" relation="include">
+        </childnode>
+      </node>
+      <node id="4914">
+        <label>ToolsCore.h</label>
+      </node>
+      <node id="4915">
+        <label>cstddef</label>
+      </node>
+      <node id="4917">
+        <label>mathfu/matrix.h</label>
+      </node>
+      <node id="4920">
+        <label>algorithm</label>
+      </node>
+    </incdepgraph>
+    <innerclass refid="class_dibella_1_1_material" prot="public">Dibella::Material</innerclass>
+    <innernamespace refid="namespace_dibella">Dibella</innernamespace>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <programlisting>
+<codeline lineno="1"><highlight class="preprocessor">#pragma<sp/>once</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="2"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&quot;../../Core/Types.h&quot;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="3"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&quot;../../Core/Utils.h&quot;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="4"><highlight class="normal"></highlight></codeline>
+<codeline lineno="5"><highlight class="normal"></highlight><highlight class="keyword">namespace<sp/></highlight><highlight class="normal"><ref refid="namespace_dibella" kindref="compound">Dibella</ref><sp/>{</highlight></codeline>
+<codeline lineno="6"><highlight class="normal"></highlight><highlight class="keyword">class<sp/></highlight><highlight class="normal">ImageHandler;</highlight></codeline>
+<codeline lineno="7"><highlight class="normal"></highlight><highlight class="keyword">class<sp/></highlight><highlight class="normal">Allocator;</highlight></codeline>
+<codeline lineno="8"><highlight class="normal"></highlight><highlight class="keyword">class<sp/></highlight><highlight class="normal">Intersection;</highlight></codeline>
+<codeline lineno="9"><highlight class="normal"></highlight></codeline>
+<codeline lineno="10" refid="class_dibella_1_1_material" refkind="compound"><highlight class="normal"></highlight><highlight class="keyword">class<sp/></highlight><highlight class="normal"><ref refid="class_dibella_1_1_material" kindref="compound">Material</ref><sp/>{</highlight></codeline>
+<codeline lineno="11"><highlight class="normal"><sp/></highlight><highlight class="keyword">public</highlight><highlight class="normal">:</highlight></codeline>
+<codeline lineno="12"><highlight class="normal"><sp/><sp/></highlight><highlight class="keyword">virtual</highlight><highlight class="normal"><sp/>~<ref refid="class_dibella_1_1_material" kindref="compound">Material</ref>()<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>=<sp/></highlight><highlight class="keywordflow">default</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="13"><highlight class="normal"><sp/><sp/><ref refid="class_dibella_1_1_material" kindref="compound">Material</ref>(</highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/><ref refid="class_dibella_1_1_material" kindref="compound">Material</ref>&amp;<sp/>other)<sp/><sp/><sp/><sp/><sp/>=<sp/></highlight><highlight class="keywordflow">default</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="14"><highlight class="normal"><sp/><sp/><ref refid="class_dibella_1_1_material" kindref="compound">Material</ref>(<ref refid="class_dibella_1_1_material" kindref="compound">Material</ref>&amp;&amp;<sp/>other)<sp/>noexcept<sp/>=<sp/></highlight><highlight class="keywordflow">default</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="15"><highlight class="normal"><sp/><sp/><ref refid="class_dibella_1_1_material" kindref="compound">Material</ref>&amp;<sp/>operator=(</highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/><ref refid="class_dibella_1_1_material" kindref="compound">Material</ref>&amp;<sp/>other)<sp/>=<sp/></highlight><highlight class="keywordflow">default</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="16"><highlight class="normal"><sp/><sp/><ref refid="class_dibella_1_1_material" kindref="compound">Material</ref>&amp;<sp/>operator=(<ref refid="class_dibella_1_1_material" kindref="compound">Material</ref>&amp;&amp;<sp/>other)<sp/>noexcept<sp/>=<sp/></highlight><highlight class="keywordflow">default</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="17"><highlight class="normal"></highlight></codeline>
+<codeline lineno="18"><highlight class="normal"><sp/><sp/></highlight><highlight class="keyword">virtual</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/>GenerateBSDF(<ref refid="class_dibella_1_1_intersection" kindref="compound">Intersection</ref>*<sp/>isect,<sp/>Allocator*<sp/>allocator)<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>=<sp/>0;</highlight></codeline>
+<codeline lineno="19"><highlight class="normal"></highlight></codeline>
+<codeline lineno="20"><highlight class="normal"><sp/><sp/></highlight><highlight class="comment">//<sp/>TODO:<sp/>[REMOVAL]<sp/>Useless<sp/>extra<sp/>call?</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="21"><highlight class="normal"><sp/><sp/></highlight><highlight class="keyword">static</highlight><highlight class="normal"><sp/>Color3f<sp/>GetImageColor(</highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>Point2f&amp;<sp/>uv,<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/><ref refid="class_dibella_1_1_image_handler" kindref="compound">ImageHandler</ref>*<sp/>handle);</highlight></codeline>
+<codeline lineno="22"><highlight class="normal">};</highlight></codeline>
+<codeline lineno="23"><highlight class="normal">}<sp/><sp/></highlight><highlight class="comment">//<sp/>namespace<sp/>Dibella</highlight><highlight class="normal"></highlight></codeline>
+    </programlisting>
+    <location file="Source/Dibella/Inc/Materials/Primitives/Material.h"/>
+  </compounddef>
+</doxygen>

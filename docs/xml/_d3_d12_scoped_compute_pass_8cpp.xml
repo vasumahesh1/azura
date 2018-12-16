@@ -1,0 +1,835 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.8.14">
+  <compounddef id="_d3_d12_scoped_compute_pass_8cpp" kind="file" language="C++">
+    <compoundname>D3D12ScopedComputePass.cpp</compoundname>
+    <includes refid="_d3_d12_scoped_compute_pass_8h" local="yes">D3D12/D3D12ScopedComputePass.h</includes>
+    <includes refid="_d3_d12_macros_8h" local="yes">D3D12/D3D12Macros.h</includes>
+    <includes refid="_monotonic_allocator_8h" local="yes">Memory/MonotonicAllocator.h</includes>
+    <includes refid="_memory_factory_8h" local="yes">Memory/MemoryFactory.h</includes>
+    <includes refid="_d3_d12_type_mapping_8h" local="yes">D3D12/D3D12TypeMapping.h</includes>
+    <incdepgraph>
+      <node id="2231">
+        <label>d3dx12.h</label>
+        <link refid="d3dx12_8h_source"/>
+        <childnode refid="2203" relation="include">
+        </childnode>
+      </node>
+      <node id="2212">
+        <label>functional</label>
+      </node>
+      <node id="2202">
+        <label>windows.h</label>
+      </node>
+      <node id="2213">
+        <label>iterator</label>
+      </node>
+      <node id="2227">
+        <label>D3D12/D3D12ScopedImage.h</label>
+        <link refid="_d3_d12_scoped_image_8h_source"/>
+        <childnode refid="2199" relation="include">
+        </childnode>
+        <childnode refid="2201" relation="include">
+        </childnode>
+      </node>
+      <node id="2224">
+        <label>Utils/Hash.h</label>
+        <link refid="_hash_8h_source"/>
+        <childnode refid="2198" relation="include">
+        </childnode>
+      </node>
+      <node id="2244">
+        <label>Memory/MemoryFactory.h</label>
+        <link refid="_memory_factory_8h_source"/>
+        <childnode refid="2245" relation="include">
+        </childnode>
+        <childnode refid="2247" relation="include">
+        </childnode>
+        <childnode refid="2198" relation="include">
+        </childnode>
+      </node>
+      <node id="2235">
+        <label>Renderer.h</label>
+        <link refid="_renderer_8h_source"/>
+        <childnode refid="2217" relation="include">
+        </childnode>
+        <childnode refid="2209" relation="include">
+        </childnode>
+        <childnode refid="2236" relation="include">
+        </childnode>
+        <childnode refid="2208" relation="include">
+        </childnode>
+        <childnode refid="2219" relation="include">
+        </childnode>
+        <childnode refid="2237" relation="include">
+        </childnode>
+      </node>
+      <node id="2201">
+        <label>D3D12/D3D12Core.h</label>
+        <link refid="_d3_d12_core_8h_source"/>
+        <childnode refid="2202" relation="include">
+        </childnode>
+        <childnode refid="2203" relation="include">
+        </childnode>
+        <childnode refid="2204" relation="include">
+        </childnode>
+        <childnode refid="2205" relation="include">
+        </childnode>
+        <childnode refid="2206" relation="include">
+        </childnode>
+        <childnode refid="2207" relation="include">
+        </childnode>
+        <childnode refid="2208" relation="include">
+        </childnode>
+      </node>
+      <node id="2219">
+        <label>Core/RawStorageFormat.h</label>
+        <link refid="_raw_storage_format_8h_source"/>
+        <childnode refid="2198" relation="include">
+        </childnode>
+        <childnode refid="2218" relation="include">
+        </childnode>
+        <childnode refid="2220" relation="include">
+        </childnode>
+        <childnode refid="2221" relation="include">
+        </childnode>
+        <childnode refid="2222" relation="include">
+        </childnode>
+        <childnode refid="2223" relation="include">
+        </childnode>
+      </node>
+      <node id="2203">
+        <label>d3d12.h</label>
+      </node>
+      <node id="2239">
+        <label>D3D12/D3D12ScopedBuffer.h</label>
+        <link refid="_d3_d12_scoped_buffer_8h_source"/>
+        <childnode refid="2230" relation="include">
+        </childnode>
+        <childnode refid="2199" relation="include">
+        </childnode>
+        <childnode refid="2201" relation="include">
+        </childnode>
+      </node>
+      <node id="2246">
+        <label>MemoryBuffer.h</label>
+        <link refid="_memory_buffer_8h_source"/>
+        <childnode refid="2198" relation="include">
+        </childnode>
+      </node>
+      <node id="2215">
+        <label>Memory/Allocator.h</label>
+        <link refid="_allocator_8h_source"/>
+        <childnode refid="2212" relation="include">
+        </childnode>
+        <childnode refid="2198" relation="include">
+        </childnode>
+        <childnode refid="2216" relation="include">
+        </childnode>
+      </node>
+      <node id="2225">
+        <label>Core/AssetLocation.h</label>
+        <link refid="_asset_location_8h_source"/>
+      </node>
+      <node id="2210">
+        <label>cassert</label>
+      </node>
+      <node id="2222">
+        <label>boost/preprocessor/tuple/elem.hpp</label>
+      </node>
+      <node id="2206">
+        <label>wrl.h</label>
+      </node>
+      <node id="2242">
+        <label>stdexcept</label>
+      </node>
+      <node id="2208">
+        <label>Generic/GenericTypes.h</label>
+        <link refid="_azura_2_render_system_2_inc_2_generic_2_generic_types_8h_source"/>
+        <childnode refid="2209" relation="include">
+        </childnode>
+        <childnode refid="2217" relation="include">
+        </childnode>
+        <childnode refid="2198" relation="include">
+        </childnode>
+        <childnode refid="2219" relation="include">
+        </childnode>
+        <childnode refid="2224" relation="include">
+        </childnode>
+        <childnode refid="2225" relation="include">
+        </childnode>
+        <childnode refid="2226" relation="include">
+        </childnode>
+        <childnode refid="2223" relation="include">
+        </childnode>
+      </node>
+      <node id="2247">
+        <label>Memory/HeapMemoryBuffer.h</label>
+        <link refid="_heap_memory_buffer_8h_source"/>
+        <childnode refid="2246" relation="include">
+        </childnode>
+        <childnode refid="2198" relation="include">
+        </childnode>
+      </node>
+      <node id="2228">
+        <label>D3D12/D3D12ScopedShader.h</label>
+        <link refid="_d3_d12_scoped_shader_8h_source"/>
+        <childnode refid="2229" relation="include">
+        </childnode>
+        <childnode refid="2199" relation="include">
+        </childnode>
+        <childnode refid="2201" relation="include">
+        </childnode>
+        <childnode refid="2230" relation="include">
+        </childnode>
+        <childnode refid="2231" relation="include">
+        </childnode>
+      </node>
+      <node id="2245">
+        <label>Memory/StackMemoryBuffer.h</label>
+        <link refid="_stack_memory_buffer_8h_source"/>
+        <childnode refid="2210" relation="include">
+        </childnode>
+        <childnode refid="2246" relation="include">
+        </childnode>
+        <childnode refid="2198" relation="include">
+        </childnode>
+        <childnode refid="2216" relation="include">
+        </childnode>
+      </node>
+      <node id="2216">
+        <label>Utils/Macros.h</label>
+        <link refid="_macros_8h_source"/>
+      </node>
+      <node id="2205">
+        <label>D3Dcompiler.h</label>
+      </node>
+      <node id="2226">
+        <label>boost/container/small_vector.hpp</label>
+      </node>
+      <node id="2217">
+        <label>Generic/Constants.h</label>
+        <link refid="_azura_2_render_system_2_inc_2_generic_2_constants_8h_source"/>
+        <childnode refid="2218" relation="include">
+        </childnode>
+        <childnode refid="2198" relation="include">
+        </childnode>
+      </node>
+      <node id="2223">
+        <label>boost/detail/bitmask.hpp</label>
+      </node>
+      <node id="2238">
+        <label>Core/Events.h</label>
+        <link refid="_events_8h_source"/>
+      </node>
+      <node id="2233">
+        <label>D3D12/D3D12ScopedSwapChain.h</label>
+        <link refid="_d3_d12_scoped_swap_chain_8h_source"/>
+        <childnode refid="2234" relation="include">
+        </childnode>
+        <childnode refid="2201" relation="include">
+        </childnode>
+      </node>
+      <node id="2218">
+        <label>tuple</label>
+      </node>
+      <node id="2214">
+        <label>Array.h</label>
+        <link refid="_array_8h_source"/>
+        <childnode refid="2210" relation="include">
+        </childnode>
+        <childnode refid="2211" relation="include">
+        </childnode>
+        <childnode refid="2215" relation="include">
+        </childnode>
+        <childnode refid="2198" relation="include">
+        </childnode>
+      </node>
+      <node id="2240">
+        <label>D3D12/D3D12Macros.h</label>
+        <link refid="_d3_d12_macros_8h_source"/>
+        <childnode refid="2241" relation="include">
+        </childnode>
+        <childnode refid="2242" relation="include">
+        </childnode>
+        <childnode refid="2198" relation="include">
+        </childnode>
+      </node>
+      <node id="2249">
+        <label>optional</label>
+      </node>
+      <node id="2243">
+        <label>Memory/MonotonicAllocator.h</label>
+        <link refid="_monotonic_allocator_8h_source"/>
+        <childnode refid="2215" relation="include">
+        </childnode>
+        <childnode refid="2198" relation="include">
+        </childnode>
+      </node>
+      <node id="2200">
+        <label>vector</label>
+      </node>
+      <node id="2209">
+        <label>Containers/Vector.h</label>
+        <link refid="_vector_8h_source"/>
+        <childnode refid="2210" relation="include">
+        </childnode>
+        <childnode refid="2211" relation="include">
+        </childnode>
+        <childnode refid="2212" relation="include">
+        </childnode>
+        <childnode refid="2213" relation="include">
+        </childnode>
+        <childnode refid="2214" relation="include">
+        </childnode>
+        <childnode refid="2215" relation="include">
+        </childnode>
+        <childnode refid="2198" relation="include">
+        </childnode>
+        <childnode refid="2216" relation="include">
+        </childnode>
+      </node>
+      <node id="2199">
+        <label>Log/Log.h</label>
+        <link refid="_log_8h_source"/>
+        <childnode refid="2198" relation="include">
+        </childnode>
+        <childnode refid="2200" relation="include">
+        </childnode>
+      </node>
+      <node id="2204">
+        <label>dxgi1_4.h</label>
+      </node>
+      <node id="2230">
+        <label>wrl/client.h</label>
+      </node>
+      <node id="2236">
+        <label>Drawable.h</label>
+        <link refid="_drawable_8h_source"/>
+        <childnode refid="2209" relation="include">
+        </childnode>
+        <childnode refid="2208" relation="include">
+        </childnode>
+        <childnode refid="2198" relation="include">
+        </childnode>
+        <childnode refid="2219" relation="include">
+        </childnode>
+      </node>
+      <node id="2220">
+        <label>boost/preprocessor/repetition/repeat.hpp</label>
+      </node>
+      <node id="2198">
+        <label>Types.h</label>
+      </node>
+      <node id="2241">
+        <label>winerror.h</label>
+      </node>
+      <node id="2196">
+        <label>Source/Azura/RenderSystem/Src/D3D12/D3D12ScopedComputePass.cpp</label>
+        <link refid="_d3_d12_scoped_compute_pass_8cpp"/>
+        <childnode refid="2197" relation="include">
+        </childnode>
+        <childnode refid="2240" relation="include">
+        </childnode>
+        <childnode refid="2243" relation="include">
+        </childnode>
+        <childnode refid="2244" relation="include">
+        </childnode>
+        <childnode refid="2248" relation="include">
+        </childnode>
+      </node>
+      <node id="2234">
+        <label>Generic/Window.h</label>
+        <link refid="_window_8h_source"/>
+        <childnode refid="2212" relation="include">
+        </childnode>
+        <childnode refid="2208" relation="include">
+        </childnode>
+        <childnode refid="2198" relation="include">
+        </childnode>
+        <childnode refid="2235" relation="include">
+        </childnode>
+        <childnode refid="2238" relation="include">
+        </childnode>
+        <childnode refid="2199" relation="include">
+        </childnode>
+      </node>
+      <node id="2232">
+        <label>D3D12/D3D12ScopedCommandBuffer.h</label>
+        <link refid="_d3_d12_scoped_command_buffer_8h_source"/>
+        <childnode refid="2201" relation="include">
+        </childnode>
+      </node>
+      <node id="2248">
+        <label>D3D12/D3D12TypeMapping.h</label>
+        <link refid="_d3_d12_type_mapping_8h_source"/>
+        <childnode refid="2249" relation="include">
+        </childnode>
+        <childnode refid="2208" relation="include">
+        </childnode>
+        <childnode refid="2219" relation="include">
+        </childnode>
+        <childnode refid="2201" relation="include">
+        </childnode>
+      </node>
+      <node id="2237">
+        <label>ComputePool.h</label>
+        <link refid="_compute_pool_8h_source"/>
+        <childnode refid="2209" relation="include">
+        </childnode>
+        <childnode refid="2208" relation="include">
+        </childnode>
+        <childnode refid="2198" relation="include">
+        </childnode>
+      </node>
+      <node id="2197">
+        <label>D3D12/D3D12ScopedComputePass.h</label>
+        <link refid="_d3_d12_scoped_compute_pass_8h_source"/>
+        <childnode refid="2198" relation="include">
+        </childnode>
+        <childnode refid="2199" relation="include">
+        </childnode>
+        <childnode refid="2201" relation="include">
+        </childnode>
+        <childnode refid="2227" relation="include">
+        </childnode>
+        <childnode refid="2228" relation="include">
+        </childnode>
+        <childnode refid="2232" relation="include">
+        </childnode>
+        <childnode refid="2233" relation="include">
+        </childnode>
+        <childnode refid="2239" relation="include">
+        </childnode>
+      </node>
+      <node id="2211">
+        <label>cstring</label>
+      </node>
+      <node id="2207">
+        <label>shellapi.h</label>
+      </node>
+      <node id="2229">
+        <label>Generic/Shader.h</label>
+        <link refid="_shader_8h_source"/>
+        <childnode refid="2208" relation="include">
+        </childnode>
+      </node>
+      <node id="2221">
+        <label>boost/preprocessor/seq/for_each.hpp</label>
+      </node>
+    </incdepgraph>
+    <innernamespace refid="namespace_azura">Azura</innernamespace>
+    <innernamespace refid="namespace_azura_1_1_d3_d12">Azura::D3D12</innernamespace>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <programlisting>
+<codeline lineno="1"><highlight class="preprocessor">#include<sp/>&quot;D3D12/D3D12ScopedComputePass.h&quot;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="2"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&quot;D3D12/D3D12Macros.h&quot;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="3"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&quot;Memory/MonotonicAllocator.h&quot;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="4"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&quot;Memory/MemoryFactory.h&quot;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="5"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&quot;D3D12/D3D12TypeMapping.h&quot;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="6"><highlight class="normal"></highlight></codeline>
+<codeline lineno="7"><highlight class="normal"></highlight><highlight class="keyword">using<sp/>namespace<sp/></highlight><highlight class="normal"><ref refid="namespace_microsoft_1_1_w_r_l" kindref="compound">Microsoft::WRL</ref>;<sp/><sp/><sp/><sp/></highlight><highlight class="comment">//<sp/>NOLINT</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="8"><highlight class="normal"></highlight><highlight class="keyword">using<sp/>namespace<sp/></highlight><highlight class="normal"><ref refid="namespace_azura_1_1_containers" kindref="compound">Azura::Containers</ref>;<sp/></highlight><highlight class="comment">//<sp/>NOLINT</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="9"><highlight class="normal"></highlight></codeline>
+<codeline lineno="10"><highlight class="normal"></highlight><highlight class="keyword">namespace<sp/></highlight><highlight class="normal"><ref refid="namespace_azura" kindref="compound">Azura</ref><sp/>{</highlight></codeline>
+<codeline lineno="11"><highlight class="normal"></highlight><highlight class="keyword">namespace<sp/></highlight><highlight class="normal">D3D12<sp/>{</highlight></codeline>
+<codeline lineno="12"><highlight class="normal"></highlight></codeline>
+<codeline lineno="13"><highlight class="normal">D3D12ScopedComputePass::D3D12ScopedComputePass(U32<sp/>idx,<sp/>U32<sp/>internalId,</highlight></codeline>
+<codeline lineno="14"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>Memory::Allocator&amp;<sp/>mainAllocator,</highlight></codeline>
+<codeline lineno="15"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>Log<sp/>logger)</highlight></codeline>
+<codeline lineno="16"><highlight class="normal"><sp/><sp/>:<sp/>log_D3D12RenderSystem(std::move(logger)),</highlight></codeline>
+<codeline lineno="17"><highlight class="normal"><sp/><sp/><sp/><sp/>m_id(idx),</highlight></codeline>
+<codeline lineno="18"><highlight class="normal"><sp/><sp/><sp/><sp/>m_internalId(internalId),</highlight></codeline>
+<codeline lineno="19"><highlight class="normal"><sp/><sp/><sp/><sp/>m_rootSignatureTable(mainAllocator),</highlight></codeline>
+<codeline lineno="20"><highlight class="normal"><sp/><sp/><sp/><sp/>m_passShaders(mainAllocator),</highlight></codeline>
+<codeline lineno="21"><highlight class="normal"><sp/><sp/><sp/><sp/>m_computeOutputTargets(mainAllocator),</highlight></codeline>
+<codeline lineno="22"><highlight class="normal"><sp/><sp/><sp/><sp/>m_computeOutputBuffers(mainAllocator),</highlight></codeline>
+<codeline lineno="23"><highlight class="normal"><sp/><sp/><sp/><sp/>m_computeInputBuffers(mainAllocator),</highlight></codeline>
+<codeline lineno="24"><highlight class="normal"><sp/><sp/><sp/><sp/>m_computeInputTargets(mainAllocator),</highlight></codeline>
+<codeline lineno="25"><highlight class="normal"><sp/><sp/><sp/><sp/>m_computeDepthInputTargets(mainAllocator),</highlight></codeline>
+<codeline lineno="26"><highlight class="normal"><sp/><sp/><sp/><sp/>m_allComputeInputTargets(mainAllocator)<sp/>{</highlight></codeline>
+<codeline lineno="27"><highlight class="normal">}</highlight></codeline>
+<codeline lineno="28"><highlight class="normal"></highlight></codeline>
+<codeline lineno="29"><highlight class="normal"></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/>D3D12ScopedComputePass::Create(</highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>Microsoft::WRL::ComPtr&lt;ID3D12Device&gt;&amp;<sp/>device,</highlight></codeline>
+<codeline lineno="30"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>PipelinePassCreateInfo&amp;<sp/>createInfo,</highlight></codeline>
+<codeline lineno="31"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>Containers::Vector&lt;RenderTargetCreateInfo&gt;&amp;<sp/>targetCreateInfos,</highlight></codeline>
+<codeline lineno="32"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>Containers::Vector&lt;D3D12ScopedImage&gt;&amp;<sp/>pipelineImages,</highlight></codeline>
+<codeline lineno="33"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>Containers::Vector&lt;D3D12ScopedBuffer&gt;&amp;<sp/>pipelineStructuredBuffers,</highlight></codeline>
+<codeline lineno="34"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>Containers::Vector&lt;DescriptorSlot&gt;&amp;<sp/>descriptorSlots,</highlight></codeline>
+<codeline lineno="35"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>Containers::Vector&lt;DescriptorTableEntry&gt;&amp;<sp/>descriptorSetTable,</highlight></codeline>
+<codeline lineno="36"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>Containers::Vector&lt;D3D12ScopedShader&gt;&amp;<sp/>allShaders)<sp/>{</highlight></codeline>
+<codeline lineno="37"><highlight class="normal"></highlight></codeline>
+<codeline lineno="38"><highlight class="normal"><sp/><sp/>CreateBase(device,<sp/>createInfo,<sp/>descriptorSlots,<sp/>descriptorSetTable,<sp/>targetCreateInfos,<sp/>pipelineImages,<sp/>pipelineStructuredBuffers,<sp/>allShaders);</highlight></codeline>
+<codeline lineno="39"><highlight class="normal"></highlight></codeline>
+<codeline lineno="40"><highlight class="normal"><sp/><sp/>D3D12ScopedCommandBuffer<sp/>primaryCmdBuffer<sp/>=<sp/>D3D12ScopedCommandBuffer(device,<sp/>D3D12_COMMAND_LIST_TYPE_COMPUTE,</highlight></codeline>
+<codeline lineno="41"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>log_D3D12RenderSystem);</highlight></codeline>
+<codeline lineno="42"><highlight class="normal"><sp/><sp/>primaryCmdBuffer.CreateGraphicsCommandList(device,<sp/></highlight><highlight class="keyword">nullptr</highlight><highlight class="normal">,<sp/>log_D3D12RenderSystem);</highlight></codeline>
+<codeline lineno="43"><highlight class="normal"><sp/><sp/>m_commandBuffers.push_back(primaryCmdBuffer);</highlight></codeline>
+<codeline lineno="44"><highlight class="normal">}</highlight></codeline>
+<codeline lineno="45"><highlight class="normal"></highlight></codeline>
+<codeline lineno="46"><highlight class="normal">U32<sp/>D3D12ScopedComputePass::GetId()</highlight><highlight class="keyword"><sp/>const<sp/></highlight><highlight class="normal">{</highlight></codeline>
+<codeline lineno="47"><highlight class="normal"><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>m_id;</highlight></codeline>
+<codeline lineno="48"><highlight class="normal">}</highlight></codeline>
+<codeline lineno="49"><highlight class="normal"></highlight></codeline>
+<codeline lineno="50"><highlight class="normal">U32<sp/>D3D12ScopedComputePass::GetInternalId()</highlight><highlight class="keyword"><sp/>const<sp/></highlight><highlight class="normal">{</highlight></codeline>
+<codeline lineno="51"><highlight class="normal"><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>m_internalId;</highlight></codeline>
+<codeline lineno="52"><highlight class="normal">}</highlight></codeline>
+<codeline lineno="53"><highlight class="normal"></highlight></codeline>
+<codeline lineno="54"><highlight class="normal">ID3D12GraphicsCommandList*<sp/>D3D12ScopedComputePass::GetPrimaryComputeCommandList(U32<sp/>idx)</highlight><highlight class="keyword"><sp/>const<sp/></highlight><highlight class="normal">{</highlight></codeline>
+<codeline lineno="55"><highlight class="normal"><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>m_commandBuffers[idx].GetGraphicsCommandList();</highlight></codeline>
+<codeline lineno="56"><highlight class="normal">}</highlight></codeline>
+<codeline lineno="57"><highlight class="normal"></highlight></codeline>
+<codeline lineno="58"><highlight class="normal"></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>DescriptorCount&amp;<sp/>D3D12ScopedComputePass::GetDescriptorCount()</highlight><highlight class="keyword"><sp/>const<sp/></highlight><highlight class="normal">{</highlight></codeline>
+<codeline lineno="59"><highlight class="normal"><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>m_descriptorCount;</highlight></codeline>
+<codeline lineno="60"><highlight class="normal">}</highlight></codeline>
+<codeline lineno="61"><highlight class="normal"></highlight></codeline>
+<codeline lineno="62"><highlight class="normal">ID3D12RootSignature*<sp/>D3D12ScopedComputePass::GetRootSignature()</highlight><highlight class="keyword"><sp/>const<sp/></highlight><highlight class="normal">{</highlight></codeline>
+<codeline lineno="63"><highlight class="normal"><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>m_rootSignature.Get();</highlight></codeline>
+<codeline lineno="64"><highlight class="normal">}</highlight></codeline>
+<codeline lineno="65"><highlight class="normal"></highlight></codeline>
+<codeline lineno="66"><highlight class="normal"></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/><ref refid="class_azura_1_1_containers_1_1_vector" kindref="compound">Vector&lt;std::reference_wrapper&lt;const D3D12ScopedShader&gt;</ref>&gt;&amp;<sp/>D3D12ScopedComputePass::GetShaders()</highlight><highlight class="keyword"><sp/>const<sp/></highlight><highlight class="normal">{</highlight></codeline>
+<codeline lineno="67"><highlight class="normal"><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>m_passShaders;</highlight></codeline>
+<codeline lineno="68"><highlight class="normal">}</highlight></codeline>
+<codeline lineno="69"><highlight class="normal"></highlight></codeline>
+<codeline lineno="70"><highlight class="normal"></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/><ref refid="class_azura_1_1_containers_1_1_vector" kindref="compound">Vector&lt;std::reference_wrapper&lt;D3D12ScopedImage&gt;</ref>&gt;&amp;<sp/>D3D12ScopedComputePass::GetInputImages()</highlight><highlight class="keyword"><sp/>const<sp/></highlight><highlight class="normal">{</highlight></codeline>
+<codeline lineno="71"><highlight class="normal"><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>m_allComputeInputTargets;</highlight></codeline>
+<codeline lineno="72"><highlight class="normal">}</highlight></codeline>
+<codeline lineno="73"><highlight class="normal"></highlight></codeline>
+<codeline lineno="74"><highlight class="normal"></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>Containers::Vector&lt;std::reference_wrapper&lt;D3D12ScopedBuffer&gt;&gt;&amp;<sp/>D3D12ScopedComputePass::GetInputBuffers()</highlight><highlight class="keyword"><sp/>const<sp/></highlight><highlight class="normal">{</highlight></codeline>
+<codeline lineno="75"><highlight class="normal"><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>m_computeInputBuffers;</highlight></codeline>
+<codeline lineno="76"><highlight class="normal">}</highlight></codeline>
+<codeline lineno="77"><highlight class="normal"></highlight></codeline>
+<codeline lineno="78"><highlight class="normal"></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>Containers::Vector&lt;std::reference_wrapper&lt;D3D12ScopedBuffer&gt;&gt;&amp;<sp/>D3D12ScopedComputePass::GetOutputBuffers()</highlight><highlight class="keyword"><sp/>const<sp/></highlight><highlight class="normal">{</highlight></codeline>
+<codeline lineno="79"><highlight class="normal"><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>m_computeOutputBuffers;</highlight></codeline>
+<codeline lineno="80"><highlight class="normal">}</highlight></codeline>
+<codeline lineno="81"><highlight class="normal"></highlight></codeline>
+<codeline lineno="82"><highlight class="normal"></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/><ref refid="class_azura_1_1_containers_1_1_vector" kindref="compound">Vector&lt;std::reference_wrapper&lt;D3D12ScopedImage&gt;</ref>&gt;&amp;<sp/>D3D12ScopedComputePass::GetOutputImages()</highlight><highlight class="keyword"><sp/>const<sp/></highlight><highlight class="normal">{</highlight></codeline>
+<codeline lineno="83"><highlight class="normal"><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>m_computeOutputTargets;</highlight></codeline>
+<codeline lineno="84"><highlight class="normal">}</highlight></codeline>
+<codeline lineno="85"><highlight class="normal"></highlight></codeline>
+<codeline lineno="86"><highlight class="normal"></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/><ref refid="class_azura_1_1_containers_1_1_vector" kindref="compound">Vector&lt;DescriptorTableEntry&gt;</ref>&amp;<sp/>D3D12ScopedComputePass::GetRootSignatureTable()</highlight><highlight class="keyword"><sp/>const<sp/></highlight><highlight class="normal">{</highlight></codeline>
+<codeline lineno="87"><highlight class="normal"><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>m_rootSignatureTable;</highlight></codeline>
+<codeline lineno="88"><highlight class="normal">}</highlight></codeline>
+<codeline lineno="89"><highlight class="normal"></highlight></codeline>
+<codeline lineno="90"><highlight class="normal"></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/>D3D12ScopedComputePass::RecordResourceBarriersForOutputsStart(ID3D12GraphicsCommandList*<sp/>commandList)</highlight><highlight class="keyword"><sp/>const<sp/></highlight><highlight class="normal">{</highlight></codeline>
+<codeline lineno="91"><highlight class="normal"><sp/><sp/></highlight><highlight class="keywordflow">for</highlight><highlight class="normal"><sp/>(</highlight><highlight class="keyword">auto</highlight><highlight class="normal">&amp;<sp/>rtv<sp/>:<sp/>m_computeOutputTargets)<sp/>{</highlight></codeline>
+<codeline lineno="92"><highlight class="normal"><sp/><sp/><sp/><sp/>rtv.get().Transition(commandList,<sp/>D3D12_RESOURCE_STATE_UNORDERED_ACCESS,<sp/>log_D3D12RenderSystem);</highlight></codeline>
+<codeline lineno="93"><highlight class="normal"><sp/><sp/>}</highlight></codeline>
+<codeline lineno="94"><highlight class="normal"><sp/><sp/></highlight></codeline>
+<codeline lineno="95"><highlight class="normal"><sp/><sp/></highlight><highlight class="keywordflow">for</highlight><highlight class="normal"><sp/>(</highlight><highlight class="keyword">auto</highlight><highlight class="normal">&amp;<sp/>buffer<sp/>:<sp/>m_computeOutputBuffers)<sp/>{</highlight></codeline>
+<codeline lineno="96"><highlight class="normal"><sp/><sp/><sp/><sp/>buffer.get().Transition(commandList,<sp/>D3D12_RESOURCE_STATE_UNORDERED_ACCESS,<sp/>log_D3D12RenderSystem);</highlight></codeline>
+<codeline lineno="97"><highlight class="normal"><sp/><sp/>}</highlight></codeline>
+<codeline lineno="98"><highlight class="normal">}</highlight></codeline>
+<codeline lineno="99"><highlight class="normal"><sp/><sp/></highlight></codeline>
+<codeline lineno="100"><highlight class="normal"></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/>D3D12ScopedComputePass::RecordResourceBarriersForOutputsEnd(ID3D12GraphicsCommandList*<sp/>commandList)</highlight><highlight class="keyword"><sp/>const<sp/></highlight><highlight class="normal">{</highlight></codeline>
+<codeline lineno="101"><highlight class="normal"><sp/><sp/></highlight><highlight class="keywordflow">for</highlight><highlight class="normal"><sp/>(</highlight><highlight class="keyword">auto</highlight><highlight class="normal">&amp;<sp/>rtv<sp/>:<sp/>m_computeOutputTargets)<sp/>{</highlight></codeline>
+<codeline lineno="102"><highlight class="normal"><sp/><sp/><sp/><sp/>rtv.get().Transition(commandList,<sp/>D3D12_RESOURCE_STATE_COMMON,<sp/>log_D3D12RenderSystem);</highlight></codeline>
+<codeline lineno="103"><highlight class="normal"><sp/><sp/>}</highlight></codeline>
+<codeline lineno="104"><highlight class="normal"></highlight></codeline>
+<codeline lineno="105"><highlight class="normal"><sp/><sp/></highlight><highlight class="keywordflow">for</highlight><highlight class="normal"><sp/>(</highlight><highlight class="keyword">auto</highlight><highlight class="normal">&amp;<sp/>buffer<sp/>:<sp/>m_computeOutputBuffers)<sp/>{</highlight></codeline>
+<codeline lineno="106"><highlight class="normal"><sp/><sp/><sp/><sp/>buffer.get().Transition(commandList,<sp/>D3D12_RESOURCE_STATE_COMMON,<sp/>log_D3D12RenderSystem);</highlight></codeline>
+<codeline lineno="107"><highlight class="normal"><sp/><sp/>}</highlight></codeline>
+<codeline lineno="108"><highlight class="normal">}</highlight></codeline>
+<codeline lineno="109"><highlight class="normal"></highlight></codeline>
+<codeline lineno="110"><highlight class="normal"></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/>D3D12ScopedComputePass::RecordResourceBarriersForInputsStart(ID3D12GraphicsCommandList*<sp/>commandList)</highlight><highlight class="keyword"><sp/>const<sp/></highlight><highlight class="normal">{</highlight></codeline>
+<codeline lineno="111"><highlight class="normal"><sp/><sp/></highlight><highlight class="keywordflow">for</highlight><highlight class="normal"><sp/>(</highlight><highlight class="keyword">auto</highlight><highlight class="normal">&amp;<sp/>rtv<sp/>:<sp/>m_computeInputTargets)<sp/>{</highlight></codeline>
+<codeline lineno="112"><highlight class="normal"><sp/><sp/><sp/><sp/>rtv.get().Transition(commandList,<sp/>D3D12_RESOURCE_STATE_NON_PIXEL_SHADER_RESOURCE,<sp/>log_D3D12RenderSystem);</highlight></codeline>
+<codeline lineno="113"><highlight class="normal"><sp/><sp/>}</highlight></codeline>
+<codeline lineno="114"><highlight class="normal"><sp/><sp/></highlight></codeline>
+<codeline lineno="115"><highlight class="normal"><sp/><sp/></highlight><highlight class="keywordflow">for</highlight><highlight class="normal"><sp/>(</highlight><highlight class="keyword">auto</highlight><highlight class="normal">&amp;<sp/>inputBuffer<sp/>:<sp/>m_computeInputBuffers)<sp/>{</highlight></codeline>
+<codeline lineno="116"><highlight class="normal"><sp/><sp/><sp/><sp/>inputBuffer.get().Transition(commandList,<sp/>D3D12_RESOURCE_STATE_NON_PIXEL_SHADER_RESOURCE,<sp/>log_D3D12RenderSystem);</highlight></codeline>
+<codeline lineno="117"><highlight class="normal"><sp/><sp/>}</highlight></codeline>
+<codeline lineno="118"><highlight class="normal"></highlight></codeline>
+<codeline lineno="119"><highlight class="normal"><sp/><sp/></highlight><highlight class="keywordflow">for</highlight><highlight class="normal"><sp/>(</highlight><highlight class="keyword">auto</highlight><highlight class="normal">&amp;<sp/>dsv<sp/>:<sp/>m_computeDepthInputTargets)<sp/>{</highlight></codeline>
+<codeline lineno="120"><highlight class="normal"><sp/><sp/><sp/><sp/>dsv.get().Transition(commandList,<sp/>D3D12_RESOURCE_STATE_NON_PIXEL_SHADER_RESOURCE,<sp/>log_D3D12RenderSystem);</highlight></codeline>
+<codeline lineno="121"><highlight class="normal"><sp/><sp/>}</highlight></codeline>
+<codeline lineno="122"><highlight class="normal">}</highlight></codeline>
+<codeline lineno="123"><highlight class="normal"><sp/><sp/></highlight></codeline>
+<codeline lineno="124"><highlight class="normal"></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/>D3D12ScopedComputePass::RecordResourceBarriersForInputsEnd(ID3D12GraphicsCommandList*<sp/>commandList)</highlight><highlight class="keyword"><sp/>const<sp/></highlight><highlight class="normal">{</highlight></codeline>
+<codeline lineno="125"><highlight class="normal"><sp/><sp/></highlight><highlight class="keywordflow">for</highlight><highlight class="normal"><sp/>(</highlight><highlight class="keyword">auto</highlight><highlight class="normal">&amp;<sp/>rtv<sp/>:<sp/>m_computeInputTargets)<sp/>{</highlight></codeline>
+<codeline lineno="126"><highlight class="normal"><sp/><sp/><sp/><sp/>rtv.get().Transition(commandList,<sp/>D3D12_RESOURCE_STATE_COMMON,<sp/>log_D3D12RenderSystem);</highlight></codeline>
+<codeline lineno="127"><highlight class="normal"><sp/><sp/>}</highlight></codeline>
+<codeline lineno="128"><highlight class="normal"></highlight></codeline>
+<codeline lineno="129"><highlight class="normal"><sp/><sp/></highlight><highlight class="keywordflow">for</highlight><highlight class="normal"><sp/>(</highlight><highlight class="keyword">auto</highlight><highlight class="normal">&amp;<sp/>inputBuffer<sp/>:<sp/>m_computeInputBuffers)<sp/>{</highlight></codeline>
+<codeline lineno="130"><highlight class="normal"><sp/><sp/><sp/><sp/>inputBuffer.get().Transition(commandList,<sp/>D3D12_RESOURCE_STATE_COMMON,<sp/>log_D3D12RenderSystem);</highlight></codeline>
+<codeline lineno="131"><highlight class="normal"><sp/><sp/>}</highlight></codeline>
+<codeline lineno="132"><highlight class="normal"></highlight></codeline>
+<codeline lineno="133"><highlight class="normal"><sp/><sp/></highlight><highlight class="keywordflow">for</highlight><highlight class="normal"><sp/>(</highlight><highlight class="keyword">auto</highlight><highlight class="normal">&amp;<sp/>dsv<sp/>:<sp/>m_computeDepthInputTargets)<sp/>{</highlight></codeline>
+<codeline lineno="134"><highlight class="normal"><sp/><sp/><sp/><sp/>dsv.get().Transition(commandList,<sp/>D3D12_RESOURCE_STATE_COMMON,<sp/>log_D3D12RenderSystem);</highlight></codeline>
+<codeline lineno="135"><highlight class="normal"><sp/><sp/>}</highlight></codeline>
+<codeline lineno="136"><highlight class="normal">}</highlight></codeline>
+<codeline lineno="137"><highlight class="normal"></highlight></codeline>
+<codeline lineno="138"><highlight class="normal"></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/>D3D12ScopedComputePass::WaitForGPU(ID3D12CommandQueue*<sp/>commandQueue)<sp/>{</highlight></codeline>
+<codeline lineno="139"><highlight class="normal"><sp/><sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>U32<sp/>fence<sp/>=<sp/>m_fenceValue;</highlight></codeline>
+<codeline lineno="140"><highlight class="normal"><sp/><sp/>VERIFY_D3D_OP(log_D3D12RenderSystem,<sp/>commandQueue-&gt;Signal(m_signalFence.Get(),<sp/>m_fenceValue),<sp/></highlight><highlight class="stringliteral">&quot;Fence<sp/>wait<sp/>failed&quot;</highlight><highlight class="normal">);</highlight></codeline>
+<codeline lineno="141"><highlight class="normal"><sp/><sp/>m_fenceValue++;</highlight></codeline>
+<codeline lineno="142"><highlight class="normal"></highlight></codeline>
+<codeline lineno="143"><highlight class="normal"><sp/><sp/></highlight><highlight class="comment">//<sp/>Wait<sp/>until<sp/>the<sp/>previous<sp/>frame<sp/>is<sp/>finished.</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="144"><highlight class="normal"><sp/><sp/></highlight><highlight class="keywordflow">if</highlight><highlight class="normal"><sp/>(m_signalFence-&gt;GetCompletedValue()<sp/>&lt;<sp/>fence)<sp/>{</highlight></codeline>
+<codeline lineno="145"><highlight class="normal"><sp/><sp/><sp/><sp/>VERIFY_D3D_OP(log_D3D12RenderSystem,<sp/>m_signalFence-&gt;SetEventOnCompletion(fence,<sp/>m_fenceEvent),</highlight></codeline>
+<codeline lineno="146"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="stringliteral">&quot;Failed<sp/>to<sp/>set<sp/>event<sp/>completion<sp/>on<sp/>Fence&quot;</highlight><highlight class="normal">);</highlight></codeline>
+<codeline lineno="147"><highlight class="normal"><sp/><sp/><sp/><sp/>WaitForSingleObject(m_fenceEvent,<sp/>INFINITE);</highlight></codeline>
+<codeline lineno="148"><highlight class="normal"><sp/><sp/>}</highlight></codeline>
+<codeline lineno="149"><highlight class="normal"></highlight></codeline>
+<codeline lineno="150"><highlight class="normal">}</highlight></codeline>
+<codeline lineno="151"><highlight class="normal"></highlight></codeline>
+<codeline lineno="152"><highlight class="normal">U32<sp/>D3D12ScopedComputePass::GetCommandBufferCount()</highlight><highlight class="keyword"><sp/>const<sp/></highlight><highlight class="normal">{</highlight></codeline>
+<codeline lineno="153"><highlight class="normal"><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>U32(m_commandBuffers.size());</highlight></codeline>
+<codeline lineno="154"><highlight class="normal">}</highlight></codeline>
+<codeline lineno="155"><highlight class="normal"></highlight></codeline>
+<codeline lineno="156"><highlight class="normal">U32<sp/>D3D12ScopedComputePass::GetInputTargetRootDescriptorTableId()</highlight><highlight class="keyword"><sp/>const<sp/></highlight><highlight class="normal">{</highlight></codeline>
+<codeline lineno="157"><highlight class="normal"><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>m_computeInputTargetTableIdx;</highlight></codeline>
+<codeline lineno="158"><highlight class="normal">}</highlight></codeline>
+<codeline lineno="159"><highlight class="normal"></highlight></codeline>
+<codeline lineno="160"><highlight class="normal">U32<sp/>D3D12ScopedComputePass::GetInputBufferRootDescriptorTableId()</highlight><highlight class="keyword"><sp/>const<sp/></highlight><highlight class="normal">{</highlight></codeline>
+<codeline lineno="161"><highlight class="normal"><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>m_computeInputBufferTableIdx;</highlight></codeline>
+<codeline lineno="162"><highlight class="normal">}</highlight></codeline>
+<codeline lineno="163"><highlight class="normal"></highlight></codeline>
+<codeline lineno="164"><highlight class="normal">U32<sp/>D3D12ScopedComputePass::GetOutputTargetsRootDescriptorTableId()</highlight><highlight class="keyword"><sp/>const<sp/></highlight><highlight class="normal">{</highlight></codeline>
+<codeline lineno="165"><highlight class="normal"><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>m_computeOutputTargetTableIdx;</highlight></codeline>
+<codeline lineno="166"><highlight class="normal">}</highlight></codeline>
+<codeline lineno="167"><highlight class="normal"></highlight></codeline>
+<codeline lineno="168"><highlight class="normal">U32<sp/>D3D12ScopedComputePass::GetOutputBuffersRootDescriptorTableId()</highlight><highlight class="keyword"><sp/>const<sp/></highlight><highlight class="normal">{</highlight></codeline>
+<codeline lineno="169"><highlight class="normal"><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>m_computeOutputBufferTableIdx;</highlight></codeline>
+<codeline lineno="170"><highlight class="normal">}</highlight></codeline>
+<codeline lineno="171"><highlight class="normal"></highlight></codeline>
+<codeline lineno="172"><highlight class="normal"></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/>D3D12ScopedComputePass::CreateBase(</highlight></codeline>
+<codeline lineno="173"><highlight class="normal"><sp/><sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>Microsoft::WRL::ComPtr&lt;ID3D12Device&gt;&amp;<sp/>device,</highlight></codeline>
+<codeline lineno="174"><highlight class="normal"><sp/><sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>PipelinePassCreateInfo&amp;<sp/>createInfo,</highlight></codeline>
+<codeline lineno="175"><highlight class="normal"><sp/><sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>Containers::Vector&lt;DescriptorSlot&gt;&amp;<sp/>descriptorSlots,</highlight></codeline>
+<codeline lineno="176"><highlight class="normal"><sp/><sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>Containers::Vector&lt;DescriptorTableEntry&gt;&amp;<sp/>descriptorSetTable,</highlight></codeline>
+<codeline lineno="177"><highlight class="normal"><sp/><sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>Containers::Vector&lt;RenderTargetCreateInfo&gt;&amp;<sp/>targetCreateInfos,</highlight></codeline>
+<codeline lineno="178"><highlight class="normal"><sp/><sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>Containers::Vector&lt;D3D12ScopedImage&gt;&amp;<sp/>pipelineImages,</highlight></codeline>
+<codeline lineno="179"><highlight class="normal"><sp/><sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>Containers::Vector&lt;D3D12ScopedBuffer&gt;&amp;<sp/>pipelineStructuredBuffers,</highlight></codeline>
+<codeline lineno="180"><highlight class="normal"><sp/><sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>Containers::Vector&lt;D3D12ScopedShader&gt;&amp;<sp/>allShaders)<sp/>{</highlight></codeline>
+<codeline lineno="181"><highlight class="normal"></highlight></codeline>
+<codeline lineno="182"><highlight class="normal"><sp/><sp/>STACK_ALLOCATOR(Temporary,<sp/>Memory::MonotonicAllocator,<sp/>2048);</highlight></codeline>
+<codeline lineno="183"><highlight class="normal"></highlight></codeline>
+<codeline lineno="184"><highlight class="normal"><sp/><sp/>VERIFY_D3D_OP(log_D3D12RenderSystem,<sp/>device-&gt;CreateFence(0,<sp/>D3D12_FENCE_FLAG_NONE,<sp/>IID_PPV_ARGS(&amp;m_signalFence)),</highlight></codeline>
+<codeline lineno="185"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="stringliteral">&quot;Failed<sp/>to<sp/>create<sp/>fence&quot;</highlight><highlight class="normal">);</highlight></codeline>
+<codeline lineno="186"><highlight class="normal"></highlight></codeline>
+<codeline lineno="187"><highlight class="normal"><sp/><sp/></highlight><highlight class="comment">//<sp/>Create<sp/>an<sp/>event<sp/>handle<sp/>to<sp/>use<sp/>for<sp/>frame<sp/>synchronization.</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="188"><highlight class="normal"><sp/><sp/>m_fenceEvent<sp/>=<sp/>CreateEvent(</highlight><highlight class="keyword">nullptr</highlight><highlight class="normal">,<sp/>FALSE,<sp/>FALSE,<sp/></highlight><highlight class="keyword">nullptr</highlight><highlight class="normal">);</highlight></codeline>
+<codeline lineno="189"><highlight class="normal"><sp/><sp/></highlight><highlight class="keywordflow">if</highlight><highlight class="normal"><sp/>(m_fenceEvent<sp/>==<sp/></highlight><highlight class="keyword">nullptr</highlight><highlight class="normal">)<sp/>{</highlight></codeline>
+<codeline lineno="190"><highlight class="normal"><sp/><sp/><sp/><sp/>VERIFY_D3D_OP(log_D3D12RenderSystem,<sp/>HRESULT_FROM_WIN32(GetLastError()),<sp/></highlight><highlight class="stringliteral">&quot;Fence<sp/>Event<sp/>Null&quot;</highlight><highlight class="normal">);</highlight></codeline>
+<codeline lineno="191"><highlight class="normal"><sp/><sp/>}</highlight></codeline>
+<codeline lineno="192"><highlight class="normal"></highlight></codeline>
+<codeline lineno="193"><highlight class="normal"><sp/><sp/>m_passShaders.Reserve(U32(createInfo.m_shaders.size()));</highlight></codeline>
+<codeline lineno="194"><highlight class="normal"><sp/><sp/>m_computeInputBuffers.Reserve(U32(createInfo.m_inputBuffers.size()));</highlight></codeline>
+<codeline lineno="195"><highlight class="normal"><sp/><sp/>m_computeInputTargets.Reserve(U32(createInfo.m_inputTargets.size()));</highlight></codeline>
+<codeline lineno="196"><highlight class="normal"><sp/><sp/>m_computeDepthInputTargets.Reserve(U32(createInfo.m_inputTargets.size()));</highlight></codeline>
+<codeline lineno="197"><highlight class="normal"><sp/><sp/>m_allComputeInputTargets.Reserve(U32(createInfo.m_inputTargets.size()));</highlight></codeline>
+<codeline lineno="198"><highlight class="normal"><sp/><sp/>m_computeOutputTargets.Reserve(U32(createInfo.m_outputTargets.size()));</highlight></codeline>
+<codeline lineno="199"><highlight class="normal"><sp/><sp/>m_computeOutputBuffers.Reserve(U32(createInfo.m_outputBuffers.size()));</highlight></codeline>
+<codeline lineno="200"><highlight class="normal"></highlight></codeline>
+<codeline lineno="201"><highlight class="normal"><sp/><sp/></highlight><highlight class="keywordflow">for</highlight><highlight class="normal"><sp/>(</highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">auto</highlight><highlight class="normal">&amp;<sp/>outputId<sp/>:<sp/>createInfo.m_outputTargets)<sp/>{</highlight></codeline>
+<codeline lineno="202"><highlight class="normal"><sp/><sp/><sp/><sp/>m_computeOutputTargets.PushBack(pipelineImages[outputId]);</highlight></codeline>
+<codeline lineno="203"><highlight class="normal"><sp/><sp/>}</highlight></codeline>
+<codeline lineno="204"><highlight class="normal"><sp/><sp/></highlight></codeline>
+<codeline lineno="205"><highlight class="normal"><sp/><sp/></highlight><highlight class="keywordflow">for</highlight><highlight class="normal"><sp/>(</highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">auto</highlight><highlight class="normal">&amp;<sp/>outputId<sp/>:<sp/>createInfo.m_outputBuffers)<sp/>{</highlight></codeline>
+<codeline lineno="206"><highlight class="normal"><sp/><sp/><sp/><sp/>m_computeOutputBuffers.PushBack(pipelineStructuredBuffers[outputId]);</highlight></codeline>
+<codeline lineno="207"><highlight class="normal"><sp/><sp/>}</highlight></codeline>
+<codeline lineno="208"><highlight class="normal"></highlight></codeline>
+<codeline lineno="209"><highlight class="normal"><sp/><sp/></highlight><highlight class="keywordflow">for</highlight><highlight class="normal"><sp/>(</highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">auto</highlight><highlight class="normal">&amp;<sp/>shaderId<sp/>:<sp/>createInfo.m_shaders)<sp/>{</highlight></codeline>
+<codeline lineno="210"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">auto</highlight><highlight class="normal">&amp;<sp/>shaderRef<sp/>=<sp/>allShaders[shaderId];</highlight></codeline>
+<codeline lineno="211"><highlight class="normal"><sp/><sp/><sp/><sp/>m_passShaders.PushBack(shaderRef);</highlight></codeline>
+<codeline lineno="212"><highlight class="normal"><sp/><sp/>}</highlight></codeline>
+<codeline lineno="213"><highlight class="normal"></highlight></codeline>
+<codeline lineno="214"><highlight class="normal"><sp/><sp/></highlight><highlight class="keywordflow">for</highlight><highlight class="normal"><sp/>(</highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">auto</highlight><highlight class="normal">&amp;<sp/>inputId<sp/>:<sp/>createInfo.m_inputTargets)<sp/>{</highlight></codeline>
+<codeline lineno="215"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="comment">//<sp/>TODO(vasumahesh1):[?]:<sp/>Respect<sp/>shader<sp/>stages<sp/>here<sp/>for<sp/>correct<sp/>binding</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="216"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">auto</highlight><highlight class="normal">&amp;<sp/>targetBufferRef<sp/>=<sp/>targetCreateInfos[inputId.m_id];</highlight></codeline>
+<codeline lineno="217"><highlight class="normal"></highlight></codeline>
+<codeline lineno="218"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">if</highlight><highlight class="normal"><sp/>(HasDepthOrStencilComponent(targetBufferRef.m_format))<sp/>{</highlight></codeline>
+<codeline lineno="219"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/>m_computeDepthInputTargets.PushBack(pipelineImages[inputId.m_id]);</highlight></codeline>
+<codeline lineno="220"><highlight class="normal"><sp/><sp/><sp/><sp/>}<sp/></highlight><highlight class="keywordflow">else</highlight><highlight class="normal"><sp/>{</highlight></codeline>
+<codeline lineno="221"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/>m_computeInputTargets.PushBack(pipelineImages[inputId.m_id]);</highlight></codeline>
+<codeline lineno="222"><highlight class="normal"><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="223"><highlight class="normal"></highlight></codeline>
+<codeline lineno="224"><highlight class="normal"><sp/><sp/><sp/><sp/>m_allComputeInputTargets.PushBack(pipelineImages[inputId.m_id]);</highlight></codeline>
+<codeline lineno="225"><highlight class="normal"><sp/><sp/>}</highlight></codeline>
+<codeline lineno="226"><highlight class="normal"></highlight></codeline>
+<codeline lineno="227"><highlight class="normal"><sp/><sp/></highlight><highlight class="keywordflow">for</highlight><highlight class="normal"><sp/>(</highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">auto</highlight><highlight class="normal">&amp;<sp/>inputBuffer<sp/>:<sp/>createInfo.m_inputBuffers)<sp/>{</highlight></codeline>
+<codeline lineno="228"><highlight class="normal"><sp/><sp/><sp/><sp/>m_computeInputBuffers.PushBack(pipelineStructuredBuffers[inputBuffer.m_id]);</highlight></codeline>
+<codeline lineno="229"><highlight class="normal"><sp/><sp/>}</highlight></codeline>
+<codeline lineno="230"><highlight class="normal"></highlight></codeline>
+<codeline lineno="231"><highlight class="normal"><sp/><sp/>LOG_DBG(log_D3D12RenderSystem,<sp/>LOG_LEVEL,<sp/></highlight><highlight class="stringliteral">&quot;========<sp/>D3D12<sp/>Render<sp/>Pass:<sp/>Root<sp/>Signature<sp/>========&quot;</highlight><highlight class="normal">);</highlight></codeline>
+<codeline lineno="232"><highlight class="normal"></highlight></codeline>
+<codeline lineno="233"><highlight class="normal"><sp/><sp/><ref refid="class_azura_1_1_containers_1_1_vector" kindref="compound">Vector&lt;CD3DX12_ROOT_PARAMETER&gt;</ref><sp/>descriptorTables(U32(createInfo.m_descriptorSets.size()<sp/>+<sp/>2),<sp/>allocatorTemporary);</highlight></codeline>
+<codeline lineno="234"><highlight class="normal"></highlight></codeline>
+<codeline lineno="235"><highlight class="normal"><sp/><sp/>m_rootSignatureTable.Reserve(U32(createInfo.m_descriptorSets.size()));</highlight></codeline>
+<codeline lineno="236"><highlight class="normal"></highlight></codeline>
+<codeline lineno="237"><highlight class="normal"><sp/><sp/>U32<sp/>cbvOffset<sp/><sp/><sp/><sp/><sp/>=<sp/>0;</highlight></codeline>
+<codeline lineno="238"><highlight class="normal"><sp/><sp/>U32<sp/>srvOffset<sp/><sp/><sp/><sp/><sp/>=<sp/>0;</highlight></codeline>
+<codeline lineno="239"><highlight class="normal"><sp/><sp/>U32<sp/>uavOffset<sp/><sp/><sp/><sp/><sp/>=<sp/>0;</highlight></codeline>
+<codeline lineno="240"><highlight class="normal"><sp/><sp/>U32<sp/>samplerOffset<sp/>=<sp/>0;</highlight></codeline>
+<codeline lineno="241"><highlight class="normal"></highlight></codeline>
+<codeline lineno="242"><highlight class="normal"><sp/><sp/></highlight><highlight class="keywordflow">for</highlight><highlight class="normal"><sp/>(</highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">auto</highlight><highlight class="normal">&amp;<sp/>setId<sp/>:<sp/>createInfo.m_descriptorSets)<sp/>{</highlight></codeline>
+<codeline lineno="243"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">auto</highlight><highlight class="normal">&amp;<sp/>tableEntry<sp/>=<sp/>descriptorSetTable[setId];</highlight></codeline>
+<codeline lineno="244"><highlight class="normal"></highlight></codeline>
+<codeline lineno="245"><highlight class="normal"><sp/><sp/><sp/><sp/>LOG_DBG(log_D3D12RenderSystem,<sp/>LOG_LEVEL,<sp/></highlight><highlight class="stringliteral">&quot;D3D12<sp/>Render<sp/>Pass:<sp/>Generating<sp/>for<sp/>Set<sp/>Position:<sp/>%d&quot;</highlight><highlight class="normal">,<sp/>m_rootSignatureTable</highlight></codeline>
+<codeline lineno="246"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/>.GetSize());</highlight></codeline>
+<codeline lineno="247"><highlight class="normal"><sp/><sp/><sp/><sp/>LOG_DBG(log_D3D12RenderSystem,<sp/>LOG_LEVEL,<sp/></highlight><highlight class="stringliteral">&quot;D3D12<sp/>Render<sp/>Pass:<sp/>Original<sp/>Set<sp/>Position:<sp/>%d&quot;</highlight><highlight class="normal">,<sp/>setId);</highlight></codeline>
+<codeline lineno="248"><highlight class="normal"></highlight></codeline>
+<codeline lineno="249"><highlight class="normal"><sp/><sp/><sp/><sp/>m_rootSignatureTable.PushBack(tableEntry);</highlight></codeline>
+<codeline lineno="250"><highlight class="normal"></highlight></codeline>
+<codeline lineno="251"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="class_azura_1_1_containers_1_1_vector" kindref="compound">Vector&lt;CD3DX12_DESCRIPTOR_RANGE&gt;</ref><sp/>currentRanges(tableEntry.m_count,<sp/>allocatorTemporary);</highlight></codeline>
+<codeline lineno="252"><highlight class="normal"></highlight></codeline>
+<codeline lineno="253"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">for</highlight><highlight class="normal"><sp/>(</highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">auto</highlight><highlight class="normal">&amp;<sp/>slot<sp/>:<sp/>descriptorSlots)<sp/>{</highlight></codeline>
+<codeline lineno="254"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">if</highlight><highlight class="normal"><sp/>(slot.m_setIdx<sp/>!=<sp/>setId)<sp/>{</highlight></codeline>
+<codeline lineno="255"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">continue</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="256"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="257"><highlight class="normal"></highlight></codeline>
+<codeline lineno="258"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/>CD3DX12_DESCRIPTOR_RANGE<sp/>rangeData;</highlight></codeline>
+<codeline lineno="259"><highlight class="normal"></highlight></codeline>
+<codeline lineno="260"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">switch</highlight><highlight class="normal"><sp/>(slot.m_type)<sp/>{</highlight></codeline>
+<codeline lineno="261"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">case</highlight><highlight class="normal"><sp/>DescriptorType::UniformBuffer:</highlight></codeline>
+<codeline lineno="262"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>LOG_DBG(log_D3D12RenderSystem,<sp/>LOG_LEVEL,<sp/></highlight><highlight class="stringliteral">&quot;D3D12<sp/>Render<sp/>Pass:<sp/>[%d]<sp/>Applying<sp/>Uniform<sp/>Buffer<sp/>at<sp/>Register<sp/>b(%d)&quot;</highlight><highlight class="normal">,</highlight></codeline>
+<codeline lineno="263"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>setId,<sp/>cbvOffset);</highlight></codeline>
+<codeline lineno="264"><highlight class="normal"></highlight></codeline>
+<codeline lineno="265"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>rangeData.Init(D3D12_DESCRIPTOR_RANGE_TYPE_CBV,<sp/>1,<sp/>cbvOffset);</highlight></codeline>
+<codeline lineno="266"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>currentRanges.PushBack(rangeData);</highlight></codeline>
+<codeline lineno="267"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>++cbvOffset;</highlight></codeline>
+<codeline lineno="268"><highlight class="normal"></highlight></codeline>
+<codeline lineno="269"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>++m_descriptorCount.m_numUniformSlots;</highlight></codeline>
+<codeline lineno="270"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">break</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="271"><highlight class="normal"></highlight></codeline>
+<codeline lineno="272"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">case</highlight><highlight class="normal"><sp/>DescriptorType::Sampler:</highlight></codeline>
+<codeline lineno="273"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>LOG_DBG(log_D3D12RenderSystem,<sp/>LOG_LEVEL,<sp/></highlight><highlight class="stringliteral">&quot;D3D12<sp/>Render<sp/>Pass:<sp/>[%d]<sp/>Applying<sp/>Sampler<sp/>Buffer<sp/>at<sp/>Register<sp/>s(%d)&quot;</highlight><highlight class="normal">,</highlight></codeline>
+<codeline lineno="274"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>setId,<sp/>samplerOffset);</highlight></codeline>
+<codeline lineno="275"><highlight class="normal"></highlight></codeline>
+<codeline lineno="276"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>rangeData.Init(D3D12_DESCRIPTOR_RANGE_TYPE_SAMPLER,<sp/>1,<sp/>samplerOffset);</highlight></codeline>
+<codeline lineno="277"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>currentRanges.PushBack(rangeData);</highlight></codeline>
+<codeline lineno="278"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>++samplerOffset;</highlight></codeline>
+<codeline lineno="279"><highlight class="normal"></highlight></codeline>
+<codeline lineno="280"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>++m_descriptorCount.m_numSamplerSlots;</highlight></codeline>
+<codeline lineno="281"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">break</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="282"><highlight class="normal"></highlight></codeline>
+<codeline lineno="283"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">case</highlight><highlight class="normal"><sp/>DescriptorType::SampledImage:</highlight></codeline>
+<codeline lineno="284"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>LOG_DBG(log_D3D12RenderSystem,<sp/>LOG_LEVEL,<sp/></highlight><highlight class="stringliteral">&quot;D3D12<sp/>Render<sp/>Pass:<sp/>[%d]<sp/>Applying<sp/>Texture<sp/>Image<sp/>at<sp/>Register<sp/>t(%d)&quot;</highlight><highlight class="normal">,</highlight></codeline>
+<codeline lineno="285"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>setId,<sp/>srvOffset);</highlight></codeline>
+<codeline lineno="286"><highlight class="normal"></highlight></codeline>
+<codeline lineno="287"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>rangeData.Init(D3D12_DESCRIPTOR_RANGE_TYPE_SRV,<sp/>1,<sp/>srvOffset);</highlight></codeline>
+<codeline lineno="288"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>currentRanges.PushBack(rangeData);</highlight></codeline>
+<codeline lineno="289"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>++srvOffset;</highlight></codeline>
+<codeline lineno="290"><highlight class="normal"></highlight></codeline>
+<codeline lineno="291"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>++m_descriptorCount.m_numSampledImageSlots;</highlight></codeline>
+<codeline lineno="292"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">break</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="293"><highlight class="normal"></highlight></codeline>
+<codeline lineno="294"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">case</highlight><highlight class="normal"><sp/>DescriptorType::UnorderedView:</highlight></codeline>
+<codeline lineno="295"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>LOG_DBG(log_D3D12RenderSystem,<sp/>LOG_LEVEL,<sp/></highlight><highlight class="stringliteral">&quot;D3D12<sp/>Render<sp/>Pass:<sp/>[%d]<sp/>Applying<sp/>UAV<sp/>at<sp/>Register<sp/>t(%d)&quot;</highlight><highlight class="normal">,</highlight></codeline>
+<codeline lineno="296"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>setId,<sp/>uavOffset);</highlight></codeline>
+<codeline lineno="297"><highlight class="normal"></highlight></codeline>
+<codeline lineno="298"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>rangeData.Init(D3D12_DESCRIPTOR_RANGE_TYPE_UAV,<sp/>1,<sp/>uavOffset);</highlight></codeline>
+<codeline lineno="299"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>currentRanges.PushBack(rangeData);</highlight></codeline>
+<codeline lineno="300"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>++uavOffset;</highlight></codeline>
+<codeline lineno="301"><highlight class="normal"></highlight></codeline>
+<codeline lineno="302"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>++m_descriptorCount.m_numUnorderedViewSlots;</highlight></codeline>
+<codeline lineno="303"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">break</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="304"><highlight class="normal"></highlight></codeline>
+<codeline lineno="305"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">case</highlight><highlight class="normal"><sp/>DescriptorType::PushConstant:</highlight></codeline>
+<codeline lineno="306"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">case</highlight><highlight class="normal"><sp/>DescriptorType::CombinedImageSampler:</highlight></codeline>
+<codeline lineno="307"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">default</highlight><highlight class="normal">:</highlight></codeline>
+<codeline lineno="308"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>LOG_ERR(log_D3D12RenderSystem,<sp/>LOG_LEVEL,<sp/></highlight><highlight class="stringliteral">&quot;Unsupported<sp/>Descriptor<sp/>Type<sp/>for<sp/>D3D12&quot;</highlight><highlight class="normal">);</highlight></codeline>
+<codeline lineno="309"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">break</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="310"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="311"><highlight class="normal"><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="312"><highlight class="normal"></highlight></codeline>
+<codeline lineno="313"><highlight class="normal"><sp/><sp/><sp/><sp/>CD3DX12_ROOT_PARAMETER<sp/>rootParameter;</highlight></codeline>
+<codeline lineno="314"><highlight class="normal"><sp/><sp/><sp/><sp/>rootParameter.InitAsDescriptorTable(currentRanges.GetSize(),<sp/>currentRanges.Data(),<sp/>D3D12_SHADER_VISIBILITY_ALL);</highlight></codeline>
+<codeline lineno="315"><highlight class="normal"><sp/><sp/><sp/><sp/>descriptorTables.PushBack(rootParameter);</highlight></codeline>
+<codeline lineno="316"><highlight class="normal"><sp/><sp/>}</highlight></codeline>
+<codeline lineno="317"><highlight class="normal"></highlight></codeline>
+<codeline lineno="318"><highlight class="normal"><sp/><sp/>CD3DX12_ROOT_PARAMETER<sp/>inputsRootParameter;</highlight></codeline>
+<codeline lineno="319"><highlight class="normal"><sp/><sp/>CD3DX12_ROOT_PARAMETER<sp/>ouputsRootParameter;</highlight></codeline>
+<codeline lineno="320"><highlight class="normal"><sp/><sp/>CD3DX12_DESCRIPTOR_RANGE<sp/>inputTargetRangeData;</highlight></codeline>
+<codeline lineno="321"><highlight class="normal"><sp/><sp/>CD3DX12_DESCRIPTOR_RANGE<sp/>inputBufferRangeData;</highlight></codeline>
+<codeline lineno="322"><highlight class="normal"><sp/><sp/>CD3DX12_DESCRIPTOR_RANGE<sp/>outputRangeData;</highlight></codeline>
+<codeline lineno="323"><highlight class="normal"></highlight></codeline>
+<codeline lineno="324"><highlight class="normal"><sp/><sp/></highlight><highlight class="comment">//<sp/>Have<sp/>some<sp/>inputs<sp/>targets</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="325"><highlight class="normal"><sp/><sp/></highlight><highlight class="keywordflow">if</highlight><highlight class="normal"><sp/>(!createInfo.m_inputTargets.empty())<sp/>{</highlight></codeline>
+<codeline lineno="326"><highlight class="normal"><sp/><sp/><sp/><sp/>LOG_DBG(log_D3D12RenderSystem,<sp/>LOG_LEVEL,<sp/></highlight><highlight class="stringliteral">&quot;D3D12<sp/>Render<sp/>Pass:<sp/>Generating<sp/>SRV<sp/>for<sp/>Set<sp/>Position:<sp/>%d&quot;</highlight><highlight class="normal">,<sp/>descriptorTables.</highlight></codeline>
+<codeline lineno="327"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/>GetSize());</highlight></codeline>
+<codeline lineno="328"><highlight class="normal"><sp/><sp/><sp/><sp/>LOG_DBG(log_D3D12RenderSystem,<sp/>LOG_LEVEL,</highlight></codeline>
+<codeline lineno="329"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="stringliteral">&quot;D3D12<sp/>Render<sp/>Pass:<sp/>[Attachments]<sp/>Applying<sp/>%d<sp/>Image<sp/>Attachments<sp/>as<sp/>register<sp/>t(%d)<sp/>to<sp/>t(%d)&quot;</highlight><highlight class="normal">,<sp/>createInfo.m_inputTargets.</highlight></codeline>
+<codeline lineno="330"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/>size(),<sp/>srvOffset,<sp/>srvOffset<sp/>+<sp/>createInfo.m_inputTargets.size()<sp/>-<sp/>1);</highlight></codeline>
+<codeline lineno="331"><highlight class="normal"></highlight></codeline>
+<codeline lineno="332"><highlight class="normal"><sp/><sp/><sp/><sp/>inputTargetRangeData.Init(D3D12_DESCRIPTOR_RANGE_TYPE_SRV,<sp/>UINT(createInfo.m_inputTargets.size()),<sp/>srvOffset);</highlight></codeline>
+<codeline lineno="333"><highlight class="normal"><sp/><sp/><sp/><sp/>inputsRootParameter.InitAsDescriptorTable(1,<sp/>&amp;inputTargetRangeData,<sp/>D3D12_SHADER_VISIBILITY_ALL);</highlight></codeline>
+<codeline lineno="334"><highlight class="normal"></highlight></codeline>
+<codeline lineno="335"><highlight class="normal"><sp/><sp/><sp/><sp/>m_computeInputTargetTableIdx<sp/>=<sp/>descriptorTables.GetSize();</highlight></codeline>
+<codeline lineno="336"><highlight class="normal"></highlight></codeline>
+<codeline lineno="337"><highlight class="normal"><sp/><sp/><sp/><sp/>descriptorTables.PushBack(inputsRootParameter);</highlight></codeline>
+<codeline lineno="338"><highlight class="normal"></highlight></codeline>
+<codeline lineno="339"><highlight class="normal"><sp/><sp/><sp/><sp/>srvOffset<sp/>+=<sp/>U32(createInfo.m_inputTargets.size());</highlight></codeline>
+<codeline lineno="340"><highlight class="normal"><sp/><sp/>}</highlight></codeline>
+<codeline lineno="341"><highlight class="normal"></highlight></codeline>
+<codeline lineno="342"><highlight class="normal"><sp/><sp/></highlight><highlight class="comment">//<sp/>Have<sp/>some<sp/>inputs<sp/>buffers</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="343"><highlight class="normal"><sp/><sp/></highlight><highlight class="keywordflow">if</highlight><highlight class="normal"><sp/>(!createInfo.m_inputBuffers.empty())<sp/>{</highlight></codeline>
+<codeline lineno="344"><highlight class="normal"><sp/><sp/><sp/><sp/>LOG_DBG(log_D3D12RenderSystem,<sp/>LOG_LEVEL,<sp/></highlight><highlight class="stringliteral">&quot;D3D12<sp/>Render<sp/>Pass:<sp/>Generating<sp/>SRV<sp/>for<sp/>Set<sp/>Position:<sp/>%d&quot;</highlight><highlight class="normal">,<sp/>descriptorTables.</highlight></codeline>
+<codeline lineno="345"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/>GetSize());</highlight></codeline>
+<codeline lineno="346"><highlight class="normal"><sp/><sp/><sp/><sp/>LOG_DBG(log_D3D12RenderSystem,<sp/>LOG_LEVEL,</highlight></codeline>
+<codeline lineno="347"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="stringliteral">&quot;D3D12<sp/>Render<sp/>Pass:<sp/>[Attachments]<sp/>Applying<sp/>%d<sp/>Buffer<sp/>Attachments<sp/>as<sp/>register<sp/>t(%d)<sp/>to<sp/>t(%d)&quot;</highlight><highlight class="normal">,<sp/>createInfo.m_inputBuffers.</highlight></codeline>
+<codeline lineno="348"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/>size(),<sp/>srvOffset,<sp/>srvOffset<sp/>+<sp/>createInfo.m_inputBuffers.size()<sp/>-<sp/>1);</highlight></codeline>
+<codeline lineno="349"><highlight class="normal"></highlight></codeline>
+<codeline lineno="350"><highlight class="normal"><sp/><sp/><sp/><sp/>inputBufferRangeData.Init(D3D12_DESCRIPTOR_RANGE_TYPE_SRV,<sp/>UINT(createInfo.m_inputBuffers.size()),<sp/>srvOffset);</highlight></codeline>
+<codeline lineno="351"><highlight class="normal"><sp/><sp/><sp/><sp/>inputsRootParameter.InitAsDescriptorTable(1,<sp/>&amp;inputBufferRangeData,<sp/>D3D12_SHADER_VISIBILITY_ALL);</highlight></codeline>
+<codeline lineno="352"><highlight class="normal"></highlight></codeline>
+<codeline lineno="353"><highlight class="normal"><sp/><sp/><sp/><sp/>m_computeInputBufferTableIdx<sp/>=<sp/>descriptorTables.GetSize();</highlight></codeline>
+<codeline lineno="354"><highlight class="normal"></highlight></codeline>
+<codeline lineno="355"><highlight class="normal"><sp/><sp/><sp/><sp/>descriptorTables.PushBack(inputsRootParameter);</highlight></codeline>
+<codeline lineno="356"><highlight class="normal"><sp/><sp/><sp/><sp/>srvOffset<sp/>+=<sp/>U32(createInfo.m_inputBuffers.size());<sp/></highlight><highlight class="comment">//<sp/>NOLINT</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="357"><highlight class="normal"><sp/><sp/>}</highlight></codeline>
+<codeline lineno="358"><highlight class="normal"></highlight></codeline>
+<codeline lineno="359"><highlight class="normal"><sp/><sp/></highlight><highlight class="keywordflow">if</highlight><highlight class="normal"><sp/>(!createInfo.m_outputTargets.empty())<sp/>{</highlight></codeline>
+<codeline lineno="360"><highlight class="normal"><sp/><sp/><sp/><sp/>LOG_DBG(log_D3D12RenderSystem,<sp/>LOG_LEVEL,<sp/></highlight><highlight class="stringliteral">&quot;D3D12<sp/>Render<sp/>Pass:<sp/>Generating<sp/>UAV<sp/>for<sp/>Set<sp/>Position:<sp/>%d&quot;</highlight><highlight class="normal">,<sp/>descriptorTables.</highlight></codeline>
+<codeline lineno="361"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/>GetSize());</highlight></codeline>
+<codeline lineno="362"><highlight class="normal"><sp/><sp/><sp/><sp/>LOG_DBG(log_D3D12RenderSystem,<sp/>LOG_LEVEL,</highlight></codeline>
+<codeline lineno="363"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="stringliteral">&quot;D3D12<sp/>Render<sp/>Pass:<sp/>[Output<sp/>Attachments]<sp/>Applying<sp/>%d<sp/>Image<sp/>Attachments<sp/>as<sp/>register<sp/>t(%d)<sp/>to<sp/>t(%d)&quot;</highlight><highlight class="normal">,<sp/>createInfo.m_outputTargets.</highlight></codeline>
+<codeline lineno="364"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/>size(),<sp/>uavOffset,<sp/>uavOffset<sp/>+<sp/>createInfo.m_outputTargets.size()<sp/>-<sp/>1);</highlight></codeline>
+<codeline lineno="365"><highlight class="normal"></highlight></codeline>
+<codeline lineno="366"><highlight class="normal"><sp/><sp/><sp/><sp/>outputRangeData.Init(D3D12_DESCRIPTOR_RANGE_TYPE_UAV,<sp/>UINT(createInfo.m_outputTargets.size()),<sp/>uavOffset);</highlight></codeline>
+<codeline lineno="367"><highlight class="normal"><sp/><sp/><sp/><sp/>ouputsRootParameter.InitAsDescriptorTable(1,<sp/>&amp;outputRangeData,<sp/>D3D12_SHADER_VISIBILITY_ALL);</highlight></codeline>
+<codeline lineno="368"><highlight class="normal"></highlight></codeline>
+<codeline lineno="369"><highlight class="normal"><sp/><sp/><sp/><sp/>m_computeOutputTargetTableIdx<sp/>=<sp/>descriptorTables.GetSize();</highlight></codeline>
+<codeline lineno="370"><highlight class="normal"></highlight></codeline>
+<codeline lineno="371"><highlight class="normal"><sp/><sp/><sp/><sp/>descriptorTables.PushBack(ouputsRootParameter);</highlight></codeline>
+<codeline lineno="372"><highlight class="normal"><sp/><sp/>}</highlight></codeline>
+<codeline lineno="373"><highlight class="normal"></highlight></codeline>
+<codeline lineno="374"><highlight class="normal"><sp/><sp/></highlight><highlight class="keywordflow">if</highlight><highlight class="normal"><sp/>(!createInfo.m_outputBuffers.empty())<sp/>{</highlight></codeline>
+<codeline lineno="375"><highlight class="normal"><sp/><sp/><sp/><sp/>LOG_DBG(log_D3D12RenderSystem,<sp/>LOG_LEVEL,<sp/></highlight><highlight class="stringliteral">&quot;D3D12<sp/>Render<sp/>Pass:<sp/>Generating<sp/>UAV<sp/>for<sp/>Set<sp/>Position:<sp/>%d&quot;</highlight><highlight class="normal">,<sp/>descriptorTables.</highlight></codeline>
+<codeline lineno="376"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/>GetSize());</highlight></codeline>
+<codeline lineno="377"><highlight class="normal"><sp/><sp/><sp/><sp/>LOG_DBG(log_D3D12RenderSystem,<sp/>LOG_LEVEL,</highlight></codeline>
+<codeline lineno="378"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="stringliteral">&quot;D3D12<sp/>Render<sp/>Pass:<sp/>[Output<sp/>Attachments]<sp/>Applying<sp/>%d<sp/>Buffer<sp/>Attachments<sp/>as<sp/>register<sp/>t(%d)<sp/>to<sp/>t(%d)&quot;</highlight><highlight class="normal">,<sp/>createInfo.m_outputTargets.</highlight></codeline>
+<codeline lineno="379"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/>size(),<sp/>uavOffset,<sp/>uavOffset<sp/>+<sp/>createInfo.m_outputBuffers.size()<sp/>-<sp/>1);</highlight></codeline>
+<codeline lineno="380"><highlight class="normal"></highlight></codeline>
+<codeline lineno="381"><highlight class="normal"><sp/><sp/><sp/><sp/>outputRangeData.Init(D3D12_DESCRIPTOR_RANGE_TYPE_UAV,<sp/>UINT(createInfo.m_outputBuffers.size()),<sp/>uavOffset);</highlight></codeline>
+<codeline lineno="382"><highlight class="normal"><sp/><sp/><sp/><sp/>ouputsRootParameter.InitAsDescriptorTable(1,<sp/>&amp;outputRangeData,<sp/>D3D12_SHADER_VISIBILITY_ALL);</highlight></codeline>
+<codeline lineno="383"><highlight class="normal"></highlight></codeline>
+<codeline lineno="384"><highlight class="normal"><sp/><sp/><sp/><sp/>m_computeOutputBufferTableIdx<sp/>=<sp/>descriptorTables.GetSize();</highlight></codeline>
+<codeline lineno="385"><highlight class="normal"></highlight></codeline>
+<codeline lineno="386"><highlight class="normal"><sp/><sp/><sp/><sp/>descriptorTables.PushBack(ouputsRootParameter);</highlight></codeline>
+<codeline lineno="387"><highlight class="normal"><sp/><sp/>}</highlight></codeline>
+<codeline lineno="388"><highlight class="normal"></highlight></codeline>
+<codeline lineno="389"><highlight class="normal"><sp/><sp/>CD3DX12_ROOT_SIGNATURE_DESC<sp/>rootSignatureDesc;</highlight></codeline>
+<codeline lineno="390"><highlight class="normal"><sp/><sp/>rootSignatureDesc.Init(descriptorTables.GetSize(),<sp/>descriptorTables.Data(),<sp/>0,<sp/></highlight><highlight class="keyword">nullptr</highlight><highlight class="normal">,</highlight></codeline>
+<codeline lineno="391"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>D3D12_ROOT_SIGNATURE_FLAG_ALLOW_INPUT_ASSEMBLER_INPUT_LAYOUT);</highlight></codeline>
+<codeline lineno="392"><highlight class="normal"></highlight></codeline>
+<codeline lineno="393"><highlight class="normal"><sp/><sp/>ComPtr&lt;ID3DBlob&gt;<sp/>signature;</highlight></codeline>
+<codeline lineno="394"><highlight class="normal"><sp/><sp/>ComPtr&lt;ID3DBlob&gt;<sp/>error;</highlight></codeline>
+<codeline lineno="395"><highlight class="normal"><sp/><sp/>VERIFY_D3D_OP(log_D3D12RenderSystem,<sp/>D3D12SerializeRootSignature(&amp;rootSignatureDesc,<sp/>D3D_ROOT_SIGNATURE_VERSION_1,<sp/>&amp;</highlight></codeline>
+<codeline lineno="396"><highlight class="normal"><sp/><sp/><sp/><sp/>signature,<sp/>&amp;error),<sp/></highlight><highlight class="stringliteral">&quot;Failed<sp/>to<sp/>serialize<sp/>D3D12<sp/>Root<sp/>Signature&quot;</highlight><highlight class="normal">);</highlight></codeline>
+<codeline lineno="397"><highlight class="normal"></highlight></codeline>
+<codeline lineno="398"><highlight class="normal"><sp/><sp/>VERIFY_D3D_OP(log_D3D12RenderSystem,<sp/>device-&gt;CreateRootSignature(0,<sp/>signature-&gt;GetBufferPointer(),<sp/>signature-&gt;</highlight></codeline>
+<codeline lineno="399"><highlight class="normal"><sp/><sp/><sp/><sp/>GetBufferSize(),<sp/>IID_PPV_ARGS(&amp;m_rootSignature)),<sp/></highlight><highlight class="stringliteral">&quot;Failed<sp/>to<sp/>create<sp/>Root<sp/>Signature&quot;</highlight><highlight class="normal">);</highlight></codeline>
+<codeline lineno="400"><highlight class="normal"></highlight></codeline>
+<codeline lineno="401"><highlight class="normal"><sp/><sp/>LOG_DBG(log_D3D12RenderSystem,<sp/>LOG_LEVEL,<sp/></highlight><highlight class="stringliteral">&quot;D3D12<sp/>Render<sp/>Pass:<sp/>Completed<sp/>Root<sp/>Signature&quot;</highlight><highlight class="normal">);</highlight></codeline>
+<codeline lineno="402"><highlight class="normal"></highlight></codeline>
+<codeline lineno="403"><highlight class="normal">}</highlight></codeline>
+<codeline lineno="404"><highlight class="normal">}<sp/></highlight><highlight class="comment">//<sp/>namespace<sp/>D3D12</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="405"><highlight class="normal">}<sp/></highlight><highlight class="comment">//<sp/>namespace<sp/>Azura</highlight><highlight class="normal"></highlight></codeline>
+    </programlisting>
+    <location file="Source/Azura/RenderSystem/Src/D3D12/D3D12ScopedComputePass.cpp"/>
+  </compounddef>
+</doxygen>

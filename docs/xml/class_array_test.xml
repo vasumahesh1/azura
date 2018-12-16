@@ -1,0 +1,122 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.8.14">
+  <compounddef id="class_array_test" kind="class" language="C++" prot="public">
+    <compoundname>ArrayTest</compoundname>
+    <basecompoundref prot="public" virt="non-virtual">Test</basecompoundref>
+      <sectiondef kind="protected-attrib">
+      <memberdef kind="variable" id="class_array_test_1a8423b54192077152a79b39417bbfbb08" prot="protected" static="no" mutable="no">
+        <type><ref refid="class_azura_1_1_memory_1_1_heap_memory_buffer" kindref="compound">Azura::Memory::HeapMemoryBuffer</ref></type>
+        <definition>Azura::Memory::HeapMemoryBuffer ArrayTest::buffer</definition>
+        <argsstring></argsstring>
+        <name>buffer</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Source/Containers/Test/Array_test.h" line="16" column="1" bodyfile="Source/Containers/Test/Array_test.h" bodystart="16" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="class_array_test_1a243b2dbb8587b165dccce10e6f8d9f7c" prot="protected" static="no" mutable="no">
+        <type><ref refid="class_azura_1_1_memory_1_1_monotonic_allocator" kindref="compound">Azura::Memory::MonotonicAllocator</ref></type>
+        <definition>Azura::Memory::MonotonicAllocator ArrayTest::alloc</definition>
+        <argsstring></argsstring>
+        <name>alloc</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Source/Containers/Test/Array_test.h" line="17" column="1" bodyfile="Source/Containers/Test/Array_test.h" bodystart="17" bodyend="-1"/>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="protected-func">
+      <memberdef kind="function" id="class_array_test_1a763be0e99715300fc0d03b01ce87c96f" prot="protected" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type></type>
+        <definition>ArrayTest::ArrayTest</definition>
+        <argsstring>()</argsstring>
+        <name>ArrayTest</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Source/Containers/Test/Array_test.h" line="12" column="1" bodyfile="Source/Containers/Test/Array_test.h" bodystart="12" bodyend="12"/>
+      </memberdef>
+      <memberdef kind="function" id="class_array_test_1ab35eb58bcd0402e3bf8013831ac3d6ee" prot="protected" static="no" const="no" explicit="no" inline="yes" virt="virtual">
+        <type></type>
+        <definition>virtual ArrayTest::~ArrayTest</definition>
+        <argsstring>()</argsstring>
+        <name>~ArrayTest</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Source/Containers/Test/Array_test.h" line="14" column="1" bodyfile="Source/Containers/Test/Array_test.h" bodystart="14" bodyend="14"/>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <inheritancegraph>
+      <node id="22">
+        <label>ArrayTest</label>
+        <link refid="class_array_test"/>
+        <childnode refid="23" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="23">
+        <label>Test</label>
+      </node>
+    </inheritancegraph>
+    <collaborationgraph>
+      <node id="27">
+        <label>Azura::Memory::MemoryBuffer</label>
+        <link refid="class_azura_1_1_memory_1_1_memory_buffer"/>
+      </node>
+      <node id="29">
+        <label>Azura::Memory::Allocator</label>
+        <link refid="class_azura_1_1_memory_1_1_allocator"/>
+      </node>
+      <node id="26">
+        <label>Azura::Memory::HeapMemoryBuffer</label>
+        <link refid="class_azura_1_1_memory_1_1_heap_memory_buffer"/>
+        <childnode refid="27" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="24">
+        <label>ArrayTest</label>
+        <link refid="class_array_test"/>
+        <childnode refid="25" relation="public-inheritance">
+        </childnode>
+        <childnode refid="26" relation="usage">
+          <edgelabel>buffer</edgelabel>
+        </childnode>
+        <childnode refid="28" relation="usage">
+          <edgelabel>alloc</edgelabel>
+        </childnode>
+      </node>
+      <node id="25">
+        <label>Test</label>
+      </node>
+      <node id="28">
+        <label>Azura::Memory::MonotonicAllocator</label>
+        <link refid="class_azura_1_1_memory_1_1_monotonic_allocator"/>
+        <childnode refid="29" relation="public-inheritance">
+        </childnode>
+      </node>
+    </collaborationgraph>
+    <location file="Source/Containers/Test/Array_test.h" line="10" column="1" bodyfile="Source/Containers/Test/Array_test.h" bodystart="10" bodyend="18"/>
+    <listofallmembers>
+      <member refid="class_array_test_1a243b2dbb8587b165dccce10e6f8d9f7c" prot="protected" virt="non-virtual"><scope>ArrayTest</scope><name>alloc</name></member>
+      <member refid="class_array_test_1a763be0e99715300fc0d03b01ce87c96f" prot="protected" virt="non-virtual"><scope>ArrayTest</scope><name>ArrayTest</name></member>
+      <member refid="class_array_test_1a8423b54192077152a79b39417bbfbb08" prot="protected" virt="non-virtual"><scope>ArrayTest</scope><name>buffer</name></member>
+      <member refid="class_array_test_1ab35eb58bcd0402e3bf8013831ac3d6ee" prot="protected" virt="virtual"><scope>ArrayTest</scope><name>~ArrayTest</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

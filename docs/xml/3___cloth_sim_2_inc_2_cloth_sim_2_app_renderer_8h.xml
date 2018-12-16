@@ -1,0 +1,637 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.8.14">
+  <compounddef id="3___cloth_sim_2_inc_2_cloth_sim_2_app_renderer_8h" kind="file" language="C++">
+    <compoundname>AppRenderer.h</compoundname>
+    <includes local="no">memory</includes>
+    <includes refid="_renderer_8h" local="yes">Generic/Renderer.h</includes>
+    <includes refid="_window_8h" local="yes">Generic/Window.h</includes>
+    <includes refid="_range_allocator_8h" local="yes">Memory/RangeAllocator.h</includes>
+    <includes refid="_heap_memory_buffer_8h" local="yes">Memory/HeapMemoryBuffer.h</includes>
+    <includes refid="_log_8h" local="yes">Log/Log.h</includes>
+    <includes refid="_core_8h" local="yes">Math/Core.h</includes>
+    <includes refid="_texture_manager_8h" local="yes">Generic/TextureManager.h</includes>
+    <includes refid="_polar_camera_8h" local="yes">Camera/PolarCamera.h</includes>
+    <includes refid="_cloth_plane_8h" local="yes">Physics/Geometry/ClothPlane.h</includes>
+    <includes refid="_transform_component_8h" local="yes">Math/TransformComponent.h</includes>
+    <includes refid="_physics_2_inc_2_physics_2_geometry_2_cloth_mesh_8h" local="yes">Physics/Geometry/ClothMesh.h</includes>
+    <includedby refid="3___cloth_sim_2_src_2_app_renderer_8cpp" local="yes">Source/Samples/3_ClothSim/Src/AppRenderer.cpp</includedby>
+    <includedby refid="_samples_23___cloth_sim_2_src_2main_8cpp" local="yes">Source/Samples/3_ClothSim/Src/main.cpp</includedby>
+    <incdepgraph>
+      <node id="5883">
+        <label>Camera.h</label>
+        <link refid="_camera_8h_source"/>
+        <childnode refid="5851" relation="include">
+        </childnode>
+        <childnode refid="5878" relation="include">
+        </childnode>
+        <childnode refid="5872" relation="include">
+        </childnode>
+      </node>
+      <node id="5878">
+        <label>Math/Core.h</label>
+        <link refid="_core_8h_source"/>
+        <childnode refid="5879" relation="include">
+        </childnode>
+        <childnode refid="5851" relation="include">
+        </childnode>
+      </node>
+      <node id="5855">
+        <label>functional</label>
+      </node>
+      <node id="5900">
+        <label>GLTFSDK/Document.h</label>
+      </node>
+      <node id="5856">
+        <label>iterator</label>
+      </node>
+      <node id="5867">
+        <label>Utils/Hash.h</label>
+        <link refid="_hash_8h_source"/>
+        <childnode refid="5851" relation="include">
+        </childnode>
+      </node>
+      <node id="5899">
+        <label>AssetManager/GLTFLoader.h</label>
+        <link refid="_g_l_t_f_loader_8h_source"/>
+        <childnode refid="5851" relation="include">
+        </childnode>
+        <childnode refid="5900" relation="include">
+        </childnode>
+        <childnode refid="5901" relation="include">
+        </childnode>
+      </node>
+      <node id="5848">
+        <label>Generic/Renderer.h</label>
+        <link refid="_renderer_8h_source"/>
+        <childnode refid="5849" relation="include">
+        </childnode>
+        <childnode refid="5852" relation="include">
+        </childnode>
+        <childnode refid="5860" relation="include">
+        </childnode>
+        <childnode refid="5861" relation="include">
+        </childnode>
+        <childnode refid="5862" relation="include">
+        </childnode>
+        <childnode refid="5870" relation="include">
+        </childnode>
+      </node>
+      <node id="5862">
+        <label>Core/RawStorageFormat.h</label>
+        <link refid="_raw_storage_format_8h_source"/>
+        <childnode refid="5851" relation="include">
+        </childnode>
+        <childnode refid="5850" relation="include">
+        </childnode>
+        <childnode refid="5863" relation="include">
+        </childnode>
+        <childnode refid="5864" relation="include">
+        </childnode>
+        <childnode refid="5865" relation="include">
+        </childnode>
+        <childnode refid="5866" relation="include">
+        </childnode>
+      </node>
+      <node id="5875">
+        <label>Memory/RangeAllocator.h</label>
+        <link refid="_range_allocator_8h_source"/>
+        <childnode refid="5858" relation="include">
+        </childnode>
+        <childnode refid="5851" relation="include">
+        </childnode>
+        <childnode refid="5874" relation="include">
+        </childnode>
+      </node>
+      <node id="5886">
+        <label>boost/container_hash/hash.hpp</label>
+      </node>
+      <node id="5888">
+        <label>Physics/PBD/Common/SolvingView.h</label>
+        <link refid="_solving_view_8h_source"/>
+        <childnode refid="5878" relation="include">
+        </childnode>
+        <childnode refid="5852" relation="include">
+        </childnode>
+        <childnode refid="5889" relation="include">
+        </childnode>
+      </node>
+      <node id="5877">
+        <label>MemoryBuffer.h</label>
+        <link refid="_memory_buffer_8h_source"/>
+        <childnode refid="5851" relation="include">
+        </childnode>
+      </node>
+      <node id="5884">
+        <label>Physics/Geometry/ClothPlane.h</label>
+        <link refid="_cloth_plane_8h_source"/>
+        <childnode refid="5878" relation="include">
+        </childnode>
+        <childnode refid="5862" relation="include">
+        </childnode>
+        <childnode refid="5885" relation="include">
+        </childnode>
+        <childnode refid="5887" relation="include">
+        </childnode>
+        <childnode refid="5892" relation="include">
+        </childnode>
+        <childnode refid="5893" relation="include">
+        </childnode>
+        <childnode refid="5874" relation="include">
+        </childnode>
+        <childnode refid="5896" relation="include">
+        </childnode>
+      </node>
+      <node id="5858">
+        <label>Memory/Allocator.h</label>
+        <link refid="_allocator_8h_source"/>
+        <childnode refid="5855" relation="include">
+        </childnode>
+        <childnode refid="5851" relation="include">
+        </childnode>
+        <childnode refid="5859" relation="include">
+        </childnode>
+      </node>
+      <node id="5868">
+        <label>Core/AssetLocation.h</label>
+        <link refid="_asset_location_8h_source"/>
+      </node>
+      <node id="5853">
+        <label>cassert</label>
+      </node>
+      <node id="5865">
+        <label>boost/preprocessor/tuple/elem.hpp</label>
+      </node>
+      <node id="5861">
+        <label>GenericTypes.h</label>
+        <link refid="_azura_2_render_system_2_inc_2_generic_2_generic_types_8h_source"/>
+        <childnode refid="5852" relation="include">
+        </childnode>
+        <childnode refid="5849" relation="include">
+        </childnode>
+        <childnode refid="5851" relation="include">
+        </childnode>
+        <childnode refid="5862" relation="include">
+        </childnode>
+        <childnode refid="5867" relation="include">
+        </childnode>
+        <childnode refid="5868" relation="include">
+        </childnode>
+        <childnode refid="5869" relation="include">
+        </childnode>
+        <childnode refid="5866" relation="include">
+        </childnode>
+      </node>
+      <node id="5876">
+        <label>Memory/HeapMemoryBuffer.h</label>
+        <link refid="_heap_memory_buffer_8h_source"/>
+        <childnode refid="5877" relation="include">
+        </childnode>
+        <childnode refid="5851" relation="include">
+        </childnode>
+      </node>
+      <node id="5859">
+        <label>Utils/Macros.h</label>
+        <link refid="_macros_8h_source"/>
+      </node>
+      <node id="5869">
+        <label>boost/container/small_vector.hpp</label>
+      </node>
+      <node id="5897">
+        <label>Math/TransformComponent.h</label>
+        <link refid="_transform_component_8h_source"/>
+        <childnode refid="5878" relation="include">
+        </childnode>
+        <childnode refid="5872" relation="include">
+        </childnode>
+      </node>
+      <node id="5849">
+        <label>Constants.h</label>
+        <link refid="_azura_2_render_system_2_inc_2_generic_2_constants_8h_source"/>
+        <childnode refid="5850" relation="include">
+        </childnode>
+        <childnode refid="5851" relation="include">
+        </childnode>
+      </node>
+      <node id="5866">
+        <label>boost/detail/bitmask.hpp</label>
+      </node>
+      <node id="5846">
+        <label>Source/Samples/3_ClothSim/Inc/ClothSim/AppRenderer.h</label>
+        <link refid="3___cloth_sim_2_inc_2_cloth_sim_2_app_renderer_8h"/>
+        <childnode refid="5847" relation="include">
+        </childnode>
+        <childnode refid="5848" relation="include">
+        </childnode>
+        <childnode refid="5871" relation="include">
+        </childnode>
+        <childnode refid="5875" relation="include">
+        </childnode>
+        <childnode refid="5876" relation="include">
+        </childnode>
+        <childnode refid="5873" relation="include">
+        </childnode>
+        <childnode refid="5878" relation="include">
+        </childnode>
+        <childnode refid="5880" relation="include">
+        </childnode>
+        <childnode refid="5882" relation="include">
+        </childnode>
+        <childnode refid="5884" relation="include">
+        </childnode>
+        <childnode refid="5897" relation="include">
+        </childnode>
+        <childnode refid="5898" relation="include">
+        </childnode>
+      </node>
+      <node id="5872">
+        <label>Core/Events.h</label>
+        <link refid="_events_8h_source"/>
+      </node>
+      <node id="5894">
+        <label>Physics/Geometry/IPhysicsGeometry.h</label>
+        <link refid="_i_physics_geometry_8h_source"/>
+        <childnode refid="5895" relation="include">
+        </childnode>
+      </node>
+      <node id="5850">
+        <label>tuple</label>
+      </node>
+      <node id="5857">
+        <label>Array.h</label>
+        <link refid="_array_8h_source"/>
+        <childnode refid="5853" relation="include">
+        </childnode>
+        <childnode refid="5854" relation="include">
+        </childnode>
+        <childnode refid="5858" relation="include">
+        </childnode>
+        <childnode refid="5851" relation="include">
+        </childnode>
+      </node>
+      <node id="5881">
+        <label>Memory/MonotonicAllocator.h</label>
+        <link refid="_monotonic_allocator_8h_source"/>
+        <childnode refid="5858" relation="include">
+        </childnode>
+        <childnode refid="5851" relation="include">
+        </childnode>
+      </node>
+      <node id="5874">
+        <label>vector</label>
+      </node>
+      <node id="5852">
+        <label>Containers/Vector.h</label>
+        <link refid="_vector_8h_source"/>
+        <childnode refid="5853" relation="include">
+        </childnode>
+        <childnode refid="5854" relation="include">
+        </childnode>
+        <childnode refid="5855" relation="include">
+        </childnode>
+        <childnode refid="5856" relation="include">
+        </childnode>
+        <childnode refid="5857" relation="include">
+        </childnode>
+        <childnode refid="5858" relation="include">
+        </childnode>
+        <childnode refid="5851" relation="include">
+        </childnode>
+        <childnode refid="5859" relation="include">
+        </childnode>
+      </node>
+      <node id="5873">
+        <label>Log/Log.h</label>
+        <link refid="_log_8h_source"/>
+        <childnode refid="5851" relation="include">
+        </childnode>
+        <childnode refid="5874" relation="include">
+        </childnode>
+      </node>
+      <node id="5891">
+        <label>array</label>
+      </node>
+      <node id="5885">
+        <label>Physics/Geometry/Edge.h</label>
+        <link refid="_edge_8h_source"/>
+        <childnode refid="5878" relation="include">
+        </childnode>
+        <childnode refid="5886" relation="include">
+        </childnode>
+      </node>
+      <node id="5895">
+        <label>Math/Geometry.h</label>
+        <link refid="_geometry_8h_source"/>
+        <childnode refid="5851" relation="include">
+        </childnode>
+        <childnode refid="5862" relation="include">
+        </childnode>
+      </node>
+      <node id="5893">
+        <label>Physics/Geometry/IClothPhysicsGeometry.h</label>
+        <link refid="_i_cloth_physics_geometry_8h_source"/>
+        <childnode refid="5894" relation="include">
+        </childnode>
+      </node>
+      <node id="5892">
+        <label>Physics/Geometry/GenericTypes.h</label>
+        <link refid="_physics_2_inc_2_physics_2_geometry_2_generic_types_8h_source"/>
+      </node>
+      <node id="5860">
+        <label>Drawable.h</label>
+        <link refid="_drawable_8h_source"/>
+        <childnode refid="5852" relation="include">
+        </childnode>
+        <childnode refid="5861" relation="include">
+        </childnode>
+        <childnode refid="5851" relation="include">
+        </childnode>
+        <childnode refid="5862" relation="include">
+        </childnode>
+      </node>
+      <node id="5887">
+        <label>Physics/PBD/Cloth/ClothSolvingView.h</label>
+        <link refid="_cloth_solving_view_8h_source"/>
+        <childnode refid="5888" relation="include">
+        </childnode>
+        <childnode refid="5890" relation="include">
+        </childnode>
+      </node>
+      <node id="5863">
+        <label>boost/preprocessor/repetition/repeat.hpp</label>
+      </node>
+      <node id="5896">
+        <label>unordered_map</label>
+      </node>
+      <node id="5851">
+        <label>Types.h</label>
+      </node>
+      <node id="5901">
+        <label>GLTFSDK/GLTFResourceReader.h</label>
+      </node>
+      <node id="5879">
+        <label>mathfu/matrix.h</label>
+      </node>
+      <node id="5871">
+        <label>Generic/Window.h</label>
+        <link refid="_window_8h_source"/>
+        <childnode refid="5855" relation="include">
+        </childnode>
+        <childnode refid="5861" relation="include">
+        </childnode>
+        <childnode refid="5851" relation="include">
+        </childnode>
+        <childnode refid="5848" relation="include">
+        </childnode>
+        <childnode refid="5872" relation="include">
+        </childnode>
+        <childnode refid="5873" relation="include">
+        </childnode>
+      </node>
+      <node id="5882">
+        <label>Camera/PolarCamera.h</label>
+        <link refid="_polar_camera_8h_source"/>
+        <childnode refid="5883" relation="include">
+        </childnode>
+      </node>
+      <node id="5889">
+        <label>type_traits</label>
+      </node>
+      <node id="5870">
+        <label>ComputePool.h</label>
+        <link refid="_compute_pool_8h_source"/>
+        <childnode refid="5852" relation="include">
+        </childnode>
+        <childnode refid="5861" relation="include">
+        </childnode>
+        <childnode refid="5851" relation="include">
+        </childnode>
+      </node>
+      <node id="5880">
+        <label>Generic/TextureManager.h</label>
+        <link refid="_texture_manager_8h_source"/>
+        <childnode refid="5851" relation="include">
+        </childnode>
+        <childnode refid="5876" relation="include">
+        </childnode>
+        <childnode refid="5881" relation="include">
+        </childnode>
+        <childnode refid="5852" relation="include">
+        </childnode>
+        <childnode refid="5861" relation="include">
+        </childnode>
+        <childnode refid="5873" relation="include">
+        </childnode>
+      </node>
+      <node id="5854">
+        <label>cstring</label>
+      </node>
+      <node id="5890">
+        <label>Physics/PBD/Cloth/Constraints.h</label>
+        <link refid="_constraints_8h_source"/>
+        <childnode refid="5851" relation="include">
+        </childnode>
+        <childnode refid="5852" relation="include">
+        </childnode>
+        <childnode refid="5878" relation="include">
+        </childnode>
+        <childnode refid="5891" relation="include">
+        </childnode>
+      </node>
+      <node id="5847">
+        <label>memory</label>
+      </node>
+      <node id="5864">
+        <label>boost/preprocessor/seq/for_each.hpp</label>
+      </node>
+      <node id="5898">
+        <label>Physics/Geometry/ClothMesh.h</label>
+        <link refid="_physics_2_inc_2_physics_2_geometry_2_cloth_mesh_8h_source"/>
+        <childnode refid="5878" relation="include">
+        </childnode>
+        <childnode refid="5862" relation="include">
+        </childnode>
+        <childnode refid="5885" relation="include">
+        </childnode>
+        <childnode refid="5887" relation="include">
+        </childnode>
+        <childnode refid="5893" relation="include">
+        </childnode>
+        <childnode refid="5874" relation="include">
+        </childnode>
+        <childnode refid="5896" relation="include">
+        </childnode>
+        <childnode refid="5899" relation="include">
+        </childnode>
+      </node>
+    </incdepgraph>
+    <innerclass refid="struct_azura_1_1_scene_u_b_o" prot="public">Azura::SceneUBO</innerclass>
+    <innerclass refid="struct_azura_1_1_cloth_compute_properties" prot="public">Azura::ClothComputeProperties</innerclass>
+    <innerclass refid="struct_azura_1_1_self_collision_constraint" prot="public">Azura::SelfCollisionConstraint</innerclass>
+    <innerclass refid="struct_azura_1_1_compute_u_b_o" prot="public">Azura::ComputeUBO</innerclass>
+    <innerclass refid="struct_azura_1_1_normal_u_b_o" prot="public">Azura::NormalUBO</innerclass>
+    <innerclass refid="struct_azura_1_1_normals_pass_data" prot="public">Azura::NormalsPassData</innerclass>
+    <innerclass refid="struct_azura_1_1_compute_pass_data" prot="public">Azura::ComputePassData</innerclass>
+    <innerclass refid="struct_azura_1_1_pass_data" prot="public">Azura::PassData</innerclass>
+    <innerclass refid="class_azura_1_1_app_renderer" prot="public">Azura::AppRenderer</innerclass>
+    <innernamespace refid="namespace_azura">Azura</innernamespace>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <programlisting>
+<codeline lineno="1"><highlight class="preprocessor">#pragma<sp/>once</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="2"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&lt;memory&gt;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="3"><highlight class="normal"></highlight></codeline>
+<codeline lineno="4"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&quot;Generic/Renderer.h&quot;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="5"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&quot;Generic/Window.h&quot;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="6"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&quot;Memory/RangeAllocator.h&quot;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="7"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&quot;Memory/HeapMemoryBuffer.h&quot;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="8"><highlight class="normal"></highlight></codeline>
+<codeline lineno="9"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&quot;Log/Log.h&quot;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="10"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&quot;Math/Core.h&quot;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="11"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&quot;Generic/TextureManager.h&quot;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="12"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&quot;Camera/PolarCamera.h&quot;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="13"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&quot;Physics/Geometry/ClothPlane.h&quot;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="14"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&quot;Math/TransformComponent.h&quot;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="15"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&quot;Physics/Geometry/ClothMesh.h&quot;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="16"><highlight class="normal"></highlight></codeline>
+<codeline lineno="17"><highlight class="normal"></highlight></codeline>
+<codeline lineno="18"><highlight class="normal"></highlight><highlight class="keyword">namespace<sp/></highlight><highlight class="normal"><ref refid="namespace_azura" kindref="compound">Azura</ref><sp/>{</highlight></codeline>
+<codeline lineno="19"><highlight class="normal"></highlight></codeline>
+<codeline lineno="20"><highlight class="normal"></highlight><highlight class="keyword">struct<sp/></highlight><highlight class="normal">SceneUBO<sp/>{</highlight></codeline>
+<codeline lineno="21"><highlight class="normal"><sp/><sp/>Matrix4f<sp/>m_model;</highlight></codeline>
+<codeline lineno="22"><highlight class="normal"><sp/><sp/>Matrix4f<sp/>m_modelInvTranspose;</highlight></codeline>
+<codeline lineno="23"><highlight class="normal"><sp/><sp/>Matrix4f<sp/>m_view;</highlight></codeline>
+<codeline lineno="24"><highlight class="normal"><sp/><sp/>Matrix4f<sp/>m_viewProj;</highlight></codeline>
+<codeline lineno="25"><highlight class="normal"><sp/><sp/>Matrix4f<sp/>m_invViewProj;</highlight></codeline>
+<codeline lineno="26"><highlight class="normal"><sp/><sp/>Matrix4f<sp/>m_invProj;</highlight></codeline>
+<codeline lineno="27"><highlight class="normal">};</highlight></codeline>
+<codeline lineno="28"><highlight class="normal"></highlight></codeline>
+<codeline lineno="29" refid="struct_azura_1_1_cloth_compute_properties" refkind="compound"><highlight class="normal"></highlight><highlight class="keyword">struct<sp/></highlight><highlight class="normal"><ref refid="struct_azura_1_1_cloth_compute_properties" kindref="compound">ClothComputeProperties</ref><sp/>{</highlight></codeline>
+<codeline lineno="30"><highlight class="normal"><sp/><sp/>Vector3i<sp/>m_minBounding;</highlight></codeline>
+<codeline lineno="31"><highlight class="normal"><sp/><sp/>Vector3i<sp/>m_maxBounding;</highlight></codeline>
+<codeline lineno="32"><highlight class="normal"><sp/><sp/>U32<sp/>m_numSelfCollisionConstraints;</highlight></codeline>
+<codeline lineno="33"><highlight class="normal">};</highlight></codeline>
+<codeline lineno="34"><highlight class="normal"></highlight></codeline>
+<codeline lineno="35" refid="struct_azura_1_1_self_collision_constraint" refkind="compound"><highlight class="normal"></highlight><highlight class="keyword">struct<sp/></highlight><highlight class="normal"><ref refid="struct_azura_1_1_self_collision_constraint" kindref="compound">SelfCollisionConstraint</ref><sp/>{</highlight></codeline>
+<codeline lineno="36"><highlight class="normal"><sp/><sp/>U32<sp/>m_pIdx;</highlight></codeline>
+<codeline lineno="37"><highlight class="normal"><sp/><sp/>U32<sp/>m_p0;</highlight></codeline>
+<codeline lineno="38"><highlight class="normal"><sp/><sp/>U32<sp/>m_p1;</highlight></codeline>
+<codeline lineno="39"><highlight class="normal"><sp/><sp/>U32<sp/>m_p2;</highlight></codeline>
+<codeline lineno="40"><highlight class="normal"></highlight></codeline>
+<codeline lineno="41"><highlight class="normal"><sp/><sp/>Vector3f<sp/>m_normal;</highlight></codeline>
+<codeline lineno="42"><highlight class="normal">};</highlight></codeline>
+<codeline lineno="43"><highlight class="normal"></highlight></codeline>
+<codeline lineno="44"><highlight class="normal"></highlight><highlight class="keyword">struct<sp/></highlight><highlight class="normal"><ref refid="struct_azura_1_1_compute_u_b_o" kindref="compound">ComputeUBO</ref></highlight></codeline>
+<codeline lineno="45"><highlight class="normal">{</highlight></codeline>
+<codeline lineno="46"><highlight class="normal"><sp/><sp/></highlight><highlight class="keywordtype">float</highlight><highlight class="normal"><sp/>m_stretchStiffness;</highlight></codeline>
+<codeline lineno="47"><highlight class="normal"><sp/><sp/></highlight><highlight class="keywordtype">float</highlight><highlight class="normal"><sp/>m_bendStiffness;</highlight></codeline>
+<codeline lineno="48"><highlight class="normal"><sp/><sp/></highlight><highlight class="keywordtype">float</highlight><highlight class="normal"><sp/>m_longRangeStiffness;</highlight></codeline>
+<codeline lineno="49"><highlight class="normal"><sp/><sp/></highlight><highlight class="keywordtype">float</highlight><highlight class="normal"><sp/>m_timeDelta;</highlight></codeline>
+<codeline lineno="50"><highlight class="normal"></highlight></codeline>
+<codeline lineno="51"><highlight class="normal"><sp/><sp/>U32<sp/>m_numStretchConstraints;</highlight></codeline>
+<codeline lineno="52"><highlight class="normal"><sp/><sp/>U32<sp/>m_numBendConstraints;</highlight></codeline>
+<codeline lineno="53"><highlight class="normal"><sp/><sp/>U32<sp/>m_numLongRangeConstraints;</highlight></codeline>
+<codeline lineno="54"><highlight class="normal"><sp/><sp/>U32<sp/>m_numVertices;</highlight></codeline>
+<codeline lineno="55"><highlight class="normal"></highlight></codeline>
+<codeline lineno="56"><highlight class="normal"><sp/><sp/>U32<sp/>m_numTriangles;</highlight></codeline>
+<codeline lineno="57"><highlight class="normal"><sp/><sp/>U32<sp/>m_frameCount{0};</highlight></codeline>
+<codeline lineno="58"><highlight class="normal"><sp/><sp/>U32<sp/>m_pad[2];</highlight></codeline>
+<codeline lineno="59"><highlight class="normal"></highlight></codeline>
+<codeline lineno="60"><highlight class="normal"><sp/><sp/>Matrix4f<sp/>m_clothModelMatrix[16];</highlight></codeline>
+<codeline lineno="61"><highlight class="normal">};</highlight></codeline>
+<codeline lineno="62"><highlight class="normal"></highlight></codeline>
+<codeline lineno="63" refid="struct_azura_1_1_normal_u_b_o" refkind="compound"><highlight class="normal"></highlight><highlight class="keyword">struct<sp/></highlight><highlight class="normal"><ref refid="struct_azura_1_1_normal_u_b_o" kindref="compound">NormalUBO</ref></highlight></codeline>
+<codeline lineno="64"><highlight class="normal">{</highlight></codeline>
+<codeline lineno="65"><highlight class="normal"><sp/><sp/>U32<sp/>m_numVertices;</highlight></codeline>
+<codeline lineno="66"><highlight class="normal"><sp/><sp/>U32<sp/>m_numTriangles;</highlight></codeline>
+<codeline lineno="67"><highlight class="normal"><sp/><sp/></highlight><highlight class="keywordtype">float</highlight><highlight class="normal"><sp/>m_pad[2];</highlight></codeline>
+<codeline lineno="68"><highlight class="normal">};</highlight></codeline>
+<codeline lineno="69"><highlight class="normal"></highlight></codeline>
+<codeline lineno="70" refid="struct_azura_1_1_normals_pass_data" refkind="compound"><highlight class="normal"></highlight><highlight class="keyword">struct<sp/></highlight><highlight class="normal"><ref refid="struct_azura_1_1_normals_pass_data" kindref="compound">NormalsPassData</ref></highlight></codeline>
+<codeline lineno="71"><highlight class="normal">{</highlight></codeline>
+<codeline lineno="72"><highlight class="normal"><sp/><sp/>U32<sp/>m_uboSlot;</highlight></codeline>
+<codeline lineno="73"><highlight class="normal"><sp/><sp/>U32<sp/>m_passId;</highlight></codeline>
+<codeline lineno="74"><highlight class="normal">};</highlight></codeline>
+<codeline lineno="75"><highlight class="normal"></highlight></codeline>
+<codeline lineno="76"><highlight class="normal"></highlight><highlight class="keyword">struct<sp/></highlight><highlight class="normal"><ref refid="struct_azura_1_1_compute_pass_data" kindref="compound">ComputePassData</ref></highlight></codeline>
+<codeline lineno="77"><highlight class="normal">{</highlight></codeline>
+<codeline lineno="78"><highlight class="normal"><sp/><sp/>U32<sp/>m_computeUBOSlot;</highlight></codeline>
+<codeline lineno="79"><highlight class="normal"><sp/><sp/>U32<sp/>m_pass1;</highlight></codeline>
+<codeline lineno="80"><highlight class="normal"><sp/><sp/>U32<sp/>m_passInitialize;</highlight></codeline>
+<codeline lineno="81"><highlight class="normal"><sp/><sp/>U32<sp/>m_passBinning;</highlight></codeline>
+<codeline lineno="82"><highlight class="normal"><sp/><sp/>U32<sp/>m_passSelfCollisions;</highlight></codeline>
+<codeline lineno="83"><highlight class="normal"><sp/><sp/>std::vector&lt;U32&gt;<sp/>m_passItr1;</highlight></codeline>
+<codeline lineno="84"><highlight class="normal"><sp/><sp/>std::vector&lt;U32&gt;<sp/>m_passItr2;</highlight></codeline>
+<codeline lineno="85"><highlight class="normal"><sp/><sp/>U32<sp/>m_pass4;</highlight></codeline>
+<codeline lineno="86"><highlight class="normal">};</highlight></codeline>
+<codeline lineno="87"><highlight class="normal"></highlight></codeline>
+<codeline lineno="88"><highlight class="normal"></highlight><highlight class="keyword">struct<sp/></highlight><highlight class="normal">PassData<sp/>{</highlight></codeline>
+<codeline lineno="89"><highlight class="normal"><sp/><sp/>U32<sp/>m_clothId;</highlight></codeline>
+<codeline lineno="90"><highlight class="normal"><sp/><sp/>U32<sp/>m_sphereId;</highlight></codeline>
+<codeline lineno="91"><highlight class="normal"><sp/><sp/>U32<sp/>m_planeId;</highlight></codeline>
+<codeline lineno="92"><highlight class="normal"><sp/><sp/>U32<sp/>m_shehzanId;</highlight></codeline>
+<codeline lineno="93"><highlight class="normal"><sp/><sp/>U32<sp/>m_sceneUBOSlot;</highlight></codeline>
+<codeline lineno="94"><highlight class="normal"><sp/><sp/>U32<sp/>m_vertexSlot;</highlight></codeline>
+<codeline lineno="95"><highlight class="normal"><sp/><sp/>U32<sp/>m_normalSlot;</highlight></codeline>
+<codeline lineno="96"><highlight class="normal">};</highlight></codeline>
+<codeline lineno="97"><highlight class="normal"></highlight></codeline>
+<codeline lineno="98"><highlight class="normal"></highlight><highlight class="keyword">class<sp/></highlight><highlight class="normal">AppRenderer<sp/>{</highlight></codeline>
+<codeline lineno="99"><highlight class="normal"></highlight><highlight class="keyword">public</highlight><highlight class="normal">:</highlight></codeline>
+<codeline lineno="100"><highlight class="normal"><sp/><sp/>AppRenderer();</highlight></codeline>
+<codeline lineno="101"><highlight class="normal"></highlight></codeline>
+<codeline lineno="102"><highlight class="normal"><sp/><sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/>Initialize();</highlight></codeline>
+<codeline lineno="103"><highlight class="normal"><sp/><sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/>WindowUpdate(</highlight><highlight class="keywordtype">float</highlight><highlight class="normal"><sp/>timeDelta);</highlight></codeline>
+<codeline lineno="104"><highlight class="normal"><sp/><sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/>Run()<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="105"><highlight class="normal"><sp/><sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/>Destroy()<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="106"><highlight class="normal"></highlight></codeline>
+<codeline lineno="107"><highlight class="normal"></highlight><highlight class="keyword">private</highlight><highlight class="normal">:</highlight></codeline>
+<codeline lineno="108"><highlight class="normal"><sp/><sp/>Log<sp/>log_AppRenderer;</highlight></codeline>
+<codeline lineno="109"><highlight class="normal"></highlight></codeline>
+<codeline lineno="110"><highlight class="normal"><sp/><sp/>Memory::HeapMemoryBuffer<sp/>m_mainBuffer;</highlight></codeline>
+<codeline lineno="111"><highlight class="normal"></highlight></codeline>
+<codeline lineno="112"><highlight class="normal"><sp/><sp/>Memory::MonotonicAllocator<sp/>m_mainAllocator;</highlight></codeline>
+<codeline lineno="113"><highlight class="normal"><sp/><sp/>Memory::MonotonicAllocator<sp/>m_localAllocator;</highlight></codeline>
+<codeline lineno="114"><highlight class="normal"><sp/><sp/>Memory::MonotonicAllocator<sp/>m_drawableAllocator;</highlight></codeline>
+<codeline lineno="115"><highlight class="normal"></highlight></codeline>
+<codeline lineno="116"><highlight class="normal"><sp/><sp/>std::unique_ptr&lt;Renderer&gt;<sp/>m_renderer{</highlight><highlight class="keyword">nullptr</highlight><highlight class="normal">};</highlight></codeline>
+<codeline lineno="117"><highlight class="normal"><sp/><sp/>std::unique_ptr&lt;Window&gt;<sp/>m_window{</highlight><highlight class="keyword">nullptr</highlight><highlight class="normal">};</highlight></codeline>
+<codeline lineno="118"><highlight class="normal"><sp/><sp/>std::unique_ptr&lt;TextureManager&gt;<sp/>m_textureManager{</highlight><highlight class="keyword">nullptr</highlight><highlight class="normal">};</highlight></codeline>
+<codeline lineno="119"><highlight class="normal"></highlight></codeline>
+<codeline lineno="120"><highlight class="normal"><sp/><sp/>PolarCamera<sp/>m_camera;</highlight></codeline>
+<codeline lineno="121"><highlight class="normal"></highlight></codeline>
+<codeline lineno="122"><highlight class="normal"><sp/><sp/>SceneUBO<sp/>m_clothUBO{};</highlight></codeline>
+<codeline lineno="123"><highlight class="normal"><sp/><sp/>SceneUBO<sp/>m_sphereUBO{};</highlight></codeline>
+<codeline lineno="124"><highlight class="normal"><sp/><sp/>SceneUBO<sp/>m_planeUBO{};</highlight></codeline>
+<codeline lineno="125"><highlight class="normal"><sp/><sp/>SceneUBO<sp/>m_shehzanUBO{};</highlight></codeline>
+<codeline lineno="126"><highlight class="normal"><sp/><sp/>ComputeUBO<sp/>m_computeUBO{};</highlight></codeline>
+<codeline lineno="127"><highlight class="normal"><sp/><sp/>NormalUBO<sp/>m_normalUBO{};</highlight></codeline>
+<codeline lineno="128"><highlight class="normal"><sp/><sp/>DrawablePool*<sp/>m_mainPool{</highlight><highlight class="keyword">nullptr</highlight><highlight class="normal">};</highlight></codeline>
+<codeline lineno="129"><highlight class="normal"><sp/><sp/>DrawablePool*<sp/>m_spherePool{</highlight><highlight class="keyword">nullptr</highlight><highlight class="normal">};</highlight></codeline>
+<codeline lineno="130"><highlight class="normal"><sp/><sp/>DrawablePool*<sp/>m_planePool{</highlight><highlight class="keyword">nullptr</highlight><highlight class="normal">};</highlight></codeline>
+<codeline lineno="131"><highlight class="normal"><sp/><sp/>DrawablePool*<sp/>m_shehzanPool{</highlight><highlight class="keyword">nullptr</highlight><highlight class="normal">};</highlight></codeline>
+<codeline lineno="132"><highlight class="normal"><sp/><sp/>ComputePool*<sp/>m_computePools[5]{<sp/></highlight><highlight class="keyword">nullptr</highlight><highlight class="normal">,<sp/></highlight><highlight class="keyword">nullptr</highlight><highlight class="normal">,<sp/></highlight><highlight class="keyword">nullptr</highlight><highlight class="normal">,<sp/></highlight><highlight class="keyword">nullptr</highlight><highlight class="normal">,<sp/></highlight><highlight class="keyword">nullptr</highlight><highlight class="normal">};</highlight></codeline>
+<codeline lineno="133"><highlight class="normal"></highlight></codeline>
+<codeline lineno="134"><highlight class="normal"><sp/><sp/>std::vector&lt;ComputePool*&gt;<sp/>m_iterativePools;</highlight></codeline>
+<codeline lineno="135"><highlight class="normal"></highlight></codeline>
+<codeline lineno="136"><highlight class="normal"><sp/><sp/>PassData<sp/>m_renderPass{};</highlight></codeline>
+<codeline lineno="137"><highlight class="normal"><sp/><sp/>ComputePassData<sp/>m_computePass{};</highlight></codeline>
+<codeline lineno="138"><highlight class="normal"><sp/><sp/>NormalsPassData<sp/>m_normalsPass{};</highlight></codeline>
+<codeline lineno="139"><highlight class="normal"></highlight></codeline>
+<codeline lineno="140"><highlight class="normal"><sp/><sp/>Math::TransformComponent<sp/>m_clothTransform{};</highlight></codeline>
+<codeline lineno="141"><highlight class="normal"></highlight></codeline>
+<codeline lineno="142"><highlight class="normal"><sp/><sp/>Containers::Vector&lt;Math::TransformComponent&gt;<sp/>m_curtainTransforms;</highlight></codeline>
+<codeline lineno="143"><highlight class="normal"></highlight></codeline>
+<codeline lineno="144"><highlight class="normal"><sp/><sp/>Physics::ClothPlane<sp/>m_clothPlane;</highlight></codeline>
+<codeline lineno="145"><highlight class="normal"><sp/><sp/>Physics::ClothMesh<sp/>m_clothMesh;</highlight></codeline>
+<codeline lineno="146"><highlight class="normal"></highlight></codeline>
+<codeline lineno="147"><highlight class="normal"><sp/><sp/>Physics::IClothPhysicsGeometry*<sp/>p_activeMesh{</highlight><highlight class="keyword">nullptr</highlight><highlight class="normal">};</highlight></codeline>
+<codeline lineno="148"><highlight class="normal"></highlight></codeline>
+<codeline lineno="149"><highlight class="normal"><sp/><sp/></highlight><highlight class="keywordtype">int</highlight><highlight class="normal"><sp/>m_rotateFactor{0};</highlight></codeline>
+<codeline lineno="150"><highlight class="normal"><sp/><sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">float</highlight><highlight class="normal"><sp/>m_rotateStepSize{Math::PI_OVER4};</highlight></codeline>
+<codeline lineno="151"><highlight class="normal">};</highlight></codeline>
+<codeline lineno="152"><highlight class="normal">}<sp/></highlight><highlight class="comment">//<sp/>namespace</highlight><highlight class="normal"></highlight></codeline>
+    </programlisting>
+    <location file="Source/Samples/3_ClothSim/Inc/ClothSim/AppRenderer.h"/>
+  </compounddef>
+</doxygen>

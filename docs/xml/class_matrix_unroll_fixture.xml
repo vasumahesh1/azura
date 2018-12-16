@@ -1,0 +1,117 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.8.14">
+  <compounddef id="class_matrix_unroll_fixture" kind="class" language="C++" prot="public">
+    <compoundname>MatrixUnrollFixture</compoundname>
+    <basecompoundref prot="public" virt="non-virtual">Fixture</basecompoundref>
+      <sectiondef kind="public-attrib">
+      <memberdef kind="variable" id="class_matrix_unroll_fixture_1a025f909a49a166a7785d96c0fd913843" prot="public" static="no" mutable="no">
+        <type>double *</type>
+        <definition>double* MatrixUnrollFixture::m_data1</definition>
+        <argsstring></argsstring>
+        <name>m_data1</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Source/PowerBench/Inc/PowerBench/MatrixUnroll.h" line="28" column="1" bodyfile="Source/PowerBench/Inc/PowerBench/MatrixUnroll.h" bodystart="28" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="class_matrix_unroll_fixture_1a342cf618d16f037264e95f36df0d6a3d" prot="public" static="no" mutable="no">
+        <type>double *</type>
+        <definition>double* MatrixUnrollFixture::m_data2</definition>
+        <argsstring></argsstring>
+        <name>m_data2</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Source/PowerBench/Inc/PowerBench/MatrixUnroll.h" line="29" column="1" bodyfile="Source/PowerBench/Inc/PowerBench/MatrixUnroll.h" bodystart="29" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="class_matrix_unroll_fixture_1ab81355ec72b435ebe3123d6a0dbda14b" prot="public" static="no" mutable="no">
+        <type>double *</type>
+        <definition>double* MatrixUnrollFixture::m_result</definition>
+        <argsstring></argsstring>
+        <name>m_result</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Source/PowerBench/Inc/PowerBench/MatrixUnroll.h" line="30" column="1" bodyfile="Source/PowerBench/Inc/PowerBench/MatrixUnroll.h" bodystart="30" bodyend="-1"/>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="public-func">
+      <memberdef kind="function" id="class_matrix_unroll_fixture_1a4ca04b35c4bcaf17b972b31ab42b631a" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>void MatrixUnrollFixture::TearDown</definition>
+        <argsstring>(const benchmark::State &amp;) override</argsstring>
+        <name>TearDown</name>
+        <param>
+          <type>const benchmark::State &amp;</type>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Source/PowerBench/Inc/PowerBench/MatrixUnroll.h" line="10" column="1" bodyfile="Source/PowerBench/Inc/PowerBench/MatrixUnroll.h" bodystart="10" bodyend="15"/>
+      </memberdef>
+      <memberdef kind="function" id="class_matrix_unroll_fixture_1a7704b2fc4f7880a5f9b2732a7824c21d" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>void MatrixUnrollFixture::SetUp</definition>
+        <argsstring>(const benchmark::State &amp;st) override</argsstring>
+        <name>SetUp</name>
+        <param>
+          <type>const benchmark::State &amp;</type>
+          <declname>st</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Source/PowerBench/Inc/PowerBench/MatrixUnroll.h" line="17" column="1" bodyfile="Source/PowerBench/Inc/PowerBench/MatrixUnroll.h" bodystart="17" bodyend="26"/>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <inheritancegraph>
+      <node id="399">
+        <label>Fixture</label>
+      </node>
+      <node id="398">
+        <label>MatrixUnrollFixture</label>
+        <link refid="class_matrix_unroll_fixture"/>
+        <childnode refid="399" relation="public-inheritance">
+        </childnode>
+      </node>
+    </inheritancegraph>
+    <collaborationgraph>
+      <node id="401">
+        <label>Fixture</label>
+      </node>
+      <node id="400">
+        <label>MatrixUnrollFixture</label>
+        <link refid="class_matrix_unroll_fixture"/>
+        <childnode refid="401" relation="public-inheritance">
+        </childnode>
+      </node>
+    </collaborationgraph>
+    <location file="Source/PowerBench/Inc/PowerBench/MatrixUnroll.h" line="8" column="1" bodyfile="Source/PowerBench/Inc/PowerBench/MatrixUnroll.h" bodystart="7" bodyend="31"/>
+    <listofallmembers>
+      <member refid="class_matrix_unroll_fixture_1a025f909a49a166a7785d96c0fd913843" prot="public" virt="non-virtual"><scope>MatrixUnrollFixture</scope><name>m_data1</name></member>
+      <member refid="class_matrix_unroll_fixture_1a342cf618d16f037264e95f36df0d6a3d" prot="public" virt="non-virtual"><scope>MatrixUnrollFixture</scope><name>m_data2</name></member>
+      <member refid="class_matrix_unroll_fixture_1ab81355ec72b435ebe3123d6a0dbda14b" prot="public" virt="non-virtual"><scope>MatrixUnrollFixture</scope><name>m_result</name></member>
+      <member refid="class_matrix_unroll_fixture_1a7704b2fc4f7880a5f9b2732a7824c21d" prot="public" virt="non-virtual"><scope>MatrixUnrollFixture</scope><name>SetUp</name></member>
+      <member refid="class_matrix_unroll_fixture_1a4ca04b35c4bcaf17b972b31ab42b631a" prot="public" virt="non-virtual"><scope>MatrixUnrollFixture</scope><name>TearDown</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

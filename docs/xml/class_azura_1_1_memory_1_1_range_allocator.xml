@@ -1,0 +1,251 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.8.14">
+  <compounddef id="class_azura_1_1_memory_1_1_range_allocator" kind="class" language="C++" prot="public" final="yes">
+    <compoundname>Azura::Memory::RangeAllocator</compoundname>
+    <basecompoundref refid="class_azura_1_1_memory_1_1_allocator" prot="public" virt="non-virtual">Azura::Memory::Allocator</basecompoundref>
+      <sectiondef kind="private-attrib">
+      <memberdef kind="variable" id="class_azura_1_1_memory_1_1_range_allocator_1abc7bc5edffe7dd0c32decd97b185e5da" prot="private" static="no" mutable="no">
+        <type><ref refid="class_azura_1_1_memory_1_1_memory_buffer" kindref="compound">MemoryBuffer</ref> &amp;</type>
+        <definition>MemoryBuffer&amp; Azura::Memory::RangeAllocator::m_sourceBuffer</definition>
+        <argsstring></argsstring>
+        <name>m_sourceBuffer</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Source/Common/Inc/Memory/RangeAllocator.h" line="39" column="1" bodyfile="Source/Common/Inc/Memory/RangeAllocator.h" bodystart="39" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="class_azura_1_1_memory_1_1_range_allocator_1a6cc92faa1232de336c6ce8308f8bf655" prot="private" static="no" mutable="no">
+        <type>std::vector&lt; <ref refid="struct_azura_1_1_memory_1_1_memory_range" kindref="compound">MemoryRange</ref> &gt;</type>
+        <definition>std::vector&lt;MemoryRange&gt; Azura::Memory::RangeAllocator::m_freeRanges</definition>
+        <argsstring></argsstring>
+        <name>m_freeRanges</name>
+        <initializer>{1, <ref refid="struct_azura_1_1_memory_1_1_memory_range" kindref="compound">MemoryRange</ref>(0, Size())}</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Source/Common/Inc/Memory/RangeAllocator.h" line="42" column="1" bodyfile="Source/Common/Inc/Memory/RangeAllocator.h" bodystart="42" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="class_azura_1_1_memory_1_1_range_allocator_1aa8cea8c06ff902ed68cc1af57d48a8c7" prot="private" static="no" mutable="no">
+        <type>std::vector&lt; <ref refid="struct_azura_1_1_memory_1_1_memory_range" kindref="compound">MemoryRange</ref> &gt;</type>
+        <definition>std::vector&lt;MemoryRange&gt; Azura::Memory::RangeAllocator::m_occupiedRanges</definition>
+        <argsstring></argsstring>
+        <name>m_occupiedRanges</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Source/Common/Inc/Memory/RangeAllocator.h" line="43" column="1" bodyfile="Source/Common/Inc/Memory/RangeAllocator.h" bodystart="43" bodyend="-1"/>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="public-func">
+      <memberdef kind="function" id="class_azura_1_1_memory_1_1_range_allocator_1a3dde41a2518e46a600f106dd3542183d" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>Azura::Memory::RangeAllocator::RangeAllocator</definition>
+        <argsstring>(MemoryBuffer &amp;buffer, U32 size)</argsstring>
+        <name>RangeAllocator</name>
+        <param>
+          <type><ref refid="class_azura_1_1_memory_1_1_memory_buffer" kindref="compound">MemoryBuffer</ref> &amp;</type>
+          <declname>buffer</declname>
+        </param>
+        <param>
+          <type>U32</type>
+          <declname>size</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Source/Common/Inc/Memory/RangeAllocator.h" line="14" column="1" bodyfile="Source/Common/Src/Memory/RangeAllocator.cpp" bodystart="19" bodyend="20"/>
+      </memberdef>
+      <memberdef kind="function" id="class_azura_1_1_memory_1_1_range_allocator_1a3c37e7c1e1f606e213e6ab032e5623d1" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>Azura::Memory::RangeAllocator::~RangeAllocator</definition>
+        <argsstring>()</argsstring>
+        <name>~RangeAllocator</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Source/Common/Inc/Memory/RangeAllocator.h" line="15" column="1" bodyfile="Source/Common/Src/Memory/RangeAllocator.cpp" bodystart="22" bodyend="25"/>
+      </memberdef>
+      <memberdef kind="function" id="class_azura_1_1_memory_1_1_range_allocator_1a8ac4e87c56ba03816b1642e90130be1b" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>Azura::Memory::RangeAllocator::RangeAllocator</definition>
+        <argsstring>(const RangeAllocator &amp;other)=delete</argsstring>
+        <name>RangeAllocator</name>
+        <param>
+          <type>const <ref refid="class_azura_1_1_memory_1_1_range_allocator" kindref="compound">RangeAllocator</ref> &amp;</type>
+          <declname>other</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Source/Common/Inc/Memory/RangeAllocator.h" line="18" column="1"/>
+      </memberdef>
+      <memberdef kind="function" id="class_azura_1_1_memory_1_1_range_allocator_1a28d94bf4658b0e65ff6d2326677bd909" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="class_azura_1_1_memory_1_1_range_allocator" kindref="compound">RangeAllocator</ref> &amp;</type>
+        <definition>RangeAllocator&amp; Azura::Memory::RangeAllocator::operator=</definition>
+        <argsstring>(const RangeAllocator &amp;other)=delete</argsstring>
+        <name>operator=</name>
+        <param>
+          <type>const <ref refid="class_azura_1_1_memory_1_1_range_allocator" kindref="compound">RangeAllocator</ref> &amp;</type>
+          <declname>other</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Source/Common/Inc/Memory/RangeAllocator.h" line="19" column="1"/>
+      </memberdef>
+      <memberdef kind="function" id="class_azura_1_1_memory_1_1_range_allocator_1af52f81a6a67cf5cf7caa6b57562ef96d" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>Azura::Memory::RangeAllocator::RangeAllocator</definition>
+        <argsstring>(RangeAllocator &amp;&amp;other) noexcept=default</argsstring>
+        <name>RangeAllocator</name>
+        <param>
+          <type><ref refid="class_azura_1_1_memory_1_1_range_allocator" kindref="compound">RangeAllocator</ref> &amp;&amp;</type>
+          <declname>other</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Source/Common/Inc/Memory/RangeAllocator.h" line="22" column="1"/>
+      </memberdef>
+      <memberdef kind="function" id="class_azura_1_1_memory_1_1_range_allocator_1ab2e17a44c8f45e5df7ad0594cf3a2f1d" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="class_azura_1_1_memory_1_1_range_allocator" kindref="compound">RangeAllocator</ref> &amp;</type>
+        <definition>RangeAllocator&amp; Azura::Memory::RangeAllocator::operator=</definition>
+        <argsstring>(RangeAllocator &amp;&amp;other) noexcept=delete</argsstring>
+        <name>operator=</name>
+        <param>
+          <type><ref refid="class_azura_1_1_memory_1_1_range_allocator" kindref="compound">RangeAllocator</ref> &amp;&amp;</type>
+          <declname>other</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Source/Common/Inc/Memory/RangeAllocator.h" line="23" column="1"/>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="protected-func">
+      <memberdef kind="function" id="class_azura_1_1_memory_1_1_range_allocator_1a69c14ff70f62adb5bc0f40dc15cc071a" prot="protected" static="no" const="no" explicit="no" inline="no" virt="virtual">
+        <type>void *</type>
+        <definition>void * Azura::Memory::RangeAllocator::Allocate</definition>
+        <argsstring>(U32 size, U32 alignment) override</argsstring>
+        <name>Allocate</name>
+        <reimplements refid="class_azura_1_1_memory_1_1_allocator_1a4ea0bf858fb03e351e2b53cf533b28e0">Allocate</reimplements>
+        <param>
+          <type>U32</type>
+          <declname>size</declname>
+        </param>
+        <param>
+          <type>U32</type>
+          <declname>alignment</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Source/Common/Inc/Memory/RangeAllocator.h" line="35" column="1" bodyfile="Source/Common/Src/Memory/RangeAllocator.cpp" bodystart="27" bodyend="78"/>
+      </memberdef>
+      <memberdef kind="function" id="class_azura_1_1_memory_1_1_range_allocator_1aeb29815c8bc7c1f2081c9c125620727c" prot="protected" static="no" const="no" explicit="no" inline="no" virt="virtual">
+        <type>void</type>
+        <definition>void Azura::Memory::RangeAllocator::Deallocate</definition>
+        <argsstring>(void *address) override</argsstring>
+        <name>Deallocate</name>
+        <reimplements refid="class_azura_1_1_memory_1_1_allocator_1aa11b99093ae5c589b86efaddcded4933">Deallocate</reimplements>
+        <param>
+          <type>void *</type>
+          <declname>address</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Source/Common/Inc/Memory/RangeAllocator.h" line="36" column="1" bodyfile="Source/Common/Src/Memory/RangeAllocator.cpp" bodystart="80" bodyend="110"/>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <inheritancegraph>
+      <node id="458">
+        <label>Azura::Memory::Allocator</label>
+        <link refid="class_azura_1_1_memory_1_1_allocator"/>
+      </node>
+      <node id="457">
+        <label>Azura::Memory::RangeAllocator</label>
+        <link refid="class_azura_1_1_memory_1_1_range_allocator"/>
+        <childnode refid="458" relation="public-inheritance">
+        </childnode>
+      </node>
+    </inheritancegraph>
+    <collaborationgraph>
+      <node id="460">
+        <label>Azura::Memory::Allocator</label>
+        <link refid="class_azura_1_1_memory_1_1_allocator"/>
+      </node>
+      <node id="459">
+        <label>Azura::Memory::RangeAllocator</label>
+        <link refid="class_azura_1_1_memory_1_1_range_allocator"/>
+        <childnode refid="460" relation="public-inheritance">
+        </childnode>
+      </node>
+    </collaborationgraph>
+    <location file="Source/Common/Inc/Memory/RangeAllocator.h" line="12" column="1" bodyfile="Source/Common/Inc/Memory/RangeAllocator.h" bodystart="12" bodyend="44"/>
+    <listofallmembers>
+      <member refid="class_azura_1_1_memory_1_1_range_allocator_1a69c14ff70f62adb5bc0f40dc15cc071a" prot="protected" virt="virtual"><scope>Azura::Memory::RangeAllocator</scope><name>Allocate</name></member>
+      <member refid="class_azura_1_1_memory_1_1_allocator_1a63f66173b61bcb2936c5ee42e23d6555" prot="public" virt="non-virtual"><scope>Azura::Memory::RangeAllocator</scope><name>Allocator</name></member>
+      <member refid="class_azura_1_1_memory_1_1_allocator_1a04e5f421a8ce8c63540f23ca0a6a16b4" prot="public" virt="non-virtual"><scope>Azura::Memory::RangeAllocator</scope><name>Allocator</name></member>
+      <member refid="class_azura_1_1_memory_1_1_allocator_1a4f5ab0c255db815ab88fd0bbe7b7185a" prot="public" virt="non-virtual"><scope>Azura::Memory::RangeAllocator</scope><name>Allocator</name></member>
+      <member refid="class_azura_1_1_memory_1_1_allocator_1a13a71cfb6bbfdb445a51db710597f1e3" prot="public" virt="non-virtual"><scope>Azura::Memory::RangeAllocator</scope><name>Allocator</name></member>
+      <member refid="class_azura_1_1_memory_1_1_allocator_1a45e1ae30db48775871f472d09f0ba354" prot="protected" virt="non-virtual"><scope>Azura::Memory::RangeAllocator</scope><name>BasePtr</name></member>
+      <member refid="class_azura_1_1_memory_1_1_range_allocator_1aeb29815c8bc7c1f2081c9c125620727c" prot="protected" virt="virtual"><scope>Azura::Memory::RangeAllocator</scope><name>Deallocate</name></member>
+      <member refid="class_azura_1_1_memory_1_1_range_allocator_1a6cc92faa1232de336c6ce8308f8bf655" prot="private" virt="non-virtual"><scope>Azura::Memory::RangeAllocator</scope><name>m_freeRanges</name></member>
+      <member refid="class_azura_1_1_memory_1_1_range_allocator_1aa8cea8c06ff902ed68cc1af57d48a8c7" prot="private" virt="non-virtual"><scope>Azura::Memory::RangeAllocator</scope><name>m_occupiedRanges</name></member>
+      <member refid="class_azura_1_1_memory_1_1_range_allocator_1abc7bc5edffe7dd0c32decd97b185e5da" prot="private" virt="non-virtual"><scope>Azura::Memory::RangeAllocator</scope><name>m_sourceBuffer</name></member>
+      <member refid="class_azura_1_1_memory_1_1_allocator_1a499fb3b777375a6b0d32cd8143e1586b" prot="public" virt="non-virtual"><scope>Azura::Memory::RangeAllocator</scope><name>New</name></member>
+      <member refid="class_azura_1_1_memory_1_1_allocator_1af2df83d27feb8bbc652284698dac2351" prot="public" virt="non-virtual"><scope>Azura::Memory::RangeAllocator</scope><name>NewArray</name></member>
+      <member refid="class_azura_1_1_memory_1_1_range_allocator_1a28d94bf4658b0e65ff6d2326677bd909" prot="public" virt="non-virtual"><scope>Azura::Memory::RangeAllocator</scope><name>operator=</name></member>
+      <member refid="class_azura_1_1_memory_1_1_range_allocator_1ab2e17a44c8f45e5df7ad0594cf3a2f1d" prot="public" virt="non-virtual"><scope>Azura::Memory::RangeAllocator</scope><name>operator=</name></member>
+      <member refid="class_azura_1_1_memory_1_1_allocator_1ac64c3f6013af712213e377b9b21bf162" prot="public" virt="non-virtual" ambiguityscope="Azura::Memory::Allocator::"><scope>Azura::Memory::RangeAllocator</scope><name>operator=</name></member>
+      <member refid="class_azura_1_1_memory_1_1_allocator_1a6bcad4fa8aff6a3b564da97634fdcdbf" prot="public" virt="non-virtual" ambiguityscope="Azura::Memory::Allocator::"><scope>Azura::Memory::RangeAllocator</scope><name>operator=</name></member>
+      <member refid="class_azura_1_1_memory_1_1_range_allocator_1a3dde41a2518e46a600f106dd3542183d" prot="public" virt="non-virtual"><scope>Azura::Memory::RangeAllocator</scope><name>RangeAllocator</name></member>
+      <member refid="class_azura_1_1_memory_1_1_range_allocator_1a8ac4e87c56ba03816b1642e90130be1b" prot="public" virt="non-virtual"><scope>Azura::Memory::RangeAllocator</scope><name>RangeAllocator</name></member>
+      <member refid="class_azura_1_1_memory_1_1_range_allocator_1af52f81a6a67cf5cf7caa6b57562ef96d" prot="public" virt="non-virtual"><scope>Azura::Memory::RangeAllocator</scope><name>RangeAllocator</name></member>
+      <member refid="class_azura_1_1_memory_1_1_allocator_1a7ee8dad5f32dad055f45003e3d4a41eb" prot="public" virt="non-virtual"><scope>Azura::Memory::RangeAllocator</scope><name>RawNew</name></member>
+      <member refid="class_azura_1_1_memory_1_1_allocator_1a252732e042cebc1256d7a8e5822a1732" prot="public" virt="non-virtual"><scope>Azura::Memory::RangeAllocator</scope><name>RawNewArray</name></member>
+      <member refid="class_azura_1_1_memory_1_1_allocator_1a8e6578ce7e05f6f2d138f9e3385626cc" prot="protected" virt="virtual"><scope>Azura::Memory::RangeAllocator</scope><name>Reset</name></member>
+      <member refid="class_azura_1_1_memory_1_1_allocator_1a3786ae37c581e3e8e221b51fa4c982e0" prot="protected" virt="non-virtual"><scope>Azura::Memory::RangeAllocator</scope><name>Size</name></member>
+      <member refid="class_azura_1_1_memory_1_1_allocator_1a7ae01cfa01f9e4354c9d811d899aa1e1" prot="public" virt="virtual"><scope>Azura::Memory::RangeAllocator</scope><name>~Allocator</name></member>
+      <member refid="class_azura_1_1_memory_1_1_range_allocator_1a3c37e7c1e1f606e213e6ab032e5623d1" prot="public" virt="non-virtual"><scope>Azura::Memory::RangeAllocator</scope><name>~RangeAllocator</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

@@ -1,0 +1,169 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.8.14">
+  <compounddef id="struct_azura_1_1_distance_constraint" kind="struct" language="C++" prot="public">
+    <compoundname>Azura::DistanceConstraint</compoundname>
+      <sectiondef kind="public-attrib">
+      <memberdef kind="variable" id="struct_azura_1_1_distance_constraint_1a16270e0405db91ec1066b84dfae2fceb" prot="public" static="no" mutable="no">
+        <type>U32</type>
+        <definition>U32 Azura::DistanceConstraint::m_indexA</definition>
+        <argsstring></argsstring>
+        <name>m_indexA</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Source/Samples/0_TestZone/Inc/TestZone/ClothCommon.h" line="30" column="1" bodyfile="Source/Samples/0_TestZone/Inc/TestZone/ClothCommon.h" bodystart="30" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="struct_azura_1_1_distance_constraint_1a1520887f6641633a107e4621f86963e8" prot="public" static="no" mutable="no">
+        <type>U32</type>
+        <definition>U32 Azura::DistanceConstraint::m_indexB</definition>
+        <argsstring></argsstring>
+        <name>m_indexB</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Source/Samples/0_TestZone/Inc/TestZone/ClothCommon.h" line="31" column="1" bodyfile="Source/Samples/0_TestZone/Inc/TestZone/ClothCommon.h" bodystart="31" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="struct_azura_1_1_distance_constraint_1a87df11b626fb262e7a70f89df434fb04" prot="public" static="no" mutable="no">
+        <type>float</type>
+        <definition>float Azura::DistanceConstraint::m_restLength</definition>
+        <argsstring></argsstring>
+        <name>m_restLength</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Source/Samples/0_TestZone/Inc/TestZone/ClothCommon.h" line="32" column="1" bodyfile="Source/Samples/0_TestZone/Inc/TestZone/ClothCommon.h" bodystart="32" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="struct_azura_1_1_distance_constraint_1ae8a6e4044a66cfb0fc757343a723de37" prot="public" static="no" mutable="no">
+        <type>float</type>
+        <definition>float Azura::DistanceConstraint::m_invMass1</definition>
+        <argsstring></argsstring>
+        <name>m_invMass1</name>
+        <initializer>{1.0f}</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Source/Samples/0_TestZone/Inc/TestZone/ClothCommon.h" line="33" column="1" bodyfile="Source/Samples/0_TestZone/Inc/TestZone/ClothCommon.h" bodystart="33" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="struct_azura_1_1_distance_constraint_1a20e6ad658affe81eae62ee0aa1dbbde1" prot="public" static="no" mutable="no">
+        <type>float</type>
+        <definition>float Azura::DistanceConstraint::m_invMass2</definition>
+        <argsstring></argsstring>
+        <name>m_invMass2</name>
+        <initializer>{1.0f}</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Source/Samples/0_TestZone/Inc/TestZone/ClothCommon.h" line="34" column="1" bodyfile="Source/Samples/0_TestZone/Inc/TestZone/ClothCommon.h" bodystart="34" bodyend="-1"/>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="public-func">
+      <memberdef kind="function" id="struct_azura_1_1_distance_constraint_1a35cf94a722245ef3d8727d57f03d9f31" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool Azura::DistanceConstraint::operator&lt;</definition>
+        <argsstring>(const DistanceConstraint &amp;rhs) const</argsstring>
+        <name>operator&lt;</name>
+        <param>
+          <type>const <ref refid="class_azura_1_1_physics_1_1_p_b_d_1_1_distance_constraint" kindref="compound">DistanceConstraint</ref> &amp;</type>
+          <declname>rhs</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Source/Samples/0_TestZone/Inc/TestZone/ClothCommon.h" line="36" column="1" bodyfile="Source/Samples/0_TestZone/Inc/TestZone/ClothCommon.h" bodystart="36" bodyend="39"/>
+      </memberdef>
+      <memberdef kind="function" id="struct_azura_1_1_distance_constraint_1ac884f8abb498bcb8e5e9a12929790816" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool Azura::DistanceConstraint::operator==</definition>
+        <argsstring>(const DistanceConstraint &amp;rhs) const</argsstring>
+        <name>operator==</name>
+        <param>
+          <type>const <ref refid="class_azura_1_1_physics_1_1_p_b_d_1_1_distance_constraint" kindref="compound">DistanceConstraint</ref> &amp;</type>
+          <declname>rhs</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Source/Samples/0_TestZone/Inc/TestZone/ClothCommon.h" line="41" column="1" bodyfile="Source/Samples/0_TestZone/Inc/TestZone/ClothCommon.h" bodystart="41" bodyend="44"/>
+      </memberdef>
+      <memberdef kind="function" id="struct_azura_1_1_distance_constraint_1ab01f35df6e874f39a897ccba19c96a76" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <type>Vector4f</type>
+        <definition>Vector4f Azura::DistanceConstraint::ComputeDeltaX1</definition>
+        <argsstring>(const std::vector&lt; Vector4f &gt; &amp;currentPositions, float k) const</argsstring>
+        <name>ComputeDeltaX1</name>
+        <param>
+          <type>const std::vector&lt; Vector4f &gt; &amp;</type>
+          <declname>currentPositions</declname>
+        </param>
+        <param>
+          <type>float</type>
+          <declname>k</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Source/Samples/0_TestZone/Inc/TestZone/ClothCommon.h" line="46" column="1" bodyfile="Source/Samples/0_TestZone/Inc/TestZone/ClothCommon.h" bodystart="46" bodyend="51"/>
+      </memberdef>
+      <memberdef kind="function" id="struct_azura_1_1_distance_constraint_1a3c38ecece24c812584c858f043695cd5" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <type>Vector4f</type>
+        <definition>Vector4f Azura::DistanceConstraint::ComputeDeltaX2</definition>
+        <argsstring>(const std::vector&lt; Vector4f &gt; &amp;currentPositions, float k) const</argsstring>
+        <name>ComputeDeltaX2</name>
+        <param>
+          <type>const std::vector&lt; Vector4f &gt; &amp;</type>
+          <declname>currentPositions</declname>
+        </param>
+        <param>
+          <type>float</type>
+          <declname>k</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Source/Samples/0_TestZone/Inc/TestZone/ClothCommon.h" line="53" column="1" bodyfile="Source/Samples/0_TestZone/Inc/TestZone/ClothCommon.h" bodystart="53" bodyend="58"/>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <location file="Source/Samples/0_TestZone/Inc/TestZone/ClothCommon.h" line="29" column="1" bodyfile="Source/Samples/0_TestZone/Inc/TestZone/ClothCommon.h" bodystart="29" bodyend="59"/>
+    <listofallmembers>
+      <member refid="struct_azura_1_1_distance_constraint_1ab01f35df6e874f39a897ccba19c96a76" prot="public" virt="non-virtual"><scope>Azura::DistanceConstraint</scope><name>ComputeDeltaX1</name></member>
+      <member refid="struct_azura_1_1_distance_constraint_1a3c38ecece24c812584c858f043695cd5" prot="public" virt="non-virtual"><scope>Azura::DistanceConstraint</scope><name>ComputeDeltaX2</name></member>
+      <member refid="struct_azura_1_1_distance_constraint_1a16270e0405db91ec1066b84dfae2fceb" prot="public" virt="non-virtual"><scope>Azura::DistanceConstraint</scope><name>m_indexA</name></member>
+      <member refid="struct_azura_1_1_distance_constraint_1a1520887f6641633a107e4621f86963e8" prot="public" virt="non-virtual"><scope>Azura::DistanceConstraint</scope><name>m_indexB</name></member>
+      <member refid="struct_azura_1_1_distance_constraint_1ae8a6e4044a66cfb0fc757343a723de37" prot="public" virt="non-virtual"><scope>Azura::DistanceConstraint</scope><name>m_invMass1</name></member>
+      <member refid="struct_azura_1_1_distance_constraint_1a20e6ad658affe81eae62ee0aa1dbbde1" prot="public" virt="non-virtual"><scope>Azura::DistanceConstraint</scope><name>m_invMass2</name></member>
+      <member refid="struct_azura_1_1_distance_constraint_1a87df11b626fb262e7a70f89df434fb04" prot="public" virt="non-virtual"><scope>Azura::DistanceConstraint</scope><name>m_restLength</name></member>
+      <member refid="struct_azura_1_1_distance_constraint_1a35cf94a722245ef3d8727d57f03d9f31" prot="public" virt="non-virtual"><scope>Azura::DistanceConstraint</scope><name>operator&lt;</name></member>
+      <member refid="struct_azura_1_1_distance_constraint_1ac884f8abb498bcb8e5e9a12929790816" prot="public" virt="non-virtual"><scope>Azura::DistanceConstraint</scope><name>operator==</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

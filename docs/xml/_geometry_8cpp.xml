@@ -1,0 +1,76 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.8.14">
+  <compounddef id="_geometry_8cpp" kind="file" language="C++">
+    <compoundname>Geometry.cpp</compoundname>
+    <includes refid="_geometry_8h" local="yes">Math/Geometry.h</includes>
+    <incdepgraph>
+      <node id="5329">
+        <label>Source/Math/Src/Geometry.cpp</label>
+        <link refid="_geometry_8cpp"/>
+        <childnode refid="5330" relation="include">
+        </childnode>
+      </node>
+      <node id="5332">
+        <label>Core/RawStorageFormat.h</label>
+        <link refid="_raw_storage_format_8h_source"/>
+        <childnode refid="5331" relation="include">
+        </childnode>
+        <childnode refid="5333" relation="include">
+        </childnode>
+        <childnode refid="5334" relation="include">
+        </childnode>
+        <childnode refid="5335" relation="include">
+        </childnode>
+        <childnode refid="5336" relation="include">
+        </childnode>
+        <childnode refid="5337" relation="include">
+        </childnode>
+      </node>
+      <node id="5336">
+        <label>boost/preprocessor/tuple/elem.hpp</label>
+      </node>
+      <node id="5337">
+        <label>boost/detail/bitmask.hpp</label>
+      </node>
+      <node id="5333">
+        <label>tuple</label>
+      </node>
+      <node id="5330">
+        <label>Math/Geometry.h</label>
+        <link refid="_geometry_8h_source"/>
+        <childnode refid="5331" relation="include">
+        </childnode>
+        <childnode refid="5332" relation="include">
+        </childnode>
+      </node>
+      <node id="5334">
+        <label>boost/preprocessor/repetition/repeat.hpp</label>
+      </node>
+      <node id="5331">
+        <label>Types.h</label>
+      </node>
+      <node id="5335">
+        <label>boost/preprocessor/seq/for_each.hpp</label>
+      </node>
+    </incdepgraph>
+    <innernamespace refid="namespace_azura">Azura</innernamespace>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <programlisting>
+<codeline lineno="1"><highlight class="preprocessor">#include<sp/>&quot;Math/Geometry.h&quot;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="2"><highlight class="normal"></highlight></codeline>
+<codeline lineno="3"><highlight class="normal"></highlight><highlight class="keyword">namespace<sp/></highlight><highlight class="normal"><ref refid="namespace_azura" kindref="compound">Azura</ref><sp/>{</highlight></codeline>
+<codeline lineno="4"><highlight class="normal"></highlight><highlight class="keywordtype">float</highlight><highlight class="normal"><sp/>Math::ToRadians(</highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">float</highlight><highlight class="normal"><sp/>degrees)<sp/>{</highlight></codeline>
+<codeline lineno="5"><highlight class="normal"><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>(PI<sp/>/<sp/>180.0f)<sp/>*<sp/>degrees;</highlight></codeline>
+<codeline lineno="6"><highlight class="normal">}</highlight></codeline>
+<codeline lineno="7"><highlight class="normal"></highlight></codeline>
+<codeline lineno="8"><highlight class="normal"></highlight><highlight class="keywordtype">float</highlight><highlight class="normal"><sp/>Math::ToAngle(</highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">float</highlight><highlight class="normal"><sp/>radians)<sp/>{</highlight></codeline>
+<codeline lineno="9"><highlight class="normal"><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>(180.0f<sp/>/<sp/>PI)<sp/>*<sp/>radians;</highlight></codeline>
+<codeline lineno="10"><highlight class="normal">}</highlight></codeline>
+<codeline lineno="11"><highlight class="normal">}<sp/></highlight><highlight class="comment">//<sp/>namespace<sp/>Azura</highlight><highlight class="normal"></highlight></codeline>
+    </programlisting>
+    <location file="Source/Math/Src/Geometry.cpp"/>
+  </compounddef>
+</doxygen>

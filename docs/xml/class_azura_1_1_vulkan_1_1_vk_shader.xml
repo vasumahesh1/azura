@@ -1,0 +1,135 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.8.14">
+  <compounddef id="class_azura_1_1_vulkan_1_1_vk_shader" kind="class" language="C++" prot="public">
+    <compoundname>Azura::Vulkan::VkShader</compoundname>
+    <basecompoundref refid="class_azura_1_1_shader" prot="public" virt="non-virtual">Azura::Shader</basecompoundref>
+      <sectiondef kind="private-attrib">
+      <memberdef kind="variable" id="class_azura_1_1_vulkan_1_1_vk_shader_1a3b4f7e498c97bf88759e84c702085c27" prot="private" static="no" mutable="no">
+        <type>VkShaderModule</type>
+        <definition>VkShaderModule Azura::Vulkan::VkShader::m_module</definition>
+        <argsstring></argsstring>
+        <name>m_module</name>
+        <initializer>{}</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Source/Azura/RenderSystem/Inc/Vulkan/VkShader.h" line="23" column="1" bodyfile="Source/Azura/RenderSystem/Inc/Vulkan/VkShader.h" bodystart="23" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="class_azura_1_1_vulkan_1_1_vk_shader_1aaf917c336b859bf40700f67b18eaa17e" prot="private" static="no" mutable="no">
+        <type>const <ref refid="class_azura_1_1_log" kindref="compound">Log</ref></type>
+        <definition>const Log Azura::Vulkan::VkShader::log_VulkanRenderSystem</definition>
+        <argsstring></argsstring>
+        <name>log_VulkanRenderSystem</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Source/Azura/RenderSystem/Inc/Vulkan/VkShader.h" line="24" column="1" bodyfile="Source/Azura/RenderSystem/Inc/Vulkan/VkShader.h" bodystart="24" bodyend="-1"/>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="public-func">
+      <memberdef kind="function" id="class_azura_1_1_vulkan_1_1_vk_shader_1ac05e3dc0f9a4f85672d2e60a7e6449df" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>Azura::Vulkan::VkShader::VkShader</definition>
+        <argsstring>(VkDevice device, const String &amp;fileName, const Log &amp;logger)</argsstring>
+        <name>VkShader</name>
+        <param>
+          <type>VkDevice</type>
+          <declname>device</declname>
+        </param>
+        <param>
+          <type>const String &amp;</type>
+          <declname>fileName</declname>
+        </param>
+        <param>
+          <type>const <ref refid="class_azura_1_1_log" kindref="compound">Log</ref> &amp;</type>
+          <declname>logger</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Source/Azura/RenderSystem/Inc/Vulkan/VkShader.h" line="17" column="1" bodyfile="Source/Azura/RenderSystem/Src/Vulkan/VkShader.cpp" bodystart="18" bodyend="32"/>
+      </memberdef>
+      <memberdef kind="function" id="class_azura_1_1_vulkan_1_1_vk_shader_1a34e1e4e00596786dbf083c81d9e5d32f" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
+        <type>VkPipelineShaderStageCreateInfo</type>
+        <definition>VkPipelineShaderStageCreateInfo Azura::Vulkan::VkShader::GetShaderStageInfo</definition>
+        <argsstring>() const</argsstring>
+        <name>GetShaderStageInfo</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Source/Azura/RenderSystem/Inc/Vulkan/VkShader.h" line="18" column="1" bodyfile="Source/Azura/RenderSystem/Src/Vulkan/VkShader.cpp" bodystart="34" bodyend="45"/>
+      </memberdef>
+      <memberdef kind="function" id="class_azura_1_1_vulkan_1_1_vk_shader_1a667f753a5962f93cd8bfc0dd34786983" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void Azura::Vulkan::VkShader::CleanUp</definition>
+        <argsstring>(VkDevice device) const</argsstring>
+        <name>CleanUp</name>
+        <param>
+          <type>VkDevice</type>
+          <declname>device</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Source/Azura/RenderSystem/Inc/Vulkan/VkShader.h" line="20" column="1" bodyfile="Source/Azura/RenderSystem/Src/Vulkan/VkShader.cpp" bodystart="47" bodyend="49"/>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <inheritancegraph>
+      <node id="673">
+        <label>Azura::Vulkan::VkShader</label>
+        <link refid="class_azura_1_1_vulkan_1_1_vk_shader"/>
+        <childnode refid="674" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="674">
+        <label>Azura::Shader</label>
+        <link refid="class_azura_1_1_shader"/>
+      </node>
+    </inheritancegraph>
+    <collaborationgraph>
+      <node id="675">
+        <label>Azura::Vulkan::VkShader</label>
+        <link refid="class_azura_1_1_vulkan_1_1_vk_shader"/>
+        <childnode refid="676" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="676">
+        <label>Azura::Shader</label>
+        <link refid="class_azura_1_1_shader"/>
+      </node>
+    </collaborationgraph>
+    <location file="Source/Azura/RenderSystem/Inc/Vulkan/VkShader.h" line="15" column="1" bodyfile="Source/Azura/RenderSystem/Inc/Vulkan/VkShader.h" bodystart="15" bodyend="25"/>
+    <listofallmembers>
+      <member refid="class_azura_1_1_vulkan_1_1_vk_shader_1a667f753a5962f93cd8bfc0dd34786983" prot="public" virt="non-virtual"><scope>Azura::Vulkan::VkShader</scope><name>CleanUp</name></member>
+      <member refid="class_azura_1_1_shader_1ac6641f2560701cdd6f89809a42acbc91" prot="protected" virt="non-virtual"><scope>Azura::Vulkan::VkShader</scope><name>GetFilePath</name></member>
+      <member refid="class_azura_1_1_shader_1a8b69041d23aa81e8075294aa20cad88f" prot="protected" virt="non-virtual"><scope>Azura::Vulkan::VkShader</scope><name>GetShaderEntryPoint</name></member>
+      <member refid="class_azura_1_1_shader_1a75db49f6ee2fb0947b18954992198369" prot="public" virt="non-virtual"><scope>Azura::Vulkan::VkShader</scope><name>GetShaderStage</name></member>
+      <member refid="class_azura_1_1_vulkan_1_1_vk_shader_1a34e1e4e00596786dbf083c81d9e5d32f" prot="public" virt="non-virtual"><scope>Azura::Vulkan::VkShader</scope><name>GetShaderStageInfo</name></member>
+      <member refid="class_azura_1_1_vulkan_1_1_vk_shader_1aaf917c336b859bf40700f67b18eaa17e" prot="private" virt="non-virtual"><scope>Azura::Vulkan::VkShader</scope><name>log_VulkanRenderSystem</name></member>
+      <member refid="class_azura_1_1_vulkan_1_1_vk_shader_1a3b4f7e498c97bf88759e84c702085c27" prot="private" virt="non-virtual"><scope>Azura::Vulkan::VkShader</scope><name>m_module</name></member>
+      <member refid="class_azura_1_1_shader_1ad7494e1ed7012de56dd7bdc4d2df6625" prot="public" virt="non-virtual"><scope>Azura::Vulkan::VkShader</scope><name>SetEntryPoint</name></member>
+      <member refid="class_azura_1_1_shader_1aa98b4195618bf182478b666cf6381881" prot="public" virt="non-virtual"><scope>Azura::Vulkan::VkShader</scope><name>SetStage</name></member>
+      <member refid="class_azura_1_1_shader_1a3821e7d27a5a31aa2b3f12d4fad8c359" prot="public" virt="non-virtual"><scope>Azura::Vulkan::VkShader</scope><name>Shader</name></member>
+      <member refid="class_azura_1_1_vulkan_1_1_vk_shader_1ac05e3dc0f9a4f85672d2e60a7e6449df" prot="public" virt="non-virtual"><scope>Azura::Vulkan::VkShader</scope><name>VkShader</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

@@ -1,0 +1,81 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.8.14">
+  <compounddef id="class_azura_1_1_vulkan_1_1_vk_scoped_pipeline" kind="class" language="C++" prot="public">
+    <compoundname>Azura::Vulkan::VkScopedPipeline</compoundname>
+      <sectiondef kind="private-attrib">
+      <memberdef kind="variable" id="class_azura_1_1_vulkan_1_1_vk_scoped_pipeline_1a383ff8508417812d00a1d84cfd42b856" prot="private" static="no" mutable="no">
+        <type>VkPipeline</type>
+        <definition>VkPipeline Azura::Vulkan::VkScopedPipeline::m_pipeline</definition>
+        <argsstring></argsstring>
+        <name>m_pipeline</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Source/Azura/RenderSystem/Inc/Vulkan/VkScopedPipeline.h" line="21" column="1" bodyfile="Source/Azura/RenderSystem/Inc/Vulkan/VkScopedPipeline.h" bodystart="21" bodyend="-1"/>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="public-func">
+      <memberdef kind="function" id="class_azura_1_1_vulkan_1_1_vk_scoped_pipeline_1a1d66f18edcb23b2c909c090fcfb4d132" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>Azura::Vulkan::VkScopedPipeline::VkScopedPipeline</definition>
+        <argsstring>(VkPipeline pipeline)</argsstring>
+        <name>VkScopedPipeline</name>
+        <param>
+          <type>VkPipeline</type>
+          <declname>pipeline</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Source/Azura/RenderSystem/Inc/Vulkan/VkScopedPipeline.h" line="16" column="1" bodyfile="Source/Azura/RenderSystem/Src/Vulkan/VkScopedPipeline.cpp" bodystart="9" bodyend="11"/>
+      </memberdef>
+      <memberdef kind="function" id="class_azura_1_1_vulkan_1_1_vk_scoped_pipeline_1a3b5f6d580cd37fe5b22cc1a8e9dc294d" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
+        <type>VkPipeline</type>
+        <definition>VkPipeline Azura::Vulkan::VkScopedPipeline::Real</definition>
+        <argsstring>() const</argsstring>
+        <name>Real</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Source/Azura/RenderSystem/Inc/Vulkan/VkScopedPipeline.h" line="17" column="1" bodyfile="Source/Azura/RenderSystem/Src/Vulkan/VkScopedPipeline.cpp" bodystart="13" bodyend="15"/>
+      </memberdef>
+      <memberdef kind="function" id="class_azura_1_1_vulkan_1_1_vk_scoped_pipeline_1af759f2fad5e4d2ee8e5ed64e09ebe362" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void Azura::Vulkan::VkScopedPipeline::CleanUp</definition>
+        <argsstring>(VkDevice device) const</argsstring>
+        <name>CleanUp</name>
+        <param>
+          <type>VkDevice</type>
+          <declname>device</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Source/Azura/RenderSystem/Inc/Vulkan/VkScopedPipeline.h" line="18" column="1" bodyfile="Source/Azura/RenderSystem/Src/Vulkan/VkScopedPipeline.cpp" bodystart="17" bodyend="19"/>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <location file="Source/Azura/RenderSystem/Inc/Vulkan/VkScopedPipeline.h" line="14" column="1" bodyfile="Source/Azura/RenderSystem/Inc/Vulkan/VkScopedPipeline.h" bodystart="14" bodyend="22"/>
+    <listofallmembers>
+      <member refid="class_azura_1_1_vulkan_1_1_vk_scoped_pipeline_1af759f2fad5e4d2ee8e5ed64e09ebe362" prot="public" virt="non-virtual"><scope>Azura::Vulkan::VkScopedPipeline</scope><name>CleanUp</name></member>
+      <member refid="class_azura_1_1_vulkan_1_1_vk_scoped_pipeline_1a383ff8508417812d00a1d84cfd42b856" prot="private" virt="non-virtual"><scope>Azura::Vulkan::VkScopedPipeline</scope><name>m_pipeline</name></member>
+      <member refid="class_azura_1_1_vulkan_1_1_vk_scoped_pipeline_1a3b5f6d580cd37fe5b22cc1a8e9dc294d" prot="public" virt="non-virtual"><scope>Azura::Vulkan::VkScopedPipeline</scope><name>Real</name></member>
+      <member refid="class_azura_1_1_vulkan_1_1_vk_scoped_pipeline_1a1d66f18edcb23b2c909c090fcfb4d132" prot="public" virt="non-virtual"><scope>Azura::Vulkan::VkScopedPipeline</scope><name>VkScopedPipeline</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

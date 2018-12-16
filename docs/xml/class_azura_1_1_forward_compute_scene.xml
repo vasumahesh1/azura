@@ -1,0 +1,235 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.8.14">
+  <compounddef id="class_azura_1_1_forward_compute_scene" kind="class" language="C++" prot="public">
+    <compoundname>Azura::ForwardComputeScene</compoundname>
+    <basecompoundref refid="class_azura_1_1_scene" prot="public" virt="non-virtual">Azura::Scene</basecompoundref>
+      <sectiondef kind="private-attrib">
+      <memberdef kind="variable" id="class_azura_1_1_forward_compute_scene_1a253d6cb21b20cb1e1e47d7aeb22421b1" prot="private" static="no" mutable="no">
+        <type><ref refid="struct_azura_1_1_forward_compute_pass" kindref="compound">ForwardComputePass</ref></type>
+        <definition>ForwardComputePass Azura::ForwardComputeScene::m_pass</definition>
+        <argsstring></argsstring>
+        <name>m_pass</name>
+        <initializer>{}</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Source/Samples/2_DeferredRenderer/Inc/Forward/ForwardComputeScene.h" line="43" column="1" bodyfile="Source/Samples/2_DeferredRenderer/Inc/Forward/ForwardComputeScene.h" bodystart="43" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="class_azura_1_1_forward_compute_scene_1ad12764a465632fa67464bca13d7020f9" prot="private" static="no" mutable="no">
+        <type><ref refid="class_azura_1_1_drawable_pool" kindref="compound">DrawablePool</ref> *</type>
+        <definition>DrawablePool* Azura::ForwardComputeScene::m_mainPool</definition>
+        <argsstring></argsstring>
+        <name>m_mainPool</name>
+        <initializer>{nullptr}</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Source/Samples/2_DeferredRenderer/Inc/Forward/ForwardComputeScene.h" line="44" column="1" bodyfile="Source/Samples/2_DeferredRenderer/Inc/Forward/ForwardComputeScene.h" bodystart="44" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="class_azura_1_1_forward_compute_scene_1aba3c615f5f8083e55cc929ae219268fd" prot="private" static="no" mutable="no">
+        <type><ref refid="class_azura_1_1_compute_pool" kindref="compound">ComputePool</ref> *</type>
+        <definition>ComputePool* Azura::ForwardComputeScene::m_computePool</definition>
+        <argsstring></argsstring>
+        <name>m_computePool</name>
+        <initializer>{nullptr}</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Source/Samples/2_DeferredRenderer/Inc/Forward/ForwardComputeScene.h" line="45" column="1" bodyfile="Source/Samples/2_DeferredRenderer/Inc/Forward/ForwardComputeScene.h" bodystart="45" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="class_azura_1_1_forward_compute_scene_1aeb6f015f6833602923b5a76585e1d299" prot="private" static="no" mutable="no">
+        <type><ref refid="class_azura_1_1_light_texture" kindref="compound">LightTexture</ref></type>
+        <definition>LightTexture Azura::ForwardComputeScene::m_lightTexture</definition>
+        <argsstring></argsstring>
+        <name>m_lightTexture</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Source/Samples/2_DeferredRenderer/Inc/Forward/ForwardComputeScene.h" line="46" column="1" bodyfile="Source/Samples/2_DeferredRenderer/Inc/Forward/ForwardComputeScene.h" bodystart="46" bodyend="-1"/>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="public-func">
+      <memberdef kind="function" id="class_azura_1_1_forward_compute_scene_1a3cc8b2a1b69f50817a205333d55bb386" prot="public" static="no" const="no" explicit="yes" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>Azura::ForwardComputeScene::ForwardComputeScene</definition>
+        <argsstring>(Memory::Allocator &amp;mainAllocator, Memory::Allocator &amp;drawAllocator)</argsstring>
+        <name>ForwardComputeScene</name>
+        <param>
+          <type><ref refid="class_azura_1_1_memory_1_1_allocator" kindref="compound">Memory::Allocator</ref> &amp;</type>
+          <declname>mainAllocator</declname>
+        </param>
+        <param>
+          <type><ref refid="class_azura_1_1_memory_1_1_allocator" kindref="compound">Memory::Allocator</ref> &amp;</type>
+          <declname>drawAllocator</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Source/Samples/2_DeferredRenderer/Inc/Forward/ForwardComputeScene.h" line="28" column="1" bodyfile="Source/Samples/2_DeferredRenderer/Src/ForwardComputeScene.cpp" bodystart="10" bodyend="13"/>
+      </memberdef>
+      <memberdef kind="function" id="class_azura_1_1_forward_compute_scene_1a9dcbcfd4be1f24712e4842c2f14d941e" prot="public" static="no" const="no" explicit="no" inline="no" virt="virtual">
+        <type>void</type>
+        <definition>void Azura::ForwardComputeScene::Initialize</definition>
+        <argsstring>(Window &amp;window, const Camera &amp;camera, const MeshObject &amp;sceneMesh, const UniformBufferData &amp;uboData, const SamplerDesc &amp;lightSamplerDesc, const Containers::Vector&lt; PointLight &gt; &amp;lights) override</argsstring>
+        <name>Initialize</name>
+        <reimplements refid="class_azura_1_1_scene_1a62f98cb16b26d793941568d664e5e394">Initialize</reimplements>
+        <param>
+          <type><ref refid="class_azura_1_1_window" kindref="compound">Window</ref> &amp;</type>
+          <declname>window</declname>
+        </param>
+        <param>
+          <type>const <ref refid="class_azura_1_1_camera" kindref="compound">Camera</ref> &amp;</type>
+          <declname>camera</declname>
+        </param>
+        <param>
+          <type>const <ref refid="struct_azura_1_1_mesh_object" kindref="compound">MeshObject</ref> &amp;</type>
+          <declname>sceneMesh</declname>
+        </param>
+        <param>
+          <type>const <ref refid="struct_azura_1_1_uniform_buffer_data" kindref="compound">UniformBufferData</ref> &amp;</type>
+          <declname>uboData</declname>
+        </param>
+        <param>
+          <type>const <ref refid="struct_azura_1_1_sampler_desc" kindref="compound">SamplerDesc</ref> &amp;</type>
+          <declname>lightSamplerDesc</declname>
+        </param>
+        <param>
+          <type>const <ref refid="class_azura_1_1_containers_1_1_vector" kindref="compound">Containers::Vector</ref>&lt; <ref refid="struct_azura_1_1_point_light" kindref="compound">PointLight</ref> &gt; &amp;</type>
+          <declname>lights</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Source/Samples/2_DeferredRenderer/Inc/Forward/ForwardComputeScene.h" line="30" column="1" bodyfile="Source/Samples/2_DeferredRenderer/Src/ForwardComputeScene.cpp" bodystart="15" bodyend="208"/>
+      </memberdef>
+      <memberdef kind="function" id="class_azura_1_1_forward_compute_scene_1a18fc2142eb0cdb872a6215397688431a" prot="public" static="no" const="no" explicit="no" inline="no" virt="virtual">
+        <type>void</type>
+        <definition>void Azura::ForwardComputeScene::Update</definition>
+        <argsstring>(float timeDelta, const Camera &amp;camera, const UniformBufferData &amp;uboData, const Containers::Vector&lt; PointLight &gt; &amp;lights) override</argsstring>
+        <name>Update</name>
+        <reimplements refid="class_azura_1_1_scene_1aa069055575f3ed3cf45b09508cfee36c">Update</reimplements>
+        <param>
+          <type>float</type>
+          <declname>timeDelta</declname>
+        </param>
+        <param>
+          <type>const <ref refid="class_azura_1_1_camera" kindref="compound">Camera</ref> &amp;</type>
+          <declname>camera</declname>
+        </param>
+        <param>
+          <type>const <ref refid="struct_azura_1_1_uniform_buffer_data" kindref="compound">UniformBufferData</ref> &amp;</type>
+          <declname>uboData</declname>
+        </param>
+        <param>
+          <type>const <ref refid="class_azura_1_1_containers_1_1_vector" kindref="compound">Containers::Vector</ref>&lt; <ref refid="struct_azura_1_1_point_light" kindref="compound">PointLight</ref> &gt; &amp;</type>
+          <declname>lights</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Source/Samples/2_DeferredRenderer/Inc/Forward/ForwardComputeScene.h" line="36" column="1" bodyfile="Source/Samples/2_DeferredRenderer/Src/ForwardComputeScene.cpp" bodystart="210" bodyend="233"/>
+      </memberdef>
+      <memberdef kind="function" id="class_azura_1_1_forward_compute_scene_1a00e2c18165fbc582316b3d66065dd30c" prot="public" static="no" const="no" explicit="no" inline="no" virt="virtual">
+        <type>void</type>
+        <definition>void Azura::ForwardComputeScene::CleanUp</definition>
+        <argsstring>() override</argsstring>
+        <name>CleanUp</name>
+        <reimplements refid="class_azura_1_1_scene_1a5d42a39c3b3ab02ce7bdcc512c9269f7">CleanUp</reimplements>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Source/Samples/2_DeferredRenderer/Inc/Forward/ForwardComputeScene.h" line="40" column="1" bodyfile="Source/Samples/2_DeferredRenderer/Src/ForwardComputeScene.cpp" bodystart="235" bodyend="236"/>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <inheritancegraph>
+      <node id="259">
+        <label>Azura::ForwardComputeScene</label>
+        <link refid="class_azura_1_1_forward_compute_scene"/>
+        <childnode refid="260" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="260">
+        <label>Azura::Scene</label>
+        <link refid="class_azura_1_1_scene"/>
+      </node>
+    </inheritancegraph>
+    <collaborationgraph>
+      <node id="261">
+        <label>Azura::ForwardComputeScene</label>
+        <link refid="class_azura_1_1_forward_compute_scene"/>
+        <childnode refid="262" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="264">
+        <label>Azura::Memory::Allocator</label>
+        <link refid="class_azura_1_1_memory_1_1_allocator"/>
+      </node>
+      <node id="262">
+        <label>Azura::Scene</label>
+        <link refid="class_azura_1_1_scene"/>
+        <childnode refid="263" relation="usage">
+          <edgelabel>log_Scene</edgelabel>
+        </childnode>
+        <childnode refid="264" relation="usage">
+          <edgelabel>m_mainAllocator</edgelabel>
+          <edgelabel>m_drawAllocator</edgelabel>
+        </childnode>
+      </node>
+      <node id="263">
+        <label>Azura::Log</label>
+        <link refid="class_azura_1_1_log"/>
+      </node>
+    </collaborationgraph>
+    <location file="Source/Samples/2_DeferredRenderer/Inc/Forward/ForwardComputeScene.h" line="25" column="1" bodyfile="Source/Samples/2_DeferredRenderer/Inc/Forward/ForwardComputeScene.h" bodystart="25" bodyend="47"/>
+    <listofallmembers>
+      <member refid="class_azura_1_1_forward_compute_scene_1a00e2c18165fbc582316b3d66065dd30c" prot="public" virt="virtual"><scope>Azura::ForwardComputeScene</scope><name>CleanUp</name></member>
+      <member refid="class_azura_1_1_forward_compute_scene_1a3cc8b2a1b69f50817a205333d55bb386" prot="public" virt="non-virtual"><scope>Azura::ForwardComputeScene</scope><name>ForwardComputeScene</name></member>
+      <member refid="class_azura_1_1_forward_compute_scene_1a9dcbcfd4be1f24712e4842c2f14d941e" prot="public" virt="virtual"><scope>Azura::ForwardComputeScene</scope><name>Initialize</name></member>
+      <member refid="class_azura_1_1_scene_1a7cfc9699dd12ca173569ec3be1b741af" prot="protected" virt="non-virtual"><scope>Azura::ForwardComputeScene</scope><name>log_Scene</name></member>
+      <member refid="class_azura_1_1_forward_compute_scene_1aba3c615f5f8083e55cc929ae219268fd" prot="private" virt="non-virtual"><scope>Azura::ForwardComputeScene</scope><name>m_computePool</name></member>
+      <member refid="class_azura_1_1_scene_1ae4a35bc5cd18cbd71dc5d8f98152d80b" prot="protected" virt="non-virtual"><scope>Azura::ForwardComputeScene</scope><name>m_drawAllocator</name></member>
+      <member refid="class_azura_1_1_forward_compute_scene_1aeb6f015f6833602923b5a76585e1d299" prot="private" virt="non-virtual"><scope>Azura::ForwardComputeScene</scope><name>m_lightTexture</name></member>
+      <member refid="class_azura_1_1_scene_1a63fcc49d98cd5c6e51adf3720cc01943" prot="protected" virt="non-virtual"><scope>Azura::ForwardComputeScene</scope><name>m_mainAllocator</name></member>
+      <member refid="class_azura_1_1_forward_compute_scene_1ad12764a465632fa67464bca13d7020f9" prot="private" virt="non-virtual"><scope>Azura::ForwardComputeScene</scope><name>m_mainPool</name></member>
+      <member refid="class_azura_1_1_forward_compute_scene_1a253d6cb21b20cb1e1e47d7aeb22421b1" prot="private" virt="non-virtual"><scope>Azura::ForwardComputeScene</scope><name>m_pass</name></member>
+      <member refid="class_azura_1_1_scene_1ae86b82011292b495ac67c2499354cef6" prot="protected" virt="non-virtual"><scope>Azura::ForwardComputeScene</scope><name>m_renderer</name></member>
+      <member refid="class_azura_1_1_scene_1acff6bc629e534e49afe727f1cbb57cb6" prot="protected" virt="non-virtual"><scope>Azura::ForwardComputeScene</scope><name>m_sponzaId</name></member>
+      <member refid="class_azura_1_1_scene_1aabf508f27337322addd778d85bdfc1e2" prot="protected" virt="non-virtual"><scope>Azura::ForwardComputeScene</scope><name>m_textureManager</name></member>
+      <member refid="class_azura_1_1_scene_1a1a2b8a1b9dbe3f5174881848e7bd9d4c" prot="public" virt="non-virtual"><scope>Azura::ForwardComputeScene</scope><name>operator=</name></member>
+      <member refid="class_azura_1_1_scene_1a7ac6c8d1dca15bc8be25454bffe06368" prot="public" virt="non-virtual"><scope>Azura::ForwardComputeScene</scope><name>operator=</name></member>
+      <member refid="class_azura_1_1_scene_1a807d2102728d63b4a9e7ffe5d0827449" prot="public" virt="non-virtual"><scope>Azura::ForwardComputeScene</scope><name>Scene</name></member>
+      <member refid="class_azura_1_1_scene_1a7c427adea537ab8499f6061188c4bdaa" prot="public" virt="non-virtual"><scope>Azura::ForwardComputeScene</scope><name>Scene</name></member>
+      <member refid="class_azura_1_1_scene_1a56b19e2bc3cc7528f58593fc9b9c12cb" prot="public" virt="non-virtual"><scope>Azura::ForwardComputeScene</scope><name>Scene</name></member>
+      <member refid="class_azura_1_1_forward_compute_scene_1a18fc2142eb0cdb872a6215397688431a" prot="public" virt="virtual"><scope>Azura::ForwardComputeScene</scope><name>Update</name></member>
+      <member refid="class_azura_1_1_scene_1a0b76b316b69a7f87ed02ca30c032be5e" prot="public" virt="virtual"><scope>Azura::ForwardComputeScene</scope><name>~Scene</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

@@ -1,0 +1,1030 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.8.14">
+  <compounddef id="_raw_storage_format_8h" kind="file" language="C++">
+    <compoundname>RawStorageFormat.h</compoundname>
+    <includes local="no">Types.h</includes>
+    <includes local="no">tuple</includes>
+    <includes local="no">boost/preprocessor/repetition/repeat.hpp</includes>
+    <includes local="no">boost/preprocessor/seq/for_each.hpp</includes>
+    <includes local="no">boost/preprocessor/tuple/elem.hpp</includes>
+    <includes local="no">boost/detail/bitmask.hpp</includes>
+    <includedby refid="_d3_d12_type_mapping_8h" local="yes">Source/Azura/RenderSystem/Inc/D3D12/D3D12TypeMapping.h</includedby>
+    <includedby refid="_azura_2_render_system_2_inc_2_generic_2_generic_types_8h" local="yes">Source/Azura/RenderSystem/Inc/Generic/GenericTypes.h</includedby>
+    <includedby refid="_drawable_8h" local="yes">Source/Azura/RenderSystem/Inc/Generic/Drawable.h</includedby>
+    <includedby refid="_renderer_8h" local="yes">Source/Azura/RenderSystem/Inc/Generic/Renderer.h</includedby>
+    <includedby refid="_vk_type_mapping_8h" local="yes">Source/Azura/RenderSystem/Inc/Vulkan/VkTypeMapping.h</includedby>
+    <includedby refid="_vk_drawable_pool_8cpp" local="yes">Source/Azura/RenderSystem/Src/Vulkan/VkDrawablePool.cpp</includedby>
+    <includedby refid="_raw_storage_format_8cpp" local="yes">Source/Core/Src/RawStorageFormat.cpp</includedby>
+    <includedby refid="_geometry_8h" local="yes">Source/Math/Inc/Math/Geometry.h</includedby>
+    <includedby refid="_icosphere_8cpp" local="yes">Source/Math/Src/Icosphere.cpp</includedby>
+    <includedby refid="_physics_2_inc_2_physics_2_geometry_2_cloth_mesh_8h" local="no">Source/Physics/Inc/Physics/Geometry/ClothMesh.h</includedby>
+    <includedby refid="_cloth_plane_8h" local="no">Source/Physics/Inc/Physics/Geometry/ClothPlane.h</includedby>
+    <includedby refid="_app_renderer_8_basic_8cpp" local="yes">Source/Samples/0_TestZone/Src/AppRenderer.Basic.cpp</includedby>
+    <includedby refid="_app_renderer_8_cloth_8cpp" local="yes">Source/Samples/0_TestZone/Src/AppRenderer.Cloth.cpp</includedby>
+    <includedby refid="_app_renderer_8_compute_8cpp" local="yes">Source/Samples/0_TestZone/Src/AppRenderer.Compute.cpp</includedby>
+    <includedby refid="0___test_zone_2_src_2_app_renderer_8cpp" local="yes">Source/Samples/0_TestZone/Src/AppRenderer.cpp</includedby>
+    <includedby refid="_app_renderer_8_deferred_8cpp" local="yes">Source/Samples/0_TestZone/Src/AppRenderer.Deferred.cpp</includedby>
+    <includedby refid="_app_renderer_8_instanced_8cpp" local="yes">Source/Samples/0_TestZone/Src/AppRenderer.Instanced.cpp</includedby>
+    <includedby refid="1___procedural_planet_2_src_2_app_renderer_8cpp" local="yes">Source/Samples/1_ProceduralPlanet/Src/AppRenderer.cpp</includedby>
+    <includedby refid="3___cloth_sim_2_src_2_app_renderer_8cpp" local="yes">Source/Samples/3_ClothSim/Src/AppRenderer.cpp</includedby>
+    <incdepgraph>
+      <node id="4765">
+        <label>Source/Core/Inc/Core/RawStorageFormat.h</label>
+        <link refid="_raw_storage_format_8h"/>
+        <childnode refid="4766" relation="include">
+        </childnode>
+        <childnode refid="4767" relation="include">
+        </childnode>
+        <childnode refid="4768" relation="include">
+        </childnode>
+        <childnode refid="4769" relation="include">
+        </childnode>
+        <childnode refid="4770" relation="include">
+        </childnode>
+        <childnode refid="4771" relation="include">
+        </childnode>
+      </node>
+      <node id="4770">
+        <label>boost/preprocessor/tuple/elem.hpp</label>
+      </node>
+      <node id="4771">
+        <label>boost/detail/bitmask.hpp</label>
+      </node>
+      <node id="4767">
+        <label>tuple</label>
+      </node>
+      <node id="4768">
+        <label>boost/preprocessor/repetition/repeat.hpp</label>
+      </node>
+      <node id="4766">
+        <label>Types.h</label>
+      </node>
+      <node id="4769">
+        <label>boost/preprocessor/seq/for_each.hpp</label>
+      </node>
+    </incdepgraph>
+    <invincdepgraph>
+      <node id="4813">
+        <label>Source/Azura/RenderSystem/Inc/Generic/GPUBufferWriter.h</label>
+        <link refid="_g_p_u_buffer_writer_8h_source"/>
+      </node>
+      <node id="4820">
+        <label>Source/Azura/RenderSystem/Inc/Vulkan/VkScopedPipeline.h</label>
+        <link refid="_vk_scoped_pipeline_8h_source"/>
+        <childnode refid="4811" relation="include">
+        </childnode>
+        <childnode refid="4804" relation="include">
+        </childnode>
+      </node>
+      <node id="4815">
+        <label>Source/Azura/RenderSystem/Inc/D3D12/D3D12TextureManager.h</label>
+        <link refid="_d3_d12_texture_manager_8h_source"/>
+        <childnode refid="4816" relation="include">
+        </childnode>
+      </node>
+      <node id="4798">
+        <label>Source/Samples/2_DeferredRenderer/Inc/Forward/ForwardComputeScene.h</label>
+        <link refid="_forward_compute_scene_8h_source"/>
+        <childnode refid="4796" relation="include">
+        </childnode>
+      </node>
+      <node id="4785">
+        <label>Source/Azura/RenderSystem/Inc/D3D12/D3D12ScopedImage.h</label>
+        <link refid="_d3_d12_scoped_image_8h_source"/>
+        <childnode refid="4776" relation="include">
+        </childnode>
+        <childnode refid="4779" relation="include">
+        </childnode>
+        <childnode refid="4781" relation="include">
+        </childnode>
+        <childnode refid="4784" relation="include">
+        </childnode>
+      </node>
+      <node id="4790">
+        <label>Source/Azura/RenderSystem/Inc/Generic/Renderer.h</label>
+        <link refid="_renderer_8h_source"/>
+        <childnode refid="4777" relation="include">
+        </childnode>
+        <childnode refid="4791" relation="include">
+        </childnode>
+        <childnode refid="4802" relation="include">
+        </childnode>
+        <childnode refid="4803" relation="include">
+        </childnode>
+        <childnode refid="4804" relation="include">
+        </childnode>
+        <childnode refid="4805" relation="include">
+        </childnode>
+        <childnode refid="4806" relation="include">
+        </childnode>
+        <childnode refid="4794" relation="include">
+        </childnode>
+        <childnode refid="4795" relation="include">
+        </childnode>
+        <childnode refid="4796" relation="include">
+        </childnode>
+        <childnode refid="4801" relation="include">
+        </childnode>
+      </node>
+      <node id="4775">
+        <label>Source/Azura/RenderSystem/Inc/D3D12/D3D12Core.h</label>
+        <link refid="_d3_d12_core_8h_source"/>
+        <childnode refid="4776" relation="include">
+        </childnode>
+        <childnode refid="4778" relation="include">
+        </childnode>
+        <childnode refid="4779" relation="include">
+        </childnode>
+        <childnode refid="4777" relation="include">
+        </childnode>
+        <childnode refid="4780" relation="include">
+        </childnode>
+        <childnode refid="4783" relation="include">
+        </childnode>
+        <childnode refid="4781" relation="include">
+        </childnode>
+        <childnode refid="4785" relation="include">
+        </childnode>
+        <childnode refid="4784" relation="include">
+        </childnode>
+        <childnode refid="4786" relation="include">
+        </childnode>
+        <childnode refid="4787" relation="include">
+        </childnode>
+        <childnode refid="4788" relation="include">
+        </childnode>
+        <childnode refid="4773" relation="include">
+        </childnode>
+      </node>
+      <node id="4772">
+        <label>Source/Core/Inc/Core/RawStorageFormat.h</label>
+        <link refid="_raw_storage_format_8h"/>
+        <childnode refid="4773" relation="include">
+        </childnode>
+        <childnode refid="4774" relation="include">
+        </childnode>
+        <childnode refid="4809" relation="include">
+        </childnode>
+        <childnode refid="4790" relation="include">
+        </childnode>
+        <childnode refid="4824" relation="include">
+        </childnode>
+        <childnode refid="4825" relation="include">
+        </childnode>
+        <childnode refid="4830" relation="include">
+        </childnode>
+        <childnode refid="4831" relation="include">
+        </childnode>
+      </node>
+      <node id="4776">
+        <label>Source/Azura/RenderSystem/Inc/D3D12/D3D12ComputePool.h</label>
+        <link refid="_d3_d12_compute_pool_8h_source"/>
+        <childnode refid="4777" relation="include">
+        </childnode>
+      </node>
+      <node id="4796">
+        <label>Source/Samples/2_DeferredRenderer/Inc/App/App.h</label>
+        <link refid="_app_8h_source"/>
+      </node>
+      <node id="4780">
+        <label>Source/Azura/RenderSystem/Inc/D3D12/D3D12ScopedBuffer.h</label>
+        <link refid="_d3_d12_scoped_buffer_8h_source"/>
+        <childnode refid="4776" relation="include">
+        </childnode>
+        <childnode refid="4779" relation="include">
+        </childnode>
+        <childnode refid="4781" relation="include">
+        </childnode>
+      </node>
+      <node id="4817">
+        <label>Source/Azura/RenderSystem/Inc/Vulkan/VkScopedImage.h</label>
+        <link refid="_vk_scoped_image_8h_source"/>
+        <childnode refid="4818" relation="include">
+        </childnode>
+        <childnode refid="4811" relation="include">
+        </childnode>
+        <childnode refid="4819" relation="include">
+        </childnode>
+        <childnode refid="4821" relation="include">
+        </childnode>
+      </node>
+      <node id="4831">
+        <label>Source/Physics/Inc/Physics/Geometry/ClothPlane.h</label>
+        <link refid="_cloth_plane_8h_source"/>
+        <childnode refid="4801" relation="include">
+        </childnode>
+      </node>
+      <node id="4774">
+        <label>Source/Azura/RenderSystem/Inc/Generic/GenericTypes.h</label>
+        <link refid="_azura_2_render_system_2_inc_2_generic_2_generic_types_8h_source"/>
+        <childnode refid="4775" relation="include">
+        </childnode>
+        <childnode refid="4782" relation="include">
+        </childnode>
+        <childnode refid="4773" relation="include">
+        </childnode>
+        <childnode refid="4789" relation="include">
+        </childnode>
+        <childnode refid="4808" relation="include">
+        </childnode>
+        <childnode refid="4809" relation="include">
+        </childnode>
+        <childnode refid="4791" relation="include">
+        </childnode>
+        <childnode refid="4790" relation="include">
+        </childnode>
+        <childnode refid="4812" relation="include">
+        </childnode>
+        <childnode refid="4814" relation="include">
+        </childnode>
+        <childnode refid="4822" relation="include">
+        </childnode>
+        <childnode refid="4820" relation="include">
+        </childnode>
+        <childnode refid="4819" relation="include">
+        </childnode>
+        <childnode refid="4824" relation="include">
+        </childnode>
+      </node>
+      <node id="4811">
+        <label>Source/Azura/RenderSystem/Inc/Vulkan/VkDrawablePool.h</label>
+        <link refid="_vk_drawable_pool_8h_source"/>
+        <childnode refid="4804" relation="include">
+        </childnode>
+      </node>
+      <node id="4800">
+        <label>Source/Samples/2_DeferredRenderer/Inc/ForwardPlus/ForwardPlusComputeScene.h</label>
+        <link refid="_forward_plus_compute_scene_8h_source"/>
+        <childnode refid="4796" relation="include">
+        </childnode>
+      </node>
+      <node id="4793">
+        <label>Source/Azura/RenderSystem/Inc/Generic/Windows/Win32GLFWWindow.h</label>
+        <link refid="_win32_g_l_f_w_window_8h_source"/>
+      </node>
+      <node id="4782">
+        <label>Source/Azura/RenderSystem/Inc/D3D12/D3D12ScopedPipeline.h</label>
+        <link refid="_d3_d12_scoped_pipeline_8h_source"/>
+        <childnode refid="4776" relation="include">
+        </childnode>
+        <childnode refid="4779" relation="include">
+        </childnode>
+      </node>
+      <node id="4787">
+        <label>Source/Azura/RenderSystem/Inc/D3D12/D3D12ScopedShader.h</label>
+        <link refid="_d3_d12_scoped_shader_8h_source"/>
+        <childnode refid="4777" relation="include">
+        </childnode>
+        <childnode refid="4781" relation="include">
+        </childnode>
+        <childnode refid="4782" relation="include">
+        </childnode>
+        <childnode refid="4784" relation="include">
+        </childnode>
+      </node>
+      <node id="4805">
+        <label>Source/Azura/RenderSystem/Inc/Vulkan/VkTextureManager.h</label>
+        <link refid="_vk_texture_manager_8h_source"/>
+        <childnode refid="4804" relation="include">
+        </childnode>
+      </node>
+      <node id="4834">
+        <label>Source/Samples/0_TestZone/Inc/TestZone/ImportedClothMesh.h</label>
+        <link refid="_imported_cloth_mesh_8h_source"/>
+        <childnode refid="4794" relation="include">
+        </childnode>
+      </node>
+      <node id="4786">
+        <label>Source/Azura/RenderSystem/Inc/D3D12/D3D12ScopedSampler.h</label>
+        <link refid="_d3_d12_scoped_sampler_8h_source"/>
+        <childnode refid="4776" relation="include">
+        </childnode>
+        <childnode refid="4779" relation="include">
+        </childnode>
+      </node>
+      <node id="4777">
+        <label>Source/Azura/RenderSystem/Inc/D3D12/D3D12Renderer.h</label>
+        <link refid="_d3_d12_renderer_8h_source"/>
+      </node>
+      <node id="4816">
+        <label>Source/Samples/2_DeferredRenderer/Inc/App/LightTexture.h</label>
+        <link refid="_light_texture_8h_source"/>
+        <childnode refid="4796" relation="include">
+        </childnode>
+        <childnode refid="4798" relation="include">
+        </childnode>
+        <childnode refid="4799" relation="include">
+        </childnode>
+        <childnode refid="4800" relation="include">
+        </childnode>
+      </node>
+      <node id="4833">
+        <label>Source/Samples/0_TestZone/Inc/TestZone/ClothMesh.h</label>
+        <link refid="_samples_20___test_zone_2_inc_2_test_zone_2_cloth_mesh_8h_source"/>
+        <childnode refid="4794" relation="include">
+        </childnode>
+      </node>
+      <node id="4784">
+        <label>Source/Azura/RenderSystem/Inc/D3D12/D3D12ScopedRenderPass.h</label>
+        <link refid="_d3_d12_scoped_render_pass_8h_source"/>
+        <childnode refid="4779" relation="include">
+        </childnode>
+        <childnode refid="4777" relation="include">
+        </childnode>
+        <childnode refid="4782" relation="include">
+        </childnode>
+      </node>
+      <node id="4801">
+        <label>Source/Samples/3_ClothSim/Inc/ClothSim/AppRenderer.h</label>
+        <link refid="3___cloth_sim_2_inc_2_cloth_sim_2_app_renderer_8h_source"/>
+      </node>
+      <node id="4788">
+        <label>Source/Azura/RenderSystem/Inc/D3D12/D3D12ScopedSwapChain.h</label>
+        <link refid="_d3_d12_scoped_swap_chain_8h_source"/>
+        <childnode refid="4777" relation="include">
+        </childnode>
+        <childnode refid="4781" relation="include">
+        </childnode>
+        <childnode refid="4784" relation="include">
+        </childnode>
+      </node>
+      <node id="4828">
+        <label>Source/Physics/Inc/Physics/Geometry/IPhysicsGeometry.h</label>
+        <link refid="_i_physics_geometry_8h_source"/>
+        <childnode refid="4829" relation="include">
+        </childnode>
+      </node>
+      <node id="4807">
+        <label>Source/Azura/RenderSystem/Inc/Vulkan/VkComputePool.h</label>
+        <link refid="_vk_compute_pool_8h_source"/>
+        <childnode refid="4804" relation="include">
+        </childnode>
+      </node>
+      <node id="4823">
+        <label>Source/Azura/RenderSystem/Inc/Vulkan/VkShader.h</label>
+        <link refid="_vk_shader_8h_source"/>
+        <childnode refid="4819" relation="include">
+        </childnode>
+        <childnode refid="4804" relation="include">
+        </childnode>
+      </node>
+      <node id="4795">
+        <label>Source/Samples/1_ProceduralPlanet/Inc/ProceduralPlanet/AppRenderer.h</label>
+        <link refid="1___procedural_planet_2_inc_2_procedural_planet_2_app_renderer_8h_source"/>
+      </node>
+      <node id="4794">
+        <label>Source/Samples/0_TestZone/Inc/TestZone/AppRenderer.h</label>
+        <link refid="0___test_zone_2_inc_2_test_zone_2_app_renderer_8h_source"/>
+      </node>
+      <node id="4778">
+        <label>Source/Azura/RenderSystem/Inc/D3D12/D3D12Drawable.h</label>
+        <link refid="_d3_d12_drawable_8h_source"/>
+        <childnode refid="4776" relation="include">
+        </childnode>
+        <childnode refid="4779" relation="include">
+        </childnode>
+      </node>
+      <node id="4792">
+        <label>Source/Azura/RenderSystem/Inc/Generic/GLFWWindow.h</label>
+        <link refid="_g_l_f_w_window_8h_source"/>
+        <childnode refid="4793" relation="include">
+        </childnode>
+      </node>
+      <node id="4821">
+        <label>Source/Azura/RenderSystem/Inc/Vulkan/VkScopedSwapChain.h</label>
+        <link refid="_vk_scoped_swap_chain_8h_source"/>
+        <childnode refid="4820" relation="include">
+        </childnode>
+        <childnode refid="4804" relation="include">
+        </childnode>
+      </node>
+      <node id="4806">
+        <label>Source/Azura/RenderSystem/Test/RenderTestCases.h</label>
+        <link refid="_render_test_cases_8h_source"/>
+      </node>
+      <node id="4812">
+        <label>Source/Azura/RenderSystem/Inc/Generic/GPUBuffer.h</label>
+        <link refid="_g_p_u_buffer_8h_source"/>
+        <childnode refid="4813" relation="include">
+        </childnode>
+      </node>
+      <node id="4825">
+        <label>Source/Math/Inc/Math/Geometry.h</label>
+        <link refid="_geometry_8h_source"/>
+        <childnode refid="4826" relation="include">
+        </childnode>
+        <childnode refid="4827" relation="include">
+        </childnode>
+        <childnode refid="4828" relation="include">
+        </childnode>
+        <childnode refid="4832" relation="include">
+        </childnode>
+        <childnode refid="4833" relation="include">
+        </childnode>
+        <childnode refid="4834" relation="include">
+        </childnode>
+      </node>
+      <node id="4829">
+        <label>Source/Physics/Inc/Physics/Geometry/IClothPhysicsGeometry.h</label>
+        <link refid="_i_cloth_physics_geometry_8h_source"/>
+        <childnode refid="4830" relation="include">
+        </childnode>
+        <childnode refid="4831" relation="include">
+        </childnode>
+      </node>
+      <node id="4810">
+        <label>Source/Azura/RenderSystem/Inc/Generic/PoolPrimitives.h</label>
+        <link refid="_pool_primitives_8h_source"/>
+      </node>
+      <node id="4809">
+        <label>Source/Azura/RenderSystem/Inc/Generic/Drawable.h</label>
+        <link refid="_drawable_8h_source"/>
+        <childnode refid="4778" relation="include">
+        </childnode>
+        <childnode refid="4779" relation="include">
+        </childnode>
+        <childnode refid="4790" relation="include">
+        </childnode>
+        <childnode refid="4810" relation="include">
+        </childnode>
+        <childnode refid="4807" relation="include">
+        </childnode>
+        <childnode refid="4811" relation="include">
+        </childnode>
+      </node>
+      <node id="4832">
+        <label>Source/Samples/0_TestZone/Inc/TestZone/ClothCommon.h</label>
+        <link refid="_cloth_common_8h_source"/>
+        <childnode refid="4833" relation="include">
+        </childnode>
+        <childnode refid="4834" relation="include">
+        </childnode>
+      </node>
+      <node id="4803">
+        <label>Source/Azura/RenderSystem/Inc/Vulkan/VkCore.h</label>
+        <link refid="_vk_core_8h_source"/>
+        <childnode refid="4804" relation="include">
+        </childnode>
+      </node>
+      <node id="4799">
+        <label>Source/Samples/2_DeferredRenderer/Inc/Forward/ForwardScene.h</label>
+        <link refid="_forward_scene_8h_source"/>
+        <childnode refid="4796" relation="include">
+        </childnode>
+      </node>
+      <node id="4779">
+        <label>Source/Azura/RenderSystem/Inc/D3D12/D3D12DrawablePool.h</label>
+        <link refid="_d3_d12_drawable_pool_8h_source"/>
+        <childnode refid="4777" relation="include">
+        </childnode>
+      </node>
+      <node id="4808">
+        <label>Source/Azura/RenderSystem/Inc/Generic/Debug.h</label>
+        <link refid="_debug_8h_source"/>
+      </node>
+      <node id="4802">
+        <label>Source/Azura/RenderSystem/Inc/Generic/RenderSystem.h</label>
+        <link refid="_render_system_8h_source"/>
+      </node>
+      <node id="4791">
+        <label>Source/Azura/RenderSystem/Inc/Generic/Window.h</label>
+        <link refid="_window_8h_source"/>
+        <childnode refid="4777" relation="include">
+        </childnode>
+        <childnode refid="4788" relation="include">
+        </childnode>
+        <childnode refid="4792" relation="include">
+        </childnode>
+        <childnode refid="4794" relation="include">
+        </childnode>
+        <childnode refid="4795" relation="include">
+        </childnode>
+        <childnode refid="4796" relation="include">
+        </childnode>
+        <childnode refid="4797" relation="include">
+        </childnode>
+        <childnode refid="4801" relation="include">
+        </childnode>
+      </node>
+      <node id="4783">
+        <label>Source/Azura/RenderSystem/Inc/D3D12/D3D12ScopedCommandBuffer.h</label>
+        <link refid="_d3_d12_scoped_command_buffer_8h_source"/>
+        <childnode refid="4776" relation="include">
+        </childnode>
+        <childnode refid="4779" relation="include">
+        </childnode>
+        <childnode refid="4777" relation="include">
+        </childnode>
+        <childnode refid="4781" relation="include">
+        </childnode>
+        <childnode refid="4784" relation="include">
+        </childnode>
+      </node>
+      <node id="4826">
+        <label>Source/Math/Inc/Math/Icosphere.h</label>
+        <link refid="_icosphere_8h_source"/>
+      </node>
+      <node id="4804">
+        <label>Source/Azura/RenderSystem/Inc/Vulkan/VkRenderer.h</label>
+        <link refid="_vk_renderer_8h_source"/>
+      </node>
+      <node id="4827">
+        <label>Source/Math/Inc/Math/Plane.h</label>
+        <link refid="_plane_8h_source"/>
+        <childnode refid="4794" relation="include">
+        </childnode>
+      </node>
+      <node id="4773">
+        <label>Source/Azura/RenderSystem/Inc/D3D12/D3D12TypeMapping.h</label>
+        <link refid="_d3_d12_type_mapping_8h_source"/>
+      </node>
+      <node id="4797">
+        <label>Source/Samples/2_DeferredRenderer/Inc/App/Scene.h</label>
+        <link refid="_samples_22___deferred_renderer_2_inc_2_app_2_scene_8h_source"/>
+        <childnode refid="4796" relation="include">
+        </childnode>
+        <childnode refid="4798" relation="include">
+        </childnode>
+        <childnode refid="4799" relation="include">
+        </childnode>
+        <childnode refid="4800" relation="include">
+        </childnode>
+      </node>
+      <node id="4789">
+        <label>Source/Azura/RenderSystem/Inc/Generic/ComputePool.h</label>
+        <link refid="_compute_pool_8h_source"/>
+        <childnode refid="4776" relation="include">
+        </childnode>
+        <childnode refid="4790" relation="include">
+        </childnode>
+        <childnode refid="4807" relation="include">
+        </childnode>
+      </node>
+      <node id="4781">
+        <label>Source/Azura/RenderSystem/Inc/D3D12/D3D12ScopedComputePass.h</label>
+        <link refid="_d3_d12_scoped_compute_pass_8h_source"/>
+        <childnode refid="4776" relation="include">
+        </childnode>
+        <childnode refid="4777" relation="include">
+        </childnode>
+        <childnode refid="4782" relation="include">
+        </childnode>
+      </node>
+      <node id="4824">
+        <label>Source/Azura/RenderSystem/Inc/Vulkan/VkTypeMapping.h</label>
+        <link refid="_vk_type_mapping_8h_source"/>
+      </node>
+      <node id="4814">
+        <label>Source/Azura/RenderSystem/Inc/Generic/TextureManager.h</label>
+        <link refid="_texture_manager_8h_source"/>
+        <childnode refid="4815" relation="include">
+        </childnode>
+        <childnode refid="4802" relation="include">
+        </childnode>
+        <childnode refid="4817" relation="include">
+        </childnode>
+        <childnode refid="4805" relation="include">
+        </childnode>
+        <childnode refid="4794" relation="include">
+        </childnode>
+        <childnode refid="4795" relation="include">
+        </childnode>
+        <childnode refid="4797" relation="include">
+        </childnode>
+        <childnode refid="4801" relation="include">
+        </childnode>
+      </node>
+      <node id="4819">
+        <label>Source/Azura/RenderSystem/Inc/Vulkan/VkScopedRenderPass.h</label>
+        <link refid="_vk_scoped_render_pass_8h_source"/>
+        <childnode refid="4820" relation="include">
+        </childnode>
+        <childnode refid="4811" relation="include">
+        </childnode>
+        <childnode refid="4804" relation="include">
+        </childnode>
+      </node>
+      <node id="4822">
+        <label>Source/Azura/RenderSystem/Inc/Generic/Shader.h</label>
+        <link refid="_shader_8h_source"/>
+        <childnode refid="4787" relation="include">
+        </childnode>
+        <childnode refid="4823" relation="include">
+        </childnode>
+      </node>
+      <node id="4818">
+        <label>Source/Azura/RenderSystem/Inc/Vulkan/VkTypes.h</label>
+        <link refid="_vk_types_8h_source"/>
+        <childnode refid="4803" relation="include">
+        </childnode>
+      </node>
+      <node id="4830">
+        <label>Source/Physics/Inc/Physics/Geometry/ClothMesh.h</label>
+        <link refid="_physics_2_inc_2_physics_2_geometry_2_cloth_mesh_8h_source"/>
+        <childnode refid="4801" relation="include">
+        </childnode>
+      </node>
+    </invincdepgraph>
+    <innernamespace refid="namespace_azura">Azura</innernamespace>
+      <sectiondef kind="define">
+      <memberdef kind="define" id="_raw_storage_format_8h_1ac6f4545ddaba38650bfe02ab644c0a24" prot="public" static="no">
+        <name>TUPLE_ACCESS_ENUM</name>
+        <initializer>0</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Source/Core/Inc/Core/RawStorageFormat.h" line="68" column="9" bodyfile="Source/Core/Inc/Core/RawStorageFormat.h" bodystart="68" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="define" id="_raw_storage_format_8h_1a35e629c2f9ca3d2fd9dcaf023af04bdf" prot="public" static="no">
+        <name>TUPLE_ACCESS_ASPECT_MASK</name>
+        <initializer>1</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Source/Core/Inc/Core/RawStorageFormat.h" line="69" column="9" bodyfile="Source/Core/Inc/Core/RawStorageFormat.h" bodystart="69" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="define" id="_raw_storage_format_8h_1a15b89fab936e5927c548f26855a367e3" prot="public" static="no">
+        <name>TUPLE_ACCESS_CHANNEL_DATA</name>
+        <initializer>2</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Source/Core/Inc/Core/RawStorageFormat.h" line="70" column="9" bodyfile="Source/Core/Inc/Core/RawStorageFormat.h" bodystart="70" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="define" id="_raw_storage_format_8h_1a567a12d8b9cf9728665631dbbfda0748" prot="public" static="no">
+        <name>TUPLE_SIZE</name>
+        <initializer>3</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Source/Core/Inc/Core/RawStorageFormat.h" line="71" column="9" bodyfile="Source/Core/Inc/Core/RawStorageFormat.h" bodystart="71" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="define" id="_raw_storage_format_8h_1aedb72d83a24b8ce601597819920b25de" prot="public" static="no">
+        <name>CHANNEL_TUPLE_ACCESS_CHANNEL</name>
+        <initializer>0</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Source/Core/Inc/Core/RawStorageFormat.h" line="73" column="9" bodyfile="Source/Core/Inc/Core/RawStorageFormat.h" bodystart="73" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="define" id="_raw_storage_format_8h_1a080c164713c03c3ce45943ff0dd6afdd" prot="public" static="no">
+        <name>CHANNEL_TUPLE_ACCESS_TYPE</name>
+        <initializer>1</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Source/Core/Inc/Core/RawStorageFormat.h" line="74" column="9" bodyfile="Source/Core/Inc/Core/RawStorageFormat.h" bodystart="74" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="define" id="_raw_storage_format_8h_1a41fd156786d9f0e0419483c61206f892" prot="public" static="no">
+        <name>CHANNEL_TUPLE_ACCESS_BIT_WIDTH</name>
+        <initializer>2</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Source/Core/Inc/Core/RawStorageFormat.h" line="75" column="9" bodyfile="Source/Core/Inc/Core/RawStorageFormat.h" bodystart="75" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="define" id="_raw_storage_format_8h_1a965c5543d58106f05eff4cc330bef27b" prot="public" static="no">
+        <name>CHANNEL_TUPLE_SIZE</name>
+        <initializer>3</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Source/Core/Inc/Core/RawStorageFormat.h" line="76" column="9" bodyfile="Source/Core/Inc/Core/RawStorageFormat.h" bodystart="76" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="define" id="_raw_storage_format_8h_1ab4ba870c792c9023457715d52085360d" prot="public" static="no">
+        <name>RAW_STORAGE_FORMAT_ITERATOR</name>
+        <param><defname>FUNC</defname></param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Source/Core/Inc/Core/RawStorageFormat.h" line="79" column="9" bodyfile="Source/Core/Inc/Core/RawStorageFormat.h" bodystart="79" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="define" id="_raw_storage_format_8h_1a2ab5d6ed0cea8e29a5764ad8993fdad5" prot="public" static="no">
+        <name>GET_FORMAT_NAME_FROM_TUPLE</name>
+        <param><defname>ENUM_TUPLE</defname></param>
+        <initializer>BOOST_PP_TUPLE_ELEM(TUPLE_SIZE, TUPLE_ACCESS_ENUM, ENUM_TUPLE)</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Source/Core/Inc/Core/RawStorageFormat.h" line="150" column="9" bodyfile="Source/Core/Inc/Core/RawStorageFormat.h" bodystart="150" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="define" id="_raw_storage_format_8h_1aae38a55203b7a248ae0ec1e76343bf3f" prot="public" static="no">
+        <name>GET_FORMAT_NAME_FOR_LIST_FROM_TUPLE</name>
+        <param><defname>ENUM_TUPLE</defname></param>
+        <initializer>GET_FORMAT_NAME_FROM_TUPLE(ENUM_TUPLE),</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Source/Core/Inc/Core/RawStorageFormat.h" line="151" column="9" bodyfile="Source/Core/Inc/Core/RawStorageFormat.h" bodystart="151" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="define" id="_raw_storage_format_8h_1a155951d09852d4224e83a984b8d5cd06" prot="public" static="no">
+        <name>GET_FULL_FORMAT_NAME_FROM_TUPLE</name>
+        <param><defname>ENUM_TUPLE</defname></param>
+        <initializer>RawStorageFormat::GET_FORMAT_NAME_FROM_TUPLE(ENUM_TUPLE)</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Source/Core/Inc/Core/RawStorageFormat.h" line="152" column="9" bodyfile="Source/Core/Inc/Core/RawStorageFormat.h" bodystart="152" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="define" id="_raw_storage_format_8h_1a4d35094e00e6f0661dc3375e7b3396e8" prot="public" static="no">
+        <name>GET_CHANNEL_WIDTH</name>
+        <param><defname>CHANNEL_TUPLE</defname></param>
+        <initializer>BOOST_PP_TUPLE_ELEM(CHANNEL_TUPLE_SIZE, CHANNEL_TUPLE_ACCESS_BIT_WIDTH, CHANNEL_TUPLE)</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Source/Core/Inc/Core/RawStorageFormat.h" line="155" column="9" bodyfile="Source/Core/Inc/Core/RawStorageFormat.h" bodystart="155" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="define" id="_raw_storage_format_8h_1a9d4f1b9f41ecc6c666974f680901e44f" prot="public" static="no">
+        <name>GET_CHANNEL_WIDTH_SEQ</name>
+        <param><defname>R</defname></param>
+        <param><defname>DATA</defname></param>
+        <param><defname>CHANNEL_TUPLE</defname></param>
+        <initializer>BOOST_PP_TUPLE_ELEM(CHANNEL_TUPLE_SIZE, CHANNEL_TUPLE_ACCESS_BIT_WIDTH, CHANNEL_TUPLE) DATA</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Source/Core/Inc/Core/RawStorageFormat.h" line="157" column="9" bodyfile="Source/Core/Inc/Core/RawStorageFormat.h" bodystart="157" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="define" id="_raw_storage_format_8h_1a29d6018c9093a48ba5eb1140185c5087" prot="public" static="no">
+        <name>GET_FORMAT_WIDTH</name>
+        <param><defname>CHANNEL_LIST</defname></param>
+        <initializer>BOOST_PP_SEQ_FOR_EACH(GET_CHANNEL_WIDTH_SEQ, +, CHANNEL_LIST) 0</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Source/Core/Inc/Core/RawStorageFormat.h" line="159" column="9" bodyfile="Source/Core/Inc/Core/RawStorageFormat.h" bodystart="159" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="define" id="_raw_storage_format_8h_1a8af326f99ed79fea2cc83cd9cbb76b60" prot="public" static="no">
+        <name>GET_FORMAT_WIDTH_FROM_TUPLE</name>
+        <param><defname>ENUM_TUPLE</defname></param>
+        <initializer>GET_FORMAT_WIDTH(BOOST_PP_TUPLE_ELEM(TUPLE_SIZE, TUPLE_ACCESS_CHANNEL_DATA, ENUM_TUPLE))</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Source/Core/Inc/Core/RawStorageFormat.h" line="161" column="9" bodyfile="Source/Core/Inc/Core/RawStorageFormat.h" bodystart="161" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="define" id="_raw_storage_format_8h_1abed04e09fb1f8f440bcf0cc79a3fb3bb" prot="public" static="no">
+        <name>GET_FORMAT_WIDTH_FOR_LIST_FROM_TUPLE</name>
+        <param><defname>ENUM_TUPLE</defname></param>
+        <initializer>GET_FORMAT_WIDTH_FROM_TUPLE(ENUM_TUPLE),</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Source/Core/Inc/Core/RawStorageFormat.h" line="163" column="9" bodyfile="Source/Core/Inc/Core/RawStorageFormat.h" bodystart="163" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="define" id="_raw_storage_format_8h_1a319e3a5dce3a6d4c5ff2af99d221a88f" prot="public" static="no">
+        <name>GET_ASPECT_MASK_FROM_TUPLE</name>
+        <param><defname>ENUM_TUPLE</defname></param>
+        <initializer>BOOST_PP_TUPLE_ELEM(TUPLE_SIZE, TUPLE_ACCESS_ASPECT_MASK, ENUM_TUPLE)</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Source/Core/Inc/Core/RawStorageFormat.h" line="166" column="9" bodyfile="Source/Core/Inc/Core/RawStorageFormat.h" bodystart="166" bodyend="-1"/>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <programlisting>
+<codeline lineno="1"><highlight class="preprocessor">#pragma<sp/>once</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="2"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&lt;Types.h&gt;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="3"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&lt;tuple&gt;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="4"><highlight class="normal"></highlight></codeline>
+<codeline lineno="5"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&lt;boost/preprocessor/repetition/repeat.hpp&gt;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="6"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&lt;boost/preprocessor/seq/for_each.hpp&gt;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="7"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&lt;boost/preprocessor/tuple/elem.hpp&gt;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="8"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&lt;boost/detail/bitmask.hpp&gt;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="9"><highlight class="normal"></highlight></codeline>
+<codeline lineno="10"><highlight class="normal"></highlight><highlight class="keyword">namespace<sp/></highlight><highlight class="normal"><ref refid="namespace_azura" kindref="compound">Azura</ref><sp/>{</highlight></codeline>
+<codeline lineno="11"><highlight class="normal"></highlight><highlight class="keyword">enum<sp/>class</highlight><highlight class="normal"><sp/>AspectMaskBits</highlight></codeline>
+<codeline lineno="12"><highlight class="normal">{</highlight></codeline>
+<codeline lineno="13"><highlight class="normal"><sp/><sp/>ColorBit<sp/>=<sp/>1<sp/>&lt;&lt;<sp/>0,</highlight></codeline>
+<codeline lineno="14"><highlight class="normal"><sp/><sp/>DepthBit<sp/>=<sp/>1<sp/>&lt;&lt;<sp/>1,</highlight></codeline>
+<codeline lineno="15"><highlight class="normal"><sp/><sp/>StencilBit<sp/>=<sp/>1<sp/>&lt;&lt;<sp/>2</highlight></codeline>
+<codeline lineno="16"><highlight class="normal">};</highlight></codeline>
+<codeline lineno="17"><highlight class="normal"></highlight></codeline>
+<codeline lineno="18"><highlight class="normal">BOOST_BITMASK(AspectMaskBits);</highlight></codeline>
+<codeline lineno="19"><highlight class="normal"></highlight></codeline>
+<codeline lineno="20"><highlight class="normal"></highlight><highlight class="keyword">enum</highlight><highlight class="normal"><sp/>Bits</highlight></codeline>
+<codeline lineno="21"><highlight class="normal">{</highlight></codeline>
+<codeline lineno="22"><highlight class="normal"><sp/><sp/>BitsUnknown<sp/>=<sp/>0,</highlight></codeline>
+<codeline lineno="23"><highlight class="normal"><sp/><sp/>Bits1<sp/><sp/><sp/><sp/><sp/><sp/><sp/>=<sp/>1,</highlight></codeline>
+<codeline lineno="24"><highlight class="normal"><sp/><sp/>Bits2<sp/><sp/><sp/><sp/><sp/><sp/><sp/>=<sp/>2,</highlight></codeline>
+<codeline lineno="25"><highlight class="normal"><sp/><sp/>Bits3<sp/><sp/><sp/><sp/><sp/><sp/><sp/>=<sp/>3,</highlight></codeline>
+<codeline lineno="26"><highlight class="normal"><sp/><sp/>Bits4<sp/><sp/><sp/><sp/><sp/><sp/><sp/>=<sp/>4,</highlight></codeline>
+<codeline lineno="27"><highlight class="normal"><sp/><sp/>Bits5<sp/><sp/><sp/><sp/><sp/><sp/><sp/>=<sp/>5,</highlight></codeline>
+<codeline lineno="28"><highlight class="normal"><sp/><sp/>Bits6<sp/><sp/><sp/><sp/><sp/><sp/><sp/>=<sp/>6,</highlight></codeline>
+<codeline lineno="29"><highlight class="normal"><sp/><sp/>Bits7<sp/><sp/><sp/><sp/><sp/><sp/><sp/>=<sp/>7,</highlight></codeline>
+<codeline lineno="30"><highlight class="normal"><sp/><sp/>Bits8<sp/><sp/><sp/><sp/><sp/><sp/><sp/>=<sp/>8,</highlight></codeline>
+<codeline lineno="31"><highlight class="normal"><sp/><sp/>Bits16<sp/><sp/><sp/><sp/><sp/><sp/>=<sp/>16,</highlight></codeline>
+<codeline lineno="32"><highlight class="normal"><sp/><sp/>Bits32<sp/><sp/><sp/><sp/><sp/><sp/>=<sp/>32</highlight></codeline>
+<codeline lineno="33"><highlight class="normal">};</highlight></codeline>
+<codeline lineno="34"><highlight class="normal"></highlight></codeline>
+<codeline lineno="35"><highlight class="normal"></highlight><highlight class="keyword">enum</highlight><highlight class="normal"><sp/>FormatFeature<sp/>:<sp/>U32</highlight></codeline>
+<codeline lineno="36"><highlight class="normal">{</highlight></codeline>
+<codeline lineno="37"><highlight class="normal"><sp/><sp/>Compressed<sp/>=<sp/>1,</highlight></codeline>
+<codeline lineno="38"><highlight class="normal"><sp/><sp/>MultiBlock<sp/>=<sp/>1<sp/>&lt;&lt;<sp/>1,</highlight></codeline>
+<codeline lineno="39"><highlight class="normal">};</highlight></codeline>
+<codeline lineno="40"><highlight class="normal"></highlight></codeline>
+<codeline lineno="41"><highlight class="normal"></highlight><highlight class="keyword">enum<sp/>class</highlight><highlight class="normal"><sp/>ChannelDataType</highlight></codeline>
+<codeline lineno="42"><highlight class="normal">{</highlight></codeline>
+<codeline lineno="43"><highlight class="normal"><sp/><sp/>Float<sp/>=<sp/>0,</highlight></codeline>
+<codeline lineno="44"><highlight class="normal"><sp/><sp/>Integer,</highlight></codeline>
+<codeline lineno="45"><highlight class="normal"><sp/><sp/>UNorm,</highlight></codeline>
+<codeline lineno="46"><highlight class="normal"><sp/><sp/>SNorm,</highlight></codeline>
+<codeline lineno="47"><highlight class="normal"><sp/><sp/>UScaled,</highlight></codeline>
+<codeline lineno="48"><highlight class="normal"><sp/><sp/>SScaled,</highlight></codeline>
+<codeline lineno="49"><highlight class="normal"><sp/><sp/>SRGB,</highlight></codeline>
+<codeline lineno="50"><highlight class="normal"><sp/><sp/>Typeless</highlight></codeline>
+<codeline lineno="51"><highlight class="normal">};</highlight></codeline>
+<codeline lineno="52"><highlight class="normal"></highlight></codeline>
+<codeline lineno="53"><highlight class="normal"></highlight><highlight class="keyword">enum<sp/>class</highlight><highlight class="normal"><sp/>Channel</highlight></codeline>
+<codeline lineno="54"><highlight class="normal">{</highlight></codeline>
+<codeline lineno="55"><highlight class="normal"><sp/><sp/>Red<sp/>=<sp/>0,</highlight></codeline>
+<codeline lineno="56"><highlight class="normal"><sp/><sp/>Green,</highlight></codeline>
+<codeline lineno="57"><highlight class="normal"><sp/><sp/>Blue,</highlight></codeline>
+<codeline lineno="58"><highlight class="normal"><sp/><sp/>Alpha,</highlight></codeline>
+<codeline lineno="59"><highlight class="normal"><sp/><sp/>Depth,</highlight></codeline>
+<codeline lineno="60"><highlight class="normal"><sp/><sp/>Stencil,</highlight></codeline>
+<codeline lineno="61"><highlight class="normal"><sp/><sp/>Padding,</highlight></codeline>
+<codeline lineno="62"><highlight class="normal"><sp/><sp/>Unknown,</highlight></codeline>
+<codeline lineno="63"><highlight class="normal">};</highlight></codeline>
+<codeline lineno="64"><highlight class="normal"></highlight></codeline>
+<codeline lineno="65"><highlight class="normal"></highlight><highlight class="keyword">using</highlight><highlight class="normal"><sp/>ChannelDesc<sp/>=<sp/>std::tuple&lt;Channel,<sp/>ChannelDataType,<sp/>U32&gt;;</highlight></codeline>
+<codeline lineno="66"><highlight class="normal"></highlight></codeline>
+<codeline lineno="67"><highlight class="normal"></highlight><highlight class="comment">//<sp/>Tuple<sp/>Access<sp/>Info</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="68"><highlight class="normal"></highlight><highlight class="preprocessor">#define<sp/>TUPLE_ACCESS_ENUM<sp/>0</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="69"><highlight class="normal"></highlight><highlight class="preprocessor">#define<sp/>TUPLE_ACCESS_ASPECT_MASK<sp/>1</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="70"><highlight class="normal"></highlight><highlight class="preprocessor">#define<sp/>TUPLE_ACCESS_CHANNEL_DATA<sp/>2</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="71"><highlight class="normal"></highlight><highlight class="preprocessor">#define<sp/>TUPLE_SIZE<sp/>3</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="72"><highlight class="normal"></highlight></codeline>
+<codeline lineno="73"><highlight class="normal"></highlight><highlight class="preprocessor">#define<sp/>CHANNEL_TUPLE_ACCESS_CHANNEL<sp/>0</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="74"><highlight class="normal"></highlight><highlight class="preprocessor">#define<sp/>CHANNEL_TUPLE_ACCESS_TYPE<sp/>1</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="75"><highlight class="normal"></highlight><highlight class="preprocessor">#define<sp/>CHANNEL_TUPLE_ACCESS_BIT_WIDTH<sp/>2</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="76"><highlight class="normal"></highlight><highlight class="preprocessor">#define<sp/>CHANNEL_TUPLE_SIZE<sp/>3</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="77"><highlight class="normal"></highlight></codeline>
+<codeline lineno="78"><highlight class="normal"></highlight><highlight class="comment">//<sp/>Format<sp/>Iterator</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="79"><highlight class="normal"></highlight><highlight class="preprocessor">#define<sp/>RAW_STORAGE_FORMAT_ITERATOR(FUNC)<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>\</highlight></codeline>
+<codeline lineno="80"><highlight class="preprocessor"><sp/><sp/>FUNC((UNKNOWN,<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>(<sp/>AspectMaskBits::ColorBit<sp/>),<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="comment">/*<sp/>CHANNELS<sp/>START<sp/>*/</highlight><highlight class="preprocessor"><sp/>((Unknown,<sp/>Typeless,<sp/>0))<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="comment">/*<sp/>CHANNELS<sp/>END<sp/>*/</highlight><highlight class="preprocessor">))<sp/><sp/>\</highlight></codeline>
+<codeline lineno="81"><highlight class="preprocessor"><sp/><sp/>FUNC((B8G8R8A8_SINT,<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>(<sp/>AspectMaskBits::ColorBit<sp/>),<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="comment">/*<sp/>CHANNELS<sp/>START<sp/>*/</highlight><highlight class="preprocessor"><sp/>((Blue,<sp/>SInt,<sp/>8))<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>((Green,<sp/>SInt,<sp/>8))<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>((Red,<sp/>SInt,<sp/>8))<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>((Alpha,<sp/>SInt,<sp/>8))<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="comment">/*<sp/>CHANNELS<sp/>END<sp/>*/</highlight><highlight class="preprocessor">))<sp/><sp/>\</highlight></codeline>
+<codeline lineno="82"><highlight class="preprocessor"><sp/><sp/>FUNC((B8G8R8A8_SNORM,<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>(<sp/>AspectMaskBits::ColorBit<sp/>),<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="comment">/*<sp/>CHANNELS<sp/>START<sp/>*/</highlight><highlight class="preprocessor"><sp/>((Blue,<sp/>SNorm,<sp/>8))<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>((Green,<sp/>SNorm,<sp/>8))<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>((Red,<sp/>SNorm,<sp/>8))<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>((Alpha,<sp/>SNorm,<sp/>8))<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="comment">/*<sp/>CHANNELS<sp/>END<sp/>*/</highlight><highlight class="preprocessor">))<sp/><sp/>\</highlight></codeline>
+<codeline lineno="83"><highlight class="preprocessor"><sp/><sp/>FUNC((B8G8R8A8_SRGB,<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>(<sp/>AspectMaskBits::ColorBit<sp/>),<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="comment">/*<sp/>CHANNELS<sp/>START<sp/>*/</highlight><highlight class="preprocessor"><sp/>((Blue,<sp/>SRGB,<sp/>8))<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>((Green,<sp/>SRGB,<sp/>8))<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>((Red,<sp/>SRGB,<sp/>8))<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>((Alpha,<sp/>SRGB,<sp/>8))<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="comment">/*<sp/>CHANNELS<sp/>END<sp/>*/</highlight><highlight class="preprocessor">))<sp/><sp/>\</highlight></codeline>
+<codeline lineno="84"><highlight class="preprocessor"><sp/><sp/>FUNC((B8G8R8A8_SSCALED,<sp/><sp/><sp/><sp/><sp/><sp/>(<sp/>AspectMaskBits::ColorBit<sp/>),<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="comment">/*<sp/>CHANNELS<sp/>START<sp/>*/</highlight><highlight class="preprocessor"><sp/>((Blue,<sp/>SScaled,<sp/>8))<sp/><sp/><sp/><sp/><sp/><sp/><sp/>((Green,<sp/>SScaled,<sp/>8))<sp/><sp/><sp/><sp/><sp/><sp/><sp/>((Red,<sp/>SScaled,<sp/>8))<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>((Alpha,<sp/>SScaled,<sp/>8))<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="comment">/*<sp/>CHANNELS<sp/>END<sp/>*/</highlight><highlight class="preprocessor">))<sp/><sp/>\</highlight></codeline>
+<codeline lineno="85"><highlight class="preprocessor"><sp/><sp/>FUNC((B8G8R8A8_UINT,<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>(<sp/>AspectMaskBits::ColorBit<sp/>),<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="comment">/*<sp/>CHANNELS<sp/>START<sp/>*/</highlight><highlight class="preprocessor"><sp/>((Blue,<sp/>UInt,<sp/>8))<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>((Green,<sp/>UInt,<sp/>8))<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>((Red,<sp/>UInt,<sp/>8))<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>((Alpha,<sp/>UInt,<sp/>8))<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="comment">/*<sp/>CHANNELS<sp/>END<sp/>*/</highlight><highlight class="preprocessor">))<sp/><sp/>\</highlight></codeline>
+<codeline lineno="86"><highlight class="preprocessor"><sp/><sp/>FUNC((B8G8R8A8_UNORM,<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>(<sp/>AspectMaskBits::ColorBit<sp/>),<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="comment">/*<sp/>CHANNELS<sp/>START<sp/>*/</highlight><highlight class="preprocessor"><sp/>((Blue,<sp/>UNorm,<sp/>8))<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>((Green,<sp/>UNorm,<sp/>8))<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>((Red,<sp/>UNorm,<sp/>8))<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>((Alpha,<sp/>UNorm,<sp/>8))<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="comment">/*<sp/>CHANNELS<sp/>END<sp/>*/</highlight><highlight class="preprocessor">))<sp/><sp/>\</highlight></codeline>
+<codeline lineno="87"><highlight class="preprocessor"><sp/><sp/>FUNC((B8G8R8A8_USCALED,<sp/><sp/><sp/><sp/><sp/><sp/>(<sp/>AspectMaskBits::ColorBit<sp/>),<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="comment">/*<sp/>CHANNELS<sp/>START<sp/>*/</highlight><highlight class="preprocessor"><sp/>((Blue,<sp/>UScaled,<sp/>8))<sp/><sp/><sp/><sp/><sp/><sp/><sp/>((Green,<sp/>UScaled,<sp/>8))<sp/><sp/><sp/><sp/><sp/><sp/><sp/>((Red,<sp/>UScaled,<sp/>8))<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>((Alpha,<sp/>UScaled,<sp/>8))<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="comment">/*<sp/>CHANNELS<sp/>END<sp/>*/</highlight><highlight class="preprocessor">))<sp/><sp/>\</highlight></codeline>
+<codeline lineno="88"><highlight class="preprocessor"><sp/><sp/>FUNC((D24_UNORM_S8_UINT,<sp/><sp/><sp/><sp/><sp/>(<sp/>AspectMaskBits::DepthBit<sp/>|<sp/>AspectMaskBits::StencilBit<sp/>),<sp/><sp/><sp/><sp/></highlight><highlight class="comment">/*<sp/>CHANNELS<sp/>START<sp/>*/</highlight><highlight class="preprocessor"><sp/>((Depth,<sp/>UNorm,<sp/>24))<sp/><sp/><sp/><sp/><sp/><sp/><sp/>((Stencil,<sp/>UInt,<sp/>8))<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="comment">/*<sp/>CHANNELS<sp/>END<sp/>*/</highlight><highlight class="preprocessor">))<sp/><sp/>\</highlight></codeline>
+<codeline lineno="89"><highlight class="preprocessor"><sp/><sp/>FUNC((D32_FLOAT,<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>(<sp/>AspectMaskBits::DepthBit<sp/>),<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="comment">/*<sp/>CHANNELS<sp/>START<sp/>*/</highlight><highlight class="preprocessor"><sp/>((Depth,<sp/>Float,<sp/>32))<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="comment">/*<sp/>CHANNELS<sp/>END<sp/>*/</highlight><highlight class="preprocessor">))<sp/><sp/>\</highlight></codeline>
+<codeline lineno="90"><highlight class="preprocessor"><sp/><sp/>FUNC((D32_FLOAT_S8X24_UINT,<sp/><sp/>(<sp/>AspectMaskBits::DepthBit<sp/>|<sp/>AspectMaskBits::StencilBit<sp/>),<sp/><sp/><sp/><sp/></highlight><highlight class="comment">/*<sp/>CHANNELS<sp/>START<sp/>*/</highlight><highlight class="preprocessor"><sp/>((Depth,<sp/>Float,<sp/>32))<sp/><sp/><sp/><sp/><sp/><sp/><sp/>((Stencil,<sp/>UInt,<sp/>8))<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>((Padding,<sp/>Float,<sp/>24))<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="comment">/*<sp/>CHANNELS<sp/>END<sp/>*/</highlight><highlight class="preprocessor">))<sp/><sp/>\</highlight></codeline>
+<codeline lineno="91"><highlight class="preprocessor"><sp/><sp/>FUNC((R8G8B8_UNORM,<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>(<sp/>AspectMaskBits::ColorBit<sp/>),<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="comment">/*<sp/>CHANNELS<sp/>START<sp/>*/</highlight><highlight class="preprocessor"><sp/>((Red,<sp/>UNorm,<sp/>8))<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>((Green,<sp/>UNorm,<sp/>8))<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>((Blue,<sp/>UNorm,<sp/>8))<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="comment">/*<sp/>CHANNELS<sp/>END<sp/>*/</highlight><highlight class="preprocessor">))<sp/><sp/>\</highlight></codeline>
+<codeline lineno="92"><highlight class="preprocessor"><sp/><sp/>FUNC((R8G8B8A8_UNORM,<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>(<sp/>AspectMaskBits::ColorBit<sp/>),<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="comment">/*<sp/>CHANNELS<sp/>START<sp/>*/</highlight><highlight class="preprocessor"><sp/>((Red,<sp/>UNorm,<sp/>8))<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>((Green,<sp/>UNorm,<sp/>8))<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>((Blue,<sp/>UNorm,<sp/>8))<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>((Alpha,<sp/>UNorm,<sp/>8))<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="comment">/*<sp/>CHANNELS<sp/>END<sp/>*/</highlight><highlight class="preprocessor">))<sp/><sp/>\</highlight></codeline>
+<codeline lineno="93"><highlight class="preprocessor"><sp/><sp/>FUNC((R11G11B10_FLOAT,<sp/><sp/><sp/><sp/><sp/><sp/><sp/>(<sp/>AspectMaskBits::ColorBit<sp/>),<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="comment">/*<sp/>CHANNELS<sp/>START<sp/>*/</highlight><highlight class="preprocessor"><sp/>((Red,<sp/>Float,<sp/>11))<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>((Green,<sp/>Float,<sp/>11))<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>((Blue,<sp/>Float,<sp/>10))<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="comment">/*<sp/>CHANNELS<sp/>END<sp/>*/</highlight><highlight class="preprocessor">))<sp/><sp/>\</highlight></codeline>
+<codeline lineno="94"><highlight class="preprocessor"><sp/><sp/>FUNC((R16_FLOAT,<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>(<sp/>AspectMaskBits::ColorBit<sp/>),<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="comment">/*<sp/>CHANNELS<sp/>START<sp/>*/</highlight><highlight class="preprocessor"><sp/>((Red,<sp/>Float,<sp/>16))<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="comment">/*<sp/>CHANNELS<sp/>END<sp/>*/</highlight><highlight class="preprocessor">))<sp/><sp/>\</highlight></codeline>
+<codeline lineno="95"><highlight class="preprocessor"><sp/><sp/>FUNC((R16_SINT,<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>(<sp/>AspectMaskBits::ColorBit<sp/>),<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="comment">/*<sp/>CHANNELS<sp/>START<sp/>*/</highlight><highlight class="preprocessor"><sp/>((Red,<sp/>SInt,<sp/>16))<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="comment">/*<sp/>CHANNELS<sp/>END<sp/>*/</highlight><highlight class="preprocessor">))<sp/><sp/>\</highlight></codeline>
+<codeline lineno="96"><highlight class="preprocessor"><sp/><sp/>FUNC((R16_SNORM,<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>(<sp/>AspectMaskBits::ColorBit<sp/>),<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="comment">/*<sp/>CHANNELS<sp/>START<sp/>*/</highlight><highlight class="preprocessor"><sp/>((Red,<sp/>SNorm,<sp/>16))<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="comment">/*<sp/>CHANNELS<sp/>END<sp/>*/</highlight><highlight class="preprocessor">))<sp/><sp/>\</highlight></codeline>
+<codeline lineno="97"><highlight class="preprocessor"><sp/><sp/>FUNC((R16_SSCALED,<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>(<sp/>AspectMaskBits::ColorBit<sp/>),<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="comment">/*<sp/>CHANNELS<sp/>START<sp/>*/</highlight><highlight class="preprocessor"><sp/>((Red,<sp/>SScaled,<sp/>16))<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="comment">/*<sp/>CHANNELS<sp/>END<sp/>*/</highlight><highlight class="preprocessor">))<sp/><sp/>\</highlight></codeline>
+<codeline lineno="98"><highlight class="preprocessor"><sp/><sp/>FUNC((R16_UINT,<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>(<sp/>AspectMaskBits::ColorBit<sp/>),<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="comment">/*<sp/>CHANNELS<sp/>START<sp/>*/</highlight><highlight class="preprocessor"><sp/>((Red,<sp/>UInt,<sp/>16))<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="comment">/*<sp/>CHANNELS<sp/>END<sp/>*/</highlight><highlight class="preprocessor">))<sp/><sp/>\</highlight></codeline>
+<codeline lineno="99"><highlight class="preprocessor"><sp/><sp/>FUNC((R16_UNORM,<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>(<sp/>AspectMaskBits::ColorBit<sp/>),<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="comment">/*<sp/>CHANNELS<sp/>START<sp/>*/</highlight><highlight class="preprocessor"><sp/>((Red,<sp/>UNorm,<sp/>16))<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="comment">/*<sp/>CHANNELS<sp/>END<sp/>*/</highlight><highlight class="preprocessor">))<sp/><sp/>\</highlight></codeline>
+<codeline lineno="100"><highlight class="preprocessor"><sp/><sp/>FUNC((R16_USCALED,<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>(<sp/>AspectMaskBits::ColorBit<sp/>),<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="comment">/*<sp/>CHANNELS<sp/>START<sp/>*/</highlight><highlight class="preprocessor"><sp/>((Red,<sp/>UScaled,<sp/>16))<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="comment">/*<sp/>CHANNELS<sp/>END<sp/>*/</highlight><highlight class="preprocessor">))<sp/><sp/>\</highlight></codeline>
+<codeline lineno="101"><highlight class="preprocessor"><sp/><sp/>FUNC((R16G16_FLOAT,<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>(<sp/>AspectMaskBits::ColorBit<sp/>),<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="comment">/*<sp/>CHANNELS<sp/>START<sp/>*/</highlight><highlight class="preprocessor"><sp/>((Red,<sp/>Float,<sp/>16))<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>((Green,<sp/>Float,<sp/>16))<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="comment">/*<sp/>CHANNELS<sp/>END<sp/>*/</highlight><highlight class="preprocessor">))<sp/><sp/>\</highlight></codeline>
+<codeline lineno="102"><highlight class="preprocessor"><sp/><sp/>FUNC((R16G16_SINT,<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>(<sp/>AspectMaskBits::ColorBit<sp/>),<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="comment">/*<sp/>CHANNELS<sp/>START<sp/>*/</highlight><highlight class="preprocessor"><sp/>((Red,<sp/>SInt,<sp/>16))<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>((Green,<sp/>SInt,<sp/>16))<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="comment">/*<sp/>CHANNELS<sp/>END<sp/>*/</highlight><highlight class="preprocessor">))<sp/><sp/>\</highlight></codeline>
+<codeline lineno="103"><highlight class="preprocessor"><sp/><sp/>FUNC((R16G16_SNORM,<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>(<sp/>AspectMaskBits::ColorBit<sp/>),<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="comment">/*<sp/>CHANNELS<sp/>START<sp/>*/</highlight><highlight class="preprocessor"><sp/>((Red,<sp/>SNorm,<sp/>16))<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>((Green,<sp/>SNorm,<sp/>16))<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="comment">/*<sp/>CHANNELS<sp/>END<sp/>*/</highlight><highlight class="preprocessor">))<sp/><sp/>\</highlight></codeline>
+<codeline lineno="104"><highlight class="preprocessor"><sp/><sp/>FUNC((R16G16_SSCALED,<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>(<sp/>AspectMaskBits::ColorBit<sp/>),<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="comment">/*<sp/>CHANNELS<sp/>START<sp/>*/</highlight><highlight class="preprocessor"><sp/>((Red,<sp/>SScaled,<sp/>16))<sp/><sp/><sp/><sp/><sp/><sp/><sp/>((Green,<sp/>SScaled,<sp/>16))<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="comment">/*<sp/>CHANNELS<sp/>END<sp/>*/</highlight><highlight class="preprocessor">))<sp/><sp/>\</highlight></codeline>
+<codeline lineno="105"><highlight class="preprocessor"><sp/><sp/>FUNC((R16G16_UINT,<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>(<sp/>AspectMaskBits::ColorBit<sp/>),<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="comment">/*<sp/>CHANNELS<sp/>START<sp/>*/</highlight><highlight class="preprocessor"><sp/>((Red,<sp/>UInt,<sp/>16))<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>((Green,<sp/>UInt,<sp/>16))<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="comment">/*<sp/>CHANNELS<sp/>END<sp/>*/</highlight><highlight class="preprocessor">))<sp/><sp/>\</highlight></codeline>
+<codeline lineno="106"><highlight class="preprocessor"><sp/><sp/>FUNC((R16G16_UNORM,<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>(<sp/>AspectMaskBits::ColorBit<sp/>),<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="comment">/*<sp/>CHANNELS<sp/>START<sp/>*/</highlight><highlight class="preprocessor"><sp/>((Red,<sp/>UNorm,<sp/>16))<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>((Green,<sp/>UNorm,<sp/>16))<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="comment">/*<sp/>CHANNELS<sp/>END<sp/>*/</highlight><highlight class="preprocessor">))<sp/><sp/>\</highlight></codeline>
+<codeline lineno="107"><highlight class="preprocessor"><sp/><sp/>FUNC((R16G16_USCALED,<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>(<sp/>AspectMaskBits::ColorBit<sp/>),<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="comment">/*<sp/>CHANNELS<sp/>START<sp/>*/</highlight><highlight class="preprocessor"><sp/>((Red,<sp/>UScaled,<sp/>16))<sp/><sp/><sp/><sp/><sp/><sp/><sp/>((Green,<sp/>UScaled,<sp/>16))<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="comment">/*<sp/>CHANNELS<sp/>END<sp/>*/</highlight><highlight class="preprocessor">))<sp/><sp/>\</highlight></codeline>
+<codeline lineno="108"><highlight class="preprocessor"><sp/><sp/>FUNC((R16G16B16_FLOAT,<sp/><sp/><sp/><sp/><sp/><sp/><sp/>(<sp/>AspectMaskBits::ColorBit<sp/>),<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="comment">/*<sp/>CHANNELS<sp/>START<sp/>*/</highlight><highlight class="preprocessor"><sp/>((Red,<sp/>Float,<sp/>16))<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>((Green,<sp/>Float,<sp/>16))<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>((Blue,<sp/>Float,<sp/>16))<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="comment">/*<sp/>CHANNELS<sp/>END<sp/>*/</highlight><highlight class="preprocessor">))<sp/><sp/>\</highlight></codeline>
+<codeline lineno="109"><highlight class="preprocessor"><sp/><sp/>FUNC((R16G16B16_SINT,<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>(<sp/>AspectMaskBits::ColorBit<sp/>),<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="comment">/*<sp/>CHANNELS<sp/>START<sp/>*/</highlight><highlight class="preprocessor"><sp/>((Red,<sp/>SInt,<sp/>16))<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>((Green,<sp/>SInt,<sp/>16))<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>((Blue,<sp/>SInt,<sp/>16))<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="comment">/*<sp/>CHANNELS<sp/>END<sp/>*/</highlight><highlight class="preprocessor">))<sp/><sp/>\</highlight></codeline>
+<codeline lineno="110"><highlight class="preprocessor"><sp/><sp/>FUNC((R16G16B16_SNORM,<sp/><sp/><sp/><sp/><sp/><sp/><sp/>(<sp/>AspectMaskBits::ColorBit<sp/>),<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="comment">/*<sp/>CHANNELS<sp/>START<sp/>*/</highlight><highlight class="preprocessor"><sp/>((Red,<sp/>SNorm,<sp/>16))<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>((Green,<sp/>SNorm,<sp/>16))<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>((Blue,<sp/>SNorm,<sp/>16))<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="comment">/*<sp/>CHANNELS<sp/>END<sp/>*/</highlight><highlight class="preprocessor">))<sp/><sp/>\</highlight></codeline>
+<codeline lineno="111"><highlight class="preprocessor"><sp/><sp/>FUNC((R16G16B16_SSCALED,<sp/><sp/><sp/><sp/><sp/>(<sp/>AspectMaskBits::ColorBit<sp/>),<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="comment">/*<sp/>CHANNELS<sp/>START<sp/>*/</highlight><highlight class="preprocessor"><sp/>((Red,<sp/>SScaled,<sp/>16))<sp/><sp/><sp/><sp/><sp/><sp/><sp/>((Green,<sp/>SScaled,<sp/>16))<sp/><sp/><sp/><sp/><sp/><sp/>((Blue,<sp/>SScaled,<sp/>16))<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="comment">/*<sp/>CHANNELS<sp/>END<sp/>*/</highlight><highlight class="preprocessor">))<sp/><sp/>\</highlight></codeline>
+<codeline lineno="112"><highlight class="preprocessor"><sp/><sp/>FUNC((R16G16B16_UINT,<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>(<sp/>AspectMaskBits::ColorBit<sp/>),<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="comment">/*<sp/>CHANNELS<sp/>START<sp/>*/</highlight><highlight class="preprocessor"><sp/>((Red,<sp/>UInt,<sp/>16))<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>((Green,<sp/>UInt,<sp/>16))<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>((Blue,<sp/>UInt,<sp/>16))<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="comment">/*<sp/>CHANNELS<sp/>END<sp/>*/</highlight><highlight class="preprocessor">))<sp/><sp/>\</highlight></codeline>
+<codeline lineno="113"><highlight class="preprocessor"><sp/><sp/>FUNC((R16G16B16_UNORM,<sp/><sp/><sp/><sp/><sp/><sp/><sp/>(<sp/>AspectMaskBits::ColorBit<sp/>),<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="comment">/*<sp/>CHANNELS<sp/>START<sp/>*/</highlight><highlight class="preprocessor"><sp/>((Red,<sp/>UNorm,<sp/>16))<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>((Green,<sp/>UNorm,<sp/>16))<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>((Blue,<sp/>UNorm,<sp/>16))<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="comment">/*<sp/>CHANNELS<sp/>END<sp/>*/</highlight><highlight class="preprocessor">))<sp/><sp/>\</highlight></codeline>
+<codeline lineno="114"><highlight class="preprocessor"><sp/><sp/>FUNC((R16G16B16_USCALED,<sp/><sp/><sp/><sp/><sp/>(<sp/>AspectMaskBits::ColorBit<sp/>),<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="comment">/*<sp/>CHANNELS<sp/>START<sp/>*/</highlight><highlight class="preprocessor"><sp/>((Red,<sp/>UScaled,<sp/>16))<sp/><sp/><sp/><sp/><sp/><sp/><sp/>((Green,<sp/>UScaled,<sp/>16))<sp/><sp/><sp/><sp/><sp/><sp/>((Blue,<sp/>UScaled,<sp/>16))<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="comment">/*<sp/>CHANNELS<sp/>END<sp/>*/</highlight><highlight class="preprocessor">))<sp/><sp/>\</highlight></codeline>
+<codeline lineno="115"><highlight class="preprocessor"><sp/><sp/>FUNC((R16G16B16A16_FLOAT,<sp/><sp/><sp/><sp/>(<sp/>AspectMaskBits::ColorBit<sp/>),<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="comment">/*<sp/>CHANNELS<sp/>START<sp/>*/</highlight><highlight class="preprocessor"><sp/>((Red,<sp/>Float,<sp/>16))<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>((Green,<sp/>Float,<sp/>16))<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>((Blue,<sp/>Float,<sp/>16))<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>((Alpha,<sp/>Float,<sp/>16))<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="comment">/*<sp/>CHANNELS<sp/>END<sp/>*/</highlight><highlight class="preprocessor">))<sp/><sp/>\</highlight></codeline>
+<codeline lineno="116"><highlight class="preprocessor"><sp/><sp/>FUNC((R16G16B16A16_SINT,<sp/><sp/><sp/><sp/><sp/>(<sp/>AspectMaskBits::ColorBit<sp/>),<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="comment">/*<sp/>CHANNELS<sp/>START<sp/>*/</highlight><highlight class="preprocessor"><sp/>((Red,<sp/>SInt,<sp/>16))<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>((Green,<sp/>SInt,<sp/>16))<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>((Blue,<sp/>SInt,<sp/>16))<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>((Alpha,<sp/>SInt,<sp/>16))<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="comment">/*<sp/>CHANNELS<sp/>END<sp/>*/</highlight><highlight class="preprocessor">))<sp/><sp/>\</highlight></codeline>
+<codeline lineno="117"><highlight class="preprocessor"><sp/><sp/>FUNC((R16G16B16A16_SNORM,<sp/><sp/><sp/><sp/>(<sp/>AspectMaskBits::ColorBit<sp/>),<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="comment">/*<sp/>CHANNELS<sp/>START<sp/>*/</highlight><highlight class="preprocessor"><sp/>((Red,<sp/>SNorm,<sp/>16))<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>((Green,<sp/>SNorm,<sp/>16))<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>((Blue,<sp/>SNorm,<sp/>16))<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>((Alpha,<sp/>SNorm,<sp/>16))<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="comment">/*<sp/>CHANNELS<sp/>END<sp/>*/</highlight><highlight class="preprocessor">))<sp/><sp/>\</highlight></codeline>
+<codeline lineno="118"><highlight class="preprocessor"><sp/><sp/>FUNC((R16G16B16A16_SSCALED,<sp/><sp/>(<sp/>AspectMaskBits::ColorBit<sp/>),<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="comment">/*<sp/>CHANNELS<sp/>START<sp/>*/</highlight><highlight class="preprocessor"><sp/>((Red,<sp/>SScaled,<sp/>16))<sp/><sp/><sp/><sp/><sp/><sp/><sp/>((Green,<sp/>SScaled,<sp/>16))<sp/><sp/><sp/><sp/><sp/><sp/>((Blue,<sp/>SScaled,<sp/>16))<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>((Alpha,<sp/>SScaled,<sp/>16))<sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="comment">/*<sp/>CHANNELS<sp/>END<sp/>*/</highlight><highlight class="preprocessor">))<sp/><sp/>\</highlight></codeline>
+<codeline lineno="119"><highlight class="preprocessor"><sp/><sp/>FUNC((R16G16B16A16_UINT,<sp/><sp/><sp/><sp/><sp/>(<sp/>AspectMaskBits::ColorBit<sp/>),<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="comment">/*<sp/>CHANNELS<sp/>START<sp/>*/</highlight><highlight class="preprocessor"><sp/>((Red,<sp/>UInt,<sp/>16))<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>((Green,<sp/>UInt,<sp/>16))<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>((Blue,<sp/>UInt,<sp/>16))<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>((Alpha,<sp/>UInt,<sp/>16))<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="comment">/*<sp/>CHANNELS<sp/>END<sp/>*/</highlight><highlight class="preprocessor">))<sp/><sp/>\</highlight></codeline>
+<codeline lineno="120"><highlight class="preprocessor"><sp/><sp/>FUNC((R16G16B16A16_UNORM,<sp/><sp/><sp/><sp/>(<sp/>AspectMaskBits::ColorBit<sp/>),<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="comment">/*<sp/>CHANNELS<sp/>START<sp/>*/</highlight><highlight class="preprocessor"><sp/>((Red,<sp/>UNorm,<sp/>16))<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>((Green,<sp/>UNorm,<sp/>16))<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>((Blue,<sp/>UNorm,<sp/>16))<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>((Alpha,<sp/>UNorm,<sp/>16))<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="comment">/*<sp/>CHANNELS<sp/>END<sp/>*/</highlight><highlight class="preprocessor">))<sp/><sp/>\</highlight></codeline>
+<codeline lineno="121"><highlight class="preprocessor"><sp/><sp/>FUNC((R16G16B16A16_USCALED,<sp/><sp/>(<sp/>AspectMaskBits::ColorBit<sp/>),<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="comment">/*<sp/>CHANNELS<sp/>START<sp/>*/</highlight><highlight class="preprocessor"><sp/>((Red,<sp/>UScaled,<sp/>16))<sp/><sp/><sp/><sp/><sp/><sp/><sp/>((Green,<sp/>UScaled,<sp/>16))<sp/><sp/><sp/><sp/><sp/><sp/>((Blue,<sp/>UScaled,<sp/>16))<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>((Alpha,<sp/>UScaled,<sp/>16))<sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="comment">/*<sp/>CHANNELS<sp/>END<sp/>*/</highlight><highlight class="preprocessor">))<sp/><sp/>\</highlight></codeline>
+<codeline lineno="122"><highlight class="preprocessor"><sp/><sp/>FUNC((R32_FLOAT,<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>(<sp/>AspectMaskBits::ColorBit<sp/>),<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="comment">/*<sp/>CHANNELS<sp/>START<sp/>*/</highlight><highlight class="preprocessor"><sp/>((Red,<sp/>Float,<sp/>32))<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="comment">/*<sp/>CHANNELS<sp/>END<sp/>*/</highlight><highlight class="preprocessor">))<sp/><sp/>\</highlight></codeline>
+<codeline lineno="123"><highlight class="preprocessor"><sp/><sp/>FUNC((R32_SINT,<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>(<sp/>AspectMaskBits::ColorBit<sp/>),<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="comment">/*<sp/>CHANNELS<sp/>START<sp/>*/</highlight><highlight class="preprocessor"><sp/>((Red,<sp/>SInt,<sp/>32))<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="comment">/*<sp/>CHANNELS<sp/>END<sp/>*/</highlight><highlight class="preprocessor">))<sp/><sp/>\</highlight></codeline>
+<codeline lineno="124"><highlight class="preprocessor"><sp/><sp/>FUNC((R32_SNORM,<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>(<sp/>AspectMaskBits::ColorBit<sp/>),<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="comment">/*<sp/>CHANNELS<sp/>START<sp/>*/</highlight><highlight class="preprocessor"><sp/>((Red,<sp/>SNorm,<sp/>32))<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="comment">/*<sp/>CHANNELS<sp/>END<sp/>*/</highlight><highlight class="preprocessor">))<sp/><sp/>\</highlight></codeline>
+<codeline lineno="125"><highlight class="preprocessor"><sp/><sp/>FUNC((R32_UINT,<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>(<sp/>AspectMaskBits::ColorBit<sp/>),<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="comment">/*<sp/>CHANNELS<sp/>START<sp/>*/</highlight><highlight class="preprocessor"><sp/>((Red,<sp/>UInt,<sp/>32))<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="comment">/*<sp/>CHANNELS<sp/>END<sp/>*/</highlight><highlight class="preprocessor">))<sp/><sp/>\</highlight></codeline>
+<codeline lineno="126"><highlight class="preprocessor"><sp/><sp/>FUNC((R32_UNORM,<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>(<sp/>AspectMaskBits::ColorBit<sp/>),<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="comment">/*<sp/>CHANNELS<sp/>START<sp/>*/</highlight><highlight class="preprocessor"><sp/>((Red,<sp/>UNorm,<sp/>32))<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="comment">/*<sp/>CHANNELS<sp/>END<sp/>*/</highlight><highlight class="preprocessor">))<sp/><sp/>\</highlight></codeline>
+<codeline lineno="127"><highlight class="preprocessor"><sp/><sp/>FUNC((R32G32_FLOAT,<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>(<sp/>AspectMaskBits::ColorBit<sp/>),<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="comment">/*<sp/>CHANNELS<sp/>START<sp/>*/</highlight><highlight class="preprocessor"><sp/>((Red,<sp/>Float,<sp/>32))<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>((Green,<sp/>Float,<sp/>32))<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="comment">/*<sp/>CHANNELS<sp/>END<sp/>*/</highlight><highlight class="preprocessor">))<sp/><sp/>\</highlight></codeline>
+<codeline lineno="128"><highlight class="preprocessor"><sp/><sp/>FUNC((R32G32_SINT,<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>(<sp/>AspectMaskBits::ColorBit<sp/>),<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="comment">/*<sp/>CHANNELS<sp/>START<sp/>*/</highlight><highlight class="preprocessor"><sp/>((Red,<sp/>SInt,<sp/>32))<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>((Green,<sp/>SInt,<sp/>32))<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="comment">/*<sp/>CHANNELS<sp/>END<sp/>*/</highlight><highlight class="preprocessor">))<sp/><sp/>\</highlight></codeline>
+<codeline lineno="129"><highlight class="preprocessor"><sp/><sp/>FUNC((R32G32_UINT,<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>(<sp/>AspectMaskBits::ColorBit<sp/>),<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="comment">/*<sp/>CHANNELS<sp/>START<sp/>*/</highlight><highlight class="preprocessor"><sp/>((Red,<sp/>UInt,<sp/>32))<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>((Green,<sp/>UInt,<sp/>32))<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="comment">/*<sp/>CHANNELS<sp/>END<sp/>*/</highlight><highlight class="preprocessor">))<sp/><sp/>\</highlight></codeline>
+<codeline lineno="130"><highlight class="preprocessor"><sp/><sp/>FUNC((R32G32B32_FLOAT,<sp/><sp/><sp/><sp/><sp/><sp/><sp/>(<sp/>AspectMaskBits::ColorBit<sp/>),<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="comment">/*<sp/>CHANNELS<sp/>START<sp/>*/</highlight><highlight class="preprocessor"><sp/>((Red,<sp/>Float,<sp/>32))<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>((Green,<sp/>Float,<sp/>32))<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>((Blue,<sp/>Float,<sp/>32))<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="comment">/*<sp/>CHANNELS<sp/>END<sp/>*/</highlight><highlight class="preprocessor">))<sp/><sp/>\</highlight></codeline>
+<codeline lineno="131"><highlight class="preprocessor"><sp/><sp/>FUNC((R32G32B32_SINT,<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>(<sp/>AspectMaskBits::ColorBit<sp/>),<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="comment">/*<sp/>CHANNELS<sp/>START<sp/>*/</highlight><highlight class="preprocessor"><sp/>((Red,<sp/>SInt,<sp/>32))<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>((Green,<sp/>SInt,<sp/>32))<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>((Blue,<sp/>SInt,<sp/>32))<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="comment">/*<sp/>CHANNELS<sp/>END<sp/>*/</highlight><highlight class="preprocessor">))<sp/><sp/>\</highlight></codeline>
+<codeline lineno="132"><highlight class="preprocessor"><sp/><sp/>FUNC((R32G32B32_UINT,<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>(<sp/>AspectMaskBits::ColorBit<sp/>),<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="comment">/*<sp/>CHANNELS<sp/>START<sp/>*/</highlight><highlight class="preprocessor"><sp/>((Red,<sp/>UInt,<sp/>32))<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>((Green,<sp/>UInt,<sp/>32))<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>((Blue,<sp/>UInt,<sp/>32))<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="comment">/*<sp/>CHANNELS<sp/>END<sp/>*/</highlight><highlight class="preprocessor">))<sp/><sp/>\</highlight></codeline>
+<codeline lineno="133"><highlight class="preprocessor"><sp/><sp/>FUNC((R32G32B32A32_FLOAT,<sp/><sp/><sp/><sp/>(<sp/>AspectMaskBits::ColorBit<sp/>),<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="comment">/*<sp/>CHANNELS<sp/>START<sp/>*/</highlight><highlight class="preprocessor"><sp/>((Red,<sp/>Float,<sp/>32))<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>((Green,<sp/>Float,<sp/>32))<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>((Blue,<sp/>Float,<sp/>32))<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>((Alpha,<sp/>Float,<sp/>32))<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="comment">/*<sp/>CHANNELS<sp/>END<sp/>*/</highlight><highlight class="preprocessor">))<sp/><sp/>\</highlight></codeline>
+<codeline lineno="134"><highlight class="preprocessor"><sp/><sp/>FUNC((R32G32B32A32_SINT,<sp/><sp/><sp/><sp/><sp/>(<sp/>AspectMaskBits::ColorBit<sp/>),<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="comment">/*<sp/>CHANNELS<sp/>START<sp/>*/</highlight><highlight class="preprocessor"><sp/>((Red,<sp/>UInt,<sp/>32))<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>((Green,<sp/>UInt,<sp/>32))<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>((Blue,<sp/>UInt,<sp/>32))<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>((Alpha,<sp/>UInt,<sp/>32))<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="comment">/*<sp/>CHANNELS<sp/>END<sp/>*/</highlight><highlight class="preprocessor">))<sp/><sp/>\</highlight></codeline>
+<codeline lineno="135"><highlight class="preprocessor"><sp/><sp/>FUNC((R32G32B32A32_UINT,<sp/><sp/><sp/><sp/><sp/>(<sp/>AspectMaskBits::ColorBit<sp/>),<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="comment">/*<sp/>CHANNELS<sp/>START<sp/>*/</highlight><highlight class="preprocessor"><sp/>((Red,<sp/>UInt,<sp/>32))<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>((Green,<sp/>UInt,<sp/>32))<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>((Blue,<sp/>UInt,<sp/>32))<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>((Alpha,<sp/>UInt,<sp/>32))<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="comment">/*<sp/>CHANNELS<sp/>END<sp/>*/</highlight><highlight class="preprocessor">))<sp/><sp/>\</highlight></codeline>
+<codeline lineno="136"><highlight class="preprocessor"><sp/><sp/>FUNC((R64_FLOAT,<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>(<sp/>AspectMaskBits::ColorBit<sp/>),<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="comment">/*<sp/>CHANNELS<sp/>START<sp/>*/</highlight><highlight class="preprocessor"><sp/>((Red,<sp/>Float,<sp/>64))<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="comment">/*<sp/>CHANNELS<sp/>END<sp/>*/</highlight><highlight class="preprocessor">))<sp/><sp/>\</highlight></codeline>
+<codeline lineno="137"><highlight class="preprocessor"><sp/><sp/>FUNC((R64_SINT,<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>(<sp/>AspectMaskBits::ColorBit<sp/>),<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="comment">/*<sp/>CHANNELS<sp/>START<sp/>*/</highlight><highlight class="preprocessor"><sp/>((Red,<sp/>SInt,<sp/>64))<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="comment">/*<sp/>CHANNELS<sp/>END<sp/>*/</highlight><highlight class="preprocessor">))<sp/><sp/>\</highlight></codeline>
+<codeline lineno="138"><highlight class="preprocessor"><sp/><sp/>FUNC((R64_UINT,<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>(<sp/>AspectMaskBits::ColorBit<sp/>),<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="comment">/*<sp/>CHANNELS<sp/>START<sp/>*/</highlight><highlight class="preprocessor"><sp/>((Red,<sp/>UInt,<sp/>64))<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="comment">/*<sp/>CHANNELS<sp/>END<sp/>*/</highlight><highlight class="preprocessor">))<sp/><sp/>\</highlight></codeline>
+<codeline lineno="139"><highlight class="preprocessor"><sp/><sp/>FUNC((R64G64_FLOAT,<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>(<sp/>AspectMaskBits::ColorBit<sp/>),<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="comment">/*<sp/>CHANNELS<sp/>START<sp/>*/</highlight><highlight class="preprocessor"><sp/>((Red,<sp/>Float,<sp/>64))<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>((Green,<sp/>Float,<sp/>64))<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="comment">/*<sp/>CHANNELS<sp/>END<sp/>*/</highlight><highlight class="preprocessor">))<sp/><sp/>\</highlight></codeline>
+<codeline lineno="140"><highlight class="preprocessor"><sp/><sp/>FUNC((R64G64_SINT,<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>(<sp/>AspectMaskBits::ColorBit<sp/>),<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="comment">/*<sp/>CHANNELS<sp/>START<sp/>*/</highlight><highlight class="preprocessor"><sp/>((Red,<sp/>SInt,<sp/>64))<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>((Green,<sp/>SInt,<sp/>64))<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="comment">/*<sp/>CHANNELS<sp/>END<sp/>*/</highlight><highlight class="preprocessor">))<sp/><sp/>\</highlight></codeline>
+<codeline lineno="141"><highlight class="preprocessor"><sp/><sp/>FUNC((R64G64_UINT,<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>(<sp/>AspectMaskBits::ColorBit<sp/>),<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="comment">/*<sp/>CHANNELS<sp/>START<sp/>*/</highlight><highlight class="preprocessor"><sp/>((Red,<sp/>UInt,<sp/>64))<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>((Green,<sp/>UInt,<sp/>64))<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="comment">/*<sp/>CHANNELS<sp/>END<sp/>*/</highlight><highlight class="preprocessor">))<sp/><sp/>\</highlight></codeline>
+<codeline lineno="142"><highlight class="preprocessor"><sp/><sp/>FUNC((R64G64B64_FLOAT,<sp/><sp/><sp/><sp/><sp/><sp/><sp/>(<sp/>AspectMaskBits::ColorBit<sp/>),<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="comment">/*<sp/>CHANNELS<sp/>START<sp/>*/</highlight><highlight class="preprocessor"><sp/>((Red,<sp/>Float,<sp/>64))<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>((Green,<sp/>Float,<sp/>64))<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>((Blue,<sp/>Float,<sp/>64))<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="comment">/*<sp/>CHANNELS<sp/>END<sp/>*/</highlight><highlight class="preprocessor">))<sp/><sp/>\</highlight></codeline>
+<codeline lineno="143"><highlight class="preprocessor"><sp/><sp/>FUNC((R64G64B64_SINT,<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>(<sp/>AspectMaskBits::ColorBit<sp/>),<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="comment">/*<sp/>CHANNELS<sp/>START<sp/>*/</highlight><highlight class="preprocessor"><sp/>((Red,<sp/>SInt,<sp/>64))<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>((Green,<sp/>SInt,<sp/>64))<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>((Blue,<sp/>SInt,<sp/>64))<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="comment">/*<sp/>CHANNELS<sp/>END<sp/>*/</highlight><highlight class="preprocessor">))<sp/><sp/>\</highlight></codeline>
+<codeline lineno="144"><highlight class="preprocessor"><sp/><sp/>FUNC((R64G64B64_UINT,<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>(<sp/>AspectMaskBits::ColorBit<sp/>),<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="comment">/*<sp/>CHANNELS<sp/>START<sp/>*/</highlight><highlight class="preprocessor"><sp/>((Red,<sp/>UInt,<sp/>64))<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>((Green,<sp/>UInt,<sp/>64))<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>((Blue,<sp/>UInt,<sp/>64))<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="comment">/*<sp/>CHANNELS<sp/>END<sp/>*/</highlight><highlight class="preprocessor">))<sp/><sp/>\</highlight></codeline>
+<codeline lineno="145"><highlight class="preprocessor"><sp/><sp/>FUNC((R64G64B64A64_FLOAT,<sp/><sp/><sp/><sp/>(<sp/>AspectMaskBits::ColorBit<sp/>),<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="comment">/*<sp/>CHANNELS<sp/>START<sp/>*/</highlight><highlight class="preprocessor"><sp/>((Red,<sp/>Float,<sp/>64))<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>((Green,<sp/>Float,<sp/>64))<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>((Blue,<sp/>Float,<sp/>64))<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>((Alpha,<sp/>Float,<sp/>64))<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="comment">/*<sp/>CHANNELS<sp/>END<sp/>*/</highlight><highlight class="preprocessor">))<sp/><sp/>\</highlight></codeline>
+<codeline lineno="146"><highlight class="preprocessor"><sp/><sp/>FUNC((R64G64B64A64_SINT,<sp/><sp/><sp/><sp/><sp/>(<sp/>AspectMaskBits::ColorBit<sp/>),<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="comment">/*<sp/>CHANNELS<sp/>START<sp/>*/</highlight><highlight class="preprocessor"><sp/>((Red,<sp/>SInt,<sp/>64))<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>((Green,<sp/>SInt,<sp/>64))<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>((Blue,<sp/>SInt,<sp/>64))<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>((Alpha,<sp/>SInt,<sp/>64))<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="comment">/*<sp/>CHANNELS<sp/>END<sp/>*/</highlight><highlight class="preprocessor">))<sp/><sp/>\</highlight></codeline>
+<codeline lineno="147"><highlight class="preprocessor"><sp/><sp/>FUNC((R64G64B64A64_UINT,<sp/><sp/><sp/><sp/><sp/>(<sp/>AspectMaskBits::ColorBit<sp/>),<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="comment">/*<sp/>CHANNELS<sp/>START<sp/>*/</highlight><highlight class="preprocessor"><sp/>((Red,<sp/>UInt,<sp/>64))<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>((Green,<sp/>UInt,<sp/>64))<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>((Blue,<sp/>UInt,<sp/>64))<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>((Alpha,<sp/>UInt,<sp/>64))<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="comment">/*<sp/>CHANNELS<sp/>END<sp/>*/</highlight><highlight class="preprocessor">))</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="148"><highlight class="normal"></highlight></codeline>
+<codeline lineno="149"><highlight class="normal"></highlight><highlight class="comment">//<sp/>Macros<sp/>For:<sp/>ENUM<sp/>NAME</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="150"><highlight class="normal"></highlight><highlight class="preprocessor">#define<sp/>GET_FORMAT_NAME_FROM_TUPLE(ENUM_TUPLE)<sp/>BOOST_PP_TUPLE_ELEM(TUPLE_SIZE,<sp/>TUPLE_ACCESS_ENUM,<sp/>ENUM_TUPLE)</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="151"><highlight class="normal"></highlight><highlight class="preprocessor">#define<sp/>GET_FORMAT_NAME_FOR_LIST_FROM_TUPLE(ENUM_TUPLE)<sp/>GET_FORMAT_NAME_FROM_TUPLE(ENUM_TUPLE),</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="152"><highlight class="normal"></highlight><highlight class="preprocessor">#define<sp/>GET_FULL_FORMAT_NAME_FROM_TUPLE(ENUM_TUPLE)<sp/>RawStorageFormat::GET_FORMAT_NAME_FROM_TUPLE(ENUM_TUPLE)</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="153"><highlight class="normal"></highlight></codeline>
+<codeline lineno="154"><highlight class="normal"></highlight><highlight class="comment">//<sp/>Macros<sp/>For:<sp/>CHANNEL<sp/>WIDTH</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="155"><highlight class="normal"></highlight><highlight class="preprocessor">#define<sp/>GET_CHANNEL_WIDTH(CHANNEL_TUPLE)<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>\</highlight></codeline>
+<codeline lineno="156"><highlight class="preprocessor"><sp/><sp/>BOOST_PP_TUPLE_ELEM(CHANNEL_TUPLE_SIZE,<sp/>CHANNEL_TUPLE_ACCESS_BIT_WIDTH,<sp/>CHANNEL_TUPLE)</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="157"><highlight class="normal"></highlight><highlight class="preprocessor">#define<sp/>GET_CHANNEL_WIDTH_SEQ(R,<sp/>DATA,<sp/>CHANNEL_TUPLE)<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>\</highlight></codeline>
+<codeline lineno="158"><highlight class="preprocessor"><sp/><sp/>BOOST_PP_TUPLE_ELEM(CHANNEL_TUPLE_SIZE,<sp/>CHANNEL_TUPLE_ACCESS_BIT_WIDTH,<sp/>CHANNEL_TUPLE)<sp/>DATA</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="159"><highlight class="normal"></highlight><highlight class="preprocessor">#define<sp/>GET_FORMAT_WIDTH(CHANNEL_LIST)<sp/>BOOST_PP_SEQ_FOR_EACH(GET_CHANNEL_WIDTH_SEQ,<sp/>+,<sp/>CHANNEL_LIST)<sp/>0</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="160"><highlight class="normal"></highlight></codeline>
+<codeline lineno="161"><highlight class="normal"></highlight><highlight class="preprocessor">#define<sp/>GET_FORMAT_WIDTH_FROM_TUPLE(ENUM_TUPLE)<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>\</highlight></codeline>
+<codeline lineno="162"><highlight class="preprocessor"><sp/><sp/>GET_FORMAT_WIDTH(BOOST_PP_TUPLE_ELEM(TUPLE_SIZE,<sp/>TUPLE_ACCESS_CHANNEL_DATA,<sp/>ENUM_TUPLE))</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="163"><highlight class="normal"></highlight><highlight class="preprocessor">#define<sp/>GET_FORMAT_WIDTH_FOR_LIST_FROM_TUPLE(ENUM_TUPLE)<sp/>GET_FORMAT_WIDTH_FROM_TUPLE(ENUM_TUPLE),</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="164"><highlight class="normal"></highlight></codeline>
+<codeline lineno="165"><highlight class="normal"></highlight></codeline>
+<codeline lineno="166"><highlight class="normal"></highlight><highlight class="preprocessor">#define<sp/>GET_ASPECT_MASK_FROM_TUPLE(ENUM_TUPLE)<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>\</highlight></codeline>
+<codeline lineno="167"><highlight class="preprocessor"><sp/><sp/>BOOST_PP_TUPLE_ELEM(TUPLE_SIZE,<sp/>TUPLE_ACCESS_ASPECT_MASK,<sp/>ENUM_TUPLE)</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="168"><highlight class="normal"></highlight></codeline>
+<codeline lineno="173"><highlight class="keyword">enum<sp/>class</highlight><highlight class="normal"><sp/>RawStorageFormat</highlight></codeline>
+<codeline lineno="174"><highlight class="normal">{</highlight></codeline>
+<codeline lineno="175"><highlight class="normal"><sp/><sp/>RAW_STORAGE_FORMAT_ITERATOR(GET_FORMAT_NAME_FOR_LIST_FROM_TUPLE)</highlight></codeline>
+<codeline lineno="176"><highlight class="normal">};</highlight></codeline>
+<codeline lineno="177"><highlight class="normal"></highlight></codeline>
+<codeline lineno="178"><highlight class="normal">U32<sp/>GetFormatSizeBits(RawStorageFormat<sp/>format);</highlight></codeline>
+<codeline lineno="179"><highlight class="normal">U32<sp/>GetFormatSize(RawStorageFormat<sp/>format);</highlight></codeline>
+<codeline lineno="180"><highlight class="normal"></highlight><highlight class="keywordtype">bool</highlight><highlight class="normal"><sp/>HasDepthComponent(RawStorageFormat<sp/>format);</highlight></codeline>
+<codeline lineno="181"><highlight class="normal"></highlight><highlight class="keywordtype">bool</highlight><highlight class="normal"><sp/>HasStencilComponent(RawStorageFormat<sp/>format);</highlight></codeline>
+<codeline lineno="182"><highlight class="normal"></highlight><highlight class="keywordtype">bool</highlight><highlight class="normal"><sp/>HasDepthOrStencilComponent(RawStorageFormat<sp/>format);</highlight></codeline>
+<codeline lineno="183"><highlight class="normal"></highlight><highlight class="keywordtype">bool</highlight><highlight class="normal"><sp/>HasDepthAndStencilComponent(RawStorageFormat<sp/>format);</highlight></codeline>
+<codeline lineno="184"><highlight class="normal">String<sp/>ToString(RawStorageFormat<sp/>format);</highlight></codeline>
+<codeline lineno="185"><highlight class="normal"></highlight></codeline>
+<codeline lineno="186"><highlight class="normal">}<sp/><sp/></highlight><highlight class="comment">//<sp/>namespace<sp/>Azura</highlight><highlight class="normal"></highlight></codeline>
+    </programlisting>
+    <location file="Source/Core/Inc/Core/RawStorageFormat.h"/>
+  </compounddef>
+</doxygen>

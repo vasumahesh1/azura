@@ -1,0 +1,103 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.8.14">
+  <compounddef id="struct_azura_1_1_texture_manager_1_1_texture_entry" kind="struct" language="C++" prot="private">
+    <compoundname>Azura::TextureManager::TextureEntry</compoundname>
+      <sectiondef kind="public-attrib">
+      <memberdef kind="variable" id="struct_azura_1_1_texture_manager_1_1_texture_entry_1aa0027207981087c8a528383576594ea0" prot="public" static="no" mutable="no">
+        <type><ref refid="struct_azura_1_1_texture_desc" kindref="compound">TextureDesc</ref></type>
+        <definition>TextureDesc Azura::TextureManager::TextureEntry::m_desc</definition>
+        <argsstring></argsstring>
+        <name>m_desc</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Source/Azura/RenderSystem/Inc/Generic/TextureManager.h" line="16" column="1" bodyfile="Source/Azura/RenderSystem/Inc/Generic/TextureManager.h" bodystart="16" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="struct_azura_1_1_texture_manager_1_1_texture_entry_1acce8caac50011a4bdf78cad1ee82f17d" prot="public" static="no" mutable="no">
+        <type>U32</type>
+        <definition>U32 Azura::TextureManager::TextureEntry::m_handle</definition>
+        <argsstring></argsstring>
+        <name>m_handle</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Source/Azura/RenderSystem/Inc/Generic/TextureManager.h" line="17" column="1" bodyfile="Source/Azura/RenderSystem/Inc/Generic/TextureManager.h" bodystart="17" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="struct_azura_1_1_texture_manager_1_1_texture_entry_1a3c609a671785183cd84eda7f5533bdbc" prot="public" static="no" mutable="no">
+        <type><ref refid="class_azura_1_1_containers_1_1_vector" kindref="compound">Containers::Vector</ref>&lt; U8 &gt;</type>
+        <definition>Containers::Vector&lt;U8&gt; Azura::TextureManager::TextureEntry::m_data</definition>
+        <argsstring></argsstring>
+        <name>m_data</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Source/Azura/RenderSystem/Inc/Generic/TextureManager.h" line="18" column="1" bodyfile="Source/Azura/RenderSystem/Inc/Generic/TextureManager.h" bodystart="18" bodyend="-1"/>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="public-func">
+      <memberdef kind="function" id="struct_azura_1_1_texture_manager_1_1_texture_entry_1ac036519cfa8a75daf54f69ca15b06ec0" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>Azura::TextureManager::TextureEntry::TextureEntry</definition>
+        <argsstring>(Memory::MonotonicAllocator &amp;allocator)</argsstring>
+        <name>TextureEntry</name>
+        <param>
+          <type><ref refid="class_azura_1_1_memory_1_1_monotonic_allocator" kindref="compound">Memory::MonotonicAllocator</ref> &amp;</type>
+          <declname>allocator</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Source/Azura/RenderSystem/Inc/Generic/TextureManager.h" line="20" column="1" bodyfile="Source/Azura/RenderSystem/Src/Generic/TextureManager.cpp" bodystart="10" bodyend="13"/>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <collaborationgraph>
+      <node id="566">
+        <label>Azura::Bounds3D</label>
+        <link refid="struct_azura_1_1_bounds3_d"/>
+      </node>
+      <node id="565">
+        <label>Azura::TextureDesc</label>
+        <link refid="struct_azura_1_1_texture_desc"/>
+        <childnode refid="566" relation="usage">
+          <edgelabel>m_bounds</edgelabel>
+        </childnode>
+      </node>
+      <node id="564">
+        <label>Azura::Containers::Vector&lt; U8 &gt;</label>
+        <link refid="class_azura_1_1_containers_1_1_vector"/>
+      </node>
+      <node id="563">
+        <label>Azura::TextureManager::TextureEntry</label>
+        <childnode refid="564" relation="usage">
+          <edgelabel>m_data</edgelabel>
+        </childnode>
+        <childnode refid="565" relation="usage">
+          <edgelabel>m_desc</edgelabel>
+        </childnode>
+      </node>
+    </collaborationgraph>
+    <location file="Source/Azura/RenderSystem/Inc/Generic/TextureManager.h" line="15" column="1" bodyfile="Source/Azura/RenderSystem/Inc/Generic/TextureManager.h" bodystart="14" bodyend="21"/>
+    <listofallmembers>
+      <member refid="struct_azura_1_1_texture_manager_1_1_texture_entry_1a3c609a671785183cd84eda7f5533bdbc" prot="public" virt="non-virtual"><scope>Azura::TextureManager::TextureEntry</scope><name>m_data</name></member>
+      <member refid="struct_azura_1_1_texture_manager_1_1_texture_entry_1aa0027207981087c8a528383576594ea0" prot="public" virt="non-virtual"><scope>Azura::TextureManager::TextureEntry</scope><name>m_desc</name></member>
+      <member refid="struct_azura_1_1_texture_manager_1_1_texture_entry_1acce8caac50011a4bdf78cad1ee82f17d" prot="public" virt="non-virtual"><scope>Azura::TextureManager::TextureEntry</scope><name>m_handle</name></member>
+      <member refid="struct_azura_1_1_texture_manager_1_1_texture_entry_1ac036519cfa8a75daf54f69ca15b06ec0" prot="public" virt="non-virtual"><scope>Azura::TextureManager::TextureEntry</scope><name>TextureEntry</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

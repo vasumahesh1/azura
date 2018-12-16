@@ -1,0 +1,165 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.8.14">
+  <compounddef id="namespace_render_test_cases" kind="namespace" language="C++">
+    <compoundname>RenderTestCases</compoundname>
+      <sectiondef kind="func">
+      <memberdef kind="function" id="_render_test_cases_8h_1a14c286906433dd15e8261553a7dc53a4" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void RenderTestCases::ExecuteBasicRenderTest</definition>
+        <argsstring>(Azura::Renderer &amp;renderer, Azura::Window &amp;window, Azura::U32 renderPass, Azura::U32 uboSlot, const Azura::Log &amp;log_TestCase)</argsstring>
+        <name>ExecuteBasicRenderTest</name>
+        <param>
+          <type><ref refid="class_azura_1_1_renderer" kindref="compound">Azura::Renderer</ref> &amp;</type>
+          <declname>renderer</declname>
+        </param>
+        <param>
+          <type><ref refid="class_azura_1_1_window" kindref="compound">Azura::Window</ref> &amp;</type>
+          <declname>window</declname>
+        </param>
+        <param>
+          <type>Azura::U32</type>
+          <declname>renderPass</declname>
+        </param>
+        <param>
+          <type>Azura::U32</type>
+          <declname>uboSlot</declname>
+        </param>
+        <param>
+          <type>const <ref refid="class_azura_1_1_log" kindref="compound">Azura::Log</ref> &amp;</type>
+          <declname>log_TestCase</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Source/Azura/RenderSystem/Test/RenderTestCases.h" line="18" column="1" bodyfile="Source/Azura/RenderSystem/Test/RenderTestCases.cpp" bodystart="25" bodyend="91"/>
+      </memberdef>
+      <memberdef kind="function" id="_render_test_cases_8h_1a96d521ef8c14d9ee3e986505b1c708a6" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void RenderTestCases::ExecuteBasicInstancingTest</definition>
+        <argsstring>(Azura::Renderer &amp;renderer, Azura::Window &amp;window, Azura::U32 renderPass, Azura::U32 uboSlot, const Azura::Log &amp;log_TestCase)</argsstring>
+        <name>ExecuteBasicInstancingTest</name>
+        <param>
+          <type><ref refid="class_azura_1_1_renderer" kindref="compound">Azura::Renderer</ref> &amp;</type>
+          <declname>renderer</declname>
+        </param>
+        <param>
+          <type><ref refid="class_azura_1_1_window" kindref="compound">Azura::Window</ref> &amp;</type>
+          <declname>window</declname>
+        </param>
+        <param>
+          <type>Azura::U32</type>
+          <declname>renderPass</declname>
+        </param>
+        <param>
+          <type>Azura::U32</type>
+          <declname>uboSlot</declname>
+        </param>
+        <param>
+          <type>const <ref refid="class_azura_1_1_log" kindref="compound">Azura::Log</ref> &amp;</type>
+          <declname>log_TestCase</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Source/Azura/RenderSystem/Test/RenderTestCases.h" line="19" column="1" bodyfile="Source/Azura/RenderSystem/Test/RenderTestCases.cpp" bodystart="93" bodyend="166"/>
+      </memberdef>
+      <memberdef kind="function" id="_render_test_cases_8h_1a939b01d42459905a49edcc94db606f63" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void RenderTestCases::ExecuteBasicTextureTest</definition>
+        <argsstring>(Azura::Renderer &amp;renderer, Azura::Window &amp;window, Azura::U32 renderPass, Azura::U32 uboSlot, Azura::U32 samplerSlot, Azura::U32 samplerTextureSlot, const Azura::Log &amp;log_TestCase)</argsstring>
+        <name>ExecuteBasicTextureTest</name>
+        <param>
+          <type><ref refid="class_azura_1_1_renderer" kindref="compound">Azura::Renderer</ref> &amp;</type>
+          <declname>renderer</declname>
+        </param>
+        <param>
+          <type><ref refid="class_azura_1_1_window" kindref="compound">Azura::Window</ref> &amp;</type>
+          <declname>window</declname>
+        </param>
+        <param>
+          <type>Azura::U32</type>
+          <declname>renderPass</declname>
+        </param>
+        <param>
+          <type>Azura::U32</type>
+          <declname>uboSlot</declname>
+        </param>
+        <param>
+          <type>Azura::U32</type>
+          <declname>samplerSlot</declname>
+        </param>
+        <param>
+          <type>Azura::U32</type>
+          <declname>samplerTextureSlot</declname>
+        </param>
+        <param>
+          <type>const <ref refid="class_azura_1_1_log" kindref="compound">Azura::Log</ref> &amp;</type>
+          <declname>log_TestCase</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Source/Azura/RenderSystem/Test/RenderTestCases.h" line="20" column="1" bodyfile="Source/Azura/RenderSystem/Test/RenderTestCases.cpp" bodystart="168" bodyend="249"/>
+      </memberdef>
+      <memberdef kind="function" id="_render_test_cases_8h_1a517bc7273db353d5497d6ac65e8560f4" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void RenderTestCases::ExecuteBasicDeferredTest</definition>
+        <argsstring>(Azura::Renderer &amp;renderer, Azura::Window &amp;window, Azura::U32 renderPass1, Azura::U32 renderPass2, Azura::U32 uboSlot, Azura::U32 samplerSlot, Azura::U32 samplerTextureSlot, const Azura::Log &amp;log_TestCase)</argsstring>
+        <name>ExecuteBasicDeferredTest</name>
+        <param>
+          <type><ref refid="class_azura_1_1_renderer" kindref="compound">Azura::Renderer</ref> &amp;</type>
+          <declname>renderer</declname>
+        </param>
+        <param>
+          <type><ref refid="class_azura_1_1_window" kindref="compound">Azura::Window</ref> &amp;</type>
+          <declname>window</declname>
+        </param>
+        <param>
+          <type>Azura::U32</type>
+          <declname>renderPass1</declname>
+        </param>
+        <param>
+          <type>Azura::U32</type>
+          <declname>renderPass2</declname>
+        </param>
+        <param>
+          <type>Azura::U32</type>
+          <declname>uboSlot</declname>
+        </param>
+        <param>
+          <type>Azura::U32</type>
+          <declname>samplerSlot</declname>
+        </param>
+        <param>
+          <type>Azura::U32</type>
+          <declname>samplerTextureSlot</declname>
+        </param>
+        <param>
+          <type>const <ref refid="class_azura_1_1_log" kindref="compound">Azura::Log</ref> &amp;</type>
+          <declname>log_TestCase</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Source/Azura/RenderSystem/Test/RenderTestCases.h" line="21" column="1" bodyfile="Source/Azura/RenderSystem/Test/RenderTestCases.cpp" bodystart="252" bodyend="377"/>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <location file="Source/Azura/RenderSystem/Test/RenderTestCases.h" line="17" column="1"/>
+  </compounddef>
+</doxygen>

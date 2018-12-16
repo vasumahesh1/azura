@@ -1,0 +1,419 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.8.14">
+  <compounddef id="_vk_scoped_buffer_8cpp" kind="file" language="C++">
+    <compoundname>VkScopedBuffer.cpp</compoundname>
+    <includes refid="_vk_scoped_buffer_8h" local="yes">Vulkan/VkScopedBuffer.h</includes>
+    <includes refid="_vk_core_8h" local="yes">Vulkan/VkCore.h</includes>
+    <includes refid="_vk_macros_8h" local="yes">Vulkan/VkMacros.h</includes>
+    <incdepgraph>
+      <node id="3190">
+        <label>functional</label>
+      </node>
+      <node id="3181">
+        <label>Vulkan/VkScopedBuffer.h</label>
+        <link refid="_vk_scoped_buffer_8h_source"/>
+        <childnode refid="3182" relation="include">
+        </childnode>
+        <childnode refid="3183" relation="include">
+        </childnode>
+        <childnode refid="3184" relation="include">
+        </childnode>
+      </node>
+      <node id="3191">
+        <label>iterator</label>
+      </node>
+      <node id="3205">
+        <label>Utils/Hash.h</label>
+        <link refid="_hash_8h_source"/>
+        <childnode refid="3183" relation="include">
+        </childnode>
+      </node>
+      <node id="3195">
+        <label>Generic/Renderer.h</label>
+        <link refid="_renderer_8h_source"/>
+        <childnode refid="3196" relation="include">
+        </childnode>
+        <childnode refid="3187" relation="include">
+        </childnode>
+        <childnode refid="3198" relation="include">
+        </childnode>
+        <childnode refid="3199" relation="include">
+        </childnode>
+        <childnode refid="3200" relation="include">
+        </childnode>
+        <childnode refid="3208" relation="include">
+        </childnode>
+      </node>
+      <node id="3200">
+        <label>Core/RawStorageFormat.h</label>
+        <link refid="_raw_storage_format_8h_source"/>
+        <childnode refid="3183" relation="include">
+        </childnode>
+        <childnode refid="3197" relation="include">
+        </childnode>
+        <childnode refid="3201" relation="include">
+        </childnode>
+        <childnode refid="3202" relation="include">
+        </childnode>
+        <childnode refid="3203" relation="include">
+        </childnode>
+        <childnode refid="3204" relation="include">
+        </childnode>
+      </node>
+      <node id="3211">
+        <label>VkScopedImage.h</label>
+        <link refid="_vk_scoped_image_8h_source"/>
+        <childnode refid="3182" relation="include">
+        </childnode>
+        <childnode refid="3183" relation="include">
+        </childnode>
+        <childnode refid="3184" relation="include">
+        </childnode>
+        <childnode refid="3212" relation="include">
+        </childnode>
+      </node>
+      <node id="3214">
+        <label>MemoryBuffer.h</label>
+        <link refid="_memory_buffer_8h_source"/>
+        <childnode refid="3183" relation="include">
+        </childnode>
+      </node>
+      <node id="3193">
+        <label>Memory/Allocator.h</label>
+        <link refid="_allocator_8h_source"/>
+        <childnode refid="3190" relation="include">
+        </childnode>
+        <childnode refid="3183" relation="include">
+        </childnode>
+        <childnode refid="3194" relation="include">
+        </childnode>
+      </node>
+      <node id="3206">
+        <label>Core/AssetLocation.h</label>
+        <link refid="_asset_location_8h_source"/>
+      </node>
+      <node id="3188">
+        <label>cassert</label>
+      </node>
+      <node id="3203">
+        <label>boost/preprocessor/tuple/elem.hpp</label>
+      </node>
+      <node id="3217">
+        <label>stdexcept</label>
+      </node>
+      <node id="3199">
+        <label>GenericTypes.h</label>
+        <link refid="_azura_2_render_system_2_inc_2_generic_2_generic_types_8h_source"/>
+        <childnode refid="3187" relation="include">
+        </childnode>
+        <childnode refid="3196" relation="include">
+        </childnode>
+        <childnode refid="3183" relation="include">
+        </childnode>
+        <childnode refid="3200" relation="include">
+        </childnode>
+        <childnode refid="3205" relation="include">
+        </childnode>
+        <childnode refid="3206" relation="include">
+        </childnode>
+        <childnode refid="3207" relation="include">
+        </childnode>
+        <childnode refid="3204" relation="include">
+        </childnode>
+      </node>
+      <node id="3213">
+        <label>Memory/HeapMemoryBuffer.h</label>
+        <link refid="_heap_memory_buffer_8h_source"/>
+        <childnode refid="3214" relation="include">
+        </childnode>
+        <childnode refid="3183" relation="include">
+        </childnode>
+      </node>
+      <node id="3194">
+        <label>Utils/Macros.h</label>
+        <link refid="_macros_8h_source"/>
+      </node>
+      <node id="3207">
+        <label>boost/container/small_vector.hpp</label>
+      </node>
+      <node id="3196">
+        <label>Constants.h</label>
+        <link refid="_azura_2_render_system_2_inc_2_generic_2_constants_8h_source"/>
+        <childnode refid="3197" relation="include">
+        </childnode>
+        <childnode refid="3183" relation="include">
+        </childnode>
+      </node>
+      <node id="3204">
+        <label>boost/detail/bitmask.hpp</label>
+      </node>
+      <node id="3197">
+        <label>tuple</label>
+      </node>
+      <node id="3192">
+        <label>Array.h</label>
+        <link refid="_array_8h_source"/>
+        <childnode refid="3188" relation="include">
+        </childnode>
+        <childnode refid="3189" relation="include">
+        </childnode>
+        <childnode refid="3193" relation="include">
+        </childnode>
+        <childnode refid="3183" relation="include">
+        </childnode>
+      </node>
+      <node id="3215">
+        <label>Memory/MonotonicAllocator.h</label>
+        <link refid="_monotonic_allocator_8h_source"/>
+        <childnode refid="3193" relation="include">
+        </childnode>
+        <childnode refid="3183" relation="include">
+        </childnode>
+      </node>
+      <node id="3185">
+        <label>vector</label>
+      </node>
+      <node id="3187">
+        <label>Containers/Vector.h</label>
+        <link refid="_vector_8h_source"/>
+        <childnode refid="3188" relation="include">
+        </childnode>
+        <childnode refid="3189" relation="include">
+        </childnode>
+        <childnode refid="3190" relation="include">
+        </childnode>
+        <childnode refid="3191" relation="include">
+        </childnode>
+        <childnode refid="3192" relation="include">
+        </childnode>
+        <childnode refid="3193" relation="include">
+        </childnode>
+        <childnode refid="3183" relation="include">
+        </childnode>
+        <childnode refid="3194" relation="include">
+        </childnode>
+      </node>
+      <node id="3184">
+        <label>Log/Log.h</label>
+        <link refid="_log_8h_source"/>
+        <childnode refid="3183" relation="include">
+        </childnode>
+        <childnode refid="3185" relation="include">
+        </childnode>
+      </node>
+      <node id="3210">
+        <label>array</label>
+      </node>
+      <node id="3180">
+        <label>Source/Azura/RenderSystem/Src/Vulkan/VkScopedBuffer.cpp</label>
+        <link refid="_vk_scoped_buffer_8cpp"/>
+        <childnode refid="3181" relation="include">
+        </childnode>
+        <childnode refid="3186" relation="include">
+        </childnode>
+        <childnode refid="3216" relation="include">
+        </childnode>
+      </node>
+      <node id="3198">
+        <label>Drawable.h</label>
+        <link refid="_drawable_8h_source"/>
+        <childnode refid="3187" relation="include">
+        </childnode>
+        <childnode refid="3199" relation="include">
+        </childnode>
+        <childnode refid="3183" relation="include">
+        </childnode>
+        <childnode refid="3200" relation="include">
+        </childnode>
+      </node>
+      <node id="3186">
+        <label>Vulkan/VkCore.h</label>
+        <link refid="_vk_core_8h_source"/>
+        <childnode refid="3182" relation="include">
+        </childnode>
+        <childnode refid="3187" relation="include">
+        </childnode>
+        <childnode refid="3195" relation="include">
+        </childnode>
+        <childnode refid="3183" relation="include">
+        </childnode>
+        <childnode refid="3209" relation="include">
+        </childnode>
+        <childnode refid="3184" relation="include">
+        </childnode>
+      </node>
+      <node id="3218">
+        <label>VkDebug.h</label>
+        <link refid="_vk_debug_8h_source"/>
+        <childnode refid="3182" relation="include">
+        </childnode>
+      </node>
+      <node id="3182">
+        <label>vulkan/vulkan_core.h</label>
+      </node>
+      <node id="3201">
+        <label>boost/preprocessor/repetition/repeat.hpp</label>
+      </node>
+      <node id="3183">
+        <label>Types.h</label>
+      </node>
+      <node id="3216">
+        <label>Vulkan/VkMacros.h</label>
+        <link refid="_vk_macros_8h_source"/>
+        <childnode refid="3182" relation="include">
+        </childnode>
+        <childnode refid="3217" relation="include">
+        </childnode>
+        <childnode refid="3218" relation="include">
+        </childnode>
+        <childnode refid="3184" relation="include">
+        </childnode>
+      </node>
+      <node id="3208">
+        <label>ComputePool.h</label>
+        <link refid="_compute_pool_8h_source"/>
+        <childnode refid="3187" relation="include">
+        </childnode>
+        <childnode refid="3199" relation="include">
+        </childnode>
+        <childnode refid="3183" relation="include">
+        </childnode>
+      </node>
+      <node id="3212">
+        <label>Generic/TextureManager.h</label>
+        <link refid="_texture_manager_8h_source"/>
+        <childnode refid="3183" relation="include">
+        </childnode>
+        <childnode refid="3213" relation="include">
+        </childnode>
+        <childnode refid="3215" relation="include">
+        </childnode>
+        <childnode refid="3187" relation="include">
+        </childnode>
+        <childnode refid="3199" relation="include">
+        </childnode>
+        <childnode refid="3184" relation="include">
+        </childnode>
+      </node>
+      <node id="3189">
+        <label>cstring</label>
+      </node>
+      <node id="3202">
+        <label>boost/preprocessor/seq/for_each.hpp</label>
+      </node>
+      <node id="3209">
+        <label>VkTypes.h</label>
+        <link refid="_vk_types_8h_source"/>
+        <childnode refid="3182" relation="include">
+        </childnode>
+        <childnode refid="3210" relation="include">
+        </childnode>
+        <childnode refid="3185" relation="include">
+        </childnode>
+        <childnode refid="3187" relation="include">
+        </childnode>
+        <childnode refid="3183" relation="include">
+        </childnode>
+        <childnode refid="3211" relation="include">
+        </childnode>
+      </node>
+    </incdepgraph>
+    <innernamespace refid="namespace_azura">Azura</innernamespace>
+    <innernamespace refid="namespace_azura_1_1_vulkan">Azura::Vulkan</innernamespace>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <programlisting>
+<codeline lineno="1"><highlight class="preprocessor">#include<sp/>&quot;Vulkan/VkScopedBuffer.h&quot;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="2"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&quot;Vulkan/VkCore.h&quot;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="3"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&quot;Vulkan/VkMacros.h&quot;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="4"><highlight class="normal"></highlight></codeline>
+<codeline lineno="5"><highlight class="normal"></highlight><highlight class="keyword">namespace<sp/></highlight><highlight class="normal"><ref refid="namespace_azura" kindref="compound">Azura</ref><sp/>{</highlight></codeline>
+<codeline lineno="6"><highlight class="normal"></highlight><highlight class="keyword">namespace<sp/></highlight><highlight class="normal">Vulkan<sp/>{</highlight></codeline>
+<codeline lineno="7"><highlight class="normal"></highlight></codeline>
+<codeline lineno="8"><highlight class="normal">VkScopedBuffer::VkScopedBuffer(VkDevice<sp/>device,</highlight></codeline>
+<codeline lineno="9"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>VkBufferUsageFlags<sp/>usage,</highlight></codeline>
+<codeline lineno="10"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>U32<sp/>bufferSize,</highlight></codeline>
+<codeline lineno="11"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>VkMemoryPropertyFlags<sp/>memoryProperties,</highlight></codeline>
+<codeline lineno="12"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>VkPhysicalDeviceMemoryProperties&amp;<sp/>phyDeviceMemoryProperties,</highlight></codeline>
+<codeline lineno="13"><highlight class="normal"><sp/><sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>Log&amp;<sp/>logger)</highlight></codeline>
+<codeline lineno="14"><highlight class="normal"><sp/><sp/>:<sp/>m_device(device),</highlight></codeline>
+<codeline lineno="15"><highlight class="normal"><sp/><sp/><sp/><sp/>log_VulkanRenderSystem(std::move(logger))<sp/>{</highlight></codeline>
+<codeline lineno="16"><highlight class="normal"><sp/><sp/>Create(device,<sp/>usage,<sp/>bufferSize,<sp/>memoryProperties,<sp/>phyDeviceMemoryProperties);</highlight></codeline>
+<codeline lineno="17"><highlight class="normal">}</highlight></codeline>
+<codeline lineno="18"><highlight class="normal"></highlight></codeline>
+<codeline lineno="19"><highlight class="normal">VkScopedBuffer::VkScopedBuffer(</highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>Log&amp;<sp/>logger)</highlight></codeline>
+<codeline lineno="20"><highlight class="normal"><sp/><sp/>:<sp/>m_device(),<sp/>log_VulkanRenderSystem(std::move(logger))<sp/>{</highlight></codeline>
+<codeline lineno="21"><highlight class="normal">}</highlight></codeline>
+<codeline lineno="22"><highlight class="normal"></highlight></codeline>
+<codeline lineno="23"><highlight class="normal"></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/>VkScopedBuffer::Create(VkDevice<sp/>device,</highlight></codeline>
+<codeline lineno="24"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>VkBufferUsageFlags<sp/>usage,</highlight></codeline>
+<codeline lineno="25"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>U32<sp/>bufferSize,</highlight></codeline>
+<codeline lineno="26"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>VkMemoryPropertyFlags<sp/>memoryProperties,</highlight></codeline>
+<codeline lineno="27"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>VkPhysicalDeviceMemoryProperties&amp;<sp/>phyDeviceMemoryProperties)<sp/>{</highlight></codeline>
+<codeline lineno="28"><highlight class="normal"><sp/><sp/>m_device<sp/>=<sp/>device;</highlight></codeline>
+<codeline lineno="29"><highlight class="normal"></highlight></codeline>
+<codeline lineno="30"><highlight class="normal"><sp/><sp/>VkBufferCreateInfo<sp/>bufferInfo<sp/>=<sp/>{};</highlight></codeline>
+<codeline lineno="31"><highlight class="normal"><sp/><sp/>bufferInfo.sType<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>=<sp/>VK_STRUCTURE_TYPE_BUFFER_CREATE_INFO;</highlight></codeline>
+<codeline lineno="32"><highlight class="normal"><sp/><sp/>bufferInfo.size<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>=<sp/>bufferSize;</highlight></codeline>
+<codeline lineno="33"><highlight class="normal"><sp/><sp/>bufferInfo.usage<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>=<sp/>usage;</highlight></codeline>
+<codeline lineno="34"><highlight class="normal"><sp/><sp/>bufferInfo.sharingMode<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>=<sp/>VK_SHARING_MODE_EXCLUSIVE;</highlight></codeline>
+<codeline lineno="35"><highlight class="normal"></highlight></codeline>
+<codeline lineno="36"><highlight class="normal"><sp/><sp/></highlight><highlight class="comment">//<sp/>TODO(vasumahesh1):<sp/>Need<sp/>an<sp/>encapsulation<sp/>for<sp/>Sharing<sp/>Mode</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="37"><highlight class="normal"></highlight></codeline>
+<codeline lineno="38"><highlight class="normal"><sp/><sp/>VERIFY_VK_OP(log_VulkanRenderSystem,<sp/>vkCreateBuffer(device,<sp/>&amp;bufferInfo,<sp/></highlight><highlight class="keyword">nullptr</highlight><highlight class="normal">,<sp/>&amp;m_buffer),</highlight></codeline>
+<codeline lineno="39"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="stringliteral">&quot;Failed<sp/>to<sp/>create<sp/>buffer&quot;</highlight><highlight class="normal">);</highlight></codeline>
+<codeline lineno="40"><highlight class="normal"></highlight></codeline>
+<codeline lineno="41"><highlight class="normal"><sp/><sp/>VkMemoryRequirements<sp/>memRequirements;</highlight></codeline>
+<codeline lineno="42"><highlight class="normal"><sp/><sp/>vkGetBufferMemoryRequirements(device,<sp/>m_buffer,<sp/>&amp;memRequirements);</highlight></codeline>
+<codeline lineno="43"><highlight class="normal"></highlight></codeline>
+<codeline lineno="44"><highlight class="normal"><sp/><sp/>VkMemoryAllocateInfo<sp/>allocInfo<sp/>=<sp/>{};</highlight></codeline>
+<codeline lineno="45"><highlight class="normal"><sp/><sp/>allocInfo.sType<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>=<sp/>VK_STRUCTURE_TYPE_MEMORY_ALLOCATE_INFO;</highlight></codeline>
+<codeline lineno="46"><highlight class="normal"><sp/><sp/>allocInfo.allocationSize<sp/><sp/><sp/><sp/><sp/><sp/><sp/>=<sp/>memRequirements.size;</highlight></codeline>
+<codeline lineno="47"><highlight class="normal"><sp/><sp/>allocInfo.memoryTypeIndex<sp/><sp/><sp/><sp/><sp/><sp/>=</highlight></codeline>
+<codeline lineno="48"><highlight class="normal"><sp/><sp/><sp/><sp/>VkCore::FindMemoryType(memRequirements.memoryTypeBits,<sp/>memoryProperties,<sp/>phyDeviceMemoryProperties);</highlight></codeline>
+<codeline lineno="49"><highlight class="normal"></highlight></codeline>
+<codeline lineno="50"><highlight class="normal"><sp/><sp/>VERIFY_VK_OP(log_VulkanRenderSystem,<sp/>vkAllocateMemory(device,<sp/>&amp;allocInfo,<sp/></highlight><highlight class="keyword">nullptr</highlight><highlight class="normal">,<sp/>&amp;m_memory),</highlight></codeline>
+<codeline lineno="51"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="stringliteral">&quot;Failed<sp/>to<sp/>allocate<sp/>buffer<sp/>memory&quot;</highlight><highlight class="normal">)</highlight></codeline>
+<codeline lineno="52"><highlight class="normal"></highlight></codeline>
+<codeline lineno="53"><highlight class="normal"><sp/><sp/>vkBindBufferMemory(device,<sp/>m_buffer,<sp/>m_memory,<sp/>0);</highlight></codeline>
+<codeline lineno="54"><highlight class="normal">}</highlight></codeline>
+<codeline lineno="55"><highlight class="normal"></highlight></codeline>
+<codeline lineno="56"><highlight class="normal"></highlight><highlight class="keywordtype">void</highlight><highlight class="normal">*<sp/>VkScopedBuffer::MapMemory(VkDeviceSize<sp/>size,<sp/>VkDeviceSize<sp/>offset)</highlight><highlight class="keyword"><sp/>const<sp/></highlight><highlight class="normal">{</highlight></codeline>
+<codeline lineno="57"><highlight class="normal"><sp/><sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal">*<sp/>data;</highlight></codeline>
+<codeline lineno="58"><highlight class="normal"><sp/><sp/>vkMapMemory(m_device,<sp/>m_memory,<sp/>offset,<sp/>size,<sp/>0,<sp/>&amp;data);</highlight></codeline>
+<codeline lineno="59"><highlight class="normal"><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>data;</highlight></codeline>
+<codeline lineno="60"><highlight class="normal">}</highlight></codeline>
+<codeline lineno="61"><highlight class="normal"></highlight></codeline>
+<codeline lineno="62"><highlight class="normal"></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/>VkScopedBuffer::UnMapMemory()</highlight><highlight class="keyword"><sp/>const<sp/></highlight><highlight class="normal">{</highlight></codeline>
+<codeline lineno="63"><highlight class="normal"><sp/><sp/>vkUnmapMemory(m_device,<sp/>m_memory);</highlight></codeline>
+<codeline lineno="64"><highlight class="normal">}</highlight></codeline>
+<codeline lineno="65"><highlight class="normal"></highlight></codeline>
+<codeline lineno="66"><highlight class="normal">VkBuffer<sp/>VkScopedBuffer::Real()</highlight><highlight class="keyword"><sp/>const<sp/></highlight><highlight class="normal">{</highlight></codeline>
+<codeline lineno="67"><highlight class="normal"><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>m_buffer;</highlight></codeline>
+<codeline lineno="68"><highlight class="normal">}</highlight></codeline>
+<codeline lineno="69"><highlight class="normal"></highlight></codeline>
+<codeline lineno="70"><highlight class="normal">VkDeviceMemory<sp/>VkScopedBuffer::Memory()</highlight><highlight class="keyword"><sp/>const<sp/></highlight><highlight class="normal">{</highlight></codeline>
+<codeline lineno="71"><highlight class="normal"><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>m_memory;</highlight></codeline>
+<codeline lineno="72"><highlight class="normal">}</highlight></codeline>
+<codeline lineno="73"><highlight class="normal"></highlight></codeline>
+<codeline lineno="74"><highlight class="normal">VkDescriptorBufferInfo<sp/>VkScopedBuffer::GetDescriptorInfo(U32<sp/>offset,<sp/>U32<sp/>range)</highlight><highlight class="keyword"><sp/>const<sp/></highlight><highlight class="normal">{</highlight></codeline>
+<codeline lineno="75"><highlight class="normal"><sp/><sp/>VkDescriptorBufferInfo<sp/>bufferInfo;</highlight></codeline>
+<codeline lineno="76"><highlight class="normal"><sp/><sp/>bufferInfo.buffer<sp/>=<sp/>Real();</highlight></codeline>
+<codeline lineno="77"><highlight class="normal"><sp/><sp/>bufferInfo.offset<sp/>=<sp/>offset;</highlight></codeline>
+<codeline lineno="78"><highlight class="normal"><sp/><sp/>bufferInfo.range<sp/><sp/>=<sp/>range;</highlight></codeline>
+<codeline lineno="79"><highlight class="normal"></highlight></codeline>
+<codeline lineno="80"><highlight class="normal"><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>bufferInfo;</highlight></codeline>
+<codeline lineno="81"><highlight class="normal">}</highlight></codeline>
+<codeline lineno="82"><highlight class="normal"></highlight></codeline>
+<codeline lineno="83"><highlight class="normal"></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/>VkScopedBuffer::CleanUp()</highlight><highlight class="keyword"><sp/>const<sp/></highlight><highlight class="normal">{</highlight></codeline>
+<codeline lineno="84"><highlight class="normal"><sp/><sp/>vkDestroyBuffer(m_device,<sp/>m_buffer,<sp/></highlight><highlight class="keyword">nullptr</highlight><highlight class="normal">);</highlight></codeline>
+<codeline lineno="85"><highlight class="normal"><sp/><sp/>vkFreeMemory(m_device,<sp/>m_memory,<sp/></highlight><highlight class="keyword">nullptr</highlight><highlight class="normal">);</highlight></codeline>
+<codeline lineno="86"><highlight class="normal">}</highlight></codeline>
+<codeline lineno="87"><highlight class="normal">}<sp/></highlight><highlight class="comment">//<sp/>namespace<sp/>Vulkan</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="88"><highlight class="normal">}<sp/></highlight><highlight class="comment">//<sp/>namespace<sp/>Azura</highlight><highlight class="normal"></highlight></codeline>
+    </programlisting>
+    <location file="Source/Azura/RenderSystem/Src/Vulkan/VkScopedBuffer.cpp"/>
+  </compounddef>
+</doxygen>

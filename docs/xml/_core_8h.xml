@@ -1,0 +1,333 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.8.14">
+  <compounddef id="_core_8h" kind="file" language="C++">
+    <compoundname>Core.h</compoundname>
+    <includes local="no">mathfu/matrix.h</includes>
+    <includes local="yes">Types.h</includes>
+    <includedby refid="_render_test_cases_8h" local="yes">Source/Azura/RenderSystem/Test/RenderTestCases.h</includedby>
+    <includedby refid="_camera_8h" local="yes">Source/Camera/Inc/Camera/Camera.h</includedby>
+    <includedby refid="_fly_through_camera_8h" local="yes">Source/Camera/Inc/Camera/FlyThroughCamera.h</includedby>
+    <includedby refid="_icosphere_8h" local="yes">Source/Math/Inc/Math/Icosphere.h</includedby>
+    <includedby refid="_plane_8h" local="yes">Source/Math/Inc/Math/Plane.h</includedby>
+    <includedby refid="_math_2_inc_2_math_2_transform_8h" local="yes">Source/Math/Inc/Math/Transform.h</includedby>
+    <includedby refid="_transform_component_8h" local="yes">Source/Math/Inc/Math/TransformComponent.h</includedby>
+    <includedby refid="_physics_2_inc_2_physics_2_geometry_2_cloth_mesh_8h" local="no">Source/Physics/Inc/Physics/Geometry/ClothMesh.h</includedby>
+    <includedby refid="_cloth_plane_8h" local="no">Source/Physics/Inc/Physics/Geometry/ClothPlane.h</includedby>
+    <includedby refid="_edge_8h" local="no">Source/Physics/Inc/Physics/Geometry/Edge.h</includedby>
+    <includedby refid="_constraints_8h" local="no">Source/Physics/Inc/Physics/PBD/Cloth/Constraints.h</includedby>
+    <includedby refid="_solving_view_8h" local="no">Source/Physics/Inc/Physics/PBD/Common/SolvingView.h</includedby>
+    <includedby refid="0___test_zone_2_inc_2_test_zone_2_app_renderer_8h" local="yes">Source/Samples/0_TestZone/Inc/TestZone/AppRenderer.h</includedby>
+    <includedby refid="_cloth_common_8h" local="yes">Source/Samples/0_TestZone/Inc/TestZone/ClothCommon.h</includedby>
+    <includedby refid="_samples_20___test_zone_2_inc_2_test_zone_2_cloth_mesh_8h" local="yes">Source/Samples/0_TestZone/Inc/TestZone/ClothMesh.h</includedby>
+    <includedby refid="_imported_cloth_mesh_8h" local="yes">Source/Samples/0_TestZone/Inc/TestZone/ImportedClothMesh.h</includedby>
+    <includedby refid="1___procedural_planet_2_inc_2_procedural_planet_2_app_renderer_8h" local="yes">Source/Samples/1_ProceduralPlanet/Inc/ProceduralPlanet/AppRenderer.h</includedby>
+    <includedby refid="_samples_22___deferred_renderer_2_inc_2_app_2_common_8h" local="yes">Source/Samples/2_DeferredRenderer/Inc/App/Common.h</includedby>
+    <includedby refid="3___cloth_sim_2_inc_2_cloth_sim_2_app_renderer_8h" local="yes">Source/Samples/3_ClothSim/Inc/ClothSim/AppRenderer.h</includedby>
+    <incdepgraph>
+      <node id="5244">
+        <label>Source/Math/Inc/Math/Core.h</label>
+        <link refid="_core_8h"/>
+        <childnode refid="5245" relation="include">
+        </childnode>
+        <childnode refid="5246" relation="include">
+        </childnode>
+      </node>
+      <node id="5246">
+        <label>Types.h</label>
+      </node>
+      <node id="5245">
+        <label>mathfu/matrix.h</label>
+      </node>
+    </incdepgraph>
+    <invincdepgraph>
+      <node id="5249">
+        <label>Source/Camera/Inc/Camera/Camera.h</label>
+        <link refid="_camera_8h_source"/>
+        <childnode refid="5250" relation="include">
+        </childnode>
+        <childnode refid="5252" relation="include">
+        </childnode>
+        <childnode refid="5256" relation="include">
+        </childnode>
+      </node>
+      <node id="5247">
+        <label>Source/Math/Inc/Math/Core.h</label>
+        <link refid="_core_8h"/>
+        <childnode refid="5248" relation="include">
+        </childnode>
+        <childnode refid="5249" relation="include">
+        </childnode>
+        <childnode refid="5250" relation="include">
+        </childnode>
+        <childnode refid="5260" relation="include">
+        </childnode>
+        <childnode refid="5261" relation="include">
+        </childnode>
+        <childnode refid="5262" relation="include">
+        </childnode>
+        <childnode refid="5263" relation="include">
+        </childnode>
+        <childnode refid="5264" relation="include">
+        </childnode>
+        <childnode refid="5265" relation="include">
+        </childnode>
+        <childnode refid="5266" relation="include">
+        </childnode>
+        <childnode refid="5267" relation="include">
+        </childnode>
+        <childnode refid="5269" relation="include">
+        </childnode>
+        <childnode refid="5253" relation="include">
+        </childnode>
+        <childnode refid="5270" relation="include">
+        </childnode>
+        <childnode refid="5271" relation="include">
+        </childnode>
+        <childnode refid="5272" relation="include">
+        </childnode>
+        <childnode refid="5254" relation="include">
+        </childnode>
+        <childnode refid="5273" relation="include">
+        </childnode>
+        <childnode refid="5255" relation="include">
+        </childnode>
+      </node>
+      <node id="5257">
+        <label>Source/Samples/2_DeferredRenderer/Inc/Forward/ForwardComputeScene.h</label>
+        <link refid="_forward_compute_scene_8h_source"/>
+        <childnode refid="5251" relation="include">
+        </childnode>
+      </node>
+      <node id="5251">
+        <label>Source/Samples/2_DeferredRenderer/Inc/App/App.h</label>
+        <link refid="_app_8h_source"/>
+      </node>
+      <node id="5269">
+        <label>Source/Physics/Inc/Physics/PBD/Common/SolvingView.h</label>
+        <link refid="_solving_view_8h_source"/>
+        <childnode refid="5268" relation="include">
+        </childnode>
+      </node>
+      <node id="5265">
+        <label>Source/Physics/Inc/Physics/Geometry/ClothPlane.h</label>
+        <link refid="_cloth_plane_8h_source"/>
+        <childnode refid="5255" relation="include">
+        </childnode>
+      </node>
+      <node id="5259">
+        <label>Source/Samples/2_DeferredRenderer/Inc/ForwardPlus/ForwardPlusComputeScene.h</label>
+        <link refid="_forward_plus_compute_scene_8h_source"/>
+        <childnode refid="5251" relation="include">
+        </childnode>
+      </node>
+      <node id="5272">
+        <label>Source/Samples/0_TestZone/Inc/TestZone/ImportedClothMesh.h</label>
+        <link refid="_imported_cloth_mesh_8h_source"/>
+        <childnode refid="5253" relation="include">
+        </childnode>
+      </node>
+      <node id="5274">
+        <label>Source/Samples/2_DeferredRenderer/Inc/App/LightTexture.h</label>
+        <link refid="_light_texture_8h_source"/>
+        <childnode refid="5251" relation="include">
+        </childnode>
+        <childnode refid="5257" relation="include">
+        </childnode>
+        <childnode refid="5258" relation="include">
+        </childnode>
+        <childnode refid="5259" relation="include">
+        </childnode>
+      </node>
+      <node id="5271">
+        <label>Source/Samples/0_TestZone/Inc/TestZone/ClothMesh.h</label>
+        <link refid="_samples_20___test_zone_2_inc_2_test_zone_2_cloth_mesh_8h_source"/>
+        <childnode refid="5253" relation="include">
+        </childnode>
+      </node>
+      <node id="5263">
+        <label>Source/Math/Inc/Math/TransformComponent.h</label>
+        <link refid="_transform_component_8h_source"/>
+        <childnode refid="5255" relation="include">
+        </childnode>
+      </node>
+      <node id="5273">
+        <label>Source/Samples/2_DeferredRenderer/Inc/App/Common.h</label>
+        <link refid="_samples_22___deferred_renderer_2_inc_2_app_2_common_8h_source"/>
+        <childnode refid="5251" relation="include">
+        </childnode>
+        <childnode refid="5274" relation="include">
+        </childnode>
+        <childnode refid="5256" relation="include">
+        </childnode>
+      </node>
+      <node id="5255">
+        <label>Source/Samples/3_ClothSim/Inc/ClothSim/AppRenderer.h</label>
+        <link refid="3___cloth_sim_2_inc_2_cloth_sim_2_app_renderer_8h_source"/>
+      </node>
+      <node id="5250">
+        <label>Source/Camera/Inc/Camera/FlyThroughCamera.h</label>
+        <link refid="_fly_through_camera_8h_source"/>
+        <childnode refid="5251" relation="include">
+        </childnode>
+      </node>
+      <node id="5254">
+        <label>Source/Samples/1_ProceduralPlanet/Inc/ProceduralPlanet/AppRenderer.h</label>
+        <link refid="1___procedural_planet_2_inc_2_procedural_planet_2_app_renderer_8h_source"/>
+      </node>
+      <node id="5253">
+        <label>Source/Samples/0_TestZone/Inc/TestZone/AppRenderer.h</label>
+        <link refid="0___test_zone_2_inc_2_test_zone_2_app_renderer_8h_source"/>
+      </node>
+      <node id="5248">
+        <label>Source/Azura/RenderSystem/Test/RenderTestCases.h</label>
+        <link refid="_render_test_cases_8h_source"/>
+      </node>
+      <node id="5266">
+        <label>Source/Physics/Inc/Physics/Geometry/Edge.h</label>
+        <link refid="_edge_8h_source"/>
+        <childnode refid="5264" relation="include">
+        </childnode>
+        <childnode refid="5265" relation="include">
+        </childnode>
+      </node>
+      <node id="5270">
+        <label>Source/Samples/0_TestZone/Inc/TestZone/ClothCommon.h</label>
+        <link refid="_cloth_common_8h_source"/>
+        <childnode refid="5271" relation="include">
+        </childnode>
+        <childnode refid="5272" relation="include">
+        </childnode>
+      </node>
+      <node id="5268">
+        <label>Source/Physics/Inc/Physics/PBD/Cloth/ClothSolvingView.h</label>
+        <link refid="_cloth_solving_view_8h_source"/>
+        <childnode refid="5264" relation="include">
+        </childnode>
+        <childnode refid="5265" relation="include">
+        </childnode>
+      </node>
+      <node id="5258">
+        <label>Source/Samples/2_DeferredRenderer/Inc/Forward/ForwardScene.h</label>
+        <link refid="_forward_scene_8h_source"/>
+        <childnode refid="5251" relation="include">
+        </childnode>
+      </node>
+      <node id="5262">
+        <label>Source/Math/Inc/Math/Transform.h</label>
+        <link refid="_math_2_inc_2_math_2_transform_8h_source"/>
+      </node>
+      <node id="5260">
+        <label>Source/Math/Inc/Math/Icosphere.h</label>
+        <link refid="_icosphere_8h_source"/>
+      </node>
+      <node id="5252">
+        <label>Source/Camera/Inc/Camera/PolarCamera.h</label>
+        <link refid="_polar_camera_8h_source"/>
+        <childnode refid="5253" relation="include">
+        </childnode>
+        <childnode refid="5254" relation="include">
+        </childnode>
+        <childnode refid="5255" relation="include">
+        </childnode>
+      </node>
+      <node id="5261">
+        <label>Source/Math/Inc/Math/Plane.h</label>
+        <link refid="_plane_8h_source"/>
+        <childnode refid="5253" relation="include">
+        </childnode>
+      </node>
+      <node id="5256">
+        <label>Source/Samples/2_DeferredRenderer/Inc/App/Scene.h</label>
+        <link refid="_samples_22___deferred_renderer_2_inc_2_app_2_scene_8h_source"/>
+        <childnode refid="5251" relation="include">
+        </childnode>
+        <childnode refid="5257" relation="include">
+        </childnode>
+        <childnode refid="5258" relation="include">
+        </childnode>
+        <childnode refid="5259" relation="include">
+        </childnode>
+      </node>
+      <node id="5267">
+        <label>Source/Physics/Inc/Physics/PBD/Cloth/Constraints.h</label>
+        <link refid="_constraints_8h_source"/>
+        <childnode refid="5268" relation="include">
+        </childnode>
+      </node>
+      <node id="5264">
+        <label>Source/Physics/Inc/Physics/Geometry/ClothMesh.h</label>
+        <link refid="_physics_2_inc_2_physics_2_geometry_2_cloth_mesh_8h_source"/>
+        <childnode refid="5255" relation="include">
+        </childnode>
+      </node>
+    </invincdepgraph>
+    <innernamespace refid="namespace_azura">Azura</innernamespace>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <programlisting>
+<codeline lineno="1"><highlight class="preprocessor">#pragma<sp/>once</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="2"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&lt;mathfu/matrix.h&gt;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="3"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&quot;Types.h&quot;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="4"><highlight class="normal"></highlight></codeline>
+<codeline lineno="5"><highlight class="normal"></highlight><highlight class="keyword">namespace<sp/></highlight><highlight class="normal"><ref refid="namespace_azura" kindref="compound">Azura</ref></highlight></codeline>
+<codeline lineno="6"><highlight class="normal">{</highlight></codeline>
+<codeline lineno="7"><highlight class="normal"><sp/><sp/></highlight><highlight class="keyword">using</highlight><highlight class="normal"><sp/>Vector4d<sp/>=<sp/>mathfu::Vector&lt;double,<sp/>4&gt;;</highlight></codeline>
+<codeline lineno="8"><highlight class="normal"><sp/><sp/></highlight><highlight class="keyword">using</highlight><highlight class="normal"><sp/>Vector4f<sp/>=<sp/>mathfu::Vector&lt;float,<sp/>4&gt;;</highlight></codeline>
+<codeline lineno="9"><highlight class="normal"><sp/><sp/></highlight><highlight class="keyword">using</highlight><highlight class="normal"><sp/>Vector4i<sp/>=<sp/>mathfu::Vector&lt;int,<sp/>4&gt;;</highlight></codeline>
+<codeline lineno="10"><highlight class="normal"><sp/><sp/></highlight><highlight class="keyword">using</highlight><highlight class="normal"><sp/>Vector4u<sp/>=<sp/>mathfu::Vector&lt;U32,<sp/>4&gt;;</highlight></codeline>
+<codeline lineno="11"><highlight class="normal"></highlight></codeline>
+<codeline lineno="12"><highlight class="normal"><sp/><sp/></highlight><highlight class="keyword">using</highlight><highlight class="normal"><sp/>Vector3d<sp/>=<sp/>mathfu::Vector&lt;double,<sp/>3&gt;;</highlight></codeline>
+<codeline lineno="13"><highlight class="normal"><sp/><sp/></highlight><highlight class="keyword">using</highlight><highlight class="normal"><sp/>Vector3f<sp/>=<sp/>mathfu::Vector&lt;float,<sp/>3&gt;;</highlight></codeline>
+<codeline lineno="14"><highlight class="normal"><sp/><sp/></highlight><highlight class="keyword">using</highlight><highlight class="normal"><sp/>Vector3i<sp/>=<sp/>mathfu::Vector&lt;int,<sp/>3&gt;;</highlight></codeline>
+<codeline lineno="15"><highlight class="normal"><sp/><sp/></highlight><highlight class="keyword">using</highlight><highlight class="normal"><sp/>Vector3u<sp/>=<sp/>mathfu::Vector&lt;U32,<sp/>3&gt;;</highlight></codeline>
+<codeline lineno="16"><highlight class="normal"></highlight></codeline>
+<codeline lineno="17"><highlight class="normal"><sp/><sp/></highlight><highlight class="keyword">using</highlight><highlight class="normal"><sp/>Vector2d<sp/>=<sp/>mathfu::Vector&lt;double,<sp/>2&gt;;</highlight></codeline>
+<codeline lineno="18"><highlight class="normal"><sp/><sp/></highlight><highlight class="keyword">using</highlight><highlight class="normal"><sp/>Vector2f<sp/>=<sp/>mathfu::Vector&lt;float,<sp/>2&gt;;</highlight></codeline>
+<codeline lineno="19"><highlight class="normal"><sp/><sp/></highlight><highlight class="keyword">using</highlight><highlight class="normal"><sp/>Vector2i<sp/>=<sp/>mathfu::Vector&lt;int,<sp/>2&gt;;</highlight></codeline>
+<codeline lineno="20"><highlight class="normal"><sp/><sp/></highlight><highlight class="keyword">using</highlight><highlight class="normal"><sp/>Vector2u<sp/>=<sp/>mathfu::Vector&lt;U32,<sp/>2&gt;;</highlight></codeline>
+<codeline lineno="21"><highlight class="normal"></highlight></codeline>
+<codeline lineno="22"><highlight class="normal"><sp/><sp/></highlight><highlight class="keyword">using</highlight><highlight class="normal"><sp/>Matrix4d<sp/>=<sp/>mathfu::Matrix&lt;double,<sp/>4,<sp/>4&gt;;</highlight></codeline>
+<codeline lineno="23"><highlight class="normal"><sp/><sp/></highlight><highlight class="keyword">using</highlight><highlight class="normal"><sp/>Matrix4f<sp/>=<sp/>mathfu::Matrix&lt;float,<sp/>4,<sp/>4&gt;;</highlight></codeline>
+<codeline lineno="24"><highlight class="normal"><sp/><sp/></highlight><highlight class="keyword">using</highlight><highlight class="normal"><sp/>Matrix4i<sp/>=<sp/>mathfu::Matrix&lt;int,<sp/>4,<sp/>4&gt;;</highlight></codeline>
+<codeline lineno="25"><highlight class="normal"><sp/><sp/></highlight><highlight class="keyword">using</highlight><highlight class="normal"><sp/>Matrix4u<sp/>=<sp/>mathfu::Matrix&lt;U32,<sp/>4,<sp/>4&gt;;</highlight></codeline>
+<codeline lineno="26"><highlight class="normal"></highlight></codeline>
+<codeline lineno="27"><highlight class="normal"><sp/><sp/></highlight><highlight class="keyword">using</highlight><highlight class="normal"><sp/>Matrix3d<sp/>=<sp/>mathfu::Matrix&lt;double,<sp/>3,<sp/>3&gt;;</highlight></codeline>
+<codeline lineno="28"><highlight class="normal"><sp/><sp/></highlight><highlight class="keyword">using</highlight><highlight class="normal"><sp/>Matrix3f<sp/>=<sp/>mathfu::Matrix&lt;float,<sp/>3,<sp/>3&gt;;</highlight></codeline>
+<codeline lineno="29"><highlight class="normal"><sp/><sp/></highlight><highlight class="keyword">using</highlight><highlight class="normal"><sp/>Matrix3i<sp/>=<sp/>mathfu::Matrix&lt;int,<sp/>3,<sp/>3&gt;;</highlight></codeline>
+<codeline lineno="30"><highlight class="normal"><sp/><sp/></highlight><highlight class="keyword">using</highlight><highlight class="normal"><sp/>Matrix3u<sp/>=<sp/>mathfu::Matrix&lt;U32,<sp/>3,<sp/>3&gt;;</highlight></codeline>
+<codeline lineno="31"><highlight class="normal"></highlight></codeline>
+<codeline lineno="32"><highlight class="normal"><sp/><sp/></highlight><highlight class="keyword">using</highlight><highlight class="normal"><sp/>Matrix2d<sp/>=<sp/>mathfu::Matrix&lt;double,<sp/>2,<sp/>2&gt;;</highlight></codeline>
+<codeline lineno="33"><highlight class="normal"><sp/><sp/></highlight><highlight class="keyword">using</highlight><highlight class="normal"><sp/>Matrix2f<sp/>=<sp/>mathfu::Matrix&lt;float,<sp/>2,<sp/>2&gt;;</highlight></codeline>
+<codeline lineno="34"><highlight class="normal"><sp/><sp/></highlight><highlight class="keyword">using</highlight><highlight class="normal"><sp/>Matrix2i<sp/>=<sp/>mathfu::Matrix&lt;int,<sp/>2,<sp/>2&gt;;</highlight></codeline>
+<codeline lineno="35"><highlight class="normal"><sp/><sp/></highlight><highlight class="keyword">using</highlight><highlight class="normal"><sp/>Matrix2u<sp/>=<sp/>mathfu::Matrix&lt;U32,<sp/>2,<sp/>2&gt;;</highlight></codeline>
+<codeline lineno="36"><highlight class="normal"></highlight></codeline>
+<codeline lineno="37"><highlight class="normal"><sp/><sp/></highlight><highlight class="keyword">using</highlight><highlight class="normal"><sp/>Color4d<sp/>=<sp/>Vector4d;</highlight></codeline>
+<codeline lineno="38"><highlight class="normal"><sp/><sp/></highlight><highlight class="keyword">using</highlight><highlight class="normal"><sp/>Color4f<sp/>=<sp/>Vector4f;</highlight></codeline>
+<codeline lineno="39"><highlight class="normal"><sp/><sp/></highlight><highlight class="keyword">using</highlight><highlight class="normal"><sp/>Color4i<sp/>=<sp/>Vector4i;</highlight></codeline>
+<codeline lineno="40"><highlight class="normal"><sp/><sp/></highlight><highlight class="keyword">using</highlight><highlight class="normal"><sp/>Color4u<sp/>=<sp/>Vector4u;</highlight></codeline>
+<codeline lineno="41"><highlight class="normal"></highlight></codeline>
+<codeline lineno="42"><highlight class="normal"><sp/><sp/></highlight><highlight class="keyword">using</highlight><highlight class="normal"><sp/>Color3d<sp/>=<sp/>Vector3d;</highlight></codeline>
+<codeline lineno="43"><highlight class="normal"><sp/><sp/></highlight><highlight class="keyword">using</highlight><highlight class="normal"><sp/>Color3f<sp/>=<sp/>Vector3f;</highlight></codeline>
+<codeline lineno="44"><highlight class="normal"><sp/><sp/></highlight><highlight class="keyword">using</highlight><highlight class="normal"><sp/>Color3i<sp/>=<sp/>Vector3i;</highlight></codeline>
+<codeline lineno="45"><highlight class="normal"><sp/><sp/></highlight><highlight class="keyword">using</highlight><highlight class="normal"><sp/>Color3u<sp/>=<sp/>Vector3u;</highlight></codeline>
+<codeline lineno="46"><highlight class="normal"></highlight></codeline>
+<codeline lineno="47"><highlight class="normal"><sp/><sp/></highlight><highlight class="keyword">using</highlight><highlight class="normal"><sp/>Normal3d<sp/>=<sp/>Vector3d;</highlight></codeline>
+<codeline lineno="48"><highlight class="normal"><sp/><sp/></highlight><highlight class="keyword">using</highlight><highlight class="normal"><sp/>Normal3f<sp/>=<sp/>Vector3f;</highlight></codeline>
+<codeline lineno="49"><highlight class="normal"></highlight></codeline>
+<codeline lineno="50"><highlight class="normal"><sp/><sp/></highlight><highlight class="keyword">enum</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="51"><highlight class="normal"><sp/><sp/>{</highlight></codeline>
+<codeline lineno="52"><highlight class="normal"><sp/><sp/><sp/><sp/>AxisX<sp/>=<sp/>0,</highlight></codeline>
+<codeline lineno="53"><highlight class="normal"><sp/><sp/><sp/><sp/>AxisY<sp/>=<sp/>1,</highlight></codeline>
+<codeline lineno="54"><highlight class="normal"><sp/><sp/><sp/><sp/>AxisZ<sp/>=<sp/>2,</highlight></codeline>
+<codeline lineno="55"><highlight class="normal"><sp/><sp/><sp/><sp/>AxisW<sp/>=<sp/>3</highlight></codeline>
+<codeline lineno="56"><highlight class="normal"><sp/><sp/>};</highlight></codeline>
+<codeline lineno="57"><highlight class="normal"></highlight></codeline>
+<codeline lineno="58"><highlight class="normal"></highlight></codeline>
+<codeline lineno="59"><highlight class="normal"><sp/><sp/>constexpr<sp/></highlight><highlight class="keywordtype">float</highlight><highlight class="normal"><sp/>EPSILON<sp/>=<sp/>0.000001f;</highlight></codeline>
+<codeline lineno="60"><highlight class="normal">}</highlight></codeline>
+    </programlisting>
+    <location file="Source/Math/Inc/Math/Core.h"/>
+  </compounddef>
+</doxygen>

@@ -1,0 +1,212 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.8.14">
+  <compounddef id="class_azura_1_1_texture_manager" kind="class" language="C++" prot="public">
+    <compoundname>Azura::TextureManager</compoundname>
+    <derivedcompoundref refid="class_azura_1_1_d3_d12_1_1_d3_d12_texture_manager" prot="public" virt="non-virtual">Azura::D3D12::D3D12TextureManager</derivedcompoundref>
+    <derivedcompoundref refid="class_azura_1_1_vulkan_1_1_vk_texture_manager" prot="public" virt="non-virtual">Azura::Vulkan::VkTextureManager</derivedcompoundref>
+    <innerclass refid="struct_azura_1_1_texture_manager_1_1_texture_entry" prot="private">Azura::TextureManager::TextureEntry</innerclass>
+      <sectiondef kind="private-static-attrib">
+      <memberdef kind="variable" id="class_azura_1_1_texture_manager_1a51beea1a1b0117d673deaca6d9203e3a" prot="private" static="yes" mutable="no">
+        <type>U32</type>
+        <definition>U32 Azura::TextureManager::s_currentTextureId</definition>
+        <argsstring></argsstring>
+        <name>s_currentTextureId</name>
+        <initializer>= 0</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Source/Azura/RenderSystem/Inc/Generic/TextureManager.h" line="23" column="1" bodyfile="Source/Azura/RenderSystem/Inc/Generic/TextureManager.h" bodystart="23" bodyend="-1"/>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="public-attrib">
+      <memberdef kind="variable" id="class_azura_1_1_texture_manager_1affc07fdb731ae7a7cb7f259064abfdc9" prot="public" static="no" mutable="no">
+        <type><ref refid="class_azura_1_1_log" kindref="compound">Log</ref></type>
+        <definition>Log Azura::TextureManager::log_TextureManager</definition>
+        <argsstring></argsstring>
+        <name>log_TextureManager</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Source/Azura/RenderSystem/Inc/Generic/TextureManager.h" line="31" column="1" bodyfile="Source/Azura/RenderSystem/Inc/Generic/TextureManager.h" bodystart="31" bodyend="-1"/>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="private-attrib">
+      <memberdef kind="variable" id="class_azura_1_1_texture_manager_1a097d0c13f059d6ebf4e8b88823c5ed70" prot="private" static="no" mutable="no">
+        <type>const U32</type>
+        <definition>const U32 Azura::TextureManager::m_maxTextures</definition>
+        <argsstring></argsstring>
+        <name>m_maxTextures</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Source/Azura/RenderSystem/Inc/Generic/TextureManager.h" line="34" column="1" bodyfile="Source/Azura/RenderSystem/Inc/Generic/TextureManager.h" bodystart="34" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="class_azura_1_1_texture_manager_1ae0eacc019cf6a78956e7d3b9f0cadb71" prot="private" static="no" mutable="no">
+        <type><ref refid="class_azura_1_1_memory_1_1_heap_memory_buffer" kindref="compound">Memory::HeapMemoryBuffer</ref></type>
+        <definition>Memory::HeapMemoryBuffer Azura::TextureManager::m_textureBuffer</definition>
+        <argsstring></argsstring>
+        <name>m_textureBuffer</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Source/Azura/RenderSystem/Inc/Generic/TextureManager.h" line="35" column="1" bodyfile="Source/Azura/RenderSystem/Inc/Generic/TextureManager.h" bodystart="35" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="class_azura_1_1_texture_manager_1af563ebebc18c9e2cb7341e3207da899c" prot="private" static="no" mutable="no">
+        <type><ref refid="class_azura_1_1_memory_1_1_monotonic_allocator" kindref="compound">Memory::MonotonicAllocator</ref></type>
+        <definition>Memory::MonotonicAllocator Azura::TextureManager::m_textureAllocator</definition>
+        <argsstring></argsstring>
+        <name>m_textureAllocator</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Source/Azura/RenderSystem/Inc/Generic/TextureManager.h" line="36" column="1" bodyfile="Source/Azura/RenderSystem/Inc/Generic/TextureManager.h" bodystart="36" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="class_azura_1_1_texture_manager_1a63c2547df80b528768ee51f9877d7a6d" prot="private" static="no" mutable="no">
+        <type><ref refid="class_azura_1_1_containers_1_1_vector" kindref="compound">Containers::Vector</ref>&lt; TextureEntry &gt;</type>
+        <definition>Containers::Vector&lt;TextureEntry&gt; Azura::TextureManager::m_storedTextures</definition>
+        <argsstring></argsstring>
+        <name>m_storedTextures</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Source/Azura/RenderSystem/Inc/Generic/TextureManager.h" line="37" column="1" bodyfile="Source/Azura/RenderSystem/Inc/Generic/TextureManager.h" bodystart="37" bodyend="-1"/>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="public-func">
+      <memberdef kind="function" id="class_azura_1_1_texture_manager_1a414e5566b730c18e38092bde84becbfb" prot="public" static="no" const="no" explicit="yes" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>Azura::TextureManager::TextureManager</definition>
+        <argsstring>(const TextureRequirements &amp;requirements)</argsstring>
+        <name>TextureManager</name>
+        <param>
+          <type>const <ref refid="struct_azura_1_1_texture_requirements" kindref="compound">TextureRequirements</ref> &amp;</type>
+          <declname>requirements</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Source/Azura/RenderSystem/Inc/Generic/TextureManager.h" line="26" column="1" bodyfile="Source/Azura/RenderSystem/Src/Generic/TextureManager.cpp" bodystart="15" bodyend="23"/>
+      </memberdef>
+      <memberdef kind="function" id="class_azura_1_1_texture_manager_1a442021de0e3bd9a4a90d467fdfdf933c" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>U32</type>
+        <definition>U32 Azura::TextureManager::Load</definition>
+        <argsstring>(const String &amp;path)</argsstring>
+        <name>Load</name>
+        <param>
+          <type>const String &amp;</type>
+          <declname>path</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Source/Azura/RenderSystem/Inc/Generic/TextureManager.h" line="27" column="1" bodyfile="Source/Azura/RenderSystem/Src/Generic/TextureManager.cpp" bodystart="25" bodyend="73"/>
+      </memberdef>
+      <memberdef kind="function" id="class_azura_1_1_texture_manager_1aafa04e581bef7296c79f15288e2d640c" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
+        <type>const <ref refid="struct_azura_1_1_texture_desc" kindref="compound">TextureDesc</ref> *</type>
+        <definition>const TextureDesc * Azura::TextureManager::GetInfo</definition>
+        <argsstring>(U32 handle) const</argsstring>
+        <name>GetInfo</name>
+        <param>
+          <type>U32</type>
+          <declname>handle</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Source/Azura/RenderSystem/Inc/Generic/TextureManager.h" line="28" column="1" bodyfile="Source/Azura/RenderSystem/Src/Generic/TextureManager.cpp" bodystart="75" bodyend="85"/>
+      </memberdef>
+      <memberdef kind="function" id="class_azura_1_1_texture_manager_1a7e7e91eb4b5b067a3cc72ecd4f2e1e69" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
+        <type>const U8 *</type>
+        <definition>const U8 * Azura::TextureManager::GetData</definition>
+        <argsstring>(U32 handle) const</argsstring>
+        <name>GetData</name>
+        <param>
+          <type>U32</type>
+          <declname>handle</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Source/Azura/RenderSystem/Inc/Generic/TextureManager.h" line="29" column="1" bodyfile="Source/Azura/RenderSystem/Src/Generic/TextureManager.cpp" bodystart="87" bodyend="96"/>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <inheritancegraph>
+      <node id="567">
+        <label>Azura::TextureManager</label>
+        <link refid="class_azura_1_1_texture_manager"/>
+      </node>
+      <node id="569">
+        <label>Azura::Vulkan::VkTextureManager</label>
+        <link refid="class_azura_1_1_vulkan_1_1_vk_texture_manager"/>
+        <childnode refid="567" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="568">
+        <label>Azura::D3D12::D3D12TextureManager</label>
+        <link refid="class_azura_1_1_d3_d12_1_1_d3_d12_texture_manager"/>
+        <childnode refid="567" relation="public-inheritance">
+        </childnode>
+      </node>
+    </inheritancegraph>
+    <collaborationgraph>
+      <node id="570">
+        <label>Azura::TextureManager</label>
+        <link refid="class_azura_1_1_texture_manager"/>
+        <childnode refid="571" relation="usage">
+          <edgelabel>log_TextureManager</edgelabel>
+        </childnode>
+      </node>
+      <node id="571">
+        <label>Azura::Log</label>
+        <link refid="class_azura_1_1_log"/>
+      </node>
+    </collaborationgraph>
+    <location file="Source/Azura/RenderSystem/Inc/Generic/TextureManager.h" line="13" column="1" bodyfile="Source/Azura/RenderSystem/Inc/Generic/TextureManager.h" bodystart="12" bodyend="38"/>
+    <listofallmembers>
+      <member refid="class_azura_1_1_texture_manager_1a7e7e91eb4b5b067a3cc72ecd4f2e1e69" prot="public" virt="non-virtual"><scope>Azura::TextureManager</scope><name>GetData</name></member>
+      <member refid="class_azura_1_1_texture_manager_1aafa04e581bef7296c79f15288e2d640c" prot="public" virt="non-virtual"><scope>Azura::TextureManager</scope><name>GetInfo</name></member>
+      <member refid="class_azura_1_1_texture_manager_1a442021de0e3bd9a4a90d467fdfdf933c" prot="public" virt="non-virtual"><scope>Azura::TextureManager</scope><name>Load</name></member>
+      <member refid="class_azura_1_1_texture_manager_1affc07fdb731ae7a7cb7f259064abfdc9" prot="public" virt="non-virtual"><scope>Azura::TextureManager</scope><name>log_TextureManager</name></member>
+      <member refid="class_azura_1_1_texture_manager_1a097d0c13f059d6ebf4e8b88823c5ed70" prot="private" virt="non-virtual"><scope>Azura::TextureManager</scope><name>m_maxTextures</name></member>
+      <member refid="class_azura_1_1_texture_manager_1a63c2547df80b528768ee51f9877d7a6d" prot="private" virt="non-virtual"><scope>Azura::TextureManager</scope><name>m_storedTextures</name></member>
+      <member refid="class_azura_1_1_texture_manager_1af563ebebc18c9e2cb7341e3207da899c" prot="private" virt="non-virtual"><scope>Azura::TextureManager</scope><name>m_textureAllocator</name></member>
+      <member refid="class_azura_1_1_texture_manager_1ae0eacc019cf6a78956e7d3b9f0cadb71" prot="private" virt="non-virtual"><scope>Azura::TextureManager</scope><name>m_textureBuffer</name></member>
+      <member refid="class_azura_1_1_texture_manager_1a51beea1a1b0117d673deaca6d9203e3a" prot="private" virt="non-virtual"><scope>Azura::TextureManager</scope><name>s_currentTextureId</name></member>
+      <member refid="class_azura_1_1_texture_manager_1a414e5566b730c18e38092bde84becbfb" prot="public" virt="non-virtual"><scope>Azura::TextureManager</scope><name>TextureManager</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>
