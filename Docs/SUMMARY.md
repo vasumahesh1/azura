@@ -1,10 +1,19 @@
-# Table of contents
+# SUMMARY
 
-* [README](README.md)
-* [Docs](docs/README.md)
-  * [Module - Common](docs/module-common.md)
-* [BENCHMARKS](benchmarks.md)
-* [Build Instructions](build-instructions.md)
-* [Setting Up](setting-up.md)
-* [CMake Wrappers](cmake-wrappers.md)
+## Azura
 
+A repository containing tools for real-time rendering, general C++, memory allocators, path tracers and more!
+
+Active Platforms on Azura:
+
+| Windows | Linux |
+| :--- | :---: |
+| [![Build Status: Windows](https://ci.appveyor.com/api/projects/status/github/vasumahesh1/azura)](https://ci.appveyor.com/project/vasumahesh1/azura) | Soon\(tm\) |
+
+Active Draw APIs on Azura:
+
+| D3D12 | Vulkan |
+| :---: | :---: |
+| Supported | Supported |
+
+![](https://github.com/vasumahesh1/azura/raw/dev/Source/Samples/1_ProceduralPlanet/Images/planet_low.gif)
