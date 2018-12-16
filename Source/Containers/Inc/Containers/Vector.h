@@ -14,65 +14,284 @@
 
 namespace Azura {
 namespace Containers {
+
+/**
+ * \brief      A struct defining the bounds of a container
+ *
+ * \ingroup    Containers
+ *
+ * \struct
+ *
+ * \details    This struct holds two important sizes for containers.
+ * A current size and a reserved size.
+ * 
+ * There are two ways to initialize this extent.
+ * 
+ * ```cpp
+ * auto extent1 = ContainerExtent{0, 5}; // Size = 0; ReservedSize = 5;
+ * auto extent2 = ContainerExtent{5}; // Size = 5; ReservedSize = 5;
+ * ``` 
+ */
 struct ContainerExtent {
   U32 m_size;
   U32 m_reserveSize;
 
+  /**
+   * \brief      Constructs a ContainerExtent with the same size and reserved size.
+   *
+   * \ingroup    Containers
+   *
+   * \param[in]  size  The container size
+   */
   explicit ContainerExtent(const U32 size)
     : m_size(size),
       m_reserveSize(size) {
   }
 
+  /**
+   * \brief      Constructs a ContainerExtent with the specified size and reservataion size.
+   *
+   * \ingroup    Containers
+   *
+   * \param[in]  size         The size
+   * \param[in]  reserveSize  The reserve size
+   */
   ContainerExtent(const U32 size, const U32 reserveSize)
     : m_size(size),
       m_reserveSize(reserveSize) {
   }
 };
 
+/**
+ * \brief      Class for customized vector.
+ *
+ * \ingroup    Containers
+ *
+ * \details    This class is used to construct a customized Azura vector.
+ * Azura vectors take advantage of a custom allocator. The custom allocators allows
+ * them to be created on the Stack or the Heap.
+ * 
+ * They also don't "allocate" new memory.
+ * Allocation is handled by the supplied Azura::Memory::Allocator class.
+ * 
+ * Azura Vectors are also "reserve" first.
+ * This basically means that the vector reserves a chunk first, instead of reserving and initializing like std::vector.
+ * This is probably the main difference between the two. Here is an example:
+ * 
+ * ```cpp
+ * Containers::Vector<int> arr(5, allocator);
+ * // above code allocates a memory upto 5 ints. But arr[0 to 4] doesn't exist.
+ * // arr.GetSize() will be 0
+ * // arr.GetMaxSize() will be 5
+ * 
+ * std::vector<int> arr(5);
+ * // above code allocates and initializes a memory upto 5 ints.
+ * // arr.size() will be 5
+ * // arr.capacity() will be 5
+ * ```
+ * 
+ * Both vectors tend to grow. But growing vectors are bad so watch out.
+ * Pre-allocate as much as you can beforehand.
+ * 
+ * The API for Azura Vector is similar but Pascal Case'd mostly.
+ * Example:
+ * 
+ * ```cpp
+ * Containers::Vector<int> arr(5, allocator);
+ * arr.PushBack(0); // similar to push_back
+ * arr.Begin();
+ * arr.End();
+ * ```
+ * Pascal case was selected because Azura keeps the API similar across all C++ code.
+ * And most of the Game Engine code that was initially built followed this scheme. 
+ * 
+ * \tparam     Type  Datatype of the vector
+ */
 template <typename Type>
 class Vector {
 public:
-  Vector() = default;
+
+  /**
+   * \brief      Constructs a 0 sized vector with an allocator
+   *
+   * \details    An empty vector doesn't reserve any space on the allocator.
+   * It is required to reserve the vector before you use it.
+   * 
+   * Example:
+   * ```cpp
+   * Containers::Vector<int> arr(allocator);
+   * // The vector is still of size 0. The capacity is 0.
+   * 
+   * // ...
+   * // Later in code
+   * // ...
+   * 
+   * arr.Resize(5);
+   * // This allocates a 5 sized int vector
+   * // The vector is of size 5. The capacity is 5.
+   * 
+   * // ---- OR ----
+   * 
+   * arr.Reserve(5);
+   * // This allocates a 5 sized int vector
+   * // The vector is still of size 0. The capacity is 5.
+   * 
+   * ```
+   * \param      alloc    The allocator
+   */
   explicit Vector(Memory::Allocator& alloc);
 
+  /**
+   * \brief      Constructs a vector accepting reserved size and allocator
+   *
+   * \details    This constructor **reserves** the specified size in the vector.
+   * The vector is of still size 0.
+   * 
+   * Example:
+   * ```cpp
+   * Containers::Vector<int> arr(5, allocator);
+   * 
+   * // This allocates a 5 sized int vector
+   * // The vector is still of size 0. The capacity is 5.
+   * ```
+   *
+   * \param[in]  maxSize  The maximum size
+   * \param      alloc    The allocator
+   */
   Vector(UINT maxSize, Memory::Allocator& alloc);
 
+  /**
+   * \brief      Construct a vector using size and max size.
+   *
+   * \details    This constructor **reserves and constructs** the specified sizes in the vector.
+   * 
+   * Example:
+   * ```cpp
+   * Containers::Vector<int> arr(2, 5, allocator);
+   * 
+   * // This allocates a 5 sized int vector
+   * // The vector is of size 2. The capacity is 5.
+   * ```
+   *
+   * \param[in]  currentSize  The current size
+   * \param[in]  maxSize      The maximum size
+   * \param      alloc        The allocator
+   */
   Vector(UINT currentSize, UINT maxSize, Memory::Allocator& alloc);
 
-
+  /**
+   * \brief      Construct a vector using an initializer list
+   *
+   * \details
+   * 
+   * Example:
+   * ```cpp
+   * Containers::Vector<int> arr({1, 2, 3, 4, 5}, allocator);
+   * 
+   * // This allocates a 5 sized int vector with that values
+   * // The vector is of size 5. The capacity is 5.
+   * ```
+   *
+   * \param[in]  list   The list
+   * \param      alloc  The allocator
+   */
   Vector(const std::initializer_list<Type>& list, Memory::Allocator& alloc);
 
+  /**
+   * \brief      Constructs the vector using the extent.
+   * 
+   * \details    Also, you can provide initialization arguments along with the extent.
+   * 
+   * Example:
+   * ```cpp
+   * Containers::Vector<int> arr(ContainerExtent{5}, allocator, 6);
+   * 
+   * // This allocates a 5 sized int vector with the value 6.
+   * // The vector is of size 5. The capacity is 5.
+   * ```
+   *
+   * \param[in]  extent     The extent
+   * \param      alloc      The allocator
+   * \param[in]  args       Initialization arguments
+   *
+   * \tparam     Args       Arguments
+   */
   template <typename... Args>
   Vector(ContainerExtent extent, Memory::Allocator& alloc, Args&&... args);
 
+  /**
+   * \brief      Destroys the vector and frees the memory in the allocator.
+   */
   ~Vector();
 
-  // Copy Ctor
   Vector(const Vector& other);
-
   Vector(const Vector & other, Memory::Allocator & alloc);
-
-  // Move Ctor
   Vector(Vector&& other) noexcept;
-
   Vector& operator=(const Vector& other);
   Vector& operator=(Vector&& other) noexcept;
 
   /**
-   * \brief Appends data to the end of the vector
+   * \brief      Appends data to the end of the vector
+   * 
+   * \details    The vector also doubles its size incase it fills up. Recommended to pre-allocate as much as you can.
+   * 
+   * Example:
+   * ```cpp
+   * Containers::Vector<int> arr(5, allocator);
+   * // The vector is of size 0. The capacity is 5.
+   * 
+   * arr.PushBack(1);
+   * // The vector is of size 1. The capacity is 5.
+   * 
+   * arr.PushBack(2);
+   * // The vector is of size 2. The capacity is 5.
+   * 
+   * arr.PushBack(3);
+   * // The vector is of size 3. The capacity is 5.
+   * 
+   * arr.PushBack(4);
+   * // The vector is of size 4. The capacity is 5.
+   * ```
+   * 
    * \param data Data to push
    */
   void PushBack(const Type& data);
 
   /**
-   * \brief Appends data to the end of the vector
-   * \param data Data to push
+   * \copydoc Vector::PushBack(const Type&)
    */
   void PushBack(Type&& data);
 
   /**
-   * \brief Appends data to the end of the vector
-   * \param args Arguments for emplacement
+   * \brief      Appends data to the end of the vector by emplacing (like regular vector)
+   * 
+   * \details    The vector also doubles its size incase it fills up. Recommended to pre-allocate as much as you can.
+   * 
+   * The arguments are the initialization parameters for the Type.
+   * 
+   * Example:
+   * ```cpp
+   * MyClass {
+   * public:
+   *   MyClass(int a) : data(a) {}
+   *   
+   * private:
+   *   int data;
+   * };
+   * 
+   * Containers::Vector<MyClass> arr(5, allocator);
+   * // The vector is of size 0. The capacity is 5.
+   * 
+   * arr.EmplaceBack(1); // Creates a MyClass{1} at the memory location
+   * // The vector is of size 1. The capacity is 5.
+   * 
+   * arr.EmplaceBack(2); // Creates a MyClass{2} at the memory location
+   * // The vector is of size 2. The capacity is 5.
+   * ```
+   * 
+   * \param args Arguments to push
+   * 
+   * \tparam     Args       Arguments
    */
   template <typename... Args>
   void EmplaceBack(Args ... args);
@@ -83,34 +302,88 @@ public:
   void PopBack();
 
   /**
-   * \brief Searches for the data in the Vector
+   * \brief Searches for the data in the vector.
+   * 
    * \param data Data to search for
+   * 
    * \return Index if Found, else -1
    */
   int FindFirst(const Type& data);
 
   /**
-   * \brief Searches for the given data in the vector and removes it
+   * \brief Searches for the given data in the vector and removes it.
+   *
    * \param data Data to Search for and Remove
    */
   void Remove(const Type& data);
 
   /**
-   * \brief Reserves a max contiguous block for the vector
-   * Use only when you didn't supply a maxSize in the constructor.
-   * \param maxSize Maxium Possible Size
+   * \brief      Reserves a contiguous block for the vector.
+   * 
+   * \details    Use this when you didn't provide an initial size for the vector.
+   * The growth of the vector is not controlled by this.
+   * Using Reserve **after** storing the data in the vector will lead an undefined behavior.
+   * Use this only once.
+   * 
+   * Example:
+   * ```cpp
+   * Containers::Vector<int> arr(allocator);
+   * // The vector is still of size 0. The capacity is 0.
+   * 
+   * // ...
+   * // Later in code
+   * // ...
+   *
+   * arr.Reserve(5);
+   * // This allocates a 5 sized int vector
+   * // The vector is still of size 0. The capacity is 5.
+   *
+   * ```
+   *
+   * \param requiredSize Required Size
    */
-  void Reserve(U32 maxSize);
-  void Resize(U32 maxSize);
+  void Reserve(U32 requiredSize);
+
+  /**
+   * \brief      Reserves a contiguous block for the vector and sets the size to the value specified.
+   * 
+   * \details    Also, sets the size to the specified value.
+   * Use this when you didn't provide an initial size for the vector.
+   * The growth of the vector is not controlled by this.
+   * Using Resize **after** storing the data in the vector will lead an undefined behavior.
+   * Use this only once.
+   * 
+   * Example:
+   * ```cpp
+   * Containers::Vector<int> arr(allocator);
+   * // The vector is still of size 0. The capacity is 0.
+   * 
+   * // ...
+   * // Later in code
+   * // ...
+   *
+   * arr.Resize(5);
+   * // This allocates a 5 sized int vector
+   * // The vector is now of size 5. The capacity is 5.
+   *
+   * ```
+   *
+   * \param requiredSize Required Size
+   */
+  void Resize(U32 requiredSize);
 
   /**
    * \brief Checks if the container is empty
-   * \return true if empty
+   *
+   * \return `true` if empty
    */
   bool IsEmpty() const;
 
   /**
    * \brief Inserts the supplied data at the index
+   *
+   * \todo Better Documentation
+   *
    * \param idx Target Index
    * \param data Data to insert
    */
@@ -118,12 +391,64 @@ public:
 
   /**
    * \brief Gets the Data pointer
+   * 
+   * \details
+   * 
+   * Example:
+   * ```cpp
+   * Containers::Vector<int> arr(5, allocator);
+   * // The vector is still of size 0. The capacity is 5.
+   * 
+   * arr.Data() // is of type int*
+   * ```
+   * 
    */
   Type* Data();
 
+  /**
+   * \copybrief Vector::Data()
+   *
+   * \copydetails Vector::Data()
+   * Useful as a constant pointer when compared to its other overload.
+   */
   const Type* Data() const;
 
+  /**
+   * \brief Empties the vector.
+   * 
+   * \details But, it doesn't deallocate anything.
+   * It is meant to reuse the allocated memory.
+   * 
+   * Example:
+   * ```cpp
+   * Containers::Vector<int> arr(5, allocator);
+   * // The vector is of size 0. The capacity is 5.
+   * 
+   * arr.PushBack(1);
+   * // The vector is of size 1. The capacity is 5.
+   * 
+   * arr.PushBack(2);
+   * // The vector is of size 2. The capacity is 5.
+   * 
+   * arr.PushBack(3);
+   * // The vector is of size 3. The capacity is 5.
+   * 
+   * arr.PushBack(4);
+   * // The vector is of size 4. The capacity is 5.
+   * 
+   * arr.Reset(); // Or Clear();
+   * // The vector is of size 0. The capacity is 5.
+   * ```
+   * 
+   */
   void Reset();
+
+  /**
+   * \copybrief void Vector::Reset()
+   *
+   * \copydetails void Vector::Reset()
+   */
+  void Clear();
 
   Type& operator[](U32 idx);
   Type& operator[](U32 idx) const;
@@ -558,15 +883,15 @@ void Vector<Type>::Remove(const Type& data) {
 }
 
 template <typename Type>
-void Vector<Type>::Reserve(U32 maxSize) {
-  m_maxSize = maxSize;
+void Vector<Type>::Reserve(U32 requiredSize) {
+  m_maxSize = requiredSize;
   m_base    = m_allocator.get().RawNewArray<Type>(m_maxSize);
 }
 
 template <typename Type>
-void Vector<Type>::Resize(U32 maxSize) {
-  m_maxSize = maxSize;
-  m_size    = maxSize;
+void Vector<Type>::Resize(U32 requiredSize) {
+  m_maxSize = requiredSize;
+  m_size    = requiredSize;
   m_base    = m_allocator.get().RawNewArray<Type>(m_maxSize);
 }
 
@@ -598,6 +923,11 @@ const Type* Vector<Type>::Data() const {
 
 template <typename Type>
 void Vector<Type>::Reset() {
+  m_size = 0;
+}
+
+template <typename Type>
+void Vector<Type>::Clear() {
   m_size = 0;
 }
 

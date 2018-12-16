@@ -55,8 +55,6 @@ public:
    * \tparam Args Initialization Arguments
    * \param args The list of arguments that Type needs for construction
    *
-   * \warning Can return a nullptr in case of failed Allocation
-   *
    * \return A unique pointer with a custom deleter
    */
   template <typename Type, typename... Args>

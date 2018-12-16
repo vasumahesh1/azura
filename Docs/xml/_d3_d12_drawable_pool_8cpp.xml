@@ -1119,7 +1119,7 @@
 <codeline lineno="607"><highlight class="normal">}</highlight></codeline>
 <codeline lineno="608"><highlight class="normal"></highlight></codeline>
 <codeline lineno="609"><highlight class="normal"></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/>D3D12DrawablePool::GetRecordEntries(<ref refid="class_azura_1_1_containers_1_1_vector" kindref="compound">Vector</ref>&lt;std::pair&lt;U32,<sp/>D3D12RenderPassRecordEntry&gt;&gt;&amp;<sp/>recordList)</highlight><highlight class="keyword"><sp/>const<sp/></highlight><highlight class="normal">{</highlight></codeline>
-<codeline lineno="610"><highlight class="normal"><sp/><sp/>recordList.<ref refid="class_azura_1_1_containers_1_1_vector_1af9aea7a8da9e449530132e50d85ca221" kindref="member">Reserve</ref>(m_renderPasses.GetSize());</highlight></codeline>
+<codeline lineno="610"><highlight class="normal"><sp/><sp/>recordList.<ref refid="class_azura_1_1_containers_1_1_vector_1af53da95e8dee524b3b12f2208079741f" kindref="member">Reserve</ref>(m_renderPasses.GetSize());</highlight></codeline>
 <codeline lineno="611"><highlight class="normal"></highlight></codeline>
 <codeline lineno="612"><highlight class="normal"><sp/><sp/>U32<sp/>idx<sp/>=<sp/>0;</highlight></codeline>
 <codeline lineno="613"><highlight class="normal"><sp/><sp/></highlight><highlight class="keywordflow">for</highlight><highlight class="normal"><sp/>(</highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">auto</highlight><highlight class="normal">&amp;<sp/>renderPass<sp/>:<sp/>m_renderPasses)<sp/>{</highlight></codeline>

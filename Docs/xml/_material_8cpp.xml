@@ -5,71 +5,71 @@
     <includes refid="_material_8h" local="yes">Material.h</includes>
     <includes local="yes">../../Interfaces/ImageHandler.h</includes>
     <incdepgraph>
-      <node id="5096">
+      <node id="5098">
         <label>mathfu/vector.h</label>
       </node>
-      <node id="5099">
+      <node id="5101">
         <label>Constants.h</label>
         <link refid="_dibella_2_inc_2_core_2_constants_8h_source"/>
-        <childnode refid="5091" relation="include">
+        <childnode refid="5093" relation="include">
         </childnode>
       </node>
-      <node id="5090">
+      <node id="5092">
         <label>Material.h</label>
         <link refid="_material_8h_source"/>
-        <childnode refid="5091" relation="include">
-        </childnode>
-        <childnode refid="5097" relation="include">
-        </childnode>
-      </node>
-      <node id="5097">
-        <label>../../Core/Utils.h</label>
-        <link refid="_dibella_2_inc_2_core_2_utils_8h_source"/>
-        <childnode refid="5098" relation="include">
+        <childnode refid="5093" relation="include">
         </childnode>
         <childnode refid="5099" relation="include">
         </childnode>
-        <childnode refid="5091" relation="include">
+      </node>
+      <node id="5099">
+        <label>../../Core/Utils.h</label>
+        <link refid="_dibella_2_inc_2_core_2_utils_8h_source"/>
+        <childnode refid="5100" relation="include">
         </childnode>
-      </node>
-      <node id="5100">
-        <label>../../Interfaces/ImageHandler.h</label>
-      </node>
-      <node id="5094">
-        <label>string</label>
-      </node>
-      <node id="5091">
-        <label>../../Core/Types.h</label>
-        <link refid="_dibella_2_inc_2_core_2_types_8h_source"/>
-        <childnode refid="5092" relation="include">
+        <childnode refid="5101" relation="include">
         </childnode>
         <childnode refid="5093" relation="include">
         </childnode>
+      </node>
+      <node id="5102">
+        <label>../../Interfaces/ImageHandler.h</label>
+      </node>
+      <node id="5096">
+        <label>string</label>
+      </node>
+      <node id="5093">
+        <label>../../Core/Types.h</label>
+        <link refid="_dibella_2_inc_2_core_2_types_8h_source"/>
         <childnode refid="5094" relation="include">
         </childnode>
         <childnode refid="5095" relation="include">
         </childnode>
         <childnode refid="5096" relation="include">
         </childnode>
+        <childnode refid="5097" relation="include">
+        </childnode>
+        <childnode refid="5098" relation="include">
+        </childnode>
       </node>
-      <node id="5089">
+      <node id="5091">
         <label>Source/Dibella/Src/Materials/Primitives/Material.cpp</label>
         <link refid="_material_8cpp"/>
-        <childnode refid="5090" relation="include">
+        <childnode refid="5092" relation="include">
         </childnode>
-        <childnode refid="5100" relation="include">
+        <childnode refid="5102" relation="include">
         </childnode>
       </node>
-      <node id="5092">
+      <node id="5094">
         <label>ToolsCore.h</label>
       </node>
-      <node id="5093">
+      <node id="5095">
         <label>cstddef</label>
       </node>
-      <node id="5095">
+      <node id="5097">
         <label>mathfu/matrix.h</label>
       </node>
-      <node id="5098">
+      <node id="5100">
         <label>algorithm</label>
       </node>
     </incdepgraph>

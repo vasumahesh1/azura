@@ -4,35 +4,35 @@
     <compoundname>Edge.cpp</compoundname>
     <includes refid="_edge_8h" local="yes">Physics/Geometry/Edge.h</includes>
     <incdepgraph>
-      <node id="5641">
+      <node id="5643">
         <label>Math/Core.h</label>
         <link refid="_core_8h_source"/>
-        <childnode refid="5642" relation="include">
-        </childnode>
-        <childnode refid="5643" relation="include">
-        </childnode>
-      </node>
-      <node id="5644">
-        <label>boost/container_hash/hash.hpp</label>
-      </node>
-      <node id="5639">
-        <label>Source/Physics/Src/Geometry/Edge.cpp</label>
-        <link refid="_edge_8cpp"/>
-        <childnode refid="5640" relation="include">
-        </childnode>
-      </node>
-      <node id="5640">
-        <label>Physics/Geometry/Edge.h</label>
-        <link refid="_edge_8h_source"/>
-        <childnode refid="5641" relation="include">
-        </childnode>
         <childnode refid="5644" relation="include">
         </childnode>
+        <childnode refid="5645" relation="include">
+        </childnode>
       </node>
-      <node id="5643">
-        <label>Types.h</label>
+      <node id="5646">
+        <label>boost/container_hash/hash.hpp</label>
+      </node>
+      <node id="5641">
+        <label>Source/Physics/Src/Geometry/Edge.cpp</label>
+        <link refid="_edge_8cpp"/>
+        <childnode refid="5642" relation="include">
+        </childnode>
       </node>
       <node id="5642">
+        <label>Physics/Geometry/Edge.h</label>
+        <link refid="_edge_8h_source"/>
+        <childnode refid="5643" relation="include">
+        </childnode>
+        <childnode refid="5646" relation="include">
+        </childnode>
+      </node>
+      <node id="5645">
+        <label>Types.h</label>
+      </node>
+      <node id="5644">
         <label>mathfu/matrix.h</label>
       </node>
     </incdepgraph>

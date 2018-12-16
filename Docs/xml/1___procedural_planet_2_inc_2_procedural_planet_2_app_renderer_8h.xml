@@ -14,177 +14,173 @@
     <includedby refid="1___procedural_planet_2_src_2_app_renderer_8cpp" local="yes">Source/Samples/1_ProceduralPlanet/Src/AppRenderer.cpp</includedby>
     <includedby refid="_samples_21___procedural_planet_2_src_2main_8cpp" local="yes">Source/Samples/1_ProceduralPlanet/Src/main.cpp</includedby>
     <incdepgraph>
-      <node id="5842">
+      <node id="5844">
         <label>Camera.h</label>
         <link refid="_camera_8h_source"/>
-        <childnode refid="5811" relation="include">
+        <childnode refid="5813" relation="include">
         </childnode>
-        <childnode refid="5838" relation="include">
+        <childnode refid="5840" relation="include">
         </childnode>
-        <childnode refid="5832" relation="include">
+        <childnode refid="5834" relation="include">
         </childnode>
       </node>
-      <node id="5838">
+      <node id="5840">
         <label>Math/Core.h</label>
         <link refid="_core_8h_source"/>
-        <childnode refid="5839" relation="include">
+        <childnode refid="5841" relation="include">
         </childnode>
-        <childnode refid="5811" relation="include">
+        <childnode refid="5813" relation="include">
         </childnode>
       </node>
-      <node id="5815">
+      <node id="5817">
         <label>functional</label>
       </node>
-      <node id="5816">
+      <node id="5818">
         <label>iterator</label>
       </node>
-      <node id="5827">
+      <node id="5829">
         <label>Utils/Hash.h</label>
         <link refid="_hash_8h_source"/>
-        <childnode refid="5811" relation="include">
+        <childnode refid="5813" relation="include">
         </childnode>
       </node>
-      <node id="5808">
+      <node id="5810">
         <label>Generic/Renderer.h</label>
         <link refid="_renderer_8h_source"/>
-        <childnode refid="5809" relation="include">
-        </childnode>
-        <childnode refid="5812" relation="include">
-        </childnode>
-        <childnode refid="5820" relation="include">
-        </childnode>
-        <childnode refid="5821" relation="include">
-        </childnode>
-        <childnode refid="5822" relation="include">
-        </childnode>
-        <childnode refid="5830" relation="include">
-        </childnode>
-      </node>
-      <node id="5822">
-        <label>Core/RawStorageFormat.h</label>
-        <link refid="_raw_storage_format_8h_source"/>
         <childnode refid="5811" relation="include">
         </childnode>
-        <childnode refid="5810" relation="include">
+        <childnode refid="5814" relation="include">
+        </childnode>
+        <childnode refid="5822" relation="include">
         </childnode>
         <childnode refid="5823" relation="include">
         </childnode>
         <childnode refid="5824" relation="include">
         </childnode>
+        <childnode refid="5832" relation="include">
+        </childnode>
+      </node>
+      <node id="5824">
+        <label>Core/RawStorageFormat.h</label>
+        <link refid="_raw_storage_format_8h_source"/>
+        <childnode refid="5813" relation="include">
+        </childnode>
+        <childnode refid="5812" relation="include">
+        </childnode>
         <childnode refid="5825" relation="include">
         </childnode>
         <childnode refid="5826" relation="include">
-        </childnode>
-      </node>
-      <node id="5837">
-        <label>MemoryBuffer.h</label>
-        <link refid="_memory_buffer_8h_source"/>
-        <childnode refid="5811" relation="include">
-        </childnode>
-      </node>
-      <node id="5818">
-        <label>Memory/Allocator.h</label>
-        <link refid="_allocator_8h_source"/>
-        <childnode refid="5815" relation="include">
-        </childnode>
-        <childnode refid="5811" relation="include">
-        </childnode>
-        <childnode refid="5819" relation="include">
-        </childnode>
-      </node>
-      <node id="5828">
-        <label>Core/AssetLocation.h</label>
-        <link refid="_asset_location_8h_source"/>
-      </node>
-      <node id="5813">
-        <label>cassert</label>
-      </node>
-      <node id="5825">
-        <label>boost/preprocessor/tuple/elem.hpp</label>
-      </node>
-      <node id="5821">
-        <label>GenericTypes.h</label>
-        <link refid="_azura_2_render_system_2_inc_2_generic_2_generic_types_8h_source"/>
-        <childnode refid="5812" relation="include">
-        </childnode>
-        <childnode refid="5809" relation="include">
-        </childnode>
-        <childnode refid="5811" relation="include">
-        </childnode>
-        <childnode refid="5822" relation="include">
         </childnode>
         <childnode refid="5827" relation="include">
         </childnode>
         <childnode refid="5828" relation="include">
         </childnode>
-        <childnode refid="5829" relation="include">
-        </childnode>
-        <childnode refid="5826" relation="include">
+      </node>
+      <node id="5839">
+        <label>MemoryBuffer.h</label>
+        <link refid="_memory_buffer_8h_source"/>
+        <childnode refid="5813" relation="include">
         </childnode>
       </node>
-      <node id="5836">
-        <label>Memory/HeapMemoryBuffer.h</label>
-        <link refid="_heap_memory_buffer_8h_source"/>
-        <childnode refid="5837" relation="include">
+      <node id="5820">
+        <label>Memory/Allocator.h</label>
+        <link refid="_allocator_8h_source"/>
+        <childnode refid="5817" relation="include">
+        </childnode>
+        <childnode refid="5813" relation="include">
+        </childnode>
+        <childnode refid="5821" relation="include">
+        </childnode>
+      </node>
+      <node id="5830">
+        <label>Core/AssetLocation.h</label>
+        <link refid="_asset_location_8h_source"/>
+      </node>
+      <node id="5815">
+        <label>cassert</label>
+      </node>
+      <node id="5827">
+        <label>boost/preprocessor/tuple/elem.hpp</label>
+      </node>
+      <node id="5823">
+        <label>GenericTypes.h</label>
+        <link refid="_azura_2_render_system_2_inc_2_generic_2_generic_types_8h_source"/>
+        <childnode refid="5814" relation="include">
         </childnode>
         <childnode refid="5811" relation="include">
         </childnode>
+        <childnode refid="5813" relation="include">
+        </childnode>
+        <childnode refid="5824" relation="include">
+        </childnode>
+        <childnode refid="5829" relation="include">
+        </childnode>
+        <childnode refid="5830" relation="include">
+        </childnode>
+        <childnode refid="5831" relation="include">
+        </childnode>
+        <childnode refid="5828" relation="include">
+        </childnode>
       </node>
-      <node id="5819">
+      <node id="5838">
+        <label>Memory/HeapMemoryBuffer.h</label>
+        <link refid="_heap_memory_buffer_8h_source"/>
+        <childnode refid="5839" relation="include">
+        </childnode>
+        <childnode refid="5813" relation="include">
+        </childnode>
+      </node>
+      <node id="5821">
         <label>Utils/Macros.h</label>
         <link refid="_macros_8h_source"/>
       </node>
-      <node id="5829">
+      <node id="5831">
         <label>boost/container/small_vector.hpp</label>
       </node>
-      <node id="5809">
+      <node id="5811">
         <label>Constants.h</label>
         <link refid="_azura_2_render_system_2_inc_2_generic_2_constants_8h_source"/>
-        <childnode refid="5810" relation="include">
+        <childnode refid="5812" relation="include">
         </childnode>
-        <childnode refid="5811" relation="include">
+        <childnode refid="5813" relation="include">
         </childnode>
       </node>
-      <node id="5826">
+      <node id="5828">
         <label>boost/detail/bitmask.hpp</label>
       </node>
-      <node id="5832">
+      <node id="5834">
         <label>Core/Events.h</label>
         <link refid="_events_8h_source"/>
       </node>
-      <node id="5810">
+      <node id="5812">
         <label>tuple</label>
       </node>
-      <node id="5817">
+      <node id="5819">
         <label>Array.h</label>
         <link refid="_array_8h_source"/>
+        <childnode refid="5815" relation="include">
+        </childnode>
+        <childnode refid="5816" relation="include">
+        </childnode>
+        <childnode refid="5820" relation="include">
+        </childnode>
         <childnode refid="5813" relation="include">
         </childnode>
-        <childnode refid="5814" relation="include">
-        </childnode>
-        <childnode refid="5818" relation="include">
-        </childnode>
-        <childnode refid="5811" relation="include">
-        </childnode>
       </node>
-      <node id="5835">
+      <node id="5837">
         <label>Memory/MonotonicAllocator.h</label>
         <link refid="_monotonic_allocator_8h_source"/>
-        <childnode refid="5818" relation="include">
+        <childnode refid="5820" relation="include">
         </childnode>
-        <childnode refid="5811" relation="include">
-        </childnode>
-      </node>
-      <node id="5834">
-        <label>vector</label>
-      </node>
-      <node id="5812">
-        <label>Containers/Vector.h</label>
-        <link refid="_vector_8h_source"/>
         <childnode refid="5813" relation="include">
         </childnode>
-        <childnode refid="5814" relation="include">
-        </childnode>
+      </node>
+      <node id="5836">
+        <label>vector</label>
+      </node>
+      <node id="5814">
+        <label>Containers/Vector.h</label>
+        <link refid="_vector_8h_source"/>
         <childnode refid="5815" relation="include">
         </childnode>
         <childnode refid="5816" relation="include">
@@ -193,117 +189,121 @@
         </childnode>
         <childnode refid="5818" relation="include">
         </childnode>
-        <childnode refid="5811" relation="include">
-        </childnode>
         <childnode refid="5819" relation="include">
         </childnode>
+        <childnode refid="5820" relation="include">
+        </childnode>
+        <childnode refid="5813" relation="include">
+        </childnode>
+        <childnode refid="5821" relation="include">
+        </childnode>
       </node>
-      <node id="5806">
+      <node id="5808">
         <label>Source/Samples/1_ProceduralPlanet/Inc/ProceduralPlanet/AppRenderer.h</label>
         <link refid="1___procedural_planet_2_inc_2_procedural_planet_2_app_renderer_8h"/>
-        <childnode refid="5807" relation="include">
+        <childnode refid="5809" relation="include">
         </childnode>
-        <childnode refid="5808" relation="include">
-        </childnode>
-        <childnode refid="5831" relation="include">
-        </childnode>
-        <childnode refid="5835" relation="include">
-        </childnode>
-        <childnode refid="5836" relation="include">
+        <childnode refid="5810" relation="include">
         </childnode>
         <childnode refid="5833" relation="include">
+        </childnode>
+        <childnode refid="5837" relation="include">
         </childnode>
         <childnode refid="5838" relation="include">
         </childnode>
+        <childnode refid="5835" relation="include">
+        </childnode>
         <childnode refid="5840" relation="include">
         </childnode>
-        <childnode refid="5841" relation="include">
-        </childnode>
-      </node>
-      <node id="5833">
-        <label>Log/Log.h</label>
-        <link refid="_log_8h_source"/>
-        <childnode refid="5811" relation="include">
-        </childnode>
-        <childnode refid="5834" relation="include">
-        </childnode>
-      </node>
-      <node id="5820">
-        <label>Drawable.h</label>
-        <link refid="_drawable_8h_source"/>
-        <childnode refid="5812" relation="include">
-        </childnode>
-        <childnode refid="5821" relation="include">
-        </childnode>
-        <childnode refid="5811" relation="include">
-        </childnode>
-        <childnode refid="5822" relation="include">
-        </childnode>
-      </node>
-      <node id="5823">
-        <label>boost/preprocessor/repetition/repeat.hpp</label>
-      </node>
-      <node id="5811">
-        <label>Types.h</label>
-      </node>
-      <node id="5839">
-        <label>mathfu/matrix.h</label>
-      </node>
-      <node id="5831">
-        <label>Generic/Window.h</label>
-        <link refid="_window_8h_source"/>
-        <childnode refid="5815" relation="include">
-        </childnode>
-        <childnode refid="5821" relation="include">
-        </childnode>
-        <childnode refid="5811" relation="include">
-        </childnode>
-        <childnode refid="5808" relation="include">
-        </childnode>
-        <childnode refid="5832" relation="include">
-        </childnode>
-        <childnode refid="5833" relation="include">
-        </childnode>
-      </node>
-      <node id="5841">
-        <label>Camera/PolarCamera.h</label>
-        <link refid="_polar_camera_8h_source"/>
         <childnode refid="5842" relation="include">
         </childnode>
-      </node>
-      <node id="5830">
-        <label>ComputePool.h</label>
-        <link refid="_compute_pool_8h_source"/>
-        <childnode refid="5812" relation="include">
-        </childnode>
-        <childnode refid="5821" relation="include">
-        </childnode>
-        <childnode refid="5811" relation="include">
+        <childnode refid="5843" relation="include">
         </childnode>
       </node>
-      <node id="5840">
-        <label>Generic/TextureManager.h</label>
-        <link refid="_texture_manager_8h_source"/>
-        <childnode refid="5811" relation="include">
+      <node id="5835">
+        <label>Log/Log.h</label>
+        <link refid="_log_8h_source"/>
+        <childnode refid="5813" relation="include">
         </childnode>
         <childnode refid="5836" relation="include">
         </childnode>
+      </node>
+      <node id="5822">
+        <label>Drawable.h</label>
+        <link refid="_drawable_8h_source"/>
+        <childnode refid="5814" relation="include">
+        </childnode>
+        <childnode refid="5823" relation="include">
+        </childnode>
+        <childnode refid="5813" relation="include">
+        </childnode>
+        <childnode refid="5824" relation="include">
+        </childnode>
+      </node>
+      <node id="5825">
+        <label>boost/preprocessor/repetition/repeat.hpp</label>
+      </node>
+      <node id="5813">
+        <label>Types.h</label>
+      </node>
+      <node id="5841">
+        <label>mathfu/matrix.h</label>
+      </node>
+      <node id="5833">
+        <label>Generic/Window.h</label>
+        <link refid="_window_8h_source"/>
+        <childnode refid="5817" relation="include">
+        </childnode>
+        <childnode refid="5823" relation="include">
+        </childnode>
+        <childnode refid="5813" relation="include">
+        </childnode>
+        <childnode refid="5810" relation="include">
+        </childnode>
+        <childnode refid="5834" relation="include">
+        </childnode>
         <childnode refid="5835" relation="include">
         </childnode>
-        <childnode refid="5812" relation="include">
-        </childnode>
-        <childnode refid="5821" relation="include">
-        </childnode>
-        <childnode refid="5833" relation="include">
+      </node>
+      <node id="5843">
+        <label>Camera/PolarCamera.h</label>
+        <link refid="_polar_camera_8h_source"/>
+        <childnode refid="5844" relation="include">
         </childnode>
       </node>
-      <node id="5814">
+      <node id="5832">
+        <label>ComputePool.h</label>
+        <link refid="_compute_pool_8h_source"/>
+        <childnode refid="5814" relation="include">
+        </childnode>
+        <childnode refid="5823" relation="include">
+        </childnode>
+        <childnode refid="5813" relation="include">
+        </childnode>
+      </node>
+      <node id="5842">
+        <label>Generic/TextureManager.h</label>
+        <link refid="_texture_manager_8h_source"/>
+        <childnode refid="5813" relation="include">
+        </childnode>
+        <childnode refid="5838" relation="include">
+        </childnode>
+        <childnode refid="5837" relation="include">
+        </childnode>
+        <childnode refid="5814" relation="include">
+        </childnode>
+        <childnode refid="5823" relation="include">
+        </childnode>
+        <childnode refid="5835" relation="include">
+        </childnode>
+      </node>
+      <node id="5816">
         <label>cstring</label>
       </node>
-      <node id="5807">
+      <node id="5809">
         <label>memory</label>
       </node>
-      <node id="5824">
+      <node id="5826">
         <label>boost/preprocessor/seq/for_each.hpp</label>
       </node>
     </incdepgraph>

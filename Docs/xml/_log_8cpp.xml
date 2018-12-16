@@ -23,17 +23,13 @@
     <includes local="yes">yaml-cpp/yaml.h</includes>
     <includes refid="_macros_8h" local="yes">Utils/Macros.h</includes>
     <incdepgraph>
-      <node id="5226">
+      <node id="5228">
         <label>boost/algorithm/string.hpp</label>
       </node>
-      <node id="5218">
+      <node id="5220">
         <label>Source/Log/Src/Log.cpp</label>
         <link refid="_log_8cpp"/>
-        <childnode refid="5219" relation="include">
-        </childnode>
-        <childnode refid="5222" relation="include">
-        </childnode>
-        <childnode refid="5223" relation="include">
+        <childnode refid="5221" relation="include">
         </childnode>
         <childnode refid="5224" relation="include">
         </childnode>
@@ -69,74 +65,78 @@
         </childnode>
         <childnode refid="5240" relation="include">
         </childnode>
-      </node>
-      <node id="5229">
-        <label>boost/log/core.hpp</label>
-      </node>
-      <node id="5227">
-        <label>boost/date_time/posix_time/posix_time_types.hpp</label>
-      </node>
-      <node id="5235">
-        <label>boost/log/support/date_time.hpp</label>
+        <childnode refid="5241" relation="include">
+        </childnode>
+        <childnode refid="5242" relation="include">
+        </childnode>
       </node>
       <node id="5231">
-        <label>boost/log/sources/logger.hpp</label>
+        <label>boost/log/core.hpp</label>
+      </node>
+      <node id="5229">
+        <label>boost/date_time/posix_time/posix_time_types.hpp</label>
+      </node>
+      <node id="5237">
+        <label>boost/log/support/date_time.hpp</label>
       </node>
       <node id="5233">
+        <label>boost/log/sources/logger.hpp</label>
+      </node>
+      <node id="5235">
         <label>boost/log/utility/setup/console.hpp</label>
       </node>
-      <node id="5228">
+      <node id="5230">
         <label>boost/log/trivial.hpp</label>
       </node>
-      <node id="5240">
+      <node id="5242">
         <label>Utils/Macros.h</label>
         <link refid="_macros_8h_source"/>
       </node>
-      <node id="5236">
+      <node id="5238">
         <label>boost/log/sinks/sync_frontend.hpp</label>
       </node>
-      <node id="5230">
+      <node id="5232">
         <label>boost/log/expressions.hpp</label>
       </node>
-      <node id="5239">
+      <node id="5241">
         <label>yaml-cpp/yaml.h</label>
       </node>
-      <node id="5237">
+      <node id="5239">
         <label>boost/log/sinks/text_file_backend.hpp</label>
       </node>
-      <node id="5221">
+      <node id="5223">
         <label>vector</label>
       </node>
-      <node id="5225">
+      <node id="5227">
         <label>boost/filesystem.hpp</label>
       </node>
-      <node id="5219">
+      <node id="5221">
         <label>Log/Log.h</label>
         <link refid="_log_8h_source"/>
-        <childnode refid="5220" relation="include">
+        <childnode refid="5222" relation="include">
         </childnode>
-        <childnode refid="5221" relation="include">
+        <childnode refid="5223" relation="include">
         </childnode>
       </node>
-      <node id="5224">
+      <node id="5226">
         <label>utility</label>
       </node>
-      <node id="5223">
+      <node id="5225">
         <label>cstdlib</label>
       </node>
-      <node id="5222">
+      <node id="5224">
         <label>iostream</label>
       </node>
-      <node id="5220">
+      <node id="5222">
         <label>Types.h</label>
       </node>
-      <node id="5232">
+      <node id="5234">
         <label>boost/log/utility/setup/file.hpp</label>
       </node>
-      <node id="5234">
+      <node id="5236">
         <label>boost/log/utility/setup/common_attributes.hpp</label>
       </node>
-      <node id="5238">
+      <node id="5240">
         <label>boost/log/attributes/named_scope.hpp</label>
       </node>
     </incdepgraph>

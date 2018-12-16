@@ -448,14 +448,14 @@
 <codeline lineno="32"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>VkScopedSwapChain&amp;<sp/>swapChain)<sp/>{</highlight></codeline>
 <codeline lineno="33"><highlight class="normal"><sp/><sp/>STACK_ALLOCATOR(Temporary,<sp/>Memory::MonotonicAllocator,<sp/>2048);</highlight></codeline>
 <codeline lineno="34"><highlight class="normal"></highlight></codeline>
-<codeline lineno="35"><highlight class="normal"><sp/><sp/>m_commandBuffers.<ref refid="class_azura_1_1_containers_1_1_vector_1af9aea7a8da9e449530132e50d85ca221" kindref="member">Reserve</ref>(1);</highlight></codeline>
-<codeline lineno="36"><highlight class="normal"><sp/><sp/>m_frameBuffers.Resize(1);</highlight></codeline>
+<codeline lineno="35"><highlight class="normal"><sp/><sp/>m_commandBuffers.<ref refid="class_azura_1_1_containers_1_1_vector_1af53da95e8dee524b3b12f2208079741f" kindref="member">Reserve</ref>(1);</highlight></codeline>
+<codeline lineno="36"><highlight class="normal"><sp/><sp/>m_frameBuffers.<ref refid="class_azura_1_1_containers_1_1_vector_1a6d651ba60555cf392c766eb77758bd81" kindref="member">Resize</ref>(1);</highlight></codeline>
 <codeline lineno="37"><highlight class="normal"></highlight></codeline>
 <codeline lineno="38"><highlight class="normal"><sp/><sp/>LOG_DBG(log_VulkanRenderSystem,<sp/>LOG_LEVEL,<sp/></highlight><highlight class="stringliteral">&quot;Creating<sp/>Render<sp/>Pass:<sp/>ID<sp/>%d&quot;</highlight><highlight class="normal">,<sp/>m_id);</highlight></codeline>
 <codeline lineno="39"><highlight class="normal"></highlight></codeline>
 <codeline lineno="40"><highlight class="normal"><sp/><sp/>CreateDescriptorSetLayout(device,<sp/>createInfo);</highlight></codeline>
 <codeline lineno="41"><highlight class="normal"></highlight></codeline>
-<codeline lineno="42"><highlight class="normal"><sp/><sp/>m_shaderPipelineInfos.<ref refid="class_azura_1_1_containers_1_1_vector_1af9aea7a8da9e449530132e50d85ca221" kindref="member">Reserve</ref>(U32(createInfo.m_shaders.size()));</highlight></codeline>
+<codeline lineno="42"><highlight class="normal"><sp/><sp/>m_shaderPipelineInfos.<ref refid="class_azura_1_1_containers_1_1_vector_1af53da95e8dee524b3b12f2208079741f" kindref="member">Reserve</ref>(U32(createInfo.m_shaders.size()));</highlight></codeline>
 <codeline lineno="43"><highlight class="normal"></highlight></codeline>
 <codeline lineno="44"><highlight class="normal"><sp/><sp/></highlight><highlight class="keywordflow">for</highlight><highlight class="normal"><sp/>(</highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">auto</highlight><highlight class="normal">&amp;<sp/>vkShaderId<sp/>:<sp/>createInfo.m_shaders)<sp/>{</highlight></codeline>
 <codeline lineno="45"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">auto</highlight><highlight class="normal">&amp;<sp/>vkShader<sp/>=<sp/>allShaders[vkShaderId];</highlight></codeline>
@@ -466,8 +466,8 @@
 <codeline lineno="50"><highlight class="normal"><sp/><sp/>VkAttachmentReference<sp/>depthReference;</highlight></codeline>
 <codeline lineno="51"><highlight class="normal"><sp/><sp/>Vector&lt;VkAttachmentDescription&gt;<sp/>attachments{U32(createInfo.m_outputTargets.size()),<sp/>allocatorTemporary};</highlight></codeline>
 <codeline lineno="52"><highlight class="normal"><sp/><sp/>Vector&lt;VkImageView&gt;<sp/>attachmentViews{U32(createInfo.m_outputTargets.size()),<sp/>allocatorTemporary};</highlight></codeline>
-<codeline lineno="53"><highlight class="normal"><sp/><sp/>m_colorBlendAttachments.<ref refid="class_azura_1_1_containers_1_1_vector_1af9aea7a8da9e449530132e50d85ca221" kindref="member">Reserve</ref>(U32(createInfo.m_outputTargets.size()));</highlight></codeline>
-<codeline lineno="54"><highlight class="normal"><sp/><sp/>m_clearValues.<ref refid="class_azura_1_1_containers_1_1_vector_1af9aea7a8da9e449530132e50d85ca221" kindref="member">Reserve</ref>(U32(createInfo.m_outputTargets.size()));</highlight></codeline>
+<codeline lineno="53"><highlight class="normal"><sp/><sp/>m_colorBlendAttachments.<ref refid="class_azura_1_1_containers_1_1_vector_1af53da95e8dee524b3b12f2208079741f" kindref="member">Reserve</ref>(U32(createInfo.m_outputTargets.size()));</highlight></codeline>
+<codeline lineno="54"><highlight class="normal"><sp/><sp/>m_clearValues.<ref refid="class_azura_1_1_containers_1_1_vector_1af53da95e8dee524b3b12f2208079741f" kindref="member">Reserve</ref>(U32(createInfo.m_outputTargets.size()));</highlight></codeline>
 <codeline lineno="55"><highlight class="normal"></highlight></codeline>
 <codeline lineno="56"><highlight class="normal"><sp/><sp/>U32<sp/>refCount<sp/><sp/>=<sp/>0;</highlight></codeline>
 <codeline lineno="57"><highlight class="normal"><sp/><sp/></highlight><highlight class="keywordtype">bool</highlight><highlight class="normal"><sp/>hasDepth<sp/>=<sp/></highlight><highlight class="keyword">false</highlight><highlight class="normal">;</highlight></codeline>
@@ -626,8 +626,8 @@
 <codeline lineno="210"><highlight class="normal"></highlight></codeline>
 <codeline lineno="211"><highlight class="normal"><sp/><sp/>LOG_DBG(log_VulkanRenderSystem,<sp/>LOG_LEVEL,<sp/></highlight><highlight class="stringliteral">&quot;Creating<sp/>Render<sp/>Pass<sp/>(Swap<sp/>Chain):<sp/>ID<sp/>%d&quot;</highlight><highlight class="normal">,<sp/>m_id);</highlight></codeline>
 <codeline lineno="212"><highlight class="normal"></highlight></codeline>
-<codeline lineno="213"><highlight class="normal"><sp/><sp/>m_shaderPipelineInfos.<ref refid="class_azura_1_1_containers_1_1_vector_1af9aea7a8da9e449530132e50d85ca221" kindref="member">Reserve</ref>(U32(createInfo.m_shaders.size()));</highlight></codeline>
-<codeline lineno="214"><highlight class="normal"><sp/><sp/>m_clearValues.<ref refid="class_azura_1_1_containers_1_1_vector_1af9aea7a8da9e449530132e50d85ca221" kindref="member">Reserve</ref>(2);</highlight></codeline>
+<codeline lineno="213"><highlight class="normal"><sp/><sp/>m_shaderPipelineInfos.<ref refid="class_azura_1_1_containers_1_1_vector_1af53da95e8dee524b3b12f2208079741f" kindref="member">Reserve</ref>(U32(createInfo.m_shaders.size()));</highlight></codeline>
+<codeline lineno="214"><highlight class="normal"><sp/><sp/>m_clearValues.<ref refid="class_azura_1_1_containers_1_1_vector_1af53da95e8dee524b3b12f2208079741f" kindref="member">Reserve</ref>(2);</highlight></codeline>
 <codeline lineno="215"><highlight class="normal"></highlight></codeline>
 <codeline lineno="216"><highlight class="normal"><sp/><sp/>VkClearValue<sp/>clearValue;</highlight></codeline>
 <codeline lineno="217"><highlight class="normal"></highlight></codeline>
@@ -649,7 +649,7 @@
 <codeline lineno="233"><highlight class="normal"><sp/><sp/>colorAttachment.initialLayout<sp/>=<sp/>VK_IMAGE_LAYOUT_UNDEFINED;</highlight></codeline>
 <codeline lineno="234"><highlight class="normal"><sp/><sp/>colorAttachment.finalLayout<sp/><sp/><sp/>=<sp/>VK_IMAGE_LAYOUT_PRESENT_SRC_KHR;</highlight></codeline>
 <codeline lineno="235"><highlight class="normal"></highlight></codeline>
-<codeline lineno="236"><highlight class="normal"><sp/><sp/>m_colorBlendAttachments.<ref refid="class_azura_1_1_containers_1_1_vector_1af9aea7a8da9e449530132e50d85ca221" kindref="member">Reserve</ref>(1);</highlight></codeline>
+<codeline lineno="236"><highlight class="normal"><sp/><sp/>m_colorBlendAttachments.<ref refid="class_azura_1_1_containers_1_1_vector_1af53da95e8dee524b3b12f2208079741f" kindref="member">Reserve</ref>(1);</highlight></codeline>
 <codeline lineno="237"><highlight class="normal"></highlight></codeline>
 <codeline lineno="238"><highlight class="normal"><sp/><sp/>VkPipelineColorBlendAttachmentState<sp/>colorBlendAttachment<sp/>=<sp/>{};</highlight></codeline>
 <codeline lineno="239"><highlight class="normal"><sp/><sp/>colorBlendAttachment.colorWriteMask<sp/>=<sp/>VK_COLOR_COMPONENT_R_BIT<sp/>|<sp/>VK_COLOR_COMPONENT_G_BIT<sp/>|<sp/>VK_COLOR_COMPONENT_B_BIT<sp/>|<sp/>VK_COLOR_COMPONENT_A_BIT;</highlight></codeline>
@@ -753,7 +753,7 @@
 <codeline lineno="337"><highlight class="normal"><sp/><sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">auto</highlight><highlight class="normal">&amp;<sp/>allImages<sp/><sp/><sp/><sp/><sp/><sp/>=<sp/>swapChain.GetAllImages();</highlight></codeline>
 <codeline lineno="338"><highlight class="normal"><sp/><sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">auto</highlight><highlight class="normal"><sp/>swapChainExtent<sp/>=<sp/>swapChain.GetExtent();</highlight></codeline>
 <codeline lineno="339"><highlight class="normal"></highlight></codeline>
-<codeline lineno="340"><highlight class="normal"><sp/><sp/>m_frameBuffers.Resize(allImages.GetSize());</highlight></codeline>
+<codeline lineno="340"><highlight class="normal"><sp/><sp/>m_frameBuffers.<ref refid="class_azura_1_1_containers_1_1_vector_1a6d651ba60555cf392c766eb77758bd81" kindref="member">Resize</ref>(allImages.GetSize());</highlight></codeline>
 <codeline lineno="341"><highlight class="normal"></highlight></codeline>
 <codeline lineno="342"><highlight class="normal"><sp/><sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>VkImageView<sp/>depthImageView<sp/>=<sp/>swapChain.GetDepthImage().View();</highlight></codeline>
 <codeline lineno="343"><highlight class="normal"></highlight></codeline>
@@ -779,7 +779,7 @@
 <codeline lineno="363"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="stringliteral">&quot;Failed<sp/>to<sp/>create<sp/>framebuffer&quot;</highlight><highlight class="normal">);</highlight></codeline>
 <codeline lineno="364"><highlight class="normal"><sp/><sp/>}</highlight></codeline>
 <codeline lineno="365"><highlight class="normal"></highlight></codeline>
-<codeline lineno="366"><highlight class="normal"><sp/><sp/>m_commandBuffers.Resize(m_frameBuffers.GetSize());</highlight></codeline>
+<codeline lineno="366"><highlight class="normal"><sp/><sp/>m_commandBuffers.<ref refid="class_azura_1_1_containers_1_1_vector_1a6d651ba60555cf392c766eb77758bd81" kindref="member">Resize</ref>(m_frameBuffers.GetSize());</highlight></codeline>
 <codeline lineno="367"><highlight class="normal"><sp/><sp/>VkCore::CreateCommandBuffers(device,<sp/>commandPool,<sp/>VK_COMMAND_BUFFER_LEVEL_PRIMARY,</highlight></codeline>
 <codeline lineno="368"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>m_commandBuffers,<sp/>log_VulkanRenderSystem);</highlight></codeline>
 <codeline lineno="369"><highlight class="normal"></highlight></codeline>
