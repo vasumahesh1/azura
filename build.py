@@ -235,6 +235,7 @@ def run():
   printConfig(executableMap)
 
   if (buildArgs.docs):
+    az_log.empty()
     az_log.info('> Building Docs:')
     print("Building Doxygen XML")
     docsCommand = [executableMap['doxygen'], 'Doxyfile']
