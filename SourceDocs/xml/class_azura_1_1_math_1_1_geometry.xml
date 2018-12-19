@@ -1,0 +1,474 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.8.14">
+  <compounddef id="class_azura_1_1_math_1_1_geometry" kind="class" language="C++" prot="public" abstract="yes">
+    <compoundname>Azura::Math::Geometry</compoundname>
+    <derivedcompoundref refid="class_azura_1_1_cloth_mesh" prot="public" virt="non-virtual">Azura::ClothMesh</derivedcompoundref>
+    <derivedcompoundref refid="class_azura_1_1_imported_cloth_mesh" prot="public" virt="non-virtual">Azura::ImportedClothMesh</derivedcompoundref>
+    <derivedcompoundref refid="class_azura_1_1_math_1_1_ico_sphere" prot="public" virt="non-virtual">Azura::Math::IcoSphere</derivedcompoundref>
+    <derivedcompoundref refid="class_azura_1_1_math_1_1_plane" prot="public" virt="non-virtual">Azura::Math::Plane</derivedcompoundref>
+    <derivedcompoundref refid="class_azura_1_1_physics_1_1_i_physics_geometry" prot="public" virt="non-virtual">Azura::Physics::IPhysicsGeometry</derivedcompoundref>
+      <sectiondef kind="public-func">
+      <memberdef kind="function" id="class_azura_1_1_math_1_1_geometry_1a7ff397714deef6a88c8e4edddc0ba032" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>Azura::Math::Geometry::Geometry</definition>
+        <argsstring>()=default</argsstring>
+        <name>Geometry</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Source/Math/Inc/Math/Geometry.h" line="22" column="1"/>
+      </memberdef>
+      <memberdef kind="function" id="class_azura_1_1_math_1_1_geometry_1ae50195fe0fa7af9125260c39de331fdf" prot="public" static="no" const="no" explicit="no" inline="no" virt="virtual">
+        <type></type>
+        <definition>virtual Azura::Math::Geometry::~Geometry</definition>
+        <argsstring>()=default</argsstring>
+        <name>~Geometry</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Source/Math/Inc/Math/Geometry.h" line="23" column="1"/>
+      </memberdef>
+      <memberdef kind="function" id="class_azura_1_1_math_1_1_geometry_1abd1cd8e142652b4dfd80378a52f45e47" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>Azura::Math::Geometry::Geometry</definition>
+        <argsstring>(const Geometry &amp;other)=delete</argsstring>
+        <name>Geometry</name>
+        <param>
+          <type>const <ref refid="class_azura_1_1_math_1_1_geometry" kindref="compound">Geometry</ref> &amp;</type>
+          <declname>other</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Source/Math/Inc/Math/Geometry.h" line="26" column="1"/>
+      </memberdef>
+      <memberdef kind="function" id="class_azura_1_1_math_1_1_geometry_1ac6d5eb1dbfcfce2d84d5f4fe54640922" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>Azura::Math::Geometry::Geometry</definition>
+        <argsstring>(Geometry &amp;&amp;other) noexcept=delete</argsstring>
+        <name>Geometry</name>
+        <param>
+          <type><ref refid="class_azura_1_1_math_1_1_geometry" kindref="compound">Geometry</ref> &amp;&amp;</type>
+          <declname>other</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Source/Math/Inc/Math/Geometry.h" line="27" column="1"/>
+      </memberdef>
+      <memberdef kind="function" id="class_azura_1_1_math_1_1_geometry_1a1f4182094f19c0f3e4d3a249707f34e9" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="class_azura_1_1_math_1_1_geometry" kindref="compound">Geometry</ref> &amp;</type>
+        <definition>Geometry&amp; Azura::Math::Geometry::operator=</definition>
+        <argsstring>(const Geometry &amp;other)=delete</argsstring>
+        <name>operator=</name>
+        <param>
+          <type>const <ref refid="class_azura_1_1_math_1_1_geometry" kindref="compound">Geometry</ref> &amp;</type>
+          <declname>other</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Source/Math/Inc/Math/Geometry.h" line="28" column="1"/>
+      </memberdef>
+      <memberdef kind="function" id="class_azura_1_1_math_1_1_geometry_1a37a28a7b74fc5abc68f231c9d3af8c72" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="class_azura_1_1_math_1_1_geometry" kindref="compound">Geometry</ref> &amp;</type>
+        <definition>Geometry&amp; Azura::Math::Geometry::operator=</definition>
+        <argsstring>(Geometry &amp;&amp;other) noexcept=delete</argsstring>
+        <name>operator=</name>
+        <param>
+          <type><ref refid="class_azura_1_1_math_1_1_geometry" kindref="compound">Geometry</ref> &amp;&amp;</type>
+          <declname>other</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Source/Math/Inc/Math/Geometry.h" line="29" column="1"/>
+      </memberdef>
+      <memberdef kind="function" id="class_azura_1_1_math_1_1_geometry_1ac054e7a5a660c7faac630cff3ee91b86" prot="public" static="no" const="yes" explicit="no" inline="no" virt="pure-virtual">
+        <type>U32</type>
+        <definition>virtual U32 Azura::Math::Geometry::VertexDataSize</definition>
+        <argsstring>() const =0</argsstring>
+        <name>VertexDataSize</name>
+        <reimplementedby refid="class_azura_1_1_math_1_1_ico_sphere_1a46695815a94a95dfd8adc7d72eab4f6e">VertexDataSize</reimplementedby>
+        <reimplementedby refid="class_azura_1_1_imported_cloth_mesh_1a5869180f5e6dfe791d4484226a2d353f">VertexDataSize</reimplementedby>
+        <reimplementedby refid="class_azura_1_1_cloth_mesh_1a4ad1780df4fdbba159377feb295988f4">VertexDataSize</reimplementedby>
+        <reimplementedby refid="class_azura_1_1_math_1_1_plane_1a5c8e1e885c4a5ee3ffb1069d992efbd7">VertexDataSize</reimplementedby>
+        <reimplementedby refid="class_azura_1_1_physics_1_1_cloth_plane_1ab6aac3d0cfe9780400e7c0230b7d9deb">VertexDataSize</reimplementedby>
+        <reimplementedby refid="class_azura_1_1_physics_1_1_cloth_mesh_1a4ad1780df4fdbba159377feb295988f4">VertexDataSize</reimplementedby>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Source/Math/Inc/Math/Geometry.h" line="32" column="1"/>
+      </memberdef>
+      <memberdef kind="function" id="class_azura_1_1_math_1_1_geometry_1aaf9593bfa903f9df23aefb3db971fc03" prot="public" static="no" const="yes" explicit="no" inline="no" virt="pure-virtual">
+        <type>U32</type>
+        <definition>virtual U32 Azura::Math::Geometry::IndexDataSize</definition>
+        <argsstring>() const =0</argsstring>
+        <name>IndexDataSize</name>
+        <reimplementedby refid="class_azura_1_1_math_1_1_ico_sphere_1a48625c7c94d25b510eee5ddccbaa0744">IndexDataSize</reimplementedby>
+        <reimplementedby refid="class_azura_1_1_imported_cloth_mesh_1afa63525b2eb7b1e3b1783ab7161b20ed">IndexDataSize</reimplementedby>
+        <reimplementedby refid="class_azura_1_1_cloth_mesh_1a92cdd2933f1eab7aec42ab3469899c46">IndexDataSize</reimplementedby>
+        <reimplementedby refid="class_azura_1_1_math_1_1_plane_1a10ac399801a00cdeb02f131d0696e2b9">IndexDataSize</reimplementedby>
+        <reimplementedby refid="class_azura_1_1_physics_1_1_cloth_plane_1a0429a289fafbac63d49bc54c4ec38ad5">IndexDataSize</reimplementedby>
+        <reimplementedby refid="class_azura_1_1_physics_1_1_cloth_mesh_1a92cdd2933f1eab7aec42ab3469899c46">IndexDataSize</reimplementedby>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Source/Math/Inc/Math/Geometry.h" line="33" column="1"/>
+      </memberdef>
+      <memberdef kind="function" id="class_azura_1_1_math_1_1_geometry_1a77e056714cf8fde1d7c15d4f7b01e84a" prot="public" static="no" const="yes" explicit="no" inline="no" virt="pure-virtual">
+        <type>U32</type>
+        <definition>virtual U32 Azura::Math::Geometry::NormalDataSize</definition>
+        <argsstring>() const =0</argsstring>
+        <name>NormalDataSize</name>
+        <reimplementedby refid="class_azura_1_1_math_1_1_ico_sphere_1acb3a1fd8631038a6972ab6f79f233926">NormalDataSize</reimplementedby>
+        <reimplementedby refid="class_azura_1_1_physics_1_1_cloth_plane_1a057be4fdbefc9818ee36b418388920a2">NormalDataSize</reimplementedby>
+        <reimplementedby refid="class_azura_1_1_math_1_1_plane_1aff525608680842d337fab4d95381d251">NormalDataSize</reimplementedby>
+        <reimplementedby refid="class_azura_1_1_imported_cloth_mesh_1a5ed9e873ac8693f68f18a1690ada63fe">NormalDataSize</reimplementedby>
+        <reimplementedby refid="class_azura_1_1_cloth_mesh_1a011fb10ed2a2cef71b2f9ddf261c084a">NormalDataSize</reimplementedby>
+        <reimplementedby refid="class_azura_1_1_physics_1_1_cloth_mesh_1a011fb10ed2a2cef71b2f9ddf261c084a">NormalDataSize</reimplementedby>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Source/Math/Inc/Math/Geometry.h" line="34" column="1"/>
+      </memberdef>
+      <memberdef kind="function" id="class_azura_1_1_math_1_1_geometry_1a812a50d6a44b12d6e3697d04a879c1d8" prot="public" static="no" const="yes" explicit="no" inline="no" virt="pure-virtual">
+        <type>U32</type>
+        <definition>virtual U32 Azura::Math::Geometry::UVDataSize</definition>
+        <argsstring>() const =0</argsstring>
+        <name>UVDataSize</name>
+        <reimplementedby refid="class_azura_1_1_math_1_1_plane_1a7be1f7c7d2276c45db4df4c85d374d42">UVDataSize</reimplementedby>
+        <reimplementedby refid="class_azura_1_1_math_1_1_ico_sphere_1a7be371e0ae135260ba8974d0a2e7bc3d">UVDataSize</reimplementedby>
+        <reimplementedby refid="class_azura_1_1_physics_1_1_cloth_plane_1a5fcf4e3163359a9c3d2f9173de210941">UVDataSize</reimplementedby>
+        <reimplementedby refid="class_azura_1_1_imported_cloth_mesh_1a57a7f7dc798aa5149b63e23bd395eeb9">UVDataSize</reimplementedby>
+        <reimplementedby refid="class_azura_1_1_cloth_mesh_1a24289e2e3132e551e45bfdbc3f231c6c">UVDataSize</reimplementedby>
+        <reimplementedby refid="class_azura_1_1_physics_1_1_cloth_mesh_1a24289e2e3132e551e45bfdbc3f231c6c">UVDataSize</reimplementedby>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Source/Math/Inc/Math/Geometry.h" line="35" column="1"/>
+      </memberdef>
+      <memberdef kind="function" id="class_azura_1_1_math_1_1_geometry_1a149b71e3fb0c73440c46b07482acf76f" prot="public" static="no" const="yes" explicit="no" inline="no" virt="pure-virtual">
+        <type>U32</type>
+        <definition>virtual U32 Azura::Math::Geometry::TotalDataSize</definition>
+        <argsstring>() const =0</argsstring>
+        <name>TotalDataSize</name>
+        <reimplementedby refid="class_azura_1_1_math_1_1_ico_sphere_1ad58a8a06aa54350227859f148480520d">TotalDataSize</reimplementedby>
+        <reimplementedby refid="class_azura_1_1_imported_cloth_mesh_1a398be9298dc330575ab03e2d59ddde8c">TotalDataSize</reimplementedby>
+        <reimplementedby refid="class_azura_1_1_cloth_mesh_1add11b8966ec5a17a996f180da784e879">TotalDataSize</reimplementedby>
+        <reimplementedby refid="class_azura_1_1_math_1_1_plane_1a5f3c4f93551dedde2dac8095afdad5ad">TotalDataSize</reimplementedby>
+        <reimplementedby refid="class_azura_1_1_physics_1_1_cloth_plane_1a7ad72cba68405769456532988296936e">TotalDataSize</reimplementedby>
+        <reimplementedby refid="class_azura_1_1_physics_1_1_cloth_mesh_1add11b8966ec5a17a996f180da784e879">TotalDataSize</reimplementedby>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Source/Math/Inc/Math/Geometry.h" line="36" column="1"/>
+      </memberdef>
+      <memberdef kind="function" id="class_azura_1_1_math_1_1_geometry_1ae114b9fd7f187249ce2c5c19fa3396a8" prot="public" static="no" const="yes" explicit="no" inline="no" virt="pure-virtual">
+        <type>U32</type>
+        <definition>virtual U32 Azura::Math::Geometry::GetVertexCount</definition>
+        <argsstring>() const =0</argsstring>
+        <name>GetVertexCount</name>
+        <reimplementedby refid="class_azura_1_1_math_1_1_ico_sphere_1ab5f5fe535445483af745919750bf745e">GetVertexCount</reimplementedby>
+        <reimplementedby refid="class_azura_1_1_imported_cloth_mesh_1a961c262838c6261bc5b3267132e25abe">GetVertexCount</reimplementedby>
+        <reimplementedby refid="class_azura_1_1_cloth_mesh_1acf16282c583a9ea24a4763b8ce92db6d">GetVertexCount</reimplementedby>
+        <reimplementedby refid="class_azura_1_1_math_1_1_plane_1abcefad16303464335c0c6c96f1284126">GetVertexCount</reimplementedby>
+        <reimplementedby refid="class_azura_1_1_physics_1_1_cloth_plane_1ab9bcdf5d3ca9e50014961df4a71a5d6e">GetVertexCount</reimplementedby>
+        <reimplementedby refid="class_azura_1_1_physics_1_1_cloth_mesh_1acf16282c583a9ea24a4763b8ce92db6d">GetVertexCount</reimplementedby>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Source/Math/Inc/Math/Geometry.h" line="38" column="1"/>
+      </memberdef>
+      <memberdef kind="function" id="class_azura_1_1_math_1_1_geometry_1af6a4f5bd5d7b7479cfe37629a60b9f87" prot="public" static="no" const="yes" explicit="no" inline="no" virt="pure-virtual">
+        <type>U32</type>
+        <definition>virtual U32 Azura::Math::Geometry::GetIndexCount</definition>
+        <argsstring>() const =0</argsstring>
+        <name>GetIndexCount</name>
+        <reimplementedby refid="class_azura_1_1_math_1_1_ico_sphere_1a9701c911a620534ad490b41d9a45dac5">GetIndexCount</reimplementedby>
+        <reimplementedby refid="class_azura_1_1_imported_cloth_mesh_1ad780f26cb40fd0207a4ef76a9de4d5a4">GetIndexCount</reimplementedby>
+        <reimplementedby refid="class_azura_1_1_cloth_mesh_1ac833446a04a3bceb5a6c116f7bf109f5">GetIndexCount</reimplementedby>
+        <reimplementedby refid="class_azura_1_1_math_1_1_plane_1a5d3dc9c0e694568dffc254538cc89756">GetIndexCount</reimplementedby>
+        <reimplementedby refid="class_azura_1_1_physics_1_1_cloth_plane_1a3acbf3bc7b57df09c7eb1b617494d6ba">GetIndexCount</reimplementedby>
+        <reimplementedby refid="class_azura_1_1_physics_1_1_cloth_mesh_1ac833446a04a3bceb5a6c116f7bf109f5">GetIndexCount</reimplementedby>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Source/Math/Inc/Math/Geometry.h" line="39" column="1"/>
+      </memberdef>
+      <memberdef kind="function" id="class_azura_1_1_math_1_1_geometry_1a81e23486f503335f688d6b9a8b3f3511" prot="public" static="no" const="yes" explicit="no" inline="no" virt="pure-virtual">
+        <type>const U8 *</type>
+        <definition>virtual const U8* Azura::Math::Geometry::VertexData</definition>
+        <argsstring>() const =0</argsstring>
+        <name>VertexData</name>
+        <reimplementedby refid="class_azura_1_1_math_1_1_ico_sphere_1aef45c0b4cc7d9e510807ef2064538d42">VertexData</reimplementedby>
+        <reimplementedby refid="class_azura_1_1_imported_cloth_mesh_1a687b59b745b57161a9c428769328a618">VertexData</reimplementedby>
+        <reimplementedby refid="class_azura_1_1_cloth_mesh_1aad3c92e28486bcd59dd6bea28bbfd76c">VertexData</reimplementedby>
+        <reimplementedby refid="class_azura_1_1_math_1_1_plane_1a25052f1f66e9174a0cb9f0751b5a62ce">VertexData</reimplementedby>
+        <reimplementedby refid="class_azura_1_1_physics_1_1_cloth_plane_1aad72ffb9544834a513dc42226afa1796">VertexData</reimplementedby>
+        <reimplementedby refid="class_azura_1_1_physics_1_1_cloth_mesh_1a55cbd00430dcd5b33824fa53cda80c49">VertexData</reimplementedby>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Source/Math/Inc/Math/Geometry.h" line="40" column="1"/>
+      </memberdef>
+      <memberdef kind="function" id="class_azura_1_1_math_1_1_geometry_1ad3a024bf9d28a6d3d230eeac7d6aa490" prot="public" static="no" const="yes" explicit="no" inline="no" virt="pure-virtual">
+        <type>const U8 *</type>
+        <definition>virtual const U8* Azura::Math::Geometry::NormalData</definition>
+        <argsstring>() const =0</argsstring>
+        <name>NormalData</name>
+        <reimplementedby refid="class_azura_1_1_math_1_1_ico_sphere_1a20c19020183cd75ce19acf3a31df50af">NormalData</reimplementedby>
+        <reimplementedby refid="class_azura_1_1_physics_1_1_cloth_plane_1a6e40e12130e5a6789c0eabfa2b1144e5">NormalData</reimplementedby>
+        <reimplementedby refid="class_azura_1_1_math_1_1_plane_1aaac856a44bc6eaacc3ad37c7e677b74f">NormalData</reimplementedby>
+        <reimplementedby refid="class_azura_1_1_imported_cloth_mesh_1a0255dc9116bdd95d3dd7b4f55c318592">NormalData</reimplementedby>
+        <reimplementedby refid="class_azura_1_1_cloth_mesh_1a322d11386baad0749dc6ed1ae6ff5da8">NormalData</reimplementedby>
+        <reimplementedby refid="class_azura_1_1_physics_1_1_cloth_mesh_1a3cf7a70e31ddc7c679c26e888dca6f51">NormalData</reimplementedby>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Source/Math/Inc/Math/Geometry.h" line="41" column="1"/>
+      </memberdef>
+      <memberdef kind="function" id="class_azura_1_1_math_1_1_geometry_1a82e486e4c83e77c7a367a31cc8019223" prot="public" static="no" const="yes" explicit="no" inline="no" virt="pure-virtual">
+        <type>const U8 *</type>
+        <definition>virtual const U8* Azura::Math::Geometry::IndexData</definition>
+        <argsstring>() const =0</argsstring>
+        <name>IndexData</name>
+        <reimplementedby refid="class_azura_1_1_math_1_1_ico_sphere_1af7ba4ea8bbac47c1b83c62916b2aa9db">IndexData</reimplementedby>
+        <reimplementedby refid="class_azura_1_1_imported_cloth_mesh_1a91a21e091d87c13dd89a9630aeba7cc5">IndexData</reimplementedby>
+        <reimplementedby refid="class_azura_1_1_cloth_mesh_1a51e4e0cacd2f467548f07d5878dac7d7">IndexData</reimplementedby>
+        <reimplementedby refid="class_azura_1_1_math_1_1_plane_1a90fdfe29f0921e8782f38bf1d9bee9cf">IndexData</reimplementedby>
+        <reimplementedby refid="class_azura_1_1_physics_1_1_cloth_plane_1a6d34438dc168a739c5eca6fcef790a7c">IndexData</reimplementedby>
+        <reimplementedby refid="class_azura_1_1_physics_1_1_cloth_mesh_1abb7338838a16d97836fd4be4e88ebd64">IndexData</reimplementedby>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Source/Math/Inc/Math/Geometry.h" line="42" column="1"/>
+      </memberdef>
+      <memberdef kind="function" id="class_azura_1_1_math_1_1_geometry_1aaef0eabbb1cc1269c20309ca3eac81b8" prot="public" static="no" const="yes" explicit="no" inline="no" virt="pure-virtual">
+        <type>const U8 *</type>
+        <definition>virtual const U8* Azura::Math::Geometry::UVData</definition>
+        <argsstring>() const =0</argsstring>
+        <name>UVData</name>
+        <reimplementedby refid="class_azura_1_1_math_1_1_plane_1a0a07b866d842477a696ab2d2ca061d4e">UVData</reimplementedby>
+        <reimplementedby refid="class_azura_1_1_math_1_1_ico_sphere_1ade7351abe2a5a7b4b3262881c8fe9f6b">UVData</reimplementedby>
+        <reimplementedby refid="class_azura_1_1_physics_1_1_cloth_plane_1a10f00f0b0d38b4a303e33c82fdeb1822">UVData</reimplementedby>
+        <reimplementedby refid="class_azura_1_1_imported_cloth_mesh_1ae9a243c7884b0e071b34fd1fdef79656">UVData</reimplementedby>
+        <reimplementedby refid="class_azura_1_1_cloth_mesh_1aa1a588427f480d688bb6bc04cd35958a">UVData</reimplementedby>
+        <reimplementedby refid="class_azura_1_1_physics_1_1_cloth_mesh_1a9ec77ce79d394013fc178dca364c5365">UVData</reimplementedby>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Source/Math/Inc/Math/Geometry.h" line="43" column="1"/>
+      </memberdef>
+      <memberdef kind="function" id="class_azura_1_1_math_1_1_geometry_1aff7277c8d60b3b04e75a97238de299a4" prot="public" static="no" const="yes" explicit="no" inline="no" virt="pure-virtual">
+        <type>RawStorageFormat</type>
+        <definition>virtual RawStorageFormat Azura::Math::Geometry::GetVertexFormat</definition>
+        <argsstring>() const =0</argsstring>
+        <name>GetVertexFormat</name>
+        <reimplementedby refid="class_azura_1_1_math_1_1_ico_sphere_1ac64ec3462aa4393f402bd1faab207608">GetVertexFormat</reimplementedby>
+        <reimplementedby refid="class_azura_1_1_imported_cloth_mesh_1af0a00cf53359ca597eeb06ed88bf4233">GetVertexFormat</reimplementedby>
+        <reimplementedby refid="class_azura_1_1_cloth_mesh_1a2e0582ff817b7a446d6eafdf3b89837d">GetVertexFormat</reimplementedby>
+        <reimplementedby refid="class_azura_1_1_math_1_1_plane_1a6187804a6ba199278e960eb59df4a566">GetVertexFormat</reimplementedby>
+        <reimplementedby refid="class_azura_1_1_physics_1_1_cloth_plane_1a539393abd1fdc386e3bae691122188b1">GetVertexFormat</reimplementedby>
+        <reimplementedby refid="class_azura_1_1_physics_1_1_cloth_mesh_1a2e0582ff817b7a446d6eafdf3b89837d">GetVertexFormat</reimplementedby>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Source/Math/Inc/Math/Geometry.h" line="44" column="1"/>
+      </memberdef>
+      <memberdef kind="function" id="class_azura_1_1_math_1_1_geometry_1a9d33a51d7ddf0c70953e2152be361a4c" prot="public" static="no" const="yes" explicit="no" inline="no" virt="pure-virtual">
+        <type>RawStorageFormat</type>
+        <definition>virtual RawStorageFormat Azura::Math::Geometry::GetNormalFormat</definition>
+        <argsstring>() const =0</argsstring>
+        <name>GetNormalFormat</name>
+        <reimplementedby refid="class_azura_1_1_math_1_1_ico_sphere_1a5644385dd215c4919efefc5f356c7956">GetNormalFormat</reimplementedby>
+        <reimplementedby refid="class_azura_1_1_physics_1_1_cloth_plane_1aee900816238f9707a55f684e0c9833a2">GetNormalFormat</reimplementedby>
+        <reimplementedby refid="class_azura_1_1_math_1_1_plane_1ab290cfee76a7bc0bf08028b433f52aa8">GetNormalFormat</reimplementedby>
+        <reimplementedby refid="class_azura_1_1_imported_cloth_mesh_1ae18aa0b6db39ee44bcb4da06f36cd78a">GetNormalFormat</reimplementedby>
+        <reimplementedby refid="class_azura_1_1_cloth_mesh_1af24713ca9479cd29cb08aa1a01762873">GetNormalFormat</reimplementedby>
+        <reimplementedby refid="class_azura_1_1_physics_1_1_cloth_mesh_1af24713ca9479cd29cb08aa1a01762873">GetNormalFormat</reimplementedby>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Source/Math/Inc/Math/Geometry.h" line="45" column="1"/>
+      </memberdef>
+      <memberdef kind="function" id="class_azura_1_1_math_1_1_geometry_1a3646f53090427c4f34d71f632bf59ff0" prot="public" static="no" const="yes" explicit="no" inline="no" virt="pure-virtual">
+        <type>RawStorageFormat</type>
+        <definition>virtual RawStorageFormat Azura::Math::Geometry::GetIndexFormat</definition>
+        <argsstring>() const =0</argsstring>
+        <name>GetIndexFormat</name>
+        <reimplementedby refid="class_azura_1_1_math_1_1_ico_sphere_1ab0ff54af290607fe2074cb2c9d4b34b2">GetIndexFormat</reimplementedby>
+        <reimplementedby refid="class_azura_1_1_imported_cloth_mesh_1a2dc1b0feccddbe41d5daf5d41d619137">GetIndexFormat</reimplementedby>
+        <reimplementedby refid="class_azura_1_1_cloth_mesh_1aa9b736d6469916689be0b31f60c9e136">GetIndexFormat</reimplementedby>
+        <reimplementedby refid="class_azura_1_1_math_1_1_plane_1a87a3f1b0921472c23aebeedf8cc5de94">GetIndexFormat</reimplementedby>
+        <reimplementedby refid="class_azura_1_1_physics_1_1_cloth_plane_1a460be278242cdcbde339f200030d413d">GetIndexFormat</reimplementedby>
+        <reimplementedby refid="class_azura_1_1_physics_1_1_cloth_mesh_1aa9b736d6469916689be0b31f60c9e136">GetIndexFormat</reimplementedby>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Source/Math/Inc/Math/Geometry.h" line="46" column="1"/>
+      </memberdef>
+      <memberdef kind="function" id="class_azura_1_1_math_1_1_geometry_1ad689616ffa31f5bdfcfa50daf5bdc7be" prot="public" static="no" const="yes" explicit="no" inline="no" virt="pure-virtual">
+        <type>RawStorageFormat</type>
+        <definition>virtual RawStorageFormat Azura::Math::Geometry::GetUVFormat</definition>
+        <argsstring>() const =0</argsstring>
+        <name>GetUVFormat</name>
+        <reimplementedby refid="class_azura_1_1_math_1_1_ico_sphere_1a241cc449d31f43cae476394cab130045">GetUVFormat</reimplementedby>
+        <reimplementedby refid="class_azura_1_1_physics_1_1_cloth_plane_1a35dc3af01854d3d3f8100e605e6f3455">GetUVFormat</reimplementedby>
+        <reimplementedby refid="class_azura_1_1_math_1_1_plane_1a00a6fead9b9c8a6243fc4aa3c4e6a390">GetUVFormat</reimplementedby>
+        <reimplementedby refid="class_azura_1_1_imported_cloth_mesh_1afa2e213a1e1e601873cf6b290efe65d8">GetUVFormat</reimplementedby>
+        <reimplementedby refid="class_azura_1_1_cloth_mesh_1a9f25a92dbce5dbcb3005b1a960b81b94">GetUVFormat</reimplementedby>
+        <reimplementedby refid="class_azura_1_1_physics_1_1_cloth_mesh_1a9f25a92dbce5dbcb3005b1a960b81b94">GetUVFormat</reimplementedby>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Source/Math/Inc/Math/Geometry.h" line="47" column="1"/>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <inheritancegraph>
+      <node id="288">
+        <label>Azura::Math::IcoSphere</label>
+        <link refid="class_azura_1_1_math_1_1_ico_sphere"/>
+        <childnode refid="285" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="286">
+        <label>Azura::ClothMesh</label>
+        <link refid="class_azura_1_1_cloth_mesh"/>
+        <childnode refid="285" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="290">
+        <label>Azura::Physics::IPhysicsGeometry</label>
+        <link refid="class_azura_1_1_physics_1_1_i_physics_geometry"/>
+        <childnode refid="285" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="293">
+        <label>Azura::Physics::ClothPlane</label>
+        <link refid="class_azura_1_1_physics_1_1_cloth_plane"/>
+        <childnode refid="291" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="292">
+        <label>Azura::Physics::ClothMesh</label>
+        <link refid="class_azura_1_1_physics_1_1_cloth_mesh"/>
+        <childnode refid="291" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="287">
+        <label>Azura::ImportedClothMesh</label>
+        <link refid="class_azura_1_1_imported_cloth_mesh"/>
+        <childnode refid="285" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="291">
+        <label>Azura::Physics::IClothPhysicsGeometry</label>
+        <link refid="class_azura_1_1_physics_1_1_i_cloth_physics_geometry"/>
+        <childnode refid="290" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="289">
+        <label>Azura::Math::Plane</label>
+        <link refid="class_azura_1_1_math_1_1_plane"/>
+        <childnode refid="285" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="285">
+        <label>Azura::Math::Geometry</label>
+        <link refid="class_azura_1_1_math_1_1_geometry"/>
+      </node>
+    </inheritancegraph>
+    <location file="Source/Math/Inc/Math/Geometry.h" line="20" column="1" bodyfile="Source/Math/Inc/Math/Geometry.h" bodystart="19" bodyend="48"/>
+    <listofallmembers>
+      <member refid="class_azura_1_1_math_1_1_geometry_1a7ff397714deef6a88c8e4edddc0ba032" prot="public" virt="non-virtual"><scope>Azura::Math::Geometry</scope><name>Geometry</name></member>
+      <member refid="class_azura_1_1_math_1_1_geometry_1abd1cd8e142652b4dfd80378a52f45e47" prot="public" virt="non-virtual"><scope>Azura::Math::Geometry</scope><name>Geometry</name></member>
+      <member refid="class_azura_1_1_math_1_1_geometry_1ac6d5eb1dbfcfce2d84d5f4fe54640922" prot="public" virt="non-virtual"><scope>Azura::Math::Geometry</scope><name>Geometry</name></member>
+      <member refid="class_azura_1_1_math_1_1_geometry_1af6a4f5bd5d7b7479cfe37629a60b9f87" prot="public" virt="pure-virtual"><scope>Azura::Math::Geometry</scope><name>GetIndexCount</name></member>
+      <member refid="class_azura_1_1_math_1_1_geometry_1a3646f53090427c4f34d71f632bf59ff0" prot="public" virt="pure-virtual"><scope>Azura::Math::Geometry</scope><name>GetIndexFormat</name></member>
+      <member refid="class_azura_1_1_math_1_1_geometry_1a9d33a51d7ddf0c70953e2152be361a4c" prot="public" virt="pure-virtual"><scope>Azura::Math::Geometry</scope><name>GetNormalFormat</name></member>
+      <member refid="class_azura_1_1_math_1_1_geometry_1ad689616ffa31f5bdfcfa50daf5bdc7be" prot="public" virt="pure-virtual"><scope>Azura::Math::Geometry</scope><name>GetUVFormat</name></member>
+      <member refid="class_azura_1_1_math_1_1_geometry_1ae114b9fd7f187249ce2c5c19fa3396a8" prot="public" virt="pure-virtual"><scope>Azura::Math::Geometry</scope><name>GetVertexCount</name></member>
+      <member refid="class_azura_1_1_math_1_1_geometry_1aff7277c8d60b3b04e75a97238de299a4" prot="public" virt="pure-virtual"><scope>Azura::Math::Geometry</scope><name>GetVertexFormat</name></member>
+      <member refid="class_azura_1_1_math_1_1_geometry_1a82e486e4c83e77c7a367a31cc8019223" prot="public" virt="pure-virtual"><scope>Azura::Math::Geometry</scope><name>IndexData</name></member>
+      <member refid="class_azura_1_1_math_1_1_geometry_1aaf9593bfa903f9df23aefb3db971fc03" prot="public" virt="pure-virtual"><scope>Azura::Math::Geometry</scope><name>IndexDataSize</name></member>
+      <member refid="class_azura_1_1_math_1_1_geometry_1ad3a024bf9d28a6d3d230eeac7d6aa490" prot="public" virt="pure-virtual"><scope>Azura::Math::Geometry</scope><name>NormalData</name></member>
+      <member refid="class_azura_1_1_math_1_1_geometry_1a77e056714cf8fde1d7c15d4f7b01e84a" prot="public" virt="pure-virtual"><scope>Azura::Math::Geometry</scope><name>NormalDataSize</name></member>
+      <member refid="class_azura_1_1_math_1_1_geometry_1a1f4182094f19c0f3e4d3a249707f34e9" prot="public" virt="non-virtual"><scope>Azura::Math::Geometry</scope><name>operator=</name></member>
+      <member refid="class_azura_1_1_math_1_1_geometry_1a37a28a7b74fc5abc68f231c9d3af8c72" prot="public" virt="non-virtual"><scope>Azura::Math::Geometry</scope><name>operator=</name></member>
+      <member refid="class_azura_1_1_math_1_1_geometry_1a149b71e3fb0c73440c46b07482acf76f" prot="public" virt="pure-virtual"><scope>Azura::Math::Geometry</scope><name>TotalDataSize</name></member>
+      <member refid="class_azura_1_1_math_1_1_geometry_1aaef0eabbb1cc1269c20309ca3eac81b8" prot="public" virt="pure-virtual"><scope>Azura::Math::Geometry</scope><name>UVData</name></member>
+      <member refid="class_azura_1_1_math_1_1_geometry_1a812a50d6a44b12d6e3697d04a879c1d8" prot="public" virt="pure-virtual"><scope>Azura::Math::Geometry</scope><name>UVDataSize</name></member>
+      <member refid="class_azura_1_1_math_1_1_geometry_1a81e23486f503335f688d6b9a8b3f3511" prot="public" virt="pure-virtual"><scope>Azura::Math::Geometry</scope><name>VertexData</name></member>
+      <member refid="class_azura_1_1_math_1_1_geometry_1ac054e7a5a660c7faac630cff3ee91b86" prot="public" virt="pure-virtual"><scope>Azura::Math::Geometry</scope><name>VertexDataSize</name></member>
+      <member refid="class_azura_1_1_math_1_1_geometry_1ae50195fe0fa7af9125260c39de331fdf" prot="public" virt="virtual"><scope>Azura::Math::Geometry</scope><name>~Geometry</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

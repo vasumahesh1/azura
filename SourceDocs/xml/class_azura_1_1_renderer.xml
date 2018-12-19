@@ -1,0 +1,652 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.8.14">
+  <compounddef id="class_azura_1_1_renderer" kind="class" language="C++" prot="public" abstract="yes">
+    <compoundname>Azura::Renderer</compoundname>
+    <derivedcompoundref refid="class_azura_1_1_d3_d12_1_1_d3_d12_renderer" prot="public" virt="non-virtual">Azura::D3D12::D3D12Renderer</derivedcompoundref>
+    <derivedcompoundref refid="class_azura_1_1_vulkan_1_1_vk_renderer" prot="public" virt="non-virtual">Azura::Vulkan::VkRenderer</derivedcompoundref>
+      <sectiondef kind="protected-attrib">
+      <memberdef kind="variable" id="class_azura_1_1_renderer_1a841f3383edb98b38eb159e5d5787f0e2" prot="protected" static="no" mutable="no">
+        <type><ref refid="class_azura_1_1_containers_1_1_vector" kindref="compound">Containers::Vector</ref>&lt; <ref refid="struct_azura_1_1_descriptor_slot" kindref="compound">DescriptorSlot</ref> &gt;</type>
+        <definition>Containers::Vector&lt;DescriptorSlot&gt; Azura::Renderer::m_descriptorSlots</definition>
+        <argsstring></argsstring>
+        <name>m_descriptorSlots</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Source/Azura/RenderSystem/Inc/Generic/Renderer.h" line="59" column="1" bodyfile="Source/Azura/RenderSystem/Inc/Generic/Renderer.h" bodystart="59" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="class_azura_1_1_renderer_1a87d7051f01160aa69535345254c2a0a8" prot="protected" static="no" mutable="no">
+        <type><ref refid="class_azura_1_1_containers_1_1_vector" kindref="compound">Containers::Vector</ref>&lt; <ref refid="struct_azura_1_1_descriptor_table_entry" kindref="compound">DescriptorTableEntry</ref> &gt;</type>
+        <definition>Containers::Vector&lt;DescriptorTableEntry&gt; Azura::Renderer::m_descriptorSetTable</definition>
+        <argsstring></argsstring>
+        <name>m_descriptorSetTable</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Source/Azura/RenderSystem/Inc/Generic/Renderer.h" line="60" column="1" bodyfile="Source/Azura/RenderSystem/Inc/Generic/Renderer.h" bodystart="60" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="class_azura_1_1_renderer_1a1f8af6c4bbf4064bf34bbf7437ec72df" prot="protected" static="no" mutable="no">
+        <type><ref refid="struct_azura_1_1_descriptor_count" kindref="compound">DescriptorCount</ref></type>
+        <definition>DescriptorCount Azura::Renderer::m_descriptorCount</definition>
+        <argsstring></argsstring>
+        <name>m_descriptorCount</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Source/Azura/RenderSystem/Inc/Generic/Renderer.h" line="62" column="1" bodyfile="Source/Azura/RenderSystem/Inc/Generic/Renderer.h" bodystart="62" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="class_azura_1_1_renderer_1a12af92c6e91812549a69d4e01c2ecfab" prot="protected" static="no" mutable="no">
+        <type>std::reference_wrapper&lt; <ref refid="class_azura_1_1_memory_1_1_allocator" kindref="compound">Memory::Allocator</ref> &gt;</type>
+        <definition>std::reference_wrapper&lt;Memory::Allocator&gt; Azura::Renderer::m_mainAllocator</definition>
+        <argsstring></argsstring>
+        <name>m_mainAllocator</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Source/Azura/RenderSystem/Inc/Generic/Renderer.h" line="64" column="1" bodyfile="Source/Azura/RenderSystem/Inc/Generic/Renderer.h" bodystart="64" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="class_azura_1_1_renderer_1a8dbf98fe051a3691d4626dddc7ff4173" prot="protected" static="no" mutable="no">
+        <type>std::reference_wrapper&lt; <ref refid="class_azura_1_1_memory_1_1_allocator" kindref="compound">Memory::Allocator</ref> &gt;</type>
+        <definition>std::reference_wrapper&lt;Memory::Allocator&gt; Azura::Renderer::m_drawPoolAllocator</definition>
+        <argsstring></argsstring>
+        <name>m_drawPoolAllocator</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Source/Azura/RenderSystem/Inc/Generic/Renderer.h" line="65" column="1" bodyfile="Source/Azura/RenderSystem/Inc/Generic/Renderer.h" bodystart="65" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="class_azura_1_1_renderer_1a2e3cdf06636b8f2e0e914fffc6f40386" prot="protected" static="no" mutable="no">
+        <type>std::reference_wrapper&lt; <ref refid="class_azura_1_1_window" kindref="compound">Window</ref> &gt;</type>
+        <definition>std::reference_wrapper&lt;Window&gt; Azura::Renderer::m_window</definition>
+        <argsstring></argsstring>
+        <name>m_window</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Source/Azura/RenderSystem/Inc/Generic/Renderer.h" line="67" column="1" bodyfile="Source/Azura/RenderSystem/Inc/Generic/Renderer.h" bodystart="67" bodyend="-1"/>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="private-attrib">
+      <memberdef kind="variable" id="class_azura_1_1_renderer_1aa4767adf6a5fe8c46aa4dc51e886dae1" prot="private" static="no" mutable="no">
+        <type>const <ref refid="struct_azura_1_1_application_info" kindref="compound">ApplicationInfo</ref></type>
+        <definition>const ApplicationInfo Azura::Renderer::m_applicationInfo</definition>
+        <argsstring></argsstring>
+        <name>m_applicationInfo</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Source/Azura/RenderSystem/Inc/Generic/Renderer.h" line="72" column="1" bodyfile="Source/Azura/RenderSystem/Inc/Generic/Renderer.h" bodystart="72" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="class_azura_1_1_renderer_1ad372a27603382503d3fa424b25a847f7" prot="private" static="no" mutable="no">
+        <type>const <ref refid="struct_azura_1_1_device_requirements" kindref="compound">DeviceRequirements</ref></type>
+        <definition>const DeviceRequirements Azura::Renderer::m_deviceRequirements</definition>
+        <argsstring></argsstring>
+        <name>m_deviceRequirements</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Source/Azura/RenderSystem/Inc/Generic/Renderer.h" line="73" column="1" bodyfile="Source/Azura/RenderSystem/Inc/Generic/Renderer.h" bodystart="73" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="class_azura_1_1_renderer_1a7684415137ca7a165630a6290ff663e2" prot="private" static="no" mutable="no">
+        <type>const <ref refid="struct_azura_1_1_application_requirements" kindref="compound">ApplicationRequirements</ref></type>
+        <definition>const ApplicationRequirements Azura::Renderer::m_appRequirements</definition>
+        <argsstring></argsstring>
+        <name>m_appRequirements</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Source/Azura/RenderSystem/Inc/Generic/Renderer.h" line="74" column="1" bodyfile="Source/Azura/RenderSystem/Inc/Generic/Renderer.h" bodystart="74" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="class_azura_1_1_renderer_1a97b4feb3128135198680d76e05efcbc6" prot="private" static="no" mutable="no">
+        <type><ref refid="struct_azura_1_1_swap_chain_requirements" kindref="compound">SwapChainRequirements</ref></type>
+        <definition>SwapChainRequirements Azura::Renderer::m_swapChainRequirements</definition>
+        <argsstring></argsstring>
+        <name>m_swapChainRequirements</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Source/Azura/RenderSystem/Inc/Generic/Renderer.h" line="75" column="1" bodyfile="Source/Azura/RenderSystem/Inc/Generic/Renderer.h" bodystart="75" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="class_azura_1_1_renderer_1afdcf999a446c7059fcf5b8f662fc2f06" prot="private" static="no" mutable="no">
+        <type>U32</type>
+        <definition>U32 Azura::Renderer::m_frameCount</definition>
+        <argsstring></argsstring>
+        <name>m_frameCount</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Source/Azura/RenderSystem/Inc/Generic/Renderer.h" line="77" column="1" bodyfile="Source/Azura/RenderSystem/Inc/Generic/Renderer.h" bodystart="77" bodyend="-1"/>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="public-func">
+      <memberdef kind="function" id="class_azura_1_1_renderer_1a54632abe8c17005a9a9029f3f17df415" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>Azura::Renderer::Renderer</definition>
+        <argsstring>(ApplicationInfo appInfo, const DeviceRequirements &amp;deviceRequirements, ApplicationRequirements appRequirements, const SwapChainRequirements &amp;swapChainRequirements, const DescriptorRequirements &amp;descriptorRequirements, Memory::Allocator &amp;mainAllocator, Memory::Allocator &amp;drawAllocator, Window &amp;window)</argsstring>
+        <name>Renderer</name>
+        <param>
+          <type><ref refid="struct_azura_1_1_application_info" kindref="compound">ApplicationInfo</ref></type>
+          <declname>appInfo</declname>
+        </param>
+        <param>
+          <type>const <ref refid="struct_azura_1_1_device_requirements" kindref="compound">DeviceRequirements</ref> &amp;</type>
+          <declname>deviceRequirements</declname>
+        </param>
+        <param>
+          <type><ref refid="struct_azura_1_1_application_requirements" kindref="compound">ApplicationRequirements</ref></type>
+          <declname>appRequirements</declname>
+        </param>
+        <param>
+          <type>const <ref refid="struct_azura_1_1_swap_chain_requirements" kindref="compound">SwapChainRequirements</ref> &amp;</type>
+          <declname>swapChainRequirements</declname>
+        </param>
+        <param>
+          <type>const <ref refid="struct_azura_1_1_descriptor_requirements" kindref="compound">DescriptorRequirements</ref> &amp;</type>
+          <declname>descriptorRequirements</declname>
+        </param>
+        <param>
+          <type><ref refid="class_azura_1_1_memory_1_1_allocator" kindref="compound">Memory::Allocator</ref> &amp;</type>
+          <declname>mainAllocator</declname>
+        </param>
+        <param>
+          <type><ref refid="class_azura_1_1_memory_1_1_allocator" kindref="compound">Memory::Allocator</ref> &amp;</type>
+          <declname>drawAllocator</declname>
+        </param>
+        <param>
+          <type><ref refid="class_azura_1_1_window" kindref="compound">Window</ref> &amp;</type>
+          <declname>window</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Source/Azura/RenderSystem/Inc/Generic/Renderer.h" line="19" column="1" bodyfile="Source/Azura/RenderSystem/Src/Generic/Renderer.cpp" bodystart="8" bodyend="80"/>
+      </memberdef>
+      <memberdef kind="function" id="class_azura_1_1_renderer_1a88bf8155464cceec60344f094926075b" prot="public" static="no" const="no" explicit="no" inline="no" virt="virtual">
+        <type></type>
+        <definition>virtual Azura::Renderer::~Renderer</definition>
+        <argsstring>()=default</argsstring>
+        <name>~Renderer</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Source/Azura/RenderSystem/Inc/Generic/Renderer.h" line="27" column="1"/>
+      </memberdef>
+      <memberdef kind="function" id="class_azura_1_1_renderer_1a0558f645a2e0108f24cc9f01c94eea54" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>Azura::Renderer::Renderer</definition>
+        <argsstring>(const Renderer &amp;other)=delete</argsstring>
+        <name>Renderer</name>
+        <param>
+          <type>const <ref refid="class_azura_1_1_renderer" kindref="compound">Renderer</ref> &amp;</type>
+          <declname>other</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Source/Azura/RenderSystem/Inc/Generic/Renderer.h" line="29" column="1"/>
+      </memberdef>
+      <memberdef kind="function" id="class_azura_1_1_renderer_1a546303972ca665980703c1d3de337aa9" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>Azura::Renderer::Renderer</definition>
+        <argsstring>(Renderer &amp;&amp;other)=delete</argsstring>
+        <name>Renderer</name>
+        <param>
+          <type><ref refid="class_azura_1_1_renderer" kindref="compound">Renderer</ref> &amp;&amp;</type>
+          <declname>other</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Source/Azura/RenderSystem/Inc/Generic/Renderer.h" line="30" column="1"/>
+      </memberdef>
+      <memberdef kind="function" id="class_azura_1_1_renderer_1a32052c773664639dce150e99324728c1" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="class_azura_1_1_renderer" kindref="compound">Renderer</ref> &amp;</type>
+        <definition>Renderer&amp; Azura::Renderer::operator=</definition>
+        <argsstring>(const Renderer &amp;rhs)=delete</argsstring>
+        <name>operator=</name>
+        <param>
+          <type>const <ref refid="class_azura_1_1_renderer" kindref="compound">Renderer</ref> &amp;</type>
+          <declname>rhs</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Source/Azura/RenderSystem/Inc/Generic/Renderer.h" line="31" column="1"/>
+      </memberdef>
+      <memberdef kind="function" id="class_azura_1_1_renderer_1a77ca39f366cb06456d73d1ba4b3e2b8e" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="class_azura_1_1_renderer" kindref="compound">Renderer</ref> &amp;</type>
+        <definition>Renderer&amp; Azura::Renderer::operator=</definition>
+        <argsstring>(Renderer &amp;&amp;rhs)=delete</argsstring>
+        <name>operator=</name>
+        <param>
+          <type><ref refid="class_azura_1_1_renderer" kindref="compound">Renderer</ref> &amp;&amp;</type>
+          <declname>rhs</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Source/Azura/RenderSystem/Inc/Generic/Renderer.h" line="32" column="1"/>
+      </memberdef>
+      <memberdef kind="function" id="class_azura_1_1_renderer_1aaf7b365a382ca3301dc5fc982ade5209" prot="public" static="no" const="yes" explicit="no" inline="no" virt="pure-virtual">
+        <type>String</type>
+        <definition>virtual String Azura::Renderer::GetRenderingAPI</definition>
+        <argsstring>() const =0</argsstring>
+        <name>GetRenderingAPI</name>
+        <reimplementedby refid="class_azura_1_1_d3_d12_1_1_d3_d12_renderer_1a1d53fe29957be4417a40768f55dd1d8f">GetRenderingAPI</reimplementedby>
+        <reimplementedby refid="class_azura_1_1_vulkan_1_1_vk_renderer_1a7b3ee28a15a4f531f73abacc4a5a6564">GetRenderingAPI</reimplementedby>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Source/Azura/RenderSystem/Inc/Generic/Renderer.h" line="34" column="1"/>
+      </memberdef>
+      <memberdef kind="function" id="class_azura_1_1_renderer_1a6ea67ac02797d16185ca3d8e29fc86c9" prot="public" static="no" const="no" explicit="no" inline="no" virt="pure-virtual">
+        <type><ref refid="class_azura_1_1_drawable_pool" kindref="compound">DrawablePool</ref> &amp;</type>
+        <definition>virtual DrawablePool&amp; Azura::Renderer::CreateDrawablePool</definition>
+        <argsstring>(const DrawablePoolCreateInfo &amp;createInfo)=0</argsstring>
+        <name>CreateDrawablePool</name>
+        <reimplementedby refid="class_azura_1_1_d3_d12_1_1_d3_d12_renderer_1a5090400633438bf34318088631161d12">CreateDrawablePool</reimplementedby>
+        <reimplementedby refid="class_azura_1_1_vulkan_1_1_vk_renderer_1ad842299ab1c7566bffd422b7fd6624ec">CreateDrawablePool</reimplementedby>
+        <param>
+          <type>const <ref refid="struct_azura_1_1_drawable_pool_create_info" kindref="compound">DrawablePoolCreateInfo</ref> &amp;</type>
+          <declname>createInfo</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Source/Azura/RenderSystem/Inc/Generic/Renderer.h" line="36" column="1"/>
+      </memberdef>
+      <memberdef kind="function" id="class_azura_1_1_renderer_1ad834cd9005516b88352a021b938c6325" prot="public" static="no" const="no" explicit="no" inline="no" virt="pure-virtual">
+        <type><ref refid="class_azura_1_1_compute_pool" kindref="compound">ComputePool</ref> &amp;</type>
+        <definition>virtual ComputePool&amp; Azura::Renderer::CreateComputePool</definition>
+        <argsstring>(const ComputePoolCreateInfo &amp;createInfo)=0</argsstring>
+        <name>CreateComputePool</name>
+        <reimplementedby refid="class_azura_1_1_d3_d12_1_1_d3_d12_renderer_1a0681872adc10dbd7c0da8246fcbc9adc">CreateComputePool</reimplementedby>
+        <reimplementedby refid="class_azura_1_1_vulkan_1_1_vk_renderer_1a088aced5bb508163e6b2e77146b8090d">CreateComputePool</reimplementedby>
+        <param>
+          <type>const <ref refid="struct_azura_1_1_compute_pool_create_info" kindref="compound">ComputePoolCreateInfo</ref> &amp;</type>
+          <declname>createInfo</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Source/Azura/RenderSystem/Inc/Generic/Renderer.h" line="37" column="1"/>
+      </memberdef>
+      <memberdef kind="function" id="class_azura_1_1_renderer_1aa494fc2068e3750ff281444ec23c0dd3" prot="public" static="no" const="no" explicit="no" inline="no" virt="pure-virtual">
+        <type>void</type>
+        <definition>virtual void Azura::Renderer::Submit</definition>
+        <argsstring>()=0</argsstring>
+        <name>Submit</name>
+        <reimplementedby refid="class_azura_1_1_d3_d12_1_1_d3_d12_renderer_1ac6016bae4c2d3a0b8aa6b45831bbb27d">Submit</reimplementedby>
+        <reimplementedby refid="class_azura_1_1_vulkan_1_1_vk_renderer_1a739bb323ff06fd0a81094da2b6ac9388">Submit</reimplementedby>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Source/Azura/RenderSystem/Inc/Generic/Renderer.h" line="39" column="1"/>
+      </memberdef>
+      <memberdef kind="function" id="class_azura_1_1_renderer_1af0ebec31c1f8a8e11601fc1632b9e54e" prot="public" static="no" const="no" explicit="no" inline="no" virt="pure-virtual">
+        <type>void</type>
+        <definition>virtual void Azura::Renderer::RenderFrame</definition>
+        <argsstring>()=0</argsstring>
+        <name>RenderFrame</name>
+        <reimplementedby refid="class_azura_1_1_d3_d12_1_1_d3_d12_renderer_1aa4973ead72d86eb9b58f5b8a82182e0e">RenderFrame</reimplementedby>
+        <reimplementedby refid="class_azura_1_1_vulkan_1_1_vk_renderer_1ab150845de6947aabbd2e311563c1cd90">RenderFrame</reimplementedby>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Source/Azura/RenderSystem/Inc/Generic/Renderer.h" line="40" column="1"/>
+      </memberdef>
+      <memberdef kind="function" id="class_azura_1_1_renderer_1a89e45cfaf87d8616a862c63f8e3def4a" prot="public" static="no" const="no" explicit="no" inline="no" virt="virtual">
+        <type>void</type>
+        <definition>void Azura::Renderer::EnterRenderFrame</definition>
+        <argsstring>()</argsstring>
+        <name>EnterRenderFrame</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Source/Azura/RenderSystem/Inc/Generic/Renderer.h" line="42" column="1" bodyfile="Source/Azura/RenderSystem/Src/Generic/Renderer.cpp" bodystart="82" bodyend="83"/>
+      </memberdef>
+      <memberdef kind="function" id="class_azura_1_1_renderer_1a64cba9c177877b7a8aae0dbe80c591b0" prot="public" static="no" const="no" explicit="no" inline="no" virt="virtual">
+        <type>void</type>
+        <definition>void Azura::Renderer::ExitRenderFrame</definition>
+        <argsstring>()</argsstring>
+        <name>ExitRenderFrame</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Source/Azura/RenderSystem/Inc/Generic/Renderer.h" line="43" column="1" bodyfile="Source/Azura/RenderSystem/Src/Generic/Renderer.cpp" bodystart="85" bodyend="87"/>
+      </memberdef>
+      <memberdef kind="function" id="class_azura_1_1_renderer_1a4a4a63908228880853e8781da6a8131f" prot="public" static="no" const="yes" explicit="no" inline="no" virt="pure-virtual">
+        <type>void</type>
+        <definition>virtual void Azura::Renderer::SnapshotFrame</definition>
+        <argsstring>(const String &amp;exportPath) const =0</argsstring>
+        <name>SnapshotFrame</name>
+        <reimplementedby refid="class_azura_1_1_d3_d12_1_1_d3_d12_renderer_1aeb4c8e0e11775653fc69a18afc4e7bb6">SnapshotFrame</reimplementedby>
+        <reimplementedby refid="class_azura_1_1_vulkan_1_1_vk_renderer_1a2e1fb6e619d25793da4658e95acaae99">SnapshotFrame</reimplementedby>
+        <param>
+          <type>const String &amp;</type>
+          <declname>exportPath</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Source/Azura/RenderSystem/Inc/Generic/Renderer.h" line="45" column="1"/>
+      </memberdef>
+      <memberdef kind="function" id="class_azura_1_1_renderer_1afffbe190821b6e162f0dcc722f4ce6fc" prot="public" static="no" const="no" explicit="no" inline="no" virt="pure-virtual">
+        <type>void</type>
+        <definition>virtual void Azura::Renderer::BindRenderTarget</definition>
+        <argsstring>(U32 renderTargetId, const TextureDesc &amp;desc, const U8 *buffer)=0</argsstring>
+        <name>BindRenderTarget</name>
+        <reimplementedby refid="class_azura_1_1_d3_d12_1_1_d3_d12_renderer_1a8e9b2e1a00e2b8a604ea678dababa9e7">BindRenderTarget</reimplementedby>
+        <reimplementedby refid="class_azura_1_1_vulkan_1_1_vk_renderer_1aa2095f30995bd026a91e323914176690">BindRenderTarget</reimplementedby>
+        <param>
+          <type>U32</type>
+          <declname>renderTargetId</declname>
+        </param>
+        <param>
+          <type>const <ref refid="struct_azura_1_1_texture_desc" kindref="compound">TextureDesc</ref> &amp;</type>
+          <declname>desc</declname>
+        </param>
+        <param>
+          <type>const U8 *</type>
+          <declname>buffer</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Source/Azura/RenderSystem/Inc/Generic/Renderer.h" line="47" column="1"/>
+      </memberdef>
+      <memberdef kind="function" id="class_azura_1_1_renderer_1adedba457f2836d839d0d611476b22cf3" prot="public" static="no" const="no" explicit="no" inline="no" virt="pure-virtual">
+        <type>void</type>
+        <definition>virtual void Azura::Renderer::BindBufferTarget</definition>
+        <argsstring>(U32 bufferTargetId, const U8 *buffer)=0</argsstring>
+        <name>BindBufferTarget</name>
+        <reimplementedby refid="class_azura_1_1_d3_d12_1_1_d3_d12_renderer_1ae261477b63af2383a88932702dae4813">BindBufferTarget</reimplementedby>
+        <reimplementedby refid="class_azura_1_1_vulkan_1_1_vk_renderer_1a70424cd6541a07a80e97e328e1c8f89d">BindBufferTarget</reimplementedby>
+        <param>
+          <type>U32</type>
+          <declname>bufferTargetId</declname>
+        </param>
+        <param>
+          <type>const U8 *</type>
+          <declname>buffer</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Source/Azura/RenderSystem/Inc/Generic/Renderer.h" line="48" column="1"/>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="protected-func">
+      <memberdef kind="function" id="class_azura_1_1_renderer_1a20ae9aefdbe3f8ab5ab413d13279c624" prot="protected" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
+        <type>const <ref refid="struct_azura_1_1_application_info" kindref="compound">ApplicationInfo</ref> &amp;</type>
+        <definition>const ApplicationInfo &amp; Azura::Renderer::GetApplicationInfo</definition>
+        <argsstring>() const</argsstring>
+        <name>GetApplicationInfo</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Source/Azura/RenderSystem/Inc/Generic/Renderer.h" line="51" column="1" bodyfile="Source/Azura/RenderSystem/Src/Generic/Renderer.cpp" bodystart="89" bodyend="91"/>
+      </memberdef>
+      <memberdef kind="function" id="class_azura_1_1_renderer_1a6b13c20fafc1df407083c0fff8db0357" prot="protected" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
+        <type>const <ref refid="struct_azura_1_1_device_requirements" kindref="compound">DeviceRequirements</ref> &amp;</type>
+        <definition>const DeviceRequirements &amp; Azura::Renderer::GetDeviceRequirements</definition>
+        <argsstring>() const</argsstring>
+        <name>GetDeviceRequirements</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Source/Azura/RenderSystem/Inc/Generic/Renderer.h" line="52" column="1" bodyfile="Source/Azura/RenderSystem/Src/Generic/Renderer.cpp" bodystart="93" bodyend="95"/>
+      </memberdef>
+      <memberdef kind="function" id="class_azura_1_1_renderer_1ac03c28c857468e9f6c6c9795db17e9f3" prot="protected" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
+        <type>const <ref refid="struct_azura_1_1_application_requirements" kindref="compound">ApplicationRequirements</ref> &amp;</type>
+        <definition>const ApplicationRequirements &amp; Azura::Renderer::GetApplicationRequirements</definition>
+        <argsstring>() const</argsstring>
+        <name>GetApplicationRequirements</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Source/Azura/RenderSystem/Inc/Generic/Renderer.h" line="53" column="1" bodyfile="Source/Azura/RenderSystem/Src/Generic/Renderer.cpp" bodystart="97" bodyend="99"/>
+      </memberdef>
+      <memberdef kind="function" id="class_azura_1_1_renderer_1ac78e2c6d8f9f973dcbb2ec5ee9b937cb" prot="protected" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
+        <type>const <ref refid="struct_azura_1_1_swap_chain_requirements" kindref="compound">SwapChainRequirements</ref> &amp;</type>
+        <definition>const SwapChainRequirements &amp; Azura::Renderer::GetSwapchainRequirements</definition>
+        <argsstring>() const</argsstring>
+        <name>GetSwapchainRequirements</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Source/Azura/RenderSystem/Inc/Generic/Renderer.h" line="54" column="1" bodyfile="Source/Azura/RenderSystem/Src/Generic/Renderer.cpp" bodystart="101" bodyend="103"/>
+      </memberdef>
+      <memberdef kind="function" id="class_azura_1_1_renderer_1ad390707811c569f789041d3833841575" prot="protected" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
+        <type>U32</type>
+        <definition>U32 Azura::Renderer::GetCurrentFrame</definition>
+        <argsstring>() const</argsstring>
+        <name>GetCurrentFrame</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Source/Azura/RenderSystem/Inc/Generic/Renderer.h" line="56" column="1" bodyfile="Source/Azura/RenderSystem/Src/Generic/Renderer.cpp" bodystart="105" bodyend="107"/>
+      </memberdef>
+      <memberdef kind="function" id="class_azura_1_1_renderer_1aa4c13c392bad69615bb9dabdc1be9c23" prot="protected" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void Azura::Renderer::SetCurrentFrame</definition>
+        <argsstring>(U32 frameIdx)</argsstring>
+        <name>SetCurrentFrame</name>
+        <param>
+          <type>U32</type>
+          <declname>frameIdx</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Source/Azura/RenderSystem/Inc/Generic/Renderer.h" line="57" column="1" bodyfile="Source/Azura/RenderSystem/Src/Generic/Renderer.cpp" bodystart="109" bodyend="111"/>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="private-func">
+      <memberdef kind="function" id="class_azura_1_1_renderer_1ad199a717e1f08ba31264a0e6857f0673" prot="private" static="no" const="no" explicit="no" inline="no" virt="pure-virtual">
+        <type>void</type>
+        <definition>virtual void Azura::Renderer::AddShader</definition>
+        <argsstring>(const ShaderCreateInfo &amp;info)=0</argsstring>
+        <name>AddShader</name>
+        <reimplementedby refid="class_azura_1_1_d3_d12_1_1_d3_d12_renderer_1a8b2ca6847c5e8077d344fcb7eabb70df">AddShader</reimplementedby>
+        <reimplementedby refid="class_azura_1_1_vulkan_1_1_vk_renderer_1ad89851468c1d6a466d786c24510b94c9">AddShader</reimplementedby>
+        <param>
+          <type>const <ref refid="struct_azura_1_1_shader_create_info" kindref="compound">ShaderCreateInfo</ref> &amp;</type>
+          <declname>info</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Source/Azura/RenderSystem/Inc/Generic/Renderer.h" line="70" column="1"/>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <inheritancegraph>
+      <node id="468">
+        <label>Azura::D3D12::D3D12Renderer</label>
+        <link refid="class_azura_1_1_d3_d12_1_1_d3_d12_renderer"/>
+        <childnode refid="467" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="467">
+        <label>Azura::Renderer</label>
+        <link refid="class_azura_1_1_renderer"/>
+      </node>
+      <node id="469">
+        <label>Azura::Vulkan::VkRenderer</label>
+        <link refid="class_azura_1_1_vulkan_1_1_vk_renderer"/>
+        <childnode refid="467" relation="public-inheritance">
+        </childnode>
+      </node>
+    </inheritancegraph>
+    <collaborationgraph>
+      <node id="473">
+        <label>Azura::Containers::Vector&lt; Azura::DescriptorSlot &gt;</label>
+        <link refid="class_azura_1_1_containers_1_1_vector"/>
+      </node>
+      <node id="470">
+        <label>Azura::Renderer</label>
+        <link refid="class_azura_1_1_renderer"/>
+        <childnode refid="471" relation="usage">
+          <edgelabel>m_descriptorCount</edgelabel>
+        </childnode>
+        <childnode refid="472" relation="usage">
+          <edgelabel>m_descriptorSetTable</edgelabel>
+        </childnode>
+        <childnode refid="473" relation="usage">
+          <edgelabel>m_descriptorSlots</edgelabel>
+        </childnode>
+      </node>
+      <node id="471">
+        <label>Azura::DescriptorCount</label>
+        <link refid="struct_azura_1_1_descriptor_count"/>
+      </node>
+      <node id="472">
+        <label>Azura::Containers::Vector&lt; Azura::DescriptorTableEntry &gt;</label>
+        <link refid="class_azura_1_1_containers_1_1_vector"/>
+      </node>
+    </collaborationgraph>
+    <location file="Source/Azura/RenderSystem/Inc/Generic/Renderer.h" line="17" column="1" bodyfile="Source/Azura/RenderSystem/Inc/Generic/Renderer.h" bodystart="17" bodyend="78"/>
+    <listofallmembers>
+      <member refid="class_azura_1_1_renderer_1ad199a717e1f08ba31264a0e6857f0673" prot="private" virt="pure-virtual"><scope>Azura::Renderer</scope><name>AddShader</name></member>
+      <member refid="class_azura_1_1_renderer_1adedba457f2836d839d0d611476b22cf3" prot="public" virt="pure-virtual"><scope>Azura::Renderer</scope><name>BindBufferTarget</name></member>
+      <member refid="class_azura_1_1_renderer_1afffbe190821b6e162f0dcc722f4ce6fc" prot="public" virt="pure-virtual"><scope>Azura::Renderer</scope><name>BindRenderTarget</name></member>
+      <member refid="class_azura_1_1_renderer_1ad834cd9005516b88352a021b938c6325" prot="public" virt="pure-virtual"><scope>Azura::Renderer</scope><name>CreateComputePool</name></member>
+      <member refid="class_azura_1_1_renderer_1a6ea67ac02797d16185ca3d8e29fc86c9" prot="public" virt="pure-virtual"><scope>Azura::Renderer</scope><name>CreateDrawablePool</name></member>
+      <member refid="class_azura_1_1_renderer_1a89e45cfaf87d8616a862c63f8e3def4a" prot="public" virt="virtual"><scope>Azura::Renderer</scope><name>EnterRenderFrame</name></member>
+      <member refid="class_azura_1_1_renderer_1a64cba9c177877b7a8aae0dbe80c591b0" prot="public" virt="virtual"><scope>Azura::Renderer</scope><name>ExitRenderFrame</name></member>
+      <member refid="class_azura_1_1_renderer_1a20ae9aefdbe3f8ab5ab413d13279c624" prot="protected" virt="non-virtual"><scope>Azura::Renderer</scope><name>GetApplicationInfo</name></member>
+      <member refid="class_azura_1_1_renderer_1ac03c28c857468e9f6c6c9795db17e9f3" prot="protected" virt="non-virtual"><scope>Azura::Renderer</scope><name>GetApplicationRequirements</name></member>
+      <member refid="class_azura_1_1_renderer_1ad390707811c569f789041d3833841575" prot="protected" virt="non-virtual"><scope>Azura::Renderer</scope><name>GetCurrentFrame</name></member>
+      <member refid="class_azura_1_1_renderer_1a6b13c20fafc1df407083c0fff8db0357" prot="protected" virt="non-virtual"><scope>Azura::Renderer</scope><name>GetDeviceRequirements</name></member>
+      <member refid="class_azura_1_1_renderer_1aaf7b365a382ca3301dc5fc982ade5209" prot="public" virt="pure-virtual"><scope>Azura::Renderer</scope><name>GetRenderingAPI</name></member>
+      <member refid="class_azura_1_1_renderer_1ac78e2c6d8f9f973dcbb2ec5ee9b937cb" prot="protected" virt="non-virtual"><scope>Azura::Renderer</scope><name>GetSwapchainRequirements</name></member>
+      <member refid="class_azura_1_1_renderer_1aa4767adf6a5fe8c46aa4dc51e886dae1" prot="private" virt="non-virtual"><scope>Azura::Renderer</scope><name>m_applicationInfo</name></member>
+      <member refid="class_azura_1_1_renderer_1a7684415137ca7a165630a6290ff663e2" prot="private" virt="non-virtual"><scope>Azura::Renderer</scope><name>m_appRequirements</name></member>
+      <member refid="class_azura_1_1_renderer_1a1f8af6c4bbf4064bf34bbf7437ec72df" prot="protected" virt="non-virtual"><scope>Azura::Renderer</scope><name>m_descriptorCount</name></member>
+      <member refid="class_azura_1_1_renderer_1a87d7051f01160aa69535345254c2a0a8" prot="protected" virt="non-virtual"><scope>Azura::Renderer</scope><name>m_descriptorSetTable</name></member>
+      <member refid="class_azura_1_1_renderer_1a841f3383edb98b38eb159e5d5787f0e2" prot="protected" virt="non-virtual"><scope>Azura::Renderer</scope><name>m_descriptorSlots</name></member>
+      <member refid="class_azura_1_1_renderer_1ad372a27603382503d3fa424b25a847f7" prot="private" virt="non-virtual"><scope>Azura::Renderer</scope><name>m_deviceRequirements</name></member>
+      <member refid="class_azura_1_1_renderer_1a8dbf98fe051a3691d4626dddc7ff4173" prot="protected" virt="non-virtual"><scope>Azura::Renderer</scope><name>m_drawPoolAllocator</name></member>
+      <member refid="class_azura_1_1_renderer_1afdcf999a446c7059fcf5b8f662fc2f06" prot="private" virt="non-virtual"><scope>Azura::Renderer</scope><name>m_frameCount</name></member>
+      <member refid="class_azura_1_1_renderer_1a12af92c6e91812549a69d4e01c2ecfab" prot="protected" virt="non-virtual"><scope>Azura::Renderer</scope><name>m_mainAllocator</name></member>
+      <member refid="class_azura_1_1_renderer_1a97b4feb3128135198680d76e05efcbc6" prot="private" virt="non-virtual"><scope>Azura::Renderer</scope><name>m_swapChainRequirements</name></member>
+      <member refid="class_azura_1_1_renderer_1a2e3cdf06636b8f2e0e914fffc6f40386" prot="protected" virt="non-virtual"><scope>Azura::Renderer</scope><name>m_window</name></member>
+      <member refid="class_azura_1_1_renderer_1a32052c773664639dce150e99324728c1" prot="public" virt="non-virtual"><scope>Azura::Renderer</scope><name>operator=</name></member>
+      <member refid="class_azura_1_1_renderer_1a77ca39f366cb06456d73d1ba4b3e2b8e" prot="public" virt="non-virtual"><scope>Azura::Renderer</scope><name>operator=</name></member>
+      <member refid="class_azura_1_1_renderer_1a54632abe8c17005a9a9029f3f17df415" prot="public" virt="non-virtual"><scope>Azura::Renderer</scope><name>Renderer</name></member>
+      <member refid="class_azura_1_1_renderer_1a0558f645a2e0108f24cc9f01c94eea54" prot="public" virt="non-virtual"><scope>Azura::Renderer</scope><name>Renderer</name></member>
+      <member refid="class_azura_1_1_renderer_1a546303972ca665980703c1d3de337aa9" prot="public" virt="non-virtual"><scope>Azura::Renderer</scope><name>Renderer</name></member>
+      <member refid="class_azura_1_1_renderer_1af0ebec31c1f8a8e11601fc1632b9e54e" prot="public" virt="pure-virtual"><scope>Azura::Renderer</scope><name>RenderFrame</name></member>
+      <member refid="class_azura_1_1_renderer_1aa4c13c392bad69615bb9dabdc1be9c23" prot="protected" virt="non-virtual"><scope>Azura::Renderer</scope><name>SetCurrentFrame</name></member>
+      <member refid="class_azura_1_1_renderer_1a4a4a63908228880853e8781da6a8131f" prot="public" virt="pure-virtual"><scope>Azura::Renderer</scope><name>SnapshotFrame</name></member>
+      <member refid="class_azura_1_1_renderer_1aa494fc2068e3750ff281444ec23c0dd3" prot="public" virt="pure-virtual"><scope>Azura::Renderer</scope><name>Submit</name></member>
+      <member refid="class_azura_1_1_renderer_1a88bf8155464cceec60344f094926075b" prot="public" virt="virtual"><scope>Azura::Renderer</scope><name>~Renderer</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

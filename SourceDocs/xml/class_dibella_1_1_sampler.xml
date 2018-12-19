@@ -1,0 +1,271 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.8.14">
+  <compounddef id="class_dibella_1_1_sampler" kind="class" language="C++" prot="public" abstract="yes">
+    <compoundname>Dibella::Sampler</compoundname>
+      <sectiondef kind="public-attrib">
+      <memberdef kind="variable" id="class_dibella_1_1_sampler_1a7593cfc46a3a7b2933b72768285a71ac" prot="public" static="no" mutable="no">
+        <type>const U64</type>
+        <definition>const U64 Dibella::Sampler::samplesPerPixel</definition>
+        <argsstring></argsstring>
+        <name>samplesPerPixel</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Source/Dibella/Inc/Samplers/Sampler.h" line="28" column="1" bodyfile="Source/Dibella/Inc/Samplers/Sampler.h" bodystart="28" bodyend="-1"/>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="protected-attrib">
+      <memberdef kind="variable" id="class_dibella_1_1_sampler_1a57453bda815f59fb1a634a9ffa175e8b" prot="protected" static="no" mutable="no">
+        <type>Point2i</type>
+        <definition>Point2i Dibella::Sampler::currentPixel</definition>
+        <argsstring></argsstring>
+        <name>currentPixel</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Source/Dibella/Inc/Samplers/Sampler.h" line="32" column="1" bodyfile="Source/Dibella/Inc/Samplers/Sampler.h" bodystart="32" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="class_dibella_1_1_sampler_1abfce92e4b53fd6cb8e3b0d2031dc10b1" prot="protected" static="no" mutable="no">
+        <type>U64</type>
+        <definition>U64 Dibella::Sampler::currentPixelSampleIndex</definition>
+        <argsstring></argsstring>
+        <name>currentPixelSampleIndex</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Source/Dibella/Inc/Samplers/Sampler.h" line="33" column="1" bodyfile="Source/Dibella/Inc/Samplers/Sampler.h" bodystart="33" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="class_dibella_1_1_sampler_1a6400a89fbb2e5aafae8ea476830660c7" prot="protected" static="no" mutable="no">
+        <type>std::vector&lt; int &gt;</type>
+        <definition>std::vector&lt;int&gt; Dibella::Sampler::samples1DArraySizes</definition>
+        <argsstring></argsstring>
+        <name>samples1DArraySizes</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Source/Dibella/Inc/Samplers/Sampler.h" line="34" column="1" bodyfile="Source/Dibella/Inc/Samplers/Sampler.h" bodystart="34" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="class_dibella_1_1_sampler_1a27d72b298e6257bf6075f5f64933afbd" prot="protected" static="no" mutable="no">
+        <type>std::vector&lt; int &gt;</type>
+        <definition>std::vector&lt;int&gt; Dibella::Sampler::samples2DArraySizes</definition>
+        <argsstring></argsstring>
+        <name>samples2DArraySizes</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Source/Dibella/Inc/Samplers/Sampler.h" line="34" column="1" bodyfile="Source/Dibella/Inc/Samplers/Sampler.h" bodystart="34" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="class_dibella_1_1_sampler_1a7c3f7bc91840ace6af989b2d0f56fa25" prot="protected" static="no" mutable="no">
+        <type>std::vector&lt; std::vector&lt; Float &gt; &gt;</type>
+        <definition>std::vector&lt;std::vector&lt;Float&gt; &gt; Dibella::Sampler::sampleArray1D</definition>
+        <argsstring></argsstring>
+        <name>sampleArray1D</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Source/Dibella/Inc/Samplers/Sampler.h" line="35" column="1" bodyfile="Source/Dibella/Inc/Samplers/Sampler.h" bodystart="35" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="class_dibella_1_1_sampler_1a51018e86bfbf180485ffc6a4bb15003f" prot="protected" static="no" mutable="no">
+        <type>std::vector&lt; std::vector&lt; Point2f &gt; &gt;</type>
+        <definition>std::vector&lt;std::vector&lt;Point2f&gt; &gt; Dibella::Sampler::sampleArray2D</definition>
+        <argsstring></argsstring>
+        <name>sampleArray2D</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Source/Dibella/Inc/Samplers/Sampler.h" line="36" column="1" bodyfile="Source/Dibella/Inc/Samplers/Sampler.h" bodystart="36" bodyend="-1"/>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="private-attrib">
+      <memberdef kind="variable" id="class_dibella_1_1_sampler_1a50d13430a366506cb3b40d4d3ae010f6" prot="private" static="no" mutable="no">
+        <type>size_t</type>
+        <definition>size_t Dibella::Sampler::array1DOffset</definition>
+        <argsstring></argsstring>
+        <name>array1DOffset</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Source/Dibella/Inc/Samplers/Sampler.h" line="40" column="1" bodyfile="Source/Dibella/Inc/Samplers/Sampler.h" bodystart="40" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="class_dibella_1_1_sampler_1aacafdcf55a4051ffb21d96e89ff1e667" prot="private" static="no" mutable="no">
+        <type>size_t</type>
+        <definition>size_t Dibella::Sampler::array2DOffset</definition>
+        <argsstring></argsstring>
+        <name>array2DOffset</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Source/Dibella/Inc/Samplers/Sampler.h" line="40" column="1" bodyfile="Source/Dibella/Inc/Samplers/Sampler.h" bodystart="40" bodyend="-1"/>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="public-func">
+      <memberdef kind="function" id="class_dibella_1_1_sampler_1a7b3cf16b736bc9747730153873f1a5e5" prot="public" static="no" const="no" explicit="no" inline="no" virt="virtual">
+        <type></type>
+        <definition>virtual Dibella::Sampler::~Sampler</definition>
+        <argsstring>()</argsstring>
+        <name>~Sampler</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Source/Dibella/Inc/Samplers/Sampler.h" line="11" column="1"/>
+      </memberdef>
+      <memberdef kind="function" id="class_dibella_1_1_sampler_1ab333e300b66a0a6381909c0a64457de9" prot="public" static="no" const="no" explicit="yes" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>Dibella::Sampler::Sampler</definition>
+        <argsstring>(U64 samplesPerPixel)</argsstring>
+        <name>Sampler</name>
+        <param>
+          <type>U64</type>
+          <declname>samplesPerPixel</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Source/Dibella/Inc/Samplers/Sampler.h" line="12" column="1"/>
+      </memberdef>
+      <memberdef kind="function" id="class_dibella_1_1_sampler_1a1ae48987dbcd0d5e5488cca7fca4df7a" prot="public" static="no" const="no" explicit="no" inline="no" virt="pure-virtual">
+        <type>Float</type>
+        <definition>virtual Float Dibella::Sampler::Get1D</definition>
+        <argsstring>()=0</argsstring>
+        <name>Get1D</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Source/Dibella/Inc/Samplers/Sampler.h" line="14" column="1"/>
+      </memberdef>
+      <memberdef kind="function" id="class_dibella_1_1_sampler_1ad66727ecc822cad885f01a66d098fc14" prot="public" static="no" const="no" explicit="no" inline="no" virt="pure-virtual">
+        <type>Point2f</type>
+        <definition>virtual Point2f Dibella::Sampler::Get2D</definition>
+        <argsstring>()=0</argsstring>
+        <name>Get2D</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Source/Dibella/Inc/Samplers/Sampler.h" line="15" column="1"/>
+      </memberdef>
+      <memberdef kind="function" id="class_dibella_1_1_sampler_1a36f61a0f90996252b184627c60c2d7a3" prot="public" static="no" const="no" explicit="no" inline="no" virt="pure-virtual">
+        <type>std::unique_ptr&lt; <ref refid="class_dibella_1_1_sampler" kindref="compound">Sampler</ref> &gt;</type>
+        <definition>virtual std::unique_ptr&lt;Sampler&gt; Dibella::Sampler::Clone</definition>
+        <argsstring>(int seed)=0</argsstring>
+        <name>Clone</name>
+        <param>
+          <type>int</type>
+          <declname>seed</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Source/Dibella/Inc/Samplers/Sampler.h" line="17" column="1"/>
+      </memberdef>
+      <memberdef kind="function" id="class_dibella_1_1_sampler_1a70e4bf28920a61ced23afeae3692ae03" prot="public" static="no" const="no" explicit="no" inline="no" virt="virtual">
+        <type>bool</type>
+        <definition>virtual bool Dibella::Sampler::SetSampleNumber</definition>
+        <argsstring>(U64 sampleNum)</argsstring>
+        <name>SetSampleNumber</name>
+        <param>
+          <type>U64</type>
+          <declname>sampleNum</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Source/Dibella/Inc/Samplers/Sampler.h" line="18" column="1"/>
+      </memberdef>
+      <memberdef kind="function" id="class_dibella_1_1_sampler_1a87c4fb6efdd30607c17b7d091b9152c9" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <type>std::string</type>
+        <definition>std::string Dibella::Sampler::StateString</definition>
+        <argsstring>() const</argsstring>
+        <name>StateString</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Source/Dibella/Inc/Samplers/Sampler.h" line="19" column="1" bodyfile="Source/Dibella/Inc/Samplers/Sampler.h" bodystart="19" bodyend="21"/>
+      </memberdef>
+      <memberdef kind="function" id="class_dibella_1_1_sampler_1af132b3b213d3088744af2d2ba44cb57c" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <type>U64</type>
+        <definition>U64 Dibella::Sampler::CurrentSampleNumber</definition>
+        <argsstring>() const</argsstring>
+        <name>CurrentSampleNumber</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Source/Dibella/Inc/Samplers/Sampler.h" line="23" column="1" bodyfile="Source/Dibella/Inc/Samplers/Sampler.h" bodystart="23" bodyend="25"/>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <location file="Source/Dibella/Inc/Samplers/Sampler.h" line="8" column="1" bodyfile="Source/Dibella/Inc/Samplers/Sampler.h" bodystart="8" bodyend="41"/>
+    <listofallmembers>
+      <member refid="class_dibella_1_1_sampler_1a50d13430a366506cb3b40d4d3ae010f6" prot="private" virt="non-virtual"><scope>Dibella::Sampler</scope><name>array1DOffset</name></member>
+      <member refid="class_dibella_1_1_sampler_1aacafdcf55a4051ffb21d96e89ff1e667" prot="private" virt="non-virtual"><scope>Dibella::Sampler</scope><name>array2DOffset</name></member>
+      <member refid="class_dibella_1_1_sampler_1a36f61a0f90996252b184627c60c2d7a3" prot="public" virt="pure-virtual"><scope>Dibella::Sampler</scope><name>Clone</name></member>
+      <member refid="class_dibella_1_1_sampler_1a57453bda815f59fb1a634a9ffa175e8b" prot="protected" virt="non-virtual"><scope>Dibella::Sampler</scope><name>currentPixel</name></member>
+      <member refid="class_dibella_1_1_sampler_1abfce92e4b53fd6cb8e3b0d2031dc10b1" prot="protected" virt="non-virtual"><scope>Dibella::Sampler</scope><name>currentPixelSampleIndex</name></member>
+      <member refid="class_dibella_1_1_sampler_1af132b3b213d3088744af2d2ba44cb57c" prot="public" virt="non-virtual"><scope>Dibella::Sampler</scope><name>CurrentSampleNumber</name></member>
+      <member refid="class_dibella_1_1_sampler_1a1ae48987dbcd0d5e5488cca7fca4df7a" prot="public" virt="pure-virtual"><scope>Dibella::Sampler</scope><name>Get1D</name></member>
+      <member refid="class_dibella_1_1_sampler_1ad66727ecc822cad885f01a66d098fc14" prot="public" virt="pure-virtual"><scope>Dibella::Sampler</scope><name>Get2D</name></member>
+      <member refid="class_dibella_1_1_sampler_1a7c3f7bc91840ace6af989b2d0f56fa25" prot="protected" virt="non-virtual"><scope>Dibella::Sampler</scope><name>sampleArray1D</name></member>
+      <member refid="class_dibella_1_1_sampler_1a51018e86bfbf180485ffc6a4bb15003f" prot="protected" virt="non-virtual"><scope>Dibella::Sampler</scope><name>sampleArray2D</name></member>
+      <member refid="class_dibella_1_1_sampler_1ab333e300b66a0a6381909c0a64457de9" prot="public" virt="non-virtual"><scope>Dibella::Sampler</scope><name>Sampler</name></member>
+      <member refid="class_dibella_1_1_sampler_1a6400a89fbb2e5aafae8ea476830660c7" prot="protected" virt="non-virtual"><scope>Dibella::Sampler</scope><name>samples1DArraySizes</name></member>
+      <member refid="class_dibella_1_1_sampler_1a27d72b298e6257bf6075f5f64933afbd" prot="protected" virt="non-virtual"><scope>Dibella::Sampler</scope><name>samples2DArraySizes</name></member>
+      <member refid="class_dibella_1_1_sampler_1a7593cfc46a3a7b2933b72768285a71ac" prot="public" virt="non-virtual"><scope>Dibella::Sampler</scope><name>samplesPerPixel</name></member>
+      <member refid="class_dibella_1_1_sampler_1a70e4bf28920a61ced23afeae3692ae03" prot="public" virt="virtual"><scope>Dibella::Sampler</scope><name>SetSampleNumber</name></member>
+      <member refid="class_dibella_1_1_sampler_1a87c4fb6efdd30607c17b7d091b9152c9" prot="public" virt="non-virtual"><scope>Dibella::Sampler</scope><name>StateString</name></member>
+      <member refid="class_dibella_1_1_sampler_1a7b3cf16b736bc9747730153873f1a5e5" prot="public" virt="virtual"><scope>Dibella::Sampler</scope><name>~Sampler</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

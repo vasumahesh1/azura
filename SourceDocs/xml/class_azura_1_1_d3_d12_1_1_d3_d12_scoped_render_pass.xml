@@ -1,0 +1,944 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.8.14">
+  <compounddef id="class_azura_1_1_d3_d12_1_1_d3_d12_scoped_render_pass" kind="class" language="C++" prot="public">
+    <compoundname>Azura::D3D12::D3D12ScopedRenderPass</compoundname>
+      <sectiondef kind="private-attrib">
+      <memberdef kind="variable" id="class_azura_1_1_d3_d12_1_1_d3_d12_scoped_render_pass_1a0b5b8451bf5710f4ddf76618aaeb2b08" prot="private" static="no" mutable="no">
+        <type>const <ref refid="class_azura_1_1_log" kindref="compound">Log</ref></type>
+        <definition>const Log Azura::D3D12::D3D12ScopedRenderPass::log_D3D12RenderSystem</definition>
+        <argsstring></argsstring>
+        <name>log_D3D12RenderSystem</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Source/Azura/RenderSystem/Inc/D3D12/D3D12ScopedRenderPass.h" line="97" column="1" bodyfile="Source/Azura/RenderSystem/Inc/D3D12/D3D12ScopedRenderPass.h" bodystart="97" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="class_azura_1_1_d3_d12_1_1_d3_d12_scoped_render_pass_1af9320f24a4811461b6d3b2934eec7402" prot="private" static="no" mutable="no">
+        <type>U32</type>
+        <definition>U32 Azura::D3D12::D3D12ScopedRenderPass::m_id</definition>
+        <argsstring></argsstring>
+        <name>m_id</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Source/Azura/RenderSystem/Inc/D3D12/D3D12ScopedRenderPass.h" line="98" column="1" bodyfile="Source/Azura/RenderSystem/Inc/D3D12/D3D12ScopedRenderPass.h" bodystart="98" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="class_azura_1_1_d3_d12_1_1_d3_d12_scoped_render_pass_1ab497d714b1b30092bd7785d91ab5663d" prot="private" static="no" mutable="no">
+        <type>U32</type>
+        <definition>U32 Azura::D3D12::D3D12ScopedRenderPass::m_internalId</definition>
+        <argsstring></argsstring>
+        <name>m_internalId</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Source/Azura/RenderSystem/Inc/D3D12/D3D12ScopedRenderPass.h" line="99" column="1" bodyfile="Source/Azura/RenderSystem/Inc/D3D12/D3D12ScopedRenderPass.h" bodystart="99" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="class_azura_1_1_d3_d12_1_1_d3_d12_scoped_render_pass_1aab9d7df14e33b9c8337d06e36a4f0109" prot="private" static="no" mutable="no">
+        <type>bool</type>
+        <definition>bool Azura::D3D12::D3D12ScopedRenderPass::m_hasDepth</definition>
+        <argsstring></argsstring>
+        <name>m_hasDepth</name>
+        <initializer>{false}</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Source/Azura/RenderSystem/Inc/D3D12/D3D12ScopedRenderPass.h" line="101" column="1" bodyfile="Source/Azura/RenderSystem/Inc/D3D12/D3D12ScopedRenderPass.h" bodystart="101" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="class_azura_1_1_d3_d12_1_1_d3_d12_scoped_render_pass_1ab607e4fec333726fde0df3b1afac1232" prot="private" static="no" mutable="no">
+        <type>bool</type>
+        <definition>bool Azura::D3D12::D3D12ScopedRenderPass::m_isTargetSwapChain</definition>
+        <argsstring></argsstring>
+        <name>m_isTargetSwapChain</name>
+        <initializer>{false}</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Source/Azura/RenderSystem/Inc/D3D12/D3D12ScopedRenderPass.h" line="102" column="1" bodyfile="Source/Azura/RenderSystem/Inc/D3D12/D3D12ScopedRenderPass.h" bodystart="102" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="class_azura_1_1_d3_d12_1_1_d3_d12_scoped_render_pass_1ad77690afd44c15f7812a361de0c5ee8f" prot="private" static="no" mutable="no">
+        <type>std::reference_wrapper&lt; const <ref refid="class_azura_1_1_d3_d12_1_1_d3_d12_scoped_swap_chain" kindref="compound">D3D12ScopedSwapChain</ref> &gt;</type>
+        <definition>std::reference_wrapper&lt;const D3D12ScopedSwapChain&gt; Azura::D3D12::D3D12ScopedRenderPass::m_swapChainRef</definition>
+        <argsstring></argsstring>
+        <name>m_swapChainRef</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Source/Azura/RenderSystem/Inc/D3D12/D3D12ScopedRenderPass.h" line="104" column="1" bodyfile="Source/Azura/RenderSystem/Inc/D3D12/D3D12ScopedRenderPass.h" bodystart="104" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="class_azura_1_1_d3_d12_1_1_d3_d12_scoped_render_pass_1abd2915fc35dbe9475b3b6eb6543c3c31" prot="private" static="no" mutable="no">
+        <type><ref refid="class_azura_1_1_containers_1_1_vector" kindref="compound">Containers::Vector</ref>&lt; <ref refid="struct_azura_1_1_descriptor_table_entry" kindref="compound">DescriptorTableEntry</ref> &gt;</type>
+        <definition>Containers::Vector&lt;DescriptorTableEntry&gt; Azura::D3D12::D3D12ScopedRenderPass::m_rootSignatureTable</definition>
+        <argsstring></argsstring>
+        <name>m_rootSignatureTable</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Source/Azura/RenderSystem/Inc/D3D12/D3D12ScopedRenderPass.h" line="106" column="1" bodyfile="Source/Azura/RenderSystem/Inc/D3D12/D3D12ScopedRenderPass.h" bodystart="106" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="class_azura_1_1_d3_d12_1_1_d3_d12_scoped_render_pass_1a197798b85c9d39f253bd01e6acb1641e" prot="private" static="no" mutable="no">
+        <type><ref refid="class_azura_1_1_containers_1_1_vector" kindref="compound">Containers::Vector</ref>&lt; <ref refid="struct_azura_1_1_d3_d12_1_1_d3_d12_render_output_info" kindref="compound">D3D12RenderOutputInfo</ref> &gt;</type>
+        <definition>Containers::Vector&lt;D3D12RenderOutputInfo&gt; Azura::D3D12::D3D12ScopedRenderPass::m_renderOutputInfo</definition>
+        <argsstring></argsstring>
+        <name>m_renderOutputInfo</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Source/Azura/RenderSystem/Inc/D3D12/D3D12ScopedRenderPass.h" line="107" column="1" bodyfile="Source/Azura/RenderSystem/Inc/D3D12/D3D12ScopedRenderPass.h" bodystart="107" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="class_azura_1_1_d3_d12_1_1_d3_d12_scoped_render_pass_1a1b863bfc0106f5ee052ded022046d7c6" prot="private" static="no" mutable="no">
+        <type><ref refid="class_azura_1_1_containers_1_1_vector" kindref="compound">Containers::Vector</ref>&lt; std::reference_wrapper&lt; const <ref refid="class_azura_1_1_d3_d12_1_1_d3_d12_scoped_shader" kindref="compound">D3D12ScopedShader</ref> &gt; &gt;</type>
+        <definition>Containers::Vector&lt;std::reference_wrapper&lt;const D3D12ScopedShader&gt; &gt; Azura::D3D12::D3D12ScopedRenderPass::m_passShaders</definition>
+        <argsstring></argsstring>
+        <name>m_passShaders</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Source/Azura/RenderSystem/Inc/D3D12/D3D12ScopedRenderPass.h" line="109" column="1" bodyfile="Source/Azura/RenderSystem/Inc/D3D12/D3D12ScopedRenderPass.h" bodystart="109" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="class_azura_1_1_d3_d12_1_1_d3_d12_scoped_render_pass_1ab943f39c967d294364707051f8ba6436" prot="private" static="no" mutable="no">
+        <type><ref refid="class_azura_1_1_containers_1_1_vector" kindref="compound">Containers::Vector</ref>&lt; std::reference_wrapper&lt; const <ref refid="struct_azura_1_1_render_target_create_info" kindref="compound">RenderTargetCreateInfo</ref> &gt; &gt;</type>
+        <definition>Containers::Vector&lt;std::reference_wrapper&lt;const RenderTargetCreateInfo&gt; &gt; Azura::D3D12::D3D12ScopedRenderPass::m_passInputs</definition>
+        <argsstring></argsstring>
+        <name>m_passInputs</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Source/Azura/RenderSystem/Inc/D3D12/D3D12ScopedRenderPass.h" line="110" column="1" bodyfile="Source/Azura/RenderSystem/Inc/D3D12/D3D12ScopedRenderPass.h" bodystart="110" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="class_azura_1_1_d3_d12_1_1_d3_d12_scoped_render_pass_1aa5d8560a8fc70afd87908682a3008211" prot="private" static="no" mutable="no">
+        <type>SmallVector&lt; <ref refid="class_azura_1_1_d3_d12_1_1_d3_d12_scoped_command_buffer" kindref="compound">D3D12ScopedCommandBuffer</ref>, DEFAULT_FRAMES_IN_FLIGHT &gt;</type>
+        <definition>SmallVector&lt;D3D12ScopedCommandBuffer, DEFAULT_FRAMES_IN_FLIGHT&gt; Azura::D3D12::D3D12ScopedRenderPass::m_commandBuffers</definition>
+        <argsstring></argsstring>
+        <name>m_commandBuffers</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Source/Azura/RenderSystem/Inc/D3D12/D3D12ScopedRenderPass.h" line="112" column="1" bodyfile="Source/Azura/RenderSystem/Inc/D3D12/D3D12ScopedRenderPass.h" bodystart="112" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="class_azura_1_1_d3_d12_1_1_d3_d12_scoped_render_pass_1a6b79d892ada73a0c4dc2d3330a19c1e6" prot="private" static="no" mutable="no">
+        <type>SmallVector&lt; ID3D12Resource *, DEFAULT_FRAMES_IN_FLIGHT &gt;</type>
+        <definition>SmallVector&lt;ID3D12Resource*, DEFAULT_FRAMES_IN_FLIGHT&gt; Azura::D3D12::D3D12ScopedRenderPass::m_swapChainImageResources</definition>
+        <argsstring></argsstring>
+        <name>m_swapChainImageResources</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Source/Azura/RenderSystem/Inc/D3D12/D3D12ScopedRenderPass.h" line="113" column="1" bodyfile="Source/Azura/RenderSystem/Inc/D3D12/D3D12ScopedRenderPass.h" bodystart="113" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="class_azura_1_1_d3_d12_1_1_d3_d12_scoped_render_pass_1a7aefac2072fb746ce7a44d95072a599b" prot="private" static="no" mutable="no">
+        <type>SmallVector&lt; std::reference_wrapper&lt; <ref refid="class_azura_1_1_d3_d12_1_1_d3_d12_scoped_image" kindref="compound">D3D12ScopedImage</ref> &gt;, MAX_RENDER_PASS_OUTPUTS &gt;</type>
+        <definition>SmallVector&lt;std::reference_wrapper&lt;D3D12ScopedImage&gt;, MAX_RENDER_PASS_OUTPUTS&gt; Azura::D3D12::D3D12ScopedRenderPass::m_renderOutputs</definition>
+        <argsstring></argsstring>
+        <name>m_renderOutputs</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Source/Azura/RenderSystem/Inc/D3D12/D3D12ScopedRenderPass.h" line="115" column="1" bodyfile="Source/Azura/RenderSystem/Inc/D3D12/D3D12ScopedRenderPass.h" bodystart="115" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="class_azura_1_1_d3_d12_1_1_d3_d12_scoped_render_pass_1a39aa85a5ca03d027ac45b8cb8acc933c" prot="private" static="no" mutable="no">
+        <type>SmallVector&lt; std::reference_wrapper&lt; <ref refid="class_azura_1_1_d3_d12_1_1_d3_d12_scoped_image" kindref="compound">D3D12ScopedImage</ref> &gt;, MAX_RENDER_PASS_OUTPUTS &gt;</type>
+        <definition>SmallVector&lt;std::reference_wrapper&lt;D3D12ScopedImage&gt;, MAX_RENDER_PASS_OUTPUTS&gt; Azura::D3D12::D3D12ScopedRenderPass::m_renderInputs</definition>
+        <argsstring></argsstring>
+        <name>m_renderInputs</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Source/Azura/RenderSystem/Inc/D3D12/D3D12ScopedRenderPass.h" line="116" column="1" bodyfile="Source/Azura/RenderSystem/Inc/D3D12/D3D12ScopedRenderPass.h" bodystart="116" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="class_azura_1_1_d3_d12_1_1_d3_d12_scoped_render_pass_1aa0d4eaedc78c9e75311e8626bd15f957" prot="private" static="no" mutable="no">
+        <type>SmallVector&lt; std::reference_wrapper&lt; <ref refid="class_azura_1_1_d3_d12_1_1_d3_d12_scoped_image" kindref="compound">D3D12ScopedImage</ref> &gt;, MAX_RENDER_PASS_OUTPUTS &gt;</type>
+        <definition>SmallVector&lt;std::reference_wrapper&lt;D3D12ScopedImage&gt;, MAX_RENDER_PASS_OUTPUTS&gt; Azura::D3D12::D3D12ScopedRenderPass::m_depthOutputs</definition>
+        <argsstring></argsstring>
+        <name>m_depthOutputs</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Source/Azura/RenderSystem/Inc/D3D12/D3D12ScopedRenderPass.h" line="117" column="1" bodyfile="Source/Azura/RenderSystem/Inc/D3D12/D3D12ScopedRenderPass.h" bodystart="117" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="class_azura_1_1_d3_d12_1_1_d3_d12_scoped_render_pass_1a37360b2cebebb70c2356c78e42d8cd38" prot="private" static="no" mutable="no">
+        <type>SmallVector&lt; std::reference_wrapper&lt; <ref refid="class_azura_1_1_d3_d12_1_1_d3_d12_scoped_image" kindref="compound">D3D12ScopedImage</ref> &gt;, MAX_RENDER_PASS_OUTPUTS &gt;</type>
+        <definition>SmallVector&lt;std::reference_wrapper&lt;D3D12ScopedImage&gt;, MAX_RENDER_PASS_OUTPUTS&gt; Azura::D3D12::D3D12ScopedRenderPass::m_depthInputs</definition>
+        <argsstring></argsstring>
+        <name>m_depthInputs</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Source/Azura/RenderSystem/Inc/D3D12/D3D12ScopedRenderPass.h" line="118" column="1" bodyfile="Source/Azura/RenderSystem/Inc/D3D12/D3D12ScopedRenderPass.h" bodystart="118" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="class_azura_1_1_d3_d12_1_1_d3_d12_scoped_render_pass_1a3194212e701e6bf1c08c939d32b3e8e4" prot="private" static="no" mutable="no">
+        <type><ref refid="class_azura_1_1_containers_1_1_vector" kindref="compound">Containers::Vector</ref>&lt; std::reference_wrapper&lt; const <ref refid="class_azura_1_1_d3_d12_1_1_d3_d12_scoped_image" kindref="compound">D3D12ScopedImage</ref> &gt; &gt;</type>
+        <definition>Containers::Vector&lt;std::reference_wrapper&lt;const D3D12ScopedImage&gt; &gt; Azura::D3D12::D3D12ScopedRenderPass::m_allRenderInputs</definition>
+        <argsstring></argsstring>
+        <name>m_allRenderInputs</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Source/Azura/RenderSystem/Inc/D3D12/D3D12ScopedRenderPass.h" line="120" column="1" bodyfile="Source/Azura/RenderSystem/Inc/D3D12/D3D12ScopedRenderPass.h" bodystart="120" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="class_azura_1_1_d3_d12_1_1_d3_d12_scoped_render_pass_1a33c173c36cf5a902d95106fa8679f51b" prot="private" static="no" mutable="no">
+        <type>Microsoft::WRL::ComPtr&lt; ID3D12DescriptorHeap &gt;</type>
+        <definition>Microsoft::WRL::ComPtr&lt;ID3D12DescriptorHeap&gt; Azura::D3D12::D3D12ScopedRenderPass::m_rtvHeap</definition>
+        <argsstring></argsstring>
+        <name>m_rtvHeap</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Source/Azura/RenderSystem/Inc/D3D12/D3D12ScopedRenderPass.h" line="122" column="1" bodyfile="Source/Azura/RenderSystem/Inc/D3D12/D3D12ScopedRenderPass.h" bodystart="122" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="class_azura_1_1_d3_d12_1_1_d3_d12_scoped_render_pass_1a45b74ce648a83cdbbfb950ef5bf44e2b" prot="private" static="no" mutable="no">
+        <type>Microsoft::WRL::ComPtr&lt; ID3D12DescriptorHeap &gt;</type>
+        <definition>Microsoft::WRL::ComPtr&lt;ID3D12DescriptorHeap&gt; Azura::D3D12::D3D12ScopedRenderPass::m_dsvHeap</definition>
+        <argsstring></argsstring>
+        <name>m_dsvHeap</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Source/Azura/RenderSystem/Inc/D3D12/D3D12ScopedRenderPass.h" line="123" column="1" bodyfile="Source/Azura/RenderSystem/Inc/D3D12/D3D12ScopedRenderPass.h" bodystart="123" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="class_azura_1_1_d3_d12_1_1_d3_d12_scoped_render_pass_1a439500efcd1c94aba6b92ba8bd9bb9cf" prot="private" static="no" mutable="no">
+        <type>Microsoft::WRL::ComPtr&lt; ID3D12RootSignature &gt;</type>
+        <definition>Microsoft::WRL::ComPtr&lt;ID3D12RootSignature&gt; Azura::D3D12::D3D12ScopedRenderPass::m_rootSignature</definition>
+        <argsstring></argsstring>
+        <name>m_rootSignature</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Source/Azura/RenderSystem/Inc/D3D12/D3D12ScopedRenderPass.h" line="125" column="1" bodyfile="Source/Azura/RenderSystem/Inc/D3D12/D3D12ScopedRenderPass.h" bodystart="125" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="class_azura_1_1_d3_d12_1_1_d3_d12_scoped_render_pass_1a85fba8ee1312a562a461bfc6d08244a7" prot="private" static="no" mutable="no">
+        <type><ref refid="struct_azura_1_1_descriptor_count" kindref="compound">DescriptorCount</ref></type>
+        <definition>DescriptorCount Azura::D3D12::D3D12ScopedRenderPass::m_descriptorCount</definition>
+        <argsstring></argsstring>
+        <name>m_descriptorCount</name>
+        <initializer>{}</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Source/Azura/RenderSystem/Inc/D3D12/D3D12ScopedRenderPass.h" line="127" column="1" bodyfile="Source/Azura/RenderSystem/Inc/D3D12/D3D12ScopedRenderPass.h" bodystart="127" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="class_azura_1_1_d3_d12_1_1_d3_d12_scoped_render_pass_1a9fdb207bffb03311e9ab833b15791c5a" prot="private" static="no" mutable="no">
+        <type><ref refid="struct_azura_1_1_clear_data" kindref="compound">ClearData</ref></type>
+        <definition>ClearData Azura::D3D12::D3D12ScopedRenderPass::m_clearData</definition>
+        <argsstring></argsstring>
+        <name>m_clearData</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Source/Azura/RenderSystem/Inc/D3D12/D3D12ScopedRenderPass.h" line="129" column="1" bodyfile="Source/Azura/RenderSystem/Inc/D3D12/D3D12ScopedRenderPass.h" bodystart="129" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="class_azura_1_1_d3_d12_1_1_d3_d12_scoped_render_pass_1ad58f0d7e711ad44cf354829513496153" prot="private" static="no" mutable="no">
+        <type>U32</type>
+        <definition>U32 Azura::D3D12::D3D12ScopedRenderPass::m_fenceValue</definition>
+        <argsstring></argsstring>
+        <name>m_fenceValue</name>
+        <initializer>{1}</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Source/Azura/RenderSystem/Inc/D3D12/D3D12ScopedRenderPass.h" line="131" column="1" bodyfile="Source/Azura/RenderSystem/Inc/D3D12/D3D12ScopedRenderPass.h" bodystart="131" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="class_azura_1_1_d3_d12_1_1_d3_d12_scoped_render_pass_1ab692747c6874db861ce27d35e4de193b" prot="private" static="no" mutable="no">
+        <type>HANDLE</type>
+        <definition>HANDLE Azura::D3D12::D3D12ScopedRenderPass::m_fenceEvent</definition>
+        <argsstring></argsstring>
+        <name>m_fenceEvent</name>
+        <initializer>{}</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Source/Azura/RenderSystem/Inc/D3D12/D3D12ScopedRenderPass.h" line="132" column="1" bodyfile="Source/Azura/RenderSystem/Inc/D3D12/D3D12ScopedRenderPass.h" bodystart="132" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="class_azura_1_1_d3_d12_1_1_d3_d12_scoped_render_pass_1aec4ead79659ca2c150ec753f48bb8548" prot="private" static="no" mutable="no">
+        <type>Microsoft::WRL::ComPtr&lt; ID3D12Fence &gt;</type>
+        <definition>Microsoft::WRL::ComPtr&lt;ID3D12Fence&gt; Azura::D3D12::D3D12ScopedRenderPass::m_signalFence</definition>
+        <argsstring></argsstring>
+        <name>m_signalFence</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Source/Azura/RenderSystem/Inc/D3D12/D3D12ScopedRenderPass.h" line="133" column="1" bodyfile="Source/Azura/RenderSystem/Inc/D3D12/D3D12ScopedRenderPass.h" bodystart="133" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="class_azura_1_1_d3_d12_1_1_d3_d12_scoped_render_pass_1ae812f7f2621d1783e7bbf49d1e3a505a" prot="private" static="no" mutable="no">
+        <type>SmallVector&lt; Microsoft::WRL::ComPtr&lt; ID3D12Fence &gt;, MAX_RENDER_PASS_INPUTS &gt;</type>
+        <definition>SmallVector&lt;Microsoft::WRL::ComPtr&lt;ID3D12Fence&gt;, MAX_RENDER_PASS_INPUTS&gt; Azura::D3D12::D3D12ScopedRenderPass::m_waitFences</definition>
+        <argsstring></argsstring>
+        <name>m_waitFences</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Source/Azura/RenderSystem/Inc/D3D12/D3D12ScopedRenderPass.h" line="134" column="1" bodyfile="Source/Azura/RenderSystem/Inc/D3D12/D3D12ScopedRenderPass.h" bodystart="134" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="class_azura_1_1_d3_d12_1_1_d3_d12_scoped_render_pass_1a8fdd6ef0c24c46512bf19f5ecb3798a1" prot="private" static="no" mutable="no">
+        <type><ref refid="struct_azura_1_1_blend_state" kindref="compound">BlendState</ref></type>
+        <definition>BlendState Azura::D3D12::D3D12ScopedRenderPass::m_blendState</definition>
+        <argsstring></argsstring>
+        <name>m_blendState</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Source/Azura/RenderSystem/Inc/D3D12/D3D12ScopedRenderPass.h" line="135" column="1" bodyfile="Source/Azura/RenderSystem/Inc/D3D12/D3D12ScopedRenderPass.h" bodystart="135" bodyend="-1"/>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="public-func">
+      <memberdef kind="function" id="class_azura_1_1_d3_d12_1_1_d3_d12_scoped_render_pass_1a7f0ea9e5d088f0babc30387166f3a53b" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>Azura::D3D12::D3D12ScopedRenderPass::D3D12ScopedRenderPass</definition>
+        <argsstring>(U32 idx, U32 internalId, const D3D12ScopedSwapChain &amp;swapChain, Memory::Allocator &amp;mainAllocator, Log logger)</argsstring>
+        <name>D3D12ScopedRenderPass</name>
+        <param>
+          <type>U32</type>
+          <declname>idx</declname>
+        </param>
+        <param>
+          <type>U32</type>
+          <declname>internalId</declname>
+        </param>
+        <param>
+          <type>const <ref refid="class_azura_1_1_d3_d12_1_1_d3_d12_scoped_swap_chain" kindref="compound">D3D12ScopedSwapChain</ref> &amp;</type>
+          <declname>swapChain</declname>
+        </param>
+        <param>
+          <type><ref refid="class_azura_1_1_memory_1_1_allocator" kindref="compound">Memory::Allocator</ref> &amp;</type>
+          <declname>mainAllocator</declname>
+        </param>
+        <param>
+          <type><ref refid="class_azura_1_1_log" kindref="compound">Log</ref></type>
+          <declname>logger</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Source/Azura/RenderSystem/Inc/D3D12/D3D12ScopedRenderPass.h" line="27" column="1" bodyfile="Source/Azura/RenderSystem/Src/D3D12/D3D12ScopedRenderPass.cpp" bodystart="16" bodyend="30"/>
+      </memberdef>
+      <memberdef kind="function" id="class_azura_1_1_d3_d12_1_1_d3_d12_scoped_render_pass_1a920a84a128c9387cb1b320260d2e5877" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void Azura::D3D12::D3D12ScopedRenderPass::Create</definition>
+        <argsstring>(const Microsoft::WRL::ComPtr&lt; ID3D12Device &gt; &amp;device, const PipelinePassCreateInfo &amp;createInfo, const Containers::Vector&lt; RenderTargetCreateInfo &gt; &amp;pipelineBuffers, const Containers::Vector&lt; D3D12ScopedImage &gt; &amp;pipelineBufferImages, const Containers::Vector&lt; DescriptorSlot &gt; &amp;descriptorSlots, const Containers::Vector&lt; DescriptorTableEntry &gt; &amp;descriptorSetTable, const Containers::Vector&lt; D3D12ScopedShader &gt; &amp;allShaders, UINT rtvDescriptorSize, UINT dsvDescriptorSize)</argsstring>
+        <name>Create</name>
+        <param>
+          <type>const Microsoft::WRL::ComPtr&lt; ID3D12Device &gt; &amp;</type>
+          <declname>device</declname>
+        </param>
+        <param>
+          <type>const <ref refid="struct_azura_1_1_pipeline_pass_create_info" kindref="compound">PipelinePassCreateInfo</ref> &amp;</type>
+          <declname>createInfo</declname>
+        </param>
+        <param>
+          <type>const <ref refid="class_azura_1_1_containers_1_1_vector" kindref="compound">Containers::Vector</ref>&lt; <ref refid="struct_azura_1_1_render_target_create_info" kindref="compound">RenderTargetCreateInfo</ref> &gt; &amp;</type>
+          <declname>pipelineBuffers</declname>
+        </param>
+        <param>
+          <type>const <ref refid="class_azura_1_1_containers_1_1_vector" kindref="compound">Containers::Vector</ref>&lt; <ref refid="class_azura_1_1_d3_d12_1_1_d3_d12_scoped_image" kindref="compound">D3D12ScopedImage</ref> &gt; &amp;</type>
+          <declname>pipelineBufferImages</declname>
+        </param>
+        <param>
+          <type>const <ref refid="class_azura_1_1_containers_1_1_vector" kindref="compound">Containers::Vector</ref>&lt; <ref refid="struct_azura_1_1_descriptor_slot" kindref="compound">DescriptorSlot</ref> &gt; &amp;</type>
+          <declname>descriptorSlots</declname>
+        </param>
+        <param>
+          <type>const <ref refid="class_azura_1_1_containers_1_1_vector" kindref="compound">Containers::Vector</ref>&lt; <ref refid="struct_azura_1_1_descriptor_table_entry" kindref="compound">DescriptorTableEntry</ref> &gt; &amp;</type>
+          <declname>descriptorSetTable</declname>
+        </param>
+        <param>
+          <type>const <ref refid="class_azura_1_1_containers_1_1_vector" kindref="compound">Containers::Vector</ref>&lt; <ref refid="class_azura_1_1_d3_d12_1_1_d3_d12_scoped_shader" kindref="compound">D3D12ScopedShader</ref> &gt; &amp;</type>
+          <declname>allShaders</declname>
+        </param>
+        <param>
+          <type>UINT</type>
+          <declname>rtvDescriptorSize</declname>
+        </param>
+        <param>
+          <type>UINT</type>
+          <declname>dsvDescriptorSize</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Source/Azura/RenderSystem/Inc/D3D12/D3D12ScopedRenderPass.h" line="29" column="1" bodyfile="Source/Azura/RenderSystem/Src/D3D12/D3D12ScopedRenderPass.cpp" bodystart="32" bodyend="104"/>
+      </memberdef>
+      <memberdef kind="function" id="class_azura_1_1_d3_d12_1_1_d3_d12_scoped_render_pass_1a17509f68d99fcdd59d3f8e96c348f1e5" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void Azura::D3D12::D3D12ScopedRenderPass::CreateForSwapChain</definition>
+        <argsstring>(const Microsoft::WRL::ComPtr&lt; ID3D12Device &gt; &amp;device, const PipelinePassCreateInfo &amp;createInfo, const Containers::Vector&lt; RenderTargetCreateInfo &gt; &amp;pipelineBuffers, const Containers::Vector&lt; D3D12ScopedImage &gt; &amp;pipelineBufferImages, const D3D12ScopedImage &amp;depthImage, const Containers::Vector&lt; DescriptorSlot &gt; &amp;descriptorSlots, const Containers::Vector&lt; DescriptorTableEntry &gt; &amp;descriptorSetTable, const Containers::Vector&lt; D3D12ScopedShader &gt; &amp;allShaders, UINT rtvDescriptorSize, UINT dsvDescriptorSize)</argsstring>
+        <name>CreateForSwapChain</name>
+        <param>
+          <type>const Microsoft::WRL::ComPtr&lt; ID3D12Device &gt; &amp;</type>
+          <declname>device</declname>
+        </param>
+        <param>
+          <type>const <ref refid="struct_azura_1_1_pipeline_pass_create_info" kindref="compound">PipelinePassCreateInfo</ref> &amp;</type>
+          <declname>createInfo</declname>
+        </param>
+        <param>
+          <type>const <ref refid="class_azura_1_1_containers_1_1_vector" kindref="compound">Containers::Vector</ref>&lt; <ref refid="struct_azura_1_1_render_target_create_info" kindref="compound">RenderTargetCreateInfo</ref> &gt; &amp;</type>
+          <declname>pipelineBuffers</declname>
+        </param>
+        <param>
+          <type>const <ref refid="class_azura_1_1_containers_1_1_vector" kindref="compound">Containers::Vector</ref>&lt; <ref refid="class_azura_1_1_d3_d12_1_1_d3_d12_scoped_image" kindref="compound">D3D12ScopedImage</ref> &gt; &amp;</type>
+          <declname>pipelineBufferImages</declname>
+        </param>
+        <param>
+          <type>const <ref refid="class_azura_1_1_d3_d12_1_1_d3_d12_scoped_image" kindref="compound">D3D12ScopedImage</ref> &amp;</type>
+          <declname>depthImage</declname>
+        </param>
+        <param>
+          <type>const <ref refid="class_azura_1_1_containers_1_1_vector" kindref="compound">Containers::Vector</ref>&lt; <ref refid="struct_azura_1_1_descriptor_slot" kindref="compound">DescriptorSlot</ref> &gt; &amp;</type>
+          <declname>descriptorSlots</declname>
+        </param>
+        <param>
+          <type>const <ref refid="class_azura_1_1_containers_1_1_vector" kindref="compound">Containers::Vector</ref>&lt; <ref refid="struct_azura_1_1_descriptor_table_entry" kindref="compound">DescriptorTableEntry</ref> &gt; &amp;</type>
+          <declname>descriptorSetTable</declname>
+        </param>
+        <param>
+          <type>const <ref refid="class_azura_1_1_containers_1_1_vector" kindref="compound">Containers::Vector</ref>&lt; <ref refid="class_azura_1_1_d3_d12_1_1_d3_d12_scoped_shader" kindref="compound">D3D12ScopedShader</ref> &gt; &amp;</type>
+          <declname>allShaders</declname>
+        </param>
+        <param>
+          <type>UINT</type>
+          <declname>rtvDescriptorSize</declname>
+        </param>
+        <param>
+          <type>UINT</type>
+          <declname>dsvDescriptorSize</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Source/Azura/RenderSystem/Inc/D3D12/D3D12ScopedRenderPass.h" line="39" column="1" bodyfile="Source/Azura/RenderSystem/Src/D3D12/D3D12ScopedRenderPass.cpp" bodystart="106" bodyend="168"/>
+      </memberdef>
+      <memberdef kind="function" id="class_azura_1_1_d3_d12_1_1_d3_d12_scoped_render_pass_1ad6f7b054291aebe95acc2884b39b637b" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
+        <type>U32</type>
+        <definition>U32 Azura::D3D12::D3D12ScopedRenderPass::GetId</definition>
+        <argsstring>() const</argsstring>
+        <name>GetId</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Source/Azura/RenderSystem/Inc/D3D12/D3D12ScopedRenderPass.h" line="50" column="1" bodyfile="Source/Azura/RenderSystem/Src/D3D12/D3D12ScopedRenderPass.cpp" bodystart="170" bodyend="172"/>
+      </memberdef>
+      <memberdef kind="function" id="class_azura_1_1_d3_d12_1_1_d3_d12_scoped_render_pass_1aa507a8ac46b4e07c172c9fed3ee349ff" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
+        <type>U32</type>
+        <definition>U32 Azura::D3D12::D3D12ScopedRenderPass::GetInternalId</definition>
+        <argsstring>() const</argsstring>
+        <name>GetInternalId</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Source/Azura/RenderSystem/Inc/D3D12/D3D12ScopedRenderPass.h" line="51" column="1" bodyfile="Source/Azura/RenderSystem/Src/D3D12/D3D12ScopedRenderPass.cpp" bodystart="174" bodyend="176"/>
+      </memberdef>
+      <memberdef kind="function" id="class_azura_1_1_d3_d12_1_1_d3_d12_scoped_render_pass_1a8222d5e1f885926423d2ced2eb823c9f" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
+        <type>ID3D12GraphicsCommandList *</type>
+        <definition>ID3D12GraphicsCommandList * Azura::D3D12::D3D12ScopedRenderPass::GetPrimaryGraphicsCommandList</definition>
+        <argsstring>(U32 idx) const</argsstring>
+        <name>GetPrimaryGraphicsCommandList</name>
+        <param>
+          <type>U32</type>
+          <declname>idx</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Source/Azura/RenderSystem/Inc/D3D12/D3D12ScopedRenderPass.h" line="53" column="1" bodyfile="Source/Azura/RenderSystem/Src/D3D12/D3D12ScopedRenderPass.cpp" bodystart="178" bodyend="180"/>
+      </memberdef>
+      <memberdef kind="function" id="class_azura_1_1_d3_d12_1_1_d3_d12_scoped_render_pass_1ad9f26b59e670a9e8d1e2fadc2ad5b8b6" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
+        <type>const <ref refid="struct_azura_1_1_descriptor_count" kindref="compound">DescriptorCount</ref> &amp;</type>
+        <definition>const DescriptorCount &amp; Azura::D3D12::D3D12ScopedRenderPass::GetDescriptorCount</definition>
+        <argsstring>() const</argsstring>
+        <name>GetDescriptorCount</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Source/Azura/RenderSystem/Inc/D3D12/D3D12ScopedRenderPass.h" line="55" column="1" bodyfile="Source/Azura/RenderSystem/Src/D3D12/D3D12ScopedRenderPass.cpp" bodystart="182" bodyend="184"/>
+      </memberdef>
+      <memberdef kind="function" id="class_azura_1_1_d3_d12_1_1_d3_d12_scoped_render_pass_1aca9701dcc9ada7fb3c00e33d016a5fc9" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
+        <type>ID3D12RootSignature *</type>
+        <definition>ID3D12RootSignature * Azura::D3D12::D3D12ScopedRenderPass::GetRootSignature</definition>
+        <argsstring>() const</argsstring>
+        <name>GetRootSignature</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Source/Azura/RenderSystem/Inc/D3D12/D3D12ScopedRenderPass.h" line="57" column="1" bodyfile="Source/Azura/RenderSystem/Src/D3D12/D3D12ScopedRenderPass.cpp" bodystart="186" bodyend="188"/>
+      </memberdef>
+      <memberdef kind="function" id="class_azura_1_1_d3_d12_1_1_d3_d12_scoped_render_pass_1ae852a6abdcbd016658c49627c144b9ee" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void Azura::D3D12::D3D12ScopedRenderPass::RecordImageAcquireBarrier</definition>
+        <argsstring>(ID3D12GraphicsCommandList *commandList, U32 idx) const</argsstring>
+        <name>RecordImageAcquireBarrier</name>
+        <param>
+          <type>ID3D12GraphicsCommandList *</type>
+          <declname>commandList</declname>
+        </param>
+        <param>
+          <type>U32</type>
+          <declname>idx</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Source/Azura/RenderSystem/Inc/D3D12/D3D12ScopedRenderPass.h" line="59" column="1" bodyfile="Source/Azura/RenderSystem/Src/D3D12/D3D12ScopedRenderPass.cpp" bodystart="190" bodyend="198"/>
+      </memberdef>
+      <memberdef kind="function" id="class_azura_1_1_d3_d12_1_1_d3_d12_scoped_render_pass_1ad1c9ad7b6d48a7cc0fa218ccaf4b6738" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void Azura::D3D12::D3D12ScopedRenderPass::RecordPresentBarrier</definition>
+        <argsstring>(ID3D12GraphicsCommandList *commandList, U32 idx) const</argsstring>
+        <name>RecordPresentBarrier</name>
+        <param>
+          <type>ID3D12GraphicsCommandList *</type>
+          <declname>commandList</declname>
+        </param>
+        <param>
+          <type>U32</type>
+          <declname>idx</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Source/Azura/RenderSystem/Inc/D3D12/D3D12ScopedRenderPass.h" line="61" column="1" bodyfile="Source/Azura/RenderSystem/Src/D3D12/D3D12ScopedRenderPass.cpp" bodystart="200" bodyend="207"/>
+      </memberdef>
+      <memberdef kind="function" id="class_azura_1_1_d3_d12_1_1_d3_d12_scoped_render_pass_1aa802e7fed17519407a6a4d4f7438e938" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void Azura::D3D12::D3D12ScopedRenderPass::SetRenderTargets</definition>
+        <argsstring>(ID3D12GraphicsCommandList *commandList, U32 cBufferIdx, UINT rtvDescriptorSize) const</argsstring>
+        <name>SetRenderTargets</name>
+        <param>
+          <type>ID3D12GraphicsCommandList *</type>
+          <declname>commandList</declname>
+        </param>
+        <param>
+          <type>U32</type>
+          <declname>cBufferIdx</declname>
+        </param>
+        <param>
+          <type>UINT</type>
+          <declname>rtvDescriptorSize</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Source/Azura/RenderSystem/Inc/D3D12/D3D12ScopedRenderPass.h" line="63" column="1" bodyfile="Source/Azura/RenderSystem/Src/D3D12/D3D12ScopedRenderPass.cpp" bodystart="209" bodyend="231"/>
+      </memberdef>
+      <memberdef kind="function" id="class_azura_1_1_d3_d12_1_1_d3_d12_scoped_render_pass_1a9e94d09589c4fba3590241b2f270c841" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
+        <type>const <ref refid="class_azura_1_1_containers_1_1_vector" kindref="compound">Containers::Vector</ref>&lt; std::reference_wrapper&lt; const <ref refid="class_azura_1_1_d3_d12_1_1_d3_d12_scoped_shader" kindref="compound">D3D12ScopedShader</ref> &gt; &gt; &amp;</type>
+        <definition>const Containers::Vector&lt; std::reference_wrapper&lt; const D3D12ScopedShader &gt; &gt; &amp; Azura::D3D12::D3D12ScopedRenderPass::GetShaders</definition>
+        <argsstring>() const</argsstring>
+        <name>GetShaders</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Source/Azura/RenderSystem/Inc/D3D12/D3D12ScopedRenderPass.h" line="65" column="1" bodyfile="Source/Azura/RenderSystem/Src/D3D12/D3D12ScopedRenderPass.cpp" bodystart="233" bodyend="235"/>
+      </memberdef>
+      <memberdef kind="function" id="class_azura_1_1_d3_d12_1_1_d3_d12_scoped_render_pass_1a00c3c5c6b92c93eef4eabdf4cd4ad298" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
+        <type>const <ref refid="class_azura_1_1_containers_1_1_vector" kindref="compound">Containers::Vector</ref>&lt; std::reference_wrapper&lt; const <ref refid="struct_azura_1_1_render_target_create_info" kindref="compound">RenderTargetCreateInfo</ref> &gt; &gt; &amp;</type>
+        <definition>const Vector&lt; std::reference_wrapper&lt; const RenderTargetCreateInfo &gt; &gt; &amp; Azura::D3D12::D3D12ScopedRenderPass::GetInputInfo</definition>
+        <argsstring>() const</argsstring>
+        <name>GetInputInfo</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Source/Azura/RenderSystem/Inc/D3D12/D3D12ScopedRenderPass.h" line="66" column="1" bodyfile="Source/Azura/RenderSystem/Src/D3D12/D3D12ScopedRenderPass.cpp" bodystart="238" bodyend="240"/>
+      </memberdef>
+      <memberdef kind="function" id="class_azura_1_1_d3_d12_1_1_d3_d12_scoped_render_pass_1a174af7ddbb9d4cdb5b03218b22636b22" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
+        <type>const <ref refid="class_azura_1_1_containers_1_1_vector" kindref="compound">Containers::Vector</ref>&lt; std::reference_wrapper&lt; const <ref refid="class_azura_1_1_d3_d12_1_1_d3_d12_scoped_image" kindref="compound">D3D12ScopedImage</ref> &gt; &gt; &amp;</type>
+        <definition>const Vector&lt; std::reference_wrapper&lt; const D3D12ScopedImage &gt; &gt; &amp; Azura::D3D12::D3D12ScopedRenderPass::GetInputImages</definition>
+        <argsstring>() const</argsstring>
+        <name>GetInputImages</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Source/Azura/RenderSystem/Inc/D3D12/D3D12ScopedRenderPass.h" line="68" column="1" bodyfile="Source/Azura/RenderSystem/Src/D3D12/D3D12ScopedRenderPass.cpp" bodystart="242" bodyend="244"/>
+      </memberdef>
+      <memberdef kind="function" id="class_azura_1_1_d3_d12_1_1_d3_d12_scoped_render_pass_1a7459fee793b9c87ece1398fd14d8516d" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
+        <type>const <ref refid="class_azura_1_1_containers_1_1_vector" kindref="compound">Containers::Vector</ref>&lt; <ref refid="struct_azura_1_1_descriptor_table_entry" kindref="compound">DescriptorTableEntry</ref> &gt; &amp;</type>
+        <definition>const Containers::Vector&lt; DescriptorTableEntry &gt; &amp; Azura::D3D12::D3D12ScopedRenderPass::GetRootSignatureTable</definition>
+        <argsstring>() const</argsstring>
+        <name>GetRootSignatureTable</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Source/Azura/RenderSystem/Inc/D3D12/D3D12ScopedRenderPass.h" line="70" column="1" bodyfile="Source/Azura/RenderSystem/Src/D3D12/D3D12ScopedRenderPass.cpp" bodystart="247" bodyend="249"/>
+      </memberdef>
+      <memberdef kind="function" id="class_azura_1_1_d3_d12_1_1_d3_d12_scoped_render_pass_1ab2c601a7edeeffddfa7bdd2fd7f5989c" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void Azura::D3D12::D3D12ScopedRenderPass::RecordResourceBarriersForOutputsStart</definition>
+        <argsstring>(ID3D12GraphicsCommandList *commandList) const</argsstring>
+        <name>RecordResourceBarriersForOutputsStart</name>
+        <param>
+          <type>ID3D12GraphicsCommandList *</type>
+          <declname>commandList</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Source/Azura/RenderSystem/Inc/D3D12/D3D12ScopedRenderPass.h" line="72" column="1" bodyfile="Source/Azura/RenderSystem/Src/D3D12/D3D12ScopedRenderPass.cpp" bodystart="251" bodyend="259"/>
+      </memberdef>
+      <memberdef kind="function" id="class_azura_1_1_d3_d12_1_1_d3_d12_scoped_render_pass_1ae9f957178eda6ef261a61218846634a0" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void Azura::D3D12::D3D12ScopedRenderPass::RecordResourceBarriersForOutputsEnd</definition>
+        <argsstring>(ID3D12GraphicsCommandList *commandList) const</argsstring>
+        <name>RecordResourceBarriersForOutputsEnd</name>
+        <param>
+          <type>ID3D12GraphicsCommandList *</type>
+          <declname>commandList</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Source/Azura/RenderSystem/Inc/D3D12/D3D12ScopedRenderPass.h" line="73" column="1" bodyfile="Source/Azura/RenderSystem/Src/D3D12/D3D12ScopedRenderPass.cpp" bodystart="261" bodyend="269"/>
+      </memberdef>
+      <memberdef kind="function" id="class_azura_1_1_d3_d12_1_1_d3_d12_scoped_render_pass_1a8a6a047a71bc8e9ed059a905d58d27dc" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void Azura::D3D12::D3D12ScopedRenderPass::RecordResourceBarriersForInputsStart</definition>
+        <argsstring>(ID3D12GraphicsCommandList *commandList) const</argsstring>
+        <name>RecordResourceBarriersForInputsStart</name>
+        <param>
+          <type>ID3D12GraphicsCommandList *</type>
+          <declname>commandList</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Source/Azura/RenderSystem/Inc/D3D12/D3D12ScopedRenderPass.h" line="74" column="1" bodyfile="Source/Azura/RenderSystem/Src/D3D12/D3D12ScopedRenderPass.cpp" bodystart="271" bodyend="279"/>
+      </memberdef>
+      <memberdef kind="function" id="class_azura_1_1_d3_d12_1_1_d3_d12_scoped_render_pass_1ac17a52f7aa7f8285d0ed5422c48b3061" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void Azura::D3D12::D3D12ScopedRenderPass::RecordResourceBarriersForInputsEnd</definition>
+        <argsstring>(ID3D12GraphicsCommandList *commandList) const</argsstring>
+        <name>RecordResourceBarriersForInputsEnd</name>
+        <param>
+          <type>ID3D12GraphicsCommandList *</type>
+          <declname>commandList</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Source/Azura/RenderSystem/Inc/D3D12/D3D12ScopedRenderPass.h" line="75" column="1" bodyfile="Source/Azura/RenderSystem/Src/D3D12/D3D12ScopedRenderPass.cpp" bodystart="281" bodyend="289"/>
+      </memberdef>
+      <memberdef kind="function" id="class_azura_1_1_d3_d12_1_1_d3_d12_scoped_render_pass_1aa497fcac079435d67ac19b31766d2ae6" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void Azura::D3D12::D3D12ScopedRenderPass::RecordResourceBarriersForWritingInputs</definition>
+        <argsstring>(ID3D12GraphicsCommandList *commandList) const</argsstring>
+        <name>RecordResourceBarriersForWritingInputs</name>
+        <param>
+          <type>ID3D12GraphicsCommandList *</type>
+          <declname>commandList</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Source/Azura/RenderSystem/Inc/D3D12/D3D12ScopedRenderPass.h" line="77" column="1" bodyfile="Source/Azura/RenderSystem/Src/D3D12/D3D12ScopedRenderPass.cpp" bodystart="291" bodyend="301"/>
+      </memberdef>
+      <memberdef kind="function" id="class_azura_1_1_d3_d12_1_1_d3_d12_scoped_render_pass_1a012ba38a4d1c431b2dad36d9176d36ae" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void Azura::D3D12::D3D12ScopedRenderPass::WaitForGPU</definition>
+        <argsstring>(ID3D12CommandQueue *commandQueue)</argsstring>
+        <name>WaitForGPU</name>
+        <param>
+          <type>ID3D12CommandQueue *</type>
+          <declname>commandQueue</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Source/Azura/RenderSystem/Inc/D3D12/D3D12ScopedRenderPass.h" line="79" column="1" bodyfile="Source/Azura/RenderSystem/Src/D3D12/D3D12ScopedRenderPass.cpp" bodystart="303" bodyend="315"/>
+      </memberdef>
+      <memberdef kind="function" id="class_azura_1_1_d3_d12_1_1_d3_d12_scoped_render_pass_1a87db94028684a88fb9d2c41520700efe" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
+        <type>U32</type>
+        <definition>U32 Azura::D3D12::D3D12ScopedRenderPass::GetCommandBufferCount</definition>
+        <argsstring>() const</argsstring>
+        <name>GetCommandBufferCount</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Source/Azura/RenderSystem/Inc/D3D12/D3D12ScopedRenderPass.h" line="81" column="1" bodyfile="Source/Azura/RenderSystem/Src/D3D12/D3D12ScopedRenderPass.cpp" bodystart="317" bodyend="319"/>
+      </memberdef>
+      <memberdef kind="function" id="class_azura_1_1_d3_d12_1_1_d3_d12_scoped_render_pass_1ad19baabf06b7f32553b9338f50578c00" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void Azura::D3D12::D3D12ScopedRenderPass::UpdatePipelineInfo</definition>
+        <argsstring>(D3D12_GRAPHICS_PIPELINE_STATE_DESC &amp;psoDesc)</argsstring>
+        <name>UpdatePipelineInfo</name>
+        <param>
+          <type>D3D12_GRAPHICS_PIPELINE_STATE_DESC &amp;</type>
+          <declname>psoDesc</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Source/Azura/RenderSystem/Inc/D3D12/D3D12ScopedRenderPass.h" line="83" column="1" bodyfile="Source/Azura/RenderSystem/Src/D3D12/D3D12ScopedRenderPass.cpp" bodystart="354" bodyend="393"/>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="private-func">
+      <memberdef kind="function" id="class_azura_1_1_d3_d12_1_1_d3_d12_scoped_render_pass_1a9c5bddd47a291686f4edfd5d8b90130e" prot="private" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void Azura::D3D12::D3D12ScopedRenderPass::CreateBase</definition>
+        <argsstring>(const Microsoft::WRL::ComPtr&lt; ID3D12Device &gt; &amp;device, const PipelinePassCreateInfo &amp;createInfo, const Containers::Vector&lt; DescriptorSlot &gt; &amp;descriptorSlots, const Containers::Vector&lt; DescriptorTableEntry &gt; &amp;descriptorSetTable, const Containers::Vector&lt; RenderTargetCreateInfo &gt; &amp;pipelineBuffers, const Containers::Vector&lt; D3D12ScopedImage &gt; &amp;pipelineBufferImages, const Containers::Vector&lt; D3D12ScopedShader &gt; &amp;allShaders)</argsstring>
+        <name>CreateBase</name>
+        <param>
+          <type>const Microsoft::WRL::ComPtr&lt; ID3D12Device &gt; &amp;</type>
+          <declname>device</declname>
+        </param>
+        <param>
+          <type>const <ref refid="struct_azura_1_1_pipeline_pass_create_info" kindref="compound">PipelinePassCreateInfo</ref> &amp;</type>
+          <declname>createInfo</declname>
+        </param>
+        <param>
+          <type>const <ref refid="class_azura_1_1_containers_1_1_vector" kindref="compound">Containers::Vector</ref>&lt; <ref refid="struct_azura_1_1_descriptor_slot" kindref="compound">DescriptorSlot</ref> &gt; &amp;</type>
+          <declname>descriptorSlots</declname>
+        </param>
+        <param>
+          <type>const <ref refid="class_azura_1_1_containers_1_1_vector" kindref="compound">Containers::Vector</ref>&lt; <ref refid="struct_azura_1_1_descriptor_table_entry" kindref="compound">DescriptorTableEntry</ref> &gt; &amp;</type>
+          <declname>descriptorSetTable</declname>
+        </param>
+        <param>
+          <type>const <ref refid="class_azura_1_1_containers_1_1_vector" kindref="compound">Containers::Vector</ref>&lt; <ref refid="struct_azura_1_1_render_target_create_info" kindref="compound">RenderTargetCreateInfo</ref> &gt; &amp;</type>
+          <declname>pipelineBuffers</declname>
+        </param>
+        <param>
+          <type>const <ref refid="class_azura_1_1_containers_1_1_vector" kindref="compound">Containers::Vector</ref>&lt; <ref refid="class_azura_1_1_d3_d12_1_1_d3_d12_scoped_image" kindref="compound">D3D12ScopedImage</ref> &gt; &amp;</type>
+          <declname>pipelineBufferImages</declname>
+        </param>
+        <param>
+          <type>const <ref refid="class_azura_1_1_containers_1_1_vector" kindref="compound">Containers::Vector</ref>&lt; <ref refid="class_azura_1_1_d3_d12_1_1_d3_d12_scoped_shader" kindref="compound">D3D12ScopedShader</ref> &gt; &amp;</type>
+          <declname>allShaders</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Source/Azura/RenderSystem/Inc/D3D12/D3D12ScopedRenderPass.h" line="86" column="1" bodyfile="Source/Azura/RenderSystem/Src/D3D12/D3D12ScopedRenderPass.cpp" bodystart="395" bodyend="555"/>
+      </memberdef>
+      <memberdef kind="function" id="class_azura_1_1_d3_d12_1_1_d3_d12_scoped_render_pass_1a503c84138f5931d770361ecff43c6552" prot="private" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void Azura::D3D12::D3D12ScopedRenderPass::ApplyBlendToPSO</definition>
+        <argsstring>(D3D12_GRAPHICS_PIPELINE_STATE_DESC &amp;psoDesc, U32 id) const</argsstring>
+        <name>ApplyBlendToPSO</name>
+        <param>
+          <type>D3D12_GRAPHICS_PIPELINE_STATE_DESC &amp;</type>
+          <declname>psoDesc</declname>
+        </param>
+        <param>
+          <type>U32</type>
+          <declname>id</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Source/Azura/RenderSystem/Inc/D3D12/D3D12ScopedRenderPass.h" line="95" column="1" bodyfile="Source/Azura/RenderSystem/Src/D3D12/D3D12ScopedRenderPass.cpp" bodystart="321" bodyend="352"/>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <location file="Source/Azura/RenderSystem/Inc/D3D12/D3D12ScopedRenderPass.h" line="25" column="1" bodyfile="Source/Azura/RenderSystem/Inc/D3D12/D3D12ScopedRenderPass.h" bodystart="25" bodyend="136"/>
+    <listofallmembers>
+      <member refid="class_azura_1_1_d3_d12_1_1_d3_d12_scoped_render_pass_1a503c84138f5931d770361ecff43c6552" prot="private" virt="non-virtual"><scope>Azura::D3D12::D3D12ScopedRenderPass</scope><name>ApplyBlendToPSO</name></member>
+      <member refid="class_azura_1_1_d3_d12_1_1_d3_d12_scoped_render_pass_1a920a84a128c9387cb1b320260d2e5877" prot="public" virt="non-virtual"><scope>Azura::D3D12::D3D12ScopedRenderPass</scope><name>Create</name></member>
+      <member refid="class_azura_1_1_d3_d12_1_1_d3_d12_scoped_render_pass_1a9c5bddd47a291686f4edfd5d8b90130e" prot="private" virt="non-virtual"><scope>Azura::D3D12::D3D12ScopedRenderPass</scope><name>CreateBase</name></member>
+      <member refid="class_azura_1_1_d3_d12_1_1_d3_d12_scoped_render_pass_1a17509f68d99fcdd59d3f8e96c348f1e5" prot="public" virt="non-virtual"><scope>Azura::D3D12::D3D12ScopedRenderPass</scope><name>CreateForSwapChain</name></member>
+      <member refid="class_azura_1_1_d3_d12_1_1_d3_d12_scoped_render_pass_1a7f0ea9e5d088f0babc30387166f3a53b" prot="public" virt="non-virtual"><scope>Azura::D3D12::D3D12ScopedRenderPass</scope><name>D3D12ScopedRenderPass</name></member>
+      <member refid="class_azura_1_1_d3_d12_1_1_d3_d12_scoped_render_pass_1a87db94028684a88fb9d2c41520700efe" prot="public" virt="non-virtual"><scope>Azura::D3D12::D3D12ScopedRenderPass</scope><name>GetCommandBufferCount</name></member>
+      <member refid="class_azura_1_1_d3_d12_1_1_d3_d12_scoped_render_pass_1ad9f26b59e670a9e8d1e2fadc2ad5b8b6" prot="public" virt="non-virtual"><scope>Azura::D3D12::D3D12ScopedRenderPass</scope><name>GetDescriptorCount</name></member>
+      <member refid="class_azura_1_1_d3_d12_1_1_d3_d12_scoped_render_pass_1ad6f7b054291aebe95acc2884b39b637b" prot="public" virt="non-virtual"><scope>Azura::D3D12::D3D12ScopedRenderPass</scope><name>GetId</name></member>
+      <member refid="class_azura_1_1_d3_d12_1_1_d3_d12_scoped_render_pass_1a174af7ddbb9d4cdb5b03218b22636b22" prot="public" virt="non-virtual"><scope>Azura::D3D12::D3D12ScopedRenderPass</scope><name>GetInputImages</name></member>
+      <member refid="class_azura_1_1_d3_d12_1_1_d3_d12_scoped_render_pass_1a00c3c5c6b92c93eef4eabdf4cd4ad298" prot="public" virt="non-virtual"><scope>Azura::D3D12::D3D12ScopedRenderPass</scope><name>GetInputInfo</name></member>
+      <member refid="class_azura_1_1_d3_d12_1_1_d3_d12_scoped_render_pass_1aa507a8ac46b4e07c172c9fed3ee349ff" prot="public" virt="non-virtual"><scope>Azura::D3D12::D3D12ScopedRenderPass</scope><name>GetInternalId</name></member>
+      <member refid="class_azura_1_1_d3_d12_1_1_d3_d12_scoped_render_pass_1a8222d5e1f885926423d2ced2eb823c9f" prot="public" virt="non-virtual"><scope>Azura::D3D12::D3D12ScopedRenderPass</scope><name>GetPrimaryGraphicsCommandList</name></member>
+      <member refid="class_azura_1_1_d3_d12_1_1_d3_d12_scoped_render_pass_1aca9701dcc9ada7fb3c00e33d016a5fc9" prot="public" virt="non-virtual"><scope>Azura::D3D12::D3D12ScopedRenderPass</scope><name>GetRootSignature</name></member>
+      <member refid="class_azura_1_1_d3_d12_1_1_d3_d12_scoped_render_pass_1a7459fee793b9c87ece1398fd14d8516d" prot="public" virt="non-virtual"><scope>Azura::D3D12::D3D12ScopedRenderPass</scope><name>GetRootSignatureTable</name></member>
+      <member refid="class_azura_1_1_d3_d12_1_1_d3_d12_scoped_render_pass_1a9e94d09589c4fba3590241b2f270c841" prot="public" virt="non-virtual"><scope>Azura::D3D12::D3D12ScopedRenderPass</scope><name>GetShaders</name></member>
+      <member refid="class_azura_1_1_d3_d12_1_1_d3_d12_scoped_render_pass_1a0b5b8451bf5710f4ddf76618aaeb2b08" prot="private" virt="non-virtual"><scope>Azura::D3D12::D3D12ScopedRenderPass</scope><name>log_D3D12RenderSystem</name></member>
+      <member refid="class_azura_1_1_d3_d12_1_1_d3_d12_scoped_render_pass_1a3194212e701e6bf1c08c939d32b3e8e4" prot="private" virt="non-virtual"><scope>Azura::D3D12::D3D12ScopedRenderPass</scope><name>m_allRenderInputs</name></member>
+      <member refid="class_azura_1_1_d3_d12_1_1_d3_d12_scoped_render_pass_1a8fdd6ef0c24c46512bf19f5ecb3798a1" prot="private" virt="non-virtual"><scope>Azura::D3D12::D3D12ScopedRenderPass</scope><name>m_blendState</name></member>
+      <member refid="class_azura_1_1_d3_d12_1_1_d3_d12_scoped_render_pass_1a9fdb207bffb03311e9ab833b15791c5a" prot="private" virt="non-virtual"><scope>Azura::D3D12::D3D12ScopedRenderPass</scope><name>m_clearData</name></member>
+      <member refid="class_azura_1_1_d3_d12_1_1_d3_d12_scoped_render_pass_1aa5d8560a8fc70afd87908682a3008211" prot="private" virt="non-virtual"><scope>Azura::D3D12::D3D12ScopedRenderPass</scope><name>m_commandBuffers</name></member>
+      <member refid="class_azura_1_1_d3_d12_1_1_d3_d12_scoped_render_pass_1a37360b2cebebb70c2356c78e42d8cd38" prot="private" virt="non-virtual"><scope>Azura::D3D12::D3D12ScopedRenderPass</scope><name>m_depthInputs</name></member>
+      <member refid="class_azura_1_1_d3_d12_1_1_d3_d12_scoped_render_pass_1aa0d4eaedc78c9e75311e8626bd15f957" prot="private" virt="non-virtual"><scope>Azura::D3D12::D3D12ScopedRenderPass</scope><name>m_depthOutputs</name></member>
+      <member refid="class_azura_1_1_d3_d12_1_1_d3_d12_scoped_render_pass_1a85fba8ee1312a562a461bfc6d08244a7" prot="private" virt="non-virtual"><scope>Azura::D3D12::D3D12ScopedRenderPass</scope><name>m_descriptorCount</name></member>
+      <member refid="class_azura_1_1_d3_d12_1_1_d3_d12_scoped_render_pass_1a45b74ce648a83cdbbfb950ef5bf44e2b" prot="private" virt="non-virtual"><scope>Azura::D3D12::D3D12ScopedRenderPass</scope><name>m_dsvHeap</name></member>
+      <member refid="class_azura_1_1_d3_d12_1_1_d3_d12_scoped_render_pass_1ab692747c6874db861ce27d35e4de193b" prot="private" virt="non-virtual"><scope>Azura::D3D12::D3D12ScopedRenderPass</scope><name>m_fenceEvent</name></member>
+      <member refid="class_azura_1_1_d3_d12_1_1_d3_d12_scoped_render_pass_1ad58f0d7e711ad44cf354829513496153" prot="private" virt="non-virtual"><scope>Azura::D3D12::D3D12ScopedRenderPass</scope><name>m_fenceValue</name></member>
+      <member refid="class_azura_1_1_d3_d12_1_1_d3_d12_scoped_render_pass_1aab9d7df14e33b9c8337d06e36a4f0109" prot="private" virt="non-virtual"><scope>Azura::D3D12::D3D12ScopedRenderPass</scope><name>m_hasDepth</name></member>
+      <member refid="class_azura_1_1_d3_d12_1_1_d3_d12_scoped_render_pass_1af9320f24a4811461b6d3b2934eec7402" prot="private" virt="non-virtual"><scope>Azura::D3D12::D3D12ScopedRenderPass</scope><name>m_id</name></member>
+      <member refid="class_azura_1_1_d3_d12_1_1_d3_d12_scoped_render_pass_1ab497d714b1b30092bd7785d91ab5663d" prot="private" virt="non-virtual"><scope>Azura::D3D12::D3D12ScopedRenderPass</scope><name>m_internalId</name></member>
+      <member refid="class_azura_1_1_d3_d12_1_1_d3_d12_scoped_render_pass_1ab607e4fec333726fde0df3b1afac1232" prot="private" virt="non-virtual"><scope>Azura::D3D12::D3D12ScopedRenderPass</scope><name>m_isTargetSwapChain</name></member>
+      <member refid="class_azura_1_1_d3_d12_1_1_d3_d12_scoped_render_pass_1ab943f39c967d294364707051f8ba6436" prot="private" virt="non-virtual"><scope>Azura::D3D12::D3D12ScopedRenderPass</scope><name>m_passInputs</name></member>
+      <member refid="class_azura_1_1_d3_d12_1_1_d3_d12_scoped_render_pass_1a1b863bfc0106f5ee052ded022046d7c6" prot="private" virt="non-virtual"><scope>Azura::D3D12::D3D12ScopedRenderPass</scope><name>m_passShaders</name></member>
+      <member refid="class_azura_1_1_d3_d12_1_1_d3_d12_scoped_render_pass_1a39aa85a5ca03d027ac45b8cb8acc933c" prot="private" virt="non-virtual"><scope>Azura::D3D12::D3D12ScopedRenderPass</scope><name>m_renderInputs</name></member>
+      <member refid="class_azura_1_1_d3_d12_1_1_d3_d12_scoped_render_pass_1a197798b85c9d39f253bd01e6acb1641e" prot="private" virt="non-virtual"><scope>Azura::D3D12::D3D12ScopedRenderPass</scope><name>m_renderOutputInfo</name></member>
+      <member refid="class_azura_1_1_d3_d12_1_1_d3_d12_scoped_render_pass_1a7aefac2072fb746ce7a44d95072a599b" prot="private" virt="non-virtual"><scope>Azura::D3D12::D3D12ScopedRenderPass</scope><name>m_renderOutputs</name></member>
+      <member refid="class_azura_1_1_d3_d12_1_1_d3_d12_scoped_render_pass_1a439500efcd1c94aba6b92ba8bd9bb9cf" prot="private" virt="non-virtual"><scope>Azura::D3D12::D3D12ScopedRenderPass</scope><name>m_rootSignature</name></member>
+      <member refid="class_azura_1_1_d3_d12_1_1_d3_d12_scoped_render_pass_1abd2915fc35dbe9475b3b6eb6543c3c31" prot="private" virt="non-virtual"><scope>Azura::D3D12::D3D12ScopedRenderPass</scope><name>m_rootSignatureTable</name></member>
+      <member refid="class_azura_1_1_d3_d12_1_1_d3_d12_scoped_render_pass_1a33c173c36cf5a902d95106fa8679f51b" prot="private" virt="non-virtual"><scope>Azura::D3D12::D3D12ScopedRenderPass</scope><name>m_rtvHeap</name></member>
+      <member refid="class_azura_1_1_d3_d12_1_1_d3_d12_scoped_render_pass_1aec4ead79659ca2c150ec753f48bb8548" prot="private" virt="non-virtual"><scope>Azura::D3D12::D3D12ScopedRenderPass</scope><name>m_signalFence</name></member>
+      <member refid="class_azura_1_1_d3_d12_1_1_d3_d12_scoped_render_pass_1a6b79d892ada73a0c4dc2d3330a19c1e6" prot="private" virt="non-virtual"><scope>Azura::D3D12::D3D12ScopedRenderPass</scope><name>m_swapChainImageResources</name></member>
+      <member refid="class_azura_1_1_d3_d12_1_1_d3_d12_scoped_render_pass_1ad77690afd44c15f7812a361de0c5ee8f" prot="private" virt="non-virtual"><scope>Azura::D3D12::D3D12ScopedRenderPass</scope><name>m_swapChainRef</name></member>
+      <member refid="class_azura_1_1_d3_d12_1_1_d3_d12_scoped_render_pass_1ae812f7f2621d1783e7bbf49d1e3a505a" prot="private" virt="non-virtual"><scope>Azura::D3D12::D3D12ScopedRenderPass</scope><name>m_waitFences</name></member>
+      <member refid="class_azura_1_1_d3_d12_1_1_d3_d12_scoped_render_pass_1ae852a6abdcbd016658c49627c144b9ee" prot="public" virt="non-virtual"><scope>Azura::D3D12::D3D12ScopedRenderPass</scope><name>RecordImageAcquireBarrier</name></member>
+      <member refid="class_azura_1_1_d3_d12_1_1_d3_d12_scoped_render_pass_1ad1c9ad7b6d48a7cc0fa218ccaf4b6738" prot="public" virt="non-virtual"><scope>Azura::D3D12::D3D12ScopedRenderPass</scope><name>RecordPresentBarrier</name></member>
+      <member refid="class_azura_1_1_d3_d12_1_1_d3_d12_scoped_render_pass_1ac17a52f7aa7f8285d0ed5422c48b3061" prot="public" virt="non-virtual"><scope>Azura::D3D12::D3D12ScopedRenderPass</scope><name>RecordResourceBarriersForInputsEnd</name></member>
+      <member refid="class_azura_1_1_d3_d12_1_1_d3_d12_scoped_render_pass_1a8a6a047a71bc8e9ed059a905d58d27dc" prot="public" virt="non-virtual"><scope>Azura::D3D12::D3D12ScopedRenderPass</scope><name>RecordResourceBarriersForInputsStart</name></member>
+      <member refid="class_azura_1_1_d3_d12_1_1_d3_d12_scoped_render_pass_1ae9f957178eda6ef261a61218846634a0" prot="public" virt="non-virtual"><scope>Azura::D3D12::D3D12ScopedRenderPass</scope><name>RecordResourceBarriersForOutputsEnd</name></member>
+      <member refid="class_azura_1_1_d3_d12_1_1_d3_d12_scoped_render_pass_1ab2c601a7edeeffddfa7bdd2fd7f5989c" prot="public" virt="non-virtual"><scope>Azura::D3D12::D3D12ScopedRenderPass</scope><name>RecordResourceBarriersForOutputsStart</name></member>
+      <member refid="class_azura_1_1_d3_d12_1_1_d3_d12_scoped_render_pass_1aa497fcac079435d67ac19b31766d2ae6" prot="public" virt="non-virtual"><scope>Azura::D3D12::D3D12ScopedRenderPass</scope><name>RecordResourceBarriersForWritingInputs</name></member>
+      <member refid="class_azura_1_1_d3_d12_1_1_d3_d12_scoped_render_pass_1aa802e7fed17519407a6a4d4f7438e938" prot="public" virt="non-virtual"><scope>Azura::D3D12::D3D12ScopedRenderPass</scope><name>SetRenderTargets</name></member>
+      <member refid="class_azura_1_1_d3_d12_1_1_d3_d12_scoped_render_pass_1ad19baabf06b7f32553b9338f50578c00" prot="public" virt="non-virtual"><scope>Azura::D3D12::D3D12ScopedRenderPass</scope><name>UpdatePipelineInfo</name></member>
+      <member refid="class_azura_1_1_d3_d12_1_1_d3_d12_scoped_render_pass_1a012ba38a4d1c431b2dad36d9176d36ae" prot="public" virt="non-virtual"><scope>Azura::D3D12::D3D12ScopedRenderPass</scope><name>WaitForGPU</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

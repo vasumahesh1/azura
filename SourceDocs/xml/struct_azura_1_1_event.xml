@@ -1,0 +1,49 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.8.14">
+  <compounddef id="struct_azura_1_1_event" kind="struct" language="C++" prot="public">
+    <compoundname>Azura::Event</compoundname>
+    <derivedcompoundref refid="struct_azura_1_1_key_event" prot="public" virt="non-virtual">Azura::KeyEvent</derivedcompoundref>
+    <derivedcompoundref refid="struct_azura_1_1_mouse_event" prot="public" virt="non-virtual">Azura::MouseEvent</derivedcompoundref>
+      <sectiondef kind="public-attrib">
+      <memberdef kind="variable" id="struct_azura_1_1_event_1ad9e8ef0a614fa5841ff961ec3803a94d" prot="public" static="no" mutable="no">
+        <type>EventType</type>
+        <definition>EventType Azura::Event::m_type</definition>
+        <argsstring></argsstring>
+        <name>m_type</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Source/Core/Inc/Core/Events.h" line="46" column="1" bodyfile="Source/Core/Inc/Core/Events.h" bodystart="46" bodyend="-1"/>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <inheritancegraph>
+      <node id="245">
+        <label>Azura::Event</label>
+        <link refid="struct_azura_1_1_event"/>
+      </node>
+      <node id="246">
+        <label>Azura::KeyEvent</label>
+        <link refid="struct_azura_1_1_key_event"/>
+        <childnode refid="245" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="247">
+        <label>Azura::MouseEvent</label>
+        <link refid="struct_azura_1_1_mouse_event"/>
+        <childnode refid="245" relation="public-inheritance">
+        </childnode>
+      </node>
+    </inheritancegraph>
+    <location file="Source/Core/Inc/Core/Events.h" line="45" column="1" bodyfile="Source/Core/Inc/Core/Events.h" bodystart="45" bodyend="47"/>
+    <listofallmembers>
+      <member refid="struct_azura_1_1_event_1ad9e8ef0a614fa5841ff961ec3803a94d" prot="public" virt="non-virtual"><scope>Azura::Event</scope><name>m_type</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

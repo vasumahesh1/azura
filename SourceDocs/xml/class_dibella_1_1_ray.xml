@@ -1,0 +1,107 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.8.14">
+  <compounddef id="class_dibella_1_1_ray" kind="class" language="C++" prot="public">
+    <compoundname>Dibella::Ray</compoundname>
+      <sectiondef kind="private-attrib">
+      <memberdef kind="variable" id="class_dibella_1_1_ray_1a49e4cb18ecebb4904d5f6baafb655ffc" prot="private" static="no" mutable="no">
+        <type>Point3f</type>
+        <definition>Point3f Dibella::Ray::mOrigin</definition>
+        <argsstring></argsstring>
+        <name>mOrigin</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Source/Dibella/Inc/RayTracing/Primitives/Ray.h" line="16" column="1" bodyfile="Source/Dibella/Inc/RayTracing/Primitives/Ray.h" bodystart="16" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="class_dibella_1_1_ray_1a3d3a0963aa09ab157746154a7355bc1e" prot="private" static="no" mutable="no">
+        <type>Vector3f</type>
+        <definition>Vector3f Dibella::Ray::mDirection</definition>
+        <argsstring></argsstring>
+        <name>mDirection</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Source/Dibella/Inc/RayTracing/Primitives/Ray.h" line="17" column="1" bodyfile="Source/Dibella/Inc/RayTracing/Primitives/Ray.h" bodystart="17" bodyend="-1"/>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="public-func">
+      <memberdef kind="function" id="class_dibella_1_1_ray_1a6ae6ded08c4a54ec5ecf153e90e68e20" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>Dibella::Ray::Ray</definition>
+        <argsstring>(const Point3f &amp;o, const Vector3f &amp;d)</argsstring>
+        <name>Ray</name>
+        <param>
+          <type>const Point3f &amp;</type>
+          <declname>o</declname>
+        </param>
+        <param>
+          <type>const Vector3f &amp;</type>
+          <declname>d</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Source/Dibella/Inc/RayTracing/Primitives/Ray.h" line="8" column="1" bodyfile="Source/Dibella/Src/RayTracing/Primitives/Ray.cpp" bodystart="5" bodyend="5"/>
+      </memberdef>
+      <memberdef kind="function" id="class_dibella_1_1_ray_1a6e4126c406aa956041fda133720d2231" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>Dibella::Ray::Ray</definition>
+        <argsstring>(const Vector4f &amp;o, const Vector4f &amp;d)</argsstring>
+        <name>Ray</name>
+        <param>
+          <type>const Vector4f &amp;</type>
+          <declname>o</declname>
+        </param>
+        <param>
+          <type>const Vector4f &amp;</type>
+          <declname>d</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Source/Dibella/Inc/RayTracing/Primitives/Ray.h" line="9" column="1" bodyfile="Source/Dibella/Src/RayTracing/Primitives/Ray.cpp" bodystart="7" bodyend="7"/>
+      </memberdef>
+      <memberdef kind="function" id="class_dibella_1_1_ray_1ab4303402ccf167c2ee3eca410539c2b3" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="class_dibella_1_1_ray" kindref="compound">Ray</ref></type>
+        <definition>Ray Dibella::Ray::GetTransformedCopy</definition>
+        <argsstring>(const Matrix4f &amp;T) const</argsstring>
+        <name>GetTransformedCopy</name>
+        <param>
+          <type>const Matrix4f &amp;</type>
+          <declname>T</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Source/Dibella/Inc/RayTracing/Primitives/Ray.h" line="13" column="1" bodyfile="Source/Dibella/Src/RayTracing/Primitives/Ray.cpp" bodystart="9" bodyend="17"/>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <location file="Source/Dibella/Inc/RayTracing/Primitives/Ray.h" line="6" column="1" bodyfile="Source/Dibella/Inc/RayTracing/Primitives/Ray.h" bodystart="6" bodyend="18"/>
+    <listofallmembers>
+      <member refid="class_dibella_1_1_ray_1ab4303402ccf167c2ee3eca410539c2b3" prot="public" virt="non-virtual"><scope>Dibella::Ray</scope><name>GetTransformedCopy</name></member>
+      <member refid="class_dibella_1_1_ray_1a3d3a0963aa09ab157746154a7355bc1e" prot="private" virt="non-virtual"><scope>Dibella::Ray</scope><name>mDirection</name></member>
+      <member refid="class_dibella_1_1_ray_1a49e4cb18ecebb4904d5f6baafb655ffc" prot="private" virt="non-virtual"><scope>Dibella::Ray</scope><name>mOrigin</name></member>
+      <member refid="class_dibella_1_1_ray_1a6ae6ded08c4a54ec5ecf153e90e68e20" prot="public" virt="non-virtual"><scope>Dibella::Ray</scope><name>Ray</name></member>
+      <member refid="class_dibella_1_1_ray_1a6e4126c406aa956041fda133720d2231" prot="public" virt="non-virtual"><scope>Dibella::Ray</scope><name>Ray</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

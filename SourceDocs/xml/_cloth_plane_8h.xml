@@ -1,0 +1,298 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.8.14">
+  <compounddef id="_cloth_plane_8h" kind="file" language="C++">
+    <compoundname>ClothPlane.h</compoundname>
+    <includes refid="_core_8h" local="no">Math/Core.h</includes>
+    <includes refid="_raw_storage_format_8h" local="no">Core/RawStorageFormat.h</includes>
+    <includes refid="_edge_8h" local="no">Physics/Geometry/Edge.h</includes>
+    <includes refid="_cloth_solving_view_8h" local="no">Physics/PBD/Cloth/ClothSolvingView.h</includes>
+    <includes refid="_physics_2_inc_2_physics_2_geometry_2_generic_types_8h" local="no">Physics/Geometry/GenericTypes.h</includes>
+    <includes refid="_i_cloth_physics_geometry_8h" local="no">Physics/Geometry/IClothPhysicsGeometry.h</includes>
+    <includes local="no">vector</includes>
+    <includes local="no">unordered_map</includes>
+    <includedby refid="_cloth_plane_8cpp" local="yes">Source/Physics/Src/Geometry/ClothPlane.cpp</includedby>
+    <includedby refid="3___cloth_sim_2_inc_2_cloth_sim_2_app_renderer_8h" local="yes">Source/Samples/3_ClothSim/Inc/ClothSim/AppRenderer.h</includedby>
+    <incdepgraph>
+      <node id="5430">
+        <label>Math/Core.h</label>
+        <link refid="_core_8h_source"/>
+        <childnode refid="5431" relation="include">
+        </childnode>
+        <childnode refid="5432" relation="include">
+        </childnode>
+      </node>
+      <node id="5446">
+        <label>functional</label>
+      </node>
+      <node id="5447">
+        <label>iterator</label>
+      </node>
+      <node id="5433">
+        <label>Core/RawStorageFormat.h</label>
+        <link refid="_raw_storage_format_8h_source"/>
+        <childnode refid="5432" relation="include">
+        </childnode>
+        <childnode refid="5434" relation="include">
+        </childnode>
+        <childnode refid="5435" relation="include">
+        </childnode>
+        <childnode refid="5436" relation="include">
+        </childnode>
+        <childnode refid="5437" relation="include">
+        </childnode>
+        <childnode refid="5438" relation="include">
+        </childnode>
+      </node>
+      <node id="5440">
+        <label>boost/container_hash/hash.hpp</label>
+      </node>
+      <node id="5442">
+        <label>Physics/PBD/Common/SolvingView.h</label>
+        <link refid="_solving_view_8h_source"/>
+        <childnode refid="5430" relation="include">
+        </childnode>
+        <childnode refid="5443" relation="include">
+        </childnode>
+        <childnode refid="5451" relation="include">
+        </childnode>
+      </node>
+      <node id="5429">
+        <label>Source/Physics/Inc/Physics/Geometry/ClothPlane.h</label>
+        <link refid="_cloth_plane_8h"/>
+        <childnode refid="5430" relation="include">
+        </childnode>
+        <childnode refid="5433" relation="include">
+        </childnode>
+        <childnode refid="5439" relation="include">
+        </childnode>
+        <childnode refid="5441" relation="include">
+        </childnode>
+        <childnode refid="5454" relation="include">
+        </childnode>
+        <childnode refid="5455" relation="include">
+        </childnode>
+        <childnode refid="5458" relation="include">
+        </childnode>
+        <childnode refid="5459" relation="include">
+        </childnode>
+      </node>
+      <node id="5449">
+        <label>Memory/Allocator.h</label>
+        <link refid="_allocator_8h_source"/>
+        <childnode refid="5446" relation="include">
+        </childnode>
+        <childnode refid="5432" relation="include">
+        </childnode>
+        <childnode refid="5450" relation="include">
+        </childnode>
+      </node>
+      <node id="5444">
+        <label>cassert</label>
+      </node>
+      <node id="5437">
+        <label>boost/preprocessor/tuple/elem.hpp</label>
+      </node>
+      <node id="5450">
+        <label>Utils/Macros.h</label>
+        <link refid="_macros_8h_source"/>
+      </node>
+      <node id="5438">
+        <label>boost/detail/bitmask.hpp</label>
+      </node>
+      <node id="5456">
+        <label>Physics/Geometry/IPhysicsGeometry.h</label>
+        <link refid="_i_physics_geometry_8h_source"/>
+        <childnode refid="5457" relation="include">
+        </childnode>
+      </node>
+      <node id="5434">
+        <label>tuple</label>
+      </node>
+      <node id="5448">
+        <label>Array.h</label>
+        <link refid="_array_8h_source"/>
+        <childnode refid="5444" relation="include">
+        </childnode>
+        <childnode refid="5445" relation="include">
+        </childnode>
+        <childnode refid="5449" relation="include">
+        </childnode>
+        <childnode refid="5432" relation="include">
+        </childnode>
+      </node>
+      <node id="5458">
+        <label>vector</label>
+      </node>
+      <node id="5443">
+        <label>Containers/Vector.h</label>
+        <link refid="_vector_8h_source"/>
+        <childnode refid="5444" relation="include">
+        </childnode>
+        <childnode refid="5445" relation="include">
+        </childnode>
+        <childnode refid="5446" relation="include">
+        </childnode>
+        <childnode refid="5447" relation="include">
+        </childnode>
+        <childnode refid="5448" relation="include">
+        </childnode>
+        <childnode refid="5449" relation="include">
+        </childnode>
+        <childnode refid="5432" relation="include">
+        </childnode>
+        <childnode refid="5450" relation="include">
+        </childnode>
+      </node>
+      <node id="5453">
+        <label>array</label>
+      </node>
+      <node id="5439">
+        <label>Physics/Geometry/Edge.h</label>
+        <link refid="_edge_8h_source"/>
+        <childnode refid="5430" relation="include">
+        </childnode>
+        <childnode refid="5440" relation="include">
+        </childnode>
+      </node>
+      <node id="5457">
+        <label>Math/Geometry.h</label>
+        <link refid="_geometry_8h_source"/>
+        <childnode refid="5432" relation="include">
+        </childnode>
+        <childnode refid="5433" relation="include">
+        </childnode>
+      </node>
+      <node id="5455">
+        <label>Physics/Geometry/IClothPhysicsGeometry.h</label>
+        <link refid="_i_cloth_physics_geometry_8h_source"/>
+        <childnode refid="5456" relation="include">
+        </childnode>
+      </node>
+      <node id="5454">
+        <label>Physics/Geometry/GenericTypes.h</label>
+        <link refid="_physics_2_inc_2_physics_2_geometry_2_generic_types_8h_source"/>
+      </node>
+      <node id="5441">
+        <label>Physics/PBD/Cloth/ClothSolvingView.h</label>
+        <link refid="_cloth_solving_view_8h_source"/>
+        <childnode refid="5442" relation="include">
+        </childnode>
+        <childnode refid="5452" relation="include">
+        </childnode>
+      </node>
+      <node id="5435">
+        <label>boost/preprocessor/repetition/repeat.hpp</label>
+      </node>
+      <node id="5459">
+        <label>unordered_map</label>
+      </node>
+      <node id="5432">
+        <label>Types.h</label>
+      </node>
+      <node id="5431">
+        <label>mathfu/matrix.h</label>
+      </node>
+      <node id="5451">
+        <label>type_traits</label>
+      </node>
+      <node id="5445">
+        <label>cstring</label>
+      </node>
+      <node id="5452">
+        <label>Physics/PBD/Cloth/Constraints.h</label>
+        <link refid="_constraints_8h_source"/>
+        <childnode refid="5432" relation="include">
+        </childnode>
+        <childnode refid="5443" relation="include">
+        </childnode>
+        <childnode refid="5430" relation="include">
+        </childnode>
+        <childnode refid="5453" relation="include">
+        </childnode>
+      </node>
+      <node id="5436">
+        <label>boost/preprocessor/seq/for_each.hpp</label>
+      </node>
+    </incdepgraph>
+    <invincdepgraph>
+      <node id="5460">
+        <label>Source/Physics/Inc/Physics/Geometry/ClothPlane.h</label>
+        <link refid="_cloth_plane_8h"/>
+        <childnode refid="5461" relation="include">
+        </childnode>
+      </node>
+      <node id="5461">
+        <label>Source/Samples/3_ClothSim/Inc/ClothSim/AppRenderer.h</label>
+        <link refid="3___cloth_sim_2_inc_2_cloth_sim_2_app_renderer_8h_source"/>
+      </node>
+    </invincdepgraph>
+    <innerclass refid="class_azura_1_1_physics_1_1_cloth_plane" prot="public">Azura::Physics::ClothPlane</innerclass>
+    <innernamespace refid="namespace_azura">Azura</innernamespace>
+    <innernamespace refid="namespace_azura_1_1_physics">Azura::Physics</innernamespace>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <programlisting>
+<codeline lineno="1"><highlight class="preprocessor">#pragma<sp/>once</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="2"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&lt;Math/Core.h&gt;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="3"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&lt;Core/RawStorageFormat.h&gt;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="4"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&lt;Physics/Geometry/Edge.h&gt;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="5"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&lt;Physics/PBD/Cloth/ClothSolvingView.h&gt;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="6"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&lt;Physics/Geometry/GenericTypes.h&gt;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="7"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&lt;Physics/Geometry/IClothPhysicsGeometry.h&gt;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="8"><highlight class="normal"></highlight></codeline>
+<codeline lineno="9"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&lt;vector&gt;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="10"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&lt;unordered_map&gt;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="11"><highlight class="normal"></highlight></codeline>
+<codeline lineno="12"><highlight class="normal"></highlight><highlight class="keyword">namespace<sp/></highlight><highlight class="normal"><ref refid="namespace_azura" kindref="compound">Azura</ref><sp/>{</highlight></codeline>
+<codeline lineno="13"><highlight class="normal"></highlight><highlight class="keyword">namespace<sp/></highlight><highlight class="normal">Physics<sp/>{</highlight></codeline>
+<codeline lineno="14"><highlight class="normal"></highlight><highlight class="keyword">struct<sp/></highlight><highlight class="normal">Edge;</highlight></codeline>
+<codeline lineno="15"><highlight class="normal"></highlight></codeline>
+<codeline lineno="16" refid="class_azura_1_1_physics_1_1_cloth_plane" refkind="compound"><highlight class="normal"></highlight><highlight class="keyword">class<sp/></highlight><highlight class="normal"><ref refid="class_azura_1_1_physics_1_1_cloth_plane" kindref="compound">ClothPlane</ref><sp/>final<sp/>:<sp/></highlight><highlight class="keyword">public</highlight><highlight class="normal"><sp/><ref refid="class_azura_1_1_physics_1_1_i_cloth_physics_geometry" kindref="compound">IClothPhysicsGeometry</ref><sp/>{</highlight></codeline>
+<codeline lineno="17"><highlight class="normal"></highlight><highlight class="keyword">public</highlight><highlight class="normal">:</highlight></codeline>
+<codeline lineno="18"><highlight class="normal"><sp/><sp/><ref refid="class_azura_1_1_physics_1_1_cloth_plane" kindref="compound">ClothPlane</ref>(</highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>Vector2f&amp;<sp/>boundMin<sp/>,<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>Vector2f&amp;<sp/>boundMax,<sp/><ref refid="class_azura_1_1_memory_1_1_allocator" kindref="compound">Memory::Allocator</ref>&amp;<sp/>allocator);</highlight></codeline>
+<codeline lineno="19"><highlight class="normal"><sp/><sp/><ref refid="class_azura_1_1_physics_1_1_cloth_plane" kindref="compound">ClothPlane</ref>(ClothTriangulation<sp/>triangulation,<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>Vector2f&amp;<sp/>boundMin<sp/>,<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>Vector2f&amp;<sp/>boundMax,<sp/></highlight><highlight class="keywordtype">float</highlight><highlight class="normal"><sp/>worldHeight,<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>Vector2u&amp;<sp/>subDivisions,<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>Vector2u&amp;<sp/>uvScale,<sp/><ref refid="class_azura_1_1_memory_1_1_allocator" kindref="compound">Memory::Allocator</ref>&amp;<sp/>allocator);</highlight></codeline>
+<codeline lineno="20"><highlight class="normal"></highlight></codeline>
+<codeline lineno="21"><highlight class="normal"><sp/><sp/>U32<sp/>VertexDataSize()<sp/></highlight><highlight class="keyword">const<sp/>override</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="22"><highlight class="normal"><sp/><sp/>U32<sp/>IndexDataSize()<sp/></highlight><highlight class="keyword">const<sp/>override</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="23"><highlight class="normal"><sp/><sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>U8*<sp/>VertexData()<sp/></highlight><highlight class="keyword">const<sp/>override</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="24"><highlight class="normal"><sp/><sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>U8*<sp/>IndexData()<sp/></highlight><highlight class="keyword">const<sp/>override</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="25"><highlight class="normal"><sp/><sp/>RawStorageFormat<sp/>GetVertexFormat()<sp/></highlight><highlight class="keyword">const<sp/>override</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="26"><highlight class="normal"><sp/><sp/>RawStorageFormat<sp/>GetIndexFormat()<sp/></highlight><highlight class="keyword">const<sp/>override</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="27"><highlight class="normal"><sp/><sp/>U32<sp/>GetVertexCount()<sp/></highlight><highlight class="keyword">const<sp/>override</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="28"><highlight class="normal"><sp/><sp/>U32<sp/>GetIndexCount()<sp/></highlight><highlight class="keyword">const<sp/>override</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="29"><highlight class="normal"><sp/><sp/>U32<sp/>TotalDataSize()<sp/></highlight><highlight class="keyword">const<sp/>override</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="30"><highlight class="normal"><sp/><sp/>U32<sp/>NormalDataSize()<sp/></highlight><highlight class="keyword">const<sp/>override</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="31"><highlight class="normal"><sp/><sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>U8*<sp/>NormalData()<sp/></highlight><highlight class="keyword">const<sp/>override</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="32"><highlight class="normal"><sp/><sp/>RawStorageFormat<sp/>GetNormalFormat()<sp/></highlight><highlight class="keyword">const<sp/>override</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="33"><highlight class="normal"></highlight></codeline>
+<codeline lineno="34"><highlight class="normal"><sp/><sp/>U32<sp/>UVDataSize()<sp/></highlight><highlight class="keyword">const<sp/>override</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="35"><highlight class="normal"><sp/><sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>U8*<sp/>UVData()<sp/></highlight><highlight class="keyword">const<sp/>override</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="36"><highlight class="normal"><sp/><sp/>RawStorageFormat<sp/>GetUVFormat()<sp/></highlight><highlight class="keyword">const<sp/>override</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="37"><highlight class="normal"></highlight></codeline>
+<codeline lineno="38"><highlight class="normal"><sp/><sp/></highlight><highlight class="comment">//<sp/>Cloth<sp/>Physics<sp/>Overrides</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="39"><highlight class="normal"><sp/><sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/>SetAnchorOnIndex(U32<sp/>idx)<sp/></highlight><highlight class="keyword">override</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="40"><highlight class="normal"><sp/><sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/><ref refid="class_azura_1_1_containers_1_1_vector" kindref="compound">Containers::Vector&lt;float&gt;</ref>&amp;<sp/>GetVertexInverseMass()<sp/></highlight><highlight class="keyword">const<sp/>override</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="41"><highlight class="normal"><sp/><sp/><ref refid="class_azura_1_1_physics_1_1_p_b_d_1_1_cloth_solving_view" kindref="compound">PBD::ClothSolvingView</ref><sp/>GetPBDSolvingView(<ref refid="class_azura_1_1_memory_1_1_allocator" kindref="compound">Memory::Allocator</ref>&amp;<sp/>allocator)<sp/></highlight><highlight class="keyword">override</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="42"><highlight class="normal"></highlight></codeline>
+<codeline lineno="43"><highlight class="normal"></highlight><highlight class="keyword">private</highlight><highlight class="normal">:</highlight></codeline>
+<codeline lineno="44"><highlight class="normal"><sp/><sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/>AddEdgeTriangleNeighbor(</highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/><ref refid="struct_azura_1_1_physics_1_1_edge" kindref="compound">Edge</ref>&amp;<sp/>edge,<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>U32<sp/>triangleIdx);</highlight></codeline>
+<codeline lineno="45"><highlight class="normal"></highlight></codeline>
+<codeline lineno="46"><highlight class="normal"><sp/><sp/>std::vector&lt;U32&gt;<sp/>m_anchorIdx;</highlight></codeline>
+<codeline lineno="47"><highlight class="normal"></highlight></codeline>
+<codeline lineno="48"><highlight class="normal"><sp/><sp/>std::unordered_map&lt;Edge,<sp/>std::vector&lt;U32&gt;,<sp/><ref refid="struct_azura_1_1_physics_1_1_edge_map_hash" kindref="compound">EdgeMapHash</ref>&gt;<sp/>m_edgeTriangleMap;</highlight></codeline>
+<codeline lineno="49"><highlight class="normal"></highlight></codeline>
+<codeline lineno="50"><highlight class="normal"><sp/><sp/><ref refid="class_azura_1_1_containers_1_1_vector" kindref="compound">Containers::Vector&lt;Vector3f&gt;</ref><sp/>m_vertices;</highlight></codeline>
+<codeline lineno="51"><highlight class="normal"><sp/><sp/><ref refid="class_azura_1_1_containers_1_1_vector" kindref="compound">Containers::Vector&lt;float&gt;</ref><sp/>m_vertexInvMass;</highlight></codeline>
+<codeline lineno="52"><highlight class="normal"><sp/><sp/><ref refid="class_azura_1_1_containers_1_1_vector" kindref="compound">Containers::Vector&lt;Vector3f&gt;</ref><sp/>m_normals;</highlight></codeline>
+<codeline lineno="53"><highlight class="normal"><sp/><sp/><ref refid="class_azura_1_1_containers_1_1_vector" kindref="compound">Containers::Vector&lt;Vector3u&gt;</ref><sp/>m_triangles;</highlight></codeline>
+<codeline lineno="54"><highlight class="normal"><sp/><sp/><ref refid="class_azura_1_1_containers_1_1_vector" kindref="compound">Containers::Vector&lt;Vector2f&gt;</ref><sp/>m_uv;</highlight></codeline>
+<codeline lineno="55"><highlight class="normal">};</highlight></codeline>
+<codeline lineno="56"><highlight class="normal"></highlight></codeline>
+<codeline lineno="57"><highlight class="normal">}<sp/></highlight><highlight class="comment">//<sp/>namespace<sp/>Physics</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="58"><highlight class="normal">}<sp/></highlight><highlight class="comment">//<sp/>namespace<sp/>Azura</highlight><highlight class="normal"></highlight></codeline>
+    </programlisting>
+    <location file="Source/Physics/Inc/Physics/Geometry/ClothPlane.h"/>
+  </compounddef>
+</doxygen>

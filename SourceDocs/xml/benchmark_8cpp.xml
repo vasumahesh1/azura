@@ -1,0 +1,43 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.8.14">
+  <compounddef id="benchmark_8cpp" kind="file" language="C++">
+    <compoundname>benchmark.cpp</compoundname>
+    <includes local="no">benchmark/benchmark.h</includes>
+    <incdepgraph>
+      <node id="4426">
+        <label>Source/Containers/Benchmark/benchmark.cpp</label>
+        <link refid="benchmark_8cpp"/>
+        <childnode refid="4427" relation="include">
+        </childnode>
+      </node>
+      <node id="4427">
+        <label>benchmark/benchmark.h</label>
+      </node>
+    </incdepgraph>
+      <sectiondef kind="func">
+      <memberdef kind="function" id="benchmark_8cpp_1a5851750faa9cfec10f7cad1f3b89697e" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>BENCHMARK_MAIN</definition>
+        <argsstring>()</argsstring>
+        <name>BENCHMARK_MAIN</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Source/Containers/Benchmark/benchmark.cpp" line="3" column="1"/>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <programlisting>
+<codeline lineno="1"><highlight class="preprocessor">#include<sp/>&lt;benchmark/benchmark.h&gt;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="2"><highlight class="normal"></highlight></codeline>
+<codeline lineno="3"><highlight class="normal">BENCHMARK_MAIN();</highlight></codeline>
+    </programlisting>
+    <location file="Source/Containers/Benchmark/benchmark.cpp"/>
+  </compounddef>
+</doxygen>

@@ -1,0 +1,201 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.8.14">
+  <compounddef id="_cloth_solving_view_8h" kind="file" language="C++">
+    <compoundname>ClothSolvingView.h</compoundname>
+    <includes refid="_solving_view_8h" local="no">Physics/PBD/Common/SolvingView.h</includes>
+    <includes refid="_constraints_8h" local="no">Physics/PBD/Cloth/Constraints.h</includes>
+    <includedby refid="_physics_2_inc_2_physics_2_geometry_2_cloth_mesh_8h" local="no">Source/Physics/Inc/Physics/Geometry/ClothMesh.h</includedby>
+    <includedby refid="_cloth_plane_8h" local="no">Source/Physics/Inc/Physics/Geometry/ClothPlane.h</includedby>
+    <includedby refid="_cloth_solving_view_8cpp" local="yes">Source/Physics/Src/PBD/Cloth/ClothSolvingView.cpp</includedby>
+    <incdepgraph>
+      <node id="5501">
+        <label>Math/Core.h</label>
+        <link refid="_core_8h_source"/>
+        <childnode refid="5502" relation="include">
+        </childnode>
+        <childnode refid="5503" relation="include">
+        </childnode>
+      </node>
+      <node id="5507">
+        <label>functional</label>
+      </node>
+      <node id="5508">
+        <label>iterator</label>
+      </node>
+      <node id="5500">
+        <label>Physics/PBD/Common/SolvingView.h</label>
+        <link refid="_solving_view_8h_source"/>
+        <childnode refid="5501" relation="include">
+        </childnode>
+        <childnode refid="5504" relation="include">
+        </childnode>
+        <childnode refid="5512" relation="include">
+        </childnode>
+      </node>
+      <node id="5510">
+        <label>Memory/Allocator.h</label>
+        <link refid="_allocator_8h_source"/>
+        <childnode refid="5507" relation="include">
+        </childnode>
+        <childnode refid="5503" relation="include">
+        </childnode>
+        <childnode refid="5511" relation="include">
+        </childnode>
+      </node>
+      <node id="5505">
+        <label>cassert</label>
+      </node>
+      <node id="5511">
+        <label>Utils/Macros.h</label>
+        <link refid="_macros_8h_source"/>
+      </node>
+      <node id="5509">
+        <label>Array.h</label>
+        <link refid="_array_8h_source"/>
+        <childnode refid="5505" relation="include">
+        </childnode>
+        <childnode refid="5506" relation="include">
+        </childnode>
+        <childnode refid="5510" relation="include">
+        </childnode>
+        <childnode refid="5503" relation="include">
+        </childnode>
+      </node>
+      <node id="5504">
+        <label>Containers/Vector.h</label>
+        <link refid="_vector_8h_source"/>
+        <childnode refid="5505" relation="include">
+        </childnode>
+        <childnode refid="5506" relation="include">
+        </childnode>
+        <childnode refid="5507" relation="include">
+        </childnode>
+        <childnode refid="5508" relation="include">
+        </childnode>
+        <childnode refid="5509" relation="include">
+        </childnode>
+        <childnode refid="5510" relation="include">
+        </childnode>
+        <childnode refid="5503" relation="include">
+        </childnode>
+        <childnode refid="5511" relation="include">
+        </childnode>
+      </node>
+      <node id="5514">
+        <label>array</label>
+      </node>
+      <node id="5499">
+        <label>Source/Physics/Inc/Physics/PBD/Cloth/ClothSolvingView.h</label>
+        <link refid="_cloth_solving_view_8h"/>
+        <childnode refid="5500" relation="include">
+        </childnode>
+        <childnode refid="5513" relation="include">
+        </childnode>
+      </node>
+      <node id="5503">
+        <label>Types.h</label>
+      </node>
+      <node id="5502">
+        <label>mathfu/matrix.h</label>
+      </node>
+      <node id="5512">
+        <label>type_traits</label>
+      </node>
+      <node id="5506">
+        <label>cstring</label>
+      </node>
+      <node id="5513">
+        <label>Physics/PBD/Cloth/Constraints.h</label>
+        <link refid="_constraints_8h_source"/>
+        <childnode refid="5503" relation="include">
+        </childnode>
+        <childnode refid="5504" relation="include">
+        </childnode>
+        <childnode refid="5501" relation="include">
+        </childnode>
+        <childnode refid="5514" relation="include">
+        </childnode>
+      </node>
+    </incdepgraph>
+    <invincdepgraph>
+      <node id="5518">
+        <label>Source/Physics/Inc/Physics/Geometry/ClothPlane.h</label>
+        <link refid="_cloth_plane_8h_source"/>
+        <childnode refid="5517" relation="include">
+        </childnode>
+      </node>
+      <node id="5517">
+        <label>Source/Samples/3_ClothSim/Inc/ClothSim/AppRenderer.h</label>
+        <link refid="3___cloth_sim_2_inc_2_cloth_sim_2_app_renderer_8h_source"/>
+      </node>
+      <node id="5515">
+        <label>Source/Physics/Inc/Physics/PBD/Cloth/ClothSolvingView.h</label>
+        <link refid="_cloth_solving_view_8h"/>
+        <childnode refid="5516" relation="include">
+        </childnode>
+        <childnode refid="5518" relation="include">
+        </childnode>
+      </node>
+      <node id="5516">
+        <label>Source/Physics/Inc/Physics/Geometry/ClothMesh.h</label>
+        <link refid="_physics_2_inc_2_physics_2_geometry_2_cloth_mesh_8h_source"/>
+        <childnode refid="5517" relation="include">
+        </childnode>
+      </node>
+    </invincdepgraph>
+    <innerclass refid="class_azura_1_1_physics_1_1_p_b_d_1_1_cloth_solving_view" prot="public">Azura::Physics::PBD::ClothSolvingView</innerclass>
+    <innernamespace refid="namespace_azura">Azura</innernamespace>
+    <innernamespace refid="namespace_azura_1_1_physics">Azura::Physics</innernamespace>
+    <innernamespace refid="namespace_azura_1_1_physics_1_1_p_b_d">Azura::Physics::PBD</innernamespace>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <programlisting>
+<codeline lineno="1"><highlight class="preprocessor">#pragma<sp/>once</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="2"><highlight class="normal"></highlight></codeline>
+<codeline lineno="3"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&lt;Physics/PBD/Common/SolvingView.h&gt;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="4"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&lt;Physics/PBD/Cloth/Constraints.h&gt;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="5"><highlight class="normal"></highlight></codeline>
+<codeline lineno="6"><highlight class="normal"></highlight><highlight class="keyword">namespace<sp/></highlight><highlight class="normal"><ref refid="namespace_azura" kindref="compound">Azura</ref><sp/>{</highlight></codeline>
+<codeline lineno="7"><highlight class="normal"></highlight><highlight class="keyword">namespace<sp/></highlight><highlight class="normal">Physics<sp/>{</highlight></codeline>
+<codeline lineno="8"><highlight class="normal"></highlight><highlight class="keyword">namespace<sp/></highlight><highlight class="normal">PBD<sp/>{</highlight></codeline>
+<codeline lineno="9"><highlight class="normal"></highlight></codeline>
+<codeline lineno="10" refid="class_azura_1_1_physics_1_1_p_b_d_1_1_cloth_solving_view" refkind="compound"><highlight class="normal"></highlight><highlight class="keyword">class<sp/></highlight><highlight class="normal"><ref refid="class_azura_1_1_physics_1_1_p_b_d_1_1_cloth_solving_view" kindref="compound">ClothSolvingView</ref><sp/>final<sp/>:<sp/></highlight><highlight class="keyword">public</highlight><highlight class="normal"><sp/><ref refid="class_azura_1_1_physics_1_1_p_b_d_1_1_solving_view" kindref="compound">SolvingView</ref><sp/>{</highlight></codeline>
+<codeline lineno="11"><highlight class="normal"></highlight></codeline>
+<codeline lineno="12"><highlight class="normal"></highlight><highlight class="keyword">public</highlight><highlight class="normal">:</highlight></codeline>
+<codeline lineno="13"><highlight class="normal"><sp/><sp/></highlight><highlight class="keyword">explicit</highlight><highlight class="normal"><sp/><ref refid="class_azura_1_1_physics_1_1_p_b_d_1_1_cloth_solving_view" kindref="compound">ClothSolvingView</ref>(<ref refid="class_azura_1_1_containers_1_1_vector" kindref="compound">Containers::Vector&lt;Vector3f&gt;</ref>&amp;<sp/>dataSet,</highlight></codeline>
+<codeline lineno="14"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="class_azura_1_1_containers_1_1_vector" kindref="compound">Containers::Vector&lt;float&gt;</ref>&amp;<sp/>invMassData,</highlight></codeline>
+<codeline lineno="15"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>U32<sp/>numDistanceConstraints,</highlight></codeline>
+<codeline lineno="16"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>U32<sp/>numLongRangeConstraints,</highlight></codeline>
+<codeline lineno="17"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>U32<sp/>numBendingConstraints,</highlight></codeline>
+<codeline lineno="18"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="class_azura_1_1_memory_1_1_allocator" kindref="compound">Memory::Allocator</ref>&amp;<sp/>allocator);</highlight></codeline>
+<codeline lineno="19"><highlight class="normal"></highlight></codeline>
+<codeline lineno="20"><highlight class="normal"><sp/><sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/>AddConstraint(</highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/><ref refid="class_azura_1_1_physics_1_1_p_b_d_1_1_distance_constraint" kindref="compound">DistanceConstraint</ref>&amp;<sp/>constraint);</highlight></codeline>
+<codeline lineno="21"><highlight class="normal"><sp/><sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/>AddConstraint(<ref refid="class_azura_1_1_physics_1_1_p_b_d_1_1_distance_constraint" kindref="compound">DistanceConstraint</ref>&amp;&amp;<sp/>constraint);</highlight></codeline>
+<codeline lineno="22"><highlight class="normal"><sp/><sp/></highlight></codeline>
+<codeline lineno="23"><highlight class="normal"><sp/><sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/>AddConstraint(</highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/><ref refid="class_azura_1_1_physics_1_1_p_b_d_1_1_long_range_constraint" kindref="compound">LongRangeConstraint</ref>&amp;<sp/>constraint);</highlight></codeline>
+<codeline lineno="24"><highlight class="normal"><sp/><sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/>AddConstraint(<ref refid="class_azura_1_1_physics_1_1_p_b_d_1_1_long_range_constraint" kindref="compound">LongRangeConstraint</ref>&amp;&amp;<sp/>constraint);</highlight></codeline>
+<codeline lineno="25"><highlight class="normal"></highlight></codeline>
+<codeline lineno="26"><highlight class="normal"><sp/><sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/>AddConstraint(</highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/><ref refid="class_azura_1_1_physics_1_1_p_b_d_1_1_bending_constraint" kindref="compound">BendingConstraint</ref>&amp;<sp/>constraint);</highlight></codeline>
+<codeline lineno="27"><highlight class="normal"><sp/><sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/>AddConstraint(<ref refid="class_azura_1_1_physics_1_1_p_b_d_1_1_bending_constraint" kindref="compound">BendingConstraint</ref>&amp;&amp;<sp/>constraint);</highlight></codeline>
+<codeline lineno="28"><highlight class="normal"></highlight></codeline>
+<codeline lineno="29"><highlight class="normal"><sp/><sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/><ref refid="class_azura_1_1_containers_1_1_vector" kindref="compound">Containers::Vector&lt;DistanceConstraint&gt;</ref>&amp;<sp/>GetDistanceConstraints()<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="30"><highlight class="normal"><sp/><sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/><ref refid="class_azura_1_1_containers_1_1_vector" kindref="compound">Containers::Vector&lt;LongRangeConstraint&gt;</ref>&amp;<sp/>GetLongRangeConstraints()<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="31"><highlight class="normal"><sp/><sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/><ref refid="class_azura_1_1_containers_1_1_vector" kindref="compound">Containers::Vector&lt;BendingConstraint&gt;</ref>&amp;<sp/>GetBendingConstraints()<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="32"><highlight class="normal"></highlight></codeline>
+<codeline lineno="33"><highlight class="normal"><sp/><sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/>Solve(<ref refid="class_azura_1_1_containers_1_1_vector" kindref="compound">Containers::Vector&lt;Vector3f&gt;</ref>&amp;<sp/>projectionPoints)<sp/></highlight><highlight class="keyword">override</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="34"><highlight class="normal"></highlight></codeline>
+<codeline lineno="35"><highlight class="normal"></highlight><highlight class="keyword">private</highlight><highlight class="normal">:</highlight></codeline>
+<codeline lineno="36"><highlight class="normal"><sp/><sp/><ref refid="class_azura_1_1_containers_1_1_vector" kindref="compound">Containers::Vector&lt;DistanceConstraint&gt;</ref><sp/>m_distanceConstraints;</highlight></codeline>
+<codeline lineno="37"><highlight class="normal"><sp/><sp/><ref refid="class_azura_1_1_containers_1_1_vector" kindref="compound">Containers::Vector&lt;LongRangeConstraint&gt;</ref><sp/>m_longRangeConstraints;</highlight></codeline>
+<codeline lineno="38"><highlight class="normal"><sp/><sp/><ref refid="class_azura_1_1_containers_1_1_vector" kindref="compound">Containers::Vector&lt;BendingConstraint&gt;</ref><sp/>m_bendingConstraints;</highlight></codeline>
+<codeline lineno="39"><highlight class="normal">};</highlight></codeline>
+<codeline lineno="40"><highlight class="normal"></highlight></codeline>
+<codeline lineno="41"><highlight class="normal">}<sp/></highlight><highlight class="comment">//<sp/>namespace<sp/>PBD</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="42"><highlight class="normal">}<sp/></highlight><highlight class="comment">//<sp/>namespace<sp/>Physics</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="43"><highlight class="normal">}<sp/></highlight><highlight class="comment">//<sp/>namespace<sp/>Azura</highlight><highlight class="normal"></highlight></codeline>
+    </programlisting>
+    <location file="Source/Physics/Inc/Physics/PBD/Cloth/ClothSolvingView.h"/>
+  </compounddef>
+</doxygen>

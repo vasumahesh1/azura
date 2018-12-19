@@ -1,0 +1,329 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.8.14">
+  <compounddef id="class_azura_1_1_d3_d12_1_1_d3_d12_scoped_image" kind="class" language="C++" prot="public">
+    <compoundname>Azura::D3D12::D3D12ScopedImage</compoundname>
+      <sectiondef kind="private-attrib">
+      <memberdef kind="variable" id="class_azura_1_1_d3_d12_1_1_d3_d12_scoped_image_1ab1b505f60e814677de3e3e9b4b6658d8" prot="private" static="no" mutable="no">
+        <type>Microsoft::WRL::ComPtr&lt; ID3D12Resource &gt;</type>
+        <definition>Microsoft::WRL::ComPtr&lt;ID3D12Resource&gt; Azura::D3D12::D3D12ScopedImage::m_texture</definition>
+        <argsstring></argsstring>
+        <name>m_texture</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Source/Azura/RenderSystem/Inc/D3D12/D3D12ScopedImage.h" line="55" column="1" bodyfile="Source/Azura/RenderSystem/Inc/D3D12/D3D12ScopedImage.h" bodystart="55" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="class_azura_1_1_d3_d12_1_1_d3_d12_scoped_image_1aa4c3d96009a7653a96ff1308d77b91e2" prot="private" static="no" mutable="no">
+        <type>RawStorageFormat</type>
+        <definition>RawStorageFormat Azura::D3D12::D3D12ScopedImage::m_format</definition>
+        <argsstring></argsstring>
+        <name>m_format</name>
+        <initializer>{RawStorageFormat::UNKNOWN}</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Source/Azura/RenderSystem/Inc/D3D12/D3D12ScopedImage.h" line="56" column="1" bodyfile="Source/Azura/RenderSystem/Inc/D3D12/D3D12ScopedImage.h" bodystart="56" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="class_azura_1_1_d3_d12_1_1_d3_d12_scoped_image_1a646657e525d25f7d99d4a9dacf8c088c" prot="private" static="no" mutable="no">
+        <type>D3D12_RESOURCE_STATES</type>
+        <definition>D3D12_RESOURCE_STATES Azura::D3D12::D3D12ScopedImage::m_currentState</definition>
+        <argsstring></argsstring>
+        <name>m_currentState</name>
+        <initializer>{}</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Source/Azura/RenderSystem/Inc/D3D12/D3D12ScopedImage.h" line="57" column="1" bodyfile="Source/Azura/RenderSystem/Inc/D3D12/D3D12ScopedImage.h" bodystart="57" bodyend="-1"/>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="public-func">
+      <memberdef kind="function" id="class_azura_1_1_d3_d12_1_1_d3_d12_scoped_image_1ab5c473bb268faa9832243a1af4101686" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void Azura::D3D12::D3D12ScopedImage::Create</definition>
+        <argsstring>(const Microsoft::WRL::ComPtr&lt; ID3D12Device &gt; &amp;device, D3D12_RESOURCE_STATES initState, D3D12_RESOURCE_FLAGS resourceFlags, const TextureDesc &amp;desc, const Log &amp;log_D3D12RenderSystem)</argsstring>
+        <name>Create</name>
+        <param>
+          <type>const Microsoft::WRL::ComPtr&lt; ID3D12Device &gt; &amp;</type>
+          <declname>device</declname>
+        </param>
+        <param>
+          <type>D3D12_RESOURCE_STATES</type>
+          <declname>initState</declname>
+        </param>
+        <param>
+          <type>D3D12_RESOURCE_FLAGS</type>
+          <declname>resourceFlags</declname>
+        </param>
+        <param>
+          <type>const <ref refid="struct_azura_1_1_texture_desc" kindref="compound">TextureDesc</ref> &amp;</type>
+          <declname>desc</declname>
+        </param>
+        <param>
+          <type>const <ref refid="class_azura_1_1_log" kindref="compound">Log</ref> &amp;</type>
+          <declname>log_D3D12RenderSystem</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Source/Azura/RenderSystem/Inc/D3D12/D3D12ScopedImage.h" line="12" column="1" bodyfile="Source/Azura/RenderSystem/Src/D3D12/D3D12ScopedImage.cpp" bodystart="36" bodyend="83"/>
+      </memberdef>
+      <memberdef kind="function" id="class_azura_1_1_d3_d12_1_1_d3_d12_scoped_image_1a0e211de16b1f6e0d4a36d2094c025bbc" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
+        <type>ID3D12Resource *</type>
+        <definition>ID3D12Resource * Azura::D3D12::D3D12ScopedImage::Real</definition>
+        <argsstring>() const</argsstring>
+        <name>Real</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Source/Azura/RenderSystem/Inc/D3D12/D3D12ScopedImage.h" line="34" column="1" bodyfile="Source/Azura/RenderSystem/Src/D3D12/D3D12ScopedImage.cpp" bodystart="208" bodyend="210"/>
+      </memberdef>
+      <memberdef kind="function" id="class_azura_1_1_d3_d12_1_1_d3_d12_scoped_image_1a041bccabffa545cd12fee319af604284" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
+        <type>RawStorageFormat</type>
+        <definition>RawStorageFormat Azura::D3D12::D3D12ScopedImage::GetFormat</definition>
+        <argsstring>() const</argsstring>
+        <name>GetFormat</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Source/Azura/RenderSystem/Inc/D3D12/D3D12ScopedImage.h" line="36" column="1" bodyfile="Source/Azura/RenderSystem/Src/D3D12/D3D12ScopedImage.cpp" bodystart="212" bodyend="214"/>
+      </memberdef>
+      <memberdef kind="function" id="class_azura_1_1_d3_d12_1_1_d3_d12_scoped_image_1ada100e352824058652edfdc4bf94f95f" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
+        <type>Microsoft::WRL::ComPtr&lt; ID3D12Resource &gt;</type>
+        <definition>Microsoft::WRL::ComPtr&lt; ID3D12Resource &gt; Azura::D3D12::D3D12ScopedImage::RealComPtr</definition>
+        <argsstring>() const</argsstring>
+        <name>RealComPtr</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Source/Azura/RenderSystem/Inc/D3D12/D3D12ScopedImage.h" line="38" column="1" bodyfile="Source/Azura/RenderSystem/Src/D3D12/D3D12ScopedImage.cpp" bodystart="216" bodyend="218"/>
+      </memberdef>
+      <memberdef kind="function" id="class_azura_1_1_d3_d12_1_1_d3_d12_scoped_image_1a31a3461a46c776f7c94a35f364aef046" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void Azura::D3D12::D3D12ScopedImage::CopyFromBuffer</definition>
+        <argsstring>(const Microsoft::WRL::ComPtr&lt; ID3D12Device &gt; &amp;device, ID3D12GraphicsCommandList *commandList, const D3D12ScopedBuffer &amp;sourceBuffer, UINT64 sourceOffset) const</argsstring>
+        <name>CopyFromBuffer</name>
+        <param>
+          <type>const Microsoft::WRL::ComPtr&lt; ID3D12Device &gt; &amp;</type>
+          <declname>device</declname>
+        </param>
+        <param>
+          <type>ID3D12GraphicsCommandList *</type>
+          <declname>commandList</declname>
+        </param>
+        <param>
+          <type>const <ref refid="class_azura_1_1_d3_d12_1_1_d3_d12_scoped_buffer" kindref="compound">D3D12ScopedBuffer</ref> &amp;</type>
+          <declname>sourceBuffer</declname>
+        </param>
+        <param>
+          <type>UINT64</type>
+          <declname>sourceOffset</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Source/Azura/RenderSystem/Inc/D3D12/D3D12ScopedImage.h" line="40" column="1" bodyfile="Source/Azura/RenderSystem/Src/D3D12/D3D12ScopedImage.cpp" bodystart="220" bodyend="236"/>
+      </memberdef>
+      <memberdef kind="function" id="class_azura_1_1_d3_d12_1_1_d3_d12_scoped_image_1a96d088ce5e7b76c8e575c79d36d63f12" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void Azura::D3D12::D3D12ScopedImage::Transition</definition>
+        <argsstring>(ID3D12GraphicsCommandList *commandList, D3D12_RESOURCE_STATES fromState, D3D12_RESOURCE_STATES toState, const Log &amp;log_D3D12RenderSystem) const</argsstring>
+        <name>Transition</name>
+        <param>
+          <type>ID3D12GraphicsCommandList *</type>
+          <declname>commandList</declname>
+        </param>
+        <param>
+          <type>D3D12_RESOURCE_STATES</type>
+          <declname>fromState</declname>
+        </param>
+        <param>
+          <type>D3D12_RESOURCE_STATES</type>
+          <declname>toState</declname>
+        </param>
+        <param>
+          <type>const <ref refid="class_azura_1_1_log" kindref="compound">Log</ref> &amp;</type>
+          <declname>log_D3D12RenderSystem</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Source/Azura/RenderSystem/Inc/D3D12/D3D12ScopedImage.h" line="45" column="1" bodyfile="Source/Azura/RenderSystem/Src/D3D12/D3D12ScopedImage.cpp" bodystart="85" bodyend="94"/>
+      </memberdef>
+      <memberdef kind="function" id="class_azura_1_1_d3_d12_1_1_d3_d12_scoped_image_1aa5ad0f716f7ec73bae565e30b300a79b" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void Azura::D3D12::D3D12ScopedImage::Transition</definition>
+        <argsstring>(ID3D12GraphicsCommandList *commandList, D3D12_RESOURCE_STATES toState, const Log &amp;log_D3D12RenderSystem)</argsstring>
+        <name>Transition</name>
+        <param>
+          <type>ID3D12GraphicsCommandList *</type>
+          <declname>commandList</declname>
+        </param>
+        <param>
+          <type>D3D12_RESOURCE_STATES</type>
+          <declname>toState</declname>
+        </param>
+        <param>
+          <type>const <ref refid="class_azura_1_1_log" kindref="compound">Log</ref> &amp;</type>
+          <declname>log_D3D12RenderSystem</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Source/Azura/RenderSystem/Inc/D3D12/D3D12ScopedImage.h" line="50" column="1" bodyfile="Source/Azura/RenderSystem/Src/D3D12/D3D12ScopedImage.cpp" bodystart="96" bodyend="112"/>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="public-static-func">
+      <memberdef kind="function" id="class_azura_1_1_d3_d12_1_1_d3_d12_scoped_image_1a92610cea08406cea486d2d889455a0dc" prot="public" static="yes" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>D3D12_SHADER_RESOURCE_VIEW_DESC</type>
+        <definition>D3D12_SHADER_RESOURCE_VIEW_DESC Azura::D3D12::D3D12ScopedImage::GetSRV</definition>
+        <argsstring>(RawStorageFormat viewFormat, ImageViewType imageView, const Log &amp;log_D3D12RenderSystem)</argsstring>
+        <name>GetSRV</name>
+        <param>
+          <type>RawStorageFormat</type>
+          <declname>viewFormat</declname>
+        </param>
+        <param>
+          <type>ImageViewType</type>
+          <declname>imageView</declname>
+        </param>
+        <param>
+          <type>const <ref refid="class_azura_1_1_log" kindref="compound">Log</ref> &amp;</type>
+          <declname>log_D3D12RenderSystem</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Source/Azura/RenderSystem/Inc/D3D12/D3D12ScopedImage.h" line="18" column="1" bodyfile="Source/Azura/RenderSystem/Src/D3D12/D3D12ScopedImage.cpp" bodystart="114" bodyend="135"/>
+      </memberdef>
+      <memberdef kind="function" id="class_azura_1_1_d3_d12_1_1_d3_d12_scoped_image_1a24dac308f3a9ffe3a0d25027c5cf0705" prot="public" static="yes" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>D3D12_UNORDERED_ACCESS_VIEW_DESC</type>
+        <definition>D3D12_UNORDERED_ACCESS_VIEW_DESC Azura::D3D12::D3D12ScopedImage::GetUAV</definition>
+        <argsstring>(RawStorageFormat viewFormat, ImageViewType imageView, const Log &amp;log_D3D12RenderSystem)</argsstring>
+        <name>GetUAV</name>
+        <param>
+          <type>RawStorageFormat</type>
+          <declname>viewFormat</declname>
+        </param>
+        <param>
+          <type>ImageViewType</type>
+          <declname>imageView</declname>
+        </param>
+        <param>
+          <type>const <ref refid="class_azura_1_1_log" kindref="compound">Log</ref> &amp;</type>
+          <declname>log_D3D12RenderSystem</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Source/Azura/RenderSystem/Inc/D3D12/D3D12ScopedImage.h" line="22" column="1" bodyfile="Source/Azura/RenderSystem/Src/D3D12/D3D12ScopedImage.cpp" bodystart="137" bodyend="158"/>
+      </memberdef>
+      <memberdef kind="function" id="class_azura_1_1_d3_d12_1_1_d3_d12_scoped_image_1a60ce1d146c261569aa1661d865d43975" prot="public" static="yes" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>D3D12_DEPTH_STENCIL_VIEW_DESC</type>
+        <definition>D3D12_DEPTH_STENCIL_VIEW_DESC Azura::D3D12::D3D12ScopedImage::GetDSV</definition>
+        <argsstring>(RawStorageFormat viewFormat, ImageViewType imageView, const Log &amp;log_D3D12RenderSystem)</argsstring>
+        <name>GetDSV</name>
+        <param>
+          <type>RawStorageFormat</type>
+          <declname>viewFormat</declname>
+        </param>
+        <param>
+          <type>ImageViewType</type>
+          <declname>imageView</declname>
+        </param>
+        <param>
+          <type>const <ref refid="class_azura_1_1_log" kindref="compound">Log</ref> &amp;</type>
+          <declname>log_D3D12RenderSystem</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Source/Azura/RenderSystem/Inc/D3D12/D3D12ScopedImage.h" line="26" column="1" bodyfile="Source/Azura/RenderSystem/Src/D3D12/D3D12ScopedImage.cpp" bodystart="160" bodyend="182"/>
+      </memberdef>
+      <memberdef kind="function" id="class_azura_1_1_d3_d12_1_1_d3_d12_scoped_image_1ab80d10b3ae5572945d8a2ed1f9370c40" prot="public" static="yes" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>D3D12_RENDER_TARGET_VIEW_DESC</type>
+        <definition>D3D12_RENDER_TARGET_VIEW_DESC Azura::D3D12::D3D12ScopedImage::GetRTV</definition>
+        <argsstring>(RawStorageFormat viewFormat, ImageViewType imageView, const Log &amp;log_D3D12RenderSystem)</argsstring>
+        <name>GetRTV</name>
+        <param>
+          <type>RawStorageFormat</type>
+          <declname>viewFormat</declname>
+        </param>
+        <param>
+          <type>ImageViewType</type>
+          <declname>imageView</declname>
+        </param>
+        <param>
+          <type>const <ref refid="class_azura_1_1_log" kindref="compound">Log</ref> &amp;</type>
+          <declname>log_D3D12RenderSystem</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Source/Azura/RenderSystem/Inc/D3D12/D3D12ScopedImage.h" line="30" column="1" bodyfile="Source/Azura/RenderSystem/Src/D3D12/D3D12ScopedImage.cpp" bodystart="184" bodyend="206"/>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <location file="Source/Azura/RenderSystem/Inc/D3D12/D3D12ScopedImage.h" line="10" column="1" bodyfile="Source/Azura/RenderSystem/Inc/D3D12/D3D12ScopedImage.h" bodystart="10" bodyend="58"/>
+    <listofallmembers>
+      <member refid="class_azura_1_1_d3_d12_1_1_d3_d12_scoped_image_1a31a3461a46c776f7c94a35f364aef046" prot="public" virt="non-virtual"><scope>Azura::D3D12::D3D12ScopedImage</scope><name>CopyFromBuffer</name></member>
+      <member refid="class_azura_1_1_d3_d12_1_1_d3_d12_scoped_image_1ab5c473bb268faa9832243a1af4101686" prot="public" virt="non-virtual"><scope>Azura::D3D12::D3D12ScopedImage</scope><name>Create</name></member>
+      <member refid="class_azura_1_1_d3_d12_1_1_d3_d12_scoped_image_1a60ce1d146c261569aa1661d865d43975" prot="public" virt="non-virtual"><scope>Azura::D3D12::D3D12ScopedImage</scope><name>GetDSV</name></member>
+      <member refid="class_azura_1_1_d3_d12_1_1_d3_d12_scoped_image_1a041bccabffa545cd12fee319af604284" prot="public" virt="non-virtual"><scope>Azura::D3D12::D3D12ScopedImage</scope><name>GetFormat</name></member>
+      <member refid="class_azura_1_1_d3_d12_1_1_d3_d12_scoped_image_1ab80d10b3ae5572945d8a2ed1f9370c40" prot="public" virt="non-virtual"><scope>Azura::D3D12::D3D12ScopedImage</scope><name>GetRTV</name></member>
+      <member refid="class_azura_1_1_d3_d12_1_1_d3_d12_scoped_image_1a92610cea08406cea486d2d889455a0dc" prot="public" virt="non-virtual"><scope>Azura::D3D12::D3D12ScopedImage</scope><name>GetSRV</name></member>
+      <member refid="class_azura_1_1_d3_d12_1_1_d3_d12_scoped_image_1a24dac308f3a9ffe3a0d25027c5cf0705" prot="public" virt="non-virtual"><scope>Azura::D3D12::D3D12ScopedImage</scope><name>GetUAV</name></member>
+      <member refid="class_azura_1_1_d3_d12_1_1_d3_d12_scoped_image_1a646657e525d25f7d99d4a9dacf8c088c" prot="private" virt="non-virtual"><scope>Azura::D3D12::D3D12ScopedImage</scope><name>m_currentState</name></member>
+      <member refid="class_azura_1_1_d3_d12_1_1_d3_d12_scoped_image_1aa4c3d96009a7653a96ff1308d77b91e2" prot="private" virt="non-virtual"><scope>Azura::D3D12::D3D12ScopedImage</scope><name>m_format</name></member>
+      <member refid="class_azura_1_1_d3_d12_1_1_d3_d12_scoped_image_1ab1b505f60e814677de3e3e9b4b6658d8" prot="private" virt="non-virtual"><scope>Azura::D3D12::D3D12ScopedImage</scope><name>m_texture</name></member>
+      <member refid="class_azura_1_1_d3_d12_1_1_d3_d12_scoped_image_1a0e211de16b1f6e0d4a36d2094c025bbc" prot="public" virt="non-virtual"><scope>Azura::D3D12::D3D12ScopedImage</scope><name>Real</name></member>
+      <member refid="class_azura_1_1_d3_d12_1_1_d3_d12_scoped_image_1ada100e352824058652edfdc4bf94f95f" prot="public" virt="non-virtual"><scope>Azura::D3D12::D3D12ScopedImage</scope><name>RealComPtr</name></member>
+      <member refid="class_azura_1_1_d3_d12_1_1_d3_d12_scoped_image_1a96d088ce5e7b76c8e575c79d36d63f12" prot="public" virt="non-virtual"><scope>Azura::D3D12::D3D12ScopedImage</scope><name>Transition</name></member>
+      <member refid="class_azura_1_1_d3_d12_1_1_d3_d12_scoped_image_1aa5ad0f716f7ec73bae565e30b300a79b" prot="public" virt="non-virtual"><scope>Azura::D3D12::D3D12ScopedImage</scope><name>Transition</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

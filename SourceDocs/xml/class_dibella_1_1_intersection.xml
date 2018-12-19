@@ -1,0 +1,291 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.8.14">
+  <compounddef id="class_dibella_1_1_intersection" kind="class" language="C++" prot="public">
+    <compoundname>Dibella::Intersection</compoundname>
+      <sectiondef kind="friend">
+      <memberdef kind="friend" id="class_dibella_1_1_intersection_1a737b3cb474f324a74e7da2d3aeca10c9" prot="private" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>friend class</type>
+        <definition>friend class SceneObject</definition>
+        <argsstring></argsstring>
+        <name>SceneObject</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Source/Dibella/Inc/RayTracing/Primitives/Intersection.h" line="11" column="1" bodyfile="Source/Dibella/Inc/RayTracing/Primitives/Intersection.h" bodystart="11" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="friend" id="class_dibella_1_1_intersection_1a1e1ef8352d0a310bace7f7a3307d1378" prot="private" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>friend class</type>
+        <definition>friend class Shape</definition>
+        <argsstring></argsstring>
+        <name>Shape</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Source/Dibella/Inc/RayTracing/Primitives/Intersection.h" line="12" column="1" bodyfile="Source/Dibella/Inc/RayTracing/Primitives/Intersection.h" bodystart="12" bodyend="-1"/>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="protected-attrib">
+      <memberdef kind="variable" id="class_dibella_1_1_intersection_1a806061f0e366633a012e98e2ab0959ea" prot="protected" static="no" mutable="no">
+        <type>Point3f</type>
+        <definition>Point3f Dibella::Intersection::mPoint</definition>
+        <argsstring></argsstring>
+        <name>mPoint</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Source/Dibella/Inc/RayTracing/Primitives/Intersection.h" line="35" column="1" bodyfile="Source/Dibella/Inc/RayTracing/Primitives/Intersection.h" bodystart="35" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="class_dibella_1_1_intersection_1a323fe605c16c385302c67fbebdcf47bd" prot="protected" static="no" mutable="no">
+        <type>Normal3f</type>
+        <definition>Normal3f Dibella::Intersection::mNormalGeometric</definition>
+        <argsstring></argsstring>
+        <name>mNormalGeometric</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Source/Dibella/Inc/RayTracing/Primitives/Intersection.h" line="38" column="1" bodyfile="Source/Dibella/Inc/RayTracing/Primitives/Intersection.h" bodystart="38" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="class_dibella_1_1_intersection_1a0b391328943df3acf0e6c4956dc87129" prot="protected" static="no" mutable="no">
+        <type>Normal3f</type>
+        <definition>Normal3f Dibella::Intersection::mNormalShading</definition>
+        <argsstring></argsstring>
+        <name>mNormalShading</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Source/Dibella/Inc/RayTracing/Primitives/Intersection.h" line="39" column="1" bodyfile="Source/Dibella/Inc/RayTracing/Primitives/Intersection.h" bodystart="39" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="class_dibella_1_1_intersection_1a02eebaa88fa2962c999c3dde15cb1f0a" prot="protected" static="no" mutable="no">
+        <type>Point2f</type>
+        <definition>Point2f Dibella::Intersection::mUV</definition>
+        <argsstring></argsstring>
+        <name>mUV</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Source/Dibella/Inc/RayTracing/Primitives/Intersection.h" line="42" column="1" bodyfile="Source/Dibella/Inc/RayTracing/Primitives/Intersection.h" bodystart="42" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="class_dibella_1_1_intersection_1a16c01dbeaf84facb43f07e9fdb822aaa" prot="protected" static="no" mutable="no">
+        <type>float</type>
+        <definition>float Dibella::Intersection::mParamT</definition>
+        <argsstring></argsstring>
+        <name>mParamT</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Source/Dibella/Inc/RayTracing/Primitives/Intersection.h" line="47" column="1" bodyfile="Source/Dibella/Inc/RayTracing/Primitives/Intersection.h" bodystart="47" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="class_dibella_1_1_intersection_1a2e2bbc6710a4f785bdaa2a9392894660" prot="protected" static="no" mutable="no">
+        <type>const <ref refid="class_dibella_1_1_scene_object" kindref="compound">SceneObject</ref> *</type>
+        <definition>const SceneObject* Dibella::Intersection::mTargetHit</definition>
+        <argsstring></argsstring>
+        <name>mTargetHit</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Source/Dibella/Inc/RayTracing/Primitives/Intersection.h" line="50" column="1" bodyfile="Source/Dibella/Inc/RayTracing/Primitives/Intersection.h" bodystart="50" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="class_dibella_1_1_intersection_1acc2980b1323ce40a259779008c98c1b4" prot="protected" static="no" mutable="no">
+        <type><ref refid="class_dibella_1_1_b_s_d_f" kindref="compound">BSDF</ref> *</type>
+        <definition>BSDF* Dibella::Intersection::mBSDF</definition>
+        <argsstring></argsstring>
+        <name>mBSDF</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Source/Dibella/Inc/RayTracing/Primitives/Intersection.h" line="53" column="1" bodyfile="Source/Dibella/Inc/RayTracing/Primitives/Intersection.h" bodystart="53" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="class_dibella_1_1_intersection_1a4ba75b0513bfac8ae2c41329bc9f4df0" prot="protected" static="no" mutable="no">
+        <type>Vector3f</type>
+        <definition>Vector3f Dibella::Intersection::mTangent</definition>
+        <argsstring></argsstring>
+        <name>mTangent</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Source/Dibella/Inc/RayTracing/Primitives/Intersection.h" line="56" column="1" bodyfile="Source/Dibella/Inc/RayTracing/Primitives/Intersection.h" bodystart="56" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="class_dibella_1_1_intersection_1a16092b8fcd3c95330e767891f2828620" prot="protected" static="no" mutable="no">
+        <type>Vector3f</type>
+        <definition>Vector3f Dibella::Intersection::mBitangent</definition>
+        <argsstring></argsstring>
+        <name>mBitangent</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Source/Dibella/Inc/RayTracing/Primitives/Intersection.h" line="57" column="1" bodyfile="Source/Dibella/Inc/RayTracing/Primitives/Intersection.h" bodystart="57" bodyend="-1"/>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="public-func">
+      <memberdef kind="function" id="class_dibella_1_1_intersection_1a16589796b22fa3b75477d1c2ae0a00e3" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>Dibella::Intersection::Intersection</definition>
+        <argsstring>()</argsstring>
+        <name>Intersection</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Source/Dibella/Inc/RayTracing/Primitives/Intersection.h" line="15" column="1"/>
+      </memberdef>
+      <memberdef kind="function" id="class_dibella_1_1_intersection_1ae54b485f57eb2fa8105304ef33824066" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool Dibella::Intersection::ProduceBSDF</definition>
+        <argsstring>()</argsstring>
+        <name>ProduceBSDF</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Source/Dibella/Inc/RayTracing/Primitives/Intersection.h" line="21" column="1"/>
+      </memberdef>
+      <memberdef kind="function" id="class_dibella_1_1_intersection_1a270ad1c91a7f14d2dbdb934fa19ff47a" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
+        <type>Color3f</type>
+        <definition>Color3f Dibella::Intersection::Le</definition>
+        <argsstring>(const Vector3f &amp;wo) const</argsstring>
+        <name>Le</name>
+        <param>
+          <type>const Vector3f &amp;</type>
+          <declname>wo</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Source/Dibella/Inc/RayTracing/Primitives/Intersection.h" line="27" column="1"/>
+      </memberdef>
+      <memberdef kind="function" id="class_dibella_1_1_intersection_1ab1ee05f07432300214f6f17cde2c634b" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="class_dibella_1_1_ray" kindref="compound">Ray</ref></type>
+        <definition>Ray Dibella::Intersection::SpawnRay</definition>
+        <argsstring>(const Vector3f &amp;d) const</argsstring>
+        <name>SpawnRay</name>
+        <param>
+          <type>const Vector3f &amp;</type>
+          <declname>d</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Source/Dibella/Inc/RayTracing/Primitives/Intersection.h" line="31" column="1"/>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <collaborationgraph>
+      <node id="355">
+        <label>Dibella::BSDF</label>
+        <link refid="class_dibella_1_1_b_s_d_f"/>
+        <childnode refid="356" relation="usage">
+          <edgelabel>bxdfs</edgelabel>
+        </childnode>
+      </node>
+      <node id="361">
+        <label>Dibella::Transform</label>
+        <link refid="class_dibella_1_1_transform"/>
+      </node>
+      <node id="357">
+        <label>Dibella::AllocationDependent</label>
+        <link refid="class_dibella_1_1_allocation_dependent"/>
+      </node>
+      <node id="354">
+        <label>Dibella::Intersection</label>
+        <link refid="class_dibella_1_1_intersection"/>
+        <childnode refid="355" relation="usage">
+          <edgelabel>mBSDF</edgelabel>
+        </childnode>
+        <childnode refid="358" relation="usage">
+          <edgelabel>mTargetHit</edgelabel>
+        </childnode>
+      </node>
+      <node id="356">
+        <label>Dibella::BxDF</label>
+        <link refid="class_dibella_1_1_bx_d_f"/>
+        <childnode refid="357" relation="protected-inheritance">
+        </childnode>
+      </node>
+      <node id="358">
+        <label>Dibella::SceneObject</label>
+        <link refid="class_dibella_1_1_scene_object"/>
+        <childnode refid="359" relation="usage">
+          <edgelabel>mMaterial</edgelabel>
+        </childnode>
+        <childnode refid="360" relation="usage">
+          <edgelabel>mShape</edgelabel>
+        </childnode>
+      </node>
+      <node id="359">
+        <label>Dibella::Material</label>
+        <link refid="class_dibella_1_1_material"/>
+      </node>
+      <node id="360">
+        <label>Dibella::Shape</label>
+        <link refid="class_dibella_1_1_shape"/>
+        <childnode refid="361" relation="usage">
+          <edgelabel>mTransform</edgelabel>
+        </childnode>
+      </node>
+    </collaborationgraph>
+    <location file="Source/Dibella/Inc/RayTracing/Primitives/Intersection.h" line="10" column="1" bodyfile="Source/Dibella/Inc/RayTracing/Primitives/Intersection.h" bodystart="10" bodyend="58"/>
+    <listofallmembers>
+      <member refid="class_dibella_1_1_intersection_1a16589796b22fa3b75477d1c2ae0a00e3" prot="public" virt="non-virtual"><scope>Dibella::Intersection</scope><name>Intersection</name></member>
+      <member refid="class_dibella_1_1_intersection_1a270ad1c91a7f14d2dbdb934fa19ff47a" prot="public" virt="non-virtual"><scope>Dibella::Intersection</scope><name>Le</name></member>
+      <member refid="class_dibella_1_1_intersection_1a16092b8fcd3c95330e767891f2828620" prot="protected" virt="non-virtual"><scope>Dibella::Intersection</scope><name>mBitangent</name></member>
+      <member refid="class_dibella_1_1_intersection_1acc2980b1323ce40a259779008c98c1b4" prot="protected" virt="non-virtual"><scope>Dibella::Intersection</scope><name>mBSDF</name></member>
+      <member refid="class_dibella_1_1_intersection_1a323fe605c16c385302c67fbebdcf47bd" prot="protected" virt="non-virtual"><scope>Dibella::Intersection</scope><name>mNormalGeometric</name></member>
+      <member refid="class_dibella_1_1_intersection_1a0b391328943df3acf0e6c4956dc87129" prot="protected" virt="non-virtual"><scope>Dibella::Intersection</scope><name>mNormalShading</name></member>
+      <member refid="class_dibella_1_1_intersection_1a16c01dbeaf84facb43f07e9fdb822aaa" prot="protected" virt="non-virtual"><scope>Dibella::Intersection</scope><name>mParamT</name></member>
+      <member refid="class_dibella_1_1_intersection_1a806061f0e366633a012e98e2ab0959ea" prot="protected" virt="non-virtual"><scope>Dibella::Intersection</scope><name>mPoint</name></member>
+      <member refid="class_dibella_1_1_intersection_1a4ba75b0513bfac8ae2c41329bc9f4df0" prot="protected" virt="non-virtual"><scope>Dibella::Intersection</scope><name>mTangent</name></member>
+      <member refid="class_dibella_1_1_intersection_1a2e2bbc6710a4f785bdaa2a9392894660" prot="protected" virt="non-virtual"><scope>Dibella::Intersection</scope><name>mTargetHit</name></member>
+      <member refid="class_dibella_1_1_intersection_1a02eebaa88fa2962c999c3dde15cb1f0a" prot="protected" virt="non-virtual"><scope>Dibella::Intersection</scope><name>mUV</name></member>
+      <member refid="class_dibella_1_1_intersection_1ae54b485f57eb2fa8105304ef33824066" prot="public" virt="non-virtual"><scope>Dibella::Intersection</scope><name>ProduceBSDF</name></member>
+      <member refid="class_dibella_1_1_intersection_1a737b3cb474f324a74e7da2d3aeca10c9" prot="private" virt="non-virtual"><scope>Dibella::Intersection</scope><name>SceneObject</name></member>
+      <member refid="class_dibella_1_1_intersection_1a1e1ef8352d0a310bace7f7a3307d1378" prot="private" virt="non-virtual"><scope>Dibella::Intersection</scope><name>Shape</name></member>
+      <member refid="class_dibella_1_1_intersection_1ab1ee05f07432300214f6f17cde2c634b" prot="public" virt="non-virtual"><scope>Dibella::Intersection</scope><name>SpawnRay</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

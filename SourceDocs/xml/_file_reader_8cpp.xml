@@ -1,0 +1,155 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.8.14">
+  <compounddef id="_file_reader_8cpp" kind="file" language="C++">
+    <compoundname>FileReader.cpp</compoundname>
+    <includes refid="_file_reader_8h" local="yes">Utils/FileReader.h</includes>
+    <includes local="no">fstream</includes>
+    <includes local="no">iterator</includes>
+    <incdepgraph>
+      <node id="5727">
+        <label>functional</label>
+      </node>
+      <node id="5722">
+        <label>Utils/FileReader.h</label>
+        <link refid="_file_reader_8h_source"/>
+        <childnode refid="5723" relation="include">
+        </childnode>
+        <childnode refid="5724" relation="include">
+        </childnode>
+      </node>
+      <node id="5728">
+        <label>iterator</label>
+      </node>
+      <node id="5730">
+        <label>Memory/Allocator.h</label>
+        <link refid="_allocator_8h_source"/>
+        <childnode refid="5727" relation="include">
+        </childnode>
+        <childnode refid="5723" relation="include">
+        </childnode>
+        <childnode refid="5731" relation="include">
+        </childnode>
+      </node>
+      <node id="5725">
+        <label>cassert</label>
+      </node>
+      <node id="5731">
+        <label>Utils/Macros.h</label>
+        <link refid="_macros_8h_source"/>
+      </node>
+      <node id="5732">
+        <label>fstream</label>
+      </node>
+      <node id="5729">
+        <label>Array.h</label>
+        <link refid="_array_8h_source"/>
+        <childnode refid="5725" relation="include">
+        </childnode>
+        <childnode refid="5726" relation="include">
+        </childnode>
+        <childnode refid="5730" relation="include">
+        </childnode>
+        <childnode refid="5723" relation="include">
+        </childnode>
+      </node>
+      <node id="5724">
+        <label>Containers/Vector.h</label>
+        <link refid="_vector_8h_source"/>
+        <childnode refid="5725" relation="include">
+        </childnode>
+        <childnode refid="5726" relation="include">
+        </childnode>
+        <childnode refid="5727" relation="include">
+        </childnode>
+        <childnode refid="5728" relation="include">
+        </childnode>
+        <childnode refid="5729" relation="include">
+        </childnode>
+        <childnode refid="5730" relation="include">
+        </childnode>
+        <childnode refid="5723" relation="include">
+        </childnode>
+        <childnode refid="5731" relation="include">
+        </childnode>
+      </node>
+      <node id="5723">
+        <label>Types.h</label>
+      </node>
+      <node id="5726">
+        <label>cstring</label>
+      </node>
+      <node id="5721">
+        <label>Source/Platform/Src/Utils/FileReader.cpp</label>
+        <link refid="_file_reader_8cpp"/>
+        <childnode refid="5722" relation="include">
+        </childnode>
+        <childnode refid="5732" relation="include">
+        </childnode>
+        <childnode refid="5728" relation="include">
+        </childnode>
+      </node>
+    </incdepgraph>
+    <innernamespace refid="namespace_azura">Azura</innernamespace>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <programlisting>
+<codeline lineno="1"><highlight class="preprocessor">#include<sp/>&quot;Utils/FileReader.h&quot;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="2"><highlight class="normal"></highlight></codeline>
+<codeline lineno="3"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&lt;fstream&gt;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="4"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&lt;iterator&gt;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="5"><highlight class="normal"></highlight></codeline>
+<codeline lineno="6"><highlight class="normal"></highlight><highlight class="keyword">namespace<sp/></highlight><highlight class="normal"><ref refid="namespace_azura" kindref="compound">Azura</ref><sp/>{</highlight></codeline>
+<codeline lineno="7"><highlight class="normal"></highlight></codeline>
+<codeline lineno="8"><highlight class="normal">Containers::Vector&lt;U8&gt;<sp/>FileReader::GetFileContents(</highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>String&amp;<sp/>filePath,<sp/>Memory::Allocator&amp;<sp/>allocator)<sp/>{</highlight></codeline>
+<codeline lineno="9"><highlight class="normal"><sp/><sp/>std::ifstream<sp/>fileStream(filePath,<sp/>std::ios::binary);</highlight></codeline>
+<codeline lineno="10"><highlight class="normal"><sp/><sp/>Containers::Vector&lt;U8&gt;<sp/>buffer(allocator);</highlight></codeline>
+<codeline lineno="11"><highlight class="normal"></highlight></codeline>
+<codeline lineno="12"><highlight class="normal"><sp/><sp/></highlight><highlight class="keywordflow">if</highlight><highlight class="normal"><sp/>(!fileStream.good())</highlight></codeline>
+<codeline lineno="13"><highlight class="normal"><sp/><sp/>{</highlight></codeline>
+<codeline lineno="14"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">throw</highlight><highlight class="normal"><sp/>std::runtime_error(</highlight><highlight class="stringliteral">&quot;Can&apos;t<sp/>find<sp/>File&quot;</highlight><highlight class="normal">);</highlight></codeline>
+<codeline lineno="15"><highlight class="normal"><sp/><sp/>}</highlight></codeline>
+<codeline lineno="16"><highlight class="normal"></highlight></codeline>
+<codeline lineno="17"><highlight class="normal"><sp/><sp/>fileStream.seekg(0,<sp/>std::ios::end);</highlight></codeline>
+<codeline lineno="18"><highlight class="normal"><sp/><sp/>buffer.Resize(U32(fileStream.tellg()));</highlight></codeline>
+<codeline lineno="19"><highlight class="normal"><sp/><sp/>fileStream.seekg(0,<sp/>std::ios::beg);</highlight></codeline>
+<codeline lineno="20"><highlight class="normal"></highlight></codeline>
+<codeline lineno="21"><highlight class="normal"><sp/><sp/>buffer.Assign(std::istreambuf_iterator&lt;char&gt;(fileStream),<sp/>std::istreambuf_iterator&lt;char&gt;());</highlight></codeline>
+<codeline lineno="22"><highlight class="normal"></highlight></codeline>
+<codeline lineno="23"><highlight class="normal"><sp/><sp/>fileStream.close();</highlight></codeline>
+<codeline lineno="24"><highlight class="normal"></highlight></codeline>
+<codeline lineno="25"><highlight class="normal"><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>buffer;</highlight></codeline>
+<codeline lineno="26"><highlight class="normal">}</highlight></codeline>
+<codeline lineno="27"><highlight class="normal"></highlight></codeline>
+<codeline lineno="28"><highlight class="normal"></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/>FileReader::GetFileContents(</highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>String&amp;<sp/>filePath,<sp/>Containers::Vector&lt;U8&gt;&amp;<sp/>buffer)<sp/>{</highlight></codeline>
+<codeline lineno="29"><highlight class="normal"><sp/><sp/>std::ifstream<sp/>fileStream(filePath,<sp/>std::ios::binary);</highlight></codeline>
+<codeline lineno="30"><highlight class="normal"></highlight></codeline>
+<codeline lineno="31"><highlight class="normal"><sp/><sp/></highlight><highlight class="keywordflow">if</highlight><highlight class="normal"><sp/>(!fileStream.good())</highlight></codeline>
+<codeline lineno="32"><highlight class="normal"><sp/><sp/>{</highlight></codeline>
+<codeline lineno="33"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">throw</highlight><highlight class="normal"><sp/>std::runtime_error(</highlight><highlight class="stringliteral">&quot;Can&apos;t<sp/>find<sp/>File&quot;</highlight><highlight class="normal">);</highlight></codeline>
+<codeline lineno="34"><highlight class="normal"><sp/><sp/>}</highlight></codeline>
+<codeline lineno="35"><highlight class="normal"></highlight></codeline>
+<codeline lineno="36"><highlight class="normal"><sp/><sp/>fileStream.seekg(0,<sp/>std::ios::end);</highlight></codeline>
+<codeline lineno="37"><highlight class="normal"><sp/><sp/>buffer.Resize(U32(fileStream.tellg()));</highlight></codeline>
+<codeline lineno="38"><highlight class="normal"><sp/><sp/>fileStream.seekg(0,<sp/>std::ios::beg);</highlight></codeline>
+<codeline lineno="39"><highlight class="normal"></highlight></codeline>
+<codeline lineno="40"><highlight class="normal"><sp/><sp/>buffer.Assign(std::istreambuf_iterator&lt;char&gt;(fileStream),<sp/>std::istreambuf_iterator&lt;char&gt;());</highlight></codeline>
+<codeline lineno="41"><highlight class="normal"></highlight></codeline>
+<codeline lineno="42"><highlight class="normal"><sp/><sp/>fileStream.close();</highlight></codeline>
+<codeline lineno="43"><highlight class="normal">}</highlight></codeline>
+<codeline lineno="44"><highlight class="normal"></highlight></codeline>
+<codeline lineno="45"><highlight class="normal">SizeType<sp/>FileReader::GetFileSize(</highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>String&amp;<sp/>filePath)<sp/>{</highlight></codeline>
+<codeline lineno="46"><highlight class="normal"><sp/><sp/>std::ifstream<sp/>fileStream(filePath);</highlight></codeline>
+<codeline lineno="47"><highlight class="normal"></highlight></codeline>
+<codeline lineno="48"><highlight class="normal"><sp/><sp/>fileStream.seekg(0,<sp/>std::ios::end);</highlight></codeline>
+<codeline lineno="49"><highlight class="normal"><sp/><sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">auto</highlight><highlight class="normal"><sp/>size<sp/>=<sp/>SizeType(fileStream.tellg());</highlight></codeline>
+<codeline lineno="50"><highlight class="normal"><sp/><sp/>fileStream.close();</highlight></codeline>
+<codeline lineno="51"><highlight class="normal"></highlight></codeline>
+<codeline lineno="52"><highlight class="normal"><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>size;</highlight></codeline>
+<codeline lineno="53"><highlight class="normal">}</highlight></codeline>
+<codeline lineno="54"><highlight class="normal">}<sp/><sp/></highlight><highlight class="comment">//<sp/>namespace<sp/>Azura</highlight><highlight class="normal"></highlight></codeline>
+    </programlisting>
+    <location file="Source/Platform/Src/Utils/FileReader.cpp"/>
+  </compounddef>
+</doxygen>

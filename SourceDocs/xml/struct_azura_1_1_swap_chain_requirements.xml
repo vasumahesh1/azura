@@ -1,0 +1,103 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.8.14">
+  <compounddef id="struct_azura_1_1_swap_chain_requirements" kind="struct" language="C++" prot="public">
+    <compoundname>Azura::SwapChainRequirements</compoundname>
+      <sectiondef kind="public-attrib">
+      <memberdef kind="variable" id="struct_azura_1_1_swap_chain_requirements_1a3039ad5537fbf27b57f87ebaefad164e" prot="public" static="no" mutable="no">
+        <type>RawStorageFormat</type>
+        <definition>RawStorageFormat Azura::SwapChainRequirements::m_format</definition>
+        <argsstring></argsstring>
+        <name>m_format</name>
+        <initializer>{}</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Source/Azura/RenderSystem/Inc/Generic/GenericTypes.h" line="393" column="1" bodyfile="Source/Azura/RenderSystem/Inc/Generic/GenericTypes.h" bodystart="393" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="struct_azura_1_1_swap_chain_requirements_1a7d7576719cbd9b2dd0405760b5fac501" prot="public" static="no" mutable="no">
+        <type>RawStorageFormat</type>
+        <definition>RawStorageFormat Azura::SwapChainRequirements::m_depthFormat</definition>
+        <argsstring></argsstring>
+        <name>m_depthFormat</name>
+        <initializer>{}</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Source/Azura/RenderSystem/Inc/Generic/GenericTypes.h" line="394" column="1" bodyfile="Source/Azura/RenderSystem/Inc/Generic/GenericTypes.h" bodystart="394" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="struct_azura_1_1_swap_chain_requirements_1a107a6e91c5483c65f44671580a392015" prot="public" static="no" mutable="no">
+        <type><ref refid="struct_azura_1_1_bounds2_d" kindref="compound">Bounds2D</ref></type>
+        <definition>Bounds2D Azura::SwapChainRequirements::m_extent</definition>
+        <argsstring></argsstring>
+        <name>m_extent</name>
+        <initializer>{0u, 0u}</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Source/Azura/RenderSystem/Inc/Generic/GenericTypes.h" line="395" column="1" bodyfile="Source/Azura/RenderSystem/Inc/Generic/GenericTypes.h" bodystart="395" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="struct_azura_1_1_swap_chain_requirements_1adaf101bb0ebd7223d548bdc11a576c8d" prot="public" static="no" mutable="no">
+        <type>ColorSpace</type>
+        <definition>ColorSpace Azura::SwapChainRequirements::m_colorSpace</definition>
+        <argsstring></argsstring>
+        <name>m_colorSpace</name>
+        <initializer>{}</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Source/Azura/RenderSystem/Inc/Generic/GenericTypes.h" line="396" column="1" bodyfile="Source/Azura/RenderSystem/Inc/Generic/GenericTypes.h" bodystart="396" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="struct_azura_1_1_swap_chain_requirements_1ab9ce6600393511efc8fd9b4cc237ab7f" prot="public" static="no" mutable="no">
+        <type>U32</type>
+        <definition>U32 Azura::SwapChainRequirements::m_framesInFlight</definition>
+        <argsstring></argsstring>
+        <name>m_framesInFlight</name>
+        <initializer>{DEFAULT_FRAMES_IN_FLIGHT}</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Source/Azura/RenderSystem/Inc/Generic/GenericTypes.h" line="397" column="1" bodyfile="Source/Azura/RenderSystem/Inc/Generic/GenericTypes.h" bodystart="397" bodyend="-1"/>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <collaborationgraph>
+      <node id="552">
+        <label>Azura::Bounds2D</label>
+        <link refid="struct_azura_1_1_bounds2_d"/>
+      </node>
+      <node id="551">
+        <label>Azura::SwapChainRequirements</label>
+        <link refid="struct_azura_1_1_swap_chain_requirements"/>
+        <childnode refid="552" relation="usage">
+          <edgelabel>m_extent</edgelabel>
+        </childnode>
+      </node>
+    </collaborationgraph>
+    <location file="Source/Azura/RenderSystem/Inc/Generic/GenericTypes.h" line="392" column="1" bodyfile="Source/Azura/RenderSystem/Inc/Generic/GenericTypes.h" bodystart="392" bodyend="398"/>
+    <listofallmembers>
+      <member refid="struct_azura_1_1_swap_chain_requirements_1adaf101bb0ebd7223d548bdc11a576c8d" prot="public" virt="non-virtual"><scope>Azura::SwapChainRequirements</scope><name>m_colorSpace</name></member>
+      <member refid="struct_azura_1_1_swap_chain_requirements_1a7d7576719cbd9b2dd0405760b5fac501" prot="public" virt="non-virtual"><scope>Azura::SwapChainRequirements</scope><name>m_depthFormat</name></member>
+      <member refid="struct_azura_1_1_swap_chain_requirements_1a107a6e91c5483c65f44671580a392015" prot="public" virt="non-virtual"><scope>Azura::SwapChainRequirements</scope><name>m_extent</name></member>
+      <member refid="struct_azura_1_1_swap_chain_requirements_1a3039ad5537fbf27b57f87ebaefad164e" prot="public" virt="non-virtual"><scope>Azura::SwapChainRequirements</scope><name>m_format</name></member>
+      <member refid="struct_azura_1_1_swap_chain_requirements_1ab9ce6600393511efc8fd9b4cc237ab7f" prot="public" virt="non-virtual"><scope>Azura::SwapChainRequirements</scope><name>m_framesInFlight</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

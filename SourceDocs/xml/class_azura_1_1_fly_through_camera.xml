@@ -1,0 +1,425 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.8.14">
+  <compounddef id="class_azura_1_1_fly_through_camera" kind="class" language="C++" prot="public" final="yes">
+    <compoundname>Azura::FlyThroughCamera</compoundname>
+    <basecompoundref refid="class_azura_1_1_camera" prot="public" virt="non-virtual">Azura::Camera</basecompoundref>
+      <sectiondef kind="private-attrib">
+      <memberdef kind="variable" id="class_azura_1_1_fly_through_camera_1a9fb44e760cf865c9ca030deab92516c0" prot="private" static="no" mutable="no">
+        <type>Vector3f</type>
+        <definition>Vector3f Azura::FlyThroughCamera::m_right</definition>
+        <argsstring></argsstring>
+        <name>m_right</name>
+        <initializer>{1, 0, 0}</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Source/Camera/Inc/Camera/FlyThroughCamera.h" line="32" column="1" bodyfile="Source/Camera/Inc/Camera/FlyThroughCamera.h" bodystart="32" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="class_azura_1_1_fly_through_camera_1a948e4e2f40005e7c6cdf5dccd0a05196" prot="private" static="no" mutable="no">
+        <type>Vector3f</type>
+        <definition>Vector3f Azura::FlyThroughCamera::m_look</definition>
+        <argsstring></argsstring>
+        <name>m_look</name>
+        <initializer>{0, 0, 1}</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Source/Camera/Inc/Camera/FlyThroughCamera.h" line="33" column="1" bodyfile="Source/Camera/Inc/Camera/FlyThroughCamera.h" bodystart="33" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="class_azura_1_1_fly_through_camera_1a3cd743c429aa79758df82ea1945b170f" prot="private" static="no" mutable="no">
+        <type>Vector3f</type>
+        <definition>Vector3f Azura::FlyThroughCamera::m_up</definition>
+        <argsstring></argsstring>
+        <name>m_up</name>
+        <initializer>{0, 1, 0}</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Source/Camera/Inc/Camera/FlyThroughCamera.h" line="34" column="1" bodyfile="Source/Camera/Inc/Camera/FlyThroughCamera.h" bodystart="34" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="class_azura_1_1_fly_through_camera_1a322cf5d102a825b1309086eed88c095a" prot="private" static="no" mutable="no">
+        <type>float</type>
+        <definition>float Azura::FlyThroughCamera::m_theta</definition>
+        <argsstring></argsstring>
+        <name>m_theta</name>
+        <initializer>{0.0f}</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Source/Camera/Inc/Camera/FlyThroughCamera.h" line="36" column="1" bodyfile="Source/Camera/Inc/Camera/FlyThroughCamera.h" bodystart="36" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="class_azura_1_1_fly_through_camera_1a5126bc278e03b9986a34c43c75c1bc80" prot="private" static="no" mutable="no">
+        <type>float</type>
+        <definition>float Azura::FlyThroughCamera::m_phi</definition>
+        <argsstring></argsstring>
+        <name>m_phi</name>
+        <initializer>{0.0f}</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Source/Camera/Inc/Camera/FlyThroughCamera.h" line="37" column="1" bodyfile="Source/Camera/Inc/Camera/FlyThroughCamera.h" bodystart="37" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="class_azura_1_1_fly_through_camera_1aeb449103e9bcf6bcf96e037c19045264" prot="private" static="no" mutable="no">
+        <type>float</type>
+        <definition>float Azura::FlyThroughCamera::m_stepSize</definition>
+        <argsstring></argsstring>
+        <name>m_stepSize</name>
+        <initializer>{10.0f}</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Source/Camera/Inc/Camera/FlyThroughCamera.h" line="38" column="1" bodyfile="Source/Camera/Inc/Camera/FlyThroughCamera.h" bodystart="38" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="class_azura_1_1_fly_through_camera_1a5b47745e362dd0c5c7829eec8a25d42b" prot="private" static="no" mutable="no">
+        <type>float</type>
+        <definition>float Azura::FlyThroughCamera::m_cachedMouseX</definition>
+        <argsstring></argsstring>
+        <name>m_cachedMouseX</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Source/Camera/Inc/Camera/FlyThroughCamera.h" line="40" column="1" bodyfile="Source/Camera/Inc/Camera/FlyThroughCamera.h" bodystart="40" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="class_azura_1_1_fly_through_camera_1aec98f08bb6419cf7b92f53a562d40bdf" prot="private" static="no" mutable="no">
+        <type>float</type>
+        <definition>float Azura::FlyThroughCamera::m_cachedMouseY</definition>
+        <argsstring></argsstring>
+        <name>m_cachedMouseY</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Source/Camera/Inc/Camera/FlyThroughCamera.h" line="41" column="1" bodyfile="Source/Camera/Inc/Camera/FlyThroughCamera.h" bodystart="41" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="class_azura_1_1_fly_through_camera_1a28b1eae47bc3d3ab0be96e908450b24a" prot="private" static="no" mutable="no">
+        <type>int</type>
+        <definition>int Azura::FlyThroughCamera::m_moveForwardFactor</definition>
+        <argsstring></argsstring>
+        <name>m_moveForwardFactor</name>
+        <initializer>{0}</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Source/Camera/Inc/Camera/FlyThroughCamera.h" line="43" column="1" bodyfile="Source/Camera/Inc/Camera/FlyThroughCamera.h" bodystart="43" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="class_azura_1_1_fly_through_camera_1ad67012bae86750ab1f4fd0d21f12830a" prot="private" static="no" mutable="no">
+        <type>int</type>
+        <definition>int Azura::FlyThroughCamera::m_moveRightFactor</definition>
+        <argsstring></argsstring>
+        <name>m_moveRightFactor</name>
+        <initializer>{0}</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Source/Camera/Inc/Camera/FlyThroughCamera.h" line="44" column="1" bodyfile="Source/Camera/Inc/Camera/FlyThroughCamera.h" bodystart="44" bodyend="-1"/>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="public-func">
+      <memberdef kind="function" id="class_azura_1_1_fly_through_camera_1a37527aa0ba1e3b86949f2e9a6c85ee9d" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>Azura::FlyThroughCamera::FlyThroughCamera</definition>
+        <argsstring>(U32 width, U32 height)</argsstring>
+        <name>FlyThroughCamera</name>
+        <param>
+          <type>U32</type>
+          <declname>width</declname>
+        </param>
+        <param>
+          <type>U32</type>
+          <declname>height</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Source/Camera/Inc/Camera/FlyThroughCamera.h" line="11" column="1" bodyfile="Source/Camera/Src/FlyThroughCamera.cpp" bodystart="13" bodyend="18"/>
+      </memberdef>
+      <memberdef kind="function" id="class_azura_1_1_fly_through_camera_1add630123f55728b7362de167416964fb" prot="public" static="no" const="no" explicit="no" inline="no" virt="virtual">
+        <type>void</type>
+        <definition>void Azura::FlyThroughCamera::Recompute</definition>
+        <argsstring>() override</argsstring>
+        <name>Recompute</name>
+        <reimplements refid="class_azura_1_1_camera_1a2e56344e6c376980b7b8eef003622d57">Recompute</reimplements>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Source/Camera/Inc/Camera/FlyThroughCamera.h" line="13" column="1" bodyfile="Source/Camera/Src/FlyThroughCamera.cpp" bodystart="20" bodyend="36"/>
+      </memberdef>
+      <memberdef kind="function" id="class_azura_1_1_fly_through_camera_1a02b3bd1dbeb06096d22d24f4a7e62d43" prot="public" static="no" const="no" explicit="no" inline="no" virt="virtual">
+        <type>void</type>
+        <definition>void Azura::FlyThroughCamera::OnMouseEvent</definition>
+        <argsstring>(MouseEvent mouseEvent) override</argsstring>
+        <name>OnMouseEvent</name>
+        <reimplements refid="class_azura_1_1_camera_1a2114ff3b9c63af05da719ba4f00b42df">OnMouseEvent</reimplements>
+        <param>
+          <type><ref refid="struct_azura_1_1_mouse_event" kindref="compound">MouseEvent</ref></type>
+          <declname>mouseEvent</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Source/Camera/Inc/Camera/FlyThroughCamera.h" line="14" column="1" bodyfile="Source/Camera/Src/FlyThroughCamera.cpp" bodystart="38" bodyend="53"/>
+      </memberdef>
+      <memberdef kind="function" id="class_azura_1_1_fly_through_camera_1a88fb9cdd607b53d7cdfa964ce40a7b90" prot="public" static="no" const="no" explicit="no" inline="no" virt="virtual">
+        <type>void</type>
+        <definition>void Azura::FlyThroughCamera::OnKeyEvent</definition>
+        <argsstring>(KeyEvent keyEvent) override</argsstring>
+        <name>OnKeyEvent</name>
+        <reimplements refid="class_azura_1_1_camera_1abf0bb3f21727033d4f919329c70dfc02">OnKeyEvent</reimplements>
+        <param>
+          <type><ref refid="struct_azura_1_1_key_event" kindref="compound">KeyEvent</ref></type>
+          <declname>keyEvent</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Source/Camera/Inc/Camera/FlyThroughCamera.h" line="15" column="1" bodyfile="Source/Camera/Src/FlyThroughCamera.cpp" bodystart="55" bodyend="109"/>
+      </memberdef>
+      <memberdef kind="function" id="class_azura_1_1_fly_through_camera_1a56d0f6fe1a25a0ca173dde75f30528e3" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void Azura::FlyThroughCamera::SetTranslationStepSize</definition>
+        <argsstring>(float amount)</argsstring>
+        <name>SetTranslationStepSize</name>
+        <param>
+          <type>float</type>
+          <declname>amount</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Source/Camera/Inc/Camera/FlyThroughCamera.h" line="17" column="1" bodyfile="Source/Camera/Src/FlyThroughCamera.cpp" bodystart="111" bodyend="113"/>
+      </memberdef>
+      <memberdef kind="function" id="class_azura_1_1_fly_through_camera_1a02788bee0ac5bba5cf5870843768b01a" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void Azura::FlyThroughCamera::RotateAboutUp</definition>
+        <argsstring>(float degrees)</argsstring>
+        <name>RotateAboutUp</name>
+        <param>
+          <type>float</type>
+          <declname>degrees</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Source/Camera/Inc/Camera/FlyThroughCamera.h" line="19" column="1" bodyfile="Source/Camera/Src/FlyThroughCamera.cpp" bodystart="115" bodyend="125"/>
+      </memberdef>
+      <memberdef kind="function" id="class_azura_1_1_fly_through_camera_1a3879c828e82f4bb41a4edd06abcea7c8" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void Azura::FlyThroughCamera::SetAngleAboutRight</definition>
+        <argsstring>(float ndcY)</argsstring>
+        <name>SetAngleAboutRight</name>
+        <param>
+          <type>float</type>
+          <declname>ndcY</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Source/Camera/Inc/Camera/FlyThroughCamera.h" line="21" column="1" bodyfile="Source/Camera/Src/FlyThroughCamera.cpp" bodystart="127" bodyend="130"/>
+      </memberdef>
+      <memberdef kind="function" id="class_azura_1_1_fly_through_camera_1ac6196945e354e7733b50e700b9ac66a3" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void Azura::FlyThroughCamera::RotateAboutRight</definition>
+        <argsstring>(float degrees)</argsstring>
+        <name>RotateAboutRight</name>
+        <param>
+          <type>float</type>
+          <declname>degrees</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Source/Camera/Inc/Camera/FlyThroughCamera.h" line="23" column="1" bodyfile="Source/Camera/Src/FlyThroughCamera.cpp" bodystart="132" bodyend="142"/>
+      </memberdef>
+      <memberdef kind="function" id="class_azura_1_1_fly_through_camera_1ab6f5adb199f14a9fc6f7fc8449636ea2" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void Azura::FlyThroughCamera::TranslateAlongLook</definition>
+        <argsstring>(float amt)</argsstring>
+        <name>TranslateAlongLook</name>
+        <param>
+          <type>float</type>
+          <declname>amt</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Source/Camera/Inc/Camera/FlyThroughCamera.h" line="25" column="1" bodyfile="Source/Camera/Src/FlyThroughCamera.cpp" bodystart="144" bodyend="149"/>
+      </memberdef>
+      <memberdef kind="function" id="class_azura_1_1_fly_through_camera_1a0c99c93e21cef03a9d7ff8018ec6a839" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void Azura::FlyThroughCamera::TranslateAlongRight</definition>
+        <argsstring>(float amt)</argsstring>
+        <name>TranslateAlongRight</name>
+        <param>
+          <type>float</type>
+          <declname>amt</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Source/Camera/Inc/Camera/FlyThroughCamera.h" line="27" column="1" bodyfile="Source/Camera/Src/FlyThroughCamera.cpp" bodystart="151" bodyend="156"/>
+      </memberdef>
+      <memberdef kind="function" id="class_azura_1_1_fly_through_camera_1a405ca3757fef26fe5c09850f78127838" prot="public" static="no" const="no" explicit="no" inline="no" virt="virtual">
+        <type>void</type>
+        <definition>void Azura::FlyThroughCamera::Update</definition>
+        <argsstring>(float timeDelta) override</argsstring>
+        <name>Update</name>
+        <reimplements refid="class_azura_1_1_camera_1a8f30660edaed4af67b85c5bfb4abf243">Update</reimplements>
+        <param>
+          <type>float</type>
+          <declname>timeDelta</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Source/Camera/Inc/Camera/FlyThroughCamera.h" line="29" column="1" bodyfile="Source/Camera/Src/FlyThroughCamera.cpp" bodystart="158" bodyend="176"/>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <inheritancegraph>
+      <node id="249">
+        <label>Azura::FlyThroughCamera</label>
+        <link refid="class_azura_1_1_fly_through_camera"/>
+        <childnode refid="250" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="250">
+        <label>Azura::Camera</label>
+        <link refid="class_azura_1_1_camera"/>
+      </node>
+    </inheritancegraph>
+    <collaborationgraph>
+      <node id="251">
+        <label>Azura::FlyThroughCamera</label>
+        <link refid="class_azura_1_1_fly_through_camera"/>
+        <childnode refid="252" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="252">
+        <label>Azura::Camera</label>
+        <link refid="class_azura_1_1_camera"/>
+      </node>
+    </collaborationgraph>
+    <location file="Source/Camera/Inc/Camera/FlyThroughCamera.h" line="9" column="1" bodyfile="Source/Camera/Inc/Camera/FlyThroughCamera.h" bodystart="9" bodyend="46"/>
+    <listofallmembers>
+      <member refid="class_azura_1_1_camera_1ae9712b37053d70b998326e7427fe4133" prot="public" virt="non-virtual"><scope>Azura::FlyThroughCamera</scope><name>Camera</name></member>
+      <member refid="class_azura_1_1_camera_1a486b0ddbe55ef6961fb2ee25cde770b9" prot="public" virt="non-virtual"><scope>Azura::FlyThroughCamera</scope><name>Camera</name></member>
+      <member refid="class_azura_1_1_camera_1afcdd8a0f2ed66de546a80c4439978d7b" prot="public" virt="non-virtual"><scope>Azura::FlyThroughCamera</scope><name>Camera</name></member>
+      <member refid="class_azura_1_1_fly_through_camera_1a37527aa0ba1e3b86949f2e9a6c85ee9d" prot="public" virt="non-virtual"><scope>Azura::FlyThroughCamera</scope><name>FlyThroughCamera</name></member>
+      <member refid="class_azura_1_1_camera_1a965abbf940578b29cdceedc4312d6391" prot="public" virt="non-virtual"><scope>Azura::FlyThroughCamera</scope><name>GetFarClip</name></member>
+      <member refid="class_azura_1_1_camera_1a60ff5afa210d24a63bb2437094ec577f" prot="public" virt="non-virtual"><scope>Azura::FlyThroughCamera</scope><name>GetInvViewProjMatrix</name></member>
+      <member refid="class_azura_1_1_camera_1ab7484fb922189c36691b6be8a6ad7437" prot="public" virt="non-virtual"><scope>Azura::FlyThroughCamera</scope><name>GetNearClip</name></member>
+      <member refid="class_azura_1_1_camera_1a0340c9690efdc7342becfda3ce2bb4ad" prot="public" virt="non-virtual"><scope>Azura::FlyThroughCamera</scope><name>GetPosition</name></member>
+      <member refid="class_azura_1_1_camera_1a3a3b4864cb3468bc575013508c35c395" prot="public" virt="non-virtual"><scope>Azura::FlyThroughCamera</scope><name>GetProjMatrix</name></member>
+      <member refid="class_azura_1_1_camera_1a7004a5b715e5250712e24125fad0730c" prot="public" virt="non-virtual"><scope>Azura::FlyThroughCamera</scope><name>GetSensitivity</name></member>
+      <member refid="class_azura_1_1_camera_1a4661c9c0bad106c322a32da477f377ee" prot="public" virt="non-virtual"><scope>Azura::FlyThroughCamera</scope><name>GetViewMatrix</name></member>
+      <member refid="class_azura_1_1_camera_1a27c2e42747a8450ddf573fedb5f7e2fb" prot="public" virt="non-virtual"><scope>Azura::FlyThroughCamera</scope><name>GetViewProjMatrix</name></member>
+      <member refid="class_azura_1_1_camera_1a3c5c58112e0497511ddf6b518c415857" prot="protected" virt="non-virtual"><scope>Azura::FlyThroughCamera</scope><name>m_aspect</name></member>
+      <member refid="class_azura_1_1_fly_through_camera_1a5b47745e362dd0c5c7829eec8a25d42b" prot="private" virt="non-virtual"><scope>Azura::FlyThroughCamera</scope><name>m_cachedMouseX</name></member>
+      <member refid="class_azura_1_1_fly_through_camera_1aec98f08bb6419cf7b92f53a562d40bdf" prot="private" virt="non-virtual"><scope>Azura::FlyThroughCamera</scope><name>m_cachedMouseY</name></member>
+      <member refid="class_azura_1_1_camera_1af6d32816487ccae5e427c80a0a4c149a" prot="protected" virt="non-virtual"><scope>Azura::FlyThroughCamera</scope><name>m_eye</name></member>
+      <member refid="class_azura_1_1_camera_1a023802a71bfb48cfe3f26f6ae8fb7d4a" prot="protected" virt="non-virtual"><scope>Azura::FlyThroughCamera</scope><name>m_farClip</name></member>
+      <member refid="class_azura_1_1_camera_1ae620188cb970b3d18591901648a6601d" prot="protected" virt="non-virtual"><scope>Azura::FlyThroughCamera</scope><name>m_fovY</name></member>
+      <member refid="class_azura_1_1_camera_1a1e59398b72a2cbf2395149c67d0aaec0" prot="protected" virt="non-virtual"><scope>Azura::FlyThroughCamera</scope><name>m_height</name></member>
+      <member refid="class_azura_1_1_camera_1a3434fa042b8a5bf7be723c3c8e7f1f16" prot="protected" virt="non-virtual"><scope>Azura::FlyThroughCamera</scope><name>m_invViewProj</name></member>
+      <member refid="class_azura_1_1_fly_through_camera_1a948e4e2f40005e7c6cdf5dccd0a05196" prot="private" virt="non-virtual"><scope>Azura::FlyThroughCamera</scope><name>m_look</name></member>
+      <member refid="class_azura_1_1_fly_through_camera_1a28b1eae47bc3d3ab0be96e908450b24a" prot="private" virt="non-virtual"><scope>Azura::FlyThroughCamera</scope><name>m_moveForwardFactor</name></member>
+      <member refid="class_azura_1_1_fly_through_camera_1ad67012bae86750ab1f4fd0d21f12830a" prot="private" virt="non-virtual"><scope>Azura::FlyThroughCamera</scope><name>m_moveRightFactor</name></member>
+      <member refid="class_azura_1_1_camera_1ab2a65b92334a90ebfe12fc458ea4b234" prot="protected" virt="non-virtual"><scope>Azura::FlyThroughCamera</scope><name>m_nearClip</name></member>
+      <member refid="class_azura_1_1_fly_through_camera_1a5126bc278e03b9986a34c43c75c1bc80" prot="private" virt="non-virtual"><scope>Azura::FlyThroughCamera</scope><name>m_phi</name></member>
+      <member refid="class_azura_1_1_camera_1a336b3e263dfa1950b332ea2ab3810ee6" prot="protected" virt="non-virtual"><scope>Azura::FlyThroughCamera</scope><name>m_proj</name></member>
+      <member refid="class_azura_1_1_camera_1a5850452746354ce316cf06b32d4f4d30" prot="protected" virt="non-virtual"><scope>Azura::FlyThroughCamera</scope><name>m_ref</name></member>
+      <member refid="class_azura_1_1_fly_through_camera_1a9fb44e760cf865c9ca030deab92516c0" prot="private" virt="non-virtual"><scope>Azura::FlyThroughCamera</scope><name>m_right</name></member>
+      <member refid="class_azura_1_1_camera_1a8bd1421f7f0e92612eb78ac4b0d34a36" prot="protected" virt="non-virtual"><scope>Azura::FlyThroughCamera</scope><name>m_sensitivity</name></member>
+      <member refid="class_azura_1_1_fly_through_camera_1aeb449103e9bcf6bcf96e037c19045264" prot="private" virt="non-virtual"><scope>Azura::FlyThroughCamera</scope><name>m_stepSize</name></member>
+      <member refid="class_azura_1_1_fly_through_camera_1a322cf5d102a825b1309086eed88c095a" prot="private" virt="non-virtual"><scope>Azura::FlyThroughCamera</scope><name>m_theta</name></member>
+      <member refid="class_azura_1_1_fly_through_camera_1a3cd743c429aa79758df82ea1945b170f" prot="private" virt="non-virtual"><scope>Azura::FlyThroughCamera</scope><name>m_up</name></member>
+      <member refid="class_azura_1_1_camera_1ae65a8bd07a0e4d0ce44ed33786012661" prot="protected" virt="non-virtual"><scope>Azura::FlyThroughCamera</scope><name>m_view</name></member>
+      <member refid="class_azura_1_1_camera_1aae8d1138090855f2d82d3912409055e3" prot="protected" virt="non-virtual"><scope>Azura::FlyThroughCamera</scope><name>m_viewProj</name></member>
+      <member refid="class_azura_1_1_camera_1a42f7c9b986fb87cbe772d2acbe7d1b21" prot="protected" virt="non-virtual"><scope>Azura::FlyThroughCamera</scope><name>m_width</name></member>
+      <member refid="class_azura_1_1_fly_through_camera_1a88fb9cdd607b53d7cdfa964ce40a7b90" prot="public" virt="virtual"><scope>Azura::FlyThroughCamera</scope><name>OnKeyEvent</name></member>
+      <member refid="class_azura_1_1_fly_through_camera_1a02b3bd1dbeb06096d22d24f4a7e62d43" prot="public" virt="virtual"><scope>Azura::FlyThroughCamera</scope><name>OnMouseEvent</name></member>
+      <member refid="class_azura_1_1_camera_1a51ef291ccccbd35e73e41e9c207af6ae" prot="public" virt="non-virtual"><scope>Azura::FlyThroughCamera</scope><name>operator=</name></member>
+      <member refid="class_azura_1_1_camera_1add80231b528c6ba768e4de340b5f71d4" prot="public" virt="non-virtual"><scope>Azura::FlyThroughCamera</scope><name>operator=</name></member>
+      <member refid="class_azura_1_1_fly_through_camera_1add630123f55728b7362de167416964fb" prot="public" virt="virtual"><scope>Azura::FlyThroughCamera</scope><name>Recompute</name></member>
+      <member refid="class_azura_1_1_fly_through_camera_1ac6196945e354e7733b50e700b9ac66a3" prot="public" virt="non-virtual"><scope>Azura::FlyThroughCamera</scope><name>RotateAboutRight</name></member>
+      <member refid="class_azura_1_1_fly_through_camera_1a02788bee0ac5bba5cf5870843768b01a" prot="public" virt="non-virtual"><scope>Azura::FlyThroughCamera</scope><name>RotateAboutUp</name></member>
+      <member refid="class_azura_1_1_fly_through_camera_1a3879c828e82f4bb41a4edd06abcea7c8" prot="public" virt="non-virtual"><scope>Azura::FlyThroughCamera</scope><name>SetAngleAboutRight</name></member>
+      <member refid="class_azura_1_1_camera_1a8a2cd598e281e2ca0dc736bd1fed0a19" prot="public" virt="non-virtual"><scope>Azura::FlyThroughCamera</scope><name>SetFarClip</name></member>
+      <member refid="class_azura_1_1_camera_1aa25f8854519a931687df59460ff41443" prot="public" virt="non-virtual"><scope>Azura::FlyThroughCamera</scope><name>SetFOVY</name></member>
+      <member refid="class_azura_1_1_camera_1af7ce54754c84907ea8b26aeeb6aae1bf" prot="public" virt="non-virtual"><scope>Azura::FlyThroughCamera</scope><name>SetNearClip</name></member>
+      <member refid="class_azura_1_1_camera_1a74669182aad5f2aadf8011aace57d3ef" prot="public" virt="non-virtual"><scope>Azura::FlyThroughCamera</scope><name>SetPosition</name></member>
+      <member refid="class_azura_1_1_camera_1a1ec84a387f952d20fad4b4280276b0a0" prot="public" virt="non-virtual"><scope>Azura::FlyThroughCamera</scope><name>SetReferencePoint</name></member>
+      <member refid="class_azura_1_1_camera_1a358f095f7bf139f5c4de44462360d1be" prot="public" virt="non-virtual"><scope>Azura::FlyThroughCamera</scope><name>SetSensitivity</name></member>
+      <member refid="class_azura_1_1_fly_through_camera_1a56d0f6fe1a25a0ca173dde75f30528e3" prot="public" virt="non-virtual"><scope>Azura::FlyThroughCamera</scope><name>SetTranslationStepSize</name></member>
+      <member refid="class_azura_1_1_fly_through_camera_1ab6f5adb199f14a9fc6f7fc8449636ea2" prot="public" virt="non-virtual"><scope>Azura::FlyThroughCamera</scope><name>TranslateAlongLook</name></member>
+      <member refid="class_azura_1_1_fly_through_camera_1a0c99c93e21cef03a9d7ff8018ec6a839" prot="public" virt="non-virtual"><scope>Azura::FlyThroughCamera</scope><name>TranslateAlongRight</name></member>
+      <member refid="class_azura_1_1_fly_through_camera_1a405ca3757fef26fe5c09850f78127838" prot="public" virt="virtual"><scope>Azura::FlyThroughCamera</scope><name>Update</name></member>
+      <member refid="class_azura_1_1_camera_1a82dbd592266b9df05367ca832b6a7183" prot="public" virt="virtual"><scope>Azura::FlyThroughCamera</scope><name>~Camera</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

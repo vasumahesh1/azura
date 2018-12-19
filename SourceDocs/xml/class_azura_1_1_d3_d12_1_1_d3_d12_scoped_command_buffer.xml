@@ -1,0 +1,216 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.8.14">
+  <compounddef id="class_azura_1_1_d3_d12_1_1_d3_d12_scoped_command_buffer" kind="class" language="C++" prot="public">
+    <compoundname>Azura::D3D12::D3D12ScopedCommandBuffer</compoundname>
+      <sectiondef kind="private-attrib">
+      <memberdef kind="variable" id="class_azura_1_1_d3_d12_1_1_d3_d12_scoped_command_buffer_1a0364594bd78bbf0a87e5b5a1fafdd9df" prot="private" static="no" mutable="no">
+        <type>D3D12_COMMAND_LIST_TYPE</type>
+        <definition>D3D12_COMMAND_LIST_TYPE Azura::D3D12::D3D12ScopedCommandBuffer::m_commandListType</definition>
+        <argsstring></argsstring>
+        <name>m_commandListType</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Source/Azura/RenderSystem/Inc/D3D12/D3D12ScopedCommandBuffer.h" line="19" column="1" bodyfile="Source/Azura/RenderSystem/Inc/D3D12/D3D12ScopedCommandBuffer.h" bodystart="19" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="class_azura_1_1_d3_d12_1_1_d3_d12_scoped_command_buffer_1aa8215ff475075b1fabaf27870f99cf59" prot="private" static="no" mutable="no">
+        <type>Microsoft::WRL::ComPtr&lt; ID3D12CommandAllocator &gt;</type>
+        <definition>Microsoft::WRL::ComPtr&lt;ID3D12CommandAllocator&gt; Azura::D3D12::D3D12ScopedCommandBuffer::m_commandAllocator</definition>
+        <argsstring></argsstring>
+        <name>m_commandAllocator</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Source/Azura/RenderSystem/Inc/D3D12/D3D12ScopedCommandBuffer.h" line="21" column="1" bodyfile="Source/Azura/RenderSystem/Inc/D3D12/D3D12ScopedCommandBuffer.h" bodystart="21" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="class_azura_1_1_d3_d12_1_1_d3_d12_scoped_command_buffer_1a080637649fd60f26a2f0beee65616114" prot="private" static="no" mutable="no">
+        <type>Microsoft::WRL::ComPtr&lt; ID3D12GraphicsCommandList &gt;</type>
+        <definition>Microsoft::WRL::ComPtr&lt;ID3D12GraphicsCommandList&gt; Azura::D3D12::D3D12ScopedCommandBuffer::m_commandList</definition>
+        <argsstring></argsstring>
+        <name>m_commandList</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Source/Azura/RenderSystem/Inc/D3D12/D3D12ScopedCommandBuffer.h" line="22" column="1" bodyfile="Source/Azura/RenderSystem/Inc/D3D12/D3D12ScopedCommandBuffer.h" bodystart="22" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="class_azura_1_1_d3_d12_1_1_d3_d12_scoped_command_buffer_1ae60570e26991d53d0889b899229104d8" prot="private" static="no" mutable="no">
+        <type>HANDLE</type>
+        <definition>HANDLE Azura::D3D12::D3D12ScopedCommandBuffer::m_fenceEvent</definition>
+        <argsstring></argsstring>
+        <name>m_fenceEvent</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Source/Azura/RenderSystem/Inc/D3D12/D3D12ScopedCommandBuffer.h" line="24" column="1" bodyfile="Source/Azura/RenderSystem/Inc/D3D12/D3D12ScopedCommandBuffer.h" bodystart="24" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="class_azura_1_1_d3_d12_1_1_d3_d12_scoped_command_buffer_1aabbdb810b867ea03abfdc539c6e3cf76" prot="private" static="no" mutable="no">
+        <type>U32</type>
+        <definition>U32 Azura::D3D12::D3D12ScopedCommandBuffer::m_fenceValue</definition>
+        <argsstring></argsstring>
+        <name>m_fenceValue</name>
+        <initializer>{0}</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Source/Azura/RenderSystem/Inc/D3D12/D3D12ScopedCommandBuffer.h" line="25" column="1" bodyfile="Source/Azura/RenderSystem/Inc/D3D12/D3D12ScopedCommandBuffer.h" bodystart="25" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="class_azura_1_1_d3_d12_1_1_d3_d12_scoped_command_buffer_1a45026094f4d641229acbe6334fac0310" prot="private" static="no" mutable="no">
+        <type>Microsoft::WRL::ComPtr&lt; ID3D12Fence &gt;</type>
+        <definition>Microsoft::WRL::ComPtr&lt;ID3D12Fence&gt; Azura::D3D12::D3D12ScopedCommandBuffer::m_fence</definition>
+        <argsstring></argsstring>
+        <name>m_fence</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Source/Azura/RenderSystem/Inc/D3D12/D3D12ScopedCommandBuffer.h" line="26" column="1" bodyfile="Source/Azura/RenderSystem/Inc/D3D12/D3D12ScopedCommandBuffer.h" bodystart="26" bodyend="-1"/>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="public-func">
+      <memberdef kind="function" id="class_azura_1_1_d3_d12_1_1_d3_d12_scoped_command_buffer_1a88f7ca0719b165af1dfc70dc15f697cb" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>Azura::D3D12::D3D12ScopedCommandBuffer::D3D12ScopedCommandBuffer</definition>
+        <argsstring>(const Microsoft::WRL::ComPtr&lt; ID3D12Device &gt; &amp;device, D3D12_COMMAND_LIST_TYPE commandListType, const Log &amp;log_D3D12RenderSystem)</argsstring>
+        <name>D3D12ScopedCommandBuffer</name>
+        <param>
+          <type>const Microsoft::WRL::ComPtr&lt; ID3D12Device &gt; &amp;</type>
+          <declname>device</declname>
+        </param>
+        <param>
+          <type>D3D12_COMMAND_LIST_TYPE</type>
+          <declname>commandListType</declname>
+        </param>
+        <param>
+          <type>const <ref refid="class_azura_1_1_log" kindref="compound">Log</ref> &amp;</type>
+          <declname>log_D3D12RenderSystem</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Source/Azura/RenderSystem/Inc/D3D12/D3D12ScopedCommandBuffer.h" line="10" column="1" bodyfile="Source/Azura/RenderSystem/Src/D3D12/D3D12ScopedCommandBuffer.cpp" bodystart="9" bodyend="17"/>
+      </memberdef>
+      <memberdef kind="function" id="class_azura_1_1_d3_d12_1_1_d3_d12_scoped_command_buffer_1ae9bb5b0041dcad81a0751125bda86e60" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void Azura::D3D12::D3D12ScopedCommandBuffer::CreateGraphicsCommandList</definition>
+        <argsstring>(const Microsoft::WRL::ComPtr&lt; ID3D12Device &gt; &amp;device, ID3D12PipelineState *pipelineState, const Log &amp;log_D3D12RenderSystem)</argsstring>
+        <name>CreateGraphicsCommandList</name>
+        <param>
+          <type>const Microsoft::WRL::ComPtr&lt; ID3D12Device &gt; &amp;</type>
+          <declname>device</declname>
+        </param>
+        <param>
+          <type>ID3D12PipelineState *</type>
+          <declname>pipelineState</declname>
+        </param>
+        <param>
+          <type>const <ref refid="class_azura_1_1_log" kindref="compound">Log</ref> &amp;</type>
+          <declname>log_D3D12RenderSystem</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Source/Azura/RenderSystem/Inc/D3D12/D3D12ScopedCommandBuffer.h" line="12" column="1" bodyfile="Source/Azura/RenderSystem/Src/D3D12/D3D12ScopedCommandBuffer.cpp" bodystart="19" bodyend="22"/>
+      </memberdef>
+      <memberdef kind="function" id="class_azura_1_1_d3_d12_1_1_d3_d12_scoped_command_buffer_1afca768251f30b44a5485fc700817b96d" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
+        <type>ID3D12GraphicsCommandList *</type>
+        <definition>ID3D12GraphicsCommandList * Azura::D3D12::D3D12ScopedCommandBuffer::GetGraphicsCommandList</definition>
+        <argsstring>() const</argsstring>
+        <name>GetGraphicsCommandList</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Source/Azura/RenderSystem/Inc/D3D12/D3D12ScopedCommandBuffer.h" line="13" column="1" bodyfile="Source/Azura/RenderSystem/Src/D3D12/D3D12ScopedCommandBuffer.cpp" bodystart="24" bodyend="26"/>
+      </memberdef>
+      <memberdef kind="function" id="class_azura_1_1_d3_d12_1_1_d3_d12_scoped_command_buffer_1aafc4eb7e48cbe1e596280530ad2b8110" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void Azura::D3D12::D3D12ScopedCommandBuffer::Execute</definition>
+        <argsstring>(const Microsoft::WRL::ComPtr&lt; ID3D12Device &gt; &amp;device, ID3D12CommandQueue *commandQueue, const Log &amp;log_D3D12RenderSystem)</argsstring>
+        <name>Execute</name>
+        <param>
+          <type>const Microsoft::WRL::ComPtr&lt; ID3D12Device &gt; &amp;</type>
+          <declname>device</declname>
+        </param>
+        <param>
+          <type>ID3D12CommandQueue *</type>
+          <declname>commandQueue</declname>
+        </param>
+        <param>
+          <type>const <ref refid="class_azura_1_1_log" kindref="compound">Log</ref> &amp;</type>
+          <declname>log_D3D12RenderSystem</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Source/Azura/RenderSystem/Inc/D3D12/D3D12ScopedCommandBuffer.h" line="15" column="1" bodyfile="Source/Azura/RenderSystem/Src/D3D12/D3D12ScopedCommandBuffer.cpp" bodystart="28" bodyend="42"/>
+      </memberdef>
+      <memberdef kind="function" id="class_azura_1_1_d3_d12_1_1_d3_d12_scoped_command_buffer_1a2bacb1e866e0de8007011d15917daaba" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void Azura::D3D12::D3D12ScopedCommandBuffer::WaitForComplete</definition>
+        <argsstring>(ID3D12CommandQueue *commandQueue, const Log &amp;log_D3D12RenderSystem)</argsstring>
+        <name>WaitForComplete</name>
+        <param>
+          <type>ID3D12CommandQueue *</type>
+          <declname>commandQueue</declname>
+        </param>
+        <param>
+          <type>const <ref refid="class_azura_1_1_log" kindref="compound">Log</ref> &amp;</type>
+          <declname>log_D3D12RenderSystem</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Source/Azura/RenderSystem/Inc/D3D12/D3D12ScopedCommandBuffer.h" line="16" column="1" bodyfile="Source/Azura/RenderSystem/Src/D3D12/D3D12ScopedCommandBuffer.cpp" bodystart="44" bodyend="52"/>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <location file="Source/Azura/RenderSystem/Inc/D3D12/D3D12ScopedCommandBuffer.h" line="7" column="1" bodyfile="Source/Azura/RenderSystem/Inc/D3D12/D3D12ScopedCommandBuffer.h" bodystart="7" bodyend="28"/>
+    <listofallmembers>
+      <member refid="class_azura_1_1_d3_d12_1_1_d3_d12_scoped_command_buffer_1ae9bb5b0041dcad81a0751125bda86e60" prot="public" virt="non-virtual"><scope>Azura::D3D12::D3D12ScopedCommandBuffer</scope><name>CreateGraphicsCommandList</name></member>
+      <member refid="class_azura_1_1_d3_d12_1_1_d3_d12_scoped_command_buffer_1a88f7ca0719b165af1dfc70dc15f697cb" prot="public" virt="non-virtual"><scope>Azura::D3D12::D3D12ScopedCommandBuffer</scope><name>D3D12ScopedCommandBuffer</name></member>
+      <member refid="class_azura_1_1_d3_d12_1_1_d3_d12_scoped_command_buffer_1aafc4eb7e48cbe1e596280530ad2b8110" prot="public" virt="non-virtual"><scope>Azura::D3D12::D3D12ScopedCommandBuffer</scope><name>Execute</name></member>
+      <member refid="class_azura_1_1_d3_d12_1_1_d3_d12_scoped_command_buffer_1afca768251f30b44a5485fc700817b96d" prot="public" virt="non-virtual"><scope>Azura::D3D12::D3D12ScopedCommandBuffer</scope><name>GetGraphicsCommandList</name></member>
+      <member refid="class_azura_1_1_d3_d12_1_1_d3_d12_scoped_command_buffer_1aa8215ff475075b1fabaf27870f99cf59" prot="private" virt="non-virtual"><scope>Azura::D3D12::D3D12ScopedCommandBuffer</scope><name>m_commandAllocator</name></member>
+      <member refid="class_azura_1_1_d3_d12_1_1_d3_d12_scoped_command_buffer_1a080637649fd60f26a2f0beee65616114" prot="private" virt="non-virtual"><scope>Azura::D3D12::D3D12ScopedCommandBuffer</scope><name>m_commandList</name></member>
+      <member refid="class_azura_1_1_d3_d12_1_1_d3_d12_scoped_command_buffer_1a0364594bd78bbf0a87e5b5a1fafdd9df" prot="private" virt="non-virtual"><scope>Azura::D3D12::D3D12ScopedCommandBuffer</scope><name>m_commandListType</name></member>
+      <member refid="class_azura_1_1_d3_d12_1_1_d3_d12_scoped_command_buffer_1a45026094f4d641229acbe6334fac0310" prot="private" virt="non-virtual"><scope>Azura::D3D12::D3D12ScopedCommandBuffer</scope><name>m_fence</name></member>
+      <member refid="class_azura_1_1_d3_d12_1_1_d3_d12_scoped_command_buffer_1ae60570e26991d53d0889b899229104d8" prot="private" virt="non-virtual"><scope>Azura::D3D12::D3D12ScopedCommandBuffer</scope><name>m_fenceEvent</name></member>
+      <member refid="class_azura_1_1_d3_d12_1_1_d3_d12_scoped_command_buffer_1aabbdb810b867ea03abfdc539c6e3cf76" prot="private" virt="non-virtual"><scope>Azura::D3D12::D3D12ScopedCommandBuffer</scope><name>m_fenceValue</name></member>
+      <member refid="class_azura_1_1_d3_d12_1_1_d3_d12_scoped_command_buffer_1a2bacb1e866e0de8007011d15917daaba" prot="public" virt="non-virtual"><scope>Azura::D3D12::D3D12ScopedCommandBuffer</scope><name>WaitForComplete</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

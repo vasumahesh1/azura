@@ -1,0 +1,90 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.8.14">
+  <compounddef id="_dibella_2_src_2_scene_2_primitives_2_transform_8cpp" kind="file" language="C++">
+    <compoundname>Transform.cpp</compoundname>
+    <includes local="yes">Transform.h</includes>
+    <includes local="yes">../../Core/Utils.h</includes>
+    <incdepgraph>
+      <node id="5162">
+        <label>Source/Dibella/Src/Scene/Primitives/Transform.cpp</label>
+        <link refid="_dibella_2_src_2_scene_2_primitives_2_transform_8cpp"/>
+        <childnode refid="5163" relation="include">
+        </childnode>
+        <childnode refid="5164" relation="include">
+        </childnode>
+      </node>
+      <node id="5164">
+        <label>../../Core/Utils.h</label>
+      </node>
+      <node id="5163">
+        <label>Transform.h</label>
+      </node>
+    </incdepgraph>
+    <innernamespace refid="namespace_dibella">Dibella</innernamespace>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <programlisting>
+<codeline lineno="1"><highlight class="preprocessor">#include<sp/>&quot;Transform.h&quot;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="2"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&quot;../../Core/Utils.h&quot;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="3"><highlight class="normal"></highlight></codeline>
+<codeline lineno="4"><highlight class="normal"></highlight><highlight class="keyword">namespace<sp/></highlight><highlight class="normal"><ref refid="namespace_dibella" kindref="compound">Dibella</ref><sp/>{</highlight></codeline>
+<codeline lineno="5"><highlight class="normal"></highlight></codeline>
+<codeline lineno="6"><highlight class="normal">Matrix3f<sp/>AsMatrix3(Matrix4f<sp/>matrix)<sp/>{</highlight></codeline>
+<codeline lineno="7"><highlight class="normal"><sp/><sp/>Matrix3f<sp/>result;</highlight></codeline>
+<codeline lineno="8"><highlight class="normal"><sp/><sp/>result.GetColumn(0)<sp/>=<sp/>matrix.GetColumn(0).xyz();</highlight></codeline>
+<codeline lineno="9"><highlight class="normal"><sp/><sp/>result.GetColumn(1)<sp/>=<sp/>matrix.GetColumn(1).xyz();</highlight></codeline>
+<codeline lineno="10"><highlight class="normal"><sp/><sp/>result.GetColumn(2)<sp/>=<sp/>matrix.GetColumn(2).xyz();</highlight></codeline>
+<codeline lineno="11"><highlight class="normal"><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>result;</highlight></codeline>
+<codeline lineno="12"><highlight class="normal">}</highlight></codeline>
+<codeline lineno="13"><highlight class="normal"></highlight></codeline>
+<codeline lineno="14"><highlight class="normal">Transform::Transform()<sp/>:<sp/>Transform(Vector3f(0.0f),<sp/>Vector3f(0.0f),<sp/>Vector3f(1.0f))<sp/>{}</highlight></codeline>
+<codeline lineno="15"><highlight class="normal"></highlight></codeline>
+<codeline lineno="16"><highlight class="normal">Transform::Transform(</highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>Vector3f&amp;<sp/>t,<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>Vector3f&amp;<sp/>r,<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>Vector3f&amp;<sp/>s)</highlight></codeline>
+<codeline lineno="17"><highlight class="normal"><sp/><sp/><sp/><sp/>:<sp/>mTranslation(t),<sp/>mRotation(r),<sp/>mScale(s)<sp/>{</highlight></codeline>
+<codeline lineno="18"><highlight class="normal"><sp/><sp/></highlight><highlight class="keyword">auto</highlight><highlight class="normal"><sp/>translate<sp/><sp/>=<sp/>Matrix4f();</highlight></codeline>
+<codeline lineno="19"><highlight class="normal"><sp/><sp/>translate(0,<sp/>3)<sp/>=<sp/>mTranslation[0];</highlight></codeline>
+<codeline lineno="20"><highlight class="normal"><sp/><sp/>translate(1,<sp/>3)<sp/>=<sp/>mTranslation[1];</highlight></codeline>
+<codeline lineno="21"><highlight class="normal"><sp/><sp/>translate(2,<sp/>3)<sp/>=<sp/>mTranslation[2];</highlight></codeline>
+<codeline lineno="22"><highlight class="normal"><sp/><sp/>translate(3,<sp/>3)<sp/>=<sp/>1.0f;</highlight></codeline>
+<codeline lineno="23"><highlight class="normal"></highlight></codeline>
+<codeline lineno="24"><highlight class="normal"><sp/><sp/></highlight><highlight class="keyword">auto</highlight><highlight class="normal"><sp/>rotationMat3<sp/>=<sp/>Matrix3f::RotationX(ToRadians(mRotation[0]))<sp/>*<sp/>Matrix3f::RotationY(ToRadians(mRotation[1]))</highlight></codeline>
+<codeline lineno="25"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>*<sp/>Matrix3f::RotationZ(ToRadians(mRotation[2]));</highlight></codeline>
+<codeline lineno="26"><highlight class="normal"></highlight></codeline>
+<codeline lineno="27"><highlight class="normal"><sp/><sp/></highlight><highlight class="keyword">auto</highlight><highlight class="normal"><sp/>rotation<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>=<sp/>Matrix4f();</highlight></codeline>
+<codeline lineno="28"><highlight class="normal"><sp/><sp/>rotation.GetColumn(0)<sp/>=<sp/>Vector4f(rotationMat3.GetColumn(0),<sp/>0.0f);</highlight></codeline>
+<codeline lineno="29"><highlight class="normal"><sp/><sp/>rotation.GetColumn(1)<sp/>=<sp/>Vector4f(rotationMat3.GetColumn(1),<sp/>0.0f);</highlight></codeline>
+<codeline lineno="30"><highlight class="normal"><sp/><sp/>rotation.GetColumn(2)<sp/>=<sp/>Vector4f(rotationMat3.GetColumn(2),<sp/>0.0f);</highlight></codeline>
+<codeline lineno="31"><highlight class="normal"><sp/><sp/>rotation.GetColumn(3)<sp/>=<sp/>Vector4f(0.0f,<sp/>0.0f,<sp/>0.0f,<sp/>1.0f);</highlight></codeline>
+<codeline lineno="32"><highlight class="normal"></highlight></codeline>
+<codeline lineno="33"><highlight class="normal"><sp/><sp/></highlight><highlight class="keyword">auto</highlight><highlight class="normal"><sp/>scale<sp/><sp/>=<sp/>Matrix4f::Identity();</highlight></codeline>
+<codeline lineno="34"><highlight class="normal"><sp/><sp/>scale(0,<sp/>0)<sp/>=<sp/>mScale[0];</highlight></codeline>
+<codeline lineno="35"><highlight class="normal"><sp/><sp/>scale(1,<sp/>1)<sp/>=<sp/>mScale[1];</highlight></codeline>
+<codeline lineno="36"><highlight class="normal"><sp/><sp/>scale(2,<sp/>2)<sp/>=<sp/>mScale[2];</highlight></codeline>
+<codeline lineno="37"><highlight class="normal"></highlight></codeline>
+<codeline lineno="38"><highlight class="normal"><sp/><sp/>mWorldTransform<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>=<sp/>translate<sp/>*<sp/>rotation<sp/>*<sp/>scale;</highlight></codeline>
+<codeline lineno="39"><highlight class="normal"><sp/><sp/>mInverseWorldTransform<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>=<sp/>mWorldTransform.Inverse();</highlight></codeline>
+<codeline lineno="40"><highlight class="normal"><sp/><sp/>mInverseTransposeWorldTransform<sp/>=<sp/>AsMatrix3((mWorldTransform.Transpose()).Inverse());</highlight></codeline>
+<codeline lineno="41"><highlight class="normal">}</highlight></codeline>
+<codeline lineno="42"><highlight class="normal"></highlight></codeline>
+<codeline lineno="43"><highlight class="normal"></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>Matrix4f&amp;<sp/>Transform::Get()</highlight><highlight class="keyword"><sp/>const<sp/></highlight><highlight class="normal">{</highlight></codeline>
+<codeline lineno="44"><highlight class="normal"><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>mWorldTransform;</highlight></codeline>
+<codeline lineno="45"><highlight class="normal">}</highlight></codeline>
+<codeline lineno="46"><highlight class="normal"></highlight></codeline>
+<codeline lineno="47"><highlight class="normal">Matrix3f<sp/>Transform::GetAsMatrix3()</highlight><highlight class="keyword"><sp/>const<sp/></highlight><highlight class="normal">{</highlight></codeline>
+<codeline lineno="48"><highlight class="normal"><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>AsMatrix3(mWorldTransform);</highlight></codeline>
+<codeline lineno="49"><highlight class="normal">}</highlight></codeline>
+<codeline lineno="50"><highlight class="normal"></highlight></codeline>
+<codeline lineno="51"><highlight class="normal"></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>Matrix4f&amp;<sp/>Transform::GetInverse()</highlight><highlight class="keyword"><sp/>const<sp/></highlight><highlight class="normal">{</highlight></codeline>
+<codeline lineno="52"><highlight class="normal"><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>mInverseWorldTransform;</highlight></codeline>
+<codeline lineno="53"><highlight class="normal">}</highlight></codeline>
+<codeline lineno="54"><highlight class="normal"></highlight></codeline>
+<codeline lineno="55"><highlight class="normal"></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>Matrix3f&amp;<sp/>Transform::GetInverseTranspose()</highlight><highlight class="keyword"><sp/>const<sp/></highlight><highlight class="normal">{</highlight></codeline>
+<codeline lineno="56"><highlight class="normal"><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>mInverseTransposeWorldTransform;</highlight></codeline>
+<codeline lineno="57"><highlight class="normal">}</highlight></codeline>
+<codeline lineno="58"><highlight class="normal">}<sp/><sp/></highlight><highlight class="comment">//<sp/>namespace<sp/>Dibella</highlight><highlight class="normal"></highlight></codeline>
+    </programlisting>
+    <location file="Source/Dibella/Src/Scene/Primitives/Transform.cpp"/>
+  </compounddef>
+</doxygen>

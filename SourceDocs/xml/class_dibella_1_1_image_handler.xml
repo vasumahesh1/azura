@@ -1,0 +1,147 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.8.14">
+  <compounddef id="class_dibella_1_1_image_handler" kind="class" language="C++" prot="public" abstract="yes">
+    <compoundname>Dibella::ImageHandler</compoundname>
+      <sectiondef kind="public-func">
+      <memberdef kind="function" id="class_dibella_1_1_image_handler_1a97fae4b5f2a0299f3b924a737f83dcc1" prot="public" static="no" const="no" explicit="no" inline="no" virt="virtual">
+        <type></type>
+        <definition>virtual Dibella::ImageHandler::~ImageHandler</definition>
+        <argsstring>()=default</argsstring>
+        <name>~ImageHandler</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Source/Dibella/Inc/Interfaces/ImageHandler.h" line="7" column="1"/>
+      </memberdef>
+      <memberdef kind="function" id="class_dibella_1_1_image_handler_1a9c56fb31eb51a4124bbf46b37f01e54c" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>Dibella::ImageHandler::ImageHandler</definition>
+        <argsstring>(const ImageHandler &amp;other)=default</argsstring>
+        <name>ImageHandler</name>
+        <param>
+          <type>const <ref refid="class_dibella_1_1_image_handler" kindref="compound">ImageHandler</ref> &amp;</type>
+          <declname>other</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Source/Dibella/Inc/Interfaces/ImageHandler.h" line="9" column="1"/>
+      </memberdef>
+      <memberdef kind="function" id="class_dibella_1_1_image_handler_1ac92781cdd96db68cc3ad3a3d0055f77a" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>Dibella::ImageHandler::ImageHandler</definition>
+        <argsstring>(ImageHandler &amp;&amp;other) noexcept=default</argsstring>
+        <name>ImageHandler</name>
+        <param>
+          <type><ref refid="class_dibella_1_1_image_handler" kindref="compound">ImageHandler</ref> &amp;&amp;</type>
+          <declname>other</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Source/Dibella/Inc/Interfaces/ImageHandler.h" line="10" column="1"/>
+      </memberdef>
+      <memberdef kind="function" id="class_dibella_1_1_image_handler_1a88a3ec90c34334c96f6c2a16172d4f74" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="class_dibella_1_1_image_handler" kindref="compound">ImageHandler</ref> &amp;</type>
+        <definition>ImageHandler&amp; Dibella::ImageHandler::operator=</definition>
+        <argsstring>(const ImageHandler &amp;other)=default</argsstring>
+        <name>operator=</name>
+        <param>
+          <type>const <ref refid="class_dibella_1_1_image_handler" kindref="compound">ImageHandler</ref> &amp;</type>
+          <declname>other</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Source/Dibella/Inc/Interfaces/ImageHandler.h" line="11" column="1"/>
+      </memberdef>
+      <memberdef kind="function" id="class_dibella_1_1_image_handler_1ade91254cc9732e6f48630ba955affce4" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="class_dibella_1_1_image_handler" kindref="compound">ImageHandler</ref> &amp;</type>
+        <definition>ImageHandler&amp; Dibella::ImageHandler::operator=</definition>
+        <argsstring>(ImageHandler &amp;&amp;other) noexcept=default</argsstring>
+        <name>operator=</name>
+        <param>
+          <type><ref refid="class_dibella_1_1_image_handler" kindref="compound">ImageHandler</ref> &amp;&amp;</type>
+          <declname>other</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Source/Dibella/Inc/Interfaces/ImageHandler.h" line="12" column="1"/>
+      </memberdef>
+      <memberdef kind="function" id="class_dibella_1_1_image_handler_1ad737726f9ecd1aa69401473fd15316f4" prot="public" static="no" const="yes" explicit="no" inline="no" virt="pure-virtual">
+        <type>SizeType</type>
+        <definition>virtual SizeType Dibella::ImageHandler::GetWidth</definition>
+        <argsstring>() const =0</argsstring>
+        <name>GetWidth</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Source/Dibella/Inc/Interfaces/ImageHandler.h" line="14" column="1"/>
+      </memberdef>
+      <memberdef kind="function" id="class_dibella_1_1_image_handler_1a8c07ac7eaebcd69c1cb089d256502aa3" prot="public" static="no" const="yes" explicit="no" inline="no" virt="pure-virtual">
+        <type>SizeType</type>
+        <definition>virtual SizeType Dibella::ImageHandler::GetHeight</definition>
+        <argsstring>() const =0</argsstring>
+        <name>GetHeight</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Source/Dibella/Inc/Interfaces/ImageHandler.h" line="15" column="1"/>
+      </memberdef>
+      <memberdef kind="function" id="class_dibella_1_1_image_handler_1aed78e543809c92e78d9cd54e013097ae" prot="public" static="no" const="yes" explicit="no" inline="no" virt="pure-virtual">
+        <type>Color3f</type>
+        <definition>virtual Color3f Dibella::ImageHandler::GetPixel</definition>
+        <argsstring>(Point2i pixelCoords) const =0</argsstring>
+        <name>GetPixel</name>
+        <param>
+          <type>Point2i</type>
+          <declname>pixelCoords</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Source/Dibella/Inc/Interfaces/ImageHandler.h" line="16" column="1"/>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <location file="Source/Dibella/Inc/Interfaces/ImageHandler.h" line="5" column="1" bodyfile="Source/Dibella/Inc/Interfaces/ImageHandler.h" bodystart="5" bodyend="17"/>
+    <listofallmembers>
+      <member refid="class_dibella_1_1_image_handler_1a8c07ac7eaebcd69c1cb089d256502aa3" prot="public" virt="pure-virtual"><scope>Dibella::ImageHandler</scope><name>GetHeight</name></member>
+      <member refid="class_dibella_1_1_image_handler_1aed78e543809c92e78d9cd54e013097ae" prot="public" virt="pure-virtual"><scope>Dibella::ImageHandler</scope><name>GetPixel</name></member>
+      <member refid="class_dibella_1_1_image_handler_1ad737726f9ecd1aa69401473fd15316f4" prot="public" virt="pure-virtual"><scope>Dibella::ImageHandler</scope><name>GetWidth</name></member>
+      <member refid="class_dibella_1_1_image_handler_1a9c56fb31eb51a4124bbf46b37f01e54c" prot="public" virt="non-virtual"><scope>Dibella::ImageHandler</scope><name>ImageHandler</name></member>
+      <member refid="class_dibella_1_1_image_handler_1ac92781cdd96db68cc3ad3a3d0055f77a" prot="public" virt="non-virtual"><scope>Dibella::ImageHandler</scope><name>ImageHandler</name></member>
+      <member refid="class_dibella_1_1_image_handler_1a88a3ec90c34334c96f6c2a16172d4f74" prot="public" virt="non-virtual"><scope>Dibella::ImageHandler</scope><name>operator=</name></member>
+      <member refid="class_dibella_1_1_image_handler_1ade91254cc9732e6f48630ba955affce4" prot="public" virt="non-virtual"><scope>Dibella::ImageHandler</scope><name>operator=</name></member>
+      <member refid="class_dibella_1_1_image_handler_1a97fae4b5f2a0299f3b924a737f83dcc1" prot="public" virt="virtual"><scope>Dibella::ImageHandler</scope><name>~ImageHandler</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

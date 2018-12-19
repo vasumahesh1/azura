@@ -1,0 +1,122 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.8.14">
+  <compounddef id="_shape_8h" kind="file" language="C++">
+    <compoundname>Shape.h</compoundname>
+    <includes refid="_dibella_2_inc_2_core_2_types_8h" local="yes">../../Core/Types.h</includes>
+    <includes refid="_intersection_8h" local="yes">../../RayTracing/Primitives/Intersection.h</includes>
+    <includes refid="_dibella_2_inc_2_scene_2_primitives_2_transform_8h" local="yes">Transform.h</includes>
+    <includedby refid="_scene_object_8cpp" local="yes">Source/Dibella/Src/Scene/Primitives/SceneObject.cpp</includedby>
+    <includedby refid="_shape_8cpp" local="yes">Source/Dibella/Src/Scene/Primitives/Shape.cpp</includedby>
+    <incdepgraph>
+      <node id="4967">
+        <label>mathfu/vector.h</label>
+      </node>
+      <node id="4965">
+        <label>string</label>
+      </node>
+      <node id="4961">
+        <label>Source/Dibella/Inc/Scene/Primitives/Shape.h</label>
+        <link refid="_shape_8h"/>
+        <childnode refid="4962" relation="include">
+        </childnode>
+        <childnode refid="4968" relation="include">
+        </childnode>
+        <childnode refid="4970" relation="include">
+        </childnode>
+      </node>
+      <node id="4970">
+        <label>Transform.h</label>
+        <link refid="_dibella_2_inc_2_scene_2_primitives_2_transform_8h_source"/>
+        <childnode refid="4962" relation="include">
+        </childnode>
+      </node>
+      <node id="4962">
+        <label>../../Core/Types.h</label>
+        <link refid="_dibella_2_inc_2_core_2_types_8h_source"/>
+        <childnode refid="4963" relation="include">
+        </childnode>
+        <childnode refid="4964" relation="include">
+        </childnode>
+        <childnode refid="4965" relation="include">
+        </childnode>
+        <childnode refid="4966" relation="include">
+        </childnode>
+        <childnode refid="4967" relation="include">
+        </childnode>
+      </node>
+      <node id="4969">
+        <label>Ray.h</label>
+        <link refid="_ray_8h_source"/>
+        <childnode refid="4962" relation="include">
+        </childnode>
+      </node>
+      <node id="4968">
+        <label>../../RayTracing/Primitives/Intersection.h</label>
+        <link refid="_intersection_8h_source"/>
+        <childnode refid="4962" relation="include">
+        </childnode>
+        <childnode refid="4969" relation="include">
+        </childnode>
+      </node>
+      <node id="4963">
+        <label>ToolsCore.h</label>
+      </node>
+      <node id="4964">
+        <label>cstddef</label>
+      </node>
+      <node id="4966">
+        <label>mathfu/matrix.h</label>
+      </node>
+    </incdepgraph>
+    <innerclass refid="class_dibella_1_1_shape" prot="public">Dibella::Shape</innerclass>
+    <innernamespace refid="namespace_dibella">Dibella</innernamespace>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <programlisting>
+<codeline lineno="1"><highlight class="preprocessor">#pragma<sp/>once</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="2"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&quot;../../Core/Types.h&quot;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="3"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&quot;../../RayTracing/Primitives/Intersection.h&quot;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="4"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&quot;Transform.h&quot;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="5"><highlight class="normal"></highlight></codeline>
+<codeline lineno="6"><highlight class="normal"></highlight><highlight class="keyword">namespace<sp/></highlight><highlight class="normal"><ref refid="namespace_dibella" kindref="compound">Dibella</ref><sp/>{</highlight></codeline>
+<codeline lineno="7" refid="class_dibella_1_1_shape" refkind="compound"><highlight class="normal"></highlight><highlight class="keyword">class<sp/></highlight><highlight class="normal"><ref refid="class_dibella_1_1_shape" kindref="compound">Shape</ref><sp/>{</highlight></codeline>
+<codeline lineno="8"><highlight class="normal"><sp/></highlight><highlight class="keyword">public</highlight><highlight class="normal">:</highlight></codeline>
+<codeline lineno="9"><highlight class="normal"><sp/><sp/></highlight><highlight class="keyword">virtual</highlight><highlight class="normal"><sp/>~<ref refid="class_dibella_1_1_shape" kindref="compound">Shape</ref>()<sp/>=<sp/></highlight><highlight class="keywordflow">default</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="10"><highlight class="normal"></highlight></codeline>
+<codeline lineno="11"><highlight class="normal"><sp/><sp/><ref refid="class_dibella_1_1_shape" kindref="compound">Shape</ref>(</highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/><ref refid="class_dibella_1_1_shape" kindref="compound">Shape</ref>&amp;<sp/>other)<sp/>=<sp/></highlight><highlight class="keywordflow">default</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="12"><highlight class="normal"><sp/><sp/><ref refid="class_dibella_1_1_shape" kindref="compound">Shape</ref>(<ref refid="class_dibella_1_1_shape" kindref="compound">Shape</ref>&amp;&amp;<sp/>other)<sp/><sp/><sp/><sp/><sp/><sp/>=<sp/></highlight><highlight class="keywordflow">default</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="13"><highlight class="normal"><sp/><sp/><ref refid="class_dibella_1_1_shape" kindref="compound">Shape</ref>&amp;<sp/>operator=(</highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/><ref refid="class_dibella_1_1_shape" kindref="compound">Shape</ref>&amp;<sp/>other)<sp/>=<sp/></highlight><highlight class="keywordflow">default</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="14"><highlight class="normal"><sp/><sp/><ref refid="class_dibella_1_1_shape" kindref="compound">Shape</ref>&amp;<sp/>operator=(<ref refid="class_dibella_1_1_shape" kindref="compound">Shape</ref>&amp;&amp;<sp/>other)<sp/>noexcept<sp/>=<sp/></highlight><highlight class="keywordflow">default</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="15"><highlight class="normal"></highlight></codeline>
+<codeline lineno="16"><highlight class="normal"><sp/><sp/></highlight><highlight class="comment">//<sp/>Find<sp/>the<sp/>intersection<sp/>of<sp/>the<sp/>ray<sp/>with<sp/>this<sp/>Shape</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="17"><highlight class="normal"><sp/><sp/></highlight><highlight class="keyword">virtual</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">bool</highlight><highlight class="normal"><sp/>Intersect(</highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/><ref refid="class_dibella_1_1_ray" kindref="compound">Ray</ref>&amp;<sp/>ray,<sp/><ref refid="class_dibella_1_1_intersection" kindref="compound">Intersection</ref>*<sp/>isect)<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>=<sp/>0;</highlight></codeline>
+<codeline lineno="18"><highlight class="normal"><sp/><sp/></highlight><highlight class="keyword">virtual</highlight><highlight class="normal"><sp/>Point2f<sp/>GetUVCoordinates(</highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>Point3f&amp;<sp/>point)<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/>=<sp/>0;</highlight></codeline>
+<codeline lineno="19"><highlight class="normal"></highlight></codeline>
+<codeline lineno="20"><highlight class="normal"><sp/><sp/></highlight><highlight class="comment">//<sp/>Given<sp/>a<sp/>t<sp/>parameterization<sp/>of<sp/>the<sp/>Ray,<sp/>compute<sp/>all<sp/>requisite<sp/>intersection<sp/>information</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="21"><highlight class="normal"><sp/><sp/></highlight><highlight class="keyword">virtual</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/>InitializeIntersection(<ref refid="class_dibella_1_1_intersection" kindref="compound">Intersection</ref>*<sp/>isect,<sp/>Float<sp/>paramT,<sp/>Point3f<sp/>pLocal)<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="22"><highlight class="normal"></highlight></codeline>
+<codeline lineno="23"><highlight class="normal"><sp/><sp/></highlight><highlight class="comment">//<sp/>A<sp/>helper<sp/>function<sp/>for<sp/>computing<sp/>the<sp/>world-space<sp/>normal,<sp/>tangent,<sp/>and<sp/>bitangent<sp/>at<sp/>local-space<sp/>point<sp/>P</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="24"><highlight class="normal"><sp/><sp/></highlight><highlight class="keyword">virtual</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/>ComputeTBN(</highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>Point3f&amp;<sp/>point,<sp/>Normal3f*<sp/>nor,<sp/>Vector3f*<sp/>tan,<sp/>Vector3f*<sp/>bit)<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>=<sp/>0;</highlight></codeline>
+<codeline lineno="25"><highlight class="normal"></highlight></codeline>
+<codeline lineno="26"><highlight class="normal"><sp/><sp/></highlight><highlight class="comment">//<sp/>Compute<sp/>and<sp/>return<sp/>the<sp/>surface<sp/>area<sp/>of<sp/>the<sp/>shape<sp/>in<sp/>world<sp/>space</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="27"><highlight class="normal"><sp/><sp/></highlight><highlight class="comment">//<sp/>i.e.<sp/>you<sp/>must<sp/>account<sp/>for<sp/>the<sp/>Transform<sp/>applied<sp/>to<sp/>the<sp/>Shape</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="28"><highlight class="normal"><sp/><sp/></highlight><highlight class="keyword">virtual</highlight><highlight class="normal"><sp/>Float<sp/>Area()<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>=<sp/>0;</highlight></codeline>
+<codeline lineno="29"><highlight class="normal"></highlight></codeline>
+<codeline lineno="30"><highlight class="normal"><sp/><sp/></highlight><highlight class="comment">//<sp/>Invokes<sp/>the<sp/>Sample<sp/>below<sp/>and<sp/>converts<sp/>the<sp/>PDF<sp/>from<sp/>an<sp/>area<sp/>measure</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="31"><highlight class="normal"><sp/><sp/></highlight><highlight class="comment">//<sp/>to<sp/>a<sp/>solid<sp/>angle<sp/>measure</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="32"><highlight class="normal"><sp/><sp/></highlight><highlight class="keyword">virtual</highlight><highlight class="normal"><sp/><ref refid="class_dibella_1_1_intersection" kindref="compound">Intersection</ref><sp/><ref refid="struct_sample" kindref="compound">Sample</ref>(</highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/><ref refid="class_dibella_1_1_intersection" kindref="compound">Intersection</ref>&amp;<sp/>ref,<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>Point2f&amp;<sp/>xi,<sp/>Float*<sp/>pdf)<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="33"><highlight class="normal"></highlight></codeline>
+<codeline lineno="34"><highlight class="normal"><sp/><sp/></highlight><highlight class="comment">//<sp/>Sample<sp/>a<sp/>point<sp/>on<sp/>the<sp/>surface<sp/>of<sp/>the<sp/>shape<sp/>and<sp/>return<sp/>the<sp/>PDF<sp/>with</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="35"><highlight class="normal"><sp/><sp/></highlight><highlight class="comment">//<sp/>respect<sp/>to<sp/>area<sp/>on<sp/>the<sp/>surface.</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="36"><highlight class="normal"><sp/><sp/></highlight><highlight class="keyword">virtual</highlight><highlight class="normal"><sp/><ref refid="class_dibella_1_1_intersection" kindref="compound">Intersection</ref><sp/><ref refid="struct_sample" kindref="compound">Sample</ref>(</highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>Point2f&amp;<sp/>xi,<sp/>Float*<sp/>pdf)<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>=<sp/>0;</highlight></codeline>
+<codeline lineno="37"><highlight class="normal"></highlight></codeline>
+<codeline lineno="38"><highlight class="normal"><sp/></highlight><highlight class="keyword">protected</highlight><highlight class="normal">:</highlight></codeline>
+<codeline lineno="39"><highlight class="normal"><sp/><sp/><ref refid="class_dibella_1_1_transform" kindref="compound">Transform</ref><sp/>mTransform;</highlight></codeline>
+<codeline lineno="40"><highlight class="normal">};</highlight></codeline>
+<codeline lineno="41"><highlight class="normal">}<sp/><sp/></highlight><highlight class="comment">//<sp/>namespace<sp/>Dibella</highlight><highlight class="normal"></highlight></codeline>
+    </programlisting>
+    <location file="Source/Dibella/Inc/Scene/Primitives/Shape.h"/>
+  </compounddef>
+</doxygen>
