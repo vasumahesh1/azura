@@ -20,6 +20,6 @@ Active Draw APIs on Azura:
 
 ### [Render Samples](https://vasumahesh1.github.io/azura_docs/#render-samples)
 
-### API Docs under construction
+### [API & Future Docs (under construction)](https://vasumahesh1.github.io/azura/html/)
 
 
