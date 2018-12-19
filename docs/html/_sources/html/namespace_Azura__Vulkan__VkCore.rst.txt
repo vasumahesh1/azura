@@ -43,9 +43,9 @@ Functions
 
 - :ref:`exhale_function__vk_core_8h_1abd77ad56c4a78b01c4cb5938d7b881b0`
 
-- :ref:`exhale_function__vk_core_8h_1a8568286acb69a8c7280f89556f37f734`
-
 - :ref:`exhale_function__vk_core_8h_1aa219c63788f055a98d342e5743dbf726`
+
+- :ref:`exhale_function__vk_core_8h_1a8568286acb69a8c7280f89556f37f734`
 
 - :ref:`exhale_function__vk_core_8h_1a0d34232378b5917f10fb741c78228df7`
 
@@ -69,9 +69,9 @@ Functions
 
 - :ref:`exhale_function__vk_core_8h_1afd600df4cb906841d6d07e2cd3b7f8e8`
 
-- :ref:`exhale_function__vk_core_8h_1a6aade5642f9987fbe999a8d14718d4c3`
-
 - :ref:`exhale_function__vk_core_8h_1a7a434d3d6d29e4b850bad8709d7d0462`
+
+- :ref:`exhale_function__vk_core_8h_1a6aade5642f9987fbe999a8d14718d4c3`
 
 - :ref:`exhale_function__vk_core_8h_1af26f6173bf1a0dc082a296e737ed10f1`
 
@@ -93,15 +93,15 @@ Functions
 
 - :ref:`exhale_function__vk_core_8h_1acd5ec39956e6e589cbf2bf39397ff512`
 
-- :ref:`exhale_function__vk_core_8h_1a2981c19c708453994b7c5a36c272fa5e`
-
 - :ref:`exhale_function__vk_core_8h_1a98068b2973992fa9e6ff41837afac8fc`
+
+- :ref:`exhale_function__vk_core_8h_1a2981c19c708453994b7c5a36c272fa5e`
 
 - :ref:`exhale_function__vk_core_8h_1af8d79f1edf4dd72141174565fb8dba0b`
 
-- :ref:`exhale_function__vk_core_8h_1a210eb248305cd38a325236e89a26d885`
-
 - :ref:`exhale_function__vk_core_8h_1a75e685ba5e425453cc70dbfe5f822505`
+
+- :ref:`exhale_function__vk_core_8h_1a210eb248305cd38a325236e89a26d885`
 
 - :ref:`exhale_function__vk_core_8h_1a165562f89beaa498c1db8b188bf82cd4`
 

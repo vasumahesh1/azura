@@ -1,0 +1,304 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>Procedural Planet &mdash; Azura  documentation</title>
+  
+
+  
+  
+  
+  
+
+  
+
+  
+  
+    
+
+  
+
+  <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/collapsible-lists\css\tree_view.css" type="text/css" />
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Azura API" href="../html/apiRoot.html" />
+    <link rel="prev" title="Projects" href="../projects.html" /> 
+
+  
+  <script src="../_static/js/modernizr.min.js"></script>
+
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search">
+          
+
+          
+            <a href="../index.html" class="icon icon-home"> Azura
+          
+
+          
+          </a>
+
+          
+            
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../setting-up.html">Setting Up</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../build-instructions.html">Build Instructions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../cmake-wrappers.html">CMake Wrappers</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../projects.html">Projects</a><ul class="current">
+<li class="toctree-l2 current"><a class="current reference internal" href="#">Procedural Planet</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#supported-apis">Supported APIs</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#features">Features</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#g-buffer-layout">G-Buffer Layout</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#project-notes">Project Notes</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../html/apiRoot.html">Azura API</a></li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">Azura</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../index.html">Docs</a> &raquo;</li>
+        
+          <li><a href="../projects.html">Projects</a> &raquo;</li>
+        
+      <li>Procedural Planet</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            <a href="../_sources/Projects/procedural-planet.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="procedural-planet">
+<h1>Procedural Planet<a class="headerlink" href="#procedural-planet" title="Permalink to this headline">¶</a></h1>
+<a class="reference external image-reference" href="https://github.com/vasumahesh1/azura/raw/dev/Source/Samples/1_ProceduralPlanet/Images/planet_low.gif"><img alt="" src="https://github.com/vasumahesh1/azura/raw/dev/Source/Samples/1_ProceduralPlanet/Images/planet_low.gif" /></a>
+<div class="section" id="supported-apis">
+<h2>Supported APIs<a class="headerlink" href="#supported-apis" title="Permalink to this headline">¶</a></h2>
+<table border="1" class="docutils">
+<colgroup>
+<col width="50%" />
+<col width="50%" />
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head">D3D12</th>
+<th class="head">Vulkan</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even"><td>Supported</td>
+<td>Supported</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="section" id="features">
+<h2>Features<a class="headerlink" href="#features" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li>Traditional Deferred Pipeline</li>
+<li>2 G-Buffers
+* UV &amp; Terrain Elevation
+* Normals</li>
+<li>Reconstruct view space data back in shading phase from buffers</li>
+<li>Multiple Passes - Noise Pass &amp; Sky Pass –&gt; Terrain Pass –&gt; Water Pass</li>
+<li>Blending for Water Pass to be rendered on top of Terrain</li>
+</ul>
+</div>
+<div class="section" id="g-buffer-layout">
+<h2>G-Buffer Layout<a class="headerlink" href="#g-buffer-layout" title="Permalink to this headline">¶</a></h2>
+<table border="1" class="docutils" id="id1">
+<caption><span class="caption-text">G-Buffer Ouputs</span><a class="headerlink" href="#id1" title="Permalink to this table">¶</a></caption>
+<colgroup>
+<col width="33%" />
+<col width="33%" />
+<col width="33%" />
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head">Depth Buffer</th>
+<th class="head">G-Buffer 1</th>
+<th class="head">G-Buffer 2</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even"><td><a class="first last reference external image-reference" href="https://github.com/vasumahesh1/azura/raw/master/Source/Samples/1_ProceduralPlanet/Images/frame_depth.PNG"><img alt="" src="https://github.com/vasumahesh1/azura/raw/master/Source/Samples/1_ProceduralPlanet/Images/frame_depth.PNG" /></a>
+</td>
+<td><a class="first last reference external image-reference" href="https://github.com/vasumahesh1/azura/raw/master/Source/Samples/1_ProceduralPlanet/Images/frame_normal.PNG"><img alt="" src="https://github.com/vasumahesh1/azura/raw/master/Source/Samples/1_ProceduralPlanet/Images/frame_normal.PNG" /></a>
+</td>
+<td><a class="first last reference external image-reference" href="https://github.com/vasumahesh1/azura/raw/master/Source/Samples/1_ProceduralPlanet/Images/frame_uv_elevation.PNG"><img alt="" src="https://github.com/vasumahesh1/azura/raw/master/Source/Samples/1_ProceduralPlanet/Images/frame_uv_elevation.PNG" /></a>
+</td>
+</tr>
+<tr class="row-odd"><td>float: Depth</td>
+<td>float4: Normals</td>
+<td>float4: UV + Elevation</td>
+</tr>
+</tbody>
+</table>
+<table border="1" class="docutils" id="id2">
+<caption><span class="caption-text">Final Frame</span><a class="headerlink" href="#id2" title="Permalink to this table">¶</a></caption>
+<colgroup>
+<col width="100%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td><a class="first last reference external image-reference" href="https://github.com/vasumahesh1/azura/raw/master/Source/Samples/1_ProceduralPlanet/Images/frame_main.PNG"><img alt="" src="https://github.com/vasumahesh1/azura/raw/master/Source/Samples/1_ProceduralPlanet/Images/frame_main.PNG" /></a>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="section" id="project-notes">
+<h2>Project Notes<a class="headerlink" href="#project-notes" title="Permalink to this headline">¶</a></h2>
+<p>This was the first project sample to be made on Azura. It was first built on Vulkan and then later ported to D3D12. You can find the source code for this sample <a class="reference external" href="https://github.com/vasumahesh1/azura/tree/master/Source/Samples/1_ProceduralPlanet">here</a>.</p>
+</div>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="../html/apiRoot.html" class="btn btn-neutral float-right" title="Azura API" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="../projects.html" class="btn btn-neutral" title="Projects" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2018, Vasu Mahesh
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  
+
+    
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+        <script type="text/javascript" src="../_static/jquery.js"></script>
+        <script type="text/javascript" src="../_static/underscore.js"></script>
+        <script type="text/javascript" src="../_static/doctools.js"></script>
+        <script type="text/javascript" src="../_static/collapsible-lists\js\CollapsibleLists.compressed.js"></script>
+        <script type="text/javascript" src="../_static/collapsible-lists\js\apply-collapsible-lists.js"></script>
+    
+
+  
+
+  <script type="text/javascript" src="../_static/js/theme.js"></script>
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

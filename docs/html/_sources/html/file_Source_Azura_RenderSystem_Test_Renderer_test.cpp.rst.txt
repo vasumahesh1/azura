@@ -58,13 +58,13 @@ Functions
 
 - :ref:`exhale_function__renderer__test_8cpp_1a4c754279d31080bb91e871092f68edc0`
 
-- :ref:`exhale_function__renderer__test_8cpp_1af19a8b3f5b14ec60e16c76ad12cf18d0`
-
-- :ref:`exhale_function__renderer__test_8cpp_1ab52b3cab02b885b8cc11c255e9e52f77`
+- :ref:`exhale_function__renderer__test_8cpp_1ad8445bcc24b131cf1f2e41c39d745b81`
 
 - :ref:`exhale_function__renderer__test_8cpp_1a5b3bf7c425f0f30a67c4ef908a792ed9`
 
-- :ref:`exhale_function__renderer__test_8cpp_1ad8445bcc24b131cf1f2e41c39d745b81`
+- :ref:`exhale_function__renderer__test_8cpp_1af19a8b3f5b14ec60e16c76ad12cf18d0`
+
+- :ref:`exhale_function__renderer__test_8cpp_1ab52b3cab02b885b8cc11c255e9e52f77`
 
 
 Variables

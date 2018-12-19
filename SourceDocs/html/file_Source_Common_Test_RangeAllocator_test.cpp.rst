@@ -53,9 +53,9 @@ Functions
 ---------
 
 
+- :ref:`exhale_function__range_allocator__test_8cpp_1ac6678fb997768bedeee9a14e90e7565e`
+
 - :ref:`exhale_function__range_allocator__test_8cpp_1a581708342a1e155be0b73853defab73e`
 
 - :ref:`exhale_function__range_allocator__test_8cpp_1a338f5bcc00abc5a8fe172cfdda1c0911`
-
-- :ref:`exhale_function__range_allocator__test_8cpp_1ac6678fb997768bedeee9a14e90e7565e`
 

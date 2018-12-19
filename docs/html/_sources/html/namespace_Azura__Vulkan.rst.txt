@@ -83,8 +83,6 @@ Functions
 
 - :ref:`exhale_function__vk_type_mapping_8cpp_1a4a38b6d16db436c0a61aa4c31afed0c3`
 
-- :ref:`exhale_function__vk_type_mapping_8h_1aad1bce6080ce322f37234a64c371a938`
-
 - :ref:`exhale_function__vk_type_mapping_8h_1a2274f0ae40490d72977d4cdbb9176d5f`
 
 - :ref:`exhale_function__vk_type_mapping_8h_1a5d5c4ab0a48730622ead77eaf25ba81e`
@@ -108,6 +106,8 @@ Functions
 - :ref:`exhale_function__vk_type_mapping_8h_1a16e7b3eb02ed0e49f4f068ed026bae8b`
 
 - :ref:`exhale_function__vk_type_mapping_8h_1af9e815320a38705557e7b220b34adfe4`
+
+- :ref:`exhale_function__vk_type_mapping_8h_1aad1bce6080ce322f37234a64c371a938`
 
 - :ref:`exhale_function__vk_type_mapping_8h_1a503ffe6d4ae218b0bf04ae7fb2362a68`
 

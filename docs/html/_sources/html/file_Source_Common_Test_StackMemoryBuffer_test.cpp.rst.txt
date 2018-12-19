@@ -40,7 +40,7 @@ Functions
 ---------
 
 
-- :ref:`exhale_function__stack_memory_buffer__test_8cpp_1a91a552ddf6691ee274a64fa76db1e70e`
-
 - :ref:`exhale_function__stack_memory_buffer__test_8cpp_1a6a3ba7321ef4461b8d231a7089ff326a`
+
+- :ref:`exhale_function__stack_memory_buffer__test_8cpp_1a91a552ddf6691ee274a64fa76db1e70e`
 

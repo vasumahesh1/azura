@@ -42,12 +42,6 @@ Functions
 ---------
 
 
-- :ref:`exhale_function__array__test_8cpp_1aa4ccd4dbbabc5b5df275d80ca2f3ee4f`
-
-- :ref:`exhale_function__array__test_8cpp_1a9f58c064e0947a4af016068235b393b6`
-
-- :ref:`exhale_function__array__test_8cpp_1ab64e8a12bb3b50b7bdc205e2a624f0b1`
-
 - :ref:`exhale_function__array__test_8cpp_1aebf49bf693f29cd68343c5a862452359`
 
 - :ref:`exhale_function__array__test_8cpp_1aa22d0d971551247b476531a61caac3b9`
@@ -59,4 +53,10 @@ Functions
 - :ref:`exhale_function__array__test_8cpp_1a7d0a863b946b5e9914f39835cbd88aea`
 
 - :ref:`exhale_function__array__test_8cpp_1a3a4dea2e519474d86e7c9ca54d5db786`
+
+- :ref:`exhale_function__array__test_8cpp_1aa4ccd4dbbabc5b5df275d80ca2f3ee4f`
+
+- :ref:`exhale_function__array__test_8cpp_1a9f58c064e0947a4af016068235b393b6`
+
+- :ref:`exhale_function__array__test_8cpp_1ab64e8a12bb3b50b7bdc205e2a624f0b1`
 
