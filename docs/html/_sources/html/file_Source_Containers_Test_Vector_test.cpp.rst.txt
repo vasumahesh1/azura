@@ -61,28 +61,6 @@ Functions
 
 - :ref:`exhale_function__vector__test_8cpp_1a9637a617f79d9faa89a839e5269841ab`
 
-- :ref:`exhale_function__vector__test_8cpp_1a4ac40aff8e1184fb8c886e280f208590`
-
-- :ref:`exhale_function__vector__test_8cpp_1a63769a03246d627157b19416c8db4f8a`
-
-- :ref:`exhale_function__vector__test_8cpp_1a7145e6c9cd089b6446d61395b733642f`
-
-- :ref:`exhale_function__vector__test_8cpp_1a9046a79e22810d3bb17dc469bddb1860`
-
-- :ref:`exhale_function__vector__test_8cpp_1a5c13c950e4599f1336bc7d01796cfcb6`
-
-- :ref:`exhale_function__vector__test_8cpp_1a2ad905e33b6c5548413a0ed3ed43f2ab`
-
-- :ref:`exhale_function__vector__test_8cpp_1aecd7e7aded1d850d6721541c60f5858e`
-
-- :ref:`exhale_function__vector__test_8cpp_1a365263a1064786805ae441b3a7f79981`
-
-- :ref:`exhale_function__vector__test_8cpp_1ab6ee0465791487b15571b0e642b4c6aa`
-
-- :ref:`exhale_function__vector__test_8cpp_1a16206387f4dd37f047205378f6871faa`
-
-- :ref:`exhale_function__vector__test_8cpp_1a56c49ac4cec448183df6bde019b6d9f2`
-
 - :ref:`exhale_function__vector__test_8cpp_1a9e66b7b16453e01b65653a8cd8e2f776`
 
 - :ref:`exhale_function__vector__test_8cpp_1a027654fd4e94e321e256818d9e646680`
@@ -116,4 +94,26 @@ Functions
 - :ref:`exhale_function__vector__test_8cpp_1a632c999abf56409dbb47088df5fe2100`
 
 - :ref:`exhale_function__vector__test_8cpp_1a52b28b1796f7846d8ef8d2b9d754c3d6`
+
+- :ref:`exhale_function__vector__test_8cpp_1a4ac40aff8e1184fb8c886e280f208590`
+
+- :ref:`exhale_function__vector__test_8cpp_1a63769a03246d627157b19416c8db4f8a`
+
+- :ref:`exhale_function__vector__test_8cpp_1a7145e6c9cd089b6446d61395b733642f`
+
+- :ref:`exhale_function__vector__test_8cpp_1a9046a79e22810d3bb17dc469bddb1860`
+
+- :ref:`exhale_function__vector__test_8cpp_1a5c13c950e4599f1336bc7d01796cfcb6`
+
+- :ref:`exhale_function__vector__test_8cpp_1a2ad905e33b6c5548413a0ed3ed43f2ab`
+
+- :ref:`exhale_function__vector__test_8cpp_1aecd7e7aded1d850d6721541c60f5858e`
+
+- :ref:`exhale_function__vector__test_8cpp_1a365263a1064786805ae441b3a7f79981`
+
+- :ref:`exhale_function__vector__test_8cpp_1ab6ee0465791487b15571b0e642b4c6aa`
+
+- :ref:`exhale_function__vector__test_8cpp_1a16206387f4dd37f047205378f6871faa`
+
+- :ref:`exhale_function__vector__test_8cpp_1a56c49ac4cec448183df6bde019b6d9f2`
 

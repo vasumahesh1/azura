@@ -42,8 +42,6 @@ Functions
 ---------
 
 
-- :ref:`exhale_function__heap_memory_buffer__test_8cpp_1a450300ecc6c997e7cef135546ba7ba2a`
-
 - :ref:`exhale_function__heap_memory_buffer__test_8cpp_1ab8f0a56d9d874f472848a982ae8f455b`
 
 - :ref:`exhale_function__heap_memory_buffer__test_8cpp_1aa53e5a30ed1265335e24ed7b735fa016`
@@ -51,4 +49,6 @@ Functions
 - :ref:`exhale_function__heap_memory_buffer__test_8cpp_1a99e04421eb7ab6e84b5fc1d2b9d6653e`
 
 - :ref:`exhale_function__heap_memory_buffer__test_8cpp_1a1931357e11aa6346c2694b4265e3d478`
+
+- :ref:`exhale_function__heap_memory_buffer__test_8cpp_1a450300ecc6c997e7cef135546ba7ba2a`
 

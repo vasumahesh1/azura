@@ -46,9 +46,12 @@ Quick Links
 .. toctree::
    :maxdepth: 2
    :hidden:
+   :glob:
 
    setting-up.rst
    build-instructions.rst
    cmake-wrappers.rst
+
+   projects.rst
 
    html/apiRoot.rst
