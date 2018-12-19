@@ -1,0 +1,595 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>Program Listing for File ForwardPlusComputeScene.cpp &mdash; Azura  documentation</title>
+  
+
+  
+  
+  
+  
+
+  
+
+  
+  
+    
+
+  
+
+  <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/collapsible-lists\css\tree_view.css" type="text/css" />
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="File ForwardPlusComputeScene.h" href="file_Source_Samples_2_DeferredRenderer_Inc_ForwardPlus_ForwardPlusComputeScene.h.html" />
+    <link rel="prev" title="File ForwardPlusComputeScene.cpp" href="file_Source_Samples_2_DeferredRenderer_Src_ForwardPlusComputeScene.cpp.html" /> 
+
+  
+  <script src="../_static/js/modernizr.min.js"></script>
+
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search">
+          
+
+          
+            <a href="../index.html" class="icon icon-home"> Azura
+          
+
+          
+          </a>
+
+          
+            
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <ul>
+<li class="toctree-l1"><a class="reference internal" href="../setting-up.html">Setting Up</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../build-instructions.html">Build Instructions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../cmake-wrappers.html">CMake Wrappers</a></li>
+<li class="toctree-l1"><a class="reference internal" href="apiRoot.html">Azura API</a></li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">Azura</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../index.html">Docs</a> &raquo;</li>
+        
+          <li><a href="apiRoot.html">Azura API</a> &raquo;</li>
+        
+          <li><a href="file_Source_Samples_2_DeferredRenderer_Src_ForwardPlusComputeScene.cpp.html">File ForwardPlusComputeScene.cpp</a> &raquo;</li>
+        
+      <li>Program Listing for File ForwardPlusComputeScene.cpp</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            <a href="../_sources/html/program_listing_file_Source_Samples_2_DeferredRenderer_Src_ForwardPlusComputeScene.cpp.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="program-listing-for-file-forwardpluscomputescene-cpp">
+<span id="program-listing-file-source-samples-2-deferredrenderer-src-forwardpluscomputescene-cpp"></span><h1>Program Listing for File ForwardPlusComputeScene.cpp<a class="headerlink" href="#program-listing-for-file-forwardpluscomputescene-cpp" title="Permalink to this headline">¶</a></h1>
+<p>↰ <a class="reference internal" href="file_Source_Samples_2_DeferredRenderer_Src_ForwardPlusComputeScene.cpp.html#file-source-samples-2-deferredrenderer-src-forwardpluscomputescene-cpp"><span class="std std-ref">Return to documentation for file</span></a> (<code class="docutils literal notranslate"><span class="pre">Source\Samples\2_DeferredRenderer\Src\ForwardPlusComputeScene.cpp</span></code>)</p>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span>#include &quot;ForwardPlus/ForwardPlusComputeScene.h&quot;
+#include &quot;Memory/MonotonicAllocator.h&quot;
+#include &quot;Memory/MemoryFactory.h&quot;
+#include &quot;Generic/RenderSystem.h&quot;
+#include &quot;Generic/PoolPrimitives.h&quot;
+
+
+namespace Azura {
+
+namespace {
+Plane ComputePlane(const Vector3f&amp; p0, const Vector3f&amp; p1, const Vector3f&amp; p2) {
+  Plane plane;
+
+  const Vector3f v0 = p1 - p0;
+  const Vector3f v2 = p2 - p0;
+
+  plane.m_normal = -1.0f * Vector3f::CrossProduct(v0, v2).Normalized();
+
+  // Compute the distance to the origin using p0.
+  plane.m_distanceToOrigin = Vector3f::DotProduct(plane.m_normal, p0);
+
+  return plane;
+}
+} // namespace
+
+
+ForwardPlusComputeScene::ForwardPlusComputeScene(Memory::Allocator&amp; mainAllocator, Memory::Allocator&amp; drawAllocator)
+  : Scene(&quot;ForwardPlusComputeScene&quot;, mainAllocator, drawAllocator),
+    m_lightTexture(NUM_LIGHTS, 7, mainAllocator),
+    m_frustums(FPLUS_NUM_FRUSTRUMS, mainAllocator) {
+}
+
+void ForwardPlusComputeScene::Initialize(Window&amp; window,
+                                         const Camera&amp; camera,
+                                         const MeshObject&amp; sceneMesh,
+                                         const UniformBufferData&amp; uboData,
+                                         const SamplerDesc&amp; lightSamplerDesc,
+                                         const Containers::Vector&lt;PointLight&gt;&amp; lights) {
+  HEAP_ALLOCATOR(Temporary, Memory::MonotonicAllocator, 0x40&#39;0000);
+
+  FillFrustums(window, camera);
+
+  ApplicationInfo appInfo;
+  appInfo.m_name    = &quot;ForwardPlusComputeScene&quot;;
+  appInfo.m_version = Version(1, 0, 0);
+
+  DeviceRequirements requirements;
+  requirements.m_discreteGPU   = true;
+  requirements.m_float64       = false;
+  requirements.m_int64         = false;
+  requirements.m_transferQueue = false;
+
+  const ApplicationRequirements applicationRequirements = {};
+
+  TextureRequirements textureRequirements = {};
+  textureRequirements.m_maxCount          = 2;
+  textureRequirements.m_poolSize          = 0xF00000;
+
+  DescriptorRequirements descriptorRequirements = DescriptorRequirements(6, 5, allocatorTemporary);
+
+  // SET 0
+  m_pass.m_uboSlot = descriptorRequirements.AddDescriptor({
+    DescriptorType::UniformBuffer, ShaderStage::Vertex
+  });
+
+  // SET 1
+  m_pass.m_sampSlot = descriptorRequirements.AddDescriptor({
+    DescriptorType::Sampler, ShaderStage::Pixel
+  });
+
+  // SET 2
+  m_pass.m_texSlot = descriptorRequirements.AddDescriptor({
+    DescriptorType::SampledImage, ShaderStage::Pixel
+  });
+
+  m_pass.m_normalSlot = descriptorRequirements.AddDescriptor({
+    DescriptorType::SampledImage, ShaderStage::Pixel
+  });
+
+  // SET 0 for Compute
+  m_pass.m_computeUBO = descriptorRequirements.AddDescriptor({
+    DescriptorType::UniformBuffer, ShaderStage::Compute
+  });
+
+  m_pass.m_lightSampSlot = descriptorRequirements.AddDescriptor({
+    DescriptorType::Sampler, ShaderStage::Pixel
+  });
+
+  const U32 UBO_SET = descriptorRequirements.AddSet({
+    m_pass.m_uboSlot
+  });
+
+  const U32 TEXTURE_SAMPLER_SET = descriptorRequirements.AddSet({
+    m_pass.m_sampSlot
+  });
+
+  const U32 TEXTURE_SET = descriptorRequirements.AddSet({
+    m_pass.m_texSlot, m_pass.m_normalSlot
+  });
+
+  const U32 COMPUTE_UBO_SET = descriptorRequirements.AddSet({
+    m_pass.m_computeUBO
+  });
+
+  const U32 LIGHT_SAMPLER_SET = descriptorRequirements.AddSet({
+    m_pass.m_lightSampSlot
+  });
+
+  ShaderRequirements shaderRequirements = ShaderRequirements(5, allocatorTemporary);
+  const U32 VERTEX_SHADER_ID            = shaderRequirements.AddShader({
+    ShaderStage::Vertex, &quot;ForwardPlusComputePass1.vs&quot;, AssetLocation::Shaders
+  });
+  const U32 PIXEL_SHADER_ID = shaderRequirements.AddShader({
+    ShaderStage::Pixel, &quot;ForwardPlusComputePass1.ps&quot;, AssetLocation::Shaders
+  });
+
+  const U32 COMPUTE_SHADER_ID = shaderRequirements.AddShader({
+    ShaderStage::Compute, &quot;ForwardPlusComputePass2.cs&quot;, AssetLocation::Shaders
+  });
+
+  const U32 SHADING_VERTEX_SHADER_ID = shaderRequirements.AddShader({
+    ShaderStage::Vertex, &quot;ScreenQuad.vs&quot;, AssetLocation::Shaders
+  });
+
+  const U32 SHADING_PIXEL_SHADER_ID = shaderRequirements.AddShader({
+    ShaderStage::Pixel, &quot;ForwardPlusComputePass3.ps&quot;, AssetLocation::Shaders
+  });
+
+  RenderPassRequirements renderPassRequirements = RenderPassRequirements(6, 3, 1, allocatorTemporary);
+  renderPassRequirements.m_maxPools             = 3;
+
+  const U32 GBUFFER_1      = renderPassRequirements.AddTarget({RawStorageFormat::R32G32B32A32_FLOAT});
+  const U32 GBUFFER_2      = renderPassRequirements.AddTarget({RawStorageFormat::R32G32B32A32_FLOAT});
+  const U32 GBUFFER_3      = renderPassRequirements.AddTarget({RawStorageFormat::R32G32B32A32_FLOAT});
+  const U32 DEPTH_BUFFER   = renderPassRequirements.AddTarget({RawStorageFormat::D32_FLOAT});
+  const U32 LIGHT_TARGET   = renderPassRequirements.AddTarget({RawStorageFormat::R32G32B32A32_FLOAT, NUM_LIGHTS, 2});
+  const U32 CLUSTER_TARGET = renderPassRequirements.AddTarget({
+    RawStorageFormat::R32G32B32A32_FLOAT, TILES_X * TILES_Y, CLUSTER_PIXEL_HEIGHT
+  });
+
+  const U32 FRUSTUM_BUFFER = renderPassRequirements.AddBuffer({
+    m_frustums.GetSize() * U32(sizeof(Frustum)), U32(sizeof(Frustum))
+  });
+
+  m_pass.m_gBufferPassId = renderPassRequirements.AddPass({
+    PipelinePassCreateInfo::Shaders{VERTEX_SHADER_ID, PIXEL_SHADER_ID},
+    PipelinePassCreateInfo::InputTargets{},
+    PipelinePassCreateInfo::InputBuffers{},
+    PipelinePassCreateInfo::OutputTargets{GBUFFER_1, GBUFFER_2, GBUFFER_3, DEPTH_BUFFER},
+    PipelinePassCreateInfo::OutputBuffers{},
+    PipelinePassCreateInfo::DescriptorSets{UBO_SET, TEXTURE_SAMPLER_SET, TEXTURE_SET},
+    ClearData{{0.0f, 0.0f, 0.0f, 1.0f}, 1.0f, 0}
+  });
+
+  m_pass.m_computePassId = renderPassRequirements.AddPass({
+    PipelinePassCreateInfo::Shaders{COMPUTE_SHADER_ID},
+    PipelinePassCreateInfo::InputTargets{{DEPTH_BUFFER, ShaderStage::Compute}},
+    PipelinePassCreateInfo::InputBuffers{{FRUSTUM_BUFFER, ShaderStage::Compute}},
+    PipelinePassCreateInfo::OutputTargets{LIGHT_TARGET, CLUSTER_TARGET},
+    PipelinePassCreateInfo::OutputBuffers{},
+    PipelinePassCreateInfo::DescriptorSets{COMPUTE_UBO_SET},
+    ClearData{{0.0f, 0.0f, 0.0f, 1.0f}, 1.0f, 0},
+    BlendState{},
+    RenderPassType::Compute
+  });
+
+  m_pass.m_shadingPassId = renderPassRequirements.AddPass({
+    PipelinePassCreateInfo::Shaders{SHADING_VERTEX_SHADER_ID, SHADING_PIXEL_SHADER_ID},
+    PipelinePassCreateInfo::InputTargets{
+      {GBUFFER_1, ShaderStage::Pixel}, {GBUFFER_2, ShaderStage::Pixel}, {GBUFFER_3, ShaderStage::Pixel},
+      {LIGHT_TARGET, ShaderStage::Pixel}, {CLUSTER_TARGET, ShaderStage::Pixel}
+    },
+    PipelinePassCreateInfo::InputBuffers{},
+    PipelinePassCreateInfo::OutputTargets{},
+    PipelinePassCreateInfo::OutputBuffers{},
+    PipelinePassCreateInfo::DescriptorSets{TEXTURE_SAMPLER_SET, LIGHT_SAMPLER_SET},
+    ClearData{{0.0f, 0.0f, 0.0f, 1.0f}, 1.0f, 0}
+  });
+
+  m_renderer = RenderSystem::CreateRenderer(appInfo, requirements, applicationRequirements,
+                                            window.GetSwapChainRequirements(), renderPassRequirements,
+                                            descriptorRequirements, shaderRequirements, m_mainAllocator,
+                                            m_drawAllocator,
+                                            window);
+
+  m_textureManager = RenderSystem::CreateTextureManager(textureRequirements);
+
+  // Load Assets
+  m_lightTexture.Fill(lights);
+  m_renderer-&gt;BindRenderTarget(LIGHT_TARGET, m_lightTexture.GetTextureDesc(), m_lightTexture.GetBuffer());
+
+  const auto frustumDataStart = reinterpret_cast&lt;const U8*&gt;(m_frustums.Data()); // NOLINT
+  m_renderer-&gt;BindBufferTarget(FRUSTUM_BUFFER, frustumDataStart);
+
+  ComputePoolCreateInfo computePoolInfo = {allocatorTemporary};
+  computePoolInfo.m_byteSize            = 0xF00000;
+  computePoolInfo.m_computePasses       = {{m_pass.m_computePassId}, allocatorTemporary};
+  computePoolInfo.m_launchDims          = ThreadGroupDimensions{TILES_X, TILES_Y, 1};
+
+  ComputePool&amp; computePool = m_renderer-&gt;CreateComputePool(computePoolInfo);
+  m_computePool            = &amp;computePool;
+
+  m_lightUBO.m_nearPlane = camera.GetNearClip();
+  m_lightUBO.m_farPlane  = camera.GetFarClip();
+  m_lightUBO.m_view      = camera.GetViewMatrix();
+  m_lightUBO.m_proj   = camera.GetProjMatrix();
+
+  const auto lightUBOStart = reinterpret_cast&lt;const U8*&gt;(&amp;m_lightUBO); // NOLINT
+  computePool.BindUniformData(m_pass.m_computeUBO, lightUBOStart, sizeof(LightUBO));
+
+  DrawablePoolCreateInfo poolInfo = {allocatorTemporary};
+  poolInfo.m_byteSize             = 0xF00000;
+  poolInfo.m_numDrawables         = 1;
+  poolInfo.m_renderPasses         = {{m_pass.m_gBufferPassId}, allocatorTemporary};
+  poolInfo.m_drawType             = DrawType::InstancedIndexed;
+  poolInfo.m_cullMode             = CullMode::None;
+
+  const auto VERTEX_SLOT = poolInfo.AddInputSlot({
+    BufferUsageRate::PerVertex, {{&quot;POSITION&quot;, RawStorageFormat::R32G32B32_FLOAT}}
+  });
+  const auto NORMAL_SLOT = poolInfo.AddInputSlot({
+    BufferUsageRate::PerVertex, {{&quot;NORMAL&quot;, RawStorageFormat::R32G32B32_FLOAT}}
+  });
+  const auto UV_SLOT = poolInfo.AddInputSlot({BufferUsageRate::PerVertex, {{&quot;UV&quot;, RawStorageFormat::R32G32_FLOAT}}});
+
+  DrawablePool&amp; pool = m_renderer-&gt;CreateDrawablePool(poolInfo);
+  m_mainPool         = &amp;pool;
+
+  // Pool Binds
+  pool.BindSampler(m_pass.m_sampSlot, {});
+
+  // Bind Texture
+  const U32 colorTexture  = m_textureManager-&gt;Load(&quot;Meshes/sponza/color.png&quot;);
+  const U32 normalTexture = m_textureManager-&gt;Load(&quot;Meshes/sponza/normal.png&quot;);
+
+  const TextureDesc* colorDesc  = m_textureManager-&gt;GetInfo(colorTexture);
+  const TextureDesc* normalDesc = m_textureManager-&gt;GetInfo(normalTexture);
+
+  VERIFY_TRUE(log_Scene, colorDesc != nullptr, &quot;Color Texture Description was Null&quot;);
+  VERIFY_TRUE(log_Scene, normalDesc != nullptr, &quot;Normal Texture Description was Null&quot;);
+  pool.BindTextureData(m_pass.m_texSlot, *colorDesc, m_textureManager-&gt;GetData(colorTexture));
+  pool.BindTextureData(m_pass.m_normalSlot, *normalDesc, m_textureManager-&gt;GetData(normalTexture));
+
+  // Bind Light Texture
+
+  const auto vertexStart      = reinterpret_cast&lt;const U8*&gt;(sceneMesh.m_vertexData.data()); // NOLINT
+  const auto normalStart      = reinterpret_cast&lt;const U8*&gt;(sceneMesh.m_normalData.data()); // NOLINT
+  const auto uvStart          = reinterpret_cast&lt;const U8*&gt;(sceneMesh.m_uvData.data());     // NOLINT
+  const auto indexBufferStart = reinterpret_cast&lt;const U8*&gt;(sceneMesh.m_indexData.data());  // NOLINT
+  const auto uboDataBuffer    = reinterpret_cast&lt;const U8*&gt;(&amp;uboData);                      // NOLINT
+
+  // Create Drawable from Pool
+  DrawableCreateInfo createInfo = {};
+  createInfo.m_vertexCount      = sceneMesh.m_numVertices;
+  createInfo.m_indexCount       = sceneMesh.m_numIndices;
+  createInfo.m_instanceCount    = 1;
+  createInfo.m_indexType        = RawStorageFormat::R32_UINT;
+
+  // Drawable Binds
+  m_sponzaId = pool.CreateDrawable(createInfo);
+  pool.BindVertexData(m_sponzaId, VERTEX_SLOT, vertexStart, sceneMesh.m_vertexDataSize);
+  pool.BindVertexData(m_sponzaId, NORMAL_SLOT, normalStart, sceneMesh.m_normalDataSize);
+  pool.BindVertexData(m_sponzaId, UV_SLOT, uvStart, sceneMesh.m_uvDataSize);
+  pool.SetIndexData(m_sponzaId, indexBufferStart, sceneMesh.m_indexDataSize);
+  pool.BindUniformData(m_sponzaId, m_pass.m_uboSlot, uboDataBuffer, sizeof(UniformBufferData));
+
+  // PASS 3
+
+  DrawablePool&amp; shadingQuad = PoolPrimitives::AddScreenQuad(*m_renderer, m_pass.m_shadingPassId, allocatorTemporary);
+  shadingQuad.BindSampler(m_pass.m_sampSlot, {});
+  shadingQuad.BindSampler(m_pass.m_lightSampSlot, lightSamplerDesc);
+
+  m_renderer-&gt;Submit();
+}
+
+void ForwardPlusComputeScene::Update(float timeDelta,
+                                     const Camera&amp; camera,
+                                     const UniformBufferData&amp; uboData,
+                                     const Containers::Vector&lt;PointLight&gt;&amp; lights) {
+
+  UNUSED(lights);
+
+  m_lightUBO.m_timeDelta = timeDelta;
+  m_lightUBO.m_view      = camera.GetViewMatrix();
+  m_lightUBO.m_nearPlane = camera.GetNearClip();
+  m_lightUBO.m_farPlane  = camera.GetFarClip();
+  m_lightUBO.m_proj   = camera.GetProjMatrix();
+
+  const auto uboDataBuffer = reinterpret_cast&lt;const U8*&gt;(&amp;uboData);    // NOLINT
+  const auto lightUBOStart = reinterpret_cast&lt;const U8*&gt;(&amp;m_lightUBO); // NOLINT
+
+  m_computePool-&gt;BeginUpdates();
+  m_computePool-&gt;UpdateUniformData(m_pass.m_computeUBO, lightUBOStart, sizeof(LightUBO));
+  m_computePool-&gt;SubmitUpdates();
+
+  m_mainPool-&gt;BeginUpdates();
+  m_mainPool-&gt;UpdateUniformData(m_sponzaId, m_pass.m_uboSlot, uboDataBuffer, sizeof(UniformBufferData));
+  m_mainPool-&gt;SubmitUpdates();
+
+  m_renderer-&gt;RenderFrame();
+}
+
+void ForwardPlusComputeScene::CleanUp() {
+}
+
+void ForwardPlusComputeScene::FillFrustums(const Window&amp; window, const Camera&amp; camera) {
+
+  const U32 widthPerTile  = window.GetWidth() / TILES_X;
+  const U32 heightPerTile = window.GetHeight() / TILES_Y;
+
+  const auto invProj = camera.GetProjMatrix().Inverse();
+
+  for (U32 idx           = 0; idx &lt; TILES_X; ++idx) {
+    for (U32 idy         = 0; idy &lt; TILES_Y; ++idy) {
+      const U32 screenX1 = idx * widthPerTile;
+      const U32 screenY1 = idy * heightPerTile;
+
+      const U32 screenX2 = (idx + 1) * widthPerTile;
+      const U32 screenY2 = (idy + 1) * heightPerTile;
+
+      Vector2f tileP1 = Vector2f(float(screenX1), float(screenY1));
+      Vector2f tileP2 = Vector2f(float(screenX2), float(screenY1));
+      Vector2f tileP3 = Vector2f(float(screenX2), float(screenY2));
+      Vector2f tileP4 = Vector2f(float(screenX1), float(screenY2));
+
+      // To NDC
+      tileP1 = tileP1 / Vector2f(float(window.GetWidth()), float(window.GetHeight()));
+      tileP2 = tileP2 / Vector2f(float(window.GetWidth()), float(window.GetHeight()));
+      tileP3 = tileP3 / Vector2f(float(window.GetWidth()), float(window.GetHeight()));
+      tileP4 = tileP4 / Vector2f(float(window.GetWidth()), float(window.GetHeight()));
+
+      tileP1[0] = (tileP1[0] * 2.0f) - 1.0f;
+      tileP2[0] = (tileP2[0] * 2.0f) - 1.0f;
+      tileP3[0] = (tileP3[0] * 2.0f) - 1.0f;
+      tileP4[0] = (tileP4[0] * 2.0f) - 1.0f;
+
+      tileP1[1] = 1.0f - (2.0f * tileP1[1]);
+      tileP2[1] = 1.0f - (2.0f * tileP2[1]);
+      tileP3[1] = 1.0f - (2.0f * tileP3[1]);
+      tileP4[1] = 1.0f - (2.0f * tileP4[1]);
+
+      // To View Space
+      Vector4f viewP1 = Vector4f(tileP1[0], tileP1[1], 1.0f, 1.0f);
+      Vector4f viewP2 = Vector4f(tileP2[0], tileP2[1], 1.0f, 1.0f);
+      Vector4f viewP3 = Vector4f(tileP3[0], tileP3[1], 1.0f, 1.0f);
+      Vector4f viewP4 = Vector4f(tileP4[0], tileP4[1], 1.0f, 1.0f);
+
+      viewP1 = invProj * viewP1;
+      viewP2 = invProj * viewP2;
+      viewP3 = invProj * viewP3;
+      viewP4 = invProj * viewP4;
+
+      viewP1 = viewP1 / viewP1[3];
+      viewP2 = viewP2 / viewP2[3];
+      viewP3 = viewP3 / viewP3[3];
+      viewP4 = viewP4 / viewP4[3];
+
+      // viewP1.w = 1.0f; // NOLINT
+      // viewP2.w = 1.0f; // NOLINT
+      // viewP3.w = 1.0f; // NOLINT
+      // viewP4.w = 1.0f; // NOLINT
+
+      Frustum frustum;
+      frustum.m_planes[0] = ComputePlane(Vector3f(0,0,0), viewP1.xyz(), viewP2.xyz());
+      frustum.m_planes[1] = ComputePlane(Vector3f(0,0,0), viewP2.xyz(), viewP3.xyz());
+      frustum.m_planes[2] = ComputePlane(Vector3f(0,0,0), viewP3.xyz(), viewP4.xyz());
+      frustum.m_planes[3] = ComputePlane(Vector3f(0,0,0), viewP4.xyz(), viewP1.xyz());
+
+      m_frustums.PushBack(frustum);
+    }
+  }
+}
+} // namespace Azura
+</pre></div>
+</div>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="file_Source_Samples_2_DeferredRenderer_Inc_ForwardPlus_ForwardPlusComputeScene.h.html" class="btn btn-neutral float-right" title="File ForwardPlusComputeScene.h" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="file_Source_Samples_2_DeferredRenderer_Src_ForwardPlusComputeScene.cpp.html" class="btn btn-neutral" title="File ForwardPlusComputeScene.cpp" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2018, Vasu Mahesh
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  
+
+    
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+        <script type="text/javascript" src="../_static/jquery.js"></script>
+        <script type="text/javascript" src="../_static/underscore.js"></script>
+        <script type="text/javascript" src="../_static/doctools.js"></script>
+        <script type="text/javascript" src="../_static/collapsible-lists\js\CollapsibleLists.compressed.js"></script>
+        <script type="text/javascript" src="../_static/collapsible-lists\js\apply-collapsible-lists.js"></script>
+    
+
+  
+
+  <script type="text/javascript" src="../_static/js/theme.js"></script>
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

@@ -1,0 +1,405 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>Program Listing for File PolarCamera.cpp &mdash; Azura  documentation</title>
+  
+
+  
+  
+  
+  
+
+  
+
+  
+  
+    
+
+  
+
+  <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/collapsible-lists\css\tree_view.css" type="text/css" />
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="File PolarCamera.h" href="file_Source_Camera_Inc_Camera_PolarCamera.h.html" />
+    <link rel="prev" title="File PolarCamera.cpp" href="file_Source_Camera_Src_PolarCamera.cpp.html" /> 
+
+  
+  <script src="../_static/js/modernizr.min.js"></script>
+
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search">
+          
+
+          
+            <a href="../index.html" class="icon icon-home"> Azura
+          
+
+          
+          </a>
+
+          
+            
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <ul>
+<li class="toctree-l1"><a class="reference internal" href="../setting-up.html">Setting Up</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../build-instructions.html">Build Instructions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../cmake-wrappers.html">CMake Wrappers</a></li>
+<li class="toctree-l1"><a class="reference internal" href="apiRoot.html">Azura API</a></li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">Azura</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../index.html">Docs</a> &raquo;</li>
+        
+          <li><a href="apiRoot.html">Azura API</a> &raquo;</li>
+        
+          <li><a href="file_Source_Camera_Src_PolarCamera.cpp.html">File PolarCamera.cpp</a> &raquo;</li>
+        
+      <li>Program Listing for File PolarCamera.cpp</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            <a href="../_sources/html/program_listing_file_Source_Camera_Src_PolarCamera.cpp.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="program-listing-for-file-polarcamera-cpp">
+<span id="program-listing-file-source-camera-src-polarcamera-cpp"></span><h1>Program Listing for File PolarCamera.cpp<a class="headerlink" href="#program-listing-for-file-polarcamera-cpp" title="Permalink to this headline">¶</a></h1>
+<p>↰ <a class="reference internal" href="file_Source_Camera_Src_PolarCamera.cpp.html#file-source-camera-src-polarcamera-cpp"><span class="std std-ref">Return to documentation for file</span></a> (<code class="docutils literal notranslate"><span class="pre">Source\Camera\Src\PolarCamera.cpp</span></code>)</p>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="cp">#include</span> <span class="cpf">&quot;Camera/PolarCamera.h&quot;</span><span class="cp"></span>
+<span class="cp">#include</span> <span class="cpf">&quot;Math/Transform.h&quot;</span><span class="cp"></span>
+<span class="cp">#include</span> <span class="cpf">&quot;Math/Geometry.h&quot;</span><span class="cp"></span>
+<span class="cp">#include</span> <span class="cpf">&quot;Utils/Macros.h&quot;</span><span class="cp"></span>
+
+<span class="k">namespace</span> <span class="n">Azura</span> <span class="p">{</span>
+<span class="k">namespace</span> <span class="p">{</span>
+<span class="k">const</span> <span class="n">Vector3f</span> <span class="n">UNIT_LOOK</span>  <span class="o">=</span> <span class="n">Vector3f</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">);</span>
+<span class="k">const</span> <span class="n">Vector3f</span> <span class="n">UNIT_RIGHT</span> <span class="o">=</span> <span class="n">Vector3f</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">);</span>
+<span class="k">const</span> <span class="n">Vector3f</span> <span class="n">UNIT_UP</span>    <span class="o">=</span> <span class="n">Vector3f</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">);</span>
+<span class="k">const</span> <span class="n">Vector3f</span> <span class="n">UNIT_EYE</span>   <span class="o">=</span> <span class="n">Vector3f</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">);</span>
+<span class="p">}</span> <span class="c1">// namespace</span>
+
+<span class="n">PolarCamera</span><span class="o">::</span><span class="n">PolarCamera</span><span class="p">(</span><span class="n">U32</span> <span class="n">width</span><span class="p">,</span> <span class="n">U32</span> <span class="n">height</span><span class="p">)</span>
+  <span class="o">:</span> <span class="n">Camera</span><span class="p">(</span><span class="n">width</span><span class="p">,</span> <span class="n">height</span><span class="p">)</span> <span class="p">{</span>
+  <span class="n">PolarCamera</span><span class="o">::</span><span class="n">Recompute</span><span class="p">();</span>
+<span class="p">}</span>
+
+<span class="n">PolarCamera</span><span class="o">::</span><span class="n">PolarCamera</span><span class="p">(</span><span class="n">U32</span> <span class="n">width</span><span class="p">,</span> <span class="n">U32</span> <span class="n">height</span><span class="p">,</span> <span class="kt">float</span> <span class="n">thethaDeg</span><span class="p">,</span> <span class="kt">float</span> <span class="n">phiDeg</span><span class="p">,</span> <span class="kt">float</span> <span class="n">zoom</span><span class="p">)</span>
+  <span class="o">:</span> <span class="n">Camera</span><span class="p">(</span><span class="n">width</span><span class="p">,</span> <span class="n">height</span><span class="p">),</span> <span class="n">m_theta</span><span class="p">(</span><span class="n">Math</span><span class="o">::</span><span class="n">ToRadians</span><span class="p">(</span><span class="n">thethaDeg</span><span class="p">)),</span> <span class="n">m_phi</span><span class="p">(</span><span class="n">Math</span><span class="o">::</span><span class="n">ToRadians</span><span class="p">(</span><span class="n">phiDeg</span><span class="p">)),</span> <span class="n">m_zoom</span><span class="p">(</span><span class="n">zoom</span><span class="p">)</span> <span class="p">{</span>
+  <span class="n">PolarCamera</span><span class="o">::</span><span class="n">Recompute</span><span class="p">();</span>
+<span class="p">}</span>
+
+<span class="kt">void</span> <span class="n">PolarCamera</span><span class="o">::</span><span class="n">Recompute</span><span class="p">()</span> <span class="p">{</span>
+  <span class="k">const</span> <span class="n">Matrix4f</span> <span class="n">transform</span> <span class="o">=</span> <span class="n">Matrix4f</span><span class="o">::</span><span class="n">FromRotationMatrix</span><span class="p">(</span><span class="n">Matrix4f</span><span class="o">::</span><span class="n">RotationY</span><span class="p">(</span><span class="n">m_theta</span><span class="p">))</span> <span class="o">*</span>
+                       <span class="n">Matrix4f</span><span class="o">::</span><span class="n">FromRotationMatrix</span><span class="p">(</span><span class="n">Matrix3f</span><span class="o">::</span><span class="n">RotationX</span><span class="p">(</span><span class="n">m_phi</span><span class="p">))</span> <span class="o">*</span>
+                       <span class="n">Matrix4f</span><span class="o">::</span><span class="n">FromTranslationVector</span><span class="p">(</span><span class="n">Vector3f</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span> <span class="o">*</span> <span class="n">m_zoom</span><span class="p">);</span>
+
+  <span class="n">m_look</span> <span class="o">=</span> <span class="n">Transform</span><span class="o">::</span><span class="n">Downgrade</span><span class="p">(</span><span class="n">transform</span> <span class="o">*</span> <span class="n">Vector4f</span><span class="p">(</span><span class="n">UNIT_LOOK</span><span class="p">,</span> <span class="mf">0.0f</span><span class="p">));</span>
+  <span class="n">m_up</span> <span class="o">=</span> <span class="n">Transform</span><span class="o">::</span><span class="n">Downgrade</span><span class="p">(</span><span class="n">transform</span> <span class="o">*</span> <span class="n">Vector4f</span><span class="p">(</span><span class="n">UNIT_UP</span><span class="p">,</span> <span class="mf">0.0f</span><span class="p">));</span>
+  <span class="n">m_right</span> <span class="o">=</span> <span class="n">Transform</span><span class="o">::</span><span class="n">Downgrade</span><span class="p">(</span><span class="n">transform</span> <span class="o">*</span> <span class="n">Vector4f</span><span class="p">(</span><span class="n">UNIT_RIGHT</span><span class="p">,</span> <span class="mf">0.0f</span><span class="p">));</span>
+
+  <span class="c1">// Position must be affected by Translation</span>
+  <span class="n">m_eye</span> <span class="o">=</span> <span class="n">Transform</span><span class="o">::</span><span class="n">Downgrade</span><span class="p">(</span><span class="n">transform</span> <span class="o">*</span> <span class="n">Vector4f</span><span class="p">(</span><span class="n">UNIT_EYE</span><span class="p">,</span> <span class="mf">1.0f</span><span class="p">));</span>
+
+
+  <span class="n">m_view</span> <span class="o">=</span> <span class="n">Transform</span><span class="o">::</span><span class="n">LookAt</span><span class="p">(</span><span class="n">m_ref</span><span class="p">,</span> <span class="n">m_eye</span><span class="p">,</span> <span class="n">m_up</span><span class="p">);</span>
+  <span class="n">m_proj</span> <span class="o">=</span> <span class="n">Transform</span><span class="o">::</span><span class="n">Perspective</span><span class="p">(</span><span class="mf">45.0f</span><span class="p">,</span> <span class="mf">16.0f</span> <span class="o">/</span> <span class="mf">9.0f</span><span class="p">,</span> <span class="mf">0.1f</span><span class="p">,</span> <span class="mf">100.0f</span><span class="p">);</span>
+
+  <span class="n">m_viewProj</span> <span class="o">=</span> <span class="n">m_proj</span> <span class="o">*</span> <span class="n">m_view</span><span class="p">;</span>
+  <span class="n">m_invViewProj</span> <span class="o">=</span> <span class="n">m_viewProj</span><span class="p">.</span><span class="n">Inverse</span><span class="p">();</span>
+<span class="p">}</span>
+
+<span class="kt">void</span> <span class="n">PolarCamera</span><span class="o">::</span><span class="n">OnMouseEvent</span><span class="p">(</span><span class="n">MouseEvent</span> <span class="n">mouseEvent</span><span class="p">)</span> <span class="p">{</span>
+  <span class="k">if</span> <span class="p">(</span><span class="n">mouseEvent</span><span class="p">.</span><span class="n">m_internalType</span> <span class="o">!=</span> <span class="n">MouseEventType</span><span class="o">::</span><span class="n">Drag</span><span class="p">)</span>
+  <span class="p">{</span>
+    <span class="k">return</span><span class="p">;</span>
+  <span class="p">}</span>
+
+  <span class="k">const</span> <span class="kt">float</span> <span class="n">anglePerPixel</span> <span class="o">=</span> <span class="mi">5</span><span class="p">;</span>
+  <span class="n">RotateAboutUp</span><span class="p">(</span><span class="n">mouseEvent</span><span class="p">.</span><span class="n">m_eventX</span> <span class="o">*</span> <span class="n">anglePerPixel</span> <span class="o">*</span> <span class="n">m_sensitivity</span><span class="p">);</span>
+  <span class="n">RotateAboutRight</span><span class="p">(</span><span class="n">mouseEvent</span><span class="p">.</span><span class="n">m_eventY</span> <span class="o">*</span> <span class="n">anglePerPixel</span> <span class="o">*</span> <span class="n">m_sensitivity</span><span class="p">);</span>
+  <span class="n">Recompute</span><span class="p">();</span>
+<span class="p">}</span>
+
+<span class="kt">void</span> <span class="n">PolarCamera</span><span class="o">::</span><span class="n">OnKeyEvent</span><span class="p">(</span><span class="n">KeyEvent</span> <span class="n">keyEvent</span><span class="p">)</span> <span class="p">{</span>
+  <span class="k">if</span> <span class="p">(</span><span class="n">keyEvent</span><span class="p">.</span><span class="n">m_internalType</span> <span class="o">==</span> <span class="n">KeyEventType</span><span class="o">::</span><span class="n">KeyPress</span><span class="p">)</span> <span class="p">{</span>
+    <span class="k">switch</span> <span class="p">(</span><span class="n">keyEvent</span><span class="p">.</span><span class="n">m_key</span><span class="p">)</span> <span class="p">{</span>
+    <span class="k">case</span> <span class="n">KeyboardKey</span><span class="o">::</span><span class="nl">W</span><span class="p">:</span>
+      <span class="n">m_moveUpFactor</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span>
+      <span class="k">break</span><span class="p">;</span>
+
+    <span class="k">case</span> <span class="n">KeyboardKey</span><span class="o">::</span><span class="nl">S</span><span class="p">:</span>
+      <span class="n">m_moveUpFactor</span> <span class="o">=</span> <span class="o">-</span><span class="mi">1</span><span class="p">;</span>
+      <span class="k">break</span><span class="p">;</span>
+
+    <span class="k">case</span> <span class="n">KeyboardKey</span><span class="o">::</span><span class="nl">D</span><span class="p">:</span>
+      <span class="n">m_moveRightFactor</span> <span class="o">=</span> <span class="o">-</span><span class="mi">1</span><span class="p">;</span>
+      <span class="k">break</span><span class="p">;</span>
+
+    <span class="k">case</span> <span class="n">KeyboardKey</span><span class="o">::</span><span class="nl">A</span><span class="p">:</span>
+      <span class="n">m_moveRightFactor</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span>
+      <span class="k">break</span><span class="p">;</span>
+
+    <span class="k">case</span> <span class="n">KeyboardKey</span><span class="o">::</span><span class="nl">Q</span><span class="p">:</span>
+      <span class="n">m_zoomFactor</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span>
+      <span class="k">break</span><span class="p">;</span>
+
+    <span class="k">case</span> <span class="n">KeyboardKey</span><span class="o">::</span><span class="nl">E</span><span class="p">:</span>
+      <span class="n">m_zoomFactor</span> <span class="o">=</span> <span class="o">-</span><span class="mi">1</span><span class="p">;</span>
+      <span class="k">break</span><span class="p">;</span>
+
+    <span class="k">case</span> <span class="n">KeyboardKey</span><span class="o">::</span><span class="nl">Unmapped</span><span class="p">:</span>
+    <span class="k">case</span> <span class="n">KeyboardKey</span><span class="o">::</span><span class="nl">Esc</span><span class="p">:</span>
+    <span class="k">case</span> <span class="n">KeyboardKey</span><span class="o">::</span><span class="nl">Up</span><span class="p">:</span>
+    <span class="k">case</span> <span class="n">KeyboardKey</span><span class="o">::</span><span class="nl">Down</span><span class="p">:</span>
+    <span class="k">case</span> <span class="n">KeyboardKey</span><span class="o">::</span><span class="nl">Left</span><span class="p">:</span>
+    <span class="k">case</span> <span class="n">KeyboardKey</span><span class="o">::</span><span class="nl">Right</span><span class="p">:</span>
+    <span class="k">case</span> <span class="n">KeyboardKey</span><span class="o">::</span><span class="nl">T</span><span class="p">:</span>
+    <span class="k">case</span> <span class="n">KeyboardKey</span><span class="o">::</span><span class="nl">Y</span><span class="p">:</span>
+    <span class="k">default</span><span class="o">:</span>
+      <span class="k">break</span><span class="p">;</span>
+    <span class="p">}</span>
+  <span class="p">}</span> <span class="k">else</span> <span class="k">if</span> <span class="p">(</span><span class="n">keyEvent</span><span class="p">.</span><span class="n">m_internalType</span> <span class="o">==</span> <span class="n">KeyEventType</span><span class="o">::</span><span class="n">KeyRelease</span><span class="p">)</span> <span class="p">{</span>
+    <span class="k">switch</span> <span class="p">(</span><span class="n">keyEvent</span><span class="p">.</span><span class="n">m_key</span><span class="p">)</span> <span class="p">{</span>
+    <span class="k">case</span> <span class="n">KeyboardKey</span><span class="o">::</span><span class="nl">W</span><span class="p">:</span>
+      <span class="n">m_moveUpFactor</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+      <span class="k">break</span><span class="p">;</span>
+
+    <span class="k">case</span> <span class="n">KeyboardKey</span><span class="o">::</span><span class="nl">S</span><span class="p">:</span>
+      <span class="n">m_moveUpFactor</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+      <span class="k">break</span><span class="p">;</span>
+
+    <span class="k">case</span> <span class="n">KeyboardKey</span><span class="o">::</span><span class="nl">D</span><span class="p">:</span>
+      <span class="n">m_moveRightFactor</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+      <span class="k">break</span><span class="p">;</span>
+
+    <span class="k">case</span> <span class="n">KeyboardKey</span><span class="o">::</span><span class="nl">A</span><span class="p">:</span>
+      <span class="n">m_moveRightFactor</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+      <span class="k">break</span><span class="p">;</span>
+
+    <span class="k">case</span> <span class="n">KeyboardKey</span><span class="o">::</span><span class="nl">Q</span><span class="p">:</span>
+      <span class="n">m_zoomFactor</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+      <span class="k">break</span><span class="p">;</span>
+
+    <span class="k">case</span> <span class="n">KeyboardKey</span><span class="o">::</span><span class="nl">E</span><span class="p">:</span>
+      <span class="n">m_zoomFactor</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+      <span class="k">break</span><span class="p">;</span>
+
+    <span class="k">case</span> <span class="n">KeyboardKey</span><span class="o">::</span><span class="nl">Unmapped</span><span class="p">:</span>
+    <span class="k">case</span> <span class="n">KeyboardKey</span><span class="o">::</span><span class="nl">Esc</span><span class="p">:</span>
+    <span class="k">case</span> <span class="n">KeyboardKey</span><span class="o">::</span><span class="nl">Up</span><span class="p">:</span>
+    <span class="k">case</span> <span class="n">KeyboardKey</span><span class="o">::</span><span class="nl">Down</span><span class="p">:</span>
+    <span class="k">case</span> <span class="n">KeyboardKey</span><span class="o">::</span><span class="nl">Left</span><span class="p">:</span>
+    <span class="k">case</span> <span class="n">KeyboardKey</span><span class="o">::</span><span class="nl">Right</span><span class="p">:</span>
+    <span class="k">case</span> <span class="n">KeyboardKey</span><span class="o">::</span><span class="nl">T</span><span class="p">:</span>
+    <span class="k">case</span> <span class="n">KeyboardKey</span><span class="o">::</span><span class="nl">Y</span><span class="p">:</span>
+    <span class="k">default</span><span class="o">:</span>
+      <span class="k">break</span><span class="p">;</span>
+    <span class="p">}</span>
+  <span class="p">}</span>
+<span class="p">}</span>
+
+<span class="kt">void</span> <span class="n">PolarCamera</span><span class="o">::</span><span class="n">SetZoom</span><span class="p">(</span><span class="kt">float</span> <span class="n">value</span><span class="p">)</span> <span class="p">{</span>
+  <span class="n">m_zoom</span> <span class="o">=</span> <span class="n">value</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="kt">void</span> <span class="n">PolarCamera</span><span class="o">::</span><span class="n">SetZoomAndRecompute</span><span class="p">(</span><span class="kt">float</span> <span class="n">value</span><span class="p">)</span> <span class="p">{</span>
+  <span class="n">SetZoom</span><span class="p">(</span><span class="n">value</span><span class="p">);</span>
+  <span class="n">Recompute</span><span class="p">();</span>
+<span class="p">}</span>
+
+<span class="kt">void</span> <span class="n">PolarCamera</span><span class="o">::</span><span class="n">RotateAboutUp</span><span class="p">(</span><span class="kt">float</span> <span class="n">deg</span><span class="p">)</span> <span class="p">{</span>
+  <span class="n">m_theta</span> <span class="o">+=</span> <span class="n">Math</span><span class="o">::</span><span class="n">ToRadians</span><span class="p">(</span><span class="n">deg</span><span class="p">);</span>
+<span class="p">}</span>
+
+<span class="kt">void</span> <span class="n">PolarCamera</span><span class="o">::</span><span class="n">RotateAboutRight</span><span class="p">(</span><span class="kt">float</span> <span class="n">deg</span><span class="p">)</span> <span class="p">{</span>
+  <span class="n">m_phi</span> <span class="o">+=</span> <span class="n">Math</span><span class="o">::</span><span class="n">ToRadians</span><span class="p">(</span><span class="n">deg</span><span class="p">);</span>
+<span class="p">}</span>
+
+<span class="kt">void</span> <span class="n">PolarCamera</span><span class="o">::</span><span class="n">TranslateAlongLook</span><span class="p">(</span><span class="kt">float</span> <span class="n">amount</span><span class="p">)</span> <span class="p">{</span>
+  <span class="n">m_zoom</span> <span class="o">+=</span> <span class="n">amount</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="kt">void</span> <span class="n">PolarCamera</span><span class="o">::</span><span class="n">SetStepSize</span><span class="p">(</span><span class="kt">float</span> <span class="n">value</span><span class="p">)</span> <span class="p">{</span>
+  <span class="n">m_stepSize</span> <span class="o">=</span> <span class="n">value</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="kt">void</span> <span class="n">PolarCamera</span><span class="o">::</span><span class="n">Update</span><span class="p">(</span><span class="kt">float</span> <span class="n">timeDelta</span><span class="p">)</span> <span class="p">{</span>
+  <span class="k">const</span> <span class="kt">float</span> <span class="n">distance</span> <span class="o">=</span> <span class="n">m_stepSize</span> <span class="o">*</span> <span class="n">timeDelta</span><span class="p">;</span>
+
+  <span class="kt">bool</span> <span class="n">needsRecompute</span> <span class="o">=</span> <span class="nb">false</span><span class="p">;</span>
+
+  <span class="k">if</span> <span class="p">(</span><span class="n">m_moveUpFactor</span> <span class="o">!=</span> <span class="mi">0</span><span class="p">)</span> <span class="p">{</span>
+    <span class="n">RotateAboutRight</span><span class="p">(</span><span class="n">distance</span> <span class="o">*</span> <span class="n">m_moveUpFactor</span><span class="p">);</span>
+    <span class="n">needsRecompute</span> <span class="o">=</span> <span class="nb">true</span><span class="p">;</span>
+  <span class="p">}</span>
+
+  <span class="k">if</span> <span class="p">(</span><span class="n">m_moveRightFactor</span> <span class="o">!=</span> <span class="mi">0</span><span class="p">)</span> <span class="p">{</span>
+    <span class="n">RotateAboutUp</span><span class="p">(</span><span class="n">distance</span> <span class="o">*</span> <span class="n">m_moveRightFactor</span><span class="p">);</span>
+    <span class="n">needsRecompute</span> <span class="o">=</span> <span class="nb">true</span><span class="p">;</span>
+  <span class="p">}</span>
+
+  <span class="k">if</span> <span class="p">(</span><span class="n">m_zoomFactor</span> <span class="o">!=</span> <span class="mi">0</span><span class="p">)</span> <span class="p">{</span>
+    <span class="n">TranslateAlongLook</span><span class="p">(</span><span class="n">distance</span> <span class="o">*</span> <span class="n">m_zoomFactor</span><span class="p">);</span>
+    <span class="n">needsRecompute</span> <span class="o">=</span> <span class="nb">true</span><span class="p">;</span>
+  <span class="p">}</span>
+
+  <span class="k">if</span> <span class="p">(</span><span class="n">needsRecompute</span><span class="p">)</span> <span class="p">{</span>
+    <span class="n">Recompute</span><span class="p">();</span>
+  <span class="p">}</span>
+<span class="p">}</span>
+<span class="p">}</span> <span class="c1">// namespace Azura</span>
+</pre></div>
+</div>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="file_Source_Camera_Inc_Camera_PolarCamera.h.html" class="btn btn-neutral float-right" title="File PolarCamera.h" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="file_Source_Camera_Src_PolarCamera.cpp.html" class="btn btn-neutral" title="File PolarCamera.cpp" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2018, Vasu Mahesh
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  
+
+    
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+        <script type="text/javascript" src="../_static/jquery.js"></script>
+        <script type="text/javascript" src="../_static/underscore.js"></script>
+        <script type="text/javascript" src="../_static/doctools.js"></script>
+        <script type="text/javascript" src="../_static/collapsible-lists\js\CollapsibleLists.compressed.js"></script>
+        <script type="text/javascript" src="../_static/collapsible-lists\js\apply-collapsible-lists.js"></script>
+    
+
+  
+
+  <script type="text/javascript" src="../_static/js/theme.js"></script>
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

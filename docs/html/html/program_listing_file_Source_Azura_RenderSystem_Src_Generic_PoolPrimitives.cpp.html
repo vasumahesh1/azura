@@ -1,0 +1,281 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>Program Listing for File PoolPrimitives.cpp &mdash; Azura  documentation</title>
+  
+
+  
+  
+  
+  
+
+  
+
+  
+  
+    
+
+  
+
+  <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/collapsible-lists\css\tree_view.css" type="text/css" />
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="File PoolPrimitives.h" href="file_Source_Azura_RenderSystem_Inc_Generic_PoolPrimitives.h.html" />
+    <link rel="prev" title="File PoolPrimitives.cpp" href="file_Source_Azura_RenderSystem_Src_Generic_PoolPrimitives.cpp.html" /> 
+
+  
+  <script src="../_static/js/modernizr.min.js"></script>
+
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search">
+          
+
+          
+            <a href="../index.html" class="icon icon-home"> Azura
+          
+
+          
+          </a>
+
+          
+            
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <ul>
+<li class="toctree-l1"><a class="reference internal" href="../setting-up.html">Setting Up</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../build-instructions.html">Build Instructions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../cmake-wrappers.html">CMake Wrappers</a></li>
+<li class="toctree-l1"><a class="reference internal" href="apiRoot.html">Azura API</a></li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">Azura</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../index.html">Docs</a> &raquo;</li>
+        
+          <li><a href="apiRoot.html">Azura API</a> &raquo;</li>
+        
+          <li><a href="file_Source_Azura_RenderSystem_Src_Generic_PoolPrimitives.cpp.html">File PoolPrimitives.cpp</a> &raquo;</li>
+        
+      <li>Program Listing for File PoolPrimitives.cpp</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            <a href="../_sources/html/program_listing_file_Source_Azura_RenderSystem_Src_Generic_PoolPrimitives.cpp.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="program-listing-for-file-poolprimitives-cpp">
+<span id="program-listing-file-source-azura-rendersystem-src-generic-poolprimitives-cpp"></span><h1>Program Listing for File PoolPrimitives.cpp<a class="headerlink" href="#program-listing-for-file-poolprimitives-cpp" title="Permalink to this headline">¶</a></h1>
+<p>↰ <a class="reference internal" href="file_Source_Azura_RenderSystem_Src_Generic_PoolPrimitives.cpp.html#file-source-azura-rendersystem-src-generic-poolprimitives-cpp"><span class="std std-ref">Return to documentation for file</span></a> (<code class="docutils literal notranslate"><span class="pre">Source\Azura\RenderSystem\Src\Generic\PoolPrimitives.cpp</span></code>)</p>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="cp">#include</span> <span class="cpf">&quot;Generic/PoolPrimitives.h&quot;</span><span class="cp"></span>
+<span class="cp">#include</span> <span class="cpf">&quot;Generic/Renderer.h&quot;</span><span class="cp"></span>
+
+<span class="k">using</span> <span class="n">Azura</span><span class="o">::</span><span class="n">Containers</span><span class="o">::</span><span class="n">Vector</span><span class="p">;</span> <span class="c1">// NOLINT</span>
+
+<span class="k">namespace</span> <span class="n">Azura</span> <span class="p">{</span>
+<span class="k">namespace</span> <span class="p">{</span>
+
+
+<span class="k">struct</span> <span class="n">VertexWithUV</span> <span class="p">{</span>
+  <span class="kt">float</span> <span class="n">m_pos</span><span class="p">[</span><span class="mi">4</span><span class="p">];</span>
+  <span class="kt">float</span> <span class="n">m_uv</span><span class="p">[</span><span class="mi">2</span><span class="p">];</span>
+<span class="p">};</span>
+<span class="p">}</span> <span class="c1">// namespace</span>
+
+<span class="n">DrawablePool</span><span class="o">&amp;</span> <span class="n">PoolPrimitives</span><span class="o">::</span><span class="n">AddScreenQuad</span><span class="p">(</span><span class="n">Renderer</span><span class="o">&amp;</span> <span class="n">renderer</span><span class="p">,</span> <span class="n">U32</span> <span class="n">renderPass</span><span class="p">,</span> <span class="n">Memory</span><span class="o">::</span><span class="n">Allocator</span><span class="o">&amp;</span> <span class="n">allocatorTemporary</span><span class="p">)</span> <span class="p">{</span>
+  <span class="n">DrawablePoolCreateInfo</span> <span class="n">quadPoolInfo</span> <span class="o">=</span> <span class="p">{</span><span class="n">allocatorTemporary</span><span class="p">};</span>
+  <span class="n">quadPoolInfo</span><span class="p">.</span><span class="n">m_byteSize</span>             <span class="o">=</span> <span class="mh">0x400000</span><span class="p">;</span>
+  <span class="n">quadPoolInfo</span><span class="p">.</span><span class="n">m_numDrawables</span>         <span class="o">=</span> <span class="mi">1</span><span class="p">;</span>
+  <span class="n">quadPoolInfo</span><span class="p">.</span><span class="n">m_drawType</span>             <span class="o">=</span> <span class="n">DrawType</span><span class="o">::</span><span class="n">InstancedIndexed</span><span class="p">;</span>
+  <span class="n">quadPoolInfo</span><span class="p">.</span><span class="n">m_cullMode</span>             <span class="o">=</span> <span class="n">CullMode</span><span class="o">::</span><span class="n">None</span><span class="p">;</span>
+  <span class="n">quadPoolInfo</span><span class="p">.</span><span class="n">m_renderPasses</span>         <span class="o">=</span> <span class="p">{{</span><span class="n">renderPass</span><span class="p">},</span> <span class="n">allocatorTemporary</span><span class="p">};</span>
+
+  <span class="k">const</span> <span class="n">U32</span> <span class="n">DEFAULT_VERTEX_SLOT</span> <span class="o">=</span> <span class="n">quadPoolInfo</span><span class="p">.</span><span class="n">AddInputSlot</span><span class="p">({</span> <span class="n">BufferUsageRate</span><span class="o">::</span><span class="n">PerVertex</span><span class="p">,</span> <span class="p">{</span> <span class="p">{</span><span class="s">&quot;POSITION&quot;</span><span class="p">,</span> <span class="n">RawStorageFormat</span><span class="o">::</span><span class="n">R32G32B32A32_FLOAT</span><span class="p">},</span> <span class="p">{</span><span class="s">&quot;UV&quot;</span><span class="p">,</span> <span class="n">RawStorageFormat</span><span class="o">::</span><span class="n">R32G32_FLOAT</span><span class="p">}</span> <span class="p">}</span> <span class="p">});</span>
+
+  <span class="n">DrawablePool</span><span class="o">&amp;</span> <span class="n">quadPool</span> <span class="o">=</span> <span class="n">renderer</span><span class="p">.</span><span class="n">CreateDrawablePool</span><span class="p">(</span><span class="n">quadPoolInfo</span><span class="p">);</span>
+
+  <span class="n">Vector</span><span class="o">&lt;</span><span class="n">VertexWithUV</span><span class="o">&gt;</span> <span class="n">quadVertexData</span> <span class="o">=</span> <span class="n">Vector</span><span class="o">&lt;</span><span class="n">VertexWithUV</span><span class="o">&gt;</span><span class="p">({</span>
+    <span class="n">VertexWithUV</span><span class="p">{{</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="mf">0.9999f</span><span class="p">,</span> <span class="mi">1</span><span class="p">},</span> <span class="p">{</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">}},</span>
+    <span class="n">VertexWithUV</span><span class="p">{{</span><span class="mi">1</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="mf">0.9999f</span><span class="p">,</span> <span class="mi">1</span><span class="p">},</span> <span class="p">{</span><span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">}},</span>
+    <span class="n">VertexWithUV</span><span class="p">{{</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mf">0.9999f</span><span class="p">,</span> <span class="mi">1</span><span class="p">},</span> <span class="p">{</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">}},</span>
+    <span class="n">VertexWithUV</span><span class="p">{{</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mf">0.9999f</span><span class="p">,</span> <span class="mi">1</span><span class="p">},</span> <span class="p">{</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">}}</span>
+  <span class="p">},</span> <span class="n">allocatorTemporary</span><span class="p">);</span>
+
+  <span class="n">Vector</span><span class="o">&lt;</span><span class="n">U32</span><span class="o">&gt;</span> <span class="n">quadIndexData</span> <span class="o">=</span> <span class="n">Vector</span><span class="o">&lt;</span><span class="n">U32</span><span class="o">&gt;</span><span class="p">({</span>
+    <span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span>
+    <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">0</span>
+  <span class="p">},</span> <span class="n">allocatorTemporary</span><span class="p">);</span>
+
+  <span class="k">const</span> <span class="k">auto</span> <span class="n">quadBufferStart</span> <span class="o">=</span> <span class="k">reinterpret_cast</span><span class="o">&lt;</span><span class="n">U8</span><span class="o">*&gt;</span><span class="p">(</span><span class="n">quadVertexData</span><span class="p">.</span><span class="n">Data</span><span class="p">());</span> <span class="c1">// NOLINT</span>
+  <span class="k">const</span> <span class="k">auto</span> <span class="n">quadIndexStart</span>  <span class="o">=</span> <span class="k">reinterpret_cast</span><span class="o">&lt;</span><span class="n">U8</span><span class="o">*&gt;</span><span class="p">(</span><span class="n">quadIndexData</span><span class="p">.</span><span class="n">Data</span><span class="p">());</span>  <span class="c1">// NOLINT</span>
+
+  <span class="c1">// Create Drawable from Pool</span>
+  <span class="n">DrawableCreateInfo</span> <span class="n">createInfo</span> <span class="o">=</span> <span class="p">{};</span>
+  <span class="n">createInfo</span><span class="p">.</span><span class="n">m_vertexCount</span>      <span class="o">=</span> <span class="n">quadVertexData</span><span class="p">.</span><span class="n">GetSize</span><span class="p">();</span>
+  <span class="n">createInfo</span><span class="p">.</span><span class="n">m_indexCount</span>       <span class="o">=</span> <span class="n">quadIndexData</span><span class="p">.</span><span class="n">GetSize</span><span class="p">();</span>
+  <span class="n">createInfo</span><span class="p">.</span><span class="n">m_instanceCount</span>    <span class="o">=</span> <span class="mi">1</span><span class="p">;</span>
+  <span class="n">createInfo</span><span class="p">.</span><span class="n">m_indexType</span>        <span class="o">=</span> <span class="n">RawStorageFormat</span><span class="o">::</span><span class="n">R32_UINT</span><span class="p">;</span>
+
+  <span class="k">const</span> <span class="k">auto</span> <span class="n">quadId</span> <span class="o">=</span> <span class="n">quadPool</span><span class="p">.</span><span class="n">CreateDrawable</span><span class="p">(</span><span class="n">createInfo</span><span class="p">);</span>
+  <span class="n">quadPool</span><span class="p">.</span><span class="n">BindVertexData</span><span class="p">(</span><span class="n">quadId</span><span class="p">,</span> <span class="n">DEFAULT_VERTEX_SLOT</span><span class="p">,</span> <span class="n">quadBufferStart</span><span class="p">,</span>
+                          <span class="n">quadVertexData</span><span class="p">.</span><span class="n">GetSize</span><span class="p">()</span> <span class="o">*</span> <span class="k">sizeof</span><span class="p">(</span><span class="n">VertexWithUV</span><span class="p">));</span>
+  <span class="n">quadPool</span><span class="p">.</span><span class="n">SetIndexData</span><span class="p">(</span><span class="n">quadId</span><span class="p">,</span> <span class="n">quadIndexStart</span><span class="p">,</span> <span class="n">quadIndexData</span><span class="p">.</span><span class="n">GetSize</span><span class="p">()</span> <span class="o">*</span> <span class="k">sizeof</span><span class="p">(</span><span class="n">U32</span><span class="p">));</span>
+
+  <span class="k">return</span> <span class="n">quadPool</span><span class="p">;</span>
+<span class="p">}</span>
+
+
+<span class="p">}</span> <span class="c1">// namespace Azura</span>
+</pre></div>
+</div>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="file_Source_Azura_RenderSystem_Inc_Generic_PoolPrimitives.h.html" class="btn btn-neutral float-right" title="File PoolPrimitives.h" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="file_Source_Azura_RenderSystem_Src_Generic_PoolPrimitives.cpp.html" class="btn btn-neutral" title="File PoolPrimitives.cpp" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2018, Vasu Mahesh
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  
+
+    
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+        <script type="text/javascript" src="../_static/jquery.js"></script>
+        <script type="text/javascript" src="../_static/underscore.js"></script>
+        <script type="text/javascript" src="../_static/doctools.js"></script>
+        <script type="text/javascript" src="../_static/collapsible-lists\js\CollapsibleLists.compressed.js"></script>
+        <script type="text/javascript" src="../_static/collapsible-lists\js\apply-collapsible-lists.js"></script>
+    
+
+  
+
+  <script type="text/javascript" src="../_static/js/theme.js"></script>
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

@@ -1,0 +1,285 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>Setting Up &mdash; Azura  documentation</title>
+  
+
+  
+  
+  
+  
+
+  
+
+  
+  
+    
+
+  
+
+  <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="_static/collapsible-lists\css\tree_view.css" type="text/css" />
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="Build Instructions" href="build-instructions.html" />
+    <link rel="prev" title="Azura" href="index.html" /> 
+
+  
+  <script src="_static/js/modernizr.min.js"></script>
+
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search">
+          
+
+          
+            <a href="index.html" class="icon icon-home"> Azura
+          
+
+          
+          </a>
+
+          
+            
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <ul class="current">
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Setting Up</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#different-system-configs">1. Different System Configs</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#download-dependencies">2. Download Dependencies</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="build-instructions.html">Build Instructions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="cmake-wrappers.html">CMake Wrappers</a></li>
+<li class="toctree-l1"><a class="reference internal" href="html/apiRoot.html">Azura API</a></li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">Azura</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="index.html">Docs</a> &raquo;</li>
+        
+      <li>Setting Up</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            <a href="_sources/setting-up.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="setting-up">
+<h1>Setting Up<a class="headerlink" href="#setting-up" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="different-system-configs">
+<h2>1. Different System Configs<a class="headerlink" href="#different-system-configs" title="Permalink to this headline">¶</a></h2>
+<p>Azura only needs one thing in your PATH to be operational. It is a link to your Python27 application. Azura creates a copy of your environment variables and modifies them. It injects paths to MSVC Compilers and other platform specific things and calls CMake.</p>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">All build related configs are located in the <code class="docutils literal notranslate"><span class="pre">External</span></code> folder</p>
+</div>
+<p>There are now two ways for you to build:</p>
+<ul class="simple">
+<li><strong>Build the way Azura builds by default</strong><ul>
+<li>Involves: Copying your files &amp; extra HDD space</li>
+<li>Steps:<ul>
+<li>Look at the <a class="reference external" href="https://github.com/vasumahesh1/azura/blob/master/External/Config.ini">default config file</a> Azura picks up</li>
+<li>Make sure all of these paths exists - You will need to copy them over to <code class="docutils literal notranslate"><span class="pre">External/&lt;Platform&gt;/</span></code> or download the exact version online.</li>
+<li><a class="reference external" href="https://github.com/vasumahesh1/azura/blob/master/appveyor.yml">Appveyor YML file</a> might be helpful to get the direct download URL</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><strong>Build your own way</strong><ul>
+<li>Involves: Modifying two Config INI files that point to the correct Libraries and Platform SDKs</li>
+<li>Not recommended for beginners</li>
+</ul>
+</li>
+</ul>
+<div class="admonition warning">
+<p class="first admonition-title">Warning</p>
+<p class="last">Qt is known to create issues with Azura. Why? Qt straight up pollutes your PATH variable which confuses CMake in Azura to build for MSVC or MinGW. There is a variable injected by Qt which you can delete from your PATH environment variable.</p>
+</div>
+</div>
+<div class="section" id="download-dependencies">
+<h2>2. Download Dependencies<a class="headerlink" href="#download-dependencies" title="Permalink to this headline">¶</a></h2>
+<p>There are two sub steps for dependencies.</p>
+<ol class="arabic">
+<li><p class="first"><strong>Sub-module clone:</strong></p>
+<p>Just run <code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">submodule</span> <span class="pre">update</span> <span class="pre">--init</span> <span class="pre">--recursive</span></code> like normal and it should download all the dependencies needed. Currently, it downloads:</p>
+<ul class="simple">
+<li>Source/Imports/Common/benchmark</li>
+<li>Source/Imports/Common/glTF-SDK</li>
+<li>Source/Imports/Common/glfw</li>
+<li>Source/Imports/Common/mathfu</li>
+<li>Source/Imports/Common/stb</li>
+<li>Source/Imports/Common/yaml-cpp</li>
+</ul>
+</li>
+<li><p class="first"><strong>Manual download:</strong></p>
+<p>Sadly, we need to still download some of the stuff manually. This includes some stuff that can’t be on github. We recommend checking the <a class="reference external" href="https://github.com/vasumahesh1/azura/blob/master/appveyor.yml">Appveyor YML file</a> which have a direct download link to <strong>most</strong> of these. They are:</p>
+<ul class="simple">
+<li>Vulkan SDK 1.1.77.0 - Located at: <code class="docutils literal notranslate"><span class="pre">Source/Imports/&lt;Platform&gt;/Vulkan/1.1.77.0/</span></code></li>
+<li>Slang 0.11.16 - Located at <code class="docutils literal notranslate"><span class="pre">Source/Imports/&lt;Platform&gt;/Slang/slang-0.11.16/</span></code></li>
+<li>Boost 1.67 - Located at <code class="docutils literal notranslate"><span class="pre">Source/Imports/&lt;Platform&gt;/Boost/boost_1_67_0/</span></code></li>
+</ul>
+</li>
+</ol>
+<p>They are all versioned appropriately. In case for version changes, we just add a new folder.</p>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p>Difference between <code class="docutils literal notranslate"><span class="pre">External/&lt;Platform&gt;/</span></code> and <code class="docutils literal notranslate"><span class="pre">Source/Imports/&lt;Platform&gt;/</span></code>
+Both of these folders include Platform specific things. Why the two folders?</p>
+<p>There is a semantic difference. For example:</p>
+<p>In Windows, we have:</p>
+<p><code class="docutils literal notranslate"><span class="pre">External/Windows</span></code> and <code class="docutils literal notranslate"><span class="pre">Source/Imports/Windows</span></code></p>
+<p>Now a question: Where to place cmake.exe? This is a <em>tool</em> that Windows uses and is unrelated to the source code. Hence, it should stay outside the Source folder. That is why CMake is inside the <code class="docutils literal notranslate"><span class="pre">External</span></code> folder.</p>
+<p class="last">Another: Where to place vulkan.h and vulkan win32 headers? These are <em>C++ files</em> that are used by Azura. Hence, they should be inside <code class="docutils literal notranslate"><span class="pre">Source/Imports/Windows</span></code></p>
+</div>
+</div>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="build-instructions.html" class="btn btn-neutral float-right" title="Build Instructions" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="index.html" class="btn btn-neutral" title="Azura" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2018, Vasu Mahesh
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  
+
+    
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
+        <script type="text/javascript" src="_static/jquery.js"></script>
+        <script type="text/javascript" src="_static/underscore.js"></script>
+        <script type="text/javascript" src="_static/doctools.js"></script>
+        <script type="text/javascript" src="_static/collapsible-lists\js\CollapsibleLists.compressed.js"></script>
+        <script type="text/javascript" src="_static/collapsible-lists\js\apply-collapsible-lists.js"></script>
+    
+
+  
+
+  <script type="text/javascript" src="_static/js/theme.js"></script>
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

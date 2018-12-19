@@ -1,0 +1,521 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.8.14">
+  <compounddef id="class_azura_1_1_memory_1_1_allocator" kind="class" language="C++" prot="public" abstract="yes">
+    <compoundname>Azura::Memory::Allocator</compoundname>
+    <derivedcompoundref refid="class_azura_1_1_memory_1_1_monotonic_allocator" prot="public" virt="non-virtual">Azura::Memory::MonotonicAllocator</derivedcompoundref>
+    <derivedcompoundref refid="class_azura_1_1_memory_1_1_range_allocator" prot="public" virt="non-virtual">Azura::Memory::RangeAllocator</derivedcompoundref>
+    <includes refid="_allocator_8h" local="no">Allocator.h</includes>
+      <sectiondef kind="private-attrib">
+      <memberdef kind="variable" id="class_azura_1_1_memory_1_1_allocator_1a0d454a8b0d5ff9b598d9a99eabdbcdba" prot="private" static="no" mutable="no">
+        <type>AddressPtr</type>
+        <definition>AddressPtr Azura::Memory::Allocator::m_basePtr</definition>
+        <argsstring></argsstring>
+        <name>m_basePtr</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Source/Common/Inc/Memory/Allocator.h" line="95" column="1" bodyfile="Source/Common/Inc/Memory/Allocator.h" bodystart="95" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="class_azura_1_1_memory_1_1_allocator_1ac0c93896f807657e7de5b41d2a0543be" prot="private" static="no" mutable="no">
+        <type>U32</type>
+        <definition>U32 Azura::Memory::Allocator::m_size</definition>
+        <argsstring></argsstring>
+        <name>m_size</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Source/Common/Inc/Memory/Allocator.h" line="96" column="1" bodyfile="Source/Common/Inc/Memory/Allocator.h" bodystart="96" bodyend="-1"/>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="public-func">
+      <memberdef kind="function" id="class_azura_1_1_memory_1_1_allocator_1a63f66173b61bcb2936c5ee42e23d6555" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>Azura::Memory::Allocator::Allocator</definition>
+        <argsstring>(void *resource, U32 size)</argsstring>
+        <name>Allocator</name>
+        <param>
+          <type>void *</type>
+          <declname>resource</declname>
+        </param>
+        <param>
+          <type>U32</type>
+          <declname>size</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Source/Common/Inc/Memory/Allocator.h" line="28" column="1" bodyfile="Source/Common/Src/Memory/Allocator.cpp" bodystart="8" bodyend="10"/>
+      </memberdef>
+      <memberdef kind="function" id="class_azura_1_1_memory_1_1_allocator_1a04e5f421a8ce8c63540f23ca0a6a16b4" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>Azura::Memory::Allocator::Allocator</definition>
+        <argsstring>(AddressPtr resource, U32 size)</argsstring>
+        <name>Allocator</name>
+        <param>
+          <type>AddressPtr</type>
+          <declname>resource</declname>
+        </param>
+        <param>
+          <type>U32</type>
+          <declname>size</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Source/Common/Inc/Memory/Allocator.h" line="29" column="1" bodyfile="Source/Common/Src/Memory/Allocator.cpp" bodystart="12" bodyend="12"/>
+      </memberdef>
+      <memberdef kind="function" id="class_azura_1_1_memory_1_1_allocator_1a7ae01cfa01f9e4354c9d811d899aa1e1" prot="public" static="no" const="no" explicit="no" inline="no" virt="virtual">
+        <type></type>
+        <definition>Azura::Memory::Allocator::~Allocator</definition>
+        <argsstring>()</argsstring>
+        <name>~Allocator</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Source/Common/Inc/Memory/Allocator.h" line="30" column="1"/>
+      </memberdef>
+      <memberdef kind="function" id="class_azura_1_1_memory_1_1_allocator_1a4f5ab0c255db815ab88fd0bbe7b7185a" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>Azura::Memory::Allocator::Allocator</definition>
+        <argsstring>(const Allocator &amp;other)=delete</argsstring>
+        <name>Allocator</name>
+        <param>
+          <type>const <ref refid="class_azura_1_1_memory_1_1_allocator" kindref="compound">Allocator</ref> &amp;</type>
+          <declname>other</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Source/Common/Inc/Memory/Allocator.h" line="33" column="1"/>
+      </memberdef>
+      <memberdef kind="function" id="class_azura_1_1_memory_1_1_allocator_1ac64c3f6013af712213e377b9b21bf162" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="class_azura_1_1_memory_1_1_allocator" kindref="compound">Allocator</ref> &amp;</type>
+        <definition>Allocator&amp; Azura::Memory::Allocator::operator=</definition>
+        <argsstring>(const Allocator &amp;other)=delete</argsstring>
+        <name>operator=</name>
+        <param>
+          <type>const <ref refid="class_azura_1_1_memory_1_1_allocator" kindref="compound">Allocator</ref> &amp;</type>
+          <declname>other</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Source/Common/Inc/Memory/Allocator.h" line="34" column="1"/>
+      </memberdef>
+      <memberdef kind="function" id="class_azura_1_1_memory_1_1_allocator_1a13a71cfb6bbfdb445a51db710597f1e3" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>Azura::Memory::Allocator::Allocator</definition>
+        <argsstring>(Allocator &amp;&amp;other) noexcept=default</argsstring>
+        <name>Allocator</name>
+        <param>
+          <type><ref refid="class_azura_1_1_memory_1_1_allocator" kindref="compound">Allocator</ref> &amp;&amp;</type>
+          <declname>other</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Source/Common/Inc/Memory/Allocator.h" line="37" column="1"/>
+      </memberdef>
+      <memberdef kind="function" id="class_azura_1_1_memory_1_1_allocator_1a6bcad4fa8aff6a3b564da97634fdcdbf" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="class_azura_1_1_memory_1_1_allocator" kindref="compound">Allocator</ref> &amp;</type>
+        <definition>Allocator&amp; Azura::Memory::Allocator::operator=</definition>
+        <argsstring>(Allocator &amp;&amp;other) noexcept=default</argsstring>
+        <name>operator=</name>
+        <param>
+          <type><ref refid="class_azura_1_1_memory_1_1_allocator" kindref="compound">Allocator</ref> &amp;&amp;</type>
+          <declname>other</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Source/Common/Inc/Memory/Allocator.h" line="38" column="1"/>
+      </memberdef>
+      <memberdef kind="function" id="class_azura_1_1_memory_1_1_allocator_1a499fb3b777375a6b0d32cd8143e1586b" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>typename Type</type>
+          </param>
+          <param>
+            <type>typename...</type>
+            <declname>Args</declname>
+            <defname>Args</defname>
+          </param>
+        </templateparamlist>
+        <type>UniquePtr&lt; Type &gt;</type>
+        <definition>UniquePtr&lt; Type &gt; Azura::Memory::Allocator::New</definition>
+        <argsstring>(Args ... args)</argsstring>
+        <name>New</name>
+        <param>
+          <type>Args ...</type>
+          <declname>args</declname>
+        </param>
+        <briefdescription>
+<para>Allocates &amp; initializes the Type and returns a pointer to that memory location. </para>        </briefdescription>
+        <detaileddescription>
+<para>New is analogous to the C++ new keyword. It tells the allocator to construct an object in the memory recourse it is managing. This functions first allocates a block of memory and then constructs it with the supplied params. Some example usages: <programlisting filename=".cpp"><codeline><highlight class="keyword">auto</highlight><highlight class="normal"><sp/>floatDataPtr<sp/>=<sp/>MyAllocator.New&lt;</highlight><highlight class="keywordtype">float</highlight><highlight class="normal">&gt;(0.0f);</highlight></codeline>
+<codeline><highlight class="normal"></highlight></codeline>
+<codeline><highlight class="normal"></highlight><highlight class="keyword">class<sp/></highlight><highlight class="normal">CustomClass{};</highlight></codeline>
+<codeline><highlight class="normal"></highlight><highlight class="keyword">auto</highlight><highlight class="normal"><sp/>customDataPtr<sp/>=<sp/>MyAllocator.New&lt;CustomClass&gt;();</highlight></codeline>
+</programlisting></para><para>The actual returned type is a <computeroutput>UniquePtr&lt;T&gt;</computeroutput> which is a std::unique_ptr with a custom deleter.</para><para><parameterlist kind="templateparam"><parameteritem>
+<parameternamelist>
+<parametername>Type</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Data Type to allocate </para></parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>Args</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Initialization Arguments </para></parameterdescription>
+</parameteritem>
+</parameterlist>
+<parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>args</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The list of arguments that Type needs for construction</para></parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>A unique pointer with a custom deleter </para></simplesect>
+</para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Source/Common/Inc/Memory/Allocator.h" line="61" column="1" bodyfile="Source/Common/Inc/Memory/Allocator.h" bodystart="100" bodyend="102"/>
+      </memberdef>
+      <memberdef kind="function" id="class_azura_1_1_memory_1_1_allocator_1af2df83d27feb8bbc652284698dac2351" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>typename Type</type>
+          </param>
+          <param>
+            <type>typename...</type>
+            <declname>Args</declname>
+            <defname>Args</defname>
+          </param>
+        </templateparamlist>
+        <type>UniqueArrayPtr&lt; Type &gt;</type>
+        <definition>UniqueArrayPtr&lt; Type &gt; Azura::Memory::Allocator::NewArray</definition>
+        <argsstring>(U32 numElements, Args ... args)</argsstring>
+        <name>NewArray</name>
+        <param>
+          <type>U32</type>
+          <declname>numElements</declname>
+        </param>
+        <param>
+          <type>Args ...</type>
+          <declname>args</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Source/Common/Inc/Memory/Allocator.h" line="64" column="1" bodyfile="Source/Common/Inc/Memory/Allocator.h" bodystart="105" bodyend="107"/>
+      </memberdef>
+      <memberdef kind="function" id="class_azura_1_1_memory_1_1_allocator_1a7ee8dad5f32dad055f45003e3d4a41eb" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>typename Type</type>
+          </param>
+          <param>
+            <type>typename...</type>
+            <declname>Args</declname>
+            <defname>Args</defname>
+          </param>
+        </templateparamlist>
+        <type>UniquePtr&lt; Type &gt;</type>
+        <definition>UniquePtr&lt; Type &gt; Azura::Memory::Allocator::RawNew</definition>
+        <argsstring>(Args ... args)</argsstring>
+        <name>RawNew</name>
+        <param>
+          <type>Args ...</type>
+          <declname>args</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Source/Common/Inc/Memory/Allocator.h" line="67" column="1" bodyfile="Source/Common/Inc/Memory/Allocator.h" bodystart="110" bodyend="112"/>
+      </memberdef>
+      <memberdef kind="function" id="class_azura_1_1_memory_1_1_allocator_1a252732e042cebc1256d7a8e5822a1732" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>typename Type</type>
+          </param>
+          <param>
+            <type>typename...</type>
+            <declname>Args</declname>
+            <defname>Args</defname>
+          </param>
+        </templateparamlist>
+        <type>UniqueArrayPtr&lt; Type &gt;</type>
+        <definition>UniqueArrayPtr&lt; Type &gt; Azura::Memory::Allocator::RawNewArray</definition>
+        <argsstring>(U32 numElements, Args ... args)</argsstring>
+        <name>RawNewArray</name>
+        <param>
+          <type>U32</type>
+          <declname>numElements</declname>
+        </param>
+        <param>
+          <type>Args ...</type>
+          <declname>args</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Source/Common/Inc/Memory/Allocator.h" line="70" column="1" bodyfile="Source/Common/Inc/Memory/Allocator.h" bodystart="115" bodyend="117"/>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="protected-func">
+      <memberdef kind="function" id="class_azura_1_1_memory_1_1_allocator_1a3786ae37c581e3e8e221b51fa4c982e0" prot="protected" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
+        <type>U32</type>
+        <definition>U32 Azura::Memory::Allocator::Size</definition>
+        <argsstring>() const</argsstring>
+        <name>Size</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Source/Common/Inc/Memory/Allocator.h" line="82" column="1" bodyfile="Source/Common/Src/Memory/Allocator.cpp" bodystart="18" bodyend="20"/>
+      </memberdef>
+      <memberdef kind="function" id="class_azura_1_1_memory_1_1_allocator_1a45e1ae30db48775871f472d09f0ba354" prot="protected" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
+        <type>AddressPtr</type>
+        <definition>AddressPtr Azura::Memory::Allocator::BasePtr</definition>
+        <argsstring>() const</argsstring>
+        <name>BasePtr</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Source/Common/Inc/Memory/Allocator.h" line="83" column="1" bodyfile="Source/Common/Src/Memory/Allocator.cpp" bodystart="22" bodyend="24"/>
+      </memberdef>
+      <memberdef kind="function" id="class_azura_1_1_memory_1_1_allocator_1a4ea0bf858fb03e351e2b53cf533b28e0" prot="protected" static="no" const="no" explicit="no" inline="no" virt="pure-virtual">
+        <type>void *</type>
+        <definition>virtual void* Azura::Memory::Allocator::Allocate</definition>
+        <argsstring>(U32 size, U32 alignment)=0</argsstring>
+        <name>Allocate</name>
+        <reimplementedby refid="class_azura_1_1_memory_1_1_range_allocator_1a69c14ff70f62adb5bc0f40dc15cc071a">Allocate</reimplementedby>
+        <reimplementedby refid="class_azura_1_1_memory_1_1_monotonic_allocator_1a5a3a0d00854453236515762f28a0bfe7">Allocate</reimplementedby>
+        <param>
+          <type>U32</type>
+          <declname>size</declname>
+        </param>
+        <param>
+          <type>U32</type>
+          <declname>alignment</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Source/Common/Inc/Memory/Allocator.h" line="85" column="1"/>
+      </memberdef>
+      <memberdef kind="function" id="class_azura_1_1_memory_1_1_allocator_1aa11b99093ae5c589b86efaddcded4933" prot="protected" static="no" const="no" explicit="no" inline="no" virt="pure-virtual">
+        <type>void</type>
+        <definition>virtual void Azura::Memory::Allocator::Deallocate</definition>
+        <argsstring>(void *address)=0</argsstring>
+        <name>Deallocate</name>
+        <reimplementedby refid="class_azura_1_1_memory_1_1_range_allocator_1aeb29815c8bc7c1f2081c9c125620727c">Deallocate</reimplementedby>
+        <reimplementedby refid="class_azura_1_1_memory_1_1_monotonic_allocator_1a6f81ae431111a6db680ca159d9a575e1">Deallocate</reimplementedby>
+        <param>
+          <type>void *</type>
+          <declname>address</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Source/Common/Inc/Memory/Allocator.h" line="86" column="1"/>
+      </memberdef>
+      <memberdef kind="function" id="class_azura_1_1_memory_1_1_allocator_1a8e6578ce7e05f6f2d138f9e3385626cc" prot="protected" static="no" const="no" explicit="no" inline="no" virt="virtual">
+        <type>void</type>
+        <definition>void Azura::Memory::Allocator::Reset</definition>
+        <argsstring>()</argsstring>
+        <name>Reset</name>
+        <reimplementedby refid="class_azura_1_1_memory_1_1_monotonic_allocator_1a5c31a835742876a7e041b6f46df17aa1">Reset</reimplementedby>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Source/Common/Inc/Memory/Allocator.h" line="87" column="1" bodyfile="Source/Common/Src/Memory/Allocator.cpp" bodystart="16" bodyend="16"/>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="private-func">
+      <memberdef kind="function" id="class_azura_1_1_memory_1_1_allocator_1a1e88c700ba617de891c91ae938c7d6cd" prot="private" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>typename Type</type>
+          </param>
+          <param>
+            <type>bool</type>
+            <declname>Construct</declname>
+            <defname>Construct</defname>
+          </param>
+          <param>
+            <type>typename...</type>
+            <declname>Args</declname>
+            <defname>Args</defname>
+          </param>
+        </templateparamlist>
+        <type>UniquePtr&lt; Type &gt;</type>
+        <definition>UniquePtr&lt; Type &gt; Azura::Memory::Allocator::InternalAllocate</definition>
+        <argsstring>(U32 size, U32 alignment, Args ... args)</argsstring>
+        <name>InternalAllocate</name>
+        <param>
+          <type>U32</type>
+          <declname>size</declname>
+        </param>
+        <param>
+          <type>U32</type>
+          <declname>alignment</declname>
+        </param>
+        <param>
+          <type>Args ...</type>
+          <declname>args</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Source/Common/Inc/Memory/Allocator.h" line="91" column="1" bodyfile="Source/Common/Inc/Memory/Allocator.h" bodystart="120" bodyend="140"/>
+      </memberdef>
+      <memberdef kind="function" id="class_azura_1_1_memory_1_1_allocator_1a1c54928bd374d682d5d882381aa0d79a" prot="private" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>class Type</type>
+          </param>
+          <param>
+            <type>bool</type>
+            <declname>Construct</declname>
+            <defname>Construct</defname>
+          </param>
+          <param>
+            <type>class...</type>
+            <declname>Args</declname>
+            <defname>Args</defname>
+          </param>
+        </templateparamlist>
+        <type>UniqueArrayPtr&lt; Type &gt;</type>
+        <definition>UniqueArrayPtr&lt; Type &gt; Azura::Memory::Allocator::InternalAllocateArray</definition>
+        <argsstring>(U32 elementSize, U32 numElements, U32 alignment, Args ... args)</argsstring>
+        <name>InternalAllocateArray</name>
+        <param>
+          <type>U32</type>
+          <declname>elementSize</declname>
+        </param>
+        <param>
+          <type>U32</type>
+          <declname>numElements</declname>
+        </param>
+        <param>
+          <type>U32</type>
+          <declname>alignment</declname>
+        </param>
+        <param>
+          <type>Args ...</type>
+          <declname>args</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Source/Common/Inc/Memory/Allocator.h" line="93" column="1" bodyfile="Source/Common/Inc/Memory/Allocator.h" bodystart="143" bodyend="172"/>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+<para>Base class for an <ref refid="class_azura_1_1_memory_1_1_allocator" kindref="compound">Allocator</ref>. </para>    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <inheritancegraph>
+      <node id="3">
+        <label>Azura::Memory::Allocator</label>
+        <link refid="class_azura_1_1_memory_1_1_allocator"/>
+      </node>
+      <node id="4">
+        <label>Azura::Memory::MonotonicAllocator</label>
+        <link refid="class_azura_1_1_memory_1_1_monotonic_allocator"/>
+        <childnode refid="3" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="5">
+        <label>Azura::Memory::RangeAllocator</label>
+        <link refid="class_azura_1_1_memory_1_1_range_allocator"/>
+        <childnode refid="3" relation="public-inheritance">
+        </childnode>
+      </node>
+    </inheritancegraph>
+    <location file="Source/Common/Inc/Memory/Allocator.h" line="26" column="1" bodyfile="Source/Common/Inc/Memory/Allocator.h" bodystart="26" bodyend="97"/>
+    <listofallmembers>
+      <member refid="class_azura_1_1_memory_1_1_allocator_1a4ea0bf858fb03e351e2b53cf533b28e0" prot="protected" virt="pure-virtual"><scope>Azura::Memory::Allocator</scope><name>Allocate</name></member>
+      <member refid="class_azura_1_1_memory_1_1_allocator_1a63f66173b61bcb2936c5ee42e23d6555" prot="public" virt="non-virtual"><scope>Azura::Memory::Allocator</scope><name>Allocator</name></member>
+      <member refid="class_azura_1_1_memory_1_1_allocator_1a04e5f421a8ce8c63540f23ca0a6a16b4" prot="public" virt="non-virtual"><scope>Azura::Memory::Allocator</scope><name>Allocator</name></member>
+      <member refid="class_azura_1_1_memory_1_1_allocator_1a4f5ab0c255db815ab88fd0bbe7b7185a" prot="public" virt="non-virtual"><scope>Azura::Memory::Allocator</scope><name>Allocator</name></member>
+      <member refid="class_azura_1_1_memory_1_1_allocator_1a13a71cfb6bbfdb445a51db710597f1e3" prot="public" virt="non-virtual"><scope>Azura::Memory::Allocator</scope><name>Allocator</name></member>
+      <member refid="class_azura_1_1_memory_1_1_allocator_1a45e1ae30db48775871f472d09f0ba354" prot="protected" virt="non-virtual"><scope>Azura::Memory::Allocator</scope><name>BasePtr</name></member>
+      <member refid="class_azura_1_1_memory_1_1_allocator_1aa11b99093ae5c589b86efaddcded4933" prot="protected" virt="pure-virtual"><scope>Azura::Memory::Allocator</scope><name>Deallocate</name></member>
+      <member refid="class_azura_1_1_memory_1_1_allocator_1a1e88c700ba617de891c91ae938c7d6cd" prot="private" virt="non-virtual"><scope>Azura::Memory::Allocator</scope><name>InternalAllocate</name></member>
+      <member refid="class_azura_1_1_memory_1_1_allocator_1a1c54928bd374d682d5d882381aa0d79a" prot="private" virt="non-virtual"><scope>Azura::Memory::Allocator</scope><name>InternalAllocateArray</name></member>
+      <member refid="class_azura_1_1_memory_1_1_allocator_1a0d454a8b0d5ff9b598d9a99eabdbcdba" prot="private" virt="non-virtual"><scope>Azura::Memory::Allocator</scope><name>m_basePtr</name></member>
+      <member refid="class_azura_1_1_memory_1_1_allocator_1ac0c93896f807657e7de5b41d2a0543be" prot="private" virt="non-virtual"><scope>Azura::Memory::Allocator</scope><name>m_size</name></member>
+      <member refid="class_azura_1_1_memory_1_1_allocator_1a499fb3b777375a6b0d32cd8143e1586b" prot="public" virt="non-virtual"><scope>Azura::Memory::Allocator</scope><name>New</name></member>
+      <member refid="class_azura_1_1_memory_1_1_allocator_1af2df83d27feb8bbc652284698dac2351" prot="public" virt="non-virtual"><scope>Azura::Memory::Allocator</scope><name>NewArray</name></member>
+      <member refid="class_azura_1_1_memory_1_1_allocator_1ac64c3f6013af712213e377b9b21bf162" prot="public" virt="non-virtual"><scope>Azura::Memory::Allocator</scope><name>operator=</name></member>
+      <member refid="class_azura_1_1_memory_1_1_allocator_1a6bcad4fa8aff6a3b564da97634fdcdbf" prot="public" virt="non-virtual"><scope>Azura::Memory::Allocator</scope><name>operator=</name></member>
+      <member refid="class_azura_1_1_memory_1_1_allocator_1a7ee8dad5f32dad055f45003e3d4a41eb" prot="public" virt="non-virtual"><scope>Azura::Memory::Allocator</scope><name>RawNew</name></member>
+      <member refid="class_azura_1_1_memory_1_1_allocator_1a252732e042cebc1256d7a8e5822a1732" prot="public" virt="non-virtual"><scope>Azura::Memory::Allocator</scope><name>RawNewArray</name></member>
+      <member refid="class_azura_1_1_memory_1_1_allocator_1a8e6578ce7e05f6f2d138f9e3385626cc" prot="protected" virt="virtual"><scope>Azura::Memory::Allocator</scope><name>Reset</name></member>
+      <member refid="class_azura_1_1_memory_1_1_allocator_1a3786ae37c581e3e8e221b51fa4c982e0" prot="protected" virt="non-virtual"><scope>Azura::Memory::Allocator</scope><name>Size</name></member>
+      <member refid="class_azura_1_1_memory_1_1_allocator_1a7ae01cfa01f9e4354c9d811d899aa1e1" prot="public" virt="virtual"><scope>Azura::Memory::Allocator</scope><name>~Allocator</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

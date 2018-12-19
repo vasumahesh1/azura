@@ -1,0 +1,993 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.8.14">
+  <compounddef id="class_azura_1_1_drawable_pool" kind="class" language="C++" prot="public" abstract="yes">
+    <compoundname>Azura::DrawablePool</compoundname>
+    <derivedcompoundref refid="class_azura_1_1_d3_d12_1_1_d3_d12_drawable_pool" prot="public" virt="non-virtual">Azura::D3D12::D3D12DrawablePool</derivedcompoundref>
+    <derivedcompoundref refid="class_azura_1_1_vulkan_1_1_vk_drawable_pool" prot="public" virt="non-virtual">Azura::Vulkan::VkDrawablePool</derivedcompoundref>
+      <sectiondef kind="protected-attrib">
+      <memberdef kind="variable" id="class_azura_1_1_drawable_pool_1a161813b2e1251fa3fd0e1065e4401867" prot="protected" static="no" mutable="no">
+        <type>U32</type>
+        <definition>U32 Azura::DrawablePool::m_numVertexSlots</definition>
+        <argsstring></argsstring>
+        <name>m_numVertexSlots</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Source/Azura/RenderSystem/Inc/Generic/Drawable.h" line="145" column="1" bodyfile="Source/Azura/RenderSystem/Inc/Generic/Drawable.h" bodystart="145" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="class_azura_1_1_drawable_pool_1a956502ffdf433ea693ae515dc03bfadd" prot="protected" static="no" mutable="no">
+        <type>U32</type>
+        <definition>U32 Azura::DrawablePool::m_numInstanceSlots</definition>
+        <argsstring></argsstring>
+        <name>m_numInstanceSlots</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Source/Azura/RenderSystem/Inc/Generic/Drawable.h" line="146" column="1" bodyfile="Source/Azura/RenderSystem/Inc/Generic/Drawable.h" bodystart="146" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="class_azura_1_1_drawable_pool_1a6e22814af049c3c1b18101e75cb93e5d" prot="protected" static="no" mutable="no">
+        <type><ref refid="struct_azura_1_1_descriptor_count" kindref="compound">DescriptorCount</ref></type>
+        <definition>DescriptorCount Azura::DrawablePool::m_descriptorCount</definition>
+        <argsstring></argsstring>
+        <name>m_descriptorCount</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Source/Azura/RenderSystem/Inc/Generic/Drawable.h" line="148" column="1" bodyfile="Source/Azura/RenderSystem/Inc/Generic/Drawable.h" bodystart="148" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="class_azura_1_1_drawable_pool_1add4a5e2764fbec5a1cccc72a15f7005d" prot="protected" static="no" mutable="no">
+        <type><ref refid="class_azura_1_1_containers_1_1_vector" kindref="compound">Containers::Vector</ref>&lt; <ref refid="struct_azura_1_1_vertex_slot" kindref="compound">VertexSlot</ref> &gt;</type>
+        <definition>Containers::Vector&lt;VertexSlot&gt; Azura::DrawablePool::m_vertexDataSlots</definition>
+        <argsstring></argsstring>
+        <name>m_vertexDataSlots</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Source/Azura/RenderSystem/Inc/Generic/Drawable.h" line="150" column="1" bodyfile="Source/Azura/RenderSystem/Inc/Generic/Drawable.h" bodystart="150" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="class_azura_1_1_drawable_pool_1a63db7d2f0a3faf8878ca21c2ea97e6c6" prot="protected" static="no" mutable="no">
+        <type><ref refid="class_azura_1_1_containers_1_1_vector" kindref="compound">Containers::Vector</ref>&lt; U32 &gt;</type>
+        <definition>Containers::Vector&lt;U32&gt; Azura::DrawablePool::m_renderPasses</definition>
+        <argsstring></argsstring>
+        <name>m_renderPasses</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Source/Azura/RenderSystem/Inc/Generic/Drawable.h" line="151" column="1" bodyfile="Source/Azura/RenderSystem/Inc/Generic/Drawable.h" bodystart="151" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="class_azura_1_1_drawable_pool_1a422d98f5396b382229b98131d1d73ae1" prot="protected" static="no" mutable="no">
+        <type><ref refid="class_azura_1_1_containers_1_1_vector" kindref="compound">Containers::Vector</ref>&lt; <ref refid="struct_azura_1_1_texture_buffer_info" kindref="compound">TextureBufferInfo</ref> &gt;</type>
+        <definition>Containers::Vector&lt;TextureBufferInfo&gt; Azura::DrawablePool::m_textureBufferInfos</definition>
+        <argsstring></argsstring>
+        <name>m_textureBufferInfos</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Source/Azura/RenderSystem/Inc/Generic/Drawable.h" line="153" column="1" bodyfile="Source/Azura/RenderSystem/Inc/Generic/Drawable.h" bodystart="153" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="class_azura_1_1_drawable_pool_1a1f813d234ad65185d9eaa8673b544bc5" prot="protected" static="no" mutable="no">
+        <type><ref refid="class_azura_1_1_containers_1_1_vector" kindref="compound">Containers::Vector</ref>&lt; <ref refid="struct_azura_1_1_sampler_info" kindref="compound">SamplerInfo</ref> &gt;</type>
+        <definition>Containers::Vector&lt;SamplerInfo&gt; Azura::DrawablePool::m_samplerInfos</definition>
+        <argsstring></argsstring>
+        <name>m_samplerInfos</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Source/Azura/RenderSystem/Inc/Generic/Drawable.h" line="154" column="1" bodyfile="Source/Azura/RenderSystem/Inc/Generic/Drawable.h" bodystart="154" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="class_azura_1_1_drawable_pool_1a039f9497a62acfd5be406878ce39e5fd" prot="protected" static="no" mutable="no">
+        <type><ref refid="class_azura_1_1_containers_1_1_vector" kindref="compound">Containers::Vector</ref>&lt; <ref refid="struct_azura_1_1_buffer_update" kindref="compound">BufferUpdate</ref> &gt;</type>
+        <definition>Containers::Vector&lt;BufferUpdate&gt; Azura::DrawablePool::m_bufferUpdates</definition>
+        <argsstring></argsstring>
+        <name>m_bufferUpdates</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Source/Azura/RenderSystem/Inc/Generic/Drawable.h" line="156" column="1" bodyfile="Source/Azura/RenderSystem/Inc/Generic/Drawable.h" bodystart="156" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="class_azura_1_1_drawable_pool_1a9c0e196cb8d6e409d1e8ddafb0adfabe" prot="protected" static="no" mutable="no">
+        <type>CullMode</type>
+        <definition>CullMode Azura::DrawablePool::m_cullMode</definition>
+        <argsstring></argsstring>
+        <name>m_cullMode</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Source/Azura/RenderSystem/Inc/Generic/Drawable.h" line="158" column="1" bodyfile="Source/Azura/RenderSystem/Inc/Generic/Drawable.h" bodystart="158" bodyend="-1"/>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="private-attrib">
+      <memberdef kind="variable" id="class_azura_1_1_drawable_pool_1aa502409466dfc85f99958e1d1735dbfb" prot="private" static="no" mutable="no">
+        <type>U32</type>
+        <definition>U32 Azura::DrawablePool::m_byteSize</definition>
+        <argsstring></argsstring>
+        <name>m_byteSize</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Source/Azura/RenderSystem/Inc/Generic/Drawable.h" line="161" column="1" bodyfile="Source/Azura/RenderSystem/Inc/Generic/Drawable.h" bodystart="161" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="class_azura_1_1_drawable_pool_1a151a8ce0f02dff480d1ebc84ce6a21db" prot="private" static="no" mutable="no">
+        <type>DrawType</type>
+        <definition>DrawType Azura::DrawablePool::m_drawType</definition>
+        <argsstring></argsstring>
+        <name>m_drawType</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Source/Azura/RenderSystem/Inc/Generic/Drawable.h" line="162" column="1" bodyfile="Source/Azura/RenderSystem/Inc/Generic/Drawable.h" bodystart="162" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="class_azura_1_1_drawable_pool_1a0a26d339ff212387ac708fe870444d94" prot="private" static="no" mutable="no">
+        <type>std::reference_wrapper&lt; <ref refid="class_azura_1_1_memory_1_1_allocator" kindref="compound">Memory::Allocator</ref> &gt;</type>
+        <definition>std::reference_wrapper&lt;Memory::Allocator&gt; Azura::DrawablePool::m_allocator</definition>
+        <argsstring></argsstring>
+        <name>m_allocator</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Source/Azura/RenderSystem/Inc/Generic/Drawable.h" line="164" column="1" bodyfile="Source/Azura/RenderSystem/Inc/Generic/Drawable.h" bodystart="164" bodyend="-1"/>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="public-func">
+      <memberdef kind="function" id="class_azura_1_1_drawable_pool_1a297853456237e9e487b6397883af4a19" prot="public" static="no" const="no" explicit="yes" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>Azura::DrawablePool::DrawablePool</definition>
+        <argsstring>(const DrawablePoolCreateInfo &amp;createInfo, DescriptorCount descriptorCount, Memory::Allocator &amp;allocator)</argsstring>
+        <name>DrawablePool</name>
+        <param>
+          <type>const <ref refid="struct_azura_1_1_drawable_pool_create_info" kindref="compound">DrawablePoolCreateInfo</ref> &amp;</type>
+          <declname>createInfo</declname>
+        </param>
+        <param>
+          <type><ref refid="struct_azura_1_1_descriptor_count" kindref="compound">DescriptorCount</ref></type>
+          <declname>descriptorCount</declname>
+        </param>
+        <param>
+          <type><ref refid="class_azura_1_1_memory_1_1_allocator" kindref="compound">Memory::Allocator</ref> &amp;</type>
+          <declname>allocator</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Source/Azura/RenderSystem/Inc/Generic/Drawable.h" line="95" column="1" bodyfile="Source/Azura/RenderSystem/Src/Generic/Drawable.cpp" bodystart="141" bodyend="175"/>
+      </memberdef>
+      <memberdef kind="function" id="class_azura_1_1_drawable_pool_1acb0064fb652b3f1f84397c4d0a645bc9" prot="public" static="no" const="no" explicit="no" inline="no" virt="virtual">
+        <type></type>
+        <definition>virtual Azura::DrawablePool::~DrawablePool</definition>
+        <argsstring>()=default</argsstring>
+        <name>~DrawablePool</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Source/Azura/RenderSystem/Inc/Generic/Drawable.h" line="98" column="1"/>
+      </memberdef>
+      <memberdef kind="function" id="class_azura_1_1_drawable_pool_1a79b953054ac1a1ca086398a9a79d7505" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>Azura::DrawablePool::DrawablePool</definition>
+        <argsstring>(const DrawablePool &amp;other)=delete</argsstring>
+        <name>DrawablePool</name>
+        <param>
+          <type>const <ref refid="class_azura_1_1_drawable_pool" kindref="compound">DrawablePool</ref> &amp;</type>
+          <declname>other</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Source/Azura/RenderSystem/Inc/Generic/Drawable.h" line="100" column="1"/>
+      </memberdef>
+      <memberdef kind="function" id="class_azura_1_1_drawable_pool_1ab3794b52aa96c0ebceca942c612f7b6e" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>Azura::DrawablePool::DrawablePool</definition>
+        <argsstring>(DrawablePool &amp;&amp;other) noexcept=default</argsstring>
+        <name>DrawablePool</name>
+        <param>
+          <type><ref refid="class_azura_1_1_drawable_pool" kindref="compound">DrawablePool</ref> &amp;&amp;</type>
+          <declname>other</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Source/Azura/RenderSystem/Inc/Generic/Drawable.h" line="101" column="1"/>
+      </memberdef>
+      <memberdef kind="function" id="class_azura_1_1_drawable_pool_1ad53e9313899c1ce573bfa5dc04de558d" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="class_azura_1_1_drawable_pool" kindref="compound">DrawablePool</ref> &amp;</type>
+        <definition>DrawablePool&amp; Azura::DrawablePool::operator=</definition>
+        <argsstring>(const DrawablePool &amp;other)=delete</argsstring>
+        <name>operator=</name>
+        <param>
+          <type>const <ref refid="class_azura_1_1_drawable_pool" kindref="compound">DrawablePool</ref> &amp;</type>
+          <declname>other</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Source/Azura/RenderSystem/Inc/Generic/Drawable.h" line="102" column="1"/>
+      </memberdef>
+      <memberdef kind="function" id="class_azura_1_1_drawable_pool_1a8f0ae91009aa0909fd792b026b612122" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="class_azura_1_1_drawable_pool" kindref="compound">DrawablePool</ref> &amp;</type>
+        <definition>DrawablePool&amp; Azura::DrawablePool::operator=</definition>
+        <argsstring>(DrawablePool &amp;&amp;other) noexcept=default</argsstring>
+        <name>operator=</name>
+        <param>
+          <type><ref refid="class_azura_1_1_drawable_pool" kindref="compound">DrawablePool</ref> &amp;&amp;</type>
+          <declname>other</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Source/Azura/RenderSystem/Inc/Generic/Drawable.h" line="103" column="1"/>
+      </memberdef>
+      <memberdef kind="function" id="class_azura_1_1_drawable_pool_1a4ccbcca2c34327ca4a8159619ca15e9f" prot="public" static="no" const="no" explicit="no" inline="no" virt="pure-virtual">
+        <type>DrawableID</type>
+        <definition>virtual DrawableID Azura::DrawablePool::CreateDrawable</definition>
+        <argsstring>(const DrawableCreateInfo &amp;createInfo)=0</argsstring>
+        <name>CreateDrawable</name>
+        <reimplementedby refid="class_azura_1_1_d3_d12_1_1_d3_d12_drawable_pool_1afc7789db2377b591dad9445074bd004b">CreateDrawable</reimplementedby>
+        <reimplementedby refid="class_azura_1_1_vulkan_1_1_vk_drawable_pool_1a026f3506e7b9b412a88e84284da5e445">CreateDrawable</reimplementedby>
+        <param>
+          <type>const <ref refid="struct_azura_1_1_drawable_create_info" kindref="compound">DrawableCreateInfo</ref> &amp;</type>
+          <declname>createInfo</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Source/Azura/RenderSystem/Inc/Generic/Drawable.h" line="105" column="1"/>
+      </memberdef>
+      <memberdef kind="function" id="class_azura_1_1_drawable_pool_1a7a99f75220c8e2cba949c1120705b2b6" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void Azura::DrawablePool::BindVertexData</definition>
+        <argsstring>(DrawableID drawableId, SlotID slot, const Containers::Vector&lt; U8 &gt; &amp;buffer)</argsstring>
+        <name>BindVertexData</name>
+        <param>
+          <type>DrawableID</type>
+          <declname>drawableId</declname>
+        </param>
+        <param>
+          <type>SlotID</type>
+          <declname>slot</declname>
+        </param>
+        <param>
+          <type>const <ref refid="class_azura_1_1_containers_1_1_vector" kindref="compound">Containers::Vector</ref>&lt; U8 &gt; &amp;</type>
+          <declname>buffer</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Source/Azura/RenderSystem/Inc/Generic/Drawable.h" line="108" column="1" bodyfile="Source/Azura/RenderSystem/Src/Generic/Drawable.cpp" bodystart="177" bodyend="179"/>
+      </memberdef>
+      <memberdef kind="function" id="class_azura_1_1_drawable_pool_1a4492bc0bee71bd41c339c5c0539aebfb" prot="public" static="no" const="no" explicit="no" inline="no" virt="pure-virtual">
+        <type>void</type>
+        <definition>virtual void Azura::DrawablePool::BindVertexData</definition>
+        <argsstring>(DrawableID drawableId, SlotID slot, const U8 *buffer, U32 size)=0</argsstring>
+        <name>BindVertexData</name>
+        <reimplementedby refid="class_azura_1_1_d3_d12_1_1_d3_d12_drawable_pool_1a850ffca31efa9b0f9e2e9ae118db7664">BindVertexData</reimplementedby>
+        <reimplementedby refid="class_azura_1_1_vulkan_1_1_vk_drawable_pool_1a673a7ebf085a8af5b0101f1d94647cb9">BindVertexData</reimplementedby>
+        <param>
+          <type>DrawableID</type>
+          <declname>drawableId</declname>
+        </param>
+        <param>
+          <type>SlotID</type>
+          <declname>slot</declname>
+        </param>
+        <param>
+          <type>const U8 *</type>
+          <declname>buffer</declname>
+        </param>
+        <param>
+          <type>U32</type>
+          <declname>size</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Source/Azura/RenderSystem/Inc/Generic/Drawable.h" line="109" column="1"/>
+      </memberdef>
+      <memberdef kind="function" id="class_azura_1_1_drawable_pool_1a5c8ee8b960e825b34cecd91cd82af35f" prot="public" static="no" const="no" explicit="no" inline="no" virt="pure-virtual">
+        <type>void</type>
+        <definition>virtual void Azura::DrawablePool::BindVertexData</definition>
+        <argsstring>(DrawableID drawableId, SlotID slot, U32 sourceBuffer, U32 offset, U32 size)=0</argsstring>
+        <name>BindVertexData</name>
+        <reimplementedby refid="class_azura_1_1_d3_d12_1_1_d3_d12_drawable_pool_1a429090b722df191bcabeac132ddaabf2">BindVertexData</reimplementedby>
+        <reimplementedby refid="class_azura_1_1_vulkan_1_1_vk_drawable_pool_1a8cb4c503312467c431ba0a1176b9054c">BindVertexData</reimplementedby>
+        <param>
+          <type>DrawableID</type>
+          <declname>drawableId</declname>
+        </param>
+        <param>
+          <type>SlotID</type>
+          <declname>slot</declname>
+        </param>
+        <param>
+          <type>U32</type>
+          <declname>sourceBuffer</declname>
+        </param>
+        <param>
+          <type>U32</type>
+          <declname>offset</declname>
+        </param>
+        <param>
+          <type>U32</type>
+          <declname>size</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Source/Azura/RenderSystem/Inc/Generic/Drawable.h" line="110" column="1"/>
+      </memberdef>
+      <memberdef kind="function" id="class_azura_1_1_drawable_pool_1ad203e79f4a29c78cea0c9338b7fe9463" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void Azura::DrawablePool::BindInstanceData</definition>
+        <argsstring>(DrawableID drawableId, SlotID slot, const Containers::Vector&lt; U8 &gt; &amp;buffer)</argsstring>
+        <name>BindInstanceData</name>
+        <param>
+          <type>DrawableID</type>
+          <declname>drawableId</declname>
+        </param>
+        <param>
+          <type>SlotID</type>
+          <declname>slot</declname>
+        </param>
+        <param>
+          <type>const <ref refid="class_azura_1_1_containers_1_1_vector" kindref="compound">Containers::Vector</ref>&lt; U8 &gt; &amp;</type>
+          <declname>buffer</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Source/Azura/RenderSystem/Inc/Generic/Drawable.h" line="112" column="1" bodyfile="Source/Azura/RenderSystem/Src/Generic/Drawable.cpp" bodystart="181" bodyend="183"/>
+      </memberdef>
+      <memberdef kind="function" id="class_azura_1_1_drawable_pool_1a41f0eda6d119b700d8d3f3aad8ab2082" prot="public" static="no" const="no" explicit="no" inline="no" virt="pure-virtual">
+        <type>void</type>
+        <definition>virtual void Azura::DrawablePool::BindInstanceData</definition>
+        <argsstring>(DrawableID drawableId, SlotID slot, const U8 *buffer, U32 size)=0</argsstring>
+        <name>BindInstanceData</name>
+        <reimplementedby refid="class_azura_1_1_d3_d12_1_1_d3_d12_drawable_pool_1aca4e6ca0c23b9b63143ce07c2a6bc48f">BindInstanceData</reimplementedby>
+        <reimplementedby refid="class_azura_1_1_vulkan_1_1_vk_drawable_pool_1a46cdc6ed3d7e61fddaaba29443732c6a">BindInstanceData</reimplementedby>
+        <param>
+          <type>DrawableID</type>
+          <declname>drawableId</declname>
+        </param>
+        <param>
+          <type>SlotID</type>
+          <declname>slot</declname>
+        </param>
+        <param>
+          <type>const U8 *</type>
+          <declname>buffer</declname>
+        </param>
+        <param>
+          <type>U32</type>
+          <declname>size</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Source/Azura/RenderSystem/Inc/Generic/Drawable.h" line="113" column="1"/>
+      </memberdef>
+      <memberdef kind="function" id="class_azura_1_1_drawable_pool_1af1bce723e4c6e6392cf6ef2b18554b8f" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void Azura::DrawablePool::BindUniformData</definition>
+        <argsstring>(DrawableID drawableId, SlotID slot, const Containers::Vector&lt; U8 &gt; &amp;buffer)</argsstring>
+        <name>BindUniformData</name>
+        <param>
+          <type>DrawableID</type>
+          <declname>drawableId</declname>
+        </param>
+        <param>
+          <type>SlotID</type>
+          <declname>slot</declname>
+        </param>
+        <param>
+          <type>const <ref refid="class_azura_1_1_containers_1_1_vector" kindref="compound">Containers::Vector</ref>&lt; U8 &gt; &amp;</type>
+          <declname>buffer</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Source/Azura/RenderSystem/Inc/Generic/Drawable.h" line="115" column="1" bodyfile="Source/Azura/RenderSystem/Src/Generic/Drawable.cpp" bodystart="185" bodyend="187"/>
+      </memberdef>
+      <memberdef kind="function" id="class_azura_1_1_drawable_pool_1afe0f1631b11dd901faa27ee1544b7031" prot="public" static="no" const="no" explicit="no" inline="no" virt="pure-virtual">
+        <type>void</type>
+        <definition>virtual void Azura::DrawablePool::BindUniformData</definition>
+        <argsstring>(DrawableID drawableId, SlotID slot, const U8 *buffer, U32 size)=0</argsstring>
+        <name>BindUniformData</name>
+        <reimplementedby refid="class_azura_1_1_d3_d12_1_1_d3_d12_drawable_pool_1a8a0b88f9ad55427efbd8ae9375018f65">BindUniformData</reimplementedby>
+        <reimplementedby refid="class_azura_1_1_vulkan_1_1_vk_drawable_pool_1a5c86d4b36e3b328704775aef8fe89893">BindUniformData</reimplementedby>
+        <param>
+          <type>DrawableID</type>
+          <declname>drawableId</declname>
+        </param>
+        <param>
+          <type>SlotID</type>
+          <declname>slot</declname>
+        </param>
+        <param>
+          <type>const U8 *</type>
+          <declname>buffer</declname>
+        </param>
+        <param>
+          <type>U32</type>
+          <declname>size</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Source/Azura/RenderSystem/Inc/Generic/Drawable.h" line="116" column="1"/>
+      </memberdef>
+      <memberdef kind="function" id="class_azura_1_1_drawable_pool_1afe156d9c60ec5c2dda6393edcc5d5640" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void Azura::DrawablePool::SetIndexData</definition>
+        <argsstring>(DrawableID drawableId, const Containers::Vector&lt; U8 &gt; &amp;buffer)</argsstring>
+        <name>SetIndexData</name>
+        <param>
+          <type>DrawableID</type>
+          <declname>drawableId</declname>
+        </param>
+        <param>
+          <type>const <ref refid="class_azura_1_1_containers_1_1_vector" kindref="compound">Containers::Vector</ref>&lt; U8 &gt; &amp;</type>
+          <declname>buffer</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Source/Azura/RenderSystem/Inc/Generic/Drawable.h" line="118" column="1" bodyfile="Source/Azura/RenderSystem/Src/Generic/Drawable.cpp" bodystart="189" bodyend="191"/>
+      </memberdef>
+      <memberdef kind="function" id="class_azura_1_1_drawable_pool_1a02ec23c817c32239019ae0748f9b53c5" prot="public" static="no" const="no" explicit="no" inline="no" virt="pure-virtual">
+        <type>void</type>
+        <definition>virtual void Azura::DrawablePool::SetIndexData</definition>
+        <argsstring>(DrawableID drawableId, const U8 *buffer, U32 size)=0</argsstring>
+        <name>SetIndexData</name>
+        <reimplementedby refid="class_azura_1_1_d3_d12_1_1_d3_d12_drawable_pool_1a3d335a5b6e1a282bb0428ca140f57cb3">SetIndexData</reimplementedby>
+        <reimplementedby refid="class_azura_1_1_vulkan_1_1_vk_drawable_pool_1a9f9d25c273ffb67be1c62101765c7cf9">SetIndexData</reimplementedby>
+        <param>
+          <type>DrawableID</type>
+          <declname>drawableId</declname>
+        </param>
+        <param>
+          <type>const U8 *</type>
+          <declname>buffer</declname>
+        </param>
+        <param>
+          <type>U32</type>
+          <declname>size</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Source/Azura/RenderSystem/Inc/Generic/Drawable.h" line="119" column="1"/>
+      </memberdef>
+      <memberdef kind="function" id="class_azura_1_1_drawable_pool_1a42be7c88e88b997e00838a7783b9a6c0" prot="public" static="no" const="no" explicit="no" inline="no" virt="pure-virtual">
+        <type>void</type>
+        <definition>virtual void Azura::DrawablePool::AddShader</definition>
+        <argsstring>(U32 shaderId)=0</argsstring>
+        <name>AddShader</name>
+        <reimplementedby refid="class_azura_1_1_d3_d12_1_1_d3_d12_drawable_pool_1aaeb11cac5b1ee45227fb1d06aed5e06a">AddShader</reimplementedby>
+        <reimplementedby refid="class_azura_1_1_vulkan_1_1_vk_drawable_pool_1aa202a3ccbb65d8f792084d24b9dfe2ef">AddShader</reimplementedby>
+        <param>
+          <type>U32</type>
+          <declname>shaderId</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Source/Azura/RenderSystem/Inc/Generic/Drawable.h" line="122" column="1"/>
+      </memberdef>
+      <memberdef kind="function" id="class_azura_1_1_drawable_pool_1a426ec55637350976963919fefcf38517" prot="public" static="no" const="no" explicit="no" inline="no" virt="pure-virtual">
+        <type>void</type>
+        <definition>virtual void Azura::DrawablePool::BindTextureData</definition>
+        <argsstring>(SlotID slot, const TextureDesc &amp;desc, const U8 *buffer)=0</argsstring>
+        <name>BindTextureData</name>
+        <reimplementedby refid="class_azura_1_1_d3_d12_1_1_d3_d12_drawable_pool_1a29ca3e36f7eb38a2d86487fce622851f">BindTextureData</reimplementedby>
+        <reimplementedby refid="class_azura_1_1_vulkan_1_1_vk_drawable_pool_1ad6ecae27856047e64dc16499a201cbd1">BindTextureData</reimplementedby>
+        <param>
+          <type>SlotID</type>
+          <declname>slot</declname>
+        </param>
+        <param>
+          <type>const <ref refid="struct_azura_1_1_texture_desc" kindref="compound">TextureDesc</ref> &amp;</type>
+          <declname>desc</declname>
+        </param>
+        <param>
+          <type>const U8 *</type>
+          <declname>buffer</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Source/Azura/RenderSystem/Inc/Generic/Drawable.h" line="123" column="1"/>
+      </memberdef>
+      <memberdef kind="function" id="class_azura_1_1_drawable_pool_1aa13975de2c2a84f9295dda249e3d6760" prot="public" static="no" const="no" explicit="no" inline="no" virt="pure-virtual">
+        <type>void</type>
+        <definition>virtual void Azura::DrawablePool::BindSampler</definition>
+        <argsstring>(SlotID slot, const SamplerDesc &amp;desc)=0</argsstring>
+        <name>BindSampler</name>
+        <reimplementedby refid="class_azura_1_1_d3_d12_1_1_d3_d12_drawable_pool_1a31cc9e8a4e0a669520df874f426d9172">BindSampler</reimplementedby>
+        <reimplementedby refid="class_azura_1_1_vulkan_1_1_vk_drawable_pool_1ab339e27236a78fdf1ec99b3dd8db413e">BindSampler</reimplementedby>
+        <param>
+          <type>SlotID</type>
+          <declname>slot</declname>
+        </param>
+        <param>
+          <type>const <ref refid="struct_azura_1_1_sampler_desc" kindref="compound">SamplerDesc</ref> &amp;</type>
+          <declname>desc</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Source/Azura/RenderSystem/Inc/Generic/Drawable.h" line="124" column="1"/>
+      </memberdef>
+      <memberdef kind="function" id="class_azura_1_1_drawable_pool_1a989aea86afcb0280411763d591136eae" prot="public" static="no" const="no" explicit="no" inline="no" virt="pure-virtual">
+        <type>void</type>
+        <definition>virtual void Azura::DrawablePool::BeginUpdates</definition>
+        <argsstring>()=0</argsstring>
+        <name>BeginUpdates</name>
+        <reimplementedby refid="class_azura_1_1_d3_d12_1_1_d3_d12_drawable_pool_1a7047128d305d4ea1eca0a83ee7940310">BeginUpdates</reimplementedby>
+        <reimplementedby refid="class_azura_1_1_vulkan_1_1_vk_drawable_pool_1a42da2087c922021c2d2c5db735cde409">BeginUpdates</reimplementedby>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Source/Azura/RenderSystem/Inc/Generic/Drawable.h" line="126" column="1"/>
+      </memberdef>
+      <memberdef kind="function" id="class_azura_1_1_drawable_pool_1a1699289968c29f51c562d6fbe42b7b54" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void Azura::DrawablePool::UpdateUniformData</definition>
+        <argsstring>(DrawableID drawableId, SlotID slot, const Containers::Vector&lt; U8 &gt; &amp;buffer)</argsstring>
+        <name>UpdateUniformData</name>
+        <param>
+          <type>DrawableID</type>
+          <declname>drawableId</declname>
+        </param>
+        <param>
+          <type>SlotID</type>
+          <declname>slot</declname>
+        </param>
+        <param>
+          <type>const <ref refid="class_azura_1_1_containers_1_1_vector" kindref="compound">Containers::Vector</ref>&lt; U8 &gt; &amp;</type>
+          <declname>buffer</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Source/Azura/RenderSystem/Inc/Generic/Drawable.h" line="127" column="1" bodyfile="Source/Azura/RenderSystem/Src/Generic/Drawable.cpp" bodystart="193" bodyend="195"/>
+      </memberdef>
+      <memberdef kind="function" id="class_azura_1_1_drawable_pool_1ac85d70904599de8da80ddd69333905d7" prot="public" static="no" const="no" explicit="no" inline="no" virt="pure-virtual">
+        <type>void</type>
+        <definition>virtual void Azura::DrawablePool::UpdateUniformData</definition>
+        <argsstring>(DrawableID drawableId, SlotID slot, const U8 *buffer, U32 size)=0</argsstring>
+        <name>UpdateUniformData</name>
+        <reimplementedby refid="class_azura_1_1_d3_d12_1_1_d3_d12_drawable_pool_1a0d559914d4101f5c683089e4a739a39e">UpdateUniformData</reimplementedby>
+        <reimplementedby refid="class_azura_1_1_vulkan_1_1_vk_drawable_pool_1ac501638a4a7fa0a48117c87bf96fbb00">UpdateUniformData</reimplementedby>
+        <param>
+          <type>DrawableID</type>
+          <declname>drawableId</declname>
+        </param>
+        <param>
+          <type>SlotID</type>
+          <declname>slot</declname>
+        </param>
+        <param>
+          <type>const U8 *</type>
+          <declname>buffer</declname>
+        </param>
+        <param>
+          <type>U32</type>
+          <declname>size</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Source/Azura/RenderSystem/Inc/Generic/Drawable.h" line="128" column="1"/>
+      </memberdef>
+      <memberdef kind="function" id="class_azura_1_1_drawable_pool_1a5339c286a35eb14e04e92468866671fe" prot="public" static="no" const="no" explicit="no" inline="no" virt="pure-virtual">
+        <type>void</type>
+        <definition>virtual void Azura::DrawablePool::UpdateVertexData</definition>
+        <argsstring>(DrawableID drawableId, SlotID slot, const U8 *buffer, U32 size)=0</argsstring>
+        <name>UpdateVertexData</name>
+        <reimplementedby refid="class_azura_1_1_d3_d12_1_1_d3_d12_drawable_pool_1a9268af4334e3462c9e18ba83400635f8">UpdateVertexData</reimplementedby>
+        <reimplementedby refid="class_azura_1_1_vulkan_1_1_vk_drawable_pool_1a3c74da9f9f3f887e1ea2504d7204a776">UpdateVertexData</reimplementedby>
+        <param>
+          <type>DrawableID</type>
+          <declname>drawableId</declname>
+        </param>
+        <param>
+          <type>SlotID</type>
+          <declname>slot</declname>
+        </param>
+        <param>
+          <type>const U8 *</type>
+          <declname>buffer</declname>
+        </param>
+        <param>
+          <type>U32</type>
+          <declname>size</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Source/Azura/RenderSystem/Inc/Generic/Drawable.h" line="129" column="1"/>
+      </memberdef>
+      <memberdef kind="function" id="class_azura_1_1_drawable_pool_1a4c93b8f0617538b83ff983bf9cc18b65" prot="public" static="no" const="no" explicit="no" inline="no" virt="pure-virtual">
+        <type>void</type>
+        <definition>virtual void Azura::DrawablePool::UpdateInstanceData</definition>
+        <argsstring>(DrawableID drawableId, SlotID slot, const U8 *buffer, U32 size)=0</argsstring>
+        <name>UpdateInstanceData</name>
+        <reimplementedby refid="class_azura_1_1_d3_d12_1_1_d3_d12_drawable_pool_1aa605aad4b6564dbd90b574e891624615">UpdateInstanceData</reimplementedby>
+        <reimplementedby refid="class_azura_1_1_vulkan_1_1_vk_drawable_pool_1aaf8f91bfd1e82a106a89e674252249ef">UpdateInstanceData</reimplementedby>
+        <param>
+          <type>DrawableID</type>
+          <declname>drawableId</declname>
+        </param>
+        <param>
+          <type>SlotID</type>
+          <declname>slot</declname>
+        </param>
+        <param>
+          <type>const U8 *</type>
+          <declname>buffer</declname>
+        </param>
+        <param>
+          <type>U32</type>
+          <declname>size</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Source/Azura/RenderSystem/Inc/Generic/Drawable.h" line="130" column="1"/>
+      </memberdef>
+      <memberdef kind="function" id="class_azura_1_1_drawable_pool_1ac36eead60292ce9c0c8bc3ba52b1033e" prot="public" static="no" const="no" explicit="no" inline="no" virt="pure-virtual">
+        <type>void</type>
+        <definition>virtual void Azura::DrawablePool::UpdateTextureData</definition>
+        <argsstring>(SlotID slot, const U8 *buffer)=0</argsstring>
+        <name>UpdateTextureData</name>
+        <reimplementedby refid="class_azura_1_1_d3_d12_1_1_d3_d12_drawable_pool_1aa28abcdb8d5f43f1a9c278d4e22c83d5">UpdateTextureData</reimplementedby>
+        <reimplementedby refid="class_azura_1_1_vulkan_1_1_vk_drawable_pool_1a7828e1757f43c76c7b02eca95e103452">UpdateTextureData</reimplementedby>
+        <param>
+          <type>SlotID</type>
+          <declname>slot</declname>
+        </param>
+        <param>
+          <type>const U8 *</type>
+          <declname>buffer</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Source/Azura/RenderSystem/Inc/Generic/Drawable.h" line="131" column="1"/>
+      </memberdef>
+      <memberdef kind="function" id="class_azura_1_1_drawable_pool_1a85f70308874b52fadc7a68c37ca171f3" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>U32</type>
+        <definition>U32 Azura::DrawablePool::GetSingleTextureBufferInfo</definition>
+        <argsstring>(const DescriptorSlot &amp;slot)</argsstring>
+        <name>GetSingleTextureBufferInfo</name>
+        <param>
+          <type>const <ref refid="struct_azura_1_1_descriptor_slot" kindref="compound">DescriptorSlot</ref> &amp;</type>
+          <declname>slot</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Source/Azura/RenderSystem/Inc/Generic/Drawable.h" line="133" column="1" bodyfile="Source/Azura/RenderSystem/Src/Generic/Drawable.cpp" bodystart="197" bodyend="211"/>
+      </memberdef>
+      <memberdef kind="function" id="class_azura_1_1_drawable_pool_1a16a6deae24f2c597003e4632a9273bca" prot="public" static="no" const="no" explicit="no" inline="no" virt="pure-virtual">
+        <type>void</type>
+        <definition>virtual void Azura::DrawablePool::Submit</definition>
+        <argsstring>()=0</argsstring>
+        <name>Submit</name>
+        <reimplementedby refid="class_azura_1_1_d3_d12_1_1_d3_d12_drawable_pool_1a559f86b2f038643bcdf9fd3c0c1b8a93">Submit</reimplementedby>
+        <reimplementedby refid="class_azura_1_1_vulkan_1_1_vk_drawable_pool_1a05186804b3f0ed1691ce8fa28602a8bc">Submit</reimplementedby>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Source/Azura/RenderSystem/Inc/Generic/Drawable.h" line="135" column="1"/>
+      </memberdef>
+      <memberdef kind="function" id="class_azura_1_1_drawable_pool_1a1f5b3fcaaea8d46d333f7806a6d152fe" prot="public" static="no" const="no" explicit="no" inline="no" virt="pure-virtual">
+        <type>void</type>
+        <definition>virtual void Azura::DrawablePool::SubmitUpdates</definition>
+        <argsstring>()=0</argsstring>
+        <name>SubmitUpdates</name>
+        <reimplementedby refid="class_azura_1_1_d3_d12_1_1_d3_d12_drawable_pool_1a5759669b6f58dddc306aef86fd11bd30">SubmitUpdates</reimplementedby>
+        <reimplementedby refid="class_azura_1_1_vulkan_1_1_vk_drawable_pool_1a9211e8d9bc4ff1b4dd5f34f9e9d72863">SubmitUpdates</reimplementedby>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Source/Azura/RenderSystem/Inc/Generic/Drawable.h" line="136" column="1"/>
+      </memberdef>
+      <memberdef kind="function" id="class_azura_1_1_drawable_pool_1a765a0254865986059c0930eba1b1daf4" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
+        <type>U32</type>
+        <definition>U32 Azura::DrawablePool::GetSize</definition>
+        <argsstring>() const</argsstring>
+        <name>GetSize</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Source/Azura/RenderSystem/Inc/Generic/Drawable.h" line="138" column="1" bodyfile="Source/Azura/RenderSystem/Src/Generic/Drawable.cpp" bodystart="213" bodyend="215"/>
+      </memberdef>
+      <memberdef kind="function" id="class_azura_1_1_drawable_pool_1a58e8d5a3ff64312db4ce673d5840f52a" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool Azura::DrawablePool::CanRenderInPass</definition>
+        <argsstring>(U32 renderPassId) const</argsstring>
+        <name>CanRenderInPass</name>
+        <param>
+          <type>U32</type>
+          <declname>renderPassId</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Source/Azura/RenderSystem/Inc/Generic/Drawable.h" line="139" column="1" bodyfile="Source/Azura/RenderSystem/Src/Generic/Drawable.cpp" bodystart="225" bodyend="233"/>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="protected-func">
+      <memberdef kind="function" id="class_azura_1_1_drawable_pool_1ac3390d615df38b112f62225390cc5eff" prot="protected" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="class_azura_1_1_memory_1_1_allocator" kindref="compound">Memory::Allocator</ref> &amp;</type>
+        <definition>Memory::Allocator &amp; Azura::DrawablePool::GetAllocator</definition>
+        <argsstring>() const</argsstring>
+        <name>GetAllocator</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Source/Azura/RenderSystem/Inc/Generic/Drawable.h" line="142" column="1" bodyfile="Source/Azura/RenderSystem/Src/Generic/Drawable.cpp" bodystart="217" bodyend="219"/>
+      </memberdef>
+      <memberdef kind="function" id="class_azura_1_1_drawable_pool_1abf159af31cbf19e0961b14fc8d3b3ba1" prot="protected" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
+        <type>DrawType</type>
+        <definition>DrawType Azura::DrawablePool::GetDrawType</definition>
+        <argsstring>() const</argsstring>
+        <name>GetDrawType</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Source/Azura/RenderSystem/Inc/Generic/Drawable.h" line="143" column="1" bodyfile="Source/Azura/RenderSystem/Src/Generic/Drawable.cpp" bodystart="221" bodyend="223"/>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <inheritancegraph>
+      <node id="225">
+        <label>Azura::D3D12::D3D12DrawablePool</label>
+        <link refid="class_azura_1_1_d3_d12_1_1_d3_d12_drawable_pool"/>
+        <childnode refid="224" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="226">
+        <label>Azura::Vulkan::VkDrawablePool</label>
+        <link refid="class_azura_1_1_vulkan_1_1_vk_drawable_pool"/>
+        <childnode refid="224" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="224">
+        <label>Azura::DrawablePool</label>
+        <link refid="class_azura_1_1_drawable_pool"/>
+      </node>
+    </inheritancegraph>
+    <collaborationgraph>
+      <node id="231">
+        <label>Azura::Containers::Vector&lt; Azura::SamplerInfo &gt;</label>
+        <link refid="class_azura_1_1_containers_1_1_vector"/>
+      </node>
+      <node id="232">
+        <label>Azura::Containers::Vector&lt; Azura::VertexSlot &gt;</label>
+        <link refid="class_azura_1_1_containers_1_1_vector"/>
+      </node>
+      <node id="230">
+        <label>Azura::DescriptorCount</label>
+        <link refid="struct_azura_1_1_descriptor_count"/>
+      </node>
+      <node id="229">
+        <label>Azura::Containers::Vector&lt; U32 &gt;</label>
+        <link refid="class_azura_1_1_containers_1_1_vector"/>
+      </node>
+      <node id="233">
+        <label>Azura::Containers::Vector&lt; Azura::TextureBufferInfo &gt;</label>
+        <link refid="class_azura_1_1_containers_1_1_vector"/>
+      </node>
+      <node id="228">
+        <label>Azura::Containers::Vector&lt; Azura::BufferUpdate &gt;</label>
+        <link refid="class_azura_1_1_containers_1_1_vector"/>
+      </node>
+      <node id="227">
+        <label>Azura::DrawablePool</label>
+        <link refid="class_azura_1_1_drawable_pool"/>
+        <childnode refid="228" relation="usage">
+          <edgelabel>m_bufferUpdates</edgelabel>
+        </childnode>
+        <childnode refid="229" relation="usage">
+          <edgelabel>m_renderPasses</edgelabel>
+        </childnode>
+        <childnode refid="230" relation="usage">
+          <edgelabel>m_descriptorCount</edgelabel>
+        </childnode>
+        <childnode refid="231" relation="usage">
+          <edgelabel>m_samplerInfos</edgelabel>
+        </childnode>
+        <childnode refid="232" relation="usage">
+          <edgelabel>m_vertexDataSlots</edgelabel>
+        </childnode>
+        <childnode refid="233" relation="usage">
+          <edgelabel>m_textureBufferInfos</edgelabel>
+        </childnode>
+      </node>
+    </collaborationgraph>
+    <location file="Source/Azura/RenderSystem/Inc/Generic/Drawable.h" line="93" column="1" bodyfile="Source/Azura/RenderSystem/Inc/Generic/Drawable.h" bodystart="93" bodyend="165"/>
+    <listofallmembers>
+      <member refid="class_azura_1_1_drawable_pool_1a42be7c88e88b997e00838a7783b9a6c0" prot="public" virt="pure-virtual"><scope>Azura::DrawablePool</scope><name>AddShader</name></member>
+      <member refid="class_azura_1_1_drawable_pool_1a989aea86afcb0280411763d591136eae" prot="public" virt="pure-virtual"><scope>Azura::DrawablePool</scope><name>BeginUpdates</name></member>
+      <member refid="class_azura_1_1_drawable_pool_1ad203e79f4a29c78cea0c9338b7fe9463" prot="public" virt="non-virtual"><scope>Azura::DrawablePool</scope><name>BindInstanceData</name></member>
+      <member refid="class_azura_1_1_drawable_pool_1a41f0eda6d119b700d8d3f3aad8ab2082" prot="public" virt="pure-virtual"><scope>Azura::DrawablePool</scope><name>BindInstanceData</name></member>
+      <member refid="class_azura_1_1_drawable_pool_1aa13975de2c2a84f9295dda249e3d6760" prot="public" virt="pure-virtual"><scope>Azura::DrawablePool</scope><name>BindSampler</name></member>
+      <member refid="class_azura_1_1_drawable_pool_1a426ec55637350976963919fefcf38517" prot="public" virt="pure-virtual"><scope>Azura::DrawablePool</scope><name>BindTextureData</name></member>
+      <member refid="class_azura_1_1_drawable_pool_1af1bce723e4c6e6392cf6ef2b18554b8f" prot="public" virt="non-virtual"><scope>Azura::DrawablePool</scope><name>BindUniformData</name></member>
+      <member refid="class_azura_1_1_drawable_pool_1afe0f1631b11dd901faa27ee1544b7031" prot="public" virt="pure-virtual"><scope>Azura::DrawablePool</scope><name>BindUniformData</name></member>
+      <member refid="class_azura_1_1_drawable_pool_1a7a99f75220c8e2cba949c1120705b2b6" prot="public" virt="non-virtual"><scope>Azura::DrawablePool</scope><name>BindVertexData</name></member>
+      <member refid="class_azura_1_1_drawable_pool_1a4492bc0bee71bd41c339c5c0539aebfb" prot="public" virt="pure-virtual"><scope>Azura::DrawablePool</scope><name>BindVertexData</name></member>
+      <member refid="class_azura_1_1_drawable_pool_1a5c8ee8b960e825b34cecd91cd82af35f" prot="public" virt="pure-virtual"><scope>Azura::DrawablePool</scope><name>BindVertexData</name></member>
+      <member refid="class_azura_1_1_drawable_pool_1a58e8d5a3ff64312db4ce673d5840f52a" prot="public" virt="non-virtual"><scope>Azura::DrawablePool</scope><name>CanRenderInPass</name></member>
+      <member refid="class_azura_1_1_drawable_pool_1a4ccbcca2c34327ca4a8159619ca15e9f" prot="public" virt="pure-virtual"><scope>Azura::DrawablePool</scope><name>CreateDrawable</name></member>
+      <member refid="class_azura_1_1_drawable_pool_1a297853456237e9e487b6397883af4a19" prot="public" virt="non-virtual"><scope>Azura::DrawablePool</scope><name>DrawablePool</name></member>
+      <member refid="class_azura_1_1_drawable_pool_1a79b953054ac1a1ca086398a9a79d7505" prot="public" virt="non-virtual"><scope>Azura::DrawablePool</scope><name>DrawablePool</name></member>
+      <member refid="class_azura_1_1_drawable_pool_1ab3794b52aa96c0ebceca942c612f7b6e" prot="public" virt="non-virtual"><scope>Azura::DrawablePool</scope><name>DrawablePool</name></member>
+      <member refid="class_azura_1_1_drawable_pool_1ac3390d615df38b112f62225390cc5eff" prot="protected" virt="non-virtual"><scope>Azura::DrawablePool</scope><name>GetAllocator</name></member>
+      <member refid="class_azura_1_1_drawable_pool_1abf159af31cbf19e0961b14fc8d3b3ba1" prot="protected" virt="non-virtual"><scope>Azura::DrawablePool</scope><name>GetDrawType</name></member>
+      <member refid="class_azura_1_1_drawable_pool_1a85f70308874b52fadc7a68c37ca171f3" prot="public" virt="non-virtual"><scope>Azura::DrawablePool</scope><name>GetSingleTextureBufferInfo</name></member>
+      <member refid="class_azura_1_1_drawable_pool_1a765a0254865986059c0930eba1b1daf4" prot="public" virt="non-virtual"><scope>Azura::DrawablePool</scope><name>GetSize</name></member>
+      <member refid="class_azura_1_1_drawable_pool_1a0a26d339ff212387ac708fe870444d94" prot="private" virt="non-virtual"><scope>Azura::DrawablePool</scope><name>m_allocator</name></member>
+      <member refid="class_azura_1_1_drawable_pool_1a039f9497a62acfd5be406878ce39e5fd" prot="protected" virt="non-virtual"><scope>Azura::DrawablePool</scope><name>m_bufferUpdates</name></member>
+      <member refid="class_azura_1_1_drawable_pool_1aa502409466dfc85f99958e1d1735dbfb" prot="private" virt="non-virtual"><scope>Azura::DrawablePool</scope><name>m_byteSize</name></member>
+      <member refid="class_azura_1_1_drawable_pool_1a9c0e196cb8d6e409d1e8ddafb0adfabe" prot="protected" virt="non-virtual"><scope>Azura::DrawablePool</scope><name>m_cullMode</name></member>
+      <member refid="class_azura_1_1_drawable_pool_1a6e22814af049c3c1b18101e75cb93e5d" prot="protected" virt="non-virtual"><scope>Azura::DrawablePool</scope><name>m_descriptorCount</name></member>
+      <member refid="class_azura_1_1_drawable_pool_1a151a8ce0f02dff480d1ebc84ce6a21db" prot="private" virt="non-virtual"><scope>Azura::DrawablePool</scope><name>m_drawType</name></member>
+      <member refid="class_azura_1_1_drawable_pool_1a956502ffdf433ea693ae515dc03bfadd" prot="protected" virt="non-virtual"><scope>Azura::DrawablePool</scope><name>m_numInstanceSlots</name></member>
+      <member refid="class_azura_1_1_drawable_pool_1a161813b2e1251fa3fd0e1065e4401867" prot="protected" virt="non-virtual"><scope>Azura::DrawablePool</scope><name>m_numVertexSlots</name></member>
+      <member refid="class_azura_1_1_drawable_pool_1a63db7d2f0a3faf8878ca21c2ea97e6c6" prot="protected" virt="non-virtual"><scope>Azura::DrawablePool</scope><name>m_renderPasses</name></member>
+      <member refid="class_azura_1_1_drawable_pool_1a1f813d234ad65185d9eaa8673b544bc5" prot="protected" virt="non-virtual"><scope>Azura::DrawablePool</scope><name>m_samplerInfos</name></member>
+      <member refid="class_azura_1_1_drawable_pool_1a422d98f5396b382229b98131d1d73ae1" prot="protected" virt="non-virtual"><scope>Azura::DrawablePool</scope><name>m_textureBufferInfos</name></member>
+      <member refid="class_azura_1_1_drawable_pool_1add4a5e2764fbec5a1cccc72a15f7005d" prot="protected" virt="non-virtual"><scope>Azura::DrawablePool</scope><name>m_vertexDataSlots</name></member>
+      <member refid="class_azura_1_1_drawable_pool_1ad53e9313899c1ce573bfa5dc04de558d" prot="public" virt="non-virtual"><scope>Azura::DrawablePool</scope><name>operator=</name></member>
+      <member refid="class_azura_1_1_drawable_pool_1a8f0ae91009aa0909fd792b026b612122" prot="public" virt="non-virtual"><scope>Azura::DrawablePool</scope><name>operator=</name></member>
+      <member refid="class_azura_1_1_drawable_pool_1afe156d9c60ec5c2dda6393edcc5d5640" prot="public" virt="non-virtual"><scope>Azura::DrawablePool</scope><name>SetIndexData</name></member>
+      <member refid="class_azura_1_1_drawable_pool_1a02ec23c817c32239019ae0748f9b53c5" prot="public" virt="pure-virtual"><scope>Azura::DrawablePool</scope><name>SetIndexData</name></member>
+      <member refid="class_azura_1_1_drawable_pool_1a16a6deae24f2c597003e4632a9273bca" prot="public" virt="pure-virtual"><scope>Azura::DrawablePool</scope><name>Submit</name></member>
+      <member refid="class_azura_1_1_drawable_pool_1a1f5b3fcaaea8d46d333f7806a6d152fe" prot="public" virt="pure-virtual"><scope>Azura::DrawablePool</scope><name>SubmitUpdates</name></member>
+      <member refid="class_azura_1_1_drawable_pool_1a4c93b8f0617538b83ff983bf9cc18b65" prot="public" virt="pure-virtual"><scope>Azura::DrawablePool</scope><name>UpdateInstanceData</name></member>
+      <member refid="class_azura_1_1_drawable_pool_1ac36eead60292ce9c0c8bc3ba52b1033e" prot="public" virt="pure-virtual"><scope>Azura::DrawablePool</scope><name>UpdateTextureData</name></member>
+      <member refid="class_azura_1_1_drawable_pool_1a1699289968c29f51c562d6fbe42b7b54" prot="public" virt="non-virtual"><scope>Azura::DrawablePool</scope><name>UpdateUniformData</name></member>
+      <member refid="class_azura_1_1_drawable_pool_1ac85d70904599de8da80ddd69333905d7" prot="public" virt="pure-virtual"><scope>Azura::DrawablePool</scope><name>UpdateUniformData</name></member>
+      <member refid="class_azura_1_1_drawable_pool_1a5339c286a35eb14e04e92468866671fe" prot="public" virt="pure-virtual"><scope>Azura::DrawablePool</scope><name>UpdateVertexData</name></member>
+      <member refid="class_azura_1_1_drawable_pool_1acb0064fb652b3f1f84397c4d0a645bc9" prot="public" virt="virtual"><scope>Azura::DrawablePool</scope><name>~DrawablePool</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

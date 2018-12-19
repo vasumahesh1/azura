@@ -1,0 +1,117 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.8.14">
+  <compounddef id="class_matrix_multiplication_fixture" kind="class" language="C++" prot="public">
+    <compoundname>MatrixMultiplicationFixture</compoundname>
+    <basecompoundref prot="public" virt="non-virtual">Fixture</basecompoundref>
+      <sectiondef kind="public-attrib">
+      <memberdef kind="variable" id="class_matrix_multiplication_fixture_1a1e30509c6567b14495313f4a008da59f" prot="public" static="no" mutable="no">
+        <type>double *</type>
+        <definition>double* MatrixMultiplicationFixture::m_data1</definition>
+        <argsstring></argsstring>
+        <name>m_data1</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Source/PowerBench/Inc/PowerBench/MatrixMultiplication.h" line="31" column="1" bodyfile="Source/PowerBench/Inc/PowerBench/MatrixMultiplication.h" bodystart="31" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="class_matrix_multiplication_fixture_1a92c4dbd92832c688272bc889cbe1627a" prot="public" static="no" mutable="no">
+        <type>double *</type>
+        <definition>double* MatrixMultiplicationFixture::m_data2</definition>
+        <argsstring></argsstring>
+        <name>m_data2</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Source/PowerBench/Inc/PowerBench/MatrixMultiplication.h" line="32" column="1" bodyfile="Source/PowerBench/Inc/PowerBench/MatrixMultiplication.h" bodystart="32" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="class_matrix_multiplication_fixture_1a093dd90c9373597c5943277b48b26b28" prot="public" static="no" mutable="no">
+        <type>double *</type>
+        <definition>double* MatrixMultiplicationFixture::m_result</definition>
+        <argsstring></argsstring>
+        <name>m_result</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Source/PowerBench/Inc/PowerBench/MatrixMultiplication.h" line="33" column="1" bodyfile="Source/PowerBench/Inc/PowerBench/MatrixMultiplication.h" bodystart="33" bodyend="-1"/>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="public-func">
+      <memberdef kind="function" id="class_matrix_multiplication_fixture_1a95aa262bceda9836477db32ce5a615d0" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>void MatrixMultiplicationFixture::TearDown</definition>
+        <argsstring>(const benchmark::State &amp;) override</argsstring>
+        <name>TearDown</name>
+        <param>
+          <type>const benchmark::State &amp;</type>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Source/PowerBench/Inc/PowerBench/MatrixMultiplication.h" line="10" column="1" bodyfile="Source/PowerBench/Inc/PowerBench/MatrixMultiplication.h" bodystart="10" bodyend="15"/>
+      </memberdef>
+      <memberdef kind="function" id="class_matrix_multiplication_fixture_1aea99f52e91c14cc665c46455462900f3" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>void MatrixMultiplicationFixture::SetUp</definition>
+        <argsstring>(const benchmark::State &amp;st) override</argsstring>
+        <name>SetUp</name>
+        <param>
+          <type>const benchmark::State &amp;</type>
+          <declname>st</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Source/PowerBench/Inc/PowerBench/MatrixMultiplication.h" line="17" column="1" bodyfile="Source/PowerBench/Inc/PowerBench/MatrixMultiplication.h" bodystart="17" bodyend="29"/>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <inheritancegraph>
+      <node id="394">
+        <label>MatrixMultiplicationFixture</label>
+        <link refid="class_matrix_multiplication_fixture"/>
+        <childnode refid="395" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="395">
+        <label>benchmark::Fixture</label>
+      </node>
+    </inheritancegraph>
+    <collaborationgraph>
+      <node id="396">
+        <label>MatrixMultiplicationFixture</label>
+        <link refid="class_matrix_multiplication_fixture"/>
+        <childnode refid="397" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="397">
+        <label>benchmark::Fixture</label>
+      </node>
+    </collaborationgraph>
+    <location file="Source/PowerBench/Inc/PowerBench/MatrixMultiplication.h" line="8" column="1" bodyfile="Source/PowerBench/Inc/PowerBench/MatrixMultiplication.h" bodystart="7" bodyend="34"/>
+    <listofallmembers>
+      <member refid="class_matrix_multiplication_fixture_1a1e30509c6567b14495313f4a008da59f" prot="public" virt="non-virtual"><scope>MatrixMultiplicationFixture</scope><name>m_data1</name></member>
+      <member refid="class_matrix_multiplication_fixture_1a92c4dbd92832c688272bc889cbe1627a" prot="public" virt="non-virtual"><scope>MatrixMultiplicationFixture</scope><name>m_data2</name></member>
+      <member refid="class_matrix_multiplication_fixture_1a093dd90c9373597c5943277b48b26b28" prot="public" virt="non-virtual"><scope>MatrixMultiplicationFixture</scope><name>m_result</name></member>
+      <member refid="class_matrix_multiplication_fixture_1aea99f52e91c14cc665c46455462900f3" prot="public" virt="non-virtual"><scope>MatrixMultiplicationFixture</scope><name>SetUp</name></member>
+      <member refid="class_matrix_multiplication_fixture_1a95aa262bceda9836477db32ce5a615d0" prot="public" virt="non-virtual"><scope>MatrixMultiplicationFixture</scope><name>TearDown</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

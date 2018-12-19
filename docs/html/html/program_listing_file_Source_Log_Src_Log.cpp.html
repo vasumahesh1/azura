@@ -1,0 +1,509 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>Program Listing for File Log.cpp &mdash; Azura  documentation</title>
+  
+
+  
+  
+  
+  
+
+  
+
+  
+  
+    
+
+  
+
+  <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/collapsible-lists\css\tree_view.css" type="text/css" />
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="File Log.h" href="file_Source_Log_Inc_Log_Log.h.html" />
+    <link rel="prev" title="File Log.cpp" href="file_Source_Log_Src_Log.cpp.html" /> 
+
+  
+  <script src="../_static/js/modernizr.min.js"></script>
+
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search">
+          
+
+          
+            <a href="../index.html" class="icon icon-home"> Azura
+          
+
+          
+          </a>
+
+          
+            
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <ul>
+<li class="toctree-l1"><a class="reference internal" href="../setting-up.html">Setting Up</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../build-instructions.html">Build Instructions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../cmake-wrappers.html">CMake Wrappers</a></li>
+<li class="toctree-l1"><a class="reference internal" href="apiRoot.html">Azura API</a></li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">Azura</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../index.html">Docs</a> &raquo;</li>
+        
+          <li><a href="apiRoot.html">Azura API</a> &raquo;</li>
+        
+          <li><a href="file_Source_Log_Src_Log.cpp.html">File Log.cpp</a> &raquo;</li>
+        
+      <li>Program Listing for File Log.cpp</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            <a href="../_sources/html/program_listing_file_Source_Log_Src_Log.cpp.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="program-listing-for-file-log-cpp">
+<span id="program-listing-file-source-log-src-log-cpp"></span><h1>Program Listing for File Log.cpp<a class="headerlink" href="#program-listing-for-file-log-cpp" title="Permalink to this headline">¶</a></h1>
+<p>↰ <a class="reference internal" href="file_Source_Log_Src_Log.cpp.html#file-source-log-src-log-cpp"><span class="std std-ref">Return to documentation for file</span></a> (<code class="docutils literal notranslate"><span class="pre">Source\Log\Src\Log.cpp</span></code>)</p>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="cp">#include</span> <span class="cpf">&quot;Log/Log.h&quot;</span><span class="cp"></span>
+
+<span class="cp">#include</span> <span class="cpf">&lt;iostream&gt;</span><span class="cp"></span>
+<span class="cp">#include</span> <span class="cpf">&lt;cstdlib&gt;</span><span class="cp"></span>
+<span class="cp">#include</span> <span class="cpf">&lt;utility&gt;</span><span class="cp"></span>
+
+<span class="cp">#include</span> <span class="cpf">&lt;boost/filesystem.hpp&gt;</span><span class="cp"></span>
+<span class="cp">#include</span> <span class="cpf">&lt;boost/algorithm/string.hpp&gt;</span><span class="cp"></span>
+
+<span class="cp">#include</span> <span class="cpf">&lt;boost/date_time/posix_time/posix_time_types.hpp&gt;</span><span class="cp"></span>
+<span class="cp">#include</span> <span class="cpf">&lt;boost/log/trivial.hpp&gt;</span><span class="cp"></span>
+<span class="cp">#include</span> <span class="cpf">&lt;boost/log/core.hpp&gt;</span><span class="cp"></span>
+<span class="cp">#include</span> <span class="cpf">&lt;boost/log/expressions.hpp&gt;</span><span class="cp"></span>
+<span class="cp">#include</span> <span class="cpf">&lt;boost/log/sources/logger.hpp&gt;</span><span class="cp"></span>
+<span class="cp">#include</span> <span class="cpf">&lt;boost/log/utility/setup/file.hpp&gt;</span><span class="cp"></span>
+<span class="cp">#include</span> <span class="cpf">&lt;boost/log/utility/setup/console.hpp&gt;</span><span class="cp"></span>
+<span class="cp">#include</span> <span class="cpf">&lt;boost/log/utility/setup/common_attributes.hpp&gt;</span><span class="cp"></span>
+<span class="cp">#include</span> <span class="cpf">&lt;boost/log/support/date_time.hpp&gt;</span><span class="cp"></span>
+<span class="cp">#include</span> <span class="cpf">&lt;boost/log/sinks/sync_frontend.hpp&gt;</span><span class="cp"></span>
+<span class="cp">#include</span> <span class="cpf">&lt;boost/log/sinks/text_file_backend.hpp&gt;</span><span class="cp"></span>
+<span class="cp">#include</span> <span class="cpf">&lt;boost/log/attributes/named_scope.hpp&gt;</span><span class="cp"></span>
+
+<span class="cp">#include</span> <span class="cpf">&quot;yaml-cpp/yaml.h&quot;</span><span class="cp"></span>
+<span class="cp">#include</span> <span class="cpf">&quot;Utils/Macros.h&quot;</span><span class="cp"></span>
+
+<span class="k">namespace</span> <span class="n">fs</span> <span class="o">=</span> <span class="n">boost</span><span class="o">::</span><span class="n">filesystem</span><span class="p">;</span>
+
+<span class="k">const</span> <span class="kt">int</span> <span class="n">DEFAULT_LOG_BUFFER_SIZE</span> <span class="o">=</span> <span class="mi">4096</span><span class="p">;</span>
+
+<span class="k">namespace</span> <span class="n">Azura</span> <span class="p">{</span>
+
+<span class="k">namespace</span> <span class="p">{</span>
+<span class="kt">void</span> <span class="n">OneTimeSetup</span><span class="p">(</span><span class="k">const</span> <span class="n">YAML</span><span class="o">::</span><span class="n">Node</span><span class="o">&amp;</span> <span class="n">settingsNode</span><span class="p">,</span> <span class="k">const</span> <span class="n">boost</span><span class="o">::</span><span class="n">log</span><span class="o">::</span><span class="n">formatter</span><span class="o">&amp;</span> <span class="n">logFmt</span><span class="p">)</span> <span class="p">{</span>
+
+  <span class="k">const</span> <span class="k">auto</span> <span class="n">logKeyStreams</span>         <span class="o">=</span> <span class="n">settingsNode</span><span class="p">[</span><span class="s">&quot;Streams&quot;</span><span class="p">];</span>
+  <span class="k">const</span> <span class="k">auto</span> <span class="n">flushLogs</span>             <span class="o">=</span> <span class="n">settingsNode</span><span class="p">[</span><span class="s">&quot;AutoFlush&quot;</span><span class="p">].</span><span class="n">as</span><span class="o">&lt;</span><span class="kt">bool</span><span class="o">&gt;</span><span class="p">();</span>
+  <span class="k">const</span> <span class="n">String</span> <span class="n">outputDir</span>           <span class="o">=</span> <span class="n">settingsNode</span><span class="p">[</span><span class="s">&quot;OutputDir&quot;</span><span class="p">].</span><span class="n">as</span><span class="o">&lt;</span><span class="n">String</span><span class="o">&gt;</span><span class="p">();</span>
+  <span class="k">const</span> <span class="n">fs</span><span class="o">::</span><span class="n">path</span> <span class="n">fileLogOutputPath</span> <span class="o">=</span> <span class="n">fs</span><span class="o">::</span><span class="n">path</span><span class="p">(</span><span class="n">outputDir</span><span class="p">);</span>
+
+  <span class="k">for</span> <span class="p">(</span><span class="n">YAML</span><span class="o">::</span><span class="n">const_iterator</span> <span class="n">itr</span> <span class="o">=</span> <span class="n">logKeyStreams</span><span class="p">.</span><span class="n">begin</span><span class="p">();</span> <span class="n">itr</span> <span class="o">!=</span> <span class="n">logKeyStreams</span><span class="p">.</span><span class="n">end</span><span class="p">();</span> <span class="o">++</span><span class="n">itr</span><span class="p">)</span> <span class="p">{</span>
+    <span class="k">const</span> <span class="n">String</span> <span class="n">logKeyStream</span>   <span class="o">=</span> <span class="n">itr</span><span class="o">-&gt;</span><span class="n">as</span><span class="o">&lt;</span><span class="n">String</span><span class="o">&gt;</span><span class="p">();</span>
+
+    <span class="k">if</span> <span class="p">(</span><span class="n">logKeyStream</span> <span class="o">==</span> <span class="s">&quot;File&quot;</span><span class="p">)</span> <span class="p">{</span>
+      <span class="k">const</span> <span class="n">fs</span><span class="o">::</span><span class="n">path</span> <span class="n">finalPath</span> <span class="o">=</span> <span class="n">fileLogOutputPath</span> <span class="o">/</span> <span class="n">fs</span><span class="o">::</span><span class="n">path</span><span class="p">(</span><span class="s">&quot;DefaultStaticLog.log&quot;</span><span class="p">);</span>
+      <span class="k">auto</span> <span class="n">fsSink</span>              <span class="o">=</span> <span class="n">boost</span><span class="o">::</span><span class="n">log</span><span class="o">::</span><span class="n">add_file_log</span><span class="p">(</span><span class="n">finalPath</span><span class="p">.</span><span class="n">string</span><span class="p">());</span>
+      <span class="n">fsSink</span><span class="o">-&gt;</span><span class="n">locked_backend</span><span class="p">()</span><span class="o">-&gt;</span><span class="n">auto_flush</span><span class="p">(</span><span class="n">flushLogs</span><span class="p">);</span>
+      <span class="n">fsSink</span><span class="o">-&gt;</span><span class="n">set_formatter</span><span class="p">(</span><span class="n">logFmt</span><span class="p">);</span>
+    <span class="p">}</span> <span class="k">else</span> <span class="k">if</span> <span class="p">(</span><span class="n">logKeyStream</span> <span class="o">==</span> <span class="s">&quot;Console&quot;</span><span class="p">)</span> <span class="p">{</span>
+      <span class="k">auto</span> <span class="n">consoleSink</span> <span class="o">=</span> <span class="n">boost</span><span class="o">::</span><span class="n">log</span><span class="o">::</span><span class="n">add_console_log</span><span class="p">(</span><span class="n">std</span><span class="o">::</span><span class="n">clog</span><span class="p">);</span>
+      <span class="n">consoleSink</span><span class="o">-&gt;</span><span class="n">set_formatter</span><span class="p">(</span><span class="n">logFmt</span><span class="p">);</span>
+    <span class="p">}</span>
+  <span class="p">}</span>
+<span class="p">}</span>
+<span class="p">}</span> <span class="c1">// namespace</span>
+
+<span class="n">Log</span><span class="o">::</span><span class="n">Log</span><span class="p">(</span><span class="n">String</span> <span class="n">key</span><span class="p">)</span>
+  <span class="o">:</span> <span class="n">m_debugLevel</span><span class="p">(</span><span class="mi">0</span><span class="p">),</span>
+    <span class="n">m_infoLevel</span><span class="p">(</span><span class="mi">0</span><span class="p">),</span>
+    <span class="n">m_warningLevel</span><span class="p">(</span><span class="mi">0</span><span class="p">),</span>
+    <span class="n">m_errorLevel</span><span class="p">(</span><span class="mi">0</span><span class="p">),</span>
+    <span class="n">m_fatalLevel</span><span class="p">(</span><span class="mi">0</span><span class="p">),</span>
+    <span class="n">m_key</span><span class="p">(</span><span class="n">std</span><span class="o">::</span><span class="n">move</span><span class="p">(</span><span class="n">key</span><span class="p">)),</span>
+    <span class="n">m_isReady</span><span class="p">(</span><span class="nb">false</span><span class="p">),</span>
+    <span class="n">m_temporaryBuffer</span><span class="p">(</span><span class="mi">4096</span><span class="p">)</span> <span class="p">{</span>
+
+<span class="cp">#ifdef BUILD_DEBUG</span>
+
+  <span class="k">const</span> <span class="kt">char</span><span class="o">*</span> <span class="n">configEnv</span> <span class="o">=</span> <span class="n">std</span><span class="o">::</span><span class="n">getenv</span><span class="p">(</span><span class="s">&quot;AZURA_CONFIG&quot;</span><span class="p">);</span>
+  <span class="k">if</span> <span class="p">(</span><span class="n">configEnv</span> <span class="o">==</span> <span class="k">nullptr</span><span class="p">)</span> <span class="p">{</span>
+    <span class="n">std</span><span class="o">::</span><span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="s">&quot;No Azura Config Specified. Log Module will run in Default Mode. </span><span class="se">\n</span><span class="s">&quot;</span><span class="p">;</span>
+    <span class="k">return</span><span class="p">;</span>
+  <span class="p">}</span>
+
+  <span class="k">const</span> <span class="n">fs</span><span class="o">::</span><span class="n">path</span> <span class="n">configDir</span><span class="p">(</span><span class="n">configEnv</span><span class="p">);</span>
+  <span class="k">if</span> <span class="p">(</span><span class="o">!</span><span class="n">is_directory</span><span class="p">(</span><span class="n">configDir</span><span class="p">))</span> <span class="p">{</span>
+    <span class="n">std</span><span class="o">::</span><span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="s">&quot;Azura Config Directory not present. Log Module will run in Default Mode. </span><span class="se">\n</span><span class="s">&quot;</span><span class="p">;</span>
+    <span class="k">return</span><span class="p">;</span>
+  <span class="p">}</span>
+
+  <span class="k">const</span> <span class="n">fs</span><span class="o">::</span><span class="n">path</span> <span class="n">fullPath</span> <span class="o">=</span> <span class="n">configDir</span> <span class="o">/</span> <span class="n">fs</span><span class="o">::</span><span class="n">path</span><span class="p">(</span><span class="s">&quot;log.yml&quot;</span><span class="p">);</span>
+  <span class="k">if</span> <span class="p">(</span><span class="o">!</span><span class="n">fs</span><span class="o">::</span><span class="n">exists</span><span class="p">(</span><span class="n">fullPath</span><span class="p">))</span> <span class="p">{</span>
+    <span class="k">return</span><span class="p">;</span>
+  <span class="p">}</span>
+<span class="cp">#elif defined(BUILD_RELEASE)</span>
+  <span class="k">const</span> <span class="n">fs</span><span class="o">::</span><span class="n">path</span> <span class="n">fullPath</span> <span class="o">=</span> <span class="n">fs</span><span class="o">::</span><span class="n">path</span><span class="p">(</span><span class="s">&quot;config&quot;</span><span class="p">)</span> <span class="o">/</span> <span class="n">fs</span><span class="o">::</span><span class="n">path</span><span class="p">(</span><span class="s">&quot;log.yml&quot;</span><span class="p">);</span>
+<span class="cp">#endif</span>
+
+  <span class="k">try</span> <span class="p">{</span>
+    <span class="n">boost</span><span class="o">::</span><span class="n">log</span><span class="o">::</span><span class="n">add_common_attributes</span><span class="p">();</span>
+    <span class="n">boost</span><span class="o">::</span><span class="n">log</span><span class="o">::</span><span class="n">core</span><span class="o">::</span><span class="n">get</span><span class="p">()</span><span class="o">-&gt;</span><span class="n">add_global_attribute</span><span class="p">(</span><span class="s">&quot;Scope&quot;</span><span class="p">,</span> <span class="n">boost</span><span class="o">::</span><span class="n">log</span><span class="o">::</span><span class="n">attributes</span><span class="o">::</span><span class="n">named_scope</span><span class="p">());</span>
+
+    <span class="k">auto</span> <span class="n">fmtTimeStamp</span> <span class="o">=</span> <span class="n">boost</span><span class="o">::</span><span class="n">log</span><span class="o">::</span><span class="n">expressions</span><span class="o">::</span><span class="n">format_date_time</span><span class="o">&lt;</span><span class="n">boost</span><span class="o">::</span><span class="n">posix_time</span><span class="o">::</span><span class="n">ptime</span><span class="o">&gt;</span><span class="p">(</span><span class="s">&quot;TimeStamp&quot;</span><span class="p">,</span>
+                                                                                            <span class="s">&quot;%Y-%m-%d %H:%M:%S.%f&quot;</span><span class="p">);</span>
+    <span class="k">auto</span> <span class="n">fmtThreadId</span> <span class="o">=</span> <span class="n">boost</span><span class="o">::</span><span class="n">log</span><span class="o">::</span><span class="n">expressions</span><span class="o">::</span><span class="n">attr</span><span class="o">&lt;</span><span class="n">boost</span><span class="o">::</span><span class="n">log</span><span class="o">::</span><span class="n">attributes</span><span class="o">::</span><span class="n">current_thread_id</span><span class="o">::</span><span class="n">value_type</span><span class="o">&gt;</span><span class="p">(</span><span class="s">&quot;ThreadID&quot;</span><span class="p">);</span>
+    <span class="k">auto</span> <span class="n">fmtSeverity</span> <span class="o">=</span> <span class="n">boost</span><span class="o">::</span><span class="n">log</span><span class="o">::</span><span class="n">expressions</span><span class="o">::</span><span class="n">attr</span><span class="o">&lt;</span><span class="n">boost</span><span class="o">::</span><span class="n">log</span><span class="o">::</span><span class="n">trivial</span><span class="o">::</span><span class="n">severity_level</span><span class="o">&gt;</span><span class="p">(</span><span class="s">&quot;Severity&quot;</span><span class="p">);</span>
+
+    <span class="k">auto</span> <span class="n">fmtScope</span> <span class="o">=</span> <span class="n">boost</span><span class="o">::</span><span class="n">log</span><span class="o">::</span>
+      <span class="n">expressions</span><span class="o">::</span><span class="n">format_named_scope</span><span class="p">(</span><span class="s">&quot;Scope&quot;</span><span class="p">,</span>
+                                      <span class="n">boost</span><span class="o">::</span><span class="n">log</span><span class="o">::</span><span class="n">keywords</span><span class="o">::</span><span class="n">format</span>    <span class="o">=</span> <span class="s">&quot;%n(%f:%l)&quot;</span><span class="p">,</span>
+                                      <span class="n">boost</span><span class="o">::</span><span class="n">log</span><span class="o">::</span><span class="n">keywords</span><span class="o">::</span><span class="n">iteration</span> <span class="o">=</span> <span class="n">boost</span><span class="o">::</span><span class="n">log</span><span class="o">::</span>
+                                      <span class="n">expressions</span><span class="o">::</span><span class="n">reverse</span><span class="p">,</span>
+                                      <span class="n">boost</span><span class="o">::</span><span class="n">log</span><span class="o">::</span><span class="n">keywords</span><span class="o">::</span><span class="n">depth</span> <span class="o">=</span> <span class="mi">2</span><span class="p">);</span>
+
+    <span class="k">const</span> <span class="n">boost</span><span class="o">::</span><span class="n">log</span><span class="o">::</span><span class="n">formatter</span> <span class="n">logFmt</span> <span class="o">=</span>
+      <span class="n">boost</span><span class="o">::</span><span class="n">log</span><span class="o">::</span><span class="n">expressions</span><span class="o">::</span><span class="n">format</span><span class="p">(</span><span class="s">&quot;[%1%] (%2%) [%3%] [%4%] %5%&quot;</span><span class="p">)</span>
+      <span class="o">%</span> <span class="n">fmtTimeStamp</span> <span class="o">%</span> <span class="n">fmtThreadId</span> <span class="o">%</span> <span class="n">fmtSeverity</span> <span class="o">%</span> <span class="n">fmtScope</span>
+      <span class="o">%</span> <span class="n">boost</span><span class="o">::</span><span class="n">log</span><span class="o">::</span><span class="n">expressions</span><span class="o">::</span><span class="n">smessage</span><span class="p">;</span>
+
+    <span class="k">static</span> <span class="k">const</span> <span class="n">YAML</span><span class="o">::</span><span class="n">Node</span> <span class="n">s_mainConfig</span> <span class="o">=</span> <span class="p">[</span><span class="o">&amp;</span><span class="p">]()</span> <span class="o">-&gt;</span> <span class="n">YAML</span><span class="o">::</span><span class="n">Node</span>
+    <span class="p">{</span>
+      <span class="n">YAML</span><span class="o">::</span><span class="n">Node</span> <span class="n">mainConfig</span> <span class="o">=</span> <span class="n">YAML</span><span class="o">::</span><span class="n">LoadFile</span><span class="p">(</span><span class="n">fullPath</span><span class="p">.</span><span class="n">string</span><span class="p">());</span>
+      <span class="k">if</span> <span class="p">(</span><span class="o">!</span><span class="n">mainConfig</span><span class="p">)</span> <span class="p">{</span>
+        <span class="n">std</span><span class="o">::</span><span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="s">&quot;Invalid YAML in log.yml. </span><span class="se">\n</span><span class="s">&quot;</span><span class="p">;</span>
+        <span class="k">return</span> <span class="p">{};</span>
+      <span class="p">}</span>
+
+      <span class="k">const</span> <span class="n">YAML</span><span class="o">::</span><span class="n">Node</span> <span class="n">settingsNode</span> <span class="o">=</span> <span class="n">mainConfig</span><span class="p">[</span><span class="s">&quot;Settings&quot;</span><span class="p">];</span>
+      <span class="n">OneTimeSetup</span><span class="p">(</span><span class="n">settingsNode</span><span class="p">,</span> <span class="n">logFmt</span><span class="p">);</span>
+
+      <span class="k">return</span> <span class="n">mainConfig</span><span class="p">;</span>
+    <span class="p">}();</span>
+
+    <span class="k">if</span> <span class="p">(</span><span class="n">s_mainConfig</span><span class="p">.</span><span class="n">IsNull</span><span class="p">())</span> <span class="p">{</span>
+      <span class="k">return</span><span class="p">;</span>
+    <span class="p">}</span>
+
+    <span class="kt">bool</span> <span class="n">isActive</span>   <span class="o">=</span> <span class="nb">false</span><span class="p">;</span>
+    <span class="kt">bool</span> <span class="n">hasDefault</span> <span class="o">=</span> <span class="nb">false</span><span class="p">;</span>
+    <span class="n">YAML</span><span class="o">::</span><span class="n">Node</span> <span class="n">logNode</span><span class="p">;</span>
+    <span class="n">YAML</span><span class="o">::</span><span class="n">Node</span> <span class="n">defaultLogNode</span><span class="p">;</span>
+    <span class="n">YAML</span><span class="o">::</span><span class="n">Node</span> <span class="n">logStreamsNode</span> <span class="o">=</span> <span class="n">s_mainConfig</span><span class="p">[</span><span class="s">&quot;LogStreams&quot;</span><span class="p">];</span>
+    <span class="n">YAML</span><span class="o">::</span><span class="n">Node</span> <span class="n">settingsNode</span>   <span class="o">=</span> <span class="n">s_mainConfig</span><span class="p">[</span><span class="s">&quot;Settings&quot;</span><span class="p">];</span>
+
+    <span class="c1">// Format of Log Stream:</span>
+    <span class="c1">//  Settings:</span>
+    <span class="c1">//    AutoFlush: true</span>
+    <span class="c1">//</span>
+    <span class="c1">//  LogStreams:</span>
+    <span class="c1">//    VkRenderer:</span>
+    <span class="c1">//      Levels: D0 I30 W50 E0 F0</span>
+    <span class="c1">//      Streams:</span>
+    <span class="c1">//        - File</span>
+    <span class="c1">//        - Console</span>
+    <span class="c1">//</span>
+    <span class="c1">//    Common:</span>
+    <span class="c1">//      Levels: D0 I50 W50 E0 F0</span>
+    <span class="c1">//      Streams:</span>
+    <span class="c1">//        - File</span>
+    <span class="c1">//        - Console</span>
+    <span class="k">for</span> <span class="p">(</span><span class="n">YAML</span><span class="o">::</span><span class="n">const_iterator</span> <span class="n">itr</span> <span class="o">=</span> <span class="n">logStreamsNode</span><span class="p">.</span><span class="n">begin</span><span class="p">();</span> <span class="n">itr</span> <span class="o">!=</span> <span class="n">logStreamsNode</span><span class="p">.</span><span class="n">end</span><span class="p">();</span> <span class="o">++</span><span class="n">itr</span><span class="p">)</span> <span class="p">{</span>
+      <span class="k">const</span> <span class="n">String</span> <span class="n">activeLogKey</span>   <span class="o">=</span> <span class="n">itr</span><span class="o">-&gt;</span><span class="n">first</span><span class="p">.</span><span class="n">as</span><span class="o">&lt;</span><span class="n">String</span><span class="o">&gt;</span><span class="p">();</span>
+
+      <span class="k">if</span> <span class="p">(</span><span class="n">m_key</span> <span class="o">==</span> <span class="n">activeLogKey</span><span class="p">)</span> <span class="p">{</span>
+        <span class="n">logNode</span>  <span class="o">=</span> <span class="n">itr</span><span class="o">-&gt;</span><span class="n">second</span><span class="p">;</span>
+        <span class="n">isActive</span> <span class="o">=</span> <span class="nb">true</span><span class="p">;</span>
+      <span class="p">}</span> <span class="k">else</span> <span class="k">if</span> <span class="p">(</span><span class="n">activeLogKey</span> <span class="o">==</span> <span class="s">&quot;Default&quot;</span><span class="p">)</span> <span class="p">{</span>
+        <span class="n">hasDefault</span>     <span class="o">=</span> <span class="nb">true</span><span class="p">;</span>
+        <span class="n">defaultLogNode</span> <span class="o">=</span> <span class="n">itr</span><span class="o">-&gt;</span><span class="n">second</span><span class="p">;</span>
+      <span class="p">}</span>
+    <span class="p">}</span>
+
+    <span class="k">if</span> <span class="p">(</span><span class="o">!</span><span class="n">isActive</span> <span class="o">&amp;&amp;</span> <span class="o">!</span><span class="n">hasDefault</span><span class="p">)</span> <span class="p">{</span>
+      <span class="k">return</span><span class="p">;</span>
+    <span class="p">}</span>
+
+    <span class="c1">// Take Default if present &amp; key not present</span>
+    <span class="k">if</span> <span class="p">(</span><span class="o">!</span><span class="n">isActive</span> <span class="o">&amp;&amp;</span> <span class="n">hasDefault</span><span class="p">)</span> <span class="p">{</span>
+      <span class="n">logNode</span> <span class="o">=</span> <span class="n">defaultLogNode</span><span class="p">;</span>
+    <span class="p">}</span>
+
+    <span class="k">const</span> <span class="k">auto</span> <span class="n">levelString</span> <span class="o">=</span> <span class="n">logNode</span><span class="p">[</span><span class="s">&quot;Levels&quot;</span><span class="p">].</span><span class="n">as</span><span class="o">&lt;</span><span class="n">String</span><span class="o">&gt;</span><span class="p">();</span>
+    <span class="n">ParseLevelString</span><span class="p">(</span><span class="n">levelString</span><span class="p">);</span>
+
+    <span class="n">m_isReady</span> <span class="o">=</span> <span class="nb">true</span><span class="p">;</span>
+  <span class="p">}</span> <span class="k">catch</span> <span class="p">(</span><span class="k">const</span> <span class="n">std</span><span class="o">::</span><span class="n">runtime_error</span><span class="o">&amp;</span> <span class="n">error</span><span class="p">)</span> <span class="p">{</span>
+    <span class="n">std</span><span class="o">::</span><span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="s">&quot;Parsing Log File Failed: &quot;</span> <span class="o">&lt;&lt;</span> <span class="n">error</span><span class="p">.</span><span class="n">what</span><span class="p">();</span>
+  <span class="p">}</span>
+<span class="p">}</span>
+
+<span class="kt">void</span> <span class="n">Log</span><span class="o">::</span><span class="n">ParseLevelString</span><span class="p">(</span><span class="k">const</span> <span class="n">String</span><span class="o">&amp;</span> <span class="n">levelStr</span><span class="p">)</span> <span class="p">{</span>
+  <span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="n">String</span><span class="o">&gt;</span> <span class="n">results</span><span class="p">;</span>
+  <span class="n">boost</span><span class="o">::</span><span class="n">split</span><span class="p">(</span><span class="n">results</span><span class="p">,</span> <span class="n">levelStr</span><span class="p">,</span> <span class="p">[](</span><span class="k">const</span> <span class="kt">char</span> <span class="n">character</span><span class="p">)</span> <span class="p">{</span> <span class="k">return</span> <span class="n">character</span> <span class="o">==</span> <span class="sc">&#39; &#39;</span><span class="p">;</span> <span class="p">});</span>
+
+  <span class="k">for</span> <span class="p">(</span><span class="k">const</span> <span class="k">auto</span><span class="o">&amp;</span> <span class="nl">logLevel</span> <span class="p">:</span> <span class="n">results</span><span class="p">)</span> <span class="p">{</span>
+    <span class="k">const</span> <span class="kt">char</span> <span class="n">index</span>      <span class="o">=</span> <span class="n">toupper</span><span class="p">(</span><span class="n">logLevel</span><span class="p">[</span><span class="mi">0</span><span class="p">]);</span>
+    <span class="n">String</span> <span class="n">level</span>          <span class="o">=</span> <span class="n">logLevel</span><span class="p">.</span><span class="n">substr</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="n">logLevel</span><span class="p">.</span><span class="n">length</span><span class="p">()</span> <span class="o">-</span> <span class="mi">1</span><span class="p">);</span>
+    <span class="k">const</span> <span class="k">auto</span> <span class="n">levelValue</span> <span class="o">=</span> <span class="n">U8</span><span class="p">(</span><span class="n">std</span><span class="o">::</span><span class="n">stoi</span><span class="p">(</span><span class="n">level</span><span class="p">));</span>
+
+    <span class="k">switch</span> <span class="p">(</span><span class="n">index</span><span class="p">)</span> <span class="p">{</span>
+      <span class="k">case</span> <span class="sc">&#39;D&#39;</span><span class="o">:</span>
+        <span class="n">m_debugLevel</span> <span class="o">=</span> <span class="n">levelValue</span><span class="p">;</span>
+        <span class="k">break</span><span class="p">;</span>
+
+      <span class="k">case</span> <span class="sc">&#39;I&#39;</span><span class="o">:</span>
+        <span class="n">m_infoLevel</span> <span class="o">=</span> <span class="n">levelValue</span><span class="p">;</span>
+        <span class="k">break</span><span class="p">;</span>
+
+      <span class="k">case</span> <span class="sc">&#39;W&#39;</span><span class="o">:</span>
+        <span class="n">m_warningLevel</span> <span class="o">=</span> <span class="n">levelValue</span><span class="p">;</span>
+        <span class="k">break</span><span class="p">;</span>
+
+      <span class="k">case</span> <span class="sc">&#39;E&#39;</span><span class="o">:</span>
+        <span class="n">m_errorLevel</span> <span class="o">=</span> <span class="n">levelValue</span><span class="p">;</span>
+        <span class="k">break</span><span class="p">;</span>
+
+      <span class="k">case</span> <span class="sc">&#39;F&#39;</span><span class="o">:</span>
+        <span class="n">m_fatalLevel</span> <span class="o">=</span> <span class="n">levelValue</span><span class="p">;</span>
+        <span class="k">break</span><span class="p">;</span>
+
+      <span class="k">default</span><span class="o">:</span>
+        <span class="n">std</span><span class="o">::</span><span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="s">&quot;Invalid Log Levels in Stream. Check log config file&quot;</span><span class="p">;</span>
+        <span class="k">break</span><span class="p">;</span>
+    <span class="p">}</span>
+  <span class="p">}</span>
+<span class="p">}</span>
+
+<span class="kt">void</span> <span class="n">Log</span><span class="o">::</span><span class="n">Debug</span><span class="p">(</span><span class="n">U32</span> <span class="n">level</span><span class="p">,</span> <span class="k">const</span> <span class="kt">char</span><span class="o">*</span> <span class="n">fmt</span><span class="p">,</span> <span class="p">...)</span> <span class="k">const</span> <span class="p">{</span>
+  <span class="k">if</span> <span class="p">(</span><span class="o">!</span><span class="n">m_isReady</span> <span class="o">||</span> <span class="n">level</span> <span class="o">&lt;</span> <span class="n">m_debugLevel</span><span class="p">)</span> <span class="p">{</span>
+    <span class="k">return</span><span class="p">;</span>
+  <span class="p">}</span>
+
+  <span class="kt">va_list</span> <span class="n">arg</span><span class="p">;</span>
+  <span class="n">va_start</span><span class="p">(</span><span class="n">arg</span><span class="p">,</span> <span class="n">fmt</span><span class="p">);</span>
+  <span class="k">const</span> <span class="kt">int</span> <span class="n">bufferLength</span> <span class="o">=</span> <span class="n">std</span><span class="o">::</span><span class="n">min</span><span class="p">(</span><span class="mi">1</span> <span class="o">+</span> <span class="n">std</span><span class="o">::</span><span class="n">vsnprintf</span><span class="p">(</span><span class="k">nullptr</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="n">fmt</span><span class="p">,</span> <span class="n">arg</span><span class="p">),</span> <span class="n">DEFAULT_LOG_BUFFER_SIZE</span><span class="p">);</span>
+  <span class="n">std</span><span class="o">::</span><span class="n">vsnprintf</span><span class="p">(</span><span class="k">const_cast</span><span class="o">&lt;</span><span class="kt">char</span> <span class="o">*&gt;</span><span class="p">(</span><span class="n">m_temporaryBuffer</span><span class="p">.</span><span class="n">data</span><span class="p">()),</span> <span class="n">bufferLength</span><span class="p">,</span> <span class="n">fmt</span><span class="p">,</span> <span class="n">arg</span><span class="p">);</span>
+  <span class="n">va_end</span><span class="p">(</span><span class="n">arg</span><span class="p">);</span>
+
+  <span class="n">BOOST_LOG_TRIVIAL</span><span class="p">(</span><span class="n">debug</span><span class="p">)</span> <span class="o">&lt;&lt;</span> <span class="n">m_temporaryBuffer</span><span class="p">.</span><span class="n">data</span><span class="p">();</span>
+<span class="p">}</span>
+
+<span class="kt">void</span> <span class="n">Log</span><span class="o">::</span><span class="n">Info</span><span class="p">(</span><span class="n">U32</span> <span class="n">level</span><span class="p">,</span> <span class="k">const</span> <span class="kt">char</span><span class="o">*</span> <span class="n">fmt</span><span class="p">,</span> <span class="p">...)</span> <span class="k">const</span> <span class="p">{</span>
+  <span class="k">if</span> <span class="p">(</span><span class="o">!</span><span class="n">m_isReady</span> <span class="o">||</span> <span class="n">level</span> <span class="o">&lt;</span> <span class="n">m_infoLevel</span><span class="p">)</span> <span class="p">{</span>
+    <span class="k">return</span><span class="p">;</span>
+  <span class="p">}</span>
+
+  <span class="kt">va_list</span> <span class="n">arg</span><span class="p">;</span>
+  <span class="n">va_start</span><span class="p">(</span><span class="n">arg</span><span class="p">,</span> <span class="n">fmt</span><span class="p">);</span>
+  <span class="k">const</span> <span class="kt">int</span> <span class="n">bufferLength</span> <span class="o">=</span> <span class="n">std</span><span class="o">::</span><span class="n">min</span><span class="p">(</span><span class="mi">1</span> <span class="o">+</span> <span class="n">std</span><span class="o">::</span><span class="n">vsnprintf</span><span class="p">(</span><span class="k">nullptr</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="n">fmt</span><span class="p">,</span> <span class="n">arg</span><span class="p">),</span> <span class="n">DEFAULT_LOG_BUFFER_SIZE</span><span class="p">);</span>
+  <span class="n">std</span><span class="o">::</span><span class="n">vsnprintf</span><span class="p">(</span><span class="k">const_cast</span><span class="o">&lt;</span><span class="kt">char</span> <span class="o">*&gt;</span><span class="p">(</span><span class="n">m_temporaryBuffer</span><span class="p">.</span><span class="n">data</span><span class="p">()),</span> <span class="n">bufferLength</span><span class="p">,</span> <span class="n">fmt</span><span class="p">,</span> <span class="n">arg</span><span class="p">);</span>
+  <span class="n">va_end</span><span class="p">(</span><span class="n">arg</span><span class="p">);</span>
+
+  <span class="n">BOOST_LOG_TRIVIAL</span><span class="p">(</span><span class="n">info</span><span class="p">)</span> <span class="o">&lt;&lt;</span> <span class="n">m_temporaryBuffer</span><span class="p">.</span><span class="n">data</span><span class="p">();</span>
+<span class="p">}</span>
+
+
+<span class="kt">void</span> <span class="n">Log</span><span class="o">::</span><span class="n">Warning</span><span class="p">(</span><span class="n">U32</span> <span class="n">level</span><span class="p">,</span> <span class="k">const</span> <span class="kt">char</span><span class="o">*</span> <span class="n">fmt</span><span class="p">,</span> <span class="p">...)</span> <span class="k">const</span> <span class="p">{</span>
+  <span class="k">if</span> <span class="p">(</span><span class="o">!</span><span class="n">m_isReady</span> <span class="o">||</span> <span class="n">level</span> <span class="o">&lt;</span> <span class="n">m_warningLevel</span><span class="p">)</span> <span class="p">{</span>
+    <span class="k">return</span><span class="p">;</span>
+  <span class="p">}</span>
+
+  <span class="kt">va_list</span> <span class="n">arg</span><span class="p">;</span>
+  <span class="n">va_start</span><span class="p">(</span><span class="n">arg</span><span class="p">,</span> <span class="n">fmt</span><span class="p">);</span>
+  <span class="k">const</span> <span class="kt">int</span> <span class="n">bufferLength</span> <span class="o">=</span> <span class="n">std</span><span class="o">::</span><span class="n">min</span><span class="p">(</span><span class="mi">1</span> <span class="o">+</span> <span class="n">std</span><span class="o">::</span><span class="n">vsnprintf</span><span class="p">(</span><span class="k">nullptr</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="n">fmt</span><span class="p">,</span> <span class="n">arg</span><span class="p">),</span> <span class="n">DEFAULT_LOG_BUFFER_SIZE</span><span class="p">);</span>
+  <span class="n">std</span><span class="o">::</span><span class="n">vsnprintf</span><span class="p">(</span><span class="k">const_cast</span><span class="o">&lt;</span><span class="kt">char</span> <span class="o">*&gt;</span><span class="p">(</span><span class="n">m_temporaryBuffer</span><span class="p">.</span><span class="n">data</span><span class="p">()),</span> <span class="n">bufferLength</span><span class="p">,</span> <span class="n">fmt</span><span class="p">,</span> <span class="n">arg</span><span class="p">);</span>
+  <span class="n">va_end</span><span class="p">(</span><span class="n">arg</span><span class="p">);</span>
+
+  <span class="n">BOOST_LOG_TRIVIAL</span><span class="p">(</span><span class="n">warning</span><span class="p">)</span> <span class="o">&lt;&lt;</span> <span class="n">m_temporaryBuffer</span><span class="p">.</span><span class="n">data</span><span class="p">();</span>
+<span class="p">}</span>
+
+<span class="kt">void</span> <span class="n">Log</span><span class="o">::</span><span class="n">Error</span><span class="p">(</span><span class="n">U32</span> <span class="n">level</span><span class="p">,</span> <span class="k">const</span> <span class="kt">char</span><span class="o">*</span> <span class="n">fmt</span><span class="p">,</span> <span class="p">...)</span> <span class="k">const</span> <span class="p">{</span>
+  <span class="k">if</span> <span class="p">(</span><span class="o">!</span><span class="n">m_isReady</span> <span class="o">||</span> <span class="n">level</span> <span class="o">&lt;</span> <span class="n">m_errorLevel</span><span class="p">)</span> <span class="p">{</span>
+    <span class="k">return</span><span class="p">;</span>
+  <span class="p">}</span>
+
+  <span class="kt">va_list</span> <span class="n">arg</span><span class="p">;</span>
+  <span class="n">va_start</span><span class="p">(</span><span class="n">arg</span><span class="p">,</span> <span class="n">fmt</span><span class="p">);</span>
+  <span class="k">const</span> <span class="kt">int</span> <span class="n">bufferLength</span> <span class="o">=</span> <span class="n">std</span><span class="o">::</span><span class="n">min</span><span class="p">(</span><span class="mi">1</span> <span class="o">+</span> <span class="n">std</span><span class="o">::</span><span class="n">vsnprintf</span><span class="p">(</span><span class="k">nullptr</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="n">fmt</span><span class="p">,</span> <span class="n">arg</span><span class="p">),</span> <span class="n">DEFAULT_LOG_BUFFER_SIZE</span><span class="p">);</span>
+  <span class="n">std</span><span class="o">::</span><span class="n">vsnprintf</span><span class="p">(</span><span class="k">const_cast</span><span class="o">&lt;</span><span class="kt">char</span> <span class="o">*&gt;</span><span class="p">(</span><span class="n">m_temporaryBuffer</span><span class="p">.</span><span class="n">data</span><span class="p">()),</span> <span class="n">bufferLength</span><span class="p">,</span> <span class="n">fmt</span><span class="p">,</span> <span class="n">arg</span><span class="p">);</span>
+  <span class="n">va_end</span><span class="p">(</span><span class="n">arg</span><span class="p">);</span>
+
+  <span class="n">BOOST_LOG_TRIVIAL</span><span class="p">(</span><span class="n">error</span><span class="p">)</span> <span class="o">&lt;&lt;</span> <span class="n">m_temporaryBuffer</span><span class="p">.</span><span class="n">data</span><span class="p">();</span>
+<span class="p">}</span>
+
+<span class="kt">void</span> <span class="n">Log</span><span class="o">::</span><span class="n">Fatal</span><span class="p">(</span><span class="n">U32</span> <span class="n">level</span><span class="p">,</span> <span class="k">const</span> <span class="kt">char</span><span class="o">*</span> <span class="n">fmt</span><span class="p">,</span> <span class="p">...)</span> <span class="k">const</span> <span class="p">{</span>
+  <span class="k">if</span> <span class="p">(</span><span class="o">!</span><span class="n">m_isReady</span> <span class="o">||</span> <span class="n">level</span> <span class="o">&lt;</span> <span class="n">m_fatalLevel</span><span class="p">)</span> <span class="p">{</span>
+    <span class="k">return</span><span class="p">;</span>
+  <span class="p">}</span>
+
+  <span class="kt">va_list</span> <span class="n">arg</span><span class="p">;</span>
+  <span class="n">va_start</span><span class="p">(</span><span class="n">arg</span><span class="p">,</span> <span class="n">fmt</span><span class="p">);</span>
+  <span class="k">const</span> <span class="kt">int</span> <span class="n">bufferLength</span> <span class="o">=</span> <span class="n">std</span><span class="o">::</span><span class="n">min</span><span class="p">(</span><span class="mi">1</span> <span class="o">+</span> <span class="n">std</span><span class="o">::</span><span class="n">vsnprintf</span><span class="p">(</span><span class="k">nullptr</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="n">fmt</span><span class="p">,</span> <span class="n">arg</span><span class="p">),</span> <span class="n">DEFAULT_LOG_BUFFER_SIZE</span><span class="p">);</span>
+  <span class="n">std</span><span class="o">::</span><span class="n">vsnprintf</span><span class="p">(</span><span class="k">const_cast</span><span class="o">&lt;</span><span class="kt">char</span> <span class="o">*&gt;</span><span class="p">(</span><span class="n">m_temporaryBuffer</span><span class="p">.</span><span class="n">data</span><span class="p">()),</span> <span class="n">bufferLength</span><span class="p">,</span> <span class="n">fmt</span><span class="p">,</span> <span class="n">arg</span><span class="p">);</span>
+  <span class="n">va_end</span><span class="p">(</span><span class="n">arg</span><span class="p">);</span>
+
+  <span class="n">BOOST_LOG_TRIVIAL</span><span class="p">(</span><span class="n">fatal</span><span class="p">)</span> <span class="o">&lt;&lt;</span> <span class="n">m_temporaryBuffer</span><span class="p">.</span><span class="n">data</span><span class="p">();</span>
+<span class="p">}</span>
+<span class="p">}</span> <span class="c1">// namespace Azura</span>
+</pre></div>
+</div>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="file_Source_Log_Inc_Log_Log.h.html" class="btn btn-neutral float-right" title="File Log.h" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="file_Source_Log_Src_Log.cpp.html" class="btn btn-neutral" title="File Log.cpp" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2018, Vasu Mahesh
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  
+
+    
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+        <script type="text/javascript" src="../_static/jquery.js"></script>
+        <script type="text/javascript" src="../_static/underscore.js"></script>
+        <script type="text/javascript" src="../_static/doctools.js"></script>
+        <script type="text/javascript" src="../_static/collapsible-lists\js\CollapsibleLists.compressed.js"></script>
+        <script type="text/javascript" src="../_static/collapsible-lists\js\apply-collapsible-lists.js"></script>
+    
+
+  
+
+  <script type="text/javascript" src="../_static/js/theme.js"></script>
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

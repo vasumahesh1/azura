@@ -1,0 +1,74 @@
+
+.. _program_listing_file_Source_Azura_RenderSystem_Src_Vulkan_VkDebug.cpp:
+
+Program Listing for File VkDebug.cpp
+====================================
+
+|exhale_lsh| :ref:`Return to documentation for file <file_Source_Azura_RenderSystem_Src_Vulkan_VkDebug.cpp>` (``Source\Azura\RenderSystem\Src\Vulkan\VkDebug.cpp``)
+
+.. |exhale_lsh| unicode:: U+021B0 .. UPWARDS ARROW WITH TIP LEFTWARDS
+
+.. code-block:: cpp
+
+   #include "Vulkan/VkDebug.h"
+   #include "Utils/Macros.h"
+   
+   namespace Azura {
+   namespace Vulkan {
+   
+   const char* VkResultToString(const VkResult err) {
+     switch (err) {
+       CASE_STR(VK_SUCCESS);
+       CASE_STR(VK_NOT_READY);
+       CASE_STR(VK_TIMEOUT);
+       CASE_STR(VK_EVENT_SET);
+       CASE_STR(VK_EVENT_RESET);
+       CASE_STR(VK_INCOMPLETE);
+       CASE_STR(VK_ERROR_OUT_OF_HOST_MEMORY);
+       CASE_STR(VK_ERROR_OUT_OF_DEVICE_MEMORY);
+       CASE_STR(VK_ERROR_INITIALIZATION_FAILED);
+       CASE_STR(VK_ERROR_DEVICE_LOST);
+       CASE_STR(VK_ERROR_MEMORY_MAP_FAILED);
+       CASE_STR(VK_ERROR_LAYER_NOT_PRESENT);
+       CASE_STR(VK_ERROR_EXTENSION_NOT_PRESENT);
+       CASE_STR(VK_ERROR_FEATURE_NOT_PRESENT);
+       CASE_STR(VK_ERROR_INCOMPATIBLE_DRIVER);
+       CASE_STR(VK_ERROR_TOO_MANY_OBJECTS);
+       CASE_STR(VK_ERROR_FORMAT_NOT_SUPPORTED);
+       CASE_STR(VK_ERROR_FRAGMENTED_POOL);
+       CASE_STR(VK_ERROR_OUT_OF_POOL_MEMORY);
+       CASE_STR(VK_ERROR_INVALID_EXTERNAL_HANDLE);
+       CASE_STR(VK_ERROR_SURFACE_LOST_KHR);
+       CASE_STR(VK_ERROR_NATIVE_WINDOW_IN_USE_KHR);
+       CASE_STR(VK_SUBOPTIMAL_KHR);
+       CASE_STR(VK_ERROR_OUT_OF_DATE_KHR);
+       CASE_STR(VK_ERROR_INCOMPATIBLE_DISPLAY_KHR);
+       CASE_STR(VK_ERROR_VALIDATION_FAILED_EXT);
+       CASE_STR(VK_ERROR_INVALID_SHADER_NV);
+       CASE_STR(VK_ERROR_FRAGMENTATION_EXT);
+       CASE_STR(VK_ERROR_NOT_PERMITTED_EXT);
+       CASE_STR(VK_RESULT_RANGE_SIZE);
+       CASE_STR(VK_RESULT_MAX_ENUM);
+   
+       default:
+         return "UNKNOWN_RESULT";
+     }
+   }
+   
+   const char* VkPhysicalDeviceTypeToString(const VkPhysicalDeviceType deviceType) {
+     switch (deviceType) {
+       CASE_STR(VK_PHYSICAL_DEVICE_TYPE_OTHER);
+       CASE_STR(VK_PHYSICAL_DEVICE_TYPE_INTEGRATED_GPU);
+       CASE_STR(VK_PHYSICAL_DEVICE_TYPE_DISCRETE_GPU);
+       CASE_STR(VK_PHYSICAL_DEVICE_TYPE_VIRTUAL_GPU);
+       CASE_STR(VK_PHYSICAL_DEVICE_TYPE_CPU);
+       CASE_STR(VK_PHYSICAL_DEVICE_TYPE_RANGE_SIZE);
+       CASE_STR(VK_PHYSICAL_DEVICE_TYPE_MAX_ENUM);
+   
+       default:
+       return "UNKNOWN_DEVICE";
+     }
+   }
+   } // namespace Vulkan
+   } // namespace Azura
+   

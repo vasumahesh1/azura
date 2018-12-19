@@ -1,0 +1,290 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>File VkTypeMapping.cpp &mdash; Azura  documentation</title>
+  
+
+  
+  
+  
+  
+
+  
+
+  
+  
+    
+
+  
+
+  <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/collapsible-lists\css\tree_view.css" type="text/css" />
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Program Listing for File VkTypeMapping.cpp" href="program_listing_file_Source_Azura_RenderSystem_Src_Vulkan_VkTypeMapping.cpp.html" />
+    <link rel="prev" title="Program Listing for File VkTextureManager.h" href="program_listing_file_Source_Azura_RenderSystem_Inc_Vulkan_VkTextureManager.h.html" /> 
+
+  
+  <script src="../_static/js/modernizr.min.js"></script>
+
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search">
+          
+
+          
+            <a href="../index.html" class="icon icon-home"> Azura
+          
+
+          
+          </a>
+
+          
+            
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <ul>
+<li class="toctree-l1"><a class="reference internal" href="../setting-up.html">Setting Up</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../build-instructions.html">Build Instructions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../cmake-wrappers.html">CMake Wrappers</a></li>
+<li class="toctree-l1"><a class="reference internal" href="apiRoot.html">Azura API</a></li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">Azura</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../index.html">Docs</a> &raquo;</li>
+        
+          <li><a href="apiRoot.html">Azura API</a> &raquo;</li>
+        
+      <li>File VkTypeMapping.cpp</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            <a href="../_sources/html/file_Source_Azura_RenderSystem_Src_Vulkan_VkTypeMapping.cpp.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="file-vktypemapping-cpp">
+<span id="file-source-azura-rendersystem-src-vulkan-vktypemapping-cpp"></span><h1>File VkTypeMapping.cpp<a class="headerlink" href="#file-vktypemapping-cpp" title="Permalink to this headline">¶</a></h1>
+<p>↰ <a class="reference internal" href="dir_Source_Azura_RenderSystem_Src_Vulkan.html#dir-source-azura-rendersystem-src-vulkan"><span class="std std-ref">Parent directory</span></a> (<code class="docutils literal notranslate"><span class="pre">Source\Azura\RenderSystem\Src\Vulkan</span></code>)</p>
+<div class="contents local topic" id="contents">
+<p class="topic-title first">Contents</p>
+<ul class="simple">
+<li><a class="reference internal" href="#definition-source-azura-rendersystem-src-vulkan-vktypemapping-cpp" id="id1">Definition (<code class="docutils literal notranslate"><span class="pre">Source\Azura\RenderSystem\Src\Vulkan\VkTypeMapping.cpp</span></code>)</a></li>
+<li><a class="reference internal" href="#includes" id="id2">Includes</a></li>
+<li><a class="reference internal" href="#namespaces" id="id3">Namespaces</a></li>
+<li><a class="reference internal" href="#functions" id="id4">Functions</a></li>
+<li><a class="reference internal" href="#defines" id="id5">Defines</a></li>
+<li><a class="reference internal" href="#variables" id="id6">Variables</a></li>
+</ul>
+</div>
+<div class="section" id="definition-source-azura-rendersystem-src-vulkan-vktypemapping-cpp">
+<h2>Definition (<code class="docutils literal notranslate"><span class="pre">Source\Azura\RenderSystem\Src\Vulkan\VkTypeMapping.cpp</span></code>)<a class="headerlink" href="#definition-source-azura-rendersystem-src-vulkan-vktypemapping-cpp" title="Permalink to this headline">¶</a></h2>
+<div class="toctree-wrapper compound">
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="program_listing_file_Source_Azura_RenderSystem_Src_Vulkan_VkTypeMapping.cpp.html">Program Listing for File VkTypeMapping.cpp</a></li>
+</ul>
+</div>
+</div>
+<div class="section" id="includes">
+<h2>Includes<a class="headerlink" href="#includes" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li><code class="docutils literal notranslate"><span class="pre">Utils/Macros.h</span></code></li>
+<li><code class="docutils literal notranslate"><span class="pre">Vulkan/VkTypeMapping.h</span></code></li>
+</ul>
+</div>
+<div class="section" id="namespaces">
+<h2>Namespaces<a class="headerlink" href="#namespaces" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li><a class="reference internal" href="namespace_Azura.html#namespace-azura"><span class="std std-ref">Namespace Azura</span></a></li>
+<li><a class="reference internal" href="namespace_Azura__Vulkan.html#namespace-azura-vulkan"><span class="std std-ref">Namespace Azura::Vulkan</span></a></li>
+</ul>
+</div>
+<div class="section" id="functions">
+<h2>Functions<a class="headerlink" href="#functions" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li><a class="reference internal" href="function__vk_type_mapping_8cpp_1a1aedf6b8922fd185e9779c7adc02f714.html#exhale-function-vk-type-mapping-8cpp-1a1aedf6b8922fd185e9779c7adc02f714"><span class="std std-ref">Function Azura::Vulkan::CREATE_MAPPER_CPP(RawStorageFormat, VkIndexType, RAW_STORAGE_TO_VK_INDEX_TYPE_MAPPING, FORWARD_MAPPING)</span></a></li>
+<li><a class="reference internal" href="function__vk_type_mapping_8cpp_1a0f246b27a07ae184cd4ffa21b01602b6.html#exhale-function-vk-type-mapping-8cpp-1a0f246b27a07ae184cd4ffa21b01602b6"><span class="std std-ref">Function Azura::Vulkan::CREATE_MAPPER_CPP(BufferUsageRate, VkVertexInputRate, BUFFER_USAGE_RATE_TO_VK_VERTEX_INPUT_RATE_MAPPING, FORWARD_MAPPING)</span></a></li>
+<li><a class="reference internal" href="function__vk_type_mapping_8cpp_1a191a58ce826347d391c12068723365d3.html#exhale-function-vk-type-mapping-8cpp-1a191a58ce826347d391c12068723365d3"><span class="std std-ref">Function Azura::Vulkan::CREATE_MAPPER_CPP(ImageViewType, VkImageViewType, IMAGE_VIEW_TYPE_TO_VK_IMAGE_TYPE, FORWARD_MAPPING)</span></a></li>
+<li><a class="reference internal" href="function__vk_type_mapping_8cpp_1ac09d82b74c113e67c74326345290ae85.html#exhale-function-vk-type-mapping-8cpp-1ac09d82b74c113e67c74326345290ae85"><span class="std std-ref">Function Azura::Vulkan::CREATE_MAPPER_CPP(BlendFactor, VkBlendFactor, BLEND_FACTOR_TO_VK_BLEND_FACTOR, FORWARD_MAPPING)</span></a></li>
+<li><a class="reference internal" href="function__vk_type_mapping_8cpp_1a4a38b6d16db436c0a61aa4c31afed0c3.html#exhale-function-vk-type-mapping-8cpp-1a4a38b6d16db436c0a61aa4c31afed0c3"><span class="std std-ref">Function Azura::Vulkan::CREATE_MAPPER_CPP(BlendOp, VkBlendOp, BLEND_OP_TO_VK_BLEND_OP, FORWARD_MAPPING)</span></a></li>
+</ul>
+</div>
+<div class="section" id="defines">
+<h2>Defines<a class="headerlink" href="#defines" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li><a class="reference internal" href="define__vk_type_mapping_8cpp_1a1bda13bb88bf0ecf8a7bb28ccb60633a.html#exhale-define-vk-type-mapping-8cpp-1a1bda13bb88bf0ecf8a7bb28ccb60633a"><span class="std std-ref">Define BLEND_FACTOR_TO_VK_BLEND_FACTOR</span></a></li>
+<li><a class="reference internal" href="define__vk_type_mapping_8cpp_1ae267238ca0f28854fde8fd282994844a.html#exhale-define-vk-type-mapping-8cpp-1ae267238ca0f28854fde8fd282994844a"><span class="std std-ref">Define BLEND_OP_TO_VK_BLEND_OP</span></a></li>
+<li><a class="reference internal" href="define__vk_type_mapping_8cpp_1adee2f6ebf0c678b9b6513cddd04ac4b7.html#exhale-define-vk-type-mapping-8cpp-1adee2f6ebf0c678b9b6513cddd04ac4b7"><span class="std std-ref">Define BUFFER_USAGE_RATE_TO_VK_VERTEX_INPUT_RATE_MAPPING</span></a></li>
+<li><a class="reference internal" href="define__vk_type_mapping_8cpp_1a2df4e2085d1a9f670745c2fc06f350a7.html#exhale-define-vk-type-mapping-8cpp-1a2df4e2085d1a9f670745c2fc06f350a7"><span class="std std-ref">Define COLOR_SPACE_TO_VK_COLOR_SPACE_MAPPING</span></a></li>
+<li><a class="reference internal" href="define__vk_type_mapping_8cpp_1a4da618d75b1cb477e7e46cfef88b98d1.html#exhale-define-vk-type-mapping-8cpp-1a4da618d75b1cb477e7e46cfef88b98d1"><span class="std std-ref">Define CREATE_MAPPER_CPP</span></a></li>
+<li><a class="reference internal" href="define__vk_type_mapping_8cpp_1afe3c9330ad114f24ed957edb5cf4f937.html#exhale-define-vk-type-mapping-8cpp-1afe3c9330ad114f24ed957edb5cf4f937"><span class="std std-ref">Define CULL_MODE_TO_VK_CULL_MODE_MAPPING</span></a></li>
+<li><a class="reference internal" href="define__vk_type_mapping_8cpp_1a0403cdd70bbe38b09020d07fd4f8baa3.html#exhale-define-vk-type-mapping-8cpp-1a0403cdd70bbe38b09020d07fd4f8baa3"><span class="std std-ref">Define FRONT_FACE_TO_VK_FRONT_FACE_MAPPING</span></a></li>
+<li><a class="reference internal" href="define__vk_type_mapping_8cpp_1acc841b3ddc51195b0d919e07c4df0dd8.html#exhale-define-vk-type-mapping-8cpp-1acc841b3ddc51195b0d919e07c4df0dd8"><span class="std std-ref">Define IMAGE_TYPE_TO_VK_IMAGE_TYPE</span></a></li>
+<li><a class="reference internal" href="define__vk_type_mapping_8cpp_1a1fe4c13c10538c234b429b5176c28ebc.html#exhale-define-vk-type-mapping-8cpp-1a1fe4c13c10538c234b429b5176c28ebc"><span class="std std-ref">Define IMAGE_VIEW_TYPE_TO_VK_IMAGE_TYPE</span></a></li>
+<li><a class="reference internal" href="define__vk_type_mapping_8cpp_1a3b9653ab459670b721e9843d598112dc.html#exhale-define-vk-type-mapping-8cpp-1a3b9653ab459670b721e9843d598112dc"><span class="std std-ref">Define PRESENT_MODES_TO_VK_PRESENT_MODE_MAPPING</span></a></li>
+<li><a class="reference internal" href="define__vk_type_mapping_8cpp_1a8ca9a9635226142a4e63ea365639df9a.html#exhale-define-vk-type-mapping-8cpp-1a8ca9a9635226142a4e63ea365639df9a"><span class="std std-ref">Define PRIMITIVE_TOPOLOGY_TO_VK_PRIMITIVE_TOPOLOGY_MAPPING</span></a></li>
+<li><a class="reference internal" href="define__vk_type_mapping_8cpp_1a08b5a06ebcb104fdab076ee9fa03255e.html#exhale-define-vk-type-mapping-8cpp-1a08b5a06ebcb104fdab076ee9fa03255e"><span class="std std-ref">Define RAW_STORAGE_TO_VK_FORMAT_MAPPING</span></a></li>
+<li><a class="reference internal" href="define__vk_type_mapping_8cpp_1a26ba1cfa213c20945a0aff6ef3d14a3d.html#exhale-define-vk-type-mapping-8cpp-1a26ba1cfa213c20945a0aff6ef3d14a3d"><span class="std std-ref">Define RAW_STORAGE_TO_VK_INDEX_TYPE_MAPPING</span></a></li>
+<li><a class="reference internal" href="define__vk_type_mapping_8cpp_1a8f14950bdcc05113becf87883a0d8840.html#exhale-define-vk-type-mapping-8cpp-1a8f14950bdcc05113becf87883a0d8840"><span class="std std-ref">Define SHADER_STAGE_TO_SHADER_STAGE_FLAGS_MAPPING</span></a></li>
+</ul>
+</div>
+<div class="section" id="variables">
+<h2>Variables<a class="headerlink" href="#variables" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li><a class="reference internal" href="variable__vk_type_mapping_8cpp_1a311c295822114a32429f1d18f6eb35df.html#exhale-variable-vk-type-mapping-8cpp-1a311c295822114a32429f1d18f6eb35df"><span class="std std-ref">Variable Azura::Vulkan::FORWARD_MAPPING</span></a></li>
+<li><a class="reference internal" href="variable__vk_type_mapping_8cpp_1ac41aaaddc5866aa59e38cc49136b6664.html#exhale-variable-vk-type-mapping-8cpp-1ac41aaaddc5866aa59e38cc49136b6664"><span class="std std-ref">Variable Azura::Vulkan::IMAGE_TYPE_TO_VK_IMAGE_TYPE</span></a></li>
+<li><a class="reference internal" href="variable__vk_type_mapping_8cpp_1aa70ad2578c8d7c24073cf62884f73e07.html#exhale-variable-vk-type-mapping-8cpp-1aa70ad2578c8d7c24073cf62884f73e07"><span class="std std-ref">Variable Azura::Vulkan::PRIMITIVE_TOPOLOGY_TO_VK_PRIMITIVE_TOPOLOGY_MAPPING</span></a></li>
+<li><a class="reference internal" href="variable__vk_type_mapping_8cpp_1a11a48824011de37e701d0c4a98e8747b.html#exhale-variable-vk-type-mapping-8cpp-1a11a48824011de37e701d0c4a98e8747b"><span class="std std-ref">Variable Azura::Vulkan::VkImageType</span></a></li>
+<li><a class="reference internal" href="variable__vk_type_mapping_8cpp_1a876c496837c218b4898698c9f2b834aa.html#exhale-variable-vk-type-mapping-8cpp-1a876c496837c218b4898698c9f2b834aa"><span class="std std-ref">Variable Azura::Vulkan::VkPrimitiveTopology</span></a></li>
+</ul>
+</div>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="program_listing_file_Source_Azura_RenderSystem_Src_Vulkan_VkTypeMapping.cpp.html" class="btn btn-neutral float-right" title="Program Listing for File VkTypeMapping.cpp" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="program_listing_file_Source_Azura_RenderSystem_Inc_Vulkan_VkTextureManager.h.html" class="btn btn-neutral" title="Program Listing for File VkTextureManager.h" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2018, Vasu Mahesh
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  
+
+    
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+        <script type="text/javascript" src="../_static/jquery.js"></script>
+        <script type="text/javascript" src="../_static/underscore.js"></script>
+        <script type="text/javascript" src="../_static/doctools.js"></script>
+        <script type="text/javascript" src="../_static/collapsible-lists\js\CollapsibleLists.compressed.js"></script>
+        <script type="text/javascript" src="../_static/collapsible-lists\js\apply-collapsible-lists.js"></script>
+    
+
+  
+
+  <script type="text/javascript" src="../_static/js/theme.js"></script>
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

@@ -1,0 +1,565 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.8.14">
+  <compounddef id="_drawable_8h" kind="file" language="C++">
+    <compoundname>Drawable.h</compoundname>
+    <includes refid="_vector_8h" local="yes">Containers/Vector.h</includes>
+    <includes refid="_azura_2_render_system_2_inc_2_generic_2_generic_types_8h" local="yes">GenericTypes.h</includes>
+    <includes local="yes">Types.h</includes>
+    <includes refid="_raw_storage_format_8h" local="yes">Core/RawStorageFormat.h</includes>
+    <includedby refid="_d3_d12_drawable_8h" local="yes">Source/Azura/RenderSystem/Inc/D3D12/D3D12Drawable.h</includedby>
+    <includedby refid="_d3_d12_drawable_pool_8h" local="yes">Source/Azura/RenderSystem/Inc/D3D12/D3D12DrawablePool.h</includedby>
+    <includedby refid="_renderer_8h" local="yes">Source/Azura/RenderSystem/Inc/Generic/Renderer.h</includedby>
+    <includedby refid="_pool_primitives_8h" local="yes">Source/Azura/RenderSystem/Inc/Generic/PoolPrimitives.h</includedby>
+    <includedby refid="_vk_compute_pool_8h" local="yes">Source/Azura/RenderSystem/Inc/Vulkan/VkComputePool.h</includedby>
+    <includedby refid="_vk_drawable_pool_8h" local="yes">Source/Azura/RenderSystem/Inc/Vulkan/VkDrawablePool.h</includedby>
+    <includedby refid="_drawable_8cpp" local="yes">Source/Azura/RenderSystem/Src/Generic/Drawable.cpp</includedby>
+    <incdepgraph>
+      <node id="875">
+        <label>functional</label>
+      </node>
+      <node id="876">
+        <label>iterator</label>
+      </node>
+      <node id="889">
+        <label>Utils/Hash.h</label>
+        <link refid="_hash_8h_source"/>
+        <childnode refid="879" relation="include">
+        </childnode>
+      </node>
+      <node id="884">
+        <label>Core/RawStorageFormat.h</label>
+        <link refid="_raw_storage_format_8h_source"/>
+        <childnode refid="879" relation="include">
+        </childnode>
+        <childnode refid="883" relation="include">
+        </childnode>
+        <childnode refid="885" relation="include">
+        </childnode>
+        <childnode refid="886" relation="include">
+        </childnode>
+        <childnode refid="887" relation="include">
+        </childnode>
+        <childnode refid="888" relation="include">
+        </childnode>
+      </node>
+      <node id="878">
+        <label>Memory/Allocator.h</label>
+        <link refid="_allocator_8h_source"/>
+        <childnode refid="875" relation="include">
+        </childnode>
+        <childnode refid="879" relation="include">
+        </childnode>
+        <childnode refid="880" relation="include">
+        </childnode>
+      </node>
+      <node id="890">
+        <label>Core/AssetLocation.h</label>
+        <link refid="_asset_location_8h_source"/>
+      </node>
+      <node id="873">
+        <label>cassert</label>
+      </node>
+      <node id="887">
+        <label>boost/preprocessor/tuple/elem.hpp</label>
+      </node>
+      <node id="881">
+        <label>GenericTypes.h</label>
+        <link refid="_azura_2_render_system_2_inc_2_generic_2_generic_types_8h_source"/>
+        <childnode refid="872" relation="include">
+        </childnode>
+        <childnode refid="882" relation="include">
+        </childnode>
+        <childnode refid="879" relation="include">
+        </childnode>
+        <childnode refid="884" relation="include">
+        </childnode>
+        <childnode refid="889" relation="include">
+        </childnode>
+        <childnode refid="890" relation="include">
+        </childnode>
+        <childnode refid="891" relation="include">
+        </childnode>
+        <childnode refid="888" relation="include">
+        </childnode>
+      </node>
+      <node id="880">
+        <label>Utils/Macros.h</label>
+        <link refid="_macros_8h_source"/>
+      </node>
+      <node id="891">
+        <label>boost/container/small_vector.hpp</label>
+      </node>
+      <node id="882">
+        <label>Generic/Constants.h</label>
+        <link refid="_azura_2_render_system_2_inc_2_generic_2_constants_8h_source"/>
+        <childnode refid="883" relation="include">
+        </childnode>
+        <childnode refid="879" relation="include">
+        </childnode>
+      </node>
+      <node id="888">
+        <label>boost/detail/bitmask.hpp</label>
+      </node>
+      <node id="883">
+        <label>tuple</label>
+      </node>
+      <node id="877">
+        <label>Array.h</label>
+        <link refid="_array_8h_source"/>
+        <childnode refid="873" relation="include">
+        </childnode>
+        <childnode refid="874" relation="include">
+        </childnode>
+        <childnode refid="878" relation="include">
+        </childnode>
+        <childnode refid="879" relation="include">
+        </childnode>
+      </node>
+      <node id="872">
+        <label>Containers/Vector.h</label>
+        <link refid="_vector_8h_source"/>
+        <childnode refid="873" relation="include">
+        </childnode>
+        <childnode refid="874" relation="include">
+        </childnode>
+        <childnode refid="875" relation="include">
+        </childnode>
+        <childnode refid="876" relation="include">
+        </childnode>
+        <childnode refid="877" relation="include">
+        </childnode>
+        <childnode refid="878" relation="include">
+        </childnode>
+        <childnode refid="879" relation="include">
+        </childnode>
+        <childnode refid="880" relation="include">
+        </childnode>
+      </node>
+      <node id="871">
+        <label>Source/Azura/RenderSystem/Inc/Generic/Drawable.h</label>
+        <link refid="_drawable_8h"/>
+        <childnode refid="872" relation="include">
+        </childnode>
+        <childnode refid="881" relation="include">
+        </childnode>
+        <childnode refid="879" relation="include">
+        </childnode>
+        <childnode refid="884" relation="include">
+        </childnode>
+      </node>
+      <node id="885">
+        <label>boost/preprocessor/repetition/repeat.hpp</label>
+      </node>
+      <node id="879">
+        <label>Types.h</label>
+      </node>
+      <node id="874">
+        <label>cstring</label>
+      </node>
+      <node id="886">
+        <label>boost/preprocessor/seq/for_each.hpp</label>
+      </node>
+    </incdepgraph>
+    <invincdepgraph>
+      <node id="909">
+        <label>Source/Samples/2_DeferredRenderer/Inc/Forward/ForwardComputeScene.h</label>
+        <link refid="_forward_compute_scene_8h_source"/>
+        <childnode refid="907" relation="include">
+        </childnode>
+      </node>
+      <node id="897">
+        <label>Source/Azura/RenderSystem/Inc/Generic/Renderer.h</label>
+        <link refid="_renderer_8h_source"/>
+        <childnode refid="895" relation="include">
+        </childnode>
+        <childnode refid="898" relation="include">
+        </childnode>
+        <childnode refid="913" relation="include">
+        </childnode>
+        <childnode refid="914" relation="include">
+        </childnode>
+        <childnode refid="915" relation="include">
+        </childnode>
+        <childnode refid="916" relation="include">
+        </childnode>
+        <childnode refid="917" relation="include">
+        </childnode>
+        <childnode refid="905" relation="include">
+        </childnode>
+        <childnode refid="906" relation="include">
+        </childnode>
+        <childnode refid="907" relation="include">
+        </childnode>
+        <childnode refid="912" relation="include">
+        </childnode>
+      </node>
+      <node id="894">
+        <label>Source/Azura/RenderSystem/Inc/D3D12/D3D12ComputePool.h</label>
+        <link refid="_d3_d12_compute_pool_8h_source"/>
+        <childnode refid="895" relation="include">
+        </childnode>
+      </node>
+      <node id="907">
+        <label>Source/Samples/2_DeferredRenderer/Inc/App/App.h</label>
+        <link refid="_app_8h_source"/>
+      </node>
+      <node id="920">
+        <label>Source/Azura/RenderSystem/Inc/Vulkan/VkDrawablePool.h</label>
+        <link refid="_vk_drawable_pool_8h_source"/>
+        <childnode refid="915" relation="include">
+        </childnode>
+      </node>
+      <node id="911">
+        <label>Source/Samples/2_DeferredRenderer/Inc/ForwardPlus/ForwardPlusComputeScene.h</label>
+        <link refid="_forward_plus_compute_scene_8h_source"/>
+        <childnode refid="907" relation="include">
+        </childnode>
+      </node>
+      <node id="904">
+        <label>Source/Azura/RenderSystem/Inc/Generic/Windows/Win32GLFWWindow.h</label>
+        <link refid="_win32_g_l_f_w_window_8h_source"/>
+      </node>
+      <node id="901">
+        <label>Source/Azura/RenderSystem/Inc/D3D12/D3D12ScopedPipeline.h</label>
+        <link refid="_d3_d12_scoped_pipeline_8h_source"/>
+        <childnode refid="894" relation="include">
+        </childnode>
+        <childnode refid="896" relation="include">
+        </childnode>
+      </node>
+      <node id="916">
+        <label>Source/Azura/RenderSystem/Inc/Vulkan/VkTextureManager.h</label>
+        <link refid="_vk_texture_manager_8h_source"/>
+        <childnode refid="915" relation="include">
+        </childnode>
+      </node>
+      <node id="895">
+        <label>Source/Azura/RenderSystem/Inc/D3D12/D3D12Renderer.h</label>
+        <link refid="_d3_d12_renderer_8h_source"/>
+      </node>
+      <node id="902">
+        <label>Source/Azura/RenderSystem/Inc/D3D12/D3D12ScopedRenderPass.h</label>
+        <link refid="_d3_d12_scoped_render_pass_8h_source"/>
+        <childnode refid="896" relation="include">
+        </childnode>
+        <childnode refid="895" relation="include">
+        </childnode>
+        <childnode refid="901" relation="include">
+        </childnode>
+      </node>
+      <node id="912">
+        <label>Source/Samples/3_ClothSim/Inc/ClothSim/AppRenderer.h</label>
+        <link refid="3___cloth_sim_2_inc_2_cloth_sim_2_app_renderer_8h_source"/>
+      </node>
+      <node id="899">
+        <label>Source/Azura/RenderSystem/Inc/D3D12/D3D12ScopedSwapChain.h</label>
+        <link refid="_d3_d12_scoped_swap_chain_8h_source"/>
+        <childnode refid="895" relation="include">
+        </childnode>
+        <childnode refid="900" relation="include">
+        </childnode>
+        <childnode refid="902" relation="include">
+        </childnode>
+      </node>
+      <node id="919">
+        <label>Source/Azura/RenderSystem/Inc/Vulkan/VkComputePool.h</label>
+        <link refid="_vk_compute_pool_8h_source"/>
+        <childnode refid="915" relation="include">
+        </childnode>
+      </node>
+      <node id="906">
+        <label>Source/Samples/1_ProceduralPlanet/Inc/ProceduralPlanet/AppRenderer.h</label>
+        <link refid="1___procedural_planet_2_inc_2_procedural_planet_2_app_renderer_8h_source"/>
+      </node>
+      <node id="905">
+        <label>Source/Samples/0_TestZone/Inc/TestZone/AppRenderer.h</label>
+        <link refid="0___test_zone_2_inc_2_test_zone_2_app_renderer_8h_source"/>
+      </node>
+      <node id="893">
+        <label>Source/Azura/RenderSystem/Inc/D3D12/D3D12Drawable.h</label>
+        <link refid="_d3_d12_drawable_8h_source"/>
+        <childnode refid="894" relation="include">
+        </childnode>
+        <childnode refid="896" relation="include">
+        </childnode>
+      </node>
+      <node id="903">
+        <label>Source/Azura/RenderSystem/Inc/Generic/GLFWWindow.h</label>
+        <link refid="_g_l_f_w_window_8h_source"/>
+        <childnode refid="904" relation="include">
+        </childnode>
+      </node>
+      <node id="917">
+        <label>Source/Azura/RenderSystem/Test/RenderTestCases.h</label>
+        <link refid="_render_test_cases_8h_source"/>
+      </node>
+      <node id="918">
+        <label>Source/Azura/RenderSystem/Inc/Generic/PoolPrimitives.h</label>
+        <link refid="_pool_primitives_8h_source"/>
+      </node>
+      <node id="892">
+        <label>Source/Azura/RenderSystem/Inc/Generic/Drawable.h</label>
+        <link refid="_drawable_8h"/>
+        <childnode refid="893" relation="include">
+        </childnode>
+        <childnode refid="896" relation="include">
+        </childnode>
+        <childnode refid="897" relation="include">
+        </childnode>
+        <childnode refid="918" relation="include">
+        </childnode>
+        <childnode refid="919" relation="include">
+        </childnode>
+        <childnode refid="920" relation="include">
+        </childnode>
+      </node>
+      <node id="914">
+        <label>Source/Azura/RenderSystem/Inc/Vulkan/VkCore.h</label>
+        <link refid="_vk_core_8h_source"/>
+        <childnode refid="915" relation="include">
+        </childnode>
+      </node>
+      <node id="910">
+        <label>Source/Samples/2_DeferredRenderer/Inc/Forward/ForwardScene.h</label>
+        <link refid="_forward_scene_8h_source"/>
+        <childnode refid="907" relation="include">
+        </childnode>
+      </node>
+      <node id="896">
+        <label>Source/Azura/RenderSystem/Inc/D3D12/D3D12DrawablePool.h</label>
+        <link refid="_d3_d12_drawable_pool_8h_source"/>
+        <childnode refid="895" relation="include">
+        </childnode>
+      </node>
+      <node id="913">
+        <label>Source/Azura/RenderSystem/Inc/Generic/RenderSystem.h</label>
+        <link refid="_render_system_8h_source"/>
+      </node>
+      <node id="898">
+        <label>Source/Azura/RenderSystem/Inc/Generic/Window.h</label>
+        <link refid="_window_8h_source"/>
+        <childnode refid="895" relation="include">
+        </childnode>
+        <childnode refid="899" relation="include">
+        </childnode>
+        <childnode refid="903" relation="include">
+        </childnode>
+        <childnode refid="905" relation="include">
+        </childnode>
+        <childnode refid="906" relation="include">
+        </childnode>
+        <childnode refid="907" relation="include">
+        </childnode>
+        <childnode refid="908" relation="include">
+        </childnode>
+        <childnode refid="912" relation="include">
+        </childnode>
+      </node>
+      <node id="915">
+        <label>Source/Azura/RenderSystem/Inc/Vulkan/VkRenderer.h</label>
+        <link refid="_vk_renderer_8h_source"/>
+      </node>
+      <node id="908">
+        <label>Source/Samples/2_DeferredRenderer/Inc/App/Scene.h</label>
+        <link refid="_samples_22___deferred_renderer_2_inc_2_app_2_scene_8h_source"/>
+        <childnode refid="907" relation="include">
+        </childnode>
+        <childnode refid="909" relation="include">
+        </childnode>
+        <childnode refid="910" relation="include">
+        </childnode>
+        <childnode refid="911" relation="include">
+        </childnode>
+      </node>
+      <node id="900">
+        <label>Source/Azura/RenderSystem/Inc/D3D12/D3D12ScopedComputePass.h</label>
+        <link refid="_d3_d12_scoped_compute_pass_8h_source"/>
+        <childnode refid="894" relation="include">
+        </childnode>
+        <childnode refid="895" relation="include">
+        </childnode>
+        <childnode refid="901" relation="include">
+        </childnode>
+      </node>
+    </invincdepgraph>
+    <innerclass refid="struct_azura_1_1_drawable_create_info" prot="public">Azura::DrawableCreateInfo</innerclass>
+    <innerclass refid="class_azura_1_1_drawable" prot="public">Azura::Drawable</innerclass>
+    <innerclass refid="struct_azura_1_1_drawable_pool_create_info" prot="public">Azura::DrawablePoolCreateInfo</innerclass>
+    <innerclass refid="class_azura_1_1_drawable_pool" prot="public">Azura::DrawablePool</innerclass>
+    <innernamespace refid="namespace_azura">Azura</innernamespace>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <programlisting>
+<codeline lineno="1"><highlight class="preprocessor">#pragma<sp/>once</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="2"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&quot;Containers/Vector.h&quot;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="3"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&quot;GenericTypes.h&quot;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="4"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&quot;Types.h&quot;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="5"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&quot;Core/RawStorageFormat.h&quot;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="6"><highlight class="normal"></highlight></codeline>
+<codeline lineno="7"><highlight class="normal"></highlight><highlight class="keyword">namespace<sp/></highlight><highlight class="normal"><ref refid="namespace_azura" kindref="compound">Azura</ref><sp/>{</highlight></codeline>
+<codeline lineno="8"><highlight class="normal"></highlight><highlight class="keyword">struct<sp/></highlight><highlight class="normal">TextureDesc;</highlight></codeline>
+<codeline lineno="9"><highlight class="normal"></highlight><highlight class="keyword">using</highlight><highlight class="normal"><sp/>DrawableID<sp/>=<sp/>U32;</highlight></codeline>
+<codeline lineno="10"><highlight class="normal"></highlight><highlight class="keyword">class<sp/></highlight><highlight class="normal">Shader;</highlight></codeline>
+<codeline lineno="11"><highlight class="normal"></highlight></codeline>
+<codeline lineno="12" refid="struct_azura_1_1_drawable_create_info" refkind="compound"><highlight class="normal"></highlight><highlight class="keyword">struct<sp/></highlight><highlight class="normal"><ref refid="struct_azura_1_1_drawable_create_info" kindref="compound">DrawableCreateInfo</ref><sp/>{</highlight></codeline>
+<codeline lineno="13"><highlight class="normal"><sp/><sp/>U32<sp/>m_vertexCount{0};</highlight></codeline>
+<codeline lineno="14"><highlight class="normal"><sp/><sp/>U32<sp/>m_instanceCount{0};</highlight></codeline>
+<codeline lineno="15"><highlight class="normal"><sp/><sp/>U32<sp/>m_indexCount{0};</highlight></codeline>
+<codeline lineno="16"><highlight class="normal"><sp/><sp/>RawStorageFormat<sp/>m_indexType{RawStorageFormat::R32_UINT};</highlight></codeline>
+<codeline lineno="17"><highlight class="normal">};</highlight></codeline>
+<codeline lineno="18"><highlight class="normal"></highlight></codeline>
+<codeline lineno="19" refid="class_azura_1_1_drawable" refkind="compound"><highlight class="normal"></highlight><highlight class="keyword">class<sp/></highlight><highlight class="normal"><ref refid="class_azura_1_1_drawable" kindref="compound">Drawable</ref><sp/>{</highlight></codeline>
+<codeline lineno="20"><highlight class="normal"></highlight><highlight class="keyword">public</highlight><highlight class="normal">:</highlight></codeline>
+<codeline lineno="21"><highlight class="normal"><sp/><sp/><ref refid="class_azura_1_1_drawable" kindref="compound">Drawable</ref>(</highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/><ref refid="struct_azura_1_1_drawable_create_info" kindref="compound">DrawableCreateInfo</ref>&amp;<sp/>info,</highlight></codeline>
+<codeline lineno="22"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>U32<sp/>numVertexSlots,</highlight></codeline>
+<codeline lineno="23"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>U32<sp/>numInstanceSlots,</highlight></codeline>
+<codeline lineno="24"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>U32<sp/>numUniformSlots,</highlight></codeline>
+<codeline lineno="25"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="class_azura_1_1_memory_1_1_allocator" kindref="compound">Memory::Allocator</ref>&amp;<sp/>allocator);</highlight></codeline>
+<codeline lineno="26"><highlight class="normal"><sp/><sp/></highlight><highlight class="keyword">virtual</highlight><highlight class="normal"><sp/>~<ref refid="class_azura_1_1_drawable" kindref="compound">Drawable</ref>()<sp/>=<sp/></highlight><highlight class="keywordflow">default</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="27"><highlight class="normal"></highlight></codeline>
+<codeline lineno="28"><highlight class="normal"><sp/><sp/><ref refid="class_azura_1_1_drawable" kindref="compound">Drawable</ref>(</highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/><ref refid="class_azura_1_1_drawable" kindref="compound">Drawable</ref>&amp;<sp/>other)<sp/>=<sp/></highlight><highlight class="keyword">delete</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="29"><highlight class="normal"><sp/><sp/><ref refid="class_azura_1_1_drawable" kindref="compound">Drawable</ref>(<ref refid="class_azura_1_1_drawable" kindref="compound">Drawable</ref>&amp;&amp;<sp/>other)<sp/>noexcept<sp/>=<sp/></highlight><highlight class="keywordflow">default</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="30"><highlight class="normal"><sp/><sp/><ref refid="class_azura_1_1_drawable" kindref="compound">Drawable</ref>&amp;<sp/>operator=(</highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/><ref refid="class_azura_1_1_drawable" kindref="compound">Drawable</ref>&amp;<sp/>other)<sp/>=<sp/></highlight><highlight class="keyword">delete</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="31"><highlight class="normal"><sp/><sp/><ref refid="class_azura_1_1_drawable" kindref="compound">Drawable</ref>&amp;<sp/>operator=(<ref refid="class_azura_1_1_drawable" kindref="compound">Drawable</ref>&amp;&amp;<sp/>other)<sp/>noexcept<sp/>=<sp/></highlight><highlight class="keyword">delete</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="32"><highlight class="normal"></highlight></codeline>
+<codeline lineno="33"><highlight class="normal"><sp/><sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/>AddVertexBufferInfo(<ref refid="struct_azura_1_1_buffer_info" kindref="compound">BufferInfo</ref>&amp;&amp;<sp/>info);</highlight></codeline>
+<codeline lineno="34"><highlight class="normal"><sp/><sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/>AddInstanceBufferInfo(<ref refid="struct_azura_1_1_buffer_info" kindref="compound">BufferInfo</ref>&amp;&amp;<sp/>info);</highlight></codeline>
+<codeline lineno="35"><highlight class="normal"><sp/><sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/>AddUniformBufferInfo(<ref refid="struct_azura_1_1_uniform_buffer_info" kindref="compound">UniformBufferInfo</ref>&amp;&amp;<sp/>info);</highlight></codeline>
+<codeline lineno="36"><highlight class="normal"><sp/><sp/>U32<sp/>GetSingleUniformBufferInfo(</highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/><ref refid="struct_azura_1_1_descriptor_slot" kindref="compound">DescriptorSlot</ref><sp/>&amp;<sp/>slot)<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="37"><highlight class="normal"><sp/><sp/>U32<sp/>GetSingleVertexBufferInfo(</highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>SlotID<sp/>&amp;<sp/>slot)<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="38"><highlight class="normal"><sp/><sp/>U32<sp/>GetSingleInstanceBufferInfo(</highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>SlotID<sp/>&amp;<sp/>slot)<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="39"><highlight class="normal"><sp/><sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/>SetIndexBufferInfo(<ref refid="struct_azura_1_1_buffer_info" kindref="compound">BufferInfo</ref>&amp;&amp;<sp/>info);</highlight></codeline>
+<codeline lineno="40"><highlight class="normal"></highlight></codeline>
+<codeline lineno="41"><highlight class="normal"><sp/><sp/>U32<sp/>GetVertexCount()<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="42"><highlight class="normal"><sp/><sp/>U32<sp/>GetIndexCount()<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="43"><highlight class="normal"><sp/><sp/>U32<sp/>GetInstanceCount()<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="44"><highlight class="normal"><sp/><sp/>RawStorageFormat<sp/>GetIndexType()<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="45"><highlight class="normal"></highlight></codeline>
+<codeline lineno="46"><highlight class="normal"><sp/><sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/><ref refid="class_azura_1_1_containers_1_1_vector" kindref="compound">Containers::Vector&lt;BufferInfo&gt;</ref>&amp;<sp/>GetVertexBufferInfos()<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="47"><highlight class="normal"><sp/><sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/><ref refid="class_azura_1_1_containers_1_1_vector" kindref="compound">Containers::Vector&lt;BufferInfo&gt;</ref>&amp;<sp/>GetInstanceBufferInfos()<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="48"><highlight class="normal"><sp/><sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/><ref refid="class_azura_1_1_containers_1_1_vector" kindref="compound">Containers::Vector&lt;UniformBufferInfo&gt;</ref>&amp;<sp/>GetUniformBufferInfos()<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="49"><highlight class="normal"><sp/><sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/><ref refid="struct_azura_1_1_buffer_info" kindref="compound">BufferInfo</ref>&amp;<sp/>GetIndexBufferInfo()<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="50"><highlight class="normal"></highlight></codeline>
+<codeline lineno="51"><highlight class="normal"></highlight><highlight class="keyword">protected</highlight><highlight class="normal">:</highlight></codeline>
+<codeline lineno="52"><highlight class="normal"><sp/><sp/><ref refid="class_azura_1_1_memory_1_1_allocator" kindref="compound">Memory::Allocator</ref>&amp;<sp/>GetAllocator()<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="53"><highlight class="normal"></highlight></codeline>
+<codeline lineno="54"><highlight class="normal"><sp/><sp/><ref refid="class_azura_1_1_containers_1_1_vector" kindref="compound">Containers::Vector&lt;BufferInfo&gt;</ref><sp/>m_vertexBufferInfos;</highlight></codeline>
+<codeline lineno="55"><highlight class="normal"><sp/><sp/><ref refid="class_azura_1_1_containers_1_1_vector" kindref="compound">Containers::Vector&lt;BufferInfo&gt;</ref><sp/>m_instanceBufferInfos;</highlight></codeline>
+<codeline lineno="56"><highlight class="normal"><sp/><sp/><ref refid="class_azura_1_1_containers_1_1_vector" kindref="compound">Containers::Vector&lt;UniformBufferInfo&gt;</ref><sp/>m_uniformBufferInfos;</highlight></codeline>
+<codeline lineno="57"><highlight class="normal"><sp/><sp/><ref refid="struct_azura_1_1_buffer_info" kindref="compound">BufferInfo</ref><sp/>m_indexBufferInfo;</highlight></codeline>
+<codeline lineno="58"><highlight class="normal"><sp/><sp/><ref refid="struct_azura_1_1_drawable_create_info" kindref="compound">DrawableCreateInfo</ref><sp/>m_createInfo;</highlight></codeline>
+<codeline lineno="59"><highlight class="normal"></highlight></codeline>
+<codeline lineno="60"><highlight class="normal"></highlight><highlight class="keyword">private</highlight><highlight class="normal">:</highlight></codeline>
+<codeline lineno="61"><highlight class="normal"><sp/><sp/></highlight><highlight class="comment">//<sp/>Shared<sp/>as<sp/>they<sp/>are<sp/>editable<sp/>by<sp/>APIs</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="62"><highlight class="normal"><sp/><sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>U32<sp/>m_vertexCount;</highlight></codeline>
+<codeline lineno="63"><highlight class="normal"><sp/><sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>U32<sp/>m_indexCount;</highlight></codeline>
+<codeline lineno="64"><highlight class="normal"><sp/><sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>RawStorageFormat<sp/>m_indexType;</highlight></codeline>
+<codeline lineno="65"><highlight class="normal"></highlight></codeline>
+<codeline lineno="66"><highlight class="normal"><sp/><sp/>U32<sp/>m_instanceCount;</highlight></codeline>
+<codeline lineno="67"><highlight class="normal"></highlight></codeline>
+<codeline lineno="68"><highlight class="normal"><sp/><sp/>std::reference_wrapper&lt;Memory::Allocator&gt;<sp/>m_allocator;</highlight></codeline>
+<codeline lineno="69"><highlight class="normal">};</highlight></codeline>
+<codeline lineno="70"><highlight class="normal"></highlight></codeline>
+<codeline lineno="71" refid="struct_azura_1_1_drawable_pool_create_info" refkind="compound"><highlight class="normal"></highlight><highlight class="keyword">struct<sp/></highlight><highlight class="normal"><ref refid="struct_azura_1_1_drawable_pool_create_info" kindref="compound">DrawablePoolCreateInfo</ref><sp/>{</highlight></codeline>
+<codeline lineno="72"><highlight class="normal"><sp/><sp/>U32<sp/>m_byteSize{0};</highlight></codeline>
+<codeline lineno="73"><highlight class="normal"><sp/><sp/>U32<sp/>m_numDrawables{0};</highlight></codeline>
+<codeline lineno="74"><highlight class="normal"><sp/><sp/>CullMode<sp/>m_cullMode{CullMode::None};</highlight></codeline>
+<codeline lineno="75"><highlight class="normal"></highlight></codeline>
+<codeline lineno="76"><highlight class="normal"><sp/><sp/>DrawType<sp/>m_drawType{DrawType::InstancedIndexed};</highlight></codeline>
+<codeline lineno="77"><highlight class="normal"></highlight></codeline>
+<codeline lineno="78"><highlight class="normal"><sp/><sp/>SmallVector&lt;VertexSlot,<sp/>4&gt;<sp/>m_vertexDataSlots;</highlight></codeline>
+<codeline lineno="79"><highlight class="normal"><sp/><sp/><ref refid="class_azura_1_1_containers_1_1_vector" kindref="compound">Containers::Vector&lt;U32&gt;</ref><sp/>m_renderPasses;</highlight></codeline>
+<codeline lineno="80"><highlight class="normal"></highlight></codeline>
+<codeline lineno="81"><highlight class="normal"><sp/><sp/>~<ref refid="struct_azura_1_1_drawable_pool_create_info" kindref="compound">DrawablePoolCreateInfo</ref>()<sp/>=<sp/></highlight><highlight class="keywordflow">default</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="82"><highlight class="normal"></highlight></codeline>
+<codeline lineno="83"><highlight class="normal"><sp/><sp/><ref refid="struct_azura_1_1_drawable_pool_create_info" kindref="compound">DrawablePoolCreateInfo</ref>(</highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/><ref refid="struct_azura_1_1_drawable_pool_create_info" kindref="compound">DrawablePoolCreateInfo</ref>&amp;<sp/>other)<sp/>=<sp/></highlight><highlight class="keyword">delete</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="84"><highlight class="normal"><sp/><sp/><ref refid="struct_azura_1_1_drawable_pool_create_info" kindref="compound">DrawablePoolCreateInfo</ref>(<ref refid="struct_azura_1_1_drawable_pool_create_info" kindref="compound">DrawablePoolCreateInfo</ref>&amp;&amp;<sp/>other)<sp/>noexcept<sp/>=<sp/></highlight><highlight class="keyword">delete</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="85"><highlight class="normal"><sp/><sp/><ref refid="struct_azura_1_1_drawable_pool_create_info" kindref="compound">DrawablePoolCreateInfo</ref>&amp;<sp/>operator=(</highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/><ref refid="struct_azura_1_1_drawable_pool_create_info" kindref="compound">DrawablePoolCreateInfo</ref>&amp;<sp/>other)<sp/>=<sp/></highlight><highlight class="keyword">delete</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="86"><highlight class="normal"><sp/><sp/><ref refid="struct_azura_1_1_drawable_pool_create_info" kindref="compound">DrawablePoolCreateInfo</ref>&amp;<sp/>operator=(<ref refid="struct_azura_1_1_drawable_pool_create_info" kindref="compound">DrawablePoolCreateInfo</ref>&amp;&amp;<sp/>other)<sp/>noexcept<sp/>=<sp/></highlight><highlight class="keyword">delete</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="87"><highlight class="normal"></highlight></codeline>
+<codeline lineno="88"><highlight class="normal"><sp/><sp/><ref refid="struct_azura_1_1_drawable_pool_create_info" kindref="compound">DrawablePoolCreateInfo</ref>(<ref refid="class_azura_1_1_memory_1_1_allocator" kindref="compound">Memory::Allocator</ref>&amp;<sp/>alloc);</highlight></codeline>
+<codeline lineno="89"><highlight class="normal"></highlight></codeline>
+<codeline lineno="90"><highlight class="normal"><sp/><sp/>U32<sp/>AddInputSlot(</highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/><ref refid="struct_azura_1_1_vertex_slot" kindref="compound">VertexSlot</ref>&amp;<sp/>slotInfo);</highlight></codeline>
+<codeline lineno="91"><highlight class="normal">};</highlight></codeline>
+<codeline lineno="92"><highlight class="normal"></highlight></codeline>
+<codeline lineno="93" refid="class_azura_1_1_drawable_pool" refkind="compound"><highlight class="normal"></highlight><highlight class="keyword">class<sp/></highlight><highlight class="normal"><ref refid="class_azura_1_1_drawable_pool" kindref="compound">DrawablePool</ref><sp/>{</highlight></codeline>
+<codeline lineno="94"><highlight class="normal"></highlight><highlight class="keyword">public</highlight><highlight class="normal">:</highlight></codeline>
+<codeline lineno="95"><highlight class="normal"><sp/><sp/></highlight><highlight class="keyword">explicit</highlight><highlight class="normal"><sp/><ref refid="class_azura_1_1_drawable_pool" kindref="compound">DrawablePool</ref>(</highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/><ref refid="struct_azura_1_1_drawable_pool_create_info" kindref="compound">DrawablePoolCreateInfo</ref>&amp;<sp/>createInfo,</highlight></codeline>
+<codeline lineno="96"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="struct_azura_1_1_descriptor_count" kindref="compound">DescriptorCount</ref><sp/>descriptorCount,</highlight></codeline>
+<codeline lineno="97"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="class_azura_1_1_memory_1_1_allocator" kindref="compound">Memory::Allocator</ref>&amp;<sp/>allocator);</highlight></codeline>
+<codeline lineno="98"><highlight class="normal"><sp/><sp/></highlight><highlight class="keyword">virtual</highlight><highlight class="normal"><sp/>~<ref refid="class_azura_1_1_drawable_pool" kindref="compound">DrawablePool</ref>()<sp/>=<sp/></highlight><highlight class="keywordflow">default</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="99"><highlight class="normal"></highlight></codeline>
+<codeline lineno="100"><highlight class="normal"><sp/><sp/><ref refid="class_azura_1_1_drawable_pool" kindref="compound">DrawablePool</ref>(</highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/><ref refid="class_azura_1_1_drawable_pool" kindref="compound">DrawablePool</ref>&amp;<sp/>other)<sp/>=<sp/></highlight><highlight class="keyword">delete</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="101"><highlight class="normal"><sp/><sp/><ref refid="class_azura_1_1_drawable_pool" kindref="compound">DrawablePool</ref>(<ref refid="class_azura_1_1_drawable_pool" kindref="compound">DrawablePool</ref>&amp;&amp;<sp/>other)<sp/>noexcept<sp/>=<sp/></highlight><highlight class="keywordflow">default</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="102"><highlight class="normal"><sp/><sp/><ref refid="class_azura_1_1_drawable_pool" kindref="compound">DrawablePool</ref>&amp;<sp/>operator=(</highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/><ref refid="class_azura_1_1_drawable_pool" kindref="compound">DrawablePool</ref>&amp;<sp/>other)<sp/>=<sp/></highlight><highlight class="keyword">delete</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="103"><highlight class="normal"><sp/><sp/><ref refid="class_azura_1_1_drawable_pool" kindref="compound">DrawablePool</ref>&amp;<sp/>operator=(<ref refid="class_azura_1_1_drawable_pool" kindref="compound">DrawablePool</ref>&amp;&amp;<sp/>other)<sp/>noexcept<sp/>=<sp/></highlight><highlight class="keywordflow">default</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="104"><highlight class="normal"></highlight></codeline>
+<codeline lineno="105"><highlight class="normal"><sp/><sp/></highlight><highlight class="keyword">virtual</highlight><highlight class="normal"><sp/>DrawableID<sp/>CreateDrawable(</highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/><ref refid="struct_azura_1_1_drawable_create_info" kindref="compound">DrawableCreateInfo</ref>&amp;<sp/>createInfo)<sp/>=<sp/>0;</highlight></codeline>
+<codeline lineno="106"><highlight class="normal"></highlight></codeline>
+<codeline lineno="107"><highlight class="normal"><sp/><sp/></highlight><highlight class="comment">//<sp/>Drawable<sp/>Scope<sp/>Binds</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="108"><highlight class="normal"><sp/><sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/>BindVertexData(DrawableID<sp/>drawableId,<sp/>SlotID<sp/>slot,<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/><ref refid="class_azura_1_1_containers_1_1_vector" kindref="compound">Containers::Vector&lt;U8&gt;</ref>&amp;<sp/>buffer);</highlight></codeline>
+<codeline lineno="109"><highlight class="normal"><sp/><sp/></highlight><highlight class="keyword">virtual</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/>BindVertexData(DrawableID<sp/>drawableId,<sp/>SlotID<sp/>slot,<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>U8*<sp/>buffer,<sp/>U32<sp/>size)<sp/>=<sp/>0;</highlight></codeline>
+<codeline lineno="110"><highlight class="normal"><sp/><sp/></highlight><highlight class="keyword">virtual</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/>BindVertexData(DrawableID<sp/>drawableId,<sp/>SlotID<sp/>slot,<sp/>U32<sp/>sourceBuffer,<sp/>U32<sp/>offset,<sp/>U32<sp/>size)<sp/>=<sp/>0;</highlight></codeline>
+<codeline lineno="111"><highlight class="normal"></highlight></codeline>
+<codeline lineno="112"><highlight class="normal"><sp/><sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/>BindInstanceData(DrawableID<sp/>drawableId,<sp/>SlotID<sp/>slot,<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/><ref refid="class_azura_1_1_containers_1_1_vector" kindref="compound">Containers::Vector&lt;U8&gt;</ref>&amp;<sp/>buffer);</highlight></codeline>
+<codeline lineno="113"><highlight class="normal"><sp/><sp/></highlight><highlight class="keyword">virtual</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/>BindInstanceData(DrawableID<sp/>drawableId,<sp/>SlotID<sp/>slot,<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>U8*<sp/>buffer,<sp/>U32<sp/>size)<sp/>=<sp/>0;</highlight></codeline>
+<codeline lineno="114"><highlight class="normal"></highlight></codeline>
+<codeline lineno="115"><highlight class="normal"><sp/><sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/>BindUniformData(DrawableID<sp/>drawableId,<sp/>SlotID<sp/>slot,<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/><ref refid="class_azura_1_1_containers_1_1_vector" kindref="compound">Containers::Vector&lt;U8&gt;</ref>&amp;<sp/>buffer);</highlight></codeline>
+<codeline lineno="116"><highlight class="normal"><sp/><sp/></highlight><highlight class="keyword">virtual</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/>BindUniformData(DrawableID<sp/>drawableId,<sp/>SlotID<sp/>slot,<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>U8*<sp/>buffer,<sp/>U32<sp/>size)<sp/>=<sp/>0;</highlight></codeline>
+<codeline lineno="117"><highlight class="normal"></highlight></codeline>
+<codeline lineno="118"><highlight class="normal"><sp/><sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/>SetIndexData(DrawableID<sp/>drawableId,<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/><ref refid="class_azura_1_1_containers_1_1_vector" kindref="compound">Containers::Vector&lt;U8&gt;</ref>&amp;<sp/>buffer);</highlight></codeline>
+<codeline lineno="119"><highlight class="normal"><sp/><sp/></highlight><highlight class="keyword">virtual</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/>SetIndexData(DrawableID<sp/>drawableId,<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>U8*<sp/>buffer,<sp/>U32<sp/>size)<sp/>=<sp/>0;</highlight></codeline>
+<codeline lineno="120"><highlight class="normal"></highlight></codeline>
+<codeline lineno="121"><highlight class="normal"><sp/><sp/></highlight><highlight class="comment">//<sp/>Pool<sp/>Scope<sp/>Binds</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="122"><highlight class="normal"><sp/><sp/></highlight><highlight class="keyword">virtual</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/>AddShader(U32<sp/>shaderId)<sp/>=<sp/>0;</highlight></codeline>
+<codeline lineno="123"><highlight class="normal"><sp/><sp/></highlight><highlight class="keyword">virtual</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/>BindTextureData(SlotID<sp/>slot,<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/><ref refid="struct_azura_1_1_texture_desc" kindref="compound">TextureDesc</ref>&amp;<sp/>desc,<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>U8*<sp/>buffer)<sp/>=<sp/>0;</highlight></codeline>
+<codeline lineno="124"><highlight class="normal"><sp/><sp/></highlight><highlight class="keyword">virtual</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/>BindSampler(SlotID<sp/>slot,<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/><ref refid="struct_azura_1_1_sampler_desc" kindref="compound">SamplerDesc</ref>&amp;<sp/>desc)<sp/>=<sp/>0;</highlight></codeline>
+<codeline lineno="125"><highlight class="normal"></highlight></codeline>
+<codeline lineno="126"><highlight class="normal"><sp/><sp/></highlight><highlight class="keyword">virtual</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/>BeginUpdates()<sp/>=<sp/>0;</highlight></codeline>
+<codeline lineno="127"><highlight class="normal"><sp/><sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/>UpdateUniformData(DrawableID<sp/>drawableId,<sp/>SlotID<sp/>slot,<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/><ref refid="class_azura_1_1_containers_1_1_vector" kindref="compound">Containers::Vector&lt;U8&gt;</ref>&amp;<sp/>buffer);</highlight></codeline>
+<codeline lineno="128"><highlight class="normal"><sp/><sp/></highlight><highlight class="keyword">virtual</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/>UpdateUniformData(DrawableID<sp/>drawableId,<sp/>SlotID<sp/>slot,<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>U8*<sp/>buffer,<sp/>U32<sp/>size)<sp/>=<sp/>0;</highlight></codeline>
+<codeline lineno="129"><highlight class="normal"><sp/><sp/></highlight><highlight class="keyword">virtual</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/>UpdateVertexData(DrawableID<sp/>drawableId,<sp/>SlotID<sp/>slot,<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>U8*<sp/>buffer,<sp/>U32<sp/>size)<sp/>=<sp/>0;</highlight></codeline>
+<codeline lineno="130"><highlight class="normal"><sp/><sp/></highlight><highlight class="keyword">virtual</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/>UpdateInstanceData(DrawableID<sp/>drawableId,<sp/>SlotID<sp/>slot,<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>U8*<sp/>buffer,<sp/>U32<sp/>size)<sp/>=<sp/>0;</highlight></codeline>
+<codeline lineno="131"><highlight class="normal"><sp/><sp/></highlight><highlight class="keyword">virtual</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/>UpdateTextureData(SlotID<sp/>slot,<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>U8*<sp/>buffer)<sp/>=<sp/>0;</highlight></codeline>
+<codeline lineno="132"><highlight class="normal"></highlight></codeline>
+<codeline lineno="133"><highlight class="normal"><sp/><sp/>U32<sp/>GetSingleTextureBufferInfo(</highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/><ref refid="struct_azura_1_1_descriptor_slot" kindref="compound">DescriptorSlot</ref><sp/>&amp;<sp/>slot);</highlight></codeline>
+<codeline lineno="134"><highlight class="normal"></highlight></codeline>
+<codeline lineno="135"><highlight class="normal"><sp/><sp/></highlight><highlight class="keyword">virtual</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/>Submit()<sp/>=<sp/>0;</highlight></codeline>
+<codeline lineno="136"><highlight class="normal"><sp/><sp/></highlight><highlight class="keyword">virtual</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/>SubmitUpdates()<sp/>=<sp/>0;</highlight></codeline>
+<codeline lineno="137"><highlight class="normal"></highlight></codeline>
+<codeline lineno="138"><highlight class="normal"><sp/><sp/>U32<sp/>GetSize()<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="139"><highlight class="normal"><sp/><sp/></highlight><highlight class="keywordtype">bool</highlight><highlight class="normal"><sp/>CanRenderInPass(U32<sp/>renderPassId)<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="140"><highlight class="normal"></highlight></codeline>
+<codeline lineno="141"><highlight class="normal"></highlight><highlight class="keyword">protected</highlight><highlight class="normal">:</highlight></codeline>
+<codeline lineno="142"><highlight class="normal"><sp/><sp/><ref refid="class_azura_1_1_memory_1_1_allocator" kindref="compound">Memory::Allocator</ref>&amp;<sp/>GetAllocator()<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="143"><highlight class="normal"><sp/><sp/>DrawType<sp/>GetDrawType()<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="144"><highlight class="normal"></highlight></codeline>
+<codeline lineno="145"><highlight class="normal"><sp/><sp/>U32<sp/>m_numVertexSlots;</highlight></codeline>
+<codeline lineno="146"><highlight class="normal"><sp/><sp/>U32<sp/>m_numInstanceSlots;</highlight></codeline>
+<codeline lineno="147"><highlight class="normal"></highlight></codeline>
+<codeline lineno="148"><highlight class="normal"><sp/><sp/><ref refid="struct_azura_1_1_descriptor_count" kindref="compound">DescriptorCount</ref><sp/>m_descriptorCount;</highlight></codeline>
+<codeline lineno="149"><highlight class="normal"></highlight></codeline>
+<codeline lineno="150"><highlight class="normal"><sp/><sp/><ref refid="class_azura_1_1_containers_1_1_vector" kindref="compound">Containers::Vector&lt;VertexSlot&gt;</ref><sp/>m_vertexDataSlots;</highlight></codeline>
+<codeline lineno="151"><highlight class="normal"><sp/><sp/><ref refid="class_azura_1_1_containers_1_1_vector" kindref="compound">Containers::Vector&lt;U32&gt;</ref><sp/>m_renderPasses;</highlight></codeline>
+<codeline lineno="152"><highlight class="normal"></highlight></codeline>
+<codeline lineno="153"><highlight class="normal"><sp/><sp/><ref refid="class_azura_1_1_containers_1_1_vector" kindref="compound">Containers::Vector&lt;TextureBufferInfo&gt;</ref><sp/>m_textureBufferInfos;</highlight></codeline>
+<codeline lineno="154"><highlight class="normal"><sp/><sp/><ref refid="class_azura_1_1_containers_1_1_vector" kindref="compound">Containers::Vector&lt;SamplerInfo&gt;</ref><sp/>m_samplerInfos;</highlight></codeline>
+<codeline lineno="155"><highlight class="normal"></highlight></codeline>
+<codeline lineno="156"><highlight class="normal"><sp/><sp/><ref refid="class_azura_1_1_containers_1_1_vector" kindref="compound">Containers::Vector&lt;BufferUpdate&gt;</ref><sp/>m_bufferUpdates;</highlight></codeline>
+<codeline lineno="157"><highlight class="normal"></highlight></codeline>
+<codeline lineno="158"><highlight class="normal"><sp/><sp/>CullMode<sp/>m_cullMode;</highlight></codeline>
+<codeline lineno="159"><highlight class="normal"></highlight></codeline>
+<codeline lineno="160"><highlight class="normal"></highlight><highlight class="keyword">private</highlight><highlight class="normal">:</highlight></codeline>
+<codeline lineno="161"><highlight class="normal"><sp/><sp/>U32<sp/>m_byteSize;</highlight></codeline>
+<codeline lineno="162"><highlight class="normal"><sp/><sp/>DrawType<sp/>m_drawType;</highlight></codeline>
+<codeline lineno="163"><highlight class="normal"></highlight></codeline>
+<codeline lineno="164"><highlight class="normal"><sp/><sp/>std::reference_wrapper&lt;Memory::Allocator&gt;<sp/>m_allocator;</highlight></codeline>
+<codeline lineno="165"><highlight class="normal">};</highlight></codeline>
+<codeline lineno="166"><highlight class="normal"></highlight></codeline>
+<codeline lineno="167"><highlight class="normal">}<sp/></highlight><highlight class="comment">//<sp/>namespace<sp/>Azura</highlight><highlight class="normal"></highlight></codeline>
+    </programlisting>
+    <location file="Source/Azura/RenderSystem/Inc/Generic/Drawable.h"/>
+  </compounddef>
+</doxygen>

@@ -1,0 +1,301 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>Program Listing for File Window.h &mdash; Azura  documentation</title>
+  
+
+  
+  
+  
+  
+
+  
+
+  
+  
+    
+
+  
+
+  <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/collapsible-lists\css\tree_view.css" type="text/css" />
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="prev" title="File Window.h" href="file_Source_Azura_RenderSystem_Inc_Generic_Window.h.html" /> 
+
+  
+  <script src="../_static/js/modernizr.min.js"></script>
+
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search">
+          
+
+          
+            <a href="../index.html" class="icon icon-home"> Azura
+          
+
+          
+          </a>
+
+          
+            
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <ul>
+<li class="toctree-l1"><a class="reference internal" href="../setting-up.html">Setting Up</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../build-instructions.html">Build Instructions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../cmake-wrappers.html">CMake Wrappers</a></li>
+<li class="toctree-l1"><a class="reference internal" href="apiRoot.html">Azura API</a></li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">Azura</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../index.html">Docs</a> &raquo;</li>
+        
+          <li><a href="apiRoot.html">Azura API</a> &raquo;</li>
+        
+          <li><a href="file_Source_Azura_RenderSystem_Inc_Generic_Window.h.html">File Window.h</a> &raquo;</li>
+        
+      <li>Program Listing for File Window.h</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            <a href="../_sources/html/program_listing_file_Source_Azura_RenderSystem_Inc_Generic_Window.h.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="program-listing-for-file-window-h">
+<span id="program-listing-file-source-azura-rendersystem-inc-generic-window-h"></span><h1>Program Listing for File Window.h<a class="headerlink" href="#program-listing-for-file-window-h" title="Permalink to this headline">¶</a></h1>
+<p>↰ <a class="reference internal" href="file_Source_Azura_RenderSystem_Inc_Generic_Window.h.html#file-source-azura-rendersystem-inc-generic-window-h"><span class="std std-ref">Return to documentation for file</span></a> (<code class="docutils literal notranslate"><span class="pre">Source\Azura\RenderSystem\Inc\Generic\Window.h</span></code>)</p>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="cp">#pragma once</span>
+<span class="cp">#include</span> <span class="cpf">&lt;functional&gt;</span><span class="cp"></span>
+<span class="cp">#include</span> <span class="cpf">&quot;GenericTypes.h&quot;</span><span class="cp"></span>
+<span class="cp">#include</span> <span class="cpf">&quot;Types.h&quot;</span><span class="cp"></span>
+<span class="cp">#include</span> <span class="cpf">&quot;Renderer.h&quot;</span><span class="cp"></span>
+<span class="cp">#include</span> <span class="cpf">&quot;Core/Events.h&quot;</span><span class="cp"></span>
+<span class="cp">#include</span> <span class="cpf">&quot;Log/Log.h&quot;</span><span class="cp"></span>
+
+<span class="k">namespace</span> <span class="n">Azura</span> <span class="p">{</span>
+<span class="k">enum</span> <span class="k">class</span> <span class="nc">CursorState</span>
+<span class="p">{</span>
+  <span class="n">Visible</span><span class="p">,</span>
+  <span class="n">Hidden</span><span class="p">,</span>
+  <span class="n">Disabled</span>
+<span class="p">};</span>
+
+<span class="k">enum</span> <span class="k">class</span> <span class="nc">UpdateRate</span>
+<span class="p">{</span>
+  <span class="n">RateUnlocked</span><span class="p">,</span>
+  <span class="n">Rate240</span><span class="p">,</span>
+  <span class="n">Rate120</span><span class="p">,</span>
+  <span class="n">Rate60</span><span class="p">,</span>
+  <span class="n">Rate30</span>
+<span class="p">};</span>
+
+<span class="k">class</span> <span class="nc">Window</span> <span class="p">{</span>
+<span class="k">public</span><span class="o">:</span>
+  <span class="k">virtual</span> <span class="o">~</span><span class="n">Window</span><span class="p">()</span> <span class="o">=</span> <span class="k">default</span><span class="p">;</span>
+  <span class="n">Window</span><span class="p">(</span><span class="n">String</span> <span class="n">title</span><span class="p">,</span> <span class="n">U32</span> <span class="n">width</span><span class="p">,</span> <span class="n">U32</span> <span class="n">height</span><span class="p">);</span>
+  <span class="k">virtual</span> <span class="k">const</span> <span class="kt">void</span><span class="o">*</span> <span class="nf">GetHandle</span><span class="p">()</span> <span class="k">const</span><span class="p">;</span>
+
+  <span class="n">Window</span><span class="p">(</span><span class="k">const</span> <span class="n">Window</span><span class="o">&amp;</span> <span class="n">other</span><span class="p">)</span> <span class="o">=</span> <span class="k">delete</span><span class="p">;</span>
+  <span class="n">Window</span><span class="p">(</span><span class="n">Window</span><span class="o">&amp;&amp;</span> <span class="n">other</span><span class="p">)</span> <span class="k">noexcept</span> <span class="o">=</span> <span class="k">delete</span><span class="p">;</span>
+  <span class="n">Window</span><span class="o">&amp;</span> <span class="k">operator</span><span class="o">=</span><span class="p">(</span><span class="k">const</span> <span class="n">Window</span><span class="o">&amp;</span> <span class="n">other</span><span class="p">)</span> <span class="o">=</span> <span class="k">delete</span><span class="p">;</span>
+  <span class="n">Window</span><span class="o">&amp;</span> <span class="k">operator</span><span class="o">=</span><span class="p">(</span><span class="n">Window</span><span class="o">&amp;&amp;</span> <span class="n">other</span><span class="p">)</span> <span class="k">noexcept</span> <span class="o">=</span> <span class="k">delete</span><span class="p">;</span>
+
+  <span class="k">virtual</span> <span class="kt">bool</span> <span class="nf">Initialize</span><span class="p">()</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+  <span class="k">virtual</span> <span class="kt">void</span> <span class="nf">StartListening</span><span class="p">()</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+  <span class="kt">void</span> <span class="nf">SetUpdateCallback</span><span class="p">(</span><span class="n">std</span><span class="o">::</span><span class="n">function</span><span class="o">&lt;</span><span class="kt">void</span><span class="p">(</span><span class="kt">float</span><span class="p">)</span><span class="o">&gt;</span> <span class="n">eventUpdate</span><span class="p">);</span>
+  <span class="kt">void</span> <span class="nf">SetMouseEventCallback</span><span class="p">(</span><span class="n">std</span><span class="o">::</span><span class="n">function</span><span class="o">&lt;</span><span class="kt">void</span><span class="p">(</span><span class="n">MouseEvent</span><span class="p">)</span><span class="o">&gt;</span> <span class="n">eventFunc</span><span class="p">);</span>
+  <span class="kt">void</span> <span class="nf">SetKeyEventCallback</span><span class="p">(</span><span class="n">std</span><span class="o">::</span><span class="n">function</span><span class="o">&lt;</span><span class="kt">void</span><span class="p">(</span><span class="n">KeyEvent</span><span class="p">)</span><span class="o">&gt;</span> <span class="n">eventFunc</span><span class="p">);</span>
+  <span class="k">virtual</span> <span class="kt">void</span> <span class="nf">Destroy</span><span class="p">()</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+
+  <span class="k">virtual</span> <span class="kt">void</span> <span class="nf">SetCursorState</span><span class="p">(</span><span class="n">CursorState</span> <span class="n">state</span><span class="p">)</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+  <span class="k">virtual</span> <span class="kt">void</span> <span class="nf">ResetCursor</span><span class="p">()</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+
+  <span class="n">ViewportDimensions</span> <span class="nf">GetViewport</span><span class="p">()</span> <span class="k">const</span><span class="p">;</span>
+  <span class="kt">void</span> <span class="nf">SetUpdateRate</span><span class="p">(</span><span class="n">UpdateRate</span> <span class="n">rate</span><span class="p">);</span>
+
+  <span class="n">SwapChainRequirements</span> <span class="nf">GetSwapChainRequirements</span><span class="p">()</span> <span class="k">const</span><span class="p">;</span>
+
+  <span class="n">U32</span> <span class="nf">GetWidth</span><span class="p">()</span> <span class="k">const</span><span class="p">;</span>
+  <span class="n">U32</span> <span class="nf">GetHeight</span><span class="p">()</span> <span class="k">const</span><span class="p">;</span>
+
+<span class="k">protected</span><span class="o">:</span>
+
+  <span class="kt">void</span> <span class="n">SetHandle</span><span class="p">(</span><span class="kt">void</span><span class="o">*</span> <span class="n">window</span><span class="p">);</span>
+  <span class="k">const</span> <span class="kt">char</span><span class="o">*</span> <span class="nf">GetTitle</span><span class="p">()</span> <span class="k">const</span><span class="p">;</span>
+
+  <span class="kt">void</span> <span class="nf">CallUpdateFunction</span><span class="p">(</span><span class="kt">float</span> <span class="n">timeDelta</span><span class="p">)</span> <span class="k">const</span><span class="p">;</span>
+  <span class="kt">void</span> <span class="nf">CallMouseEventFunction</span><span class="p">(</span><span class="n">MouseEvent</span> <span class="n">e</span><span class="p">)</span> <span class="k">const</span><span class="p">;</span>
+
+  <span class="kt">void</span> <span class="nf">CallKeyEventFunction</span><span class="p">(</span><span class="n">KeyEvent</span> <span class="n">e</span><span class="p">)</span> <span class="k">const</span><span class="p">;</span>
+
+  <span class="n">Log</span> <span class="n">log_Window</span><span class="p">;</span>
+
+  <span class="kt">float</span> <span class="n">m_midWidth</span><span class="p">;</span>
+  <span class="kt">float</span> <span class="n">m_midHeight</span><span class="p">;</span>
+  <span class="n">UpdateRate</span> <span class="n">m_rate</span><span class="p">;</span>
+
+<span class="k">private</span><span class="o">:</span>
+  <span class="n">U32</span> <span class="n">m_width</span><span class="p">;</span>
+  <span class="n">U32</span> <span class="n">m_height</span><span class="p">;</span>
+
+  <span class="n">String</span> <span class="n">m_title</span><span class="p">;</span>
+  <span class="kt">void</span><span class="o">*</span> <span class="n">p_windowResource</span><span class="p">;</span>
+
+  <span class="n">std</span><span class="o">::</span><span class="n">function</span><span class="o">&lt;</span><span class="kt">void</span><span class="p">(</span><span class="kt">float</span><span class="p">)</span><span class="o">&gt;</span> <span class="n">p_updateFunc</span><span class="p">;</span>
+  <span class="n">std</span><span class="o">::</span><span class="n">function</span><span class="o">&lt;</span><span class="kt">void</span><span class="p">(</span><span class="n">MouseEvent</span><span class="p">)</span><span class="o">&gt;</span> <span class="n">p_mouseEventFunc</span><span class="p">{</span><span class="k">nullptr</span><span class="p">};</span>
+  <span class="n">std</span><span class="o">::</span><span class="n">function</span><span class="o">&lt;</span><span class="kt">void</span><span class="p">(</span><span class="n">KeyEvent</span><span class="p">)</span><span class="o">&gt;</span> <span class="n">p_keyEventFunc</span><span class="p">{</span><span class="k">nullptr</span><span class="p">};</span>
+<span class="p">};</span>
+<span class="p">}</span> <span class="c1">// namespace Azura</span>
+</pre></div>
+</div>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+      
+        <a href="file_Source_Azura_RenderSystem_Inc_Generic_Window.h.html" class="btn btn-neutral" title="File Window.h" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2018, Vasu Mahesh
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  
+
+    
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+        <script type="text/javascript" src="../_static/jquery.js"></script>
+        <script type="text/javascript" src="../_static/underscore.js"></script>
+        <script type="text/javascript" src="../_static/doctools.js"></script>
+        <script type="text/javascript" src="../_static/collapsible-lists\js\CollapsibleLists.compressed.js"></script>
+        <script type="text/javascript" src="../_static/collapsible-lists\js\apply-collapsible-lists.js"></script>
+    
+
+  
+
+  <script type="text/javascript" src="../_static/js/theme.js"></script>
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

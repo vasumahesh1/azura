@@ -1,0 +1,110 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.8.14">
+  <compounddef id="class_azura_1_1_vulkan_1_1_vk_scoped_sampler" kind="class" language="C++" prot="public">
+    <compoundname>Azura::Vulkan::VkScopedSampler</compoundname>
+      <sectiondef kind="private-attrib">
+      <memberdef kind="variable" id="class_azura_1_1_vulkan_1_1_vk_scoped_sampler_1abebefab259a98cd00ee7caea1492157a" prot="private" static="no" mutable="no">
+        <type>VkDevice</type>
+        <definition>VkDevice Azura::Vulkan::VkScopedSampler::m_device</definition>
+        <argsstring></argsstring>
+        <name>m_device</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Source/Azura/RenderSystem/Inc/Vulkan/VkScopedSampler.h" line="18" column="1" bodyfile="Source/Azura/RenderSystem/Inc/Vulkan/VkScopedSampler.h" bodystart="18" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="class_azura_1_1_vulkan_1_1_vk_scoped_sampler_1a69ed385bbe1c54e2d287a067c95e3faf" prot="private" static="no" mutable="no">
+        <type>VkSampler</type>
+        <definition>VkSampler Azura::Vulkan::VkScopedSampler::m_sampler</definition>
+        <argsstring></argsstring>
+        <name>m_sampler</name>
+        <initializer>{}</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Source/Azura/RenderSystem/Inc/Vulkan/VkScopedSampler.h" line="20" column="1" bodyfile="Source/Azura/RenderSystem/Inc/Vulkan/VkScopedSampler.h" bodystart="20" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="class_azura_1_1_vulkan_1_1_vk_scoped_sampler_1a8e4f2890f22098a614f498e2908cb96f" prot="private" static="no" mutable="no">
+        <type>const <ref refid="class_azura_1_1_log" kindref="compound">Log</ref></type>
+        <definition>const Log Azura::Vulkan::VkScopedSampler::log_VulkanRenderSystem</definition>
+        <argsstring></argsstring>
+        <name>log_VulkanRenderSystem</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Source/Azura/RenderSystem/Inc/Vulkan/VkScopedSampler.h" line="22" column="1" bodyfile="Source/Azura/RenderSystem/Inc/Vulkan/VkScopedSampler.h" bodystart="22" bodyend="-1"/>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="public-func">
+      <memberdef kind="function" id="class_azura_1_1_vulkan_1_1_vk_scoped_sampler_1a8bfa275be3c914bedfbdd351272f09ac" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>Azura::Vulkan::VkScopedSampler::VkScopedSampler</definition>
+        <argsstring>(VkDevice device, Log logger)</argsstring>
+        <name>VkScopedSampler</name>
+        <param>
+          <type>VkDevice</type>
+          <declname>device</declname>
+        </param>
+        <param>
+          <type><ref refid="class_azura_1_1_log" kindref="compound">Log</ref></type>
+          <declname>logger</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Source/Azura/RenderSystem/Inc/Vulkan/VkScopedSampler.h" line="11" column="1" bodyfile="Source/Azura/RenderSystem/Src/Vulkan/VkScopedSampler.cpp" bodystart="7" bodyend="32"/>
+      </memberdef>
+      <memberdef kind="function" id="class_azura_1_1_vulkan_1_1_vk_scoped_sampler_1aaf78011c7072c51ed76bab64bc46f376" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
+        <type>VkSampler</type>
+        <definition>VkSampler Azura::Vulkan::VkScopedSampler::Real</definition>
+        <argsstring>() const</argsstring>
+        <name>Real</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Source/Azura/RenderSystem/Inc/Vulkan/VkScopedSampler.h" line="13" column="1" bodyfile="Source/Azura/RenderSystem/Src/Vulkan/VkScopedSampler.cpp" bodystart="34" bodyend="36"/>
+      </memberdef>
+      <memberdef kind="function" id="class_azura_1_1_vulkan_1_1_vk_scoped_sampler_1a5b6ab88fad366e4b91146d4a18da3996" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void Azura::Vulkan::VkScopedSampler::CleanUp</definition>
+        <argsstring>() const</argsstring>
+        <name>CleanUp</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Source/Azura/RenderSystem/Inc/Vulkan/VkScopedSampler.h" line="15" column="1" bodyfile="Source/Azura/RenderSystem/Src/Vulkan/VkScopedSampler.cpp" bodystart="38" bodyend="40"/>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <location file="Source/Azura/RenderSystem/Inc/Vulkan/VkScopedSampler.h" line="9" column="1" bodyfile="Source/Azura/RenderSystem/Inc/Vulkan/VkScopedSampler.h" bodystart="9" bodyend="23"/>
+    <listofallmembers>
+      <member refid="class_azura_1_1_vulkan_1_1_vk_scoped_sampler_1a5b6ab88fad366e4b91146d4a18da3996" prot="public" virt="non-virtual"><scope>Azura::Vulkan::VkScopedSampler</scope><name>CleanUp</name></member>
+      <member refid="class_azura_1_1_vulkan_1_1_vk_scoped_sampler_1a8e4f2890f22098a614f498e2908cb96f" prot="private" virt="non-virtual"><scope>Azura::Vulkan::VkScopedSampler</scope><name>log_VulkanRenderSystem</name></member>
+      <member refid="class_azura_1_1_vulkan_1_1_vk_scoped_sampler_1abebefab259a98cd00ee7caea1492157a" prot="private" virt="non-virtual"><scope>Azura::Vulkan::VkScopedSampler</scope><name>m_device</name></member>
+      <member refid="class_azura_1_1_vulkan_1_1_vk_scoped_sampler_1a69ed385bbe1c54e2d287a067c95e3faf" prot="private" virt="non-virtual"><scope>Azura::Vulkan::VkScopedSampler</scope><name>m_sampler</name></member>
+      <member refid="class_azura_1_1_vulkan_1_1_vk_scoped_sampler_1aaf78011c7072c51ed76bab64bc46f376" prot="public" virt="non-virtual"><scope>Azura::Vulkan::VkScopedSampler</scope><name>Real</name></member>
+      <member refid="class_azura_1_1_vulkan_1_1_vk_scoped_sampler_1a8bfa275be3c914bedfbdd351272f09ac" prot="public" virt="non-virtual"><scope>Azura::Vulkan::VkScopedSampler</scope><name>VkScopedSampler</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

@@ -1,0 +1,225 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.8.14">
+  <compounddef id="_sandbox_2main_8cpp" kind="file" language="C++">
+    <compoundname>main.cpp</compoundname>
+    <includes refid="_vector_8h" local="no">Containers/Vector.h</includes>
+    <includes refid="_memory_factory_8h" local="yes">Memory/MemoryFactory.h</includes>
+    <includes refid="_stack_memory_buffer_8h" local="yes">Memory/StackMemoryBuffer.h</includes>
+    <includes refid="_monotonic_allocator_8h" local="yes">Memory/MonotonicAllocator.h</includes>
+    <includes refid="_log_8h" local="yes">Log/Log.h</includes>
+    <includes local="no">GLFW/glfw3.h</includes>
+    <incdepgraph>
+      <node id="6602">
+        <label>functional</label>
+      </node>
+      <node id="6603">
+        <label>iterator</label>
+      </node>
+      <node id="6608">
+        <label>Memory/MemoryFactory.h</label>
+        <link refid="_memory_factory_8h_source"/>
+        <childnode refid="6609" relation="include">
+        </childnode>
+        <childnode refid="6611" relation="include">
+        </childnode>
+        <childnode refid="6606" relation="include">
+        </childnode>
+      </node>
+      <node id="6610">
+        <label>MemoryBuffer.h</label>
+        <link refid="_memory_buffer_8h_source"/>
+        <childnode refid="6606" relation="include">
+        </childnode>
+      </node>
+      <node id="6605">
+        <label>Memory/Allocator.h</label>
+        <link refid="_allocator_8h_source"/>
+        <childnode refid="6602" relation="include">
+        </childnode>
+        <childnode refid="6606" relation="include">
+        </childnode>
+        <childnode refid="6607" relation="include">
+        </childnode>
+      </node>
+      <node id="6600">
+        <label>cassert</label>
+      </node>
+      <node id="6611">
+        <label>Memory/HeapMemoryBuffer.h</label>
+        <link refid="_heap_memory_buffer_8h_source"/>
+        <childnode refid="6610" relation="include">
+        </childnode>
+        <childnode refid="6606" relation="include">
+        </childnode>
+      </node>
+      <node id="6615">
+        <label>GLFW/glfw3.h</label>
+      </node>
+      <node id="6609">
+        <label>Memory/StackMemoryBuffer.h</label>
+        <link refid="_stack_memory_buffer_8h_source"/>
+        <childnode refid="6600" relation="include">
+        </childnode>
+        <childnode refid="6610" relation="include">
+        </childnode>
+        <childnode refid="6606" relation="include">
+        </childnode>
+        <childnode refid="6607" relation="include">
+        </childnode>
+      </node>
+      <node id="6607">
+        <label>Utils/Macros.h</label>
+        <link refid="_macros_8h_source"/>
+      </node>
+      <node id="6598">
+        <label>Source/Sandbox/main.cpp</label>
+        <link refid="_sandbox_2main_8cpp"/>
+        <childnode refid="6599" relation="include">
+        </childnode>
+        <childnode refid="6608" relation="include">
+        </childnode>
+        <childnode refid="6609" relation="include">
+        </childnode>
+        <childnode refid="6612" relation="include">
+        </childnode>
+        <childnode refid="6613" relation="include">
+        </childnode>
+        <childnode refid="6615" relation="include">
+        </childnode>
+      </node>
+      <node id="6604">
+        <label>Array.h</label>
+        <link refid="_array_8h_source"/>
+        <childnode refid="6600" relation="include">
+        </childnode>
+        <childnode refid="6601" relation="include">
+        </childnode>
+        <childnode refid="6605" relation="include">
+        </childnode>
+        <childnode refid="6606" relation="include">
+        </childnode>
+      </node>
+      <node id="6612">
+        <label>Memory/MonotonicAllocator.h</label>
+        <link refid="_monotonic_allocator_8h_source"/>
+        <childnode refid="6605" relation="include">
+        </childnode>
+        <childnode refid="6606" relation="include">
+        </childnode>
+      </node>
+      <node id="6614">
+        <label>vector</label>
+      </node>
+      <node id="6599">
+        <label>Containers/Vector.h</label>
+        <link refid="_vector_8h_source"/>
+        <childnode refid="6600" relation="include">
+        </childnode>
+        <childnode refid="6601" relation="include">
+        </childnode>
+        <childnode refid="6602" relation="include">
+        </childnode>
+        <childnode refid="6603" relation="include">
+        </childnode>
+        <childnode refid="6604" relation="include">
+        </childnode>
+        <childnode refid="6605" relation="include">
+        </childnode>
+        <childnode refid="6606" relation="include">
+        </childnode>
+        <childnode refid="6607" relation="include">
+        </childnode>
+      </node>
+      <node id="6613">
+        <label>Log/Log.h</label>
+        <link refid="_log_8h_source"/>
+        <childnode refid="6606" relation="include">
+        </childnode>
+        <childnode refid="6614" relation="include">
+        </childnode>
+      </node>
+      <node id="6606">
+        <label>Types.h</label>
+      </node>
+      <node id="6601">
+        <label>cstring</label>
+      </node>
+    </incdepgraph>
+      <sectiondef kind="func">
+      <memberdef kind="function" id="_sandbox_2main_8cpp_1ae66f6b31b5ad750f1fe042a706a4e3d4" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>int</type>
+        <definition>int main</definition>
+        <argsstring>()</argsstring>
+        <name>main</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Source/Sandbox/main.cpp" line="12" column="1" bodyfile="Source/Sandbox/main.cpp" bodystart="12" bodyend="54"/>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <programlisting>
+<codeline lineno="1"><highlight class="preprocessor">#include<sp/>&lt;Containers/Vector.h&gt;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="2"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&quot;Memory/MemoryFactory.h&quot;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="3"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&quot;Memory/StackMemoryBuffer.h&quot;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="4"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&quot;Memory/MonotonicAllocator.h&quot;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="5"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&quot;Log/Log.h&quot;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="6"><highlight class="normal"></highlight></codeline>
+<codeline lineno="7"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&lt;GLFW/glfw3.h&gt;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="8"><highlight class="normal"></highlight></codeline>
+<codeline lineno="9"><highlight class="normal"></highlight><highlight class="keyword">using<sp/>namespace<sp/></highlight><highlight class="normal"><ref refid="namespace_azura_1_1_containers" kindref="compound">Azura::Containers</ref>;<sp/></highlight><highlight class="comment">//<sp/>NOLINT</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="10"><highlight class="normal"></highlight><highlight class="keyword">using<sp/>namespace<sp/></highlight><highlight class="normal"><ref refid="namespace_azura" kindref="compound">Azura</ref>;<sp/></highlight><highlight class="comment">//<sp/>NOLINT</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="11"><highlight class="normal"></highlight></codeline>
+<codeline lineno="12"><highlight class="normal"></highlight><highlight class="keywordtype">int</highlight><highlight class="normal"><sp/>main()<sp/>{</highlight></codeline>
+<codeline lineno="13"><highlight class="normal"><sp/><sp/><ref refid="class_azura_1_1_log" kindref="compound">Log</ref><sp/>myLogger<sp/>=<sp/><ref refid="class_azura_1_1_log" kindref="compound">Log</ref>(</highlight><highlight class="stringliteral">&quot;VulkanRenderSystem&quot;</highlight><highlight class="normal">);</highlight></codeline>
+<codeline lineno="14"><highlight class="normal"></highlight></codeline>
+<codeline lineno="15"><highlight class="normal"><sp/><sp/>LOG_INF(myLogger,<sp/>75,<sp/></highlight><highlight class="stringliteral">&quot;Testing<sp/>this<sp/>Beautiful<sp/>Printf<sp/>like<sp/>Log<sp/>%d<sp/>%f&quot;</highlight><highlight class="normal">,<sp/>45,<sp/>5.0f);</highlight></codeline>
+<codeline lineno="16"><highlight class="normal"><sp/><sp/>LOG_DBG(myLogger,<sp/>75,<sp/></highlight><highlight class="stringliteral">&quot;Debug<sp/>Message&quot;</highlight><highlight class="normal">);</highlight></codeline>
+<codeline lineno="17"><highlight class="normal"><sp/><sp/>LOG_INF(myLogger,<sp/>75,<sp/></highlight><highlight class="stringliteral">&quot;Info<sp/>Message&quot;</highlight><highlight class="normal">);</highlight></codeline>
+<codeline lineno="18"><highlight class="normal"><sp/><sp/>LOG_WRN(myLogger,<sp/>75,<sp/></highlight><highlight class="stringliteral">&quot;Warning<sp/>Message&quot;</highlight><highlight class="normal">);</highlight></codeline>
+<codeline lineno="19"><highlight class="normal"><sp/><sp/>LOG_ERR(myLogger,<sp/>75,<sp/></highlight><highlight class="stringliteral">&quot;Error<sp/>Message&quot;</highlight><highlight class="normal">);</highlight></codeline>
+<codeline lineno="20"><highlight class="normal"><sp/><sp/>LOG_FTL(myLogger,<sp/>75,<sp/></highlight><highlight class="stringliteral">&quot;Fatal<sp/>Message&quot;</highlight><highlight class="normal">);</highlight></codeline>
+<codeline lineno="21"><highlight class="normal"></highlight></codeline>
+<codeline lineno="22"><highlight class="normal"></highlight></codeline>
+<codeline lineno="23"><highlight class="normal"><sp/><sp/></highlight><highlight class="comment">//<sp/>STACK_ALLOCATOR(Temporary,<sp/>Memory::MonotonicAllocator,<sp/>2048);</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="24"><highlight class="normal"><sp/><sp/></highlight><highlight class="comment">//</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="25"><highlight class="normal"><sp/><sp/></highlight><highlight class="comment">//<sp/>Vector&lt;const<sp/>char<sp/>*&gt;<sp/>v(2,<sp/>allocatorTemporary);</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="26"><highlight class="normal"><sp/><sp/></highlight><highlight class="comment">//<sp/>v.PushBack(&quot;Vasu&quot;);</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="27"><highlight class="normal"><sp/><sp/></highlight><highlight class="comment">//<sp/>v.PushBack(&quot;Mahesh&quot;);</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="28"><highlight class="normal"><sp/><sp/></highlight><highlight class="comment">//</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="29"><highlight class="normal"><sp/><sp/></highlight><highlight class="comment">//<sp/>printf(&quot;%s<sp/>\n&quot;,<sp/>v[0]);<sp/>//<sp/>NOLINT</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="30"><highlight class="normal"><sp/><sp/></highlight><highlight class="comment">//<sp/>printf(&quot;%s<sp/>\n&quot;,<sp/>v[1]);<sp/>//<sp/>NOLINT</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="31"><highlight class="normal"><sp/><sp/></highlight><highlight class="comment">//</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="32"><highlight class="normal"><sp/><sp/></highlight><highlight class="comment">//<sp/>const<sp/>char**<sp/>c<sp/>=<sp/>v.Data();</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="33"><highlight class="normal"><sp/><sp/></highlight><highlight class="comment">//<sp/>printf(&quot;%s<sp/>\n&quot;,<sp/>c[0]);<sp/>//<sp/>NOLINT</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="34"><highlight class="normal"><sp/><sp/></highlight><highlight class="comment">//<sp/>printf(&quot;%s<sp/>\n&quot;,<sp/>c[1]);<sp/>//<sp/>NOLINT</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="35"><highlight class="normal"></highlight></codeline>
+<codeline lineno="36"><highlight class="normal"><sp/><sp/></highlight><highlight class="keywordflow">if</highlight><highlight class="normal"><sp/>(glfwInit()<sp/>==<sp/>GLFW_FALSE)<sp/>{</highlight></codeline>
+<codeline lineno="37"><highlight class="normal"><sp/><sp/><sp/><sp/>exit(EXIT_FAILURE);</highlight></codeline>
+<codeline lineno="38"><highlight class="normal"><sp/><sp/>}</highlight></codeline>
+<codeline lineno="39"><highlight class="normal"><sp/><sp/></highlight></codeline>
+<codeline lineno="40"><highlight class="normal"><sp/><sp/>GLFWwindow*<sp/>window<sp/>=<sp/>glfwCreateWindow(640,<sp/>480,<sp/></highlight><highlight class="stringliteral">&quot;Simple<sp/>example&quot;</highlight><highlight class="normal">,<sp/></highlight><highlight class="keyword">nullptr</highlight><highlight class="normal">,<sp/></highlight><highlight class="keyword">nullptr</highlight><highlight class="normal">);</highlight></codeline>
+<codeline lineno="41"><highlight class="normal"><sp/><sp/></highlight></codeline>
+<codeline lineno="42"><highlight class="normal"><sp/><sp/></highlight><highlight class="keywordflow">if</highlight><highlight class="normal"><sp/>(window<sp/>==<sp/></highlight><highlight class="keyword">nullptr</highlight><highlight class="normal">)<sp/>{</highlight></codeline>
+<codeline lineno="43"><highlight class="normal"><sp/><sp/><sp/><sp/>glfwTerminate();</highlight></codeline>
+<codeline lineno="44"><highlight class="normal"><sp/><sp/><sp/><sp/>exit(EXIT_FAILURE);</highlight></codeline>
+<codeline lineno="45"><highlight class="normal"><sp/><sp/>}</highlight></codeline>
+<codeline lineno="46"><highlight class="normal"><sp/><sp/></highlight></codeline>
+<codeline lineno="47"><highlight class="normal"><sp/><sp/></highlight><highlight class="keywordflow">while</highlight><highlight class="normal"><sp/>(glfwWindowShouldClose(window)<sp/>==<sp/>GLFW_FALSE)<sp/>{</highlight></codeline>
+<codeline lineno="48"><highlight class="normal"><sp/><sp/><sp/><sp/>glfwPollEvents();</highlight></codeline>
+<codeline lineno="49"><highlight class="normal"><sp/><sp/>}</highlight></codeline>
+<codeline lineno="50"><highlight class="normal"><sp/><sp/></highlight></codeline>
+<codeline lineno="51"><highlight class="normal"><sp/><sp/>glfwDestroyWindow(window);</highlight></codeline>
+<codeline lineno="52"><highlight class="normal"><sp/><sp/>glfwTerminate();</highlight></codeline>
+<codeline lineno="53"><highlight class="normal"><sp/><sp/>exit(EXIT_SUCCESS);</highlight></codeline>
+<codeline lineno="54"><highlight class="normal">}</highlight></codeline>
+    </programlisting>
+    <location file="Source/Sandbox/main.cpp"/>
+  </compounddef>
+</doxygen>

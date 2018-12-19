@@ -1,0 +1,210 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.8.14">
+  <compounddef id="struct_azura_1_1_mesh_object" kind="struct" language="C++" prot="public">
+    <compoundname>Azura::MeshObject</compoundname>
+      <sectiondef kind="public-attrib">
+      <memberdef kind="variable" id="struct_azura_1_1_mesh_object_1a8f5ef6376b5fe9150a45b2484a439a2a" prot="public" static="no" mutable="no">
+        <type>std::unique_ptr&lt; <ref refid="class_azura_1_1_g_l_t_f_mesh_interface" kindref="compound">GLTFMeshInterface</ref> &gt;</type>
+        <definition>std::unique_ptr&lt;GLTFMeshInterface&gt; Azura::MeshObject::p_interface</definition>
+        <argsstring></argsstring>
+        <name>p_interface</name>
+        <initializer>{nullptr}</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Source/Samples/2_DeferredRenderer/Inc/App/Common.h" line="39" column="1" bodyfile="Source/Samples/2_DeferredRenderer/Inc/App/Common.h" bodystart="39" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="struct_azura_1_1_mesh_object_1a57655f79bd39b1eeee3feba7d41843e7" prot="public" static="no" mutable="no">
+        <type>std::vector&lt; float &gt;</type>
+        <definition>std::vector&lt;float&gt; Azura::MeshObject::m_vertexData</definition>
+        <argsstring></argsstring>
+        <name>m_vertexData</name>
+        <initializer>{}</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Source/Samples/2_DeferredRenderer/Inc/App/Common.h" line="41" column="1" bodyfile="Source/Samples/2_DeferredRenderer/Inc/App/Common.h" bodystart="41" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="struct_azura_1_1_mesh_object_1a89a4fc67d510f3fb7a33c9ec1591b8be" prot="public" static="no" mutable="no">
+        <type>std::vector&lt; float &gt;</type>
+        <definition>std::vector&lt;float&gt; Azura::MeshObject::m_normalData</definition>
+        <argsstring></argsstring>
+        <name>m_normalData</name>
+        <initializer>{}</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Source/Samples/2_DeferredRenderer/Inc/App/Common.h" line="42" column="1" bodyfile="Source/Samples/2_DeferredRenderer/Inc/App/Common.h" bodystart="42" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="struct_azura_1_1_mesh_object_1a243ecb982ab87770506cd4ca3d2584a5" prot="public" static="no" mutable="no">
+        <type>std::vector&lt; float &gt;</type>
+        <definition>std::vector&lt;float&gt; Azura::MeshObject::m_uvData</definition>
+        <argsstring></argsstring>
+        <name>m_uvData</name>
+        <initializer>{}</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Source/Samples/2_DeferredRenderer/Inc/App/Common.h" line="43" column="1" bodyfile="Source/Samples/2_DeferredRenderer/Inc/App/Common.h" bodystart="43" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="struct_azura_1_1_mesh_object_1a66c0beb5c64cdc72b0fd3cec9583093c" prot="public" static="no" mutable="no">
+        <type>std::vector&lt; U32 &gt;</type>
+        <definition>std::vector&lt;U32&gt; Azura::MeshObject::m_indexData</definition>
+        <argsstring></argsstring>
+        <name>m_indexData</name>
+        <initializer>{}</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Source/Samples/2_DeferredRenderer/Inc/App/Common.h" line="44" column="1" bodyfile="Source/Samples/2_DeferredRenderer/Inc/App/Common.h" bodystart="44" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="struct_azura_1_1_mesh_object_1aa696e0524aad07ce08835bc97ac93f56" prot="public" static="no" mutable="no">
+        <type>U32</type>
+        <definition>U32 Azura::MeshObject::m_numVertices</definition>
+        <argsstring></argsstring>
+        <name>m_numVertices</name>
+        <initializer>{0}</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Source/Samples/2_DeferredRenderer/Inc/App/Common.h" line="46" column="1" bodyfile="Source/Samples/2_DeferredRenderer/Inc/App/Common.h" bodystart="46" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="struct_azura_1_1_mesh_object_1a4012032e29c602199425403302709272" prot="public" static="no" mutable="no">
+        <type>U32</type>
+        <definition>U32 Azura::MeshObject::m_vertexDataSize</definition>
+        <argsstring></argsstring>
+        <name>m_vertexDataSize</name>
+        <initializer>{0}</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Source/Samples/2_DeferredRenderer/Inc/App/Common.h" line="47" column="1" bodyfile="Source/Samples/2_DeferredRenderer/Inc/App/Common.h" bodystart="47" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="struct_azura_1_1_mesh_object_1ac3fb07853bbb866e97f4dcbe0255c188" prot="public" static="no" mutable="no">
+        <type>U32</type>
+        <definition>U32 Azura::MeshObject::m_numIndices</definition>
+        <argsstring></argsstring>
+        <name>m_numIndices</name>
+        <initializer>{0}</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Source/Samples/2_DeferredRenderer/Inc/App/Common.h" line="49" column="1" bodyfile="Source/Samples/2_DeferredRenderer/Inc/App/Common.h" bodystart="49" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="struct_azura_1_1_mesh_object_1ac2689dd4c6a56d79fb3ea0b265a0cc28" prot="public" static="no" mutable="no">
+        <type>U32</type>
+        <definition>U32 Azura::MeshObject::m_indexDataSize</definition>
+        <argsstring></argsstring>
+        <name>m_indexDataSize</name>
+        <initializer>{0}</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Source/Samples/2_DeferredRenderer/Inc/App/Common.h" line="50" column="1" bodyfile="Source/Samples/2_DeferredRenderer/Inc/App/Common.h" bodystart="50" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="struct_azura_1_1_mesh_object_1a6dfed040e1a6f962dbf2c0734235da1f" prot="public" static="no" mutable="no">
+        <type>U32</type>
+        <definition>U32 Azura::MeshObject::m_numUV</definition>
+        <argsstring></argsstring>
+        <name>m_numUV</name>
+        <initializer>{0}</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Source/Samples/2_DeferredRenderer/Inc/App/Common.h" line="52" column="1" bodyfile="Source/Samples/2_DeferredRenderer/Inc/App/Common.h" bodystart="52" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="struct_azura_1_1_mesh_object_1aea46f867467b310cf3ecfbf4cfdf43a4" prot="public" static="no" mutable="no">
+        <type>U32</type>
+        <definition>U32 Azura::MeshObject::m_uvDataSize</definition>
+        <argsstring></argsstring>
+        <name>m_uvDataSize</name>
+        <initializer>{0}</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Source/Samples/2_DeferredRenderer/Inc/App/Common.h" line="53" column="1" bodyfile="Source/Samples/2_DeferredRenderer/Inc/App/Common.h" bodystart="53" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="struct_azura_1_1_mesh_object_1a10989ce0dd86c65d493c7bea44ddc6ec" prot="public" static="no" mutable="no">
+        <type>U32</type>
+        <definition>U32 Azura::MeshObject::m_numNormals</definition>
+        <argsstring></argsstring>
+        <name>m_numNormals</name>
+        <initializer>{0}</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Source/Samples/2_DeferredRenderer/Inc/App/Common.h" line="55" column="1" bodyfile="Source/Samples/2_DeferredRenderer/Inc/App/Common.h" bodystart="55" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="struct_azura_1_1_mesh_object_1a7d38346b57b776100eaf21f1a0474797" prot="public" static="no" mutable="no">
+        <type>U32</type>
+        <definition>U32 Azura::MeshObject::m_normalDataSize</definition>
+        <argsstring></argsstring>
+        <name>m_normalDataSize</name>
+        <initializer>{0}</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Source/Samples/2_DeferredRenderer/Inc/App/Common.h" line="56" column="1" bodyfile="Source/Samples/2_DeferredRenderer/Inc/App/Common.h" bodystart="56" bodyend="-1"/>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <location file="Source/Samples/2_DeferredRenderer/Inc/App/Common.h" line="38" column="1" bodyfile="Source/Samples/2_DeferredRenderer/Inc/App/Common.h" bodystart="37" bodyend="57"/>
+    <listofallmembers>
+      <member refid="struct_azura_1_1_mesh_object_1a66c0beb5c64cdc72b0fd3cec9583093c" prot="public" virt="non-virtual"><scope>Azura::MeshObject</scope><name>m_indexData</name></member>
+      <member refid="struct_azura_1_1_mesh_object_1ac2689dd4c6a56d79fb3ea0b265a0cc28" prot="public" virt="non-virtual"><scope>Azura::MeshObject</scope><name>m_indexDataSize</name></member>
+      <member refid="struct_azura_1_1_mesh_object_1a89a4fc67d510f3fb7a33c9ec1591b8be" prot="public" virt="non-virtual"><scope>Azura::MeshObject</scope><name>m_normalData</name></member>
+      <member refid="struct_azura_1_1_mesh_object_1a7d38346b57b776100eaf21f1a0474797" prot="public" virt="non-virtual"><scope>Azura::MeshObject</scope><name>m_normalDataSize</name></member>
+      <member refid="struct_azura_1_1_mesh_object_1ac3fb07853bbb866e97f4dcbe0255c188" prot="public" virt="non-virtual"><scope>Azura::MeshObject</scope><name>m_numIndices</name></member>
+      <member refid="struct_azura_1_1_mesh_object_1a10989ce0dd86c65d493c7bea44ddc6ec" prot="public" virt="non-virtual"><scope>Azura::MeshObject</scope><name>m_numNormals</name></member>
+      <member refid="struct_azura_1_1_mesh_object_1a6dfed040e1a6f962dbf2c0734235da1f" prot="public" virt="non-virtual"><scope>Azura::MeshObject</scope><name>m_numUV</name></member>
+      <member refid="struct_azura_1_1_mesh_object_1aa696e0524aad07ce08835bc97ac93f56" prot="public" virt="non-virtual"><scope>Azura::MeshObject</scope><name>m_numVertices</name></member>
+      <member refid="struct_azura_1_1_mesh_object_1a243ecb982ab87770506cd4ca3d2584a5" prot="public" virt="non-virtual"><scope>Azura::MeshObject</scope><name>m_uvData</name></member>
+      <member refid="struct_azura_1_1_mesh_object_1aea46f867467b310cf3ecfbf4cfdf43a4" prot="public" virt="non-virtual"><scope>Azura::MeshObject</scope><name>m_uvDataSize</name></member>
+      <member refid="struct_azura_1_1_mesh_object_1a57655f79bd39b1eeee3feba7d41843e7" prot="public" virt="non-virtual"><scope>Azura::MeshObject</scope><name>m_vertexData</name></member>
+      <member refid="struct_azura_1_1_mesh_object_1a4012032e29c602199425403302709272" prot="public" virt="non-virtual"><scope>Azura::MeshObject</scope><name>m_vertexDataSize</name></member>
+      <member refid="struct_azura_1_1_mesh_object_1a8f5ef6376b5fe9150a45b2484a439a2a" prot="public" virt="non-virtual"><scope>Azura::MeshObject</scope><name>p_interface</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

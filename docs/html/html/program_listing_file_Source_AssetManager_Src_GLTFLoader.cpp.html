@@ -1,0 +1,395 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>Program Listing for File GLTFLoader.cpp &mdash; Azura  documentation</title>
+  
+
+  
+  
+  
+  
+
+  
+
+  
+  
+    
+
+  
+
+  <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/collapsible-lists\css\tree_view.css" type="text/css" />
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="File GLTFLoader.h" href="file_Source_AssetManager_Inc_AssetManager_GLTFLoader.h.html" />
+    <link rel="prev" title="File GLTFLoader.cpp" href="file_Source_AssetManager_Src_GLTFLoader.cpp.html" /> 
+
+  
+  <script src="../_static/js/modernizr.min.js"></script>
+
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search">
+          
+
+          
+            <a href="../index.html" class="icon icon-home"> Azura
+          
+
+          
+          </a>
+
+          
+            
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <ul>
+<li class="toctree-l1"><a class="reference internal" href="../setting-up.html">Setting Up</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../build-instructions.html">Build Instructions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../cmake-wrappers.html">CMake Wrappers</a></li>
+<li class="toctree-l1"><a class="reference internal" href="apiRoot.html">Azura API</a></li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">Azura</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../index.html">Docs</a> &raquo;</li>
+        
+          <li><a href="apiRoot.html">Azura API</a> &raquo;</li>
+        
+          <li><a href="file_Source_AssetManager_Src_GLTFLoader.cpp.html">File GLTFLoader.cpp</a> &raquo;</li>
+        
+      <li>Program Listing for File GLTFLoader.cpp</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            <a href="../_sources/html/program_listing_file_Source_AssetManager_Src_GLTFLoader.cpp.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="program-listing-for-file-gltfloader-cpp">
+<span id="program-listing-file-source-assetmanager-src-gltfloader-cpp"></span><h1>Program Listing for File GLTFLoader.cpp<a class="headerlink" href="#program-listing-for-file-gltfloader-cpp" title="Permalink to this headline">¶</a></h1>
+<p>↰ <a class="reference internal" href="file_Source_AssetManager_Src_GLTFLoader.cpp.html#file-source-assetmanager-src-gltfloader-cpp"><span class="std std-ref">Return to documentation for file</span></a> (<code class="docutils literal notranslate"><span class="pre">Source\AssetManager\Src\GLTFLoader.cpp</span></code>)</p>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="cp">#include</span> <span class="cpf">&quot;AssetManager/GLTFLoader.h&quot;</span><span class="cp"></span>
+
+<span class="cp">#include</span> <span class="cpf">&lt;cassert&gt;</span><span class="cp"></span>
+<span class="cp">#include</span> <span class="cpf">&lt;sstream&gt;</span><span class="cp"></span>
+<span class="cp">#include</span> <span class="cpf">&lt;boost/filesystem.hpp&gt;</span><span class="cp"></span>
+
+<span class="cp">#include</span> <span class="cpf">&lt;GLTFSDK/IStreamReader.h&gt;</span><span class="cp"></span>
+<span class="cp">#include</span> <span class="cpf">&lt;GLTFSDK/GLTFResourceReader.h&gt;</span><span class="cp"></span>
+<span class="cp">#include</span> <span class="cpf">&lt;GLTFSDK/Deserialize.h&gt;</span><span class="cp"></span>
+
+<span class="cp">#include</span> <span class="cpf">&quot;Log/Log.h&quot;</span><span class="cp"></span>
+<span class="cp">#include</span> <span class="cpf">&quot;Utils/Macros.h&quot;</span><span class="cp"></span>
+<span class="cp">#include</span> <span class="cpf">&quot;Memory/Allocator.h&quot;</span><span class="cp"></span>
+
+
+<span class="k">using</span> <span class="k">namespace</span> <span class="n">Microsoft</span><span class="o">::</span><span class="n">glTF</span><span class="p">;</span>          <span class="c1">// NOLINT</span>
+<span class="k">namespace</span> <span class="n">filesystem</span> <span class="o">=</span> <span class="n">boost</span><span class="o">::</span><span class="n">filesystem</span><span class="p">;</span> <span class="c1">// NOLINT</span>
+
+<span class="k">namespace</span> <span class="n">Azura</span> <span class="p">{</span>
+
+<span class="k">namespace</span> <span class="p">{</span>
+<span class="c1">// The glTF SDK is decoupled from all file I/O by the IStreamReader (and IStreamWriter)</span>
+<span class="c1">// interface(s) and the C++ stream-based I/O library. This allows the glTF SDK to be used in</span>
+<span class="c1">// sandboxed environments, such as WebAssembly modules and UWP apps, where any file I/O code</span>
+<span class="c1">// must be platform or use-case specific.</span>
+<span class="k">class</span> <span class="nc">StreamReader</span> <span class="o">:</span> <span class="k">public</span> <span class="n">IStreamReader</span> <span class="p">{</span>
+<span class="k">public</span><span class="o">:</span>
+  <span class="k">explicit</span> <span class="n">StreamReader</span><span class="p">(</span><span class="n">filesystem</span><span class="o">::</span><span class="n">path</span> <span class="n">pathBase</span><span class="p">)</span>
+    <span class="o">:</span> <span class="n">m_pathBase</span><span class="p">(</span><span class="n">std</span><span class="o">::</span><span class="n">move</span><span class="p">(</span><span class="n">pathBase</span><span class="p">))</span> <span class="p">{</span>
+    <span class="n">assert</span><span class="p">(</span><span class="n">m_pathBase</span><span class="p">.</span><span class="n">has_root_path</span><span class="p">());</span>
+  <span class="p">}</span>
+
+  <span class="c1">// Resolves the relative URIs of any external resources declared in the glTF manifest</span>
+  <span class="n">std</span><span class="o">::</span><span class="n">shared_ptr</span><span class="o">&lt;</span><span class="n">std</span><span class="o">::</span><span class="n">istream</span><span class="o">&gt;</span> <span class="n">GetInputStream</span><span class="p">(</span><span class="k">const</span> <span class="n">std</span><span class="o">::</span><span class="n">string</span><span class="o">&amp;</span> <span class="n">filename</span><span class="p">)</span> <span class="k">const</span> <span class="k">override</span> <span class="p">{</span>
+    <span class="c1">// In order to construct a valid stream:</span>
+    <span class="c1">// 1. The filename argument will be encoded as UTF-8 so use filesystem::u8path to</span>
+    <span class="c1">//    correctly construct a path instance.</span>
+    <span class="c1">// 2. Generate an absolute path by concatenating m_pathBase with the specified filename</span>
+    <span class="c1">//    path. The filesystem::operator/ uses the platform&#39;s preferred directory separator</span>
+    <span class="c1">//    if appropriate.</span>
+    <span class="c1">// 3. Always open the file stream in binary mode. The glTF SDK will handle any text</span>
+    <span class="c1">//    encoding issues for us.</span>
+    <span class="k">auto</span> <span class="n">streamPath</span> <span class="o">=</span> <span class="n">m_pathBase</span> <span class="o">/</span> <span class="n">filename</span><span class="p">;</span>
+    <span class="k">auto</span> <span class="n">stream</span>     <span class="o">=</span> <span class="n">std</span><span class="o">::</span><span class="n">make_shared</span><span class="o">&lt;</span><span class="n">std</span><span class="o">::</span><span class="n">ifstream</span><span class="o">&gt;</span><span class="p">(</span><span class="n">streamPath</span><span class="p">.</span><span class="n">c_str</span><span class="p">(),</span> <span class="n">std</span><span class="o">::</span><span class="n">ios_base</span><span class="o">::</span><span class="n">binary</span><span class="p">);</span>
+
+    <span class="c1">// Check if the stream has no errors and is ready for I/O operations</span>
+    <span class="k">if</span> <span class="p">(</span><span class="o">!</span><span class="n">stream</span> <span class="o">||</span> <span class="o">!</span><span class="p">(</span><span class="o">*</span><span class="n">stream</span><span class="p">))</span> <span class="p">{</span>
+      <span class="k">throw</span> <span class="n">std</span><span class="o">::</span><span class="n">runtime_error</span><span class="p">(</span><span class="s">&quot;Unable to create a valid input stream for uri: &quot;</span> <span class="o">+</span> <span class="n">filename</span><span class="p">);</span>
+    <span class="p">}</span>
+
+    <span class="k">return</span> <span class="n">stream</span><span class="p">;</span>
+  <span class="p">}</span>
+
+<span class="k">private</span><span class="o">:</span>
+  <span class="n">filesystem</span><span class="o">::</span><span class="n">path</span> <span class="n">m_pathBase</span><span class="p">;</span>
+<span class="p">};</span>
+
+<span class="p">}</span> <span class="c1">// namespace</span>
+
+<span class="n">GLTFMeshInterface</span><span class="o">::</span><span class="n">GLTFMeshInterface</span><span class="p">(</span><span class="k">const</span> <span class="n">String</span><span class="o">&amp;</span> <span class="n">manifest</span><span class="p">,</span>
+                                     <span class="n">std</span><span class="o">::</span><span class="n">unique_ptr</span><span class="o">&lt;</span><span class="k">const</span> <span class="n">Microsoft</span><span class="o">::</span><span class="n">glTF</span><span class="o">::</span><span class="n">GLTFResourceReader</span><span class="o">&gt;</span> <span class="n">resourceReader</span><span class="p">)</span>
+  <span class="o">:</span> <span class="n">m_resourceReader</span><span class="p">(</span><span class="n">std</span><span class="o">::</span><span class="n">move</span><span class="p">(</span><span class="n">resourceReader</span><span class="p">)),</span>
+    <span class="n">m_document</span><span class="p">(</span><span class="n">Deserialize</span><span class="p">(</span><span class="n">manifest</span><span class="p">))</span> <span class="p">{</span>
+<span class="p">}</span>
+
+<span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="kt">float</span><span class="o">&gt;</span> <span class="n">GLTFMeshInterface</span><span class="o">::</span><span class="n">GetPositionBuffer</span><span class="p">(</span><span class="n">U32</span> <span class="n">meshId</span><span class="p">,</span>
+                                                        <span class="n">U32</span> <span class="n">meshPrimitive</span><span class="p">,</span>
+                                                        <span class="n">U32</span><span class="o">&amp;</span> <span class="n">bufferSize</span><span class="p">,</span>
+                                                        <span class="n">U32</span><span class="o">&amp;</span> <span class="n">count</span><span class="p">)</span> <span class="k">const</span> <span class="p">{</span>
+
+  <span class="k">const</span> <span class="k">auto</span><span class="o">&amp;</span> <span class="n">primitive</span> <span class="o">=</span> <span class="n">GetMeshPrimitive</span><span class="p">(</span><span class="n">GetMesh</span><span class="p">(</span><span class="n">meshId</span><span class="p">),</span> <span class="n">meshPrimitive</span><span class="p">);</span>
+
+  <span class="k">const</span> <span class="n">Accessor</span><span class="o">&amp;</span> <span class="n">accessor</span> <span class="o">=</span> <span class="n">m_document</span><span class="p">.</span><span class="n">accessors</span><span class="p">.</span><span class="n">Get</span><span class="p">(</span><span class="n">primitive</span><span class="p">.</span><span class="n">GetAttributeAccessorId</span><span class="p">(</span><span class="s">&quot;POSITION&quot;</span><span class="p">));</span>
+
+  <span class="k">const</span> <span class="k">auto</span> <span class="n">data</span> <span class="o">=</span> <span class="n">m_resourceReader</span><span class="o">-&gt;</span><span class="n">ReadBinaryData</span><span class="o">&lt;</span><span class="kt">float</span><span class="o">&gt;</span><span class="p">(</span><span class="n">m_document</span><span class="p">,</span> <span class="n">accessor</span><span class="p">);</span>
+
+  <span class="n">count</span>      <span class="o">=</span> <span class="n">U32</span><span class="p">(</span><span class="n">accessor</span><span class="p">.</span><span class="n">count</span><span class="p">);</span>
+  <span class="n">bufferSize</span> <span class="o">=</span> <span class="n">U32</span><span class="p">(</span><span class="n">data</span><span class="p">.</span><span class="n">size</span><span class="p">()</span> <span class="o">*</span> <span class="k">sizeof</span><span class="p">(</span><span class="kt">float</span><span class="p">));</span>
+
+  <span class="k">return</span> <span class="n">data</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="kt">float</span><span class="o">&gt;</span> <span class="n">GLTFMeshInterface</span><span class="o">::</span>
+<span class="n">GetNormalBuffer</span><span class="p">(</span><span class="n">U32</span> <span class="n">meshId</span><span class="p">,</span> <span class="n">U32</span> <span class="n">meshPrimitive</span><span class="p">,</span> <span class="n">U32</span><span class="o">&amp;</span> <span class="n">bufferSize</span><span class="p">,</span> <span class="n">U32</span><span class="o">&amp;</span> <span class="n">count</span><span class="p">)</span> <span class="k">const</span> <span class="p">{</span>
+  <span class="k">const</span> <span class="k">auto</span><span class="o">&amp;</span> <span class="n">primitive</span> <span class="o">=</span> <span class="n">GetMeshPrimitive</span><span class="p">(</span><span class="n">GetMesh</span><span class="p">(</span><span class="n">meshId</span><span class="p">),</span> <span class="n">meshPrimitive</span><span class="p">);</span>
+
+  <span class="k">const</span> <span class="n">Accessor</span><span class="o">&amp;</span> <span class="n">accessor</span> <span class="o">=</span> <span class="n">m_document</span><span class="p">.</span><span class="n">accessors</span><span class="p">.</span><span class="n">Get</span><span class="p">(</span><span class="n">primitive</span><span class="p">.</span><span class="n">GetAttributeAccessorId</span><span class="p">(</span><span class="s">&quot;NORMAL&quot;</span><span class="p">));</span>
+
+  <span class="k">const</span> <span class="k">auto</span> <span class="n">data</span> <span class="o">=</span> <span class="n">m_resourceReader</span><span class="o">-&gt;</span><span class="n">ReadBinaryData</span><span class="o">&lt;</span><span class="kt">float</span><span class="o">&gt;</span><span class="p">(</span><span class="n">m_document</span><span class="p">,</span> <span class="n">accessor</span><span class="p">);</span>
+
+  <span class="n">count</span>      <span class="o">=</span> <span class="n">U32</span><span class="p">(</span><span class="n">accessor</span><span class="p">.</span><span class="n">count</span><span class="p">);</span>
+  <span class="n">bufferSize</span> <span class="o">=</span> <span class="n">U32</span><span class="p">(</span><span class="n">data</span><span class="p">.</span><span class="n">size</span><span class="p">()</span> <span class="o">*</span> <span class="k">sizeof</span><span class="p">(</span><span class="kt">float</span><span class="p">));</span>
+
+  <span class="k">return</span> <span class="n">data</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="kt">float</span><span class="o">&gt;</span> <span class="n">GLTFMeshInterface</span><span class="o">::</span><span class="n">GetUVBuffer</span><span class="p">(</span><span class="n">U32</span> <span class="n">meshId</span><span class="p">,</span> <span class="n">U32</span> <span class="n">meshPrimitive</span><span class="p">,</span> <span class="n">U32</span><span class="o">&amp;</span> <span class="n">bufferSize</span><span class="p">,</span> <span class="n">U32</span><span class="o">&amp;</span> <span class="n">count</span><span class="p">)</span> <span class="k">const</span> <span class="p">{</span>
+  <span class="k">const</span> <span class="k">auto</span><span class="o">&amp;</span> <span class="n">primitive</span> <span class="o">=</span> <span class="n">GetMeshPrimitive</span><span class="p">(</span><span class="n">GetMesh</span><span class="p">(</span><span class="n">meshId</span><span class="p">),</span> <span class="n">meshPrimitive</span><span class="p">);</span>
+
+  <span class="k">const</span> <span class="n">Accessor</span><span class="o">&amp;</span> <span class="n">accessor</span> <span class="o">=</span> <span class="n">m_document</span><span class="p">.</span><span class="n">accessors</span><span class="p">.</span><span class="n">Get</span><span class="p">(</span><span class="n">primitive</span><span class="p">.</span><span class="n">GetAttributeAccessorId</span><span class="p">(</span><span class="s">&quot;TEXCOORD_0&quot;</span><span class="p">));</span>
+
+  <span class="k">const</span> <span class="k">auto</span> <span class="n">data</span> <span class="o">=</span> <span class="n">m_resourceReader</span><span class="o">-&gt;</span><span class="n">ReadBinaryData</span><span class="o">&lt;</span><span class="kt">float</span><span class="o">&gt;</span><span class="p">(</span><span class="n">m_document</span><span class="p">,</span> <span class="n">accessor</span><span class="p">);</span>
+
+  <span class="n">count</span>      <span class="o">=</span> <span class="n">U32</span><span class="p">(</span><span class="n">accessor</span><span class="p">.</span><span class="n">count</span><span class="p">);</span>
+  <span class="n">bufferSize</span> <span class="o">=</span> <span class="n">U32</span><span class="p">(</span><span class="n">data</span><span class="p">.</span><span class="n">size</span><span class="p">()</span> <span class="o">*</span> <span class="k">sizeof</span><span class="p">(</span><span class="kt">float</span><span class="p">));</span>
+
+  <span class="k">return</span> <span class="n">data</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="n">U32</span><span class="o">&gt;</span> <span class="n">GLTFMeshInterface</span><span class="o">::</span><span class="n">GetIndexBuffer</span><span class="p">(</span><span class="n">U32</span> <span class="n">meshId</span><span class="p">,</span> <span class="n">U32</span> <span class="n">meshPrimitive</span><span class="p">,</span> <span class="n">U32</span><span class="o">&amp;</span> <span class="n">bufferSize</span><span class="p">,</span> <span class="n">U32</span><span class="o">&amp;</span> <span class="n">count</span><span class="p">)</span> <span class="k">const</span> <span class="p">{</span>
+
+  <span class="k">const</span> <span class="k">auto</span><span class="o">&amp;</span> <span class="n">primitive</span> <span class="o">=</span> <span class="n">GetMeshPrimitive</span><span class="p">(</span><span class="n">GetMesh</span><span class="p">(</span><span class="n">meshId</span><span class="p">),</span> <span class="n">meshPrimitive</span><span class="p">);</span>
+
+  <span class="k">const</span> <span class="n">Accessor</span><span class="o">&amp;</span> <span class="n">accessor</span> <span class="o">=</span> <span class="n">m_document</span><span class="p">.</span><span class="n">accessors</span><span class="p">.</span><span class="n">Get</span><span class="p">(</span><span class="n">primitive</span><span class="p">.</span><span class="n">indicesAccessorId</span><span class="p">);</span>
+
+
+  <span class="k">const</span> <span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="n">U32</span><span class="o">&gt;</span> <span class="n">data</span> <span class="o">=</span> <span class="p">[</span><span class="o">&amp;</span><span class="p">]()</span>
+  <span class="p">{</span>
+    <span class="k">if</span> <span class="p">(</span><span class="n">accessor</span><span class="p">.</span><span class="n">componentType</span> <span class="o">==</span> <span class="n">COMPONENT_UNSIGNED_SHORT</span><span class="p">)</span> <span class="p">{</span>
+      <span class="k">const</span> <span class="k">auto</span> <span class="n">u16Data</span> <span class="o">=</span> <span class="n">m_resourceReader</span><span class="o">-&gt;</span><span class="n">ReadBinaryData</span><span class="o">&lt;</span><span class="n">U16</span><span class="o">&gt;</span><span class="p">(</span><span class="n">m_document</span><span class="p">,</span> <span class="n">accessor</span><span class="p">);</span>
+
+      <span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="n">U32</span><span class="o">&gt;</span> <span class="n">u32Data</span><span class="p">;</span>
+      <span class="n">u32Data</span><span class="p">.</span><span class="n">reserve</span><span class="p">(</span><span class="n">u16Data</span><span class="p">.</span><span class="n">size</span><span class="p">());</span>
+
+      <span class="k">for</span> <span class="p">(</span><span class="k">const</span> <span class="k">auto</span> <span class="nl">value</span> <span class="p">:</span> <span class="n">u16Data</span><span class="p">)</span>
+      <span class="p">{</span>
+        <span class="n">u32Data</span><span class="p">.</span><span class="n">push_back</span><span class="p">(</span><span class="n">U32</span><span class="p">(</span><span class="n">value</span><span class="p">));</span>
+      <span class="p">}</span>
+
+      <span class="k">return</span> <span class="n">u32Data</span><span class="p">;</span>
+    <span class="p">}</span>
+
+    <span class="k">return</span> <span class="n">m_resourceReader</span><span class="o">-&gt;</span><span class="n">ReadBinaryData</span><span class="o">&lt;</span><span class="n">U32</span><span class="o">&gt;</span><span class="p">(</span><span class="n">m_document</span><span class="p">,</span> <span class="n">accessor</span><span class="p">);</span>
+  <span class="p">}();</span>
+
+  <span class="n">count</span> <span class="o">=</span> <span class="n">U32</span><span class="p">(</span><span class="n">accessor</span><span class="p">.</span><span class="n">count</span><span class="p">);</span>
+  <span class="n">bufferSize</span> <span class="o">=</span> <span class="n">U32</span><span class="p">(</span><span class="n">data</span><span class="p">.</span><span class="n">size</span><span class="p">()</span> <span class="o">*</span> <span class="k">sizeof</span><span class="p">(</span><span class="n">U32</span><span class="p">));</span>
+
+  <span class="k">return</span> <span class="n">data</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="k">const</span> <span class="n">Microsoft</span><span class="o">::</span><span class="n">glTF</span><span class="o">::</span><span class="n">Mesh</span><span class="o">&amp;</span> <span class="n">GLTFMeshInterface</span><span class="o">::</span><span class="n">GetMesh</span><span class="p">(</span><span class="n">U32</span> <span class="n">idx</span><span class="p">)</span> <span class="k">const</span> <span class="p">{</span>
+  <span class="k">return</span> <span class="n">m_document</span><span class="p">.</span><span class="n">meshes</span><span class="p">[</span><span class="n">idx</span><span class="p">];</span>
+<span class="p">}</span>
+
+<span class="k">const</span> <span class="n">Microsoft</span><span class="o">::</span><span class="n">glTF</span><span class="o">::</span><span class="n">MeshPrimitive</span><span class="o">&amp;</span> <span class="n">GLTFMeshInterface</span><span class="o">::</span><span class="n">GetMeshPrimitive</span><span class="p">(</span><span class="k">const</span> <span class="n">Microsoft</span><span class="o">::</span><span class="n">glTF</span><span class="o">::</span><span class="n">Mesh</span><span class="o">&amp;</span> <span class="n">mesh</span><span class="p">,</span> <span class="n">U32</span> <span class="n">idx</span><span class="p">)</span> <span class="p">{</span>
+  <span class="k">return</span> <span class="n">mesh</span><span class="p">.</span><span class="n">primitives</span><span class="p">[</span><span class="n">idx</span><span class="p">];</span>
+<span class="p">}</span>
+
+<span class="n">GLTFMeshInterface</span> <span class="n">GLTFLoader</span><span class="o">::</span><span class="n">LoadFromJSON</span><span class="p">(</span><span class="k">const</span> <span class="n">String</span><span class="o">&amp;</span> <span class="n">assetName</span><span class="p">,</span> <span class="n">AssetLocation</span> <span class="n">location</span><span class="p">,</span> <span class="k">const</span> <span class="n">Log</span><span class="o">&amp;</span> <span class="n">log</span><span class="p">)</span> <span class="p">{</span>
+  <span class="n">UNUSED</span><span class="p">(</span><span class="n">location</span><span class="p">);</span>
+  <span class="n">UNUSED</span><span class="p">(</span><span class="n">log</span><span class="p">);</span> <span class="c1">// Release Mode</span>
+
+  <span class="n">filesystem</span><span class="o">::</span><span class="n">path</span> <span class="n">filePath</span> <span class="o">=</span> <span class="n">filesystem</span><span class="o">::</span><span class="n">current_path</span><span class="p">()</span> <span class="o">/</span> <span class="n">filesystem</span><span class="o">::</span>
+                              <span class="n">path</span><span class="p">(</span><span class="s">&quot;Meshes/&quot;</span> <span class="o">+</span> <span class="n">assetName</span> <span class="o">+</span> <span class="s">&quot;/&quot;</span> <span class="o">+</span> <span class="n">assetName</span> <span class="o">+</span> <span class="s">&quot;.gltf&quot;</span><span class="p">);</span>
+
+  <span class="n">LOG_DBG</span><span class="p">(</span><span class="n">log</span><span class="p">,</span> <span class="n">LOG_LEVEL</span><span class="p">,</span> <span class="s">&quot;Loading Mesh: %s&quot;</span><span class="p">,</span> <span class="n">filePath</span><span class="p">.</span><span class="n">c_str</span><span class="p">());</span>
+
+  <span class="k">auto</span> <span class="n">streamReader</span> <span class="o">=</span> <span class="n">std</span><span class="o">::</span><span class="n">make_unique</span><span class="o">&lt;</span><span class="n">StreamReader</span><span class="o">&gt;</span><span class="p">(</span><span class="n">filePath</span><span class="p">.</span><span class="n">parent_path</span><span class="p">());</span>
+
+  <span class="k">const</span> <span class="k">auto</span> <span class="n">gltfStream</span> <span class="o">=</span> <span class="n">streamReader</span><span class="o">-&gt;</span><span class="n">GetInputStream</span><span class="p">(</span><span class="n">assetName</span> <span class="o">+</span> <span class="s">&quot;.gltf&quot;</span><span class="p">);</span>
+  <span class="k">auto</span> <span class="n">resourceReader</span>   <span class="o">=</span> <span class="n">std</span><span class="o">::</span><span class="n">make_unique</span><span class="o">&lt;</span><span class="n">GLTFResourceReader</span><span class="o">&gt;</span><span class="p">(</span><span class="n">std</span><span class="o">::</span><span class="n">move</span><span class="p">(</span><span class="n">streamReader</span><span class="p">));</span>
+
+  <span class="n">std</span><span class="o">::</span><span class="n">stringstream</span> <span class="n">manifestStream</span><span class="p">;</span>
+
+  <span class="c1">// Read the contents of the glTF file into a string using a std::stringstream</span>
+  <span class="n">manifestStream</span> <span class="o">&lt;&lt;</span> <span class="n">gltfStream</span><span class="o">-&gt;</span><span class="n">rdbuf</span><span class="p">();</span>
+  <span class="k">const</span> <span class="n">std</span><span class="o">::</span><span class="n">string</span> <span class="n">manifest</span> <span class="o">=</span> <span class="n">manifestStream</span><span class="p">.</span><span class="n">str</span><span class="p">();</span>
+
+  <span class="k">return</span> <span class="nf">GLTFMeshInterface</span><span class="p">(</span><span class="n">manifest</span><span class="p">,</span> <span class="n">std</span><span class="o">::</span><span class="n">move</span><span class="p">(</span><span class="n">resourceReader</span><span class="p">));</span>
+<span class="p">}</span>
+
+<span class="p">}</span> <span class="c1">// namespace Azura</span>
+</pre></div>
+</div>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="file_Source_AssetManager_Inc_AssetManager_GLTFLoader.h.html" class="btn btn-neutral float-right" title="File GLTFLoader.h" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="file_Source_AssetManager_Src_GLTFLoader.cpp.html" class="btn btn-neutral" title="File GLTFLoader.cpp" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2018, Vasu Mahesh
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  
+
+    
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+        <script type="text/javascript" src="../_static/jquery.js"></script>
+        <script type="text/javascript" src="../_static/underscore.js"></script>
+        <script type="text/javascript" src="../_static/doctools.js"></script>
+        <script type="text/javascript" src="../_static/collapsible-lists\js\CollapsibleLists.compressed.js"></script>
+        <script type="text/javascript" src="../_static/collapsible-lists\js\apply-collapsible-lists.js"></script>
+    
+
+  
+
+  <script type="text/javascript" src="../_static/js/theme.js"></script>
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

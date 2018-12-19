@@ -1,0 +1,62 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.8.14">
+  <compounddef id="class_dibella_1_1_allocation_dependent" kind="class" language="C++" prot="public">
+    <compoundname>Dibella::AllocationDependent</compoundname>
+    <derivedcompoundref refid="class_dibella_1_1_bx_d_f" prot="protected" virt="non-virtual">Dibella::BxDF</derivedcompoundref>
+      <sectiondef kind="protected-attrib">
+      <memberdef kind="variable" id="class_dibella_1_1_allocation_dependent_1a0467a4807d823a4dd8151a5e9bb7a687" prot="protected" static="no" mutable="no">
+        <type>Allocator *</type>
+        <definition>Allocator* Dibella::AllocationDependent::mAllocator</definition>
+        <argsstring></argsstring>
+        <name>mAllocator</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Source/Dibella/Inc/Core/AllocationDependent.h" line="9" column="1" bodyfile="Source/Dibella/Inc/Core/AllocationDependent.h" bodystart="9" bodyend="-1"/>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="protected-func">
+      <memberdef kind="function" id="class_dibella_1_1_allocation_dependent_1a16e0700775da11add17fdeb6c4ec116d" prot="protected" static="no" const="no" explicit="yes" inline="yes" virt="non-virtual">
+        <type></type>
+        <definition>Dibella::AllocationDependent::AllocationDependent</definition>
+        <argsstring>(Allocator *alloc)</argsstring>
+        <name>AllocationDependent</name>
+        <param>
+          <type>Allocator *</type>
+          <declname>alloc</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Source/Dibella/Inc/Core/AllocationDependent.h" line="8" column="1" bodyfile="Source/Dibella/Inc/Core/AllocationDependent.h" bodystart="12" bodyend="12"/>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <inheritancegraph>
+      <node id="0">
+        <label>Dibella::AllocationDependent</label>
+        <link refid="class_dibella_1_1_allocation_dependent"/>
+      </node>
+      <node id="1">
+        <label>Dibella::BxDF</label>
+        <link refid="class_dibella_1_1_bx_d_f"/>
+        <childnode refid="0" relation="protected-inheritance">
+        </childnode>
+      </node>
+    </inheritancegraph>
+    <location file="Source/Dibella/Inc/Core/AllocationDependent.h" line="6" column="1" bodyfile="Source/Dibella/Inc/Core/AllocationDependent.h" bodystart="6" bodyend="10"/>
+    <listofallmembers>
+      <member refid="class_dibella_1_1_allocation_dependent_1a16e0700775da11add17fdeb6c4ec116d" prot="protected" virt="non-virtual"><scope>Dibella::AllocationDependent</scope><name>AllocationDependent</name></member>
+      <member refid="class_dibella_1_1_allocation_dependent_1a0467a4807d823a4dd8151a5e9bb7a687" prot="protected" virt="non-virtual"><scope>Dibella::AllocationDependent</scope><name>mAllocator</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

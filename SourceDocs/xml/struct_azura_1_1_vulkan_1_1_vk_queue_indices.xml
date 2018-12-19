@@ -1,0 +1,118 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.8.14">
+  <compounddef id="struct_azura_1_1_vulkan_1_1_vk_queue_indices" kind="struct" language="C++" prot="public">
+    <compoundname>Azura::Vulkan::VkQueueIndices</compoundname>
+      <sectiondef kind="public-attrib">
+      <memberdef kind="variable" id="struct_azura_1_1_vulkan_1_1_vk_queue_indices_1a96adc95c439d6cc02ec5909423243672" prot="public" static="no" mutable="no">
+        <type>int</type>
+        <definition>int Azura::Vulkan::VkQueueIndices::m_graphicsFamily</definition>
+        <argsstring></argsstring>
+        <name>m_graphicsFamily</name>
+        <initializer>{-1}</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Source/Azura/RenderSystem/Inc/Vulkan/VkTypes.h" line="12" column="1" bodyfile="Source/Azura/RenderSystem/Inc/Vulkan/VkTypes.h" bodystart="12" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="struct_azura_1_1_vulkan_1_1_vk_queue_indices_1a982a5dee7ad844e653a02f9237862b57" prot="public" static="no" mutable="no">
+        <type>int</type>
+        <definition>int Azura::Vulkan::VkQueueIndices::m_presentFamily</definition>
+        <argsstring></argsstring>
+        <name>m_presentFamily</name>
+        <initializer>{-1}</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Source/Azura/RenderSystem/Inc/Vulkan/VkTypes.h" line="13" column="1" bodyfile="Source/Azura/RenderSystem/Inc/Vulkan/VkTypes.h" bodystart="13" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="struct_azura_1_1_vulkan_1_1_vk_queue_indices_1aea922b805be7021b4e1b9973ccd0b97e" prot="public" static="no" mutable="no">
+        <type>int</type>
+        <definition>int Azura::Vulkan::VkQueueIndices::m_transferFamily</definition>
+        <argsstring></argsstring>
+        <name>m_transferFamily</name>
+        <initializer>{-1}</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Source/Azura/RenderSystem/Inc/Vulkan/VkTypes.h" line="18" column="1" bodyfile="Source/Azura/RenderSystem/Inc/Vulkan/VkTypes.h" bodystart="18" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="struct_azura_1_1_vulkan_1_1_vk_queue_indices_1abc099ca4b60a7fe50590418ff5e73195" prot="public" static="no" mutable="no">
+        <type>bool</type>
+        <definition>bool Azura::Vulkan::VkQueueIndices::m_isTransferQueueRequired</definition>
+        <argsstring></argsstring>
+        <name>m_isTransferQueueRequired</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Source/Azura/RenderSystem/Inc/Vulkan/VkTypes.h" line="20" column="1" bodyfile="Source/Azura/RenderSystem/Inc/Vulkan/VkTypes.h" bodystart="20" bodyend="-1"/>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="public-func">
+      <memberdef kind="function" id="struct_azura_1_1_vulkan_1_1_vk_queue_indices_1a74b37f5b6b2b519abae6d9d1d4342e37" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool Azura::Vulkan::VkQueueIndices::IsComplete</definition>
+        <argsstring>() const</argsstring>
+        <name>IsComplete</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Source/Azura/RenderSystem/Inc/Vulkan/VkTypes.h" line="22" column="1" bodyfile="Source/Azura/RenderSystem/Src/Vulkan/VkTypes.cpp" bodystart="6" bodyend="14"/>
+      </memberdef>
+      <memberdef kind="function" id="struct_azura_1_1_vulkan_1_1_vk_queue_indices_1a3a7f6309986bfd0987442498bfdb02ef" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
+        <type>std::array&lt; U32, 2 &gt;</type>
+        <definition>std::array&lt; U32, 2 &gt; Azura::Vulkan::VkQueueIndices::GetIndicesArray</definition>
+        <argsstring>() const</argsstring>
+        <name>GetIndicesArray</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Source/Azura/RenderSystem/Inc/Vulkan/VkTypes.h" line="24" column="1" bodyfile="Source/Azura/RenderSystem/Src/Vulkan/VkTypes.cpp" bodystart="16" bodyend="18"/>
+      </memberdef>
+      <memberdef kind="function" id="struct_azura_1_1_vulkan_1_1_vk_queue_indices_1af3b0067660ef43bbce72e80f8ee3e2f4" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
+        <type>U32</type>
+        <definition>U32 Azura::Vulkan::VkQueueIndices::GetActiveSize</definition>
+        <argsstring>() const</argsstring>
+        <name>GetActiveSize</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Source/Azura/RenderSystem/Inc/Vulkan/VkTypes.h" line="25" column="1" bodyfile="Source/Azura/RenderSystem/Src/Vulkan/VkTypes.cpp" bodystart="20" bodyend="22"/>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <location file="Source/Azura/RenderSystem/Inc/Vulkan/VkTypes.h" line="11" column="1" bodyfile="Source/Azura/RenderSystem/Inc/Vulkan/VkTypes.h" bodystart="11" bodyend="26"/>
+    <listofallmembers>
+      <member refid="struct_azura_1_1_vulkan_1_1_vk_queue_indices_1af3b0067660ef43bbce72e80f8ee3e2f4" prot="public" virt="non-virtual"><scope>Azura::Vulkan::VkQueueIndices</scope><name>GetActiveSize</name></member>
+      <member refid="struct_azura_1_1_vulkan_1_1_vk_queue_indices_1a3a7f6309986bfd0987442498bfdb02ef" prot="public" virt="non-virtual"><scope>Azura::Vulkan::VkQueueIndices</scope><name>GetIndicesArray</name></member>
+      <member refid="struct_azura_1_1_vulkan_1_1_vk_queue_indices_1a74b37f5b6b2b519abae6d9d1d4342e37" prot="public" virt="non-virtual"><scope>Azura::Vulkan::VkQueueIndices</scope><name>IsComplete</name></member>
+      <member refid="struct_azura_1_1_vulkan_1_1_vk_queue_indices_1a96adc95c439d6cc02ec5909423243672" prot="public" virt="non-virtual"><scope>Azura::Vulkan::VkQueueIndices</scope><name>m_graphicsFamily</name></member>
+      <member refid="struct_azura_1_1_vulkan_1_1_vk_queue_indices_1abc099ca4b60a7fe50590418ff5e73195" prot="public" virt="non-virtual"><scope>Azura::Vulkan::VkQueueIndices</scope><name>m_isTransferQueueRequired</name></member>
+      <member refid="struct_azura_1_1_vulkan_1_1_vk_queue_indices_1a982a5dee7ad844e653a02f9237862b57" prot="public" virt="non-virtual"><scope>Azura::Vulkan::VkQueueIndices</scope><name>m_presentFamily</name></member>
+      <member refid="struct_azura_1_1_vulkan_1_1_vk_queue_indices_1aea922b805be7021b4e1b9973ccd0b97e" prot="public" virt="non-virtual"><scope>Azura::Vulkan::VkQueueIndices</scope><name>m_transferFamily</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

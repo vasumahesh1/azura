@@ -1,0 +1,108 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.8.14">
+  <compounddef id="struct_azura_1_1_containers_1_1_container_extent" kind="struct" language="C++" prot="public">
+    <compoundname>Azura::Containers::ContainerExtent</compoundname>
+      <sectiondef kind="public-attrib">
+      <memberdef kind="variable" id="struct_azura_1_1_containers_1_1_container_extent_1a8a62f876cfc608084f8809ccb7422d59" prot="public" static="no" mutable="no">
+        <type>U32</type>
+        <definition>U32 Azura::Containers::ContainerExtent::m_size</definition>
+        <argsstring></argsstring>
+        <name>m_size</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Source/Containers/Inc/Containers/Vector.h" line="36" column="1" bodyfile="Source/Containers/Inc/Containers/Vector.h" bodystart="36" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="struct_azura_1_1_containers_1_1_container_extent_1ad91b3c128a7971f9705df80fc2f44274" prot="public" static="no" mutable="no">
+        <type>U32</type>
+        <definition>U32 Azura::Containers::ContainerExtent::m_reserveSize</definition>
+        <argsstring></argsstring>
+        <name>m_reserveSize</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Source/Containers/Inc/Containers/Vector.h" line="37" column="1" bodyfile="Source/Containers/Inc/Containers/Vector.h" bodystart="37" bodyend="-1"/>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="public-func">
+      <memberdef kind="function" id="group___containers_1gabdea46cc128f48a9fc317fd5ca797ee8" prot="public" static="no" const="no" explicit="yes" inline="yes" virt="non-virtual">
+        <type></type>
+        <definition>Azura::Containers::ContainerExtent::ContainerExtent</definition>
+        <argsstring>(const U32 size)</argsstring>
+        <name>ContainerExtent</name>
+        <param>
+          <type>const U32</type>
+          <declname>size</declname>
+        </param>
+        <briefdescription>
+<para>Constructs a <ref refid="struct_azura_1_1_containers_1_1_container_extent" kindref="compound">ContainerExtent</ref> with the same size and reserved size. </para>        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername direction="in">size</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The container size </para></parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Source/Containers/Inc/Containers/Vector.h" line="46" column="1" bodyfile="Source/Containers/Inc/Containers/Vector.h" bodystart="46" bodyend="49"/>
+      </memberdef>
+      <memberdef kind="function" id="group___containers_1ga086b568dd8be510400cd02bf146c6141" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type></type>
+        <definition>Azura::Containers::ContainerExtent::ContainerExtent</definition>
+        <argsstring>(const U32 size, const U32 reserveSize)</argsstring>
+        <name>ContainerExtent</name>
+        <param>
+          <type>const U32</type>
+          <declname>size</declname>
+        </param>
+        <param>
+          <type>const U32</type>
+          <declname>reserveSize</declname>
+        </param>
+        <briefdescription>
+<para>Constructs a <ref refid="struct_azura_1_1_containers_1_1_container_extent" kindref="compound">ContainerExtent</ref> with the specified size and reservataion size. </para>        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername direction="in">size</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The size </para></parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">reserveSize</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The reserve size </para></parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Source/Containers/Inc/Containers/Vector.h" line="59" column="1" bodyfile="Source/Containers/Inc/Containers/Vector.h" bodystart="59" bodyend="62"/>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <location file="Source/Containers/Inc/Containers/Vector.h" line="35" column="1" bodyfile="Source/Containers/Inc/Containers/Vector.h" bodystart="35" bodyend="63"/>
+    <listofallmembers>
+      <member refid="group___containers_1gabdea46cc128f48a9fc317fd5ca797ee8" prot="public" virt="non-virtual"><scope>Azura::Containers::ContainerExtent</scope><name>ContainerExtent</name></member>
+      <member refid="group___containers_1ga086b568dd8be510400cd02bf146c6141" prot="public" virt="non-virtual"><scope>Azura::Containers::ContainerExtent</scope><name>ContainerExtent</name></member>
+      <member refid="struct_azura_1_1_containers_1_1_container_extent_1ad91b3c128a7971f9705df80fc2f44274" prot="public" virt="non-virtual"><scope>Azura::Containers::ContainerExtent</scope><name>m_reserveSize</name></member>
+      <member refid="struct_azura_1_1_containers_1_1_container_extent_1a8a62f876cfc608084f8809ccb7422d59" prot="public" virt="non-virtual"><scope>Azura::Containers::ContainerExtent</scope><name>m_size</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

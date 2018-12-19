@@ -1,0 +1,317 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>CMake Wrappers &mdash; Azura  documentation</title>
+  
+
+  
+  
+  
+  
+
+  
+
+  
+  
+    
+
+  
+
+  <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="_static/collapsible-lists\css\tree_view.css" type="text/css" />
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="Azura API" href="html/apiRoot.html" />
+    <link rel="prev" title="Build Instructions" href="build-instructions.html" /> 
+
+  
+  <script src="_static/js/modernizr.min.js"></script>
+
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search">
+          
+
+          
+            <a href="index.html" class="icon icon-home"> Azura
+          
+
+          
+          </a>
+
+          
+            
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="setting-up.html">Setting Up</a></li>
+<li class="toctree-l1"><a class="reference internal" href="build-instructions.html">Build Instructions</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">CMake Wrappers</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#custom-cmake-wrappers">Custom CMake Wrappers</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#application-build">Application Build</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#cross-platform-shader-compilation">Cross Platform Shader Compilation</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#copying-files-that-don-t-compile">Copying files that don’t compile</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#adding-log-support">Adding log support</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#application-deployment">Application Deployment</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="html/apiRoot.html">Azura API</a></li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">Azura</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="index.html">Docs</a> &raquo;</li>
+        
+      <li>CMake Wrappers</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            <a href="_sources/cmake-wrappers.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="cmake-wrappers">
+<h1>CMake Wrappers<a class="headerlink" href="#cmake-wrappers" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="custom-cmake-wrappers">
+<h2>Custom CMake Wrappers<a class="headerlink" href="#custom-cmake-wrappers" title="Permalink to this headline">¶</a></h2>
+<p>If you are modifying the CMake system for Azura or building an application inside Azura, then take a look at these awesome functions to make your life easier.</p>
+<p>We use modern CMake, look that up. In short, we define CMake targets and use them. Every project, even 3rd party ones are CMake targets.</p>
+<p>Azura has a deploy phase and a build phase. During deploy phase we “install” the application to a deploy specific folder (Example: <code class="docutils literal notranslate"><span class="pre">Deploy/WIN64_RELEASE/&lt;CMake</span> <span class="pre">Target&gt;/</span></code>). When an application is deployed, it basically means that we can zip it and ship it to anyone. The application <strong>must</strong> run as standalone once deployed. This includes having the necessary config, shaders, textures and shared libraries (DLLs).</p>
+<p>Azura has CMake functions for both Deploy and Build phase.</p>
+</div>
+<div class="section" id="application-build">
+<h2>Application Build<a class="headerlink" href="#application-build" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="cross-platform-shader-compilation">
+<h3>Cross Platform Shader Compilation<a class="headerlink" href="#cross-platform-shader-compilation" title="Permalink to this headline">¶</a></h3>
+<p>We use a slang shader for compilation. Unfortunately, they don’t have a CMake wrapper. Azura provides one with a simple interface.</p>
+<p><strong>API:</strong></p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>AzuraAddSlangShaders<span class="o">(</span>&lt;CMake Target&gt; &lt;HLSL<span class="p">|</span>GLSL<span class="p">|</span>DXBC<span class="p">|</span>VULKAN&gt; &lt;SHADERS&gt;<span class="o">)</span>
+</pre></div>
+</div>
+<p><strong>Example:</strong></p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="c1"># Format for shaders: &quot;&lt;Path&gt;|&lt;Shader Type: PS VS CS&gt;&quot;</span>
+<span class="c1"># Path must NOT have subfolders. Currently the code just takes the filename directly during export</span>
+set<span class="o">(</span>
+  PROJECT_SHADERS
+    <span class="s2">&quot;</span><span class="si">${</span><span class="nv">PROJECT_SOURCE_DIR</span><span class="si">}</span><span class="s2">/Shaders/ShadingPass_Plane.ps.slang|PS&quot;</span>
+    <span class="s2">&quot;</span><span class="si">${</span><span class="nv">PROJECT_SOURCE_DIR</span><span class="si">}</span><span class="s2">/Shaders/ShadingPass_Plane.vs.slang|VS&quot;</span>
+<span class="o">)</span>
+
+AzuraAddSlangShaders<span class="o">(</span>ClothSim HLSL <span class="si">${</span><span class="nv">PROJECT_SHADERS</span><span class="si">}</span><span class="o">)</span>
+AzuraAddSlangShaders<span class="o">(</span>ClothSim DXBC <span class="si">${</span><span class="nv">PROJECT_SHADERS</span><span class="si">}</span><span class="o">)</span>
+</pre></div>
+</div>
+<p>^</p>
+</div>
+<div class="section" id="copying-files-that-don-t-compile">
+<h3>Copying files that don’t compile<a class="headerlink" href="#copying-files-that-don-t-compile" title="Permalink to this headline">¶</a></h3>
+<p>Use this to copy over meshes &amp; textures or any file that is not built using C++ compilers.</p>
+<p><strong>API:</strong></p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>AzuraAddFilesAsDependency<span class="o">(</span>&lt;CMake Target&gt; &lt;Group Name <span class="o">(</span>no space<span class="o">)</span>&gt; &lt;List of Files&gt;<span class="o">)</span>
+</pre></div>
+</div>
+<p><strong>Example:</strong></p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>AzuraAddFilesAsDependency<span class="o">(</span>
+    ClothSim Meshes
+    <span class="s2">&quot;Meshes/CustomCloth/buffer.bin&quot;</span>
+    <span class="s2">&quot;Meshes/CustomCloth/CustomCloth.gltf&quot;</span>
+    <span class="s2">&quot;Meshes/CustomCloth/ClothDiffuse.jpg&quot;</span>
+
+    <span class="s2">&quot;Meshes/Plane/Plane.bin&quot;</span>
+    <span class="s2">&quot;Meshes/Plane/Plane.gltf&quot;</span>
+    <span class="s2">&quot;Meshes/Plane/Color plane map.png&quot;</span>
+
+    <span class="s2">&quot;Meshes/CustomCloth2/CustomCloth2.gltf&quot;</span>
+    <span class="s2">&quot;Meshes/CustomCloth2/ClothCustom2_col.jpg&quot;</span>
+    <span class="s2">&quot;Meshes/CustomCloth2/ClothCustom2_nrm.jpg&quot;</span>
+    <span class="s2">&quot;Meshes/CustomCloth2/ClothCustom2_rgh.jpg&quot;</span>
+    <span class="s2">&quot;Meshes/CustomCloth2/ClothCustom2_AO.jpg&quot;</span>
+<span class="o">)</span>
+</pre></div>
+</div>
+<p>^</p>
+</div>
+<div class="section" id="adding-log-support">
+<h3>Adding log support<a class="headerlink" href="#adding-log-support" title="Permalink to this headline">¶</a></h3>
+<p>Azura has a custom logger. There are 0 cout and 0 printf statements. The log can be piped into the console if needed. To add logging support, call this function with the appropriate level of logging. 50 is the general default.</p>
+<p><strong>API:</strong></p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>AzuraAddLoggingSupport<span class="o">(</span>&lt;CMake Target&gt; &lt;Log Level&gt;<span class="o">)</span>
+</pre></div>
+</div>
+<p>Importance of log level: Log Level allows certain modules to log at a higher priority (0-100). Currently, all projects are set to a default 50. This allows us to quiet logs that are lower priority.</p>
+<p><strong>Example:</strong></p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>AzuraAddLoggingSupport<span class="o">(</span>ClothSim <span class="m">50</span><span class="o">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="section" id="application-deployment">
+<h2>Application Deployment<a class="headerlink" href="#application-deployment" title="Permalink to this headline">¶</a></h2>
+<p>Azura is an “out of source” build. We deploy after building the project.</p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>Flow of code:
+Source/ &gt; Build/ &gt; Deploy/
+</pre></div>
+</div>
+<p>Deployment happens on top of the build folder.</p>
+<p>Here is a quick example on how to deploy an executable:</p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>AzuraDeployTarget(ClothSim)
+
+# Copy build folder things to desired deploy directory.
+# Notice how we copy the Shaders which are compiled by the build process.
+AzuraDeployTargetFolder(ClothSim ${PROJECT_BINARY_DIR}/Shaders Shaders/)
+AzuraDeployTargetFolder(ClothSim ${PROJECT_BINARY_DIR}/Textures Textures/)
+AzuraDeployTargetFolder(ClothSim ${PROJECT_BINARY_DIR}/Meshes Meshes/)
+</pre></div>
+</div>
+</div>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="html/apiRoot.html" class="btn btn-neutral float-right" title="Azura API" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="build-instructions.html" class="btn btn-neutral" title="Build Instructions" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2018, Vasu Mahesh
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  
+
+    
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
+        <script type="text/javascript" src="_static/jquery.js"></script>
+        <script type="text/javascript" src="_static/underscore.js"></script>
+        <script type="text/javascript" src="_static/doctools.js"></script>
+        <script type="text/javascript" src="_static/collapsible-lists\js\CollapsibleLists.compressed.js"></script>
+        <script type="text/javascript" src="_static/collapsible-lists\js\apply-collapsible-lists.js"></script>
+    
+
+  
+
+  <script type="text/javascript" src="_static/js/theme.js"></script>
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

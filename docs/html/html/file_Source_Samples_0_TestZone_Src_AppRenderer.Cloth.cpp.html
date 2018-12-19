@@ -1,0 +1,266 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>File AppRenderer.Cloth.cpp &mdash; Azura  documentation</title>
+  
+
+  
+  
+  
+  
+
+  
+
+  
+  
+    
+
+  
+
+  <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/collapsible-lists\css\tree_view.css" type="text/css" />
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Program Listing for File AppRenderer.Cloth.cpp" href="program_listing_file_Source_Samples_0_TestZone_Src_AppRenderer.Cloth.cpp.html" />
+    <link rel="prev" title="Program Listing for File AppRenderer.Basic.cpp" href="program_listing_file_Source_Samples_0_TestZone_Src_AppRenderer.Basic.cpp.html" /> 
+
+  
+  <script src="../_static/js/modernizr.min.js"></script>
+
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search">
+          
+
+          
+            <a href="../index.html" class="icon icon-home"> Azura
+          
+
+          
+          </a>
+
+          
+            
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <ul>
+<li class="toctree-l1"><a class="reference internal" href="../setting-up.html">Setting Up</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../build-instructions.html">Build Instructions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../cmake-wrappers.html">CMake Wrappers</a></li>
+<li class="toctree-l1"><a class="reference internal" href="apiRoot.html">Azura API</a></li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">Azura</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../index.html">Docs</a> &raquo;</li>
+        
+          <li><a href="apiRoot.html">Azura API</a> &raquo;</li>
+        
+      <li>File AppRenderer.Cloth.cpp</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            <a href="../_sources/html/file_Source_Samples_0_TestZone_Src_AppRenderer.Cloth.cpp.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="file-apprenderer-cloth-cpp">
+<span id="file-source-samples-0-testzone-src-apprenderer-cloth-cpp"></span><h1>File AppRenderer.Cloth.cpp<a class="headerlink" href="#file-apprenderer-cloth-cpp" title="Permalink to this headline">¶</a></h1>
+<p>↰ <a class="reference internal" href="dir_Source_Samples_0_TestZone_Src.html#dir-source-samples-0-testzone-src"><span class="std std-ref">Parent directory</span></a> (<code class="docutils literal notranslate"><span class="pre">Source\Samples\0_TestZone\Src</span></code>)</p>
+<div class="contents local topic" id="contents">
+<p class="topic-title first">Contents</p>
+<ul class="simple">
+<li><a class="reference internal" href="#definition-source-samples-0-testzone-src-apprenderer-cloth-cpp" id="id1">Definition (<code class="docutils literal notranslate"><span class="pre">Source\Samples\0_TestZone\Src\AppRenderer.Cloth.cpp</span></code>)</a></li>
+<li><a class="reference internal" href="#includes" id="id2">Includes</a></li>
+<li><a class="reference internal" href="#namespaces" id="id3">Namespaces</a></li>
+<li><a class="reference internal" href="#variables" id="id4">Variables</a></li>
+</ul>
+</div>
+<div class="section" id="definition-source-samples-0-testzone-src-apprenderer-cloth-cpp">
+<h2>Definition (<code class="docutils literal notranslate"><span class="pre">Source\Samples\0_TestZone\Src\AppRenderer.Cloth.cpp</span></code>)<a class="headerlink" href="#definition-source-samples-0-testzone-src-apprenderer-cloth-cpp" title="Permalink to this headline">¶</a></h2>
+<div class="toctree-wrapper compound">
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="program_listing_file_Source_Samples_0_TestZone_Src_AppRenderer.Cloth.cpp.html">Program Listing for File AppRenderer.Cloth.cpp</a></li>
+</ul>
+</div>
+</div>
+<div class="section" id="includes">
+<h2>Includes<a class="headerlink" href="#includes" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li><code class="docutils literal notranslate"><span class="pre">Core/RawStorageFormat.h</span></code></li>
+<li><code class="docutils literal notranslate"><span class="pre">Generic/RenderSystem.h</span></code></li>
+<li><code class="docutils literal notranslate"><span class="pre">Generic/Shader.h</span></code></li>
+<li><code class="docutils literal notranslate"><span class="pre">Math/Icosphere.h</span></code></li>
+<li><code class="docutils literal notranslate"><span class="pre">Math/Plane.h</span></code></li>
+<li><code class="docutils literal notranslate"><span class="pre">Math/Transform.h</span></code></li>
+<li><code class="docutils literal notranslate"><span class="pre">Memory/MemoryFactory.h</span></code></li>
+<li><code class="docutils literal notranslate"><span class="pre">Memory/MonotonicAllocator.h</span></code></li>
+<li><code class="docutils literal notranslate"><span class="pre">TestZone/AppRenderer.h</span></code></li>
+<li><code class="docutils literal notranslate"><span class="pre">algorithm</span></code></li>
+<li><code class="docutils literal notranslate"><span class="pre">random</span></code></li>
+</ul>
+</div>
+<div class="section" id="namespaces">
+<h2>Namespaces<a class="headerlink" href="#namespaces" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li><a class="reference internal" href="namespace_Azura.html#namespace-azura"><span class="std std-ref">Namespace Azura</span></a></li>
+</ul>
+</div>
+<div class="section" id="variables">
+<h2>Variables<a class="headerlink" href="#variables" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li><a class="reference internal" href="variable__app_renderer_8_cloth_8cpp_1abacfef300a31bbd96e041d2139f6a589.html#exhale-variable-app-renderer-8-cloth-8cpp-1abacfef300a31bbd96e041d2139f6a589"><span class="std std-ref">Variable m_col</span></a></li>
+<li><a class="reference internal" href="variable__app_renderer_8_cloth_8cpp_1ab0e812335faf45458fb0aeaa849b3556.html#exhale-variable-app-renderer-8-cloth-8cpp-1ab0e812335faf45458fb0aeaa849b3556"><span class="std std-ref">Variable m_lightPos</span></a></li>
+<li><a class="reference internal" href="variable__app_renderer_8_cloth_8cpp_1a9f070c24d1bcd5d92601a9e4bc5b2239.html#exhale-variable-app-renderer-8-cloth-8cpp-1a9f070c24d1bcd5d92601a9e4bc5b2239"><span class="std std-ref">Variable m_pos</span></a></li>
+<li><a class="reference internal" href="variable__app_renderer_8_cloth_8cpp_1aa8f87e87e5449f1c7a46b53abdc033e8.html#exhale-variable-app-renderer-8-cloth-8cpp-1aa8f87e87e5449f1c7a46b53abdc033e8"><span class="std std-ref">Variable m_uv</span></a></li>
+</ul>
+</div>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="program_listing_file_Source_Samples_0_TestZone_Src_AppRenderer.Cloth.cpp.html" class="btn btn-neutral float-right" title="Program Listing for File AppRenderer.Cloth.cpp" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="program_listing_file_Source_Samples_0_TestZone_Src_AppRenderer.Basic.cpp.html" class="btn btn-neutral" title="Program Listing for File AppRenderer.Basic.cpp" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2018, Vasu Mahesh
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  
+
+    
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+        <script type="text/javascript" src="../_static/jquery.js"></script>
+        <script type="text/javascript" src="../_static/underscore.js"></script>
+        <script type="text/javascript" src="../_static/doctools.js"></script>
+        <script type="text/javascript" src="../_static/collapsible-lists\js\CollapsibleLists.compressed.js"></script>
+        <script type="text/javascript" src="../_static/collapsible-lists\js\apply-collapsible-lists.js"></script>
+    
+
+  
+
+  <script type="text/javascript" src="../_static/js/theme.js"></script>
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

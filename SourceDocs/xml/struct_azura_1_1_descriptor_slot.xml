@@ -1,0 +1,90 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.8.14">
+  <compounddef id="struct_azura_1_1_descriptor_slot" kind="struct" language="C++" prot="public">
+    <compoundname>Azura::DescriptorSlot</compoundname>
+      <sectiondef kind="public-attrib">
+      <memberdef kind="variable" id="struct_azura_1_1_descriptor_slot_1a94017845a7976ecf1bd15bd00207b110" prot="public" static="no" mutable="no">
+        <type>U32</type>
+        <definition>U32 Azura::DescriptorSlot::m_key</definition>
+        <argsstring></argsstring>
+        <name>m_key</name>
+        <initializer>{0}</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Source/Azura/RenderSystem/Inc/Generic/GenericTypes.h" line="248" column="1" bodyfile="Source/Azura/RenderSystem/Inc/Generic/GenericTypes.h" bodystart="248" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="struct_azura_1_1_descriptor_slot_1a933531ab1b9f1677d671162d3d546133" prot="public" static="no" mutable="no">
+        <type>DescriptorType</type>
+        <definition>DescriptorType Azura::DescriptorSlot::m_type</definition>
+        <argsstring></argsstring>
+        <name>m_type</name>
+        <initializer>{DescriptorType::UniformBuffer}</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Source/Azura/RenderSystem/Inc/Generic/GenericTypes.h" line="249" column="1" bodyfile="Source/Azura/RenderSystem/Inc/Generic/GenericTypes.h" bodystart="249" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="struct_azura_1_1_descriptor_slot_1a3bbdb438c5cfe1d96f34c4d0862379b9" prot="public" static="no" mutable="no">
+        <type>ShaderStage</type>
+        <definition>ShaderStage Azura::DescriptorSlot::m_stages</definition>
+        <argsstring></argsstring>
+        <name>m_stages</name>
+        <initializer>{ShaderStage::All}</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Source/Azura/RenderSystem/Inc/Generic/GenericTypes.h" line="250" column="1" bodyfile="Source/Azura/RenderSystem/Inc/Generic/GenericTypes.h" bodystart="250" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="struct_azura_1_1_descriptor_slot_1aeba835f0c212f8edb7982519eb871036" prot="public" static="no" mutable="no">
+        <type>U32</type>
+        <definition>U32 Azura::DescriptorSlot::m_setIdx</definition>
+        <argsstring></argsstring>
+        <name>m_setIdx</name>
+        <initializer>{0}</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Source/Azura/RenderSystem/Inc/Generic/GenericTypes.h" line="251" column="1" bodyfile="Source/Azura/RenderSystem/Inc/Generic/GenericTypes.h" bodystart="251" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="struct_azura_1_1_descriptor_slot_1a6ad86095ec13acb8b5cc12312d49be6b" prot="public" static="no" mutable="no">
+        <type>U32</type>
+        <definition>U32 Azura::DescriptorSlot::m_bindIdx</definition>
+        <argsstring></argsstring>
+        <name>m_bindIdx</name>
+        <initializer>{0}</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Source/Azura/RenderSystem/Inc/Generic/GenericTypes.h" line="252" column="1" bodyfile="Source/Azura/RenderSystem/Inc/Generic/GenericTypes.h" bodystart="252" bodyend="-1"/>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <location file="Source/Azura/RenderSystem/Inc/Generic/GenericTypes.h" line="247" column="1" bodyfile="Source/Azura/RenderSystem/Inc/Generic/GenericTypes.h" bodystart="247" bodyend="253"/>
+    <listofallmembers>
+      <member refid="struct_azura_1_1_descriptor_slot_1a6ad86095ec13acb8b5cc12312d49be6b" prot="public" virt="non-virtual"><scope>Azura::DescriptorSlot</scope><name>m_bindIdx</name></member>
+      <member refid="struct_azura_1_1_descriptor_slot_1a94017845a7976ecf1bd15bd00207b110" prot="public" virt="non-virtual"><scope>Azura::DescriptorSlot</scope><name>m_key</name></member>
+      <member refid="struct_azura_1_1_descriptor_slot_1aeba835f0c212f8edb7982519eb871036" prot="public" virt="non-virtual"><scope>Azura::DescriptorSlot</scope><name>m_setIdx</name></member>
+      <member refid="struct_azura_1_1_descriptor_slot_1a3bbdb438c5cfe1d96f34c4d0862379b9" prot="public" virt="non-virtual"><scope>Azura::DescriptorSlot</scope><name>m_stages</name></member>
+      <member refid="struct_azura_1_1_descriptor_slot_1a933531ab1b9f1677d671162d3d546133" prot="public" virt="non-virtual"><scope>Azura::DescriptorSlot</scope><name>m_type</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

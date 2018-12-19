@@ -1,0 +1,66 @@
+
+.. _program_listing_file_Source_Platform_Src_Utils_FileReader.cpp:
+
+Program Listing for File FileReader.cpp
+=======================================
+
+|exhale_lsh| :ref:`Return to documentation for file <file_Source_Platform_Src_Utils_FileReader.cpp>` (``Source\Platform\Src\Utils\FileReader.cpp``)
+
+.. |exhale_lsh| unicode:: U+021B0 .. UPWARDS ARROW WITH TIP LEFTWARDS
+
+.. code-block:: cpp
+
+   #include "Utils/FileReader.h"
+   
+   #include <fstream>
+   #include <iterator>
+   
+   namespace Azura {
+   
+   Containers::Vector<U8> FileReader::GetFileContents(const String& filePath, Memory::Allocator& allocator) {
+     std::ifstream fileStream(filePath, std::ios::binary);
+     Containers::Vector<U8> buffer(allocator);
+   
+     if (!fileStream.good())
+     {
+       throw std::runtime_error("Can't find File");
+     }
+   
+     fileStream.seekg(0, std::ios::end);
+     buffer.Resize(U32(fileStream.tellg()));
+     fileStream.seekg(0, std::ios::beg);
+   
+     buffer.Assign(std::istreambuf_iterator<char>(fileStream), std::istreambuf_iterator<char>());
+   
+     fileStream.close();
+   
+     return buffer;
+   }
+   
+   void FileReader::GetFileContents(const String& filePath, Containers::Vector<U8>& buffer) {
+     std::ifstream fileStream(filePath, std::ios::binary);
+   
+     if (!fileStream.good())
+     {
+       throw std::runtime_error("Can't find File");
+     }
+   
+     fileStream.seekg(0, std::ios::end);
+     buffer.Resize(U32(fileStream.tellg()));
+     fileStream.seekg(0, std::ios::beg);
+   
+     buffer.Assign(std::istreambuf_iterator<char>(fileStream), std::istreambuf_iterator<char>());
+   
+     fileStream.close();
+   }
+   
+   SizeType FileReader::GetFileSize(const String& filePath) {
+     std::ifstream fileStream(filePath);
+   
+     fileStream.seekg(0, std::ios::end);
+     const auto size = SizeType(fileStream.tellg());
+     fileStream.close();
+   
+     return size;
+   }
+   }  // namespace Azura
