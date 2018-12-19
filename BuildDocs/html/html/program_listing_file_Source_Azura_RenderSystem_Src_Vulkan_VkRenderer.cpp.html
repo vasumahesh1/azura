@@ -1,0 +1,892 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>Program Listing for File VkRenderer.cpp &mdash; Azura  documentation</title>
+  
+
+  
+  
+  
+  
+
+  
+
+  
+  
+    
+
+  
+
+  <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/collapsible-lists\css\tree_view.css" type="text/css" />
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="File VkRenderer.h" href="file_Source_Azura_RenderSystem_Inc_Vulkan_VkRenderer.h.html" />
+    <link rel="prev" title="File VkRenderer.cpp" href="file_Source_Azura_RenderSystem_Src_Vulkan_VkRenderer.cpp.html" /> 
+
+  
+  <script src="../_static/js/modernizr.min.js"></script>
+
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search">
+          
+
+          
+            <a href="../index.html" class="icon icon-home"> Azura
+          
+
+          
+          </a>
+
+          
+            
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <ul>
+<li class="toctree-l1"><a class="reference internal" href="../setting-up.html">Setting Up</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../build-instructions.html">Build Instructions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../cmake-wrappers.html">CMake Wrappers</a></li>
+<li class="toctree-l1"><a class="reference internal" href="apiRoot.html">Azura API</a></li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">Azura</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../index.html">Docs</a> &raquo;</li>
+        
+          <li><a href="apiRoot.html">Azura API</a> &raquo;</li>
+        
+          <li><a href="file_Source_Azura_RenderSystem_Src_Vulkan_VkRenderer.cpp.html">File VkRenderer.cpp</a> &raquo;</li>
+        
+      <li>Program Listing for File VkRenderer.cpp</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            <a href="../_sources/html/program_listing_file_Source_Azura_RenderSystem_Src_Vulkan_VkRenderer.cpp.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="program-listing-for-file-vkrenderer-cpp">
+<span id="program-listing-file-source-azura-rendersystem-src-vulkan-vkrenderer-cpp"></span><h1>Program Listing for File VkRenderer.cpp<a class="headerlink" href="#program-listing-for-file-vkrenderer-cpp" title="Permalink to this headline">¶</a></h1>
+<p>↰ <a class="reference internal" href="file_Source_Azura_RenderSystem_Src_Vulkan_VkRenderer.cpp.html#file-source-azura-rendersystem-src-vulkan-vkrenderer-cpp"><span class="std std-ref">Return to documentation for file</span></a> (<code class="docutils literal notranslate"><span class="pre">Source\Azura\RenderSystem\Src\Vulkan\VkRenderer.cpp</span></code>)</p>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="cp">#include</span> <span class="cpf">&quot;Vulkan/VkRenderer.h&quot;</span><span class="cp"></span>
+<span class="cp">#include</span> <span class="cpf">&quot;Generic/Window.h&quot;</span><span class="cp"></span>
+<span class="cp">#include</span> <span class="cpf">&quot;Memory/MemoryFactory.h&quot;</span><span class="cp"></span>
+<span class="cp">#include</span> <span class="cpf">&quot;Memory/MonotonicAllocator.h&quot;</span><span class="cp"></span>
+<span class="cp">#include</span> <span class="cpf">&quot;Utils/Macros.h&quot;</span><span class="cp"></span>
+<span class="cp">#include</span> <span class="cpf">&quot;Vulkan/VkShader.h&quot;</span><span class="cp"></span>
+<span class="cp">#include</span> <span class="cpf">&quot;Vulkan/VkTypeMapping.h&quot;</span><span class="cp"></span>
+<span class="cp">#include</span> <span class="cpf">&quot;Vulkan/VkMacros.h&quot;</span><span class="cp"></span>
+<span class="cp">#include</span> <span class="cpf">&lt;fstream&gt;</span><span class="cp"></span>
+
+<span class="k">using</span> <span class="k">namespace</span> <span class="n">Azura</span><span class="o">::</span><span class="n">Containers</span><span class="p">;</span> <span class="c1">// NOLINT - Freedom to use using namespace in CPP files.</span>
+
+<span class="k">namespace</span> <span class="n">Azura</span> <span class="p">{</span>
+<span class="k">namespace</span> <span class="n">Vulkan</span> <span class="p">{</span>
+
+<span class="n">VkRenderer</span><span class="o">::</span><span class="n">VkRenderer</span><span class="p">(</span><span class="k">const</span> <span class="n">ApplicationInfo</span><span class="o">&amp;</span> <span class="n">appInfo</span><span class="p">,</span>
+                       <span class="k">const</span> <span class="n">DeviceRequirements</span><span class="o">&amp;</span> <span class="n">deviceRequirements</span><span class="p">,</span>
+                       <span class="k">const</span> <span class="n">ApplicationRequirements</span><span class="o">&amp;</span> <span class="n">appRequirements</span><span class="p">,</span>
+                       <span class="k">const</span> <span class="n">SwapChainRequirements</span><span class="o">&amp;</span> <span class="n">swapChainRequirement</span><span class="p">,</span>
+                       <span class="k">const</span> <span class="n">RenderPassRequirements</span><span class="o">&amp;</span> <span class="n">renderPassRequirements</span><span class="p">,</span>
+                       <span class="k">const</span> <span class="n">DescriptorRequirements</span><span class="o">&amp;</span> <span class="n">descriptorRequirements</span><span class="p">,</span>
+                       <span class="k">const</span> <span class="n">ShaderRequirements</span><span class="o">&amp;</span> <span class="n">shaderRequirements</span><span class="p">,</span>
+                       <span class="n">Memory</span><span class="o">::</span><span class="n">Allocator</span><span class="o">&amp;</span> <span class="n">mainAllocator</span><span class="p">,</span>
+                       <span class="n">Memory</span><span class="o">::</span><span class="n">Allocator</span><span class="o">&amp;</span> <span class="n">drawAllocator</span><span class="p">,</span>
+                       <span class="n">Window</span><span class="o">&amp;</span> <span class="n">window</span><span class="p">)</span>
+  <span class="o">:</span> <span class="n">Renderer</span><span class="p">(</span><span class="n">appInfo</span><span class="p">,</span> <span class="n">deviceRequirements</span><span class="p">,</span> <span class="n">appRequirements</span><span class="p">,</span> <span class="n">swapChainRequirement</span><span class="p">,</span> <span class="n">descriptorRequirements</span><span class="p">,</span> <span class="n">mainAllocator</span><span class="p">,</span>
+             <span class="n">drawAllocator</span><span class="p">,</span> <span class="n">window</span><span class="p">),</span>
+    <span class="n">log_VulkanRenderSystem</span><span class="p">(</span><span class="n">Log</span><span class="p">(</span><span class="s">&quot;VulkanRenderSystem&quot;</span><span class="p">)),</span>
+    <span class="n">m_perFrameBuffer</span><span class="p">(</span><span class="mi">4096</span><span class="p">),</span>
+    <span class="n">m_perFrameAllocator</span><span class="p">(</span><span class="n">m_perFrameBuffer</span><span class="p">,</span> <span class="mi">4096</span><span class="p">),</span>
+    <span class="n">m_drawablePools</span><span class="p">(</span><span class="n">renderPassRequirements</span><span class="p">.</span><span class="n">m_maxPools</span><span class="p">,</span> <span class="n">drawAllocator</span><span class="p">),</span>
+    <span class="n">m_computePools</span><span class="p">(</span><span class="n">renderPassRequirements</span><span class="p">.</span><span class="n">m_maxPools</span><span class="p">,</span> <span class="n">drawAllocator</span><span class="p">),</span>
+    <span class="n">m_swapChain</span><span class="p">(</span><span class="n">mainAllocator</span><span class="p">,</span> <span class="n">log_VulkanRenderSystem</span><span class="p">),</span>
+    <span class="n">m_renderPasses</span><span class="p">(</span><span class="n">renderPassRequirements</span><span class="p">.</span><span class="n">m_passSequence</span><span class="p">.</span><span class="n">GetSize</span><span class="p">(),</span> <span class="n">mainAllocator</span><span class="p">),</span>
+    <span class="n">m_descriptorSetLayouts</span><span class="p">(</span><span class="n">mainAllocator</span><span class="p">),</span>
+    <span class="n">m_imageAvailableSemaphores</span><span class="p">(</span><span class="n">mainAllocator</span><span class="p">),</span>
+    <span class="n">m_renderFinishedSemaphores</span><span class="p">(</span><span class="n">mainAllocator</span><span class="p">),</span>
+    <span class="n">m_inFlightFences</span><span class="p">(</span><span class="n">mainAllocator</span><span class="p">),</span>
+    <span class="n">m_shaders</span><span class="p">(</span><span class="n">shaderRequirements</span><span class="p">.</span><span class="n">m_shaders</span><span class="p">.</span><span class="n">GetSize</span><span class="p">(),</span> <span class="n">mainAllocator</span><span class="p">),</span>
+    <span class="n">m_renderPassAttachmentImages</span><span class="p">(</span><span class="n">renderPassRequirements</span><span class="p">.</span><span class="n">m_targets</span><span class="p">.</span><span class="n">GetSize</span><span class="p">(),</span> <span class="n">mainAllocator</span><span class="p">)</span> <span class="p">{</span>
+  <span class="n">HEAP_ALLOCATOR</span><span class="p">(</span><span class="n">Temporary</span><span class="p">,</span> <span class="n">Memory</span><span class="o">::</span><span class="n">MonotonicAllocator</span><span class="p">,</span> <span class="mi">16384</span><span class="p">);</span>
+
+  <span class="n">Vector</span><span class="o">&lt;</span><span class="k">const</span> <span class="kt">char</span><span class="o">*&gt;</span> <span class="n">extensions</span><span class="p">(</span><span class="mi">4</span><span class="p">,</span> <span class="n">allocatorTemporary</span><span class="p">);</span>
+  <span class="n">VkPlatform</span><span class="o">::</span><span class="n">GetInstanceExtensions</span><span class="p">(</span><span class="n">extensions</span><span class="p">);</span>
+
+  <span class="n">m_instance</span> <span class="o">=</span> <span class="n">VkCore</span><span class="o">::</span><span class="n">CreateInstance</span><span class="p">(</span><span class="n">GetApplicationInfo</span><span class="p">(),</span> <span class="n">extensions</span><span class="p">,</span> <span class="n">log_VulkanRenderSystem</span><span class="p">);</span>
+<span class="cp">#ifdef BUILD_DEBUG</span>
+  <span class="n">m_callback</span> <span class="o">=</span> <span class="n">VkCore</span><span class="o">::</span><span class="n">SetupDebug</span><span class="p">(</span><span class="n">m_instance</span><span class="p">,</span> <span class="n">log_VulkanRenderSystem</span><span class="p">);</span>
+<span class="cp">#endif</span>
+
+  <span class="n">m_surface</span> <span class="o">=</span> <span class="n">VkPlatform</span><span class="o">::</span><span class="n">CreateSurface</span><span class="p">(</span><span class="n">m_window</span><span class="p">.</span><span class="n">get</span><span class="p">().</span><span class="n">GetHandle</span><span class="p">(),</span> <span class="n">m_instance</span><span class="p">,</span> <span class="n">log_VulkanRenderSystem</span><span class="p">);</span>
+
+  <span class="n">m_physicalDevice</span> <span class="o">=</span> <span class="n">VkCore</span><span class="o">::</span><span class="n">SelectPhysicalDevice</span><span class="p">(</span><span class="n">m_instance</span><span class="p">,</span> <span class="n">m_surface</span><span class="p">,</span> <span class="n">GetDeviceRequirements</span><span class="p">(),</span>
+                                                  <span class="n">log_VulkanRenderSystem</span><span class="p">);</span>
+  <span class="n">m_queueIndices</span> <span class="o">=</span> <span class="n">VkCore</span><span class="o">::</span><span class="n">FindQueueFamiliesInDevice</span><span class="p">(</span><span class="n">m_physicalDevice</span><span class="p">,</span> <span class="n">m_surface</span><span class="p">,</span> <span class="n">GetDeviceRequirements</span><span class="p">(),</span>
+                                                     <span class="n">log_VulkanRenderSystem</span><span class="p">);</span>
+  <span class="n">m_device</span> <span class="o">=</span> <span class="n">VkCore</span><span class="o">::</span><span class="n">CreateLogicalDevice</span><span class="p">(</span><span class="n">m_physicalDevice</span><span class="p">,</span> <span class="n">m_queueIndices</span><span class="p">,</span> <span class="n">GetDeviceRequirements</span><span class="p">(),</span>
+                                         <span class="n">log_VulkanRenderSystem</span><span class="p">);</span>
+
+  <span class="n">vkGetPhysicalDeviceProperties</span><span class="p">(</span><span class="n">m_physicalDevice</span><span class="p">,</span> <span class="o">&amp;</span><span class="n">m_physicalDeviceProperties</span><span class="p">);</span>
+
+  <span class="k">for</span> <span class="p">(</span><span class="k">const</span> <span class="k">auto</span><span class="o">&amp;</span> <span class="nl">shaderCreateInfo</span> <span class="p">:</span> <span class="n">shaderRequirements</span><span class="p">.</span><span class="n">m_shaders</span><span class="p">)</span> <span class="p">{</span>
+    <span class="n">VkRenderer</span><span class="o">::</span><span class="n">AddShader</span><span class="p">(</span><span class="n">shaderCreateInfo</span><span class="p">);</span>
+  <span class="p">}</span>
+
+  <span class="n">m_graphicsQueue</span> <span class="o">=</span> <span class="n">VkCore</span><span class="o">::</span><span class="n">GetQueueFromDevice</span><span class="p">(</span><span class="n">m_device</span><span class="p">,</span> <span class="n">m_queueIndices</span><span class="p">.</span><span class="n">m_graphicsFamily</span><span class="p">);</span>
+  <span class="n">m_presentQueue</span>  <span class="o">=</span> <span class="n">VkCore</span><span class="o">::</span><span class="n">GetQueueFromDevice</span><span class="p">(</span><span class="n">m_device</span><span class="p">,</span> <span class="n">m_queueIndices</span><span class="p">.</span><span class="n">m_presentFamily</span><span class="p">);</span>
+
+  <span class="k">const</span> <span class="n">SwapChainDeviceSupport</span> <span class="n">swapChainDeviceSupport</span> <span class="o">=</span>
+    <span class="n">VkCore</span><span class="o">::</span><span class="n">QuerySwapChainSupport</span><span class="p">(</span><span class="n">m_physicalDevice</span><span class="p">,</span> <span class="n">m_surface</span><span class="p">,</span> <span class="n">allocatorTemporary</span><span class="p">);</span>
+
+  <span class="k">if</span> <span class="p">(</span><span class="n">m_queueIndices</span><span class="p">.</span><span class="n">m_isTransferQueueRequired</span><span class="p">)</span> <span class="p">{</span>
+    <span class="n">m_transferQueue</span> <span class="o">=</span> <span class="n">VkCore</span><span class="o">::</span><span class="n">GetQueueFromDevice</span><span class="p">(</span><span class="n">m_device</span><span class="p">,</span> <span class="n">m_queueIndices</span><span class="p">.</span><span class="n">m_transferFamily</span><span class="p">);</span>
+  <span class="p">}</span>
+
+  <span class="n">m_graphicsCommandPool</span> <span class="o">=</span> <span class="n">VkCore</span><span class="o">::</span><span class="n">CreateCommandPool</span><span class="p">(</span><span class="n">m_device</span><span class="p">,</span> <span class="n">m_queueIndices</span><span class="p">.</span><span class="n">m_graphicsFamily</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span>
+                                                    <span class="n">log_VulkanRenderSystem</span><span class="p">);</span>
+
+  <span class="k">if</span> <span class="p">(</span><span class="n">m_queueIndices</span><span class="p">.</span><span class="n">m_isTransferQueueRequired</span><span class="p">)</span> <span class="p">{</span>
+    <span class="n">m_transferCommandPool</span> <span class="o">=</span>
+      <span class="n">VkCore</span><span class="o">::</span><span class="n">CreateCommandPool</span><span class="p">(</span><span class="n">m_device</span><span class="p">,</span> <span class="n">m_queueIndices</span><span class="p">.</span><span class="n">m_transferFamily</span><span class="p">,</span> <span class="n">VK_COMMAND_POOL_CREATE_TRANSIENT_BIT</span><span class="p">,</span>
+                                <span class="n">log_VulkanRenderSystem</span><span class="p">);</span>
+  <span class="p">}</span>
+
+  <span class="n">VkPhysicalDeviceMemoryProperties</span> <span class="n">memProperties</span><span class="p">;</span>
+  <span class="n">vkGetPhysicalDeviceMemoryProperties</span><span class="p">(</span><span class="n">m_physicalDevice</span><span class="p">,</span> <span class="o">&amp;</span><span class="n">memProperties</span><span class="p">);</span>
+
+  <span class="n">m_swapChain</span><span class="p">.</span><span class="n">Create</span><span class="p">(</span><span class="n">m_device</span><span class="p">,</span> <span class="n">m_physicalDevice</span><span class="p">,</span> <span class="n">m_graphicsQueue</span><span class="p">,</span> <span class="n">m_graphicsCommandPool</span><span class="p">,</span> <span class="n">m_surface</span><span class="p">,</span> <span class="n">m_queueIndices</span><span class="p">,</span>
+                     <span class="n">swapChainDeviceSupport</span><span class="p">,</span> <span class="n">swapChainRequirement</span><span class="p">,</span> <span class="n">memProperties</span><span class="p">);</span>
+
+  <span class="k">for</span> <span class="p">(</span><span class="k">const</span> <span class="k">auto</span><span class="o">&amp;</span> <span class="nl">bufferCreateInfo</span> <span class="p">:</span> <span class="n">renderPassRequirements</span><span class="p">.</span><span class="n">m_targets</span><span class="p">)</span> <span class="p">{</span>
+    <span class="n">TextureDesc</span> <span class="n">desc</span> <span class="o">=</span> <span class="p">{};</span>
+    <span class="n">desc</span><span class="p">.</span><span class="n">m_format</span>    <span class="o">=</span> <span class="n">bufferCreateInfo</span><span class="p">.</span><span class="n">m_format</span><span class="p">;</span>
+    <span class="n">desc</span><span class="p">.</span><span class="n">m_bounds</span>    <span class="o">=</span> <span class="n">Bounds3D</span><span class="p">{</span><span class="n">m_swapChain</span><span class="p">.</span><span class="n">GetExtent</span><span class="p">().</span><span class="n">width</span><span class="p">,</span> <span class="n">m_swapChain</span><span class="p">.</span><span class="n">GetExtent</span><span class="p">().</span><span class="n">height</span><span class="p">,</span> <span class="mi">1</span><span class="p">};</span>
+
+    <span class="n">VkImageUsageFlags</span> <span class="n">usageFlags</span> <span class="o">=</span> <span class="n">VK_IMAGE_USAGE_COLOR_ATTACHMENT_BIT</span> <span class="o">|</span> <span class="n">VK_IMAGE_USAGE_SAMPLED_BIT</span><span class="p">;</span>
+
+    <span class="k">if</span> <span class="p">(</span><span class="n">HasDepthComponent</span><span class="p">(</span><span class="n">bufferCreateInfo</span><span class="p">.</span><span class="n">m_format</span><span class="p">)</span> <span class="o">||</span> <span class="n">HasStencilComponent</span><span class="p">(</span><span class="n">bufferCreateInfo</span><span class="p">.</span><span class="n">m_format</span><span class="p">))</span> <span class="p">{</span>
+      <span class="n">usageFlags</span> <span class="o">=</span> <span class="n">VK_IMAGE_USAGE_DEPTH_STENCIL_ATTACHMENT_BIT</span> <span class="o">|</span> <span class="n">VK_IMAGE_USAGE_SAMPLED_BIT</span><span class="p">;</span>
+    <span class="p">}</span>
+
+    <span class="n">LOG_DBG</span><span class="p">(</span><span class="n">log_VulkanRenderSystem</span><span class="p">,</span> <span class="n">LOG_LEVEL</span><span class="p">,</span> <span class="s">&quot;Creating Attachment Input at: %d for %s&quot;</span><span class="p">,</span> <span class="n">m_renderPassAttachmentImages</span><span class="p">.</span>
+      <span class="n">GetSize</span><span class="p">(),</span> <span class="n">ToString</span><span class="p">(</span><span class="n">bufferCreateInfo</span><span class="p">.</span><span class="n">m_format</span><span class="p">).</span><span class="n">c_str</span><span class="p">());</span>
+
+    <span class="n">m_renderPassAttachmentImages</span><span class="p">.</span><span class="n">PushBack</span><span class="p">(</span><span class="n">VkScopedImage</span><span class="p">(</span><span class="n">m_device</span><span class="p">,</span> <span class="n">desc</span><span class="p">,</span>
+                                                        <span class="n">usageFlags</span><span class="p">,</span>
+                                                        <span class="n">memProperties</span><span class="p">,</span> <span class="n">log_VulkanRenderSystem</span><span class="p">));</span>
+
+    <span class="n">m_renderPassAttachmentImages</span><span class="p">.</span><span class="n">Last</span><span class="p">().</span><span class="n">CreateImageView</span><span class="p">(</span><span class="n">ImageViewType</span><span class="o">::</span><span class="n">ImageView2D</span><span class="p">);</span>
+  <span class="p">}</span>
+
+  <span class="n">U32</span> <span class="n">passCount</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+  <span class="k">for</span> <span class="p">(</span><span class="k">const</span> <span class="k">auto</span><span class="o">&amp;</span> <span class="nl">passCreateInfo</span> <span class="p">:</span> <span class="n">renderPassRequirements</span><span class="p">.</span><span class="n">m_passSequence</span><span class="p">)</span> <span class="p">{</span>
+    <span class="n">VkScopedRenderPass</span> <span class="n">renderPass</span> <span class="o">=</span> <span class="n">VkScopedRenderPass</span><span class="p">(</span><span class="n">m_renderPasses</span><span class="p">.</span><span class="n">GetSize</span><span class="p">(),</span> <span class="n">mainAllocator</span><span class="p">,</span> <span class="n">log_VulkanRenderSystem</span><span class="p">);</span>
+
+    <span class="k">if</span> <span class="p">(</span><span class="n">passCount</span> <span class="o">!=</span> <span class="p">(</span><span class="n">renderPassRequirements</span><span class="p">.</span><span class="n">m_passSequence</span><span class="p">.</span><span class="n">GetSize</span><span class="p">()</span> <span class="o">-</span> <span class="mi">1</span><span class="p">))</span> <span class="p">{</span>
+      <span class="n">renderPass</span><span class="p">.</span><span class="n">Create</span><span class="p">(</span><span class="n">m_device</span><span class="p">,</span>
+                        <span class="n">m_graphicsCommandPool</span><span class="p">,</span>
+                        <span class="n">passCreateInfo</span><span class="p">,</span>
+                        <span class="n">renderPassRequirements</span><span class="p">.</span><span class="n">m_targets</span><span class="p">,</span>
+                        <span class="n">m_renderPassAttachmentImages</span><span class="p">,</span>
+                        <span class="n">m_shaders</span><span class="p">,</span>
+                        <span class="n">m_swapChain</span><span class="p">);</span>
+    <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+      <span class="n">renderPass</span><span class="p">.</span><span class="n">CreateForSwapChain</span><span class="p">(</span><span class="n">m_device</span><span class="p">,</span>
+                                    <span class="n">m_graphicsCommandPool</span><span class="p">,</span>
+                                    <span class="n">passCreateInfo</span><span class="p">,</span>
+                                    <span class="n">m_shaders</span><span class="p">,</span>
+                                    <span class="n">m_swapChain</span><span class="p">);</span>
+    <span class="p">}</span>
+
+    <span class="n">m_renderPasses</span><span class="p">.</span><span class="n">PushBack</span><span class="p">(</span><span class="n">renderPass</span><span class="p">);</span>
+    <span class="o">++</span><span class="n">passCount</span><span class="p">;</span>
+  <span class="p">}</span>
+
+  <span class="n">CreateDescriptorInfo</span><span class="p">();</span>
+
+  <span class="k">const</span> <span class="n">U32</span> <span class="n">syncCount</span> <span class="o">=</span> <span class="n">swapChainRequirement</span><span class="p">.</span><span class="n">m_framesInFlight</span><span class="p">;</span>
+
+  <span class="n">m_imageAvailableSemaphores</span><span class="p">.</span><span class="n">Resize</span><span class="p">(</span><span class="n">syncCount</span><span class="p">);</span>
+  <span class="n">m_renderFinishedSemaphores</span><span class="p">.</span><span class="n">Resize</span><span class="p">(</span><span class="n">syncCount</span><span class="p">);</span>
+  <span class="n">m_inFlightFences</span><span class="p">.</span><span class="n">Resize</span><span class="p">(</span><span class="n">syncCount</span><span class="p">);</span>
+
+  <span class="n">VkCore</span><span class="o">::</span><span class="n">CreateSemaphores</span><span class="p">(</span><span class="n">m_device</span><span class="p">,</span> <span class="n">syncCount</span><span class="p">,</span> <span class="n">m_imageAvailableSemaphores</span><span class="p">,</span> <span class="n">log_VulkanRenderSystem</span><span class="p">);</span>
+  <span class="n">VkCore</span><span class="o">::</span><span class="n">CreateSemaphores</span><span class="p">(</span><span class="n">m_device</span><span class="p">,</span> <span class="n">syncCount</span><span class="p">,</span> <span class="n">m_renderFinishedSemaphores</span><span class="p">,</span> <span class="n">log_VulkanRenderSystem</span><span class="p">);</span>
+  <span class="n">VkCore</span><span class="o">::</span><span class="n">CreateFences</span><span class="p">(</span><span class="n">m_device</span><span class="p">,</span> <span class="n">syncCount</span><span class="p">,</span> <span class="n">VK_FENCE_CREATE_SIGNALED_BIT</span><span class="p">,</span> <span class="n">m_inFlightFences</span><span class="p">,</span> <span class="n">log_VulkanRenderSystem</span><span class="p">);</span>
+<span class="p">}</span>
+
+<span class="n">VkRenderer</span><span class="o">::~</span><span class="n">VkRenderer</span><span class="p">()</span> <span class="p">{</span>
+  <span class="n">vkDeviceWaitIdle</span><span class="p">(</span><span class="n">m_device</span><span class="p">);</span>
+
+<span class="cp">#ifdef BUILD_DEBUG</span>
+  <span class="n">VkCore</span><span class="o">::</span><span class="n">DestroyDebugReportCallbackEXT</span><span class="p">(</span><span class="n">m_instance</span><span class="p">,</span> <span class="n">m_callback</span><span class="p">,</span> <span class="k">nullptr</span><span class="p">);</span>
+<span class="cp">#endif</span>
+
+  <span class="k">for</span> <span class="p">(</span><span class="k">const</span> <span class="k">auto</span><span class="o">&amp;</span> <span class="nl">semaphore</span> <span class="p">:</span> <span class="n">m_imageAvailableSemaphores</span><span class="p">)</span> <span class="p">{</span>
+    <span class="n">vkDestroySemaphore</span><span class="p">(</span><span class="n">m_device</span><span class="p">,</span> <span class="n">semaphore</span><span class="p">,</span> <span class="k">nullptr</span><span class="p">);</span>
+  <span class="p">}</span>
+
+  <span class="k">for</span> <span class="p">(</span><span class="k">const</span> <span class="k">auto</span><span class="o">&amp;</span> <span class="nl">semaphore</span> <span class="p">:</span> <span class="n">m_renderFinishedSemaphores</span><span class="p">)</span> <span class="p">{</span>
+    <span class="n">vkDestroySemaphore</span><span class="p">(</span><span class="n">m_device</span><span class="p">,</span> <span class="n">semaphore</span><span class="p">,</span> <span class="k">nullptr</span><span class="p">);</span>
+  <span class="p">}</span>
+
+  <span class="k">for</span> <span class="p">(</span><span class="k">const</span> <span class="k">auto</span><span class="o">&amp;</span> <span class="nl">fences</span> <span class="p">:</span> <span class="n">m_inFlightFences</span><span class="p">)</span> <span class="p">{</span>
+    <span class="n">vkDestroyFence</span><span class="p">(</span><span class="n">m_device</span><span class="p">,</span> <span class="n">fences</span><span class="p">,</span> <span class="k">nullptr</span><span class="p">);</span>
+  <span class="p">}</span>
+
+  <span class="k">for</span> <span class="p">(</span><span class="k">const</span> <span class="k">auto</span><span class="o">&amp;</span> <span class="nl">pool</span> <span class="p">:</span> <span class="n">m_drawablePools</span><span class="p">)</span> <span class="p">{</span>
+    <span class="n">pool</span><span class="p">.</span><span class="n">CleanUp</span><span class="p">();</span>
+  <span class="p">}</span>
+
+  <span class="k">for</span> <span class="p">(</span><span class="k">const</span> <span class="k">auto</span><span class="o">&amp;</span> <span class="nl">shader</span> <span class="p">:</span> <span class="n">m_shaders</span><span class="p">)</span> <span class="p">{</span>
+    <span class="n">shader</span><span class="p">.</span><span class="n">CleanUp</span><span class="p">(</span><span class="n">m_device</span><span class="p">);</span>
+  <span class="p">}</span>
+
+  <span class="k">for</span> <span class="p">(</span><span class="k">const</span> <span class="k">auto</span><span class="o">&amp;</span> <span class="nl">setLayout</span> <span class="p">:</span> <span class="n">m_descriptorSetLayouts</span><span class="p">)</span> <span class="p">{</span>
+    <span class="n">vkDestroyDescriptorSetLayout</span><span class="p">(</span><span class="n">m_device</span><span class="p">,</span> <span class="n">setLayout</span><span class="p">,</span> <span class="k">nullptr</span><span class="p">);</span>
+  <span class="p">}</span>
+
+  <span class="n">vkDestroyPipelineLayout</span><span class="p">(</span><span class="n">m_device</span><span class="p">,</span> <span class="n">m_pipelineLayout</span><span class="p">,</span> <span class="k">nullptr</span><span class="p">);</span>
+
+  <span class="n">vkDestroyDescriptorPool</span><span class="p">(</span><span class="n">m_device</span><span class="p">,</span> <span class="n">m_descriptorPool</span><span class="p">,</span> <span class="k">nullptr</span><span class="p">);</span>
+
+  <span class="n">m_swapChain</span><span class="p">.</span><span class="n">CleanUp</span><span class="p">(</span><span class="n">m_device</span><span class="p">);</span>
+
+  <span class="k">for</span> <span class="p">(</span><span class="k">const</span> <span class="k">auto</span><span class="o">&amp;</span> <span class="nl">attachments</span> <span class="p">:</span> <span class="n">m_renderPassAttachmentImages</span><span class="p">)</span> <span class="p">{</span>
+    <span class="n">attachments</span><span class="p">.</span><span class="n">CleanUp</span><span class="p">();</span>
+  <span class="p">}</span>
+
+  <span class="k">for</span> <span class="p">(</span><span class="k">const</span> <span class="k">auto</span><span class="o">&amp;</span> <span class="nl">renderPass</span> <span class="p">:</span> <span class="n">m_renderPasses</span><span class="p">)</span> <span class="p">{</span>
+    <span class="n">renderPass</span><span class="p">.</span><span class="n">CleanUp</span><span class="p">(</span><span class="n">m_device</span><span class="p">,</span> <span class="n">m_graphicsCommandPool</span><span class="p">);</span>
+  <span class="p">}</span>
+
+  <span class="n">vkDestroyCommandPool</span><span class="p">(</span><span class="n">m_device</span><span class="p">,</span> <span class="n">m_graphicsCommandPool</span><span class="p">,</span> <span class="k">nullptr</span><span class="p">);</span>
+
+  <span class="k">if</span> <span class="p">(</span><span class="n">m_queueIndices</span><span class="p">.</span><span class="n">m_isTransferQueueRequired</span><span class="p">)</span> <span class="p">{</span>
+    <span class="n">vkDestroyCommandPool</span><span class="p">(</span><span class="n">m_device</span><span class="p">,</span> <span class="n">m_transferCommandPool</span><span class="p">,</span> <span class="k">nullptr</span><span class="p">);</span>
+  <span class="p">}</span>
+
+  <span class="n">vkDestroySurfaceKHR</span><span class="p">(</span><span class="n">m_instance</span><span class="p">,</span> <span class="n">m_surface</span><span class="p">,</span> <span class="k">nullptr</span><span class="p">);</span>
+
+  <span class="n">vkDestroyDevice</span><span class="p">(</span><span class="n">m_device</span><span class="p">,</span> <span class="k">nullptr</span><span class="p">);</span>     <span class="c1">// Queues are also deleted</span>
+  <span class="n">vkDestroyInstance</span><span class="p">(</span><span class="n">m_instance</span><span class="p">,</span> <span class="k">nullptr</span><span class="p">);</span> <span class="c1">// m_device also Deleted</span>
+<span class="p">};</span>
+
+<span class="n">DrawablePool</span><span class="o">&amp;</span> <span class="n">VkRenderer</span><span class="o">::</span><span class="n">CreateDrawablePool</span><span class="p">(</span><span class="k">const</span> <span class="n">DrawablePoolCreateInfo</span><span class="o">&amp;</span> <span class="n">createInfo</span><span class="p">)</span> <span class="p">{</span>
+  <span class="n">STACK_ALLOCATOR</span><span class="p">(</span><span class="n">Temporary</span><span class="p">,</span> <span class="n">Memory</span><span class="o">::</span><span class="n">MonotonicAllocator</span><span class="p">,</span> <span class="mi">2048</span><span class="p">);</span>
+
+  <span class="n">VkPhysicalDeviceMemoryProperties</span> <span class="n">memProperties</span><span class="p">;</span>
+  <span class="n">vkGetPhysicalDeviceMemoryProperties</span><span class="p">(</span><span class="n">m_physicalDevice</span><span class="p">,</span> <span class="o">&amp;</span><span class="n">memProperties</span><span class="p">);</span>
+
+  <span class="c1">// TODO(vasumahesh1): This isn&#39;t as performance optimized as it should be. We can probably find a way to insert a</span>
+  <span class="c1">// buffer inside each pool?</span>
+  <span class="c1">// Also, using default Viewport.</span>
+  <span class="n">VkDrawablePool</span> <span class="n">pool</span> <span class="o">=</span> <span class="n">VkDrawablePool</span><span class="p">(</span><span class="n">createInfo</span><span class="p">,</span> <span class="n">m_device</span><span class="p">,</span> <span class="n">m_graphicsQueue</span><span class="p">,</span>
+                                       <span class="n">VK_BUFFER_USAGE_INDEX_BUFFER_BIT</span> <span class="o">|</span> <span class="n">VK_BUFFER_USAGE_VERTEX_BUFFER_BIT</span> <span class="o">|</span>
+                                       <span class="n">VK_BUFFER_USAGE_UNIFORM_BUFFER_BIT</span><span class="p">,</span>
+                                       <span class="n">VK_MEMORY_PROPERTY_HOST_VISIBLE_BIT</span><span class="p">,</span>
+                                       <span class="n">m_graphicsCommandPool</span><span class="p">,</span>
+                                       <span class="n">m_pipelineLayout</span><span class="p">,</span> <span class="n">m_descriptorPool</span><span class="p">,</span> <span class="n">m_descriptorSetLayouts</span><span class="p">,</span>
+                                       <span class="n">m_renderPasses</span><span class="p">,</span> <span class="n">m_renderPassAttachmentImages</span><span class="p">,</span> <span class="n">m_shaders</span><span class="p">,</span>
+                                       <span class="n">GetApplicationRequirements</span><span class="p">(),</span> <span class="n">m_window</span><span class="p">.</span><span class="n">get</span><span class="p">().</span><span class="n">GetViewport</span><span class="p">(),</span> <span class="n">memProperties</span><span class="p">,</span>
+                                       <span class="n">m_physicalDeviceProperties</span><span class="p">,</span>
+                                       <span class="n">m_swapChain</span><span class="p">,</span> <span class="n">m_descriptorSlots</span><span class="p">,</span> <span class="n">m_descriptorCount</span><span class="p">,</span> <span class="n">m_drawPoolAllocator</span><span class="p">,</span>
+                                       <span class="n">m_mainAllocator</span><span class="p">,</span> <span class="n">log_VulkanRenderSystem</span><span class="p">);</span>
+
+  <span class="n">m_drawablePools</span><span class="p">.</span><span class="n">PushBack</span><span class="p">(</span><span class="n">std</span><span class="o">::</span><span class="n">move</span><span class="p">(</span><span class="n">pool</span><span class="p">));</span>
+
+  <span class="k">return</span> <span class="n">m_drawablePools</span><span class="p">.</span><span class="n">Last</span><span class="p">();</span>
+<span class="p">}</span>
+
+<span class="n">ComputePool</span><span class="o">&amp;</span> <span class="n">VkRenderer</span><span class="o">::</span><span class="n">CreateComputePool</span><span class="p">(</span><span class="k">const</span> <span class="n">ComputePoolCreateInfo</span><span class="o">&amp;</span> <span class="n">createInfo</span><span class="p">)</span> <span class="p">{</span>
+  <span class="n">VkComputePool</span> <span class="n">pool</span> <span class="o">=</span> <span class="n">VkComputePool</span><span class="p">(</span><span class="n">createInfo</span><span class="p">,</span> <span class="n">m_descriptorCount</span><span class="p">,</span> <span class="n">m_mainAllocator</span><span class="p">);</span>
+  <span class="n">m_computePools</span><span class="p">.</span><span class="n">PushBack</span><span class="p">(</span><span class="n">std</span><span class="o">::</span><span class="n">move</span><span class="p">(</span><span class="n">pool</span><span class="p">));</span>
+  <span class="k">return</span> <span class="n">m_computePools</span><span class="p">.</span><span class="n">Last</span><span class="p">();</span>
+<span class="p">}</span>
+
+<span class="n">VkDevice</span> <span class="n">VkRenderer</span><span class="o">::</span><span class="n">GetDevice</span><span class="p">()</span> <span class="k">const</span> <span class="p">{</span>
+  <span class="k">return</span> <span class="n">m_device</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="n">String</span> <span class="n">VkRenderer</span><span class="o">::</span><span class="n">GetRenderingAPI</span><span class="p">()</span> <span class="k">const</span> <span class="p">{</span>
+  <span class="k">return</span> <span class="s">&quot;Vulkan&quot;</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="kt">void</span> <span class="n">VkRenderer</span><span class="o">::</span><span class="n">Submit</span><span class="p">()</span> <span class="p">{</span>
+  <span class="n">STACK_ALLOCATOR</span><span class="p">(</span><span class="n">Temporary</span><span class="p">,</span> <span class="n">Memory</span><span class="o">::</span><span class="n">MonotonicAllocator</span><span class="p">,</span> <span class="mi">4096</span><span class="p">);</span>
+
+  <span class="n">Vector</span><span class="o">&lt;</span><span class="n">Vector</span><span class="o">&lt;</span><span class="n">VkCommandBuffer</span><span class="o">&gt;&gt;</span> <span class="n">secondaryCmdBuffers</span><span class="p">(</span><span class="n">m_renderPasses</span><span class="p">.</span><span class="n">GetSize</span><span class="p">(),</span> <span class="n">allocatorTemporary</span><span class="p">);</span>
+
+  <span class="k">for</span> <span class="p">(</span><span class="n">U32</span> <span class="n">idx</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">idx</span> <span class="o">&lt;</span> <span class="n">m_renderPasses</span><span class="p">.</span><span class="n">GetSize</span><span class="p">();</span> <span class="o">++</span><span class="n">idx</span><span class="p">)</span> <span class="p">{</span>
+    <span class="n">Vector</span><span class="o">&lt;</span><span class="n">VkCommandBuffer</span><span class="o">&gt;</span> <span class="n">poolCmdBuffers</span><span class="p">(</span><span class="n">m_drawablePools</span><span class="p">.</span><span class="n">GetSize</span><span class="p">(),</span> <span class="n">allocatorTemporary</span><span class="p">);</span>
+    <span class="n">secondaryCmdBuffers</span><span class="p">.</span><span class="n">PushBack</span><span class="p">(</span><span class="n">poolCmdBuffers</span><span class="p">);</span>
+  <span class="p">}</span>
+
+  <span class="k">for</span> <span class="p">(</span><span class="k">auto</span><span class="o">&amp;</span> <span class="nl">drawablePool</span> <span class="p">:</span> <span class="n">m_drawablePools</span><span class="p">)</span> <span class="p">{</span>
+    <span class="n">drawablePool</span><span class="p">.</span><span class="n">Submit</span><span class="p">();</span>
+  <span class="p">}</span>
+
+  <span class="k">for</span> <span class="p">(</span><span class="k">auto</span><span class="o">&amp;</span> <span class="nl">drawablePool</span> <span class="p">:</span> <span class="n">m_drawablePools</span><span class="p">)</span> <span class="p">{</span>
+    <span class="n">Vector</span><span class="o">&lt;</span><span class="n">std</span><span class="o">::</span><span class="n">pair</span><span class="o">&lt;</span><span class="n">U32</span><span class="p">,</span> <span class="n">VkCommandBuffer</span><span class="o">&gt;&gt;</span> <span class="n">drawableBuffer</span><span class="p">(</span><span class="n">allocatorTemporary</span><span class="p">);</span>
+    <span class="n">drawablePool</span><span class="p">.</span><span class="n">GetCommandBuffers</span><span class="p">(</span><span class="n">drawableBuffer</span><span class="p">);</span>
+
+    <span class="k">for</span> <span class="p">(</span><span class="k">const</span> <span class="k">auto</span><span class="o">&amp;</span> <span class="nl">bufferPair</span> <span class="p">:</span> <span class="n">drawableBuffer</span><span class="p">)</span> <span class="p">{</span>
+      <span class="n">secondaryCmdBuffers</span><span class="p">[</span><span class="n">bufferPair</span><span class="p">.</span><span class="n">first</span><span class="p">].</span><span class="n">PushBack</span><span class="p">(</span><span class="n">bufferPair</span><span class="p">.</span><span class="n">second</span><span class="p">);</span>
+    <span class="p">}</span>
+  <span class="p">}</span>
+
+  <span class="c1">// Don&#39;t call last pass</span>
+  <span class="k">for</span> <span class="p">(</span><span class="n">U32</span> <span class="n">idx</span>             <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">idx</span> <span class="o">&lt;</span> <span class="n">m_renderPasses</span><span class="p">.</span><span class="n">GetSize</span><span class="p">()</span> <span class="o">-</span> <span class="mi">1</span><span class="p">;</span> <span class="o">++</span><span class="n">idx</span><span class="p">)</span> <span class="p">{</span>
+    <span class="k">const</span> <span class="k">auto</span><span class="o">&amp;</span> <span class="n">renderPass</span> <span class="o">=</span> <span class="n">m_renderPasses</span><span class="p">[</span><span class="n">idx</span><span class="p">];</span>
+
+    <span class="n">renderPass</span><span class="p">.</span><span class="n">Begin</span><span class="p">(</span><span class="n">m_swapChain</span><span class="p">);</span>
+
+    <span class="k">const</span> <span class="k">auto</span><span class="o">&amp;</span> <span class="n">cmdBuffers</span> <span class="o">=</span> <span class="n">secondaryCmdBuffers</span><span class="p">[</span><span class="n">renderPass</span><span class="p">.</span><span class="n">GetId</span><span class="p">()];</span>
+    <span class="n">vkCmdExecuteCommands</span><span class="p">(</span><span class="n">renderPass</span><span class="p">.</span><span class="n">GetCommandBuffer</span><span class="p">(</span><span class="mi">0</span><span class="p">),</span> <span class="n">cmdBuffers</span><span class="p">.</span><span class="n">GetSize</span><span class="p">(),</span> <span class="n">cmdBuffers</span><span class="p">.</span><span class="n">Data</span><span class="p">());</span>
+
+    <span class="n">renderPass</span><span class="p">.</span><span class="n">End</span><span class="p">();</span>
+  <span class="p">}</span>
+
+  <span class="k">const</span> <span class="k">auto</span><span class="o">&amp;</span> <span class="n">lastPass</span>         <span class="o">=</span> <span class="n">m_renderPasses</span><span class="p">.</span><span class="n">Last</span><span class="p">();</span>
+  <span class="k">const</span> <span class="k">auto</span><span class="o">&amp;</span> <span class="n">lastPassCommands</span> <span class="o">=</span> <span class="n">secondaryCmdBuffers</span><span class="p">.</span><span class="n">Last</span><span class="p">();</span>
+
+  <span class="n">lastPass</span><span class="p">.</span><span class="n">Begin</span><span class="p">(</span><span class="n">m_swapChain</span><span class="p">);</span>
+  <span class="k">for</span> <span class="p">(</span><span class="n">U32</span> <span class="n">idx</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">idx</span> <span class="o">&lt;</span> <span class="n">lastPass</span><span class="p">.</span><span class="n">GetFrameBufferCount</span><span class="p">();</span> <span class="o">++</span><span class="n">idx</span><span class="p">)</span> <span class="p">{</span>
+    <span class="n">vkCmdExecuteCommands</span><span class="p">(</span><span class="n">lastPass</span><span class="p">.</span><span class="n">GetCommandBuffer</span><span class="p">(</span><span class="n">idx</span><span class="p">),</span> <span class="n">lastPassCommands</span><span class="p">.</span><span class="n">GetSize</span><span class="p">(),</span> <span class="n">lastPassCommands</span><span class="p">.</span><span class="n">Data</span><span class="p">());</span>
+  <span class="p">}</span>
+  <span class="n">lastPass</span><span class="p">.</span><span class="n">End</span><span class="p">();</span>
+<span class="p">}</span>
+
+<span class="kt">void</span> <span class="n">VkRenderer</span><span class="o">::</span><span class="n">CreateDescriptorInfo</span><span class="p">()</span> <span class="p">{</span>
+  <span class="n">STACK_ALLOCATOR</span><span class="p">(</span><span class="n">Temporary</span><span class="p">,</span> <span class="n">Memory</span><span class="o">::</span><span class="n">MonotonicAllocator</span><span class="p">,</span> <span class="mi">4096</span><span class="p">);</span>
+
+  <span class="n">Vector</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;</span> <span class="n">bindingSetSizes</span><span class="p">{</span><span class="n">m_descriptorSlots</span><span class="p">.</span><span class="n">GetSize</span><span class="p">(),</span> <span class="n">allocatorTemporary</span><span class="p">};</span>
+
+  <span class="kt">int</span> <span class="n">lastSet</span> <span class="o">=</span> <span class="o">-</span><span class="mi">1</span><span class="p">;</span>
+  <span class="k">for</span> <span class="p">(</span><span class="k">const</span> <span class="k">auto</span><span class="o">&amp;</span> <span class="nl">slot</span> <span class="p">:</span> <span class="n">m_descriptorSlots</span><span class="p">)</span> <span class="p">{</span>
+    <span class="k">if</span> <span class="p">(</span><span class="n">lastSet</span> <span class="o">==</span> <span class="kt">int</span><span class="p">(</span><span class="n">slot</span><span class="p">.</span><span class="n">m_setIdx</span><span class="p">))</span> <span class="p">{</span>
+      <span class="n">bindingSetSizes</span><span class="p">.</span><span class="n">Last</span><span class="p">()</span> <span class="o">+=</span> <span class="mi">1</span><span class="p">;</span>
+      <span class="k">continue</span><span class="p">;</span>
+    <span class="p">}</span>
+
+    <span class="n">lastSet</span> <span class="o">=</span> <span class="kt">int</span><span class="p">(</span><span class="n">slot</span><span class="p">.</span><span class="n">m_setIdx</span><span class="p">);</span>
+
+    <span class="n">bindingSetSizes</span><span class="p">.</span><span class="n">PushBack</span><span class="p">(</span><span class="mi">1</span><span class="p">);</span>
+  <span class="p">}</span>
+
+  <span class="n">m_descriptorSetLayouts</span><span class="p">.</span><span class="n">Reserve</span><span class="p">(</span><span class="n">bindingSetSizes</span><span class="p">.</span><span class="n">GetSize</span><span class="p">()</span> <span class="o">+</span> <span class="n">m_renderPasses</span><span class="p">.</span><span class="n">GetSize</span><span class="p">());</span>
+
+  <span class="kt">int</span> <span class="n">offset</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+  <span class="k">for</span> <span class="p">(</span><span class="k">const</span> <span class="k">auto</span><span class="o">&amp;</span> <span class="nl">bindingSize</span> <span class="p">:</span> <span class="n">bindingSetSizes</span><span class="p">)</span> <span class="p">{</span>
+    <span class="n">Vector</span><span class="o">&lt;</span><span class="n">VkDescriptorSetLayoutBinding</span><span class="o">&gt;</span> <span class="n">currentBindings</span><span class="p">(</span><span class="n">bindingSize</span><span class="p">,</span> <span class="n">allocatorTemporary</span><span class="p">);</span>
+
+    <span class="k">for</span> <span class="p">(</span><span class="kt">int</span> <span class="n">idx</span> <span class="o">=</span> <span class="n">offset</span><span class="p">;</span> <span class="n">idx</span> <span class="o">&lt;</span> <span class="n">offset</span> <span class="o">+</span> <span class="n">bindingSize</span><span class="p">;</span> <span class="o">++</span><span class="n">idx</span><span class="p">)</span> <span class="p">{</span>
+
+      <span class="k">const</span> <span class="k">auto</span><span class="o">&amp;</span> <span class="n">slot</span>                  <span class="o">=</span> <span class="n">m_descriptorSlots</span><span class="p">[</span><span class="n">idx</span><span class="p">];</span>
+      <span class="k">const</span> <span class="k">auto</span> <span class="n">combinedShaderFlagBits</span> <span class="o">=</span> <span class="n">GetCombinedShaderStageFlag</span><span class="p">(</span><span class="n">slot</span><span class="p">.</span><span class="n">m_stages</span><span class="p">);</span>
+
+      <span class="k">const</span> <span class="k">auto</span> <span class="n">bindingId</span> <span class="o">=</span> <span class="n">U32</span><span class="p">(</span><span class="n">idx</span> <span class="o">-</span> <span class="n">offset</span><span class="p">);</span>
+
+      <span class="k">switch</span> <span class="p">(</span><span class="n">slot</span><span class="p">.</span><span class="n">m_type</span><span class="p">)</span> <span class="p">{</span>
+        <span class="k">case</span> <span class="n">DescriptorType</span><span class="o">::</span><span class="nl">UniformBuffer</span><span class="p">:</span>
+          <span class="n">VkCore</span><span class="o">::</span><span class="n">CreateUniformBufferBinding</span><span class="p">(</span><span class="n">currentBindings</span><span class="p">,</span> <span class="n">bindingId</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="n">combinedShaderFlagBits</span><span class="p">);</span>
+          <span class="k">break</span><span class="p">;</span>
+
+        <span class="k">case</span> <span class="n">DescriptorType</span><span class="o">::</span><span class="nl">Sampler</span><span class="p">:</span>
+          <span class="n">VkCore</span><span class="o">::</span><span class="n">CreateSamplerBinding</span><span class="p">(</span><span class="n">currentBindings</span><span class="p">,</span> <span class="n">bindingId</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="n">combinedShaderFlagBits</span><span class="p">);</span>
+          <span class="k">break</span><span class="p">;</span>
+
+        <span class="k">case</span> <span class="n">DescriptorType</span><span class="o">::</span><span class="nl">SampledImage</span><span class="p">:</span>
+          <span class="n">VkCore</span><span class="o">::</span><span class="n">CreateSampledImageBinding</span><span class="p">(</span><span class="n">currentBindings</span><span class="p">,</span> <span class="n">bindingId</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="n">combinedShaderFlagBits</span><span class="p">);</span>
+          <span class="k">break</span><span class="p">;</span>
+
+        <span class="k">case</span> <span class="n">DescriptorType</span><span class="o">::</span><span class="nl">PushConstant</span><span class="p">:</span>
+        <span class="k">case</span> <span class="n">DescriptorType</span><span class="o">::</span><span class="nl">CombinedImageSampler</span><span class="p">:</span>
+        <span class="k">default</span><span class="o">:</span>
+          <span class="n">LOG_ERR</span><span class="p">(</span><span class="n">log_VulkanRenderSystem</span><span class="p">,</span> <span class="n">LOG_LEVEL</span><span class="p">,</span> <span class="s">&quot;Unknown Descriptor Type&quot;</span><span class="p">);</span>
+          <span class="k">break</span><span class="p">;</span>
+      <span class="p">}</span>
+    <span class="p">}</span>
+
+    <span class="n">m_descriptorSetLayouts</span><span class="p">.</span>
+      <span class="n">PushBack</span><span class="p">(</span><span class="n">VkCore</span><span class="o">::</span><span class="n">CreateDescriptorSetLayout</span><span class="p">(</span><span class="n">m_device</span><span class="p">,</span> <span class="n">currentBindings</span><span class="p">,</span> <span class="n">log_VulkanRenderSystem</span><span class="p">));</span>
+
+    <span class="n">offset</span> <span class="o">+=</span> <span class="n">bindingSize</span><span class="p">;</span>
+  <span class="p">}</span>
+
+  <span class="k">for</span> <span class="p">(</span><span class="k">auto</span><span class="o">&amp;</span> <span class="nl">renderPass</span> <span class="p">:</span> <span class="n">m_renderPasses</span><span class="p">)</span> <span class="p">{</span>
+    <span class="k">const</span> <span class="k">auto</span><span class="o">&amp;</span> <span class="n">setLayout</span> <span class="o">=</span> <span class="n">renderPass</span><span class="p">.</span><span class="n">GetDescriptorSetLayout</span><span class="p">();</span>
+    <span class="k">if</span> <span class="p">(</span><span class="n">setLayout</span> <span class="o">!=</span> <span class="n">VK_NULL_HANDLE</span><span class="p">)</span> <span class="p">{</span>
+      <span class="n">renderPass</span><span class="p">.</span><span class="n">SetDescriptorSetId</span><span class="p">(</span><span class="n">m_descriptorSetLayouts</span><span class="p">.</span><span class="n">GetSize</span><span class="p">());</span>
+      <span class="n">m_descriptorSetLayouts</span><span class="p">.</span><span class="n">PushBack</span><span class="p">(</span><span class="n">setLayout</span><span class="p">);</span>
+    <span class="p">}</span>
+  <span class="p">}</span>
+
+  <span class="n">m_pipelineLayout</span> <span class="o">=</span> <span class="n">VkCore</span><span class="o">::</span><span class="n">CreatePipelineLayout</span><span class="p">(</span><span class="n">m_device</span><span class="p">,</span> <span class="n">m_descriptorSetLayouts</span><span class="p">,</span> <span class="n">log_VulkanRenderSystem</span><span class="p">);</span>
+
+  <span class="n">Vector</span><span class="o">&lt;</span><span class="n">VkDescriptorPoolSize</span><span class="o">&gt;</span> <span class="n">descriptorPoolSizes</span><span class="p">(</span><span class="n">MAX_DESCRIPTOR_TYPE_COUNT</span><span class="p">,</span> <span class="n">allocatorTemporary</span><span class="p">);</span>
+
+  <span class="c1">// TODO(vasumahesh1):[DESCRIPTOR]: How to use Uniform Buffer Arrays?</span>
+  <span class="n">VkDescriptorPoolSize</span> <span class="n">uniformPoolSize</span> <span class="o">=</span> <span class="p">{};</span>
+  <span class="n">uniformPoolSize</span><span class="p">.</span><span class="n">type</span>                 <span class="o">=</span> <span class="n">VK_DESCRIPTOR_TYPE_UNIFORM_BUFFER</span><span class="p">;</span>
+  <span class="n">uniformPoolSize</span><span class="p">.</span><span class="n">descriptorCount</span>      <span class="o">=</span> <span class="n">m_descriptorCount</span><span class="p">.</span><span class="n">m_numUniformSlots</span><span class="p">;</span>
+  <span class="n">descriptorPoolSizes</span><span class="p">.</span><span class="n">PushBack</span><span class="p">(</span><span class="n">uniformPoolSize</span><span class="p">);</span>
+
+  <span class="k">if</span> <span class="p">(</span><span class="n">m_descriptorCount</span><span class="p">.</span><span class="n">m_numSamplerSlots</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">)</span> <span class="p">{</span>
+    <span class="n">VkDescriptorPoolSize</span> <span class="n">samplerPoolSize</span> <span class="o">=</span> <span class="p">{};</span>
+    <span class="n">samplerPoolSize</span><span class="p">.</span><span class="n">type</span>                 <span class="o">=</span> <span class="n">VK_DESCRIPTOR_TYPE_SAMPLER</span><span class="p">;</span>
+    <span class="n">samplerPoolSize</span><span class="p">.</span><span class="n">descriptorCount</span>      <span class="o">=</span> <span class="n">m_descriptorCount</span><span class="p">.</span><span class="n">m_numSamplerSlots</span><span class="p">;</span>
+    <span class="n">descriptorPoolSizes</span><span class="p">.</span><span class="n">PushBack</span><span class="p">(</span><span class="n">samplerPoolSize</span><span class="p">);</span>
+  <span class="p">}</span>
+
+  <span class="k">if</span> <span class="p">(</span><span class="n">m_descriptorCount</span><span class="p">.</span><span class="n">m_numSampledImageSlots</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">)</span> <span class="p">{</span>
+    <span class="n">VkDescriptorPoolSize</span> <span class="n">sampledImagePoolSize</span> <span class="o">=</span> <span class="p">{};</span>
+    <span class="n">sampledImagePoolSize</span><span class="p">.</span><span class="n">type</span>                 <span class="o">=</span> <span class="n">VK_DESCRIPTOR_TYPE_SAMPLED_IMAGE</span><span class="p">;</span>
+    <span class="n">sampledImagePoolSize</span><span class="p">.</span><span class="n">descriptorCount</span>      <span class="o">=</span> <span class="n">m_descriptorCount</span><span class="p">.</span><span class="n">m_numSampledImageSlots</span><span class="p">;</span>
+    <span class="n">descriptorPoolSizes</span><span class="p">.</span><span class="n">PushBack</span><span class="p">(</span><span class="n">sampledImagePoolSize</span><span class="p">);</span>
+  <span class="p">}</span>
+
+  <span class="c1">// TODO(vasumahesh1):[DESCRIPTOR]: 1 Set per Drawable? Need to Check</span>
+  <span class="n">VkDescriptorPoolCreateInfo</span> <span class="n">poolInfo</span> <span class="o">=</span> <span class="p">{};</span>
+  <span class="n">poolInfo</span><span class="p">.</span><span class="n">sType</span>                      <span class="o">=</span> <span class="n">VK_STRUCTURE_TYPE_DESCRIPTOR_POOL_CREATE_INFO</span><span class="p">;</span>
+  <span class="n">poolInfo</span><span class="p">.</span><span class="n">poolSizeCount</span>              <span class="o">=</span> <span class="n">descriptorPoolSizes</span><span class="p">.</span><span class="n">GetSize</span><span class="p">();</span>
+  <span class="n">poolInfo</span><span class="p">.</span><span class="n">pPoolSizes</span>                 <span class="o">=</span> <span class="n">descriptorPoolSizes</span><span class="p">.</span><span class="n">Data</span><span class="p">();</span>
+
+  <span class="c1">// TODO(vasumahesh1):[DESCRIPTORS]: Max Sets issue!</span>
+  <span class="n">poolInfo</span><span class="p">.</span><span class="n">maxSets</span> <span class="o">=</span> <span class="n">m_drawablePools</span><span class="p">.</span><span class="n">GetMaxSize</span><span class="p">()</span> <span class="o">*</span> <span class="n">m_descriptorSetLayouts</span><span class="p">.</span><span class="n">GetSize</span><span class="p">();</span>
+
+  <span class="n">VERIFY_VK_OP</span><span class="p">(</span><span class="n">log_VulkanRenderSystem</span><span class="p">,</span> <span class="n">vkCreateDescriptorPool</span><span class="p">(</span><span class="n">m_device</span><span class="p">,</span> <span class="o">&amp;</span><span class="n">poolInfo</span><span class="p">,</span> <span class="k">nullptr</span><span class="p">,</span> <span class="o">&amp;</span><span class="n">m_descriptorPool</span><span class="p">),</span>
+    <span class="s">&quot;Unable to create Descriptor Pool&quot;</span><span class="p">);</span>
+<span class="p">}</span>
+
+<span class="kt">void</span> <span class="n">VkRenderer</span><span class="o">::</span><span class="n">RenderFrame</span><span class="p">()</span> <span class="p">{</span>
+  <span class="n">EnterRenderFrame</span><span class="p">();</span>
+
+  <span class="k">const</span> <span class="k">auto</span><span class="o">&amp;</span> <span class="n">currentFrame</span> <span class="o">=</span> <span class="n">GetCurrentFrame</span><span class="p">();</span>
+
+  <span class="n">vkWaitForFences</span><span class="p">(</span><span class="n">m_device</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="o">&amp;</span><span class="n">m_inFlightFences</span><span class="p">[</span><span class="n">currentFrame</span><span class="p">],</span> <span class="n">VK_TRUE</span><span class="p">,</span> <span class="n">std</span><span class="o">::</span><span class="n">numeric_limits</span><span class="o">&lt;</span><span class="kt">uint64_t</span><span class="o">&gt;::</span><span class="n">max</span><span class="p">());</span>
+  <span class="n">vkResetFences</span><span class="p">(</span><span class="n">m_device</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="o">&amp;</span><span class="n">m_inFlightFences</span><span class="p">[</span><span class="n">currentFrame</span><span class="p">]);</span>
+
+  <span class="n">U32</span> <span class="n">imageIndex</span><span class="p">;</span>
+  <span class="k">const</span> <span class="n">VkResult</span> <span class="n">result</span> <span class="o">=</span> <span class="n">vkAcquireNextImageKHR</span><span class="p">(</span><span class="n">m_device</span><span class="p">,</span> <span class="n">m_swapChain</span><span class="p">.</span><span class="n">Real</span><span class="p">(),</span> <span class="n">std</span><span class="o">::</span><span class="n">numeric_limits</span><span class="o">&lt;</span><span class="kt">uint64_t</span><span class="o">&gt;::</span><span class="n">max</span><span class="p">(),</span>
+                                                <span class="n">m_imageAvailableSemaphores</span><span class="p">[</span><span class="n">currentFrame</span><span class="p">],</span> <span class="n">VK_NULL_HANDLE</span><span class="p">,</span> <span class="o">&amp;</span><span class="n">imageIndex</span><span class="p">);</span>
+
+  <span class="k">if</span> <span class="p">(</span><span class="n">result</span> <span class="o">==</span> <span class="n">VK_ERROR_OUT_OF_DATE_KHR</span><span class="p">)</span> <span class="p">{</span>
+    <span class="c1">// TODO(vasumahesh1):[RESIZE]: Recreate Swapchain</span>
+    <span class="c1">// RecreateSwapChain();</span>
+    <span class="k">return</span><span class="p">;</span>
+  <span class="p">}</span>
+
+  <span class="n">VERIFY_TRUE</span><span class="p">(</span><span class="n">log_VulkanRenderSystem</span><span class="p">,</span> <span class="n">result</span> <span class="o">==</span> <span class="n">VK_SUCCESS</span> <span class="o">||</span> <span class="n">result</span> <span class="o">==</span> <span class="n">VK_SUBOPTIMAL_KHR</span><span class="p">,</span>
+    <span class="s">&quot;Failed to acquire swap chain image&quot;</span><span class="p">);</span>
+
+  <span class="c1">// std::array&lt;VkSemaphore, 1&gt; initialWaitSemaphores      = {};</span>
+  <span class="c1">// std::array&lt;VkSemaphore, 1&gt; finalSignalSemaphores = {m_renderFinishedSemaphores[currentFrame]};</span>
+
+  <span class="c1">// std::array&lt;VkPipelineStageFlags, 1&gt; waitStages = {VK_PIPELINE_STAGE_COLOR_ATTACHMENT_OUTPUT_BIT};</span>
+
+  <span class="k">for</span> <span class="p">(</span><span class="n">U32</span> <span class="n">idx</span>             <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">idx</span> <span class="o">&lt;</span> <span class="n">m_renderPasses</span><span class="p">.</span><span class="n">GetSize</span><span class="p">();</span> <span class="o">++</span><span class="n">idx</span><span class="p">)</span> <span class="p">{</span>
+    <span class="k">const</span> <span class="k">auto</span><span class="o">&amp;</span> <span class="n">renderPass</span> <span class="o">=</span> <span class="n">m_renderPasses</span><span class="p">[</span><span class="n">idx</span><span class="p">];</span>
+
+    <span class="n">VkCommandBuffer</span> <span class="n">passBuffer</span><span class="p">;</span>
+    <span class="n">VkFence</span> <span class="n">waitFence</span> <span class="o">=</span> <span class="n">VK_NULL_HANDLE</span><span class="p">;</span>
+    <span class="n">Vector</span><span class="o">&lt;</span><span class="n">VkSemaphore</span><span class="o">&gt;</span> <span class="n">waitSemaphores</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="n">m_perFrameAllocator</span><span class="p">);</span>
+    <span class="n">Vector</span><span class="o">&lt;</span><span class="n">VkPipelineStageFlags</span><span class="o">&gt;</span> <span class="n">waitStages</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="n">m_perFrameAllocator</span><span class="p">);</span>
+    <span class="n">Vector</span><span class="o">&lt;</span><span class="n">VkSemaphore</span><span class="o">&gt;</span> <span class="n">signalSemaphores</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="n">m_perFrameAllocator</span><span class="p">);</span>
+
+    <span class="c1">// Start of Render</span>
+    <span class="k">if</span> <span class="p">(</span><span class="n">idx</span> <span class="o">==</span> <span class="mi">0</span><span class="p">)</span> <span class="p">{</span>
+      <span class="n">waitSemaphores</span><span class="p">.</span><span class="n">PushBack</span><span class="p">(</span><span class="n">m_imageAvailableSemaphores</span><span class="p">[</span><span class="n">currentFrame</span><span class="p">]);</span>
+      <span class="n">waitStages</span><span class="p">.</span><span class="n">PushBack</span><span class="p">(</span><span class="n">VK_PIPELINE_STAGE_COLOR_ATTACHMENT_OUTPUT_BIT</span><span class="p">);</span>
+
+      <span class="k">if</span> <span class="p">(</span><span class="n">idx</span> <span class="o">!=</span> <span class="n">m_renderPasses</span><span class="p">.</span><span class="n">GetSize</span><span class="p">()</span> <span class="o">-</span> <span class="mi">1</span><span class="p">)</span> <span class="p">{</span>
+        <span class="k">const</span> <span class="k">auto</span><span class="o">&amp;</span> <span class="n">nextPass</span> <span class="o">=</span> <span class="n">m_renderPasses</span><span class="p">[</span><span class="n">idx</span> <span class="o">+</span> <span class="mi">1</span><span class="p">];</span>
+        <span class="n">signalSemaphores</span><span class="p">.</span><span class="n">PushBack</span><span class="p">(</span><span class="n">nextPass</span><span class="p">.</span><span class="n">GetRenderSemaphore</span><span class="p">());</span>
+      <span class="p">}</span>
+    <span class="p">}</span>
+      <span class="c1">// Somewhere in Middle</span>
+    <span class="k">else</span> <span class="k">if</span> <span class="p">(</span><span class="n">idx</span> <span class="o">&lt;</span> <span class="n">m_renderPasses</span><span class="p">.</span><span class="n">GetSize</span><span class="p">()</span> <span class="o">-</span> <span class="mi">1</span><span class="p">)</span> <span class="p">{</span>
+      <span class="k">const</span> <span class="k">auto</span><span class="o">&amp;</span> <span class="n">nextPass</span> <span class="o">=</span> <span class="n">m_renderPasses</span><span class="p">[</span><span class="n">idx</span> <span class="o">+</span> <span class="mi">1</span><span class="p">];</span>
+
+      <span class="n">waitSemaphores</span><span class="p">.</span><span class="n">PushBack</span><span class="p">(</span><span class="n">renderPass</span><span class="p">.</span><span class="n">GetRenderSemaphore</span><span class="p">());</span>
+      <span class="n">waitStages</span><span class="p">.</span><span class="n">PushBack</span><span class="p">(</span><span class="n">VK_PIPELINE_STAGE_COLOR_ATTACHMENT_OUTPUT_BIT</span><span class="p">);</span>
+      <span class="n">signalSemaphores</span><span class="p">.</span><span class="n">PushBack</span><span class="p">(</span><span class="n">nextPass</span><span class="p">.</span><span class="n">GetRenderSemaphore</span><span class="p">());</span>
+    <span class="p">}</span>
+
+    <span class="n">passBuffer</span> <span class="o">=</span> <span class="n">renderPass</span><span class="p">.</span><span class="n">GetCommandBuffer</span><span class="p">(</span><span class="mi">0</span><span class="p">);</span>
+
+    <span class="c1">// End of Render</span>
+    <span class="k">if</span> <span class="p">(</span><span class="n">idx</span> <span class="o">==</span> <span class="n">m_renderPasses</span><span class="p">.</span><span class="n">GetSize</span><span class="p">()</span> <span class="o">-</span> <span class="mi">1</span><span class="p">)</span> <span class="p">{</span>
+      <span class="k">if</span> <span class="p">(</span><span class="n">idx</span> <span class="o">!=</span> <span class="mi">0</span><span class="p">)</span> <span class="p">{</span>
+        <span class="n">waitSemaphores</span><span class="p">.</span><span class="n">PushBack</span><span class="p">(</span><span class="n">renderPass</span><span class="p">.</span><span class="n">GetRenderSemaphore</span><span class="p">());</span>
+        <span class="n">waitStages</span><span class="p">.</span><span class="n">PushBack</span><span class="p">(</span><span class="n">VK_PIPELINE_STAGE_COLOR_ATTACHMENT_OUTPUT_BIT</span><span class="p">);</span>
+      <span class="p">}</span>
+
+      <span class="n">signalSemaphores</span><span class="p">.</span><span class="n">PushBack</span><span class="p">(</span><span class="n">m_renderFinishedSemaphores</span><span class="p">[</span><span class="n">currentFrame</span><span class="p">]);</span>
+
+      <span class="n">passBuffer</span> <span class="o">=</span> <span class="n">renderPass</span><span class="p">.</span><span class="n">GetCommandBuffer</span><span class="p">(</span><span class="n">imageIndex</span><span class="p">);</span>
+      <span class="n">waitFence</span>  <span class="o">=</span> <span class="n">m_inFlightFences</span><span class="p">[</span><span class="n">currentFrame</span><span class="p">];</span>
+    <span class="p">}</span>
+
+    <span class="c1">// SUCCESS OR SUBOPTIMAL</span>
+    <span class="n">VkSubmitInfo</span> <span class="n">submitInfo</span>         <span class="o">=</span> <span class="p">{};</span>
+    <span class="n">submitInfo</span><span class="p">.</span><span class="n">sType</span>                <span class="o">=</span> <span class="n">VK_STRUCTURE_TYPE_SUBMIT_INFO</span><span class="p">;</span>
+    <span class="n">submitInfo</span><span class="p">.</span><span class="n">waitSemaphoreCount</span>   <span class="o">=</span> <span class="n">waitSemaphores</span><span class="p">.</span><span class="n">GetSize</span><span class="p">();</span>
+    <span class="n">submitInfo</span><span class="p">.</span><span class="n">pWaitSemaphores</span>      <span class="o">=</span> <span class="n">waitSemaphores</span><span class="p">.</span><span class="n">Data</span><span class="p">();</span>
+    <span class="n">submitInfo</span><span class="p">.</span><span class="n">pWaitDstStageMask</span>    <span class="o">=</span> <span class="n">waitStages</span><span class="p">.</span><span class="n">Data</span><span class="p">();</span>
+    <span class="n">submitInfo</span><span class="p">.</span><span class="n">commandBufferCount</span>   <span class="o">=</span> <span class="mi">1</span><span class="p">;</span>
+    <span class="n">submitInfo</span><span class="p">.</span><span class="n">pCommandBuffers</span>      <span class="o">=</span> <span class="o">&amp;</span><span class="n">passBuffer</span><span class="p">;</span>
+    <span class="n">submitInfo</span><span class="p">.</span><span class="n">signalSemaphoreCount</span> <span class="o">=</span> <span class="n">signalSemaphores</span><span class="p">.</span><span class="n">GetSize</span><span class="p">();</span>
+    <span class="n">submitInfo</span><span class="p">.</span><span class="n">pSignalSemaphores</span>    <span class="o">=</span> <span class="n">signalSemaphores</span><span class="p">.</span><span class="n">Data</span><span class="p">();</span>
+
+    <span class="n">VERIFY_VK_OP</span><span class="p">(</span><span class="n">log_VulkanRenderSystem</span><span class="p">,</span> <span class="n">vkQueueSubmit</span><span class="p">(</span><span class="n">m_graphicsQueue</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="o">&amp;</span><span class="n">submitInfo</span><span class="p">,</span> <span class="n">waitFence</span><span class="p">),</span>
+      <span class="s">&quot;Failed to submit draw command buffer&quot;</span><span class="p">);</span>
+  <span class="p">}</span>
+
+  <span class="n">Vector</span><span class="o">&lt;</span><span class="n">VkSemaphore</span><span class="o">&gt;</span> <span class="n">presentWaitSemaphores</span><span class="p">({</span><span class="n">m_renderFinishedSemaphores</span><span class="p">[</span><span class="n">currentFrame</span><span class="p">]},</span> <span class="n">m_perFrameAllocator</span><span class="p">);</span>
+
+  <span class="n">VkPresentInfoKHR</span> <span class="n">presentInfo</span>   <span class="o">=</span> <span class="p">{};</span>
+  <span class="n">presentInfo</span><span class="p">.</span><span class="n">sType</span>              <span class="o">=</span> <span class="n">VK_STRUCTURE_TYPE_PRESENT_INFO_KHR</span><span class="p">;</span>
+  <span class="n">presentInfo</span><span class="p">.</span><span class="n">waitSemaphoreCount</span> <span class="o">=</span> <span class="n">presentWaitSemaphores</span><span class="p">.</span><span class="n">GetSize</span><span class="p">();</span>
+  <span class="n">presentInfo</span><span class="p">.</span><span class="n">pWaitSemaphores</span>    <span class="o">=</span> <span class="n">presentWaitSemaphores</span><span class="p">.</span><span class="n">Data</span><span class="p">();</span>
+
+  <span class="n">std</span><span class="o">::</span><span class="n">array</span><span class="o">&lt;</span><span class="n">VkSwapchainKHR</span><span class="p">,</span> <span class="mi">1</span><span class="o">&gt;</span> <span class="n">swapChains</span> <span class="o">=</span> <span class="p">{</span><span class="n">m_swapChain</span><span class="p">.</span><span class="n">Real</span><span class="p">()};</span>
+  <span class="n">presentInfo</span><span class="p">.</span><span class="n">swapchainCount</span>               <span class="o">=</span> <span class="n">U32</span><span class="p">(</span><span class="n">swapChains</span><span class="p">.</span><span class="n">size</span><span class="p">());</span>
+  <span class="n">presentInfo</span><span class="p">.</span><span class="n">pSwapchains</span>                  <span class="o">=</span> <span class="n">swapChains</span><span class="p">.</span><span class="n">data</span><span class="p">();</span>
+  <span class="n">presentInfo</span><span class="p">.</span><span class="n">pImageIndices</span>                <span class="o">=</span> <span class="o">&amp;</span><span class="n">imageIndex</span><span class="p">;</span>
+  <span class="n">presentInfo</span><span class="p">.</span><span class="n">pResults</span>                     <span class="o">=</span> <span class="k">nullptr</span><span class="p">;</span>
+
+  <span class="n">vkQueuePresentKHR</span><span class="p">(</span><span class="n">m_presentQueue</span><span class="p">,</span> <span class="o">&amp;</span><span class="n">presentInfo</span><span class="p">);</span>
+
+  <span class="n">m_perFrameAllocator</span><span class="p">.</span><span class="n">Reset</span><span class="p">();</span>
+
+  <span class="n">ExitRenderFrame</span><span class="p">();</span>
+<span class="p">}</span>
+
+<span class="kt">void</span> <span class="n">VkRenderer</span><span class="o">::</span><span class="n">SnapshotFrame</span><span class="p">(</span><span class="k">const</span> <span class="n">String</span><span class="o">&amp;</span> <span class="n">exportPath</span><span class="p">)</span> <span class="k">const</span> <span class="p">{</span>
+  <span class="c1">// TODO(vasumahesh):[TEXTURE]: VkScopedImage</span>
+  <span class="n">VkDeviceMemory</span> <span class="n">dstMemory</span><span class="p">;</span>
+
+  <span class="c1">// TODO(vasumahesh1):[SNAPSHOT]: Use same format as Swap Chain currently</span>
+  <span class="k">const</span> <span class="n">RawStorageFormat</span> <span class="n">storageFormat</span> <span class="o">=</span> <span class="n">GetSwapchainRequirements</span><span class="p">().</span><span class="n">m_format</span><span class="p">;</span>
+
+  <span class="k">const</span> <span class="kt">bool</span> <span class="n">supportsBlit</span> <span class="o">=</span> <span class="p">[</span><span class="k">this</span><span class="p">,</span> <span class="n">storageFormat</span><span class="p">]()</span> <span class="o">-&gt;</span> <span class="kt">bool</span>
+  <span class="p">{</span>
+    <span class="k">const</span> <span class="k">auto</span> <span class="n">vkFormat</span> <span class="o">=</span> <span class="n">ToVkFormat</span><span class="p">(</span><span class="n">storageFormat</span><span class="p">);</span>
+    <span class="n">VERIFY_OPT</span><span class="p">(</span><span class="n">log_VulkanRenderSystem</span><span class="p">,</span> <span class="n">vkFormat</span><span class="p">,</span> <span class="s">&quot;Unknown Vk Format&quot;</span><span class="p">);</span>
+
+    <span class="n">VkFormatProperties</span> <span class="n">formatProps</span><span class="p">;</span>
+    <span class="n">vkGetPhysicalDeviceFormatProperties</span><span class="p">(</span><span class="n">m_physicalDevice</span><span class="p">,</span> <span class="n">m_swapChain</span><span class="p">.</span><span class="n">GetSurfaceFormat</span><span class="p">(),</span> <span class="o">&amp;</span><span class="n">formatProps</span><span class="p">);</span>
+    <span class="k">if</span> <span class="p">((</span><span class="n">formatProps</span><span class="p">.</span><span class="n">optimalTilingFeatures</span> <span class="o">&amp;</span> <span class="n">VK_FORMAT_FEATURE_BLIT_SRC_BIT</span><span class="p">)</span> <span class="o">==</span> <span class="mi">0u</span><span class="p">)</span> <span class="p">{</span>
+      <span class="n">LOG_WRN</span><span class="p">(</span><span class="n">log_VulkanRenderSystem</span><span class="p">,</span> <span class="n">LOG_LEVEL</span><span class="p">,</span> <span class="s">&quot;Swapchain Format doesn&#39;t support Blit, Will use Image Copy&quot;</span><span class="p">);</span>
+      <span class="k">return</span> <span class="nb">false</span><span class="p">;</span>
+    <span class="p">}</span>
+
+    <span class="n">vkGetPhysicalDeviceFormatProperties</span><span class="p">(</span><span class="n">m_physicalDevice</span><span class="p">,</span> <span class="n">vkFormat</span><span class="p">.</span><span class="n">value</span><span class="p">(),</span> <span class="o">&amp;</span><span class="n">formatProps</span><span class="p">);</span>
+    <span class="k">if</span> <span class="p">((</span><span class="n">formatProps</span><span class="p">.</span><span class="n">linearTilingFeatures</span> <span class="o">&amp;</span> <span class="n">VK_FORMAT_FEATURE_BLIT_DST_BIT</span><span class="p">)</span> <span class="o">==</span> <span class="mi">0u</span><span class="p">)</span> <span class="p">{</span>
+      <span class="n">LOG_WRN</span><span class="p">(</span><span class="n">log_VulkanRenderSystem</span><span class="p">,</span> <span class="n">LOG_LEVEL</span><span class="p">,</span>
+        <span class="s">&quot;Destination Image Format doesn&#39;t support linear blit, Will use Image Copy&quot;</span><span class="p">);</span>
+      <span class="k">return</span> <span class="nb">false</span><span class="p">;</span>
+    <span class="p">}</span>
+
+    <span class="k">return</span> <span class="nb">true</span><span class="p">;</span>
+  <span class="p">}();</span>
+
+  <span class="k">const</span> <span class="k">auto</span><span class="o">&amp;</span> <span class="n">currentFrame</span> <span class="o">=</span> <span class="n">GetCurrentFrame</span><span class="p">();</span>
+
+  <span class="c1">// TODO(vasumahesh):[TEXTURE]: VkScopedImage</span>
+  <span class="c1">// TODO(vasumahesh):[LINT]: Remove Lint overrides</span>
+  <span class="k">const</span> <span class="n">VkScopedImage</span><span class="o">&amp;</span> <span class="n">srcImage</span> <span class="o">=</span> <span class="n">m_swapChain</span><span class="p">.</span><span class="n">GetImage</span><span class="p">(</span><span class="n">currentFrame</span><span class="p">);</span>
+
+  <span class="k">const</span> <span class="k">auto</span> <span class="n">swapChainExtent</span> <span class="o">=</span> <span class="n">m_swapChain</span><span class="p">.</span><span class="n">GetExtent</span><span class="p">();</span>
+  <span class="k">const</span> <span class="n">VkImage</span> <span class="n">dstImage</span>     <span class="o">=</span> <span class="n">VkCore</span><span class="o">::</span><span class="n">CreateImage</span><span class="p">(</span><span class="n">m_device</span><span class="p">,</span> <span class="n">storageFormat</span><span class="p">,</span> <span class="n">ImageType</span><span class="o">::</span><span class="n">Image2D</span><span class="p">,</span>
+                                                   <span class="n">Bounds2D</span><span class="p">{</span><span class="n">swapChainExtent</span><span class="p">.</span><span class="n">width</span><span class="p">,</span> <span class="n">swapChainExtent</span><span class="p">.</span><span class="n">height</span><span class="p">},</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span>
+                                                   <span class="mi">1</span><span class="p">,</span>
+                                                   <span class="n">VK_IMAGE_TILING_LINEAR</span><span class="p">,</span> <span class="n">VK_IMAGE_USAGE_TRANSFER_DST_BIT</span><span class="p">,</span>
+                                                   <span class="n">log_VulkanRenderSystem</span><span class="p">);</span>
+
+  <span class="n">VkMemoryRequirements</span> <span class="n">memRequirements</span><span class="p">;</span>
+  <span class="n">vkGetImageMemoryRequirements</span><span class="p">(</span><span class="n">m_device</span><span class="p">,</span> <span class="n">dstImage</span><span class="p">,</span> <span class="o">&amp;</span><span class="n">memRequirements</span><span class="p">);</span>
+
+  <span class="n">VkPhysicalDeviceMemoryProperties</span> <span class="n">memProperties</span><span class="p">;</span>
+  <span class="n">vkGetPhysicalDeviceMemoryProperties</span><span class="p">(</span><span class="n">m_physicalDevice</span><span class="p">,</span> <span class="o">&amp;</span><span class="n">memProperties</span><span class="p">);</span>
+
+  <span class="n">VkMemoryAllocateInfo</span> <span class="n">allocInfo</span> <span class="o">=</span> <span class="p">{};</span>
+  <span class="n">allocInfo</span><span class="p">.</span><span class="n">sType</span>                <span class="o">=</span> <span class="n">VK_STRUCTURE_TYPE_MEMORY_ALLOCATE_INFO</span><span class="p">;</span>
+  <span class="n">allocInfo</span><span class="p">.</span><span class="n">allocationSize</span>       <span class="o">=</span> <span class="n">memRequirements</span><span class="p">.</span><span class="n">size</span><span class="p">;</span>
+  <span class="n">allocInfo</span><span class="p">.</span><span class="n">memoryTypeIndex</span>      <span class="o">=</span> <span class="n">VkCore</span><span class="o">::</span><span class="n">FindMemoryType</span><span class="p">(</span><span class="n">memRequirements</span><span class="p">.</span><span class="n">memoryTypeBits</span><span class="p">,</span>
+                                                          <span class="n">VK_MEMORY_PROPERTY_HOST_VISIBLE_BIT</span> <span class="o">|</span>
+                                                          <span class="n">VK_MEMORY_PROPERTY_HOST_COHERENT_BIT</span><span class="p">,</span> <span class="n">memProperties</span><span class="p">);</span>
+
+  <span class="n">VERIFY_VK_OP</span><span class="p">(</span><span class="n">log_VulkanRenderSystem</span><span class="p">,</span> <span class="n">vkAllocateMemory</span><span class="p">(</span><span class="n">m_device</span><span class="p">,</span> <span class="o">&amp;</span><span class="n">allocInfo</span><span class="p">,</span> <span class="k">nullptr</span><span class="p">,</span> <span class="o">&amp;</span><span class="n">dstMemory</span><span class="p">),</span>
+    <span class="s">&quot;Snapshot: Unable to allocate Texture Memory for snapshot&quot;</span><span class="p">);</span>
+  <span class="n">VERIFY_VK_OP</span><span class="p">(</span><span class="n">log_VulkanRenderSystem</span><span class="p">,</span> <span class="n">vkBindImageMemory</span><span class="p">(</span><span class="n">m_device</span><span class="p">,</span> <span class="n">dstImage</span><span class="p">,</span> <span class="n">dstMemory</span><span class="p">,</span> <span class="mi">0</span><span class="p">),</span>
+    <span class="s">&quot;Snapshot: Failed to bind Image and Image Memory&quot;</span><span class="p">);</span>
+
+  <span class="n">VkCommandBuffer</span> <span class="n">snapshotCmdBuffer</span> <span class="o">=</span> <span class="n">VkCore</span><span class="o">::</span><span class="n">CreateCommandBuffer</span><span class="p">(</span><span class="n">m_device</span><span class="p">,</span> <span class="n">m_graphicsCommandPool</span><span class="p">,</span>
+                                                                  <span class="n">VK_COMMAND_BUFFER_LEVEL_PRIMARY</span><span class="p">,</span>
+                                                                  <span class="n">log_VulkanRenderSystem</span><span class="p">);</span>
+  <span class="n">VkCore</span><span class="o">::</span><span class="n">BeginCommandBuffer</span><span class="p">(</span><span class="n">snapshotCmdBuffer</span><span class="p">,</span> <span class="n">VK_COMMAND_BUFFER_USAGE_ONE_TIME_SUBMIT_BIT</span><span class="p">,</span> <span class="n">log_VulkanRenderSystem</span><span class="p">);</span>
+
+  <span class="n">VkCore</span><span class="o">::</span><span class="n">TransitionImageLayout</span><span class="p">(</span>
+                                <span class="n">snapshotCmdBuffer</span><span class="p">,</span>
+                                <span class="n">dstImage</span><span class="p">,</span>
+                                <span class="mi">0</span><span class="p">,</span>
+                                <span class="n">VK_ACCESS_TRANSFER_WRITE_BIT</span><span class="p">,</span>
+                                <span class="n">VK_IMAGE_LAYOUT_UNDEFINED</span><span class="p">,</span>
+                                <span class="n">VK_IMAGE_LAYOUT_TRANSFER_DST_OPTIMAL</span><span class="p">,</span>
+                                <span class="n">VK_PIPELINE_STAGE_TRANSFER_BIT</span><span class="p">,</span>
+                                <span class="n">VK_PIPELINE_STAGE_TRANSFER_BIT</span><span class="p">,</span>
+                                <span class="n">VkImageSubresourceRange</span><span class="p">{</span><span class="n">VK_IMAGE_ASPECT_COLOR_BIT</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">});</span>
+
+  <span class="c1">// Transition swapchain image from present to transfer source layout</span>
+  <span class="n">VkCore</span><span class="o">::</span><span class="n">TransitionImageLayout</span><span class="p">(</span>
+                                <span class="n">snapshotCmdBuffer</span><span class="p">,</span>
+                                <span class="n">srcImage</span><span class="p">.</span><span class="n">Real</span><span class="p">(),</span>
+                                <span class="n">VK_ACCESS_MEMORY_READ_BIT</span><span class="p">,</span>
+                                <span class="n">VK_ACCESS_TRANSFER_READ_BIT</span><span class="p">,</span>
+                                <span class="n">VK_IMAGE_LAYOUT_PRESENT_SRC_KHR</span><span class="p">,</span>
+                                <span class="n">VK_IMAGE_LAYOUT_TRANSFER_SRC_OPTIMAL</span><span class="p">,</span>
+                                <span class="n">VK_PIPELINE_STAGE_TRANSFER_BIT</span><span class="p">,</span>
+                                <span class="n">VK_PIPELINE_STAGE_TRANSFER_BIT</span><span class="p">,</span>
+                                <span class="n">VkImageSubresourceRange</span><span class="p">{</span><span class="n">VK_IMAGE_ASPECT_COLOR_BIT</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">}</span>
+                               <span class="p">);</span>
+
+  <span class="k">if</span> <span class="p">(</span><span class="n">supportsBlit</span><span class="p">)</span> <span class="p">{</span>
+    <span class="n">VkCore</span><span class="o">::</span><span class="n">ImageBlit</span><span class="p">(</span><span class="n">snapshotCmdBuffer</span><span class="p">,</span> <span class="n">srcImage</span><span class="p">.</span><span class="n">Real</span><span class="p">(),</span> <span class="n">dstImage</span><span class="p">,</span> <span class="n">VK_IMAGE_ASPECT_COLOR_BIT</span><span class="p">,</span>
+                      <span class="n">VK_IMAGE_ASPECT_COLOR_BIT</span><span class="p">,</span>
+                      <span class="n">Bounds3D</span><span class="p">{</span><span class="n">swapChainExtent</span><span class="p">.</span><span class="n">width</span><span class="p">,</span> <span class="n">swapChainExtent</span><span class="p">.</span><span class="n">height</span><span class="p">,</span> <span class="mi">1</span><span class="p">});</span>
+  <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+    <span class="n">VkCore</span><span class="o">::</span><span class="n">ImageCopy</span><span class="p">(</span><span class="n">snapshotCmdBuffer</span><span class="p">,</span> <span class="n">srcImage</span><span class="p">.</span><span class="n">Real</span><span class="p">(),</span> <span class="n">dstImage</span><span class="p">,</span> <span class="n">VK_IMAGE_ASPECT_COLOR_BIT</span><span class="p">,</span>
+                      <span class="n">VK_IMAGE_ASPECT_COLOR_BIT</span><span class="p">,</span>
+                      <span class="p">{</span><span class="n">swapChainExtent</span><span class="p">.</span><span class="n">width</span><span class="p">,</span> <span class="n">swapChainExtent</span><span class="p">.</span><span class="n">height</span><span class="p">,</span> <span class="mi">1</span><span class="p">});</span>
+  <span class="p">}</span>
+
+  <span class="n">VkCore</span><span class="o">::</span><span class="n">TransitionImageLayout</span><span class="p">(</span>
+                                <span class="n">snapshotCmdBuffer</span><span class="p">,</span>
+                                <span class="n">dstImage</span><span class="p">,</span>
+                                <span class="n">VK_ACCESS_TRANSFER_WRITE_BIT</span><span class="p">,</span>
+                                <span class="n">VK_ACCESS_MEMORY_READ_BIT</span><span class="p">,</span>
+                                <span class="n">VK_IMAGE_LAYOUT_TRANSFER_DST_OPTIMAL</span><span class="p">,</span>
+                                <span class="n">VK_IMAGE_LAYOUT_GENERAL</span><span class="p">,</span>
+                                <span class="n">VK_PIPELINE_STAGE_TRANSFER_BIT</span><span class="p">,</span>
+                                <span class="n">VK_PIPELINE_STAGE_TRANSFER_BIT</span><span class="p">,</span>
+                                <span class="n">VkImageSubresourceRange</span><span class="p">{</span><span class="n">VK_IMAGE_ASPECT_COLOR_BIT</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">}</span>
+                               <span class="p">);</span>
+
+  <span class="c1">// Transition source image back to its original layout</span>
+  <span class="n">VkCore</span><span class="o">::</span><span class="n">TransitionImageLayout</span><span class="p">(</span>
+                                <span class="n">snapshotCmdBuffer</span><span class="p">,</span>
+                                <span class="n">srcImage</span><span class="p">.</span><span class="n">Real</span><span class="p">(),</span>
+                                <span class="n">VK_ACCESS_TRANSFER_READ_BIT</span><span class="p">,</span>
+                                <span class="n">VK_ACCESS_MEMORY_READ_BIT</span><span class="p">,</span>
+                                <span class="n">VK_IMAGE_LAYOUT_TRANSFER_SRC_OPTIMAL</span><span class="p">,</span>
+                                <span class="n">VK_IMAGE_LAYOUT_PRESENT_SRC_KHR</span><span class="p">,</span>
+                                <span class="n">VK_PIPELINE_STAGE_TRANSFER_BIT</span><span class="p">,</span>
+                                <span class="n">VK_PIPELINE_STAGE_TRANSFER_BIT</span><span class="p">,</span>
+                                <span class="n">VkImageSubresourceRange</span><span class="p">{</span><span class="n">VK_IMAGE_ASPECT_COLOR_BIT</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">}</span>
+                               <span class="p">);</span>
+
+  <span class="n">VkCore</span><span class="o">::</span><span class="n">FlushCommandBuffer</span><span class="p">(</span><span class="n">m_device</span><span class="p">,</span> <span class="n">snapshotCmdBuffer</span><span class="p">,</span> <span class="n">m_graphicsQueue</span><span class="p">,</span> <span class="n">log_VulkanRenderSystem</span><span class="p">);</span>
+  <span class="n">vkFreeCommandBuffers</span><span class="p">(</span><span class="n">m_device</span><span class="p">,</span> <span class="n">m_graphicsCommandPool</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="o">&amp;</span><span class="n">snapshotCmdBuffer</span><span class="p">);</span>
+
+  <span class="c1">// Get layout of the image (including row pitch)</span>
+  <span class="n">VkImageSubresource</span> <span class="n">subResource</span><span class="p">{</span><span class="n">VK_IMAGE_ASPECT_COLOR_BIT</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">};</span>
+  <span class="n">VkSubresourceLayout</span> <span class="n">subResourceLayout</span><span class="p">;</span>
+  <span class="n">vkGetImageSubresourceLayout</span><span class="p">(</span><span class="n">m_device</span><span class="p">,</span> <span class="n">dstImage</span><span class="p">,</span> <span class="o">&amp;</span><span class="n">subResource</span><span class="p">,</span> <span class="o">&amp;</span><span class="n">subResourceLayout</span><span class="p">);</span>
+
+  <span class="k">const</span> <span class="kt">char</span><span class="o">*</span> <span class="n">data</span><span class="p">;</span>
+  <span class="n">vkMapMemory</span><span class="p">(</span><span class="n">m_device</span><span class="p">,</span> <span class="n">dstMemory</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="n">VK_WHOLE_SIZE</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="p">(</span><span class="kt">void</span><span class="o">**</span><span class="p">)</span><span class="o">&amp;</span><span class="n">data</span><span class="p">);</span> <span class="c1">// NOLINT</span>
+  <span class="n">data</span> <span class="o">+=</span> <span class="n">subResourceLayout</span><span class="p">.</span><span class="n">offset</span><span class="p">;</span>                                     <span class="c1">// NOLINT</span>
+
+  <span class="k">const</span> <span class="n">U32</span> <span class="n">imageSize</span> <span class="o">=</span> <span class="n">swapChainExtent</span><span class="p">.</span><span class="n">width</span> <span class="o">*</span> <span class="n">swapChainExtent</span><span class="p">.</span><span class="n">height</span> <span class="o">*</span> <span class="p">(</span><span class="n">GetFormatSize</span><span class="p">(</span><span class="n">storageFormat</span><span class="p">));</span>
+  <span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="kt">char</span><span class="o">&gt;</span> <span class="n">imageData</span><span class="p">(</span><span class="n">imageSize</span><span class="p">);</span>
+
+  <span class="n">memcpy</span><span class="p">(</span><span class="n">imageData</span><span class="p">.</span><span class="n">data</span><span class="p">(),</span> <span class="n">data</span><span class="p">,</span> <span class="n">imageSize</span><span class="p">);</span>
+
+  <span class="n">std</span><span class="o">::</span><span class="n">ofstream</span> <span class="n">file</span><span class="p">(</span><span class="n">exportPath</span><span class="p">,</span> <span class="n">std</span><span class="o">::</span><span class="n">ios</span><span class="o">::</span><span class="n">out</span> <span class="o">|</span> <span class="n">std</span><span class="o">::</span><span class="n">ios</span><span class="o">::</span><span class="n">binary</span><span class="p">);</span>
+  <span class="n">file</span><span class="p">.</span><span class="n">write</span><span class="p">(</span><span class="o">&amp;</span><span class="n">imageData</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">imageData</span><span class="p">.</span><span class="n">size</span><span class="p">());</span>
+
+  <span class="n">file</span><span class="p">.</span><span class="n">close</span><span class="p">();</span>
+
+  <span class="n">vkUnmapMemory</span><span class="p">(</span><span class="n">m_device</span><span class="p">,</span> <span class="n">dstMemory</span><span class="p">);</span>
+  <span class="n">vkFreeMemory</span><span class="p">(</span><span class="n">m_device</span><span class="p">,</span> <span class="n">dstMemory</span><span class="p">,</span> <span class="k">nullptr</span><span class="p">);</span>
+  <span class="n">vkDestroyImage</span><span class="p">(</span><span class="n">m_device</span><span class="p">,</span> <span class="n">dstImage</span><span class="p">,</span> <span class="k">nullptr</span><span class="p">);</span>
+
+  <span class="n">LOG_INF</span><span class="p">(</span><span class="n">log_VulkanRenderSystem</span><span class="p">,</span> <span class="n">LOG_LEVEL</span><span class="p">,</span> <span class="s">&quot;Snapshot Saved: Size: %d x %d&quot;</span><span class="p">,</span> <span class="n">swapChainExtent</span><span class="p">.</span><span class="n">width</span><span class="p">,</span> <span class="n">swapChainExtent</span><span class="p">.</span>
+    <span class="n">height</span><span class="p">);</span>
+<span class="p">}</span>
+
+<span class="kt">void</span> <span class="n">VkRenderer</span><span class="o">::</span><span class="n">BindRenderTarget</span><span class="p">(</span><span class="n">U32</span> <span class="n">renderTargetId</span><span class="p">,</span> <span class="k">const</span> <span class="n">TextureDesc</span><span class="o">&amp;</span> <span class="n">desc</span><span class="p">,</span> <span class="k">const</span> <span class="n">U8</span><span class="o">*</span> <span class="n">buffer</span><span class="p">)</span> <span class="p">{</span>
+  <span class="n">UNUSED</span><span class="p">(</span><span class="n">renderTargetId</span><span class="p">);</span>
+  <span class="n">UNUSED</span><span class="p">(</span><span class="n">desc</span><span class="p">);</span>
+  <span class="n">UNUSED</span><span class="p">(</span><span class="n">buffer</span><span class="p">);</span>
+<span class="p">}</span>
+
+<span class="kt">void</span> <span class="n">VkRenderer</span><span class="o">::</span><span class="n">BindBufferTarget</span><span class="p">(</span><span class="n">U32</span> <span class="n">bufferTargetId</span><span class="p">,</span> <span class="k">const</span> <span class="n">U8</span><span class="o">*</span> <span class="n">buffer</span><span class="p">)</span> <span class="p">{</span>
+  <span class="n">UNUSED</span><span class="p">(</span><span class="n">bufferTargetId</span><span class="p">);</span>
+  <span class="n">UNUSED</span><span class="p">(</span><span class="n">buffer</span><span class="p">);</span>
+<span class="p">}</span>
+
+<span class="kt">void</span> <span class="n">VkRenderer</span><span class="o">::</span><span class="n">AddShader</span><span class="p">(</span><span class="k">const</span> <span class="n">ShaderCreateInfo</span><span class="o">&amp;</span> <span class="n">info</span><span class="p">)</span> <span class="p">{</span>
+  <span class="c1">// TODO(vasumahesh1):[ASSETS]: Manage assets</span>
+  <span class="k">const</span> <span class="n">String</span> <span class="n">fullPath</span> <span class="o">=</span> <span class="s">&quot;Shaders/&quot;</span> <span class="o">+</span> <span class="n">VkRenderer</span><span class="o">::</span><span class="n">GetRenderingAPI</span><span class="p">()</span> <span class="o">+</span> <span class="s">&quot;/&quot;</span> <span class="o">+</span> <span class="n">info</span><span class="p">.</span><span class="n">m_shaderFileName</span><span class="p">;</span>
+  <span class="n">m_shaders</span><span class="p">.</span><span class="n">EmplaceBack</span><span class="p">(</span><span class="n">m_device</span><span class="p">,</span> <span class="n">fullPath</span><span class="p">,</span> <span class="n">log_VulkanRenderSystem</span><span class="p">);</span>
+  <span class="n">m_shaders</span><span class="p">.</span><span class="n">Last</span><span class="p">().</span><span class="n">SetStage</span><span class="p">(</span><span class="n">info</span><span class="p">.</span><span class="n">m_stage</span><span class="p">);</span>
+<span class="p">}</span>
+
+<span class="p">}</span> <span class="c1">// namespace Vulkan</span>
+<span class="p">}</span> <span class="c1">// namespace Azura</span>
+</pre></div>
+</div>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="file_Source_Azura_RenderSystem_Inc_Vulkan_VkRenderer.h.html" class="btn btn-neutral float-right" title="File VkRenderer.h" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="file_Source_Azura_RenderSystem_Src_Vulkan_VkRenderer.cpp.html" class="btn btn-neutral" title="File VkRenderer.cpp" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2018, Vasu Mahesh
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  
+
+    
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+        <script type="text/javascript" src="../_static/jquery.js"></script>
+        <script type="text/javascript" src="../_static/underscore.js"></script>
+        <script type="text/javascript" src="../_static/doctools.js"></script>
+        <script type="text/javascript" src="../_static/collapsible-lists\js\CollapsibleLists.compressed.js"></script>
+        <script type="text/javascript" src="../_static/collapsible-lists\js\apply-collapsible-lists.js"></script>
+    
+
+  
+
+  <script type="text/javascript" src="../_static/js/theme.js"></script>
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

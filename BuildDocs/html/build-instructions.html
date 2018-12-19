@@ -1,0 +1,281 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>Build Instructions &mdash; Azura  documentation</title>
+  
+
+  
+  
+  
+  
+
+  
+
+  
+  
+    
+
+  
+
+  <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="_static/collapsible-lists\css\tree_view.css" type="text/css" />
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="CMake Wrappers" href="cmake-wrappers.html" />
+    <link rel="prev" title="Setting Up" href="setting-up.html" /> 
+
+  
+  <script src="_static/js/modernizr.min.js"></script>
+
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search">
+          
+
+          
+            <a href="index.html" class="icon icon-home"> Azura
+          
+
+          
+          </a>
+
+          
+            
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="setting-up.html">Setting Up</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Build Instructions</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#build-structure">Build Structure</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#the-most-basic-build">The Most Basic Build</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#building-ide-project-files">Building IDE Project Files</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#windows-specific-project-files">Windows Specific Project Files:</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="cmake-wrappers.html">CMake Wrappers</a></li>
+<li class="toctree-l1"><a class="reference internal" href="html/apiRoot.html">Azura API</a></li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">Azura</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="index.html">Docs</a> &raquo;</li>
+        
+      <li>Build Instructions</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            <a href="_sources/build-instructions.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="build-instructions">
+<h1>Build Instructions<a class="headerlink" href="#build-instructions" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="build-structure">
+<h2>Build Structure<a class="headerlink" href="#build-structure" title="Permalink to this headline">¶</a></h2>
+<p>Builds are always generated for a <code class="docutils literal notranslate"><span class="pre">target</span></code>. The following set of targets are available:</p>
+<ul class="simple">
+<li>Win64</li>
+<li>Win32*</li>
+<li>Mac64 = Soon(tm)</li>
+</ul>
+<p>These targets are combined with a Debug or Release specification and generate the following string:</p>
+<ul class="simple">
+<li>WIN64_DEBUG</li>
+<li>WIN64_RELEASE</li>
+<li>WIN32_DEBUG*</li>
+<li>WIN32_RELEASE*</li>
+<li>MAC64_DEBUG - Soon <sup>tm</sup></li>
+<li>MAC64_RELEASE - Soon <sup>tm</sup></li>
+</ul>
+<p><code class="docutils literal notranslate"><span class="pre">*</span></code> = Currently disabled due to CI issues.</p>
+<p>These are basically a string of Platform + Architecture + Debug/Release combined. This allows us to build multiple targets later on.</p>
+<p>The following folders are also available:</p>
+<ul>
+<li><p class="first"><code class="docutils literal notranslate"><span class="pre">Build/</span></code></p>
+<p>This folder is the main folder where a build is made. Builds are made without any IDE support and are generated via CMake and Ninja. <code class="docutils literal notranslate"><span class="pre">--build</span></code> controls if you want to build <code class="docutils literal notranslate"><span class="pre">Debug</span></code> or <code class="docutils literal notranslate"><span class="pre">Release</span></code> . And <code class="docutils literal notranslate"><span class="pre">--target</span></code> controls the target (listed above)</p>
+</li>
+<li><p class="first"><code class="docutils literal notranslate"><span class="pre">BuildProjects/</span></code></p>
+<p>This folder contains project files (Currently tuned for Visual Studio 2017). This folder will contain you visual studio files. You might want to rebuild these files if the CMake files change. <code class="docutils literal notranslate"><span class="pre">--projectFiles</span></code> flag controls if we want to build project files or not.</p>
+</li>
+</ul>
+</div>
+<div class="section" id="the-most-basic-build">
+<h2>The Most Basic Build<a class="headerlink" href="#the-most-basic-build" title="Permalink to this headline">¶</a></h2>
+<p>The most basic build must include these commands:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>$ python build.py --project all --target Win64
+</pre></div>
+</div>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">Defaults to Debug mode, use <code class="docutils literal notranslate"><span class="pre">--build</span> <span class="pre">Release</span></code> to build Release mode.</p>
+</div>
+</div>
+<div class="section" id="building-ide-project-files">
+<h2>Building IDE Project Files<a class="headerlink" href="#building-ide-project-files" title="Permalink to this headline">¶</a></h2>
+<p>You can generate IDE files (Visual Studio files) by appending the flag <code class="docutils literal notranslate"><span class="pre">--projectFiles</span></code> This will tell Azura to generate a set of project files along with a regular build.</p>
+<p>Note: You don’t have to do this every single time. This will waste a lot of time building them. One should only use <code class="docutils literal notranslate"><span class="pre">--projectFiles</span></code> only when CMakeLists.txt changes with additions / removals related to Shaders / Textures / CPP Files or any other files that are linked to CMake targets.</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>$ python build.py --project all --target Win64 --projectFiles
+</pre></div>
+</div>
+<p>This will create the required project files in the <code class="docutils literal notranslate"><span class="pre">BuildProjects/</span></code> folder.</p>
+<div class="section" id="windows-specific-project-files">
+<h3>Windows Specific Project Files:<a class="headerlink" href="#windows-specific-project-files" title="Permalink to this headline">¶</a></h3>
+<p>For Visual Studio open <a class="reference external" href="http://elderscrolls.wikia.com/wiki/Mundus">Mundus</a>.sln</p>
+<p>This is the one single visual studio solution containing all projects. You can now set any project (that is an executable) as a Start Up Project. You can now build and code as usual.</p>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">Visual Studio projects have reduced static analysis and compiler checks. In short, if your visual studio project builds then the main build may or may not build. This is due to stricter checks in the main build allowing you to hack through code in VS. But obviously, correcting the hacks once the code works.</p>
+</div>
+</div>
+</div>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="cmake-wrappers.html" class="btn btn-neutral float-right" title="CMake Wrappers" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="setting-up.html" class="btn btn-neutral" title="Setting Up" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2018, Vasu Mahesh
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  
+
+    
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
+        <script type="text/javascript" src="_static/jquery.js"></script>
+        <script type="text/javascript" src="_static/underscore.js"></script>
+        <script type="text/javascript" src="_static/doctools.js"></script>
+        <script type="text/javascript" src="_static/collapsible-lists\js\CollapsibleLists.compressed.js"></script>
+        <script type="text/javascript" src="_static/collapsible-lists\js\apply-collapsible-lists.js"></script>
+    
+
+  
+
+  <script type="text/javascript" src="_static/js/theme.js"></script>
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

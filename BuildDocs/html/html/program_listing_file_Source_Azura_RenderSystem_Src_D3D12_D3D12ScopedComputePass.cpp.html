@@ -1,0 +1,627 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>Program Listing for File D3D12ScopedComputePass.cpp &mdash; Azura  documentation</title>
+  
+
+  
+  
+  
+  
+
+  
+
+  
+  
+    
+
+  
+
+  <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/collapsible-lists\css\tree_view.css" type="text/css" />
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="File D3D12ScopedComputePass.h" href="file_Source_Azura_RenderSystem_Inc_D3D12_D3D12ScopedComputePass.h.html" />
+    <link rel="prev" title="File D3D12ScopedComputePass.cpp" href="file_Source_Azura_RenderSystem_Src_D3D12_D3D12ScopedComputePass.cpp.html" /> 
+
+  
+  <script src="../_static/js/modernizr.min.js"></script>
+
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search">
+          
+
+          
+            <a href="../index.html" class="icon icon-home"> Azura
+          
+
+          
+          </a>
+
+          
+            
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <ul>
+<li class="toctree-l1"><a class="reference internal" href="../setting-up.html">Setting Up</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../build-instructions.html">Build Instructions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../cmake-wrappers.html">CMake Wrappers</a></li>
+<li class="toctree-l1"><a class="reference internal" href="apiRoot.html">Azura API</a></li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">Azura</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../index.html">Docs</a> &raquo;</li>
+        
+          <li><a href="apiRoot.html">Azura API</a> &raquo;</li>
+        
+          <li><a href="file_Source_Azura_RenderSystem_Src_D3D12_D3D12ScopedComputePass.cpp.html">File D3D12ScopedComputePass.cpp</a> &raquo;</li>
+        
+      <li>Program Listing for File D3D12ScopedComputePass.cpp</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            <a href="../_sources/html/program_listing_file_Source_Azura_RenderSystem_Src_D3D12_D3D12ScopedComputePass.cpp.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="program-listing-for-file-d3d12scopedcomputepass-cpp">
+<span id="program-listing-file-source-azura-rendersystem-src-d3d12-d3d12scopedcomputepass-cpp"></span><h1>Program Listing for File D3D12ScopedComputePass.cpp<a class="headerlink" href="#program-listing-for-file-d3d12scopedcomputepass-cpp" title="Permalink to this headline">¶</a></h1>
+<p>↰ <a class="reference internal" href="file_Source_Azura_RenderSystem_Src_D3D12_D3D12ScopedComputePass.cpp.html#file-source-azura-rendersystem-src-d3d12-d3d12scopedcomputepass-cpp"><span class="std std-ref">Return to documentation for file</span></a> (<code class="docutils literal notranslate"><span class="pre">Source\Azura\RenderSystem\Src\D3D12\D3D12ScopedComputePass.cpp</span></code>)</p>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="cp">#include</span> <span class="cpf">&quot;D3D12/D3D12ScopedComputePass.h&quot;</span><span class="cp"></span>
+<span class="cp">#include</span> <span class="cpf">&quot;D3D12/D3D12Macros.h&quot;</span><span class="cp"></span>
+<span class="cp">#include</span> <span class="cpf">&quot;Memory/MonotonicAllocator.h&quot;</span><span class="cp"></span>
+<span class="cp">#include</span> <span class="cpf">&quot;Memory/MemoryFactory.h&quot;</span><span class="cp"></span>
+<span class="cp">#include</span> <span class="cpf">&quot;D3D12/D3D12TypeMapping.h&quot;</span><span class="cp"></span>
+
+<span class="k">using</span> <span class="k">namespace</span> <span class="n">Microsoft</span><span class="o">::</span><span class="n">WRL</span><span class="p">;</span>    <span class="c1">// NOLINT</span>
+<span class="k">using</span> <span class="k">namespace</span> <span class="n">Azura</span><span class="o">::</span><span class="n">Containers</span><span class="p">;</span> <span class="c1">// NOLINT</span>
+
+<span class="k">namespace</span> <span class="n">Azura</span> <span class="p">{</span>
+<span class="k">namespace</span> <span class="n">D3D12</span> <span class="p">{</span>
+
+<span class="n">D3D12ScopedComputePass</span><span class="o">::</span><span class="n">D3D12ScopedComputePass</span><span class="p">(</span><span class="n">U32</span> <span class="n">idx</span><span class="p">,</span> <span class="n">U32</span> <span class="n">internalId</span><span class="p">,</span>
+                                               <span class="n">Memory</span><span class="o">::</span><span class="n">Allocator</span><span class="o">&amp;</span> <span class="n">mainAllocator</span><span class="p">,</span>
+                                               <span class="n">Log</span> <span class="n">logger</span><span class="p">)</span>
+  <span class="o">:</span> <span class="n">log_D3D12RenderSystem</span><span class="p">(</span><span class="n">std</span><span class="o">::</span><span class="n">move</span><span class="p">(</span><span class="n">logger</span><span class="p">)),</span>
+    <span class="n">m_id</span><span class="p">(</span><span class="n">idx</span><span class="p">),</span>
+    <span class="n">m_internalId</span><span class="p">(</span><span class="n">internalId</span><span class="p">),</span>
+    <span class="n">m_rootSignatureTable</span><span class="p">(</span><span class="n">mainAllocator</span><span class="p">),</span>
+    <span class="n">m_passShaders</span><span class="p">(</span><span class="n">mainAllocator</span><span class="p">),</span>
+    <span class="n">m_computeOutputTargets</span><span class="p">(</span><span class="n">mainAllocator</span><span class="p">),</span>
+    <span class="n">m_computeOutputBuffers</span><span class="p">(</span><span class="n">mainAllocator</span><span class="p">),</span>
+    <span class="n">m_computeInputBuffers</span><span class="p">(</span><span class="n">mainAllocator</span><span class="p">),</span>
+    <span class="n">m_computeInputTargets</span><span class="p">(</span><span class="n">mainAllocator</span><span class="p">),</span>
+    <span class="n">m_computeDepthInputTargets</span><span class="p">(</span><span class="n">mainAllocator</span><span class="p">),</span>
+    <span class="n">m_allComputeInputTargets</span><span class="p">(</span><span class="n">mainAllocator</span><span class="p">)</span> <span class="p">{</span>
+<span class="p">}</span>
+
+<span class="kt">void</span> <span class="n">D3D12ScopedComputePass</span><span class="o">::</span><span class="n">Create</span><span class="p">(</span><span class="k">const</span> <span class="n">Microsoft</span><span class="o">::</span><span class="n">WRL</span><span class="o">::</span><span class="n">ComPtr</span><span class="o">&lt;</span><span class="n">ID3D12Device</span><span class="o">&gt;&amp;</span> <span class="n">device</span><span class="p">,</span>
+                                    <span class="k">const</span> <span class="n">PipelinePassCreateInfo</span><span class="o">&amp;</span> <span class="n">createInfo</span><span class="p">,</span>
+                                    <span class="k">const</span> <span class="n">Containers</span><span class="o">::</span><span class="n">Vector</span><span class="o">&lt;</span><span class="n">RenderTargetCreateInfo</span><span class="o">&gt;&amp;</span> <span class="n">targetCreateInfos</span><span class="p">,</span>
+                                    <span class="k">const</span> <span class="n">Containers</span><span class="o">::</span><span class="n">Vector</span><span class="o">&lt;</span><span class="n">D3D12ScopedImage</span><span class="o">&gt;&amp;</span> <span class="n">pipelineImages</span><span class="p">,</span>
+                                    <span class="k">const</span> <span class="n">Containers</span><span class="o">::</span><span class="n">Vector</span><span class="o">&lt;</span><span class="n">D3D12ScopedBuffer</span><span class="o">&gt;&amp;</span> <span class="n">pipelineStructuredBuffers</span><span class="p">,</span>
+                                    <span class="k">const</span> <span class="n">Containers</span><span class="o">::</span><span class="n">Vector</span><span class="o">&lt;</span><span class="n">DescriptorSlot</span><span class="o">&gt;&amp;</span> <span class="n">descriptorSlots</span><span class="p">,</span>
+                                    <span class="k">const</span> <span class="n">Containers</span><span class="o">::</span><span class="n">Vector</span><span class="o">&lt;</span><span class="n">DescriptorTableEntry</span><span class="o">&gt;&amp;</span> <span class="n">descriptorSetTable</span><span class="p">,</span>
+                                    <span class="k">const</span> <span class="n">Containers</span><span class="o">::</span><span class="n">Vector</span><span class="o">&lt;</span><span class="n">D3D12ScopedShader</span><span class="o">&gt;&amp;</span> <span class="n">allShaders</span><span class="p">)</span> <span class="p">{</span>
+
+  <span class="n">CreateBase</span><span class="p">(</span><span class="n">device</span><span class="p">,</span> <span class="n">createInfo</span><span class="p">,</span> <span class="n">descriptorSlots</span><span class="p">,</span> <span class="n">descriptorSetTable</span><span class="p">,</span> <span class="n">targetCreateInfos</span><span class="p">,</span> <span class="n">pipelineImages</span><span class="p">,</span> <span class="n">pipelineStructuredBuffers</span><span class="p">,</span> <span class="n">allShaders</span><span class="p">);</span>
+
+  <span class="n">D3D12ScopedCommandBuffer</span> <span class="n">primaryCmdBuffer</span> <span class="o">=</span> <span class="n">D3D12ScopedCommandBuffer</span><span class="p">(</span><span class="n">device</span><span class="p">,</span> <span class="n">D3D12_COMMAND_LIST_TYPE_COMPUTE</span><span class="p">,</span>
+                                                                       <span class="n">log_D3D12RenderSystem</span><span class="p">);</span>
+  <span class="n">primaryCmdBuffer</span><span class="p">.</span><span class="n">CreateGraphicsCommandList</span><span class="p">(</span><span class="n">device</span><span class="p">,</span> <span class="k">nullptr</span><span class="p">,</span> <span class="n">log_D3D12RenderSystem</span><span class="p">);</span>
+  <span class="n">m_commandBuffers</span><span class="p">.</span><span class="n">push_back</span><span class="p">(</span><span class="n">primaryCmdBuffer</span><span class="p">);</span>
+<span class="p">}</span>
+
+<span class="n">U32</span> <span class="n">D3D12ScopedComputePass</span><span class="o">::</span><span class="n">GetId</span><span class="p">()</span> <span class="k">const</span> <span class="p">{</span>
+  <span class="k">return</span> <span class="n">m_id</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="n">U32</span> <span class="n">D3D12ScopedComputePass</span><span class="o">::</span><span class="n">GetInternalId</span><span class="p">()</span> <span class="k">const</span> <span class="p">{</span>
+  <span class="k">return</span> <span class="n">m_internalId</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="n">ID3D12GraphicsCommandList</span><span class="o">*</span> <span class="n">D3D12ScopedComputePass</span><span class="o">::</span><span class="n">GetPrimaryComputeCommandList</span><span class="p">(</span><span class="n">U32</span> <span class="n">idx</span><span class="p">)</span> <span class="k">const</span> <span class="p">{</span>
+  <span class="k">return</span> <span class="n">m_commandBuffers</span><span class="p">[</span><span class="n">idx</span><span class="p">].</span><span class="n">GetGraphicsCommandList</span><span class="p">();</span>
+<span class="p">}</span>
+
+<span class="k">const</span> <span class="n">DescriptorCount</span><span class="o">&amp;</span> <span class="n">D3D12ScopedComputePass</span><span class="o">::</span><span class="n">GetDescriptorCount</span><span class="p">()</span> <span class="k">const</span> <span class="p">{</span>
+  <span class="k">return</span> <span class="n">m_descriptorCount</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="n">ID3D12RootSignature</span><span class="o">*</span> <span class="n">D3D12ScopedComputePass</span><span class="o">::</span><span class="n">GetRootSignature</span><span class="p">()</span> <span class="k">const</span> <span class="p">{</span>
+  <span class="k">return</span> <span class="n">m_rootSignature</span><span class="p">.</span><span class="n">Get</span><span class="p">();</span>
+<span class="p">}</span>
+
+<span class="k">const</span> <span class="n">Vector</span><span class="o">&lt;</span><span class="n">std</span><span class="o">::</span><span class="n">reference_wrapper</span><span class="o">&lt;</span><span class="k">const</span> <span class="n">D3D12ScopedShader</span><span class="o">&gt;&gt;&amp;</span> <span class="n">D3D12ScopedComputePass</span><span class="o">::</span><span class="n">GetShaders</span><span class="p">()</span> <span class="k">const</span> <span class="p">{</span>
+  <span class="k">return</span> <span class="n">m_passShaders</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="k">const</span> <span class="n">Vector</span><span class="o">&lt;</span><span class="n">std</span><span class="o">::</span><span class="n">reference_wrapper</span><span class="o">&lt;</span><span class="n">D3D12ScopedImage</span><span class="o">&gt;&gt;&amp;</span> <span class="n">D3D12ScopedComputePass</span><span class="o">::</span><span class="n">GetInputImages</span><span class="p">()</span> <span class="k">const</span> <span class="p">{</span>
+  <span class="k">return</span> <span class="n">m_allComputeInputTargets</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="k">const</span> <span class="n">Containers</span><span class="o">::</span><span class="n">Vector</span><span class="o">&lt;</span><span class="n">std</span><span class="o">::</span><span class="n">reference_wrapper</span><span class="o">&lt;</span><span class="n">D3D12ScopedBuffer</span><span class="o">&gt;&gt;&amp;</span> <span class="n">D3D12ScopedComputePass</span><span class="o">::</span><span class="n">GetInputBuffers</span><span class="p">()</span> <span class="k">const</span> <span class="p">{</span>
+  <span class="k">return</span> <span class="n">m_computeInputBuffers</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="k">const</span> <span class="n">Containers</span><span class="o">::</span><span class="n">Vector</span><span class="o">&lt;</span><span class="n">std</span><span class="o">::</span><span class="n">reference_wrapper</span><span class="o">&lt;</span><span class="n">D3D12ScopedBuffer</span><span class="o">&gt;&gt;&amp;</span> <span class="n">D3D12ScopedComputePass</span><span class="o">::</span><span class="n">GetOutputBuffers</span><span class="p">()</span> <span class="k">const</span> <span class="p">{</span>
+  <span class="k">return</span> <span class="n">m_computeOutputBuffers</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="k">const</span> <span class="n">Vector</span><span class="o">&lt;</span><span class="n">std</span><span class="o">::</span><span class="n">reference_wrapper</span><span class="o">&lt;</span><span class="n">D3D12ScopedImage</span><span class="o">&gt;&gt;&amp;</span> <span class="n">D3D12ScopedComputePass</span><span class="o">::</span><span class="n">GetOutputImages</span><span class="p">()</span> <span class="k">const</span> <span class="p">{</span>
+  <span class="k">return</span> <span class="n">m_computeOutputTargets</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="k">const</span> <span class="n">Vector</span><span class="o">&lt;</span><span class="n">DescriptorTableEntry</span><span class="o">&gt;&amp;</span> <span class="n">D3D12ScopedComputePass</span><span class="o">::</span><span class="n">GetRootSignatureTable</span><span class="p">()</span> <span class="k">const</span> <span class="p">{</span>
+  <span class="k">return</span> <span class="n">m_rootSignatureTable</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="kt">void</span> <span class="n">D3D12ScopedComputePass</span><span class="o">::</span><span class="n">RecordResourceBarriersForOutputsStart</span><span class="p">(</span><span class="n">ID3D12GraphicsCommandList</span><span class="o">*</span> <span class="n">commandList</span><span class="p">)</span> <span class="k">const</span> <span class="p">{</span>
+  <span class="k">for</span> <span class="p">(</span><span class="k">auto</span><span class="o">&amp;</span> <span class="nl">rtv</span> <span class="p">:</span> <span class="n">m_computeOutputTargets</span><span class="p">)</span> <span class="p">{</span>
+    <span class="n">rtv</span><span class="p">.</span><span class="n">get</span><span class="p">().</span><span class="n">Transition</span><span class="p">(</span><span class="n">commandList</span><span class="p">,</span> <span class="n">D3D12_RESOURCE_STATE_UNORDERED_ACCESS</span><span class="p">,</span> <span class="n">log_D3D12RenderSystem</span><span class="p">);</span>
+  <span class="p">}</span>
+
+  <span class="k">for</span> <span class="p">(</span><span class="k">auto</span><span class="o">&amp;</span> <span class="nl">buffer</span> <span class="p">:</span> <span class="n">m_computeOutputBuffers</span><span class="p">)</span> <span class="p">{</span>
+    <span class="n">buffer</span><span class="p">.</span><span class="n">get</span><span class="p">().</span><span class="n">Transition</span><span class="p">(</span><span class="n">commandList</span><span class="p">,</span> <span class="n">D3D12_RESOURCE_STATE_UNORDERED_ACCESS</span><span class="p">,</span> <span class="n">log_D3D12RenderSystem</span><span class="p">);</span>
+  <span class="p">}</span>
+<span class="p">}</span>
+
+<span class="kt">void</span> <span class="n">D3D12ScopedComputePass</span><span class="o">::</span><span class="n">RecordResourceBarriersForOutputsEnd</span><span class="p">(</span><span class="n">ID3D12GraphicsCommandList</span><span class="o">*</span> <span class="n">commandList</span><span class="p">)</span> <span class="k">const</span> <span class="p">{</span>
+  <span class="k">for</span> <span class="p">(</span><span class="k">auto</span><span class="o">&amp;</span> <span class="nl">rtv</span> <span class="p">:</span> <span class="n">m_computeOutputTargets</span><span class="p">)</span> <span class="p">{</span>
+    <span class="n">rtv</span><span class="p">.</span><span class="n">get</span><span class="p">().</span><span class="n">Transition</span><span class="p">(</span><span class="n">commandList</span><span class="p">,</span> <span class="n">D3D12_RESOURCE_STATE_COMMON</span><span class="p">,</span> <span class="n">log_D3D12RenderSystem</span><span class="p">);</span>
+  <span class="p">}</span>
+
+  <span class="k">for</span> <span class="p">(</span><span class="k">auto</span><span class="o">&amp;</span> <span class="nl">buffer</span> <span class="p">:</span> <span class="n">m_computeOutputBuffers</span><span class="p">)</span> <span class="p">{</span>
+    <span class="n">buffer</span><span class="p">.</span><span class="n">get</span><span class="p">().</span><span class="n">Transition</span><span class="p">(</span><span class="n">commandList</span><span class="p">,</span> <span class="n">D3D12_RESOURCE_STATE_COMMON</span><span class="p">,</span> <span class="n">log_D3D12RenderSystem</span><span class="p">);</span>
+  <span class="p">}</span>
+<span class="p">}</span>
+
+<span class="kt">void</span> <span class="n">D3D12ScopedComputePass</span><span class="o">::</span><span class="n">RecordResourceBarriersForInputsStart</span><span class="p">(</span><span class="n">ID3D12GraphicsCommandList</span><span class="o">*</span> <span class="n">commandList</span><span class="p">)</span> <span class="k">const</span> <span class="p">{</span>
+  <span class="k">for</span> <span class="p">(</span><span class="k">auto</span><span class="o">&amp;</span> <span class="nl">rtv</span> <span class="p">:</span> <span class="n">m_computeInputTargets</span><span class="p">)</span> <span class="p">{</span>
+    <span class="n">rtv</span><span class="p">.</span><span class="n">get</span><span class="p">().</span><span class="n">Transition</span><span class="p">(</span><span class="n">commandList</span><span class="p">,</span> <span class="n">D3D12_RESOURCE_STATE_NON_PIXEL_SHADER_RESOURCE</span><span class="p">,</span> <span class="n">log_D3D12RenderSystem</span><span class="p">);</span>
+  <span class="p">}</span>
+
+  <span class="k">for</span> <span class="p">(</span><span class="k">auto</span><span class="o">&amp;</span> <span class="nl">inputBuffer</span> <span class="p">:</span> <span class="n">m_computeInputBuffers</span><span class="p">)</span> <span class="p">{</span>
+    <span class="n">inputBuffer</span><span class="p">.</span><span class="n">get</span><span class="p">().</span><span class="n">Transition</span><span class="p">(</span><span class="n">commandList</span><span class="p">,</span> <span class="n">D3D12_RESOURCE_STATE_NON_PIXEL_SHADER_RESOURCE</span><span class="p">,</span> <span class="n">log_D3D12RenderSystem</span><span class="p">);</span>
+  <span class="p">}</span>
+
+  <span class="k">for</span> <span class="p">(</span><span class="k">auto</span><span class="o">&amp;</span> <span class="nl">dsv</span> <span class="p">:</span> <span class="n">m_computeDepthInputTargets</span><span class="p">)</span> <span class="p">{</span>
+    <span class="n">dsv</span><span class="p">.</span><span class="n">get</span><span class="p">().</span><span class="n">Transition</span><span class="p">(</span><span class="n">commandList</span><span class="p">,</span> <span class="n">D3D12_RESOURCE_STATE_NON_PIXEL_SHADER_RESOURCE</span><span class="p">,</span> <span class="n">log_D3D12RenderSystem</span><span class="p">);</span>
+  <span class="p">}</span>
+<span class="p">}</span>
+
+<span class="kt">void</span> <span class="n">D3D12ScopedComputePass</span><span class="o">::</span><span class="n">RecordResourceBarriersForInputsEnd</span><span class="p">(</span><span class="n">ID3D12GraphicsCommandList</span><span class="o">*</span> <span class="n">commandList</span><span class="p">)</span> <span class="k">const</span> <span class="p">{</span>
+  <span class="k">for</span> <span class="p">(</span><span class="k">auto</span><span class="o">&amp;</span> <span class="nl">rtv</span> <span class="p">:</span> <span class="n">m_computeInputTargets</span><span class="p">)</span> <span class="p">{</span>
+    <span class="n">rtv</span><span class="p">.</span><span class="n">get</span><span class="p">().</span><span class="n">Transition</span><span class="p">(</span><span class="n">commandList</span><span class="p">,</span> <span class="n">D3D12_RESOURCE_STATE_COMMON</span><span class="p">,</span> <span class="n">log_D3D12RenderSystem</span><span class="p">);</span>
+  <span class="p">}</span>
+
+  <span class="k">for</span> <span class="p">(</span><span class="k">auto</span><span class="o">&amp;</span> <span class="nl">inputBuffer</span> <span class="p">:</span> <span class="n">m_computeInputBuffers</span><span class="p">)</span> <span class="p">{</span>
+    <span class="n">inputBuffer</span><span class="p">.</span><span class="n">get</span><span class="p">().</span><span class="n">Transition</span><span class="p">(</span><span class="n">commandList</span><span class="p">,</span> <span class="n">D3D12_RESOURCE_STATE_COMMON</span><span class="p">,</span> <span class="n">log_D3D12RenderSystem</span><span class="p">);</span>
+  <span class="p">}</span>
+
+  <span class="k">for</span> <span class="p">(</span><span class="k">auto</span><span class="o">&amp;</span> <span class="nl">dsv</span> <span class="p">:</span> <span class="n">m_computeDepthInputTargets</span><span class="p">)</span> <span class="p">{</span>
+    <span class="n">dsv</span><span class="p">.</span><span class="n">get</span><span class="p">().</span><span class="n">Transition</span><span class="p">(</span><span class="n">commandList</span><span class="p">,</span> <span class="n">D3D12_RESOURCE_STATE_COMMON</span><span class="p">,</span> <span class="n">log_D3D12RenderSystem</span><span class="p">);</span>
+  <span class="p">}</span>
+<span class="p">}</span>
+
+<span class="kt">void</span> <span class="n">D3D12ScopedComputePass</span><span class="o">::</span><span class="n">WaitForGPU</span><span class="p">(</span><span class="n">ID3D12CommandQueue</span><span class="o">*</span> <span class="n">commandQueue</span><span class="p">)</span> <span class="p">{</span>
+  <span class="k">const</span> <span class="n">U32</span> <span class="n">fence</span> <span class="o">=</span> <span class="n">m_fenceValue</span><span class="p">;</span>
+  <span class="n">VERIFY_D3D_OP</span><span class="p">(</span><span class="n">log_D3D12RenderSystem</span><span class="p">,</span> <span class="n">commandQueue</span><span class="o">-&gt;</span><span class="n">Signal</span><span class="p">(</span><span class="n">m_signalFence</span><span class="p">.</span><span class="n">Get</span><span class="p">(),</span> <span class="n">m_fenceValue</span><span class="p">),</span> <span class="s">&quot;Fence wait failed&quot;</span><span class="p">);</span>
+  <span class="n">m_fenceValue</span><span class="o">++</span><span class="p">;</span>
+
+  <span class="c1">// Wait until the previous frame is finished.</span>
+  <span class="k">if</span> <span class="p">(</span><span class="n">m_signalFence</span><span class="o">-&gt;</span><span class="n">GetCompletedValue</span><span class="p">()</span> <span class="o">&lt;</span> <span class="n">fence</span><span class="p">)</span> <span class="p">{</span>
+    <span class="n">VERIFY_D3D_OP</span><span class="p">(</span><span class="n">log_D3D12RenderSystem</span><span class="p">,</span> <span class="n">m_signalFence</span><span class="o">-&gt;</span><span class="n">SetEventOnCompletion</span><span class="p">(</span><span class="n">fence</span><span class="p">,</span> <span class="n">m_fenceEvent</span><span class="p">),</span>
+      <span class="s">&quot;Failed to set event completion on Fence&quot;</span><span class="p">);</span>
+    <span class="n">WaitForSingleObject</span><span class="p">(</span><span class="n">m_fenceEvent</span><span class="p">,</span> <span class="n">INFINITE</span><span class="p">);</span>
+  <span class="p">}</span>
+
+<span class="p">}</span>
+
+<span class="n">U32</span> <span class="n">D3D12ScopedComputePass</span><span class="o">::</span><span class="n">GetCommandBufferCount</span><span class="p">()</span> <span class="k">const</span> <span class="p">{</span>
+  <span class="k">return</span> <span class="n">U32</span><span class="p">(</span><span class="n">m_commandBuffers</span><span class="p">.</span><span class="n">size</span><span class="p">());</span>
+<span class="p">}</span>
+
+<span class="n">U32</span> <span class="n">D3D12ScopedComputePass</span><span class="o">::</span><span class="n">GetInputTargetRootDescriptorTableId</span><span class="p">()</span> <span class="k">const</span> <span class="p">{</span>
+  <span class="k">return</span> <span class="n">m_computeInputTargetTableIdx</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="n">U32</span> <span class="n">D3D12ScopedComputePass</span><span class="o">::</span><span class="n">GetInputBufferRootDescriptorTableId</span><span class="p">()</span> <span class="k">const</span> <span class="p">{</span>
+  <span class="k">return</span> <span class="n">m_computeInputBufferTableIdx</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="n">U32</span> <span class="n">D3D12ScopedComputePass</span><span class="o">::</span><span class="n">GetOutputTargetsRootDescriptorTableId</span><span class="p">()</span> <span class="k">const</span> <span class="p">{</span>
+  <span class="k">return</span> <span class="n">m_computeOutputTargetTableIdx</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="n">U32</span> <span class="n">D3D12ScopedComputePass</span><span class="o">::</span><span class="n">GetOutputBuffersRootDescriptorTableId</span><span class="p">()</span> <span class="k">const</span> <span class="p">{</span>
+  <span class="k">return</span> <span class="n">m_computeOutputBufferTableIdx</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="kt">void</span> <span class="n">D3D12ScopedComputePass</span><span class="o">::</span><span class="n">CreateBase</span><span class="p">(</span>
+  <span class="k">const</span> <span class="n">Microsoft</span><span class="o">::</span><span class="n">WRL</span><span class="o">::</span><span class="n">ComPtr</span><span class="o">&lt;</span><span class="n">ID3D12Device</span><span class="o">&gt;&amp;</span> <span class="n">device</span><span class="p">,</span>
+  <span class="k">const</span> <span class="n">PipelinePassCreateInfo</span><span class="o">&amp;</span> <span class="n">createInfo</span><span class="p">,</span>
+  <span class="k">const</span> <span class="n">Containers</span><span class="o">::</span><span class="n">Vector</span><span class="o">&lt;</span><span class="n">DescriptorSlot</span><span class="o">&gt;&amp;</span> <span class="n">descriptorSlots</span><span class="p">,</span>
+  <span class="k">const</span> <span class="n">Containers</span><span class="o">::</span><span class="n">Vector</span><span class="o">&lt;</span><span class="n">DescriptorTableEntry</span><span class="o">&gt;&amp;</span> <span class="n">descriptorSetTable</span><span class="p">,</span>
+  <span class="k">const</span> <span class="n">Containers</span><span class="o">::</span><span class="n">Vector</span><span class="o">&lt;</span><span class="n">RenderTargetCreateInfo</span><span class="o">&gt;&amp;</span> <span class="n">targetCreateInfos</span><span class="p">,</span>
+  <span class="k">const</span> <span class="n">Containers</span><span class="o">::</span><span class="n">Vector</span><span class="o">&lt;</span><span class="n">D3D12ScopedImage</span><span class="o">&gt;&amp;</span> <span class="n">pipelineImages</span><span class="p">,</span>
+  <span class="k">const</span> <span class="n">Containers</span><span class="o">::</span><span class="n">Vector</span><span class="o">&lt;</span><span class="n">D3D12ScopedBuffer</span><span class="o">&gt;&amp;</span> <span class="n">pipelineStructuredBuffers</span><span class="p">,</span>
+  <span class="k">const</span> <span class="n">Containers</span><span class="o">::</span><span class="n">Vector</span><span class="o">&lt;</span><span class="n">D3D12ScopedShader</span><span class="o">&gt;&amp;</span> <span class="n">allShaders</span><span class="p">)</span> <span class="p">{</span>
+
+  <span class="n">STACK_ALLOCATOR</span><span class="p">(</span><span class="n">Temporary</span><span class="p">,</span> <span class="n">Memory</span><span class="o">::</span><span class="n">MonotonicAllocator</span><span class="p">,</span> <span class="mi">2048</span><span class="p">);</span>
+
+  <span class="n">VERIFY_D3D_OP</span><span class="p">(</span><span class="n">log_D3D12RenderSystem</span><span class="p">,</span> <span class="n">device</span><span class="o">-&gt;</span><span class="n">CreateFence</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">D3D12_FENCE_FLAG_NONE</span><span class="p">,</span> <span class="n">IID_PPV_ARGS</span><span class="p">(</span><span class="o">&amp;</span><span class="n">m_signalFence</span><span class="p">)),</span>
+    <span class="s">&quot;Failed to create fence&quot;</span><span class="p">);</span>
+
+  <span class="c1">// Create an event handle to use for frame synchronization.</span>
+  <span class="n">m_fenceEvent</span> <span class="o">=</span> <span class="n">CreateEvent</span><span class="p">(</span><span class="k">nullptr</span><span class="p">,</span> <span class="n">FALSE</span><span class="p">,</span> <span class="n">FALSE</span><span class="p">,</span> <span class="k">nullptr</span><span class="p">);</span>
+  <span class="k">if</span> <span class="p">(</span><span class="n">m_fenceEvent</span> <span class="o">==</span> <span class="k">nullptr</span><span class="p">)</span> <span class="p">{</span>
+    <span class="n">VERIFY_D3D_OP</span><span class="p">(</span><span class="n">log_D3D12RenderSystem</span><span class="p">,</span> <span class="n">HRESULT_FROM_WIN32</span><span class="p">(</span><span class="n">GetLastError</span><span class="p">()),</span> <span class="s">&quot;Fence Event Null&quot;</span><span class="p">);</span>
+  <span class="p">}</span>
+
+  <span class="n">m_passShaders</span><span class="p">.</span><span class="n">Reserve</span><span class="p">(</span><span class="n">U32</span><span class="p">(</span><span class="n">createInfo</span><span class="p">.</span><span class="n">m_shaders</span><span class="p">.</span><span class="n">size</span><span class="p">()));</span>
+  <span class="n">m_computeInputBuffers</span><span class="p">.</span><span class="n">Reserve</span><span class="p">(</span><span class="n">U32</span><span class="p">(</span><span class="n">createInfo</span><span class="p">.</span><span class="n">m_inputBuffers</span><span class="p">.</span><span class="n">size</span><span class="p">()));</span>
+  <span class="n">m_computeInputTargets</span><span class="p">.</span><span class="n">Reserve</span><span class="p">(</span><span class="n">U32</span><span class="p">(</span><span class="n">createInfo</span><span class="p">.</span><span class="n">m_inputTargets</span><span class="p">.</span><span class="n">size</span><span class="p">()));</span>
+  <span class="n">m_computeDepthInputTargets</span><span class="p">.</span><span class="n">Reserve</span><span class="p">(</span><span class="n">U32</span><span class="p">(</span><span class="n">createInfo</span><span class="p">.</span><span class="n">m_inputTargets</span><span class="p">.</span><span class="n">size</span><span class="p">()));</span>
+  <span class="n">m_allComputeInputTargets</span><span class="p">.</span><span class="n">Reserve</span><span class="p">(</span><span class="n">U32</span><span class="p">(</span><span class="n">createInfo</span><span class="p">.</span><span class="n">m_inputTargets</span><span class="p">.</span><span class="n">size</span><span class="p">()));</span>
+  <span class="n">m_computeOutputTargets</span><span class="p">.</span><span class="n">Reserve</span><span class="p">(</span><span class="n">U32</span><span class="p">(</span><span class="n">createInfo</span><span class="p">.</span><span class="n">m_outputTargets</span><span class="p">.</span><span class="n">size</span><span class="p">()));</span>
+  <span class="n">m_computeOutputBuffers</span><span class="p">.</span><span class="n">Reserve</span><span class="p">(</span><span class="n">U32</span><span class="p">(</span><span class="n">createInfo</span><span class="p">.</span><span class="n">m_outputBuffers</span><span class="p">.</span><span class="n">size</span><span class="p">()));</span>
+
+  <span class="k">for</span> <span class="p">(</span><span class="k">const</span> <span class="k">auto</span><span class="o">&amp;</span> <span class="nl">outputId</span> <span class="p">:</span> <span class="n">createInfo</span><span class="p">.</span><span class="n">m_outputTargets</span><span class="p">)</span> <span class="p">{</span>
+    <span class="n">m_computeOutputTargets</span><span class="p">.</span><span class="n">PushBack</span><span class="p">(</span><span class="n">pipelineImages</span><span class="p">[</span><span class="n">outputId</span><span class="p">]);</span>
+  <span class="p">}</span>
+
+  <span class="k">for</span> <span class="p">(</span><span class="k">const</span> <span class="k">auto</span><span class="o">&amp;</span> <span class="nl">outputId</span> <span class="p">:</span> <span class="n">createInfo</span><span class="p">.</span><span class="n">m_outputBuffers</span><span class="p">)</span> <span class="p">{</span>
+    <span class="n">m_computeOutputBuffers</span><span class="p">.</span><span class="n">PushBack</span><span class="p">(</span><span class="n">pipelineStructuredBuffers</span><span class="p">[</span><span class="n">outputId</span><span class="p">]);</span>
+  <span class="p">}</span>
+
+  <span class="k">for</span> <span class="p">(</span><span class="k">const</span> <span class="k">auto</span><span class="o">&amp;</span> <span class="nl">shaderId</span> <span class="p">:</span> <span class="n">createInfo</span><span class="p">.</span><span class="n">m_shaders</span><span class="p">)</span> <span class="p">{</span>
+    <span class="k">const</span> <span class="k">auto</span><span class="o">&amp;</span> <span class="n">shaderRef</span> <span class="o">=</span> <span class="n">allShaders</span><span class="p">[</span><span class="n">shaderId</span><span class="p">];</span>
+    <span class="n">m_passShaders</span><span class="p">.</span><span class="n">PushBack</span><span class="p">(</span><span class="n">shaderRef</span><span class="p">);</span>
+  <span class="p">}</span>
+
+  <span class="k">for</span> <span class="p">(</span><span class="k">const</span> <span class="k">auto</span><span class="o">&amp;</span> <span class="nl">inputId</span> <span class="p">:</span> <span class="n">createInfo</span><span class="p">.</span><span class="n">m_inputTargets</span><span class="p">)</span> <span class="p">{</span>
+    <span class="c1">// TODO(vasumahesh1):[?]: Respect shader stages here for correct binding</span>
+    <span class="k">const</span> <span class="k">auto</span><span class="o">&amp;</span> <span class="n">targetBufferRef</span> <span class="o">=</span> <span class="n">targetCreateInfos</span><span class="p">[</span><span class="n">inputId</span><span class="p">.</span><span class="n">m_id</span><span class="p">];</span>
+
+    <span class="k">if</span> <span class="p">(</span><span class="n">HasDepthOrStencilComponent</span><span class="p">(</span><span class="n">targetBufferRef</span><span class="p">.</span><span class="n">m_format</span><span class="p">))</span> <span class="p">{</span>
+      <span class="n">m_computeDepthInputTargets</span><span class="p">.</span><span class="n">PushBack</span><span class="p">(</span><span class="n">pipelineImages</span><span class="p">[</span><span class="n">inputId</span><span class="p">.</span><span class="n">m_id</span><span class="p">]);</span>
+    <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+      <span class="n">m_computeInputTargets</span><span class="p">.</span><span class="n">PushBack</span><span class="p">(</span><span class="n">pipelineImages</span><span class="p">[</span><span class="n">inputId</span><span class="p">.</span><span class="n">m_id</span><span class="p">]);</span>
+    <span class="p">}</span>
+
+    <span class="n">m_allComputeInputTargets</span><span class="p">.</span><span class="n">PushBack</span><span class="p">(</span><span class="n">pipelineImages</span><span class="p">[</span><span class="n">inputId</span><span class="p">.</span><span class="n">m_id</span><span class="p">]);</span>
+  <span class="p">}</span>
+
+  <span class="k">for</span> <span class="p">(</span><span class="k">const</span> <span class="k">auto</span><span class="o">&amp;</span> <span class="nl">inputBuffer</span> <span class="p">:</span> <span class="n">createInfo</span><span class="p">.</span><span class="n">m_inputBuffers</span><span class="p">)</span> <span class="p">{</span>
+    <span class="n">m_computeInputBuffers</span><span class="p">.</span><span class="n">PushBack</span><span class="p">(</span><span class="n">pipelineStructuredBuffers</span><span class="p">[</span><span class="n">inputBuffer</span><span class="p">.</span><span class="n">m_id</span><span class="p">]);</span>
+  <span class="p">}</span>
+
+  <span class="n">LOG_DBG</span><span class="p">(</span><span class="n">log_D3D12RenderSystem</span><span class="p">,</span> <span class="n">LOG_LEVEL</span><span class="p">,</span> <span class="s">&quot;======== D3D12 Render Pass: Root Signature ========&quot;</span><span class="p">);</span>
+
+  <span class="n">Vector</span><span class="o">&lt;</span><span class="n">CD3DX12_ROOT_PARAMETER</span><span class="o">&gt;</span> <span class="n">descriptorTables</span><span class="p">(</span><span class="n">U32</span><span class="p">(</span><span class="n">createInfo</span><span class="p">.</span><span class="n">m_descriptorSets</span><span class="p">.</span><span class="n">size</span><span class="p">()</span> <span class="o">+</span> <span class="mi">2</span><span class="p">),</span> <span class="n">allocatorTemporary</span><span class="p">);</span>
+
+  <span class="n">m_rootSignatureTable</span><span class="p">.</span><span class="n">Reserve</span><span class="p">(</span><span class="n">U32</span><span class="p">(</span><span class="n">createInfo</span><span class="p">.</span><span class="n">m_descriptorSets</span><span class="p">.</span><span class="n">size</span><span class="p">()));</span>
+
+  <span class="n">U32</span> <span class="n">cbvOffset</span>     <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+  <span class="n">U32</span> <span class="n">srvOffset</span>     <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+  <span class="n">U32</span> <span class="n">uavOffset</span>     <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+  <span class="n">U32</span> <span class="n">samplerOffset</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+
+  <span class="k">for</span> <span class="p">(</span><span class="k">const</span> <span class="k">auto</span><span class="o">&amp;</span> <span class="nl">setId</span> <span class="p">:</span> <span class="n">createInfo</span><span class="p">.</span><span class="n">m_descriptorSets</span><span class="p">)</span> <span class="p">{</span>
+    <span class="k">const</span> <span class="k">auto</span><span class="o">&amp;</span> <span class="n">tableEntry</span> <span class="o">=</span> <span class="n">descriptorSetTable</span><span class="p">[</span><span class="n">setId</span><span class="p">];</span>
+
+    <span class="n">LOG_DBG</span><span class="p">(</span><span class="n">log_D3D12RenderSystem</span><span class="p">,</span> <span class="n">LOG_LEVEL</span><span class="p">,</span> <span class="s">&quot;D3D12 Render Pass: Generating for Set Position: %d&quot;</span><span class="p">,</span> <span class="n">m_rootSignatureTable</span>
+      <span class="p">.</span><span class="n">GetSize</span><span class="p">());</span>
+    <span class="n">LOG_DBG</span><span class="p">(</span><span class="n">log_D3D12RenderSystem</span><span class="p">,</span> <span class="n">LOG_LEVEL</span><span class="p">,</span> <span class="s">&quot;D3D12 Render Pass: Original Set Position: %d&quot;</span><span class="p">,</span> <span class="n">setId</span><span class="p">);</span>
+
+    <span class="n">m_rootSignatureTable</span><span class="p">.</span><span class="n">PushBack</span><span class="p">(</span><span class="n">tableEntry</span><span class="p">);</span>
+
+    <span class="n">Vector</span><span class="o">&lt;</span><span class="n">CD3DX12_DESCRIPTOR_RANGE</span><span class="o">&gt;</span> <span class="n">currentRanges</span><span class="p">(</span><span class="n">tableEntry</span><span class="p">.</span><span class="n">m_count</span><span class="p">,</span> <span class="n">allocatorTemporary</span><span class="p">);</span>
+
+    <span class="k">for</span> <span class="p">(</span><span class="k">const</span> <span class="k">auto</span><span class="o">&amp;</span> <span class="nl">slot</span> <span class="p">:</span> <span class="n">descriptorSlots</span><span class="p">)</span> <span class="p">{</span>
+      <span class="k">if</span> <span class="p">(</span><span class="n">slot</span><span class="p">.</span><span class="n">m_setIdx</span> <span class="o">!=</span> <span class="n">setId</span><span class="p">)</span> <span class="p">{</span>
+        <span class="k">continue</span><span class="p">;</span>
+      <span class="p">}</span>
+
+      <span class="n">CD3DX12_DESCRIPTOR_RANGE</span> <span class="n">rangeData</span><span class="p">;</span>
+
+      <span class="k">switch</span> <span class="p">(</span><span class="n">slot</span><span class="p">.</span><span class="n">m_type</span><span class="p">)</span> <span class="p">{</span>
+        <span class="k">case</span> <span class="n">DescriptorType</span><span class="o">::</span><span class="nl">UniformBuffer</span><span class="p">:</span>
+          <span class="n">LOG_DBG</span><span class="p">(</span><span class="n">log_D3D12RenderSystem</span><span class="p">,</span> <span class="n">LOG_LEVEL</span><span class="p">,</span> <span class="s">&quot;D3D12 Render Pass: [%d] Applying Uniform Buffer at Register b(%d)&quot;</span><span class="p">,</span>
+            <span class="n">setId</span><span class="p">,</span> <span class="n">cbvOffset</span><span class="p">);</span>
+
+          <span class="n">rangeData</span><span class="p">.</span><span class="n">Init</span><span class="p">(</span><span class="n">D3D12_DESCRIPTOR_RANGE_TYPE_CBV</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="n">cbvOffset</span><span class="p">);</span>
+          <span class="n">currentRanges</span><span class="p">.</span><span class="n">PushBack</span><span class="p">(</span><span class="n">rangeData</span><span class="p">);</span>
+          <span class="o">++</span><span class="n">cbvOffset</span><span class="p">;</span>
+
+          <span class="o">++</span><span class="n">m_descriptorCount</span><span class="p">.</span><span class="n">m_numUniformSlots</span><span class="p">;</span>
+          <span class="k">break</span><span class="p">;</span>
+
+        <span class="k">case</span> <span class="n">DescriptorType</span><span class="o">::</span><span class="nl">Sampler</span><span class="p">:</span>
+          <span class="n">LOG_DBG</span><span class="p">(</span><span class="n">log_D3D12RenderSystem</span><span class="p">,</span> <span class="n">LOG_LEVEL</span><span class="p">,</span> <span class="s">&quot;D3D12 Render Pass: [%d] Applying Sampler Buffer at Register s(%d)&quot;</span><span class="p">,</span>
+            <span class="n">setId</span><span class="p">,</span> <span class="n">samplerOffset</span><span class="p">);</span>
+
+          <span class="n">rangeData</span><span class="p">.</span><span class="n">Init</span><span class="p">(</span><span class="n">D3D12_DESCRIPTOR_RANGE_TYPE_SAMPLER</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="n">samplerOffset</span><span class="p">);</span>
+          <span class="n">currentRanges</span><span class="p">.</span><span class="n">PushBack</span><span class="p">(</span><span class="n">rangeData</span><span class="p">);</span>
+          <span class="o">++</span><span class="n">samplerOffset</span><span class="p">;</span>
+
+          <span class="o">++</span><span class="n">m_descriptorCount</span><span class="p">.</span><span class="n">m_numSamplerSlots</span><span class="p">;</span>
+          <span class="k">break</span><span class="p">;</span>
+
+        <span class="k">case</span> <span class="n">DescriptorType</span><span class="o">::</span><span class="nl">SampledImage</span><span class="p">:</span>
+          <span class="n">LOG_DBG</span><span class="p">(</span><span class="n">log_D3D12RenderSystem</span><span class="p">,</span> <span class="n">LOG_LEVEL</span><span class="p">,</span> <span class="s">&quot;D3D12 Render Pass: [%d] Applying Texture Image at Register t(%d)&quot;</span><span class="p">,</span>
+            <span class="n">setId</span><span class="p">,</span> <span class="n">srvOffset</span><span class="p">);</span>
+
+          <span class="n">rangeData</span><span class="p">.</span><span class="n">Init</span><span class="p">(</span><span class="n">D3D12_DESCRIPTOR_RANGE_TYPE_SRV</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="n">srvOffset</span><span class="p">);</span>
+          <span class="n">currentRanges</span><span class="p">.</span><span class="n">PushBack</span><span class="p">(</span><span class="n">rangeData</span><span class="p">);</span>
+          <span class="o">++</span><span class="n">srvOffset</span><span class="p">;</span>
+
+          <span class="o">++</span><span class="n">m_descriptorCount</span><span class="p">.</span><span class="n">m_numSampledImageSlots</span><span class="p">;</span>
+          <span class="k">break</span><span class="p">;</span>
+
+        <span class="k">case</span> <span class="n">DescriptorType</span><span class="o">::</span><span class="nl">UnorderedView</span><span class="p">:</span>
+          <span class="n">LOG_DBG</span><span class="p">(</span><span class="n">log_D3D12RenderSystem</span><span class="p">,</span> <span class="n">LOG_LEVEL</span><span class="p">,</span> <span class="s">&quot;D3D12 Render Pass: [%d] Applying UAV at Register t(%d)&quot;</span><span class="p">,</span>
+            <span class="n">setId</span><span class="p">,</span> <span class="n">uavOffset</span><span class="p">);</span>
+
+          <span class="n">rangeData</span><span class="p">.</span><span class="n">Init</span><span class="p">(</span><span class="n">D3D12_DESCRIPTOR_RANGE_TYPE_UAV</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="n">uavOffset</span><span class="p">);</span>
+          <span class="n">currentRanges</span><span class="p">.</span><span class="n">PushBack</span><span class="p">(</span><span class="n">rangeData</span><span class="p">);</span>
+          <span class="o">++</span><span class="n">uavOffset</span><span class="p">;</span>
+
+          <span class="o">++</span><span class="n">m_descriptorCount</span><span class="p">.</span><span class="n">m_numUnorderedViewSlots</span><span class="p">;</span>
+          <span class="k">break</span><span class="p">;</span>
+
+        <span class="k">case</span> <span class="n">DescriptorType</span><span class="o">::</span><span class="nl">PushConstant</span><span class="p">:</span>
+        <span class="k">case</span> <span class="n">DescriptorType</span><span class="o">::</span><span class="nl">CombinedImageSampler</span><span class="p">:</span>
+        <span class="k">default</span><span class="o">:</span>
+          <span class="n">LOG_ERR</span><span class="p">(</span><span class="n">log_D3D12RenderSystem</span><span class="p">,</span> <span class="n">LOG_LEVEL</span><span class="p">,</span> <span class="s">&quot;Unsupported Descriptor Type for D3D12&quot;</span><span class="p">);</span>
+          <span class="k">break</span><span class="p">;</span>
+      <span class="p">}</span>
+    <span class="p">}</span>
+
+    <span class="n">CD3DX12_ROOT_PARAMETER</span> <span class="n">rootParameter</span><span class="p">;</span>
+    <span class="n">rootParameter</span><span class="p">.</span><span class="n">InitAsDescriptorTable</span><span class="p">(</span><span class="n">currentRanges</span><span class="p">.</span><span class="n">GetSize</span><span class="p">(),</span> <span class="n">currentRanges</span><span class="p">.</span><span class="n">Data</span><span class="p">(),</span> <span class="n">D3D12_SHADER_VISIBILITY_ALL</span><span class="p">);</span>
+    <span class="n">descriptorTables</span><span class="p">.</span><span class="n">PushBack</span><span class="p">(</span><span class="n">rootParameter</span><span class="p">);</span>
+  <span class="p">}</span>
+
+  <span class="n">CD3DX12_ROOT_PARAMETER</span> <span class="n">inputsRootParameter</span><span class="p">;</span>
+  <span class="n">CD3DX12_ROOT_PARAMETER</span> <span class="n">ouputsRootParameter</span><span class="p">;</span>
+  <span class="n">CD3DX12_DESCRIPTOR_RANGE</span> <span class="n">inputTargetRangeData</span><span class="p">;</span>
+  <span class="n">CD3DX12_DESCRIPTOR_RANGE</span> <span class="n">inputBufferRangeData</span><span class="p">;</span>
+  <span class="n">CD3DX12_DESCRIPTOR_RANGE</span> <span class="n">outputRangeData</span><span class="p">;</span>
+
+  <span class="c1">// Have some inputs targets</span>
+  <span class="k">if</span> <span class="p">(</span><span class="o">!</span><span class="n">createInfo</span><span class="p">.</span><span class="n">m_inputTargets</span><span class="p">.</span><span class="n">empty</span><span class="p">())</span> <span class="p">{</span>
+    <span class="n">LOG_DBG</span><span class="p">(</span><span class="n">log_D3D12RenderSystem</span><span class="p">,</span> <span class="n">LOG_LEVEL</span><span class="p">,</span> <span class="s">&quot;D3D12 Render Pass: Generating SRV for Set Position: %d&quot;</span><span class="p">,</span> <span class="n">descriptorTables</span><span class="p">.</span>
+      <span class="n">GetSize</span><span class="p">());</span>
+    <span class="n">LOG_DBG</span><span class="p">(</span><span class="n">log_D3D12RenderSystem</span><span class="p">,</span> <span class="n">LOG_LEVEL</span><span class="p">,</span>
+      <span class="s">&quot;D3D12 Render Pass: [Attachments] Applying %d Image Attachments as register t(%d) to t(%d)&quot;</span><span class="p">,</span> <span class="n">createInfo</span><span class="p">.</span><span class="n">m_inputTargets</span><span class="p">.</span>
+      <span class="n">size</span><span class="p">(),</span> <span class="n">srvOffset</span><span class="p">,</span> <span class="n">srvOffset</span> <span class="o">+</span> <span class="n">createInfo</span><span class="p">.</span><span class="n">m_inputTargets</span><span class="p">.</span><span class="n">size</span><span class="p">()</span> <span class="o">-</span> <span class="mi">1</span><span class="p">);</span>
+
+    <span class="n">inputTargetRangeData</span><span class="p">.</span><span class="n">Init</span><span class="p">(</span><span class="n">D3D12_DESCRIPTOR_RANGE_TYPE_SRV</span><span class="p">,</span> <span class="n">UINT</span><span class="p">(</span><span class="n">createInfo</span><span class="p">.</span><span class="n">m_inputTargets</span><span class="p">.</span><span class="n">size</span><span class="p">()),</span> <span class="n">srvOffset</span><span class="p">);</span>
+    <span class="n">inputsRootParameter</span><span class="p">.</span><span class="n">InitAsDescriptorTable</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="o">&amp;</span><span class="n">inputTargetRangeData</span><span class="p">,</span> <span class="n">D3D12_SHADER_VISIBILITY_ALL</span><span class="p">);</span>
+
+    <span class="n">m_computeInputTargetTableIdx</span> <span class="o">=</span> <span class="n">descriptorTables</span><span class="p">.</span><span class="n">GetSize</span><span class="p">();</span>
+
+    <span class="n">descriptorTables</span><span class="p">.</span><span class="n">PushBack</span><span class="p">(</span><span class="n">inputsRootParameter</span><span class="p">);</span>
+
+    <span class="n">srvOffset</span> <span class="o">+=</span> <span class="n">U32</span><span class="p">(</span><span class="n">createInfo</span><span class="p">.</span><span class="n">m_inputTargets</span><span class="p">.</span><span class="n">size</span><span class="p">());</span>
+  <span class="p">}</span>
+
+  <span class="c1">// Have some inputs buffers</span>
+  <span class="k">if</span> <span class="p">(</span><span class="o">!</span><span class="n">createInfo</span><span class="p">.</span><span class="n">m_inputBuffers</span><span class="p">.</span><span class="n">empty</span><span class="p">())</span> <span class="p">{</span>
+    <span class="n">LOG_DBG</span><span class="p">(</span><span class="n">log_D3D12RenderSystem</span><span class="p">,</span> <span class="n">LOG_LEVEL</span><span class="p">,</span> <span class="s">&quot;D3D12 Render Pass: Generating SRV for Set Position: %d&quot;</span><span class="p">,</span> <span class="n">descriptorTables</span><span class="p">.</span>
+      <span class="n">GetSize</span><span class="p">());</span>
+    <span class="n">LOG_DBG</span><span class="p">(</span><span class="n">log_D3D12RenderSystem</span><span class="p">,</span> <span class="n">LOG_LEVEL</span><span class="p">,</span>
+      <span class="s">&quot;D3D12 Render Pass: [Attachments] Applying %d Buffer Attachments as register t(%d) to t(%d)&quot;</span><span class="p">,</span> <span class="n">createInfo</span><span class="p">.</span><span class="n">m_inputBuffers</span><span class="p">.</span>
+      <span class="n">size</span><span class="p">(),</span> <span class="n">srvOffset</span><span class="p">,</span> <span class="n">srvOffset</span> <span class="o">+</span> <span class="n">createInfo</span><span class="p">.</span><span class="n">m_inputBuffers</span><span class="p">.</span><span class="n">size</span><span class="p">()</span> <span class="o">-</span> <span class="mi">1</span><span class="p">);</span>
+
+    <span class="n">inputBufferRangeData</span><span class="p">.</span><span class="n">Init</span><span class="p">(</span><span class="n">D3D12_DESCRIPTOR_RANGE_TYPE_SRV</span><span class="p">,</span> <span class="n">UINT</span><span class="p">(</span><span class="n">createInfo</span><span class="p">.</span><span class="n">m_inputBuffers</span><span class="p">.</span><span class="n">size</span><span class="p">()),</span> <span class="n">srvOffset</span><span class="p">);</span>
+    <span class="n">inputsRootParameter</span><span class="p">.</span><span class="n">InitAsDescriptorTable</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="o">&amp;</span><span class="n">inputBufferRangeData</span><span class="p">,</span> <span class="n">D3D12_SHADER_VISIBILITY_ALL</span><span class="p">);</span>
+
+    <span class="n">m_computeInputBufferTableIdx</span> <span class="o">=</span> <span class="n">descriptorTables</span><span class="p">.</span><span class="n">GetSize</span><span class="p">();</span>
+
+    <span class="n">descriptorTables</span><span class="p">.</span><span class="n">PushBack</span><span class="p">(</span><span class="n">inputsRootParameter</span><span class="p">);</span>
+    <span class="n">srvOffset</span> <span class="o">+=</span> <span class="n">U32</span><span class="p">(</span><span class="n">createInfo</span><span class="p">.</span><span class="n">m_inputBuffers</span><span class="p">.</span><span class="n">size</span><span class="p">());</span> <span class="c1">// NOLINT</span>
+  <span class="p">}</span>
+
+  <span class="k">if</span> <span class="p">(</span><span class="o">!</span><span class="n">createInfo</span><span class="p">.</span><span class="n">m_outputTargets</span><span class="p">.</span><span class="n">empty</span><span class="p">())</span> <span class="p">{</span>
+    <span class="n">LOG_DBG</span><span class="p">(</span><span class="n">log_D3D12RenderSystem</span><span class="p">,</span> <span class="n">LOG_LEVEL</span><span class="p">,</span> <span class="s">&quot;D3D12 Render Pass: Generating UAV for Set Position: %d&quot;</span><span class="p">,</span> <span class="n">descriptorTables</span><span class="p">.</span>
+      <span class="n">GetSize</span><span class="p">());</span>
+    <span class="n">LOG_DBG</span><span class="p">(</span><span class="n">log_D3D12RenderSystem</span><span class="p">,</span> <span class="n">LOG_LEVEL</span><span class="p">,</span>
+      <span class="s">&quot;D3D12 Render Pass: [Output Attachments] Applying %d Image Attachments as register t(%d) to t(%d)&quot;</span><span class="p">,</span> <span class="n">createInfo</span><span class="p">.</span><span class="n">m_outputTargets</span><span class="p">.</span>
+      <span class="n">size</span><span class="p">(),</span> <span class="n">uavOffset</span><span class="p">,</span> <span class="n">uavOffset</span> <span class="o">+</span> <span class="n">createInfo</span><span class="p">.</span><span class="n">m_outputTargets</span><span class="p">.</span><span class="n">size</span><span class="p">()</span> <span class="o">-</span> <span class="mi">1</span><span class="p">);</span>
+
+    <span class="n">outputRangeData</span><span class="p">.</span><span class="n">Init</span><span class="p">(</span><span class="n">D3D12_DESCRIPTOR_RANGE_TYPE_UAV</span><span class="p">,</span> <span class="n">UINT</span><span class="p">(</span><span class="n">createInfo</span><span class="p">.</span><span class="n">m_outputTargets</span><span class="p">.</span><span class="n">size</span><span class="p">()),</span> <span class="n">uavOffset</span><span class="p">);</span>
+    <span class="n">ouputsRootParameter</span><span class="p">.</span><span class="n">InitAsDescriptorTable</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="o">&amp;</span><span class="n">outputRangeData</span><span class="p">,</span> <span class="n">D3D12_SHADER_VISIBILITY_ALL</span><span class="p">);</span>
+
+    <span class="n">m_computeOutputTargetTableIdx</span> <span class="o">=</span> <span class="n">descriptorTables</span><span class="p">.</span><span class="n">GetSize</span><span class="p">();</span>
+
+    <span class="n">descriptorTables</span><span class="p">.</span><span class="n">PushBack</span><span class="p">(</span><span class="n">ouputsRootParameter</span><span class="p">);</span>
+  <span class="p">}</span>
+
+  <span class="k">if</span> <span class="p">(</span><span class="o">!</span><span class="n">createInfo</span><span class="p">.</span><span class="n">m_outputBuffers</span><span class="p">.</span><span class="n">empty</span><span class="p">())</span> <span class="p">{</span>
+    <span class="n">LOG_DBG</span><span class="p">(</span><span class="n">log_D3D12RenderSystem</span><span class="p">,</span> <span class="n">LOG_LEVEL</span><span class="p">,</span> <span class="s">&quot;D3D12 Render Pass: Generating UAV for Set Position: %d&quot;</span><span class="p">,</span> <span class="n">descriptorTables</span><span class="p">.</span>
+      <span class="n">GetSize</span><span class="p">());</span>
+    <span class="n">LOG_DBG</span><span class="p">(</span><span class="n">log_D3D12RenderSystem</span><span class="p">,</span> <span class="n">LOG_LEVEL</span><span class="p">,</span>
+      <span class="s">&quot;D3D12 Render Pass: [Output Attachments] Applying %d Buffer Attachments as register t(%d) to t(%d)&quot;</span><span class="p">,</span> <span class="n">createInfo</span><span class="p">.</span><span class="n">m_outputTargets</span><span class="p">.</span>
+      <span class="n">size</span><span class="p">(),</span> <span class="n">uavOffset</span><span class="p">,</span> <span class="n">uavOffset</span> <span class="o">+</span> <span class="n">createInfo</span><span class="p">.</span><span class="n">m_outputBuffers</span><span class="p">.</span><span class="n">size</span><span class="p">()</span> <span class="o">-</span> <span class="mi">1</span><span class="p">);</span>
+
+    <span class="n">outputRangeData</span><span class="p">.</span><span class="n">Init</span><span class="p">(</span><span class="n">D3D12_DESCRIPTOR_RANGE_TYPE_UAV</span><span class="p">,</span> <span class="n">UINT</span><span class="p">(</span><span class="n">createInfo</span><span class="p">.</span><span class="n">m_outputBuffers</span><span class="p">.</span><span class="n">size</span><span class="p">()),</span> <span class="n">uavOffset</span><span class="p">);</span>
+    <span class="n">ouputsRootParameter</span><span class="p">.</span><span class="n">InitAsDescriptorTable</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="o">&amp;</span><span class="n">outputRangeData</span><span class="p">,</span> <span class="n">D3D12_SHADER_VISIBILITY_ALL</span><span class="p">);</span>
+
+    <span class="n">m_computeOutputBufferTableIdx</span> <span class="o">=</span> <span class="n">descriptorTables</span><span class="p">.</span><span class="n">GetSize</span><span class="p">();</span>
+
+    <span class="n">descriptorTables</span><span class="p">.</span><span class="n">PushBack</span><span class="p">(</span><span class="n">ouputsRootParameter</span><span class="p">);</span>
+  <span class="p">}</span>
+
+  <span class="n">CD3DX12_ROOT_SIGNATURE_DESC</span> <span class="n">rootSignatureDesc</span><span class="p">;</span>
+  <span class="n">rootSignatureDesc</span><span class="p">.</span><span class="n">Init</span><span class="p">(</span><span class="n">descriptorTables</span><span class="p">.</span><span class="n">GetSize</span><span class="p">(),</span> <span class="n">descriptorTables</span><span class="p">.</span><span class="n">Data</span><span class="p">(),</span> <span class="mi">0</span><span class="p">,</span> <span class="k">nullptr</span><span class="p">,</span>
+                         <span class="n">D3D12_ROOT_SIGNATURE_FLAG_ALLOW_INPUT_ASSEMBLER_INPUT_LAYOUT</span><span class="p">);</span>
+
+  <span class="n">ComPtr</span><span class="o">&lt;</span><span class="n">ID3DBlob</span><span class="o">&gt;</span> <span class="n">signature</span><span class="p">;</span>
+  <span class="n">ComPtr</span><span class="o">&lt;</span><span class="n">ID3DBlob</span><span class="o">&gt;</span> <span class="n">error</span><span class="p">;</span>
+  <span class="n">VERIFY_D3D_OP</span><span class="p">(</span><span class="n">log_D3D12RenderSystem</span><span class="p">,</span> <span class="n">D3D12SerializeRootSignature</span><span class="p">(</span><span class="o">&amp;</span><span class="n">rootSignatureDesc</span><span class="p">,</span> <span class="n">D3D_ROOT_SIGNATURE_VERSION_1</span><span class="p">,</span> <span class="o">&amp;</span>
+    <span class="n">signature</span><span class="p">,</span> <span class="o">&amp;</span><span class="n">error</span><span class="p">),</span> <span class="s">&quot;Failed to serialize D3D12 Root Signature&quot;</span><span class="p">);</span>
+
+  <span class="n">VERIFY_D3D_OP</span><span class="p">(</span><span class="n">log_D3D12RenderSystem</span><span class="p">,</span> <span class="n">device</span><span class="o">-&gt;</span><span class="n">CreateRootSignature</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">signature</span><span class="o">-&gt;</span><span class="n">GetBufferPointer</span><span class="p">(),</span> <span class="n">signature</span><span class="o">-&gt;</span>
+    <span class="n">GetBufferSize</span><span class="p">(),</span> <span class="n">IID_PPV_ARGS</span><span class="p">(</span><span class="o">&amp;</span><span class="n">m_rootSignature</span><span class="p">)),</span> <span class="s">&quot;Failed to create Root Signature&quot;</span><span class="p">);</span>
+
+  <span class="n">LOG_DBG</span><span class="p">(</span><span class="n">log_D3D12RenderSystem</span><span class="p">,</span> <span class="n">LOG_LEVEL</span><span class="p">,</span> <span class="s">&quot;D3D12 Render Pass: Completed Root Signature&quot;</span><span class="p">);</span>
+
+<span class="p">}</span>
+<span class="p">}</span> <span class="c1">// namespace D3D12</span>
+<span class="p">}</span> <span class="c1">// namespace Azura</span>
+</pre></div>
+</div>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="file_Source_Azura_RenderSystem_Inc_D3D12_D3D12ScopedComputePass.h.html" class="btn btn-neutral float-right" title="File D3D12ScopedComputePass.h" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="file_Source_Azura_RenderSystem_Src_D3D12_D3D12ScopedComputePass.cpp.html" class="btn btn-neutral" title="File D3D12ScopedComputePass.cpp" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2018, Vasu Mahesh
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  
+
+    
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+        <script type="text/javascript" src="../_static/jquery.js"></script>
+        <script type="text/javascript" src="../_static/underscore.js"></script>
+        <script type="text/javascript" src="../_static/doctools.js"></script>
+        <script type="text/javascript" src="../_static/collapsible-lists\js\CollapsibleLists.compressed.js"></script>
+        <script type="text/javascript" src="../_static/collapsible-lists\js\apply-collapsible-lists.js"></script>
+    
+
+  
+
+  <script type="text/javascript" src="../_static/js/theme.js"></script>
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

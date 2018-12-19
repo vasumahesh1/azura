@@ -1,0 +1,567 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>Template Class Array &mdash; Azura  documentation</title>
+  
+
+  
+  
+  
+  
+
+  
+
+  
+  
+    
+
+  
+
+  <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/collapsible-lists\css\tree_view.css" type="text/css" />
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Class Array::Iterator" href="class_azura_1_1_containers_1_1_array_1_1_iterator.html" />
+    <link rel="prev" title="Class ComputePool" href="class_azura_1_1_compute_pool.html" /> 
+
+  
+  <script src="../_static/js/modernizr.min.js"></script>
+
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search">
+          
+
+          
+            <a href="../index.html" class="icon icon-home"> Azura
+          
+
+          
+          </a>
+
+          
+            
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <ul>
+<li class="toctree-l1"><a class="reference internal" href="../setting-up.html">Setting Up</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../build-instructions.html">Build Instructions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../cmake-wrappers.html">CMake Wrappers</a></li>
+<li class="toctree-l1"><a class="reference internal" href="apiRoot.html">Azura API</a></li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">Azura</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../index.html">Docs</a> &raquo;</li>
+        
+          <li><a href="apiRoot.html">Azura API</a> &raquo;</li>
+        
+      <li>Template Class Array</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            <a href="../_sources/html/class_azura_1_1_containers_1_1_array.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="template-class-array">
+<span id="exhale-class-class-azura-1-1-containers-1-1-array"></span><h1>Template Class Array<a class="headerlink" href="#template-class-array" title="Permalink to this headline">¶</a></h1>
+<ul class="simple">
+<li>Defined in <a class="reference internal" href="file_Source_Containers_Inc_Containers_Array.h.html#file-source-containers-inc-containers-array-h"><span class="std std-ref">File Array.h</span></a></li>
+</ul>
+<div class="section" id="nested-relationships">
+<h2>Nested Relationships<a class="headerlink" href="#nested-relationships" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="nested-types">
+<h3>Nested Types<a class="headerlink" href="#nested-types" title="Permalink to this headline">¶</a></h3>
+<ul class="simple">
+<li><a class="reference internal" href="class_azura_1_1_containers_1_1_array_1_1_iterator.html#exhale-class-class-azura-1-1-containers-1-1-array-1-1-iterator"><span class="std std-ref">Class Array::Iterator</span></a></li>
+</ul>
+</div>
+</div>
+<div class="section" id="class-documentation">
+<h2>Class Documentation<a class="headerlink" href="#class-documentation" title="Permalink to this headline">¶</a></h2>
+<dl class="class">
+<dt id="_CPPv3N5Azura10Containers5ArrayE">
+<span id="_CPPv2N5Azura10Containers5ArrayE"></span><span id="Azura::Containers::Array"></span><span class="target" id="class_azura_1_1_containers_1_1_array"></span><em class="property">template </em>&lt;typename <em>Type</em>, U32 <em>MaxSize</em>&gt;<br /><em class="property">class </em><code class="descname">Array</code><a class="headerlink" href="#_CPPv3N5Azura10Containers5ArrayE" title="Permalink to this definition">¶</a><br /></dt>
+<dd><div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric">Public Functions</p>
+<dl class="function">
+<dt id="_CPPv3N5Azura10Containers5Array5ArrayERN6Memory9AllocatorE">
+<span id="_CPPv2N5Azura10Containers5Array5ArrayERN6Memory9AllocatorE"></span><span id="Azura::Containers::Array::Array__Memory::AllocatorR"></span><span class="target" id="class_azura_1_1_containers_1_1_array_1ab2ab8c5a382f700869bbf3ceff0835b6"></span><code class="descname">Array</code><span class="sig-paren">(</span>Memory::<a class="reference internal" href="class_azura_1_1_memory_1_1_allocator.html#_CPPv3N5Azura6Memory9AllocatorE" title="Azura::Memory::Allocator">Allocator</a> &amp;<em>alloc</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv3N5Azura10Containers5Array5ArrayERN6Memory9AllocatorE" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt id="_CPPv3N5Azura10Containers5ArrayD0Ev">
+<span id="_CPPv2N5Azura10Containers5ArrayD0Ev"></span><span id="Azura::Containers::Array::~Array"></span><span class="target" id="class_azura_1_1_containers_1_1_array_1a66eea2be11ba6fa2377453484fff393c"></span><code class="descname">~Array</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv3N5Azura10Containers5ArrayD0Ev" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt id="_CPPv3N5Azura10Containers5Array5ArrayERK5Array">
+<span id="_CPPv2N5Azura10Containers5Array5ArrayERK5Array"></span><span id="Azura::Containers::Array::Array__ArrayCR"></span><span class="target" id="class_azura_1_1_containers_1_1_array_1a935982492eb9ae02a694158461feab49"></span><code class="descname">Array</code><span class="sig-paren">(</span><em class="property">const</em> <a class="reference internal" href="#_CPPv3N5Azura10Containers5Array5ArrayERN6Memory9AllocatorE" title="Azura::Containers::Array::Array">Array</a> &amp;<em>other</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv3N5Azura10Containers5Array5ArrayERK5Array" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt id="_CPPv3N5Azura10Containers5Array5ArrayERR5Array">
+<span id="_CPPv2N5Azura10Containers5Array5ArrayERR5Array"></span><span id="Azura::Containers::Array::Array__ArrayRR"></span><span class="target" id="class_azura_1_1_containers_1_1_array_1a43bb1e4487f385f0c90461fc0ea448b0"></span><code class="descname">Array</code><span class="sig-paren">(</span><a class="reference internal" href="#_CPPv3N5Azura10Containers5Array5ArrayERN6Memory9AllocatorE" title="Azura::Containers::Array::Array">Array</a> &amp;&amp;<em>other</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv3N5Azura10Containers5Array5ArrayERR5Array" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt id="_CPPv3N5Azura10Containers5ArrayaSERK5Array">
+<span id="_CPPv2N5Azura10Containers5ArrayaSERK5Array"></span><span id="Azura::Containers::Array::assign-operator__ArrayCR"></span><span class="target" id="class_azura_1_1_containers_1_1_array_1a0b456460eb9794fb1b7715ef06227c42"></span><a class="reference internal" href="#_CPPv3N5Azura10Containers5ArrayE" title="Azura::Containers::Array">Array</a>&lt;Type, MaxSize&gt; &amp;<code class="descname">operator=</code><span class="sig-paren">(</span><em class="property">const</em> <a class="reference internal" href="#_CPPv3N5Azura10Containers5ArrayE" title="Azura::Containers::Array">Array</a> &amp;<em>other</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv3N5Azura10Containers5ArrayaSERK5Array" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt id="_CPPv3N5Azura10Containers5ArrayaSERR5Array">
+<span id="_CPPv2N5Azura10Containers5ArrayaSERR5Array"></span><span id="Azura::Containers::Array::assign-operator__ArrayRR"></span><span class="target" id="class_azura_1_1_containers_1_1_array_1aa51530366e5f8877c361ecb3a6113d38"></span><a class="reference internal" href="#_CPPv3N5Azura10Containers5ArrayE" title="Azura::Containers::Array">Array</a>&lt;Type, MaxSize&gt; &amp;<code class="descname">operator=</code><span class="sig-paren">(</span><a class="reference internal" href="#_CPPv3N5Azura10Containers5ArrayE" title="Azura::Containers::Array">Array</a> &amp;&amp;<em>other</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv3N5Azura10Containers5ArrayaSERR5Array" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt id="_CPPv3N5Azura10Containers5Array8PushBackERK4Type">
+<span id="_CPPv2N5Azura10Containers5Array8PushBackERK4Type"></span><span id="Azura::Containers::Array::PushBack__TypeCR"></span><span class="target" id="class_azura_1_1_containers_1_1_array_1a2ba41cb0847f98adc56d52a84935fc1d"></span>void <code class="descname">PushBack</code><span class="sig-paren">(</span><em class="property">const</em> Type &amp;<em>data</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv3N5Azura10Containers5Array8PushBackERK4Type" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Appends data to the end of the array. </p>
+<p><dl class="docutils">
+<dt><strong>Parameters</strong></dt>
+<dd><ul class="breatheparameterlist first last simple">
+<li><code class="docutils literal notranslate"><span class="pre">data</span></code>: Data to push </li>
+</ul>
+</dd>
+</dl>
+</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="_CPPv3N5Azura10Containers5Array3PopEv">
+<span id="_CPPv2N5Azura10Containers5Array3PopEv"></span><span id="Azura::Containers::Array::Pop"></span><span class="target" id="class_azura_1_1_containers_1_1_array_1a09bff62fce6b350e7e09b6c237f65258"></span>Type <code class="descname">Pop</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv3N5Azura10Containers5Array3PopEv" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Removes the last element in the array array. </p>
+<p><dl class="docutils">
+<dt><strong>Return</strong></dt>
+<dd>Element that was popped </dd>
+</dl>
+</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="_CPPv3N5Azura10Containers5Array9FindFirstERK4Type">
+<span id="_CPPv2N5Azura10Containers5Array9FindFirstERK4Type"></span><span id="Azura::Containers::Array::FindFirst__TypeCR"></span><span class="target" id="class_azura_1_1_containers_1_1_array_1aedce5aff495e80bebe1ec5cf44e2052e"></span>int <code class="descname">FindFirst</code><span class="sig-paren">(</span><em class="property">const</em> Type &amp;<em>data</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv3N5Azura10Containers5Array9FindFirstERK4Type" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Searches for the data in the <a class="reference internal" href="#class_azura_1_1_containers_1_1_array"><span class="std std-ref">Array</span></a>. </p>
+<p><dl class="docutils">
+<dt><strong>Return</strong></dt>
+<dd>Index if Found, else -1 </dd>
+<dt><strong>Parameters</strong></dt>
+<dd><ul class="breatheparameterlist first last simple">
+<li><code class="docutils literal notranslate"><span class="pre">data</span></code>: Data to search for </li>
+</ul>
+</dd>
+</dl>
+</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="_CPPv3N5Azura10Containers5Array6RemoveERK4Type">
+<span id="_CPPv2N5Azura10Containers5Array6RemoveERK4Type"></span><span id="Azura::Containers::Array::Remove__TypeCR"></span><span class="target" id="class_azura_1_1_containers_1_1_array_1a62009e8ab3e0a69edcfe3c018e41cab1"></span>void <code class="descname">Remove</code><span class="sig-paren">(</span><em class="property">const</em> Type &amp;<em>data</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv3N5Azura10Containers5Array6RemoveERK4Type" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Searches for the given data in the array and removes it. </p>
+<p><dl class="docutils">
+<dt><strong>Parameters</strong></dt>
+<dd><ul class="breatheparameterlist first last simple">
+<li><code class="docutils literal notranslate"><span class="pre">data</span></code>: Data to Search for and Remove </li>
+</ul>
+</dd>
+</dl>
+</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="_CPPv3NK5Azura10Containers5Array7IsEmptyEv">
+<span id="_CPPv2NK5Azura10Containers5Array7IsEmptyEv"></span><span id="Azura::Containers::Array::IsEmptyC"></span><span class="target" id="class_azura_1_1_containers_1_1_array_1ac0126bd751769fc11c80b99f6b6a1d39"></span>bool <code class="descname">IsEmpty</code><span class="sig-paren">(</span><span class="sig-paren">)</span> <em class="property">const</em><a class="headerlink" href="#_CPPv3NK5Azura10Containers5Array7IsEmptyEv" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Checks if the container is empty. </p>
+<p><dl class="docutils">
+<dt><strong>Return</strong></dt>
+<dd>true if empty </dd>
+</dl>
+</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="_CPPv3N5Azura10Containers5Array8InsertAtE3U32RK4Type">
+<span id="_CPPv2N5Azura10Containers5Array8InsertAtE3U32RK4Type"></span><span id="Azura::Containers::Array::InsertAt__U32.TypeCR"></span><span class="target" id="class_azura_1_1_containers_1_1_array_1a72ac4554c6c84656569ed04ce6d5f94d"></span>void <code class="descname">InsertAt</code><span class="sig-paren">(</span>U32 <em>idx</em>, <em class="property">const</em> Type &amp;<em>data</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv3N5Azura10Containers5Array8InsertAtE3U32RK4Type" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Inserts the supplied data at the index. </p>
+<p><dl class="docutils">
+<dt><strong>Parameters</strong></dt>
+<dd><ul class="breatheparameterlist first last simple">
+<li><code class="docutils literal notranslate"><span class="pre">idx</span></code>: Target Index </li>
+<li><code class="docutils literal notranslate"><span class="pre">data</span></code>: Data to insert </li>
+</ul>
+</dd>
+</dl>
+</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="_CPPv3N5Azura10Containers5ArrayixE3U32">
+<span id="_CPPv2N5Azura10Containers5ArrayixE3U32"></span><span id="Azura::Containers::Array::subscript-operator__U32"></span><span class="target" id="class_azura_1_1_containers_1_1_array_1aa7eedeeb10012bc14f5f213f44097bb1"></span>Type &amp;<code class="descname">operator[]</code><span class="sig-paren">(</span>U32 <em>idx</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv3N5Azura10Containers5ArrayixE3U32" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt id="_CPPv3NK5Azura10Containers5ArrayixE3U32">
+<span id="_CPPv2NK5Azura10Containers5ArrayixE3U32"></span><span id="Azura::Containers::Array::subscript-operator__U32C"></span><span class="target" id="class_azura_1_1_containers_1_1_array_1a96a8d69c15ab92dbaaadb406adf61d99"></span>Type &amp;<code class="descname">operator[]</code><span class="sig-paren">(</span>U32 <em>idx</em><span class="sig-paren">)</span> <em class="property">const</em><a class="headerlink" href="#_CPPv3NK5Azura10Containers5ArrayixE3U32" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt id="_CPPv3N5Azura10Containers5Array4DataEv">
+<span id="_CPPv2N5Azura10Containers5Array4DataEv"></span><span id="Azura::Containers::Array::Data"></span><span class="target" id="class_azura_1_1_containers_1_1_array_1a27e609174c9a9563f6f186d723e1ee65"></span>Type *<code class="descname">Data</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv3N5Azura10Containers5Array4DataEv" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt id="_CPPv3NK5Azura10Containers5Array7GetSizeEv">
+<span id="_CPPv2NK5Azura10Containers5Array7GetSizeEv"></span><span id="Azura::Containers::Array::GetSizeC"></span><span class="target" id="class_azura_1_1_containers_1_1_array_1acde5c7767d4e50b48721a3f595004529"></span>U32 <code class="descname">GetSize</code><span class="sig-paren">(</span><span class="sig-paren">)</span> <em class="property">const</em><a class="headerlink" href="#_CPPv3NK5Azura10Containers5Array7GetSizeEv" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt id="_CPPv3NK5Azura10Containers5Array10GetMaxSizeEv">
+<span id="_CPPv2NK5Azura10Containers5Array10GetMaxSizeEv"></span><span id="Azura::Containers::Array::GetMaxSizeC"></span><span class="target" id="class_azura_1_1_containers_1_1_array_1a633323a95b06d9f80f431b51a0875213"></span>U32 <code class="descname">GetMaxSize</code><span class="sig-paren">(</span><span class="sig-paren">)</span> <em class="property">const</em><a class="headerlink" href="#_CPPv3NK5Azura10Containers5Array10GetMaxSizeEv" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt id="_CPPv3NK5Azura10Containers5Array5BeginEv">
+<span id="_CPPv2NK5Azura10Containers5Array5BeginEv"></span><span id="Azura::Containers::Array::BeginC"></span><span class="target" id="class_azura_1_1_containers_1_1_array_1a8999510e1a643c608c1805c28e01186e"></span><a class="reference internal" href="#_CPPv3N5Azura10Containers5ArrayE" title="Azura::Containers::Array">Array</a>&lt;Type, MaxSize&gt;::Iterator <code class="descname">Begin</code><span class="sig-paren">(</span><span class="sig-paren">)</span> <em class="property">const</em><a class="headerlink" href="#_CPPv3NK5Azura10Containers5Array5BeginEv" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Returns an <a class="reference internal" href="class_azura_1_1_containers_1_1_array_1_1_iterator.html#class_azura_1_1_containers_1_1_array_1_1_iterator"><span class="std std-ref">Iterator</span></a> pointing to the beginning of the array. This is similar to begin() of a std::array. </p>
+<p><dl class="docutils">
+<dt><strong>Return</strong></dt>
+<dd><a class="reference internal" href="class_azura_1_1_containers_1_1_array_1_1_iterator.html#class_azura_1_1_containers_1_1_array_1_1_iterator"><span class="std std-ref">Iterator</span></a> </dd>
+</dl>
+</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="_CPPv3NK5Azura10Containers5Array3EndEv">
+<span id="_CPPv2NK5Azura10Containers5Array3EndEv"></span><span id="Azura::Containers::Array::EndC"></span><span class="target" id="class_azura_1_1_containers_1_1_array_1a72784503a762fe27bf765863e9881a23"></span><a class="reference internal" href="#_CPPv3N5Azura10Containers5ArrayE" title="Azura::Containers::Array">Array</a>&lt;Type, MaxSize&gt;::Iterator <code class="descname">End</code><span class="sig-paren">(</span><span class="sig-paren">)</span> <em class="property">const</em><a class="headerlink" href="#_CPPv3NK5Azura10Containers5Array3EndEv" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Returns an <a class="reference internal" href="class_azura_1_1_containers_1_1_array_1_1_iterator.html#class_azura_1_1_containers_1_1_array_1_1_iterator"><span class="std std-ref">Iterator</span></a> pointing to the end of the array. This is similar to end() of a std::array. </p>
+<p><dl class="docutils">
+<dt><strong>Return</strong></dt>
+<dd><a class="reference internal" href="class_azura_1_1_containers_1_1_array_1_1_iterator.html#class_azura_1_1_containers_1_1_array_1_1_iterator"><span class="std std-ref">Iterator</span></a> </dd>
+</dl>
+</p>
+</dd></dl>
+
+</div>
+<dl class="class">
+<dt id="_CPPv3N5Azura10Containers5Array8IteratorE">
+<span id="_CPPv2N5Azura10Containers5Array8IteratorE"></span><span id="Azura::Containers::Array::Iterator"></span><span class="target" id="class_azura_1_1_containers_1_1_array_1_1_iterator"></span><em class="property">class </em><code class="descname">Iterator</code><a class="headerlink" href="#_CPPv3N5Azura10Containers5Array8IteratorE" title="Permalink to this definition">¶</a><br /></dt>
+<dd><div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric">Public Types</p>
+<dl class="type">
+<dt id="_CPPv3IEN5Azura10Containers5ArrayI4Type7MaxSizeE8Iterator17iterator_categoryE">
+<span id="_CPPv2IEN5Azura10Containers5ArrayI4Type7MaxSizeE8Iterator17iterator_categoryE"></span>template&lt;&gt;<br /><span class="target" id="class_azura_1_1_containers_1_1_array_1_1_iterator_1a112a2c90d933d41b98430e1fe1d1584e"></span><em class="property">using </em><code class="descname">iterator_category</code> = std::random_access_iterator_tag<a class="headerlink" href="#_CPPv3IEN5Azura10Containers5ArrayI4Type7MaxSizeE8Iterator17iterator_categoryE" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="type">
+<dt id="_CPPv3IEN5Azura10Containers5ArrayI4Type7MaxSizeE8Iterator10value_typeE">
+<span id="_CPPv2IEN5Azura10Containers5ArrayI4Type7MaxSizeE8Iterator10value_typeE"></span>template&lt;&gt;<br /><span class="target" id="class_azura_1_1_containers_1_1_array_1_1_iterator_1a524c2d8b413e586366ae5d72666a865c"></span><em class="property">using </em><code class="descname">value_type</code> = Type<a class="headerlink" href="#_CPPv3IEN5Azura10Containers5ArrayI4Type7MaxSizeE8Iterator10value_typeE" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="type">
+<dt id="_CPPv3IEN5Azura10Containers5ArrayI4Type7MaxSizeE8Iterator15difference_typeE">
+<span id="_CPPv2IEN5Azura10Containers5ArrayI4Type7MaxSizeE8Iterator15difference_typeE"></span>template&lt;&gt;<br /><span class="target" id="class_azura_1_1_containers_1_1_array_1_1_iterator_1a596bbf73f4c96c5ffeaff5fcd36a0f88"></span><em class="property">using </em><code class="descname">difference_type</code> = int<a class="headerlink" href="#_CPPv3IEN5Azura10Containers5ArrayI4Type7MaxSizeE8Iterator15difference_typeE" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="type">
+<dt id="_CPPv3IEN5Azura10Containers5ArrayI4Type7MaxSizeE8Iterator7pointerE">
+<span id="_CPPv2IEN5Azura10Containers5ArrayI4Type7MaxSizeE8Iterator7pointerE"></span>template&lt;&gt;<br /><span class="target" id="class_azura_1_1_containers_1_1_array_1_1_iterator_1ac5c3b603ab1ea5fe10f3762b9e3eb3ef"></span><em class="property">using </em><code class="descname">pointer</code> = Type *<a class="headerlink" href="#_CPPv3IEN5Azura10Containers5ArrayI4Type7MaxSizeE8Iterator7pointerE" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="type">
+<dt id="_CPPv3IEN5Azura10Containers5ArrayI4Type7MaxSizeE8Iterator9referenceE">
+<span id="_CPPv2IEN5Azura10Containers5ArrayI4Type7MaxSizeE8Iterator9referenceE"></span>template&lt;&gt;<br /><span class="target" id="class_azura_1_1_containers_1_1_array_1_1_iterator_1aa5f31929af2bfb88ba79941967337734"></span><em class="property">using </em><code class="descname">reference</code> = Type&amp;<a class="headerlink" href="#_CPPv3IEN5Azura10Containers5ArrayI4Type7MaxSizeE8Iterator9referenceE" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+</div>
+<div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric">Public Functions</p>
+<dl class="function">
+<dt id="_CPPv3IEN5Azura10Containers5ArrayI4Type7MaxSizeE8Iterator8IteratorEv">
+<span id="_CPPv2IEN5Azura10Containers5ArrayI4Type7MaxSizeE8Iterator8IteratorEv"></span><span class="target" id="class_azura_1_1_containers_1_1_array_1_1_iterator_1a802d4119d5fb5bd135c82874a75344be"></span>template&lt;&gt;<br /><code class="descname">Iterator</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv3IEN5Azura10Containers5ArrayI4Type7MaxSizeE8Iterator8IteratorEv" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt id="_CPPv3IEN5Azura10Containers5ArrayI4Type7MaxSizeE8IteratorD0Ev">
+<span id="_CPPv2IEN5Azura10Containers5ArrayI4Type7MaxSizeE8IteratorD0Ev"></span><span class="target" id="class_azura_1_1_containers_1_1_array_1_1_iterator_1a4ef5fae2e102226e2144eba5a9ddc36d"></span>template&lt;&gt;<br /><code class="descname">~Iterator</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv3IEN5Azura10Containers5ArrayI4Type7MaxSizeE8IteratorD0Ev" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt id="_CPPv3IEN5Azura10Containers5ArrayI4Type7MaxSizeE8Iterator8IteratorERK8Iterator">
+<span id="_CPPv2IEN5Azura10Containers5ArrayI4Type7MaxSizeE8Iterator8IteratorERK8Iterator"></span><span class="target" id="class_azura_1_1_containers_1_1_array_1_1_iterator_1abee89f1f5ec73ee40c647bdada1bd513"></span>template&lt;&gt;<br /><code class="descname">Iterator</code><span class="sig-paren">(</span><em class="property">const</em> <a class="reference internal" href="#_CPPv3IEN5Azura10Containers5ArrayI4Type7MaxSizeE8Iterator8IteratorEv" title="Azura::Containers::Array&lt;Type, MaxSize&gt;::Iterator::Iterator">Iterator</a> &amp;<em>other</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv3IEN5Azura10Containers5ArrayI4Type7MaxSizeE8Iterator8IteratorERK8Iterator" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt id="_CPPv3IEN5Azura10Containers5ArrayI4Type7MaxSizeE8IteratoraSERK8Iterator">
+<span id="_CPPv2IEN5Azura10Containers5ArrayI4Type7MaxSizeE8IteratoraSERK8Iterator"></span><span class="target" id="class_azura_1_1_containers_1_1_array_1_1_iterator_1a98e4ad55cfed7fcfbac276a63185633f"></span>template&lt;&gt;<br />Iterator &amp;<code class="descname">operator=</code><span class="sig-paren">(</span><em class="property">const</em> Iterator &amp;<em>other</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv3IEN5Azura10Containers5ArrayI4Type7MaxSizeE8IteratoraSERK8Iterator" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt id="_CPPv3IEN5Azura10Containers5ArrayI4Type7MaxSizeE8Iterator8IteratorEPK5Arrayi">
+<span id="_CPPv2IEN5Azura10Containers5ArrayI4Type7MaxSizeE8Iterator8IteratorEPK5Arrayi"></span><span class="target" id="class_azura_1_1_containers_1_1_array_1_1_iterator_1a6119f84f788f7b8a4e65ea50edb752ac"></span>template&lt;&gt;<br /><code class="descname">Iterator</code><span class="sig-paren">(</span><em class="property">const</em> Array *<em>ptr</em>, int <em>index</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv3IEN5Azura10Containers5ArrayI4Type7MaxSizeE8Iterator8IteratorEPK5Arrayi" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt id="_CPPv3IEN5Azura10Containers5ArrayI4Type7MaxSizeE8Iterator8IteratorERR8Iterator">
+<span id="_CPPv2IEN5Azura10Containers5ArrayI4Type7MaxSizeE8Iterator8IteratorERR8Iterator"></span><span class="target" id="class_azura_1_1_containers_1_1_array_1_1_iterator_1a36a55b4261f27fd4d5b1a1d6704cba9e"></span>template&lt;&gt;<br /><code class="descname">Iterator</code><span class="sig-paren">(</span><a class="reference internal" href="#_CPPv3IEN5Azura10Containers5ArrayI4Type7MaxSizeE8Iterator8IteratorEv" title="Azura::Containers::Array&lt;Type, MaxSize&gt;::Iterator::Iterator">Iterator</a> &amp;&amp;<em>other</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv3IEN5Azura10Containers5ArrayI4Type7MaxSizeE8Iterator8IteratorERR8Iterator" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt id="_CPPv3IEN5Azura10Containers5ArrayI4Type7MaxSizeE8IteratoraSERR8Iterator">
+<span id="_CPPv2IEN5Azura10Containers5ArrayI4Type7MaxSizeE8IteratoraSERR8Iterator"></span><span class="target" id="class_azura_1_1_containers_1_1_array_1_1_iterator_1a035cd9f229803b6de0183dc8b140300f"></span>template&lt;&gt;<br />Iterator &amp;<code class="descname">operator=</code><span class="sig-paren">(</span>Iterator &amp;&amp;<em>other</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv3IEN5Azura10Containers5ArrayI4Type7MaxSizeE8IteratoraSERR8Iterator" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt id="_CPPv3IEN5Azura10Containers5ArrayI4Type7MaxSizeE8IteratorppEv">
+<span id="_CPPv2IEN5Azura10Containers5ArrayI4Type7MaxSizeE8IteratorppEv"></span><span class="target" id="class_azura_1_1_containers_1_1_array_1_1_iterator_1ae86ee2d4f3583020e85e5449ccd29323"></span>template&lt;&gt;<br />Iterator &amp;<code class="descname">operator++</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv3IEN5Azura10Containers5ArrayI4Type7MaxSizeE8IteratorppEv" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt id="_CPPv3IEN5Azura10Containers5ArrayI4Type7MaxSizeE8IteratorppEi">
+<span id="_CPPv2IEN5Azura10Containers5ArrayI4Type7MaxSizeE8IteratorppEi"></span><span class="target" id="class_azura_1_1_containers_1_1_array_1_1_iterator_1a64ec3ea04174dac760ab80da43e9937a"></span>template&lt;&gt;<br />Iterator <code class="descname">operator++</code><span class="sig-paren">(</span>int<span class="sig-paren">)</span><a class="headerlink" href="#_CPPv3IEN5Azura10Containers5ArrayI4Type7MaxSizeE8IteratorppEi" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt id="_CPPv3IEN5Azura10Containers5ArrayI4Type7MaxSizeE8IteratormmEv">
+<span id="_CPPv2IEN5Azura10Containers5ArrayI4Type7MaxSizeE8IteratormmEv"></span><span class="target" id="class_azura_1_1_containers_1_1_array_1_1_iterator_1a488c1f839802659517ddad5710660d2a"></span>template&lt;&gt;<br />Iterator &amp;<code class="descname">operator--</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv3IEN5Azura10Containers5ArrayI4Type7MaxSizeE8IteratormmEv" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt id="_CPPv3IEN5Azura10Containers5ArrayI4Type7MaxSizeE8IteratormmEi">
+<span id="_CPPv2IEN5Azura10Containers5ArrayI4Type7MaxSizeE8IteratormmEi"></span><span class="target" id="class_azura_1_1_containers_1_1_array_1_1_iterator_1a55c0a32a87349abe616dec97abeba22b"></span>template&lt;&gt;<br />Iterator <code class="descname">operator--</code><span class="sig-paren">(</span>int<span class="sig-paren">)</span><a class="headerlink" href="#_CPPv3IEN5Azura10Containers5ArrayI4Type7MaxSizeE8IteratormmEi" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt id="_CPPv3IEN5Azura10Containers5ArrayI4Type7MaxSizeE8IteratoreqERK8Iterator">
+<span id="_CPPv2IEN5Azura10Containers5ArrayI4Type7MaxSizeE8IteratoreqERK8Iterator"></span><span class="target" id="class_azura_1_1_containers_1_1_array_1_1_iterator_1ab7dc4af88adb1732fc4ac3b718c011cc"></span>template&lt;&gt;<br />bool <code class="descname">operator==</code><span class="sig-paren">(</span><em class="property">const</em> Iterator &amp;<em>rhs</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv3IEN5Azura10Containers5ArrayI4Type7MaxSizeE8IteratoreqERK8Iterator" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt id="_CPPv3IEN5Azura10Containers5ArrayI4Type7MaxSizeE8IteratorneERK8Iterator">
+<span id="_CPPv2IEN5Azura10Containers5ArrayI4Type7MaxSizeE8IteratorneERK8Iterator"></span><span class="target" id="class_azura_1_1_containers_1_1_array_1_1_iterator_1a6e9eb4b3833b21303c0fbe7cc848be9e"></span>template&lt;&gt;<br />bool <code class="descname">operator!=</code><span class="sig-paren">(</span><em class="property">const</em> Iterator &amp;<em>rhs</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv3IEN5Azura10Containers5ArrayI4Type7MaxSizeE8IteratorneERK8Iterator" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt id="_CPPv3IEN5Azura10Containers5ArrayI4Type7MaxSizeE8IteratorltERK8Iterator">
+<span id="_CPPv2IEN5Azura10Containers5ArrayI4Type7MaxSizeE8IteratorltERK8Iterator"></span><span class="target" id="class_azura_1_1_containers_1_1_array_1_1_iterator_1a205e4200c563746c2449238bed78730c"></span>template&lt;&gt;<br />bool <code class="descname">operator&lt;</code><span class="sig-paren">(</span><em class="property">const</em> Iterator &amp;<em>rhs</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv3IEN5Azura10Containers5ArrayI4Type7MaxSizeE8IteratorltERK8Iterator" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt id="_CPPv3IEN5Azura10Containers5ArrayI4Type7MaxSizeE8IteratorleERK8Iterator">
+<span id="_CPPv2IEN5Azura10Containers5ArrayI4Type7MaxSizeE8IteratorleERK8Iterator"></span><span class="target" id="class_azura_1_1_containers_1_1_array_1_1_iterator_1a09c0d2763194ebfca06a9955f79e381b"></span>template&lt;&gt;<br />bool <code class="descname">operator&lt;=</code><span class="sig-paren">(</span><em class="property">const</em> Iterator &amp;<em>rhs</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv3IEN5Azura10Containers5ArrayI4Type7MaxSizeE8IteratorleERK8Iterator" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt id="_CPPv3IEN5Azura10Containers5ArrayI4Type7MaxSizeE8IteratorgtERK8Iterator">
+<span id="_CPPv2IEN5Azura10Containers5ArrayI4Type7MaxSizeE8IteratorgtERK8Iterator"></span><span class="target" id="class_azura_1_1_containers_1_1_array_1_1_iterator_1abf3249302ee48daee8412419538baf44"></span>template&lt;&gt;<br />bool <code class="descname">operator&gt;</code><span class="sig-paren">(</span><em class="property">const</em> Iterator &amp;<em>rhs</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv3IEN5Azura10Containers5ArrayI4Type7MaxSizeE8IteratorgtERK8Iterator" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt id="_CPPv3IEN5Azura10Containers5ArrayI4Type7MaxSizeE8IteratorgeERK8Iterator">
+<span id="_CPPv2IEN5Azura10Containers5ArrayI4Type7MaxSizeE8IteratorgeERK8Iterator"></span><span class="target" id="class_azura_1_1_containers_1_1_array_1_1_iterator_1a7614deb1341c0f7a2c5ac6b339d0617c"></span>template&lt;&gt;<br />bool <code class="descname">operator&gt;=</code><span class="sig-paren">(</span><em class="property">const</em> Iterator &amp;<em>rhs</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv3IEN5Azura10Containers5ArrayI4Type7MaxSizeE8IteratorgeERK8Iterator" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt id="_CPPv3IEN5Azura10Containers5ArrayI4Type7MaxSizeE8IteratorplERKi">
+<span id="_CPPv2IEN5Azura10Containers5ArrayI4Type7MaxSizeE8IteratorplERKi"></span><span class="target" id="class_azura_1_1_containers_1_1_array_1_1_iterator_1a960b3a44936f4b83ea73dd32465c3527"></span>template&lt;&gt;<br />Iterator <code class="descname">operator+</code><span class="sig-paren">(</span><em class="property">const</em> int &amp;<em>idx</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv3IEN5Azura10Containers5ArrayI4Type7MaxSizeE8IteratorplERKi" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt id="_CPPv3IEN5Azura10Containers5ArrayI4Type7MaxSizeE8IteratorpLERKi">
+<span id="_CPPv2IEN5Azura10Containers5ArrayI4Type7MaxSizeE8IteratorpLERKi"></span><span class="target" id="class_azura_1_1_containers_1_1_array_1_1_iterator_1a59adade82ee2e5f908e4a849aeef4c11"></span>template&lt;&gt;<br />Iterator &amp;<code class="descname">operator+=</code><span class="sig-paren">(</span><em class="property">const</em> int &amp;<em>idx</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv3IEN5Azura10Containers5ArrayI4Type7MaxSizeE8IteratorpLERKi" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt id="_CPPv3IEN5Azura10Containers5ArrayI4Type7MaxSizeE8IteratormiERKi">
+<span id="_CPPv2IEN5Azura10Containers5ArrayI4Type7MaxSizeE8IteratormiERKi"></span><span class="target" id="class_azura_1_1_containers_1_1_array_1_1_iterator_1aeb26bfc8bd0ac21947819831eb4f49ad"></span>template&lt;&gt;<br />Iterator <code class="descname">operator-</code><span class="sig-paren">(</span><em class="property">const</em> int &amp;<em>idx</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv3IEN5Azura10Containers5ArrayI4Type7MaxSizeE8IteratormiERKi" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt id="_CPPv3IEN5Azura10Containers5ArrayI4Type7MaxSizeE8IteratormIERKi">
+<span id="_CPPv2IEN5Azura10Containers5ArrayI4Type7MaxSizeE8IteratormIERKi"></span><span class="target" id="class_azura_1_1_containers_1_1_array_1_1_iterator_1a7d6a72d457a53fe6dfbbe7987fa8067e"></span>template&lt;&gt;<br />Iterator &amp;<code class="descname">operator-=</code><span class="sig-paren">(</span><em class="property">const</em> int &amp;<em>idx</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv3IEN5Azura10Containers5ArrayI4Type7MaxSizeE8IteratormIERKi" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt id="_CPPv3IEN5Azura10Containers5ArrayI4Type7MaxSizeE8IteratormiERK8Iterator">
+<span id="_CPPv2IEN5Azura10Containers5ArrayI4Type7MaxSizeE8IteratormiERK8Iterator"></span><span class="target" id="class_azura_1_1_containers_1_1_array_1_1_iterator_1adc87591c01fb4896e006faccba52b0c9"></span>template&lt;&gt;<br />int <code class="descname">operator-</code><span class="sig-paren">(</span><em class="property">const</em> Iterator &amp;<em>rhs</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv3IEN5Azura10Containers5ArrayI4Type7MaxSizeE8IteratormiERK8Iterator" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt id="_CPPv3IEN5Azura10Containers5ArrayI4Type7MaxSizeE8IteratormlEv">
+<span id="_CPPv2IEN5Azura10Containers5ArrayI4Type7MaxSizeE8IteratormlEv"></span><span class="target" id="class_azura_1_1_containers_1_1_array_1_1_iterator_1a7316fcadd0b3953b02c9274cf722a98a"></span>template&lt;&gt;<br />Type &amp;<code class="descname">operator*</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv3IEN5Azura10Containers5ArrayI4Type7MaxSizeE8IteratormlEv" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt id="_CPPv3IEN5Azura10Containers5ArrayI4Type7MaxSizeE8IteratorptEv">
+<span id="_CPPv2IEN5Azura10Containers5ArrayI4Type7MaxSizeE8IteratorptEv"></span><span class="target" id="class_azura_1_1_containers_1_1_array_1_1_iterator_1afb30eaa834c00e4ba08af0d501941c60"></span>template&lt;&gt;<br />Type *<code class="descname">operator-&gt;</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv3IEN5Azura10Containers5ArrayI4Type7MaxSizeE8IteratorptEv" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt id="_CPPv3IEN5Azura10Containers5ArrayI4Type7MaxSizeE8IteratorixERKi">
+<span id="_CPPv2IEN5Azura10Containers5ArrayI4Type7MaxSizeE8IteratorixERKi"></span><span class="target" id="class_azura_1_1_containers_1_1_array_1_1_iterator_1a6d8f3af6752b3649948869cd4bd3c13f"></span>template&lt;&gt;<br />Type &amp;<code class="descname">operator[]</code><span class="sig-paren">(</span><em class="property">const</em> int &amp;<em>idx</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv3IEN5Azura10Containers5ArrayI4Type7MaxSizeE8IteratorixERKi" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+</div>
+<div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric">Friends</p>
+<dl class="function">
+<dt id="_CPPv3miRK8IteratorRK8Iterator">
+<span id="_CPPv2miRK8IteratorRK8Iterator"></span><span id="sub-operator__IteratorCR.IteratorCR"></span><span class="target" id="class_azura_1_1_containers_1_1_array_1_1_iterator_1a93661b1094ed6450a2921e0ff69b46ff"></span>int <code class="descname">operator-</code><span class="sig-paren">(</span><em class="property">const</em> Iterator &amp;<em>lhs</em>, <em class="property">const</em> Iterator &amp;<em>rhs</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv3miRK8IteratorRK8Iterator" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+</div>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="class_azura_1_1_containers_1_1_array_1_1_iterator.html" class="btn btn-neutral float-right" title="Class Array::Iterator" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="class_azura_1_1_compute_pool.html" class="btn btn-neutral" title="Class ComputePool" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2018, Vasu Mahesh
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  
+
+    
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+        <script type="text/javascript" src="../_static/jquery.js"></script>
+        <script type="text/javascript" src="../_static/underscore.js"></script>
+        <script type="text/javascript" src="../_static/doctools.js"></script>
+        <script type="text/javascript" src="../_static/collapsible-lists\js\CollapsibleLists.compressed.js"></script>
+        <script type="text/javascript" src="../_static/collapsible-lists\js\apply-collapsible-lists.js"></script>
+    
+
+  
+
+  <script type="text/javascript" src="../_static/js/theme.js"></script>
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

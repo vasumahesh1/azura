@@ -1,0 +1,450 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>Program Listing for File VkScopedPipeline.cpp &mdash; Azura  documentation</title>
+  
+
+  
+  
+  
+  
+
+  
+
+  
+  
+    
+
+  
+
+  <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/collapsible-lists\css\tree_view.css" type="text/css" />
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="File VkScopedPipeline.h" href="file_Source_Azura_RenderSystem_Inc_Vulkan_VkScopedPipeline.h.html" />
+    <link rel="prev" title="File VkScopedPipeline.cpp" href="file_Source_Azura_RenderSystem_Src_Vulkan_VkScopedPipeline.cpp.html" /> 
+
+  
+  <script src="../_static/js/modernizr.min.js"></script>
+
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search">
+          
+
+          
+            <a href="../index.html" class="icon icon-home"> Azura
+          
+
+          
+          </a>
+
+          
+            
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <ul>
+<li class="toctree-l1"><a class="reference internal" href="../setting-up.html">Setting Up</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../build-instructions.html">Build Instructions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../cmake-wrappers.html">CMake Wrappers</a></li>
+<li class="toctree-l1"><a class="reference internal" href="apiRoot.html">Azura API</a></li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">Azura</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../index.html">Docs</a> &raquo;</li>
+        
+          <li><a href="apiRoot.html">Azura API</a> &raquo;</li>
+        
+          <li><a href="file_Source_Azura_RenderSystem_Src_Vulkan_VkScopedPipeline.cpp.html">File VkScopedPipeline.cpp</a> &raquo;</li>
+        
+      <li>Program Listing for File VkScopedPipeline.cpp</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            <a href="../_sources/html/program_listing_file_Source_Azura_RenderSystem_Src_Vulkan_VkScopedPipeline.cpp.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="program-listing-for-file-vkscopedpipeline-cpp">
+<span id="program-listing-file-source-azura-rendersystem-src-vulkan-vkscopedpipeline-cpp"></span><h1>Program Listing for File VkScopedPipeline.cpp<a class="headerlink" href="#program-listing-for-file-vkscopedpipeline-cpp" title="Permalink to this headline">¶</a></h1>
+<p>↰ <a class="reference internal" href="file_Source_Azura_RenderSystem_Src_Vulkan_VkScopedPipeline.cpp.html#file-source-azura-rendersystem-src-vulkan-vkscopedpipeline-cpp"><span class="std std-ref">Return to documentation for file</span></a> (<code class="docutils literal notranslate"><span class="pre">Source\Azura\RenderSystem\Src\Vulkan\VkScopedPipeline.cpp</span></code>)</p>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="cp">#include</span> <span class="cpf">&quot;Vulkan/VkScopedPipeline.h&quot;</span><span class="cp"></span>
+<span class="cp">#include</span> <span class="cpf">&quot;Memory/Allocator.h&quot;</span><span class="cp"></span>
+<span class="cp">#include</span> <span class="cpf">&quot;Vulkan/VkMacros.h&quot;</span><span class="cp"></span>
+<span class="cp">#include</span> <span class="cpf">&quot;Vulkan/VkTypeMapping.h&quot;</span><span class="cp"></span>
+
+<span class="k">namespace</span> <span class="n">Azura</span> <span class="p">{</span>
+<span class="k">namespace</span> <span class="n">Vulkan</span> <span class="p">{</span>
+
+<span class="n">VkScopedPipeline</span><span class="o">::</span><span class="n">VkScopedPipeline</span><span class="p">(</span><span class="n">VkPipeline</span> <span class="n">pipeline</span><span class="p">)</span>
+  <span class="o">:</span> <span class="n">m_pipeline</span><span class="p">(</span><span class="n">pipeline</span><span class="p">)</span> <span class="p">{</span>
+<span class="p">}</span>
+
+<span class="n">VkPipeline</span> <span class="n">VkScopedPipeline</span><span class="o">::</span><span class="n">Real</span><span class="p">()</span> <span class="k">const</span> <span class="p">{</span>
+  <span class="k">return</span> <span class="n">m_pipeline</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="kt">void</span> <span class="n">VkScopedPipeline</span><span class="o">::</span><span class="n">CleanUp</span><span class="p">(</span><span class="n">VkDevice</span> <span class="n">device</span><span class="p">)</span> <span class="k">const</span> <span class="p">{</span>
+  <span class="n">vkDestroyPipeline</span><span class="p">(</span><span class="n">device</span><span class="p">,</span> <span class="n">m_pipeline</span><span class="p">,</span> <span class="k">nullptr</span><span class="p">);</span>
+<span class="p">}</span>
+
+<span class="c1">// TODO(vasumahesh1): Figure out a way to adjust size properly</span>
+<span class="n">VkPipelineFactory</span><span class="o">::</span><span class="n">VkPipelineFactory</span><span class="p">(</span><span class="n">VkDevice</span> <span class="n">device</span><span class="p">,</span> <span class="n">Memory</span><span class="o">::</span><span class="n">Allocator</span><span class="o">&amp;</span> <span class="n">allocator</span><span class="p">,</span> <span class="n">Log</span> <span class="n">logger</span><span class="p">)</span>
+  <span class="o">:</span> <span class="n">m_device</span><span class="p">(</span><span class="n">device</span><span class="p">),</span>
+    <span class="n">m_bindingInfo</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="n">allocator</span><span class="p">),</span>
+    <span class="n">m_attributeDescription</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="n">allocator</span><span class="p">),</span>
+    <span class="n">m_stages</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="n">allocator</span><span class="p">),</span>
+    <span class="n">log_VulkanRenderSystem</span><span class="p">(</span><span class="n">std</span><span class="o">::</span><span class="n">move</span><span class="p">(</span><span class="n">logger</span><span class="p">))</span> <span class="p">{</span>
+<span class="p">}</span>
+
+<span class="n">VkPipelineFactory</span><span class="o">&amp;</span> <span class="n">VkPipelineFactory</span><span class="o">::</span><span class="n">AddBindingDescription</span><span class="p">(</span><span class="n">U32</span> <span class="n">stride</span><span class="p">,</span> <span class="n">VertexSlot</span> <span class="n">slot</span><span class="p">,</span> <span class="n">U32</span> <span class="n">binding</span><span class="p">)</span> <span class="p">{</span>
+  <span class="n">VkVertexInputBindingDescription</span> <span class="n">bindingDesc</span><span class="p">;</span>
+
+  <span class="k">const</span> <span class="k">auto</span> <span class="n">rate</span> <span class="o">=</span> <span class="n">ToVkVertexInputRate</span><span class="p">(</span><span class="n">slot</span><span class="p">.</span><span class="n">m_rate</span><span class="p">);</span>
+  <span class="n">VERIFY_OPT</span><span class="p">(</span><span class="n">log_VulkanRenderSystem</span><span class="p">,</span> <span class="n">rate</span><span class="p">,</span> <span class="s">&quot;Unknown Format&quot;</span><span class="p">);</span>
+
+  <span class="n">bindingDesc</span><span class="p">.</span><span class="n">binding</span>   <span class="o">=</span> <span class="n">binding</span><span class="p">;</span>
+  <span class="n">bindingDesc</span><span class="p">.</span><span class="n">stride</span>    <span class="o">=</span> <span class="n">stride</span><span class="p">;</span>
+  <span class="n">bindingDesc</span><span class="p">.</span><span class="n">inputRate</span> <span class="o">=</span> <span class="n">rate</span><span class="p">.</span><span class="n">value</span><span class="p">();</span>
+
+  <span class="n">m_bindingInfo</span><span class="p">.</span><span class="n">PushBack</span><span class="p">(</span><span class="n">bindingDesc</span><span class="p">);</span>
+  <span class="k">return</span> <span class="o">*</span><span class="k">this</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="n">VkPipelineFactory</span><span class="o">&amp;</span> <span class="n">VkPipelineFactory</span><span class="o">::</span><span class="n">BulkAddAttributeDescription</span><span class="p">(</span><span class="k">const</span> <span class="n">VertexSlot</span><span class="o">&amp;</span> <span class="n">vertexSlot</span><span class="p">,</span> <span class="n">U32</span> <span class="n">binding</span><span class="p">)</span> <span class="p">{</span>
+  <span class="k">auto</span> <span class="n">bindingInfo</span> <span class="o">=</span> <span class="n">m_bindingMap</span><span class="p">[</span><span class="n">binding</span><span class="p">];</span>
+
+  <span class="k">for</span> <span class="p">(</span><span class="k">const</span> <span class="k">auto</span><span class="o">&amp;</span> <span class="nl">semanticStride</span> <span class="p">:</span> <span class="n">vertexSlot</span><span class="p">.</span><span class="n">m_stride</span><span class="p">)</span> <span class="p">{</span>
+    <span class="k">const</span> <span class="k">auto</span> <span class="n">format</span> <span class="o">=</span> <span class="n">ToVkFormat</span><span class="p">(</span><span class="n">semanticStride</span><span class="p">.</span><span class="n">m_format</span><span class="p">);</span>
+    <span class="n">LOG_DBG</span><span class="p">(</span><span class="n">log_VulkanRenderSystem</span><span class="p">,</span> <span class="n">LOG_LEVEL</span><span class="p">,</span> <span class="s">&quot;Binding Vertex Attribute: Binding: %d   Location: %d   Format: %s&quot;</span><span class="p">,</span> <span class="n">binding</span><span class="p">,</span> <span class="n">m_currentLocation</span><span class="p">,</span> <span class="n">ToString</span><span class="p">(</span><span class="n">semanticStride</span><span class="p">.</span><span class="n">m_format</span><span class="p">).</span><span class="n">c_str</span><span class="p">());</span>
+    <span class="n">VERIFY_OPT</span><span class="p">(</span><span class="n">log_VulkanRenderSystem</span><span class="p">,</span> <span class="n">format</span><span class="p">,</span> <span class="s">&quot;Unknown Format&quot;</span><span class="p">);</span>
+
+    <span class="n">VkVertexInputAttributeDescription</span> <span class="n">attrDesc</span><span class="p">;</span>
+    <span class="n">attrDesc</span><span class="p">.</span><span class="n">binding</span>  <span class="o">=</span> <span class="n">binding</span><span class="p">;</span>
+    <span class="n">attrDesc</span><span class="p">.</span><span class="n">location</span> <span class="o">=</span> <span class="n">m_currentLocation</span><span class="p">;</span>
+    <span class="n">attrDesc</span><span class="p">.</span><span class="n">format</span>   <span class="o">=</span> <span class="n">format</span><span class="p">.</span><span class="n">value</span><span class="p">();</span>
+    <span class="n">attrDesc</span><span class="p">.</span><span class="n">offset</span>   <span class="o">=</span> <span class="n">bindingInfo</span><span class="p">.</span><span class="n">m_offset</span><span class="p">;</span>
+
+    <span class="c1">// TODO(vasumahesh1):[FORMATS]: Handle 64bit formats taking 2 locations</span>
+    <span class="n">m_currentLocation</span><span class="o">++</span><span class="p">;</span>
+
+    <span class="n">bindingInfo</span><span class="p">.</span><span class="n">m_offset</span> <span class="o">+=</span> <span class="n">GetFormatSize</span><span class="p">(</span><span class="n">semanticStride</span><span class="p">.</span><span class="n">m_format</span><span class="p">);</span>
+
+    <span class="n">m_attributeDescription</span><span class="p">.</span><span class="n">PushBack</span><span class="p">(</span><span class="n">attrDesc</span><span class="p">);</span>
+  <span class="p">}</span>
+
+  <span class="n">m_bindingMap</span><span class="p">[</span><span class="n">binding</span><span class="p">]</span> <span class="o">=</span> <span class="n">bindingInfo</span><span class="p">;</span>
+
+  <span class="k">return</span> <span class="o">*</span><span class="k">this</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="n">VkPipelineFactory</span><span class="o">&amp;</span> <span class="n">VkPipelineFactory</span><span class="o">::</span><span class="n">SetInputAssemblyStage</span><span class="p">(</span><span class="n">PrimitiveTopology</span> <span class="n">topology</span><span class="p">)</span> <span class="p">{</span>
+  <span class="k">const</span> <span class="k">auto</span> <span class="n">vkTopology</span> <span class="o">=</span> <span class="n">ToVkPrimitiveTopology</span><span class="p">(</span><span class="n">topology</span><span class="p">);</span>
+  <span class="n">VERIFY_OPT</span><span class="p">(</span><span class="n">log_VulkanRenderSystem</span><span class="p">,</span> <span class="n">vkTopology</span><span class="p">,</span> <span class="s">&quot;Unknown Topology&quot;</span><span class="p">);</span>
+
+  <span class="n">m_inputAssemblyStage</span><span class="p">.</span><span class="n">sType</span>    <span class="o">=</span> <span class="n">VK_STRUCTURE_TYPE_PIPELINE_INPUT_ASSEMBLY_STATE_CREATE_INFO</span><span class="p">;</span>
+  <span class="n">m_inputAssemblyStage</span><span class="p">.</span><span class="n">topology</span> <span class="o">=</span> <span class="n">vkTopology</span><span class="p">.</span><span class="n">value</span><span class="p">();</span>
+
+  <span class="c1">// TODO(vasumahesh1): Might need to expose</span>
+  <span class="n">m_inputAssemblyStage</span><span class="p">.</span><span class="n">primitiveRestartEnable</span> <span class="o">=</span> <span class="n">VK_FALSE</span><span class="p">;</span>
+
+  <span class="k">return</span> <span class="o">*</span><span class="k">this</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="n">VkPipelineFactory</span><span class="o">&amp;</span> <span class="n">VkPipelineFactory</span><span class="o">::</span><span class="n">SetViewportStage</span><span class="p">(</span><span class="n">ViewportDimensions</span> <span class="n">viewportDimensions</span><span class="p">,</span>
+                                                       <span class="k">const</span> <span class="n">VkScopedSwapChain</span><span class="o">&amp;</span> <span class="n">swapChain</span><span class="p">)</span> <span class="p">{</span>
+  <span class="n">m_viewport</span><span class="p">.</span><span class="n">x</span>        <span class="o">=</span> <span class="n">viewportDimensions</span><span class="p">.</span><span class="n">m_x</span><span class="p">;</span>
+  <span class="n">m_viewport</span><span class="p">.</span><span class="n">y</span>        <span class="o">=</span> <span class="n">viewportDimensions</span><span class="p">.</span><span class="n">m_height</span> <span class="o">-</span> <span class="n">viewportDimensions</span><span class="p">.</span><span class="n">m_y</span><span class="p">;</span>
+  <span class="n">m_viewport</span><span class="p">.</span><span class="n">width</span>    <span class="o">=</span> <span class="n">viewportDimensions</span><span class="p">.</span><span class="n">m_width</span><span class="p">;</span>
+  <span class="n">m_viewport</span><span class="p">.</span><span class="n">height</span>   <span class="o">=</span> <span class="o">-</span><span class="n">viewportDimensions</span><span class="p">.</span><span class="n">m_height</span><span class="p">;</span> <span class="c1">// Flipped</span>
+  <span class="n">m_viewport</span><span class="p">.</span><span class="n">minDepth</span> <span class="o">=</span> <span class="n">viewportDimensions</span><span class="p">.</span><span class="n">m_minDepth</span><span class="p">;</span>
+  <span class="n">m_viewport</span><span class="p">.</span><span class="n">maxDepth</span> <span class="o">=</span> <span class="n">viewportDimensions</span><span class="p">.</span><span class="n">m_maxDepth</span><span class="p">;</span>
+
+  <span class="c1">// TODO(vasumahesh1): Might need custom scissoring</span>
+  <span class="n">m_scissors</span><span class="p">.</span><span class="n">offset</span> <span class="o">=</span> <span class="p">{</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">};</span>
+  <span class="n">m_scissors</span><span class="p">.</span><span class="n">extent</span> <span class="o">=</span> <span class="n">swapChain</span><span class="p">.</span><span class="n">GetExtent</span><span class="p">();</span>
+
+  <span class="c1">// TODO(vasumahesh1): Might need arrays here one day</span>
+  <span class="n">m_viewportStage</span><span class="p">.</span><span class="n">sType</span>         <span class="o">=</span> <span class="n">VK_STRUCTURE_TYPE_PIPELINE_VIEWPORT_STATE_CREATE_INFO</span><span class="p">;</span>
+  <span class="n">m_viewportStage</span><span class="p">.</span><span class="n">viewportCount</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span>
+  <span class="n">m_viewportStage</span><span class="p">.</span><span class="n">pViewports</span>    <span class="o">=</span> <span class="o">&amp;</span><span class="n">m_viewport</span><span class="p">;</span>
+  <span class="n">m_viewportStage</span><span class="p">.</span><span class="n">scissorCount</span>  <span class="o">=</span> <span class="mi">1</span><span class="p">;</span>
+  <span class="n">m_viewportStage</span><span class="p">.</span><span class="n">pScissors</span>     <span class="o">=</span> <span class="o">&amp;</span><span class="n">m_scissors</span><span class="p">;</span>
+
+  <span class="k">return</span> <span class="o">*</span><span class="k">this</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="n">VkPipelineFactory</span><span class="o">&amp;</span> <span class="n">VkPipelineFactory</span><span class="o">::</span><span class="n">SetRasterizerStage</span><span class="p">(</span><span class="n">CullMode</span> <span class="n">cullMode</span><span class="p">,</span> <span class="n">FrontFace</span> <span class="n">faceOrder</span><span class="p">)</span> <span class="p">{</span>
+  <span class="k">const</span> <span class="k">auto</span> <span class="n">vkCullMode</span> <span class="o">=</span> <span class="n">ToVkCullModeFlags</span><span class="p">(</span><span class="n">cullMode</span><span class="p">);</span>
+  <span class="n">VERIFY_OPT</span><span class="p">(</span><span class="n">log_VulkanRenderSystem</span><span class="p">,</span> <span class="n">vkCullMode</span><span class="p">,</span> <span class="s">&quot;Unknown Cull Mode&quot;</span><span class="p">);</span>
+
+  <span class="k">const</span> <span class="k">auto</span> <span class="n">vkFrontFace</span> <span class="o">=</span> <span class="n">ToVkFrontFace</span><span class="p">(</span><span class="n">faceOrder</span><span class="p">);</span>
+  <span class="n">VERIFY_OPT</span><span class="p">(</span><span class="n">log_VulkanRenderSystem</span><span class="p">,</span> <span class="n">vkFrontFace</span><span class="p">,</span> <span class="s">&quot;Unknown Face Order&quot;</span><span class="p">);</span>
+
+  <span class="c1">// TODO(vasumahesh1): Might need to expose some values later on</span>
+  <span class="n">m_rasterizerStage</span><span class="p">.</span><span class="n">sType</span>                   <span class="o">=</span> <span class="n">VK_STRUCTURE_TYPE_PIPELINE_RASTERIZATION_STATE_CREATE_INFO</span><span class="p">;</span>
+  <span class="n">m_rasterizerStage</span><span class="p">.</span><span class="n">depthClampEnable</span>        <span class="o">=</span> <span class="n">VK_FALSE</span><span class="p">;</span>
+  <span class="n">m_rasterizerStage</span><span class="p">.</span><span class="n">rasterizerDiscardEnable</span> <span class="o">=</span> <span class="n">VK_FALSE</span><span class="p">;</span>
+  <span class="n">m_rasterizerStage</span><span class="p">.</span><span class="n">polygonMode</span>             <span class="o">=</span> <span class="n">VK_POLYGON_MODE_FILL</span><span class="p">;</span>
+  <span class="n">m_rasterizerStage</span><span class="p">.</span><span class="n">lineWidth</span>               <span class="o">=</span> <span class="mf">1.0f</span><span class="p">;</span>
+  <span class="n">m_rasterizerStage</span><span class="p">.</span><span class="n">cullMode</span>                <span class="o">=</span> <span class="n">vkCullMode</span><span class="p">.</span><span class="n">value</span><span class="p">();</span>
+  <span class="n">m_rasterizerStage</span><span class="p">.</span><span class="n">frontFace</span>               <span class="o">=</span> <span class="n">vkFrontFace</span><span class="p">.</span><span class="n">value</span><span class="p">();</span>
+  <span class="n">m_rasterizerStage</span><span class="p">.</span><span class="n">depthBiasEnable</span>         <span class="o">=</span> <span class="n">VK_FALSE</span><span class="p">;</span>
+
+  <span class="k">return</span> <span class="o">*</span><span class="k">this</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="c1">// Not Supported Yet</span>
+<span class="n">VkPipelineFactory</span><span class="o">&amp;</span> <span class="n">VkPipelineFactory</span><span class="o">::</span><span class="n">SetMultisampleStage</span><span class="p">()</span> <span class="p">{</span>
+  <span class="n">m_multisampleStage</span><span class="p">.</span><span class="n">sType</span>                <span class="o">=</span> <span class="n">VK_STRUCTURE_TYPE_PIPELINE_MULTISAMPLE_STATE_CREATE_INFO</span><span class="p">;</span>
+  <span class="n">m_multisampleStage</span><span class="p">.</span><span class="n">sampleShadingEnable</span>  <span class="o">=</span> <span class="n">VK_FALSE</span><span class="p">;</span>
+  <span class="n">m_multisampleStage</span><span class="p">.</span><span class="n">rasterizationSamples</span> <span class="o">=</span> <span class="n">VK_SAMPLE_COUNT_1_BIT</span><span class="p">;</span>
+
+  <span class="c1">// TODO(vasumahesh1): Add Support</span>
+
+  <span class="k">return</span> <span class="o">*</span><span class="k">this</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="n">VkPipelineFactory</span><span class="o">&amp;</span> <span class="n">VkPipelineFactory</span><span class="o">::</span><span class="n">SetPipelineLayout</span><span class="p">(</span><span class="n">VkPipelineLayout</span> <span class="n">layout</span><span class="p">)</span> <span class="p">{</span>
+  <span class="n">m_layout</span> <span class="o">=</span> <span class="n">layout</span><span class="p">;</span>
+  <span class="k">return</span> <span class="o">*</span><span class="k">this</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="n">VkPipelineFactory</span><span class="o">&amp;</span> <span class="n">VkPipelineFactory</span><span class="o">::</span><span class="n">AddShaderStage</span><span class="p">(</span><span class="k">const</span> <span class="n">VkPipelineShaderStageCreateInfo</span><span class="o">&amp;</span> <span class="n">shaderStageCreateInfo</span><span class="p">)</span> <span class="p">{</span>
+  <span class="c1">// TODO(vasumahesh1): Emplace?</span>
+  <span class="n">m_stages</span><span class="p">.</span><span class="n">PushBack</span><span class="p">(</span><span class="n">shaderStageCreateInfo</span><span class="p">);</span>
+  <span class="k">return</span> <span class="o">*</span><span class="k">this</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="kt">void</span> <span class="n">VkPipelineFactory</span><span class="o">::</span><span class="n">Submit</span><span class="p">(</span><span class="n">Containers</span><span class="o">::</span><span class="n">Vector</span><span class="o">&lt;</span><span class="n">std</span><span class="o">::</span><span class="n">reference_wrapper</span><span class="o">&lt;</span><span class="n">VkScopedRenderPass</span><span class="o">&gt;&gt;</span> <span class="n">renderPasses</span><span class="p">,</span>
+                               <span class="n">Containers</span><span class="o">::</span><span class="n">Vector</span><span class="o">&lt;</span><span class="n">VkScopedPipeline</span><span class="o">&gt;&amp;</span> <span class="n">result</span><span class="p">)</span> <span class="k">const</span> <span class="p">{</span>
+  <span class="n">result</span><span class="p">.</span><span class="n">Reserve</span><span class="p">(</span><span class="n">renderPasses</span><span class="p">.</span><span class="n">GetSize</span><span class="p">());</span>
+
+  <span class="n">VkPipelineVertexInputStateCreateInfo</span> <span class="n">vertexInputInfo</span> <span class="o">=</span> <span class="p">{};</span>
+  <span class="n">vertexInputInfo</span><span class="p">.</span><span class="n">sType</span>                                <span class="o">=</span> <span class="n">VK_STRUCTURE_TYPE_PIPELINE_VERTEX_INPUT_STATE_CREATE_INFO</span><span class="p">;</span>
+  <span class="n">vertexInputInfo</span><span class="p">.</span><span class="n">vertexBindingDescriptionCount</span>        <span class="o">=</span> <span class="n">m_bindingInfo</span><span class="p">.</span><span class="n">GetSize</span><span class="p">();</span>
+  <span class="n">vertexInputInfo</span><span class="p">.</span><span class="n">pVertexBindingDescriptions</span>           <span class="o">=</span> <span class="n">m_bindingInfo</span><span class="p">.</span><span class="n">Data</span><span class="p">();</span>
+  <span class="n">vertexInputInfo</span><span class="p">.</span><span class="n">vertexAttributeDescriptionCount</span>      <span class="o">=</span> <span class="n">m_attributeDescription</span><span class="p">.</span><span class="n">GetSize</span><span class="p">();</span>
+  <span class="n">vertexInputInfo</span><span class="p">.</span><span class="n">pVertexAttributeDescriptions</span>         <span class="o">=</span> <span class="n">m_attributeDescription</span><span class="p">.</span><span class="n">Data</span><span class="p">();</span>
+
+  <span class="n">LOG_DBG</span><span class="p">(</span><span class="n">log_VulkanRenderSystem</span><span class="p">,</span> <span class="n">LOG_LEVEL</span><span class="p">,</span> <span class="s">&quot;Creating Pipeline&quot;</span><span class="p">);</span>
+  <span class="n">LOG_DBG</span><span class="p">(</span><span class="n">log_VulkanRenderSystem</span><span class="p">,</span> <span class="n">LOG_LEVEL</span><span class="p">,</span> <span class="s">&quot;Num Attribute Descriptions: %d&quot;</span><span class="p">,</span> <span class="n">m_attributeDescription</span><span class="p">.</span><span class="n">GetSize</span><span class="p">());</span>
+  <span class="n">LOG_DBG</span><span class="p">(</span><span class="n">log_VulkanRenderSystem</span><span class="p">,</span> <span class="n">LOG_LEVEL</span><span class="p">,</span> <span class="s">&quot;Num Binding Info: %d&quot;</span><span class="p">,</span> <span class="n">m_bindingInfo</span><span class="p">.</span><span class="n">GetSize</span><span class="p">());</span>
+
+  <span class="c1">// TODO(vasumahesh1):[DEPTH-STENCIL]: Expose this via an API</span>
+  <span class="n">VkPipelineDepthStencilStateCreateInfo</span> <span class="n">depthStencil</span> <span class="o">=</span> <span class="p">{};</span>
+  <span class="n">depthStencil</span><span class="p">.</span><span class="n">sType</span>                                 <span class="o">=</span> <span class="n">VK_STRUCTURE_TYPE_PIPELINE_DEPTH_STENCIL_STATE_CREATE_INFO</span><span class="p">;</span>
+  <span class="n">depthStencil</span><span class="p">.</span><span class="n">depthTestEnable</span>                       <span class="o">=</span> <span class="n">VK_TRUE</span><span class="p">;</span>
+  <span class="n">depthStencil</span><span class="p">.</span><span class="n">depthWriteEnable</span>                      <span class="o">=</span> <span class="n">VK_TRUE</span><span class="p">;</span>
+  <span class="n">depthStencil</span><span class="p">.</span><span class="n">depthCompareOp</span>                        <span class="o">=</span> <span class="n">VK_COMPARE_OP_LESS</span><span class="p">;</span> <span class="c1">// *</span>
+  <span class="n">depthStencil</span><span class="p">.</span><span class="n">depthBoundsTestEnable</span>                 <span class="o">=</span> <span class="n">VK_FALSE</span><span class="p">;</span>
+  <span class="n">depthStencil</span><span class="p">.</span><span class="n">minDepthBounds</span>                        <span class="o">=</span> <span class="mf">0.0f</span><span class="p">;</span> <span class="c1">// Optional</span>
+  <span class="n">depthStencil</span><span class="p">.</span><span class="n">maxDepthBounds</span>                        <span class="o">=</span> <span class="mf">1.0f</span><span class="p">;</span> <span class="c1">// Optional</span>
+  <span class="n">depthStencil</span><span class="p">.</span><span class="n">stencilTestEnable</span>                     <span class="o">=</span> <span class="n">VK_FALSE</span><span class="p">;</span>
+  <span class="n">depthStencil</span><span class="p">.</span><span class="n">front</span>                                 <span class="o">=</span> <span class="p">{};</span> <span class="c1">// Optional</span>
+  <span class="n">depthStencil</span><span class="p">.</span><span class="n">back</span>                                  <span class="o">=</span> <span class="p">{};</span> <span class="c1">// Optional</span>
+
+  <span class="n">VkGraphicsPipelineCreateInfo</span> <span class="n">pipelineInfo</span> <span class="o">=</span> <span class="p">{};</span>
+  <span class="n">pipelineInfo</span><span class="p">.</span><span class="n">sType</span>                        <span class="o">=</span> <span class="n">VK_STRUCTURE_TYPE_GRAPHICS_PIPELINE_CREATE_INFO</span><span class="p">;</span>
+
+  <span class="n">pipelineInfo</span><span class="p">.</span><span class="n">pVertexInputState</span>   <span class="o">=</span> <span class="o">&amp;</span><span class="n">vertexInputInfo</span><span class="p">;</span>
+  <span class="n">pipelineInfo</span><span class="p">.</span><span class="n">pInputAssemblyState</span> <span class="o">=</span> <span class="o">&amp;</span><span class="n">m_inputAssemblyStage</span><span class="p">;</span>
+  <span class="n">pipelineInfo</span><span class="p">.</span><span class="n">pViewportState</span>      <span class="o">=</span> <span class="o">&amp;</span><span class="n">m_viewportStage</span><span class="p">;</span>
+  <span class="n">pipelineInfo</span><span class="p">.</span><span class="n">pRasterizationState</span> <span class="o">=</span> <span class="o">&amp;</span><span class="n">m_rasterizerStage</span><span class="p">;</span>
+  <span class="n">pipelineInfo</span><span class="p">.</span><span class="n">pMultisampleState</span>   <span class="o">=</span> <span class="o">&amp;</span><span class="n">m_multisampleStage</span><span class="p">;</span>
+  <span class="n">pipelineInfo</span><span class="p">.</span><span class="n">pDepthStencilState</span>  <span class="o">=</span> <span class="o">&amp;</span><span class="n">depthStencil</span><span class="p">;</span>
+  <span class="n">pipelineInfo</span><span class="p">.</span><span class="n">pDynamicState</span>       <span class="o">=</span> <span class="k">nullptr</span><span class="p">;</span>
+  <span class="n">pipelineInfo</span><span class="p">.</span><span class="n">layout</span>              <span class="o">=</span> <span class="n">m_layout</span><span class="p">;</span>
+
+  <span class="n">pipelineInfo</span><span class="p">.</span><span class="n">subpass</span>            <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+  <span class="n">pipelineInfo</span><span class="p">.</span><span class="n">basePipelineHandle</span> <span class="o">=</span> <span class="n">VK_NULL_HANDLE</span><span class="p">;</span>
+  <span class="n">pipelineInfo</span><span class="p">.</span><span class="n">basePipelineIndex</span>  <span class="o">=</span> <span class="o">-</span><span class="mi">1</span><span class="p">;</span>
+
+  <span class="n">VkPipelineColorBlendStateCreateInfo</span> <span class="n">colorBlendStage</span><span class="p">{};</span>
+  <span class="n">colorBlendStage</span><span class="p">.</span><span class="n">sType</span> <span class="o">=</span> <span class="n">VK_STRUCTURE_TYPE_PIPELINE_COLOR_BLEND_STATE_CREATE_INFO</span><span class="p">;</span>
+
+  <span class="k">for</span> <span class="p">(</span><span class="k">const</span> <span class="k">auto</span><span class="o">&amp;</span> <span class="nl">renderPass</span> <span class="p">:</span> <span class="n">renderPasses</span><span class="p">)</span> <span class="p">{</span>
+    <span class="k">const</span> <span class="k">auto</span><span class="o">&amp;</span> <span class="n">colorBlendAttachments</span> <span class="o">=</span> <span class="n">renderPass</span><span class="p">.</span><span class="n">get</span><span class="p">().</span><span class="n">GetColorBlendAttachments</span><span class="p">();</span>
+
+    <span class="n">colorBlendStage</span><span class="p">.</span><span class="n">logicOpEnable</span>   <span class="o">=</span> <span class="n">VK_FALSE</span><span class="p">;</span>
+    <span class="n">colorBlendStage</span><span class="p">.</span><span class="n">attachmentCount</span> <span class="o">=</span> <span class="n">colorBlendAttachments</span><span class="p">.</span><span class="n">GetSize</span><span class="p">();</span>
+    <span class="n">colorBlendStage</span><span class="p">.</span><span class="n">pAttachments</span>    <span class="o">=</span> <span class="n">colorBlendAttachments</span><span class="p">.</span><span class="n">Data</span><span class="p">();</span>
+    <span class="n">pipelineInfo</span><span class="p">.</span><span class="n">pColorBlendState</span>   <span class="o">=</span> <span class="o">&amp;</span><span class="n">colorBlendStage</span><span class="p">;</span>
+
+    <span class="k">const</span> <span class="k">auto</span><span class="o">&amp;</span> <span class="n">stages</span> <span class="o">=</span> <span class="n">renderPass</span><span class="p">.</span><span class="n">get</span><span class="p">().</span><span class="n">GetShaderStageInfo</span><span class="p">();</span>
+
+    <span class="n">pipelineInfo</span><span class="p">.</span><span class="n">stageCount</span> <span class="o">=</span> <span class="n">stages</span><span class="p">.</span><span class="n">GetSize</span><span class="p">();</span>
+    <span class="n">pipelineInfo</span><span class="p">.</span><span class="n">pStages</span>    <span class="o">=</span> <span class="n">stages</span><span class="p">.</span><span class="n">Data</span><span class="p">();</span>
+    <span class="n">pipelineInfo</span><span class="p">.</span><span class="n">renderPass</span> <span class="o">=</span> <span class="n">renderPass</span><span class="p">.</span><span class="n">get</span><span class="p">().</span><span class="n">GetRenderPass</span><span class="p">();</span>
+
+    <span class="c1">// Locally assigned Shaders present</span>
+    <span class="k">if</span> <span class="p">(</span><span class="n">m_stages</span><span class="p">.</span><span class="n">GetSize</span><span class="p">()</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">)</span> <span class="p">{</span>
+      <span class="n">pipelineInfo</span><span class="p">.</span><span class="n">stageCount</span> <span class="o">=</span> <span class="n">m_stages</span><span class="p">.</span><span class="n">GetSize</span><span class="p">();</span>
+      <span class="n">pipelineInfo</span><span class="p">.</span><span class="n">pStages</span>    <span class="o">=</span> <span class="n">m_stages</span><span class="p">.</span><span class="n">Data</span><span class="p">();</span>
+    <span class="p">}</span>
+
+    <span class="n">LOG_DBG</span><span class="p">(</span><span class="n">log_VulkanRenderSystem</span><span class="p">,</span> <span class="n">LOG_LEVEL</span><span class="p">,</span> <span class="s">&quot;Pipeline Creation: Local Shader Stages: %d&quot;</span><span class="p">,</span> <span class="n">stages</span><span class="p">.</span><span class="n">GetSize</span><span class="p">());</span>
+    <span class="n">LOG_DBG</span><span class="p">(</span><span class="n">log_VulkanRenderSystem</span><span class="p">,</span> <span class="n">LOG_LEVEL</span><span class="p">,</span> <span class="s">&quot;Pipeline Creation: Render Pass Shader Stages: %d&quot;</span><span class="p">,</span> <span class="n">stages</span><span class="p">.</span><span class="n">GetSize</span><span class="p">());</span>
+
+    <span class="n">VkPipeline</span> <span class="n">pipeline</span><span class="p">;</span>
+    <span class="n">VERIFY_VK_OP</span><span class="p">(</span><span class="n">log_VulkanRenderSystem</span><span class="p">,</span> <span class="n">vkCreateGraphicsPipelines</span><span class="p">(</span><span class="n">m_device</span><span class="p">,</span> <span class="n">VK_NULL_HANDLE</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="o">&amp;</span><span class="n">pipelineInfo</span><span class="p">,</span> <span class="k">nullptr</span><span class="p">,</span>
+        <span class="o">&amp;</span><span class="n">pipeline</span><span class="p">),</span>
+      <span class="s">&quot;Failed to create pipeline&quot;</span><span class="p">);</span>
+
+    <span class="n">result</span><span class="p">.</span><span class="n">PushBack</span><span class="p">(</span><span class="n">VkScopedPipeline</span><span class="p">(</span><span class="n">pipeline</span><span class="p">));</span>
+  <span class="p">}</span>
+<span class="p">}</span>
+<span class="p">}</span> <span class="c1">// namespace Vulkan</span>
+<span class="p">}</span> <span class="c1">// namespace Azura</span>
+</pre></div>
+</div>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="file_Source_Azura_RenderSystem_Inc_Vulkan_VkScopedPipeline.h.html" class="btn btn-neutral float-right" title="File VkScopedPipeline.h" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="file_Source_Azura_RenderSystem_Src_Vulkan_VkScopedPipeline.cpp.html" class="btn btn-neutral" title="File VkScopedPipeline.cpp" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2018, Vasu Mahesh
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  
+
+    
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+        <script type="text/javascript" src="../_static/jquery.js"></script>
+        <script type="text/javascript" src="../_static/underscore.js"></script>
+        <script type="text/javascript" src="../_static/doctools.js"></script>
+        <script type="text/javascript" src="../_static/collapsible-lists\js\CollapsibleLists.compressed.js"></script>
+        <script type="text/javascript" src="../_static/collapsible-lists\js\apply-collapsible-lists.js"></script>
+    
+
+  
+
+  <script type="text/javascript" src="../_static/js/theme.js"></script>
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

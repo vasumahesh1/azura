@@ -1,0 +1,474 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>Program Listing for File VkScopedSwapChain.cpp &mdash; Azura  documentation</title>
+  
+
+  
+  
+  
+  
+
+  
+
+  
+  
+    
+
+  
+
+  <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/collapsible-lists\css\tree_view.css" type="text/css" />
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="File VkScopedSwapChain.h" href="file_Source_Azura_RenderSystem_Inc_Vulkan_VkScopedSwapChain.h.html" />
+    <link rel="prev" title="File VkScopedSwapChain.cpp" href="file_Source_Azura_RenderSystem_Src_Vulkan_VkScopedSwapChain.cpp.html" /> 
+
+  
+  <script src="../_static/js/modernizr.min.js"></script>
+
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search">
+          
+
+          
+            <a href="../index.html" class="icon icon-home"> Azura
+          
+
+          
+          </a>
+
+          
+            
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <ul>
+<li class="toctree-l1"><a class="reference internal" href="../setting-up.html">Setting Up</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../build-instructions.html">Build Instructions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../cmake-wrappers.html">CMake Wrappers</a></li>
+<li class="toctree-l1"><a class="reference internal" href="apiRoot.html">Azura API</a></li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">Azura</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../index.html">Docs</a> &raquo;</li>
+        
+          <li><a href="apiRoot.html">Azura API</a> &raquo;</li>
+        
+          <li><a href="file_Source_Azura_RenderSystem_Src_Vulkan_VkScopedSwapChain.cpp.html">File VkScopedSwapChain.cpp</a> &raquo;</li>
+        
+      <li>Program Listing for File VkScopedSwapChain.cpp</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            <a href="../_sources/html/program_listing_file_Source_Azura_RenderSystem_Src_Vulkan_VkScopedSwapChain.cpp.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="program-listing-for-file-vkscopedswapchain-cpp">
+<span id="program-listing-file-source-azura-rendersystem-src-vulkan-vkscopedswapchain-cpp"></span><h1>Program Listing for File VkScopedSwapChain.cpp<a class="headerlink" href="#program-listing-for-file-vkscopedswapchain-cpp" title="Permalink to this headline">¶</a></h1>
+<p>↰ <a class="reference internal" href="file_Source_Azura_RenderSystem_Src_Vulkan_VkScopedSwapChain.cpp.html#file-source-azura-rendersystem-src-vulkan-vkscopedswapchain-cpp"><span class="std std-ref">Return to documentation for file</span></a> (<code class="docutils literal notranslate"><span class="pre">Source\Azura\RenderSystem\Src\Vulkan\VkScopedSwapChain.cpp</span></code>)</p>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="cp">#include</span> <span class="cpf">&quot;Vulkan/VkScopedSwapChain.h&quot;</span><span class="cp"></span>
+<span class="cp">#include</span> <span class="cpf">&quot;Vulkan/VkTypes.h&quot;</span><span class="cp"></span>
+<span class="cp">#include</span> <span class="cpf">&quot;Vulkan/VkCore.h&quot;</span><span class="cp"></span>
+<span class="cp">#include</span> <span class="cpf">&quot;Generic/Renderer.h&quot;</span><span class="cp"></span>
+<span class="cp">#include</span> <span class="cpf">&quot;Vulkan/VkTypeMapping.h&quot;</span><span class="cp"></span>
+<span class="cp">#include</span> <span class="cpf">&quot;Vulkan/VkMacros.h&quot;</span><span class="cp"></span>
+<span class="cp">#include</span> <span class="cpf">&quot;Memory/MemoryFactory.h&quot;</span><span class="cp"></span>
+
+<span class="k">namespace</span> <span class="n">Azura</span> <span class="p">{</span>
+<span class="k">namespace</span> <span class="n">Vulkan</span> <span class="p">{</span>
+
+<span class="k">namespace</span> <span class="p">{</span>
+<span class="n">VkPresentModeKHR</span> <span class="n">ChooseSwapPresentMode</span><span class="p">(</span><span class="k">const</span> <span class="n">Containers</span><span class="o">::</span><span class="n">Vector</span><span class="o">&lt;</span><span class="n">VkPresentModeKHR</span><span class="o">&gt;&amp;</span> <span class="n">availablePresentModes</span><span class="p">)</span> <span class="p">{</span>
+  <span class="n">VkPresentModeKHR</span> <span class="n">bestMode</span> <span class="o">=</span> <span class="n">VK_PRESENT_MODE_FIFO_KHR</span><span class="p">;</span>
+  <span class="k">for</span> <span class="p">(</span><span class="k">const</span> <span class="k">auto</span><span class="o">&amp;</span> <span class="nl">availablePresentMode</span> <span class="p">:</span> <span class="n">availablePresentModes</span><span class="p">)</span> <span class="p">{</span>
+    <span class="k">if</span> <span class="p">(</span><span class="n">availablePresentMode</span> <span class="o">==</span> <span class="n">VK_PRESENT_MODE_MAILBOX_KHR</span><span class="p">)</span> <span class="p">{</span>
+      <span class="k">return</span> <span class="n">availablePresentMode</span><span class="p">;</span>
+    <span class="p">}</span>
+
+    <span class="k">if</span> <span class="p">(</span><span class="n">availablePresentMode</span> <span class="o">==</span> <span class="n">VK_PRESENT_MODE_IMMEDIATE_KHR</span><span class="p">)</span> <span class="p">{</span>
+      <span class="n">bestMode</span> <span class="o">=</span> <span class="n">availablePresentMode</span><span class="p">;</span>
+    <span class="p">}</span>
+  <span class="p">}</span>
+
+  <span class="k">return</span> <span class="n">bestMode</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="n">VkSurfaceFormatKHR</span> <span class="n">ChooseSwapSurfaceFormat</span><span class="p">(</span><span class="k">const</span> <span class="n">Containers</span><span class="o">::</span><span class="n">Vector</span><span class="o">&lt;</span><span class="n">VkSurfaceFormatKHR</span><span class="o">&gt;&amp;</span> <span class="n">availableFormats</span><span class="p">,</span>
+                                           <span class="k">const</span> <span class="n">SwapChainRequirements</span><span class="o">&amp;</span> <span class="n">requirement</span><span class="p">,</span>
+                                           <span class="k">const</span> <span class="n">Log</span><span class="o">&amp;</span> <span class="n">log_VulkanRenderSystem</span><span class="p">)</span> <span class="p">{</span>
+  <span class="k">const</span> <span class="k">auto</span> <span class="n">format</span> <span class="o">=</span> <span class="n">ToVkFormat</span><span class="p">(</span><span class="n">requirement</span><span class="p">.</span><span class="n">m_format</span><span class="p">);</span>
+  <span class="n">VERIFY_OPT</span><span class="p">(</span><span class="n">log_VulkanRenderSystem</span><span class="p">,</span> <span class="n">format</span><span class="p">,</span> <span class="s">&quot;Unknown Format&quot;</span><span class="p">);</span>
+
+  <span class="k">const</span> <span class="k">auto</span> <span class="n">colorSpace</span> <span class="o">=</span> <span class="n">ToVkColorSpaceKHR</span><span class="p">(</span><span class="n">requirement</span><span class="p">.</span><span class="n">m_colorSpace</span><span class="p">);</span>
+  <span class="n">VERIFY_OPT</span><span class="p">(</span><span class="n">log_VulkanRenderSystem</span><span class="p">,</span> <span class="n">colorSpace</span><span class="p">,</span> <span class="s">&quot;Unknown Colorspace&quot;</span><span class="p">);</span>
+
+  <span class="n">LOG_DBG</span><span class="p">(</span><span class="n">log_VulkanRenderSystem</span><span class="p">,</span> <span class="n">LOG_LEVEL</span><span class="p">,</span> <span class="s">&quot;Checking for %d availableFormats&quot;</span><span class="p">,</span> <span class="n">availableFormats</span><span class="p">.</span><span class="n">GetSize</span><span class="p">());</span>
+
+  <span class="c1">// no preferred format</span>
+  <span class="k">if</span> <span class="p">(</span><span class="n">availableFormats</span><span class="p">.</span><span class="n">GetSize</span><span class="p">()</span> <span class="o">==</span> <span class="mi">1</span> <span class="o">&amp;&amp;</span> <span class="n">availableFormats</span><span class="p">[</span><span class="mi">0</span><span class="p">].</span><span class="n">format</span> <span class="o">==</span> <span class="n">VK_FORMAT_UNDEFINED</span><span class="p">)</span> <span class="p">{</span>
+    <span class="k">return</span> <span class="p">{</span><span class="n">format</span><span class="p">.</span><span class="n">value</span><span class="p">(),</span> <span class="n">colorSpace</span><span class="p">.</span><span class="n">value</span><span class="p">()};</span>
+  <span class="p">}</span>
+
+  <span class="k">for</span> <span class="p">(</span><span class="k">const</span> <span class="k">auto</span><span class="o">&amp;</span> <span class="nl">availableFormat</span> <span class="p">:</span> <span class="n">availableFormats</span><span class="p">)</span> <span class="p">{</span>
+    <span class="k">if</span> <span class="p">(</span><span class="n">availableFormat</span><span class="p">.</span><span class="n">format</span> <span class="o">==</span> <span class="n">format</span><span class="p">.</span><span class="n">value</span><span class="p">()</span> <span class="o">&amp;&amp;</span> <span class="n">availableFormat</span><span class="p">.</span><span class="n">colorSpace</span> <span class="o">==</span> <span class="n">colorSpace</span><span class="p">.</span><span class="n">value</span><span class="p">())</span> <span class="p">{</span>
+      <span class="k">return</span> <span class="n">availableFormat</span><span class="p">;</span>
+    <span class="p">}</span>
+  <span class="p">}</span>
+
+  <span class="k">throw</span> <span class="n">std</span><span class="o">::</span><span class="n">runtime_error</span><span class="p">(</span><span class="s">&quot;Cannot get proper required swapchain format&quot;</span><span class="p">);</span>
+<span class="p">}</span>
+
+<span class="n">VkExtent2D</span> <span class="n">ChooseSwapExtent</span><span class="p">(</span><span class="k">const</span> <span class="n">VkSurfaceCapabilitiesKHR</span><span class="o">&amp;</span> <span class="n">capabilities</span><span class="p">,</span> <span class="k">const</span> <span class="n">SwapChainRequirements</span><span class="o">&amp;</span> <span class="n">requirement</span><span class="p">)</span> <span class="p">{</span>
+  <span class="k">if</span> <span class="p">(</span><span class="n">capabilities</span><span class="p">.</span><span class="n">currentExtent</span><span class="p">.</span><span class="n">width</span> <span class="o">!=</span> <span class="n">std</span><span class="o">::</span><span class="n">numeric_limits</span><span class="o">&lt;</span><span class="n">U32</span><span class="o">&gt;::</span><span class="n">max</span><span class="p">())</span> <span class="p">{</span>
+    <span class="k">return</span> <span class="n">capabilities</span><span class="p">.</span><span class="n">currentExtent</span><span class="p">;</span>
+  <span class="p">}</span>
+
+  <span class="n">VkExtent2D</span> <span class="n">actualExtent</span> <span class="o">=</span> <span class="p">{</span><span class="n">requirement</span><span class="p">.</span><span class="n">m_extent</span><span class="p">.</span><span class="n">m_width</span><span class="p">,</span> <span class="n">requirement</span><span class="p">.</span><span class="n">m_extent</span><span class="p">.</span><span class="n">m_height</span><span class="p">};</span>
+  <span class="n">actualExtent</span><span class="p">.</span><span class="n">width</span>      <span class="o">=</span>
+    <span class="n">std</span><span class="o">::</span><span class="n">max</span><span class="p">(</span><span class="n">capabilities</span><span class="p">.</span><span class="n">minImageExtent</span><span class="p">.</span><span class="n">width</span><span class="p">,</span> <span class="n">std</span><span class="o">::</span><span class="n">min</span><span class="p">(</span><span class="n">capabilities</span><span class="p">.</span><span class="n">maxImageExtent</span><span class="p">.</span><span class="n">width</span><span class="p">,</span> <span class="n">actualExtent</span><span class="p">.</span><span class="n">width</span><span class="p">));</span>
+  <span class="n">actualExtent</span><span class="p">.</span><span class="n">height</span> <span class="o">=</span>
+    <span class="n">std</span><span class="o">::</span><span class="n">max</span><span class="p">(</span><span class="n">capabilities</span><span class="p">.</span><span class="n">minImageExtent</span><span class="p">.</span><span class="n">height</span><span class="p">,</span> <span class="n">std</span><span class="o">::</span><span class="n">min</span><span class="p">(</span><span class="n">capabilities</span><span class="p">.</span><span class="n">maxImageExtent</span><span class="p">.</span><span class="n">height</span><span class="p">,</span> <span class="n">actualExtent</span><span class="p">.</span><span class="n">height</span><span class="p">));</span>
+  <span class="k">return</span> <span class="n">actualExtent</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="p">}</span> <span class="c1">// namespace</span>
+
+<span class="n">VkScopedSwapChain</span><span class="o">::</span><span class="n">VkScopedSwapChain</span><span class="p">(</span><span class="n">Memory</span><span class="o">::</span><span class="n">Allocator</span><span class="o">&amp;</span> <span class="n">allocator</span><span class="p">,</span> <span class="n">Log</span> <span class="n">logger</span><span class="p">)</span>
+  <span class="o">:</span> <span class="n">log_VulkanRenderSystem</span><span class="p">(</span><span class="n">std</span><span class="o">::</span><span class="n">move</span><span class="p">(</span><span class="n">logger</span><span class="p">)),</span>
+    <span class="n">m_swapChain</span><span class="p">(),</span>
+    <span class="n">m_extent</span><span class="p">(),</span>
+    <span class="n">m_surfaceFormat</span><span class="p">(),</span>
+    <span class="n">m_images</span><span class="p">(</span><span class="n">allocator</span><span class="p">),</span>
+    <span class="n">m_depthImage</span><span class="p">(</span><span class="n">log_VulkanRenderSystem</span><span class="p">)</span> <span class="p">{</span>
+<span class="p">}</span>
+
+<span class="kt">void</span> <span class="n">VkScopedSwapChain</span><span class="o">::</span><span class="n">Create</span><span class="p">(</span><span class="n">VkDevice</span> <span class="n">device</span><span class="p">,</span>
+                               <span class="n">VkPhysicalDevice</span> <span class="n">physicalDevice</span><span class="p">,</span>
+                               <span class="n">VkQueue</span> <span class="n">graphicsQueue</span><span class="p">,</span>
+                               <span class="n">VkCommandPool</span> <span class="n">graphicsCommandPool</span><span class="p">,</span>
+                               <span class="n">VkSurfaceKHR</span> <span class="n">surface</span><span class="p">,</span>
+                               <span class="k">const</span> <span class="n">VkQueueIndices</span><span class="o">&amp;</span> <span class="n">queueIndices</span><span class="p">,</span>
+                               <span class="k">const</span> <span class="n">SwapChainDeviceSupport</span><span class="o">&amp;</span> <span class="n">swapChainSupport</span><span class="p">,</span>
+                               <span class="k">const</span> <span class="n">SwapChainRequirements</span><span class="o">&amp;</span> <span class="n">swapChainRequirement</span><span class="p">,</span>
+                               <span class="k">const</span> <span class="n">VkPhysicalDeviceMemoryProperties</span><span class="o">&amp;</span> <span class="n">physicalDeviceMemoryProperties</span><span class="p">)</span> <span class="p">{</span>
+
+  <span class="n">STACK_ALLOCATOR</span><span class="p">(</span><span class="n">Temporary</span><span class="p">,</span> <span class="n">Memory</span><span class="o">::</span><span class="n">MonotonicAllocator</span><span class="p">,</span> <span class="mi">1024</span><span class="p">);</span>
+
+  <span class="n">m_hasDepthSupport</span> <span class="o">=</span> <span class="n">swapChainRequirement</span><span class="p">.</span><span class="n">m_depthFormat</span> <span class="o">!=</span> <span class="n">RawStorageFormat</span><span class="o">::</span><span class="n">UNKNOWN</span><span class="p">;</span>
+
+  <span class="k">const</span> <span class="n">VkPresentModeKHR</span> <span class="n">presentMode</span> <span class="o">=</span> <span class="n">ChooseSwapPresentMode</span><span class="p">(</span><span class="n">swapChainSupport</span><span class="p">.</span><span class="n">m_presentModes</span><span class="p">);</span>
+  <span class="n">m_surfaceFormat</span>                    <span class="o">=</span> <span class="n">ChooseSwapSurfaceFormat</span><span class="p">(</span><span class="n">swapChainSupport</span><span class="p">.</span><span class="n">m_formats</span><span class="p">,</span> <span class="n">swapChainRequirement</span><span class="p">,</span>
+                                                               <span class="n">log_VulkanRenderSystem</span><span class="p">);</span>
+  <span class="n">m_extent</span> <span class="o">=</span> <span class="n">ChooseSwapExtent</span><span class="p">(</span><span class="n">swapChainSupport</span><span class="p">.</span><span class="n">m_capabilities</span><span class="p">,</span> <span class="n">swapChainRequirement</span><span class="p">);</span>
+
+  <span class="c1">// TODO(vasumahesh1): Need requirement?</span>
+  <span class="c1">// Set Queue Length of SwapChain</span>
+  <span class="n">m_imageCount</span> <span class="o">=</span> <span class="n">swapChainSupport</span><span class="p">.</span><span class="n">m_capabilities</span><span class="p">.</span><span class="n">minImageCount</span> <span class="o">+</span> <span class="mi">1</span><span class="p">;</span>
+
+  <span class="k">if</span> <span class="p">(</span><span class="n">swapChainSupport</span><span class="p">.</span><span class="n">m_capabilities</span><span class="p">.</span><span class="n">maxImageCount</span> <span class="o">&gt;</span> <span class="mi">0</span>
+      <span class="o">&amp;&amp;</span> <span class="n">m_imageCount</span> <span class="o">&gt;</span> <span class="n">swapChainSupport</span><span class="p">.</span><span class="n">m_capabilities</span><span class="p">.</span><span class="n">maxImageCount</span><span class="p">)</span> <span class="p">{</span>
+    <span class="n">m_imageCount</span> <span class="o">=</span> <span class="n">swapChainSupport</span><span class="p">.</span><span class="n">m_capabilities</span><span class="p">.</span><span class="n">maxImageCount</span><span class="p">;</span>
+  <span class="p">}</span>
+
+  <span class="n">VkSwapchainCreateInfoKHR</span> <span class="n">createInfo</span> <span class="o">=</span> <span class="p">{};</span>
+  <span class="n">createInfo</span><span class="p">.</span><span class="n">sType</span>                    <span class="o">=</span> <span class="n">VK_STRUCTURE_TYPE_SWAPCHAIN_CREATE_INFO_KHR</span><span class="p">;</span>
+  <span class="n">createInfo</span><span class="p">.</span><span class="n">surface</span>                  <span class="o">=</span> <span class="n">surface</span><span class="p">;</span>
+  <span class="n">createInfo</span><span class="p">.</span><span class="n">minImageCount</span>            <span class="o">=</span> <span class="n">m_imageCount</span><span class="p">;</span>
+  <span class="n">createInfo</span><span class="p">.</span><span class="n">imageFormat</span>              <span class="o">=</span> <span class="n">m_surfaceFormat</span><span class="p">.</span><span class="n">format</span><span class="p">;</span>
+  <span class="n">createInfo</span><span class="p">.</span><span class="n">imageColorSpace</span>          <span class="o">=</span> <span class="n">m_surfaceFormat</span><span class="p">.</span><span class="n">colorSpace</span><span class="p">;</span>
+  <span class="n">createInfo</span><span class="p">.</span><span class="n">imageExtent</span>              <span class="o">=</span> <span class="n">m_extent</span><span class="p">;</span>
+  <span class="n">createInfo</span><span class="p">.</span><span class="n">imageArrayLayers</span>         <span class="o">=</span> <span class="mi">1</span><span class="p">;</span>
+  <span class="n">createInfo</span><span class="p">.</span><span class="n">imageUsage</span>               <span class="o">=</span> <span class="n">VK_IMAGE_USAGE_COLOR_ATTACHMENT_BIT</span> <span class="o">|</span> <span class="n">VK_IMAGE_USAGE_TRANSFER_SRC_BIT</span><span class="p">;</span>
+
+  <span class="c1">// TODO(vasumahesh1): Possible bug if Graphics Queue is not the same as Present Queue. How to handle?</span>
+  <span class="k">if</span> <span class="p">(</span><span class="n">queueIndices</span><span class="p">.</span><span class="n">m_transferFamily</span> <span class="o">!=</span> <span class="o">-</span><span class="mi">1</span> <span class="o">&amp;&amp;</span> <span class="n">queueIndices</span><span class="p">.</span><span class="n">m_isTransferQueueRequired</span><span class="p">)</span> <span class="p">{</span>
+    <span class="n">createInfo</span><span class="p">.</span><span class="n">imageSharingMode</span>      <span class="o">=</span> <span class="n">VK_SHARING_MODE_CONCURRENT</span><span class="p">;</span>
+    <span class="n">createInfo</span><span class="p">.</span><span class="n">queueFamilyIndexCount</span> <span class="o">=</span> <span class="n">queueIndices</span><span class="p">.</span><span class="n">GetActiveSize</span><span class="p">();</span>
+    <span class="n">createInfo</span><span class="p">.</span><span class="n">pQueueFamilyIndices</span>   <span class="o">=</span> <span class="n">queueIndices</span><span class="p">.</span><span class="n">GetIndicesArray</span><span class="p">().</span><span class="n">data</span><span class="p">();</span>
+  <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+    <span class="n">createInfo</span><span class="p">.</span><span class="n">imageSharingMode</span>      <span class="o">=</span> <span class="n">VK_SHARING_MODE_EXCLUSIVE</span><span class="p">;</span>
+    <span class="n">createInfo</span><span class="p">.</span><span class="n">queueFamilyIndexCount</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+    <span class="n">createInfo</span><span class="p">.</span><span class="n">pQueueFamilyIndices</span>   <span class="o">=</span> <span class="k">nullptr</span><span class="p">;</span>
+  <span class="p">}</span>
+
+  <span class="n">createInfo</span><span class="p">.</span><span class="n">preTransform</span>   <span class="o">=</span> <span class="n">swapChainSupport</span><span class="p">.</span><span class="n">m_capabilities</span><span class="p">.</span><span class="n">currentTransform</span><span class="p">;</span>
+  <span class="n">createInfo</span><span class="p">.</span><span class="n">compositeAlpha</span> <span class="o">=</span> <span class="n">VK_COMPOSITE_ALPHA_OPAQUE_BIT_KHR</span><span class="p">;</span>
+  <span class="n">createInfo</span><span class="p">.</span><span class="n">presentMode</span>    <span class="o">=</span> <span class="n">presentMode</span><span class="p">;</span>
+  <span class="n">createInfo</span><span class="p">.</span><span class="n">clipped</span>        <span class="o">=</span> <span class="n">VK_TRUE</span><span class="p">;</span>
+  <span class="n">createInfo</span><span class="p">.</span><span class="n">oldSwapchain</span>   <span class="o">=</span> <span class="n">VK_NULL_HANDLE</span><span class="p">;</span>
+
+  <span class="n">VERIFY_VK_OP</span><span class="p">(</span><span class="n">log_VulkanRenderSystem</span><span class="p">,</span> <span class="n">vkCreateSwapchainKHR</span><span class="p">(</span><span class="n">device</span><span class="p">,</span> <span class="o">&amp;</span><span class="n">createInfo</span><span class="p">,</span> <span class="k">nullptr</span><span class="p">,</span> <span class="o">&amp;</span><span class="n">m_swapChain</span><span class="p">),</span>
+    <span class="s">&quot;Failed to create swap chain&quot;</span><span class="p">);</span>
+
+  <span class="n">vkGetSwapchainImagesKHR</span><span class="p">(</span><span class="n">device</span><span class="p">,</span> <span class="n">m_swapChain</span><span class="p">,</span> <span class="o">&amp;</span><span class="n">m_imageCount</span><span class="p">,</span> <span class="k">nullptr</span><span class="p">);</span>
+  <span class="n">m_images</span><span class="p">.</span><span class="n">Reserve</span><span class="p">(</span><span class="n">m_imageCount</span><span class="p">);</span>
+
+  <span class="n">Containers</span><span class="o">::</span><span class="n">Vector</span><span class="o">&lt;</span><span class="n">VkImage</span><span class="o">&gt;</span> <span class="n">tempImages</span><span class="p">{</span><span class="n">Containers</span><span class="o">::</span><span class="n">ContainerExtent</span><span class="p">{</span><span class="n">m_imageCount</span><span class="p">},</span> <span class="n">allocatorTemporary</span><span class="p">};</span>
+  <span class="n">vkGetSwapchainImagesKHR</span><span class="p">(</span><span class="n">device</span><span class="p">,</span> <span class="n">m_swapChain</span><span class="p">,</span> <span class="o">&amp;</span><span class="n">m_imageCount</span><span class="p">,</span> <span class="n">tempImages</span><span class="p">.</span><span class="n">Data</span><span class="p">());</span>
+
+  <span class="n">TextureDesc</span> <span class="n">swapChainDesc</span>       <span class="o">=</span> <span class="p">{};</span>
+  <span class="n">swapChainDesc</span><span class="p">.</span><span class="n">m_arrayLayers</span>     <span class="o">=</span> <span class="mi">1</span><span class="p">;</span>
+  <span class="n">swapChainDesc</span><span class="p">.</span><span class="n">m_mipLevels</span>       <span class="o">=</span> <span class="mi">1</span><span class="p">;</span>
+  <span class="n">swapChainDesc</span><span class="p">.</span><span class="n">m_bounds</span><span class="p">.</span><span class="n">m_width</span>  <span class="o">=</span> <span class="n">m_extent</span><span class="p">.</span><span class="n">width</span><span class="p">;</span>
+  <span class="n">swapChainDesc</span><span class="p">.</span><span class="n">m_bounds</span><span class="p">.</span><span class="n">m_height</span> <span class="o">=</span> <span class="n">m_extent</span><span class="p">.</span><span class="n">height</span><span class="p">;</span>
+  <span class="n">swapChainDesc</span><span class="p">.</span><span class="n">m_bounds</span><span class="p">.</span><span class="n">m_depth</span>  <span class="o">=</span> <span class="mi">1</span><span class="p">;</span>
+  <span class="n">swapChainDesc</span><span class="p">.</span><span class="n">m_format</span>          <span class="o">=</span> <span class="n">swapChainRequirement</span><span class="p">.</span><span class="n">m_format</span><span class="p">;</span>
+  <span class="n">swapChainDesc</span><span class="p">.</span><span class="n">m_type</span>            <span class="o">=</span> <span class="n">ImageType</span><span class="o">::</span><span class="n">Image2D</span><span class="p">;</span>
+
+  <span class="k">for</span> <span class="p">(</span><span class="n">U32</span> <span class="n">idx</span>       <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">idx</span> <span class="o">&lt;</span> <span class="n">m_imageCount</span><span class="p">;</span> <span class="o">++</span><span class="n">idx</span><span class="p">)</span> <span class="p">{</span>
+    <span class="k">auto</span> <span class="n">scopedImage</span> <span class="o">=</span> <span class="n">VkScopedImage</span><span class="p">(</span><span class="n">device</span><span class="p">,</span> <span class="n">swapChainDesc</span><span class="p">,</span> <span class="n">tempImages</span><span class="p">[</span><span class="n">idx</span><span class="p">],</span> <span class="n">log_VulkanRenderSystem</span><span class="p">);</span>
+    <span class="n">scopedImage</span><span class="p">.</span><span class="n">CreateImageView</span><span class="p">(</span><span class="n">ImageViewType</span><span class="o">::</span><span class="n">ImageView2D</span><span class="p">);</span>
+    <span class="n">m_images</span><span class="p">.</span><span class="n">PushBack</span><span class="p">(</span><span class="n">scopedImage</span><span class="p">);</span>
+  <span class="p">}</span>
+
+  <span class="k">if</span> <span class="p">(</span><span class="o">!</span><span class="n">m_hasDepthSupport</span><span class="p">)</span>
+  <span class="p">{</span>
+    <span class="n">LOG_DBG</span><span class="p">(</span><span class="n">log_VulkanRenderSystem</span><span class="p">,</span> <span class="n">LOG_LEVEL</span><span class="p">,</span> <span class="s">&quot;Depth Format Not Supplied; Will not create Depth Attachment Image&quot;</span><span class="p">);</span>
+    <span class="k">return</span><span class="p">;</span>
+  <span class="p">}</span>
+
+  <span class="c1">// Check if Depth Format is supported by Device or not.</span>
+  <span class="k">const</span> <span class="kt">bool</span> <span class="n">depthFormatCheck</span> <span class="o">=</span> <span class="n">VkCore</span><span class="o">::</span><span class="n">QueryFormatFeatureSupport</span><span class="p">(</span>
+                                                                  <span class="n">physicalDevice</span><span class="p">,</span>
+                                                                  <span class="n">VkCore</span><span class="o">::</span><span class="n">GetVkFormat</span><span class="p">(</span><span class="n">swapChainRequirement</span><span class="p">.</span>
+                                                                                      <span class="n">m_depthFormat</span><span class="p">,</span>
+                                                                                      <span class="n">log_VulkanRenderSystem</span><span class="p">),</span>
+                                                                  <span class="p">[](</span><span class="k">const</span> <span class="n">VkFormatProperties</span><span class="o">&amp;</span> <span class="n">prop</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">bool</span>
+                                                                  <span class="p">{</span>
+                                                                    <span class="k">return</span> <span class="p">(</span><span class="n">prop</span><span class="p">.</span><span class="n">optimalTilingFeatures</span> <span class="o">&amp;</span>
+                                                                            <span class="n">VK_FORMAT_FEATURE_DEPTH_STENCIL_ATTACHMENT_BIT</span>
+                                                                           <span class="p">)</span> <span class="o">==</span>
+                                                                           <span class="n">VK_FORMAT_FEATURE_DEPTH_STENCIL_ATTACHMENT_BIT</span><span class="p">;</span>
+  <span class="p">});</span>
+
+  <span class="n">VERIFY_TRUE</span><span class="p">(</span><span class="n">log_VulkanRenderSystem</span><span class="p">,</span> <span class="n">depthFormatCheck</span><span class="p">,</span> <span class="s">&quot;Depth Format Not Supported&quot;</span><span class="p">);</span>
+
+  <span class="n">TextureDesc</span> <span class="n">depthDesc</span> <span class="o">=</span> <span class="n">swapChainDesc</span><span class="p">;</span>
+  <span class="n">depthDesc</span><span class="p">.</span><span class="n">m_format</span> <span class="o">=</span> <span class="n">swapChainRequirement</span><span class="p">.</span><span class="n">m_depthFormat</span><span class="p">;</span>
+  <span class="n">depthDesc</span><span class="p">.</span><span class="n">m_arrayLayers</span>     <span class="o">=</span> <span class="mi">1</span><span class="p">;</span>
+  <span class="n">depthDesc</span><span class="p">.</span><span class="n">m_mipLevels</span>       <span class="o">=</span> <span class="mi">1</span><span class="p">;</span>
+  <span class="n">depthDesc</span><span class="p">.</span><span class="n">m_size</span> <span class="o">=</span> <span class="n">GetFormatSize</span><span class="p">(</span><span class="n">swapChainRequirement</span><span class="p">.</span><span class="n">m_depthFormat</span><span class="p">)</span> <span class="o">*</span> <span class="n">swapChainDesc</span><span class="p">.</span><span class="n">m_bounds</span><span class="p">.</span><span class="n">m_width</span> <span class="o">*</span> <span class="n">swapChainDesc</span><span class="p">.</span><span class="n">m_bounds</span><span class="p">.</span><span class="n">m_height</span><span class="p">;</span>
+
+  <span class="n">m_depthImage</span><span class="p">.</span><span class="n">Create</span><span class="p">(</span><span class="n">device</span><span class="p">,</span> <span class="n">depthDesc</span><span class="p">,</span> <span class="n">VK_IMAGE_USAGE_DEPTH_STENCIL_ATTACHMENT_BIT</span><span class="p">,</span> <span class="n">physicalDeviceMemoryProperties</span><span class="p">);</span>
+  <span class="n">m_depthImage</span><span class="p">.</span><span class="n">CreateImageView</span><span class="p">(</span><span class="n">ImageViewType</span><span class="o">::</span><span class="n">ImageView2D</span><span class="p">);</span>
+
+  <span class="n">VkCommandBuffer</span> <span class="n">depthCommandBuffer</span> <span class="o">=</span> <span class="n">VkCore</span><span class="o">::</span><span class="n">CreateCommandBuffer</span><span class="p">(</span><span class="n">device</span><span class="p">,</span> <span class="n">graphicsCommandPool</span><span class="p">,</span>
+    <span class="n">VK_COMMAND_BUFFER_LEVEL_PRIMARY</span><span class="p">,</span>
+    <span class="n">log_VulkanRenderSystem</span><span class="p">);</span>
+  <span class="n">VkCore</span><span class="o">::</span><span class="n">BeginCommandBuffer</span><span class="p">(</span><span class="n">depthCommandBuffer</span><span class="p">,</span> <span class="n">VK_COMMAND_BUFFER_USAGE_ONE_TIME_SUBMIT_BIT</span><span class="p">,</span> <span class="n">log_VulkanRenderSystem</span><span class="p">);</span>
+
+
+  <span class="k">const</span> <span class="n">ImageTransition</span> <span class="n">layoutUndefined</span><span class="p">{</span>
+    <span class="n">VK_IMAGE_LAYOUT_UNDEFINED</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="n">VK_PIPELINE_STAGE_TOP_OF_PIPE_BIT</span>
+  <span class="p">};</span>
+
+  <span class="k">const</span> <span class="n">ImageTransition</span> <span class="n">layoutDepth</span><span class="p">{</span>
+    <span class="n">VK_IMAGE_LAYOUT_DEPTH_STENCIL_ATTACHMENT_OPTIMAL</span><span class="p">,</span> <span class="n">VK_ACCESS_DEPTH_STENCIL_ATTACHMENT_READ_BIT</span> <span class="o">|</span> <span class="n">VK_ACCESS_DEPTH_STENCIL_ATTACHMENT_WRITE_BIT</span><span class="p">,</span> <span class="n">VK_PIPELINE_STAGE_EARLY_FRAGMENT_TESTS_BIT</span>
+  <span class="p">};</span>
+
+  <span class="n">m_depthImage</span><span class="p">.</span><span class="n">TransitionLayout</span><span class="p">(</span><span class="n">depthCommandBuffer</span><span class="p">,</span> <span class="n">layoutUndefined</span><span class="p">,</span> <span class="n">layoutDepth</span><span class="p">);</span>
+
+  <span class="c1">// Flush &amp; Wait</span>
+  <span class="n">VkCore</span><span class="o">::</span><span class="n">FlushCommandBuffer</span><span class="p">(</span><span class="n">device</span><span class="p">,</span> <span class="n">depthCommandBuffer</span><span class="p">,</span> <span class="n">graphicsQueue</span><span class="p">,</span> <span class="n">log_VulkanRenderSystem</span><span class="p">);</span>
+  <span class="n">vkFreeCommandBuffers</span><span class="p">(</span><span class="n">device</span><span class="p">,</span> <span class="n">graphicsCommandPool</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="o">&amp;</span><span class="n">depthCommandBuffer</span><span class="p">);</span>
+<span class="p">}</span>
+
+<span class="kt">void</span> <span class="n">VkScopedSwapChain</span><span class="o">::</span><span class="n">CleanUp</span><span class="p">(</span><span class="n">VkDevice</span> <span class="n">device</span><span class="p">)</span> <span class="p">{</span>
+  <span class="c1">// Swapchains have a different cleanup compared to VkScopedImage</span>
+  <span class="k">for</span> <span class="p">(</span><span class="k">const</span> <span class="k">auto</span><span class="o">&amp;</span> <span class="nl">image</span> <span class="p">:</span> <span class="n">m_images</span><span class="p">)</span> <span class="p">{</span>
+    <span class="n">vkDestroyImageView</span><span class="p">(</span><span class="n">device</span><span class="p">,</span> <span class="n">image</span><span class="p">.</span><span class="n">View</span><span class="p">(),</span> <span class="k">nullptr</span><span class="p">);</span>
+  <span class="p">}</span>
+  <span class="k">if</span> <span class="p">(</span><span class="n">m_hasDepthSupport</span><span class="p">)</span> <span class="p">{</span>
+    <span class="n">m_depthImage</span><span class="p">.</span><span class="n">CleanUp</span><span class="p">();</span>
+  <span class="p">}</span>
+
+  <span class="n">vkDestroySwapchainKHR</span><span class="p">(</span><span class="n">device</span><span class="p">,</span> <span class="n">m_swapChain</span><span class="p">,</span> <span class="k">nullptr</span><span class="p">);</span>
+<span class="p">}</span>
+
+<span class="n">VkSwapchainKHR</span> <span class="n">VkScopedSwapChain</span><span class="o">::</span><span class="n">Real</span><span class="p">()</span> <span class="k">const</span> <span class="p">{</span>
+  <span class="k">return</span> <span class="n">m_swapChain</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="n">VkFormat</span> <span class="n">VkScopedSwapChain</span><span class="o">::</span><span class="n">GetSurfaceFormat</span><span class="p">()</span> <span class="k">const</span> <span class="p">{</span>
+  <span class="k">return</span> <span class="n">m_surfaceFormat</span><span class="p">.</span><span class="n">format</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="n">VkFormat</span> <span class="n">VkScopedSwapChain</span><span class="o">::</span><span class="n">GetDepthFormat</span><span class="p">()</span> <span class="k">const</span> <span class="p">{</span>
+  <span class="k">return</span> <span class="n">m_depthImage</span><span class="p">.</span><span class="n">GetRealFormat</span><span class="p">();</span>
+<span class="p">}</span>
+
+<span class="kt">bool</span> <span class="n">VkScopedSwapChain</span><span class="o">::</span><span class="n">HasDepthSupport</span><span class="p">()</span> <span class="k">const</span> <span class="p">{</span>
+  <span class="k">return</span> <span class="n">m_hasDepthSupport</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="k">const</span> <span class="n">VkExtent2D</span><span class="o">&amp;</span> <span class="n">VkScopedSwapChain</span><span class="o">::</span><span class="n">GetExtent</span><span class="p">()</span> <span class="k">const</span> <span class="p">{</span>
+  <span class="k">return</span> <span class="n">m_extent</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="k">const</span> <span class="n">VkScopedImage</span><span class="o">&amp;</span> <span class="n">VkScopedSwapChain</span><span class="o">::</span><span class="n">GetImage</span><span class="p">(</span><span class="kt">int</span> <span class="n">frameIdx</span><span class="p">)</span> <span class="k">const</span> <span class="p">{</span>
+  <span class="k">return</span> <span class="n">m_images</span><span class="p">[</span><span class="n">frameIdx</span><span class="p">];</span>
+<span class="p">}</span>
+
+<span class="k">const</span> <span class="n">VkScopedImage</span><span class="o">&amp;</span> <span class="n">VkScopedSwapChain</span><span class="o">::</span><span class="n">GetDepthImage</span><span class="p">()</span> <span class="k">const</span> <span class="p">{</span>
+  <span class="k">return</span> <span class="n">m_depthImage</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="k">const</span> <span class="n">Containers</span><span class="o">::</span><span class="n">Vector</span><span class="o">&lt;</span><span class="n">VkScopedImage</span><span class="o">&gt;&amp;</span> <span class="n">VkScopedSwapChain</span><span class="o">::</span><span class="n">GetAllImages</span><span class="p">()</span> <span class="k">const</span> <span class="p">{</span>
+  <span class="k">return</span> <span class="n">m_images</span><span class="p">;</span>
+<span class="p">}</span>
+<span class="p">}</span> <span class="c1">// namespace Vulkan</span>
+<span class="p">}</span> <span class="c1">// namespace Azura</span>
+</pre></div>
+</div>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="file_Source_Azura_RenderSystem_Inc_Vulkan_VkScopedSwapChain.h.html" class="btn btn-neutral float-right" title="File VkScopedSwapChain.h" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="file_Source_Azura_RenderSystem_Src_Vulkan_VkScopedSwapChain.cpp.html" class="btn btn-neutral" title="File VkScopedSwapChain.cpp" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2018, Vasu Mahesh
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  
+
+    
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+        <script type="text/javascript" src="../_static/jquery.js"></script>
+        <script type="text/javascript" src="../_static/underscore.js"></script>
+        <script type="text/javascript" src="../_static/doctools.js"></script>
+        <script type="text/javascript" src="../_static/collapsible-lists\js\CollapsibleLists.compressed.js"></script>
+        <script type="text/javascript" src="../_static/collapsible-lists\js\apply-collapsible-lists.js"></script>
+    
+
+  
+
+  <script type="text/javascript" src="../_static/js/theme.js"></script>
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

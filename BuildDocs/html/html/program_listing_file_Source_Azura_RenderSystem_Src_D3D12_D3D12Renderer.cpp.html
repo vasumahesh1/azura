@@ -1,0 +1,713 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>Program Listing for File D3D12Renderer.cpp &mdash; Azura  documentation</title>
+  
+
+  
+  
+  
+  
+
+  
+
+  
+  
+    
+
+  
+
+  <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/collapsible-lists\css\tree_view.css" type="text/css" />
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="File D3D12Renderer.h" href="file_Source_Azura_RenderSystem_Inc_D3D12_D3D12Renderer.h.html" />
+    <link rel="prev" title="File D3D12Renderer.cpp" href="file_Source_Azura_RenderSystem_Src_D3D12_D3D12Renderer.cpp.html" /> 
+
+  
+  <script src="../_static/js/modernizr.min.js"></script>
+
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search">
+          
+
+          
+            <a href="../index.html" class="icon icon-home"> Azura
+          
+
+          
+          </a>
+
+          
+            
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <ul>
+<li class="toctree-l1"><a class="reference internal" href="../setting-up.html">Setting Up</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../build-instructions.html">Build Instructions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../cmake-wrappers.html">CMake Wrappers</a></li>
+<li class="toctree-l1"><a class="reference internal" href="apiRoot.html">Azura API</a></li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">Azura</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../index.html">Docs</a> &raquo;</li>
+        
+          <li><a href="apiRoot.html">Azura API</a> &raquo;</li>
+        
+          <li><a href="file_Source_Azura_RenderSystem_Src_D3D12_D3D12Renderer.cpp.html">File D3D12Renderer.cpp</a> &raquo;</li>
+        
+      <li>Program Listing for File D3D12Renderer.cpp</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            <a href="../_sources/html/program_listing_file_Source_Azura_RenderSystem_Src_D3D12_D3D12Renderer.cpp.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="program-listing-for-file-d3d12renderer-cpp">
+<span id="program-listing-file-source-azura-rendersystem-src-d3d12-d3d12renderer-cpp"></span><h1>Program Listing for File D3D12Renderer.cpp<a class="headerlink" href="#program-listing-for-file-d3d12renderer-cpp" title="Permalink to this headline">¶</a></h1>
+<p>↰ <a class="reference internal" href="file_Source_Azura_RenderSystem_Src_D3D12_D3D12Renderer.cpp.html#file-source-azura-rendersystem-src-d3d12-d3d12renderer-cpp"><span class="std std-ref">Return to documentation for file</span></a> (<code class="docutils literal notranslate"><span class="pre">Source\Azura\RenderSystem\Src\D3D12\D3D12Renderer.cpp</span></code>)</p>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="cp">#include</span> <span class="cpf">&quot;D3D12/D3D12Renderer.h&quot;</span><span class="cp"></span>
+<span class="cp">#include</span> <span class="cpf">&quot;D3D12/D3D12Macros.h&quot;</span><span class="cp"></span>
+
+<span class="cp">#include</span> <span class="cpf">&quot;D3D12/d3dx12.h&quot;</span><span class="cp"></span>
+<span class="cp">#include</span> <span class="cpf">&quot;Memory/MemoryFactory.h&quot;</span><span class="cp"></span>
+<span class="cp">#include</span> <span class="cpf">&lt;array&gt;</span><span class="cp"></span>
+<span class="cp">#include</span> <span class="cpf">&quot;Log/Log.h&quot;</span><span class="cp"></span>
+
+<span class="k">using</span> <span class="k">namespace</span> <span class="n">Microsoft</span><span class="o">::</span><span class="n">WRL</span><span class="p">;</span>    <span class="c1">// NOLINT</span>
+<span class="k">using</span> <span class="k">namespace</span> <span class="n">Azura</span><span class="o">::</span><span class="n">Containers</span><span class="p">;</span> <span class="c1">// NOLINT</span>
+
+<span class="k">namespace</span> <span class="n">Azura</span> <span class="p">{</span>
+<span class="k">namespace</span> <span class="n">D3D12</span> <span class="p">{</span>
+
+<span class="n">D3D12Renderer</span><span class="o">::</span><span class="n">D3D12Renderer</span><span class="p">(</span><span class="k">const</span> <span class="n">ApplicationInfo</span><span class="o">&amp;</span> <span class="n">appInfo</span><span class="p">,</span>
+                             <span class="k">const</span> <span class="n">DeviceRequirements</span><span class="o">&amp;</span> <span class="n">deviceRequirements</span><span class="p">,</span>
+                             <span class="k">const</span> <span class="n">ApplicationRequirements</span><span class="o">&amp;</span> <span class="n">appRequirements</span><span class="p">,</span>
+                             <span class="k">const</span> <span class="n">SwapChainRequirements</span><span class="o">&amp;</span> <span class="n">swapChainRequirements</span><span class="p">,</span>
+                             <span class="k">const</span> <span class="n">RenderPassRequirements</span><span class="o">&amp;</span> <span class="n">renderPassRequirements</span><span class="p">,</span>
+                             <span class="k">const</span> <span class="n">DescriptorRequirements</span><span class="o">&amp;</span> <span class="n">descriptorRequirements</span><span class="p">,</span>
+                             <span class="k">const</span> <span class="n">ShaderRequirements</span><span class="o">&amp;</span> <span class="n">shaderRequirements</span><span class="p">,</span>
+                             <span class="n">Memory</span><span class="o">::</span><span class="n">Allocator</span><span class="o">&amp;</span> <span class="n">mainAllocator</span><span class="p">,</span>
+                             <span class="n">Memory</span><span class="o">::</span><span class="n">Allocator</span><span class="o">&amp;</span> <span class="n">drawAllocator</span><span class="p">,</span>
+                             <span class="n">Window</span><span class="o">&amp;</span> <span class="n">window</span><span class="p">)</span>
+  <span class="o">:</span> <span class="n">Renderer</span><span class="p">(</span><span class="n">appInfo</span><span class="p">,</span> <span class="n">deviceRequirements</span><span class="p">,</span> <span class="n">appRequirements</span><span class="p">,</span> <span class="n">swapChainRequirements</span><span class="p">,</span> <span class="n">descriptorRequirements</span><span class="p">,</span>
+             <span class="n">mainAllocator</span><span class="p">,</span> <span class="n">drawAllocator</span><span class="p">,</span> <span class="n">window</span><span class="p">),</span>
+    <span class="n">log_D3D12RenderSystem</span><span class="p">(</span><span class="n">Log</span><span class="p">(</span><span class="s">&quot;D3D12RenderSystem&quot;</span><span class="p">)),</span>
+    <span class="n">m_perFrameBuffer</span><span class="p">(</span><span class="mi">8192</span><span class="p">),</span>
+    <span class="n">m_perFrameAllocator</span><span class="p">(</span><span class="n">m_perFrameBuffer</span><span class="p">,</span> <span class="mi">8192</span><span class="p">),</span>
+    <span class="n">m_initBuffer</span><span class="p">(</span><span class="mh">0x400000</span><span class="p">),</span>
+    <span class="n">m_initAllocator</span><span class="p">(</span><span class="n">m_initBuffer</span><span class="p">,</span> <span class="mh">0x400000</span><span class="p">),</span>
+    <span class="n">m_renderSequence</span><span class="p">(</span><span class="n">renderPassRequirements</span><span class="p">.</span><span class="n">m_passSequence</span><span class="p">.</span><span class="n">GetSize</span><span class="p">(),</span> <span class="n">mainAllocator</span><span class="p">),</span>
+    <span class="n">m_renderTargetUpdates</span><span class="p">(</span><span class="n">renderPassRequirements</span><span class="p">.</span><span class="n">m_targets</span><span class="p">.</span><span class="n">GetSize</span><span class="p">(),</span> <span class="n">mainAllocator</span><span class="p">),</span>
+    <span class="n">m_bufferTargetUpdates</span><span class="p">(</span><span class="n">renderPassRequirements</span><span class="p">.</span><span class="n">m_buffers</span><span class="p">.</span><span class="n">GetSize</span><span class="p">(),</span> <span class="n">mainAllocator</span><span class="p">),</span>
+    <span class="n">m_targetImages</span><span class="p">(</span><span class="n">renderPassRequirements</span><span class="p">.</span><span class="n">m_targets</span><span class="p">.</span><span class="n">GetSize</span><span class="p">(),</span> <span class="n">mainAllocator</span><span class="p">),</span>
+    <span class="n">m_targetBuffers</span><span class="p">(</span><span class="n">renderPassRequirements</span><span class="p">.</span><span class="n">m_buffers</span><span class="p">.</span><span class="n">GetSize</span><span class="p">(),</span> <span class="n">mainAllocator</span><span class="p">),</span>
+    <span class="n">m_renderPasses</span><span class="p">(</span><span class="n">renderPassRequirements</span><span class="p">.</span><span class="n">m_passSequence</span><span class="p">.</span><span class="n">GetSize</span><span class="p">(),</span> <span class="n">mainAllocator</span><span class="p">),</span>
+    <span class="n">m_computePasses</span><span class="p">(</span><span class="n">renderPassRequirements</span><span class="p">.</span><span class="n">m_passSequence</span><span class="p">.</span><span class="n">GetSize</span><span class="p">(),</span> <span class="n">mainAllocator</span><span class="p">),</span>
+    <span class="n">m_drawablePools</span><span class="p">(</span><span class="n">renderPassRequirements</span><span class="p">.</span><span class="n">m_maxPools</span><span class="p">,</span> <span class="n">drawAllocator</span><span class="p">),</span>
+    <span class="n">m_computePools</span><span class="p">(</span><span class="n">renderPassRequirements</span><span class="p">.</span><span class="n">m_maxPools</span><span class="p">,</span> <span class="n">drawAllocator</span><span class="p">),</span>
+    <span class="n">m_shaders</span><span class="p">(</span><span class="n">shaderRequirements</span><span class="p">.</span><span class="n">m_shaders</span><span class="p">.</span><span class="n">GetSize</span><span class="p">(),</span> <span class="n">mainAllocator</span><span class="p">)</span> <span class="p">{</span>
+
+  <span class="k">const</span> <span class="k">auto</span> <span class="n">viewportDimensions</span> <span class="o">=</span> <span class="n">window</span><span class="p">.</span><span class="n">GetViewport</span><span class="p">();</span>
+  <span class="n">m_viewport</span>                    <span class="o">=</span> <span class="n">CD3DX12_VIEWPORT</span><span class="p">(</span><span class="mf">0.0f</span><span class="p">,</span> <span class="mf">0.0f</span><span class="p">,</span> <span class="n">viewportDimensions</span><span class="p">.</span><span class="n">m_width</span><span class="p">,</span> <span class="n">viewportDimensions</span><span class="p">.</span><span class="n">m_height</span><span class="p">);</span>
+  <span class="n">m_scissorRect</span>                 <span class="o">=</span> <span class="n">CD3DX12_RECT</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="k">static_cast</span><span class="o">&lt;</span><span class="n">LONG</span><span class="o">&gt;</span><span class="p">(</span><span class="n">viewportDimensions</span><span class="p">.</span><span class="n">m_width</span><span class="p">),</span>
+                                               <span class="k">static_cast</span><span class="o">&lt;</span><span class="n">LONG</span><span class="o">&gt;</span><span class="p">(</span><span class="n">viewportDimensions</span><span class="p">.</span><span class="n">m_height</span><span class="p">));</span>
+
+<span class="cp">#ifdef BUILD_DEBUG</span>
+  <span class="n">UINT</span> <span class="n">dxgiFactoryFlags</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+  <span class="n">ComPtr</span><span class="o">&lt;</span><span class="n">ID3D12Debug</span><span class="o">&gt;</span> <span class="n">debugController</span><span class="p">;</span>
+  <span class="n">ComPtr</span><span class="o">&lt;</span><span class="n">ID3D12Debug1</span><span class="o">&gt;</span> <span class="n">debugController1</span><span class="p">;</span>
+  <span class="k">if</span> <span class="p">(</span><span class="n">SUCCEEDED</span><span class="p">(</span><span class="n">D3D12GetDebugInterface</span><span class="p">(</span><span class="n">IID_PPV_ARGS</span><span class="p">(</span><span class="o">&amp;</span><span class="n">debugController</span><span class="p">))))</span> <span class="p">{</span>
+    <span class="n">debugController</span><span class="o">-&gt;</span><span class="n">EnableDebugLayer</span><span class="p">();</span>
+
+    <span class="n">debugController</span><span class="o">-&gt;</span><span class="n">QueryInterface</span><span class="p">(</span><span class="n">IID_PPV_ARGS</span><span class="p">(</span><span class="o">&amp;</span><span class="n">debugController1</span><span class="p">));</span>
+    <span class="n">debugController1</span><span class="o">-&gt;</span><span class="n">SetEnableGPUBasedValidation</span><span class="p">(</span><span class="nb">true</span><span class="p">);</span> <span class="c1">// NOLINT</span>
+
+    <span class="c1">// Enable additional debug layers.</span>
+    <span class="n">dxgiFactoryFlags</span> <span class="o">|=</span> <span class="n">DXGI_CREATE_FACTORY_DEBUG</span><span class="p">;</span>
+  <span class="p">}</span>
+<span class="cp">#elif defined(BUILD_RELEASE)</span>
+  <span class="k">const</span> <span class="n">UINT</span> <span class="n">dxgiFactoryFlags</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+<span class="cp">#endif</span>
+
+  <span class="n">ComPtr</span><span class="o">&lt;</span><span class="n">IDXGIFactory4</span><span class="o">&gt;</span> <span class="n">factory</span><span class="p">;</span>
+  <span class="n">VERIFY_D3D_OP</span><span class="p">(</span><span class="n">log_D3D12RenderSystem</span><span class="p">,</span> <span class="n">CreateDXGIFactory2</span><span class="p">(</span><span class="n">dxgiFactoryFlags</span><span class="p">,</span> <span class="n">IID_PPV_ARGS</span><span class="p">(</span><span class="o">&amp;</span><span class="n">factory</span><span class="p">)),</span>
+    <span class="s">&quot;Failed to create DXGI Factory&quot;</span><span class="p">);</span>
+
+  <span class="n">ComPtr</span><span class="o">&lt;</span><span class="n">IDXGIAdapter1</span><span class="o">&gt;</span> <span class="n">hardwareAdapter</span><span class="p">;</span>
+  <span class="n">D3D12Core</span><span class="o">::</span><span class="n">GetHardwareAdapter</span><span class="p">(</span><span class="n">factory</span><span class="p">.</span><span class="n">Get</span><span class="p">(),</span> <span class="o">&amp;</span><span class="n">hardwareAdapter</span><span class="p">,</span> <span class="n">log_D3D12RenderSystem</span><span class="p">);</span>
+
+<span class="cp">#ifdef BUILD_DEBUG</span>
+  <span class="n">ComPtr</span><span class="o">&lt;</span><span class="n">IDXGIAdapter</span><span class="o">&gt;</span> <span class="n">warpAdapter</span><span class="p">;</span>
+  <span class="n">VERIFY_D3D_OP</span><span class="p">(</span><span class="n">log_D3D12RenderSystem</span><span class="p">,</span> <span class="n">factory</span><span class="o">-&gt;</span><span class="n">EnumWarpAdapter</span><span class="p">(</span><span class="n">IID_PPV_ARGS</span><span class="p">(</span><span class="o">&amp;</span><span class="n">warpAdapter</span><span class="p">)),</span> <span class="s">&quot;Failed to create Warp adapter&quot;</span><span class="p">);</span>
+<span class="cp">#endif</span>
+
+  <span class="n">VERIFY_D3D_OP</span><span class="p">(</span><span class="n">log_D3D12RenderSystem</span><span class="p">,</span> <span class="n">D3D12CreateDevice</span><span class="p">(</span><span class="n">hardwareAdapter</span><span class="p">.</span><span class="n">Get</span><span class="p">(),</span> <span class="n">D3D_FEATURE_LEVEL_11_0</span><span class="p">,</span> <span class="n">IID_PPV_ARGS</span><span class="p">(</span><span class="o">&amp;</span>
+    <span class="n">m_device</span><span class="p">)),</span> <span class="s">&quot;Failed to create D3D12 Device&quot;</span><span class="p">);</span>
+
+  <span class="c1">// Describe and create the command queue.</span>
+  <span class="n">D3D12_COMMAND_QUEUE_DESC</span> <span class="n">queueDesc</span> <span class="o">=</span> <span class="p">{};</span>
+  <span class="n">queueDesc</span><span class="p">.</span><span class="n">Flags</span>                    <span class="o">=</span> <span class="n">D3D12_COMMAND_QUEUE_FLAG_NONE</span><span class="p">;</span>
+  <span class="n">queueDesc</span><span class="p">.</span><span class="n">Type</span>                     <span class="o">=</span> <span class="n">D3D12_COMMAND_LIST_TYPE_DIRECT</span><span class="p">;</span>
+
+  <span class="n">VERIFY_D3D_OP</span><span class="p">(</span><span class="n">log_D3D12RenderSystem</span><span class="p">,</span> <span class="n">m_device</span><span class="o">-&gt;</span><span class="n">CreateCommandQueue</span><span class="p">(</span><span class="o">&amp;</span><span class="n">queueDesc</span><span class="p">,</span> <span class="n">IID_PPV_ARGS</span><span class="p">(</span><span class="o">&amp;</span><span class="n">m_mainGraphicsCommandQueue</span><span class="p">)),</span>
+    <span class="s">&quot;Failed to create command Queue&quot;</span><span class="p">);</span>
+
+  <span class="n">D3D12_COMMAND_QUEUE_DESC</span> <span class="n">computeQueueDesc</span> <span class="o">=</span> <span class="p">{};</span>
+  <span class="n">computeQueueDesc</span><span class="p">.</span><span class="n">Flags</span>                    <span class="o">=</span> <span class="n">D3D12_COMMAND_QUEUE_FLAG_NONE</span><span class="p">;</span>
+  <span class="n">computeQueueDesc</span><span class="p">.</span><span class="n">Type</span>                     <span class="o">=</span> <span class="n">D3D12_COMMAND_LIST_TYPE_COMPUTE</span><span class="p">;</span>
+
+  <span class="n">VERIFY_D3D_OP</span><span class="p">(</span><span class="n">log_D3D12RenderSystem</span><span class="p">,</span> <span class="n">m_device</span><span class="o">-&gt;</span><span class="n">CreateCommandQueue</span><span class="p">(</span><span class="o">&amp;</span><span class="n">computeQueueDesc</span><span class="p">,</span> <span class="n">IID_PPV_ARGS</span><span class="p">(</span><span class="o">&amp;</span><span class="n">m_mainComputeCommandQueue</span><span class="p">)),</span>
+    <span class="s">&quot;Failed to create command Queue&quot;</span><span class="p">);</span>
+
+  <span class="n">m_swapChain</span><span class="p">.</span><span class="n">Create</span><span class="p">(</span><span class="n">factory</span><span class="p">,</span> <span class="n">m_mainGraphicsCommandQueue</span><span class="p">,</span> <span class="n">m_window</span><span class="p">.</span><span class="n">get</span><span class="p">(),</span> <span class="n">swapChainRequirements</span><span class="p">,</span> <span class="n">log_D3D12RenderSystem</span><span class="p">);</span>
+
+  <span class="n">SetCurrentFrame</span><span class="p">(</span><span class="n">m_swapChain</span><span class="p">.</span><span class="n">RealComPtr</span><span class="p">()</span><span class="o">-&gt;</span><span class="n">GetCurrentBackBufferIndex</span><span class="p">());</span>
+
+  <span class="c1">// Create Buffers</span>
+  <span class="n">m_stagingBuffer</span><span class="p">.</span><span class="n">Create</span><span class="p">(</span><span class="n">m_device</span><span class="p">,</span> <span class="n">CD3DX12_HEAP_PROPERTIES</span><span class="p">(</span><span class="n">D3D12_HEAP_TYPE_UPLOAD</span><span class="p">),</span> <span class="n">GetApplicationRequirements</span><span class="p">().</span><span class="n">m_renderer</span><span class="p">.</span><span class="n">m_stagingBufferSize</span><span class="p">,</span>
+    <span class="n">D3D12_RESOURCE_STATE_GENERIC_READ</span><span class="p">,</span> <span class="n">log_D3D12RenderSystem</span><span class="p">);</span>
+  <span class="n">m_stagingBuffer</span><span class="p">.</span><span class="n">Map</span><span class="p">();</span>
+
+
+  <span class="k">for</span> <span class="p">(</span><span class="k">const</span> <span class="k">auto</span><span class="o">&amp;</span> <span class="nl">shaderCreateInfo</span> <span class="p">:</span> <span class="n">shaderRequirements</span><span class="p">.</span><span class="n">m_shaders</span><span class="p">)</span> <span class="p">{</span>
+    <span class="n">D3D12Renderer</span><span class="o">::</span><span class="n">AddShader</span><span class="p">(</span><span class="n">shaderCreateInfo</span><span class="p">);</span>
+  <span class="p">}</span>
+
+  <span class="k">for</span> <span class="p">(</span><span class="k">const</span> <span class="k">auto</span><span class="o">&amp;</span> <span class="nl">renderTarget</span> <span class="p">:</span> <span class="n">renderPassRequirements</span><span class="p">.</span><span class="n">m_targets</span><span class="p">)</span> <span class="p">{</span>
+    <span class="n">TextureDesc</span> <span class="n">desc</span> <span class="o">=</span> <span class="p">{};</span>
+    <span class="n">desc</span><span class="p">.</span><span class="n">m_format</span>    <span class="o">=</span> <span class="n">renderTarget</span><span class="p">.</span><span class="n">m_format</span><span class="p">;</span>
+    <span class="n">desc</span><span class="p">.</span><span class="n">m_bounds</span>    <span class="o">=</span> <span class="n">Bounds3D</span><span class="p">{</span><span class="n">swapChainRequirements</span><span class="p">.</span><span class="n">m_extent</span><span class="p">.</span><span class="n">m_width</span><span class="p">,</span> <span class="n">swapChainRequirements</span><span class="p">.</span><span class="n">m_extent</span><span class="p">.</span><span class="n">m_height</span><span class="p">,</span> <span class="mi">1</span><span class="p">};</span>
+
+    <span class="k">if</span> <span class="p">(</span><span class="n">renderTarget</span><span class="p">.</span><span class="n">m_width</span> <span class="o">&gt;</span> <span class="mi">0</span> <span class="o">&amp;&amp;</span> <span class="n">renderTarget</span><span class="p">.</span><span class="n">m_height</span> <span class="o">&gt;</span> <span class="mi">0</span> <span class="o">&amp;&amp;</span> <span class="n">renderTarget</span><span class="p">.</span><span class="n">m_depth</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">)</span>
+    <span class="p">{</span>
+      <span class="n">desc</span><span class="p">.</span><span class="n">m_bounds</span> <span class="o">=</span> <span class="n">Bounds3D</span><span class="p">{</span><span class="n">U32</span><span class="p">(</span><span class="n">renderTarget</span><span class="p">.</span><span class="n">m_width</span><span class="p">),</span> <span class="n">U32</span><span class="p">(</span><span class="n">renderTarget</span><span class="p">.</span><span class="n">m_height</span><span class="p">),</span> <span class="n">U32</span><span class="p">(</span><span class="n">renderTarget</span><span class="p">.</span><span class="n">m_depth</span><span class="p">)};</span>
+    <span class="p">}</span>
+
+    <span class="n">LOG_DBG</span><span class="p">(</span><span class="n">log_D3D12RenderSystem</span><span class="p">,</span> <span class="n">LOG_LEVEL</span><span class="p">,</span> <span class="s">&quot;Creating Attachment Input at: %d for %s&quot;</span><span class="p">,</span> <span class="n">m_targetImages</span><span class="p">.</span>
+      <span class="n">GetSize</span><span class="p">(),</span> <span class="n">ToString</span><span class="p">(</span><span class="n">renderTarget</span><span class="p">.</span><span class="n">m_format</span><span class="p">).</span><span class="n">c_str</span><span class="p">());</span>
+
+    <span class="k">const</span> <span class="n">D3D12_RESOURCE_STATES</span> <span class="n">resourceState</span> <span class="o">=</span> <span class="n">D3D12_RESOURCE_STATE_COMMON</span><span class="p">;</span>
+
+    <span class="n">D3D12_RESOURCE_FLAGS</span> <span class="n">resourceFlags</span> <span class="o">=</span> <span class="n">D3D12_RESOURCE_FLAG_ALLOW_RENDER_TARGET</span> <span class="o">|</span> <span class="n">D3D12_RESOURCE_FLAG_ALLOW_UNORDERED_ACCESS</span><span class="p">;</span>
+    <span class="k">if</span> <span class="p">(</span><span class="n">HasDepthComponent</span><span class="p">(</span><span class="n">desc</span><span class="p">.</span><span class="n">m_format</span><span class="p">)</span> <span class="o">||</span> <span class="n">HasStencilComponent</span><span class="p">(</span><span class="n">desc</span><span class="p">.</span><span class="n">m_format</span><span class="p">))</span> <span class="p">{</span>
+      <span class="n">resourceFlags</span> <span class="o">=</span> <span class="n">D3D12_RESOURCE_FLAG_ALLOW_DEPTH_STENCIL</span><span class="p">;</span>
+    <span class="p">}</span>
+
+    <span class="n">m_targetImages</span><span class="p">.</span><span class="n">PushBack</span><span class="p">(</span><span class="n">D3D12ScopedImage</span><span class="p">());</span>
+    <span class="n">m_targetImages</span><span class="p">.</span><span class="n">Last</span><span class="p">().</span><span class="n">Create</span><span class="p">(</span><span class="n">m_device</span><span class="p">,</span> <span class="n">resourceState</span><span class="p">,</span> <span class="n">resourceFlags</span><span class="p">,</span> <span class="n">desc</span><span class="p">,</span> <span class="n">log_D3D12RenderSystem</span><span class="p">);</span>
+  <span class="p">}</span>
+
+  <span class="k">for</span> <span class="p">(</span><span class="k">const</span> <span class="k">auto</span><span class="o">&amp;</span> <span class="nl">bufferTarget</span> <span class="p">:</span> <span class="n">renderPassRequirements</span><span class="p">.</span><span class="n">m_buffers</span><span class="p">)</span> <span class="p">{</span>
+    <span class="k">const</span> <span class="n">D3D12_RESOURCE_STATES</span> <span class="n">resourceState</span> <span class="o">=</span> <span class="n">D3D12_RESOURCE_STATE_COMMON</span><span class="p">;</span>
+    <span class="k">const</span> <span class="n">D3D12_RESOURCE_FLAGS</span> <span class="n">resourceFlags</span> <span class="o">=</span> <span class="n">D3D12_RESOURCE_FLAG_ALLOW_UNORDERED_ACCESS</span><span class="p">;</span>
+
+    <span class="n">m_targetBuffers</span><span class="p">.</span><span class="n">PushBack</span><span class="p">(</span><span class="n">D3D12ScopedBuffer</span><span class="p">());</span>
+    <span class="n">m_targetBuffers</span><span class="p">.</span><span class="n">Last</span><span class="p">().</span><span class="n">Create</span><span class="p">(</span><span class="n">m_device</span><span class="p">,</span> <span class="n">CD3DX12_HEAP_PROPERTIES</span><span class="p">(</span><span class="n">D3D12_HEAP_TYPE_DEFAULT</span><span class="p">),</span> <span class="n">bufferTarget</span><span class="p">.</span><span class="n">m_size</span><span class="p">,</span> <span class="n">resourceState</span><span class="p">,</span> <span class="n">resourceFlags</span><span class="p">,</span> <span class="n">log_D3D12RenderSystem</span><span class="p">);</span>
+    <span class="n">m_targetBuffers</span><span class="p">.</span><span class="n">Last</span><span class="p">().</span><span class="n">SetStride</span><span class="p">(</span><span class="n">bufferTarget</span><span class="p">.</span><span class="n">m_stride</span><span class="p">);</span>
+  <span class="p">}</span>
+
+  <span class="k">if</span> <span class="p">(</span><span class="n">swapChainRequirements</span><span class="p">.</span><span class="n">m_depthFormat</span> <span class="o">!=</span> <span class="n">RawStorageFormat</span><span class="o">::</span><span class="n">UNKNOWN</span><span class="p">)</span> <span class="p">{</span>
+    <span class="n">TextureDesc</span> <span class="n">desc</span> <span class="o">=</span> <span class="p">{};</span>
+    <span class="n">desc</span><span class="p">.</span><span class="n">m_format</span> <span class="o">=</span> <span class="n">swapChainRequirements</span><span class="p">.</span><span class="n">m_depthFormat</span><span class="p">;</span>
+    <span class="n">desc</span><span class="p">.</span><span class="n">m_bounds</span> <span class="o">=</span> <span class="n">Bounds3D</span><span class="p">{</span> <span class="n">swapChainRequirements</span><span class="p">.</span><span class="n">m_extent</span><span class="p">.</span><span class="n">m_width</span><span class="p">,</span> <span class="n">swapChainRequirements</span><span class="p">.</span><span class="n">m_extent</span><span class="p">.</span><span class="n">m_height</span><span class="p">,</span> <span class="mi">1</span> <span class="p">};</span>
+
+    <span class="k">const</span> <span class="n">D3D12_RESOURCE_STATES</span> <span class="n">resourceState</span> <span class="o">=</span> <span class="n">D3D12_RESOURCE_STATE_DEPTH_WRITE</span><span class="p">;</span>
+    <span class="k">const</span> <span class="n">D3D12_RESOURCE_FLAGS</span> <span class="n">resourceFlags</span> <span class="o">=</span> <span class="n">D3D12_RESOURCE_FLAG_ALLOW_DEPTH_STENCIL</span><span class="p">;</span>
+    <span class="n">m_depthTexture</span><span class="p">.</span><span class="n">Create</span><span class="p">(</span><span class="n">m_device</span><span class="p">,</span> <span class="n">resourceState</span><span class="p">,</span> <span class="n">resourceFlags</span><span class="p">,</span> <span class="n">desc</span><span class="p">,</span> <span class="n">log_D3D12RenderSystem</span><span class="p">);</span>
+  <span class="p">}</span>
+
+  <span class="n">m_rtvDescriptorSize</span> <span class="o">=</span> <span class="n">m_device</span><span class="o">-&gt;</span><span class="n">GetDescriptorHandleIncrementSize</span><span class="p">(</span><span class="n">D3D12_DESCRIPTOR_HEAP_TYPE_RTV</span><span class="p">);</span>
+  <span class="n">m_dsvDescriptorSize</span> <span class="o">=</span> <span class="n">m_device</span><span class="o">-&gt;</span><span class="n">GetDescriptorHandleIncrementSize</span><span class="p">(</span><span class="n">D3D12_DESCRIPTOR_HEAP_TYPE_DSV</span><span class="p">);</span>
+
+  <span class="n">U32</span> <span class="n">passCount</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+  <span class="k">for</span> <span class="p">(</span><span class="k">const</span> <span class="k">auto</span><span class="o">&amp;</span> <span class="nl">passCreateInfo</span> <span class="p">:</span> <span class="n">renderPassRequirements</span><span class="p">.</span><span class="n">m_passSequence</span><span class="p">)</span> <span class="p">{</span>
+    <span class="k">if</span> <span class="p">(</span><span class="n">passCreateInfo</span><span class="p">.</span><span class="n">m_type</span> <span class="o">==</span> <span class="n">RenderPassType</span><span class="o">::</span><span class="n">Graphics</span><span class="p">)</span> <span class="p">{</span>
+
+      <span class="n">D3D12ScopedRenderPass</span> <span class="n">renderPass</span> <span class="o">=</span> <span class="n">D3D12ScopedRenderPass</span><span class="p">(</span><span class="n">passCount</span><span class="p">,</span> <span class="n">m_renderPasses</span><span class="p">.</span><span class="n">GetSize</span><span class="p">(),</span> <span class="n">m_swapChain</span><span class="p">,</span> <span class="n">mainAllocator</span><span class="p">,</span>
+        <span class="n">log_D3D12RenderSystem</span><span class="p">);</span>
+
+      <span class="k">if</span> <span class="p">(</span><span class="n">passCount</span> <span class="o">!=</span> <span class="p">(</span><span class="n">renderPassRequirements</span><span class="p">.</span><span class="n">m_passSequence</span><span class="p">.</span><span class="n">GetSize</span><span class="p">()</span> <span class="o">-</span> <span class="mi">1</span><span class="p">))</span> <span class="p">{</span>
+        <span class="n">renderPass</span><span class="p">.</span><span class="n">Create</span><span class="p">(</span><span class="n">m_device</span><span class="p">,</span>
+          <span class="n">passCreateInfo</span><span class="p">,</span>
+          <span class="n">renderPassRequirements</span><span class="p">.</span><span class="n">m_targets</span><span class="p">,</span>
+          <span class="n">m_targetImages</span><span class="p">,</span>
+          <span class="n">m_descriptorSlots</span><span class="p">,</span>
+          <span class="n">m_descriptorSetTable</span><span class="p">,</span>
+          <span class="n">m_shaders</span><span class="p">,</span>
+          <span class="n">m_rtvDescriptorSize</span><span class="p">,</span> <span class="n">m_dsvDescriptorSize</span><span class="p">);</span>
+      <span class="p">}</span>
+      <span class="k">else</span> <span class="p">{</span>
+        <span class="n">renderPass</span><span class="p">.</span><span class="n">CreateForSwapChain</span><span class="p">(</span><span class="n">m_device</span><span class="p">,</span>
+          <span class="n">passCreateInfo</span><span class="p">,</span>
+          <span class="n">renderPassRequirements</span><span class="p">.</span><span class="n">m_targets</span><span class="p">,</span>
+          <span class="n">m_targetImages</span><span class="p">,</span>
+          <span class="n">m_depthTexture</span><span class="p">,</span>
+          <span class="n">m_descriptorSlots</span><span class="p">,</span>
+          <span class="n">m_descriptorSetTable</span><span class="p">,</span>
+          <span class="n">m_shaders</span><span class="p">,</span>
+          <span class="n">m_rtvDescriptorSize</span><span class="p">,</span> <span class="n">m_dsvDescriptorSize</span><span class="p">);</span>
+      <span class="p">}</span>
+
+      <span class="n">m_renderPasses</span><span class="p">.</span><span class="n">PushBack</span><span class="p">(</span><span class="n">renderPass</span><span class="p">);</span>
+      <span class="n">m_renderSequence</span><span class="p">.</span><span class="n">PushBack</span><span class="p">(</span><span class="n">std</span><span class="o">::</span><span class="n">make_pair</span><span class="p">(</span><span class="n">m_renderPasses</span><span class="p">.</span><span class="n">GetSize</span><span class="p">()</span> <span class="o">-</span> <span class="mi">1</span><span class="p">,</span> <span class="n">passCreateInfo</span><span class="p">.</span><span class="n">m_type</span><span class="p">));</span>
+    <span class="p">}</span>
+    <span class="k">else</span> <span class="k">if</span> <span class="p">(</span><span class="n">passCreateInfo</span><span class="p">.</span><span class="n">m_type</span> <span class="o">==</span> <span class="n">RenderPassType</span><span class="o">::</span><span class="n">Compute</span><span class="p">)</span>
+    <span class="p">{</span>
+      <span class="n">D3D12ScopedComputePass</span> <span class="n">computePass</span> <span class="o">=</span> <span class="n">D3D12ScopedComputePass</span><span class="p">(</span><span class="n">passCount</span><span class="p">,</span> <span class="n">m_computePasses</span><span class="p">.</span><span class="n">GetSize</span><span class="p">(),</span> <span class="n">mainAllocator</span><span class="p">,</span>
+        <span class="n">log_D3D12RenderSystem</span><span class="p">);</span>
+
+      <span class="n">computePass</span><span class="p">.</span><span class="n">Create</span><span class="p">(</span><span class="n">m_device</span><span class="p">,</span>
+        <span class="n">passCreateInfo</span><span class="p">,</span>
+        <span class="n">renderPassRequirements</span><span class="p">.</span><span class="n">m_targets</span><span class="p">,</span>
+        <span class="n">m_targetImages</span><span class="p">,</span>
+        <span class="n">m_targetBuffers</span><span class="p">,</span>
+        <span class="n">m_descriptorSlots</span><span class="p">,</span>
+        <span class="n">m_descriptorSetTable</span><span class="p">,</span>
+        <span class="n">m_shaders</span><span class="p">);</span>
+
+      <span class="n">m_computePasses</span><span class="p">.</span><span class="n">PushBack</span><span class="p">(</span><span class="n">computePass</span><span class="p">);</span>
+      <span class="n">m_renderSequence</span><span class="p">.</span><span class="n">PushBack</span><span class="p">(</span><span class="n">std</span><span class="o">::</span><span class="n">make_pair</span><span class="p">(</span><span class="n">m_computePasses</span><span class="p">.</span><span class="n">GetSize</span><span class="p">()</span> <span class="o">-</span> <span class="mi">1</span><span class="p">,</span> <span class="n">passCreateInfo</span><span class="p">.</span><span class="n">m_type</span><span class="p">));</span>
+    <span class="p">}</span>
+
+    <span class="o">++</span><span class="n">passCount</span><span class="p">;</span>
+  <span class="p">}</span>
+<span class="p">}</span>
+
+<span class="n">String</span> <span class="n">D3D12Renderer</span><span class="o">::</span><span class="n">GetRenderingAPI</span><span class="p">()</span> <span class="k">const</span> <span class="p">{</span>
+  <span class="k">return</span> <span class="s">&quot;D3D12&quot;</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="n">DrawablePool</span><span class="o">&amp;</span> <span class="n">D3D12Renderer</span><span class="o">::</span><span class="n">CreateDrawablePool</span><span class="p">(</span><span class="k">const</span> <span class="n">DrawablePoolCreateInfo</span><span class="o">&amp;</span> <span class="n">createInfo</span><span class="p">)</span> <span class="p">{</span>
+  <span class="n">D3D12DrawablePool</span> <span class="n">pool</span> <span class="o">=</span> <span class="n">D3D12DrawablePool</span><span class="p">(</span><span class="n">m_device</span><span class="p">,</span>
+                                             <span class="n">createInfo</span><span class="p">,</span>
+                                             <span class="n">m_descriptorCount</span><span class="p">,</span>
+                                             <span class="n">m_descriptorSlots</span><span class="p">,</span>
+                                             <span class="n">m_shaders</span><span class="p">,</span>
+                                             <span class="n">m_renderPasses</span><span class="p">,</span>
+                                             <span class="n">m_targetBuffers</span><span class="p">,</span>
+                                             <span class="n">m_mainGraphicsCommandQueue</span><span class="p">,</span>
+                                             <span class="n">m_drawPoolAllocator</span><span class="p">,</span>
+                                             <span class="n">m_initAllocator</span><span class="p">,</span>
+                                             <span class="n">log_D3D12RenderSystem</span><span class="p">);</span>
+
+  <span class="n">m_drawablePools</span><span class="p">.</span><span class="n">PushBack</span><span class="p">(</span><span class="n">std</span><span class="o">::</span><span class="n">move</span><span class="p">(</span><span class="n">pool</span><span class="p">));</span>
+
+  <span class="k">return</span> <span class="n">m_drawablePools</span><span class="p">.</span><span class="n">Last</span><span class="p">();</span>
+<span class="p">}</span>
+
+<span class="n">ComputePool</span><span class="o">&amp;</span> <span class="n">D3D12Renderer</span><span class="o">::</span><span class="n">CreateComputePool</span><span class="p">(</span><span class="k">const</span> <span class="n">ComputePoolCreateInfo</span><span class="o">&amp;</span> <span class="n">createInfo</span><span class="p">)</span> <span class="p">{</span>
+  <span class="n">D3D12ComputePool</span> <span class="n">pool</span> <span class="o">=</span> <span class="n">D3D12ComputePool</span><span class="p">(</span><span class="n">m_device</span><span class="p">,</span>
+    <span class="n">createInfo</span><span class="p">,</span>
+    <span class="n">m_descriptorCount</span><span class="p">,</span>
+    <span class="n">m_descriptorSlots</span><span class="p">,</span>
+    <span class="n">m_shaders</span><span class="p">,</span>
+    <span class="n">m_computePasses</span><span class="p">,</span>
+    <span class="n">m_mainComputeCommandQueue</span><span class="p">,</span>
+    <span class="n">m_mainGraphicsCommandQueue</span><span class="p">,</span>
+    <span class="n">m_drawPoolAllocator</span><span class="p">,</span>
+    <span class="n">m_initAllocator</span><span class="p">,</span>
+    <span class="n">log_D3D12RenderSystem</span><span class="p">);</span>
+
+  <span class="n">m_computePools</span><span class="p">.</span><span class="n">PushBack</span><span class="p">(</span><span class="n">std</span><span class="o">::</span><span class="n">move</span><span class="p">(</span><span class="n">pool</span><span class="p">));</span>
+
+  <span class="k">return</span> <span class="n">m_computePools</span><span class="p">.</span><span class="n">Last</span><span class="p">();</span>
+<span class="p">}</span>
+
+<span class="kt">void</span> <span class="n">D3D12Renderer</span><span class="o">::</span><span class="n">Submit</span><span class="p">()</span> <span class="p">{</span>
+  <span class="n">LOG_DBG</span><span class="p">(</span><span class="n">log_D3D12RenderSystem</span><span class="p">,</span> <span class="n">LOG_LEVEL</span><span class="p">,</span> <span class="s">&quot;Submitting Renderer&quot;</span><span class="p">);</span>
+
+  <span class="n">HEAP_ALLOCATOR</span><span class="p">(</span><span class="n">Temporary</span><span class="p">,</span> <span class="n">Memory</span><span class="o">::</span><span class="n">MonotonicAllocator</span><span class="p">,</span> <span class="mi">8192</span><span class="p">);</span>
+
+  <span class="k">const</span> <span class="kt">bool</span> <span class="n">haveSubmits</span> <span class="o">=</span> <span class="n">m_renderTargetUpdates</span><span class="p">.</span><span class="n">GetSize</span><span class="p">()</span> <span class="o">&gt;</span> <span class="mi">0</span> <span class="o">||</span> <span class="n">m_bufferTargetUpdates</span><span class="p">.</span><span class="n">GetSize</span><span class="p">()</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">;</span>
+
+  <span class="k">if</span> <span class="p">(</span><span class="n">haveSubmits</span><span class="p">)</span>
+  <span class="p">{</span>
+    <span class="k">auto</span> <span class="n">oneTimeSubmitBuffer</span> <span class="o">=</span> <span class="n">D3D12ScopedCommandBuffer</span><span class="p">(</span><span class="n">m_device</span><span class="p">,</span> <span class="n">D3D12_COMMAND_LIST_TYPE_DIRECT</span><span class="p">,</span> <span class="n">log_D3D12RenderSystem</span><span class="p">);</span>
+    <span class="n">oneTimeSubmitBuffer</span><span class="p">.</span><span class="n">CreateGraphicsCommandList</span><span class="p">(</span><span class="n">m_device</span><span class="p">,</span> <span class="k">nullptr</span><span class="p">,</span> <span class="n">log_D3D12RenderSystem</span><span class="p">);</span>
+    <span class="k">auto</span> <span class="n">oneTimeCommandList</span> <span class="o">=</span> <span class="n">oneTimeSubmitBuffer</span><span class="p">.</span><span class="n">GetGraphicsCommandList</span><span class="p">();</span>
+
+    <span class="n">LOG_DBG</span><span class="p">(</span><span class="n">log_D3D12RenderSystem</span><span class="p">,</span> <span class="n">LOG_LEVEL</span><span class="p">,</span> <span class="s">&quot;Updating Render Targets with Initial Data&quot;</span><span class="p">);</span>
+
+    <span class="k">for</span> <span class="p">(</span><span class="k">const</span> <span class="k">auto</span><span class="o">&amp;</span> <span class="nl">renderTargetUpdate</span> <span class="p">:</span> <span class="n">m_renderTargetUpdates</span><span class="p">)</span>
+    <span class="p">{</span>
+      <span class="c1">// TODO(vasumahesh1):[STATES]: Get current state and don&#39;t hardcode</span>
+      <span class="k">auto</span><span class="o">&amp;</span> <span class="n">targetImage</span> <span class="o">=</span> <span class="n">m_targetImages</span><span class="p">[</span><span class="n">renderTargetUpdate</span><span class="p">.</span><span class="n">m_binding</span><span class="p">];</span>
+      <span class="n">targetImage</span><span class="p">.</span><span class="n">Transition</span><span class="p">(</span><span class="n">oneTimeCommandList</span><span class="p">,</span> <span class="n">D3D12_RESOURCE_STATE_COMMON</span><span class="p">,</span> <span class="n">D3D12_RESOURCE_STATE_COPY_DEST</span><span class="p">,</span> <span class="n">log_D3D12RenderSystem</span><span class="p">);</span>
+      <span class="n">targetImage</span><span class="p">.</span><span class="n">CopyFromBuffer</span><span class="p">(</span><span class="n">m_device</span><span class="p">,</span> <span class="n">oneTimeCommandList</span><span class="p">,</span> <span class="n">m_stagingBuffer</span><span class="p">,</span> <span class="n">renderTargetUpdate</span><span class="p">.</span><span class="n">m_offset</span><span class="p">);</span>
+      <span class="n">targetImage</span><span class="p">.</span><span class="n">Transition</span><span class="p">(</span><span class="n">oneTimeCommandList</span><span class="p">,</span> <span class="n">D3D12_RESOURCE_STATE_COPY_DEST</span><span class="p">,</span> <span class="n">D3D12_RESOURCE_STATE_COMMON</span><span class="p">,</span> <span class="n">log_D3D12RenderSystem</span><span class="p">);</span>
+    <span class="p">}</span>
+
+    <span class="n">LOG_DBG</span><span class="p">(</span><span class="n">log_D3D12RenderSystem</span><span class="p">,</span> <span class="n">LOG_LEVEL</span><span class="p">,</span> <span class="s">&quot;Updating Buffer Targets with Initial Data&quot;</span><span class="p">);</span>
+
+    <span class="k">for</span> <span class="p">(</span><span class="k">const</span> <span class="k">auto</span><span class="o">&amp;</span> <span class="nl">bufferTargetUpdate</span> <span class="p">:</span> <span class="n">m_bufferTargetUpdates</span><span class="p">)</span>
+    <span class="p">{</span>
+      <span class="k">auto</span><span class="o">&amp;</span> <span class="n">targetBuffer</span> <span class="o">=</span> <span class="n">m_targetBuffers</span><span class="p">[</span><span class="n">bufferTargetUpdate</span><span class="p">.</span><span class="n">m_binding</span><span class="p">];</span>
+      <span class="n">targetBuffer</span><span class="p">.</span><span class="n">Transition</span><span class="p">(</span><span class="n">oneTimeCommandList</span><span class="p">,</span> <span class="n">D3D12_RESOURCE_STATE_COPY_DEST</span><span class="p">,</span> <span class="n">log_D3D12RenderSystem</span><span class="p">);</span>
+      <span class="n">D3D12Core</span><span class="o">::</span><span class="n">CopyBuffer</span><span class="p">(</span><span class="n">oneTimeCommandList</span><span class="p">,</span> <span class="n">targetBuffer</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="n">m_stagingBuffer</span><span class="p">,</span> <span class="n">bufferTargetUpdate</span><span class="p">.</span><span class="n">m_offset</span><span class="p">,</span> <span class="n">bufferTargetUpdate</span><span class="p">.</span><span class="n">m_byteSize</span><span class="p">);</span>
+      <span class="n">targetBuffer</span><span class="p">.</span><span class="n">Transition</span><span class="p">(</span><span class="n">oneTimeCommandList</span><span class="p">,</span> <span class="n">D3D12_RESOURCE_STATE_COMMON</span><span class="p">,</span> <span class="n">log_D3D12RenderSystem</span><span class="p">);</span>
+    <span class="p">}</span>
+
+    <span class="n">oneTimeCommandList</span><span class="o">-&gt;</span><span class="n">Close</span><span class="p">();</span>
+    <span class="n">oneTimeSubmitBuffer</span><span class="p">.</span><span class="n">Execute</span><span class="p">(</span><span class="n">m_device</span><span class="p">,</span> <span class="n">m_mainGraphicsCommandQueue</span><span class="p">.</span><span class="n">Get</span><span class="p">(),</span> <span class="n">log_D3D12RenderSystem</span><span class="p">);</span>
+    <span class="n">oneTimeSubmitBuffer</span><span class="p">.</span><span class="n">WaitForComplete</span><span class="p">(</span><span class="n">m_mainGraphicsCommandQueue</span><span class="p">.</span><span class="n">Get</span><span class="p">(),</span> <span class="n">log_D3D12RenderSystem</span><span class="p">);</span>
+  <span class="p">}</span>
+
+  <span class="k">for</span> <span class="p">(</span><span class="k">auto</span><span class="o">&amp;</span> <span class="nl">drawablePool</span> <span class="p">:</span> <span class="n">m_drawablePools</span><span class="p">)</span> <span class="p">{</span>
+    <span class="n">drawablePool</span><span class="p">.</span><span class="n">Submit</span><span class="p">();</span>
+  <span class="p">}</span>
+
+  <span class="n">Vector</span><span class="o">&lt;</span><span class="n">Vector</span><span class="o">&lt;</span><span class="n">D3D12RenderPassRecordEntry</span><span class="o">&gt;&gt;</span> <span class="n">renderPassEntries</span><span class="p">(</span><span class="n">m_renderPasses</span><span class="p">.</span><span class="n">GetSize</span><span class="p">(),</span> <span class="n">allocatorTemporary</span><span class="p">);</span>
+  <span class="k">for</span> <span class="p">(</span><span class="n">U32</span> <span class="n">idx</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">idx</span> <span class="o">&lt;</span> <span class="n">m_renderPasses</span><span class="p">.</span><span class="n">GetSize</span><span class="p">();</span> <span class="o">++</span><span class="n">idx</span><span class="p">)</span> <span class="p">{</span>
+    <span class="n">Vector</span><span class="o">&lt;</span><span class="n">D3D12RenderPassRecordEntry</span><span class="o">&gt;</span> <span class="n">poolEntries</span><span class="p">(</span><span class="n">m_drawablePools</span><span class="p">.</span><span class="n">GetSize</span><span class="p">(),</span> <span class="n">allocatorTemporary</span><span class="p">);</span>
+    <span class="n">renderPassEntries</span><span class="p">.</span><span class="n">PushBack</span><span class="p">(</span><span class="n">poolEntries</span><span class="p">);</span>
+  <span class="p">}</span>
+
+  <span class="n">U32</span> <span class="n">poolIdx</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+  <span class="k">for</span> <span class="p">(</span><span class="k">auto</span><span class="o">&amp;</span> <span class="nl">drawablePool</span> <span class="p">:</span> <span class="n">m_drawablePools</span><span class="p">)</span> <span class="p">{</span>
+    <span class="n">Vector</span><span class="o">&lt;</span><span class="n">std</span><span class="o">::</span><span class="n">pair</span><span class="o">&lt;</span><span class="n">U32</span><span class="p">,</span> <span class="n">D3D12RenderPassRecordEntry</span><span class="o">&gt;&gt;</span> <span class="n">poolEntries</span><span class="p">(</span><span class="n">allocatorTemporary</span><span class="p">);</span>
+    <span class="n">drawablePool</span><span class="p">.</span><span class="n">GetRecordEntries</span><span class="p">(</span><span class="n">poolEntries</span><span class="p">);</span>
+
+    <span class="k">for</span> <span class="p">(</span><span class="k">const</span> <span class="k">auto</span><span class="o">&amp;</span> <span class="nl">bufferPair</span> <span class="p">:</span> <span class="n">poolEntries</span><span class="p">)</span> <span class="p">{</span>
+      <span class="n">renderPassEntries</span><span class="p">[</span><span class="n">bufferPair</span><span class="p">.</span><span class="n">first</span><span class="p">].</span><span class="n">PushBack</span><span class="p">(</span><span class="n">bufferPair</span><span class="p">.</span><span class="n">second</span><span class="p">);</span>
+      <span class="n">renderPassEntries</span><span class="p">[</span><span class="n">bufferPair</span><span class="p">.</span><span class="n">first</span><span class="p">].</span><span class="n">Last</span><span class="p">().</span><span class="n">m_poolIdx</span> <span class="o">=</span> <span class="n">poolIdx</span><span class="p">;</span>
+    <span class="p">}</span>
+
+    <span class="o">++</span><span class="n">poolIdx</span><span class="p">;</span>
+  <span class="p">}</span>
+
+  <span class="k">for</span> <span class="p">(</span><span class="n">U32</span> <span class="n">idx</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">idx</span> <span class="o">&lt;</span> <span class="n">m_renderPasses</span><span class="p">.</span><span class="n">GetSize</span><span class="p">();</span> <span class="o">++</span><span class="n">idx</span><span class="p">)</span> <span class="p">{</span>
+
+    <span class="k">const</span> <span class="k">auto</span><span class="o">&amp;</span> <span class="n">renderPass</span> <span class="o">=</span> <span class="n">m_renderPasses</span><span class="p">[</span><span class="n">idx</span><span class="p">];</span>
+
+    <span class="k">const</span> <span class="kt">bool</span> <span class="n">isLast</span> <span class="o">=</span> <span class="n">idx</span> <span class="o">==</span> <span class="n">m_renderPasses</span><span class="p">.</span><span class="n">GetSize</span><span class="p">()</span> <span class="o">-</span> <span class="mi">1</span><span class="p">;</span>
+
+    <span class="k">const</span> <span class="n">U32</span> <span class="n">commandBuffers</span> <span class="o">=</span> <span class="n">renderPass</span><span class="p">.</span><span class="n">GetCommandBufferCount</span><span class="p">();</span>
+
+    <span class="k">for</span> <span class="p">(</span><span class="n">U32</span> <span class="n">cIdx</span>      <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">cIdx</span> <span class="o">&lt;</span> <span class="n">commandBuffers</span><span class="p">;</span> <span class="o">++</span><span class="n">cIdx</span><span class="p">)</span> <span class="p">{</span>
+      <span class="k">auto</span> <span class="n">commandList</span> <span class="o">=</span> <span class="n">renderPass</span><span class="p">.</span><span class="n">GetPrimaryGraphicsCommandList</span><span class="p">(</span><span class="n">cIdx</span><span class="p">);</span>
+
+      <span class="k">if</span> <span class="p">(</span><span class="n">isLast</span><span class="p">)</span> <span class="p">{</span>
+        <span class="n">renderPass</span><span class="p">.</span><span class="n">RecordImageAcquireBarrier</span><span class="p">(</span><span class="n">commandList</span><span class="p">,</span> <span class="n">cIdx</span><span class="p">);</span>
+      <span class="p">}</span>
+
+      <span class="n">renderPass</span><span class="p">.</span><span class="n">RecordResourceBarriersForOutputsStart</span><span class="p">(</span><span class="n">commandList</span><span class="p">);</span>
+      <span class="n">renderPass</span><span class="p">.</span><span class="n">RecordResourceBarriersForInputsStart</span><span class="p">(</span><span class="n">commandList</span><span class="p">);</span>
+
+      <span class="n">commandList</span><span class="o">-&gt;</span><span class="n">RSSetViewports</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="o">&amp;</span><span class="n">m_viewport</span><span class="p">);</span>
+      <span class="n">commandList</span><span class="o">-&gt;</span><span class="n">RSSetScissorRects</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="o">&amp;</span><span class="n">m_scissorRect</span><span class="p">);</span>
+
+      <span class="n">renderPass</span><span class="p">.</span><span class="n">SetRenderTargets</span><span class="p">(</span><span class="n">commandList</span><span class="p">,</span> <span class="n">cIdx</span><span class="p">,</span> <span class="n">m_rtvDescriptorSize</span><span class="p">);</span>
+
+      <span class="k">const</span> <span class="k">auto</span><span class="o">&amp;</span> <span class="n">renderPassRecords</span> <span class="o">=</span> <span class="n">renderPassEntries</span><span class="p">[</span><span class="n">idx</span><span class="p">];</span>
+
+      <span class="n">commandList</span><span class="o">-&gt;</span><span class="n">SetGraphicsRootSignature</span><span class="p">(</span><span class="n">renderPass</span><span class="p">.</span><span class="n">GetRootSignature</span><span class="p">());</span>
+
+      <span class="k">for</span> <span class="p">(</span><span class="k">auto</span><span class="o">&amp;</span> <span class="nl">recordEntry</span> <span class="p">:</span> <span class="n">renderPassRecords</span><span class="p">)</span> <span class="p">{</span>
+        <span class="k">const</span> <span class="k">auto</span><span class="o">&amp;</span> <span class="n">targetPool</span> <span class="o">=</span> <span class="n">m_drawablePools</span><span class="p">[</span><span class="n">recordEntry</span><span class="p">.</span><span class="n">m_poolIdx</span><span class="p">];</span>
+
+        <span class="n">commandList</span><span class="o">-&gt;</span><span class="n">SetPipelineState</span><span class="p">(</span><span class="n">recordEntry</span><span class="p">.</span><span class="n">m_pso</span><span class="p">);</span>
+
+        <span class="k">const</span> <span class="k">auto</span><span class="o">&amp;</span> <span class="n">allHeaps</span> <span class="o">=</span> <span class="n">targetPool</span><span class="p">.</span><span class="n">GetAllDescriptorHeaps</span><span class="p">();</span>
+        <span class="n">commandList</span><span class="o">-&gt;</span><span class="n">SetDescriptorHeaps</span><span class="p">(</span><span class="n">UINT</span><span class="p">(</span><span class="n">allHeaps</span><span class="p">.</span><span class="n">GetSize</span><span class="p">()),</span> <span class="n">allHeaps</span><span class="p">.</span><span class="n">Data</span><span class="p">());</span>
+
+        <span class="n">commandList</span><span class="o">-&gt;</span><span class="n">ExecuteBundle</span><span class="p">(</span><span class="n">recordEntry</span><span class="p">.</span><span class="n">m_bundle</span><span class="p">);</span>
+      <span class="p">}</span>
+
+      <span class="n">renderPass</span><span class="p">.</span><span class="n">RecordResourceBarriersForOutputsEnd</span><span class="p">(</span><span class="n">commandList</span><span class="p">);</span>
+      <span class="n">renderPass</span><span class="p">.</span><span class="n">RecordResourceBarriersForInputsEnd</span><span class="p">(</span><span class="n">commandList</span><span class="p">);</span>
+
+      <span class="k">if</span> <span class="p">(</span><span class="n">isLast</span><span class="p">)</span> <span class="p">{</span>
+        <span class="n">renderPass</span><span class="p">.</span><span class="n">RecordPresentBarrier</span><span class="p">(</span><span class="n">commandList</span><span class="p">,</span> <span class="n">cIdx</span><span class="p">);</span>
+      <span class="p">}</span>
+
+      <span class="n">commandList</span><span class="o">-&gt;</span><span class="n">Close</span><span class="p">();</span>
+    <span class="p">}</span>
+  <span class="p">}</span>
+
+
+  <span class="c1">// COMPUTE SUBMIT</span>
+
+  <span class="k">for</span> <span class="p">(</span><span class="k">auto</span><span class="o">&amp;</span> <span class="nl">computePool</span> <span class="p">:</span> <span class="n">m_computePools</span><span class="p">)</span> <span class="p">{</span>
+    <span class="n">computePool</span><span class="p">.</span><span class="n">Submit</span><span class="p">();</span>
+  <span class="p">}</span>
+
+  <span class="c1">// Begin Recording - Open all command buffers</span>
+  <span class="k">for</span> <span class="p">(</span><span class="n">U32</span> <span class="n">idx</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">idx</span> <span class="o">&lt;</span> <span class="n">m_computePasses</span><span class="p">.</span><span class="n">GetSize</span><span class="p">();</span> <span class="o">++</span><span class="n">idx</span><span class="p">)</span> <span class="p">{</span>
+    <span class="k">auto</span><span class="o">&amp;</span> <span class="n">computePass</span> <span class="o">=</span> <span class="n">m_computePasses</span><span class="p">[</span><span class="n">idx</span><span class="p">];</span>
+
+    <span class="n">LOG_DBG</span><span class="p">(</span><span class="n">log_D3D12RenderSystem</span><span class="p">,</span> <span class="n">LOG_LEVEL</span><span class="p">,</span> <span class="s">&quot;Begin Recording Compute Pass: %d&quot;</span><span class="p">,</span> <span class="n">idx</span><span class="p">);</span>
+
+    <span class="k">const</span> <span class="k">auto</span> <span class="n">commandList</span> <span class="o">=</span> <span class="n">computePass</span><span class="p">.</span><span class="n">GetPrimaryComputeCommandList</span><span class="p">(</span><span class="mi">0</span><span class="p">);</span>
+
+    <span class="n">computePass</span><span class="p">.</span><span class="n">RecordResourceBarriersForOutputsStart</span><span class="p">(</span><span class="n">commandList</span><span class="p">);</span>
+    <span class="n">computePass</span><span class="p">.</span><span class="n">RecordResourceBarriersForInputsStart</span><span class="p">(</span><span class="n">commandList</span><span class="p">);</span>
+
+    <span class="c1">// Record Pool Wise - Pass Wise data</span>
+    <span class="k">for</span> <span class="p">(</span><span class="k">auto</span><span class="o">&amp;</span> <span class="nl">computePool</span> <span class="p">:</span> <span class="n">m_computePools</span><span class="p">)</span> <span class="p">{</span>
+      <span class="n">computePool</span><span class="p">.</span><span class="n">Record</span><span class="p">(</span><span class="n">computePass</span><span class="p">.</span><span class="n">GetId</span><span class="p">());</span>
+    <span class="p">}</span>
+
+    <span class="n">computePass</span><span class="p">.</span><span class="n">RecordResourceBarriersForOutputsEnd</span><span class="p">(</span><span class="n">commandList</span><span class="p">);</span>
+    <span class="n">computePass</span><span class="p">.</span><span class="n">RecordResourceBarriersForInputsEnd</span><span class="p">(</span><span class="n">commandList</span><span class="p">);</span>
+    <span class="n">commandList</span><span class="o">-&gt;</span><span class="n">Close</span><span class="p">();</span>
+
+    <span class="n">LOG_DBG</span><span class="p">(</span><span class="n">log_D3D12RenderSystem</span><span class="p">,</span> <span class="n">LOG_LEVEL</span><span class="p">,</span> <span class="s">&quot;End Recording Compute Pass: %d&quot;</span><span class="p">,</span> <span class="n">idx</span><span class="p">);</span>
+  <span class="p">}</span>
+
+  <span class="n">LOG_DBG</span><span class="p">(</span><span class="n">log_D3D12RenderSystem</span><span class="p">,</span> <span class="n">LOG_LEVEL</span><span class="p">,</span> <span class="s">&quot;Submit Complete - All Render Passes recorded&quot;</span><span class="p">);</span>
+<span class="p">}</span>
+
+<span class="kt">void</span> <span class="n">D3D12Renderer</span><span class="o">::</span><span class="n">RenderFrame</span><span class="p">()</span> <span class="p">{</span>
+  <span class="n">EnterRenderFrame</span><span class="p">();</span>
+
+  <span class="k">const</span> <span class="k">auto</span><span class="o">&amp;</span> <span class="n">currentFrame</span> <span class="o">=</span> <span class="n">GetCurrentFrame</span><span class="p">();</span>
+
+  <span class="n">U32</span> <span class="n">count</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+  <span class="k">for</span><span class="p">(</span><span class="k">const</span> <span class="k">auto</span><span class="o">&amp;</span> <span class="nl">pass</span> <span class="p">:</span> <span class="n">m_renderSequence</span><span class="p">)</span>
+  <span class="p">{</span>
+    <span class="k">if</span> <span class="p">(</span><span class="n">count</span> <span class="o">==</span> <span class="n">m_renderSequence</span><span class="p">.</span><span class="n">GetSize</span><span class="p">()</span> <span class="o">-</span> <span class="mi">1</span><span class="p">)</span>
+    <span class="p">{</span>
+      <span class="c1">// Don&#39;t do last render pass</span>
+      <span class="k">break</span><span class="p">;</span>
+    <span class="p">}</span>
+
+    <span class="k">const</span> <span class="k">auto</span> <span class="n">idx</span> <span class="o">=</span> <span class="n">pass</span><span class="p">.</span><span class="n">first</span><span class="p">;</span>
+
+    <span class="k">if</span> <span class="p">(</span><span class="n">pass</span><span class="p">.</span><span class="n">second</span> <span class="o">==</span> <span class="n">RenderPassType</span><span class="o">::</span><span class="n">Graphics</span><span class="p">)</span>
+    <span class="p">{</span>
+      <span class="n">std</span><span class="o">::</span><span class="n">array</span><span class="o">&lt;</span><span class="n">ID3D12CommandList</span><span class="o">*</span><span class="p">,</span> <span class="mi">1</span><span class="o">&gt;</span> <span class="n">list</span> <span class="o">=</span> <span class="p">{</span> <span class="n">m_renderPasses</span><span class="p">[</span><span class="n">idx</span><span class="p">].</span><span class="n">GetPrimaryGraphicsCommandList</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span> <span class="p">};</span>
+      <span class="n">m_mainGraphicsCommandQueue</span><span class="o">-&gt;</span><span class="n">ExecuteCommandLists</span><span class="p">(</span><span class="n">UINT</span><span class="p">(</span><span class="n">list</span><span class="p">.</span><span class="n">size</span><span class="p">()),</span> <span class="n">list</span><span class="p">.</span><span class="n">data</span><span class="p">());</span>
+      <span class="n">m_renderPasses</span><span class="p">[</span><span class="n">idx</span><span class="p">].</span><span class="n">WaitForGPU</span><span class="p">(</span><span class="n">m_mainGraphicsCommandQueue</span><span class="p">.</span><span class="n">Get</span><span class="p">());</span>
+    <span class="p">}</span>
+    <span class="k">else</span> <span class="k">if</span> <span class="p">(</span><span class="n">pass</span><span class="p">.</span><span class="n">second</span> <span class="o">==</span> <span class="n">RenderPassType</span><span class="o">::</span><span class="n">Compute</span><span class="p">)</span>
+    <span class="p">{</span>
+      <span class="n">std</span><span class="o">::</span><span class="n">array</span><span class="o">&lt;</span><span class="n">ID3D12CommandList</span><span class="o">*</span><span class="p">,</span> <span class="mi">1</span><span class="o">&gt;</span> <span class="n">list</span> <span class="o">=</span> <span class="p">{</span> <span class="n">m_computePasses</span><span class="p">[</span><span class="n">idx</span><span class="p">].</span><span class="n">GetPrimaryComputeCommandList</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span> <span class="p">};</span>
+      <span class="n">m_mainComputeCommandQueue</span><span class="o">-&gt;</span><span class="n">ExecuteCommandLists</span><span class="p">(</span><span class="n">UINT</span><span class="p">(</span><span class="n">list</span><span class="p">.</span><span class="n">size</span><span class="p">()),</span> <span class="n">list</span><span class="p">.</span><span class="n">data</span><span class="p">());</span>
+      <span class="n">m_computePasses</span><span class="p">[</span><span class="n">idx</span><span class="p">].</span><span class="n">WaitForGPU</span><span class="p">(</span><span class="n">m_mainComputeCommandQueue</span><span class="p">.</span><span class="n">Get</span><span class="p">());</span>
+    <span class="p">}</span>
+
+    <span class="o">++</span><span class="n">count</span><span class="p">;</span>
+  <span class="p">}</span>
+
+  <span class="n">std</span><span class="o">::</span><span class="n">array</span><span class="o">&lt;</span><span class="n">ID3D12CommandList</span><span class="o">*</span><span class="p">,</span> <span class="mi">1</span><span class="o">&gt;</span> <span class="n">swapChainList</span> <span class="o">=</span> <span class="p">{</span><span class="n">m_renderPasses</span><span class="p">.</span><span class="n">Last</span><span class="p">().</span><span class="n">GetPrimaryGraphicsCommandList</span><span class="p">(</span><span class="n">currentFrame</span><span class="p">)};</span>
+  <span class="n">m_mainGraphicsCommandQueue</span><span class="o">-&gt;</span><span class="n">ExecuteCommandLists</span><span class="p">(</span><span class="n">UINT</span><span class="p">(</span><span class="n">swapChainList</span><span class="p">.</span><span class="n">size</span><span class="p">()),</span> <span class="n">swapChainList</span><span class="p">.</span><span class="n">data</span><span class="p">());</span> <span class="c1">// NOLINT</span>
+
+  <span class="c1">// Present and update the frame index for the next frame.</span>
+  <span class="n">VERIFY_D3D_OP</span><span class="p">(</span><span class="n">log_D3D12RenderSystem</span><span class="p">,</span> <span class="n">m_swapChain</span><span class="p">.</span><span class="n">RealComPtr</span><span class="p">()</span><span class="o">-&gt;</span><span class="n">Present</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">),</span> <span class="s">&quot;Present Failed&quot;</span><span class="p">);</span>
+
+  <span class="n">m_renderPasses</span><span class="p">.</span><span class="n">Last</span><span class="p">().</span><span class="n">WaitForGPU</span><span class="p">(</span><span class="n">m_mainGraphicsCommandQueue</span><span class="p">.</span><span class="n">Get</span><span class="p">());</span>
+
+  <span class="n">m_perFrameAllocator</span><span class="p">.</span><span class="n">Reset</span><span class="p">();</span>
+  <span class="n">ExitRenderFrame</span><span class="p">();</span>
+<span class="p">}</span>
+
+<span class="kt">void</span> <span class="n">D3D12Renderer</span><span class="o">::</span><span class="n">SnapshotFrame</span><span class="p">(</span><span class="k">const</span> <span class="n">String</span><span class="o">&amp;</span> <span class="n">exportPath</span><span class="p">)</span> <span class="k">const</span> <span class="p">{</span>
+  <span class="n">LOG_DBG</span><span class="p">(</span><span class="n">log_D3D12RenderSystem</span><span class="p">,</span> <span class="n">LOG_LEVEL</span><span class="p">,</span> <span class="s">&quot;Exporting Screenshot: %s&quot;</span><span class="p">,</span> <span class="n">exportPath</span><span class="p">.</span><span class="n">c_str</span><span class="p">());</span>
+  <span class="n">UNUSED</span><span class="p">(</span><span class="n">exportPath</span><span class="p">);</span>
+<span class="p">}</span>
+
+<span class="kt">void</span> <span class="n">D3D12Renderer</span><span class="o">::</span><span class="n">AddShader</span><span class="p">(</span><span class="k">const</span> <span class="n">ShaderCreateInfo</span><span class="o">&amp;</span> <span class="n">info</span><span class="p">)</span> <span class="p">{</span>
+  <span class="k">const</span> <span class="n">String</span> <span class="n">fullPath</span> <span class="o">=</span> <span class="s">&quot;Shaders/&quot;</span> <span class="o">+</span> <span class="n">D3D12Renderer</span><span class="o">::</span><span class="n">GetRenderingAPI</span><span class="p">()</span> <span class="o">+</span> <span class="s">&quot;/&quot;</span> <span class="o">+</span> <span class="n">info</span><span class="p">.</span><span class="n">m_shaderFileName</span><span class="p">;</span>
+
+  <span class="n">D3D12ScopedShader</span> <span class="n">shader</span> <span class="o">=</span> <span class="n">D3D12ScopedShader</span><span class="p">(</span><span class="n">fullPath</span><span class="p">,</span> <span class="n">m_initAllocator</span><span class="p">,</span> <span class="n">log_D3D12RenderSystem</span><span class="p">);</span>
+  <span class="n">m_shaders</span><span class="p">.</span><span class="n">PushBack</span><span class="p">(</span><span class="n">std</span><span class="o">::</span><span class="n">move</span><span class="p">(</span><span class="n">shader</span><span class="p">));</span>
+
+  <span class="n">m_shaders</span><span class="p">.</span><span class="n">Last</span><span class="p">().</span><span class="n">SetStage</span><span class="p">(</span><span class="n">info</span><span class="p">.</span><span class="n">m_stage</span><span class="p">);</span>
+<span class="p">}</span>
+
+<span class="kt">void</span> <span class="n">D3D12Renderer</span><span class="o">::</span><span class="n">BindRenderTarget</span><span class="p">(</span><span class="n">U32</span> <span class="n">renderTargetId</span><span class="p">,</span> <span class="k">const</span> <span class="n">TextureDesc</span><span class="o">&amp;</span> <span class="n">desc</span><span class="p">,</span> <span class="k">const</span> <span class="n">U8</span><span class="o">*</span> <span class="n">buffer</span><span class="p">)</span> <span class="p">{</span>
+  <span class="n">LOG_DBG</span><span class="p">(</span><span class="n">log_D3D12RenderSystem</span><span class="p">,</span> <span class="n">LOG_LEVEL</span><span class="p">,</span>
+    <span class="s">&quot;D3D12 Render Target: Updating Render Target: %d of Size: %d bytes&quot;</span><span class="p">,</span> <span class="n">renderTargetId</span><span class="p">,</span> <span class="n">desc</span><span class="p">.</span><span class="n">m_size</span><span class="p">);</span>
+
+  <span class="k">const</span> <span class="n">U32</span> <span class="n">size</span> <span class="o">=</span> <span class="n">desc</span><span class="p">.</span><span class="n">m_size</span><span class="p">;</span>
+
+  <span class="k">const</span> <span class="n">U32</span> <span class="n">textureWidthBytes</span> <span class="o">=</span> <span class="n">desc</span><span class="p">.</span><span class="n">m_bounds</span><span class="p">.</span><span class="n">m_width</span> <span class="o">*</span> <span class="n">GetFormatSize</span><span class="p">(</span><span class="n">desc</span><span class="p">.</span><span class="n">m_format</span><span class="p">);</span>
+
+  <span class="c1">// TODO(vasumahesh1):[INPUT]: Could be an issue with sizeof(float)</span>
+  <span class="k">const</span> <span class="n">U32</span> <span class="n">offset</span> <span class="o">=</span> <span class="n">m_stagingBuffer</span><span class="p">.</span><span class="n">AppendTextureData</span><span class="p">(</span><span class="n">buffer</span><span class="p">,</span> <span class="n">size</span><span class="p">,</span> <span class="mi">512</span><span class="p">,</span> <span class="n">textureWidthBytes</span><span class="p">,</span> <span class="n">D3D12_TEXTURE_DATA_PITCH_ALIGNMENT</span><span class="p">,</span> <span class="n">log_D3D12RenderSystem</span><span class="p">);</span>
+
+  <span class="n">TextureBufferInfo</span> <span class="n">info</span> <span class="o">=</span> <span class="n">TextureBufferInfo</span><span class="p">();</span>
+  <span class="n">info</span><span class="p">.</span><span class="n">m_byteSize</span>        <span class="o">=</span> <span class="n">size</span><span class="p">;</span>
+  <span class="n">info</span><span class="p">.</span><span class="n">m_offset</span>          <span class="o">=</span> <span class="n">offset</span><span class="p">;</span>
+  <span class="n">info</span><span class="p">.</span><span class="n">m_desc</span>            <span class="o">=</span> <span class="n">desc</span><span class="p">;</span>
+  <span class="n">info</span><span class="p">.</span><span class="n">m_binding</span>         <span class="o">=</span> <span class="n">renderTargetId</span><span class="p">;</span>
+  <span class="n">info</span><span class="p">.</span><span class="n">m_set</span>             <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+
+  <span class="n">m_renderTargetUpdates</span><span class="p">.</span><span class="n">PushBack</span><span class="p">(</span><span class="n">info</span><span class="p">);</span>
+<span class="p">}</span>
+
+<span class="kt">void</span> <span class="n">D3D12Renderer</span><span class="o">::</span><span class="n">BindBufferTarget</span><span class="p">(</span><span class="n">U32</span> <span class="n">bufferTargetId</span><span class="p">,</span> <span class="k">const</span> <span class="n">U8</span><span class="o">*</span> <span class="n">buffer</span><span class="p">)</span> <span class="p">{</span>
+  <span class="k">const</span> <span class="n">U32</span> <span class="n">size</span> <span class="o">=</span> <span class="n">m_targetBuffers</span><span class="p">[</span><span class="n">bufferTargetId</span><span class="p">].</span><span class="n">GetSize</span><span class="p">();</span>
+
+  <span class="n">LOG_DBG</span><span class="p">(</span><span class="n">log_D3D12RenderSystem</span><span class="p">,</span> <span class="n">LOG_LEVEL</span><span class="p">,</span>
+    <span class="s">&quot;D3D12 Render Target: Updating Buffer Target: %d of Size: %d bytes&quot;</span><span class="p">,</span> <span class="n">bufferTargetId</span><span class="p">,</span> <span class="n">size</span><span class="p">);</span>
+
+  <span class="c1">// TODO(vasumahesh1):[INPUT]: Could be an issue with sizeof(float)</span>
+  <span class="k">const</span> <span class="n">U32</span> <span class="n">offset</span> <span class="o">=</span> <span class="n">m_stagingBuffer</span><span class="p">.</span><span class="n">AppendData</span><span class="p">(</span><span class="n">buffer</span><span class="p">,</span> <span class="n">size</span><span class="p">,</span> <span class="k">sizeof</span><span class="p">(</span><span class="kt">float</span><span class="p">),</span> <span class="n">log_D3D12RenderSystem</span><span class="p">);</span>
+
+  <span class="n">BufferTargetInfo</span> <span class="n">info</span> <span class="o">=</span> <span class="n">BufferTargetInfo</span><span class="p">();</span>
+  <span class="n">info</span><span class="p">.</span><span class="n">m_byteSize</span>        <span class="o">=</span> <span class="n">size</span><span class="p">;</span>
+  <span class="n">info</span><span class="p">.</span><span class="n">m_offset</span>          <span class="o">=</span> <span class="n">offset</span><span class="p">;</span>
+  <span class="n">info</span><span class="p">.</span><span class="n">m_binding</span>         <span class="o">=</span> <span class="n">bufferTargetId</span><span class="p">;</span>
+  <span class="n">info</span><span class="p">.</span><span class="n">m_set</span>             <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+
+  <span class="n">m_bufferTargetUpdates</span><span class="p">.</span><span class="n">PushBack</span><span class="p">(</span><span class="n">info</span><span class="p">);</span>
+<span class="p">}</span>
+
+<span class="p">}</span> <span class="c1">// namespace D3D12</span>
+<span class="p">}</span> <span class="c1">// namespace Azura</span>
+</pre></div>
+</div>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="file_Source_Azura_RenderSystem_Inc_D3D12_D3D12Renderer.h.html" class="btn btn-neutral float-right" title="File D3D12Renderer.h" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="file_Source_Azura_RenderSystem_Src_D3D12_D3D12Renderer.cpp.html" class="btn btn-neutral" title="File D3D12Renderer.cpp" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2018, Vasu Mahesh
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  
+
+    
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+        <script type="text/javascript" src="../_static/jquery.js"></script>
+        <script type="text/javascript" src="../_static/underscore.js"></script>
+        <script type="text/javascript" src="../_static/doctools.js"></script>
+        <script type="text/javascript" src="../_static/collapsible-lists\js\CollapsibleLists.compressed.js"></script>
+        <script type="text/javascript" src="../_static/collapsible-lists\js\apply-collapsible-lists.js"></script>
+    
+
+  
+
+  <script type="text/javascript" src="../_static/js/theme.js"></script>
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

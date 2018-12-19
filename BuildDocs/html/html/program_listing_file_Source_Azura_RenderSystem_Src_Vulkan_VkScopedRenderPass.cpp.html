@@ -1,0 +1,704 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>Program Listing for File VkScopedRenderPass.cpp &mdash; Azura  documentation</title>
+  
+
+  
+  
+  
+  
+
+  
+
+  
+  
+    
+
+  
+
+  <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/collapsible-lists\css\tree_view.css" type="text/css" />
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="File VkScopedRenderPass.h" href="file_Source_Azura_RenderSystem_Inc_Vulkan_VkScopedRenderPass.h.html" />
+    <link rel="prev" title="File VkScopedRenderPass.cpp" href="file_Source_Azura_RenderSystem_Src_Vulkan_VkScopedRenderPass.cpp.html" /> 
+
+  
+  <script src="../_static/js/modernizr.min.js"></script>
+
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search">
+          
+
+          
+            <a href="../index.html" class="icon icon-home"> Azura
+          
+
+          
+          </a>
+
+          
+            
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <ul>
+<li class="toctree-l1"><a class="reference internal" href="../setting-up.html">Setting Up</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../build-instructions.html">Build Instructions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../cmake-wrappers.html">CMake Wrappers</a></li>
+<li class="toctree-l1"><a class="reference internal" href="apiRoot.html">Azura API</a></li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">Azura</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../index.html">Docs</a> &raquo;</li>
+        
+          <li><a href="apiRoot.html">Azura API</a> &raquo;</li>
+        
+          <li><a href="file_Source_Azura_RenderSystem_Src_Vulkan_VkScopedRenderPass.cpp.html">File VkScopedRenderPass.cpp</a> &raquo;</li>
+        
+      <li>Program Listing for File VkScopedRenderPass.cpp</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            <a href="../_sources/html/program_listing_file_Source_Azura_RenderSystem_Src_Vulkan_VkScopedRenderPass.cpp.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="program-listing-for-file-vkscopedrenderpass-cpp">
+<span id="program-listing-file-source-azura-rendersystem-src-vulkan-vkscopedrenderpass-cpp"></span><h1>Program Listing for File VkScopedRenderPass.cpp<a class="headerlink" href="#program-listing-for-file-vkscopedrenderpass-cpp" title="Permalink to this headline">¶</a></h1>
+<p>↰ <a class="reference internal" href="file_Source_Azura_RenderSystem_Src_Vulkan_VkScopedRenderPass.cpp.html#file-source-azura-rendersystem-src-vulkan-vkscopedrenderpass-cpp"><span class="std std-ref">Return to documentation for file</span></a> (<code class="docutils literal notranslate"><span class="pre">Source\Azura\RenderSystem\Src\Vulkan\VkScopedRenderPass.cpp</span></code>)</p>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="cp">#include</span> <span class="cpf">&lt;utility&gt;</span><span class="cp"></span>
+<span class="cp">#include</span> <span class="cpf">&quot;Vulkan/VkScopedRenderPass.h&quot;</span><span class="cp"></span>
+<span class="cp">#include</span> <span class="cpf">&quot;Vulkan/VkTypeMapping.h&quot;</span><span class="cp"></span>
+<span class="cp">#include</span> <span class="cpf">&quot;Vulkan/VkCore.h&quot;</span><span class="cp"></span>
+<span class="cp">#include</span> <span class="cpf">&quot;Memory/MemoryFactory.h&quot;</span><span class="cp"></span>
+<span class="cp">#include</span> <span class="cpf">&quot;Vulkan/VkMacros.h&quot;</span><span class="cp"></span>
+<span class="cp">#include</span> <span class="cpf">&quot;Vulkan/VkScopedSwapChain.h&quot;</span><span class="cp"></span>
+
+<span class="k">namespace</span> <span class="n">Azura</span> <span class="p">{</span>
+<span class="k">namespace</span> <span class="n">Vulkan</span> <span class="p">{</span>
+
+<span class="k">using</span> <span class="k">namespace</span> <span class="n">Containers</span><span class="p">;</span> <span class="c1">// NOLINT</span>
+
+<span class="n">VkScopedRenderPass</span><span class="o">::</span><span class="n">VkScopedRenderPass</span><span class="p">(</span><span class="n">U32</span> <span class="n">idx</span><span class="p">,</span> <span class="n">Memory</span><span class="o">::</span><span class="n">Allocator</span><span class="o">&amp;</span> <span class="n">mainAllocator</span><span class="p">,</span> <span class="n">Log</span> <span class="n">logger</span><span class="p">)</span>
+  <span class="o">:</span> <span class="n">log_VulkanRenderSystem</span><span class="p">(</span><span class="n">std</span><span class="o">::</span><span class="n">move</span><span class="p">(</span><span class="n">logger</span><span class="p">)),</span>
+    <span class="n">m_id</span><span class="p">(</span><span class="n">idx</span><span class="p">),</span>
+    <span class="n">m_descriptorSetLayout</span><span class="p">(</span><span class="n">VK_NULL_HANDLE</span><span class="p">),</span>
+    <span class="n">m_frameBuffers</span><span class="p">(</span><span class="n">mainAllocator</span><span class="p">),</span>
+    <span class="n">m_commandBuffers</span><span class="p">(</span><span class="n">mainAllocator</span><span class="p">),</span>
+    <span class="n">m_inputAttachments</span><span class="p">(</span><span class="n">mainAllocator</span><span class="p">),</span>
+    <span class="n">m_colorBlendAttachments</span><span class="p">(</span><span class="n">mainAllocator</span><span class="p">),</span>
+    <span class="n">m_clearValues</span><span class="p">(</span><span class="n">mainAllocator</span><span class="p">),</span>
+    <span class="n">m_shaderPipelineInfos</span><span class="p">(</span><span class="n">mainAllocator</span><span class="p">)</span> <span class="p">{</span>
+<span class="p">}</span>
+
+<span class="kt">void</span> <span class="n">VkScopedRenderPass</span><span class="o">::</span><span class="n">Create</span><span class="p">(</span><span class="n">VkDevice</span> <span class="n">device</span><span class="p">,</span>
+                                <span class="n">VkCommandPool</span> <span class="n">commandPool</span><span class="p">,</span>
+                                <span class="k">const</span> <span class="n">PipelinePassCreateInfo</span><span class="o">&amp;</span> <span class="n">createInfo</span><span class="p">,</span>
+                                <span class="k">const</span> <span class="n">Vector</span><span class="o">&lt;</span><span class="n">RenderTargetCreateInfo</span><span class="o">&gt;&amp;</span> <span class="n">pipelineBuffers</span><span class="p">,</span>
+                                <span class="k">const</span> <span class="n">Vector</span><span class="o">&lt;</span><span class="n">VkScopedImage</span><span class="o">&gt;&amp;</span> <span class="n">pipelineBufferImages</span><span class="p">,</span>
+                                <span class="k">const</span> <span class="n">Vector</span><span class="o">&lt;</span><span class="n">VkShader</span><span class="o">&gt;&amp;</span> <span class="n">allShaders</span><span class="p">,</span>
+                                <span class="k">const</span> <span class="n">VkScopedSwapChain</span><span class="o">&amp;</span> <span class="n">swapChain</span><span class="p">)</span> <span class="p">{</span>
+  <span class="n">STACK_ALLOCATOR</span><span class="p">(</span><span class="n">Temporary</span><span class="p">,</span> <span class="n">Memory</span><span class="o">::</span><span class="n">MonotonicAllocator</span><span class="p">,</span> <span class="mi">2048</span><span class="p">);</span>
+
+  <span class="n">m_commandBuffers</span><span class="p">.</span><span class="n">Reserve</span><span class="p">(</span><span class="mi">1</span><span class="p">);</span>
+  <span class="n">m_frameBuffers</span><span class="p">.</span><span class="n">Resize</span><span class="p">(</span><span class="mi">1</span><span class="p">);</span>
+
+  <span class="n">LOG_DBG</span><span class="p">(</span><span class="n">log_VulkanRenderSystem</span><span class="p">,</span> <span class="n">LOG_LEVEL</span><span class="p">,</span> <span class="s">&quot;Creating Render Pass: ID %d&quot;</span><span class="p">,</span> <span class="n">m_id</span><span class="p">);</span>
+
+  <span class="n">CreateDescriptorSetLayout</span><span class="p">(</span><span class="n">device</span><span class="p">,</span> <span class="n">createInfo</span><span class="p">);</span>
+
+  <span class="n">m_shaderPipelineInfos</span><span class="p">.</span><span class="n">Reserve</span><span class="p">(</span><span class="n">U32</span><span class="p">(</span><span class="n">createInfo</span><span class="p">.</span><span class="n">m_shaders</span><span class="p">.</span><span class="n">size</span><span class="p">()));</span>
+
+  <span class="k">for</span> <span class="p">(</span><span class="k">const</span> <span class="k">auto</span><span class="o">&amp;</span> <span class="nl">vkShaderId</span> <span class="p">:</span> <span class="n">createInfo</span><span class="p">.</span><span class="n">m_shaders</span><span class="p">)</span> <span class="p">{</span>
+    <span class="k">const</span> <span class="k">auto</span><span class="o">&amp;</span> <span class="n">vkShader</span> <span class="o">=</span> <span class="n">allShaders</span><span class="p">[</span><span class="n">vkShaderId</span><span class="p">];</span>
+    <span class="n">m_shaderPipelineInfos</span><span class="p">.</span><span class="n">PushBack</span><span class="p">(</span><span class="n">vkShader</span><span class="p">.</span><span class="n">GetShaderStageInfo</span><span class="p">());</span>
+  <span class="p">}</span>
+
+  <span class="n">Vector</span><span class="o">&lt;</span><span class="n">VkAttachmentReference</span><span class="o">&gt;</span> <span class="n">colorReferences</span><span class="p">{</span><span class="n">U32</span><span class="p">(</span><span class="n">createInfo</span><span class="p">.</span><span class="n">m_outputTargets</span><span class="p">.</span><span class="n">size</span><span class="p">()),</span> <span class="n">allocatorTemporary</span><span class="p">};</span>
+  <span class="n">VkAttachmentReference</span> <span class="n">depthReference</span><span class="p">;</span>
+  <span class="n">Vector</span><span class="o">&lt;</span><span class="n">VkAttachmentDescription</span><span class="o">&gt;</span> <span class="n">attachments</span><span class="p">{</span><span class="n">U32</span><span class="p">(</span><span class="n">createInfo</span><span class="p">.</span><span class="n">m_outputTargets</span><span class="p">.</span><span class="n">size</span><span class="p">()),</span> <span class="n">allocatorTemporary</span><span class="p">};</span>
+  <span class="n">Vector</span><span class="o">&lt;</span><span class="n">VkImageView</span><span class="o">&gt;</span> <span class="n">attachmentViews</span><span class="p">{</span><span class="n">U32</span><span class="p">(</span><span class="n">createInfo</span><span class="p">.</span><span class="n">m_outputTargets</span><span class="p">.</span><span class="n">size</span><span class="p">()),</span> <span class="n">allocatorTemporary</span><span class="p">};</span>
+  <span class="n">m_colorBlendAttachments</span><span class="p">.</span><span class="n">Reserve</span><span class="p">(</span><span class="n">U32</span><span class="p">(</span><span class="n">createInfo</span><span class="p">.</span><span class="n">m_outputTargets</span><span class="p">.</span><span class="n">size</span><span class="p">()));</span>
+  <span class="n">m_clearValues</span><span class="p">.</span><span class="n">Reserve</span><span class="p">(</span><span class="n">U32</span><span class="p">(</span><span class="n">createInfo</span><span class="p">.</span><span class="n">m_outputTargets</span><span class="p">.</span><span class="n">size</span><span class="p">()));</span>
+
+  <span class="n">U32</span> <span class="n">refCount</span>  <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+  <span class="kt">bool</span> <span class="n">hasDepth</span> <span class="o">=</span> <span class="nb">false</span><span class="p">;</span>
+
+  <span class="k">for</span> <span class="p">(</span><span class="k">const</span> <span class="k">auto</span><span class="o">&amp;</span> <span class="nl">output</span> <span class="p">:</span> <span class="n">createInfo</span><span class="p">.</span><span class="n">m_outputTargets</span><span class="p">)</span> <span class="p">{</span>
+    <span class="k">const</span> <span class="k">auto</span><span class="o">&amp;</span> <span class="n">selected</span> <span class="o">=</span> <span class="n">pipelineBuffers</span><span class="p">[</span><span class="n">output</span><span class="p">];</span>
+
+    <span class="n">VkClearValue</span> <span class="n">clearValue</span> <span class="o">=</span> <span class="p">{};</span>
+
+    <span class="c1">// Push View to Vector as we process output</span>
+    <span class="n">attachmentViews</span><span class="p">.</span><span class="n">PushBack</span><span class="p">(</span><span class="n">pipelineBufferImages</span><span class="p">[</span><span class="n">output</span><span class="p">].</span><span class="n">View</span><span class="p">());</span>
+
+    <span class="k">const</span> <span class="k">auto</span> <span class="n">vkFormat</span> <span class="o">=</span> <span class="n">VkCore</span><span class="o">::</span><span class="n">GetVkFormat</span><span class="p">(</span><span class="n">selected</span><span class="p">.</span><span class="n">m_format</span><span class="p">,</span> <span class="n">log_VulkanRenderSystem</span><span class="p">);</span>
+
+    <span class="n">VkAttachmentDescription</span> <span class="n">attachmentDescription</span> <span class="o">=</span> <span class="p">{};</span>
+    <span class="n">attachmentDescription</span><span class="p">.</span><span class="n">format</span>                  <span class="o">=</span> <span class="n">vkFormat</span><span class="p">;</span>
+    <span class="n">attachmentDescription</span><span class="p">.</span><span class="n">samples</span>                 <span class="o">=</span> <span class="n">VK_SAMPLE_COUNT_1_BIT</span><span class="p">;</span>
+    <span class="n">attachmentDescription</span><span class="p">.</span><span class="n">loadOp</span>                  <span class="o">=</span> <span class="n">VK_ATTACHMENT_LOAD_OP_CLEAR</span><span class="p">;</span>
+    <span class="n">attachmentDescription</span><span class="p">.</span><span class="n">storeOp</span>                 <span class="o">=</span> <span class="n">VK_ATTACHMENT_STORE_OP_STORE</span><span class="p">;</span>
+
+    <span class="c1">// Not using Stencil buffer</span>
+    <span class="n">attachmentDescription</span><span class="p">.</span><span class="n">stencilLoadOp</span>  <span class="o">=</span> <span class="n">VK_ATTACHMENT_LOAD_OP_DONT_CARE</span><span class="p">;</span>
+    <span class="n">attachmentDescription</span><span class="p">.</span><span class="n">stencilStoreOp</span> <span class="o">=</span> <span class="n">VK_ATTACHMENT_STORE_OP_DONT_CARE</span><span class="p">;</span>
+
+    <span class="k">if</span> <span class="p">(</span><span class="n">HasDepthComponent</span><span class="p">(</span><span class="n">selected</span><span class="p">.</span><span class="n">m_format</span><span class="p">)</span> <span class="o">||</span> <span class="n">HasStencilComponent</span><span class="p">(</span><span class="n">selected</span><span class="p">.</span><span class="n">m_format</span><span class="p">))</span> <span class="p">{</span>
+      <span class="c1">// Record Depth Reference</span>
+      <span class="n">depthReference</span> <span class="o">=</span> <span class="n">VkAttachmentReference</span><span class="p">{</span><span class="n">refCount</span><span class="p">,</span> <span class="n">VK_IMAGE_LAYOUT_DEPTH_STENCIL_ATTACHMENT_OPTIMAL</span><span class="p">};</span>
+
+      <span class="n">hasDepth</span> <span class="o">=</span> <span class="nb">true</span><span class="p">;</span>
+
+      <span class="c1">// Shader Read for Color</span>
+      <span class="n">attachmentDescription</span><span class="p">.</span><span class="n">initialLayout</span> <span class="o">=</span> <span class="n">VK_IMAGE_LAYOUT_UNDEFINED</span><span class="p">;</span>
+      <span class="n">attachmentDescription</span><span class="p">.</span><span class="n">finalLayout</span>   <span class="o">=</span> <span class="n">VK_IMAGE_LAYOUT_DEPTH_STENCIL_ATTACHMENT_OPTIMAL</span><span class="p">;</span>
+
+      <span class="n">clearValue</span><span class="p">.</span><span class="n">depthStencil</span> <span class="o">=</span> <span class="p">{</span> <span class="n">createInfo</span><span class="p">.</span><span class="n">m_clearData</span><span class="p">.</span><span class="n">m_depth</span><span class="p">,</span> <span class="n">createInfo</span><span class="p">.</span><span class="n">m_clearData</span><span class="p">.</span><span class="n">m_stencil</span> <span class="p">};</span>
+      <span class="n">m_clearValues</span><span class="p">.</span><span class="n">PushBack</span><span class="p">(</span><span class="n">clearValue</span><span class="p">);</span>
+
+    <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+      <span class="c1">// Record Color Reference</span>
+      <span class="n">colorReferences</span><span class="p">.</span><span class="n">PushBack</span><span class="p">({</span><span class="n">refCount</span><span class="p">,</span> <span class="n">VK_IMAGE_LAYOUT_COLOR_ATTACHMENT_OPTIMAL</span><span class="p">});</span>
+
+      <span class="c1">// Shader Read for Color</span>
+      <span class="n">attachmentDescription</span><span class="p">.</span><span class="n">initialLayout</span> <span class="o">=</span> <span class="n">VK_IMAGE_LAYOUT_UNDEFINED</span><span class="p">;</span>
+      <span class="n">attachmentDescription</span><span class="p">.</span><span class="n">finalLayout</span>   <span class="o">=</span> <span class="n">VK_IMAGE_LAYOUT_SHADER_READ_ONLY_OPTIMAL</span><span class="p">;</span>
+
+      <span class="n">VkPipelineColorBlendAttachmentState</span> <span class="n">colorBlendAttachment</span> <span class="o">=</span> <span class="p">{};</span>
+      <span class="n">colorBlendAttachment</span><span class="p">.</span><span class="n">colorWriteMask</span> <span class="o">=</span> <span class="n">VK_COLOR_COMPONENT_R_BIT</span> <span class="o">|</span> <span class="n">VK_COLOR_COMPONENT_G_BIT</span> <span class="o">|</span> <span class="n">VK_COLOR_COMPONENT_B_BIT</span> <span class="o">|</span> <span class="n">VK_COLOR_COMPONENT_A_BIT</span><span class="p">;</span>
+      <span class="n">colorBlendAttachment</span><span class="p">.</span><span class="n">blendEnable</span> <span class="o">=</span> <span class="n">VkBool32</span><span class="p">(</span><span class="n">createInfo</span><span class="p">.</span><span class="n">m_blendState</span><span class="p">.</span><span class="n">m_enable</span><span class="p">);</span>
+
+      <span class="k">if</span> <span class="p">(</span><span class="n">createInfo</span><span class="p">.</span><span class="n">m_blendState</span><span class="p">.</span><span class="n">m_enable</span><span class="p">)</span> <span class="p">{</span>
+        <span class="n">LOG_DBG</span><span class="p">(</span><span class="n">log_VulkanRenderSystem</span><span class="p">,</span> <span class="n">LOG_LEVEL</span><span class="p">,</span> <span class="s">&quot;Enabling Blend State For Render Pass&quot;</span><span class="p">);</span>
+
+        <span class="k">const</span> <span class="k">auto</span> <span class="n">colorSrcFactor</span> <span class="o">=</span> <span class="n">ToVkBlendFactor</span><span class="p">(</span><span class="n">createInfo</span><span class="p">.</span><span class="n">m_blendState</span><span class="p">.</span><span class="n">m_color</span><span class="p">.</span><span class="n">m_srcFactor</span><span class="p">);</span>
+        <span class="n">VERIFY_OPT</span><span class="p">(</span><span class="n">log_VulkanRenderSystem</span><span class="p">,</span> <span class="n">colorSrcFactor</span><span class="p">,</span> <span class="s">&quot;Invalid colorSrcFactor converted for Blend State&quot;</span><span class="p">);</span>
+
+        <span class="k">const</span> <span class="k">auto</span> <span class="n">colorDstFactor</span> <span class="o">=</span> <span class="n">ToVkBlendFactor</span><span class="p">(</span><span class="n">createInfo</span><span class="p">.</span><span class="n">m_blendState</span><span class="p">.</span><span class="n">m_color</span><span class="p">.</span><span class="n">m_dstFactor</span><span class="p">);</span>
+        <span class="n">VERIFY_OPT</span><span class="p">(</span><span class="n">log_VulkanRenderSystem</span><span class="p">,</span> <span class="n">colorDstFactor</span><span class="p">,</span> <span class="s">&quot;Invalid colorDstFactor converted for Blend State&quot;</span><span class="p">);</span>
+
+        <span class="k">const</span> <span class="k">auto</span> <span class="n">colorOp</span> <span class="o">=</span> <span class="n">ToVkBlendOp</span><span class="p">(</span><span class="n">createInfo</span><span class="p">.</span><span class="n">m_blendState</span><span class="p">.</span><span class="n">m_color</span><span class="p">.</span><span class="n">m_op</span><span class="p">);</span>
+        <span class="n">VERIFY_OPT</span><span class="p">(</span><span class="n">log_VulkanRenderSystem</span><span class="p">,</span> <span class="n">colorOp</span><span class="p">,</span> <span class="s">&quot;Invalid colorOp converted for Blend State&quot;</span><span class="p">);</span>
+
+        <span class="k">const</span> <span class="k">auto</span> <span class="n">alphaSrcFactor</span> <span class="o">=</span> <span class="n">ToVkBlendFactor</span><span class="p">(</span><span class="n">createInfo</span><span class="p">.</span><span class="n">m_blendState</span><span class="p">.</span><span class="n">m_alpha</span><span class="p">.</span><span class="n">m_srcFactor</span><span class="p">);</span>
+        <span class="n">VERIFY_OPT</span><span class="p">(</span><span class="n">log_VulkanRenderSystem</span><span class="p">,</span> <span class="n">alphaSrcFactor</span><span class="p">,</span> <span class="s">&quot;Invalid alphaSrcFactor converted for Blend State&quot;</span><span class="p">);</span>
+
+        <span class="k">const</span> <span class="k">auto</span> <span class="n">alphaDstFactor</span> <span class="o">=</span> <span class="n">ToVkBlendFactor</span><span class="p">(</span><span class="n">createInfo</span><span class="p">.</span><span class="n">m_blendState</span><span class="p">.</span><span class="n">m_alpha</span><span class="p">.</span><span class="n">m_dstFactor</span><span class="p">);</span>
+        <span class="n">VERIFY_OPT</span><span class="p">(</span><span class="n">log_VulkanRenderSystem</span><span class="p">,</span> <span class="n">alphaDstFactor</span><span class="p">,</span> <span class="s">&quot;Invalid alphaDstFactor converted for Blend State&quot;</span><span class="p">);</span>
+
+        <span class="k">const</span> <span class="k">auto</span> <span class="n">alphaOp</span> <span class="o">=</span> <span class="n">ToVkBlendOp</span><span class="p">(</span><span class="n">createInfo</span><span class="p">.</span><span class="n">m_blendState</span><span class="p">.</span><span class="n">m_alpha</span><span class="p">.</span><span class="n">m_op</span><span class="p">);</span>
+        <span class="n">VERIFY_OPT</span><span class="p">(</span><span class="n">log_VulkanRenderSystem</span><span class="p">,</span> <span class="n">alphaOp</span><span class="p">,</span> <span class="s">&quot;Invalid alphaOp converted for Blend State&quot;</span><span class="p">);</span>
+
+        <span class="n">colorBlendAttachment</span><span class="p">.</span><span class="n">srcColorBlendFactor</span> <span class="o">=</span> <span class="n">colorSrcFactor</span><span class="p">.</span><span class="n">value</span><span class="p">();</span>
+        <span class="n">colorBlendAttachment</span><span class="p">.</span><span class="n">dstColorBlendFactor</span> <span class="o">=</span> <span class="n">colorDstFactor</span><span class="p">.</span><span class="n">value</span><span class="p">();</span>
+        <span class="n">colorBlendAttachment</span><span class="p">.</span><span class="n">colorBlendOp</span> <span class="o">=</span> <span class="n">colorOp</span><span class="p">.</span><span class="n">value</span><span class="p">();</span>
+
+        <span class="n">colorBlendAttachment</span><span class="p">.</span><span class="n">srcAlphaBlendFactor</span> <span class="o">=</span> <span class="n">alphaSrcFactor</span><span class="p">.</span><span class="n">value</span><span class="p">();</span>
+        <span class="n">colorBlendAttachment</span><span class="p">.</span><span class="n">dstAlphaBlendFactor</span> <span class="o">=</span> <span class="n">alphaDstFactor</span><span class="p">.</span><span class="n">value</span><span class="p">();</span>
+        <span class="n">colorBlendAttachment</span><span class="p">.</span><span class="n">alphaBlendOp</span> <span class="o">=</span> <span class="n">alphaOp</span><span class="p">.</span><span class="n">value</span><span class="p">();</span>
+      <span class="p">}</span>
+
+      <span class="n">m_colorBlendAttachments</span><span class="p">.</span><span class="n">PushBack</span><span class="p">(</span><span class="n">colorBlendAttachment</span><span class="p">);</span>
+
+      <span class="n">clearValue</span><span class="p">.</span><span class="n">color</span> <span class="o">=</span> <span class="p">{</span> <span class="n">createInfo</span><span class="p">.</span><span class="n">m_clearData</span><span class="p">.</span><span class="n">m_color</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">createInfo</span><span class="p">.</span><span class="n">m_clearData</span><span class="p">.</span><span class="n">m_color</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="n">createInfo</span><span class="p">.</span><span class="n">m_clearData</span><span class="p">.</span><span class="n">m_color</span><span class="p">[</span><span class="mi">2</span><span class="p">],</span> <span class="n">createInfo</span><span class="p">.</span><span class="n">m_clearData</span><span class="p">.</span><span class="n">m_color</span><span class="p">[</span><span class="mi">3</span><span class="p">]</span> <span class="p">};</span>
+      <span class="n">m_clearValues</span><span class="p">.</span><span class="n">PushBack</span><span class="p">(</span><span class="n">clearValue</span><span class="p">);</span>
+    <span class="p">}</span>
+
+    <span class="n">attachments</span><span class="p">.</span><span class="n">PushBack</span><span class="p">(</span><span class="n">attachmentDescription</span><span class="p">);</span>
+
+    <span class="o">++</span><span class="n">refCount</span><span class="p">;</span>
+  <span class="p">}</span>
+
+  <span class="n">VkSubpassDescription</span> <span class="n">subpass</span>    <span class="o">=</span> <span class="p">{};</span>
+  <span class="n">subpass</span><span class="p">.</span><span class="n">pipelineBindPoint</span>       <span class="o">=</span> <span class="n">VK_PIPELINE_BIND_POINT_GRAPHICS</span><span class="p">;</span>
+  <span class="n">subpass</span><span class="p">.</span><span class="n">colorAttachmentCount</span>    <span class="o">=</span> <span class="n">colorReferences</span><span class="p">.</span><span class="n">GetSize</span><span class="p">();</span>
+  <span class="n">subpass</span><span class="p">.</span><span class="n">pColorAttachments</span>       <span class="o">=</span> <span class="n">colorReferences</span><span class="p">.</span><span class="n">Data</span><span class="p">();</span>
+  <span class="n">subpass</span><span class="p">.</span><span class="n">pDepthStencilAttachment</span> <span class="o">=</span> <span class="n">hasDepth</span> <span class="o">?</span> <span class="o">&amp;</span><span class="nl">depthReference</span> <span class="p">:</span> <span class="k">nullptr</span><span class="p">;</span>
+
+  <span class="n">VkRenderPassCreateInfo</span> <span class="n">renderPassInfo</span> <span class="o">=</span> <span class="p">{};</span>
+  <span class="n">renderPassInfo</span><span class="p">.</span><span class="n">sType</span>                  <span class="o">=</span> <span class="n">VK_STRUCTURE_TYPE_RENDER_PASS_CREATE_INFO</span><span class="p">;</span>
+  <span class="n">renderPassInfo</span><span class="p">.</span><span class="n">attachmentCount</span>        <span class="o">=</span> <span class="n">attachments</span><span class="p">.</span><span class="n">GetSize</span><span class="p">();</span>
+  <span class="n">renderPassInfo</span><span class="p">.</span><span class="n">pAttachments</span>           <span class="o">=</span> <span class="n">attachments</span><span class="p">.</span><span class="n">Data</span><span class="p">();</span>
+  <span class="n">renderPassInfo</span><span class="p">.</span><span class="n">subpassCount</span>           <span class="o">=</span> <span class="mi">1</span><span class="p">;</span>
+  <span class="n">renderPassInfo</span><span class="p">.</span><span class="n">pSubpasses</span>             <span class="o">=</span> <span class="o">&amp;</span><span class="n">subpass</span><span class="p">;</span>
+
+  <span class="c1">// Tell special subpass to wait for Image acquisition from semaphore</span>
+  <span class="n">std</span><span class="o">::</span><span class="n">array</span><span class="o">&lt;</span><span class="n">VkSubpassDependency</span><span class="p">,</span> <span class="mi">2</span><span class="o">&gt;</span> <span class="n">dependencies</span> <span class="o">=</span> <span class="p">{};</span>
+
+  <span class="n">dependencies</span><span class="p">[</span><span class="mi">0</span><span class="p">].</span><span class="n">srcSubpass</span>    <span class="o">=</span> <span class="n">VK_SUBPASS_EXTERNAL</span><span class="p">;</span>
+  <span class="n">dependencies</span><span class="p">[</span><span class="mi">0</span><span class="p">].</span><span class="n">dstSubpass</span>    <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+  <span class="n">dependencies</span><span class="p">[</span><span class="mi">0</span><span class="p">].</span><span class="n">srcStageMask</span>  <span class="o">=</span> <span class="n">VK_PIPELINE_STAGE_COLOR_ATTACHMENT_OUTPUT_BIT</span><span class="p">;</span>
+  <span class="n">dependencies</span><span class="p">[</span><span class="mi">0</span><span class="p">].</span><span class="n">srcAccessMask</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+  <span class="n">dependencies</span><span class="p">[</span><span class="mi">0</span><span class="p">].</span><span class="n">dstStageMask</span>  <span class="o">=</span> <span class="n">VK_PIPELINE_STAGE_COLOR_ATTACHMENT_OUTPUT_BIT</span><span class="p">;</span>
+  <span class="n">dependencies</span><span class="p">[</span><span class="mi">0</span><span class="p">].</span><span class="n">dstAccessMask</span> <span class="o">=</span> <span class="n">VK_ACCESS_COLOR_ATTACHMENT_READ_BIT</span> <span class="o">|</span> <span class="n">VK_ACCESS_COLOR_ATTACHMENT_WRITE_BIT</span><span class="p">;</span>
+
+  <span class="n">dependencies</span><span class="p">[</span><span class="mi">1</span><span class="p">].</span><span class="n">srcSubpass</span>      <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+  <span class="n">dependencies</span><span class="p">[</span><span class="mi">1</span><span class="p">].</span><span class="n">dstSubpass</span>      <span class="o">=</span> <span class="n">VK_SUBPASS_EXTERNAL</span><span class="p">;</span>
+  <span class="n">dependencies</span><span class="p">[</span><span class="mi">1</span><span class="p">].</span><span class="n">srcStageMask</span>    <span class="o">=</span> <span class="n">VK_PIPELINE_STAGE_COLOR_ATTACHMENT_OUTPUT_BIT</span><span class="p">;</span>
+  <span class="n">dependencies</span><span class="p">[</span><span class="mi">1</span><span class="p">].</span><span class="n">dstStageMask</span>    <span class="o">=</span> <span class="n">VK_PIPELINE_STAGE_BOTTOM_OF_PIPE_BIT</span><span class="p">;</span>
+  <span class="n">dependencies</span><span class="p">[</span><span class="mi">1</span><span class="p">].</span><span class="n">srcAccessMask</span>   <span class="o">=</span> <span class="n">VK_ACCESS_COLOR_ATTACHMENT_READ_BIT</span> <span class="o">|</span> <span class="n">VK_ACCESS_COLOR_ATTACHMENT_WRITE_BIT</span><span class="p">;</span>
+  <span class="n">dependencies</span><span class="p">[</span><span class="mi">1</span><span class="p">].</span><span class="n">dstAccessMask</span>   <span class="o">=</span> <span class="n">VK_ACCESS_MEMORY_READ_BIT</span><span class="p">;</span>
+  <span class="n">dependencies</span><span class="p">[</span><span class="mi">1</span><span class="p">].</span><span class="n">dependencyFlags</span> <span class="o">=</span> <span class="n">VK_DEPENDENCY_BY_REGION_BIT</span><span class="p">;</span>
+
+  <span class="n">renderPassInfo</span><span class="p">.</span><span class="n">dependencyCount</span> <span class="o">=</span> <span class="n">U32</span><span class="p">(</span><span class="n">dependencies</span><span class="p">.</span><span class="n">size</span><span class="p">());</span>
+  <span class="n">renderPassInfo</span><span class="p">.</span><span class="n">pDependencies</span>   <span class="o">=</span> <span class="n">dependencies</span><span class="p">.</span><span class="n">data</span><span class="p">();</span>
+
+  <span class="n">VERIFY_VK_OP</span><span class="p">(</span><span class="n">log_VulkanRenderSystem</span><span class="p">,</span> <span class="n">vkCreateRenderPass</span><span class="p">(</span><span class="n">device</span><span class="p">,</span> <span class="o">&amp;</span><span class="n">renderPassInfo</span><span class="p">,</span> <span class="k">nullptr</span><span class="p">,</span> <span class="o">&amp;</span><span class="n">m_renderPass</span><span class="p">),</span>
+    <span class="s">&quot;Failed to create render pass&quot;</span><span class="p">);</span>
+
+  <span class="n">VkFramebufferCreateInfo</span> <span class="n">framebufferInfo</span> <span class="o">=</span> <span class="p">{};</span>
+  <span class="n">framebufferInfo</span><span class="p">.</span><span class="n">sType</span>                   <span class="o">=</span> <span class="n">VK_STRUCTURE_TYPE_FRAMEBUFFER_CREATE_INFO</span><span class="p">;</span>
+  <span class="n">framebufferInfo</span><span class="p">.</span><span class="n">renderPass</span>              <span class="o">=</span> <span class="n">m_renderPass</span><span class="p">;</span>
+  <span class="n">framebufferInfo</span><span class="p">.</span><span class="n">attachmentCount</span>         <span class="o">=</span> <span class="n">U32</span><span class="p">(</span><span class="n">attachmentViews</span><span class="p">.</span><span class="n">GetSize</span><span class="p">());</span>
+  <span class="n">framebufferInfo</span><span class="p">.</span><span class="n">pAttachments</span>            <span class="o">=</span> <span class="n">attachmentViews</span><span class="p">.</span><span class="n">Data</span><span class="p">();</span>
+  <span class="n">framebufferInfo</span><span class="p">.</span><span class="n">width</span>                   <span class="o">=</span> <span class="n">swapChain</span><span class="p">.</span><span class="n">GetExtent</span><span class="p">().</span><span class="n">width</span><span class="p">;</span>
+  <span class="n">framebufferInfo</span><span class="p">.</span><span class="n">height</span>                  <span class="o">=</span> <span class="n">swapChain</span><span class="p">.</span><span class="n">GetExtent</span><span class="p">().</span><span class="n">height</span><span class="p">;</span>
+  <span class="n">framebufferInfo</span><span class="p">.</span><span class="n">layers</span>                  <span class="o">=</span> <span class="mi">1</span><span class="p">;</span>
+
+  <span class="n">m_numAttachments</span> <span class="o">=</span> <span class="n">attachmentViews</span><span class="p">.</span><span class="n">GetSize</span><span class="p">();</span>
+
+  <span class="n">VERIFY_VK_OP</span><span class="p">(</span><span class="n">log_VulkanRenderSystem</span><span class="p">,</span> <span class="n">vkCreateFramebuffer</span><span class="p">(</span><span class="n">device</span><span class="p">,</span> <span class="o">&amp;</span><span class="n">framebufferInfo</span><span class="p">,</span> <span class="k">nullptr</span><span class="p">,</span> <span class="n">m_frameBuffers</span><span class="p">.</span><span class="n">Data</span><span class="p">()),</span>
+    <span class="s">&quot;Failed to create single framebuffer&quot;</span><span class="p">);</span>
+
+  <span class="n">m_commandBuffers</span><span class="p">.</span><span class="n">PushBack</span><span class="p">(</span><span class="n">VkCore</span><span class="o">::</span><span class="n">CreateCommandBuffer</span><span class="p">(</span><span class="n">device</span><span class="p">,</span> <span class="n">commandPool</span><span class="p">,</span> <span class="n">VK_COMMAND_BUFFER_LEVEL_PRIMARY</span><span class="p">,</span>
+                                                        <span class="n">log_VulkanRenderSystem</span><span class="p">));</span>
+
+  <span class="n">m_beginRenderSemaphore</span> <span class="o">=</span> <span class="n">VkCore</span><span class="o">::</span><span class="n">CreateSemaphore</span><span class="p">(</span><span class="n">device</span><span class="p">,</span> <span class="n">log_VulkanRenderSystem</span><span class="p">);</span>
+<span class="p">}</span>
+
+<span class="kt">void</span> <span class="n">VkScopedRenderPass</span><span class="o">::</span><span class="n">CreateForSwapChain</span><span class="p">(</span><span class="n">VkDevice</span> <span class="n">device</span><span class="p">,</span>
+                                            <span class="n">VkCommandPool</span> <span class="n">commandPool</span><span class="p">,</span>
+                                            <span class="k">const</span> <span class="n">PipelinePassCreateInfo</span><span class="o">&amp;</span> <span class="n">createInfo</span><span class="p">,</span>
+                                            <span class="k">const</span> <span class="n">Vector</span><span class="o">&lt;</span><span class="n">VkShader</span><span class="o">&gt;&amp;</span> <span class="n">allShaders</span><span class="p">,</span>
+                                            <span class="k">const</span> <span class="n">VkScopedSwapChain</span><span class="o">&amp;</span> <span class="n">swapChain</span><span class="p">)</span> <span class="p">{</span>
+  <span class="n">STACK_ALLOCATOR</span><span class="p">(</span><span class="n">Temporary</span><span class="p">,</span> <span class="n">Memory</span><span class="o">::</span><span class="n">MonotonicAllocator</span><span class="p">,</span> <span class="mi">2048</span><span class="p">);</span>
+
+  <span class="n">CreateDescriptorSetLayout</span><span class="p">(</span><span class="n">device</span><span class="p">,</span> <span class="n">createInfo</span><span class="p">);</span>
+
+  <span class="n">LOG_DBG</span><span class="p">(</span><span class="n">log_VulkanRenderSystem</span><span class="p">,</span> <span class="n">LOG_LEVEL</span><span class="p">,</span> <span class="s">&quot;Creating Render Pass (Swap Chain): ID %d&quot;</span><span class="p">,</span> <span class="n">m_id</span><span class="p">);</span>
+
+  <span class="n">m_shaderPipelineInfos</span><span class="p">.</span><span class="n">Reserve</span><span class="p">(</span><span class="n">U32</span><span class="p">(</span><span class="n">createInfo</span><span class="p">.</span><span class="n">m_shaders</span><span class="p">.</span><span class="n">size</span><span class="p">()));</span>
+  <span class="n">m_clearValues</span><span class="p">.</span><span class="n">Reserve</span><span class="p">(</span><span class="mi">2</span><span class="p">);</span>
+
+  <span class="n">VkClearValue</span> <span class="n">clearValue</span><span class="p">;</span>
+
+  <span class="k">for</span> <span class="p">(</span><span class="k">const</span> <span class="k">auto</span><span class="o">&amp;</span> <span class="nl">vkShaderId</span> <span class="p">:</span> <span class="n">createInfo</span><span class="p">.</span><span class="n">m_shaders</span><span class="p">)</span> <span class="p">{</span>
+    <span class="k">const</span> <span class="k">auto</span><span class="o">&amp;</span> <span class="n">vkShader</span> <span class="o">=</span> <span class="n">allShaders</span><span class="p">[</span><span class="n">vkShaderId</span><span class="p">];</span>
+    <span class="n">m_shaderPipelineInfos</span><span class="p">.</span><span class="n">PushBack</span><span class="p">(</span><span class="n">vkShader</span><span class="p">.</span><span class="n">GetShaderStageInfo</span><span class="p">());</span>
+  <span class="p">}</span>
+
+  <span class="n">VkAttachmentDescription</span> <span class="n">colorAttachment</span> <span class="o">=</span> <span class="p">{};</span>
+  <span class="n">colorAttachment</span><span class="p">.</span><span class="n">format</span>                  <span class="o">=</span> <span class="n">swapChain</span><span class="p">.</span><span class="n">GetSurfaceFormat</span><span class="p">();</span>
+  <span class="n">colorAttachment</span><span class="p">.</span><span class="n">samples</span>                 <span class="o">=</span> <span class="n">VK_SAMPLE_COUNT_1_BIT</span><span class="p">;</span>
+  <span class="n">colorAttachment</span><span class="p">.</span><span class="n">loadOp</span>                  <span class="o">=</span> <span class="n">VK_ATTACHMENT_LOAD_OP_CLEAR</span><span class="p">;</span>
+  <span class="n">colorAttachment</span><span class="p">.</span><span class="n">storeOp</span>                 <span class="o">=</span> <span class="n">VK_ATTACHMENT_STORE_OP_STORE</span><span class="p">;</span>
+
+  <span class="c1">// Not using Stencil buffer</span>
+  <span class="n">colorAttachment</span><span class="p">.</span><span class="n">stencilLoadOp</span>  <span class="o">=</span> <span class="n">VK_ATTACHMENT_LOAD_OP_DONT_CARE</span><span class="p">;</span>
+  <span class="n">colorAttachment</span><span class="p">.</span><span class="n">stencilStoreOp</span> <span class="o">=</span> <span class="n">VK_ATTACHMENT_STORE_OP_DONT_CARE</span><span class="p">;</span>
+
+  <span class="n">colorAttachment</span><span class="p">.</span><span class="n">initialLayout</span> <span class="o">=</span> <span class="n">VK_IMAGE_LAYOUT_UNDEFINED</span><span class="p">;</span>
+  <span class="n">colorAttachment</span><span class="p">.</span><span class="n">finalLayout</span>   <span class="o">=</span> <span class="n">VK_IMAGE_LAYOUT_PRESENT_SRC_KHR</span><span class="p">;</span>
+
+  <span class="n">m_colorBlendAttachments</span><span class="p">.</span><span class="n">Reserve</span><span class="p">(</span><span class="mi">1</span><span class="p">);</span>
+
+  <span class="n">VkPipelineColorBlendAttachmentState</span> <span class="n">colorBlendAttachment</span> <span class="o">=</span> <span class="p">{};</span>
+  <span class="n">colorBlendAttachment</span><span class="p">.</span><span class="n">colorWriteMask</span> <span class="o">=</span> <span class="n">VK_COLOR_COMPONENT_R_BIT</span> <span class="o">|</span> <span class="n">VK_COLOR_COMPONENT_G_BIT</span> <span class="o">|</span> <span class="n">VK_COLOR_COMPONENT_B_BIT</span> <span class="o">|</span> <span class="n">VK_COLOR_COMPONENT_A_BIT</span><span class="p">;</span>
+  <span class="n">colorBlendAttachment</span><span class="p">.</span><span class="n">blendEnable</span> <span class="o">=</span> <span class="n">VkBool32</span><span class="p">(</span><span class="n">createInfo</span><span class="p">.</span><span class="n">m_blendState</span><span class="p">.</span><span class="n">m_enable</span><span class="p">);</span>
+
+  <span class="k">if</span> <span class="p">(</span><span class="n">createInfo</span><span class="p">.</span><span class="n">m_blendState</span><span class="p">.</span><span class="n">m_enable</span><span class="p">)</span> <span class="p">{</span>
+    <span class="n">LOG_DBG</span><span class="p">(</span><span class="n">log_VulkanRenderSystem</span><span class="p">,</span> <span class="n">LOG_LEVEL</span><span class="p">,</span> <span class="s">&quot;Enabling Blend State For Render Pass&quot;</span><span class="p">);</span>
+
+    <span class="k">const</span> <span class="k">auto</span> <span class="n">colorSrcFactor</span> <span class="o">=</span> <span class="n">ToVkBlendFactor</span><span class="p">(</span><span class="n">createInfo</span><span class="p">.</span><span class="n">m_blendState</span><span class="p">.</span><span class="n">m_color</span><span class="p">.</span><span class="n">m_srcFactor</span><span class="p">);</span>
+    <span class="n">VERIFY_OPT</span><span class="p">(</span><span class="n">log_VulkanRenderSystem</span><span class="p">,</span> <span class="n">colorSrcFactor</span><span class="p">,</span> <span class="s">&quot;Invalid colorSrcFactor converted for Blend State&quot;</span><span class="p">);</span>
+
+    <span class="k">const</span> <span class="k">auto</span> <span class="n">colorDstFactor</span> <span class="o">=</span> <span class="n">ToVkBlendFactor</span><span class="p">(</span><span class="n">createInfo</span><span class="p">.</span><span class="n">m_blendState</span><span class="p">.</span><span class="n">m_color</span><span class="p">.</span><span class="n">m_dstFactor</span><span class="p">);</span>
+    <span class="n">VERIFY_OPT</span><span class="p">(</span><span class="n">log_VulkanRenderSystem</span><span class="p">,</span> <span class="n">colorDstFactor</span><span class="p">,</span> <span class="s">&quot;Invalid colorDstFactor converted for Blend State&quot;</span><span class="p">);</span>
+
+    <span class="k">const</span> <span class="k">auto</span> <span class="n">colorOp</span> <span class="o">=</span> <span class="n">ToVkBlendOp</span><span class="p">(</span><span class="n">createInfo</span><span class="p">.</span><span class="n">m_blendState</span><span class="p">.</span><span class="n">m_color</span><span class="p">.</span><span class="n">m_op</span><span class="p">);</span>
+    <span class="n">VERIFY_OPT</span><span class="p">(</span><span class="n">log_VulkanRenderSystem</span><span class="p">,</span> <span class="n">colorOp</span><span class="p">,</span> <span class="s">&quot;Invalid colorOp converted for Blend State&quot;</span><span class="p">);</span>
+
+    <span class="k">const</span> <span class="k">auto</span> <span class="n">alphaSrcFactor</span> <span class="o">=</span> <span class="n">ToVkBlendFactor</span><span class="p">(</span><span class="n">createInfo</span><span class="p">.</span><span class="n">m_blendState</span><span class="p">.</span><span class="n">m_alpha</span><span class="p">.</span><span class="n">m_srcFactor</span><span class="p">);</span>
+    <span class="n">VERIFY_OPT</span><span class="p">(</span><span class="n">log_VulkanRenderSystem</span><span class="p">,</span> <span class="n">alphaSrcFactor</span><span class="p">,</span> <span class="s">&quot;Invalid alphaSrcFactor converted for Blend State&quot;</span><span class="p">);</span>
+
+    <span class="k">const</span> <span class="k">auto</span> <span class="n">alphaDstFactor</span> <span class="o">=</span> <span class="n">ToVkBlendFactor</span><span class="p">(</span><span class="n">createInfo</span><span class="p">.</span><span class="n">m_blendState</span><span class="p">.</span><span class="n">m_alpha</span><span class="p">.</span><span class="n">m_dstFactor</span><span class="p">);</span>
+    <span class="n">VERIFY_OPT</span><span class="p">(</span><span class="n">log_VulkanRenderSystem</span><span class="p">,</span> <span class="n">alphaDstFactor</span><span class="p">,</span> <span class="s">&quot;Invalid alphaDstFactor converted for Blend State&quot;</span><span class="p">);</span>
+
+    <span class="k">const</span> <span class="k">auto</span> <span class="n">alphaOp</span> <span class="o">=</span> <span class="n">ToVkBlendOp</span><span class="p">(</span><span class="n">createInfo</span><span class="p">.</span><span class="n">m_blendState</span><span class="p">.</span><span class="n">m_alpha</span><span class="p">.</span><span class="n">m_op</span><span class="p">);</span>
+    <span class="n">VERIFY_OPT</span><span class="p">(</span><span class="n">log_VulkanRenderSystem</span><span class="p">,</span> <span class="n">alphaOp</span><span class="p">,</span> <span class="s">&quot;Invalid alphaOp converted for Blend State&quot;</span><span class="p">);</span>
+
+    <span class="n">colorBlendAttachment</span><span class="p">.</span><span class="n">srcColorBlendFactor</span> <span class="o">=</span> <span class="n">colorSrcFactor</span><span class="p">.</span><span class="n">value</span><span class="p">();</span>
+    <span class="n">colorBlendAttachment</span><span class="p">.</span><span class="n">dstColorBlendFactor</span> <span class="o">=</span> <span class="n">colorDstFactor</span><span class="p">.</span><span class="n">value</span><span class="p">();</span>
+    <span class="n">colorBlendAttachment</span><span class="p">.</span><span class="n">colorBlendOp</span> <span class="o">=</span> <span class="n">colorOp</span><span class="p">.</span><span class="n">value</span><span class="p">();</span>
+
+    <span class="n">colorBlendAttachment</span><span class="p">.</span><span class="n">srcAlphaBlendFactor</span> <span class="o">=</span> <span class="n">alphaSrcFactor</span><span class="p">.</span><span class="n">value</span><span class="p">();</span>
+    <span class="n">colorBlendAttachment</span><span class="p">.</span><span class="n">dstAlphaBlendFactor</span> <span class="o">=</span> <span class="n">alphaDstFactor</span><span class="p">.</span><span class="n">value</span><span class="p">();</span>
+    <span class="n">colorBlendAttachment</span><span class="p">.</span><span class="n">alphaBlendOp</span> <span class="o">=</span> <span class="n">alphaOp</span><span class="p">.</span><span class="n">value</span><span class="p">();</span>
+  <span class="p">}</span>
+
+  <span class="n">m_colorBlendAttachments</span><span class="p">.</span><span class="n">PushBack</span><span class="p">(</span><span class="n">colorBlendAttachment</span><span class="p">);</span>
+
+  <span class="n">VkAttachmentDescription</span> <span class="n">depthAttachment</span> <span class="o">=</span> <span class="p">{};</span>
+  <span class="n">depthAttachment</span><span class="p">.</span><span class="n">format</span>                  <span class="o">=</span> <span class="n">swapChain</span><span class="p">.</span><span class="n">GetDepthFormat</span><span class="p">();</span>
+  <span class="n">depthAttachment</span><span class="p">.</span><span class="n">samples</span>                 <span class="o">=</span> <span class="n">VK_SAMPLE_COUNT_1_BIT</span><span class="p">;</span>
+  <span class="n">depthAttachment</span><span class="p">.</span><span class="n">loadOp</span>                  <span class="o">=</span> <span class="n">VK_ATTACHMENT_LOAD_OP_CLEAR</span><span class="p">;</span>
+  <span class="n">depthAttachment</span><span class="p">.</span><span class="n">storeOp</span>                 <span class="o">=</span> <span class="n">VK_ATTACHMENT_STORE_OP_DONT_CARE</span><span class="p">;</span>
+  <span class="n">depthAttachment</span><span class="p">.</span><span class="n">stencilLoadOp</span>           <span class="o">=</span> <span class="n">VK_ATTACHMENT_LOAD_OP_DONT_CARE</span><span class="p">;</span>
+  <span class="n">depthAttachment</span><span class="p">.</span><span class="n">stencilStoreOp</span>          <span class="o">=</span> <span class="n">VK_ATTACHMENT_STORE_OP_DONT_CARE</span><span class="p">;</span>
+  <span class="n">depthAttachment</span><span class="p">.</span><span class="n">initialLayout</span>           <span class="o">=</span> <span class="n">VK_IMAGE_LAYOUT_UNDEFINED</span><span class="p">;</span>
+  <span class="n">depthAttachment</span><span class="p">.</span><span class="n">finalLayout</span>             <span class="o">=</span> <span class="n">VK_IMAGE_LAYOUT_DEPTH_STENCIL_ATTACHMENT_OPTIMAL</span><span class="p">;</span>
+
+  <span class="n">VkAttachmentReference</span> <span class="n">colorAttachmentRef</span> <span class="o">=</span> <span class="p">{};</span>
+  <span class="n">colorAttachmentRef</span><span class="p">.</span><span class="n">attachment</span>            <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+  <span class="n">colorAttachmentRef</span><span class="p">.</span><span class="n">layout</span>                <span class="o">=</span> <span class="n">VK_IMAGE_LAYOUT_COLOR_ATTACHMENT_OPTIMAL</span><span class="p">;</span>
+
+  <span class="n">VkAttachmentReference</span> <span class="n">depthAttachmentRef</span> <span class="o">=</span> <span class="p">{};</span>
+  <span class="n">depthAttachmentRef</span><span class="p">.</span><span class="n">attachment</span>            <span class="o">=</span> <span class="mi">1</span><span class="p">;</span>
+  <span class="n">depthAttachmentRef</span><span class="p">.</span><span class="n">layout</span>                <span class="o">=</span> <span class="n">VK_IMAGE_LAYOUT_DEPTH_STENCIL_ATTACHMENT_OPTIMAL</span><span class="p">;</span>
+
+  <span class="n">VkSubpassDescription</span> <span class="n">subpass</span>    <span class="o">=</span> <span class="p">{};</span>
+  <span class="n">subpass</span><span class="p">.</span><span class="n">pipelineBindPoint</span>       <span class="o">=</span> <span class="n">VK_PIPELINE_BIND_POINT_GRAPHICS</span><span class="p">;</span>
+  <span class="n">subpass</span><span class="p">.</span><span class="n">colorAttachmentCount</span>    <span class="o">=</span> <span class="mi">1</span><span class="p">;</span>
+  <span class="n">subpass</span><span class="p">.</span><span class="n">pColorAttachments</span>       <span class="o">=</span> <span class="o">&amp;</span><span class="n">colorAttachmentRef</span><span class="p">;</span>
+  <span class="n">subpass</span><span class="p">.</span><span class="n">pDepthStencilAttachment</span> <span class="o">=</span> <span class="n">swapChain</span><span class="p">.</span><span class="n">HasDepthSupport</span><span class="p">()</span> <span class="o">?</span> <span class="o">&amp;</span><span class="nl">depthAttachmentRef</span> <span class="p">:</span> <span class="k">nullptr</span><span class="p">;</span>
+
+  <span class="n">Vector</span><span class="o">&lt;</span><span class="n">VkAttachmentDescription</span><span class="o">&gt;</span> <span class="n">attachments</span><span class="p">{</span> <span class="mi">2</span><span class="p">,</span> <span class="n">allocatorTemporary</span> <span class="p">};</span>
+  <span class="n">attachments</span><span class="p">.</span><span class="n">PushBack</span><span class="p">(</span><span class="n">colorAttachment</span><span class="p">);</span>
+
+  <span class="n">clearValue</span><span class="p">.</span><span class="n">color</span> <span class="o">=</span> <span class="p">{</span> <span class="n">createInfo</span><span class="p">.</span><span class="n">m_clearData</span><span class="p">.</span><span class="n">m_color</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">createInfo</span><span class="p">.</span><span class="n">m_clearData</span><span class="p">.</span><span class="n">m_color</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="n">createInfo</span><span class="p">.</span><span class="n">m_clearData</span><span class="p">.</span><span class="n">m_color</span><span class="p">[</span><span class="mi">2</span><span class="p">],</span> <span class="n">createInfo</span><span class="p">.</span><span class="n">m_clearData</span><span class="p">.</span><span class="n">m_color</span><span class="p">[</span><span class="mi">3</span><span class="p">]</span> <span class="p">};</span>
+  <span class="n">m_clearValues</span><span class="p">.</span><span class="n">PushBack</span><span class="p">(</span><span class="n">clearValue</span><span class="p">);</span>
+
+  <span class="k">if</span> <span class="p">(</span><span class="n">swapChain</span><span class="p">.</span><span class="n">HasDepthSupport</span><span class="p">())</span>
+  <span class="p">{</span>
+    <span class="n">attachments</span><span class="p">.</span><span class="n">PushBack</span><span class="p">(</span><span class="n">depthAttachment</span><span class="p">);</span>
+
+    <span class="n">clearValue</span><span class="p">.</span><span class="n">depthStencil</span> <span class="o">=</span> <span class="p">{</span> <span class="n">createInfo</span><span class="p">.</span><span class="n">m_clearData</span><span class="p">.</span><span class="n">m_depth</span><span class="p">,</span> <span class="n">createInfo</span><span class="p">.</span><span class="n">m_clearData</span><span class="p">.</span><span class="n">m_stencil</span> <span class="p">};</span>
+    <span class="n">m_clearValues</span><span class="p">.</span><span class="n">PushBack</span><span class="p">(</span><span class="n">clearValue</span><span class="p">);</span>
+  <span class="p">}</span>
+
+  <span class="n">VkRenderPassCreateInfo</span> <span class="n">renderPassInfo</span> <span class="o">=</span> <span class="p">{};</span>
+  <span class="n">renderPassInfo</span><span class="p">.</span><span class="n">sType</span>                  <span class="o">=</span> <span class="n">VK_STRUCTURE_TYPE_RENDER_PASS_CREATE_INFO</span><span class="p">;</span>
+  <span class="n">renderPassInfo</span><span class="p">.</span><span class="n">attachmentCount</span>        <span class="o">=</span> <span class="n">attachments</span><span class="p">.</span><span class="n">GetSize</span><span class="p">();</span>
+  <span class="n">renderPassInfo</span><span class="p">.</span><span class="n">pAttachments</span>           <span class="o">=</span> <span class="n">attachments</span><span class="p">.</span><span class="n">Data</span><span class="p">();</span>
+  <span class="n">renderPassInfo</span><span class="p">.</span><span class="n">subpassCount</span>           <span class="o">=</span> <span class="mi">1</span><span class="p">;</span>
+  <span class="n">renderPassInfo</span><span class="p">.</span><span class="n">pSubpasses</span>             <span class="o">=</span> <span class="o">&amp;</span><span class="n">subpass</span><span class="p">;</span>
+
+  <span class="n">m_numAttachments</span> <span class="o">=</span> <span class="n">attachments</span><span class="p">.</span><span class="n">GetSize</span><span class="p">();</span>
+
+  <span class="c1">// Tell special subpass to wait for Image acquisition from semaphore</span>
+  <span class="n">std</span><span class="o">::</span><span class="n">array</span><span class="o">&lt;</span><span class="n">VkSubpassDependency</span><span class="p">,</span> <span class="mi">1</span><span class="o">&gt;</span> <span class="n">dependencies</span> <span class="o">=</span> <span class="p">{};</span>
+
+  <span class="n">dependencies</span><span class="p">[</span><span class="mi">0</span><span class="p">].</span><span class="n">srcSubpass</span>    <span class="o">=</span> <span class="n">VK_SUBPASS_EXTERNAL</span><span class="p">;</span>
+  <span class="n">dependencies</span><span class="p">[</span><span class="mi">0</span><span class="p">].</span><span class="n">dstSubpass</span>    <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+  <span class="n">dependencies</span><span class="p">[</span><span class="mi">0</span><span class="p">].</span><span class="n">srcStageMask</span>  <span class="o">=</span> <span class="n">VK_PIPELINE_STAGE_COLOR_ATTACHMENT_OUTPUT_BIT</span><span class="p">;</span>
+  <span class="n">dependencies</span><span class="p">[</span><span class="mi">0</span><span class="p">].</span><span class="n">srcAccessMask</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+  <span class="n">dependencies</span><span class="p">[</span><span class="mi">0</span><span class="p">].</span><span class="n">dstStageMask</span>  <span class="o">=</span> <span class="n">VK_PIPELINE_STAGE_COLOR_ATTACHMENT_OUTPUT_BIT</span><span class="p">;</span>
+  <span class="n">dependencies</span><span class="p">[</span><span class="mi">0</span><span class="p">].</span><span class="n">dstAccessMask</span> <span class="o">=</span> <span class="n">VK_ACCESS_COLOR_ATTACHMENT_READ_BIT</span> <span class="o">|</span> <span class="n">VK_ACCESS_COLOR_ATTACHMENT_WRITE_BIT</span><span class="p">;</span>
+
+  <span class="n">renderPassInfo</span><span class="p">.</span><span class="n">dependencyCount</span> <span class="o">=</span> <span class="n">U32</span><span class="p">(</span><span class="n">dependencies</span><span class="p">.</span><span class="n">size</span><span class="p">());</span>
+  <span class="n">renderPassInfo</span><span class="p">.</span><span class="n">pDependencies</span>   <span class="o">=</span> <span class="n">dependencies</span><span class="p">.</span><span class="n">data</span><span class="p">();</span>
+
+  <span class="n">VERIFY_VK_OP</span><span class="p">(</span><span class="n">log_VulkanRenderSystem</span><span class="p">,</span> <span class="n">vkCreateRenderPass</span><span class="p">(</span><span class="n">device</span><span class="p">,</span> <span class="o">&amp;</span><span class="n">renderPassInfo</span><span class="p">,</span> <span class="k">nullptr</span><span class="p">,</span> <span class="o">&amp;</span><span class="n">m_renderPass</span><span class="p">),</span>
+    <span class="s">&quot;Failed to create render pass&quot;</span><span class="p">);</span>
+
+  <span class="k">const</span> <span class="k">auto</span><span class="o">&amp;</span> <span class="n">allImages</span>      <span class="o">=</span> <span class="n">swapChain</span><span class="p">.</span><span class="n">GetAllImages</span><span class="p">();</span>
+  <span class="k">const</span> <span class="k">auto</span> <span class="n">swapChainExtent</span> <span class="o">=</span> <span class="n">swapChain</span><span class="p">.</span><span class="n">GetExtent</span><span class="p">();</span>
+
+  <span class="n">m_frameBuffers</span><span class="p">.</span><span class="n">Resize</span><span class="p">(</span><span class="n">allImages</span><span class="p">.</span><span class="n">GetSize</span><span class="p">());</span>
+
+  <span class="k">const</span> <span class="n">VkImageView</span> <span class="n">depthImageView</span> <span class="o">=</span> <span class="n">swapChain</span><span class="p">.</span><span class="n">GetDepthImage</span><span class="p">().</span><span class="n">View</span><span class="p">();</span>
+
+  <span class="k">for</span> <span class="p">(</span><span class="n">U32</span> <span class="n">idx</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">idx</span> <span class="o">&lt;</span> <span class="n">allImages</span><span class="p">.</span><span class="n">GetSize</span><span class="p">();</span> <span class="o">++</span><span class="n">idx</span><span class="p">)</span> <span class="p">{</span>
+    <span class="n">Vector</span><span class="o">&lt;</span><span class="n">VkImageView</span><span class="o">&gt;</span> <span class="n">swapAttachments</span><span class="p">{</span> <span class="mi">2</span><span class="p">,</span> <span class="n">allocatorTemporary</span> <span class="p">};</span>
+    <span class="n">swapAttachments</span><span class="p">.</span><span class="n">PushBack</span><span class="p">(</span><span class="n">allImages</span><span class="p">[</span><span class="n">idx</span><span class="p">].</span><span class="n">View</span><span class="p">());</span>
+
+    <span class="k">if</span> <span class="p">(</span><span class="n">swapChain</span><span class="p">.</span><span class="n">HasDepthSupport</span><span class="p">())</span>
+    <span class="p">{</span>
+      <span class="n">swapAttachments</span><span class="p">.</span><span class="n">PushBack</span><span class="p">(</span><span class="n">depthImageView</span><span class="p">);</span>
+    <span class="p">}</span>
+
+    <span class="n">VkFramebufferCreateInfo</span> <span class="n">framebufferInfo</span> <span class="o">=</span> <span class="p">{};</span>
+    <span class="n">framebufferInfo</span><span class="p">.</span><span class="n">sType</span>                   <span class="o">=</span> <span class="n">VK_STRUCTURE_TYPE_FRAMEBUFFER_CREATE_INFO</span><span class="p">;</span>
+    <span class="n">framebufferInfo</span><span class="p">.</span><span class="n">renderPass</span>              <span class="o">=</span> <span class="n">m_renderPass</span><span class="p">;</span>
+    <span class="n">framebufferInfo</span><span class="p">.</span><span class="n">attachmentCount</span>         <span class="o">=</span> <span class="n">swapAttachments</span><span class="p">.</span><span class="n">GetSize</span><span class="p">();</span>
+    <span class="n">framebufferInfo</span><span class="p">.</span><span class="n">pAttachments</span>            <span class="o">=</span> <span class="n">swapAttachments</span><span class="p">.</span><span class="n">Data</span><span class="p">();</span>
+    <span class="n">framebufferInfo</span><span class="p">.</span><span class="n">width</span>                   <span class="o">=</span> <span class="n">swapChainExtent</span><span class="p">.</span><span class="n">width</span><span class="p">;</span>
+    <span class="n">framebufferInfo</span><span class="p">.</span><span class="n">height</span>                  <span class="o">=</span> <span class="n">swapChainExtent</span><span class="p">.</span><span class="n">height</span><span class="p">;</span>
+    <span class="n">framebufferInfo</span><span class="p">.</span><span class="n">layers</span>                  <span class="o">=</span> <span class="mi">1</span><span class="p">;</span>
+
+    <span class="n">VERIFY_VK_OP</span><span class="p">(</span><span class="n">log_VulkanRenderSystem</span><span class="p">,</span> <span class="n">vkCreateFramebuffer</span><span class="p">(</span><span class="n">device</span><span class="p">,</span> <span class="o">&amp;</span><span class="n">framebufferInfo</span><span class="p">,</span> <span class="k">nullptr</span><span class="p">,</span> <span class="o">&amp;</span><span class="n">m_frameBuffers</span><span class="p">[</span><span class="n">idx</span><span class="p">]),</span>
+      <span class="s">&quot;Failed to create framebuffer&quot;</span><span class="p">);</span>
+  <span class="p">}</span>
+
+  <span class="n">m_commandBuffers</span><span class="p">.</span><span class="n">Resize</span><span class="p">(</span><span class="n">m_frameBuffers</span><span class="p">.</span><span class="n">GetSize</span><span class="p">());</span>
+  <span class="n">VkCore</span><span class="o">::</span><span class="n">CreateCommandBuffers</span><span class="p">(</span><span class="n">device</span><span class="p">,</span> <span class="n">commandPool</span><span class="p">,</span> <span class="n">VK_COMMAND_BUFFER_LEVEL_PRIMARY</span><span class="p">,</span>
+                               <span class="n">m_commandBuffers</span><span class="p">,</span> <span class="n">log_VulkanRenderSystem</span><span class="p">);</span>
+
+  <span class="n">m_beginRenderSemaphore</span> <span class="o">=</span> <span class="n">VkCore</span><span class="o">::</span><span class="n">CreateSemaphore</span><span class="p">(</span><span class="n">device</span><span class="p">,</span> <span class="n">log_VulkanRenderSystem</span><span class="p">);</span>
+<span class="p">}</span>
+
+<span class="n">VkRenderPass</span> <span class="n">VkScopedRenderPass</span><span class="o">::</span><span class="n">GetRenderPass</span><span class="p">()</span> <span class="k">const</span> <span class="p">{</span>
+  <span class="k">return</span> <span class="n">m_renderPass</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="n">VkFramebuffer</span> <span class="n">VkScopedRenderPass</span><span class="o">::</span><span class="n">GetFrameBuffer</span><span class="p">(</span><span class="n">U32</span> <span class="n">idx</span><span class="p">)</span> <span class="k">const</span> <span class="p">{</span>
+  <span class="k">return</span> <span class="n">m_frameBuffers</span><span class="p">[</span><span class="n">idx</span><span class="p">];</span>
+<span class="p">}</span>
+
+<span class="n">VkCommandBuffer</span> <span class="n">VkScopedRenderPass</span><span class="o">::</span><span class="n">GetCommandBuffer</span><span class="p">(</span><span class="n">U32</span> <span class="n">idx</span><span class="p">)</span> <span class="k">const</span> <span class="p">{</span>
+  <span class="k">return</span> <span class="n">m_commandBuffers</span><span class="p">[</span><span class="n">idx</span><span class="p">];</span>
+<span class="p">}</span>
+
+<span class="k">const</span> <span class="n">Containers</span><span class="o">::</span><span class="n">Vector</span><span class="o">&lt;</span><span class="n">PipelinePassInput</span><span class="o">&gt;&amp;</span> <span class="n">VkScopedRenderPass</span><span class="o">::</span><span class="n">GetPassInputs</span><span class="p">()</span> <span class="k">const</span> <span class="p">{</span>
+  <span class="k">return</span> <span class="n">m_inputAttachments</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="n">U32</span> <span class="n">VkScopedRenderPass</span><span class="o">::</span><span class="n">GetFrameBufferCount</span><span class="p">()</span> <span class="k">const</span> <span class="p">{</span>
+  <span class="k">return</span> <span class="n">m_frameBuffers</span><span class="p">.</span><span class="n">GetSize</span><span class="p">();</span>
+<span class="p">}</span>
+
+<span class="n">VkSemaphore</span> <span class="n">VkScopedRenderPass</span><span class="o">::</span><span class="n">GetRenderSemaphore</span><span class="p">()</span> <span class="k">const</span> <span class="p">{</span>
+  <span class="k">return</span> <span class="n">m_beginRenderSemaphore</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="n">VkDescriptorSetLayout</span> <span class="n">VkScopedRenderPass</span><span class="o">::</span><span class="n">GetDescriptorSetLayout</span><span class="p">()</span> <span class="k">const</span> <span class="p">{</span>
+  <span class="k">return</span> <span class="n">m_descriptorSetLayout</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="n">U32</span> <span class="n">VkScopedRenderPass</span><span class="o">::</span><span class="n">GetId</span><span class="p">()</span> <span class="k">const</span> <span class="p">{</span>
+  <span class="k">return</span> <span class="n">m_id</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="n">U32</span> <span class="n">VkScopedRenderPass</span><span class="o">::</span><span class="n">GetDescriptorSetId</span><span class="p">()</span> <span class="k">const</span> <span class="p">{</span>
+  <span class="k">return</span> <span class="n">m_descriptorSet</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="kt">void</span> <span class="n">VkScopedRenderPass</span><span class="o">::</span><span class="n">SetDescriptorSetId</span><span class="p">(</span><span class="n">U32</span> <span class="n">id</span><span class="p">)</span> <span class="p">{</span>
+  <span class="n">m_descriptorSet</span> <span class="o">=</span> <span class="n">id</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="kt">void</span> <span class="n">VkScopedRenderPass</span><span class="o">::</span><span class="n">Begin</span><span class="p">(</span><span class="k">const</span> <span class="n">VkScopedSwapChain</span><span class="o">&amp;</span> <span class="n">swapChain</span><span class="p">)</span> <span class="k">const</span> <span class="p">{</span>
+  <span class="k">for</span> <span class="p">(</span><span class="n">U32</span> <span class="n">idx</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">idx</span> <span class="o">&lt;</span> <span class="n">m_frameBuffers</span><span class="p">.</span><span class="n">GetSize</span><span class="p">();</span> <span class="o">++</span><span class="n">idx</span><span class="p">)</span> <span class="p">{</span>
+    <span class="n">VkCore</span><span class="o">::</span><span class="n">BeginCommandBuffer</span><span class="p">(</span><span class="n">m_commandBuffers</span><span class="p">[</span><span class="n">idx</span><span class="p">],</span> <span class="n">VK_COMMAND_BUFFER_USAGE_SIMULTANEOUS_USE_BIT</span><span class="p">,</span>
+                               <span class="n">log_VulkanRenderSystem</span><span class="p">);</span>
+
+    <span class="n">VkRenderPassBeginInfo</span> <span class="n">renderPassInfo</span> <span class="o">=</span> <span class="p">{};</span>
+    <span class="n">renderPassInfo</span><span class="p">.</span><span class="n">sType</span>                 <span class="o">=</span> <span class="n">VK_STRUCTURE_TYPE_RENDER_PASS_BEGIN_INFO</span><span class="p">;</span>
+    <span class="n">renderPassInfo</span><span class="p">.</span><span class="n">renderPass</span>            <span class="o">=</span> <span class="n">m_renderPass</span><span class="p">;</span>
+    <span class="n">renderPassInfo</span><span class="p">.</span><span class="n">framebuffer</span>           <span class="o">=</span> <span class="n">m_frameBuffers</span><span class="p">[</span><span class="n">idx</span><span class="p">];</span>
+    <span class="n">renderPassInfo</span><span class="p">.</span><span class="n">renderArea</span><span class="p">.</span><span class="n">offset</span>     <span class="o">=</span> <span class="p">{</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">};</span>
+    <span class="n">renderPassInfo</span><span class="p">.</span><span class="n">renderArea</span><span class="p">.</span><span class="n">extent</span>     <span class="o">=</span> <span class="n">swapChain</span><span class="p">.</span><span class="n">GetExtent</span><span class="p">();</span>
+    <span class="n">renderPassInfo</span><span class="p">.</span><span class="n">clearValueCount</span>       <span class="o">=</span> <span class="n">m_clearValues</span><span class="p">.</span><span class="n">GetSize</span><span class="p">();</span>
+    <span class="n">renderPassInfo</span><span class="p">.</span><span class="n">pClearValues</span>          <span class="o">=</span> <span class="n">m_clearValues</span><span class="p">.</span><span class="n">Data</span><span class="p">();</span>
+
+    <span class="n">vkCmdBeginRenderPass</span><span class="p">(</span><span class="n">m_commandBuffers</span><span class="p">[</span><span class="n">idx</span><span class="p">],</span> <span class="o">&amp;</span><span class="n">renderPassInfo</span><span class="p">,</span> <span class="n">VK_SUBPASS_CONTENTS_SECONDARY_COMMAND_BUFFERS</span><span class="p">);</span>
+  <span class="p">}</span>
+<span class="p">}</span>
+
+<span class="kt">void</span> <span class="n">VkScopedRenderPass</span><span class="o">::</span><span class="n">End</span><span class="p">()</span> <span class="k">const</span> <span class="p">{</span>
+  <span class="k">for</span> <span class="p">(</span><span class="n">U32</span> <span class="n">idx</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">idx</span> <span class="o">&lt;</span> <span class="n">m_commandBuffers</span><span class="p">.</span><span class="n">GetSize</span><span class="p">();</span> <span class="o">++</span><span class="n">idx</span><span class="p">)</span> <span class="p">{</span>
+    <span class="n">vkCmdEndRenderPass</span><span class="p">(</span><span class="n">m_commandBuffers</span><span class="p">[</span><span class="n">idx</span><span class="p">]);</span>
+    <span class="n">VkCore</span><span class="o">::</span><span class="n">EndCommandBuffer</span><span class="p">(</span><span class="n">m_commandBuffers</span><span class="p">[</span><span class="n">idx</span><span class="p">],</span> <span class="n">log_VulkanRenderSystem</span><span class="p">);</span>
+  <span class="p">}</span>
+<span class="p">}</span>
+
+<span class="k">const</span> <span class="n">Vector</span><span class="o">&lt;</span><span class="n">VkPipelineShaderStageCreateInfo</span><span class="o">&gt;&amp;</span> <span class="n">VkScopedRenderPass</span><span class="o">::</span><span class="n">GetShaderStageInfo</span><span class="p">()</span> <span class="k">const</span> <span class="p">{</span>
+  <span class="k">return</span> <span class="n">m_shaderPipelineInfos</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="k">const</span> <span class="n">Containers</span><span class="o">::</span><span class="n">Vector</span><span class="o">&lt;</span><span class="n">VkPipelineColorBlendAttachmentState</span><span class="o">&gt;&amp;</span> <span class="n">VkScopedRenderPass</span><span class="o">::</span><span class="n">GetColorBlendAttachments</span><span class="p">()</span> <span class="k">const</span> <span class="p">{</span>
+  <span class="k">return</span> <span class="n">m_colorBlendAttachments</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="kt">void</span> <span class="n">VkScopedRenderPass</span><span class="o">::</span><span class="n">CleanUp</span><span class="p">(</span><span class="n">VkDevice</span> <span class="n">device</span><span class="p">,</span> <span class="n">VkCommandPool</span> <span class="n">commandPool</span><span class="p">)</span> <span class="k">const</span> <span class="p">{</span>
+  <span class="n">vkDestroyRenderPass</span><span class="p">(</span><span class="n">device</span><span class="p">,</span> <span class="n">m_renderPass</span><span class="p">,</span> <span class="k">nullptr</span><span class="p">);</span>
+
+  <span class="k">for</span> <span class="p">(</span><span class="k">const</span> <span class="k">auto</span><span class="o">&amp;</span> <span class="nl">frameBuffer</span> <span class="p">:</span> <span class="n">m_frameBuffers</span><span class="p">)</span> <span class="p">{</span>
+    <span class="n">vkDestroyFramebuffer</span><span class="p">(</span><span class="n">device</span><span class="p">,</span> <span class="n">frameBuffer</span><span class="p">,</span> <span class="k">nullptr</span><span class="p">);</span>
+  <span class="p">}</span>
+
+  <span class="n">vkDestroySemaphore</span><span class="p">(</span><span class="n">device</span><span class="p">,</span> <span class="n">m_beginRenderSemaphore</span><span class="p">,</span> <span class="k">nullptr</span><span class="p">);</span>
+
+  <span class="n">vkFreeCommandBuffers</span><span class="p">(</span><span class="n">device</span><span class="p">,</span> <span class="n">commandPool</span><span class="p">,</span> <span class="n">m_commandBuffers</span><span class="p">.</span><span class="n">GetSize</span><span class="p">(),</span> <span class="n">m_commandBuffers</span><span class="p">.</span><span class="n">Data</span><span class="p">());</span>
+<span class="p">}</span>
+
+<span class="kt">void</span> <span class="n">VkScopedRenderPass</span><span class="o">::</span><span class="n">CreateDescriptorSetLayout</span><span class="p">(</span><span class="n">VkDevice</span> <span class="n">device</span><span class="p">,</span> <span class="k">const</span> <span class="n">PipelinePassCreateInfo</span><span class="o">&amp;</span> <span class="n">createInfo</span><span class="p">)</span> <span class="p">{</span>
+  <span class="k">if</span> <span class="p">(</span><span class="n">createInfo</span><span class="p">.</span><span class="n">m_inputTargets</span><span class="p">.</span><span class="n">empty</span><span class="p">())</span> <span class="p">{</span>
+    <span class="k">return</span><span class="p">;</span>
+  <span class="p">}</span>
+
+  <span class="n">STACK_ALLOCATOR</span><span class="p">(</span><span class="n">Temporary</span><span class="p">,</span> <span class="n">Memory</span><span class="o">::</span><span class="n">MonotonicAllocator</span><span class="p">,</span> <span class="mi">1024</span><span class="p">);</span>
+
+  <span class="n">U32</span> <span class="n">bindingId</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+
+  <span class="n">m_inputAttachments</span><span class="p">.</span><span class="n">Reserve</span><span class="p">(</span><span class="n">U32</span><span class="p">(</span><span class="n">createInfo</span><span class="p">.</span><span class="n">m_inputTargets</span><span class="p">.</span><span class="n">size</span><span class="p">()));</span>
+
+  <span class="n">Vector</span><span class="o">&lt;</span><span class="n">VkDescriptorSetLayoutBinding</span><span class="o">&gt;</span> <span class="n">currentBindings</span><span class="p">(</span><span class="n">U32</span><span class="p">(</span><span class="n">createInfo</span><span class="p">.</span><span class="n">m_inputTargets</span><span class="p">.</span><span class="n">size</span><span class="p">()),</span> <span class="n">allocatorTemporary</span><span class="p">);</span>
+  <span class="k">for</span> <span class="p">(</span><span class="k">const</span> <span class="k">auto</span><span class="o">&amp;</span> <span class="nl">input</span> <span class="p">:</span> <span class="n">createInfo</span><span class="p">.</span><span class="n">m_inputTargets</span><span class="p">)</span> <span class="p">{</span>
+    <span class="n">m_inputAttachments</span><span class="p">.</span><span class="n">PushBack</span><span class="p">(</span><span class="n">input</span><span class="p">);</span>
+
+    <span class="k">const</span> <span class="k">auto</span> <span class="n">combinedShaderFlagBits</span> <span class="o">=</span> <span class="n">GetCombinedShaderStageFlag</span><span class="p">(</span><span class="n">input</span><span class="p">.</span><span class="n">m_stages</span><span class="p">);</span>
+    <span class="n">VkCore</span><span class="o">::</span><span class="n">CreateSampledImageBinding</span><span class="p">(</span><span class="n">currentBindings</span><span class="p">,</span> <span class="n">bindingId</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="n">combinedShaderFlagBits</span><span class="p">);</span>
+
+    <span class="o">++</span><span class="n">bindingId</span><span class="p">;</span>
+  <span class="p">}</span>
+
+  <span class="n">m_descriptorSetLayout</span> <span class="o">=</span> <span class="n">VkCore</span><span class="o">::</span><span class="n">CreateDescriptorSetLayout</span><span class="p">(</span><span class="n">device</span><span class="p">,</span> <span class="n">currentBindings</span><span class="p">,</span> <span class="n">log_VulkanRenderSystem</span><span class="p">);</span>
+<span class="p">}</span>
+<span class="p">}</span> <span class="c1">// namespace Vulkan</span>
+<span class="p">}</span> <span class="c1">// namespace Azura</span>
+</pre></div>
+</div>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="file_Source_Azura_RenderSystem_Inc_Vulkan_VkScopedRenderPass.h.html" class="btn btn-neutral float-right" title="File VkScopedRenderPass.h" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="file_Source_Azura_RenderSystem_Src_Vulkan_VkScopedRenderPass.cpp.html" class="btn btn-neutral" title="File VkScopedRenderPass.cpp" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2018, Vasu Mahesh
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  
+
+    
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+        <script type="text/javascript" src="../_static/jquery.js"></script>
+        <script type="text/javascript" src="../_static/underscore.js"></script>
+        <script type="text/javascript" src="../_static/doctools.js"></script>
+        <script type="text/javascript" src="../_static/collapsible-lists\js\CollapsibleLists.compressed.js"></script>
+        <script type="text/javascript" src="../_static/collapsible-lists\js\apply-collapsible-lists.js"></script>
+    
+
+  
+
+  <script type="text/javascript" src="../_static/js/theme.js"></script>
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

@@ -1,0 +1,478 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>Program Listing for File VkTypeMapping.cpp &mdash; Azura  documentation</title>
+  
+
+  
+  
+  
+  
+
+  
+
+  
+  
+    
+
+  
+
+  <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/collapsible-lists\css\tree_view.css" type="text/css" />
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="File VkTypeMapping.h" href="file_Source_Azura_RenderSystem_Inc_Vulkan_VkTypeMapping.h.html" />
+    <link rel="prev" title="File VkTypeMapping.cpp" href="file_Source_Azura_RenderSystem_Src_Vulkan_VkTypeMapping.cpp.html" /> 
+
+  
+  <script src="../_static/js/modernizr.min.js"></script>
+
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search">
+          
+
+          
+            <a href="../index.html" class="icon icon-home"> Azura
+          
+
+          
+          </a>
+
+          
+            
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <ul>
+<li class="toctree-l1"><a class="reference internal" href="../setting-up.html">Setting Up</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../build-instructions.html">Build Instructions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../cmake-wrappers.html">CMake Wrappers</a></li>
+<li class="toctree-l1"><a class="reference internal" href="apiRoot.html">Azura API</a></li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">Azura</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../index.html">Docs</a> &raquo;</li>
+        
+          <li><a href="apiRoot.html">Azura API</a> &raquo;</li>
+        
+          <li><a href="file_Source_Azura_RenderSystem_Src_Vulkan_VkTypeMapping.cpp.html">File VkTypeMapping.cpp</a> &raquo;</li>
+        
+      <li>Program Listing for File VkTypeMapping.cpp</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            <a href="../_sources/html/program_listing_file_Source_Azura_RenderSystem_Src_Vulkan_VkTypeMapping.cpp.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="program-listing-for-file-vktypemapping-cpp">
+<span id="program-listing-file-source-azura-rendersystem-src-vulkan-vktypemapping-cpp"></span><h1>Program Listing for File VkTypeMapping.cpp<a class="headerlink" href="#program-listing-for-file-vktypemapping-cpp" title="Permalink to this headline">¶</a></h1>
+<p>↰ <a class="reference internal" href="file_Source_Azura_RenderSystem_Src_Vulkan_VkTypeMapping.cpp.html#file-source-azura-rendersystem-src-vulkan-vktypemapping-cpp"><span class="std std-ref">Return to documentation for file</span></a> (<code class="docutils literal notranslate"><span class="pre">Source\Azura\RenderSystem\Src\Vulkan\VkTypeMapping.cpp</span></code>)</p>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="cp">#include</span> <span class="cpf">&quot;Vulkan/VkTypeMapping.h&quot;</span><span class="cp"></span>
+<span class="cp">#include</span> <span class="cpf">&quot;Utils/Macros.h&quot;</span><span class="cp"></span>
+
+<span class="k">namespace</span> <span class="n">Azura</span> <span class="p">{</span>
+<span class="k">namespace</span> <span class="n">Vulkan</span> <span class="p">{</span>
+
+<span class="cp">#define RAW_STORAGE_TO_VK_FORMAT_MAPPING(FUNC)                                                                         \</span>
+<span class="cp">  FUNC(RawStorageFormat::UNKNOWN, VK_FORMAT_UNDEFINED)                                                                 \</span>
+<span class="cp">  FUNC(RawStorageFormat::R32_UNORM, VK_FORMAT_UNDEFINED)                                                               \</span>
+<span class="cp">  FUNC(RawStorageFormat::R32_SNORM, VK_FORMAT_UNDEFINED)                                                               \</span>
+<span class="cp">                                                                                                                       \</span>
+<span class="cp">  FUNC(RawStorageFormat::B8G8R8A8_UNORM, VK_FORMAT_B8G8R8A8_UNORM)                                                     \</span>
+<span class="cp">  FUNC(RawStorageFormat::B8G8R8A8_SNORM, VK_FORMAT_B8G8R8A8_SNORM)                                                     \</span>
+<span class="cp">  FUNC(RawStorageFormat::B8G8R8A8_USCALED, VK_FORMAT_B8G8R8A8_USCALED)                                                 \</span>
+<span class="cp">  FUNC(RawStorageFormat::B8G8R8A8_SSCALED, VK_FORMAT_B8G8R8A8_SSCALED)                                                 \</span>
+<span class="cp">  FUNC(RawStorageFormat::B8G8R8A8_UINT, VK_FORMAT_B8G8R8A8_UINT)                                                       \</span>
+<span class="cp">  FUNC(RawStorageFormat::B8G8R8A8_SINT, VK_FORMAT_B8G8R8A8_SINT)                                                       \</span>
+<span class="cp">  FUNC(RawStorageFormat::B8G8R8A8_SRGB, VK_FORMAT_B8G8R8A8_SRGB)                                                       \</span>
+<span class="cp">  FUNC(RawStorageFormat::R8G8B8_UNORM, VK_FORMAT_R8G8B8_UNORM)                                                         \</span>
+<span class="cp">  FUNC(RawStorageFormat::R8G8B8A8_UNORM, VK_FORMAT_R8G8B8A8_UNORM)                                                     \</span>
+<span class="cp">  FUNC(RawStorageFormat::R16_FLOAT, VK_FORMAT_R16_SFLOAT)                                                              \</span>
+<span class="cp">  FUNC(RawStorageFormat::R16_UINT, VK_FORMAT_R16_UINT)                                                                 \</span>
+<span class="cp">  FUNC(RawStorageFormat::R16_SINT, VK_FORMAT_R16_SINT)                                                                 \</span>
+<span class="cp">  FUNC(RawStorageFormat::R16_UNORM, VK_FORMAT_R16_UNORM)                                                               \</span>
+<span class="cp">  FUNC(RawStorageFormat::R16_SNORM, VK_FORMAT_R16_SNORM)                                                               \</span>
+<span class="cp">  FUNC(RawStorageFormat::R16_USCALED, VK_FORMAT_R16_USCALED)                                                           \</span>
+<span class="cp">  FUNC(RawStorageFormat::R16_SSCALED, VK_FORMAT_R16_SSCALED)                                                           \</span>
+<span class="cp">  FUNC(RawStorageFormat::R32_FLOAT, VK_FORMAT_R32_SFLOAT)                                                              \</span>
+<span class="cp">  FUNC(RawStorageFormat::R32_UINT, VK_FORMAT_R32_UINT)                                                                 \</span>
+<span class="cp">  FUNC(RawStorageFormat::R32_SINT, VK_FORMAT_R32_SINT)                                                                 \</span>
+<span class="cp">  FUNC(RawStorageFormat::R16G16_FLOAT, VK_FORMAT_R16G16_SFLOAT)                                                        \</span>
+<span class="cp">  FUNC(RawStorageFormat::R16G16_UINT, VK_FORMAT_R16G16_UINT)                                                           \</span>
+<span class="cp">  FUNC(RawStorageFormat::R16G16_SINT, VK_FORMAT_R16G16_SINT)                                                           \</span>
+<span class="cp">  FUNC(RawStorageFormat::R16G16_UNORM, VK_FORMAT_R16G16_UNORM)                                                         \</span>
+<span class="cp">  FUNC(RawStorageFormat::R16G16_SNORM, VK_FORMAT_R16G16_SNORM)                                                         \</span>
+<span class="cp">  FUNC(RawStorageFormat::R16G16_USCALED, VK_FORMAT_R16G16_USCALED)                                                     \</span>
+<span class="cp">  FUNC(RawStorageFormat::R16G16_SSCALED, VK_FORMAT_R16G16_SSCALED)                                                     \</span>
+<span class="cp">  FUNC(RawStorageFormat::R11G11B10_FLOAT, VK_FORMAT_B10G11R11_UFLOAT_PACK32)                                           \</span>
+<span class="cp">  FUNC(RawStorageFormat::R16G16B16_FLOAT, VK_FORMAT_R16G16B16_SFLOAT)                                                  \</span>
+<span class="cp">  FUNC(RawStorageFormat::R16G16B16_UINT, VK_FORMAT_R16G16B16_UINT)                                                     \</span>
+<span class="cp">  FUNC(RawStorageFormat::R16G16B16_SINT, VK_FORMAT_R16G16B16_SINT)                                                     \</span>
+<span class="cp">  FUNC(RawStorageFormat::R16G16B16_UNORM, VK_FORMAT_R16G16B16_UNORM)                                                   \</span>
+<span class="cp">  FUNC(RawStorageFormat::R16G16B16_SNORM, VK_FORMAT_R16G16B16_SNORM)                                                   \</span>
+<span class="cp">  FUNC(RawStorageFormat::R16G16B16_USCALED, VK_FORMAT_R16G16B16_USCALED)                                               \</span>
+<span class="cp">  FUNC(RawStorageFormat::R16G16B16_SSCALED, VK_FORMAT_R16G16B16_SSCALED)                                               \</span>
+<span class="cp">  FUNC(RawStorageFormat::R64_FLOAT, VK_FORMAT_R64_SFLOAT)                                                              \</span>
+<span class="cp">  FUNC(RawStorageFormat::R64_UINT, VK_FORMAT_R64_UINT)                                                                 \</span>
+<span class="cp">  FUNC(RawStorageFormat::R64_SINT, VK_FORMAT_R64_SINT)                                                                 \</span>
+<span class="cp">  FUNC(RawStorageFormat::R32G32_FLOAT, VK_FORMAT_R32G32_SFLOAT)                                                        \</span>
+<span class="cp">  FUNC(RawStorageFormat::R32G32_UINT, VK_FORMAT_R32G32_UINT)                                                           \</span>
+<span class="cp">  FUNC(RawStorageFormat::R32G32_SINT, VK_FORMAT_R32G32_SINT)                                                           \</span>
+<span class="cp">  FUNC(RawStorageFormat::R16G16B16A16_FLOAT, VK_FORMAT_R16G16B16A16_SFLOAT)                                            \</span>
+<span class="cp">  FUNC(RawStorageFormat::R16G16B16A16_UINT, VK_FORMAT_R16G16B16A16_UINT)                                               \</span>
+<span class="cp">  FUNC(RawStorageFormat::R16G16B16A16_SINT, VK_FORMAT_R16G16B16A16_SINT)                                               \</span>
+<span class="cp">  FUNC(RawStorageFormat::R16G16B16A16_UNORM, VK_FORMAT_R16G16B16A16_UNORM)                                             \</span>
+<span class="cp">  FUNC(RawStorageFormat::R16G16B16A16_SNORM, VK_FORMAT_R16G16B16A16_SNORM)                                             \</span>
+<span class="cp">  FUNC(RawStorageFormat::R16G16B16A16_USCALED, VK_FORMAT_R16G16B16A16_USCALED)                                         \</span>
+<span class="cp">  FUNC(RawStorageFormat::R16G16B16A16_SSCALED, VK_FORMAT_R16G16B16A16_SSCALED)                                         \</span>
+<span class="cp">  FUNC(RawStorageFormat::R32G32B32_FLOAT, VK_FORMAT_R32G32B32_SFLOAT)                                                  \</span>
+<span class="cp">  FUNC(RawStorageFormat::R32G32B32_UINT, VK_FORMAT_R32G32B32_UINT)                                                     \</span>
+<span class="cp">  FUNC(RawStorageFormat::R32G32B32_SINT, VK_FORMAT_R32G32B32_SINT)                                                     \</span>
+<span class="cp">  FUNC(RawStorageFormat::R64G64_FLOAT, VK_FORMAT_R64G64_SFLOAT)                                                        \</span>
+<span class="cp">  FUNC(RawStorageFormat::R64G64_UINT, VK_FORMAT_R64G64_UINT)                                                           \</span>
+<span class="cp">  FUNC(RawStorageFormat::R64G64_SINT, VK_FORMAT_R64G64_SINT)                                                           \</span>
+<span class="cp">  FUNC(RawStorageFormat::R32G32B32A32_FLOAT, VK_FORMAT_R32G32B32A32_SFLOAT)                                            \</span>
+<span class="cp">  FUNC(RawStorageFormat::R32G32B32A32_UINT, VK_FORMAT_R32G32B32A32_UINT)                                               \</span>
+<span class="cp">  FUNC(RawStorageFormat::R32G32B32A32_SINT, VK_FORMAT_R32G32B32A32_SINT)                                               \</span>
+<span class="cp">  FUNC(RawStorageFormat::R64G64B64_FLOAT, VK_FORMAT_R64G64B64_SFLOAT)                                                  \</span>
+<span class="cp">  FUNC(RawStorageFormat::R64G64B64_UINT, VK_FORMAT_R64G64B64_UINT)                                                     \</span>
+<span class="cp">  FUNC(RawStorageFormat::R64G64B64_SINT, VK_FORMAT_R64G64B64_SINT)                                                     \</span>
+<span class="cp">  FUNC(RawStorageFormat::R64G64B64A64_FLOAT, VK_FORMAT_R64G64B64A64_SFLOAT)                                            \</span>
+<span class="cp">  FUNC(RawStorageFormat::R64G64B64A64_UINT, VK_FORMAT_R64G64B64A64_UINT)                                               \</span>
+<span class="cp">  FUNC(RawStorageFormat::R64G64B64A64_SINT, VK_FORMAT_R64G64B64A64_SINT)                                               \</span>
+<span class="cp">  FUNC(RawStorageFormat::D24_UNORM_S8_UINT, VK_FORMAT_D24_UNORM_S8_UINT)                                               \</span>
+<span class="cp">  FUNC(RawStorageFormat::D32_FLOAT_S8X24_UINT, VK_FORMAT_D32_SFLOAT_S8_UINT)                                           \</span>
+<span class="cp">  FUNC(RawStorageFormat::D32_FLOAT, VK_FORMAT_D32_SFLOAT)</span>
+
+
+<span class="cp">#define RAW_STORAGE_TO_VK_INDEX_TYPE_MAPPING(FUNC)                                                                      \</span>
+<span class="cp">  FUNC(RawStorageFormat::R16_UINT, VK_INDEX_TYPE_UINT16)                                                               \</span>
+<span class="cp">  FUNC(RawStorageFormat::R32_UINT, VK_INDEX_TYPE_UINT32)</span>
+<span class="cp">#define COLOR_SPACE_TO_VK_COLOR_SPACE_MAPPING(FUNC)                                                                    \</span>
+<span class="cp">  FUNC(ColorSpace::SRGB, VK_COLOR_SPACE_SRGB_NONLINEAR_KHR)                                                            \</span>
+<span class="cp">  FUNC(ColorSpace::HDR10, VK_COLOR_SPACE_HDR10_HLG_EXT)</span>
+
+<span class="cp">#define PRESENT_MODES_TO_VK_PRESENT_MODE_MAPPING(FUNC)                                                                 \</span>
+<span class="cp">  FUNC(PresentModes::Immediate, VK_PRESENT_MODE_IMMEDIATE_KHR)                                                         \</span>
+<span class="cp">  FUNC(PresentModes::Mailbox, VK_PRESENT_MODE_MAILBOX_KHR)                                                             \</span>
+<span class="cp">  FUNC(PresentModes::FIFO, VK_PRESENT_MODE_FIFO_KHR)                                                                   \</span>
+<span class="cp">  FUNC(PresentModes::FIFORelaxed, VK_PRESENT_MODE_FIFO_RELAXED_KHR)                                                    \</span>
+<span class="cp">  FUNC(PresentModes::SharedDemandRefresh, VK_PRESENT_MODE_SHARED_DEMAND_REFRESH_KHR)                                   \</span>
+<span class="cp">  FUNC(PresentModes::SharedContinuous, VK_PRESENT_MODE_SHARED_CONTINUOUS_REFRESH_KHR)</span>
+
+<span class="cp">#define SHADER_STAGE_TO_SHADER_STAGE_FLAGS_MAPPING(FUNC)                                                               \</span>
+<span class="cp">  FUNC(ShaderStage::All, VK_SHADER_STAGE_ALL)                                                                          \</span>
+<span class="cp">  FUNC(ShaderStage::Vertex, VK_SHADER_STAGE_VERTEX_BIT)                                                                \</span>
+<span class="cp">  FUNC(ShaderStage::Pixel, VK_SHADER_STAGE_FRAGMENT_BIT)                                                               \</span>
+<span class="cp">  FUNC(ShaderStage::Compute, VK_SHADER_STAGE_COMPUTE_BIT)                                                              \</span>
+<span class="cp">  FUNC(ShaderStage::Geometry, VK_SHADER_STAGE_GEOMETRY_BIT)</span>
+
+<span class="cp">#define PRIMITIVE_TOPOLOGY_TO_VK_PRIMITIVE_TOPOLOGY_MAPPING(FUNC)                                                      \</span>
+<span class="cp">  FUNC(PrimitiveTopology::PointList, VK_PRIMITIVE_TOPOLOGY_POINT_LIST)                                                 \</span>
+<span class="cp">  FUNC(PrimitiveTopology::LineList, VK_PRIMITIVE_TOPOLOGY_LINE_LIST)                                                   \</span>
+<span class="cp">  FUNC(PrimitiveTopology::LineStrip, VK_PRIMITIVE_TOPOLOGY_LINE_STRIP)                                                 \</span>
+<span class="cp">  FUNC(PrimitiveTopology::TriangleList, VK_PRIMITIVE_TOPOLOGY_TRIANGLE_LIST)                                           \</span>
+<span class="cp">  FUNC(PrimitiveTopology::TriangleStrip, VK_PRIMITIVE_TOPOLOGY_TRIANGLE_STRIP)                                         \</span>
+<span class="cp">  FUNC(PrimitiveTopology::TriangleFan, VK_PRIMITIVE_TOPOLOGY_TRIANGLE_FAN)                                             \</span>
+<span class="cp">  FUNC(PrimitiveTopology::LineListWithAdjacency, VK_PRIMITIVE_TOPOLOGY_LINE_LIST_WITH_ADJACENCY)                       \</span>
+<span class="cp">  FUNC(PrimitiveTopology::LineStripWithAdjacency, VK_PRIMITIVE_TOPOLOGY_LINE_STRIP_WITH_ADJACENCY)                     \</span>
+<span class="cp">  FUNC(PrimitiveTopology::TriangleListWithAdjacency, VK_PRIMITIVE_TOPOLOGY_TRIANGLE_LIST_WITH_ADJACENCY)               \</span>
+<span class="cp">  FUNC(PrimitiveTopology::TriangleStripWithAdjacency, VK_PRIMITIVE_TOPOLOGY_TRIANGLE_STRIP_WITH_ADJACENCY)             \</span>
+<span class="cp">  FUNC(PrimitiveTopology::PatchList, VK_PRIMITIVE_TOPOLOGY_PATCH_LIST)</span>
+
+<span class="cp">#define CULL_MODE_TO_VK_CULL_MODE_MAPPING(FUNC)                                                                        \</span>
+<span class="cp">  FUNC(CullMode::None, VK_CULL_MODE_NONE)                                                                              \</span>
+<span class="cp">  FUNC(CullMode::FrontBit, VK_CULL_MODE_FRONT_BIT)                                                                     \</span>
+<span class="cp">  FUNC(CullMode::BackBit, VK_CULL_MODE_BACK_BIT)                                                                       \</span>
+<span class="cp">  FUNC(CullMode::FrontAndBack, VK_CULL_MODE_FRONT_AND_BACK)</span>
+
+<span class="cp">#define FRONT_FACE_TO_VK_FRONT_FACE_MAPPING(FUNC)                                                                      \</span>
+<span class="cp">  FUNC(FrontFace::CounterClockwise, VK_FRONT_FACE_COUNTER_CLOCKWISE)                                                   \</span>
+<span class="cp">  FUNC(FrontFace::Clockwise, VK_FRONT_FACE_CLOCKWISE)</span>
+
+<span class="cp">#define BUFFER_USAGE_RATE_TO_VK_VERTEX_INPUT_RATE_MAPPING(FUNC)                                                        \</span>
+<span class="cp">  FUNC(BufferUsageRate::PerVertex, VK_VERTEX_INPUT_RATE_VERTEX)                                                        \</span>
+<span class="cp">  FUNC(BufferUsageRate::PerInstance, VK_VERTEX_INPUT_RATE_INSTANCE)</span>
+
+<span class="cp">#define IMAGE_TYPE_TO_VK_IMAGE_TYPE(FUNC)                                                           \</span>
+<span class="cp">  FUNC(ImageType::Image1D, VK_IMAGE_TYPE_1D)                                                        \</span>
+<span class="cp">  FUNC(ImageType::Image2D, VK_IMAGE_TYPE_2D)                                                        \</span>
+<span class="cp">  FUNC(ImageType::Image3D, VK_IMAGE_TYPE_3D)</span>
+
+<span class="cp">#define IMAGE_VIEW_TYPE_TO_VK_IMAGE_TYPE(FUNC)                               \</span>
+<span class="cp">  FUNC(ImageViewType::ImageView1D, VK_IMAGE_VIEW_TYPE_1D)                    \</span>
+<span class="cp">  FUNC(ImageViewType::ImageView2D, VK_IMAGE_VIEW_TYPE_2D)                    \</span>
+<span class="cp">  FUNC(ImageViewType::ImageView3D, VK_IMAGE_VIEW_TYPE_3D)                    \</span>
+<span class="cp">  FUNC(ImageViewType::ImageViewCubeMap, VK_IMAGE_VIEW_TYPE_CUBE)             \</span>
+<span class="cp">  FUNC(ImageViewType::ImageView1DArray, VK_IMAGE_VIEW_TYPE_1D_ARRAY)         \</span>
+<span class="cp">  FUNC(ImageViewType::ImageView2DArray, VK_IMAGE_VIEW_TYPE_2D_ARRAY)         \</span>
+<span class="cp">  FUNC(ImageViewType::ImageViewCubeMapArray, VK_IMAGE_VIEW_TYPE_CUBE_ARRAY)</span>
+
+<span class="cp">#define BLEND_OP_TO_VK_BLEND_OP(FUNC)                              \</span>
+<span class="cp">  FUNC(BlendOp::Add, VK_BLEND_OP_ADD)                              \</span>
+<span class="cp">  FUNC(BlendOp::Subtract, VK_BLEND_OP_SUBTRACT)                    \</span>
+<span class="cp">  FUNC(BlendOp::ReverseSubtract, VK_BLEND_OP_REVERSE_SUBTRACT)     \</span>
+<span class="cp">  FUNC(BlendOp::Min, VK_BLEND_OP_MIN)                              \</span>
+<span class="cp">  FUNC(BlendOp::Max, VK_BLEND_OP_MAX)</span>
+
+
+
+<span class="cp">#define BLEND_FACTOR_TO_VK_BLEND_FACTOR(FUNC)                                          \</span>
+<span class="cp">  FUNC(BlendFactor::Zero, VK_BLEND_FACTOR_ZERO)                                        \</span>
+<span class="cp">  FUNC(BlendFactor::One, VK_BLEND_FACTOR_ONE)                                          \</span>
+<span class="cp">  FUNC(BlendFactor::SrcColor, VK_BLEND_FACTOR_SRC_COLOR)                               \</span>
+<span class="cp">  FUNC(BlendFactor::OneMinusSrcColor, VK_BLEND_FACTOR_ONE_MINUS_SRC_COLOR)             \</span>
+<span class="cp">  FUNC(BlendFactor::DstColor, VK_BLEND_FACTOR_DST_COLOR)                               \</span>
+<span class="cp">  FUNC(BlendFactor::OneMinusDstColor, VK_BLEND_FACTOR_ONE_MINUS_DST_COLOR)             \</span>
+<span class="cp">  FUNC(BlendFactor::SrcAlpha, VK_BLEND_FACTOR_SRC_ALPHA)                               \</span>
+<span class="cp">  FUNC(BlendFactor::OneMinusSrcAlpha, VK_BLEND_FACTOR_ONE_MINUS_SRC_ALPHA)             \</span>
+<span class="cp">  FUNC(BlendFactor::DstAlpha, VK_BLEND_FACTOR_DST_ALPHA)                               \</span>
+<span class="cp">  FUNC(BlendFactor::OneMinusDstAlpha, VK_BLEND_FACTOR_ONE_MINUS_DST_ALPHA)             \</span>
+<span class="cp">  FUNC(BlendFactor::ConstantColor, VK_BLEND_FACTOR_CONSTANT_COLOR)                     \</span>
+<span class="cp">  FUNC(BlendFactor::OneMinusConstantColor, VK_BLEND_FACTOR_ONE_MINUS_CONSTANT_COLOR)   \</span>
+<span class="cp">  FUNC(BlendFactor::ConstantAlpha, VK_BLEND_FACTOR_CONSTANT_ALPHA)                     \</span>
+<span class="cp">  FUNC(BlendFactor::OneMinusConstantAlpha, VK_BLEND_FACTOR_ONE_MINUS_CONSTANT_ALPHA)   \</span>
+<span class="cp">  FUNC(BlendFactor::SrcAlphaSaturate, VK_BLEND_FACTOR_SRC_ALPHA_SATURATE)              \</span>
+<span class="cp">  FUNC(BlendFactor::Src1Color, VK_BLEND_FACTOR_SRC1_COLOR)                             \</span>
+<span class="cp">  FUNC(BlendFactor::OneMinusSrc1Color, VK_BLEND_FACTOR_ONE_MINUS_SRC1_COLOR)           \</span>
+<span class="cp">  FUNC(BlendFactor::Src1Alpha, VK_BLEND_FACTOR_SRC1_ALPHA)                             \</span>
+<span class="cp">  FUNC(BlendFactor::OneMinusSrc1Alpha, VK_BLEND_FACTOR_ONE_MINUS_SRC1_ALPHA)</span>
+
+
+<span class="cp">#define CREATE_MAPPER_CPP(FROM_FORMAT, TO_FORMAT, MAPPING_TABLE, CASE_MAPPING_FUNC)                                    \</span>
+<span class="cp">  CREATE_MAPPER_H(FROM_FORMAT, TO_FORMAT) {                                                                            \</span>
+<span class="cp">    switch (inputFormat) { MAPPING_TABLE(CASE_MAPPING_FUNC) }                                                          \</span>
+<span class="cp">    return std::nullopt;                                                                                               \</span>
+<span class="cp">  }</span>
+
+<span class="c1">// TODO(vasumahesh1): Enable some mappings when fully mapped (Currently compilers raises warnings for some mappings not</span>
+<span class="c1">// present - This is intentional)</span>
+
+<span class="n">CREATE_MAPPER_CPP</span><span class="p">(</span><span class="n">RawStorageFormat</span><span class="p">,</span> <span class="n">VkFormat</span><span class="p">,</span> <span class="n">RAW_STORAGE_TO_VK_FORMAT_MAPPING</span><span class="p">,</span> <span class="n">FORWARD_MAPPING</span><span class="p">)</span>
+<span class="c1">// CREATE_MAPPER_CPP(VkFormat, RawStorageFormat, RAW_STORAGE_TO_VK_FORMAT_MAPPING, REVERSE_MAPPING)</span>
+
+<span class="n">CREATE_MAPPER_CPP</span><span class="p">(</span><span class="n">RawStorageFormat</span><span class="p">,</span> <span class="n">VkIndexType</span><span class="p">,</span> <span class="n">RAW_STORAGE_TO_VK_INDEX_TYPE_MAPPING</span><span class="p">,</span> <span class="n">FORWARD_MAPPING</span><span class="p">)</span> <span class="c1">// NOLINT - Exception case as VkIndexType is different from VkFormat.</span>
+<span class="c1">// CREATE_MAPPER_CPP(RawStorageFormat, VkIndexType, RAW_STORAGE_TO_VK_INDEX_TYPE_MAPPING, REVERSE_MAPPING)</span>
+
+<span class="n">CREATE_MAPPER_CPP</span><span class="p">(</span><span class="n">ColorSpace</span><span class="p">,</span> <span class="n">VkColorSpaceKHR</span><span class="p">,</span> <span class="n">COLOR_SPACE_TO_VK_COLOR_SPACE_MAPPING</span><span class="p">,</span> <span class="n">FORWARD_MAPPING</span><span class="p">)</span>
+<span class="c1">// CREATE_MAPPER_CPP(VkColorSpaceKHR, ColorSpace, COLOR_SPACE_TO_VK_COLOR_SPACE_MAPPING, REVERSE_MAPPING)</span>
+
+<span class="n">CREATE_MAPPER_CPP</span><span class="p">(</span><span class="n">PresentModes</span><span class="p">,</span> <span class="n">VkPresentModeKHR</span><span class="p">,</span> <span class="n">PRESENT_MODES_TO_VK_PRESENT_MODE_MAPPING</span><span class="p">,</span> <span class="n">FORWARD_MAPPING</span><span class="p">)</span>
+<span class="c1">// CREATE_MAPPER_CPP(VkPresentModeKHR, PresentModes, PRESENT_MODES_TO_VK_PRESENT_MODE_MAPPING, REVERSE_MAPPING)</span>
+
+<span class="n">CREATE_MAPPER_CPP</span><span class="p">(</span><span class="n">ShaderStage</span><span class="p">,</span> <span class="n">VkShaderStageFlagBits</span><span class="p">,</span> <span class="n">SHADER_STAGE_TO_SHADER_STAGE_FLAGS_MAPPING</span><span class="p">,</span> <span class="n">FORWARD_MAPPING</span><span class="p">)</span>
+<span class="c1">// CREATE_MAPPER_CPP(VkShaderStageFlagBits, ShaderStage, SHADER_STAGE_TO_SHADER_STAGE_FLAGS_MAPPING, REVERSE_MAPPING)</span>
+
+<span class="n">CREATE_MAPPER_CPP</span><span class="p">(</span><span class="n">PrimitiveTopology</span><span class="p">,</span>
+  <span class="n">VkPrimitiveTopology</span><span class="p">,</span>
+  <span class="n">PRIMITIVE_TOPOLOGY_TO_VK_PRIMITIVE_TOPOLOGY_MAPPING</span><span class="p">,</span>
+  <span class="n">FORWARD_MAPPING</span><span class="p">)</span>
+<span class="c1">// CREATE_MAPPER_CPP(VkPrimitiveTopology, PrimitiveTopology, PRIMITIVE_TOPOLOGY_TO_VK_PRIMITIVE_TOPOLOGY_MAPPING,</span>
+<span class="c1">// REVERSE_MAPPING)</span>
+
+<span class="n">CREATE_MAPPER_CPP</span><span class="p">(</span><span class="n">CullMode</span><span class="p">,</span> <span class="n">VkCullModeFlags</span><span class="p">,</span> <span class="n">CULL_MODE_TO_VK_CULL_MODE_MAPPING</span><span class="p">,</span> <span class="n">FORWARD_MAPPING</span><span class="p">)</span>
+<span class="c1">// CREATE_MAPPER_CPP(VkCullModeFlags, CullMode, CULL_MODE_TO_VK_CULL_MODE_MAPPING, REVERSE_MAPPING)</span>
+
+<span class="n">CREATE_MAPPER_CPP</span><span class="p">(</span><span class="n">FrontFace</span><span class="p">,</span> <span class="n">VkFrontFace</span><span class="p">,</span> <span class="n">FRONT_FACE_TO_VK_FRONT_FACE_MAPPING</span><span class="p">,</span> <span class="n">FORWARD_MAPPING</span><span class="p">)</span>
+<span class="c1">// CREATE_MAPPER_CPP(VkFrontFace, FrontFace, FRONT_FACE_TO_VK_FRONT_FACE_MAPPING, REVERSE_MAPPING)</span>
+
+<span class="n">CREATE_MAPPER_CPP</span><span class="p">(</span><span class="n">BufferUsageRate</span><span class="p">,</span>
+  <span class="n">VkVertexInputRate</span><span class="p">,</span>
+  <span class="n">BUFFER_USAGE_RATE_TO_VK_VERTEX_INPUT_RATE_MAPPING</span><span class="p">,</span>
+  <span class="n">FORWARD_MAPPING</span><span class="p">)</span>
+<span class="c1">// CREATE_MAPPER_CPP(VkFrontFace, FrontFace, FRONT_FACE_TO_VK_FRONT_FACE_MAPPING, REVERSE_MAPPING)</span>
+
+<span class="n">CREATE_MAPPER_CPP</span><span class="p">(</span><span class="n">ImageType</span><span class="p">,</span> <span class="n">VkImageType</span><span class="p">,</span> <span class="n">IMAGE_TYPE_TO_VK_IMAGE_TYPE</span><span class="p">,</span> <span class="n">FORWARD_MAPPING</span><span class="p">);</span>
+<span class="c1">// CREATE_MAPPER_CPP(ImageType, VkImageType, IMAGE_TYPE_TO_VK_IMAGE_TYPE, REVERSE_MAPPING)</span>
+
+<span class="n">CREATE_MAPPER_CPP</span><span class="p">(</span><span class="n">ImageViewType</span><span class="p">,</span> <span class="n">VkImageViewType</span><span class="p">,</span> <span class="n">IMAGE_VIEW_TYPE_TO_VK_IMAGE_TYPE</span><span class="p">,</span> <span class="n">FORWARD_MAPPING</span><span class="p">);</span>
+<span class="c1">// CREATE_MAPPER_CPP(ImageType, VkImageType, IMAGE_TYPE_TO_VK_IMAGE_TYPE, REVERSE_MAPPING)</span>
+
+<span class="n">CREATE_MAPPER_CPP</span><span class="p">(</span><span class="n">BlendFactor</span><span class="p">,</span> <span class="n">VkBlendFactor</span><span class="p">,</span> <span class="n">BLEND_FACTOR_TO_VK_BLEND_FACTOR</span><span class="p">,</span> <span class="n">FORWARD_MAPPING</span><span class="p">);</span>
+<span class="c1">// CREATE_MAPPER_CPP(BlendFactor, VkBlendFactor, BLEND_FACTOR_TO_VK_BLEND_FACTOR, REVERSE_MAPPING);</span>
+
+<span class="n">CREATE_MAPPER_CPP</span><span class="p">(</span><span class="n">BlendOp</span><span class="p">,</span> <span class="n">VkBlendOp</span><span class="p">,</span> <span class="n">BLEND_OP_TO_VK_BLEND_OP</span><span class="p">,</span> <span class="n">FORWARD_MAPPING</span><span class="p">);</span>
+<span class="c1">// CREATE_MAPPER_CPP(BlendOp, VkBlendOp, BLEND_OP_TO_VK_BLEND_OP, REVERSE_MAPPING); // NOLINT</span>
+
+<span class="n">VkShaderStageFlagBits</span> <span class="nf">GetCombinedShaderStageFlag</span><span class="p">(</span><span class="n">ShaderStage</span> <span class="n">stage</span><span class="p">)</span> <span class="p">{</span>
+  <span class="k">if</span> <span class="p">(</span><span class="n">ENUM_HAS</span><span class="p">(</span><span class="n">stage</span><span class="p">,</span> <span class="n">ShaderStage</span><span class="o">::</span><span class="n">All</span><span class="p">))</span> <span class="p">{</span>
+    <span class="k">return</span> <span class="n">ToVkShaderStageFlagBits</span><span class="p">(</span><span class="n">ShaderStage</span><span class="o">::</span><span class="n">All</span><span class="p">).</span><span class="n">value</span><span class="p">();</span>
+  <span class="p">}</span>
+
+  <span class="n">U32</span> <span class="n">result</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+
+  <span class="k">if</span> <span class="p">(</span><span class="n">ENUM_HAS</span><span class="p">(</span><span class="n">stage</span><span class="p">,</span> <span class="n">ShaderStage</span><span class="o">::</span><span class="n">Vertex</span><span class="p">))</span> <span class="p">{</span>
+    <span class="n">result</span> <span class="o">=</span> <span class="n">result</span> <span class="o">|</span> <span class="n">ToVkShaderStageFlagBits</span><span class="p">(</span><span class="n">ShaderStage</span><span class="o">::</span><span class="n">Vertex</span><span class="p">).</span><span class="n">value</span><span class="p">();</span>
+  <span class="p">}</span>
+
+  <span class="k">if</span> <span class="p">(</span><span class="n">ENUM_HAS</span><span class="p">(</span><span class="n">stage</span><span class="p">,</span> <span class="n">ShaderStage</span><span class="o">::</span><span class="n">Pixel</span><span class="p">))</span> <span class="p">{</span>
+    <span class="n">result</span> <span class="o">=</span> <span class="n">result</span> <span class="o">|</span> <span class="n">ToVkShaderStageFlagBits</span><span class="p">(</span><span class="n">ShaderStage</span><span class="o">::</span><span class="n">Pixel</span><span class="p">).</span><span class="n">value</span><span class="p">();</span>
+  <span class="p">}</span>
+
+  <span class="k">if</span> <span class="p">(</span><span class="n">ENUM_HAS</span><span class="p">(</span><span class="n">stage</span><span class="p">,</span> <span class="n">ShaderStage</span><span class="o">::</span><span class="n">Compute</span><span class="p">))</span> <span class="p">{</span>
+    <span class="n">result</span> <span class="o">=</span> <span class="n">result</span> <span class="o">|</span> <span class="n">ToVkShaderStageFlagBits</span><span class="p">(</span><span class="n">ShaderStage</span><span class="o">::</span><span class="n">Compute</span><span class="p">).</span><span class="n">value</span><span class="p">();</span>
+  <span class="p">}</span>
+
+  <span class="k">if</span> <span class="p">(</span><span class="n">ENUM_HAS</span><span class="p">(</span><span class="n">stage</span><span class="p">,</span> <span class="n">ShaderStage</span><span class="o">::</span><span class="n">Geometry</span><span class="p">))</span> <span class="p">{</span>
+    <span class="n">result</span> <span class="o">=</span> <span class="n">result</span> <span class="o">|</span> <span class="n">ToVkShaderStageFlagBits</span><span class="p">(</span><span class="n">ShaderStage</span><span class="o">::</span><span class="n">Geometry</span><span class="p">).</span><span class="n">value</span><span class="p">();</span>
+  <span class="p">}</span>
+
+  <span class="c1">// TODO(vasumahesh1):[ENUM]: Check safety</span>
+  <span class="k">return</span> <span class="k">static_cast</span><span class="o">&lt;</span><span class="n">VkShaderStageFlagBits</span><span class="o">&gt;</span><span class="p">(</span><span class="n">result</span><span class="p">);</span>
+<span class="p">}</span>
+
+<span class="p">}</span> <span class="c1">// namespace Vulkan</span>
+<span class="p">}</span> <span class="c1">// namespace Azura</span>
+</pre></div>
+</div>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="file_Source_Azura_RenderSystem_Inc_Vulkan_VkTypeMapping.h.html" class="btn btn-neutral float-right" title="File VkTypeMapping.h" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="file_Source_Azura_RenderSystem_Src_Vulkan_VkTypeMapping.cpp.html" class="btn btn-neutral" title="File VkTypeMapping.cpp" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2018, Vasu Mahesh
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  
+
+    
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+        <script type="text/javascript" src="../_static/jquery.js"></script>
+        <script type="text/javascript" src="../_static/underscore.js"></script>
+        <script type="text/javascript" src="../_static/doctools.js"></script>
+        <script type="text/javascript" src="../_static/collapsible-lists\js\CollapsibleLists.compressed.js"></script>
+        <script type="text/javascript" src="../_static/collapsible-lists\js\apply-collapsible-lists.js"></script>
+    
+
+  
+
+  <script type="text/javascript" src="../_static/js/theme.js"></script>
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

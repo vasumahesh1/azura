@@ -1,0 +1,570 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>Program Listing for File Array.h &mdash; Azura  documentation</title>
+  
+
+  
+  
+  
+  
+
+  
+
+  
+  
+    
+
+  
+
+  <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/collapsible-lists\css\tree_view.css" type="text/css" />
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="File Array_test.cpp" href="file_Source_Containers_Test_Array_test.cpp.html" />
+    <link rel="prev" title="File Array.h" href="file_Source_Containers_Inc_Containers_Array.h.html" /> 
+
+  
+  <script src="../_static/js/modernizr.min.js"></script>
+
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search">
+          
+
+          
+            <a href="../index.html" class="icon icon-home"> Azura
+          
+
+          
+          </a>
+
+          
+            
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <ul>
+<li class="toctree-l1"><a class="reference internal" href="../setting-up.html">Setting Up</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../build-instructions.html">Build Instructions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../cmake-wrappers.html">CMake Wrappers</a></li>
+<li class="toctree-l1"><a class="reference internal" href="apiRoot.html">Azura API</a></li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">Azura</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../index.html">Docs</a> &raquo;</li>
+        
+          <li><a href="apiRoot.html">Azura API</a> &raquo;</li>
+        
+          <li><a href="file_Source_Containers_Inc_Containers_Array.h.html">File Array.h</a> &raquo;</li>
+        
+      <li>Program Listing for File Array.h</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            <a href="../_sources/html/program_listing_file_Source_Containers_Inc_Containers_Array.h.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="program-listing-for-file-array-h">
+<span id="program-listing-file-source-containers-inc-containers-array-h"></span><h1>Program Listing for File Array.h<a class="headerlink" href="#program-listing-for-file-array-h" title="Permalink to this headline">¶</a></h1>
+<p>↰ <a class="reference internal" href="file_Source_Containers_Inc_Containers_Array.h.html#file-source-containers-inc-containers-array-h"><span class="std std-ref">Return to documentation for file</span></a> (<code class="docutils literal notranslate"><span class="pre">Source\Containers\Inc\Containers\Array.h</span></code>)</p>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="cp">#pragma once</span>
+
+<span class="c1">// for memcpy</span>
+<span class="cp">#include</span> <span class="cpf">&lt;cassert&gt;</span><span class="cp"></span>
+<span class="cp">#include</span> <span class="cpf">&lt;cstring&gt;</span><span class="cp"></span>
+
+<span class="cp">#include</span> <span class="cpf">&quot;Memory/Allocator.h&quot;</span><span class="cp"></span>
+<span class="cp">#include</span> <span class="cpf">&quot;Types.h&quot;</span><span class="cp"></span>
+
+<span class="k">namespace</span> <span class="n">Azura</span> <span class="p">{</span>
+<span class="k">namespace</span> <span class="n">Containers</span> <span class="p">{</span>
+<span class="k">template</span> <span class="o">&lt;</span><span class="k">typename</span> <span class="n">Type</span><span class="p">,</span> <span class="n">U32</span> <span class="n">MaxSize</span><span class="o">&gt;</span>
+<span class="k">class</span> <span class="nc">Array</span> <span class="p">{</span>
+ <span class="k">public</span><span class="o">:</span>
+  <span class="c1">// TODO: Enable When NewDeleteAllocator is ready</span>
+  <span class="c1">// explicit Array(U32 maxSize);</span>
+  <span class="k">explicit</span> <span class="n">Array</span><span class="p">(</span><span class="n">Memory</span><span class="o">::</span><span class="n">Allocator</span><span class="o">&amp;</span> <span class="n">alloc</span><span class="p">);</span>
+
+  <span class="o">~</span><span class="n">Array</span><span class="p">();</span>
+
+  <span class="c1">// Copy Ctor</span>
+  <span class="n">Array</span><span class="p">(</span><span class="k">const</span> <span class="n">Array</span><span class="o">&amp;</span> <span class="n">other</span><span class="p">);</span>
+
+  <span class="c1">// Move Ctor</span>
+  <span class="n">Array</span><span class="p">(</span><span class="n">Array</span><span class="o">&amp;&amp;</span> <span class="n">other</span><span class="p">)</span> <span class="k">noexcept</span><span class="p">;</span>
+
+  <span class="n">Array</span><span class="o">&amp;</span> <span class="k">operator</span><span class="o">=</span><span class="p">(</span><span class="k">const</span> <span class="n">Array</span><span class="o">&amp;</span> <span class="n">other</span><span class="p">);</span>
+  <span class="n">Array</span><span class="o">&amp;</span> <span class="k">operator</span><span class="o">=</span><span class="p">(</span><span class="n">Array</span><span class="o">&amp;&amp;</span> <span class="n">other</span><span class="p">)</span> <span class="k">noexcept</span><span class="p">;</span>
+
+  <span class="kt">void</span> <span class="nf">PushBack</span><span class="p">(</span><span class="k">const</span> <span class="n">Type</span><span class="o">&amp;</span> <span class="n">data</span><span class="p">);</span>
+
+  <span class="n">Type</span> <span class="nf">Pop</span><span class="p">();</span>
+
+  <span class="kt">int</span> <span class="nf">FindFirst</span><span class="p">(</span><span class="k">const</span> <span class="n">Type</span><span class="o">&amp;</span> <span class="n">data</span><span class="p">);</span>
+
+  <span class="kt">void</span> <span class="nf">Remove</span><span class="p">(</span><span class="k">const</span> <span class="n">Type</span><span class="o">&amp;</span> <span class="n">data</span><span class="p">);</span>
+
+  <span class="kt">bool</span> <span class="nf">IsEmpty</span><span class="p">()</span> <span class="k">const</span><span class="p">;</span>
+
+  <span class="kt">void</span> <span class="nf">InsertAt</span><span class="p">(</span><span class="n">U32</span> <span class="n">idx</span><span class="p">,</span> <span class="k">const</span> <span class="n">Type</span><span class="o">&amp;</span> <span class="n">data</span><span class="p">);</span>
+
+  <span class="n">Type</span><span class="o">&amp;</span> <span class="k">operator</span><span class="p">[](</span><span class="n">U32</span> <span class="n">idx</span><span class="p">);</span>
+  <span class="n">Type</span><span class="o">&amp;</span> <span class="k">operator</span><span class="p">[](</span><span class="n">U32</span> <span class="n">idx</span><span class="p">)</span> <span class="k">const</span><span class="p">;</span>
+  <span class="n">Type</span><span class="o">*</span> <span class="nf">Data</span><span class="p">();</span>
+
+  <span class="n">U32</span> <span class="nf">GetSize</span><span class="p">()</span> <span class="k">const</span> <span class="p">{</span>
+    <span class="k">return</span> <span class="n">m_size</span><span class="p">;</span>
+  <span class="p">}</span>
+  <span class="n">U32</span> <span class="nf">GetMaxSize</span><span class="p">()</span> <span class="k">const</span> <span class="p">{</span>
+    <span class="k">return</span> <span class="n">m_maxSize</span><span class="p">;</span>
+  <span class="p">}</span>
+
+  <span class="k">class</span> <span class="nc">Iterator</span> <span class="p">{</span>
+   <span class="k">public</span><span class="o">:</span>
+    <span class="n">Iterator</span><span class="p">()</span>                      <span class="o">=</span> <span class="k">default</span><span class="p">;</span>
+    <span class="o">~</span><span class="n">Iterator</span><span class="p">()</span>                     <span class="o">=</span> <span class="k">default</span><span class="p">;</span>
+    <span class="n">Iterator</span><span class="p">(</span><span class="k">const</span> <span class="n">Iterator</span><span class="o">&amp;</span> <span class="n">other</span><span class="p">)</span> <span class="o">=</span> <span class="k">default</span><span class="p">;</span>
+    <span class="n">Iterator</span><span class="o">&amp;</span> <span class="k">operator</span><span class="o">=</span><span class="p">(</span><span class="k">const</span> <span class="n">Iterator</span><span class="o">&amp;</span> <span class="n">other</span><span class="p">)</span> <span class="o">=</span> <span class="k">default</span><span class="p">;</span>
+
+    <span class="k">using</span> <span class="n">iterator_category</span> <span class="o">=</span> <span class="n">std</span><span class="o">::</span><span class="n">random_access_iterator_tag</span><span class="p">;</span>
+    <span class="k">using</span> <span class="n">value_type</span>        <span class="o">=</span> <span class="n">Type</span><span class="p">;</span>
+    <span class="k">using</span> <span class="n">difference_type</span>   <span class="o">=</span> <span class="kt">int</span><span class="p">;</span>
+    <span class="k">using</span> <span class="n">pointer</span>           <span class="o">=</span> <span class="n">Type</span><span class="o">*</span><span class="p">;</span>
+    <span class="k">using</span> <span class="n">reference</span>         <span class="o">=</span> <span class="n">Type</span><span class="o">&amp;</span><span class="p">;</span>
+
+    <span class="n">Iterator</span><span class="p">(</span><span class="k">const</span> <span class="n">Array</span><span class="o">*</span> <span class="n">ptr</span><span class="p">,</span> <span class="kt">int</span> <span class="n">index</span><span class="p">)</span> <span class="o">:</span> <span class="n">mPtr</span><span class="p">(</span><span class="n">ptr</span><span class="p">),</span> <span class="n">mIndex</span><span class="p">(</span><span class="n">index</span><span class="p">)</span> <span class="p">{}</span>
+
+    <span class="n">Iterator</span><span class="p">(</span><span class="n">Iterator</span><span class="o">&amp;&amp;</span> <span class="n">other</span><span class="p">)</span> <span class="k">noexcept</span> <span class="o">=</span> <span class="k">default</span><span class="p">;</span>
+    <span class="n">Iterator</span><span class="o">&amp;</span> <span class="k">operator</span><span class="o">=</span><span class="p">(</span><span class="n">Iterator</span><span class="o">&amp;&amp;</span> <span class="n">other</span><span class="p">)</span> <span class="k">noexcept</span> <span class="o">=</span> <span class="k">default</span><span class="p">;</span>
+
+    <span class="c1">// Pre Increment</span>
+    <span class="n">Iterator</span><span class="o">&amp;</span> <span class="k">operator</span><span class="o">++</span><span class="p">()</span> <span class="p">{</span>
+      <span class="o">++</span><span class="n">mIndex</span><span class="p">;</span>
+      <span class="k">return</span> <span class="o">*</span><span class="k">this</span><span class="p">;</span>
+    <span class="p">}</span>
+
+    <span class="c1">// Post Increment</span>
+    <span class="n">Iterator</span> <span class="k">operator</span><span class="o">++</span><span class="p">(</span><span class="kt">int</span><span class="p">)</span> <span class="p">{</span>
+      <span class="n">Iterator</span> <span class="n">copy</span><span class="p">(</span><span class="o">*</span><span class="k">this</span><span class="p">);</span>
+      <span class="k">operator</span><span class="o">++</span><span class="p">();</span>
+      <span class="k">return</span> <span class="n">copy</span><span class="p">;</span>
+    <span class="p">}</span>
+
+    <span class="c1">// Pre Decrement</span>
+    <span class="n">Iterator</span><span class="o">&amp;</span> <span class="k">operator</span><span class="o">--</span><span class="p">()</span> <span class="p">{</span>
+      <span class="o">--</span><span class="n">mIndex</span><span class="p">;</span>
+      <span class="k">return</span> <span class="o">*</span><span class="k">this</span><span class="p">;</span>
+    <span class="p">}</span>
+
+    <span class="c1">// Post Decrement</span>
+    <span class="n">Iterator</span> <span class="k">operator</span><span class="o">--</span><span class="p">(</span><span class="kt">int</span><span class="p">)</span> <span class="p">{</span>
+      <span class="n">Iterator</span> <span class="n">copy</span><span class="p">(</span><span class="o">*</span><span class="k">this</span><span class="p">);</span>
+      <span class="k">operator</span><span class="o">--</span><span class="p">();</span>
+      <span class="k">return</span> <span class="n">copy</span><span class="p">;</span>
+    <span class="p">}</span>
+
+    <span class="kt">bool</span> <span class="k">operator</span><span class="o">==</span><span class="p">(</span><span class="k">const</span> <span class="n">Iterator</span><span class="o">&amp;</span> <span class="n">rhs</span><span class="p">)</span> <span class="p">{</span>
+      <span class="k">return</span> <span class="n">mPtr</span> <span class="o">==</span> <span class="n">rhs</span><span class="p">.</span><span class="n">mPtr</span> <span class="o">&amp;&amp;</span> <span class="n">mIndex</span> <span class="o">==</span> <span class="n">rhs</span><span class="p">.</span><span class="n">mIndex</span><span class="p">;</span>
+    <span class="p">}</span>
+
+    <span class="kt">bool</span> <span class="k">operator</span><span class="o">!=</span><span class="p">(</span><span class="k">const</span> <span class="n">Iterator</span><span class="o">&amp;</span> <span class="n">rhs</span><span class="p">)</span> <span class="p">{</span>
+      <span class="k">return</span> <span class="o">!</span><span class="p">(</span><span class="o">*</span><span class="k">this</span> <span class="o">==</span> <span class="n">rhs</span><span class="p">);</span>
+    <span class="p">}</span>
+
+    <span class="kt">bool</span> <span class="k">operator</span><span class="o">&lt;</span><span class="p">(</span><span class="k">const</span> <span class="n">Iterator</span><span class="o">&amp;</span> <span class="n">rhs</span><span class="p">)</span> <span class="p">{</span>
+      <span class="n">assert</span><span class="p">(</span><span class="n">mPtr</span> <span class="o">==</span> <span class="n">rhs</span><span class="p">.</span><span class="n">mPtr</span><span class="p">);</span>
+      <span class="k">return</span> <span class="n">mIndex</span> <span class="o">&lt;</span> <span class="n">rhs</span><span class="p">.</span><span class="n">mIndex</span><span class="p">;</span>
+    <span class="p">}</span>
+
+    <span class="kt">bool</span> <span class="k">operator</span><span class="o">&lt;=</span><span class="p">(</span><span class="k">const</span> <span class="n">Iterator</span><span class="o">&amp;</span> <span class="n">rhs</span><span class="p">)</span> <span class="p">{</span>
+      <span class="n">assert</span><span class="p">(</span><span class="n">mPtr</span> <span class="o">==</span> <span class="n">rhs</span><span class="p">.</span><span class="n">mPtr</span><span class="p">);</span>
+      <span class="k">return</span> <span class="n">mIndex</span> <span class="o">&lt;=</span> <span class="n">rhs</span><span class="p">.</span><span class="n">mIndex</span><span class="p">;</span>
+    <span class="p">}</span>
+
+    <span class="kt">bool</span> <span class="k">operator</span><span class="o">&gt;</span><span class="p">(</span><span class="k">const</span> <span class="n">Iterator</span><span class="o">&amp;</span> <span class="n">rhs</span><span class="p">)</span> <span class="p">{</span>
+      <span class="n">assert</span><span class="p">(</span><span class="n">mPtr</span> <span class="o">==</span> <span class="n">rhs</span><span class="p">.</span><span class="n">mPtr</span><span class="p">);</span>
+      <span class="k">return</span> <span class="n">mIndex</span> <span class="o">&gt;</span> <span class="n">rhs</span><span class="p">.</span><span class="n">mIndex</span><span class="p">;</span>
+    <span class="p">}</span>
+
+    <span class="kt">bool</span> <span class="k">operator</span><span class="o">&gt;=</span><span class="p">(</span><span class="k">const</span> <span class="n">Iterator</span><span class="o">&amp;</span> <span class="n">rhs</span><span class="p">)</span> <span class="p">{</span>
+      <span class="n">assert</span><span class="p">(</span><span class="n">mPtr</span> <span class="o">==</span> <span class="n">rhs</span><span class="p">.</span><span class="n">mPtr</span><span class="p">);</span>
+      <span class="k">return</span> <span class="n">mIndex</span> <span class="o">&gt;=</span> <span class="n">rhs</span><span class="p">.</span><span class="n">mIndex</span><span class="p">;</span>
+    <span class="p">}</span>
+
+    <span class="n">Iterator</span> <span class="k">operator</span><span class="o">+</span><span class="p">(</span><span class="k">const</span> <span class="kt">int</span><span class="o">&amp;</span> <span class="n">idx</span><span class="p">)</span> <span class="p">{</span>
+      <span class="k">return</span> <span class="n">Iterator</span><span class="p">(</span><span class="n">mPtr</span><span class="p">,</span> <span class="n">mIndex</span> <span class="o">+</span> <span class="n">idx</span><span class="p">);</span>
+    <span class="p">}</span>
+
+    <span class="n">Iterator</span><span class="o">&amp;</span> <span class="k">operator</span><span class="o">+=</span><span class="p">(</span><span class="k">const</span> <span class="kt">int</span><span class="o">&amp;</span> <span class="n">idx</span><span class="p">)</span> <span class="p">{</span>
+      <span class="n">mIndex</span> <span class="o">+=</span> <span class="n">idx</span><span class="p">;</span>
+      <span class="k">return</span> <span class="o">*</span><span class="k">this</span><span class="p">;</span>
+    <span class="p">}</span>
+
+    <span class="n">Iterator</span> <span class="k">operator</span><span class="o">-</span><span class="p">(</span><span class="k">const</span> <span class="kt">int</span><span class="o">&amp;</span> <span class="n">idx</span><span class="p">)</span> <span class="p">{</span>
+      <span class="n">assert</span><span class="p">(</span><span class="n">mIndex</span> <span class="o">-</span> <span class="n">idx</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">);</span>
+      <span class="k">return</span> <span class="nf">Iterator</span><span class="p">(</span><span class="n">mPtr</span><span class="p">,</span> <span class="n">mIndex</span> <span class="o">-</span> <span class="n">idx</span><span class="p">);</span>
+    <span class="p">}</span>
+
+    <span class="n">Iterator</span><span class="o">&amp;</span> <span class="k">operator</span><span class="o">-=</span><span class="p">(</span><span class="k">const</span> <span class="kt">int</span><span class="o">&amp;</span> <span class="n">idx</span><span class="p">)</span> <span class="p">{</span>
+      <span class="n">assert</span><span class="p">(</span><span class="n">mIndex</span> <span class="o">-</span> <span class="n">idx</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">);</span>
+      <span class="n">mIndex</span> <span class="o">-=</span> <span class="n">idx</span><span class="p">;</span>
+      <span class="k">return</span> <span class="o">*</span><span class="k">this</span><span class="p">;</span>
+    <span class="p">}</span>
+
+    <span class="kt">int</span> <span class="k">operator</span><span class="o">-</span><span class="p">(</span><span class="k">const</span> <span class="n">Iterator</span><span class="o">&amp;</span> <span class="n">rhs</span><span class="p">)</span> <span class="p">{</span>
+      <span class="n">assert</span><span class="p">(</span><span class="n">mPtr</span> <span class="o">==</span> <span class="n">rhs</span><span class="p">.</span><span class="n">mPtr</span><span class="p">);</span>
+      <span class="k">return</span> <span class="n">mIndex</span> <span class="o">-</span> <span class="n">rhs</span><span class="p">.</span><span class="n">mIndex</span><span class="p">;</span>
+    <span class="p">}</span>
+
+    <span class="k">friend</span> <span class="kt">int</span> <span class="k">operator</span><span class="o">-</span><span class="p">(</span><span class="k">const</span> <span class="n">Iterator</span><span class="o">&amp;</span> <span class="n">lhs</span><span class="p">,</span> <span class="k">const</span> <span class="n">Iterator</span><span class="o">&amp;</span> <span class="n">rhs</span><span class="p">)</span> <span class="p">{</span>
+      <span class="n">Iterator</span> <span class="n">copy</span><span class="p">(</span><span class="n">lhs</span><span class="p">);</span>
+      <span class="k">return</span> <span class="n">copy</span> <span class="o">-</span> <span class="n">rhs</span><span class="p">;</span>
+    <span class="p">}</span>
+
+    <span class="c1">// Element Accessors</span>
+
+    <span class="n">Type</span><span class="o">&amp;</span> <span class="k">operator</span><span class="o">*</span><span class="p">()</span> <span class="p">{</span>
+      <span class="k">return</span> <span class="n">mPtr</span><span class="o">-&gt;</span><span class="k">operator</span><span class="p">[](</span><span class="n">mIndex</span><span class="p">);</span>
+    <span class="p">}</span>
+
+    <span class="n">Type</span><span class="o">*</span> <span class="k">operator</span><span class="o">-&gt;</span><span class="p">()</span> <span class="p">{</span>
+      <span class="k">return</span> <span class="o">&amp;</span><span class="n">mPtr</span><span class="o">-&gt;</span><span class="k">operator</span><span class="p">[](</span><span class="n">mIndex</span><span class="p">);</span>
+    <span class="p">}</span>
+
+    <span class="n">Type</span><span class="o">&amp;</span> <span class="k">operator</span><span class="p">[](</span><span class="k">const</span> <span class="kt">int</span><span class="o">&amp;</span> <span class="n">idx</span><span class="p">)</span> <span class="p">{</span>
+      <span class="k">return</span> <span class="n">mPtr</span><span class="o">-&gt;</span><span class="k">operator</span><span class="p">[](</span><span class="n">mIndex</span> <span class="o">+</span> <span class="n">idx</span><span class="p">);</span>
+    <span class="p">}</span>
+
+   <span class="k">private</span><span class="o">:</span>
+    <span class="k">const</span> <span class="n">Array</span><span class="o">*</span> <span class="n">mPtr</span><span class="p">{</span><span class="k">nullptr</span><span class="p">};</span>
+    <span class="kt">int</span> <span class="n">mIndex</span><span class="p">{</span><span class="o">-</span><span class="mi">1</span><span class="p">};</span>
+  <span class="p">};</span>
+
+  <span class="n">Iterator</span> <span class="nf">Begin</span><span class="p">()</span> <span class="k">const</span><span class="p">;</span>
+
+  <span class="n">Iterator</span> <span class="nf">End</span><span class="p">()</span> <span class="k">const</span><span class="p">;</span>
+
+<span class="cp">#ifdef BUILD_UNIT_TEST</span>
+  <span class="n">Type</span><span class="o">*</span> <span class="nf">GetBackPtr</span><span class="p">()</span> <span class="k">const</span> <span class="p">{</span>
+    <span class="k">return</span> <span class="n">mBack</span><span class="p">;</span>
+  <span class="p">};</span>
+  <span class="n">Type</span><span class="o">*</span> <span class="nf">GetBasePtr</span><span class="p">()</span> <span class="k">const</span> <span class="p">{</span>
+    <span class="k">return</span> <span class="n">m_base</span><span class="p">;</span>
+  <span class="p">};</span>
+<span class="cp">#endif</span>
+
+ <span class="k">private</span><span class="o">:</span>
+  <span class="n">U32</span> <span class="n">m_size</span><span class="p">{</span><span class="mi">0</span><span class="p">};</span>
+  <span class="n">U32</span> <span class="n">m_maxSize</span><span class="p">{</span><span class="n">MaxSize</span><span class="p">};</span>
+  <span class="n">Memory</span><span class="o">::</span><span class="n">Allocator</span><span class="o">&amp;</span> <span class="n">m_allocator</span><span class="p">;</span>
+  <span class="n">Memory</span><span class="o">::</span><span class="n">UniqueArrayPtr</span><span class="o">&lt;</span><span class="n">Type</span><span class="o">&gt;</span> <span class="n">m_base</span><span class="p">{</span><span class="k">nullptr</span><span class="p">};</span>
+<span class="p">};</span>
+
+<span class="c1">// TODO: Enable When NewDeleteAllocator is ready</span>
+<span class="c1">// template &lt;typename Type&gt;</span>
+<span class="c1">// Array&lt;Type, MaxSize&gt;::Array(const U32 maxSize) : m_maxSize(maxSize), m_allocator(alloc),</span>
+<span class="c1">// m_base(m_allocator-&gt;NewObjects&lt;Type&gt;(maxSize)) {}</span>
+
+<span class="k">template</span> <span class="o">&lt;</span><span class="k">typename</span> <span class="n">Type</span><span class="p">,</span> <span class="n">U32</span> <span class="n">MaxSize</span><span class="o">&gt;</span>
+<span class="n">Array</span><span class="o">&lt;</span><span class="n">Type</span><span class="p">,</span> <span class="n">MaxSize</span><span class="o">&gt;::</span><span class="n">Array</span><span class="p">(</span><span class="n">Memory</span><span class="o">::</span><span class="n">Allocator</span><span class="o">&amp;</span> <span class="n">alloc</span><span class="p">)</span>
+    <span class="o">:</span> <span class="n">m_allocator</span><span class="p">(</span><span class="n">alloc</span><span class="p">),</span> <span class="n">m_base</span><span class="p">(</span><span class="n">m_allocator</span><span class="p">.</span><span class="n">RawNewArray</span><span class="o">&lt;</span><span class="n">Type</span><span class="o">&gt;</span><span class="p">(</span><span class="n">MaxSize</span><span class="p">))</span> <span class="p">{}</span>
+
+<span class="k">template</span> <span class="o">&lt;</span><span class="k">typename</span> <span class="n">Type</span><span class="p">,</span> <span class="n">U32</span> <span class="n">MaxSize</span><span class="o">&gt;</span>
+<span class="n">Array</span><span class="o">&lt;</span><span class="n">Type</span><span class="p">,</span> <span class="n">MaxSize</span><span class="o">&gt;::~</span><span class="n">Array</span><span class="p">()</span> <span class="o">=</span> <span class="k">default</span><span class="p">;</span>
+
+<span class="c1">// TODO: error with non trivial types need something similar to typename</span>
+<span class="c1">// std::enable_if&lt;!std::is_fundamental&lt;Type&gt;::value&gt;::type</span>
+<span class="k">template</span> <span class="o">&lt;</span><span class="k">typename</span> <span class="n">Type</span><span class="p">,</span> <span class="n">U32</span> <span class="n">MaxSize</span><span class="o">&gt;</span>
+<span class="n">Array</span><span class="o">&lt;</span><span class="n">Type</span><span class="p">,</span> <span class="n">MaxSize</span><span class="o">&gt;::</span><span class="n">Array</span><span class="p">(</span><span class="k">const</span> <span class="n">Array</span><span class="o">&amp;</span> <span class="n">other</span><span class="p">)</span>
+    <span class="o">:</span> <span class="n">m_size</span><span class="p">(</span><span class="n">other</span><span class="p">.</span><span class="n">m_size</span><span class="p">),</span> <span class="n">m_maxSize</span><span class="p">(</span><span class="n">other</span><span class="p">.</span><span class="n">m_maxSize</span><span class="p">),</span> <span class="n">m_allocator</span><span class="p">(</span><span class="n">other</span><span class="p">.</span><span class="n">m_allocator</span><span class="p">)</span> <span class="p">{</span>
+  <span class="c1">// Allocate Memory</span>
+  <span class="n">m_base</span> <span class="o">=</span> <span class="n">m_allocator</span><span class="p">.</span><span class="n">RawNewArray</span><span class="o">&lt;</span><span class="n">Type</span><span class="o">&gt;</span><span class="p">(</span><span class="n">m_maxSize</span><span class="p">);</span>
+
+  <span class="c1">// Copy over Contents</span>
+  <span class="n">std</span><span class="o">::</span><span class="n">memcpy</span><span class="p">(</span><span class="n">m_base</span><span class="p">.</span><span class="n">get</span><span class="p">(),</span> <span class="n">other</span><span class="p">.</span><span class="n">m_base</span><span class="p">.</span><span class="n">get</span><span class="p">(),</span> <span class="n">m_maxSize</span> <span class="o">*</span> <span class="k">sizeof</span><span class="p">(</span><span class="n">Type</span><span class="p">));</span>
+<span class="p">}</span>
+
+<span class="k">template</span> <span class="o">&lt;</span><span class="k">typename</span> <span class="n">Type</span><span class="p">,</span> <span class="n">U32</span> <span class="n">MaxSize</span><span class="o">&gt;</span>
+<span class="n">Array</span><span class="o">&lt;</span><span class="n">Type</span><span class="p">,</span> <span class="n">MaxSize</span><span class="o">&gt;::</span><span class="n">Array</span><span class="p">(</span><span class="n">Array</span><span class="o">&amp;&amp;</span> <span class="n">other</span><span class="p">)</span> <span class="k">noexcept</span>
+    <span class="o">:</span> <span class="n">m_size</span><span class="p">(</span><span class="n">std</span><span class="o">::</span><span class="n">move</span><span class="p">(</span><span class="n">other</span><span class="p">.</span><span class="n">m_size</span><span class="p">)),</span>
+      <span class="n">m_maxSize</span><span class="p">(</span><span class="n">std</span><span class="o">::</span><span class="n">move</span><span class="p">(</span><span class="n">other</span><span class="p">.</span><span class="n">m_maxSize</span><span class="p">)),</span>
+      <span class="n">m_allocator</span><span class="p">(</span><span class="n">other</span><span class="p">.</span><span class="n">m_allocator</span><span class="p">),</span>
+      <span class="n">m_base</span><span class="p">(</span><span class="n">std</span><span class="o">::</span><span class="n">move</span><span class="p">(</span><span class="n">other</span><span class="p">.</span><span class="n">m_base</span><span class="p">))</span> <span class="p">{}</span>
+
+<span class="c1">// TODO: error with non trivial types need something similar to typename</span>
+<span class="c1">// std::enable_if&lt;!std::is_fundamental&lt;Type&gt;::value&gt;::type</span>
+<span class="k">template</span> <span class="o">&lt;</span><span class="k">typename</span> <span class="n">Type</span><span class="p">,</span> <span class="n">U32</span> <span class="n">MaxSize</span><span class="o">&gt;</span>
+<span class="n">Array</span><span class="o">&lt;</span><span class="n">Type</span><span class="p">,</span> <span class="n">MaxSize</span><span class="o">&gt;&amp;</span> <span class="n">Array</span><span class="o">&lt;</span><span class="n">Type</span><span class="p">,</span> <span class="n">MaxSize</span><span class="o">&gt;::</span><span class="k">operator</span><span class="o">=</span><span class="p">(</span><span class="k">const</span> <span class="n">Array</span><span class="o">&amp;</span> <span class="n">other</span><span class="p">)</span> <span class="p">{</span>
+  <span class="k">if</span> <span class="p">(</span><span class="k">this</span> <span class="o">==</span> <span class="o">&amp;</span><span class="n">other</span><span class="p">)</span> <span class="p">{</span>
+    <span class="k">return</span> <span class="o">*</span><span class="k">this</span><span class="p">;</span>
+  <span class="p">}</span>
+
+  <span class="n">m_size</span>      <span class="o">=</span> <span class="n">other</span><span class="p">.</span><span class="n">m_size</span><span class="p">;</span>
+  <span class="n">m_maxSize</span>   <span class="o">=</span> <span class="n">other</span><span class="p">.</span><span class="n">m_maxSize</span><span class="p">;</span>
+  <span class="n">m_allocator</span> <span class="o">=</span> <span class="n">other</span><span class="p">.</span><span class="n">m_allocator</span><span class="p">;</span>
+
+  <span class="c1">// Allocate Memory</span>
+  <span class="n">m_base</span> <span class="o">=</span> <span class="n">m_allocator</span><span class="p">.</span><span class="n">RawNewArray</span><span class="o">&lt;</span><span class="n">Type</span><span class="o">&gt;</span><span class="p">(</span><span class="n">m_maxSize</span><span class="p">);</span>
+
+  <span class="c1">// Copy over Contents</span>
+  <span class="n">std</span><span class="o">::</span><span class="n">memcpy</span><span class="p">(</span><span class="n">m_base</span><span class="p">.</span><span class="n">get</span><span class="p">(),</span> <span class="n">other</span><span class="p">.</span><span class="n">m_base</span><span class="p">.</span><span class="n">get</span><span class="p">(),</span> <span class="n">m_maxSize</span> <span class="o">*</span> <span class="k">sizeof</span><span class="p">(</span><span class="n">Type</span><span class="p">));</span>
+
+  <span class="k">return</span> <span class="o">*</span><span class="k">this</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="k">template</span> <span class="o">&lt;</span><span class="k">typename</span> <span class="n">Type</span><span class="p">,</span> <span class="n">U32</span> <span class="n">MaxSize</span><span class="o">&gt;</span>
+<span class="n">Array</span><span class="o">&lt;</span><span class="n">Type</span><span class="p">,</span> <span class="n">MaxSize</span><span class="o">&gt;&amp;</span> <span class="n">Array</span><span class="o">&lt;</span><span class="n">Type</span><span class="p">,</span> <span class="n">MaxSize</span><span class="o">&gt;::</span><span class="k">operator</span><span class="o">=</span><span class="p">(</span><span class="n">Array</span><span class="o">&amp;&amp;</span> <span class="n">other</span><span class="p">)</span> <span class="k">noexcept</span> <span class="p">{</span>
+  <span class="k">if</span> <span class="p">(</span><span class="k">this</span> <span class="o">==</span> <span class="o">&amp;</span><span class="n">other</span><span class="p">)</span> <span class="p">{</span>
+    <span class="k">return</span> <span class="o">*</span><span class="k">this</span><span class="p">;</span>
+  <span class="p">}</span>
+
+  <span class="n">m_size</span>      <span class="o">=</span> <span class="n">std</span><span class="o">::</span><span class="n">move</span><span class="p">(</span><span class="n">other</span><span class="p">.</span><span class="n">m_size</span><span class="p">);</span>
+  <span class="n">m_maxSize</span>   <span class="o">=</span> <span class="n">std</span><span class="o">::</span><span class="n">move</span><span class="p">(</span><span class="n">other</span><span class="p">.</span><span class="n">m_maxSize</span><span class="p">);</span>
+  <span class="n">m_allocator</span> <span class="o">=</span> <span class="n">other</span><span class="p">.</span><span class="n">m_allocator</span><span class="p">;</span>
+  <span class="n">m_base</span>      <span class="o">=</span> <span class="n">std</span><span class="o">::</span><span class="n">move</span><span class="p">(</span><span class="n">other</span><span class="p">.</span><span class="n">m_base</span><span class="p">);</span>
+
+  <span class="k">return</span> <span class="o">*</span><span class="k">this</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="k">template</span> <span class="o">&lt;</span><span class="k">typename</span> <span class="n">Type</span><span class="p">,</span> <span class="n">U32</span> <span class="n">MaxSize</span><span class="o">&gt;</span>
+<span class="kt">void</span> <span class="n">Array</span><span class="o">&lt;</span><span class="n">Type</span><span class="p">,</span> <span class="n">MaxSize</span><span class="o">&gt;::</span><span class="n">PushBack</span><span class="p">(</span><span class="k">const</span> <span class="n">Type</span><span class="o">&amp;</span> <span class="n">data</span><span class="p">)</span> <span class="p">{</span>
+  <span class="n">assert</span><span class="p">(</span><span class="n">m_size</span> <span class="o">&lt;</span> <span class="n">m_maxSize</span><span class="p">);</span>
+
+  <span class="n">m_base</span><span class="p">[</span><span class="n">m_size</span><span class="p">]</span> <span class="o">=</span> <span class="n">data</span><span class="p">;</span>
+  <span class="o">++</span><span class="n">m_size</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="k">template</span> <span class="o">&lt;</span><span class="k">typename</span> <span class="n">Type</span><span class="p">,</span> <span class="n">U32</span> <span class="n">MaxSize</span><span class="o">&gt;</span>
+<span class="n">Type</span> <span class="n">Array</span><span class="o">&lt;</span><span class="n">Type</span><span class="p">,</span> <span class="n">MaxSize</span><span class="o">&gt;::</span><span class="n">Pop</span><span class="p">()</span> <span class="p">{</span>
+  <span class="n">assert</span><span class="p">(</span><span class="n">m_size</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">);</span>
+
+  <span class="n">Type</span> <span class="n">data</span> <span class="o">=</span> <span class="n">m_base</span><span class="p">[</span><span class="n">m_size</span> <span class="o">-</span> <span class="mi">1</span><span class="p">];</span>
+  <span class="o">--</span><span class="n">m_size</span><span class="p">;</span>
+
+  <span class="k">return</span> <span class="n">data</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="k">template</span> <span class="o">&lt;</span><span class="k">typename</span> <span class="n">Type</span><span class="p">,</span> <span class="n">U32</span> <span class="n">MaxSize</span><span class="o">&gt;</span>
+<span class="kt">int</span> <span class="n">Array</span><span class="o">&lt;</span><span class="n">Type</span><span class="p">,</span> <span class="n">MaxSize</span><span class="o">&gt;::</span><span class="n">FindFirst</span><span class="p">(</span><span class="k">const</span> <span class="n">Type</span><span class="o">&amp;</span> <span class="n">data</span><span class="p">)</span> <span class="p">{</span>
+  <span class="kt">int</span> <span class="n">idx</span> <span class="o">=</span> <span class="o">-</span><span class="mi">1</span><span class="p">;</span>
+
+  <span class="k">for</span> <span class="p">(</span><span class="n">U32</span> <span class="n">itr</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">itr</span> <span class="o">&lt;</span> <span class="n">m_size</span><span class="p">;</span> <span class="o">++</span><span class="n">itr</span><span class="p">)</span> <span class="p">{</span>
+    <span class="k">if</span> <span class="p">(</span><span class="n">data</span> <span class="o">==</span> <span class="n">m_base</span><span class="p">[</span><span class="n">itr</span><span class="p">])</span> <span class="p">{</span>
+      <span class="n">idx</span> <span class="o">=</span> <span class="n">itr</span><span class="p">;</span>
+      <span class="k">break</span><span class="p">;</span>
+    <span class="p">}</span>
+  <span class="p">}</span>
+
+  <span class="k">return</span> <span class="n">idx</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="k">template</span> <span class="o">&lt;</span><span class="k">typename</span> <span class="n">Type</span><span class="p">,</span> <span class="n">U32</span> <span class="n">MaxSize</span><span class="o">&gt;</span>
+<span class="kt">void</span> <span class="n">Array</span><span class="o">&lt;</span><span class="n">Type</span><span class="p">,</span> <span class="n">MaxSize</span><span class="o">&gt;::</span><span class="n">Remove</span><span class="p">(</span><span class="k">const</span> <span class="n">Type</span><span class="o">&amp;</span> <span class="n">data</span><span class="p">)</span> <span class="p">{</span>
+  <span class="k">const</span> <span class="kt">int</span> <span class="n">idx</span> <span class="o">=</span> <span class="n">FindFirst</span><span class="p">(</span><span class="n">data</span><span class="p">);</span>
+
+  <span class="k">if</span> <span class="p">(</span><span class="n">idx</span> <span class="o">&gt;=</span> <span class="mi">0</span><span class="p">)</span> <span class="p">{</span>
+    <span class="k">for</span> <span class="p">(</span><span class="n">U32</span> <span class="n">itr</span> <span class="o">=</span> <span class="n">idx</span> <span class="o">+</span> <span class="mi">1</span><span class="p">;</span> <span class="n">itr</span> <span class="o">&lt;</span> <span class="n">m_size</span><span class="p">;</span> <span class="o">++</span><span class="n">itr</span><span class="p">)</span> <span class="p">{</span>
+      <span class="n">m_base</span><span class="p">[</span><span class="n">itr</span> <span class="o">-</span> <span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="n">m_base</span><span class="p">[</span><span class="n">itr</span><span class="p">];</span>
+    <span class="p">}</span>
+
+    <span class="o">--</span><span class="n">m_size</span><span class="p">;</span>
+  <span class="p">}</span>
+<span class="p">}</span>
+
+<span class="k">template</span> <span class="o">&lt;</span><span class="k">typename</span> <span class="n">Type</span><span class="p">,</span> <span class="n">U32</span> <span class="n">MaxSize</span><span class="o">&gt;</span>
+<span class="kt">bool</span> <span class="n">Array</span><span class="o">&lt;</span><span class="n">Type</span><span class="p">,</span> <span class="n">MaxSize</span><span class="o">&gt;::</span><span class="n">IsEmpty</span><span class="p">()</span> <span class="k">const</span> <span class="p">{</span>
+  <span class="k">return</span> <span class="n">m_size</span> <span class="o">==</span> <span class="mi">0</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="k">template</span> <span class="o">&lt;</span><span class="k">typename</span> <span class="n">Type</span><span class="p">,</span> <span class="n">U32</span> <span class="n">MaxSize</span><span class="o">&gt;</span>
+<span class="kt">void</span> <span class="n">Array</span><span class="o">&lt;</span><span class="n">Type</span><span class="p">,</span> <span class="n">MaxSize</span><span class="o">&gt;::</span><span class="n">InsertAt</span><span class="p">(</span><span class="n">U32</span> <span class="n">idx</span><span class="p">,</span> <span class="k">const</span> <span class="n">Type</span><span class="o">&amp;</span> <span class="n">data</span><span class="p">)</span> <span class="p">{</span>
+  <span class="n">assert</span><span class="p">(</span><span class="n">idx</span> <span class="o">&gt;=</span> <span class="mi">0</span> <span class="o">&amp;&amp;</span> <span class="n">idx</span> <span class="o">&lt;=</span> <span class="n">m_size</span><span class="p">);</span>
+
+  <span class="k">for</span> <span class="p">(</span><span class="kt">int</span> <span class="n">itr</span> <span class="o">=</span> <span class="n">m_size</span><span class="p">;</span> <span class="n">itr</span> <span class="o">&gt;</span> <span class="n">idx</span><span class="p">;</span> <span class="o">--</span><span class="n">itr</span><span class="p">)</span> <span class="p">{</span>
+    <span class="n">m_base</span><span class="p">[</span><span class="n">itr</span><span class="p">]</span> <span class="o">=</span> <span class="n">m_base</span><span class="p">[</span><span class="n">itr</span> <span class="o">-</span> <span class="mi">1</span><span class="p">];</span>
+  <span class="p">}</span>
+
+  <span class="n">m_base</span><span class="p">[</span><span class="n">idx</span><span class="p">]</span> <span class="o">=</span> <span class="n">data</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="k">template</span> <span class="o">&lt;</span><span class="k">typename</span> <span class="n">Type</span><span class="p">,</span> <span class="n">U32</span> <span class="n">MaxSize</span><span class="o">&gt;</span>
+<span class="n">Type</span><span class="o">&amp;</span> <span class="n">Array</span><span class="o">&lt;</span><span class="n">Type</span><span class="p">,</span> <span class="n">MaxSize</span><span class="o">&gt;::</span><span class="k">operator</span><span class="p">[](</span><span class="k">const</span> <span class="n">U32</span> <span class="n">idx</span><span class="p">)</span> <span class="p">{</span>
+  <span class="n">assert</span><span class="p">(</span><span class="n">idx</span> <span class="o">&lt;</span> <span class="n">m_size</span><span class="p">);</span>
+  <span class="k">return</span> <span class="n">m_base</span><span class="p">[</span><span class="n">idx</span><span class="p">];</span>
+<span class="p">}</span>
+
+<span class="k">template</span> <span class="o">&lt;</span><span class="k">typename</span> <span class="n">Type</span><span class="p">,</span> <span class="n">U32</span> <span class="n">MaxSize</span><span class="o">&gt;</span>
+<span class="n">Type</span><span class="o">&amp;</span> <span class="n">Array</span><span class="o">&lt;</span><span class="n">Type</span><span class="p">,</span> <span class="n">MaxSize</span><span class="o">&gt;::</span><span class="k">operator</span><span class="p">[](</span><span class="k">const</span> <span class="n">U32</span> <span class="n">idx</span><span class="p">)</span> <span class="k">const</span> <span class="p">{</span>
+  <span class="n">assert</span><span class="p">(</span><span class="n">idx</span> <span class="o">&lt;</span> <span class="n">m_size</span><span class="p">);</span>
+  <span class="k">return</span> <span class="n">m_base</span><span class="p">[</span><span class="n">idx</span><span class="p">];</span>
+<span class="p">}</span>
+
+<span class="k">template</span> <span class="o">&lt;</span><span class="k">typename</span> <span class="n">Type</span><span class="p">,</span> <span class="n">U32</span> <span class="n">MaxSize</span><span class="o">&gt;</span>
+<span class="n">Type</span><span class="o">*</span> <span class="n">Array</span><span class="o">&lt;</span><span class="n">Type</span><span class="p">,</span> <span class="n">MaxSize</span><span class="o">&gt;::</span><span class="n">Data</span><span class="p">()</span> <span class="p">{</span>
+  <span class="k">return</span> <span class="n">m_base</span><span class="p">.</span><span class="n">get</span><span class="p">();</span>
+<span class="p">}</span>
+
+<span class="k">template</span> <span class="o">&lt;</span><span class="k">typename</span> <span class="n">Type</span><span class="p">,</span> <span class="n">U32</span> <span class="n">MaxSize</span><span class="o">&gt;</span>
+<span class="k">typename</span> <span class="n">Array</span><span class="o">&lt;</span><span class="n">Type</span><span class="p">,</span> <span class="n">MaxSize</span><span class="o">&gt;::</span><span class="n">Iterator</span> <span class="n">Array</span><span class="o">&lt;</span><span class="n">Type</span><span class="p">,</span> <span class="n">MaxSize</span><span class="o">&gt;::</span><span class="n">Begin</span><span class="p">()</span> <span class="k">const</span> <span class="p">{</span>
+  <span class="k">return</span> <span class="n">Iterator</span><span class="p">(</span><span class="k">this</span><span class="p">,</span> <span class="mi">0</span><span class="p">);</span>
+<span class="p">}</span>
+
+<span class="k">template</span> <span class="o">&lt;</span><span class="k">typename</span> <span class="n">Type</span><span class="p">,</span> <span class="n">U32</span> <span class="n">MaxSize</span><span class="o">&gt;</span>
+<span class="k">typename</span> <span class="n">Array</span><span class="o">&lt;</span><span class="n">Type</span><span class="p">,</span> <span class="n">MaxSize</span><span class="o">&gt;::</span><span class="n">Iterator</span> <span class="n">Array</span><span class="o">&lt;</span><span class="n">Type</span><span class="p">,</span> <span class="n">MaxSize</span><span class="o">&gt;::</span><span class="n">End</span><span class="p">()</span> <span class="k">const</span> <span class="p">{</span>
+  <span class="k">return</span> <span class="n">Iterator</span><span class="p">(</span><span class="k">this</span><span class="p">,</span> <span class="n">m_size</span><span class="p">);</span>
+<span class="p">}</span>
+<span class="p">}</span>  <span class="c1">// namespace Containers</span>
+<span class="p">}</span>  <span class="c1">// namespace Azura</span>
+</pre></div>
+</div>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="file_Source_Containers_Test_Array_test.cpp.html" class="btn btn-neutral float-right" title="File Array_test.cpp" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="file_Source_Containers_Inc_Containers_Array.h.html" class="btn btn-neutral" title="File Array.h" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2018, Vasu Mahesh
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  
+
+    
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+        <script type="text/javascript" src="../_static/jquery.js"></script>
+        <script type="text/javascript" src="../_static/underscore.js"></script>
+        <script type="text/javascript" src="../_static/doctools.js"></script>
+        <script type="text/javascript" src="../_static/collapsible-lists\js\CollapsibleLists.compressed.js"></script>
+        <script type="text/javascript" src="../_static/collapsible-lists\js\apply-collapsible-lists.js"></script>
+    
+
+  
+
+  <script type="text/javascript" src="../_static/js/theme.js"></script>
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

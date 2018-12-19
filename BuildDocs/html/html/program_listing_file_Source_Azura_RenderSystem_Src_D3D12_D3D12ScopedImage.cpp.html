@@ -1,0 +1,461 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>Program Listing for File D3D12ScopedImage.cpp &mdash; Azura  documentation</title>
+  
+
+  
+  
+  
+  
+
+  
+
+  
+  
+    
+
+  
+
+  <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/collapsible-lists\css\tree_view.css" type="text/css" />
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="File D3D12ScopedImage.h" href="file_Source_Azura_RenderSystem_Inc_D3D12_D3D12ScopedImage.h.html" />
+    <link rel="prev" title="File D3D12ScopedImage.cpp" href="file_Source_Azura_RenderSystem_Src_D3D12_D3D12ScopedImage.cpp.html" /> 
+
+  
+  <script src="../_static/js/modernizr.min.js"></script>
+
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search">
+          
+
+          
+            <a href="../index.html" class="icon icon-home"> Azura
+          
+
+          
+          </a>
+
+          
+            
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <ul>
+<li class="toctree-l1"><a class="reference internal" href="../setting-up.html">Setting Up</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../build-instructions.html">Build Instructions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../cmake-wrappers.html">CMake Wrappers</a></li>
+<li class="toctree-l1"><a class="reference internal" href="apiRoot.html">Azura API</a></li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">Azura</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../index.html">Docs</a> &raquo;</li>
+        
+          <li><a href="apiRoot.html">Azura API</a> &raquo;</li>
+        
+          <li><a href="file_Source_Azura_RenderSystem_Src_D3D12_D3D12ScopedImage.cpp.html">File D3D12ScopedImage.cpp</a> &raquo;</li>
+        
+      <li>Program Listing for File D3D12ScopedImage.cpp</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            <a href="../_sources/html/program_listing_file_Source_Azura_RenderSystem_Src_D3D12_D3D12ScopedImage.cpp.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="program-listing-for-file-d3d12scopedimage-cpp">
+<span id="program-listing-file-source-azura-rendersystem-src-d3d12-d3d12scopedimage-cpp"></span><h1>Program Listing for File D3D12ScopedImage.cpp<a class="headerlink" href="#program-listing-for-file-d3d12scopedimage-cpp" title="Permalink to this headline">¶</a></h1>
+<p>↰ <a class="reference internal" href="file_Source_Azura_RenderSystem_Src_D3D12_D3D12ScopedImage.cpp.html#file-source-azura-rendersystem-src-d3d12-d3d12scopedimage-cpp"><span class="std std-ref">Return to documentation for file</span></a> (<code class="docutils literal notranslate"><span class="pre">Source\Azura\RenderSystem\Src\D3D12\D3D12ScopedImage.cpp</span></code>)</p>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="cp">#include</span> <span class="cpf">&quot;D3D12/D3D12ScopedImage.h&quot;</span><span class="cp"></span>
+<span class="cp">#include</span> <span class="cpf">&quot;D3D12/D3D12TypeMapping.h&quot;</span><span class="cp"></span>
+<span class="cp">#include</span> <span class="cpf">&quot;D3D12/D3D12Macros.h&quot;</span><span class="cp"></span>
+<span class="cp">#include</span> <span class="cpf">&quot;D3D12/D3D12ScopedBuffer.h&quot;</span><span class="cp"></span>
+
+<span class="cp">#include</span> <span class="cpf">&quot;D3D12/d3dx12.h&quot;</span><span class="cp"></span>
+<span class="cp">#include</span> <span class="cpf">&quot;D3D12/D3D12Debug.h&quot;</span><span class="cp"></span>
+
+
+<span class="k">namespace</span> <span class="n">Azura</span> <span class="p">{</span>
+<span class="k">namespace</span> <span class="n">D3D12</span> <span class="p">{</span>
+
+<span class="k">namespace</span> <span class="p">{</span>
+<span class="n">DXGI_FORMAT</span> <span class="n">ConvertDepthFormatForSRV</span><span class="p">(</span><span class="n">DXGI_FORMAT</span> <span class="n">format</span><span class="p">)</span> <span class="p">{</span>
+  <span class="k">if</span> <span class="p">(</span><span class="n">format</span> <span class="o">==</span> <span class="n">DXGI_FORMAT_D32_FLOAT</span><span class="p">)</span> <span class="p">{</span>
+    <span class="k">return</span> <span class="n">DXGI_FORMAT_R32_FLOAT</span><span class="p">;</span>
+  <span class="p">}</span>
+
+  <span class="k">if</span> <span class="p">(</span><span class="n">format</span> <span class="o">==</span> <span class="n">DXGI_FORMAT_D24_UNORM_S8_UINT</span><span class="p">)</span> <span class="p">{</span>
+    <span class="k">return</span> <span class="n">DXGI_FORMAT_R24_UNORM_X8_TYPELESS</span><span class="p">;</span>
+  <span class="p">}</span>
+
+  <span class="k">if</span> <span class="p">(</span><span class="n">format</span> <span class="o">==</span> <span class="n">DXGI_FORMAT_D32_FLOAT_S8X24_UINT</span><span class="p">)</span> <span class="p">{</span>
+    <span class="k">return</span> <span class="n">DXGI_FORMAT_R32_FLOAT_X8X24_TYPELESS</span><span class="p">;</span>
+  <span class="p">}</span>
+
+  <span class="k">if</span> <span class="p">(</span><span class="n">format</span> <span class="o">==</span> <span class="n">DXGI_FORMAT_D16_UNORM</span><span class="p">)</span> <span class="p">{</span>
+    <span class="k">return</span> <span class="n">DXGI_FORMAT_R16_UNORM</span><span class="p">;</span>
+  <span class="p">}</span>
+
+  <span class="k">return</span> <span class="n">DXGI_FORMAT_UNKNOWN</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="p">}</span> <span class="c1">// namespace</span>
+
+<span class="kt">void</span> <span class="n">D3D12ScopedImage</span><span class="o">::</span><span class="n">Create</span><span class="p">(</span><span class="k">const</span> <span class="n">Microsoft</span><span class="o">::</span><span class="n">WRL</span><span class="o">::</span><span class="n">ComPtr</span><span class="o">&lt;</span><span class="n">ID3D12Device</span><span class="o">&gt;&amp;</span> <span class="n">device</span><span class="p">,</span>
+                              <span class="n">D3D12_RESOURCE_STATES</span> <span class="n">initState</span><span class="p">,</span>
+                              <span class="n">D3D12_RESOURCE_FLAGS</span> <span class="n">resourceFlags</span><span class="p">,</span>
+                              <span class="k">const</span> <span class="n">TextureDesc</span><span class="o">&amp;</span> <span class="n">desc</span><span class="p">,</span>
+                              <span class="k">const</span> <span class="n">Log</span><span class="o">&amp;</span> <span class="n">log_D3D12RenderSystem</span><span class="p">)</span> <span class="p">{</span>
+
+  <span class="k">const</span> <span class="k">auto</span> <span class="n">format</span> <span class="o">=</span> <span class="n">ToDXGI_FORMAT</span><span class="p">(</span><span class="n">desc</span><span class="p">.</span><span class="n">m_format</span><span class="p">);</span>
+  <span class="n">VERIFY_OPT</span><span class="p">(</span><span class="n">log_D3D12RenderSystem</span><span class="p">,</span> <span class="n">format</span><span class="p">,</span> <span class="s">&quot;Unknown Format&quot;</span><span class="p">);</span>
+
+  <span class="n">m_format</span> <span class="o">=</span> <span class="n">desc</span><span class="p">.</span><span class="n">m_format</span><span class="p">;</span>
+
+  <span class="n">m_currentState</span> <span class="o">=</span> <span class="n">initState</span><span class="p">;</span>
+
+  <span class="k">const</span> <span class="k">auto</span> <span class="n">resourceDimension</span> <span class="o">=</span> <span class="n">ToD3D12_RESOURCE_DIMENSION</span><span class="p">(</span><span class="n">desc</span><span class="p">.</span><span class="n">m_type</span><span class="p">);</span>
+  <span class="n">VERIFY_OPT</span><span class="p">(</span><span class="n">log_D3D12RenderSystem</span><span class="p">,</span> <span class="n">resourceDimension</span><span class="p">,</span> <span class="s">&quot;Unknown Resource Dimension&quot;</span><span class="p">);</span>
+
+  <span class="n">D3D12_RESOURCE_DESC</span> <span class="n">textureDesc</span> <span class="o">=</span> <span class="p">{};</span>
+  <span class="n">textureDesc</span><span class="p">.</span><span class="n">MipLevels</span>           <span class="o">=</span> <span class="n">UINT16</span><span class="p">(</span><span class="n">desc</span><span class="p">.</span><span class="n">m_mipLevels</span><span class="p">);</span>
+  <span class="n">textureDesc</span><span class="p">.</span><span class="n">Format</span>              <span class="o">=</span> <span class="n">format</span><span class="p">.</span><span class="n">value</span><span class="p">();</span>
+  <span class="n">textureDesc</span><span class="p">.</span><span class="n">Width</span>               <span class="o">=</span> <span class="n">desc</span><span class="p">.</span><span class="n">m_bounds</span><span class="p">.</span><span class="n">m_width</span><span class="p">;</span>
+  <span class="n">textureDesc</span><span class="p">.</span><span class="n">Height</span>              <span class="o">=</span> <span class="n">desc</span><span class="p">.</span><span class="n">m_bounds</span><span class="p">.</span><span class="n">m_height</span><span class="p">;</span>
+  <span class="n">textureDesc</span><span class="p">.</span><span class="n">Flags</span>               <span class="o">=</span> <span class="n">resourceFlags</span><span class="p">;</span>
+  <span class="n">textureDesc</span><span class="p">.</span><span class="n">DepthOrArraySize</span>    <span class="o">=</span> <span class="n">UINT16</span><span class="p">(</span><span class="n">desc</span><span class="p">.</span><span class="n">m_bounds</span><span class="p">.</span><span class="n">m_depth</span> <span class="o">&gt;</span> <span class="mi">1</span> <span class="o">?</span> <span class="n">desc</span><span class="p">.</span><span class="n">m_bounds</span><span class="p">.</span><span class="nl">m_depth</span> <span class="p">:</span> <span class="n">desc</span><span class="p">.</span><span class="n">m_arrayLayers</span><span class="p">);</span>
+  <span class="n">textureDesc</span><span class="p">.</span><span class="n">SampleDesc</span><span class="p">.</span><span class="n">Count</span>    <span class="o">=</span> <span class="mi">1</span><span class="p">;</span>
+  <span class="n">textureDesc</span><span class="p">.</span><span class="n">SampleDesc</span><span class="p">.</span><span class="n">Quality</span>  <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+  <span class="n">textureDesc</span><span class="p">.</span><span class="n">Dimension</span>           <span class="o">=</span> <span class="n">resourceDimension</span><span class="p">.</span><span class="n">value</span><span class="p">();</span>
+
+  <span class="k">const</span> <span class="k">auto</span> <span class="n">heapProperties</span> <span class="o">=</span> <span class="n">CD3DX12_HEAP_PROPERTIES</span><span class="p">(</span><span class="n">D3D12_HEAP_TYPE_DEFAULT</span><span class="p">);</span>
+
+  <span class="c1">// D3D12_CLEAR_VALUE clearValue = {};</span>
+  <span class="c1">// clearValue.Color[0] = 0.2f;</span>
+  <span class="c1">// clearValue.Color[1] = 0.2f;</span>
+  <span class="c1">// clearValue.Color[2] = 0.2f;</span>
+  <span class="c1">// clearValue.Color[3] = 1.0f;</span>
+  <span class="c1">// clearValue.Format = format.value();</span>
+  <span class="c1">//</span>
+  <span class="c1">// if (HasDepthOrStencilComponent(desc.m_format)) {</span>
+  <span class="c1">//   clearValue = { format.value() , 1.0f };</span>
+  <span class="c1">// }</span>
+
+  <span class="n">VERIFY_D3D_OP</span><span class="p">(</span><span class="n">log_D3D12RenderSystem</span><span class="p">,</span> <span class="n">device</span><span class="o">-&gt;</span><span class="n">CreateCommittedResource</span><span class="p">(</span>
+    <span class="o">&amp;</span><span class="n">heapProperties</span><span class="p">,</span>
+    <span class="n">D3D12_HEAP_FLAG_NONE</span><span class="p">,</span>
+    <span class="o">&amp;</span><span class="n">textureDesc</span><span class="p">,</span>
+    <span class="n">initState</span><span class="p">,</span>
+    <span class="k">nullptr</span><span class="p">,</span>
+    <span class="n">IID_PPV_ARGS</span><span class="p">(</span><span class="o">&amp;</span><span class="n">m_texture</span><span class="p">)),</span> <span class="s">&quot;Failed to create image comitted resource&quot;</span><span class="p">);</span>
+<span class="p">}</span>
+
+<span class="kt">void</span> <span class="n">D3D12ScopedImage</span><span class="o">::</span><span class="n">Transition</span><span class="p">(</span><span class="n">ID3D12GraphicsCommandList</span><span class="o">*</span> <span class="n">commandList</span><span class="p">,</span>
+                                  <span class="n">D3D12_RESOURCE_STATES</span> <span class="n">fromState</span><span class="p">,</span>
+                                  <span class="n">D3D12_RESOURCE_STATES</span> <span class="n">toState</span><span class="p">,</span> <span class="k">const</span> <span class="n">Log</span><span class="o">&amp;</span> <span class="n">log_D3D12RenderSystem</span><span class="p">)</span> <span class="k">const</span> <span class="p">{</span>
+  <span class="n">UNUSED</span><span class="p">(</span><span class="n">log_D3D12RenderSystem</span><span class="p">);</span> <span class="c1">// Release Mode</span>
+
+  <span class="n">LOG_DBG</span><span class="p">(</span><span class="n">log_D3D12RenderSystem</span><span class="p">,</span> <span class="n">LOG_LEVEL</span><span class="p">,</span> <span class="s">&quot;[FORCE] Transitioning State: %s =&gt; %s&quot;</span><span class="p">,</span> <span class="n">D3D12ResourceStateToString</span><span class="p">(</span><span class="n">fromState</span><span class="p">),</span> <span class="n">D3D12ResourceStateToString</span><span class="p">(</span><span class="n">toState</span><span class="p">));</span>
+
+  <span class="k">const</span> <span class="k">auto</span> <span class="n">resourceBarrier</span> <span class="o">=</span> <span class="n">CD3DX12_RESOURCE_BARRIER</span><span class="o">::</span><span class="n">Transition</span><span class="p">(</span><span class="n">m_texture</span><span class="p">.</span><span class="n">Get</span><span class="p">(),</span> <span class="n">fromState</span><span class="p">,</span> <span class="n">toState</span><span class="p">);</span>
+  <span class="n">commandList</span><span class="o">-&gt;</span><span class="n">ResourceBarrier</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="o">&amp;</span><span class="n">resourceBarrier</span><span class="p">);</span>
+<span class="p">}</span>
+
+<span class="kt">void</span> <span class="n">D3D12ScopedImage</span><span class="o">::</span><span class="n">Transition</span><span class="p">(</span><span class="n">ID3D12GraphicsCommandList</span><span class="o">*</span> <span class="n">commandList</span><span class="p">,</span>
+  <span class="n">D3D12_RESOURCE_STATES</span> <span class="n">toState</span><span class="p">,</span> <span class="k">const</span> <span class="n">Log</span><span class="o">&amp;</span> <span class="n">log_D3D12RenderSystem</span><span class="p">)</span> <span class="p">{</span>
+  <span class="n">UNUSED</span><span class="p">(</span><span class="n">log_D3D12RenderSystem</span><span class="p">);</span> <span class="c1">// Release Mode</span>
+
+  <span class="k">if</span> <span class="p">(</span><span class="n">m_currentState</span> <span class="o">==</span> <span class="n">toState</span><span class="p">)</span>
+  <span class="p">{</span>
+    <span class="n">LOG_DBG</span><span class="p">(</span><span class="n">log_D3D12RenderSystem</span><span class="p">,</span> <span class="n">LOG_LEVEL</span><span class="p">,</span> <span class="s">&quot;Current State is same as Transition State: %s&quot;</span><span class="p">,</span> <span class="n">D3D12ResourceStateToString</span><span class="p">(</span><span class="n">toState</span><span class="p">));</span>
+    <span class="k">return</span><span class="p">;</span>
+  <span class="p">}</span>
+
+  <span class="n">LOG_DBG</span><span class="p">(</span><span class="n">log_D3D12RenderSystem</span><span class="p">,</span> <span class="n">LOG_LEVEL</span><span class="p">,</span> <span class="s">&quot;Transitioning State: %s =&gt; %s&quot;</span><span class="p">,</span> <span class="n">D3D12ResourceStateToString</span><span class="p">(</span><span class="n">m_currentState</span><span class="p">),</span> <span class="n">D3D12ResourceStateToString</span><span class="p">(</span><span class="n">toState</span><span class="p">));</span>
+
+  <span class="k">const</span> <span class="k">auto</span> <span class="n">resourceBarrier</span> <span class="o">=</span> <span class="n">CD3DX12_RESOURCE_BARRIER</span><span class="o">::</span><span class="n">Transition</span><span class="p">(</span><span class="n">m_texture</span><span class="p">.</span><span class="n">Get</span><span class="p">(),</span> <span class="n">m_currentState</span><span class="p">,</span> <span class="n">toState</span><span class="p">);</span>
+  <span class="n">commandList</span><span class="o">-&gt;</span><span class="n">ResourceBarrier</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="o">&amp;</span><span class="n">resourceBarrier</span><span class="p">);</span>
+
+  <span class="n">m_currentState</span> <span class="o">=</span> <span class="n">toState</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="n">D3D12_SHADER_RESOURCE_VIEW_DESC</span> <span class="n">D3D12ScopedImage</span><span class="o">::</span><span class="n">GetSRV</span><span class="p">(</span><span class="n">RawStorageFormat</span> <span class="n">viewFormat</span><span class="p">,</span>
+                                                         <span class="n">ImageViewType</span> <span class="n">imageView</span><span class="p">,</span>
+                                                         <span class="k">const</span> <span class="n">Log</span><span class="o">&amp;</span> <span class="n">log_D3D12RenderSystem</span><span class="p">)</span> <span class="p">{</span>
+  <span class="k">const</span> <span class="k">auto</span> <span class="n">format</span> <span class="o">=</span> <span class="n">ToDXGI_FORMAT</span><span class="p">(</span><span class="n">viewFormat</span><span class="p">);</span>
+  <span class="n">VERIFY_OPT</span><span class="p">(</span><span class="n">log_D3D12RenderSystem</span><span class="p">,</span> <span class="n">format</span><span class="p">,</span> <span class="s">&quot;Unknown Format&quot;</span><span class="p">);</span>
+
+  <span class="k">const</span> <span class="k">auto</span> <span class="n">srvView</span> <span class="o">=</span> <span class="n">ToD3D12_SRV_DIMENSION</span><span class="p">(</span><span class="n">imageView</span><span class="p">);</span>
+  <span class="n">VERIFY_OPT</span><span class="p">(</span><span class="n">log_D3D12RenderSystem</span><span class="p">,</span> <span class="n">format</span><span class="p">,</span> <span class="s">&quot;Unknown SRV View Dimensions&quot;</span><span class="p">);</span>
+
+  <span class="n">DXGI_FORMAT</span> <span class="n">srvFormat</span> <span class="o">=</span> <span class="n">format</span><span class="p">.</span><span class="n">value</span><span class="p">();</span>
+  <span class="k">if</span> <span class="p">(</span><span class="n">HasDepthComponent</span><span class="p">(</span><span class="n">viewFormat</span><span class="p">)</span> <span class="o">||</span> <span class="n">HasStencilComponent</span><span class="p">(</span><span class="n">viewFormat</span><span class="p">))</span> <span class="p">{</span>
+    <span class="n">srvFormat</span> <span class="o">=</span> <span class="n">ConvertDepthFormatForSRV</span><span class="p">(</span><span class="n">srvFormat</span><span class="p">);</span>
+  <span class="p">}</span>
+
+  <span class="n">D3D12_SHADER_RESOURCE_VIEW_DESC</span> <span class="n">srvDesc</span> <span class="o">=</span> <span class="p">{};</span>
+  <span class="n">srvDesc</span><span class="p">.</span><span class="n">Shader4ComponentMapping</span>         <span class="o">=</span> <span class="n">D3D12_DEFAULT_SHADER_4_COMPONENT_MAPPING</span><span class="p">;</span>
+  <span class="n">srvDesc</span><span class="p">.</span><span class="n">Format</span>                          <span class="o">=</span> <span class="n">srvFormat</span><span class="p">;</span>
+  <span class="n">srvDesc</span><span class="p">.</span><span class="n">ViewDimension</span>                   <span class="o">=</span> <span class="n">srvView</span><span class="p">.</span><span class="n">value</span><span class="p">();</span>
+  <span class="n">srvDesc</span><span class="p">.</span><span class="n">Texture2D</span><span class="p">.</span><span class="n">MipLevels</span>             <span class="o">=</span> <span class="mi">1</span><span class="p">;</span> <span class="c1">// NOLINT</span>
+
+  <span class="k">return</span> <span class="n">srvDesc</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="n">D3D12_UNORDERED_ACCESS_VIEW_DESC</span> <span class="n">D3D12ScopedImage</span><span class="o">::</span><span class="n">GetUAV</span><span class="p">(</span><span class="n">RawStorageFormat</span> <span class="n">viewFormat</span><span class="p">,</span>
+  <span class="n">ImageViewType</span> <span class="n">imageView</span><span class="p">,</span>
+  <span class="k">const</span> <span class="n">Log</span><span class="o">&amp;</span> <span class="n">log_D3D12RenderSystem</span><span class="p">)</span> <span class="p">{</span>
+  <span class="k">const</span> <span class="k">auto</span> <span class="n">format</span> <span class="o">=</span> <span class="n">ToDXGI_FORMAT</span><span class="p">(</span><span class="n">viewFormat</span><span class="p">);</span>
+  <span class="n">VERIFY_OPT</span><span class="p">(</span><span class="n">log_D3D12RenderSystem</span><span class="p">,</span> <span class="n">format</span><span class="p">,</span> <span class="s">&quot;Unknown Format&quot;</span><span class="p">);</span>
+
+  <span class="k">const</span> <span class="k">auto</span> <span class="n">uavView</span> <span class="o">=</span> <span class="n">ToD3D12_UAV_DIMENSION</span><span class="p">(</span><span class="n">imageView</span><span class="p">);</span>
+  <span class="n">VERIFY_OPT</span><span class="p">(</span><span class="n">log_D3D12RenderSystem</span><span class="p">,</span> <span class="n">format</span><span class="p">,</span> <span class="s">&quot;Unknown SRV View Dimensions&quot;</span><span class="p">);</span>
+
+  <span class="n">DXGI_FORMAT</span> <span class="n">uavFormat</span> <span class="o">=</span> <span class="n">format</span><span class="p">.</span><span class="n">value</span><span class="p">();</span>
+  <span class="k">if</span> <span class="p">(</span><span class="n">HasDepthComponent</span><span class="p">(</span><span class="n">viewFormat</span><span class="p">)</span> <span class="o">||</span> <span class="n">HasStencilComponent</span><span class="p">(</span><span class="n">viewFormat</span><span class="p">))</span> <span class="p">{</span>
+    <span class="n">uavFormat</span> <span class="o">=</span> <span class="n">ConvertDepthFormatForSRV</span><span class="p">(</span><span class="n">uavFormat</span><span class="p">);</span>
+  <span class="p">}</span>
+
+  <span class="n">D3D12_UNORDERED_ACCESS_VIEW_DESC</span> <span class="n">uavDesc</span> <span class="o">=</span> <span class="p">{};</span>
+  <span class="n">uavDesc</span><span class="p">.</span><span class="n">Format</span> <span class="o">=</span> <span class="n">uavFormat</span><span class="p">;</span>
+  <span class="n">uavDesc</span><span class="p">.</span><span class="n">ViewDimension</span> <span class="o">=</span> <span class="n">uavView</span><span class="p">.</span><span class="n">value</span><span class="p">();</span>
+  <span class="n">uavDesc</span><span class="p">.</span><span class="n">Texture2D</span><span class="p">.</span><span class="n">MipSlice</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="c1">// NOLINT</span>
+  <span class="n">uavDesc</span><span class="p">.</span><span class="n">Texture2D</span><span class="p">.</span><span class="n">PlaneSlice</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="c1">// NOLINT</span>
+
+  <span class="k">return</span> <span class="n">uavDesc</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="n">D3D12_DEPTH_STENCIL_VIEW_DESC</span> <span class="n">D3D12ScopedImage</span><span class="o">::</span><span class="n">GetDSV</span><span class="p">(</span><span class="n">RawStorageFormat</span> <span class="n">viewFormat</span><span class="p">,</span>
+                                                       <span class="n">ImageViewType</span> <span class="n">imageView</span><span class="p">,</span>
+                                                       <span class="k">const</span> <span class="n">Log</span><span class="o">&amp;</span> <span class="n">log_D3D12RenderSystem</span><span class="p">)</span> <span class="p">{</span>
+
+  <span class="k">if</span> <span class="p">(</span><span class="o">!</span><span class="n">HasDepthComponent</span><span class="p">(</span><span class="n">viewFormat</span><span class="p">)</span> <span class="o">&amp;&amp;</span> <span class="o">!</span><span class="n">HasStencilComponent</span><span class="p">(</span><span class="n">viewFormat</span><span class="p">))</span> <span class="p">{</span>
+    <span class="n">LOG_ERR</span><span class="p">(</span><span class="n">log_D3D12RenderSystem</span><span class="p">,</span> <span class="n">LOG_LEVEL</span><span class="p">,</span> <span class="s">&quot;Unknown Format Requested for DSV: %s&quot;</span><span class="p">,</span> <span class="n">ToString</span><span class="p">(</span><span class="n">viewFormat</span><span class="p">).</span><span class="n">c_str</span><span class="p">());</span>
+    <span class="k">return</span> <span class="p">{};</span>
+  <span class="p">}</span>
+
+  <span class="k">const</span> <span class="k">auto</span> <span class="n">format</span> <span class="o">=</span> <span class="n">ToDXGI_FORMAT</span><span class="p">(</span><span class="n">viewFormat</span><span class="p">);</span>
+  <span class="n">VERIFY_OPT</span><span class="p">(</span><span class="n">log_D3D12RenderSystem</span><span class="p">,</span> <span class="n">format</span><span class="p">,</span> <span class="s">&quot;Unknown Format&quot;</span><span class="p">);</span>
+
+  <span class="k">const</span> <span class="k">auto</span> <span class="n">dsvDimension</span> <span class="o">=</span> <span class="n">ToD3D12_DSV_DIMENSION</span><span class="p">(</span><span class="n">imageView</span><span class="p">);</span>
+  <span class="n">VERIFY_OPT</span><span class="p">(</span><span class="n">log_D3D12RenderSystem</span><span class="p">,</span> <span class="n">format</span><span class="p">,</span> <span class="s">&quot;Unknown SRV View Dimensions&quot;</span><span class="p">);</span>
+
+  <span class="n">D3D12_DEPTH_STENCIL_VIEW_DESC</span> <span class="n">dsvDesc</span> <span class="o">=</span> <span class="p">{};</span>
+  <span class="n">dsvDesc</span><span class="p">.</span><span class="n">Texture2D</span><span class="p">.</span><span class="n">MipSlice</span>            <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="c1">// NOLINT</span>
+  <span class="n">dsvDesc</span><span class="p">.</span><span class="n">Format</span>                        <span class="o">=</span> <span class="n">format</span><span class="p">.</span><span class="n">value</span><span class="p">();</span>
+  <span class="n">dsvDesc</span><span class="p">.</span><span class="n">ViewDimension</span>                 <span class="o">=</span> <span class="n">dsvDimension</span><span class="p">.</span><span class="n">value</span><span class="p">();</span>
+  <span class="n">dsvDesc</span><span class="p">.</span><span class="n">Flags</span>                         <span class="o">=</span> <span class="n">D3D12_DSV_FLAG_NONE</span><span class="p">;</span>
+
+  <span class="k">return</span> <span class="n">dsvDesc</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="n">D3D12_RENDER_TARGET_VIEW_DESC</span> <span class="n">D3D12ScopedImage</span><span class="o">::</span><span class="n">GetRTV</span><span class="p">(</span><span class="n">RawStorageFormat</span> <span class="n">viewFormat</span><span class="p">,</span>
+                                                       <span class="n">ImageViewType</span> <span class="n">imageView</span><span class="p">,</span>
+                                                       <span class="k">const</span> <span class="n">Log</span><span class="o">&amp;</span> <span class="n">log_D3D12RenderSystem</span><span class="p">)</span> <span class="p">{</span>
+
+  <span class="k">if</span> <span class="p">(</span><span class="n">HasDepthComponent</span><span class="p">(</span><span class="n">viewFormat</span><span class="p">)</span> <span class="o">||</span> <span class="n">HasStencilComponent</span><span class="p">(</span><span class="n">viewFormat</span><span class="p">))</span> <span class="p">{</span>
+    <span class="n">LOG_ERR</span><span class="p">(</span><span class="n">log_D3D12RenderSystem</span><span class="p">,</span> <span class="n">LOG_LEVEL</span><span class="p">,</span> <span class="s">&quot;Unknown Format Requested for RTV: %s&quot;</span><span class="p">,</span> <span class="n">ToString</span><span class="p">(</span><span class="n">viewFormat</span><span class="p">).</span><span class="n">c_str</span><span class="p">());</span>
+    <span class="k">return</span> <span class="p">{};</span>
+  <span class="p">}</span>
+
+  <span class="k">const</span> <span class="k">auto</span> <span class="n">format</span> <span class="o">=</span> <span class="n">ToDXGI_FORMAT</span><span class="p">(</span><span class="n">viewFormat</span><span class="p">);</span>
+  <span class="n">VERIFY_OPT</span><span class="p">(</span><span class="n">log_D3D12RenderSystem</span><span class="p">,</span> <span class="n">format</span><span class="p">,</span> <span class="s">&quot;Unknown Format&quot;</span><span class="p">);</span>
+
+  <span class="k">const</span> <span class="k">auto</span> <span class="n">rtvDimension</span> <span class="o">=</span> <span class="n">ToD3D12_RTV_DIMENSION</span><span class="p">(</span><span class="n">imageView</span><span class="p">);</span>
+  <span class="n">VERIFY_OPT</span><span class="p">(</span><span class="n">log_D3D12RenderSystem</span><span class="p">,</span> <span class="n">format</span><span class="p">,</span> <span class="s">&quot;Unknown SRV View Dimensions&quot;</span><span class="p">);</span>
+
+  <span class="n">D3D12_RENDER_TARGET_VIEW_DESC</span> <span class="n">rtvDesc</span> <span class="o">=</span> <span class="p">{};</span>
+  <span class="n">rtvDesc</span><span class="p">.</span><span class="n">Texture2D</span><span class="p">.</span><span class="n">MipSlice</span>            <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="c1">// NOLINT</span>
+  <span class="n">rtvDesc</span><span class="p">.</span><span class="n">Texture2D</span><span class="p">.</span><span class="n">PlaneSlice</span>          <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="c1">// NOLINT</span>
+  <span class="n">rtvDesc</span><span class="p">.</span><span class="n">Format</span>                        <span class="o">=</span> <span class="n">format</span><span class="p">.</span><span class="n">value</span><span class="p">();</span>
+  <span class="n">rtvDesc</span><span class="p">.</span><span class="n">ViewDimension</span>                 <span class="o">=</span> <span class="n">rtvDimension</span><span class="p">.</span><span class="n">value</span><span class="p">();</span>
+
+  <span class="k">return</span> <span class="n">rtvDesc</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="n">ID3D12Resource</span><span class="o">*</span> <span class="n">D3D12ScopedImage</span><span class="o">::</span><span class="n">Real</span><span class="p">()</span> <span class="k">const</span> <span class="p">{</span>
+  <span class="k">return</span> <span class="n">m_texture</span><span class="p">.</span><span class="n">Get</span><span class="p">();</span>
+<span class="p">}</span>
+
+<span class="n">RawStorageFormat</span> <span class="n">D3D12ScopedImage</span><span class="o">::</span><span class="n">GetFormat</span><span class="p">()</span> <span class="k">const</span> <span class="p">{</span>
+  <span class="k">return</span> <span class="n">m_format</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="n">Microsoft</span><span class="o">::</span><span class="n">WRL</span><span class="o">::</span><span class="n">ComPtr</span><span class="o">&lt;</span><span class="n">ID3D12Resource</span><span class="o">&gt;</span> <span class="n">D3D12ScopedImage</span><span class="o">::</span><span class="n">RealComPtr</span><span class="p">()</span> <span class="k">const</span> <span class="p">{</span>
+  <span class="k">return</span> <span class="n">m_texture</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="kt">void</span> <span class="n">D3D12ScopedImage</span><span class="o">::</span><span class="n">CopyFromBuffer</span><span class="p">(</span><span class="k">const</span> <span class="n">Microsoft</span><span class="o">::</span><span class="n">WRL</span><span class="o">::</span><span class="n">ComPtr</span><span class="o">&lt;</span><span class="n">ID3D12Device</span><span class="o">&gt;&amp;</span> <span class="n">device</span><span class="p">,</span>
+                                      <span class="n">ID3D12GraphicsCommandList</span><span class="o">*</span> <span class="n">commandList</span><span class="p">,</span>
+                                      <span class="k">const</span> <span class="n">D3D12ScopedBuffer</span><span class="o">&amp;</span> <span class="n">sourceBuffer</span><span class="p">,</span>
+                                      <span class="n">UINT64</span> <span class="n">sourceOffset</span><span class="p">)</span> <span class="k">const</span> <span class="p">{</span>
+  <span class="k">const</span> <span class="k">auto</span> <span class="n">textureDesc</span> <span class="o">=</span> <span class="n">m_texture</span><span class="o">-&gt;</span><span class="n">GetDesc</span><span class="p">();</span>
+
+  <span class="n">D3D12_PLACED_SUBRESOURCE_FOOTPRINT</span> <span class="n">layouts</span><span class="p">;</span>
+  <span class="n">UINT64</span> <span class="n">rowSizesInBytes</span><span class="p">;</span>
+  <span class="n">UINT</span> <span class="n">numRows</span><span class="p">;</span>
+  <span class="n">UINT64</span> <span class="n">requiredSize</span><span class="p">;</span>
+
+  <span class="n">device</span><span class="o">-&gt;</span><span class="n">GetCopyableFootprints</span><span class="p">(</span><span class="o">&amp;</span><span class="n">textureDesc</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="n">sourceOffset</span><span class="p">,</span> <span class="o">&amp;</span><span class="n">layouts</span><span class="p">,</span> <span class="o">&amp;</span><span class="n">numRows</span><span class="p">,</span> <span class="o">&amp;</span><span class="n">rowSizesInBytes</span><span class="p">,</span> <span class="o">&amp;</span><span class="n">requiredSize</span><span class="p">);</span>
+
+  <span class="n">CD3DX12_TEXTURE_COPY_LOCATION</span> <span class="nf">Dst</span><span class="p">(</span><span class="n">m_texture</span><span class="p">.</span><span class="n">Get</span><span class="p">(),</span> <span class="mi">0</span><span class="p">);</span>
+  <span class="n">CD3DX12_TEXTURE_COPY_LOCATION</span> <span class="nf">Src</span><span class="p">(</span><span class="n">sourceBuffer</span><span class="p">.</span><span class="n">Real</span><span class="p">(),</span> <span class="n">layouts</span><span class="p">);</span>
+  <span class="n">commandList</span><span class="o">-&gt;</span><span class="n">CopyTextureRegion</span><span class="p">(</span><span class="o">&amp;</span><span class="n">Dst</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="o">&amp;</span><span class="n">Src</span><span class="p">,</span> <span class="k">nullptr</span><span class="p">);</span>
+<span class="p">}</span>
+
+<span class="p">}</span> <span class="c1">// namespace D3D12</span>
+<span class="p">}</span> <span class="c1">// namespace Azura</span>
+</pre></div>
+</div>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="file_Source_Azura_RenderSystem_Inc_D3D12_D3D12ScopedImage.h.html" class="btn btn-neutral float-right" title="File D3D12ScopedImage.h" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="file_Source_Azura_RenderSystem_Src_D3D12_D3D12ScopedImage.cpp.html" class="btn btn-neutral" title="File D3D12ScopedImage.cpp" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2018, Vasu Mahesh
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  
+
+    
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+        <script type="text/javascript" src="../_static/jquery.js"></script>
+        <script type="text/javascript" src="../_static/underscore.js"></script>
+        <script type="text/javascript" src="../_static/doctools.js"></script>
+        <script type="text/javascript" src="../_static/collapsible-lists\js\CollapsibleLists.compressed.js"></script>
+        <script type="text/javascript" src="../_static/collapsible-lists\js\apply-collapsible-lists.js"></script>
+    
+
+  
+
+  <script type="text/javascript" src="../_static/js/theme.js"></script>
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

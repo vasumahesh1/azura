@@ -1,0 +1,296 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>Class VkScopedImage &mdash; Azura  documentation</title>
+  
+
+  
+  
+  
+  
+
+  
+
+  
+  
+    
+
+  
+
+  <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/collapsible-lists\css\tree_view.css" type="text/css" />
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Class VkScopedPipeline" href="class_azura_1_1_vulkan_1_1_vk_scoped_pipeline.html" />
+    <link rel="prev" title="Class VkScopedBuffer" href="class_azura_1_1_vulkan_1_1_vk_scoped_buffer.html" /> 
+
+  
+  <script src="../_static/js/modernizr.min.js"></script>
+
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search">
+          
+
+          
+            <a href="../index.html" class="icon icon-home"> Azura
+          
+
+          
+          </a>
+
+          
+            
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <ul>
+<li class="toctree-l1"><a class="reference internal" href="../setting-up.html">Setting Up</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../build-instructions.html">Build Instructions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../cmake-wrappers.html">CMake Wrappers</a></li>
+<li class="toctree-l1"><a class="reference internal" href="apiRoot.html">Azura API</a></li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">Azura</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../index.html">Docs</a> &raquo;</li>
+        
+          <li><a href="apiRoot.html">Azura API</a> &raquo;</li>
+        
+      <li>Class VkScopedImage</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            <a href="../_sources/html/class_azura_1_1_vulkan_1_1_vk_scoped_image.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="class-vkscopedimage">
+<span id="exhale-class-class-azura-1-1-vulkan-1-1-vk-scoped-image"></span><h1>Class VkScopedImage<a class="headerlink" href="#class-vkscopedimage" title="Permalink to this headline">¶</a></h1>
+<ul class="simple">
+<li>Defined in <a class="reference internal" href="file_Source_Azura_RenderSystem_Inc_Vulkan_VkScopedImage.h.html#file-source-azura-rendersystem-inc-vulkan-vkscopedimage-h"><span class="std std-ref">File VkScopedImage.h</span></a></li>
+</ul>
+<div class="section" id="class-documentation">
+<h2>Class Documentation<a class="headerlink" href="#class-documentation" title="Permalink to this headline">¶</a></h2>
+<dl class="class">
+<dt id="_CPPv3N5Azura6Vulkan13VkScopedImageE">
+<span id="_CPPv2N5Azura6Vulkan13VkScopedImageE"></span><span id="Azura::Vulkan::VkScopedImage"></span><span class="target" id="class_azura_1_1_vulkan_1_1_vk_scoped_image"></span><em class="property">class </em><code class="descname">VkScopedImage</code><a class="headerlink" href="#_CPPv3N5Azura6Vulkan13VkScopedImageE" title="Permalink to this definition">¶</a><br /></dt>
+<dd><div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric">Public Functions</p>
+<dl class="function">
+<dt id="_CPPv3N5Azura6Vulkan13VkScopedImage13VkScopedImageE8VkDeviceRK11TextureDesc17VkImageUsageFlagsRK32VkPhysicalDeviceMemoryProperties3Log">
+<span id="_CPPv2N5Azura6Vulkan13VkScopedImage13VkScopedImageE8VkDeviceRK11TextureDesc17VkImageUsageFlagsRK32VkPhysicalDeviceMemoryProperties3Log"></span><span id="Azura::Vulkan::VkScopedImage::VkScopedImage__VkDevice.TextureDescCR.VkImageUsageFlags.VkPhysicalDeviceMemoryPropertiesCR.Log"></span><span class="target" id="class_azura_1_1_vulkan_1_1_vk_scoped_image_1ab39844b4d2ffe3efc2e65043bd67bb78"></span><code class="descname">VkScopedImage</code><span class="sig-paren">(</span>VkDevice <em>device</em>, <em class="property">const</em> <a class="reference internal" href="struct_azura_1_1_texture_desc.html#_CPPv3N5Azura11TextureDescE" title="Azura::TextureDesc">TextureDesc</a> &amp;<em>textureDesc</em>, VkImageUsageFlags <em>usage</em>, <em class="property">const</em> VkPhysicalDeviceMemoryProperties &amp;<em>physicalDeviceMemoryProperties</em>, <a class="reference internal" href="class_azura_1_1_log.html#_CPPv3N5Azura3LogE" title="Azura::Log">Log</a> <em>logger</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv3N5Azura6Vulkan13VkScopedImage13VkScopedImageE8VkDeviceRK11TextureDesc17VkImageUsageFlagsRK32VkPhysicalDeviceMemoryProperties3Log" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt id="_CPPv3N5Azura6Vulkan13VkScopedImage13VkScopedImageE8VkDeviceRK11TextureDesc7VkImage3Log">
+<span id="_CPPv2N5Azura6Vulkan13VkScopedImage13VkScopedImageE8VkDeviceRK11TextureDesc7VkImage3Log"></span><span id="Azura::Vulkan::VkScopedImage::VkScopedImage__VkDevice.TextureDescCR.VkImage.Log"></span><span class="target" id="class_azura_1_1_vulkan_1_1_vk_scoped_image_1a73a312a39226e26b35c754b8ecc34ac5"></span><code class="descname">VkScopedImage</code><span class="sig-paren">(</span>VkDevice <em>device</em>, <em class="property">const</em> <a class="reference internal" href="struct_azura_1_1_texture_desc.html#_CPPv3N5Azura11TextureDescE" title="Azura::TextureDesc">TextureDesc</a> &amp;<em>textureDesc</em>, VkImage <em>image</em>, <a class="reference internal" href="class_azura_1_1_log.html#_CPPv3N5Azura3LogE" title="Azura::Log">Log</a> <em>logger</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv3N5Azura6Vulkan13VkScopedImage13VkScopedImageE8VkDeviceRK11TextureDesc7VkImage3Log" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt id="_CPPv3N5Azura6Vulkan13VkScopedImage13VkScopedImageE3Log">
+<span id="_CPPv2N5Azura6Vulkan13VkScopedImage13VkScopedImageE3Log"></span><span id="Azura::Vulkan::VkScopedImage::VkScopedImage__Log"></span><span class="target" id="class_azura_1_1_vulkan_1_1_vk_scoped_image_1add2844406957493728bc2fbc5c05bc10"></span><code class="descname">VkScopedImage</code><span class="sig-paren">(</span><a class="reference internal" href="class_azura_1_1_log.html#_CPPv3N5Azura3LogE" title="Azura::Log">Log</a> <em>logger</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv3N5Azura6Vulkan13VkScopedImage13VkScopedImageE3Log" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt id="_CPPv3N5Azura6Vulkan13VkScopedImage6CreateE8VkDeviceRK11TextureDesc17VkImageUsageFlagsRK32VkPhysicalDeviceMemoryProperties">
+<span id="_CPPv2N5Azura6Vulkan13VkScopedImage6CreateE8VkDeviceRK11TextureDesc17VkImageUsageFlagsRK32VkPhysicalDeviceMemoryProperties"></span><span id="Azura::Vulkan::VkScopedImage::Create__VkDevice.TextureDescCR.VkImageUsageFlags.VkPhysicalDeviceMemoryPropertiesCR"></span><span class="target" id="class_azura_1_1_vulkan_1_1_vk_scoped_image_1aff7c4dcbf5ca1ec6bfbe18890bf6569b"></span>void <code class="descname">Create</code><span class="sig-paren">(</span>VkDevice <em>device</em>, <em class="property">const</em> <a class="reference internal" href="struct_azura_1_1_texture_desc.html#_CPPv3N5Azura11TextureDescE" title="Azura::TextureDesc">TextureDesc</a> &amp;<em>textureDesc</em>, VkImageUsageFlags <em>usage</em>, <em class="property">const</em> VkPhysicalDeviceMemoryProperties &amp;<em>physicalDeviceMemoryProperties</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv3N5Azura6Vulkan13VkScopedImage6CreateE8VkDeviceRK11TextureDesc17VkImageUsageFlagsRK32VkPhysicalDeviceMemoryProperties" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt id="_CPPv3NK5Azura6Vulkan13VkScopedImage4RealEv">
+<span id="_CPPv2NK5Azura6Vulkan13VkScopedImage4RealEv"></span><span id="Azura::Vulkan::VkScopedImage::RealC"></span><span class="target" id="class_azura_1_1_vulkan_1_1_vk_scoped_image_1af3728969e86e52d9a54108f491c6a4b2"></span>VkImage <code class="descname">Real</code><span class="sig-paren">(</span><span class="sig-paren">)</span> <em class="property">const</em><a class="headerlink" href="#_CPPv3NK5Azura6Vulkan13VkScopedImage4RealEv" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt id="_CPPv3NK5Azura6Vulkan13VkScopedImage4ViewEv">
+<span id="_CPPv2NK5Azura6Vulkan13VkScopedImage4ViewEv"></span><span id="Azura::Vulkan::VkScopedImage::ViewC"></span><span class="target" id="class_azura_1_1_vulkan_1_1_vk_scoped_image_1a32729ce8c4660320ffcc3ab7ddf14899"></span>VkImageView <code class="descname">View</code><span class="sig-paren">(</span><span class="sig-paren">)</span> <em class="property">const</em><a class="headerlink" href="#_CPPv3NK5Azura6Vulkan13VkScopedImage4ViewEv" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt id="_CPPv3NK5Azura6Vulkan13VkScopedImage6MemoryEv">
+<span id="_CPPv2NK5Azura6Vulkan13VkScopedImage6MemoryEv"></span><span id="Azura::Vulkan::VkScopedImage::MemoryC"></span><span class="target" id="class_azura_1_1_vulkan_1_1_vk_scoped_image_1ae3a8b213b432b455803723e0d8add312"></span>VkDeviceMemory <code class="descname">Memory</code><span class="sig-paren">(</span><span class="sig-paren">)</span> <em class="property">const</em><a class="headerlink" href="#_CPPv3NK5Azura6Vulkan13VkScopedImage6MemoryEv" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt id="_CPPv3NK5Azura6Vulkan13VkScopedImage13GetRealFormatEv">
+<span id="_CPPv2NK5Azura6Vulkan13VkScopedImage13GetRealFormatEv"></span><span id="Azura::Vulkan::VkScopedImage::GetRealFormatC"></span><span class="target" id="class_azura_1_1_vulkan_1_1_vk_scoped_image_1aed98850fb160fb489701f3b7e5eeedc4"></span>VkFormat <code class="descname">GetRealFormat</code><span class="sig-paren">(</span><span class="sig-paren">)</span> <em class="property">const</em><a class="headerlink" href="#_CPPv3NK5Azura6Vulkan13VkScopedImage13GetRealFormatEv" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt id="_CPPv3NK5Azura6Vulkan13VkScopedImage9GetFormatEv">
+<span id="_CPPv2NK5Azura6Vulkan13VkScopedImage9GetFormatEv"></span><span id="Azura::Vulkan::VkScopedImage::GetFormatC"></span><span class="target" id="class_azura_1_1_vulkan_1_1_vk_scoped_image_1aa055ecd8a3fa0f0201fc3a8269dd0e27"></span><a class="reference internal" href="enum__raw_storage_format_8h_1a15eb2139633839e42a35ee86aaf6f48c.html#_CPPv3N5Azura16RawStorageFormatE" title="Azura::RawStorageFormat">RawStorageFormat</a> <code class="descname">GetFormat</code><span class="sig-paren">(</span><span class="sig-paren">)</span> <em class="property">const</em><a class="headerlink" href="#_CPPv3NK5Azura6Vulkan13VkScopedImage9GetFormatEv" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt id="_CPPv3NK5Azura6Vulkan13VkScopedImage7CleanUpEv">
+<span id="_CPPv2NK5Azura6Vulkan13VkScopedImage7CleanUpEv"></span><span id="Azura::Vulkan::VkScopedImage::CleanUpC"></span><span class="target" id="class_azura_1_1_vulkan_1_1_vk_scoped_image_1aae834e782badd70841122283cd0da378"></span>void <code class="descname">CleanUp</code><span class="sig-paren">(</span><span class="sig-paren">)</span> <em class="property">const</em><a class="headerlink" href="#_CPPv3NK5Azura6Vulkan13VkScopedImage7CleanUpEv" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt id="_CPPv3NK5Azura6Vulkan13VkScopedImage16TransitionLayoutE15VkCommandBuffer15ImageTransition15ImageTransition">
+<span id="_CPPv2NK5Azura6Vulkan13VkScopedImage16TransitionLayoutE15VkCommandBuffer15ImageTransition15ImageTransition"></span><span id="Azura::Vulkan::VkScopedImage::TransitionLayout__VkCommandBuffer.ImageTransition.ImageTransitionC"></span><span class="target" id="class_azura_1_1_vulkan_1_1_vk_scoped_image_1a14c88cd39e3fbad1d89a5c95305cc467"></span>void <code class="descname">TransitionLayout</code><span class="sig-paren">(</span>VkCommandBuffer <em>commandBuffer</em>, <a class="reference internal" href="struct_azura_1_1_vulkan_1_1_image_transition.html#_CPPv3N5Azura6Vulkan15ImageTransitionE" title="Azura::Vulkan::ImageTransition">ImageTransition</a> <em>oldTransition</em>, <a class="reference internal" href="struct_azura_1_1_vulkan_1_1_image_transition.html#_CPPv3N5Azura6Vulkan15ImageTransitionE" title="Azura::Vulkan::ImageTransition">ImageTransition</a> <em>newTransition</em><span class="sig-paren">)</span> <em class="property">const</em><a class="headerlink" href="#_CPPv3NK5Azura6Vulkan13VkScopedImage16TransitionLayoutE15VkCommandBuffer15ImageTransition15ImageTransition" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt id="_CPPv3NK5Azura6Vulkan13VkScopedImage14CopyFromBufferE15VkCommandBufferRK17TextureBufferInfo8VkBuffer">
+<span id="_CPPv2NK5Azura6Vulkan13VkScopedImage14CopyFromBufferE15VkCommandBufferRK17TextureBufferInfo8VkBuffer"></span><span id="Azura::Vulkan::VkScopedImage::CopyFromBuffer__VkCommandBuffer.TextureBufferInfoCR.VkBufferC"></span><span class="target" id="class_azura_1_1_vulkan_1_1_vk_scoped_image_1a1f78ab7bfb444b6d0c56a7fdddb51e2d"></span>void <code class="descname">CopyFromBuffer</code><span class="sig-paren">(</span>VkCommandBuffer <em>commandBuffer</em>, <em class="property">const</em> <a class="reference internal" href="struct_azura_1_1_texture_buffer_info.html#_CPPv3N5Azura17TextureBufferInfoE" title="Azura::TextureBufferInfo">TextureBufferInfo</a> &amp;<em>bufferInfo</em>, VkBuffer <em>buffer</em><span class="sig-paren">)</span> <em class="property">const</em><a class="headerlink" href="#_CPPv3NK5Azura6Vulkan13VkScopedImage14CopyFromBufferE15VkCommandBufferRK17TextureBufferInfo8VkBuffer" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt id="_CPPv3N5Azura6Vulkan13VkScopedImage15CreateImageViewE13ImageViewType">
+<span id="_CPPv2N5Azura6Vulkan13VkScopedImage15CreateImageViewE13ImageViewType"></span><span id="Azura::Vulkan::VkScopedImage::CreateImageView__ImageViewType"></span><span class="target" id="class_azura_1_1_vulkan_1_1_vk_scoped_image_1a50ec1ac7163cf57dfc7e09a5c2aeb50f"></span>void <code class="descname">CreateImageView</code><span class="sig-paren">(</span><a class="reference internal" href="enum__azura_2_render_system_2_inc_2_generic_2_generic_types_8h_1a6642b6d9a9ab82e289d75cebcf7e60c0.html#_CPPv3N5Azura13ImageViewTypeE" title="Azura::ImageViewType">ImageViewType</a> <em>imageView</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv3N5Azura6Vulkan13VkScopedImage15CreateImageViewE13ImageViewType" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+</div>
+</dd></dl>
+
+</div>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="class_azura_1_1_vulkan_1_1_vk_scoped_pipeline.html" class="btn btn-neutral float-right" title="Class VkScopedPipeline" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="class_azura_1_1_vulkan_1_1_vk_scoped_buffer.html" class="btn btn-neutral" title="Class VkScopedBuffer" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2018, Vasu Mahesh
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  
+
+    
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+        <script type="text/javascript" src="../_static/jquery.js"></script>
+        <script type="text/javascript" src="../_static/underscore.js"></script>
+        <script type="text/javascript" src="../_static/doctools.js"></script>
+        <script type="text/javascript" src="../_static/collapsible-lists\js\CollapsibleLists.compressed.js"></script>
+        <script type="text/javascript" src="../_static/collapsible-lists\js\apply-collapsible-lists.js"></script>
+    
+
+  
+
+  <script type="text/javascript" src="../_static/js/theme.js"></script>
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

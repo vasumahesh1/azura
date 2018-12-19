@@ -1,0 +1,439 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>Program Listing for File D3D12ScopedPipeline.cpp &mdash; Azura  documentation</title>
+  
+
+  
+  
+  
+  
+
+  
+
+  
+  
+    
+
+  
+
+  <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/collapsible-lists\css\tree_view.css" type="text/css" />
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="File D3D12ScopedPipeline.h" href="file_Source_Azura_RenderSystem_Inc_D3D12_D3D12ScopedPipeline.h.html" />
+    <link rel="prev" title="File D3D12ScopedPipeline.cpp" href="file_Source_Azura_RenderSystem_Src_D3D12_D3D12ScopedPipeline.cpp.html" /> 
+
+  
+  <script src="../_static/js/modernizr.min.js"></script>
+
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search">
+          
+
+          
+            <a href="../index.html" class="icon icon-home"> Azura
+          
+
+          
+          </a>
+
+          
+            
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <ul>
+<li class="toctree-l1"><a class="reference internal" href="../setting-up.html">Setting Up</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../build-instructions.html">Build Instructions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../cmake-wrappers.html">CMake Wrappers</a></li>
+<li class="toctree-l1"><a class="reference internal" href="apiRoot.html">Azura API</a></li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">Azura</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../index.html">Docs</a> &raquo;</li>
+        
+          <li><a href="apiRoot.html">Azura API</a> &raquo;</li>
+        
+          <li><a href="file_Source_Azura_RenderSystem_Src_D3D12_D3D12ScopedPipeline.cpp.html">File D3D12ScopedPipeline.cpp</a> &raquo;</li>
+        
+      <li>Program Listing for File D3D12ScopedPipeline.cpp</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            <a href="../_sources/html/program_listing_file_Source_Azura_RenderSystem_Src_D3D12_D3D12ScopedPipeline.cpp.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="program-listing-for-file-d3d12scopedpipeline-cpp">
+<span id="program-listing-file-source-azura-rendersystem-src-d3d12-d3d12scopedpipeline-cpp"></span><h1>Program Listing for File D3D12ScopedPipeline.cpp<a class="headerlink" href="#program-listing-for-file-d3d12scopedpipeline-cpp" title="Permalink to this headline">¶</a></h1>
+<p>↰ <a class="reference internal" href="file_Source_Azura_RenderSystem_Src_D3D12_D3D12ScopedPipeline.cpp.html#file-source-azura-rendersystem-src-d3d12-d3d12scopedpipeline-cpp"><span class="std std-ref">Return to documentation for file</span></a> (<code class="docutils literal notranslate"><span class="pre">Source\Azura\RenderSystem\Src\D3D12\D3D12ScopedPipeline.cpp</span></code>)</p>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="cp">#include</span> <span class="cpf">&quot;D3D12/D3D12ScopedPipeline.h&quot;</span><span class="cp"></span>
+<span class="cp">#include</span> <span class="cpf">&quot;D3D12/D3D12Macros.h&quot;</span><span class="cp"></span>
+<span class="cp">#include</span> <span class="cpf">&quot;D3D12/D3D12TypeMapping.h&quot;</span><span class="cp"></span>
+<span class="cp">#include</span> <span class="cpf">&quot;D3D12/D3D12ScopedRenderPass.h&quot;</span><span class="cp"></span>
+<span class="cp">#include</span> <span class="cpf">&quot;D3D12/D3D12ScopedComputePass.h&quot;</span><span class="cp"></span>
+
+
+<span class="k">namespace</span> <span class="n">Azura</span> <span class="p">{</span>
+<span class="k">namespace</span> <span class="n">D3D12</span> <span class="p">{</span>
+
+<span class="n">D3D12ScopedPipeline</span><span class="o">::</span><span class="n">D3D12ScopedPipeline</span><span class="p">(</span><span class="k">const</span> <span class="n">Microsoft</span><span class="o">::</span><span class="n">WRL</span><span class="o">::</span><span class="n">ComPtr</span><span class="o">&lt;</span><span class="n">ID3D12Device</span><span class="o">&gt;&amp;</span> <span class="n">device</span><span class="p">,</span>
+                                         <span class="n">D3D12_GRAPHICS_PIPELINE_STATE_DESC</span> <span class="n">psoDesc</span><span class="p">,</span>
+                                         <span class="k">const</span> <span class="n">Log</span><span class="o">&amp;</span> <span class="n">log</span><span class="p">)</span> <span class="o">:</span> <span class="n">m_type</span><span class="p">(</span><span class="n">PipelineType</span><span class="o">::</span><span class="n">Graphics</span><span class="p">)</span> <span class="p">{</span>
+
+  <span class="n">VERIFY_D3D_OP</span><span class="p">(</span><span class="n">log</span><span class="p">,</span> <span class="n">device</span><span class="o">-&gt;</span><span class="n">CreateGraphicsPipelineState</span><span class="p">(</span><span class="o">&amp;</span><span class="n">psoDesc</span><span class="p">,</span> <span class="n">IID_PPV_ARGS</span><span class="p">(</span><span class="o">&amp;</span><span class="n">m_pipeline</span><span class="p">)),</span>
+    <span class="s">&quot;Failed to create graphics pipeline&quot;</span><span class="p">);</span>
+<span class="p">}</span>
+
+<span class="n">D3D12ScopedPipeline</span><span class="o">::</span><span class="n">D3D12ScopedPipeline</span><span class="p">(</span><span class="k">const</span> <span class="n">Microsoft</span><span class="o">::</span><span class="n">WRL</span><span class="o">::</span><span class="n">ComPtr</span><span class="o">&lt;</span><span class="n">ID3D12Device</span><span class="o">&gt;&amp;</span> <span class="n">device</span><span class="p">,</span>
+  <span class="n">D3D12_COMPUTE_PIPELINE_STATE_DESC</span> <span class="n">psoDesc</span><span class="p">,</span>
+  <span class="k">const</span> <span class="n">Log</span><span class="o">&amp;</span> <span class="n">log</span><span class="p">)</span> <span class="o">:</span> <span class="n">m_type</span><span class="p">(</span><span class="n">PipelineType</span><span class="o">::</span><span class="n">Compute</span><span class="p">)</span> <span class="p">{</span>
+
+  <span class="n">VERIFY_D3D_OP</span><span class="p">(</span><span class="n">log</span><span class="p">,</span> <span class="n">device</span><span class="o">-&gt;</span><span class="n">CreateComputePipelineState</span><span class="p">(</span><span class="o">&amp;</span><span class="n">psoDesc</span><span class="p">,</span> <span class="n">IID_PPV_ARGS</span><span class="p">(</span><span class="o">&amp;</span><span class="n">m_pipeline</span><span class="p">)),</span>
+    <span class="s">&quot;Failed to create compute pipeline&quot;</span><span class="p">);</span>
+<span class="p">}</span>
+
+<span class="n">ID3D12PipelineState</span><span class="o">*</span> <span class="n">D3D12ScopedPipeline</span><span class="o">::</span><span class="n">GetState</span><span class="p">()</span> <span class="k">const</span> <span class="p">{</span>
+  <span class="k">return</span> <span class="n">m_pipeline</span><span class="p">.</span><span class="n">Get</span><span class="p">();</span>
+<span class="p">}</span>
+
+<span class="n">PipelineType</span> <span class="n">D3D12ScopedPipeline</span><span class="o">::</span><span class="n">GetType</span><span class="p">()</span> <span class="k">const</span> <span class="p">{</span>
+  <span class="k">return</span> <span class="n">m_type</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="n">D3D12PipelineFactory</span><span class="o">::</span><span class="n">D3D12PipelineFactory</span><span class="p">(</span><span class="n">Memory</span><span class="o">::</span><span class="n">Allocator</span><span class="o">&amp;</span> <span class="n">allocator</span><span class="p">,</span> <span class="n">Log</span> <span class="n">logger</span><span class="p">)</span>
+  <span class="o">:</span> <span class="n">log_D3D12RenderSystem</span><span class="p">(</span><span class="n">std</span><span class="o">::</span><span class="n">move</span><span class="p">(</span><span class="n">logger</span><span class="p">)),</span>
+    <span class="n">m_type</span><span class="p">(</span><span class="n">PipelineType</span><span class="o">::</span><span class="n">Graphics</span><span class="p">),</span>
+    <span class="n">m_inputElementDescs</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="n">allocator</span><span class="p">)</span> <span class="p">{</span>
+<span class="p">}</span>
+
+<span class="n">D3D12PipelineFactory</span><span class="o">&amp;</span> <span class="n">D3D12PipelineFactory</span><span class="o">::</span><span class="n">SetPipelineType</span><span class="p">(</span><span class="n">PipelineType</span> <span class="n">type</span><span class="p">)</span> <span class="p">{</span>
+  <span class="n">m_type</span> <span class="o">=</span> <span class="n">type</span><span class="p">;</span>
+
+  <span class="k">return</span> <span class="o">*</span><span class="k">this</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="n">D3D12PipelineFactory</span><span class="o">&amp;</span> <span class="n">D3D12PipelineFactory</span><span class="o">::</span><span class="n">BulkAddAttributeDescription</span><span class="p">(</span><span class="k">const</span> <span class="n">VertexSlot</span><span class="o">&amp;</span> <span class="n">vertexSlot</span><span class="p">,</span> <span class="n">U32</span> <span class="n">binding</span><span class="p">)</span> <span class="p">{</span>
+
+  <span class="k">auto</span> <span class="n">bindingInfo</span> <span class="o">=</span> <span class="n">m_bindingMap</span><span class="p">[</span><span class="n">binding</span><span class="p">];</span>
+
+  <span class="k">for</span> <span class="p">(</span><span class="k">const</span> <span class="k">auto</span><span class="o">&amp;</span> <span class="nl">semanticStride</span> <span class="p">:</span> <span class="n">vertexSlot</span><span class="p">.</span><span class="n">m_stride</span><span class="p">)</span> <span class="p">{</span>
+    <span class="k">const</span> <span class="k">auto</span> <span class="n">format</span> <span class="o">=</span> <span class="n">ToDXGI_FORMAT</span><span class="p">(</span><span class="n">semanticStride</span><span class="p">.</span><span class="n">m_format</span><span class="p">);</span>
+    <span class="n">VERIFY_OPT</span><span class="p">(</span><span class="n">log_D3D12RenderSystem</span><span class="p">,</span> <span class="n">format</span><span class="p">,</span> <span class="s">&quot;Unknown Format&quot;</span><span class="p">);</span>
+
+    <span class="k">const</span> <span class="k">auto</span> <span class="n">usageRate</span> <span class="o">=</span> <span class="n">ToD3D12_INPUT_CLASSIFICATION</span><span class="p">(</span><span class="n">vertexSlot</span><span class="p">.</span><span class="n">m_rate</span><span class="p">);</span>
+    <span class="n">VERIFY_OPT</span><span class="p">(</span><span class="n">log_D3D12RenderSystem</span><span class="p">,</span> <span class="n">usageRate</span><span class="p">,</span> <span class="s">&quot;Unknown Buffer Usage Rate&quot;</span><span class="p">);</span>
+
+    <span class="n">LOG_DBG</span><span class="p">(</span><span class="n">log_D3D12RenderSystem</span><span class="p">,</span> <span class="n">LOG_LEVEL</span><span class="p">,</span> <span class="s">&quot;Binding Vertex Attribute: Binding: %d  Semantic: %s  Format: %s&quot;</span><span class="p">,</span> <span class="n">binding</span><span class="p">,</span> <span class="n">semanticStride</span><span class="p">.</span><span class="n">m_name</span><span class="p">,</span> <span class="n">ToString</span><span class="p">(</span><span class="n">semanticStride</span><span class="p">.</span><span class="n">m_format</span><span class="p">).</span><span class="n">c_str</span><span class="p">());</span>
+
+    <span class="n">D3D12_INPUT_ELEMENT_DESC</span> <span class="n">attrDesc</span><span class="p">;</span>
+    <span class="n">attrDesc</span><span class="p">.</span><span class="n">Format</span> <span class="o">=</span> <span class="n">format</span><span class="p">.</span><span class="n">value</span><span class="p">();</span>
+    <span class="n">attrDesc</span><span class="p">.</span><span class="n">SemanticName</span> <span class="o">=</span> <span class="n">semanticStride</span><span class="p">.</span><span class="n">m_name</span><span class="p">;</span>
+    <span class="n">attrDesc</span><span class="p">.</span><span class="n">SemanticIndex</span> <span class="o">=</span> <span class="n">semanticStride</span><span class="p">.</span><span class="n">m_id</span><span class="p">;</span>
+    <span class="n">attrDesc</span><span class="p">.</span><span class="n">InputSlot</span> <span class="o">=</span> <span class="n">binding</span><span class="p">;</span>
+    <span class="n">attrDesc</span><span class="p">.</span><span class="n">AlignedByteOffset</span> <span class="o">=</span> <span class="n">bindingInfo</span><span class="p">.</span><span class="n">m_offset</span><span class="p">;</span>
+    <span class="n">attrDesc</span><span class="p">.</span><span class="n">InputSlotClass</span> <span class="o">=</span> <span class="n">usageRate</span><span class="p">.</span><span class="n">value</span><span class="p">();</span>
+    <span class="n">attrDesc</span><span class="p">.</span><span class="n">InstanceDataStepRate</span> <span class="o">=</span> <span class="n">vertexSlot</span><span class="p">.</span><span class="n">m_rate</span> <span class="o">==</span> <span class="n">BufferUsageRate</span><span class="o">::</span><span class="n">PerInstance</span> <span class="o">?</span> <span class="mi">1</span> <span class="o">:</span> <span class="mi">0</span><span class="p">;</span>
+
+    <span class="n">bindingInfo</span><span class="p">.</span><span class="n">m_offset</span> <span class="o">+=</span> <span class="n">GetFormatSize</span><span class="p">(</span><span class="n">semanticStride</span><span class="p">.</span><span class="n">m_format</span><span class="p">);</span>
+
+    <span class="n">m_inputElementDescs</span><span class="p">.</span><span class="n">PushBack</span><span class="p">(</span><span class="n">attrDesc</span><span class="p">);</span>
+  <span class="p">}</span>
+
+  <span class="n">m_bindingMap</span><span class="p">[</span><span class="n">binding</span><span class="p">]</span> <span class="o">=</span> <span class="n">bindingInfo</span><span class="p">;</span>
+
+  <span class="k">return</span> <span class="o">*</span><span class="k">this</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="n">D3D12PipelineFactory</span><span class="o">&amp;</span> <span class="n">D3D12PipelineFactory</span><span class="o">::</span><span class="n">SetRasterizerStage</span><span class="p">(</span><span class="n">CullMode</span> <span class="n">cullMode</span><span class="p">,</span> <span class="n">FrontFace</span> <span class="n">faceOrder</span><span class="p">)</span> <span class="p">{</span>
+  <span class="k">const</span> <span class="k">auto</span> <span class="n">d3dCullMode</span> <span class="o">=</span> <span class="n">ToD3D12_CULL_MODE</span><span class="p">(</span><span class="n">cullMode</span><span class="p">);</span>
+  <span class="n">VERIFY_OPT</span><span class="p">(</span><span class="n">log_D3D12RenderSystem</span><span class="p">,</span> <span class="n">d3dCullMode</span><span class="p">,</span> <span class="s">&quot;Unknown D3D12 Cull Mode&quot;</span><span class="p">);</span>
+
+  <span class="n">m_rasterizerDesc</span><span class="p">.</span><span class="n">CullMode</span> <span class="o">=</span> <span class="n">d3dCullMode</span><span class="p">.</span><span class="n">value</span><span class="p">();</span>
+  <span class="n">m_rasterizerDesc</span><span class="p">.</span><span class="n">FrontCounterClockwise</span> <span class="o">=</span> <span class="k">static_cast</span><span class="o">&lt;</span><span class="n">BOOL</span><span class="o">&gt;</span><span class="p">(</span><span class="n">faceOrder</span> <span class="o">==</span> <span class="n">FrontFace</span><span class="o">::</span><span class="n">CounterClockwise</span><span class="p">);</span>
+
+  <span class="k">return</span> <span class="o">*</span><span class="k">this</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="n">D3D12PipelineFactory</span><span class="o">&amp;</span> <span class="n">D3D12PipelineFactory</span><span class="o">::</span><span class="n">AddShaderStage</span><span class="p">(</span><span class="k">const</span> <span class="n">D3D12ScopedShader</span><span class="o">&amp;</span> <span class="n">shader</span><span class="p">)</span> <span class="p">{</span>
+  <span class="k">switch</span><span class="p">(</span><span class="n">shader</span><span class="p">.</span><span class="n">GetShaderStage</span><span class="p">())</span>
+  <span class="p">{</span>
+    <span class="k">case</span> <span class="n">ShaderStage</span><span class="o">::</span><span class="nl">Vertex</span><span class="p">:</span>
+      <span class="n">m_vertexShaderModule</span> <span class="o">=</span> <span class="n">shader</span><span class="p">.</span><span class="n">GetByteCode</span><span class="p">();</span>
+      <span class="k">break</span><span class="p">;</span>
+
+    <span class="k">case</span> <span class="n">ShaderStage</span><span class="o">::</span><span class="nl">Pixel</span><span class="p">:</span>
+      <span class="n">m_pixelShaderModule</span> <span class="o">=</span> <span class="n">shader</span><span class="p">.</span><span class="n">GetByteCode</span><span class="p">();</span>
+      <span class="k">break</span><span class="p">;</span>
+
+    <span class="k">case</span> <span class="n">ShaderStage</span><span class="o">::</span><span class="nl">Compute</span><span class="p">:</span>
+      <span class="n">m_computeShaderModule</span> <span class="o">=</span> <span class="n">shader</span><span class="p">.</span><span class="n">GetByteCode</span><span class="p">();</span>
+      <span class="k">break</span><span class="p">;</span>
+
+    <span class="k">case</span> <span class="n">ShaderStage</span><span class="o">::</span><span class="nl">Geometry</span><span class="p">:</span>
+    <span class="k">case</span> <span class="n">ShaderStage</span><span class="o">::</span><span class="nl">All</span><span class="p">:</span>
+      <span class="n">LOG_ERR</span><span class="p">(</span><span class="n">log_D3D12RenderSystem</span><span class="p">,</span> <span class="n">LOG_LEVEL</span><span class="p">,</span> <span class="s">&quot;Unsupported Shader Stage for Pipeline Factory&quot;</span><span class="p">);</span>
+      <span class="k">break</span><span class="p">;</span>
+
+    <span class="k">default</span><span class="o">:</span>
+      <span class="n">LOG_ERR</span><span class="p">(</span><span class="n">log_D3D12RenderSystem</span><span class="p">,</span> <span class="n">LOG_LEVEL</span><span class="p">,</span> <span class="s">&quot;Unknown Shader Stage for Pipeline Factory&quot;</span><span class="p">);</span>
+    <span class="k">break</span><span class="p">;</span>
+  <span class="p">}</span>
+
+  <span class="k">return</span> <span class="o">*</span><span class="k">this</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="kt">void</span> <span class="n">D3D12PipelineFactory</span><span class="o">::</span><span class="n">Submit</span><span class="p">(</span><span class="k">const</span> <span class="n">Microsoft</span><span class="o">::</span><span class="n">WRL</span><span class="o">::</span><span class="n">ComPtr</span><span class="o">&lt;</span><span class="n">ID3D12Device</span><span class="o">&gt;&amp;</span> <span class="n">device</span><span class="p">,</span> <span class="k">const</span> <span class="n">Containers</span><span class="o">::</span><span class="n">Vector</span><span class="o">&lt;</span><span class="n">std</span><span class="o">::</span><span class="n">reference_wrapper</span><span class="o">&lt;</span><span class="n">D3D12ScopedRenderPass</span><span class="o">&gt;&gt;&amp;</span> <span class="n">renderPasses</span><span class="p">,</span> <span class="n">Containers</span><span class="o">::</span><span class="n">Vector</span><span class="o">&lt;</span><span class="n">D3D12ScopedPipeline</span><span class="o">&gt;&amp;</span> <span class="n">resultPipelines</span><span class="p">)</span> <span class="k">const</span> <span class="p">{</span>
+  <span class="n">assert</span><span class="p">(</span><span class="n">m_type</span> <span class="o">==</span> <span class="n">PipelineType</span><span class="o">::</span><span class="n">Graphics</span><span class="p">);</span>
+
+  <span class="k">for</span> <span class="p">(</span><span class="k">const</span> <span class="k">auto</span><span class="o">&amp;</span> <span class="nl">renderPass</span> <span class="p">:</span> <span class="n">renderPasses</span><span class="p">)</span>
+  <span class="p">{</span>
+    <span class="n">D3D12_GRAPHICS_PIPELINE_STATE_DESC</span> <span class="n">psoDesc</span> <span class="o">=</span> <span class="p">{};</span>
+    <span class="n">psoDesc</span><span class="p">.</span><span class="n">InputLayout</span> <span class="o">=</span> <span class="p">{</span> <span class="n">m_inputElementDescs</span><span class="p">.</span><span class="n">Data</span><span class="p">(),</span> <span class="n">m_inputElementDescs</span><span class="p">.</span><span class="n">GetSize</span><span class="p">()</span> <span class="p">};</span>
+    <span class="n">psoDesc</span><span class="p">.</span><span class="n">pRootSignature</span> <span class="o">=</span> <span class="n">renderPass</span><span class="p">.</span><span class="n">get</span><span class="p">().</span><span class="n">GetRootSignature</span><span class="p">();</span>
+
+
+    <span class="k">for</span> <span class="p">(</span><span class="k">const</span> <span class="k">auto</span><span class="o">&amp;</span> <span class="nl">shader</span> <span class="p">:</span> <span class="n">renderPass</span><span class="p">.</span><span class="n">get</span><span class="p">().</span><span class="n">GetShaders</span><span class="p">())</span>
+    <span class="p">{</span>
+      <span class="k">switch</span> <span class="p">(</span><span class="n">shader</span><span class="p">.</span><span class="n">get</span><span class="p">().</span><span class="n">GetShaderStage</span><span class="p">())</span>
+      <span class="p">{</span>
+      <span class="k">case</span> <span class="n">ShaderStage</span><span class="o">::</span><span class="nl">All</span><span class="p">:</span> <span class="k">break</span><span class="p">;</span>
+
+      <span class="k">case</span> <span class="n">ShaderStage</span><span class="o">::</span><span class="nl">Vertex</span><span class="p">:</span>
+        <span class="n">psoDesc</span><span class="p">.</span><span class="n">VS</span> <span class="o">=</span> <span class="n">shader</span><span class="p">.</span><span class="n">get</span><span class="p">().</span><span class="n">GetByteCode</span><span class="p">();</span>
+        <span class="k">break</span><span class="p">;</span>
+
+      <span class="k">case</span> <span class="n">ShaderStage</span><span class="o">::</span><span class="nl">Pixel</span><span class="p">:</span>
+        <span class="n">psoDesc</span><span class="p">.</span><span class="n">PS</span> <span class="o">=</span> <span class="n">shader</span><span class="p">.</span><span class="n">get</span><span class="p">().</span><span class="n">GetByteCode</span><span class="p">();</span>
+        <span class="k">break</span><span class="p">;</span>
+
+      <span class="k">case</span> <span class="n">ShaderStage</span><span class="o">::</span><span class="nl">Compute</span><span class="p">:</span>
+        <span class="k">break</span><span class="p">;</span>
+
+      <span class="k">case</span> <span class="n">ShaderStage</span><span class="o">::</span><span class="nl">Geometry</span><span class="p">:</span>
+        <span class="n">psoDesc</span><span class="p">.</span><span class="n">GS</span> <span class="o">=</span> <span class="n">shader</span><span class="p">.</span><span class="n">get</span><span class="p">().</span><span class="n">GetByteCode</span><span class="p">();</span>
+        <span class="k">break</span><span class="p">;</span>
+
+      <span class="k">default</span><span class="o">:</span> <span class="k">break</span><span class="p">;</span>
+      <span class="p">}</span>
+    <span class="p">}</span>
+
+    <span class="k">if</span> <span class="p">(</span><span class="n">m_vertexShaderModule</span><span class="p">.</span><span class="n">has_value</span><span class="p">())</span>
+    <span class="p">{</span>
+      <span class="n">psoDesc</span><span class="p">.</span><span class="n">VS</span> <span class="o">=</span> <span class="n">m_vertexShaderModule</span><span class="p">.</span><span class="n">value</span><span class="p">();</span>
+    <span class="p">}</span>
+
+    <span class="k">if</span> <span class="p">(</span><span class="n">m_pixelShaderModule</span><span class="p">.</span><span class="n">has_value</span><span class="p">())</span>
+    <span class="p">{</span>
+      <span class="n">psoDesc</span><span class="p">.</span><span class="n">PS</span> <span class="o">=</span> <span class="n">m_pixelShaderModule</span><span class="p">.</span><span class="n">value</span><span class="p">();</span>
+    <span class="p">}</span>
+
+    <span class="n">psoDesc</span><span class="p">.</span><span class="n">RasterizerState</span> <span class="o">=</span> <span class="n">m_rasterizerDesc</span><span class="p">;</span>
+
+    <span class="n">psoDesc</span><span class="p">.</span><span class="n">BlendState</span> <span class="o">=</span> <span class="n">CD3DX12_BLEND_DESC</span><span class="p">(</span><span class="n">D3D12_DEFAULT</span><span class="p">);</span>
+    <span class="n">psoDesc</span><span class="p">.</span><span class="n">DepthStencilState</span><span class="p">.</span><span class="n">DepthEnable</span> <span class="o">=</span> <span class="n">FALSE</span><span class="p">;</span>
+    <span class="n">psoDesc</span><span class="p">.</span><span class="n">DepthStencilState</span><span class="p">.</span><span class="n">StencilEnable</span> <span class="o">=</span> <span class="n">FALSE</span><span class="p">;</span>
+    <span class="n">psoDesc</span><span class="p">.</span><span class="n">SampleMask</span> <span class="o">=</span> <span class="n">UINT_MAX</span><span class="p">;</span>
+    <span class="n">psoDesc</span><span class="p">.</span><span class="n">PrimitiveTopologyType</span> <span class="o">=</span> <span class="n">D3D12_PRIMITIVE_TOPOLOGY_TYPE_TRIANGLE</span><span class="p">;</span>
+    <span class="n">psoDesc</span><span class="p">.</span><span class="n">SampleDesc</span><span class="p">.</span><span class="n">Count</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span>
+
+    <span class="c1">// Update Output Targets</span>
+    <span class="n">renderPass</span><span class="p">.</span><span class="n">get</span><span class="p">().</span><span class="n">UpdatePipelineInfo</span><span class="p">(</span><span class="n">psoDesc</span><span class="p">);</span>
+
+    <span class="n">resultPipelines</span><span class="p">.</span><span class="n">PushBack</span><span class="p">(</span><span class="n">D3D12ScopedPipeline</span><span class="p">(</span><span class="n">device</span><span class="p">,</span> <span class="n">psoDesc</span><span class="p">,</span> <span class="n">log_D3D12RenderSystem</span><span class="p">));</span>
+  <span class="p">}</span>
+
+<span class="p">}</span>
+
+<span class="kt">void</span> <span class="n">D3D12PipelineFactory</span><span class="o">::</span><span class="n">Submit</span><span class="p">(</span><span class="k">const</span> <span class="n">Microsoft</span><span class="o">::</span><span class="n">WRL</span><span class="o">::</span><span class="n">ComPtr</span><span class="o">&lt;</span><span class="n">ID3D12Device</span><span class="o">&gt;&amp;</span> <span class="n">device</span><span class="p">,</span>
+  <span class="k">const</span> <span class="n">Containers</span><span class="o">::</span><span class="n">Vector</span><span class="o">&lt;</span><span class="n">std</span><span class="o">::</span><span class="n">reference_wrapper</span><span class="o">&lt;</span><span class="n">D3D12ScopedComputePass</span><span class="o">&gt;&gt;&amp;</span> <span class="n">computePasses</span><span class="p">,</span>
+  <span class="n">Containers</span><span class="o">::</span><span class="n">Vector</span><span class="o">&lt;</span><span class="n">D3D12ScopedPipeline</span><span class="o">&gt;&amp;</span> <span class="n">resultPipelines</span><span class="p">)</span> <span class="k">const</span> <span class="p">{</span>
+
+  <span class="n">assert</span><span class="p">(</span><span class="n">m_type</span> <span class="o">==</span> <span class="n">PipelineType</span><span class="o">::</span><span class="n">Compute</span><span class="p">);</span>
+
+  <span class="k">for</span> <span class="p">(</span><span class="k">const</span> <span class="k">auto</span><span class="o">&amp;</span> <span class="nl">computePass</span> <span class="p">:</span> <span class="n">computePasses</span><span class="p">)</span>
+  <span class="p">{</span>
+    <span class="n">D3D12_COMPUTE_PIPELINE_STATE_DESC</span> <span class="n">psoDesc</span> <span class="o">=</span> <span class="p">{};</span>
+    <span class="n">psoDesc</span><span class="p">.</span><span class="n">pRootSignature</span> <span class="o">=</span> <span class="n">computePass</span><span class="p">.</span><span class="n">get</span><span class="p">().</span><span class="n">GetRootSignature</span><span class="p">();</span>
+
+
+    <span class="k">for</span> <span class="p">(</span><span class="k">const</span> <span class="k">auto</span><span class="o">&amp;</span> <span class="nl">shader</span> <span class="p">:</span> <span class="n">computePass</span><span class="p">.</span><span class="n">get</span><span class="p">().</span><span class="n">GetShaders</span><span class="p">())</span>
+    <span class="p">{</span>
+      <span class="k">switch</span> <span class="p">(</span><span class="n">shader</span><span class="p">.</span><span class="n">get</span><span class="p">().</span><span class="n">GetShaderStage</span><span class="p">())</span>
+      <span class="p">{</span>
+      <span class="k">case</span> <span class="n">ShaderStage</span><span class="o">::</span><span class="nl">Compute</span><span class="p">:</span>
+        <span class="n">psoDesc</span><span class="p">.</span><span class="n">CS</span> <span class="o">=</span> <span class="n">shader</span><span class="p">.</span><span class="n">get</span><span class="p">().</span><span class="n">GetByteCode</span><span class="p">();</span>
+        <span class="k">break</span><span class="p">;</span>
+
+      <span class="k">case</span> <span class="n">ShaderStage</span><span class="o">::</span><span class="nl">All</span><span class="p">:</span>
+      <span class="k">case</span> <span class="n">ShaderStage</span><span class="o">::</span><span class="nl">Vertex</span><span class="p">:</span>
+      <span class="k">case</span> <span class="n">ShaderStage</span><span class="o">::</span><span class="nl">Pixel</span><span class="p">:</span>
+      <span class="k">case</span> <span class="n">ShaderStage</span><span class="o">::</span><span class="nl">Geometry</span><span class="p">:</span>
+      <span class="k">default</span><span class="o">:</span>
+        <span class="k">break</span><span class="p">;</span>
+      <span class="p">}</span>
+    <span class="p">}</span>
+
+    <span class="k">if</span> <span class="p">(</span><span class="n">m_computeShaderModule</span><span class="p">.</span><span class="n">has_value</span><span class="p">())</span>
+    <span class="p">{</span>
+      <span class="n">psoDesc</span><span class="p">.</span><span class="n">CS</span> <span class="o">=</span> <span class="n">m_computeShaderModule</span><span class="p">.</span><span class="n">value</span><span class="p">();</span>
+    <span class="p">}</span>
+
+    <span class="n">resultPipelines</span><span class="p">.</span><span class="n">PushBack</span><span class="p">(</span><span class="n">D3D12ScopedPipeline</span><span class="p">(</span><span class="n">device</span><span class="p">,</span> <span class="n">psoDesc</span><span class="p">,</span> <span class="n">log_D3D12RenderSystem</span><span class="p">));</span>
+  <span class="p">}</span>
+<span class="p">}</span>
+<span class="p">}</span> <span class="c1">// namespace D3D12</span>
+<span class="p">}</span> <span class="c1">// namespace Azura</span>
+</pre></div>
+</div>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="file_Source_Azura_RenderSystem_Inc_D3D12_D3D12ScopedPipeline.h.html" class="btn btn-neutral float-right" title="File D3D12ScopedPipeline.h" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="file_Source_Azura_RenderSystem_Src_D3D12_D3D12ScopedPipeline.cpp.html" class="btn btn-neutral" title="File D3D12ScopedPipeline.cpp" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2018, Vasu Mahesh
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  
+
+    
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+        <script type="text/javascript" src="../_static/jquery.js"></script>
+        <script type="text/javascript" src="../_static/underscore.js"></script>
+        <script type="text/javascript" src="../_static/doctools.js"></script>
+        <script type="text/javascript" src="../_static/collapsible-lists\js\CollapsibleLists.compressed.js"></script>
+        <script type="text/javascript" src="../_static/collapsible-lists\js\apply-collapsible-lists.js"></script>
+    
+
+  
+
+  <script type="text/javascript" src="../_static/js/theme.js"></script>
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

@@ -1,0 +1,726 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>Program Listing for File GenericTypes.h &mdash; Azura  documentation</title>
+  
+
+  
+  
+  
+  
+
+  
+
+  
+  
+    
+
+  
+
+  <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/collapsible-lists\css\tree_view.css" type="text/css" />
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="File GenericTypes.h" href="file_Source_Physics_Inc_Physics_Geometry_GenericTypes.h.html" />
+    <link rel="prev" title="File GenericTypes.h" href="file_Source_Azura_RenderSystem_Inc_Generic_GenericTypes.h.html" /> 
+
+  
+  <script src="../_static/js/modernizr.min.js"></script>
+
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search">
+          
+
+          
+            <a href="../index.html" class="icon icon-home"> Azura
+          
+
+          
+          </a>
+
+          
+            
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <ul>
+<li class="toctree-l1"><a class="reference internal" href="../setting-up.html">Setting Up</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../build-instructions.html">Build Instructions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../cmake-wrappers.html">CMake Wrappers</a></li>
+<li class="toctree-l1"><a class="reference internal" href="apiRoot.html">Azura API</a></li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">Azura</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../index.html">Docs</a> &raquo;</li>
+        
+          <li><a href="apiRoot.html">Azura API</a> &raquo;</li>
+        
+          <li><a href="file_Source_Azura_RenderSystem_Inc_Generic_GenericTypes.h.html">File GenericTypes.h</a> &raquo;</li>
+        
+      <li>Program Listing for File GenericTypes.h</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            <a href="../_sources/html/program_listing_file_Source_Azura_RenderSystem_Inc_Generic_GenericTypes.h.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="program-listing-for-file-generictypes-h">
+<span id="program-listing-file-source-azura-rendersystem-inc-generic-generictypes-h"></span><h1>Program Listing for File GenericTypes.h<a class="headerlink" href="#program-listing-for-file-generictypes-h" title="Permalink to this headline">¶</a></h1>
+<p>↰ <a class="reference internal" href="file_Source_Azura_RenderSystem_Inc_Generic_GenericTypes.h.html#file-source-azura-rendersystem-inc-generic-generictypes-h"><span class="std std-ref">Return to documentation for file</span></a> (<code class="docutils literal notranslate"><span class="pre">Source\Azura\RenderSystem\Inc\Generic\GenericTypes.h</span></code>)</p>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="cp">#pragma once</span>
+
+<span class="cp">#include</span> <span class="cpf">&quot;Containers/Vector.h&quot;</span><span class="cp"></span>
+<span class="cp">#include</span> <span class="cpf">&quot;Generic/Constants.h&quot;</span><span class="cp"></span>
+<span class="cp">#include</span> <span class="cpf">&quot;Types.h&quot;</span><span class="cp"></span>
+<span class="cp">#include</span> <span class="cpf">&quot;Core/RawStorageFormat.h&quot;</span><span class="cp"></span>
+<span class="cp">#include</span> <span class="cpf">&quot;Utils/Hash.h&quot;</span><span class="cp"></span>
+<span class="cp">#include</span> <span class="cpf">&quot;Core/AssetLocation.h&quot;</span><span class="cp"></span>
+
+<span class="cp">#include</span> <span class="cpf">&lt;boost/container/small_vector.hpp&gt;</span><span class="cp"></span>
+<span class="cp">#include</span> <span class="cpf">&lt;boost/detail/bitmask.hpp&gt;</span><span class="cp"></span>
+
+<span class="k">namespace</span> <span class="n">Azura</span> <span class="p">{</span>
+<span class="k">template</span> <span class="o">&lt;</span><span class="k">typename</span> <span class="n">T</span><span class="p">,</span> <span class="n">SizeType</span> <span class="n">N</span><span class="o">&gt;</span>
+<span class="k">using</span> <span class="n">SmallVector</span> <span class="o">=</span> <span class="n">boost</span><span class="o">::</span><span class="n">container</span><span class="o">::</span><span class="n">small_vector</span><span class="o">&lt;</span><span class="n">T</span><span class="p">,</span> <span class="n">N</span><span class="o">&gt;</span><span class="p">;</span>
+
+<span class="k">const</span> <span class="n">U32</span> <span class="n">PRESENT_TARGET</span> <span class="o">=</span> <span class="mi">100</span><span class="p">;</span>
+
+<span class="k">enum</span> <span class="k">class</span> <span class="nc">RawStorageFormat</span><span class="p">;</span>
+
+<span class="k">enum</span> <span class="k">class</span> <span class="nc">RS</span> <span class="p">{</span>
+  <span class="n">Success</span> <span class="o">=</span> <span class="mi">0</span><span class="p">,</span>
+  <span class="n">UnknownError</span><span class="p">,</span>
+<span class="p">};</span>
+
+<span class="k">enum</span> <span class="k">class</span> <span class="nc">ColorSpace</span> <span class="p">{</span>
+  <span class="n">SRGB</span><span class="p">,</span>
+  <span class="n">HDR10</span>
+<span class="p">};</span>
+
+<span class="k">enum</span> <span class="k">class</span> <span class="nc">PresentModes</span> <span class="p">{</span>
+  <span class="n">Immediate</span><span class="p">,</span>
+  <span class="n">Mailbox</span><span class="p">,</span>
+  <span class="n">FIFO</span><span class="p">,</span>
+  <span class="n">FIFORelaxed</span><span class="p">,</span>
+  <span class="n">SharedDemandRefresh</span><span class="p">,</span>
+  <span class="n">SharedContinuous</span>
+<span class="p">};</span>
+
+<span class="k">enum</span> <span class="k">class</span> <span class="nc">PipelineType</span>
+<span class="p">{</span>
+  <span class="n">Graphics</span><span class="p">,</span>
+  <span class="n">Compute</span>
+<span class="p">};</span>
+
+<span class="k">enum</span> <span class="k">class</span> <span class="nc">RenderPassType</span>
+<span class="p">{</span>
+  <span class="n">Graphics</span><span class="p">,</span>
+  <span class="n">Compute</span>
+<span class="p">};</span>
+
+<span class="k">enum</span> <span class="k">class</span> <span class="nc">ShaderStage</span> <span class="o">:</span> <span class="n">U32</span> <span class="p">{</span>
+  <span class="n">All</span> <span class="o">=</span> <span class="mh">0x00001111</span><span class="p">,</span>
+  <span class="n">Vertex</span> <span class="o">=</span> <span class="mh">0x00000001</span><span class="p">,</span>
+  <span class="n">Pixel</span> <span class="o">=</span> <span class="mh">0x00000010</span><span class="p">,</span>
+  <span class="n">Compute</span> <span class="o">=</span> <span class="mh">0x00000100</span><span class="p">,</span>
+  <span class="n">Geometry</span> <span class="o">=</span> <span class="mh">0x00001000</span>
+<span class="p">};</span>
+
+<span class="n">BOOST_BITMASK</span><span class="p">(</span><span class="n">ShaderStage</span><span class="p">);</span>
+
+<span class="k">enum</span> <span class="k">class</span> <span class="nc">BufferUsage</span> <span class="p">{</span>
+  <span class="n">Vertex</span><span class="p">,</span>
+  <span class="n">Index</span><span class="p">,</span>
+<span class="p">};</span>
+
+<span class="k">enum</span> <span class="k">class</span> <span class="nc">BufferUsageRate</span> <span class="p">{</span>
+  <span class="n">PerVertex</span><span class="p">,</span>
+  <span class="n">PerInstance</span>
+<span class="p">};</span>
+
+<span class="k">enum</span> <span class="k">class</span> <span class="nc">BlendFactor</span> <span class="p">{</span>
+  <span class="n">Zero</span><span class="p">,</span>
+  <span class="n">One</span><span class="p">,</span>
+  <span class="n">SrcColor</span><span class="p">,</span>
+  <span class="n">OneMinusSrcColor</span><span class="p">,</span>
+  <span class="n">DstColor</span><span class="p">,</span>
+  <span class="n">OneMinusDstColor</span><span class="p">,</span>
+  <span class="n">SrcAlpha</span><span class="p">,</span>
+  <span class="n">OneMinusSrcAlpha</span><span class="p">,</span>
+  <span class="n">DstAlpha</span><span class="p">,</span>
+  <span class="n">OneMinusDstAlpha</span><span class="p">,</span>
+  <span class="n">ConstantColor</span><span class="p">,</span>
+  <span class="n">OneMinusConstantColor</span><span class="p">,</span>
+  <span class="n">ConstantAlpha</span><span class="p">,</span>
+  <span class="n">OneMinusConstantAlpha</span><span class="p">,</span>
+  <span class="n">SrcAlphaSaturate</span><span class="p">,</span>
+  <span class="n">Src1Color</span><span class="p">,</span>
+  <span class="n">OneMinusSrc1Color</span><span class="p">,</span>
+  <span class="n">Src1Alpha</span><span class="p">,</span>
+  <span class="n">OneMinusSrc1Alpha</span>
+<span class="p">};</span>
+
+<span class="k">enum</span> <span class="k">class</span> <span class="nc">BlendOp</span> <span class="p">{</span>
+  <span class="n">Add</span><span class="p">,</span>
+  <span class="n">Subtract</span><span class="p">,</span>
+  <span class="n">ReverseSubtract</span><span class="p">,</span>
+  <span class="n">Min</span><span class="p">,</span>
+  <span class="n">Max</span>
+<span class="p">};</span>
+
+<span class="k">struct</span> <span class="n">BlendingEq</span> <span class="p">{</span>
+  <span class="n">BlendFactor</span> <span class="n">m_srcFactor</span><span class="p">{};</span>
+  <span class="n">BlendFactor</span> <span class="n">m_dstFactor</span><span class="p">{};</span>
+  <span class="n">BlendOp</span> <span class="n">m_op</span><span class="p">{};</span>
+<span class="p">};</span>
+
+<span class="k">struct</span> <span class="n">BlendState</span> <span class="p">{</span>
+  <span class="kt">bool</span> <span class="n">m_enable</span><span class="p">{</span><span class="nb">false</span><span class="p">};</span>
+  <span class="n">BlendingEq</span> <span class="n">m_color</span><span class="p">{};</span>
+  <span class="n">BlendingEq</span> <span class="n">m_alpha</span><span class="p">{};</span>
+<span class="p">};</span>
+
+<span class="k">enum</span> <span class="k">class</span> <span class="nc">PrimitiveTopology</span> <span class="p">{</span>
+  <span class="n">PointList</span><span class="p">,</span>
+  <span class="n">LineList</span><span class="p">,</span>
+  <span class="n">LineStrip</span><span class="p">,</span>
+  <span class="n">TriangleList</span><span class="p">,</span>
+  <span class="n">TriangleStrip</span><span class="p">,</span>
+  <span class="n">TriangleFan</span><span class="p">,</span>
+  <span class="n">LineListWithAdjacency</span><span class="p">,</span>
+  <span class="n">LineStripWithAdjacency</span><span class="p">,</span>
+  <span class="n">TriangleListWithAdjacency</span><span class="p">,</span>
+  <span class="n">TriangleStripWithAdjacency</span><span class="p">,</span>
+  <span class="n">PatchList</span>
+<span class="p">};</span>
+
+<span class="k">enum</span> <span class="k">class</span> <span class="nc">CullMode</span> <span class="p">{</span>
+  <span class="n">None</span><span class="p">,</span>
+  <span class="n">FrontBit</span><span class="p">,</span>
+  <span class="n">BackBit</span><span class="p">,</span>
+  <span class="n">FrontAndBack</span>
+<span class="p">};</span>
+
+<span class="k">enum</span> <span class="k">class</span> <span class="nc">FrontFace</span> <span class="p">{</span>
+  <span class="n">CounterClockwise</span><span class="p">,</span>
+  <span class="n">Clockwise</span>
+<span class="p">};</span>
+
+<span class="k">enum</span> <span class="k">class</span> <span class="nc">DrawType</span> <span class="p">{</span>
+  <span class="n">InstancedIndexed</span><span class="p">,</span>
+  <span class="n">InstancedIndexedIndirect</span>
+<span class="p">};</span>
+
+<span class="k">enum</span> <span class="k">class</span> <span class="nc">ImageType</span> <span class="p">{</span>
+  <span class="n">Image1D</span><span class="p">,</span>
+  <span class="n">Image2D</span><span class="p">,</span>
+  <span class="n">Image3D</span>
+<span class="p">};</span>
+
+<span class="k">enum</span> <span class="k">class</span> <span class="nc">ImageViewType</span> <span class="p">{</span>
+  <span class="n">ImageView1D</span><span class="p">,</span>
+  <span class="n">ImageView1DArray</span><span class="p">,</span>
+  <span class="n">ImageView2D</span><span class="p">,</span>
+  <span class="n">ImageView2DArray</span><span class="p">,</span>
+  <span class="n">ImageView3D</span><span class="p">,</span>
+  <span class="n">ImageViewCubeMap</span><span class="p">,</span>
+  <span class="n">ImageViewCubeMapArray</span><span class="p">,</span>
+<span class="p">};</span>
+
+<span class="k">enum</span> <span class="k">class</span> <span class="nc">SamplerType</span> <span class="p">{</span>
+  <span class="n">Sampler1D</span><span class="p">,</span>
+  <span class="n">Sampler2D</span><span class="p">,</span>
+  <span class="n">Sampler3D</span>
+<span class="p">};</span>
+
+<span class="k">enum</span> <span class="k">class</span> <span class="nc">DescriptorType</span> <span class="p">{</span>
+  <span class="n">UniformBuffer</span><span class="p">,</span>
+  <span class="n">Sampler</span><span class="p">,</span>
+  <span class="n">SampledImage</span><span class="p">,</span>
+  <span class="n">CombinedImageSampler</span><span class="p">,</span>
+  <span class="n">PushConstant</span><span class="p">,</span>
+  <span class="n">UnorderedView</span>
+<span class="p">};</span>
+
+<span class="k">enum</span> <span class="k">class</span> <span class="nc">BufferSource</span> <span class="p">{</span>
+  <span class="n">Normal</span><span class="p">,</span>
+  <span class="n">StructuredBuffer</span>
+<span class="p">};</span>
+
+<span class="k">const</span> <span class="n">U32</span> <span class="n">MAX_DESCRIPTOR_TYPE_COUNT</span> <span class="o">=</span> <span class="mi">5</span><span class="p">;</span>
+
+<span class="k">struct</span> <span class="n">Bounds3D</span> <span class="p">{</span>
+  <span class="n">U32</span> <span class="n">m_width</span><span class="p">{</span><span class="mi">1</span><span class="p">};</span>
+  <span class="n">U32</span> <span class="n">m_height</span><span class="p">{</span><span class="mi">1</span><span class="p">};</span>
+  <span class="n">U32</span> <span class="n">m_depth</span><span class="p">{</span><span class="mi">1</span><span class="p">};</span>
+
+  <span class="n">Bounds3D</span><span class="p">(</span><span class="n">U32</span> <span class="n">width</span><span class="p">,</span> <span class="n">U32</span> <span class="n">height</span><span class="p">,</span> <span class="n">U32</span> <span class="n">depth</span><span class="p">)</span>
+    <span class="o">:</span> <span class="n">m_width</span><span class="p">(</span><span class="n">width</span><span class="p">),</span>
+      <span class="n">m_height</span><span class="p">(</span><span class="n">height</span><span class="p">),</span>
+      <span class="n">m_depth</span><span class="p">(</span><span class="n">depth</span><span class="p">)</span> <span class="p">{</span>
+
+  <span class="p">}</span>
+
+  <span class="n">U32</span> <span class="n">GetSize</span><span class="p">()</span> <span class="k">const</span> <span class="p">{</span>
+    <span class="k">return</span> <span class="n">m_width</span> <span class="o">*</span> <span class="n">m_height</span> <span class="o">*</span> <span class="n">m_depth</span><span class="p">;</span>
+  <span class="p">}</span>
+<span class="p">};</span>
+
+<span class="k">struct</span> <span class="n">Bounds2D</span> <span class="p">{</span>
+  <span class="n">U32</span> <span class="n">m_width</span><span class="p">{</span><span class="mi">0</span><span class="p">};</span>
+  <span class="n">U32</span> <span class="n">m_height</span><span class="p">{</span><span class="mi">0</span><span class="p">};</span>
+
+  <span class="n">Bounds2D</span><span class="p">(</span><span class="n">U32</span> <span class="n">width</span><span class="p">,</span> <span class="n">U32</span> <span class="n">height</span><span class="p">)</span>
+    <span class="o">:</span> <span class="n">m_width</span><span class="p">(</span><span class="n">width</span><span class="p">),</span>
+      <span class="n">m_height</span><span class="p">(</span><span class="n">height</span><span class="p">)</span> <span class="p">{</span>
+
+  <span class="p">}</span>
+<span class="p">};</span>
+
+<span class="k">struct</span> <span class="n">ShaderStageInfo</span> <span class="p">{</span>
+  <span class="n">ShaderStage</span> <span class="n">m_stage</span><span class="p">;</span>
+  <span class="n">String</span> <span class="n">m_entryPoint</span><span class="p">;</span>
+  <span class="n">String</span> <span class="n">m_filePath</span><span class="p">;</span>
+  <span class="kt">bool</span> <span class="n">m_isCompiled</span><span class="p">;</span>
+<span class="p">};</span>
+
+<span class="k">struct</span> <span class="n">ViewportDimensions</span> <span class="p">{</span>
+  <span class="kt">float</span> <span class="n">m_x</span><span class="p">;</span>
+  <span class="kt">float</span> <span class="n">m_y</span><span class="p">;</span>
+  <span class="kt">float</span> <span class="n">m_width</span><span class="p">;</span>
+  <span class="kt">float</span> <span class="n">m_height</span><span class="p">;</span>
+  <span class="kt">float</span> <span class="n">m_minDepth</span><span class="p">;</span>
+  <span class="kt">float</span> <span class="n">m_maxDepth</span><span class="p">;</span>
+<span class="p">};</span>
+
+<span class="k">using</span> <span class="n">SlotID</span> <span class="o">=</span> <span class="n">U32</span><span class="p">;</span>
+
+<span class="k">struct</span> <span class="n">SlotSemantic</span> <span class="p">{</span>
+  <span class="k">const</span> <span class="kt">char</span><span class="o">*</span> <span class="n">m_name</span><span class="p">;</span>
+  <span class="n">RawStorageFormat</span> <span class="n">m_format</span><span class="p">;</span>
+  <span class="n">U32</span> <span class="n">m_id</span><span class="p">{</span><span class="mi">0</span><span class="p">};</span>
+<span class="p">};</span>
+
+<span class="k">struct</span> <span class="n">VertexSlot</span> <span class="p">{</span>
+  <span class="n">BufferUsageRate</span> <span class="n">m_rate</span><span class="p">;</span>
+  <span class="n">SmallVector</span><span class="o">&lt;</span><span class="n">SlotSemantic</span><span class="p">,</span> <span class="mi">10</span><span class="o">&gt;</span> <span class="n">m_stride</span><span class="p">;</span>
+  <span class="n">U32</span> <span class="n">m_strideSize</span><span class="p">{</span><span class="mi">0</span><span class="p">};</span>
+  <span class="n">BufferSource</span> <span class="n">m_bufferSource</span><span class="p">{</span><span class="n">BufferSource</span><span class="o">::</span><span class="n">Normal</span><span class="p">};</span>
+<span class="p">};</span>
+
+<span class="k">struct</span> <span class="n">DescriptorSlotCreateInfo</span> <span class="p">{</span>
+  <span class="n">DescriptorType</span> <span class="n">m_type</span><span class="p">{</span><span class="n">DescriptorType</span><span class="o">::</span><span class="n">UniformBuffer</span><span class="p">};</span>
+  <span class="n">ShaderStage</span> <span class="n">m_stages</span><span class="p">{</span><span class="n">ShaderStage</span><span class="o">::</span><span class="n">All</span><span class="p">};</span>
+<span class="p">};</span>
+
+<span class="k">struct</span> <span class="n">DescriptorSlot</span> <span class="p">{</span>
+  <span class="n">U32</span> <span class="n">m_key</span><span class="p">{</span><span class="mi">0</span><span class="p">};</span>
+  <span class="n">DescriptorType</span> <span class="n">m_type</span><span class="p">{</span><span class="n">DescriptorType</span><span class="o">::</span><span class="n">UniformBuffer</span><span class="p">};</span>
+  <span class="n">ShaderStage</span> <span class="n">m_stages</span><span class="p">{</span><span class="n">ShaderStage</span><span class="o">::</span><span class="n">All</span><span class="p">};</span>
+  <span class="n">U32</span> <span class="n">m_setIdx</span><span class="p">{</span><span class="mi">0</span><span class="p">};</span>
+  <span class="n">U32</span> <span class="n">m_bindIdx</span><span class="p">{</span><span class="mi">0</span><span class="p">};</span>
+<span class="p">};</span>
+
+<span class="k">struct</span> <span class="n">TextureDesc</span> <span class="p">{</span>
+  <span class="n">Bounds3D</span> <span class="n">m_bounds</span><span class="p">{</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">};</span>
+  <span class="n">U32</span> <span class="n">m_size</span><span class="p">{</span><span class="mi">0</span><span class="p">};</span>
+  <span class="n">U32</span> <span class="n">m_mipLevels</span><span class="p">{</span><span class="mi">1</span><span class="p">};</span>
+  <span class="n">U32</span> <span class="n">m_arrayLayers</span><span class="p">{</span><span class="mi">1</span><span class="p">};</span>
+  <span class="n">ImageType</span> <span class="n">m_type</span><span class="p">{</span><span class="n">ImageType</span><span class="o">::</span><span class="n">Image2D</span><span class="p">};</span>
+  <span class="n">RawStorageFormat</span> <span class="n">m_format</span><span class="p">{</span><span class="n">RawStorageFormat</span><span class="o">::</span><span class="n">R8G8B8A8_UNORM</span><span class="p">};</span>
+<span class="p">};</span>
+
+<span class="k">enum</span> <span class="k">class</span> <span class="nc">TextureAddressMode</span> <span class="p">{</span>
+  <span class="n">Wrap</span><span class="p">,</span>
+  <span class="n">Mirror</span><span class="p">,</span>
+  <span class="n">Clamp</span><span class="p">,</span>
+  <span class="n">Border</span><span class="p">,</span>
+  <span class="n">MirrorOnce</span>
+<span class="p">};</span>
+
+<span class="k">enum</span> <span class="k">class</span> <span class="nc">TextureFilter</span> <span class="p">{</span>
+  <span class="n">MinMagMipPoint</span><span class="p">,</span>
+  <span class="n">MinMagPoint_MipLinear</span><span class="p">,</span>
+  <span class="n">MinPoint_MagLinear_MipPoint</span><span class="p">,</span>
+  <span class="n">MinPoint_MagMipLinear</span><span class="p">,</span>
+  <span class="n">MinLinear_MagMipPoint</span><span class="p">,</span>
+  <span class="n">MinLinear_MagPoint_MipLinear</span><span class="p">,</span>
+  <span class="n">MinMagLinear_MipPoint</span><span class="p">,</span>
+  <span class="n">MinMagMipLinear</span><span class="p">,</span>
+  <span class="n">Anisotropic</span><span class="p">,</span>
+<span class="p">};</span>
+
+<span class="k">struct</span> <span class="n">SamplerDesc</span> <span class="p">{</span>
+  <span class="n">TextureAddressMode</span> <span class="n">m_addressModeU</span><span class="p">{</span><span class="n">TextureAddressMode</span><span class="o">::</span><span class="n">Wrap</span><span class="p">};</span>
+  <span class="n">TextureAddressMode</span> <span class="n">m_addressModeV</span><span class="p">{</span><span class="n">TextureAddressMode</span><span class="o">::</span><span class="n">Wrap</span><span class="p">};</span>
+  <span class="n">TextureAddressMode</span> <span class="n">m_addressModeW</span><span class="p">{</span><span class="n">TextureAddressMode</span><span class="o">::</span><span class="n">Wrap</span><span class="p">};</span>
+
+  <span class="n">TextureFilter</span> <span class="n">m_filter</span><span class="p">{</span><span class="n">TextureFilter</span><span class="o">::</span><span class="n">MinMagMipLinear</span><span class="p">};</span>
+<span class="p">};</span>
+
+<span class="k">struct</span> <span class="n">BufferInfo</span> <span class="p">{</span>
+  <span class="n">U32</span> <span class="n">m_offset</span><span class="p">;</span>
+  <span class="n">U32</span> <span class="n">m_byteSize</span><span class="p">;</span>
+  <span class="n">U32</span> <span class="n">m_maxByteSize</span><span class="p">;</span>
+  <span class="n">U32</span> <span class="n">m_binding</span><span class="p">;</span>
+  <span class="n">U32</span> <span class="n">m_sourceBufferId</span><span class="p">;</span>
+
+  <span class="n">BufferInfo</span><span class="p">()</span>
+    <span class="o">:</span> <span class="n">m_offset</span><span class="p">(</span><span class="mi">0</span><span class="p">),</span>
+      <span class="n">m_byteSize</span><span class="p">(</span><span class="mi">0</span><span class="p">),</span>
+      <span class="n">m_maxByteSize</span><span class="p">(</span><span class="mi">0</span><span class="p">),</span>
+      <span class="n">m_binding</span><span class="p">(</span><span class="mi">0</span><span class="p">),</span>
+      <span class="n">m_sourceBufferId</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span> <span class="p">{</span>
+  <span class="p">}</span>
+<span class="p">};</span>
+
+<span class="k">enum</span> <span class="k">class</span> <span class="nc">BufferUpdateType</span> <span class="p">{</span>
+  <span class="n">UniformBuffer</span><span class="p">,</span>
+  <span class="n">Sampler</span><span class="p">,</span>
+  <span class="n">SampledImage</span><span class="p">,</span>
+  <span class="n">CombinedImageSampler</span><span class="p">,</span>
+  <span class="n">PushConstant</span><span class="p">,</span>
+  <span class="n">UnorderedView</span><span class="p">,</span>
+  <span class="n">Vertex</span><span class="p">,</span>
+  <span class="n">Instance</span>
+<span class="p">};</span>
+
+<span class="k">struct</span> <span class="n">BufferUpdate</span>
+<span class="p">{</span>
+  <span class="n">BufferUpdateType</span> <span class="n">m_type</span><span class="p">;</span>
+
+  <span class="n">U32</span> <span class="n">m_idx</span><span class="p">;</span>
+  <span class="n">U32</span> <span class="n">m_gpuOffset</span><span class="p">;</span>
+  <span class="n">U32</span> <span class="n">m_gpuByteSize</span><span class="p">;</span>
+
+  <span class="n">U32</span> <span class="n">m_updateOffset</span><span class="p">;</span>
+  <span class="n">U32</span> <span class="n">m_updateByteSize</span><span class="p">;</span>
+<span class="p">};</span>
+
+<span class="k">struct</span> <span class="n">TextureBufferInfo</span> <span class="k">final</span> <span class="o">:</span> <span class="k">public</span> <span class="n">BufferInfo</span> <span class="p">{</span>
+  <span class="n">TextureDesc</span> <span class="n">m_desc</span><span class="p">;</span>
+  <span class="n">U32</span> <span class="n">m_set</span><span class="p">{</span><span class="mi">0</span><span class="p">};</span>
+<span class="p">};</span>
+
+<span class="k">struct</span> <span class="n">SamplerInfo</span> <span class="p">{</span>
+  <span class="n">U32</span> <span class="n">m_set</span><span class="p">{</span><span class="mi">0</span><span class="p">};</span>
+  <span class="n">U32</span> <span class="n">m_binding</span><span class="p">{</span><span class="mi">0</span><span class="p">};</span>
+  <span class="n">SamplerDesc</span> <span class="n">m_desc</span><span class="p">{};</span>
+<span class="p">};</span>
+
+<span class="k">struct</span> <span class="n">UniformBufferInfo</span> <span class="k">final</span> <span class="o">:</span> <span class="k">public</span> <span class="n">BufferInfo</span> <span class="p">{</span>
+  <span class="n">U32</span> <span class="n">m_set</span><span class="p">{</span><span class="mi">0</span><span class="p">};</span>
+<span class="p">};</span>
+
+<span class="k">struct</span> <span class="n">BufferTargetInfo</span> <span class="k">final</span> <span class="o">:</span> <span class="k">public</span> <span class="n">BufferInfo</span> <span class="p">{</span>
+  <span class="n">U32</span> <span class="n">m_set</span><span class="p">{</span><span class="mi">0</span><span class="p">};</span>
+<span class="p">};</span>
+
+
+<span class="k">struct</span> <span class="n">LayerSubresource</span> <span class="p">{</span>
+  <span class="n">U32</span> <span class="n">m_layerCount</span><span class="p">{</span><span class="mi">1</span><span class="p">};</span>
+  <span class="n">U32</span> <span class="n">m_baseLayer</span><span class="p">{</span><span class="mi">0</span><span class="p">};</span>
+<span class="p">};</span>
+
+<span class="k">struct</span> <span class="n">TextureSubresource</span> <span class="p">{</span>
+  <span class="n">LayerSubresource</span> <span class="n">m_layerInfo</span><span class="p">{};</span>
+  <span class="n">U32</span> <span class="n">m_mipLevel</span><span class="p">{</span><span class="mi">0</span><span class="p">};</span>
+<span class="p">};</span>
+
+<span class="k">struct</span> <span class="n">TextureRequirements</span> <span class="p">{</span>
+  <span class="n">U32</span> <span class="n">m_maxCount</span><span class="p">{</span><span class="mi">0</span><span class="p">};</span>
+  <span class="n">U32</span> <span class="n">m_poolSize</span><span class="p">{</span><span class="mi">0</span><span class="p">};</span>
+<span class="p">};</span>
+
+<span class="k">struct</span> <span class="n">DeviceRequirements</span> <span class="p">{</span>
+  <span class="kt">bool</span> <span class="n">m_discreteGPU</span><span class="p">{</span><span class="nb">true</span><span class="p">};</span>
+  <span class="kt">bool</span> <span class="n">m_transferQueue</span><span class="p">{</span><span class="nb">false</span><span class="p">};</span>
+  <span class="kt">bool</span> <span class="n">m_float64</span><span class="p">{</span><span class="nb">false</span><span class="p">};</span>
+  <span class="kt">bool</span> <span class="n">m_int64</span><span class="p">{</span><span class="nb">false</span><span class="p">};</span>
+<span class="p">};</span>
+
+<span class="k">struct</span> <span class="n">ApplicationInfo</span> <span class="p">{</span>
+  <span class="n">std</span><span class="o">::</span><span class="n">string</span> <span class="n">m_name</span><span class="p">;</span>
+  <span class="n">Version</span> <span class="n">m_version</span><span class="p">;</span>
+<span class="p">};</span>
+
+<span class="k">constexpr</span> <span class="n">U32</span> <span class="n">DEFAULT_FRAMES_IN_FLIGHT</span> <span class="o">=</span> <span class="mi">2</span><span class="p">;</span>
+<span class="k">constexpr</span> <span class="n">U32</span> <span class="n">MAX_RENDER_PASS_INPUTS</span>   <span class="o">=</span> <span class="mi">10</span><span class="p">;</span>
+<span class="k">constexpr</span> <span class="n">U32</span> <span class="n">MAX_RENDER_PASS_OUTPUTS</span>  <span class="o">=</span> <span class="mi">10</span><span class="p">;</span>
+<span class="k">constexpr</span> <span class="n">U32</span> <span class="n">MAX_RENDER_PASS_SETS</span>     <span class="o">=</span> <span class="mi">10</span><span class="p">;</span>
+<span class="k">constexpr</span> <span class="n">U32</span> <span class="n">MAX_RENDER_PASS_SHADERS</span>  <span class="o">=</span> <span class="mi">10</span><span class="p">;</span>
+
+<span class="k">struct</span> <span class="n">MemoryRequirements</span> <span class="p">{</span>
+  <span class="n">U32</span> <span class="n">m_stagingBufferSize</span><span class="p">{</span><span class="mh">0x4000000</span><span class="p">};</span>
+<span class="p">};</span>
+
+<span class="k">struct</span> <span class="n">ApplicationRequirements</span> <span class="p">{</span>
+  <span class="n">MemoryRequirements</span> <span class="n">m_renderer</span><span class="p">;</span>
+<span class="p">};</span>
+
+<span class="k">struct</span> <span class="n">SwapChainRequirements</span> <span class="p">{</span>
+  <span class="n">RawStorageFormat</span> <span class="n">m_format</span><span class="p">{};</span>
+  <span class="n">RawStorageFormat</span> <span class="n">m_depthFormat</span><span class="p">{};</span>
+  <span class="n">Bounds2D</span> <span class="n">m_extent</span><span class="p">{</span><span class="mi">0u</span><span class="p">,</span> <span class="mi">0u</span><span class="p">};</span>
+  <span class="n">ColorSpace</span> <span class="n">m_colorSpace</span><span class="p">{};</span>
+  <span class="n">U32</span> <span class="n">m_framesInFlight</span><span class="p">{</span><span class="n">DEFAULT_FRAMES_IN_FLIGHT</span><span class="p">};</span>
+<span class="p">};</span>
+
+<span class="k">struct</span> <span class="n">ShaderCreateInfo</span> <span class="p">{</span>
+  <span class="n">ShaderStage</span> <span class="n">m_stage</span><span class="p">;</span>
+  <span class="n">String</span> <span class="n">m_shaderFileName</span><span class="p">;</span>
+  <span class="n">AssetLocation</span> <span class="n">location</span><span class="p">;</span>
+<span class="p">};</span>
+
+<span class="k">struct</span> <span class="n">RenderTargetCreateInfo</span> <span class="p">{</span>
+  <span class="n">RawStorageFormat</span> <span class="n">m_format</span><span class="p">{</span><span class="n">RawStorageFormat</span><span class="o">::</span><span class="n">UNKNOWN</span><span class="p">};</span>
+  <span class="kt">int</span> <span class="n">m_width</span><span class="p">{</span><span class="o">-</span><span class="mi">1</span><span class="p">};</span>
+  <span class="kt">int</span> <span class="n">m_height</span><span class="p">{</span><span class="o">-</span><span class="mi">1</span><span class="p">};</span>
+  <span class="kt">int</span> <span class="n">m_depth</span><span class="p">{</span><span class="mi">1</span><span class="p">};</span>
+<span class="p">};</span>
+
+<span class="k">struct</span> <span class="n">StructuredBufferCreateInfo</span> <span class="p">{</span>
+  <span class="n">U32</span> <span class="n">m_size</span><span class="p">;</span>
+  <span class="n">U32</span> <span class="n">m_stride</span><span class="p">;</span>
+<span class="p">};</span>
+
+<span class="k">struct</span> <span class="n">PipelinePassInput</span> <span class="p">{</span>
+  <span class="n">U32</span> <span class="n">m_id</span><span class="p">;</span>
+  <span class="n">ShaderStage</span> <span class="n">m_stages</span><span class="p">;</span>
+<span class="p">};</span>
+
+<span class="k">struct</span> <span class="n">ClearData</span> <span class="p">{</span>
+  <span class="kt">float</span> <span class="n">m_color</span><span class="p">[</span><span class="mi">4</span><span class="p">]{</span><span class="mf">0.0f</span><span class="p">,</span> <span class="mf">0.0f</span><span class="p">,</span> <span class="mf">0.0f</span><span class="p">,</span> <span class="mf">1.0f</span><span class="p">};</span>
+  <span class="kt">float</span> <span class="n">m_depth</span><span class="p">{</span><span class="mf">1.0f</span><span class="p">};</span>
+  <span class="n">U8</span> <span class="n">m_stencil</span><span class="p">{</span><span class="mi">0</span><span class="p">};</span>
+<span class="p">};</span>
+
+<span class="k">struct</span> <span class="n">PipelinePassCreateInfo</span> <span class="p">{</span>
+  <span class="k">using</span> <span class="n">Shaders</span> <span class="o">=</span> <span class="n">SmallVector</span><span class="o">&lt;</span><span class="n">U32</span><span class="p">,</span> <span class="n">MAX_RENDER_PASS_SHADERS</span><span class="o">&gt;</span><span class="p">;</span>
+  <span class="k">using</span> <span class="n">OutputTargets</span> <span class="o">=</span> <span class="n">SmallVector</span><span class="o">&lt;</span><span class="n">U32</span><span class="p">,</span> <span class="n">MAX_RENDER_PASS_OUTPUTS</span><span class="o">&gt;</span><span class="p">;</span>
+  <span class="k">using</span> <span class="n">OutputBuffers</span> <span class="o">=</span> <span class="n">SmallVector</span><span class="o">&lt;</span><span class="n">U32</span><span class="p">,</span> <span class="n">MAX_RENDER_PASS_OUTPUTS</span><span class="o">&gt;</span><span class="p">;</span>
+  <span class="k">using</span> <span class="n">InputTargets</span> <span class="o">=</span> <span class="n">SmallVector</span><span class="o">&lt;</span><span class="n">PipelinePassInput</span><span class="p">,</span> <span class="n">MAX_RENDER_PASS_INPUTS</span><span class="o">&gt;</span><span class="p">;</span>
+  <span class="k">using</span> <span class="n">InputBuffers</span> <span class="o">=</span> <span class="n">SmallVector</span><span class="o">&lt;</span><span class="n">PipelinePassInput</span><span class="p">,</span> <span class="n">MAX_RENDER_PASS_INPUTS</span><span class="o">&gt;</span><span class="p">;</span>
+  <span class="k">using</span> <span class="n">DescriptorSets</span> <span class="o">=</span> <span class="n">SmallVector</span><span class="o">&lt;</span><span class="n">U32</span><span class="p">,</span> <span class="n">MAX_RENDER_PASS_SETS</span><span class="o">&gt;</span><span class="p">;</span>
+
+  <span class="n">Shaders</span> <span class="n">m_shaders</span><span class="p">{};</span>
+
+  <span class="n">InputTargets</span> <span class="n">m_inputTargets</span><span class="p">{};</span>
+  <span class="n">InputBuffers</span> <span class="n">m_inputBuffers</span><span class="p">{};</span>
+  <span class="n">OutputTargets</span> <span class="n">m_outputTargets</span><span class="p">{};</span>
+  <span class="n">OutputBuffers</span> <span class="n">m_outputBuffers</span><span class="p">{};</span>
+  <span class="n">DescriptorSets</span> <span class="n">m_descriptorSets</span><span class="p">{};</span>
+
+  <span class="n">ClearData</span> <span class="n">m_clearData</span><span class="p">{};</span>
+  <span class="n">BlendState</span> <span class="n">m_blendState</span><span class="p">{};</span>
+  <span class="n">RenderPassType</span> <span class="n">m_type</span><span class="p">{</span><span class="n">RenderPassType</span><span class="o">::</span><span class="n">Graphics</span><span class="p">};</span>
+<span class="p">};</span>
+
+<span class="k">struct</span> <span class="n">DescriptorRequirements</span> <span class="p">{</span>
+  <span class="n">DescriptorRequirements</span><span class="p">(</span><span class="n">U32</span> <span class="n">numDescriptors</span><span class="p">,</span> <span class="n">U32</span> <span class="n">numSets</span><span class="p">,</span> <span class="n">Memory</span><span class="o">::</span><span class="n">Allocator</span><span class="o">&amp;</span> <span class="n">alloc</span><span class="p">);</span>
+  <span class="n">U32</span> <span class="nf">AddDescriptor</span><span class="p">(</span><span class="k">const</span> <span class="n">DescriptorSlotCreateInfo</span><span class="o">&amp;</span> <span class="n">info</span><span class="p">);</span>
+  <span class="n">U32</span> <span class="nf">AddSet</span><span class="p">(</span><span class="k">const</span> <span class="n">std</span><span class="o">::</span><span class="n">initializer_list</span><span class="o">&lt;</span><span class="n">U32</span><span class="o">&gt;&amp;</span> <span class="n">sets</span><span class="p">);</span>
+
+  <span class="n">Containers</span><span class="o">::</span><span class="n">Vector</span><span class="o">&lt;</span><span class="n">DescriptorSlotCreateInfo</span><span class="o">&gt;</span> <span class="n">m_descriptorSlots</span><span class="p">;</span>
+  <span class="n">Containers</span><span class="o">::</span><span class="n">Vector</span><span class="o">&lt;</span><span class="n">Containers</span><span class="o">::</span><span class="n">Vector</span><span class="o">&lt;</span><span class="n">U32</span><span class="o">&gt;&gt;</span> <span class="n">m_descriptorSets</span><span class="p">;</span>
+
+<span class="k">private</span><span class="o">:</span>
+  <span class="n">std</span><span class="o">::</span><span class="n">reference_wrapper</span><span class="o">&lt;</span><span class="n">Memory</span><span class="o">::</span><span class="n">Allocator</span><span class="o">&gt;</span> <span class="n">m_allocator</span><span class="p">;</span>
+<span class="p">};</span>
+
+<span class="k">struct</span> <span class="n">ShaderRequirements</span> <span class="p">{</span>
+  <span class="n">ShaderRequirements</span><span class="p">(</span><span class="n">U32</span> <span class="n">numShaders</span><span class="p">,</span> <span class="n">Memory</span><span class="o">::</span><span class="n">Allocator</span><span class="o">&amp;</span> <span class="n">allocator</span><span class="p">);</span>
+  <span class="n">U32</span> <span class="nf">AddShader</span><span class="p">(</span><span class="k">const</span> <span class="n">ShaderCreateInfo</span><span class="o">&amp;</span> <span class="n">info</span><span class="p">);</span>
+
+  <span class="n">Containers</span><span class="o">::</span><span class="n">Vector</span><span class="o">&lt;</span><span class="n">ShaderCreateInfo</span><span class="o">&gt;</span> <span class="n">m_shaders</span><span class="p">;</span>
+<span class="p">};</span>
+
+<span class="k">struct</span> <span class="n">RenderPassRequirements</span> <span class="p">{</span>
+  <span class="n">RenderPassRequirements</span><span class="p">(</span><span class="n">U32</span> <span class="n">numRenderTargets</span><span class="p">,</span> <span class="n">U32</span> <span class="n">numPasses</span><span class="p">,</span> <span class="n">U32</span> <span class="n">numBuffers</span><span class="p">,</span> <span class="n">Memory</span><span class="o">::</span><span class="n">Allocator</span><span class="o">&amp;</span> <span class="n">alloc</span><span class="p">);</span>
+  <span class="n">U32</span> <span class="nf">AddTarget</span><span class="p">(</span><span class="k">const</span> <span class="n">RenderTargetCreateInfo</span><span class="o">&amp;</span> <span class="n">info</span><span class="p">);</span>
+  <span class="n">U32</span> <span class="nf">AddBuffer</span><span class="p">(</span><span class="k">const</span> <span class="n">StructuredBufferCreateInfo</span><span class="o">&amp;</span> <span class="n">info</span><span class="p">);</span>
+  <span class="n">U32</span> <span class="nf">AddPass</span><span class="p">(</span><span class="k">const</span> <span class="n">PipelinePassCreateInfo</span><span class="o">&amp;</span> <span class="n">info</span><span class="p">);</span>
+
+  <span class="n">Containers</span><span class="o">::</span><span class="n">Vector</span><span class="o">&lt;</span><span class="n">StructuredBufferCreateInfo</span><span class="o">&gt;</span> <span class="n">m_buffers</span><span class="p">;</span>
+  <span class="n">Containers</span><span class="o">::</span><span class="n">Vector</span><span class="o">&lt;</span><span class="n">RenderTargetCreateInfo</span><span class="o">&gt;</span> <span class="n">m_targets</span><span class="p">;</span>
+  <span class="n">Containers</span><span class="o">::</span><span class="n">Vector</span><span class="o">&lt;</span><span class="n">PipelinePassCreateInfo</span><span class="o">&gt;</span> <span class="n">m_passSequence</span><span class="p">;</span>
+
+  <span class="n">U32</span> <span class="n">m_maxPools</span><span class="p">{</span><span class="mi">1</span><span class="p">};</span>
+<span class="p">};</span>
+
+<span class="k">struct</span> <span class="n">DescriptorCount</span> <span class="p">{</span>
+  <span class="n">U32</span> <span class="n">m_numUniformSlots</span><span class="p">{</span><span class="mi">0</span><span class="p">};</span>
+  <span class="n">U32</span> <span class="n">m_numSamplerSlots</span><span class="p">{</span><span class="mi">0</span><span class="p">};</span>
+  <span class="n">U32</span> <span class="n">m_numCombinedSamplerSlots</span><span class="p">{</span><span class="mi">0</span><span class="p">};</span>
+  <span class="n">U32</span> <span class="n">m_numSampledImageSlots</span><span class="p">{</span><span class="mi">0</span><span class="p">};</span>
+  <span class="n">U32</span> <span class="n">m_numPushConstantsSlots</span><span class="p">{</span><span class="mi">0</span><span class="p">};</span>
+  <span class="n">U32</span> <span class="n">m_numUnorderedViewSlots</span><span class="p">{</span><span class="mi">0</span><span class="p">};</span>
+<span class="p">};</span>
+
+<span class="k">struct</span> <span class="n">ThreadGroupDimensions</span>
+<span class="p">{</span>
+  <span class="n">U32</span> <span class="n">m_x</span><span class="p">{</span><span class="mi">1</span><span class="p">};</span>
+  <span class="n">U32</span> <span class="n">m_y</span><span class="p">{</span><span class="mi">1</span><span class="p">};</span>
+  <span class="n">U32</span> <span class="n">m_z</span><span class="p">{</span><span class="mi">1</span><span class="p">};</span>
+<span class="p">};</span>
+
+<span class="k">struct</span> <span class="n">DescriptorTableEntry</span> <span class="p">{</span>
+  <span class="kt">int</span> <span class="n">m_count</span><span class="p">{</span><span class="mi">1</span><span class="p">};</span>
+  <span class="kt">int</span> <span class="n">m_cumulativeCount</span><span class="p">{</span><span class="mi">0</span><span class="p">};</span>
+  <span class="n">DescriptorType</span> <span class="n">m_type</span><span class="p">;</span>
+<span class="p">};</span>
+
+<span class="p">}</span> <span class="c1">// namespace Azura</span>
+</pre></div>
+</div>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="file_Source_Physics_Inc_Physics_Geometry_GenericTypes.h.html" class="btn btn-neutral float-right" title="File GenericTypes.h" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="file_Source_Azura_RenderSystem_Inc_Generic_GenericTypes.h.html" class="btn btn-neutral" title="File GenericTypes.h" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2018, Vasu Mahesh
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  
+
+    
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+        <script type="text/javascript" src="../_static/jquery.js"></script>
+        <script type="text/javascript" src="../_static/underscore.js"></script>
+        <script type="text/javascript" src="../_static/doctools.js"></script>
+        <script type="text/javascript" src="../_static/collapsible-lists\js\CollapsibleLists.compressed.js"></script>
+        <script type="text/javascript" src="../_static/collapsible-lists\js\apply-collapsible-lists.js"></script>
+    
+
+  
+
+  <script type="text/javascript" src="../_static/js/theme.js"></script>
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

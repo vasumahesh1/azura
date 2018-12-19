@@ -1,0 +1,966 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>Template Class Vector &mdash; Azura  documentation</title>
+  
+
+  
+  
+  
+  
+
+  
+
+  
+  
+    
+
+  
+
+  <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/collapsible-lists\css\tree_view.css" type="text/css" />
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Class Vector::Iterator" href="class_azura_1_1_containers_1_1_vector_1_1_iterator.html" />
+    <link rel="prev" title="Template Class ArrayBatch" href="class_azura_1_1_containers_1_1_array_batch.html" /> 
+
+  
+  <script src="../_static/js/modernizr.min.js"></script>
+
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search">
+          
+
+          
+            <a href="../index.html" class="icon icon-home"> Azura
+          
+
+          
+          </a>
+
+          
+            
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <ul>
+<li class="toctree-l1"><a class="reference internal" href="../setting-up.html">Setting Up</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../build-instructions.html">Build Instructions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../cmake-wrappers.html">CMake Wrappers</a></li>
+<li class="toctree-l1"><a class="reference internal" href="apiRoot.html">Azura API</a></li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">Azura</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../index.html">Docs</a> &raquo;</li>
+        
+          <li><a href="apiRoot.html">Azura API</a> &raquo;</li>
+        
+      <li>Template Class Vector</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            <a href="../_sources/html/class_azura_1_1_containers_1_1_vector.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="template-class-vector">
+<span id="exhale-class-class-azura-1-1-containers-1-1-vector"></span><h1>Template Class Vector<a class="headerlink" href="#template-class-vector" title="Permalink to this headline">¶</a></h1>
+<ul class="simple">
+<li>Defined in <a class="reference internal" href="file_Source_Containers_Inc_Containers_Vector.h.html#file-source-containers-inc-containers-vector-h"><span class="std std-ref">File Vector.h</span></a></li>
+</ul>
+<div class="section" id="nested-relationships">
+<h2>Nested Relationships<a class="headerlink" href="#nested-relationships" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="nested-types">
+<h3>Nested Types<a class="headerlink" href="#nested-types" title="Permalink to this headline">¶</a></h3>
+<ul class="simple">
+<li><a class="reference internal" href="class_azura_1_1_containers_1_1_vector_1_1_iterator.html#exhale-class-class-azura-1-1-containers-1-1-vector-1-1-iterator"><span class="std std-ref">Class Vector::Iterator</span></a></li>
+</ul>
+</div>
+</div>
+<div class="section" id="class-documentation">
+<h2>Class Documentation<a class="headerlink" href="#class-documentation" title="Permalink to this headline">¶</a></h2>
+<dl class="class">
+<dt id="_CPPv3N5Azura10Containers6VectorE">
+<span id="_CPPv2N5Azura10Containers6VectorE"></span><span id="Azura::Containers::Vector"></span><span class="target" id="class_azura_1_1_containers_1_1_vector"></span><em class="property">template </em>&lt;typename <em>Type</em>&gt;<br /><em class="property">class </em><code class="descname">Vector</code><a class="headerlink" href="#_CPPv3N5Azura10Containers6VectorE" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Class for customized vector. </p>
+<p>This class is used to construct a customized Azura vector. Azura vectors take advantage of a custom allocator. The custom allocators allows them to be created on the Stack or the Heap.</p>
+<p>They also don’t “allocate” new memory. Allocation is handled by the supplied <a class="reference internal" href="class_azura_1_1_memory_1_1_allocator.html#class_azura_1_1_memory_1_1_allocator"><span class="std std-ref">Azura::Memory::Allocator</span></a> class.</p>
+<p>Azura Vectors are also “reserve” first. This basically means that the vector reserves a chunk first, instead of reserving and initializing like std::vector. This is probably the main difference between the two. Here is an example:</p>
+<p><div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="n">Containers</span><span class="o">::</span><span class="n">Vector</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;</span> <span class="n">arr</span><span class="p">(</span><span class="mi">5</span><span class="p">,</span> <span class="n">allocator</span><span class="p">);</span>
+<span class="c1">// above code allocates a memory upto 5 ints. But arr[0 to 4] doesn&#39;t exist.</span>
+<span class="c1">// arr.GetSize() will be 0</span>
+<span class="c1">// arr.GetMaxSize() will be 5</span>
+
+<span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;</span> <span class="n">arr</span><span class="p">(</span><span class="mi">5</span><span class="p">);</span>
+<span class="c1">// above code allocates and initializes a memory upto 5 ints.</span>
+<span class="c1">// arr.size() will be 5</span>
+<span class="c1">// arr.capacity() will be 5</span>
+</pre></div>
+</div>
+</p>
+<p>Both vectors tend to grow. But growing vectors are bad so watch out. Pre-allocate as much as you can beforehand.</p>
+<p>The API for Azura <a class="reference internal" href="#class_azura_1_1_containers_1_1_vector"><span class="std std-ref">Vector</span></a> is similar but Pascal Case’d mostly. Example:</p>
+<p><div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="n">Containers</span><span class="o">::</span><span class="n">Vector</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;</span> <span class="n">arr</span><span class="p">(</span><span class="mi">5</span><span class="p">,</span> <span class="n">allocator</span><span class="p">);</span>
+<span class="n">arr</span><span class="p">.</span><span class="n">PushBack</span><span class="p">(</span><span class="mi">0</span><span class="p">);</span> <span class="c1">// similar to push_back</span>
+<span class="n">arr</span><span class="p">.</span><span class="n">Begin</span><span class="p">();</span>
+<span class="n">arr</span><span class="p">.</span><span class="n">End</span><span class="p">();</span>
+</pre></div>
+</div>
+ Pascal case was selected because Azura keeps the API similar across all C++ code. And most of the Game Engine code that was initially built followed this scheme.</p>
+<p><dl class="docutils">
+<dt><strong>Template Parameters</strong></dt>
+<dd><ul class="breatheparameterlist first last simple">
+<li><code class="docutils literal notranslate"><span class="pre">Type</span></code>: Datatype of the vector </li>
+</ul>
+</dd>
+</dl>
+</p>
+<div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric">Public Functions</p>
+<dl class="function">
+<dt id="_CPPv3N5Azura10Containers6Vector6VectorERN6Memory9AllocatorE">
+<span id="_CPPv2N5Azura10Containers6Vector6VectorERN6Memory9AllocatorE"></span><span id="Azura::Containers::Vector::Vector__Memory::AllocatorR"></span><span class="target" id="class_azura_1_1_containers_1_1_vector_1a6f3debb85587cf01eef9bddcb14c58fb"></span><code class="descname">Vector</code><span class="sig-paren">(</span>Memory::<a class="reference internal" href="class_azura_1_1_memory_1_1_allocator.html#_CPPv3N5Azura6Memory9AllocatorE" title="Azura::Memory::Allocator">Allocator</a> &amp;<em>alloc</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv3N5Azura10Containers6Vector6VectorERN6Memory9AllocatorE" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Constructs a 0 sized vector with an allocator. </p>
+<p>An empty vector doesn’t reserve any space on the allocator. It is required to reserve the vector before you use it.</p>
+<p>Example: <div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="n">Containers</span><span class="o">::</span><span class="n">Vector</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;</span> <span class="n">arr</span><span class="p">(</span><span class="n">allocator</span><span class="p">);</span>
+<span class="c1">// The vector is still of size 0. The capacity is 0.</span>
+
+<span class="c1">// ...</span>
+<span class="c1">// Later in code</span>
+<span class="c1">// ...</span>
+
+<span class="n">arr</span><span class="p">.</span><span class="n">Resize</span><span class="p">(</span><span class="mi">5</span><span class="p">);</span>
+<span class="c1">// This allocates a 5 sized int vector</span>
+<span class="c1">// The vector is of size 5. The capacity is 5.</span>
+
+<span class="c1">// ---- OR ----</span>
+
+<span class="n">arr</span><span class="p">.</span><span class="n">Reserve</span><span class="p">(</span><span class="mi">5</span><span class="p">);</span>
+<span class="c1">// This allocates a 5 sized int vector</span>
+<span class="c1">// The vector is still of size 0. The capacity is 5.</span>
+</pre></div>
+</div>
+ <dl class="docutils">
+<dt><strong>Parameters</strong></dt>
+<dd><ul class="breatheparameterlist first last simple">
+<li><code class="docutils literal notranslate"><span class="pre">alloc</span></code>: The allocator </li>
+</ul>
+</dd>
+</dl>
+</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="_CPPv3N5Azura10Containers6Vector6VectorE4UINTRN6Memory9AllocatorE">
+<span id="_CPPv2N5Azura10Containers6Vector6VectorE4UINTRN6Memory9AllocatorE"></span><span id="Azura::Containers::Vector::Vector__UINT.Memory::AllocatorR"></span><span class="target" id="class_azura_1_1_containers_1_1_vector_1a57b086de3f62679d082a086300138636"></span><code class="descname">Vector</code><span class="sig-paren">(</span>UINT <em>maxSize</em>, Memory::<a class="reference internal" href="class_azura_1_1_memory_1_1_allocator.html#_CPPv3N5Azura6Memory9AllocatorE" title="Azura::Memory::Allocator">Allocator</a> &amp;<em>alloc</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv3N5Azura10Containers6Vector6VectorE4UINTRN6Memory9AllocatorE" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Constructs a vector accepting reserved size and allocator. </p>
+<p>This constructor <strong>reserves</strong> the specified size in the vector. The vector is of still size 0.</p>
+<p>Example: <div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="n">Containers</span><span class="o">::</span><span class="n">Vector</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;</span> <span class="n">arr</span><span class="p">(</span><span class="mi">5</span><span class="p">,</span> <span class="n">allocator</span><span class="p">);</span>
+
+<span class="c1">// This allocates a 5 sized int vector</span>
+<span class="c1">// The vector is still of size 0. The capacity is 5.</span>
+</pre></div>
+</div>
+</p>
+<p><dl class="docutils">
+<dt><strong>Parameters</strong></dt>
+<dd><ul class="breatheparameterlist first last simple">
+<li><code class="docutils literal notranslate"><span class="pre">maxSize</span></code>: The maximum size </li>
+<li><code class="docutils literal notranslate"><span class="pre">alloc</span></code>: The allocator </li>
+</ul>
+</dd>
+</dl>
+</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="_CPPv3N5Azura10Containers6Vector6VectorE4UINT4UINTRN6Memory9AllocatorE">
+<span id="_CPPv2N5Azura10Containers6Vector6VectorE4UINT4UINTRN6Memory9AllocatorE"></span><span id="Azura::Containers::Vector::Vector__UINT.UINT.Memory::AllocatorR"></span><span class="target" id="class_azura_1_1_containers_1_1_vector_1af816fc5ac5a9e5060f6c88cb4e8beaa3"></span><code class="descname">Vector</code><span class="sig-paren">(</span>UINT <em>currentSize</em>, UINT <em>maxSize</em>, Memory::<a class="reference internal" href="class_azura_1_1_memory_1_1_allocator.html#_CPPv3N5Azura6Memory9AllocatorE" title="Azura::Memory::Allocator">Allocator</a> &amp;<em>alloc</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv3N5Azura10Containers6Vector6VectorE4UINT4UINTRN6Memory9AllocatorE" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Construct a vector using size and max size. </p>
+<p>This constructor <strong>reserves and constructs</strong> the specified sizes in the vector.</p>
+<p>Example: <div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="n">Containers</span><span class="o">::</span><span class="n">Vector</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;</span> <span class="n">arr</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="n">allocator</span><span class="p">);</span>
+
+<span class="c1">// This allocates a 5 sized int vector</span>
+<span class="c1">// The vector is of size 2. The capacity is 5.</span>
+</pre></div>
+</div>
+</p>
+<p><dl class="docutils">
+<dt><strong>Parameters</strong></dt>
+<dd><ul class="breatheparameterlist first last simple">
+<li><code class="docutils literal notranslate"><span class="pre">currentSize</span></code>: The current size </li>
+<li><code class="docutils literal notranslate"><span class="pre">maxSize</span></code>: The maximum size </li>
+<li><code class="docutils literal notranslate"><span class="pre">alloc</span></code>: The allocator </li>
+</ul>
+</dd>
+</dl>
+</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="_CPPv3N5Azura10Containers6Vector6VectorERKNSt16initializer_listI4TypeEERN6Memory9AllocatorE">
+<span id="_CPPv2N5Azura10Containers6Vector6VectorERKNSt16initializer_listI4TypeEERN6Memory9AllocatorE"></span><span id="Azura::Containers::Vector::Vector__std::initializer_list:Type:CR.Memory::AllocatorR"></span><span class="target" id="class_azura_1_1_containers_1_1_vector_1a791c8721cacac5dd785a45a98e45d4a8"></span><code class="descname">Vector</code><span class="sig-paren">(</span><em class="property">const</em> std::initializer_list&lt;Type&gt; &amp;<em>list</em>, Memory::<a class="reference internal" href="class_azura_1_1_memory_1_1_allocator.html#_CPPv3N5Azura6Memory9AllocatorE" title="Azura::Memory::Allocator">Allocator</a> &amp;<em>alloc</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv3N5Azura10Containers6Vector6VectorERKNSt16initializer_listI4TypeEERN6Memory9AllocatorE" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Construct a vector using an initializer list. </p>
+<p>Example: <div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="n">Containers</span><span class="o">::</span><span class="n">Vector</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;</span> <span class="n">arr</span><span class="p">({</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">5</span><span class="p">},</span> <span class="n">allocator</span><span class="p">);</span>
+
+<span class="c1">// This allocates a 5 sized int vector with that values</span>
+<span class="c1">// The vector is of size 5. The capacity is 5.</span>
+</pre></div>
+</div>
+</p>
+<p><dl class="docutils">
+<dt><strong>Parameters</strong></dt>
+<dd><ul class="breatheparameterlist first last simple">
+<li><code class="docutils literal notranslate"><span class="pre">list</span></code>: The list </li>
+<li><code class="docutils literal notranslate"><span class="pre">alloc</span></code>: The allocator </li>
+</ul>
+</dd>
+</dl>
+</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="_CPPv3N5Azura10Containers6Vector6VectorE15ContainerExtentRN6Memory9AllocatorEDpRR4Args">
+<span id="_CPPv2N5Azura10Containers6Vector6VectorE15ContainerExtentRN6Memory9AllocatorEDpRR4Args"></span><span id="Azura::Containers::Vector::Vector__ContainerExtent.Memory::AllocatorR.ArgsRRDp"></span><em class="property">template </em>&lt;typename... <em>Args</em>&gt;<br /><span class="target" id="class_azura_1_1_containers_1_1_vector_1a11574d6d332a04eccebcc4f0255275b4"></span><code class="descname">Vector</code><span class="sig-paren">(</span><a class="reference internal" href="struct_azura_1_1_containers_1_1_container_extent.html#_CPPv3N5Azura10Containers15ContainerExtentE" title="Azura::Containers::ContainerExtent">ContainerExtent</a> <em>extent</em>, Memory::<a class="reference internal" href="class_azura_1_1_memory_1_1_allocator.html#_CPPv3N5Azura6Memory9AllocatorE" title="Azura::Memory::Allocator">Allocator</a> &amp;<em>alloc</em>, Args&amp;&amp;... <em>args</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv3N5Azura10Containers6Vector6VectorE15ContainerExtentRN6Memory9AllocatorEDpRR4Args" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Constructs the vector using the extent. </p>
+<p>Also, you can provide initialization arguments along with the extent.</p>
+<p>Example: <div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="n">Containers</span><span class="o">::</span><span class="n">Vector</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;</span> <span class="n">arr</span><span class="p">(</span><span class="n">ContainerExtent</span><span class="p">{</span><span class="mi">5</span><span class="p">},</span> <span class="n">allocator</span><span class="p">,</span> <span class="mi">6</span><span class="p">);</span>
+
+<span class="c1">// This allocates a 5 sized int vector with the value 6.</span>
+<span class="c1">// The vector is of size 5. The capacity is 5.</span>
+</pre></div>
+</div>
+</p>
+<p><dl class="docutils">
+<dt><strong>Parameters</strong></dt>
+<dd><ul class="breatheparameterlist first last simple">
+<li><code class="docutils literal notranslate"><span class="pre">extent</span></code>: The extent </li>
+<li><code class="docutils literal notranslate"><span class="pre">alloc</span></code>: The allocator </li>
+<li><code class="docutils literal notranslate"><span class="pre">args</span></code>: Initialization arguments</li>
+</ul>
+</dd>
+<dt><strong>Template Parameters</strong></dt>
+<dd><ul class="breatheparameterlist first last simple">
+<li><code class="docutils literal notranslate"><span class="pre">Args</span></code>: Arguments </li>
+</ul>
+</dd>
+</dl>
+</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="_CPPv3N5Azura10Containers6VectorD0Ev">
+<span id="_CPPv2N5Azura10Containers6VectorD0Ev"></span><span id="Azura::Containers::Vector::~Vector"></span><span class="target" id="class_azura_1_1_containers_1_1_vector_1a81495c5eec68f60da33123073cdde942"></span><code class="descname">~Vector</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv3N5Azura10Containers6VectorD0Ev" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Destroys the vector and frees the memory in the allocator. </p>
+</dd></dl>
+
+<dl class="function">
+<dt id="_CPPv3N5Azura10Containers6Vector6VectorERK6Vector">
+<span id="_CPPv2N5Azura10Containers6Vector6VectorERK6Vector"></span><span id="Azura::Containers::Vector::Vector__VectorCR"></span><span class="target" id="class_azura_1_1_containers_1_1_vector_1a3b25f7177d538d7bb646ceb5fa46f30c"></span><code class="descname">Vector</code><span class="sig-paren">(</span><em class="property">const</em> <a class="reference internal" href="#_CPPv3N5Azura10Containers6Vector6VectorERN6Memory9AllocatorE" title="Azura::Containers::Vector::Vector">Vector</a> &amp;<em>other</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv3N5Azura10Containers6Vector6VectorERK6Vector" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt id="_CPPv3N5Azura10Containers6Vector6VectorERK6VectorRN6Memory9AllocatorE">
+<span id="_CPPv2N5Azura10Containers6Vector6VectorERK6VectorRN6Memory9AllocatorE"></span><span id="Azura::Containers::Vector::Vector__VectorCR.Memory::AllocatorR"></span><span class="target" id="class_azura_1_1_containers_1_1_vector_1afa47d6fd1b56460466a5b15a1030c439"></span><code class="descname">Vector</code><span class="sig-paren">(</span><em class="property">const</em> <a class="reference internal" href="#_CPPv3N5Azura10Containers6Vector6VectorERN6Memory9AllocatorE" title="Azura::Containers::Vector::Vector">Vector</a> &amp;<em>other</em>, Memory::<a class="reference internal" href="class_azura_1_1_memory_1_1_allocator.html#_CPPv3N5Azura6Memory9AllocatorE" title="Azura::Memory::Allocator">Allocator</a> &amp;<em>alloc</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv3N5Azura10Containers6Vector6VectorERK6VectorRN6Memory9AllocatorE" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt id="_CPPv3N5Azura10Containers6Vector6VectorERR6Vector">
+<span id="_CPPv2N5Azura10Containers6Vector6VectorERR6Vector"></span><span id="Azura::Containers::Vector::Vector__VectorRR"></span><span class="target" id="class_azura_1_1_containers_1_1_vector_1a2552d6447e1aeccdd359a50f9c52d016"></span><code class="descname">Vector</code><span class="sig-paren">(</span><a class="reference internal" href="#_CPPv3N5Azura10Containers6Vector6VectorERN6Memory9AllocatorE" title="Azura::Containers::Vector::Vector">Vector</a> &amp;&amp;<em>other</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv3N5Azura10Containers6Vector6VectorERR6Vector" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt id="_CPPv3N5Azura10Containers6VectoraSERK6Vector">
+<span id="_CPPv2N5Azura10Containers6VectoraSERK6Vector"></span><span id="Azura::Containers::Vector::assign-operator__VectorCR"></span><span class="target" id="class_azura_1_1_containers_1_1_vector_1adbb949f6f25479775bb3af194ce528d5"></span><a class="reference internal" href="#_CPPv3N5Azura10Containers6VectorE" title="Azura::Containers::Vector">Vector</a>&lt;Type&gt; &amp;<code class="descname">operator=</code><span class="sig-paren">(</span><em class="property">const</em> <a class="reference internal" href="#_CPPv3N5Azura10Containers6VectorE" title="Azura::Containers::Vector">Vector</a> &amp;<em>other</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv3N5Azura10Containers6VectoraSERK6Vector" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt id="_CPPv3N5Azura10Containers6VectoraSERR6Vector">
+<span id="_CPPv2N5Azura10Containers6VectoraSERR6Vector"></span><span id="Azura::Containers::Vector::assign-operator__VectorRR"></span><span class="target" id="class_azura_1_1_containers_1_1_vector_1aed6c43d8742cd53f938c87ae91e6532b"></span><a class="reference internal" href="#_CPPv3N5Azura10Containers6VectorE" title="Azura::Containers::Vector">Vector</a>&lt;Type&gt; &amp;<code class="descname">operator=</code><span class="sig-paren">(</span><a class="reference internal" href="#_CPPv3N5Azura10Containers6VectorE" title="Azura::Containers::Vector">Vector</a> &amp;&amp;<em>other</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv3N5Azura10Containers6VectoraSERR6Vector" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt id="_CPPv3N5Azura10Containers6Vector8PushBackERK4Type">
+<span id="_CPPv2N5Azura10Containers6Vector8PushBackERK4Type"></span><span id="Azura::Containers::Vector::PushBack__TypeCR"></span><span class="target" id="class_azura_1_1_containers_1_1_vector_1aadc803b734b7481d9d7f2e9f86891ce4"></span>void <code class="descname">PushBack</code><span class="sig-paren">(</span><em class="property">const</em> Type &amp;<em>data</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv3N5Azura10Containers6Vector8PushBackERK4Type" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Appends data to the end of the vector. </p>
+<p>The vector also doubles its size incase it fills up. Recommended to pre-allocate as much as you can.</p>
+<p>Example: <div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="n">Containers</span><span class="o">::</span><span class="n">Vector</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;</span> <span class="n">arr</span><span class="p">(</span><span class="mi">5</span><span class="p">,</span> <span class="n">allocator</span><span class="p">);</span>
+<span class="c1">// The vector is of size 0. The capacity is 5.</span>
+
+<span class="n">arr</span><span class="p">.</span><span class="n">PushBack</span><span class="p">(</span><span class="mi">1</span><span class="p">);</span>
+<span class="c1">// The vector is of size 1. The capacity is 5.</span>
+
+<span class="n">arr</span><span class="p">.</span><span class="n">PushBack</span><span class="p">(</span><span class="mi">2</span><span class="p">);</span>
+<span class="c1">// The vector is of size 2. The capacity is 5.</span>
+
+<span class="n">arr</span><span class="p">.</span><span class="n">PushBack</span><span class="p">(</span><span class="mi">3</span><span class="p">);</span>
+<span class="c1">// The vector is of size 3. The capacity is 5.</span>
+
+<span class="n">arr</span><span class="p">.</span><span class="n">PushBack</span><span class="p">(</span><span class="mi">4</span><span class="p">);</span>
+<span class="c1">// The vector is of size 4. The capacity is 5.</span>
+</pre></div>
+</div>
+</p>
+<p><dl class="docutils">
+<dt><strong>Parameters</strong></dt>
+<dd><ul class="breatheparameterlist first last simple">
+<li><code class="docutils literal notranslate"><span class="pre">data</span></code>: Data to push </li>
+</ul>
+</dd>
+</dl>
+</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="_CPPv3N5Azura10Containers6Vector8PushBackERR4Type">
+<span id="_CPPv2N5Azura10Containers6Vector8PushBackERR4Type"></span><span id="Azura::Containers::Vector::PushBack__TypeRR"></span><span class="target" id="class_azura_1_1_containers_1_1_vector_1af55839be4b5b355ed020a09201713935"></span>void <code class="descname">PushBack</code><span class="sig-paren">(</span>Type &amp;&amp;<em>data</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv3N5Azura10Containers6Vector8PushBackERR4Type" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Appends data to the end of the vector. </p>
+<p>The vector also doubles its size incase it fills up. Recommended to pre-allocate as much as you can.</p>
+<p>Example: <div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="n">Containers</span><span class="o">::</span><span class="n">Vector</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;</span> <span class="n">arr</span><span class="p">(</span><span class="mi">5</span><span class="p">,</span> <span class="n">allocator</span><span class="p">);</span>
+<span class="c1">// The vector is of size 0. The capacity is 5.</span>
+
+<span class="n">arr</span><span class="p">.</span><span class="n">PushBack</span><span class="p">(</span><span class="mi">1</span><span class="p">);</span>
+<span class="c1">// The vector is of size 1. The capacity is 5.</span>
+
+<span class="n">arr</span><span class="p">.</span><span class="n">PushBack</span><span class="p">(</span><span class="mi">2</span><span class="p">);</span>
+<span class="c1">// The vector is of size 2. The capacity is 5.</span>
+
+<span class="n">arr</span><span class="p">.</span><span class="n">PushBack</span><span class="p">(</span><span class="mi">3</span><span class="p">);</span>
+<span class="c1">// The vector is of size 3. The capacity is 5.</span>
+
+<span class="n">arr</span><span class="p">.</span><span class="n">PushBack</span><span class="p">(</span><span class="mi">4</span><span class="p">);</span>
+<span class="c1">// The vector is of size 4. The capacity is 5.</span>
+</pre></div>
+</div>
+</p>
+<p><dl class="docutils">
+<dt><strong>Parameters</strong></dt>
+<dd><ul class="breatheparameterlist first last simple">
+<li><code class="docutils literal notranslate"><span class="pre">data</span></code>: Data to push </li>
+</ul>
+</dd>
+</dl>
+</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="_CPPv3N5Azura10Containers6Vector11EmplaceBackEDp4Args">
+<span id="_CPPv2N5Azura10Containers6Vector11EmplaceBackEDp4Args"></span><span id="Azura::Containers::Vector::EmplaceBack__ArgsDp"></span><em class="property">template </em>&lt;typename... <em>Args</em>&gt;<br /><span class="target" id="class_azura_1_1_containers_1_1_vector_1aadfac4f55765e41e812160022a9a949f"></span>void <code class="descname">EmplaceBack</code><span class="sig-paren">(</span>Args... <em>args</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv3N5Azura10Containers6Vector11EmplaceBackEDp4Args" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Appends data to the end of the vector by emplacing (like regular vector) </p>
+<p>The vector also doubles its size incase it fills up. Recommended to pre-allocate as much as you can.</p>
+<p>The arguments are the initialization parameters for the Type.</p>
+<p>Example: <div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="n">MyClass</span> <span class="p">{</span>
+<span class="k">public</span><span class="o">:</span>
+  <span class="n">MyClass</span><span class="p">(</span><span class="kt">int</span> <span class="n">a</span><span class="p">)</span> <span class="o">:</span> <span class="n">data</span><span class="p">(</span><span class="n">a</span><span class="p">)</span> <span class="p">{}</span>
+
+<span class="k">private</span><span class="o">:</span>
+  <span class="kt">int</span> <span class="n">data</span><span class="p">;</span>
+<span class="p">};</span>
+
+<span class="n">Containers</span><span class="o">::</span><span class="n">Vector</span><span class="o">&lt;</span><span class="n">MyClass</span><span class="o">&gt;</span> <span class="n">arr</span><span class="p">(</span><span class="mi">5</span><span class="p">,</span> <span class="n">allocator</span><span class="p">);</span>
+<span class="c1">// The vector is of size 0. The capacity is 5.</span>
+
+<span class="n">arr</span><span class="p">.</span><span class="n">EmplaceBack</span><span class="p">(</span><span class="mi">1</span><span class="p">);</span> <span class="c1">// Creates a MyClass{1} at the memory location</span>
+<span class="c1">// The vector is of size 1. The capacity is 5.</span>
+
+<span class="n">arr</span><span class="p">.</span><span class="n">EmplaceBack</span><span class="p">(</span><span class="mi">2</span><span class="p">);</span> <span class="c1">// Creates a MyClass{2} at the memory location</span>
+<span class="c1">// The vector is of size 2. The capacity is 5.</span>
+</pre></div>
+</div>
+</p>
+<p><dl class="docutils">
+<dt><strong>Parameters</strong></dt>
+<dd><ul class="breatheparameterlist first last simple">
+<li><code class="docutils literal notranslate"><span class="pre">args</span></code>: Arguments to push</li>
+</ul>
+</dd>
+<dt><strong>Template Parameters</strong></dt>
+<dd><ul class="breatheparameterlist first last simple">
+<li><code class="docutils literal notranslate"><span class="pre">Args</span></code>: Arguments </li>
+</ul>
+</dd>
+</dl>
+</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="_CPPv3N5Azura10Containers6Vector7PopBackEv">
+<span id="_CPPv2N5Azura10Containers6Vector7PopBackEv"></span><span id="Azura::Containers::Vector::PopBack"></span><span class="target" id="class_azura_1_1_containers_1_1_vector_1ad181b9dc858e1ad59fc64b39f795fb75"></span>void <code class="descname">PopBack</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv3N5Azura10Containers6Vector7PopBackEv" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Removes the last element in the vector array. </p>
+</dd></dl>
+
+<dl class="function">
+<dt id="_CPPv3N5Azura10Containers6Vector9FindFirstERK4Type">
+<span id="_CPPv2N5Azura10Containers6Vector9FindFirstERK4Type"></span><span id="Azura::Containers::Vector::FindFirst__TypeCR"></span><span class="target" id="class_azura_1_1_containers_1_1_vector_1a5da3557964b80e7c40a574fbbb7e24a6"></span>int <code class="descname">FindFirst</code><span class="sig-paren">(</span><em class="property">const</em> Type &amp;<em>data</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv3N5Azura10Containers6Vector9FindFirstERK4Type" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Searches for the data in the vector. </p>
+<p><dl class="docutils">
+<dt><strong>Return</strong></dt>
+<dd>Index if Found, else -1 </dd>
+<dt><strong>Parameters</strong></dt>
+<dd><ul class="breatheparameterlist first last simple">
+<li><code class="docutils literal notranslate"><span class="pre">data</span></code>: Data to search for</li>
+</ul>
+</dd>
+</dl>
+</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="_CPPv3N5Azura10Containers6Vector6RemoveERK4Type">
+<span id="_CPPv2N5Azura10Containers6Vector6RemoveERK4Type"></span><span id="Azura::Containers::Vector::Remove__TypeCR"></span><span class="target" id="class_azura_1_1_containers_1_1_vector_1a4d191b0d876f03c44c5a58e6380a07ee"></span>void <code class="descname">Remove</code><span class="sig-paren">(</span><em class="property">const</em> Type &amp;<em>data</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv3N5Azura10Containers6Vector6RemoveERK4Type" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Searches for the given data in the vector and removes it. </p>
+<p><dl class="docutils">
+<dt><strong>Parameters</strong></dt>
+<dd><ul class="breatheparameterlist first last simple">
+<li><code class="docutils literal notranslate"><span class="pre">data</span></code>: Data to Search for and Remove </li>
+</ul>
+</dd>
+</dl>
+</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="_CPPv3N5Azura10Containers6Vector7ReserveE3U32">
+<span id="_CPPv2N5Azura10Containers6Vector7ReserveE3U32"></span><span id="Azura::Containers::Vector::Reserve__U32"></span><span class="target" id="class_azura_1_1_containers_1_1_vector_1af53da95e8dee524b3b12f2208079741f"></span>void <code class="descname">Reserve</code><span class="sig-paren">(</span>U32 <em>requiredSize</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv3N5Azura10Containers6Vector7ReserveE3U32" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Reserves a contiguous block for the vector. </p>
+<p>Use this when you didn’t provide an initial size for the vector. The growth of the vector is not controlled by this. Using Reserve <strong>after</strong> storing the data in the vector will lead an undefined behavior. Use this only once.</p>
+<p>Example: <div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="n">Containers</span><span class="o">::</span><span class="n">Vector</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;</span> <span class="n">arr</span><span class="p">(</span><span class="n">allocator</span><span class="p">);</span>
+<span class="c1">// The vector is still of size 0. The capacity is 0.</span>
+
+<span class="c1">// ...</span>
+<span class="c1">// Later in code</span>
+<span class="c1">// ...</span>
+
+<span class="n">arr</span><span class="p">.</span><span class="n">Reserve</span><span class="p">(</span><span class="mi">5</span><span class="p">);</span>
+<span class="c1">// This allocates a 5 sized int vector</span>
+<span class="c1">// The vector is still of size 0. The capacity is 5.</span>
+</pre></div>
+</div>
+</p>
+<p><dl class="docutils">
+<dt><strong>Parameters</strong></dt>
+<dd><ul class="breatheparameterlist first last simple">
+<li><code class="docutils literal notranslate"><span class="pre">requiredSize</span></code>: Required Size </li>
+</ul>
+</dd>
+</dl>
+</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="_CPPv3N5Azura10Containers6Vector6ResizeE3U32">
+<span id="_CPPv2N5Azura10Containers6Vector6ResizeE3U32"></span><span id="Azura::Containers::Vector::Resize__U32"></span><span class="target" id="class_azura_1_1_containers_1_1_vector_1a6d651ba60555cf392c766eb77758bd81"></span>void <code class="descname">Resize</code><span class="sig-paren">(</span>U32 <em>requiredSize</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv3N5Azura10Containers6Vector6ResizeE3U32" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Reserves a contiguous block for the vector and sets the size to the value specified. </p>
+<p>Also, sets the size to the specified value. Use this when you didn’t provide an initial size for the vector. The growth of the vector is not controlled by this. Using Resize <strong>after</strong> storing the data in the vector will lead an undefined behavior. Use this only once.</p>
+<p>Example: <div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="n">Containers</span><span class="o">::</span><span class="n">Vector</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;</span> <span class="n">arr</span><span class="p">(</span><span class="n">allocator</span><span class="p">);</span>
+<span class="c1">// The vector is still of size 0. The capacity is 0.</span>
+
+<span class="c1">// ...</span>
+<span class="c1">// Later in code</span>
+<span class="c1">// ...</span>
+
+<span class="n">arr</span><span class="p">.</span><span class="n">Resize</span><span class="p">(</span><span class="mi">5</span><span class="p">);</span>
+<span class="c1">// This allocates a 5 sized int vector</span>
+<span class="c1">// The vector is now of size 5. The capacity is 5.</span>
+</pre></div>
+</div>
+</p>
+<p><dl class="docutils">
+<dt><strong>Parameters</strong></dt>
+<dd><ul class="breatheparameterlist first last simple">
+<li><code class="docutils literal notranslate"><span class="pre">requiredSize</span></code>: Required Size </li>
+</ul>
+</dd>
+</dl>
+</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="_CPPv3NK5Azura10Containers6Vector7IsEmptyEv">
+<span id="_CPPv2NK5Azura10Containers6Vector7IsEmptyEv"></span><span id="Azura::Containers::Vector::IsEmptyC"></span><span class="target" id="class_azura_1_1_containers_1_1_vector_1a3f955f930eefbb486ff9880421bbc7a4"></span>bool <code class="descname">IsEmpty</code><span class="sig-paren">(</span><span class="sig-paren">)</span> <em class="property">const</em><a class="headerlink" href="#_CPPv3NK5Azura10Containers6Vector7IsEmptyEv" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Checks if the container is empty. </p>
+<p><dl class="docutils">
+<dt><strong>Return</strong></dt>
+<dd><code class="docutils literal notranslate"><span class="pre">true</span></code> if empty </dd>
+</dl>
+</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="_CPPv3N5Azura10Containers6Vector8InsertAtE3U32RK4Type">
+<span id="_CPPv2N5Azura10Containers6Vector8InsertAtE3U32RK4Type"></span><span id="Azura::Containers::Vector::InsertAt__U32.TypeCR"></span><span class="target" id="class_azura_1_1_containers_1_1_vector_1a9f350f9bbc7f5aaec6318369444d2d99"></span>void <code class="descname">InsertAt</code><span class="sig-paren">(</span>U32 <em>idx</em>, <em class="property">const</em> Type &amp;<em>data</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv3N5Azura10Containers6Vector8InsertAtE3U32RK4Type" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Inserts the supplied data at the index. </p>
+<p></p>
+<p><dl class="docutils">
+<dt><strong>Parameters</strong></dt>
+<dd><ul class="breatheparameterlist first last simple">
+<li><code class="docutils literal notranslate"><span class="pre">idx</span></code>: Target Index </li>
+<li><code class="docutils literal notranslate"><span class="pre">data</span></code>: Data to insert </li>
+</ul>
+</dd>
+</dl>
+</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="_CPPv3N5Azura10Containers6Vector4DataEv">
+<span id="_CPPv2N5Azura10Containers6Vector4DataEv"></span><span id="Azura::Containers::Vector::Data"></span><span class="target" id="class_azura_1_1_containers_1_1_vector_1a6e3fd44d2821bb97f170b6e5443ec57e"></span>Type *<code class="descname">Data</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv3N5Azura10Containers6Vector4DataEv" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Gets the Data pointer. </p>
+<p>Example: <div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="n">Containers</span><span class="o">::</span><span class="n">Vector</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;</span> <span class="n">arr</span><span class="p">(</span><span class="mi">5</span><span class="p">,</span> <span class="n">allocator</span><span class="p">);</span>
+<span class="c1">// The vector is still of size 0. The capacity is 5.</span>
+
+<span class="n">arr</span><span class="p">.</span><span class="n">Data</span><span class="p">()</span> <span class="c1">// is of type int*</span>
+</pre></div>
+</div>
+ </p>
+</dd></dl>
+
+<dl class="function">
+<dt id="_CPPv3NK5Azura10Containers6Vector4DataEv">
+<span id="_CPPv2NK5Azura10Containers6Vector4DataEv"></span><span id="Azura::Containers::Vector::DataC"></span><span class="target" id="class_azura_1_1_containers_1_1_vector_1a512f49e419efb7f312d0a08ddfc675b7"></span><em class="property">const</em> Type *<code class="descname">Data</code><span class="sig-paren">(</span><span class="sig-paren">)</span> <em class="property">const</em><a class="headerlink" href="#_CPPv3NK5Azura10Containers6Vector4DataEv" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Gets the Data pointer.</p>
+<p>Example: <div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="n">Containers</span><span class="o">::</span><span class="n">Vector</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;</span> <span class="n">arr</span><span class="p">(</span><span class="mi">5</span><span class="p">,</span> <span class="n">allocator</span><span class="p">);</span>
+<span class="c1">// The vector is still of size 0. The capacity is 5.</span>
+
+<span class="n">arr</span><span class="p">.</span><span class="n">Data</span><span class="p">()</span> <span class="c1">// is of type int*</span>
+</pre></div>
+</div>
+ Useful as a constant pointer when compared to its other overload. </p>
+</dd></dl>
+
+<dl class="function">
+<dt id="_CPPv3N5Azura10Containers6Vector5ResetEv">
+<span id="_CPPv2N5Azura10Containers6Vector5ResetEv"></span><span id="Azura::Containers::Vector::Reset"></span><span class="target" id="class_azura_1_1_containers_1_1_vector_1a9a0fe84cbf357050432a0f851f8a8daa"></span>void <code class="descname">Reset</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv3N5Azura10Containers6Vector5ResetEv" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Empties the vector. </p>
+<p>But, it doesn’t deallocate anything. It is meant to reuse the allocated memory.</p>
+<p>Example: <div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="n">Containers</span><span class="o">::</span><span class="n">Vector</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;</span> <span class="n">arr</span><span class="p">(</span><span class="mi">5</span><span class="p">,</span> <span class="n">allocator</span><span class="p">);</span>
+<span class="c1">// The vector is of size 0. The capacity is 5.</span>
+
+<span class="n">arr</span><span class="p">.</span><span class="n">PushBack</span><span class="p">(</span><span class="mi">1</span><span class="p">);</span>
+<span class="c1">// The vector is of size 1. The capacity is 5.</span>
+
+<span class="n">arr</span><span class="p">.</span><span class="n">PushBack</span><span class="p">(</span><span class="mi">2</span><span class="p">);</span>
+<span class="c1">// The vector is of size 2. The capacity is 5.</span>
+
+<span class="n">arr</span><span class="p">.</span><span class="n">PushBack</span><span class="p">(</span><span class="mi">3</span><span class="p">);</span>
+<span class="c1">// The vector is of size 3. The capacity is 5.</span>
+
+<span class="n">arr</span><span class="p">.</span><span class="n">PushBack</span><span class="p">(</span><span class="mi">4</span><span class="p">);</span>
+<span class="c1">// The vector is of size 4. The capacity is 5.</span>
+
+<span class="n">arr</span><span class="p">.</span><span class="n">Reset</span><span class="p">();</span> <span class="c1">// Or Clear();</span>
+<span class="c1">// The vector is of size 0. The capacity is 5.</span>
+</pre></div>
+</div>
+ </p>
+</dd></dl>
+
+<dl class="function">
+<dt id="_CPPv3N5Azura10Containers6Vector5ClearEv">
+<span id="_CPPv2N5Azura10Containers6Vector5ClearEv"></span><span id="Azura::Containers::Vector::Clear"></span><span class="target" id="class_azura_1_1_containers_1_1_vector_1acf0e0039895ef1262e9060406863351e"></span>void <code class="descname">Clear</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv3N5Azura10Containers6Vector5ClearEv" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p><a class="reference internal" href="#class_azura_1_1_containers_1_1_vector_1a9a0fe84cbf357050432a0f851f8a8daa"><span class="std std-ref">Vector::Reset()</span></a></p>
+<p><a class="reference internal" href="#class_azura_1_1_containers_1_1_vector_1a9a0fe84cbf357050432a0f851f8a8daa"><span class="std std-ref">Vector::Reset()</span></a> </p>
+</dd></dl>
+
+<dl class="function">
+<dt id="_CPPv3N5Azura10Containers6VectorixE3U32">
+<span id="_CPPv2N5Azura10Containers6VectorixE3U32"></span><span id="Azura::Containers::Vector::subscript-operator__U32"></span><span class="target" id="class_azura_1_1_containers_1_1_vector_1a9375fcc59ae44bfe9960d045d322d897"></span>Type &amp;<code class="descname">operator[]</code><span class="sig-paren">(</span>U32 <em>idx</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv3N5Azura10Containers6VectorixE3U32" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt id="_CPPv3NK5Azura10Containers6VectorixE3U32">
+<span id="_CPPv2NK5Azura10Containers6VectorixE3U32"></span><span id="Azura::Containers::Vector::subscript-operator__U32C"></span><span class="target" id="class_azura_1_1_containers_1_1_vector_1aa88a35925d3013cd8050639e07938d62"></span>Type &amp;<code class="descname">operator[]</code><span class="sig-paren">(</span>U32 <em>idx</em><span class="sig-paren">)</span> <em class="property">const</em><a class="headerlink" href="#_CPPv3NK5Azura10Containers6VectorixE3U32" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt id="_CPPv3N5Azura10Containers6Vector4LastEv">
+<span id="_CPPv2N5Azura10Containers6Vector4LastEv"></span><span id="Azura::Containers::Vector::Last"></span><span class="target" id="class_azura_1_1_containers_1_1_vector_1aff0a689dcc4d698e49a40453f4e40d3b"></span>Type &amp;<code class="descname">Last</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv3N5Azura10Containers6Vector4LastEv" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt id="_CPPv3NK5Azura10Containers6Vector4LastEv">
+<span id="_CPPv2NK5Azura10Containers6Vector4LastEv"></span><span id="Azura::Containers::Vector::LastC"></span><span class="target" id="class_azura_1_1_containers_1_1_vector_1a6c87f384a7a0e3c4a76e53c8607e7f04"></span>Type &amp;<code class="descname">Last</code><span class="sig-paren">(</span><span class="sig-paren">)</span> <em class="property">const</em><a class="headerlink" href="#_CPPv3NK5Azura10Containers6Vector4LastEv" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt id="_CPPv3NK5Azura10Containers6Vector7GetSizeEv">
+<span id="_CPPv2NK5Azura10Containers6Vector7GetSizeEv"></span><span id="Azura::Containers::Vector::GetSizeC"></span><span class="target" id="class_azura_1_1_containers_1_1_vector_1a109fab9164fcbf717f7dba81e1a8ac47"></span>U32 <code class="descname">GetSize</code><span class="sig-paren">(</span><span class="sig-paren">)</span> <em class="property">const</em><a class="headerlink" href="#_CPPv3NK5Azura10Containers6Vector7GetSizeEv" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt id="_CPPv3NK5Azura10Containers6Vector10GetMaxSizeEv">
+<span id="_CPPv2NK5Azura10Containers6Vector10GetMaxSizeEv"></span><span id="Azura::Containers::Vector::GetMaxSizeC"></span><span class="target" id="class_azura_1_1_containers_1_1_vector_1ad51431e69d28f4f8e240c8f64cea17db"></span>U32 <code class="descname">GetMaxSize</code><span class="sig-paren">(</span><span class="sig-paren">)</span> <em class="property">const</em><a class="headerlink" href="#_CPPv3NK5Azura10Containers6Vector10GetMaxSizeEv" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt id="_CPPv3N5Azura10Containers6Vector6AssignE7InputIt7InputIt">
+<span id="_CPPv2N5Azura10Containers6Vector6AssignE7InputIt7InputIt"></span><span id="Azura::Containers::Vector::Assign__InputIt.InputIt"></span><em class="property">template </em>&lt;<em class="property">class</em> InputIt&gt;<br /><span class="target" id="class_azura_1_1_containers_1_1_vector_1a41f8b0d08472230bbcaf4e9611c9a5b3"></span>void <code class="descname">Assign</code><span class="sig-paren">(</span>InputIt <em>first</em>, InputIt <em>last</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv3N5Azura10Containers6Vector6AssignE7InputIt7InputIt" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt id="_CPPv3NK5Azura10Containers6Vector5BeginEv">
+<span id="_CPPv2NK5Azura10Containers6Vector5BeginEv"></span><span id="Azura::Containers::Vector::BeginC"></span><span class="target" id="class_azura_1_1_containers_1_1_vector_1a49e7eba07315528d8f75998944b0e7c5"></span><a class="reference internal" href="#_CPPv3N5Azura10Containers6VectorE" title="Azura::Containers::Vector">Vector</a>&lt;Type&gt;::Iterator <code class="descname">Begin</code><span class="sig-paren">(</span><span class="sig-paren">)</span> <em class="property">const</em><a class="headerlink" href="#_CPPv3NK5Azura10Containers6Vector5BeginEv" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Returns an <a class="reference internal" href="class_azura_1_1_containers_1_1_vector_1_1_iterator.html#class_azura_1_1_containers_1_1_vector_1_1_iterator"><span class="std std-ref">Iterator</span></a> pointing to the beginning of the vector. This is similar to <a class="reference internal" href="#class_azura_1_1_containers_1_1_vector_1a324d28755f053b4a83c89982eebeee93"><span class="std std-ref">begin()</span></a> of a std::vector. </p>
+<p><dl class="docutils">
+<dt><strong>Return</strong></dt>
+<dd><a class="reference internal" href="class_azura_1_1_containers_1_1_vector_1_1_iterator.html#class_azura_1_1_containers_1_1_vector_1_1_iterator"><span class="std std-ref">Iterator</span></a> </dd>
+</dl>
+</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="_CPPv3NK5Azura10Containers6Vector3EndEv">
+<span id="_CPPv2NK5Azura10Containers6Vector3EndEv"></span><span id="Azura::Containers::Vector::EndC"></span><span class="target" id="class_azura_1_1_containers_1_1_vector_1aaf8c1fcfb814e8030e5520b56c094c6a"></span><a class="reference internal" href="#_CPPv3N5Azura10Containers6VectorE" title="Azura::Containers::Vector">Vector</a>&lt;Type&gt;::Iterator <code class="descname">End</code><span class="sig-paren">(</span><span class="sig-paren">)</span> <em class="property">const</em><a class="headerlink" href="#_CPPv3NK5Azura10Containers6Vector3EndEv" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Returns an <a class="reference internal" href="class_azura_1_1_containers_1_1_vector_1_1_iterator.html#class_azura_1_1_containers_1_1_vector_1_1_iterator"><span class="std std-ref">Iterator</span></a> pointing to the end of the vector. This is similar to <a class="reference internal" href="#class_azura_1_1_containers_1_1_vector_1a364c485414869aa9d6de832f2af0f46f"><span class="std std-ref">end()</span></a> of a std::vector. </p>
+<p><dl class="docutils">
+<dt><strong>Return</strong></dt>
+<dd><a class="reference internal" href="class_azura_1_1_containers_1_1_vector_1_1_iterator.html#class_azura_1_1_containers_1_1_vector_1_1_iterator"><span class="std std-ref">Iterator</span></a> </dd>
+</dl>
+</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="_CPPv3NK5Azura10Containers6Vector5beginEv">
+<span id="_CPPv2NK5Azura10Containers6Vector5beginEv"></span><span id="Azura::Containers::Vector::beginC"></span><span class="target" id="class_azura_1_1_containers_1_1_vector_1a324d28755f053b4a83c89982eebeee93"></span><a class="reference internal" href="#_CPPv3N5Azura10Containers6VectorE" title="Azura::Containers::Vector">Vector</a>&lt;Type&gt;::Iterator <code class="descname">begin</code><span class="sig-paren">(</span><span class="sig-paren">)</span> <em class="property">const</em><a class="headerlink" href="#_CPPv3NK5Azura10Containers6Vector5beginEv" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Returns an <a class="reference internal" href="class_azura_1_1_containers_1_1_vector_1_1_iterator.html#class_azura_1_1_containers_1_1_vector_1_1_iterator"><span class="std std-ref">Iterator</span></a> pointing to the beginning of the vector. This is similar to <a class="reference internal" href="#class_azura_1_1_containers_1_1_vector_1a324d28755f053b4a83c89982eebeee93"><span class="std std-ref">begin()</span></a> of a std::vector. </p>
+<p><dl class="docutils">
+<dt><strong>Return</strong></dt>
+<dd><a class="reference internal" href="class_azura_1_1_containers_1_1_vector_1_1_iterator.html#class_azura_1_1_containers_1_1_vector_1_1_iterator"><span class="std std-ref">Iterator</span></a> </dd>
+</dl>
+</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="_CPPv3NK5Azura10Containers6Vector3endEv">
+<span id="_CPPv2NK5Azura10Containers6Vector3endEv"></span><span id="Azura::Containers::Vector::endC"></span><span class="target" id="class_azura_1_1_containers_1_1_vector_1a364c485414869aa9d6de832f2af0f46f"></span><a class="reference internal" href="#_CPPv3N5Azura10Containers6VectorE" title="Azura::Containers::Vector">Vector</a>&lt;Type&gt;::Iterator <code class="descname">end</code><span class="sig-paren">(</span><span class="sig-paren">)</span> <em class="property">const</em><a class="headerlink" href="#_CPPv3NK5Azura10Containers6Vector3endEv" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Returns an <a class="reference internal" href="class_azura_1_1_containers_1_1_vector_1_1_iterator.html#class_azura_1_1_containers_1_1_vector_1_1_iterator"><span class="std std-ref">Iterator</span></a> pointing to the end of the vector. This is similar to <a class="reference internal" href="#class_azura_1_1_containers_1_1_vector_1a364c485414869aa9d6de832f2af0f46f"><span class="std std-ref">end()</span></a> of a std::vector. </p>
+<p><dl class="docutils">
+<dt><strong>Return</strong></dt>
+<dd><a class="reference internal" href="class_azura_1_1_containers_1_1_vector_1_1_iterator.html#class_azura_1_1_containers_1_1_vector_1_1_iterator"><span class="std std-ref">Iterator</span></a> </dd>
+</dl>
+</p>
+</dd></dl>
+
+</div>
+<dl class="class">
+<dt id="_CPPv3N5Azura10Containers6Vector8IteratorE">
+<span id="_CPPv2N5Azura10Containers6Vector8IteratorE"></span><span id="Azura::Containers::Vector::Iterator"></span><span class="target" id="class_azura_1_1_containers_1_1_vector_1_1_iterator"></span><em class="property">class </em><code class="descname">Iterator</code><a class="headerlink" href="#_CPPv3N5Azura10Containers6Vector8IteratorE" title="Permalink to this definition">¶</a><br /></dt>
+<dd><div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric">Public Types</p>
+<dl class="type">
+<dt id="_CPPv3IEN5Azura10Containers6VectorI4TypeE8Iterator17iterator_categoryE">
+<span id="_CPPv2IEN5Azura10Containers6VectorI4TypeE8Iterator17iterator_categoryE"></span>template&lt;&gt;<br /><span class="target" id="class_azura_1_1_containers_1_1_vector_1_1_iterator_1aecb5d648b44a857de1f86493ea88a728"></span><em class="property">using </em><code class="descname">iterator_category</code> = std::random_access_iterator_tag<a class="headerlink" href="#_CPPv3IEN5Azura10Containers6VectorI4TypeE8Iterator17iterator_categoryE" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="type">
+<dt id="_CPPv3IEN5Azura10Containers6VectorI4TypeE8Iterator10value_typeE">
+<span id="_CPPv2IEN5Azura10Containers6VectorI4TypeE8Iterator10value_typeE"></span>template&lt;&gt;<br /><span class="target" id="class_azura_1_1_containers_1_1_vector_1_1_iterator_1af07ed38fc881e1a2ec7c5bbe567e493b"></span><em class="property">using </em><code class="descname">value_type</code> = Type<a class="headerlink" href="#_CPPv3IEN5Azura10Containers6VectorI4TypeE8Iterator10value_typeE" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="type">
+<dt id="_CPPv3IEN5Azura10Containers6VectorI4TypeE8Iterator15difference_typeE">
+<span id="_CPPv2IEN5Azura10Containers6VectorI4TypeE8Iterator15difference_typeE"></span>template&lt;&gt;<br /><span class="target" id="class_azura_1_1_containers_1_1_vector_1_1_iterator_1a2e87006386373176d26f9033d574472f"></span><em class="property">using </em><code class="descname">difference_type</code> = int<a class="headerlink" href="#_CPPv3IEN5Azura10Containers6VectorI4TypeE8Iterator15difference_typeE" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="type">
+<dt id="_CPPv3IEN5Azura10Containers6VectorI4TypeE8Iterator7pointerE">
+<span id="_CPPv2IEN5Azura10Containers6VectorI4TypeE8Iterator7pointerE"></span>template&lt;&gt;<br /><span class="target" id="class_azura_1_1_containers_1_1_vector_1_1_iterator_1adaa4c0480ed1e2a5f04d8c7e84e80349"></span><em class="property">using </em><code class="descname">pointer</code> = Type *<a class="headerlink" href="#_CPPv3IEN5Azura10Containers6VectorI4TypeE8Iterator7pointerE" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="type">
+<dt id="_CPPv3IEN5Azura10Containers6VectorI4TypeE8Iterator9referenceE">
+<span id="_CPPv2IEN5Azura10Containers6VectorI4TypeE8Iterator9referenceE"></span>template&lt;&gt;<br /><span class="target" id="class_azura_1_1_containers_1_1_vector_1_1_iterator_1a23f491d759145ca662290968dbc1cf51"></span><em class="property">using </em><code class="descname">reference</code> = Type&amp;<a class="headerlink" href="#_CPPv3IEN5Azura10Containers6VectorI4TypeE8Iterator9referenceE" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+</div>
+<div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric">Public Functions</p>
+<dl class="function">
+<dt id="_CPPv3IEN5Azura10Containers6VectorI4TypeE8Iterator8IteratorEv">
+<span id="_CPPv2IEN5Azura10Containers6VectorI4TypeE8Iterator8IteratorEv"></span><span class="target" id="class_azura_1_1_containers_1_1_vector_1_1_iterator_1acfa041ed3ef71f6040f39d0e09b4c8f7"></span>template&lt;&gt;<br /><code class="descname">Iterator</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv3IEN5Azura10Containers6VectorI4TypeE8Iterator8IteratorEv" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt id="_CPPv3IEN5Azura10Containers6VectorI4TypeE8IteratorD0Ev">
+<span id="_CPPv2IEN5Azura10Containers6VectorI4TypeE8IteratorD0Ev"></span><span class="target" id="class_azura_1_1_containers_1_1_vector_1_1_iterator_1a162f9659467fa77d572fa4fb5b9ec3bb"></span>template&lt;&gt;<br /><code class="descname">~Iterator</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv3IEN5Azura10Containers6VectorI4TypeE8IteratorD0Ev" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt id="_CPPv3IEN5Azura10Containers6VectorI4TypeE8Iterator8IteratorERK8Iterator">
+<span id="_CPPv2IEN5Azura10Containers6VectorI4TypeE8Iterator8IteratorERK8Iterator"></span><span class="target" id="class_azura_1_1_containers_1_1_vector_1_1_iterator_1a574766424a2a773a7db57066acc04d66"></span>template&lt;&gt;<br /><code class="descname">Iterator</code><span class="sig-paren">(</span><em class="property">const</em> <a class="reference internal" href="#_CPPv3IEN5Azura10Containers6VectorI4TypeE8Iterator8IteratorEv" title="Azura::Containers::Vector&lt;Type&gt;::Iterator::Iterator">Iterator</a> &amp;<em>other</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv3IEN5Azura10Containers6VectorI4TypeE8Iterator8IteratorERK8Iterator" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt id="_CPPv3IEN5Azura10Containers6VectorI4TypeE8IteratoraSERK8Iterator">
+<span id="_CPPv2IEN5Azura10Containers6VectorI4TypeE8IteratoraSERK8Iterator"></span><span class="target" id="class_azura_1_1_containers_1_1_vector_1_1_iterator_1af3149f451bcbab6e20a039bb875bf556"></span>template&lt;&gt;<br />Iterator &amp;<code class="descname">operator=</code><span class="sig-paren">(</span><em class="property">const</em> Iterator &amp;<em>other</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv3IEN5Azura10Containers6VectorI4TypeE8IteratoraSERK8Iterator" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt id="_CPPv3IEN5Azura10Containers6VectorI4TypeE8Iterator8IteratorEPK6Vectori">
+<span id="_CPPv2IEN5Azura10Containers6VectorI4TypeE8Iterator8IteratorEPK6Vectori"></span><span class="target" id="class_azura_1_1_containers_1_1_vector_1_1_iterator_1a76b9d4e3b9789e385abd29669f669bad"></span>template&lt;&gt;<br /><code class="descname">Iterator</code><span class="sig-paren">(</span><em class="property">const</em> Vector *<em>ptr</em>, int <em>index</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv3IEN5Azura10Containers6VectorI4TypeE8Iterator8IteratorEPK6Vectori" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt id="_CPPv3IEN5Azura10Containers6VectorI4TypeE8Iterator8IteratorERR8Iterator">
+<span id="_CPPv2IEN5Azura10Containers6VectorI4TypeE8Iterator8IteratorERR8Iterator"></span><span class="target" id="class_azura_1_1_containers_1_1_vector_1_1_iterator_1a3f27d5a62b0c22537083afb53069b0b6"></span>template&lt;&gt;<br /><code class="descname">Iterator</code><span class="sig-paren">(</span><a class="reference internal" href="#_CPPv3IEN5Azura10Containers6VectorI4TypeE8Iterator8IteratorEv" title="Azura::Containers::Vector&lt;Type&gt;::Iterator::Iterator">Iterator</a> &amp;&amp;<em>other</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv3IEN5Azura10Containers6VectorI4TypeE8Iterator8IteratorERR8Iterator" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt id="_CPPv3IEN5Azura10Containers6VectorI4TypeE8IteratoraSERR8Iterator">
+<span id="_CPPv2IEN5Azura10Containers6VectorI4TypeE8IteratoraSERR8Iterator"></span><span class="target" id="class_azura_1_1_containers_1_1_vector_1_1_iterator_1a7cf9fd2f5f7a8cebd0934aaafbbcaf63"></span>template&lt;&gt;<br />Iterator &amp;<code class="descname">operator=</code><span class="sig-paren">(</span>Iterator &amp;&amp;<em>other</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv3IEN5Azura10Containers6VectorI4TypeE8IteratoraSERR8Iterator" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt id="_CPPv3IEN5Azura10Containers6VectorI4TypeE8IteratorppEv">
+<span id="_CPPv2IEN5Azura10Containers6VectorI4TypeE8IteratorppEv"></span><span class="target" id="class_azura_1_1_containers_1_1_vector_1_1_iterator_1a979da8f970d715c01ab7534f6a3c4de0"></span>template&lt;&gt;<br />Iterator &amp;<code class="descname">operator++</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv3IEN5Azura10Containers6VectorI4TypeE8IteratorppEv" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt id="_CPPv3IEN5Azura10Containers6VectorI4TypeE8IteratorppEi">
+<span id="_CPPv2IEN5Azura10Containers6VectorI4TypeE8IteratorppEi"></span><span class="target" id="class_azura_1_1_containers_1_1_vector_1_1_iterator_1af605a2a5a0702ed63a75c78cce2fcdf6"></span>template&lt;&gt;<br />Iterator <code class="descname">operator++</code><span class="sig-paren">(</span>int<span class="sig-paren">)</span><a class="headerlink" href="#_CPPv3IEN5Azura10Containers6VectorI4TypeE8IteratorppEi" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt id="_CPPv3IEN5Azura10Containers6VectorI4TypeE8IteratormmEv">
+<span id="_CPPv2IEN5Azura10Containers6VectorI4TypeE8IteratormmEv"></span><span class="target" id="class_azura_1_1_containers_1_1_vector_1_1_iterator_1a6f002266c0919cb3df3833e894402612"></span>template&lt;&gt;<br />Iterator &amp;<code class="descname">operator--</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv3IEN5Azura10Containers6VectorI4TypeE8IteratormmEv" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt id="_CPPv3IEN5Azura10Containers6VectorI4TypeE8IteratormmEi">
+<span id="_CPPv2IEN5Azura10Containers6VectorI4TypeE8IteratormmEi"></span><span class="target" id="class_azura_1_1_containers_1_1_vector_1_1_iterator_1a3d331aba5acd78bdc362fc1554866a29"></span>template&lt;&gt;<br />Iterator <code class="descname">operator--</code><span class="sig-paren">(</span>int<span class="sig-paren">)</span><a class="headerlink" href="#_CPPv3IEN5Azura10Containers6VectorI4TypeE8IteratormmEi" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt id="_CPPv3IEN5Azura10Containers6VectorI4TypeE8IteratoreqERK8Iterator">
+<span id="_CPPv2IEN5Azura10Containers6VectorI4TypeE8IteratoreqERK8Iterator"></span><span class="target" id="class_azura_1_1_containers_1_1_vector_1_1_iterator_1ac43354d9be9c91b10c46d2f2ad8e26d2"></span>template&lt;&gt;<br />bool <code class="descname">operator==</code><span class="sig-paren">(</span><em class="property">const</em> Iterator &amp;<em>rhs</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv3IEN5Azura10Containers6VectorI4TypeE8IteratoreqERK8Iterator" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt id="_CPPv3IEN5Azura10Containers6VectorI4TypeE8IteratorneERK8Iterator">
+<span id="_CPPv2IEN5Azura10Containers6VectorI4TypeE8IteratorneERK8Iterator"></span><span class="target" id="class_azura_1_1_containers_1_1_vector_1_1_iterator_1af223ef31b943242205c0189d9488067f"></span>template&lt;&gt;<br />bool <code class="descname">operator!=</code><span class="sig-paren">(</span><em class="property">const</em> Iterator &amp;<em>rhs</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv3IEN5Azura10Containers6VectorI4TypeE8IteratorneERK8Iterator" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt id="_CPPv3IEN5Azura10Containers6VectorI4TypeE8IteratorltERK8Iterator">
+<span id="_CPPv2IEN5Azura10Containers6VectorI4TypeE8IteratorltERK8Iterator"></span><span class="target" id="class_azura_1_1_containers_1_1_vector_1_1_iterator_1a34e5644a80c5242f60bd1c5887a3760e"></span>template&lt;&gt;<br />bool <code class="descname">operator&lt;</code><span class="sig-paren">(</span><em class="property">const</em> Iterator &amp;<em>rhs</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv3IEN5Azura10Containers6VectorI4TypeE8IteratorltERK8Iterator" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt id="_CPPv3IEN5Azura10Containers6VectorI4TypeE8IteratorleERK8Iterator">
+<span id="_CPPv2IEN5Azura10Containers6VectorI4TypeE8IteratorleERK8Iterator"></span><span class="target" id="class_azura_1_1_containers_1_1_vector_1_1_iterator_1abc17caa8b283404518a014eb5f246569"></span>template&lt;&gt;<br />bool <code class="descname">operator&lt;=</code><span class="sig-paren">(</span><em class="property">const</em> Iterator &amp;<em>rhs</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv3IEN5Azura10Containers6VectorI4TypeE8IteratorleERK8Iterator" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt id="_CPPv3IEN5Azura10Containers6VectorI4TypeE8IteratorgtERK8Iterator">
+<span id="_CPPv2IEN5Azura10Containers6VectorI4TypeE8IteratorgtERK8Iterator"></span><span class="target" id="class_azura_1_1_containers_1_1_vector_1_1_iterator_1a4c3d985c01083c455e7165bfe9eb2317"></span>template&lt;&gt;<br />bool <code class="descname">operator&gt;</code><span class="sig-paren">(</span><em class="property">const</em> Iterator &amp;<em>rhs</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv3IEN5Azura10Containers6VectorI4TypeE8IteratorgtERK8Iterator" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt id="_CPPv3IEN5Azura10Containers6VectorI4TypeE8IteratorgeERK8Iterator">
+<span id="_CPPv2IEN5Azura10Containers6VectorI4TypeE8IteratorgeERK8Iterator"></span><span class="target" id="class_azura_1_1_containers_1_1_vector_1_1_iterator_1a686007e1bbb2ccb1f7dae61ad86b34ad"></span>template&lt;&gt;<br />bool <code class="descname">operator&gt;=</code><span class="sig-paren">(</span><em class="property">const</em> Iterator &amp;<em>rhs</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv3IEN5Azura10Containers6VectorI4TypeE8IteratorgeERK8Iterator" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt id="_CPPv3IEN5Azura10Containers6VectorI4TypeE8IteratorplERKi">
+<span id="_CPPv2IEN5Azura10Containers6VectorI4TypeE8IteratorplERKi"></span><span class="target" id="class_azura_1_1_containers_1_1_vector_1_1_iterator_1a2506b2d02a37e3d7f788d07b544729d8"></span>template&lt;&gt;<br />Iterator <code class="descname">operator+</code><span class="sig-paren">(</span><em class="property">const</em> int &amp;<em>idx</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv3IEN5Azura10Containers6VectorI4TypeE8IteratorplERKi" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt id="_CPPv3IEN5Azura10Containers6VectorI4TypeE8IteratorpLERKi">
+<span id="_CPPv2IEN5Azura10Containers6VectorI4TypeE8IteratorpLERKi"></span><span class="target" id="class_azura_1_1_containers_1_1_vector_1_1_iterator_1ae34a589281bfdccbbdd84787b347db54"></span>template&lt;&gt;<br />Iterator &amp;<code class="descname">operator+=</code><span class="sig-paren">(</span><em class="property">const</em> int &amp;<em>idx</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv3IEN5Azura10Containers6VectorI4TypeE8IteratorpLERKi" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt id="_CPPv3IEN5Azura10Containers6VectorI4TypeE8IteratormiERKi">
+<span id="_CPPv2IEN5Azura10Containers6VectorI4TypeE8IteratormiERKi"></span><span class="target" id="class_azura_1_1_containers_1_1_vector_1_1_iterator_1a7171a0531c79f825cea673477810a5ee"></span>template&lt;&gt;<br />Iterator <code class="descname">operator-</code><span class="sig-paren">(</span><em class="property">const</em> int &amp;<em>idx</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv3IEN5Azura10Containers6VectorI4TypeE8IteratormiERKi" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt id="_CPPv3IEN5Azura10Containers6VectorI4TypeE8IteratormIERKi">
+<span id="_CPPv2IEN5Azura10Containers6VectorI4TypeE8IteratormIERKi"></span><span class="target" id="class_azura_1_1_containers_1_1_vector_1_1_iterator_1a0ea9eb84d4befa12d31cacb4fc34ac6b"></span>template&lt;&gt;<br />Iterator &amp;<code class="descname">operator-=</code><span class="sig-paren">(</span><em class="property">const</em> int &amp;<em>idx</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv3IEN5Azura10Containers6VectorI4TypeE8IteratormIERKi" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt id="_CPPv3IEN5Azura10Containers6VectorI4TypeE8IteratormiERK8Iterator">
+<span id="_CPPv2IEN5Azura10Containers6VectorI4TypeE8IteratormiERK8Iterator"></span><span class="target" id="class_azura_1_1_containers_1_1_vector_1_1_iterator_1a86667234a77b035806a7f45b7a55e7c0"></span>template&lt;&gt;<br />int <code class="descname">operator-</code><span class="sig-paren">(</span><em class="property">const</em> Iterator &amp;<em>rhs</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv3IEN5Azura10Containers6VectorI4TypeE8IteratormiERK8Iterator" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt id="_CPPv3IEN5Azura10Containers6VectorI4TypeE8IteratormlEv">
+<span id="_CPPv2IEN5Azura10Containers6VectorI4TypeE8IteratormlEv"></span><span class="target" id="class_azura_1_1_containers_1_1_vector_1_1_iterator_1ab3ef0b00ab5000868683dccdf4c87014"></span>template&lt;&gt;<br />Type &amp;<code class="descname">operator*</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv3IEN5Azura10Containers6VectorI4TypeE8IteratormlEv" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt id="_CPPv3IEN5Azura10Containers6VectorI4TypeE8IteratorptEv">
+<span id="_CPPv2IEN5Azura10Containers6VectorI4TypeE8IteratorptEv"></span><span class="target" id="class_azura_1_1_containers_1_1_vector_1_1_iterator_1af9de1ca39787b15d06b3ef68abc6ebfa"></span>template&lt;&gt;<br />Type *<code class="descname">operator-&gt;</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv3IEN5Azura10Containers6VectorI4TypeE8IteratorptEv" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt id="_CPPv3IEN5Azura10Containers6VectorI4TypeE8IteratorixERKi">
+<span id="_CPPv2IEN5Azura10Containers6VectorI4TypeE8IteratorixERKi"></span><span class="target" id="class_azura_1_1_containers_1_1_vector_1_1_iterator_1a67a32e3dcf1bdf66c8ce5436a1f4fbc5"></span>template&lt;&gt;<br />Type &amp;<code class="descname">operator[]</code><span class="sig-paren">(</span><em class="property">const</em> int &amp;<em>idx</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv3IEN5Azura10Containers6VectorI4TypeE8IteratorixERKi" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+</div>
+<div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric">Friends</p>
+<dl class="function">
+<dt id="_CPPv3miRK8IteratorRK8Iterator">
+<span id="_CPPv2miRK8IteratorRK8Iterator"></span><span id="sub-operator__IteratorCR.IteratorCR"></span><span class="target" id="class_azura_1_1_containers_1_1_vector_1_1_iterator_1a93661b1094ed6450a2921e0ff69b46ff"></span>int <code class="descname">operator-</code><span class="sig-paren">(</span><em class="property">const</em> Iterator &amp;<em>lhs</em>, <em class="property">const</em> Iterator &amp;<em>rhs</em><span class="sig-paren">)</span><br /></dt>
+<dd></dd></dl>
+
+</div>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="class_azura_1_1_containers_1_1_vector_1_1_iterator.html" class="btn btn-neutral float-right" title="Class Vector::Iterator" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="class_azura_1_1_containers_1_1_array_batch.html" class="btn btn-neutral" title="Template Class ArrayBatch" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2018, Vasu Mahesh
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  
+
+    
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+        <script type="text/javascript" src="../_static/jquery.js"></script>
+        <script type="text/javascript" src="../_static/underscore.js"></script>
+        <script type="text/javascript" src="../_static/doctools.js"></script>
+        <script type="text/javascript" src="../_static/collapsible-lists\js\CollapsibleLists.compressed.js"></script>
+        <script type="text/javascript" src="../_static/collapsible-lists\js\apply-collapsible-lists.js"></script>
+    
+
+  
+
+  <script type="text/javascript" src="../_static/js/theme.js"></script>
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

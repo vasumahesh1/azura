@@ -1,0 +1,521 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>Program Listing for File Renderer_test.cpp &mdash; Azura  documentation</title>
+  
+
+  
+  
+  
+  
+
+  
+
+  
+  
+    
+
+  
+
+  <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/collapsible-lists\css\tree_view.css" type="text/css" />
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="File Renderer_test.h" href="file_Source_Azura_RenderSystem_Test_Renderer_test.h.html" />
+    <link rel="prev" title="File Renderer_test.cpp" href="file_Source_Azura_RenderSystem_Test_Renderer_test.cpp.html" /> 
+
+  
+  <script src="../_static/js/modernizr.min.js"></script>
+
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search">
+          
+
+          
+            <a href="../index.html" class="icon icon-home"> Azura
+          
+
+          
+          </a>
+
+          
+            
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <ul>
+<li class="toctree-l1"><a class="reference internal" href="../setting-up.html">Setting Up</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../build-instructions.html">Build Instructions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../cmake-wrappers.html">CMake Wrappers</a></li>
+<li class="toctree-l1"><a class="reference internal" href="apiRoot.html">Azura API</a></li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">Azura</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../index.html">Docs</a> &raquo;</li>
+        
+          <li><a href="apiRoot.html">Azura API</a> &raquo;</li>
+        
+          <li><a href="file_Source_Azura_RenderSystem_Test_Renderer_test.cpp.html">File Renderer_test.cpp</a> &raquo;</li>
+        
+      <li>Program Listing for File Renderer_test.cpp</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            <a href="../_sources/html/program_listing_file_Source_Azura_RenderSystem_Test_Renderer_test.cpp.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="program-listing-for-file-renderer-test-cpp">
+<span id="program-listing-file-source-azura-rendersystem-test-renderer-test-cpp"></span><h1>Program Listing for File Renderer_test.cpp<a class="headerlink" href="#program-listing-for-file-renderer-test-cpp" title="Permalink to this headline">¶</a></h1>
+<p>↰ <a class="reference internal" href="file_Source_Azura_RenderSystem_Test_Renderer_test.cpp.html#file-source-azura-rendersystem-test-renderer-test-cpp"><span class="std std-ref">Return to documentation for file</span></a> (<code class="docutils literal notranslate"><span class="pre">Source\Azura\RenderSystem\Test\Renderer_test.cpp</span></code>)</p>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="cp">#include</span> <span class="cpf">&quot;Renderer_test.h&quot;</span><span class="cp"></span>
+<span class="cp">#include</span> <span class="cpf">&quot;Generic/Renderer.h&quot;</span><span class="cp"></span>
+<span class="cp">#include</span> <span class="cpf">&quot;Generic/Window.h&quot;</span><span class="cp"></span>
+<span class="cp">#include</span> <span class="cpf">&quot;Generic/RenderSystem.h&quot;</span><span class="cp"></span>
+<span class="cp">#include</span> <span class="cpf">&quot;RenderTestCases.h&quot;</span><span class="cp"></span>
+<span class="cp">#include</span> <span class="cpf">&quot;Generic/Shader.h&quot;</span><span class="cp"></span>
+<span class="cp">#include</span> <span class="cpf">&quot;Utils/FileReader.h&quot;</span><span class="cp"></span>
+<span class="cp">#include</span> <span class="cpf">&quot;Memory/MemoryFactory.h&quot;</span><span class="cp"></span>
+
+<span class="k">using</span> <span class="k">namespace</span> <span class="n">Azura</span><span class="p">;</span> <span class="c1">// NOLINT</span>
+
+<span class="k">const</span> <span class="kt">int</span> <span class="n">UNIFORM_BUFFER_BINDING_ID</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+<span class="k">const</span> <span class="kt">int</span> <span class="n">WINDOW_WIDTH</span> <span class="o">=</span> <span class="mi">1280</span><span class="p">;</span>
+<span class="k">const</span> <span class="kt">int</span> <span class="n">WINDOW_HEIGHT</span> <span class="o">=</span> <span class="mi">720</span><span class="p">;</span>
+
+<span class="k">const</span> <span class="n">String</span> <span class="n">TEST_SUITE</span> <span class="o">=</span> <span class="s">&quot;RendererTest&quot;</span><span class="p">;</span>
+
+<span class="k">const</span> <span class="n">RawStorageFormat</span> <span class="n">SWAPCHAIN_DEFAULT_FORMAT</span> <span class="o">=</span> <span class="n">RawStorageFormat</span><span class="o">::</span><span class="n">B8G8R8A8_UNORM</span><span class="p">;</span>
+
+<span class="k">const</span> <span class="n">U32</span> <span class="n">SWAPCHAIN_BYTE_SIZE</span> <span class="o">=</span> <span class="n">WINDOW_WIDTH</span> <span class="o">*</span> <span class="n">WINDOW_HEIGHT</span> <span class="o">*</span> <span class="n">GetFormatSize</span><span class="p">(</span><span class="n">SWAPCHAIN_DEFAULT_FORMAT</span><span class="p">);</span>
+
+<span class="n">std</span><span class="o">::</span><span class="n">unique_ptr</span><span class="o">&lt;</span><span class="n">Azura</span><span class="o">::</span><span class="n">Window</span><span class="o">&gt;</span> <span class="n">CreateDefaultWindow</span><span class="p">()</span>
+<span class="p">{</span>
+  <span class="n">std</span><span class="o">::</span><span class="n">unique_ptr</span><span class="o">&lt;</span><span class="n">Azura</span><span class="o">::</span><span class="n">Window</span><span class="o">&gt;</span> <span class="n">windowPtr</span> <span class="o">=</span> <span class="n">RenderSystem</span><span class="o">::</span><span class="n">CreateApplicationWindow</span><span class="p">(</span><span class="n">TEST_SUITE</span><span class="p">,</span> <span class="n">WINDOW_WIDTH</span><span class="p">,</span> <span class="n">WINDOW_HEIGHT</span><span class="p">);</span>
+
+  <span class="n">windowPtr</span><span class="o">-&gt;</span><span class="n">SetUpdateCallback</span><span class="p">([]</span> <span class="p">(</span><span class="kt">float</span> <span class="n">timeSinceLastFrame</span><span class="p">)</span>
+  <span class="p">{</span>
+    <span class="n">UNUSED</span><span class="p">(</span><span class="n">timeSinceLastFrame</span><span class="p">);</span>
+  <span class="p">});</span>
+
+
+  <span class="k">if</span> <span class="p">(</span><span class="o">!</span><span class="n">windowPtr</span><span class="o">-&gt;</span><span class="n">Initialize</span><span class="p">())</span>
+  <span class="p">{</span>
+    <span class="k">throw</span> <span class="n">std</span><span class="o">::</span><span class="n">runtime_error</span><span class="p">(</span><span class="s">&quot;Cannot Initialize Window&quot;</span><span class="p">);</span>
+  <span class="p">}</span>
+
+  <span class="k">return</span> <span class="n">windowPtr</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="kt">bool</span> <span class="n">CompareImageBytes</span><span class="p">(</span><span class="k">const</span> <span class="n">String</span><span class="o">&amp;</span> <span class="n">referenceFile</span><span class="p">,</span> <span class="k">const</span> <span class="n">String</span><span class="o">&amp;</span> <span class="n">testFile</span><span class="p">)</span>
+<span class="p">{</span>
+  <span class="n">HEAP_ALLOCATOR</span><span class="p">(</span><span class="n">Temporary</span><span class="p">,</span> <span class="n">Memory</span><span class="o">::</span><span class="n">MonotonicAllocator</span><span class="p">,</span> <span class="n">SWAPCHAIN_BYTE_SIZE</span> <span class="o">*</span> <span class="mi">4</span><span class="p">);</span>
+  <span class="k">const</span> <span class="k">auto</span> <span class="n">referenceFileContents</span> <span class="o">=</span> <span class="n">FileReader</span><span class="o">::</span><span class="n">GetFileContents</span><span class="p">(</span><span class="n">referenceFile</span><span class="p">,</span> <span class="n">allocatorTemporary</span><span class="p">);</span>
+  <span class="k">const</span> <span class="k">auto</span> <span class="n">testFileContents</span> <span class="o">=</span> <span class="n">FileReader</span><span class="o">::</span><span class="n">GetFileContents</span><span class="p">(</span><span class="n">testFile</span><span class="p">,</span> <span class="n">allocatorTemporary</span><span class="p">);</span>
+
+  <span class="k">return</span> <span class="n">std</span><span class="o">::</span><span class="n">memcmp</span><span class="p">(</span><span class="n">referenceFileContents</span><span class="p">.</span><span class="n">Data</span><span class="p">(),</span> <span class="n">testFileContents</span><span class="p">.</span><span class="n">Data</span><span class="p">(),</span> <span class="n">SWAPCHAIN_BYTE_SIZE</span><span class="p">)</span> <span class="o">==</span> <span class="mi">0</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="n">TEST_F</span><span class="p">(</span><span class="n">RendererTest</span><span class="p">,</span> <span class="n">BasicRenderTest</span><span class="p">)</span> <span class="p">{</span>
+  <span class="n">HEAP_ALLOCATOR</span><span class="p">(</span><span class="n">Temporary</span><span class="p">,</span> <span class="n">Memory</span><span class="o">::</span><span class="n">MonotonicAllocator</span><span class="p">,</span> <span class="mi">16384</span><span class="p">);</span>
+
+  <span class="n">HeapMemoryBuffer</span> <span class="nf">mainBuffer</span><span class="p">(</span><span class="mi">16384</span><span class="p">);</span>
+
+  <span class="n">RangeAllocator</span> <span class="nf">mainAllocator</span><span class="p">(</span><span class="n">mainBuffer</span><span class="p">,</span> <span class="mi">8192</span><span class="p">);</span>
+  <span class="n">RangeAllocator</span> <span class="nf">drawableAllocator</span><span class="p">(</span><span class="n">mainBuffer</span><span class="p">,</span> <span class="mi">8192</span><span class="p">);</span>
+
+  <span class="k">const</span> <span class="k">auto</span> <span class="n">window</span> <span class="o">=</span> <span class="n">CreateDefaultWindow</span><span class="p">();</span>
+
+  <span class="n">ApplicationInfo</span> <span class="n">appInfo</span><span class="p">;</span>
+  <span class="n">appInfo</span><span class="p">.</span><span class="n">m_name</span>    <span class="o">=</span> <span class="n">TEST_SUITE</span><span class="p">;</span>
+  <span class="n">appInfo</span><span class="p">.</span><span class="n">m_version</span> <span class="o">=</span> <span class="n">Version</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">);</span>
+
+  <span class="n">DeviceRequirements</span> <span class="n">requirements</span><span class="p">;</span>
+  <span class="n">requirements</span><span class="p">.</span><span class="n">m_discreteGPU</span>   <span class="o">=</span> <span class="nb">true</span><span class="p">;</span>
+  <span class="n">requirements</span><span class="p">.</span><span class="n">m_float64</span>       <span class="o">=</span> <span class="nb">false</span><span class="p">;</span>
+  <span class="n">requirements</span><span class="p">.</span><span class="n">m_int64</span>         <span class="o">=</span> <span class="nb">false</span><span class="p">;</span>
+  <span class="n">requirements</span><span class="p">.</span><span class="n">m_transferQueue</span> <span class="o">=</span> <span class="nb">false</span><span class="p">;</span>
+
+  <span class="k">const</span> <span class="n">ApplicationRequirements</span> <span class="n">applicationRequirements</span> <span class="o">=</span> <span class="p">{};</span>
+
+  <span class="n">DescriptorRequirements</span> <span class="n">descriptorRequirements</span> <span class="o">=</span> <span class="n">DescriptorRequirements</span><span class="p">(</span><span class="mi">3</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="n">allocatorTemporary</span><span class="p">);</span>
+  <span class="k">const</span> <span class="n">U32</span> <span class="n">UBO_SLOT</span> <span class="o">=</span> <span class="n">descriptorRequirements</span><span class="p">.</span><span class="n">AddDescriptor</span><span class="p">({</span> <span class="n">DescriptorType</span><span class="o">::</span><span class="n">UniformBuffer</span><span class="p">,</span> <span class="n">ShaderStage</span><span class="o">::</span><span class="n">Vertex</span> <span class="p">});</span>
+
+  <span class="k">const</span> <span class="n">U32</span> <span class="n">UBO_SET</span> <span class="o">=</span> <span class="n">descriptorRequirements</span><span class="p">.</span><span class="n">AddSet</span><span class="p">({</span> <span class="n">UBO_SLOT</span> <span class="p">});</span>
+
+  <span class="n">ShaderRequirements</span> <span class="n">shaderRequirements</span> <span class="o">=</span> <span class="n">ShaderRequirements</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="n">allocatorTemporary</span><span class="p">);</span>
+  <span class="k">const</span> <span class="n">U32</span> <span class="n">VERTEX_SHADER_ID</span> <span class="o">=</span> <span class="n">shaderRequirements</span><span class="p">.</span><span class="n">AddShader</span><span class="p">({</span> <span class="n">ShaderStage</span><span class="o">::</span><span class="n">Vertex</span><span class="p">,</span> <span class="s">&quot;BasicRenderTest.vs&quot;</span><span class="p">,</span> <span class="n">AssetLocation</span><span class="o">::</span><span class="n">Shaders</span> <span class="p">});</span>
+  <span class="k">const</span> <span class="n">U32</span> <span class="n">PIXEL_SHADER_ID</span> <span class="o">=</span> <span class="n">shaderRequirements</span><span class="p">.</span><span class="n">AddShader</span><span class="p">({</span> <span class="n">ShaderStage</span><span class="o">::</span><span class="n">Pixel</span><span class="p">,</span> <span class="s">&quot;BasicRenderTest.ps&quot;</span><span class="p">,</span> <span class="n">AssetLocation</span><span class="o">::</span><span class="n">Shaders</span> <span class="p">});</span>
+
+  <span class="n">RenderPassRequirements</span> <span class="n">renderPassRequirements</span> <span class="o">=</span> <span class="n">RenderPassRequirements</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="n">allocatorTemporary</span><span class="p">);</span>
+
+  <span class="k">const</span> <span class="n">U32</span> <span class="n">SINGLE_PASS</span> <span class="o">=</span> <span class="n">renderPassRequirements</span><span class="p">.</span><span class="n">AddPass</span><span class="p">({</span>
+    <span class="n">PipelinePassCreateInfo</span><span class="o">::</span><span class="n">Shaders</span><span class="p">{</span><span class="n">VERTEX_SHADER_ID</span><span class="p">,</span> <span class="n">PIXEL_SHADER_ID</span><span class="p">},</span>  <span class="c1">// SHADERS</span>
+    <span class="n">PipelinePassCreateInfo</span><span class="o">::</span><span class="n">InputTargets</span><span class="p">{},</span>                                    <span class="c1">// INPUT TARGETS</span>
+    <span class="n">PipelinePassCreateInfo</span><span class="o">::</span><span class="n">InputBuffers</span><span class="p">{},</span>
+    <span class="n">PipelinePassCreateInfo</span><span class="o">::</span><span class="n">OutputTargets</span><span class="p">{},</span>                     <span class="c1">// OUTPUT TARGETS</span>
+    <span class="n">PipelinePassCreateInfo</span><span class="o">::</span><span class="n">OutputBuffers</span><span class="p">{},</span>                     <span class="c1">// OUTPUT TARGETS</span>
+    <span class="n">PipelinePassCreateInfo</span><span class="o">::</span><span class="n">DescriptorSets</span><span class="p">{</span><span class="n">UBO_SET</span><span class="p">},</span>                        <span class="c1">// DESCRIPTORS</span>
+    <span class="n">ClearData</span><span class="p">{{</span><span class="mf">0.2f</span><span class="p">,</span> <span class="mf">0.2f</span><span class="p">,</span> <span class="mf">0.2f</span><span class="p">,</span> <span class="mf">1.0f</span><span class="p">},</span> <span class="mf">1.0f</span><span class="p">,</span> <span class="mi">0</span><span class="p">}</span>
+    <span class="p">});</span>
+
+  <span class="k">auto</span> <span class="n">swapChainRequirements</span> <span class="o">=</span> <span class="n">window</span><span class="o">-&gt;</span><span class="n">GetSwapChainRequirements</span><span class="p">();</span>
+
+  <span class="n">std</span><span class="o">::</span><span class="n">unique_ptr</span><span class="o">&lt;</span><span class="n">Azura</span><span class="o">::</span><span class="n">Renderer</span><span class="o">&gt;</span> <span class="n">renderer</span> <span class="o">=</span> <span class="n">RenderSystem</span><span class="o">::</span><span class="n">CreateRenderer</span><span class="p">(</span><span class="n">appInfo</span><span class="p">,</span> <span class="n">requirements</span><span class="p">,</span> <span class="n">applicationRequirements</span><span class="p">,</span>
+    <span class="n">swapChainRequirements</span><span class="p">,</span> <span class="n">renderPassRequirements</span><span class="p">,</span>
+    <span class="n">descriptorRequirements</span><span class="p">,</span> <span class="n">shaderRequirements</span><span class="p">,</span> <span class="n">mainAllocator</span><span class="p">,</span> <span class="n">drawableAllocator</span><span class="p">,</span>
+    <span class="o">*</span><span class="n">window</span><span class="p">);</span>
+
+  <span class="n">RenderTestCases</span><span class="o">::</span><span class="n">ExecuteBasicRenderTest</span><span class="p">(</span><span class="o">*</span><span class="n">renderer</span><span class="p">,</span> <span class="o">*</span><span class="n">window</span><span class="p">,</span> <span class="n">SINGLE_PASS</span><span class="p">,</span> <span class="n">UBO_SLOT</span><span class="p">,</span> <span class="n">log_TestRenderer</span><span class="p">);</span>
+
+  <span class="n">ASSERT_TRUE</span><span class="p">(</span><span class="n">CompareImageBytes</span><span class="p">(</span><span class="s">&quot;./ReferenceImages/BasicRenderTest.data&quot;</span><span class="p">,</span> <span class="s">&quot;./BasicRenderTest.data&quot;</span><span class="p">));</span>
+
+  <span class="n">window</span><span class="o">-&gt;</span><span class="n">Destroy</span><span class="p">();</span>
+<span class="p">}</span>
+
+<span class="n">TEST_F</span><span class="p">(</span><span class="n">RendererTest</span><span class="p">,</span> <span class="n">BasicInstancingTest</span><span class="p">)</span> <span class="p">{</span>
+  <span class="n">HEAP_ALLOCATOR</span><span class="p">(</span><span class="n">Temporary</span><span class="p">,</span> <span class="n">Memory</span><span class="o">::</span><span class="n">MonotonicAllocator</span><span class="p">,</span> <span class="mi">16384</span><span class="p">);</span>
+
+  <span class="n">HeapMemoryBuffer</span> <span class="nf">mainBuffer</span><span class="p">(</span><span class="mi">16384</span><span class="p">);</span>
+
+  <span class="n">RangeAllocator</span> <span class="nf">mainAllocator</span><span class="p">(</span><span class="n">mainBuffer</span><span class="p">,</span> <span class="mi">8192</span><span class="p">);</span>
+  <span class="n">RangeAllocator</span> <span class="nf">drawableAllocator</span><span class="p">(</span><span class="n">mainBuffer</span><span class="p">,</span> <span class="mi">8192</span><span class="p">);</span>
+
+  <span class="k">const</span> <span class="k">auto</span> <span class="n">window</span> <span class="o">=</span> <span class="n">CreateDefaultWindow</span><span class="p">();</span>
+
+  <span class="n">ApplicationInfo</span> <span class="n">appInfo</span><span class="p">;</span>
+  <span class="n">appInfo</span><span class="p">.</span><span class="n">m_name</span>    <span class="o">=</span> <span class="n">TEST_SUITE</span><span class="p">;</span>
+  <span class="n">appInfo</span><span class="p">.</span><span class="n">m_version</span> <span class="o">=</span> <span class="n">Version</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">);</span>
+
+  <span class="n">DeviceRequirements</span> <span class="n">requirements</span><span class="p">;</span>
+  <span class="n">requirements</span><span class="p">.</span><span class="n">m_discreteGPU</span>   <span class="o">=</span> <span class="nb">true</span><span class="p">;</span>
+  <span class="n">requirements</span><span class="p">.</span><span class="n">m_float64</span>       <span class="o">=</span> <span class="nb">false</span><span class="p">;</span>
+  <span class="n">requirements</span><span class="p">.</span><span class="n">m_int64</span>         <span class="o">=</span> <span class="nb">false</span><span class="p">;</span>
+  <span class="n">requirements</span><span class="p">.</span><span class="n">m_transferQueue</span> <span class="o">=</span> <span class="nb">false</span><span class="p">;</span>
+
+  <span class="k">const</span> <span class="n">ApplicationRequirements</span> <span class="n">applicationRequirements</span> <span class="o">=</span> <span class="p">{};</span>
+
+  <span class="n">DescriptorRequirements</span> <span class="n">descriptorRequirements</span> <span class="o">=</span> <span class="n">DescriptorRequirements</span><span class="p">(</span><span class="mi">3</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="n">allocatorTemporary</span><span class="p">);</span>
+  <span class="k">const</span> <span class="n">U32</span> <span class="n">UBO_SLOT</span> <span class="o">=</span> <span class="n">descriptorRequirements</span><span class="p">.</span><span class="n">AddDescriptor</span><span class="p">({</span> <span class="n">DescriptorType</span><span class="o">::</span><span class="n">UniformBuffer</span><span class="p">,</span> <span class="n">ShaderStage</span><span class="o">::</span><span class="n">Vertex</span> <span class="p">});</span>
+
+  <span class="k">const</span> <span class="n">U32</span> <span class="n">UBO_SET</span> <span class="o">=</span> <span class="n">descriptorRequirements</span><span class="p">.</span><span class="n">AddSet</span><span class="p">({</span> <span class="n">UBO_SLOT</span> <span class="p">});</span>
+
+  <span class="n">ShaderRequirements</span> <span class="n">shaderRequirements</span> <span class="o">=</span> <span class="n">ShaderRequirements</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="n">allocatorTemporary</span><span class="p">);</span>
+  <span class="k">const</span> <span class="n">U32</span> <span class="n">VERTEX_SHADER_ID</span> <span class="o">=</span> <span class="n">shaderRequirements</span><span class="p">.</span><span class="n">AddShader</span><span class="p">({</span> <span class="n">ShaderStage</span><span class="o">::</span><span class="n">Vertex</span><span class="p">,</span> <span class="s">&quot;BasicInstancingTest.vs&quot;</span><span class="p">,</span> <span class="n">AssetLocation</span><span class="o">::</span><span class="n">Shaders</span> <span class="p">});</span>
+  <span class="k">const</span> <span class="n">U32</span> <span class="n">PIXEL_SHADER_ID</span> <span class="o">=</span> <span class="n">shaderRequirements</span><span class="p">.</span><span class="n">AddShader</span><span class="p">({</span> <span class="n">ShaderStage</span><span class="o">::</span><span class="n">Pixel</span><span class="p">,</span> <span class="s">&quot;BasicInstancingTest.ps&quot;</span><span class="p">,</span> <span class="n">AssetLocation</span><span class="o">::</span><span class="n">Shaders</span> <span class="p">});</span>
+
+  <span class="n">RenderPassRequirements</span> <span class="n">renderPassRequirements</span> <span class="o">=</span> <span class="n">RenderPassRequirements</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="n">allocatorTemporary</span><span class="p">);</span>
+
+  <span class="k">const</span> <span class="n">U32</span> <span class="n">SINGLE_PASS</span> <span class="o">=</span> <span class="n">renderPassRequirements</span><span class="p">.</span><span class="n">AddPass</span><span class="p">({</span>
+    <span class="n">PipelinePassCreateInfo</span><span class="o">::</span><span class="n">Shaders</span><span class="p">{</span><span class="n">VERTEX_SHADER_ID</span><span class="p">,</span> <span class="n">PIXEL_SHADER_ID</span><span class="p">},</span>  <span class="c1">// SHADERS</span>
+    <span class="n">PipelinePassCreateInfo</span><span class="o">::</span><span class="n">InputTargets</span><span class="p">{},</span>                                    <span class="c1">// INPUT TARGETS</span>
+    <span class="n">PipelinePassCreateInfo</span><span class="o">::</span><span class="n">InputBuffers</span><span class="p">{},</span>
+    <span class="n">PipelinePassCreateInfo</span><span class="o">::</span><span class="n">OutputTargets</span><span class="p">{},</span>                     <span class="c1">// OUTPUT TARGETS</span>
+    <span class="n">PipelinePassCreateInfo</span><span class="o">::</span><span class="n">OutputBuffers</span><span class="p">{},</span>                     <span class="c1">// OUTPUT TARGETS</span>
+    <span class="n">PipelinePassCreateInfo</span><span class="o">::</span><span class="n">DescriptorSets</span><span class="p">{</span><span class="n">UBO_SET</span><span class="p">},</span>                        <span class="c1">// DESCRIPTORS</span>
+    <span class="n">ClearData</span><span class="p">{{</span><span class="mf">0.2f</span><span class="p">,</span> <span class="mf">0.2f</span><span class="p">,</span> <span class="mf">0.2f</span><span class="p">,</span> <span class="mf">1.0f</span><span class="p">},</span> <span class="mf">1.0f</span><span class="p">,</span> <span class="mi">0</span><span class="p">}</span>
+    <span class="p">});</span>
+
+  <span class="k">auto</span> <span class="n">swapChainRequirements</span> <span class="o">=</span> <span class="n">window</span><span class="o">-&gt;</span><span class="n">GetSwapChainRequirements</span><span class="p">();</span>
+
+  <span class="n">std</span><span class="o">::</span><span class="n">unique_ptr</span><span class="o">&lt;</span><span class="n">Azura</span><span class="o">::</span><span class="n">Renderer</span><span class="o">&gt;</span> <span class="n">renderer</span> <span class="o">=</span> <span class="n">RenderSystem</span><span class="o">::</span><span class="n">CreateRenderer</span><span class="p">(</span><span class="n">appInfo</span><span class="p">,</span> <span class="n">requirements</span><span class="p">,</span> <span class="n">applicationRequirements</span><span class="p">,</span>
+    <span class="n">swapChainRequirements</span><span class="p">,</span> <span class="n">renderPassRequirements</span><span class="p">,</span>
+    <span class="n">descriptorRequirements</span><span class="p">,</span> <span class="n">shaderRequirements</span><span class="p">,</span> <span class="n">mainAllocator</span><span class="p">,</span> <span class="n">drawableAllocator</span><span class="p">,</span>
+    <span class="o">*</span><span class="n">window</span><span class="p">);</span>
+
+  <span class="n">RenderTestCases</span><span class="o">::</span><span class="n">ExecuteBasicInstancingTest</span><span class="p">(</span><span class="o">*</span><span class="n">renderer</span><span class="p">,</span> <span class="o">*</span><span class="n">window</span><span class="p">,</span> <span class="n">SINGLE_PASS</span><span class="p">,</span> <span class="n">UBO_SLOT</span><span class="p">,</span> <span class="n">log_TestRenderer</span><span class="p">);</span>
+
+  <span class="n">ASSERT_TRUE</span><span class="p">(</span><span class="n">CompareImageBytes</span><span class="p">(</span><span class="s">&quot;./ReferenceImages/BasicInstancingTest.data&quot;</span><span class="p">,</span> <span class="s">&quot;./BasicInstancingTest.data&quot;</span><span class="p">));</span>
+
+  <span class="n">window</span><span class="o">-&gt;</span><span class="n">Destroy</span><span class="p">();</span>
+<span class="p">}</span>
+
+<span class="n">TEST_F</span><span class="p">(</span><span class="n">RendererTest</span><span class="p">,</span> <span class="n">BasicTextureTest</span><span class="p">)</span> <span class="p">{</span>
+  <span class="n">HEAP_ALLOCATOR</span><span class="p">(</span><span class="n">Temporary</span><span class="p">,</span> <span class="n">Memory</span><span class="o">::</span><span class="n">MonotonicAllocator</span><span class="p">,</span> <span class="mi">16384</span><span class="p">);</span>
+
+  <span class="n">HeapMemoryBuffer</span> <span class="nf">mainBuffer</span><span class="p">(</span><span class="mi">16384</span><span class="p">);</span>
+
+  <span class="n">RangeAllocator</span> <span class="nf">mainAllocator</span><span class="p">(</span><span class="n">mainBuffer</span><span class="p">,</span> <span class="mi">8192</span><span class="p">);</span>
+  <span class="n">RangeAllocator</span> <span class="nf">drawableAllocator</span><span class="p">(</span><span class="n">mainBuffer</span><span class="p">,</span> <span class="mi">8192</span><span class="p">);</span>
+
+  <span class="k">const</span> <span class="k">auto</span> <span class="n">window</span> <span class="o">=</span> <span class="n">CreateDefaultWindow</span><span class="p">();</span>
+
+  <span class="n">ApplicationInfo</span> <span class="n">appInfo</span><span class="p">;</span>
+  <span class="n">appInfo</span><span class="p">.</span><span class="n">m_name</span>    <span class="o">=</span> <span class="n">TEST_SUITE</span><span class="p">;</span>
+  <span class="n">appInfo</span><span class="p">.</span><span class="n">m_version</span> <span class="o">=</span> <span class="n">Version</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">);</span>
+
+  <span class="n">DeviceRequirements</span> <span class="n">requirements</span><span class="p">;</span>
+  <span class="n">requirements</span><span class="p">.</span><span class="n">m_discreteGPU</span>   <span class="o">=</span> <span class="nb">true</span><span class="p">;</span>
+  <span class="n">requirements</span><span class="p">.</span><span class="n">m_float64</span>       <span class="o">=</span> <span class="nb">false</span><span class="p">;</span>
+  <span class="n">requirements</span><span class="p">.</span><span class="n">m_int64</span>         <span class="o">=</span> <span class="nb">false</span><span class="p">;</span>
+  <span class="n">requirements</span><span class="p">.</span><span class="n">m_transferQueue</span> <span class="o">=</span> <span class="nb">false</span><span class="p">;</span>
+
+  <span class="k">const</span> <span class="n">ApplicationRequirements</span> <span class="n">applicationRequirements</span> <span class="o">=</span> <span class="p">{};</span>
+
+  <span class="n">DescriptorRequirements</span> <span class="n">descriptorRequirements</span> <span class="o">=</span> <span class="n">DescriptorRequirements</span><span class="p">(</span><span class="mi">3</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="n">allocatorTemporary</span><span class="p">);</span>
+  <span class="k">const</span> <span class="n">U32</span> <span class="n">UBO_SLOT</span> <span class="o">=</span> <span class="n">descriptorRequirements</span><span class="p">.</span><span class="n">AddDescriptor</span><span class="p">({</span> <span class="n">DescriptorType</span><span class="o">::</span><span class="n">UniformBuffer</span><span class="p">,</span> <span class="n">ShaderStage</span><span class="o">::</span><span class="n">Vertex</span> <span class="p">});</span>
+  <span class="k">const</span> <span class="n">U32</span> <span class="n">SAMPLER_SLOT</span> <span class="o">=</span> <span class="n">descriptorRequirements</span><span class="p">.</span><span class="n">AddDescriptor</span><span class="p">({</span><span class="n">DescriptorType</span><span class="o">::</span><span class="n">Sampler</span><span class="p">,</span> <span class="n">ShaderStage</span><span class="o">::</span><span class="n">Pixel</span><span class="p">});</span>
+  <span class="k">const</span> <span class="n">U32</span> <span class="n">BASIC_TEXTURE_SLOT</span> <span class="o">=</span> <span class="n">descriptorRequirements</span><span class="p">.</span><span class="n">AddDescriptor</span><span class="p">({</span><span class="n">DescriptorType</span><span class="o">::</span><span class="n">SampledImage</span><span class="p">,</span> <span class="n">ShaderStage</span><span class="o">::</span><span class="n">Pixel</span><span class="p">});</span>
+
+  <span class="k">const</span> <span class="n">U32</span> <span class="n">UBO_SET</span> <span class="o">=</span> <span class="n">descriptorRequirements</span><span class="p">.</span><span class="n">AddSet</span><span class="p">({</span> <span class="n">UBO_SLOT</span> <span class="p">});</span>
+  <span class="k">const</span> <span class="n">U32</span> <span class="n">SAMPLER_SET</span> <span class="o">=</span> <span class="n">descriptorRequirements</span><span class="p">.</span><span class="n">AddSet</span><span class="p">({</span> <span class="n">SAMPLER_SLOT</span> <span class="p">});</span>
+  <span class="k">const</span> <span class="n">U32</span> <span class="n">BASIC_TEXTURE_SET</span> <span class="o">=</span> <span class="n">descriptorRequirements</span><span class="p">.</span><span class="n">AddSet</span><span class="p">({</span> <span class="n">BASIC_TEXTURE_SLOT</span> <span class="p">});</span>
+
+  <span class="n">ShaderRequirements</span> <span class="n">shaderRequirements</span> <span class="o">=</span> <span class="n">ShaderRequirements</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="n">allocatorTemporary</span><span class="p">);</span>
+  <span class="k">const</span> <span class="n">U32</span> <span class="n">VERTEX_SHADER_ID</span> <span class="o">=</span> <span class="n">shaderRequirements</span><span class="p">.</span><span class="n">AddShader</span><span class="p">({</span> <span class="n">ShaderStage</span><span class="o">::</span><span class="n">Vertex</span><span class="p">,</span> <span class="s">&quot;BasicTextureTest.vs&quot;</span><span class="p">,</span> <span class="n">AssetLocation</span><span class="o">::</span><span class="n">Shaders</span> <span class="p">});</span>
+  <span class="k">const</span> <span class="n">U32</span> <span class="n">PIXEL_SHADER_ID</span> <span class="o">=</span> <span class="n">shaderRequirements</span><span class="p">.</span><span class="n">AddShader</span><span class="p">({</span> <span class="n">ShaderStage</span><span class="o">::</span><span class="n">Pixel</span><span class="p">,</span> <span class="s">&quot;BasicTextureTest.ps&quot;</span><span class="p">,</span> <span class="n">AssetLocation</span><span class="o">::</span><span class="n">Shaders</span> <span class="p">});</span>
+
+  <span class="n">RenderPassRequirements</span> <span class="n">renderPassRequirements</span> <span class="o">=</span> <span class="n">RenderPassRequirements</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="n">allocatorTemporary</span><span class="p">);</span>
+
+  <span class="k">const</span> <span class="n">U32</span> <span class="n">SINGLE_PASS</span> <span class="o">=</span> <span class="n">renderPassRequirements</span><span class="p">.</span><span class="n">AddPass</span><span class="p">({</span>
+    <span class="n">PipelinePassCreateInfo</span><span class="o">::</span><span class="n">Shaders</span><span class="p">{</span><span class="n">VERTEX_SHADER_ID</span><span class="p">,</span> <span class="n">PIXEL_SHADER_ID</span><span class="p">},</span>  <span class="c1">// SHADERS</span>
+    <span class="n">PipelinePassCreateInfo</span><span class="o">::</span><span class="n">InputTargets</span><span class="p">{},</span>                                    <span class="c1">// INPUT TARGETS</span>
+    <span class="n">PipelinePassCreateInfo</span><span class="o">::</span><span class="n">InputBuffers</span><span class="p">{},</span>
+    <span class="n">PipelinePassCreateInfo</span><span class="o">::</span><span class="n">OutputTargets</span><span class="p">{},</span>                     <span class="c1">// OUTPUT TARGETS</span>
+    <span class="n">PipelinePassCreateInfo</span><span class="o">::</span><span class="n">OutputBuffers</span><span class="p">{},</span>                     <span class="c1">// OUTPUT TARGETS</span>
+    <span class="n">PipelinePassCreateInfo</span><span class="o">::</span><span class="n">DescriptorSets</span><span class="p">{</span><span class="n">UBO_SET</span><span class="p">,</span> <span class="n">SAMPLER_SET</span><span class="p">,</span> <span class="n">BASIC_TEXTURE_SET</span><span class="p">},</span>                        <span class="c1">// DESCRIPTORS</span>
+    <span class="n">ClearData</span><span class="p">{{</span><span class="mf">0.2f</span><span class="p">,</span> <span class="mf">0.2f</span><span class="p">,</span> <span class="mf">0.2f</span><span class="p">,</span> <span class="mf">1.0f</span><span class="p">},</span> <span class="mf">1.0f</span><span class="p">,</span> <span class="mi">0</span><span class="p">}</span>
+    <span class="p">});</span>
+
+  <span class="k">auto</span> <span class="n">swapChainRequirements</span> <span class="o">=</span> <span class="n">window</span><span class="o">-&gt;</span><span class="n">GetSwapChainRequirements</span><span class="p">();</span>
+
+  <span class="n">std</span><span class="o">::</span><span class="n">unique_ptr</span><span class="o">&lt;</span><span class="n">Azura</span><span class="o">::</span><span class="n">Renderer</span><span class="o">&gt;</span> <span class="n">renderer</span> <span class="o">=</span> <span class="n">RenderSystem</span><span class="o">::</span><span class="n">CreateRenderer</span><span class="p">(</span><span class="n">appInfo</span><span class="p">,</span> <span class="n">requirements</span><span class="p">,</span> <span class="n">applicationRequirements</span><span class="p">,</span>
+    <span class="n">swapChainRequirements</span><span class="p">,</span> <span class="n">renderPassRequirements</span><span class="p">,</span>
+    <span class="n">descriptorRequirements</span><span class="p">,</span> <span class="n">shaderRequirements</span><span class="p">,</span> <span class="n">mainAllocator</span><span class="p">,</span> <span class="n">drawableAllocator</span><span class="p">,</span>
+    <span class="o">*</span><span class="n">window</span><span class="p">);</span>
+
+  <span class="n">RenderTestCases</span><span class="o">::</span><span class="n">ExecuteBasicTextureTest</span><span class="p">(</span><span class="o">*</span><span class="n">renderer</span><span class="p">,</span> <span class="o">*</span><span class="n">window</span><span class="p">,</span> <span class="n">SINGLE_PASS</span><span class="p">,</span> <span class="n">UBO_SLOT</span><span class="p">,</span> <span class="n">SAMPLER_SLOT</span><span class="p">,</span> <span class="n">BASIC_TEXTURE_SLOT</span><span class="p">,</span> <span class="n">log_TestRenderer</span><span class="p">);</span>
+
+  <span class="n">ASSERT_TRUE</span><span class="p">(</span><span class="n">CompareImageBytes</span><span class="p">(</span><span class="s">&quot;./ReferenceImages/BasicTextureTest.data&quot;</span><span class="p">,</span> <span class="s">&quot;./BasicTextureTest.data&quot;</span><span class="p">));</span>
+
+  <span class="n">window</span><span class="o">-&gt;</span><span class="n">Destroy</span><span class="p">();</span>
+<span class="p">}</span>
+
+<span class="n">TEST_F</span><span class="p">(</span><span class="n">RendererTest</span><span class="p">,</span> <span class="n">BasicDeferredTest</span><span class="p">)</span> <span class="p">{</span>
+  <span class="n">HEAP_ALLOCATOR</span><span class="p">(</span><span class="n">Temporary</span><span class="p">,</span> <span class="n">Memory</span><span class="o">::</span><span class="n">MonotonicAllocator</span><span class="p">,</span> <span class="mi">16384</span><span class="p">);</span>
+
+  <span class="n">HeapMemoryBuffer</span> <span class="nf">mainBuffer</span><span class="p">(</span><span class="mi">16384</span><span class="p">);</span>
+
+  <span class="n">RangeAllocator</span> <span class="nf">mainAllocator</span><span class="p">(</span><span class="n">mainBuffer</span><span class="p">,</span> <span class="mi">8192</span><span class="p">);</span>
+  <span class="n">RangeAllocator</span> <span class="nf">drawableAllocator</span><span class="p">(</span><span class="n">mainBuffer</span><span class="p">,</span> <span class="mi">8192</span><span class="p">);</span>
+
+  <span class="k">const</span> <span class="k">auto</span> <span class="n">window</span> <span class="o">=</span> <span class="n">CreateDefaultWindow</span><span class="p">();</span>
+
+  <span class="n">ApplicationInfo</span> <span class="n">appInfo</span><span class="p">;</span>
+  <span class="n">appInfo</span><span class="p">.</span><span class="n">m_name</span>    <span class="o">=</span> <span class="n">TEST_SUITE</span><span class="p">;</span>
+  <span class="n">appInfo</span><span class="p">.</span><span class="n">m_version</span> <span class="o">=</span> <span class="n">Version</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">);</span>
+
+  <span class="n">DeviceRequirements</span> <span class="n">requirements</span><span class="p">;</span>
+  <span class="n">requirements</span><span class="p">.</span><span class="n">m_discreteGPU</span>   <span class="o">=</span> <span class="nb">true</span><span class="p">;</span>
+  <span class="n">requirements</span><span class="p">.</span><span class="n">m_float64</span>       <span class="o">=</span> <span class="nb">false</span><span class="p">;</span>
+  <span class="n">requirements</span><span class="p">.</span><span class="n">m_int64</span>         <span class="o">=</span> <span class="nb">false</span><span class="p">;</span>
+  <span class="n">requirements</span><span class="p">.</span><span class="n">m_transferQueue</span> <span class="o">=</span> <span class="nb">false</span><span class="p">;</span>
+
+  <span class="k">const</span> <span class="n">ApplicationRequirements</span> <span class="n">applicationRequirements</span> <span class="o">=</span> <span class="p">{};</span>
+
+  <span class="n">DescriptorRequirements</span> <span class="n">descriptorRequirements</span> <span class="o">=</span> <span class="n">DescriptorRequirements</span><span class="p">(</span><span class="mi">3</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="n">allocatorTemporary</span><span class="p">);</span>
+  <span class="k">const</span> <span class="n">U32</span> <span class="n">UBO_SLOT</span> <span class="o">=</span> <span class="n">descriptorRequirements</span><span class="p">.</span><span class="n">AddDescriptor</span><span class="p">({</span> <span class="n">DescriptorType</span><span class="o">::</span><span class="n">UniformBuffer</span><span class="p">,</span> <span class="n">ShaderStage</span><span class="o">::</span><span class="n">Vertex</span> <span class="p">});</span>
+  <span class="k">const</span> <span class="n">U32</span> <span class="n">SAMPLER_SLOT</span> <span class="o">=</span> <span class="n">descriptorRequirements</span><span class="p">.</span><span class="n">AddDescriptor</span><span class="p">({</span><span class="n">DescriptorType</span><span class="o">::</span><span class="n">Sampler</span><span class="p">,</span> <span class="n">ShaderStage</span><span class="o">::</span><span class="n">Pixel</span><span class="p">});</span>
+  <span class="k">const</span> <span class="n">U32</span> <span class="n">BASIC_TEXTURE_SLOT</span> <span class="o">=</span> <span class="n">descriptorRequirements</span><span class="p">.</span><span class="n">AddDescriptor</span><span class="p">({</span><span class="n">DescriptorType</span><span class="o">::</span><span class="n">SampledImage</span><span class="p">,</span> <span class="n">ShaderStage</span><span class="o">::</span><span class="n">Pixel</span><span class="p">});</span>
+
+  <span class="k">const</span> <span class="n">U32</span> <span class="n">UBO_SET</span> <span class="o">=</span> <span class="n">descriptorRequirements</span><span class="p">.</span><span class="n">AddSet</span><span class="p">({</span> <span class="n">UBO_SLOT</span> <span class="p">});</span>
+  <span class="k">const</span> <span class="n">U32</span> <span class="n">SAMPLER_SET</span> <span class="o">=</span> <span class="n">descriptorRequirements</span><span class="p">.</span><span class="n">AddSet</span><span class="p">({</span> <span class="n">SAMPLER_SLOT</span> <span class="p">});</span>
+  <span class="k">const</span> <span class="n">U32</span> <span class="n">BASIC_TEXTURE_SET</span> <span class="o">=</span> <span class="n">descriptorRequirements</span><span class="p">.</span><span class="n">AddSet</span><span class="p">({</span> <span class="n">BASIC_TEXTURE_SLOT</span> <span class="p">});</span>
+
+  <span class="n">ShaderRequirements</span> <span class="n">shaderRequirements</span> <span class="o">=</span> <span class="n">ShaderRequirements</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="n">allocatorTemporary</span><span class="p">);</span>
+  <span class="k">const</span> <span class="n">U32</span> <span class="n">VERTEX_SHADER_ID</span> <span class="o">=</span> <span class="n">shaderRequirements</span><span class="p">.</span><span class="n">AddShader</span><span class="p">({</span> <span class="n">ShaderStage</span><span class="o">::</span><span class="n">Vertex</span><span class="p">,</span> <span class="s">&quot;BasicDeferredTest.vs&quot;</span><span class="p">,</span> <span class="n">AssetLocation</span><span class="o">::</span><span class="n">Shaders</span> <span class="p">});</span>
+  <span class="k">const</span> <span class="n">U32</span> <span class="n">PIXEL_SHADER_ID</span> <span class="o">=</span> <span class="n">shaderRequirements</span><span class="p">.</span><span class="n">AddShader</span><span class="p">({</span> <span class="n">ShaderStage</span><span class="o">::</span><span class="n">Pixel</span><span class="p">,</span> <span class="s">&quot;BasicDeferredTest.ps&quot;</span><span class="p">,</span> <span class="n">AssetLocation</span><span class="o">::</span><span class="n">Shaders</span> <span class="p">});</span>
+
+  <span class="k">const</span> <span class="n">U32</span> <span class="n">DEF_VERTEX_SHADER_ID</span> <span class="o">=</span> <span class="n">shaderRequirements</span><span class="p">.</span><span class="n">AddShader</span><span class="p">({</span> <span class="n">ShaderStage</span><span class="o">::</span><span class="n">Vertex</span><span class="p">,</span> <span class="s">&quot;BasicDeferredTest.Deferred.vs&quot;</span><span class="p">,</span> <span class="n">AssetLocation</span><span class="o">::</span><span class="n">Shaders</span> <span class="p">});</span>
+  <span class="k">const</span> <span class="n">U32</span> <span class="n">DEF_PIXEL_SHADER_ID</span> <span class="o">=</span> <span class="n">shaderRequirements</span><span class="p">.</span><span class="n">AddShader</span><span class="p">({</span> <span class="n">ShaderStage</span><span class="o">::</span><span class="n">Pixel</span><span class="p">,</span> <span class="s">&quot;BasicDeferredTest.Deferred.ps&quot;</span><span class="p">,</span> <span class="n">AssetLocation</span><span class="o">::</span><span class="n">Shaders</span> <span class="p">});</span>
+
+  <span class="n">RenderPassRequirements</span> <span class="n">renderPassRequirements</span> <span class="o">=</span> <span class="n">RenderPassRequirements</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="n">allocatorTemporary</span><span class="p">);</span>
+  <span class="n">renderPassRequirements</span><span class="p">.</span><span class="n">m_maxPools</span> <span class="o">=</span> <span class="mi">2</span><span class="p">;</span>
+
+  <span class="k">const</span> <span class="n">U32</span> <span class="n">COLOR_TARGET_1</span> <span class="o">=</span> <span class="n">renderPassRequirements</span><span class="p">.</span><span class="n">AddTarget</span><span class="p">({</span><span class="n">RawStorageFormat</span><span class="o">::</span><span class="n">R32G32B32A32_FLOAT</span><span class="p">});</span>
+
+  <span class="k">const</span> <span class="n">U32</span> <span class="n">GBUFFER_PASS</span> <span class="o">=</span> <span class="n">renderPassRequirements</span><span class="p">.</span><span class="n">AddPass</span><span class="p">({</span>
+    <span class="n">PipelinePassCreateInfo</span><span class="o">::</span><span class="n">Shaders</span><span class="p">{</span><span class="n">VERTEX_SHADER_ID</span><span class="p">,</span> <span class="n">PIXEL_SHADER_ID</span><span class="p">},</span>  <span class="c1">// SHADERS</span>
+    <span class="n">PipelinePassCreateInfo</span><span class="o">::</span><span class="n">InputTargets</span><span class="p">{},</span>                                    <span class="c1">// INPUT TARGETS</span>
+    <span class="n">PipelinePassCreateInfo</span><span class="o">::</span><span class="n">InputBuffers</span><span class="p">{},</span>
+    <span class="n">PipelinePassCreateInfo</span><span class="o">::</span><span class="n">OutputTargets</span><span class="p">{</span><span class="n">COLOR_TARGET_1</span><span class="p">},</span>                     <span class="c1">// OUTPUT TARGETS</span>
+    <span class="n">PipelinePassCreateInfo</span><span class="o">::</span><span class="n">OutputBuffers</span><span class="p">{},</span>                     <span class="c1">// OUTPUT TARGETS</span>
+    <span class="n">PipelinePassCreateInfo</span><span class="o">::</span><span class="n">DescriptorSets</span><span class="p">{</span><span class="n">UBO_SET</span><span class="p">,</span> <span class="n">SAMPLER_SET</span><span class="p">,</span> <span class="n">BASIC_TEXTURE_SET</span><span class="p">},</span>                        <span class="c1">// DESCRIPTORS</span>
+    <span class="n">ClearData</span><span class="p">{{</span><span class="mf">0.2f</span><span class="p">,</span> <span class="mf">0.2f</span><span class="p">,</span> <span class="mf">0.2f</span><span class="p">,</span> <span class="mf">1.0f</span><span class="p">},</span> <span class="mf">1.0f</span><span class="p">,</span> <span class="mi">0</span><span class="p">}</span>
+    <span class="p">});</span>
+
+  <span class="k">const</span> <span class="n">U32</span> <span class="n">SHADING_PASS</span> <span class="o">=</span> <span class="n">renderPassRequirements</span><span class="p">.</span><span class="n">AddPass</span><span class="p">({</span>
+    <span class="n">PipelinePassCreateInfo</span><span class="o">::</span><span class="n">Shaders</span><span class="p">{</span><span class="n">DEF_VERTEX_SHADER_ID</span><span class="p">,</span> <span class="n">DEF_PIXEL_SHADER_ID</span><span class="p">},</span>
+    <span class="n">PipelinePassCreateInfo</span><span class="o">::</span><span class="n">InputTargets</span><span class="p">{{</span><span class="n">COLOR_TARGET_1</span><span class="p">,</span> <span class="n">ShaderStage</span><span class="o">::</span><span class="n">Pixel</span><span class="p">}},</span>
+    <span class="n">PipelinePassCreateInfo</span><span class="o">::</span><span class="n">InputBuffers</span><span class="p">{},</span>
+    <span class="n">PipelinePassCreateInfo</span><span class="o">::</span><span class="n">OutputTargets</span><span class="p">{</span><span class="n">PRESENT_TARGET</span><span class="p">},</span> <span class="c1">// END OF RENDERING</span>
+    <span class="n">PipelinePassCreateInfo</span><span class="o">::</span><span class="n">OutputBuffers</span><span class="p">{},</span> <span class="c1">// END OF RENDERING</span>
+    <span class="n">PipelinePassCreateInfo</span><span class="o">::</span><span class="n">DescriptorSets</span><span class="p">{</span><span class="n">SAMPLER_SET</span><span class="p">},</span>
+    <span class="n">ClearData</span><span class="p">{{</span><span class="mf">0.2f</span><span class="p">,</span> <span class="mf">0.2f</span><span class="p">,</span> <span class="mf">0.2f</span><span class="p">,</span> <span class="mf">1.0f</span><span class="p">},</span> <span class="mf">1.0f</span><span class="p">,</span> <span class="mi">0</span><span class="p">}</span>
+    <span class="p">});</span>
+
+  <span class="k">auto</span> <span class="n">swapChainRequirements</span> <span class="o">=</span> <span class="n">window</span><span class="o">-&gt;</span><span class="n">GetSwapChainRequirements</span><span class="p">();</span>
+
+  <span class="n">std</span><span class="o">::</span><span class="n">unique_ptr</span><span class="o">&lt;</span><span class="n">Azura</span><span class="o">::</span><span class="n">Renderer</span><span class="o">&gt;</span> <span class="n">renderer</span> <span class="o">=</span> <span class="n">RenderSystem</span><span class="o">::</span><span class="n">CreateRenderer</span><span class="p">(</span><span class="n">appInfo</span><span class="p">,</span> <span class="n">requirements</span><span class="p">,</span> <span class="n">applicationRequirements</span><span class="p">,</span>
+    <span class="n">swapChainRequirements</span><span class="p">,</span> <span class="n">renderPassRequirements</span><span class="p">,</span>
+    <span class="n">descriptorRequirements</span><span class="p">,</span> <span class="n">shaderRequirements</span><span class="p">,</span> <span class="n">mainAllocator</span><span class="p">,</span> <span class="n">drawableAllocator</span><span class="p">,</span>
+    <span class="o">*</span><span class="n">window</span><span class="p">);</span>
+
+  <span class="n">RenderTestCases</span><span class="o">::</span><span class="n">ExecuteBasicDeferredTest</span><span class="p">(</span><span class="o">*</span><span class="n">renderer</span><span class="p">,</span> <span class="o">*</span><span class="n">window</span><span class="p">,</span> <span class="n">GBUFFER_PASS</span><span class="p">,</span> <span class="n">SHADING_PASS</span><span class="p">,</span> <span class="n">UBO_SLOT</span><span class="p">,</span> <span class="n">SAMPLER_SLOT</span><span class="p">,</span> <span class="n">BASIC_TEXTURE_SLOT</span><span class="p">,</span> <span class="n">log_TestRenderer</span><span class="p">);</span>
+
+  <span class="n">ASSERT_TRUE</span><span class="p">(</span><span class="n">CompareImageBytes</span><span class="p">(</span><span class="s">&quot;./ReferenceImages/BasicDeferredTest.data&quot;</span><span class="p">,</span> <span class="s">&quot;./BasicDeferredTest.data&quot;</span><span class="p">));</span>
+
+  <span class="n">window</span><span class="o">-&gt;</span><span class="n">Destroy</span><span class="p">();</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="file_Source_Azura_RenderSystem_Test_Renderer_test.h.html" class="btn btn-neutral float-right" title="File Renderer_test.h" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="file_Source_Azura_RenderSystem_Test_Renderer_test.cpp.html" class="btn btn-neutral" title="File Renderer_test.cpp" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2018, Vasu Mahesh
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  
+
+    
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+        <script type="text/javascript" src="../_static/jquery.js"></script>
+        <script type="text/javascript" src="../_static/underscore.js"></script>
+        <script type="text/javascript" src="../_static/doctools.js"></script>
+        <script type="text/javascript" src="../_static/collapsible-lists\js\CollapsibleLists.compressed.js"></script>
+        <script type="text/javascript" src="../_static/collapsible-lists\js\apply-collapsible-lists.js"></script>
+    
+
+  
+
+  <script type="text/javascript" src="../_static/js/theme.js"></script>
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

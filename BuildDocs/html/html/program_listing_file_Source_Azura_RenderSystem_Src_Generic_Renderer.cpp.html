@@ -1,0 +1,334 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>Program Listing for File Renderer.cpp &mdash; Azura  documentation</title>
+  
+
+  
+  
+  
+  
+
+  
+
+  
+  
+    
+
+  
+
+  <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/collapsible-lists\css\tree_view.css" type="text/css" />
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="File Renderer.h" href="file_Source_Azura_RenderSystem_Inc_Generic_Renderer.h.html" />
+    <link rel="prev" title="File Renderer.cpp" href="file_Source_Azura_RenderSystem_Src_Generic_Renderer.cpp.html" /> 
+
+  
+  <script src="../_static/js/modernizr.min.js"></script>
+
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search">
+          
+
+          
+            <a href="../index.html" class="icon icon-home"> Azura
+          
+
+          
+          </a>
+
+          
+            
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <ul>
+<li class="toctree-l1"><a class="reference internal" href="../setting-up.html">Setting Up</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../build-instructions.html">Build Instructions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../cmake-wrappers.html">CMake Wrappers</a></li>
+<li class="toctree-l1"><a class="reference internal" href="apiRoot.html">Azura API</a></li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">Azura</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../index.html">Docs</a> &raquo;</li>
+        
+          <li><a href="apiRoot.html">Azura API</a> &raquo;</li>
+        
+          <li><a href="file_Source_Azura_RenderSystem_Src_Generic_Renderer.cpp.html">File Renderer.cpp</a> &raquo;</li>
+        
+      <li>Program Listing for File Renderer.cpp</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            <a href="../_sources/html/program_listing_file_Source_Azura_RenderSystem_Src_Generic_Renderer.cpp.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="program-listing-for-file-renderer-cpp">
+<span id="program-listing-file-source-azura-rendersystem-src-generic-renderer-cpp"></span><h1>Program Listing for File Renderer.cpp<a class="headerlink" href="#program-listing-for-file-renderer-cpp" title="Permalink to this headline">¶</a></h1>
+<p>↰ <a class="reference internal" href="file_Source_Azura_RenderSystem_Src_Generic_Renderer.cpp.html#file-source-azura-rendersystem-src-generic-renderer-cpp"><span class="std std-ref">Return to documentation for file</span></a> (<code class="docutils literal notranslate"><span class="pre">Source\Azura\RenderSystem\Src\Generic\Renderer.cpp</span></code>)</p>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="cp">#include</span> <span class="cpf">&quot;Generic/Renderer.h&quot;</span><span class="cp"></span>
+
+<span class="cp">#include</span> <span class="cpf">&lt;utility&gt;</span><span class="cp"></span>
+<span class="cp">#include</span> <span class="cpf">&quot;Generic/Window.h&quot;</span><span class="cp"></span>
+
+<span class="k">namespace</span> <span class="n">Azura</span> <span class="p">{</span>
+
+<span class="n">Renderer</span><span class="o">::</span><span class="n">Renderer</span><span class="p">(</span><span class="n">ApplicationInfo</span> <span class="n">appInfo</span><span class="p">,</span>
+                   <span class="k">const</span> <span class="n">DeviceRequirements</span><span class="o">&amp;</span> <span class="n">deviceRequirements</span><span class="p">,</span>
+                   <span class="n">ApplicationRequirements</span> <span class="n">appRequirements</span><span class="p">,</span>
+                   <span class="k">const</span> <span class="n">SwapChainRequirements</span><span class="o">&amp;</span> <span class="n">swapChainRequirements</span><span class="p">,</span>
+                   <span class="k">const</span> <span class="n">DescriptorRequirements</span><span class="o">&amp;</span> <span class="n">descriptorRequirements</span><span class="p">,</span>
+                   <span class="n">Memory</span><span class="o">::</span><span class="n">Allocator</span><span class="o">&amp;</span> <span class="n">mainAllocator</span><span class="p">,</span>
+                   <span class="n">Memory</span><span class="o">::</span><span class="n">Allocator</span><span class="o">&amp;</span> <span class="n">drawAllocator</span><span class="p">,</span>
+                   <span class="n">Window</span><span class="o">&amp;</span> <span class="n">window</span><span class="p">)</span>
+  <span class="o">:</span> <span class="n">m_descriptorSlots</span><span class="p">(</span><span class="n">descriptorRequirements</span><span class="p">.</span><span class="n">m_descriptorSlots</span><span class="p">.</span><span class="n">GetSize</span><span class="p">(),</span> <span class="n">mainAllocator</span><span class="p">),</span>
+    <span class="n">m_descriptorSetTable</span><span class="p">(</span><span class="n">descriptorRequirements</span><span class="p">.</span><span class="n">m_descriptorSets</span><span class="p">.</span><span class="n">GetSize</span><span class="p">(),</span> <span class="n">mainAllocator</span><span class="p">),</span>
+    <span class="n">m_mainAllocator</span><span class="p">(</span><span class="n">mainAllocator</span><span class="p">),</span>
+    <span class="n">m_drawPoolAllocator</span><span class="p">(</span><span class="n">drawAllocator</span><span class="p">),</span>
+    <span class="n">m_window</span><span class="p">(</span><span class="n">window</span><span class="p">),</span>
+    <span class="n">m_applicationInfo</span><span class="p">(</span><span class="n">std</span><span class="o">::</span><span class="n">move</span><span class="p">(</span><span class="n">appInfo</span><span class="p">)),</span>
+    <span class="n">m_deviceRequirements</span><span class="p">(</span><span class="n">deviceRequirements</span><span class="p">),</span>
+    <span class="n">m_appRequirements</span><span class="p">(</span><span class="n">std</span><span class="o">::</span><span class="n">move</span><span class="p">(</span><span class="n">appRequirements</span><span class="p">)),</span>
+    <span class="n">m_swapChainRequirements</span><span class="p">(</span><span class="n">swapChainRequirements</span><span class="p">),</span>
+    <span class="n">m_frameCount</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span> <span class="p">{</span>
+
+  <span class="n">U32</span> <span class="n">setIdx</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+  <span class="k">for</span> <span class="p">(</span><span class="k">const</span> <span class="k">auto</span><span class="o">&amp;</span> <span class="nl">set</span> <span class="p">:</span> <span class="n">descriptorRequirements</span><span class="p">.</span><span class="n">m_descriptorSets</span><span class="p">)</span> <span class="p">{</span>
+
+    <span class="n">U32</span> <span class="n">bindIdx</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+    <span class="k">for</span><span class="p">(</span><span class="k">const</span> <span class="k">auto</span><span class="o">&amp;</span> <span class="nl">descriptorId</span> <span class="p">:</span> <span class="n">set</span><span class="p">)</span>
+    <span class="p">{</span>
+      <span class="k">const</span> <span class="k">auto</span><span class="o">&amp;</span> <span class="n">slot</span> <span class="o">=</span> <span class="n">descriptorRequirements</span><span class="p">.</span><span class="n">m_descriptorSlots</span><span class="p">[</span><span class="n">descriptorId</span><span class="p">];</span>
+
+      <span class="n">DescriptorSlot</span> <span class="n">setSlot</span> <span class="o">=</span> <span class="p">{};</span>
+      <span class="n">setSlot</span><span class="p">.</span><span class="n">m_type</span>         <span class="o">=</span> <span class="n">slot</span><span class="p">.</span><span class="n">m_type</span><span class="p">;</span>
+      <span class="n">setSlot</span><span class="p">.</span><span class="n">m_stages</span>       <span class="o">=</span> <span class="n">slot</span><span class="p">.</span><span class="n">m_stages</span><span class="p">;</span>
+      <span class="n">setSlot</span><span class="p">.</span><span class="n">m_setIdx</span>       <span class="o">=</span> <span class="n">setIdx</span><span class="p">;</span>
+      <span class="n">setSlot</span><span class="p">.</span><span class="n">m_bindIdx</span>      <span class="o">=</span> <span class="n">bindIdx</span><span class="p">;</span>
+
+      <span class="n">m_descriptorSlots</span><span class="p">.</span><span class="n">PushBack</span><span class="p">(</span><span class="n">std</span><span class="o">::</span><span class="n">move</span><span class="p">(</span><span class="n">setSlot</span><span class="p">));</span>
+      <span class="o">++</span><span class="n">bindIdx</span><span class="p">;</span>
+    <span class="p">}</span>
+
+    <span class="k">const</span> <span class="k">auto</span><span class="o">&amp;</span> <span class="n">typeSlot</span> <span class="o">=</span> <span class="n">descriptorRequirements</span><span class="p">.</span><span class="n">m_descriptorSlots</span><span class="p">[</span><span class="n">set</span><span class="p">[</span><span class="mi">0</span><span class="p">]];</span>
+
+    <span class="n">DescriptorTableEntry</span> <span class="n">entry</span> <span class="o">=</span> <span class="p">{};</span>
+    <span class="n">entry</span><span class="p">.</span><span class="n">m_count</span> <span class="o">=</span> <span class="n">bindIdx</span><span class="p">;</span>
+    <span class="n">entry</span><span class="p">.</span><span class="n">m_type</span> <span class="o">=</span> <span class="n">typeSlot</span><span class="p">.</span><span class="n">m_type</span><span class="p">;</span>
+
+    <span class="n">m_descriptorSetTable</span><span class="p">.</span><span class="n">PushBack</span><span class="p">(</span><span class="n">entry</span><span class="p">);</span>
+
+    <span class="o">++</span><span class="n">setIdx</span><span class="p">;</span>
+  <span class="p">}</span>
+
+  <span class="k">for</span> <span class="p">(</span><span class="k">const</span> <span class="k">auto</span><span class="o">&amp;</span> <span class="nl">slot</span> <span class="p">:</span> <span class="n">m_descriptorSlots</span><span class="p">)</span> <span class="p">{</span>
+    <span class="k">switch</span> <span class="p">(</span><span class="n">slot</span><span class="p">.</span><span class="n">m_type</span><span class="p">)</span> <span class="p">{</span>
+
+      <span class="k">case</span> <span class="n">DescriptorType</span><span class="o">::</span><span class="nl">UniformBuffer</span><span class="p">:</span>
+        <span class="o">++</span><span class="n">m_descriptorCount</span><span class="p">.</span><span class="n">m_numUniformSlots</span><span class="p">;</span>
+        <span class="k">break</span><span class="p">;</span>
+
+      <span class="k">case</span> <span class="n">DescriptorType</span><span class="o">::</span><span class="nl">Sampler</span><span class="p">:</span>
+        <span class="o">++</span><span class="n">m_descriptorCount</span><span class="p">.</span><span class="n">m_numSamplerSlots</span><span class="p">;</span>
+        <span class="k">break</span><span class="p">;</span>
+      <span class="k">case</span> <span class="n">DescriptorType</span><span class="o">::</span><span class="nl">SampledImage</span><span class="p">:</span>
+        <span class="o">++</span><span class="n">m_descriptorCount</span><span class="p">.</span><span class="n">m_numSampledImageSlots</span><span class="p">;</span>
+        <span class="k">break</span><span class="p">;</span>
+      <span class="k">case</span> <span class="n">DescriptorType</span><span class="o">::</span><span class="nl">CombinedImageSampler</span><span class="p">:</span>
+        <span class="o">++</span><span class="n">m_descriptorCount</span><span class="p">.</span><span class="n">m_numCombinedSamplerSlots</span><span class="p">;</span>
+        <span class="k">break</span><span class="p">;</span>
+
+      <span class="k">case</span> <span class="n">DescriptorType</span><span class="o">::</span><span class="nl">PushConstant</span><span class="p">:</span>
+        <span class="o">++</span><span class="n">m_descriptorCount</span><span class="p">.</span><span class="n">m_numPushConstantsSlots</span><span class="p">;</span>
+        <span class="k">break</span><span class="p">;</span>
+      <span class="k">default</span><span class="o">:</span>
+        <span class="k">break</span><span class="p">;</span>
+    <span class="p">}</span>
+  <span class="p">}</span>
+<span class="p">}</span>
+
+<span class="kt">void</span> <span class="n">Renderer</span><span class="o">::</span><span class="n">EnterRenderFrame</span><span class="p">()</span> <span class="p">{</span>
+<span class="p">}</span>
+
+<span class="kt">void</span> <span class="n">Renderer</span><span class="o">::</span><span class="n">ExitRenderFrame</span><span class="p">()</span> <span class="p">{</span>
+  <span class="n">m_frameCount</span> <span class="o">=</span> <span class="p">(</span><span class="n">m_frameCount</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)</span> <span class="o">%</span> <span class="n">m_swapChainRequirements</span><span class="p">.</span><span class="n">m_framesInFlight</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="k">const</span> <span class="n">ApplicationInfo</span><span class="o">&amp;</span> <span class="n">Renderer</span><span class="o">::</span><span class="n">GetApplicationInfo</span><span class="p">()</span> <span class="k">const</span> <span class="p">{</span>
+  <span class="k">return</span> <span class="n">m_applicationInfo</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="k">const</span> <span class="n">DeviceRequirements</span><span class="o">&amp;</span> <span class="n">Renderer</span><span class="o">::</span><span class="n">GetDeviceRequirements</span><span class="p">()</span> <span class="k">const</span> <span class="p">{</span>
+  <span class="k">return</span> <span class="n">m_deviceRequirements</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="k">const</span> <span class="n">ApplicationRequirements</span><span class="o">&amp;</span> <span class="n">Renderer</span><span class="o">::</span><span class="n">GetApplicationRequirements</span><span class="p">()</span> <span class="k">const</span> <span class="p">{</span>
+  <span class="k">return</span> <span class="n">m_appRequirements</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="k">const</span> <span class="n">SwapChainRequirements</span><span class="o">&amp;</span> <span class="n">Renderer</span><span class="o">::</span><span class="n">GetSwapchainRequirements</span><span class="p">()</span> <span class="k">const</span> <span class="p">{</span>
+  <span class="k">return</span> <span class="n">m_swapChainRequirements</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="n">U32</span> <span class="n">Renderer</span><span class="o">::</span><span class="n">GetCurrentFrame</span><span class="p">()</span> <span class="k">const</span> <span class="p">{</span>
+  <span class="k">return</span> <span class="n">m_frameCount</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="kt">void</span> <span class="n">Renderer</span><span class="o">::</span><span class="n">SetCurrentFrame</span><span class="p">(</span><span class="n">U32</span> <span class="n">frameIdx</span><span class="p">)</span> <span class="p">{</span>
+  <span class="n">m_frameCount</span> <span class="o">=</span> <span class="n">frameIdx</span><span class="p">;</span>
+<span class="p">}</span>
+<span class="p">}</span> <span class="c1">// namespace Azura</span>
+</pre></div>
+</div>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="file_Source_Azura_RenderSystem_Inc_Generic_Renderer.h.html" class="btn btn-neutral float-right" title="File Renderer.h" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="file_Source_Azura_RenderSystem_Src_Generic_Renderer.cpp.html" class="btn btn-neutral" title="File Renderer.cpp" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2018, Vasu Mahesh
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  
+
+    
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+        <script type="text/javascript" src="../_static/jquery.js"></script>
+        <script type="text/javascript" src="../_static/underscore.js"></script>
+        <script type="text/javascript" src="../_static/doctools.js"></script>
+        <script type="text/javascript" src="../_static/collapsible-lists\js\CollapsibleLists.compressed.js"></script>
+        <script type="text/javascript" src="../_static/collapsible-lists\js\apply-collapsible-lists.js"></script>
+    
+
+  
+
+  <script type="text/javascript" src="../_static/js/theme.js"></script>
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

@@ -1,0 +1,13 @@
+.. _exhale_variable__power_bench_2_inc_2_power_bench_2_utils_8h_1a7212850bbb07021c15d65ae2e2e73442:
+
+Variable Utils::BIGGER_THAN_CACHE
+=================================
+
+- Defined in :ref:`file_Source_PowerBench_Inc_PowerBench_Utils.h`
+
+
+Variable Documentation
+----------------------
+
+
+.. doxygenvariable:: Utils::BIGGER_THAN_CACHE

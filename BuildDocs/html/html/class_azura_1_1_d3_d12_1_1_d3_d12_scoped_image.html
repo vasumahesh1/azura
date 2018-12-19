@@ -1,0 +1,289 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>Class D3D12ScopedImage &mdash; Azura  documentation</title>
+  
+
+  
+  
+  
+  
+
+  
+
+  
+  
+    
+
+  
+
+  <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/collapsible-lists\css\tree_view.css" type="text/css" />
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Class D3D12ScopedPipeline" href="class_azura_1_1_d3_d12_1_1_d3_d12_scoped_pipeline.html" />
+    <link rel="prev" title="Class D3D12ScopedComputePass" href="class_azura_1_1_d3_d12_1_1_d3_d12_scoped_compute_pass.html" /> 
+
+  
+  <script src="../_static/js/modernizr.min.js"></script>
+
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search">
+          
+
+          
+            <a href="../index.html" class="icon icon-home"> Azura
+          
+
+          
+          </a>
+
+          
+            
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <ul>
+<li class="toctree-l1"><a class="reference internal" href="../setting-up.html">Setting Up</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../build-instructions.html">Build Instructions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../cmake-wrappers.html">CMake Wrappers</a></li>
+<li class="toctree-l1"><a class="reference internal" href="apiRoot.html">Azura API</a></li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">Azura</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../index.html">Docs</a> &raquo;</li>
+        
+          <li><a href="apiRoot.html">Azura API</a> &raquo;</li>
+        
+      <li>Class D3D12ScopedImage</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            <a href="../_sources/html/class_azura_1_1_d3_d12_1_1_d3_d12_scoped_image.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="class-d3d12scopedimage">
+<span id="exhale-class-class-azura-1-1-d3-d12-1-1-d3-d12-scoped-image"></span><h1>Class D3D12ScopedImage<a class="headerlink" href="#class-d3d12scopedimage" title="Permalink to this headline">¶</a></h1>
+<ul class="simple">
+<li>Defined in <a class="reference internal" href="file_Source_Azura_RenderSystem_Inc_D3D12_D3D12ScopedImage.h.html#file-source-azura-rendersystem-inc-d3d12-d3d12scopedimage-h"><span class="std std-ref">File D3D12ScopedImage.h</span></a></li>
+</ul>
+<div class="section" id="class-documentation">
+<h2>Class Documentation<a class="headerlink" href="#class-documentation" title="Permalink to this headline">¶</a></h2>
+<dl class="class">
+<dt id="_CPPv3N5Azura5D3D1216D3D12ScopedImageE">
+<span id="_CPPv2N5Azura5D3D1216D3D12ScopedImageE"></span><span id="Azura::D3D12::D3D12ScopedImage"></span><span class="target" id="class_azura_1_1_d3_d12_1_1_d3_d12_scoped_image"></span><em class="property">class </em><code class="descname">D3D12ScopedImage</code><a class="headerlink" href="#_CPPv3N5Azura5D3D1216D3D12ScopedImageE" title="Permalink to this definition">¶</a><br /></dt>
+<dd><div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric">Public Functions</p>
+<dl class="function">
+<dt id="_CPPv3N5Azura5D3D1216D3D12ScopedImage6CreateERKN9Microsoft3WRL6ComPtrI12ID3D12DeviceEE21D3D12_RESOURCE_STATES20D3D12_RESOURCE_FLAGSRK11TextureDescRK3Log">
+<span id="_CPPv2N5Azura5D3D1216D3D12ScopedImage6CreateERKN9Microsoft3WRL6ComPtrI12ID3D12DeviceEE21D3D12_RESOURCE_STATES20D3D12_RESOURCE_FLAGSRK11TextureDescRK3Log"></span><span id="Azura::D3D12::D3D12ScopedImage::Create__Microsoft::WRL::ComPtr:ID3D12Device:CR.D3D12_RESOURCE_STATES.D3D12_RESOURCE_FLAGS.TextureDescCR.LogCR"></span><span class="target" id="class_azura_1_1_d3_d12_1_1_d3_d12_scoped_image_1ab5c473bb268faa9832243a1af4101686"></span>void <code class="descname">Create</code><span class="sig-paren">(</span><em class="property">const</em> Microsoft::WRL::ComPtr&lt;ID3D12Device&gt; &amp;<em>device</em>, D3D12_RESOURCE_STATES <em>initState</em>, D3D12_RESOURCE_FLAGS <em>resourceFlags</em>, <em class="property">const</em> <a class="reference internal" href="struct_azura_1_1_texture_desc.html#_CPPv3N5Azura11TextureDescE" title="Azura::TextureDesc">TextureDesc</a> &amp;<em>desc</em>, <em class="property">const</em> <a class="reference internal" href="class_azura_1_1_log.html#_CPPv3N5Azura3LogE" title="Azura::Log">Log</a> &amp;<em>log_D3D12RenderSystem</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv3N5Azura5D3D1216D3D12ScopedImage6CreateERKN9Microsoft3WRL6ComPtrI12ID3D12DeviceEE21D3D12_RESOURCE_STATES20D3D12_RESOURCE_FLAGSRK11TextureDescRK3Log" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt id="_CPPv3NK5Azura5D3D1216D3D12ScopedImage4RealEv">
+<span id="_CPPv2NK5Azura5D3D1216D3D12ScopedImage4RealEv"></span><span id="Azura::D3D12::D3D12ScopedImage::RealC"></span><span class="target" id="class_azura_1_1_d3_d12_1_1_d3_d12_scoped_image_1a0e211de16b1f6e0d4a36d2094c025bbc"></span>ID3D12Resource *<code class="descname">Real</code><span class="sig-paren">(</span><span class="sig-paren">)</span> <em class="property">const</em><a class="headerlink" href="#_CPPv3NK5Azura5D3D1216D3D12ScopedImage4RealEv" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt id="_CPPv3NK5Azura5D3D1216D3D12ScopedImage9GetFormatEv">
+<span id="_CPPv2NK5Azura5D3D1216D3D12ScopedImage9GetFormatEv"></span><span id="Azura::D3D12::D3D12ScopedImage::GetFormatC"></span><span class="target" id="class_azura_1_1_d3_d12_1_1_d3_d12_scoped_image_1a041bccabffa545cd12fee319af604284"></span><a class="reference internal" href="enum__raw_storage_format_8h_1a15eb2139633839e42a35ee86aaf6f48c.html#_CPPv3N5Azura16RawStorageFormatE" title="Azura::RawStorageFormat">RawStorageFormat</a> <code class="descname">GetFormat</code><span class="sig-paren">(</span><span class="sig-paren">)</span> <em class="property">const</em><a class="headerlink" href="#_CPPv3NK5Azura5D3D1216D3D12ScopedImage9GetFormatEv" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt id="_CPPv3NK5Azura5D3D1216D3D12ScopedImage10RealComPtrEv">
+<span id="_CPPv2NK5Azura5D3D1216D3D12ScopedImage10RealComPtrEv"></span><span id="Azura::D3D12::D3D12ScopedImage::RealComPtrC"></span><span class="target" id="class_azura_1_1_d3_d12_1_1_d3_d12_scoped_image_1ada100e352824058652edfdc4bf94f95f"></span>Microsoft::WRL::ComPtr&lt;ID3D12Resource&gt; <code class="descname">RealComPtr</code><span class="sig-paren">(</span><span class="sig-paren">)</span> <em class="property">const</em><a class="headerlink" href="#_CPPv3NK5Azura5D3D1216D3D12ScopedImage10RealComPtrEv" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt id="_CPPv3NK5Azura5D3D1216D3D12ScopedImage14CopyFromBufferERKN9Microsoft3WRL6ComPtrI12ID3D12DeviceEEP25ID3D12GraphicsCommandListRK17D3D12ScopedBuffer6UINT64">
+<span id="_CPPv2NK5Azura5D3D1216D3D12ScopedImage14CopyFromBufferERKN9Microsoft3WRL6ComPtrI12ID3D12DeviceEEP25ID3D12GraphicsCommandListRK17D3D12ScopedBuffer6UINT64"></span><span id="Azura::D3D12::D3D12ScopedImage::CopyFromBuffer__Microsoft::WRL::ComPtr:ID3D12Device:CR.ID3D12GraphicsCommandListP.D3D12ScopedBufferCR.UINT64C"></span><span class="target" id="class_azura_1_1_d3_d12_1_1_d3_d12_scoped_image_1a31a3461a46c776f7c94a35f364aef046"></span>void <code class="descname">CopyFromBuffer</code><span class="sig-paren">(</span><em class="property">const</em> Microsoft::WRL::ComPtr&lt;ID3D12Device&gt; &amp;<em>device</em>, ID3D12GraphicsCommandList *<em>commandList</em>, <em class="property">const</em> <a class="reference internal" href="class_azura_1_1_d3_d12_1_1_d3_d12_scoped_buffer.html#_CPPv3N5Azura5D3D1217D3D12ScopedBufferE" title="Azura::D3D12::D3D12ScopedBuffer">D3D12ScopedBuffer</a> &amp;<em>sourceBuffer</em>, UINT64 <em>sourceOffset</em><span class="sig-paren">)</span> <em class="property">const</em><a class="headerlink" href="#_CPPv3NK5Azura5D3D1216D3D12ScopedImage14CopyFromBufferERKN9Microsoft3WRL6ComPtrI12ID3D12DeviceEEP25ID3D12GraphicsCommandListRK17D3D12ScopedBuffer6UINT64" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt id="_CPPv3NK5Azura5D3D1216D3D12ScopedImage10TransitionEP25ID3D12GraphicsCommandList21D3D12_RESOURCE_STATES21D3D12_RESOURCE_STATESRK3Log">
+<span id="_CPPv2NK5Azura5D3D1216D3D12ScopedImage10TransitionEP25ID3D12GraphicsCommandList21D3D12_RESOURCE_STATES21D3D12_RESOURCE_STATESRK3Log"></span><span id="Azura::D3D12::D3D12ScopedImage::Transition__ID3D12GraphicsCommandListP.D3D12_RESOURCE_STATES.D3D12_RESOURCE_STATES.LogCRC"></span><span class="target" id="class_azura_1_1_d3_d12_1_1_d3_d12_scoped_image_1a96d088ce5e7b76c8e575c79d36d63f12"></span>void <code class="descname">Transition</code><span class="sig-paren">(</span>ID3D12GraphicsCommandList *<em>commandList</em>, D3D12_RESOURCE_STATES <em>fromState</em>, D3D12_RESOURCE_STATES <em>toState</em>, <em class="property">const</em> <a class="reference internal" href="class_azura_1_1_log.html#_CPPv3N5Azura3LogE" title="Azura::Log">Log</a> &amp;<em>log_D3D12RenderSystem</em><span class="sig-paren">)</span> <em class="property">const</em><a class="headerlink" href="#_CPPv3NK5Azura5D3D1216D3D12ScopedImage10TransitionEP25ID3D12GraphicsCommandList21D3D12_RESOURCE_STATES21D3D12_RESOURCE_STATESRK3Log" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt id="_CPPv3N5Azura5D3D1216D3D12ScopedImage10TransitionEP25ID3D12GraphicsCommandList21D3D12_RESOURCE_STATESRK3Log">
+<span id="_CPPv2N5Azura5D3D1216D3D12ScopedImage10TransitionEP25ID3D12GraphicsCommandList21D3D12_RESOURCE_STATESRK3Log"></span><span id="Azura::D3D12::D3D12ScopedImage::Transition__ID3D12GraphicsCommandListP.D3D12_RESOURCE_STATES.LogCR"></span><span class="target" id="class_azura_1_1_d3_d12_1_1_d3_d12_scoped_image_1aa5ad0f716f7ec73bae565e30b300a79b"></span>void <code class="descname">Transition</code><span class="sig-paren">(</span>ID3D12GraphicsCommandList *<em>commandList</em>, D3D12_RESOURCE_STATES <em>toState</em>, <em class="property">const</em> <a class="reference internal" href="class_azura_1_1_log.html#_CPPv3N5Azura3LogE" title="Azura::Log">Log</a> &amp;<em>log_D3D12RenderSystem</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv3N5Azura5D3D1216D3D12ScopedImage10TransitionEP25ID3D12GraphicsCommandList21D3D12_RESOURCE_STATESRK3Log" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+</div>
+<div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric">Public Static Functions</p>
+<dl class="function">
+<dt id="_CPPv3N5Azura5D3D1216D3D12ScopedImage6GetSRVE16RawStorageFormat13ImageViewTypeRK3Log">
+<span id="_CPPv2N5Azura5D3D1216D3D12ScopedImage6GetSRVE16RawStorageFormat13ImageViewTypeRK3Log"></span><span id="Azura::D3D12::D3D12ScopedImage::GetSRV__RawStorageFormat.ImageViewType.LogCR"></span><span class="target" id="class_azura_1_1_d3_d12_1_1_d3_d12_scoped_image_1a92610cea08406cea486d2d889455a0dc"></span>D3D12_SHADER_RESOURCE_VIEW_DESC <code class="descname">GetSRV</code><span class="sig-paren">(</span><a class="reference internal" href="enum__raw_storage_format_8h_1a15eb2139633839e42a35ee86aaf6f48c.html#_CPPv3N5Azura16RawStorageFormatE" title="Azura::RawStorageFormat">RawStorageFormat</a> <em>viewFormat</em>, <a class="reference internal" href="enum__azura_2_render_system_2_inc_2_generic_2_generic_types_8h_1a6642b6d9a9ab82e289d75cebcf7e60c0.html#_CPPv3N5Azura13ImageViewTypeE" title="Azura::ImageViewType">ImageViewType</a> <em>imageView</em>, <em class="property">const</em> <a class="reference internal" href="class_azura_1_1_log.html#_CPPv3N5Azura3LogE" title="Azura::Log">Log</a> &amp;<em>log_D3D12RenderSystem</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv3N5Azura5D3D1216D3D12ScopedImage6GetSRVE16RawStorageFormat13ImageViewTypeRK3Log" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt id="_CPPv3N5Azura5D3D1216D3D12ScopedImage6GetUAVE16RawStorageFormat13ImageViewTypeRK3Log">
+<span id="_CPPv2N5Azura5D3D1216D3D12ScopedImage6GetUAVE16RawStorageFormat13ImageViewTypeRK3Log"></span><span id="Azura::D3D12::D3D12ScopedImage::GetUAV__RawStorageFormat.ImageViewType.LogCR"></span><span class="target" id="class_azura_1_1_d3_d12_1_1_d3_d12_scoped_image_1a24dac308f3a9ffe3a0d25027c5cf0705"></span>D3D12_UNORDERED_ACCESS_VIEW_DESC <code class="descname">GetUAV</code><span class="sig-paren">(</span><a class="reference internal" href="enum__raw_storage_format_8h_1a15eb2139633839e42a35ee86aaf6f48c.html#_CPPv3N5Azura16RawStorageFormatE" title="Azura::RawStorageFormat">RawStorageFormat</a> <em>viewFormat</em>, <a class="reference internal" href="enum__azura_2_render_system_2_inc_2_generic_2_generic_types_8h_1a6642b6d9a9ab82e289d75cebcf7e60c0.html#_CPPv3N5Azura13ImageViewTypeE" title="Azura::ImageViewType">ImageViewType</a> <em>imageView</em>, <em class="property">const</em> <a class="reference internal" href="class_azura_1_1_log.html#_CPPv3N5Azura3LogE" title="Azura::Log">Log</a> &amp;<em>log_D3D12RenderSystem</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv3N5Azura5D3D1216D3D12ScopedImage6GetUAVE16RawStorageFormat13ImageViewTypeRK3Log" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt id="_CPPv3N5Azura5D3D1216D3D12ScopedImage6GetDSVE16RawStorageFormat13ImageViewTypeRK3Log">
+<span id="_CPPv2N5Azura5D3D1216D3D12ScopedImage6GetDSVE16RawStorageFormat13ImageViewTypeRK3Log"></span><span id="Azura::D3D12::D3D12ScopedImage::GetDSV__RawStorageFormat.ImageViewType.LogCR"></span><span class="target" id="class_azura_1_1_d3_d12_1_1_d3_d12_scoped_image_1a60ce1d146c261569aa1661d865d43975"></span>D3D12_DEPTH_STENCIL_VIEW_DESC <code class="descname">GetDSV</code><span class="sig-paren">(</span><a class="reference internal" href="enum__raw_storage_format_8h_1a15eb2139633839e42a35ee86aaf6f48c.html#_CPPv3N5Azura16RawStorageFormatE" title="Azura::RawStorageFormat">RawStorageFormat</a> <em>viewFormat</em>, <a class="reference internal" href="enum__azura_2_render_system_2_inc_2_generic_2_generic_types_8h_1a6642b6d9a9ab82e289d75cebcf7e60c0.html#_CPPv3N5Azura13ImageViewTypeE" title="Azura::ImageViewType">ImageViewType</a> <em>imageView</em>, <em class="property">const</em> <a class="reference internal" href="class_azura_1_1_log.html#_CPPv3N5Azura3LogE" title="Azura::Log">Log</a> &amp;<em>log_D3D12RenderSystem</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv3N5Azura5D3D1216D3D12ScopedImage6GetDSVE16RawStorageFormat13ImageViewTypeRK3Log" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt id="_CPPv3N5Azura5D3D1216D3D12ScopedImage6GetRTVE16RawStorageFormat13ImageViewTypeRK3Log">
+<span id="_CPPv2N5Azura5D3D1216D3D12ScopedImage6GetRTVE16RawStorageFormat13ImageViewTypeRK3Log"></span><span id="Azura::D3D12::D3D12ScopedImage::GetRTV__RawStorageFormat.ImageViewType.LogCR"></span><span class="target" id="class_azura_1_1_d3_d12_1_1_d3_d12_scoped_image_1ab80d10b3ae5572945d8a2ed1f9370c40"></span>D3D12_RENDER_TARGET_VIEW_DESC <code class="descname">GetRTV</code><span class="sig-paren">(</span><a class="reference internal" href="enum__raw_storage_format_8h_1a15eb2139633839e42a35ee86aaf6f48c.html#_CPPv3N5Azura16RawStorageFormatE" title="Azura::RawStorageFormat">RawStorageFormat</a> <em>viewFormat</em>, <a class="reference internal" href="enum__azura_2_render_system_2_inc_2_generic_2_generic_types_8h_1a6642b6d9a9ab82e289d75cebcf7e60c0.html#_CPPv3N5Azura13ImageViewTypeE" title="Azura::ImageViewType">ImageViewType</a> <em>imageView</em>, <em class="property">const</em> <a class="reference internal" href="class_azura_1_1_log.html#_CPPv3N5Azura3LogE" title="Azura::Log">Log</a> &amp;<em>log_D3D12RenderSystem</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv3N5Azura5D3D1216D3D12ScopedImage6GetRTVE16RawStorageFormat13ImageViewTypeRK3Log" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+</div>
+</dd></dl>
+
+</div>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="class_azura_1_1_d3_d12_1_1_d3_d12_scoped_pipeline.html" class="btn btn-neutral float-right" title="Class D3D12ScopedPipeline" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="class_azura_1_1_d3_d12_1_1_d3_d12_scoped_compute_pass.html" class="btn btn-neutral" title="Class D3D12ScopedComputePass" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2018, Vasu Mahesh
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  
+
+    
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+        <script type="text/javascript" src="../_static/jquery.js"></script>
+        <script type="text/javascript" src="../_static/underscore.js"></script>
+        <script type="text/javascript" src="../_static/doctools.js"></script>
+        <script type="text/javascript" src="../_static/collapsible-lists\js\CollapsibleLists.compressed.js"></script>
+        <script type="text/javascript" src="../_static/collapsible-lists\js\apply-collapsible-lists.js"></script>
+    
+
+  
+
+  <script type="text/javascript" src="../_static/js/theme.js"></script>
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

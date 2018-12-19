@@ -1,0 +1,419 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>Program Listing for File VkScopedImage.cpp &mdash; Azura  documentation</title>
+  
+
+  
+  
+  
+  
+
+  
+
+  
+  
+    
+
+  
+
+  <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/collapsible-lists\css\tree_view.css" type="text/css" />
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="File VkScopedImage.h" href="file_Source_Azura_RenderSystem_Inc_Vulkan_VkScopedImage.h.html" />
+    <link rel="prev" title="File VkScopedImage.cpp" href="file_Source_Azura_RenderSystem_Src_Vulkan_VkScopedImage.cpp.html" /> 
+
+  
+  <script src="../_static/js/modernizr.min.js"></script>
+
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search">
+          
+
+          
+            <a href="../index.html" class="icon icon-home"> Azura
+          
+
+          
+          </a>
+
+          
+            
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <ul>
+<li class="toctree-l1"><a class="reference internal" href="../setting-up.html">Setting Up</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../build-instructions.html">Build Instructions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../cmake-wrappers.html">CMake Wrappers</a></li>
+<li class="toctree-l1"><a class="reference internal" href="apiRoot.html">Azura API</a></li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">Azura</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../index.html">Docs</a> &raquo;</li>
+        
+          <li><a href="apiRoot.html">Azura API</a> &raquo;</li>
+        
+          <li><a href="file_Source_Azura_RenderSystem_Src_Vulkan_VkScopedImage.cpp.html">File VkScopedImage.cpp</a> &raquo;</li>
+        
+      <li>Program Listing for File VkScopedImage.cpp</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            <a href="../_sources/html/program_listing_file_Source_Azura_RenderSystem_Src_Vulkan_VkScopedImage.cpp.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="program-listing-for-file-vkscopedimage-cpp">
+<span id="program-listing-file-source-azura-rendersystem-src-vulkan-vkscopedimage-cpp"></span><h1>Program Listing for File VkScopedImage.cpp<a class="headerlink" href="#program-listing-for-file-vkscopedimage-cpp" title="Permalink to this headline">¶</a></h1>
+<p>↰ <a class="reference internal" href="file_Source_Azura_RenderSystem_Src_Vulkan_VkScopedImage.cpp.html#file-source-azura-rendersystem-src-vulkan-vkscopedimage-cpp"><span class="std std-ref">Return to documentation for file</span></a> (<code class="docutils literal notranslate"><span class="pre">Source\Azura\RenderSystem\Src\Vulkan\VkScopedImage.cpp</span></code>)</p>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="cp">#include</span> <span class="cpf">&lt;utility&gt;</span><span class="cp"></span>
+<span class="cp">#include</span> <span class="cpf">&quot;Vulkan/VkScopedImage.h&quot;</span><span class="cp"></span>
+<span class="cp">#include</span> <span class="cpf">&quot;Vulkan/VkTypeMapping.h&quot;</span><span class="cp"></span>
+<span class="cp">#include</span> <span class="cpf">&quot;Vulkan/VkTextureManager.h&quot;</span><span class="cp"></span>
+<span class="cp">#include</span> <span class="cpf">&quot;Vulkan/VkCore.h&quot;</span><span class="cp"></span>
+<span class="cp">#include</span> <span class="cpf">&quot;Vulkan/VkMacros.h&quot;</span><span class="cp"></span>
+<span class="cp">#include</span> <span class="cpf">&quot;Memory/MemoryFactory.h&quot;</span><span class="cp"></span>
+
+<span class="k">namespace</span> <span class="n">Azura</span> <span class="p">{</span>
+<span class="k">namespace</span> <span class="n">Vulkan</span> <span class="p">{</span>
+<span class="n">VkScopedImage</span><span class="o">::</span><span class="n">VkScopedImage</span><span class="p">(</span><span class="n">VkDevice</span> <span class="n">device</span><span class="p">,</span>
+                             <span class="k">const</span> <span class="n">TextureDesc</span><span class="o">&amp;</span> <span class="n">textureDesc</span><span class="p">,</span>
+                             <span class="n">VkImageUsageFlags</span> <span class="n">usage</span><span class="p">,</span>
+                             <span class="k">const</span> <span class="n">VkPhysicalDeviceMemoryProperties</span><span class="o">&amp;</span> <span class="n">physicalDeviceMemoryProperties</span><span class="p">,</span>
+                             <span class="n">Log</span> <span class="n">logger</span><span class="p">)</span>
+  <span class="o">:</span> <span class="n">m_device</span><span class="p">(</span><span class="n">device</span><span class="p">),</span>
+    <span class="n">m_desc</span><span class="p">(</span><span class="n">textureDesc</span><span class="p">),</span>
+    <span class="n">log_VulkanRenderSystem</span><span class="p">(</span><span class="n">std</span><span class="o">::</span><span class="n">move</span><span class="p">(</span><span class="n">logger</span><span class="p">))</span> <span class="p">{</span>
+  <span class="n">Create</span><span class="p">(</span><span class="n">m_device</span><span class="p">,</span> <span class="n">textureDesc</span><span class="p">,</span> <span class="n">usage</span><span class="p">,</span> <span class="n">physicalDeviceMemoryProperties</span><span class="p">);</span>
+<span class="p">}</span>
+
+<span class="n">VkScopedImage</span><span class="o">::</span><span class="n">VkScopedImage</span><span class="p">(</span><span class="n">VkDevice</span> <span class="n">device</span><span class="p">,</span> <span class="k">const</span> <span class="n">TextureDesc</span><span class="o">&amp;</span> <span class="n">textureDesc</span><span class="p">,</span> <span class="n">VkImage</span> <span class="n">image</span><span class="p">,</span> <span class="n">Log</span> <span class="n">logger</span><span class="p">)</span>
+  <span class="o">:</span> <span class="n">m_device</span><span class="p">(</span><span class="n">device</span><span class="p">),</span>
+    <span class="n">m_image</span><span class="p">(</span><span class="n">image</span><span class="p">),</span>
+    <span class="n">m_desc</span><span class="p">(</span><span class="n">textureDesc</span><span class="p">),</span>
+    <span class="n">log_VulkanRenderSystem</span><span class="p">(</span><span class="n">std</span><span class="o">::</span><span class="n">move</span><span class="p">(</span><span class="n">logger</span><span class="p">))</span> <span class="p">{</span>
+<span class="p">}</span>
+
+<span class="n">VkScopedImage</span><span class="o">::</span><span class="n">VkScopedImage</span><span class="p">(</span><span class="n">Log</span> <span class="n">logger</span><span class="p">)</span>
+  <span class="o">:</span> <span class="n">m_device</span><span class="p">(),</span>
+    <span class="n">log_VulkanRenderSystem</span><span class="p">(</span><span class="n">std</span><span class="o">::</span><span class="n">move</span><span class="p">(</span><span class="n">logger</span><span class="p">))</span> <span class="p">{</span>
+<span class="p">}</span>
+
+<span class="kt">void</span> <span class="n">VkScopedImage</span><span class="o">::</span><span class="n">Create</span><span class="p">(</span><span class="n">VkDevice</span> <span class="n">device</span><span class="p">,</span>
+                           <span class="k">const</span> <span class="n">TextureDesc</span><span class="o">&amp;</span> <span class="n">textureDesc</span><span class="p">,</span>
+                           <span class="n">VkImageUsageFlags</span> <span class="n">usage</span><span class="p">,</span>
+                           <span class="k">const</span> <span class="n">VkPhysicalDeviceMemoryProperties</span><span class="o">&amp;</span> <span class="n">physicalDeviceMemoryProperties</span><span class="p">)</span> <span class="p">{</span>
+
+  <span class="n">m_device</span> <span class="o">=</span> <span class="n">device</span><span class="p">;</span>
+  <span class="n">m_desc</span> <span class="o">=</span> <span class="n">textureDesc</span><span class="p">;</span>
+
+  <span class="n">m_image</span> <span class="o">=</span> <span class="n">VkCore</span><span class="o">::</span><span class="n">CreateImage</span><span class="p">(</span><span class="n">device</span><span class="p">,</span> <span class="n">textureDesc</span><span class="p">.</span><span class="n">m_format</span><span class="p">,</span> <span class="n">textureDesc</span><span class="p">.</span><span class="n">m_type</span><span class="p">,</span>
+                                <span class="p">{</span><span class="n">textureDesc</span><span class="p">.</span><span class="n">m_bounds</span><span class="p">.</span><span class="n">m_width</span><span class="p">,</span> <span class="n">textureDesc</span><span class="p">.</span><span class="n">m_bounds</span><span class="p">.</span><span class="n">m_height</span><span class="p">},</span>
+                                <span class="n">textureDesc</span><span class="p">.</span><span class="n">m_bounds</span><span class="p">.</span><span class="n">m_depth</span><span class="p">,</span> <span class="n">textureDesc</span><span class="p">.</span><span class="n">m_arrayLayers</span><span class="p">,</span> <span class="n">textureDesc</span><span class="p">.</span><span class="n">m_mipLevels</span><span class="p">,</span>
+                                <span class="n">VK_IMAGE_TILING_OPTIMAL</span><span class="p">,</span> <span class="n">usage</span><span class="p">,</span> <span class="n">log_VulkanRenderSystem</span><span class="p">);</span>
+
+  <span class="n">VkMemoryRequirements</span> <span class="n">memRequirements</span><span class="p">;</span>
+  <span class="n">vkGetImageMemoryRequirements</span><span class="p">(</span><span class="n">m_device</span><span class="p">,</span> <span class="n">m_image</span><span class="p">,</span> <span class="o">&amp;</span><span class="n">memRequirements</span><span class="p">);</span>
+
+  <span class="n">VkMemoryAllocateInfo</span> <span class="n">allocInfo</span> <span class="o">=</span> <span class="p">{};</span>
+  <span class="n">allocInfo</span><span class="p">.</span><span class="n">sType</span>                <span class="o">=</span> <span class="n">VK_STRUCTURE_TYPE_MEMORY_ALLOCATE_INFO</span><span class="p">;</span>
+  <span class="n">allocInfo</span><span class="p">.</span><span class="n">allocationSize</span>       <span class="o">=</span> <span class="n">memRequirements</span><span class="p">.</span><span class="n">size</span><span class="p">;</span>
+  <span class="n">allocInfo</span><span class="p">.</span><span class="n">memoryTypeIndex</span>      <span class="o">=</span> <span class="n">VkCore</span><span class="o">::</span><span class="n">FindMemoryType</span><span class="p">(</span><span class="n">memRequirements</span><span class="p">.</span><span class="n">memoryTypeBits</span><span class="p">,</span>
+                                                          <span class="n">VK_MEMORY_PROPERTY_DEVICE_LOCAL_BIT</span><span class="p">,</span>
+                                                          <span class="n">physicalDeviceMemoryProperties</span><span class="p">);</span>
+
+  <span class="n">VERIFY_VK_OP</span><span class="p">(</span><span class="n">log_VulkanRenderSystem</span><span class="p">,</span> <span class="n">vkAllocateMemory</span><span class="p">(</span><span class="n">m_device</span><span class="p">,</span> <span class="o">&amp;</span><span class="n">allocInfo</span><span class="p">,</span> <span class="k">nullptr</span><span class="p">,</span> <span class="o">&amp;</span><span class="n">m_memory</span><span class="p">),</span>
+    <span class="s">&quot;Failed to allocate memory for image texture&quot;</span><span class="p">);</span>
+  <span class="n">vkBindImageMemory</span><span class="p">(</span><span class="n">m_device</span><span class="p">,</span> <span class="n">m_image</span><span class="p">,</span> <span class="n">m_memory</span><span class="p">,</span> <span class="mi">0</span><span class="p">);</span>
+<span class="p">}</span>
+
+<span class="n">VkImage</span> <span class="n">VkScopedImage</span><span class="o">::</span><span class="n">Real</span><span class="p">()</span> <span class="k">const</span> <span class="p">{</span>
+  <span class="k">return</span> <span class="n">m_image</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="n">VkImageView</span> <span class="n">VkScopedImage</span><span class="o">::</span><span class="n">View</span><span class="p">()</span> <span class="k">const</span> <span class="p">{</span>
+  <span class="k">return</span> <span class="n">m_imageView</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="n">VkDeviceMemory</span> <span class="n">VkScopedImage</span><span class="o">::</span><span class="n">Memory</span><span class="p">()</span> <span class="k">const</span> <span class="p">{</span>
+  <span class="k">return</span> <span class="n">m_memory</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="n">VkFormat</span> <span class="n">VkScopedImage</span><span class="o">::</span><span class="n">GetRealFormat</span><span class="p">()</span> <span class="k">const</span> <span class="p">{</span>
+  <span class="k">const</span> <span class="k">auto</span> <span class="n">vkFormat</span> <span class="o">=</span> <span class="n">ToVkFormat</span><span class="p">(</span><span class="n">GetFormat</span><span class="p">());</span>
+  <span class="n">VERIFY_OPT</span><span class="p">(</span><span class="n">log_VulkanRenderSystem</span><span class="p">,</span> <span class="n">vkFormat</span><span class="p">,</span> <span class="s">&quot;Unknown VkFormat&quot;</span><span class="p">);</span>
+
+  <span class="k">return</span> <span class="n">vkFormat</span><span class="p">.</span><span class="n">value</span><span class="p">();</span>
+<span class="p">}</span>
+
+<span class="n">RawStorageFormat</span> <span class="n">VkScopedImage</span><span class="o">::</span><span class="n">GetFormat</span><span class="p">()</span> <span class="k">const</span> <span class="p">{</span>
+  <span class="k">return</span> <span class="n">m_desc</span><span class="p">.</span><span class="n">m_format</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="kt">void</span> <span class="n">VkScopedImage</span><span class="o">::</span><span class="n">CleanUp</span><span class="p">()</span> <span class="k">const</span> <span class="p">{</span>
+  <span class="n">vkDestroyImage</span><span class="p">(</span><span class="n">m_device</span><span class="p">,</span> <span class="n">m_image</span><span class="p">,</span> <span class="k">nullptr</span><span class="p">);</span>
+  <span class="n">vkFreeMemory</span><span class="p">(</span><span class="n">m_device</span><span class="p">,</span> <span class="n">m_memory</span><span class="p">,</span> <span class="k">nullptr</span><span class="p">);</span>
+  <span class="n">vkDestroyImageView</span><span class="p">(</span><span class="n">m_device</span><span class="p">,</span> <span class="n">m_imageView</span><span class="p">,</span> <span class="k">nullptr</span><span class="p">);</span>
+<span class="p">}</span>
+
+<span class="kt">void</span> <span class="n">VkScopedImage</span><span class="o">::</span><span class="n">TransitionLayout</span><span class="p">(</span><span class="n">VkCommandBuffer</span> <span class="n">commandBuffer</span><span class="p">,</span>
+                                     <span class="n">ImageTransition</span> <span class="n">oldTransition</span><span class="p">,</span>
+                                     <span class="n">ImageTransition</span> <span class="n">newTransition</span><span class="p">)</span> <span class="k">const</span> <span class="p">{</span>
+
+  <span class="k">auto</span> <span class="n">flagBits</span> <span class="o">=</span> <span class="kt">int</span><span class="p">(</span><span class="n">VK_IMAGE_ASPECT_COLOR_BIT</span><span class="p">);</span>
+
+  <span class="k">if</span> <span class="p">(</span><span class="n">HasDepthComponent</span><span class="p">(</span><span class="n">m_desc</span><span class="p">.</span><span class="n">m_format</span><span class="p">))</span>
+  <span class="p">{</span>
+    <span class="n">flagBits</span> <span class="o">=</span> <span class="kt">int</span><span class="p">(</span><span class="n">VK_IMAGE_ASPECT_DEPTH_BIT</span><span class="p">);</span>
+
+    <span class="k">if</span> <span class="p">(</span><span class="n">HasStencilComponent</span><span class="p">(</span><span class="n">m_desc</span><span class="p">.</span><span class="n">m_format</span><span class="p">))</span>
+    <span class="p">{</span>
+      <span class="n">flagBits</span> <span class="o">=</span> <span class="n">flagBits</span> <span class="o">|</span> <span class="n">VK_IMAGE_ASPECT_STENCIL_BIT</span><span class="p">;</span>
+    <span class="p">}</span>
+  <span class="p">}</span>
+
+  <span class="k">const</span> <span class="n">VkImageSubresourceRange</span> <span class="n">resourceRange</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="n">VkImageAspectFlags</span><span class="p">(</span><span class="n">flagBits</span><span class="p">),</span> <span class="mi">0</span><span class="p">,</span> <span class="n">m_desc</span><span class="p">.</span><span class="n">m_mipLevels</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="n">m_desc</span><span class="p">.</span><span class="n">m_arrayLayers</span>
+  <span class="p">};</span>
+
+  <span class="n">VkCore</span><span class="o">::</span><span class="n">TransitionImageLayout</span><span class="p">(</span><span class="n">commandBuffer</span><span class="p">,</span> <span class="n">m_image</span><span class="p">,</span> <span class="n">oldTransition</span><span class="p">.</span><span class="n">m_accessMask</span><span class="p">,</span> <span class="n">newTransition</span><span class="p">.</span><span class="n">m_accessMask</span><span class="p">,</span>
+                                <span class="n">oldTransition</span><span class="p">.</span><span class="n">m_layout</span><span class="p">,</span> <span class="n">newTransition</span><span class="p">.</span><span class="n">m_layout</span><span class="p">,</span> <span class="n">oldTransition</span><span class="p">.</span><span class="n">m_stageMask</span><span class="p">,</span>
+                                <span class="n">newTransition</span><span class="p">.</span><span class="n">m_stageMask</span><span class="p">,</span> <span class="n">resourceRange</span><span class="p">);</span>
+
+<span class="p">}</span>
+
+<span class="kt">void</span> <span class="n">VkScopedImage</span><span class="o">::</span><span class="n">CopyFromBuffer</span><span class="p">(</span><span class="n">VkCommandBuffer</span> <span class="n">commandBuffer</span><span class="p">,</span>
+                                   <span class="k">const</span> <span class="n">TextureBufferInfo</span><span class="o">&amp;</span> <span class="n">bufferInfo</span><span class="p">,</span>
+                                   <span class="n">VkBuffer</span> <span class="n">buffer</span><span class="p">)</span> <span class="k">const</span> <span class="p">{</span>
+
+  <span class="k">auto</span> <span class="n">flagBits</span> <span class="o">=</span> <span class="kt">int</span><span class="p">(</span><span class="n">VK_IMAGE_ASPECT_COLOR_BIT</span><span class="p">);</span>
+
+  <span class="k">if</span> <span class="p">(</span><span class="n">HasDepthComponent</span><span class="p">(</span><span class="n">m_desc</span><span class="p">.</span><span class="n">m_format</span><span class="p">))</span>
+  <span class="p">{</span>
+    <span class="n">flagBits</span> <span class="o">=</span> <span class="kt">int</span><span class="p">(</span><span class="n">VK_IMAGE_ASPECT_DEPTH_BIT</span><span class="p">);</span>
+
+    <span class="k">if</span> <span class="p">(</span><span class="n">HasStencilComponent</span><span class="p">(</span><span class="n">m_desc</span><span class="p">.</span><span class="n">m_format</span><span class="p">))</span>
+    <span class="p">{</span>
+      <span class="n">flagBits</span> <span class="o">=</span> <span class="n">flagBits</span> <span class="o">|</span> <span class="n">VK_IMAGE_ASPECT_STENCIL_BIT</span><span class="p">;</span>
+    <span class="p">}</span>
+  <span class="p">}</span>
+
+  <span class="n">U32</span> <span class="n">currentWidth</span>  <span class="o">=</span> <span class="n">m_desc</span><span class="p">.</span><span class="n">m_bounds</span><span class="p">.</span><span class="n">m_width</span><span class="p">;</span>
+  <span class="n">U32</span> <span class="n">currentHeight</span> <span class="o">=</span> <span class="n">m_desc</span><span class="p">.</span><span class="n">m_bounds</span><span class="p">.</span><span class="n">m_height</span><span class="p">;</span>
+  <span class="n">U32</span> <span class="n">currentDepth</span>  <span class="o">=</span> <span class="n">m_desc</span><span class="p">.</span><span class="n">m_bounds</span><span class="p">.</span><span class="n">m_depth</span><span class="p">;</span>
+
+  <span class="n">VkBufferImageCopy</span> <span class="n">region</span>               <span class="o">=</span> <span class="p">{};</span>
+  <span class="n">region</span><span class="p">.</span><span class="n">bufferOffset</span>                    <span class="o">=</span> <span class="n">bufferInfo</span><span class="p">.</span><span class="n">m_offset</span><span class="p">;</span>
+  <span class="n">region</span><span class="p">.</span><span class="n">bufferRowLength</span>                 <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+  <span class="n">region</span><span class="p">.</span><span class="n">bufferImageHeight</span>               <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+  <span class="n">region</span><span class="p">.</span><span class="n">imageSubresource</span><span class="p">.</span><span class="n">aspectMask</span>     <span class="o">=</span> <span class="n">flagBits</span><span class="p">;</span>
+  <span class="n">region</span><span class="p">.</span><span class="n">imageSubresource</span><span class="p">.</span><span class="n">mipLevel</span>       <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+  <span class="n">region</span><span class="p">.</span><span class="n">imageSubresource</span><span class="p">.</span><span class="n">baseArrayLayer</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+  <span class="n">region</span><span class="p">.</span><span class="n">imageSubresource</span><span class="p">.</span><span class="n">layerCount</span>     <span class="o">=</span> <span class="mi">1</span><span class="p">;</span>
+
+  <span class="n">region</span><span class="p">.</span><span class="n">imageOffset</span> <span class="o">=</span> <span class="p">{</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">};</span>
+  <span class="n">region</span><span class="p">.</span><span class="n">imageExtent</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="n">currentWidth</span><span class="p">,</span>
+    <span class="n">currentHeight</span><span class="p">,</span>
+    <span class="n">currentDepth</span>
+  <span class="p">};</span>
+
+  <span class="n">vkCmdCopyBufferToImage</span><span class="p">(</span>
+                         <span class="n">commandBuffer</span><span class="p">,</span>
+                         <span class="n">buffer</span><span class="p">,</span>
+                         <span class="n">m_image</span><span class="p">,</span>
+                         <span class="n">VK_IMAGE_LAYOUT_TRANSFER_DST_OPTIMAL</span><span class="p">,</span>
+                         <span class="mi">1</span><span class="p">,</span>
+                         <span class="o">&amp;</span><span class="n">region</span><span class="p">);</span>
+<span class="p">}</span>
+
+<span class="kt">void</span> <span class="n">VkScopedImage</span><span class="o">::</span><span class="n">CreateImageView</span><span class="p">(</span><span class="n">ImageViewType</span> <span class="n">imageView</span><span class="p">)</span> <span class="p">{</span>
+  <span class="k">const</span> <span class="k">auto</span> <span class="n">vkImageView</span> <span class="o">=</span> <span class="n">ToVkImageViewType</span><span class="p">(</span><span class="n">imageView</span><span class="p">);</span>
+  <span class="n">VERIFY_OPT</span><span class="p">(</span><span class="n">log_VulkanRenderSystem</span><span class="p">,</span> <span class="n">vkImageView</span><span class="p">,</span> <span class="s">&quot;Unknown VkImageViewType&quot;</span><span class="p">);</span>
+
+  <span class="k">const</span> <span class="k">auto</span> <span class="n">vkFormat</span> <span class="o">=</span> <span class="n">ToVkFormat</span><span class="p">(</span><span class="n">m_desc</span><span class="p">.</span><span class="n">m_format</span><span class="p">);</span>
+  <span class="n">VERIFY_OPT</span><span class="p">(</span><span class="n">log_VulkanRenderSystem</span><span class="p">,</span> <span class="n">vkFormat</span><span class="p">,</span> <span class="s">&quot;Unknown VkFormat&quot;</span><span class="p">);</span>
+
+
+  <span class="k">auto</span> <span class="n">flagBits</span> <span class="o">=</span> <span class="kt">int</span><span class="p">(</span><span class="n">VK_IMAGE_ASPECT_COLOR_BIT</span><span class="p">);</span>
+
+  <span class="k">if</span> <span class="p">(</span><span class="n">HasDepthComponent</span><span class="p">(</span><span class="n">m_desc</span><span class="p">.</span><span class="n">m_format</span><span class="p">))</span>
+  <span class="p">{</span>
+    <span class="n">flagBits</span> <span class="o">=</span> <span class="kt">int</span><span class="p">(</span><span class="n">VK_IMAGE_ASPECT_DEPTH_BIT</span><span class="p">);</span>
+
+    <span class="k">if</span> <span class="p">(</span><span class="n">HasStencilComponent</span><span class="p">(</span><span class="n">m_desc</span><span class="p">.</span><span class="n">m_format</span><span class="p">))</span>
+    <span class="p">{</span>
+      <span class="n">flagBits</span> <span class="o">=</span> <span class="n">flagBits</span> <span class="o">|</span> <span class="n">VK_IMAGE_ASPECT_STENCIL_BIT</span><span class="p">;</span>
+    <span class="p">}</span>
+  <span class="p">}</span>
+
+  <span class="n">VkImageViewCreateInfo</span> <span class="n">viewInfo</span>           <span class="o">=</span> <span class="p">{};</span>
+  <span class="n">viewInfo</span><span class="p">.</span><span class="n">sType</span>                           <span class="o">=</span> <span class="n">VK_STRUCTURE_TYPE_IMAGE_VIEW_CREATE_INFO</span><span class="p">;</span>
+  <span class="n">viewInfo</span><span class="p">.</span><span class="n">image</span>                           <span class="o">=</span> <span class="n">m_image</span><span class="p">;</span>
+  <span class="n">viewInfo</span><span class="p">.</span><span class="n">viewType</span>                        <span class="o">=</span> <span class="n">vkImageView</span><span class="p">.</span><span class="n">value</span><span class="p">();</span>
+  <span class="n">viewInfo</span><span class="p">.</span><span class="n">format</span>                          <span class="o">=</span> <span class="n">vkFormat</span><span class="p">.</span><span class="n">value</span><span class="p">();</span>
+  <span class="n">viewInfo</span><span class="p">.</span><span class="n">subresourceRange</span><span class="p">.</span><span class="n">aspectMask</span>     <span class="o">=</span> <span class="n">flagBits</span><span class="p">;</span>
+  <span class="n">viewInfo</span><span class="p">.</span><span class="n">subresourceRange</span><span class="p">.</span><span class="n">baseMipLevel</span>   <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+  <span class="n">viewInfo</span><span class="p">.</span><span class="n">subresourceRange</span><span class="p">.</span><span class="n">levelCount</span>     <span class="o">=</span> <span class="n">m_desc</span><span class="p">.</span><span class="n">m_mipLevels</span><span class="p">;</span>
+  <span class="n">viewInfo</span><span class="p">.</span><span class="n">subresourceRange</span><span class="p">.</span><span class="n">baseArrayLayer</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+  <span class="n">viewInfo</span><span class="p">.</span><span class="n">subresourceRange</span><span class="p">.</span><span class="n">layerCount</span>     <span class="o">=</span> <span class="n">m_desc</span><span class="p">.</span><span class="n">m_arrayLayers</span><span class="p">;</span>
+
+  <span class="n">VERIFY_VK_OP</span><span class="p">(</span><span class="n">log_VulkanRenderSystem</span><span class="p">,</span> <span class="n">vkCreateImageView</span><span class="p">(</span><span class="n">m_device</span><span class="p">,</span> <span class="o">&amp;</span><span class="n">viewInfo</span><span class="p">,</span> <span class="k">nullptr</span><span class="p">,</span> <span class="o">&amp;</span><span class="n">m_imageView</span><span class="p">),</span>
+    <span class="s">&quot;Failed to create texture image view&quot;</span><span class="p">);</span>
+<span class="p">}</span>
+<span class="p">}</span> <span class="c1">// namespace Vulkan</span>
+<span class="p">}</span> <span class="c1">// namespace Azura</span>
+</pre></div>
+</div>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="file_Source_Azura_RenderSystem_Inc_Vulkan_VkScopedImage.h.html" class="btn btn-neutral float-right" title="File VkScopedImage.h" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="file_Source_Azura_RenderSystem_Src_Vulkan_VkScopedImage.cpp.html" class="btn btn-neutral" title="File VkScopedImage.cpp" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2018, Vasu Mahesh
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  
+
+    
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+        <script type="text/javascript" src="../_static/jquery.js"></script>
+        <script type="text/javascript" src="../_static/underscore.js"></script>
+        <script type="text/javascript" src="../_static/doctools.js"></script>
+        <script type="text/javascript" src="../_static/collapsible-lists\js\CollapsibleLists.compressed.js"></script>
+        <script type="text/javascript" src="../_static/collapsible-lists\js\apply-collapsible-lists.js"></script>
+    
+
+  
+
+  <script type="text/javascript" src="../_static/js/theme.js"></script>
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

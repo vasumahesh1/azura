@@ -1,0 +1,454 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>Program Listing for File GLFWWindow.cpp &mdash; Azura  documentation</title>
+  
+
+  
+  
+  
+  
+
+  
+
+  
+  
+    
+
+  
+
+  <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/collapsible-lists\css\tree_view.css" type="text/css" />
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="File GLFWWindow.h" href="file_Source_Azura_RenderSystem_Inc_Generic_GLFWWindow.h.html" />
+    <link rel="prev" title="File GLFWWindow.cpp" href="file_Source_Azura_RenderSystem_Src_Generic_GLFWWindow.cpp.html" /> 
+
+  
+  <script src="../_static/js/modernizr.min.js"></script>
+
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search">
+          
+
+          
+            <a href="../index.html" class="icon icon-home"> Azura
+          
+
+          
+          </a>
+
+          
+            
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <ul>
+<li class="toctree-l1"><a class="reference internal" href="../setting-up.html">Setting Up</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../build-instructions.html">Build Instructions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../cmake-wrappers.html">CMake Wrappers</a></li>
+<li class="toctree-l1"><a class="reference internal" href="apiRoot.html">Azura API</a></li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">Azura</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../index.html">Docs</a> &raquo;</li>
+        
+          <li><a href="apiRoot.html">Azura API</a> &raquo;</li>
+        
+          <li><a href="file_Source_Azura_RenderSystem_Src_Generic_GLFWWindow.cpp.html">File GLFWWindow.cpp</a> &raquo;</li>
+        
+      <li>Program Listing for File GLFWWindow.cpp</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            <a href="../_sources/html/program_listing_file_Source_Azura_RenderSystem_Src_Generic_GLFWWindow.cpp.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="program-listing-for-file-glfwwindow-cpp">
+<span id="program-listing-file-source-azura-rendersystem-src-generic-glfwwindow-cpp"></span><h1>Program Listing for File GLFWWindow.cpp<a class="headerlink" href="#program-listing-for-file-glfwwindow-cpp" title="Permalink to this headline">¶</a></h1>
+<p>↰ <a class="reference internal" href="file_Source_Azura_RenderSystem_Src_Generic_GLFWWindow.cpp.html#file-source-azura-rendersystem-src-generic-glfwwindow-cpp"><span class="std std-ref">Return to documentation for file</span></a> (<code class="docutils literal notranslate"><span class="pre">Source\Azura\RenderSystem\Src\Generic\GLFWWindow.cpp</span></code>)</p>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="c1">// Don&#39;t include GLFW&#39;s non-sense. We include what we need.</span>
+<span class="cp">#define GLFW_INCLUDE_NONE</span>
+<span class="cp">#include</span> <span class="cpf">&lt;GLFW/glfw3.h&gt;</span><span class="cp"></span>
+
+<span class="cp">#include</span> <span class="cpf">&quot;Generic/GLFWWindow.h&quot;</span><span class="cp"></span>
+
+<span class="k">namespace</span> <span class="n">Azura</span> <span class="p">{</span>
+<span class="k">namespace</span> <span class="p">{</span>
+<span class="kt">float</span> <span class="n">GetUpdateRateDelta</span><span class="p">(</span><span class="n">UpdateRate</span> <span class="n">rate</span><span class="p">)</span> <span class="p">{</span>
+  <span class="k">switch</span> <span class="p">(</span><span class="n">rate</span><span class="p">)</span> <span class="p">{</span>
+    <span class="k">case</span> <span class="n">UpdateRate</span><span class="o">::</span><span class="nl">RateUnlocked</span><span class="p">:</span>
+      <span class="k">return</span> <span class="mf">0.0f</span><span class="p">;</span>
+    <span class="k">case</span> <span class="n">UpdateRate</span><span class="o">::</span><span class="nl">Rate240</span><span class="p">:</span>
+      <span class="k">return</span> <span class="mf">1.0f</span> <span class="o">/</span> <span class="mf">240.0f</span><span class="p">;</span>
+    <span class="k">case</span> <span class="n">UpdateRate</span><span class="o">::</span><span class="nl">Rate120</span><span class="p">:</span>
+      <span class="k">return</span> <span class="mf">1.0f</span> <span class="o">/</span> <span class="mf">120.0f</span><span class="p">;</span>
+    <span class="k">case</span> <span class="n">UpdateRate</span><span class="o">::</span><span class="nl">Rate60</span><span class="p">:</span>
+      <span class="k">return</span> <span class="mf">1.0f</span> <span class="o">/</span> <span class="mf">60.0f</span><span class="p">;</span>
+    <span class="k">case</span> <span class="n">UpdateRate</span><span class="o">::</span><span class="nl">Rate30</span><span class="p">:</span>
+      <span class="k">return</span> <span class="mf">1.0f</span> <span class="o">/</span> <span class="mf">30.0f</span><span class="p">;</span>
+
+    <span class="k">default</span><span class="o">:</span>
+      <span class="k">return</span> <span class="mf">0.0f</span><span class="p">;</span>
+  <span class="p">}</span>
+<span class="p">}</span>
+
+<span class="n">KeyboardKey</span> <span class="n">GetKey</span><span class="p">(</span><span class="kt">int</span> <span class="n">key</span><span class="p">)</span> <span class="p">{</span>
+  <span class="k">switch</span> <span class="p">(</span><span class="n">key</span><span class="p">)</span> <span class="p">{</span>
+    <span class="k">case</span> <span class="nl">GLFW_KEY_W</span><span class="p">:</span>
+      <span class="k">return</span> <span class="n">KeyboardKey</span><span class="o">::</span><span class="n">W</span><span class="p">;</span>
+
+    <span class="k">case</span> <span class="nl">GLFW_KEY_A</span><span class="p">:</span>
+      <span class="k">return</span> <span class="n">KeyboardKey</span><span class="o">::</span><span class="n">A</span><span class="p">;</span>
+
+    <span class="k">case</span> <span class="nl">GLFW_KEY_S</span><span class="p">:</span>
+      <span class="k">return</span> <span class="n">KeyboardKey</span><span class="o">::</span><span class="n">S</span><span class="p">;</span>
+
+    <span class="k">case</span> <span class="nl">GLFW_KEY_D</span><span class="p">:</span>
+      <span class="k">return</span> <span class="n">KeyboardKey</span><span class="o">::</span><span class="n">D</span><span class="p">;</span>
+
+    <span class="k">case</span> <span class="nl">GLFW_KEY_R</span><span class="p">:</span>
+      <span class="k">return</span> <span class="n">KeyboardKey</span><span class="o">::</span><span class="n">R</span><span class="p">;</span>
+
+    <span class="k">case</span> <span class="nl">GLFW_KEY_T</span><span class="p">:</span>
+      <span class="k">return</span> <span class="n">KeyboardKey</span><span class="o">::</span><span class="n">T</span><span class="p">;</span>
+
+    <span class="k">case</span> <span class="nl">GLFW_KEY_Q</span><span class="p">:</span>
+      <span class="k">return</span> <span class="n">KeyboardKey</span><span class="o">::</span><span class="n">Q</span><span class="p">;</span>
+
+    <span class="k">case</span> <span class="nl">GLFW_KEY_E</span><span class="p">:</span>
+      <span class="k">return</span> <span class="n">KeyboardKey</span><span class="o">::</span><span class="n">E</span><span class="p">;</span>
+
+    <span class="k">case</span> <span class="nl">GLFW_KEY_Y</span><span class="p">:</span>
+      <span class="k">return</span> <span class="n">KeyboardKey</span><span class="o">::</span><span class="n">Y</span><span class="p">;</span>
+
+    <span class="k">case</span> <span class="nl">GLFW_KEY_U</span><span class="p">:</span>
+      <span class="k">return</span> <span class="n">KeyboardKey</span><span class="o">::</span><span class="n">U</span><span class="p">;</span>
+
+    <span class="k">case</span> <span class="nl">GLFW_KEY_I</span><span class="p">:</span>
+      <span class="k">return</span> <span class="n">KeyboardKey</span><span class="o">::</span><span class="n">I</span><span class="p">;</span>
+
+    <span class="k">case</span> <span class="nl">GLFW_KEY_ESCAPE</span><span class="p">:</span>
+      <span class="k">return</span> <span class="n">KeyboardKey</span><span class="o">::</span><span class="n">Esc</span><span class="p">;</span>
+
+    <span class="k">case</span> <span class="nl">GLFW_KEY_UP</span><span class="p">:</span>
+      <span class="k">return</span> <span class="n">KeyboardKey</span><span class="o">::</span><span class="n">Up</span><span class="p">;</span>
+
+    <span class="k">case</span> <span class="nl">GLFW_KEY_DOWN</span><span class="p">:</span>
+      <span class="k">return</span> <span class="n">KeyboardKey</span><span class="o">::</span><span class="n">Down</span><span class="p">;</span>
+
+    <span class="k">case</span> <span class="nl">GLFW_KEY_RIGHT</span><span class="p">:</span>
+      <span class="k">return</span> <span class="n">KeyboardKey</span><span class="o">::</span><span class="n">Right</span><span class="p">;</span>
+
+    <span class="k">case</span> <span class="nl">GLFW_KEY_LEFT</span><span class="p">:</span>
+      <span class="k">return</span> <span class="n">KeyboardKey</span><span class="o">::</span><span class="n">Left</span><span class="p">;</span>
+
+    <span class="k">default</span><span class="o">:</span>
+      <span class="k">return</span> <span class="n">KeyboardKey</span><span class="o">::</span><span class="n">Unmapped</span><span class="p">;</span>
+
+  <span class="p">}</span>
+<span class="p">}</span>
+<span class="p">}</span> <span class="c1">// namespace</span>
+
+
+<span class="n">GLFWWindow</span><span class="o">::</span><span class="n">GLFWWindow</span><span class="p">(</span><span class="n">String</span> <span class="n">title</span><span class="p">,</span> <span class="n">U32</span> <span class="n">width</span><span class="p">,</span> <span class="n">U32</span> <span class="n">height</span><span class="p">)</span>
+  <span class="o">:</span> <span class="n">Window</span><span class="p">(</span><span class="n">title</span><span class="p">,</span> <span class="n">width</span><span class="p">,</span> <span class="n">height</span><span class="p">),</span>
+    <span class="n">p_window</span><span class="p">(</span><span class="k">nullptr</span><span class="p">)</span> <span class="p">{</span>
+<span class="p">}</span>
+
+<span class="kt">bool</span> <span class="n">GLFWWindow</span><span class="o">::</span><span class="n">Initialize</span><span class="p">()</span> <span class="p">{</span>
+  <span class="k">if</span> <span class="p">(</span><span class="n">glfwInit</span><span class="p">()</span> <span class="o">==</span> <span class="n">GLFW_FALSE</span><span class="p">)</span> <span class="p">{</span>
+    <span class="k">return</span> <span class="nb">false</span><span class="p">;</span>
+  <span class="p">}</span>
+
+  <span class="n">glfwWindowHint</span><span class="p">(</span><span class="n">GLFW_CLIENT_API</span><span class="p">,</span> <span class="n">GLFW_NO_API</span><span class="p">);</span>
+  <span class="n">glfwWindowHint</span><span class="p">(</span><span class="n">GLFW_RESIZABLE</span><span class="p">,</span> <span class="n">GLFW_FALSE</span><span class="p">);</span>
+
+  <span class="n">p_window</span> <span class="o">=</span> <span class="n">glfwCreateWindow</span><span class="p">(</span><span class="n">GetWidth</span><span class="p">(),</span> <span class="n">GetHeight</span><span class="p">(),</span> <span class="n">GetTitle</span><span class="p">(),</span> <span class="k">nullptr</span><span class="p">,</span> <span class="k">nullptr</span><span class="p">);</span>
+
+  <span class="n">glfwSetMouseButtonCallback</span><span class="p">(</span><span class="n">p_window</span><span class="p">,</span> <span class="n">MouseEventCallback</span><span class="p">);</span>
+
+  <span class="n">glfwSetKeyCallback</span><span class="p">(</span><span class="n">p_window</span><span class="p">,</span> <span class="n">KeyPressCallback</span><span class="p">);</span>
+
+  <span class="n">glfwSetWindowUserPointer</span><span class="p">(</span><span class="n">p_window</span><span class="p">,</span> <span class="k">this</span><span class="p">);</span>
+
+  <span class="k">return</span> <span class="nb">true</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="kt">void</span> <span class="n">GLFWWindow</span><span class="o">::</span><span class="n">Destroy</span><span class="p">()</span> <span class="p">{</span>
+  <span class="n">glfwDestroyWindow</span><span class="p">(</span><span class="n">p_window</span><span class="p">);</span>
+  <span class="n">glfwTerminate</span><span class="p">();</span>
+<span class="p">}</span>
+
+<span class="kt">void</span> <span class="n">GLFWWindow</span><span class="o">::</span><span class="n">StartListening</span><span class="p">()</span> <span class="p">{</span>
+
+  <span class="kt">int</span> <span class="n">frameCount</span><span class="p">{</span><span class="mi">0</span><span class="p">};</span>
+  <span class="kt">double</span> <span class="n">previousStatsTime</span> <span class="o">=</span> <span class="n">glfwGetTime</span><span class="p">();</span>
+  <span class="kt">double</span> <span class="n">previousFrameTime</span> <span class="o">=</span> <span class="n">glfwGetTime</span><span class="p">();</span>
+
+  <span class="k">const</span> <span class="kt">float</span> <span class="n">rateDelta</span> <span class="o">=</span> <span class="n">GetUpdateRateDelta</span><span class="p">(</span><span class="n">m_rate</span><span class="p">);</span>
+
+  <span class="c1">// TODO(vasumahesh1):[GAME]: Need a Performance Timer here</span>
+
+  <span class="k">while</span> <span class="p">(</span><span class="n">glfwWindowShouldClose</span><span class="p">(</span><span class="n">p_window</span><span class="p">)</span> <span class="o">==</span> <span class="n">GLFW_FALSE</span><span class="p">)</span> <span class="p">{</span>
+
+    <span class="k">const</span> <span class="kt">double</span> <span class="n">currentTime</span> <span class="o">=</span> <span class="n">glfwGetTime</span><span class="p">();</span>
+
+    <span class="kt">double</span> <span class="n">currCursorX</span><span class="p">;</span>
+    <span class="kt">double</span> <span class="n">currCursorY</span><span class="p">;</span>
+    <span class="n">glfwGetCursorPos</span><span class="p">(</span><span class="n">p_window</span><span class="p">,</span> <span class="o">&amp;</span><span class="n">currCursorX</span><span class="p">,</span> <span class="o">&amp;</span><span class="n">currCursorY</span><span class="p">);</span>
+
+    <span class="n">MouseEvent</span> <span class="n">mouseEvent</span>     <span class="o">=</span> <span class="p">{};</span>
+    <span class="n">mouseEvent</span><span class="p">.</span><span class="n">m_internalType</span> <span class="o">=</span> <span class="n">MouseEventType</span><span class="o">::</span><span class="n">MouseUpdate</span><span class="p">;</span>
+    <span class="n">mouseEvent</span><span class="p">.</span><span class="n">m_eventX</span>       <span class="o">=</span> <span class="kt">float</span><span class="p">(</span><span class="n">currCursorX</span><span class="p">);</span>
+    <span class="n">mouseEvent</span><span class="p">.</span><span class="n">m_eventY</span>       <span class="o">=</span> <span class="kt">float</span><span class="p">(</span><span class="n">currCursorY</span><span class="p">);</span>
+    <span class="n">CallMouseEventFunction</span><span class="p">(</span><span class="n">mouseEvent</span><span class="p">);</span>
+
+    <span class="k">if</span> <span class="p">(</span><span class="n">m_mouseLeftDown</span><span class="p">)</span> <span class="p">{</span>
+      <span class="k">const</span> <span class="kt">double</span> <span class="n">diffX</span> <span class="o">=</span> <span class="n">currCursorX</span> <span class="o">-</span> <span class="n">m_prevCursorX</span><span class="p">;</span>
+      <span class="k">const</span> <span class="kt">double</span> <span class="n">diffY</span> <span class="o">=</span> <span class="n">currCursorY</span> <span class="o">-</span> <span class="n">m_prevCursorY</span><span class="p">;</span>
+
+      <span class="k">if</span> <span class="p">(</span><span class="n">diffX</span> <span class="o">&gt;</span> <span class="mf">0.001</span> <span class="o">||</span> <span class="n">diffY</span> <span class="o">&gt;</span> <span class="mf">0.001</span><span class="p">)</span> <span class="p">{</span>
+        <span class="n">MouseEvent</span> <span class="n">evt</span>     <span class="o">=</span> <span class="p">{};</span>
+        <span class="n">evt</span><span class="p">.</span><span class="n">m_internalType</span> <span class="o">=</span> <span class="n">MouseEventType</span><span class="o">::</span><span class="n">Drag</span><span class="p">;</span>
+        <span class="n">evt</span><span class="p">.</span><span class="n">m_eventX</span>       <span class="o">=</span> <span class="kt">float</span><span class="p">(</span><span class="n">diffX</span><span class="p">);</span>
+        <span class="n">evt</span><span class="p">.</span><span class="n">m_eventY</span>       <span class="o">=</span> <span class="kt">float</span><span class="p">(</span><span class="n">diffY</span><span class="p">);</span>
+        <span class="n">CallMouseEventFunction</span><span class="p">(</span><span class="n">evt</span><span class="p">);</span>
+      <span class="p">}</span>
+
+      <span class="n">m_prevCursorX</span> <span class="o">=</span> <span class="n">currCursorX</span><span class="p">;</span>
+      <span class="n">m_prevCursorY</span> <span class="o">=</span> <span class="n">currCursorY</span><span class="p">;</span>
+    <span class="p">}</span>
+
+    <span class="k">const</span> <span class="k">auto</span> <span class="n">timeDelta</span>  <span class="o">=</span> <span class="kt">float</span><span class="p">(</span><span class="n">currentTime</span> <span class="o">-</span> <span class="n">previousFrameTime</span><span class="p">);</span>
+    <span class="k">const</span> <span class="kt">bool</span> <span class="n">shouldTick</span> <span class="o">=</span> <span class="n">m_rate</span> <span class="o">==</span> <span class="n">UpdateRate</span><span class="o">::</span><span class="n">RateUnlocked</span> <span class="o">||</span> <span class="p">(</span><span class="n">timeDelta</span> <span class="o">&gt;</span> <span class="n">rateDelta</span><span class="p">);</span>
+
+    <span class="k">if</span> <span class="p">(</span><span class="n">shouldTick</span><span class="p">)</span> <span class="p">{</span>
+      <span class="n">CallUpdateFunction</span><span class="p">(</span><span class="n">timeDelta</span><span class="p">);</span>
+
+      <span class="n">frameCount</span><span class="o">++</span><span class="p">;</span>
+      <span class="n">previousFrameTime</span> <span class="o">=</span> <span class="n">currentTime</span><span class="p">;</span>
+    <span class="p">}</span>
+
+    <span class="k">const</span> <span class="kt">double</span> <span class="n">statsTimeDelta</span> <span class="o">=</span> <span class="n">currentTime</span> <span class="o">-</span> <span class="n">previousStatsTime</span><span class="p">;</span>
+
+    <span class="k">if</span> <span class="p">(</span><span class="n">statsTimeDelta</span> <span class="o">&gt;=</span> <span class="mf">1.0</span><span class="p">)</span> <span class="p">{</span>
+      <span class="n">String</span> <span class="n">windowTitle</span> <span class="o">=</span> <span class="n">String</span><span class="p">(</span><span class="n">GetTitle</span><span class="p">())</span> <span class="o">+</span> <span class="s">&quot; - FPS: &quot;</span> <span class="o">+</span> <span class="n">std</span><span class="o">::</span><span class="n">to_string</span><span class="p">(</span><span class="n">frameCount</span><span class="p">)</span> <span class="o">+</span> <span class="s">&quot; - Frame Time: &quot;</span> <span class="o">+</span> <span class="n">std</span><span class="o">::</span>
+        <span class="n">to_string</span><span class="p">(</span><span class="mf">1000.0</span> <span class="o">/</span> <span class="n">frameCount</span><span class="p">)</span> <span class="o">+</span> <span class="s">&quot;ms&quot;</span><span class="p">;</span>
+      <span class="n">glfwSetWindowTitle</span><span class="p">(</span><span class="n">p_window</span><span class="p">,</span> <span class="n">windowTitle</span><span class="p">.</span><span class="n">c_str</span><span class="p">());</span>
+
+      <span class="n">frameCount</span>        <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+      <span class="n">previousStatsTime</span> <span class="o">=</span> <span class="n">currentTime</span><span class="p">;</span>
+    <span class="p">}</span>
+
+    <span class="n">glfwPollEvents</span><span class="p">();</span>
+  <span class="p">}</span>
+<span class="p">}</span>
+
+<span class="kt">void</span> <span class="n">GLFWWindow</span><span class="o">::</span><span class="n">ResetCursor</span><span class="p">()</span> <span class="p">{</span>
+  <span class="n">glfwSetCursorPos</span><span class="p">(</span><span class="n">p_window</span><span class="p">,</span> <span class="n">m_midWidth</span><span class="p">,</span> <span class="n">m_midHeight</span><span class="p">);</span>
+<span class="p">}</span>
+
+<span class="n">GLFWwindow</span><span class="o">*</span> <span class="n">GLFWWindow</span><span class="o">::</span><span class="n">GetGLFWHandle</span><span class="p">()</span> <span class="k">const</span> <span class="p">{</span>
+  <span class="k">return</span> <span class="n">p_window</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="kt">void</span> <span class="n">GLFWWindow</span><span class="o">::</span><span class="n">KeyPressCallback</span><span class="p">(</span><span class="n">GLFWwindow</span><span class="o">*</span> <span class="n">window</span><span class="p">,</span> <span class="kt">int</span> <span class="n">key</span><span class="p">,</span> <span class="kt">int</span> <span class="n">scanCode</span><span class="p">,</span> <span class="kt">int</span> <span class="n">action</span><span class="p">,</span> <span class="kt">int</span> <span class="n">mods</span><span class="p">)</span> <span class="p">{</span>
+  <span class="n">UNUSED</span><span class="p">(</span><span class="n">mods</span><span class="p">);</span>
+  <span class="n">UNUSED</span><span class="p">(</span><span class="n">scanCode</span><span class="p">);</span>
+
+  <span class="n">GLFWWindow</span><span class="o">*</span> <span class="n">wrapper</span> <span class="o">=</span> <span class="k">reinterpret_cast</span><span class="o">&lt;</span><span class="n">GLFWWindow</span><span class="o">*&gt;</span><span class="p">(</span><span class="n">glfwGetWindowUserPointer</span><span class="p">(</span><span class="n">window</span><span class="p">));</span> <span class="c1">// NOLINT</span>
+
+  <span class="k">if</span> <span class="p">(</span><span class="n">action</span> <span class="o">==</span> <span class="n">GLFW_PRESS</span><span class="p">)</span> <span class="p">{</span>
+    <span class="n">wrapper</span><span class="o">-&gt;</span><span class="n">CallKeyEventFunction</span><span class="p">(</span><span class="n">KeyEvent</span><span class="p">(</span><span class="n">key</span><span class="p">,</span> <span class="n">GetKey</span><span class="p">(</span><span class="n">key</span><span class="p">),</span> <span class="n">KeyEventType</span><span class="o">::</span><span class="n">KeyPress</span><span class="p">));</span>
+  <span class="p">}</span> <span class="k">else</span> <span class="k">if</span> <span class="p">(</span><span class="n">action</span> <span class="o">==</span> <span class="n">GLFW_RELEASE</span><span class="p">)</span> <span class="p">{</span>
+    <span class="n">wrapper</span><span class="o">-&gt;</span><span class="n">CallKeyEventFunction</span><span class="p">(</span><span class="n">KeyEvent</span><span class="p">(</span><span class="n">key</span><span class="p">,</span> <span class="n">GetKey</span><span class="p">(</span><span class="n">key</span><span class="p">),</span> <span class="n">KeyEventType</span><span class="o">::</span><span class="n">KeyRelease</span><span class="p">));</span>
+  <span class="p">}</span>
+<span class="p">}</span>
+
+<span class="kt">void</span> <span class="n">GLFWWindow</span><span class="o">::</span><span class="n">SetCursorState</span><span class="p">(</span><span class="n">CursorState</span> <span class="n">state</span><span class="p">)</span> <span class="p">{</span>
+  <span class="k">switch</span> <span class="p">(</span><span class="n">state</span><span class="p">)</span> <span class="p">{</span>
+    <span class="k">case</span> <span class="n">CursorState</span><span class="o">::</span><span class="nl">Visible</span><span class="p">:</span>
+      <span class="n">glfwSetInputMode</span><span class="p">(</span><span class="n">p_window</span><span class="p">,</span> <span class="n">GLFW_CURSOR</span><span class="p">,</span> <span class="n">GLFW_CURSOR_NORMAL</span><span class="p">);</span>
+      <span class="k">break</span><span class="p">;</span>
+    <span class="k">case</span> <span class="n">CursorState</span><span class="o">::</span><span class="nl">Hidden</span><span class="p">:</span>
+      <span class="n">glfwSetInputMode</span><span class="p">(</span><span class="n">p_window</span><span class="p">,</span> <span class="n">GLFW_CURSOR</span><span class="p">,</span> <span class="n">GLFW_CURSOR_HIDDEN</span><span class="p">);</span>
+      <span class="k">break</span><span class="p">;</span>
+    <span class="k">case</span> <span class="n">CursorState</span><span class="o">::</span><span class="nl">Disabled</span><span class="p">:</span>
+      <span class="n">glfwSetInputMode</span><span class="p">(</span><span class="n">p_window</span><span class="p">,</span> <span class="n">GLFW_CURSOR</span><span class="p">,</span> <span class="n">GLFW_CURSOR_DISABLED</span><span class="p">);</span>
+      <span class="k">break</span><span class="p">;</span>
+
+    <span class="k">default</span><span class="o">:</span>
+      <span class="k">break</span><span class="p">;</span>
+  <span class="p">}</span>
+<span class="p">}</span>
+
+<span class="kt">void</span> <span class="n">GLFWWindow</span><span class="o">::</span><span class="n">MouseEventCallback</span><span class="p">(</span><span class="n">GLFWwindow</span><span class="o">*</span> <span class="n">window</span><span class="p">,</span> <span class="kt">int</span> <span class="n">button</span><span class="p">,</span> <span class="kt">int</span> <span class="n">action</span><span class="p">,</span> <span class="kt">int</span> <span class="n">mods</span><span class="p">)</span> <span class="p">{</span>
+  <span class="n">UNUSED</span><span class="p">(</span><span class="n">mods</span><span class="p">);</span>
+
+  <span class="n">GLFWWindow</span><span class="o">*</span> <span class="n">wrapper</span> <span class="o">=</span> <span class="k">reinterpret_cast</span><span class="o">&lt;</span><span class="n">GLFWWindow</span><span class="o">*&gt;</span><span class="p">(</span><span class="n">glfwGetWindowUserPointer</span><span class="p">(</span><span class="n">window</span><span class="p">));</span> <span class="c1">// NOLINT</span>
+
+  <span class="k">if</span> <span class="p">(</span><span class="n">button</span> <span class="o">==</span> <span class="n">GLFW_MOUSE_BUTTON_LEFT</span><span class="p">)</span> <span class="p">{</span>
+    <span class="k">if</span> <span class="p">(</span><span class="n">GLFW_PRESS</span> <span class="o">==</span> <span class="n">action</span><span class="p">)</span> <span class="p">{</span>
+      <span class="n">wrapper</span><span class="o">-&gt;</span><span class="n">m_mouseLeftDown</span> <span class="o">=</span> <span class="nb">true</span><span class="p">;</span>
+      <span class="n">glfwGetCursorPos</span><span class="p">(</span><span class="n">window</span><span class="p">,</span> <span class="o">&amp;</span><span class="p">(</span><span class="n">wrapper</span><span class="o">-&gt;</span><span class="n">m_prevCursorX</span><span class="p">),</span> <span class="o">&amp;</span><span class="p">(</span><span class="n">wrapper</span><span class="o">-&gt;</span><span class="n">m_prevCursorY</span><span class="p">));</span>
+    <span class="p">}</span> <span class="k">else</span> <span class="k">if</span> <span class="p">(</span><span class="n">GLFW_RELEASE</span> <span class="o">==</span> <span class="n">action</span><span class="p">)</span> <span class="p">{</span>
+      <span class="n">wrapper</span><span class="o">-&gt;</span><span class="n">m_mouseLeftDown</span> <span class="o">=</span> <span class="nb">false</span><span class="p">;</span>
+    <span class="p">}</span>
+  <span class="p">}</span>
+<span class="p">}</span>
+
+<span class="p">}</span> <span class="c1">// namespace Azura</span>
+</pre></div>
+</div>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="file_Source_Azura_RenderSystem_Inc_Generic_GLFWWindow.h.html" class="btn btn-neutral float-right" title="File GLFWWindow.h" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="file_Source_Azura_RenderSystem_Src_Generic_GLFWWindow.cpp.html" class="btn btn-neutral" title="File GLFWWindow.cpp" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2018, Vasu Mahesh
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  
+
+    
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+        <script type="text/javascript" src="../_static/jquery.js"></script>
+        <script type="text/javascript" src="../_static/underscore.js"></script>
+        <script type="text/javascript" src="../_static/doctools.js"></script>
+        <script type="text/javascript" src="../_static/collapsible-lists\js\CollapsibleLists.compressed.js"></script>
+        <script type="text/javascript" src="../_static/collapsible-lists\js\apply-collapsible-lists.js"></script>
+    
+
+  
+
+  <script type="text/javascript" src="../_static/js/theme.js"></script>
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

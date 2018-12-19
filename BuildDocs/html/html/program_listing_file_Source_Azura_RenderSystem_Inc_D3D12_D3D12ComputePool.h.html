@@ -1,0 +1,331 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>Program Listing for File D3D12ComputePool.h &mdash; Azura  documentation</title>
+  
+
+  
+  
+  
+  
+
+  
+
+  
+  
+    
+
+  
+
+  <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/collapsible-lists\css\tree_view.css" type="text/css" />
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="File D3D12Core.cpp" href="file_Source_Azura_RenderSystem_Src_D3D12_D3D12Core.cpp.html" />
+    <link rel="prev" title="File D3D12ComputePool.h" href="file_Source_Azura_RenderSystem_Inc_D3D12_D3D12ComputePool.h.html" /> 
+
+  
+  <script src="../_static/js/modernizr.min.js"></script>
+
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search">
+          
+
+          
+            <a href="../index.html" class="icon icon-home"> Azura
+          
+
+          
+          </a>
+
+          
+            
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <ul>
+<li class="toctree-l1"><a class="reference internal" href="../setting-up.html">Setting Up</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../build-instructions.html">Build Instructions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../cmake-wrappers.html">CMake Wrappers</a></li>
+<li class="toctree-l1"><a class="reference internal" href="apiRoot.html">Azura API</a></li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">Azura</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../index.html">Docs</a> &raquo;</li>
+        
+          <li><a href="apiRoot.html">Azura API</a> &raquo;</li>
+        
+          <li><a href="file_Source_Azura_RenderSystem_Inc_D3D12_D3D12ComputePool.h.html">File D3D12ComputePool.h</a> &raquo;</li>
+        
+      <li>Program Listing for File D3D12ComputePool.h</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            <a href="../_sources/html/program_listing_file_Source_Azura_RenderSystem_Inc_D3D12_D3D12ComputePool.h.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="program-listing-for-file-d3d12computepool-h">
+<span id="program-listing-file-source-azura-rendersystem-inc-d3d12-d3d12computepool-h"></span><h1>Program Listing for File D3D12ComputePool.h<a class="headerlink" href="#program-listing-for-file-d3d12computepool-h" title="Permalink to this headline">¶</a></h1>
+<p>↰ <a class="reference internal" href="file_Source_Azura_RenderSystem_Inc_D3D12_D3D12ComputePool.h.html#file-source-azura-rendersystem-inc-d3d12-d3d12computepool-h"><span class="std std-ref">Return to documentation for file</span></a> (<code class="docutils literal notranslate"><span class="pre">Source\Azura\RenderSystem\Inc\D3D12\D3D12ComputePool.h</span></code>)</p>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="cp">#pragma once</span>
+<span class="cp">#include</span> <span class="cpf">&quot;Generic/ComputePool.h&quot;</span><span class="cp"></span>
+<span class="cp">#include</span> <span class="cpf">&quot;Log/Log.h&quot;</span><span class="cp"></span>
+
+<span class="cp">#include</span> <span class="cpf">&quot;D3D12/D3D12Core.h&quot;</span><span class="cp"></span>
+<span class="cp">#include</span> <span class="cpf">&quot;D3D12/D3D12ScopedPipeline.h&quot;</span><span class="cp"></span>
+<span class="cp">#include</span> <span class="cpf">&quot;D3D12/D3D12Drawable.h&quot;</span><span class="cp"></span>
+<span class="cp">#include</span> <span class="cpf">&quot;D3D12/D3D12ScopedBuffer.h&quot;</span><span class="cp"></span>
+<span class="cp">#include</span> <span class="cpf">&quot;D3D12/D3D12ScopedCommandBuffer.h&quot;</span><span class="cp"></span>
+<span class="cp">#include</span> <span class="cpf">&quot;D3D12/D3D12ScopedImage.h&quot;</span><span class="cp"></span>
+<span class="cp">#include</span> <span class="cpf">&quot;D3D12/D3D12ScopedSampler.h&quot;</span><span class="cp"></span>
+<span class="cp">#include</span> <span class="cpf">&quot;D3D12/D3D12ScopedComputePass.h&quot;</span><span class="cp"></span>
+
+
+<span class="k">namespace</span> <span class="n">Azura</span> <span class="p">{</span>
+<span class="k">namespace</span> <span class="n">D3D12</span> <span class="p">{</span>
+
+<span class="k">struct</span> <span class="n">D3D12ComputePassRecordEntry</span>
+<span class="p">{</span>
+  <span class="n">ID3D12PipelineState</span><span class="o">*</span> <span class="n">m_pso</span><span class="p">;</span>
+  <span class="n">ID3D12GraphicsCommandList</span><span class="o">*</span> <span class="n">m_bundle</span><span class="p">;</span>
+  <span class="n">U32</span> <span class="n">m_poolIdx</span><span class="p">;</span>
+<span class="p">};</span>
+
+<span class="k">class</span> <span class="nc">D3D12ComputePool</span> <span class="o">:</span> <span class="k">public</span> <span class="n">ComputePool</span> <span class="p">{</span>
+
+<span class="k">public</span><span class="o">:</span>
+  <span class="n">D3D12ComputePool</span><span class="p">(</span><span class="k">const</span> <span class="n">Microsoft</span><span class="o">::</span><span class="n">WRL</span><span class="o">::</span><span class="n">ComPtr</span><span class="o">&lt;</span><span class="n">ID3D12Device</span><span class="o">&gt;&amp;</span> <span class="n">device</span><span class="p">,</span>
+                    <span class="k">const</span> <span class="n">ComputePoolCreateInfo</span><span class="o">&amp;</span> <span class="n">createInfo</span><span class="p">,</span>
+                    <span class="k">const</span> <span class="n">DescriptorCount</span><span class="o">&amp;</span> <span class="n">descriptorCount</span><span class="p">,</span>
+                    <span class="k">const</span> <span class="n">Containers</span><span class="o">::</span><span class="n">Vector</span><span class="o">&lt;</span><span class="n">DescriptorSlot</span><span class="o">&gt;&amp;</span> <span class="n">descriptorSlots</span><span class="p">,</span>
+                    <span class="k">const</span> <span class="n">Containers</span><span class="o">::</span><span class="n">Vector</span><span class="o">&lt;</span><span class="n">D3D12ScopedShader</span><span class="o">&gt;&amp;</span> <span class="n">shaders</span><span class="p">,</span>
+                    <span class="k">const</span> <span class="n">Containers</span><span class="o">::</span><span class="n">Vector</span><span class="o">&lt;</span><span class="n">D3D12ScopedComputePass</span><span class="o">&gt;&amp;</span> <span class="n">renderPasses</span><span class="p">,</span>
+                    <span class="n">Microsoft</span><span class="o">::</span><span class="n">WRL</span><span class="o">::</span><span class="n">ComPtr</span><span class="o">&lt;</span><span class="n">ID3D12CommandQueue</span><span class="o">&gt;</span> <span class="n">commandQueue</span><span class="p">,</span>
+                    <span class="n">Microsoft</span><span class="o">::</span><span class="n">WRL</span><span class="o">::</span><span class="n">ComPtr</span><span class="o">&lt;</span><span class="n">ID3D12CommandQueue</span><span class="o">&gt;</span> <span class="n">graphicsQueue</span><span class="p">,</span>
+                    <span class="n">Memory</span><span class="o">::</span><span class="n">Allocator</span><span class="o">&amp;</span> <span class="n">mainAllocator</span><span class="p">,</span>
+                    <span class="n">Memory</span><span class="o">::</span><span class="n">Allocator</span><span class="o">&amp;</span> <span class="n">initAllocator</span><span class="p">,</span>
+                    <span class="n">Log</span> <span class="n">log</span><span class="p">);</span>
+
+  <span class="kt">void</span> <span class="nf">AddShader</span><span class="p">(</span><span class="n">U32</span> <span class="n">shaderId</span><span class="p">)</span> <span class="k">override</span><span class="p">;</span>
+  <span class="kt">void</span> <span class="nf">BindTextureData</span><span class="p">(</span><span class="n">SlotID</span> <span class="n">slot</span><span class="p">,</span> <span class="k">const</span> <span class="n">TextureDesc</span><span class="o">&amp;</span> <span class="n">desc</span><span class="p">,</span> <span class="k">const</span> <span class="n">U8</span><span class="o">*</span> <span class="n">buffer</span><span class="p">)</span> <span class="k">override</span><span class="p">;</span>
+  <span class="kt">void</span> <span class="nf">BindSampler</span><span class="p">(</span><span class="n">SlotID</span> <span class="n">slot</span><span class="p">,</span> <span class="k">const</span> <span class="n">SamplerDesc</span><span class="o">&amp;</span> <span class="n">desc</span><span class="p">)</span> <span class="k">override</span><span class="p">;</span>
+  <span class="kt">void</span> <span class="nf">SetUniformBufferData</span><span class="p">();</span>
+  <span class="kt">void</span> <span class="nf">BindUniformData</span><span class="p">(</span><span class="n">SlotID</span> <span class="n">slot</span><span class="p">,</span> <span class="k">const</span> <span class="n">U8</span><span class="o">*</span> <span class="n">buffer</span><span class="p">,</span> <span class="n">U32</span> <span class="n">size</span><span class="p">)</span> <span class="k">override</span><span class="p">;</span>
+  <span class="kt">void</span> <span class="nf">Submit</span><span class="p">()</span> <span class="k">override</span><span class="p">;</span>
+  <span class="kt">void</span> <span class="nf">Record</span><span class="p">(</span><span class="n">U32</span> <span class="n">passId</span><span class="p">);</span>
+
+  <span class="kt">void</span> <span class="nf">BeginUpdates</span><span class="p">()</span> <span class="k">override</span><span class="p">;</span>
+  <span class="kt">void</span> <span class="nf">UpdateUniformData</span><span class="p">(</span><span class="n">SlotID</span> <span class="n">slot</span><span class="p">,</span> <span class="k">const</span> <span class="n">U8</span><span class="o">*</span> <span class="n">buffer</span><span class="p">,</span> <span class="n">U32</span> <span class="n">size</span><span class="p">)</span> <span class="k">override</span><span class="p">;</span>
+  <span class="kt">void</span> <span class="nf">UpdateTextureData</span><span class="p">(</span><span class="n">SlotID</span> <span class="n">slot</span><span class="p">,</span> <span class="k">const</span> <span class="n">U8</span><span class="o">*</span> <span class="n">buffer</span><span class="p">)</span> <span class="k">override</span><span class="p">;</span>
+  <span class="kt">void</span> <span class="nf">SubmitUpdates</span><span class="p">()</span> <span class="k">override</span><span class="p">;</span>
+
+  <span class="k">const</span> <span class="n">Containers</span><span class="o">::</span><span class="n">Vector</span><span class="o">&lt;</span><span class="n">ID3D12DescriptorHeap</span><span class="o">*&gt;&amp;</span> <span class="n">GetAllDescriptorHeaps</span><span class="p">()</span> <span class="k">const</span><span class="p">;</span>
+  <span class="n">ID3D12PipelineState</span><span class="o">*</span> <span class="nf">GetPipelineState</span><span class="p">(</span><span class="n">U32</span> <span class="n">renderPassId</span><span class="p">)</span> <span class="k">const</span><span class="p">;</span>
+
+<span class="k">private</span><span class="o">:</span>
+  <span class="kt">void</span> <span class="n">CreateRenderPassReferences</span><span class="p">(</span><span class="k">const</span> <span class="n">ComputePoolCreateInfo</span><span class="o">&amp;</span> <span class="n">createInfo</span><span class="p">,</span> <span class="k">const</span> <span class="n">Containers</span><span class="o">::</span><span class="n">Vector</span><span class="o">&lt;</span><span class="n">D3D12ScopedComputePass</span><span class="o">&gt;&amp;</span> <span class="n">computePasses</span><span class="p">);</span>
+  <span class="kt">void</span> <span class="nf">CreateDescriptorHeap</span><span class="p">();</span>
+
+  <span class="kt">void</span> <span class="nf">SetTextureData</span><span class="p">(</span><span class="n">ID3D12GraphicsCommandList</span><span class="o">*</span> <span class="n">oneTimeCommandList</span><span class="p">);</span>
+  <span class="kt">void</span> <span class="nf">SetSamplerData</span><span class="p">();</span>
+
+  <span class="kt">void</span> <span class="nf">CreateComputePassInputTargetSRV</span><span class="p">(</span><span class="k">const</span> <span class="n">Containers</span><span class="o">::</span><span class="n">Vector</span><span class="o">&lt;</span><span class="n">std</span><span class="o">::</span><span class="n">reference_wrapper</span><span class="o">&lt;</span><span class="n">D3D12ScopedImage</span><span class="o">&gt;&gt;&amp;</span> <span class="n">renderPassInputs</span><span class="p">,</span> <span class="n">U32</span> <span class="n">offsetTillThis</span><span class="p">)</span> <span class="k">const</span><span class="p">;</span>
+  <span class="kt">void</span> <span class="nf">CreateComputePassInputBufferSRV</span><span class="p">(</span>
+    <span class="k">const</span> <span class="n">Containers</span><span class="o">::</span><span class="n">Vector</span><span class="o">&lt;</span><span class="n">std</span><span class="o">::</span><span class="n">reference_wrapper</span><span class="o">&lt;</span><span class="n">D3D12ScopedBuffer</span><span class="o">&gt;&gt;&amp;</span> <span class="n">bufferInputs</span><span class="p">,</span>
+    <span class="n">U32</span> <span class="n">offsetTillThis</span><span class="p">)</span> <span class="k">const</span><span class="p">;</span>
+  <span class="kt">void</span> <span class="nf">CreateComputePassOutputTargetUAV</span><span class="p">(</span>
+    <span class="k">const</span> <span class="n">Containers</span><span class="o">::</span><span class="n">Vector</span><span class="o">&lt;</span><span class="n">std</span><span class="o">::</span><span class="n">reference_wrapper</span><span class="o">&lt;</span><span class="n">D3D12ScopedImage</span><span class="o">&gt;&gt;&amp;</span> <span class="n">computePassOutputs</span><span class="p">,</span>
+    <span class="n">U32</span> <span class="n">offsetTillThis</span><span class="p">)</span> <span class="k">const</span><span class="p">;</span>
+
+  <span class="kt">void</span> <span class="nf">CreateComputePassOutputBufferUAV</span><span class="p">(</span><span class="k">const</span> <span class="n">Containers</span><span class="o">::</span><span class="n">Vector</span><span class="o">&lt;</span><span class="n">std</span><span class="o">::</span><span class="n">reference_wrapper</span><span class="o">&lt;</span><span class="n">D3D12ScopedBuffer</span><span class="o">&gt;&gt;&amp;</span> <span class="n">computePassOutputs</span><span class="p">,</span> <span class="n">U32</span> <span class="n">offsetTillThis</span><span class="p">)</span> <span class="k">const</span><span class="p">;</span>
+
+  <span class="n">Log</span> <span class="n">log_D3D12RenderSystem</span><span class="p">;</span>
+
+  <span class="k">const</span> <span class="n">Microsoft</span><span class="o">::</span><span class="n">WRL</span><span class="o">::</span><span class="n">ComPtr</span><span class="o">&lt;</span><span class="n">ID3D12Device</span><span class="o">&gt;&amp;</span> <span class="n">m_device</span><span class="p">;</span>
+  <span class="k">const</span> <span class="n">Containers</span><span class="o">::</span><span class="n">Vector</span><span class="o">&lt;</span><span class="n">DescriptorSlot</span><span class="o">&gt;&amp;</span> <span class="n">m_globalDescriptorSlots</span><span class="p">;</span>
+  <span class="k">const</span> <span class="n">Containers</span><span class="o">::</span><span class="n">Vector</span><span class="o">&lt;</span><span class="n">D3D12ScopedShader</span><span class="o">&gt;&amp;</span> <span class="n">m_shaders</span><span class="p">;</span>
+
+  <span class="n">Containers</span><span class="o">::</span><span class="n">Vector</span><span class="o">&lt;</span><span class="n">D3D12ScopedPipeline</span><span class="o">&gt;</span> <span class="n">m_pipelines</span><span class="p">;</span>
+
+  <span class="n">Containers</span><span class="o">::</span><span class="n">Vector</span><span class="o">&lt;</span><span class="n">std</span><span class="o">::</span><span class="n">reference_wrapper</span><span class="o">&lt;</span><span class="n">D3D12ScopedComputePass</span><span class="o">&gt;&gt;</span> <span class="n">m_computePasses</span><span class="p">;</span>
+
+  <span class="n">Microsoft</span><span class="o">::</span><span class="n">WRL</span><span class="o">::</span><span class="n">ComPtr</span><span class="o">&lt;</span><span class="n">ID3D12CommandQueue</span><span class="o">&gt;</span> <span class="n">m_computeCommandQueue</span><span class="p">;</span>
+  <span class="n">Microsoft</span><span class="o">::</span><span class="n">WRL</span><span class="o">::</span><span class="n">ComPtr</span><span class="o">&lt;</span><span class="n">ID3D12CommandQueue</span><span class="o">&gt;</span> <span class="n">m_graphicsCommandQueue</span><span class="p">;</span>
+
+  <span class="n">D3D12PipelineFactory</span> <span class="n">m_pipelineFactory</span><span class="p">;</span>
+  <span class="n">D3D12ScopedBuffer</span> <span class="n">m_updateBuffer</span><span class="p">;</span>
+  <span class="n">D3D12ScopedBuffer</span> <span class="n">m_stagingBuffer</span><span class="p">;</span>
+  <span class="n">D3D12ScopedBuffer</span> <span class="n">m_mainBuffer</span><span class="p">;</span>
+
+  <span class="n">U32</span> <span class="n">m_cbvSrvDescriptorElementSize</span><span class="p">{</span><span class="mi">0</span><span class="p">};</span>
+  <span class="n">U32</span> <span class="n">m_samplerDescriptorElementSize</span><span class="p">{</span><span class="mi">0</span><span class="p">};</span>
+  <span class="n">U32</span> <span class="n">m_offsetToConstantBuffers</span><span class="p">{</span><span class="mi">0</span><span class="p">};</span>
+  <span class="n">U32</span> <span class="n">m_offsetToComputePassInputTargets</span><span class="p">{</span><span class="mi">0</span><span class="p">};</span>
+  <span class="n">U32</span> <span class="n">m_offsetToComputePassInputBuffers</span><span class="p">{</span><span class="mi">0</span><span class="p">};</span>
+  <span class="n">U32</span> <span class="n">m_offsetToComputePassOutputTargets</span><span class="p">{</span><span class="mi">0</span><span class="p">};</span>
+  <span class="n">U32</span> <span class="n">m_offsetToComputePassOutputBuffers</span><span class="p">{</span><span class="mi">0</span><span class="p">};</span>
+
+  <span class="n">Containers</span><span class="o">::</span><span class="n">Vector</span><span class="o">&lt;</span><span class="n">D3D12ScopedImage</span><span class="o">&gt;</span> <span class="n">m_images</span><span class="p">;</span>
+  <span class="n">Containers</span><span class="o">::</span><span class="n">Vector</span><span class="o">&lt;</span><span class="n">D3D12ScopedSampler</span><span class="o">&gt;</span> <span class="n">m_samplers</span><span class="p">;</span>
+
+  <span class="n">Microsoft</span><span class="o">::</span><span class="n">WRL</span><span class="o">::</span><span class="n">ComPtr</span><span class="o">&lt;</span><span class="n">ID3D12DescriptorHeap</span><span class="o">&gt;</span> <span class="n">m_descriptorComputeHeap</span><span class="p">;</span>
+  <span class="n">Microsoft</span><span class="o">::</span><span class="n">WRL</span><span class="o">::</span><span class="n">ComPtr</span><span class="o">&lt;</span><span class="n">ID3D12DescriptorHeap</span><span class="o">&gt;</span> <span class="n">m_descriptorSamplerHeap</span><span class="p">;</span>
+
+  <span class="n">Containers</span><span class="o">::</span><span class="n">Vector</span><span class="o">&lt;</span><span class="n">ID3D12DescriptorHeap</span><span class="o">*&gt;</span> <span class="n">m_allHeaps</span><span class="p">;</span>
+<span class="p">};</span>
+
+<span class="p">}</span> <span class="c1">// namespace D3D12</span>
+<span class="p">}</span> <span class="c1">// namespace Azura</span>
+</pre></div>
+</div>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="file_Source_Azura_RenderSystem_Src_D3D12_D3D12Core.cpp.html" class="btn btn-neutral float-right" title="File D3D12Core.cpp" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="file_Source_Azura_RenderSystem_Inc_D3D12_D3D12ComputePool.h.html" class="btn btn-neutral" title="File D3D12ComputePool.h" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2018, Vasu Mahesh
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  
+
+    
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+        <script type="text/javascript" src="../_static/jquery.js"></script>
+        <script type="text/javascript" src="../_static/underscore.js"></script>
+        <script type="text/javascript" src="../_static/doctools.js"></script>
+        <script type="text/javascript" src="../_static/collapsible-lists\js\CollapsibleLists.compressed.js"></script>
+        <script type="text/javascript" src="../_static/collapsible-lists\js\apply-collapsible-lists.js"></script>
+    
+
+  
+
+  <script type="text/javascript" src="../_static/js/theme.js"></script>
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

@@ -1,0 +1,404 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>Program Listing for File RawStorageFormat.h &mdash; Azura  documentation</title>
+  
+
+  
+  
+  
+  
+
+  
+
+  
+  
+    
+
+  
+
+  <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/collapsible-lists\css\tree_view.css" type="text/css" />
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="File Ray.cpp" href="file_Source_Dibella_Src_RayTracing_Primitives_Ray.cpp.html" />
+    <link rel="prev" title="File RawStorageFormat.h" href="file_Source_Core_Inc_Core_RawStorageFormat.h.html" /> 
+
+  
+  <script src="../_static/js/modernizr.min.js"></script>
+
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search">
+          
+
+          
+            <a href="../index.html" class="icon icon-home"> Azura
+          
+
+          
+          </a>
+
+          
+            
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <ul>
+<li class="toctree-l1"><a class="reference internal" href="../setting-up.html">Setting Up</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../build-instructions.html">Build Instructions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../cmake-wrappers.html">CMake Wrappers</a></li>
+<li class="toctree-l1"><a class="reference internal" href="apiRoot.html">Azura API</a></li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">Azura</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../index.html">Docs</a> &raquo;</li>
+        
+          <li><a href="apiRoot.html">Azura API</a> &raquo;</li>
+        
+          <li><a href="file_Source_Core_Inc_Core_RawStorageFormat.h.html">File RawStorageFormat.h</a> &raquo;</li>
+        
+      <li>Program Listing for File RawStorageFormat.h</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            <a href="../_sources/html/program_listing_file_Source_Core_Inc_Core_RawStorageFormat.h.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="program-listing-for-file-rawstorageformat-h">
+<span id="program-listing-file-source-core-inc-core-rawstorageformat-h"></span><h1>Program Listing for File RawStorageFormat.h<a class="headerlink" href="#program-listing-for-file-rawstorageformat-h" title="Permalink to this headline">¶</a></h1>
+<p>↰ <a class="reference internal" href="file_Source_Core_Inc_Core_RawStorageFormat.h.html#file-source-core-inc-core-rawstorageformat-h"><span class="std std-ref">Return to documentation for file</span></a> (<code class="docutils literal notranslate"><span class="pre">Source\Core\Inc\Core\RawStorageFormat.h</span></code>)</p>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="cp">#pragma once</span>
+<span class="cp">#include</span> <span class="cpf">&lt;Types.h&gt;</span><span class="cp"></span>
+<span class="cp">#include</span> <span class="cpf">&lt;tuple&gt;</span><span class="cp"></span>
+
+<span class="cp">#include</span> <span class="cpf">&lt;boost/preprocessor/repetition/repeat.hpp&gt;</span><span class="cp"></span>
+<span class="cp">#include</span> <span class="cpf">&lt;boost/preprocessor/seq/for_each.hpp&gt;</span><span class="cp"></span>
+<span class="cp">#include</span> <span class="cpf">&lt;boost/preprocessor/tuple/elem.hpp&gt;</span><span class="cp"></span>
+<span class="cp">#include</span> <span class="cpf">&lt;boost/detail/bitmask.hpp&gt;</span><span class="cp"></span>
+
+<span class="k">namespace</span> <span class="n">Azura</span> <span class="p">{</span>
+<span class="k">enum</span> <span class="k">class</span> <span class="nc">AspectMaskBits</span>
+<span class="p">{</span>
+  <span class="n">ColorBit</span> <span class="o">=</span> <span class="mi">1</span> <span class="o">&lt;&lt;</span> <span class="mi">0</span><span class="p">,</span>
+  <span class="n">DepthBit</span> <span class="o">=</span> <span class="mi">1</span> <span class="o">&lt;&lt;</span> <span class="mi">1</span><span class="p">,</span>
+  <span class="n">StencilBit</span> <span class="o">=</span> <span class="mi">1</span> <span class="o">&lt;&lt;</span> <span class="mi">2</span>
+<span class="p">};</span>
+
+<span class="n">BOOST_BITMASK</span><span class="p">(</span><span class="n">AspectMaskBits</span><span class="p">);</span>
+
+<span class="k">enum</span> <span class="n">Bits</span>
+<span class="p">{</span>
+  <span class="n">BitsUnknown</span> <span class="o">=</span> <span class="mi">0</span><span class="p">,</span>
+  <span class="n">Bits1</span>       <span class="o">=</span> <span class="mi">1</span><span class="p">,</span>
+  <span class="n">Bits2</span>       <span class="o">=</span> <span class="mi">2</span><span class="p">,</span>
+  <span class="n">Bits3</span>       <span class="o">=</span> <span class="mi">3</span><span class="p">,</span>
+  <span class="n">Bits4</span>       <span class="o">=</span> <span class="mi">4</span><span class="p">,</span>
+  <span class="n">Bits5</span>       <span class="o">=</span> <span class="mi">5</span><span class="p">,</span>
+  <span class="n">Bits6</span>       <span class="o">=</span> <span class="mi">6</span><span class="p">,</span>
+  <span class="n">Bits7</span>       <span class="o">=</span> <span class="mi">7</span><span class="p">,</span>
+  <span class="n">Bits8</span>       <span class="o">=</span> <span class="mi">8</span><span class="p">,</span>
+  <span class="n">Bits16</span>      <span class="o">=</span> <span class="mi">16</span><span class="p">,</span>
+  <span class="n">Bits32</span>      <span class="o">=</span> <span class="mi">32</span>
+<span class="p">};</span>
+
+<span class="k">enum</span> <span class="nl">FormatFeature</span> <span class="p">:</span> <span class="n">U32</span>
+<span class="p">{</span>
+  <span class="n">Compressed</span> <span class="o">=</span> <span class="mi">1</span><span class="p">,</span>
+  <span class="n">MultiBlock</span> <span class="o">=</span> <span class="mi">1</span> <span class="o">&lt;&lt;</span> <span class="mi">1</span><span class="p">,</span>
+<span class="p">};</span>
+
+<span class="k">enum</span> <span class="k">class</span> <span class="nc">ChannelDataType</span>
+<span class="p">{</span>
+  <span class="n">Float</span> <span class="o">=</span> <span class="mi">0</span><span class="p">,</span>
+  <span class="n">Integer</span><span class="p">,</span>
+  <span class="n">UNorm</span><span class="p">,</span>
+  <span class="n">SNorm</span><span class="p">,</span>
+  <span class="n">UScaled</span><span class="p">,</span>
+  <span class="n">SScaled</span><span class="p">,</span>
+  <span class="n">SRGB</span><span class="p">,</span>
+  <span class="n">Typeless</span>
+<span class="p">};</span>
+
+<span class="k">enum</span> <span class="k">class</span> <span class="nc">Channel</span>
+<span class="p">{</span>
+  <span class="n">Red</span> <span class="o">=</span> <span class="mi">0</span><span class="p">,</span>
+  <span class="n">Green</span><span class="p">,</span>
+  <span class="n">Blue</span><span class="p">,</span>
+  <span class="n">Alpha</span><span class="p">,</span>
+  <span class="n">Depth</span><span class="p">,</span>
+  <span class="n">Stencil</span><span class="p">,</span>
+  <span class="n">Padding</span><span class="p">,</span>
+  <span class="n">Unknown</span><span class="p">,</span>
+<span class="p">};</span>
+
+<span class="k">using</span> <span class="n">ChannelDesc</span> <span class="o">=</span> <span class="n">std</span><span class="o">::</span><span class="n">tuple</span><span class="o">&lt;</span><span class="n">Channel</span><span class="p">,</span> <span class="n">ChannelDataType</span><span class="p">,</span> <span class="n">U32</span><span class="o">&gt;</span><span class="p">;</span>
+
+<span class="c1">// Tuple Access Info</span>
+<span class="cp">#define TUPLE_ACCESS_ENUM 0</span>
+<span class="cp">#define TUPLE_ACCESS_ASPECT_MASK 1</span>
+<span class="cp">#define TUPLE_ACCESS_CHANNEL_DATA 2</span>
+<span class="cp">#define TUPLE_SIZE 3</span>
+
+<span class="cp">#define CHANNEL_TUPLE_ACCESS_CHANNEL 0</span>
+<span class="cp">#define CHANNEL_TUPLE_ACCESS_TYPE 1</span>
+<span class="cp">#define CHANNEL_TUPLE_ACCESS_BIT_WIDTH 2</span>
+<span class="cp">#define CHANNEL_TUPLE_SIZE 3</span>
+
+<span class="c1">// Format Iterator</span>
+<span class="cp">#define RAW_STORAGE_FORMAT_ITERATOR(FUNC)                                                                                                                                                        \</span>
+<span class="cp">  FUNC((UNKNOWN,               ( AspectMaskBits::ColorBit ),                                 </span><span class="cm">/* CHANNELS START */</span><span class="cp"> ((Unknown, Typeless, 0))                                                                                          </span><span class="cm">/* CHANNELS END */</span><span class="cp">))  \</span>
+<span class="cp">  FUNC((B8G8R8A8_SINT,         ( AspectMaskBits::ColorBit ),                                 </span><span class="cm">/* CHANNELS START */</span><span class="cp"> ((Blue, SInt, 8))          ((Green, SInt, 8))          ((Red, SInt, 8))              ((Alpha, SInt, 8))           </span><span class="cm">/* CHANNELS END */</span><span class="cp">))  \</span>
+<span class="cp">  FUNC((B8G8R8A8_SNORM,        ( AspectMaskBits::ColorBit ),                                 </span><span class="cm">/* CHANNELS START */</span><span class="cp"> ((Blue, SNorm, 8))         ((Green, SNorm, 8))         ((Red, SNorm, 8))             ((Alpha, SNorm, 8))          </span><span class="cm">/* CHANNELS END */</span><span class="cp">))  \</span>
+<span class="cp">  FUNC((B8G8R8A8_SRGB,         ( AspectMaskBits::ColorBit ),                                 </span><span class="cm">/* CHANNELS START */</span><span class="cp"> ((Blue, SRGB, 8))          ((Green, SRGB, 8))          ((Red, SRGB, 8))              ((Alpha, SRGB, 8))           </span><span class="cm">/* CHANNELS END */</span><span class="cp">))  \</span>
+<span class="cp">  FUNC((B8G8R8A8_SSCALED,      ( AspectMaskBits::ColorBit ),                                 </span><span class="cm">/* CHANNELS START */</span><span class="cp"> ((Blue, SScaled, 8))       ((Green, SScaled, 8))       ((Red, SScaled, 8))           ((Alpha, SScaled, 8))        </span><span class="cm">/* CHANNELS END */</span><span class="cp">))  \</span>
+<span class="cp">  FUNC((B8G8R8A8_UINT,         ( AspectMaskBits::ColorBit ),                                 </span><span class="cm">/* CHANNELS START */</span><span class="cp"> ((Blue, UInt, 8))          ((Green, UInt, 8))          ((Red, UInt, 8))              ((Alpha, UInt, 8))           </span><span class="cm">/* CHANNELS END */</span><span class="cp">))  \</span>
+<span class="cp">  FUNC((B8G8R8A8_UNORM,        ( AspectMaskBits::ColorBit ),                                 </span><span class="cm">/* CHANNELS START */</span><span class="cp"> ((Blue, UNorm, 8))         ((Green, UNorm, 8))         ((Red, UNorm, 8))             ((Alpha, UNorm, 8))          </span><span class="cm">/* CHANNELS END */</span><span class="cp">))  \</span>
+<span class="cp">  FUNC((B8G8R8A8_USCALED,      ( AspectMaskBits::ColorBit ),                                 </span><span class="cm">/* CHANNELS START */</span><span class="cp"> ((Blue, UScaled, 8))       ((Green, UScaled, 8))       ((Red, UScaled, 8))           ((Alpha, UScaled, 8))        </span><span class="cm">/* CHANNELS END */</span><span class="cp">))  \</span>
+<span class="cp">  FUNC((D24_UNORM_S8_UINT,     ( AspectMaskBits::DepthBit | AspectMaskBits::StencilBit ),    </span><span class="cm">/* CHANNELS START */</span><span class="cp"> ((Depth, UNorm, 24))       ((Stencil, UInt, 8))                                                                   </span><span class="cm">/* CHANNELS END */</span><span class="cp">))  \</span>
+<span class="cp">  FUNC((D32_FLOAT,             ( AspectMaskBits::DepthBit ),                                 </span><span class="cm">/* CHANNELS START */</span><span class="cp"> ((Depth, Float, 32))                                                                                              </span><span class="cm">/* CHANNELS END */</span><span class="cp">))  \</span>
+<span class="cp">  FUNC((D32_FLOAT_S8X24_UINT,  ( AspectMaskBits::DepthBit | AspectMaskBits::StencilBit ),    </span><span class="cm">/* CHANNELS START */</span><span class="cp"> ((Depth, Float, 32))       ((Stencil, UInt, 8))        ((Padding, Float, 24))                                     </span><span class="cm">/* CHANNELS END */</span><span class="cp">))  \</span>
+<span class="cp">  FUNC((R8G8B8_UNORM,          ( AspectMaskBits::ColorBit ),                                 </span><span class="cm">/* CHANNELS START */</span><span class="cp"> ((Red, UNorm, 8))          ((Green, UNorm, 8))         ((Blue, UNorm, 8))                                         </span><span class="cm">/* CHANNELS END */</span><span class="cp">))  \</span>
+<span class="cp">  FUNC((R8G8B8A8_UNORM,        ( AspectMaskBits::ColorBit ),                                 </span><span class="cm">/* CHANNELS START */</span><span class="cp"> ((Red, UNorm, 8))          ((Green, UNorm, 8))         ((Blue, UNorm, 8))            ((Alpha, UNorm, 8))          </span><span class="cm">/* CHANNELS END */</span><span class="cp">))  \</span>
+<span class="cp">  FUNC((R11G11B10_FLOAT,       ( AspectMaskBits::ColorBit ),                                 </span><span class="cm">/* CHANNELS START */</span><span class="cp"> ((Red, Float, 11))         ((Green, Float, 11))        ((Blue, Float, 10))                                        </span><span class="cm">/* CHANNELS END */</span><span class="cp">))  \</span>
+<span class="cp">  FUNC((R16_FLOAT,             ( AspectMaskBits::ColorBit ),                                 </span><span class="cm">/* CHANNELS START */</span><span class="cp"> ((Red, Float, 16))                                                                                                </span><span class="cm">/* CHANNELS END */</span><span class="cp">))  \</span>
+<span class="cp">  FUNC((R16_SINT,              ( AspectMaskBits::ColorBit ),                                 </span><span class="cm">/* CHANNELS START */</span><span class="cp"> ((Red, SInt, 16))                                                                                                 </span><span class="cm">/* CHANNELS END */</span><span class="cp">))  \</span>
+<span class="cp">  FUNC((R16_SNORM,             ( AspectMaskBits::ColorBit ),                                 </span><span class="cm">/* CHANNELS START */</span><span class="cp"> ((Red, SNorm, 16))                                                                                                </span><span class="cm">/* CHANNELS END */</span><span class="cp">))  \</span>
+<span class="cp">  FUNC((R16_SSCALED,           ( AspectMaskBits::ColorBit ),                                 </span><span class="cm">/* CHANNELS START */</span><span class="cp"> ((Red, SScaled, 16))                                                                                              </span><span class="cm">/* CHANNELS END */</span><span class="cp">))  \</span>
+<span class="cp">  FUNC((R16_UINT,              ( AspectMaskBits::ColorBit ),                                 </span><span class="cm">/* CHANNELS START */</span><span class="cp"> ((Red, UInt, 16))                                                                                                 </span><span class="cm">/* CHANNELS END */</span><span class="cp">))  \</span>
+<span class="cp">  FUNC((R16_UNORM,             ( AspectMaskBits::ColorBit ),                                 </span><span class="cm">/* CHANNELS START */</span><span class="cp"> ((Red, UNorm, 16))                                                                                                </span><span class="cm">/* CHANNELS END */</span><span class="cp">))  \</span>
+<span class="cp">  FUNC((R16_USCALED,           ( AspectMaskBits::ColorBit ),                                 </span><span class="cm">/* CHANNELS START */</span><span class="cp"> ((Red, UScaled, 16))                                                                                              </span><span class="cm">/* CHANNELS END */</span><span class="cp">))  \</span>
+<span class="cp">  FUNC((R16G16_FLOAT,          ( AspectMaskBits::ColorBit ),                                 </span><span class="cm">/* CHANNELS START */</span><span class="cp"> ((Red, Float, 16))         ((Green, Float, 16))                                                                   </span><span class="cm">/* CHANNELS END */</span><span class="cp">))  \</span>
+<span class="cp">  FUNC((R16G16_SINT,           ( AspectMaskBits::ColorBit ),                                 </span><span class="cm">/* CHANNELS START */</span><span class="cp"> ((Red, SInt, 16))          ((Green, SInt, 16))                                                                    </span><span class="cm">/* CHANNELS END */</span><span class="cp">))  \</span>
+<span class="cp">  FUNC((R16G16_SNORM,          ( AspectMaskBits::ColorBit ),                                 </span><span class="cm">/* CHANNELS START */</span><span class="cp"> ((Red, SNorm, 16))         ((Green, SNorm, 16))                                                                   </span><span class="cm">/* CHANNELS END */</span><span class="cp">))  \</span>
+<span class="cp">  FUNC((R16G16_SSCALED,        ( AspectMaskBits::ColorBit ),                                 </span><span class="cm">/* CHANNELS START */</span><span class="cp"> ((Red, SScaled, 16))       ((Green, SScaled, 16))                                                                 </span><span class="cm">/* CHANNELS END */</span><span class="cp">))  \</span>
+<span class="cp">  FUNC((R16G16_UINT,           ( AspectMaskBits::ColorBit ),                                 </span><span class="cm">/* CHANNELS START */</span><span class="cp"> ((Red, UInt, 16))          ((Green, UInt, 16))                                                                    </span><span class="cm">/* CHANNELS END */</span><span class="cp">))  \</span>
+<span class="cp">  FUNC((R16G16_UNORM,          ( AspectMaskBits::ColorBit ),                                 </span><span class="cm">/* CHANNELS START */</span><span class="cp"> ((Red, UNorm, 16))         ((Green, UNorm, 16))                                                                   </span><span class="cm">/* CHANNELS END */</span><span class="cp">))  \</span>
+<span class="cp">  FUNC((R16G16_USCALED,        ( AspectMaskBits::ColorBit ),                                 </span><span class="cm">/* CHANNELS START */</span><span class="cp"> ((Red, UScaled, 16))       ((Green, UScaled, 16))                                                                 </span><span class="cm">/* CHANNELS END */</span><span class="cp">))  \</span>
+<span class="cp">  FUNC((R16G16B16_FLOAT,       ( AspectMaskBits::ColorBit ),                                 </span><span class="cm">/* CHANNELS START */</span><span class="cp"> ((Red, Float, 16))         ((Green, Float, 16))        ((Blue, Float, 16))                                        </span><span class="cm">/* CHANNELS END */</span><span class="cp">))  \</span>
+<span class="cp">  FUNC((R16G16B16_SINT,        ( AspectMaskBits::ColorBit ),                                 </span><span class="cm">/* CHANNELS START */</span><span class="cp"> ((Red, SInt, 16))          ((Green, SInt, 16))         ((Blue, SInt, 16))                                         </span><span class="cm">/* CHANNELS END */</span><span class="cp">))  \</span>
+<span class="cp">  FUNC((R16G16B16_SNORM,       ( AspectMaskBits::ColorBit ),                                 </span><span class="cm">/* CHANNELS START */</span><span class="cp"> ((Red, SNorm, 16))         ((Green, SNorm, 16))        ((Blue, SNorm, 16))                                        </span><span class="cm">/* CHANNELS END */</span><span class="cp">))  \</span>
+<span class="cp">  FUNC((R16G16B16_SSCALED,     ( AspectMaskBits::ColorBit ),                                 </span><span class="cm">/* CHANNELS START */</span><span class="cp"> ((Red, SScaled, 16))       ((Green, SScaled, 16))      ((Blue, SScaled, 16))                                      </span><span class="cm">/* CHANNELS END */</span><span class="cp">))  \</span>
+<span class="cp">  FUNC((R16G16B16_UINT,        ( AspectMaskBits::ColorBit ),                                 </span><span class="cm">/* CHANNELS START */</span><span class="cp"> ((Red, UInt, 16))          ((Green, UInt, 16))         ((Blue, UInt, 16))                                         </span><span class="cm">/* CHANNELS END */</span><span class="cp">))  \</span>
+<span class="cp">  FUNC((R16G16B16_UNORM,       ( AspectMaskBits::ColorBit ),                                 </span><span class="cm">/* CHANNELS START */</span><span class="cp"> ((Red, UNorm, 16))         ((Green, UNorm, 16))        ((Blue, UNorm, 16))                                        </span><span class="cm">/* CHANNELS END */</span><span class="cp">))  \</span>
+<span class="cp">  FUNC((R16G16B16_USCALED,     ( AspectMaskBits::ColorBit ),                                 </span><span class="cm">/* CHANNELS START */</span><span class="cp"> ((Red, UScaled, 16))       ((Green, UScaled, 16))      ((Blue, UScaled, 16))                                      </span><span class="cm">/* CHANNELS END */</span><span class="cp">))  \</span>
+<span class="cp">  FUNC((R16G16B16A16_FLOAT,    ( AspectMaskBits::ColorBit ),                                 </span><span class="cm">/* CHANNELS START */</span><span class="cp"> ((Red, Float, 16))         ((Green, Float, 16))        ((Blue, Float, 16))           ((Alpha, Float, 16))         </span><span class="cm">/* CHANNELS END */</span><span class="cp">))  \</span>
+<span class="cp">  FUNC((R16G16B16A16_SINT,     ( AspectMaskBits::ColorBit ),                                 </span><span class="cm">/* CHANNELS START */</span><span class="cp"> ((Red, SInt, 16))          ((Green, SInt, 16))         ((Blue, SInt, 16))            ((Alpha, SInt, 16))          </span><span class="cm">/* CHANNELS END */</span><span class="cp">))  \</span>
+<span class="cp">  FUNC((R16G16B16A16_SNORM,    ( AspectMaskBits::ColorBit ),                                 </span><span class="cm">/* CHANNELS START */</span><span class="cp"> ((Red, SNorm, 16))         ((Green, SNorm, 16))        ((Blue, SNorm, 16))           ((Alpha, SNorm, 16))         </span><span class="cm">/* CHANNELS END */</span><span class="cp">))  \</span>
+<span class="cp">  FUNC((R16G16B16A16_SSCALED,  ( AspectMaskBits::ColorBit ),                                 </span><span class="cm">/* CHANNELS START */</span><span class="cp"> ((Red, SScaled, 16))       ((Green, SScaled, 16))      ((Blue, SScaled, 16))         ((Alpha, SScaled, 16))       </span><span class="cm">/* CHANNELS END */</span><span class="cp">))  \</span>
+<span class="cp">  FUNC((R16G16B16A16_UINT,     ( AspectMaskBits::ColorBit ),                                 </span><span class="cm">/* CHANNELS START */</span><span class="cp"> ((Red, UInt, 16))          ((Green, UInt, 16))         ((Blue, UInt, 16))            ((Alpha, UInt, 16))          </span><span class="cm">/* CHANNELS END */</span><span class="cp">))  \</span>
+<span class="cp">  FUNC((R16G16B16A16_UNORM,    ( AspectMaskBits::ColorBit ),                                 </span><span class="cm">/* CHANNELS START */</span><span class="cp"> ((Red, UNorm, 16))         ((Green, UNorm, 16))        ((Blue, UNorm, 16))           ((Alpha, UNorm, 16))         </span><span class="cm">/* CHANNELS END */</span><span class="cp">))  \</span>
+<span class="cp">  FUNC((R16G16B16A16_USCALED,  ( AspectMaskBits::ColorBit ),                                 </span><span class="cm">/* CHANNELS START */</span><span class="cp"> ((Red, UScaled, 16))       ((Green, UScaled, 16))      ((Blue, UScaled, 16))         ((Alpha, UScaled, 16))       </span><span class="cm">/* CHANNELS END */</span><span class="cp">))  \</span>
+<span class="cp">  FUNC((R32_FLOAT,             ( AspectMaskBits::ColorBit ),                                 </span><span class="cm">/* CHANNELS START */</span><span class="cp"> ((Red, Float, 32))                                                                                                </span><span class="cm">/* CHANNELS END */</span><span class="cp">))  \</span>
+<span class="cp">  FUNC((R32_SINT,              ( AspectMaskBits::ColorBit ),                                 </span><span class="cm">/* CHANNELS START */</span><span class="cp"> ((Red, SInt, 32))                                                                                                 </span><span class="cm">/* CHANNELS END */</span><span class="cp">))  \</span>
+<span class="cp">  FUNC((R32_SNORM,             ( AspectMaskBits::ColorBit ),                                 </span><span class="cm">/* CHANNELS START */</span><span class="cp"> ((Red, SNorm, 32))                                                                                                </span><span class="cm">/* CHANNELS END */</span><span class="cp">))  \</span>
+<span class="cp">  FUNC((R32_UINT,              ( AspectMaskBits::ColorBit ),                                 </span><span class="cm">/* CHANNELS START */</span><span class="cp"> ((Red, UInt, 32))                                                                                                 </span><span class="cm">/* CHANNELS END */</span><span class="cp">))  \</span>
+<span class="cp">  FUNC((R32_UNORM,             ( AspectMaskBits::ColorBit ),                                 </span><span class="cm">/* CHANNELS START */</span><span class="cp"> ((Red, UNorm, 32))                                                                                                </span><span class="cm">/* CHANNELS END */</span><span class="cp">))  \</span>
+<span class="cp">  FUNC((R32G32_FLOAT,          ( AspectMaskBits::ColorBit ),                                 </span><span class="cm">/* CHANNELS START */</span><span class="cp"> ((Red, Float, 32))         ((Green, Float, 32))                                                                   </span><span class="cm">/* CHANNELS END */</span><span class="cp">))  \</span>
+<span class="cp">  FUNC((R32G32_SINT,           ( AspectMaskBits::ColorBit ),                                 </span><span class="cm">/* CHANNELS START */</span><span class="cp"> ((Red, SInt, 32))          ((Green, SInt, 32))                                                                    </span><span class="cm">/* CHANNELS END */</span><span class="cp">))  \</span>
+<span class="cp">  FUNC((R32G32_UINT,           ( AspectMaskBits::ColorBit ),                                 </span><span class="cm">/* CHANNELS START */</span><span class="cp"> ((Red, UInt, 32))          ((Green, UInt, 32))                                                                    </span><span class="cm">/* CHANNELS END */</span><span class="cp">))  \</span>
+<span class="cp">  FUNC((R32G32B32_FLOAT,       ( AspectMaskBits::ColorBit ),                                 </span><span class="cm">/* CHANNELS START */</span><span class="cp"> ((Red, Float, 32))         ((Green, Float, 32))        ((Blue, Float, 32))                                        </span><span class="cm">/* CHANNELS END */</span><span class="cp">))  \</span>
+<span class="cp">  FUNC((R32G32B32_SINT,        ( AspectMaskBits::ColorBit ),                                 </span><span class="cm">/* CHANNELS START */</span><span class="cp"> ((Red, SInt, 32))          ((Green, SInt, 32))         ((Blue, SInt, 32))                                         </span><span class="cm">/* CHANNELS END */</span><span class="cp">))  \</span>
+<span class="cp">  FUNC((R32G32B32_UINT,        ( AspectMaskBits::ColorBit ),                                 </span><span class="cm">/* CHANNELS START */</span><span class="cp"> ((Red, UInt, 32))          ((Green, UInt, 32))         ((Blue, UInt, 32))                                         </span><span class="cm">/* CHANNELS END */</span><span class="cp">))  \</span>
+<span class="cp">  FUNC((R32G32B32A32_FLOAT,    ( AspectMaskBits::ColorBit ),                                 </span><span class="cm">/* CHANNELS START */</span><span class="cp"> ((Red, Float, 32))         ((Green, Float, 32))        ((Blue, Float, 32))           ((Alpha, Float, 32))         </span><span class="cm">/* CHANNELS END */</span><span class="cp">))  \</span>
+<span class="cp">  FUNC((R32G32B32A32_SINT,     ( AspectMaskBits::ColorBit ),                                 </span><span class="cm">/* CHANNELS START */</span><span class="cp"> ((Red, UInt, 32))          ((Green, UInt, 32))         ((Blue, UInt, 32))            ((Alpha, UInt, 32))          </span><span class="cm">/* CHANNELS END */</span><span class="cp">))  \</span>
+<span class="cp">  FUNC((R32G32B32A32_UINT,     ( AspectMaskBits::ColorBit ),                                 </span><span class="cm">/* CHANNELS START */</span><span class="cp"> ((Red, UInt, 32))          ((Green, UInt, 32))         ((Blue, UInt, 32))            ((Alpha, UInt, 32))          </span><span class="cm">/* CHANNELS END */</span><span class="cp">))  \</span>
+<span class="cp">  FUNC((R64_FLOAT,             ( AspectMaskBits::ColorBit ),                                 </span><span class="cm">/* CHANNELS START */</span><span class="cp"> ((Red, Float, 64))                                                                                                </span><span class="cm">/* CHANNELS END */</span><span class="cp">))  \</span>
+<span class="cp">  FUNC((R64_SINT,              ( AspectMaskBits::ColorBit ),                                 </span><span class="cm">/* CHANNELS START */</span><span class="cp"> ((Red, SInt, 64))                                                                                                 </span><span class="cm">/* CHANNELS END */</span><span class="cp">))  \</span>
+<span class="cp">  FUNC((R64_UINT,              ( AspectMaskBits::ColorBit ),                                 </span><span class="cm">/* CHANNELS START */</span><span class="cp"> ((Red, UInt, 64))                                                                                                 </span><span class="cm">/* CHANNELS END */</span><span class="cp">))  \</span>
+<span class="cp">  FUNC((R64G64_FLOAT,          ( AspectMaskBits::ColorBit ),                                 </span><span class="cm">/* CHANNELS START */</span><span class="cp"> ((Red, Float, 64))         ((Green, Float, 64))                                                                   </span><span class="cm">/* CHANNELS END */</span><span class="cp">))  \</span>
+<span class="cp">  FUNC((R64G64_SINT,           ( AspectMaskBits::ColorBit ),                                 </span><span class="cm">/* CHANNELS START */</span><span class="cp"> ((Red, SInt, 64))          ((Green, SInt, 64))                                                                    </span><span class="cm">/* CHANNELS END */</span><span class="cp">))  \</span>
+<span class="cp">  FUNC((R64G64_UINT,           ( AspectMaskBits::ColorBit ),                                 </span><span class="cm">/* CHANNELS START */</span><span class="cp"> ((Red, UInt, 64))          ((Green, UInt, 64))                                                                    </span><span class="cm">/* CHANNELS END */</span><span class="cp">))  \</span>
+<span class="cp">  FUNC((R64G64B64_FLOAT,       ( AspectMaskBits::ColorBit ),                                 </span><span class="cm">/* CHANNELS START */</span><span class="cp"> ((Red, Float, 64))         ((Green, Float, 64))        ((Blue, Float, 64))                                        </span><span class="cm">/* CHANNELS END */</span><span class="cp">))  \</span>
+<span class="cp">  FUNC((R64G64B64_SINT,        ( AspectMaskBits::ColorBit ),                                 </span><span class="cm">/* CHANNELS START */</span><span class="cp"> ((Red, SInt, 64))          ((Green, SInt, 64))         ((Blue, SInt, 64))                                         </span><span class="cm">/* CHANNELS END */</span><span class="cp">))  \</span>
+<span class="cp">  FUNC((R64G64B64_UINT,        ( AspectMaskBits::ColorBit ),                                 </span><span class="cm">/* CHANNELS START */</span><span class="cp"> ((Red, UInt, 64))          ((Green, UInt, 64))         ((Blue, UInt, 64))                                         </span><span class="cm">/* CHANNELS END */</span><span class="cp">))  \</span>
+<span class="cp">  FUNC((R64G64B64A64_FLOAT,    ( AspectMaskBits::ColorBit ),                                 </span><span class="cm">/* CHANNELS START */</span><span class="cp"> ((Red, Float, 64))         ((Green, Float, 64))        ((Blue, Float, 64))           ((Alpha, Float, 64))         </span><span class="cm">/* CHANNELS END */</span><span class="cp">))  \</span>
+<span class="cp">  FUNC((R64G64B64A64_SINT,     ( AspectMaskBits::ColorBit ),                                 </span><span class="cm">/* CHANNELS START */</span><span class="cp"> ((Red, SInt, 64))          ((Green, SInt, 64))         ((Blue, SInt, 64))            ((Alpha, SInt, 64))          </span><span class="cm">/* CHANNELS END */</span><span class="cp">))  \</span>
+<span class="cp">  FUNC((R64G64B64A64_UINT,     ( AspectMaskBits::ColorBit ),                                 </span><span class="cm">/* CHANNELS START */</span><span class="cp"> ((Red, UInt, 64))          ((Green, UInt, 64))         ((Blue, UInt, 64))            ((Alpha, UInt, 64))          </span><span class="cm">/* CHANNELS END */</span><span class="cp">))</span>
+
+<span class="c1">// Macros For: ENUM NAME</span>
+<span class="cp">#define GET_FORMAT_NAME_FROM_TUPLE(ENUM_TUPLE) BOOST_PP_TUPLE_ELEM(TUPLE_SIZE, TUPLE_ACCESS_ENUM, ENUM_TUPLE)</span>
+<span class="cp">#define GET_FORMAT_NAME_FOR_LIST_FROM_TUPLE(ENUM_TUPLE) GET_FORMAT_NAME_FROM_TUPLE(ENUM_TUPLE),</span>
+<span class="cp">#define GET_FULL_FORMAT_NAME_FROM_TUPLE(ENUM_TUPLE) RawStorageFormat::GET_FORMAT_NAME_FROM_TUPLE(ENUM_TUPLE)</span>
+
+<span class="c1">// Macros For: CHANNEL WIDTH</span>
+<span class="cp">#define GET_CHANNEL_WIDTH(CHANNEL_TUPLE)                                                                                                                                                  \</span>
+<span class="cp">  BOOST_PP_TUPLE_ELEM(CHANNEL_TUPLE_SIZE, CHANNEL_TUPLE_ACCESS_BIT_WIDTH, CHANNEL_TUPLE)</span>
+<span class="cp">#define GET_CHANNEL_WIDTH_SEQ(R, DATA, CHANNEL_TUPLE)                                                                                                                                     \</span>
+<span class="cp">  BOOST_PP_TUPLE_ELEM(CHANNEL_TUPLE_SIZE, CHANNEL_TUPLE_ACCESS_BIT_WIDTH, CHANNEL_TUPLE) DATA</span>
+<span class="cp">#define GET_FORMAT_WIDTH(CHANNEL_LIST) BOOST_PP_SEQ_FOR_EACH(GET_CHANNEL_WIDTH_SEQ, +, CHANNEL_LIST) 0</span>
+
+<span class="cp">#define GET_FORMAT_WIDTH_FROM_TUPLE(ENUM_TUPLE)                                                                                                                                           \</span>
+<span class="cp">  GET_FORMAT_WIDTH(BOOST_PP_TUPLE_ELEM(TUPLE_SIZE, TUPLE_ACCESS_CHANNEL_DATA, ENUM_TUPLE))</span>
+<span class="cp">#define GET_FORMAT_WIDTH_FOR_LIST_FROM_TUPLE(ENUM_TUPLE) GET_FORMAT_WIDTH_FROM_TUPLE(ENUM_TUPLE),</span>
+
+
+<span class="cp">#define GET_ASPECT_MASK_FROM_TUPLE(ENUM_TUPLE)                                                                                                                                           \</span>
+<span class="cp">  BOOST_PP_TUPLE_ELEM(TUPLE_SIZE, TUPLE_ACCESS_ASPECT_MASK, ENUM_TUPLE)</span>
+
+<span class="k">enum</span> <span class="k">class</span> <span class="nc">RawStorageFormat</span>
+<span class="p">{</span>
+  <span class="n">RAW_STORAGE_FORMAT_ITERATOR</span><span class="p">(</span><span class="n">GET_FORMAT_NAME_FOR_LIST_FROM_TUPLE</span><span class="p">)</span>
+<span class="p">};</span>
+
+<span class="n">U32</span> <span class="nf">GetFormatSizeBits</span><span class="p">(</span><span class="n">RawStorageFormat</span> <span class="n">format</span><span class="p">);</span>
+<span class="n">U32</span> <span class="nf">GetFormatSize</span><span class="p">(</span><span class="n">RawStorageFormat</span> <span class="n">format</span><span class="p">);</span>
+<span class="kt">bool</span> <span class="nf">HasDepthComponent</span><span class="p">(</span><span class="n">RawStorageFormat</span> <span class="n">format</span><span class="p">);</span>
+<span class="kt">bool</span> <span class="nf">HasStencilComponent</span><span class="p">(</span><span class="n">RawStorageFormat</span> <span class="n">format</span><span class="p">);</span>
+<span class="kt">bool</span> <span class="nf">HasDepthOrStencilComponent</span><span class="p">(</span><span class="n">RawStorageFormat</span> <span class="n">format</span><span class="p">);</span>
+<span class="kt">bool</span> <span class="nf">HasDepthAndStencilComponent</span><span class="p">(</span><span class="n">RawStorageFormat</span> <span class="n">format</span><span class="p">);</span>
+<span class="n">String</span> <span class="nf">ToString</span><span class="p">(</span><span class="n">RawStorageFormat</span> <span class="n">format</span><span class="p">);</span>
+
+<span class="p">}</span>  <span class="c1">// namespace Azura</span>
+</pre></div>
+</div>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="file_Source_Dibella_Src_RayTracing_Primitives_Ray.cpp.html" class="btn btn-neutral float-right" title="File Ray.cpp" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="file_Source_Core_Inc_Core_RawStorageFormat.h.html" class="btn btn-neutral" title="File RawStorageFormat.h" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2018, Vasu Mahesh
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  
+
+    
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+        <script type="text/javascript" src="../_static/jquery.js"></script>
+        <script type="text/javascript" src="../_static/underscore.js"></script>
+        <script type="text/javascript" src="../_static/doctools.js"></script>
+        <script type="text/javascript" src="../_static/collapsible-lists\js\CollapsibleLists.compressed.js"></script>
+        <script type="text/javascript" src="../_static/collapsible-lists\js\apply-collapsible-lists.js"></script>
+    
+
+  
+
+  <script type="text/javascript" src="../_static/js/theme.js"></script>
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

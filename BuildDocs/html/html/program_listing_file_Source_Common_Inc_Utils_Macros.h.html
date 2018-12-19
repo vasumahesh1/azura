@@ -1,0 +1,299 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>Program Listing for File Macros.h &mdash; Azura  documentation</title>
+  
+
+  
+  
+  
+  
+
+  
+
+  
+  
+    
+
+  
+
+  <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/collapsible-lists\css\tree_view.css" type="text/css" />
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="File main.cpp" href="file_Source_Samples_0_TestZone_Src_main.cpp.html" />
+    <link rel="prev" title="File Macros.h" href="file_Source_Common_Inc_Utils_Macros.h.html" /> 
+
+  
+  <script src="../_static/js/modernizr.min.js"></script>
+
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search">
+          
+
+          
+            <a href="../index.html" class="icon icon-home"> Azura
+          
+
+          
+          </a>
+
+          
+            
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <ul>
+<li class="toctree-l1"><a class="reference internal" href="../setting-up.html">Setting Up</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../build-instructions.html">Build Instructions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../cmake-wrappers.html">CMake Wrappers</a></li>
+<li class="toctree-l1"><a class="reference internal" href="apiRoot.html">Azura API</a></li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">Azura</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../index.html">Docs</a> &raquo;</li>
+        
+          <li><a href="apiRoot.html">Azura API</a> &raquo;</li>
+        
+          <li><a href="file_Source_Common_Inc_Utils_Macros.h.html">File Macros.h</a> &raquo;</li>
+        
+      <li>Program Listing for File Macros.h</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            <a href="../_sources/html/program_listing_file_Source_Common_Inc_Utils_Macros.h.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="program-listing-for-file-macros-h">
+<span id="program-listing-file-source-common-inc-utils-macros-h"></span><h1>Program Listing for File Macros.h<a class="headerlink" href="#program-listing-for-file-macros-h" title="Permalink to this headline">¶</a></h1>
+<p>↰ <a class="reference internal" href="file_Source_Common_Inc_Utils_Macros.h.html#file-source-common-inc-utils-macros-h"><span class="std std-ref">Return to documentation for file</span></a> (<code class="docutils literal notranslate"><span class="pre">Source\Common\Inc\Utils\Macros.h</span></code>)</p>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="cp">#pragma once</span>
+
+<span class="cp">#if defined(WIN32) || defined(_WIN32)</span>
+<span class="cp">#include</span> <span class="cpf">&lt;malloc.h&gt;</span><span class="cp"></span>
+<span class="cp">#define ALIGNED_ALLOC(alignment, size) _aligned_malloc(size, alignment)</span>
+
+<span class="cp">#define ALIGNED_FREE(ptr) _aligned_free(ptr)</span>
+
+<span class="cp">#elif defined(UNIX) || defined(__linux__)</span>
+<span class="cp">#include</span> <span class="cpf">&lt;malloc.h&gt;</span><span class="cp"></span>
+<span class="cp">#define ALIGNED_ALLOC(alignment, size) memalign(alignment, size)</span>
+
+<span class="cp">#define ALIGNED_FREE(ptr) free(ptr)</span>
+
+<span class="cp">#elif defined(APPLE) || defined(__linux__)</span>
+<span class="cp">#define ALIGNED_ALLOC(alignment, size) memalign(alignment, size)</span>
+
+<span class="cp">#define ALIGNED_FREE(ptr) free(ptr)</span>
+<span class="cp">#endif</span>
+
+<span class="cp">#define UNUSED(x) (void)(x)</span>
+
+<span class="cp">#define SCALE_SIZE(val, size) ((val + size - 1) &amp; ~(size - 1))</span>
+
+<span class="cp">#define FORWARD_MAPPING(TYPE_A, TYPE_B)                                                                                \</span>
+<span class="cp">  case TYPE_A:                                                                                                         \</span>
+<span class="cp">    return TYPE_B;</span>
+
+<span class="cp">#define REVERSE_MAPPING(TYPE_A, TYPE_B)                                                                                \</span>
+<span class="cp">  case TYPE_B:                                                                                                         \</span>
+<span class="cp">    return TYPE_A;</span>
+
+<span class="cp">#define VERIFY_TRUE(Logger, res, message)                                                            \</span>
+<span class="cp">  if ((res) != true) {                                                                               \</span>
+<span class="cp">    LOG_ERR(Logger, LOG_LEVEL, message);                                                             \</span>
+<span class="cp">    throw std::runtime_error(message);                                                               \</span>
+<span class="cp">  }</span>
+
+<span class="cp">#define VERIFY_OPT(Logger, res, message)                                                             \</span>
+<span class="cp">  if (!(res)) {                                                                                      \</span>
+<span class="cp">    LOG_ERR(Logger, LOG_LEVEL, message);                                                             \</span>
+<span class="cp">    throw std::runtime_error(message);                                                               \</span>
+<span class="cp">  }</span>
+
+<span class="cp">#define FAIL_IF(Logger, res, message)                                                                \</span>
+<span class="cp">  if ((res)) {                                                                                       \</span>
+<span class="cp">    LOG_ERR(Logger, LOG_LEVEL, message);                                                             \</span>
+<span class="cp">    throw std::runtime_error(message);                                                               \</span>
+<span class="cp">  }</span>
+
+<span class="cp">#define ENUM_HAS(enumVar, value) \</span>
+<span class="cp">  (enumVar &amp; value) == value</span>
+
+<span class="cp">#define CASE_STR(r)   \</span>
+<span class="cp">    case r:           \</span>
+<span class="cp">        return #r</span>
+
+
+<span class="c1">// Credit Source:</span>
+<span class="c1">// http://lucumr.pocoo.org/2013/8/18/beautiful-native-libraries/</span>
+<span class="cp">#ifndef AZURA_API</span>
+<span class="cp">#  ifdef _WIN32</span>
+<span class="cp">#     if defined(YL_BUILD_SHARED) </span><span class="cm">/* build dll */</span><span class="cp"></span>
+<span class="cp">#         define AZURA_API __declspec(dllexport)</span>
+<span class="cp">#     elif !defined(YL_BUILD_STATIC) </span><span class="cm">/* use dll */</span><span class="cp"></span>
+<span class="cp">#         define AZURA_API __declspec(dllimport)</span>
+<span class="cp">#     else </span><span class="cm">/* static library */</span><span class="cp"></span>
+<span class="cp">#         define AZURA_API</span>
+<span class="cp">#     endif</span>
+<span class="cp">#  else</span>
+<span class="cp">#     if __GNUC__ &gt;= 4</span>
+<span class="cp">#         define AZURA_API __attribute__((visibility(&quot;default&quot;)))</span>
+<span class="cp">#     else</span>
+<span class="cp">#         define AZURA_API</span>
+<span class="cp">#     endif</span>
+<span class="cp">#  endif</span>
+<span class="cp">#endif</span>
+</pre></div>
+</div>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="file_Source_Samples_0_TestZone_Src_main.cpp.html" class="btn btn-neutral float-right" title="File main.cpp" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="file_Source_Common_Inc_Utils_Macros.h.html" class="btn btn-neutral" title="File Macros.h" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2018, Vasu Mahesh
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  
+
+    
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+        <script type="text/javascript" src="../_static/jquery.js"></script>
+        <script type="text/javascript" src="../_static/underscore.js"></script>
+        <script type="text/javascript" src="../_static/doctools.js"></script>
+        <script type="text/javascript" src="../_static/collapsible-lists\js\CollapsibleLists.compressed.js"></script>
+        <script type="text/javascript" src="../_static/collapsible-lists\js\apply-collapsible-lists.js"></script>
+    
+
+  
+
+  <script type="text/javascript" src="../_static/js/theme.js"></script>
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>
