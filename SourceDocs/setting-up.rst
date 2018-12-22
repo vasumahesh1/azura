@@ -9,12 +9,32 @@ Azura only needs one thing in your PATH to be operational. It is a link to your 
 
 .. note:: All build related configs are located in the ``External`` folder
 
-There are now two ways for you to build:
+There are now three ways for you to build:
 
 
 * 
-  **Build the way Azura builds by default**
 
+  **Use the new install script**
+
+  * Involves: Running a CLI command to install dependencies.
+
+  * Steps:
+
+    * Run: 
+
+    .. code-block:: bash
+      # Install ALL dependencies
+      python install.py
+
+      # Install ALL dependencies - If you don't have 7z in your path
+      python install.py --zipExtractor <Path to 7z executable>
+      python install.py --zipExtractor "C:\Program Files\7-Zip\7z.exe"
+
+      # Install only 1 dependency
+      python install.py --zipExtractor "C:\Program Files\7-Zip\7z.exe" --only Vulkan
+
+
+  **Build the way Azura builds by default**
 
   * Involves: Copying your files & extra HDD space
   * 
