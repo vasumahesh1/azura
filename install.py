@@ -21,8 +21,8 @@ def ZipExtractor(installArgs, currentZipPath, unzipPath):
 
   return True
 
-def WindowsInstaller(installArgs, currentLLVM, unzipPath):
-  command = [os.path.abspath(currentLLVM), '/S', '/D='+ os.path.abspath(unzipPath)]
+def WindowsInstaller(installArgs, currentExecutable, installPath):
+  command = [os.path.abspath(currentExecutable), '/S', '/D='+ os.path.abspath(installPath)]
 
   res = subprocess.Popen(command, shell=True).wait()
   if res:
@@ -30,8 +30,8 @@ def WindowsInstaller(installArgs, currentLLVM, unzipPath):
 
   return True
 
-def BoostWindowsInstaller(installArgs, currentLLVM, unzipPath):
-  command = [os.path.abspath(currentLLVM), '/VERYSILENT', '/DIR='+ os.path.abspath(unzipPath)]
+def VerySilentWindowsInstaller(installArgs, currentExecutable, installPath):
+  command = [os.path.abspath(currentExecutable), '/VERYSILENT', '/DIR='+ os.path.abspath(installPath)]
 
   res = subprocess.Popen(command, shell=True).wait()
   if res:
@@ -89,11 +89,11 @@ def run():
   })
 
   installManager.register('Boost', {
-    'saveTo': 'Source/Imports/$Platform/Boost/boost_1_68_0/',
+    'saveTo': 'Source/Imports/$Platform/Boost/boost_1_67_0/',
     
     'Windows': {
       'url': 'https://downloads.sourceforge.net/project/boost/boost-binaries/1.67.0/boost_1_67_0-msvc-14.1-64.exe',
-      'onDownload': BoostWindowsInstaller
+      'onDownload': VerySilentWindowsInstaller
     }
   })
 
