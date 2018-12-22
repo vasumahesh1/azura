@@ -33,6 +33,10 @@ There are now three ways for you to build:
       # Install only 1 dependency
       python install.py --zipExtractor "C:\Program Files\7-Zip\7z.exe" --only Vulkan
 
+    All installations are silent and will not request any UI. However, some installations may ask for Windows UAC access (Windows only thing).
+
+    .. warning:: Things like LLVM & Vulkan will actually "install" it inside Azura causing an entry to pop up in system control panel. If you are deleting it be sure to check your Control Panel while uninstalling it.
+
 
   **Build the way Azura builds by default**
 
