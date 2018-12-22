@@ -37,6 +37,8 @@ There are now three ways for you to build:
 
     .. warning:: Things like LLVM & Vulkan will actually "install" it inside Azura causing an entry to pop up in system control panel. If you are deleting it be sure to check your Control Panel while uninstalling it.
 
+    The install script will download almost all of the dependencies. But, it doesn't download Windows compiler dependencies. For those, check the other steps on how to do that. (You can either specify the path in a new config file or directly copy it to the required location).
+
 
   **Build the way Azura builds by default**
 
