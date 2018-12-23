@@ -66,6 +66,8 @@ class InstallManager(object):
         az_log.fail('Failed to execute onDownload script for dependency: ' + event)
         return
 
+      print('Installed to: ' + os.path.abspath(modifiedSavePath))
+
       az_log.success('Done: ' + event)
       az_log.empty()
 
