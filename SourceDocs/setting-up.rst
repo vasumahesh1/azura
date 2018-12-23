@@ -1,103 +1,122 @@
-
 Setting Up
 ==========
 
-1. Different System Configs
----------------------------
+0. PATH setup
+~~~~~~~~~~~~~
 
-Azura only needs one thing in your PATH to be operational. It is a link to your Python27 application. Azura creates a copy of your environment variables and modifies them. It injects paths to MSVC Compilers and other platform specific things and calls CMake.
+Azura's build system runs on Python 3.
 
-.. note:: All build related configs are located in the ``External`` folder
+Make sure you have added python 3 added to your PATH environment variable. This makes it easier to invoke the build system.
 
-There are now three ways for you to build:
+Currently used: Python 3.7
 
-
-* 
-
-  **Use the new install script**
-
-  * Involves: Running a CLI command to install dependencies.
-
-  * Steps:
-
-    * Run: 
-
-    .. code-block:: bash
-      # Install ALL dependencies
-      python install.py
-
-      # Install ALL dependencies - If you don't have 7z in your path
-      python install.py --zipExtractor <Path to 7z executable>
-      python install.py --zipExtractor "C:\Program Files\7-Zip\7z.exe"
-
-      # Install only 1 dependency
-      python install.py --zipExtractor "C:\Program Files\7-Zip\7z.exe" --only Vulkan
-
-    All installations are silent and will not request any UI. However, some installations may ask for Windows UAC access (Windows only thing).
-
-    .. warning:: Things like LLVM & Vulkan will actually "install" it inside Azura causing an entry to pop up in system control panel. If you are deleting it be sure to check your Control Panel while uninstalling it.
-
-    The install script will download almost all of the dependencies. But, it doesn't download Windows compiler dependencies. For those, check the other steps on how to do that. (You can either specify the path in a new config file or directly copy it to the required location).
-
-
-  **Build the way Azura builds by default**
-
-  * Involves: Copying your files & extra HDD space
-  * 
-    Steps:
-
-
-    * Look at the `default config file <https://github.com/vasumahesh1/azura/blob/master/External/Config.ini>`_ Azura picks up
-    * Make sure all of these paths exists - You will need to copy them over to ``External/<Platform>/`` or download the exact version online.
-    * `Appveyor YML file <https://github.com/vasumahesh1/azura/blob/master/appveyor.yml>`_ might be helpful to get the direct download URL
-
-* **Build your own way**
-
-  * Involves: Modifying two Config INI files that point to the correct Libraries and Platform SDKs
-  * Not recommended for beginners
 
 .. warning:: Qt is known to create issues with Azura. Why? Qt straight up pollutes your PATH variable which confuses CMake in Azura to build for MSVC or MinGW. There is a variable injected by Qt which you can delete from your PATH environment variable.
 
-2. Download Dependencies
-------------------------
-
-There are two sub steps for dependencies.
+.. warning:: If you have VulkanSDK installed for Windows, we recommend uninstalling it if you just started using Azura.
 
 
-#. 
-   **Sub-module clone:**
+1. Clone and Install submodules
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-   Just run ``git submodule update --init --recursive`` like normal and it should download all the dependencies needed. Currently, it downloads:
+You can start by `cloning azura <https://github.com/vasumahesh1/azura>`_ from github.
+
+Then make sure to install all the submodules.
+
+.. code-block:: sh
+
+   git submodule update --init --recursive
+
+This will download all the code related dependencies.
+
+.. warning:: Make sure you use default command prompt, or Powershell or Cmder for downloading / cloning Azura. Not sure about Git Bash but Ubuntu Subsystem for Windows has issues with cloning the submodules for Azura.
+
+2. Run the Install Script
+~~~~~~~~~~~~~~~~~~~~~~~~~
+
+Azura has an install script provided to you. You need to have 7 zip installed. It can be in your PATH but it is not necessary.
+
+You can execute the script by calling:
+
+.. code-block:: sh
+
+   # Direct Usage (if 7z in PATH)
+   python install.py
+
+   # Direct Usage (if 7z not in PATH, give the location)
+   python install.py --zipExtractor "C:\Program Files\7-Zip\7z.exe"
+
+Sometimes you may need to install only one dependency. You can then use:
+
+.. code-block:: sh
+
+   python install.py --only <Name>
+   python install.py --only Vulkan
+
+   # ---
+   # OR (Based on your zip extractor usage)
+   # ---
+
+   python install.py --zipExtractor "C:\Program Files\7-Zip\7z.exe" --only <Name>
+   python install.py --zipExtractor "C:\Program Files\7-Zip\7z.exe" --only Vulkan
+
+All installations are silent and will not request any UI. However, some installations may ask for Windows UAC access (Windows only thing).
+
+.. warning:: Things like LLVM & Vulkan will actually "install" it inside Azura causing an entry to pop up in system control panel. If you are deleting it be sure to check your Control Panel while uninstalling it.
+
+The install script will download almost all of the dependencies. But, it doesn't download Windows compiler dependencies.
 
 
-   * Source/Imports/Common/benchmark
-   * Source/Imports/Common/glTF-SDK
-   * Source/Imports/Common/glfw
-   * Source/Imports/Common/mathfu
-   * Source/Imports/Common/stb
-   * Source/Imports/Common/yaml-cpp
+3. Manual Installation
+~~~~~~~~~~~~~~~~~~~~~~
 
-#. 
-   **Manual download:**
+There are some platform specific things that need to be done. Sadly, they are to be done manually.
 
-   Sadly, we need to still download some of the stuff manually. This includes some stuff that can't be on github. We recommend checking the `Appveyor YML file <https://github.com/vasumahesh1/azura/blob/master/appveyor.yml>`_ which have a direct download link to **most** of these. They are:
+[REQUIRED] Build Requirements:
+""""""""""""""""""""""""""""""
+
+* 
+  Windows
+
+  You will need to either specify the path to your Microsoft compilers OR just copy them over to the respective paths that Azura checks for.
+
+  There are two ways to do this. For both ways, We recommend to have a look at `Config.ini <https://github.com/vasumahesh1/azura/blob/master/External/Config.ini>`_ and `Appveyor's Config <https://github.com/vasumahesh1/azura/blob/master/External/AppveyorConfig.ini>`_.
 
 
-   * Vulkan SDK 1.1.77.0 - Located at: ``Source/Imports/<Platform>/Vulkan/1.1.77.0/``
-   * Slang 0.11.16 - Located at ``Source/Imports/<Platform>/Slang/slang-0.11.16/``
-   * Boost 1.67 - Located at ``Source/Imports/<Platform>/Boost/boost_1_67_0/``
+  * 
+    Copy Over Path Method (Following Paths must exist and must contain the compiler files):
 
-They are all versioned appropriately. In case for version changes, we just add a new folder.
+    .. code-block:: ini
 
-.. note:: Difference between ``External/<Platform>/`` and ``Source/Imports/<Platform>/``
-  Both of these folders include Platform specific things. Why the two folders?
+       VisualStudioBuildTools/VC/Tools/MSVC/14.14.26428/
+       Windows Kits/10/Lib/10.0.17134.0/
+       Windows Kits/10/bin/10.0.17134.0/
+       Windows Kits/10/Include/10.0.17134.0/
 
-  There is a semantic difference. For example:
 
-  In Windows, we have:
+    * Linking Path Method
 
-  ``External/Windows`` and ``Source/Imports/Windows``
+    Following Paths must be linked into a new config file and must be provided to the build system when building. (using the --configFile option)
 
-  Now a question: Where to place cmake.exe? This is a *tool* that Windows uses and is unrelated to the source code. Hence, it should stay outside the Source folder. That is why CMake is inside the ``External`` folder.
+    You can create a copy of Config.ini and update the following path variables based on your system. Appveyor config does this without copying files.
 
-  Another: Where to place vulkan.h and vulkan win32 headers? These are *C++ files* that are used by Azura. Hence, they should be inside ``Source/Imports/Windows``
+    .. code-block:: ini
+
+       VSBuildTools
+       MSVCPath
+       Windows10SDKLib
+       Windows10SDKBin
+       Windows10SDKInc
+
+
+* Linux
+* MacOS
+
+[OPTIONAL] Documentation Requirements:
+""""""""""""""""""""""""""""""""""""""
+
+Tools needed for documentation generation.
+
+.. code-block:: sh
+
+   pip3 install sphinx breathe exhale
