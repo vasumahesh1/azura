@@ -62,7 +62,8 @@ def getConfigMap(config, section):
 
 def getDefines(defineMap):
   arr = []
-  for key, value in defineMap.iteritems():
+  for key in defineMap.keys():
+    value = defineMap[key]
     arr.append('-D' + key.upper() + '=' + value)
 
   return arr
