@@ -11,7 +11,7 @@ class bcolors:
 	UNDERLINE = '\033[4m'
 
 def repeat_to_length(string_to_expand, length):
-   return (string_to_expand * ((length/len(string_to_expand))+1))[:length]
+   return (string_to_expand * int((length/len(string_to_expand))+1))[:length]
 
 def header(message):
 	print(bcolors.HEADER + message + bcolors.ENDC)

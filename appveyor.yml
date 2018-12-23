@@ -65,7 +65,7 @@ install:
 
 before_test:
   - cd C:\azura
-  - C:\Python27\python.exe build.py --project all --target %TARGET% --configFile ./External/AppveyorConfig.ini --cmakeConfigFile="External/AppveyorCMakeConfig.ini" --build %BUILD% --includeTests --deploy
+  - C:\Python37-x64\python.exe build.py --project all --target %TARGET% --configFile ./External/AppveyorConfig.ini --cmakeConfigFile="External/AppveyorCMakeConfig.ini" --build %BUILD% --includeTests --deploy
 
 test_script:
 

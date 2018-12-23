@@ -6,7 +6,7 @@ sys.path.insert(0, './Scripts/Build/')
 import datetime
 import subprocess
 import platform
-import ConfigParser
+import configparser
 import az_log
 import az_build_args
 
@@ -62,7 +62,8 @@ def getConfigMap(config, section):
 
 def getDefines(defineMap):
   arr = []
-  for key, value in defineMap.iteritems():
+  for key in defineMap.keys():
+    value = defineMap[key]
     arr.append('-D' + key.upper() + '=' + value)
 
   return arr
@@ -85,7 +86,8 @@ def buildExecutableMap(config, platform):
     executableMap['doxygen'] = config['doxygen'] + sep + 'doxygen' + ext
 
 def printConfig(item):
-  for key, value in item.iteritems():
+  for key in item.keys():
+    value = item[key]
     message = "Using %32s = " % key.upper()
     message = message + ("%s" % value)
     print(message)
@@ -220,7 +222,7 @@ def run():
 
   setCompileSettings()
 
-  externalConfig = ConfigParser.ConfigParser()
+  externalConfig = configparser.ConfigParser()
   externalConfig.read(buildArgs.configFile)
   hostExternalConfig = getConfigMap(externalConfig, hostOS)
   
@@ -251,7 +253,7 @@ def run():
   if (buildArgs.cmakeConfigFile):
     az_log.empty()
     az_log.warn('> Custom CMake Override Config')
-    cmakeConfig = ConfigParser.ConfigParser()
+    cmakeConfig = configparser.ConfigParser()
     cmakeConfig.read(buildArgs.cmakeConfigFile)
     cmakeDefines = getRawConfigMap(cmakeConfig, 'Defines')
     printConfig(cmakeDefines)
