@@ -8,102 +8,118 @@
     <includedby refid="_vk_renderer_8h" local="yes">Source/Azura/RenderSystem/Inc/Vulkan/VkRenderer.h</includedby>
     <includedby refid="_vk_win32_platform_8cpp" local="yes">Source/Azura/RenderSystem/Src/Vulkan/Windows/VkWin32Platform.cpp</includedby>
     <incdepgraph>
-      <node id="1454">
+      <node id="1465">
         <label>functional</label>
       </node>
-      <node id="1455">
+      <node id="1466">
         <label>iterator</label>
       </node>
-      <node id="1457">
-        <label>Memory/Allocator.h</label>
-        <link refid="_allocator_8h_source"/>
-        <childnode refid="1454" relation="include">
-        </childnode>
-        <childnode refid="1458" relation="include">
-        </childnode>
-        <childnode refid="1459" relation="include">
-        </childnode>
+      <node id="1471">
+        <label>cstdint</label>
       </node>
-      <node id="1452">
+      <node id="1463">
         <label>cassert</label>
       </node>
-      <node id="1449">
-        <label>Source/Azura/RenderSystem/Inc/Vulkan/VkPlatform.h</label>
-        <link refid="_vk_platform_8h"/>
-        <childnode refid="1450" relation="include">
+      <node id="1472">
+        <label>string</label>
+      </node>
+      <node id="1468">
+        <label>Memory/Allocator.h</label>
+        <link refid="_allocator_8h_source"/>
+        <childnode refid="1465" relation="include">
         </childnode>
-        <childnode refid="1451" relation="include">
+        <childnode refid="1469" relation="include">
         </childnode>
-        <childnode refid="1460" relation="include">
+        <childnode refid="1473" relation="include">
         </childnode>
       </node>
-      <node id="1459">
+      <node id="1462">
+        <label>Containers/Vector.h</label>
+        <link refid="_vector_8h_source"/>
+        <childnode refid="1463" relation="include">
+        </childnode>
+        <childnode refid="1464" relation="include">
+        </childnode>
+        <childnode refid="1465" relation="include">
+        </childnode>
+        <childnode refid="1466" relation="include">
+        </childnode>
+        <childnode refid="1467" relation="include">
+        </childnode>
+        <childnode refid="1468" relation="include">
+        </childnode>
+        <childnode refid="1469" relation="include">
+        </childnode>
+        <childnode refid="1473" relation="include">
+        </childnode>
+      </node>
+      <node id="1473">
         <label>Utils/Macros.h</label>
         <link refid="_macros_8h_source"/>
       </node>
-      <node id="1456">
+      <node id="1475">
+        <label>vector</label>
+      </node>
+      <node id="1460">
+        <label>Source/Azura/RenderSystem/Inc/Vulkan/VkPlatform.h</label>
+        <link refid="_vk_platform_8h"/>
+        <childnode refid="1461" relation="include">
+        </childnode>
+        <childnode refid="1462" relation="include">
+        </childnode>
+        <childnode refid="1474" relation="include">
+        </childnode>
+      </node>
+      <node id="1467">
         <label>Array.h</label>
         <link refid="_array_8h_source"/>
-        <childnode refid="1452" relation="include">
+        <childnode refid="1463" relation="include">
         </childnode>
-        <childnode refid="1453" relation="include">
+        <childnode refid="1464" relation="include">
         </childnode>
-        <childnode refid="1457" relation="include">
+        <childnode refid="1468" relation="include">
         </childnode>
-        <childnode refid="1458" relation="include">
+        <childnode refid="1469" relation="include">
+        </childnode>
+      </node>
+      <node id="1474">
+        <label>Log/Log.h</label>
+        <link refid="_log_8h_source"/>
+        <childnode refid="1469" relation="include">
+        </childnode>
+        <childnode refid="1475" relation="include">
         </childnode>
       </node>
       <node id="1461">
-        <label>vector</label>
-      </node>
-      <node id="1451">
-        <label>Containers/Vector.h</label>
-        <link refid="_vector_8h_source"/>
-        <childnode refid="1452" relation="include">
-        </childnode>
-        <childnode refid="1453" relation="include">
-        </childnode>
-        <childnode refid="1454" relation="include">
-        </childnode>
-        <childnode refid="1455" relation="include">
-        </childnode>
-        <childnode refid="1456" relation="include">
-        </childnode>
-        <childnode refid="1457" relation="include">
-        </childnode>
-        <childnode refid="1458" relation="include">
-        </childnode>
-        <childnode refid="1459" relation="include">
-        </childnode>
-      </node>
-      <node id="1460">
-        <label>Log/Log.h</label>
-        <link refid="_log_8h_source"/>
-        <childnode refid="1458" relation="include">
-        </childnode>
-        <childnode refid="1461" relation="include">
-        </childnode>
-      </node>
-      <node id="1450">
         <label>vulkan/vulkan_core.h</label>
       </node>
-      <node id="1458">
-        <label>Types.h</label>
+      <node id="1470">
+        <label>cstddef</label>
       </node>
-      <node id="1453">
+      <node id="1469">
+        <label>Types.h</label>
+        <link refid="_types_8h_source"/>
+        <childnode refid="1470" relation="include">
+        </childnode>
+        <childnode refid="1471" relation="include">
+        </childnode>
+        <childnode refid="1472" relation="include">
+        </childnode>
+      </node>
+      <node id="1464">
         <label>cstring</label>
       </node>
     </incdepgraph>
     <invincdepgraph>
-      <node id="1462">
-        <label>Source/Azura/RenderSystem/Inc/Vulkan/VkPlatform.h</label>
-        <link refid="_vk_platform_8h"/>
-        <childnode refid="1463" relation="include">
-        </childnode>
-      </node>
-      <node id="1463">
+      <node id="1477">
         <label>Source/Azura/RenderSystem/Inc/Vulkan/VkRenderer.h</label>
         <link refid="_vk_renderer_8h_source"/>
+      </node>
+      <node id="1476">
+        <label>Source/Azura/RenderSystem/Inc/Vulkan/VkPlatform.h</label>
+        <link refid="_vk_platform_8h"/>
+        <childnode refid="1477" relation="include">
+        </childnode>
       </node>
     </invincdepgraph>
     <innernamespace refid="namespace_azura">Azura</innernamespace>

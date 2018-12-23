@@ -45,8 +45,6 @@ Included By
 
 - :ref:`file_Source_Physics_Inc_Physics_Geometry_ClothMesh.h`
 
-- :ref:`file_Source_Samples_2_DeferredRenderer_Inc_App_Common.h`
-
 
 
 

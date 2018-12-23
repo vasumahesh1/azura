@@ -69,22 +69,6 @@ Included By
 
 - :ref:`file_Source_Physics_Inc_Physics_Geometry_ClothPlane.h`
 
-- :ref:`file_Source_Samples_0_TestZone_Src_AppRenderer.Basic.cpp`
-
-- :ref:`file_Source_Samples_0_TestZone_Src_AppRenderer.Cloth.cpp`
-
-- :ref:`file_Source_Samples_0_TestZone_Src_AppRenderer.Compute.cpp`
-
-- :ref:`file_Source_Samples_0_TestZone_Src_AppRenderer.cpp`
-
-- :ref:`file_Source_Samples_0_TestZone_Src_AppRenderer.Deferred.cpp`
-
-- :ref:`file_Source_Samples_0_TestZone_Src_AppRenderer.Instanced.cpp`
-
-- :ref:`file_Source_Samples_1_ProceduralPlanet_Src_AppRenderer.cpp`
-
-- :ref:`file_Source_Samples_3_ClothSim_Src_AppRenderer.cpp`
-
 
 
 

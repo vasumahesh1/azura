@@ -14,9 +14,7 @@ Directory Containers
 Subdirectories
 --------------
 
-- :ref:`dir_Source_Containers_Benchmark`
 - :ref:`dir_Source_Containers_Inc`
-- :ref:`dir_Source_Containers_Test`
 
 
 Files

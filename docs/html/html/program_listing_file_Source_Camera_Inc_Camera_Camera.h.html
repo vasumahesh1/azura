@@ -29,7 +29,7 @@
   <link rel="stylesheet" href="../_static/collapsible-lists\css\tree_view.css" type="text/css" />
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
-    <link rel="next" title="File ClothCommon.h" href="file_Source_Samples_0_TestZone_Inc_TestZone_ClothCommon.h.html" />
+    <link rel="next" title="File ClothMesh.cpp" href="file_Source_Physics_Src_Geometry_ClothMesh.cpp.html" />
     <link rel="prev" title="File Camera.h" href="file_Source_Camera_Inc_Camera_Camera.h.html" /> 
 
   
@@ -175,25 +175,35 @@
   <span class="n">Camera</span><span class="o">&amp;</span> <span class="k">operator</span><span class="o">=</span><span class="p">(</span><span class="n">Camera</span><span class="o">&amp;&amp;</span> <span class="n">other</span><span class="p">)</span> <span class="k">noexcept</span> <span class="o">=</span> <span class="k">delete</span><span class="p">;</span>
 
   <span class="kt">void</span> <span class="nf">SetSensitivity</span><span class="p">(</span><span class="kt">float</span> <span class="n">value</span><span class="p">);</span>
+
   <span class="kt">float</span> <span class="nf">GetSensitivity</span><span class="p">()</span> <span class="k">const</span><span class="p">;</span>
 
   <span class="kt">void</span> <span class="nf">SetNearClip</span><span class="p">(</span><span class="kt">float</span> <span class="n">value</span><span class="p">);</span>
+
   <span class="kt">void</span> <span class="nf">SetFarClip</span><span class="p">(</span><span class="kt">float</span> <span class="n">value</span><span class="p">);</span>
+
   <span class="kt">float</span> <span class="nf">GetNearClip</span><span class="p">()</span> <span class="k">const</span><span class="p">;</span>
+
   <span class="kt">float</span> <span class="nf">GetFarClip</span><span class="p">()</span> <span class="k">const</span><span class="p">;</span>
+
   <span class="kt">void</span> <span class="nf">SetFOVY</span><span class="p">(</span><span class="kt">float</span> <span class="n">value</span><span class="p">);</span>
+
   <span class="kt">void</span> <span class="nf">SetPosition</span><span class="p">(</span><span class="n">Vector3f</span> <span class="n">value</span><span class="p">);</span>
+
   <span class="kt">void</span> <span class="nf">SetReferencePoint</span><span class="p">(</span><span class="n">Vector3f</span> <span class="n">value</span><span class="p">);</span>
 
   <span class="n">Vector3f</span> <span class="nf">GetPosition</span><span class="p">()</span> <span class="k">const</span><span class="p">;</span>
 
   <span class="n">Matrix4f</span> <span class="nf">GetViewProjMatrix</span><span class="p">()</span> <span class="k">const</span><span class="p">;</span>
+
   <span class="n">Matrix4f</span> <span class="nf">GetInvViewProjMatrix</span><span class="p">()</span> <span class="k">const</span><span class="p">;</span>
 
   <span class="n">Matrix4f</span> <span class="nf">GetViewMatrix</span><span class="p">()</span> <span class="k">const</span><span class="p">;</span>
+
   <span class="n">Matrix4f</span> <span class="nf">GetProjMatrix</span><span class="p">()</span> <span class="k">const</span><span class="p">;</span>
 
   <span class="k">virtual</span> <span class="kt">void</span> <span class="nf">Recompute</span><span class="p">()</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+
   <span class="k">virtual</span> <span class="kt">void</span> <span class="nf">Update</span><span class="p">(</span><span class="kt">float</span> <span class="n">timeDelta</span><span class="p">)</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
   <span class="k">virtual</span> <span class="kt">void</span> <span class="nf">OnMouseEvent</span><span class="p">(</span><span class="n">MouseEvent</span> <span class="n">mouseEvent</span><span class="p">)</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
   <span class="k">virtual</span> <span class="kt">void</span> <span class="nf">OnKeyEvent</span><span class="p">(</span><span class="n">KeyEvent</span> <span class="n">keyEvent</span><span class="p">)</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
@@ -232,7 +242,7 @@
   
     <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
       
-        <a href="file_Source_Samples_0_TestZone_Inc_TestZone_ClothCommon.h.html" class="btn btn-neutral float-right" title="File ClothCommon.h" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+        <a href="file_Source_Physics_Src_Geometry_ClothMesh.cpp.html" class="btn btn-neutral float-right" title="File ClothMesh.cpp" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
       
       
         <a href="file_Source_Camera_Inc_Camera_Camera.h.html" class="btn btn-neutral" title="File Camera.h" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>

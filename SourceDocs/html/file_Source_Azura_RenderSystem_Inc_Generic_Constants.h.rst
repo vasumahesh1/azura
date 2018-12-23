@@ -59,25 +59,25 @@ Enums
 -----
 
 
-- :ref:`exhale_enum__azura_2_render_system_2_inc_2_generic_2_constants_8h_1aece4541733a1bc739293311414445e57`
+- :ref:`exhale_enum__constants_8h_1aece4541733a1bc739293311414445e57`
 
 
 Typedefs
 --------
 
 
-- :ref:`exhale_typedef__azura_2_render_system_2_inc_2_generic_2_constants_8h_1a1f5b86dc4c34883e96bbda676dbac276`
+- :ref:`exhale_typedef__constants_8h_1a1f5b86dc4c34883e96bbda676dbac276`
 
 
 Variables
 ---------
 
 
-- :ref:`exhale_variable__azura_2_render_system_2_inc_2_generic_2_constants_8h_1a5507000fe0f4a970a124d1d0690a1931`
+- :ref:`exhale_variable__constants_8h_1a5507000fe0f4a970a124d1d0690a1931`
 
-- :ref:`exhale_variable__azura_2_render_system_2_inc_2_generic_2_constants_8h_1ac9d292b944302e3593ec3c4f7d0b0422`
+- :ref:`exhale_variable__constants_8h_1ac9d292b944302e3593ec3c4f7d0b0422`
 
-- :ref:`exhale_variable__azura_2_render_system_2_inc_2_generic_2_constants_8h_1afa46364d6dad722146fd17ad4a0fd3fb`
+- :ref:`exhale_variable__constants_8h_1afa46364d6dad722146fd17ad4a0fd3fb`
 
-- :ref:`exhale_variable__azura_2_render_system_2_inc_2_generic_2_constants_8h_1af054e28c57031d73b0d35d27c2bd3664`
+- :ref:`exhale_variable__constants_8h_1af054e28c57031d73b0d35d27c2bd3664`
 

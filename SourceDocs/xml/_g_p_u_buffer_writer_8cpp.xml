@@ -6,178 +6,194 @@
     <includes refid="_log_8h" local="yes">Log/Log.h</includes>
     <includes refid="_debug_8h" local="yes">Generic/Debug.h</includes>
     <incdepgraph>
-      <node id="2735">
-        <label>Generic/GPUBufferWriter.h</label>
-        <link refid="_g_p_u_buffer_writer_8h_source"/>
-        <childnode refid="2736" relation="include">
-        </childnode>
-      </node>
-      <node id="2742">
+      <node id="2861">
         <label>functional</label>
       </node>
-      <node id="2743">
+      <node id="2866">
+        <label>Generic/Constants.h</label>
+        <link refid="_constants_8h_source"/>
+        <childnode refid="2867" relation="include">
+        </childnode>
+        <childnode refid="2853" relation="include">
+        </childnode>
+      </node>
+      <node id="2862">
         <label>iterator</label>
       </node>
-      <node id="2754">
-        <label>Utils/Hash.h</label>
-        <link refid="_hash_8h_source"/>
-        <childnode refid="2737" relation="include">
+      <node id="2855">
+        <label>cstdint</label>
+      </node>
+      <node id="2851">
+        <label>Generic/GPUBufferWriter.h</label>
+        <link refid="_g_p_u_buffer_writer_8h_source"/>
+        <childnode refid="2852" relation="include">
         </childnode>
       </node>
-      <node id="2749">
-        <label>Core/RawStorageFormat.h</label>
-        <link refid="_raw_storage_format_8h_source"/>
-        <childnode refid="2737" relation="include">
+      <node id="2859">
+        <label>cassert</label>
+      </node>
+      <node id="2871">
+        <label>boost/preprocessor/tuple/elem.hpp</label>
+      </node>
+      <node id="2856">
+        <label>string</label>
+      </node>
+      <node id="2852">
+        <label>Generic/GPUBuffer.h</label>
+        <link refid="_g_p_u_buffer_8h_source"/>
+        <childnode refid="2853" relation="include">
         </childnode>
-        <childnode refid="2748" relation="include">
-        </childnode>
-        <childnode refid="2750" relation="include">
-        </childnode>
-        <childnode refid="2751" relation="include">
-        </childnode>
-        <childnode refid="2752" relation="include">
-        </childnode>
-        <childnode refid="2753" relation="include">
+        <childnode refid="2857" relation="include">
         </childnode>
       </node>
-      <node id="2745">
-        <label>Memory/Allocator.h</label>
-        <link refid="_allocator_8h_source"/>
-        <childnode refid="2742" relation="include">
-        </childnode>
-        <childnode refid="2737" relation="include">
-        </childnode>
-        <childnode refid="2746" relation="include">
-        </childnode>
+      <node id="2875">
+        <label>boost/container/small_vector.hpp</label>
       </node>
-      <node id="2755">
+      <node id="2874">
         <label>Core/AssetLocation.h</label>
         <link refid="_asset_location_8h_source"/>
       </node>
-      <node id="2740">
-        <label>cassert</label>
+      <node id="2872">
+        <label>boost/detail/bitmask.hpp</label>
       </node>
-      <node id="2752">
-        <label>boost/preprocessor/tuple/elem.hpp</label>
-      </node>
-      <node id="2738">
-        <label>Generic/GenericTypes.h</label>
-        <link refid="_azura_2_render_system_2_inc_2_generic_2_generic_types_8h_source"/>
-        <childnode refid="2739" relation="include">
+      <node id="2864">
+        <label>Memory/Allocator.h</label>
+        <link refid="_allocator_8h_source"/>
+        <childnode refid="2861" relation="include">
         </childnode>
-        <childnode refid="2747" relation="include">
+        <childnode refid="2853" relation="include">
         </childnode>
-        <childnode refid="2737" relation="include">
-        </childnode>
-        <childnode refid="2749" relation="include">
-        </childnode>
-        <childnode refid="2754" relation="include">
-        </childnode>
-        <childnode refid="2755" relation="include">
-        </childnode>
-        <childnode refid="2756" relation="include">
-        </childnode>
-        <childnode refid="2753" relation="include">
+        <childnode refid="2865" relation="include">
         </childnode>
       </node>
-      <node id="2746">
+      <node id="2858">
+        <label>Containers/Vector.h</label>
+        <link refid="_vector_8h_source"/>
+        <childnode refid="2859" relation="include">
+        </childnode>
+        <childnode refid="2860" relation="include">
+        </childnode>
+        <childnode refid="2861" relation="include">
+        </childnode>
+        <childnode refid="2862" relation="include">
+        </childnode>
+        <childnode refid="2863" relation="include">
+        </childnode>
+        <childnode refid="2864" relation="include">
+        </childnode>
+        <childnode refid="2853" relation="include">
+        </childnode>
+        <childnode refid="2865" relation="include">
+        </childnode>
+      </node>
+      <node id="2865">
         <label>Utils/Macros.h</label>
         <link refid="_macros_8h_source"/>
       </node>
-      <node id="2756">
-        <label>boost/container/small_vector.hpp</label>
-      </node>
-      <node id="2747">
-        <label>Generic/Constants.h</label>
-        <link refid="_azura_2_render_system_2_inc_2_generic_2_constants_8h_source"/>
-        <childnode refid="2748" relation="include">
-        </childnode>
-        <childnode refid="2737" relation="include">
-        </childnode>
-      </node>
-      <node id="2753">
-        <label>boost/detail/bitmask.hpp</label>
-      </node>
-      <node id="2748">
+      <node id="2867">
         <label>tuple</label>
       </node>
-      <node id="2744">
-        <label>Array.h</label>
-        <link refid="_array_8h_source"/>
-        <childnode refid="2740" relation="include">
+      <node id="2857">
+        <label>Generic/GenericTypes.h</label>
+        <link refid="_azura_2_render_system_2_inc_2_generic_2_generic_types_8h_source"/>
+        <childnode refid="2858" relation="include">
         </childnode>
-        <childnode refid="2741" relation="include">
+        <childnode refid="2866" relation="include">
         </childnode>
-        <childnode refid="2745" relation="include">
+        <childnode refid="2853" relation="include">
         </childnode>
-        <childnode refid="2737" relation="include">
+        <childnode refid="2868" relation="include">
+        </childnode>
+        <childnode refid="2873" relation="include">
+        </childnode>
+        <childnode refid="2874" relation="include">
+        </childnode>
+        <childnode refid="2875" relation="include">
+        </childnode>
+        <childnode refid="2872" relation="include">
         </childnode>
       </node>
-      <node id="2758">
+      <node id="2877">
         <label>vector</label>
       </node>
-      <node id="2739">
-        <label>Containers/Vector.h</label>
-        <link refid="_vector_8h_source"/>
-        <childnode refid="2740" relation="include">
-        </childnode>
-        <childnode refid="2741" relation="include">
-        </childnode>
-        <childnode refid="2742" relation="include">
-        </childnode>
-        <childnode refid="2743" relation="include">
-        </childnode>
-        <childnode refid="2744" relation="include">
-        </childnode>
-        <childnode refid="2745" relation="include">
-        </childnode>
-        <childnode refid="2737" relation="include">
-        </childnode>
-        <childnode refid="2746" relation="include">
-        </childnode>
-      </node>
-      <node id="2757">
-        <label>Log/Log.h</label>
-        <link refid="_log_8h_source"/>
-        <childnode refid="2737" relation="include">
-        </childnode>
-        <childnode refid="2758" relation="include">
-        </childnode>
-      </node>
-      <node id="2736">
-        <label>Generic/GPUBuffer.h</label>
-        <link refid="_g_p_u_buffer_8h_source"/>
-        <childnode refid="2737" relation="include">
-        </childnode>
-        <childnode refid="2738" relation="include">
-        </childnode>
-      </node>
-      <node id="2750">
-        <label>boost/preprocessor/repetition/repeat.hpp</label>
-      </node>
-      <node id="2737">
-        <label>Types.h</label>
-      </node>
-      <node id="2759">
+      <node id="2878">
         <label>Generic/Debug.h</label>
         <link refid="_debug_8h_source"/>
-        <childnode refid="2738" relation="include">
+        <childnode refid="2857" relation="include">
         </childnode>
       </node>
-      <node id="2734">
-        <label>Source/Azura/RenderSystem/Src/Generic/GPUBufferWriter.cpp</label>
-        <link refid="_g_p_u_buffer_writer_8cpp"/>
-        <childnode refid="2735" relation="include">
+      <node id="2863">
+        <label>Array.h</label>
+        <link refid="_array_8h_source"/>
+        <childnode refid="2859" relation="include">
         </childnode>
-        <childnode refid="2757" relation="include">
+        <childnode refid="2860" relation="include">
         </childnode>
-        <childnode refid="2759" relation="include">
+        <childnode refid="2864" relation="include">
+        </childnode>
+        <childnode refid="2853" relation="include">
         </childnode>
       </node>
-      <node id="2741">
+      <node id="2876">
+        <label>Log/Log.h</label>
+        <link refid="_log_8h_source"/>
+        <childnode refid="2853" relation="include">
+        </childnode>
+        <childnode refid="2877" relation="include">
+        </childnode>
+      </node>
+      <node id="2868">
+        <label>Core/RawStorageFormat.h</label>
+        <link refid="_raw_storage_format_8h_source"/>
+        <childnode refid="2853" relation="include">
+        </childnode>
+        <childnode refid="2867" relation="include">
+        </childnode>
+        <childnode refid="2869" relation="include">
+        </childnode>
+        <childnode refid="2870" relation="include">
+        </childnode>
+        <childnode refid="2871" relation="include">
+        </childnode>
+        <childnode refid="2872" relation="include">
+        </childnode>
+      </node>
+      <node id="2854">
+        <label>cstddef</label>
+      </node>
+      <node id="2869">
+        <label>boost/preprocessor/repetition/repeat.hpp</label>
+      </node>
+      <node id="2873">
+        <label>Utils/Hash.h</label>
+        <link refid="_hash_8h_source"/>
+        <childnode refid="2853" relation="include">
+        </childnode>
+      </node>
+      <node id="2853">
+        <label>Types.h</label>
+        <link refid="_types_8h_source"/>
+        <childnode refid="2854" relation="include">
+        </childnode>
+        <childnode refid="2855" relation="include">
+        </childnode>
+        <childnode refid="2856" relation="include">
+        </childnode>
+      </node>
+      <node id="2860">
         <label>cstring</label>
       </node>
-      <node id="2751">
+      <node id="2850">
+        <label>Source/Azura/RenderSystem/Src/Generic/GPUBufferWriter.cpp</label>
+        <link refid="_g_p_u_buffer_writer_8cpp"/>
+        <childnode refid="2851" relation="include">
+        </childnode>
+        <childnode refid="2876" relation="include">
+        </childnode>
+        <childnode refid="2878" relation="include">
+        </childnode>
+      </node>
+      <node id="2870">
         <label>boost/preprocessor/seq/for_each.hpp</label>
       </node>
     </incdepgraph>

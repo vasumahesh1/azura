@@ -67,36 +67,6 @@ Included By
 
 - :ref:`file_Source_Azura_RenderSystem_Src_Vulkan_VkShader.cpp`
 
-- :ref:`file_Source_Azura_RenderSystem_Test_Renderer_test.cpp`
-
-- :ref:`file_Source_Azura_RenderSystem_Test_RenderTestCases.cpp`
-
-- :ref:`file_Source_Containers_Benchmark_Vector_benchmark.h`
-
-- :ref:`file_Source_Samples_0_TestZone_Src_AppRenderer.Basic.cpp`
-
-- :ref:`file_Source_Samples_0_TestZone_Src_AppRenderer.Cloth.cpp`
-
-- :ref:`file_Source_Samples_0_TestZone_Src_AppRenderer.Compute.cpp`
-
-- :ref:`file_Source_Samples_0_TestZone_Src_AppRenderer.cpp`
-
-- :ref:`file_Source_Samples_0_TestZone_Src_AppRenderer.Deferred.cpp`
-
-- :ref:`file_Source_Samples_0_TestZone_Src_AppRenderer.Instanced.cpp`
-
-- :ref:`file_Source_Samples_1_ProceduralPlanet_Src_AppRenderer.cpp`
-
-- :ref:`file_Source_Samples_2_DeferredRenderer_Src_ForwardComputeScene.cpp`
-
-- :ref:`file_Source_Samples_2_DeferredRenderer_Src_ForwardPlusComputeScene.cpp`
-
-- :ref:`file_Source_Samples_2_DeferredRenderer_Src_ForwardScene.cpp`
-
-- :ref:`file_Source_Samples_3_ClothSim_Src_AppRenderer.cpp`
-
-- :ref:`file_Source_Sandbox_main.cpp`
-
 
 
 

@@ -204,9 +204,9 @@
         <name>Recompute</name>
         <reimplements refid="class_azura_1_1_camera_1a2e56344e6c376980b7b8eef003622d57">Recompute</reimplements>
         <briefdescription>
-        </briefdescription>
+<para>Tells the camera to update its matrices &amp; other properties. </para>        </briefdescription>
         <detaileddescription>
-        </detaileddescription>
+<para>Cameras in Azura don&apos;t recompute always. For example, you maybe wanted to move the camera first, then rotate it, maybe then shift it due to some physics. At the end, One can call recompute only once to get the final view projection matrix.</para><para>Recompute will compute the view &amp; projection matrices (and their combinations). </para>        </detaileddescription>
         <inbodydescription>
         </inbodydescription>
         <location file="Source/Camera/Inc/Camera/PolarCamera.h" line="12" column="1" bodyfile="Source/Camera/Src/PolarCamera.cpp" bodystart="24" bodyend="42"/>
@@ -360,9 +360,17 @@
           <declname>timeDelta</declname>
         </param>
         <briefdescription>
-        </briefdescription>
+<para>Update based on <ref refid="class_azura_1_1_window" kindref="compound">Window</ref> events. </para>        </briefdescription>
         <detaileddescription>
-        </detaileddescription>
+<para>Azura cameras have the ability to listen to keyboard events or mouse events. They can then perform movements based on the <computeroutput>timeDelta</computeroutput> passed. This is highly useful as every <ref refid="class_azura_1_1_polar_camera" kindref="compound">PolarCamera</ref> or <ref refid="class_azura_1_1_fly_through_camera" kindref="compound">FlyThroughCamera</ref> are generally the same with some modification for the screen, fovy etc.</para><para>They all respond to a basic set of movements. However, the user can modify the keyboard keys for each camera. But this is highly dependent on the application using the camera. For example, WASD is the default for all cameras. But one can change those keys to maybe say the arrow keys.</para><para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername direction="in">timeDelta</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The time delta </para></parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>        </detaileddescription>
         <inbodydescription>
         </inbodydescription>
         <location file="Source/Camera/Inc/Camera/PolarCamera.h" line="26" column="1" bodyfile="Source/Camera/Src/PolarCamera.cpp" bodystart="159" bodyend="182"/>
@@ -373,25 +381,25 @@
     <detaileddescription>
     </detaileddescription>
     <inheritancegraph>
-      <node id="449">
+      <node id="323">
         <label>Azura::PolarCamera</label>
         <link refid="class_azura_1_1_polar_camera"/>
-        <childnode refid="450" relation="public-inheritance">
+        <childnode refid="324" relation="public-inheritance">
         </childnode>
       </node>
-      <node id="450">
+      <node id="324">
         <label>Azura::Camera</label>
         <link refid="class_azura_1_1_camera"/>
       </node>
     </inheritancegraph>
     <collaborationgraph>
-      <node id="451">
+      <node id="325">
         <label>Azura::PolarCamera</label>
         <link refid="class_azura_1_1_polar_camera"/>
-        <childnode refid="452" relation="public-inheritance">
+        <childnode refid="326" relation="public-inheritance">
         </childnode>
       </node>
-      <node id="452">
+      <node id="326">
         <label>Azura::Camera</label>
         <link refid="class_azura_1_1_camera"/>
       </node>

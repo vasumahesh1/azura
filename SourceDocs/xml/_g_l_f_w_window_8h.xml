@@ -6,224 +6,240 @@
     <includedby refid="_win32_g_l_f_w_window_8h" local="yes">Source/Azura/RenderSystem/Inc/Generic/Windows/Win32GLFWWindow.h</includedby>
     <includedby refid="_g_l_f_w_window_8cpp" local="yes">Source/Azura/RenderSystem/Src/Generic/GLFWWindow.cpp</includedby>
     <incdepgraph>
-      <node id="999">
+      <node id="994">
         <label>functional</label>
       </node>
-      <node id="1004">
-        <label>iterator</label>
-      </node>
-      <node id="1016">
-        <label>Utils/Hash.h</label>
-        <link refid="_hash_8h_source"/>
-        <childnode refid="1007" relation="include">
+      <node id="1007">
+        <label>Generic/Constants.h</label>
+        <link refid="_constants_8h_source"/>
+        <childnode refid="1008" relation="include">
+        </childnode>
+        <childnode refid="1002" relation="include">
         </childnode>
       </node>
-      <node id="1019">
+      <node id="1017">
         <label>Renderer.h</label>
         <link refid="_renderer_8h_source"/>
+        <childnode refid="1007" relation="include">
+        </childnode>
+        <childnode refid="996" relation="include">
+        </childnode>
+        <childnode refid="1018" relation="include">
+        </childnode>
+        <childnode refid="995" relation="include">
+        </childnode>
         <childnode refid="1009" relation="include">
         </childnode>
-        <childnode refid="1001" relation="include">
+        <childnode refid="1019" relation="include">
         </childnode>
-        <childnode refid="1020" relation="include">
+      </node>
+      <node id="999">
+        <label>iterator</label>
+      </node>
+      <node id="1004">
+        <label>cstdint</label>
+      </node>
+      <node id="997">
+        <label>cassert</label>
+      </node>
+      <node id="1012">
+        <label>boost/preprocessor/tuple/elem.hpp</label>
+      </node>
+      <node id="1005">
+        <label>string</label>
+      </node>
+      <node id="1020">
+        <label>Core/Events.h</label>
+        <link refid="_events_8h_source"/>
+      </node>
+      <node id="1018">
+        <label>Drawable.h</label>
+        <link refid="_drawable_8h_source"/>
+        <childnode refid="996" relation="include">
+        </childnode>
+        <childnode refid="995" relation="include">
+        </childnode>
+        <childnode refid="1002" relation="include">
+        </childnode>
+        <childnode refid="1009" relation="include">
+        </childnode>
+      </node>
+      <node id="1016">
+        <label>boost/container/small_vector.hpp</label>
+      </node>
+      <node id="1015">
+        <label>Core/AssetLocation.h</label>
+        <link refid="_asset_location_8h_source"/>
+      </node>
+      <node id="1013">
+        <label>boost/detail/bitmask.hpp</label>
+      </node>
+      <node id="1001">
+        <label>Memory/Allocator.h</label>
+        <link refid="_allocator_8h_source"/>
+        <childnode refid="994" relation="include">
+        </childnode>
+        <childnode refid="1002" relation="include">
+        </childnode>
+        <childnode refid="1006" relation="include">
+        </childnode>
+      </node>
+      <node id="996">
+        <label>Containers/Vector.h</label>
+        <link refid="_vector_8h_source"/>
+        <childnode refid="997" relation="include">
+        </childnode>
+        <childnode refid="998" relation="include">
+        </childnode>
+        <childnode refid="994" relation="include">
+        </childnode>
+        <childnode refid="999" relation="include">
         </childnode>
         <childnode refid="1000" relation="include">
         </childnode>
-        <childnode refid="1011" relation="include">
+        <childnode refid="1001" relation="include">
         </childnode>
-        <childnode refid="1021" relation="include">
+        <childnode refid="1002" relation="include">
+        </childnode>
+        <childnode refid="1006" relation="include">
         </childnode>
       </node>
-      <node id="1011">
-        <label>Core/RawStorageFormat.h</label>
-        <link refid="_raw_storage_format_8h_source"/>
+      <node id="1006">
+        <label>Utils/Macros.h</label>
+        <link refid="_macros_8h_source"/>
+      </node>
+      <node id="1008">
+        <label>tuple</label>
+      </node>
+      <node id="1019">
+        <label>ComputePool.h</label>
+        <link refid="_compute_pool_8h_source"/>
+        <childnode refid="996" relation="include">
+        </childnode>
+        <childnode refid="995" relation="include">
+        </childnode>
+        <childnode refid="1002" relation="include">
+        </childnode>
+      </node>
+      <node id="995">
+        <label>GenericTypes.h</label>
+        <link refid="_azura_2_render_system_2_inc_2_generic_2_generic_types_8h_source"/>
+        <childnode refid="996" relation="include">
+        </childnode>
         <childnode refid="1007" relation="include">
         </childnode>
-        <childnode refid="1010" relation="include">
+        <childnode refid="1002" relation="include">
         </childnode>
-        <childnode refid="1012" relation="include">
-        </childnode>
-        <childnode refid="1013" relation="include">
+        <childnode refid="1009" relation="include">
         </childnode>
         <childnode refid="1014" relation="include">
         </childnode>
         <childnode refid="1015" relation="include">
         </childnode>
-      </node>
-      <node id="1006">
-        <label>Memory/Allocator.h</label>
-        <link refid="_allocator_8h_source"/>
-        <childnode refid="999" relation="include">
-        </childnode>
-        <childnode refid="1007" relation="include">
-        </childnode>
-        <childnode refid="1008" relation="include">
-        </childnode>
-      </node>
-      <node id="1017">
-        <label>Core/AssetLocation.h</label>
-        <link refid="_asset_location_8h_source"/>
-      </node>
-      <node id="1002">
-        <label>cassert</label>
-      </node>
-      <node id="1014">
-        <label>boost/preprocessor/tuple/elem.hpp</label>
-      </node>
-      <node id="1000">
-        <label>GenericTypes.h</label>
-        <link refid="_azura_2_render_system_2_inc_2_generic_2_generic_types_8h_source"/>
-        <childnode refid="1001" relation="include">
-        </childnode>
-        <childnode refid="1009" relation="include">
-        </childnode>
-        <childnode refid="1007" relation="include">
-        </childnode>
-        <childnode refid="1011" relation="include">
-        </childnode>
         <childnode refid="1016" relation="include">
+        </childnode>
+        <childnode refid="1013" relation="include">
+        </childnode>
+      </node>
+      <node id="1022">
+        <label>vector</label>
+      </node>
+      <node id="993">
+        <label>Window.h</label>
+        <link refid="_window_8h_source"/>
+        <childnode refid="994" relation="include">
+        </childnode>
+        <childnode refid="995" relation="include">
+        </childnode>
+        <childnode refid="1002" relation="include">
         </childnode>
         <childnode refid="1017" relation="include">
         </childnode>
-        <childnode refid="1018" relation="include">
+        <childnode refid="1020" relation="include">
         </childnode>
-        <childnode refid="1015" relation="include">
-        </childnode>
-      </node>
-      <node id="1008">
-        <label>Utils/Macros.h</label>
-        <link refid="_macros_8h_source"/>
-      </node>
-      <node id="1018">
-        <label>boost/container/small_vector.hpp</label>
-      </node>
-      <node id="1009">
-        <label>Generic/Constants.h</label>
-        <link refid="_azura_2_render_system_2_inc_2_generic_2_constants_8h_source"/>
-        <childnode refid="1010" relation="include">
-        </childnode>
-        <childnode refid="1007" relation="include">
+        <childnode refid="1021" relation="include">
         </childnode>
       </node>
-      <node id="1015">
-        <label>boost/detail/bitmask.hpp</label>
-      </node>
-      <node id="1022">
-        <label>Core/Events.h</label>
-        <link refid="_events_8h_source"/>
-      </node>
-      <node id="1010">
-        <label>tuple</label>
-      </node>
-      <node id="1005">
+      <node id="1000">
         <label>Array.h</label>
         <link refid="_array_8h_source"/>
+        <childnode refid="997" relation="include">
+        </childnode>
+        <childnode refid="998" relation="include">
+        </childnode>
+        <childnode refid="1001" relation="include">
+        </childnode>
         <childnode refid="1002" relation="include">
         </childnode>
-        <childnode refid="1003" relation="include">
-        </childnode>
-        <childnode refid="1006" relation="include">
-        </childnode>
-        <childnode refid="1007" relation="include">
-        </childnode>
       </node>
-      <node id="1024">
-        <label>vector</label>
-      </node>
-      <node id="1001">
-        <label>Containers/Vector.h</label>
-        <link refid="_vector_8h_source"/>
+      <node id="1021">
+        <label>Log/Log.h</label>
+        <link refid="_log_8h_source"/>
         <childnode refid="1002" relation="include">
         </childnode>
-        <childnode refid="1003" relation="include">
+        <childnode refid="1022" relation="include">
         </childnode>
-        <childnode refid="999" relation="include">
+      </node>
+      <node id="1009">
+        <label>Core/RawStorageFormat.h</label>
+        <link refid="_raw_storage_format_8h_source"/>
+        <childnode refid="1002" relation="include">
+        </childnode>
+        <childnode refid="1008" relation="include">
+        </childnode>
+        <childnode refid="1010" relation="include">
+        </childnode>
+        <childnode refid="1011" relation="include">
+        </childnode>
+        <childnode refid="1012" relation="include">
+        </childnode>
+        <childnode refid="1013" relation="include">
+        </childnode>
+      </node>
+      <node id="1003">
+        <label>cstddef</label>
+      </node>
+      <node id="1010">
+        <label>boost/preprocessor/repetition/repeat.hpp</label>
+      </node>
+      <node id="992">
+        <label>Source/Azura/RenderSystem/Inc/Generic/GLFWWindow.h</label>
+        <link refid="_g_l_f_w_window_8h"/>
+        <childnode refid="993" relation="include">
+        </childnode>
+      </node>
+      <node id="1014">
+        <label>Utils/Hash.h</label>
+        <link refid="_hash_8h_source"/>
+        <childnode refid="1002" relation="include">
+        </childnode>
+      </node>
+      <node id="1002">
+        <label>Types.h</label>
+        <link refid="_types_8h_source"/>
+        <childnode refid="1003" relation="include">
         </childnode>
         <childnode refid="1004" relation="include">
         </childnode>
         <childnode refid="1005" relation="include">
         </childnode>
-        <childnode refid="1006" relation="include">
-        </childnode>
-        <childnode refid="1007" relation="include">
-        </childnode>
-        <childnode refid="1008" relation="include">
-        </childnode>
-      </node>
-      <node id="1023">
-        <label>Log/Log.h</label>
-        <link refid="_log_8h_source"/>
-        <childnode refid="1007" relation="include">
-        </childnode>
-        <childnode refid="1024" relation="include">
-        </childnode>
-      </node>
-      <node id="997">
-        <label>Source/Azura/RenderSystem/Inc/Generic/GLFWWindow.h</label>
-        <link refid="_g_l_f_w_window_8h"/>
-        <childnode refid="998" relation="include">
-        </childnode>
-      </node>
-      <node id="1020">
-        <label>Drawable.h</label>
-        <link refid="_drawable_8h_source"/>
-        <childnode refid="1001" relation="include">
-        </childnode>
-        <childnode refid="1000" relation="include">
-        </childnode>
-        <childnode refid="1007" relation="include">
-        </childnode>
-        <childnode refid="1011" relation="include">
-        </childnode>
-      </node>
-      <node id="1012">
-        <label>boost/preprocessor/repetition/repeat.hpp</label>
-      </node>
-      <node id="1007">
-        <label>Types.h</label>
       </node>
       <node id="998">
-        <label>Window.h</label>
-        <link refid="_window_8h_source"/>
-        <childnode refid="999" relation="include">
-        </childnode>
-        <childnode refid="1000" relation="include">
-        </childnode>
-        <childnode refid="1007" relation="include">
-        </childnode>
-        <childnode refid="1019" relation="include">
-        </childnode>
-        <childnode refid="1022" relation="include">
-        </childnode>
-        <childnode refid="1023" relation="include">
-        </childnode>
-      </node>
-      <node id="1021">
-        <label>ComputePool.h</label>
-        <link refid="_compute_pool_8h_source"/>
-        <childnode refid="1001" relation="include">
-        </childnode>
-        <childnode refid="1000" relation="include">
-        </childnode>
-        <childnode refid="1007" relation="include">
-        </childnode>
-      </node>
-      <node id="1003">
         <label>cstring</label>
       </node>
-      <node id="1013">
+      <node id="1011">
         <label>boost/preprocessor/seq/for_each.hpp</label>
       </node>
     </incdepgraph>
     <invincdepgraph>
-      <node id="1026">
+      <node id="1024">
         <label>Source/Azura/RenderSystem/Inc/Generic/Windows/Win32GLFWWindow.h</label>
         <link refid="_win32_g_l_f_w_window_8h_source"/>
       </node>
-      <node id="1025">
+      <node id="1023">
         <label>Source/Azura/RenderSystem/Inc/Generic/GLFWWindow.h</label>
         <link refid="_g_l_f_w_window_8h"/>
-        <childnode refid="1026" relation="include">
+        <childnode refid="1024" relation="include">
         </childnode>
       </node>
     </invincdepgraph>

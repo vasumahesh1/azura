@@ -5,58 +5,74 @@
     <includes refid="_vk_scoped_sampler_8h" local="yes">Vulkan/VkScopedSampler.h</includes>
     <includes refid="_vk_macros_8h" local="yes">Vulkan/VkMacros.h</includes>
     <incdepgraph>
-      <node id="3356">
-        <label>Vulkan/VkScopedSampler.h</label>
-        <link refid="_vk_scoped_sampler_8h_source"/>
-        <childnode refid="3357" relation="include">
-        </childnode>
-        <childnode refid="3358" relation="include">
-        </childnode>
-      </node>
-      <node id="3362">
-        <label>stdexcept</label>
-      </node>
-      <node id="3355">
-        <label>Source/Azura/RenderSystem/Src/Vulkan/VkScopedSampler.cpp</label>
-        <link refid="_vk_scoped_sampler_8cpp"/>
-        <childnode refid="3356" relation="include">
-        </childnode>
-        <childnode refid="3361" relation="include">
-        </childnode>
-      </node>
-      <node id="3360">
-        <label>vector</label>
-      </node>
-      <node id="3358">
-        <label>Log/Log.h</label>
-        <link refid="_log_8h_source"/>
-        <childnode refid="3359" relation="include">
-        </childnode>
-        <childnode refid="3360" relation="include">
-        </childnode>
-      </node>
-      <node id="3363">
+      <node id="3530">
         <label>VkDebug.h</label>
         <link refid="_vk_debug_8h_source"/>
-        <childnode refid="3357" relation="include">
+        <childnode refid="3521" relation="include">
         </childnode>
       </node>
-      <node id="3357">
-        <label>vulkan/vulkan_core.h</label>
+      <node id="3525">
+        <label>cstdint</label>
       </node>
-      <node id="3359">
-        <label>Types.h</label>
+      <node id="3529">
+        <label>stdexcept</label>
       </node>
-      <node id="3361">
+      <node id="3526">
+        <label>string</label>
+      </node>
+      <node id="3519">
+        <label>Source/Azura/RenderSystem/Src/Vulkan/VkScopedSampler.cpp</label>
+        <link refid="_vk_scoped_sampler_8cpp"/>
+        <childnode refid="3520" relation="include">
+        </childnode>
+        <childnode refid="3528" relation="include">
+        </childnode>
+      </node>
+      <node id="3527">
+        <label>vector</label>
+      </node>
+      <node id="3522">
+        <label>Log/Log.h</label>
+        <link refid="_log_8h_source"/>
+        <childnode refid="3523" relation="include">
+        </childnode>
+        <childnode refid="3527" relation="include">
+        </childnode>
+      </node>
+      <node id="3528">
         <label>Vulkan/VkMacros.h</label>
         <link refid="_vk_macros_8h_source"/>
-        <childnode refid="3357" relation="include">
+        <childnode refid="3521" relation="include">
         </childnode>
-        <childnode refid="3362" relation="include">
+        <childnode refid="3529" relation="include">
         </childnode>
-        <childnode refid="3363" relation="include">
+        <childnode refid="3530" relation="include">
         </childnode>
-        <childnode refid="3358" relation="include">
+        <childnode refid="3522" relation="include">
+        </childnode>
+      </node>
+      <node id="3521">
+        <label>vulkan/vulkan_core.h</label>
+      </node>
+      <node id="3524">
+        <label>cstddef</label>
+      </node>
+      <node id="3523">
+        <label>Types.h</label>
+        <link refid="_types_8h_source"/>
+        <childnode refid="3524" relation="include">
+        </childnode>
+        <childnode refid="3525" relation="include">
+        </childnode>
+        <childnode refid="3526" relation="include">
+        </childnode>
+      </node>
+      <node id="3520">
+        <label>Vulkan/VkScopedSampler.h</label>
+        <link refid="_vk_scoped_sampler_8h_source"/>
+        <childnode refid="3521" relation="include">
+        </childnode>
+        <childnode refid="3522" relation="include">
         </childnode>
       </node>
     </incdepgraph>

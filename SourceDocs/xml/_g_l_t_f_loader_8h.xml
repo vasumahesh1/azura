@@ -2,107 +2,58 @@
 <doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.8.14">
   <compounddef id="_g_l_t_f_loader_8h" kind="file" language="C++">
     <compoundname>GLTFLoader.h</compoundname>
-    <includes local="yes">Types.h</includes>
+    <includes refid="_types_8h" local="yes">Types.h</includes>
     <includes local="no">GLTFSDK/Document.h</includes>
     <includes local="no">GLTFSDK/GLTFResourceReader.h</includes>
     <includedby refid="_g_l_t_f_loader_8cpp" local="yes">Source/AssetManager/Src/GLTFLoader.cpp</includedby>
-    <includedby refid="_physics_2_inc_2_physics_2_geometry_2_cloth_mesh_8h" local="yes">Source/Physics/Inc/Physics/Geometry/ClothMesh.h</includedby>
-    <includedby refid="_samples_22___deferred_renderer_2_inc_2_app_2_common_8h" local="yes">Source/Samples/2_DeferredRenderer/Inc/App/Common.h</includedby>
+    <includedby refid="_cloth_mesh_8h" local="yes">Source/Physics/Inc/Physics/Geometry/ClothMesh.h</includedby>
     <incdepgraph>
-      <node id="18">
+      <node id="7">
         <label>GLTFSDK/Document.h</label>
       </node>
-      <node id="16">
+      <node id="5">
+        <label>cstdint</label>
+      </node>
+      <node id="2">
         <label>Source/AssetManager/Inc/AssetManager/GLTFLoader.h</label>
         <link refid="_g_l_t_f_loader_8h"/>
-        <childnode refid="17" relation="include">
+        <childnode refid="3" relation="include">
         </childnode>
-        <childnode refid="18" relation="include">
+        <childnode refid="7" relation="include">
         </childnode>
-        <childnode refid="19" relation="include">
+        <childnode refid="8" relation="include">
         </childnode>
       </node>
-      <node id="17">
-        <label>Types.h</label>
+      <node id="6">
+        <label>string</label>
       </node>
-      <node id="19">
+      <node id="4">
+        <label>cstddef</label>
+      </node>
+      <node id="8">
         <label>GLTFSDK/GLTFResourceReader.h</label>
+      </node>
+      <node id="3">
+        <label>Types.h</label>
+        <link refid="_types_8h_source"/>
+        <childnode refid="4" relation="include">
+        </childnode>
+        <childnode refid="5" relation="include">
+        </childnode>
+        <childnode refid="6" relation="include">
+        </childnode>
       </node>
     </incdepgraph>
     <invincdepgraph>
-      <node id="26">
-        <label>Source/Samples/2_DeferredRenderer/Inc/Forward/ForwardComputeScene.h</label>
-        <link refid="_forward_compute_scene_8h_source"/>
-        <childnode refid="24" relation="include">
-        </childnode>
-      </node>
-      <node id="20">
+      <node id="9">
         <label>Source/AssetManager/Inc/AssetManager/GLTFLoader.h</label>
         <link refid="_g_l_t_f_loader_8h"/>
-        <childnode refid="21" relation="include">
-        </childnode>
-        <childnode refid="23" relation="include">
+        <childnode refid="10" relation="include">
         </childnode>
       </node>
-      <node id="24">
-        <label>Source/Samples/2_DeferredRenderer/Inc/App/App.h</label>
-        <link refid="_app_8h_source"/>
-      </node>
-      <node id="28">
-        <label>Source/Samples/2_DeferredRenderer/Inc/ForwardPlus/ForwardPlusComputeScene.h</label>
-        <link refid="_forward_plus_compute_scene_8h_source"/>
-        <childnode refid="24" relation="include">
-        </childnode>
-      </node>
-      <node id="25">
-        <label>Source/Samples/2_DeferredRenderer/Inc/App/LightTexture.h</label>
-        <link refid="_light_texture_8h_source"/>
-        <childnode refid="24" relation="include">
-        </childnode>
-        <childnode refid="26" relation="include">
-        </childnode>
-        <childnode refid="27" relation="include">
-        </childnode>
-        <childnode refid="28" relation="include">
-        </childnode>
-      </node>
-      <node id="23">
-        <label>Source/Samples/2_DeferredRenderer/Inc/App/Common.h</label>
-        <link refid="_samples_22___deferred_renderer_2_inc_2_app_2_common_8h_source"/>
-        <childnode refid="24" relation="include">
-        </childnode>
-        <childnode refid="25" relation="include">
-        </childnode>
-        <childnode refid="29" relation="include">
-        </childnode>
-      </node>
-      <node id="22">
-        <label>Source/Samples/3_ClothSim/Inc/ClothSim/AppRenderer.h</label>
-        <link refid="3___cloth_sim_2_inc_2_cloth_sim_2_app_renderer_8h_source"/>
-      </node>
-      <node id="27">
-        <label>Source/Samples/2_DeferredRenderer/Inc/Forward/ForwardScene.h</label>
-        <link refid="_forward_scene_8h_source"/>
-        <childnode refid="24" relation="include">
-        </childnode>
-      </node>
-      <node id="29">
-        <label>Source/Samples/2_DeferredRenderer/Inc/App/Scene.h</label>
-        <link refid="_samples_22___deferred_renderer_2_inc_2_app_2_scene_8h_source"/>
-        <childnode refid="24" relation="include">
-        </childnode>
-        <childnode refid="26" relation="include">
-        </childnode>
-        <childnode refid="27" relation="include">
-        </childnode>
-        <childnode refid="28" relation="include">
-        </childnode>
-      </node>
-      <node id="21">
+      <node id="10">
         <label>Source/Physics/Inc/Physics/Geometry/ClothMesh.h</label>
-        <link refid="_physics_2_inc_2_physics_2_geometry_2_cloth_mesh_8h_source"/>
-        <childnode refid="22" relation="include">
-        </childnode>
+        <link refid="_cloth_mesh_8h_source"/>
       </node>
     </invincdepgraph>
     <innerclass refid="class_azura_1_1_g_l_t_f_mesh_interface" prot="public">Azura::GLTFMeshInterface</innerclass>

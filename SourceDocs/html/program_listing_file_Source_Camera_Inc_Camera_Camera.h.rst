@@ -29,25 +29,35 @@ Program Listing for File Camera.h
      Camera& operator=(Camera&& other) noexcept = delete;
    
      void SetSensitivity(float value);
+   
      float GetSensitivity() const;
    
      void SetNearClip(float value);
+   
      void SetFarClip(float value);
+   
      float GetNearClip() const;
+   
      float GetFarClip() const;
+   
      void SetFOVY(float value);
+   
      void SetPosition(Vector3f value);
+   
      void SetReferencePoint(Vector3f value);
    
      Vector3f GetPosition() const;
    
      Matrix4f GetViewProjMatrix() const;
+     
      Matrix4f GetInvViewProjMatrix() const;
    
      Matrix4f GetViewMatrix() const;
+   
      Matrix4f GetProjMatrix() const;
    
      virtual void Recompute() = 0;
+   
      virtual void Update(float timeDelta) = 0;
      virtual void OnMouseEvent(MouseEvent mouseEvent) = 0;
      virtual void OnKeyEvent(KeyEvent keyEvent) = 0;

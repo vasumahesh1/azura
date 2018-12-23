@@ -7,128 +7,144 @@
     <includes local="no">vulkan/vulkan_win32.h</includes>
     <includes refid="_vk_macros_8h" local="yes">Vulkan/VkMacros.h</includes>
     <incdepgraph>
-      <node id="3554">
+      <node id="3736">
         <label>functional</label>
       </node>
-      <node id="3555">
+      <node id="3737">
         <label>iterator</label>
       </node>
-      <node id="3562">
+      <node id="3751">
+        <label>VkDebug.h</label>
+        <link refid="_vk_debug_8h_source"/>
+        <childnode refid="3732" relation="include">
+        </childnode>
+      </node>
+      <node id="3742">
+        <label>cstdint</label>
+      </node>
+      <node id="3747">
         <label>Windows.h</label>
       </node>
-      <node id="3557">
-        <label>Memory/Allocator.h</label>
-        <link refid="_allocator_8h_source"/>
-        <childnode refid="3554" relation="include">
-        </childnode>
-        <childnode refid="3558" relation="include">
-        </childnode>
-        <childnode refid="3559" relation="include">
-        </childnode>
-      </node>
-      <node id="3552">
+      <node id="3734">
         <label>cassert</label>
       </node>
-      <node id="3565">
+      <node id="3750">
         <label>stdexcept</label>
       </node>
-      <node id="3549">
-        <label>Vulkan/VkPlatform.h</label>
-        <link refid="_vk_platform_8h_source"/>
-        <childnode refid="3550" relation="include">
+      <node id="3743">
+        <label>string</label>
+      </node>
+      <node id="3748">
+        <label>vulkan/vulkan_win32.h</label>
+      </node>
+      <node id="3739">
+        <label>Memory/Allocator.h</label>
+        <link refid="_allocator_8h_source"/>
+        <childnode refid="3736" relation="include">
         </childnode>
-        <childnode refid="3551" relation="include">
+        <childnode refid="3740" relation="include">
         </childnode>
-        <childnode refid="3560" relation="include">
+        <childnode refid="3744" relation="include">
         </childnode>
       </node>
-      <node id="3559">
+      <node id="3733">
+        <label>Containers/Vector.h</label>
+        <link refid="_vector_8h_source"/>
+        <childnode refid="3734" relation="include">
+        </childnode>
+        <childnode refid="3735" relation="include">
+        </childnode>
+        <childnode refid="3736" relation="include">
+        </childnode>
+        <childnode refid="3737" relation="include">
+        </childnode>
+        <childnode refid="3738" relation="include">
+        </childnode>
+        <childnode refid="3739" relation="include">
+        </childnode>
+        <childnode refid="3740" relation="include">
+        </childnode>
+        <childnode refid="3744" relation="include">
+        </childnode>
+      </node>
+      <node id="3744">
         <label>Utils/Macros.h</label>
         <link refid="_macros_8h_source"/>
       </node>
-      <node id="3563">
-        <label>vulkan/vulkan_win32.h</label>
-      </node>
-      <node id="3556">
-        <label>Array.h</label>
-        <link refid="_array_8h_source"/>
-        <childnode refid="3552" relation="include">
-        </childnode>
-        <childnode refid="3553" relation="include">
-        </childnode>
-        <childnode refid="3557" relation="include">
-        </childnode>
-        <childnode refid="3558" relation="include">
-        </childnode>
-      </node>
-      <node id="3561">
+      <node id="3746">
         <label>vector</label>
       </node>
-      <node id="3551">
-        <label>Containers/Vector.h</label>
-        <link refid="_vector_8h_source"/>
-        <childnode refid="3552" relation="include">
+      <node id="3731">
+        <label>Vulkan/VkPlatform.h</label>
+        <link refid="_vk_platform_8h_source"/>
+        <childnode refid="3732" relation="include">
         </childnode>
-        <childnode refid="3553" relation="include">
+        <childnode refid="3733" relation="include">
         </childnode>
-        <childnode refid="3554" relation="include">
-        </childnode>
-        <childnode refid="3555" relation="include">
-        </childnode>
-        <childnode refid="3556" relation="include">
-        </childnode>
-        <childnode refid="3557" relation="include">
-        </childnode>
-        <childnode refid="3558" relation="include">
-        </childnode>
-        <childnode refid="3559" relation="include">
+        <childnode refid="3745" relation="include">
         </childnode>
       </node>
-      <node id="3560">
+      <node id="3738">
+        <label>Array.h</label>
+        <link refid="_array_8h_source"/>
+        <childnode refid="3734" relation="include">
+        </childnode>
+        <childnode refid="3735" relation="include">
+        </childnode>
+        <childnode refid="3739" relation="include">
+        </childnode>
+        <childnode refid="3740" relation="include">
+        </childnode>
+      </node>
+      <node id="3745">
         <label>Log/Log.h</label>
         <link refid="_log_8h_source"/>
-        <childnode refid="3558" relation="include">
+        <childnode refid="3740" relation="include">
         </childnode>
-        <childnode refid="3561" relation="include">
-        </childnode>
-      </node>
-      <node id="3566">
-        <label>VkDebug.h</label>
-        <link refid="_vk_debug_8h_source"/>
-        <childnode refid="3550" relation="include">
+        <childnode refid="3746" relation="include">
         </childnode>
       </node>
-      <node id="3550">
-        <label>vulkan/vulkan_core.h</label>
-      </node>
-      <node id="3558">
-        <label>Types.h</label>
-      </node>
-      <node id="3548">
-        <label>Source/Azura/RenderSystem/Src/Vulkan/Windows/VkWin32Platform.cpp</label>
-        <link refid="_vk_win32_platform_8cpp"/>
-        <childnode refid="3549" relation="include">
-        </childnode>
-        <childnode refid="3562" relation="include">
-        </childnode>
-        <childnode refid="3563" relation="include">
-        </childnode>
-        <childnode refid="3564" relation="include">
-        </childnode>
-      </node>
-      <node id="3564">
+      <node id="3749">
         <label>Vulkan/VkMacros.h</label>
         <link refid="_vk_macros_8h_source"/>
-        <childnode refid="3550" relation="include">
+        <childnode refid="3732" relation="include">
         </childnode>
-        <childnode refid="3565" relation="include">
+        <childnode refid="3750" relation="include">
         </childnode>
-        <childnode refid="3566" relation="include">
+        <childnode refid="3751" relation="include">
         </childnode>
-        <childnode refid="3560" relation="include">
+        <childnode refid="3745" relation="include">
         </childnode>
       </node>
-      <node id="3553">
+      <node id="3732">
+        <label>vulkan/vulkan_core.h</label>
+      </node>
+      <node id="3741">
+        <label>cstddef</label>
+      </node>
+      <node id="3730">
+        <label>Source/Azura/RenderSystem/Src/Vulkan/Windows/VkWin32Platform.cpp</label>
+        <link refid="_vk_win32_platform_8cpp"/>
+        <childnode refid="3731" relation="include">
+        </childnode>
+        <childnode refid="3747" relation="include">
+        </childnode>
+        <childnode refid="3748" relation="include">
+        </childnode>
+        <childnode refid="3749" relation="include">
+        </childnode>
+      </node>
+      <node id="3740">
+        <label>Types.h</label>
+        <link refid="_types_8h_source"/>
+        <childnode refid="3741" relation="include">
+        </childnode>
+        <childnode refid="3742" relation="include">
+        </childnode>
+        <childnode refid="3743" relation="include">
+        </childnode>
+      </node>
+      <node id="3735">
         <label>cstring</label>
       </node>
     </incdepgraph>

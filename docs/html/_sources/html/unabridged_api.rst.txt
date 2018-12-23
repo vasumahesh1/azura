@@ -10,7 +10,7 @@ Namespaces
 .. toctree::
    :maxdepth: 5
 
-   namespace_@238.rst
+   namespace_@181.rst
 
 .. toctree::
    :maxdepth: 5
@@ -25,52 +25,22 @@ Namespaces
 .. toctree::
    :maxdepth: 5
 
-   namespace_Azura__@116.rst
+   namespace_Azura__@111.rst
 
 .. toctree::
    :maxdepth: 5
 
-   namespace_Azura__@117.rst
+   namespace_Azura__@112.rst
+
+.. toctree::
+   :maxdepth: 5
+
+   namespace_Azura__@143.rst
 
 .. toctree::
    :maxdepth: 5
 
    namespace_Azura__@2.rst
-
-.. toctree::
-   :maxdepth: 5
-
-   namespace_Azura__@200.rst
-
-.. toctree::
-   :maxdepth: 5
-
-   namespace_Azura__@244.rst
-
-.. toctree::
-   :maxdepth: 5
-
-   namespace_Azura__@246.rst
-
-.. toctree::
-   :maxdepth: 5
-
-   namespace_Azura__@249.rst
-
-.. toctree::
-   :maxdepth: 5
-
-   namespace_Azura__@250.rst
-
-.. toctree::
-   :maxdepth: 5
-
-   namespace_Azura__@264.rst
-
-.. toctree::
-   :maxdepth: 5
-
-   namespace_Azura__@269.rst
 
 .. toctree::
    :maxdepth: 5
@@ -160,12 +130,12 @@ Namespaces
 .. toctree::
    :maxdepth: 5
 
-   namespace_Azura__Math__@208.rst
+   namespace_Azura__Math__@151.rst
 
 .. toctree::
    :maxdepth: 5
 
-   namespace_Azura__Math__@209.rst
+   namespace_Azura__Math__@152.rst
 
 .. toctree::
    :maxdepth: 5
@@ -175,12 +145,12 @@ Namespaces
 .. toctree::
    :maxdepth: 5
 
-   namespace_Azura__Memory__@135.rst
+   namespace_Azura__Memory__@130.rst
 
 .. toctree::
    :maxdepth: 5
 
-   namespace_Azura__Memory__@136.rst
+   namespace_Azura__Memory__@131.rst
 
 .. toctree::
    :maxdepth: 5
@@ -190,12 +160,12 @@ Namespaces
 .. toctree::
    :maxdepth: 5
 
-   namespace_Azura__Physics__@221.rst
+   namespace_Azura__Physics__@164.rst
 
 .. toctree::
    :maxdepth: 5
 
-   namespace_Azura__Physics__@222.rst
+   namespace_Azura__Physics__@165.rst
 
 .. toctree::
    :maxdepth: 5
@@ -205,7 +175,7 @@ Namespaces
 .. toctree::
    :maxdepth: 5
 
-   namespace_Azura__Physics__PBD__@225.rst
+   namespace_Azura__Physics__PBD__@168.rst
 
 .. toctree::
    :maxdepth: 5
@@ -260,22 +230,12 @@ Namespaces
 .. toctree::
    :maxdepth: 5
 
-   namespace_Dibella.rst
-
-.. toctree::
-   :maxdepth: 5
-
    namespace_Microsoft__glTF.rst
 
 .. toctree::
    :maxdepth: 5
 
    namespace_Microsoft__WRL.rst
-
-.. toctree::
-   :maxdepth: 5
-
-   namespace_RenderTestCases.rst
 
 .. toctree::
    :maxdepth: 5
@@ -295,16 +255,6 @@ Classes and Structs
    :maxdepth: 5
 
    struct_azura_1_1_application_requirements.rst
-
-.. toctree::
-   :maxdepth: 5
-
-   struct_azura_1_1_app_pass1.rst
-
-.. toctree::
-   :maxdepth: 5
-
-   struct_azura_1_1_bending_constraint.rst
 
 .. toctree::
    :maxdepth: 5
@@ -354,22 +304,7 @@ Classes and Structs
 .. toctree::
    :maxdepth: 5
 
-   struct_azura_1_1_cloth_compute_properties.rst
-
-.. toctree::
-   :maxdepth: 5
-
-   struct_azura_1_1_compute_pass_data.rst
-
-.. toctree::
-   :maxdepth: 5
-
    struct_azura_1_1_compute_pool_create_info.rst
-
-.. toctree::
-   :maxdepth: 5
-
-   struct_azura_1_1_compute_u_b_o.rst
 
 .. toctree::
    :maxdepth: 5
@@ -444,11 +379,6 @@ Classes and Structs
 .. toctree::
    :maxdepth: 5
 
-   struct_azura_1_1_distance_constraint.rst
-
-.. toctree::
-   :maxdepth: 5
-
    struct_azura_1_1_drawable_create_info.rst
 
 .. toctree::
@@ -459,47 +389,12 @@ Classes and Structs
 .. toctree::
    :maxdepth: 5
 
-   struct_azura_1_1_edge.rst
-
-.. toctree::
-   :maxdepth: 5
-
-   struct_azura_1_1_edge_map_hash.rst
-
-.. toctree::
-   :maxdepth: 5
-
    struct_azura_1_1_event.rst
 
 .. toctree::
    :maxdepth: 5
 
-   struct_azura_1_1_forward_compute_pass.rst
-
-.. toctree::
-   :maxdepth: 5
-
-   struct_azura_1_1_forward_pass.rst
-
-.. toctree::
-   :maxdepth: 5
-
-   struct_azura_1_1_forward_plus_compute_pass.rst
-
-.. toctree::
-   :maxdepth: 5
-
-   struct_azura_1_1_frustum.rst
-
-.. toctree::
-   :maxdepth: 5
-
    struct_azura_1_1_g_p_u_buffer.rst
-
-.. toctree::
-   :maxdepth: 5
-
-   struct_azura_1_1_instance.rst
 
 .. toctree::
    :maxdepth: 5
@@ -510,11 +405,6 @@ Classes and Structs
    :maxdepth: 5
 
    struct_azura_1_1_layer_subresource.rst
-
-.. toctree::
-   :maxdepth: 5
-
-   struct_azura_1_1_light_u_b_o.rst
 
 .. toctree::
    :maxdepth: 5
@@ -534,27 +424,7 @@ Classes and Structs
 .. toctree::
    :maxdepth: 5
 
-   struct_azura_1_1_mesh_object.rst
-
-.. toctree::
-   :maxdepth: 5
-
    struct_azura_1_1_mouse_event.rst
-
-.. toctree::
-   :maxdepth: 5
-
-   struct_azura_1_1_normals_pass_data.rst
-
-.. toctree::
-   :maxdepth: 5
-
-   struct_azura_1_1_normal_u_b_o.rst
-
-.. toctree::
-   :maxdepth: 5
-
-   struct_azura_1_1_pass_data.rst
 
 .. toctree::
    :maxdepth: 5
@@ -594,16 +464,6 @@ Classes and Structs
 .. toctree::
    :maxdepth: 5
 
-   struct_azura_1_1_plane.rst
-
-.. toctree::
-   :maxdepth: 5
-
-   struct_azura_1_1_point_light.rst
-
-.. toctree::
-   :maxdepth: 5
-
    struct_azura_1_1_pool_node.rst
 
 .. toctree::
@@ -625,21 +485,6 @@ Classes and Structs
    :maxdepth: 5
 
    struct_azura_1_1_sampler_info.rst
-
-.. toctree::
-   :maxdepth: 5
-
-   struct_azura_1_1_scene_u_b_o.rst
-
-.. toctree::
-   :maxdepth: 5
-
-   struct_azura_1_1_self_collision_constraint.rst
-
-.. toctree::
-   :maxdepth: 5
-
-   struct_azura_1_1_shader_controls.rst
 
 .. toctree::
    :maxdepth: 5
@@ -704,27 +549,12 @@ Classes and Structs
 .. toctree::
    :maxdepth: 5
 
-   struct_azura_1_1_uniform_buffer_data.rst
-
-.. toctree::
-   :maxdepth: 5
-
    struct_azura_1_1_uniform_buffer_info.rst
 
 .. toctree::
    :maxdepth: 5
 
-   struct_azura_1_1_vertex.rst
-
-.. toctree::
-   :maxdepth: 5
-
    struct_azura_1_1_vertex_slot.rst
-
-.. toctree::
-   :maxdepth: 5
-
-   struct_azura_1_1_vertex_with_u_v.rst
 
 .. toctree::
    :maxdepth: 5
@@ -754,47 +584,7 @@ Classes and Structs
 .. toctree::
    :maxdepth: 5
 
-   struct_instance.rst
-
-.. toctree::
-   :maxdepth: 5
-
-   struct_sample.rst
-
-.. toctree::
-   :maxdepth: 5
-
-   struct_vertex.rst
-
-.. toctree::
-   :maxdepth: 5
-
-   struct_vertex_with_u_v.rst
-
-.. toctree::
-   :maxdepth: 5
-
-   class_array_test.rst
-
-.. toctree::
-   :maxdepth: 5
-
-   class_azura_1_1_app.rst
-
-.. toctree::
-   :maxdepth: 5
-
-   class_azura_1_1_app_renderer.rst
-
-.. toctree::
-   :maxdepth: 5
-
    class_azura_1_1_camera.rst
-
-.. toctree::
-   :maxdepth: 5
-
-   class_azura_1_1_cloth_mesh.rst
 
 .. toctree::
    :maxdepth: 5
@@ -924,21 +714,6 @@ Classes and Structs
 .. toctree::
    :maxdepth: 5
 
-   class_azura_1_1_forward_compute_scene.rst
-
-.. toctree::
-   :maxdepth: 5
-
-   class_azura_1_1_forward_plus_compute_scene.rst
-
-.. toctree::
-   :maxdepth: 5
-
-   class_azura_1_1_forward_scene.rst
-
-.. toctree::
-   :maxdepth: 5
-
    class_azura_1_1_g_l_f_w_window.rst
 
 .. toctree::
@@ -950,16 +725,6 @@ Classes and Structs
    :maxdepth: 5
 
    class_azura_1_1_hash_operator.rst
-
-.. toctree::
-   :maxdepth: 5
-
-   class_azura_1_1_imported_cloth_mesh.rst
-
-.. toctree::
-   :maxdepth: 5
-
-   class_azura_1_1_light_texture.rst
 
 .. toctree::
    :maxdepth: 5
@@ -1084,11 +849,6 @@ Classes and Structs
 .. toctree::
    :maxdepth: 5
 
-   class_azura_1_1_scene.rst
-
-.. toctree::
-   :maxdepth: 5
-
    class_azura_1_1_shader.rst
 
 .. toctree::
@@ -1179,127 +939,12 @@ Classes and Structs
 .. toctree::
    :maxdepth: 5
 
-   class_complex_type.rst
-
-.. toctree::
-   :maxdepth: 5
-
-   class_dibella_1_1_allocation_dependent.rst
-
-.. toctree::
-   :maxdepth: 5
-
-   class_dibella_1_1_b_s_d_f.rst
-
-.. toctree::
-   :maxdepth: 5
-
-   class_dibella_1_1_bx_d_f.rst
-
-.. toctree::
-   :maxdepth: 5
-
-   class_dibella_1_1_image_handler.rst
-
-.. toctree::
-   :maxdepth: 5
-
-   class_dibella_1_1_integrator.rst
-
-.. toctree::
-   :maxdepth: 5
-
-   class_dibella_1_1_intersection.rst
-
-.. toctree::
-   :maxdepth: 5
-
-   class_dibella_1_1_material.rst
-
-.. toctree::
-   :maxdepth: 5
-
-   class_dibella_1_1_ray.rst
-
-.. toctree::
-   :maxdepth: 5
-
-   class_dibella_1_1_sampler.rst
-
-.. toctree::
-   :maxdepth: 5
-
-   class_dibella_1_1_scene.rst
-
-.. toctree::
-   :maxdepth: 5
-
-   class_dibella_1_1_scene_object.rst
-
-.. toctree::
-   :maxdepth: 5
-
-   class_dibella_1_1_shape.rst
-
-.. toctree::
-   :maxdepth: 5
-
-   class_dibella_1_1_transform.rst
-
-.. toctree::
-   :maxdepth: 5
-
-   class_dibella_1_1_warper.rst
-
-.. toctree::
-   :maxdepth: 5
-
-   class_hash_test.rst
-
-.. toctree::
-   :maxdepth: 5
-
-   class_heap_memory_buffer_test.rst
-
-.. toctree::
-   :maxdepth: 5
-
    class_matrix_multiplication_fixture.rst
 
 .. toctree::
    :maxdepth: 5
 
    class_matrix_unroll_fixture.rst
-
-.. toctree::
-   :maxdepth: 5
-
-   class_monotonic_allocator_test.rst
-
-.. toctree::
-   :maxdepth: 5
-
-   class_range_allocator_test.rst
-
-.. toctree::
-   :maxdepth: 5
-
-   class_renderer_test.rst
-
-.. toctree::
-   :maxdepth: 5
-
-   class_stack_memory_buffer_test.rst
-
-.. toctree::
-   :maxdepth: 5
-
-   class_vector_benchmark_fixture.rst
-
-.. toctree::
-   :maxdepth: 5
-
-   class_vector_test.rst
 
 Enums
 *****
@@ -1308,7 +953,7 @@ Enums
 .. toctree::
    :maxdepth: 5
 
-   enum__azura_2_render_system_2_inc_2_generic_2_constants_8h_1aece4541733a1bc739293311414445e57.rst
+   enum__constants_8h_1aece4541733a1bc739293311414445e57.rst
 
 .. toctree::
    :maxdepth: 5
@@ -1499,11 +1144,6 @@ Enums
    :maxdepth: 5
 
    enum__window_8h_1a4c6a12786e5b90bf8c7c62cb3fb09325.rst
-
-.. toctree::
-   :maxdepth: 5
-
-   enum__bx_d_f_type_8h_1abe581c44e596213188e8ca8142f375ae.rst
 
 Functions
 *********
@@ -1722,17 +1362,17 @@ Functions
 .. toctree::
    :maxdepth: 5
 
-   function__math_2_inc_2_math_2_transform_8h_1a6fce39055eeea5934db9c2b4ec705204.rst
+   function__transform_8h_1a6fce39055eeea5934db9c2b4ec705204.rst
 
 .. toctree::
    :maxdepth: 5
 
-   function__math_2_inc_2_math_2_transform_8h_1abd4b9bad546050c957dae51f02f181a3.rst
+   function__transform_8h_1abd4b9bad546050c957dae51f02f181a3.rst
 
 .. toctree::
    :maxdepth: 5
 
-   function__math_2_inc_2_math_2_transform_8h_1a29763786770b321c2278e7856904625e.rst
+   function__transform_8h_1a29763786770b321c2278e7856904625e.rst
 
 .. toctree::
    :maxdepth: 5
@@ -2092,46 +1732,6 @@ Functions
 .. toctree::
    :maxdepth: 5
 
-   function__std_vector__benchmark_8cpp_1abff77f9106c0ee80fe86c58fe873cb5d.rst
-
-.. toctree::
-   :maxdepth: 5
-
-   function__std_vector__benchmark_8cpp_1a50e227a37faf2038bfd5f6b1b5cfaf11.rst
-
-.. toctree::
-   :maxdepth: 5
-
-   function__std_vector__benchmark_8cpp_1acd9e7a149dc4d4524bafd332e5fd8acf.rst
-
-.. toctree::
-   :maxdepth: 5
-
-   function__std_vector__benchmark_8cpp_1a9442ef126d558754c6219ac8bb82b4ad.rst
-
-.. toctree::
-   :maxdepth: 5
-
-   function__vector__benchmark_8cpp_1abff77f9106c0ee80fe86c58fe873cb5d.rst
-
-.. toctree::
-   :maxdepth: 5
-
-   function__vector__benchmark_8cpp_1a50e227a37faf2038bfd5f6b1b5cfaf11.rst
-
-.. toctree::
-   :maxdepth: 5
-
-   function__vector__benchmark_8cpp_1acd9e7a149dc4d4524bafd332e5fd8acf.rst
-
-.. toctree::
-   :maxdepth: 5
-
-   function__vector__benchmark_8cpp_1a9442ef126d558754c6219ac8bb82b4ad.rst
-
-.. toctree::
-   :maxdepth: 5
-
    function__matrix_multiplication_8cpp_1a44debf68d4a7d7a62dd54f3e235b1b52.rst
 
 .. toctree::
@@ -2143,71 +1743,6 @@ Functions
    :maxdepth: 5
 
    function__matrix_unroll_8cpp_1a250fd69440b8bd65d81c242361604c5b.rst
-
-.. toctree::
-   :maxdepth: 5
-
-   function__std_vector__benchmark_8cpp_1ab740f0436e45de8760ecbb1da5f11066.rst
-
-.. toctree::
-   :maxdepth: 5
-
-   function__std_vector__benchmark_8cpp_1a8ce437907b41f9beeecc3d61c2cdc01d.rst
-
-.. toctree::
-   :maxdepth: 5
-
-   function__vector__benchmark_8cpp_1ab740f0436e45de8760ecbb1da5f11066.rst
-
-.. toctree::
-   :maxdepth: 5
-
-   function__vector__benchmark_8cpp_1a8ce437907b41f9beeecc3d61c2cdc01d.rst
-
-.. toctree::
-   :maxdepth: 5
-
-   function_benchmark_8cpp_1a5851750faa9cfec10f7cad1f3b89697e.rst
-
-.. toctree::
-   :maxdepth: 5
-
-   function__std_vector__benchmark_8cpp_1a804346727717046026aa47cb2fc485ce.rst
-
-.. toctree::
-   :maxdepth: 5
-
-   function__std_vector__benchmark_8cpp_1a6dd5dcf85ca393740d381799fce431ab.rst
-
-.. toctree::
-   :maxdepth: 5
-
-   function__std_vector__benchmark_8cpp_1a2a32762ce7d84d12ddfee532c3a10b8a.rst
-
-.. toctree::
-   :maxdepth: 5
-
-   function__std_vector__benchmark_8cpp_1a62431646a89f86db3c5a09b81056309f.rst
-
-.. toctree::
-   :maxdepth: 5
-
-   function__vector__benchmark_8cpp_1a804346727717046026aa47cb2fc485ce.rst
-
-.. toctree::
-   :maxdepth: 5
-
-   function__vector__benchmark_8cpp_1a6dd5dcf85ca393740d381799fce431ab.rst
-
-.. toctree::
-   :maxdepth: 5
-
-   function__vector__benchmark_8cpp_1a2a32762ce7d84d12ddfee532c3a10b8a.rst
-
-.. toctree::
-   :maxdepth: 5
-
-   function__vector__benchmark_8cpp_1a62431646a89f86db3c5a09b81056309f.rst
 
 .. toctree::
    :maxdepth: 5
@@ -2227,446 +1762,21 @@ Functions
 .. toctree::
    :maxdepth: 5
 
-   function__renderer__test_8cpp_1a062b9ab7c5bb6e129ac81b160c8898c0.rst
+   function__utils_8h_1ae4f36f9e7bf88650741aa454f547bc32.rst
 
 .. toctree::
    :maxdepth: 5
 
-   function__renderer__test_8cpp_1a4c754279d31080bb91e871092f68edc0.rst
+   function__utils_8h_1aa548fde9b991df527263042726d516bb.rst
 
 .. toctree::
    :maxdepth: 5
 
-   function__dibella_2_src_2_scene_2_primitives_2_transform_8cpp_1a07bad89c0721d07c634d81c54e1f12e5.rst
-
-.. toctree::
-   :maxdepth: 5
-
-   function__dibella_2_inc_2_core_2_utils_8h_1afd5c4b5fdfcc6e841324ab970f680afc.rst
-
-.. toctree::
-   :maxdepth: 5
-
-   function__dibella_2_inc_2_core_2_utils_8h_1a9d54782813e5d729be7983ca4445b310.rst
-
-.. toctree::
-   :maxdepth: 5
-
-   function__dibella_2_inc_2_core_2_utils_8h_1a34afacd7d3c5a0c8838888d0c2b119fd.rst
-
-.. toctree::
-   :maxdepth: 5
-
-   function__vector__test_8cpp_1ac3926a9720aa08de179ad081930ad579.rst
-
-.. toctree::
-   :maxdepth: 5
-
-   function__vector__test_8cpp_1ab58e6a529ebc87d9ca7d119e1af64d0d.rst
-
-.. toctree::
-   :maxdepth: 5
-
-   function__vector__test_8cpp_1a9637a617f79d9faa89a839e5269841ab.rst
-
-.. toctree::
-   :maxdepth: 5
-
-   function__azura_2_render_system_2_test_2test_8cpp_1a3c04138a5bfe5d72780bb7e82a18e627.rst
-
-.. toctree::
-   :maxdepth: 5
-
-   function__common_2_test_2test_8cpp_1a3c04138a5bfe5d72780bb7e82a18e627.rst
-
-.. toctree::
-   :maxdepth: 5
-
-   function__containers_2_test_2test_8cpp_1a3c04138a5bfe5d72780bb7e82a18e627.rst
-
-.. toctree::
-   :maxdepth: 5
-
-   function__samples_20___test_zone_2_src_2main_8cpp_1ae66f6b31b5ad750f1fe042a706a4e3d4.rst
-
-.. toctree::
-   :maxdepth: 5
-
-   function__samples_21___procedural_planet_2_src_2main_8cpp_1ae66f6b31b5ad750f1fe042a706a4e3d4.rst
-
-.. toctree::
-   :maxdepth: 5
-
-   function__samples_22___deferred_renderer_2_src_2main_8cpp_1ae66f6b31b5ad750f1fe042a706a4e3d4.rst
-
-.. toctree::
-   :maxdepth: 5
-
-   function__samples_23___cloth_sim_2_src_2main_8cpp_1ae66f6b31b5ad750f1fe042a706a4e3d4.rst
-
-.. toctree::
-   :maxdepth: 5
-
-   function__sandbox_2main_8cpp_1ae66f6b31b5ad750f1fe042a706a4e3d4.rst
-
-.. toctree::
-   :maxdepth: 5
-
-   function__render_test_cases_8h_1a517bc7273db353d5497d6ac65e8560f4.rst
-
-.. toctree::
-   :maxdepth: 5
-
-   function__render_test_cases_8h_1a96d521ef8c14d9ee3e986505b1c708a6.rst
-
-.. toctree::
-   :maxdepth: 5
-
-   function__render_test_cases_8h_1a14c286906433dd15e8261553a7dc53a4.rst
-
-.. toctree::
-   :maxdepth: 5
-
-   function__render_test_cases_8h_1a939b01d42459905a49edcc94db606f63.rst
-
-.. toctree::
-   :maxdepth: 5
-
-   function__azura_2_render_system_2_test_2test_8cpp_1a5b677e4e2990373ff0a16ed29b5d6aa3.rst
-
-.. toctree::
-   :maxdepth: 5
-
-   function__common_2_test_2test_8cpp_1a5b677e4e2990373ff0a16ed29b5d6aa3.rst
-
-.. toctree::
-   :maxdepth: 5
-
-   function__containers_2_test_2test_8cpp_1a5b677e4e2990373ff0a16ed29b5d6aa3.rst
-
-.. toctree::
-   :maxdepth: 5
-
-   function__hash__test_8cpp_1a194ebeb185213ac77acf085d8d43e234.rst
-
-.. toctree::
-   :maxdepth: 5
-
-   function__hash__test_8cpp_1a4881afbf183fbc99095979bae2d8792a.rst
-
-.. toctree::
-   :maxdepth: 5
-
-   function__hash__test_8cpp_1ada7fde0e1646d543c28ad49be2fe6215.rst
-
-.. toctree::
-   :maxdepth: 5
-
-   function__heap_memory_buffer__test_8cpp_1a450300ecc6c997e7cef135546ba7ba2a.rst
-
-.. toctree::
-   :maxdepth: 5
-
-   function__heap_memory_buffer__test_8cpp_1aa53e5a30ed1265335e24ed7b735fa016.rst
-
-.. toctree::
-   :maxdepth: 5
-
-   function__heap_memory_buffer__test_8cpp_1a1931357e11aa6346c2694b4265e3d478.rst
-
-.. toctree::
-   :maxdepth: 5
-
-   function__heap_memory_buffer__test_8cpp_1ab8f0a56d9d874f472848a982ae8f455b.rst
-
-.. toctree::
-   :maxdepth: 5
-
-   function__heap_memory_buffer__test_8cpp_1a99e04421eb7ab6e84b5fc1d2b9d6653e.rst
-
-.. toctree::
-   :maxdepth: 5
-
-   function__monotonic_allocator__test_8cpp_1ac9e07a76ae83212af84c2b244d0ae3e1.rst
-
-.. toctree::
-   :maxdepth: 5
-
-   function__monotonic_allocator__test_8cpp_1a91a8fc9858ada27ba80a532e9a70b138.rst
-
-.. toctree::
-   :maxdepth: 5
-
-   function__monotonic_allocator__test_8cpp_1aebf780e24cf7ae3e5ecaf4eb8c38a18a.rst
-
-.. toctree::
-   :maxdepth: 5
-
-   function__monotonic_allocator__test_8cpp_1adb633093519743ee045d2489e601a0da.rst
-
-.. toctree::
-   :maxdepth: 5
-
-   function__range_allocator__test_8cpp_1ac6678fb997768bedeee9a14e90e7565e.rst
-
-.. toctree::
-   :maxdepth: 5
-
-   function__range_allocator__test_8cpp_1a581708342a1e155be0b73853defab73e.rst
-
-.. toctree::
-   :maxdepth: 5
-
-   function__range_allocator__test_8cpp_1a338f5bcc00abc5a8fe172cfdda1c0911.rst
-
-.. toctree::
-   :maxdepth: 5
-
-   function__stack_memory_buffer__test_8cpp_1a91a552ddf6691ee274a64fa76db1e70e.rst
-
-.. toctree::
-   :maxdepth: 5
-
-   function__stack_memory_buffer__test_8cpp_1a6a3ba7321ef4461b8d231a7089ff326a.rst
-
-.. toctree::
-   :maxdepth: 5
-
-   function__renderer__test_8cpp_1a5b3bf7c425f0f30a67c4ef908a792ed9.rst
-
-.. toctree::
-   :maxdepth: 5
-
-   function__renderer__test_8cpp_1ab52b3cab02b885b8cc11c255e9e52f77.rst
-
-.. toctree::
-   :maxdepth: 5
-
-   function__renderer__test_8cpp_1af19a8b3f5b14ec60e16c76ad12cf18d0.rst
-
-.. toctree::
-   :maxdepth: 5
-
-   function__renderer__test_8cpp_1ad8445bcc24b131cf1f2e41c39d745b81.rst
-
-.. toctree::
-   :maxdepth: 5
-
-   function__array__test_8cpp_1aa4ccd4dbbabc5b5df275d80ca2f3ee4f.rst
-
-.. toctree::
-   :maxdepth: 5
-
-   function__array__test_8cpp_1a9f58c064e0947a4af016068235b393b6.rst
-
-.. toctree::
-   :maxdepth: 5
-
-   function__array__test_8cpp_1ab64e8a12bb3b50b7bdc205e2a624f0b1.rst
-
-.. toctree::
-   :maxdepth: 5
-
-   function__array__test_8cpp_1aebf49bf693f29cd68343c5a862452359.rst
-
-.. toctree::
-   :maxdepth: 5
-
-   function__array__test_8cpp_1aa22d0d971551247b476531a61caac3b9.rst
-
-.. toctree::
-   :maxdepth: 5
-
-   function__array__test_8cpp_1a09b83af735f4d8f86f4596740866d761.rst
-
-.. toctree::
-   :maxdepth: 5
-
-   function__array__test_8cpp_1a6f7c780191a9813410f36ec018c25083.rst
-
-.. toctree::
-   :maxdepth: 5
-
-   function__array__test_8cpp_1a7d0a863b946b5e9914f39835cbd88aea.rst
-
-.. toctree::
-   :maxdepth: 5
-
-   function__array__test_8cpp_1a3a4dea2e519474d86e7c9ca54d5db786.rst
-
-.. toctree::
-   :maxdepth: 5
-
-   function__vector__test_8cpp_1ac94730a9bf9d5ffbdb33e23f8a2bc9de.rst
-
-.. toctree::
-   :maxdepth: 5
-
-   function__vector__test_8cpp_1af4a781b49ca7c4d7e3e8ab1dfacf6335.rst
-
-.. toctree::
-   :maxdepth: 5
-
-   function__vector__test_8cpp_1a839afb52a8a307c041a5d85e3f355a5a.rst
-
-.. toctree::
-   :maxdepth: 5
-
-   function__vector__test_8cpp_1a632c999abf56409dbb47088df5fe2100.rst
-
-.. toctree::
-   :maxdepth: 5
-
-   function__vector__test_8cpp_1a52b28b1796f7846d8ef8d2b9d754c3d6.rst
-
-.. toctree::
-   :maxdepth: 5
-
-   function__vector__test_8cpp_1a4ac40aff8e1184fb8c886e280f208590.rst
-
-.. toctree::
-   :maxdepth: 5
-
-   function__vector__test_8cpp_1a63769a03246d627157b19416c8db4f8a.rst
-
-.. toctree::
-   :maxdepth: 5
-
-   function__vector__test_8cpp_1a7145e6c9cd089b6446d61395b733642f.rst
-
-.. toctree::
-   :maxdepth: 5
-
-   function__vector__test_8cpp_1a9046a79e22810d3bb17dc469bddb1860.rst
-
-.. toctree::
-   :maxdepth: 5
-
-   function__vector__test_8cpp_1a5c13c950e4599f1336bc7d01796cfcb6.rst
-
-.. toctree::
-   :maxdepth: 5
-
-   function__vector__test_8cpp_1a2ad905e33b6c5548413a0ed3ed43f2ab.rst
-
-.. toctree::
-   :maxdepth: 5
-
-   function__vector__test_8cpp_1aecd7e7aded1d850d6721541c60f5858e.rst
-
-.. toctree::
-   :maxdepth: 5
-
-   function__vector__test_8cpp_1a365263a1064786805ae441b3a7f79981.rst
-
-.. toctree::
-   :maxdepth: 5
-
-   function__vector__test_8cpp_1ab6ee0465791487b15571b0e642b4c6aa.rst
-
-.. toctree::
-   :maxdepth: 5
-
-   function__vector__test_8cpp_1a16206387f4dd37f047205378f6871faa.rst
-
-.. toctree::
-   :maxdepth: 5
-
-   function__vector__test_8cpp_1a56c49ac4cec448183df6bde019b6d9f2.rst
-
-.. toctree::
-   :maxdepth: 5
-
-   function__vector__test_8cpp_1a9e66b7b16453e01b65653a8cd8e2f776.rst
-
-.. toctree::
-   :maxdepth: 5
-
-   function__vector__test_8cpp_1a027654fd4e94e321e256818d9e646680.rst
-
-.. toctree::
-   :maxdepth: 5
-
-   function__vector__test_8cpp_1a85d5c577be35de263b08a3ba7548d873.rst
-
-.. toctree::
-   :maxdepth: 5
-
-   function__vector__test_8cpp_1a586408b493411c087cce5601a511da7a.rst
-
-.. toctree::
-   :maxdepth: 5
-
-   function__vector__test_8cpp_1acdd10de9a05444ff6a08464294a0702d.rst
-
-.. toctree::
-   :maxdepth: 5
-
-   function__vector__test_8cpp_1a3b57a58af4ed3615410cf5245b34b1a6.rst
-
-.. toctree::
-   :maxdepth: 5
-
-   function__vector__test_8cpp_1a3c5094dcc309e269a4314f46d30e509e.rst
-
-.. toctree::
-   :maxdepth: 5
-
-   function__vector__test_8cpp_1a1ee59730717d0102889b1575a8830ff8.rst
-
-.. toctree::
-   :maxdepth: 5
-
-   function__vector__test_8cpp_1a63c1b1e192af126ee88790733f573b45.rst
-
-.. toctree::
-   :maxdepth: 5
-
-   function__vector__test_8cpp_1a436933b55b65f695c7338b54c8704dc9.rst
-
-.. toctree::
-   :maxdepth: 5
-
-   function__vector__test_8cpp_1ac65d38c73b39242cbd60a95168ccdfd2.rst
-
-.. toctree::
-   :maxdepth: 5
-
-   function__vector__test_8cpp_1a64800e64a873187e02674e45967dd125.rst
-
-.. toctree::
-   :maxdepth: 5
-
-   function__power_bench_2_inc_2_power_bench_2_utils_8h_1ae4f36f9e7bf88650741aa454f547bc32.rst
-
-.. toctree::
-   :maxdepth: 5
-
-   function__power_bench_2_inc_2_power_bench_2_utils_8h_1aa548fde9b991df527263042726d516bb.rst
-
-.. toctree::
-   :maxdepth: 5
-
-   function__power_bench_2_inc_2_power_bench_2_utils_8h_1a4779b034e45269359257a8de81170283.rst
+   function__utils_8h_1a4779b034e45269359257a8de81170283.rst
 
 Variables
 *********
 
-
-.. toctree::
-   :maxdepth: 5
-
-   variable_0___test_zone_2_inc_2_test_zone_2_app_renderer_8h_1a540b9c2cefa70c8a109868e6edc62ac4.rst
-
-.. toctree::
-   :maxdepth: 5
-
-   variable__samples_22___deferred_renderer_2_inc_2_app_2_common_8h_1a5615fc3826c7ee83791fbf3e83adf886.rst
-
-.. toctree::
-   :maxdepth: 5
-
-   variable_0___test_zone_2_inc_2_test_zone_2_app_renderer_8h_1ab3cf23addaceaa419e169dfc980c9cc3.rst
 
 .. toctree::
    :maxdepth: 5
@@ -2686,42 +1796,12 @@ Variables
 .. toctree::
    :maxdepth: 5
 
-   variable_0___test_zone_2_inc_2_test_zone_2_app_renderer_8h_1a89449f6d4b138dab0cea8bc638337e5b.rst
-
-.. toctree::
-   :maxdepth: 5
-
    variable__core_8h_1aab4ba1389a92c1f11f25ed1839683c6d.rst
 
 .. toctree::
    :maxdepth: 5
 
-   variable__samples_22___deferred_renderer_2_inc_2_app_2_common_8h_1afefb43d514bd66841e49c60baa6163f5.rst
-
-.. toctree::
-   :maxdepth: 5
-
    variable__renderer_8h_1a47bf4a8c1bb7bea0986c01928c244b9d.rst
-
-.. toctree::
-   :maxdepth: 5
-
-   variable__samples_22___deferred_renderer_2_inc_2_app_2_common_8h_1a1ac37e47cd1168265c064190446e3c75.rst
-
-.. toctree::
-   :maxdepth: 5
-
-   variable__samples_22___deferred_renderer_2_inc_2_app_2_common_8h_1abee06dba304c47febdbfd32396db3e69.rst
-
-.. toctree::
-   :maxdepth: 5
-
-   variable__samples_22___deferred_renderer_2_inc_2_app_2_common_8h_1a449a8beab4e8e18943f060b176c2be8d.rst
-
-.. toctree::
-   :maxdepth: 5
-
-   variable__samples_22___deferred_renderer_2_inc_2_app_2_common_8h_1a3a9ae143c0af5080293aca8ad7419837.rst
 
 .. toctree::
    :maxdepth: 5
@@ -2781,11 +1861,6 @@ Variables
 .. toctree::
    :maxdepth: 5
 
-   variable__samples_22___deferred_renderer_2_inc_2_app_2_common_8h_1aa2333f975e997c359a3be78b41e4a1eb.rst
-
-.. toctree::
-   :maxdepth: 5
-
    variable__azura_2_render_system_2_inc_2_generic_2_generic_types_8h_1a78c993f3d576f09de3d536b55c15320b.rst
 
 .. toctree::
@@ -2806,52 +1881,27 @@ Variables
 .. toctree::
    :maxdepth: 5
 
-   variable__samples_22___deferred_renderer_2_inc_2_app_2_common_8h_1a7184df1b25e2084c468acfd3d102e73b.rst
-
-.. toctree::
-   :maxdepth: 5
-
    variable__azura_2_render_system_2_inc_2_generic_2_generic_types_8h_1a428635d860221dc07a957db97b34a40d.rst
 
 .. toctree::
    :maxdepth: 5
 
-   variable__azura_2_render_system_2_inc_2_generic_2_constants_8h_1a5507000fe0f4a970a124d1d0690a1931.rst
+   variable__constants_8h_1a5507000fe0f4a970a124d1d0690a1931.rst
 
 .. toctree::
    :maxdepth: 5
 
-   variable__azura_2_render_system_2_inc_2_generic_2_constants_8h_1ac9d292b944302e3593ec3c4f7d0b0422.rst
+   variable__constants_8h_1ac9d292b944302e3593ec3c4f7d0b0422.rst
 
 .. toctree::
    :maxdepth: 5
 
-   variable__azura_2_render_system_2_inc_2_generic_2_constants_8h_1afa46364d6dad722146fd17ad4a0fd3fb.rst
+   variable__constants_8h_1afa46364d6dad722146fd17ad4a0fd3fb.rst
 
 .. toctree::
    :maxdepth: 5
 
-   variable__azura_2_render_system_2_inc_2_generic_2_constants_8h_1af054e28c57031d73b0d35d27c2bd3664.rst
-
-.. toctree::
-   :maxdepth: 5
-
-   variable_0___test_zone_2_inc_2_test_zone_2_app_renderer_8h_1afe56639a5a14c44e5bd5dbad88311986.rst
-
-.. toctree::
-   :maxdepth: 5
-
-   variable__samples_22___deferred_renderer_2_inc_2_app_2_common_8h_1a7df9177b45bcd5074d515b61cd7f11e2.rst
-
-.. toctree::
-   :maxdepth: 5
-
-   variable__samples_22___deferred_renderer_2_inc_2_app_2_common_8h_1ab7af1cfc5e4db278c92823fc89125c3d.rst
-
-.. toctree::
-   :maxdepth: 5
-
-   variable__samples_22___deferred_renderer_2_inc_2_app_2_common_8h_1a14de5d6e262865a009b56707081d4991.rst
+   variable__constants_8h_1af054e28c57031d73b0d35d27c2bd3664.rst
 
 .. toctree::
    :maxdepth: 5
@@ -2886,96 +1936,6 @@ Variables
 .. toctree::
    :maxdepth: 5
 
-   variable__dibella_2_inc_2_core_2_constants_8h_1a60bdc9333d8f892a6ed586f32ee34c27.rst
-
-.. toctree::
-   :maxdepth: 5
-
-   variable__dibella_2_inc_2_core_2_constants_8h_1ae12760aff90c95f7f14107789d205dcb.rst
-
-.. toctree::
-   :maxdepth: 5
-
-   variable__dibella_2_inc_2_core_2_constants_8h_1a58a9cd433ce7645c4fbda83498f9b0db.rst
-
-.. toctree::
-   :maxdepth: 5
-
-   variable__dibella_2_inc_2_core_2_constants_8h_1abe60b74f67a3042425f0e8e3d84022b6.rst
-
-.. toctree::
-   :maxdepth: 5
-
-   variable__dibella_2_inc_2_core_2_constants_8h_1a89f7e16f594e9452c35b8e31e1c67d15.rst
-
-.. toctree::
-   :maxdepth: 5
-
-   variable__dibella_2_inc_2_core_2_constants_8h_1a515d0abfeeeffe3a648609426f248927.rst
-
-.. toctree::
-   :maxdepth: 5
-
-   variable__dibella_2_inc_2_core_2_constants_8h_1aef8588a3698597e1c45b23f3f3af9e01.rst
-
-.. toctree::
-   :maxdepth: 5
-
-   variable__dibella_2_inc_2_core_2_constants_8h_1adb553b79afbcc6bc5e5bb6639e391eeb.rst
-
-.. toctree::
-   :maxdepth: 5
-
-   variable__dibella_2_inc_2_core_2_constants_8h_1a590b6ccd0a1d4fc131beb0bda8e55880.rst
-
-.. toctree::
-   :maxdepth: 5
-
-   variable__dibella_2_inc_2_core_2_constants_8h_1adef4dd19159880848137d3aae37d2e9c.rst
-
-.. toctree::
-   :maxdepth: 5
-
-   variable__dibella_2_inc_2_core_2_constants_8h_1adf48efc54d0657ac92071e9ffe5c0afe.rst
-
-.. toctree::
-   :maxdepth: 5
-
-   variable__dibella_2_inc_2_core_2_constants_8h_1aaf08832dc9ff24b88b6ab5ba86587134.rst
-
-.. toctree::
-   :maxdepth: 5
-
-   variable__dibella_2_inc_2_core_2_constants_8h_1a25e4052b1e0e3583e87bf917d3c01690.rst
-
-.. toctree::
-   :maxdepth: 5
-
-   variable__app_renderer_8_cloth_8cpp_1abacfef300a31bbd96e041d2139f6a589.rst
-
-.. toctree::
-   :maxdepth: 5
-
-   variable_0___test_zone_2_src_2_app_renderer_8cpp_1abacfef300a31bbd96e041d2139f6a589.rst
-
-.. toctree::
-   :maxdepth: 5
-
-   variable__app_renderer_8_cloth_8cpp_1ab0e812335faf45458fb0aeaa849b3556.rst
-
-.. toctree::
-   :maxdepth: 5
-
-   variable_0___test_zone_2_src_2_app_renderer_8cpp_1ab0e812335faf45458fb0aeaa849b3556.rst
-
-.. toctree::
-   :maxdepth: 5
-
-   variable_3___cloth_sim_2_src_2_app_renderer_8cpp_1ab0e812335faf45458fb0aeaa849b3556.rst
-
-.. toctree::
-   :maxdepth: 5
-
    variable__g_l_t_f_loader_8cpp_1a4b53215a76bfca434f60d57424b667fb.rst
 
 .. toctree::
@@ -2986,92 +1946,42 @@ Variables
 .. toctree::
    :maxdepth: 5
 
-   variable__app_renderer_8_cloth_8cpp_1a9f070c24d1bcd5d92601a9e4bc5b2239.rst
-
-.. toctree::
-   :maxdepth: 5
-
-   variable_0___test_zone_2_src_2_app_renderer_8cpp_1a9f070c24d1bcd5d92601a9e4bc5b2239.rst
-
-.. toctree::
-   :maxdepth: 5
-
    variable__pool_primitives_8cpp_1aa8f87e87e5449f1c7a46b53abdc033e8.rst
 
 .. toctree::
    :maxdepth: 5
 
-   variable__app_renderer_8_cloth_8cpp_1aa8f87e87e5449f1c7a46b53abdc033e8.rst
+   variable__transform_8cpp_1a3cc772ca4f63a5a92716139ec6912489.rst
 
 .. toctree::
    :maxdepth: 5
 
-   variable_0___test_zone_2_src_2_app_renderer_8cpp_1aa8f87e87e5449f1c7a46b53abdc033e8.rst
+   variable__utils_8h_1a7212850bbb07021c15d65ae2e2e73442.rst
 
 .. toctree::
    :maxdepth: 5
 
-   variable__math_2_src_2_transform_8cpp_1a3cc772ca4f63a5a92716139ec6912489.rst
+   variable__utils_8h_1aeebd0a101cb6221c8e75d7676dd771b7.rst
 
 .. toctree::
    :maxdepth: 5
 
-   variable__renderer__test_8cpp_1aa3804051970068634d931ef717c36fda.rst
+   variable__utils_8h_1a88b70f1b00a94c24eb08990006635120.rst
 
 .. toctree::
    :maxdepth: 5
 
-   variable__renderer__test_8cpp_1a41e317c0599d51e6b84b2bc892a25eb9.rst
+   variable__utils_8h_1a1abe6716a8637b976551a46bd6b69d95.rst
 
 .. toctree::
    :maxdepth: 5
 
-   variable__renderer__test_8cpp_1a66bc4539f721f9f4eec6e6a39e5e4b12.rst
+   variable__utils_8h_1a404dd8dcc39e5bae579a4e2045d70e54.rst
 
 .. toctree::
    :maxdepth: 5
 
-   variable__renderer__test_8cpp_1af8b312acc091fbc63bb075317e2f9fab.rst
-
-.. toctree::
-   :maxdepth: 5
-
-   variable__power_bench_2_inc_2_power_bench_2_utils_8h_1a7212850bbb07021c15d65ae2e2e73442.rst
-
-.. toctree::
-   :maxdepth: 5
-
-   variable__power_bench_2_inc_2_power_bench_2_utils_8h_1aeebd0a101cb6221c8e75d7676dd771b7.rst
-
-.. toctree::
-   :maxdepth: 5
-
-   variable__power_bench_2_inc_2_power_bench_2_utils_8h_1a88b70f1b00a94c24eb08990006635120.rst
-
-.. toctree::
-   :maxdepth: 5
-
-   variable__power_bench_2_inc_2_power_bench_2_utils_8h_1a1abe6716a8637b976551a46bd6b69d95.rst
-
-.. toctree::
-   :maxdepth: 5
-
-   variable__power_bench_2_inc_2_power_bench_2_utils_8h_1a404dd8dcc39e5bae579a4e2045d70e54.rst
-
-.. toctree::
-   :maxdepth: 5
-
-   variable__power_bench_2_inc_2_power_bench_2_utils_8h_1ac8bd26f8c138b474601752b8878a0c4a.rst
-
-.. toctree::
-   :maxdepth: 5
-
-   variable__renderer__test_8cpp_1ab76d138fa589df9a65fc05eb3bd56073.rst
-
-.. toctree::
-   :maxdepth: 5
-
-   variable__renderer__test_8cpp_1a5e6ce0dd58078611570510dc4b8d81f3.rst
+   variable__utils_8h_1ac8bd26f8c138b474601752b8878a0c4a.rst
 
 Defines
 *******
@@ -3444,12 +2354,12 @@ Typedefs
 .. toctree::
    :maxdepth: 5
 
-   typedef__common_2_inc_2_types_8h_1af43024d172b60f7753f9fc9f4d40ab1f.rst
+   typedef__types_8h_1af43024d172b60f7753f9fc9f4d40ab1f.rst
 
 .. toctree::
    :maxdepth: 5
 
-   typedef__common_2_inc_2_types_8h_1a8dd630babbe2f9cfe21d3c17e8404fc5.rst
+   typedef__types_8h_1a8dd630babbe2f9cfe21d3c17e8404fc5.rst
 
 .. toctree::
    :maxdepth: 5
@@ -3584,7 +2494,7 @@ Typedefs
 .. toctree::
    :maxdepth: 5
 
-   typedef__common_2_inc_2_types_8h_1ae48008e9e60a1cdaf01d004f166810e0.rst
+   typedef__types_8h_1ae48008e9e60a1cdaf01d004f166810e0.rst
 
 .. toctree::
    :maxdepth: 5
@@ -3599,37 +2509,37 @@ Typedefs
 .. toctree::
    :maxdepth: 5
 
-   typedef__common_2_inc_2_types_8h_1acbe7fa9d46ea4221d13f883cea9a4dc7.rst
+   typedef__types_8h_1acbe7fa9d46ea4221d13f883cea9a4dc7.rst
 
 .. toctree::
    :maxdepth: 5
 
-   typedef__common_2_inc_2_types_8h_1ae9916fde622120218775b0092d33c85f.rst
+   typedef__types_8h_1ae9916fde622120218775b0092d33c85f.rst
 
 .. toctree::
    :maxdepth: 5
 
-   typedef__common_2_inc_2_types_8h_1a23e594108f6920302006bce2bfe6d056.rst
+   typedef__types_8h_1a23e594108f6920302006bce2bfe6d056.rst
 
 .. toctree::
    :maxdepth: 5
 
-   typedef__common_2_inc_2_types_8h_1a4df47cd738ccace4acabe2aefbe69840.rst
+   typedef__types_8h_1a4df47cd738ccace4acabe2aefbe69840.rst
 
 .. toctree::
    :maxdepth: 5
 
-   typedef__common_2_inc_2_types_8h_1ab348a6a803558b90b4a09eaef9921b98.rst
+   typedef__types_8h_1ab348a6a803558b90b4a09eaef9921b98.rst
 
 .. toctree::
    :maxdepth: 5
 
-   typedef__common_2_inc_2_types_8h_1acac3ad4420766984cb1f0e7a8e19347c.rst
+   typedef__types_8h_1acac3ad4420766984cb1f0e7a8e19347c.rst
 
 .. toctree::
    :maxdepth: 5
 
-   typedef__common_2_inc_2_types_8h_1a1b26b3bba3ef2c9e24f3d4ed0c2d6145.rst
+   typedef__types_8h_1a1b26b3bba3ef2c9e24f3d4ed0c2d6145.rst
 
 .. toctree::
    :maxdepth: 5
@@ -3694,7 +2604,7 @@ Typedefs
 .. toctree::
    :maxdepth: 5
 
-   typedef__azura_2_render_system_2_inc_2_generic_2_constants_8h_1a1f5b86dc4c34883e96bbda676dbac276.rst
+   typedef__constants_8h_1a1f5b86dc4c34883e96bbda676dbac276.rst
 
 .. toctree::
    :maxdepth: 5
@@ -3704,92 +2614,7 @@ Typedefs
 .. toctree::
    :maxdepth: 5
 
-   typedef__dibella_2_inc_2_core_2_types_8h_1a2ec54ae4fb5ef54a50847dbe795e6498.rst
-
-.. toctree::
-   :maxdepth: 5
-
-   typedef__dibella_2_inc_2_core_2_types_8h_1ae43a97751218d5c3b2cd841f393314a1.rst
-
-.. toctree::
-   :maxdepth: 5
-
-   typedef__dibella_2_inc_2_core_2_types_8h_1a9ac948232fc6979e946f26ed7abe327e.rst
-
-.. toctree::
-   :maxdepth: 5
-
-   typedef__dibella_2_inc_2_core_2_types_8h_1a4ce8629e67c8c1e03267beee6f513e5c.rst
-
-.. toctree::
-   :maxdepth: 5
-
-   typedef__dibella_2_inc_2_core_2_types_8h_1a4ac813cb777942a05e57917b23599d3f.rst
-
-.. toctree::
-   :maxdepth: 5
-
-   typedef__dibella_2_inc_2_core_2_types_8h_1a85bd91e40c2eda2d981a58c843779187.rst
-
-.. toctree::
-   :maxdepth: 5
-
-   typedef__dibella_2_inc_2_core_2_types_8h_1a67c6e92bba3850a0303980ce77385139.rst
-
-.. toctree::
-   :maxdepth: 5
-
-   typedef__dibella_2_inc_2_core_2_types_8h_1a143d581d105d0004a672021c0bb9220b.rst
-
-.. toctree::
-   :maxdepth: 5
-
-   typedef__dibella_2_inc_2_core_2_types_8h_1af8b39b4c3558d5b0618d02da318524c1.rst
-
-.. toctree::
-   :maxdepth: 5
-
-   typedef__dibella_2_inc_2_core_2_types_8h_1a6ba69dc8b184ac0e33f422ec6b4122d4.rst
-
-.. toctree::
-   :maxdepth: 5
-
-   typedef__dibella_2_inc_2_core_2_types_8h_1ab80b5d10635daca26fb8a311013b6e4a.rst
-
-.. toctree::
-   :maxdepth: 5
-
-   typedef__dibella_2_inc_2_core_2_types_8h_1a827520d12d60c717e4009e9eb2bd18aa.rst
-
-.. toctree::
-   :maxdepth: 5
-
-   typedef__dibella_2_inc_2_core_2_types_8h_1adf63746f3d524ac863e20689b84997e7.rst
-
-.. toctree::
-   :maxdepth: 5
-
-   typedef__dibella_2_inc_2_core_2_types_8h_1ac59797836ead03e02e3756e741e50316.rst
-
-.. toctree::
-   :maxdepth: 5
-
-   typedef__dibella_2_inc_2_core_2_types_8h_1aa314429733ca27e42fd9292464ba6225.rst
-
-.. toctree::
-   :maxdepth: 5
-
-   typedef__dibella_2_inc_2_core_2_types_8h_1a73b6a1228fc88818159bfa75c4902369.rst
-
-.. toctree::
-   :maxdepth: 5
-
-   typedef__dibella_2_inc_2_core_2_types_8h_1a10f7ff757ec133cd564c6af96bb5625c.rst
-
-.. toctree::
-   :maxdepth: 5
-
-   typedef__power_bench_2_inc_2_power_bench_2_utils_8h_1a6fb533d5d34911a48798bef60b073ecf.rst
+   typedef__utils_8h_1a6fb533d5d34911a48798bef60b073ecf.rst
 
 Directories
 ***********
@@ -3888,11 +2713,6 @@ Directories
 .. toctree::
    :maxdepth: 5
 
-   dir_Source_Azura_RenderSystem_Test.rst
-
-.. toctree::
-   :maxdepth: 5
-
    dir_Source_Camera.rst
 
 .. toctree::
@@ -3948,17 +2768,7 @@ Directories
 .. toctree::
    :maxdepth: 5
 
-   dir_Source_Common_Test.rst
-
-.. toctree::
-   :maxdepth: 5
-
    dir_Source_Containers.rst
-
-.. toctree::
-   :maxdepth: 5
-
-   dir_Source_Containers_Benchmark.rst
 
 .. toctree::
    :maxdepth: 5
@@ -3969,11 +2779,6 @@ Directories
    :maxdepth: 5
 
    dir_Source_Containers_Inc_Containers.rst
-
-.. toctree::
-   :maxdepth: 5
-
-   dir_Source_Containers_Test.rst
 
 .. toctree::
    :maxdepth: 5
@@ -3994,116 +2799,6 @@ Directories
    :maxdepth: 5
 
    dir_Source_Core_Src.rst
-
-.. toctree::
-   :maxdepth: 5
-
-   dir_Source_Dibella.rst
-
-.. toctree::
-   :maxdepth: 5
-
-   dir_Source_Dibella_Inc.rst
-
-.. toctree::
-   :maxdepth: 5
-
-   dir_Source_Dibella_Inc_Core.rst
-
-.. toctree::
-   :maxdepth: 5
-
-   dir_Source_Dibella_Inc_Integrators.rst
-
-.. toctree::
-   :maxdepth: 5
-
-   dir_Source_Dibella_Inc_Interfaces.rst
-
-.. toctree::
-   :maxdepth: 5
-
-   dir_Source_Dibella_Inc_Materials.rst
-
-.. toctree::
-   :maxdepth: 5
-
-   dir_Source_Dibella_Inc_Materials_Primitives.rst
-
-.. toctree::
-   :maxdepth: 5
-
-   dir_Source_Dibella_Inc_RayTracing.rst
-
-.. toctree::
-   :maxdepth: 5
-
-   dir_Source_Dibella_Inc_RayTracing_Primitives.rst
-
-.. toctree::
-   :maxdepth: 5
-
-   dir_Source_Dibella_Inc_Samplers.rst
-
-.. toctree::
-   :maxdepth: 5
-
-   dir_Source_Dibella_Inc_Scene.rst
-
-.. toctree::
-   :maxdepth: 5
-
-   dir_Source_Dibella_Inc_Scene_Primitives.rst
-
-.. toctree::
-   :maxdepth: 5
-
-   dir_Source_Dibella_Src.rst
-
-.. toctree::
-   :maxdepth: 5
-
-   dir_Source_Dibella_Src_Core.rst
-
-.. toctree::
-   :maxdepth: 5
-
-   dir_Source_Dibella_Src_Integrators.rst
-
-.. toctree::
-   :maxdepth: 5
-
-   dir_Source_Dibella_Src_Materials.rst
-
-.. toctree::
-   :maxdepth: 5
-
-   dir_Source_Dibella_Src_Materials_Primitives.rst
-
-.. toctree::
-   :maxdepth: 5
-
-   dir_Source_Dibella_Src_RayTracing.rst
-
-.. toctree::
-   :maxdepth: 5
-
-   dir_Source_Dibella_Src_RayTracing_Primitives.rst
-
-.. toctree::
-   :maxdepth: 5
-
-   dir_Source_Dibella_Src_Samplers.rst
-
-.. toctree::
-   :maxdepth: 5
-
-   dir_Source_Dibella_Src_Scene.rst
-
-.. toctree::
-   :maxdepth: 5
-
-   dir_Source_Dibella_Src_Scene_Primitives.rst
 
 .. toctree::
    :maxdepth: 5
@@ -4255,119 +2950,9 @@ Directories
 
    dir_Source_PowerBench_Src.rst
 
-.. toctree::
-   :maxdepth: 5
-
-   dir_Source_Samples.rst
-
-.. toctree::
-   :maxdepth: 5
-
-   dir_Source_Samples_0_TestZone.rst
-
-.. toctree::
-   :maxdepth: 5
-
-   dir_Source_Samples_0_TestZone_Inc.rst
-
-.. toctree::
-   :maxdepth: 5
-
-   dir_Source_Samples_0_TestZone_Inc_TestZone.rst
-
-.. toctree::
-   :maxdepth: 5
-
-   dir_Source_Samples_0_TestZone_Src.rst
-
-.. toctree::
-   :maxdepth: 5
-
-   dir_Source_Samples_1_ProceduralPlanet.rst
-
-.. toctree::
-   :maxdepth: 5
-
-   dir_Source_Samples_1_ProceduralPlanet_Inc.rst
-
-.. toctree::
-   :maxdepth: 5
-
-   dir_Source_Samples_1_ProceduralPlanet_Inc_ProceduralPlanet.rst
-
-.. toctree::
-   :maxdepth: 5
-
-   dir_Source_Samples_1_ProceduralPlanet_Src.rst
-
-.. toctree::
-   :maxdepth: 5
-
-   dir_Source_Samples_2_DeferredRenderer.rst
-
-.. toctree::
-   :maxdepth: 5
-
-   dir_Source_Samples_2_DeferredRenderer_Inc.rst
-
-.. toctree::
-   :maxdepth: 5
-
-   dir_Source_Samples_2_DeferredRenderer_Inc_App.rst
-
-.. toctree::
-   :maxdepth: 5
-
-   dir_Source_Samples_2_DeferredRenderer_Inc_Forward.rst
-
-.. toctree::
-   :maxdepth: 5
-
-   dir_Source_Samples_2_DeferredRenderer_Inc_ForwardPlus.rst
-
-.. toctree::
-   :maxdepth: 5
-
-   dir_Source_Samples_2_DeferredRenderer_Src.rst
-
-.. toctree::
-   :maxdepth: 5
-
-   dir_Source_Samples_3_ClothSim.rst
-
-.. toctree::
-   :maxdepth: 5
-
-   dir_Source_Samples_3_ClothSim_Inc.rst
-
-.. toctree::
-   :maxdepth: 5
-
-   dir_Source_Samples_3_ClothSim_Inc_ClothSim.rst
-
-.. toctree::
-   :maxdepth: 5
-
-   dir_Source_Samples_3_ClothSim_Src.rst
-
-.. toctree::
-   :maxdepth: 5
-
-   dir_Source_Sandbox.rst
-
 Files
 *****
 
-
-.. toctree::
-   :maxdepth: 5
-
-   file_Source_Dibella_Src_Core_Allocatable.cpp.rst
-
-.. toctree::
-   :maxdepth: 5
-
-   file_Source_Dibella_Inc_Core_AllocationDependent.h.rst
 
 .. toctree::
    :maxdepth: 5
@@ -4382,82 +2967,7 @@ Files
 .. toctree::
    :maxdepth: 5
 
-   file_Source_Samples_2_DeferredRenderer_Src_App.cpp.rst
-
-.. toctree::
-   :maxdepth: 5
-
-   file_Source_Samples_2_DeferredRenderer_Inc_App_App.h.rst
-
-.. toctree::
-   :maxdepth: 5
-
-   file_Source_Samples_0_TestZone_Src_AppRenderer.Basic.cpp.rst
-
-.. toctree::
-   :maxdepth: 5
-
-   file_Source_Samples_0_TestZone_Src_AppRenderer.Cloth.cpp.rst
-
-.. toctree::
-   :maxdepth: 5
-
-   file_Source_Samples_0_TestZone_Src_AppRenderer.Compute.cpp.rst
-
-.. toctree::
-   :maxdepth: 5
-
-   file_Source_Samples_0_TestZone_Src_AppRenderer.cpp.rst
-
-.. toctree::
-   :maxdepth: 5
-
-   file_Source_Samples_1_ProceduralPlanet_Src_AppRenderer.cpp.rst
-
-.. toctree::
-   :maxdepth: 5
-
-   file_Source_Samples_3_ClothSim_Src_AppRenderer.cpp.rst
-
-.. toctree::
-   :maxdepth: 5
-
-   file_Source_Samples_0_TestZone_Src_AppRenderer.Deferred.cpp.rst
-
-.. toctree::
-   :maxdepth: 5
-
-   file_Source_Samples_0_TestZone_Inc_TestZone_AppRenderer.h.rst
-
-.. toctree::
-   :maxdepth: 5
-
-   file_Source_Samples_1_ProceduralPlanet_Inc_ProceduralPlanet_AppRenderer.h.rst
-
-.. toctree::
-   :maxdepth: 5
-
-   file_Source_Samples_3_ClothSim_Inc_ClothSim_AppRenderer.h.rst
-
-.. toctree::
-   :maxdepth: 5
-
-   file_Source_Samples_0_TestZone_Src_AppRenderer.Instanced.cpp.rst
-
-.. toctree::
-   :maxdepth: 5
-
    file_Source_Containers_Inc_Containers_Array.h.rst
-
-.. toctree::
-   :maxdepth: 5
-
-   file_Source_Containers_Test_Array_test.cpp.rst
-
-.. toctree::
-   :maxdepth: 5
-
-   file_Source_Containers_Test_Array_test.h.rst
 
 .. toctree::
    :maxdepth: 5
@@ -4472,36 +2982,6 @@ Files
 .. toctree::
    :maxdepth: 5
 
-   file_Source_Containers_Benchmark_benchmark.cpp.rst
-
-.. toctree::
-   :maxdepth: 5
-
-   file_Source_Dibella_Src_Materials_Primitives_BSDF.cpp.rst
-
-.. toctree::
-   :maxdepth: 5
-
-   file_Source_Dibella_Inc_Materials_Primitives_BSDF.h.rst
-
-.. toctree::
-   :maxdepth: 5
-
-   file_Source_Dibella_Src_Materials_Primitives_BxDF.cpp.rst
-
-.. toctree::
-   :maxdepth: 5
-
-   file_Source_Dibella_Inc_Materials_Primitives_BxDF.h.rst
-
-.. toctree::
-   :maxdepth: 5
-
-   file_Source_Dibella_Inc_Materials_Primitives_BxDFType.h.rst
-
-.. toctree::
-   :maxdepth: 5
-
    file_Source_Camera_Src_Camera.cpp.rst
 
 .. toctree::
@@ -4512,27 +2992,12 @@ Files
 .. toctree::
    :maxdepth: 5
 
-   file_Source_Samples_0_TestZone_Inc_TestZone_ClothCommon.h.rst
-
-.. toctree::
-   :maxdepth: 5
-
    file_Source_Physics_Src_Geometry_ClothMesh.cpp.rst
 
 .. toctree::
    :maxdepth: 5
 
-   file_Source_Samples_0_TestZone_Src_ClothMesh.cpp.rst
-
-.. toctree::
-   :maxdepth: 5
-
    file_Source_Physics_Inc_Physics_Geometry_ClothMesh.h.rst
-
-.. toctree::
-   :maxdepth: 5
-
-   file_Source_Samples_0_TestZone_Inc_TestZone_ClothMesh.h.rst
 
 .. toctree::
    :maxdepth: 5
@@ -4567,11 +3032,6 @@ Files
 .. toctree::
    :maxdepth: 5
 
-   file_Source_Samples_2_DeferredRenderer_Inc_App_Common.h.rst
-
-.. toctree::
-   :maxdepth: 5
-
    file_Source_Azura_RenderSystem_Src_Generic_ComputePool.cpp.rst
 
 .. toctree::
@@ -4583,11 +3043,6 @@ Files
    :maxdepth: 5
 
    file_Source_Azura_RenderSystem_Inc_Generic_Constants.h.rst
-
-.. toctree::
-   :maxdepth: 5
-
-   file_Source_Dibella_Inc_Core_Constants.h.rst
 
 .. toctree::
    :maxdepth: 5
@@ -4877,36 +3332,6 @@ Files
 .. toctree::
    :maxdepth: 5
 
-   file_Source_Samples_2_DeferredRenderer_Src_ForwardComputeScene.cpp.rst
-
-.. toctree::
-   :maxdepth: 5
-
-   file_Source_Samples_2_DeferredRenderer_Inc_Forward_ForwardComputeScene.h.rst
-
-.. toctree::
-   :maxdepth: 5
-
-   file_Source_Samples_2_DeferredRenderer_Src_ForwardPlusComputeScene.cpp.rst
-
-.. toctree::
-   :maxdepth: 5
-
-   file_Source_Samples_2_DeferredRenderer_Inc_ForwardPlus_ForwardPlusComputeScene.h.rst
-
-.. toctree::
-   :maxdepth: 5
-
-   file_Source_Samples_2_DeferredRenderer_Src_ForwardScene.cpp.rst
-
-.. toctree::
-   :maxdepth: 5
-
-   file_Source_Samples_2_DeferredRenderer_Inc_Forward_ForwardScene.h.rst
-
-.. toctree::
-   :maxdepth: 5
-
    file_Source_Azura_RenderSystem_Src_Generic_GenericTypes.cpp.rst
 
 .. toctree::
@@ -4982,32 +3407,12 @@ Files
 .. toctree::
    :maxdepth: 5
 
-   file_Source_Common_Test_Hash_test.cpp.rst
-
-.. toctree::
-   :maxdepth: 5
-
-   file_Source_Common_Test_Hash_test.h.rst
-
-.. toctree::
-   :maxdepth: 5
-
    file_Source_Common_Src_Memory_HeapMemoryBuffer.cpp.rst
 
 .. toctree::
    :maxdepth: 5
 
    file_Source_Common_Inc_Memory_HeapMemoryBuffer.h.rst
-
-.. toctree::
-   :maxdepth: 5
-
-   file_Source_Common_Test_HeapMemoryBuffer_test.cpp.rst
-
-.. toctree::
-   :maxdepth: 5
-
-   file_Source_Common_Test_HeapMemoryBuffer_test.h.rst
 
 .. toctree::
    :maxdepth: 5
@@ -5027,52 +3432,7 @@ Files
 .. toctree::
    :maxdepth: 5
 
-   file_Source_Dibella_Inc_Interfaces_ImageHandler.h.rst
-
-.. toctree::
-   :maxdepth: 5
-
-   file_Source_Samples_0_TestZone_Src_ImportedClothMesh.cpp.rst
-
-.. toctree::
-   :maxdepth: 5
-
-   file_Source_Samples_0_TestZone_Inc_TestZone_ImportedClothMesh.h.rst
-
-.. toctree::
-   :maxdepth: 5
-
-   file_Source_Dibella_Src_Integrators_Integrator.cpp.rst
-
-.. toctree::
-   :maxdepth: 5
-
-   file_Source_Dibella_Inc_Integrators_Integrator.h.rst
-
-.. toctree::
-   :maxdepth: 5
-
-   file_Source_Dibella_Src_RayTracing_Primitives_Intersection.cpp.rst
-
-.. toctree::
-   :maxdepth: 5
-
-   file_Source_Dibella_Inc_RayTracing_Primitives_Intersection.h.rst
-
-.. toctree::
-   :maxdepth: 5
-
    file_Source_Physics_Inc_Physics_Geometry_IPhysicsGeometry.h.rst
-
-.. toctree::
-   :maxdepth: 5
-
-   file_Source_Samples_2_DeferredRenderer_Src_LightTexture.cpp.rst
-
-.. toctree::
-   :maxdepth: 5
-
-   file_Source_Samples_2_DeferredRenderer_Inc_App_LightTexture.h.rst
 
 .. toctree::
    :maxdepth: 5
@@ -5088,41 +3448,6 @@ Files
    :maxdepth: 5
 
    file_Source_Common_Inc_Utils_Macros.h.rst
-
-.. toctree::
-   :maxdepth: 5
-
-   file_Source_Samples_0_TestZone_Src_main.cpp.rst
-
-.. toctree::
-   :maxdepth: 5
-
-   file_Source_Samples_1_ProceduralPlanet_Src_main.cpp.rst
-
-.. toctree::
-   :maxdepth: 5
-
-   file_Source_Samples_2_DeferredRenderer_Src_main.cpp.rst
-
-.. toctree::
-   :maxdepth: 5
-
-   file_Source_Samples_3_ClothSim_Src_main.cpp.rst
-
-.. toctree::
-   :maxdepth: 5
-
-   file_Source_Sandbox_main.cpp.rst
-
-.. toctree::
-   :maxdepth: 5
-
-   file_Source_Dibella_Src_Materials_Primitives_Material.cpp.rst
-
-.. toctree::
-   :maxdepth: 5
-
-   file_Source_Dibella_Inc_Materials_Primitives_Material.h.rst
 
 .. toctree::
    :maxdepth: 5
@@ -5168,16 +3493,6 @@ Files
    :maxdepth: 5
 
    file_Source_Common_Inc_Memory_MonotonicAllocator.h.rst
-
-.. toctree::
-   :maxdepth: 5
-
-   file_Source_Common_Test_MonotonicAllocator_test.cpp.rst
-
-.. toctree::
-   :maxdepth: 5
-
-   file_Source_Common_Test_MonotonicAllocator_test.h.rst
 
 .. toctree::
    :maxdepth: 5
@@ -5232,32 +3547,12 @@ Files
 .. toctree::
    :maxdepth: 5
 
-   file_Source_Common_Test_RangeAllocator_test.cpp.rst
-
-.. toctree::
-   :maxdepth: 5
-
-   file_Source_Common_Test_RangeAllocator_test.h.rst
-
-.. toctree::
-   :maxdepth: 5
-
    file_Source_Core_Src_RawStorageFormat.cpp.rst
 
 .. toctree::
    :maxdepth: 5
 
    file_Source_Core_Inc_Core_RawStorageFormat.h.rst
-
-.. toctree::
-   :maxdepth: 5
-
-   file_Source_Dibella_Src_RayTracing_Primitives_Ray.cpp.rst
-
-.. toctree::
-   :maxdepth: 5
-
-   file_Source_Dibella_Inc_RayTracing_Primitives_Ray.h.rst
 
 .. toctree::
    :maxdepth: 5
@@ -5272,62 +3567,7 @@ Files
 .. toctree::
    :maxdepth: 5
 
-   file_Source_Azura_RenderSystem_Test_Renderer_test.cpp.rst
-
-.. toctree::
-   :maxdepth: 5
-
-   file_Source_Azura_RenderSystem_Test_Renderer_test.h.rst
-
-.. toctree::
-   :maxdepth: 5
-
    file_Source_Azura_RenderSystem_Inc_Generic_RenderSystem.h.rst
-
-.. toctree::
-   :maxdepth: 5
-
-   file_Source_Azura_RenderSystem_Test_RenderTestCases.cpp.rst
-
-.. toctree::
-   :maxdepth: 5
-
-   file_Source_Azura_RenderSystem_Test_RenderTestCases.h.rst
-
-.. toctree::
-   :maxdepth: 5
-
-   file_Source_Dibella_Src_Samplers_Sampler.cpp.rst
-
-.. toctree::
-   :maxdepth: 5
-
-   file_Source_Dibella_Inc_Samplers_Sampler.h.rst
-
-.. toctree::
-   :maxdepth: 5
-
-   file_Source_Dibella_Src_Scene_Scene.cpp.rst
-
-.. toctree::
-   :maxdepth: 5
-
-   file_Source_Dibella_Inc_Scene_Scene.h.rst
-
-.. toctree::
-   :maxdepth: 5
-
-   file_Source_Samples_2_DeferredRenderer_Inc_App_Scene.h.rst
-
-.. toctree::
-   :maxdepth: 5
-
-   file_Source_Dibella_Src_Scene_Primitives_SceneObject.cpp.rst
-
-.. toctree::
-   :maxdepth: 5
-
-   file_Source_Dibella_Inc_Scene_Primitives_SceneObject.h.rst
 
 .. toctree::
    :maxdepth: 5
@@ -5338,16 +3578,6 @@ Files
    :maxdepth: 5
 
    file_Source_Azura_RenderSystem_Inc_Generic_Shader.h.rst
-
-.. toctree::
-   :maxdepth: 5
-
-   file_Source_Dibella_Src_Scene_Primitives_Shape.cpp.rst
-
-.. toctree::
-   :maxdepth: 5
-
-   file_Source_Dibella_Inc_Scene_Primitives_Shape.h.rst
 
 .. toctree::
    :maxdepth: 5
@@ -5377,41 +3607,6 @@ Files
 .. toctree::
    :maxdepth: 5
 
-   file_Source_Common_Test_StackMemoryBuffer_test.cpp.rst
-
-.. toctree::
-   :maxdepth: 5
-
-   file_Source_Common_Test_StackMemoryBuffer_test.h.rst
-
-.. toctree::
-   :maxdepth: 5
-
-   file_Source_Containers_Benchmark_StdVector_benchmark.cpp.rst
-
-.. toctree::
-   :maxdepth: 5
-
-   file_Source_Containers_Benchmark_StdVector_benchmark.h.rst
-
-.. toctree::
-   :maxdepth: 5
-
-   file_Source_Azura_RenderSystem_Test_test.cpp.rst
-
-.. toctree::
-   :maxdepth: 5
-
-   file_Source_Common_Test_test.cpp.rst
-
-.. toctree::
-   :maxdepth: 5
-
-   file_Source_Containers_Test_test.cpp.rst
-
-.. toctree::
-   :maxdepth: 5
-
    file_Source_Azura_RenderSystem_Src_Generic_TextureManager.cpp.rst
 
 .. toctree::
@@ -5422,17 +3617,7 @@ Files
 .. toctree::
    :maxdepth: 5
 
-   file_Source_Dibella_Src_Scene_Primitives_Transform.cpp.rst
-
-.. toctree::
-   :maxdepth: 5
-
    file_Source_Math_Src_Transform.cpp.rst
-
-.. toctree::
-   :maxdepth: 5
-
-   file_Source_Dibella_Inc_Scene_Primitives_Transform.h.rst
 
 .. toctree::
    :maxdepth: 5
@@ -5457,42 +3642,12 @@ Files
 .. toctree::
    :maxdepth: 5
 
-   file_Source_Dibella_Inc_Core_Types.h.rst
-
-.. toctree::
-   :maxdepth: 5
-
-   file_Source_Dibella_Inc_Core_Utils.h.rst
-
-.. toctree::
-   :maxdepth: 5
-
    file_Source_PowerBench_Inc_PowerBench_Utils.h.rst
 
 .. toctree::
    :maxdepth: 5
 
    file_Source_Containers_Inc_Containers_Vector.h.rst
-
-.. toctree::
-   :maxdepth: 5
-
-   file_Source_Containers_Benchmark_Vector_benchmark.cpp.rst
-
-.. toctree::
-   :maxdepth: 5
-
-   file_Source_Containers_Benchmark_Vector_benchmark.h.rst
-
-.. toctree::
-   :maxdepth: 5
-
-   file_Source_Containers_Test_Vector_test.cpp.rst
-
-.. toctree::
-   :maxdepth: 5
-
-   file_Source_Containers_Test_Vector_test.h.rst
 
 .. toctree::
    :maxdepth: 5
@@ -5688,16 +3843,6 @@ Files
    :maxdepth: 5
 
    file_Source_Azura_RenderSystem_Src_Vulkan_Windows_VkWin32RenderSystem.cpp.rst
-
-.. toctree::
-   :maxdepth: 5
-
-   file_Source_Dibella_Src_Core_Warper.cpp.rst
-
-.. toctree::
-   :maxdepth: 5
-
-   file_Source_Dibella_Inc_Core_Warper.h.rst
 
 .. toctree::
    :maxdepth: 5

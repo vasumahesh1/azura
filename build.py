@@ -73,14 +73,17 @@ def buildExecutableMap(config, platform):
 
   ext = ''
   sep = '/'
+  shellFileExt = ''
   if (platform == 'Windows'):
     ext = '.exe'
+    shellFileExt = '.bat'
     sep = '\\'
 
   executableMap['ninja'] = config['ninja'] + sep + 'ninja' + ext
   executableMap['cmake'] = config['cmake'] + sep + 'cmake' + ext
   executableMap['ctest'] = config['cmake'] + sep + 'ctest' + ext
   executableMap['clang-tidy'] = config['llvm'] + sep + 'clang-tidy' + ext
+  executableMap['create-docs'] = 'CreateDocs' + shellFileExt
 
   if ('doxygen' in config):
     executableMap['doxygen'] = config['doxygen'] + sep + 'doxygen' + ext
@@ -238,13 +241,13 @@ def run():
 
   if (buildArgs.docs):
     az_log.empty()
-    az_log.info('> Building Docs:')
+    az_log.info('> Building Docs ...')
     print("Building Doxygen XML")
     docsCommand = [executableMap['doxygen'], 'Doxyfile']
     executeCommand(docsCommand)
-    print("Building Markdown Files: moxygen --anchors --groups --output \"Docs/Module - %s.md\" Docs/xml/")
-    # moxygen --anchors --groups --output "Docs/Module - %s.md" Docs/xml/
-    docsCommand = ['moxygen', '--anchors', '--groups', '--output "Docs/Module - %s.md" Docs/xml/']
+    
+    print("Building Sphinx HTML Docs ...")
+    docsCommand = [executableMap['create-docs']]
     executeCommand(docsCommand)
     az_log.flush();
     return

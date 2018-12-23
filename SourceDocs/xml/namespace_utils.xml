@@ -3,7 +3,7 @@
   <compounddef id="namespace_utils" kind="namespace" language="C++">
     <compoundname>Utils</compoundname>
       <sectiondef kind="var">
-      <memberdef kind="variable" id="_power_bench_2_inc_2_power_bench_2_utils_8h_1aeebd0a101cb6221c8e75d7676dd771b7" prot="public" static="no" mutable="no">
+      <memberdef kind="variable" id="_utils_8h_1aeebd0a101cb6221c8e75d7676dd771b7" prot="public" static="no" mutable="no">
         <type>constexpr uint32_t</type>
         <definition>constexpr uint32_t Utils::CACHE_LINE_BYTES</definition>
         <argsstring></argsstring>
@@ -17,7 +17,7 @@
         </inbodydescription>
         <location file="Source/PowerBench/Inc/PowerBench/Utils.h" line="9" column="1" bodyfile="Source/PowerBench/Inc/PowerBench/Utils.h" bodystart="9" bodyend="-1"/>
       </memberdef>
-      <memberdef kind="variable" id="_power_bench_2_inc_2_power_bench_2_utils_8h_1a88b70f1b00a94c24eb08990006635120" prot="public" static="no" mutable="no">
+      <memberdef kind="variable" id="_utils_8h_1a88b70f1b00a94c24eb08990006635120" prot="public" static="no" mutable="no">
         <type>constexpr uint32_t</type>
         <definition>constexpr uint32_t Utils::ELEMENTS_PER_LINE</definition>
         <argsstring></argsstring>
@@ -31,7 +31,7 @@
         </inbodydescription>
         <location file="Source/PowerBench/Inc/PowerBench/Utils.h" line="10" column="1" bodyfile="Source/PowerBench/Inc/PowerBench/Utils.h" bodystart="10" bodyend="-1"/>
       </memberdef>
-      <memberdef kind="variable" id="_power_bench_2_inc_2_power_bench_2_utils_8h_1a7212850bbb07021c15d65ae2e2e73442" prot="public" static="no" mutable="no">
+      <memberdef kind="variable" id="_utils_8h_1a7212850bbb07021c15d65ae2e2e73442" prot="public" static="no" mutable="no">
         <type>constexpr size_t</type>
         <definition>constexpr size_t Utils::BIGGER_THAN_CACHE</definition>
         <argsstring></argsstring>
@@ -45,7 +45,7 @@
         </inbodydescription>
         <location file="Source/PowerBench/Inc/PowerBench/Utils.h" line="12" column="1" bodyfile="Source/PowerBench/Inc/PowerBench/Utils.h" bodystart="12" bodyend="-1"/>
       </memberdef>
-      <memberdef kind="variable" id="_power_bench_2_inc_2_power_bench_2_utils_8h_1a1abe6716a8637b976551a46bd6b69d95" prot="public" static="no" mutable="no">
+      <memberdef kind="variable" id="_utils_8h_1a1abe6716a8637b976551a46bd6b69d95" prot="public" static="no" mutable="no">
         <type>auto</type>
         <definition>auto Utils::g_dummyVec</definition>
         <argsstring></argsstring>
@@ -59,7 +59,7 @@
         </inbodydescription>
         <location file="Source/PowerBench/Inc/PowerBench/Utils.h" line="13" column="1" bodyfile="Source/PowerBench/Inc/PowerBench/Utils.h" bodystart="13" bodyend="-1"/>
       </memberdef>
-      <memberdef kind="variable" id="_power_bench_2_inc_2_power_bench_2_utils_8h_1ac8bd26f8c138b474601752b8878a0c4a" prot="public" static="no" mutable="no">
+      <memberdef kind="variable" id="_utils_8h_1ac8bd26f8c138b474601752b8878a0c4a" prot="public" static="no" mutable="no">
         <type>const double</type>
         <definition>const double Utils::MATRIX_VAL_MIN</definition>
         <argsstring></argsstring>
@@ -73,7 +73,7 @@
         </inbodydescription>
         <location file="Source/PowerBench/Inc/PowerBench/Utils.h" line="15" column="1" bodyfile="Source/PowerBench/Inc/PowerBench/Utils.h" bodystart="15" bodyend="-1"/>
       </memberdef>
-      <memberdef kind="variable" id="_power_bench_2_inc_2_power_bench_2_utils_8h_1a404dd8dcc39e5bae579a4e2045d70e54" prot="public" static="no" mutable="no">
+      <memberdef kind="variable" id="_utils_8h_1a404dd8dcc39e5bae579a4e2045d70e54" prot="public" static="no" mutable="no">
         <type>const double</type>
         <definition>const double Utils::MATRIX_VAL_MAX</definition>
         <argsstring></argsstring>
@@ -89,7 +89,7 @@
       </memberdef>
       </sectiondef>
       <sectiondef kind="func">
-      <memberdef kind="function" id="_power_bench_2_inc_2_power_bench_2_utils_8h_1ae4f36f9e7bf88650741aa454f547bc32" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+      <memberdef kind="function" id="_utils_8h_1ae4f36f9e7bf88650741aa454f547bc32" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
         <type>void</type>
         <definition>void Utils::ClearCache</definition>
         <argsstring>()</argsstring>
@@ -102,7 +102,7 @@
         </inbodydescription>
         <location file="Source/PowerBench/Inc/PowerBench/Utils.h" line="18" column="1" bodyfile="Source/PowerBench/Inc/PowerBench/Utils.h" bodystart="18" bodyend="23"/>
       </memberdef>
-      <memberdef kind="function" id="_power_bench_2_inc_2_power_bench_2_utils_8h_1a4779b034e45269359257a8de81170283" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+      <memberdef kind="function" id="_utils_8h_1a4779b034e45269359257a8de81170283" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
         <type>void</type>
         <definition>void Utils::CreateRandomMatrix</definition>
         <argsstring>(int64_t size, double *result)</argsstring>
@@ -123,7 +123,7 @@
         </inbodydescription>
         <location file="Source/PowerBench/Inc/PowerBench/Utils.h" line="25" column="1" bodyfile="Source/PowerBench/Inc/PowerBench/Utils.h" bodystart="25" bodyend="37"/>
       </memberdef>
-      <memberdef kind="function" id="_power_bench_2_inc_2_power_bench_2_utils_8h_1aa548fde9b991df527263042726d516bb" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+      <memberdef kind="function" id="_utils_8h_1aa548fde9b991df527263042726d516bb" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
         <type>void</type>
         <definition>void Utils::CreateEmpty</definition>
         <argsstring>(int64_t size, double *result)</argsstring>

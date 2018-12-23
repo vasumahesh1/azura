@@ -4,31 +4,47 @@
     <compoundname>Allocator.cpp</compoundname>
     <includes refid="_allocator_8h" local="yes">Memory/Allocator.h</includes>
     <incdepgraph>
-      <node id="4296">
+      <node id="4246">
         <label>functional</label>
       </node>
-      <node id="4294">
+      <node id="4249">
+        <label>cstdint</label>
+      </node>
+      <node id="4244">
         <label>Source/Common/Src/Memory/Allocator.cpp</label>
         <link refid="_allocator_8cpp"/>
-        <childnode refid="4295" relation="include">
+        <childnode refid="4245" relation="include">
         </childnode>
       </node>
-      <node id="4295">
+      <node id="4250">
+        <label>string</label>
+      </node>
+      <node id="4245">
         <label>Memory/Allocator.h</label>
         <link refid="_allocator_8h_source"/>
-        <childnode refid="4296" relation="include">
+        <childnode refid="4246" relation="include">
         </childnode>
-        <childnode refid="4297" relation="include">
+        <childnode refid="4247" relation="include">
         </childnode>
-        <childnode refid="4298" relation="include">
+        <childnode refid="4251" relation="include">
         </childnode>
       </node>
-      <node id="4298">
+      <node id="4251">
         <label>Utils/Macros.h</label>
         <link refid="_macros_8h_source"/>
       </node>
-      <node id="4297">
+      <node id="4248">
+        <label>cstddef</label>
+      </node>
+      <node id="4247">
         <label>Types.h</label>
+        <link refid="_types_8h_source"/>
+        <childnode refid="4248" relation="include">
+        </childnode>
+        <childnode refid="4249" relation="include">
+        </childnode>
+        <childnode refid="4250" relation="include">
+        </childnode>
       </node>
     </incdepgraph>
     <innernamespace refid="namespace_azura">Azura</innernamespace>

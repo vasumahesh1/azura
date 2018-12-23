@@ -7,91 +7,178 @@
     <includedby refid="_d3_d12_drawable_pool_8h" local="yes">Source/Azura/RenderSystem/Inc/D3D12/D3D12DrawablePool.h</includedby>
     <includedby refid="_d3_d12_scoped_sampler_8cpp" local="yes">Source/Azura/RenderSystem/Src/D3D12/D3D12ScopedSampler.cpp</includedby>
     <incdepgraph>
-      <node id="559">
+      <node id="579">
         <label>functional</label>
       </node>
-      <node id="549">
+      <node id="588">
+        <label>Generic/Constants.h</label>
+        <link refid="_constants_8h_source"/>
+        <childnode refid="589" relation="include">
+        </childnode>
+        <childnode refid="583" relation="include">
+        </childnode>
+      </node>
+      <node id="569">
         <label>windows.h</label>
       </node>
-      <node id="560">
+      <node id="580">
         <label>iterator</label>
       </node>
+      <node id="585">
+        <label>cstdint</label>
+      </node>
+      <node id="570">
+        <label>d3d12.h</label>
+      </node>
+      <node id="577">
+        <label>cassert</label>
+      </node>
+      <node id="593">
+        <label>boost/preprocessor/tuple/elem.hpp</label>
+      </node>
+      <node id="573">
+        <label>wrl.h</label>
+      </node>
+      <node id="586">
+        <label>string</label>
+      </node>
       <node id="572">
-        <label>Utils/Hash.h</label>
-        <link refid="_hash_8h_source"/>
-        <childnode refid="563" relation="include">
+        <label>D3Dcompiler.h</label>
+      </node>
+      <node id="597">
+        <label>boost/container/small_vector.hpp</label>
+      </node>
+      <node id="596">
+        <label>Core/AssetLocation.h</label>
+        <link refid="_asset_location_8h_source"/>
+      </node>
+      <node id="594">
+        <label>boost/detail/bitmask.hpp</label>
+      </node>
+      <node id="582">
+        <label>Memory/Allocator.h</label>
+        <link refid="_allocator_8h_source"/>
+        <childnode refid="579" relation="include">
+        </childnode>
+        <childnode refid="583" relation="include">
+        </childnode>
+        <childnode refid="587" relation="include">
         </childnode>
       </node>
-      <node id="548">
-        <label>D3D12Core.h</label>
-        <link refid="_d3_d12_core_8h_source"/>
-        <childnode refid="549" relation="include">
+      <node id="576">
+        <label>Containers/Vector.h</label>
+        <link refid="_vector_8h_source"/>
+        <childnode refid="577" relation="include">
         </childnode>
-        <childnode refid="550" relation="include">
+        <childnode refid="578" relation="include">
         </childnode>
-        <childnode refid="551" relation="include">
+        <childnode refid="579" relation="include">
         </childnode>
-        <childnode refid="552" relation="include">
+        <childnode refid="580" relation="include">
         </childnode>
-        <childnode refid="553" relation="include">
+        <childnode refid="581" relation="include">
         </childnode>
-        <childnode refid="554" relation="include">
+        <childnode refid="582" relation="include">
         </childnode>
-        <childnode refid="555" relation="include">
+        <childnode refid="583" relation="include">
+        </childnode>
+        <childnode refid="587" relation="include">
+        </childnode>
+      </node>
+      <node id="587">
+        <label>Utils/Macros.h</label>
+        <link refid="_macros_8h_source"/>
+      </node>
+      <node id="589">
+        <label>tuple</label>
+      </node>
+      <node id="575">
+        <label>Generic/GenericTypes.h</label>
+        <link refid="_azura_2_render_system_2_inc_2_generic_2_generic_types_8h_source"/>
+        <childnode refid="576" relation="include">
+        </childnode>
+        <childnode refid="588" relation="include">
+        </childnode>
+        <childnode refid="583" relation="include">
+        </childnode>
+        <childnode refid="590" relation="include">
+        </childnode>
+        <childnode refid="595" relation="include">
+        </childnode>
+        <childnode refid="596" relation="include">
+        </childnode>
+        <childnode refid="597" relation="include">
+        </childnode>
+        <childnode refid="594" relation="include">
         </childnode>
       </node>
       <node id="567">
-        <label>Core/RawStorageFormat.h</label>
-        <link refid="_raw_storage_format_8h_source"/>
-        <childnode refid="563" relation="include">
-        </childnode>
-        <childnode refid="566" relation="include">
-        </childnode>
+        <label>Source/Azura/RenderSystem/Inc/D3D12/D3D12ScopedSampler.h</label>
+        <link refid="_d3_d12_scoped_sampler_8h"/>
         <childnode refid="568" relation="include">
         </childnode>
+      </node>
+      <node id="581">
+        <label>Array.h</label>
+        <link refid="_array_8h_source"/>
+        <childnode refid="577" relation="include">
+        </childnode>
+        <childnode refid="578" relation="include">
+        </childnode>
+        <childnode refid="582" relation="include">
+        </childnode>
+        <childnode refid="583" relation="include">
+        </childnode>
+      </node>
+      <node id="571">
+        <label>dxgi1_4.h</label>
+      </node>
+      <node id="590">
+        <label>Core/RawStorageFormat.h</label>
+        <link refid="_raw_storage_format_8h_source"/>
+        <childnode refid="583" relation="include">
+        </childnode>
+        <childnode refid="589" relation="include">
+        </childnode>
+        <childnode refid="591" relation="include">
+        </childnode>
+        <childnode refid="592" relation="include">
+        </childnode>
+        <childnode refid="593" relation="include">
+        </childnode>
+        <childnode refid="594" relation="include">
+        </childnode>
+      </node>
+      <node id="584">
+        <label>cstddef</label>
+      </node>
+      <node id="591">
+        <label>boost/preprocessor/repetition/repeat.hpp</label>
+      </node>
+      <node id="595">
+        <label>Utils/Hash.h</label>
+        <link refid="_hash_8h_source"/>
+        <childnode refid="583" relation="include">
+        </childnode>
+      </node>
+      <node id="583">
+        <label>Types.h</label>
+        <link refid="_types_8h_source"/>
+        <childnode refid="584" relation="include">
+        </childnode>
+        <childnode refid="585" relation="include">
+        </childnode>
+        <childnode refid="586" relation="include">
+        </childnode>
+      </node>
+      <node id="568">
+        <label>D3D12Core.h</label>
+        <link refid="_d3_d12_core_8h_source"/>
         <childnode refid="569" relation="include">
         </childnode>
         <childnode refid="570" relation="include">
         </childnode>
         <childnode refid="571" relation="include">
-        </childnode>
-      </node>
-      <node id="550">
-        <label>d3d12.h</label>
-      </node>
-      <node id="562">
-        <label>Memory/Allocator.h</label>
-        <link refid="_allocator_8h_source"/>
-        <childnode refid="559" relation="include">
-        </childnode>
-        <childnode refid="563" relation="include">
-        </childnode>
-        <childnode refid="564" relation="include">
-        </childnode>
-      </node>
-      <node id="573">
-        <label>Core/AssetLocation.h</label>
-        <link refid="_asset_location_8h_source"/>
-      </node>
-      <node id="557">
-        <label>cassert</label>
-      </node>
-      <node id="570">
-        <label>boost/preprocessor/tuple/elem.hpp</label>
-      </node>
-      <node id="553">
-        <label>wrl.h</label>
-      </node>
-      <node id="555">
-        <label>Generic/GenericTypes.h</label>
-        <link refid="_azura_2_render_system_2_inc_2_generic_2_generic_types_8h_source"/>
-        <childnode refid="556" relation="include">
-        </childnode>
-        <childnode refid="565" relation="include">
-        </childnode>
-        <childnode refid="563" relation="include">
-        </childnode>
-        <childnode refid="567" relation="include">
         </childnode>
         <childnode refid="572" relation="include">
         </childnode>
@@ -99,113 +186,42 @@
         </childnode>
         <childnode refid="574" relation="include">
         </childnode>
-        <childnode refid="571" relation="include">
+        <childnode refid="575" relation="include">
         </childnode>
       </node>
-      <node id="564">
-        <label>Utils/Macros.h</label>
-        <link refid="_macros_8h_source"/>
-      </node>
-      <node id="547">
-        <label>Source/Azura/RenderSystem/Inc/D3D12/D3D12ScopedSampler.h</label>
-        <link refid="_d3_d12_scoped_sampler_8h"/>
-        <childnode refid="548" relation="include">
-        </childnode>
-      </node>
-      <node id="552">
-        <label>D3Dcompiler.h</label>
-      </node>
-      <node id="574">
-        <label>boost/container/small_vector.hpp</label>
-      </node>
-      <node id="565">
-        <label>Generic/Constants.h</label>
-        <link refid="_azura_2_render_system_2_inc_2_generic_2_constants_8h_source"/>
-        <childnode refid="566" relation="include">
-        </childnode>
-        <childnode refid="563" relation="include">
-        </childnode>
-      </node>
-      <node id="571">
-        <label>boost/detail/bitmask.hpp</label>
-      </node>
-      <node id="566">
-        <label>tuple</label>
-      </node>
-      <node id="561">
-        <label>Array.h</label>
-        <link refid="_array_8h_source"/>
-        <childnode refid="557" relation="include">
-        </childnode>
-        <childnode refid="558" relation="include">
-        </childnode>
-        <childnode refid="562" relation="include">
-        </childnode>
-        <childnode refid="563" relation="include">
-        </childnode>
-      </node>
-      <node id="556">
-        <label>Containers/Vector.h</label>
-        <link refid="_vector_8h_source"/>
-        <childnode refid="557" relation="include">
-        </childnode>
-        <childnode refid="558" relation="include">
-        </childnode>
-        <childnode refid="559" relation="include">
-        </childnode>
-        <childnode refid="560" relation="include">
-        </childnode>
-        <childnode refid="561" relation="include">
-        </childnode>
-        <childnode refid="562" relation="include">
-        </childnode>
-        <childnode refid="563" relation="include">
-        </childnode>
-        <childnode refid="564" relation="include">
-        </childnode>
-      </node>
-      <node id="551">
-        <label>dxgi1_4.h</label>
-      </node>
-      <node id="568">
-        <label>boost/preprocessor/repetition/repeat.hpp</label>
-      </node>
-      <node id="563">
-        <label>Types.h</label>
-      </node>
-      <node id="558">
+      <node id="578">
         <label>cstring</label>
       </node>
-      <node id="554">
+      <node id="574">
         <label>shellapi.h</label>
       </node>
-      <node id="569">
+      <node id="592">
         <label>boost/preprocessor/seq/for_each.hpp</label>
       </node>
     </incdepgraph>
     <invincdepgraph>
-      <node id="576">
-        <label>Source/Azura/RenderSystem/Inc/D3D12/D3D12ComputePool.h</label>
-        <link refid="_d3_d12_compute_pool_8h_source"/>
-        <childnode refid="577" relation="include">
-        </childnode>
-      </node>
-      <node id="575">
-        <label>Source/Azura/RenderSystem/Inc/D3D12/D3D12ScopedSampler.h</label>
-        <link refid="_d3_d12_scoped_sampler_8h"/>
-        <childnode refid="576" relation="include">
-        </childnode>
-        <childnode refid="578" relation="include">
-        </childnode>
-      </node>
-      <node id="577">
+      <node id="600">
         <label>Source/Azura/RenderSystem/Inc/D3D12/D3D12Renderer.h</label>
         <link refid="_d3_d12_renderer_8h_source"/>
       </node>
-      <node id="578">
+      <node id="598">
+        <label>Source/Azura/RenderSystem/Inc/D3D12/D3D12ScopedSampler.h</label>
+        <link refid="_d3_d12_scoped_sampler_8h"/>
+        <childnode refid="599" relation="include">
+        </childnode>
+        <childnode refid="601" relation="include">
+        </childnode>
+      </node>
+      <node id="599">
+        <label>Source/Azura/RenderSystem/Inc/D3D12/D3D12ComputePool.h</label>
+        <link refid="_d3_d12_compute_pool_8h_source"/>
+        <childnode refid="600" relation="include">
+        </childnode>
+      </node>
+      <node id="601">
         <label>Source/Azura/RenderSystem/Inc/D3D12/D3D12DrawablePool.h</label>
         <link refid="_d3_d12_drawable_pool_8h_source"/>
-        <childnode refid="577" relation="include">
+        <childnode refid="600" relation="include">
         </childnode>
       </node>
     </invincdepgraph>

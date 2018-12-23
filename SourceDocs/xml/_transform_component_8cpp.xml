@@ -4,36 +4,52 @@
     <compoundname>TransformComponent.cpp</compoundname>
     <includes refid="_transform_component_8h" local="yes">Math/TransformComponent.h</includes>
     <incdepgraph>
-      <node id="5372">
-        <label>Math/Core.h</label>
-        <link refid="_core_8h_source"/>
-        <childnode refid="5373" relation="include">
-        </childnode>
-        <childnode refid="5374" relation="include">
+      <node id="4795">
+        <label>Source/Math/Src/TransformComponent.cpp</label>
+        <link refid="_transform_component_8cpp"/>
+        <childnode refid="4796" relation="include">
         </childnode>
       </node>
-      <node id="5371">
+      <node id="4801">
+        <label>cstdint</label>
+      </node>
+      <node id="4796">
         <label>Math/TransformComponent.h</label>
         <link refid="_transform_component_8h_source"/>
-        <childnode refid="5372" relation="include">
+        <childnode refid="4797" relation="include">
         </childnode>
-        <childnode refid="5375" relation="include">
+        <childnode refid="4803" relation="include">
         </childnode>
       </node>
-      <node id="5375">
+      <node id="4802">
+        <label>string</label>
+      </node>
+      <node id="4803">
         <label>Core/Events.h</label>
         <link refid="_events_8h_source"/>
       </node>
-      <node id="5374">
-        <label>Types.h</label>
+      <node id="4797">
+        <label>Math/Core.h</label>
+        <link refid="_core_8h_source"/>
+        <childnode refid="4798" relation="include">
+        </childnode>
+        <childnode refid="4799" relation="include">
+        </childnode>
       </node>
-      <node id="5373">
+      <node id="4800">
+        <label>cstddef</label>
+      </node>
+      <node id="4798">
         <label>mathfu/matrix.h</label>
       </node>
-      <node id="5370">
-        <label>Source/Math/Src/TransformComponent.cpp</label>
-        <link refid="_transform_component_8cpp"/>
-        <childnode refid="5371" relation="include">
+      <node id="4799">
+        <label>Types.h</label>
+        <link refid="_types_8h_source"/>
+        <childnode refid="4800" relation="include">
+        </childnode>
+        <childnode refid="4801" relation="include">
+        </childnode>
+        <childnode refid="4802" relation="include">
         </childnode>
       </node>
     </incdepgraph>

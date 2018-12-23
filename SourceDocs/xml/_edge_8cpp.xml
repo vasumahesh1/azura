@@ -4,36 +4,52 @@
     <compoundname>Edge.cpp</compoundname>
     <includes refid="_edge_8h" local="yes">Physics/Geometry/Edge.h</includes>
     <incdepgraph>
-      <node id="5643">
-        <label>Math/Core.h</label>
-        <link refid="_core_8h_source"/>
-        <childnode refid="5644" relation="include">
-        </childnode>
-        <childnode refid="5645" relation="include">
-        </childnode>
+      <node id="5063">
+        <label>cstdint</label>
       </node>
-      <node id="5646">
+      <node id="5065">
         <label>boost/container_hash/hash.hpp</label>
       </node>
-      <node id="5641">
-        <label>Source/Physics/Src/Geometry/Edge.cpp</label>
-        <link refid="_edge_8cpp"/>
-        <childnode refid="5642" relation="include">
-        </childnode>
+      <node id="5064">
+        <label>string</label>
       </node>
-      <node id="5642">
+      <node id="5058">
         <label>Physics/Geometry/Edge.h</label>
         <link refid="_edge_8h_source"/>
-        <childnode refid="5643" relation="include">
+        <childnode refid="5059" relation="include">
         </childnode>
-        <childnode refid="5646" relation="include">
+        <childnode refid="5065" relation="include">
         </childnode>
       </node>
-      <node id="5645">
-        <label>Types.h</label>
+      <node id="5057">
+        <label>Source/Physics/Src/Geometry/Edge.cpp</label>
+        <link refid="_edge_8cpp"/>
+        <childnode refid="5058" relation="include">
+        </childnode>
       </node>
-      <node id="5644">
+      <node id="5059">
+        <label>Math/Core.h</label>
+        <link refid="_core_8h_source"/>
+        <childnode refid="5060" relation="include">
+        </childnode>
+        <childnode refid="5061" relation="include">
+        </childnode>
+      </node>
+      <node id="5062">
+        <label>cstddef</label>
+      </node>
+      <node id="5060">
         <label>mathfu/matrix.h</label>
+      </node>
+      <node id="5061">
+        <label>Types.h</label>
+        <link refid="_types_8h_source"/>
+        <childnode refid="5062" relation="include">
+        </childnode>
+        <childnode refid="5063" relation="include">
+        </childnode>
+        <childnode refid="5064" relation="include">
+        </childnode>
       </node>
     </incdepgraph>
     <innernamespace refid="namespace_azura">Azura</innernamespace>

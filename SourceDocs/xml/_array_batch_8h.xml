@@ -4,57 +4,73 @@
     <compoundname>ArrayBatch.h</compoundname>
     <includes local="no">tuple</includes>
     <includes refid="_array_8h" local="yes">Array.h</includes>
-    <includes local="yes">Types.h</includes>
+    <includes refid="_types_8h" local="yes">Types.h</includes>
     <incdepgraph>
-      <node id="4550">
+      <node id="4381">
         <label>functional</label>
       </node>
-      <node id="4544">
-        <label>Source/Containers/Inc/Containers/ArrayBatch.h</label>
-        <link refid="_array_batch_8h"/>
-        <childnode refid="4545" relation="include">
-        </childnode>
-        <childnode refid="4546" relation="include">
-        </childnode>
-        <childnode refid="4551" relation="include">
-        </childnode>
+      <node id="4384">
+        <label>cstdint</label>
       </node>
-      <node id="4549">
-        <label>Memory/Allocator.h</label>
-        <link refid="_allocator_8h_source"/>
-        <childnode refid="4550" relation="include">
-        </childnode>
-        <childnode refid="4551" relation="include">
-        </childnode>
-        <childnode refid="4552" relation="include">
-        </childnode>
-      </node>
-      <node id="4547">
+      <node id="4378">
         <label>cassert</label>
       </node>
-      <node id="4552">
+      <node id="4385">
+        <label>string</label>
+      </node>
+      <node id="4375">
+        <label>Source/Containers/Inc/Containers/ArrayBatch.h</label>
+        <link refid="_array_batch_8h"/>
+        <childnode refid="4376" relation="include">
+        </childnode>
+        <childnode refid="4377" relation="include">
+        </childnode>
+        <childnode refid="4382" relation="include">
+        </childnode>
+      </node>
+      <node id="4380">
+        <label>Memory/Allocator.h</label>
+        <link refid="_allocator_8h_source"/>
+        <childnode refid="4381" relation="include">
+        </childnode>
+        <childnode refid="4382" relation="include">
+        </childnode>
+        <childnode refid="4386" relation="include">
+        </childnode>
+      </node>
+      <node id="4386">
         <label>Utils/Macros.h</label>
         <link refid="_macros_8h_source"/>
       </node>
-      <node id="4545">
+      <node id="4376">
         <label>tuple</label>
       </node>
-      <node id="4546">
+      <node id="4377">
         <label>Array.h</label>
         <link refid="_array_8h_source"/>
-        <childnode refid="4547" relation="include">
+        <childnode refid="4378" relation="include">
         </childnode>
-        <childnode refid="4548" relation="include">
+        <childnode refid="4379" relation="include">
         </childnode>
-        <childnode refid="4549" relation="include">
+        <childnode refid="4380" relation="include">
         </childnode>
-        <childnode refid="4551" relation="include">
+        <childnode refid="4382" relation="include">
         </childnode>
       </node>
-      <node id="4551">
+      <node id="4383">
+        <label>cstddef</label>
+      </node>
+      <node id="4382">
         <label>Types.h</label>
+        <link refid="_types_8h_source"/>
+        <childnode refid="4383" relation="include">
+        </childnode>
+        <childnode refid="4384" relation="include">
+        </childnode>
+        <childnode refid="4385" relation="include">
+        </childnode>
       </node>
-      <node id="4548">
+      <node id="4379">
         <label>cstring</label>
       </node>
     </incdepgraph>
@@ -125,8 +141,8 @@
 <codeline lineno="52"><highlight class="normal"></highlight></codeline>
 <codeline lineno="53"><highlight class="normal"></highlight><highlight class="keyword">template</highlight><highlight class="normal"><sp/>&lt;U32<sp/>NumElements,<sp/></highlight><highlight class="keyword">typename</highlight><highlight class="normal">...<sp/>BatchProperties&gt;</highlight></codeline>
 <codeline lineno="54"><highlight class="normal"></highlight><highlight class="keyword">template</highlight><highlight class="normal"><sp/>&lt;U32<sp/>Index&gt;</highlight></codeline>
-<codeline lineno="55"><highlight class="normal"><ref refid="class_azura_1_1_containers_1_1_array" kindref="compound">Array</ref>&lt;</highlight><highlight class="keyword">typename</highlight><highlight class="normal"><sp/><ref refid="struct_azura_1_1_containers_1_1_impl_1_1_get" kindref="compound">Impl::Get</ref>&lt;Index,<sp/>BatchProperties...&gt;::Type,<sp/>NumElements&gt;</highlight></codeline>
-<codeline lineno="56"><highlight class="normal"><sp/><sp/><sp/><sp/>&amp;<ref refid="class_azura_1_1_containers_1_1_array_batch" kindref="compound">ArrayBatch&lt;NumElements, BatchProperties...&gt;::Get</ref>()<sp/>{</highlight></codeline>
+<codeline lineno="55"><highlight class="normal">Array&lt;</highlight><highlight class="keyword">typename</highlight><highlight class="normal"><sp/>Impl::Get&lt;Index,<sp/>BatchProperties...&gt;::Type,<sp/>NumElements&gt;</highlight></codeline>
+<codeline lineno="56"><highlight class="normal"><sp/><sp/><sp/><sp/>&amp;ArrayBatch&lt;NumElements,<sp/>BatchProperties...&gt;::Get()<sp/>{</highlight></codeline>
 <codeline lineno="57"><highlight class="normal"><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>std::get&lt;Index&gt;(mData);</highlight></codeline>
 <codeline lineno="58"><highlight class="normal">}</highlight></codeline>
 <codeline lineno="59"><highlight class="normal"></highlight></codeline>

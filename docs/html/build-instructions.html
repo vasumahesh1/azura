@@ -88,6 +88,7 @@
 <li class="toctree-l3"><a class="reference internal" href="#windows-specific-project-files">Windows Specific Project Files:</a></li>
 </ul>
 </li>
+<li class="toctree-l2"><a class="reference internal" href="#building-documentation">Building Documentation</a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="cmake-wrappers.html">CMake Wrappers</a></li>
@@ -216,6 +217,12 @@
 <p class="last">Visual Studio projects have reduced static analysis and compiler checks. In short, if your visual studio project builds then the main build may or may not build. This is due to stricter checks in the main build allowing you to hack through code in VS. But obviously, correcting the hacks once the code works.</p>
 </div>
 </div>
+</div>
+<div class="section" id="building-documentation">
+<h2>Building Documentation<a class="headerlink" href="#building-documentation" title="Permalink to this headline">¶</a></h2>
+<p>Make sure you have the required modules for documentation generation.
+You can use the <code class="docutils literal notranslate"><span class="pre">--docs</span></code> override to generate docs. Based on the platform it will call the necessary scripts.</p>
+<p>From an overview, The docs are first built using Doxygen. They output an XML structure which is converted to reStructured Text using Sphinx docs and their doxygen bridge plugin called <code class="docutils literal notranslate"><span class="pre">breathe</span></code>.</p>
 </div>
 </div>
 

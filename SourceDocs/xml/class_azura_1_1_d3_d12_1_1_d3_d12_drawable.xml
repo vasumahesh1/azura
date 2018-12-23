@@ -171,54 +171,54 @@
     <detaileddescription>
     </detaileddescription>
     <inheritancegraph>
-      <node id="141">
+      <node id="102">
         <label>Azura::Drawable</label>
         <link refid="class_azura_1_1_drawable"/>
       </node>
-      <node id="140">
+      <node id="101">
         <label>Azura::D3D12::D3D12Drawable</label>
         <link refid="class_azura_1_1_d3_d12_1_1_d3_d12_drawable"/>
-        <childnode refid="141" relation="public-inheritance">
+        <childnode refid="102" relation="public-inheritance">
         </childnode>
       </node>
     </inheritancegraph>
     <collaborationgraph>
-      <node id="144">
+      <node id="105">
         <label>Azura::Containers::Vector&lt; Azura::UniformBufferInfo &gt;</label>
         <link refid="class_azura_1_1_containers_1_1_vector"/>
       </node>
-      <node id="147">
+      <node id="108">
         <label>Azura::DrawableCreateInfo</label>
         <link refid="struct_azura_1_1_drawable_create_info"/>
       </node>
-      <node id="146">
+      <node id="107">
         <label>Azura::Containers::Vector&lt; Azura::BufferInfo &gt;</label>
         <link refid="class_azura_1_1_containers_1_1_vector"/>
       </node>
-      <node id="143">
+      <node id="104">
         <label>Azura::Drawable</label>
         <link refid="class_azura_1_1_drawable"/>
-        <childnode refid="144" relation="usage">
+        <childnode refid="105" relation="usage">
           <edgelabel>m_uniformBufferInfos</edgelabel>
         </childnode>
-        <childnode refid="145" relation="usage">
+        <childnode refid="106" relation="usage">
           <edgelabel>m_indexBufferInfo</edgelabel>
         </childnode>
-        <childnode refid="146" relation="usage">
+        <childnode refid="107" relation="usage">
           <edgelabel>m_vertexBufferInfos</edgelabel>
           <edgelabel>m_instanceBufferInfos</edgelabel>
         </childnode>
-        <childnode refid="147" relation="usage">
+        <childnode refid="108" relation="usage">
           <edgelabel>m_createInfo</edgelabel>
         </childnode>
       </node>
-      <node id="142">
+      <node id="103">
         <label>Azura::D3D12::D3D12Drawable</label>
         <link refid="class_azura_1_1_d3_d12_1_1_d3_d12_drawable"/>
-        <childnode refid="143" relation="public-inheritance">
+        <childnode refid="104" relation="public-inheritance">
         </childnode>
       </node>
-      <node id="145">
+      <node id="106">
         <label>Azura::BufferInfo</label>
         <link refid="struct_azura_1_1_buffer_info"/>
       </node>

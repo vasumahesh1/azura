@@ -34,7 +34,7 @@ This will download all the code related dependencies.
 2. Run the Install Script
 ~~~~~~~~~~~~~~~~~~~~~~~~~
 
-Azura has an install script provided to you. You need to have 7 zip installed. It can be in your PATH but it is not necessary.
+There is a install script provided that auto downloads most non-compiler related dependencies. You need to have 7 zip installed. It can be in your PATH but it is not necessary.
 
 You can execute the script by calling:
 
@@ -72,6 +72,8 @@ The install script will download almost all of the dependencies. But, it doesn't
 
 There are some platform specific things that need to be done. Sadly, they are to be done manually.
 
+.. note:: All build related configs are located in the ``External`` folder
+
 [REQUIRED] Build Requirements:
 """"""""""""""""""""""""""""""
 
@@ -94,7 +96,8 @@ There are some platform specific things that need to be done. Sadly, they are to
        Windows Kits/10/Include/10.0.17134.0/
 
 
-    * Linking Path Method
+  * 
+    Linking Path Method
 
     Following Paths must be linked into a new config file and must be provided to the build system when building. (using the --configFile option)
 
@@ -119,4 +122,4 @@ Tools needed for documentation generation.
 
 .. code-block:: sh
 
-   pip3 install sphinx breathe exhale
+   pip3 install sphinx breathe exhale sphinx_rtd_theme

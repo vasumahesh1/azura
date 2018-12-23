@@ -4,143 +4,151 @@
     <compoundname>ClothSolvingView.h</compoundname>
     <includes refid="_solving_view_8h" local="no">Physics/PBD/Common/SolvingView.h</includes>
     <includes refid="_constraints_8h" local="no">Physics/PBD/Cloth/Constraints.h</includes>
-    <includedby refid="_physics_2_inc_2_physics_2_geometry_2_cloth_mesh_8h" local="no">Source/Physics/Inc/Physics/Geometry/ClothMesh.h</includedby>
+    <includedby refid="_cloth_mesh_8h" local="no">Source/Physics/Inc/Physics/Geometry/ClothMesh.h</includedby>
     <includedby refid="_cloth_plane_8h" local="no">Source/Physics/Inc/Physics/Geometry/ClothPlane.h</includedby>
     <includedby refid="_cloth_solving_view_8cpp" local="yes">Source/Physics/Src/PBD/Cloth/ClothSolvingView.cpp</includedby>
     <incdepgraph>
-      <node id="5501">
-        <label>Math/Core.h</label>
-        <link refid="_core_8h_source"/>
-        <childnode refid="5502" relation="include">
-        </childnode>
-        <childnode refid="5503" relation="include">
-        </childnode>
-      </node>
-      <node id="5507">
+      <node id="4931">
         <label>functional</label>
       </node>
-      <node id="5508">
+      <node id="4932">
         <label>iterator</label>
       </node>
-      <node id="5500">
-        <label>Physics/PBD/Common/SolvingView.h</label>
-        <link refid="_solving_view_8h_source"/>
-        <childnode refid="5501" relation="include">
-        </childnode>
-        <childnode refid="5504" relation="include">
-        </childnode>
-        <childnode refid="5512" relation="include">
-        </childnode>
+      <node id="4926">
+        <label>cstdint</label>
       </node>
-      <node id="5510">
-        <label>Memory/Allocator.h</label>
-        <link refid="_allocator_8h_source"/>
-        <childnode refid="5507" relation="include">
-        </childnode>
-        <childnode refid="5503" relation="include">
-        </childnode>
-        <childnode refid="5511" relation="include">
-        </childnode>
-      </node>
-      <node id="5505">
+      <node id="4929">
         <label>cassert</label>
       </node>
-      <node id="5511">
+      <node id="4927">
+        <label>string</label>
+      </node>
+      <node id="4920">
+        <label>Source/Physics/Inc/Physics/PBD/Cloth/ClothSolvingView.h</label>
+        <link refid="_cloth_solving_view_8h"/>
+        <childnode refid="4921" relation="include">
+        </childnode>
+        <childnode refid="4937" relation="include">
+        </childnode>
+      </node>
+      <node id="4934">
+        <label>Memory/Allocator.h</label>
+        <link refid="_allocator_8h_source"/>
+        <childnode refid="4931" relation="include">
+        </childnode>
+        <childnode refid="4924" relation="include">
+        </childnode>
+        <childnode refid="4935" relation="include">
+        </childnode>
+      </node>
+      <node id="4928">
+        <label>Containers/Vector.h</label>
+        <link refid="_vector_8h_source"/>
+        <childnode refid="4929" relation="include">
+        </childnode>
+        <childnode refid="4930" relation="include">
+        </childnode>
+        <childnode refid="4931" relation="include">
+        </childnode>
+        <childnode refid="4932" relation="include">
+        </childnode>
+        <childnode refid="4933" relation="include">
+        </childnode>
+        <childnode refid="4934" relation="include">
+        </childnode>
+        <childnode refid="4924" relation="include">
+        </childnode>
+        <childnode refid="4935" relation="include">
+        </childnode>
+      </node>
+      <node id="4935">
         <label>Utils/Macros.h</label>
         <link refid="_macros_8h_source"/>
       </node>
-      <node id="5509">
+      <node id="4933">
         <label>Array.h</label>
         <link refid="_array_8h_source"/>
-        <childnode refid="5505" relation="include">
+        <childnode refid="4929" relation="include">
         </childnode>
-        <childnode refid="5506" relation="include">
+        <childnode refid="4930" relation="include">
         </childnode>
-        <childnode refid="5510" relation="include">
+        <childnode refid="4934" relation="include">
         </childnode>
-        <childnode refid="5503" relation="include">
-        </childnode>
-      </node>
-      <node id="5504">
-        <label>Containers/Vector.h</label>
-        <link refid="_vector_8h_source"/>
-        <childnode refid="5505" relation="include">
-        </childnode>
-        <childnode refid="5506" relation="include">
-        </childnode>
-        <childnode refid="5507" relation="include">
-        </childnode>
-        <childnode refid="5508" relation="include">
-        </childnode>
-        <childnode refid="5509" relation="include">
-        </childnode>
-        <childnode refid="5510" relation="include">
-        </childnode>
-        <childnode refid="5503" relation="include">
-        </childnode>
-        <childnode refid="5511" relation="include">
+        <childnode refid="4924" relation="include">
         </childnode>
       </node>
-      <node id="5514">
+      <node id="4938">
         <label>array</label>
       </node>
-      <node id="5499">
-        <label>Source/Physics/Inc/Physics/PBD/Cloth/ClothSolvingView.h</label>
-        <link refid="_cloth_solving_view_8h"/>
-        <childnode refid="5500" relation="include">
+      <node id="4922">
+        <label>Math/Core.h</label>
+        <link refid="_core_8h_source"/>
+        <childnode refid="4923" relation="include">
         </childnode>
-        <childnode refid="5513" relation="include">
+        <childnode refid="4924" relation="include">
         </childnode>
       </node>
-      <node id="5503">
-        <label>Types.h</label>
-      </node>
-      <node id="5502">
-        <label>mathfu/matrix.h</label>
-      </node>
-      <node id="5512">
-        <label>type_traits</label>
-      </node>
-      <node id="5506">
-        <label>cstring</label>
-      </node>
-      <node id="5513">
+      <node id="4937">
         <label>Physics/PBD/Cloth/Constraints.h</label>
         <link refid="_constraints_8h_source"/>
-        <childnode refid="5503" relation="include">
+        <childnode refid="4924" relation="include">
         </childnode>
-        <childnode refid="5504" relation="include">
+        <childnode refid="4928" relation="include">
         </childnode>
-        <childnode refid="5501" relation="include">
+        <childnode refid="4922" relation="include">
         </childnode>
-        <childnode refid="5514" relation="include">
+        <childnode refid="4938" relation="include">
         </childnode>
+      </node>
+      <node id="4925">
+        <label>cstddef</label>
+      </node>
+      <node id="4923">
+        <label>mathfu/matrix.h</label>
+      </node>
+      <node id="4924">
+        <label>Types.h</label>
+        <link refid="_types_8h_source"/>
+        <childnode refid="4925" relation="include">
+        </childnode>
+        <childnode refid="4926" relation="include">
+        </childnode>
+        <childnode refid="4927" relation="include">
+        </childnode>
+      </node>
+      <node id="4921">
+        <label>Physics/PBD/Common/SolvingView.h</label>
+        <link refid="_solving_view_8h_source"/>
+        <childnode refid="4922" relation="include">
+        </childnode>
+        <childnode refid="4928" relation="include">
+        </childnode>
+        <childnode refid="4936" relation="include">
+        </childnode>
+      </node>
+      <node id="4936">
+        <label>type_traits</label>
+      </node>
+      <node id="4930">
+        <label>cstring</label>
       </node>
     </incdepgraph>
     <invincdepgraph>
-      <node id="5518">
-        <label>Source/Physics/Inc/Physics/Geometry/ClothPlane.h</label>
-        <link refid="_cloth_plane_8h_source"/>
-        <childnode refid="5517" relation="include">
-        </childnode>
-      </node>
-      <node id="5517">
-        <label>Source/Samples/3_ClothSim/Inc/ClothSim/AppRenderer.h</label>
-        <link refid="3___cloth_sim_2_inc_2_cloth_sim_2_app_renderer_8h_source"/>
-      </node>
-      <node id="5515">
+      <node id="4939">
         <label>Source/Physics/Inc/Physics/PBD/Cloth/ClothSolvingView.h</label>
         <link refid="_cloth_solving_view_8h"/>
-        <childnode refid="5516" relation="include">
+        <childnode refid="4940" relation="include">
         </childnode>
-        <childnode refid="5518" relation="include">
+        <childnode refid="4941" relation="include">
         </childnode>
       </node>
-      <node id="5516">
+      <node id="4941">
+        <label>Source/Physics/Inc/Physics/Geometry/ClothPlane.h</label>
+        <link refid="_cloth_plane_8h_source"/>
+      </node>
+      <node id="4940">
         <label>Source/Physics/Inc/Physics/Geometry/ClothMesh.h</label>
-        <link refid="_physics_2_inc_2_physics_2_geometry_2_cloth_mesh_8h_source"/>
-        <childnode refid="5517" relation="include">
-        </childnode>
+        <link refid="_cloth_mesh_8h_source"/>
       </node>
     </invincdepgraph>
     <innerclass refid="class_azura_1_1_physics_1_1_p_b_d_1_1_cloth_solving_view" prot="public">Azura::Physics::PBD::ClothSolvingView</innerclass>

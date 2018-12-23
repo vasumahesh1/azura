@@ -3,7 +3,7 @@
   <compounddef id="_vk_core_8cpp" kind="file" language="C++">
     <compoundname>VkCore.cpp</compoundname>
     <includes refid="_vk_core_8h" local="yes">Vulkan/VkCore.h</includes>
-    <includes refid="_azura_2_render_system_2_inc_2_generic_2_constants_8h" local="yes">Generic/Constants.h</includes>
+    <includes refid="_constants_8h" local="yes">Generic/Constants.h</includes>
     <includes local="no">array</includes>
     <includes local="no">map</includes>
     <includes local="no">set</includes>
@@ -16,391 +16,407 @@
     <includes refid="_vk_scoped_buffer_8h" local="yes">Vulkan/VkScopedBuffer.h</includes>
     <includes refid="_vk_scoped_swap_chain_8h" local="yes">Vulkan/VkScopedSwapChain.h</includes>
     <incdepgraph>
-      <node id="2968">
+      <node id="3150">
+        <label>Vulkan/VkScopedSwapChain.h</label>
+        <link refid="_vk_scoped_swap_chain_8h_source"/>
+        <childnode refid="3104" relation="include">
+        </childnode>
+        <childnode refid="3112" relation="include">
+        </childnode>
+        <childnode refid="3105" relation="include">
+        </childnode>
+        <childnode refid="3134" relation="include">
+        </childnode>
+      </node>
+      <node id="3108">
         <label>functional</label>
       </node>
-      <node id="3006">
-        <label>Vulkan/VkScopedBuffer.h</label>
-        <link refid="_vk_scoped_buffer_8h_source"/>
-        <childnode refid="2964" relation="include">
+      <node id="3118">
+        <label>Constants.h</label>
+        <link refid="_constants_8h_source"/>
+        <childnode refid="3119" relation="include">
         </childnode>
-        <childnode refid="2972" relation="include">
-        </childnode>
-        <childnode refid="2992" relation="include">
+        <childnode refid="3112" relation="include">
         </childnode>
       </node>
-      <node id="2969">
-        <label>iterator</label>
-      </node>
-      <node id="2984">
-        <label>Utils/Hash.h</label>
-        <link refid="_hash_8h_source"/>
-        <childnode refid="2972" relation="include">
+      <node id="3102">
+        <label>Source/Azura/RenderSystem/Src/Vulkan/VkCore.cpp</label>
+        <link refid="_vk_core_8cpp"/>
+        <childnode refid="3103" relation="include">
+        </childnode>
+        <childnode refid="3118" relation="include">
+        </childnode>
+        <childnode refid="3132" relation="include">
+        </childnode>
+        <childnode refid="3140" relation="include">
+        </childnode>
+        <childnode refid="3141" relation="include">
+        </childnode>
+        <childnode refid="3142" relation="include">
+        </childnode>
+        <childnode refid="3139" relation="include">
+        </childnode>
+        <childnode refid="3143" relation="include">
+        </childnode>
+        <childnode refid="3137" relation="include">
+        </childnode>
+        <childnode refid="3144" relation="include">
+        </childnode>
+        <childnode refid="3147" relation="include">
+        </childnode>
+        <childnode refid="3149" relation="include">
+        </childnode>
+        <childnode refid="3150" relation="include">
         </childnode>
       </node>
-      <node id="2999">
-        <label>Memory/MemoryFactory.h</label>
-        <link refid="_memory_factory_8h_source"/>
-        <childnode refid="3000" relation="include">
-        </childnode>
-        <childnode refid="2994" relation="include">
-        </childnode>
-        <childnode refid="2972" relation="include">
-        </childnode>
-      </node>
-      <node id="2974">
+      <node id="3117">
         <label>Generic/Renderer.h</label>
         <link refid="_renderer_8h_source"/>
-        <childnode refid="2975" relation="include">
+        <childnode refid="3118" relation="include">
         </childnode>
-        <childnode refid="2965" relation="include">
+        <childnode refid="3105" relation="include">
         </childnode>
-        <childnode refid="2977" relation="include">
+        <childnode refid="3120" relation="include">
         </childnode>
-        <childnode refid="2978" relation="include">
+        <childnode refid="3121" relation="include">
         </childnode>
-        <childnode refid="2979" relation="include">
+        <childnode refid="3122" relation="include">
         </childnode>
-        <childnode refid="2987" relation="include">
-        </childnode>
-      </node>
-      <node id="2979">
-        <label>Core/RawStorageFormat.h</label>
-        <link refid="_raw_storage_format_8h_source"/>
-        <childnode refid="2972" relation="include">
-        </childnode>
-        <childnode refid="2976" relation="include">
-        </childnode>
-        <childnode refid="2980" relation="include">
-        </childnode>
-        <childnode refid="2981" relation="include">
-        </childnode>
-        <childnode refid="2982" relation="include">
-        </childnode>
-        <childnode refid="2983" relation="include">
+        <childnode refid="3130" relation="include">
         </childnode>
       </node>
-      <node id="2991">
-        <label>VkScopedImage.h</label>
-        <link refid="_vk_scoped_image_8h_source"/>
-        <childnode refid="2964" relation="include">
-        </childnode>
-        <childnode refid="2972" relation="include">
-        </childnode>
-        <childnode refid="2992" relation="include">
-        </childnode>
-        <childnode refid="2993" relation="include">
+      <node id="3109">
+        <label>iterator</label>
+      </node>
+      <node id="3146">
+        <label>VkDebug.h</label>
+        <link refid="_vk_debug_8h_source"/>
+        <childnode refid="3104" relation="include">
         </childnode>
       </node>
-      <node id="2995">
-        <label>MemoryBuffer.h</label>
-        <link refid="_memory_buffer_8h_source"/>
-        <childnode refid="2972" relation="include">
+      <node id="3114">
+        <label>cstdint</label>
+      </node>
+      <node id="3149">
+        <label>Vulkan/VkScopedBuffer.h</label>
+        <link refid="_vk_scoped_buffer_8h_source"/>
+        <childnode refid="3104" relation="include">
+        </childnode>
+        <childnode refid="3112" relation="include">
+        </childnode>
+        <childnode refid="3135" relation="include">
         </childnode>
       </node>
-      <node id="2971">
-        <label>Memory/Allocator.h</label>
-        <link refid="_allocator_8h_source"/>
-        <childnode refid="2968" relation="include">
+      <node id="3106">
+        <label>cassert</label>
+      </node>
+      <node id="3143">
+        <label>Memory/StackMemoryBuffer.h</label>
+        <link refid="_stack_memory_buffer_8h_source"/>
+        <childnode refid="3106" relation="include">
         </childnode>
-        <childnode refid="2972" relation="include">
+        <childnode refid="3138" relation="include">
         </childnode>
-        <childnode refid="2973" relation="include">
+        <childnode refid="3112" relation="include">
+        </childnode>
+        <childnode refid="3116" relation="include">
         </childnode>
       </node>
-      <node id="2985">
+      <node id="3125">
+        <label>boost/preprocessor/tuple/elem.hpp</label>
+      </node>
+      <node id="3145">
+        <label>stdexcept</label>
+      </node>
+      <node id="3131">
+        <label>VkTypes.h</label>
+        <link refid="_vk_types_8h_source"/>
+        <childnode refid="3104" relation="include">
+        </childnode>
+        <childnode refid="3132" relation="include">
+        </childnode>
+        <childnode refid="3133" relation="include">
+        </childnode>
+        <childnode refid="3105" relation="include">
+        </childnode>
+        <childnode refid="3112" relation="include">
+        </childnode>
+        <childnode refid="3134" relation="include">
+        </childnode>
+      </node>
+      <node id="3115">
+        <label>string</label>
+      </node>
+      <node id="3140">
+        <label>map</label>
+      </node>
+      <node id="3103">
+        <label>Vulkan/VkCore.h</label>
+        <link refid="_vk_core_8h_source"/>
+        <childnode refid="3104" relation="include">
+        </childnode>
+        <childnode refid="3105" relation="include">
+        </childnode>
+        <childnode refid="3117" relation="include">
+        </childnode>
+        <childnode refid="3112" relation="include">
+        </childnode>
+        <childnode refid="3131" relation="include">
+        </childnode>
+        <childnode refid="3135" relation="include">
+        </childnode>
+      </node>
+      <node id="3120">
+        <label>Drawable.h</label>
+        <link refid="_drawable_8h_source"/>
+        <childnode refid="3105" relation="include">
+        </childnode>
+        <childnode refid="3121" relation="include">
+        </childnode>
+        <childnode refid="3112" relation="include">
+        </childnode>
+        <childnode refid="3122" relation="include">
+        </childnode>
+      </node>
+      <node id="3129">
+        <label>boost/container/small_vector.hpp</label>
+      </node>
+      <node id="3128">
         <label>Core/AssetLocation.h</label>
         <link refid="_asset_location_8h_source"/>
       </node>
-      <node id="2966">
-        <label>cassert</label>
+      <node id="3126">
+        <label>boost/detail/bitmask.hpp</label>
       </node>
-      <node id="2982">
-        <label>boost/preprocessor/tuple/elem.hpp</label>
-      </node>
-      <node id="3002">
-        <label>stdexcept</label>
-      </node>
-      <node id="2978">
-        <label>GenericTypes.h</label>
-        <link refid="_azura_2_render_system_2_inc_2_generic_2_generic_types_8h_source"/>
-        <childnode refid="2965" relation="include">
+      <node id="3136">
+        <label>Generic/TextureManager.h</label>
+        <link refid="_texture_manager_8h_source"/>
+        <childnode refid="3112" relation="include">
         </childnode>
-        <childnode refid="2975" relation="include">
+        <childnode refid="3137" relation="include">
         </childnode>
-        <childnode refid="2972" relation="include">
+        <childnode refid="3139" relation="include">
         </childnode>
-        <childnode refid="2979" relation="include">
+        <childnode refid="3105" relation="include">
         </childnode>
-        <childnode refid="2984" relation="include">
+        <childnode refid="3121" relation="include">
         </childnode>
-        <childnode refid="2985" relation="include">
-        </childnode>
-        <childnode refid="2986" relation="include">
-        </childnode>
-        <childnode refid="2983" relation="include">
+        <childnode refid="3135" relation="include">
         </childnode>
       </node>
-      <node id="2994">
-        <label>Memory/HeapMemoryBuffer.h</label>
-        <link refid="_heap_memory_buffer_8h_source"/>
-        <childnode refid="2995" relation="include">
+      <node id="3147">
+        <label>Vulkan/VkTypeMapping.h</label>
+        <link refid="_vk_type_mapping_8h_source"/>
+        <childnode refid="3104" relation="include">
         </childnode>
-        <childnode refid="2972" relation="include">
+        <childnode refid="3148" relation="include">
         </childnode>
-      </node>
-      <node id="2997">
-        <label>map</label>
-      </node>
-      <node id="3000">
-        <label>Memory/StackMemoryBuffer.h</label>
-        <link refid="_stack_memory_buffer_8h_source"/>
-        <childnode refid="2966" relation="include">
+        <childnode refid="3121" relation="include">
         </childnode>
-        <childnode refid="2995" relation="include">
-        </childnode>
-        <childnode refid="2972" relation="include">
-        </childnode>
-        <childnode refid="2973" relation="include">
+        <childnode refid="3122" relation="include">
         </childnode>
       </node>
-      <node id="2973">
+      <node id="3111">
+        <label>Memory/Allocator.h</label>
+        <link refid="_allocator_8h_source"/>
+        <childnode refid="3108" relation="include">
+        </childnode>
+        <childnode refid="3112" relation="include">
+        </childnode>
+        <childnode refid="3116" relation="include">
+        </childnode>
+      </node>
+      <node id="3105">
+        <label>Containers/Vector.h</label>
+        <link refid="_vector_8h_source"/>
+        <childnode refid="3106" relation="include">
+        </childnode>
+        <childnode refid="3107" relation="include">
+        </childnode>
+        <childnode refid="3108" relation="include">
+        </childnode>
+        <childnode refid="3109" relation="include">
+        </childnode>
+        <childnode refid="3110" relation="include">
+        </childnode>
+        <childnode refid="3111" relation="include">
+        </childnode>
+        <childnode refid="3112" relation="include">
+        </childnode>
+        <childnode refid="3116" relation="include">
+        </childnode>
+      </node>
+      <node id="3116">
         <label>Utils/Macros.h</label>
         <link refid="_macros_8h_source"/>
       </node>
-      <node id="2986">
-        <label>boost/container/small_vector.hpp</label>
-      </node>
-      <node id="2975">
-        <label>Constants.h</label>
-        <link refid="_azura_2_render_system_2_inc_2_generic_2_constants_8h_source"/>
-        <childnode refid="2976" relation="include">
-        </childnode>
-        <childnode refid="2972" relation="include">
-        </childnode>
-      </node>
-      <node id="2983">
-        <label>boost/detail/bitmask.hpp</label>
-      </node>
-      <node id="2976">
+      <node id="3119">
         <label>tuple</label>
       </node>
-      <node id="2970">
-        <label>Array.h</label>
-        <link refid="_array_8h_source"/>
-        <childnode refid="2966" relation="include">
-        </childnode>
-        <childnode refid="2967" relation="include">
-        </childnode>
-        <childnode refid="2971" relation="include">
-        </childnode>
-        <childnode refid="2972" relation="include">
-        </childnode>
-      </node>
-      <node id="3005">
-        <label>optional</label>
-      </node>
-      <node id="2996">
-        <label>Memory/MonotonicAllocator.h</label>
-        <link refid="_monotonic_allocator_8h_source"/>
-        <childnode refid="2971" relation="include">
-        </childnode>
-        <childnode refid="2972" relation="include">
-        </childnode>
-      </node>
-      <node id="2990">
-        <label>vector</label>
-      </node>
-      <node id="2965">
-        <label>Containers/Vector.h</label>
-        <link refid="_vector_8h_source"/>
-        <childnode refid="2966" relation="include">
-        </childnode>
-        <childnode refid="2967" relation="include">
-        </childnode>
-        <childnode refid="2968" relation="include">
-        </childnode>
-        <childnode refid="2969" relation="include">
-        </childnode>
-        <childnode refid="2970" relation="include">
-        </childnode>
-        <childnode refid="2971" relation="include">
-        </childnode>
-        <childnode refid="2972" relation="include">
-        </childnode>
-        <childnode refid="2973" relation="include">
-        </childnode>
-      </node>
-      <node id="2992">
-        <label>Log/Log.h</label>
-        <link refid="_log_8h_source"/>
-        <childnode refid="2972" relation="include">
-        </childnode>
-        <childnode refid="2990" relation="include">
-        </childnode>
-      </node>
-      <node id="2962">
-        <label>Source/Azura/RenderSystem/Src/Vulkan/VkCore.cpp</label>
-        <link refid="_vk_core_8cpp"/>
-        <childnode refid="2963" relation="include">
-        </childnode>
-        <childnode refid="2975" relation="include">
-        </childnode>
-        <childnode refid="2989" relation="include">
-        </childnode>
-        <childnode refid="2997" relation="include">
-        </childnode>
-        <childnode refid="2998" relation="include">
-        </childnode>
-        <childnode refid="2999" relation="include">
-        </childnode>
-        <childnode refid="2996" relation="include">
-        </childnode>
-        <childnode refid="3000" relation="include">
-        </childnode>
-        <childnode refid="2994" relation="include">
-        </childnode>
-        <childnode refid="3001" relation="include">
-        </childnode>
-        <childnode refid="3004" relation="include">
-        </childnode>
-        <childnode refid="3006" relation="include">
-        </childnode>
-        <childnode refid="3007" relation="include">
-        </childnode>
-      </node>
-      <node id="2989">
-        <label>array</label>
-      </node>
-      <node id="3007">
-        <label>Vulkan/VkScopedSwapChain.h</label>
-        <link refid="_vk_scoped_swap_chain_8h_source"/>
-        <childnode refid="2964" relation="include">
-        </childnode>
-        <childnode refid="2972" relation="include">
-        </childnode>
-        <childnode refid="2965" relation="include">
-        </childnode>
-        <childnode refid="2991" relation="include">
-        </childnode>
-      </node>
-      <node id="2977">
-        <label>Drawable.h</label>
-        <link refid="_drawable_8h_source"/>
-        <childnode refid="2965" relation="include">
-        </childnode>
-        <childnode refid="2978" relation="include">
-        </childnode>
-        <childnode refid="2972" relation="include">
-        </childnode>
-        <childnode refid="2979" relation="include">
-        </childnode>
-      </node>
-      <node id="2963">
-        <label>Vulkan/VkCore.h</label>
-        <link refid="_vk_core_8h_source"/>
-        <childnode refid="2964" relation="include">
-        </childnode>
-        <childnode refid="2965" relation="include">
-        </childnode>
-        <childnode refid="2974" relation="include">
-        </childnode>
-        <childnode refid="2972" relation="include">
-        </childnode>
-        <childnode refid="2988" relation="include">
-        </childnode>
-        <childnode refid="2992" relation="include">
-        </childnode>
-      </node>
-      <node id="3003">
-        <label>VkDebug.h</label>
-        <link refid="_vk_debug_8h_source"/>
-        <childnode refid="2964" relation="include">
-        </childnode>
-      </node>
-      <node id="2964">
-        <label>vulkan/vulkan_core.h</label>
-      </node>
-      <node id="2980">
-        <label>boost/preprocessor/repetition/repeat.hpp</label>
-      </node>
-      <node id="2972">
-        <label>Types.h</label>
-      </node>
-      <node id="2998">
-        <label>set</label>
-      </node>
-      <node id="3001">
-        <label>Vulkan/VkMacros.h</label>
-        <link refid="_vk_macros_8h_source"/>
-        <childnode refid="2964" relation="include">
-        </childnode>
-        <childnode refid="3002" relation="include">
-        </childnode>
-        <childnode refid="3003" relation="include">
-        </childnode>
-        <childnode refid="2992" relation="include">
-        </childnode>
-      </node>
-      <node id="2987">
+      <node id="3130">
         <label>ComputePool.h</label>
         <link refid="_compute_pool_8h_source"/>
-        <childnode refid="2965" relation="include">
+        <childnode refid="3105" relation="include">
         </childnode>
-        <childnode refid="2978" relation="include">
+        <childnode refid="3121" relation="include">
         </childnode>
-        <childnode refid="2972" relation="include">
-        </childnode>
-      </node>
-      <node id="3004">
-        <label>Vulkan/VkTypeMapping.h</label>
-        <link refid="_vk_type_mapping_8h_source"/>
-        <childnode refid="2964" relation="include">
-        </childnode>
-        <childnode refid="3005" relation="include">
-        </childnode>
-        <childnode refid="2978" relation="include">
-        </childnode>
-        <childnode refid="2979" relation="include">
+        <childnode refid="3112" relation="include">
         </childnode>
       </node>
-      <node id="2993">
-        <label>Generic/TextureManager.h</label>
-        <link refid="_texture_manager_8h_source"/>
-        <childnode refid="2972" relation="include">
+      <node id="3148">
+        <label>optional</label>
+      </node>
+      <node id="3121">
+        <label>GenericTypes.h</label>
+        <link refid="_azura_2_render_system_2_inc_2_generic_2_generic_types_8h_source"/>
+        <childnode refid="3105" relation="include">
         </childnode>
-        <childnode refid="2994" relation="include">
+        <childnode refid="3118" relation="include">
         </childnode>
-        <childnode refid="2996" relation="include">
+        <childnode refid="3112" relation="include">
         </childnode>
-        <childnode refid="2965" relation="include">
+        <childnode refid="3122" relation="include">
         </childnode>
-        <childnode refid="2978" relation="include">
+        <childnode refid="3127" relation="include">
         </childnode>
-        <childnode refid="2992" relation="include">
+        <childnode refid="3128" relation="include">
+        </childnode>
+        <childnode refid="3129" relation="include">
+        </childnode>
+        <childnode refid="3126" relation="include">
         </childnode>
       </node>
-      <node id="2967">
+      <node id="3133">
+        <label>vector</label>
+      </node>
+      <node id="3110">
+        <label>Array.h</label>
+        <link refid="_array_8h_source"/>
+        <childnode refid="3106" relation="include">
+        </childnode>
+        <childnode refid="3107" relation="include">
+        </childnode>
+        <childnode refid="3111" relation="include">
+        </childnode>
+        <childnode refid="3112" relation="include">
+        </childnode>
+      </node>
+      <node id="3132">
+        <label>array</label>
+      </node>
+      <node id="3135">
+        <label>Log/Log.h</label>
+        <link refid="_log_8h_source"/>
+        <childnode refid="3112" relation="include">
+        </childnode>
+        <childnode refid="3133" relation="include">
+        </childnode>
+      </node>
+      <node id="3142">
+        <label>Memory/MemoryFactory.h</label>
+        <link refid="_memory_factory_8h_source"/>
+        <childnode refid="3143" relation="include">
+        </childnode>
+        <childnode refid="3137" relation="include">
+        </childnode>
+        <childnode refid="3112" relation="include">
+        </childnode>
+      </node>
+      <node id="3144">
+        <label>Vulkan/VkMacros.h</label>
+        <link refid="_vk_macros_8h_source"/>
+        <childnode refid="3104" relation="include">
+        </childnode>
+        <childnode refid="3145" relation="include">
+        </childnode>
+        <childnode refid="3146" relation="include">
+        </childnode>
+        <childnode refid="3135" relation="include">
+        </childnode>
+      </node>
+      <node id="3137">
+        <label>Memory/HeapMemoryBuffer.h</label>
+        <link refid="_heap_memory_buffer_8h_source"/>
+        <childnode refid="3138" relation="include">
+        </childnode>
+        <childnode refid="3112" relation="include">
+        </childnode>
+      </node>
+      <node id="3122">
+        <label>Core/RawStorageFormat.h</label>
+        <link refid="_raw_storage_format_8h_source"/>
+        <childnode refid="3112" relation="include">
+        </childnode>
+        <childnode refid="3119" relation="include">
+        </childnode>
+        <childnode refid="3123" relation="include">
+        </childnode>
+        <childnode refid="3124" relation="include">
+        </childnode>
+        <childnode refid="3125" relation="include">
+        </childnode>
+        <childnode refid="3126" relation="include">
+        </childnode>
+      </node>
+      <node id="3104">
+        <label>vulkan/vulkan_core.h</label>
+      </node>
+      <node id="3113">
+        <label>cstddef</label>
+      </node>
+      <node id="3123">
+        <label>boost/preprocessor/repetition/repeat.hpp</label>
+      </node>
+      <node id="3139">
+        <label>Memory/MonotonicAllocator.h</label>
+        <link refid="_monotonic_allocator_8h_source"/>
+        <childnode refid="3111" relation="include">
+        </childnode>
+        <childnode refid="3112" relation="include">
+        </childnode>
+      </node>
+      <node id="3127">
+        <label>Utils/Hash.h</label>
+        <link refid="_hash_8h_source"/>
+        <childnode refid="3112" relation="include">
+        </childnode>
+      </node>
+      <node id="3112">
+        <label>Types.h</label>
+        <link refid="_types_8h_source"/>
+        <childnode refid="3113" relation="include">
+        </childnode>
+        <childnode refid="3114" relation="include">
+        </childnode>
+        <childnode refid="3115" relation="include">
+        </childnode>
+      </node>
+      <node id="3141">
+        <label>set</label>
+      </node>
+      <node id="3134">
+        <label>VkScopedImage.h</label>
+        <link refid="_vk_scoped_image_8h_source"/>
+        <childnode refid="3104" relation="include">
+        </childnode>
+        <childnode refid="3112" relation="include">
+        </childnode>
+        <childnode refid="3135" relation="include">
+        </childnode>
+        <childnode refid="3136" relation="include">
+        </childnode>
+      </node>
+      <node id="3138">
+        <label>MemoryBuffer.h</label>
+        <link refid="_memory_buffer_8h_source"/>
+        <childnode refid="3112" relation="include">
+        </childnode>
+      </node>
+      <node id="3107">
         <label>cstring</label>
       </node>
-      <node id="2981">
+      <node id="3124">
         <label>boost/preprocessor/seq/for_each.hpp</label>
-      </node>
-      <node id="2988">
-        <label>VkTypes.h</label>
-        <link refid="_vk_types_8h_source"/>
-        <childnode refid="2964" relation="include">
-        </childnode>
-        <childnode refid="2989" relation="include">
-        </childnode>
-        <childnode refid="2990" relation="include">
-        </childnode>
-        <childnode refid="2965" relation="include">
-        </childnode>
-        <childnode refid="2972" relation="include">
-        </childnode>
-        <childnode refid="2991" relation="include">
-        </childnode>
       </node>
     </incdepgraph>
     <innernamespace refid="namespace_azura">Azura</innernamespace>

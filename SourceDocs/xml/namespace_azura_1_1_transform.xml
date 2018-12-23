@@ -3,7 +3,7 @@
   <compounddef id="namespace_azura_1_1_transform" kind="namespace" language="C++">
     <compoundname>Azura::Transform</compoundname>
       <sectiondef kind="func">
-      <memberdef kind="function" id="_math_2_inc_2_math_2_transform_8h_1abd4b9bad546050c957dae51f02f181a3" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+      <memberdef kind="function" id="_transform_8h_1abd4b9bad546050c957dae51f02f181a3" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>Matrix4f</type>
         <definition>Matrix4f Azura::Transform::LookAt</definition>
         <argsstring>(const Vector3f &amp;at, const Vector3f &amp;eye, const Vector3f &amp;worldUp)</argsstring>
@@ -28,7 +28,7 @@
         </inbodydescription>
         <location file="Source/Math/Inc/Math/Transform.h" line="6" column="1" bodyfile="Source/Math/Src/Transform.cpp" bodystart="10" bodyend="12"/>
       </memberdef>
-      <memberdef kind="function" id="_math_2_inc_2_math_2_transform_8h_1a29763786770b321c2278e7856904625e" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+      <memberdef kind="function" id="_transform_8h_1a29763786770b321c2278e7856904625e" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>Matrix4f</type>
         <definition>Matrix4f Azura::Transform::Perspective</definition>
         <argsstring>(float fovY, float aspect, float zNear, float zFar)</argsstring>
@@ -57,7 +57,7 @@
         </inbodydescription>
         <location file="Source/Math/Inc/Math/Transform.h" line="7" column="1" bodyfile="Source/Math/Src/Transform.cpp" bodystart="14" bodyend="16"/>
       </memberdef>
-      <memberdef kind="function" id="_math_2_inc_2_math_2_transform_8h_1a6fce39055eeea5934db9c2b4ec705204" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+      <memberdef kind="function" id="_transform_8h_1a6fce39055eeea5934db9c2b4ec705204" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>Vector3f</type>
         <definition>Vector3f Azura::Transform::Downgrade</definition>
         <argsstring>(const Vector4f &amp;vec)</argsstring>

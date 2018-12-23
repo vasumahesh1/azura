@@ -2,500 +2,417 @@
 <doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.8.14">
   <compounddef id="_hash_8h" kind="file" language="C++">
     <compoundname>Hash.h</compoundname>
-    <includes local="yes">Types.h</includes>
+    <includes refid="_types_8h" local="yes">Types.h</includes>
     <includedby refid="_azura_2_render_system_2_inc_2_generic_2_generic_types_8h" local="yes">Source/Azura/RenderSystem/Inc/Generic/GenericTypes.h</includedby>
     <includedby refid="_hash_8cpp" local="yes">Source/Common/Src/Utils/Hash.cpp</includedby>
-    <includedby refid="_hash__test_8h" local="yes">Source/Common/Test/Hash_test.h</includedby>
     <incdepgraph>
-      <node id="4161">
+      <node id="4140">
+        <label>cstdint</label>
+      </node>
+      <node id="4141">
+        <label>string</label>
+      </node>
+      <node id="4139">
+        <label>cstddef</label>
+      </node>
+      <node id="4137">
         <label>Source/Common/Inc/Utils/Hash.h</label>
         <link refid="_hash_8h"/>
-        <childnode refid="4162" relation="include">
+        <childnode refid="4138" relation="include">
         </childnode>
       </node>
-      <node id="4162">
+      <node id="4138">
         <label>Types.h</label>
+        <link refid="_types_8h_source"/>
+        <childnode refid="4139" relation="include">
+        </childnode>
+        <childnode refid="4140" relation="include">
+        </childnode>
+        <childnode refid="4141" relation="include">
+        </childnode>
       </node>
     </incdepgraph>
     <invincdepgraph>
-      <node id="4204">
-        <label>Source/Azura/RenderSystem/Inc/Generic/GPUBufferWriter.h</label>
-        <link refid="_g_p_u_buffer_writer_8h_source"/>
-      </node>
-      <node id="4211">
-        <label>Source/Azura/RenderSystem/Inc/Vulkan/VkScopedPipeline.h</label>
-        <link refid="_vk_scoped_pipeline_8h_source"/>
-        <childnode refid="4202" relation="include">
-        </childnode>
-        <childnode refid="4195" relation="include">
-        </childnode>
-      </node>
-      <node id="4206">
-        <label>Source/Azura/RenderSystem/Inc/D3D12/D3D12TextureManager.h</label>
-        <link refid="_d3_d12_texture_manager_8h_source"/>
-        <childnode refid="4207" relation="include">
-        </childnode>
-      </node>
-      <node id="4216">
-        <label>Source/Common/Test/Hash_test.h</label>
-        <link refid="_hash__test_8h_source"/>
-      </node>
-      <node id="4189">
-        <label>Source/Samples/2_DeferredRenderer/Inc/Forward/ForwardComputeScene.h</label>
-        <link refid="_forward_compute_scene_8h_source"/>
-        <childnode refid="4187" relation="include">
-        </childnode>
-      </node>
-      <node id="4175">
-        <label>Source/Azura/RenderSystem/Inc/D3D12/D3D12ScopedImage.h</label>
-        <link refid="_d3_d12_scoped_image_8h_source"/>
-        <childnode refid="4166" relation="include">
-        </childnode>
-        <childnode refid="4169" relation="include">
-        </childnode>
-        <childnode refid="4171" relation="include">
-        </childnode>
-        <childnode refid="4174" relation="include">
-        </childnode>
-      </node>
-      <node id="4163">
-        <label>Source/Common/Inc/Utils/Hash.h</label>
-        <link refid="_hash_8h"/>
-        <childnode refid="4164" relation="include">
-        </childnode>
-        <childnode refid="4216" relation="include">
-        </childnode>
-      </node>
       <node id="4181">
-        <label>Source/Azura/RenderSystem/Inc/Generic/Renderer.h</label>
-        <link refid="_renderer_8h_source"/>
-        <childnode refid="4167" relation="include">
-        </childnode>
-        <childnode refid="4182" relation="include">
-        </childnode>
-        <childnode refid="4193" relation="include">
-        </childnode>
-        <childnode refid="4194" relation="include">
-        </childnode>
-        <childnode refid="4195" relation="include">
-        </childnode>
-        <childnode refid="4196" relation="include">
-        </childnode>
-        <childnode refid="4197" relation="include">
-        </childnode>
-        <childnode refid="4185" relation="include">
-        </childnode>
-        <childnode refid="4186" relation="include">
-        </childnode>
-        <childnode refid="4187" relation="include">
-        </childnode>
-        <childnode refid="4192" relation="include">
-        </childnode>
-      </node>
-      <node id="4165">
-        <label>Source/Azura/RenderSystem/Inc/D3D12/D3D12Core.h</label>
-        <link refid="_d3_d12_core_8h_source"/>
-        <childnode refid="4166" relation="include">
-        </childnode>
-        <childnode refid="4168" relation="include">
-        </childnode>
-        <childnode refid="4169" relation="include">
-        </childnode>
-        <childnode refid="4167" relation="include">
-        </childnode>
-        <childnode refid="4170" relation="include">
-        </childnode>
-        <childnode refid="4173" relation="include">
-        </childnode>
-        <childnode refid="4171" relation="include">
-        </childnode>
-        <childnode refid="4175" relation="include">
-        </childnode>
-        <childnode refid="4174" relation="include">
-        </childnode>
-        <childnode refid="4176" relation="include">
-        </childnode>
-        <childnode refid="4177" relation="include">
-        </childnode>
-        <childnode refid="4178" relation="include">
-        </childnode>
-        <childnode refid="4179" relation="include">
-        </childnode>
-      </node>
-      <node id="4166">
-        <label>Source/Azura/RenderSystem/Inc/D3D12/D3D12ComputePool.h</label>
-        <link refid="_d3_d12_compute_pool_8h_source"/>
-        <childnode refid="4167" relation="include">
-        </childnode>
-      </node>
-      <node id="4187">
-        <label>Source/Samples/2_DeferredRenderer/Inc/App/App.h</label>
-        <link refid="_app_8h_source"/>
-      </node>
-      <node id="4170">
-        <label>Source/Azura/RenderSystem/Inc/D3D12/D3D12ScopedBuffer.h</label>
-        <link refid="_d3_d12_scoped_buffer_8h_source"/>
-        <childnode refid="4166" relation="include">
-        </childnode>
-        <childnode refid="4169" relation="include">
-        </childnode>
-        <childnode refid="4171" relation="include">
-        </childnode>
-      </node>
-      <node id="4208">
-        <label>Source/Azura/RenderSystem/Inc/Vulkan/VkScopedImage.h</label>
-        <link refid="_vk_scoped_image_8h_source"/>
-        <childnode refid="4209" relation="include">
-        </childnode>
-        <childnode refid="4202" relation="include">
-        </childnode>
-        <childnode refid="4210" relation="include">
-        </childnode>
-        <childnode refid="4212" relation="include">
-        </childnode>
-      </node>
-      <node id="4164">
-        <label>Source/Azura/RenderSystem/Inc/Generic/GenericTypes.h</label>
-        <link refid="_azura_2_render_system_2_inc_2_generic_2_generic_types_8h_source"/>
-        <childnode refid="4165" relation="include">
-        </childnode>
-        <childnode refid="4172" relation="include">
-        </childnode>
-        <childnode refid="4179" relation="include">
-        </childnode>
+        <label>Source/Azura/RenderSystem/Inc/Vulkan/VkScopedSwapChain.h</label>
+        <link refid="_vk_scoped_swap_chain_8h_source"/>
         <childnode refid="4180" relation="include">
         </childnode>
-        <childnode refid="4199" relation="include">
-        </childnode>
-        <childnode refid="4200" relation="include">
-        </childnode>
-        <childnode refid="4182" relation="include">
-        </childnode>
-        <childnode refid="4181" relation="include">
-        </childnode>
-        <childnode refid="4203" relation="include">
-        </childnode>
-        <childnode refid="4205" relation="include">
-        </childnode>
-        <childnode refid="4213" relation="include">
-        </childnode>
-        <childnode refid="4211" relation="include">
-        </childnode>
-        <childnode refid="4210" relation="include">
-        </childnode>
-        <childnode refid="4215" relation="include">
-        </childnode>
-      </node>
-      <node id="4202">
-        <label>Source/Azura/RenderSystem/Inc/Vulkan/VkDrawablePool.h</label>
-        <link refid="_vk_drawable_pool_8h_source"/>
-        <childnode refid="4195" relation="include">
-        </childnode>
-      </node>
-      <node id="4191">
-        <label>Source/Samples/2_DeferredRenderer/Inc/ForwardPlus/ForwardPlusComputeScene.h</label>
-        <link refid="_forward_plus_compute_scene_8h_source"/>
-        <childnode refid="4187" relation="include">
-        </childnode>
-      </node>
-      <node id="4184">
-        <label>Source/Azura/RenderSystem/Inc/Generic/Windows/Win32GLFWWindow.h</label>
-        <link refid="_win32_g_l_f_w_window_8h_source"/>
-      </node>
-      <node id="4172">
-        <label>Source/Azura/RenderSystem/Inc/D3D12/D3D12ScopedPipeline.h</label>
-        <link refid="_d3_d12_scoped_pipeline_8h_source"/>
         <childnode refid="4166" relation="include">
         </childnode>
-        <childnode refid="4169" relation="include">
-        </childnode>
       </node>
-      <node id="4177">
-        <label>Source/Azura/RenderSystem/Inc/D3D12/D3D12ScopedShader.h</label>
-        <link refid="_d3_d12_scoped_shader_8h_source"/>
+      <node id="4160">
+        <label>Source/Azura/RenderSystem/Inc/Generic/Renderer.h</label>
+        <link refid="_renderer_8h_source"/>
+        <childnode refid="4146" relation="include">
+        </childnode>
+        <childnode refid="4161" relation="include">
+        </childnode>
+        <childnode refid="4164" relation="include">
+        </childnode>
+        <childnode refid="4165" relation="include">
+        </childnode>
+        <childnode refid="4166" relation="include">
+        </childnode>
         <childnode refid="4167" relation="include">
         </childnode>
-        <childnode refid="4171" relation="include">
+      </node>
+      <node id="4157">
+        <label>Source/Azura/RenderSystem/Inc/D3D12/D3D12ScopedSwapChain.h</label>
+        <link refid="_d3_d12_scoped_swap_chain_8h_source"/>
+        <childnode refid="4146" relation="include">
         </childnode>
-        <childnode refid="4172" relation="include">
+        <childnode refid="4150" relation="include">
         </childnode>
-        <childnode refid="4174" relation="include">
+        <childnode refid="4153" relation="include">
         </childnode>
       </node>
-      <node id="4196">
-        <label>Source/Azura/RenderSystem/Inc/Vulkan/VkTextureManager.h</label>
-        <link refid="_vk_texture_manager_8h_source"/>
-        <childnode refid="4195" relation="include">
+      <node id="4147">
+        <label>Source/Azura/RenderSystem/Inc/D3D12/D3D12Drawable.h</label>
+        <link refid="_d3_d12_drawable_8h_source"/>
+        <childnode refid="4145" relation="include">
         </childnode>
-      </node>
-      <node id="4176">
-        <label>Source/Azura/RenderSystem/Inc/D3D12/D3D12ScopedSampler.h</label>
-        <link refid="_d3_d12_scoped_sampler_8h_source"/>
-        <childnode refid="4166" relation="include">
-        </childnode>
-        <childnode refid="4169" relation="include">
-        </childnode>
-      </node>
-      <node id="4167">
-        <label>Source/Azura/RenderSystem/Inc/D3D12/D3D12Renderer.h</label>
-        <link refid="_d3_d12_renderer_8h_source"/>
-      </node>
-      <node id="4207">
-        <label>Source/Samples/2_DeferredRenderer/Inc/App/LightTexture.h</label>
-        <link refid="_light_texture_8h_source"/>
-        <childnode refid="4187" relation="include">
-        </childnode>
-        <childnode refid="4189" relation="include">
-        </childnode>
-        <childnode refid="4190" relation="include">
-        </childnode>
-        <childnode refid="4191" relation="include">
+        <childnode refid="4148" relation="include">
         </childnode>
       </node>
       <node id="4174">
-        <label>Source/Azura/RenderSystem/Inc/D3D12/D3D12ScopedRenderPass.h</label>
-        <link refid="_d3_d12_scoped_render_pass_8h_source"/>
-        <childnode refid="4169" relation="include">
-        </childnode>
-        <childnode refid="4167" relation="include">
-        </childnode>
-        <childnode refid="4172" relation="include">
-        </childnode>
-      </node>
-      <node id="4192">
-        <label>Source/Samples/3_ClothSim/Inc/ClothSim/AppRenderer.h</label>
-        <link refid="3___cloth_sim_2_inc_2_cloth_sim_2_app_renderer_8h_source"/>
-      </node>
-      <node id="4178">
-        <label>Source/Azura/RenderSystem/Inc/D3D12/D3D12ScopedSwapChain.h</label>
-        <link refid="_d3_d12_scoped_swap_chain_8h_source"/>
-        <childnode refid="4167" relation="include">
-        </childnode>
-        <childnode refid="4171" relation="include">
-        </childnode>
-        <childnode refid="4174" relation="include">
-        </childnode>
-      </node>
-      <node id="4198">
-        <label>Source/Azura/RenderSystem/Inc/Vulkan/VkComputePool.h</label>
-        <link refid="_vk_compute_pool_8h_source"/>
-        <childnode refid="4195" relation="include">
-        </childnode>
-      </node>
-      <node id="4214">
-        <label>Source/Azura/RenderSystem/Inc/Vulkan/VkShader.h</label>
-        <link refid="_vk_shader_8h_source"/>
-        <childnode refid="4210" relation="include">
-        </childnode>
-        <childnode refid="4195" relation="include">
-        </childnode>
-      </node>
-      <node id="4186">
-        <label>Source/Samples/1_ProceduralPlanet/Inc/ProceduralPlanet/AppRenderer.h</label>
-        <link refid="1___procedural_planet_2_inc_2_procedural_planet_2_app_renderer_8h_source"/>
-      </node>
-      <node id="4185">
-        <label>Source/Samples/0_TestZone/Inc/TestZone/AppRenderer.h</label>
-        <link refid="0___test_zone_2_inc_2_test_zone_2_app_renderer_8h_source"/>
-      </node>
-      <node id="4168">
-        <label>Source/Azura/RenderSystem/Inc/D3D12/D3D12Drawable.h</label>
-        <link refid="_d3_d12_drawable_8h_source"/>
-        <childnode refid="4166" relation="include">
-        </childnode>
-        <childnode refid="4169" relation="include">
-        </childnode>
+        <label>Source/Azura/RenderSystem/Inc/Generic/GPUBufferWriter.h</label>
+        <link refid="_g_p_u_buffer_writer_8h_source"/>
       </node>
       <node id="4183">
-        <label>Source/Azura/RenderSystem/Inc/Generic/GLFWWindow.h</label>
-        <link refid="_g_l_f_w_window_8h_source"/>
-        <childnode refid="4184" relation="include">
+        <label>Source/Azura/RenderSystem/Inc/Vulkan/VkShader.h</label>
+        <link refid="_vk_shader_8h_source"/>
+        <childnode refid="4179" relation="include">
         </childnode>
-      </node>
-      <node id="4212">
-        <label>Source/Azura/RenderSystem/Inc/Vulkan/VkScopedSwapChain.h</label>
-        <link refid="_vk_scoped_swap_chain_8h_source"/>
-        <childnode refid="4211" relation="include">
-        </childnode>
-        <childnode refid="4195" relation="include">
-        </childnode>
-      </node>
-      <node id="4197">
-        <label>Source/Azura/RenderSystem/Test/RenderTestCases.h</label>
-        <link refid="_render_test_cases_8h_source"/>
-      </node>
-      <node id="4203">
-        <label>Source/Azura/RenderSystem/Inc/Generic/GPUBuffer.h</label>
-        <link refid="_g_p_u_buffer_8h_source"/>
-        <childnode refid="4204" relation="include">
-        </childnode>
-      </node>
-      <node id="4201">
-        <label>Source/Azura/RenderSystem/Inc/Generic/PoolPrimitives.h</label>
-        <link refid="_pool_primitives_8h_source"/>
-      </node>
-      <node id="4200">
-        <label>Source/Azura/RenderSystem/Inc/Generic/Drawable.h</label>
-        <link refid="_drawable_8h_source"/>
-        <childnode refid="4168" relation="include">
-        </childnode>
-        <childnode refid="4169" relation="include">
-        </childnode>
-        <childnode refid="4181" relation="include">
-        </childnode>
-        <childnode refid="4201" relation="include">
-        </childnode>
-        <childnode refid="4198" relation="include">
-        </childnode>
-        <childnode refid="4202" relation="include">
-        </childnode>
-      </node>
-      <node id="4194">
-        <label>Source/Azura/RenderSystem/Inc/Vulkan/VkCore.h</label>
-        <link refid="_vk_core_8h_source"/>
-        <childnode refid="4195" relation="include">
-        </childnode>
-      </node>
-      <node id="4190">
-        <label>Source/Samples/2_DeferredRenderer/Inc/Forward/ForwardScene.h</label>
-        <link refid="_forward_scene_8h_source"/>
-        <childnode refid="4187" relation="include">
-        </childnode>
-      </node>
-      <node id="4169">
-        <label>Source/Azura/RenderSystem/Inc/D3D12/D3D12DrawablePool.h</label>
-        <link refid="_d3_d12_drawable_pool_8h_source"/>
-        <childnode refid="4167" relation="include">
-        </childnode>
-      </node>
-      <node id="4199">
-        <label>Source/Azura/RenderSystem/Inc/Generic/Debug.h</label>
-        <link refid="_debug_8h_source"/>
-      </node>
-      <node id="4193">
-        <label>Source/Azura/RenderSystem/Inc/Generic/RenderSystem.h</label>
-        <link refid="_render_system_8h_source"/>
-      </node>
-      <node id="4182">
-        <label>Source/Azura/RenderSystem/Inc/Generic/Window.h</label>
-        <link refid="_window_8h_source"/>
-        <childnode refid="4167" relation="include">
-        </childnode>
-        <childnode refid="4178" relation="include">
-        </childnode>
-        <childnode refid="4183" relation="include">
-        </childnode>
-        <childnode refid="4185" relation="include">
-        </childnode>
-        <childnode refid="4186" relation="include">
-        </childnode>
-        <childnode refid="4187" relation="include">
-        </childnode>
-        <childnode refid="4188" relation="include">
-        </childnode>
-        <childnode refid="4192" relation="include">
-        </childnode>
-      </node>
-      <node id="4173">
-        <label>Source/Azura/RenderSystem/Inc/D3D12/D3D12ScopedCommandBuffer.h</label>
-        <link refid="_d3_d12_scoped_command_buffer_8h_source"/>
         <childnode refid="4166" relation="include">
         </childnode>
-        <childnode refid="4169" relation="include">
-        </childnode>
-        <childnode refid="4167" relation="include">
-        </childnode>
-        <childnode refid="4171" relation="include">
-        </childnode>
-        <childnode refid="4174" relation="include">
-        </childnode>
       </node>
-      <node id="4195">
-        <label>Source/Azura/RenderSystem/Inc/Vulkan/VkRenderer.h</label>
-        <link refid="_vk_renderer_8h_source"/>
+      <node id="4146">
+        <label>Source/Azura/RenderSystem/Inc/D3D12/D3D12Renderer.h</label>
+        <link refid="_d3_d12_renderer_8h_source"/>
       </node>
-      <node id="4179">
+      <node id="4158">
         <label>Source/Azura/RenderSystem/Inc/D3D12/D3D12TypeMapping.h</label>
         <link refid="_d3_d12_type_mapping_8h_source"/>
       </node>
-      <node id="4188">
-        <label>Source/Samples/2_DeferredRenderer/Inc/App/Scene.h</label>
-        <link refid="_samples_22___deferred_renderer_2_inc_2_app_2_scene_8h_source"/>
-        <childnode refid="4187" relation="include">
+      <node id="4153">
+        <label>Source/Azura/RenderSystem/Inc/D3D12/D3D12ScopedRenderPass.h</label>
+        <link refid="_d3_d12_scoped_render_pass_8h_source"/>
+        <childnode refid="4148" relation="include">
         </childnode>
-        <childnode refid="4189" relation="include">
+        <childnode refid="4146" relation="include">
         </childnode>
-        <childnode refid="4190" relation="include">
-        </childnode>
-        <childnode refid="4191" relation="include">
+        <childnode refid="4151" relation="include">
         </childnode>
       </node>
-      <node id="4180">
-        <label>Source/Azura/RenderSystem/Inc/Generic/ComputePool.h</label>
-        <link refid="_compute_pool_8h_source"/>
-        <childnode refid="4166" relation="include">
-        </childnode>
-        <childnode refid="4181" relation="include">
-        </childnode>
-        <childnode refid="4198" relation="include">
+      <node id="4166">
+        <label>Source/Azura/RenderSystem/Inc/Vulkan/VkRenderer.h</label>
+        <link refid="_vk_renderer_8h_source"/>
+      </node>
+      <node id="4178">
+        <label>Source/Azura/RenderSystem/Inc/Vulkan/VkTypes.h</label>
+        <link refid="_vk_types_8h_source"/>
+        <childnode refid="4165" relation="include">
         </childnode>
       </node>
-      <node id="4171">
-        <label>Source/Azura/RenderSystem/Inc/D3D12/D3D12ScopedComputePass.h</label>
-        <link refid="_d3_d12_scoped_compute_pass_8h_source"/>
+      <node id="4182">
+        <label>Source/Azura/RenderSystem/Inc/Generic/Shader.h</label>
+        <link refid="_shader_8h_source"/>
+        <childnode refid="4156" relation="include">
+        </childnode>
+        <childnode refid="4183" relation="include">
+        </childnode>
+      </node>
+      <node id="4173">
+        <label>Source/Azura/RenderSystem/Inc/Generic/GPUBuffer.h</label>
+        <link refid="_g_p_u_buffer_8h_source"/>
+        <childnode refid="4174" relation="include">
+        </childnode>
+      </node>
+      <node id="4165">
+        <label>Source/Azura/RenderSystem/Inc/Vulkan/VkCore.h</label>
+        <link refid="_vk_core_8h_source"/>
         <childnode refid="4166" relation="include">
         </childnode>
-        <childnode refid="4167" relation="include">
+      </node>
+      <node id="4167">
+        <label>Source/Azura/RenderSystem/Inc/Vulkan/VkTextureManager.h</label>
+        <link refid="_vk_texture_manager_8h_source"/>
+        <childnode refid="4166" relation="include">
+        </childnode>
+      </node>
+      <node id="4170">
+        <label>Source/Azura/RenderSystem/Inc/Generic/Drawable.h</label>
+        <link refid="_drawable_8h_source"/>
+        <childnode refid="4147" relation="include">
+        </childnode>
+        <childnode refid="4148" relation="include">
+        </childnode>
+        <childnode refid="4160" relation="include">
+        </childnode>
+        <childnode refid="4171" relation="include">
+        </childnode>
+        <childnode refid="4168" relation="include">
         </childnode>
         <childnode refid="4172" relation="include">
         </childnode>
       </node>
-      <node id="4215">
+      <node id="4179">
+        <label>Source/Azura/RenderSystem/Inc/Vulkan/VkScopedRenderPass.h</label>
+        <link refid="_vk_scoped_render_pass_8h_source"/>
+        <childnode refid="4180" relation="include">
+        </childnode>
+        <childnode refid="4172" relation="include">
+        </childnode>
+        <childnode refid="4166" relation="include">
+        </childnode>
+      </node>
+      <node id="4151">
+        <label>Source/Azura/RenderSystem/Inc/D3D12/D3D12ScopedPipeline.h</label>
+        <link refid="_d3_d12_scoped_pipeline_8h_source"/>
+        <childnode refid="4145" relation="include">
+        </childnode>
+        <childnode refid="4148" relation="include">
+        </childnode>
+      </node>
+      <node id="4175">
+        <label>Source/Azura/RenderSystem/Inc/Generic/TextureManager.h</label>
+        <link refid="_texture_manager_8h_source"/>
+        <childnode refid="4176" relation="include">
+        </childnode>
+        <childnode refid="4164" relation="include">
+        </childnode>
+        <childnode refid="4177" relation="include">
+        </childnode>
+        <childnode refid="4167" relation="include">
+        </childnode>
+      </node>
+      <node id="4184">
         <label>Source/Azura/RenderSystem/Inc/Vulkan/VkTypeMapping.h</label>
         <link refid="_vk_type_mapping_8h_source"/>
       </node>
-      <node id="4205">
-        <label>Source/Azura/RenderSystem/Inc/Generic/TextureManager.h</label>
-        <link refid="_texture_manager_8h_source"/>
-        <childnode refid="4206" relation="include">
+      <node id="4150">
+        <label>Source/Azura/RenderSystem/Inc/D3D12/D3D12ScopedComputePass.h</label>
+        <link refid="_d3_d12_scoped_compute_pass_8h_source"/>
+        <childnode refid="4145" relation="include">
         </childnode>
-        <childnode refid="4193" relation="include">
+        <childnode refid="4146" relation="include">
         </childnode>
-        <childnode refid="4208" relation="include">
-        </childnode>
-        <childnode refid="4196" relation="include">
-        </childnode>
-        <childnode refid="4185" relation="include">
-        </childnode>
-        <childnode refid="4186" relation="include">
-        </childnode>
-        <childnode refid="4188" relation="include">
-        </childnode>
-        <childnode refid="4192" relation="include">
+        <childnode refid="4151" relation="include">
         </childnode>
       </node>
-      <node id="4210">
-        <label>Source/Azura/RenderSystem/Inc/Vulkan/VkScopedRenderPass.h</label>
-        <link refid="_vk_scoped_render_pass_8h_source"/>
-        <childnode refid="4211" relation="include">
+      <node id="4152">
+        <label>Source/Azura/RenderSystem/Inc/D3D12/D3D12ScopedCommandBuffer.h</label>
+        <link refid="_d3_d12_scoped_command_buffer_8h_source"/>
+        <childnode refid="4145" relation="include">
         </childnode>
-        <childnode refid="4202" relation="include">
+        <childnode refid="4148" relation="include">
         </childnode>
-        <childnode refid="4195" relation="include">
+        <childnode refid="4146" relation="include">
         </childnode>
-      </node>
-      <node id="4213">
-        <label>Source/Azura/RenderSystem/Inc/Generic/Shader.h</label>
-        <link refid="_shader_8h_source"/>
-        <childnode refid="4177" relation="include">
+        <childnode refid="4150" relation="include">
         </childnode>
-        <childnode refid="4214" relation="include">
+        <childnode refid="4153" relation="include">
         </childnode>
       </node>
-      <node id="4209">
-        <label>Source/Azura/RenderSystem/Inc/Vulkan/VkTypes.h</label>
-        <link refid="_vk_types_8h_source"/>
-        <childnode refid="4194" relation="include">
+      <node id="4172">
+        <label>Source/Azura/RenderSystem/Inc/Vulkan/VkDrawablePool.h</label>
+        <link refid="_vk_drawable_pool_8h_source"/>
+        <childnode refid="4166" relation="include">
+        </childnode>
+      </node>
+      <node id="4171">
+        <label>Source/Azura/RenderSystem/Inc/Generic/PoolPrimitives.h</label>
+        <link refid="_pool_primitives_8h_source"/>
+      </node>
+      <node id="4159">
+        <label>Source/Azura/RenderSystem/Inc/Generic/ComputePool.h</label>
+        <link refid="_compute_pool_8h_source"/>
+        <childnode refid="4145" relation="include">
+        </childnode>
+        <childnode refid="4160" relation="include">
+        </childnode>
+        <childnode refid="4168" relation="include">
+        </childnode>
+      </node>
+      <node id="4143">
+        <label>Source/Azura/RenderSystem/Inc/Generic/GenericTypes.h</label>
+        <link refid="_azura_2_render_system_2_inc_2_generic_2_generic_types_8h_source"/>
+        <childnode refid="4144" relation="include">
+        </childnode>
+        <childnode refid="4151" relation="include">
+        </childnode>
+        <childnode refid="4158" relation="include">
+        </childnode>
+        <childnode refid="4159" relation="include">
+        </childnode>
+        <childnode refid="4169" relation="include">
+        </childnode>
+        <childnode refid="4170" relation="include">
+        </childnode>
+        <childnode refid="4161" relation="include">
+        </childnode>
+        <childnode refid="4160" relation="include">
+        </childnode>
+        <childnode refid="4173" relation="include">
+        </childnode>
+        <childnode refid="4175" relation="include">
+        </childnode>
+        <childnode refid="4182" relation="include">
+        </childnode>
+        <childnode refid="4180" relation="include">
+        </childnode>
+        <childnode refid="4179" relation="include">
+        </childnode>
+        <childnode refid="4184" relation="include">
+        </childnode>
+      </node>
+      <node id="4161">
+        <label>Source/Azura/RenderSystem/Inc/Generic/Window.h</label>
+        <link refid="_window_8h_source"/>
+        <childnode refid="4146" relation="include">
+        </childnode>
+        <childnode refid="4157" relation="include">
+        </childnode>
+        <childnode refid="4162" relation="include">
+        </childnode>
+      </node>
+      <node id="4169">
+        <label>Source/Azura/RenderSystem/Inc/Generic/Debug.h</label>
+        <link refid="_debug_8h_source"/>
+      </node>
+      <node id="4154">
+        <label>Source/Azura/RenderSystem/Inc/D3D12/D3D12ScopedImage.h</label>
+        <link refid="_d3_d12_scoped_image_8h_source"/>
+        <childnode refid="4145" relation="include">
+        </childnode>
+        <childnode refid="4148" relation="include">
+        </childnode>
+        <childnode refid="4150" relation="include">
+        </childnode>
+        <childnode refid="4153" relation="include">
+        </childnode>
+      </node>
+      <node id="4155">
+        <label>Source/Azura/RenderSystem/Inc/D3D12/D3D12ScopedSampler.h</label>
+        <link refid="_d3_d12_scoped_sampler_8h_source"/>
+        <childnode refid="4145" relation="include">
+        </childnode>
+        <childnode refid="4148" relation="include">
+        </childnode>
+      </node>
+      <node id="4164">
+        <label>Source/Azura/RenderSystem/Inc/Generic/RenderSystem.h</label>
+        <link refid="_render_system_8h_source"/>
+      </node>
+      <node id="4176">
+        <label>Source/Azura/RenderSystem/Inc/D3D12/D3D12TextureManager.h</label>
+        <link refid="_d3_d12_texture_manager_8h_source"/>
+      </node>
+      <node id="4149">
+        <label>Source/Azura/RenderSystem/Inc/D3D12/D3D12ScopedBuffer.h</label>
+        <link refid="_d3_d12_scoped_buffer_8h_source"/>
+        <childnode refid="4145" relation="include">
+        </childnode>
+        <childnode refid="4148" relation="include">
+        </childnode>
+        <childnode refid="4150" relation="include">
+        </childnode>
+      </node>
+      <node id="4156">
+        <label>Source/Azura/RenderSystem/Inc/D3D12/D3D12ScopedShader.h</label>
+        <link refid="_d3_d12_scoped_shader_8h_source"/>
+        <childnode refid="4146" relation="include">
+        </childnode>
+        <childnode refid="4150" relation="include">
+        </childnode>
+        <childnode refid="4151" relation="include">
+        </childnode>
+        <childnode refid="4153" relation="include">
+        </childnode>
+      </node>
+      <node id="4163">
+        <label>Source/Azura/RenderSystem/Inc/Generic/Windows/Win32GLFWWindow.h</label>
+        <link refid="_win32_g_l_f_w_window_8h_source"/>
+      </node>
+      <node id="4162">
+        <label>Source/Azura/RenderSystem/Inc/Generic/GLFWWindow.h</label>
+        <link refid="_g_l_f_w_window_8h_source"/>
+        <childnode refid="4163" relation="include">
+        </childnode>
+      </node>
+      <node id="4180">
+        <label>Source/Azura/RenderSystem/Inc/Vulkan/VkScopedPipeline.h</label>
+        <link refid="_vk_scoped_pipeline_8h_source"/>
+        <childnode refid="4172" relation="include">
+        </childnode>
+        <childnode refid="4166" relation="include">
+        </childnode>
+      </node>
+      <node id="4142">
+        <label>Source/Common/Inc/Utils/Hash.h</label>
+        <link refid="_hash_8h"/>
+        <childnode refid="4143" relation="include">
+        </childnode>
+      </node>
+      <node id="4144">
+        <label>Source/Azura/RenderSystem/Inc/D3D12/D3D12Core.h</label>
+        <link refid="_d3_d12_core_8h_source"/>
+        <childnode refid="4145" relation="include">
+        </childnode>
+        <childnode refid="4147" relation="include">
+        </childnode>
+        <childnode refid="4148" relation="include">
+        </childnode>
+        <childnode refid="4146" relation="include">
+        </childnode>
+        <childnode refid="4149" relation="include">
+        </childnode>
+        <childnode refid="4152" relation="include">
+        </childnode>
+        <childnode refid="4150" relation="include">
+        </childnode>
+        <childnode refid="4154" relation="include">
+        </childnode>
+        <childnode refid="4153" relation="include">
+        </childnode>
+        <childnode refid="4155" relation="include">
+        </childnode>
+        <childnode refid="4156" relation="include">
+        </childnode>
+        <childnode refid="4157" relation="include">
+        </childnode>
+        <childnode refid="4158" relation="include">
+        </childnode>
+      </node>
+      <node id="4168">
+        <label>Source/Azura/RenderSystem/Inc/Vulkan/VkComputePool.h</label>
+        <link refid="_vk_compute_pool_8h_source"/>
+        <childnode refid="4166" relation="include">
+        </childnode>
+      </node>
+      <node id="4177">
+        <label>Source/Azura/RenderSystem/Inc/Vulkan/VkScopedImage.h</label>
+        <link refid="_vk_scoped_image_8h_source"/>
+        <childnode refid="4178" relation="include">
+        </childnode>
+        <childnode refid="4172" relation="include">
+        </childnode>
+        <childnode refid="4179" relation="include">
+        </childnode>
+        <childnode refid="4181" relation="include">
+        </childnode>
+      </node>
+      <node id="4145">
+        <label>Source/Azura/RenderSystem/Inc/D3D12/D3D12ComputePool.h</label>
+        <link refid="_d3_d12_compute_pool_8h_source"/>
+        <childnode refid="4146" relation="include">
+        </childnode>
+      </node>
+      <node id="4148">
+        <label>Source/Azura/RenderSystem/Inc/D3D12/D3D12DrawablePool.h</label>
+        <link refid="_d3_d12_drawable_pool_8h_source"/>
+        <childnode refid="4146" relation="include">
         </childnode>
       </node>
     </invincdepgraph>

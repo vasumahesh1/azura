@@ -174,10 +174,12 @@
 <span class="p">}</span>
 
 <span class="kt">void</span> <span class="n">Camera</span><span class="o">::</span><span class="n">SetNearClip</span><span class="p">(</span><span class="k">const</span> <span class="kt">float</span> <span class="n">value</span><span class="p">)</span> <span class="p">{</span>
+  <span class="n">assert</span><span class="p">(</span><span class="n">value</span> <span class="o">&lt;</span> <span class="n">m_farClip</span><span class="p">);</span>
   <span class="n">m_nearClip</span> <span class="o">=</span> <span class="n">value</span><span class="p">;</span>
 <span class="p">}</span>
 
 <span class="kt">void</span> <span class="n">Camera</span><span class="o">::</span><span class="n">SetFarClip</span><span class="p">(</span><span class="k">const</span> <span class="kt">float</span> <span class="n">value</span><span class="p">)</span> <span class="p">{</span>
+  <span class="n">assert</span><span class="p">(</span><span class="n">value</span> <span class="o">&gt;</span> <span class="n">m_nearClip</span><span class="p">);</span>
   <span class="n">m_farClip</span> <span class="o">=</span> <span class="n">value</span><span class="p">;</span>
 <span class="p">}</span>
 

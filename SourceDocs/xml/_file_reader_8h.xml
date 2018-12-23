@@ -2,80 +2,95 @@
 <doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.8.14">
   <compounddef id="_file_reader_8h" kind="file" language="C++">
     <compoundname>FileReader.h</compoundname>
-    <includes local="yes">Types.h</includes>
+    <includes refid="_types_8h" local="yes">Types.h</includes>
     <includes refid="_vector_8h" local="yes">Containers/Vector.h</includes>
     <includedby refid="_d3_d12_scoped_shader_8cpp" local="yes">Source/Azura/RenderSystem/Src/D3D12/D3D12ScopedShader.cpp</includedby>
     <includedby refid="_vk_shader_8cpp" local="yes">Source/Azura/RenderSystem/Src/Vulkan/VkShader.cpp</includedby>
-    <includedby refid="_renderer__test_8cpp" local="yes">Source/Azura/RenderSystem/Test/Renderer_test.cpp</includedby>
     <includedby refid="_file_reader_8cpp" local="yes">Source/Platform/Src/Utils/FileReader.cpp</includedby>
     <incdepgraph>
-      <node id="5711">
+      <node id="5142">
         <label>functional</label>
       </node>
-      <node id="5706">
-        <label>Source/Platform/Inc/Utils/FileReader.h</label>
-        <link refid="_file_reader_8h"/>
-        <childnode refid="5707" relation="include">
-        </childnode>
-        <childnode refid="5708" relation="include">
-        </childnode>
-      </node>
-      <node id="5712">
+      <node id="5143">
         <label>iterator</label>
       </node>
-      <node id="5714">
-        <label>Memory/Allocator.h</label>
-        <link refid="_allocator_8h_source"/>
-        <childnode refid="5711" relation="include">
-        </childnode>
-        <childnode refid="5707" relation="include">
-        </childnode>
-        <childnode refid="5715" relation="include">
-        </childnode>
+      <node id="5137">
+        <label>cstdint</label>
       </node>
-      <node id="5709">
+      <node id="5140">
         <label>cassert</label>
       </node>
-      <node id="5715">
+      <node id="5138">
+        <label>string</label>
+      </node>
+      <node id="5145">
+        <label>Memory/Allocator.h</label>
+        <link refid="_allocator_8h_source"/>
+        <childnode refid="5142" relation="include">
+        </childnode>
+        <childnode refid="5135" relation="include">
+        </childnode>
+        <childnode refid="5146" relation="include">
+        </childnode>
+      </node>
+      <node id="5139">
+        <label>Containers/Vector.h</label>
+        <link refid="_vector_8h_source"/>
+        <childnode refid="5140" relation="include">
+        </childnode>
+        <childnode refid="5141" relation="include">
+        </childnode>
+        <childnode refid="5142" relation="include">
+        </childnode>
+        <childnode refid="5143" relation="include">
+        </childnode>
+        <childnode refid="5144" relation="include">
+        </childnode>
+        <childnode refid="5145" relation="include">
+        </childnode>
+        <childnode refid="5135" relation="include">
+        </childnode>
+        <childnode refid="5146" relation="include">
+        </childnode>
+      </node>
+      <node id="5146">
         <label>Utils/Macros.h</label>
         <link refid="_macros_8h_source"/>
       </node>
-      <node id="5713">
+      <node id="5144">
         <label>Array.h</label>
         <link refid="_array_8h_source"/>
-        <childnode refid="5709" relation="include">
+        <childnode refid="5140" relation="include">
         </childnode>
-        <childnode refid="5710" relation="include">
+        <childnode refid="5141" relation="include">
         </childnode>
-        <childnode refid="5714" relation="include">
+        <childnode refid="5145" relation="include">
         </childnode>
-        <childnode refid="5707" relation="include">
-        </childnode>
-      </node>
-      <node id="5708">
-        <label>Containers/Vector.h</label>
-        <link refid="_vector_8h_source"/>
-        <childnode refid="5709" relation="include">
-        </childnode>
-        <childnode refid="5710" relation="include">
-        </childnode>
-        <childnode refid="5711" relation="include">
-        </childnode>
-        <childnode refid="5712" relation="include">
-        </childnode>
-        <childnode refid="5713" relation="include">
-        </childnode>
-        <childnode refid="5714" relation="include">
-        </childnode>
-        <childnode refid="5707" relation="include">
-        </childnode>
-        <childnode refid="5715" relation="include">
+        <childnode refid="5135" relation="include">
         </childnode>
       </node>
-      <node id="5707">
+      <node id="5136">
+        <label>cstddef</label>
+      </node>
+      <node id="5135">
         <label>Types.h</label>
+        <link refid="_types_8h_source"/>
+        <childnode refid="5136" relation="include">
+        </childnode>
+        <childnode refid="5137" relation="include">
+        </childnode>
+        <childnode refid="5138" relation="include">
+        </childnode>
       </node>
-      <node id="5710">
+      <node id="5134">
+        <label>Source/Platform/Inc/Utils/FileReader.h</label>
+        <link refid="_file_reader_8h"/>
+        <childnode refid="5135" relation="include">
+        </childnode>
+        <childnode refid="5139" relation="include">
+        </childnode>
+      </node>
+      <node id="5141">
         <label>cstring</label>
       </node>
     </incdepgraph>

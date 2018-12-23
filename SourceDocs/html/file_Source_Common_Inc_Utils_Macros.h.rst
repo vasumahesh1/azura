@@ -53,8 +53,6 @@ Included By
 
 - :ref:`file_Source_Containers_Inc_Containers_Vector.h`
 
-- :ref:`file_Source_Containers_Test_Vector_test.cpp`
-
 - :ref:`file_Source_Core_Src_RawStorageFormat.cpp`
 
 - :ref:`file_Source_Log_Src_Log.cpp`

@@ -7,48 +7,64 @@
     <includedby refid="_vk_drawable_pool_8h" local="yes">Source/Azura/RenderSystem/Inc/Vulkan/VkDrawablePool.h</includedby>
     <includedby refid="_vk_scoped_sampler_8cpp" local="yes">Source/Azura/RenderSystem/Src/Vulkan/VkScopedSampler.cpp</includedby>
     <incdepgraph>
-      <node id="1629">
-        <label>Source/Azura/RenderSystem/Inc/Vulkan/VkScopedSampler.h</label>
-        <link refid="_vk_scoped_sampler_8h"/>
-        <childnode refid="1630" relation="include">
-        </childnode>
-        <childnode refid="1631" relation="include">
-        </childnode>
+      <node id="1663">
+        <label>cstdint</label>
       </node>
-      <node id="1633">
+      <node id="1664">
+        <label>string</label>
+      </node>
+      <node id="1665">
         <label>vector</label>
       </node>
-      <node id="1631">
+      <node id="1660">
         <label>Log/Log.h</label>
         <link refid="_log_8h_source"/>
-        <childnode refid="1632" relation="include">
+        <childnode refid="1661" relation="include">
         </childnode>
-        <childnode refid="1633" relation="include">
+        <childnode refid="1665" relation="include">
         </childnode>
       </node>
-      <node id="1630">
+      <node id="1659">
         <label>vulkan/vulkan_core.h</label>
       </node>
-      <node id="1632">
+      <node id="1662">
+        <label>cstddef</label>
+      </node>
+      <node id="1661">
         <label>Types.h</label>
+        <link refid="_types_8h_source"/>
+        <childnode refid="1662" relation="include">
+        </childnode>
+        <childnode refid="1663" relation="include">
+        </childnode>
+        <childnode refid="1664" relation="include">
+        </childnode>
+      </node>
+      <node id="1658">
+        <label>Source/Azura/RenderSystem/Inc/Vulkan/VkScopedSampler.h</label>
+        <link refid="_vk_scoped_sampler_8h"/>
+        <childnode refid="1659" relation="include">
+        </childnode>
+        <childnode refid="1660" relation="include">
+        </childnode>
       </node>
     </incdepgraph>
     <invincdepgraph>
-      <node id="1634">
-        <label>Source/Azura/RenderSystem/Inc/Vulkan/VkScopedSampler.h</label>
-        <link refid="_vk_scoped_sampler_8h"/>
-        <childnode refid="1635" relation="include">
-        </childnode>
-      </node>
-      <node id="1635">
-        <label>Source/Azura/RenderSystem/Inc/Vulkan/VkDrawablePool.h</label>
-        <link refid="_vk_drawable_pool_8h_source"/>
-        <childnode refid="1636" relation="include">
-        </childnode>
-      </node>
-      <node id="1636">
+      <node id="1668">
         <label>Source/Azura/RenderSystem/Inc/Vulkan/VkRenderer.h</label>
         <link refid="_vk_renderer_8h_source"/>
+      </node>
+      <node id="1667">
+        <label>Source/Azura/RenderSystem/Inc/Vulkan/VkDrawablePool.h</label>
+        <link refid="_vk_drawable_pool_8h_source"/>
+        <childnode refid="1668" relation="include">
+        </childnode>
+      </node>
+      <node id="1666">
+        <label>Source/Azura/RenderSystem/Inc/Vulkan/VkScopedSampler.h</label>
+        <link refid="_vk_scoped_sampler_8h"/>
+        <childnode refid="1667" relation="include">
+        </childnode>
       </node>
     </invincdepgraph>
     <innerclass refid="class_azura_1_1_vulkan_1_1_vk_scoped_sampler" prot="public">Azura::Vulkan::VkScopedSampler</innerclass>

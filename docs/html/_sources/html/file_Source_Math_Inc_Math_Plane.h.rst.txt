@@ -43,14 +43,6 @@ Included By
 
 - :ref:`file_Source_Math_Src_Plane.cpp`
 
-- :ref:`file_Source_Samples_0_TestZone_Inc_TestZone_AppRenderer.h`
-
-- :ref:`file_Source_Samples_0_TestZone_Src_AppRenderer.Cloth.cpp`
-
-- :ref:`file_Source_Samples_0_TestZone_Src_AppRenderer.cpp`
-
-- :ref:`file_Source_Samples_3_ClothSim_Src_AppRenderer.cpp`
-
 
 
 

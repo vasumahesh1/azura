@@ -4,64 +4,66 @@
     <compoundname>StackMemoryBuffer.h</compoundname>
     <includes local="no">cassert</includes>
     <includes refid="_memory_buffer_8h" local="yes">MemoryBuffer.h</includes>
-    <includes local="yes">Types.h</includes>
+    <includes refid="_types_8h" local="yes">Types.h</includes>
     <includes refid="_macros_8h" local="yes">Utils/Macros.h</includes>
     <includedby refid="_vk_core_8cpp" local="yes">Source/Azura/RenderSystem/Src/Vulkan/VkCore.cpp</includedby>
     <includedby refid="_memory_factory_8h" local="yes">Source/Common/Inc/Memory/MemoryFactory.h</includedby>
-    <includedby refid="_stack_memory_buffer__test_8h" local="yes">Source/Common/Test/StackMemoryBuffer_test.h</includedby>
-    <includedby refid="_sandbox_2main_8cpp" local="yes">Source/Sandbox/main.cpp</includedby>
     <incdepgraph>
-      <node id="4021">
-        <label>MemoryBuffer.h</label>
-        <link refid="_memory_buffer_8h_source"/>
-        <childnode refid="4022" relation="include">
-        </childnode>
+      <node id="4042">
+        <label>cstdint</label>
       </node>
-      <node id="4020">
+      <node id="4038">
         <label>cassert</label>
       </node>
-      <node id="4019">
+      <node id="4037">
         <label>Source/Common/Inc/Memory/StackMemoryBuffer.h</label>
         <link refid="_stack_memory_buffer_8h"/>
-        <childnode refid="4020" relation="include">
+        <childnode refid="4038" relation="include">
         </childnode>
-        <childnode refid="4021" relation="include">
+        <childnode refid="4039" relation="include">
         </childnode>
-        <childnode refid="4022" relation="include">
+        <childnode refid="4040" relation="include">
         </childnode>
-        <childnode refid="4023" relation="include">
+        <childnode refid="4044" relation="include">
         </childnode>
       </node>
-      <node id="4023">
+      <node id="4043">
+        <label>string</label>
+      </node>
+      <node id="4044">
         <label>Utils/Macros.h</label>
         <link refid="_macros_8h_source"/>
       </node>
-      <node id="4022">
+      <node id="4041">
+        <label>cstddef</label>
+      </node>
+      <node id="4040">
         <label>Types.h</label>
+        <link refid="_types_8h_source"/>
+        <childnode refid="4041" relation="include">
+        </childnode>
+        <childnode refid="4042" relation="include">
+        </childnode>
+        <childnode refid="4043" relation="include">
+        </childnode>
+      </node>
+      <node id="4039">
+        <label>MemoryBuffer.h</label>
+        <link refid="_memory_buffer_8h_source"/>
+        <childnode refid="4040" relation="include">
+        </childnode>
       </node>
     </incdepgraph>
     <invincdepgraph>
-      <node id="4025">
-        <label>Source/Common/Inc/Memory/MemoryFactory.h</label>
-        <link refid="_memory_factory_8h_source"/>
-        <childnode refid="4026" relation="include">
-        </childnode>
-      </node>
-      <node id="4026">
-        <label>Source/Containers/Benchmark/Vector_benchmark.h</label>
-        <link refid="_vector__benchmark_8h_source"/>
-      </node>
-      <node id="4024">
+      <node id="4045">
         <label>Source/Common/Inc/Memory/StackMemoryBuffer.h</label>
         <link refid="_stack_memory_buffer_8h"/>
-        <childnode refid="4025" relation="include">
-        </childnode>
-        <childnode refid="4027" relation="include">
+        <childnode refid="4046" relation="include">
         </childnode>
       </node>
-      <node id="4027">
-        <label>Source/Common/Test/StackMemoryBuffer_test.h</label>
-        <link refid="_stack_memory_buffer__test_8h_source"/>
+      <node id="4046">
+        <label>Source/Common/Inc/Memory/MemoryFactory.h</label>
+        <link refid="_memory_factory_8h_source"/>
       </node>
     </invincdepgraph>
     <innerclass refid="class_azura_1_1_memory_1_1_stack_memory_buffer" prot="public">Azura::Memory::StackMemoryBuffer</innerclass>

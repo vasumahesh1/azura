@@ -39,12 +39,6 @@ Included By
 
 - :ref:`file_Source_Camera_Src_PolarCamera.cpp`
 
-- :ref:`file_Source_Samples_0_TestZone_Inc_TestZone_AppRenderer.h`
-
-- :ref:`file_Source_Samples_1_ProceduralPlanet_Inc_ProceduralPlanet_AppRenderer.h`
-
-- :ref:`file_Source_Samples_3_ClothSim_Inc_ClothSim_AppRenderer.h`
-
 
 
 

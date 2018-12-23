@@ -1,0 +1,69 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.8.14">
+  <compounddef id="_transform_8h" kind="file" language="C++">
+    <compoundname>Transform.h</compoundname>
+    <includes refid="_core_8h" local="yes">Core.h</includes>
+    <includedby refid="_fly_through_camera_8cpp" local="yes">Source/Camera/Src/FlyThroughCamera.cpp</includedby>
+    <includedby refid="_polar_camera_8cpp" local="yes">Source/Camera/Src/PolarCamera.cpp</includedby>
+    <includedby refid="_icosphere_8cpp" local="yes">Source/Math/Src/Icosphere.cpp</includedby>
+    <includedby refid="_transform_8cpp" local="yes">Source/Math/Src/Transform.cpp</includedby>
+    <incdepgraph>
+      <node id="4724">
+        <label>cstdint</label>
+      </node>
+      <node id="4725">
+        <label>string</label>
+      </node>
+      <node id="4720">
+        <label>Core.h</label>
+        <link refid="_core_8h_source"/>
+        <childnode refid="4721" relation="include">
+        </childnode>
+        <childnode refid="4722" relation="include">
+        </childnode>
+      </node>
+      <node id="4723">
+        <label>cstddef</label>
+      </node>
+      <node id="4721">
+        <label>mathfu/matrix.h</label>
+      </node>
+      <node id="4722">
+        <label>Types.h</label>
+        <link refid="_types_8h_source"/>
+        <childnode refid="4723" relation="include">
+        </childnode>
+        <childnode refid="4724" relation="include">
+        </childnode>
+        <childnode refid="4725" relation="include">
+        </childnode>
+      </node>
+      <node id="4719">
+        <label>Source/Math/Inc/Math/Transform.h</label>
+        <link refid="_transform_8h"/>
+        <childnode refid="4720" relation="include">
+        </childnode>
+      </node>
+    </incdepgraph>
+    <innernamespace refid="namespace_azura">Azura</innernamespace>
+    <innernamespace refid="namespace_azura_1_1_transform">Azura::Transform</innernamespace>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <programlisting>
+<codeline lineno="1"><highlight class="preprocessor">#pragma<sp/>once</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="2"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&quot;Core.h&quot;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="3"><highlight class="normal"></highlight></codeline>
+<codeline lineno="4"><highlight class="normal"></highlight><highlight class="keyword">namespace<sp/></highlight><highlight class="normal"><ref refid="namespace_azura" kindref="compound">Azura</ref><sp/>{</highlight></codeline>
+<codeline lineno="5"><highlight class="normal"></highlight><highlight class="keyword">namespace<sp/></highlight><highlight class="normal">Transform<sp/>{</highlight></codeline>
+<codeline lineno="6"><highlight class="normal">Matrix4f<sp/>LookAt(</highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>Vector3f&amp;<sp/>at,<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>Vector3f&amp;<sp/>eye,<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>Vector3f&amp;<sp/>worldUp);</highlight></codeline>
+<codeline lineno="7"><highlight class="normal">Matrix4f<sp/>Perspective(</highlight><highlight class="keywordtype">float</highlight><highlight class="normal"><sp/>fovY,<sp/></highlight><highlight class="keywordtype">float</highlight><highlight class="normal"><sp/>aspect,<sp/></highlight><highlight class="keywordtype">float</highlight><highlight class="normal"><sp/>zNear,<sp/></highlight><highlight class="keywordtype">float</highlight><highlight class="normal"><sp/>zFar);</highlight></codeline>
+<codeline lineno="8"><highlight class="normal"></highlight></codeline>
+<codeline lineno="9"><highlight class="normal">Vector3f<sp/>Downgrade(</highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>Vector4f&amp;<sp/>vec);</highlight></codeline>
+<codeline lineno="10"><highlight class="normal">}</highlight></codeline>
+<codeline lineno="11"><highlight class="normal">}</highlight></codeline>
+    </programlisting>
+    <location file="Source/Math/Inc/Math/Transform.h"/>
+  </compounddef>
+</doxygen>

@@ -29,8 +29,8 @@
   <link rel="stylesheet" href="../_static/collapsible-lists\css\tree_view.css" type="text/css" />
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
-    <link rel="next" title="Class ClothMesh" href="class_azura_1_1_cloth_mesh.html" />
-    <link rel="prev" title="Class AppRenderer" href="class_azura_1_1_app_renderer.html" /> 
+    <link rel="next" title="Class ComputePool" href="class_azura_1_1_compute_pool.html" />
+    <link rel="prev" title="Struct VkQueueIndices" href="struct_azura_1_1_vulkan_1_1_vk_queue_indices.html" /> 
 
   
   <script src="../_static/js/modernizr.min.js"></script>
@@ -177,7 +177,18 @@
 <dl class="function">
 <dt id="_CPPv3N5Azura6Camera6CameraE3U323U32">
 <span id="_CPPv2N5Azura6Camera6CameraE3U323U32"></span><span id="Azura::Camera::Camera__U32.U32"></span><span class="target" id="class_azura_1_1_camera_1ae9712b37053d70b998326e7427fe4133"></span><code class="descname">Camera</code><span class="sig-paren">(</span>U32 <em>width</em>, U32 <em>height</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv3N5Azura6Camera6CameraE3U323U32" title="Permalink to this definition">¶</a><br /></dt>
-<dd></dd></dl>
+<dd><p>Constructs the camera with the given width and height. </p>
+<p>The height &amp; width provided are used in the projection matrix computation.</p>
+<p><dl class="docutils">
+<dt><strong>Parameters</strong></dt>
+<dd><ul class="breatheparameterlist first last simple">
+<li><code class="docutils literal notranslate"><span class="pre">width</span></code>: The film width </li>
+<li><code class="docutils literal notranslate"><span class="pre">height</span></code>: The film height </li>
+</ul>
+</dd>
+</dl>
+</p>
+</dd></dl>
 
 <dl class="function">
 <dt id="_CPPv3N5Azura6CameraD0Ev">
@@ -207,82 +218,200 @@
 <dl class="function">
 <dt id="_CPPv3N5Azura6Camera14SetSensitivityEf">
 <span id="_CPPv2N5Azura6Camera14SetSensitivityEf"></span><span id="Azura::Camera::SetSensitivity__float"></span><span class="target" id="class_azura_1_1_camera_1a358f095f7bf139f5c4de44462360d1be"></span>void <code class="descname">SetSensitivity</code><span class="sig-paren">(</span>float <em>value</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv3N5Azura6Camera14SetSensitivityEf" title="Permalink to this definition">¶</a><br /></dt>
-<dd></dd></dl>
+<dd><p>Sets the sensitivity of the camera. </p>
+<p>Sensitivity is an independent parameter and may be used by the dervied class in a particular way.</p>
+<p><dl class="docutils">
+<dt><strong>Parameters</strong></dt>
+<dd><ul class="breatheparameterlist first last simple">
+<li><code class="docutils literal notranslate"><span class="pre">value</span></code>: The sensitivity value </li>
+</ul>
+</dd>
+</dl>
+</p>
+</dd></dl>
 
 <dl class="function">
 <dt id="_CPPv3NK5Azura6Camera14GetSensitivityEv">
 <span id="_CPPv2NK5Azura6Camera14GetSensitivityEv"></span><span id="Azura::Camera::GetSensitivityC"></span><span class="target" id="class_azura_1_1_camera_1a7004a5b715e5250712e24125fad0730c"></span>float <code class="descname">GetSensitivity</code><span class="sig-paren">(</span><span class="sig-paren">)</span> <em class="property">const</em><a class="headerlink" href="#_CPPv3NK5Azura6Camera14GetSensitivityEv" title="Permalink to this definition">¶</a><br /></dt>
-<dd></dd></dl>
+<dd><p>Query the sensitivity of the camera. </p>
+<p><dl class="docutils">
+<dt><strong>Return</strong></dt>
+<dd>The sensitivity of the camera. </dd>
+</dl>
+</p>
+</dd></dl>
 
 <dl class="function">
 <dt id="_CPPv3N5Azura6Camera11SetNearClipEf">
 <span id="_CPPv2N5Azura6Camera11SetNearClipEf"></span><span id="Azura::Camera::SetNearClip__float"></span><span class="target" id="class_azura_1_1_camera_1af7ce54754c84907ea8b26aeeb6aae1bf"></span>void <code class="descname">SetNearClip</code><span class="sig-paren">(</span>float <em>value</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv3N5Azura6Camera11SetNearClipEf" title="Permalink to this definition">¶</a><br /></dt>
-<dd></dd></dl>
+<dd><p>Sets the near clip plane for the camera. </p>
+<p><dl class="docutils">
+<dt><strong>Parameters</strong></dt>
+<dd><ul class="breatheparameterlist first last simple">
+<li><code class="docutils literal notranslate"><span class="pre">value</span></code>: The value </li>
+</ul>
+</dd>
+</dl>
+</p>
+</dd></dl>
 
 <dl class="function">
 <dt id="_CPPv3N5Azura6Camera10SetFarClipEf">
 <span id="_CPPv2N5Azura6Camera10SetFarClipEf"></span><span id="Azura::Camera::SetFarClip__float"></span><span class="target" id="class_azura_1_1_camera_1a8a2cd598e281e2ca0dc736bd1fed0a19"></span>void <code class="descname">SetFarClip</code><span class="sig-paren">(</span>float <em>value</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv3N5Azura6Camera10SetFarClipEf" title="Permalink to this definition">¶</a><br /></dt>
-<dd></dd></dl>
+<dd><p>Sets the far clip plane for the camera. </p>
+<p><dl class="docutils">
+<dt><strong>Parameters</strong></dt>
+<dd><ul class="breatheparameterlist first last simple">
+<li><code class="docutils literal notranslate"><span class="pre">value</span></code>: The value </li>
+</ul>
+</dd>
+</dl>
+</p>
+</dd></dl>
 
 <dl class="function">
 <dt id="_CPPv3NK5Azura6Camera11GetNearClipEv">
 <span id="_CPPv2NK5Azura6Camera11GetNearClipEv"></span><span id="Azura::Camera::GetNearClipC"></span><span class="target" id="class_azura_1_1_camera_1ab7484fb922189c36691b6be8a6ad7437"></span>float <code class="descname">GetNearClip</code><span class="sig-paren">(</span><span class="sig-paren">)</span> <em class="property">const</em><a class="headerlink" href="#_CPPv3NK5Azura6Camera11GetNearClipEv" title="Permalink to this definition">¶</a><br /></dt>
-<dd></dd></dl>
+<dd><p>Query the near clip plane value of the camera. </p>
+<p><dl class="docutils">
+<dt><strong>Return</strong></dt>
+<dd>The near clip value. </dd>
+</dl>
+</p>
+</dd></dl>
 
 <dl class="function">
 <dt id="_CPPv3NK5Azura6Camera10GetFarClipEv">
 <span id="_CPPv2NK5Azura6Camera10GetFarClipEv"></span><span id="Azura::Camera::GetFarClipC"></span><span class="target" id="class_azura_1_1_camera_1a965abbf940578b29cdceedc4312d6391"></span>float <code class="descname">GetFarClip</code><span class="sig-paren">(</span><span class="sig-paren">)</span> <em class="property">const</em><a class="headerlink" href="#_CPPv3NK5Azura6Camera10GetFarClipEv" title="Permalink to this definition">¶</a><br /></dt>
-<dd></dd></dl>
+<dd><p>Query the far clip plane value of the camera. </p>
+<p><dl class="docutils">
+<dt><strong>Return</strong></dt>
+<dd>The far clip value. </dd>
+</dl>
+</p>
+</dd></dl>
 
 <dl class="function">
 <dt id="_CPPv3N5Azura6Camera7SetFOVYEf">
 <span id="_CPPv2N5Azura6Camera7SetFOVYEf"></span><span id="Azura::Camera::SetFOVY__float"></span><span class="target" id="class_azura_1_1_camera_1aa25f8854519a931687df59460ff41443"></span>void <code class="descname">SetFOVY</code><span class="sig-paren">(</span>float <em>value</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv3N5Azura6Camera7SetFOVYEf" title="Permalink to this definition">¶</a><br /></dt>
-<dd></dd></dl>
+<dd><p>Sets the vertical field of view of the camera. </p>
+<p><dl class="docutils">
+<dt><strong>Parameters</strong></dt>
+<dd><ul class="breatheparameterlist first last simple">
+<li><code class="docutils literal notranslate"><span class="pre">value</span></code>: The value </li>
+</ul>
+</dd>
+</dl>
+</p>
+</dd></dl>
 
 <dl class="function">
 <dt id="_CPPv3N5Azura6Camera11SetPositionE8Vector3f">
 <span id="_CPPv2N5Azura6Camera11SetPositionE8Vector3f"></span><span id="Azura::Camera::SetPosition__Vector3f"></span><span class="target" id="class_azura_1_1_camera_1a74669182aad5f2aadf8011aace57d3ef"></span>void <code class="descname">SetPosition</code><span class="sig-paren">(</span>Vector3f <em>value</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv3N5Azura6Camera11SetPositionE8Vector3f" title="Permalink to this definition">¶</a><br /></dt>
-<dd></dd></dl>
+<dd><p>Sets the camera position. </p>
+<p><dl class="docutils">
+<dt><strong>Parameters</strong></dt>
+<dd><ul class="breatheparameterlist first last simple">
+<li><code class="docutils literal notranslate"><span class="pre">value</span></code>: 3D world position </li>
+</ul>
+</dd>
+</dl>
+</p>
+</dd></dl>
 
 <dl class="function">
 <dt id="_CPPv3N5Azura6Camera17SetReferencePointE8Vector3f">
 <span id="_CPPv2N5Azura6Camera17SetReferencePointE8Vector3f"></span><span id="Azura::Camera::SetReferencePoint__Vector3f"></span><span class="target" id="class_azura_1_1_camera_1a1ec84a387f952d20fad4b4280276b0a0"></span>void <code class="descname">SetReferencePoint</code><span class="sig-paren">(</span>Vector3f <em>value</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv3N5Azura6Camera17SetReferencePointE8Vector3f" title="Permalink to this definition">¶</a><br /></dt>
-<dd></dd></dl>
+<dd><p>Sets the reference point for the camera. </p>
+<p>The reference point is the camera’s target.</p>
+<p><dl class="docutils">
+<dt><strong>Parameters</strong></dt>
+<dd><ul class="breatheparameterlist first last simple">
+<li><code class="docutils literal notranslate"><span class="pre">value</span></code>: 3D world position </li>
+</ul>
+</dd>
+</dl>
+</p>
+</dd></dl>
 
 <dl class="function">
 <dt id="_CPPv3NK5Azura6Camera11GetPositionEv">
 <span id="_CPPv2NK5Azura6Camera11GetPositionEv"></span><span id="Azura::Camera::GetPositionC"></span><span class="target" id="class_azura_1_1_camera_1a0340c9690efdc7342becfda3ce2bb4ad"></span>Vector3f <code class="descname">GetPosition</code><span class="sig-paren">(</span><span class="sig-paren">)</span> <em class="property">const</em><a class="headerlink" href="#_CPPv3NK5Azura6Camera11GetPositionEv" title="Permalink to this definition">¶</a><br /></dt>
-<dd></dd></dl>
+<dd><p>Query to get the current camera position. </p>
+<p><dl class="docutils">
+<dt><strong>Return</strong></dt>
+<dd>The position. </dd>
+</dl>
+</p>
+</dd></dl>
 
 <dl class="function">
 <dt id="_CPPv3NK5Azura6Camera17GetViewProjMatrixEv">
 <span id="_CPPv2NK5Azura6Camera17GetViewProjMatrixEv"></span><span id="Azura::Camera::GetViewProjMatrixC"></span><span class="target" id="class_azura_1_1_camera_1a27c2e42747a8450ddf573fedb5f7e2fb"></span>Matrix4f <code class="descname">GetViewProjMatrix</code><span class="sig-paren">(</span><span class="sig-paren">)</span> <em class="property">const</em><a class="headerlink" href="#_CPPv3NK5Azura6Camera17GetViewProjMatrixEv" title="Permalink to this definition">¶</a><br /></dt>
-<dd></dd></dl>
+<dd><p>Gets the view projection matrix for the camera. </p>
+<p><dl class="docutils">
+<dt><strong>Return</strong></dt>
+<dd>The view projection matrix. </dd>
+</dl>
+</p>
+</dd></dl>
 
 <dl class="function">
 <dt id="_CPPv3NK5Azura6Camera20GetInvViewProjMatrixEv">
 <span id="_CPPv2NK5Azura6Camera20GetInvViewProjMatrixEv"></span><span id="Azura::Camera::GetInvViewProjMatrixC"></span><span class="target" id="class_azura_1_1_camera_1a60ff5afa210d24a63bb2437094ec577f"></span>Matrix4f <code class="descname">GetInvViewProjMatrix</code><span class="sig-paren">(</span><span class="sig-paren">)</span> <em class="property">const</em><a class="headerlink" href="#_CPPv3NK5Azura6Camera20GetInvViewProjMatrixEv" title="Permalink to this definition">¶</a><br /></dt>
-<dd></dd></dl>
+<dd><p>Gets the inverse of the view projection matrix for the camera. </p>
+<p><dl class="docutils">
+<dt><strong>Return</strong></dt>
+<dd>The inverse of view projection matrix. </dd>
+</dl>
+</p>
+</dd></dl>
 
 <dl class="function">
 <dt id="_CPPv3NK5Azura6Camera13GetViewMatrixEv">
 <span id="_CPPv2NK5Azura6Camera13GetViewMatrixEv"></span><span id="Azura::Camera::GetViewMatrixC"></span><span class="target" id="class_azura_1_1_camera_1a4661c9c0bad106c322a32da477f377ee"></span>Matrix4f <code class="descname">GetViewMatrix</code><span class="sig-paren">(</span><span class="sig-paren">)</span> <em class="property">const</em><a class="headerlink" href="#_CPPv3NK5Azura6Camera13GetViewMatrixEv" title="Permalink to this definition">¶</a><br /></dt>
-<dd></dd></dl>
+<dd><p>Gets the view matrix. </p>
+<p><dl class="docutils">
+<dt><strong>Return</strong></dt>
+<dd>The view matrix. </dd>
+</dl>
+</p>
+</dd></dl>
 
 <dl class="function">
 <dt id="_CPPv3NK5Azura6Camera13GetProjMatrixEv">
 <span id="_CPPv2NK5Azura6Camera13GetProjMatrixEv"></span><span id="Azura::Camera::GetProjMatrixC"></span><span class="target" id="class_azura_1_1_camera_1a3a3b4864cb3468bc575013508c35c395"></span>Matrix4f <code class="descname">GetProjMatrix</code><span class="sig-paren">(</span><span class="sig-paren">)</span> <em class="property">const</em><a class="headerlink" href="#_CPPv3NK5Azura6Camera13GetProjMatrixEv" title="Permalink to this definition">¶</a><br /></dt>
-<dd></dd></dl>
+<dd><p>Gets the projection matrix. </p>
+<p><dl class="docutils">
+<dt><strong>Return</strong></dt>
+<dd>The projection matrix. </dd>
+</dl>
+</p>
+</dd></dl>
 
 <dl class="function">
 <dt id="_CPPv3N5Azura6Camera9RecomputeEv">
 <span id="_CPPv2N5Azura6Camera9RecomputeEv"></span><span id="Azura::Camera::Recompute"></span><span class="target" id="class_azura_1_1_camera_1a2e56344e6c376980b7b8eef003622d57"></span><em class="property">virtual</em> void <code class="descname">Recompute</code><span class="sig-paren">(</span><span class="sig-paren">)</span> = 0<a class="headerlink" href="#_CPPv3N5Azura6Camera9RecomputeEv" title="Permalink to this definition">¶</a><br /></dt>
-<dd></dd></dl>
+<dd><p>Tells the camera to update its matrices &amp; other properties. </p>
+<p>Cameras in Azura don’t recompute always. For example, you maybe wanted to move the camera first, then rotate it, maybe then shift it due to some physics. At the end, One can call recompute only once to get the final view projection matrix.</p>
+<p>Recompute will compute the view &amp; projection matrices (and their combinations). </p>
+</dd></dl>
 
 <dl class="function">
 <dt id="_CPPv3N5Azura6Camera6UpdateEf">
 <span id="_CPPv2N5Azura6Camera6UpdateEf"></span><span id="Azura::Camera::Update__float"></span><span class="target" id="class_azura_1_1_camera_1a8f30660edaed4af67b85c5bfb4abf243"></span><em class="property">virtual</em> void <code class="descname">Update</code><span class="sig-paren">(</span>float <em>timeDelta</em><span class="sig-paren">)</span> = 0<a class="headerlink" href="#_CPPv3N5Azura6Camera6UpdateEf" title="Permalink to this definition">¶</a><br /></dt>
-<dd></dd></dl>
+<dd><p>Update based on <a class="reference internal" href="class_azura_1_1_window.html#class_azura_1_1_window"><span class="std std-ref">Window</span></a> events. </p>
+<p>Azura cameras have the ability to listen to keyboard events or mouse events. They can then perform movements based on the <code class="docutils literal notranslate"><span class="pre">timeDelta</span></code> passed. This is highly useful as every <a class="reference internal" href="class_azura_1_1_polar_camera.html#class_azura_1_1_polar_camera"><span class="std std-ref">PolarCamera</span></a> or <a class="reference internal" href="class_azura_1_1_fly_through_camera.html#class_azura_1_1_fly_through_camera"><span class="std std-ref">FlyThroughCamera</span></a> are generally the same with some modification for the screen, fovy etc.</p>
+<p>They all respond to a basic set of movements. However, the user can modify the keyboard keys for each camera. But this is highly dependent on the application using the camera. For example, WASD is the default for all cameras. But one can change those keys to maybe say the arrow keys.</p>
+<p><dl class="docutils">
+<dt><strong>Parameters</strong></dt>
+<dd><ul class="breatheparameterlist first last simple">
+<li><code class="docutils literal notranslate"><span class="pre">timeDelta</span></code>: The time delta </li>
+</ul>
+</dd>
+</dl>
+</p>
+</dd></dl>
 
 <dl class="function">
 <dt id="_CPPv3N5Azura6Camera12OnMouseEventE10MouseEvent">
@@ -376,10 +505,10 @@
   
     <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
       
-        <a href="class_azura_1_1_cloth_mesh.html" class="btn btn-neutral float-right" title="Class ClothMesh" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+        <a href="class_azura_1_1_compute_pool.html" class="btn btn-neutral float-right" title="Class ComputePool" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
       
       
-        <a href="class_azura_1_1_app_renderer.html" class="btn btn-neutral" title="Class AppRenderer" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+        <a href="struct_azura_1_1_vulkan_1_1_vk_queue_indices.html" class="btn btn-neutral" title="Struct VkQueueIndices" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
       
     </div>
   

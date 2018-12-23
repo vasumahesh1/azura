@@ -5,25 +5,41 @@
     <includes refid="_stack_allocator_8h" local="yes">Memory/StackAllocator.h</includes>
     <includes local="no">stdlib.h</includes>
     <incdepgraph>
-      <node id="4334">
+      <node id="4300">
+        <label>cstdint</label>
+      </node>
+      <node id="4302">
         <label>stdlib.h</label>
       </node>
-      <node id="4331">
-        <label>Source/Common/Src/Memory/StackAllocator.cpp</label>
-        <link refid="_stack_allocator_8cpp"/>
-        <childnode refid="4332" relation="include">
-        </childnode>
-        <childnode refid="4334" relation="include">
-        </childnode>
+      <node id="4301">
+        <label>string</label>
       </node>
-      <node id="4332">
+      <node id="4297">
         <label>Memory/StackAllocator.h</label>
         <link refid="_stack_allocator_8h_source"/>
-        <childnode refid="4333" relation="include">
+        <childnode refid="4298" relation="include">
         </childnode>
       </node>
-      <node id="4333">
+      <node id="4296">
+        <label>Source/Common/Src/Memory/StackAllocator.cpp</label>
+        <link refid="_stack_allocator_8cpp"/>
+        <childnode refid="4297" relation="include">
+        </childnode>
+        <childnode refid="4302" relation="include">
+        </childnode>
+      </node>
+      <node id="4299">
+        <label>cstddef</label>
+      </node>
+      <node id="4298">
         <label>Types.h</label>
+        <link refid="_types_8h_source"/>
+        <childnode refid="4299" relation="include">
+        </childnode>
+        <childnode refid="4300" relation="include">
+        </childnode>
+        <childnode refid="4301" relation="include">
+        </childnode>
       </node>
     </incdepgraph>
     <innernamespace refid="namespace_a_z">AZ</innernamespace>

@@ -4,69 +4,58 @@
     <compoundname>PolarCamera.h</compoundname>
     <includes refid="_camera_8h" local="yes">Camera.h</includes>
     <includedby refid="_polar_camera_8cpp" local="yes">Source/Camera/Src/PolarCamera.cpp</includedby>
-    <includedby refid="0___test_zone_2_inc_2_test_zone_2_app_renderer_8h" local="yes">Source/Samples/0_TestZone/Inc/TestZone/AppRenderer.h</includedby>
-    <includedby refid="1___procedural_planet_2_inc_2_procedural_planet_2_app_renderer_8h" local="yes">Source/Samples/1_ProceduralPlanet/Inc/ProceduralPlanet/AppRenderer.h</includedby>
-    <includedby refid="3___cloth_sim_2_inc_2_cloth_sim_2_app_renderer_8h" local="yes">Source/Samples/3_ClothSim/Inc/ClothSim/AppRenderer.h</includedby>
     <incdepgraph>
-      <node id="3762">
-        <label>Camera.h</label>
-        <link refid="_camera_8h_source"/>
-        <childnode refid="3763" relation="include">
-        </childnode>
-        <childnode refid="3764" relation="include">
-        </childnode>
-        <childnode refid="3766" relation="include">
+      <node id="3818">
+        <label>cstdint</label>
+      </node>
+      <node id="3819">
+        <label>string</label>
+      </node>
+      <node id="3814">
+        <label>Source/Camera/Inc/Camera/PolarCamera.h</label>
+        <link refid="_polar_camera_8h"/>
+        <childnode refid="3815" relation="include">
         </childnode>
       </node>
-      <node id="3764">
-        <label>Math/Core.h</label>
-        <link refid="_core_8h_source"/>
-        <childnode refid="3765" relation="include">
-        </childnode>
-        <childnode refid="3763" relation="include">
-        </childnode>
-      </node>
-      <node id="3766">
+      <node id="3822">
         <label>Core/Events.h</label>
         <link refid="_events_8h_source"/>
       </node>
-      <node id="3763">
-        <label>Types.h</label>
+      <node id="3820">
+        <label>Math/Core.h</label>
+        <link refid="_core_8h_source"/>
+        <childnode refid="3821" relation="include">
+        </childnode>
+        <childnode refid="3816" relation="include">
+        </childnode>
       </node>
-      <node id="3765">
+      <node id="3815">
+        <label>Camera.h</label>
+        <link refid="_camera_8h_source"/>
+        <childnode refid="3816" relation="include">
+        </childnode>
+        <childnode refid="3820" relation="include">
+        </childnode>
+        <childnode refid="3822" relation="include">
+        </childnode>
+      </node>
+      <node id="3817">
+        <label>cstddef</label>
+      </node>
+      <node id="3821">
         <label>mathfu/matrix.h</label>
       </node>
-      <node id="3761">
-        <label>Source/Camera/Inc/Camera/PolarCamera.h</label>
-        <link refid="_polar_camera_8h"/>
-        <childnode refid="3762" relation="include">
+      <node id="3816">
+        <label>Types.h</label>
+        <link refid="_types_8h_source"/>
+        <childnode refid="3817" relation="include">
+        </childnode>
+        <childnode refid="3818" relation="include">
+        </childnode>
+        <childnode refid="3819" relation="include">
         </childnode>
       </node>
     </incdepgraph>
-    <invincdepgraph>
-      <node id="3770">
-        <label>Source/Samples/3_ClothSim/Inc/ClothSim/AppRenderer.h</label>
-        <link refid="3___cloth_sim_2_inc_2_cloth_sim_2_app_renderer_8h_source"/>
-      </node>
-      <node id="3769">
-        <label>Source/Samples/1_ProceduralPlanet/Inc/ProceduralPlanet/AppRenderer.h</label>
-        <link refid="1___procedural_planet_2_inc_2_procedural_planet_2_app_renderer_8h_source"/>
-      </node>
-      <node id="3768">
-        <label>Source/Samples/0_TestZone/Inc/TestZone/AppRenderer.h</label>
-        <link refid="0___test_zone_2_inc_2_test_zone_2_app_renderer_8h_source"/>
-      </node>
-      <node id="3767">
-        <label>Source/Camera/Inc/Camera/PolarCamera.h</label>
-        <link refid="_polar_camera_8h"/>
-        <childnode refid="3768" relation="include">
-        </childnode>
-        <childnode refid="3769" relation="include">
-        </childnode>
-        <childnode refid="3770" relation="include">
-        </childnode>
-      </node>
-    </invincdepgraph>
     <innerclass refid="class_azura_1_1_polar_camera" prot="public">Azura::PolarCamera</innerclass>
     <innernamespace refid="namespace_azura">Azura</innernamespace>
     <briefdescription>
@@ -85,7 +74,7 @@
 <codeline lineno="9"><highlight class="normal"></highlight></codeline>
 <codeline lineno="10"><highlight class="normal"><sp/><sp/><ref refid="class_azura_1_1_polar_camera" kindref="compound">PolarCamera</ref>(U32<sp/>width,<sp/>U32<sp/>height,<sp/></highlight><highlight class="keywordtype">float</highlight><highlight class="normal"><sp/>thethaDeg,<sp/></highlight><highlight class="keywordtype">float</highlight><highlight class="normal"><sp/>phiDeg,<sp/></highlight><highlight class="keywordtype">float</highlight><highlight class="normal"><sp/>zoom);</highlight></codeline>
 <codeline lineno="11"><highlight class="normal"></highlight></codeline>
-<codeline lineno="12"><highlight class="normal"><sp/><sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/>Recompute()<sp/></highlight><highlight class="keyword">override</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="12"><highlight class="normal"><sp/><sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/><ref refid="class_azura_1_1_polar_camera_1aa46eb2bbc8bf44eb48fecb9cb1f412f3" kindref="member">Recompute</ref>()<sp/></highlight><highlight class="keyword">override</highlight><highlight class="normal">;</highlight></codeline>
 <codeline lineno="13"><highlight class="normal"><sp/><sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/>OnMouseEvent(<ref refid="struct_azura_1_1_mouse_event" kindref="compound">MouseEvent</ref><sp/>mouseEvent)<sp/></highlight><highlight class="keyword">override</highlight><highlight class="normal">;</highlight></codeline>
 <codeline lineno="14"><highlight class="normal"><sp/><sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/>OnKeyEvent(<ref refid="struct_azura_1_1_key_event" kindref="compound">KeyEvent</ref><sp/>keyEvent)<sp/></highlight><highlight class="keyword">override</highlight><highlight class="normal">;</highlight></codeline>
 <codeline lineno="15"><highlight class="normal"></highlight></codeline>
@@ -99,7 +88,7 @@
 <codeline lineno="23"><highlight class="normal"></highlight></codeline>
 <codeline lineno="24"><highlight class="normal"><sp/><sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/>SetStepSize(</highlight><highlight class="keywordtype">float</highlight><highlight class="normal"><sp/>value);</highlight></codeline>
 <codeline lineno="25"><highlight class="normal"></highlight></codeline>
-<codeline lineno="26"><highlight class="normal"><sp/><sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/>Update(</highlight><highlight class="keywordtype">float</highlight><highlight class="normal"><sp/>timeDelta)<sp/></highlight><highlight class="keyword">override</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="26"><highlight class="normal"><sp/><sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/><ref refid="class_azura_1_1_polar_camera_1a569e54d71186b1e31de8306fe5eebd9b" kindref="member">Update</ref>(</highlight><highlight class="keywordtype">float</highlight><highlight class="normal"><sp/>timeDelta)<sp/></highlight><highlight class="keyword">override</highlight><highlight class="normal">;</highlight></codeline>
 <codeline lineno="27"><highlight class="normal"></highlight></codeline>
 <codeline lineno="28"><highlight class="normal"></highlight><highlight class="keyword">private</highlight><highlight class="normal">:</highlight></codeline>
 <codeline lineno="29"><highlight class="normal"><sp/><sp/></highlight><highlight class="keywordtype">float</highlight><highlight class="normal"><sp/>m_theta{0.0f};</highlight></codeline>

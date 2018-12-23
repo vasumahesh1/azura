@@ -72,3 +72,11 @@ This is the one single visual studio solution containing all projects. You can n
 
 .. note:: Visual Studio projects have reduced static analysis and compiler checks. In short, if your visual studio project builds then the main build may or may not build. This is due to stricter checks in the main build allowing you to hack through code in VS. But obviously, correcting the hacks once the code works.
 
+Building Documentation
+--------------------------
+
+Make sure you have the required modules for documentation generation.
+You can use the ``--docs`` override to generate docs. Based on the platform it will call the necessary scripts.
+
+From an overview, The docs are first built using Doxygen. They output an XML structure which is converted to reStructured Text using Sphinx docs and their doxygen bridge plugin called ``breathe``.
+

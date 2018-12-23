@@ -4,60 +4,68 @@
     <compoundname>Edge.h</compoundname>
     <includes refid="_core_8h" local="no">Math/Core.h</includes>
     <includes local="no">boost/container_hash/hash.hpp</includes>
-    <includedby refid="_physics_2_inc_2_physics_2_geometry_2_cloth_mesh_8h" local="no">Source/Physics/Inc/Physics/Geometry/ClothMesh.h</includedby>
+    <includedby refid="_cloth_mesh_8h" local="no">Source/Physics/Inc/Physics/Geometry/ClothMesh.h</includedby>
     <includedby refid="_cloth_plane_8h" local="no">Source/Physics/Inc/Physics/Geometry/ClothPlane.h</includedby>
     <includedby refid="_edge_8cpp" local="yes">Source/Physics/Src/Geometry/Edge.cpp</includedby>
     <incdepgraph>
-      <node id="5463">
-        <label>Math/Core.h</label>
-        <link refid="_core_8h_source"/>
-        <childnode refid="5464" relation="include">
-        </childnode>
-        <childnode refid="5465" relation="include">
-        </childnode>
+      <node id="4882">
+        <label>cstdint</label>
       </node>
-      <node id="5466">
+      <node id="4884">
         <label>boost/container_hash/hash.hpp</label>
       </node>
-      <node id="5462">
+      <node id="4883">
+        <label>string</label>
+      </node>
+      <node id="4877">
         <label>Source/Physics/Inc/Physics/Geometry/Edge.h</label>
         <link refid="_edge_8h"/>
-        <childnode refid="5463" relation="include">
+        <childnode refid="4878" relation="include">
         </childnode>
-        <childnode refid="5466" relation="include">
+        <childnode refid="4884" relation="include">
         </childnode>
       </node>
-      <node id="5465">
-        <label>Types.h</label>
+      <node id="4878">
+        <label>Math/Core.h</label>
+        <link refid="_core_8h_source"/>
+        <childnode refid="4879" relation="include">
+        </childnode>
+        <childnode refid="4880" relation="include">
+        </childnode>
       </node>
-      <node id="5464">
+      <node id="4881">
+        <label>cstddef</label>
+      </node>
+      <node id="4879">
         <label>mathfu/matrix.h</label>
+      </node>
+      <node id="4880">
+        <label>Types.h</label>
+        <link refid="_types_8h_source"/>
+        <childnode refid="4881" relation="include">
+        </childnode>
+        <childnode refid="4882" relation="include">
+        </childnode>
+        <childnode refid="4883" relation="include">
+        </childnode>
       </node>
     </incdepgraph>
     <invincdepgraph>
-      <node id="5470">
-        <label>Source/Physics/Inc/Physics/Geometry/ClothPlane.h</label>
-        <link refid="_cloth_plane_8h_source"/>
-        <childnode refid="5469" relation="include">
-        </childnode>
-      </node>
-      <node id="5469">
-        <label>Source/Samples/3_ClothSim/Inc/ClothSim/AppRenderer.h</label>
-        <link refid="3___cloth_sim_2_inc_2_cloth_sim_2_app_renderer_8h_source"/>
-      </node>
-      <node id="5467">
+      <node id="4885">
         <label>Source/Physics/Inc/Physics/Geometry/Edge.h</label>
         <link refid="_edge_8h"/>
-        <childnode refid="5468" relation="include">
+        <childnode refid="4886" relation="include">
         </childnode>
-        <childnode refid="5470" relation="include">
+        <childnode refid="4887" relation="include">
         </childnode>
       </node>
-      <node id="5468">
+      <node id="4887">
+        <label>Source/Physics/Inc/Physics/Geometry/ClothPlane.h</label>
+        <link refid="_cloth_plane_8h_source"/>
+      </node>
+      <node id="4886">
         <label>Source/Physics/Inc/Physics/Geometry/ClothMesh.h</label>
-        <link refid="_physics_2_inc_2_physics_2_geometry_2_cloth_mesh_8h_source"/>
-        <childnode refid="5469" relation="include">
-        </childnode>
+        <link refid="_cloth_mesh_8h_source"/>
       </node>
     </invincdepgraph>
     <innerclass refid="struct_azura_1_1_physics_1_1_edge" prot="public">Azura::Physics::Edge</innerclass>

@@ -41,10 +41,6 @@ Included By
 
 - :ref:`file_Source_Azura_RenderSystem_Src_Generic_PoolPrimitives.cpp`
 
-- :ref:`file_Source_Samples_1_ProceduralPlanet_Src_AppRenderer.cpp`
-
-- :ref:`file_Source_Samples_2_DeferredRenderer_Src_ForwardPlusComputeScene.cpp`
-
 
 
 

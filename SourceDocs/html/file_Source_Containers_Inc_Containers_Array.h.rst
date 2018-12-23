@@ -47,8 +47,6 @@ Included By
 
 - :ref:`file_Source_Containers_Inc_Containers_Vector.h`
 
-- :ref:`file_Source_Containers_Test_Array_test.h`
-
 
 
 

@@ -5,47 +5,50 @@
     <includes refid="_core_8h" local="yes">Math/Core.h</includes>
     <includes refid="_events_8h" local="yes">Core/Events.h</includes>
     <includedby refid="_transform_component_8cpp" local="yes">Source/Math/Src/TransformComponent.cpp</includedby>
-    <includedby refid="3___cloth_sim_2_inc_2_cloth_sim_2_app_renderer_8h" local="yes">Source/Samples/3_ClothSim/Inc/ClothSim/AppRenderer.h</includedby>
     <incdepgraph>
-      <node id="5323">
-        <label>Math/Core.h</label>
-        <link refid="_core_8h_source"/>
-        <childnode refid="5324" relation="include">
-        </childnode>
-        <childnode refid="5325" relation="include">
-        </childnode>
+      <node id="4732">
+        <label>cstdint</label>
       </node>
-      <node id="5322">
+      <node id="4727">
         <label>Source/Math/Inc/Math/TransformComponent.h</label>
         <link refid="_transform_component_8h"/>
-        <childnode refid="5323" relation="include">
+        <childnode refid="4728" relation="include">
         </childnode>
-        <childnode refid="5326" relation="include">
+        <childnode refid="4734" relation="include">
         </childnode>
       </node>
-      <node id="5326">
+      <node id="4733">
+        <label>string</label>
+      </node>
+      <node id="4734">
         <label>Core/Events.h</label>
         <link refid="_events_8h_source"/>
       </node>
-      <node id="5325">
-        <label>Types.h</label>
-      </node>
-      <node id="5324">
-        <label>mathfu/matrix.h</label>
-      </node>
-    </incdepgraph>
-    <invincdepgraph>
-      <node id="5327">
-        <label>Source/Math/Inc/Math/TransformComponent.h</label>
-        <link refid="_transform_component_8h"/>
-        <childnode refid="5328" relation="include">
+      <node id="4728">
+        <label>Math/Core.h</label>
+        <link refid="_core_8h_source"/>
+        <childnode refid="4729" relation="include">
+        </childnode>
+        <childnode refid="4730" relation="include">
         </childnode>
       </node>
-      <node id="5328">
-        <label>Source/Samples/3_ClothSim/Inc/ClothSim/AppRenderer.h</label>
-        <link refid="3___cloth_sim_2_inc_2_cloth_sim_2_app_renderer_8h_source"/>
+      <node id="4731">
+        <label>cstddef</label>
       </node>
-    </invincdepgraph>
+      <node id="4729">
+        <label>mathfu/matrix.h</label>
+      </node>
+      <node id="4730">
+        <label>Types.h</label>
+        <link refid="_types_8h_source"/>
+        <childnode refid="4731" relation="include">
+        </childnode>
+        <childnode refid="4732" relation="include">
+        </childnode>
+        <childnode refid="4733" relation="include">
+        </childnode>
+      </node>
+    </incdepgraph>
     <innerclass refid="class_azura_1_1_math_1_1_transform_component" prot="public">Azura::Math::TransformComponent</innerclass>
     <innernamespace refid="namespace_azura">Azura</innernamespace>
     <innernamespace refid="namespace_azura_1_1_math">Azura::Math</innernamespace>

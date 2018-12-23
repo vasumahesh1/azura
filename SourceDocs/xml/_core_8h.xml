@@ -3,262 +3,144 @@
   <compounddef id="_core_8h" kind="file" language="C++">
     <compoundname>Core.h</compoundname>
     <includes local="no">mathfu/matrix.h</includes>
-    <includes local="yes">Types.h</includes>
-    <includedby refid="_render_test_cases_8h" local="yes">Source/Azura/RenderSystem/Test/RenderTestCases.h</includedby>
+    <includes refid="_types_8h" local="yes">Types.h</includes>
     <includedby refid="_camera_8h" local="yes">Source/Camera/Inc/Camera/Camera.h</includedby>
     <includedby refid="_fly_through_camera_8h" local="yes">Source/Camera/Inc/Camera/FlyThroughCamera.h</includedby>
     <includedby refid="_icosphere_8h" local="yes">Source/Math/Inc/Math/Icosphere.h</includedby>
     <includedby refid="_plane_8h" local="yes">Source/Math/Inc/Math/Plane.h</includedby>
-    <includedby refid="_math_2_inc_2_math_2_transform_8h" local="yes">Source/Math/Inc/Math/Transform.h</includedby>
+    <includedby refid="_transform_8h" local="yes">Source/Math/Inc/Math/Transform.h</includedby>
     <includedby refid="_transform_component_8h" local="yes">Source/Math/Inc/Math/TransformComponent.h</includedby>
-    <includedby refid="_physics_2_inc_2_physics_2_geometry_2_cloth_mesh_8h" local="no">Source/Physics/Inc/Physics/Geometry/ClothMesh.h</includedby>
+    <includedby refid="_cloth_mesh_8h" local="no">Source/Physics/Inc/Physics/Geometry/ClothMesh.h</includedby>
     <includedby refid="_cloth_plane_8h" local="no">Source/Physics/Inc/Physics/Geometry/ClothPlane.h</includedby>
     <includedby refid="_edge_8h" local="no">Source/Physics/Inc/Physics/Geometry/Edge.h</includedby>
     <includedby refid="_constraints_8h" local="no">Source/Physics/Inc/Physics/PBD/Cloth/Constraints.h</includedby>
     <includedby refid="_solving_view_8h" local="no">Source/Physics/Inc/Physics/PBD/Common/SolvingView.h</includedby>
-    <includedby refid="0___test_zone_2_inc_2_test_zone_2_app_renderer_8h" local="yes">Source/Samples/0_TestZone/Inc/TestZone/AppRenderer.h</includedby>
-    <includedby refid="_cloth_common_8h" local="yes">Source/Samples/0_TestZone/Inc/TestZone/ClothCommon.h</includedby>
-    <includedby refid="_samples_20___test_zone_2_inc_2_test_zone_2_cloth_mesh_8h" local="yes">Source/Samples/0_TestZone/Inc/TestZone/ClothMesh.h</includedby>
-    <includedby refid="_imported_cloth_mesh_8h" local="yes">Source/Samples/0_TestZone/Inc/TestZone/ImportedClothMesh.h</includedby>
-    <includedby refid="1___procedural_planet_2_inc_2_procedural_planet_2_app_renderer_8h" local="yes">Source/Samples/1_ProceduralPlanet/Inc/ProceduralPlanet/AppRenderer.h</includedby>
-    <includedby refid="_samples_22___deferred_renderer_2_inc_2_app_2_common_8h" local="yes">Source/Samples/2_DeferredRenderer/Inc/App/Common.h</includedby>
-    <includedby refid="3___cloth_sim_2_inc_2_cloth_sim_2_app_renderer_8h" local="yes">Source/Samples/3_ClothSim/Inc/ClothSim/AppRenderer.h</includedby>
     <incdepgraph>
-      <node id="5244">
+      <node id="4653">
+        <label>cstdint</label>
+      </node>
+      <node id="4654">
+        <label>string</label>
+      </node>
+      <node id="4649">
         <label>Source/Math/Inc/Math/Core.h</label>
         <link refid="_core_8h"/>
-        <childnode refid="5245" relation="include">
+        <childnode refid="4650" relation="include">
         </childnode>
-        <childnode refid="5246" relation="include">
+        <childnode refid="4651" relation="include">
         </childnode>
       </node>
-      <node id="5246">
-        <label>Types.h</label>
+      <node id="4652">
+        <label>cstddef</label>
       </node>
-      <node id="5245">
+      <node id="4650">
         <label>mathfu/matrix.h</label>
+      </node>
+      <node id="4651">
+        <label>Types.h</label>
+        <link refid="_types_8h_source"/>
+        <childnode refid="4652" relation="include">
+        </childnode>
+        <childnode refid="4653" relation="include">
+        </childnode>
+        <childnode refid="4654" relation="include">
+        </childnode>
       </node>
     </incdepgraph>
     <invincdepgraph>
-      <node id="5249">
-        <label>Source/Camera/Inc/Camera/Camera.h</label>
-        <link refid="_camera_8h_source"/>
-        <childnode refid="5250" relation="include">
-        </childnode>
-        <childnode refid="5252" relation="include">
-        </childnode>
-        <childnode refid="5256" relation="include">
-        </childnode>
-      </node>
-      <node id="5247">
-        <label>Source/Math/Inc/Math/Core.h</label>
-        <link refid="_core_8h"/>
-        <childnode refid="5248" relation="include">
-        </childnode>
-        <childnode refid="5249" relation="include">
-        </childnode>
-        <childnode refid="5250" relation="include">
-        </childnode>
-        <childnode refid="5260" relation="include">
-        </childnode>
-        <childnode refid="5261" relation="include">
-        </childnode>
-        <childnode refid="5262" relation="include">
-        </childnode>
-        <childnode refid="5263" relation="include">
-        </childnode>
-        <childnode refid="5264" relation="include">
-        </childnode>
-        <childnode refid="5265" relation="include">
-        </childnode>
-        <childnode refid="5266" relation="include">
-        </childnode>
-        <childnode refid="5267" relation="include">
-        </childnode>
-        <childnode refid="5269" relation="include">
-        </childnode>
-        <childnode refid="5253" relation="include">
-        </childnode>
-        <childnode refid="5270" relation="include">
-        </childnode>
-        <childnode refid="5271" relation="include">
-        </childnode>
-        <childnode refid="5272" relation="include">
-        </childnode>
-        <childnode refid="5254" relation="include">
-        </childnode>
-        <childnode refid="5273" relation="include">
-        </childnode>
-        <childnode refid="5255" relation="include">
-        </childnode>
-      </node>
-      <node id="5257">
-        <label>Source/Samples/2_DeferredRenderer/Inc/Forward/ForwardComputeScene.h</label>
-        <link refid="_forward_compute_scene_8h_source"/>
-        <childnode refid="5251" relation="include">
-        </childnode>
-      </node>
-      <node id="5251">
-        <label>Source/Samples/2_DeferredRenderer/Inc/App/App.h</label>
-        <link refid="_app_8h_source"/>
-      </node>
-      <node id="5269">
-        <label>Source/Physics/Inc/Physics/PBD/Common/SolvingView.h</label>
-        <link refid="_solving_view_8h_source"/>
-        <childnode refid="5268" relation="include">
-        </childnode>
-      </node>
-      <node id="5265">
-        <label>Source/Physics/Inc/Physics/Geometry/ClothPlane.h</label>
-        <link refid="_cloth_plane_8h_source"/>
-        <childnode refid="5255" relation="include">
-        </childnode>
-      </node>
-      <node id="5259">
-        <label>Source/Samples/2_DeferredRenderer/Inc/ForwardPlus/ForwardPlusComputeScene.h</label>
-        <link refid="_forward_plus_compute_scene_8h_source"/>
-        <childnode refid="5251" relation="include">
-        </childnode>
-      </node>
-      <node id="5272">
-        <label>Source/Samples/0_TestZone/Inc/TestZone/ImportedClothMesh.h</label>
-        <link refid="_imported_cloth_mesh_8h_source"/>
-        <childnode refid="5253" relation="include">
-        </childnode>
-      </node>
-      <node id="5274">
-        <label>Source/Samples/2_DeferredRenderer/Inc/App/LightTexture.h</label>
-        <link refid="_light_texture_8h_source"/>
-        <childnode refid="5251" relation="include">
-        </childnode>
-        <childnode refid="5257" relation="include">
-        </childnode>
-        <childnode refid="5258" relation="include">
-        </childnode>
-        <childnode refid="5259" relation="include">
-        </childnode>
-      </node>
-      <node id="5271">
-        <label>Source/Samples/0_TestZone/Inc/TestZone/ClothMesh.h</label>
-        <link refid="_samples_20___test_zone_2_inc_2_test_zone_2_cloth_mesh_8h_source"/>
-        <childnode refid="5253" relation="include">
-        </childnode>
-      </node>
-      <node id="5263">
-        <label>Source/Math/Inc/Math/TransformComponent.h</label>
-        <link refid="_transform_component_8h_source"/>
-        <childnode refid="5255" relation="include">
-        </childnode>
-      </node>
-      <node id="5273">
-        <label>Source/Samples/2_DeferredRenderer/Inc/App/Common.h</label>
-        <link refid="_samples_22___deferred_renderer_2_inc_2_app_2_common_8h_source"/>
-        <childnode refid="5251" relation="include">
-        </childnode>
-        <childnode refid="5274" relation="include">
-        </childnode>
-        <childnode refid="5256" relation="include">
-        </childnode>
-      </node>
-      <node id="5255">
-        <label>Source/Samples/3_ClothSim/Inc/ClothSim/AppRenderer.h</label>
-        <link refid="3___cloth_sim_2_inc_2_cloth_sim_2_app_renderer_8h_source"/>
-      </node>
-      <node id="5250">
+      <node id="4657">
         <label>Source/Camera/Inc/Camera/FlyThroughCamera.h</label>
         <link refid="_fly_through_camera_8h_source"/>
-        <childnode refid="5251" relation="include">
-        </childnode>
       </node>
-      <node id="5254">
-        <label>Source/Samples/1_ProceduralPlanet/Inc/ProceduralPlanet/AppRenderer.h</label>
-        <link refid="1___procedural_planet_2_inc_2_procedural_planet_2_app_renderer_8h_source"/>
+      <node id="4660">
+        <label>Source/Math/Inc/Math/Plane.h</label>
+        <link refid="_plane_8h_source"/>
       </node>
-      <node id="5253">
-        <label>Source/Samples/0_TestZone/Inc/TestZone/AppRenderer.h</label>
-        <link refid="0___test_zone_2_inc_2_test_zone_2_app_renderer_8h_source"/>
+      <node id="4662">
+        <label>Source/Math/Inc/Math/TransformComponent.h</label>
+        <link refid="_transform_component_8h_source"/>
       </node>
-      <node id="5248">
-        <label>Source/Azura/RenderSystem/Test/RenderTestCases.h</label>
-        <link refid="_render_test_cases_8h_source"/>
-      </node>
-      <node id="5266">
-        <label>Source/Physics/Inc/Physics/Geometry/Edge.h</label>
-        <link refid="_edge_8h_source"/>
-        <childnode refid="5264" relation="include">
-        </childnode>
-        <childnode refid="5265" relation="include">
-        </childnode>
-      </node>
-      <node id="5270">
-        <label>Source/Samples/0_TestZone/Inc/TestZone/ClothCommon.h</label>
-        <link refid="_cloth_common_8h_source"/>
-        <childnode refid="5271" relation="include">
-        </childnode>
-        <childnode refid="5272" relation="include">
-        </childnode>
-      </node>
-      <node id="5268">
+      <node id="4667">
         <label>Source/Physics/Inc/Physics/PBD/Cloth/ClothSolvingView.h</label>
         <link refid="_cloth_solving_view_8h_source"/>
-        <childnode refid="5264" relation="include">
+        <childnode refid="4663" relation="include">
         </childnode>
-        <childnode refid="5265" relation="include">
-        </childnode>
-      </node>
-      <node id="5258">
-        <label>Source/Samples/2_DeferredRenderer/Inc/Forward/ForwardScene.h</label>
-        <link refid="_forward_scene_8h_source"/>
-        <childnode refid="5251" relation="include">
+        <childnode refid="4664" relation="include">
         </childnode>
       </node>
-      <node id="5262">
-        <label>Source/Math/Inc/Math/Transform.h</label>
-        <link refid="_math_2_inc_2_math_2_transform_8h_source"/>
+      <node id="4658">
+        <label>Source/Camera/Inc/Camera/PolarCamera.h</label>
+        <link refid="_polar_camera_8h_source"/>
       </node>
-      <node id="5260">
+      <node id="4665">
+        <label>Source/Physics/Inc/Physics/Geometry/Edge.h</label>
+        <link refid="_edge_8h_source"/>
+        <childnode refid="4663" relation="include">
+        </childnode>
+        <childnode refid="4664" relation="include">
+        </childnode>
+      </node>
+      <node id="4664">
+        <label>Source/Physics/Inc/Physics/Geometry/ClothPlane.h</label>
+        <link refid="_cloth_plane_8h_source"/>
+      </node>
+      <node id="4659">
         <label>Source/Math/Inc/Math/Icosphere.h</label>
         <link refid="_icosphere_8h_source"/>
       </node>
-      <node id="5252">
-        <label>Source/Camera/Inc/Camera/PolarCamera.h</label>
-        <link refid="_polar_camera_8h_source"/>
-        <childnode refid="5253" relation="include">
+      <node id="4663">
+        <label>Source/Physics/Inc/Physics/Geometry/ClothMesh.h</label>
+        <link refid="_cloth_mesh_8h_source"/>
+      </node>
+      <node id="4655">
+        <label>Source/Math/Inc/Math/Core.h</label>
+        <link refid="_core_8h"/>
+        <childnode refid="4656" relation="include">
         </childnode>
-        <childnode refid="5254" relation="include">
+        <childnode refid="4657" relation="include">
         </childnode>
-        <childnode refid="5255" relation="include">
+        <childnode refid="4659" relation="include">
+        </childnode>
+        <childnode refid="4660" relation="include">
+        </childnode>
+        <childnode refid="4661" relation="include">
+        </childnode>
+        <childnode refid="4662" relation="include">
+        </childnode>
+        <childnode refid="4663" relation="include">
+        </childnode>
+        <childnode refid="4664" relation="include">
+        </childnode>
+        <childnode refid="4665" relation="include">
+        </childnode>
+        <childnode refid="4666" relation="include">
+        </childnode>
+        <childnode refid="4668" relation="include">
         </childnode>
       </node>
-      <node id="5261">
-        <label>Source/Math/Inc/Math/Plane.h</label>
-        <link refid="_plane_8h_source"/>
-        <childnode refid="5253" relation="include">
+      <node id="4656">
+        <label>Source/Camera/Inc/Camera/Camera.h</label>
+        <link refid="_camera_8h_source"/>
+        <childnode refid="4657" relation="include">
+        </childnode>
+        <childnode refid="4658" relation="include">
         </childnode>
       </node>
-      <node id="5256">
-        <label>Source/Samples/2_DeferredRenderer/Inc/App/Scene.h</label>
-        <link refid="_samples_22___deferred_renderer_2_inc_2_app_2_scene_8h_source"/>
-        <childnode refid="5251" relation="include">
-        </childnode>
-        <childnode refid="5257" relation="include">
-        </childnode>
-        <childnode refid="5258" relation="include">
-        </childnode>
-        <childnode refid="5259" relation="include">
-        </childnode>
-      </node>
-      <node id="5267">
+      <node id="4666">
         <label>Source/Physics/Inc/Physics/PBD/Cloth/Constraints.h</label>
         <link refid="_constraints_8h_source"/>
-        <childnode refid="5268" relation="include">
+        <childnode refid="4667" relation="include">
         </childnode>
       </node>
-      <node id="5264">
-        <label>Source/Physics/Inc/Physics/Geometry/ClothMesh.h</label>
-        <link refid="_physics_2_inc_2_physics_2_geometry_2_cloth_mesh_8h_source"/>
-        <childnode refid="5255" relation="include">
+      <node id="4668">
+        <label>Source/Physics/Inc/Physics/PBD/Common/SolvingView.h</label>
+        <link refid="_solving_view_8h_source"/>
+        <childnode refid="4667" relation="include">
         </childnode>
+      </node>
+      <node id="4661">
+        <label>Source/Math/Inc/Math/Transform.h</label>
+        <link refid="_transform_8h_source"/>
       </node>
     </invincdepgraph>
     <innernamespace refid="namespace_azura">Azura</innernamespace>

@@ -53,8 +53,6 @@ Included By
 
 - :ref:`file_Source_Physics_Src_Geometry_ClothPlane.cpp`
 
-- :ref:`file_Source_Samples_3_ClothSim_Inc_ClothSim_AppRenderer.h`
-
 
 
 

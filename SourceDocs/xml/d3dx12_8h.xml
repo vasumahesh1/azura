@@ -12,87 +12,87 @@
     <includedby refid="_d3_d12_scoped_image_8cpp" local="yes">Source/Azura/RenderSystem/Src/D3D12/D3D12ScopedImage.cpp</includedby>
     <includedby refid="_d3_d12_scoped_swap_chain_8cpp" local="yes">Source/Azura/RenderSystem/Src/D3D12/D3D12ScopedSwapChain.cpp</includedby>
     <incdepgraph>
-      <node id="724">
+      <node id="755">
+        <label>d3d12.h</label>
+      </node>
+      <node id="754">
         <label>Source/Azura/RenderSystem/Inc/D3D12/d3dx12.h</label>
         <link refid="d3dx12_8h"/>
-        <childnode refid="725" relation="include">
+        <childnode refid="755" relation="include">
         </childnode>
-      </node>
-      <node id="725">
-        <label>d3d12.h</label>
       </node>
     </incdepgraph>
     <invincdepgraph>
-      <node id="726">
-        <label>Source/Azura/RenderSystem/Inc/D3D12/d3dx12.h</label>
-        <link refid="d3dx12_8h"/>
-        <childnode refid="727" relation="include">
+      <node id="757">
+        <label>Source/Azura/RenderSystem/Inc/D3D12/D3D12Drawable.h</label>
+        <link refid="_d3_d12_drawable_8h_source"/>
+        <childnode refid="758" relation="include">
         </childnode>
-        <childnode refid="731" relation="include">
-        </childnode>
-      </node>
-      <node id="728">
-        <label>Source/Azura/RenderSystem/Inc/D3D12/D3D12ComputePool.h</label>
-        <link refid="_d3_d12_compute_pool_8h_source"/>
-        <childnode refid="729" relation="include">
+        <childnode refid="760" relation="include">
         </childnode>
       </node>
-      <node id="733">
-        <label>Source/Azura/RenderSystem/Inc/D3D12/D3D12ScopedPipeline.h</label>
-        <link refid="_d3_d12_scoped_pipeline_8h_source"/>
-        <childnode refid="728" relation="include">
-        </childnode>
-        <childnode refid="730" relation="include">
-        </childnode>
-      </node>
-      <node id="731">
-        <label>Source/Azura/RenderSystem/Inc/D3D12/D3D12ScopedShader.h</label>
-        <link refid="_d3_d12_scoped_shader_8h_source"/>
-        <childnode refid="729" relation="include">
-        </childnode>
-        <childnode refid="732" relation="include">
-        </childnode>
-        <childnode refid="733" relation="include">
-        </childnode>
-        <childnode refid="734" relation="include">
-        </childnode>
-      </node>
-      <node id="729">
+      <node id="759">
         <label>Source/Azura/RenderSystem/Inc/D3D12/D3D12Renderer.h</label>
         <link refid="_d3_d12_renderer_8h_source"/>
       </node>
-      <node id="734">
+      <node id="764">
         <label>Source/Azura/RenderSystem/Inc/D3D12/D3D12ScopedRenderPass.h</label>
         <link refid="_d3_d12_scoped_render_pass_8h_source"/>
-        <childnode refid="730" relation="include">
+        <childnode refid="760" relation="include">
         </childnode>
-        <childnode refid="729" relation="include">
+        <childnode refid="759" relation="include">
         </childnode>
-        <childnode refid="733" relation="include">
-        </childnode>
-      </node>
-      <node id="727">
-        <label>Source/Azura/RenderSystem/Inc/D3D12/D3D12Drawable.h</label>
-        <link refid="_d3_d12_drawable_8h_source"/>
-        <childnode refid="728" relation="include">
-        </childnode>
-        <childnode refid="730" relation="include">
+        <childnode refid="763" relation="include">
         </childnode>
       </node>
-      <node id="730">
-        <label>Source/Azura/RenderSystem/Inc/D3D12/D3D12DrawablePool.h</label>
-        <link refid="_d3_d12_drawable_pool_8h_source"/>
-        <childnode refid="729" relation="include">
+      <node id="756">
+        <label>Source/Azura/RenderSystem/Inc/D3D12/d3dx12.h</label>
+        <link refid="d3dx12_8h"/>
+        <childnode refid="757" relation="include">
+        </childnode>
+        <childnode refid="761" relation="include">
         </childnode>
       </node>
-      <node id="732">
+      <node id="763">
+        <label>Source/Azura/RenderSystem/Inc/D3D12/D3D12ScopedPipeline.h</label>
+        <link refid="_d3_d12_scoped_pipeline_8h_source"/>
+        <childnode refid="758" relation="include">
+        </childnode>
+        <childnode refid="760" relation="include">
+        </childnode>
+      </node>
+      <node id="762">
         <label>Source/Azura/RenderSystem/Inc/D3D12/D3D12ScopedComputePass.h</label>
         <link refid="_d3_d12_scoped_compute_pass_8h_source"/>
-        <childnode refid="728" relation="include">
+        <childnode refid="758" relation="include">
         </childnode>
-        <childnode refid="729" relation="include">
+        <childnode refid="759" relation="include">
         </childnode>
-        <childnode refid="733" relation="include">
+        <childnode refid="763" relation="include">
+        </childnode>
+      </node>
+      <node id="761">
+        <label>Source/Azura/RenderSystem/Inc/D3D12/D3D12ScopedShader.h</label>
+        <link refid="_d3_d12_scoped_shader_8h_source"/>
+        <childnode refid="759" relation="include">
+        </childnode>
+        <childnode refid="762" relation="include">
+        </childnode>
+        <childnode refid="763" relation="include">
+        </childnode>
+        <childnode refid="764" relation="include">
+        </childnode>
+      </node>
+      <node id="758">
+        <label>Source/Azura/RenderSystem/Inc/D3D12/D3D12ComputePool.h</label>
+        <link refid="_d3_d12_compute_pool_8h_source"/>
+        <childnode refid="759" relation="include">
+        </childnode>
+      </node>
+      <node id="760">
+        <label>Source/Azura/RenderSystem/Inc/D3D12/D3D12DrawablePool.h</label>
+        <link refid="_d3_d12_drawable_pool_8h_source"/>
+        <childnode refid="759" relation="include">
         </childnode>
       </node>
     </invincdepgraph>

@@ -17,9 +17,9 @@ Namespaces
 ----------
 
 
-- :ref:`namespace_Azura__Memory__@135`
+- :ref:`namespace_Azura__Memory__@130`
 
-- :ref:`namespace_Azura__Memory__@136`
+- :ref:`namespace_Azura__Memory__@131`
 
 
 Classes

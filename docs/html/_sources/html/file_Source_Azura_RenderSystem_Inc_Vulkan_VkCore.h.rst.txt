@@ -107,9 +107,9 @@ Functions
 
 - :ref:`exhale_function__vk_core_8h_1abd77ad56c4a78b01c4cb5938d7b881b0`
 
-- :ref:`exhale_function__vk_core_8h_1aa219c63788f055a98d342e5743dbf726`
-
 - :ref:`exhale_function__vk_core_8h_1a8568286acb69a8c7280f89556f37f734`
+
+- :ref:`exhale_function__vk_core_8h_1aa219c63788f055a98d342e5743dbf726`
 
 - :ref:`exhale_function__vk_core_8h_1a0d34232378b5917f10fb741c78228df7`
 
@@ -157,9 +157,9 @@ Functions
 
 - :ref:`exhale_function__vk_core_8h_1acd5ec39956e6e589cbf2bf39397ff512`
 
-- :ref:`exhale_function__vk_core_8h_1a98068b2973992fa9e6ff41837afac8fc`
-
 - :ref:`exhale_function__vk_core_8h_1a2981c19c708453994b7c5a36c272fa5e`
+
+- :ref:`exhale_function__vk_core_8h_1a98068b2973992fa9e6ff41837afac8fc`
 
 - :ref:`exhale_function__vk_core_8h_1af8d79f1edf4dd72141174565fb8dba0b`
 

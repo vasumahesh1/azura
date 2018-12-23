@@ -2,12 +2,8 @@
 <doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.8.14">
   <compounddef id="namespace_azura" kind="namespace" language="C++">
     <compoundname>Azura</compoundname>
-    <innerclass refid="class_azura_1_1_app" prot="public">Azura::App</innerclass>
     <innerclass refid="struct_azura_1_1_application_info" prot="public">Azura::ApplicationInfo</innerclass>
     <innerclass refid="struct_azura_1_1_application_requirements" prot="public">Azura::ApplicationRequirements</innerclass>
-    <innerclass refid="struct_azura_1_1_app_pass1" prot="public">Azura::AppPass1</innerclass>
-    <innerclass refid="class_azura_1_1_app_renderer" prot="public">Azura::AppRenderer</innerclass>
-    <innerclass refid="struct_azura_1_1_bending_constraint" prot="public">Azura::BendingConstraint</innerclass>
     <innerclass refid="struct_azura_1_1_blending_eq" prot="public">Azura::BlendingEq</innerclass>
     <innerclass refid="struct_azura_1_1_blend_state" prot="public">Azura::BlendState</innerclass>
     <innerclass refid="struct_azura_1_1_bounds2_d" prot="public">Azura::Bounds2D</innerclass>
@@ -18,58 +14,34 @@
     <innerclass refid="struct_azura_1_1_buffer_update" prot="public">Azura::BufferUpdate</innerclass>
     <innerclass refid="class_azura_1_1_camera" prot="public">Azura::Camera</innerclass>
     <innerclass refid="struct_azura_1_1_clear_data" prot="public">Azura::ClearData</innerclass>
-    <innerclass refid="struct_azura_1_1_cloth_compute_properties" prot="public">Azura::ClothComputeProperties</innerclass>
-    <innerclass refid="class_azura_1_1_cloth_mesh" prot="public">Azura::ClothMesh</innerclass>
-    <innerclass refid="struct_azura_1_1_compute_pass_data" prot="public">Azura::ComputePassData</innerclass>
     <innerclass refid="class_azura_1_1_compute_pool" prot="public">Azura::ComputePool</innerclass>
     <innerclass refid="struct_azura_1_1_compute_pool_create_info" prot="public">Azura::ComputePoolCreateInfo</innerclass>
-    <innerclass refid="struct_azura_1_1_compute_u_b_o" prot="public">Azura::ComputeUBO</innerclass>
     <innerclass refid="struct_azura_1_1_descriptor_count" prot="public">Azura::DescriptorCount</innerclass>
     <innerclass refid="struct_azura_1_1_descriptor_requirements" prot="public">Azura::DescriptorRequirements</innerclass>
     <innerclass refid="struct_azura_1_1_descriptor_slot" prot="public">Azura::DescriptorSlot</innerclass>
     <innerclass refid="struct_azura_1_1_descriptor_slot_create_info" prot="public">Azura::DescriptorSlotCreateInfo</innerclass>
     <innerclass refid="struct_azura_1_1_descriptor_table_entry" prot="public">Azura::DescriptorTableEntry</innerclass>
     <innerclass refid="struct_azura_1_1_device_requirements" prot="public">Azura::DeviceRequirements</innerclass>
-    <innerclass refid="struct_azura_1_1_distance_constraint" prot="public">Azura::DistanceConstraint</innerclass>
     <innerclass refid="class_azura_1_1_drawable" prot="public">Azura::Drawable</innerclass>
     <innerclass refid="struct_azura_1_1_drawable_create_info" prot="public">Azura::DrawableCreateInfo</innerclass>
     <innerclass refid="class_azura_1_1_drawable_pool" prot="public">Azura::DrawablePool</innerclass>
     <innerclass refid="struct_azura_1_1_drawable_pool_create_info" prot="public">Azura::DrawablePoolCreateInfo</innerclass>
-    <innerclass refid="struct_azura_1_1_edge" prot="public">Azura::Edge</innerclass>
-    <innerclass refid="struct_azura_1_1_edge_map_hash" prot="public">Azura::EdgeMapHash</innerclass>
     <innerclass refid="struct_azura_1_1_event" prot="public">Azura::Event</innerclass>
     <innerclass refid="class_azura_1_1_fly_through_camera" prot="public">Azura::FlyThroughCamera</innerclass>
     <innerclass refid="class_azura_1_1_f_n_v_hash_operator" prot="public">Azura::FNVHashOperator</innerclass>
-    <innerclass refid="struct_azura_1_1_forward_compute_pass" prot="public">Azura::ForwardComputePass</innerclass>
-    <innerclass refid="class_azura_1_1_forward_compute_scene" prot="public">Azura::ForwardComputeScene</innerclass>
-    <innerclass refid="struct_azura_1_1_forward_pass" prot="public">Azura::ForwardPass</innerclass>
-    <innerclass refid="struct_azura_1_1_forward_plus_compute_pass" prot="public">Azura::ForwardPlusComputePass</innerclass>
-    <innerclass refid="class_azura_1_1_forward_plus_compute_scene" prot="public">Azura::ForwardPlusComputeScene</innerclass>
-    <innerclass refid="class_azura_1_1_forward_scene" prot="public">Azura::ForwardScene</innerclass>
-    <innerclass refid="struct_azura_1_1_frustum" prot="public">Azura::Frustum</innerclass>
     <innerclass refid="class_azura_1_1_g_l_f_w_window" prot="public">Azura::GLFWWindow</innerclass>
     <innerclass refid="class_azura_1_1_g_l_t_f_mesh_interface" prot="public">Azura::GLTFMeshInterface</innerclass>
     <innerclass refid="struct_azura_1_1_g_p_u_buffer" prot="public">Azura::GPUBuffer</innerclass>
     <innerclass refid="class_azura_1_1_hash_operator" prot="public">Azura::HashOperator</innerclass>
-    <innerclass refid="class_azura_1_1_imported_cloth_mesh" prot="public">Azura::ImportedClothMesh</innerclass>
-    <innerclass refid="struct_azura_1_1_instance" prot="public">Azura::Instance</innerclass>
     <innerclass refid="struct_azura_1_1_key_event" prot="public">Azura::KeyEvent</innerclass>
     <innerclass refid="struct_azura_1_1_layer_subresource" prot="public">Azura::LayerSubresource</innerclass>
-    <innerclass refid="class_azura_1_1_light_texture" prot="public">Azura::LightTexture</innerclass>
-    <innerclass refid="struct_azura_1_1_light_u_b_o" prot="public">Azura::LightUBO</innerclass>
     <innerclass refid="class_azura_1_1_log" prot="public">Azura::Log</innerclass>
     <innerclass refid="struct_azura_1_1_mapped_g_p_u_buffer" prot="public">Azura::MappedGPUBuffer</innerclass>
     <innerclass refid="struct_azura_1_1_memory_requirements" prot="public">Azura::MemoryRequirements</innerclass>
-    <innerclass refid="struct_azura_1_1_mesh_object" prot="public">Azura::MeshObject</innerclass>
     <innerclass refid="struct_azura_1_1_mouse_event" prot="public">Azura::MouseEvent</innerclass>
-    <innerclass refid="struct_azura_1_1_normals_pass_data" prot="public">Azura::NormalsPassData</innerclass>
-    <innerclass refid="struct_azura_1_1_normal_u_b_o" prot="public">Azura::NormalUBO</innerclass>
     <innerclass refid="class_azura_1_1_not_implemented_exception" prot="public">Azura::NotImplementedException</innerclass>
-    <innerclass refid="struct_azura_1_1_pass_data" prot="public">Azura::PassData</innerclass>
     <innerclass refid="struct_azura_1_1_pipeline_pass_create_info" prot="public">Azura::PipelinePassCreateInfo</innerclass>
     <innerclass refid="struct_azura_1_1_pipeline_pass_input" prot="public">Azura::PipelinePassInput</innerclass>
-    <innerclass refid="struct_azura_1_1_plane" prot="public">Azura::Plane</innerclass>
-    <innerclass refid="struct_azura_1_1_point_light" prot="public">Azura::PointLight</innerclass>
     <innerclass refid="class_azura_1_1_polar_camera" prot="public">Azura::PolarCamera</innerclass>
     <innerclass refid="class_azura_1_1_pool_allocator" prot="public">Azura::PoolAllocator</innerclass>
     <innerclass refid="struct_azura_1_1_pool_node" prot="public">Azura::PoolNode</innerclass>
@@ -78,11 +50,7 @@
     <innerclass refid="struct_azura_1_1_render_target_create_info" prot="public">Azura::RenderTargetCreateInfo</innerclass>
     <innerclass refid="struct_azura_1_1_sampler_desc" prot="public">Azura::SamplerDesc</innerclass>
     <innerclass refid="struct_azura_1_1_sampler_info" prot="public">Azura::SamplerInfo</innerclass>
-    <innerclass refid="class_azura_1_1_scene" prot="public">Azura::Scene</innerclass>
-    <innerclass refid="struct_azura_1_1_scene_u_b_o" prot="public">Azura::SceneUBO</innerclass>
-    <innerclass refid="struct_azura_1_1_self_collision_constraint" prot="public">Azura::SelfCollisionConstraint</innerclass>
     <innerclass refid="class_azura_1_1_shader" prot="public">Azura::Shader</innerclass>
-    <innerclass refid="struct_azura_1_1_shader_controls" prot="public">Azura::ShaderControls</innerclass>
     <innerclass refid="struct_azura_1_1_shader_create_info" prot="public">Azura::ShaderCreateInfo</innerclass>
     <innerclass refid="struct_azura_1_1_shader_requirements" prot="public">Azura::ShaderRequirements</innerclass>
     <innerclass refid="struct_azura_1_1_shader_stage_info" prot="public">Azura::ShaderStageInfo</innerclass>
@@ -96,11 +64,8 @@
     <innerclass refid="struct_azura_1_1_texture_requirements" prot="public">Azura::TextureRequirements</innerclass>
     <innerclass refid="struct_azura_1_1_texture_subresource" prot="public">Azura::TextureSubresource</innerclass>
     <innerclass refid="struct_azura_1_1_thread_group_dimensions" prot="public">Azura::ThreadGroupDimensions</innerclass>
-    <innerclass refid="struct_azura_1_1_uniform_buffer_data" prot="public">Azura::UniformBufferData</innerclass>
     <innerclass refid="struct_azura_1_1_uniform_buffer_info" prot="public">Azura::UniformBufferInfo</innerclass>
-    <innerclass refid="struct_azura_1_1_vertex" prot="public">Azura::Vertex</innerclass>
     <innerclass refid="struct_azura_1_1_vertex_slot" prot="public">Azura::VertexSlot</innerclass>
-    <innerclass refid="struct_azura_1_1_vertex_with_u_v" prot="public">Azura::VertexWithUV</innerclass>
     <innerclass refid="struct_azura_1_1_viewport_dimensions" prot="public">Azura::ViewportDimensions</innerclass>
     <innerclass refid="class_azura_1_1_win32_g_l_f_w_window" prot="public">Azura::Win32GLFWWindow</innerclass>
     <innerclass refid="class_azura_1_1_window" prot="public">Azura::Window</innerclass>
@@ -117,10 +82,10 @@
     <innernamespace refid="namespace_azura_1_1_transform">Azura::Transform</innernamespace>
     <innernamespace refid="namespace_azura_1_1_vulkan">Azura::Vulkan</innernamespace>
       <sectiondef kind="enum">
-      <memberdef kind="enum" id="_azura_2_render_system_2_inc_2_generic_2_constants_8h_1aece4541733a1bc739293311414445e57" prot="public" static="no" strong="no">
+      <memberdef kind="enum" id="_constants_8h_1aece4541733a1bc739293311414445e57" prot="public" static="no" strong="no">
         <type></type>
         <name>@0</name>
-        <enumvalue id="_azura_2_render_system_2_inc_2_generic_2_constants_8h_1aece4541733a1bc739293311414445e57a0a3082b7c340c4d868dc9a3089b7cc92" prot="public">
+        <enumvalue id="_constants_8h_1aece4541733a1bc739293311414445e57a0a3082b7c340c4d868dc9a3089b7cc92" prot="public">
           <name>SemverMajor</name>
           <initializer>= 0</initializer>
           <briefdescription>
@@ -128,14 +93,14 @@
           <detaileddescription>
           </detaileddescription>
         </enumvalue>
-        <enumvalue id="_azura_2_render_system_2_inc_2_generic_2_constants_8h_1aece4541733a1bc739293311414445e57abfcd7bb4d1a2eb8b351f7c7a22c47aef" prot="public">
+        <enumvalue id="_constants_8h_1aece4541733a1bc739293311414445e57abfcd7bb4d1a2eb8b351f7c7a22c47aef" prot="public">
           <name>SemverMinor</name>
           <briefdescription>
           </briefdescription>
           <detaileddescription>
           </detaileddescription>
         </enumvalue>
-        <enumvalue id="_azura_2_render_system_2_inc_2_generic_2_constants_8h_1aece4541733a1bc739293311414445e57a62bd58d35e0e580348ae129bde5888ae" prot="public">
+        <enumvalue id="_constants_8h_1aece4541733a1bc739293311414445e57a62bd58d35e0e580348ae129bde5888ae" prot="public">
           <name>SemverPatch</name>
           <briefdescription>
           </briefdescription>
@@ -1917,7 +1882,7 @@
       </memberdef>
       </sectiondef>
       <sectiondef kind="typedef">
-      <memberdef kind="typedef" id="_azura_2_render_system_2_inc_2_generic_2_constants_8h_1a1f5b86dc4c34883e96bbda676dbac276" prot="public" static="no">
+      <memberdef kind="typedef" id="_constants_8h_1a1f5b86dc4c34883e96bbda676dbac276" prot="public" static="no">
         <type>std::tuple&lt; U32, U32, U32 &gt;</type>
         <definition>using Azura::Version = typedef std::tuple&lt;U32, U32, U32&gt;</definition>
         <argsstring></argsstring>
@@ -1979,7 +1944,7 @@
         </inbodydescription>
         <location file="Source/Azura/RenderSystem/Inc/Generic/GenericTypes.h" line="227" column="1" bodyfile="Source/Azura/RenderSystem/Inc/Generic/GenericTypes.h" bodystart="227" bodyend="-1"/>
       </memberdef>
-      <memberdef kind="typedef" id="_common_2_inc_2_types_8h_1acac3ad4420766984cb1f0e7a8e19347c" prot="public" static="no">
+      <memberdef kind="typedef" id="_types_8h_1acac3ad4420766984cb1f0e7a8e19347c" prot="public" static="no">
         <type>unsigned int</type>
         <definition>using Azura::UINT = typedef unsigned int</definition>
         <argsstring></argsstring>
@@ -1992,7 +1957,7 @@
         </inbodydescription>
         <location file="Source/Common/Inc/Types.h" line="8" column="1" bodyfile="Source/Common/Inc/Types.h" bodystart="8" bodyend="-1"/>
       </memberdef>
-      <memberdef kind="typedef" id="_common_2_inc_2_types_8h_1ab348a6a803558b90b4a09eaef9921b98" prot="public" static="no">
+      <memberdef kind="typedef" id="_types_8h_1ab348a6a803558b90b4a09eaef9921b98" prot="public" static="no">
         <type>std::uint8_t</type>
         <definition>using Azura::U8 = typedef std::uint8_t</definition>
         <argsstring></argsstring>
@@ -2005,7 +1970,7 @@
         </inbodydescription>
         <location file="Source/Common/Inc/Types.h" line="9" column="1" bodyfile="Source/Common/Inc/Types.h" bodystart="9" bodyend="-1"/>
       </memberdef>
-      <memberdef kind="typedef" id="_common_2_inc_2_types_8h_1ae9916fde622120218775b0092d33c85f" prot="public" static="no">
+      <memberdef kind="typedef" id="_types_8h_1ae9916fde622120218775b0092d33c85f" prot="public" static="no">
         <type>std::uint16_t</type>
         <definition>using Azura::U16 = typedef std::uint16_t</definition>
         <argsstring></argsstring>
@@ -2018,7 +1983,7 @@
         </inbodydescription>
         <location file="Source/Common/Inc/Types.h" line="10" column="1" bodyfile="Source/Common/Inc/Types.h" bodystart="10" bodyend="-1"/>
       </memberdef>
-      <memberdef kind="typedef" id="_common_2_inc_2_types_8h_1a23e594108f6920302006bce2bfe6d056" prot="public" static="no">
+      <memberdef kind="typedef" id="_types_8h_1a23e594108f6920302006bce2bfe6d056" prot="public" static="no">
         <type>std::uint32_t</type>
         <definition>using Azura::U32 = typedef std::uint32_t</definition>
         <argsstring></argsstring>
@@ -2031,7 +1996,7 @@
         </inbodydescription>
         <location file="Source/Common/Inc/Types.h" line="11" column="1" bodyfile="Source/Common/Inc/Types.h" bodystart="11" bodyend="-1"/>
       </memberdef>
-      <memberdef kind="typedef" id="_common_2_inc_2_types_8h_1a4df47cd738ccace4acabe2aefbe69840" prot="public" static="no">
+      <memberdef kind="typedef" id="_types_8h_1a4df47cd738ccace4acabe2aefbe69840" prot="public" static="no">
         <type>std::uint64_t</type>
         <definition>using Azura::U64 = typedef std::uint64_t</definition>
         <argsstring></argsstring>
@@ -2044,7 +2009,7 @@
         </inbodydescription>
         <location file="Source/Common/Inc/Types.h" line="12" column="1" bodyfile="Source/Common/Inc/Types.h" bodystart="12" bodyend="-1"/>
       </memberdef>
-      <memberdef kind="typedef" id="_common_2_inc_2_types_8h_1a1b26b3bba3ef2c9e24f3d4ed0c2d6145" prot="public" static="no">
+      <memberdef kind="typedef" id="_types_8h_1a1b26b3bba3ef2c9e24f3d4ed0c2d6145" prot="public" static="no">
         <type>std::uintptr_t</type>
         <definition>using Azura::UPTR = typedef std::uintptr_t</definition>
         <argsstring></argsstring>
@@ -2057,7 +2022,7 @@
         </inbodydescription>
         <location file="Source/Common/Inc/Types.h" line="13" column="1" bodyfile="Source/Common/Inc/Types.h" bodystart="13" bodyend="-1"/>
       </memberdef>
-      <memberdef kind="typedef" id="_common_2_inc_2_types_8h_1ae48008e9e60a1cdaf01d004f166810e0" prot="public" static="no">
+      <memberdef kind="typedef" id="_types_8h_1ae48008e9e60a1cdaf01d004f166810e0" prot="public" static="no">
         <type>std::size_t</type>
         <definition>using Azura::SizeType = typedef std::size_t</definition>
         <argsstring></argsstring>
@@ -2070,7 +2035,7 @@
         </inbodydescription>
         <location file="Source/Common/Inc/Types.h" line="14" column="1" bodyfile="Source/Common/Inc/Types.h" bodystart="14" bodyend="-1"/>
       </memberdef>
-      <memberdef kind="typedef" id="_common_2_inc_2_types_8h_1acbe7fa9d46ea4221d13f883cea9a4dc7" prot="public" static="no">
+      <memberdef kind="typedef" id="_types_8h_1acbe7fa9d46ea4221d13f883cea9a4dc7" prot="public" static="no">
         <type>std::string</type>
         <definition>using Azura::String = typedef std::string</definition>
         <argsstring></argsstring>
@@ -2083,7 +2048,7 @@
         </inbodydescription>
         <location file="Source/Common/Inc/Types.h" line="15" column="1" bodyfile="Source/Common/Inc/Types.h" bodystart="15" bodyend="-1"/>
       </memberdef>
-      <memberdef kind="typedef" id="_common_2_inc_2_types_8h_1a8dd630babbe2f9cfe21d3c17e8404fc5" prot="public" static="no">
+      <memberdef kind="typedef" id="_types_8h_1a8dd630babbe2f9cfe21d3c17e8404fc5" prot="public" static="no">
         <type>UPTR</type>
         <definition>using Azura::AddressPtr = typedef UPTR</definition>
         <argsstring></argsstring>
@@ -2096,7 +2061,7 @@
         </inbodydescription>
         <location file="Source/Common/Inc/Types.h" line="16" column="1" bodyfile="Source/Common/Inc/Types.h" bodystart="16" bodyend="-1"/>
       </memberdef>
-      <memberdef kind="typedef" id="_common_2_inc_2_types_8h_1af43024d172b60f7753f9fc9f4d40ab1f" prot="public" static="no">
+      <memberdef kind="typedef" id="_types_8h_1af43024d172b60f7753f9fc9f4d40ab1f" prot="public" static="no">
         <type>ptrdiff_t</type>
         <definition>using Azura::AddressDiff = typedef ptrdiff_t</definition>
         <argsstring></argsstring>
@@ -2566,7 +2531,7 @@
       </memberdef>
       </sectiondef>
       <sectiondef kind="var">
-      <memberdef kind="variable" id="_azura_2_render_system_2_inc_2_generic_2_constants_8h_1af054e28c57031d73b0d35d27c2bd3664" prot="public" static="no" mutable="no">
+      <memberdef kind="variable" id="_constants_8h_1af054e28c57031d73b0d35d27c2bd3664" prot="public" static="no" mutable="no">
         <type>const Version</type>
         <definition>const Version Azura::RENDER_SYSTEM_VERSION</definition>
         <argsstring></argsstring>
@@ -2580,7 +2545,7 @@
         </inbodydescription>
         <location file="Source/Azura/RenderSystem/Inc/Generic/Constants.h" line="16" column="1" bodyfile="Source/Azura/RenderSystem/Inc/Generic/Constants.h" bodystart="16" bodyend="-1"/>
       </memberdef>
-      <memberdef kind="variable" id="_azura_2_render_system_2_inc_2_generic_2_constants_8h_1a5507000fe0f4a970a124d1d0690a1931" prot="public" static="no" mutable="no">
+      <memberdef kind="variable" id="_constants_8h_1a5507000fe0f4a970a124d1d0690a1931" prot="public" static="no" mutable="no">
         <type>const U32</type>
         <definition>const U32 Azura::RENDER_SYSTEM_MAJOR_SEMVER</definition>
         <argsstring></argsstring>
@@ -2594,7 +2559,7 @@
         </inbodydescription>
         <location file="Source/Azura/RenderSystem/Inc/Generic/Constants.h" line="18" column="1" bodyfile="Source/Azura/RenderSystem/Inc/Generic/Constants.h" bodystart="18" bodyend="-1"/>
       </memberdef>
-      <memberdef kind="variable" id="_azura_2_render_system_2_inc_2_generic_2_constants_8h_1ac9d292b944302e3593ec3c4f7d0b0422" prot="public" static="no" mutable="no">
+      <memberdef kind="variable" id="_constants_8h_1ac9d292b944302e3593ec3c4f7d0b0422" prot="public" static="no" mutable="no">
         <type>const U32</type>
         <definition>const U32 Azura::RENDER_SYSTEM_MINOR_SEMVER</definition>
         <argsstring></argsstring>
@@ -2608,7 +2573,7 @@
         </inbodydescription>
         <location file="Source/Azura/RenderSystem/Inc/Generic/Constants.h" line="19" column="1" bodyfile="Source/Azura/RenderSystem/Inc/Generic/Constants.h" bodystart="19" bodyend="-1"/>
       </memberdef>
-      <memberdef kind="variable" id="_azura_2_render_system_2_inc_2_generic_2_constants_8h_1afa46364d6dad722146fd17ad4a0fd3fb" prot="public" static="no" mutable="no">
+      <memberdef kind="variable" id="_constants_8h_1afa46364d6dad722146fd17ad4a0fd3fb" prot="public" static="no" mutable="no">
         <type>const U32</type>
         <definition>const U32 Azura::RENDER_SYSTEM_PATCH_SEMVER</definition>
         <argsstring></argsstring>
@@ -2775,216 +2740,6 @@
         <inbodydescription>
         </inbodydescription>
         <location file="Source/Math/Inc/Math/Core.h" line="59" column="1" bodyfile="Source/Math/Inc/Math/Core.h" bodystart="59" bodyend="-1"/>
-      </memberdef>
-      <memberdef kind="variable" id="0___test_zone_2_inc_2_test_zone_2_app_renderer_8h_1ab3cf23addaceaa419e169dfc980c9cc3" prot="public" static="no" mutable="no">
-        <type>constexpr U32</type>
-        <definition>constexpr U32 Azura::DEFAULT_BLOCK_SIZE_X</definition>
-        <argsstring></argsstring>
-        <name>DEFAULT_BLOCK_SIZE_X</name>
-        <initializer>= 512</initializer>
-        <briefdescription>
-        </briefdescription>
-        <detaileddescription>
-        </detaileddescription>
-        <inbodydescription>
-        </inbodydescription>
-        <location file="Source/Samples/0_TestZone/Inc/TestZone/AppRenderer.h" line="19" column="1" bodyfile="Source/Samples/0_TestZone/Inc/TestZone/AppRenderer.h" bodystart="19" bodyend="-1"/>
-      </memberdef>
-      <memberdef kind="variable" id="0___test_zone_2_inc_2_test_zone_2_app_renderer_8h_1afe56639a5a14c44e5bd5dbad88311986" prot="public" static="no" mutable="no">
-        <type>constexpr U32</type>
-        <definition>constexpr U32 Azura::SOLVER_ITERATIONS</definition>
-        <argsstring></argsstring>
-        <name>SOLVER_ITERATIONS</name>
-        <initializer>= 32</initializer>
-        <briefdescription>
-        </briefdescription>
-        <detaileddescription>
-        </detaileddescription>
-        <inbodydescription>
-        </inbodydescription>
-        <location file="Source/Samples/0_TestZone/Inc/TestZone/AppRenderer.h" line="20" column="1" bodyfile="Source/Samples/0_TestZone/Inc/TestZone/AppRenderer.h" bodystart="20" bodyend="-1"/>
-      </memberdef>
-      <memberdef kind="variable" id="0___test_zone_2_inc_2_test_zone_2_app_renderer_8h_1a89449f6d4b138dab0cea8bc638337e5b" prot="public" static="no" mutable="no">
-        <type>const float</type>
-        <definition>const float Azura::DISTANCE_STIFFNESS</definition>
-        <argsstring></argsstring>
-        <name>DISTANCE_STIFFNESS</name>
-        <initializer>= 0.9f</initializer>
-        <briefdescription>
-        </briefdescription>
-        <detaileddescription>
-        </detaileddescription>
-        <inbodydescription>
-        </inbodydescription>
-        <location file="Source/Samples/0_TestZone/Inc/TestZone/AppRenderer.h" line="22" column="1" bodyfile="Source/Samples/0_TestZone/Inc/TestZone/AppRenderer.h" bodystart="22" bodyend="-1"/>
-      </memberdef>
-      <memberdef kind="variable" id="0___test_zone_2_inc_2_test_zone_2_app_renderer_8h_1a540b9c2cefa70c8a109868e6edc62ac4" prot="public" static="no" mutable="no">
-        <type>const float</type>
-        <definition>const float Azura::BENDING_STIFFNESS</definition>
-        <argsstring></argsstring>
-        <name>BENDING_STIFFNESS</name>
-        <initializer>= 0.3f</initializer>
-        <briefdescription>
-        </briefdescription>
-        <detaileddescription>
-        </detaileddescription>
-        <inbodydescription>
-        </inbodydescription>
-        <location file="Source/Samples/0_TestZone/Inc/TestZone/AppRenderer.h" line="23" column="1" bodyfile="Source/Samples/0_TestZone/Inc/TestZone/AppRenderer.h" bodystart="23" bodyend="-1"/>
-      </memberdef>
-      <memberdef kind="variable" id="_samples_22___deferred_renderer_2_inc_2_app_2_common_8h_1a7184df1b25e2084c468acfd3d102e73b" prot="public" static="no" mutable="no">
-        <type>constexpr U32</type>
-        <definition>constexpr U32 Azura::NUM_LIGHTS</definition>
-        <argsstring></argsstring>
-        <name>NUM_LIGHTS</name>
-        <initializer>= 256</initializer>
-        <briefdescription>
-        </briefdescription>
-        <detaileddescription>
-        </detaileddescription>
-        <inbodydescription>
-        </inbodydescription>
-        <location file="Source/Samples/2_DeferredRenderer/Inc/App/Common.h" line="8" column="1" bodyfile="Source/Samples/2_DeferredRenderer/Inc/App/Common.h" bodystart="8" bodyend="-1"/>
-      </memberdef>
-      <memberdef kind="variable" id="_samples_22___deferred_renderer_2_inc_2_app_2_common_8h_1aa2333f975e997c359a3be78b41e4a1eb" prot="public" static="no" mutable="no">
-        <type>constexpr U32</type>
-        <definition>constexpr U32 Azura::MAX_LIGHTS_PER_CLUSTER</definition>
-        <argsstring></argsstring>
-        <name>MAX_LIGHTS_PER_CLUSTER</name>
-        <initializer>= 1020</initializer>
-        <briefdescription>
-        </briefdescription>
-        <detaileddescription>
-        </detaileddescription>
-        <inbodydescription>
-        </inbodydescription>
-        <location file="Source/Samples/2_DeferredRenderer/Inc/App/Common.h" line="9" column="1" bodyfile="Source/Samples/2_DeferredRenderer/Inc/App/Common.h" bodystart="9" bodyend="-1"/>
-      </memberdef>
-      <memberdef kind="variable" id="_samples_22___deferred_renderer_2_inc_2_app_2_common_8h_1a449a8beab4e8e18943f060b176c2be8d" prot="public" static="no" mutable="no">
-        <type>const Vector3f</type>
-        <definition>const Vector3f Azura::LIGHT_MIN</definition>
-        <argsstring></argsstring>
-        <name>LIGHT_MIN</name>
-        <initializer>= {-10.0f, 0.0f, -5.0f }</initializer>
-        <briefdescription>
-        </briefdescription>
-        <detaileddescription>
-        </detaileddescription>
-        <inbodydescription>
-        </inbodydescription>
-        <location file="Source/Samples/2_DeferredRenderer/Inc/App/Common.h" line="10" column="1" bodyfile="Source/Samples/2_DeferredRenderer/Inc/App/Common.h" bodystart="10" bodyend="-1"/>
-      </memberdef>
-      <memberdef kind="variable" id="_samples_22___deferred_renderer_2_inc_2_app_2_common_8h_1abee06dba304c47febdbfd32396db3e69" prot="public" static="no" mutable="no">
-        <type>const Vector3f</type>
-        <definition>const Vector3f Azura::LIGHT_MAX</definition>
-        <argsstring></argsstring>
-        <name>LIGHT_MAX</name>
-        <initializer>= { 10.0f, 15.0f, 5.0f }</initializer>
-        <briefdescription>
-        </briefdescription>
-        <detaileddescription>
-        </detaileddescription>
-        <inbodydescription>
-        </inbodydescription>
-        <location file="Source/Samples/2_DeferredRenderer/Inc/App/Common.h" line="11" column="1" bodyfile="Source/Samples/2_DeferredRenderer/Inc/App/Common.h" bodystart="11" bodyend="-1"/>
-      </memberdef>
-      <memberdef kind="variable" id="_samples_22___deferred_renderer_2_inc_2_app_2_common_8h_1a3a9ae143c0af5080293aca8ad7419837" prot="public" static="no" mutable="no">
-        <type>constexpr float</type>
-        <definition>constexpr float Azura::LIGHT_RADIUS</definition>
-        <argsstring></argsstring>
-        <name>LIGHT_RADIUS</name>
-        <initializer>= 5.0f</initializer>
-        <briefdescription>
-        </briefdescription>
-        <detaileddescription>
-        </detaileddescription>
-        <inbodydescription>
-        </inbodydescription>
-        <location file="Source/Samples/2_DeferredRenderer/Inc/App/Common.h" line="12" column="1" bodyfile="Source/Samples/2_DeferredRenderer/Inc/App/Common.h" bodystart="12" bodyend="-1"/>
-      </memberdef>
-      <memberdef kind="variable" id="_samples_22___deferred_renderer_2_inc_2_app_2_common_8h_1a1ac37e47cd1168265c064190446e3c75" prot="public" static="no" mutable="no">
-        <type>constexpr float</type>
-        <definition>constexpr float Azura::LIGHT_DT</definition>
-        <argsstring></argsstring>
-        <name>LIGHT_DT</name>
-        <initializer>= -2.5f</initializer>
-        <briefdescription>
-        </briefdescription>
-        <detaileddescription>
-        </detaileddescription>
-        <inbodydescription>
-        </inbodydescription>
-        <location file="Source/Samples/2_DeferredRenderer/Inc/App/Common.h" line="13" column="1" bodyfile="Source/Samples/2_DeferredRenderer/Inc/App/Common.h" bodystart="13" bodyend="-1"/>
-      </memberdef>
-      <memberdef kind="variable" id="_samples_22___deferred_renderer_2_inc_2_app_2_common_8h_1a7df9177b45bcd5074d515b61cd7f11e2" prot="public" static="no" mutable="no">
-        <type>constexpr U32</type>
-        <definition>constexpr U32 Azura::TILES_X</definition>
-        <argsstring></argsstring>
-        <name>TILES_X</name>
-        <initializer>= 16</initializer>
-        <briefdescription>
-        </briefdescription>
-        <detaileddescription>
-        </detaileddescription>
-        <inbodydescription>
-        </inbodydescription>
-        <location file="Source/Samples/2_DeferredRenderer/Inc/App/Common.h" line="15" column="1" bodyfile="Source/Samples/2_DeferredRenderer/Inc/App/Common.h" bodystart="15" bodyend="-1"/>
-      </memberdef>
-      <memberdef kind="variable" id="_samples_22___deferred_renderer_2_inc_2_app_2_common_8h_1ab7af1cfc5e4db278c92823fc89125c3d" prot="public" static="no" mutable="no">
-        <type>constexpr U32</type>
-        <definition>constexpr U32 Azura::TILES_Y</definition>
-        <argsstring></argsstring>
-        <name>TILES_Y</name>
-        <initializer>= 16</initializer>
-        <briefdescription>
-        </briefdescription>
-        <detaileddescription>
-        </detaileddescription>
-        <inbodydescription>
-        </inbodydescription>
-        <location file="Source/Samples/2_DeferredRenderer/Inc/App/Common.h" line="16" column="1" bodyfile="Source/Samples/2_DeferredRenderer/Inc/App/Common.h" bodystart="16" bodyend="-1"/>
-      </memberdef>
-      <memberdef kind="variable" id="_samples_22___deferred_renderer_2_inc_2_app_2_common_8h_1a14de5d6e262865a009b56707081d4991" prot="public" static="no" mutable="no">
-        <type>constexpr U32</type>
-        <definition>constexpr U32 Azura::TILES_Z</definition>
-        <argsstring></argsstring>
-        <name>TILES_Z</name>
-        <initializer>= 16</initializer>
-        <briefdescription>
-        </briefdescription>
-        <detaileddescription>
-        </detaileddescription>
-        <inbodydescription>
-        </inbodydescription>
-        <location file="Source/Samples/2_DeferredRenderer/Inc/App/Common.h" line="17" column="1" bodyfile="Source/Samples/2_DeferredRenderer/Inc/App/Common.h" bodystart="17" bodyend="-1"/>
-      </memberdef>
-      <memberdef kind="variable" id="_samples_22___deferred_renderer_2_inc_2_app_2_common_8h_1a5615fc3826c7ee83791fbf3e83adf886" prot="public" static="no" mutable="no">
-        <type>constexpr U32</type>
-        <definition>constexpr U32 Azura::CLUSTER_PIXEL_HEIGHT</definition>
-        <argsstring></argsstring>
-        <name>CLUSTER_PIXEL_HEIGHT</name>
-        <initializer>= 1 + (MAX_LIGHTS_PER_CLUSTER / 4)</initializer>
-        <briefdescription>
-        </briefdescription>
-        <detaileddescription>
-        </detaileddescription>
-        <inbodydescription>
-        </inbodydescription>
-        <location file="Source/Samples/2_DeferredRenderer/Inc/App/Common.h" line="19" column="1" bodyfile="Source/Samples/2_DeferredRenderer/Inc/App/Common.h" bodystart="19" bodyend="-1"/>
-      </memberdef>
-      <memberdef kind="variable" id="_samples_22___deferred_renderer_2_inc_2_app_2_common_8h_1afefb43d514bd66841e49c60baa6163f5" prot="public" static="no" mutable="no">
-        <type>constexpr U32</type>
-        <definition>constexpr U32 Azura::FPLUS_NUM_FRUSTRUMS</definition>
-        <argsstring></argsstring>
-        <name>FPLUS_NUM_FRUSTRUMS</name>
-        <initializer>= TILES_X * TILES_Y</initializer>
-        <briefdescription>
-        </briefdescription>
-        <detaileddescription>
-        </detaileddescription>
-        <inbodydescription>
-        </inbodydescription>
-        <location file="Source/Samples/2_DeferredRenderer/Inc/App/Common.h" line="21" column="1" bodyfile="Source/Samples/2_DeferredRenderer/Inc/App/Common.h" bodystart="21" bodyend="-1"/>
       </memberdef>
       </sectiondef>
       <sectiondef kind="func">

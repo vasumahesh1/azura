@@ -677,46 +677,46 @@
     <detaileddescription>
     </detaileddescription>
     <inheritancegraph>
-      <node id="655">
+      <node id="459">
         <label>Azura::Renderer</label>
         <link refid="class_azura_1_1_renderer"/>
       </node>
-      <node id="654">
+      <node id="458">
         <label>Azura::Vulkan::VkRenderer</label>
         <link refid="class_azura_1_1_vulkan_1_1_vk_renderer"/>
-        <childnode refid="655" relation="public-inheritance">
+        <childnode refid="459" relation="public-inheritance">
         </childnode>
       </node>
     </inheritancegraph>
     <collaborationgraph>
-      <node id="660">
+      <node id="464">
         <label>Azura::Containers::Vector&lt; Azura::DescriptorSlot &gt;</label>
         <link refid="class_azura_1_1_containers_1_1_vector"/>
       </node>
-      <node id="657">
+      <node id="461">
         <label>Azura::Renderer</label>
         <link refid="class_azura_1_1_renderer"/>
-        <childnode refid="658" relation="usage">
+        <childnode refid="462" relation="usage">
           <edgelabel>m_descriptorCount</edgelabel>
         </childnode>
-        <childnode refid="659" relation="usage">
+        <childnode refid="463" relation="usage">
           <edgelabel>m_descriptorSetTable</edgelabel>
         </childnode>
-        <childnode refid="660" relation="usage">
+        <childnode refid="464" relation="usage">
           <edgelabel>m_descriptorSlots</edgelabel>
         </childnode>
       </node>
-      <node id="658">
+      <node id="462">
         <label>Azura::DescriptorCount</label>
         <link refid="struct_azura_1_1_descriptor_count"/>
       </node>
-      <node id="656">
+      <node id="460">
         <label>Azura::Vulkan::VkRenderer</label>
         <link refid="class_azura_1_1_vulkan_1_1_vk_renderer"/>
-        <childnode refid="657" relation="public-inheritance">
+        <childnode refid="461" relation="public-inheritance">
         </childnode>
       </node>
-      <node id="659">
+      <node id="463">
         <label>Azura::Containers::Vector&lt; Azura::DescriptorTableEntry &gt;</label>
         <link refid="class_azura_1_1_containers_1_1_vector"/>
       </node>

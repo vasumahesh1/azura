@@ -51,12 +51,6 @@ Included By
 
 - :ref:`file_Source_Physics_Inc_Physics_Geometry_IPhysicsGeometry.h`
 
-- :ref:`file_Source_Samples_0_TestZone_Inc_TestZone_ClothCommon.h`
-
-- :ref:`file_Source_Samples_0_TestZone_Inc_TestZone_ClothMesh.h`
-
-- :ref:`file_Source_Samples_0_TestZone_Inc_TestZone_ImportedClothMesh.h`
-
 
 
 

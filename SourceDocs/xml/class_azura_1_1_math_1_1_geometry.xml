@@ -2,8 +2,6 @@
 <doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.8.14">
   <compounddef id="class_azura_1_1_math_1_1_geometry" kind="class" language="C++" prot="public" abstract="yes">
     <compoundname>Azura::Math::Geometry</compoundname>
-    <derivedcompoundref refid="class_azura_1_1_cloth_mesh" prot="public" virt="non-virtual">Azura::ClothMesh</derivedcompoundref>
-    <derivedcompoundref refid="class_azura_1_1_imported_cloth_mesh" prot="public" virt="non-virtual">Azura::ImportedClothMesh</derivedcompoundref>
     <derivedcompoundref refid="class_azura_1_1_math_1_1_ico_sphere" prot="public" virt="non-virtual">Azura::Math::IcoSphere</derivedcompoundref>
     <derivedcompoundref refid="class_azura_1_1_math_1_1_plane" prot="public" virt="non-virtual">Azura::Math::Plane</derivedcompoundref>
     <derivedcompoundref refid="class_azura_1_1_physics_1_1_i_physics_geometry" prot="public" virt="non-virtual">Azura::Physics::IPhysicsGeometry</derivedcompoundref>
@@ -108,11 +106,9 @@
         <argsstring>() const =0</argsstring>
         <name>VertexDataSize</name>
         <reimplementedby refid="class_azura_1_1_math_1_1_ico_sphere_1a46695815a94a95dfd8adc7d72eab4f6e">VertexDataSize</reimplementedby>
-        <reimplementedby refid="class_azura_1_1_imported_cloth_mesh_1a5869180f5e6dfe791d4484226a2d353f">VertexDataSize</reimplementedby>
-        <reimplementedby refid="class_azura_1_1_cloth_mesh_1a4ad1780df4fdbba159377feb295988f4">VertexDataSize</reimplementedby>
         <reimplementedby refid="class_azura_1_1_math_1_1_plane_1a5c8e1e885c4a5ee3ffb1069d992efbd7">VertexDataSize</reimplementedby>
         <reimplementedby refid="class_azura_1_1_physics_1_1_cloth_plane_1ab6aac3d0cfe9780400e7c0230b7d9deb">VertexDataSize</reimplementedby>
-        <reimplementedby refid="class_azura_1_1_physics_1_1_cloth_mesh_1a4ad1780df4fdbba159377feb295988f4">VertexDataSize</reimplementedby>
+        <reimplementedby refid="class_azura_1_1_physics_1_1_cloth_mesh_1a41bbcd827416fbd7c414676dbec36ce8">VertexDataSize</reimplementedby>
         <briefdescription>
         </briefdescription>
         <detaileddescription>
@@ -127,11 +123,9 @@
         <argsstring>() const =0</argsstring>
         <name>IndexDataSize</name>
         <reimplementedby refid="class_azura_1_1_math_1_1_ico_sphere_1a48625c7c94d25b510eee5ddccbaa0744">IndexDataSize</reimplementedby>
-        <reimplementedby refid="class_azura_1_1_imported_cloth_mesh_1afa63525b2eb7b1e3b1783ab7161b20ed">IndexDataSize</reimplementedby>
-        <reimplementedby refid="class_azura_1_1_cloth_mesh_1a92cdd2933f1eab7aec42ab3469899c46">IndexDataSize</reimplementedby>
         <reimplementedby refid="class_azura_1_1_math_1_1_plane_1a10ac399801a00cdeb02f131d0696e2b9">IndexDataSize</reimplementedby>
         <reimplementedby refid="class_azura_1_1_physics_1_1_cloth_plane_1a0429a289fafbac63d49bc54c4ec38ad5">IndexDataSize</reimplementedby>
-        <reimplementedby refid="class_azura_1_1_physics_1_1_cloth_mesh_1a92cdd2933f1eab7aec42ab3469899c46">IndexDataSize</reimplementedby>
+        <reimplementedby refid="class_azura_1_1_physics_1_1_cloth_mesh_1a3fc78ccfb8c0f3ce3f0a18ea265e848a">IndexDataSize</reimplementedby>
         <briefdescription>
         </briefdescription>
         <detaileddescription>
@@ -148,9 +142,7 @@
         <reimplementedby refid="class_azura_1_1_math_1_1_ico_sphere_1acb3a1fd8631038a6972ab6f79f233926">NormalDataSize</reimplementedby>
         <reimplementedby refid="class_azura_1_1_physics_1_1_cloth_plane_1a057be4fdbefc9818ee36b418388920a2">NormalDataSize</reimplementedby>
         <reimplementedby refid="class_azura_1_1_math_1_1_plane_1aff525608680842d337fab4d95381d251">NormalDataSize</reimplementedby>
-        <reimplementedby refid="class_azura_1_1_imported_cloth_mesh_1a5ed9e873ac8693f68f18a1690ada63fe">NormalDataSize</reimplementedby>
-        <reimplementedby refid="class_azura_1_1_cloth_mesh_1a011fb10ed2a2cef71b2f9ddf261c084a">NormalDataSize</reimplementedby>
-        <reimplementedby refid="class_azura_1_1_physics_1_1_cloth_mesh_1a011fb10ed2a2cef71b2f9ddf261c084a">NormalDataSize</reimplementedby>
+        <reimplementedby refid="class_azura_1_1_physics_1_1_cloth_mesh_1aceef5eb1c761aa8c4fe009de2855421c">NormalDataSize</reimplementedby>
         <briefdescription>
         </briefdescription>
         <detaileddescription>
@@ -167,9 +159,7 @@
         <reimplementedby refid="class_azura_1_1_math_1_1_plane_1a7be1f7c7d2276c45db4df4c85d374d42">UVDataSize</reimplementedby>
         <reimplementedby refid="class_azura_1_1_math_1_1_ico_sphere_1a7be371e0ae135260ba8974d0a2e7bc3d">UVDataSize</reimplementedby>
         <reimplementedby refid="class_azura_1_1_physics_1_1_cloth_plane_1a5fcf4e3163359a9c3d2f9173de210941">UVDataSize</reimplementedby>
-        <reimplementedby refid="class_azura_1_1_imported_cloth_mesh_1a57a7f7dc798aa5149b63e23bd395eeb9">UVDataSize</reimplementedby>
-        <reimplementedby refid="class_azura_1_1_cloth_mesh_1a24289e2e3132e551e45bfdbc3f231c6c">UVDataSize</reimplementedby>
-        <reimplementedby refid="class_azura_1_1_physics_1_1_cloth_mesh_1a24289e2e3132e551e45bfdbc3f231c6c">UVDataSize</reimplementedby>
+        <reimplementedby refid="class_azura_1_1_physics_1_1_cloth_mesh_1a388dc3757a47f3bd6a985b371fc55e8d">UVDataSize</reimplementedby>
         <briefdescription>
         </briefdescription>
         <detaileddescription>
@@ -184,11 +174,9 @@
         <argsstring>() const =0</argsstring>
         <name>TotalDataSize</name>
         <reimplementedby refid="class_azura_1_1_math_1_1_ico_sphere_1ad58a8a06aa54350227859f148480520d">TotalDataSize</reimplementedby>
-        <reimplementedby refid="class_azura_1_1_imported_cloth_mesh_1a398be9298dc330575ab03e2d59ddde8c">TotalDataSize</reimplementedby>
-        <reimplementedby refid="class_azura_1_1_cloth_mesh_1add11b8966ec5a17a996f180da784e879">TotalDataSize</reimplementedby>
         <reimplementedby refid="class_azura_1_1_math_1_1_plane_1a5f3c4f93551dedde2dac8095afdad5ad">TotalDataSize</reimplementedby>
         <reimplementedby refid="class_azura_1_1_physics_1_1_cloth_plane_1a7ad72cba68405769456532988296936e">TotalDataSize</reimplementedby>
-        <reimplementedby refid="class_azura_1_1_physics_1_1_cloth_mesh_1add11b8966ec5a17a996f180da784e879">TotalDataSize</reimplementedby>
+        <reimplementedby refid="class_azura_1_1_physics_1_1_cloth_mesh_1a9594147035cb8e4c38ec81c4bc60d9f1">TotalDataSize</reimplementedby>
         <briefdescription>
         </briefdescription>
         <detaileddescription>
@@ -203,11 +191,9 @@
         <argsstring>() const =0</argsstring>
         <name>GetVertexCount</name>
         <reimplementedby refid="class_azura_1_1_math_1_1_ico_sphere_1ab5f5fe535445483af745919750bf745e">GetVertexCount</reimplementedby>
-        <reimplementedby refid="class_azura_1_1_imported_cloth_mesh_1a961c262838c6261bc5b3267132e25abe">GetVertexCount</reimplementedby>
-        <reimplementedby refid="class_azura_1_1_cloth_mesh_1acf16282c583a9ea24a4763b8ce92db6d">GetVertexCount</reimplementedby>
         <reimplementedby refid="class_azura_1_1_math_1_1_plane_1abcefad16303464335c0c6c96f1284126">GetVertexCount</reimplementedby>
         <reimplementedby refid="class_azura_1_1_physics_1_1_cloth_plane_1ab9bcdf5d3ca9e50014961df4a71a5d6e">GetVertexCount</reimplementedby>
-        <reimplementedby refid="class_azura_1_1_physics_1_1_cloth_mesh_1acf16282c583a9ea24a4763b8ce92db6d">GetVertexCount</reimplementedby>
+        <reimplementedby refid="class_azura_1_1_physics_1_1_cloth_mesh_1ae91be18d3faac47adb6ef19526330a75">GetVertexCount</reimplementedby>
         <briefdescription>
         </briefdescription>
         <detaileddescription>
@@ -222,11 +208,9 @@
         <argsstring>() const =0</argsstring>
         <name>GetIndexCount</name>
         <reimplementedby refid="class_azura_1_1_math_1_1_ico_sphere_1a9701c911a620534ad490b41d9a45dac5">GetIndexCount</reimplementedby>
-        <reimplementedby refid="class_azura_1_1_imported_cloth_mesh_1ad780f26cb40fd0207a4ef76a9de4d5a4">GetIndexCount</reimplementedby>
-        <reimplementedby refid="class_azura_1_1_cloth_mesh_1ac833446a04a3bceb5a6c116f7bf109f5">GetIndexCount</reimplementedby>
         <reimplementedby refid="class_azura_1_1_math_1_1_plane_1a5d3dc9c0e694568dffc254538cc89756">GetIndexCount</reimplementedby>
         <reimplementedby refid="class_azura_1_1_physics_1_1_cloth_plane_1a3acbf3bc7b57df09c7eb1b617494d6ba">GetIndexCount</reimplementedby>
-        <reimplementedby refid="class_azura_1_1_physics_1_1_cloth_mesh_1ac833446a04a3bceb5a6c116f7bf109f5">GetIndexCount</reimplementedby>
+        <reimplementedby refid="class_azura_1_1_physics_1_1_cloth_mesh_1aebed88daf7aa4877825346b59312ead2">GetIndexCount</reimplementedby>
         <briefdescription>
         </briefdescription>
         <detaileddescription>
@@ -241,11 +225,9 @@
         <argsstring>() const =0</argsstring>
         <name>VertexData</name>
         <reimplementedby refid="class_azura_1_1_math_1_1_ico_sphere_1aef45c0b4cc7d9e510807ef2064538d42">VertexData</reimplementedby>
-        <reimplementedby refid="class_azura_1_1_imported_cloth_mesh_1a687b59b745b57161a9c428769328a618">VertexData</reimplementedby>
-        <reimplementedby refid="class_azura_1_1_cloth_mesh_1aad3c92e28486bcd59dd6bea28bbfd76c">VertexData</reimplementedby>
         <reimplementedby refid="class_azura_1_1_math_1_1_plane_1a25052f1f66e9174a0cb9f0751b5a62ce">VertexData</reimplementedby>
         <reimplementedby refid="class_azura_1_1_physics_1_1_cloth_plane_1aad72ffb9544834a513dc42226afa1796">VertexData</reimplementedby>
-        <reimplementedby refid="class_azura_1_1_physics_1_1_cloth_mesh_1a55cbd00430dcd5b33824fa53cda80c49">VertexData</reimplementedby>
+        <reimplementedby refid="class_azura_1_1_physics_1_1_cloth_mesh_1aa6325a4678202604ada6a6e590f71fad">VertexData</reimplementedby>
         <briefdescription>
         </briefdescription>
         <detaileddescription>
@@ -262,9 +244,7 @@
         <reimplementedby refid="class_azura_1_1_math_1_1_ico_sphere_1a20c19020183cd75ce19acf3a31df50af">NormalData</reimplementedby>
         <reimplementedby refid="class_azura_1_1_physics_1_1_cloth_plane_1a6e40e12130e5a6789c0eabfa2b1144e5">NormalData</reimplementedby>
         <reimplementedby refid="class_azura_1_1_math_1_1_plane_1aaac856a44bc6eaacc3ad37c7e677b74f">NormalData</reimplementedby>
-        <reimplementedby refid="class_azura_1_1_imported_cloth_mesh_1a0255dc9116bdd95d3dd7b4f55c318592">NormalData</reimplementedby>
-        <reimplementedby refid="class_azura_1_1_cloth_mesh_1a322d11386baad0749dc6ed1ae6ff5da8">NormalData</reimplementedby>
-        <reimplementedby refid="class_azura_1_1_physics_1_1_cloth_mesh_1a3cf7a70e31ddc7c679c26e888dca6f51">NormalData</reimplementedby>
+        <reimplementedby refid="class_azura_1_1_physics_1_1_cloth_mesh_1a9e093637a570b5892422f523356c12d6">NormalData</reimplementedby>
         <briefdescription>
         </briefdescription>
         <detaileddescription>
@@ -279,11 +259,9 @@
         <argsstring>() const =0</argsstring>
         <name>IndexData</name>
         <reimplementedby refid="class_azura_1_1_math_1_1_ico_sphere_1af7ba4ea8bbac47c1b83c62916b2aa9db">IndexData</reimplementedby>
-        <reimplementedby refid="class_azura_1_1_imported_cloth_mesh_1a91a21e091d87c13dd89a9630aeba7cc5">IndexData</reimplementedby>
-        <reimplementedby refid="class_azura_1_1_cloth_mesh_1a51e4e0cacd2f467548f07d5878dac7d7">IndexData</reimplementedby>
         <reimplementedby refid="class_azura_1_1_math_1_1_plane_1a90fdfe29f0921e8782f38bf1d9bee9cf">IndexData</reimplementedby>
         <reimplementedby refid="class_azura_1_1_physics_1_1_cloth_plane_1a6d34438dc168a739c5eca6fcef790a7c">IndexData</reimplementedby>
-        <reimplementedby refid="class_azura_1_1_physics_1_1_cloth_mesh_1abb7338838a16d97836fd4be4e88ebd64">IndexData</reimplementedby>
+        <reimplementedby refid="class_azura_1_1_physics_1_1_cloth_mesh_1a1e59215483bf480e09e04e0daa7ce1f3">IndexData</reimplementedby>
         <briefdescription>
         </briefdescription>
         <detaileddescription>
@@ -300,9 +278,7 @@
         <reimplementedby refid="class_azura_1_1_math_1_1_plane_1a0a07b866d842477a696ab2d2ca061d4e">UVData</reimplementedby>
         <reimplementedby refid="class_azura_1_1_math_1_1_ico_sphere_1ade7351abe2a5a7b4b3262881c8fe9f6b">UVData</reimplementedby>
         <reimplementedby refid="class_azura_1_1_physics_1_1_cloth_plane_1a10f00f0b0d38b4a303e33c82fdeb1822">UVData</reimplementedby>
-        <reimplementedby refid="class_azura_1_1_imported_cloth_mesh_1ae9a243c7884b0e071b34fd1fdef79656">UVData</reimplementedby>
-        <reimplementedby refid="class_azura_1_1_cloth_mesh_1aa1a588427f480d688bb6bc04cd35958a">UVData</reimplementedby>
-        <reimplementedby refid="class_azura_1_1_physics_1_1_cloth_mesh_1a9ec77ce79d394013fc178dca364c5365">UVData</reimplementedby>
+        <reimplementedby refid="class_azura_1_1_physics_1_1_cloth_mesh_1a5588b3d8e73196e33882563d7e448c27">UVData</reimplementedby>
         <briefdescription>
         </briefdescription>
         <detaileddescription>
@@ -317,11 +293,9 @@
         <argsstring>() const =0</argsstring>
         <name>GetVertexFormat</name>
         <reimplementedby refid="class_azura_1_1_math_1_1_ico_sphere_1ac64ec3462aa4393f402bd1faab207608">GetVertexFormat</reimplementedby>
-        <reimplementedby refid="class_azura_1_1_imported_cloth_mesh_1af0a00cf53359ca597eeb06ed88bf4233">GetVertexFormat</reimplementedby>
-        <reimplementedby refid="class_azura_1_1_cloth_mesh_1a2e0582ff817b7a446d6eafdf3b89837d">GetVertexFormat</reimplementedby>
         <reimplementedby refid="class_azura_1_1_math_1_1_plane_1a6187804a6ba199278e960eb59df4a566">GetVertexFormat</reimplementedby>
         <reimplementedby refid="class_azura_1_1_physics_1_1_cloth_plane_1a539393abd1fdc386e3bae691122188b1">GetVertexFormat</reimplementedby>
-        <reimplementedby refid="class_azura_1_1_physics_1_1_cloth_mesh_1a2e0582ff817b7a446d6eafdf3b89837d">GetVertexFormat</reimplementedby>
+        <reimplementedby refid="class_azura_1_1_physics_1_1_cloth_mesh_1a189c33a296ada049b212f6a7bd569067">GetVertexFormat</reimplementedby>
         <briefdescription>
         </briefdescription>
         <detaileddescription>
@@ -338,9 +312,7 @@
         <reimplementedby refid="class_azura_1_1_math_1_1_ico_sphere_1a5644385dd215c4919efefc5f356c7956">GetNormalFormat</reimplementedby>
         <reimplementedby refid="class_azura_1_1_physics_1_1_cloth_plane_1aee900816238f9707a55f684e0c9833a2">GetNormalFormat</reimplementedby>
         <reimplementedby refid="class_azura_1_1_math_1_1_plane_1ab290cfee76a7bc0bf08028b433f52aa8">GetNormalFormat</reimplementedby>
-        <reimplementedby refid="class_azura_1_1_imported_cloth_mesh_1ae18aa0b6db39ee44bcb4da06f36cd78a">GetNormalFormat</reimplementedby>
-        <reimplementedby refid="class_azura_1_1_cloth_mesh_1af24713ca9479cd29cb08aa1a01762873">GetNormalFormat</reimplementedby>
-        <reimplementedby refid="class_azura_1_1_physics_1_1_cloth_mesh_1af24713ca9479cd29cb08aa1a01762873">GetNormalFormat</reimplementedby>
+        <reimplementedby refid="class_azura_1_1_physics_1_1_cloth_mesh_1a6a8c1680bf91d8cb2e4810c7c9750157">GetNormalFormat</reimplementedby>
         <briefdescription>
         </briefdescription>
         <detaileddescription>
@@ -355,11 +327,9 @@
         <argsstring>() const =0</argsstring>
         <name>GetIndexFormat</name>
         <reimplementedby refid="class_azura_1_1_math_1_1_ico_sphere_1ab0ff54af290607fe2074cb2c9d4b34b2">GetIndexFormat</reimplementedby>
-        <reimplementedby refid="class_azura_1_1_imported_cloth_mesh_1a2dc1b0feccddbe41d5daf5d41d619137">GetIndexFormat</reimplementedby>
-        <reimplementedby refid="class_azura_1_1_cloth_mesh_1aa9b736d6469916689be0b31f60c9e136">GetIndexFormat</reimplementedby>
         <reimplementedby refid="class_azura_1_1_math_1_1_plane_1a87a3f1b0921472c23aebeedf8cc5de94">GetIndexFormat</reimplementedby>
         <reimplementedby refid="class_azura_1_1_physics_1_1_cloth_plane_1a460be278242cdcbde339f200030d413d">GetIndexFormat</reimplementedby>
-        <reimplementedby refid="class_azura_1_1_physics_1_1_cloth_mesh_1aa9b736d6469916689be0b31f60c9e136">GetIndexFormat</reimplementedby>
+        <reimplementedby refid="class_azura_1_1_physics_1_1_cloth_mesh_1aecf53f568c32cdaaa1dda5ee0cb940b3">GetIndexFormat</reimplementedby>
         <briefdescription>
         </briefdescription>
         <detaileddescription>
@@ -376,9 +346,7 @@
         <reimplementedby refid="class_azura_1_1_math_1_1_ico_sphere_1a241cc449d31f43cae476394cab130045">GetUVFormat</reimplementedby>
         <reimplementedby refid="class_azura_1_1_physics_1_1_cloth_plane_1a35dc3af01854d3d3f8100e605e6f3455">GetUVFormat</reimplementedby>
         <reimplementedby refid="class_azura_1_1_math_1_1_plane_1a00a6fead9b9c8a6243fc4aa3c4e6a390">GetUVFormat</reimplementedby>
-        <reimplementedby refid="class_azura_1_1_imported_cloth_mesh_1afa2e213a1e1e601873cf6b290efe65d8">GetUVFormat</reimplementedby>
-        <reimplementedby refid="class_azura_1_1_cloth_mesh_1a9f25a92dbce5dbcb3005b1a960b81b94">GetUVFormat</reimplementedby>
-        <reimplementedby refid="class_azura_1_1_physics_1_1_cloth_mesh_1a9f25a92dbce5dbcb3005b1a960b81b94">GetUVFormat</reimplementedby>
+        <reimplementedby refid="class_azura_1_1_physics_1_1_cloth_mesh_1a0ca8638d4273e67d07380fb5049ae42c">GetUVFormat</reimplementedby>
         <briefdescription>
         </briefdescription>
         <detaileddescription>
@@ -393,55 +361,43 @@
     <detaileddescription>
     </detaileddescription>
     <inheritancegraph>
-      <node id="288">
+      <node id="213">
         <label>Azura::Math::IcoSphere</label>
         <link refid="class_azura_1_1_math_1_1_ico_sphere"/>
-        <childnode refid="285" relation="public-inheritance">
+        <childnode refid="212" relation="public-inheritance">
         </childnode>
       </node>
-      <node id="286">
-        <label>Azura::ClothMesh</label>
-        <link refid="class_azura_1_1_cloth_mesh"/>
-        <childnode refid="285" relation="public-inheritance">
-        </childnode>
-      </node>
-      <node id="290">
+      <node id="215">
         <label>Azura::Physics::IPhysicsGeometry</label>
         <link refid="class_azura_1_1_physics_1_1_i_physics_geometry"/>
-        <childnode refid="285" relation="public-inheritance">
+        <childnode refid="212" relation="public-inheritance">
         </childnode>
       </node>
-      <node id="293">
+      <node id="218">
         <label>Azura::Physics::ClothPlane</label>
         <link refid="class_azura_1_1_physics_1_1_cloth_plane"/>
-        <childnode refid="291" relation="public-inheritance">
+        <childnode refid="216" relation="public-inheritance">
         </childnode>
       </node>
-      <node id="292">
+      <node id="217">
         <label>Azura::Physics::ClothMesh</label>
         <link refid="class_azura_1_1_physics_1_1_cloth_mesh"/>
-        <childnode refid="291" relation="public-inheritance">
+        <childnode refid="216" relation="public-inheritance">
         </childnode>
       </node>
-      <node id="287">
-        <label>Azura::ImportedClothMesh</label>
-        <link refid="class_azura_1_1_imported_cloth_mesh"/>
-        <childnode refid="285" relation="public-inheritance">
-        </childnode>
-      </node>
-      <node id="291">
+      <node id="216">
         <label>Azura::Physics::IClothPhysicsGeometry</label>
         <link refid="class_azura_1_1_physics_1_1_i_cloth_physics_geometry"/>
-        <childnode refid="290" relation="public-inheritance">
+        <childnode refid="215" relation="public-inheritance">
         </childnode>
       </node>
-      <node id="289">
+      <node id="214">
         <label>Azura::Math::Plane</label>
         <link refid="class_azura_1_1_math_1_1_plane"/>
-        <childnode refid="285" relation="public-inheritance">
+        <childnode refid="212" relation="public-inheritance">
         </childnode>
       </node>
-      <node id="285">
+      <node id="212">
         <label>Azura::Math::Geometry</label>
         <link refid="class_azura_1_1_math_1_1_geometry"/>
       </node>

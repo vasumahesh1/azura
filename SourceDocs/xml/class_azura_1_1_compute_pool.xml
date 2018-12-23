@@ -550,74 +550,74 @@
     <detaileddescription>
     </detaileddescription>
     <inheritancegraph>
-      <node id="104">
+      <node id="67">
         <label>Azura::ComputePool</label>
         <link refid="class_azura_1_1_compute_pool"/>
       </node>
-      <node id="106">
+      <node id="69">
         <label>Azura::Vulkan::VkComputePool</label>
         <link refid="class_azura_1_1_vulkan_1_1_vk_compute_pool"/>
-        <childnode refid="104" relation="public-inheritance">
+        <childnode refid="67" relation="public-inheritance">
         </childnode>
       </node>
-      <node id="105">
+      <node id="68">
         <label>Azura::D3D12::D3D12ComputePool</label>
         <link refid="class_azura_1_1_d3_d12_1_1_d3_d12_compute_pool"/>
-        <childnode refid="104" relation="public-inheritance">
+        <childnode refid="67" relation="public-inheritance">
         </childnode>
       </node>
     </inheritancegraph>
     <collaborationgraph>
-      <node id="107">
+      <node id="70">
         <label>Azura::ComputePool</label>
         <link refid="class_azura_1_1_compute_pool"/>
-        <childnode refid="108" relation="usage">
+        <childnode refid="71" relation="usage">
           <edgelabel>m_uniformBufferInfos</edgelabel>
         </childnode>
-        <childnode refid="109" relation="usage">
+        <childnode refid="72" relation="usage">
           <edgelabel>m_bufferUpdates</edgelabel>
         </childnode>
-        <childnode refid="110" relation="usage">
+        <childnode refid="73" relation="usage">
           <edgelabel>m_launchDims</edgelabel>
         </childnode>
-        <childnode refid="111" relation="usage">
+        <childnode refid="74" relation="usage">
           <edgelabel>m_computePasses</edgelabel>
         </childnode>
-        <childnode refid="112" relation="usage">
+        <childnode refid="75" relation="usage">
           <edgelabel>m_descriptorCount</edgelabel>
         </childnode>
-        <childnode refid="113" relation="usage">
+        <childnode refid="76" relation="usage">
           <edgelabel>m_samplerInfos</edgelabel>
         </childnode>
-        <childnode refid="114" relation="usage">
+        <childnode refid="77" relation="usage">
           <edgelabel>m_textureBufferInfos</edgelabel>
         </childnode>
       </node>
-      <node id="108">
+      <node id="71">
         <label>Azura::Containers::Vector&lt; Azura::UniformBufferInfo &gt;</label>
         <link refid="class_azura_1_1_containers_1_1_vector"/>
       </node>
-      <node id="113">
+      <node id="76">
         <label>Azura::Containers::Vector&lt; Azura::SamplerInfo &gt;</label>
         <link refid="class_azura_1_1_containers_1_1_vector"/>
       </node>
-      <node id="112">
+      <node id="75">
         <label>Azura::DescriptorCount</label>
         <link refid="struct_azura_1_1_descriptor_count"/>
       </node>
-      <node id="111">
+      <node id="74">
         <label>Azura::Containers::Vector&lt; U32 &gt;</label>
         <link refid="class_azura_1_1_containers_1_1_vector"/>
       </node>
-      <node id="110">
+      <node id="73">
         <label>Azura::ThreadGroupDimensions</label>
         <link refid="struct_azura_1_1_thread_group_dimensions"/>
       </node>
-      <node id="114">
+      <node id="77">
         <label>Azura::Containers::Vector&lt; Azura::TextureBufferInfo &gt;</label>
         <link refid="class_azura_1_1_containers_1_1_vector"/>
       </node>
-      <node id="109">
+      <node id="72">
         <label>Azura::Containers::Vector&lt; Azura::BufferUpdate &gt;</label>
         <link refid="class_azura_1_1_containers_1_1_vector"/>
       </node>

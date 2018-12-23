@@ -77,12 +77,6 @@ Functions
 ---------
 
 
-- :ref:`exhale_function__d3_d12_type_mapping_8h_1a706aa82da9fe541397a371a6600c5f0f`
-
-- :ref:`exhale_function__d3_d12_type_mapping_8h_1a808815ef348c2f008f1c7aa884a6eed6`
-
-- :ref:`exhale_function__d3_d12_type_mapping_8h_1ae87edaf8ec63f730c4b1fd447218b3c4`
-
 - :ref:`exhale_function__d3_d12_type_mapping_8h_1a494fe220accef4eb3641d61739660736`
 
 - :ref:`exhale_function__d3_d12_type_mapping_8h_1a1260b881ea5d7243830e57d93347928e`
@@ -100,6 +94,12 @@ Functions
 - :ref:`exhale_function__d3_d12_type_mapping_8h_1ac284343372580489c3f3a10a02333d8a`
 
 - :ref:`exhale_function__d3_d12_type_mapping_8h_1afe2a0d7eabddb83f5ec9eca1a271f20e`
+
+- :ref:`exhale_function__d3_d12_type_mapping_8h_1a706aa82da9fe541397a371a6600c5f0f`
+
+- :ref:`exhale_function__d3_d12_type_mapping_8h_1a808815ef348c2f008f1c7aa884a6eed6`
+
+- :ref:`exhale_function__d3_d12_type_mapping_8h_1ae87edaf8ec63f730c4b1fd447218b3c4`
 
 - :ref:`exhale_function__d3_d12_debug_8h_1a300a8e6bd5a29193ced0e2ba28769679`
 

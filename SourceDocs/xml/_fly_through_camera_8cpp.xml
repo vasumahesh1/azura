@@ -3,104 +3,120 @@
   <compounddef id="_fly_through_camera_8cpp" kind="file" language="C++">
     <compoundname>FlyThroughCamera.cpp</compoundname>
     <includes refid="_fly_through_camera_8h" local="yes">Camera/FlyThroughCamera.h</includes>
-    <includes refid="_math_2_inc_2_math_2_transform_8h" local="yes">Math/Transform.h</includes>
+    <includes refid="_transform_8h" local="yes">Math/Transform.h</includes>
     <includes refid="_geometry_8h" local="yes">Math/Geometry.h</includes>
     <includes refid="_events_8h" local="yes">Core/Events.h</includes>
     <incdepgraph>
-      <node id="3780">
-        <label>Camera.h</label>
-        <link refid="_camera_8h_source"/>
-        <childnode refid="3781" relation="include">
+      <node id="3835">
+        <label>Camera/FlyThroughCamera.h</label>
+        <link refid="_fly_through_camera_8h_source"/>
+        <childnode refid="3836" relation="include">
         </childnode>
-        <childnode refid="3782" relation="include">
+        <childnode refid="3837" relation="include">
         </childnode>
-        <childnode refid="3784" relation="include">
-        </childnode>
-      </node>
-      <node id="3782">
-        <label>Math/Core.h</label>
-        <link refid="_core_8h_source"/>
-        <childnode refid="3783" relation="include">
-        </childnode>
-        <childnode refid="3781" relation="include">
+        <childnode refid="3841" relation="include">
         </childnode>
       </node>
-      <node id="3787">
-        <label>Core/RawStorageFormat.h</label>
-        <link refid="_raw_storage_format_8h_source"/>
-        <childnode refid="3781" relation="include">
-        </childnode>
-        <childnode refid="3788" relation="include">
-        </childnode>
-        <childnode refid="3789" relation="include">
-        </childnode>
-        <childnode refid="3790" relation="include">
-        </childnode>
-        <childnode refid="3791" relation="include">
-        </childnode>
-        <childnode refid="3792" relation="include">
-        </childnode>
-      </node>
-      <node id="3778">
+      <node id="3834">
         <label>Source/Camera/Src/FlyThroughCamera.cpp</label>
         <link refid="_fly_through_camera_8cpp"/>
-        <childnode refid="3779" relation="include">
+        <childnode refid="3835" relation="include">
         </childnode>
-        <childnode refid="3785" relation="include">
+        <childnode refid="3844" relation="include">
         </childnode>
-        <childnode refid="3786" relation="include">
+        <childnode refid="3845" relation="include">
         </childnode>
-        <childnode refid="3784" relation="include">
+        <childnode refid="3843" relation="include">
         </childnode>
       </node>
-      <node id="3791">
+      <node id="3839">
+        <label>cstdint</label>
+      </node>
+      <node id="3850">
         <label>boost/preprocessor/tuple/elem.hpp</label>
       </node>
-      <node id="3792">
-        <label>boost/detail/bitmask.hpp</label>
+      <node id="3840">
+        <label>string</label>
       </node>
-      <node id="3784">
+      <node id="3843">
         <label>Core/Events.h</label>
         <link refid="_events_8h_source"/>
       </node>
-      <node id="3788">
+      <node id="3851">
+        <label>boost/detail/bitmask.hpp</label>
+      </node>
+      <node id="3847">
         <label>tuple</label>
       </node>
-      <node id="3779">
-        <label>Camera/FlyThroughCamera.h</label>
-        <link refid="_fly_through_camera_8h_source"/>
-        <childnode refid="3780" relation="include">
+      <node id="3841">
+        <label>Math/Core.h</label>
+        <link refid="_core_8h_source"/>
+        <childnode refid="3842" relation="include">
         </childnode>
-        <childnode refid="3781" relation="include">
-        </childnode>
-        <childnode refid="3782" relation="include">
+        <childnode refid="3837" relation="include">
         </childnode>
       </node>
-      <node id="3786">
-        <label>Math/Geometry.h</label>
-        <link refid="_geometry_8h_source"/>
-        <childnode refid="3781" relation="include">
+      <node id="3846">
+        <label>Core/RawStorageFormat.h</label>
+        <link refid="_raw_storage_format_8h_source"/>
+        <childnode refid="3837" relation="include">
         </childnode>
-        <childnode refid="3787" relation="include">
+        <childnode refid="3847" relation="include">
+        </childnode>
+        <childnode refid="3848" relation="include">
+        </childnode>
+        <childnode refid="3849" relation="include">
+        </childnode>
+        <childnode refid="3850" relation="include">
+        </childnode>
+        <childnode refid="3851" relation="include">
         </childnode>
       </node>
-      <node id="3785">
-        <label>Math/Transform.h</label>
-        <link refid="_math_2_inc_2_math_2_transform_8h_source"/>
-        <childnode refid="3782" relation="include">
+      <node id="3836">
+        <label>Camera.h</label>
+        <link refid="_camera_8h_source"/>
+        <childnode refid="3837" relation="include">
+        </childnode>
+        <childnode refid="3841" relation="include">
+        </childnode>
+        <childnode refid="3843" relation="include">
         </childnode>
       </node>
-      <node id="3789">
+      <node id="3838">
+        <label>cstddef</label>
+      </node>
+      <node id="3848">
         <label>boost/preprocessor/repetition/repeat.hpp</label>
       </node>
-      <node id="3781">
-        <label>Types.h</label>
-      </node>
-      <node id="3783">
+      <node id="3842">
         <label>mathfu/matrix.h</label>
       </node>
-      <node id="3790">
+      <node id="3837">
+        <label>Types.h</label>
+        <link refid="_types_8h_source"/>
+        <childnode refid="3838" relation="include">
+        </childnode>
+        <childnode refid="3839" relation="include">
+        </childnode>
+        <childnode refid="3840" relation="include">
+        </childnode>
+      </node>
+      <node id="3845">
+        <label>Math/Geometry.h</label>
+        <link refid="_geometry_8h_source"/>
+        <childnode refid="3837" relation="include">
+        </childnode>
+        <childnode refid="3846" relation="include">
+        </childnode>
+      </node>
+      <node id="3849">
         <label>boost/preprocessor/seq/for_each.hpp</label>
+      </node>
+      <node id="3844">
+        <label>Math/Transform.h</label>
+        <link refid="_transform_8h_source"/>
+        <childnode refid="3841" relation="include">
+        </childnode>
       </node>
     </incdepgraph>
     <innernamespace refid="namespace_azura">Azura</innernamespace>
@@ -125,10 +141,10 @@
 <codeline lineno="14"><highlight class="normal"><sp/><sp/>:<sp/>Camera(width,<sp/>height),</highlight></codeline>
 <codeline lineno="15"><highlight class="normal"><sp/><sp/><sp/><sp/>m_cachedMouseX(width<sp/>/<sp/>2.0f),</highlight></codeline>
 <codeline lineno="16"><highlight class="normal"><sp/><sp/><sp/><sp/>m_cachedMouseY(height<sp/>/<sp/>2.0f)<sp/>{</highlight></codeline>
-<codeline lineno="17"><highlight class="normal"><sp/><sp/>FlyThroughCamera::Recompute();</highlight></codeline>
+<codeline lineno="17"><highlight class="normal"><sp/><sp/><ref refid="class_azura_1_1_fly_through_camera_1add630123f55728b7362de167416964fb" kindref="member">FlyThroughCamera::Recompute</ref>();</highlight></codeline>
 <codeline lineno="18"><highlight class="normal">}</highlight></codeline>
 <codeline lineno="19"><highlight class="normal"></highlight></codeline>
-<codeline lineno="20"><highlight class="normal"></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/>FlyThroughCamera::Recompute()<sp/>{</highlight></codeline>
+<codeline lineno="20"><highlight class="normal"></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/><ref refid="class_azura_1_1_fly_through_camera_1add630123f55728b7362de167416964fb" kindref="member">FlyThroughCamera::Recompute</ref>()<sp/>{</highlight></codeline>
 <codeline lineno="21"><highlight class="normal"><sp/><sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>Matrix4f<sp/>transform<sp/>=<sp/>Matrix4f::FromRotationMatrix(Matrix4f::RotationY(m_theta))<sp/>*</highlight></codeline>
 <codeline lineno="22"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>Matrix4f::FromRotationMatrix(Matrix3f::RotationX(m_phi));</highlight></codeline>
 <codeline lineno="23"><highlight class="normal"></highlight></codeline>
@@ -160,7 +176,7 @@
 <codeline lineno="49"><highlight class="normal"><sp/><sp/>RotateAboutRight(diffY<sp/>*<sp/>m_sensitivity<sp/>*<sp/>2.0f);</highlight></codeline>
 <codeline lineno="50"><highlight class="normal"><sp/><sp/>RotateAboutUp(diffX<sp/>*<sp/>m_sensitivity<sp/>*<sp/>2.0f);</highlight></codeline>
 <codeline lineno="51"><highlight class="normal"></highlight></codeline>
-<codeline lineno="52"><highlight class="normal"><sp/><sp/>Recompute();</highlight></codeline>
+<codeline lineno="52"><highlight class="normal"><sp/><sp/><ref refid="class_azura_1_1_fly_through_camera_1add630123f55728b7362de167416964fb" kindref="member">Recompute</ref>();</highlight></codeline>
 <codeline lineno="53"><highlight class="normal">}</highlight></codeline>
 <codeline lineno="54"><highlight class="normal"></highlight></codeline>
 <codeline lineno="55"><highlight class="normal"></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/>FlyThroughCamera::OnKeyEvent(KeyEvent<sp/>keyEvent)<sp/>{</highlight></codeline>
@@ -266,7 +282,7 @@
 <codeline lineno="155"><highlight class="normal"><sp/><sp/>m_ref<sp/>+=<sp/>translation;</highlight></codeline>
 <codeline lineno="156"><highlight class="normal">}</highlight></codeline>
 <codeline lineno="157"><highlight class="normal"></highlight></codeline>
-<codeline lineno="158"><highlight class="normal"></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/>FlyThroughCamera::Update(</highlight><highlight class="keywordtype">float</highlight><highlight class="normal"><sp/>timeDelta)<sp/>{</highlight></codeline>
+<codeline lineno="158"><highlight class="normal"></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/><ref refid="class_azura_1_1_fly_through_camera_1a405ca3757fef26fe5c09850f78127838" kindref="member">FlyThroughCamera::Update</ref>(</highlight><highlight class="keywordtype">float</highlight><highlight class="normal"><sp/>timeDelta)<sp/>{</highlight></codeline>
 <codeline lineno="159"><highlight class="normal"><sp/><sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">float</highlight><highlight class="normal"><sp/>distance<sp/>=<sp/>m_stepSize<sp/>*<sp/>timeDelta;</highlight></codeline>
 <codeline lineno="160"><highlight class="normal"></highlight></codeline>
 <codeline lineno="161"><highlight class="normal"><sp/><sp/></highlight><highlight class="keywordtype">bool</highlight><highlight class="normal"><sp/>needsRecompute<sp/>=<sp/></highlight><highlight class="keyword">false</highlight><highlight class="normal">;</highlight></codeline>
@@ -282,7 +298,7 @@
 <codeline lineno="171"><highlight class="normal"><sp/><sp/>}</highlight></codeline>
 <codeline lineno="172"><highlight class="normal"></highlight></codeline>
 <codeline lineno="173"><highlight class="normal"><sp/><sp/></highlight><highlight class="keywordflow">if</highlight><highlight class="normal"><sp/>(needsRecompute)<sp/>{</highlight></codeline>
-<codeline lineno="174"><highlight class="normal"><sp/><sp/><sp/><sp/>Recompute();</highlight></codeline>
+<codeline lineno="174"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="class_azura_1_1_fly_through_camera_1add630123f55728b7362de167416964fb" kindref="member">Recompute</ref>();</highlight></codeline>
 <codeline lineno="175"><highlight class="normal"><sp/><sp/>}</highlight></codeline>
 <codeline lineno="176"><highlight class="normal">}</highlight></codeline>
 <codeline lineno="177"><highlight class="normal"></highlight></codeline>

@@ -5,24 +5,40 @@
     <includes refid="_memory_buffer_8h" local="yes">Memory/MemoryBuffer.h</includes>
     <includes local="no">cassert</includes>
     <incdepgraph>
-      <node id="4309">
-        <label>Memory/MemoryBuffer.h</label>
-        <link refid="_memory_buffer_8h_source"/>
-        <childnode refid="4310" relation="include">
-        </childnode>
+      <node id="4268">
+        <label>cstdint</label>
       </node>
-      <node id="4311">
+      <node id="4270">
         <label>cassert</label>
       </node>
-      <node id="4310">
-        <label>Types.h</label>
+      <node id="4269">
+        <label>string</label>
       </node>
-      <node id="4308">
+      <node id="4264">
         <label>Source/Common/Src/Memory/MemoryBuffer.cpp</label>
         <link refid="_memory_buffer_8cpp"/>
-        <childnode refid="4309" relation="include">
+        <childnode refid="4265" relation="include">
         </childnode>
-        <childnode refid="4311" relation="include">
+        <childnode refid="4270" relation="include">
+        </childnode>
+      </node>
+      <node id="4267">
+        <label>cstddef</label>
+      </node>
+      <node id="4266">
+        <label>Types.h</label>
+        <link refid="_types_8h_source"/>
+        <childnode refid="4267" relation="include">
+        </childnode>
+        <childnode refid="4268" relation="include">
+        </childnode>
+        <childnode refid="4269" relation="include">
+        </childnode>
+      </node>
+      <node id="4265">
+        <label>Memory/MemoryBuffer.h</label>
+        <link refid="_memory_buffer_8h_source"/>
+        <childnode refid="4266" relation="include">
         </childnode>
       </node>
     </incdepgraph>

@@ -180,7 +180,10 @@
 <dl class="function">
 <dt id="_CPPv3N5Azura16FlyThroughCamera9RecomputeEv">
 <span id="_CPPv2N5Azura16FlyThroughCamera9RecomputeEv"></span><span id="Azura::FlyThroughCamera::Recompute"></span><span class="target" id="class_azura_1_1_fly_through_camera_1add630123f55728b7362de167416964fb"></span>void <code class="descname">Recompute</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv3N5Azura16FlyThroughCamera9RecomputeEv" title="Permalink to this definition">¶</a><br /></dt>
-<dd></dd></dl>
+<dd><p>Tells the camera to update its matrices &amp; other properties. </p>
+<p>Cameras in Azura don’t recompute always. For example, you maybe wanted to move the camera first, then rotate it, maybe then shift it due to some physics. At the end, One can call recompute only once to get the final view projection matrix.</p>
+<p>Recompute will compute the view &amp; projection matrices (and their combinations). </p>
+</dd></dl>
 
 <dl class="function">
 <dt id="_CPPv3N5Azura16FlyThroughCamera12OnMouseEventE10MouseEvent">
@@ -225,7 +228,18 @@
 <dl class="function">
 <dt id="_CPPv3N5Azura16FlyThroughCamera6UpdateEf">
 <span id="_CPPv2N5Azura16FlyThroughCamera6UpdateEf"></span><span id="Azura::FlyThroughCamera::Update__float"></span><span class="target" id="class_azura_1_1_fly_through_camera_1a405ca3757fef26fe5c09850f78127838"></span>void <code class="descname">Update</code><span class="sig-paren">(</span>float <em>timeDelta</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv3N5Azura16FlyThroughCamera6UpdateEf" title="Permalink to this definition">¶</a><br /></dt>
-<dd></dd></dl>
+<dd><p>Update based on <a class="reference internal" href="class_azura_1_1_window.html#class_azura_1_1_window"><span class="std std-ref">Window</span></a> events. </p>
+<p>Azura cameras have the ability to listen to keyboard events or mouse events. They can then perform movements based on the <code class="docutils literal notranslate"><span class="pre">timeDelta</span></code> passed. This is highly useful as every <a class="reference internal" href="class_azura_1_1_polar_camera.html#class_azura_1_1_polar_camera"><span class="std std-ref">PolarCamera</span></a> or <a class="reference internal" href="#class_azura_1_1_fly_through_camera"><span class="std std-ref">FlyThroughCamera</span></a> are generally the same with some modification for the screen, fovy etc.</p>
+<p>They all respond to a basic set of movements. However, the user can modify the keyboard keys for each camera. But this is highly dependent on the application using the camera. For example, WASD is the default for all cameras. But one can change those keys to maybe say the arrow keys.</p>
+<p><dl class="docutils">
+<dt><strong>Parameters</strong></dt>
+<dd><ul class="breatheparameterlist first last simple">
+<li><code class="docutils literal notranslate"><span class="pre">timeDelta</span></code>: The time delta </li>
+</ul>
+</dd>
+</dl>
+</p>
+</dd></dl>
 
 </div>
 </dd></dl>

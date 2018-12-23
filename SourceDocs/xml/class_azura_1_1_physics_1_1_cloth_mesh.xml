@@ -166,9 +166,9 @@
         </inbodydescription>
         <location file="Source/Physics/Inc/Physics/Geometry/ClothMesh.h" line="24" column="1" bodyfile="Source/Physics/Src/Geometry/ClothMesh.cpp" bodystart="25" bodyend="108"/>
       </memberdef>
-      <memberdef kind="function" id="class_azura_1_1_physics_1_1_cloth_mesh_1a4ad1780df4fdbba159377feb295988f4" prot="public" static="no" const="yes" explicit="no" inline="no" virt="virtual">
+      <memberdef kind="function" id="class_azura_1_1_physics_1_1_cloth_mesh_1a41bbcd827416fbd7c414676dbec36ce8" prot="public" static="no" const="yes" explicit="no" inline="no" virt="virtual">
         <type>U32</type>
-        <definition>U32 Azura::ClothMesh::VertexDataSize</definition>
+        <definition>U32 Azura::Physics::ClothMesh::VertexDataSize</definition>
         <argsstring>() const override</argsstring>
         <name>VertexDataSize</name>
         <reimplements refid="class_azura_1_1_math_1_1_geometry_1ac054e7a5a660c7faac630cff3ee91b86">VertexDataSize</reimplements>
@@ -180,9 +180,9 @@
         </inbodydescription>
         <location file="Source/Physics/Inc/Physics/Geometry/ClothMesh.h" line="26" column="1" bodyfile="Source/Physics/Src/Geometry/ClothMesh.cpp" bodystart="110" bodyend="112"/>
       </memberdef>
-      <memberdef kind="function" id="class_azura_1_1_physics_1_1_cloth_mesh_1a92cdd2933f1eab7aec42ab3469899c46" prot="public" static="no" const="yes" explicit="no" inline="no" virt="virtual">
+      <memberdef kind="function" id="class_azura_1_1_physics_1_1_cloth_mesh_1a3fc78ccfb8c0f3ce3f0a18ea265e848a" prot="public" static="no" const="yes" explicit="no" inline="no" virt="virtual">
         <type>U32</type>
-        <definition>U32 Azura::ClothMesh::IndexDataSize</definition>
+        <definition>U32 Azura::Physics::ClothMesh::IndexDataSize</definition>
         <argsstring>() const override</argsstring>
         <name>IndexDataSize</name>
         <reimplements refid="class_azura_1_1_math_1_1_geometry_1aaf9593bfa903f9df23aefb3db971fc03">IndexDataSize</reimplements>
@@ -194,9 +194,9 @@
         </inbodydescription>
         <location file="Source/Physics/Inc/Physics/Geometry/ClothMesh.h" line="27" column="1" bodyfile="Source/Physics/Src/Geometry/ClothMesh.cpp" bodystart="114" bodyend="116"/>
       </memberdef>
-      <memberdef kind="function" id="class_azura_1_1_physics_1_1_cloth_mesh_1a55cbd00430dcd5b33824fa53cda80c49" prot="public" static="no" const="yes" explicit="no" inline="no" virt="virtual">
+      <memberdef kind="function" id="class_azura_1_1_physics_1_1_cloth_mesh_1aa6325a4678202604ada6a6e590f71fad" prot="public" static="no" const="yes" explicit="no" inline="no" virt="virtual">
         <type>const U8 *</type>
-        <definition>const U8 * Azura::ClothMesh::VertexData</definition>
+        <definition>const U8 * Azura::Physics::ClothMesh::VertexData</definition>
         <argsstring>() const override</argsstring>
         <name>VertexData</name>
         <reimplements refid="class_azura_1_1_math_1_1_geometry_1a81e23486f503335f688d6b9a8b3f3511">VertexData</reimplements>
@@ -208,9 +208,9 @@
         </inbodydescription>
         <location file="Source/Physics/Inc/Physics/Geometry/ClothMesh.h" line="28" column="1" bodyfile="Source/Physics/Src/Geometry/ClothMesh.cpp" bodystart="126" bodyend="129"/>
       </memberdef>
-      <memberdef kind="function" id="class_azura_1_1_physics_1_1_cloth_mesh_1abb7338838a16d97836fd4be4e88ebd64" prot="public" static="no" const="yes" explicit="no" inline="no" virt="virtual">
+      <memberdef kind="function" id="class_azura_1_1_physics_1_1_cloth_mesh_1a1e59215483bf480e09e04e0daa7ce1f3" prot="public" static="no" const="yes" explicit="no" inline="no" virt="virtual">
         <type>const U8 *</type>
-        <definition>const U8 * Azura::ClothMesh::IndexData</definition>
+        <definition>const U8 * Azura::Physics::ClothMesh::IndexData</definition>
         <argsstring>() const override</argsstring>
         <name>IndexData</name>
         <reimplements refid="class_azura_1_1_math_1_1_geometry_1a82e486e4c83e77c7a367a31cc8019223">IndexData</reimplements>
@@ -222,9 +222,9 @@
         </inbodydescription>
         <location file="Source/Physics/Inc/Physics/Geometry/ClothMesh.h" line="29" column="1" bodyfile="Source/Physics/Src/Geometry/ClothMesh.cpp" bodystart="131" bodyend="134"/>
       </memberdef>
-      <memberdef kind="function" id="class_azura_1_1_physics_1_1_cloth_mesh_1a2e0582ff817b7a446d6eafdf3b89837d" prot="public" static="no" const="yes" explicit="no" inline="no" virt="virtual">
+      <memberdef kind="function" id="class_azura_1_1_physics_1_1_cloth_mesh_1a189c33a296ada049b212f6a7bd569067" prot="public" static="no" const="yes" explicit="no" inline="no" virt="virtual">
         <type>RawStorageFormat</type>
-        <definition>RawStorageFormat Azura::ClothMesh::GetVertexFormat</definition>
+        <definition>RawStorageFormat Azura::Physics::ClothMesh::GetVertexFormat</definition>
         <argsstring>() const override</argsstring>
         <name>GetVertexFormat</name>
         <reimplements refid="class_azura_1_1_math_1_1_geometry_1aff7277c8d60b3b04e75a97238de299a4">GetVertexFormat</reimplements>
@@ -236,9 +236,9 @@
         </inbodydescription>
         <location file="Source/Physics/Inc/Physics/Geometry/ClothMesh.h" line="30" column="1" bodyfile="Source/Physics/Src/Geometry/ClothMesh.cpp" bodystart="146" bodyend="148"/>
       </memberdef>
-      <memberdef kind="function" id="class_azura_1_1_physics_1_1_cloth_mesh_1aa9b736d6469916689be0b31f60c9e136" prot="public" static="no" const="yes" explicit="no" inline="no" virt="virtual">
+      <memberdef kind="function" id="class_azura_1_1_physics_1_1_cloth_mesh_1aecf53f568c32cdaaa1dda5ee0cb940b3" prot="public" static="no" const="yes" explicit="no" inline="no" virt="virtual">
         <type>RawStorageFormat</type>
-        <definition>RawStorageFormat Azura::ClothMesh::GetIndexFormat</definition>
+        <definition>RawStorageFormat Azura::Physics::ClothMesh::GetIndexFormat</definition>
         <argsstring>() const override</argsstring>
         <name>GetIndexFormat</name>
         <reimplements refid="class_azura_1_1_math_1_1_geometry_1a3646f53090427c4f34d71f632bf59ff0">GetIndexFormat</reimplements>
@@ -250,9 +250,9 @@
         </inbodydescription>
         <location file="Source/Physics/Inc/Physics/Geometry/ClothMesh.h" line="31" column="1" bodyfile="Source/Physics/Src/Geometry/ClothMesh.cpp" bodystart="150" bodyend="152"/>
       </memberdef>
-      <memberdef kind="function" id="class_azura_1_1_physics_1_1_cloth_mesh_1acf16282c583a9ea24a4763b8ce92db6d" prot="public" static="no" const="yes" explicit="no" inline="no" virt="virtual">
+      <memberdef kind="function" id="class_azura_1_1_physics_1_1_cloth_mesh_1ae91be18d3faac47adb6ef19526330a75" prot="public" static="no" const="yes" explicit="no" inline="no" virt="virtual">
         <type>U32</type>
-        <definition>U32 Azura::ClothMesh::GetVertexCount</definition>
+        <definition>U32 Azura::Physics::ClothMesh::GetVertexCount</definition>
         <argsstring>() const override</argsstring>
         <name>GetVertexCount</name>
         <reimplements refid="class_azura_1_1_math_1_1_geometry_1ae114b9fd7f187249ce2c5c19fa3396a8">GetVertexCount</reimplements>
@@ -264,9 +264,9 @@
         </inbodydescription>
         <location file="Source/Physics/Inc/Physics/Geometry/ClothMesh.h" line="32" column="1" bodyfile="Source/Physics/Src/Geometry/ClothMesh.cpp" bodystart="294" bodyend="296"/>
       </memberdef>
-      <memberdef kind="function" id="class_azura_1_1_physics_1_1_cloth_mesh_1ac833446a04a3bceb5a6c116f7bf109f5" prot="public" static="no" const="yes" explicit="no" inline="no" virt="virtual">
+      <memberdef kind="function" id="class_azura_1_1_physics_1_1_cloth_mesh_1aebed88daf7aa4877825346b59312ead2" prot="public" static="no" const="yes" explicit="no" inline="no" virt="virtual">
         <type>U32</type>
-        <definition>U32 Azura::ClothMesh::GetIndexCount</definition>
+        <definition>U32 Azura::Physics::ClothMesh::GetIndexCount</definition>
         <argsstring>() const override</argsstring>
         <name>GetIndexCount</name>
         <reimplements refid="class_azura_1_1_math_1_1_geometry_1af6a4f5bd5d7b7479cfe37629a60b9f87">GetIndexCount</reimplements>
@@ -278,9 +278,9 @@
         </inbodydescription>
         <location file="Source/Physics/Inc/Physics/Geometry/ClothMesh.h" line="33" column="1" bodyfile="Source/Physics/Src/Geometry/ClothMesh.cpp" bodystart="298" bodyend="300"/>
       </memberdef>
-      <memberdef kind="function" id="class_azura_1_1_physics_1_1_cloth_mesh_1add11b8966ec5a17a996f180da784e879" prot="public" static="no" const="yes" explicit="no" inline="no" virt="virtual">
+      <memberdef kind="function" id="class_azura_1_1_physics_1_1_cloth_mesh_1a9594147035cb8e4c38ec81c4bc60d9f1" prot="public" static="no" const="yes" explicit="no" inline="no" virt="virtual">
         <type>U32</type>
-        <definition>U32 Azura::ClothMesh::TotalDataSize</definition>
+        <definition>U32 Azura::Physics::ClothMesh::TotalDataSize</definition>
         <argsstring>() const override</argsstring>
         <name>TotalDataSize</name>
         <reimplements refid="class_azura_1_1_math_1_1_geometry_1a149b71e3fb0c73440c46b07482acf76f">TotalDataSize</reimplements>
@@ -292,9 +292,9 @@
         </inbodydescription>
         <location file="Source/Physics/Inc/Physics/Geometry/ClothMesh.h" line="34" column="1" bodyfile="Source/Physics/Src/Geometry/ClothMesh.cpp" bodystart="302" bodyend="304"/>
       </memberdef>
-      <memberdef kind="function" id="class_azura_1_1_physics_1_1_cloth_mesh_1a011fb10ed2a2cef71b2f9ddf261c084a" prot="public" static="no" const="yes" explicit="no" inline="no" virt="virtual">
+      <memberdef kind="function" id="class_azura_1_1_physics_1_1_cloth_mesh_1aceef5eb1c761aa8c4fe009de2855421c" prot="public" static="no" const="yes" explicit="no" inline="no" virt="virtual">
         <type>U32</type>
-        <definition>U32 Azura::ClothMesh::NormalDataSize</definition>
+        <definition>U32 Azura::Physics::ClothMesh::NormalDataSize</definition>
         <argsstring>() const override</argsstring>
         <name>NormalDataSize</name>
         <reimplements refid="class_azura_1_1_math_1_1_geometry_1a77e056714cf8fde1d7c15d4f7b01e84a">NormalDataSize</reimplements>
@@ -306,9 +306,9 @@
         </inbodydescription>
         <location file="Source/Physics/Inc/Physics/Geometry/ClothMesh.h" line="35" column="1" bodyfile="Source/Physics/Src/Geometry/ClothMesh.cpp" bodystart="118" bodyend="120"/>
       </memberdef>
-      <memberdef kind="function" id="class_azura_1_1_physics_1_1_cloth_mesh_1a3cf7a70e31ddc7c679c26e888dca6f51" prot="public" static="no" const="yes" explicit="no" inline="no" virt="virtual">
+      <memberdef kind="function" id="class_azura_1_1_physics_1_1_cloth_mesh_1a9e093637a570b5892422f523356c12d6" prot="public" static="no" const="yes" explicit="no" inline="no" virt="virtual">
         <type>const U8 *</type>
-        <definition>const U8 * Azura::ClothMesh::NormalData</definition>
+        <definition>const U8 * Azura::Physics::ClothMesh::NormalData</definition>
         <argsstring>() const override</argsstring>
         <name>NormalData</name>
         <reimplements refid="class_azura_1_1_math_1_1_geometry_1ad3a024bf9d28a6d3d230eeac7d6aa490">NormalData</reimplements>
@@ -320,9 +320,9 @@
         </inbodydescription>
         <location file="Source/Physics/Inc/Physics/Geometry/ClothMesh.h" line="36" column="1" bodyfile="Source/Physics/Src/Geometry/ClothMesh.cpp" bodystart="136" bodyend="139"/>
       </memberdef>
-      <memberdef kind="function" id="class_azura_1_1_physics_1_1_cloth_mesh_1af24713ca9479cd29cb08aa1a01762873" prot="public" static="no" const="yes" explicit="no" inline="no" virt="virtual">
+      <memberdef kind="function" id="class_azura_1_1_physics_1_1_cloth_mesh_1a6a8c1680bf91d8cb2e4810c7c9750157" prot="public" static="no" const="yes" explicit="no" inline="no" virt="virtual">
         <type>RawStorageFormat</type>
-        <definition>RawStorageFormat Azura::ClothMesh::GetNormalFormat</definition>
+        <definition>RawStorageFormat Azura::Physics::ClothMesh::GetNormalFormat</definition>
         <argsstring>() const override</argsstring>
         <name>GetNormalFormat</name>
         <reimplements refid="class_azura_1_1_math_1_1_geometry_1a9d33a51d7ddf0c70953e2152be361a4c">GetNormalFormat</reimplements>
@@ -334,9 +334,9 @@
         </inbodydescription>
         <location file="Source/Physics/Inc/Physics/Geometry/ClothMesh.h" line="37" column="1" bodyfile="Source/Physics/Src/Geometry/ClothMesh.cpp" bodystart="154" bodyend="156"/>
       </memberdef>
-      <memberdef kind="function" id="class_azura_1_1_physics_1_1_cloth_mesh_1a24289e2e3132e551e45bfdbc3f231c6c" prot="public" static="no" const="yes" explicit="no" inline="no" virt="virtual">
+      <memberdef kind="function" id="class_azura_1_1_physics_1_1_cloth_mesh_1a388dc3757a47f3bd6a985b371fc55e8d" prot="public" static="no" const="yes" explicit="no" inline="no" virt="virtual">
         <type>U32</type>
-        <definition>U32 Azura::ClothMesh::UVDataSize</definition>
+        <definition>U32 Azura::Physics::ClothMesh::UVDataSize</definition>
         <argsstring>() const override</argsstring>
         <name>UVDataSize</name>
         <reimplements refid="class_azura_1_1_math_1_1_geometry_1a812a50d6a44b12d6e3697d04a879c1d8">UVDataSize</reimplements>
@@ -348,9 +348,9 @@
         </inbodydescription>
         <location file="Source/Physics/Inc/Physics/Geometry/ClothMesh.h" line="39" column="1" bodyfile="Source/Physics/Src/Geometry/ClothMesh.cpp" bodystart="122" bodyend="124"/>
       </memberdef>
-      <memberdef kind="function" id="class_azura_1_1_physics_1_1_cloth_mesh_1a9ec77ce79d394013fc178dca364c5365" prot="public" static="no" const="yes" explicit="no" inline="no" virt="virtual">
+      <memberdef kind="function" id="class_azura_1_1_physics_1_1_cloth_mesh_1a5588b3d8e73196e33882563d7e448c27" prot="public" static="no" const="yes" explicit="no" inline="no" virt="virtual">
         <type>const U8 *</type>
-        <definition>const U8 * Azura::ClothMesh::UVData</definition>
+        <definition>const U8 * Azura::Physics::ClothMesh::UVData</definition>
         <argsstring>() const override</argsstring>
         <name>UVData</name>
         <reimplements refid="class_azura_1_1_math_1_1_geometry_1aaef0eabbb1cc1269c20309ca3eac81b8">UVData</reimplements>
@@ -362,9 +362,9 @@
         </inbodydescription>
         <location file="Source/Physics/Inc/Physics/Geometry/ClothMesh.h" line="40" column="1" bodyfile="Source/Physics/Src/Geometry/ClothMesh.cpp" bodystart="141" bodyend="144"/>
       </memberdef>
-      <memberdef kind="function" id="class_azura_1_1_physics_1_1_cloth_mesh_1a9f25a92dbce5dbcb3005b1a960b81b94" prot="public" static="no" const="yes" explicit="no" inline="no" virt="virtual">
+      <memberdef kind="function" id="class_azura_1_1_physics_1_1_cloth_mesh_1a0ca8638d4273e67d07380fb5049ae42c" prot="public" static="no" const="yes" explicit="no" inline="no" virt="virtual">
         <type>RawStorageFormat</type>
-        <definition>RawStorageFormat Azura::ClothMesh::GetUVFormat</definition>
+        <definition>RawStorageFormat Azura::Physics::ClothMesh::GetUVFormat</definition>
         <argsstring>() const override</argsstring>
         <name>GetUVFormat</name>
         <reimplements refid="class_azura_1_1_math_1_1_geometry_1ad689616ffa31f5bdfcfa50daf5bdc7be">GetUVFormat</reimplements>
@@ -441,9 +441,9 @@
       </memberdef>
       </sectiondef>
       <sectiondef kind="private-func">
-      <memberdef kind="function" id="class_azura_1_1_physics_1_1_cloth_mesh_1a7c9a4f45d76fbb73de21dd6ff6795a20" prot="private" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+      <memberdef kind="function" id="class_azura_1_1_physics_1_1_cloth_mesh_1a44d050ec52f5c1479e2bb411dfd69533" prot="private" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>void</type>
-        <definition>void Azura::ClothMesh::AddEdgeTriangleNeighbor</definition>
+        <definition>void Azura::Physics::ClothMesh::AddEdgeTriangleNeighbor</definition>
         <argsstring>(const Edge &amp;edge, const U32 triangleIdx)</argsstring>
         <name>AddEdgeTriangleNeighbor</name>
         <param>
@@ -485,71 +485,71 @@
     <detaileddescription>
     </detaileddescription>
     <inheritancegraph>
-      <node id="78">
+      <node id="49">
         <label>Azura::Physics::IPhysicsGeometry</label>
         <link refid="class_azura_1_1_physics_1_1_i_physics_geometry"/>
-        <childnode refid="79" relation="public-inheritance">
+        <childnode refid="50" relation="public-inheritance">
         </childnode>
       </node>
-      <node id="76">
+      <node id="47">
         <label>Azura::Physics::ClothMesh</label>
         <link refid="class_azura_1_1_physics_1_1_cloth_mesh"/>
-        <childnode refid="77" relation="public-inheritance">
+        <childnode refid="48" relation="public-inheritance">
         </childnode>
       </node>
-      <node id="77">
+      <node id="48">
         <label>Azura::Physics::IClothPhysicsGeometry</label>
         <link refid="class_azura_1_1_physics_1_1_i_cloth_physics_geometry"/>
-        <childnode refid="78" relation="public-inheritance">
+        <childnode refid="49" relation="public-inheritance">
         </childnode>
       </node>
-      <node id="79">
+      <node id="50">
         <label>Azura::Math::Geometry</label>
         <link refid="class_azura_1_1_math_1_1_geometry"/>
       </node>
     </inheritancegraph>
     <collaborationgraph>
-      <node id="82">
+      <node id="53">
         <label>Azura::Physics::IPhysicsGeometry</label>
         <link refid="class_azura_1_1_physics_1_1_i_physics_geometry"/>
-        <childnode refid="83" relation="public-inheritance">
+        <childnode refid="54" relation="public-inheritance">
         </childnode>
       </node>
-      <node id="80">
+      <node id="51">
         <label>Azura::Physics::ClothMesh</label>
         <link refid="class_azura_1_1_physics_1_1_cloth_mesh"/>
-        <childnode refid="81" relation="public-inheritance">
+        <childnode refid="52" relation="public-inheritance">
         </childnode>
       </node>
-      <node id="81">
+      <node id="52">
         <label>Azura::Physics::IClothPhysicsGeometry</label>
         <link refid="class_azura_1_1_physics_1_1_i_cloth_physics_geometry"/>
-        <childnode refid="82" relation="public-inheritance">
+        <childnode refid="53" relation="public-inheritance">
         </childnode>
       </node>
-      <node id="83">
+      <node id="54">
         <label>Azura::Math::Geometry</label>
         <link refid="class_azura_1_1_math_1_1_geometry"/>
       </node>
     </collaborationgraph>
     <location file="Source/Physics/Inc/Physics/Geometry/ClothMesh.h" line="22" column="1" bodyfile="Source/Physics/Inc/Physics/Geometry/ClothMesh.h" bodystart="22" bodyend="66"/>
     <listofallmembers>
-      <member refid="class_azura_1_1_physics_1_1_cloth_mesh_1a7c9a4f45d76fbb73de21dd6ff6795a20" prot="private" virt="non-virtual"><scope>Azura::Physics::ClothMesh</scope><name>AddEdgeTriangleNeighbor</name></member>
+      <member refid="class_azura_1_1_physics_1_1_cloth_mesh_1a44d050ec52f5c1479e2bb411dfd69533" prot="private" virt="non-virtual"><scope>Azura::Physics::ClothMesh</scope><name>AddEdgeTriangleNeighbor</name></member>
       <member refid="class_azura_1_1_physics_1_1_cloth_mesh_1a40b92eada33418d1ea9285ef68f105e8" prot="public" virt="non-virtual"><scope>Azura::Physics::ClothMesh</scope><name>ClothMesh</name></member>
       <member refid="class_azura_1_1_math_1_1_geometry_1a7ff397714deef6a88c8e4edddc0ba032" prot="public" virt="non-virtual"><scope>Azura::Physics::ClothMesh</scope><name>Geometry</name></member>
       <member refid="class_azura_1_1_math_1_1_geometry_1abd1cd8e142652b4dfd80378a52f45e47" prot="public" virt="non-virtual"><scope>Azura::Physics::ClothMesh</scope><name>Geometry</name></member>
       <member refid="class_azura_1_1_math_1_1_geometry_1ac6d5eb1dbfcfce2d84d5f4fe54640922" prot="public" virt="non-virtual"><scope>Azura::Physics::ClothMesh</scope><name>Geometry</name></member>
-      <member refid="class_azura_1_1_physics_1_1_cloth_mesh_1ac833446a04a3bceb5a6c116f7bf109f5" prot="public" virt="virtual"><scope>Azura::Physics::ClothMesh</scope><name>GetIndexCount</name></member>
-      <member refid="class_azura_1_1_physics_1_1_cloth_mesh_1aa9b736d6469916689be0b31f60c9e136" prot="public" virt="virtual"><scope>Azura::Physics::ClothMesh</scope><name>GetIndexFormat</name></member>
-      <member refid="class_azura_1_1_physics_1_1_cloth_mesh_1af24713ca9479cd29cb08aa1a01762873" prot="public" virt="virtual"><scope>Azura::Physics::ClothMesh</scope><name>GetNormalFormat</name></member>
+      <member refid="class_azura_1_1_physics_1_1_cloth_mesh_1aebed88daf7aa4877825346b59312ead2" prot="public" virt="virtual"><scope>Azura::Physics::ClothMesh</scope><name>GetIndexCount</name></member>
+      <member refid="class_azura_1_1_physics_1_1_cloth_mesh_1aecf53f568c32cdaaa1dda5ee0cb940b3" prot="public" virt="virtual"><scope>Azura::Physics::ClothMesh</scope><name>GetIndexFormat</name></member>
+      <member refid="class_azura_1_1_physics_1_1_cloth_mesh_1a6a8c1680bf91d8cb2e4810c7c9750157" prot="public" virt="virtual"><scope>Azura::Physics::ClothMesh</scope><name>GetNormalFormat</name></member>
       <member refid="class_azura_1_1_physics_1_1_cloth_mesh_1aaa0f046e7590dce980af82c98dd0fff8" prot="public" virt="virtual"><scope>Azura::Physics::ClothMesh</scope><name>GetPBDSolvingView</name></member>
-      <member refid="class_azura_1_1_physics_1_1_cloth_mesh_1a9f25a92dbce5dbcb3005b1a960b81b94" prot="public" virt="virtual"><scope>Azura::Physics::ClothMesh</scope><name>GetUVFormat</name></member>
+      <member refid="class_azura_1_1_physics_1_1_cloth_mesh_1a0ca8638d4273e67d07380fb5049ae42c" prot="public" virt="virtual"><scope>Azura::Physics::ClothMesh</scope><name>GetUVFormat</name></member>
       <member refid="class_azura_1_1_physics_1_1_cloth_mesh_1aca9f5ad8f83a52791084058221fa2b1a" prot="public" virt="non-virtual"><scope>Azura::Physics::ClothMesh</scope><name>GetVertexAliases</name></member>
-      <member refid="class_azura_1_1_physics_1_1_cloth_mesh_1acf16282c583a9ea24a4763b8ce92db6d" prot="public" virt="virtual"><scope>Azura::Physics::ClothMesh</scope><name>GetVertexCount</name></member>
-      <member refid="class_azura_1_1_physics_1_1_cloth_mesh_1a2e0582ff817b7a446d6eafdf3b89837d" prot="public" virt="virtual"><scope>Azura::Physics::ClothMesh</scope><name>GetVertexFormat</name></member>
+      <member refid="class_azura_1_1_physics_1_1_cloth_mesh_1ae91be18d3faac47adb6ef19526330a75" prot="public" virt="virtual"><scope>Azura::Physics::ClothMesh</scope><name>GetVertexCount</name></member>
+      <member refid="class_azura_1_1_physics_1_1_cloth_mesh_1a189c33a296ada049b212f6a7bd569067" prot="public" virt="virtual"><scope>Azura::Physics::ClothMesh</scope><name>GetVertexFormat</name></member>
       <member refid="class_azura_1_1_physics_1_1_cloth_mesh_1ae50a8ecd1857808e838d8de9c1a5ab58" prot="public" virt="virtual"><scope>Azura::Physics::ClothMesh</scope><name>GetVertexInverseMass</name></member>
-      <member refid="class_azura_1_1_physics_1_1_cloth_mesh_1abb7338838a16d97836fd4be4e88ebd64" prot="public" virt="virtual"><scope>Azura::Physics::ClothMesh</scope><name>IndexData</name></member>
-      <member refid="class_azura_1_1_physics_1_1_cloth_mesh_1a92cdd2933f1eab7aec42ab3469899c46" prot="public" virt="virtual"><scope>Azura::Physics::ClothMesh</scope><name>IndexDataSize</name></member>
+      <member refid="class_azura_1_1_physics_1_1_cloth_mesh_1a1e59215483bf480e09e04e0daa7ce1f3" prot="public" virt="virtual"><scope>Azura::Physics::ClothMesh</scope><name>IndexData</name></member>
+      <member refid="class_azura_1_1_physics_1_1_cloth_mesh_1a3fc78ccfb8c0f3ce3f0a18ea265e848a" prot="public" virt="virtual"><scope>Azura::Physics::ClothMesh</scope><name>IndexDataSize</name></member>
       <member refid="class_azura_1_1_physics_1_1_cloth_mesh_1a93b380b3d9d2cf4bb7b6387d7c25f867" prot="private" virt="non-virtual"><scope>Azura::Physics::ClothMesh</scope><name>IsVertexAnchorPoint</name></member>
       <member refid="class_azura_1_1_physics_1_1_cloth_mesh_1aa9e7285729dafafc8a921e9d4886496a" prot="private" virt="non-virtual"><scope>Azura::Physics::ClothMesh</scope><name>m_anchorIdx</name></member>
       <member refid="class_azura_1_1_physics_1_1_cloth_mesh_1a90690c75edc7ec8b1400e561cb49e054" prot="private" virt="non-virtual"><scope>Azura::Physics::ClothMesh</scope><name>m_edgeTriangleMap</name></member>
@@ -560,17 +560,17 @@
       <member refid="class_azura_1_1_physics_1_1_cloth_mesh_1aec970b12c1fc3b795ee670792d3179bc" prot="private" virt="non-virtual"><scope>Azura::Physics::ClothMesh</scope><name>m_vertexAliasMap</name></member>
       <member refid="class_azura_1_1_physics_1_1_cloth_mesh_1a2880a15fea16e9242c0a74a3a685f236" prot="private" virt="non-virtual"><scope>Azura::Physics::ClothMesh</scope><name>m_vertexInvMass</name></member>
       <member refid="class_azura_1_1_physics_1_1_cloth_mesh_1a694486e8c5605e3d1e4adb0f3364604d" prot="private" virt="non-virtual"><scope>Azura::Physics::ClothMesh</scope><name>m_vertices</name></member>
-      <member refid="class_azura_1_1_physics_1_1_cloth_mesh_1a3cf7a70e31ddc7c679c26e888dca6f51" prot="public" virt="virtual"><scope>Azura::Physics::ClothMesh</scope><name>NormalData</name></member>
-      <member refid="class_azura_1_1_physics_1_1_cloth_mesh_1a011fb10ed2a2cef71b2f9ddf261c084a" prot="public" virt="virtual"><scope>Azura::Physics::ClothMesh</scope><name>NormalDataSize</name></member>
+      <member refid="class_azura_1_1_physics_1_1_cloth_mesh_1a9e093637a570b5892422f523356c12d6" prot="public" virt="virtual"><scope>Azura::Physics::ClothMesh</scope><name>NormalData</name></member>
+      <member refid="class_azura_1_1_physics_1_1_cloth_mesh_1aceef5eb1c761aa8c4fe009de2855421c" prot="public" virt="virtual"><scope>Azura::Physics::ClothMesh</scope><name>NormalDataSize</name></member>
       <member refid="class_azura_1_1_math_1_1_geometry_1a1f4182094f19c0f3e4d3a249707f34e9" prot="public" virt="non-virtual"><scope>Azura::Physics::ClothMesh</scope><name>operator=</name></member>
       <member refid="class_azura_1_1_math_1_1_geometry_1a37a28a7b74fc5abc68f231c9d3af8c72" prot="public" virt="non-virtual"><scope>Azura::Physics::ClothMesh</scope><name>operator=</name></member>
       <member refid="class_azura_1_1_physics_1_1_cloth_mesh_1aea1c212aff7c6d729266b5d2bba0d6a4" prot="private" virt="non-virtual"><scope>Azura::Physics::ClothMesh</scope><name>p_interface</name></member>
       <member refid="class_azura_1_1_physics_1_1_cloth_mesh_1a6c4d65a091b000326786d6d1ee6502d8" prot="public" virt="virtual"><scope>Azura::Physics::ClothMesh</scope><name>SetAnchorOnIndex</name></member>
-      <member refid="class_azura_1_1_physics_1_1_cloth_mesh_1add11b8966ec5a17a996f180da784e879" prot="public" virt="virtual"><scope>Azura::Physics::ClothMesh</scope><name>TotalDataSize</name></member>
-      <member refid="class_azura_1_1_physics_1_1_cloth_mesh_1a9ec77ce79d394013fc178dca364c5365" prot="public" virt="virtual"><scope>Azura::Physics::ClothMesh</scope><name>UVData</name></member>
-      <member refid="class_azura_1_1_physics_1_1_cloth_mesh_1a24289e2e3132e551e45bfdbc3f231c6c" prot="public" virt="virtual"><scope>Azura::Physics::ClothMesh</scope><name>UVDataSize</name></member>
-      <member refid="class_azura_1_1_physics_1_1_cloth_mesh_1a55cbd00430dcd5b33824fa53cda80c49" prot="public" virt="virtual"><scope>Azura::Physics::ClothMesh</scope><name>VertexData</name></member>
-      <member refid="class_azura_1_1_physics_1_1_cloth_mesh_1a4ad1780df4fdbba159377feb295988f4" prot="public" virt="virtual"><scope>Azura::Physics::ClothMesh</scope><name>VertexDataSize</name></member>
+      <member refid="class_azura_1_1_physics_1_1_cloth_mesh_1a9594147035cb8e4c38ec81c4bc60d9f1" prot="public" virt="virtual"><scope>Azura::Physics::ClothMesh</scope><name>TotalDataSize</name></member>
+      <member refid="class_azura_1_1_physics_1_1_cloth_mesh_1a5588b3d8e73196e33882563d7e448c27" prot="public" virt="virtual"><scope>Azura::Physics::ClothMesh</scope><name>UVData</name></member>
+      <member refid="class_azura_1_1_physics_1_1_cloth_mesh_1a388dc3757a47f3bd6a985b371fc55e8d" prot="public" virt="virtual"><scope>Azura::Physics::ClothMesh</scope><name>UVDataSize</name></member>
+      <member refid="class_azura_1_1_physics_1_1_cloth_mesh_1aa6325a4678202604ada6a6e590f71fad" prot="public" virt="virtual"><scope>Azura::Physics::ClothMesh</scope><name>VertexData</name></member>
+      <member refid="class_azura_1_1_physics_1_1_cloth_mesh_1a41bbcd827416fbd7c414676dbec36ce8" prot="public" virt="virtual"><scope>Azura::Physics::ClothMesh</scope><name>VertexDataSize</name></member>
       <member refid="class_azura_1_1_math_1_1_geometry_1ae50195fe0fa7af9125260c39de331fdf" prot="public" virt="virtual"><scope>Azura::Physics::ClothMesh</scope><name>~Geometry</name></member>
     </listofallmembers>
   </compounddef>

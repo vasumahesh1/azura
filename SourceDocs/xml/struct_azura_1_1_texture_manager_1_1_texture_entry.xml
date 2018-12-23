@@ -67,27 +67,27 @@
     <detaileddescription>
     </detaileddescription>
     <collaborationgraph>
-      <node id="566">
+      <node id="398">
         <label>Azura::Bounds3D</label>
         <link refid="struct_azura_1_1_bounds3_d"/>
       </node>
-      <node id="565">
+      <node id="397">
         <label>Azura::TextureDesc</label>
         <link refid="struct_azura_1_1_texture_desc"/>
-        <childnode refid="566" relation="usage">
+        <childnode refid="398" relation="usage">
           <edgelabel>m_bounds</edgelabel>
         </childnode>
       </node>
-      <node id="564">
+      <node id="396">
         <label>Azura::Containers::Vector&lt; U8 &gt;</label>
         <link refid="class_azura_1_1_containers_1_1_vector"/>
       </node>
-      <node id="563">
+      <node id="395">
         <label>Azura::TextureManager::TextureEntry</label>
-        <childnode refid="564" relation="usage">
+        <childnode refid="396" relation="usage">
           <edgelabel>m_data</edgelabel>
         </childnode>
-        <childnode refid="565" relation="usage">
+        <childnode refid="397" relation="usage">
           <edgelabel>m_desc</edgelabel>
         </childnode>
       </node>

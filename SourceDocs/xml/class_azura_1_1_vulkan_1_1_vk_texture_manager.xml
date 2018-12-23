@@ -27,32 +27,32 @@
     <detaileddescription>
     </detaileddescription>
     <inheritancegraph>
-      <node id="678">
+      <node id="482">
         <label>Azura::TextureManager</label>
         <link refid="class_azura_1_1_texture_manager"/>
       </node>
-      <node id="677">
+      <node id="481">
         <label>Azura::Vulkan::VkTextureManager</label>
         <link refid="class_azura_1_1_vulkan_1_1_vk_texture_manager"/>
-        <childnode refid="678" relation="public-inheritance">
+        <childnode refid="482" relation="public-inheritance">
         </childnode>
       </node>
     </inheritancegraph>
     <collaborationgraph>
-      <node id="680">
+      <node id="484">
         <label>Azura::TextureManager</label>
         <link refid="class_azura_1_1_texture_manager"/>
-        <childnode refid="681" relation="usage">
+        <childnode refid="485" relation="usage">
           <edgelabel>log_TextureManager</edgelabel>
         </childnode>
       </node>
-      <node id="679">
+      <node id="483">
         <label>Azura::Vulkan::VkTextureManager</label>
         <link refid="class_azura_1_1_vulkan_1_1_vk_texture_manager"/>
-        <childnode refid="680" relation="public-inheritance">
+        <childnode refid="484" relation="public-inheritance">
         </childnode>
       </node>
-      <node id="681">
+      <node id="485">
         <label>Azura::Log</label>
         <link refid="class_azura_1_1_log"/>
       </node>

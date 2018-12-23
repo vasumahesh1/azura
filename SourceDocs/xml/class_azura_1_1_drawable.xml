@@ -497,54 +497,54 @@
     <detaileddescription>
     </detaileddescription>
     <inheritancegraph>
-      <node id="214">
+      <node id="173">
         <label>Azura::Drawable</label>
         <link refid="class_azura_1_1_drawable"/>
       </node>
-      <node id="216">
+      <node id="175">
         <label>Azura::Vulkan::VkDrawable</label>
         <link refid="class_azura_1_1_vulkan_1_1_vk_drawable"/>
-        <childnode refid="214" relation="public-inheritance">
+        <childnode refid="173" relation="public-inheritance">
         </childnode>
       </node>
-      <node id="215">
+      <node id="174">
         <label>Azura::D3D12::D3D12Drawable</label>
         <link refid="class_azura_1_1_d3_d12_1_1_d3_d12_drawable"/>
-        <childnode refid="214" relation="public-inheritance">
+        <childnode refid="173" relation="public-inheritance">
         </childnode>
       </node>
     </inheritancegraph>
     <collaborationgraph>
-      <node id="218">
+      <node id="177">
         <label>Azura::Containers::Vector&lt; Azura::UniformBufferInfo &gt;</label>
         <link refid="class_azura_1_1_containers_1_1_vector"/>
       </node>
-      <node id="221">
+      <node id="180">
         <label>Azura::DrawableCreateInfo</label>
         <link refid="struct_azura_1_1_drawable_create_info"/>
       </node>
-      <node id="220">
+      <node id="179">
         <label>Azura::Containers::Vector&lt; Azura::BufferInfo &gt;</label>
         <link refid="class_azura_1_1_containers_1_1_vector"/>
       </node>
-      <node id="217">
+      <node id="176">
         <label>Azura::Drawable</label>
         <link refid="class_azura_1_1_drawable"/>
-        <childnode refid="218" relation="usage">
+        <childnode refid="177" relation="usage">
           <edgelabel>m_uniformBufferInfos</edgelabel>
         </childnode>
-        <childnode refid="219" relation="usage">
+        <childnode refid="178" relation="usage">
           <edgelabel>m_indexBufferInfo</edgelabel>
         </childnode>
-        <childnode refid="220" relation="usage">
+        <childnode refid="179" relation="usage">
           <edgelabel>m_vertexBufferInfos</edgelabel>
           <edgelabel>m_instanceBufferInfos</edgelabel>
         </childnode>
-        <childnode refid="221" relation="usage">
+        <childnode refid="180" relation="usage">
           <edgelabel>m_createInfo</edgelabel>
         </childnode>
       </node>
-      <node id="219">
+      <node id="178">
         <label>Azura::BufferInfo</label>
         <link refid="struct_azura_1_1_buffer_info"/>
       </node>

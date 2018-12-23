@@ -41,8 +41,6 @@ Included By
 
 - :ref:`file_Source_Azura_RenderSystem_Src_D3D12_D3D12TextureManager.cpp`
 
-- :ref:`file_Source_Samples_2_DeferredRenderer_Inc_App_LightTexture.h`
-
 
 
 

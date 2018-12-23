@@ -79,21 +79,11 @@ Included By
 
 - :ref:`file_Source_Azura_RenderSystem_Src_Vulkan_VkDrawablePool.cpp`
 
-- :ref:`file_Source_Containers_Benchmark_Vector_benchmark.cpp`
-
-- :ref:`file_Source_Containers_Test_Vector_test.h`
-
-- :ref:`file_Source_Dibella_Inc_Scene_Scene.h`
-
 - :ref:`file_Source_Physics_Inc_Physics_PBD_Cloth_Constraints.h`
 
 - :ref:`file_Source_Physics_Inc_Physics_PBD_Common_SolvingView.h`
 
 - :ref:`file_Source_Platform_Inc_Utils_FileReader.h`
-
-- :ref:`file_Source_Samples_2_DeferredRenderer_Inc_App_LightTexture.h`
-
-- :ref:`file_Source_Sandbox_main.cpp`
 
 
 

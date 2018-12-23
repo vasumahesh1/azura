@@ -47,8 +47,6 @@ Included By
 
 - :ref:`file_Source_Camera_Src_Camera.cpp`
 
-- :ref:`file_Source_Samples_2_DeferredRenderer_Inc_App_Scene.h`
-
 
 
 

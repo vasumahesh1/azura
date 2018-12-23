@@ -2,130 +2,138 @@
 <doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.8.14">
   <compounddef id="_constraints_8h" kind="file" language="C++">
     <compoundname>Constraints.h</compoundname>
-    <includes local="no">Types.h</includes>
+    <includes refid="_types_8h" local="no">Types.h</includes>
     <includes refid="_vector_8h" local="no">Containers/Vector.h</includes>
     <includes refid="_core_8h" local="no">Math/Core.h</includes>
     <includes local="no">array</includes>
     <includedby refid="_cloth_solving_view_8h" local="no">Source/Physics/Inc/Physics/PBD/Cloth/ClothSolvingView.h</includedby>
     <includedby refid="_constraints_8cpp" local="yes">Source/Physics/Src/PBD/Cloth/Constraints.cpp</includedby>
     <incdepgraph>
-      <node id="5529">
-        <label>Math/Core.h</label>
-        <link refid="_core_8h_source"/>
-        <childnode refid="5530" relation="include">
-        </childnode>
-        <childnode refid="5520" relation="include">
-        </childnode>
-      </node>
-      <node id="5524">
+      <node id="4950">
         <label>functional</label>
       </node>
-      <node id="5525">
+      <node id="4951">
         <label>iterator</label>
       </node>
-      <node id="5527">
-        <label>Memory/Allocator.h</label>
-        <link refid="_allocator_8h_source"/>
-        <childnode refid="5524" relation="include">
-        </childnode>
-        <childnode refid="5520" relation="include">
-        </childnode>
-        <childnode refid="5528" relation="include">
-        </childnode>
+      <node id="4945">
+        <label>cstdint</label>
       </node>
-      <node id="5522">
+      <node id="4948">
         <label>cassert</label>
       </node>
-      <node id="5528">
+      <node id="4946">
+        <label>string</label>
+      </node>
+      <node id="4953">
+        <label>Memory/Allocator.h</label>
+        <link refid="_allocator_8h_source"/>
+        <childnode refid="4950" relation="include">
+        </childnode>
+        <childnode refid="4943" relation="include">
+        </childnode>
+        <childnode refid="4954" relation="include">
+        </childnode>
+      </node>
+      <node id="4947">
+        <label>Containers/Vector.h</label>
+        <link refid="_vector_8h_source"/>
+        <childnode refid="4948" relation="include">
+        </childnode>
+        <childnode refid="4949" relation="include">
+        </childnode>
+        <childnode refid="4950" relation="include">
+        </childnode>
+        <childnode refid="4951" relation="include">
+        </childnode>
+        <childnode refid="4952" relation="include">
+        </childnode>
+        <childnode refid="4953" relation="include">
+        </childnode>
+        <childnode refid="4943" relation="include">
+        </childnode>
+        <childnode refid="4954" relation="include">
+        </childnode>
+      </node>
+      <node id="4954">
         <label>Utils/Macros.h</label>
         <link refid="_macros_8h_source"/>
       </node>
-      <node id="5526">
+      <node id="4952">
         <label>Array.h</label>
         <link refid="_array_8h_source"/>
-        <childnode refid="5522" relation="include">
+        <childnode refid="4948" relation="include">
         </childnode>
-        <childnode refid="5523" relation="include">
+        <childnode refid="4949" relation="include">
         </childnode>
-        <childnode refid="5527" relation="include">
+        <childnode refid="4953" relation="include">
         </childnode>
-        <childnode refid="5520" relation="include">
-        </childnode>
-      </node>
-      <node id="5521">
-        <label>Containers/Vector.h</label>
-        <link refid="_vector_8h_source"/>
-        <childnode refid="5522" relation="include">
-        </childnode>
-        <childnode refid="5523" relation="include">
-        </childnode>
-        <childnode refid="5524" relation="include">
-        </childnode>
-        <childnode refid="5525" relation="include">
-        </childnode>
-        <childnode refid="5526" relation="include">
-        </childnode>
-        <childnode refid="5527" relation="include">
-        </childnode>
-        <childnode refid="5520" relation="include">
-        </childnode>
-        <childnode refid="5528" relation="include">
+        <childnode refid="4943" relation="include">
         </childnode>
       </node>
-      <node id="5531">
+      <node id="4957">
         <label>array</label>
       </node>
-      <node id="5520">
-        <label>Types.h</label>
+      <node id="4955">
+        <label>Math/Core.h</label>
+        <link refid="_core_8h_source"/>
+        <childnode refid="4956" relation="include">
+        </childnode>
+        <childnode refid="4943" relation="include">
+        </childnode>
       </node>
-      <node id="5530">
-        <label>mathfu/matrix.h</label>
-      </node>
-      <node id="5523">
-        <label>cstring</label>
-      </node>
-      <node id="5519">
+      <node id="4942">
         <label>Source/Physics/Inc/Physics/PBD/Cloth/Constraints.h</label>
         <link refid="_constraints_8h"/>
-        <childnode refid="5520" relation="include">
+        <childnode refid="4943" relation="include">
         </childnode>
-        <childnode refid="5521" relation="include">
+        <childnode refid="4947" relation="include">
         </childnode>
-        <childnode refid="5529" relation="include">
+        <childnode refid="4955" relation="include">
         </childnode>
-        <childnode refid="5531" relation="include">
+        <childnode refid="4957" relation="include">
         </childnode>
+      </node>
+      <node id="4944">
+        <label>cstddef</label>
+      </node>
+      <node id="4956">
+        <label>mathfu/matrix.h</label>
+      </node>
+      <node id="4943">
+        <label>Types.h</label>
+        <link refid="_types_8h_source"/>
+        <childnode refid="4944" relation="include">
+        </childnode>
+        <childnode refid="4945" relation="include">
+        </childnode>
+        <childnode refid="4946" relation="include">
+        </childnode>
+      </node>
+      <node id="4949">
+        <label>cstring</label>
       </node>
     </incdepgraph>
     <invincdepgraph>
-      <node id="5536">
-        <label>Source/Physics/Inc/Physics/Geometry/ClothPlane.h</label>
-        <link refid="_cloth_plane_8h_source"/>
-        <childnode refid="5535" relation="include">
-        </childnode>
-      </node>
-      <node id="5535">
-        <label>Source/Samples/3_ClothSim/Inc/ClothSim/AppRenderer.h</label>
-        <link refid="3___cloth_sim_2_inc_2_cloth_sim_2_app_renderer_8h_source"/>
-      </node>
-      <node id="5533">
+      <node id="4959">
         <label>Source/Physics/Inc/Physics/PBD/Cloth/ClothSolvingView.h</label>
         <link refid="_cloth_solving_view_8h_source"/>
-        <childnode refid="5534" relation="include">
+        <childnode refid="4960" relation="include">
         </childnode>
-        <childnode refid="5536" relation="include">
+        <childnode refid="4961" relation="include">
         </childnode>
       </node>
-      <node id="5532">
+      <node id="4961">
+        <label>Source/Physics/Inc/Physics/Geometry/ClothPlane.h</label>
+        <link refid="_cloth_plane_8h_source"/>
+      </node>
+      <node id="4960">
+        <label>Source/Physics/Inc/Physics/Geometry/ClothMesh.h</label>
+        <link refid="_cloth_mesh_8h_source"/>
+      </node>
+      <node id="4958">
         <label>Source/Physics/Inc/Physics/PBD/Cloth/Constraints.h</label>
         <link refid="_constraints_8h"/>
-        <childnode refid="5533" relation="include">
-        </childnode>
-      </node>
-      <node id="5534">
-        <label>Source/Physics/Inc/Physics/Geometry/ClothMesh.h</label>
-        <link refid="_physics_2_inc_2_physics_2_geometry_2_cloth_mesh_8h_source"/>
-        <childnode refid="5535" relation="include">
+        <childnode refid="4959" relation="include">
         </childnode>
       </node>
     </invincdepgraph>

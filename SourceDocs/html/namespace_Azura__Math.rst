@@ -17,9 +17,9 @@ Namespaces
 ----------
 
 
-- :ref:`namespace_Azura__Math__@208`
+- :ref:`namespace_Azura__Math__@151`
 
-- :ref:`namespace_Azura__Math__@209`
+- :ref:`namespace_Azura__Math__@152`
 
 
 Classes

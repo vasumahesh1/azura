@@ -2,86 +2,94 @@
 <doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.8.14">
   <compounddef id="_icosphere_8h" kind="file" language="C++">
     <compoundname>Icosphere.h</compoundname>
-    <includes local="yes">Types.h</includes>
+    <includes refid="_types_8h" local="yes">Types.h</includes>
     <includes refid="_geometry_8h" local="yes">Geometry.h</includes>
     <includes refid="_core_8h" local="yes">Math/Core.h</includes>
     <includes local="no">vector</includes>
     <includedby refid="_icosphere_8cpp" local="yes">Source/Math/Src/Icosphere.cpp</includedby>
-    <includedby refid="_app_renderer_8_basic_8cpp" local="yes">Source/Samples/0_TestZone/Src/AppRenderer.Basic.cpp</includedby>
-    <includedby refid="_app_renderer_8_cloth_8cpp" local="yes">Source/Samples/0_TestZone/Src/AppRenderer.Cloth.cpp</includedby>
-    <includedby refid="_app_renderer_8_compute_8cpp" local="yes">Source/Samples/0_TestZone/Src/AppRenderer.Compute.cpp</includedby>
-    <includedby refid="0___test_zone_2_src_2_app_renderer_8cpp" local="yes">Source/Samples/0_TestZone/Src/AppRenderer.cpp</includedby>
-    <includedby refid="_app_renderer_8_deferred_8cpp" local="yes">Source/Samples/0_TestZone/Src/AppRenderer.Deferred.cpp</includedby>
-    <includedby refid="_app_renderer_8_instanced_8cpp" local="yes">Source/Samples/0_TestZone/Src/AppRenderer.Instanced.cpp</includedby>
-    <includedby refid="1___procedural_planet_2_src_2_app_renderer_8cpp" local="yes">Source/Samples/1_ProceduralPlanet/Src/AppRenderer.cpp</includedby>
-    <includedby refid="3___cloth_sim_2_src_2_app_renderer_8cpp" local="yes">Source/Samples/3_ClothSim/Src/AppRenderer.cpp</includedby>
     <incdepgraph>
-      <node id="5304">
-        <label>Math/Core.h</label>
-        <link refid="_core_8h_source"/>
-        <childnode refid="5305" relation="include">
-        </childnode>
-        <childnode refid="5296" relation="include">
-        </childnode>
+      <node id="4690">
+        <label>cstdint</label>
       </node>
-      <node id="5298">
-        <label>Core/RawStorageFormat.h</label>
-        <link refid="_raw_storage_format_8h_source"/>
-        <childnode refid="5296" relation="include">
-        </childnode>
-        <childnode refid="5299" relation="include">
-        </childnode>
-        <childnode refid="5300" relation="include">
-        </childnode>
-        <childnode refid="5301" relation="include">
-        </childnode>
-        <childnode refid="5302" relation="include">
-        </childnode>
-        <childnode refid="5303" relation="include">
-        </childnode>
-      </node>
-      <node id="5302">
+      <node id="4697">
         <label>boost/preprocessor/tuple/elem.hpp</label>
       </node>
-      <node id="5303">
+      <node id="4691">
+        <label>string</label>
+      </node>
+      <node id="4698">
         <label>boost/detail/bitmask.hpp</label>
       </node>
-      <node id="5299">
+      <node id="4694">
         <label>tuple</label>
       </node>
-      <node id="5306">
+      <node id="4701">
         <label>vector</label>
       </node>
-      <node id="5297">
-        <label>Geometry.h</label>
-        <link refid="_geometry_8h_source"/>
-        <childnode refid="5296" relation="include">
-        </childnode>
-        <childnode refid="5298" relation="include">
-        </childnode>
-      </node>
-      <node id="5300">
-        <label>boost/preprocessor/repetition/repeat.hpp</label>
-      </node>
-      <node id="5296">
-        <label>Types.h</label>
-      </node>
-      <node id="5305">
-        <label>mathfu/matrix.h</label>
-      </node>
-      <node id="5295">
+      <node id="4687">
         <label>Source/Math/Inc/Math/Icosphere.h</label>
         <link refid="_icosphere_8h"/>
-        <childnode refid="5296" relation="include">
+        <childnode refid="4688" relation="include">
         </childnode>
-        <childnode refid="5297" relation="include">
+        <childnode refid="4692" relation="include">
         </childnode>
-        <childnode refid="5304" relation="include">
+        <childnode refid="4699" relation="include">
         </childnode>
-        <childnode refid="5306" relation="include">
+        <childnode refid="4701" relation="include">
         </childnode>
       </node>
-      <node id="5301">
+      <node id="4699">
+        <label>Math/Core.h</label>
+        <link refid="_core_8h_source"/>
+        <childnode refid="4700" relation="include">
+        </childnode>
+        <childnode refid="4688" relation="include">
+        </childnode>
+      </node>
+      <node id="4693">
+        <label>Core/RawStorageFormat.h</label>
+        <link refid="_raw_storage_format_8h_source"/>
+        <childnode refid="4688" relation="include">
+        </childnode>
+        <childnode refid="4694" relation="include">
+        </childnode>
+        <childnode refid="4695" relation="include">
+        </childnode>
+        <childnode refid="4696" relation="include">
+        </childnode>
+        <childnode refid="4697" relation="include">
+        </childnode>
+        <childnode refid="4698" relation="include">
+        </childnode>
+      </node>
+      <node id="4689">
+        <label>cstddef</label>
+      </node>
+      <node id="4695">
+        <label>boost/preprocessor/repetition/repeat.hpp</label>
+      </node>
+      <node id="4700">
+        <label>mathfu/matrix.h</label>
+      </node>
+      <node id="4688">
+        <label>Types.h</label>
+        <link refid="_types_8h_source"/>
+        <childnode refid="4689" relation="include">
+        </childnode>
+        <childnode refid="4690" relation="include">
+        </childnode>
+        <childnode refid="4691" relation="include">
+        </childnode>
+      </node>
+      <node id="4692">
+        <label>Geometry.h</label>
+        <link refid="_geometry_8h_source"/>
+        <childnode refid="4688" relation="include">
+        </childnode>
+        <childnode refid="4693" relation="include">
+        </childnode>
+      </node>
+      <node id="4696">
         <label>boost/preprocessor/seq/for_each.hpp</label>
       </node>
     </incdepgraph>

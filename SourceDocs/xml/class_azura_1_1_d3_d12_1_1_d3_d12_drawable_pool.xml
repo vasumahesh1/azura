@@ -945,67 +945,67 @@
     <detaileddescription>
     </detaileddescription>
     <inheritancegraph>
-      <node id="148">
+      <node id="109">
         <label>Azura::D3D12::D3D12DrawablePool</label>
         <link refid="class_azura_1_1_d3_d12_1_1_d3_d12_drawable_pool"/>
-        <childnode refid="149" relation="public-inheritance">
+        <childnode refid="110" relation="public-inheritance">
         </childnode>
       </node>
-      <node id="149">
+      <node id="110">
         <label>Azura::DrawablePool</label>
         <link refid="class_azura_1_1_drawable_pool"/>
       </node>
     </inheritancegraph>
     <collaborationgraph>
-      <node id="150">
+      <node id="111">
         <label>Azura::D3D12::D3D12DrawablePool</label>
         <link refid="class_azura_1_1_d3_d12_1_1_d3_d12_drawable_pool"/>
-        <childnode refid="151" relation="public-inheritance">
+        <childnode refid="112" relation="public-inheritance">
         </childnode>
       </node>
-      <node id="155">
+      <node id="116">
         <label>Azura::Containers::Vector&lt; Azura::SamplerInfo &gt;</label>
         <link refid="class_azura_1_1_containers_1_1_vector"/>
       </node>
-      <node id="156">
+      <node id="117">
         <label>Azura::Containers::Vector&lt; Azura::VertexSlot &gt;</label>
         <link refid="class_azura_1_1_containers_1_1_vector"/>
       </node>
-      <node id="154">
+      <node id="115">
         <label>Azura::DescriptorCount</label>
         <link refid="struct_azura_1_1_descriptor_count"/>
       </node>
-      <node id="153">
+      <node id="114">
         <label>Azura::Containers::Vector&lt; U32 &gt;</label>
         <link refid="class_azura_1_1_containers_1_1_vector"/>
       </node>
-      <node id="157">
+      <node id="118">
         <label>Azura::Containers::Vector&lt; Azura::TextureBufferInfo &gt;</label>
         <link refid="class_azura_1_1_containers_1_1_vector"/>
       </node>
-      <node id="152">
+      <node id="113">
         <label>Azura::Containers::Vector&lt; Azura::BufferUpdate &gt;</label>
         <link refid="class_azura_1_1_containers_1_1_vector"/>
       </node>
-      <node id="151">
+      <node id="112">
         <label>Azura::DrawablePool</label>
         <link refid="class_azura_1_1_drawable_pool"/>
-        <childnode refid="152" relation="usage">
+        <childnode refid="113" relation="usage">
           <edgelabel>m_bufferUpdates</edgelabel>
         </childnode>
-        <childnode refid="153" relation="usage">
+        <childnode refid="114" relation="usage">
           <edgelabel>m_renderPasses</edgelabel>
         </childnode>
-        <childnode refid="154" relation="usage">
+        <childnode refid="115" relation="usage">
           <edgelabel>m_descriptorCount</edgelabel>
         </childnode>
-        <childnode refid="155" relation="usage">
+        <childnode refid="116" relation="usage">
           <edgelabel>m_samplerInfos</edgelabel>
         </childnode>
-        <childnode refid="156" relation="usage">
+        <childnode refid="117" relation="usage">
           <edgelabel>m_vertexDataSlots</edgelabel>
         </childnode>
-        <childnode refid="157" relation="usage">
+        <childnode refid="118" relation="usage">
           <edgelabel>m_textureBufferInfos</edgelabel>
         </childnode>
       </node>

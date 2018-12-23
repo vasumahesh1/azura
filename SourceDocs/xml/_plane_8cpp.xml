@@ -4,76 +4,92 @@
     <compoundname>Plane.cpp</compoundname>
     <includes refid="_plane_8h" local="yes">Math/Plane.h</includes>
     <incdepgraph>
-      <node id="5358">
-        <label>Math/Core.h</label>
-        <link refid="_core_8h_source"/>
-        <childnode refid="5359" relation="include">
-        </childnode>
-        <childnode refid="5360" relation="include">
-        </childnode>
+      <node id="4775">
+        <label>cstdint</label>
       </node>
-      <node id="5362">
-        <label>Core/RawStorageFormat.h</label>
-        <link refid="_raw_storage_format_8h_source"/>
-        <childnode refid="5360" relation="include">
-        </childnode>
-        <childnode refid="5363" relation="include">
-        </childnode>
-        <childnode refid="5364" relation="include">
-        </childnode>
-        <childnode refid="5365" relation="include">
-        </childnode>
-        <childnode refid="5366" relation="include">
-        </childnode>
-        <childnode refid="5367" relation="include">
-        </childnode>
-      </node>
-      <node id="5366">
-        <label>boost/preprocessor/tuple/elem.hpp</label>
-      </node>
-      <node id="5367">
-        <label>boost/detail/bitmask.hpp</label>
-      </node>
-      <node id="5363">
-        <label>tuple</label>
-      </node>
-      <node id="5356">
-        <label>Source/Math/Src/Plane.cpp</label>
-        <link refid="_plane_8cpp"/>
-        <childnode refid="5357" relation="include">
-        </childnode>
-      </node>
-      <node id="5368">
-        <label>vector</label>
-      </node>
-      <node id="5361">
-        <label>Math/Geometry.h</label>
-        <link refid="_geometry_8h_source"/>
-        <childnode refid="5360" relation="include">
-        </childnode>
-        <childnode refid="5362" relation="include">
-        </childnode>
-      </node>
-      <node id="5364">
-        <label>boost/preprocessor/repetition/repeat.hpp</label>
-      </node>
-      <node id="5360">
-        <label>Types.h</label>
-      </node>
-      <node id="5359">
-        <label>mathfu/matrix.h</label>
-      </node>
-      <node id="5357">
+      <node id="4770">
         <label>Math/Plane.h</label>
         <link refid="_plane_8h_source"/>
-        <childnode refid="5358" relation="include">
+        <childnode refid="4771" relation="include">
         </childnode>
-        <childnode refid="5361" relation="include">
+        <childnode refid="4777" relation="include">
         </childnode>
-        <childnode refid="5368" relation="include">
+        <childnode refid="4784" relation="include">
         </childnode>
       </node>
-      <node id="5365">
+      <node id="4782">
+        <label>boost/preprocessor/tuple/elem.hpp</label>
+      </node>
+      <node id="4769">
+        <label>Source/Math/Src/Plane.cpp</label>
+        <link refid="_plane_8cpp"/>
+        <childnode refid="4770" relation="include">
+        </childnode>
+      </node>
+      <node id="4776">
+        <label>string</label>
+      </node>
+      <node id="4783">
+        <label>boost/detail/bitmask.hpp</label>
+      </node>
+      <node id="4779">
+        <label>tuple</label>
+      </node>
+      <node id="4784">
+        <label>vector</label>
+      </node>
+      <node id="4771">
+        <label>Math/Core.h</label>
+        <link refid="_core_8h_source"/>
+        <childnode refid="4772" relation="include">
+        </childnode>
+        <childnode refid="4773" relation="include">
+        </childnode>
+      </node>
+      <node id="4778">
+        <label>Core/RawStorageFormat.h</label>
+        <link refid="_raw_storage_format_8h_source"/>
+        <childnode refid="4773" relation="include">
+        </childnode>
+        <childnode refid="4779" relation="include">
+        </childnode>
+        <childnode refid="4780" relation="include">
+        </childnode>
+        <childnode refid="4781" relation="include">
+        </childnode>
+        <childnode refid="4782" relation="include">
+        </childnode>
+        <childnode refid="4783" relation="include">
+        </childnode>
+      </node>
+      <node id="4774">
+        <label>cstddef</label>
+      </node>
+      <node id="4780">
+        <label>boost/preprocessor/repetition/repeat.hpp</label>
+      </node>
+      <node id="4772">
+        <label>mathfu/matrix.h</label>
+      </node>
+      <node id="4773">
+        <label>Types.h</label>
+        <link refid="_types_8h_source"/>
+        <childnode refid="4774" relation="include">
+        </childnode>
+        <childnode refid="4775" relation="include">
+        </childnode>
+        <childnode refid="4776" relation="include">
+        </childnode>
+      </node>
+      <node id="4777">
+        <label>Math/Geometry.h</label>
+        <link refid="_geometry_8h_source"/>
+        <childnode refid="4773" relation="include">
+        </childnode>
+        <childnode refid="4778" relation="include">
+        </childnode>
+      </node>
+      <node id="4781">
         <label>boost/preprocessor/seq/for_each.hpp</label>
       </node>
     </incdepgraph>

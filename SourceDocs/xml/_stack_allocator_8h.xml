@@ -2,17 +2,33 @@
 <doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.8.14">
   <compounddef id="_stack_allocator_8h" kind="file" language="C++">
     <compoundname>StackAllocator.h</compoundname>
-    <includes local="yes">Types.h</includes>
+    <includes refid="_types_8h" local="yes">Types.h</includes>
     <includedby refid="_stack_allocator_8cpp" local="yes">Source/Common/Src/Memory/StackAllocator.cpp</includedby>
     <incdepgraph>
-      <node id="4016">
+      <node id="4034">
+        <label>cstdint</label>
+      </node>
+      <node id="4035">
+        <label>string</label>
+      </node>
+      <node id="4031">
         <label>Source/Common/Inc/Memory/StackAllocator.h</label>
         <link refid="_stack_allocator_8h"/>
-        <childnode refid="4017" relation="include">
+        <childnode refid="4032" relation="include">
         </childnode>
       </node>
-      <node id="4017">
+      <node id="4033">
+        <label>cstddef</label>
+      </node>
+      <node id="4032">
         <label>Types.h</label>
+        <link refid="_types_8h_source"/>
+        <childnode refid="4033" relation="include">
+        </childnode>
+        <childnode refid="4034" relation="include">
+        </childnode>
+        <childnode refid="4035" relation="include">
+        </childnode>
       </node>
     </incdepgraph>
     <innerclass refid="class_azura_1_1_stack_allocator" prot="public">Azura::StackAllocator</innerclass>

@@ -3,62 +3,65 @@
   <compounddef id="_fly_through_camera_8h" kind="file" language="C++">
     <compoundname>FlyThroughCamera.h</compoundname>
     <includes refid="_camera_8h" local="yes">Camera.h</includes>
-    <includes local="yes">Types.h</includes>
+    <includes refid="_types_8h" local="yes">Types.h</includes>
     <includes refid="_core_8h" local="yes">Math/Core.h</includes>
     <includedby refid="_fly_through_camera_8cpp" local="yes">Source/Camera/Src/FlyThroughCamera.cpp</includedby>
-    <includedby refid="_app_8h" local="yes">Source/Samples/2_DeferredRenderer/Inc/App/App.h</includedby>
     <incdepgraph>
-      <node id="3754">
-        <label>Camera.h</label>
-        <link refid="_camera_8h_source"/>
-        <childnode refid="3755" relation="include">
+      <node id="3804">
+        <label>Source/Camera/Inc/Camera/FlyThroughCamera.h</label>
+        <link refid="_fly_through_camera_8h"/>
+        <childnode refid="3805" relation="include">
         </childnode>
-        <childnode refid="3756" relation="include">
+        <childnode refid="3806" relation="include">
         </childnode>
-        <childnode refid="3758" relation="include">
-        </childnode>
-      </node>
-      <node id="3756">
-        <label>Math/Core.h</label>
-        <link refid="_core_8h_source"/>
-        <childnode refid="3757" relation="include">
-        </childnode>
-        <childnode refid="3755" relation="include">
+        <childnode refid="3810" relation="include">
         </childnode>
       </node>
-      <node id="3758">
+      <node id="3808">
+        <label>cstdint</label>
+      </node>
+      <node id="3809">
+        <label>string</label>
+      </node>
+      <node id="3812">
         <label>Core/Events.h</label>
         <link refid="_events_8h_source"/>
       </node>
-      <node id="3753">
-        <label>Source/Camera/Inc/Camera/FlyThroughCamera.h</label>
-        <link refid="_fly_through_camera_8h"/>
-        <childnode refid="3754" relation="include">
+      <node id="3810">
+        <label>Math/Core.h</label>
+        <link refid="_core_8h_source"/>
+        <childnode refid="3811" relation="include">
         </childnode>
-        <childnode refid="3755" relation="include">
-        </childnode>
-        <childnode refid="3756" relation="include">
+        <childnode refid="3806" relation="include">
         </childnode>
       </node>
-      <node id="3755">
-        <label>Types.h</label>
+      <node id="3805">
+        <label>Camera.h</label>
+        <link refid="_camera_8h_source"/>
+        <childnode refid="3806" relation="include">
+        </childnode>
+        <childnode refid="3810" relation="include">
+        </childnode>
+        <childnode refid="3812" relation="include">
+        </childnode>
       </node>
-      <node id="3757">
+      <node id="3807">
+        <label>cstddef</label>
+      </node>
+      <node id="3811">
         <label>mathfu/matrix.h</label>
       </node>
-    </incdepgraph>
-    <invincdepgraph>
-      <node id="3760">
-        <label>Source/Samples/2_DeferredRenderer/Inc/App/App.h</label>
-        <link refid="_app_8h_source"/>
-      </node>
-      <node id="3759">
-        <label>Source/Camera/Inc/Camera/FlyThroughCamera.h</label>
-        <link refid="_fly_through_camera_8h"/>
-        <childnode refid="3760" relation="include">
+      <node id="3806">
+        <label>Types.h</label>
+        <link refid="_types_8h_source"/>
+        <childnode refid="3807" relation="include">
+        </childnode>
+        <childnode refid="3808" relation="include">
+        </childnode>
+        <childnode refid="3809" relation="include">
         </childnode>
       </node>
-    </invincdepgraph>
+    </incdepgraph>
     <innerclass refid="class_azura_1_1_fly_through_camera" prot="public">Azura::FlyThroughCamera</innerclass>
     <innernamespace refid="namespace_azura">Azura</innernamespace>
     <briefdescription>
@@ -78,7 +81,7 @@
 <codeline lineno="10"><highlight class="normal"></highlight><highlight class="keyword">public</highlight><highlight class="normal">:</highlight></codeline>
 <codeline lineno="11"><highlight class="normal"><sp/><sp/><ref refid="class_azura_1_1_fly_through_camera" kindref="compound">FlyThroughCamera</ref>(U32<sp/>width,<sp/>U32<sp/>height);</highlight></codeline>
 <codeline lineno="12"><highlight class="normal"></highlight></codeline>
-<codeline lineno="13"><highlight class="normal"><sp/><sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/>Recompute()<sp/></highlight><highlight class="keyword">override</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="13"><highlight class="normal"><sp/><sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/><ref refid="class_azura_1_1_fly_through_camera_1add630123f55728b7362de167416964fb" kindref="member">Recompute</ref>()<sp/></highlight><highlight class="keyword">override</highlight><highlight class="normal">;</highlight></codeline>
 <codeline lineno="14"><highlight class="normal"><sp/><sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/>OnMouseEvent(<ref refid="struct_azura_1_1_mouse_event" kindref="compound">MouseEvent</ref><sp/>mouseEvent)<sp/></highlight><highlight class="keyword">override</highlight><highlight class="normal">;</highlight></codeline>
 <codeline lineno="15"><highlight class="normal"><sp/><sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/>OnKeyEvent(<ref refid="struct_azura_1_1_key_event" kindref="compound">KeyEvent</ref><sp/>keyEvent)<sp/></highlight><highlight class="keyword">override</highlight><highlight class="normal">;</highlight></codeline>
 <codeline lineno="16"><highlight class="normal"></highlight></codeline>
@@ -94,7 +97,7 @@
 <codeline lineno="26"><highlight class="normal"></highlight></codeline>
 <codeline lineno="27"><highlight class="normal"><sp/><sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/>TranslateAlongRight(</highlight><highlight class="keywordtype">float</highlight><highlight class="normal"><sp/>amt);</highlight></codeline>
 <codeline lineno="28"><highlight class="normal"></highlight></codeline>
-<codeline lineno="29"><highlight class="normal"><sp/><sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/>Update(</highlight><highlight class="keywordtype">float</highlight><highlight class="normal"><sp/>timeDelta)<sp/></highlight><highlight class="keyword">override</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="29"><highlight class="normal"><sp/><sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/><ref refid="class_azura_1_1_fly_through_camera_1a405ca3757fef26fe5c09850f78127838" kindref="member">Update</ref>(</highlight><highlight class="keywordtype">float</highlight><highlight class="normal"><sp/>timeDelta)<sp/></highlight><highlight class="keyword">override</highlight><highlight class="normal">;</highlight></codeline>
 <codeline lineno="30"><highlight class="normal"></highlight></codeline>
 <codeline lineno="31"><highlight class="normal"></highlight><highlight class="keyword">private</highlight><highlight class="normal">:</highlight></codeline>
 <codeline lineno="32"><highlight class="normal"><sp/><sp/>Vector3f<sp/>m_right{1,<sp/>0,<sp/>0};</highlight></codeline>

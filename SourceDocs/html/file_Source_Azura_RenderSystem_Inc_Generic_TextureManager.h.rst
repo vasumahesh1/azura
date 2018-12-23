@@ -63,14 +63,6 @@ Included By
 
 - :ref:`file_Source_Azura_RenderSystem_Src_Vulkan_VkDrawablePool.cpp`
 
-- :ref:`file_Source_Samples_0_TestZone_Inc_TestZone_AppRenderer.h`
-
-- :ref:`file_Source_Samples_1_ProceduralPlanet_Inc_ProceduralPlanet_AppRenderer.h`
-
-- :ref:`file_Source_Samples_2_DeferredRenderer_Inc_App_Scene.h`
-
-- :ref:`file_Source_Samples_3_ClothSim_Inc_ClothSim_AppRenderer.h`
-
 
 
 

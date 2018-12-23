@@ -28,10 +28,12 @@ Program Listing for File Camera.cpp
    }
    
    void Camera::SetNearClip(const float value) {
+     assert(value < m_farClip);
      m_nearClip = value;
    }
    
    void Camera::SetFarClip(const float value) {
+     assert(value > m_nearClip);
      m_farClip = value;
    }
    

@@ -1,9 +1,5 @@
 <?xml version='1.0' encoding='UTF-8' standalone='no'?>
 <doxygenindex xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="index.xsd" version="1.8.14">
-  <compound refid="class_dibella_1_1_allocation_dependent" kind="class"><name>Dibella::AllocationDependent</name>
-    <member refid="class_dibella_1_1_allocation_dependent_1a0467a4807d823a4dd8151a5e9bb7a687" kind="variable"><name>mAllocator</name></member>
-    <member refid="class_dibella_1_1_allocation_dependent_1a16e0700775da11add17fdeb6c4ec116d" kind="function"><name>AllocationDependent</name></member>
-  </compound>
   <compound refid="class_azura_1_1_memory_1_1_allocator" kind="class"><name>Azura::Memory::Allocator</name>
     <member refid="class_azura_1_1_memory_1_1_allocator_1a0d454a8b0d5ff9b598d9a99eabdbcdba" kind="variable"><name>m_basePtr</name></member>
     <member refid="class_azura_1_1_memory_1_1_allocator_1ac0c93896f807657e7de5b41d2a0543be" kind="variable"><name>m_size</name></member>
@@ -26,99 +22,12 @@
     <member refid="class_azura_1_1_memory_1_1_allocator_1a1e88c700ba617de891c91ae938c7d6cd" kind="function"><name>InternalAllocate</name></member>
     <member refid="class_azura_1_1_memory_1_1_allocator_1a1c54928bd374d682d5d882381aa0d79a" kind="function"><name>InternalAllocateArray</name></member>
   </compound>
-  <compound refid="class_azura_1_1_app" kind="class"><name>Azura::App</name>
-    <member refid="class_azura_1_1_app_1a12c908091041d57aaac44a57105d7da7" kind="variable"><name>log_App</name></member>
-    <member refid="class_azura_1_1_app_1a08ed71db5101ddfa5bb865b3ac6085bc" kind="variable"><name>m_mainBuffer</name></member>
-    <member refid="class_azura_1_1_app_1afffd45e21fa5671363d379372951b40c" kind="variable"><name>m_mainAllocator</name></member>
-    <member refid="class_azura_1_1_app_1a7b518bf9770a4a846ae798f5ea621e4a" kind="variable"><name>m_drawableAllocator</name></member>
-    <member refid="class_azura_1_1_app_1aeece1e5cf8dd643bdde38f02b7e5fdda" kind="variable"><name>m_lights</name></member>
-    <member refid="class_azura_1_1_app_1a92e65774242ed8032aedd6951c63e3c3" kind="variable"><name>m_sceneUBO</name></member>
-    <member refid="class_azura_1_1_app_1a4399e03bf25323e426240cc68543e9c3" kind="variable"><name>m_camera</name></member>
-    <member refid="class_azura_1_1_app_1ac0c4724b8a84fbad7dfd74998027ddfb" kind="variable"><name>m_sponza</name></member>
-    <member refid="class_azura_1_1_app_1a5ba2d71076633a3b9f85dbf2c8f78b02" kind="variable"><name>m_lightSamplerDesc</name></member>
-    <member refid="class_azura_1_1_app_1a00447f09bc24e1b8daac93867a20b3ba" kind="variable"><name>p_activeScene</name></member>
-    <member refid="class_azura_1_1_app_1a1e3bf809172fb51f37e4d7337ac9d8ec" kind="variable"><name>m_forwardScene</name></member>
-    <member refid="class_azura_1_1_app_1aa6f775ee5c275b7dee2b4bcd44f291cb" kind="variable"><name>m_forwardComputeScene</name></member>
-    <member refid="class_azura_1_1_app_1a20b5a380309bf8c8c4fdb62c479a9846" kind="variable"><name>m_forwardPlusComputeScene</name></member>
-    <member refid="class_azura_1_1_app_1ac969d3ed11456fef65ba3d94b40d672d" kind="variable"><name>p_window</name></member>
-    <member refid="class_azura_1_1_app_1ae3277653a7e39779827250a014e88a26" kind="function"><name>App</name></member>
-    <member refid="class_azura_1_1_app_1ab503a9ee73d333ea670c78b32ff2f130" kind="function"><name>Initialize</name></member>
-    <member refid="class_azura_1_1_app_1a98264ee1437b829b545afa90f89d3e63" kind="function"><name>Update</name></member>
-    <member refid="class_azura_1_1_app_1afe3d88a999894b0d73cddbb47c6f98aa" kind="function"><name>Run</name></member>
-    <member refid="class_azura_1_1_app_1a1f592ab9d9aa8ec2b7e5d1d168d1cd5c" kind="function"><name>CleanUp</name></member>
-    <member refid="class_azura_1_1_app_1aecb6a4c8cfabd7a99ade8020465b1dc6" kind="function"><name>GenerateLights</name></member>
-  </compound>
   <compound refid="struct_azura_1_1_application_info" kind="struct"><name>Azura::ApplicationInfo</name>
     <member refid="struct_azura_1_1_application_info_1add32df21c975cd9a5d75afc51292ebee" kind="variable"><name>m_name</name></member>
     <member refid="struct_azura_1_1_application_info_1aaaa178ab88007a3c2b13daed128abae0" kind="variable"><name>m_version</name></member>
   </compound>
   <compound refid="struct_azura_1_1_application_requirements" kind="struct"><name>Azura::ApplicationRequirements</name>
     <member refid="struct_azura_1_1_application_requirements_1ac8efe7a456b0d2ba19fee0e0d3281308" kind="variable"><name>m_renderer</name></member>
-  </compound>
-  <compound refid="struct_azura_1_1_app_pass1" kind="struct"><name>Azura::AppPass1</name>
-    <member refid="struct_azura_1_1_app_pass1_1a523ac37173b04fd38733e7a3f522abd1" kind="variable"><name>m_uboSlot</name></member>
-  </compound>
-  <compound refid="class_azura_1_1_app_renderer" kind="class"><name>Azura::AppRenderer</name>
-    <member refid="class_azura_1_1_app_renderer_1a0e2a02f932ab37fa91d48a2d5071eb08" kind="variable"><name>m_mainBuffer</name></member>
-    <member refid="class_azura_1_1_app_renderer_1ab3a52fdc3a660924a3383d3bbc987a30" kind="variable"><name>m_mainAllocator</name></member>
-    <member refid="class_azura_1_1_app_renderer_1a73789c6edb6731169f79d452656ab75c" kind="variable"><name>m_drawableAllocator</name></member>
-    <member refid="class_azura_1_1_app_renderer_1a003af8d47f98436ab83e54acdf7dec26" kind="variable"><name>m_renderer</name></member>
-    <member refid="class_azura_1_1_app_renderer_1aefefaa4261f51f93a3cde1a050639eaf" kind="variable"><name>m_window</name></member>
-    <member refid="class_azura_1_1_app_renderer_1aa2bfaf8d5584b47dce7638d8e63e3bc3" kind="variable"><name>m_textureManager</name></member>
-    <member refid="class_azura_1_1_app_renderer_1aaaa8dfb217d0a03629c75b9366c9a1f3" kind="variable"><name>m_camera</name></member>
-    <member refid="class_azura_1_1_app_renderer_1a60441ffb7a9a97d0c6dd4ac63c92b7a4" kind="variable"><name>m_clothUBO</name></member>
-    <member refid="class_azura_1_1_app_renderer_1aeca62316132d044119344d771cab5826" kind="variable"><name>m_sphereUBO</name></member>
-    <member refid="class_azura_1_1_app_renderer_1afed96b9aaffd5ff442dd72e4c6fa1af2" kind="variable"><name>m_computeUBO</name></member>
-    <member refid="class_azura_1_1_app_renderer_1a60db79c496607b4075340872ec5d0811" kind="variable"><name>m_mainPool</name></member>
-    <member refid="class_azura_1_1_app_renderer_1a4a5f9e4f4e4d87bf42e086823a087907" kind="variable"><name>m_spherePool</name></member>
-    <member refid="class_azura_1_1_app_renderer_1a49c92501574c0ce0c49fadbcc6be446a" kind="variable"><name>m_computePool</name></member>
-    <member refid="class_azura_1_1_app_renderer_1afe07a3f505ba079a5b3622a04b07ad23" kind="variable"><name>m_renderPass</name></member>
-    <member refid="class_azura_1_1_app_renderer_1a631665bca8478f7e738274b9bc686e62" kind="variable"><name>m_computePass</name></member>
-    <member refid="class_azura_1_1_app_renderer_1a7082906213ba2e304db1a2a1b8ac82b4" kind="variable"><name>m_clothPlane</name></member>
-    <member refid="class_azura_1_1_app_renderer_1a21559ae6b70eb27c61781587ba68b7ec" kind="variable"><name>m_clothVertexVel</name></member>
-    <member refid="class_azura_1_1_app_renderer_1ac8daa825208b17800c49d7e952e71c49" kind="variable"><name>m_clothProjectedPos</name></member>
-    <member refid="class_azura_1_1_app_renderer_1a85beafdc213a46a7acc0a71cde462456" kind="variable"><name>m_clothConstraintsIdx</name></member>
-    <member refid="class_azura_1_1_app_renderer_1ac1f086a721d5ef63b100488687954f57" kind="variable"><name>log_AppRenderer</name></member>
-    <member refid="class_azura_1_1_app_renderer_1ab3a52fdc3a660924a3383d3bbc987a30" kind="variable"><name>m_mainAllocator</name></member>
-    <member refid="class_azura_1_1_app_renderer_1a73789c6edb6731169f79d452656ab75c" kind="variable"><name>m_drawableAllocator</name></member>
-    <member refid="class_azura_1_1_app_renderer_1a74de12cc5d2777bdfc1273a980695900" kind="variable"><name>m_sceneUBO</name></member>
-    <member refid="class_azura_1_1_app_renderer_1a77867aa355439a56d4ce22f84f357800" kind="variable"><name>m_sceneControls</name></member>
-    <member refid="class_azura_1_1_app_renderer_1ac3a6ea3b2be57b90d8f4ca165591b148" kind="variable"><name>m_icosphereId</name></member>
-    <member refid="class_azura_1_1_app_renderer_1a957367778c9b00f836acd48adfb64c5f" kind="variable"><name>m_pass1</name></member>
-    <member refid="class_azura_1_1_app_renderer_1ad384074f6c261bd87028f50afcc6be86" kind="variable"><name>m_skyPool</name></member>
-    <member refid="class_azura_1_1_app_renderer_1a2a5b11935adbfb905099b5e5ccabecc8" kind="variable"><name>m_terrainPool</name></member>
-    <member refid="class_azura_1_1_app_renderer_1a7d9ca49bc1cbb7610e898a4661cd2020" kind="variable"><name>m_waterPool</name></member>
-    <member refid="class_azura_1_1_app_renderer_1abc0b2795e01b85de53bcfbdcae19df8a" kind="variable"><name>m_localAllocator</name></member>
-    <member refid="class_azura_1_1_app_renderer_1a31549f213e66b6c8277f980cc2550bcb" kind="variable"><name>m_planeUBO</name></member>
-    <member refid="class_azura_1_1_app_renderer_1a09e07a755d9e5e6548ac9399c41e3870" kind="variable"><name>m_shehzanUBO</name></member>
-    <member refid="class_azura_1_1_app_renderer_1aba97969e322a1b629a4092e7b80920d9" kind="variable"><name>m_normalUBO</name></member>
-    <member refid="class_azura_1_1_app_renderer_1a695b00c66034dd7263215b68b811d81f" kind="variable"><name>m_planePool</name></member>
-    <member refid="class_azura_1_1_app_renderer_1a6a917e217e6349a89a260e21e76450c9" kind="variable"><name>m_shehzanPool</name></member>
-    <member refid="class_azura_1_1_app_renderer_1aa7159b4f1b326bf6477f4e2804262502" kind="variable"><name>m_computePools</name></member>
-    <member refid="class_azura_1_1_app_renderer_1ac3c126975bfb54a30773848e82f25df4" kind="variable"><name>m_iterativePools</name></member>
-    <member refid="class_azura_1_1_app_renderer_1a8f63d2385211cd02c3c9bd0d791176f1" kind="variable"><name>m_normalsPass</name></member>
-    <member refid="class_azura_1_1_app_renderer_1a264a650942c80fc0c7c665b5eb6bb640" kind="variable"><name>m_clothTransform</name></member>
-    <member refid="class_azura_1_1_app_renderer_1a8dacff0e2c7ac6b0c6d84033aa739134" kind="variable"><name>m_curtainTransforms</name></member>
-    <member refid="class_azura_1_1_app_renderer_1a2a4c63803a609ef18ea3d0863ec3a21d" kind="variable"><name>m_clothPlane</name></member>
-    <member refid="class_azura_1_1_app_renderer_1ad7202d2c9b2ae78f233f3c2a27788822" kind="variable"><name>m_clothMesh</name></member>
-    <member refid="class_azura_1_1_app_renderer_1a8e4e38213b2f887c29fa5d1806796b22" kind="variable"><name>p_activeMesh</name></member>
-    <member refid="class_azura_1_1_app_renderer_1a3be2c8993be3114438b09c1a7839ef5a" kind="variable"><name>m_rotateFactor</name></member>
-    <member refid="class_azura_1_1_app_renderer_1abfb235548f122bcec16602f6f691cd12" kind="variable"><name>m_rotateStepSize</name></member>
-    <member refid="class_azura_1_1_app_renderer_1a729999298ed93281f60d03ffc00bfbcd" kind="function"><name>AppRenderer</name></member>
-    <member refid="class_azura_1_1_app_renderer_1a6c476579a5c1ecc340e405169d2d6206" kind="function"><name>Initialize</name></member>
-    <member refid="class_azura_1_1_app_renderer_1aab613340f99fc4b229be9d90781de0cb" kind="function"><name>WindowUpdate</name></member>
-    <member refid="class_azura_1_1_app_renderer_1a4b9ae61ecb8a834bfdbf1b848b91fa8a" kind="function"><name>Run</name></member>
-    <member refid="class_azura_1_1_app_renderer_1aef01656abe2966facd73a672cc7e5507" kind="function"><name>Destroy</name></member>
-    <member refid="class_azura_1_1_app_renderer_1a729999298ed93281f60d03ffc00bfbcd" kind="function"><name>AppRenderer</name></member>
-    <member refid="class_azura_1_1_app_renderer_1a6c476579a5c1ecc340e405169d2d6206" kind="function"><name>Initialize</name></member>
-    <member refid="class_azura_1_1_app_renderer_1aab613340f99fc4b229be9d90781de0cb" kind="function"><name>WindowUpdate</name></member>
-    <member refid="class_azura_1_1_app_renderer_1a4b9ae61ecb8a834bfdbf1b848b91fa8a" kind="function"><name>Run</name></member>
-    <member refid="class_azura_1_1_app_renderer_1aef01656abe2966facd73a672cc7e5507" kind="function"><name>Destroy</name></member>
-    <member refid="class_azura_1_1_app_renderer_1a729999298ed93281f60d03ffc00bfbcd" kind="function"><name>AppRenderer</name></member>
-    <member refid="class_azura_1_1_app_renderer_1a6c476579a5c1ecc340e405169d2d6206" kind="function"><name>Initialize</name></member>
-    <member refid="class_azura_1_1_app_renderer_1aab613340f99fc4b229be9d90781de0cb" kind="function"><name>WindowUpdate</name></member>
-    <member refid="class_azura_1_1_app_renderer_1a4b9ae61ecb8a834bfdbf1b848b91fa8a" kind="function"><name>Run</name></member>
-    <member refid="class_azura_1_1_app_renderer_1aef01656abe2966facd73a672cc7e5507" kind="function"><name>Destroy</name></member>
   </compound>
   <compound refid="class_azura_1_1_containers_1_1_array" kind="class"><name>Azura::Containers::Array</name>
     <member refid="class_azura_1_1_containers_1_1_array_1a693238e93d05f239de801e2df97b8504" kind="variable"><name>m_size</name></member>
@@ -155,31 +64,12 @@
     <member refid="class_azura_1_1_containers_1_1_array_batch_1a72f3ffcdcee4d9db50496b3bbbfd3042" kind="function"><name>Get</name></member>
     <member refid="class_azura_1_1_containers_1_1_array_batch_1ae2401c94bfd82b731f79553982d8bdb1" kind="function"><name>Get</name></member>
   </compound>
-  <compound refid="class_array_test" kind="class"><name>ArrayTest</name>
-    <member refid="class_array_test_1a8423b54192077152a79b39417bbfbb08" kind="variable"><name>buffer</name></member>
-    <member refid="class_array_test_1a243b2dbb8587b165dccce10e6f8d9f7c" kind="variable"><name>alloc</name></member>
-    <member refid="class_array_test_1a763be0e99715300fc0d03b01ce87c96f" kind="function"><name>ArrayTest</name></member>
-    <member refid="class_array_test_1ab35eb58bcd0402e3bf8013831ac3d6ee" kind="function"><name>~ArrayTest</name></member>
-  </compound>
   <compound refid="class_azura_1_1_physics_1_1_p_b_d_1_1_bending_constraint" kind="class"><name>Azura::Physics::PBD::BendingConstraint</name>
     <member refid="class_azura_1_1_physics_1_1_p_b_d_1_1_bending_constraint_1ac91f90cbf81262210e7a63060bce6395" kind="variable"><name>m_points</name></member>
     <member refid="class_azura_1_1_physics_1_1_p_b_d_1_1_bending_constraint_1ac8c1bc959e83daac951f6abcfdd3d694" kind="variable"><name>m_Q</name></member>
     <member refid="class_azura_1_1_physics_1_1_p_b_d_1_1_bending_constraint_1a43c6924b7d2f423fd0ae74bf4b859deb" kind="function"><name>BendingConstraint</name></member>
     <member refid="class_azura_1_1_physics_1_1_p_b_d_1_1_bending_constraint_1a40ade47be708c84d0c5ece2f9c9c95ec" kind="function"><name>Compute</name></member>
     <member refid="class_azura_1_1_physics_1_1_p_b_d_1_1_bending_constraint_1a35c1224f88ede66a586b4c2a1ba5bd76" kind="function"><name>ComputeBendingGradient</name></member>
-  </compound>
-  <compound refid="struct_azura_1_1_bending_constraint" kind="struct"><name>Azura::BendingConstraint</name>
-    <member refid="struct_azura_1_1_bending_constraint_1af4c1606989ad9d175092fc49875b0e50" kind="variable"><name>m_indexX0</name></member>
-    <member refid="struct_azura_1_1_bending_constraint_1a73c088a9d05e8fe6e31b0fe76cabfa3c" kind="variable"><name>m_indexX1</name></member>
-    <member refid="struct_azura_1_1_bending_constraint_1a363722381c488a00620e9d109e683c31" kind="variable"><name>m_indexX2</name></member>
-    <member refid="struct_azura_1_1_bending_constraint_1a272f3b9fa5c481c50da8ebed25b2c083" kind="variable"><name>m_indexX3</name></member>
-    <member refid="struct_azura_1_1_bending_constraint_1a80cb9d7e02371a9b6dc8920f0ce4e0a7" kind="variable"><name>m_invMass0</name></member>
-    <member refid="struct_azura_1_1_bending_constraint_1a77bffe0f39e4c50651de0166336de115" kind="variable"><name>m_invMass1</name></member>
-    <member refid="struct_azura_1_1_bending_constraint_1a9f8ab6dd8132a468ab820294fa527835" kind="variable"><name>m_invMass2</name></member>
-    <member refid="struct_azura_1_1_bending_constraint_1a459e01d788c8a71d397c84f861100514" kind="variable"><name>m_invMass3</name></member>
-    <member refid="struct_azura_1_1_bending_constraint_1afa18cd5099522698999524a6c0300244" kind="variable"><name>m_Q</name></member>
-    <member refid="struct_azura_1_1_bending_constraint_1a91cde1ac8fd524580b2f3266cff4c965" kind="function"><name>Compute</name></member>
-    <member refid="struct_azura_1_1_bending_constraint_1a22dbb27e177e6e08ab978cfe38928881" kind="function"><name>ComputeBendingGradient</name></member>
   </compound>
   <compound refid="struct_azura_1_1_vulkan_1_1_vk_pipeline_factory_1_1_binding_info" kind="struct"><name>Azura::Vulkan::VkPipelineFactory::BindingInfo</name>
     <member refid="struct_azura_1_1_vulkan_1_1_vk_pipeline_factory_1_1_binding_info_1af77f0ce6cb357b51201bed55c710d171" kind="variable"><name>m_offset</name></member>
@@ -209,21 +99,6 @@
     <member refid="struct_azura_1_1_bounds3_d_1aaf080e29eea59a0c49ea11a9a603146d" kind="function"><name>Bounds3D</name></member>
     <member refid="struct_azura_1_1_bounds3_d_1a6315cab2c1be2fc25760a1b2fb15bfe0" kind="function"><name>GetSize</name></member>
   </compound>
-  <compound refid="class_dibella_1_1_b_s_d_f" kind="class"><name>Dibella::BSDF</name>
-    <member refid="class_dibella_1_1_b_s_d_f_1acbfbeb80ee5256ab1303ee53d1252808" kind="variable"><name>mWorldToTangent</name></member>
-    <member refid="class_dibella_1_1_b_s_d_f_1ab7c3b287786c851a39af641ca3693cdb" kind="variable"><name>mTangentToWorld</name></member>
-    <member refid="class_dibella_1_1_b_s_d_f_1a2c50f863ab0c261fe4eba4344e640b48" kind="variable"><name>mNormal</name></member>
-    <member refid="class_dibella_1_1_b_s_d_f_1ad3a9f756d7cd38f9abc99d6827a881db" kind="variable"><name>mETA</name></member>
-    <member refid="class_dibella_1_1_b_s_d_f_1a7950ae6e9409daa21d5190fdeb85cfd8" kind="variable"><name>mNumBxDF</name></member>
-    <member refid="class_dibella_1_1_b_s_d_f_1acf35912862427f0725258ec1898fbd89" kind="variable"><name>bxdfs</name></member>
-    <member refid="class_dibella_1_1_b_s_d_f_1a26a84b941024c7e3b791831d3288666b" kind="function"><name>BSDF</name></member>
-    <member refid="class_dibella_1_1_b_s_d_f_1ad313f3bfc89c58159dab6b24a51acb88" kind="function"><name>Add</name></member>
-    <member refid="class_dibella_1_1_b_s_d_f_1ade4f0dbe3bbb92fbc9e2f8a636465388" kind="function"><name>CalculateF</name></member>
-    <member refid="class_dibella_1_1_b_s_d_f_1aac402824f1331054bd4ba9bb37289191" kind="function"><name>SampleF</name></member>
-    <member refid="class_dibella_1_1_b_s_d_f_1a00dee6537cedba6a601390829bac1318" kind="function"><name>CalculatePDF</name></member>
-    <member refid="class_dibella_1_1_b_s_d_f_1a6187cd07f462581632e83d084c7f43e3" kind="function"><name>BxDFsMatchingFlags</name></member>
-    <member refid="class_dibella_1_1_b_s_d_f_1ae2800b915eff53b85d52a9ffbf33f159" kind="function"><name>UpdateTangentSpaceMatrices</name></member>
-  </compound>
   <compound refid="struct_azura_1_1_buffer_entry" kind="struct"><name>Azura::BufferEntry</name>
     <member refid="struct_azura_1_1_buffer_entry_1afe019a3560a7fb563db3ae5cdade4903" kind="variable"><name>m_offset</name></member>
     <member refid="struct_azura_1_1_buffer_entry_1aa0bcfd4ecfce38c58fe44e9d559f819f" kind="variable"><name>m_size</name></member>
@@ -249,19 +124,6 @@
     <member refid="struct_azura_1_1_buffer_update_1a5fce41f69c2aa974ccb7a1c4bdece95d" kind="variable"><name>m_gpuByteSize</name></member>
     <member refid="struct_azura_1_1_buffer_update_1a2c78919b9ce2cbd32e0d552d483607ec" kind="variable"><name>m_updateOffset</name></member>
     <member refid="struct_azura_1_1_buffer_update_1ae0562cd3d9c544fb6ad3d2c5a46a2cb1" kind="variable"><name>m_updateByteSize</name></member>
-  </compound>
-  <compound refid="class_dibella_1_1_bx_d_f" kind="class"><name>Dibella::BxDF</name>
-    <member refid="class_dibella_1_1_bx_d_f_1a4f1a67b08dd9c9afe055c12f11657629" kind="variable"><name>mType</name></member>
-    <member refid="class_dibella_1_1_bx_d_f_1aebfe6b1631a5544da09b774e0285edc3" kind="function"><name>BxDF</name></member>
-    <member refid="class_dibella_1_1_bx_d_f_1a9371dd8a8f22ce87936e9e61acfadb3f" kind="function"><name>~BxDF</name></member>
-    <member refid="class_dibella_1_1_bx_d_f_1a144769c8b4fa528460a8eca447ac8ec5" kind="function"><name>BxDF</name></member>
-    <member refid="class_dibella_1_1_bx_d_f_1ab55034dd171a966f670ccc1b1987cb8f" kind="function"><name>BxDF</name></member>
-    <member refid="class_dibella_1_1_bx_d_f_1ab004853ad56ca282510563f0f8a0c895" kind="function"><name>operator=</name></member>
-    <member refid="class_dibella_1_1_bx_d_f_1a48cf41067c30bb38aea5867e5c8c8133" kind="function"><name>operator=</name></member>
-    <member refid="class_dibella_1_1_bx_d_f_1aa7dacf04628ea5353a2ffe0f53c4fac7" kind="function"><name>CalculateF</name></member>
-    <member refid="class_dibella_1_1_bx_d_f_1a775e4b0238203679f35381b6c4b2e573" kind="function"><name>SampleF</name></member>
-    <member refid="class_dibella_1_1_bx_d_f_1a227e97ebdeb1e4e7fc7c3f5b5258a08e" kind="function"><name>CalculatePDF</name></member>
-    <member refid="class_dibella_1_1_bx_d_f_1a0ce9755ae67f86b1fd5d2314aa5c7496" kind="function"><name>IsType</name></member>
   </compound>
   <compound refid="class_azura_1_1_camera" kind="class"><name>Azura::Camera</name>
     <member refid="class_azura_1_1_camera_1a42f7c9b986fb87cbe772d2acbe7d1b21" kind="variable"><name>m_width</name></member>
@@ -307,11 +169,6 @@
     <member refid="struct_azura_1_1_clear_data_1a069c070e82fdd3d48b32b5ac2a9400cc" kind="variable"><name>m_depth</name></member>
     <member refid="struct_azura_1_1_clear_data_1a473afad9880805e788ab44f968aa7ab4" kind="variable"><name>m_stencil</name></member>
   </compound>
-  <compound refid="struct_azura_1_1_cloth_compute_properties" kind="struct"><name>Azura::ClothComputeProperties</name>
-    <member refid="struct_azura_1_1_cloth_compute_properties_1a6ed77b4e2dcc0850fb7924b3f2fa0933" kind="variable"><name>m_minBounding</name></member>
-    <member refid="struct_azura_1_1_cloth_compute_properties_1a88947f0aafb042bd904a123bc6e061df" kind="variable"><name>m_maxBounding</name></member>
-    <member refid="struct_azura_1_1_cloth_compute_properties_1a2145afacedfd2532bcc89059cd17ba90" kind="variable"><name>m_numSelfCollisionConstraints</name></member>
-  </compound>
   <compound refid="class_azura_1_1_physics_1_1_cloth_mesh" kind="class"><name>Azura::Physics::ClothMesh</name>
     <member refid="class_azura_1_1_physics_1_1_cloth_mesh_1aa9e7285729dafafc8a921e9d4886496a" kind="variable"><name>m_anchorIdx</name></member>
     <member refid="class_azura_1_1_physics_1_1_cloth_mesh_1a90690c75edc7ec8b1400e561cb49e054" kind="variable"><name>m_edgeTriangleMap</name></member>
@@ -324,62 +181,27 @@
     <member refid="class_azura_1_1_physics_1_1_cloth_mesh_1aeca3d4e28eb02bcad4c9c2c059de5e31" kind="variable"><name>m_uv</name></member>
     <member refid="class_azura_1_1_physics_1_1_cloth_mesh_1aea1c212aff7c6d729266b5d2bba0d6a4" kind="variable"><name>p_interface</name></member>
     <member refid="class_azura_1_1_physics_1_1_cloth_mesh_1a40b92eada33418d1ea9285ef68f105e8" kind="function"><name>ClothMesh</name></member>
-    <member refid="class_azura_1_1_physics_1_1_cloth_mesh_1a4ad1780df4fdbba159377feb295988f4" kind="function"><name>VertexDataSize</name></member>
-    <member refid="class_azura_1_1_physics_1_1_cloth_mesh_1a92cdd2933f1eab7aec42ab3469899c46" kind="function"><name>IndexDataSize</name></member>
-    <member refid="class_azura_1_1_physics_1_1_cloth_mesh_1a55cbd00430dcd5b33824fa53cda80c49" kind="function"><name>VertexData</name></member>
-    <member refid="class_azura_1_1_physics_1_1_cloth_mesh_1abb7338838a16d97836fd4be4e88ebd64" kind="function"><name>IndexData</name></member>
-    <member refid="class_azura_1_1_physics_1_1_cloth_mesh_1a2e0582ff817b7a446d6eafdf3b89837d" kind="function"><name>GetVertexFormat</name></member>
-    <member refid="class_azura_1_1_physics_1_1_cloth_mesh_1aa9b736d6469916689be0b31f60c9e136" kind="function"><name>GetIndexFormat</name></member>
-    <member refid="class_azura_1_1_physics_1_1_cloth_mesh_1acf16282c583a9ea24a4763b8ce92db6d" kind="function"><name>GetVertexCount</name></member>
-    <member refid="class_azura_1_1_physics_1_1_cloth_mesh_1ac833446a04a3bceb5a6c116f7bf109f5" kind="function"><name>GetIndexCount</name></member>
-    <member refid="class_azura_1_1_physics_1_1_cloth_mesh_1add11b8966ec5a17a996f180da784e879" kind="function"><name>TotalDataSize</name></member>
-    <member refid="class_azura_1_1_physics_1_1_cloth_mesh_1a011fb10ed2a2cef71b2f9ddf261c084a" kind="function"><name>NormalDataSize</name></member>
-    <member refid="class_azura_1_1_physics_1_1_cloth_mesh_1a3cf7a70e31ddc7c679c26e888dca6f51" kind="function"><name>NormalData</name></member>
-    <member refid="class_azura_1_1_physics_1_1_cloth_mesh_1af24713ca9479cd29cb08aa1a01762873" kind="function"><name>GetNormalFormat</name></member>
-    <member refid="class_azura_1_1_physics_1_1_cloth_mesh_1a24289e2e3132e551e45bfdbc3f231c6c" kind="function"><name>UVDataSize</name></member>
-    <member refid="class_azura_1_1_physics_1_1_cloth_mesh_1a9ec77ce79d394013fc178dca364c5365" kind="function"><name>UVData</name></member>
-    <member refid="class_azura_1_1_physics_1_1_cloth_mesh_1a9f25a92dbce5dbcb3005b1a960b81b94" kind="function"><name>GetUVFormat</name></member>
+    <member refid="class_azura_1_1_physics_1_1_cloth_mesh_1a41bbcd827416fbd7c414676dbec36ce8" kind="function"><name>VertexDataSize</name></member>
+    <member refid="class_azura_1_1_physics_1_1_cloth_mesh_1a3fc78ccfb8c0f3ce3f0a18ea265e848a" kind="function"><name>IndexDataSize</name></member>
+    <member refid="class_azura_1_1_physics_1_1_cloth_mesh_1aa6325a4678202604ada6a6e590f71fad" kind="function"><name>VertexData</name></member>
+    <member refid="class_azura_1_1_physics_1_1_cloth_mesh_1a1e59215483bf480e09e04e0daa7ce1f3" kind="function"><name>IndexData</name></member>
+    <member refid="class_azura_1_1_physics_1_1_cloth_mesh_1a189c33a296ada049b212f6a7bd569067" kind="function"><name>GetVertexFormat</name></member>
+    <member refid="class_azura_1_1_physics_1_1_cloth_mesh_1aecf53f568c32cdaaa1dda5ee0cb940b3" kind="function"><name>GetIndexFormat</name></member>
+    <member refid="class_azura_1_1_physics_1_1_cloth_mesh_1ae91be18d3faac47adb6ef19526330a75" kind="function"><name>GetVertexCount</name></member>
+    <member refid="class_azura_1_1_physics_1_1_cloth_mesh_1aebed88daf7aa4877825346b59312ead2" kind="function"><name>GetIndexCount</name></member>
+    <member refid="class_azura_1_1_physics_1_1_cloth_mesh_1a9594147035cb8e4c38ec81c4bc60d9f1" kind="function"><name>TotalDataSize</name></member>
+    <member refid="class_azura_1_1_physics_1_1_cloth_mesh_1aceef5eb1c761aa8c4fe009de2855421c" kind="function"><name>NormalDataSize</name></member>
+    <member refid="class_azura_1_1_physics_1_1_cloth_mesh_1a9e093637a570b5892422f523356c12d6" kind="function"><name>NormalData</name></member>
+    <member refid="class_azura_1_1_physics_1_1_cloth_mesh_1a6a8c1680bf91d8cb2e4810c7c9750157" kind="function"><name>GetNormalFormat</name></member>
+    <member refid="class_azura_1_1_physics_1_1_cloth_mesh_1a388dc3757a47f3bd6a985b371fc55e8d" kind="function"><name>UVDataSize</name></member>
+    <member refid="class_azura_1_1_physics_1_1_cloth_mesh_1a5588b3d8e73196e33882563d7e448c27" kind="function"><name>UVData</name></member>
+    <member refid="class_azura_1_1_physics_1_1_cloth_mesh_1a0ca8638d4273e67d07380fb5049ae42c" kind="function"><name>GetUVFormat</name></member>
     <member refid="class_azura_1_1_physics_1_1_cloth_mesh_1a6c4d65a091b000326786d6d1ee6502d8" kind="function"><name>SetAnchorOnIndex</name></member>
     <member refid="class_azura_1_1_physics_1_1_cloth_mesh_1ae50a8ecd1857808e838d8de9c1a5ab58" kind="function"><name>GetVertexInverseMass</name></member>
     <member refid="class_azura_1_1_physics_1_1_cloth_mesh_1aca9f5ad8f83a52791084058221fa2b1a" kind="function"><name>GetVertexAliases</name></member>
     <member refid="class_azura_1_1_physics_1_1_cloth_mesh_1aaa0f046e7590dce980af82c98dd0fff8" kind="function"><name>GetPBDSolvingView</name></member>
-    <member refid="class_azura_1_1_physics_1_1_cloth_mesh_1a7c9a4f45d76fbb73de21dd6ff6795a20" kind="function"><name>AddEdgeTriangleNeighbor</name></member>
+    <member refid="class_azura_1_1_physics_1_1_cloth_mesh_1a44d050ec52f5c1479e2bb411dfd69533" kind="function"><name>AddEdgeTriangleNeighbor</name></member>
     <member refid="class_azura_1_1_physics_1_1_cloth_mesh_1a93b380b3d9d2cf4bb7b6387d7c25f867" kind="function"><name>IsVertexAnchorPoint</name></member>
-  </compound>
-  <compound refid="class_azura_1_1_cloth_mesh" kind="class"><name>Azura::ClothMesh</name>
-    <member refid="class_azura_1_1_cloth_mesh_1a9268960c587d7d63ffc3848c8a9d14aa" kind="variable"><name>m_anchorIdx</name></member>
-    <member refid="class_azura_1_1_cloth_mesh_1a3066fd57ea05d7c909d648c4605899fc" kind="variable"><name>m_edgeTriangleMap</name></member>
-    <member refid="class_azura_1_1_cloth_mesh_1a773ce66060d80c0c0c403be6d124cd51" kind="variable"><name>m_vertices</name></member>
-    <member refid="class_azura_1_1_cloth_mesh_1ae72598f550595afe430853793d8e1563" kind="variable"><name>m_normals</name></member>
-    <member refid="class_azura_1_1_cloth_mesh_1a07dd567be014c47b0f1ec0227ea1109d" kind="variable"><name>m_triangles</name></member>
-    <member refid="class_azura_1_1_cloth_mesh_1abc33f9088df4e463dad5051e07af4117" kind="variable"><name>m_distanceConstraints</name></member>
-    <member refid="class_azura_1_1_cloth_mesh_1a215f6f5c75ec0c3e9d433abc32fe860b" kind="variable"><name>m_bendingConstraints</name></member>
-    <member refid="class_azura_1_1_cloth_mesh_1a790e1af398abebf9df19493e353b8423" kind="function"><name>ClothMesh</name></member>
-    <member refid="class_azura_1_1_cloth_mesh_1ab6e1f3ddb3933b7afd0c8d3b95bb6639" kind="function"><name>ClothMesh</name></member>
-    <member refid="class_azura_1_1_cloth_mesh_1a4ad1780df4fdbba159377feb295988f4" kind="function"><name>VertexDataSize</name></member>
-    <member refid="class_azura_1_1_cloth_mesh_1a92cdd2933f1eab7aec42ab3469899c46" kind="function"><name>IndexDataSize</name></member>
-    <member refid="class_azura_1_1_cloth_mesh_1aad3c92e28486bcd59dd6bea28bbfd76c" kind="function"><name>VertexData</name></member>
-    <member refid="class_azura_1_1_cloth_mesh_1a51e4e0cacd2f467548f07d5878dac7d7" kind="function"><name>IndexData</name></member>
-    <member refid="class_azura_1_1_cloth_mesh_1a2e0582ff817b7a446d6eafdf3b89837d" kind="function"><name>GetVertexFormat</name></member>
-    <member refid="class_azura_1_1_cloth_mesh_1aa9b736d6469916689be0b31f60c9e136" kind="function"><name>GetIndexFormat</name></member>
-    <member refid="class_azura_1_1_cloth_mesh_1acf16282c583a9ea24a4763b8ce92db6d" kind="function"><name>GetVertexCount</name></member>
-    <member refid="class_azura_1_1_cloth_mesh_1ac833446a04a3bceb5a6c116f7bf109f5" kind="function"><name>GetIndexCount</name></member>
-    <member refid="class_azura_1_1_cloth_mesh_1add11b8966ec5a17a996f180da784e879" kind="function"><name>TotalDataSize</name></member>
-    <member refid="class_azura_1_1_cloth_mesh_1a3b6505763ca0458e654be045e2a6b87e" kind="function"><name>GetVertices</name></member>
-    <member refid="class_azura_1_1_cloth_mesh_1a8caeeae68a8309c9ba57c197c9745b87" kind="function"><name>GetEdgeConstraints</name></member>
-    <member refid="class_azura_1_1_cloth_mesh_1a321aaf7f31f7b974ee67dfd70674692b" kind="function"><name>GetBendingConstraints</name></member>
-    <member refid="class_azura_1_1_cloth_mesh_1a90b14d4af3a1b4b94581d40dc6ef1ac5" kind="function"><name>GetAnchorIds</name></member>
-    <member refid="class_azura_1_1_cloth_mesh_1aff5955f8bcb49ff8b0644df97057e085" kind="function"><name>GetVertices</name></member>
-    <member refid="class_azura_1_1_cloth_mesh_1aa68459f8ec7bb20f15c8da37bdc889b2" kind="function"><name>GetNormals</name></member>
-    <member refid="class_azura_1_1_cloth_mesh_1a2d7e67d319bc11a69f496083e06f6778" kind="function"><name>GetNormals</name></member>
-    <member refid="class_azura_1_1_cloth_mesh_1a116d6e2845e8d6024f08d815d83d1c29" kind="function"><name>AddEdgeConstraint</name></member>
-    <member refid="class_azura_1_1_cloth_mesh_1a011fb10ed2a2cef71b2f9ddf261c084a" kind="function"><name>NormalDataSize</name></member>
-    <member refid="class_azura_1_1_cloth_mesh_1a322d11386baad0749dc6ed1ae6ff5da8" kind="function"><name>NormalData</name></member>
-    <member refid="class_azura_1_1_cloth_mesh_1af24713ca9479cd29cb08aa1a01762873" kind="function"><name>GetNormalFormat</name></member>
-    <member refid="class_azura_1_1_cloth_mesh_1a24289e2e3132e551e45bfdbc3f231c6c" kind="function"><name>UVDataSize</name></member>
-    <member refid="class_azura_1_1_cloth_mesh_1aa1a588427f480d688bb6bc04cd35958a" kind="function"><name>UVData</name></member>
-    <member refid="class_azura_1_1_cloth_mesh_1a9f25a92dbce5dbcb3005b1a960b81b94" kind="function"><name>GetUVFormat</name></member>
-    <member refid="class_azura_1_1_cloth_mesh_1a7c9a4f45d76fbb73de21dd6ff6795a20" kind="function"><name>AddEdgeTriangleNeighbor</name></member>
   </compound>
   <compound refid="class_azura_1_1_physics_1_1_cloth_plane" kind="class"><name>Azura::Physics::ClothPlane</name>
     <member refid="class_azura_1_1_physics_1_1_cloth_plane_1ada22d38f2236cf424c8e1107c46e1bf1" kind="variable"><name>m_anchorIdx</name></member>
@@ -427,51 +249,6 @@
     <member refid="class_azura_1_1_physics_1_1_p_b_d_1_1_cloth_solving_view_1ac4e943f83107dabe1a2994f757aa4c6d" kind="function"><name>GetBendingConstraints</name></member>
     <member refid="class_azura_1_1_physics_1_1_p_b_d_1_1_cloth_solving_view_1a71fa91753ded6ac57432ceef4bbe7ca5" kind="function"><name>Solve</name></member>
   </compound>
-  <compound refid="class_complex_type" kind="class"><name>ComplexType</name>
-    <member refid="class_complex_type_1a56d4b3885333f97a2b0c4fe8388b5fb6" kind="variable"><name>m_data</name></member>
-    <member refid="class_complex_type_1a124ec42d1a09b1b559c91546489842b7" kind="variable"><name>s_ctorCalls</name></member>
-    <member refid="class_complex_type_1a409480197eb1d50bbb6a38dcb8dc3420" kind="variable"><name>s_dtorCalls</name></member>
-    <member refid="class_complex_type_1a39a0bf7ce15fdca400397b48efa0243a" kind="variable"><name>s_copyCtorCalls</name></member>
-    <member refid="class_complex_type_1ac6e5b0dcaa5874c7d44142a11dbc47f2" kind="variable"><name>s_moveCtorCalls</name></member>
-    <member refid="class_complex_type_1aaddf8217a962f84dd29d45af0df38a6c" kind="variable"><name>s_copyAssignCalls</name></member>
-    <member refid="class_complex_type_1a40c7761b605a2980bacbdee8f77bc2ba" kind="variable"><name>s_moveAssignCalls</name></member>
-    <member refid="class_complex_type_1a3117c3acf8e63f830b1a9ba567bf041a" kind="function"><name>ResetStats</name></member>
-    <member refid="class_complex_type_1a3117c3acf8e63f830b1a9ba567bf041a" kind="function"><name>ResetStats</name></member>
-    <member refid="class_complex_type_1a3117c3acf8e63f830b1a9ba567bf041a" kind="function"><name>ResetStats</name></member>
-    <member refid="class_complex_type_1abc2f30cd1a7e125ea11c39c896bb2790" kind="function"><name>PrintStats</name></member>
-    <member refid="class_complex_type_1af79a75d693fc608c27fbfd8d0e60e120" kind="function"><name>ComplexType</name></member>
-    <member refid="class_complex_type_1ac7bc98621f4efb157cde6f760f483ae1" kind="function"><name>~ComplexType</name></member>
-    <member refid="class_complex_type_1a379b37381d4502380ed2558446317db4" kind="function"><name>ComplexType</name></member>
-    <member refid="class_complex_type_1a4698fcf5f6af8c15b80e13b57efd7003" kind="function"><name>ComplexType</name></member>
-    <member refid="class_complex_type_1adb5a9208819e9d60628c18a8fd2f2f30" kind="function"><name>operator=</name></member>
-    <member refid="class_complex_type_1a75122648d82c4002014ca11614b4b7a2" kind="function"><name>operator=</name></member>
-    <member refid="class_complex_type_1ad0f3f9ce79e82f5e31e935eea82a24f7" kind="function"><name>Data</name></member>
-    <member refid="class_complex_type_1af79a75d693fc608c27fbfd8d0e60e120" kind="function"><name>ComplexType</name></member>
-    <member refid="class_complex_type_1ac7bc98621f4efb157cde6f760f483ae1" kind="function"><name>~ComplexType</name></member>
-    <member refid="class_complex_type_1a379b37381d4502380ed2558446317db4" kind="function"><name>ComplexType</name></member>
-    <member refid="class_complex_type_1a4698fcf5f6af8c15b80e13b57efd7003" kind="function"><name>ComplexType</name></member>
-    <member refid="class_complex_type_1adb5a9208819e9d60628c18a8fd2f2f30" kind="function"><name>operator=</name></member>
-    <member refid="class_complex_type_1a75122648d82c4002014ca11614b4b7a2" kind="function"><name>operator=</name></member>
-    <member refid="class_complex_type_1ad0f3f9ce79e82f5e31e935eea82a24f7" kind="function"><name>Data</name></member>
-    <member refid="class_complex_type_1af79a75d693fc608c27fbfd8d0e60e120" kind="function"><name>ComplexType</name></member>
-    <member refid="class_complex_type_1ac7bc98621f4efb157cde6f760f483ae1" kind="function"><name>~ComplexType</name></member>
-    <member refid="class_complex_type_1a379b37381d4502380ed2558446317db4" kind="function"><name>ComplexType</name></member>
-    <member refid="class_complex_type_1a4698fcf5f6af8c15b80e13b57efd7003" kind="function"><name>ComplexType</name></member>
-    <member refid="class_complex_type_1adb5a9208819e9d60628c18a8fd2f2f30" kind="function"><name>operator=</name></member>
-    <member refid="class_complex_type_1a75122648d82c4002014ca11614b4b7a2" kind="function"><name>operator=</name></member>
-    <member refid="class_complex_type_1ad0f3f9ce79e82f5e31e935eea82a24f7" kind="function"><name>Data</name></member>
-  </compound>
-  <compound refid="struct_azura_1_1_compute_pass_data" kind="struct"><name>Azura::ComputePassData</name>
-    <member refid="struct_azura_1_1_compute_pass_data_1a431d07b387a5d7e2534784b13d4abde3" kind="variable"><name>m_computeUBOSlot</name></member>
-    <member refid="struct_azura_1_1_compute_pass_data_1aa0b68873b3affc85be2c4fde00224fdc" kind="variable"><name>m_passId</name></member>
-    <member refid="struct_azura_1_1_compute_pass_data_1a600ac8a76bcfb6802b29f4b726bf37f3" kind="variable"><name>m_pass1</name></member>
-    <member refid="struct_azura_1_1_compute_pass_data_1aa9cf560c54215f5de606e10f87ffc126" kind="variable"><name>m_passInitialize</name></member>
-    <member refid="struct_azura_1_1_compute_pass_data_1a12486b177d816df0a05cc6722c5238db" kind="variable"><name>m_passBinning</name></member>
-    <member refid="struct_azura_1_1_compute_pass_data_1aa8d44d7c40e7b7cdde29ccf7dab3906b" kind="variable"><name>m_passSelfCollisions</name></member>
-    <member refid="struct_azura_1_1_compute_pass_data_1afe21959e7cf96f01642bd27303103179" kind="variable"><name>m_passItr1</name></member>
-    <member refid="struct_azura_1_1_compute_pass_data_1a02c349b7c0bf5ba87543d149c378c89f" kind="variable"><name>m_passItr2</name></member>
-    <member refid="struct_azura_1_1_compute_pass_data_1ade30ee96f21737a776d6a9fb72bb4602" kind="variable"><name>m_pass4</name></member>
-  </compound>
   <compound refid="class_azura_1_1_compute_pool" kind="class"><name>Azura::ComputePool</name>
     <member refid="class_azura_1_1_compute_pool_1a7de00c2da471b1ad5b645f9711bfeaf2" kind="variable"><name>m_descriptorCount</name></member>
     <member refid="class_azura_1_1_compute_pool_1a5f1a7177b1d1206f77a96c13e70ac35c" kind="variable"><name>m_computePasses</name></member>
@@ -515,22 +292,6 @@
     <member refid="struct_azura_1_1_compute_pool_create_info_1a894b25c1d8ce30902e1f4d76848d163a" kind="function"><name>operator=</name></member>
     <member refid="struct_azura_1_1_compute_pool_create_info_1a24a737cc6dcb585a087291a679a1a235" kind="function"><name>operator=</name></member>
     <member refid="struct_azura_1_1_compute_pool_create_info_1a9f58e41a19cce5ddbfec1d8adf6ac430" kind="function"><name>ComputePoolCreateInfo</name></member>
-  </compound>
-  <compound refid="struct_azura_1_1_compute_u_b_o" kind="struct"><name>Azura::ComputeUBO</name>
-    <member refid="struct_azura_1_1_compute_u_b_o_1a0d86bd3adb0b57d066c528d85a9665af" kind="variable"><name>m_stretchStiffness</name></member>
-    <member refid="struct_azura_1_1_compute_u_b_o_1af85c337d7f793077e613afdc33c52558" kind="variable"><name>m_bendStiffness</name></member>
-    <member refid="struct_azura_1_1_compute_u_b_o_1aad65bfb12a0751b3fe34ef7b7860b4f8" kind="variable"><name>m_timeDelta</name></member>
-    <member refid="struct_azura_1_1_compute_u_b_o_1a9d5d6df055b277b1c8da21f78812d714" kind="variable"><name>m_numStretchConstraints</name></member>
-    <member refid="struct_azura_1_1_compute_u_b_o_1afda20c146041ee0976b2c734e005cc4a" kind="variable"><name>m_numBendConstraints</name></member>
-    <member refid="struct_azura_1_1_compute_u_b_o_1a7ce25dc0a022afb84367e12793af4aeb" kind="variable"><name>m_numVertices</name></member>
-    <member refid="struct_azura_1_1_compute_u_b_o_1a46e938aebe119a8336b592b39e50ad93" kind="variable"><name>m_numBlocks</name></member>
-    <member refid="struct_azura_1_1_compute_u_b_o_1a0369a324ac081f087f8046fb05b441a7" kind="variable"><name>pad</name></member>
-    <member refid="struct_azura_1_1_compute_u_b_o_1ad6a64200dd52e2243defd33207687394" kind="variable"><name>m_longRangeStiffness</name></member>
-    <member refid="struct_azura_1_1_compute_u_b_o_1acea780edf8c6ce74b9b05427d986046c" kind="variable"><name>m_numLongRangeConstraints</name></member>
-    <member refid="struct_azura_1_1_compute_u_b_o_1abee0fd20d3616170c20a10384905ccc8" kind="variable"><name>m_numTriangles</name></member>
-    <member refid="struct_azura_1_1_compute_u_b_o_1a1de2eed3c5a9059e799cd7aae26cf16e" kind="variable"><name>m_frameCount</name></member>
-    <member refid="struct_azura_1_1_compute_u_b_o_1a6e34fe4056c74f4f772294651f9d49a4" kind="variable"><name>m_pad</name></member>
-    <member refid="struct_azura_1_1_compute_u_b_o_1a9a8533b3b783b55f6255fcee87bd5b80" kind="variable"><name>m_clothModelMatrix</name></member>
   </compound>
   <compound refid="struct_azura_1_1_physics_1_1_p_b_d_1_1_constraint_point" kind="struct"><name>Azura::Physics::PBD::ConstraintPoint</name>
     <member refid="struct_azura_1_1_physics_1_1_p_b_d_1_1_constraint_point_1ac8fed5451b7c3f36aa2b0a9c7dd8901a" kind="variable"><name>m_dataIdx</name></member>
@@ -959,17 +720,6 @@
     <member refid="class_azura_1_1_physics_1_1_p_b_d_1_1_distance_constraint_1ae77aac8be4e326dbc7af11e2fb33db64" kind="function"><name>operator&lt;</name></member>
     <member refid="class_azura_1_1_physics_1_1_p_b_d_1_1_distance_constraint_1a5e1517e3117463b2734e0bcd79069cbb" kind="function"><name>operator==</name></member>
   </compound>
-  <compound refid="struct_azura_1_1_distance_constraint" kind="struct"><name>Azura::DistanceConstraint</name>
-    <member refid="struct_azura_1_1_distance_constraint_1a16270e0405db91ec1066b84dfae2fceb" kind="variable"><name>m_indexA</name></member>
-    <member refid="struct_azura_1_1_distance_constraint_1a1520887f6641633a107e4621f86963e8" kind="variable"><name>m_indexB</name></member>
-    <member refid="struct_azura_1_1_distance_constraint_1a87df11b626fb262e7a70f89df434fb04" kind="variable"><name>m_restLength</name></member>
-    <member refid="struct_azura_1_1_distance_constraint_1ae8a6e4044a66cfb0fc757343a723de37" kind="variable"><name>m_invMass1</name></member>
-    <member refid="struct_azura_1_1_distance_constraint_1a20e6ad658affe81eae62ee0aa1dbbde1" kind="variable"><name>m_invMass2</name></member>
-    <member refid="struct_azura_1_1_distance_constraint_1a35cf94a722245ef3d8727d57f03d9f31" kind="function"><name>operator&lt;</name></member>
-    <member refid="struct_azura_1_1_distance_constraint_1ac884f8abb498bcb8e5e9a12929790816" kind="function"><name>operator==</name></member>
-    <member refid="struct_azura_1_1_distance_constraint_1ab01f35df6e874f39a897ccba19c96a76" kind="function"><name>ComputeDeltaX1</name></member>
-    <member refid="struct_azura_1_1_distance_constraint_1a3c38ecece24c812584c858f043695cd5" kind="function"><name>ComputeDeltaX2</name></member>
-  </compound>
   <compound refid="class_azura_1_1_drawable" kind="class"><name>Azura::Drawable</name>
     <member refid="class_azura_1_1_drawable_1abd7a2b1505fecdceecb01f69dce4f141" kind="variable"><name>m_vertexBufferInfos</name></member>
     <member refid="class_azura_1_1_drawable_1aab3f9242b2e44c295dcdd4a21ff7af05" kind="variable"><name>m_instanceBufferInfos</name></member>
@@ -1076,16 +826,8 @@
     <member refid="struct_azura_1_1_physics_1_1_edge_1a8b65c911758290819461c1e12fdbd7f1" kind="variable"><name>m_indexB</name></member>
     <member refid="struct_azura_1_1_physics_1_1_edge_1a4ab661f0daf7a493759aa82f65df3c94" kind="function"><name>operator==</name></member>
   </compound>
-  <compound refid="struct_azura_1_1_edge" kind="struct"><name>Azura::Edge</name>
-    <member refid="struct_azura_1_1_edge_1a34daa66f53d5f1e4495e8b0352812e3f" kind="variable"><name>m_indexA</name></member>
-    <member refid="struct_azura_1_1_edge_1a5f8e022042b92ac655c471179ce570e6" kind="variable"><name>m_indexB</name></member>
-    <member refid="struct_azura_1_1_edge_1a598085033325d36a7f65f6aa1fcefd4a" kind="function"><name>operator==</name></member>
-  </compound>
   <compound refid="struct_azura_1_1_physics_1_1_edge_map_hash" kind="struct"><name>Azura::Physics::EdgeMapHash</name>
     <member refid="struct_azura_1_1_physics_1_1_edge_map_hash_1ad12a26c78388d2714d5edaed3695d4b7" kind="function"><name>operator()</name></member>
-  </compound>
-  <compound refid="struct_azura_1_1_edge_map_hash" kind="struct"><name>Azura::EdgeMapHash</name>
-    <member refid="struct_azura_1_1_edge_map_hash_1a30a1d1510e8c68b81c44b229190eba2f" kind="function"><name>operator()</name></member>
   </compound>
   <compound refid="struct_azura_1_1_event" kind="struct"><name>Azura::Event</name>
     <member refid="struct_azura_1_1_event_1ad9e8ef0a614fa5841ff961ec3803a94d" kind="variable"><name>m_type</name></member>
@@ -1121,71 +863,6 @@
     <member refid="class_azura_1_1_f_n_v_hash_operator_1aa51f6b511eb0885ef1cde870ee4d5d87" kind="function"><name>evaluate</name></member>
     <member refid="class_azura_1_1_f_n_v_hash_operator_1a86986435c91fa5393cd91de728eda860" kind="function"><name>evaluate</name></member>
     <member refid="class_azura_1_1_f_n_v_hash_operator_1ae8958f72a8726f4d5e3fb35e64c81143" kind="function"><name>evaluate</name></member>
-  </compound>
-  <compound refid="struct_azura_1_1_forward_compute_pass" kind="struct"><name>Azura::ForwardComputePass</name>
-    <member refid="struct_azura_1_1_forward_compute_pass_1a409e20d1eaca15c7b461d61ad25d4363" kind="variable"><name>m_passId</name></member>
-    <member refid="struct_azura_1_1_forward_compute_pass_1a72f58af2c2bb64710efaeb8325427aec" kind="variable"><name>m_computePassId</name></member>
-    <member refid="struct_azura_1_1_forward_compute_pass_1a1131318167131345b27e5b1edfed2bd3" kind="variable"><name>m_uboSlot</name></member>
-    <member refid="struct_azura_1_1_forward_compute_pass_1a657c3bd663eb07c6ff00b4708f9b646f" kind="variable"><name>m_sampSlot</name></member>
-    <member refid="struct_azura_1_1_forward_compute_pass_1a684169bfe5e6ff61d539a339428dc866" kind="variable"><name>m_lightSampSlot</name></member>
-    <member refid="struct_azura_1_1_forward_compute_pass_1aee22cede80d168061fc9d686eaacac97" kind="variable"><name>m_texSlot</name></member>
-    <member refid="struct_azura_1_1_forward_compute_pass_1a305cd89fb7060657a447f4b9f97a9a64" kind="variable"><name>m_normalSlot</name></member>
-    <member refid="struct_azura_1_1_forward_compute_pass_1ad2889028ac69db7bb25744e79f1dda85" kind="variable"><name>m_computeUBO</name></member>
-  </compound>
-  <compound refid="class_azura_1_1_forward_compute_scene" kind="class"><name>Azura::ForwardComputeScene</name>
-    <member refid="class_azura_1_1_forward_compute_scene_1a253d6cb21b20cb1e1e47d7aeb22421b1" kind="variable"><name>m_pass</name></member>
-    <member refid="class_azura_1_1_forward_compute_scene_1ad12764a465632fa67464bca13d7020f9" kind="variable"><name>m_mainPool</name></member>
-    <member refid="class_azura_1_1_forward_compute_scene_1aba3c615f5f8083e55cc929ae219268fd" kind="variable"><name>m_computePool</name></member>
-    <member refid="class_azura_1_1_forward_compute_scene_1aeb6f015f6833602923b5a76585e1d299" kind="variable"><name>m_lightTexture</name></member>
-    <member refid="class_azura_1_1_forward_compute_scene_1a3cc8b2a1b69f50817a205333d55bb386" kind="function"><name>ForwardComputeScene</name></member>
-    <member refid="class_azura_1_1_forward_compute_scene_1a9dcbcfd4be1f24712e4842c2f14d941e" kind="function"><name>Initialize</name></member>
-    <member refid="class_azura_1_1_forward_compute_scene_1a18fc2142eb0cdb872a6215397688431a" kind="function"><name>Update</name></member>
-    <member refid="class_azura_1_1_forward_compute_scene_1a00e2c18165fbc582316b3d66065dd30c" kind="function"><name>CleanUp</name></member>
-  </compound>
-  <compound refid="struct_azura_1_1_forward_pass" kind="struct"><name>Azura::ForwardPass</name>
-    <member refid="struct_azura_1_1_forward_pass_1ae144c8cb776c25c2204c02adad578f0a" kind="variable"><name>m_passId</name></member>
-    <member refid="struct_azura_1_1_forward_pass_1ae57a52d0fbc96f9f56d68437a702cbf0" kind="variable"><name>m_uboSlot</name></member>
-    <member refid="struct_azura_1_1_forward_pass_1a447642fb624b8a5ad240a41fe129bd23" kind="variable"><name>m_sampSlot</name></member>
-    <member refid="struct_azura_1_1_forward_pass_1a9a839c152d157dc8d1abc582e013e891" kind="variable"><name>m_lightSampSlot</name></member>
-    <member refid="struct_azura_1_1_forward_pass_1a0f8284c85f283925ad2a6921e9c64c1a" kind="variable"><name>m_texSlot</name></member>
-    <member refid="struct_azura_1_1_forward_pass_1aafe3cadcd1783687fc947643d022a95c" kind="variable"><name>m_normalSlot</name></member>
-    <member refid="struct_azura_1_1_forward_pass_1a150854ab409a6bf362d2ae3f3b8b2947" kind="variable"><name>m_lightTexSlot</name></member>
-  </compound>
-  <compound refid="struct_azura_1_1_forward_plus_compute_pass" kind="struct"><name>Azura::ForwardPlusComputePass</name>
-    <member refid="struct_azura_1_1_forward_plus_compute_pass_1a4d68ad6a1ac8401b5f04b2d2516558d9" kind="variable"><name>m_gBufferPassId</name></member>
-    <member refid="struct_azura_1_1_forward_plus_compute_pass_1a69970adf408aafcfc1c62806710e1c89" kind="variable"><name>m_computePassId</name></member>
-    <member refid="struct_azura_1_1_forward_plus_compute_pass_1a45f877bd0a4b526b64f8e0a39830c27a" kind="variable"><name>m_shadingPassId</name></member>
-    <member refid="struct_azura_1_1_forward_plus_compute_pass_1af98cd2dc234c4851a93c40912e68cb74" kind="variable"><name>m_uboSlot</name></member>
-    <member refid="struct_azura_1_1_forward_plus_compute_pass_1a2cdecde355033e09ff22be3e96248aab" kind="variable"><name>m_computeUBO</name></member>
-    <member refid="struct_azura_1_1_forward_plus_compute_pass_1a187400b62c7131c95b21334accea5be1" kind="variable"><name>m_sampSlot</name></member>
-    <member refid="struct_azura_1_1_forward_plus_compute_pass_1a9216183e9391beb2abafd268e0d9499b" kind="variable"><name>m_lightSampSlot</name></member>
-    <member refid="struct_azura_1_1_forward_plus_compute_pass_1aa494005fb02e05ad508045f52511ec84" kind="variable"><name>m_texSlot</name></member>
-    <member refid="struct_azura_1_1_forward_plus_compute_pass_1a5e230288d969026fd4aea5be2c6aaca1" kind="variable"><name>m_normalSlot</name></member>
-  </compound>
-  <compound refid="class_azura_1_1_forward_plus_compute_scene" kind="class"><name>Azura::ForwardPlusComputeScene</name>
-    <member refid="class_azura_1_1_forward_plus_compute_scene_1aa718dc1c690e9daf0937cf47a0170442" kind="variable"><name>m_pass</name></member>
-    <member refid="class_azura_1_1_forward_plus_compute_scene_1ab5731b5240a90af37aad4fbffe06484e" kind="variable"><name>m_mainPool</name></member>
-    <member refid="class_azura_1_1_forward_plus_compute_scene_1abb950a25c25a8a40e156a8938ba8c805" kind="variable"><name>m_computePool</name></member>
-    <member refid="class_azura_1_1_forward_plus_compute_scene_1a3404cd71372523c64a93a55012bfcd45" kind="variable"><name>m_lightTexture</name></member>
-    <member refid="class_azura_1_1_forward_plus_compute_scene_1aeec5556e8782730bad9fa1f081d76d64" kind="variable"><name>m_lightUBO</name></member>
-    <member refid="class_azura_1_1_forward_plus_compute_scene_1a4d68e2a26f965ca596a49e0a83d19cd8" kind="variable"><name>m_frustums</name></member>
-    <member refid="class_azura_1_1_forward_plus_compute_scene_1a59c001447cedb4950ece9382d20042cb" kind="function"><name>ForwardPlusComputeScene</name></member>
-    <member refid="class_azura_1_1_forward_plus_compute_scene_1a9e5c1bee206bb20f9581d189ac80b34f" kind="function"><name>Initialize</name></member>
-    <member refid="class_azura_1_1_forward_plus_compute_scene_1a598286bde59c8734963218bf1eb7f5ed" kind="function"><name>Update</name></member>
-    <member refid="class_azura_1_1_forward_plus_compute_scene_1a0c804c5bee5c2569675f70d3b3d3c051" kind="function"><name>CleanUp</name></member>
-    <member refid="class_azura_1_1_forward_plus_compute_scene_1afaf732b53ec57d7aa4eeb42e99ec3dff" kind="function"><name>FillFrustums</name></member>
-  </compound>
-  <compound refid="class_azura_1_1_forward_scene" kind="class"><name>Azura::ForwardScene</name>
-    <member refid="class_azura_1_1_forward_scene_1a0f7bc55bb663ea9001458c51cc6ff643" kind="variable"><name>m_pass</name></member>
-    <member refid="class_azura_1_1_forward_scene_1a99a85a5280e4ee737ea2421194e5e40a" kind="variable"><name>m_mainPool</name></member>
-    <member refid="class_azura_1_1_forward_scene_1ab03aaa58f7a96603916459ad797151ae" kind="variable"><name>m_lightTexture</name></member>
-    <member refid="class_azura_1_1_forward_scene_1a7c03f43ac731e9bc74c4f6e32064972a" kind="function"><name>ForwardScene</name></member>
-    <member refid="class_azura_1_1_forward_scene_1a2fc834451563fe90256d45119a886bf0" kind="function"><name>Initialize</name></member>
-    <member refid="class_azura_1_1_forward_scene_1addc974785f7f1c50a4929cc696ba629d" kind="function"><name>Update</name></member>
-    <member refid="class_azura_1_1_forward_scene_1acf107281b52e042b8149ce1610486996" kind="function"><name>CleanUp</name></member>
-  </compound>
-  <compound refid="struct_azura_1_1_frustum" kind="struct"><name>Azura::Frustum</name>
-    <member refid="struct_azura_1_1_frustum_1abd8b368e088150cad485a733a47372a4" kind="variable"><name>m_planes</name></member>
   </compound>
   <compound refid="class_azura_1_1_math_1_1_geometry" kind="class"><name>Azura::Math::Geometry</name>
     <member refid="class_azura_1_1_math_1_1_geometry_1a7ff397714deef6a88c8e4edddc0ba032" kind="function"><name>Geometry</name></member>
@@ -1263,10 +940,6 @@
     <member refid="class_azura_1_1_hash_operator_1a233c6ce96b433628fd335aa68715ae01" kind="function"><name>evaluate</name></member>
     <member refid="class_azura_1_1_hash_operator_1ad80f18d8628539247990c39378430aad" kind="function"><name>evaluate</name></member>
   </compound>
-  <compound refid="class_hash_test" kind="class"><name>HashTest</name>
-    <member refid="class_hash_test_1a7aa8957b773cdd9dc4474e3175e9c477" kind="function"><name>HashTest</name></member>
-    <member refid="class_hash_test_1ac8f4b30dbdd6d036582b1d19a43f04a7" kind="function"><name>~HashTest</name></member>
-  </compound>
   <compound refid="class_azura_1_1_memory_1_1_heap_memory_buffer" kind="class"><name>Azura::Memory::HeapMemoryBuffer</name>
     <member refid="class_azura_1_1_memory_1_1_heap_memory_buffer_1aa645880a4c13da5027a53c22d4a63b13" kind="typedef"><name>Byte</name></member>
     <member refid="class_azura_1_1_memory_1_1_heap_memory_buffer_1aa0b8442cd96e9a78156dd669c124f3dc" kind="variable"><name>m_isAllocationAligned</name></member>
@@ -1280,8 +953,6 @@
     <member refid="class_azura_1_1_memory_1_1_heap_memory_buffer_1a8d4a8f946ef488e06c88540fef31f772" kind="function"><name>Allocate</name></member>
     <member refid="class_azura_1_1_memory_1_1_heap_memory_buffer_1ac92d39dfd4c38dd6b7f81f4ee0cddf6d" kind="function"><name>Deallocate</name></member>
     <member refid="class_azura_1_1_memory_1_1_heap_memory_buffer_1af6e5b09f3cccb80c8e1b754724654122" kind="function"><name>AllocateRaw</name></member>
-  </compound>
-  <compound refid="class_heap_memory_buffer_test" kind="class"><name>HeapMemoryBufferTest</name>
   </compound>
   <compound refid="class_azura_1_1_physics_1_1_i_cloth_physics_geometry" kind="class"><name>Azura::Physics::IClothPhysicsGeometry</name>
     <member refid="class_azura_1_1_physics_1_1_i_cloth_physics_geometry_1a96c120f3204c0ce597340f0d1d79bda7" kind="function"><name>SetAnchorOnIndex</name></member>
@@ -1309,117 +980,12 @@
     <member refid="class_azura_1_1_math_1_1_ico_sphere_1ade7351abe2a5a7b4b3262881c8fe9f6b" kind="function"><name>UVData</name></member>
     <member refid="class_azura_1_1_math_1_1_ico_sphere_1a241cc449d31f43cae476394cab130045" kind="function"><name>GetUVFormat</name></member>
   </compound>
-  <compound refid="class_dibella_1_1_image_handler" kind="class"><name>Dibella::ImageHandler</name>
-    <member refid="class_dibella_1_1_image_handler_1a97fae4b5f2a0299f3b924a737f83dcc1" kind="function"><name>~ImageHandler</name></member>
-    <member refid="class_dibella_1_1_image_handler_1a9c56fb31eb51a4124bbf46b37f01e54c" kind="function"><name>ImageHandler</name></member>
-    <member refid="class_dibella_1_1_image_handler_1ac92781cdd96db68cc3ad3a3d0055f77a" kind="function"><name>ImageHandler</name></member>
-    <member refid="class_dibella_1_1_image_handler_1a88a3ec90c34334c96f6c2a16172d4f74" kind="function"><name>operator=</name></member>
-    <member refid="class_dibella_1_1_image_handler_1ade91254cc9732e6f48630ba955affce4" kind="function"><name>operator=</name></member>
-    <member refid="class_dibella_1_1_image_handler_1ad737726f9ecd1aa69401473fd15316f4" kind="function"><name>GetWidth</name></member>
-    <member refid="class_dibella_1_1_image_handler_1a8c07ac7eaebcd69c1cb089d256502aa3" kind="function"><name>GetHeight</name></member>
-    <member refid="class_dibella_1_1_image_handler_1aed78e543809c92e78d9cd54e013097ae" kind="function"><name>GetPixel</name></member>
-  </compound>
   <compound refid="struct_azura_1_1_vulkan_1_1_image_transition" kind="struct"><name>Azura::Vulkan::ImageTransition</name>
     <member refid="struct_azura_1_1_vulkan_1_1_image_transition_1af387b48309a836ad80ed0a9033e89da8" kind="variable"><name>m_layout</name></member>
     <member refid="struct_azura_1_1_vulkan_1_1_image_transition_1a3a3f18e357f42d56114555ad968f3605" kind="variable"><name>m_accessMask</name></member>
     <member refid="struct_azura_1_1_vulkan_1_1_image_transition_1a215872272192a3b255b23f09fb91d9da" kind="variable"><name>m_stageMask</name></member>
   </compound>
-  <compound refid="class_azura_1_1_imported_cloth_mesh" kind="class"><name>Azura::ImportedClothMesh</name>
-    <member refid="class_azura_1_1_imported_cloth_mesh_1abd9120fa4e4f1d4c957d1b97fd4d39f6" kind="variable"><name>m_anchorIdx</name></member>
-    <member refid="class_azura_1_1_imported_cloth_mesh_1a27aed5f4b61e418ff1fe6b370ddd922d" kind="variable"><name>m_edgeTriangleMap</name></member>
-    <member refid="class_azura_1_1_imported_cloth_mesh_1aee2e16b6bc44520a22b2e0c1410deb1c" kind="variable"><name>m_vertices</name></member>
-    <member refid="class_azura_1_1_imported_cloth_mesh_1a28fa398a5344fcbd546e56a12d44c38a" kind="variable"><name>m_normals</name></member>
-    <member refid="class_azura_1_1_imported_cloth_mesh_1a1ccd353609bc54c32e5a0fce04be0ba3" kind="variable"><name>m_triangles</name></member>
-    <member refid="class_azura_1_1_imported_cloth_mesh_1ad2dca5cad63630f9eb6c5556d0802b1d" kind="variable"><name>m_distanceConstraints</name></member>
-    <member refid="class_azura_1_1_imported_cloth_mesh_1ab7613d54ac2b5907df7a909701cccb7a" kind="variable"><name>m_bendingConstraints</name></member>
-    <member refid="class_azura_1_1_imported_cloth_mesh_1aa644a8dbeadc1a25b3e25e69211157a3" kind="function"><name>ImportedClothMesh</name></member>
-    <member refid="class_azura_1_1_imported_cloth_mesh_1aa8606237f04538e85215f549f3ce5c11" kind="function"><name>ImportedClothMesh</name></member>
-    <member refid="class_azura_1_1_imported_cloth_mesh_1a5869180f5e6dfe791d4484226a2d353f" kind="function"><name>VertexDataSize</name></member>
-    <member refid="class_azura_1_1_imported_cloth_mesh_1afa63525b2eb7b1e3b1783ab7161b20ed" kind="function"><name>IndexDataSize</name></member>
-    <member refid="class_azura_1_1_imported_cloth_mesh_1a687b59b745b57161a9c428769328a618" kind="function"><name>VertexData</name></member>
-    <member refid="class_azura_1_1_imported_cloth_mesh_1a91a21e091d87c13dd89a9630aeba7cc5" kind="function"><name>IndexData</name></member>
-    <member refid="class_azura_1_1_imported_cloth_mesh_1af0a00cf53359ca597eeb06ed88bf4233" kind="function"><name>GetVertexFormat</name></member>
-    <member refid="class_azura_1_1_imported_cloth_mesh_1a2dc1b0feccddbe41d5daf5d41d619137" kind="function"><name>GetIndexFormat</name></member>
-    <member refid="class_azura_1_1_imported_cloth_mesh_1a961c262838c6261bc5b3267132e25abe" kind="function"><name>GetVertexCount</name></member>
-    <member refid="class_azura_1_1_imported_cloth_mesh_1ad780f26cb40fd0207a4ef76a9de4d5a4" kind="function"><name>GetIndexCount</name></member>
-    <member refid="class_azura_1_1_imported_cloth_mesh_1a398be9298dc330575ab03e2d59ddde8c" kind="function"><name>TotalDataSize</name></member>
-    <member refid="class_azura_1_1_imported_cloth_mesh_1a18d8a280505352f8b4d5c8615919bb9b" kind="function"><name>GetVertices</name></member>
-    <member refid="class_azura_1_1_imported_cloth_mesh_1ac3a7eae4e1ff12f5cbf2936cf41e644c" kind="function"><name>GetEdgeConstraints</name></member>
-    <member refid="class_azura_1_1_imported_cloth_mesh_1a872393e9a6fdcb70d8a40405adf202c9" kind="function"><name>GetBendingConstraints</name></member>
-    <member refid="class_azura_1_1_imported_cloth_mesh_1aff1bb0f449953ad59f8c301002358e13" kind="function"><name>GetAnchorIds</name></member>
-    <member refid="class_azura_1_1_imported_cloth_mesh_1abb1f7bfd091298176b1e225fd32825d8" kind="function"><name>GetVertices</name></member>
-    <member refid="class_azura_1_1_imported_cloth_mesh_1ac17092e53c6cba245d961f63841aa983" kind="function"><name>GetNormals</name></member>
-    <member refid="class_azura_1_1_imported_cloth_mesh_1a9a17b792336795cfa797b3b3de6b78d7" kind="function"><name>GetNormals</name></member>
-    <member refid="class_azura_1_1_imported_cloth_mesh_1abb5634ee1f9dc4a6eb14b824d7adea96" kind="function"><name>AddEdgeConstraint</name></member>
-    <member refid="class_azura_1_1_imported_cloth_mesh_1a5ed9e873ac8693f68f18a1690ada63fe" kind="function"><name>NormalDataSize</name></member>
-    <member refid="class_azura_1_1_imported_cloth_mesh_1a0255dc9116bdd95d3dd7b4f55c318592" kind="function"><name>NormalData</name></member>
-    <member refid="class_azura_1_1_imported_cloth_mesh_1ae18aa0b6db39ee44bcb4da06f36cd78a" kind="function"><name>GetNormalFormat</name></member>
-    <member refid="class_azura_1_1_imported_cloth_mesh_1a57a7f7dc798aa5149b63e23bd395eeb9" kind="function"><name>UVDataSize</name></member>
-    <member refid="class_azura_1_1_imported_cloth_mesh_1ae9a243c7884b0e071b34fd1fdef79656" kind="function"><name>UVData</name></member>
-    <member refid="class_azura_1_1_imported_cloth_mesh_1afa2e213a1e1e601873cf6b290efe65d8" kind="function"><name>GetUVFormat</name></member>
-    <member refid="class_azura_1_1_imported_cloth_mesh_1a8b531f691ccf78b62057c0261bf9bb64" kind="function"><name>AddEdgeTriangleNeighbor</name></member>
-  </compound>
-  <compound refid="struct_azura_1_1_instance" kind="struct"><name>Azura::Instance</name>
-    <member refid="struct_azura_1_1_instance_1a19874f8983e3f4edc1d66de24941f963" kind="variable"><name>m_pos</name></member>
-  </compound>
-  <compound refid="struct_instance" kind="struct"><name>Instance</name>
-    <member refid="struct_instance_1af0a484ea11f7afa131b63aa7fa02ac4c" kind="variable"><name>m_pos</name></member>
-  </compound>
-  <compound refid="class_dibella_1_1_integrator" kind="class"><name>Dibella::Integrator</name>
-  </compound>
-  <compound refid="class_dibella_1_1_intersection" kind="class"><name>Dibella::Intersection</name>
-    <member refid="class_dibella_1_1_intersection_1a737b3cb474f324a74e7da2d3aeca10c9" kind="friend"><name>SceneObject</name></member>
-    <member refid="class_dibella_1_1_intersection_1a1e1ef8352d0a310bace7f7a3307d1378" kind="friend"><name>Shape</name></member>
-    <member refid="class_dibella_1_1_intersection_1a806061f0e366633a012e98e2ab0959ea" kind="variable"><name>mPoint</name></member>
-    <member refid="class_dibella_1_1_intersection_1a323fe605c16c385302c67fbebdcf47bd" kind="variable"><name>mNormalGeometric</name></member>
-    <member refid="class_dibella_1_1_intersection_1a0b391328943df3acf0e6c4956dc87129" kind="variable"><name>mNormalShading</name></member>
-    <member refid="class_dibella_1_1_intersection_1a02eebaa88fa2962c999c3dde15cb1f0a" kind="variable"><name>mUV</name></member>
-    <member refid="class_dibella_1_1_intersection_1a16c01dbeaf84facb43f07e9fdb822aaa" kind="variable"><name>mParamT</name></member>
-    <member refid="class_dibella_1_1_intersection_1a2e2bbc6710a4f785bdaa2a9392894660" kind="variable"><name>mTargetHit</name></member>
-    <member refid="class_dibella_1_1_intersection_1acc2980b1323ce40a259779008c98c1b4" kind="variable"><name>mBSDF</name></member>
-    <member refid="class_dibella_1_1_intersection_1a4ba75b0513bfac8ae2c41329bc9f4df0" kind="variable"><name>mTangent</name></member>
-    <member refid="class_dibella_1_1_intersection_1a16092b8fcd3c95330e767891f2828620" kind="variable"><name>mBitangent</name></member>
-    <member refid="class_dibella_1_1_intersection_1a16589796b22fa3b75477d1c2ae0a00e3" kind="function"><name>Intersection</name></member>
-    <member refid="class_dibella_1_1_intersection_1ae54b485f57eb2fa8105304ef33824066" kind="function"><name>ProduceBSDF</name></member>
-    <member refid="class_dibella_1_1_intersection_1a270ad1c91a7f14d2dbdb934fa19ff47a" kind="function"><name>Le</name></member>
-    <member refid="class_dibella_1_1_intersection_1ab1ee05f07432300214f6f17cde2c634b" kind="function"><name>SpawnRay</name></member>
-  </compound>
   <compound refid="class_azura_1_1_physics_1_1_i_physics_geometry" kind="class"><name>Azura::Physics::IPhysicsGeometry</name>
-  </compound>
-  <compound refid="class_azura_1_1_containers_1_1_vector_1_1_iterator" kind="class"><name>Azura::Containers::Vector::Iterator</name>
-    <member refid="class_azura_1_1_containers_1_1_vector_1_1_iterator_1aecb5d648b44a857de1f86493ea88a728" kind="typedef"><name>iterator_category</name></member>
-    <member refid="class_azura_1_1_containers_1_1_vector_1_1_iterator_1af07ed38fc881e1a2ec7c5bbe567e493b" kind="typedef"><name>value_type</name></member>
-    <member refid="class_azura_1_1_containers_1_1_vector_1_1_iterator_1a2e87006386373176d26f9033d574472f" kind="typedef"><name>difference_type</name></member>
-    <member refid="class_azura_1_1_containers_1_1_vector_1_1_iterator_1adaa4c0480ed1e2a5f04d8c7e84e80349" kind="typedef"><name>pointer</name></member>
-    <member refid="class_azura_1_1_containers_1_1_vector_1_1_iterator_1a23f491d759145ca662290968dbc1cf51" kind="typedef"><name>reference</name></member>
-    <member refid="class_azura_1_1_containers_1_1_vector_1_1_iterator_1a35a2f4fc19a31a9b8b2a74db3a1b2e83" kind="variable"><name>mPtr</name></member>
-    <member refid="class_azura_1_1_containers_1_1_vector_1_1_iterator_1a42e528c6886429b3f0b379ce6320ceb3" kind="variable"><name>mIndex</name></member>
-    <member refid="class_azura_1_1_containers_1_1_vector_1_1_iterator_1acfa041ed3ef71f6040f39d0e09b4c8f7" kind="function"><name>Iterator</name></member>
-    <member refid="class_azura_1_1_containers_1_1_vector_1_1_iterator_1a162f9659467fa77d572fa4fb5b9ec3bb" kind="function"><name>~Iterator</name></member>
-    <member refid="class_azura_1_1_containers_1_1_vector_1_1_iterator_1a574766424a2a773a7db57066acc04d66" kind="function"><name>Iterator</name></member>
-    <member refid="class_azura_1_1_containers_1_1_vector_1_1_iterator_1af3149f451bcbab6e20a039bb875bf556" kind="function"><name>operator=</name></member>
-    <member refid="class_azura_1_1_containers_1_1_vector_1_1_iterator_1a76b9d4e3b9789e385abd29669f669bad" kind="function"><name>Iterator</name></member>
-    <member refid="class_azura_1_1_containers_1_1_vector_1_1_iterator_1a3f27d5a62b0c22537083afb53069b0b6" kind="function"><name>Iterator</name></member>
-    <member refid="class_azura_1_1_containers_1_1_vector_1_1_iterator_1a7cf9fd2f5f7a8cebd0934aaafbbcaf63" kind="function"><name>operator=</name></member>
-    <member refid="class_azura_1_1_containers_1_1_vector_1_1_iterator_1a979da8f970d715c01ab7534f6a3c4de0" kind="function"><name>operator++</name></member>
-    <member refid="class_azura_1_1_containers_1_1_vector_1_1_iterator_1af605a2a5a0702ed63a75c78cce2fcdf6" kind="function"><name>operator++</name></member>
-    <member refid="class_azura_1_1_containers_1_1_vector_1_1_iterator_1a6f002266c0919cb3df3833e894402612" kind="function"><name>operator--</name></member>
-    <member refid="class_azura_1_1_containers_1_1_vector_1_1_iterator_1a3d331aba5acd78bdc362fc1554866a29" kind="function"><name>operator--</name></member>
-    <member refid="class_azura_1_1_containers_1_1_vector_1_1_iterator_1ac43354d9be9c91b10c46d2f2ad8e26d2" kind="function"><name>operator==</name></member>
-    <member refid="class_azura_1_1_containers_1_1_vector_1_1_iterator_1af223ef31b943242205c0189d9488067f" kind="function"><name>operator!=</name></member>
-    <member refid="class_azura_1_1_containers_1_1_vector_1_1_iterator_1a34e5644a80c5242f60bd1c5887a3760e" kind="function"><name>operator&lt;</name></member>
-    <member refid="class_azura_1_1_containers_1_1_vector_1_1_iterator_1abc17caa8b283404518a014eb5f246569" kind="function"><name>operator&lt;=</name></member>
-    <member refid="class_azura_1_1_containers_1_1_vector_1_1_iterator_1a4c3d985c01083c455e7165bfe9eb2317" kind="function"><name>operator&gt;</name></member>
-    <member refid="class_azura_1_1_containers_1_1_vector_1_1_iterator_1a686007e1bbb2ccb1f7dae61ad86b34ad" kind="function"><name>operator&gt;=</name></member>
-    <member refid="class_azura_1_1_containers_1_1_vector_1_1_iterator_1a2506b2d02a37e3d7f788d07b544729d8" kind="function"><name>operator+</name></member>
-    <member refid="class_azura_1_1_containers_1_1_vector_1_1_iterator_1ae34a589281bfdccbbdd84787b347db54" kind="function"><name>operator+=</name></member>
-    <member refid="class_azura_1_1_containers_1_1_vector_1_1_iterator_1a7171a0531c79f825cea673477810a5ee" kind="function"><name>operator-</name></member>
-    <member refid="class_azura_1_1_containers_1_1_vector_1_1_iterator_1a0ea9eb84d4befa12d31cacb4fc34ac6b" kind="function"><name>operator-=</name></member>
-    <member refid="class_azura_1_1_containers_1_1_vector_1_1_iterator_1a86667234a77b035806a7f45b7a55e7c0" kind="function"><name>operator-</name></member>
-    <member refid="class_azura_1_1_containers_1_1_vector_1_1_iterator_1ab3ef0b00ab5000868683dccdf4c87014" kind="function"><name>operator*</name></member>
-    <member refid="class_azura_1_1_containers_1_1_vector_1_1_iterator_1af9de1ca39787b15d06b3ef68abc6ebfa" kind="function"><name>operator-&gt;</name></member>
-    <member refid="class_azura_1_1_containers_1_1_vector_1_1_iterator_1a67a32e3dcf1bdf66c8ce5436a1f4fbc5" kind="function"><name>operator[]</name></member>
-    <member refid="class_azura_1_1_containers_1_1_vector_1_1_iterator_1a93661b1094ed6450a2921e0ff69b46ff" kind="friend"><name>operator-</name></member>
   </compound>
   <compound refid="class_azura_1_1_containers_1_1_array_1_1_iterator" kind="class"><name>Azura::Containers::Array::Iterator</name>
     <member refid="class_azura_1_1_containers_1_1_array_1_1_iterator_1a112a2c90d933d41b98430e1fe1d1584e" kind="typedef"><name>iterator_category</name></member>
@@ -1456,6 +1022,41 @@
     <member refid="class_azura_1_1_containers_1_1_array_1_1_iterator_1a6d8f3af6752b3649948869cd4bd3c13f" kind="function"><name>operator[]</name></member>
     <member refid="class_azura_1_1_containers_1_1_array_1_1_iterator_1a93661b1094ed6450a2921e0ff69b46ff" kind="friend"><name>operator-</name></member>
   </compound>
+  <compound refid="class_azura_1_1_containers_1_1_vector_1_1_iterator" kind="class"><name>Azura::Containers::Vector::Iterator</name>
+    <member refid="class_azura_1_1_containers_1_1_vector_1_1_iterator_1aecb5d648b44a857de1f86493ea88a728" kind="typedef"><name>iterator_category</name></member>
+    <member refid="class_azura_1_1_containers_1_1_vector_1_1_iterator_1af07ed38fc881e1a2ec7c5bbe567e493b" kind="typedef"><name>value_type</name></member>
+    <member refid="class_azura_1_1_containers_1_1_vector_1_1_iterator_1a2e87006386373176d26f9033d574472f" kind="typedef"><name>difference_type</name></member>
+    <member refid="class_azura_1_1_containers_1_1_vector_1_1_iterator_1adaa4c0480ed1e2a5f04d8c7e84e80349" kind="typedef"><name>pointer</name></member>
+    <member refid="class_azura_1_1_containers_1_1_vector_1_1_iterator_1a23f491d759145ca662290968dbc1cf51" kind="typedef"><name>reference</name></member>
+    <member refid="class_azura_1_1_containers_1_1_vector_1_1_iterator_1a35a2f4fc19a31a9b8b2a74db3a1b2e83" kind="variable"><name>mPtr</name></member>
+    <member refid="class_azura_1_1_containers_1_1_vector_1_1_iterator_1a42e528c6886429b3f0b379ce6320ceb3" kind="variable"><name>mIndex</name></member>
+    <member refid="class_azura_1_1_containers_1_1_vector_1_1_iterator_1acfa041ed3ef71f6040f39d0e09b4c8f7" kind="function"><name>Iterator</name></member>
+    <member refid="class_azura_1_1_containers_1_1_vector_1_1_iterator_1a162f9659467fa77d572fa4fb5b9ec3bb" kind="function"><name>~Iterator</name></member>
+    <member refid="class_azura_1_1_containers_1_1_vector_1_1_iterator_1a574766424a2a773a7db57066acc04d66" kind="function"><name>Iterator</name></member>
+    <member refid="class_azura_1_1_containers_1_1_vector_1_1_iterator_1af3149f451bcbab6e20a039bb875bf556" kind="function"><name>operator=</name></member>
+    <member refid="class_azura_1_1_containers_1_1_vector_1_1_iterator_1a76b9d4e3b9789e385abd29669f669bad" kind="function"><name>Iterator</name></member>
+    <member refid="class_azura_1_1_containers_1_1_vector_1_1_iterator_1a3f27d5a62b0c22537083afb53069b0b6" kind="function"><name>Iterator</name></member>
+    <member refid="class_azura_1_1_containers_1_1_vector_1_1_iterator_1a7cf9fd2f5f7a8cebd0934aaafbbcaf63" kind="function"><name>operator=</name></member>
+    <member refid="class_azura_1_1_containers_1_1_vector_1_1_iterator_1a979da8f970d715c01ab7534f6a3c4de0" kind="function"><name>operator++</name></member>
+    <member refid="class_azura_1_1_containers_1_1_vector_1_1_iterator_1af605a2a5a0702ed63a75c78cce2fcdf6" kind="function"><name>operator++</name></member>
+    <member refid="class_azura_1_1_containers_1_1_vector_1_1_iterator_1a6f002266c0919cb3df3833e894402612" kind="function"><name>operator--</name></member>
+    <member refid="class_azura_1_1_containers_1_1_vector_1_1_iterator_1a3d331aba5acd78bdc362fc1554866a29" kind="function"><name>operator--</name></member>
+    <member refid="class_azura_1_1_containers_1_1_vector_1_1_iterator_1ac43354d9be9c91b10c46d2f2ad8e26d2" kind="function"><name>operator==</name></member>
+    <member refid="class_azura_1_1_containers_1_1_vector_1_1_iterator_1af223ef31b943242205c0189d9488067f" kind="function"><name>operator!=</name></member>
+    <member refid="class_azura_1_1_containers_1_1_vector_1_1_iterator_1a34e5644a80c5242f60bd1c5887a3760e" kind="function"><name>operator&lt;</name></member>
+    <member refid="class_azura_1_1_containers_1_1_vector_1_1_iterator_1abc17caa8b283404518a014eb5f246569" kind="function"><name>operator&lt;=</name></member>
+    <member refid="class_azura_1_1_containers_1_1_vector_1_1_iterator_1a4c3d985c01083c455e7165bfe9eb2317" kind="function"><name>operator&gt;</name></member>
+    <member refid="class_azura_1_1_containers_1_1_vector_1_1_iterator_1a686007e1bbb2ccb1f7dae61ad86b34ad" kind="function"><name>operator&gt;=</name></member>
+    <member refid="class_azura_1_1_containers_1_1_vector_1_1_iterator_1a2506b2d02a37e3d7f788d07b544729d8" kind="function"><name>operator+</name></member>
+    <member refid="class_azura_1_1_containers_1_1_vector_1_1_iterator_1ae34a589281bfdccbbdd84787b347db54" kind="function"><name>operator+=</name></member>
+    <member refid="class_azura_1_1_containers_1_1_vector_1_1_iterator_1a7171a0531c79f825cea673477810a5ee" kind="function"><name>operator-</name></member>
+    <member refid="class_azura_1_1_containers_1_1_vector_1_1_iterator_1a0ea9eb84d4befa12d31cacb4fc34ac6b" kind="function"><name>operator-=</name></member>
+    <member refid="class_azura_1_1_containers_1_1_vector_1_1_iterator_1a86667234a77b035806a7f45b7a55e7c0" kind="function"><name>operator-</name></member>
+    <member refid="class_azura_1_1_containers_1_1_vector_1_1_iterator_1ab3ef0b00ab5000868683dccdf4c87014" kind="function"><name>operator*</name></member>
+    <member refid="class_azura_1_1_containers_1_1_vector_1_1_iterator_1af9de1ca39787b15d06b3ef68abc6ebfa" kind="function"><name>operator-&gt;</name></member>
+    <member refid="class_azura_1_1_containers_1_1_vector_1_1_iterator_1a67a32e3dcf1bdf66c8ce5436a1f4fbc5" kind="function"><name>operator[]</name></member>
+    <member refid="class_azura_1_1_containers_1_1_vector_1_1_iterator_1a93661b1094ed6450a2921e0ff69b46ff" kind="friend"><name>operator-</name></member>
+  </compound>
   <compound refid="struct_azura_1_1_key_event" kind="struct"><name>Azura::KeyEvent</name>
     <member refid="struct_azura_1_1_key_event_1afa0f6cdecf9225380c9ab847e52ad996" kind="variable"><name>m_keyValue</name></member>
     <member refid="struct_azura_1_1_key_event_1afaa12330db5108c24092ae6049953e2f" kind="variable"><name>m_internalType</name></member>
@@ -1465,24 +1066,6 @@
   <compound refid="struct_azura_1_1_layer_subresource" kind="struct"><name>Azura::LayerSubresource</name>
     <member refid="struct_azura_1_1_layer_subresource_1a3381b718b0c7d508767624437cd6f63f" kind="variable"><name>m_layerCount</name></member>
     <member refid="struct_azura_1_1_layer_subresource_1aeddd78637be7934498dbd5fd9e20283b" kind="variable"><name>m_baseLayer</name></member>
-  </compound>
-  <compound refid="class_azura_1_1_light_texture" kind="class"><name>Azura::LightTexture</name>
-    <member refid="class_azura_1_1_light_texture_1aea369ab5acaddcf1ba692e4037ed766d" kind="variable"><name>m_buffer</name></member>
-    <member refid="class_azura_1_1_light_texture_1aedfc7100719d28440f41678e6795a335" kind="variable"><name>m_numLights</name></member>
-    <member refid="class_azura_1_1_light_texture_1a827379ec05eaa921ef7f87b99900abb8" kind="variable"><name>m_pixelsPerLight</name></member>
-    <member refid="class_azura_1_1_light_texture_1a4f91ed9234ec163adfb340f846403b44" kind="function"><name>LightTexture</name></member>
-    <member refid="class_azura_1_1_light_texture_1aa868c2e2d02ae108100a07ed45ca1f0e" kind="function"><name>Fill</name></member>
-    <member refid="class_azura_1_1_light_texture_1a5433c523763864e43a9e692c26f1d887" kind="function"><name>GetBuffer</name></member>
-    <member refid="class_azura_1_1_light_texture_1aa75f3f6b41dced688f66c0cc8a89fc98" kind="function"><name>GetSize</name></member>
-    <member refid="class_azura_1_1_light_texture_1a243b94a06abbe720f2d077b17faae172" kind="function"><name>GetTextureDesc</name></member>
-  </compound>
-  <compound refid="struct_azura_1_1_light_u_b_o" kind="struct"><name>Azura::LightUBO</name>
-    <member refid="struct_azura_1_1_light_u_b_o_1ac17026bf181fa9ef15bd2918a13b9368" kind="variable"><name>m_view</name></member>
-    <member refid="struct_azura_1_1_light_u_b_o_1a18caa7abb9ad25fad6ee850633d1d2d6" kind="variable"><name>m_nearPlane</name></member>
-    <member refid="struct_azura_1_1_light_u_b_o_1a1e0c92377c4d780ea0e565f7c0fd77e3" kind="variable"><name>m_farPlane</name></member>
-    <member refid="struct_azura_1_1_light_u_b_o_1a7323555d1b701e40eb2743903d96afd3" kind="variable"><name>m_timeDelta</name></member>
-    <member refid="struct_azura_1_1_light_u_b_o_1ad6d5fe1ebafc3c125564beffd8c1410e" kind="variable"><name>_pad1</name></member>
-    <member refid="struct_azura_1_1_light_u_b_o_1aed32c1069e5cae82d91953a2c1b63dbb" kind="variable"><name>m_proj</name></member>
   </compound>
   <compound refid="class_azura_1_1_log" kind="class"><name>Azura::Log</name>
     <member refid="class_azura_1_1_log_1ac21f3014964a775c0584bad37fa9fc28" kind="variable"><name>m_debugLevel</name></member>
@@ -1516,15 +1099,6 @@
     <member refid="struct_azura_1_1_mapped_g_p_u_buffer_1a6d8d7bf23780541e1215e052fe87db51" kind="variable"><name>m_entries</name></member>
     <member refid="struct_azura_1_1_mapped_g_p_u_buffer_1aad8d16e1e8ebf21e69de19165d4415ab" kind="function"><name>MappedGPUBuffer</name></member>
     <member refid="struct_azura_1_1_mapped_g_p_u_buffer_1ad2c527f9e274226e4ef7e9dea37de132" kind="function"><name>SubAllocate</name></member>
-  </compound>
-  <compound refid="class_dibella_1_1_material" kind="class"><name>Dibella::Material</name>
-    <member refid="class_dibella_1_1_material_1a3cd5086acf6ad417c2b5bd5fd9992040" kind="function"><name>~Material</name></member>
-    <member refid="class_dibella_1_1_material_1a1c2021eef1d28ca52fb5084a299558ea" kind="function"><name>Material</name></member>
-    <member refid="class_dibella_1_1_material_1a9695cb5bae2b8bad81401d76414b83e7" kind="function"><name>Material</name></member>
-    <member refid="class_dibella_1_1_material_1a833f5c807919a8175e97de76321c50ba" kind="function"><name>operator=</name></member>
-    <member refid="class_dibella_1_1_material_1a1fc0073b6a023e6468205dc8556f9f8c" kind="function"><name>operator=</name></member>
-    <member refid="class_dibella_1_1_material_1ada820c6dea4fa4d5e246ea93d79ee9d5" kind="function"><name>GenerateBSDF</name></member>
-    <member refid="class_dibella_1_1_material_1af342d92a2c38ce653a832712ade8979b" kind="function"><name>GetImageColor</name></member>
   </compound>
   <compound refid="class_matrix_multiplication_fixture" kind="class"><name>MatrixMultiplicationFixture</name>
     <member refid="class_matrix_multiplication_fixture_1a1e30509c6567b14495313f4a008da59f" kind="variable"><name>m_data1</name></member>
@@ -1563,21 +1137,6 @@
   <compound refid="struct_azura_1_1_memory_requirements" kind="struct"><name>Azura::MemoryRequirements</name>
     <member refid="struct_azura_1_1_memory_requirements_1a2d6cbaf6c129132dbb70c05ed8d14fe4" kind="variable"><name>m_stagingBufferSize</name></member>
   </compound>
-  <compound refid="struct_azura_1_1_mesh_object" kind="struct"><name>Azura::MeshObject</name>
-    <member refid="struct_azura_1_1_mesh_object_1a8f5ef6376b5fe9150a45b2484a439a2a" kind="variable"><name>p_interface</name></member>
-    <member refid="struct_azura_1_1_mesh_object_1a57655f79bd39b1eeee3feba7d41843e7" kind="variable"><name>m_vertexData</name></member>
-    <member refid="struct_azura_1_1_mesh_object_1a89a4fc67d510f3fb7a33c9ec1591b8be" kind="variable"><name>m_normalData</name></member>
-    <member refid="struct_azura_1_1_mesh_object_1a243ecb982ab87770506cd4ca3d2584a5" kind="variable"><name>m_uvData</name></member>
-    <member refid="struct_azura_1_1_mesh_object_1a66c0beb5c64cdc72b0fd3cec9583093c" kind="variable"><name>m_indexData</name></member>
-    <member refid="struct_azura_1_1_mesh_object_1aa696e0524aad07ce08835bc97ac93f56" kind="variable"><name>m_numVertices</name></member>
-    <member refid="struct_azura_1_1_mesh_object_1a4012032e29c602199425403302709272" kind="variable"><name>m_vertexDataSize</name></member>
-    <member refid="struct_azura_1_1_mesh_object_1ac3fb07853bbb866e97f4dcbe0255c188" kind="variable"><name>m_numIndices</name></member>
-    <member refid="struct_azura_1_1_mesh_object_1ac2689dd4c6a56d79fb3ea0b265a0cc28" kind="variable"><name>m_indexDataSize</name></member>
-    <member refid="struct_azura_1_1_mesh_object_1a6dfed040e1a6f962dbf2c0734235da1f" kind="variable"><name>m_numUV</name></member>
-    <member refid="struct_azura_1_1_mesh_object_1aea46f867467b310cf3ecfbf4cfdf43a4" kind="variable"><name>m_uvDataSize</name></member>
-    <member refid="struct_azura_1_1_mesh_object_1a10989ce0dd86c65d493c7bea44ddc6ec" kind="variable"><name>m_numNormals</name></member>
-    <member refid="struct_azura_1_1_mesh_object_1a7d38346b57b776100eaf21f1a0474797" kind="variable"><name>m_normalDataSize</name></member>
-  </compound>
   <compound refid="class_azura_1_1_memory_1_1_monotonic_allocator" kind="class"><name>Azura::Memory::MonotonicAllocator</name>
     <member refid="class_azura_1_1_memory_1_1_monotonic_allocator_1a378bf411770d7dbcbbe936712c7cd4d8" kind="variable"><name>m_headPtr</name></member>
     <member refid="class_azura_1_1_memory_1_1_monotonic_allocator_1a20735d1cf52f413c47651a58eb486253" kind="variable"><name>m_sourceBuffer</name></member>
@@ -1591,34 +1150,14 @@
     <member refid="class_azura_1_1_memory_1_1_monotonic_allocator_1a5a3a0d00854453236515762f28a0bfe7" kind="function"><name>Allocate</name></member>
     <member refid="class_azura_1_1_memory_1_1_monotonic_allocator_1a6f81ae431111a6db680ca159d9a575e1" kind="function"><name>Deallocate</name></member>
   </compound>
-  <compound refid="class_monotonic_allocator_test" kind="class"><name>MonotonicAllocatorTest</name>
-  </compound>
   <compound refid="struct_azura_1_1_mouse_event" kind="struct"><name>Azura::MouseEvent</name>
     <member refid="struct_azura_1_1_mouse_event_1a3dd3abf6c934c5ef25027edd31991d4e" kind="variable"><name>m_internalType</name></member>
     <member refid="struct_azura_1_1_mouse_event_1a765de796eb1f23d5824a187838b6a7b2" kind="variable"><name>m_eventX</name></member>
     <member refid="struct_azura_1_1_mouse_event_1a5ad730a51b2d042cf79936474903a55b" kind="variable"><name>m_eventY</name></member>
     <member refid="struct_azura_1_1_mouse_event_1ab7ea97825acaeda7a796e36c1ce633ba" kind="function"><name>MouseEvent</name></member>
   </compound>
-  <compound refid="struct_azura_1_1_normals_pass_data" kind="struct"><name>Azura::NormalsPassData</name>
-    <member refid="struct_azura_1_1_normals_pass_data_1a4022d53a6d68fce4ae453b883e882d8a" kind="variable"><name>m_uboSlot</name></member>
-    <member refid="struct_azura_1_1_normals_pass_data_1a10c16da21c29ba60f2ead73277f99cc9" kind="variable"><name>m_passId</name></member>
-  </compound>
-  <compound refid="struct_azura_1_1_normal_u_b_o" kind="struct"><name>Azura::NormalUBO</name>
-    <member refid="struct_azura_1_1_normal_u_b_o_1a59de0141e4ac39fb21e7c61355bce81f" kind="variable"><name>m_numVertices</name></member>
-    <member refid="struct_azura_1_1_normal_u_b_o_1a2205c8103e01c6ae9c1be00175858251" kind="variable"><name>m_numTriangles</name></member>
-    <member refid="struct_azura_1_1_normal_u_b_o_1a81b4c9a7f1a56bed2e117f1642eb6c41" kind="variable"><name>m_pad</name></member>
-  </compound>
   <compound refid="class_azura_1_1_not_implemented_exception" kind="class"><name>Azura::NotImplementedException</name>
     <member refid="class_azura_1_1_not_implemented_exception_1a5703bfe93d57821bc2c3fc0eb79938f5" kind="function"><name>what</name></member>
-  </compound>
-  <compound refid="struct_azura_1_1_pass_data" kind="struct"><name>Azura::PassData</name>
-    <member refid="struct_azura_1_1_pass_data_1ae000f81623aa354e8b439ac6d23b720b" kind="variable"><name>m_clothId</name></member>
-    <member refid="struct_azura_1_1_pass_data_1a3d28b13c20b69a8b322e767f64e21aed" kind="variable"><name>m_sphereId</name></member>
-    <member refid="struct_azura_1_1_pass_data_1ab9dab72f9de2fe4050f1c7bff141c126" kind="variable"><name>m_sceneUBOSlot</name></member>
-    <member refid="struct_azura_1_1_pass_data_1ad4aac635c6c4dad1916276407445ce50" kind="variable"><name>m_vertexSlot</name></member>
-    <member refid="struct_azura_1_1_pass_data_1a815b1511c516646236111526ddb14a0f" kind="variable"><name>m_normalSlot</name></member>
-    <member refid="struct_azura_1_1_pass_data_1a7a1d187e60efd31579a4323a5d1df113" kind="variable"><name>m_planeId</name></member>
-    <member refid="struct_azura_1_1_pass_data_1a7e71e29e14d7f6ad400e4aaa0d9b086d" kind="variable"><name>m_shehzanId</name></member>
   </compound>
   <compound refid="struct_azura_1_1_pipeline_pass_create_info" kind="struct"><name>Azura::PipelinePassCreateInfo</name>
     <member refid="struct_azura_1_1_pipeline_pass_create_info_1a09b52fc77ecbba70bb3d9d16623e15e2" kind="typedef"><name>Shaders</name></member>
@@ -1667,16 +1206,6 @@
     <member refid="class_azura_1_1_math_1_1_plane_1aaac856a44bc6eaacc3ad37c7e677b74f" kind="function"><name>NormalData</name></member>
     <member refid="class_azura_1_1_math_1_1_plane_1ab290cfee76a7bc0bf08028b433f52aa8" kind="function"><name>GetNormalFormat</name></member>
     <member refid="class_azura_1_1_math_1_1_plane_1a00a6fead9b9c8a6243fc4aa3c4e6a390" kind="function"><name>GetUVFormat</name></member>
-  </compound>
-  <compound refid="struct_azura_1_1_plane" kind="struct"><name>Azura::Plane</name>
-    <member refid="struct_azura_1_1_plane_1a4c436de24b5c6caaa25e54fa4cdacccf" kind="variable"><name>m_normal</name></member>
-    <member refid="struct_azura_1_1_plane_1add4ce28edeecaec8cfd7a1aa2d4b6303" kind="variable"><name>m_distanceToOrigin</name></member>
-  </compound>
-  <compound refid="struct_azura_1_1_point_light" kind="struct"><name>Azura::PointLight</name>
-    <member refid="struct_azura_1_1_point_light_1a1a17909a5e5b4153ad547ea3de6b56fa" kind="variable"><name>m_position</name></member>
-    <member refid="struct_azura_1_1_point_light_1a310aeee93fc5c5db576ca8ea09ce5b03" kind="variable"><name>m_radius</name></member>
-    <member refid="struct_azura_1_1_point_light_1abeb777a7ecc1a2db020d38a6a297c414" kind="variable"><name>m_color</name></member>
-    <member refid="struct_azura_1_1_point_light_1a865f127ed2d709c6b49ee3092e5a9dbf" kind="variable"><name>_pad</name></member>
   </compound>
   <compound refid="class_azura_1_1_polar_camera" kind="class"><name>Azura::PolarCamera</name>
     <member refid="class_azura_1_1_polar_camera_1aba08b0bb657e98ef135fa13e851ae856" kind="variable"><name>m_theta</name></member>
@@ -1730,15 +1259,6 @@
     <member refid="class_azura_1_1_memory_1_1_range_allocator_1a69c14ff70f62adb5bc0f40dc15cc071a" kind="function"><name>Allocate</name></member>
     <member refid="class_azura_1_1_memory_1_1_range_allocator_1aeb29815c8bc7c1f2081c9c125620727c" kind="function"><name>Deallocate</name></member>
   </compound>
-  <compound refid="class_range_allocator_test" kind="class"><name>RangeAllocatorTest</name>
-  </compound>
-  <compound refid="class_dibella_1_1_ray" kind="class"><name>Dibella::Ray</name>
-    <member refid="class_dibella_1_1_ray_1a49e4cb18ecebb4904d5f6baafb655ffc" kind="variable"><name>mOrigin</name></member>
-    <member refid="class_dibella_1_1_ray_1a3d3a0963aa09ab157746154a7355bc1e" kind="variable"><name>mDirection</name></member>
-    <member refid="class_dibella_1_1_ray_1a6ae6ded08c4a54ec5ecf153e90e68e20" kind="function"><name>Ray</name></member>
-    <member refid="class_dibella_1_1_ray_1a6e4126c406aa956041fda133720d2231" kind="function"><name>Ray</name></member>
-    <member refid="class_dibella_1_1_ray_1ab4303402ccf167c2ee3eca410539c2b3" kind="function"><name>GetTransformedCopy</name></member>
-  </compound>
   <compound refid="class_azura_1_1_renderer" kind="class"><name>Azura::Renderer</name>
     <member refid="class_azura_1_1_renderer_1a841f3383edb98b38eb159e5d5787f0e2" kind="variable"><name>m_descriptorSlots</name></member>
     <member refid="class_azura_1_1_renderer_1a87d7051f01160aa69535345254c2a0a8" kind="variable"><name>m_descriptorSetTable</name></member>
@@ -1775,11 +1295,6 @@
     <member refid="class_azura_1_1_renderer_1aa4c13c392bad69615bb9dabdc1be9c23" kind="function"><name>SetCurrentFrame</name></member>
     <member refid="class_azura_1_1_renderer_1ad199a717e1f08ba31264a0e6857f0673" kind="function"><name>AddShader</name></member>
   </compound>
-  <compound refid="class_renderer_test" kind="class"><name>RendererTest</name>
-    <member refid="class_renderer_test_1a50727a7607864fed4b5961f15ef7ce6b" kind="variable"><name>log_TestRenderer</name></member>
-    <member refid="class_renderer_test_1ab61dd01cae78ae614351557765de9f9d" kind="function"><name>RendererTest</name></member>
-    <member refid="class_renderer_test_1a08b9c9164a8278e586b846b8f46d3d3d" kind="function"><name>~RendererTest</name></member>
-  </compound>
   <compound refid="struct_azura_1_1_render_pass_requirements" kind="struct"><name>Azura::RenderPassRequirements</name>
     <member refid="struct_azura_1_1_render_pass_requirements_1ad7386da65e9e1d9f2b82db3f039d5ef8" kind="variable"><name>m_buffers</name></member>
     <member refid="struct_azura_1_1_render_pass_requirements_1a0ffd3ee203b9dd212cb15b91993158cd" kind="variable"><name>m_targets</name></member>
@@ -1796,31 +1311,6 @@
     <member refid="struct_azura_1_1_render_target_create_info_1a7b0ecd93cbd760c7778ef416afa8b630" kind="variable"><name>m_height</name></member>
     <member refid="struct_azura_1_1_render_target_create_info_1a659e2e58b8b2a503d2b6ca55e8a6638d" kind="variable"><name>m_depth</name></member>
   </compound>
-  <compound refid="struct_sample" kind="struct"><name>Sample</name>
-    <member refid="struct_sample_1a6e19b18a5f538fce9a64ea6e8f9e538b" kind="variable"><name>arg1</name></member>
-    <member refid="struct_sample_1aef02c11206efe3bd808b6ae748db2dd5" kind="variable"><name>arg2</name></member>
-    <member refid="struct_sample_1a48a4cf559a1ff65b7d4776c262236e27" kind="function"><name>Sample</name></member>
-    <member refid="struct_sample_1a48a4cf559a1ff65b7d4776c262236e27" kind="function"><name>Sample</name></member>
-  </compound>
-  <compound refid="class_dibella_1_1_sampler" kind="class"><name>Dibella::Sampler</name>
-    <member refid="class_dibella_1_1_sampler_1a7593cfc46a3a7b2933b72768285a71ac" kind="variable"><name>samplesPerPixel</name></member>
-    <member refid="class_dibella_1_1_sampler_1a57453bda815f59fb1a634a9ffa175e8b" kind="variable"><name>currentPixel</name></member>
-    <member refid="class_dibella_1_1_sampler_1abfce92e4b53fd6cb8e3b0d2031dc10b1" kind="variable"><name>currentPixelSampleIndex</name></member>
-    <member refid="class_dibella_1_1_sampler_1a6400a89fbb2e5aafae8ea476830660c7" kind="variable"><name>samples1DArraySizes</name></member>
-    <member refid="class_dibella_1_1_sampler_1a27d72b298e6257bf6075f5f64933afbd" kind="variable"><name>samples2DArraySizes</name></member>
-    <member refid="class_dibella_1_1_sampler_1a7c3f7bc91840ace6af989b2d0f56fa25" kind="variable"><name>sampleArray1D</name></member>
-    <member refid="class_dibella_1_1_sampler_1a51018e86bfbf180485ffc6a4bb15003f" kind="variable"><name>sampleArray2D</name></member>
-    <member refid="class_dibella_1_1_sampler_1a50d13430a366506cb3b40d4d3ae010f6" kind="variable"><name>array1DOffset</name></member>
-    <member refid="class_dibella_1_1_sampler_1aacafdcf55a4051ffb21d96e89ff1e667" kind="variable"><name>array2DOffset</name></member>
-    <member refid="class_dibella_1_1_sampler_1a7b3cf16b736bc9747730153873f1a5e5" kind="function"><name>~Sampler</name></member>
-    <member refid="class_dibella_1_1_sampler_1ab333e300b66a0a6381909c0a64457de9" kind="function"><name>Sampler</name></member>
-    <member refid="class_dibella_1_1_sampler_1a1ae48987dbcd0d5e5488cca7fca4df7a" kind="function"><name>Get1D</name></member>
-    <member refid="class_dibella_1_1_sampler_1ad66727ecc822cad885f01a66d098fc14" kind="function"><name>Get2D</name></member>
-    <member refid="class_dibella_1_1_sampler_1a36f61a0f90996252b184627c60c2d7a3" kind="function"><name>Clone</name></member>
-    <member refid="class_dibella_1_1_sampler_1a70e4bf28920a61ced23afeae3692ae03" kind="function"><name>SetSampleNumber</name></member>
-    <member refid="class_dibella_1_1_sampler_1a87c4fb6efdd30607c17b7d091b9152c9" kind="function"><name>StateString</name></member>
-    <member refid="class_dibella_1_1_sampler_1af132b3b213d3088744af2d2ba44cb57c" kind="function"><name>CurrentSampleNumber</name></member>
-  </compound>
   <compound refid="struct_azura_1_1_sampler_desc" kind="struct"><name>Azura::SamplerDesc</name>
     <member refid="struct_azura_1_1_sampler_desc_1ac23536779006a6d3d73f8daa048837ab" kind="variable"><name>m_addressModeU</name></member>
     <member refid="struct_azura_1_1_sampler_desc_1a2accec006853c2589ad54380650f4554" kind="variable"><name>m_addressModeV</name></member>
@@ -1832,66 +1322,6 @@
     <member refid="struct_azura_1_1_sampler_info_1ae9f5df14b3e2cfbc204b7967833dbc62" kind="variable"><name>m_binding</name></member>
     <member refid="struct_azura_1_1_sampler_info_1a5bba3965bcb3b1b58feea3cc48bf2db3" kind="variable"><name>m_desc</name></member>
   </compound>
-  <compound refid="class_dibella_1_1_scene" kind="class"><name>Dibella::Scene</name>
-    <member refid="class_dibella_1_1_scene_1aa896b3f7f0ced41bb046388ef88885c0" kind="typedef"><name>SceneVector</name></member>
-    <member refid="class_dibella_1_1_scene_1a8ac2895329edf843909ed5393231d408" kind="typedef"><name>MaterialVector</name></member>
-    <member refid="class_dibella_1_1_scene_1ac122eaf4d55b35a23c82f00c908ea8eb" kind="typedef"><name>LightVector</name></member>
-    <member refid="class_dibella_1_1_scene_1ad2c01c2ca36b384e1b8cac4bae0ddc92" kind="variable"><name>mObjects</name></member>
-    <member refid="class_dibella_1_1_scene_1aaa4fd574fdf6d14bbc7f2504f8d21c1b" kind="variable"><name>mMaterials</name></member>
-    <member refid="class_dibella_1_1_scene_1ad5e96bc88e616002fcbc568df75f8ba7" kind="variable"><name>mLights</name></member>
-    <member refid="class_dibella_1_1_scene_1ab89a5733dd5a99b04286ee829480bc1c" kind="variable"><name>mCamera</name></member>
-    <member refid="class_dibella_1_1_scene_1af9d37a2587f8afd219b054f6bb9bf591" kind="variable"><name>mFilm</name></member>
-    <member refid="class_dibella_1_1_scene_1a5b188515bb3c232c134f482d74abc487" kind="function"><name>Scene</name></member>
-    <member refid="class_dibella_1_1_scene_1a479c0c90389f1bc12875c425d0fbeb97" kind="function"><name>SetCamera</name></member>
-    <member refid="class_dibella_1_1_scene_1ad5cfa57ee1cf7fc017851543ac020105" kind="function"><name>Intersect</name></member>
-    <member refid="class_dibella_1_1_scene_1acb830a2a89f659c4c0db170da0c2549e" kind="function"><name>addSphere</name></member>
-    <member refid="class_dibella_1_1_scene_1aa0421b1c01a42299913a112447c67648" kind="function"><name>addCube</name></member>
-    <member refid="class_dibella_1_1_scene_1a3a02582e3218aac984bd533c8db2a3af" kind="function"><name>addSquarePlane</name></member>
-  </compound>
-  <compound refid="class_azura_1_1_scene" kind="class"><name>Azura::Scene</name>
-    <member refid="class_azura_1_1_scene_1a7cfc9699dd12ca173569ec3be1b741af" kind="variable"><name>log_Scene</name></member>
-    <member refid="class_azura_1_1_scene_1a63fcc49d98cd5c6e51adf3720cc01943" kind="variable"><name>m_mainAllocator</name></member>
-    <member refid="class_azura_1_1_scene_1ae4a35bc5cd18cbd71dc5d8f98152d80b" kind="variable"><name>m_drawAllocator</name></member>
-    <member refid="class_azura_1_1_scene_1ae86b82011292b495ac67c2499354cef6" kind="variable"><name>m_renderer</name></member>
-    <member refid="class_azura_1_1_scene_1aabf508f27337322addd778d85bdfc1e2" kind="variable"><name>m_textureManager</name></member>
-    <member refid="class_azura_1_1_scene_1acff6bc629e534e49afe727f1cbb57cb6" kind="variable"><name>m_sponzaId</name></member>
-    <member refid="class_azura_1_1_scene_1a807d2102728d63b4a9e7ffe5d0827449" kind="function"><name>Scene</name></member>
-    <member refid="class_azura_1_1_scene_1a0b76b316b69a7f87ed02ca30c032be5e" kind="function"><name>~Scene</name></member>
-    <member refid="class_azura_1_1_scene_1a7c427adea537ab8499f6061188c4bdaa" kind="function"><name>Scene</name></member>
-    <member refid="class_azura_1_1_scene_1a56b19e2bc3cc7528f58593fc9b9c12cb" kind="function"><name>Scene</name></member>
-    <member refid="class_azura_1_1_scene_1a1a2b8a1b9dbe3f5174881848e7bd9d4c" kind="function"><name>operator=</name></member>
-    <member refid="class_azura_1_1_scene_1a7ac6c8d1dca15bc8be25454bffe06368" kind="function"><name>operator=</name></member>
-    <member refid="class_azura_1_1_scene_1a62f98cb16b26d793941568d664e5e394" kind="function"><name>Initialize</name></member>
-    <member refid="class_azura_1_1_scene_1aa069055575f3ed3cf45b09508cfee36c" kind="function"><name>Update</name></member>
-    <member refid="class_azura_1_1_scene_1a5d42a39c3b3ab02ce7bdcc512c9269f7" kind="function"><name>CleanUp</name></member>
-  </compound>
-  <compound refid="class_dibella_1_1_scene_object" kind="class"><name>Dibella::SceneObject</name>
-    <member refid="class_dibella_1_1_scene_object_1a825ce310c50d50a5fe073f5d7f393ebf" kind="variable"><name>mName</name></member>
-    <member refid="class_dibella_1_1_scene_object_1a88dc07b575db2a33ebca1457cca2388c" kind="variable"><name>mShape</name></member>
-    <member refid="class_dibella_1_1_scene_object_1a789c0230b3f84e2178952c15596e5173" kind="variable"><name>mMaterial</name></member>
-    <member refid="class_dibella_1_1_scene_object_1a8dffabf6961d1066800c64a3d34c0b83" kind="variable"><name>mLight</name></member>
-    <member refid="class_dibella_1_1_scene_object_1a6f81fc52b1291dca9a62053d0b3af706" kind="function"><name>SceneObject</name></member>
-    <member refid="class_dibella_1_1_scene_object_1aed79824a097fd9c7f56249e7f5ff9e2d" kind="function"><name>SceneObject</name></member>
-    <member refid="class_dibella_1_1_scene_object_1a8bea5a75b59170418af3d51beb7d9c9f" kind="function"><name>Intersect</name></member>
-    <member refid="class_dibella_1_1_scene_object_1a89139f023c4ab90ae912a690f289f9f1" kind="function"><name>GetLight</name></member>
-    <member refid="class_dibella_1_1_scene_object_1a874525f8a292b0b69bd0bf346988d754" kind="function"><name>GetMaterial</name></member>
-    <member refid="class_dibella_1_1_scene_object_1ac8e8793c39db13217dd0d5ff37e65fe0" kind="function"><name>GenerateBSDF</name></member>
-  </compound>
-  <compound refid="struct_azura_1_1_scene_u_b_o" kind="struct"><name>Azura::SceneUBO</name>
-    <member refid="struct_azura_1_1_scene_u_b_o_1a78139d752d2e4ad347b9e7009285ce4a" kind="variable"><name>m_model</name></member>
-    <member refid="struct_azura_1_1_scene_u_b_o_1a8f05be3e717ccf7aaa4610e30ce770fd" kind="variable"><name>m_modelInvTranspose</name></member>
-    <member refid="struct_azura_1_1_scene_u_b_o_1aaddebec786ad6d6fa9916e74170f7b43" kind="variable"><name>m_view</name></member>
-    <member refid="struct_azura_1_1_scene_u_b_o_1a558167e5771a49e45bae4bb7365af614" kind="variable"><name>m_viewProj</name></member>
-    <member refid="struct_azura_1_1_scene_u_b_o_1a20a86c964ef852c825b0acde0b14c3fb" kind="variable"><name>m_invViewProj</name></member>
-    <member refid="struct_azura_1_1_scene_u_b_o_1ac87876b7d8a72d461eac12867eb4c2e4" kind="variable"><name>m_invProj</name></member>
-  </compound>
-  <compound refid="struct_azura_1_1_self_collision_constraint" kind="struct"><name>Azura::SelfCollisionConstraint</name>
-    <member refid="struct_azura_1_1_self_collision_constraint_1a277d48aa334ac88bfdde8ed2aeb16ca8" kind="variable"><name>m_pIdx</name></member>
-    <member refid="struct_azura_1_1_self_collision_constraint_1a5206e0847d58b2fbd2b2c5c253fe3936" kind="variable"><name>m_p0</name></member>
-    <member refid="struct_azura_1_1_self_collision_constraint_1a5e1b666506844bbf9aa42f44a6d80dd0" kind="variable"><name>m_p1</name></member>
-    <member refid="struct_azura_1_1_self_collision_constraint_1a0e797f15dff92d5a55b067088dc3280a" kind="variable"><name>m_p2</name></member>
-    <member refid="struct_azura_1_1_self_collision_constraint_1aff87819966bfc15460b21863a804d9c1" kind="variable"><name>m_normal</name></member>
-  </compound>
   <compound refid="class_azura_1_1_shader" kind="class"><name>Azura::Shader</name>
     <member refid="class_azura_1_1_shader_1a7fd4607b6afc9f4b20d005b16803e620" kind="variable"><name>m_filePath</name></member>
     <member refid="class_azura_1_1_shader_1aa430b3df5eaea86c1c414816e6fd972e" kind="variable"><name>m_stage</name></member>
@@ -1902,16 +1332,6 @@
     <member refid="class_azura_1_1_shader_1a75db49f6ee2fb0947b18954992198369" kind="function"><name>GetShaderStage</name></member>
     <member refid="class_azura_1_1_shader_1ac6641f2560701cdd6f89809a42acbc91" kind="function"><name>GetFilePath</name></member>
     <member refid="class_azura_1_1_shader_1a8b69041d23aa81e8075294aa20cad88f" kind="function"><name>GetShaderEntryPoint</name></member>
-  </compound>
-  <compound refid="struct_azura_1_1_shader_controls" kind="struct"><name>Azura::ShaderControls</name>
-    <member refid="struct_azura_1_1_shader_controls_1a23cc10573b6eb1b6454b5f86c79fa124" kind="variable"><name>m_shoreLevel</name></member>
-    <member refid="struct_azura_1_1_shader_controls_1a542bc9f7ecef959ecf88f4457a04b8b0" kind="variable"><name>m_elevation</name></member>
-    <member refid="struct_azura_1_1_shader_controls_1a9ecf0929c161a095341951f1b8e814cd" kind="variable"><name>m_noiseScale</name></member>
-    <member refid="struct_azura_1_1_shader_controls_1aa70921ea055b2afd8b01c2c8ed4057d0" kind="variable"><name>pad1</name></member>
-    <member refid="struct_azura_1_1_shader_controls_1a343a528c6cefb350a68d9940256bab13" kind="variable"><name>m_lightPos</name></member>
-    <member refid="struct_azura_1_1_shader_controls_1a693bb9ec77aaebca0ce3843d7159b7fa" kind="variable"><name>m_eye</name></member>
-    <member refid="struct_azura_1_1_shader_controls_1ab59d8ef502f4e3517070fe274f381eea" kind="variable"><name>m_waterControls</name></member>
-    <member refid="struct_azura_1_1_shader_controls_1a9910b5d390efdfa22870a8ca4627c292" kind="variable"><name>m_waterColor</name></member>
   </compound>
   <compound refid="struct_azura_1_1_shader_create_info" kind="struct"><name>Azura::ShaderCreateInfo</name>
     <member refid="struct_azura_1_1_shader_create_info_1a0286e9bf08c58e543102f762ea2a7b08" kind="variable"><name>m_stage</name></member>
@@ -1928,21 +1348,6 @@
     <member refid="struct_azura_1_1_shader_stage_info_1a92d89cbb2be2576a9b1cd589c508b1d8" kind="variable"><name>m_entryPoint</name></member>
     <member refid="struct_azura_1_1_shader_stage_info_1a17059b2460cf3d9de6830c68a03f0935" kind="variable"><name>m_filePath</name></member>
     <member refid="struct_azura_1_1_shader_stage_info_1acd36b91c858201ef7cf78740ddc30bbd" kind="variable"><name>m_isCompiled</name></member>
-  </compound>
-  <compound refid="class_dibella_1_1_shape" kind="class"><name>Dibella::Shape</name>
-    <member refid="class_dibella_1_1_shape_1ae808f29a74a70dbd827acf489c31c807" kind="variable"><name>mTransform</name></member>
-    <member refid="class_dibella_1_1_shape_1af2d9cca71ab21d47d1141517dfa04b58" kind="function"><name>~Shape</name></member>
-    <member refid="class_dibella_1_1_shape_1a7125adf1088925c337c7499e0cbbae4c" kind="function"><name>Shape</name></member>
-    <member refid="class_dibella_1_1_shape_1a866a65bb0b5bda035b8d493405fbbf49" kind="function"><name>Shape</name></member>
-    <member refid="class_dibella_1_1_shape_1a11601dcdf5a3b687e576356873bcb490" kind="function"><name>operator=</name></member>
-    <member refid="class_dibella_1_1_shape_1ac05410ed8caf37d8302299a398c5dc82" kind="function"><name>operator=</name></member>
-    <member refid="class_dibella_1_1_shape_1ac62036c16ab4948082b10245bc002ec2" kind="function"><name>Intersect</name></member>
-    <member refid="class_dibella_1_1_shape_1a2fe5a20cc0b8b1445b642937c5c9cc7f" kind="function"><name>GetUVCoordinates</name></member>
-    <member refid="class_dibella_1_1_shape_1ae5125a0f502b091ee97005f1703a586d" kind="function"><name>InitializeIntersection</name></member>
-    <member refid="class_dibella_1_1_shape_1abe02b94e0ceb98ee2b4325185636ded9" kind="function"><name>ComputeTBN</name></member>
-    <member refid="class_dibella_1_1_shape_1abee4fd9ca05fc49b080f31cc49e04e9d" kind="function"><name>Area</name></member>
-    <member refid="class_dibella_1_1_shape_1aa2ce85e5d2d8da99948fda2af091680b" kind="function"><name>Sample</name></member>
-    <member refid="class_dibella_1_1_shape_1a26108907630d786ff4c8ec774cc4943b" kind="function"><name>Sample</name></member>
   </compound>
   <compound refid="struct_azura_1_1_slot_semantic" kind="struct"><name>Azura::SlotSemantic</name>
     <member refid="struct_azura_1_1_slot_semantic_1a59c632cf1c99669690b431781d8cd4c7" kind="variable"><name>m_name</name></member>
@@ -1985,8 +1390,6 @@
     <member refid="class_azura_1_1_memory_1_1_stack_memory_buffer_1a722df44ade3e3a72f00ab22766d39d70" kind="function"><name>Allocate</name></member>
     <member refid="class_azura_1_1_memory_1_1_stack_memory_buffer_1acfb03af94aec98a5768876e479fe1131" kind="function"><name>Deallocate</name></member>
     <member refid="class_azura_1_1_memory_1_1_stack_memory_buffer_1a8a9adf254dc5d356f7cde3cd3746dde2" kind="function"><name>AllocateRaw</name></member>
-  </compound>
-  <compound refid="class_stack_memory_buffer_test" kind="class"><name>StackMemoryBufferTest</name>
   </compound>
   <compound refid="struct_azura_1_1_structured_buffer_create_info" kind="struct"><name>Azura::StructuredBufferCreateInfo</name>
     <member refid="struct_azura_1_1_structured_buffer_create_info_1a79ffead6fe99bb237de27abee8c0899c" kind="variable"><name>m_size</name></member>
@@ -2049,23 +1452,6 @@
     <member refid="struct_azura_1_1_thread_group_dimensions_1a92bdf63ac65d746ce4e73a209aae2bfc" kind="variable"><name>m_y</name></member>
     <member refid="struct_azura_1_1_thread_group_dimensions_1a943172b928f83fd00f6c72ee6f0d5b50" kind="variable"><name>m_z</name></member>
   </compound>
-  <compound refid="class_dibella_1_1_transform" kind="class"><name>Dibella::Transform</name>
-    <member refid="class_dibella_1_1_transform_1a432c4c2d971842bd413ff8007fe89dfb" kind="variable"><name>mTranslation</name></member>
-    <member refid="class_dibella_1_1_transform_1ac35afd8f7605f5e512b9ca9c0d57e44c" kind="variable"><name>mRotation</name></member>
-    <member refid="class_dibella_1_1_transform_1ae6a321884aeb0c95ae8d90f9ae8ee6fa" kind="variable"><name>mScale</name></member>
-    <member refid="class_dibella_1_1_transform_1ac2e704aa40056388feb0080a982b2982" kind="variable"><name>mWorldTransform</name></member>
-    <member refid="class_dibella_1_1_transform_1a998fa58a1ec545a2046235e94810343e" kind="variable"><name>mInverseWorldTransform</name></member>
-    <member refid="class_dibella_1_1_transform_1a89f410c13059a00df776aa9d2cab5b1b" kind="variable"><name>mInverseTransposeWorldTransform</name></member>
-    <member refid="class_dibella_1_1_transform_1a17b3d0d3f5bc906d744db8c2d24f8bee" kind="function"><name>Transform</name></member>
-    <member refid="class_dibella_1_1_transform_1a93ffd097c7501144cde171b78db21b38" kind="function"><name>Transform</name></member>
-    <member refid="class_dibella_1_1_transform_1a47eefb4c134779ced9d685e1aafb7f08" kind="function"><name>Get</name></member>
-    <member refid="class_dibella_1_1_transform_1accd67321d230a527b587a6576cd1d79c" kind="function"><name>GetAsMatrix3</name></member>
-    <member refid="class_dibella_1_1_transform_1a89832a6bdc13ac38897a5b655e50c27f" kind="function"><name>GetInverse</name></member>
-    <member refid="class_dibella_1_1_transform_1abf8bc201fde59b8eb0ce59cf51b466a9" kind="function"><name>GetInverseTranspose</name></member>
-    <member refid="class_dibella_1_1_transform_1abb93f1106bcae66a2c29893c439543c9" kind="function"><name>GetPosition</name></member>
-    <member refid="class_dibella_1_1_transform_1aff01d956b9b4e64dd73fcb09119e9bcb" kind="function"><name>GetRotation</name></member>
-    <member refid="class_dibella_1_1_transform_1a932107733a1cf63fabdd5fc3e16299db" kind="function"><name>GetScale</name></member>
-  </compound>
   <compound refid="class_azura_1_1_math_1_1_transform_component" kind="class"><name>Azura::Math::TransformComponent</name>
     <member refid="class_azura_1_1_math_1_1_transform_component_1a23caa53dd23043e9627fc6efec63666e" kind="variable"><name>m_sensitivity</name></member>
     <member refid="class_azura_1_1_math_1_1_transform_component_1a647efe24202cb666bb1e4e4697d39170" kind="variable"><name>m_stepSize</name></member>
@@ -2092,15 +1478,6 @@
     <member refid="class_azura_1_1_math_1_1_transform_component_1ae6ec3f13f5f7fb478094077c1977a010" kind="function"><name>SetBackwardKey</name></member>
     <member refid="class_azura_1_1_math_1_1_transform_component_1a3e6efaad44f4555d321044d3d1a20ef6" kind="function"><name>GetTransform</name></member>
     <member refid="class_azura_1_1_math_1_1_transform_component_1aa6fa93cb2db505f42a6218db765ff94a" kind="function"><name>FromTranslationVector</name></member>
-  </compound>
-  <compound refid="struct_azura_1_1_uniform_buffer_data" kind="struct"><name>Azura::UniformBufferData</name>
-    <member refid="struct_azura_1_1_uniform_buffer_data_1aa7281b628077dc3a6cf172f1ec198660" kind="variable"><name>m_model</name></member>
-    <member refid="struct_azura_1_1_uniform_buffer_data_1a7d0295ce2f3b556f4b734504da8498b3" kind="variable"><name>m_modelInvTranspose</name></member>
-    <member refid="struct_azura_1_1_uniform_buffer_data_1afc40033e8d5be714ddc9d915755a0d4a" kind="variable"><name>m_viewProj</name></member>
-    <member refid="struct_azura_1_1_uniform_buffer_data_1abfc07475beed4a97c6ca476ee49c4581" kind="variable"><name>m_view</name></member>
-    <member refid="struct_azura_1_1_uniform_buffer_data_1a0c2fa059366fdd8a69923c55838b736b" kind="variable"><name>m_proj</name></member>
-    <member refid="struct_azura_1_1_uniform_buffer_data_1a76f32b6d644af3f62beea0d7c0f1bb88" kind="variable"><name>m_invViewProj</name></member>
-    <member refid="struct_azura_1_1_uniform_buffer_data_1a2e17b71ee498d7e08c8061aab5e9e6ea" kind="variable"><name>m_invProj</name></member>
   </compound>
   <compound refid="struct_azura_1_1_uniform_buffer_info" kind="struct"><name>Azura::UniformBufferInfo</name>
     <member refid="struct_azura_1_1_uniform_buffer_info_1af3ac3b61a68c0bbf60dc753bc2245630" kind="variable"><name>m_set</name></member>
@@ -2151,41 +1528,11 @@
   <compound refid="struct_azura_1_1_physics_1_1_vector3f_hash" kind="struct"><name>Azura::Physics::Vector3fHash</name>
     <member refid="struct_azura_1_1_physics_1_1_vector3f_hash_1a762c2737d59d9441c413a3bd73219db4" kind="function"><name>operator()</name></member>
   </compound>
-  <compound refid="class_vector_benchmark_fixture" kind="class"><name>VectorBenchmarkFixture</name>
-    <member refid="class_vector_benchmark_fixture_1a4ec3e868a0f02e33b42b7f137cfe53be" kind="variable"><name>buffer</name></member>
-    <member refid="class_vector_benchmark_fixture_1a92b427053f373a668b4ba0e45dccc699" kind="variable"><name>alloc</name></member>
-    <member refid="class_vector_benchmark_fixture_1a36a7e198267be7c70284e906b75a2d00" kind="function"><name>VectorBenchmarkFixture</name></member>
-    <member refid="class_vector_benchmark_fixture_1a379f7e712c0527221413fd005ffcf51d" kind="function"><name>TearDown</name></member>
-    <member refid="class_vector_benchmark_fixture_1a36a7e198267be7c70284e906b75a2d00" kind="function"><name>VectorBenchmarkFixture</name></member>
-    <member refid="class_vector_benchmark_fixture_1a379f7e712c0527221413fd005ffcf51d" kind="function"><name>TearDown</name></member>
-  </compound>
-  <compound refid="class_vector_test" kind="class"><name>VectorTest</name>
-    <member refid="class_vector_test_1a1a1fc89598aa7f3b10c3f4c120df7632" kind="variable"><name>buffer</name></member>
-    <member refid="class_vector_test_1afe68137ad4372b3b76051158ff88a311" kind="variable"><name>alloc</name></member>
-    <member refid="class_vector_test_1a7fbb9e38d31f779faf2475e75969fd68" kind="function"><name>VectorTest</name></member>
-    <member refid="class_vector_test_1a3c4d17de7055c281c2d94cb2e102d89b" kind="function"><name>~VectorTest</name></member>
-  </compound>
-  <compound refid="struct_vertex" kind="struct"><name>Vertex</name>
-    <member refid="struct_vertex_1ab6bb9b71ae0042e41439cbf51a5c5d90" kind="variable"><name>m_pos</name></member>
-    <member refid="struct_vertex_1acd1d4737c7334bf59c3a756711c7b8fa" kind="variable"><name>m_col</name></member>
-  </compound>
-  <compound refid="struct_azura_1_1_vertex" kind="struct"><name>Azura::Vertex</name>
-    <member refid="struct_azura_1_1_vertex_1ac923ee8e726f57432254ff93e7f0af54" kind="variable"><name>m_pos</name></member>
-    <member refid="struct_azura_1_1_vertex_1a745ded8c7eebbc151d7a6f5434dd632e" kind="variable"><name>m_col</name></member>
-  </compound>
   <compound refid="struct_azura_1_1_vertex_slot" kind="struct"><name>Azura::VertexSlot</name>
     <member refid="struct_azura_1_1_vertex_slot_1ac6f7c6344520963ec88d8514d517e489" kind="variable"><name>m_rate</name></member>
     <member refid="struct_azura_1_1_vertex_slot_1a4395b0cd7c60cc8565bfeb671b8caac1" kind="variable"><name>m_stride</name></member>
     <member refid="struct_azura_1_1_vertex_slot_1a34ca167dbcf8f6f3a817659795e47914" kind="variable"><name>m_strideSize</name></member>
     <member refid="struct_azura_1_1_vertex_slot_1a84c1abe5c4814efed5a51adb92078138" kind="variable"><name>m_bufferSource</name></member>
-  </compound>
-  <compound refid="struct_vertex_with_u_v" kind="struct"><name>VertexWithUV</name>
-    <member refid="struct_vertex_with_u_v_1a830bc6d130be3f37d8a22a577e18052a" kind="variable"><name>m_pos</name></member>
-    <member refid="struct_vertex_with_u_v_1a1f029cf0b691c5c34d25b578e3deb26f" kind="variable"><name>m_uv</name></member>
-  </compound>
-  <compound refid="struct_azura_1_1_vertex_with_u_v" kind="struct"><name>Azura::VertexWithUV</name>
-    <member refid="struct_azura_1_1_vertex_with_u_v_1afa8ae4a79d17ecdcda05ecf7002b9089" kind="variable"><name>m_pos</name></member>
-    <member refid="struct_azura_1_1_vertex_with_u_v_1a27c059483c9ab2d1f919ac3893f3d4a0" kind="variable"><name>m_uv</name></member>
   </compound>
   <compound refid="struct_azura_1_1_viewport_dimensions" kind="struct"><name>Azura::ViewportDimensions</name>
     <member refid="struct_azura_1_1_viewport_dimensions_1aafb0067e43ec558bf30adde8bf42ab5f" kind="variable"><name>m_x</name></member>
@@ -2463,19 +1810,6 @@
   <compound refid="class_azura_1_1_vulkan_1_1_vk_texture_manager" kind="class"><name>Azura::Vulkan::VkTextureManager</name>
     <member refid="class_azura_1_1_vulkan_1_1_vk_texture_manager_1af6400e2948f020d106a1dc7f0cce9af0" kind="function"><name>VkTextureManager</name></member>
   </compound>
-  <compound refid="class_dibella_1_1_warper" kind="class"><name>Dibella::Warper</name>
-    <member refid="class_dibella_1_1_warper_1a1d4a93ef2810f0a620ff83242cf92887" kind="function"><name>SquareToDiskUniform</name></member>
-    <member refid="class_dibella_1_1_warper_1a4809862a4576cb18c5bb2cbf3a4b48d0" kind="function"><name>SquareToDiskConcentric</name></member>
-    <member refid="class_dibella_1_1_warper_1ac3e0185e13b998d71bbe04c58cf1cfaa" kind="function"><name>SquareToDiskPDF</name></member>
-    <member refid="class_dibella_1_1_warper_1afa18f32e20a8286f77d544d894b4f5f9" kind="function"><name>SquareToSphereUniform</name></member>
-    <member refid="class_dibella_1_1_warper_1ad2ae659cedda1a111e65bc58b35b0c48" kind="function"><name>SquareToSphereUniformPDF</name></member>
-    <member refid="class_dibella_1_1_warper_1a136c5617627a7a910179f4905c0bd6dc" kind="function"><name>SquareToSphereCapUniform</name></member>
-    <member refid="class_dibella_1_1_warper_1a6e7d46364d5021a155323704e67b5bd5" kind="function"><name>SquareToSphereCapUniformPDF</name></member>
-    <member refid="class_dibella_1_1_warper_1ab6e1bb468f06a02ca913b8d18b298251" kind="function"><name>SquareToHemisphereUniform</name></member>
-    <member refid="class_dibella_1_1_warper_1a7a6e6f10e0c2d57bf70139912df3b79c" kind="function"><name>SquareToHemisphereUniformPDF</name></member>
-    <member refid="class_dibella_1_1_warper_1a08948c470148b8d750791fc29d67ca3b" kind="function"><name>SquareToHemisphereCosine</name></member>
-    <member refid="class_dibella_1_1_warper_1a906d85a7f9896a5e19d6f58dca873db6" kind="function"><name>SquareToHemisphereCosinePDF</name></member>
-  </compound>
   <compound refid="class_azura_1_1_win32_g_l_f_w_window" kind="class"><name>Azura::Win32GLFWWindow</name>
     <member refid="class_azura_1_1_win32_g_l_f_w_window_1abbbb8a8b03fa2c7e17e661ec9ba583dc" kind="variable"><name>m_win32Window</name></member>
     <member refid="class_azura_1_1_win32_g_l_f_w_window_1a90a01e9b8a76b1b2b37130035287b43f" kind="function"><name>Win32GLFWWindow</name></member>
@@ -2520,15 +1854,15 @@
     <member refid="class_azura_1_1_window_1ae5b34dda3a2f2df08be92857f5557cef" kind="function"><name>CallMouseEventFunction</name></member>
     <member refid="class_azura_1_1_window_1a26e8fa5c3ce65455a5650c0a71fa648e" kind="function"><name>CallKeyEventFunction</name></member>
   </compound>
-  <compound refid="namespace_0D238" kind="namespace"><name>@238</name>
+  <compound refid="namespace_0D181" kind="namespace"><name>@181</name>
   </compound>
   <compound refid="namespace_a_z" kind="namespace"><name>AZ</name>
   </compound>
   <compound refid="namespace_azura" kind="namespace"><name>Azura</name>
-    <member refid="_azura_2_render_system_2_inc_2_generic_2_constants_8h_1aece4541733a1bc739293311414445e57" kind="enum"><name>@0</name></member>
-    <member refid="_azura_2_render_system_2_inc_2_generic_2_constants_8h_1aece4541733a1bc739293311414445e57a0a3082b7c340c4d868dc9a3089b7cc92" kind="enumvalue"><name>SemverMajor</name></member>
-    <member refid="_azura_2_render_system_2_inc_2_generic_2_constants_8h_1aece4541733a1bc739293311414445e57abfcd7bb4d1a2eb8b351f7c7a22c47aef" kind="enumvalue"><name>SemverMinor</name></member>
-    <member refid="_azura_2_render_system_2_inc_2_generic_2_constants_8h_1aece4541733a1bc739293311414445e57a62bd58d35e0e580348ae129bde5888ae" kind="enumvalue"><name>SemverPatch</name></member>
+    <member refid="_constants_8h_1aece4541733a1bc739293311414445e57" kind="enum"><name>@0</name></member>
+    <member refid="_constants_8h_1aece4541733a1bc739293311414445e57a0a3082b7c340c4d868dc9a3089b7cc92" kind="enumvalue"><name>SemverMajor</name></member>
+    <member refid="_constants_8h_1aece4541733a1bc739293311414445e57abfcd7bb4d1a2eb8b351f7c7a22c47aef" kind="enumvalue"><name>SemverMinor</name></member>
+    <member refid="_constants_8h_1aece4541733a1bc739293311414445e57a62bd58d35e0e580348ae129bde5888ae" kind="enumvalue"><name>SemverPatch</name></member>
     <member refid="_azura_2_render_system_2_inc_2_generic_2_generic_types_8h_1a0dfd60b7af51cf5f4d860421774d968f" kind="enum"><name>RS</name></member>
     <member refid="dummy_1a0dfd60b7af51cf5f4d860421774d968fa505a83f220c02df2f85c3810cd9ceb38" kind="enumvalue"><name>Success</name></member>
     <member refid="dummy_1a0dfd60b7af51cf5f4d860421774d968fabfaef30f1c8011c5cefa38ae470fb7aa" kind="enumvalue"><name>UnknownError</name></member>
@@ -2756,20 +2090,20 @@
     <member refid="_core_8h_1a0a775ba230213cc602a6618d000e5407a3ba7c7607860d30ee94721a95956fb69" kind="enumvalue"><name>AxisY</name></member>
     <member refid="_core_8h_1a0a775ba230213cc602a6618d000e5407a05ea1b693b3a32eace102de4cbff8685" kind="enumvalue"><name>AxisZ</name></member>
     <member refid="_core_8h_1a0a775ba230213cc602a6618d000e5407a39e32d27747f6e5d0bd9a4296da7b300" kind="enumvalue"><name>AxisW</name></member>
-    <member refid="_azura_2_render_system_2_inc_2_generic_2_constants_8h_1a1f5b86dc4c34883e96bbda676dbac276" kind="typedef"><name>Version</name></member>
+    <member refid="_constants_8h_1a1f5b86dc4c34883e96bbda676dbac276" kind="typedef"><name>Version</name></member>
     <member refid="_drawable_8h_1a58ca57dc00aa1103dece3e66fc0abe13" kind="typedef"><name>DrawableID</name></member>
     <member refid="_azura_2_render_system_2_inc_2_generic_2_generic_types_8h_1a0942398fe1228a210d838c25f6c4407d" kind="typedef"><name>SmallVector</name></member>
     <member refid="_azura_2_render_system_2_inc_2_generic_2_generic_types_8h_1a433c1a9ea494fa0c0e5cacbba124a91c" kind="typedef"><name>SlotID</name></member>
-    <member refid="_common_2_inc_2_types_8h_1acac3ad4420766984cb1f0e7a8e19347c" kind="typedef"><name>UINT</name></member>
-    <member refid="_common_2_inc_2_types_8h_1ab348a6a803558b90b4a09eaef9921b98" kind="typedef"><name>U8</name></member>
-    <member refid="_common_2_inc_2_types_8h_1ae9916fde622120218775b0092d33c85f" kind="typedef"><name>U16</name></member>
-    <member refid="_common_2_inc_2_types_8h_1a23e594108f6920302006bce2bfe6d056" kind="typedef"><name>U32</name></member>
-    <member refid="_common_2_inc_2_types_8h_1a4df47cd738ccace4acabe2aefbe69840" kind="typedef"><name>U64</name></member>
-    <member refid="_common_2_inc_2_types_8h_1a1b26b3bba3ef2c9e24f3d4ed0c2d6145" kind="typedef"><name>UPTR</name></member>
-    <member refid="_common_2_inc_2_types_8h_1ae48008e9e60a1cdaf01d004f166810e0" kind="typedef"><name>SizeType</name></member>
-    <member refid="_common_2_inc_2_types_8h_1acbe7fa9d46ea4221d13f883cea9a4dc7" kind="typedef"><name>String</name></member>
-    <member refid="_common_2_inc_2_types_8h_1a8dd630babbe2f9cfe21d3c17e8404fc5" kind="typedef"><name>AddressPtr</name></member>
-    <member refid="_common_2_inc_2_types_8h_1af43024d172b60f7753f9fc9f4d40ab1f" kind="typedef"><name>AddressDiff</name></member>
+    <member refid="_types_8h_1acac3ad4420766984cb1f0e7a8e19347c" kind="typedef"><name>UINT</name></member>
+    <member refid="_types_8h_1ab348a6a803558b90b4a09eaef9921b98" kind="typedef"><name>U8</name></member>
+    <member refid="_types_8h_1ae9916fde622120218775b0092d33c85f" kind="typedef"><name>U16</name></member>
+    <member refid="_types_8h_1a23e594108f6920302006bce2bfe6d056" kind="typedef"><name>U32</name></member>
+    <member refid="_types_8h_1a4df47cd738ccace4acabe2aefbe69840" kind="typedef"><name>U64</name></member>
+    <member refid="_types_8h_1a1b26b3bba3ef2c9e24f3d4ed0c2d6145" kind="typedef"><name>UPTR</name></member>
+    <member refid="_types_8h_1ae48008e9e60a1cdaf01d004f166810e0" kind="typedef"><name>SizeType</name></member>
+    <member refid="_types_8h_1acbe7fa9d46ea4221d13f883cea9a4dc7" kind="typedef"><name>String</name></member>
+    <member refid="_types_8h_1a8dd630babbe2f9cfe21d3c17e8404fc5" kind="typedef"><name>AddressPtr</name></member>
+    <member refid="_types_8h_1af43024d172b60f7753f9fc9f4d40ab1f" kind="typedef"><name>AddressDiff</name></member>
     <member refid="_raw_storage_format_8h_1a4b83fefe9910af536a92a41f23573e73" kind="typedef"><name>ChannelDesc</name></member>
     <member refid="_core_8h_1af4c32bb4b1116359603de996f3df3001" kind="typedef"><name>Vector4d</name></member>
     <member refid="_core_8h_1ad560427ae8b094e5f96c231b77ad625d" kind="typedef"><name>Vector4f</name></member>
@@ -2805,10 +2139,10 @@
     <member refid="_core_8h_1a09dd03c0760a0c5d2b53884c1313a239" kind="typedef"><name>Color3u</name></member>
     <member refid="_core_8h_1ad6d4d7df1b9a5c246f3b91e8526055c0" kind="typedef"><name>Normal3d</name></member>
     <member refid="_core_8h_1a049cb255c49348736ab86b48dbb330e5" kind="typedef"><name>Normal3f</name></member>
-    <member refid="_azura_2_render_system_2_inc_2_generic_2_constants_8h_1af054e28c57031d73b0d35d27c2bd3664" kind="variable"><name>RENDER_SYSTEM_VERSION</name></member>
-    <member refid="_azura_2_render_system_2_inc_2_generic_2_constants_8h_1a5507000fe0f4a970a124d1d0690a1931" kind="variable"><name>RENDER_SYSTEM_MAJOR_SEMVER</name></member>
-    <member refid="_azura_2_render_system_2_inc_2_generic_2_constants_8h_1ac9d292b944302e3593ec3c4f7d0b0422" kind="variable"><name>RENDER_SYSTEM_MINOR_SEMVER</name></member>
-    <member refid="_azura_2_render_system_2_inc_2_generic_2_constants_8h_1afa46364d6dad722146fd17ad4a0fd3fb" kind="variable"><name>RENDER_SYSTEM_PATCH_SEMVER</name></member>
+    <member refid="_constants_8h_1af054e28c57031d73b0d35d27c2bd3664" kind="variable"><name>RENDER_SYSTEM_VERSION</name></member>
+    <member refid="_constants_8h_1a5507000fe0f4a970a124d1d0690a1931" kind="variable"><name>RENDER_SYSTEM_MAJOR_SEMVER</name></member>
+    <member refid="_constants_8h_1ac9d292b944302e3593ec3c4f7d0b0422" kind="variable"><name>RENDER_SYSTEM_MINOR_SEMVER</name></member>
+    <member refid="_constants_8h_1afa46364d6dad722146fd17ad4a0fd3fb" kind="variable"><name>RENDER_SYSTEM_PATCH_SEMVER</name></member>
     <member refid="_azura_2_render_system_2_inc_2_generic_2_generic_types_8h_1a428635d860221dc07a957db97b34a40d" kind="variable"><name>PRESENT_TARGET</name></member>
     <member refid="_azura_2_render_system_2_inc_2_generic_2_generic_types_8h_1a379c9e3432f7a63211257928c4c9e162" kind="variable"><name>MAX_DESCRIPTOR_TYPE_COUNT</name></member>
     <member refid="_azura_2_render_system_2_inc_2_generic_2_generic_types_8h_1a89cf253785a668da1fe4264479fe289e" kind="variable"><name>DEFAULT_FRAMES_IN_FLIGHT</name></member>
@@ -2820,21 +2154,6 @@
     <member refid="_hash_8h_1a7c1c28fc4579e69f4612b32af30145ae" kind="variable"><name>DEFAULT_SEED</name></member>
     <member refid="_hash_8h_1a9b33bacf70098ff0a6ba827baae9f79e" kind="variable"><name>DEFAULT_PRIME</name></member>
     <member refid="_core_8h_1aab4ba1389a92c1f11f25ed1839683c6d" kind="variable"><name>EPSILON</name></member>
-    <member refid="0___test_zone_2_inc_2_test_zone_2_app_renderer_8h_1ab3cf23addaceaa419e169dfc980c9cc3" kind="variable"><name>DEFAULT_BLOCK_SIZE_X</name></member>
-    <member refid="0___test_zone_2_inc_2_test_zone_2_app_renderer_8h_1afe56639a5a14c44e5bd5dbad88311986" kind="variable"><name>SOLVER_ITERATIONS</name></member>
-    <member refid="0___test_zone_2_inc_2_test_zone_2_app_renderer_8h_1a89449f6d4b138dab0cea8bc638337e5b" kind="variable"><name>DISTANCE_STIFFNESS</name></member>
-    <member refid="0___test_zone_2_inc_2_test_zone_2_app_renderer_8h_1a540b9c2cefa70c8a109868e6edc62ac4" kind="variable"><name>BENDING_STIFFNESS</name></member>
-    <member refid="_samples_22___deferred_renderer_2_inc_2_app_2_common_8h_1a7184df1b25e2084c468acfd3d102e73b" kind="variable"><name>NUM_LIGHTS</name></member>
-    <member refid="_samples_22___deferred_renderer_2_inc_2_app_2_common_8h_1aa2333f975e997c359a3be78b41e4a1eb" kind="variable"><name>MAX_LIGHTS_PER_CLUSTER</name></member>
-    <member refid="_samples_22___deferred_renderer_2_inc_2_app_2_common_8h_1a449a8beab4e8e18943f060b176c2be8d" kind="variable"><name>LIGHT_MIN</name></member>
-    <member refid="_samples_22___deferred_renderer_2_inc_2_app_2_common_8h_1abee06dba304c47febdbfd32396db3e69" kind="variable"><name>LIGHT_MAX</name></member>
-    <member refid="_samples_22___deferred_renderer_2_inc_2_app_2_common_8h_1a3a9ae143c0af5080293aca8ad7419837" kind="variable"><name>LIGHT_RADIUS</name></member>
-    <member refid="_samples_22___deferred_renderer_2_inc_2_app_2_common_8h_1a1ac37e47cd1168265c064190446e3c75" kind="variable"><name>LIGHT_DT</name></member>
-    <member refid="_samples_22___deferred_renderer_2_inc_2_app_2_common_8h_1a7df9177b45bcd5074d515b61cd7f11e2" kind="variable"><name>TILES_X</name></member>
-    <member refid="_samples_22___deferred_renderer_2_inc_2_app_2_common_8h_1ab7af1cfc5e4db278c92823fc89125c3d" kind="variable"><name>TILES_Y</name></member>
-    <member refid="_samples_22___deferred_renderer_2_inc_2_app_2_common_8h_1a14de5d6e262865a009b56707081d4991" kind="variable"><name>TILES_Z</name></member>
-    <member refid="_samples_22___deferred_renderer_2_inc_2_app_2_common_8h_1a5615fc3826c7ee83791fbf3e83adf886" kind="variable"><name>CLUSTER_PIXEL_HEIGHT</name></member>
-    <member refid="_samples_22___deferred_renderer_2_inc_2_app_2_common_8h_1afefb43d514bd66841e49c60baa6163f5" kind="variable"><name>FPLUS_NUM_FRUSTRUMS</name></member>
     <member refid="_debug_8h_1a10487b58322018a0bce8c92679a8d837" kind="function"><name>DescriptorTypeToString</name></member>
     <member refid="_azura_2_render_system_2_inc_2_generic_2_generic_types_8h_1aaa9d7f0cc35f7639ff2d9d3016542d55" kind="function"><name>BOOST_BITMASK</name></member>
     <member refid="_hash_8h_1a202437df4ce979c02ec1fdd4b0f6ca76" kind="function"><name>FNVHash</name></member>
@@ -2847,25 +2166,13 @@
     <member refid="_raw_storage_format_8h_1a57c329c18f423d0ad732896feb7f594c" kind="function"><name>HasDepthAndStencilComponent</name></member>
     <member refid="_raw_storage_format_8h_1ac0d949f9c11a84885fe214fea42f1989" kind="function"><name>ToString</name></member>
   </compound>
-  <compound refid="namespace_azura_1_1_0D116" kind="namespace"><name>Azura::@116</name>
+  <compound refid="namespace_azura_1_1_0D111" kind="namespace"><name>Azura::@111</name>
   </compound>
-  <compound refid="namespace_azura_1_1_0D117" kind="namespace"><name>Azura::@117</name>
+  <compound refid="namespace_azura_1_1_0D112" kind="namespace"><name>Azura::@112</name>
+  </compound>
+  <compound refid="namespace_azura_1_1_0D143" kind="namespace"><name>Azura::@143</name>
   </compound>
   <compound refid="namespace_azura_1_1_0D2" kind="namespace"><name>Azura::@2</name>
-  </compound>
-  <compound refid="namespace_azura_1_1_0D200" kind="namespace"><name>Azura::@200</name>
-  </compound>
-  <compound refid="namespace_azura_1_1_0D244" kind="namespace"><name>Azura::@244</name>
-  </compound>
-  <compound refid="namespace_azura_1_1_0D246" kind="namespace"><name>Azura::@246</name>
-  </compound>
-  <compound refid="namespace_azura_1_1_0D249" kind="namespace"><name>Azura::@249</name>
-  </compound>
-  <compound refid="namespace_azura_1_1_0D250" kind="namespace"><name>Azura::@250</name>
-  </compound>
-  <compound refid="namespace_azura_1_1_0D264" kind="namespace"><name>Azura::@264</name>
-  </compound>
-  <compound refid="namespace_azura_1_1_0D269" kind="namespace"><name>Azura::@269</name>
   </compound>
   <compound refid="namespace_azura_1_1_0D76" kind="namespace"><name>Azura::@76</name>
   </compound>
@@ -2938,30 +2245,30 @@
     <member refid="_geometry_8h_1a12e8f9c2174d06ad118a5bac3d0ee6a6" kind="function"><name>ToRadians</name></member>
     <member refid="_geometry_8h_1a724043a840c387e298333f121dd98965" kind="function"><name>ToAngle</name></member>
   </compound>
-  <compound refid="namespace_azura_1_1_math_1_1_0D208" kind="namespace"><name>Azura::Math::@208</name>
+  <compound refid="namespace_azura_1_1_math_1_1_0D151" kind="namespace"><name>Azura::Math::@151</name>
   </compound>
-  <compound refid="namespace_azura_1_1_math_1_1_0D209" kind="namespace"><name>Azura::Math::@209</name>
+  <compound refid="namespace_azura_1_1_math_1_1_0D152" kind="namespace"><name>Azura::Math::@152</name>
   </compound>
   <compound refid="namespace_azura_1_1_memory" kind="namespace"><name>Azura::Memory</name>
     <member refid="_allocator_8h_1a71688256967374caeb84ef35e224396e" kind="typedef"><name>UniquePtr</name></member>
     <member refid="_allocator_8h_1a1e413ab35af59bb701b98ca6a22cf4fe" kind="typedef"><name>UniqueArrayPtr</name></member>
   </compound>
-  <compound refid="namespace_azura_1_1_memory_1_1_0D135" kind="namespace"><name>Azura::Memory::@135</name>
+  <compound refid="namespace_azura_1_1_memory_1_1_0D130" kind="namespace"><name>Azura::Memory::@130</name>
   </compound>
-  <compound refid="namespace_azura_1_1_memory_1_1_0D136" kind="namespace"><name>Azura::Memory::@136</name>
+  <compound refid="namespace_azura_1_1_memory_1_1_0D131" kind="namespace"><name>Azura::Memory::@131</name>
   </compound>
   <compound refid="namespace_azura_1_1_physics" kind="namespace"><name>Azura::Physics</name>
     <member refid="_physics_2_inc_2_physics_2_geometry_2_generic_types_8h_1a52c726030295c6adf328f8d0c55c7c02" kind="enum"><name>ClothTriangulation</name></member>
     <member refid="dummy_1a52c726030295c6adf328f8d0c55c7c02ad2203cb1237cb6460cbad94564e39345" kind="enumvalue"><name>Regular</name></member>
     <member refid="dummy_1a52c726030295c6adf328f8d0c55c7c02a8f7671185d590914ac21c7511767b699" kind="enumvalue"><name>Diamond</name></member>
   </compound>
-  <compound refid="namespace_azura_1_1_physics_1_1_0D221" kind="namespace"><name>Azura::Physics::@221</name>
+  <compound refid="namespace_azura_1_1_physics_1_1_0D164" kind="namespace"><name>Azura::Physics::@164</name>
   </compound>
-  <compound refid="namespace_azura_1_1_physics_1_1_0D222" kind="namespace"><name>Azura::Physics::@222</name>
+  <compound refid="namespace_azura_1_1_physics_1_1_0D165" kind="namespace"><name>Azura::Physics::@165</name>
   </compound>
   <compound refid="namespace_azura_1_1_physics_1_1_p_b_d" kind="namespace"><name>Azura::Physics::PBD</name>
   </compound>
-  <compound refid="namespace_azura_1_1_physics_1_1_p_b_d_1_1_0D225" kind="namespace"><name>Azura::Physics::PBD::@225</name>
+  <compound refid="namespace_azura_1_1_physics_1_1_p_b_d_1_1_0D168" kind="namespace"><name>Azura::Physics::PBD::@168</name>
   </compound>
   <compound refid="namespace_azura_1_1_pool_primitives" kind="namespace"><name>Azura::PoolPrimitives</name>
     <member refid="_pool_primitives_8h_1a36b66c5048e5cb128abf797a66077fc6" kind="function"><name>AddScreenQuad</name></member>
@@ -2972,9 +2279,9 @@
     <member refid="_render_system_8h_1a9c6c4e72584af0c723bbc4611caa21ee" kind="function"><name>CreateTextureManager</name></member>
   </compound>
   <compound refid="namespace_azura_1_1_transform" kind="namespace"><name>Azura::Transform</name>
-    <member refid="_math_2_inc_2_math_2_transform_8h_1abd4b9bad546050c957dae51f02f181a3" kind="function"><name>LookAt</name></member>
-    <member refid="_math_2_inc_2_math_2_transform_8h_1a29763786770b321c2278e7856904625e" kind="function"><name>Perspective</name></member>
-    <member refid="_math_2_inc_2_math_2_transform_8h_1a6fce39055eeea5934db9c2b4ec705204" kind="function"><name>Downgrade</name></member>
+    <member refid="_transform_8h_1abd4b9bad546050c957dae51f02f181a3" kind="function"><name>LookAt</name></member>
+    <member refid="_transform_8h_1a29763786770b321c2278e7856904625e" kind="function"><name>Perspective</name></member>
+    <member refid="_transform_8h_1a6fce39055eeea5934db9c2b4ec705204" kind="function"><name>Downgrade</name></member>
   </compound>
   <compound refid="namespace_azura_1_1_vulkan" kind="namespace"><name>Azura::Vulkan</name>
     <member refid="_vk_type_mapping_8cpp_1a876c496837c218b4898698c9f2b834aa" kind="variable"><name>VkPrimitiveTopology</name></member>
@@ -3066,73 +2373,22 @@
     <member refid="_vk_platform_8h_1a654e652d3ed914c888aba51bca4ba809" kind="function"><name>CreateSurface</name></member>
     <member refid="_vk_platform_8h_1a556954878d2247ec3ef2cf8025185bbc" kind="function"><name>GetInstanceExtensions</name></member>
   </compound>
-  <compound refid="namespace_dibella" kind="namespace"><name>Dibella</name>
-    <member refid="_bx_d_f_type_8h_1abe581c44e596213188e8ca8142f375ae" kind="enum"><name>BxDFType</name></member>
-    <member refid="dummy_1abe581c44e596213188e8ca8142f375aeac7eb58a894592de06d34a748a4d1fcd7" kind="enumvalue"><name>BsdfReflection</name></member>
-    <member refid="dummy_1abe581c44e596213188e8ca8142f375aeae46de5ce69dda54a62dc5ea858973b6a" kind="enumvalue"><name>BsdfTransmission</name></member>
-    <member refid="dummy_1abe581c44e596213188e8ca8142f375aeac201dda2aa3ab5a36f9514faf3a46d1a" kind="enumvalue"><name>BsdfDiffuse</name></member>
-    <member refid="dummy_1abe581c44e596213188e8ca8142f375aea2487a5bf514458e90b8349f815f388a5" kind="enumvalue"><name>BsdfGlossy</name></member>
-    <member refid="dummy_1abe581c44e596213188e8ca8142f375aeaea278941ab5dd7e79e66ca113a27f59d" kind="enumvalue"><name>BsdfSpecular</name></member>
-    <member refid="dummy_1abe581c44e596213188e8ca8142f375aea559101056d7ad85101bb9f0750305592" kind="enumvalue"><name>BsdfAll</name></member>
-    <member refid="_dibella_2_inc_2_core_2_types_8h_1a2ec54ae4fb5ef54a50847dbe795e6498" kind="typedef"><name>Color3f</name></member>
-    <member refid="_dibella_2_inc_2_core_2_types_8h_1a85bd91e40c2eda2d981a58c843779187" kind="typedef"><name>Normal3f</name></member>
-    <member refid="_dibella_2_inc_2_core_2_types_8h_1a10f7ff757ec133cd564c6af96bb5625c" kind="typedef"><name>Vector4f</name></member>
-    <member refid="_dibella_2_inc_2_core_2_types_8h_1aa314429733ca27e42fd9292464ba6225" kind="typedef"><name>Vector3f</name></member>
-    <member refid="_dibella_2_inc_2_core_2_types_8h_1af8b39b4c3558d5b0618d02da318524c1" kind="typedef"><name>Point3f</name></member>
-    <member refid="_dibella_2_inc_2_core_2_types_8h_1adf63746f3d524ac863e20689b84997e7" kind="typedef"><name>Vector2f</name></member>
-    <member refid="_dibella_2_inc_2_core_2_types_8h_1a67c6e92bba3850a0303980ce77385139" kind="typedef"><name>Point2f</name></member>
-    <member refid="_dibella_2_inc_2_core_2_types_8h_1a73b6a1228fc88818159bfa75c4902369" kind="typedef"><name>Vector3i</name></member>
-    <member refid="_dibella_2_inc_2_core_2_types_8h_1a6ba69dc8b184ac0e33f422ec6b4122d4" kind="typedef"><name>Point3i</name></member>
-    <member refid="_dibella_2_inc_2_core_2_types_8h_1ac59797836ead03e02e3756e741e50316" kind="typedef"><name>Vector2i</name></member>
-    <member refid="_dibella_2_inc_2_core_2_types_8h_1a143d581d105d0004a672021c0bb9220b" kind="typedef"><name>Point2i</name></member>
-    <member refid="_dibella_2_inc_2_core_2_types_8h_1a9ac948232fc6979e946f26ed7abe327e" kind="typedef"><name>Float</name></member>
-    <member refid="_dibella_2_inc_2_core_2_types_8h_1a4ce8629e67c8c1e03267beee6f513e5c" kind="typedef"><name>Matrix3f</name></member>
-    <member refid="_dibella_2_inc_2_core_2_types_8h_1a4ac813cb777942a05e57917b23599d3f" kind="typedef"><name>Matrix4f</name></member>
-    <member refid="_dibella_2_inc_2_core_2_types_8h_1ae43a97751218d5c3b2cd841f393314a1" kind="typedef"><name>DString</name></member>
-    <member refid="_dibella_2_inc_2_core_2_types_8h_1ab80b5d10635daca26fb8a311013b6e4a" kind="typedef"><name>SizeType</name></member>
-    <member refid="_dibella_2_inc_2_core_2_types_8h_1a827520d12d60c717e4009e9eb2bd18aa" kind="typedef"><name>U64</name></member>
-    <member refid="_dibella_2_inc_2_core_2_constants_8h_1adf48efc54d0657ac92071e9ffe5c0afe" kind="variable"><name>SHADOW_EPSILON</name></member>
-    <member refid="_dibella_2_inc_2_core_2_constants_8h_1adef4dd19159880848137d3aae37d2e9c" kind="variable"><name>RAY_EPSILON</name></member>
-    <member refid="_dibella_2_inc_2_core_2_constants_8h_1aef8588a3698597e1c45b23f3f3af9e01" kind="variable"><name>PI</name></member>
-    <member refid="_dibella_2_inc_2_core_2_constants_8h_1a25e4052b1e0e3583e87bf917d3c01690" kind="variable"><name>TWO_PI</name></member>
-    <member refid="_dibella_2_inc_2_core_2_constants_8h_1abe60b74f67a3042425f0e8e3d84022b6" kind="variable"><name>INV_PI</name></member>
-    <member refid="_dibella_2_inc_2_core_2_constants_8h_1ae12760aff90c95f7f14107789d205dcb" kind="variable"><name>INV2_PI</name></member>
-    <member refid="_dibella_2_inc_2_core_2_constants_8h_1a58a9cd433ce7645c4fbda83498f9b0db" kind="variable"><name>INV4_PI</name></member>
-    <member refid="_dibella_2_inc_2_core_2_constants_8h_1adb553b79afbcc6bc5e5bb6639e391eeb" kind="variable"><name>PI_OVER2</name></member>
-    <member refid="_dibella_2_inc_2_core_2_constants_8h_1a590b6ccd0a1d4fc131beb0bda8e55880" kind="variable"><name>PI_OVER4</name></member>
-    <member refid="_dibella_2_inc_2_core_2_constants_8h_1aaf08832dc9ff24b88b6ab5ba86587134" kind="variable"><name>SQRT2</name></member>
-    <member refid="_dibella_2_inc_2_core_2_constants_8h_1a515d0abfeeeffe3a648609426f248927" kind="variable"><name>ONE_MINUS_EPSILON</name></member>
-    <member refid="_dibella_2_inc_2_core_2_constants_8h_1a60bdc9333d8f892a6ed586f32ee34c27" kind="variable"><name>EPSILON</name></member>
-    <member refid="_dibella_2_inc_2_core_2_constants_8h_1a89f7e16f594e9452c35b8e31e1c67d15" kind="variable"><name>MAX_BDSF_BXDF</name></member>
-    <member refid="_dibella_2_inc_2_core_2_utils_8h_1afd5c4b5fdfcc6e841324ab970f680afc" kind="function"><name>SameHemisphere</name></member>
-    <member refid="_dibella_2_inc_2_core_2_utils_8h_1a9d54782813e5d729be7983ca4445b310" kind="function"><name>ToRadians</name></member>
-    <member refid="_dibella_2_inc_2_core_2_utils_8h_1a34afacd7d3c5a0c8838888d0c2b119fd" kind="function"><name>UVToPixelSpace</name></member>
-    <member refid="_dibella_2_src_2_scene_2_primitives_2_transform_8cpp_1a07bad89c0721d07c634d81c54e1f12e5" kind="function"><name>AsMatrix3</name></member>
-  </compound>
   <compound refid="namespace_microsoft_1_1gl_t_f" kind="namespace"><name>Microsoft::glTF</name>
   </compound>
   <compound refid="namespace_microsoft_1_1_w_r_l" kind="namespace"><name>Microsoft::WRL</name>
   </compound>
-  <compound refid="namespace_render_test_cases" kind="namespace"><name>RenderTestCases</name>
-    <member refid="_render_test_cases_8h_1a14c286906433dd15e8261553a7dc53a4" kind="function"><name>ExecuteBasicRenderTest</name></member>
-    <member refid="_render_test_cases_8h_1a96d521ef8c14d9ee3e986505b1c708a6" kind="function"><name>ExecuteBasicInstancingTest</name></member>
-    <member refid="_render_test_cases_8h_1a939b01d42459905a49edcc94db606f63" kind="function"><name>ExecuteBasicTextureTest</name></member>
-    <member refid="_render_test_cases_8h_1a517bc7273db353d5497d6ac65e8560f4" kind="function"><name>ExecuteBasicDeferredTest</name></member>
-  </compound>
   <compound refid="namespace_utils" kind="namespace"><name>Utils</name>
-    <member refid="_power_bench_2_inc_2_power_bench_2_utils_8h_1aeebd0a101cb6221c8e75d7676dd771b7" kind="variable"><name>CACHE_LINE_BYTES</name></member>
-    <member refid="_power_bench_2_inc_2_power_bench_2_utils_8h_1a88b70f1b00a94c24eb08990006635120" kind="variable"><name>ELEMENTS_PER_LINE</name></member>
-    <member refid="_power_bench_2_inc_2_power_bench_2_utils_8h_1a7212850bbb07021c15d65ae2e2e73442" kind="variable"><name>BIGGER_THAN_CACHE</name></member>
-    <member refid="_power_bench_2_inc_2_power_bench_2_utils_8h_1a1abe6716a8637b976551a46bd6b69d95" kind="variable"><name>g_dummyVec</name></member>
-    <member refid="_power_bench_2_inc_2_power_bench_2_utils_8h_1ac8bd26f8c138b474601752b8878a0c4a" kind="variable"><name>MATRIX_VAL_MIN</name></member>
-    <member refid="_power_bench_2_inc_2_power_bench_2_utils_8h_1a404dd8dcc39e5bae579a4e2045d70e54" kind="variable"><name>MATRIX_VAL_MAX</name></member>
-    <member refid="_power_bench_2_inc_2_power_bench_2_utils_8h_1ae4f36f9e7bf88650741aa454f547bc32" kind="function"><name>ClearCache</name></member>
-    <member refid="_power_bench_2_inc_2_power_bench_2_utils_8h_1a4779b034e45269359257a8de81170283" kind="function"><name>CreateRandomMatrix</name></member>
-    <member refid="_power_bench_2_inc_2_power_bench_2_utils_8h_1aa548fde9b991df527263042726d516bb" kind="function"><name>CreateEmpty</name></member>
+    <member refid="_utils_8h_1aeebd0a101cb6221c8e75d7676dd771b7" kind="variable"><name>CACHE_LINE_BYTES</name></member>
+    <member refid="_utils_8h_1a88b70f1b00a94c24eb08990006635120" kind="variable"><name>ELEMENTS_PER_LINE</name></member>
+    <member refid="_utils_8h_1a7212850bbb07021c15d65ae2e2e73442" kind="variable"><name>BIGGER_THAN_CACHE</name></member>
+    <member refid="_utils_8h_1a1abe6716a8637b976551a46bd6b69d95" kind="variable"><name>g_dummyVec</name></member>
+    <member refid="_utils_8h_1ac8bd26f8c138b474601752b8878a0c4a" kind="variable"><name>MATRIX_VAL_MIN</name></member>
+    <member refid="_utils_8h_1a404dd8dcc39e5bae579a4e2045d70e54" kind="variable"><name>MATRIX_VAL_MAX</name></member>
+    <member refid="_utils_8h_1ae4f36f9e7bf88650741aa454f547bc32" kind="function"><name>ClearCache</name></member>
+    <member refid="_utils_8h_1a4779b034e45269359257a8de81170283" kind="function"><name>CreateRandomMatrix</name></member>
+    <member refid="_utils_8h_1aa548fde9b991df527263042726d516bb" kind="function"><name>CreateEmpty</name></member>
   </compound>
-  <compound refid="_asset_manager_2_inc_2_asset_manager_2_common_8h" kind="file"><name>Common.h</name>
-  </compound>
-  <compound refid="_samples_22___deferred_renderer_2_inc_2_app_2_common_8h" kind="file"><name>Common.h</name>
+  <compound refid="_common_8h" kind="file"><name>Common.h</name>
   </compound>
   <compound refid="_g_l_t_f_loader_8h" kind="file"><name>GLTFLoader.h</name>
   </compound>
@@ -3182,9 +2438,7 @@
   </compound>
   <compound refid="_compute_pool_8h" kind="file"><name>ComputePool.h</name>
   </compound>
-  <compound refid="_azura_2_render_system_2_inc_2_generic_2_constants_8h" kind="file"><name>Constants.h</name>
-  </compound>
-  <compound refid="_dibella_2_inc_2_core_2_constants_8h" kind="file"><name>Constants.h</name>
+  <compound refid="_constants_8h" kind="file"><name>Constants.h</name>
   </compound>
   <compound refid="_debug_8h" kind="file"><name>Debug.h</name>
   </compound>
@@ -3390,38 +2644,6 @@
   </compound>
   <compound refid="_vk_win32_render_system_8cpp" kind="file"><name>VkWin32RenderSystem.cpp</name>
   </compound>
-  <compound refid="_renderer__test_8cpp" kind="file"><name>Renderer_test.cpp</name>
-    <member refid="_renderer__test_8cpp_1af8b312acc091fbc63bb075317e2f9fab" kind="variable"><name>UNIFORM_BUFFER_BINDING_ID</name></member>
-    <member refid="_renderer__test_8cpp_1a5e6ce0dd58078611570510dc4b8d81f3" kind="variable"><name>WINDOW_WIDTH</name></member>
-    <member refid="_renderer__test_8cpp_1ab76d138fa589df9a65fc05eb3bd56073" kind="variable"><name>WINDOW_HEIGHT</name></member>
-    <member refid="_renderer__test_8cpp_1a66bc4539f721f9f4eec6e6a39e5e4b12" kind="variable"><name>TEST_SUITE</name></member>
-    <member refid="_renderer__test_8cpp_1a41e317c0599d51e6b84b2bc892a25eb9" kind="variable"><name>SWAPCHAIN_DEFAULT_FORMAT</name></member>
-    <member refid="_renderer__test_8cpp_1aa3804051970068634d931ef717c36fda" kind="variable"><name>SWAPCHAIN_BYTE_SIZE</name></member>
-    <member refid="_renderer__test_8cpp_1a4c754279d31080bb91e871092f68edc0" kind="function"><name>CreateDefaultWindow</name></member>
-    <member refid="_renderer__test_8cpp_1a062b9ab7c5bb6e129ac81b160c8898c0" kind="function"><name>CompareImageBytes</name></member>
-    <member refid="_renderer__test_8cpp_1a5b3bf7c425f0f30a67c4ef908a792ed9" kind="function"><name>TEST_F</name></member>
-    <member refid="_renderer__test_8cpp_1ab52b3cab02b885b8cc11c255e9e52f77" kind="function"><name>TEST_F</name></member>
-    <member refid="_renderer__test_8cpp_1af19a8b3f5b14ec60e16c76ad12cf18d0" kind="function"><name>TEST_F</name></member>
-    <member refid="_renderer__test_8cpp_1ad8445bcc24b131cf1f2e41c39d745b81" kind="function"><name>TEST_F</name></member>
-  </compound>
-  <compound refid="_renderer__test_8h" kind="file"><name>Renderer_test.h</name>
-  </compound>
-  <compound refid="_render_test_cases_8cpp" kind="file"><name>RenderTestCases.cpp</name>
-  </compound>
-  <compound refid="_render_test_cases_8h" kind="file"><name>RenderTestCases.h</name>
-  </compound>
-  <compound refid="_azura_2_render_system_2_test_2test_8cpp" kind="file"><name>test.cpp</name>
-    <member refid="_azura_2_render_system_2_test_2test_8cpp_1a5b677e4e2990373ff0a16ed29b5d6aa3" kind="function"><name>TEST</name></member>
-    <member refid="_azura_2_render_system_2_test_2test_8cpp_1a3c04138a5bfe5d72780bb7e82a18e627" kind="function"><name>main</name></member>
-  </compound>
-  <compound refid="_common_2_test_2test_8cpp" kind="file"><name>test.cpp</name>
-    <member refid="_common_2_test_2test_8cpp_1a5b677e4e2990373ff0a16ed29b5d6aa3" kind="function"><name>TEST</name></member>
-    <member refid="_common_2_test_2test_8cpp_1a3c04138a5bfe5d72780bb7e82a18e627" kind="function"><name>main</name></member>
-  </compound>
-  <compound refid="_containers_2_test_2test_8cpp" kind="file"><name>test.cpp</name>
-    <member refid="_containers_2_test_2test_8cpp_1a5b677e4e2990373ff0a16ed29b5d6aa3" kind="function"><name>TEST</name></member>
-    <member refid="_containers_2_test_2test_8cpp_1a3c04138a5bfe5d72780bb7e82a18e627" kind="function"><name>main</name></member>
-  </compound>
   <compound refid="_camera_8h" kind="file"><name>Camera.h</name>
   </compound>
   <compound refid="_fly_through_camera_8h" kind="file"><name>FlyThroughCamera.h</name>
@@ -3456,9 +2678,7 @@
   </compound>
   <compound refid="_stack_memory_buffer_8h" kind="file"><name>StackMemoryBuffer.h</name>
   </compound>
-  <compound refid="_common_2_inc_2_types_8h" kind="file"><name>Types.h</name>
-  </compound>
-  <compound refid="_dibella_2_inc_2_core_2_types_8h" kind="file"><name>Types.h</name>
+  <compound refid="_types_8h" kind="file"><name>Types.h</name>
   </compound>
   <compound refid="_exceptions_8h" kind="file"><name>Exceptions.h</name>
   </compound>
@@ -3491,74 +2711,6 @@
   </compound>
   <compound refid="_hash_8cpp" kind="file"><name>Hash.cpp</name>
   </compound>
-  <compound refid="_hash__test_8cpp" kind="file"><name>Hash_test.cpp</name>
-    <member refid="_hash__test_8cpp_1a194ebeb185213ac77acf085d8d43e234" kind="function"><name>TEST</name></member>
-    <member refid="_hash__test_8cpp_1a4881afbf183fbc99095979bae2d8792a" kind="function"><name>TEST</name></member>
-    <member refid="_hash__test_8cpp_1ada7fde0e1646d543c28ad49be2fe6215" kind="function"><name>TEST</name></member>
-  </compound>
-  <compound refid="_hash__test_8h" kind="file"><name>Hash_test.h</name>
-  </compound>
-  <compound refid="_heap_memory_buffer__test_8cpp" kind="file"><name>HeapMemoryBuffer_test.cpp</name>
-    <member refid="_heap_memory_buffer__test_8cpp_1a450300ecc6c997e7cef135546ba7ba2a" kind="function"><name>TEST</name></member>
-    <member refid="_heap_memory_buffer__test_8cpp_1aa53e5a30ed1265335e24ed7b735fa016" kind="function"><name>TEST</name></member>
-    <member refid="_heap_memory_buffer__test_8cpp_1a1931357e11aa6346c2694b4265e3d478" kind="function"><name>TEST</name></member>
-    <member refid="_heap_memory_buffer__test_8cpp_1ab8f0a56d9d874f472848a982ae8f455b" kind="function"><name>TEST</name></member>
-    <member refid="_heap_memory_buffer__test_8cpp_1a99e04421eb7ab6e84b5fc1d2b9d6653e" kind="function"><name>TEST</name></member>
-  </compound>
-  <compound refid="_heap_memory_buffer__test_8h" kind="file"><name>HeapMemoryBuffer_test.h</name>
-  </compound>
-  <compound refid="_monotonic_allocator__test_8cpp" kind="file"><name>MonotonicAllocator_test.cpp</name>
-    <member refid="_monotonic_allocator__test_8cpp_1ac9e07a76ae83212af84c2b244d0ae3e1" kind="function"><name>TEST</name></member>
-    <member refid="_monotonic_allocator__test_8cpp_1a91a8fc9858ada27ba80a532e9a70b138" kind="function"><name>TEST</name></member>
-    <member refid="_monotonic_allocator__test_8cpp_1aebf780e24cf7ae3e5ecaf4eb8c38a18a" kind="function"><name>TEST</name></member>
-    <member refid="_monotonic_allocator__test_8cpp_1adb633093519743ee045d2489e601a0da" kind="function"><name>TEST</name></member>
-  </compound>
-  <compound refid="_monotonic_allocator__test_8h" kind="file"><name>MonotonicAllocator_test.h</name>
-  </compound>
-  <compound refid="_range_allocator__test_8cpp" kind="file"><name>RangeAllocator_test.cpp</name>
-    <member refid="_range_allocator__test_8cpp_1ac6678fb997768bedeee9a14e90e7565e" kind="function"><name>TEST</name></member>
-    <member refid="_range_allocator__test_8cpp_1a581708342a1e155be0b73853defab73e" kind="function"><name>TEST</name></member>
-    <member refid="_range_allocator__test_8cpp_1a338f5bcc00abc5a8fe172cfdda1c0911" kind="function"><name>TEST</name></member>
-  </compound>
-  <compound refid="_range_allocator__test_8h" kind="file"><name>RangeAllocator_test.h</name>
-  </compound>
-  <compound refid="_stack_memory_buffer__test_8cpp" kind="file"><name>StackMemoryBuffer_test.cpp</name>
-    <member refid="_stack_memory_buffer__test_8cpp_1a91a552ddf6691ee274a64fa76db1e70e" kind="function"><name>TEST</name></member>
-    <member refid="_stack_memory_buffer__test_8cpp_1a6a3ba7321ef4461b8d231a7089ff326a" kind="function"><name>TEST</name></member>
-  </compound>
-  <compound refid="_stack_memory_buffer__test_8h" kind="file"><name>StackMemoryBuffer_test.h</name>
-  </compound>
-  <compound refid="benchmark_8cpp" kind="file"><name>benchmark.cpp</name>
-    <member refid="benchmark_8cpp_1a5851750faa9cfec10f7cad1f3b89697e" kind="function"><name>BENCHMARK_MAIN</name></member>
-  </compound>
-  <compound refid="_std_vector__benchmark_8cpp" kind="file"><name>StdVector_benchmark.cpp</name>
-    <member refid="_std_vector__benchmark_8cpp_1ab740f0436e45de8760ecbb1da5f11066" kind="function"><name>BENCHMARK_F</name></member>
-    <member refid="_std_vector__benchmark_8cpp_1a8ce437907b41f9beeecc3d61c2cdc01d" kind="function"><name>BENCHMARK_F</name></member>
-    <member refid="_std_vector__benchmark_8cpp_1abff77f9106c0ee80fe86c58fe873cb5d" kind="function"><name>BENCHMARK_DEFINE_F</name></member>
-    <member refid="_std_vector__benchmark_8cpp_1a804346727717046026aa47cb2fc485ce" kind="function"><name>BENCHMARK_REGISTER_F</name></member>
-    <member refid="_std_vector__benchmark_8cpp_1a50e227a37faf2038bfd5f6b1b5cfaf11" kind="function"><name>BENCHMARK_DEFINE_F</name></member>
-    <member refid="_std_vector__benchmark_8cpp_1a6dd5dcf85ca393740d381799fce431ab" kind="function"><name>BENCHMARK_REGISTER_F</name></member>
-    <member refid="_std_vector__benchmark_8cpp_1acd9e7a149dc4d4524bafd332e5fd8acf" kind="function"><name>BENCHMARK_DEFINE_F</name></member>
-    <member refid="_std_vector__benchmark_8cpp_1a2a32762ce7d84d12ddfee532c3a10b8a" kind="function"><name>BENCHMARK_REGISTER_F</name></member>
-    <member refid="_std_vector__benchmark_8cpp_1a9442ef126d558754c6219ac8bb82b4ad" kind="function"><name>BENCHMARK_DEFINE_F</name></member>
-    <member refid="_std_vector__benchmark_8cpp_1a62431646a89f86db3c5a09b81056309f" kind="function"><name>BENCHMARK_REGISTER_F</name></member>
-  </compound>
-  <compound refid="_std_vector__benchmark_8h" kind="file"><name>StdVector_benchmark.h</name>
-  </compound>
-  <compound refid="_vector__benchmark_8cpp" kind="file"><name>Vector_benchmark.cpp</name>
-    <member refid="_vector__benchmark_8cpp_1ab740f0436e45de8760ecbb1da5f11066" kind="function"><name>BENCHMARK_F</name></member>
-    <member refid="_vector__benchmark_8cpp_1a8ce437907b41f9beeecc3d61c2cdc01d" kind="function"><name>BENCHMARK_F</name></member>
-    <member refid="_vector__benchmark_8cpp_1abff77f9106c0ee80fe86c58fe873cb5d" kind="function"><name>BENCHMARK_DEFINE_F</name></member>
-    <member refid="_vector__benchmark_8cpp_1a804346727717046026aa47cb2fc485ce" kind="function"><name>BENCHMARK_REGISTER_F</name></member>
-    <member refid="_vector__benchmark_8cpp_1a50e227a37faf2038bfd5f6b1b5cfaf11" kind="function"><name>BENCHMARK_DEFINE_F</name></member>
-    <member refid="_vector__benchmark_8cpp_1a6dd5dcf85ca393740d381799fce431ab" kind="function"><name>BENCHMARK_REGISTER_F</name></member>
-    <member refid="_vector__benchmark_8cpp_1acd9e7a149dc4d4524bafd332e5fd8acf" kind="function"><name>BENCHMARK_DEFINE_F</name></member>
-    <member refid="_vector__benchmark_8cpp_1a2a32762ce7d84d12ddfee532c3a10b8a" kind="function"><name>BENCHMARK_REGISTER_F</name></member>
-    <member refid="_vector__benchmark_8cpp_1a9442ef126d558754c6219ac8bb82b4ad" kind="function"><name>BENCHMARK_DEFINE_F</name></member>
-    <member refid="_vector__benchmark_8cpp_1a62431646a89f86db3c5a09b81056309f" kind="function"><name>BENCHMARK_REGISTER_F</name></member>
-  </compound>
-  <compound refid="_vector__benchmark_8h" kind="file"><name>Vector_benchmark.h</name>
-  </compound>
   <compound refid="_containers_8dox" kind="file"><name>Containers.dox</name>
   </compound>
   <compound refid="_array_8h" kind="file"><name>Array.h</name>
@@ -3566,54 +2718,6 @@
   <compound refid="_array_batch_8h" kind="file"><name>ArrayBatch.h</name>
   </compound>
   <compound refid="_vector_8h" kind="file"><name>Vector.h</name>
-  </compound>
-  <compound refid="_array__test_8cpp" kind="file"><name>Array_test.cpp</name>
-    <member refid="_array__test_8cpp_1aa4ccd4dbbabc5b5df275d80ca2f3ee4f" kind="function"><name>TEST_F</name></member>
-    <member refid="_array__test_8cpp_1a9f58c064e0947a4af016068235b393b6" kind="function"><name>TEST_F</name></member>
-    <member refid="_array__test_8cpp_1ab64e8a12bb3b50b7bdc205e2a624f0b1" kind="function"><name>TEST_F</name></member>
-    <member refid="_array__test_8cpp_1aebf49bf693f29cd68343c5a862452359" kind="function"><name>TEST_F</name></member>
-    <member refid="_array__test_8cpp_1aa22d0d971551247b476531a61caac3b9" kind="function"><name>TEST_F</name></member>
-    <member refid="_array__test_8cpp_1a09b83af735f4d8f86f4596740866d761" kind="function"><name>TEST_F</name></member>
-    <member refid="_array__test_8cpp_1a6f7c780191a9813410f36ec018c25083" kind="function"><name>TEST_F</name></member>
-    <member refid="_array__test_8cpp_1a7d0a863b946b5e9914f39835cbd88aea" kind="function"><name>TEST_F</name></member>
-    <member refid="_array__test_8cpp_1a3a4dea2e519474d86e7c9ca54d5db786" kind="function"><name>TEST_F</name></member>
-  </compound>
-  <compound refid="_array__test_8h" kind="file"><name>Array_test.h</name>
-  </compound>
-  <compound refid="_vector__test_8cpp" kind="file"><name>Vector_test.cpp</name>
-    <member refid="_vector__test_8cpp_1a9637a617f79d9faa89a839e5269841ab" kind="function"><name>GetTrivialVector</name></member>
-    <member refid="_vector__test_8cpp_1ab58e6a529ebc87d9ca7d119e1af64d0d" kind="function"><name>GetComplexVector</name></member>
-    <member refid="_vector__test_8cpp_1ac3926a9720aa08de179ad081930ad579" kind="function"><name>GetComplexStdVector</name></member>
-    <member refid="_vector__test_8cpp_1ac94730a9bf9d5ffbdb33e23f8a2bc9de" kind="function"><name>TEST_F</name></member>
-    <member refid="_vector__test_8cpp_1af4a781b49ca7c4d7e3e8ab1dfacf6335" kind="function"><name>TEST_F</name></member>
-    <member refid="_vector__test_8cpp_1a839afb52a8a307c041a5d85e3f355a5a" kind="function"><name>TEST_F</name></member>
-    <member refid="_vector__test_8cpp_1a632c999abf56409dbb47088df5fe2100" kind="function"><name>TEST_F</name></member>
-    <member refid="_vector__test_8cpp_1a52b28b1796f7846d8ef8d2b9d754c3d6" kind="function"><name>TEST_F</name></member>
-    <member refid="_vector__test_8cpp_1a4ac40aff8e1184fb8c886e280f208590" kind="function"><name>TEST_F</name></member>
-    <member refid="_vector__test_8cpp_1a63769a03246d627157b19416c8db4f8a" kind="function"><name>TEST_F</name></member>
-    <member refid="_vector__test_8cpp_1a7145e6c9cd089b6446d61395b733642f" kind="function"><name>TEST_F</name></member>
-    <member refid="_vector__test_8cpp_1a9046a79e22810d3bb17dc469bddb1860" kind="function"><name>TEST_F</name></member>
-    <member refid="_vector__test_8cpp_1a5c13c950e4599f1336bc7d01796cfcb6" kind="function"><name>TEST_F</name></member>
-    <member refid="_vector__test_8cpp_1a2ad905e33b6c5548413a0ed3ed43f2ab" kind="function"><name>TEST_F</name></member>
-    <member refid="_vector__test_8cpp_1aecd7e7aded1d850d6721541c60f5858e" kind="function"><name>TEST_F</name></member>
-    <member refid="_vector__test_8cpp_1a365263a1064786805ae441b3a7f79981" kind="function"><name>TEST_F</name></member>
-    <member refid="_vector__test_8cpp_1ab6ee0465791487b15571b0e642b4c6aa" kind="function"><name>TEST_F</name></member>
-    <member refid="_vector__test_8cpp_1a16206387f4dd37f047205378f6871faa" kind="function"><name>TEST_F</name></member>
-    <member refid="_vector__test_8cpp_1a56c49ac4cec448183df6bde019b6d9f2" kind="function"><name>TEST_F</name></member>
-    <member refid="_vector__test_8cpp_1a9e66b7b16453e01b65653a8cd8e2f776" kind="function"><name>TEST_F</name></member>
-    <member refid="_vector__test_8cpp_1a027654fd4e94e321e256818d9e646680" kind="function"><name>TEST_F</name></member>
-    <member refid="_vector__test_8cpp_1a85d5c577be35de263b08a3ba7548d873" kind="function"><name>TEST_F</name></member>
-    <member refid="_vector__test_8cpp_1a586408b493411c087cce5601a511da7a" kind="function"><name>TEST_F</name></member>
-    <member refid="_vector__test_8cpp_1acdd10de9a05444ff6a08464294a0702d" kind="function"><name>TEST_F</name></member>
-    <member refid="_vector__test_8cpp_1a3b57a58af4ed3615410cf5245b34b1a6" kind="function"><name>TEST_F</name></member>
-    <member refid="_vector__test_8cpp_1a3c5094dcc309e269a4314f46d30e509e" kind="function"><name>TEST_F</name></member>
-    <member refid="_vector__test_8cpp_1a1ee59730717d0102889b1575a8830ff8" kind="function"><name>TEST_F</name></member>
-    <member refid="_vector__test_8cpp_1a63c1b1e192af126ee88790733f573b45" kind="function"><name>TEST_F</name></member>
-    <member refid="_vector__test_8cpp_1a436933b55b65f695c7338b54c8704dc9" kind="function"><name>TEST_F</name></member>
-    <member refid="_vector__test_8cpp_1ac65d38c73b39242cbd60a95168ccdfd2" kind="function"><name>TEST_F</name></member>
-    <member refid="_vector__test_8cpp_1a64800e64a873187e02674e45967dd125" kind="function"><name>TEST_F</name></member>
-  </compound>
-  <compound refid="_vector__test_8h" kind="file"><name>Vector_test.h</name>
   </compound>
   <compound refid="_asset_location_8h" kind="file"><name>AssetLocation.h</name>
   </compound>
@@ -3646,74 +2750,6 @@
     <member refid="_raw_storage_format_8cpp_1aba07e41c970d7ece02f8384a4cf9ab1b" kind="define"><name>TO_STRING_MACRO</name></member>
     <member refid="_raw_storage_format_8cpp_1ac49c366c0421defd5d615eba853e4855" kind="define"><name>ENUM_TO_STRING_CASE</name></member>
   </compound>
-  <compound refid="_allocation_dependent_8h" kind="file"><name>AllocationDependent.h</name>
-  </compound>
-  <compound refid="_dibella_2_inc_2_core_2_utils_8h" kind="file"><name>Utils.h</name>
-  </compound>
-  <compound refid="_power_bench_2_inc_2_power_bench_2_utils_8h" kind="file"><name>Utils.h</name>
-    <member refid="_power_bench_2_inc_2_power_bench_2_utils_8h_1a6fb533d5d34911a48798bef60b073ecf" kind="typedef"><name>TestMatrix</name></member>
-  </compound>
-  <compound refid="_warper_8h" kind="file"><name>Warper.h</name>
-  </compound>
-  <compound refid="_integrator_8h" kind="file"><name>Integrator.h</name>
-  </compound>
-  <compound refid="_image_handler_8h" kind="file"><name>ImageHandler.h</name>
-  </compound>
-  <compound refid="_b_s_d_f_8h" kind="file"><name>BSDF.h</name>
-  </compound>
-  <compound refid="_bx_d_f_8h" kind="file"><name>BxDF.h</name>
-  </compound>
-  <compound refid="_bx_d_f_type_8h" kind="file"><name>BxDFType.h</name>
-  </compound>
-  <compound refid="_material_8h" kind="file"><name>Material.h</name>
-  </compound>
-  <compound refid="_intersection_8h" kind="file"><name>Intersection.h</name>
-  </compound>
-  <compound refid="_ray_8h" kind="file"><name>Ray.h</name>
-  </compound>
-  <compound refid="_sampler_8h" kind="file"><name>Sampler.h</name>
-  </compound>
-  <compound refid="_scene_object_8h" kind="file"><name>SceneObject.h</name>
-  </compound>
-  <compound refid="_shape_8h" kind="file"><name>Shape.h</name>
-  </compound>
-  <compound refid="_dibella_2_inc_2_scene_2_primitives_2_transform_8h" kind="file"><name>Transform.h</name>
-  </compound>
-  <compound refid="_math_2_inc_2_math_2_transform_8h" kind="file"><name>Transform.h</name>
-  </compound>
-  <compound refid="_dibella_2_inc_2_scene_2_scene_8h" kind="file"><name>Scene.h</name>
-  </compound>
-  <compound refid="_samples_22___deferred_renderer_2_inc_2_app_2_scene_8h" kind="file"><name>Scene.h</name>
-  </compound>
-  <compound refid="_allocatable_8cpp" kind="file"><name>Allocatable.cpp</name>
-  </compound>
-  <compound refid="_warper_8cpp" kind="file"><name>Warper.cpp</name>
-  </compound>
-  <compound refid="_integrator_8cpp" kind="file"><name>Integrator.cpp</name>
-  </compound>
-  <compound refid="_b_s_d_f_8cpp" kind="file"><name>BSDF.cpp</name>
-  </compound>
-  <compound refid="_bx_d_f_8cpp" kind="file"><name>BxDF.cpp</name>
-  </compound>
-  <compound refid="_material_8cpp" kind="file"><name>Material.cpp</name>
-  </compound>
-  <compound refid="_intersection_8cpp" kind="file"><name>Intersection.cpp</name>
-  </compound>
-  <compound refid="_ray_8cpp" kind="file"><name>Ray.cpp</name>
-  </compound>
-  <compound refid="_sampler_8cpp" kind="file"><name>Sampler.cpp</name>
-  </compound>
-  <compound refid="_scene_object_8cpp" kind="file"><name>SceneObject.cpp</name>
-  </compound>
-  <compound refid="_shape_8cpp" kind="file"><name>Shape.cpp</name>
-  </compound>
-  <compound refid="_dibella_2_src_2_scene_2_primitives_2_transform_8cpp" kind="file"><name>Transform.cpp</name>
-  </compound>
-  <compound refid="_math_2_src_2_transform_8cpp" kind="file"><name>Transform.cpp</name>
-    <member refid="_math_2_src_2_transform_8cpp_1a3cc772ca4f63a5a92716139ec6912489" kind="variable"><name>MATHFU_HANDEDNESS</name></member>
-  </compound>
-  <compound refid="_scene_8cpp" kind="file"><name>Scene.cpp</name>
-  </compound>
   <compound refid="_log_8h" kind="file"><name>Log.h</name>
   </compound>
   <compound refid="_log_8cpp" kind="file"><name>Log.cpp</name>
@@ -3727,6 +2763,8 @@
   </compound>
   <compound refid="_plane_8h" kind="file"><name>Plane.h</name>
   </compound>
+  <compound refid="_transform_8h" kind="file"><name>Transform.h</name>
+  </compound>
   <compound refid="_transform_component_8h" kind="file"><name>TransformComponent.h</name>
   </compound>
   <compound refid="_geometry_8cpp" kind="file"><name>Geometry.cpp</name>
@@ -3735,11 +2773,12 @@
   </compound>
   <compound refid="_plane_8cpp" kind="file"><name>Plane.cpp</name>
   </compound>
+  <compound refid="_transform_8cpp" kind="file"><name>Transform.cpp</name>
+    <member refid="_transform_8cpp_1a3cc772ca4f63a5a92716139ec6912489" kind="variable"><name>MATHFU_HANDEDNESS</name></member>
+  </compound>
   <compound refid="_transform_component_8cpp" kind="file"><name>TransformComponent.cpp</name>
   </compound>
-  <compound refid="_physics_2_inc_2_physics_2_geometry_2_cloth_mesh_8h" kind="file"><name>ClothMesh.h</name>
-  </compound>
-  <compound refid="_samples_20___test_zone_2_inc_2_test_zone_2_cloth_mesh_8h" kind="file"><name>ClothMesh.h</name>
+  <compound refid="_cloth_mesh_8h" kind="file"><name>ClothMesh.h</name>
   </compound>
   <compound refid="_cloth_plane_8h" kind="file"><name>ClothPlane.h</name>
   </compound>
@@ -3755,9 +2794,7 @@
   </compound>
   <compound refid="_solving_view_8h" kind="file"><name>SolvingView.h</name>
   </compound>
-  <compound refid="_physics_2_src_2_geometry_2_cloth_mesh_8cpp" kind="file"><name>ClothMesh.cpp</name>
-  </compound>
-  <compound refid="_samples_20___test_zone_2_src_2_cloth_mesh_8cpp" kind="file"><name>ClothMesh.cpp</name>
+  <compound refid="_cloth_mesh_8cpp" kind="file"><name>ClothMesh.cpp</name>
   </compound>
   <compound refid="_cloth_plane_8cpp" kind="file"><name>ClothPlane.cpp</name>
   </compound>
@@ -3787,6 +2824,9 @@
   </compound>
   <compound refid="_matrix_unroll_8h" kind="file"><name>MatrixUnroll.h</name>
   </compound>
+  <compound refid="_utils_8h" kind="file"><name>Utils.h</name>
+    <member refid="_utils_8h_1a6fb533d5d34911a48798bef60b073ecf" kind="typedef"><name>TestMatrix</name></member>
+  </compound>
   <compound refid="_matrix_multiplication_8cpp" kind="file"><name>MatrixMultiplication.cpp</name>
     <member refid="_matrix_multiplication_8cpp_1a44debf68d4a7d7a62dd54f3e235b1b52" kind="function"><name>BENCHMARK_DEFINE_F</name></member>
     <member refid="_matrix_multiplication_8cpp_1a1d7d5619dc74048806bebd4b7fabdc8b" kind="function"><name>BENCHMARK_REGISTER_F</name></member>
@@ -3797,78 +2837,6 @@
     <member refid="_matrix_unroll_8cpp_1a250fd69440b8bd65d81c242361604c5b" kind="function"><name>BENCHMARK_DEFINE_F</name></member>
     <member refid="_matrix_unroll_8cpp_1a9c2f8a5d39d6b50f4b7f626ef810a447" kind="function"><name>BENCHMARK_REGISTER_F</name></member>
   </compound>
-  <compound refid="0___test_zone_2_inc_2_test_zone_2_app_renderer_8h" kind="file"><name>AppRenderer.h</name>
-  </compound>
-  <compound refid="1___procedural_planet_2_inc_2_procedural_planet_2_app_renderer_8h" kind="file"><name>AppRenderer.h</name>
-  </compound>
-  <compound refid="3___cloth_sim_2_inc_2_cloth_sim_2_app_renderer_8h" kind="file"><name>AppRenderer.h</name>
-  </compound>
-  <compound refid="_cloth_common_8h" kind="file"><name>ClothCommon.h</name>
-  </compound>
-  <compound refid="_imported_cloth_mesh_8h" kind="file"><name>ImportedClothMesh.h</name>
-  </compound>
-  <compound refid="_app_renderer_8_basic_8cpp" kind="file"><name>AppRenderer.Basic.cpp</name>
-  </compound>
-  <compound refid="_app_renderer_8_cloth_8cpp" kind="file"><name>AppRenderer.Cloth.cpp</name>
-    <member refid="_app_renderer_8_cloth_8cpp_1a9f070c24d1bcd5d92601a9e4bc5b2239" kind="variable"><name>m_pos</name></member>
-    <member refid="_app_renderer_8_cloth_8cpp_1abacfef300a31bbd96e041d2139f6a589" kind="variable"><name>m_col</name></member>
-    <member refid="_app_renderer_8_cloth_8cpp_1aa8f87e87e5449f1c7a46b53abdc033e8" kind="variable"><name>m_uv</name></member>
-    <member refid="_app_renderer_8_cloth_8cpp_1ab0e812335faf45458fb0aeaa849b3556" kind="variable"><name>m_lightPos</name></member>
-  </compound>
-  <compound refid="_app_renderer_8_compute_8cpp" kind="file"><name>AppRenderer.Compute.cpp</name>
-  </compound>
-  <compound refid="0___test_zone_2_src_2_app_renderer_8cpp" kind="file"><name>AppRenderer.cpp</name>
-    <member refid="0___test_zone_2_src_2_app_renderer_8cpp_1a9f070c24d1bcd5d92601a9e4bc5b2239" kind="variable"><name>m_pos</name></member>
-    <member refid="0___test_zone_2_src_2_app_renderer_8cpp_1abacfef300a31bbd96e041d2139f6a589" kind="variable"><name>m_col</name></member>
-    <member refid="0___test_zone_2_src_2_app_renderer_8cpp_1aa8f87e87e5449f1c7a46b53abdc033e8" kind="variable"><name>m_uv</name></member>
-    <member refid="0___test_zone_2_src_2_app_renderer_8cpp_1ab0e812335faf45458fb0aeaa849b3556" kind="variable"><name>m_lightPos</name></member>
-  </compound>
-  <compound refid="1___procedural_planet_2_src_2_app_renderer_8cpp" kind="file"><name>AppRenderer.cpp</name>
-  </compound>
-  <compound refid="3___cloth_sim_2_src_2_app_renderer_8cpp" kind="file"><name>AppRenderer.cpp</name>
-    <member refid="3___cloth_sim_2_src_2_app_renderer_8cpp_1ab0e812335faf45458fb0aeaa849b3556" kind="variable"><name>m_lightPos</name></member>
-  </compound>
-  <compound refid="_app_renderer_8_deferred_8cpp" kind="file"><name>AppRenderer.Deferred.cpp</name>
-  </compound>
-  <compound refid="_app_renderer_8_instanced_8cpp" kind="file"><name>AppRenderer.Instanced.cpp</name>
-  </compound>
-  <compound refid="_imported_cloth_mesh_8cpp" kind="file"><name>ImportedClothMesh.cpp</name>
-  </compound>
-  <compound refid="_samples_20___test_zone_2_src_2main_8cpp" kind="file"><name>main.cpp</name>
-    <member refid="_samples_20___test_zone_2_src_2main_8cpp_1ae66f6b31b5ad750f1fe042a706a4e3d4" kind="function"><name>main</name></member>
-  </compound>
-  <compound refid="_samples_21___procedural_planet_2_src_2main_8cpp" kind="file"><name>main.cpp</name>
-    <member refid="_samples_21___procedural_planet_2_src_2main_8cpp_1ae66f6b31b5ad750f1fe042a706a4e3d4" kind="function"><name>main</name></member>
-  </compound>
-  <compound refid="_samples_22___deferred_renderer_2_src_2main_8cpp" kind="file"><name>main.cpp</name>
-    <member refid="_samples_22___deferred_renderer_2_src_2main_8cpp_1ae66f6b31b5ad750f1fe042a706a4e3d4" kind="function"><name>main</name></member>
-  </compound>
-  <compound refid="_samples_23___cloth_sim_2_src_2main_8cpp" kind="file"><name>main.cpp</name>
-    <member refid="_samples_23___cloth_sim_2_src_2main_8cpp_1ae66f6b31b5ad750f1fe042a706a4e3d4" kind="function"><name>main</name></member>
-  </compound>
-  <compound refid="_sandbox_2main_8cpp" kind="file"><name>main.cpp</name>
-    <member refid="_sandbox_2main_8cpp_1ae66f6b31b5ad750f1fe042a706a4e3d4" kind="function"><name>main</name></member>
-  </compound>
-  <compound refid="_app_8h" kind="file"><name>App.h</name>
-  </compound>
-  <compound refid="_light_texture_8h" kind="file"><name>LightTexture.h</name>
-  </compound>
-  <compound refid="_forward_compute_scene_8h" kind="file"><name>ForwardComputeScene.h</name>
-  </compound>
-  <compound refid="_forward_scene_8h" kind="file"><name>ForwardScene.h</name>
-  </compound>
-  <compound refid="_forward_plus_compute_scene_8h" kind="file"><name>ForwardPlusComputeScene.h</name>
-  </compound>
-  <compound refid="_app_8cpp" kind="file"><name>App.cpp</name>
-  </compound>
-  <compound refid="_forward_compute_scene_8cpp" kind="file"><name>ForwardComputeScene.cpp</name>
-  </compound>
-  <compound refid="_forward_plus_compute_scene_8cpp" kind="file"><name>ForwardPlusComputeScene.cpp</name>
-  </compound>
-  <compound refid="_forward_scene_8cpp" kind="file"><name>ForwardScene.cpp</name>
-  </compound>
-  <compound refid="_light_texture_8cpp" kind="file"><name>LightTexture.cpp</name>
-  </compound>
   <compound refid="group___common" kind="group"><name>Common</name>
   </compound>
   <compound refid="group___containers" kind="group"><name>Containers</name>
@@ -3877,23 +2845,11 @@
   </compound>
   <compound refid="todo" kind="page"><name>todo</name>
   </compound>
-  <compound refid="dir_00c33668da3f6cdbf3f77480622dfcb0" kind="dir"><name>Source/Samples/0_TestZone</name>
-  </compound>
-  <compound refid="dir_1f8f4006dcb15ba484a34805001b4264" kind="dir"><name>Source/Samples/1_ProceduralPlanet</name>
-  </compound>
-  <compound refid="dir_a8b722c9bb7e66add9a24b8ab89e6b09" kind="dir"><name>Source/Samples/2_DeferredRenderer</name>
-  </compound>
-  <compound refid="dir_933b1809a86011fe20b9aa5091753311" kind="dir"><name>Source/Samples/3_ClothSim</name>
-  </compound>
-  <compound refid="dir_572ac736a50c114acc2da55d1ab678f8" kind="dir"><name>Source/Samples/2_DeferredRenderer/Inc/App</name>
+  <compound refid="dir_10807047d00b3b0051fa88170d0fc301" kind="dir"><name>Source/AssetManager</name>
   </compound>
   <compound refid="dir_165c93a73fff8fcc3782ce7677b9efb0" kind="dir"><name>Source/AssetManager/Inc/AssetManager</name>
   </compound>
-  <compound refid="dir_10807047d00b3b0051fa88170d0fc301" kind="dir"><name>Source/AssetManager</name>
-  </compound>
   <compound refid="dir_812fa592ed21f01e62b4652a94728f8e" kind="dir"><name>Source/Azura</name>
-  </compound>
-  <compound refid="dir_3a69a5c14700b142ef54aa828ead01a9" kind="dir"><name>Source/Containers/Benchmark</name>
   </compound>
   <compound refid="dir_c1f6e5050edfdc88a62461f0422cef37" kind="dir"><name>Source/Camera</name>
   </compound>
@@ -3903,13 +2859,11 @@
   </compound>
   <compound refid="dir_92d889dff3ee079e17c6ec9831119105" kind="dir"><name>Source/Physics/Src/PBD/Cloth</name>
   </compound>
-  <compound refid="dir_157807393a5dd3ab23465c53244ac084" kind="dir"><name>Source/Samples/3_ClothSim/Inc/ClothSim</name>
-  </compound>
   <compound refid="dir_32d116e2aef2f2c1cc21236c96ac1042" kind="dir"><name>Source/Physics/Inc/Physics/PBD/Common</name>
   </compound>
-  <compound refid="dir_ecd144c6b909a483b5f2f5ce71e60778" kind="dir"><name>Source/Physics/Src/PBD/Common</name>
-  </compound>
   <compound refid="dir_573d75420a9527d403ae2af0f90fb3b6" kind="dir"><name>Source/Common</name>
+  </compound>
+  <compound refid="dir_ecd144c6b909a483b5f2f5ce71e60778" kind="dir"><name>Source/Physics/Src/PBD/Common</name>
   </compound>
   <compound refid="dir_51ce3bd35fd0e36e203435c9e0701535" kind="dir"><name>Source/Platform/Inc/CompileWarnings</name>
   </compound>
@@ -3917,85 +2871,55 @@
   </compound>
   <compound refid="dir_7e79bbf9426c5c36880a1e4e28061d08" kind="dir"><name>Source/Containers/Inc/Containers</name>
   </compound>
-  <compound refid="dir_0f3ef8c17cf3d8c1160f9b67467dacf2" kind="dir"><name>Source/Dibella/Inc/Core</name>
-  </compound>
-  <compound refid="dir_e402b03aae7bc8c18ebf1fe6717cf8ea" kind="dir"><name>Source/Dibella/Src/Core</name>
+  <compound refid="dir_1ad6433457b0067ef8f54a4fa85f5c9a" kind="dir"><name>Source/Core</name>
   </compound>
   <compound refid="dir_2d76a3fe177169ec8e1c6bc46f0e52e6" kind="dir"><name>Source/Core/Inc/Core</name>
   </compound>
-  <compound refid="dir_1ad6433457b0067ef8f54a4fa85f5c9a" kind="dir"><name>Source/Core</name>
-  </compound>
-  <compound refid="dir_3e7057b5b2b95403610957bb0c7cd488" kind="dir"><name>Source/Azura/RenderSystem/Src/D3D12</name>
-  </compound>
   <compound refid="dir_b0081666ddd4f252e3146d11bf89a886" kind="dir"><name>Source/Azura/RenderSystem/Inc/D3D12</name>
   </compound>
-  <compound refid="dir_e04c3ea876d0f18a4edc936211469caa" kind="dir"><name>Source/Dibella</name>
-  </compound>
-  <compound refid="dir_e9b08293bb3789469ede8b27f9a47102" kind="dir"><name>Source/Samples/2_DeferredRenderer/Inc/Forward</name>
-  </compound>
-  <compound refid="dir_7cc6fc610fa59663d2f38cbe03e7477a" kind="dir"><name>Source/Samples/2_DeferredRenderer/Inc/ForwardPlus</name>
+  <compound refid="dir_3e7057b5b2b95403610957bb0c7cd488" kind="dir"><name>Source/Azura/RenderSystem/Src/D3D12</name>
   </compound>
   <compound refid="dir_c24336a2a9d98db366d4521d4893d49f" kind="dir"><name>Source/Azura/RenderSystem/Src/Generic</name>
   </compound>
   <compound refid="dir_d65287db8b2e037c44f714b0ae87a2de" kind="dir"><name>Source/Azura/RenderSystem/Inc/Generic</name>
   </compound>
-  <compound refid="dir_1d963182e9e80ce9034f7a5033f397dc" kind="dir"><name>Source/Physics/Inc/Physics/Geometry</name>
-  </compound>
   <compound refid="dir_9cca2d142b572e379482b9ecad3dc299" kind="dir"><name>Source/Physics/Src/Geometry</name>
   </compound>
-  <compound refid="dir_8fe409b4d6bcd36e72722e584869e8d9" kind="dir"><name>Source/Math/Inc</name>
-  </compound>
-  <compound refid="dir_6b14b6a3136322f2b7a82534993d1226" kind="dir"><name>Source/Dibella/Inc</name>
-  </compound>
-  <compound refid="dir_9323940b097bbe8138c0c26d7909acd0" kind="dir"><name>Source/Samples/3_ClothSim/Inc</name>
-  </compound>
-  <compound refid="dir_fdd2b03d030d6762779ae1d9c4549ca7" kind="dir"><name>Source/Physics/Inc</name>
-  </compound>
-  <compound refid="dir_9bde3edf324dd76ece6c93f83b1d8189" kind="dir"><name>Source/Camera/Inc</name>
-  </compound>
-  <compound refid="dir_414a3ccf7da47e2e58fd692f13a16edc" kind="dir"><name>Source/Common/Inc</name>
-  </compound>
-  <compound refid="dir_542c2712334920d648a9fe1f18ce6069" kind="dir"><name>Source/Log/Inc</name>
-  </compound>
-  <compound refid="dir_da8d0c4c65f6b82e43c04dc507c2f308" kind="dir"><name>Source/Platform/Inc</name>
-  </compound>
-  <compound refid="dir_926dabec8304e517f34666a46272fd35" kind="dir"><name>Source/Samples/0_TestZone/Inc</name>
-  </compound>
-  <compound refid="dir_27da567ab3164dbb8dd455734660037c" kind="dir"><name>Source/Azura/RenderSystem/Inc</name>
-  </compound>
-  <compound refid="dir_26b3125252ba4008511972f92dc1ddc1" kind="dir"><name>Source/Containers/Inc</name>
-  </compound>
-  <compound refid="dir_013e4c86588dac62c0b4e00b7294b0b7" kind="dir"><name>Source/Core/Inc</name>
-  </compound>
-  <compound refid="dir_31d6e358702f48c68114ba44db339e56" kind="dir"><name>Source/Samples/1_ProceduralPlanet/Inc</name>
-  </compound>
-  <compound refid="dir_ac4b5d15564aaf9a61d2a1fa3f7dcd23" kind="dir"><name>Source/AssetManager/Inc</name>
+  <compound refid="dir_1d963182e9e80ce9034f7a5033f397dc" kind="dir"><name>Source/Physics/Inc/Physics/Geometry</name>
   </compound>
   <compound refid="dir_91a72ee9aa47d05268fff5869f136b89" kind="dir"><name>Source/PowerBench/Inc</name>
   </compound>
-  <compound refid="dir_de5367737b7291b3c203468ddc0cd2c2" kind="dir"><name>Source/Samples/2_DeferredRenderer/Inc</name>
+  <compound refid="dir_26b3125252ba4008511972f92dc1ddc1" kind="dir"><name>Source/Containers/Inc</name>
   </compound>
-  <compound refid="dir_c4d2ced8b200d13ac18fadb18bf2ae88" kind="dir"><name>Source/Dibella/Src/Integrators</name>
+  <compound refid="dir_27da567ab3164dbb8dd455734660037c" kind="dir"><name>Source/Azura/RenderSystem/Inc</name>
   </compound>
-  <compound refid="dir_a7ab38eb510d40a6ed8b47bb938c3147" kind="dir"><name>Source/Dibella/Inc/Integrators</name>
+  <compound refid="dir_013e4c86588dac62c0b4e00b7294b0b7" kind="dir"><name>Source/Core/Inc</name>
   </compound>
-  <compound refid="dir_19dd555689a7488eb183100e69ec32e4" kind="dir"><name>Source/Dibella/Inc/Interfaces</name>
+  <compound refid="dir_542c2712334920d648a9fe1f18ce6069" kind="dir"><name>Source/Log/Inc</name>
+  </compound>
+  <compound refid="dir_8fe409b4d6bcd36e72722e584869e8d9" kind="dir"><name>Source/Math/Inc</name>
+  </compound>
+  <compound refid="dir_9bde3edf324dd76ece6c93f83b1d8189" kind="dir"><name>Source/Camera/Inc</name>
+  </compound>
+  <compound refid="dir_fdd2b03d030d6762779ae1d9c4549ca7" kind="dir"><name>Source/Physics/Inc</name>
+  </compound>
+  <compound refid="dir_ac4b5d15564aaf9a61d2a1fa3f7dcd23" kind="dir"><name>Source/AssetManager/Inc</name>
+  </compound>
+  <compound refid="dir_414a3ccf7da47e2e58fd692f13a16edc" kind="dir"><name>Source/Common/Inc</name>
+  </compound>
+  <compound refid="dir_da8d0c4c65f6b82e43c04dc507c2f308" kind="dir"><name>Source/Platform/Inc</name>
   </compound>
   <compound refid="dir_85150b383dd2082738044d1794cfe63f" kind="dir"><name>Source/Log</name>
   </compound>
   <compound refid="dir_af54a762f5f5744e052220a47c6f923d" kind="dir"><name>Source/Log/Inc/Log</name>
   </compound>
-  <compound refid="dir_c7adfbb8e19ba05b88d105cdcce6abd2" kind="dir"><name>Source/Dibella/Src/Materials</name>
-  </compound>
-  <compound refid="dir_097cf5e081b3c69c4255c7b5164cf2f4" kind="dir"><name>Source/Dibella/Inc/Materials</name>
-  </compound>
   <compound refid="dir_e11b0d151eb01caf664c9344ba74d0cd" kind="dir"><name>Source/Math</name>
   </compound>
   <compound refid="dir_9d431b5aa65c39985c0eb5744d94f93d" kind="dir"><name>Source/Math/Inc/Math</name>
   </compound>
-  <compound refid="dir_f8354eeee1676e7ed741f1a1f6487616" kind="dir"><name>Source/Common/Inc/Memory</name>
-  </compound>
   <compound refid="dir_082816181a3e02987ad09c97809dca9d" kind="dir"><name>Source/Common/Src/Memory</name>
+  </compound>
+  <compound refid="dir_f8354eeee1676e7ed741f1a1f6487616" kind="dir"><name>Source/Common/Inc/Memory</name>
   </compound>
   <compound refid="dir_9e7e7290316838bccbe6075509c75054" kind="dir"><name>Source/Physics/Inc/Physics/PBD</name>
   </compound>
@@ -4007,93 +2931,45 @@
   </compound>
   <compound refid="dir_037d053c2decc15147cb220e8c093448" kind="dir"><name>Source/Platform</name>
   </compound>
-  <compound refid="dir_9e38844e155d6dfe56ca558fe1fdd703" kind="dir"><name>Source/PowerBench</name>
-  </compound>
   <compound refid="dir_431d603fe960950aa59b84d49fe07120" kind="dir"><name>Source/PowerBench/Inc/PowerBench</name>
   </compound>
-  <compound refid="dir_4a85dedb421323baddad8baa046b381d" kind="dir"><name>Source/Dibella/Src/Materials/Primitives</name>
-  </compound>
-  <compound refid="dir_ff3ead9e4c566b21bb2dc468c15d57ed" kind="dir"><name>Source/Dibella/Src/RayTracing/Primitives</name>
-  </compound>
-  <compound refid="dir_3b401138ca03e8077949836349105864" kind="dir"><name>Source/Dibella/Src/Scene/Primitives</name>
-  </compound>
-  <compound refid="dir_7e5cebfbcaff10a55f1fe8b6b8be6442" kind="dir"><name>Source/Dibella/Inc/Materials/Primitives</name>
-  </compound>
-  <compound refid="dir_68e594fa6f566d8540595f8d80f90577" kind="dir"><name>Source/Dibella/Inc/RayTracing/Primitives</name>
-  </compound>
-  <compound refid="dir_5d31d2f245c79ae4340bd359a69beead" kind="dir"><name>Source/Dibella/Inc/Scene/Primitives</name>
-  </compound>
-  <compound refid="dir_d234df171b80dc9baed12a2125f6fed9" kind="dir"><name>Source/Samples/1_ProceduralPlanet/Inc/ProceduralPlanet</name>
-  </compound>
-  <compound refid="dir_73230f1d1a86a4a01d47132b27260f5b" kind="dir"><name>Source/Dibella/Src/RayTracing</name>
-  </compound>
-  <compound refid="dir_26e1b19d310e6234ef0449611d01f955" kind="dir"><name>Source/Dibella/Inc/RayTracing</name>
+  <compound refid="dir_9e38844e155d6dfe56ca558fe1fdd703" kind="dir"><name>Source/PowerBench</name>
   </compound>
   <compound refid="dir_34e4d1fdc168b3d2b29a263b6f66091b" kind="dir"><name>Source/Azura/RenderSystem</name>
   </compound>
-  <compound refid="dir_077455fccf17b83666fd53ca3a66e804" kind="dir"><name>Source/Dibella/Src/Samplers</name>
-  </compound>
-  <compound refid="dir_24b6604dc6d49704948d10db3915fac3" kind="dir"><name>Source/Dibella/Inc/Samplers</name>
-  </compound>
-  <compound refid="dir_6e6f4034d178377ba19a5012f7841200" kind="dir"><name>Source/Samples</name>
-  </compound>
-  <compound refid="dir_a82d801ca6c82e64c6f696063e9565ca" kind="dir"><name>Source/Sandbox</name>
-  </compound>
-  <compound refid="dir_fa7a840fe1f0586b0c0ece39f604cce6" kind="dir"><name>Source/Dibella/Src/Scene</name>
-  </compound>
-  <compound refid="dir_a4a99f01e9c1fb73c650f96cdaee1f12" kind="dir"><name>Source/Dibella/Inc/Scene</name>
-  </compound>
   <compound refid="dir_74389ed8173ad57b461b9d623a1f3867" kind="dir"><name>Source</name>
-  </compound>
-  <compound refid="dir_13dfa86fa53f4827537324be96bf5083" kind="dir"><name>Source/PowerBench/Src</name>
-  </compound>
-  <compound refid="dir_15e0a612576eb934ae2ecd8e77b392d8" kind="dir"><name>Source/Samples/2_DeferredRenderer/Src</name>
-  </compound>
-  <compound refid="dir_2a28c84b88d865be983b5ccd365e9868" kind="dir"><name>Source/Samples/3_ClothSim/Src</name>
-  </compound>
-  <compound refid="dir_8b2570fb0cfa7a302dd9b36190badae3" kind="dir"><name>Source/Samples/0_TestZone/Src</name>
   </compound>
   <compound refid="dir_fd74e5455cebddc594cbeedcf79b29d0" kind="dir"><name>Source/Common/Src</name>
   </compound>
   <compound refid="dir_86a9dd4450aaedba1062a8b65b6fd498" kind="dir"><name>Source/Azura/RenderSystem/Src</name>
   </compound>
-  <compound refid="dir_27e9d679b90b4a3dbdca28e2cb16988c" kind="dir"><name>Source/Camera/Src</name>
-  </compound>
-  <compound refid="dir_7cc44bdec624141bc1f2210f27237c4d" kind="dir"><name>Source/Math/Src</name>
-  </compound>
-  <compound refid="dir_541714749b352de845182b61043f3f35" kind="dir"><name>Source/Log/Src</name>
+  <compound refid="dir_de67ccb3e57404e612d814388a2d4001" kind="dir"><name>Source/Core/Src</name>
   </compound>
   <compound refid="dir_79f8205d72a193fe81d549b074594910" kind="dir"><name>Source/AssetManager/Src</name>
   </compound>
-  <compound refid="dir_06595e3f310d4d5da901bf006a77b1c6" kind="dir"><name>Source/Physics/Src</name>
-  </compound>
-  <compound refid="dir_de67ccb3e57404e612d814388a2d4001" kind="dir"><name>Source/Core/Src</name>
-  </compound>
-  <compound refid="dir_1d770949642b1a96d91665027fdfa205" kind="dir"><name>Source/Samples/1_ProceduralPlanet/Src</name>
-  </compound>
-  <compound refid="dir_e9f059044fca6477b34e2ea7e4f842e3" kind="dir"><name>Source/Dibella/Src</name>
+  <compound refid="dir_13dfa86fa53f4827537324be96bf5083" kind="dir"><name>Source/PowerBench/Src</name>
   </compound>
   <compound refid="dir_330716c16bc6b3fcfda2a61c91c9104f" kind="dir"><name>Source/Platform/Src</name>
   </compound>
-  <compound refid="dir_7f60885e4c7d8c33494cd20600acb883" kind="dir"><name>Source/Azura/RenderSystem/Test</name>
+  <compound refid="dir_27e9d679b90b4a3dbdca28e2cb16988c" kind="dir"><name>Source/Camera/Src</name>
   </compound>
-  <compound refid="dir_bf1ec7ad60af9eb520d46763587caf64" kind="dir"><name>Source/Containers/Test</name>
+  <compound refid="dir_541714749b352de845182b61043f3f35" kind="dir"><name>Source/Log/Src</name>
   </compound>
-  <compound refid="dir_e8c33675ac14374a2c1e51571c79a0eb" kind="dir"><name>Source/Common/Test</name>
+  <compound refid="dir_7cc44bdec624141bc1f2210f27237c4d" kind="dir"><name>Source/Math/Src</name>
   </compound>
-  <compound refid="dir_0058d285dd2bee28f5c795072233ec2d" kind="dir"><name>Source/Samples/0_TestZone/Inc/TestZone</name>
-  </compound>
-  <compound refid="dir_38751aba19bd2955dd1a3a711a4e3c0d" kind="dir"><name>Source/Common/Src/Utils</name>
-  </compound>
-  <compound refid="dir_b741866e04513a5eff94a21645f0325e" kind="dir"><name>Source/Platform/Src/Utils</name>
-  </compound>
-  <compound refid="dir_19fbc52ae735a046ef8ee74d4d0fccc2" kind="dir"><name>Source/Platform/Inc/Utils</name>
+  <compound refid="dir_06595e3f310d4d5da901bf006a77b1c6" kind="dir"><name>Source/Physics/Src</name>
   </compound>
   <compound refid="dir_9d5e0908d5355275b4128abad39484ff" kind="dir"><name>Source/Common/Inc/Utils</name>
   </compound>
-  <compound refid="dir_ed73bdc95d69900a142e70d44e1bc81e" kind="dir"><name>Source/Azura/RenderSystem/Inc/Vulkan</name>
+  <compound refid="dir_19fbc52ae735a046ef8ee74d4d0fccc2" kind="dir"><name>Source/Platform/Inc/Utils</name>
+  </compound>
+  <compound refid="dir_b741866e04513a5eff94a21645f0325e" kind="dir"><name>Source/Platform/Src/Utils</name>
+  </compound>
+  <compound refid="dir_38751aba19bd2955dd1a3a711a4e3c0d" kind="dir"><name>Source/Common/Src/Utils</name>
   </compound>
   <compound refid="dir_7f2b9ec54b6ea3380cf8e7209dafbeaf" kind="dir"><name>Source/Azura/RenderSystem/Src/Vulkan</name>
+  </compound>
+  <compound refid="dir_ed73bdc95d69900a142e70d44e1bc81e" kind="dir"><name>Source/Azura/RenderSystem/Inc/Vulkan</name>
   </compound>
   <compound refid="dir_15a173f8ce149db710e32f4e69b10364" kind="dir"><name>Source/Azura/RenderSystem/Src/Vulkan/Windows</name>
   </compound>

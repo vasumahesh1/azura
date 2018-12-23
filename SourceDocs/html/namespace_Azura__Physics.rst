@@ -17,9 +17,9 @@ Namespaces
 ----------
 
 
-- :ref:`namespace_Azura__Physics__@221`
+- :ref:`namespace_Azura__Physics__@164`
 
-- :ref:`namespace_Azura__Physics__@222`
+- :ref:`namespace_Azura__Physics__@165`
 
 - :ref:`namespace_Azura__Physics__PBD`
 

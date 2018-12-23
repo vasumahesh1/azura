@@ -114,32 +114,32 @@
     <detaileddescription>
     </detaileddescription>
     <inheritancegraph>
-      <node id="388">
+      <node id="280">
         <label>Azura::GPUBuffer</label>
         <link refid="struct_azura_1_1_g_p_u_buffer"/>
       </node>
-      <node id="387">
+      <node id="279">
         <label>Azura::MappedGPUBuffer</label>
         <link refid="struct_azura_1_1_mapped_g_p_u_buffer"/>
-        <childnode refid="388" relation="public-inheritance">
+        <childnode refid="280" relation="public-inheritance">
         </childnode>
       </node>
     </inheritancegraph>
     <collaborationgraph>
-      <node id="391">
+      <node id="283">
         <label>Azura::Containers::Vector&lt; Azura::BufferEntry &gt;</label>
         <link refid="class_azura_1_1_containers_1_1_vector"/>
       </node>
-      <node id="390">
+      <node id="282">
         <label>Azura::GPUBuffer</label>
         <link refid="struct_azura_1_1_g_p_u_buffer"/>
       </node>
-      <node id="389">
+      <node id="281">
         <label>Azura::MappedGPUBuffer</label>
         <link refid="struct_azura_1_1_mapped_g_p_u_buffer"/>
-        <childnode refid="390" relation="public-inheritance">
+        <childnode refid="282" relation="public-inheritance">
         </childnode>
-        <childnode refid="391" relation="usage">
+        <childnode refid="283" relation="usage">
           <edgelabel>m_entries</edgelabel>
         </childnode>
       </node>

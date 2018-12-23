@@ -31,7 +31,7 @@ Includes
 
 - ``Memory/Allocator.h``
 
-- ``Renderer.h`` (:ref:`file_Source_Samples_0_TestZone_Inc_TestZone_AppRenderer.h`)
+- ``Renderer.h`` (:ref:`file_Source_Azura_RenderSystem_Inc_D3D12_D3D12Renderer.h`)
 
 - ``TextureManager.h`` (:ref:`file_Source_Azura_RenderSystem_Inc_D3D12_D3D12TextureManager.h`)
 
@@ -46,34 +46,6 @@ Included By
 - :ref:`file_Source_Azura_RenderSystem_Src_Vulkan_VkRenderSystem.cpp`
 
 - :ref:`file_Source_Azura_RenderSystem_Src_Vulkan_Windows_VkWin32RenderSystem.cpp`
-
-- :ref:`file_Source_Azura_RenderSystem_Test_Renderer_test.cpp`
-
-- :ref:`file_Source_Azura_RenderSystem_Test_RenderTestCases.cpp`
-
-- :ref:`file_Source_Samples_0_TestZone_Src_AppRenderer.Basic.cpp`
-
-- :ref:`file_Source_Samples_0_TestZone_Src_AppRenderer.Cloth.cpp`
-
-- :ref:`file_Source_Samples_0_TestZone_Src_AppRenderer.Compute.cpp`
-
-- :ref:`file_Source_Samples_0_TestZone_Src_AppRenderer.cpp`
-
-- :ref:`file_Source_Samples_0_TestZone_Src_AppRenderer.Deferred.cpp`
-
-- :ref:`file_Source_Samples_0_TestZone_Src_AppRenderer.Instanced.cpp`
-
-- :ref:`file_Source_Samples_1_ProceduralPlanet_Src_AppRenderer.cpp`
-
-- :ref:`file_Source_Samples_2_DeferredRenderer_Src_App.cpp`
-
-- :ref:`file_Source_Samples_2_DeferredRenderer_Src_ForwardComputeScene.cpp`
-
-- :ref:`file_Source_Samples_2_DeferredRenderer_Src_ForwardPlusComputeScene.cpp`
-
-- :ref:`file_Source_Samples_2_DeferredRenderer_Src_ForwardScene.cpp`
-
-- :ref:`file_Source_Samples_3_ClothSim_Src_AppRenderer.cpp`
 
 
 

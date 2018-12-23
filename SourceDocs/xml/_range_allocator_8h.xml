@@ -3,85 +3,60 @@
   <compounddef id="_range_allocator_8h" kind="file" language="C++">
     <compoundname>RangeAllocator.h</compoundname>
     <includes refid="_allocator_8h" local="yes">Allocator.h</includes>
-    <includes local="yes">Types.h</includes>
+    <includes refid="_types_8h" local="yes">Types.h</includes>
     <includes local="no">vector</includes>
-    <includedby refid="_renderer__test_8h" local="yes">Source/Azura/RenderSystem/Test/Renderer_test.h</includedby>
     <includedby refid="_range_allocator_8cpp" local="yes">Source/Common/Src/Memory/RangeAllocator.cpp</includedby>
-    <includedby refid="_range_allocator__test_8h" local="yes">Source/Common/Test/RangeAllocator_test.h</includedby>
-    <includedby refid="0___test_zone_2_inc_2_test_zone_2_app_renderer_8h" local="yes">Source/Samples/0_TestZone/Inc/TestZone/AppRenderer.h</includedby>
-    <includedby refid="_app_8h" local="yes">Source/Samples/2_DeferredRenderer/Inc/App/App.h</includedby>
-    <includedby refid="3___cloth_sim_2_inc_2_cloth_sim_2_app_renderer_8h" local="yes">Source/Samples/3_ClothSim/Inc/ClothSim/AppRenderer.h</includedby>
     <incdepgraph>
-      <node id="4006">
+      <node id="4023">
         <label>functional</label>
       </node>
-      <node id="4004">
-        <label>Source/Common/Inc/Memory/RangeAllocator.h</label>
-        <link refid="_range_allocator_8h"/>
-        <childnode refid="4005" relation="include">
-        </childnode>
-        <childnode refid="4007" relation="include">
-        </childnode>
-        <childnode refid="4009" relation="include">
-        </childnode>
+      <node id="4026">
+        <label>cstdint</label>
       </node>
-      <node id="4005">
+      <node id="4027">
+        <label>string</label>
+      </node>
+      <node id="4022">
         <label>Allocator.h</label>
         <link refid="_allocator_8h_source"/>
-        <childnode refid="4006" relation="include">
+        <childnode refid="4023" relation="include">
         </childnode>
-        <childnode refid="4007" relation="include">
+        <childnode refid="4024" relation="include">
         </childnode>
-        <childnode refid="4008" relation="include">
+        <childnode refid="4028" relation="include">
         </childnode>
       </node>
-      <node id="4008">
+      <node id="4028">
         <label>Utils/Macros.h</label>
         <link refid="_macros_8h_source"/>
       </node>
-      <node id="4009">
+      <node id="4029">
         <label>vector</label>
       </node>
-      <node id="4007">
-        <label>Types.h</label>
+      <node id="4025">
+        <label>cstddef</label>
       </node>
-    </incdepgraph>
-    <invincdepgraph>
-      <node id="4010">
+      <node id="4024">
+        <label>Types.h</label>
+        <link refid="_types_8h_source"/>
+        <childnode refid="4025" relation="include">
+        </childnode>
+        <childnode refid="4026" relation="include">
+        </childnode>
+        <childnode refid="4027" relation="include">
+        </childnode>
+      </node>
+      <node id="4021">
         <label>Source/Common/Inc/Memory/RangeAllocator.h</label>
         <link refid="_range_allocator_8h"/>
-        <childnode refid="4011" relation="include">
+        <childnode refid="4022" relation="include">
         </childnode>
-        <childnode refid="4012" relation="include">
+        <childnode refid="4024" relation="include">
         </childnode>
-        <childnode refid="4013" relation="include">
-        </childnode>
-        <childnode refid="4014" relation="include">
-        </childnode>
-        <childnode refid="4015" relation="include">
+        <childnode refid="4029" relation="include">
         </childnode>
       </node>
-      <node id="4014">
-        <label>Source/Samples/2_DeferredRenderer/Inc/App/App.h</label>
-        <link refid="_app_8h_source"/>
-      </node>
-      <node id="4015">
-        <label>Source/Samples/3_ClothSim/Inc/ClothSim/AppRenderer.h</label>
-        <link refid="3___cloth_sim_2_inc_2_cloth_sim_2_app_renderer_8h_source"/>
-      </node>
-      <node id="4013">
-        <label>Source/Samples/0_TestZone/Inc/TestZone/AppRenderer.h</label>
-        <link refid="0___test_zone_2_inc_2_test_zone_2_app_renderer_8h_source"/>
-      </node>
-      <node id="4012">
-        <label>Source/Common/Test/RangeAllocator_test.h</label>
-        <link refid="_range_allocator__test_8h_source"/>
-      </node>
-      <node id="4011">
-        <label>Source/Azura/RenderSystem/Test/Renderer_test.h</label>
-        <link refid="_renderer__test_8h_source"/>
-      </node>
-    </invincdepgraph>
+    </incdepgraph>
     <innerclass refid="class_azura_1_1_memory_1_1_range_allocator" prot="public">Azura::Memory::RangeAllocator</innerclass>
     <innernamespace refid="namespace_azura">Azura</innernamespace>
     <innernamespace refid="namespace_azura_1_1_memory">Azura::Memory</innernamespace>

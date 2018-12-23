@@ -247,39 +247,39 @@
     <detaileddescription>
     </detaileddescription>
     <inheritancegraph>
-      <node id="302">
+      <node id="227">
         <label>Azura::Window</label>
         <link refid="class_azura_1_1_window"/>
       </node>
-      <node id="303">
+      <node id="228">
         <label>Azura::Win32GLFWWindow</label>
         <link refid="class_azura_1_1_win32_g_l_f_w_window"/>
-        <childnode refid="301" relation="public-inheritance">
+        <childnode refid="226" relation="public-inheritance">
         </childnode>
       </node>
-      <node id="301">
+      <node id="226">
         <label>Azura::GLFWWindow</label>
         <link refid="class_azura_1_1_g_l_f_w_window"/>
-        <childnode refid="302" relation="public-inheritance">
+        <childnode refid="227" relation="public-inheritance">
         </childnode>
       </node>
     </inheritancegraph>
     <collaborationgraph>
-      <node id="306">
+      <node id="231">
         <label>Azura::Log</label>
         <link refid="class_azura_1_1_log"/>
       </node>
-      <node id="305">
+      <node id="230">
         <label>Azura::Window</label>
         <link refid="class_azura_1_1_window"/>
-        <childnode refid="306" relation="usage">
+        <childnode refid="231" relation="usage">
           <edgelabel>log_Window</edgelabel>
         </childnode>
       </node>
-      <node id="304">
+      <node id="229">
         <label>Azura::GLFWWindow</label>
         <link refid="class_azura_1_1_g_l_f_w_window"/>
-        <childnode refid="305" relation="public-inheritance">
+        <childnode refid="230" relation="public-inheritance">
         </childnode>
       </node>
     </collaborationgraph>

@@ -7,176 +7,108 @@
     <includedby refid="_fly_through_camera_8cpp" local="yes">Source/Camera/Src/FlyThroughCamera.cpp</includedby>
     <includedby refid="_transform_component_8h" local="yes">Source/Math/Inc/Math/TransformComponent.h</includedby>
     <invincdepgraph>
-      <node id="4761">
-        <label>Source/Camera/Inc/Camera/Camera.h</label>
-        <link refid="_camera_8h_source"/>
-        <childnode refid="4762" relation="include">
+      <node id="4507">
+        <label>Source/Camera/Inc/Camera/FlyThroughCamera.h</label>
+        <link refid="_fly_through_camera_8h_source"/>
+      </node>
+      <node id="4498">
+        <label>Source/Azura/RenderSystem/Inc/D3D12/D3D12ScopedSwapChain.h</label>
+        <link refid="_d3_d12_scoped_swap_chain_8h_source"/>
+        <childnode refid="4497" relation="include">
         </childnode>
-        <childnode refid="4763" relation="include">
+        <childnode refid="4499" relation="include">
         </childnode>
-        <childnode refid="4756" relation="include">
+        <childnode refid="4503" relation="include">
         </childnode>
       </node>
-      <node id="4757">
-        <label>Source/Samples/2_DeferredRenderer/Inc/Forward/ForwardComputeScene.h</label>
-        <link refid="_forward_compute_scene_8h_source"/>
-        <childnode refid="4755" relation="include">
-        </childnode>
-      </node>
-      <node id="4747">
-        <label>Source/Azura/RenderSystem/Inc/D3D12/D3D12ComputePool.h</label>
-        <link refid="_d3_d12_compute_pool_8h_source"/>
-        <childnode refid="4744" relation="include">
-        </childnode>
-      </node>
-      <node id="4755">
-        <label>Source/Samples/2_DeferredRenderer/Inc/App/App.h</label>
-        <link refid="_app_8h_source"/>
-      </node>
-      <node id="4759">
-        <label>Source/Samples/2_DeferredRenderer/Inc/ForwardPlus/ForwardPlusComputeScene.h</label>
-        <link refid="_forward_plus_compute_scene_8h_source"/>
-        <childnode refid="4755" relation="include">
-        </childnode>
-      </node>
-      <node id="4752">
-        <label>Source/Azura/RenderSystem/Inc/Generic/Windows/Win32GLFWWindow.h</label>
-        <link refid="_win32_g_l_f_w_window_8h_source"/>
-      </node>
-      <node id="4748">
-        <label>Source/Azura/RenderSystem/Inc/D3D12/D3D12ScopedPipeline.h</label>
-        <link refid="_d3_d12_scoped_pipeline_8h_source"/>
-        <childnode refid="4747" relation="include">
-        </childnode>
-        <childnode refid="4749" relation="include">
-        </childnode>
-      </node>
-      <node id="4744">
+      <node id="4497">
         <label>Source/Azura/RenderSystem/Inc/D3D12/D3D12Renderer.h</label>
         <link refid="_d3_d12_renderer_8h_source"/>
       </node>
-      <node id="4750">
-        <label>Source/Azura/RenderSystem/Inc/D3D12/D3D12ScopedRenderPass.h</label>
-        <link refid="_d3_d12_scoped_render_pass_8h_source"/>
-        <childnode refid="4749" relation="include">
-        </childnode>
-        <childnode refid="4744" relation="include">
-        </childnode>
-        <childnode refid="4748" relation="include">
-        </childnode>
-      </node>
-      <node id="4764">
+      <node id="4509">
         <label>Source/Math/Inc/Math/TransformComponent.h</label>
         <link refid="_transform_component_8h_source"/>
-        <childnode refid="4760" relation="include">
+      </node>
+      <node id="4503">
+        <label>Source/Azura/RenderSystem/Inc/D3D12/D3D12ScopedRenderPass.h</label>
+        <link refid="_d3_d12_scoped_render_pass_8h_source"/>
+        <childnode refid="4502" relation="include">
+        </childnode>
+        <childnode refid="4497" relation="include">
+        </childnode>
+        <childnode refid="4501" relation="include">
         </childnode>
       </node>
-      <node id="4760">
-        <label>Source/Samples/3_ClothSim/Inc/ClothSim/AppRenderer.h</label>
-        <link refid="3___cloth_sim_2_inc_2_cloth_sim_2_app_renderer_8h_source"/>
-      </node>
-      <node id="4742">
-        <label>Source/Core/Inc/Core/Events.h</label>
-        <link refid="_events_8h"/>
-        <childnode refid="4743" relation="include">
-        </childnode>
-        <childnode refid="4761" relation="include">
-        </childnode>
-        <childnode refid="4764" relation="include">
-        </childnode>
-      </node>
-      <node id="4745">
-        <label>Source/Azura/RenderSystem/Inc/D3D12/D3D12ScopedSwapChain.h</label>
-        <link refid="_d3_d12_scoped_swap_chain_8h_source"/>
-        <childnode refid="4744" relation="include">
-        </childnode>
-        <childnode refid="4746" relation="include">
-        </childnode>
-        <childnode refid="4750" relation="include">
-        </childnode>
-      </node>
-      <node id="4762">
-        <label>Source/Camera/Inc/Camera/FlyThroughCamera.h</label>
-        <link refid="_fly_through_camera_8h_source"/>
-        <childnode refid="4755" relation="include">
-        </childnode>
-      </node>
-      <node id="4754">
-        <label>Source/Samples/1_ProceduralPlanet/Inc/ProceduralPlanet/AppRenderer.h</label>
-        <link refid="1___procedural_planet_2_inc_2_procedural_planet_2_app_renderer_8h_source"/>
-      </node>
-      <node id="4753">
-        <label>Source/Samples/0_TestZone/Inc/TestZone/AppRenderer.h</label>
-        <link refid="0___test_zone_2_inc_2_test_zone_2_app_renderer_8h_source"/>
-      </node>
-      <node id="4751">
-        <label>Source/Azura/RenderSystem/Inc/Generic/GLFWWindow.h</label>
-        <link refid="_g_l_f_w_window_8h_source"/>
-        <childnode refid="4752" relation="include">
-        </childnode>
-      </node>
-      <node id="4758">
-        <label>Source/Samples/2_DeferredRenderer/Inc/Forward/ForwardScene.h</label>
-        <link refid="_forward_scene_8h_source"/>
-        <childnode refid="4755" relation="include">
-        </childnode>
-      </node>
-      <node id="4749">
-        <label>Source/Azura/RenderSystem/Inc/D3D12/D3D12DrawablePool.h</label>
-        <link refid="_d3_d12_drawable_pool_8h_source"/>
-        <childnode refid="4744" relation="include">
-        </childnode>
-      </node>
-      <node id="4743">
-        <label>Source/Azura/RenderSystem/Inc/Generic/Window.h</label>
-        <link refid="_window_8h_source"/>
-        <childnode refid="4744" relation="include">
-        </childnode>
-        <childnode refid="4745" relation="include">
-        </childnode>
-        <childnode refid="4751" relation="include">
-        </childnode>
-        <childnode refid="4753" relation="include">
-        </childnode>
-        <childnode refid="4754" relation="include">
-        </childnode>
-        <childnode refid="4755" relation="include">
-        </childnode>
-        <childnode refid="4756" relation="include">
-        </childnode>
-        <childnode refid="4760" relation="include">
-        </childnode>
-      </node>
-      <node id="4763">
+      <node id="4508">
         <label>Source/Camera/Inc/Camera/PolarCamera.h</label>
         <link refid="_polar_camera_8h_source"/>
-        <childnode refid="4753" relation="include">
+      </node>
+      <node id="4495">
+        <label>Source/Core/Inc/Core/Events.h</label>
+        <link refid="_events_8h"/>
+        <childnode refid="4496" relation="include">
         </childnode>
-        <childnode refid="4754" relation="include">
+        <childnode refid="4506" relation="include">
         </childnode>
-        <childnode refid="4760" relation="include">
+        <childnode refid="4509" relation="include">
         </childnode>
       </node>
-      <node id="4756">
-        <label>Source/Samples/2_DeferredRenderer/Inc/App/Scene.h</label>
-        <link refid="_samples_22___deferred_renderer_2_inc_2_app_2_scene_8h_source"/>
-        <childnode refid="4755" relation="include">
+      <node id="4501">
+        <label>Source/Azura/RenderSystem/Inc/D3D12/D3D12ScopedPipeline.h</label>
+        <link refid="_d3_d12_scoped_pipeline_8h_source"/>
+        <childnode refid="4500" relation="include">
         </childnode>
-        <childnode refid="4757" relation="include">
-        </childnode>
-        <childnode refid="4758" relation="include">
-        </childnode>
-        <childnode refid="4759" relation="include">
+        <childnode refid="4502" relation="include">
         </childnode>
       </node>
-      <node id="4746">
+      <node id="4499">
         <label>Source/Azura/RenderSystem/Inc/D3D12/D3D12ScopedComputePass.h</label>
         <link refid="_d3_d12_scoped_compute_pass_8h_source"/>
-        <childnode refid="4747" relation="include">
+        <childnode refid="4500" relation="include">
         </childnode>
-        <childnode refid="4744" relation="include">
+        <childnode refid="4497" relation="include">
         </childnode>
-        <childnode refid="4748" relation="include">
+        <childnode refid="4501" relation="include">
+        </childnode>
+      </node>
+      <node id="4496">
+        <label>Source/Azura/RenderSystem/Inc/Generic/Window.h</label>
+        <link refid="_window_8h_source"/>
+        <childnode refid="4497" relation="include">
+        </childnode>
+        <childnode refid="4498" relation="include">
+        </childnode>
+        <childnode refid="4504" relation="include">
+        </childnode>
+      </node>
+      <node id="4506">
+        <label>Source/Camera/Inc/Camera/Camera.h</label>
+        <link refid="_camera_8h_source"/>
+        <childnode refid="4507" relation="include">
+        </childnode>
+        <childnode refid="4508" relation="include">
+        </childnode>
+      </node>
+      <node id="4505">
+        <label>Source/Azura/RenderSystem/Inc/Generic/Windows/Win32GLFWWindow.h</label>
+        <link refid="_win32_g_l_f_w_window_8h_source"/>
+      </node>
+      <node id="4504">
+        <label>Source/Azura/RenderSystem/Inc/Generic/GLFWWindow.h</label>
+        <link refid="_g_l_f_w_window_8h_source"/>
+        <childnode refid="4505" relation="include">
+        </childnode>
+      </node>
+      <node id="4500">
+        <label>Source/Azura/RenderSystem/Inc/D3D12/D3D12ComputePool.h</label>
+        <link refid="_d3_d12_compute_pool_8h_source"/>
+        <childnode refid="4497" relation="include">
+        </childnode>
+      </node>
+      <node id="4502">
+        <label>Source/Azura/RenderSystem/Inc/D3D12/D3D12DrawablePool.h</label>
+        <link refid="_d3_d12_drawable_pool_8h_source"/>
+        <childnode refid="4497" relation="include">
         </childnode>
       </node>
     </invincdepgraph>

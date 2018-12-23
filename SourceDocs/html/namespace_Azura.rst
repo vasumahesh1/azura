@@ -17,25 +17,13 @@ Namespaces
 ----------
 
 
-- :ref:`namespace_Azura__@116`
+- :ref:`namespace_Azura__@111`
 
-- :ref:`namespace_Azura__@117`
+- :ref:`namespace_Azura__@112`
+
+- :ref:`namespace_Azura__@143`
 
 - :ref:`namespace_Azura__@2`
-
-- :ref:`namespace_Azura__@200`
-
-- :ref:`namespace_Azura__@244`
-
-- :ref:`namespace_Azura__@246`
-
-- :ref:`namespace_Azura__@249`
-
-- :ref:`namespace_Azura__@250`
-
-- :ref:`namespace_Azura__@264`
-
-- :ref:`namespace_Azura__@269`
 
 - :ref:`namespace_Azura__@76`
 
@@ -78,10 +66,6 @@ Classes
 
 - :ref:`exhale_struct_struct_azura_1_1_application_requirements`
 
-- :ref:`exhale_struct_struct_azura_1_1_app_pass1`
-
-- :ref:`exhale_struct_struct_azura_1_1_bending_constraint`
-
 - :ref:`exhale_struct_struct_azura_1_1_blending_eq`
 
 - :ref:`exhale_struct_struct_azura_1_1_blend_state`
@@ -100,13 +84,7 @@ Classes
 
 - :ref:`exhale_struct_struct_azura_1_1_clear_data`
 
-- :ref:`exhale_struct_struct_azura_1_1_cloth_compute_properties`
-
-- :ref:`exhale_struct_struct_azura_1_1_compute_pass_data`
-
 - :ref:`exhale_struct_struct_azura_1_1_compute_pool_create_info`
-
-- :ref:`exhale_struct_struct_azura_1_1_compute_u_b_o`
 
 - :ref:`exhale_struct_struct_azura_1_1_descriptor_count`
 
@@ -120,57 +98,27 @@ Classes
 
 - :ref:`exhale_struct_struct_azura_1_1_device_requirements`
 
-- :ref:`exhale_struct_struct_azura_1_1_distance_constraint`
-
 - :ref:`exhale_struct_struct_azura_1_1_drawable_create_info`
 
 - :ref:`exhale_struct_struct_azura_1_1_drawable_pool_create_info`
 
-- :ref:`exhale_struct_struct_azura_1_1_edge`
-
-- :ref:`exhale_struct_struct_azura_1_1_edge_map_hash`
-
 - :ref:`exhale_struct_struct_azura_1_1_event`
 
-- :ref:`exhale_struct_struct_azura_1_1_forward_compute_pass`
-
-- :ref:`exhale_struct_struct_azura_1_1_forward_pass`
-
-- :ref:`exhale_struct_struct_azura_1_1_forward_plus_compute_pass`
-
-- :ref:`exhale_struct_struct_azura_1_1_frustum`
-
 - :ref:`exhale_struct_struct_azura_1_1_g_p_u_buffer`
-
-- :ref:`exhale_struct_struct_azura_1_1_instance`
 
 - :ref:`exhale_struct_struct_azura_1_1_key_event`
 
 - :ref:`exhale_struct_struct_azura_1_1_layer_subresource`
 
-- :ref:`exhale_struct_struct_azura_1_1_light_u_b_o`
-
 - :ref:`exhale_struct_struct_azura_1_1_mapped_g_p_u_buffer`
 
 - :ref:`exhale_struct_struct_azura_1_1_memory_requirements`
 
-- :ref:`exhale_struct_struct_azura_1_1_mesh_object`
-
 - :ref:`exhale_struct_struct_azura_1_1_mouse_event`
-
-- :ref:`exhale_struct_struct_azura_1_1_normals_pass_data`
-
-- :ref:`exhale_struct_struct_azura_1_1_normal_u_b_o`
-
-- :ref:`exhale_struct_struct_azura_1_1_pass_data`
 
 - :ref:`exhale_struct_struct_azura_1_1_pipeline_pass_create_info`
 
 - :ref:`exhale_struct_struct_azura_1_1_pipeline_pass_input`
-
-- :ref:`exhale_struct_struct_azura_1_1_plane`
-
-- :ref:`exhale_struct_struct_azura_1_1_point_light`
 
 - :ref:`exhale_struct_struct_azura_1_1_pool_node`
 
@@ -181,12 +129,6 @@ Classes
 - :ref:`exhale_struct_struct_azura_1_1_sampler_desc`
 
 - :ref:`exhale_struct_struct_azura_1_1_sampler_info`
-
-- :ref:`exhale_struct_struct_azura_1_1_scene_u_b_o`
-
-- :ref:`exhale_struct_struct_azura_1_1_self_collision_constraint`
-
-- :ref:`exhale_struct_struct_azura_1_1_shader_controls`
 
 - :ref:`exhale_struct_struct_azura_1_1_shader_create_info`
 
@@ -212,25 +154,13 @@ Classes
 
 - :ref:`exhale_struct_struct_azura_1_1_thread_group_dimensions`
 
-- :ref:`exhale_struct_struct_azura_1_1_uniform_buffer_data`
-
 - :ref:`exhale_struct_struct_azura_1_1_uniform_buffer_info`
-
-- :ref:`exhale_struct_struct_azura_1_1_vertex`
 
 - :ref:`exhale_struct_struct_azura_1_1_vertex_slot`
 
-- :ref:`exhale_struct_struct_azura_1_1_vertex_with_u_v`
-
 - :ref:`exhale_struct_struct_azura_1_1_viewport_dimensions`
 
-- :ref:`exhale_class_class_azura_1_1_app`
-
-- :ref:`exhale_class_class_azura_1_1_app_renderer`
-
 - :ref:`exhale_class_class_azura_1_1_camera`
-
-- :ref:`exhale_class_class_azura_1_1_cloth_mesh`
 
 - :ref:`exhale_class_class_azura_1_1_compute_pool`
 
@@ -242,21 +172,11 @@ Classes
 
 - :ref:`exhale_class_class_azura_1_1_f_n_v_hash_operator`
 
-- :ref:`exhale_class_class_azura_1_1_forward_compute_scene`
-
-- :ref:`exhale_class_class_azura_1_1_forward_plus_compute_scene`
-
-- :ref:`exhale_class_class_azura_1_1_forward_scene`
-
 - :ref:`exhale_class_class_azura_1_1_g_l_f_w_window`
 
 - :ref:`exhale_class_class_azura_1_1_g_l_t_f_mesh_interface`
 
 - :ref:`exhale_class_class_azura_1_1_hash_operator`
-
-- :ref:`exhale_class_class_azura_1_1_imported_cloth_mesh`
-
-- :ref:`exhale_class_class_azura_1_1_light_texture`
 
 - :ref:`exhale_class_class_azura_1_1_log`
 
@@ -267,8 +187,6 @@ Classes
 - :ref:`exhale_class_class_azura_1_1_pool_allocator`
 
 - :ref:`exhale_class_class_azura_1_1_renderer`
-
-- :ref:`exhale_class_class_azura_1_1_scene`
 
 - :ref:`exhale_class_class_azura_1_1_shader`
 
@@ -285,7 +203,7 @@ Enums
 -----
 
 
-- :ref:`exhale_enum__azura_2_render_system_2_inc_2_generic_2_constants_8h_1aece4541733a1bc739293311414445e57`
+- :ref:`exhale_enum__constants_8h_1aece4541733a1bc739293311414445e57`
 
 - :ref:`exhale_enum__core_8h_1a0a775ba230213cc602a6618d000e5407`
 
@@ -393,9 +311,9 @@ Typedefs
 --------
 
 
-- :ref:`exhale_typedef__common_2_inc_2_types_8h_1af43024d172b60f7753f9fc9f4d40ab1f`
+- :ref:`exhale_typedef__types_8h_1af43024d172b60f7753f9fc9f4d40ab1f`
 
-- :ref:`exhale_typedef__common_2_inc_2_types_8h_1a8dd630babbe2f9cfe21d3c17e8404fc5`
+- :ref:`exhale_typedef__types_8h_1a8dd630babbe2f9cfe21d3c17e8404fc5`
 
 - :ref:`exhale_typedef__raw_storage_format_8h_1a4b83fefe9910af536a92a41f23573e73`
 
@@ -445,25 +363,25 @@ Typedefs
 
 - :ref:`exhale_typedef__core_8h_1a049cb255c49348736ab86b48dbb330e5`
 
-- :ref:`exhale_typedef__common_2_inc_2_types_8h_1ae48008e9e60a1cdaf01d004f166810e0`
+- :ref:`exhale_typedef__types_8h_1ae48008e9e60a1cdaf01d004f166810e0`
 
 - :ref:`exhale_typedef__azura_2_render_system_2_inc_2_generic_2_generic_types_8h_1a433c1a9ea494fa0c0e5cacbba124a91c`
 
 - :ref:`exhale_typedef__azura_2_render_system_2_inc_2_generic_2_generic_types_8h_1a0942398fe1228a210d838c25f6c4407d`
 
-- :ref:`exhale_typedef__common_2_inc_2_types_8h_1acbe7fa9d46ea4221d13f883cea9a4dc7`
+- :ref:`exhale_typedef__types_8h_1acbe7fa9d46ea4221d13f883cea9a4dc7`
 
-- :ref:`exhale_typedef__common_2_inc_2_types_8h_1ae9916fde622120218775b0092d33c85f`
+- :ref:`exhale_typedef__types_8h_1ae9916fde622120218775b0092d33c85f`
 
-- :ref:`exhale_typedef__common_2_inc_2_types_8h_1a23e594108f6920302006bce2bfe6d056`
+- :ref:`exhale_typedef__types_8h_1a23e594108f6920302006bce2bfe6d056`
 
-- :ref:`exhale_typedef__common_2_inc_2_types_8h_1a4df47cd738ccace4acabe2aefbe69840`
+- :ref:`exhale_typedef__types_8h_1a4df47cd738ccace4acabe2aefbe69840`
 
-- :ref:`exhale_typedef__common_2_inc_2_types_8h_1ab348a6a803558b90b4a09eaef9921b98`
+- :ref:`exhale_typedef__types_8h_1ab348a6a803558b90b4a09eaef9921b98`
 
-- :ref:`exhale_typedef__common_2_inc_2_types_8h_1acac3ad4420766984cb1f0e7a8e19347c`
+- :ref:`exhale_typedef__types_8h_1acac3ad4420766984cb1f0e7a8e19347c`
 
-- :ref:`exhale_typedef__common_2_inc_2_types_8h_1a1b26b3bba3ef2c9e24f3d4ed0c2d6145`
+- :ref:`exhale_typedef__types_8h_1a1b26b3bba3ef2c9e24f3d4ed0c2d6145`
 
 - :ref:`exhale_typedef__core_8h_1a52350eaa0c535111e72073c90cedf024`
 
@@ -489,18 +407,12 @@ Typedefs
 
 - :ref:`exhale_typedef__core_8h_1acb2f124b5390ac0003afecee523c1940`
 
-- :ref:`exhale_typedef__azura_2_render_system_2_inc_2_generic_2_constants_8h_1a1f5b86dc4c34883e96bbda676dbac276`
+- :ref:`exhale_typedef__constants_8h_1a1f5b86dc4c34883e96bbda676dbac276`
 
 
 Variables
 ---------
 
-
-- :ref:`exhale_variable_0___test_zone_2_inc_2_test_zone_2_app_renderer_8h_1a540b9c2cefa70c8a109868e6edc62ac4`
-
-- :ref:`exhale_variable__samples_22___deferred_renderer_2_inc_2_app_2_common_8h_1a5615fc3826c7ee83791fbf3e83adf886`
-
-- :ref:`exhale_variable_0___test_zone_2_inc_2_test_zone_2_app_renderer_8h_1ab3cf23addaceaa419e169dfc980c9cc3`
 
 - :ref:`exhale_variable__azura_2_render_system_2_inc_2_generic_2_generic_types_8h_1a89cf253785a668da1fe4264479fe289e`
 
@@ -508,25 +420,11 @@ Variables
 
 - :ref:`exhale_variable__hash_8h_1a7c1c28fc4579e69f4612b32af30145ae`
 
-- :ref:`exhale_variable_0___test_zone_2_inc_2_test_zone_2_app_renderer_8h_1a89449f6d4b138dab0cea8bc638337e5b`
-
 - :ref:`exhale_variable__core_8h_1aab4ba1389a92c1f11f25ed1839683c6d`
-
-- :ref:`exhale_variable__samples_22___deferred_renderer_2_inc_2_app_2_common_8h_1afefb43d514bd66841e49c60baa6163f5`
 
 - :ref:`exhale_variable__renderer_8h_1a47bf4a8c1bb7bea0986c01928c244b9d`
 
-- :ref:`exhale_variable__samples_22___deferred_renderer_2_inc_2_app_2_common_8h_1a1ac37e47cd1168265c064190446e3c75`
-
-- :ref:`exhale_variable__samples_22___deferred_renderer_2_inc_2_app_2_common_8h_1abee06dba304c47febdbfd32396db3e69`
-
-- :ref:`exhale_variable__samples_22___deferred_renderer_2_inc_2_app_2_common_8h_1a449a8beab4e8e18943f060b176c2be8d`
-
-- :ref:`exhale_variable__samples_22___deferred_renderer_2_inc_2_app_2_common_8h_1a3a9ae143c0af5080293aca8ad7419837`
-
 - :ref:`exhale_variable__azura_2_render_system_2_inc_2_generic_2_generic_types_8h_1a379c9e3432f7a63211257928c4c9e162`
-
-- :ref:`exhale_variable__samples_22___deferred_renderer_2_inc_2_app_2_common_8h_1aa2333f975e997c359a3be78b41e4a1eb`
 
 - :ref:`exhale_variable__azura_2_render_system_2_inc_2_generic_2_generic_types_8h_1a78c993f3d576f09de3d536b55c15320b`
 
@@ -536,22 +434,12 @@ Variables
 
 - :ref:`exhale_variable__azura_2_render_system_2_inc_2_generic_2_generic_types_8h_1a63555d6a2f35f7a10c14a1e073bc6a08`
 
-- :ref:`exhale_variable__samples_22___deferred_renderer_2_inc_2_app_2_common_8h_1a7184df1b25e2084c468acfd3d102e73b`
-
 - :ref:`exhale_variable__azura_2_render_system_2_inc_2_generic_2_generic_types_8h_1a428635d860221dc07a957db97b34a40d`
 
-- :ref:`exhale_variable__azura_2_render_system_2_inc_2_generic_2_constants_8h_1a5507000fe0f4a970a124d1d0690a1931`
+- :ref:`exhale_variable__constants_8h_1a5507000fe0f4a970a124d1d0690a1931`
 
-- :ref:`exhale_variable__azura_2_render_system_2_inc_2_generic_2_constants_8h_1ac9d292b944302e3593ec3c4f7d0b0422`
+- :ref:`exhale_variable__constants_8h_1ac9d292b944302e3593ec3c4f7d0b0422`
 
-- :ref:`exhale_variable__azura_2_render_system_2_inc_2_generic_2_constants_8h_1afa46364d6dad722146fd17ad4a0fd3fb`
+- :ref:`exhale_variable__constants_8h_1afa46364d6dad722146fd17ad4a0fd3fb`
 
-- :ref:`exhale_variable__azura_2_render_system_2_inc_2_generic_2_constants_8h_1af054e28c57031d73b0d35d27c2bd3664`
-
-- :ref:`exhale_variable_0___test_zone_2_inc_2_test_zone_2_app_renderer_8h_1afe56639a5a14c44e5bd5dbad88311986`
-
-- :ref:`exhale_variable__samples_22___deferred_renderer_2_inc_2_app_2_common_8h_1a7df9177b45bcd5074d515b61cd7f11e2`
-
-- :ref:`exhale_variable__samples_22___deferred_renderer_2_inc_2_app_2_common_8h_1ab7af1cfc5e4db278c92823fc89125c3d`
-
-- :ref:`exhale_variable__samples_22___deferred_renderer_2_inc_2_app_2_common_8h_1a14de5d6e262865a009b56707081d4991`
+- :ref:`exhale_variable__constants_8h_1af054e28c57031d73b0d35d27c2bd3664`

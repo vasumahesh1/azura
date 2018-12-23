@@ -81,8 +81,14 @@
             
               <ul class="current">
 <li class="toctree-l1 current"><a class="current reference internal" href="#">Setting Up</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="#different-system-configs">1. Different System Configs</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#download-dependencies">2. Download Dependencies</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#path-setup">0. PATH setup</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#clone-and-install-submodules">1. Clone and Install submodules</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#run-the-install-script">2. Run the Install Script</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#manual-installation">3. Manual Installation</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#required-build-requirements">[REQUIRED] Build Requirements:</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#optional-documentation-requirements">[OPTIONAL] Documentation Requirements:</a></li>
+</ul>
+</li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="build-instructions.html">Build Instructions</a></li>
@@ -155,70 +161,110 @@
             
   <div class="section" id="setting-up">
 <h1>Setting Up<a class="headerlink" href="#setting-up" title="Permalink to this headline">¶</a></h1>
-<div class="section" id="different-system-configs">
-<h2>1. Different System Configs<a class="headerlink" href="#different-system-configs" title="Permalink to this headline">¶</a></h2>
-<p>Azura only needs one thing in your PATH to be operational. It is a link to your Python27 application. Azura creates a copy of your environment variables and modifies them. It injects paths to MSVC Compilers and other platform specific things and calls CMake.</p>
-<div class="admonition note">
-<p class="first admonition-title">Note</p>
-<p class="last">All build related configs are located in the <code class="docutils literal notranslate"><span class="pre">External</span></code> folder</p>
-</div>
-<p>There are now two ways for you to build:</p>
-<ul class="simple">
-<li><strong>Build the way Azura builds by default</strong><ul>
-<li>Involves: Copying your files &amp; extra HDD space</li>
-<li>Steps:<ul>
-<li>Look at the <a class="reference external" href="https://github.com/vasumahesh1/azura/blob/master/External/Config.ini">default config file</a> Azura picks up</li>
-<li>Make sure all of these paths exists - You will need to copy them over to <code class="docutils literal notranslate"><span class="pre">External/&lt;Platform&gt;/</span></code> or download the exact version online.</li>
-<li><a class="reference external" href="https://github.com/vasumahesh1/azura/blob/master/appveyor.yml">Appveyor YML file</a> might be helpful to get the direct download URL</li>
-</ul>
-</li>
-</ul>
-</li>
-<li><strong>Build your own way</strong><ul>
-<li>Involves: Modifying two Config INI files that point to the correct Libraries and Platform SDKs</li>
-<li>Not recommended for beginners</li>
-</ul>
-</li>
-</ul>
+<div class="section" id="path-setup">
+<h2>0. PATH setup<a class="headerlink" href="#path-setup" title="Permalink to this headline">¶</a></h2>
+<p>Azura’s build system runs on Python 3.</p>
+<p>Make sure you have added python 3 added to your PATH environment variable. This makes it easier to invoke the build system.</p>
+<p>Currently used: Python 3.7</p>
 <div class="admonition warning">
 <p class="first admonition-title">Warning</p>
 <p class="last">Qt is known to create issues with Azura. Why? Qt straight up pollutes your PATH variable which confuses CMake in Azura to build for MSVC or MinGW. There is a variable injected by Qt which you can delete from your PATH environment variable.</p>
 </div>
+<div class="admonition warning">
+<p class="first admonition-title">Warning</p>
+<p class="last">If you have VulkanSDK installed for Windows, we recommend uninstalling it if you just started using Azura.</p>
 </div>
-<div class="section" id="download-dependencies">
-<h2>2. Download Dependencies<a class="headerlink" href="#download-dependencies" title="Permalink to this headline">¶</a></h2>
-<p>There are two sub steps for dependencies.</p>
-<ol class="arabic">
-<li><p class="first"><strong>Sub-module clone:</strong></p>
-<p>Just run <code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">submodule</span> <span class="pre">update</span> <span class="pre">--init</span> <span class="pre">--recursive</span></code> like normal and it should download all the dependencies needed. Currently, it downloads:</p>
-<ul class="simple">
-<li>Source/Imports/Common/benchmark</li>
-<li>Source/Imports/Common/glTF-SDK</li>
-<li>Source/Imports/Common/glfw</li>
-<li>Source/Imports/Common/mathfu</li>
-<li>Source/Imports/Common/stb</li>
-<li>Source/Imports/Common/yaml-cpp</li>
-</ul>
-</li>
-<li><p class="first"><strong>Manual download:</strong></p>
-<p>Sadly, we need to still download some of the stuff manually. This includes some stuff that can’t be on github. We recommend checking the <a class="reference external" href="https://github.com/vasumahesh1/azura/blob/master/appveyor.yml">Appveyor YML file</a> which have a direct download link to <strong>most</strong> of these. They are:</p>
-<ul class="simple">
-<li>Vulkan SDK 1.1.77.0 - Located at: <code class="docutils literal notranslate"><span class="pre">Source/Imports/&lt;Platform&gt;/Vulkan/1.1.77.0/</span></code></li>
-<li>Slang 0.11.16 - Located at <code class="docutils literal notranslate"><span class="pre">Source/Imports/&lt;Platform&gt;/Slang/slang-0.11.16/</span></code></li>
-<li>Boost 1.67 - Located at <code class="docutils literal notranslate"><span class="pre">Source/Imports/&lt;Platform&gt;/Boost/boost_1_67_0/</span></code></li>
-</ul>
-</li>
-</ol>
-<p>They are all versioned appropriately. In case for version changes, we just add a new folder.</p>
+</div>
+<div class="section" id="clone-and-install-submodules">
+<h2>1. Clone and Install submodules<a class="headerlink" href="#clone-and-install-submodules" title="Permalink to this headline">¶</a></h2>
+<p>You can start by <a class="reference external" href="https://github.com/vasumahesh1/azura">cloning azura</a> from github.</p>
+<p>Then make sure to install all the submodules.</p>
+<div class="highlight-sh notranslate"><div class="highlight"><pre><span></span>git submodule update --init --recursive
+</pre></div>
+</div>
+<p>This will download all the code related dependencies.</p>
+<div class="admonition warning">
+<p class="first admonition-title">Warning</p>
+<p class="last">Make sure you use default command prompt, or Powershell or Cmder for downloading / cloning Azura. Not sure about Git Bash but Ubuntu Subsystem for Windows has issues with cloning the submodules for Azura.</p>
+</div>
+</div>
+<div class="section" id="run-the-install-script">
+<h2>2. Run the Install Script<a class="headerlink" href="#run-the-install-script" title="Permalink to this headline">¶</a></h2>
+<p>There is a install script provided that auto downloads most non-compiler related dependencies. You need to have 7 zip installed. It can be in your PATH but it is not necessary.</p>
+<p>You can execute the script by calling:</p>
+<div class="highlight-sh notranslate"><div class="highlight"><pre><span></span><span class="c1"># Direct Usage (if 7z in PATH)</span>
+python install.py
+
+<span class="c1"># Direct Usage (if 7z not in PATH, give the location)</span>
+python install.py --zipExtractor <span class="s2">&quot;C:\Program Files\7-Zip\7z.exe&quot;</span>
+</pre></div>
+</div>
+<p>Sometimes you may need to install only one dependency. You can then use:</p>
+<div class="highlight-sh notranslate"><div class="highlight"><pre><span></span>python install.py --only &lt;Name&gt;
+python install.py --only Vulkan
+
+<span class="c1"># ---</span>
+<span class="c1"># OR (Based on your zip extractor usage)</span>
+<span class="c1"># ---</span>
+
+python install.py --zipExtractor <span class="s2">&quot;C:\Program Files\7-Zip\7z.exe&quot;</span> --only &lt;Name&gt;
+python install.py --zipExtractor <span class="s2">&quot;C:\Program Files\7-Zip\7z.exe&quot;</span> --only Vulkan
+</pre></div>
+</div>
+<p>All installations are silent and will not request any UI. However, some installations may ask for Windows UAC access (Windows only thing).</p>
+<div class="admonition warning">
+<p class="first admonition-title">Warning</p>
+<p class="last">Things like LLVM &amp; Vulkan will actually “install” it inside Azura causing an entry to pop up in system control panel. If you are deleting it be sure to check your Control Panel while uninstalling it.</p>
+</div>
+<p>The install script will download almost all of the dependencies. But, it doesn’t download Windows compiler dependencies.</p>
+</div>
+<div class="section" id="manual-installation">
+<h2>3. Manual Installation<a class="headerlink" href="#manual-installation" title="Permalink to this headline">¶</a></h2>
+<p>There are some platform specific things that need to be done. Sadly, they are to be done manually.</p>
 <div class="admonition note">
 <p class="first admonition-title">Note</p>
-<p>Difference between <code class="docutils literal notranslate"><span class="pre">External/&lt;Platform&gt;/</span></code> and <code class="docutils literal notranslate"><span class="pre">Source/Imports/&lt;Platform&gt;/</span></code>
-Both of these folders include Platform specific things. Why the two folders?</p>
-<p>There is a semantic difference. For example:</p>
-<p>In Windows, we have:</p>
-<p><code class="docutils literal notranslate"><span class="pre">External/Windows</span></code> and <code class="docutils literal notranslate"><span class="pre">Source/Imports/Windows</span></code></p>
-<p>Now a question: Where to place cmake.exe? This is a <em>tool</em> that Windows uses and is unrelated to the source code. Hence, it should stay outside the Source folder. That is why CMake is inside the <code class="docutils literal notranslate"><span class="pre">External</span></code> folder.</p>
-<p class="last">Another: Where to place vulkan.h and vulkan win32 headers? These are <em>C++ files</em> that are used by Azura. Hence, they should be inside <code class="docutils literal notranslate"><span class="pre">Source/Imports/Windows</span></code></p>
+<p class="last">All build related configs are located in the <code class="docutils literal notranslate"><span class="pre">External</span></code> folder</p>
+</div>
+<div class="section" id="required-build-requirements">
+<h3>[REQUIRED] Build Requirements:<a class="headerlink" href="#required-build-requirements" title="Permalink to this headline">¶</a></h3>
+<ul>
+<li><p class="first">Windows</p>
+<p>You will need to either specify the path to your Microsoft compilers OR just copy them over to the respective paths that Azura checks for.</p>
+<p>There are two ways to do this. For both ways, We recommend to have a look at <a class="reference external" href="https://github.com/vasumahesh1/azura/blob/master/External/Config.ini">Config.ini</a> and <a class="reference external" href="https://github.com/vasumahesh1/azura/blob/master/External/AppveyorConfig.ini">Appveyor’s Config</a>.</p>
+<ul>
+<li><p class="first">Copy Over Path Method (Following Paths must exist and must contain the compiler files):</p>
+<div class="highlight-ini notranslate"><div class="highlight"><pre><span></span><span class="na">VisualStudioBuildTools/VC/Tools/MSVC/14.14.26428/</span>
+<span class="na">Windows Kits/10/Lib/10.0.17134.0/</span>
+<span class="na">Windows Kits/10/bin/10.0.17134.0/</span>
+<span class="na">Windows Kits/10/Include/10.0.17134.0/</span>
+</pre></div>
+</div>
+</li>
+<li><p class="first">Linking Path Method</p>
+<p>Following Paths must be linked into a new config file and must be provided to the build system when building. (using the –configFile option)</p>
+<p>You can create a copy of Config.ini and update the following path variables based on your system. Appveyor config does this without copying files.</p>
+<div class="highlight-ini notranslate"><div class="highlight"><pre><span></span><span class="na">VSBuildTools</span>
+<span class="na">MSVCPath</span>
+<span class="na">Windows10SDKLib</span>
+<span class="na">Windows10SDKBin</span>
+<span class="na">Windows10SDKInc</span>
+</pre></div>
+</div>
+</li>
+</ul>
+</li>
+<li><p class="first">Linux</p>
+</li>
+<li><p class="first">MacOS</p>
+</li>
+</ul>
+</div>
+<div class="section" id="optional-documentation-requirements">
+<h3>[OPTIONAL] Documentation Requirements:<a class="headerlink" href="#optional-documentation-requirements" title="Permalink to this headline">¶</a></h3>
+<p>Tools needed for documentation generation.</p>
+<div class="highlight-sh notranslate"><div class="highlight"><pre><span></span>pip3 install sphinx breathe exhale sphinx_rtd_theme
+</pre></div>
+</div>
 </div>
 </div>
 </div>

@@ -908,67 +908,67 @@
     <detaileddescription>
     </detaileddescription>
     <inheritancegraph>
-      <node id="640">
+      <node id="444">
         <label>Azura::Vulkan::VkDrawablePool</label>
         <link refid="class_azura_1_1_vulkan_1_1_vk_drawable_pool"/>
-        <childnode refid="641" relation="public-inheritance">
+        <childnode refid="445" relation="public-inheritance">
         </childnode>
       </node>
-      <node id="641">
+      <node id="445">
         <label>Azura::DrawablePool</label>
         <link refid="class_azura_1_1_drawable_pool"/>
       </node>
     </inheritancegraph>
     <collaborationgraph>
-      <node id="647">
+      <node id="451">
         <label>Azura::Containers::Vector&lt; Azura::SamplerInfo &gt;</label>
         <link refid="class_azura_1_1_containers_1_1_vector"/>
       </node>
-      <node id="648">
+      <node id="452">
         <label>Azura::Containers::Vector&lt; Azura::VertexSlot &gt;</label>
         <link refid="class_azura_1_1_containers_1_1_vector"/>
       </node>
-      <node id="646">
+      <node id="450">
         <label>Azura::DescriptorCount</label>
         <link refid="struct_azura_1_1_descriptor_count"/>
       </node>
-      <node id="645">
+      <node id="449">
         <label>Azura::Containers::Vector&lt; U32 &gt;</label>
         <link refid="class_azura_1_1_containers_1_1_vector"/>
       </node>
-      <node id="642">
+      <node id="446">
         <label>Azura::Vulkan::VkDrawablePool</label>
         <link refid="class_azura_1_1_vulkan_1_1_vk_drawable_pool"/>
-        <childnode refid="643" relation="public-inheritance">
+        <childnode refid="447" relation="public-inheritance">
         </childnode>
       </node>
-      <node id="649">
+      <node id="453">
         <label>Azura::Containers::Vector&lt; Azura::TextureBufferInfo &gt;</label>
         <link refid="class_azura_1_1_containers_1_1_vector"/>
       </node>
-      <node id="644">
+      <node id="448">
         <label>Azura::Containers::Vector&lt; Azura::BufferUpdate &gt;</label>
         <link refid="class_azura_1_1_containers_1_1_vector"/>
       </node>
-      <node id="643">
+      <node id="447">
         <label>Azura::DrawablePool</label>
         <link refid="class_azura_1_1_drawable_pool"/>
-        <childnode refid="644" relation="usage">
+        <childnode refid="448" relation="usage">
           <edgelabel>m_bufferUpdates</edgelabel>
         </childnode>
-        <childnode refid="645" relation="usage">
+        <childnode refid="449" relation="usage">
           <edgelabel>m_renderPasses</edgelabel>
         </childnode>
-        <childnode refid="646" relation="usage">
+        <childnode refid="450" relation="usage">
           <edgelabel>m_descriptorCount</edgelabel>
         </childnode>
-        <childnode refid="647" relation="usage">
+        <childnode refid="451" relation="usage">
           <edgelabel>m_samplerInfos</edgelabel>
         </childnode>
-        <childnode refid="648" relation="usage">
+        <childnode refid="452" relation="usage">
           <edgelabel>m_vertexDataSlots</edgelabel>
         </childnode>
-        <childnode refid="649" relation="usage">
+        <childnode refid="453" relation="usage">
           <edgelabel>m_textureBufferInfos</edgelabel>
         </childnode>
       </node>
