@@ -9,12 +9,38 @@ Azura only needs one thing in your PATH to be operational. It is a link to your 
 
 .. note:: All build related configs are located in the ``External`` folder
 
-There are now two ways for you to build:
+There are now three ways for you to build:
 
 
 * 
-  **Build the way Azura builds by default**
 
+  **Use the new install script**
+
+  * Involves: Running a CLI command to install dependencies.
+
+  * Steps:
+
+    * Run: 
+
+    .. code-block:: bash
+      # Install ALL dependencies
+      python install.py
+
+      # Install ALL dependencies - If you don't have 7z in your path
+      python install.py --zipExtractor <Path to 7z executable>
+      python install.py --zipExtractor "C:\Program Files\7-Zip\7z.exe"
+
+      # Install only 1 dependency
+      python install.py --zipExtractor "C:\Program Files\7-Zip\7z.exe" --only Vulkan
+
+    All installations are silent and will not request any UI. However, some installations may ask for Windows UAC access (Windows only thing).
+
+    .. warning:: Things like LLVM & Vulkan will actually "install" it inside Azura causing an entry to pop up in system control panel. If you are deleting it be sure to check your Control Panel while uninstalling it.
+
+    The install script will download almost all of the dependencies. But, it doesn't download Windows compiler dependencies. For those, check the other steps on how to do that. (You can either specify the path in a new config file or directly copy it to the required location).
+
+
+  **Build the way Azura builds by default**
 
   * Involves: Copying your files & extra HDD space
   * 
