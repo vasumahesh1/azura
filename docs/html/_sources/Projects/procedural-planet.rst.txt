@@ -40,15 +40,17 @@ G-Buffer Layout
       - G-Buffer 1
       - G-Buffer 2
 
-    * - .. image:: https://github.com/vasumahesh1/azura/raw/master/Source/Samples/1_ProceduralPlanet/Images/frame_depth.PNG
-          :target: https://github.com/vasumahesh1/azura/raw/master/Source/Samples/1_ProceduralPlanet/Images/frame_depth.PNG
-          :alt: 
-      - .. image:: https://github.com/vasumahesh1/azura/raw/master/Source/Samples/1_ProceduralPlanet/Images/frame_normal.PNG
-          :target: https://github.com/vasumahesh1/azura/raw/master/Source/Samples/1_ProceduralPlanet/Images/frame_normal.PNG
-          :alt: 
-      - .. image:: https://github.com/vasumahesh1/azura/raw/master/Source/Samples/1_ProceduralPlanet/Images/frame_uv_elevation.PNG
-          :target: https://github.com/vasumahesh1/azura/raw/master/Source/Samples/1_ProceduralPlanet/Images/frame_uv_elevation.PNG
-          :alt: 
+    * - .. image:: ../../Source/Samples/1_ProceduralPlanet/Images/frame_depth.PNG
+          :target: ../_images/frame_depth.PNG
+          :alt: Depth Frame
+
+      - .. image:: ../../Source/Samples/1_ProceduralPlanet/Images/frame_normal.PNG
+          :target: ../_images/frame_normal.PNG
+          :alt: Normals Frame
+
+      - .. image:: ../../Source/Samples/1_ProceduralPlanet/Images/frame_uv_elevation.PNG
+          :target: ../_images/frame_uv_elevation.PNG
+          :alt: UV & Elevation Frame
 
     * - float: Depth
       - float4: Normals
@@ -58,9 +60,9 @@ G-Buffer Layout
 .. list-table:: Final Frame
     :header-rows: 0
 
-    * - .. image:: https://github.com/vasumahesh1/azura/raw/master/Source/Samples/1_ProceduralPlanet/Images/frame_main.PNG
-          :target: https://github.com/vasumahesh1/azura/raw/master/Source/Samples/1_ProceduralPlanet/Images/frame_main.PNG
-          :alt: 
+    * - .. image:: ../../Source/Samples/1_ProceduralPlanet/Images/frame_main.PNG
+          :target: ../_images/frame_main.PNG
+          :alt: Main Frame
 
 
 Project Notes

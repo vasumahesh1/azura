@@ -129,59 +129,6 @@
 </li>
 <li class="toctree-l1"><a class="reference internal" href="../html/apiRoot.html">Azura API</a></li>
 </ul>
-<ul class="current">
-<li class="toctree-l1 current"><a class="current reference internal" href="#">Flamenco</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="#description">Description</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#methodology">Methodology</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="#pbd-algorithm">PBD Algorithm</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#gpu-based-pbd-solver">GPU-Based PBD Solver</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#geometric-constraints">Geometric Constraints</a><ul>
-<li class="toctree-l4"><a class="reference internal" href="#distance">Distance</a></li>
-<li class="toctree-l4"><a class="reference internal" href="#isometric-bending">Isometric Bending</a></li>
-<li class="toctree-l4"><a class="reference internal" href="#anchors">Anchors</a></li>
-<li class="toctree-l4"><a class="reference internal" href="#long-range-attachments">Long-Range Attachments</a></li>
-</ul>
-</li>
-<li class="toctree-l3"><a class="reference internal" href="#environment-collisions">Environment Collisions</a><ul>
-<li class="toctree-l4"><a class="reference internal" href="#sphere">Sphere</a></li>
-<li class="toctree-l4"><a class="reference internal" href="#plane">Plane</a></li>
-</ul>
-</li>
-<li class="toctree-l3"><a class="reference internal" href="#mesh-definition">Mesh Definition</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#spatial-hashing-with-predictive-constraints-for-self-collisions">Spatial Hashing with Predictive Constraints for Self-Collisions</a></li>
-</ul>
-</li>
-<li class="toctree-l2"><a class="reference internal" href="#implementation">Implementation</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="#compute-vertex-projected-positions">Compute Vertex Projected Positions</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#binning-initialization">Binning Initialization</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#vertex-binning">Vertex Binning</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#generate-self-collision-constraints">Generate Self-Collision Constraints</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#apply-vertex-constraints">Apply Vertex Constraints</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#apply-deltas">Apply Deltas</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#compute-vertex-positions">Compute Vertex Positions</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#mesh-normals">Mesh Normals</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#shading-pass">Shading Pass</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#frame-timing-breakdown">Frame Timing Breakdown</a></li>
-</ul>
-</li>
-<li class="toctree-l2"><a class="reference internal" href="#performance">Performance</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="#cpu-vs-gpu">CPU vs GPU</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#total-compute-time-vs-total-constraints-solved">Total Compute Time vs Total Constraints Solved</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#mesh-resolution-vs-compute-time">Mesh Resolution vs Compute Time</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#spatial-hash-grid-acceleration">Spatial Hash Grid Acceleration</a></li>
-</ul>
-</li>
-<li class="toctree-l2"><a class="reference internal" href="#additional-features">Additional Features</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="#gltf-2-0-mesh-support">GLTF 2.0 Mesh Support</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#rendering-pipeline-using-pbr-shading">Rendering Pipeline using PBR Shading</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#meme-generator">Meme Generator</a></li>
-</ul>
-</li>
-<li class="toctree-l2"><a class="reference internal" href="#references">References</a></li>
-</ul>
-</li>
-<li class="toctree-l1"><a class="reference internal" href="procedural-planet.html">Procedural Planet</a></li>
-</ul>
 
             
           
@@ -263,15 +210,15 @@
 </ul>
 <div class="section" id="description">
 <h2>Description<a class="headerlink" href="#description" title="Permalink to this headline">¶</a></h2>
-<p>Flamenco is a GPU position-based dynamics (PBD) cloth simulation sufficiently fast and robust for use in games. Our take on this well-studied problem is an amalgam of some of the industry’s best PBD cloth methods, some dating back as far as 2003, some recently communicated in GDC 2018, all mixed and ported to the GPU. By parallelizing these methods on the GPU, we achieve frame rates far higher than their CPU-based counterparts, and easily satisfy the game industry’s 60 fps standard.</p>
-<a class="reference external image-reference" href="https://github.com/vasumahesh1/azura/raw/dev/Source/Samples/3_ClothSim/Images/default_cloth_30x30_(0.8-0.7-0.3).gif"><img alt="gif" src="https://github.com/vasumahesh1/azura/raw/dev/Source/Samples/3_ClothSim/Images/default_cloth_30x30_(0.8-0.7-0.3).gif" /></a>
+<p>Flamenco is a GPU position-based dynamics (PBD) cloth simulation sufficiently fast and robust for use in games. Our take on this well-studied problem is an amalgam of some of the industry’s best PBD cloth methods, some dating back as far as 2003, some recently communicated in GDC 2018, all mixed and ported to the GPU <a class="footnote-reference" href="#id7" id="id2">[1]</a> <a class="footnote-reference" href="#id8" id="id3">[2]</a>. By parallelizing these methods on the GPU, we achieve frame rates far higher than their CPU-based counterparts, and easily satisfy the game industry’s 60 fps standard.</p>
+<img alt="Main GIF" src="../_images/default_cloth_30x30_(0.8-0.7-0.3).gif" />
 </div>
 <hr class="docutils" />
 <div class="section" id="methodology">
 <h2>Methodology<a class="headerlink" href="#methodology" title="Permalink to this headline">¶</a></h2>
 <div class="section" id="pbd-algorithm">
 <h3>PBD Algorithm<a class="headerlink" href="#pbd-algorithm" title="Permalink to this headline">¶</a></h3>
-<p>We write the core PBD algorithm here for convenience:</p>
+<p>We write the core PBD algorithm here for convenience <a class="footnote-reference" href="#id10" id="id4">[4]</a>:</p>
 <div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="n">ALGORITHM</span> <span class="n">Position</span> <span class="n">Based</span> <span class="nl">Dyanmics</span><span class="p">:</span>
   <span class="k">for</span> <span class="n">all</span> <span class="n">vertices</span> <span class="n">i</span> <span class="k">do</span>
     <span class="n">initialize</span> <span class="n">x_i</span><span class="p">,</span> <span class="n">vi</span><span class="p">,</span> <span class="n">wi</span> <span class="o">=</span> <span class="mi">1</span><span class="o">/</span><span class="n">mi</span>
@@ -294,8 +241,8 @@
 </div>
 <div class="section" id="gpu-based-pbd-solver">
 <h3>GPU-Based PBD Solver<a class="headerlink" href="#gpu-based-pbd-solver" title="Permalink to this headline">¶</a></h3>
-<a class="reference external image-reference" href="https://github.com/vasumahesh1/azura/raw/dev/Source/Samples/3_ClothSim/Images/SolverPasses.PNG"><img alt="" src="https://github.com/vasumahesh1/azura/raw/dev/Source/Samples/3_ClothSim/Images/SolverPasses.PNG" /></a>
-<p>The PBD algorithm is typically evaluated on the CPU using a Gauss-Seidel type solver, which works exclusively in a serial fashion. Porting the PBD algorithm therefore requires a different approach. Researchers typically choose one of two methods - A Jacobi iterative solver or a graph coloring algorithm. The graph coloring method identifies independent sets of vertices (those not linked by constraint functions) then solves the constraints associated with each of these sets in a serial fashion using the Gauss-Seidel method. While this method guarantees convergence, it limits vertex/constraint throughput on the GPU and is still inherently serial. The Jacobi method, on the other hand, maximizes parallelism but does not guarantee convergence without the following adjustment to the PBD algorithm: the change in position is computed for each vertex i for all constraints that apply to i in parallel. The final correction applied to i, however, is the average of these adjustments.</p>
+<a class="reference external image-reference" href="../_images/SolverPasses.PNG"><img alt="Solver Passes" src="../_images/SolverPasses.PNG" /></a>
+<p>The PBD algorithm is typically evaluated on the CPU using a Gauss-Seidel type solver, which works exclusively in a serial fashion. Porting the PBD algorithm therefore requires a different approach. Researchers typically choose one of two methods - A Jacobi iterative solver or a graph coloring algorithm <a class="footnote-reference" href="#id9" id="id5">[3]</a>. The graph coloring method identifies independent sets of vertices (those not linked by constraint functions) then solves the constraints associated with each of these sets in a serial fashion using the Gauss-Seidel method. While this method guarantees convergence, it limits vertex/constraint throughput on the GPU and is still inherently serial. The Jacobi method, on the other hand, maximizes parallelism but does not guarantee convergence without the following adjustment to the PBD algorithm: the change in position is computed for each vertex i for all constraints that apply to i in parallel. The final correction applied to i, however, is the average of these adjustments.</p>
 </div>
 <div class="section" id="geometric-constraints">
 <h3>Geometric Constraints<a class="headerlink" href="#geometric-constraints" title="Permalink to this headline">¶</a></h3>
@@ -315,7 +262,7 @@
 <div class="section" id="long-range-attachments">
 <h4>Long-Range Attachments<a class="headerlink" href="#long-range-attachments" title="Permalink to this headline">¶</a></h4>
 <p>We include this additional distance-based constraint because it helps enforce inextensibility when the cloth model includes anchors.</p>
-<a class="reference external image-reference" href="https://github.com/vasumahesh1/azura/raw/dev/Source/Samples/3_ClothSim/Images/default_curtain_70x40_(0.8-0.7-0.3).gif"><img alt="gif" src="https://github.com/vasumahesh1/azura/raw/dev/Source/Samples/3_ClothSim/Images/default_curtain_70x40_(0.8-0.7-0.3).gif" /></a>
+<img alt="Curtain Effect" src="../_images/default_curtain_70x40_(0.8-0.7-0.3).gif" />
 <p><em>A Shower Curtain Using Anchors and Long-Range Attachments</em></p>
 </div>
 </div>
@@ -329,7 +276,7 @@
 <div class="section" id="plane">
 <h4>Plane<a class="headerlink" href="#plane" title="Permalink to this headline">¶</a></h4>
 <p>Every vertex position is checked to make sure it remains on the same side of the plane it was on in the previous time step. If not, the vertex is pushed back in the direction normal to the plane.</p>
-<a class="reference external image-reference" href="https://github.com/vasumahesh1/azura/raw/dev/Source/Samples/3_ClothSim/Images/cloth_collision.gif"><img alt="gif" src="https://github.com/vasumahesh1/azura/raw/dev/Source/Samples/3_ClothSim/Images/cloth_collision.gif" /></a>
+<img alt="Cloth Environment Collisions" src="../_images/cloth_collision.gif" />
 <p><em>Plane and Sphere SDF Cloth Collisions</em></p>
 </div>
 </div>
@@ -342,9 +289,9 @@
 <col width="50%" />
 </colgroup>
 <tbody valign="top">
-<tr class="row-odd"><td><a class="first last reference external image-reference" href="https://github.com/vasumahesh1/azura/raw/dev/Source/Samples/3_ClothSim/Images/meshCenterTopology.JPG"><img alt="meshCenterTopology" src="https://github.com/vasumahesh1/azura/raw/dev/Source/Samples/3_ClothSim/Images/meshCenterTopology.JPG" /></a>
+<tr class="row-odd"><td><img alt="Center Mesh Topology" class="first last" src="../_images/meshCenterTopology.JPG" />
 </td>
-<td><a class="first last reference external image-reference" href="https://github.com/vasumahesh1/azura/raw/dev/Source/Samples/3_ClothSim/Images/meshDefaultTopology.JPG"><img alt="meshDefaultTopology" src="https://github.com/vasumahesh1/azura/raw/dev/Source/Samples/3_ClothSim/Images/meshDefaultTopology.JPG" /></a>
+<td><img alt="Mesh Default Topology" class="first last" src="../_images/meshDefaultTopology.JPG" />
 </td>
 </tr>
 </tbody>
@@ -354,9 +301,9 @@
 <div class="section" id="spatial-hashing-with-predictive-constraints-for-self-collisions">
 <h3>Spatial Hashing with Predictive Constraints for Self-Collisions<a class="headerlink" href="#spatial-hashing-with-predictive-constraints-for-self-collisions" title="Permalink to this headline">¶</a></h3>
 <p>To implement naive self-collision constraint generation, every vertex must be checked against every triangle in the mesh. We accelerate this process by using an adaptive spatial hash grid to bin mesh vertices before constraint projection. We then compute the axis-aligned bounding box encapsulating each triangle and its projected displacement. Then, following Chris Lewin’s [2] prescription for predictive constraints (introduced at GDC 2018, see links below), we generate all self-collision constraints for the cloth. Predictive constraints are computationally expedient and guarantee that cloth vertices never pass through the mesh.</p>
-<p><em>Modified Spatial Hash Grid for Predictive Constraints (adapted from [5])</em></p>
-<p><span class="raw-html-m2r"><img src="https://github.com/vasumahesh1/azura/raw/dev/Source/Samples/3_ClothSim/Images/spatial_grid.JPG" alt="Modified Spatial Hash Grid" width="500"/></span></p>
-<a class="reference external image-reference" href="https://github.com/vasumahesh1/azura/raw/dev/Source/Samples/3_ClothSim/Images/default_twist_30x30_(0.8-0.7-0.3).gif"><img alt="gif" src="https://github.com/vasumahesh1/azura/raw/dev/Source/Samples/3_ClothSim/Images/default_twist_30x30_(0.8-0.7-0.3).gif" /></a>
+<p>Modified Spatial Hash Grid for Predictive Constraints <a class="footnote-reference" href="#id11" id="id6">[5]</a></p>
+<img alt="Modified Spatial Hash Grid" src="../_images/spatial_grid.JPG" />
+<img alt="Twist" src="../_images/default_twist_30x30_(0.8-0.7-0.3).gif" />
 <p><em>Predictive Constraints Resolve Self-Collisions</em></p>
 </div>
 </div>
@@ -404,19 +351,8 @@
 <div class="section" id="frame-timing-breakdown">
 <h3>Frame Timing Breakdown<a class="headerlink" href="#frame-timing-breakdown" title="Permalink to this headline">¶</a></h3>
 <p>On the left we break down each frame’s total compute time into its constituent components for various square cloth mesh resolutions. On the right we show the percentage of total time (in ms) each compute shader takes for various mesh resolutions in a given frame. We see here that total compute time increases exponentially with mesh resolution, and that the bulk of this time regardless of mesh resolution is spent generating self-collision constraints and applying all constraints to the cloth mesh. The graph on the right demonstrates that self-collision time is minimized for a mesh resolution of 100 x 100. In this case, the time spent generating self-collision constraints is equal to the time spent applying all constraints. As expected, for higher mesh resolutions, self-collision compute time increases faster than all other compute passes. This fact highlights the importance of our spatial hashing acceleration step, as well as the utility of predictive constraints.</p>
-<table border="1" class="docutils">
-<colgroup>
-<col width="50%" />
-<col width="50%" />
-</colgroup>
-<tbody valign="top">
-<tr class="row-odd"><td><a class="first last reference external image-reference" href="https://github.com/vasumahesh1/azura/raw/dev/Source/Samples/3_ClothSim/Images/compute_time_bar.png"><img alt="Compute Time Bar" src="https://github.com/vasumahesh1/azura/raw/dev/Source/Samples/3_ClothSim/Images/compute_time_bar.png" /></a>
-</td>
-<td><a class="first last reference external image-reference" href="https://github.com/vasumahesh1/azura/raw/dev/Source/Samples/3_ClothSim/Images/percent_breakdown.png"><img alt="Percentage Breakdown" src="https://github.com/vasumahesh1/azura/raw/dev/Source/Samples/3_ClothSim/Images/percent_breakdown.png" /></a>
-</td>
-</tr>
-</tbody>
-</table>
+<a class="reference external image-reference" href="../_images/compute_time_bar.png"><img alt="Compute Time Bar" src="../_images/compute_time_bar.png" /></a>
+<a class="reference external image-reference" href="../_images/percent_breakdown.png"><img alt="Percentage Breakdown" src="../_images/percent_breakdown.png" /></a>
 </div>
 </div>
 <hr class="docutils" />
@@ -427,7 +363,7 @@
 CPU: i7 4790K<span class="raw-html-m2r"><br></span>
 GPU: NVIDIA RTX 2080</p>
 <p>All compute passes launch with 512 threads per block. We do not use shared memory in any of our compute shaders.</p>
-<a class="reference external image-reference" href="https://github.com/vasumahesh1/azura/raw/dev/Source/Samples/3_ClothSim/Images/Data.PNG"><img alt="Data" src="https://github.com/vasumahesh1/azura/raw/dev/Source/Samples/3_ClothSim/Images/Data.PNG" /></a>
+<a class="reference external image-reference" href="../_images/Data.PNG"><img alt="Data" src="../_images/Data.PNG" /></a>
 <div class="section" id="cpu-vs-gpu">
 <h3>CPU vs GPU<a class="headerlink" href="#cpu-vs-gpu" title="Permalink to this headline">¶</a></h3>
 <p>Including basic distance and bending constraints, we managed CPU frame rates upwards of 20 FPS. For a cloth model of equal complexity, we observe frame rates upwards of 400 FPS. We observed a compute-only framerate of 480 FPS for a 200x200 resolution cloth.</p>
@@ -435,17 +371,17 @@ GPU: NVIDIA RTX 2080</p>
 <div class="section" id="total-compute-time-vs-total-constraints-solved">
 <h3>Total Compute Time vs Total Constraints Solved<a class="headerlink" href="#total-compute-time-vs-total-constraints-solved" title="Permalink to this headline">¶</a></h3>
 <p>As expected, total compute time increases with the total number of constraints solved, which increase with higher mesh resolutions.</p>
-<a class="reference external image-reference" href="https://github.com/vasumahesh1/azura/raw/dev/Source/Samples/3_ClothSim/Images/total_constraints_time.png"><img alt="Total Constraints Time" src="https://github.com/vasumahesh1/azura/raw/dev/Source/Samples/3_ClothSim/Images/total_constraints_time.png" /></a>
+<img alt="Total Constraints Time" src="../_images/total_constraints_time.png" />
 </div>
 <div class="section" id="mesh-resolution-vs-compute-time">
 <h3>Mesh Resolution vs Compute Time<a class="headerlink" href="#mesh-resolution-vs-compute-time" title="Permalink to this headline">¶</a></h3>
 <p>As noted previously, compute time increases exponentially with increased mesh resolutions (lower is better).</p>
-<a class="reference external image-reference" href="https://github.com/vasumahesh1/azura/raw/dev/Source/Samples/3_ClothSim/Images/compute_time_line.png"><img alt="Compute Timeline" src="https://github.com/vasumahesh1/azura/raw/dev/Source/Samples/3_ClothSim/Images/compute_time_line.png" /></a>
+<img alt="Compute Timeline" src="../_images/compute_time_line.png" />
 </div>
 <div class="section" id="spatial-hash-grid-acceleration">
 <h3>Spatial Hash Grid Acceleration<a class="headerlink" href="#spatial-hash-grid-acceleration" title="Permalink to this headline">¶</a></h3>
 <p>Here we show compute time acceleration as a function of hash grid resolution. As noted above, self-collisions are the most computationally expensive pass in the compute pipeline. A tuned (optimized resolution) hash grid can speedup the total compute time by as much as 4x the total compute time without one.</p>
-<a class="reference external image-reference" href="https://github.com/vasumahesh1/azura/raw/dev/Source/Samples/3_ClothSim/Images/grid_resolutions.png"><img alt="" src="https://github.com/vasumahesh1/azura/raw/dev/Source/Samples/3_ClothSim/Images/grid_resolutions.png" /></a>
+<img alt="Grid Resolution Graph" src="../_images/grid_resolutions.png" />
 <p><em>All timing values computed for a 200x200 cloth</em></p>
 </div>
 </div>
@@ -455,7 +391,7 @@ GPU: NVIDIA RTX 2080</p>
 <div class="section" id="gltf-2-0-mesh-support">
 <h3>GLTF 2.0 Mesh Support<a class="headerlink" href="#gltf-2-0-mesh-support" title="Permalink to this headline">¶</a></h3>
 <p>Flamenco currently supports GLTF 2.0 mesh loading. However, GLTF meshes do not currently work with cloth self-collisions turned on. We are currently working to enable this feature.</p>
-<a class="reference external image-reference" href="https://github.com/vasumahesh1/azura/raw/dev/Source/Samples/3_ClothSim/Images/custom_cloth_mesh_1.gif"><img alt="gif" src="https://github.com/vasumahesh1/azura/raw/dev/Source/Samples/3_ClothSim/Images/custom_cloth_mesh_1.gif" /></a>
+<img alt="Custom GLTF Meshes" src="../_images/custom_cloth_mesh_1.gif" />
 <p><em>Flamenco Supports GLTF 2.0 Mesh Loading</em></p>
 <p>Our Constraints also work on custom meshes. We also built a vertex aliasing technique that prevents duplicate vertices from being simulated by the core PBD algorithm.</p>
 <table border="1" class="docutils">
@@ -464,9 +400,9 @@ GPU: NVIDIA RTX 2080</p>
 <col width="50%" />
 </colgroup>
 <thead valign="bottom">
-<tr class="row-odd"><th class="head"><a class="first last reference external image-reference" href="https://github.com/vasumahesh1/azura/raw/dev/Source/Samples/3_ClothSim/Images/custom_cloth_mesh_0_9-0_6.gif"><img alt="gif" src="https://github.com/vasumahesh1/azura/raw/dev/Source/Samples/3_ClothSim/Images/custom_cloth_mesh_0_9-0_6.gif" /></a>
+<tr class="row-odd"><th class="head"><img alt="GLTF Meshes Stiff" class="first last" src="../_images/custom_cloth_mesh_0_9-0_6.gif" />
 </th>
-<th class="head"><a class="first last reference external image-reference" href="https://github.com/vasumahesh1/azura/raw/dev/Source/Samples/3_ClothSim/Images/custom_cloth_mesh_0_6-0_1.gif"><img alt="gif" src="https://github.com/vasumahesh1/azura/raw/dev/Source/Samples/3_ClothSim/Images/custom_cloth_mesh_0_6-0_1.gif" /></a>
+<th class="head"><img alt="GLTF Meshes Relaxed" class="first last" src="../_images/custom_cloth_mesh_0_6-0_1.gif" />
 </th>
 </tr>
 </thead>
@@ -497,13 +433,13 @@ GPU: NVIDIA RTX 2080</p>
 </tr>
 </thead>
 <tbody valign="top">
-<tr class="row-even"><td><a class="first last reference external image-reference" href="https://github.com/vasumahesh1/azura/raw/dev/Source/Samples/3_ClothSim/Images/ClothDiffuse.PNG"><img alt="" src="https://github.com/vasumahesh1/azura/raw/dev/Source/Samples/3_ClothSim/Images/ClothDiffuse.PNG" /></a>
+<tr class="row-even"><td><a class="first last reference external image-reference" href="../_images/ClothDiffuse.PNG"><img alt="Diffuse" src="../_images/ClothDiffuse.PNG" /></a>
 </td>
-<td><a class="first last reference external image-reference" href="https://github.com/vasumahesh1/azura/raw/dev/Source/Samples/3_ClothSim/Images/ClothNormal.PNG"><img alt="" src="https://github.com/vasumahesh1/azura/raw/dev/Source/Samples/3_ClothSim/Images/ClothNormal.PNG" /></a>
+<td><a class="first last reference external image-reference" href="../_images/ClothNormal.PNG"><img alt="Normal" src="../_images/ClothNormal.PNG" /></a>
 </td>
-<td><a class="first last reference external image-reference" href="https://github.com/vasumahesh1/azura/raw/dev/Source/Samples/3_ClothSim/Images/ClothRoughness.PNG"><img alt="" src="https://github.com/vasumahesh1/azura/raw/dev/Source/Samples/3_ClothSim/Images/ClothRoughness.PNG" /></a>
+<td><a class="first last reference external image-reference" href="../_images/ClothRoughness.PNG"><img alt="Roughness" src="../_images/ClothRoughness.PNG" /></a>
 </td>
-<td><a class="first last reference external image-reference" href="https://github.com/vasumahesh1/azura/raw/dev/Source/Samples/3_ClothSim/Images/ClothAO.PNG"><img alt="" src="https://github.com/vasumahesh1/azura/raw/dev/Source/Samples/3_ClothSim/Images/ClothAO.PNG" /></a>
+<td><a class="first last reference external image-reference" href="../_images/ClothAO.PNG"><img alt="AO" src="../_images/ClothAO.PNG" /></a>
 </td>
 </tr>
 </tbody>
@@ -517,7 +453,7 @@ GPU: NVIDIA RTX 2080</p>
 </tr>
 </thead>
 <tbody valign="top">
-<tr class="row-even"><td><a class="first last reference external image-reference" href="https://github.com/vasumahesh1/azura/raw/dev/Source/Samples/3_ClothSim/Images/ClothAll.PNG"><img alt="Final Frame Image" src="https://github.com/vasumahesh1/azura/raw/dev/Source/Samples/3_ClothSim/Images/ClothAll.PNG" /></a>
+<tr class="row-even"><td><img alt="Final Frame Image" class="first last" src="../_images/ClothAll.PNG" />
 </td>
 </tr>
 </tbody>
@@ -526,19 +462,42 @@ GPU: NVIDIA RTX 2080</p>
 <div class="section" id="meme-generator">
 <h3>Meme Generator<a class="headerlink" href="#meme-generator" title="Permalink to this headline">¶</a></h3>
 <p>We’ve added a toggleable meme generator. Results are shown below.</p>
-<a class="reference external image-reference" href="https://github.com/vasumahesh1/azura/raw/dev/Source/Samples/3_ClothSim/Images/default_shehzan_35x40_(0.8-0.7-0.3).gif"><img alt="gif" src="https://github.com/vasumahesh1/azura/raw/dev/Source/Samples/3_ClothSim/Images/default_shehzan_35x40_(0.8-0.7-0.3).gif" /></a>
+<img alt="Shehzan Boi" src="../_images/default_shehzan_35x40_(0.8-0.7-0.3).gif" />
 </div>
 </div>
 <hr class="docutils" />
 <div class="section" id="references">
 <h2>References<a class="headerlink" href="#references" title="Permalink to this headline">¶</a></h2>
-<ol class="arabic simple">
-<li>Jan Bender, Matthias Müller, and Miles Macklin, <a class="reference external" href="http://mmacklin.com/EG2015PBD.pdf">Position-Based Simulation Methods in Computer Graphics</a></li>
-<li>Chris Lewin, <a class="reference external" href="https://media.contentapi.ea.com/content/dam/eacom/frostbite/files/gdc2018-chrislewin-clothselfcollisionwithpredictivecontacts.pdf">Cloth Self-Collision with Predictive Contacts</a></li>
-<li>Marco Fratarcangeli and Fabio Pellacini, <a class="reference external" href="http://publications.lib.chalmers.se/records/fulltext/219708/local_219708.pdf">A GPU-Based Implementation of Position Based Dynamics for Interactive Deformable Bodies</a></li>
-<li>Matthias Müller, Bruno Heidelberger, Marcus Hennix, and John Ratcliff, <a class="reference external" href="http://matthias-mueller-fischer.ch/publications/posBasedDyn.pdf">Position Based Dynamics</a></li>
-<li>Matthias Teschner, Bruno Heidelberger, Matthias Müller, Danat Pomeranets, and Markus Gross, <a class="reference external" href="http://matthias-mueller-fischer.ch/publications/tetraederCollision.pdf">Optimized Spatial Hashing for Collision Detection of Deformable Objects</a></li>
-</ol>
+<table class="docutils footnote" frame="void" id="id7" rules="none">
+<colgroup><col class="label" /><col /></colgroup>
+<tbody valign="top">
+<tr><td class="label"><a class="fn-backref" href="#id2">[1]</a></td><td>Jan Bender, Matthias Müller, and Miles Macklin, <a class="reference external" href="http://mmacklin.com/EG2015PBD.pdf">Position-Based Simulation Methods in Computer Graphics</a></td></tr>
+</tbody>
+</table>
+<table class="docutils footnote" frame="void" id="id8" rules="none">
+<colgroup><col class="label" /><col /></colgroup>
+<tbody valign="top">
+<tr><td class="label"><a class="fn-backref" href="#id3">[2]</a></td><td>Chris Lewin, <a class="reference external" href="https://media.contentapi.ea.com/content/dam/eacom/frostbite/files/gdc2018-chrislewin-clothselfcollisionwithpredictivecontacts.pdf">Cloth Self-Collision with Predictive Contacts</a></td></tr>
+</tbody>
+</table>
+<table class="docutils footnote" frame="void" id="id9" rules="none">
+<colgroup><col class="label" /><col /></colgroup>
+<tbody valign="top">
+<tr><td class="label"><a class="fn-backref" href="#id5">[3]</a></td><td>Marco Fratarcangeli and Fabio Pellacini, <a class="reference external" href="http://publications.lib.chalmers.se/records/fulltext/219708/local_219708.pdf">A GPU-Based Implementation of Position Based Dynamics for Interactive Deformable Bodies</a></td></tr>
+</tbody>
+</table>
+<table class="docutils footnote" frame="void" id="id10" rules="none">
+<colgroup><col class="label" /><col /></colgroup>
+<tbody valign="top">
+<tr><td class="label"><a class="fn-backref" href="#id4">[4]</a></td><td>Matthias Müller, Bruno Heidelberger, Marcus Hennix, and John Ratcliff, <a class="reference external" href="http://matthias-mueller-fischer.ch/publications/posBasedDyn.pdf">Position Based Dynamics</a></td></tr>
+</tbody>
+</table>
+<table class="docutils footnote" frame="void" id="id11" rules="none">
+<colgroup><col class="label" /><col /></colgroup>
+<tbody valign="top">
+<tr><td class="label"><a class="fn-backref" href="#id6">[5]</a></td><td>Matthias Teschner, Bruno Heidelberger, Matthias Müller, Danat Pomeranets, and Markus Gross, <a class="reference external" href="http://matthias-mueller-fischer.ch/publications/tetraederCollision.pdf">Optimized Spatial Hashing for Collision Detection of Deformable Objects</a></td></tr>
+</tbody>
+</table>
 </div>
 </div>
 

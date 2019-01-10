@@ -73,15 +73,15 @@ Functions
 ---------
 
 
+- :ref:`exhale_function__vk_type_mapping_8cpp_1a0f246b27a07ae184cd4ffa21b01602b6`
+
 - :ref:`exhale_function__vk_type_mapping_8cpp_1a191a58ce826347d391c12068723365d3`
+
+- :ref:`exhale_function__vk_type_mapping_8cpp_1a1aedf6b8922fd185e9779c7adc02f714`
 
 - :ref:`exhale_function__vk_type_mapping_8cpp_1ac09d82b74c113e67c74326345290ae85`
 
 - :ref:`exhale_function__vk_type_mapping_8cpp_1a4a38b6d16db436c0a61aa4c31afed0c3`
-
-- :ref:`exhale_function__vk_type_mapping_8cpp_1a1aedf6b8922fd185e9779c7adc02f714`
-
-- :ref:`exhale_function__vk_type_mapping_8cpp_1a0f246b27a07ae184cd4ffa21b01602b6`
 
 - :ref:`exhale_function__vk_type_mapping_8h_1aad1bce6080ce322f37234a64c371a938`
 
