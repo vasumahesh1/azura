@@ -16,10 +16,7 @@ Active Draw APIs on Azura:
 
 ![](https://github.com/vasumahesh1/azura/raw/dev/Source/Samples/1_ProceduralPlanet/Images/planet_low.gif)
 
-### [Main Docs](https://vasumahesh1.github.io/azura_docs/)
+### [Main Docs](https://vasumahesh1.github.io/azura/html/)
 
 ### [Render Samples](https://vasumahesh1.github.io/azura_docs/#render-samples)
-
-### [API & Future Docs (under construction)](https://vasumahesh1.github.io/azura/html/)
-
 
