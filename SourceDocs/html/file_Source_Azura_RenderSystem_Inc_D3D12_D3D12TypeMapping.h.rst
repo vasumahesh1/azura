@@ -77,7 +77,13 @@ Functions
 ---------
 
 
+- :ref:`exhale_function__d3_d12_type_mapping_8h_1a9738463112ac00e54e130df9f4101b0e`
+
+- :ref:`exhale_function__d3_d12_type_mapping_8h_1a2a3355f35c7b31c79b3e8333783f170d`
+
 - :ref:`exhale_function__d3_d12_type_mapping_8h_1ab521aa2ecdc66ce5de98ad61b6c94994`
+
+- :ref:`exhale_function__d3_d12_type_mapping_8h_1ae87edaf8ec63f730c4b1fd447218b3c4`
 
 - :ref:`exhale_function__d3_d12_type_mapping_8h_1ac284343372580489c3f3a10a02333d8a`
 
@@ -93,13 +99,7 @@ Functions
 
 - :ref:`exhale_function__d3_d12_type_mapping_8h_1a5fc061f6e67f1d64f9f0bf4f3c08a93b`
 
-- :ref:`exhale_function__d3_d12_type_mapping_8h_1ae87edaf8ec63f730c4b1fd447218b3c4`
-
 - :ref:`exhale_function__d3_d12_type_mapping_8h_1aad1c839e62b8a85d80dbffd60b632115`
-
-- :ref:`exhale_function__d3_d12_type_mapping_8h_1a9738463112ac00e54e130df9f4101b0e`
-
-- :ref:`exhale_function__d3_d12_type_mapping_8h_1a2a3355f35c7b31c79b3e8333783f170d`
 
 
 Defines

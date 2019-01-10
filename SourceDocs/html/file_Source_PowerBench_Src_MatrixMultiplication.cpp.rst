@@ -40,9 +40,9 @@ Functions
 ---------
 
 
-- :ref:`exhale_function__matrix_multiplication_8cpp_1a8cd060c14cda87e2b438239d6fd197b6`
-
 - :ref:`exhale_function__matrix_multiplication_8cpp_1a44debf68d4a7d7a62dd54f3e235b1b52`
+
+- :ref:`exhale_function__matrix_multiplication_8cpp_1a8cd060c14cda87e2b438239d6fd197b6`
 
 - :ref:`exhale_function__matrix_multiplication_8cpp_1a2a169416b9edebb19732b376c5943cf8`
 

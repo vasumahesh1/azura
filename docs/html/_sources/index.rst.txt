@@ -55,3 +55,12 @@ Quick Links
    projects.rst
 
    html/apiRoot.rst
+
+
+Completed Projects:
+
+.. toctree::
+   :maxdepth: 1
+   :glob:
+
+   Projects/*
