@@ -10,5 +10,5 @@ set(
 
 add_library(Core ${SOURCES})
 
-target_include_directories(Core PUBLIC ${PROJECT_SOURCE_DIR}/Inc ${BOOST_ROOT}/)
+target_include_directories(Core PUBLIC ${PROJECT_SOURCE_DIR}/Inc ${BOOST_ROOT}/include)
 target_link_libraries(Core PUBLIC Common)

@@ -1,6 +1,6 @@
 ---
-Checks:          'cppcoreguidelines-*,clang-analyzer-*,google-*,modernize-*,readability-*,portability-*,-google-runtime-references,clang-diagnostic-switch,-cppcoreguidelines-pro-bounds-constant-array-index'
-WarningsAsErrors: 'cppcoreguidelines-*,clang-analyzer-*,google-*,modernize-*,readability-*,portability-*,-google-runtime-references,clang-diagnostic-switch,-cppcoreguidelines-pro-bounds-constant-array-index'
+Checks:          'cppcoreguidelines-*,clang-analyzer-*,google-*,modernize-*,readability-*,portability-*,-google-runtime-references,clang-diagnostic-switch,-cppcoreguidelines-pro-bounds-constant-array-index,-cppcoreguidelines-pro-bounds-array-to-pointer-decay'
+WarningsAsErrors: 'cppcoreguidelines-*,clang-analyzer-*,google-*,modernize-*,readability-*,portability-*,-google-runtime-references,clang-diagnostic-switch,-cppcoreguidelines-pro-bounds-constant-array-index,-cppcoreguidelines-pro-bounds-array-to-pointer-decay'
 AnalyzeTemporaryDtors: false
 FormatStyle:     google
 User:            Vasu Mahesh

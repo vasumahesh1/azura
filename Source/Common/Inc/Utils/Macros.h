@@ -12,8 +12,16 @@
 
 #define ALIGNED_FREE(ptr) free(ptr)
 
-#elif defined(APPLE) || defined(__linux__)
-#define ALIGNED_ALLOC(alignment, size) memalign(alignment, size)
+#elif defined(APPLE) || defined(__APPLE__)
+#define ALIGNED_ALLOC(alignment, size) \
+ [=] { \
+  void* aPtr; \
+  if (posix_memalign (&aPtr, alignment, size)) \
+  { \
+     aPtr = nullptr; \
+  } \
+  return aPtr;  \
+  }()
 
 #define ALIGNED_FREE(ptr) free(ptr)
 #endif

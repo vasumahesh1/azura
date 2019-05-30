@@ -633,7 +633,7 @@ template <typename Type>
 Vector<Type>::Vector(const UINT maxSize, Memory::Allocator& alloc)
   : m_maxSize(maxSize),
     m_allocator(alloc),
-    m_base(m_allocator.get().RawNewArray<Type>(m_maxSize)) {
+    m_base(m_allocator.get().template RawNewArray<Type>(m_maxSize)) {
 }
 
 template <typename Type>
@@ -642,7 +642,7 @@ Vector<Type>::Vector(UINT currentSize, UINT maxSize, Memory::Allocator& alloc)
     m_size(currentSize),
     m_maxSize(maxSize),
     m_allocator(alloc),
-    m_base(m_allocator.get().RawNewArray<Type>(m_maxSize)) {
+    m_base(m_allocator.get().template RawNewArray<Type>(m_maxSize)) {
   }
 
 template <typename Type>
@@ -650,7 +650,7 @@ Vector<Type>::Vector(const std::initializer_list<Type>& list, Memory::Allocator&
   : m_size(U32(list.size())),
     m_maxSize(U32(list.size())),
     m_allocator(alloc),
-    m_base(m_allocator.get().RawNewArray<Type>(m_maxSize)) {
+    m_base(m_allocator.get().template RawNewArray<Type>(m_maxSize)) {
 
   if constexpr (std::is_trivially_copyable_v<Type>) {
     // Copy over Contents
@@ -670,7 +670,7 @@ Vector<Type>::Vector(ContainerExtent extent, Memory::Allocator& alloc, Args&&...
   : m_maxSize(extent.m_reserveSize),
     m_size(extent.m_size),
     m_allocator(alloc),
-    m_base(m_allocator.get().RawNewArray<Type>(m_maxSize)) {
+    m_base(m_allocator.get().template RawNewArray<Type>(m_maxSize)) {
   assert(m_size <= m_maxSize);
 
   for (U32 idx = 0; idx < m_size; ++idx) {
@@ -692,7 +692,7 @@ Vector<Type>::Vector(const Vector& other)
     m_maxSize(other.m_maxSize),
     m_allocator(other.m_allocator) {
   // Allocate Memory
-  m_base = m_allocator.get().RawNewArray<Type>(m_maxSize);
+  m_base = m_allocator.get().template RawNewArray<Type>(m_maxSize);
 
   if constexpr (std::is_trivially_copyable_v<Type>) {
     // Copy over Contents
@@ -711,7 +711,7 @@ Vector<Type>::Vector(const Vector& other, Memory::Allocator& alloc)
   m_maxSize(other.m_maxSize),
   m_allocator(alloc) {
   // Allocate Memory
-  m_base = m_allocator.get().RawNewArray<Type>(m_maxSize);
+  m_base = m_allocator.get().template RawNewArray<Type>(m_maxSize);
 
   if constexpr (std::is_trivially_copyable_v<Type>) {
     // Copy over Contents
@@ -746,7 +746,7 @@ Vector<Type>& Vector<Type>::operator=(const Vector& other) {
   m_allocator = other.m_allocator;
 
   // Allocate Memory
-  m_base = m_allocator.get().RawNewArray<Type>(m_maxSize);
+  m_base = m_allocator.get().template RawNewArray<Type>(m_maxSize);
 
   if constexpr (std::is_trivially_copyable_v<Type>) {
     // Copy over Contents
@@ -802,7 +802,7 @@ void Vector<Type>::GrowIfNeeded() {
   m_maxSize = 2 * m_maxSize;
 
   // Grow Vector
-  auto newDataHandle = m_allocator.get().RawNewArray<Type>(m_maxSize);
+  auto newDataHandle = m_allocator.get().template RawNewArray<Type>(m_maxSize);
 
   if constexpr (std::is_trivially_copyable_v<Type>) {
     // Copy over Contents
@@ -885,14 +885,14 @@ void Vector<Type>::Remove(const Type& data) {
 template <typename Type>
 void Vector<Type>::Reserve(U32 requiredSize) {
   m_maxSize = requiredSize;
-  m_base    = m_allocator.get().RawNewArray<Type>(m_maxSize);
+  m_base    = m_allocator.get().template RawNewArray<Type>(m_maxSize);
 }
 
 template <typename Type>
 void Vector<Type>::Resize(U32 requiredSize) {
   m_maxSize = requiredSize;
   m_size    = requiredSize;
-  m_base    = m_allocator.get().RawNewArray<Type>(m_maxSize);
+  m_base    = m_allocator.get().template RawNewArray<Type>(m_maxSize);
 }
 
 template <typename Type>
