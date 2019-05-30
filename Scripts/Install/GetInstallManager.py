@@ -33,43 +33,59 @@ class InstallManager(object):
         az_log.fail('Failed find dependency: ' + event)
         return
 
+      if not dependencyData[hostOS]:
+        az_log.warn('Skipping dependency as config for OS not found: ' + event.lower())
+        res = True
+        return
+
+      # Mirror hostOS data into dependencyData
       if dependencyData[hostOS]:
         for key in dependencyData[hostOS]:
           dependencyData[key] = dependencyData[hostOS][key]
 
-      fileExtension = dependencyData['url'].split('.')[-1]
-      fileName = event.lower() + '_' + hostOS.lower() + '.' + fileExtension
+      if 'url' in dependencyData:
+        fileExtension = dependencyData['url'].split('.')[-1]
+        fileName = event.lower() + '_' + hostOS.lower() + '.' + fileExtension
 
-      temporaryPath = os.path.join(installArgs.cachePath, fileName)
+        temporaryPath = os.path.join(installArgs.cachePath, fileName)
 
-      if os.path.exists(temporaryPath):
-        az_log.warn('Skipping download as required file was found in cache (located at: ' + installArgs.cachePath + ')')
-        res = True
-      else:
-        res = DownloadFile(dependencyData['url'], temporaryPath)
-
-      if not res:
         if os.path.exists(temporaryPath):
-          os.remove(temporaryPath)
-        az_log.fail('Failed to download dependency: ' + event)
-        return
+          az_log.warn('Skipping download as required file was found in cache (located at: ' + installArgs.cachePath + ')')
+          res = True
+        else:
+          res = DownloadFile(dependencyData['url'], temporaryPath)
+
+        if not res:
+          if os.path.exists(temporaryPath):
+            os.remove(temporaryPath)
+          az_log.fail('Failed to download dependency: ' + event)
+          return
 
 
-      modifiedSavePath = dependencyData['saveTo'].replace('$Platform', hostOS)
+        modifiedSavePath = dependencyData['saveTo'].replace('$Platform', hostOS)
 
-      if not os.path.exists(modifiedSavePath):
-        MakeDirectoryRecursive(modifiedSavePath)
+        if not os.path.exists(modifiedSavePath):
+          MakeDirectoryRecursive(modifiedSavePath)
 
-      res = dependencyData['onDownload'](installArgs, temporaryPath, modifiedSavePath)
+        res = dependencyData['onDownload'](installArgs, temporaryPath, modifiedSavePath, installArgs.cachePath, event.lower())
 
-      if not res:
-        az_log.fail('Failed to execute onDownload script for dependency: ' + event)
-        return
+        if not res:
+          az_log.fail('Failed to execute onDownload script for dependency: ' + event)
+          return
 
-      print('Installed to: ' + os.path.abspath(modifiedSavePath))
+        print('Installed to: ' + os.path.abspath(modifiedSavePath))
 
-      az_log.success('Done: ' + event)
-      az_log.empty()
+        az_log.success('Done: ' + event)
+        az_log.empty()
+
+      elif 'shell' in dependencyData:
+        res = subprocess.Popen(dependencyData['shell'].split(' ')).wait()
+
+        if res:
+          raise Exception('Error Executing install command: ' + dependencyData['shell'])
+
+        az_log.success('Done: ' + event)
+        az_log.empty()
 
 
 def GetInstallManager():

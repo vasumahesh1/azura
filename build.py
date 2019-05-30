@@ -189,6 +189,12 @@ def addTargetCmakeArgs(cmakeArgs):
     cmakeArgs.append("-DBUILD_PLATFORM=Windows")
     return cmakeArgs
 
+  if (buildArgs.target == 'Mac64'):
+    cmakeArgs.append("-DBUILD_TARGET=Mac64")
+    cmakeArgs.append("-DBUILD_ARCH=64")
+    cmakeArgs.append("-DBUILD_PLATFORM=MacOS")
+    return cmakeArgs
+
   return cmakeArgs
 
 
