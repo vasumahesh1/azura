@@ -131,9 +131,16 @@ def configureLinux():
   global executableMap
   global processEnv
 
-  processEnv['PATH'] = hostExternalConfig['clang'] + ":"
+  processEnv['PATH'] = hostExternalConfig['clang'] + ":" + hostExternalConfig['ninja'] + ':' + processEnv['PATH']
   processEnv['LIB'] = hostExternalConfig['clang'] + '/lib/:'
   processEnv['INCLUDE'] = hostExternalConfig['clang'] + '/include/:'
+
+def configureMacOS():
+  global hostExternalConfig
+  global executableMap
+  global processEnv
+
+  processEnv['PATH'] = hostExternalConfig['ninja'] + ':' + processEnv['PATH']
 
 def printTimeDelta(seconds):
     seconds = int(seconds)
@@ -172,6 +179,8 @@ def setCompileSettings():
     currentBuildArch = "32"
 
 def addTargetCmakeArgs(cmakeArgs):
+  global hostExternalConfig
+
   if (buildArgs.includeTests):
     cmakeArgs.append("-DINCLUDE_TESTS=ON")
   else:
@@ -193,6 +202,8 @@ def addTargetCmakeArgs(cmakeArgs):
     cmakeArgs.append("-DBUILD_TARGET=Mac64")
     cmakeArgs.append("-DBUILD_ARCH=64")
     cmakeArgs.append("-DBUILD_PLATFORM=MacOS")
+    # cmakeArgs.append("-DCMAKE_C_COMPILER=" + hostExternalConfig['gcc'] + 'bin/gcc-9')
+    # cmakeArgs.append("-DCMAKE_CXX_COMPILER=" + hostExternalConfig['gcc'] + 'bin/g++-9')
     return cmakeArgs
 
   return cmakeArgs
@@ -274,6 +285,8 @@ def run():
     configureWindows()
   elif (hostOS == 'Linux'):
     configureLinux()
+  elif (hostOS == 'Darwin'):
+    configureMacOS()
 
   az_log.empty()
   az_log.banner("Configuring Build Files")

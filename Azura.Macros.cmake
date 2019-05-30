@@ -3,8 +3,10 @@ macro(AzuraSilenceClangTidy TargetName)
 endmacro(AzuraSilenceClangTidy)
 
 macro(AzuraSilenceEnumGuard TargetName)
-  set_target_properties(${TargetName}
+  if(MSVC)
+    set_target_properties(${TargetName}
                         PROPERTIES COMPILE_FLAGS "${CMAKE_CXX_FLAGS} /wd4061")
+  endif()
 endmacro(AzuraSilenceEnumGuard)
 
 macro(AzuraGlobalSilenceEnumGuard)

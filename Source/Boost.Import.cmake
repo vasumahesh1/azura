@@ -1,6 +1,6 @@
 if ("${BUILD_PLATFORM}" STREQUAL "Windows")
   if(NOT DEFINED BOOST_ROOT)
-    set(BOOST_ROOT ${CMAKE_CURRENT_SOURCE_DIR}/Imports/Windows/Boost/boost_1_67_0/
+    set(BOOST_ROOT ${CMAKE_CURRENT_SOURCE_DIR}/Imports/Windows/Boost/boost_1_69_0/
         CACHE STRING ""
         FORCE)
   endif()
@@ -13,6 +13,21 @@ if ("${BUILD_PLATFORM}" STREQUAL "Windows")
   elseif("${BUILD_ARCH}" STREQUAL "32")
     set(BOOST_LIBRARYDIR "${BOOST_ROOT}/${LIB32_BOOST}/" CACHE STRING "" FORCE)
   endif()
+
+elseif ("${BUILD_PLATFORM}" STREQUAL "MacOS")
+  
+  if(NOT DEFINED BOOST_ROOT)
+    set(BOOST_ROOT /usr/local/Cellar/boost/1.69.0_2/
+        CACHE STRING ""
+        FORCE)
+  endif()
+
+  if ("${BUILD_ARCH}" STREQUAL "64")
+    set(BOOST_LIBRARYDIR "${BOOST_ROOT}/" CACHE STRING "" FORCE)
+  elseif("${BUILD_ARCH}" STREQUAL "32")
+    message(FATAL_ERROR "Azura Darwin doesn't support 32 bit builds")
+  endif()
+
 endif()
 
 # if(CMAKE_BUILD_TYPE MATCHES DEBUG)

@@ -1,6 +1,7 @@
 add_library(VULKAN_STATIC INTERFACE IMPORTED GLOBAL)
 
 if ("${BUILD_PLATFORM}" STREQUAL "Windows")
+
 	if(NOT DEFINED VULKAN_1_1_77_0_ROOT)
 		set(VULKAN_1_1_77_0_ROOT ${CMAKE_CURRENT_SOURCE_DIR}/Imports/Windows/Vulkan/1.1.77.0/)
 	endif()
@@ -27,6 +28,32 @@ if ("${BUILD_PLATFORM}" STREQUAL "Windows")
 	set(VULKAN_ROOT ${VULKAN_1_1_77_0_ROOT} CACHE STRING "" FORCE)
 
 	target_link_libraries(VULKAN_STATIC INTERFACE ${VULKAN_LIB}/vulkan-1.lib)
+
+elseif ("${BUILD_PLATFORM}" STREQUAL "MacOS")
+	
+	if(NOT DEFINED VULKAN_1_1_77_0_ROOT)
+		set(VULKAN_1_1_77_0_ROOT ${CMAKE_CURRENT_SOURCE_DIR}/Imports/Darwin/Vulkan/1.1.77.0/vulkansdk-macos-1.1.77.0/)
+	endif()
+
+	set(VULKAN_1_1_77_0_MACOS_ROOT ${VULKAN_1_1_77_0_ROOT}macOS/)
+
+	set(VULKAN_1_1_77_0_INCLUDE_DIR ${VULKAN_1_1_77_0_MACOS_ROOT}include/)
+	set(VULKAN_1_1_77_0_LIB64_DIR ${VULKAN_1_1_77_0_MACOS_ROOT}lib/)
+	
+	if(NOT DEFINED GLSL_VALIDATOR)
+		set(GLSL_VALIDATOR ${VULKAN_1_1_77_0_MACOS_ROOT}/bin/glslangValidator CACHE STRING "GLSLangValidator Location" FORCE)
+	endif()
+
+	if ("${BUILD_ARCH}" STREQUAL "64")
+		set(VULKAN_INCLUDE ${VULKAN_1_1_77_0_INCLUDE_DIR} CACHE STRING "" FORCE)
+		set(VULKAN_LIB ${VULKAN_1_1_77_0_LIB64_DIR} CACHE STRING "" FORCE)
+	elseif("${BUILD_ARCH}" STREQUAL "32")
+		message(FATAL_ERROR "Azura Darwin doesn't support 32 bit builds")
+	endif()
+	set(VULKAN_ROOT ${VULKAN_1_1_77_0_MACOS_ROOT} CACHE STRING "" FORCE)
+
+	target_link_libraries(VULKAN_STATIC INTERFACE ${VULKAN_LIB}/libvulkan.1.dylib)
+
 endif()
 
 set(ENV{VULKAN_SDK} ${VULKAN_ROOT})

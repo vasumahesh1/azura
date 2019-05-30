@@ -1,13 +1,12 @@
 project(Azura)
 
-set(BOOST_VERSION 1.67.0 CACHE STRING "" FORCE)
+set(BOOST_VERSION 1.69.0 CACHE STRING "" FORCE)
 
 message(STATUS "Build Target: ${BUILD_TARGET}")
 message(STATUS "Build Platform: ${BUILD_PLATFORM}")
 message(STATUS "Build Arch: ${BUILD_ARCH}")
 
 include("./Windows.Settings.cmake")
-# include("./GLFW.Import.cmake")
 include("./Vulkan.Import.cmake")
 include("./Boost.Import.cmake")
 include("./Slang.Import.cmake")
