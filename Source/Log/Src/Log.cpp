@@ -222,8 +222,10 @@ void Log::Debug(U32 level, const char* fmt, ...) const {
   va_list arg;
   va_start(arg, fmt);
   const int bufferLength = std::min(1 + std::vsnprintf(nullptr, 0, fmt, arg), DEFAULT_LOG_BUFFER_SIZE);
-  std::vsnprintf(const_cast<char *>(m_temporaryBuffer.data()), bufferLength, fmt, arg);
   va_end(arg);
+  va_start(arg, fmt);
+
+  std::vsnprintf(const_cast<char *>(m_temporaryBuffer.data()), bufferLength, fmt, arg);
 
   BOOST_LOG_TRIVIAL(debug) << m_temporaryBuffer.data();
 }
@@ -236,8 +238,10 @@ void Log::Info(U32 level, const char* fmt, ...) const {
   va_list arg;
   va_start(arg, fmt);
   const int bufferLength = std::min(1 + std::vsnprintf(nullptr, 0, fmt, arg), DEFAULT_LOG_BUFFER_SIZE);
-  std::vsnprintf(const_cast<char *>(m_temporaryBuffer.data()), bufferLength, fmt, arg);
   va_end(arg);
+  va_start(arg, fmt);
+
+  std::vsnprintf(const_cast<char *>(m_temporaryBuffer.data()), bufferLength, fmt, arg);
 
   BOOST_LOG_TRIVIAL(info) << m_temporaryBuffer.data();
 }

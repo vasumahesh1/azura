@@ -51,11 +51,16 @@ if(MSVC)
   endif()
   set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} /WX /wd4061 /wd4127 /D_SCL_SECURE_NO_WARNINGS")
 
-elseif(CMAKE_COMPILER_IS_GNUCC OR CMAKE_COMPILER_IS_GNUCXX)
+elseif(CMAKE_CXX_COMPILER_ID STREQUAL "GNU" OR
+       CMAKE_CXX_COMPILER_ID STREQUAL "Clang" OR
+       CMAKE_CXX_COMPILER_ID STREQUAL "AppleClang")
+
   set(
     CMAKE_CXX_FLAGS
     "${CMAKE_CXX_FLAGS} -Werror -Wall -Wno-long-long -pedantic -Wswitch -Wextra"
     )
+
+    set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -fvisibility=hidden")
 endif()
 
 if(PROJECT_BUILD)

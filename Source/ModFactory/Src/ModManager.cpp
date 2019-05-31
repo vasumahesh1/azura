@@ -26,6 +26,8 @@ bool ModManager::Load(const String& modPath, const String& name) {
   }
 
   try {
+    LOG_DBG(m_log, LOG_LEVEL, "Trying to load mod: %s", name.c_str());
+
     // type of imported symbol must be explicitly specified
     const boost::function<mod_t> createFunc = boost::dll::import_alias<mod_t>(
                                                                               modPath,          // path to library

@@ -6,7 +6,7 @@ namespace Memory {
 MemoryBuffer::MemoryBuffer(U32 size) : m_size(size) {}
 
 MemoryBuffer::MemoryBuffer(U32 size, AddressPtr blockStart)
-    : m_size(size), m_memoryBlock(blockStart), m_currentPosition(blockStart) {}
+    : m_memoryBlock(blockStart), m_currentPosition(blockStart), m_size(size) {}
 
 MemoryBuffer::MemoryBuffer(MemoryBuffer&& other) noexcept
     : m_memoryBlock(other.m_memoryBlock), m_currentPosition(other.m_currentPosition), m_size(other.m_size) {

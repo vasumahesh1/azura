@@ -2,6 +2,9 @@
 #include "Types.h"
 #include <vector>
 
+#pragma clang diagnostic push
+#pragma clang diagnostic ignored "-Wgnu-zero-variadic-macro-arguments"
+
 namespace Azura {
 enum class LogLevel {
   Debug,
@@ -43,25 +46,25 @@ private:
 
 // TODO(vasumahesh1):[LOG]: Fix BOOST_LOG_NAMED_SCOPE("") here.
 #define LOG_DEBUG(LOG, LEVEL, STR, ...) \
-  LOG.Debug(LEVEL, STR, __VA_ARGS__) // NOLINT
+  LOG.Debug(LEVEL, STR, ## __VA_ARGS__) // NOLINT
 
 #define LOG_INFO(LOG, LEVEL, STR, ...) \
-  LOG.Info(LEVEL, STR, __VA_ARGS__) // NOLINT
+  LOG.Info(LEVEL, STR, ## __VA_ARGS__) // NOLINT
 
 #define LOG_WARNING(LOG, LEVEL, STR, ...) \
-  LOG.Warning(LEVEL, STR, __VA_ARGS__) // NOLINT
+  LOG.Warning(LEVEL, STR, ## __VA_ARGS__) // NOLINT
 
 #define LOG_ERROR(LOG, LEVEL, STR, ...) \
-  LOG.Error(LEVEL, STR, __VA_ARGS__) // NOLINT
+  LOG.Error(LEVEL, STR, ## __VA_ARGS__) // NOLINT
 
 #define LOG_FATAL(LOG, LEVEL, STR, ...) \
-  LOG.Fatal(LEVEL, STR, __VA_ARGS__) // NOLINT
+  LOG.Fatal(LEVEL, STR, ## __VA_ARGS__) // NOLINT
 
-#define LOG_DBG(LOG, LEVEL, STR, ...) LOG_DEBUG(LOG, LEVEL, STR, __VA_ARGS__)
-#define LOG_INF(LOG, LEVEL, STR, ...) LOG_INFO(LOG, LEVEL, STR, __VA_ARGS__)
-#define LOG_WRN(LOG, LEVEL, STR, ...) LOG_WARNING(LOG, LEVEL, STR, __VA_ARGS__)
-#define LOG_ERR(LOG, LEVEL, STR, ...) LOG_ERROR(LOG, LEVEL, STR, __VA_ARGS__)
-#define LOG_FTL(LOG, LEVEL, STR, ...) LOG_FATAL(LOG, LEVEL, STR, __VA_ARGS__)
+#define LOG_DBG(LOG, LEVEL, STR, ...) LOG_DEBUG(LOG, LEVEL, STR, ## __VA_ARGS__)
+#define LOG_INF(LOG, LEVEL, STR, ...) LOG_INFO(LOG, LEVEL, STR, ## __VA_ARGS__)
+#define LOG_WRN(LOG, LEVEL, STR, ...) LOG_WARNING(LOG, LEVEL, STR, ## __VA_ARGS__)
+#define LOG_ERR(LOG, LEVEL, STR, ...) LOG_ERROR(LOG, LEVEL, STR, ## __VA_ARGS__)
+#define LOG_FTL(LOG, LEVEL, STR, ...) LOG_FATAL(LOG, LEVEL, STR, ## __VA_ARGS__)
 
 #elif BUILD_RELEASE
 
@@ -86,3 +89,5 @@ private:
 #endif
 
 } // namespace Azura
+
+#pragma clang diagnostic pop
