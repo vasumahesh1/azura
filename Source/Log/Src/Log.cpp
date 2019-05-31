@@ -182,7 +182,7 @@ void Log::ParseLevelString(const String& levelStr) {
   boost::split(results, levelStr, [](const char character) { return character == ' '; });
 
   for (const auto& logLevel : results) {
-    const char index      = toupper(logLevel[0]);
+    const char index      = char(toupper(logLevel[0]));
     String level          = logLevel.substr(1, logLevel.length() - 1);
     const auto levelValue = U8(std::stoi(level));
 

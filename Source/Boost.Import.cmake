@@ -7,6 +7,7 @@ if ("${BUILD_PLATFORM}" STREQUAL "Windows")
 
   set(LIB64_BOOST "lib64-msvc-14.1")
   set(LIB32_BOOST "lib32-msvc-14.1")
+  set(BOOST_INCLUDE ${BOOST_ROOT})
 
   if ("${BUILD_ARCH}" STREQUAL "64")
     set(BOOST_LIBRARYDIR "${BOOST_ROOT}/${LIB64_BOOST}/" CACHE STRING "" FORCE)
@@ -21,6 +22,8 @@ elseif ("${BUILD_PLATFORM}" STREQUAL "MacOS")
         CACHE STRING ""
         FORCE)
   endif()
+
+  set(BOOST_INCLUDE ${BOOST_ROOT}include/)
 
   if ("${BUILD_ARCH}" STREQUAL "64")
     set(BOOST_LIBRARYDIR "${BOOST_ROOT}/" CACHE STRING "" FORCE)
