@@ -2,8 +2,14 @@
 #include "Types.h"
 #include <vector>
 
+#if defined(WIN32) || defined(_WIN32)
+
+#elif defined(UNIX) || defined(__linux__)
+
+#elif defined(APPLE) || defined(__APPLE__)
 #pragma clang diagnostic push
 #pragma clang diagnostic ignored "-Wgnu-zero-variadic-macro-arguments"
+#endif
 
 namespace Azura {
 enum class LogLevel {
@@ -90,4 +96,11 @@ private:
 
 } // namespace Azura
 
+
+#if defined(WIN32) || defined(_WIN32)
+
+#elif defined(UNIX) || defined(__linux__)
+
+#elif defined(APPLE) || defined(__APPLE__)
 #pragma clang diagnostic pop
+#endif
